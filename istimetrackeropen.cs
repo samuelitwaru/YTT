@@ -1,0 +1,212 @@
+using System;
+using System.Collections;
+using GeneXus.Utils;
+using GeneXus.Resources;
+using GeneXus.Application;
+using GeneXus.Metadata;
+using GeneXus.Cryptography;
+using System.Data;
+using GeneXus.Data;
+using com.genexus;
+using GeneXus.Data.ADO;
+using GeneXus.Data.NTier;
+using GeneXus.Data.NTier.ADO;
+using GeneXus.WebControls;
+using GeneXus.Http;
+using GeneXus.Procedure;
+using GeneXus.XML;
+using GeneXus.Search;
+using GeneXus.Encryption;
+using GeneXus.Http.Client;
+using System.Threading;
+using System.Xml.Serialization;
+using System.Runtime.Serialization;
+namespace GeneXus.Programs {
+   public class istimetrackeropen : GXProcedure
+   {
+      protected override bool IntegratedSecurityEnabled
+      {
+         get {
+            return true ;
+         }
+
+      }
+
+      protected override GAMSecurityLevel IntegratedSecurityLevel
+      {
+         get {
+            return GAMSecurityLevel.SecurityHigh ;
+         }
+
+      }
+
+      protected override string ExecutePermissionPrefix
+      {
+         get {
+            return "istimetrackeropen_Services_Execute" ;
+         }
+
+      }
+
+      public istimetrackeropen( )
+      {
+         context = new GxContext(  );
+         DataStoreUtil.LoadDataStores( context);
+         dsGAM = context.GetDataStore("GAM");
+         dsDefault = context.GetDataStore("Default");
+         IsMain = true;
+         context.SetDefaultTheme("WorkWithPlusDS", true);
+      }
+
+      public istimetrackeropen( IGxContext context )
+      {
+         this.context = context;
+         IsMain = false;
+         dsGAM = context.GetDataStore("GAM");
+         dsDefault = context.GetDataStore("Default");
+      }
+
+      public void execute( out bool aP0_isOpen )
+      {
+         this.AV8isOpen = false ;
+         initialize();
+         executePrivate();
+         aP0_isOpen=this.AV8isOpen;
+      }
+
+      public bool executeUdp( )
+      {
+         execute(out aP0_isOpen);
+         return AV8isOpen ;
+      }
+
+      public void executeSubmit( out bool aP0_isOpen )
+      {
+         istimetrackeropen objistimetrackeropen;
+         objistimetrackeropen = new istimetrackeropen();
+         objistimetrackeropen.AV8isOpen = false ;
+         objistimetrackeropen.context.SetSubmitInitialConfig(context);
+         objistimetrackeropen.initialize();
+         Submit( executePrivateCatch,objistimetrackeropen);
+         aP0_isOpen=this.AV8isOpen;
+      }
+
+      void executePrivateCatch( object stateInfo )
+      {
+         try
+         {
+            ((istimetrackeropen)stateInfo).executePrivate();
+         }
+         catch ( Exception e )
+         {
+            GXUtil.SaveToEventLog( "Design", e);
+            throw;
+         }
+      }
+
+      void executePrivate( )
+      {
+         /* GeneXus formulas */
+         /* Output device settings */
+         AV10Udparg1 = new getloggedinusercompanyid(context).executeUdp( );
+         /* Using cursor P00942 */
+         pr_default.execute(0, new Object[] {AV10Udparg1});
+         while ( (pr_default.getStatus(0) != 101) )
+         {
+            A100CompanyId = P00942_A100CompanyId[0];
+            A161IsLogHourOpen = P00942_A161IsLogHourOpen[0];
+            A160SiteSettingId = P00942_A160SiteSettingId[0];
+            AV8isOpen = A161IsLogHourOpen;
+            pr_default.readNext(0);
+         }
+         pr_default.close(0);
+         this.cleanup();
+      }
+
+      public override void cleanup( )
+      {
+         CloseOpenCursors();
+         if ( IsMain )
+         {
+            context.CloseConnections();
+         }
+         ExitApp();
+      }
+
+      protected void CloseOpenCursors( )
+      {
+      }
+
+      public override void initialize( )
+      {
+         scmdbuf = "";
+         P00942_A100CompanyId = new long[1] ;
+         P00942_A161IsLogHourOpen = new bool[] {false} ;
+         P00942_A160SiteSettingId = new long[1] ;
+         pr_default = new DataStoreProvider(context, new GeneXus.Programs.istimetrackeropen__default(),
+            new Object[][] {
+                new Object[] {
+               P00942_A100CompanyId, P00942_A161IsLogHourOpen, P00942_A160SiteSettingId
+               }
+            }
+         );
+         /* GeneXus formulas. */
+      }
+
+      private long AV10Udparg1 ;
+      private long A100CompanyId ;
+      private long A160SiteSettingId ;
+      private string scmdbuf ;
+      private bool AV8isOpen ;
+      private bool A161IsLogHourOpen ;
+      private IGxDataStore dsGAM ;
+      private IGxDataStore dsDefault ;
+      private IDataStoreProvider pr_default ;
+      private long[] P00942_A100CompanyId ;
+      private bool[] P00942_A161IsLogHourOpen ;
+      private long[] P00942_A160SiteSettingId ;
+      private bool aP0_isOpen ;
+   }
+
+   public class istimetrackeropen__default : DataStoreHelperBase, IDataStoreHelper
+   {
+      public ICursor[] getCursors( )
+      {
+         cursorDefinitions();
+         return new Cursor[] {
+          new ForEachCursor(def[0])
+       };
+    }
+
+    private static CursorDef[] def;
+    private void cursorDefinitions( )
+    {
+       if ( def == null )
+       {
+          Object[] prmP00942;
+          prmP00942 = new Object[] {
+          new ParDef("AV10Udparg1",GXType.Int64,10,0)
+          };
+          def= new CursorDef[] {
+              new CursorDef("P00942", "SELECT CompanyId, IsLogHourOpen, SiteSettingId FROM SiteSetting WHERE CompanyId = :AV10Udparg1 ORDER BY CompanyId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00942,100, GxCacheFrequency.OFF ,false,false )
+          };
+       }
+    }
+
+    public void getResults( int cursor ,
+                            IFieldGetter rslt ,
+                            Object[] buf )
+    {
+       switch ( cursor )
+       {
+             case 0 :
+                ((long[]) buf[0])[0] = rslt.getLong(1);
+                ((bool[]) buf[1])[0] = rslt.getBool(2);
+                ((long[]) buf[2])[0] = rslt.getLong(3);
+                return;
+       }
+    }
+
+ }
+
+}

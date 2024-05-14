@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CallableObject guid="8acc25c1-4a3b-49e9-a3a9-611d6d1c60e3" name="Tests.PaginateTestData" description="Paginate Test Data" namespace="GeneXus.Programs">
+  <Signature name="parm">
+    <Parameter name="ReturnValue" accessor="out" collection="true">
+      <Field name="PaginateTestSDT" description="Paginate Test SDT">
+        <Fields>
+          <Field name="TestCaseId" description="Test case identifier">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>VarChar</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>40</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="pages_to_show" description="" collection="true">
+            <Fields>
+              <Field name="Page" description="Page">
+                <Properties>
+                  <Property>
+                    <Name>Type</Name>
+                    <Value>Numeric</Value>
+                  </Property>
+                  <Property>
+                    <Name>Length</Name>
+                    <Value>4</Value>
+                  </Property>
+                  <Property>
+                    <Name>Picture</Name>
+                    <Value>ZZZ9</Value>
+                  </Property>
+                </Properties>
+              </Field>
+              <Field name="IsCurrent" description="Is Current">
+                <Properties>
+                  <Property>
+                    <Name>Type</Name>
+                    <Value>Boolean</Value>
+                  </Property>
+                </Properties>
+              </Field>
+            </Fields>
+          </Field>
+          <Field name="Expectedpages_to_show" description="" collection="true">
+            <Fields>
+              <Field name="Page" description="Page">
+                <Properties>
+                  <Property>
+                    <Name>Type</Name>
+                    <Value>Numeric</Value>
+                  </Property>
+                  <Property>
+                    <Name>Length</Name>
+                    <Value>4</Value>
+                  </Property>
+                  <Property>
+                    <Name>Picture</Name>
+                    <Value>ZZZ9</Value>
+                  </Property>
+                </Properties>
+              </Field>
+              <Field name="IsCurrent" description="Is Current">
+                <Properties>
+                  <Property>
+                    <Name>Type</Name>
+                    <Value>Boolean</Value>
+                  </Property>
+                </Properties>
+              </Field>
+            </Fields>
+          </Field>
+          <Field name="Msgpages_to_show" description="Message to show for assertion over field pages_to_show">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>VarChar</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>100</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="total_pages" description="">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>Numeric</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>4</Value>
+              </Property>
+              <Property>
+                <Name>Picture</Name>
+                <Value>ZZZ9</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="Expectedtotal_pages" description="">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>Numeric</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>4</Value>
+              </Property>
+              <Property>
+                <Name>Picture</Name>
+                <Value>ZZZ9</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="Msgtotal_pages" description="Message to show for assertion over field total_pages">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>VarChar</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>100</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="current_page" description="">
+            <Fields>
+              <Field name="Page" description="Page">
+                <Properties>
+                  <Property>
+                    <Name>Type</Name>
+                    <Value>Numeric</Value>
+                  </Property>
+                  <Property>
+                    <Name>Length</Name>
+                    <Value>4</Value>
+                  </Property>
+                  <Property>
+                    <Name>Picture</Name>
+                    <Value>ZZZ9</Value>
+                  </Property>
+                </Properties>
+              </Field>
+              <Field name="IsCurrent" description="Is Current">
+                <Properties>
+                  <Property>
+                    <Name>Type</Name>
+                    <Value>Boolean</Value>
+                  </Property>
+                </Properties>
+              </Field>
+            </Fields>
+          </Field>
+          <Field name="Expectedcurrent_page" description="">
+            <Fields>
+              <Field name="Page" description="Page">
+                <Properties>
+                  <Property>
+                    <Name>Type</Name>
+                    <Value>Numeric</Value>
+                  </Property>
+                  <Property>
+                    <Name>Length</Name>
+                    <Value>4</Value>
+                  </Property>
+                  <Property>
+                    <Name>Picture</Name>
+                    <Value>ZZZ9</Value>
+                  </Property>
+                </Properties>
+              </Field>
+              <Field name="IsCurrent" description="Is Current">
+                <Properties>
+                  <Property>
+                    <Name>Type</Name>
+                    <Value>Boolean</Value>
+                  </Property>
+                </Properties>
+              </Field>
+            </Fields>
+          </Field>
+          <Field name="Msgcurrent_page" description="Message to show for assertion over field current_page">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>VarChar</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>100</Value>
+              </Property>
+            </Properties>
+          </Field>
+        </Fields>
+      </Field>
+    </Parameter>
+  </Signature>
+</CallableObject>

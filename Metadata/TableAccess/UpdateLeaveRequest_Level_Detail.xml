@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dependencies type="name" name="UpdateLeaveRequest_Level_Detail">
+  <Table name="LeaveType" />
+  <Table name="Employee" />
+  <Table name="Company" />
+  <Table name="Project" />
+  <Table name="WorkHourLog" />
+  <Table name="LeaveRequest" />
+  <Table name="EmployeeProject" />
+</Dependencies>
