@@ -166,33 +166,49 @@ namespace GeneXus.Programs {
          AV28Dsworkhourlogs_1_companylocationid = AV8CompanyLocationId;
          AV29Dsworkhourlogs_2_employeeid = AV15EmployeeId;
          pr_default.dynParam(3, new Object[]{ new Object[]{
+                                              A157CompanyLocationId ,
+                                              AV8CompanyLocationId ,
+                                              A106EmployeeId ,
+                                              AV15EmployeeId ,
                                               A102ProjectId ,
                                               AV13ProjectId ,
                                               AV23ProjectIds ,
-                                              A157CompanyLocationId ,
                                               AV28Dsworkhourlogs_1_companylocationid ,
-                                              A106EmployeeId ,
                                               AV29Dsworkhourlogs_2_employeeid ,
+                                              AV8CompanyLocationId.Count ,
+                                              AV15EmployeeId.Count ,
                                               AV13ProjectId.Count ,
-                                              AV23ProjectIds.Count } ,
+                                              AV23ProjectIds.Count ,
+                                              AV12FromDate ,
+                                              AV11ToDate ,
+                                              A119WorkHourLogDate } ,
                                               new int[]{
-                                              TypeConstants.LONG, TypeConstants.LONG, TypeConstants.LONG, TypeConstants.INT, TypeConstants.INT
+                                              TypeConstants.LONG, TypeConstants.LONG, TypeConstants.LONG, TypeConstants.BOOLEAN, TypeConstants.INT, TypeConstants.INT, TypeConstants.INT, TypeConstants.INT, TypeConstants.DATE, TypeConstants.DATE,
+                                              TypeConstants.DATE
                                               }
          });
          /* Using cursor P008V6 */
-         pr_default.execute(3, new Object[] {AV12FromDate, AV12FromDate, AV11ToDate, AV11ToDate, AV18IsCompanyLocationIdEmpty, AV17IsEmployeeIdEmpty});
+         pr_default.execute(3, new Object[] {AV12FromDate, AV12FromDate, AV11ToDate, AV11ToDate, AV18IsCompanyLocationIdEmpty, AV17IsEmployeeIdEmpty, AV12FromDate, AV11ToDate});
          while ( (pr_default.getStatus(3) != 101) )
          {
+            A100CompanyId = P008V6_A100CompanyId[0];
+            A119WorkHourLogDate = P008V6_A119WorkHourLogDate[0];
             A102ProjectId = P008V6_A102ProjectId[0];
+            n102ProjectId = P008V6_n102ProjectId[0];
+            A106EmployeeId = P008V6_A106EmployeeId[0];
+            A157CompanyLocationId = P008V6_A157CompanyLocationId[0];
             A103ProjectName = P008V6_A103ProjectName[0];
             A40000GXC1 = P008V6_A40000GXC1[0];
             n40000GXC1 = P008V6_n40000GXC1[0];
             A40001GXC2 = P008V6_A40001GXC2[0];
             n40001GXC2 = P008V6_n40001GXC2[0];
+            A103ProjectName = P008V6_A103ProjectName[0];
             A40000GXC1 = P008V6_A40000GXC1[0];
             n40000GXC1 = P008V6_n40000GXC1[0];
             A40001GXC2 = P008V6_A40001GXC2[0];
             n40001GXC2 = P008V6_n40001GXC2[0];
+            A100CompanyId = P008V6_A100CompanyId[0];
+            A157CompanyLocationId = P008V6_A157CompanyLocationId[0];
             AV10total = (long)(A40000GXC1*60+A40001GXC2);
             AV22SDTProject = new SdtSDTProject(context);
             AV22SDTProject.gxTpr_Projectname = A103ProjectName;
@@ -233,7 +249,13 @@ namespace GeneXus.Programs {
          AV16StringEmployeeId = "";
          AV28Dsworkhourlogs_1_companylocationid = new GxSimpleCollection<long>();
          AV29Dsworkhourlogs_2_employeeid = new GxSimpleCollection<long>();
+         A119WorkHourLogDate = DateTime.MinValue;
+         P008V6_A100CompanyId = new long[1] ;
+         P008V6_A119WorkHourLogDate = new DateTime[] {DateTime.MinValue} ;
          P008V6_A102ProjectId = new long[1] ;
+         P008V6_n102ProjectId = new bool[] {false} ;
+         P008V6_A106EmployeeId = new long[1] ;
+         P008V6_A157CompanyLocationId = new long[1] ;
          P008V6_A103ProjectName = new string[] {""} ;
          P008V6_A40000GXC1 = new short[1] ;
          P008V6_n40000GXC1 = new bool[] {false} ;
@@ -254,7 +276,8 @@ namespace GeneXus.Programs {
                P008V4_A100CompanyId, P008V4_A106EmployeeId
                }
                , new Object[] {
-               P008V6_A102ProjectId, P008V6_A103ProjectName, P008V6_A40000GXC1, P008V6_n40000GXC1, P008V6_A40001GXC2, P008V6_n40001GXC2
+               P008V6_A100CompanyId, P008V6_A119WorkHourLogDate, P008V6_A102ProjectId, P008V6_n102ProjectId, P008V6_A106EmployeeId, P008V6_A157CompanyLocationId, P008V6_A103ProjectName, P008V6_A40000GXC1, P008V6_n40000GXC1, P008V6_A40001GXC2,
+               P008V6_n40001GXC2
                }
             }
          );
@@ -263,6 +286,8 @@ namespace GeneXus.Programs {
 
       private short A40000GXC1 ;
       private short A40001GXC2 ;
+      private int AV8CompanyLocationId_Count ;
+      private int AV15EmployeeId_Count ;
       private int AV13ProjectId_Count ;
       private int AV23ProjectIds_Count ;
       private long AV10total ;
@@ -275,8 +300,10 @@ namespace GeneXus.Programs {
       private string GXt_char1 ;
       private DateTime AV12FromDate ;
       private DateTime AV11ToDate ;
+      private DateTime A119WorkHourLogDate ;
       private bool AV17IsEmployeeIdEmpty ;
       private bool AV18IsCompanyLocationIdEmpty ;
+      private bool n102ProjectId ;
       private bool n40000GXC1 ;
       private bool n40001GXC2 ;
       private string AV16StringEmployeeId ;
@@ -300,7 +327,12 @@ namespace GeneXus.Programs {
       private long[] P008V3_A100CompanyId ;
       private long[] P008V4_A100CompanyId ;
       private long[] P008V4_A106EmployeeId ;
+      private long[] P008V6_A100CompanyId ;
+      private DateTime[] P008V6_A119WorkHourLogDate ;
       private long[] P008V6_A102ProjectId ;
+      private bool[] P008V6_n102ProjectId ;
+      private long[] P008V6_A106EmployeeId ;
+      private long[] P008V6_A157CompanyLocationId ;
       private string[] P008V6_A103ProjectName ;
       private short[] P008V6_A40000GXC1 ;
       private bool[] P008V6_n40000GXC1 ;
@@ -329,29 +361,44 @@ namespace GeneXus.Programs {
       }
 
       protected Object[] conditional_P008V6( IGxContext context ,
+                                             long A157CompanyLocationId ,
+                                             GxSimpleCollection<long> AV8CompanyLocationId ,
+                                             long A106EmployeeId ,
+                                             GxSimpleCollection<long> AV15EmployeeId ,
                                              long A102ProjectId ,
                                              GxSimpleCollection<long> AV13ProjectId ,
                                              GxSimpleCollection<long> AV23ProjectIds ,
-                                             long A157CompanyLocationId ,
                                              GxSimpleCollection<long> AV28Dsworkhourlogs_1_companylocationid ,
-                                             long A106EmployeeId ,
                                              GxSimpleCollection<long> AV29Dsworkhourlogs_2_employeeid ,
+                                             int AV8CompanyLocationId_Count ,
+                                             int AV15EmployeeId_Count ,
                                              int AV13ProjectId_Count ,
-                                             int AV23ProjectIds_Count )
+                                             int AV23ProjectIds_Count ,
+                                             DateTime AV12FromDate ,
+                                             DateTime AV11ToDate ,
+                                             DateTime A119WorkHourLogDate )
       {
          System.Text.StringBuilder sWhereString = new System.Text.StringBuilder();
          string scmdbuf;
-         short[] GXv_int4 = new short[6];
+         short[] GXv_int4 = new short[8];
          Object[] GXv_Object5 = new Object[2];
          string sRef1;
-         sRef1 = (string)(new GxDbmsUtils( new GxPostgreSql()).ValueList(AV29Dsworkhourlogs_2_employeeid, "T3.EmployeeId"+" IN (", ")"));
+         sRef1 = (string)(new GxDbmsUtils( new GxPostgreSql()).ValueList(AV29Dsworkhourlogs_2_employeeid, "T6.EmployeeId"+" IN (", ")"));
          string sRef2;
-         sRef2 = (string)(new GxDbmsUtils( new GxPostgreSql()).ValueList(AV28Dsworkhourlogs_1_companylocationid, "T5.CompanyLocationId"+" IN (", ")"));
-         scmdbuf = "SELECT T1.ProjectId, T1.ProjectName, COALESCE( T2.GXC1, 0) AS GXC1, COALESCE( T2.GXC2, 0) AS GXC2 FROM (Project T1 LEFT JOIN LATERAL (SELECT SUM(T3.WorkHourLogHour) AS GXC1, T3.ProjectId, SUM(T3.WorkHourLogMinute) AS GXC2 FROM ((WorkHourLog T3 INNER JOIN Employee T4 ON T4.EmployeeId = T3.EmployeeId) INNER JOIN Company T5 ON T5.CompanyId = T4.CompanyId) WHERE (T1.ProjectId = T3.ProjectId) AND (( (:AV12FromDate = DATE '00010101') or ( T3.WorkHourLogDate >= :AV12FromDate)) and ( (:AV11ToDate = DATE '00010101') or ( T3.WorkHourLogDate <= :AV11ToDate)) and ( :AV18IsCompanyLocationIdEmpty or ( ";
+         sRef2 = (string)(new GxDbmsUtils( new GxPostgreSql()).ValueList(AV28Dsworkhourlogs_1_companylocationid, "T8.CompanyLocationId"+" IN (", ")"));
+         scmdbuf = "SELECT DISTINCT NULL AS CompanyId, NULL AS WorkHourLogDate, ProjectId, NULL AS EmployeeId, NULL AS CompanyLocationId, ProjectName, GXC1, GXC2 FROM ( SELECT T4.CompanyId, T1.WorkHourLogDate, T1.ProjectId, T1.EmployeeId, T5.CompanyLocationId, T2.ProjectName, COALESCE( T3.GXC1, 0) AS GXC1, COALESCE( T3.GXC2, 0) AS GXC2 FROM ((((WorkHourLog T1 INNER JOIN Project T2 ON T2.ProjectId = T1.ProjectId) LEFT JOIN LATERAL (SELECT SUM(T6.WorkHourLogHour) AS GXC1, T6.ProjectId, T9.ProjectName, SUM(T6.WorkHourLogMinute) AS GXC2 FROM (((WorkHourLog T6 INNER JOIN Employee T7 ON T7.EmployeeId = T6.EmployeeId) INNER JOIN Company T8 ON T8.CompanyId = T7.CompanyId) INNER JOIN Project T9 ON T9.ProjectId = T6.ProjectId) WHERE (T1.ProjectId = T6.ProjectId and T2.ProjectName = ( T9.ProjectName)) AND (( (:AV12FromDate = DATE '00010101') or ( T6.WorkHourLogDate >= :AV12FromDate)) and ( (:AV11ToDate = DATE '00010101') or ( T6.WorkHourLogDate <= :AV11ToDate)) and ( :AV18IsCompanyLocationIdEmpty or ( ";
          scmdbuf += sRef2;
          scmdbuf += ")) and ( :AV17IsEmployeeIdEmpty or ( ";
          scmdbuf += sRef1;
-         scmdbuf += "))) GROUP BY T3.ProjectId ) T2 ON T2.ProjectId = T1.ProjectId)";
+         scmdbuf += "))) GROUP BY T6.ProjectId, T9.ProjectName ) T3 ON T3.ProjectId = T1.ProjectId AND T3.ProjectName = T2.ProjectName) INNER JOIN Employee T4 ON T4.EmployeeId = T1.EmployeeId) INNER JOIN Company T5 ON T5.CompanyId = T4.CompanyId)";
+         if ( AV8CompanyLocationId_Count > 0 )
+         {
+            AddWhere(sWhereString, "("+new GxDbmsUtils( new GxPostgreSql()).ValueList(AV8CompanyLocationId, "T5.CompanyLocationId IN (", ")")+")");
+         }
+         if ( AV15EmployeeId_Count > 0 )
+         {
+            AddWhere(sWhereString, "("+new GxDbmsUtils( new GxPostgreSql()).ValueList(AV15EmployeeId, "T1.EmployeeId IN (", ")")+")");
+         }
          if ( AV13ProjectId_Count > 0 )
          {
             AddWhere(sWhereString, "("+new GxDbmsUtils( new GxPostgreSql()).ValueList(AV13ProjectId, "T1.ProjectId IN (", ")")+")");
@@ -360,8 +407,26 @@ namespace GeneXus.Programs {
          {
             AddWhere(sWhereString, "("+new GxDbmsUtils( new GxPostgreSql()).ValueList(AV23ProjectIds, "T1.ProjectId IN (", ")")+")");
          }
+         if ( ! (DateTime.MinValue==AV12FromDate) )
+         {
+            AddWhere(sWhereString, "(T1.WorkHourLogDate >= :AV12FromDate)");
+         }
+         else
+         {
+            GXv_int4[6] = 1;
+         }
+         if ( ! (DateTime.MinValue==AV11ToDate) )
+         {
+            AddWhere(sWhereString, "(T1.WorkHourLogDate <= :AV11ToDate)");
+         }
+         else
+         {
+            GXv_int4[7] = 1;
+         }
          scmdbuf += sWhereString;
-         scmdbuf += " ORDER BY T1.ProjectName";
+         scmdbuf += " ORDER BY T2.ProjectName";
+         scmdbuf += ") DistinctT";
+         scmdbuf += " ORDER BY ProjectName";
          GXv_Object5[0] = scmdbuf;
          GXv_Object5[1] = GXv_int4;
          return GXv_Object5 ;
@@ -376,7 +441,7 @@ namespace GeneXus.Programs {
                case 0 :
                      return conditional_P008V2(context, (long)dynConstraints[0] , (GxSimpleCollection<long>)dynConstraints[1] );
                case 3 :
-                     return conditional_P008V6(context, (long)dynConstraints[0] , (GxSimpleCollection<long>)dynConstraints[1] , (GxSimpleCollection<long>)dynConstraints[2] , (long)dynConstraints[3] , (GxSimpleCollection<long>)dynConstraints[4] , (long)dynConstraints[5] , (GxSimpleCollection<long>)dynConstraints[6] , (int)dynConstraints[7] , (int)dynConstraints[8] );
+                     return conditional_P008V6(context, (long)dynConstraints[0] , (GxSimpleCollection<long>)dynConstraints[1] , (long)dynConstraints[2] , (GxSimpleCollection<long>)dynConstraints[3] , (long)dynConstraints[4] , (GxSimpleCollection<long>)dynConstraints[5] , (GxSimpleCollection<long>)dynConstraints[6] , (GxSimpleCollection<long>)dynConstraints[7] , (GxSimpleCollection<long>)dynConstraints[8] , (int)dynConstraints[9] , (int)dynConstraints[10] , (int)dynConstraints[11] , (int)dynConstraints[12] , (DateTime)dynConstraints[13] , (DateTime)dynConstraints[14] , (DateTime)dynConstraints[15] );
          }
          return base.getDynamicStatement(cursor, context, dynConstraints);
       }
@@ -415,7 +480,9 @@ namespace GeneXus.Programs {
           new ParDef("AV11ToDate",GXType.Date,8,0) ,
           new ParDef("AV11ToDate",GXType.Date,8,0) ,
           new ParDef("AV18IsCompanyLocationIdEmpty",GXType.Boolean,4,0) ,
-          new ParDef("AV17IsEmployeeIdEmpty",GXType.Boolean,4,0)
+          new ParDef("AV17IsEmployeeIdEmpty",GXType.Boolean,4,0) ,
+          new ParDef("AV12FromDate",GXType.Date,8,0) ,
+          new ParDef("AV11ToDate",GXType.Date,8,0)
           };
           def= new CursorDef[] {
               new CursorDef("P008V2", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP008V2,100, GxCacheFrequency.OFF ,true,false )
@@ -445,11 +512,16 @@ namespace GeneXus.Programs {
                 return;
              case 3 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);
-                ((string[]) buf[1])[0] = rslt.getString(2, 100);
-                ((short[]) buf[2])[0] = rslt.getShort(3);
+                ((DateTime[]) buf[1])[0] = rslt.getGXDate(2);
+                ((long[]) buf[2])[0] = rslt.getLong(3);
                 ((bool[]) buf[3])[0] = rslt.wasNull(3);
-                ((short[]) buf[4])[0] = rslt.getShort(4);
-                ((bool[]) buf[5])[0] = rslt.wasNull(4);
+                ((long[]) buf[4])[0] = rslt.getLong(4);
+                ((long[]) buf[5])[0] = rslt.getLong(5);
+                ((string[]) buf[6])[0] = rslt.getString(6, 100);
+                ((short[]) buf[7])[0] = rslt.getShort(7);
+                ((bool[]) buf[8])[0] = rslt.wasNull(7);
+                ((short[]) buf[9])[0] = rslt.getShort(8);
+                ((bool[]) buf[10])[0] = rslt.wasNull(8);
                 return;
        }
     }
