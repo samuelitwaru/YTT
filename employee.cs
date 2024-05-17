@@ -701,7 +701,7 @@ namespace GeneXus.Programs {
          if ( ( nKeyPressed == 1 ) && ( AnyError == 0 ) )
          {
             /* Enter key processing. */
-            nBlankRcdCount28 = (short)(subGridlevel_project_Rows);
+            nBlankRcdCount28 = 1;
             if ( ! IsIns( ) )
             {
                /* Display confirmed (stored) records */
@@ -715,7 +715,7 @@ namespace GeneXus.Programs {
                   ScanNext0F28( ) ;
                }
                ScanEnd0F28( ) ;
-               nBlankRcdCount28 = (short)(subGridlevel_project_Rows);
+               nBlankRcdCount28 = 1;
             }
          }
          else if ( ( nKeyPressed == 3 ) || ( nKeyPressed == 4 ) || ( ( nKeyPressed == 1 ) && ( AnyError != 0 ) ) )
@@ -747,7 +747,7 @@ namespace GeneXus.Programs {
          else
          {
             /* Get or get-alike key processing. */
-            nBlankRcdCount28 = (short)(subGridlevel_project_Rows);
+            nBlankRcdCount28 = 1;
             nRcdExists_28 = 1;
             if ( ! IsIns( ) )
             {
@@ -1334,7 +1334,6 @@ namespace GeneXus.Programs {
       {
          /* Start Routine */
          returnInSub = false;
-         subGridlevel_project_Rows = (int)(subGridlevel_project_Rows+1);
          divLayoutmaintable_Class = divLayoutmaintable_Class+" "+"EditForm";
          AssignProp("", false, divLayoutmaintable_Internalname, "Class", divLayoutmaintable_Class, true);
          new GeneXus.Programs.wwpbaseobjects.loadwwpcontext(context ).execute( out  AV8WWPContext) ;
@@ -3503,7 +3502,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202451311102566", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20245161619973", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -3519,7 +3518,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("employee.js", "?202451311102568", false, true);
+         context.AddJavascriptSource("employee.js", "?20245161619975", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Panel/BootstrapPanelRender.js", "", false, true);
@@ -3610,7 +3609,6 @@ namespace GeneXus.Programs {
          subGridlevel_project_Backcolorstyle = 0;
          Combo_projectid_Titlecontrolidtoreplace = "";
          edtProjectId_Enabled = 1;
-         subGridlevel_project_Rows = 1;
          edtEmployeeName_Jsonclick = "";
          edtEmployeeName_Enabled = 1;
          edtEmployeeName_Visible = 1;
@@ -4475,7 +4473,6 @@ namespace GeneXus.Programs {
       private int edtEmployeeBalance_Visible ;
       private int edtEmployeeName_Visible ;
       private int edtEmployeeName_Enabled ;
-      private int subGridlevel_project_Rows ;
       private int edtProjectId_Enabled ;
       private int fRowAdded ;
       private int Dvpanel_tableattributes_Gxcontroltype ;
