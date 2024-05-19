@@ -143,7 +143,7 @@ namespace GeneXus.Programs {
          AV9MailRecipient.Address = "timetracker@yukon.software";
          AV9MailRecipient.Name = "Time Tracker Support";
          AV10MailMessage.Subject = AV11supportsubject;
-         AV10MailMessage.HTMLText = "<p> Hi support,</p>"+"<p>"+AV13employee.gxTpr_Employeeemail+"</p>"+"<p>has sent the following support request:</p>"+"<p>"+AV12supportdescription+"</p>";
+         AV10MailMessage.HTMLText = "<p> Hi support,</p>"+"<p>has sent the following support request:</p>"+"<p>"+AV12supportdescription+"</p>";
          AV10MailMessage.To.Add(AV9MailRecipient);
          AV8SMTPSession.Login();
          if ( AV8SMTPSession.ErrCode == 0 )

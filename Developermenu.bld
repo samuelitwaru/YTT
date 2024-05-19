@@ -356,7 +356,6 @@ gamsdchangepassword
 loginpanel
 gamsdupdateuser
 passwordchangepanel
-profilepanel
 updateworkhourlog
 loghourspanel
 worklogsgridcollectionpanel
@@ -364,4 +363,5 @@ leaverequestpanel
 viewleaverequest
 updateleaverequest
 leaverequestsgridpanel
+profilepanel
 GeneXus.Programs.Common

@@ -1,1 +1,86 @@
-function UCExample(n){var i='<div>\t<button  data-event="Click" >Button 1<\/button>\t<button  data-event="Click2" >Button 2<\/button><\/div>',e={},r,u,f,t;Mustache.parse(i);r=0;u=0;this.show=function(){f=n(this.getContainerControl());r=0;u=0;this.setHtml(Mustache.render(i,this,e));this.renderChildContainers();n(this.getContainerControl()).find("[data-event='Click']").on("click",this.onClickHandler.closure(this)).each(function(n){this.setAttribute("data-items-index",n+1)});n(this.getContainerControl()).find("[data-event='Click2']").on("click2",this.onClick2Handler.closure(this)).each(function(n){this.setAttribute("data-items-index",n+1)})};this.Scripts=[];this.onClickHandler=function(n){if(n){var t=n.currentTarget;n.preventDefault()}this.Click&&this.Click()};this.onClick2Handler=function(n){if(n){var t=n.currentTarget;n.preventDefault()}this.Click2&&this.Click2()};this.autoToggleVisibility=!0;t={};this.renderChildContainers=function(){f.find("[data-slot][data-parent='"+this.ContainerName+"']").each(function(i,r){var e=n(r),f=e.attr("data-slot"),u;u=t[f];u||(u=this.getChildContainer(f),t[f]=u,u.parentNode.removeChild(u));e.append(u);n(u).show()}.closure(this))}}
+function UCExample($) {
+
+	var template = '<div>	<button  data-event=\"Click\" >Button 1</button>	<button  data-event=\"Click2\" >Button 2</button></div>';
+	var partials = {  }; 
+	Mustache.parse(template);
+	var _iOnClick = 0; 
+	var _iOnClick2 = 0; 
+	var $container;
+	this.show = function() {
+			$container = $(this.getContainerControl());
+
+			// Raise before show scripts
+
+			_iOnClick = 0; 
+			_iOnClick2 = 0; 
+
+			//if (this.IsPostBack)
+				this.setHtml(Mustache.render(template, this, partials));
+			this.renderChildContainers();
+
+			$(this.getContainerControl())
+				.find("[data-event='Click']")
+				.on('click', this.onClickHandler.closure(this))
+				.each(function (i) {
+					this.setAttribute("data-items-index", i + 1);
+				}); 
+			$(this.getContainerControl())
+				.find("[data-event='Click2']")
+				.on('click2', this.onClick2Handler.closure(this))
+				.each(function (i) {
+					this.setAttribute("data-items-index", i + 1);
+				}); 
+
+			// Raise after show scripts
+
+	}
+
+	this.Scripts = [];
+
+
+
+		this.onClickHandler = function (e) {
+			if (e) {
+				var target = e.currentTarget;
+				e.preventDefault();
+			}
+
+			if (this.Click) {
+				this.Click();
+			}
+		} 
+
+		this.onClick2Handler = function (e) {
+			if (e) {
+				var target = e.currentTarget;
+				e.preventDefault();
+			}
+
+			if (this.Click2) {
+				this.Click2();
+			}
+		} 
+
+	this.autoToggleVisibility = true;
+
+	var childContainers = {};
+	this.renderChildContainers = function () {
+		$container
+			.find("[data-slot][data-parent='" + this.ContainerName + "']")
+			.each((function (i, slot) {
+				var $slot = $(slot),
+					slotName = $slot.attr('data-slot'),
+					slotContentEl;
+
+				slotContentEl = childContainers[slotName];
+				if (!slotContentEl) {				
+					slotContentEl = this.getChildContainer(slotName)
+					childContainers[slotName] = slotContentEl;
+					slotContentEl.parentNode.removeChild(slotContentEl);
+				}
+				$slot.append(slotContentEl);
+				$(slotContentEl).show();
+			}).closure(this));
+	};
+
+}
