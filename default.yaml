@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: "YTT_version4"
-  version: "20240506180204"
+  version: "20240519073421"
 servers:
   - url: http://localhost:8082/YTT_version4NETPostgreSQL14/rest
 paths:
@@ -2416,6 +2416,26 @@ paths:
               schema:
                 $ref: "#/components/schemas/GAMSDUpdateUser_Level_DetailSdt"  
 
+        404:
+          description: "Not found"
+  /LandingPanel_Level_Detail:
+    get:
+      tags:
+        - LandingPanel_Level_Detail
+      operationId: "LandingPanel_Level_Detail"
+      summary: "LandingPanel_Level_Detail"
+      parameters:
+        - name: "Gxid"
+          in: "query"
+          required: false
+          schema:
+            type: "integer"
+            format: "int64"
+
+
+      responses:
+        200:
+          description: "Successful operation"
         404:
           description: "Not found"
   /LeaveRequestPanel_Level_Detail:

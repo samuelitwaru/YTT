@@ -105,6 +105,7 @@ namespace GeneXus.Programs {
             new getloggedinemployeeid(context ).execute( out  GXt_int1) ;
             AV20EmployeeId = GXt_int1;
             AV29MsgVar = "Hours Logged Succesfully";
+            AV23LogHour = 8;
             new sdgetweekhours(context ).execute( out  AV25WeekDuration, out  AV26WeekHours) ;
             Gxdynprop1 = "Weekly Total: " + AV25WeekDuration;
             Gxdynprop += ((StringUtil.StrCmp(Gxdynprop, "")==0) ? "" : ", ") + "[\"Weeklyhourstxt\",\"Caption\",\"" + StringUtil.JSONEncode( Gxdynprop1) + "\"]";
@@ -120,6 +121,7 @@ namespace GeneXus.Programs {
             }
             Gxwebsession.Set(Gxids+"gxvar_Workhourlogdate", context.localUtil.DToC( AV7WorkHourLogDate, 1, "/"));
             Gxwebsession.Set(Gxids+"gxvar_Projectid", StringUtil.Str( (decimal)(AV10ProjectId), 4, 0));
+            Gxwebsession.Set(Gxids+"gxvar_Loghour", StringUtil.Str( (decimal)(AV23LogHour), 2, 0));
             Gxwebsession.Set(Gxids+"gxvar_Employeeid", StringUtil.Str( (decimal)(AV20EmployeeId), 10, 0));
             Gxwebsession.Set(Gxids+"gxvar_Msgvar", AV29MsgVar);
             Gxwebsession.Set(Gxids, "true");
@@ -129,6 +131,7 @@ namespace GeneXus.Programs {
             AV7WorkHourLogDate = context.localUtil.CToD( Gxwebsession.Get(Gxids+"gxvar_Workhourlogdate"), 1);
             AV20EmployeeId = (long)(Math.Round(NumberUtil.Val( Gxwebsession.Get(Gxids+"gxvar_Employeeid"), "."), 18, MidpointRounding.ToEven));
             AV29MsgVar = Gxwebsession.Get(Gxids+"gxvar_Msgvar");
+            AV23LogHour = (short)(Math.Round(NumberUtil.Val( Gxwebsession.Get(Gxids+"gxvar_Loghour"), "."), 18, MidpointRounding.ToEven));
             AV10ProjectId = (short)(Math.Round(NumberUtil.Val( Gxwebsession.Get(Gxids+"gxvar_Projectid"), "."), 18, MidpointRounding.ToEven));
          }
          AV7WorkHourLogDate = Gx_date;
@@ -171,6 +174,7 @@ namespace GeneXus.Programs {
          AV7WorkHourLogDate = DateTime.MinValue;
          Gx_date = DateTime.MinValue;
          AV29MsgVar = "";
+         AV23LogHour = 8;
          AV25WeekDuration = "";
          Gxdynprop1 = "";
          Gxdynprop = "";
@@ -181,9 +185,9 @@ namespace GeneXus.Programs {
          Gx_date = DateTimeUtil.Today( context);
       }
 
+      private short AV23LogHour ;
       private short AV26WeekHours ;
       private short AV10ProjectId ;
-      private short AV23LogHour ;
       private short AV24LogMinute ;
       private int AV36gxid ;
       private long AV20EmployeeId ;

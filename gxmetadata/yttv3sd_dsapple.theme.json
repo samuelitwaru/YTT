@@ -73,6 +73,14 @@
         "Name" : "SlidingTransparentTableRightHalfHide",
         "ThemeTransformationReference" : "slidingtransparenttablerighthalfhide",
         "elevation" : "0"
+    }, { 
+        "Name" : "TabPageSelected",
+        "font_size" : "14dip",
+        "font_weight" : "bolder"
+    }, { 
+        "Name" : "TabPageUnselected",
+        "font_size" : "14dip",
+        "font_weight" : "bolder"
     } ],
     "Transformations" : [ { 
         "Name" : "tablegrow100x100",

@@ -448,9 +448,9 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "Center", "top", "", "", "div");
             /* Static images/pictures */
-            ClassString = "Image" + " " + ((StringUtil.StrCmp(imgHeaderoriginal_gximage, "")==0) ? "GX_Image_yukon_app_logo_Class" : "GX_Image_"+imgHeaderoriginal_gximage+"_Class");
+            ClassString = "Image" + " " + ((StringUtil.StrCmp(imgHeaderoriginal_gximage, "")==0) ? "GX_Image_yukon_login_logo_Class" : "GX_Image_"+imgHeaderoriginal_gximage+"_Class");
             StyleString = "";
-            sImgUrl = (string)(context.GetImagePath( "3b6682a4-794f-4e83-af42-03de378e152a", "", context.GetTheme( )));
+            sImgUrl = (string)(context.GetImagePath( "8043abc0-1e6e-4605-96a6-9babd495e72f", "", context.GetTheme( )));
             GxWebStd.gx_bitmap( context, imgHeaderoriginal_Internalname, sImgUrl, "", "", "", context.GetTheme( ), 1, 1, "", "", 0, 0, 0, "px", 0, "px", 0, 0, 0, "", "", StyleString, ClassString, "", "", "", "", " "+"data-gx-image"+" ", "", "", 1, false, false, context.GetImageSrcSet( sImgUrl), "HLP_Login.htm");
             GxWebStd.gx_div_end( context, "Center", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -465,7 +465,7 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "Center", "top", "", "", "div");
             /* Text block */
-            GxWebStd.gx_label_ctrl( context, lblSignin_Internalname, "SIGN IN", "", "", lblSignin_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "TextBlockTitleLogin", 0, "", 1, 1, 0, 0, "HLP_Login.htm");
+            GxWebStd.gx_label_ctrl( context, lblSignin_Internalname, "Yukon Time Tracker", "", "", lblSignin_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "TextBlockTitleLogin", 0, "", 1, 1, 0, 0, "HLP_Login.htm");
             GxWebStd.gx_div_end( context, "Center", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
@@ -1152,9 +1152,6 @@ namespace GeneXus.Programs {
       {
          /* Start Routine */
          returnInSub = false;
-         AV40Repository.gxTpr_Sessionexpiresonipchange = false;
-         AV49CookieName = "DVelop_HMenuSelected_" + AV51HTTPRequest.ServerHost + "_" + StringUtil.StringReplace( AV51HTTPRequest.ScriptPath, "/", "");
-         AV50CokResult = context.SetCookie( AV49CookieName, "", "/", (DateTime)(DateTime.MinValue), "", 0);
          divLayoutmaintable_Class = "MainContainer";
          AssignProp("", false, divLayoutmaintable_Internalname, "Class", divLayoutmaintable_Class, true);
          lblRegisteruser_Link = formatLink("gamregisteruser.aspx") ;
@@ -1715,7 +1712,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202443019124044", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202451910335720", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1731,7 +1728,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("login.js", "?202443019124049", false, true);
+         context.AddJavascriptSource("login.js", "?202451910335722", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Mask/jquery.mask.js", "", false, true);
          context.AddJavascriptSource("DVelop/WorkWithPlusUtilities/BootstrapSelect.js", "", false, true);
@@ -2258,9 +2255,6 @@ namespace GeneXus.Programs {
          AV53Imageauthtype_GXI = "";
          AV29TypeAuthType = "";
          AV26NameAuthType = "";
-         AV40Repository = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context);
-         AV49CookieName = "";
-         AV51HTTPRequest = new GxHttpRequest( context);
          AV28RepositoryGUID = "";
          AV36Errors = new GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError>( context, "GeneXus.Programs.genexussecurity.SdtGAMError", "GeneXus.Programs");
          AV9ConnectionInfoCollection = new GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMConnectionInfo>( context, "GeneXus.Programs.genexussecurity.SdtGAMConnectionInfo", "GeneXus.Programs");
@@ -2271,6 +2265,7 @@ namespace GeneXus.Programs {
          AV48GAMUser = new GeneXus.Programs.genexussecurity.SdtGAMUser(context);
          AV37ErrorsLogin = new GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError>( context, "GeneXus.Programs.genexussecurity.SdtGAMError", "GeneXus.Programs");
          AV41Session = new GeneXus.Programs.genexussecurity.SdtGAMSession(context);
+         AV40Repository = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context);
          AV13GAMRepository = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context);
          AV35Error = new GeneXus.Programs.genexussecurity.SdtGAMError(context);
          Gx_msg = "";
@@ -2294,7 +2289,6 @@ namespace GeneXus.Programs {
       private short nDonePA ;
       private short gxcookieaux ;
       private short subGridauthtypes_Backcolorstyle ;
-      private short AV50CokResult ;
       private short GRIDAUTHTYPES_nEOF ;
       private short nGXWrapped ;
       private short subGridauthtypes_Backstyle ;
@@ -2402,7 +2396,6 @@ namespace GeneXus.Programs {
       private string edtavImageauthtype_Internalname ;
       private string AV29TypeAuthType ;
       private string AV26NameAuthType ;
-      private string AV49CookieName ;
       private string AV28RepositoryGUID ;
       private string edtavImageauthtype_gximage ;
       private string edtavImageauthtype_Tooltiptext ;
@@ -2460,7 +2453,6 @@ namespace GeneXus.Programs {
       private GXCombobox cmbavTypeauthtype ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
-      private GxHttpRequest AV51HTTPRequest ;
       private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMAuthenticationTypeSimple> AV7AuthenticationTypes ;
       private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMConnectionInfo> AV9ConnectionInfoCollection ;
       private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV36Errors ;

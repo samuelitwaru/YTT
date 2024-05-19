@@ -249,6 +249,7 @@
 	--GX-Image_yukon_splash_screen2 : url(../yukon_splash_screen2.png);
 	--GX-Image_new_login_bg : url(../new_login_bg.png);
 	--GX-Image_yukon_get_started_bg : url(../yukon_get_started_bg.png);
+	--GX-Image_yukon_login_logo : url(../yukon_login_logo.png);
 }
 
 .GX_Image_SelectRow_Class{content: var(--GX-Image_SelectRow);}
@@ -499,4 +500,5 @@
 .GX_Image_yukon_splash_screen2_Class{content: var(--GX-Image_yukon_splash_screen2);}
 .GX_Image_new_login_bg_Class{content: var(--GX-Image_new_login_bg);}
 .GX_Image_yukon_get_started_bg_Class{content: var(--GX-Image_yukon_get_started_bg);}
+.GX_Image_yukon_login_logo_Class{content: var(--GX-Image_yukon_login_logo);}
 }

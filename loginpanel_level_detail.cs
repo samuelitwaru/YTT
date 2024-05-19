@@ -38,17 +38,17 @@ namespace GeneXus.Programs {
       public void execute( int aP0_gxid ,
                            out SdtLoginPanel_Level_DetailSdt aP1_GXM1LoginPanel_Level_DetailSdt )
       {
-         this.AV18gxid = aP0_gxid;
-         this.AV21GXM1LoginPanel_Level_DetailSdt = new SdtLoginPanel_Level_DetailSdt(context) ;
+         this.AV19gxid = aP0_gxid;
+         this.AV22GXM1LoginPanel_Level_DetailSdt = new SdtLoginPanel_Level_DetailSdt(context) ;
          initialize();
          executePrivate();
-         aP1_GXM1LoginPanel_Level_DetailSdt=this.AV21GXM1LoginPanel_Level_DetailSdt;
+         aP1_GXM1LoginPanel_Level_DetailSdt=this.AV22GXM1LoginPanel_Level_DetailSdt;
       }
 
       public SdtLoginPanel_Level_DetailSdt executeUdp( int aP0_gxid )
       {
          execute(aP0_gxid, out aP1_GXM1LoginPanel_Level_DetailSdt);
-         return AV21GXM1LoginPanel_Level_DetailSdt ;
+         return AV22GXM1LoginPanel_Level_DetailSdt ;
       }
 
       public void executeSubmit( int aP0_gxid ,
@@ -56,12 +56,12 @@ namespace GeneXus.Programs {
       {
          loginpanel_level_detail objloginpanel_level_detail;
          objloginpanel_level_detail = new loginpanel_level_detail();
-         objloginpanel_level_detail.AV18gxid = aP0_gxid;
-         objloginpanel_level_detail.AV21GXM1LoginPanel_Level_DetailSdt = new SdtLoginPanel_Level_DetailSdt(context) ;
+         objloginpanel_level_detail.AV19gxid = aP0_gxid;
+         objloginpanel_level_detail.AV22GXM1LoginPanel_Level_DetailSdt = new SdtLoginPanel_Level_DetailSdt(context) ;
          objloginpanel_level_detail.context.SetSubmitInitialConfig(context);
          objloginpanel_level_detail.initialize();
          Submit( executePrivateCatch,objloginpanel_level_detail);
-         aP1_GXM1LoginPanel_Level_DetailSdt=this.AV21GXM1LoginPanel_Level_DetailSdt;
+         aP1_GXM1LoginPanel_Level_DetailSdt=this.AV22GXM1LoginPanel_Level_DetailSdt;
       }
 
       void executePrivateCatch( object stateInfo )
@@ -81,13 +81,13 @@ namespace GeneXus.Programs {
       {
          /* GeneXus formulas */
          /* Output device settings */
-         Gxids = "gxid_" + StringUtil.Str( (decimal)(AV18gxid), 8, 0);
+         Gxids = "gxid_" + StringUtil.Str( (decimal)(AV19gxid), 8, 0);
          if ( StringUtil.StrCmp(Gxwebsession.Get(Gxids), "") == 0 )
          {
             Gxwebsession.Set(Gxids, "true");
          }
-         AV21GXM1LoginPanel_Level_DetailSdt.gxTpr_User = AV10User;
-         AV21GXM1LoginPanel_Level_DetailSdt.gxTpr_Password = AV11Password;
+         AV22GXM1LoginPanel_Level_DetailSdt.gxTpr_User = AV10User;
+         AV22GXM1LoginPanel_Level_DetailSdt.gxTpr_Password = AV11Password;
          this.cleanup();
       }
 
@@ -107,7 +107,7 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
-         AV21GXM1LoginPanel_Level_DetailSdt = new SdtLoginPanel_Level_DetailSdt(context);
+         AV22GXM1LoginPanel_Level_DetailSdt = new SdtLoginPanel_Level_DetailSdt(context);
          Gxids = "";
          Gxwebsession = context.GetSession();
          AV10User = "";
@@ -115,13 +115,13 @@ namespace GeneXus.Programs {
          /* GeneXus formulas. */
       }
 
-      private int AV18gxid ;
+      private int AV19gxid ;
       private string Gxids ;
       private string AV10User ;
       private string AV11Password ;
       private SdtLoginPanel_Level_DetailSdt aP1_GXM1LoginPanel_Level_DetailSdt ;
       private IGxSession Gxwebsession ;
-      private SdtLoginPanel_Level_DetailSdt AV21GXM1LoginPanel_Level_DetailSdt ;
+      private SdtLoginPanel_Level_DetailSdt AV22GXM1LoginPanel_Level_DetailSdt ;
    }
 
 }
