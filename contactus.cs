@@ -18,7 +18,6 @@ using GeneXus.Mail;
 using GeneXus.Search;
 using GeneXus.Encryption;
 using GeneXus.Http.Client;
-using GeneXus.Http.Server;
 using System.Xml.Serialization;
 using System.Runtime.Serialization;
 namespace GeneXus.Programs {
@@ -285,7 +284,6 @@ namespace GeneXus.Programs {
          /* Send hidden variables. */
          /* Send saved values. */
          send_integrity_footer_hashes( ) ;
-         GxWebStd.gx_hidden_field( context, "vHTTPREQUEST_Baseurl", StringUtil.RTrim( AV17HttpRequest.BaseURL));
       }
 
       public override void RenderHtmlCloseForm( )
@@ -688,9 +686,10 @@ namespace GeneXus.Programs {
          /* 'Submit' Routine */
          returnInSub = false;
          AV15name = "Samuel";
+         AV14Email = AV19GAMUser.gxTpr_Email;
          AV14Email = "samuel.itwaru@yukon.ug";
-         AV8subject = "Daily Time Tracker Reminder";
-         AV16Body = "<div style=\"max-width:600px;margin:0 auto;font-family:Arial,sans-serif;border:1px solid #e0e0e0;padding:20px;box-shadow:0 4px 8px rgba(0,0,0,.1)\"><div style=\"background-color:#333;color:#fff;text-align:center;padding:20px 0\"><h2>Time Tracker Reminder</h2></div><div style=\"padding:20px;line-height:1.5\"><p>Dear " + AV15name + ",</p><p>Check your Time Tracker hours for today and fill them</p><p>We think you forgot to fill them in</p><a href=\" " + AV17HttpRequest.BaseURL + "logworkhours.aspx\" style=\"display: block; padding: 10px 20px; width: 150px;  margin: 20px auto; background-color: #FFCC00; text-align: center; border-radius: 8px; color: white; font-weight: bold; line-height: 30px; text-decoration: none;\">Fill now</a><p>Empower customer’s success!</p><p>Yukon Software</p></div></div>";
+         AV8subject = AV5supportsubject;
+         AV16Body = "<p> Hi support,</p>" + "<p>" + AV14Email + "</p>" + "<p>has sent the following support request:</p>" + "<p>" + AV6supportdescription + "</p>";
          new sendemail(context ).execute(  AV14Email, ref  AV8subject, ref  AV16Body) ;
       }
 
@@ -1139,7 +1138,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20245191759457", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20245191815765", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1155,7 +1154,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("contactus.js", "?20245191759457", false, true);
+         context.AddJavascriptSource("contactus.js", "?20245191815766", false, true);
          /* End function include_jscripts */
       }
 
@@ -1229,7 +1228,7 @@ namespace GeneXus.Programs {
       {
          setEventMetadata("REFRESH","{handler:'Refresh',iparms:[]");
          setEventMetadata("REFRESH",",oparms:[]}");
-         setEventMetadata("'SUBMIT'","{handler:'E12542',iparms:[{av:'AV17HttpRequest.BaseURL',ctrl:'vHTTPREQUEST',prop:'Baseurl'}]");
+         setEventMetadata("'SUBMIT'","{handler:'E12542',iparms:[{av:'AV5supportsubject',fld:'vSUPPORTSUBJECT',pic:''},{av:'AV6supportdescription',fld:'vSUPPORTDESCRIPTION',pic:''}]");
          setEventMetadata("'SUBMIT'",",oparms:[]}");
          return  ;
       }
@@ -1250,7 +1249,6 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
-         AV17HttpRequest = new GxHttpRequest( context);
          gxfirstwebparm = "";
          gxfirstwebparm_bkp = "";
          sDynURL = "";
@@ -1268,6 +1266,7 @@ namespace GeneXus.Programs {
          AV6supportdescription = "";
          AV15name = "";
          AV14Email = "";
+         AV19GAMUser = new GeneXus.Programs.genexussecurity.SdtGAMUser(context);
          AV8subject = "";
          AV16Body = "";
          sStyleString = "";
@@ -1372,8 +1371,8 @@ namespace GeneXus.Programs {
       private IGxDataStore dsDefault ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
-      private GxHttpRequest AV17HttpRequest ;
       private GXWebForm Form ;
+      private GeneXus.Programs.genexussecurity.SdtGAMUser AV19GAMUser ;
    }
 
 }
