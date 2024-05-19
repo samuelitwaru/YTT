@@ -663,12 +663,16 @@ namespace GeneXus.Programs {
          returnInSub = false;
          new getloggedinuser(context ).execute( out  AV19GAMUser, out  AV21Employee) ;
          AV14Email = "timetracker@yukon.software";
+         AV14Email = "samuel.itwaru@yukon.ug";
          AV8subject = AV5supportsubject;
          AV16Body = "<p> Hi support,</p>" + "<p>" + AV19GAMUser.gxTpr_Email + " has sent the following support request:</p>" + "<p>" + AV6supportdescription + "</p>";
          new sendemail(context).executeSubmit(  AV14Email, ref  AV8subject, ref  AV16Body) ;
-         CallWebObject(formatLink("contactus.aspx") );
-         context.wjLocDisableFrm = 1;
+         AV5supportsubject = "";
+         AssignAttri("", false, "AV5supportsubject", AV5supportsubject);
+         AV6supportdescription = "";
+         AssignAttri("", false, "AV6supportdescription", AV6supportdescription);
          GX_msglist.addItem("Email sent successfully");
+         /*  Sending Event outputs  */
       }
 
       protected void nextLoad( )
@@ -1116,7 +1120,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20245191852985", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20245191912045", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1132,7 +1136,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("contactus.js", "?20245191852985", false, true);
+         context.AddJavascriptSource("contactus.js", "?20245191912046", false, true);
          /* End function include_jscripts */
       }
 
@@ -1207,7 +1211,7 @@ namespace GeneXus.Programs {
          setEventMetadata("REFRESH","{handler:'Refresh',iparms:[]");
          setEventMetadata("REFRESH",",oparms:[]}");
          setEventMetadata("'SUBMIT'","{handler:'E11542',iparms:[{av:'AV5supportsubject',fld:'vSUPPORTSUBJECT',pic:''},{av:'AV6supportdescription',fld:'vSUPPORTDESCRIPTION',pic:''}]");
-         setEventMetadata("'SUBMIT'",",oparms:[]}");
+         setEventMetadata("'SUBMIT'",",oparms:[{av:'AV5supportsubject',fld:'vSUPPORTSUBJECT',pic:''},{av:'AV6supportdescription',fld:'vSUPPORTDESCRIPTION',pic:''}]}");
          return  ;
       }
 
