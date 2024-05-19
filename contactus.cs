@@ -687,9 +687,8 @@ namespace GeneXus.Programs {
          returnInSub = false;
          AV15name = "Samuel";
          AV14Email = AV19GAMUser.gxTpr_Email;
-         AV14Email = "samuel.itwaru@yukon.ug";
          AV8subject = AV5supportsubject;
-         AV16Body = "<p> Hi support,</p>" + "<p>" + AV14Email + "</p>" + "<p>has sent the following support request:</p>" + "<p>" + AV6supportdescription + "</p>";
+         AV16Body = "<p> Hi support,</p>" + "<p>" + AV14Email + " has sent the following support request:</p>" + "<p>" + AV6supportdescription + "</p>";
          new sendemail(context ).execute(  AV14Email, ref  AV8subject, ref  AV16Body) ;
       }
 
@@ -1138,7 +1137,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20245191815765", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202451918251464", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1154,7 +1153,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("contactus.js", "?20245191815766", false, true);
+         context.AddJavascriptSource("contactus.js", "?202451918251464", false, true);
          /* End function include_jscripts */
       }
 
