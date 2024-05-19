@@ -14,6 +14,7 @@ using GeneXus.Data.NTier.ADO;
 using GeneXus.WebControls;
 using GeneXus.Http;
 using GeneXus.XML;
+using GeneXus.Mail;
 using GeneXus.Search;
 using GeneXus.Encryption;
 using GeneXus.Http.Client;
@@ -684,11 +685,8 @@ namespace GeneXus.Programs {
       {
          /* 'Submit' Routine */
          returnInSub = false;
-         new sendcontactusemail(context).executeSubmit(  AV5supportsubject,  AV6supportdescription) ;
+         new sendcontactusemail(context).executeSubmit(  AV6supportdescription,  "") ;
          GX_msglist.addItem("Email sent successfully");
-         CallWebObject(formatLink("contactus.aspx") );
-         context.wjLocDisableFrm = 1;
-         /*  Sending Event outputs  */
       }
 
       protected void nextLoad( )
@@ -1136,7 +1134,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20245191613279", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202451917505688", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1152,7 +1150,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("contactus.js", "?20245191613281", false, true);
+         context.AddJavascriptSource("contactus.js", "?202451917505688", false, true);
          /* End function include_jscripts */
       }
 
@@ -1227,7 +1225,7 @@ namespace GeneXus.Programs {
          setEventMetadata("REFRESH","{handler:'Refresh',iparms:[]");
          setEventMetadata("REFRESH",",oparms:[]}");
          setEventMetadata("'SUBMIT'","{handler:'E12542',iparms:[{av:'AV5supportsubject',fld:'vSUPPORTSUBJECT',pic:''},{av:'AV6supportdescription',fld:'vSUPPORTDESCRIPTION',pic:''}]");
-         setEventMetadata("'SUBMIT'",",oparms:[{av:'AV6supportdescription',fld:'vSUPPORTDESCRIPTION',pic:''},{av:'AV5supportsubject',fld:'vSUPPORTSUBJECT',pic:''}]}");
+         setEventMetadata("'SUBMIT'",",oparms:[]}");
          return  ;
       }
 
