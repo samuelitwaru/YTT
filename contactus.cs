@@ -662,11 +662,13 @@ namespace GeneXus.Programs {
          /* 'Submit' Routine */
          returnInSub = false;
          new getloggedinuser(context ).execute( out  AV19GAMUser, out  AV21Employee) ;
-         GX_msglist.addItem(AV21Employee.gxTpr_Employeename);
-         AV14Email = "samuel.itwaru@yukon.ug";
+         AV14Email = "timetracker@yukon.software";
          AV8subject = AV5supportsubject;
-         AV16Body = "<p> Hi support,</p>" + "<p>" + AV21Employee.gxTpr_Employeeemail + " has sent the following support request:</p>" + "<p>" + AV6supportdescription + "</p>";
-         new sendemail(context ).execute(  AV14Email, ref  AV8subject, ref  AV16Body) ;
+         AV16Body = "<p> Hi support,</p>" + "<p>" + AV19GAMUser.gxTpr_Email + " has sent the following support request:</p>" + "<p>" + AV6supportdescription + "</p>";
+         new sendemail(context).executeSubmit(  AV14Email, ref  AV8subject, ref  AV16Body) ;
+         CallWebObject(formatLink("contactus.aspx") );
+         context.wjLocDisableFrm = 1;
+         GX_msglist.addItem("Email sent successfully");
       }
 
       protected void nextLoad( )
@@ -1114,7 +1116,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202451918425771", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20245191852985", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1130,7 +1132,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("contactus.js", "?202451918425772", false, true);
+         context.AddJavascriptSource("contactus.js", "?20245191852985", false, true);
          /* End function include_jscripts */
       }
 
