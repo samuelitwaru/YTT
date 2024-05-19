@@ -479,26 +479,19 @@ namespace GeneXus.Programs {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
                            }
-                           else if ( StringUtil.StrCmp(sEvt, "START") == 0 )
-                           {
-                              context.wbHandled = 1;
-                              dynload_actions( ) ;
-                              /* Execute user event: Start */
-                              E11542 ();
-                           }
                            else if ( StringUtil.StrCmp(sEvt, "'SUBMIT'") == 0 )
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
                               /* Execute user event: 'Submit' */
-                              E12542 ();
+                              E11542 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "LOAD") == 0 )
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
                               /* Execute user event: Load */
-                              E13542 ();
+                              E12542 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "ENTER") == 0 )
                            {
@@ -625,7 +618,7 @@ namespace GeneXus.Programs {
          if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
          {
             /* Execute user event: Load */
-            E13542 ();
+            E12542 ();
             WB540( ) ;
          }
       }
@@ -643,10 +636,6 @@ namespace GeneXus.Programs {
       {
          /* Before Start, stand alone formulas. */
          before_start_formulas( ) ;
-         /* Execute Start event if defined. */
-         context.wbGlbDoneStart = 0;
-         /* Execute user event: Start */
-         E11542 ();
          context.wbGlbDoneStart = 1;
          /* After Start, stand alone formulas. */
          if ( StringUtil.StrCmp(context.GetRequestMethod( ), "POST") == 0 )
@@ -668,27 +657,15 @@ namespace GeneXus.Programs {
          }
       }
 
-      protected void GXStart( )
-      {
-         /* Execute user event: Start */
-         E11542 ();
-         if (returnInSub) return;
-      }
-
       protected void E11542( )
-      {
-         /* Start Routine */
-         returnInSub = false;
-      }
-
-      protected void E12542( )
       {
          /* 'Submit' Routine */
          returnInSub = false;
-         AV15name = "Samuel";
-         AV14Email = AV19GAMUser.gxTpr_Email;
+         new getloggedinuser(context ).execute( out  AV19GAMUser, out  AV21Employee) ;
+         GX_msglist.addItem(AV21Employee.gxTpr_Employeename);
+         AV14Email = "samuel.itwaru@yukon.ug";
          AV8subject = AV5supportsubject;
-         AV16Body = "<p> Hi support,</p>" + "<p>" + AV14Email + " has sent the following support request:</p>" + "<p>" + AV6supportdescription + "</p>";
+         AV16Body = "<p> Hi support,</p>" + "<p>" + AV21Employee.gxTpr_Employeeemail + " has sent the following support request:</p>" + "<p>" + AV6supportdescription + "</p>";
          new sendemail(context ).execute(  AV14Email, ref  AV8subject, ref  AV16Body) ;
       }
 
@@ -696,7 +673,7 @@ namespace GeneXus.Programs {
       {
       }
 
-      protected void E13542( )
+      protected void E12542( )
       {
          /* Load Routine */
          returnInSub = false;
@@ -1137,7 +1114,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202451918251464", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202451918425771", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1153,7 +1130,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("contactus.js", "?202451918251464", false, true);
+         context.AddJavascriptSource("contactus.js", "?202451918425772", false, true);
          /* End function include_jscripts */
       }
 
@@ -1227,7 +1204,7 @@ namespace GeneXus.Programs {
       {
          setEventMetadata("REFRESH","{handler:'Refresh',iparms:[]");
          setEventMetadata("REFRESH",",oparms:[]}");
-         setEventMetadata("'SUBMIT'","{handler:'E12542',iparms:[{av:'AV5supportsubject',fld:'vSUPPORTSUBJECT',pic:''},{av:'AV6supportdescription',fld:'vSUPPORTDESCRIPTION',pic:''}]");
+         setEventMetadata("'SUBMIT'","{handler:'E11542',iparms:[{av:'AV5supportsubject',fld:'vSUPPORTSUBJECT',pic:''},{av:'AV6supportdescription',fld:'vSUPPORTDESCRIPTION',pic:''}]");
          setEventMetadata("'SUBMIT'",",oparms:[]}");
          return  ;
       }
@@ -1263,9 +1240,9 @@ namespace GeneXus.Programs {
          sEvtType = "";
          AV5supportsubject = "";
          AV6supportdescription = "";
-         AV15name = "";
-         AV14Email = "";
          AV19GAMUser = new GeneXus.Programs.genexussecurity.SdtGAMUser(context);
+         AV21Employee = new SdtEmployee(context);
+         AV14Email = "";
          AV8subject = "";
          AV16Body = "";
          sStyleString = "";
@@ -1317,7 +1294,6 @@ namespace GeneXus.Programs {
       private string sEvtType ;
       private string edtavSupportsubject_Internalname ;
       private string edtavSupportdescription_Internalname ;
-      private string AV15name ;
       private string sStyleString ;
       private string tblTable1_Internalname ;
       private string divSection4_Internalname ;
@@ -1372,6 +1348,7 @@ namespace GeneXus.Programs {
       private msglist LclMsgLst ;
       private GXWebForm Form ;
       private GeneXus.Programs.genexussecurity.SdtGAMUser AV19GAMUser ;
+      private SdtEmployee AV21Employee ;
    }
 
 }

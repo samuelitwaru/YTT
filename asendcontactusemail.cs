@@ -130,6 +130,7 @@ namespace GeneXus.Programs {
       {
          /* GeneXus formulas */
          /* Output device settings */
+         new getloggedinuser(context ).execute( out  AV14GAMUser, out  AV13employee) ;
          AV8SMTPSession.Host = "timetracker.yukon.software";
          AV8SMTPSession.Port = 465;
          AV8SMTPSession.Authentication = 0;
@@ -173,6 +174,8 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
+         AV14GAMUser = new GeneXus.Programs.genexussecurity.SdtGAMUser(context);
+         AV13employee = new SdtEmployee(context);
          AV8SMTPSession = new GeneXus.Mail.GXSMTPSession(context.GetPhysicalPath());
          AV9MailRecipient = new GeneXus.Mail.GXMailRecipient();
          AV10MailMessage = new GeneXus.Mail.GXMailMessage();
@@ -184,6 +187,8 @@ namespace GeneXus.Programs {
       private GeneXus.Mail.GXMailMessage AV10MailMessage ;
       private GeneXus.Mail.GXMailRecipient AV9MailRecipient ;
       private GeneXus.Mail.GXSMTPSession AV8SMTPSession ;
+      private SdtEmployee AV13employee ;
+      private GeneXus.Programs.genexussecurity.SdtGAMUser AV14GAMUser ;
    }
 
 }
