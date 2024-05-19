@@ -1,11 +1,6 @@
-CREATE SEQUENCE WorkHourLogId MINVALUE 10000 INCREMENT 1;
-CREATE TABLE GXA0019 (WorkHourLogId bigint NOT NULL DEFAULT nextval('WorkHourLogId'), WorkHourLogDate date NOT NULL , WorkHourLogDuration VARCHAR(40) NOT NULL , WorkHourLogHour smallint NOT NULL , WorkHourLogMinute smallint NOT NULL , WorkHourLogDescription TEXT NOT NULL , ProjectId bigint NOT NULL , EmployeeId bigint NOT NULL );
-INSERT INTO GXA0019 (WorkHourLogId, WorkHourLogDate, WorkHourLogDuration, WorkHourLogHour, WorkHourLogMinute, WorkHourLogDescription, ProjectId, EmployeeId) SELECT WorkHourLogId, WorkHourLogDate, WorkHourLogDuration, WorkHourLogHour, WorkHourLogMinute, WorkHourLogDescription, ProjectId, EmployeeId FROM WorkHourLog T1;
-DROP TABLE WorkHourLog CASCADE;
-ALTER TABLE GXA0019 RENAME TO WorkHourLog;
-ALTER TABLE WorkHourLog ADD CONSTRAINT WorkHourLog_pkey PRIMARY KEY(WorkHourLogId);
-CREATE INDEX UWORKHOURLOG ON WorkHourLog (WorkHourLogDate );
-CREATE INDEX IWORKHOURLOG1 ON WorkHourLog (EmployeeId ,ProjectId );
+CREATE SEQUENCE SupportRequestId MINVALUE 1 INCREMENT 1;
+CREATE TABLE SupportRequest (SupportRequestId bigint NOT NULL DEFAULT nextval('SupportRequestId'), SupportRequestSubject VARCHAR(200) NOT NULL , SupportRequestDescription VARCHAR(200) NOT NULL , EmployeeId bigint NOT NULL , PRIMARY KEY(SupportRequestId));
+CREATE INDEX ISUPPORTREQUEST1 ON SupportRequest (EmployeeId );
 
-ALTER TABLE WorkHourLog ADD CONSTRAINT IWORKHOURLOG1 FOREIGN KEY (EmployeeId, ProjectId) REFERENCES EmployeeProject (EmployeeId, ProjectId);
+ALTER TABLE SupportRequest ADD CONSTRAINT ISUPPORTREQUEST1 FOREIGN KEY (EmployeeId) REFERENCES Employee (EmployeeId);
 

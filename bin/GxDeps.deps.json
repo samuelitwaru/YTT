@@ -17,6 +17,7 @@
           "GeneXus.NetCoreStartup": "1.26.1",
           "GeneXus.PdfReportsCS.Core": "1.26.1",
           "GeneXus.Reorganization.Core": "1.26.1",
+          "GeneXus.Search.Core": "1.26.1",
           "iTextSharp-LGPL": "4.1.6"
         },
         "runtime": {
@@ -218,6 +219,22 @@
           }
         }
       },
+      "GeneXus.Search.Core/1.26.1": {
+        "dependencies": {
+          "GeneXus.Classes.Core": "1.26.1",
+          "Lucene.Net": "3.0.3",
+          "Lucene.Net.Contrib": "3.0.3",
+          "NUglify": "1.16.4",
+          "PdfPig": "0.1.5",
+          "log4net": "2.0.15"
+        },
+        "runtime": {
+          "lib/net6.0/GxSearch.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.26.1.0"
+          }
+        }
+      },
       "GeneXus.Xsl.Core/1.26.1": {
         "runtime": {
           "lib/net6.0/GxXsl.dll": {
@@ -250,6 +267,64 @@
           "lib/netstandard2.0/log4net.dll": {
             "assemblyVersion": "2.0.15.0",
             "fileVersion": "2.0.15.0"
+          }
+        }
+      },
+      "Lucene.Net/3.0.3": {
+        "dependencies": {
+          "SharpZipLib": "0.86.0"
+        },
+        "runtime": {
+          "lib/NET40/Lucene.Net.dll": {
+            "assemblyVersion": "3.0.3.0",
+            "fileVersion": "3.0.3.0"
+          }
+        }
+      },
+      "Lucene.Net.Contrib/3.0.3": {
+        "dependencies": {
+          "Lucene.Net": "3.0.3"
+        },
+        "runtime": {
+          "lib/net40/Lucene.Net.Contrib.Analyzers.dll": {
+            "assemblyVersion": "3.0.3.0",
+            "fileVersion": "3.0.3.0"
+          },
+          "lib/net40/Lucene.Net.Contrib.Core.dll": {
+            "assemblyVersion": "3.0.3.0",
+            "fileVersion": "3.0.3.0"
+          },
+          "lib/net40/Lucene.Net.Contrib.FastVectorHighlighter.dll": {
+            "assemblyVersion": "3.0.3.0",
+            "fileVersion": "3.0.3.0"
+          },
+          "lib/net40/Lucene.Net.Contrib.Highlighter.dll": {
+            "assemblyVersion": "2.3.2.1",
+            "fileVersion": "2.3.2.1"
+          },
+          "lib/net40/Lucene.Net.Contrib.Memory.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          },
+          "lib/net40/Lucene.Net.Contrib.Queries.dll": {
+            "assemblyVersion": "3.0.3.0",
+            "fileVersion": "3.0.3.0"
+          },
+          "lib/net40/Lucene.Net.Contrib.Regex.dll": {
+            "assemblyVersion": "3.0.3.0",
+            "fileVersion": "3.0.3.0"
+          },
+          "lib/net40/Lucene.Net.Contrib.SimpleFacetedSearch.dll": {
+            "assemblyVersion": "3.0.3.0",
+            "fileVersion": "3.0.3.0"
+          },
+          "lib/net40/Lucene.Net.Contrib.Snowball.dll": {
+            "assemblyVersion": "2.0.0.1",
+            "fileVersion": "2.0.0.1"
+          },
+          "lib/net40/Lucene.Net.Contrib.SpellChecker.dll": {
+            "assemblyVersion": "3.0.3.0",
+            "fileVersion": "3.0.3.0"
           }
         }
       },
@@ -750,6 +825,38 @@
           }
         }
       },
+      "PdfPig/0.1.5": {
+        "runtime": {
+          "lib/netstandard2.0/UglyToad.PdfPig.Core.dll": {
+            "assemblyVersion": "0.1.5.0",
+            "fileVersion": "0.1.5.0"
+          },
+          "lib/netstandard2.0/UglyToad.PdfPig.DocumentLayoutAnalysis.dll": {
+            "assemblyVersion": "0.1.5.0",
+            "fileVersion": "0.1.5.0"
+          },
+          "lib/netstandard2.0/UglyToad.PdfPig.Fonts.dll": {
+            "assemblyVersion": "0.1.5.0",
+            "fileVersion": "0.1.5.0"
+          },
+          "lib/netstandard2.0/UglyToad.PdfPig.Package.dll": {
+            "assemblyVersion": "0.1.5.0",
+            "fileVersion": "0.1.5.0"
+          },
+          "lib/netstandard2.0/UglyToad.PdfPig.Tokenization.dll": {
+            "assemblyVersion": "0.1.5.0",
+            "fileVersion": "0.1.5.0"
+          },
+          "lib/netstandard2.0/UglyToad.PdfPig.Tokens.dll": {
+            "assemblyVersion": "0.1.5.0",
+            "fileVersion": "0.1.5.0"
+          },
+          "lib/netstandard2.0/UglyToad.PdfPig.dll": {
+            "assemblyVersion": "0.1.5.0",
+            "fileVersion": "0.1.5.0"
+          }
+        }
+      },
       "Pipelines.Sockets.Unofficial/2.0.17": {
         "dependencies": {
           "System.Buffers": "4.5.0",
@@ -827,6 +934,14 @@
           "lib/netstandard1.1/Sandwych.GeographicLib.dll": {
             "assemblyVersion": "0.0.0.0",
             "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "SharpZipLib/0.86.0": {
+        "runtime": {
+          "lib/20/ICSharpCode.SharpZipLib.dll": {
+            "assemblyVersion": "0.86.0.518",
+            "fileVersion": "0.86.0.518"
           }
         }
       },
@@ -1717,6 +1832,13 @@
       "path": "genexus.reorganization.core/1.26.1",
       "hashPath": "genexus.reorganization.core.1.26.1.nupkg.sha512"
     },
+    "GeneXus.Search.Core/1.26.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-mHlkv7mlPOXAqEkN41ZZn3fxn8h870XoPnBsfFJqpCq9QansJu04L9j1KrN7DiCsHtLYPO/+LBoXx39HCVGqhQ==",
+      "path": "genexus.search.core/1.26.1",
+      "hashPath": "genexus.search.core.1.26.1.nupkg.sha512"
+    },
     "GeneXus.Xsl.Core/1.26.1": {
       "type": "package",
       "serviceable": true,
@@ -1744,6 +1866,20 @@
       "sha512": "sha512-GahnO9ZgFka+xYcFwAfIFjW+k86P2nxFoaEpH6t3v4hiGj7tv2ksVZphxCVIHmJxoySS0HeU3dgCW+bSCcfD0A==",
       "path": "log4net/2.0.15",
       "hashPath": "log4net.2.0.15.nupkg.sha512"
+    },
+    "Lucene.Net/3.0.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-A/70q4eDcuuafQeDB9eaiDP9FQG7X29T4VIYRphS7Wk8kAM9gNcfVqYyd0H8BJ1BTpA5C1ORm9RzFn4BiNavrw==",
+      "path": "lucene.net/3.0.3",
+      "hashPath": "lucene.net.3.0.3.nupkg.sha512"
+    },
+    "Lucene.Net.Contrib/3.0.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-4aFMsm5657tIIAXWOh3wYxSfPwWFDjrUomXnE3lxKPOuJDjmvLg3CEuTaPYuLvBMKwRaj/C4EwyPM5/pmIwytw==",
+      "path": "lucene.net.contrib/3.0.3",
+      "hashPath": "lucene.net.contrib.3.0.3.nupkg.sha512"
     },
     "MailKit/3.1.1": {
       "type": "package",
@@ -2130,6 +2266,13 @@
       "path": "org.mentalis.security/1.0.0",
       "hashPath": "org.mentalis.security.1.0.0.nupkg.sha512"
     },
+    "PdfPig/0.1.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-VJfr6nMmTVvEWDkcI/3LW1DLbZwYTZDMEXwNJH3ZXdT0uhBYEcFwEYJTd97Z4qGZbxaA1yCmudl+vY9y2NC/mA==",
+      "path": "pdfpig/0.1.5",
+      "hashPath": "pdfpig.0.1.5.nupkg.sha512"
+    },
     "Pipelines.Sockets.Unofficial/2.0.17": {
       "type": "package",
       "serviceable": true,
@@ -2262,6 +2405,13 @@
       "sha512": "sha512-VaYkpb2V2DF16cG8sGJicYe8S1K6E/9UdZunUVSvQU9CvPVWgf+7V9X/3L9rrhWVXQjbA5h+zGKYe8EeVDy4xQ==",
       "path": "sandwych.geographiclib/1.49.3",
       "hashPath": "sandwych.geographiclib.1.49.3.nupkg.sha512"
+    },
+    "SharpZipLib/0.86.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-5DbS1SlKLMi+WG00Cm0ueYf2oyXJrowETQk8nx96rmdjTuHsA3laPykGV7Sxi0R5Xxfx0Kh/EfacAZ1f6M7y/g==",
+      "path": "sharpziplib/0.86.0",
+      "hashPath": "sharpziplib.0.86.0.nupkg.sha512"
     },
     "StackExchange.Redis/2.0.593": {
       "type": "package",

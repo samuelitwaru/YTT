@@ -7,6 +7,7 @@
   <Table name="Project" />
   <Table name="WorkHourLog" />
   <Table name="EmployeeProject" />
+  <Table name="SupportRequest" />
   <Table name="Holiday" />
   <Table name="Device" />
 </Dependencies>
