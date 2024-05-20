@@ -1582,7 +1582,7 @@ namespace GeneXus.Programs {
               ((long[]) buf[5])[0] = rslt.getLong(5);
               return;
            case 2 :
-              ((string[]) buf[0])[0] = rslt.getString(1, 100);
+              ((string[]) buf[0])[0] = rslt.getString(1, 128);
               return;
            case 3 :
               ((long[]) buf[0])[0] = rslt.getLong(1);
@@ -1591,7 +1591,7 @@ namespace GeneXus.Programs {
               ((string[]) buf[0])[0] = rslt.getString(1, 100);
               ((string[]) buf[1])[0] = rslt.getVarchar(2);
               ((string[]) buf[2])[0] = rslt.getString(3, 20);
-              ((string[]) buf[3])[0] = rslt.getString(4, 100);
+              ((string[]) buf[3])[0] = rslt.getString(4, 128);
               ((long[]) buf[4])[0] = rslt.getLong(5);
               ((bool[]) buf[5])[0] = rslt.wasNull(5);
               ((long[]) buf[6])[0] = rslt.getLong(6);
@@ -1606,7 +1606,7 @@ namespace GeneXus.Programs {
               ((long[]) buf[0])[0] = rslt.getLong(1);
               return;
            case 11 :
-              ((string[]) buf[0])[0] = rslt.getString(1, 100);
+              ((string[]) buf[0])[0] = rslt.getString(1, 128);
               return;
            case 12 :
               ((long[]) buf[0])[0] = rslt.getLong(1);
@@ -1616,7 +1616,7 @@ namespace GeneXus.Programs {
               ((string[]) buf[0])[0] = rslt.getString(1, 100);
               ((string[]) buf[1])[0] = rslt.getVarchar(2);
               ((string[]) buf[2])[0] = rslt.getString(3, 20);
-              ((string[]) buf[3])[0] = rslt.getString(4, 100);
+              ((string[]) buf[3])[0] = rslt.getString(4, 128);
               ((long[]) buf[4])[0] = rslt.getLong(5);
               ((bool[]) buf[5])[0] = rslt.wasNull(5);
               ((long[]) buf[6])[0] = rslt.getLong(6);

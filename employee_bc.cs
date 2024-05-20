@@ -349,7 +349,7 @@ namespace GeneXus.Programs {
 
       protected void OnLoadActions0F16( )
       {
-         A148EmployeeName = A107EmployeeFirstName + " " + A108EmployeeLastName;
+         A148EmployeeName = StringUtil.Trim( A107EmployeeFirstName) + " " + StringUtil.Trim( A108EmployeeLastName);
          if ( IsIns( )  && (0==A147EmployeeBalance) && ( Gx_BScreen == 0 ) )
          {
             A147EmployeeBalance = A146EmployeeVactionDays;
@@ -385,7 +385,7 @@ namespace GeneXus.Programs {
          }
          pr_default.close(7);
          nIsDirty_16 = 1;
-         A148EmployeeName = A107EmployeeFirstName + " " + A108EmployeeLastName;
+         A148EmployeeName = StringUtil.Trim( A107EmployeeFirstName) + " " + StringUtil.Trim( A108EmployeeLastName);
          if ( String.IsNullOrEmpty(StringUtil.RTrim( A107EmployeeFirstName)) )
          {
             GX_msglist.addItem(StringUtil.Format( "%1 is required.", "Employee First Name", "", "", "", "", "", "", "", ""), 1, "");
@@ -2574,7 +2574,7 @@ namespace GeneXus.Programs {
         };
         Object[] prmBC000F11;
         prmBC000F11 = new Object[] {
-        new ParDef("EmployeeName",GXType.Char,100,0) ,
+        new ParDef("EmployeeName",GXType.Char,128,0) ,
         new ParDef("GAMUserGUID",GXType.VarChar,100,60) ,
         new ParDef("EmployeeBalance",GXType.Int16,4,0) ,
         new ParDef("EmployeeFirstName",GXType.Char,100,0) ,
@@ -2590,7 +2590,7 @@ namespace GeneXus.Programs {
         };
         Object[] prmBC000F13;
         prmBC000F13 = new Object[] {
-        new ParDef("EmployeeName",GXType.Char,100,0) ,
+        new ParDef("EmployeeName",GXType.Char,128,0) ,
         new ParDef("GAMUserGUID",GXType.VarChar,100,60) ,
         new ParDef("EmployeeBalance",GXType.Int16,4,0) ,
         new ParDef("EmployeeFirstName",GXType.Char,100,0) ,
@@ -2733,7 +2733,7 @@ namespace GeneXus.Programs {
               return;
            case 3 :
               ((long[]) buf[0])[0] = rslt.getLong(1);
-              ((string[]) buf[1])[0] = rslt.getString(2, 100);
+              ((string[]) buf[1])[0] = rslt.getString(2, 128);
               ((string[]) buf[2])[0] = rslt.getVarchar(3);
               ((short[]) buf[3])[0] = rslt.getShort(4);
               ((string[]) buf[4])[0] = rslt.getString(5, 100);
@@ -2746,7 +2746,7 @@ namespace GeneXus.Programs {
               return;
            case 4 :
               ((long[]) buf[0])[0] = rslt.getLong(1);
-              ((string[]) buf[1])[0] = rslt.getString(2, 100);
+              ((string[]) buf[1])[0] = rslt.getString(2, 128);
               ((string[]) buf[2])[0] = rslt.getVarchar(3);
               ((short[]) buf[3])[0] = rslt.getShort(4);
               ((string[]) buf[4])[0] = rslt.getString(5, 100);
@@ -2762,7 +2762,7 @@ namespace GeneXus.Programs {
               return;
            case 6 :
               ((long[]) buf[0])[0] = rslt.getLong(1);
-              ((string[]) buf[1])[0] = rslt.getString(2, 100);
+              ((string[]) buf[1])[0] = rslt.getString(2, 128);
               ((string[]) buf[2])[0] = rslt.getVarchar(3);
               ((short[]) buf[3])[0] = rslt.getShort(4);
               ((string[]) buf[4])[0] = rslt.getString(5, 100);
@@ -2800,7 +2800,7 @@ namespace GeneXus.Programs {
               return;
            case 18 :
               ((long[]) buf[0])[0] = rslt.getLong(1);
-              ((string[]) buf[1])[0] = rslt.getString(2, 100);
+              ((string[]) buf[1])[0] = rslt.getString(2, 128);
               ((string[]) buf[2])[0] = rslt.getVarchar(3);
               ((short[]) buf[3])[0] = rslt.getShort(4);
               ((string[]) buf[4])[0] = rslt.getString(5, 100);

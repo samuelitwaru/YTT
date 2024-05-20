@@ -1277,7 +1277,7 @@ namespace GeneXus.Programs {
             lV83Employeewwds_3_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV83Employeewwds_3_filterfulltext), "%", "");
             lV83Employeewwds_3_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV83Employeewwds_3_filterfulltext), "%", "");
             lV83Employeewwds_3_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV83Employeewwds_3_filterfulltext), "%", "");
-            lV84Employeewwds_4_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV84Employeewwds_4_tfemployeename), 100, "%");
+            lV84Employeewwds_4_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV84Employeewwds_4_tfemployeename), 128, "%");
             lV86Employeewwds_6_tfemployeeemail = StringUtil.Concat( StringUtil.RTrim( AV86Employeewwds_6_tfemployeeemail), "%", "");
             /* Using cursor H002V2 */
             pr_default.execute(0, new Object[] {AV80Udparg1, AV81Udparg2, lV83Employeewwds_3_filterfulltext, lV83Employeewwds_3_filterfulltext, lV83Employeewwds_3_filterfulltext, lV83Employeewwds_3_filterfulltext, lV84Employeewwds_4_tfemployeename, AV85Employeewwds_5_tfemployeename_sel, lV86Employeewwds_6_tfemployeeemail, AV87Employeewwds_7_tfemployeeemail_sel, AV90Employeewwds_10_tfemployeevactiondays, AV91Employeewwds_11_tfemployeevactiondays_to, AV92Employeewwds_12_tfemployeebalance, AV93Employeewwds_13_tfemployeebalance_to, GXPagingFrom2, GXPagingTo2, GXPagingTo2});
@@ -1395,7 +1395,7 @@ namespace GeneXus.Programs {
          lV83Employeewwds_3_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV83Employeewwds_3_filterfulltext), "%", "");
          lV83Employeewwds_3_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV83Employeewwds_3_filterfulltext), "%", "");
          lV83Employeewwds_3_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV83Employeewwds_3_filterfulltext), "%", "");
-         lV84Employeewwds_4_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV84Employeewwds_4_tfemployeename), 100, "%");
+         lV84Employeewwds_4_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV84Employeewwds_4_tfemployeename), 128, "%");
          lV86Employeewwds_6_tfemployeeemail = StringUtil.Concat( StringUtil.RTrim( AV86Employeewwds_6_tfemployeeemail), "%", "");
          /* Using cursor H002V3 */
          pr_default.execute(1, new Object[] {AV80Udparg1, AV81Udparg2, lV83Employeewwds_3_filterfulltext, lV83Employeewwds_3_filterfulltext, lV83Employeewwds_3_filterfulltext, lV83Employeewwds_3_filterfulltext, lV84Employeewwds_4_tfemployeename, AV85Employeewwds_5_tfemployeename_sel, lV86Employeewwds_6_tfemployeeemail, AV87Employeewwds_7_tfemployeeemail_sel, AV90Employeewwds_10_tfemployeevactiondays, AV91Employeewwds_11_tfemployeevactiondays_to, AV92Employeewwds_12_tfemployeebalance, AV93Employeewwds_13_tfemployeebalance_to});
@@ -2608,7 +2608,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202451917312726", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20245201433688", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2624,7 +2624,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("employeeww.js", "?202451917312727", false, true);
+         context.AddJavascriptSource("employeeww.js", "?20245201433691", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -2804,7 +2804,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtEmployeeName_Internalname,StringUtil.RTrim( A148EmployeeName),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtEmployeeName_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn hidden-xs",(string)"",(int)edtEmployeeName_Visible,(short)0,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)100,(short)0,(short)0,(short)41,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtEmployeeName_Internalname,StringUtil.RTrim( A148EmployeeName),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtEmployeeName_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn hidden-xs",(string)"",(int)edtEmployeeName_Visible,(short)0,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)128,(short)0,(short)0,(short)41,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -4219,8 +4219,8 @@ namespace GeneXus.Programs {
           new ParDef("lV83Employeewwds_3_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV83Employeewwds_3_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV83Employeewwds_3_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV84Employeewwds_4_tfemployeename",GXType.Char,100,0) ,
-          new ParDef("AV85Employeewwds_5_tfemployeename_sel",GXType.Char,100,0) ,
+          new ParDef("lV84Employeewwds_4_tfemployeename",GXType.Char,128,0) ,
+          new ParDef("AV85Employeewwds_5_tfemployeename_sel",GXType.Char,128,0) ,
           new ParDef("lV86Employeewwds_6_tfemployeeemail",GXType.VarChar,100,0) ,
           new ParDef("AV87Employeewwds_7_tfemployeeemail_sel",GXType.VarChar,100,0) ,
           new ParDef("AV90Employeewwds_10_tfemployeevactiondays",GXType.Int16,4,0) ,
@@ -4239,8 +4239,8 @@ namespace GeneXus.Programs {
           new ParDef("lV83Employeewwds_3_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV83Employeewwds_3_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV83Employeewwds_3_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV84Employeewwds_4_tfemployeename",GXType.Char,100,0) ,
-          new ParDef("AV85Employeewwds_5_tfemployeename_sel",GXType.Char,100,0) ,
+          new ParDef("lV84Employeewwds_4_tfemployeename",GXType.Char,128,0) ,
+          new ParDef("AV85Employeewwds_5_tfemployeename_sel",GXType.Char,128,0) ,
           new ParDef("lV86Employeewwds_6_tfemployeeemail",GXType.VarChar,100,0) ,
           new ParDef("AV87Employeewwds_7_tfemployeeemail_sel",GXType.VarChar,100,0) ,
           new ParDef("AV90Employeewwds_10_tfemployeevactiondays",GXType.Int16,4,0) ,
@@ -4271,7 +4271,7 @@ namespace GeneXus.Programs {
                 ((string[]) buf[5])[0] = rslt.getString(6, 100);
                 ((long[]) buf[6])[0] = rslt.getLong(7);
                 ((string[]) buf[7])[0] = rslt.getVarchar(8);
-                ((string[]) buf[8])[0] = rslt.getString(9, 100);
+                ((string[]) buf[8])[0] = rslt.getString(9, 128);
                 ((string[]) buf[9])[0] = rslt.getString(10, 100);
                 ((string[]) buf[10])[0] = rslt.getString(11, 100);
                 ((long[]) buf[11])[0] = rslt.getLong(12);

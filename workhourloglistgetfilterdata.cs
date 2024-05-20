@@ -304,7 +304,7 @@ namespace GeneXus.Programs {
          lV53Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV53Workhourloglistds_1_filterfulltext), "%", "");
          lV53Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV53Workhourloglistds_1_filterfulltext), "%", "");
          lV53Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV53Workhourloglistds_1_filterfulltext), "%", "");
-         lV54Workhourloglistds_2_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV54Workhourloglistds_2_tfemployeename), 100, "%");
+         lV54Workhourloglistds_2_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV54Workhourloglistds_2_tfemployeename), 128, "%");
          lV56Workhourloglistds_4_tfprojectname = StringUtil.PadR( StringUtil.RTrim( AV56Workhourloglistds_4_tfprojectname), 100, "%");
          lV60Workhourloglistds_8_tfworkhourlogduration = StringUtil.Concat( StringUtil.RTrim( AV60Workhourloglistds_8_tfworkhourlogduration), "%", "");
          lV62Workhourloglistds_10_tfworkhourlogdescription = StringUtil.Concat( StringUtil.RTrim( AV62Workhourloglistds_10_tfworkhourlogdescription), "%", "");
@@ -403,7 +403,7 @@ namespace GeneXus.Programs {
          lV53Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV53Workhourloglistds_1_filterfulltext), "%", "");
          lV53Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV53Workhourloglistds_1_filterfulltext), "%", "");
          lV53Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV53Workhourloglistds_1_filterfulltext), "%", "");
-         lV54Workhourloglistds_2_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV54Workhourloglistds_2_tfemployeename), 100, "%");
+         lV54Workhourloglistds_2_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV54Workhourloglistds_2_tfemployeename), 128, "%");
          lV56Workhourloglistds_4_tfprojectname = StringUtil.PadR( StringUtil.RTrim( AV56Workhourloglistds_4_tfprojectname), 100, "%");
          lV60Workhourloglistds_8_tfworkhourlogduration = StringUtil.Concat( StringUtil.RTrim( AV60Workhourloglistds_8_tfworkhourlogduration), "%", "");
          lV62Workhourloglistds_10_tfworkhourlogdescription = StringUtil.Concat( StringUtil.RTrim( AV62Workhourloglistds_10_tfworkhourlogdescription), "%", "");
@@ -502,7 +502,7 @@ namespace GeneXus.Programs {
          lV53Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV53Workhourloglistds_1_filterfulltext), "%", "");
          lV53Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV53Workhourloglistds_1_filterfulltext), "%", "");
          lV53Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV53Workhourloglistds_1_filterfulltext), "%", "");
-         lV54Workhourloglistds_2_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV54Workhourloglistds_2_tfemployeename), 100, "%");
+         lV54Workhourloglistds_2_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV54Workhourloglistds_2_tfemployeename), 128, "%");
          lV56Workhourloglistds_4_tfprojectname = StringUtil.PadR( StringUtil.RTrim( AV56Workhourloglistds_4_tfprojectname), 100, "%");
          lV60Workhourloglistds_8_tfworkhourlogduration = StringUtil.Concat( StringUtil.RTrim( AV60Workhourloglistds_8_tfworkhourlogduration), "%", "");
          lV62Workhourloglistds_10_tfworkhourlogdescription = StringUtil.Concat( StringUtil.RTrim( AV62Workhourloglistds_10_tfworkhourlogdescription), "%", "");
@@ -600,7 +600,7 @@ namespace GeneXus.Programs {
          lV53Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV53Workhourloglistds_1_filterfulltext), "%", "");
          lV53Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV53Workhourloglistds_1_filterfulltext), "%", "");
          lV53Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV53Workhourloglistds_1_filterfulltext), "%", "");
-         lV54Workhourloglistds_2_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV54Workhourloglistds_2_tfemployeename), 100, "%");
+         lV54Workhourloglistds_2_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV54Workhourloglistds_2_tfemployeename), 128, "%");
          lV56Workhourloglistds_4_tfprojectname = StringUtil.PadR( StringUtil.RTrim( AV56Workhourloglistds_4_tfprojectname), 100, "%");
          lV60Workhourloglistds_8_tfworkhourlogduration = StringUtil.Concat( StringUtil.RTrim( AV60Workhourloglistds_8_tfworkhourlogduration), "%", "");
          lV62Workhourloglistds_10_tfworkhourlogdescription = StringUtil.Concat( StringUtil.RTrim( AV62Workhourloglistds_10_tfworkhourlogdescription), "%", "");
@@ -1572,8 +1572,8 @@ namespace GeneXus.Programs {
           new ParDef("lV53Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV53Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV53Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV54Workhourloglistds_2_tfemployeename",GXType.Char,100,0) ,
-          new ParDef("AV55Workhourloglistds_3_tfemployeename_sel",GXType.Char,100,0) ,
+          new ParDef("lV54Workhourloglistds_2_tfemployeename",GXType.Char,128,0) ,
+          new ParDef("AV55Workhourloglistds_3_tfemployeename_sel",GXType.Char,128,0) ,
           new ParDef("lV56Workhourloglistds_4_tfprojectname",GXType.Char,100,0) ,
           new ParDef("AV57Workhourloglistds_5_tfprojectname_sel",GXType.Char,100,0) ,
           new ParDef("AV58Workhourloglistds_6_tfworkhourlogdate",GXType.Date,8,0) ,
@@ -1592,8 +1592,8 @@ namespace GeneXus.Programs {
           new ParDef("lV53Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV53Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV53Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV54Workhourloglistds_2_tfemployeename",GXType.Char,100,0) ,
-          new ParDef("AV55Workhourloglistds_3_tfemployeename_sel",GXType.Char,100,0) ,
+          new ParDef("lV54Workhourloglistds_2_tfemployeename",GXType.Char,128,0) ,
+          new ParDef("AV55Workhourloglistds_3_tfemployeename_sel",GXType.Char,128,0) ,
           new ParDef("lV56Workhourloglistds_4_tfprojectname",GXType.Char,100,0) ,
           new ParDef("AV57Workhourloglistds_5_tfprojectname_sel",GXType.Char,100,0) ,
           new ParDef("AV58Workhourloglistds_6_tfworkhourlogdate",GXType.Date,8,0) ,
@@ -1612,8 +1612,8 @@ namespace GeneXus.Programs {
           new ParDef("lV53Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV53Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV53Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV54Workhourloglistds_2_tfemployeename",GXType.Char,100,0) ,
-          new ParDef("AV55Workhourloglistds_3_tfemployeename_sel",GXType.Char,100,0) ,
+          new ParDef("lV54Workhourloglistds_2_tfemployeename",GXType.Char,128,0) ,
+          new ParDef("AV55Workhourloglistds_3_tfemployeename_sel",GXType.Char,128,0) ,
           new ParDef("lV56Workhourloglistds_4_tfprojectname",GXType.Char,100,0) ,
           new ParDef("AV57Workhourloglistds_5_tfprojectname_sel",GXType.Char,100,0) ,
           new ParDef("AV58Workhourloglistds_6_tfworkhourlogdate",GXType.Date,8,0) ,
@@ -1632,8 +1632,8 @@ namespace GeneXus.Programs {
           new ParDef("lV53Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV53Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV53Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV54Workhourloglistds_2_tfemployeename",GXType.Char,100,0) ,
-          new ParDef("AV55Workhourloglistds_3_tfemployeename_sel",GXType.Char,100,0) ,
+          new ParDef("lV54Workhourloglistds_2_tfemployeename",GXType.Char,128,0) ,
+          new ParDef("AV55Workhourloglistds_3_tfemployeename_sel",GXType.Char,128,0) ,
           new ParDef("lV56Workhourloglistds_4_tfprojectname",GXType.Char,100,0) ,
           new ParDef("AV57Workhourloglistds_5_tfprojectname_sel",GXType.Char,100,0) ,
           new ParDef("AV58Workhourloglistds_6_tfworkhourlogdate",GXType.Date,8,0) ,
@@ -1663,7 +1663,7 @@ namespace GeneXus.Programs {
        {
              case 0 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);
-                ((string[]) buf[1])[0] = rslt.getString(2, 100);
+                ((string[]) buf[1])[0] = rslt.getString(2, 128);
                 ((long[]) buf[2])[0] = rslt.getLong(3);
                 ((string[]) buf[3])[0] = rslt.getLongVarchar(4);
                 ((string[]) buf[4])[0] = rslt.getVarchar(5);
@@ -1678,7 +1678,7 @@ namespace GeneXus.Programs {
                 ((string[]) buf[3])[0] = rslt.getLongVarchar(4);
                 ((string[]) buf[4])[0] = rslt.getVarchar(5);
                 ((DateTime[]) buf[5])[0] = rslt.getGXDate(6);
-                ((string[]) buf[6])[0] = rslt.getString(7, 100);
+                ((string[]) buf[6])[0] = rslt.getString(7, 128);
                 ((long[]) buf[7])[0] = rslt.getLong(8);
                 return;
              case 2 :
@@ -1688,7 +1688,7 @@ namespace GeneXus.Programs {
                 ((string[]) buf[3])[0] = rslt.getLongVarchar(4);
                 ((DateTime[]) buf[4])[0] = rslt.getGXDate(5);
                 ((string[]) buf[5])[0] = rslt.getString(6, 100);
-                ((string[]) buf[6])[0] = rslt.getString(7, 100);
+                ((string[]) buf[6])[0] = rslt.getString(7, 128);
                 ((long[]) buf[7])[0] = rslt.getLong(8);
                 return;
              case 3 :
@@ -1698,7 +1698,7 @@ namespace GeneXus.Programs {
                 ((string[]) buf[3])[0] = rslt.getVarchar(4);
                 ((DateTime[]) buf[4])[0] = rslt.getGXDate(5);
                 ((string[]) buf[5])[0] = rslt.getString(6, 100);
-                ((string[]) buf[6])[0] = rslt.getString(7, 100);
+                ((string[]) buf[6])[0] = rslt.getString(7, 128);
                 ((long[]) buf[7])[0] = rslt.getLong(8);
                 return;
        }

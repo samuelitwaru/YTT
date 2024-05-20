@@ -1450,7 +1450,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20245191613529", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20245192252410", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1466,7 +1466,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("leaverequestgeneral.js", "?20245191613529", false, true);
+         context.AddJavascriptSource("leaverequestgeneral.js", "?20245192252410", false, true);
          /* End function include_jscripts */
       }
 
@@ -1849,7 +1849,7 @@ namespace GeneXus.Programs {
                 return;
              case 1 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);
-                ((string[]) buf[1])[0] = rslt.getString(2, 100);
+                ((string[]) buf[1])[0] = rslt.getString(2, 128);
                 ((long[]) buf[2])[0] = rslt.getLong(3);
                 return;
              case 2 :

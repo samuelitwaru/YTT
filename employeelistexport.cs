@@ -347,7 +347,7 @@ namespace GeneXus.Programs {
          lV60Employeelistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV60Employeelistds_1_filterfulltext), "%", "");
          lV60Employeelistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV60Employeelistds_1_filterfulltext), "%", "");
          lV60Employeelistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV60Employeelistds_1_filterfulltext), "%", "");
-         lV61Employeelistds_2_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV61Employeelistds_2_tfemployeename), 100, "%");
+         lV61Employeelistds_2_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV61Employeelistds_2_tfemployeename), 128, "%");
          lV63Employeelistds_4_tfemployeeemail = StringUtil.Concat( StringUtil.RTrim( AV63Employeelistds_4_tfemployeeemail), "%", "");
          lV65Employeelistds_6_tfcompanyname = StringUtil.PadR( StringUtil.RTrim( AV65Employeelistds_6_tfcompanyname), 100, "%");
          /* Using cursor P007T2 */
@@ -918,8 +918,8 @@ namespace GeneXus.Programs {
           new ParDef("lV60Employeelistds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV60Employeelistds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV60Employeelistds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV61Employeelistds_2_tfemployeename",GXType.Char,100,0) ,
-          new ParDef("AV62Employeelistds_3_tfemployeename_sel",GXType.Char,100,0) ,
+          new ParDef("lV61Employeelistds_2_tfemployeename",GXType.Char,128,0) ,
+          new ParDef("AV62Employeelistds_3_tfemployeename_sel",GXType.Char,128,0) ,
           new ParDef("lV63Employeelistds_4_tfemployeeemail",GXType.VarChar,100,0) ,
           new ParDef("AV64Employeelistds_5_tfemployeeemail_sel",GXType.VarChar,100,0) ,
           new ParDef("lV65Employeelistds_6_tfcompanyname",GXType.Char,100,0) ,
@@ -946,7 +946,7 @@ namespace GeneXus.Programs {
                 ((bool[]) buf[3])[0] = rslt.getBool(4);
                 ((string[]) buf[4])[0] = rslt.getString(5, 100);
                 ((string[]) buf[5])[0] = rslt.getVarchar(6);
-                ((string[]) buf[6])[0] = rslt.getString(7, 100);
+                ((string[]) buf[6])[0] = rslt.getString(7, 128);
                 ((string[]) buf[7])[0] = rslt.getString(8, 100);
                 ((long[]) buf[8])[0] = rslt.getLong(9);
                 return;

@@ -1610,7 +1610,7 @@ namespace GeneXus.Programs {
             lV84Leaverequestpendingds_3_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV84Leaverequestpendingds_3_filterfulltext), "%", "");
             lV85Leaverequestpendingds_4_tfleavetypename = StringUtil.PadR( StringUtil.RTrim( AV85Leaverequestpendingds_4_tfleavetypename), 100, "%");
             lV93Leaverequestpendingds_12_tfleaverequestdescription = StringUtil.Concat( StringUtil.RTrim( AV93Leaverequestpendingds_12_tfleaverequestdescription), "%", "");
-            lV95Leaverequestpendingds_14_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV95Leaverequestpendingds_14_tfemployeename), 100, "%");
+            lV95Leaverequestpendingds_14_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV95Leaverequestpendingds_14_tfemployeename), 128, "%");
             /* Using cursor H00392 */
             pr_default.execute(0, new Object[] {AV81Udparg1, AV82Udparg2, lV84Leaverequestpendingds_3_filterfulltext, lV84Leaverequestpendingds_3_filterfulltext, lV84Leaverequestpendingds_3_filterfulltext, lV84Leaverequestpendingds_3_filterfulltext, lV85Leaverequestpendingds_4_tfleavetypename, AV86Leaverequestpendingds_5_tfleavetypename_sel, AV87Leaverequestpendingds_6_tfleaverequeststartdate, AV88Leaverequestpendingds_7_tfleaverequeststartdate_to, AV89Leaverequestpendingds_8_tfleaverequestenddate, AV90Leaverequestpendingds_9_tfleaverequestenddate_to, AV91Leaverequestpendingds_10_tfleaverequestduration, AV92Leaverequestpendingds_11_tfleaverequestduration_to, lV93Leaverequestpendingds_12_tfleaverequestdescription, AV94Leaverequestpendingds_13_tfleaverequestdescription_sel, lV95Leaverequestpendingds_14_tfemployeename, AV96Leaverequestpendingds_15_tfemployeename_sel, GXPagingFrom2, GXPagingTo2, GXPagingTo2});
             nGXsfl_39_idx = 1;
@@ -1731,7 +1731,7 @@ namespace GeneXus.Programs {
          lV84Leaverequestpendingds_3_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV84Leaverequestpendingds_3_filterfulltext), "%", "");
          lV85Leaverequestpendingds_4_tfleavetypename = StringUtil.PadR( StringUtil.RTrim( AV85Leaverequestpendingds_4_tfleavetypename), 100, "%");
          lV93Leaverequestpendingds_12_tfleaverequestdescription = StringUtil.Concat( StringUtil.RTrim( AV93Leaverequestpendingds_12_tfleaverequestdescription), "%", "");
-         lV95Leaverequestpendingds_14_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV95Leaverequestpendingds_14_tfemployeename), 100, "%");
+         lV95Leaverequestpendingds_14_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV95Leaverequestpendingds_14_tfemployeename), 128, "%");
          /* Using cursor H00393 */
          pr_default.execute(1, new Object[] {AV81Udparg1, AV82Udparg2, lV84Leaverequestpendingds_3_filterfulltext, lV84Leaverequestpendingds_3_filterfulltext, lV84Leaverequestpendingds_3_filterfulltext, lV84Leaverequestpendingds_3_filterfulltext, lV85Leaverequestpendingds_4_tfleavetypename, AV86Leaverequestpendingds_5_tfleavetypename_sel, AV87Leaverequestpendingds_6_tfleaverequeststartdate, AV88Leaverequestpendingds_7_tfleaverequeststartdate_to, AV89Leaverequestpendingds_8_tfleaverequestenddate, AV90Leaverequestpendingds_9_tfleaverequestenddate_to, AV91Leaverequestpendingds_10_tfleaverequestduration, AV92Leaverequestpendingds_11_tfleaverequestduration_to, lV93Leaverequestpendingds_12_tfleaverequestdescription, AV94Leaverequestpendingds_13_tfleaverequestdescription_sel, lV95Leaverequestpendingds_14_tfemployeename, AV96Leaverequestpendingds_15_tfemployeename_sel});
          GRID_nRecordCount = H00393_AGRID_nRecordCount[0];
@@ -3215,7 +3215,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202451916132199", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202451922525354", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -3231,7 +3231,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("leaverequestpending.js", "?20245191613220", false, true);
+         context.AddJavascriptSource("leaverequestpending.js", "?202451922525355", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -3478,7 +3478,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtEmployeeName_Internalname,StringUtil.RTrim( A148EmployeeName),(string)"",(string)"",(string)"'"+sPrefix+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtEmployeeName_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn hidden-xs",(string)"",(int)edtEmployeeName_Visible,(short)0,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)100,(short)0,(short)0,(short)39,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtEmployeeName_Internalname,StringUtil.RTrim( A148EmployeeName),(string)"",(string)"",(string)"'"+sPrefix+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtEmployeeName_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn hidden-xs",(string)"",(int)edtEmployeeName_Visible,(short)0,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)128,(short)0,(short)0,(short)39,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -5005,8 +5005,8 @@ namespace GeneXus.Programs {
         new ParDef("AV92Leaverequestpendingds_11_tfleaverequestduration_to",GXType.Int16,4,0) ,
         new ParDef("lV93Leaverequestpendingds_12_tfleaverequestdescription",GXType.VarChar,200,0) ,
         new ParDef("AV94Leaverequestpendingds_13_tfleaverequestdescription_sel",GXType.VarChar,200,0) ,
-        new ParDef("lV95Leaverequestpendingds_14_tfemployeename",GXType.Char,100,0) ,
-        new ParDef("AV96Leaverequestpendingds_15_tfemployeename_sel",GXType.Char,100,0) ,
+        new ParDef("lV95Leaverequestpendingds_14_tfemployeename",GXType.Char,128,0) ,
+        new ParDef("AV96Leaverequestpendingds_15_tfemployeename_sel",GXType.Char,128,0) ,
         new ParDef("GXPagingFrom2",GXType.Int32,9,0) ,
         new ParDef("GXPagingTo2",GXType.Int32,9,0) ,
         new ParDef("GXPagingTo2",GXType.Int32,9,0)
@@ -5029,8 +5029,8 @@ namespace GeneXus.Programs {
         new ParDef("AV92Leaverequestpendingds_11_tfleaverequestduration_to",GXType.Int16,4,0) ,
         new ParDef("lV93Leaverequestpendingds_12_tfleaverequestdescription",GXType.VarChar,200,0) ,
         new ParDef("AV94Leaverequestpendingds_13_tfleaverequestdescription_sel",GXType.VarChar,200,0) ,
-        new ParDef("lV95Leaverequestpendingds_14_tfemployeename",GXType.Char,100,0) ,
-        new ParDef("AV96Leaverequestpendingds_15_tfemployeename_sel",GXType.Char,100,0)
+        new ParDef("lV95Leaverequestpendingds_14_tfemployeename",GXType.Char,128,0) ,
+        new ParDef("AV96Leaverequestpendingds_15_tfemployeename_sel",GXType.Char,128,0)
         };
         def= new CursorDef[] {
             new CursorDef("H00392", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00392,11, GxCacheFrequency.OFF ,true,false )
@@ -5048,7 +5048,7 @@ namespace GeneXus.Programs {
      {
            case 0 :
               ((long[]) buf[0])[0] = rslt.getLong(1);
-              ((string[]) buf[1])[0] = rslt.getString(2, 100);
+              ((string[]) buf[1])[0] = rslt.getString(2, 128);
               ((long[]) buf[2])[0] = rslt.getLong(3);
               ((string[]) buf[3])[0] = rslt.getVarchar(4);
               ((string[]) buf[4])[0] = rslt.getVarchar(5);

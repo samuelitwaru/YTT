@@ -1495,7 +1495,7 @@ namespace GeneXus.Programs {
             lV66Leaverequestapprovedds_3_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV66Leaverequestapprovedds_3_filterfulltext), "%", "");
             lV67Leaverequestapprovedds_4_tfleavetypename = StringUtil.PadR( StringUtil.RTrim( AV67Leaverequestapprovedds_4_tfleavetypename), 100, "%");
             lV75Leaverequestapprovedds_12_tfleaverequestdescription = StringUtil.Concat( StringUtil.RTrim( AV75Leaverequestapprovedds_12_tfleaverequestdescription), "%", "");
-            lV77Leaverequestapprovedds_14_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV77Leaverequestapprovedds_14_tfemployeename), 100, "%");
+            lV77Leaverequestapprovedds_14_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV77Leaverequestapprovedds_14_tfemployeename), 128, "%");
             /* Using cursor H003A2 */
             pr_default.execute(0, new Object[] {AV63Udparg1, AV64Udparg2, lV66Leaverequestapprovedds_3_filterfulltext, lV66Leaverequestapprovedds_3_filterfulltext, lV66Leaverequestapprovedds_3_filterfulltext, lV66Leaverequestapprovedds_3_filterfulltext, lV67Leaverequestapprovedds_4_tfleavetypename, AV68Leaverequestapprovedds_5_tfleavetypename_sel, AV69Leaverequestapprovedds_6_tfleaverequeststartdate, AV70Leaverequestapprovedds_7_tfleaverequeststartdate_to, AV71Leaverequestapprovedds_8_tfleaverequestenddate, AV72Leaverequestapprovedds_9_tfleaverequestenddate_to, AV73Leaverequestapprovedds_10_tfleaverequestduration, AV74Leaverequestapprovedds_11_tfleaverequestduration_to, lV75Leaverequestapprovedds_12_tfleaverequestdescription, AV76Leaverequestapprovedds_13_tfleaverequestdescription_sel, lV77Leaverequestapprovedds_14_tfemployeename, AV78Leaverequestapprovedds_15_tfemployeename_sel, GXPagingFrom2, GXPagingTo2, GXPagingTo2});
             nGXsfl_39_idx = 1;
@@ -1615,7 +1615,7 @@ namespace GeneXus.Programs {
          lV66Leaverequestapprovedds_3_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV66Leaverequestapprovedds_3_filterfulltext), "%", "");
          lV67Leaverequestapprovedds_4_tfleavetypename = StringUtil.PadR( StringUtil.RTrim( AV67Leaverequestapprovedds_4_tfleavetypename), 100, "%");
          lV75Leaverequestapprovedds_12_tfleaverequestdescription = StringUtil.Concat( StringUtil.RTrim( AV75Leaverequestapprovedds_12_tfleaverequestdescription), "%", "");
-         lV77Leaverequestapprovedds_14_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV77Leaverequestapprovedds_14_tfemployeename), 100, "%");
+         lV77Leaverequestapprovedds_14_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV77Leaverequestapprovedds_14_tfemployeename), 128, "%");
          /* Using cursor H003A3 */
          pr_default.execute(1, new Object[] {AV63Udparg1, AV64Udparg2, lV66Leaverequestapprovedds_3_filterfulltext, lV66Leaverequestapprovedds_3_filterfulltext, lV66Leaverequestapprovedds_3_filterfulltext, lV66Leaverequestapprovedds_3_filterfulltext, lV67Leaverequestapprovedds_4_tfleavetypename, AV68Leaverequestapprovedds_5_tfleavetypename_sel, AV69Leaverequestapprovedds_6_tfleaverequeststartdate, AV70Leaverequestapprovedds_7_tfleaverequeststartdate_to, AV71Leaverequestapprovedds_8_tfleaverequestenddate, AV72Leaverequestapprovedds_9_tfleaverequestenddate_to, AV73Leaverequestapprovedds_10_tfleaverequestduration, AV74Leaverequestapprovedds_11_tfleaverequestduration_to, lV75Leaverequestapprovedds_12_tfleaverequestdescription, AV76Leaverequestapprovedds_13_tfleaverequestdescription_sel, lV77Leaverequestapprovedds_14_tfemployeename, AV78Leaverequestapprovedds_15_tfemployeename_sel});
          GRID_nRecordCount = H003A3_AGRID_nRecordCount[0];
@@ -2890,7 +2890,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202451916131118", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202451922525633", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2906,7 +2906,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("leaverequestapproved.js", "?202451916131119", false, true);
+         context.AddJavascriptSource("leaverequestapproved.js", "?202451922525633", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -3143,7 +3143,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtEmployeeName_Internalname,StringUtil.RTrim( A148EmployeeName),(string)"",(string)"",(string)"'"+sPrefix+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtEmployeeName_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn hidden-xs",(string)"",(int)edtEmployeeName_Visible,(short)0,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)100,(short)0,(short)0,(short)39,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtEmployeeName_Internalname,StringUtil.RTrim( A148EmployeeName),(string)"",(string)"",(string)"'"+sPrefix+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtEmployeeName_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn hidden-xs",(string)"",(int)edtEmployeeName_Visible,(short)0,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)128,(short)0,(short)0,(short)39,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
             send_integrity_lvl_hashes3A2( ) ;
             GridContainer.AddRow(GridRow);
             nGXsfl_39_idx = ((subGrid_Islastpage==1)&&(nGXsfl_39_idx+1>subGrid_fnc_Recordsperpage( )) ? 1 : nGXsfl_39_idx+1);
@@ -4510,8 +4510,8 @@ namespace GeneXus.Programs {
           new ParDef("AV74Leaverequestapprovedds_11_tfleaverequestduration_to",GXType.Int16,4,0) ,
           new ParDef("lV75Leaverequestapprovedds_12_tfleaverequestdescription",GXType.VarChar,200,0) ,
           new ParDef("AV76Leaverequestapprovedds_13_tfleaverequestdescription_sel",GXType.VarChar,200,0) ,
-          new ParDef("lV77Leaverequestapprovedds_14_tfemployeename",GXType.Char,100,0) ,
-          new ParDef("AV78Leaverequestapprovedds_15_tfemployeename_sel",GXType.Char,100,0) ,
+          new ParDef("lV77Leaverequestapprovedds_14_tfemployeename",GXType.Char,128,0) ,
+          new ParDef("AV78Leaverequestapprovedds_15_tfemployeename_sel",GXType.Char,128,0) ,
           new ParDef("GXPagingFrom2",GXType.Int32,9,0) ,
           new ParDef("GXPagingTo2",GXType.Int32,9,0) ,
           new ParDef("GXPagingTo2",GXType.Int32,9,0)
@@ -4534,8 +4534,8 @@ namespace GeneXus.Programs {
           new ParDef("AV74Leaverequestapprovedds_11_tfleaverequestduration_to",GXType.Int16,4,0) ,
           new ParDef("lV75Leaverequestapprovedds_12_tfleaverequestdescription",GXType.VarChar,200,0) ,
           new ParDef("AV76Leaverequestapprovedds_13_tfleaverequestdescription_sel",GXType.VarChar,200,0) ,
-          new ParDef("lV77Leaverequestapprovedds_14_tfemployeename",GXType.Char,100,0) ,
-          new ParDef("AV78Leaverequestapprovedds_15_tfemployeename_sel",GXType.Char,100,0)
+          new ParDef("lV77Leaverequestapprovedds_14_tfemployeename",GXType.Char,128,0) ,
+          new ParDef("AV78Leaverequestapprovedds_15_tfemployeename_sel",GXType.Char,128,0)
           };
           def= new CursorDef[] {
               new CursorDef("H003A2", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH003A2,11, GxCacheFrequency.OFF ,true,false )
@@ -4553,7 +4553,7 @@ namespace GeneXus.Programs {
        {
              case 0 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);
-                ((string[]) buf[1])[0] = rslt.getString(2, 100);
+                ((string[]) buf[1])[0] = rslt.getString(2, 128);
                 ((long[]) buf[2])[0] = rslt.getLong(3);
                 ((string[]) buf[3])[0] = rslt.getVarchar(4);
                 ((string[]) buf[4])[0] = rslt.getVarchar(5);

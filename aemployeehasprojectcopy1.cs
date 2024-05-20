@@ -157,7 +157,7 @@ namespace GeneXus.Programs {
                A148EmployeeName = P00852_A148EmployeeName[0];
                H850( false, 57) ;
                getPrinter().GxAttris("Microsoft Sans Serif", 8, false, false, false, false, 0, 0, 0, 0, 0, 255, 255, 255) ;
-               getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( A148EmployeeName, "")), 239, Gx_line+22, 761, Gx_line+37, 0+256, 0, 0, 0) ;
+               getPrinter().GxDrawText(StringUtil.RTrim( context.localUtil.Format( A148EmployeeName, "")), 239, Gx_line+22, 907, Gx_line+37, 0+256, 0, 0, 0) ;
                getPrinter().GxDrawText(StringUtil.LTrim( context.localUtil.Format( (decimal)(A106EmployeeId), "ZZZZZZZZZ9")), 83, Gx_line+22, 147, Gx_line+37, 2+256, 0, 0, 0) ;
                Gx_OldLine = Gx_line;
                Gx_line = (int)(Gx_line+57);
@@ -379,7 +379,7 @@ namespace GeneXus.Programs {
        {
              case 0 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);
-                ((string[]) buf[1])[0] = rslt.getString(2, 100);
+                ((string[]) buf[1])[0] = rslt.getString(2, 128);
                 return;
              case 1 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);

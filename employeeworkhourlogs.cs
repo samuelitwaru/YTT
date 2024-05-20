@@ -388,7 +388,7 @@ namespace GeneXus.Programs {
        {
              case 0 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);
-                ((string[]) buf[1])[0] = rslt.getString(2, 100);
+                ((string[]) buf[1])[0] = rslt.getString(2, 128);
                 ((long[]) buf[2])[0] = rslt.getLong(3);
                 ((DateTime[]) buf[3])[0] = rslt.getGXDate(4);
                 ((string[]) buf[4])[0] = rslt.getVarchar(5);

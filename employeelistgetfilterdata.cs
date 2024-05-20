@@ -291,7 +291,7 @@ namespace GeneXus.Programs {
          lV58Employeelistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV58Employeelistds_1_filterfulltext), "%", "");
          lV58Employeelistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV58Employeelistds_1_filterfulltext), "%", "");
          lV58Employeelistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV58Employeelistds_1_filterfulltext), "%", "");
-         lV59Employeelistds_2_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV59Employeelistds_2_tfemployeename), 100, "%");
+         lV59Employeelistds_2_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV59Employeelistds_2_tfemployeename), 128, "%");
          lV61Employeelistds_4_tfemployeeemail = StringUtil.Concat( StringUtil.RTrim( AV61Employeelistds_4_tfemployeeemail), "%", "");
          lV63Employeelistds_6_tfcompanyname = StringUtil.PadR( StringUtil.RTrim( AV63Employeelistds_6_tfcompanyname), 100, "%");
          /* Using cursor P007S2 */
@@ -384,7 +384,7 @@ namespace GeneXus.Programs {
          lV58Employeelistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV58Employeelistds_1_filterfulltext), "%", "");
          lV58Employeelistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV58Employeelistds_1_filterfulltext), "%", "");
          lV58Employeelistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV58Employeelistds_1_filterfulltext), "%", "");
-         lV59Employeelistds_2_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV59Employeelistds_2_tfemployeename), 100, "%");
+         lV59Employeelistds_2_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV59Employeelistds_2_tfemployeename), 128, "%");
          lV61Employeelistds_4_tfemployeeemail = StringUtil.Concat( StringUtil.RTrim( AV61Employeelistds_4_tfemployeeemail), "%", "");
          lV63Employeelistds_6_tfcompanyname = StringUtil.PadR( StringUtil.RTrim( AV63Employeelistds_6_tfcompanyname), 100, "%");
          /* Using cursor P007S3 */
@@ -477,7 +477,7 @@ namespace GeneXus.Programs {
          lV58Employeelistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV58Employeelistds_1_filterfulltext), "%", "");
          lV58Employeelistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV58Employeelistds_1_filterfulltext), "%", "");
          lV58Employeelistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV58Employeelistds_1_filterfulltext), "%", "");
-         lV59Employeelistds_2_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV59Employeelistds_2_tfemployeename), 100, "%");
+         lV59Employeelistds_2_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV59Employeelistds_2_tfemployeename), 128, "%");
          lV61Employeelistds_4_tfemployeeemail = StringUtil.Concat( StringUtil.RTrim( AV61Employeelistds_4_tfemployeeemail), "%", "");
          lV63Employeelistds_6_tfcompanyname = StringUtil.PadR( StringUtil.RTrim( AV63Employeelistds_6_tfcompanyname), 100, "%");
          /* Using cursor P007S4 */
@@ -1154,8 +1154,8 @@ namespace GeneXus.Programs {
           new ParDef("lV58Employeelistds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV58Employeelistds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV58Employeelistds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV59Employeelistds_2_tfemployeename",GXType.Char,100,0) ,
-          new ParDef("AV60Employeelistds_3_tfemployeename_sel",GXType.Char,100,0) ,
+          new ParDef("lV59Employeelistds_2_tfemployeename",GXType.Char,128,0) ,
+          new ParDef("AV60Employeelistds_3_tfemployeename_sel",GXType.Char,128,0) ,
           new ParDef("lV61Employeelistds_4_tfemployeeemail",GXType.VarChar,100,0) ,
           new ParDef("AV62Employeelistds_5_tfemployeeemail_sel",GXType.VarChar,100,0) ,
           new ParDef("lV63Employeelistds_6_tfcompanyname",GXType.Char,100,0) ,
@@ -1169,8 +1169,8 @@ namespace GeneXus.Programs {
           new ParDef("lV58Employeelistds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV58Employeelistds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV58Employeelistds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV59Employeelistds_2_tfemployeename",GXType.Char,100,0) ,
-          new ParDef("AV60Employeelistds_3_tfemployeename_sel",GXType.Char,100,0) ,
+          new ParDef("lV59Employeelistds_2_tfemployeename",GXType.Char,128,0) ,
+          new ParDef("AV60Employeelistds_3_tfemployeename_sel",GXType.Char,128,0) ,
           new ParDef("lV61Employeelistds_4_tfemployeeemail",GXType.VarChar,100,0) ,
           new ParDef("AV62Employeelistds_5_tfemployeeemail_sel",GXType.VarChar,100,0) ,
           new ParDef("lV63Employeelistds_6_tfcompanyname",GXType.Char,100,0) ,
@@ -1184,8 +1184,8 @@ namespace GeneXus.Programs {
           new ParDef("lV58Employeelistds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV58Employeelistds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV58Employeelistds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV59Employeelistds_2_tfemployeename",GXType.Char,100,0) ,
-          new ParDef("AV60Employeelistds_3_tfemployeename_sel",GXType.Char,100,0) ,
+          new ParDef("lV59Employeelistds_2_tfemployeename",GXType.Char,128,0) ,
+          new ParDef("AV60Employeelistds_3_tfemployeename_sel",GXType.Char,128,0) ,
           new ParDef("lV61Employeelistds_4_tfemployeeemail",GXType.VarChar,100,0) ,
           new ParDef("AV62Employeelistds_5_tfemployeeemail_sel",GXType.VarChar,100,0) ,
           new ParDef("lV63Employeelistds_6_tfcompanyname",GXType.Char,100,0) ,
@@ -1209,7 +1209,7 @@ namespace GeneXus.Programs {
        {
              case 0 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);
-                ((string[]) buf[1])[0] = rslt.getString(2, 100);
+                ((string[]) buf[1])[0] = rslt.getString(2, 128);
                 ((short[]) buf[2])[0] = rslt.getShort(3);
                 ((bool[]) buf[3])[0] = rslt.getBool(4);
                 ((bool[]) buf[4])[0] = rslt.getBool(5);
@@ -1224,7 +1224,7 @@ namespace GeneXus.Programs {
                 ((bool[]) buf[3])[0] = rslt.getBool(4);
                 ((bool[]) buf[4])[0] = rslt.getBool(5);
                 ((string[]) buf[5])[0] = rslt.getString(6, 100);
-                ((string[]) buf[6])[0] = rslt.getString(7, 100);
+                ((string[]) buf[6])[0] = rslt.getString(7, 128);
                 ((long[]) buf[7])[0] = rslt.getLong(8);
                 return;
              case 2 :
@@ -1234,7 +1234,7 @@ namespace GeneXus.Programs {
                 ((bool[]) buf[3])[0] = rslt.getBool(4);
                 ((string[]) buf[4])[0] = rslt.getString(5, 100);
                 ((string[]) buf[5])[0] = rslt.getVarchar(6);
-                ((string[]) buf[6])[0] = rslt.getString(7, 100);
+                ((string[]) buf[6])[0] = rslt.getString(7, 128);
                 ((long[]) buf[7])[0] = rslt.getLong(8);
                 return;
        }

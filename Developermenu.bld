@@ -358,10 +358,10 @@ gamsdupdateuser
 passwordchangepanel
 updateworkhourlog
 loghourspanel
-worklogsgridcollectionpanel
 leaverequestpanel
 viewleaverequest
 updateleaverequest
 leaverequestsgridpanel
+worklogsgridcollectionpanel
 profilepanel
 GeneXus.Programs.Common

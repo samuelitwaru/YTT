@@ -390,7 +390,7 @@ namespace GeneXus.Programs {
          lV56Leaverequestrejectedds_2_tfleavetypename = StringUtil.PadR( StringUtil.RTrim( AV56Leaverequestrejectedds_2_tfleavetypename), 100, "%");
          lV64Leaverequestrejectedds_10_tfleaverequestdescription = StringUtil.Concat( StringUtil.RTrim( AV64Leaverequestrejectedds_10_tfleaverequestdescription), "%", "");
          lV66Leaverequestrejectedds_12_tfleaverequestrejectionreason = StringUtil.Concat( StringUtil.RTrim( AV66Leaverequestrejectedds_12_tfleaverequestrejectionreason), "%", "");
-         lV68Leaverequestrejectedds_14_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV68Leaverequestrejectedds_14_tfemployeename), 100, "%");
+         lV68Leaverequestrejectedds_14_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV68Leaverequestrejectedds_14_tfemployeename), 128, "%");
          /* Using cursor P00702 */
          pr_default.execute(0, new Object[] {lV55Leaverequestrejectedds_1_filterfulltext, lV55Leaverequestrejectedds_1_filterfulltext, lV55Leaverequestrejectedds_1_filterfulltext, lV55Leaverequestrejectedds_1_filterfulltext, lV55Leaverequestrejectedds_1_filterfulltext, lV56Leaverequestrejectedds_2_tfleavetypename, AV57Leaverequestrejectedds_3_tfleavetypename_sel, AV58Leaverequestrejectedds_4_tfleaverequeststartdate, AV59Leaverequestrejectedds_5_tfleaverequeststartdate_to, AV60Leaverequestrejectedds_6_tfleaverequestenddate, AV61Leaverequestrejectedds_7_tfleaverequestenddate_to, AV62Leaverequestrejectedds_8_tfleaverequestduration, AV63Leaverequestrejectedds_9_tfleaverequestduration_to, lV64Leaverequestrejectedds_10_tfleaverequestdescription, AV65Leaverequestrejectedds_11_tfleaverequestdescription_sel, lV66Leaverequestrejectedds_12_tfleaverequestrejectionreason, AV67Leaverequestrejectedds_13_tfleaverequestrejectionreason_sel, lV68Leaverequestrejectedds_14_tfemployeename, AV69Leaverequestrejectedds_15_tfemployeename_sel, AV70Udparg16});
          while ( (pr_default.getStatus(0) != 101) )
@@ -1106,8 +1106,8 @@ namespace GeneXus.Programs {
           new ParDef("AV65Leaverequestrejectedds_11_tfleaverequestdescription_sel",GXType.VarChar,200,0) ,
           new ParDef("lV66Leaverequestrejectedds_12_tfleaverequestrejectionreason",GXType.VarChar,200,0) ,
           new ParDef("AV67Leaverequestrejectedds_13_tfleaverequestrejectionreason_sel",GXType.VarChar,200,0) ,
-          new ParDef("lV68Leaverequestrejectedds_14_tfemployeename",GXType.Char,100,0) ,
-          new ParDef("AV69Leaverequestrejectedds_15_tfemployeename_sel",GXType.Char,100,0) ,
+          new ParDef("lV68Leaverequestrejectedds_14_tfemployeename",GXType.Char,128,0) ,
+          new ParDef("AV69Leaverequestrejectedds_15_tfemployeename_sel",GXType.Char,128,0) ,
           new ParDef("AV70Udparg16",GXType.Int64,10,0)
           };
           def= new CursorDef[] {
@@ -1127,7 +1127,7 @@ namespace GeneXus.Programs {
                 ((long[]) buf[1])[0] = rslt.getLong(2);
                 ((long[]) buf[2])[0] = rslt.getLong(3);
                 ((string[]) buf[3])[0] = rslt.getString(4, 20);
-                ((string[]) buf[4])[0] = rslt.getString(5, 100);
+                ((string[]) buf[4])[0] = rslt.getString(5, 128);
                 ((string[]) buf[5])[0] = rslt.getVarchar(6);
                 ((string[]) buf[6])[0] = rslt.getVarchar(7);
                 ((short[]) buf[7])[0] = rslt.getShort(8);

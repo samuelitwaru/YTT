@@ -50,6 +50,12 @@
         }
     } ],
     "Styles" : [ { 
+        "Name" : "ApplicationBarsAlignCenter",
+        "application_bar_alignment" : "center-screen"
+    }, { 
+        "Name" : "ApplicationBarsAlignPD",
+        "application_bar_alignment" : "pd"
+    }, { 
         "Name" : "ColorPrimary",
         "color" : "$colors_primary"
     }, { 
@@ -653,6 +659,24 @@
         "SDPageControllerBackgroundColor" : "$colors_controlborderonsurface40",
         "sd_height_withPercentage" : "1dip",
         "height" : "1dip"
+    }, { 
+        "Name" : "TableLineSeparator",
+        "background_color" : "$colors_controlborderonsurface40",
+        "BackgroundColor" : "$colors_controlborderonsurface40",
+        "SDPageControllerBackgroundColor" : "$colors_controlborderonsurface40",
+        "sd_height_withPercentage" : "1dip",
+        "height" : "1dip"
+    }, { 
+        "Name" : "TableShowLines",
+        "sd-row-horizontal-line-separator-table" : "True",
+        "sd_row_horizontal_line_separator" : "True",
+        "sd_row_horizontal_line_separator" : "True",
+        "ThemeHorizontalLineClassReference" : "TableLineSeparator"
+    }, { 
+        "Name" : "TableHideLines",
+        "sd-row-horizontal-line-separator-table" : "False",
+        "sd_row_horizontal_line_separator" : "False",
+        "sd_row_horizontal_line_separator" : "False"
     }, { 
         "Name" : "BasicAnimation",
         "ThemeAnimated" : "True",

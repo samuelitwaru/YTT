@@ -2570,7 +2570,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202451916131416", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202451922524696", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2586,7 +2586,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("leaverequest.js", "?202451916131419", false, true);
+         context.AddJavascriptSource("leaverequest.js", "?202451922524698", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Panel/BootstrapPanelRender.js", "", false, true);
@@ -3772,7 +3772,7 @@ namespace GeneXus.Programs {
               ((string[]) buf[1])[0] = rslt.getString(2, 20);
               return;
            case 3 :
-              ((string[]) buf[0])[0] = rslt.getString(1, 100);
+              ((string[]) buf[0])[0] = rslt.getString(1, 128);
               return;
            case 4 :
               ((long[]) buf[0])[0] = rslt.getLong(1);
@@ -3784,7 +3784,7 @@ namespace GeneXus.Programs {
               ((string[]) buf[6])[0] = rslt.getString(7, 20);
               ((string[]) buf[7])[0] = rslt.getVarchar(8);
               ((string[]) buf[8])[0] = rslt.getVarchar(9);
-              ((string[]) buf[9])[0] = rslt.getString(10, 100);
+              ((string[]) buf[9])[0] = rslt.getString(10, 128);
               ((string[]) buf[10])[0] = rslt.getString(11, 20);
               ((long[]) buf[11])[0] = rslt.getLong(12);
               ((long[]) buf[12])[0] = rslt.getLong(13);
@@ -3794,7 +3794,7 @@ namespace GeneXus.Programs {
               ((string[]) buf[1])[0] = rslt.getString(2, 20);
               return;
            case 6 :
-              ((string[]) buf[0])[0] = rslt.getString(1, 100);
+              ((string[]) buf[0])[0] = rslt.getString(1, 128);
               return;
            case 7 :
               ((long[]) buf[0])[0] = rslt.getLong(1);
@@ -3813,7 +3813,7 @@ namespace GeneXus.Programs {
               ((string[]) buf[1])[0] = rslt.getString(2, 20);
               return;
            case 15 :
-              ((string[]) buf[0])[0] = rslt.getString(1, 100);
+              ((string[]) buf[0])[0] = rslt.getString(1, 128);
               return;
            case 16 :
               ((long[]) buf[0])[0] = rslt.getLong(1);
@@ -3825,7 +3825,7 @@ namespace GeneXus.Programs {
               return;
            case 18 :
               ((long[]) buf[0])[0] = rslt.getLong(1);
-              ((string[]) buf[1])[0] = rslt.getString(2, 100);
+              ((string[]) buf[1])[0] = rslt.getString(2, 128);
               ((long[]) buf[2])[0] = rslt.getLong(3);
               return;
            case 19 :
@@ -3833,7 +3833,7 @@ namespace GeneXus.Programs {
               ((string[]) buf[1])[0] = rslt.getString(2, 20);
               return;
            case 20 :
-              ((string[]) buf[0])[0] = rslt.getString(1, 100);
+              ((string[]) buf[0])[0] = rslt.getString(1, 128);
               return;
      }
   }

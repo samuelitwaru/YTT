@@ -2090,7 +2090,7 @@ namespace GeneXus.Programs {
               ((string[]) buf[1])[0] = rslt.getString(2, 20);
               return;
            case 3 :
-              ((string[]) buf[0])[0] = rslt.getString(1, 100);
+              ((string[]) buf[0])[0] = rslt.getString(1, 128);
               return;
            case 4 :
               ((long[]) buf[0])[0] = rslt.getLong(1);
@@ -2102,7 +2102,7 @@ namespace GeneXus.Programs {
               ((string[]) buf[6])[0] = rslt.getString(7, 20);
               ((string[]) buf[7])[0] = rslt.getVarchar(8);
               ((string[]) buf[8])[0] = rslt.getVarchar(9);
-              ((string[]) buf[9])[0] = rslt.getString(10, 100);
+              ((string[]) buf[9])[0] = rslt.getString(10, 128);
               ((string[]) buf[10])[0] = rslt.getString(11, 20);
               ((long[]) buf[11])[0] = rslt.getLong(12);
               ((long[]) buf[12])[0] = rslt.getLong(13);
@@ -2117,7 +2117,7 @@ namespace GeneXus.Programs {
               ((string[]) buf[6])[0] = rslt.getString(7, 20);
               ((string[]) buf[7])[0] = rslt.getVarchar(8);
               ((string[]) buf[8])[0] = rslt.getVarchar(9);
-              ((string[]) buf[9])[0] = rslt.getString(10, 100);
+              ((string[]) buf[9])[0] = rslt.getString(10, 128);
               ((string[]) buf[10])[0] = rslt.getString(11, 20);
               ((long[]) buf[11])[0] = rslt.getLong(12);
               ((long[]) buf[12])[0] = rslt.getLong(13);
@@ -2133,7 +2133,7 @@ namespace GeneXus.Programs {
               ((string[]) buf[1])[0] = rslt.getString(2, 20);
               return;
            case 12 :
-              ((string[]) buf[0])[0] = rslt.getString(1, 100);
+              ((string[]) buf[0])[0] = rslt.getString(1, 128);
               return;
            case 13 :
               ((long[]) buf[0])[0] = rslt.getLong(1);
@@ -2145,7 +2145,7 @@ namespace GeneXus.Programs {
               ((string[]) buf[6])[0] = rslt.getString(7, 20);
               ((string[]) buf[7])[0] = rslt.getVarchar(8);
               ((string[]) buf[8])[0] = rslt.getVarchar(9);
-              ((string[]) buf[9])[0] = rslt.getString(10, 100);
+              ((string[]) buf[9])[0] = rslt.getString(10, 128);
               ((string[]) buf[10])[0] = rslt.getString(11, 20);
               ((long[]) buf[11])[0] = rslt.getLong(12);
               ((long[]) buf[12])[0] = rslt.getLong(13);
