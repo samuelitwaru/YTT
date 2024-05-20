@@ -1422,7 +1422,7 @@ namespace GeneXus.Programs {
             {
                cmbavGridactions.addItem("1", "Revoke", 0);
             }
-            cmbavGridactions.addItem("2", "WWP_GAM_Generate", 0);
+            cmbavGridactions.addItem("2", "Generate", 0);
             if ( AV17GAMUser.isactivatedapplicationapikey(AV12ClientID) )
             {
                edtavStatus_Columnclass = "WWColumn WWColumnTag WWColumnTagSuccess WWColumnTagSuccessSingleCell";
@@ -1566,7 +1566,7 @@ namespace GeneXus.Programs {
          if ( AV17GAMUser.revokeapplicationapikey(AV12ClientID, out  AV16GAMErrorCollection) )
          {
             context.CommitDataStores("gamwwuserapplications",pr_default);
-            GX_msglist.addItem("WWP_GAM_UserAPIkeyrevoked");
+            GX_msglist.addItem("User API Key revoked");
          }
       }
 
@@ -1749,7 +1749,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202451915105056", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202452012223872", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1765,7 +1765,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("gamwwuserapplications.js", "?202451915105059", false, true);
+         context.AddJavascriptSource("gamwwuserapplications.js", "?202452012223877", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -1992,7 +1992,7 @@ namespace GeneXus.Programs {
             context.SendWebValue( "Id") ;
             context.WriteHtmlTextNl( "</th>") ;
             context.WriteHtmlText( "<th align=\""+"start"+"\" "+" width="+StringUtil.LTrimStr( (decimal)(300), 4, 0)+"px"+" class=\""+"Attribute"+"\" "+" style=\""+""+""+"\" "+">") ;
-            context.SendWebValue( "WWP_GAM_ApplicationName") ;
+            context.SendWebValue( "Application Name") ;
             context.WriteHtmlTextNl( "</th>") ;
             context.WriteHtmlText( "<th align=\""+"start"+"\" "+" width="+StringUtil.LTrimStr( (decimal)(300), 4, 0)+"px"+" class=\""+"Attribute"+"\" "+" style=\""+""+""+"\" "+">") ;
             context.SendWebValue( "Description") ;
@@ -2001,7 +2001,7 @@ namespace GeneXus.Programs {
             context.SendWebValue( "Client Id") ;
             context.WriteHtmlTextNl( "</th>") ;
             context.WriteHtmlText( "<th align=\""+"start"+"\" "+" width="+StringUtil.LTrimStr( (decimal)(100), 4, 0)+"px"+" class=\""+"Attribute"+"\" "+" style=\""+""+""+"\" "+">") ;
-            context.SendWebValue( "WWP_GAM_APIKeyStatus") ;
+            context.SendWebValue( "API Key Status") ;
             context.WriteHtmlTextNl( "</th>") ;
             context.WriteHtmlTextNl( "</tr>") ;
             GridContainer.AddObjectProperty("GridName", "Grid");

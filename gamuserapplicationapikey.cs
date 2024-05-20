@@ -493,7 +493,7 @@ namespace GeneXus.Programs {
             TempTags = "  onfocus=\"gx.evt.onfocus(this, 36,'',false,'',0)\"";
             ClassString = "AttributeCheckBox";
             StyleString = "";
-            GxWebStd.gx_checkbox_ctrl( context, chkavClientallowgetuserdatarest_Internalname, StringUtil.BoolToStr( AV14ClientAllowGetUserDataREST), "", "User data", chkavClientallowgetuserdatarest.Visible, chkavClientallowgetuserdatarest.Enabled, "true", "WWP_GAM_Userdata", StyleString, ClassString, "", "", TempTags+" onclick="+"\"gx.fn.checkboxClick(36, this, 'true', 'false',"+"''"+");"+"gx.evt.onchange(this, event);\""+" onblur=\""+""+";gx.evt.onblur(this,36);\"");
+            GxWebStd.gx_checkbox_ctrl( context, chkavClientallowgetuserdatarest_Internalname, StringUtil.BoolToStr( AV14ClientAllowGetUserDataREST), "", "User data", chkavClientallowgetuserdatarest.Visible, chkavClientallowgetuserdatarest.Enabled, "true", "User data", StyleString, ClassString, "", "", TempTags+" onclick="+"\"gx.fn.checkboxClick(36, this, 'true', 'false',"+"''"+");"+"gx.evt.onchange(this, event);\""+" onblur=\""+""+";gx.evt.onblur(this,36);\"");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
@@ -506,7 +506,7 @@ namespace GeneXus.Programs {
             TempTags = "  onfocus=\"gx.evt.onfocus(this, 39,'',false,'',0)\"";
             ClassString = "AttributeCheckBox";
             StyleString = "";
-            GxWebStd.gx_checkbox_ctrl( context, chkavClientallowgetuseradddatarest_Internalname, StringUtil.BoolToStr( AV15ClientAllowGetUserAddDataREST), "", "User additional data", chkavClientallowgetuseradddatarest.Visible, chkavClientallowgetuseradddatarest.Enabled, "true", "WWP_GAM_Useradditionaldata", StyleString, ClassString, "", "", TempTags+" onclick="+"\"gx.fn.checkboxClick(39, this, 'true', 'false',"+"''"+");"+"gx.evt.onchange(this, event);\""+" onblur=\""+""+";gx.evt.onblur(this,39);\"");
+            GxWebStd.gx_checkbox_ctrl( context, chkavClientallowgetuseradddatarest_Internalname, StringUtil.BoolToStr( AV15ClientAllowGetUserAddDataREST), "", "User additional data", chkavClientallowgetuseradddatarest.Visible, chkavClientallowgetuseradddatarest.Enabled, "true", "User additional data", StyleString, ClassString, "", "", TempTags+" onclick="+"\"gx.fn.checkboxClick(39, this, 'true', 'false',"+"''"+");"+"gx.evt.onchange(this, event);\""+" onblur=\""+""+";gx.evt.onblur(this,39);\"");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
@@ -537,7 +537,7 @@ namespace GeneXus.Programs {
             TempTags = "  onfocus=\"gx.evt.onfocus(this, 46,'',false,'',0)\"";
             ClassString = "AttributeCheckBox";
             StyleString = "";
-            GxWebStd.gx_checkbox_ctrl( context, chkavClientallowgetsessioniniproprest_Internalname, StringUtil.BoolToStr( AV17ClientAllowGetSessionIniPropREST), "", "Session initial properties", chkavClientallowgetsessioniniproprest.Visible, chkavClientallowgetsessioniniproprest.Enabled, "true", "WWP_GAM_Sessioninitialproperties", StyleString, ClassString, "", "", TempTags+" onclick="+"\"gx.fn.checkboxClick(46, this, 'true', 'false',"+"''"+");"+"gx.evt.onchange(this, event);\""+" onblur=\""+""+";gx.evt.onblur(this,46);\"");
+            GxWebStd.gx_checkbox_ctrl( context, chkavClientallowgetsessioniniproprest_Internalname, StringUtil.BoolToStr( AV17ClientAllowGetSessionIniPropREST), "", "Session initial properties", chkavClientallowgetsessioniniproprest.Visible, chkavClientallowgetsessioniniproprest.Enabled, "true", "Session initial properties", StyleString, ClassString, "", "", TempTags+" onclick="+"\"gx.fn.checkboxClick(46, this, 'true', 'false',"+"''"+");"+"gx.evt.onchange(this, event);\""+" onblur=\""+""+";gx.evt.onblur(this,46);\"");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
@@ -550,7 +550,7 @@ namespace GeneXus.Programs {
             TempTags = "  onfocus=\"gx.evt.onfocus(this, 49,'',false,'',0)\"";
             ClassString = "AttributeCheckBox";
             StyleString = "";
-            GxWebStd.gx_checkbox_ctrl( context, chkavClientallowgetsessionappdatarest_Internalname, StringUtil.BoolToStr( AV18ClientAllowGetSessionAppDataREST), "", "Session application data", chkavClientallowgetsessionappdatarest.Visible, chkavClientallowgetsessionappdatarest.Enabled, "true", "WWP_GAM_Sessionapplicationdata", StyleString, ClassString, "", "", TempTags+" onclick="+"\"gx.fn.checkboxClick(49, this, 'true', 'false',"+"''"+");"+"gx.evt.onchange(this, event);\""+" onblur=\""+""+";gx.evt.onblur(this,49);\"");
+            GxWebStd.gx_checkbox_ctrl( context, chkavClientallowgetsessionappdatarest_Internalname, StringUtil.BoolToStr( AV18ClientAllowGetSessionAppDataREST), "", "Session application data", chkavClientallowgetsessionappdatarest.Visible, chkavClientallowgetsessionappdatarest.Enabled, "true", "Session application data", StyleString, ClassString, "", "", TempTags+" onclick="+"\"gx.fn.checkboxClick(49, this, 'true', 'false',"+"''"+");"+"gx.evt.onchange(this, event);\""+" onblur=\""+""+";gx.evt.onblur(this,49);\"");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -564,7 +564,7 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+edtavClientallowadditionalscoperest_Internalname+"\"", "", "div");
             /* Attribute/Variable Label */
-            GxWebStd.gx_label_element( context, edtavClientallowadditionalscoperest_Internalname, "WWP_GAM_Additionaluserscopes", " AttributeLabel", 1, true, "");
+            GxWebStd.gx_label_element( context, edtavClientallowadditionalscoperest_Internalname, "Additional user scopes", " AttributeLabel", 1, true, "");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
             /* Single line edit */
@@ -584,7 +584,7 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", edtavExpires_Visible, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+edtavExpires_Internalname+"\"", "", "div");
             /* Attribute/Variable Label */
-            GxWebStd.gx_label_element( context, edtavExpires_Internalname, "WWP_GAM_Expires", " AttributeDateTimeLabel", 1, true, "");
+            GxWebStd.gx_label_element( context, edtavExpires_Internalname, "Expires", " AttributeDateTimeLabel", 1, true, "");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
             /* Single line edit */
@@ -601,7 +601,7 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+edtavApikey_Internalname+"\"", "", "div");
             /* Attribute/Variable Label */
-            GxWebStd.gx_label_element( context, edtavApikey_Internalname, "WWP_GAM_APIkey", " AttributeLabel", 1, true, "");
+            GxWebStd.gx_label_element( context, edtavApikey_Internalname, "API Key", " AttributeLabel", 1, true, "");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
             /* Single line edit */
@@ -625,7 +625,7 @@ namespace GeneXus.Programs {
             TempTags = "  onfocus=\"gx.evt.onfocus(this, 68,'',false,'',0)\"";
             ClassString = "ButtonMaterial";
             StyleString = "";
-            GxWebStd.gx_button_ctrl( context, bttBtnenter_Internalname, "", "WWP_GAM_Generate", bttBtnenter_Jsonclick, 5, "Confirm", "", StyleString, ClassString, bttBtnenter_Visible, 1, "standard", "'"+""+"'"+",false,"+"'"+"EENTER."+"'", TempTags, "", context.GetButtonType( ), "HLP_GAMUserApplicationAPIkey.htm");
+            GxWebStd.gx_button_ctrl( context, bttBtnenter_Internalname, "", "Generate", bttBtnenter_Jsonclick, 5, "Confirm", "", StyleString, ClassString, bttBtnenter_Visible, 1, "standard", "'"+""+"'"+",false,"+"'"+"EENTER."+"'", TempTags, "", context.GetButtonType( ), "HLP_GAMUserApplicationAPIkey.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-button", "start", "top", "", "", "div");
@@ -982,7 +982,7 @@ namespace GeneXus.Programs {
          AV9GAMApplication = new GeneXus.Programs.genexussecurity.SdtGAMApplication(context).getbyclientid(AV6ClientID, out  AV10GAMErrorCollection);
          if ( AV10GAMErrorCollection.Count == 0 )
          {
-            Form.Caption = StringUtil.Format( "WWP_GAM_1applicationAPIkeyfor2", AV9GAMApplication.gxTpr_Name, AV11GAMUser.gxTpr_Name, "", "", "", "", "", "", "");
+            Form.Caption = StringUtil.Format( "%1 application API Key for %2", AV9GAMApplication.gxTpr_Name, AV11GAMUser.gxTpr_Name, "", "", "", "", "", "", "");
             AssignProp("", false, "FORM", "Caption", Form.Caption, true);
             if ( AV9GAMApplication.gxTpr_Apikeyenable && AV9GAMApplication.gxTpr_Clientallowremoterestauthentication )
             {
@@ -1100,9 +1100,9 @@ namespace GeneXus.Programs {
                }
                bttBtnenter_Visible = 0;
                AssignProp("", false, bttBtnenter_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(bttBtnenter_Visible), 5, 0), true);
-               bttBtncancel_Caption = "WWP_GAM_Close";
+               bttBtncancel_Caption = "Close";
                AssignProp("", false, bttBtncancel_Internalname, "Caption", bttBtncancel_Caption, true);
-               GX_msglist.addItem("WWP_GAM_YourAPIkeywasgeneratedsuccessfully");
+               GX_msglist.addItem("Your API key was generated successfully!");
             }
          }
          /*  Sending Event outputs  */
@@ -1164,7 +1164,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202451915104898", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20245201222826", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1180,7 +1180,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("gamuserapplicationapikey.js", "?20245191510491", false, true);
+         context.AddJavascriptSource("gamuserapplicationapikey.js", "?20245201222830", false, true);
          /* End function include_jscripts */
       }
 
@@ -1188,14 +1188,14 @@ namespace GeneXus.Programs {
       {
          chkavClientallowgetuserdatarest.Name = "vCLIENTALLOWGETUSERDATAREST";
          chkavClientallowgetuserdatarest.WebTags = "";
-         chkavClientallowgetuserdatarest.Caption = "WWP_GAM_Userdata";
+         chkavClientallowgetuserdatarest.Caption = "User data";
          AssignProp("", false, chkavClientallowgetuserdatarest_Internalname, "TitleCaption", chkavClientallowgetuserdatarest.Caption, true);
          chkavClientallowgetuserdatarest.CheckedValue = "false";
          AV14ClientAllowGetUserDataREST = StringUtil.StrToBool( StringUtil.BoolToStr( AV14ClientAllowGetUserDataREST));
          AssignAttri("", false, "AV14ClientAllowGetUserDataREST", AV14ClientAllowGetUserDataREST);
          chkavClientallowgetuseradddatarest.Name = "vCLIENTALLOWGETUSERADDDATAREST";
          chkavClientallowgetuseradddatarest.WebTags = "";
-         chkavClientallowgetuseradddatarest.Caption = "WWP_GAM_Useradditionaldata";
+         chkavClientallowgetuseradddatarest.Caption = "User additional data";
          AssignProp("", false, chkavClientallowgetuseradddatarest_Internalname, "TitleCaption", chkavClientallowgetuseradddatarest.Caption, true);
          chkavClientallowgetuseradddatarest.CheckedValue = "false";
          AV15ClientAllowGetUserAddDataREST = StringUtil.StrToBool( StringUtil.BoolToStr( AV15ClientAllowGetUserAddDataREST));
@@ -1209,14 +1209,14 @@ namespace GeneXus.Programs {
          AssignAttri("", false, "AV16ClientAllowGetUserRolesRest", AV16ClientAllowGetUserRolesRest);
          chkavClientallowgetsessioniniproprest.Name = "vCLIENTALLOWGETSESSIONINIPROPREST";
          chkavClientallowgetsessioniniproprest.WebTags = "";
-         chkavClientallowgetsessioniniproprest.Caption = "WWP_GAM_Sessioninitialproperties";
+         chkavClientallowgetsessioniniproprest.Caption = "Session initial properties";
          AssignProp("", false, chkavClientallowgetsessioniniproprest_Internalname, "TitleCaption", chkavClientallowgetsessioniniproprest.Caption, true);
          chkavClientallowgetsessioniniproprest.CheckedValue = "false";
          AV17ClientAllowGetSessionIniPropREST = StringUtil.StrToBool( StringUtil.BoolToStr( AV17ClientAllowGetSessionIniPropREST));
          AssignAttri("", false, "AV17ClientAllowGetSessionIniPropREST", AV17ClientAllowGetSessionIniPropREST);
          chkavClientallowgetsessionappdatarest.Name = "vCLIENTALLOWGETSESSIONAPPDATAREST";
          chkavClientallowgetsessionappdatarest.WebTags = "";
-         chkavClientallowgetsessionappdatarest.Caption = "WWP_GAM_Sessionapplicationdata";
+         chkavClientallowgetsessionappdatarest.Caption = "Session application data";
          AssignProp("", false, chkavClientallowgetsessionappdatarest_Internalname, "TitleCaption", chkavClientallowgetsessionappdatarest.Caption, true);
          chkavClientallowgetsessionappdatarest.CheckedValue = "false";
          AV18ClientAllowGetSessionAppDataREST = StringUtil.StrToBool( StringUtil.BoolToStr( AV18ClientAllowGetSessionAppDataREST));
