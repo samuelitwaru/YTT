@@ -1664,7 +1664,14 @@ namespace GeneXus.Programs {
             AV35Error = ((GeneXus.Programs.genexussecurity.SdtGAMError)AV36Errors.Item(AV57GXV5));
             if ( AV35Error.gxTpr_Code != 13 )
             {
-               Gx_msg = AV35Error.gxTpr_Message;
+               if ( AV35Error.gxTpr_Code == 9 )
+               {
+                  Gx_msg = "User not yet active";
+               }
+               else
+               {
+                  Gx_msg = AV35Error.gxTpr_Message;
+               }
                GX_msglist.addItem(new GeneXus.Programs.wwpbaseobjects.dvmessagegetbasicnotificationmsg(context).executeUdp(  "Error!",  Gx_msg,  "error",  "#"+edtavUserpassword_Internalname,  "true",  ""));
             }
             AV57GXV5 = (int)(AV57GXV5+1);
@@ -1712,7 +1719,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024520121826", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20245201473834", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1728,7 +1735,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("login.js", "?20245201218210", false, true);
+         context.AddJavascriptSource("login.js", "?20245201473835", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Mask/jquery.mask.js", "", false, true);
          context.AddJavascriptSource("DVelop/WorkWithPlusUtilities/BootstrapSelect.js", "", false, true);

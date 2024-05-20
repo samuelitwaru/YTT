@@ -339,7 +339,7 @@ namespace GeneXus.Programs {
          GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
          /* Single line edit */
          TempTags = "  onfocus=\"gx.evt.onfocus(this, 26,'',false,'',0)\"";
-         GxWebStd.gx_single_line_edit( context, edtCompanyLocationCode_Internalname, StringUtil.RTrim( A159CompanyLocationCode), StringUtil.RTrim( context.localUtil.Format( A159CompanyLocationCode, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,26);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtCompanyLocationCode_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtCompanyLocationCode_Enabled, 0, "text", "", 20, "chr", 1, "row", 20, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_CompanyLocation.htm");
+         GxWebStd.gx_single_line_edit( context, edtCompanyLocationCode_Internalname, StringUtil.RTrim( A159CompanyLocationCode), StringUtil.RTrim( context.localUtil.Format( A159CompanyLocationCode, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,26);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtCompanyLocationCode_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtCompanyLocationCode_Enabled, 1, "text", "", 20, "chr", 1, "row", 20, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_CompanyLocation.htm");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -458,6 +458,7 @@ namespace GeneXus.Programs {
                Dvpanel_tableattributes_Iconposition = cgiGet( "DVPANEL_TABLEATTRIBUTES_Iconposition");
                Dvpanel_tableattributes_Autoscroll = StringUtil.StrToBool( cgiGet( "DVPANEL_TABLEATTRIBUTES_Autoscroll"));
                Dvpanel_tableattributes_Visible = StringUtil.StrToBool( cgiGet( "DVPANEL_TABLEATTRIBUTES_Visible"));
+               Dvpanel_tableattributes_Gxcontroltype = (int)(Math.Round(context.localUtil.CToN( cgiGet( "DVPANEL_TABLEATTRIBUTES_Gxcontroltype"), ".", ","), 18, MidpointRounding.ToEven));
                /* Read variables values. */
                A158CompanyLocationName = cgiGet( edtCompanyLocationName_Internalname);
                AssignAttri("", false, "A158CompanyLocationName", A158CompanyLocationName);
@@ -721,7 +722,7 @@ namespace GeneXus.Programs {
 
       protected void ZM0M24( short GX_JID )
       {
-         if ( ( GX_JID == 5 ) || ( GX_JID == 0 ) )
+         if ( ( GX_JID == 7 ) || ( GX_JID == 0 ) )
          {
             if ( ! IsIns( ) )
             {
@@ -734,7 +735,7 @@ namespace GeneXus.Programs {
                Z159CompanyLocationCode = A159CompanyLocationCode;
             }
          }
-         if ( GX_JID == -5 )
+         if ( GX_JID == -7 )
          {
             Z157CompanyLocationId = A157CompanyLocationId;
             Z158CompanyLocationName = A158CompanyLocationName;
@@ -746,6 +747,16 @@ namespace GeneXus.Programs {
       {
          edtCompanyLocationId_Enabled = 0;
          AssignProp("", false, edtCompanyLocationId_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtCompanyLocationId_Enabled), 5, 0), true);
+         if ( StringUtil.StrCmp(Gx_mode, "UPD") == 0 )
+         {
+            edtCompanyLocationCode_Enabled = 0;
+            AssignProp("", false, edtCompanyLocationCode_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtCompanyLocationCode_Enabled), 5, 0), true);
+         }
+         else
+         {
+            edtCompanyLocationCode_Enabled = 1;
+            AssignProp("", false, edtCompanyLocationCode_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtCompanyLocationCode_Enabled), 5, 0), true);
+         }
          edtCompanyLocationId_Enabled = 0;
          AssignProp("", false, edtCompanyLocationId_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtCompanyLocationId_Enabled), 5, 0), true);
          bttBtntrn_delete_Enabled = 0;
@@ -759,6 +770,11 @@ namespace GeneXus.Programs {
 
       protected void standaloneModal( )
       {
+         if ( StringUtil.StrCmp(Gx_mode, "UPD") == 0 )
+         {
+            edtCompanyLocationCode_Enabled = 0;
+            AssignProp("", false, edtCompanyLocationCode_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtCompanyLocationCode_Enabled), 5, 0), true);
+         }
          if ( StringUtil.StrCmp(Gx_mode, "DSP") == 0 )
          {
             bttBtntrn_enter_Enabled = 0;
@@ -782,7 +798,7 @@ namespace GeneXus.Programs {
             AssignAttri("", false, "A158CompanyLocationName", A158CompanyLocationName);
             A159CompanyLocationCode = T000M4_A159CompanyLocationCode[0];
             AssignAttri("", false, "A159CompanyLocationCode", A159CompanyLocationCode);
-            ZM0M24( -5) ;
+            ZM0M24( -7) ;
          }
          pr_default.close(2);
          OnLoadActions0M24( ) ;
@@ -852,7 +868,7 @@ namespace GeneXus.Programs {
          pr_default.execute(1, new Object[] {A157CompanyLocationId});
          if ( (pr_default.getStatus(1) != 101) )
          {
-            ZM0M24( 5) ;
+            ZM0M24( 7) ;
             RcdFound24 = 1;
             A157CompanyLocationId = T000M3_A157CompanyLocationId[0];
             AssignAttri("", false, "A157CompanyLocationId", StringUtil.LTrimStr( (decimal)(A157CompanyLocationId), 10, 0));
@@ -1634,7 +1650,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20245201216469", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20245201471237", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1650,7 +1666,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("companylocation.js", "?202452012164610", false, true);
+         context.AddJavascriptSource("companylocation.js", "?20245201471238", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Panel/BootstrapPanelRender.js", "", false, true);
@@ -1934,6 +1950,7 @@ namespace GeneXus.Programs {
       private int bttBtntrn_delete_Enabled ;
       private int edtCompanyLocationId_Enabled ;
       private int edtCompanyLocationId_Visible ;
+      private int Dvpanel_tableattributes_Gxcontroltype ;
       private int idxLst ;
       private long wcpOAV13CompanyLocationId ;
       private long Z157CompanyLocationId ;

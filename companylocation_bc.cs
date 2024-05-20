@@ -132,12 +132,12 @@ namespace GeneXus.Programs {
 
       protected void ZM0M24( short GX_JID )
       {
-         if ( ( GX_JID == 3 ) || ( GX_JID == 0 ) )
+         if ( ( GX_JID == 4 ) || ( GX_JID == 0 ) )
          {
             Z158CompanyLocationName = A158CompanyLocationName;
             Z159CompanyLocationCode = A159CompanyLocationCode;
          }
-         if ( GX_JID == -3 )
+         if ( GX_JID == -4 )
          {
             Z157CompanyLocationId = A157CompanyLocationId;
             Z158CompanyLocationName = A158CompanyLocationName;
@@ -162,7 +162,7 @@ namespace GeneXus.Programs {
             RcdFound24 = 1;
             A158CompanyLocationName = BC000M4_A158CompanyLocationName[0];
             A159CompanyLocationCode = BC000M4_A159CompanyLocationCode[0];
-            ZM0M24( -3) ;
+            ZM0M24( -4) ;
          }
          pr_default.close(2);
          OnLoadActions0M24( ) ;
@@ -225,7 +225,7 @@ namespace GeneXus.Programs {
          pr_default.execute(1, new Object[] {A157CompanyLocationId});
          if ( (pr_default.getStatus(1) != 101) )
          {
-            ZM0M24( 3) ;
+            ZM0M24( 4) ;
             RcdFound24 = 1;
             A157CompanyLocationId = BC000M3_A157CompanyLocationId[0];
             A158CompanyLocationName = BC000M3_A158CompanyLocationName[0];
@@ -660,7 +660,10 @@ namespace GeneXus.Programs {
       {
          Gx_mode = obj24.gxTpr_Mode;
          A158CompanyLocationName = obj24.gxTpr_Companylocationname;
-         A159CompanyLocationCode = obj24.gxTpr_Companylocationcode;
+         if ( ! ( ( StringUtil.StrCmp(Gx_mode, "UPD") == 0 ) ) || ( forceLoad == 1 ) )
+         {
+            A159CompanyLocationCode = obj24.gxTpr_Companylocationcode;
+         }
          A157CompanyLocationId = obj24.gxTpr_Companylocationid;
          Z157CompanyLocationId = obj24.gxTpr_Companylocationid_Z;
          Z158CompanyLocationName = obj24.gxTpr_Companylocationname_Z;
@@ -687,7 +690,7 @@ namespace GeneXus.Programs {
             Gx_mode = "UPD";
             Z157CompanyLocationId = A157CompanyLocationId;
          }
-         ZM0M24( -3) ;
+         ZM0M24( -4) ;
          OnLoadActions0M24( ) ;
          AddRow0M24( ) ;
          ScanKeyEnd0M24( ) ;
@@ -716,7 +719,7 @@ namespace GeneXus.Programs {
             Gx_mode = "UPD";
             Z157CompanyLocationId = A157CompanyLocationId;
          }
-         ZM0M24( -3) ;
+         ZM0M24( -4) ;
          OnLoadActions0M24( ) ;
          AddRow0M24( ) ;
          ScanKeyEnd0M24( ) ;
@@ -1134,6 +1137,7 @@ namespace GeneXus.Programs {
          BC000M12_A157CompanyLocationId = new long[1] ;
          BC000M12_A158CompanyLocationName = new string[] {""} ;
          BC000M12_A159CompanyLocationCode = new string[] {""} ;
+         N159CompanyLocationCode = "";
          BackMsgLst = new msglist();
          LclMsgLst = new msglist();
          pr_gam = new DataStoreProvider(context, new GeneXus.Programs.companylocation_bc__gam(),
@@ -1202,6 +1206,7 @@ namespace GeneXus.Programs {
       private string Z159CompanyLocationCode ;
       private string A159CompanyLocationCode ;
       private string sMode24 ;
+      private string N159CompanyLocationCode ;
       private bool returnInSub ;
       private bool mustCommit ;
       private IGxSession AV12WebSession ;
