@@ -96,6 +96,27 @@ namespace GeneXus.Programs {
       {
          /* GeneXus formulas */
          /* Output device settings */
+         AV14CurrentHour = (short)(DateTimeUtil.Hour( DateTimeUtil.Now( context)));
+         if ( AV14CurrentHour >= 17 )
+         {
+            AV16CheckDate = Gx_date;
+         }
+         else
+         {
+            AV16CheckDate = DateTimeUtil.DAdd( Gx_date, (-1));
+            AV15DayOfWeek = DateTimeUtil.Dow( AV16CheckDate);
+            if ( AV15DayOfWeek == 7 )
+            {
+               AV16CheckDate = DateTimeUtil.DAdd( AV16CheckDate, (-1));
+            }
+            else
+            {
+               if ( AV15DayOfWeek == 1 )
+               {
+                  AV16CheckDate = DateTimeUtil.DAdd( AV16CheckDate, (-2));
+               }
+            }
+         }
          /* Using cursor P005Y2 */
          pr_default.execute(0);
          while ( (pr_default.getStatus(0) != 101) )
@@ -104,25 +125,34 @@ namespace GeneXus.Programs {
             A112EmployeeIsActive = P005Y2_A112EmployeeIsActive[0];
             A107EmployeeFirstName = P005Y2_A107EmployeeFirstName[0];
             A109EmployeeEmail = P005Y2_A109EmployeeEmail[0];
-            AV15GXLvl3 = 0;
+            AV17HasLoggedHours = false;
             /* Using cursor P005Y3 */
-            pr_default.execute(1, new Object[] {Gx_date, A106EmployeeId});
+            pr_default.execute(1, new Object[] {AV16CheckDate, A106EmployeeId});
             while ( (pr_default.getStatus(1) != 101) )
             {
                A119WorkHourLogDate = P005Y3_A119WorkHourLogDate[0];
                A118WorkHourLogId = P005Y3_A118WorkHourLogId[0];
-               AV15GXLvl3 = 1;
+               AV17HasLoggedHours = true;
+               context.nUserReturn = 1;
+               if ( context.WillRedirect( ) )
+               {
+                  context.Redirect( context.wjLoc );
+                  context.wjLoc = "";
+               }
+               pr_default.close(1);
+               this.cleanup();
+               if (true) return;
                pr_default.readNext(1);
             }
             pr_default.close(1);
-            if ( AV15GXLvl3 == 0 )
+            if ( ! AV17HasLoggedHours )
             {
                AV10name = A107EmployeeFirstName;
                AV9email = A109EmployeeEmail;
-               AV12Subject = "Daily Time Tracker Reminder";
-               AV8Body = "<div style=\"max-width:600px;margin:0 auto;font-family:Arial,sans-serif;border:1px solid #e0e0e0;padding:20px;box-shadow:0 4px 8px rgba(0,0,0,.1)\"><div style=\"background-color:#333;color:#fff;text-align:center;padding:20px 0\"><h2>Time Tracker Reminder</h2></div><div style=\"padding:20px;line-height:1.5\"><p>Dear " + AV10name + ",</p><p>Check your Time Tracker hours for today and fill them</p><p>We think you forgot to fill them in</p><a href=\" " + AV13HttpRequest.BaseURL + "logworkhours.aspx\" style=\"display: block; padding: 10px 20px; width: 150px;  margin: 20px auto; background-color: #FFCC00; text-align: center; border-radius: 8px; color: white; font-weight: bold; line-height: 30px; text-decoration: none;\">Fill now</a><p>Empower customer’s success!</p><p>Yukon Software</p></div></div>";
+               AV12Subject = "Daily Time Tracker Reminder" + StringUtil.Str( (decimal)(AV14CurrentHour), 4, 0);
+               AV8Body = "<div style=\"max-width:600px;margin:0 auto;font-family:Arial,sans-serif;border:1px solid #e0e0e0;padding:20px;box-shadow:0 4px 8px rgba(0,0,0,.1)\"><div style=\"background-color:#333;color:#fff;text-align:center;padding:20px 0\"><h2>Time Tracker Reminder</h2></div><div style=\"padding:20px;line-height:1.5\"><p>Dear " + StringUtil.Trim( AV10name) + ",</p><p>Check your Time Tracker hours for today and fill them.</p><p>We think you forgot to fill them in.</p><a href=\" " + AV13HttpRequest.BaseURL + "logworkhours.aspx\" style=\"display: block; padding: 10px 20px; width: 150px;  margin: 20px auto; background-color: #FFCC00; text-align: center; border-radius: 8px; color: white; font-weight: bold; line-height: 30px; text-decoration: none;\">Fill now</a></div></div>";
                new sendemail(context ).execute(  AV9email, ref  AV12Subject, ref  AV8Body) ;
-               new sdsendpushnotifications(context ).execute(  "Time Tracker Reminder",  "Check your time tracker hours, you may have missed a log",  A106EmployeeId) ;
+               new sdsendpushnotifications(context ).execute(  "Time Tracker Reminder",  "Check your time tracker hours, you may have missed a log.",  A106EmployeeId) ;
             }
             pr_default.readNext(0);
          }
@@ -154,6 +184,8 @@ namespace GeneXus.Programs {
       {
          GXKey = "";
          gxfirstwebparm = "";
+         AV16CheckDate = DateTime.MinValue;
+         Gx_date = DateTime.MinValue;
          scmdbuf = "";
          P005Y2_A106EmployeeId = new long[1] ;
          P005Y2_A112EmployeeIsActive = new bool[] {false} ;
@@ -161,7 +193,6 @@ namespace GeneXus.Programs {
          P005Y2_A109EmployeeEmail = new string[] {""} ;
          A107EmployeeFirstName = "";
          A109EmployeeEmail = "";
-         Gx_date = DateTime.MinValue;
          P005Y3_A106EmployeeId = new long[1] ;
          P005Y3_A119WorkHourLogDate = new DateTime[] {DateTime.MinValue} ;
          P005Y3_A118WorkHourLogId = new long[1] ;
@@ -189,7 +220,8 @@ namespace GeneXus.Programs {
       private short gxcookieaux ;
       private short nGotPars ;
       private short GxWebError ;
-      private short AV15GXLvl3 ;
+      private short AV14CurrentHour ;
+      private short AV15DayOfWeek ;
       private long A106EmployeeId ;
       private long A118WorkHourLogId ;
       private string GXKey ;
@@ -197,10 +229,12 @@ namespace GeneXus.Programs {
       private string scmdbuf ;
       private string A107EmployeeFirstName ;
       private string AV10name ;
+      private DateTime AV16CheckDate ;
       private DateTime Gx_date ;
       private DateTime A119WorkHourLogDate ;
       private bool entryPointCalled ;
       private bool A112EmployeeIsActive ;
+      private bool AV17HasLoggedHours ;
       private string AV8Body ;
       private string A109EmployeeEmail ;
       private string AV9email ;
@@ -239,12 +273,12 @@ namespace GeneXus.Programs {
           };
           Object[] prmP005Y3;
           prmP005Y3 = new Object[] {
-          new ParDef("Gx_date",GXType.Date,8,0) ,
+          new ParDef("AV16CheckDate",GXType.Date,8,0) ,
           new ParDef("EmployeeId",GXType.Int64,10,0)
           };
           def= new CursorDef[] {
               new CursorDef("P005Y2", "SELECT EmployeeId, EmployeeIsActive, EmployeeFirstName, EmployeeEmail FROM Employee WHERE EmployeeIsActive = TRUE ORDER BY EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP005Y2,100, GxCacheFrequency.OFF ,true,false )
-             ,new CursorDef("P005Y3", "SELECT EmployeeId, WorkHourLogDate, WorkHourLogId FROM WorkHourLog WHERE (WorkHourLogDate = :Gx_date) AND (EmployeeId = :EmployeeId) ORDER BY WorkHourLogDate ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP005Y3,100, GxCacheFrequency.OFF ,false,false )
+             ,new CursorDef("P005Y3", "SELECT EmployeeId, WorkHourLogDate, WorkHourLogId FROM WorkHourLog WHERE (WorkHourLogDate = :AV16CheckDate) AND (EmployeeId = :EmployeeId) ORDER BY WorkHourLogDate ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP005Y3,1, GxCacheFrequency.OFF ,false,true )
           };
        }
     }
