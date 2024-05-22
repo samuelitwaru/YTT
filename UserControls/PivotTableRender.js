@@ -53,7 +53,7 @@ function PivotTable($) {
 				}); 
 			$(this.getContainerControl())
 				.find("[data-event='ProjectClicked']")
-				.on('projectclicked', this.onProjectClickedHandler.closure(this))
+				.on('click', this.onProjectClickedHandler.closure(this))
 				.each(function (i) {
 					this.setAttribute("data-items-index", i + 1);
 				}); 

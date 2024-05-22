@@ -1153,6 +1153,7 @@ namespace GeneXus.Programs {
          GXt_boolean2 = AV53IsProjectManager;
          new userhasrole(context ).execute(  "Project Manager", out  GXt_boolean2) ;
          AV53IsProjectManager = GXt_boolean2;
+         AssignAttri("", false, "AV53IsProjectManager", AV53IsProjectManager);
          if ( AV53IsProjectManager )
          {
             /* Execute user subroutine: 'GETEMPLOYEEIDSBYPROJECT' */
@@ -1354,9 +1355,10 @@ namespace GeneXus.Programs {
          pr_default.dynParam(2, new Object[]{ new Object[]{
                                               AV49EmployeeCompanyLocationId ,
                                               AV52IsManager ,
+                                              AV53IsProjectManager ,
                                               A157CompanyLocationId } ,
                                               new int[]{
-                                              TypeConstants.LONG, TypeConstants.BOOLEAN, TypeConstants.LONG
+                                              TypeConstants.LONG, TypeConstants.BOOLEAN, TypeConstants.BOOLEAN, TypeConstants.LONG
                                               }
          });
          /* Using cursor H00454 */
@@ -1595,7 +1597,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202452012222557", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20245212056366", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1611,7 +1613,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("reports.js", "?202452012222560", false, true);
+         context.AddJavascriptSource("reports.js", "?20245212056368", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -2074,6 +2076,7 @@ namespace GeneXus.Programs {
       protected Object[] conditional_H00454( IGxContext context ,
                                              long AV49EmployeeCompanyLocationId ,
                                              bool AV52IsManager ,
+                                             bool AV53IsProjectManager ,
                                              long A157CompanyLocationId )
       {
          System.Text.StringBuilder sWhereString = new System.Text.StringBuilder();
@@ -2081,7 +2084,7 @@ namespace GeneXus.Programs {
          short[] GXv_int9 = new short[1];
          Object[] GXv_Object10 = new Object[2];
          scmdbuf = "SELECT CompanyLocationId, CompanyLocationName FROM CompanyLocation";
-         if ( ! (0==AV49EmployeeCompanyLocationId) && ( AV52IsManager ) )
+         if ( ! (0==AV49EmployeeCompanyLocationId) && ( AV52IsManager ) && ! AV53IsProjectManager )
          {
             AddWhere(sWhereString, "(CompanyLocationId = :AV49EmployeeCompanyLocationId)");
          }
@@ -2124,7 +2127,7 @@ namespace GeneXus.Programs {
                case 1 :
                      return conditional_H00453(context, (long)dynConstraints[0] , (GxSimpleCollection<long>)dynConstraints[1] , (int)dynConstraints[2] );
                case 2 :
-                     return conditional_H00454(context, (long)dynConstraints[0] , (bool)dynConstraints[1] , (long)dynConstraints[2] );
+                     return conditional_H00454(context, (long)dynConstraints[0] , (bool)dynConstraints[1] , (bool)dynConstraints[2] , (long)dynConstraints[3] );
                case 3 :
                      return conditional_H00455(context, (long)dynConstraints[0] , (GxSimpleCollection<long>)dynConstraints[1] , (int)dynConstraints[2] );
          }
