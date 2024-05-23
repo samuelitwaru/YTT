@@ -110,7 +110,7 @@ namespace GeneXus.Programs {
             AV13SMTPSession.UserName = "redfu@timetracker.yukon.software";
             AV13SMTPSession.Password = "3Vzo5oOFuxkquz+e";
             AV13SMTPSession.Secure = 1;
-            AV13SMTPSession.Sender.Address = "redfu@timetracker.yukon.software";
+            AV13SMTPSession.Sender.Address = "noreply@timetracker.yukon.software";
             AV13SMTPSession.Sender.Name = "Yukon Time Tracker";
             AV10MailRecipient.Address = AV8Employee.gxTpr_Employeeemail;
             AV10MailRecipient.Name = AV8Employee.gxTpr_Employeename;
