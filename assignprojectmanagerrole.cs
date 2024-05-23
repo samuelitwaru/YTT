@@ -45,8 +45,8 @@ namespace GeneXus.Programs {
       public void execute( long aP0_EmployeeId ,
                            long aP1_ProjectId )
       {
-         this.A106EmployeeId = aP0_EmployeeId;
-         this.A102ProjectId = aP1_ProjectId;
+         this.AV19EmployeeId = aP0_EmployeeId;
+         this.AV20ProjectId = aP1_ProjectId;
          initialize();
          executePrivate();
       }
@@ -56,8 +56,8 @@ namespace GeneXus.Programs {
       {
          assignprojectmanagerrole objassignprojectmanagerrole;
          objassignprojectmanagerrole = new assignprojectmanagerrole();
-         objassignprojectmanagerrole.A106EmployeeId = aP0_EmployeeId;
-         objassignprojectmanagerrole.A102ProjectId = aP1_ProjectId;
+         objassignprojectmanagerrole.AV19EmployeeId = aP0_EmployeeId;
+         objassignprojectmanagerrole.AV20ProjectId = aP1_ProjectId;
          objassignprojectmanagerrole.context.SetSubmitInitialConfig(context);
          objassignprojectmanagerrole.initialize();
          Submit( executePrivateCatch,objassignprojectmanagerrole);
@@ -80,7 +80,7 @@ namespace GeneXus.Programs {
       {
          /* GeneXus formulas */
          /* Output device settings */
-         AV14Project.Load(A102ProjectId);
+         AV14Project.Load(AV20ProjectId);
          AV11GAMRole = AV12GAMRepository.getrolebyexternalid("IsProject Manager", out  AV10GAMErrorCollection);
          if ( ! (0==AV14Project.gxTpr_Projectmanagerid) )
          {
@@ -88,10 +88,11 @@ namespace GeneXus.Programs {
             AV9GAMUser = new GeneXus.Programs.genexussecurity.SdtGAMUser(context).getbylogin("local", AV15CurrentEmployee.gxTpr_Employeeemail, out  AV10GAMErrorCollection);
             AV9GAMUser.deleterole( AV11GAMRole, out  AV10GAMErrorCollection);
          }
-         AV8Employee.Load(A106EmployeeId);
+         AV8Employee.Load(AV19EmployeeId);
          AV9GAMUser = new GeneXus.Programs.genexussecurity.SdtGAMUser(context).getbylogin("local", AV8Employee.gxTpr_Employeeemail, out  AV10GAMErrorCollection);
          AV9GAMUser.addrolebyid( AV11GAMRole.gxTpr_Id, out  AV10GAMErrorCollection);
          context.CommitDataStores("assignprojectmanagerrole",pr_default);
+         new logtofile(context ).execute(  "Hello world") ;
          this.cleanup();
       }
 
@@ -129,8 +130,8 @@ namespace GeneXus.Programs {
          /* GeneXus formulas. */
       }
 
-      private long A106EmployeeId ;
-      private long A102ProjectId ;
+      private long AV19EmployeeId ;
+      private long AV20ProjectId ;
       private GeneXus.Programs.genexussecurity.SdtGAMRepository AV12GAMRepository ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
