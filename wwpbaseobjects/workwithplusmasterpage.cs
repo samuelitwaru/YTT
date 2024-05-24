@@ -140,6 +140,9 @@ namespace GeneXus.Programs.wwpbaseobjects {
          GxWebStd.gx_hidden_field( context, "WWPUTILITIES_MPAGE_Allowcolumnsrestore", StringUtil.BoolToStr( Wwputilities_Allowcolumnsrestore));
          GxWebStd.gx_hidden_field( context, "WWPUTILITIES_MPAGE_Pagbarincludegoto", StringUtil.BoolToStr( Wwputilities_Pagbarincludegoto));
          GxWebStd.gx_hidden_field( context, "WWPUTILITIES_MPAGE_Comboloadtype", StringUtil.RTrim( Wwputilities_Comboloadtype));
+         GxWebStd.gx_hidden_field( context, "GOOGLEANALYTICS_MPAGE_Code", StringUtil.RTrim( Googleanalytics_Code));
+         GxWebStd.gx_hidden_field( context, "GOOGLEANALYTICS_MPAGE_Domainname", StringUtil.RTrim( Googleanalytics_Domainname));
+         GxWebStd.gx_hidden_field( context, "GOOGLEANALYTICS_MPAGE_Allowlinker", StringUtil.BoolToStr( Googleanalytics_Allowlinker));
          GxWebStd.gx_hidden_field( context, "FORM_MPAGE_Caption", StringUtil.RTrim( (getDataAreaObject() == null ? Form : getDataAreaObject().GetForm()).Caption));
          GxWebStd.gx_hidden_field( context, "FORM_MPAGE_Caption", StringUtil.RTrim( (getDataAreaObject() == null ? Form : getDataAreaObject().GetForm()).Caption));
       }
@@ -185,7 +188,8 @@ namespace GeneXus.Programs.wwpbaseobjects {
          context.AddJavascriptSource("DVelop/Shared/daterangepicker/daterangepicker.min.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/DatePicker/DatePickerRender.js", "", false, true);
-         context.AddJavascriptSource("wwpbaseobjects/workwithplusmasterpage.js", "?2024524811330", false, true);
+         context.AddJavascriptSource("GXGoogleVisualizationLibrary/GoogleAnalytics/GoogleAnalyticsRender.js", "", false, true);
+         context.AddJavascriptSource("wwpbaseobjects/workwithplusmasterpage.js", "?20245249535371", false, true);
          context.WriteHtmlTextNl( "</body>") ;
          context.WriteHtmlTextNl( "</html>") ;
          if ( context.isSpaRequest( ) )
@@ -389,6 +393,17 @@ namespace GeneXus.Programs.wwpbaseobjects {
             ucWwpdatepicker.Render(context, "wwp.datepicker", Wwpdatepicker_Internalname, "WWPDATEPICKER_MPAGEContainer");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
+            /* User Defined Control */
+            ucGoogleanalytics.SetProperty("Code", Googleanalytics_Code);
+            ucGoogleanalytics.SetProperty("DomainName", Googleanalytics_Domainname);
+            ucGoogleanalytics.SetProperty("AllowLinker", Googleanalytics_Allowlinker);
+            ucGoogleanalytics.Render(context, "googleanalytics", Googleanalytics_Internalname, "GOOGLEANALYTICS_MPAGEContainer");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -399,9 +414,9 @@ namespace GeneXus.Programs.wwpbaseobjects {
             /* Div Control */
             GxWebStd.gx_div_start( context, divHtml_bottomauxiliarcontrols_Internalname, 1, 0, "px", 0, "px", "Section", "start", "top", "", "", "div");
             /* Single line edit */
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 42,'',true,'',0)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 45,'',true,'',0)\"";
             context.WriteHtmlText( "<div id=\""+edtavPickerdummyvariable_Internalname+"_dp_container\" class=\"dp_container\" style=\"white-space:nowrap;display:inline;\">") ;
-            GxWebStd.gx_single_line_edit( context, edtavPickerdummyvariable_Internalname, context.localUtil.Format(AV30PickerDummyVariable, "99/99/99"), context.localUtil.Format( AV30PickerDummyVariable, "99/99/99"), TempTags+" onchange=\""+"gx.date.valid_date(this, 8,'MDY',0,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 8,'MDY',0,12,'eng',false,0);"+";gx.evt.onblur(this,42);\"", "'"+""+"'"+",true,"+"'"+"E_MPAGE."+"'", "", "", "", "", edtavPickerdummyvariable_Jsonclick, 0, "Invisible", "", "", "", "", 1, 1, 0, "text", "", 8, "chr", 1, "row", 8, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_WWPBaseObjects/WorkWithPlusMasterPage.htm");
+            GxWebStd.gx_single_line_edit( context, edtavPickerdummyvariable_Internalname, context.localUtil.Format(AV30PickerDummyVariable, "99/99/99"), context.localUtil.Format( AV30PickerDummyVariable, "99/99/99"), TempTags+" onchange=\""+"gx.date.valid_date(this, 8,'MDY',0,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 8,'MDY',0,12,'eng',false,0);"+";gx.evt.onblur(this,45);\"", "'"+""+"'"+",true,"+"'"+"E_MPAGE."+"'", "", "", "", "", edtavPickerdummyvariable_Jsonclick, 0, "Invisible", "", "", "", "", 1, 1, 0, "text", "", 8, "chr", 1, "row", 8, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_WWPBaseObjects/WorkWithPlusMasterPage.htm");
             GxWebStd.gx_bitmap( context, edtavPickerdummyvariable_Internalname+"_dp_trigger", context.GetImagePath( "61b9b5d3-dff6-4d59-9b00-da61bc2cbe93", "", context.GetTheme( )), "", "", "", "", ((1==0)||(1==0) ? 0 : 1), 0, "Date selector", "Date selector", 0, 1, 0, "", 0, "", 0, 0, 0, "", "", "cursor: pointer;", "", "", "", "", "", "", "", "", 1, false, false, "", "HLP_WWPBaseObjects/WorkWithPlusMasterPage.htm");
             context.WriteHtmlTextNl( "</div>") ;
             /* Div Control */
@@ -409,16 +424,16 @@ namespace GeneXus.Programs.wwpbaseobjects {
             if ( ! isFullAjaxMode( ) )
             {
                /* WebComponent */
-               GxWebStd.gx_hidden_field( context, "MPW0044"+"", StringUtil.RTrim( WebComp_Wwpaux_wc_Component));
+               GxWebStd.gx_hidden_field( context, "MPW0047"+"", StringUtil.RTrim( WebComp_Wwpaux_wc_Component));
                context.WriteHtmlText( "<div") ;
                GxWebStd.ClassAttribute( context, "gxwebcomponent");
-               context.WriteHtmlText( " id=\""+"gxHTMLWrpMPW0044"+""+"\""+"") ;
+               context.WriteHtmlText( " id=\""+"gxHTMLWrpMPW0047"+""+"\""+"") ;
                context.WriteHtmlText( ">") ;
                if ( StringUtil.Len( WebComp_Wwpaux_wc_Component) != 0 )
                {
                   if ( StringUtil.StrCmp(StringUtil.Lower( OldWwpaux_wc), StringUtil.Lower( WebComp_Wwpaux_wc_Component)) != 0 )
                   {
-                     context.httpAjaxContext.ajax_rspStartCmp("gxHTMLWrpMPW0044"+"");
+                     context.httpAjaxContext.ajax_rspStartCmp("gxHTMLWrpMPW0047"+"");
                   }
                   WebComp_Wwpaux_wc.componentdraw();
                   if ( StringUtil.StrCmp(StringUtil.Lower( OldWwpaux_wc), StringUtil.Lower( WebComp_Wwpaux_wc_Component)) != 0 )
@@ -549,9 +564,9 @@ namespace GeneXus.Programs.wwpbaseobjects {
                      sEvtType = StringUtil.Right( sEvt, (short)(StringUtil.Len( sEvt)-2));
                      sEvt = StringUtil.Right( sEvt, (short)(StringUtil.Len( sEvt)-6));
                      nCmpId = (short)(Math.Round(NumberUtil.Val( sEvtType, "."), 18, MidpointRounding.ToEven));
-                     if ( nCmpId == 44 )
+                     if ( nCmpId == 47 )
                      {
-                        OldWwpaux_wc = cgiGet( "MPW0044");
+                        OldWwpaux_wc = cgiGet( "MPW0047");
                         if ( ( StringUtil.Len( OldWwpaux_wc) == 0 ) || ( StringUtil.StrCmp(OldWwpaux_wc, WebComp_Wwpaux_wc_Component) != 0 ) )
                         {
                            WebComp_Wwpaux_wc = getWebComponent(GetType(), "GeneXus.Programs", OldWwpaux_wc, new Object[] {context} );
@@ -561,7 +576,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
                         }
                         if ( StringUtil.Len( WebComp_Wwpaux_wc_Component) != 0 )
                         {
-                           WebComp_Wwpaux_wc.componentprocess("MPW0044", "", sEvt);
+                           WebComp_Wwpaux_wc.componentprocess("MPW0047", "", sEvt);
                         }
                         WebComp_Wwpaux_wc_Component = OldWwpaux_wc;
                      }
@@ -736,6 +751,9 @@ namespace GeneXus.Programs.wwpbaseobjects {
             Wwputilities_Allowcolumnsrestore = StringUtil.StrToBool( cgiGet( "WWPUTILITIES_MPAGE_Allowcolumnsrestore"));
             Wwputilities_Pagbarincludegoto = StringUtil.StrToBool( cgiGet( "WWPUTILITIES_MPAGE_Pagbarincludegoto"));
             Wwputilities_Comboloadtype = cgiGet( "WWPUTILITIES_MPAGE_Comboloadtype");
+            Googleanalytics_Code = cgiGet( "GOOGLEANALYTICS_MPAGE_Code");
+            Googleanalytics_Domainname = cgiGet( "GOOGLEANALYTICS_MPAGE_Domainname");
+            Googleanalytics_Allowlinker = StringUtil.StrToBool( cgiGet( "GOOGLEANALYTICS_MPAGE_Allowlinker"));
             (getDataAreaObject() == null ? Form : getDataAreaObject().GetForm()).Caption = cgiGet( "FORM_MPAGE_Caption");
             /* Read variables values. */
             if ( context.localUtil.VCDate( cgiGet( edtavPickerdummyvariable_Internalname), 1) == 0 )
@@ -885,7 +903,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          idxLst = 1;
          while ( idxLst <= (getDataAreaObject() == null ? Form : getDataAreaObject().GetForm()).Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)(getDataAreaObject() == null ? Form : getDataAreaObject().GetForm()).Jscriptsrc.Item(idxLst))), "?2024524811894", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)(getDataAreaObject() == null ? Form : getDataAreaObject().GetForm()).Jscriptsrc.Item(idxLst))), "?2024524953593", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -900,7 +918,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("wwpbaseobjects/workwithplusmasterpage.js", "?2024524811896", false, true);
+         context.AddJavascriptSource("wwpbaseobjects/workwithplusmasterpage.js", "?2024524953595", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/slimmenu/jquery.slimmenu.min.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
@@ -923,6 +941,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          context.AddJavascriptSource("DVelop/Shared/daterangepicker/daterangepicker.min.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/DatePicker/DatePickerRender.js", "", false, true);
+         context.AddJavascriptSource("GXGoogleVisualizationLibrary/GoogleAnalytics/GoogleAnalyticsRender.js", "", false, true);
          /* End function include_jscripts */
       }
 
@@ -944,6 +963,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          Uctooltip_Internalname = "UCTOOLTIP_MPAGE";
          Wwputilities_Internalname = "WWPUTILITIES_MPAGE";
          Wwpdatepicker_Internalname = "WWPDATEPICKER_MPAGE";
+         Googleanalytics_Internalname = "GOOGLEANALYTICS_MPAGE";
          divTablemain_Internalname = "TABLEMAIN_MPAGE";
          edtavPickerdummyvariable_Internalname = "vPICKERDUMMYVARIABLE_MPAGE";
          divDiv_wwpauxwc_Internalname = "DIV_WWPAUXWC_MPAGE";
@@ -962,6 +982,9 @@ namespace GeneXus.Programs.wwpbaseobjects {
          edtavPickerdummyvariable_Jsonclick = "";
          lblTextblocktitle_Caption = " Title";
          divLayoutmaintable_Class = "Table";
+         Googleanalytics_Allowlinker = Convert.ToBoolean( 0);
+         Googleanalytics_Domainname = "staging.timetracker.yukon.software";
+         Googleanalytics_Code = "<!-- Google tag (gtag.js) -->";
          Wwputilities_Comboloadtype = "InfiniteScrolling";
          Wwputilities_Pagbarincludegoto = Convert.ToBoolean( -1);
          Wwputilities_Allowcolumnsrestore = Convert.ToBoolean( -1);
@@ -1033,6 +1056,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          ucUctooltip = new GXUserControl();
          ucWwputilities = new GXUserControl();
          ucWwpdatepicker = new GXUserControl();
+         ucGoogleanalytics = new GXUserControl();
          TempTags = "";
          AV30PickerDummyVariable = DateTime.MinValue;
          WebComp_Wwpaux_wc_Component = "";
@@ -1082,6 +1106,8 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private string Ddc_adminag_Caption ;
       private string Ddc_adminag_Cls ;
       private string Wwputilities_Comboloadtype ;
+      private string Googleanalytics_Code ;
+      private string Googleanalytics_Domainname ;
       private string sPrefix ;
       private string divLayoutmaintable_Internalname ;
       private string divLayoutmaintable_Class ;
@@ -1103,6 +1129,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private string Uctooltip_Internalname ;
       private string Wwputilities_Internalname ;
       private string Wwpdatepicker_Internalname ;
+      private string Googleanalytics_Internalname ;
       private string divHtml_bottomauxiliarcontrols_Internalname ;
       private string TempTags ;
       private string edtavPickerdummyvariable_Internalname ;
@@ -1128,6 +1155,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private bool Wwputilities_Allowcolumndragging ;
       private bool Wwputilities_Allowcolumnsrestore ;
       private bool Wwputilities_Pagbarincludegoto ;
+      private bool Googleanalytics_Allowlinker ;
       private bool wbLoad ;
       private bool Rfr0gs ;
       private bool wbErr ;
@@ -1143,6 +1171,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private GXUserControl ucUctooltip ;
       private GXUserControl ucWwputilities ;
       private GXUserControl ucWwpdatepicker ;
+      private GXUserControl ucGoogleanalytics ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private GXDataAreaControl Contentholder ;
