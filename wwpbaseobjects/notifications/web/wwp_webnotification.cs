@@ -2427,7 +2427,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024523835477", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024524755613", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2443,7 +2443,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wwpbaseobjects/notifications/web/wwp_webnotification.js", "?2024523835477", false, true);
+         context.AddJavascriptSource("wwpbaseobjects/notifications/web/wwp_webnotification.js", "?2024524755613", false, true);
          /* End function include_jscripts */
       }
 
