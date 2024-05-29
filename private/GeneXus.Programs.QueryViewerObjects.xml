@@ -132,4 +132,7 @@
   <Object name="jsGanttProvider" id="62" type="DataProvider" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="jsGanttProvider" xmlns="qv">
     <DefaultOutput type="OutputTypePivotTable" xmlns="qv" />
   </Object>
+  <Object name="jsGanttProvider2" id="63" type="DataProvider" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="jsGanttProvider" xmlns="qv">
+    <DefaultOutput type="OutputTypePivotTable" xmlns="qv" />
+  </Object>
 </Objects>

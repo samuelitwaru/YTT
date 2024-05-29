@@ -655,7 +655,7 @@ namespace GeneXus.Programs {
          /* 'GANTTSAMPLE' Routine */
          returnInSub = false;
          GXt_objcol_SdtjsGanttTask1 = AV5DataJsGanttTask;
-         new jsganttprovider(context ).execute( out  GXt_objcol_SdtjsGanttTask1) ;
+         new jsganttprovider2(context ).execute( out  GXt_objcol_SdtjsGanttTask1) ;
          AV5DataJsGanttTask = GXt_objcol_SdtjsGanttTask1;
       }
 
@@ -709,7 +709,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20245281253918", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20245281615175", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -727,7 +727,7 @@ namespace GeneXus.Programs {
          if ( nGXWrapped != 1 )
          {
             context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-            context.AddJavascriptSource("gantchart.js", "?20245281253918", false, true);
+            context.AddJavascriptSource("gantchart.js", "?20245281615175", false, true);
             context.AddJavascriptSource("gxJSGantt/jsgantt/jsgantt.js", "", false, true);
             context.AddJavascriptSource("gxJSGantt/gxJSGanttRender.js", "", false, true);
          }
