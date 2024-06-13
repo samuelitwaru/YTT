@@ -242,7 +242,7 @@ namespace GeneXus.Programs {
          returnInSub = false;
          if ( ( ( StringUtil.StrCmp(Gx_mode, "INS") == 0 ) ) && ( StringUtil.StrCmp(A132LeaveRequestStatus, "Pending") == 0 ) )
          {
-            new sdsendleaverequestmail(context).executeSubmit(  A129LeaveRequestStartDate,  A130LeaveRequestEndDate,  A133LeaveRequestDescription,  A125LeaveTypeName,  A148EmployeeName) ;
+            new sdsendleaverequestmail(context).executeSubmit(  A129LeaveRequestStartDate,  A130LeaveRequestEndDate,  A133LeaveRequestDescription,  A125LeaveTypeName,  A148EmployeeName,  A106EmployeeId) ;
             AV37Mesage = "Leave Request successful";
             CallWebObject(formatLink("leaverequestww.aspx", new object[] {UrlEncode(StringUtil.RTrim(AV37Mesage))}, new string[] {"Mesage"}) );
             context.wjLocDisableFrm = 1;

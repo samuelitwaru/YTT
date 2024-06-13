@@ -161,10 +161,6 @@ namespace GeneXus.Programs {
          AV34TFLeaveTypeName_Sel = GetPar( "TFLeaveTypeName_Sel");
          ajax_req_read_hidden_sdt(GetNextPar( ), AV52TFLeaveTypeVacationLeave_Sels);
          ajax_req_read_hidden_sdt(GetNextPar( ), AV54TFLeaveTypeLoggingWorkHours_Sels);
-         AV58TFLeaveTypeColorPending = GetPar( "TFLeaveTypeColorPending");
-         AV59TFLeaveTypeColorPending_Sel = GetPar( "TFLeaveTypeColorPending_Sel");
-         AV60TFLeaveTypeColorApproved = GetPar( "TFLeaveTypeColorApproved");
-         AV61TFLeaveTypeColorApproved_Sel = GetPar( "TFLeaveTypeColorApproved_Sel");
          AV17OrderedBy = (short)(Math.Round(NumberUtil.Val( GetPar( "OrderedBy"), "."), 18, MidpointRounding.ToEven));
          AV18OrderedDsc = StringUtil.StrToBool( GetPar( "OrderedDsc"));
          AV44IsAuthorized_Update = StringUtil.StrToBool( GetPar( "IsAuthorized_Update"));
@@ -176,7 +172,7 @@ namespace GeneXus.Programs {
             GxWebError = 1;
             return  ;
          }
-         gxgrGrid_refresh( subGrid_Rows, AV20FilterFullText, AV30ManageFiltersExecutionStep, AV25ColumnsSelector, AV62Pgmname, AV33TFLeaveTypeName, AV34TFLeaveTypeName_Sel, AV52TFLeaveTypeVacationLeave_Sels, AV54TFLeaveTypeLoggingWorkHours_Sels, AV58TFLeaveTypeColorPending, AV59TFLeaveTypeColorPending_Sel, AV60TFLeaveTypeColorApproved, AV61TFLeaveTypeColorApproved_Sel, AV17OrderedBy, AV18OrderedDsc, AV44IsAuthorized_Update, AV46IsAuthorized_Delete, AV50IsAuthorized_Insert) ;
+         gxgrGrid_refresh( subGrid_Rows, AV20FilterFullText, AV30ManageFiltersExecutionStep, AV25ColumnsSelector, AV62Pgmname, AV33TFLeaveTypeName, AV34TFLeaveTypeName_Sel, AV52TFLeaveTypeVacationLeave_Sels, AV54TFLeaveTypeLoggingWorkHours_Sels, AV17OrderedBy, AV18OrderedDsc, AV44IsAuthorized_Update, AV46IsAuthorized_Delete, AV50IsAuthorized_Insert) ;
          AddString( context.getJSONResponse( )) ;
          /* End function gxgrGrid_refresh_invoke */
       }
@@ -425,10 +421,6 @@ namespace GeneXus.Programs {
          {
             context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("vTFLEAVETYPELOGGINGWORKHOURS_SELS", AV54TFLeaveTypeLoggingWorkHours_Sels);
          }
-         GxWebStd.gx_hidden_field( context, "vTFLEAVETYPECOLORPENDING", StringUtil.RTrim( AV58TFLeaveTypeColorPending));
-         GxWebStd.gx_hidden_field( context, "vTFLEAVETYPECOLORPENDING_SEL", StringUtil.RTrim( AV59TFLeaveTypeColorPending_Sel));
-         GxWebStd.gx_hidden_field( context, "vTFLEAVETYPECOLORAPPROVED", StringUtil.RTrim( AV60TFLeaveTypeColorApproved));
-         GxWebStd.gx_hidden_field( context, "vTFLEAVETYPECOLORAPPROVED_SEL", StringUtil.RTrim( AV61TFLeaveTypeColorApproved_Sel));
          GxWebStd.gx_hidden_field( context, "vORDEREDBY", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV17OrderedBy), 4, 0, ".", "")));
          GxWebStd.gx_boolean_hidden_field( context, "vORDEREDDSC", AV18OrderedDsc);
          GxWebStd.gx_boolean_hidden_field( context, "vISAUTHORIZED_UPDATE", AV44IsAuthorized_Update);
@@ -1111,10 +1103,6 @@ namespace GeneXus.Programs {
                                        string AV34TFLeaveTypeName_Sel ,
                                        GxSimpleCollection<string> AV52TFLeaveTypeVacationLeave_Sels ,
                                        GxSimpleCollection<string> AV54TFLeaveTypeLoggingWorkHours_Sels ,
-                                       string AV58TFLeaveTypeColorPending ,
-                                       string AV59TFLeaveTypeColorPending_Sel ,
-                                       string AV60TFLeaveTypeColorApproved ,
-                                       string AV61TFLeaveTypeColorApproved_Sel ,
                                        short AV17OrderedBy ,
                                        bool AV18OrderedDsc ,
                                        bool AV44IsAuthorized_Update ,
@@ -1212,19 +1200,13 @@ namespace GeneXus.Programs {
                                                  AV64Leavetypewwds_2_tfleavetypename ,
                                                  AV66Leavetypewwds_4_tfleavetypevacationleave_sels.Count ,
                                                  AV67Leavetypewwds_5_tfleavetypeloggingworkhours_sels.Count ,
-                                                 AV69Leavetypewwds_7_tfleavetypecolorpending_sel ,
-                                                 AV68Leavetypewwds_6_tfleavetypecolorpending ,
-                                                 AV71Leavetypewwds_9_tfleavetypecolorapproved_sel ,
-                                                 AV70Leavetypewwds_8_tfleavetypecolorapproved ,
                                                  A125LeaveTypeName ,
-                                                 A174LeaveTypeColorPending ,
-                                                 A175LeaveTypeColorApproved ,
                                                  AV17OrderedBy ,
                                                  AV18OrderedDsc ,
                                                  A100CompanyId ,
-                                                 AV72Udparg10 } ,
+                                                 AV68Udparg6 } ,
                                                  new int[]{
-                                                 TypeConstants.INT, TypeConstants.INT, TypeConstants.BOOLEAN, TypeConstants.BOOLEAN, TypeConstants.SHORT, TypeConstants.BOOLEAN, TypeConstants.LONG, TypeConstants.LONG
+                                                 TypeConstants.INT, TypeConstants.INT, TypeConstants.SHORT, TypeConstants.BOOLEAN, TypeConstants.LONG, TypeConstants.LONG
                                                  }
             });
             lV63Leavetypewwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV63Leavetypewwds_1_filterfulltext), "%", "");
@@ -1232,13 +1214,9 @@ namespace GeneXus.Programs {
             lV63Leavetypewwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV63Leavetypewwds_1_filterfulltext), "%", "");
             lV63Leavetypewwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV63Leavetypewwds_1_filterfulltext), "%", "");
             lV63Leavetypewwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV63Leavetypewwds_1_filterfulltext), "%", "");
-            lV63Leavetypewwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV63Leavetypewwds_1_filterfulltext), "%", "");
-            lV63Leavetypewwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV63Leavetypewwds_1_filterfulltext), "%", "");
             lV64Leavetypewwds_2_tfleavetypename = StringUtil.PadR( StringUtil.RTrim( AV64Leavetypewwds_2_tfleavetypename), 100, "%");
-            lV68Leavetypewwds_6_tfleavetypecolorpending = StringUtil.PadR( StringUtil.RTrim( AV68Leavetypewwds_6_tfleavetypecolorpending), 20, "%");
-            lV70Leavetypewwds_8_tfleavetypecolorapproved = StringUtil.PadR( StringUtil.RTrim( AV70Leavetypewwds_8_tfleavetypecolorapproved), 20, "%");
             /* Using cursor H002O2 */
-            pr_default.execute(0, new Object[] {AV72Udparg10, lV63Leavetypewwds_1_filterfulltext, lV63Leavetypewwds_1_filterfulltext, lV63Leavetypewwds_1_filterfulltext, lV63Leavetypewwds_1_filterfulltext, lV63Leavetypewwds_1_filterfulltext, lV63Leavetypewwds_1_filterfulltext, lV63Leavetypewwds_1_filterfulltext, lV64Leavetypewwds_2_tfleavetypename, AV65Leavetypewwds_3_tfleavetypename_sel, lV68Leavetypewwds_6_tfleavetypecolorpending, AV69Leavetypewwds_7_tfleavetypecolorpending_sel, lV70Leavetypewwds_8_tfleavetypecolorapproved, AV71Leavetypewwds_9_tfleavetypecolorapproved_sel, GXPagingFrom2, GXPagingTo2, GXPagingTo2});
+            pr_default.execute(0, new Object[] {AV68Udparg6, lV63Leavetypewwds_1_filterfulltext, lV63Leavetypewwds_1_filterfulltext, lV63Leavetypewwds_1_filterfulltext, lV63Leavetypewwds_1_filterfulltext, lV63Leavetypewwds_1_filterfulltext, lV64Leavetypewwds_2_tfleavetypename, AV65Leavetypewwds_3_tfleavetypename_sel, GXPagingFrom2, GXPagingTo2, GXPagingTo2});
             nGXsfl_41_idx = 1;
             sGXsfl_41_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_41_idx), 4, 0), 4, "0");
             SubsflControlProps_412( ) ;
@@ -1295,17 +1273,13 @@ namespace GeneXus.Programs {
          AV65Leavetypewwds_3_tfleavetypename_sel = AV34TFLeaveTypeName_Sel;
          AV66Leavetypewwds_4_tfleavetypevacationleave_sels = AV52TFLeaveTypeVacationLeave_Sels;
          AV67Leavetypewwds_5_tfleavetypeloggingworkhours_sels = AV54TFLeaveTypeLoggingWorkHours_Sels;
-         AV68Leavetypewwds_6_tfleavetypecolorpending = AV58TFLeaveTypeColorPending;
-         AV69Leavetypewwds_7_tfleavetypecolorpending_sel = AV59TFLeaveTypeColorPending_Sel;
-         AV70Leavetypewwds_8_tfleavetypecolorapproved = AV60TFLeaveTypeColorApproved;
-         AV71Leavetypewwds_9_tfleavetypecolorapproved_sel = AV61TFLeaveTypeColorApproved_Sel;
-         AV72Udparg10 = new getloggedinusercompanyid(context).executeUdp( );
-         AV72Udparg10 = new getloggedinusercompanyid(context).executeUdp( );
-         AV72Udparg10 = new getloggedinusercompanyid(context).executeUdp( );
-         AV72Udparg10 = new getloggedinusercompanyid(context).executeUdp( );
-         AV72Udparg10 = new getloggedinusercompanyid(context).executeUdp( );
-         AV72Udparg10 = new getloggedinusercompanyid(context).executeUdp( );
-         AV72Udparg10 = new getloggedinusercompanyid(context).executeUdp( );
+         AV68Udparg6 = new getloggedinusercompanyid(context).executeUdp( );
+         AV68Udparg6 = new getloggedinusercompanyid(context).executeUdp( );
+         AV68Udparg6 = new getloggedinusercompanyid(context).executeUdp( );
+         AV68Udparg6 = new getloggedinusercompanyid(context).executeUdp( );
+         AV68Udparg6 = new getloggedinusercompanyid(context).executeUdp( );
+         AV68Udparg6 = new getloggedinusercompanyid(context).executeUdp( );
+         AV68Udparg6 = new getloggedinusercompanyid(context).executeUdp( );
          pr_default.dynParam(1, new Object[]{ new Object[]{
                                               A144LeaveTypeVacationLeave ,
                                               AV66Leavetypewwds_4_tfleavetypevacationleave_sels ,
@@ -1316,19 +1290,13 @@ namespace GeneXus.Programs {
                                               AV64Leavetypewwds_2_tfleavetypename ,
                                               AV66Leavetypewwds_4_tfleavetypevacationleave_sels.Count ,
                                               AV67Leavetypewwds_5_tfleavetypeloggingworkhours_sels.Count ,
-                                              AV69Leavetypewwds_7_tfleavetypecolorpending_sel ,
-                                              AV68Leavetypewwds_6_tfleavetypecolorpending ,
-                                              AV71Leavetypewwds_9_tfleavetypecolorapproved_sel ,
-                                              AV70Leavetypewwds_8_tfleavetypecolorapproved ,
                                               A125LeaveTypeName ,
-                                              A174LeaveTypeColorPending ,
-                                              A175LeaveTypeColorApproved ,
                                               AV17OrderedBy ,
                                               AV18OrderedDsc ,
                                               A100CompanyId ,
-                                              AV72Udparg10 } ,
+                                              AV68Udparg6 } ,
                                               new int[]{
-                                              TypeConstants.INT, TypeConstants.INT, TypeConstants.BOOLEAN, TypeConstants.BOOLEAN, TypeConstants.SHORT, TypeConstants.BOOLEAN, TypeConstants.LONG, TypeConstants.LONG
+                                              TypeConstants.INT, TypeConstants.INT, TypeConstants.SHORT, TypeConstants.BOOLEAN, TypeConstants.LONG, TypeConstants.LONG
                                               }
          });
          lV63Leavetypewwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV63Leavetypewwds_1_filterfulltext), "%", "");
@@ -1336,13 +1304,9 @@ namespace GeneXus.Programs {
          lV63Leavetypewwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV63Leavetypewwds_1_filterfulltext), "%", "");
          lV63Leavetypewwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV63Leavetypewwds_1_filterfulltext), "%", "");
          lV63Leavetypewwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV63Leavetypewwds_1_filterfulltext), "%", "");
-         lV63Leavetypewwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV63Leavetypewwds_1_filterfulltext), "%", "");
-         lV63Leavetypewwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV63Leavetypewwds_1_filterfulltext), "%", "");
          lV64Leavetypewwds_2_tfleavetypename = StringUtil.PadR( StringUtil.RTrim( AV64Leavetypewwds_2_tfleavetypename), 100, "%");
-         lV68Leavetypewwds_6_tfleavetypecolorpending = StringUtil.PadR( StringUtil.RTrim( AV68Leavetypewwds_6_tfleavetypecolorpending), 20, "%");
-         lV70Leavetypewwds_8_tfleavetypecolorapproved = StringUtil.PadR( StringUtil.RTrim( AV70Leavetypewwds_8_tfleavetypecolorapproved), 20, "%");
          /* Using cursor H002O3 */
-         pr_default.execute(1, new Object[] {AV72Udparg10, lV63Leavetypewwds_1_filterfulltext, lV63Leavetypewwds_1_filterfulltext, lV63Leavetypewwds_1_filterfulltext, lV63Leavetypewwds_1_filterfulltext, lV63Leavetypewwds_1_filterfulltext, lV63Leavetypewwds_1_filterfulltext, lV63Leavetypewwds_1_filterfulltext, lV64Leavetypewwds_2_tfleavetypename, AV65Leavetypewwds_3_tfleavetypename_sel, lV68Leavetypewwds_6_tfleavetypecolorpending, AV69Leavetypewwds_7_tfleavetypecolorpending_sel, lV70Leavetypewwds_8_tfleavetypecolorapproved, AV71Leavetypewwds_9_tfleavetypecolorapproved_sel});
+         pr_default.execute(1, new Object[] {AV68Udparg6, lV63Leavetypewwds_1_filterfulltext, lV63Leavetypewwds_1_filterfulltext, lV63Leavetypewwds_1_filterfulltext, lV63Leavetypewwds_1_filterfulltext, lV63Leavetypewwds_1_filterfulltext, lV64Leavetypewwds_2_tfleavetypename, AV65Leavetypewwds_3_tfleavetypename_sel});
          GRID_nRecordCount = H002O3_AGRID_nRecordCount[0];
          pr_default.close(1);
          return (int)(GRID_nRecordCount) ;
@@ -1372,15 +1336,11 @@ namespace GeneXus.Programs {
          AV65Leavetypewwds_3_tfleavetypename_sel = AV34TFLeaveTypeName_Sel;
          AV66Leavetypewwds_4_tfleavetypevacationleave_sels = AV52TFLeaveTypeVacationLeave_Sels;
          AV67Leavetypewwds_5_tfleavetypeloggingworkhours_sels = AV54TFLeaveTypeLoggingWorkHours_Sels;
-         AV68Leavetypewwds_6_tfleavetypecolorpending = AV58TFLeaveTypeColorPending;
-         AV69Leavetypewwds_7_tfleavetypecolorpending_sel = AV59TFLeaveTypeColorPending_Sel;
-         AV70Leavetypewwds_8_tfleavetypecolorapproved = AV60TFLeaveTypeColorApproved;
-         AV71Leavetypewwds_9_tfleavetypecolorapproved_sel = AV61TFLeaveTypeColorApproved_Sel;
          GRID_nFirstRecordOnPage = 0;
          GxWebStd.gx_hidden_field( context, "GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV20FilterFullText, AV30ManageFiltersExecutionStep, AV25ColumnsSelector, AV62Pgmname, AV33TFLeaveTypeName, AV34TFLeaveTypeName_Sel, AV52TFLeaveTypeVacationLeave_Sels, AV54TFLeaveTypeLoggingWorkHours_Sels, AV58TFLeaveTypeColorPending, AV59TFLeaveTypeColorPending_Sel, AV60TFLeaveTypeColorApproved, AV61TFLeaveTypeColorApproved_Sel, AV17OrderedBy, AV18OrderedDsc, AV44IsAuthorized_Update, AV46IsAuthorized_Delete, AV50IsAuthorized_Insert) ;
+            gxgrGrid_refresh( subGrid_Rows, AV20FilterFullText, AV30ManageFiltersExecutionStep, AV25ColumnsSelector, AV62Pgmname, AV33TFLeaveTypeName, AV34TFLeaveTypeName_Sel, AV52TFLeaveTypeVacationLeave_Sels, AV54TFLeaveTypeLoggingWorkHours_Sels, AV17OrderedBy, AV18OrderedDsc, AV44IsAuthorized_Update, AV46IsAuthorized_Delete, AV50IsAuthorized_Insert) ;
          }
          send_integrity_footer_hashes( ) ;
          return 0 ;
@@ -1393,10 +1353,6 @@ namespace GeneXus.Programs {
          AV65Leavetypewwds_3_tfleavetypename_sel = AV34TFLeaveTypeName_Sel;
          AV66Leavetypewwds_4_tfleavetypevacationleave_sels = AV52TFLeaveTypeVacationLeave_Sels;
          AV67Leavetypewwds_5_tfleavetypeloggingworkhours_sels = AV54TFLeaveTypeLoggingWorkHours_Sels;
-         AV68Leavetypewwds_6_tfleavetypecolorpending = AV58TFLeaveTypeColorPending;
-         AV69Leavetypewwds_7_tfleavetypecolorpending_sel = AV59TFLeaveTypeColorPending_Sel;
-         AV70Leavetypewwds_8_tfleavetypecolorapproved = AV60TFLeaveTypeColorApproved;
-         AV71Leavetypewwds_9_tfleavetypecolorapproved_sel = AV61TFLeaveTypeColorApproved_Sel;
          GRID_nRecordCount = subGrid_fnc_Recordcount( );
          if ( ( GRID_nRecordCount >= subGrid_fnc_Recordsperpage( ) ) && ( GRID_nEOF == 0 ) )
          {
@@ -1410,7 +1366,7 @@ namespace GeneXus.Programs {
          GridContainer.AddObjectProperty("GRID_nFirstRecordOnPage", GRID_nFirstRecordOnPage);
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV20FilterFullText, AV30ManageFiltersExecutionStep, AV25ColumnsSelector, AV62Pgmname, AV33TFLeaveTypeName, AV34TFLeaveTypeName_Sel, AV52TFLeaveTypeVacationLeave_Sels, AV54TFLeaveTypeLoggingWorkHours_Sels, AV58TFLeaveTypeColorPending, AV59TFLeaveTypeColorPending_Sel, AV60TFLeaveTypeColorApproved, AV61TFLeaveTypeColorApproved_Sel, AV17OrderedBy, AV18OrderedDsc, AV44IsAuthorized_Update, AV46IsAuthorized_Delete, AV50IsAuthorized_Insert) ;
+            gxgrGrid_refresh( subGrid_Rows, AV20FilterFullText, AV30ManageFiltersExecutionStep, AV25ColumnsSelector, AV62Pgmname, AV33TFLeaveTypeName, AV34TFLeaveTypeName_Sel, AV52TFLeaveTypeVacationLeave_Sels, AV54TFLeaveTypeLoggingWorkHours_Sels, AV17OrderedBy, AV18OrderedDsc, AV44IsAuthorized_Update, AV46IsAuthorized_Delete, AV50IsAuthorized_Insert) ;
          }
          send_integrity_footer_hashes( ) ;
          return (short)(((GRID_nEOF==0) ? 0 : 2)) ;
@@ -1423,10 +1379,6 @@ namespace GeneXus.Programs {
          AV65Leavetypewwds_3_tfleavetypename_sel = AV34TFLeaveTypeName_Sel;
          AV66Leavetypewwds_4_tfleavetypevacationleave_sels = AV52TFLeaveTypeVacationLeave_Sels;
          AV67Leavetypewwds_5_tfleavetypeloggingworkhours_sels = AV54TFLeaveTypeLoggingWorkHours_Sels;
-         AV68Leavetypewwds_6_tfleavetypecolorpending = AV58TFLeaveTypeColorPending;
-         AV69Leavetypewwds_7_tfleavetypecolorpending_sel = AV59TFLeaveTypeColorPending_Sel;
-         AV70Leavetypewwds_8_tfleavetypecolorapproved = AV60TFLeaveTypeColorApproved;
-         AV71Leavetypewwds_9_tfleavetypecolorapproved_sel = AV61TFLeaveTypeColorApproved_Sel;
          if ( GRID_nFirstRecordOnPage >= subGrid_fnc_Recordsperpage( ) )
          {
             GRID_nFirstRecordOnPage = (long)(GRID_nFirstRecordOnPage-subGrid_fnc_Recordsperpage( ));
@@ -1438,7 +1390,7 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV20FilterFullText, AV30ManageFiltersExecutionStep, AV25ColumnsSelector, AV62Pgmname, AV33TFLeaveTypeName, AV34TFLeaveTypeName_Sel, AV52TFLeaveTypeVacationLeave_Sels, AV54TFLeaveTypeLoggingWorkHours_Sels, AV58TFLeaveTypeColorPending, AV59TFLeaveTypeColorPending_Sel, AV60TFLeaveTypeColorApproved, AV61TFLeaveTypeColorApproved_Sel, AV17OrderedBy, AV18OrderedDsc, AV44IsAuthorized_Update, AV46IsAuthorized_Delete, AV50IsAuthorized_Insert) ;
+            gxgrGrid_refresh( subGrid_Rows, AV20FilterFullText, AV30ManageFiltersExecutionStep, AV25ColumnsSelector, AV62Pgmname, AV33TFLeaveTypeName, AV34TFLeaveTypeName_Sel, AV52TFLeaveTypeVacationLeave_Sels, AV54TFLeaveTypeLoggingWorkHours_Sels, AV17OrderedBy, AV18OrderedDsc, AV44IsAuthorized_Update, AV46IsAuthorized_Delete, AV50IsAuthorized_Insert) ;
          }
          send_integrity_footer_hashes( ) ;
          return 0 ;
@@ -1451,10 +1403,6 @@ namespace GeneXus.Programs {
          AV65Leavetypewwds_3_tfleavetypename_sel = AV34TFLeaveTypeName_Sel;
          AV66Leavetypewwds_4_tfleavetypevacationleave_sels = AV52TFLeaveTypeVacationLeave_Sels;
          AV67Leavetypewwds_5_tfleavetypeloggingworkhours_sels = AV54TFLeaveTypeLoggingWorkHours_Sels;
-         AV68Leavetypewwds_6_tfleavetypecolorpending = AV58TFLeaveTypeColorPending;
-         AV69Leavetypewwds_7_tfleavetypecolorpending_sel = AV59TFLeaveTypeColorPending_Sel;
-         AV70Leavetypewwds_8_tfleavetypecolorapproved = AV60TFLeaveTypeColorApproved;
-         AV71Leavetypewwds_9_tfleavetypecolorapproved_sel = AV61TFLeaveTypeColorApproved_Sel;
          GRID_nRecordCount = subGrid_fnc_Recordcount( );
          if ( GRID_nRecordCount > subGrid_fnc_Recordsperpage( ) )
          {
@@ -1474,7 +1422,7 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV20FilterFullText, AV30ManageFiltersExecutionStep, AV25ColumnsSelector, AV62Pgmname, AV33TFLeaveTypeName, AV34TFLeaveTypeName_Sel, AV52TFLeaveTypeVacationLeave_Sels, AV54TFLeaveTypeLoggingWorkHours_Sels, AV58TFLeaveTypeColorPending, AV59TFLeaveTypeColorPending_Sel, AV60TFLeaveTypeColorApproved, AV61TFLeaveTypeColorApproved_Sel, AV17OrderedBy, AV18OrderedDsc, AV44IsAuthorized_Update, AV46IsAuthorized_Delete, AV50IsAuthorized_Insert) ;
+            gxgrGrid_refresh( subGrid_Rows, AV20FilterFullText, AV30ManageFiltersExecutionStep, AV25ColumnsSelector, AV62Pgmname, AV33TFLeaveTypeName, AV34TFLeaveTypeName_Sel, AV52TFLeaveTypeVacationLeave_Sels, AV54TFLeaveTypeLoggingWorkHours_Sels, AV17OrderedBy, AV18OrderedDsc, AV44IsAuthorized_Update, AV46IsAuthorized_Delete, AV50IsAuthorized_Insert) ;
          }
          send_integrity_footer_hashes( ) ;
          return 0 ;
@@ -1487,10 +1435,6 @@ namespace GeneXus.Programs {
          AV65Leavetypewwds_3_tfleavetypename_sel = AV34TFLeaveTypeName_Sel;
          AV66Leavetypewwds_4_tfleavetypevacationleave_sels = AV52TFLeaveTypeVacationLeave_Sels;
          AV67Leavetypewwds_5_tfleavetypeloggingworkhours_sels = AV54TFLeaveTypeLoggingWorkHours_Sels;
-         AV68Leavetypewwds_6_tfleavetypecolorpending = AV58TFLeaveTypeColorPending;
-         AV69Leavetypewwds_7_tfleavetypecolorpending_sel = AV59TFLeaveTypeColorPending_Sel;
-         AV70Leavetypewwds_8_tfleavetypecolorapproved = AV60TFLeaveTypeColorApproved;
-         AV71Leavetypewwds_9_tfleavetypecolorapproved_sel = AV61TFLeaveTypeColorApproved_Sel;
          if ( nPageNo > 0 )
          {
             GRID_nFirstRecordOnPage = (long)(subGrid_fnc_Recordsperpage( )*(nPageNo-1));
@@ -1502,7 +1446,7 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV20FilterFullText, AV30ManageFiltersExecutionStep, AV25ColumnsSelector, AV62Pgmname, AV33TFLeaveTypeName, AV34TFLeaveTypeName_Sel, AV52TFLeaveTypeVacationLeave_Sels, AV54TFLeaveTypeLoggingWorkHours_Sels, AV58TFLeaveTypeColorPending, AV59TFLeaveTypeColorPending_Sel, AV60TFLeaveTypeColorApproved, AV61TFLeaveTypeColorApproved_Sel, AV17OrderedBy, AV18OrderedDsc, AV44IsAuthorized_Update, AV46IsAuthorized_Delete, AV50IsAuthorized_Insert) ;
+            gxgrGrid_refresh( subGrid_Rows, AV20FilterFullText, AV30ManageFiltersExecutionStep, AV25ColumnsSelector, AV62Pgmname, AV33TFLeaveTypeName, AV34TFLeaveTypeName_Sel, AV52TFLeaveTypeVacationLeave_Sels, AV54TFLeaveTypeLoggingWorkHours_Sels, AV17OrderedBy, AV18OrderedDsc, AV44IsAuthorized_Update, AV46IsAuthorized_Delete, AV50IsAuthorized_Insert) ;
          }
          send_integrity_footer_hashes( ) ;
          return (int)(0) ;
@@ -1788,10 +1732,6 @@ namespace GeneXus.Programs {
          AssignProp("", false, radLeaveTypeVacationLeave_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(radLeaveTypeVacationLeave.Visible), 5, 0), !bGXsfl_41_Refreshing);
          radLeaveTypeLoggingWorkHours.Visible = (((GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector_Column)AV25ColumnsSelector.gxTpr_Columns.Item(3)).gxTpr_Isvisible ? 1 : 0);
          AssignProp("", false, radLeaveTypeLoggingWorkHours_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(radLeaveTypeLoggingWorkHours.Visible), 5, 0), !bGXsfl_41_Refreshing);
-         edtLeaveTypeColorPending_Visible = (((GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector_Column)AV25ColumnsSelector.gxTpr_Columns.Item(4)).gxTpr_Isvisible ? 1 : 0);
-         AssignProp("", false, edtLeaveTypeColorPending_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtLeaveTypeColorPending_Visible), 5, 0), !bGXsfl_41_Refreshing);
-         edtLeaveTypeColorApproved_Visible = (((GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector_Column)AV25ColumnsSelector.gxTpr_Columns.Item(5)).gxTpr_Isvisible ? 1 : 0);
-         AssignProp("", false, edtLeaveTypeColorApproved_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtLeaveTypeColorApproved_Visible), 5, 0), !bGXsfl_41_Refreshing);
          AV41GridCurrentPage = subGrid_fnc_Currentpage( );
          AssignAttri("", false, "AV41GridCurrentPage", StringUtil.LTrimStr( (decimal)(AV41GridCurrentPage), 10, 0));
          AV42GridPageCount = subGrid_fnc_Pagecount( );
@@ -1805,17 +1745,13 @@ namespace GeneXus.Programs {
          AV65Leavetypewwds_3_tfleavetypename_sel = AV34TFLeaveTypeName_Sel;
          AV66Leavetypewwds_4_tfleavetypevacationleave_sels = AV52TFLeaveTypeVacationLeave_Sels;
          AV67Leavetypewwds_5_tfleavetypeloggingworkhours_sels = AV54TFLeaveTypeLoggingWorkHours_Sels;
-         AV68Leavetypewwds_6_tfleavetypecolorpending = AV58TFLeaveTypeColorPending;
-         AV69Leavetypewwds_7_tfleavetypecolorpending_sel = AV59TFLeaveTypeColorPending_Sel;
-         AV70Leavetypewwds_8_tfleavetypecolorapproved = AV60TFLeaveTypeColorApproved;
-         AV71Leavetypewwds_9_tfleavetypecolorapproved_sel = AV61TFLeaveTypeColorApproved_Sel;
-         AV72Udparg10 = new getloggedinusercompanyid(context).executeUdp( );
-         AV72Udparg10 = new getloggedinusercompanyid(context).executeUdp( );
-         AV72Udparg10 = new getloggedinusercompanyid(context).executeUdp( );
-         AV72Udparg10 = new getloggedinusercompanyid(context).executeUdp( );
-         AV72Udparg10 = new getloggedinusercompanyid(context).executeUdp( );
-         AV72Udparg10 = new getloggedinusercompanyid(context).executeUdp( );
-         AV72Udparg10 = new getloggedinusercompanyid(context).executeUdp( );
+         AV68Udparg6 = new getloggedinusercompanyid(context).executeUdp( );
+         AV68Udparg6 = new getloggedinusercompanyid(context).executeUdp( );
+         AV68Udparg6 = new getloggedinusercompanyid(context).executeUdp( );
+         AV68Udparg6 = new getloggedinusercompanyid(context).executeUdp( );
+         AV68Udparg6 = new getloggedinusercompanyid(context).executeUdp( );
+         AV68Udparg6 = new getloggedinusercompanyid(context).executeUdp( );
+         AV68Udparg6 = new getloggedinusercompanyid(context).executeUdp( );
          /*  Sending Event outputs  */
          context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV25ColumnsSelector", AV25ColumnsSelector);
          context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV28ManageFiltersData", AV28ManageFiltersData);
@@ -1890,20 +1826,6 @@ namespace GeneXus.Programs {
                AV53TFLeaveTypeLoggingWorkHours_SelsJson = Ddo_grid_Selectedvalue_get;
                AssignAttri("", false, "AV53TFLeaveTypeLoggingWorkHours_SelsJson", AV53TFLeaveTypeLoggingWorkHours_SelsJson);
                AV54TFLeaveTypeLoggingWorkHours_Sels.FromJSonString(AV53TFLeaveTypeLoggingWorkHours_SelsJson, null);
-            }
-            else if ( StringUtil.StrCmp(Ddo_grid_Selectedcolumn, "LeaveTypeColorPending") == 0 )
-            {
-               AV58TFLeaveTypeColorPending = Ddo_grid_Filteredtext_get;
-               AssignAttri("", false, "AV58TFLeaveTypeColorPending", AV58TFLeaveTypeColorPending);
-               AV59TFLeaveTypeColorPending_Sel = Ddo_grid_Selectedvalue_get;
-               AssignAttri("", false, "AV59TFLeaveTypeColorPending_Sel", AV59TFLeaveTypeColorPending_Sel);
-            }
-            else if ( StringUtil.StrCmp(Ddo_grid_Selectedcolumn, "LeaveTypeColorApproved") == 0 )
-            {
-               AV60TFLeaveTypeColorApproved = Ddo_grid_Filteredtext_get;
-               AssignAttri("", false, "AV60TFLeaveTypeColorApproved", AV60TFLeaveTypeColorApproved);
-               AV61TFLeaveTypeColorApproved_Sel = Ddo_grid_Selectedvalue_get;
-               AssignAttri("", false, "AV61TFLeaveTypeColorApproved_Sel", AV61TFLeaveTypeColorApproved_Sel);
             }
             subgrid_firstpage( ) ;
          }
@@ -2077,8 +1999,8 @@ namespace GeneXus.Programs {
          }
          /*  Sending Event outputs  */
          context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV15GridState", AV15GridState);
-         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV54TFLeaveTypeLoggingWorkHours_Sels", AV54TFLeaveTypeLoggingWorkHours_Sels);
          context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV52TFLeaveTypeVacationLeave_Sels", AV52TFLeaveTypeVacationLeave_Sels);
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV54TFLeaveTypeLoggingWorkHours_Sels", AV54TFLeaveTypeLoggingWorkHours_Sels);
       }
 
       protected void S142( )
@@ -2097,8 +2019,6 @@ namespace GeneXus.Programs {
          new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV25ColumnsSelector,  "LeaveTypeName",  "",  "Type Name",  true,  "") ;
          new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV25ColumnsSelector,  "LeaveTypeVacationLeave",  "",  "Vacation Leave",  true,  "") ;
          new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV25ColumnsSelector,  "LeaveTypeLoggingWorkHours",  "",  "Work Hours",  true,  "") ;
-         new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV25ColumnsSelector,  "LeaveTypeColorPending",  "",  "Color Pending",  true,  "") ;
-         new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV25ColumnsSelector,  "LeaveTypeColorApproved",  "",  "Color Approved",  true,  "") ;
          GXt_char2 = AV24UserCustomValue;
          new GeneXus.Programs.wwpbaseobjects.loadcolumnsselectorstate(context ).execute(  "LeaveTypeWWColumnsSelector", out  GXt_char2) ;
          AV24UserCustomValue = GXt_char2;
@@ -2166,14 +2086,6 @@ namespace GeneXus.Programs {
          AssignAttri("", false, "AV34TFLeaveTypeName_Sel", AV34TFLeaveTypeName_Sel);
          AV52TFLeaveTypeVacationLeave_Sels = (GxSimpleCollection<string>)(new GxSimpleCollection<string>());
          AV54TFLeaveTypeLoggingWorkHours_Sels = (GxSimpleCollection<string>)(new GxSimpleCollection<string>());
-         AV58TFLeaveTypeColorPending = "";
-         AssignAttri("", false, "AV58TFLeaveTypeColorPending", AV58TFLeaveTypeColorPending);
-         AV59TFLeaveTypeColorPending_Sel = "";
-         AssignAttri("", false, "AV59TFLeaveTypeColorPending_Sel", AV59TFLeaveTypeColorPending_Sel);
-         AV60TFLeaveTypeColorApproved = "";
-         AssignAttri("", false, "AV60TFLeaveTypeColorApproved", AV60TFLeaveTypeColorApproved);
-         AV61TFLeaveTypeColorApproved_Sel = "";
-         AssignAttri("", false, "AV61TFLeaveTypeColorApproved_Sel", AV61TFLeaveTypeColorApproved_Sel);
          Ddo_grid_Selectedvalue_set = "";
          ucDdo_grid.SendProperty(context, "", false, Ddo_grid_Internalname, "SelectedValue_set", Ddo_grid_Selectedvalue_set);
          Ddo_grid_Filteredtext_set = "";
@@ -2222,10 +2134,10 @@ namespace GeneXus.Programs {
       {
          /* 'LOADREGFILTERSSTATE' Routine */
          returnInSub = false;
-         AV73GXV1 = 1;
-         while ( AV73GXV1 <= AV15GridState.gxTpr_Filtervalues.Count )
+         AV69GXV1 = 1;
+         while ( AV69GXV1 <= AV15GridState.gxTpr_Filtervalues.Count )
          {
-            AV16GridStateFilterValue = ((GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue)AV15GridState.gxTpr_Filtervalues.Item(AV73GXV1));
+            AV16GridStateFilterValue = ((GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue)AV15GridState.gxTpr_Filtervalues.Item(AV69GXV1));
             if ( StringUtil.StrCmp(AV16GridStateFilterValue.gxTpr_Name, "FILTERFULLTEXT") == 0 )
             {
                AV20FilterFullText = AV16GridStateFilterValue.gxTpr_Value;
@@ -2253,27 +2165,7 @@ namespace GeneXus.Programs {
                AssignAttri("", false, "AV53TFLeaveTypeLoggingWorkHours_SelsJson", AV53TFLeaveTypeLoggingWorkHours_SelsJson);
                AV54TFLeaveTypeLoggingWorkHours_Sels.FromJSonString(AV53TFLeaveTypeLoggingWorkHours_SelsJson, null);
             }
-            else if ( StringUtil.StrCmp(AV16GridStateFilterValue.gxTpr_Name, "TFLEAVETYPECOLORPENDING") == 0 )
-            {
-               AV58TFLeaveTypeColorPending = AV16GridStateFilterValue.gxTpr_Value;
-               AssignAttri("", false, "AV58TFLeaveTypeColorPending", AV58TFLeaveTypeColorPending);
-            }
-            else if ( StringUtil.StrCmp(AV16GridStateFilterValue.gxTpr_Name, "TFLEAVETYPECOLORPENDING_SEL") == 0 )
-            {
-               AV59TFLeaveTypeColorPending_Sel = AV16GridStateFilterValue.gxTpr_Value;
-               AssignAttri("", false, "AV59TFLeaveTypeColorPending_Sel", AV59TFLeaveTypeColorPending_Sel);
-            }
-            else if ( StringUtil.StrCmp(AV16GridStateFilterValue.gxTpr_Name, "TFLEAVETYPECOLORAPPROVED") == 0 )
-            {
-               AV60TFLeaveTypeColorApproved = AV16GridStateFilterValue.gxTpr_Value;
-               AssignAttri("", false, "AV60TFLeaveTypeColorApproved", AV60TFLeaveTypeColorApproved);
-            }
-            else if ( StringUtil.StrCmp(AV16GridStateFilterValue.gxTpr_Name, "TFLEAVETYPECOLORAPPROVED_SEL") == 0 )
-            {
-               AV61TFLeaveTypeColorApproved_Sel = AV16GridStateFilterValue.gxTpr_Value;
-               AssignAttri("", false, "AV61TFLeaveTypeColorApproved_Sel", AV61TFLeaveTypeColorApproved_Sel);
-            }
-            AV73GXV1 = (int)(AV73GXV1+1);
+            AV69GXV1 = (int)(AV69GXV1+1);
          }
          GXt_char2 = "";
          new GeneXus.Programs.wwpbaseobjects.wwp_getfilterval(context ).execute(  String.IsNullOrEmpty(StringUtil.RTrim( AV34TFLeaveTypeName_Sel)),  AV34TFLeaveTypeName_Sel, out  GXt_char2) ;
@@ -2281,19 +2173,11 @@ namespace GeneXus.Programs {
          new GeneXus.Programs.wwpbaseobjects.wwp_getfilterval(context ).execute(  (AV52TFLeaveTypeVacationLeave_Sels.Count==0),  AV51TFLeaveTypeVacationLeave_SelsJson, out  GXt_char5) ;
          GXt_char6 = "";
          new GeneXus.Programs.wwpbaseobjects.wwp_getfilterval(context ).execute(  (AV54TFLeaveTypeLoggingWorkHours_Sels.Count==0),  AV53TFLeaveTypeLoggingWorkHours_SelsJson, out  GXt_char6) ;
-         GXt_char7 = "";
-         new GeneXus.Programs.wwpbaseobjects.wwp_getfilterval(context ).execute(  String.IsNullOrEmpty(StringUtil.RTrim( AV59TFLeaveTypeColorPending_Sel)),  AV59TFLeaveTypeColorPending_Sel, out  GXt_char7) ;
-         GXt_char8 = "";
-         new GeneXus.Programs.wwpbaseobjects.wwp_getfilterval(context ).execute(  String.IsNullOrEmpty(StringUtil.RTrim( AV61TFLeaveTypeColorApproved_Sel)),  AV61TFLeaveTypeColorApproved_Sel, out  GXt_char8) ;
-         Ddo_grid_Selectedvalue_set = GXt_char2+"|"+GXt_char5+"|"+GXt_char6+"|"+GXt_char7+"|"+GXt_char8;
+         Ddo_grid_Selectedvalue_set = GXt_char2+"|"+GXt_char5+"|"+GXt_char6;
          ucDdo_grid.SendProperty(context, "", false, Ddo_grid_Internalname, "SelectedValue_set", Ddo_grid_Selectedvalue_set);
-         GXt_char8 = "";
-         new GeneXus.Programs.wwpbaseobjects.wwp_getfilterval(context ).execute(  String.IsNullOrEmpty(StringUtil.RTrim( AV33TFLeaveTypeName)),  AV33TFLeaveTypeName, out  GXt_char8) ;
-         GXt_char7 = "";
-         new GeneXus.Programs.wwpbaseobjects.wwp_getfilterval(context ).execute(  String.IsNullOrEmpty(StringUtil.RTrim( AV58TFLeaveTypeColorPending)),  AV58TFLeaveTypeColorPending, out  GXt_char7) ;
          GXt_char6 = "";
-         new GeneXus.Programs.wwpbaseobjects.wwp_getfilterval(context ).execute(  String.IsNullOrEmpty(StringUtil.RTrim( AV60TFLeaveTypeColorApproved)),  AV60TFLeaveTypeColorApproved, out  GXt_char6) ;
-         Ddo_grid_Filteredtext_set = GXt_char8+"|||"+GXt_char7+"|"+GXt_char6;
+         new GeneXus.Programs.wwpbaseobjects.wwp_getfilterval(context ).execute(  String.IsNullOrEmpty(StringUtil.RTrim( AV33TFLeaveTypeName)),  AV33TFLeaveTypeName, out  GXt_char6) ;
+         Ddo_grid_Filteredtext_set = GXt_char6+"||";
          ucDdo_grid.SendProperty(context, "", false, Ddo_grid_Internalname, "FilteredText_set", Ddo_grid_Filteredtext_set);
       }
 
@@ -2311,8 +2195,6 @@ namespace GeneXus.Programs {
          new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV15GridState,  "TFLEAVETYPEVACATIONLEAVE_SEL",  "Vacation Leave",  !(AV52TFLeaveTypeVacationLeave_Sels.Count==0),  0,  AV52TFLeaveTypeVacationLeave_Sels.ToJSonString(false),  ((StringUtil.StrCmp(AV55AuxText, "")==0) ? "" : StringUtil.StringReplace( StringUtil.StringReplace( AV55AuxText, "[No]", "No"), "[Yes]", "Yes")),  false,  "",  "") ;
          AV55AuxText = ((AV54TFLeaveTypeLoggingWorkHours_Sels.Count==1) ? "["+AV54TFLeaveTypeLoggingWorkHours_Sels.GetString(1)+"]" : "multiple values");
          new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV15GridState,  "TFLEAVETYPELOGGINGWORKHOURS_SEL",  "Work Hours",  !(AV54TFLeaveTypeLoggingWorkHours_Sels.Count==0),  0,  AV54TFLeaveTypeLoggingWorkHours_Sels.ToJSonString(false),  ((StringUtil.StrCmp(AV55AuxText, "")==0) ? "" : StringUtil.StringReplace( StringUtil.StringReplace( AV55AuxText, "[No]", "No"), "[Yes]", "Yes")),  false,  "",  "") ;
-         new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalueandsel(context ).execute( ref  AV15GridState,  "TFLEAVETYPECOLORPENDING",  "Color Pending",  !String.IsNullOrEmpty(StringUtil.RTrim( AV58TFLeaveTypeColorPending)),  0,  AV58TFLeaveTypeColorPending,  AV58TFLeaveTypeColorPending,  false,  "",  "",  !String.IsNullOrEmpty(StringUtil.RTrim( AV59TFLeaveTypeColorPending_Sel)),  AV59TFLeaveTypeColorPending_Sel,  AV59TFLeaveTypeColorPending_Sel) ;
-         new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalueandsel(context ).execute( ref  AV15GridState,  "TFLEAVETYPECOLORAPPROVED",  "Color Approved",  !String.IsNullOrEmpty(StringUtil.RTrim( AV60TFLeaveTypeColorApproved)),  0,  AV60TFLeaveTypeColorApproved,  AV60TFLeaveTypeColorApproved,  false,  "",  "",  !String.IsNullOrEmpty(StringUtil.RTrim( AV61TFLeaveTypeColorApproved_Sel)),  AV61TFLeaveTypeColorApproved_Sel,  AV61TFLeaveTypeColorApproved_Sel) ;
          AV15GridState.gxTpr_Pagesize = StringUtil.Str( (decimal)(subGrid_Rows), 10, 0);
          AV15GridState.gxTpr_Currentpage = (short)(subGrid_fnc_Currentpage( ));
          new GeneXus.Programs.wwpbaseobjects.savegridstate(context ).execute(  AV62Pgmname+"GridState",  AV15GridState.ToXml(false, true, "", "")) ;
@@ -2466,7 +2348,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20246131128359", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202461314544228", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2482,7 +2364,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("leavetypeww.js", "?20246131128360", false, true);
+         context.AddJavascriptSource("leavetypeww.js", "?202461314544230", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -2661,19 +2543,19 @@ namespace GeneXus.Programs {
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
-               context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+((edtLeaveTypeColorPending_Visible==0) ? "display:none;" : "")+"\">") ;
+               context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+"display:none;"+"\">") ;
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtLeaveTypeColorPending_Internalname,StringUtil.RTrim( A174LeaveTypeColorPending),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtLeaveTypeColorPending_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn hidden-xs",(string)"",(int)edtLeaveTypeColorPending_Visible,(short)0,(short)0,(string)"color",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)0,(short)41,(short)0,(short)-1,(short)-1,(bool)true,(string)"Color",(string)"start",(bool)true,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtLeaveTypeColorPending_Internalname,StringUtil.RTrim( A174LeaveTypeColorPending),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtLeaveTypeColorPending_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn hidden-xs",(string)"",(short)0,(short)0,(short)0,(string)"color",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)0,(short)41,(short)0,(short)-1,(short)-1,(bool)true,(string)"Color",(string)"start",(bool)true,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
-               context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+((edtLeaveTypeColorApproved_Visible==0) ? "display:none;" : "")+"\">") ;
+               context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+"display:none;"+"\">") ;
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtLeaveTypeColorApproved_Internalname,StringUtil.RTrim( A175LeaveTypeColorApproved),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtLeaveTypeColorApproved_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn hidden-xs",(string)"",(int)edtLeaveTypeColorApproved_Visible,(short)0,(short)0,(string)"color",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)0,(short)41,(short)0,(short)-1,(short)-1,(bool)true,(string)"Color",(string)"start",(bool)true,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtLeaveTypeColorApproved_Internalname,StringUtil.RTrim( A175LeaveTypeColorApproved),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtLeaveTypeColorApproved_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn hidden-xs",(string)"",(short)0,(short)0,(short)0,(string)"color",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)0,(short)41,(short)0,(short)-1,(short)-1,(bool)true,(string)"Color",(string)"start",(bool)true,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -2761,11 +2643,11 @@ namespace GeneXus.Programs {
             context.WriteHtmlText( "<th align=\""+"start"+"\" "+" nowrap=\"nowrap\" "+" class=\""+"Attribute"+"\" "+" style=\""+((radLeaveTypeLoggingWorkHours.Visible==0) ? "display:none;" : "")+""+"\" "+">") ;
             context.SendWebValue( "Work Hours") ;
             context.WriteHtmlTextNl( "</th>") ;
-            context.WriteHtmlText( "<th align=\""+"start"+"\" "+" nowrap=\"nowrap\" "+" class=\""+"Attribute"+"\" "+" style=\""+((edtLeaveTypeColorPending_Visible==0) ? "display:none;" : "")+""+"\" "+">") ;
-            context.SendWebValue( "Color Pending") ;
+            context.WriteHtmlText( "<th align=\""+"start"+"\" "+" nowrap=\"nowrap\" "+" class=\""+"Attribute"+"\" "+" style=\""+"display:none;"+""+"\" "+">") ;
+            context.SendWebValue( "") ;
             context.WriteHtmlTextNl( "</th>") ;
-            context.WriteHtmlText( "<th align=\""+"start"+"\" "+" nowrap=\"nowrap\" "+" class=\""+"Attribute"+"\" "+" style=\""+((edtLeaveTypeColorApproved_Visible==0) ? "display:none;" : "")+""+"\" "+">") ;
-            context.SendWebValue( "Color Approved") ;
+            context.WriteHtmlText( "<th align=\""+"start"+"\" "+" nowrap=\"nowrap\" "+" class=\""+"Attribute"+"\" "+" style=\""+"display:none;"+""+"\" "+">") ;
+            context.SendWebValue( "") ;
             context.WriteHtmlTextNl( "</th>") ;
             context.WriteHtmlText( "<th align=\""+"end"+"\" "+" nowrap=\"nowrap\" "+" class=\""+"Attribute"+"\" "+" style=\""+"display:none;"+""+"\" "+">") ;
             context.SendWebValue( "") ;
@@ -2822,11 +2704,9 @@ namespace GeneXus.Programs {
             GridContainer.AddColumnProperties(GridColumn);
             GridColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
             GridColumn.AddObjectProperty("Value", GXUtil.ValueEncode( StringUtil.RTrim( A174LeaveTypeColorPending)));
-            GridColumn.AddObjectProperty("Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtLeaveTypeColorPending_Visible), 5, 0, ".", "")));
             GridContainer.AddColumnProperties(GridColumn);
             GridColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
             GridColumn.AddObjectProperty("Value", GXUtil.ValueEncode( StringUtil.RTrim( A175LeaveTypeColorApproved)));
-            GridColumn.AddObjectProperty("Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtLeaveTypeColorApproved_Visible), 5, 0, ".", "")));
             GridContainer.AddColumnProperties(GridColumn);
             GridColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
             GridColumn.AddObjectProperty("Value", GXUtil.ValueEncode( StringUtil.LTrim( StringUtil.NToC( (decimal)(A100CompanyId), 10, 0, ".", ""))));
@@ -2905,8 +2785,6 @@ namespace GeneXus.Programs {
          edtavFilterfulltext_Enabled = 1;
          edtavDelete_Visible = -1;
          edtavUpdate_Visible = -1;
-         edtLeaveTypeColorApproved_Visible = -1;
-         edtLeaveTypeColorPending_Visible = -1;
          radLeaveTypeLoggingWorkHours.Visible = -1;
          radLeaveTypeVacationLeave.Visible = -1;
          edtLeaveTypeName_Visible = -1;
@@ -2930,16 +2808,16 @@ namespace GeneXus.Programs {
          Ddo_gridcolumnsselector_Icon = "fas fa-cog";
          Ddo_gridcolumnsselector_Icontype = "FontIcon";
          Ddo_grid_Datalistproc = "LeaveTypeWWGetFilterData";
-         Ddo_grid_Datalistfixedvalues = "|No:No,Yes:Yes|No:No,Yes:Yes||";
-         Ddo_grid_Allowmultipleselection = "|T|T||";
-         Ddo_grid_Datalisttype = "Dynamic|FixedValues|FixedValues|Dynamic|Dynamic";
+         Ddo_grid_Datalistfixedvalues = "|No:No,Yes:Yes|No:No,Yes:Yes";
+         Ddo_grid_Allowmultipleselection = "|T|T";
+         Ddo_grid_Datalisttype = "Dynamic|FixedValues|FixedValues";
          Ddo_grid_Includedatalist = "T";
-         Ddo_grid_Filtertype = "Character|||Character|Character";
-         Ddo_grid_Includefilter = "T|||T|T";
+         Ddo_grid_Filtertype = "Character||";
+         Ddo_grid_Includefilter = "T||";
          Ddo_grid_Fixable = "T";
          Ddo_grid_Includesortasc = "T";
-         Ddo_grid_Columnssortvalues = "1|2|3|4|5";
-         Ddo_grid_Columnids = "3:LeaveTypeName|4:LeaveTypeVacationLeave|5:LeaveTypeLoggingWorkHours|6:LeaveTypeColorPending|7:LeaveTypeColorApproved";
+         Ddo_grid_Columnssortvalues = "1|2|3";
+         Ddo_grid_Columnids = "3:LeaveTypeName|4:LeaveTypeVacationLeave|5:LeaveTypeLoggingWorkHours";
          Ddo_grid_Gridinternalname = "";
          Ddo_agexport_Titlecontrolidtoreplace = "";
          Ddo_agexport_Cls = "ColumnsSelector";
@@ -2986,24 +2864,24 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV20FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV62Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV33TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV34TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV52TFLeaveTypeVacationLeave_Sels',fld:'vTFLEAVETYPEVACATIONLEAVE_SELS',pic:''},{av:'AV54TFLeaveTypeLoggingWorkHours_Sels',fld:'vTFLEAVETYPELOGGINGWORKHOURS_SELS',pic:''},{av:'AV58TFLeaveTypeColorPending',fld:'vTFLEAVETYPECOLORPENDING',pic:''},{av:'AV59TFLeaveTypeColorPending_Sel',fld:'vTFLEAVETYPECOLORPENDING_SEL',pic:''},{av:'AV60TFLeaveTypeColorApproved',fld:'vTFLEAVETYPECOLORAPPROVED',pic:''},{av:'AV61TFLeaveTypeColorApproved_Sel',fld:'vTFLEAVETYPECOLORAPPROVED_SEL',pic:''},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV44IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV46IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV50IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true}]");
-         setEventMetadata("REFRESH",",oparms:[{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'edtLeaveTypeName_Visible',ctrl:'LEAVETYPENAME',prop:'Visible'},{av:'radLeaveTypeVacationLeave'},{av:'radLeaveTypeLoggingWorkHours'},{av:'edtLeaveTypeColorPending_Visible',ctrl:'LEAVETYPECOLORPENDING',prop:'Visible'},{av:'edtLeaveTypeColorApproved_Visible',ctrl:'LEAVETYPECOLORAPPROVED',prop:'Visible'},{av:'AV41GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV42GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV9GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'AV44IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'edtavUpdate_Visible',ctrl:'vUPDATE',prop:'Visible'},{av:'AV46IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'edtavDelete_Visible',ctrl:'vDELETE',prop:'Visible'},{av:'AV50IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{ctrl:'BTNINSERT',prop:'Visible'},{av:'AV28ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''},{av:'AV15GridState',fld:'vGRIDSTATE',pic:''}]}");
-         setEventMetadata("GRIDPAGINATIONBAR.CHANGEPAGE","{handler:'E122O2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV20FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV62Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV33TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV34TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV52TFLeaveTypeVacationLeave_Sels',fld:'vTFLEAVETYPEVACATIONLEAVE_SELS',pic:''},{av:'AV54TFLeaveTypeLoggingWorkHours_Sels',fld:'vTFLEAVETYPELOGGINGWORKHOURS_SELS',pic:''},{av:'AV58TFLeaveTypeColorPending',fld:'vTFLEAVETYPECOLORPENDING',pic:''},{av:'AV59TFLeaveTypeColorPending_Sel',fld:'vTFLEAVETYPECOLORPENDING_SEL',pic:''},{av:'AV60TFLeaveTypeColorApproved',fld:'vTFLEAVETYPECOLORAPPROVED',pic:''},{av:'AV61TFLeaveTypeColorApproved_Sel',fld:'vTFLEAVETYPECOLORAPPROVED_SEL',pic:''},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV44IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV46IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV50IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'Gridpaginationbar_Selectedpage',ctrl:'GRIDPAGINATIONBAR',prop:'SelectedPage'}]");
+         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV20FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV62Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV33TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV34TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV52TFLeaveTypeVacationLeave_Sels',fld:'vTFLEAVETYPEVACATIONLEAVE_SELS',pic:''},{av:'AV54TFLeaveTypeLoggingWorkHours_Sels',fld:'vTFLEAVETYPELOGGINGWORKHOURS_SELS',pic:''},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV44IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV46IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV50IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true}]");
+         setEventMetadata("REFRESH",",oparms:[{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'edtLeaveTypeName_Visible',ctrl:'LEAVETYPENAME',prop:'Visible'},{av:'radLeaveTypeVacationLeave'},{av:'radLeaveTypeLoggingWorkHours'},{av:'AV41GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV42GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV9GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'AV44IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'edtavUpdate_Visible',ctrl:'vUPDATE',prop:'Visible'},{av:'AV46IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'edtavDelete_Visible',ctrl:'vDELETE',prop:'Visible'},{av:'AV50IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{ctrl:'BTNINSERT',prop:'Visible'},{av:'AV28ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''},{av:'AV15GridState',fld:'vGRIDSTATE',pic:''}]}");
+         setEventMetadata("GRIDPAGINATIONBAR.CHANGEPAGE","{handler:'E122O2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV20FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV62Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV33TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV34TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV52TFLeaveTypeVacationLeave_Sels',fld:'vTFLEAVETYPEVACATIONLEAVE_SELS',pic:''},{av:'AV54TFLeaveTypeLoggingWorkHours_Sels',fld:'vTFLEAVETYPELOGGINGWORKHOURS_SELS',pic:''},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV44IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV46IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV50IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'Gridpaginationbar_Selectedpage',ctrl:'GRIDPAGINATIONBAR',prop:'SelectedPage'}]");
          setEventMetadata("GRIDPAGINATIONBAR.CHANGEPAGE",",oparms:[]}");
-         setEventMetadata("GRIDPAGINATIONBAR.CHANGEROWSPERPAGE","{handler:'E132O2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV20FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV62Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV33TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV34TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV52TFLeaveTypeVacationLeave_Sels',fld:'vTFLEAVETYPEVACATIONLEAVE_SELS',pic:''},{av:'AV54TFLeaveTypeLoggingWorkHours_Sels',fld:'vTFLEAVETYPELOGGINGWORKHOURS_SELS',pic:''},{av:'AV58TFLeaveTypeColorPending',fld:'vTFLEAVETYPECOLORPENDING',pic:''},{av:'AV59TFLeaveTypeColorPending_Sel',fld:'vTFLEAVETYPECOLORPENDING_SEL',pic:''},{av:'AV60TFLeaveTypeColorApproved',fld:'vTFLEAVETYPECOLORAPPROVED',pic:''},{av:'AV61TFLeaveTypeColorApproved_Sel',fld:'vTFLEAVETYPECOLORAPPROVED_SEL',pic:''},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV44IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV46IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV50IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'Gridpaginationbar_Rowsperpageselectedvalue',ctrl:'GRIDPAGINATIONBAR',prop:'RowsPerPageSelectedValue'}]");
+         setEventMetadata("GRIDPAGINATIONBAR.CHANGEROWSPERPAGE","{handler:'E132O2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV20FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV62Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV33TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV34TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV52TFLeaveTypeVacationLeave_Sels',fld:'vTFLEAVETYPEVACATIONLEAVE_SELS',pic:''},{av:'AV54TFLeaveTypeLoggingWorkHours_Sels',fld:'vTFLEAVETYPELOGGINGWORKHOURS_SELS',pic:''},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV44IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV46IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV50IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'Gridpaginationbar_Rowsperpageselectedvalue',ctrl:'GRIDPAGINATIONBAR',prop:'RowsPerPageSelectedValue'}]");
          setEventMetadata("GRIDPAGINATIONBAR.CHANGEROWSPERPAGE",",oparms:[{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'}]}");
-         setEventMetadata("DDO_GRID.ONOPTIONCLICKED","{handler:'E152O2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV20FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV62Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV33TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV34TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV52TFLeaveTypeVacationLeave_Sels',fld:'vTFLEAVETYPEVACATIONLEAVE_SELS',pic:''},{av:'AV54TFLeaveTypeLoggingWorkHours_Sels',fld:'vTFLEAVETYPELOGGINGWORKHOURS_SELS',pic:''},{av:'AV58TFLeaveTypeColorPending',fld:'vTFLEAVETYPECOLORPENDING',pic:''},{av:'AV59TFLeaveTypeColorPending_Sel',fld:'vTFLEAVETYPECOLORPENDING_SEL',pic:''},{av:'AV60TFLeaveTypeColorApproved',fld:'vTFLEAVETYPECOLORAPPROVED',pic:''},{av:'AV61TFLeaveTypeColorApproved_Sel',fld:'vTFLEAVETYPECOLORAPPROVED_SEL',pic:''},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV44IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV46IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV50IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'Ddo_grid_Activeeventkey',ctrl:'DDO_GRID',prop:'ActiveEventKey'},{av:'Ddo_grid_Selectedvalue_get',ctrl:'DDO_GRID',prop:'SelectedValue_get'},{av:'Ddo_grid_Selectedcolumn',ctrl:'DDO_GRID',prop:'SelectedColumn'},{av:'Ddo_grid_Filteredtext_get',ctrl:'DDO_GRID',prop:'FilteredText_get'}]");
-         setEventMetadata("DDO_GRID.ONOPTIONCLICKED",",oparms:[{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV33TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV34TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV51TFLeaveTypeVacationLeave_SelsJson',fld:'vTFLEAVETYPEVACATIONLEAVE_SELSJSON',pic:''},{av:'AV52TFLeaveTypeVacationLeave_Sels',fld:'vTFLEAVETYPEVACATIONLEAVE_SELS',pic:''},{av:'AV53TFLeaveTypeLoggingWorkHours_SelsJson',fld:'vTFLEAVETYPELOGGINGWORKHOURS_SELSJSON',pic:''},{av:'AV54TFLeaveTypeLoggingWorkHours_Sels',fld:'vTFLEAVETYPELOGGINGWORKHOURS_SELS',pic:''},{av:'AV58TFLeaveTypeColorPending',fld:'vTFLEAVETYPECOLORPENDING',pic:''},{av:'AV59TFLeaveTypeColorPending_Sel',fld:'vTFLEAVETYPECOLORPENDING_SEL',pic:''},{av:'AV60TFLeaveTypeColorApproved',fld:'vTFLEAVETYPECOLORAPPROVED',pic:''},{av:'AV61TFLeaveTypeColorApproved_Sel',fld:'vTFLEAVETYPECOLORAPPROVED_SEL',pic:''},{av:'Ddo_grid_Sortedstatus',ctrl:'DDO_GRID',prop:'SortedStatus'}]}");
+         setEventMetadata("DDO_GRID.ONOPTIONCLICKED","{handler:'E152O2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV20FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV62Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV33TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV34TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV52TFLeaveTypeVacationLeave_Sels',fld:'vTFLEAVETYPEVACATIONLEAVE_SELS',pic:''},{av:'AV54TFLeaveTypeLoggingWorkHours_Sels',fld:'vTFLEAVETYPELOGGINGWORKHOURS_SELS',pic:''},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV44IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV46IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV50IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'Ddo_grid_Activeeventkey',ctrl:'DDO_GRID',prop:'ActiveEventKey'},{av:'Ddo_grid_Selectedvalue_get',ctrl:'DDO_GRID',prop:'SelectedValue_get'},{av:'Ddo_grid_Selectedcolumn',ctrl:'DDO_GRID',prop:'SelectedColumn'},{av:'Ddo_grid_Filteredtext_get',ctrl:'DDO_GRID',prop:'FilteredText_get'}]");
+         setEventMetadata("DDO_GRID.ONOPTIONCLICKED",",oparms:[{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV33TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV34TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV51TFLeaveTypeVacationLeave_SelsJson',fld:'vTFLEAVETYPEVACATIONLEAVE_SELSJSON',pic:''},{av:'AV52TFLeaveTypeVacationLeave_Sels',fld:'vTFLEAVETYPEVACATIONLEAVE_SELS',pic:''},{av:'AV53TFLeaveTypeLoggingWorkHours_SelsJson',fld:'vTFLEAVETYPELOGGINGWORKHOURS_SELSJSON',pic:''},{av:'AV54TFLeaveTypeLoggingWorkHours_Sels',fld:'vTFLEAVETYPELOGGINGWORKHOURS_SELS',pic:''},{av:'Ddo_grid_Sortedstatus',ctrl:'DDO_GRID',prop:'SortedStatus'}]}");
          setEventMetadata("GRID.LOAD","{handler:'E202O2',iparms:[{av:'AV44IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'A124LeaveTypeId',fld:'LEAVETYPEID',pic:'ZZZZZZZZZ9',hsh:true},{av:'AV46IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true}]");
          setEventMetadata("GRID.LOAD",",oparms:[{av:'AV43Update',fld:'vUPDATE',pic:''},{av:'edtavUpdate_Link',ctrl:'vUPDATE',prop:'Link'},{av:'AV45Delete',fld:'vDELETE',pic:''},{av:'edtavDelete_Link',ctrl:'vDELETE',prop:'Link'}]}");
-         setEventMetadata("DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED","{handler:'E162O2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV20FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV62Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV33TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV34TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV52TFLeaveTypeVacationLeave_Sels',fld:'vTFLEAVETYPEVACATIONLEAVE_SELS',pic:''},{av:'AV54TFLeaveTypeLoggingWorkHours_Sels',fld:'vTFLEAVETYPELOGGINGWORKHOURS_SELS',pic:''},{av:'AV58TFLeaveTypeColorPending',fld:'vTFLEAVETYPECOLORPENDING',pic:''},{av:'AV59TFLeaveTypeColorPending_Sel',fld:'vTFLEAVETYPECOLORPENDING_SEL',pic:''},{av:'AV60TFLeaveTypeColorApproved',fld:'vTFLEAVETYPECOLORAPPROVED',pic:''},{av:'AV61TFLeaveTypeColorApproved_Sel',fld:'vTFLEAVETYPECOLORAPPROVED_SEL',pic:''},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV44IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV46IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV50IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'Ddo_gridcolumnsselector_Columnsselectorvalues',ctrl:'DDO_GRIDCOLUMNSSELECTOR',prop:'ColumnsSelectorValues'}]");
-         setEventMetadata("DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED",",oparms:[{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'edtLeaveTypeName_Visible',ctrl:'LEAVETYPENAME',prop:'Visible'},{av:'radLeaveTypeVacationLeave'},{av:'radLeaveTypeLoggingWorkHours'},{av:'edtLeaveTypeColorPending_Visible',ctrl:'LEAVETYPECOLORPENDING',prop:'Visible'},{av:'edtLeaveTypeColorApproved_Visible',ctrl:'LEAVETYPECOLORAPPROVED',prop:'Visible'},{av:'AV41GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV42GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV9GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'AV44IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'edtavUpdate_Visible',ctrl:'vUPDATE',prop:'Visible'},{av:'AV46IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'edtavDelete_Visible',ctrl:'vDELETE',prop:'Visible'},{av:'AV50IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{ctrl:'BTNINSERT',prop:'Visible'},{av:'AV28ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''},{av:'AV15GridState',fld:'vGRIDSTATE',pic:''}]}");
-         setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED","{handler:'E112O2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV20FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV62Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV33TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV34TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV52TFLeaveTypeVacationLeave_Sels',fld:'vTFLEAVETYPEVACATIONLEAVE_SELS',pic:''},{av:'AV54TFLeaveTypeLoggingWorkHours_Sels',fld:'vTFLEAVETYPELOGGINGWORKHOURS_SELS',pic:''},{av:'AV58TFLeaveTypeColorPending',fld:'vTFLEAVETYPECOLORPENDING',pic:''},{av:'AV59TFLeaveTypeColorPending_Sel',fld:'vTFLEAVETYPECOLORPENDING_SEL',pic:''},{av:'AV60TFLeaveTypeColorApproved',fld:'vTFLEAVETYPECOLORAPPROVED',pic:''},{av:'AV61TFLeaveTypeColorApproved_Sel',fld:'vTFLEAVETYPECOLORAPPROVED_SEL',pic:''},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV44IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV46IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV50IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'Ddo_managefilters_Activeeventkey',ctrl:'DDO_MANAGEFILTERS',prop:'ActiveEventKey'},{av:'AV15GridState',fld:'vGRIDSTATE',pic:''},{av:'AV51TFLeaveTypeVacationLeave_SelsJson',fld:'vTFLEAVETYPEVACATIONLEAVE_SELSJSON',pic:''},{av:'AV53TFLeaveTypeLoggingWorkHours_SelsJson',fld:'vTFLEAVETYPELOGGINGWORKHOURS_SELSJSON',pic:''}]");
-         setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED",",oparms:[{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV15GridState',fld:'vGRIDSTATE',pic:''},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV20FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV33TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV34TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV52TFLeaveTypeVacationLeave_Sels',fld:'vTFLEAVETYPEVACATIONLEAVE_SELS',pic:''},{av:'AV54TFLeaveTypeLoggingWorkHours_Sels',fld:'vTFLEAVETYPELOGGINGWORKHOURS_SELS',pic:''},{av:'AV58TFLeaveTypeColorPending',fld:'vTFLEAVETYPECOLORPENDING',pic:''},{av:'AV59TFLeaveTypeColorPending_Sel',fld:'vTFLEAVETYPECOLORPENDING_SEL',pic:''},{av:'AV60TFLeaveTypeColorApproved',fld:'vTFLEAVETYPECOLORAPPROVED',pic:''},{av:'AV61TFLeaveTypeColorApproved_Sel',fld:'vTFLEAVETYPECOLORAPPROVED_SEL',pic:''},{av:'Ddo_grid_Selectedvalue_set',ctrl:'DDO_GRID',prop:'SelectedValue_set'},{av:'Ddo_grid_Filteredtext_set',ctrl:'DDO_GRID',prop:'FilteredText_set'},{av:'Ddo_grid_Sortedstatus',ctrl:'DDO_GRID',prop:'SortedStatus'},{av:'AV53TFLeaveTypeLoggingWorkHours_SelsJson',fld:'vTFLEAVETYPELOGGINGWORKHOURS_SELSJSON',pic:''},{av:'AV51TFLeaveTypeVacationLeave_SelsJson',fld:'vTFLEAVETYPEVACATIONLEAVE_SELSJSON',pic:''},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'edtLeaveTypeName_Visible',ctrl:'LEAVETYPENAME',prop:'Visible'},{av:'radLeaveTypeVacationLeave'},{av:'radLeaveTypeLoggingWorkHours'},{av:'edtLeaveTypeColorPending_Visible',ctrl:'LEAVETYPECOLORPENDING',prop:'Visible'},{av:'edtLeaveTypeColorApproved_Visible',ctrl:'LEAVETYPECOLORAPPROVED',prop:'Visible'},{av:'AV41GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV42GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV9GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'AV44IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'edtavUpdate_Visible',ctrl:'vUPDATE',prop:'Visible'},{av:'AV46IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'edtavDelete_Visible',ctrl:'vDELETE',prop:'Visible'},{av:'AV50IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{ctrl:'BTNINSERT',prop:'Visible'},{av:'AV28ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''}]}");
-         setEventMetadata("'DOINSERT'","{handler:'E172O2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV20FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV62Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV33TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV34TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV52TFLeaveTypeVacationLeave_Sels',fld:'vTFLEAVETYPEVACATIONLEAVE_SELS',pic:''},{av:'AV54TFLeaveTypeLoggingWorkHours_Sels',fld:'vTFLEAVETYPELOGGINGWORKHOURS_SELS',pic:''},{av:'AV58TFLeaveTypeColorPending',fld:'vTFLEAVETYPECOLORPENDING',pic:''},{av:'AV59TFLeaveTypeColorPending_Sel',fld:'vTFLEAVETYPECOLORPENDING_SEL',pic:''},{av:'AV60TFLeaveTypeColorApproved',fld:'vTFLEAVETYPECOLORAPPROVED',pic:''},{av:'AV61TFLeaveTypeColorApproved_Sel',fld:'vTFLEAVETYPECOLORAPPROVED_SEL',pic:''},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV44IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV46IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV50IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'A124LeaveTypeId',fld:'LEAVETYPEID',pic:'ZZZZZZZZZ9',hsh:true}]");
-         setEventMetadata("'DOINSERT'",",oparms:[{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'edtLeaveTypeName_Visible',ctrl:'LEAVETYPENAME',prop:'Visible'},{av:'radLeaveTypeVacationLeave'},{av:'radLeaveTypeLoggingWorkHours'},{av:'edtLeaveTypeColorPending_Visible',ctrl:'LEAVETYPECOLORPENDING',prop:'Visible'},{av:'edtLeaveTypeColorApproved_Visible',ctrl:'LEAVETYPECOLORAPPROVED',prop:'Visible'},{av:'AV41GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV42GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV9GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'AV44IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'edtavUpdate_Visible',ctrl:'vUPDATE',prop:'Visible'},{av:'AV46IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'edtavDelete_Visible',ctrl:'vDELETE',prop:'Visible'},{av:'AV50IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{ctrl:'BTNINSERT',prop:'Visible'},{av:'AV28ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''},{av:'AV15GridState',fld:'vGRIDSTATE',pic:''}]}");
-         setEventMetadata("DDO_AGEXPORT.ONOPTIONCLICKED","{handler:'E142O2',iparms:[{av:'Ddo_agexport_Activeeventkey',ctrl:'DDO_AGEXPORT',prop:'ActiveEventKey'},{av:'AV62Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV15GridState',fld:'vGRIDSTATE',pic:''},{av:'AV34TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV52TFLeaveTypeVacationLeave_Sels',fld:'vTFLEAVETYPEVACATIONLEAVE_SELS',pic:''},{av:'AV51TFLeaveTypeVacationLeave_SelsJson',fld:'vTFLEAVETYPEVACATIONLEAVE_SELSJSON',pic:''},{av:'AV54TFLeaveTypeLoggingWorkHours_Sels',fld:'vTFLEAVETYPELOGGINGWORKHOURS_SELS',pic:''},{av:'AV53TFLeaveTypeLoggingWorkHours_SelsJson',fld:'vTFLEAVETYPELOGGINGWORKHOURS_SELSJSON',pic:''},{av:'AV59TFLeaveTypeColorPending_Sel',fld:'vTFLEAVETYPECOLORPENDING_SEL',pic:''},{av:'AV61TFLeaveTypeColorApproved_Sel',fld:'vTFLEAVETYPECOLORAPPROVED_SEL',pic:''},{av:'AV33TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV58TFLeaveTypeColorPending',fld:'vTFLEAVETYPECOLORPENDING',pic:''},{av:'AV60TFLeaveTypeColorApproved',fld:'vTFLEAVETYPECOLORAPPROVED',pic:''}]");
-         setEventMetadata("DDO_AGEXPORT.ONOPTIONCLICKED",",oparms:[{av:'AV15GridState',fld:'vGRIDSTATE',pic:''},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'AV20FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV62Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV33TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV34TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV52TFLeaveTypeVacationLeave_Sels',fld:'vTFLEAVETYPEVACATIONLEAVE_SELS',pic:''},{av:'AV54TFLeaveTypeLoggingWorkHours_Sels',fld:'vTFLEAVETYPELOGGINGWORKHOURS_SELS',pic:''},{av:'AV58TFLeaveTypeColorPending',fld:'vTFLEAVETYPECOLORPENDING',pic:''},{av:'AV59TFLeaveTypeColorPending_Sel',fld:'vTFLEAVETYPECOLORPENDING_SEL',pic:''},{av:'AV60TFLeaveTypeColorApproved',fld:'vTFLEAVETYPECOLORAPPROVED',pic:''},{av:'AV61TFLeaveTypeColorApproved_Sel',fld:'vTFLEAVETYPECOLORAPPROVED_SEL',pic:''},{av:'AV44IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV46IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV50IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'Ddo_grid_Sortedstatus',ctrl:'DDO_GRID',prop:'SortedStatus'},{av:'AV53TFLeaveTypeLoggingWorkHours_SelsJson',fld:'vTFLEAVETYPELOGGINGWORKHOURS_SELSJSON',pic:''},{av:'AV51TFLeaveTypeVacationLeave_SelsJson',fld:'vTFLEAVETYPEVACATIONLEAVE_SELSJSON',pic:''},{av:'Ddo_grid_Selectedvalue_set',ctrl:'DDO_GRID',prop:'SelectedValue_set'},{av:'Ddo_grid_Filteredtext_set',ctrl:'DDO_GRID',prop:'FilteredText_set'}]}");
+         setEventMetadata("DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED","{handler:'E162O2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV20FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV62Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV33TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV34TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV52TFLeaveTypeVacationLeave_Sels',fld:'vTFLEAVETYPEVACATIONLEAVE_SELS',pic:''},{av:'AV54TFLeaveTypeLoggingWorkHours_Sels',fld:'vTFLEAVETYPELOGGINGWORKHOURS_SELS',pic:''},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV44IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV46IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV50IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'Ddo_gridcolumnsselector_Columnsselectorvalues',ctrl:'DDO_GRIDCOLUMNSSELECTOR',prop:'ColumnsSelectorValues'}]");
+         setEventMetadata("DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED",",oparms:[{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'edtLeaveTypeName_Visible',ctrl:'LEAVETYPENAME',prop:'Visible'},{av:'radLeaveTypeVacationLeave'},{av:'radLeaveTypeLoggingWorkHours'},{av:'AV41GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV42GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV9GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'AV44IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'edtavUpdate_Visible',ctrl:'vUPDATE',prop:'Visible'},{av:'AV46IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'edtavDelete_Visible',ctrl:'vDELETE',prop:'Visible'},{av:'AV50IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{ctrl:'BTNINSERT',prop:'Visible'},{av:'AV28ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''},{av:'AV15GridState',fld:'vGRIDSTATE',pic:''}]}");
+         setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED","{handler:'E112O2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV20FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV62Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV33TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV34TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV52TFLeaveTypeVacationLeave_Sels',fld:'vTFLEAVETYPEVACATIONLEAVE_SELS',pic:''},{av:'AV54TFLeaveTypeLoggingWorkHours_Sels',fld:'vTFLEAVETYPELOGGINGWORKHOURS_SELS',pic:''},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV44IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV46IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV50IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'Ddo_managefilters_Activeeventkey',ctrl:'DDO_MANAGEFILTERS',prop:'ActiveEventKey'},{av:'AV15GridState',fld:'vGRIDSTATE',pic:''},{av:'AV51TFLeaveTypeVacationLeave_SelsJson',fld:'vTFLEAVETYPEVACATIONLEAVE_SELSJSON',pic:''},{av:'AV53TFLeaveTypeLoggingWorkHours_SelsJson',fld:'vTFLEAVETYPELOGGINGWORKHOURS_SELSJSON',pic:''}]");
+         setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED",",oparms:[{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV15GridState',fld:'vGRIDSTATE',pic:''},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV20FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV33TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV34TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV52TFLeaveTypeVacationLeave_Sels',fld:'vTFLEAVETYPEVACATIONLEAVE_SELS',pic:''},{av:'AV54TFLeaveTypeLoggingWorkHours_Sels',fld:'vTFLEAVETYPELOGGINGWORKHOURS_SELS',pic:''},{av:'Ddo_grid_Selectedvalue_set',ctrl:'DDO_GRID',prop:'SelectedValue_set'},{av:'Ddo_grid_Filteredtext_set',ctrl:'DDO_GRID',prop:'FilteredText_set'},{av:'Ddo_grid_Sortedstatus',ctrl:'DDO_GRID',prop:'SortedStatus'},{av:'AV51TFLeaveTypeVacationLeave_SelsJson',fld:'vTFLEAVETYPEVACATIONLEAVE_SELSJSON',pic:''},{av:'AV53TFLeaveTypeLoggingWorkHours_SelsJson',fld:'vTFLEAVETYPELOGGINGWORKHOURS_SELSJSON',pic:''},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'edtLeaveTypeName_Visible',ctrl:'LEAVETYPENAME',prop:'Visible'},{av:'radLeaveTypeVacationLeave'},{av:'radLeaveTypeLoggingWorkHours'},{av:'AV41GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV42GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV9GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'AV44IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'edtavUpdate_Visible',ctrl:'vUPDATE',prop:'Visible'},{av:'AV46IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'edtavDelete_Visible',ctrl:'vDELETE',prop:'Visible'},{av:'AV50IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{ctrl:'BTNINSERT',prop:'Visible'},{av:'AV28ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''}]}");
+         setEventMetadata("'DOINSERT'","{handler:'E172O2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV20FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV62Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV33TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV34TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV52TFLeaveTypeVacationLeave_Sels',fld:'vTFLEAVETYPEVACATIONLEAVE_SELS',pic:''},{av:'AV54TFLeaveTypeLoggingWorkHours_Sels',fld:'vTFLEAVETYPELOGGINGWORKHOURS_SELS',pic:''},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV44IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV46IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV50IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'A124LeaveTypeId',fld:'LEAVETYPEID',pic:'ZZZZZZZZZ9',hsh:true}]");
+         setEventMetadata("'DOINSERT'",",oparms:[{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'edtLeaveTypeName_Visible',ctrl:'LEAVETYPENAME',prop:'Visible'},{av:'radLeaveTypeVacationLeave'},{av:'radLeaveTypeLoggingWorkHours'},{av:'AV41GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV42GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV9GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'AV44IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'edtavUpdate_Visible',ctrl:'vUPDATE',prop:'Visible'},{av:'AV46IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'edtavDelete_Visible',ctrl:'vDELETE',prop:'Visible'},{av:'AV50IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{ctrl:'BTNINSERT',prop:'Visible'},{av:'AV28ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''},{av:'AV15GridState',fld:'vGRIDSTATE',pic:''}]}");
+         setEventMetadata("DDO_AGEXPORT.ONOPTIONCLICKED","{handler:'E142O2',iparms:[{av:'Ddo_agexport_Activeeventkey',ctrl:'DDO_AGEXPORT',prop:'ActiveEventKey'},{av:'AV62Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV15GridState',fld:'vGRIDSTATE',pic:''},{av:'AV34TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV52TFLeaveTypeVacationLeave_Sels',fld:'vTFLEAVETYPEVACATIONLEAVE_SELS',pic:''},{av:'AV51TFLeaveTypeVacationLeave_SelsJson',fld:'vTFLEAVETYPEVACATIONLEAVE_SELSJSON',pic:''},{av:'AV54TFLeaveTypeLoggingWorkHours_Sels',fld:'vTFLEAVETYPELOGGINGWORKHOURS_SELS',pic:''},{av:'AV53TFLeaveTypeLoggingWorkHours_SelsJson',fld:'vTFLEAVETYPELOGGINGWORKHOURS_SELSJSON',pic:''},{av:'AV33TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''}]");
+         setEventMetadata("DDO_AGEXPORT.ONOPTIONCLICKED",",oparms:[{av:'AV15GridState',fld:'vGRIDSTATE',pic:''},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'AV20FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV62Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV33TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV34TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV52TFLeaveTypeVacationLeave_Sels',fld:'vTFLEAVETYPEVACATIONLEAVE_SELS',pic:''},{av:'AV54TFLeaveTypeLoggingWorkHours_Sels',fld:'vTFLEAVETYPELOGGINGWORKHOURS_SELS',pic:''},{av:'AV44IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV46IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV50IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'Ddo_grid_Sortedstatus',ctrl:'DDO_GRID',prop:'SortedStatus'},{av:'AV51TFLeaveTypeVacationLeave_SelsJson',fld:'vTFLEAVETYPEVACATIONLEAVE_SELSJSON',pic:''},{av:'AV53TFLeaveTypeLoggingWorkHours_SelsJson',fld:'vTFLEAVETYPELOGGINGWORKHOURS_SELSJSON',pic:''},{av:'Ddo_grid_Selectedvalue_set',ctrl:'DDO_GRID',prop:'SelectedValue_set'},{av:'Ddo_grid_Filteredtext_set',ctrl:'DDO_GRID',prop:'FilteredText_set'}]}");
          setEventMetadata("NULL","{handler:'Valid_Companyid',iparms:[]");
          setEventMetadata("NULL",",oparms:[]}");
          return  ;
@@ -3042,10 +2920,6 @@ namespace GeneXus.Programs {
          AV34TFLeaveTypeName_Sel = "";
          AV52TFLeaveTypeVacationLeave_Sels = new GxSimpleCollection<string>();
          AV54TFLeaveTypeLoggingWorkHours_Sels = new GxSimpleCollection<string>();
-         AV58TFLeaveTypeColorPending = "";
-         AV59TFLeaveTypeColorPending_Sel = "";
-         AV60TFLeaveTypeColorApproved = "";
-         AV61TFLeaveTypeColorApproved_Sel = "";
          sDynURL = "";
          FormProcess = "";
          bodyStyle = "";
@@ -3097,15 +2971,9 @@ namespace GeneXus.Programs {
          scmdbuf = "";
          lV63Leavetypewwds_1_filterfulltext = "";
          lV64Leavetypewwds_2_tfleavetypename = "";
-         lV68Leavetypewwds_6_tfleavetypecolorpending = "";
-         lV70Leavetypewwds_8_tfleavetypecolorapproved = "";
          AV63Leavetypewwds_1_filterfulltext = "";
          AV65Leavetypewwds_3_tfleavetypename_sel = "";
          AV64Leavetypewwds_2_tfleavetypename = "";
-         AV69Leavetypewwds_7_tfleavetypecolorpending_sel = "";
-         AV68Leavetypewwds_6_tfleavetypecolorpending = "";
-         AV71Leavetypewwds_9_tfleavetypecolorapproved_sel = "";
-         AV70Leavetypewwds_8_tfleavetypecolorapproved = "";
          H002O2_A100CompanyId = new long[1] ;
          H002O2_A175LeaveTypeColorApproved = new string[] {""} ;
          H002O2_n175LeaveTypeColorApproved = new bool[] {false} ;
@@ -3132,8 +3000,6 @@ namespace GeneXus.Programs {
          AV16GridStateFilterValue = new GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue(context);
          GXt_char2 = "";
          GXt_char5 = "";
-         GXt_char8 = "";
-         GXt_char7 = "";
          GXt_char6 = "";
          AV55AuxText = "";
          AV13TrnContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext(context);
@@ -3203,12 +3069,10 @@ namespace GeneXus.Programs {
       private int edtLeaveTypeColorApproved_Enabled ;
       private int edtCompanyId_Enabled ;
       private int edtLeaveTypeName_Visible ;
-      private int edtLeaveTypeColorPending_Visible ;
-      private int edtLeaveTypeColorApproved_Visible ;
       private int AV40PageToGo ;
       private int edtavUpdate_Visible ;
       private int edtavDelete_Visible ;
-      private int AV73GXV1 ;
+      private int AV69GXV1 ;
       private int edtavFilterfulltext_Enabled ;
       private int idxLst ;
       private int subGrid_Backcolor ;
@@ -3223,7 +3087,7 @@ namespace GeneXus.Programs {
       private long A124LeaveTypeId ;
       private long A100CompanyId ;
       private long GRID_nCurrentRecord ;
-      private long AV72Udparg10 ;
+      private long AV68Udparg6 ;
       private long GRID_nRecordCount ;
       private string Gridpaginationbar_Selectedpage ;
       private string Ddo_grid_Activeeventkey ;
@@ -3239,10 +3103,6 @@ namespace GeneXus.Programs {
       private string AV62Pgmname ;
       private string AV33TFLeaveTypeName ;
       private string AV34TFLeaveTypeName_Sel ;
-      private string AV58TFLeaveTypeColorPending ;
-      private string AV59TFLeaveTypeColorPending_Sel ;
-      private string AV60TFLeaveTypeColorApproved ;
-      private string AV61TFLeaveTypeColorApproved_Sel ;
       private string sDynURL ;
       private string FormProcess ;
       private string bodyStyle ;
@@ -3341,20 +3201,12 @@ namespace GeneXus.Programs {
       private string edtavFilterfulltext_Internalname ;
       private string scmdbuf ;
       private string lV64Leavetypewwds_2_tfleavetypename ;
-      private string lV68Leavetypewwds_6_tfleavetypecolorpending ;
-      private string lV70Leavetypewwds_8_tfleavetypecolorapproved ;
       private string AV65Leavetypewwds_3_tfleavetypename_sel ;
       private string AV64Leavetypewwds_2_tfleavetypename ;
-      private string AV69Leavetypewwds_7_tfleavetypecolorpending_sel ;
-      private string AV68Leavetypewwds_6_tfleavetypecolorpending ;
-      private string AV71Leavetypewwds_9_tfleavetypecolorapproved_sel ;
-      private string AV70Leavetypewwds_8_tfleavetypecolorapproved ;
       private string edtavUpdate_Link ;
       private string edtavDelete_Link ;
       private string GXt_char2 ;
       private string GXt_char5 ;
-      private string GXt_char8 ;
-      private string GXt_char7 ;
       private string GXt_char6 ;
       private string tblTablerightheader_Internalname ;
       private string Ddo_managefilters_Caption ;
@@ -3472,42 +3324,34 @@ namespace GeneXus.Programs {
                                              string AV64Leavetypewwds_2_tfleavetypename ,
                                              int AV66Leavetypewwds_4_tfleavetypevacationleave_sels_Count ,
                                              int AV67Leavetypewwds_5_tfleavetypeloggingworkhours_sels_Count ,
-                                             string AV69Leavetypewwds_7_tfleavetypecolorpending_sel ,
-                                             string AV68Leavetypewwds_6_tfleavetypecolorpending ,
-                                             string AV71Leavetypewwds_9_tfleavetypecolorapproved_sel ,
-                                             string AV70Leavetypewwds_8_tfleavetypecolorapproved ,
                                              string A125LeaveTypeName ,
-                                             string A174LeaveTypeColorPending ,
-                                             string A175LeaveTypeColorApproved ,
                                              short AV17OrderedBy ,
                                              bool AV18OrderedDsc ,
                                              long A100CompanyId ,
-                                             long AV72Udparg10 )
+                                             long AV68Udparg6 )
       {
          System.Text.StringBuilder sWhereString = new System.Text.StringBuilder();
          string scmdbuf;
-         short[] GXv_int9 = new short[17];
-         Object[] GXv_Object10 = new Object[2];
+         short[] GXv_int7 = new short[11];
+         Object[] GXv_Object8 = new Object[2];
          string sSelectString;
          string sFromString;
          string sOrderString;
          sSelectString = " CompanyId, LeaveTypeColorApproved, LeaveTypeColorPending, LeaveTypeLoggingWorkHours, LeaveTypeVacationLeave, LeaveTypeName, LeaveTypeId";
          sFromString = " FROM LeaveType";
          sOrderString = "";
-         AddWhere(sWhereString, "(CompanyId = :AV72Udparg10)");
+         AddWhere(sWhereString, "(CompanyId = :AV68Udparg6)");
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV63Leavetypewwds_1_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( LOWER(LeaveTypeName) like '%' || LOWER(:lV63Leavetypewwds_1_filterfulltext)) or ( 'no' like '%' || LOWER(:lV63Leavetypewwds_1_filterfulltext) and LeaveTypeVacationLeave = ( 'No')) or ( 'yes' like '%' || LOWER(:lV63Leavetypewwds_1_filterfulltext) and LeaveTypeVacationLeave = ( 'Yes')) or ( 'no' like '%' || LOWER(:lV63Leavetypewwds_1_filterfulltext) and LeaveTypeLoggingWorkHours = ( 'No')) or ( 'yes' like '%' || LOWER(:lV63Leavetypewwds_1_filterfulltext) and LeaveTypeLoggingWorkHours = ( 'Yes')) or ( LOWER(LeaveTypeColorPending) like '%' || LOWER(:lV63Leavetypewwds_1_filterfulltext)) or ( LOWER(LeaveTypeColorApproved) like '%' || LOWER(:lV63Leavetypewwds_1_filterfulltext)))");
+            AddWhere(sWhereString, "(( LOWER(LeaveTypeName) like '%' || LOWER(:lV63Leavetypewwds_1_filterfulltext)) or ( 'no' like '%' || LOWER(:lV63Leavetypewwds_1_filterfulltext) and LeaveTypeVacationLeave = ( 'No')) or ( 'yes' like '%' || LOWER(:lV63Leavetypewwds_1_filterfulltext) and LeaveTypeVacationLeave = ( 'Yes')) or ( 'no' like '%' || LOWER(:lV63Leavetypewwds_1_filterfulltext) and LeaveTypeLoggingWorkHours = ( 'No')) or ( 'yes' like '%' || LOWER(:lV63Leavetypewwds_1_filterfulltext) and LeaveTypeLoggingWorkHours = ( 'Yes')))");
          }
          else
          {
-            GXv_int9[1] = 1;
-            GXv_int9[2] = 1;
-            GXv_int9[3] = 1;
-            GXv_int9[4] = 1;
-            GXv_int9[5] = 1;
-            GXv_int9[6] = 1;
-            GXv_int9[7] = 1;
+            GXv_int7[1] = 1;
+            GXv_int7[2] = 1;
+            GXv_int7[3] = 1;
+            GXv_int7[4] = 1;
+            GXv_int7[5] = 1;
          }
          if ( String.IsNullOrEmpty(StringUtil.RTrim( AV65Leavetypewwds_3_tfleavetypename_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV64Leavetypewwds_2_tfleavetypename)) ) )
          {
@@ -3515,7 +3359,7 @@ namespace GeneXus.Programs {
          }
          else
          {
-            GXv_int9[8] = 1;
+            GXv_int7[6] = 1;
          }
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV65Leavetypewwds_3_tfleavetypename_sel)) && ! ( StringUtil.StrCmp(AV65Leavetypewwds_3_tfleavetypename_sel, "<#Empty#>") == 0 ) )
          {
@@ -3523,7 +3367,7 @@ namespace GeneXus.Programs {
          }
          else
          {
-            GXv_int9[9] = 1;
+            GXv_int7[7] = 1;
          }
          if ( StringUtil.StrCmp(AV65Leavetypewwds_3_tfleavetypename_sel, "<#Empty#>") == 0 )
          {
@@ -3536,46 +3380,6 @@ namespace GeneXus.Programs {
          if ( AV67Leavetypewwds_5_tfleavetypeloggingworkhours_sels_Count > 0 )
          {
             AddWhere(sWhereString, "("+new GxDbmsUtils( new GxPostgreSql()).ValueList(AV67Leavetypewwds_5_tfleavetypeloggingworkhours_sels, "LeaveTypeLoggingWorkHours IN (", ")")+")");
-         }
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV69Leavetypewwds_7_tfleavetypecolorpending_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV68Leavetypewwds_6_tfleavetypecolorpending)) ) )
-         {
-            AddWhere(sWhereString, "(LOWER(LeaveTypeColorPending) like LOWER(:lV68Leavetypewwds_6_tfleavetypecolorpending))");
-         }
-         else
-         {
-            GXv_int9[10] = 1;
-         }
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV69Leavetypewwds_7_tfleavetypecolorpending_sel)) && ! ( StringUtil.StrCmp(AV69Leavetypewwds_7_tfleavetypecolorpending_sel, "<#Empty#>") == 0 ) )
-         {
-            AddWhere(sWhereString, "(LeaveTypeColorPending = ( :AV69Leavetypewwds_7_tfleavetypecolorpending_sel))");
-         }
-         else
-         {
-            GXv_int9[11] = 1;
-         }
-         if ( StringUtil.StrCmp(AV69Leavetypewwds_7_tfleavetypecolorpending_sel, "<#Empty#>") == 0 )
-         {
-            AddWhere(sWhereString, "(LeaveTypeColorPending IS NULL or (char_length(trim(trailing ' ' from LeaveTypeColorPending))=0))");
-         }
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV71Leavetypewwds_9_tfleavetypecolorapproved_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV70Leavetypewwds_8_tfleavetypecolorapproved)) ) )
-         {
-            AddWhere(sWhereString, "(LOWER(LeaveTypeColorApproved) like LOWER(:lV70Leavetypewwds_8_tfleavetypecolorapproved))");
-         }
-         else
-         {
-            GXv_int9[12] = 1;
-         }
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV71Leavetypewwds_9_tfleavetypecolorapproved_sel)) && ! ( StringUtil.StrCmp(AV71Leavetypewwds_9_tfleavetypecolorapproved_sel, "<#Empty#>") == 0 ) )
-         {
-            AddWhere(sWhereString, "(LeaveTypeColorApproved = ( :AV71Leavetypewwds_9_tfleavetypecolorapproved_sel))");
-         }
-         else
-         {
-            GXv_int9[13] = 1;
-         }
-         if ( StringUtil.StrCmp(AV71Leavetypewwds_9_tfleavetypecolorapproved_sel, "<#Empty#>") == 0 )
-         {
-            AddWhere(sWhereString, "(LeaveTypeColorApproved IS NULL or (char_length(trim(trailing ' ' from LeaveTypeColorApproved))=0))");
          }
          if ( ( AV17OrderedBy == 1 ) && ! AV18OrderedDsc )
          {
@@ -3601,30 +3405,14 @@ namespace GeneXus.Programs {
          {
             sOrderString += " ORDER BY LeaveTypeLoggingWorkHours DESC, LeaveTypeId";
          }
-         else if ( ( AV17OrderedBy == 4 ) && ! AV18OrderedDsc )
-         {
-            sOrderString += " ORDER BY LeaveTypeColorPending, LeaveTypeId";
-         }
-         else if ( ( AV17OrderedBy == 4 ) && ( AV18OrderedDsc ) )
-         {
-            sOrderString += " ORDER BY LeaveTypeColorPending DESC, LeaveTypeId";
-         }
-         else if ( ( AV17OrderedBy == 5 ) && ! AV18OrderedDsc )
-         {
-            sOrderString += " ORDER BY LeaveTypeColorApproved, LeaveTypeId";
-         }
-         else if ( ( AV17OrderedBy == 5 ) && ( AV18OrderedDsc ) )
-         {
-            sOrderString += " ORDER BY LeaveTypeColorApproved DESC, LeaveTypeId";
-         }
          else if ( true )
          {
             sOrderString += " ORDER BY LeaveTypeId";
          }
          scmdbuf = "SELECT " + sSelectString + sFromString + sWhereString + sOrderString + "" + " OFFSET " + ":GXPagingFrom2" + " LIMIT CASE WHEN " + ":GXPagingTo2" + " > 0 THEN " + ":GXPagingTo2" + " ELSE 1e9 END";
-         GXv_Object10[0] = scmdbuf;
-         GXv_Object10[1] = GXv_int9;
-         return GXv_Object10 ;
+         GXv_Object8[0] = scmdbuf;
+         GXv_Object8[1] = GXv_int7;
+         return GXv_Object8 ;
       }
 
       protected Object[] conditional_H002O3( IGxContext context ,
@@ -3637,37 +3425,29 @@ namespace GeneXus.Programs {
                                              string AV64Leavetypewwds_2_tfleavetypename ,
                                              int AV66Leavetypewwds_4_tfleavetypevacationleave_sels_Count ,
                                              int AV67Leavetypewwds_5_tfleavetypeloggingworkhours_sels_Count ,
-                                             string AV69Leavetypewwds_7_tfleavetypecolorpending_sel ,
-                                             string AV68Leavetypewwds_6_tfleavetypecolorpending ,
-                                             string AV71Leavetypewwds_9_tfleavetypecolorapproved_sel ,
-                                             string AV70Leavetypewwds_8_tfleavetypecolorapproved ,
                                              string A125LeaveTypeName ,
-                                             string A174LeaveTypeColorPending ,
-                                             string A175LeaveTypeColorApproved ,
                                              short AV17OrderedBy ,
                                              bool AV18OrderedDsc ,
                                              long A100CompanyId ,
-                                             long AV72Udparg10 )
+                                             long AV68Udparg6 )
       {
          System.Text.StringBuilder sWhereString = new System.Text.StringBuilder();
          string scmdbuf;
-         short[] GXv_int11 = new short[14];
-         Object[] GXv_Object12 = new Object[2];
+         short[] GXv_int9 = new short[8];
+         Object[] GXv_Object10 = new Object[2];
          scmdbuf = "SELECT COUNT(*) FROM LeaveType";
-         AddWhere(sWhereString, "(CompanyId = :AV72Udparg10)");
+         AddWhere(sWhereString, "(CompanyId = :AV68Udparg6)");
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV63Leavetypewwds_1_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( LOWER(LeaveTypeName) like '%' || LOWER(:lV63Leavetypewwds_1_filterfulltext)) or ( 'no' like '%' || LOWER(:lV63Leavetypewwds_1_filterfulltext) and LeaveTypeVacationLeave = ( 'No')) or ( 'yes' like '%' || LOWER(:lV63Leavetypewwds_1_filterfulltext) and LeaveTypeVacationLeave = ( 'Yes')) or ( 'no' like '%' || LOWER(:lV63Leavetypewwds_1_filterfulltext) and LeaveTypeLoggingWorkHours = ( 'No')) or ( 'yes' like '%' || LOWER(:lV63Leavetypewwds_1_filterfulltext) and LeaveTypeLoggingWorkHours = ( 'Yes')) or ( LOWER(LeaveTypeColorPending) like '%' || LOWER(:lV63Leavetypewwds_1_filterfulltext)) or ( LOWER(LeaveTypeColorApproved) like '%' || LOWER(:lV63Leavetypewwds_1_filterfulltext)))");
+            AddWhere(sWhereString, "(( LOWER(LeaveTypeName) like '%' || LOWER(:lV63Leavetypewwds_1_filterfulltext)) or ( 'no' like '%' || LOWER(:lV63Leavetypewwds_1_filterfulltext) and LeaveTypeVacationLeave = ( 'No')) or ( 'yes' like '%' || LOWER(:lV63Leavetypewwds_1_filterfulltext) and LeaveTypeVacationLeave = ( 'Yes')) or ( 'no' like '%' || LOWER(:lV63Leavetypewwds_1_filterfulltext) and LeaveTypeLoggingWorkHours = ( 'No')) or ( 'yes' like '%' || LOWER(:lV63Leavetypewwds_1_filterfulltext) and LeaveTypeLoggingWorkHours = ( 'Yes')))");
          }
          else
          {
-            GXv_int11[1] = 1;
-            GXv_int11[2] = 1;
-            GXv_int11[3] = 1;
-            GXv_int11[4] = 1;
-            GXv_int11[5] = 1;
-            GXv_int11[6] = 1;
-            GXv_int11[7] = 1;
+            GXv_int9[1] = 1;
+            GXv_int9[2] = 1;
+            GXv_int9[3] = 1;
+            GXv_int9[4] = 1;
+            GXv_int9[5] = 1;
          }
          if ( String.IsNullOrEmpty(StringUtil.RTrim( AV65Leavetypewwds_3_tfleavetypename_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV64Leavetypewwds_2_tfleavetypename)) ) )
          {
@@ -3675,7 +3455,7 @@ namespace GeneXus.Programs {
          }
          else
          {
-            GXv_int11[8] = 1;
+            GXv_int9[6] = 1;
          }
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV65Leavetypewwds_3_tfleavetypename_sel)) && ! ( StringUtil.StrCmp(AV65Leavetypewwds_3_tfleavetypename_sel, "<#Empty#>") == 0 ) )
          {
@@ -3683,7 +3463,7 @@ namespace GeneXus.Programs {
          }
          else
          {
-            GXv_int11[9] = 1;
+            GXv_int9[7] = 1;
          }
          if ( StringUtil.StrCmp(AV65Leavetypewwds_3_tfleavetypename_sel, "<#Empty#>") == 0 )
          {
@@ -3696,46 +3476,6 @@ namespace GeneXus.Programs {
          if ( AV67Leavetypewwds_5_tfleavetypeloggingworkhours_sels_Count > 0 )
          {
             AddWhere(sWhereString, "("+new GxDbmsUtils( new GxPostgreSql()).ValueList(AV67Leavetypewwds_5_tfleavetypeloggingworkhours_sels, "LeaveTypeLoggingWorkHours IN (", ")")+")");
-         }
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV69Leavetypewwds_7_tfleavetypecolorpending_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV68Leavetypewwds_6_tfleavetypecolorpending)) ) )
-         {
-            AddWhere(sWhereString, "(LOWER(LeaveTypeColorPending) like LOWER(:lV68Leavetypewwds_6_tfleavetypecolorpending))");
-         }
-         else
-         {
-            GXv_int11[10] = 1;
-         }
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV69Leavetypewwds_7_tfleavetypecolorpending_sel)) && ! ( StringUtil.StrCmp(AV69Leavetypewwds_7_tfleavetypecolorpending_sel, "<#Empty#>") == 0 ) )
-         {
-            AddWhere(sWhereString, "(LeaveTypeColorPending = ( :AV69Leavetypewwds_7_tfleavetypecolorpending_sel))");
-         }
-         else
-         {
-            GXv_int11[11] = 1;
-         }
-         if ( StringUtil.StrCmp(AV69Leavetypewwds_7_tfleavetypecolorpending_sel, "<#Empty#>") == 0 )
-         {
-            AddWhere(sWhereString, "(LeaveTypeColorPending IS NULL or (char_length(trim(trailing ' ' from LeaveTypeColorPending))=0))");
-         }
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV71Leavetypewwds_9_tfleavetypecolorapproved_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV70Leavetypewwds_8_tfleavetypecolorapproved)) ) )
-         {
-            AddWhere(sWhereString, "(LOWER(LeaveTypeColorApproved) like LOWER(:lV70Leavetypewwds_8_tfleavetypecolorapproved))");
-         }
-         else
-         {
-            GXv_int11[12] = 1;
-         }
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV71Leavetypewwds_9_tfleavetypecolorapproved_sel)) && ! ( StringUtil.StrCmp(AV71Leavetypewwds_9_tfleavetypecolorapproved_sel, "<#Empty#>") == 0 ) )
-         {
-            AddWhere(sWhereString, "(LeaveTypeColorApproved = ( :AV71Leavetypewwds_9_tfleavetypecolorapproved_sel))");
-         }
-         else
-         {
-            GXv_int11[13] = 1;
-         }
-         if ( StringUtil.StrCmp(AV71Leavetypewwds_9_tfleavetypecolorapproved_sel, "<#Empty#>") == 0 )
-         {
-            AddWhere(sWhereString, "(LeaveTypeColorApproved IS NULL or (char_length(trim(trailing ' ' from LeaveTypeColorApproved))=0))");
          }
          scmdbuf += sWhereString;
          if ( ( AV17OrderedBy == 1 ) && ! AV18OrderedDsc )
@@ -3762,29 +3502,13 @@ namespace GeneXus.Programs {
          {
             scmdbuf += "";
          }
-         else if ( ( AV17OrderedBy == 4 ) && ! AV18OrderedDsc )
-         {
-            scmdbuf += "";
-         }
-         else if ( ( AV17OrderedBy == 4 ) && ( AV18OrderedDsc ) )
-         {
-            scmdbuf += "";
-         }
-         else if ( ( AV17OrderedBy == 5 ) && ! AV18OrderedDsc )
-         {
-            scmdbuf += "";
-         }
-         else if ( ( AV17OrderedBy == 5 ) && ( AV18OrderedDsc ) )
-         {
-            scmdbuf += "";
-         }
          else if ( true )
          {
             scmdbuf += "";
          }
-         GXv_Object12[0] = scmdbuf;
-         GXv_Object12[1] = GXv_int11;
-         return GXv_Object12 ;
+         GXv_Object10[0] = scmdbuf;
+         GXv_Object10[1] = GXv_int9;
+         return GXv_Object10 ;
       }
 
       public override Object [] getDynamicStatement( int cursor ,
@@ -3794,9 +3518,9 @@ namespace GeneXus.Programs {
          switch ( cursor )
          {
                case 0 :
-                     return conditional_H002O2(context, (string)dynConstraints[0] , (GxSimpleCollection<string>)dynConstraints[1] , (string)dynConstraints[2] , (GxSimpleCollection<string>)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (int)dynConstraints[7] , (int)dynConstraints[8] , (string)dynConstraints[9] , (string)dynConstraints[10] , (string)dynConstraints[11] , (string)dynConstraints[12] , (string)dynConstraints[13] , (string)dynConstraints[14] , (string)dynConstraints[15] , (short)dynConstraints[16] , (bool)dynConstraints[17] , (long)dynConstraints[18] , (long)dynConstraints[19] );
+                     return conditional_H002O2(context, (string)dynConstraints[0] , (GxSimpleCollection<string>)dynConstraints[1] , (string)dynConstraints[2] , (GxSimpleCollection<string>)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (int)dynConstraints[7] , (int)dynConstraints[8] , (string)dynConstraints[9] , (short)dynConstraints[10] , (bool)dynConstraints[11] , (long)dynConstraints[12] , (long)dynConstraints[13] );
                case 1 :
-                     return conditional_H002O3(context, (string)dynConstraints[0] , (GxSimpleCollection<string>)dynConstraints[1] , (string)dynConstraints[2] , (GxSimpleCollection<string>)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (int)dynConstraints[7] , (int)dynConstraints[8] , (string)dynConstraints[9] , (string)dynConstraints[10] , (string)dynConstraints[11] , (string)dynConstraints[12] , (string)dynConstraints[13] , (string)dynConstraints[14] , (string)dynConstraints[15] , (short)dynConstraints[16] , (bool)dynConstraints[17] , (long)dynConstraints[18] , (long)dynConstraints[19] );
+                     return conditional_H002O3(context, (string)dynConstraints[0] , (GxSimpleCollection<string>)dynConstraints[1] , (string)dynConstraints[2] , (GxSimpleCollection<string>)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (int)dynConstraints[7] , (int)dynConstraints[8] , (string)dynConstraints[9] , (short)dynConstraints[10] , (bool)dynConstraints[11] , (long)dynConstraints[12] , (long)dynConstraints[13] );
          }
          return base.getDynamicStatement(cursor, context, dynConstraints);
       }
@@ -3817,9 +3541,7 @@ namespace GeneXus.Programs {
        {
           Object[] prmH002O2;
           prmH002O2 = new Object[] {
-          new ParDef("AV72Udparg10",GXType.Int64,10,0) ,
-          new ParDef("lV63Leavetypewwds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV63Leavetypewwds_1_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("AV68Udparg6",GXType.Int64,10,0) ,
           new ParDef("lV63Leavetypewwds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV63Leavetypewwds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV63Leavetypewwds_1_filterfulltext",GXType.VarChar,100,0) ,
@@ -3827,30 +3549,20 @@ namespace GeneXus.Programs {
           new ParDef("lV63Leavetypewwds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV64Leavetypewwds_2_tfleavetypename",GXType.Char,100,0) ,
           new ParDef("AV65Leavetypewwds_3_tfleavetypename_sel",GXType.Char,100,0) ,
-          new ParDef("lV68Leavetypewwds_6_tfleavetypecolorpending",GXType.Char,20,0) ,
-          new ParDef("AV69Leavetypewwds_7_tfleavetypecolorpending_sel",GXType.Char,20,0) ,
-          new ParDef("lV70Leavetypewwds_8_tfleavetypecolorapproved",GXType.Char,20,0) ,
-          new ParDef("AV71Leavetypewwds_9_tfleavetypecolorapproved_sel",GXType.Char,20,0) ,
           new ParDef("GXPagingFrom2",GXType.Int32,9,0) ,
           new ParDef("GXPagingTo2",GXType.Int32,9,0) ,
           new ParDef("GXPagingTo2",GXType.Int32,9,0)
           };
           Object[] prmH002O3;
           prmH002O3 = new Object[] {
-          new ParDef("AV72Udparg10",GXType.Int64,10,0) ,
-          new ParDef("lV63Leavetypewwds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV63Leavetypewwds_1_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("AV68Udparg6",GXType.Int64,10,0) ,
           new ParDef("lV63Leavetypewwds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV63Leavetypewwds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV63Leavetypewwds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV63Leavetypewwds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV63Leavetypewwds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV64Leavetypewwds_2_tfleavetypename",GXType.Char,100,0) ,
-          new ParDef("AV65Leavetypewwds_3_tfleavetypename_sel",GXType.Char,100,0) ,
-          new ParDef("lV68Leavetypewwds_6_tfleavetypecolorpending",GXType.Char,20,0) ,
-          new ParDef("AV69Leavetypewwds_7_tfleavetypecolorpending_sel",GXType.Char,20,0) ,
-          new ParDef("lV70Leavetypewwds_8_tfleavetypecolorapproved",GXType.Char,20,0) ,
-          new ParDef("AV71Leavetypewwds_9_tfleavetypecolorapproved_sel",GXType.Char,20,0)
+          new ParDef("AV65Leavetypewwds_3_tfleavetypename_sel",GXType.Char,100,0)
           };
           def= new CursorDef[] {
               new CursorDef("H002O2", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH002O2,11, GxCacheFrequency.OFF ,true,false )

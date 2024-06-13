@@ -119,18 +119,23 @@ namespace GeneXus.Programs {
       {
          /* GeneXus formulas */
          /* Output device settings */
-         /* Optimized UPDATE. */
-         cmdBuffer=" LOCK TABLE Employee IN EXCLUSIVE MODE "
-         ;
-         RGZ = new GxCommand(dsDefault.Db, cmdBuffer, dsDefault,0,true,false,null);
-         RGZ.ErrorMask = GxErrorMask.GX_MASKLOCKERR | GxErrorMask.GX_MASKLOOPLOCK;
-         RGZ.ExecuteStmt() ;
-         RGZ.Drop();
          /* Using cursor P00AH2 */
          pr_default.execute(0);
+         while ( (pr_default.getStatus(0) != 101) )
+         {
+            A147EmployeeBalance = P00AH2_A147EmployeeBalance[0];
+            A146EmployeeVactionDays = P00AH2_A146EmployeeVactionDays[0];
+            A106EmployeeId = P00AH2_A106EmployeeId[0];
+            AV8EmployeeBalance = A147EmployeeBalance;
+            AV9EmployeeVactionDays = A146EmployeeVactionDays;
+            A147EmployeeBalance = (short)(AV8EmployeeBalance+AV9EmployeeVactionDays);
+            /* Using cursor P00AH3 */
+            pr_default.execute(1, new Object[] {A147EmployeeBalance, A106EmployeeId});
+            pr_default.close(1);
+            pr_default.SmartCacheProvider.SetUpdated("Employee");
+            pr_default.readNext(0);
+         }
          pr_default.close(0);
-         pr_default.SmartCacheProvider.SetUpdated("Employee");
-         /* End optimized UPDATE. */
          if ( context.WillRedirect( ) )
          {
             context.Redirect( context.wjLoc );
@@ -159,10 +164,16 @@ namespace GeneXus.Programs {
       {
          GXKey = "";
          gxfirstwebparm = "";
-         cmdBuffer = "";
+         scmdbuf = "";
+         P00AH2_A147EmployeeBalance = new short[1] ;
+         P00AH2_A146EmployeeVactionDays = new short[1] ;
+         P00AH2_A106EmployeeId = new long[1] ;
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.aresetvacationholidays__default(),
             new Object[][] {
                 new Object[] {
+               P00AH2_A147EmployeeBalance, P00AH2_A146EmployeeVactionDays, P00AH2_A106EmployeeId
+               }
+               , new Object[] {
                }
             }
          );
@@ -172,14 +183,21 @@ namespace GeneXus.Programs {
       private short gxcookieaux ;
       private short nGotPars ;
       private short GxWebError ;
+      private short A147EmployeeBalance ;
+      private short A146EmployeeVactionDays ;
+      private short AV8EmployeeBalance ;
+      private short AV9EmployeeVactionDays ;
+      private long A106EmployeeId ;
       private string GXKey ;
       private string gxfirstwebparm ;
-      private string cmdBuffer ;
+      private string scmdbuf ;
       private bool entryPointCalled ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
-      private GxCommand RGZ ;
       private IDataStoreProvider pr_default ;
+      private short[] P00AH2_A147EmployeeBalance ;
+      private short[] P00AH2_A146EmployeeVactionDays ;
+      private long[] P00AH2_A106EmployeeId ;
    }
 
    public class aresetvacationholidays__default : DataStoreHelperBase, IDataStoreHelper
@@ -188,7 +206,8 @@ namespace GeneXus.Programs {
       {
          cursorDefinitions();
          return new Cursor[] {
-          new UpdateCursor(def[0])
+          new ForEachCursor(def[0])
+         ,new UpdateCursor(def[1])
        };
     }
 
@@ -200,8 +219,14 @@ namespace GeneXus.Programs {
           Object[] prmP00AH2;
           prmP00AH2 = new Object[] {
           };
+          Object[] prmP00AH3;
+          prmP00AH3 = new Object[] {
+          new ParDef("EmployeeBalance",GXType.Int16,4,0) ,
+          new ParDef("EmployeeId",GXType.Int64,10,0)
+          };
           def= new CursorDef[] {
-              new CursorDef("P00AH2", "UPDATE Employee SET EmployeeBalance=EmployeeVactionDays ", GxErrorMask.GX_ROLLBACKSAVEPOINT | GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK,prmP00AH2)
+              new CursorDef("P00AH2", "SELECT EmployeeBalance, EmployeeVactionDays, EmployeeId FROM Employee ORDER BY EmployeeId  FOR UPDATE OF Employee",true, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00AH2,1, GxCacheFrequency.OFF ,true,false )
+             ,new CursorDef("P00AH3", "SAVEPOINT gxupdate;UPDATE Employee SET EmployeeBalance=:EmployeeBalance  WHERE EmployeeId = :EmployeeId;RELEASE SAVEPOINT gxupdate", GxErrorMask.GX_ROLLBACKSAVEPOINT | GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK,prmP00AH3)
           };
        }
     }
@@ -210,6 +235,14 @@ namespace GeneXus.Programs {
                             IFieldGetter rslt ,
                             Object[] buf )
     {
+       switch ( cursor )
+       {
+             case 0 :
+                ((short[]) buf[0])[0] = rslt.getShort(1);
+                ((short[]) buf[1])[0] = rslt.getShort(2);
+                ((long[]) buf[2])[0] = rslt.getLong(3);
+                return;
+       }
     }
 
  }

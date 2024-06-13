@@ -881,9 +881,14 @@ namespace GeneXus.Programs {
       {
          /* Start Routine */
          returnInSub = false;
-         GXt_int1 = AV18CompanyId;
-         new getloggedinusercompanyid(context ).execute( out  GXt_int1) ;
-         AV18CompanyId = GXt_int1;
+         GXt_objcol_SdtSDTLeaveType1 = AV23SDTLeaveTypes;
+         new dpleavetype(context ).execute( out  GXt_objcol_SdtSDTLeaveType1) ;
+         AV23SDTLeaveTypes = GXt_objcol_SdtSDTLeaveType1;
+         Ucvistimeline1_Leavetypes = AV23SDTLeaveTypes.ToJSonString(false);
+         ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "leavetypes", Ucvistimeline1_Leavetypes);
+         GXt_int2 = AV18CompanyId;
+         new getloggedinusercompanyid(context ).execute( out  GXt_int2) ;
+         AV18CompanyId = GXt_int2;
          AssignAttri("", false, "AV18CompanyId", StringUtil.LTrimStr( (decimal)(AV18CompanyId), 10, 0));
          if ( ! (0==AV18CompanyId) )
          {
@@ -911,22 +916,22 @@ namespace GeneXus.Programs {
          /* Execute user subroutine: 'GETDATA' */
          S112 ();
          if (returnInSub) return;
-         GXt_char2 = "";
-         new formatdatetime(context ).execute(  AV10DateRange,  "YYYY-MM-DD", out  GXt_char2) ;
-         Ucvistimeline1_Startdate = GXt_char2;
+         GXt_char3 = "";
+         new formatdatetime(context ).execute(  AV10DateRange,  "YYYY-MM-DD", out  GXt_char3) ;
+         Ucvistimeline1_Startdate = GXt_char3;
          ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "startDate", Ucvistimeline1_Startdate);
-         GXt_char2 = "";
-         new formatdatetime(context ).execute(  AV16DateRange_To,  "YYYY-MM-DD", out  GXt_char2) ;
-         Ucvistimeline1_Stopdate = GXt_char2;
+         GXt_char3 = "";
+         new formatdatetime(context ).execute(  AV16DateRange_To,  "YYYY-MM-DD", out  GXt_char3) ;
+         Ucvistimeline1_Stopdate = GXt_char3;
          ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "stopDate", Ucvistimeline1_Stopdate);
          Ucvistimeline1_Events = AV6LeaveEvents.ToJSonString(false);
          ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "events", Ucvistimeline1_Events);
          Ucvistimeline1_Groups = AV7LeaveEventGroups.ToJSonString(false);
          ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "groups", Ucvistimeline1_Groups);
          this.executeUsercontrolMethod("", false, "DATERANGE_RANGEPICKERContainer", "Attach", "", new Object[] {(string)edtavDaterange_rangetext_Internalname});
-         GXt_SdtWWPDateRangePickerOptions3 = AV17DateRange_RangePickerOptions;
-         new GeneXus.Programs.wwpbaseobjects.wwp_rangepicker_getoptionsreports(context ).execute( out  GXt_SdtWWPDateRangePickerOptions3) ;
-         AV17DateRange_RangePickerOptions = GXt_SdtWWPDateRangePickerOptions3;
+         GXt_SdtWWPDateRangePickerOptions4 = AV17DateRange_RangePickerOptions;
+         new GeneXus.Programs.wwpbaseobjects.wwp_rangepicker_getoptionsreports(context ).execute( out  GXt_SdtWWPDateRangePickerOptions4) ;
+         AV17DateRange_RangePickerOptions = GXt_SdtWWPDateRangePickerOptions4;
       }
 
       protected void E13562( )
@@ -961,13 +966,13 @@ namespace GeneXus.Programs {
          /* Execute user subroutine: 'GETDATA' */
          S112 ();
          if (returnInSub) return;
-         GXt_char2 = "";
-         new formatdatetime(context ).execute(  AV10DateRange,  "YYYY-MM-DD", out  GXt_char2) ;
-         Ucvistimeline1_Startdate = GXt_char2;
+         GXt_char3 = "";
+         new formatdatetime(context ).execute(  AV10DateRange,  "YYYY-MM-DD", out  GXt_char3) ;
+         Ucvistimeline1_Startdate = GXt_char3;
          ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "startDate", Ucvistimeline1_Startdate);
-         GXt_char2 = "";
-         new formatdatetime(context ).execute(  AV16DateRange_To,  "YYYY-MM-DD", out  GXt_char2) ;
-         Ucvistimeline1_Stopdate = GXt_char2;
+         GXt_char3 = "";
+         new formatdatetime(context ).execute(  AV16DateRange_To,  "YYYY-MM-DD", out  GXt_char3) ;
+         Ucvistimeline1_Stopdate = GXt_char3;
          ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "stopDate", Ucvistimeline1_Stopdate);
          this.executeUsercontrolMethod("", false, "UCVISTIMELINE1Container", "Refresh", "", new Object[] {AV6LeaveEvents.ToJSonString(false),AV7LeaveEventGroups.ToJSonString(false)});
          /*  Sending Event outputs  */
@@ -982,13 +987,13 @@ namespace GeneXus.Programs {
          /* Execute user subroutine: 'GETDATA' */
          S112 ();
          if (returnInSub) return;
-         GXt_char2 = "";
-         new formatdatetime(context ).execute(  AV10DateRange,  "YYYY-MM-DD", out  GXt_char2) ;
-         Ucvistimeline1_Startdate = GXt_char2;
+         GXt_char3 = "";
+         new formatdatetime(context ).execute(  AV10DateRange,  "YYYY-MM-DD", out  GXt_char3) ;
+         Ucvistimeline1_Startdate = GXt_char3;
          ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "startDate", Ucvistimeline1_Startdate);
-         GXt_char2 = "";
-         new formatdatetime(context ).execute(  AV16DateRange_To,  "YYYY-MM-DD", out  GXt_char2) ;
-         Ucvistimeline1_Stopdate = GXt_char2;
+         GXt_char3 = "";
+         new formatdatetime(context ).execute(  AV16DateRange_To,  "YYYY-MM-DD", out  GXt_char3) ;
+         Ucvistimeline1_Stopdate = GXt_char3;
          ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "stopDate", Ucvistimeline1_Stopdate);
          this.executeUsercontrolMethod("", false, "UCVISTIMELINE1Container", "Refresh", "", new Object[] {AV6LeaveEvents.ToJSonString(false),AV7LeaveEventGroups.ToJSonString(false)});
          /*  Sending Event outputs  */
@@ -1000,12 +1005,12 @@ namespace GeneXus.Programs {
       {
          /* 'GETDATA' Routine */
          returnInSub = false;
-         GXt_objcol_SdtSDTLeaveEvent4 = AV6LeaveEvents;
-         new dpleaveevent(context ).execute(  AV10DateRange,  AV16DateRange_To,  AV11CompanyLocationId, out  GXt_objcol_SdtSDTLeaveEvent4) ;
-         AV6LeaveEvents = GXt_objcol_SdtSDTLeaveEvent4;
-         GXt_objcol_SdtSDTLeaveEventGroup5 = AV7LeaveEventGroups;
-         new dpleaveeventgroup(context ).execute(  AV10DateRange,  AV16DateRange_To,  AV11CompanyLocationId, out  GXt_objcol_SdtSDTLeaveEventGroup5) ;
-         AV7LeaveEventGroups = GXt_objcol_SdtSDTLeaveEventGroup5;
+         GXt_objcol_SdtSDTLeaveEvent5 = AV6LeaveEvents;
+         new dpleaveevent(context ).execute(  AV10DateRange,  AV16DateRange_To,  AV11CompanyLocationId, out  GXt_objcol_SdtSDTLeaveEvent5) ;
+         AV6LeaveEvents = GXt_objcol_SdtSDTLeaveEvent5;
+         GXt_objcol_SdtSDTLeaveEventGroup6 = AV7LeaveEventGroups;
+         new dpleaveeventgroup(context ).execute(  AV10DateRange,  AV16DateRange_To,  AV11CompanyLocationId, out  GXt_objcol_SdtSDTLeaveEventGroup6) ;
+         AV7LeaveEventGroups = GXt_objcol_SdtSDTLeaveEventGroup6;
       }
 
       protected void nextLoad( )
@@ -1058,7 +1063,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20246138282196", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024613158363", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1074,7 +1079,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("fullcalendar.js", "?20246138282196", false, true);
+         context.AddJavascriptSource("fullcalendar.js", "?2024613158364", false, true);
          context.AddJavascriptSource("UserControls/UCVISTimelineRender.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/daterangepicker/locales.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/daterangepicker/wwp-daterangepicker.js", "", false, true);
@@ -1132,6 +1137,7 @@ namespace GeneXus.Programs {
             disableJsOutput();
          }
          init_default_properties( ) ;
+         Ucvistimeline1_Leavetypes = "";
          dynavCompanylocationid_Jsonclick = "";
          dynavCompanylocationid.Enabled = 1;
          edtavDaterange_rangetext_Jsonclick = "";
@@ -1222,14 +1228,16 @@ namespace GeneXus.Programs {
          H00562_A158CompanyLocationName = new string[] {""} ;
          H00563_A157CompanyLocationId = new long[1] ;
          H00563_A158CompanyLocationName = new string[] {""} ;
+         AV23SDTLeaveTypes = new GXBaseCollection<SdtSDTLeaveType>( context, "SDTLeaveType", "YTT_version4");
+         GXt_objcol_SdtSDTLeaveType1 = new GXBaseCollection<SdtSDTLeaveType>( context, "SDTLeaveType", "YTT_version4");
          H00564_A100CompanyId = new long[1] ;
          H00564_A157CompanyLocationId = new long[1] ;
-         GXt_SdtWWPDateRangePickerOptions3 = new GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions(context);
+         GXt_SdtWWPDateRangePickerOptions4 = new GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions(context);
          AV21ExcelFilename = "";
          AV20ErrorMessage = "";
-         GXt_char2 = "";
-         GXt_objcol_SdtSDTLeaveEvent4 = new GXBaseCollection<SdtSDTLeaveEvent>( context, "SDTLeaveEvent", "YTT_version4");
-         GXt_objcol_SdtSDTLeaveEventGroup5 = new GXBaseCollection<SdtSDTLeaveEventGroup>( context, "SDTLeaveEventGroup", "YTT_version4");
+         GXt_char3 = "";
+         GXt_objcol_SdtSDTLeaveEvent5 = new GXBaseCollection<SdtSDTLeaveEvent>( context, "SDTLeaveEvent", "YTT_version4");
+         GXt_objcol_SdtSDTLeaveEventGroup6 = new GXBaseCollection<SdtSDTLeaveEventGroup>( context, "SDTLeaveEventGroup", "YTT_version4");
          BackMsgLst = new msglist();
          LclMsgLst = new msglist();
          H00565_A157CompanyLocationId = new long[1] ;
@@ -1272,7 +1280,7 @@ namespace GeneXus.Programs {
       private int idxLst ;
       private long AV11CompanyLocationId ;
       private long AV18CompanyId ;
-      private long GXt_int1 ;
+      private long GXt_int2 ;
       private long A100CompanyId ;
       private long A157CompanyLocationId ;
       private string gxfirstwebparm ;
@@ -1314,7 +1322,8 @@ namespace GeneXus.Programs {
       private string sEvtType ;
       private string gxwrpcisep ;
       private string scmdbuf ;
-      private string GXt_char2 ;
+      private string Ucvistimeline1_Leavetypes ;
+      private string GXt_char3 ;
       private DateTime Gx_date ;
       private DateTime AV10DateRange ;
       private DateTime AV16DateRange_To ;
@@ -1347,12 +1356,14 @@ namespace GeneXus.Programs {
       private long[] H00565_A157CompanyLocationId ;
       private string[] H00565_A158CompanyLocationName ;
       private GXBaseCollection<SdtSDTLeaveEventGroup> AV7LeaveEventGroups ;
-      private GXBaseCollection<SdtSDTLeaveEventGroup> GXt_objcol_SdtSDTLeaveEventGroup5 ;
+      private GXBaseCollection<SdtSDTLeaveEventGroup> GXt_objcol_SdtSDTLeaveEventGroup6 ;
       private GXBaseCollection<SdtSDTLeaveEvent> AV6LeaveEvents ;
-      private GXBaseCollection<SdtSDTLeaveEvent> GXt_objcol_SdtSDTLeaveEvent4 ;
+      private GXBaseCollection<SdtSDTLeaveEvent> GXt_objcol_SdtSDTLeaveEvent5 ;
+      private GXBaseCollection<SdtSDTLeaveType> AV23SDTLeaveTypes ;
+      private GXBaseCollection<SdtSDTLeaveType> GXt_objcol_SdtSDTLeaveType1 ;
       private GXWebForm Form ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions AV17DateRange_RangePickerOptions ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions GXt_SdtWWPDateRangePickerOptions3 ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions GXt_SdtWWPDateRangePickerOptions4 ;
    }
 
    public class fullcalendar__default : DataStoreHelperBase, IDataStoreHelper

@@ -188,7 +188,7 @@ namespace GeneXus.Programs {
 
       [  SoapElement( ElementName = "Leaverequestduration" )]
       [  XmlElement( ElementName = "Leaverequestduration"   )]
-      public short gxTpr_Leaverequestduration
+      public decimal gxTpr_Leaverequestduration
       {
          get {
             return gxTv_SdtLeaveRequestPanel_Level_DetailSdt_Leaverequestduration ;
@@ -354,10 +354,10 @@ namespace GeneXus.Programs {
       }
 
       protected short sdtIsNull ;
-      protected short gxTv_SdtLeaveRequestPanel_Level_DetailSdt_Leaverequestduration ;
       protected short gxTv_SdtLeaveRequestPanel_Level_DetailSdt_Employyeeavailablevacationdays ;
       protected long gxTv_SdtLeaveRequestPanel_Level_DetailSdt_Leavetypeid ;
       protected long gxTv_SdtLeaveRequestPanel_Level_DetailSdt_Employeeid ;
+      protected decimal gxTv_SdtLeaveRequestPanel_Level_DetailSdt_Leaverequestduration ;
       protected string gxTv_SdtLeaveRequestPanel_Level_DetailSdt_Msgvar ;
       protected string gxTv_SdtLeaveRequestPanel_Level_DetailSdt_Gxdynprop ;
       protected string sDateCnv ;
@@ -420,14 +420,14 @@ namespace GeneXus.Programs {
       }
 
       [DataMember( Name = "Leaverequestduration" , Order = 3 )]
-      public Nullable<short> gxTpr_Leaverequestduration
+      public Nullable<decimal> gxTpr_Leaverequestduration
       {
          get {
             return sdt.gxTpr_Leaverequestduration ;
          }
 
          set {
-            sdt.gxTpr_Leaverequestduration = (short)(value.HasValue ? value.Value : 0);
+            sdt.gxTpr_Leaverequestduration = (decimal)(value.HasValue ? value.Value : 0);
          }
 
       }

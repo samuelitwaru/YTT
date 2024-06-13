@@ -226,7 +226,6 @@ namespace GeneXus.Programs {
 
       private short AV37EmployyeeAvailableVacationDays ;
       private short GXt_int2 ;
-      private short AV33LeaveRequestDuration ;
       private int AV40gxid ;
       private long AV20EmployeeId ;
       private long GXt_int1 ;
@@ -235,6 +234,7 @@ namespace GeneXus.Programs {
       private long AV51Udparg4 ;
       private long A100CompanyId ;
       private long A124LeaveTypeId ;
+      private decimal AV33LeaveRequestDuration ;
       private string Gxids ;
       private string AV29MsgVar ;
       private string Gxdynprop1 ;

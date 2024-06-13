@@ -75,6 +75,8 @@ namespace GeneXus.Programs {
          state.Add("gxTpr_Projectstatus_Z");
          state.Add("gxTpr_Projectmanagerid_Z");
          state.Add("gxTpr_Projectmanagername_Z");
+         state.Add("gxTpr_Projectmanageremail_Z");
+         state.Add("gxTpr_Projectmanagerisactive_Z");
          state.Add("gxTpr_Projectmanagerid_N");
          return state ;
       }
@@ -89,6 +91,8 @@ namespace GeneXus.Programs {
          gxTv_SdtProject_Projectstatus = sdt.gxTv_SdtProject_Projectstatus ;
          gxTv_SdtProject_Projectmanagerid = sdt.gxTv_SdtProject_Projectmanagerid ;
          gxTv_SdtProject_Projectmanagername = sdt.gxTv_SdtProject_Projectmanagername ;
+         gxTv_SdtProject_Projectmanageremail = sdt.gxTv_SdtProject_Projectmanageremail ;
+         gxTv_SdtProject_Projectmanagerisactive = sdt.gxTv_SdtProject_Projectmanagerisactive ;
          gxTv_SdtProject_Mode = sdt.gxTv_SdtProject_Mode ;
          gxTv_SdtProject_Initialized = sdt.gxTv_SdtProject_Initialized ;
          gxTv_SdtProject_Projectid_Z = sdt.gxTv_SdtProject_Projectid_Z ;
@@ -97,6 +101,8 @@ namespace GeneXus.Programs {
          gxTv_SdtProject_Projectstatus_Z = sdt.gxTv_SdtProject_Projectstatus_Z ;
          gxTv_SdtProject_Projectmanagerid_Z = sdt.gxTv_SdtProject_Projectmanagerid_Z ;
          gxTv_SdtProject_Projectmanagername_Z = sdt.gxTv_SdtProject_Projectmanagername_Z ;
+         gxTv_SdtProject_Projectmanageremail_Z = sdt.gxTv_SdtProject_Projectmanageremail_Z ;
+         gxTv_SdtProject_Projectmanagerisactive_Z = sdt.gxTv_SdtProject_Projectmanagerisactive_Z ;
          gxTv_SdtProject_Projectmanagerid_N = sdt.gxTv_SdtProject_Projectmanagerid_N ;
          return  ;
       }
@@ -123,6 +129,8 @@ namespace GeneXus.Programs {
          AddObjectProperty("ProjectManagerId", gxTv_SdtProject_Projectmanagerid, false, includeNonInitialized);
          AddObjectProperty("ProjectManagerId_N", gxTv_SdtProject_Projectmanagerid_N, false, includeNonInitialized);
          AddObjectProperty("ProjectManagerName", gxTv_SdtProject_Projectmanagername, false, includeNonInitialized);
+         AddObjectProperty("ProjectManagerEmail", gxTv_SdtProject_Projectmanageremail, false, includeNonInitialized);
+         AddObjectProperty("ProjectManagerIsActive", gxTv_SdtProject_Projectmanagerisactive, false, includeNonInitialized);
          if ( includeState )
          {
             AddObjectProperty("Mode", gxTv_SdtProject_Mode, false, includeNonInitialized);
@@ -133,6 +141,8 @@ namespace GeneXus.Programs {
             AddObjectProperty("ProjectStatus_Z", gxTv_SdtProject_Projectstatus_Z, false, includeNonInitialized);
             AddObjectProperty("ProjectManagerId_Z", gxTv_SdtProject_Projectmanagerid_Z, false, includeNonInitialized);
             AddObjectProperty("ProjectManagerName_Z", gxTv_SdtProject_Projectmanagername_Z, false, includeNonInitialized);
+            AddObjectProperty("ProjectManagerEmail_Z", gxTv_SdtProject_Projectmanageremail_Z, false, includeNonInitialized);
+            AddObjectProperty("ProjectManagerIsActive_Z", gxTv_SdtProject_Projectmanagerisactive_Z, false, includeNonInitialized);
             AddObjectProperty("ProjectManagerId_N", gxTv_SdtProject_Projectmanagerid_N, false, includeNonInitialized);
          }
          return  ;
@@ -171,6 +181,16 @@ namespace GeneXus.Programs {
             sdtIsNull = 0;
             gxTv_SdtProject_Projectmanagername = sdt.gxTv_SdtProject_Projectmanagername ;
          }
+         if ( sdt.IsDirty("ProjectManagerEmail") )
+         {
+            sdtIsNull = 0;
+            gxTv_SdtProject_Projectmanageremail = sdt.gxTv_SdtProject_Projectmanageremail ;
+         }
+         if ( sdt.IsDirty("ProjectManagerIsActive") )
+         {
+            sdtIsNull = 0;
+            gxTv_SdtProject_Projectmanagerisactive = sdt.gxTv_SdtProject_Projectmanagerisactive ;
+         }
          return  ;
       }
 
@@ -193,6 +213,8 @@ namespace GeneXus.Programs {
                this.gxTv_SdtProject_Projectstatus_Z_SetNull( );
                this.gxTv_SdtProject_Projectmanagerid_Z_SetNull( );
                this.gxTv_SdtProject_Projectmanagername_Z_SetNull( );
+               this.gxTv_SdtProject_Projectmanageremail_Z_SetNull( );
+               this.gxTv_SdtProject_Projectmanagerisactive_Z_SetNull( );
             }
             gxTv_SdtProject_Projectid = value;
             SetDirty("Projectid");
@@ -290,6 +312,38 @@ namespace GeneXus.Programs {
             sdtIsNull = 0;
             gxTv_SdtProject_Projectmanagername = value;
             SetDirty("Projectmanagername");
+         }
+
+      }
+
+      [  SoapElement( ElementName = "ProjectManagerEmail" )]
+      [  XmlElement( ElementName = "ProjectManagerEmail"   )]
+      public string gxTpr_Projectmanageremail
+      {
+         get {
+            return gxTv_SdtProject_Projectmanageremail ;
+         }
+
+         set {
+            sdtIsNull = 0;
+            gxTv_SdtProject_Projectmanageremail = value;
+            SetDirty("Projectmanageremail");
+         }
+
+      }
+
+      [  SoapElement( ElementName = "ProjectManagerIsActive" )]
+      [  XmlElement( ElementName = "ProjectManagerIsActive"   )]
+      public bool gxTpr_Projectmanagerisactive
+      {
+         get {
+            return gxTv_SdtProject_Projectmanagerisactive ;
+         }
+
+         set {
+            sdtIsNull = 0;
+            gxTv_SdtProject_Projectmanagerisactive = value;
+            SetDirty("Projectmanagerisactive");
          }
 
       }
@@ -518,6 +572,62 @@ namespace GeneXus.Programs {
          return false ;
       }
 
+      [  SoapElement( ElementName = "ProjectManagerEmail_Z" )]
+      [  XmlElement( ElementName = "ProjectManagerEmail_Z"   )]
+      public string gxTpr_Projectmanageremail_Z
+      {
+         get {
+            return gxTv_SdtProject_Projectmanageremail_Z ;
+         }
+
+         set {
+            sdtIsNull = 0;
+            gxTv_SdtProject_Projectmanageremail_Z = value;
+            SetDirty("Projectmanageremail_Z");
+         }
+
+      }
+
+      public void gxTv_SdtProject_Projectmanageremail_Z_SetNull( )
+      {
+         gxTv_SdtProject_Projectmanageremail_Z = "";
+         SetDirty("Projectmanageremail_Z");
+         return  ;
+      }
+
+      public bool gxTv_SdtProject_Projectmanageremail_Z_IsNull( )
+      {
+         return false ;
+      }
+
+      [  SoapElement( ElementName = "ProjectManagerIsActive_Z" )]
+      [  XmlElement( ElementName = "ProjectManagerIsActive_Z"   )]
+      public bool gxTpr_Projectmanagerisactive_Z
+      {
+         get {
+            return gxTv_SdtProject_Projectmanagerisactive_Z ;
+         }
+
+         set {
+            sdtIsNull = 0;
+            gxTv_SdtProject_Projectmanagerisactive_Z = value;
+            SetDirty("Projectmanagerisactive_Z");
+         }
+
+      }
+
+      public void gxTv_SdtProject_Projectmanagerisactive_Z_SetNull( )
+      {
+         gxTv_SdtProject_Projectmanagerisactive_Z = false;
+         SetDirty("Projectmanagerisactive_Z");
+         return  ;
+      }
+
+      public bool gxTv_SdtProject_Projectmanagerisactive_Z_IsNull( )
+      {
+         return false ;
+      }
+
       [  SoapElement( ElementName = "ProjectManagerId_N" )]
       [  XmlElement( ElementName = "ProjectManagerId_N"   )]
       public short gxTpr_Projectmanagerid_N
@@ -553,11 +663,13 @@ namespace GeneXus.Programs {
          gxTv_SdtProject_Projectdescription = "";
          gxTv_SdtProject_Projectstatus = "";
          gxTv_SdtProject_Projectmanagername = "";
+         gxTv_SdtProject_Projectmanageremail = "";
          gxTv_SdtProject_Mode = "";
          gxTv_SdtProject_Projectname_Z = "";
          gxTv_SdtProject_Projectdescription_Z = "";
          gxTv_SdtProject_Projectstatus_Z = "";
          gxTv_SdtProject_Projectmanagername_Z = "";
+         gxTv_SdtProject_Projectmanageremail_Z = "";
          IGxSilentTrn obj;
          obj = (IGxSilentTrn)ClassLoader.FindInstance( "project", "GeneXus.Programs.project_bc", new Object[] {context}, constructorCallingAssembly);;
          obj.initialize();
@@ -586,8 +698,12 @@ namespace GeneXus.Programs {
       private string gxTv_SdtProject_Projectname_Z ;
       private string gxTv_SdtProject_Projectstatus_Z ;
       private string gxTv_SdtProject_Projectmanagername_Z ;
+      private bool gxTv_SdtProject_Projectmanagerisactive ;
+      private bool gxTv_SdtProject_Projectmanagerisactive_Z ;
       private string gxTv_SdtProject_Projectdescription ;
+      private string gxTv_SdtProject_Projectmanageremail ;
       private string gxTv_SdtProject_Projectdescription_Z ;
+      private string gxTv_SdtProject_Projectmanageremail_Z ;
    }
 
    [DataContract(Name = @"Project", Namespace = "YTT_version4")]
@@ -685,6 +801,34 @@ namespace GeneXus.Programs {
 
       }
 
+      [DataMember( Name = "ProjectManagerEmail" , Order = 6 )]
+      [GxSeudo()]
+      public string gxTpr_Projectmanageremail
+      {
+         get {
+            return sdt.gxTpr_Projectmanageremail ;
+         }
+
+         set {
+            sdt.gxTpr_Projectmanageremail = value;
+         }
+
+      }
+
+      [DataMember( Name = "ProjectManagerIsActive" , Order = 7 )]
+      [GxSeudo()]
+      public bool gxTpr_Projectmanagerisactive
+      {
+         get {
+            return sdt.gxTpr_Projectmanagerisactive ;
+         }
+
+         set {
+            sdt.gxTpr_Projectmanagerisactive = value;
+         }
+
+      }
+
       public SdtProject sdt
       {
          get {
@@ -706,7 +850,7 @@ namespace GeneXus.Programs {
          }
       }
 
-      [DataMember( Name = "gx_md5_hash", Order = 6 )]
+      [DataMember( Name = "gx_md5_hash", Order = 8 )]
       public string Hash
       {
          get {

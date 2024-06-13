@@ -125,7 +125,7 @@ namespace GeneXus.Programs {
             Gxwebsession.Set(Gxids+"gxvar_Leavetypeid", StringUtil.Str( (decimal)(AV26LeaveTypeId), 10, 0));
             Gxwebsession.Set(Gxids+"gxvar_Leaverequeststartdate", context.localUtil.DToC( AV25LeaveRequestStartDate, 1, "/"));
             Gxwebsession.Set(Gxids+"gxvar_Leaverequestenddate", context.localUtil.DToC( AV24LeaveRequestEndDate, 1, "/"));
-            Gxwebsession.Set(Gxids+"gxvar_Leaverequestduration", StringUtil.Str( (decimal)(AV23LeaveRequestDuration), 4, 0));
+            Gxwebsession.Set(Gxids+"gxvar_Leaverequestduration", StringUtil.Str( AV23LeaveRequestDuration, 4, 1));
             Gxwebsession.Set(Gxids+"gxvar_Leaverequestdescription", AV22LeaveRequestDescription);
             Gxwebsession.Set(Gxids+"gxvar_Leaverejectionreason", AV28LeaveRejectionReason);
             Gxwebsession.Set(Gxids, "true");
@@ -137,7 +137,7 @@ namespace GeneXus.Programs {
             AV25LeaveRequestStartDate = context.localUtil.CToD( Gxwebsession.Get(Gxids+"gxvar_Leaverequeststartdate"), 1);
             AV24LeaveRequestEndDate = context.localUtil.CToD( Gxwebsession.Get(Gxids+"gxvar_Leaverequestenddate"), 1);
             AV22LeaveRequestDescription = Gxwebsession.Get(Gxids+"gxvar_Leaverequestdescription");
-            AV23LeaveRequestDuration = (short)(Math.Round(NumberUtil.Val( Gxwebsession.Get(Gxids+"gxvar_Leaverequestduration"), "."), 18, MidpointRounding.ToEven));
+            AV23LeaveRequestDuration = NumberUtil.Val( Gxwebsession.Get(Gxids+"gxvar_Leaverequestduration"), ".");
             AV28LeaveRejectionReason = Gxwebsession.Get(Gxids+"gxvar_Leaverejectionreason");
          }
          AV34GXM1ViewLeaveRequest_Level_DetailSdt.gxTpr_Leaverequestdate = AV21LeaveRequestDate;
@@ -222,12 +222,12 @@ namespace GeneXus.Programs {
          Gx_date = DateTimeUtil.Today( context);
       }
 
-      private short AV23LeaveRequestDuration ;
       private int AV29gxid ;
       private long A127LeaveRequestId ;
       private long AV26LeaveTypeId ;
       private long Gxval_leavetypeid ;
       private long A124LeaveTypeId ;
+      private decimal AV23LeaveRequestDuration ;
       private string Gxids ;
       private string scmdbuf ;
       private string A125LeaveTypeName ;

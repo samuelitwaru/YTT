@@ -48,6 +48,7 @@
  	<Compile Include="$(WebDirectory)\type_SdtSDTLeaveEventGroup.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDTLeaveReport.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDTLeaveReport_PeriodCollectionItem.cs" />
+ 	<Compile Include="$(WebDirectory)\type_SdtSDTLeaveType.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDTPage.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDTProject.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDTRow_SDTRowItem.cs" />

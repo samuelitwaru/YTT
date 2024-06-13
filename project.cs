@@ -572,6 +572,8 @@ namespace GeneXus.Programs {
                AV20Insert_ProjectManagerId = (long)(Math.Round(context.localUtil.CToN( cgiGet( "vINSERT_PROJECTMANAGERID"), ".", ","), 18, MidpointRounding.ToEven));
                Gx_BScreen = (short)(Math.Round(context.localUtil.CToN( cgiGet( "vGXBSCREEN"), ".", ","), 18, MidpointRounding.ToEven));
                A167ProjectManagerName = cgiGet( "PROJECTMANAGERNAME");
+               A176ProjectManagerEmail = cgiGet( "PROJECTMANAGEREMAIL");
+               A177ProjectManagerIsActive = StringUtil.StrToBool( cgiGet( "PROJECTMANAGERISACTIVE"));
                AV32Pgmname = cgiGet( "vPGMNAME");
                Combo_projectmanagerid_Objectcall = cgiGet( "COMBO_PROJECTMANAGERID_Objectcall");
                Combo_projectmanagerid_Class = cgiGet( "COMBO_PROJECTMANAGERID_Class");
@@ -630,6 +632,7 @@ namespace GeneXus.Programs {
                Dvpanel_tableattributes_Iconposition = cgiGet( "DVPANEL_TABLEATTRIBUTES_Iconposition");
                Dvpanel_tableattributes_Autoscroll = StringUtil.StrToBool( cgiGet( "DVPANEL_TABLEATTRIBUTES_Autoscroll"));
                Dvpanel_tableattributes_Visible = StringUtil.StrToBool( cgiGet( "DVPANEL_TABLEATTRIBUTES_Visible"));
+               Dvpanel_tableattributes_Gxcontroltype = (int)(Math.Round(context.localUtil.CToN( cgiGet( "DVPANEL_TABLEATTRIBUTES_Gxcontroltype"), ".", ","), 18, MidpointRounding.ToEven));
                /* Read variables values. */
                A103ProjectName = cgiGet( edtProjectName_Internalname);
                AssignAttri("", false, "A103ProjectName", A103ProjectName);
@@ -1002,6 +1005,8 @@ namespace GeneXus.Programs {
             Z166ProjectManagerId = A166ProjectManagerId;
             Z102ProjectId = A102ProjectId;
             Z167ProjectManagerName = A167ProjectManagerName;
+            Z176ProjectManagerEmail = A176ProjectManagerEmail;
+            Z177ProjectManagerIsActive = A177ProjectManagerIsActive;
          }
       }
 
@@ -1082,6 +1087,8 @@ namespace GeneXus.Programs {
             /* Using cursor T000E4 */
             pr_default.execute(2, new Object[] {n166ProjectManagerId, A166ProjectManagerId});
             A167ProjectManagerName = T000E4_A167ProjectManagerName[0];
+            A176ProjectManagerEmail = T000E4_A176ProjectManagerEmail[0];
+            A177ProjectManagerIsActive = T000E4_A177ProjectManagerIsActive[0];
             pr_default.close(2);
          }
       }
@@ -1100,6 +1107,8 @@ namespace GeneXus.Programs {
             A105ProjectStatus = T000E6_A105ProjectStatus[0];
             AssignAttri("", false, "A105ProjectStatus", A105ProjectStatus);
             A167ProjectManagerName = T000E6_A167ProjectManagerName[0];
+            A176ProjectManagerEmail = T000E6_A176ProjectManagerEmail[0];
+            A177ProjectManagerIsActive = T000E6_A177ProjectManagerIsActive[0];
             A166ProjectManagerId = T000E6_A166ProjectManagerId[0];
             n166ProjectManagerId = T000E6_n166ProjectManagerId[0];
             AssignAttri("", false, "A166ProjectManagerId", StringUtil.LTrimStr( (decimal)(A166ProjectManagerId), 10, 0));
@@ -1169,6 +1178,8 @@ namespace GeneXus.Programs {
             }
          }
          A167ProjectManagerName = T000E4_A167ProjectManagerName[0];
+         A176ProjectManagerEmail = T000E4_A176ProjectManagerEmail[0];
+         A177ProjectManagerIsActive = T000E4_A177ProjectManagerIsActive[0];
          pr_default.close(2);
       }
 
@@ -1224,9 +1235,11 @@ namespace GeneXus.Programs {
             }
          }
          A167ProjectManagerName = T000E9_A167ProjectManagerName[0];
+         A176ProjectManagerEmail = T000E9_A176ProjectManagerEmail[0];
+         A177ProjectManagerIsActive = T000E9_A177ProjectManagerIsActive[0];
          GxWebStd.set_html_headers( context, 0, "", "");
          AddString( "[[") ;
-         AddString( "\""+GXUtil.EncodeJSConstant( StringUtil.RTrim( A167ProjectManagerName))+"\"") ;
+         AddString( "\""+GXUtil.EncodeJSConstant( StringUtil.RTrim( A167ProjectManagerName))+"\""+","+"\""+GXUtil.EncodeJSConstant( A176ProjectManagerEmail)+"\""+","+"\""+GXUtil.EncodeJSConstant( StringUtil.BoolToStr( A177ProjectManagerIsActive))+"\"") ;
          AddString( "]") ;
          if ( (pr_default.getStatus(7) == 101) )
          {
@@ -1709,6 +1722,8 @@ namespace GeneXus.Programs {
             /* Using cursor T000E17 */
             pr_default.execute(15, new Object[] {n166ProjectManagerId, A166ProjectManagerId});
             A167ProjectManagerName = T000E17_A167ProjectManagerName[0];
+            A176ProjectManagerEmail = T000E17_A176ProjectManagerEmail[0];
+            A177ProjectManagerIsActive = T000E17_A177ProjectManagerIsActive[0];
             pr_default.close(15);
          }
          if ( AnyError == 0 )
@@ -1989,6 +2004,8 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "vINSERT_PROJECTMANAGERID", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV20Insert_ProjectManagerId), 10, 0, ".", "")));
          GxWebStd.gx_hidden_field( context, "vGXBSCREEN", StringUtil.LTrim( StringUtil.NToC( (decimal)(Gx_BScreen), 1, 0, ".", "")));
          GxWebStd.gx_hidden_field( context, "PROJECTMANAGERNAME", StringUtil.RTrim( A167ProjectManagerName));
+         GxWebStd.gx_hidden_field( context, "PROJECTMANAGEREMAIL", A176ProjectManagerEmail);
+         GxWebStd.gx_boolean_hidden_field( context, "PROJECTMANAGERISACTIVE", A177ProjectManagerIsActive);
          GxWebStd.gx_hidden_field( context, "vPGMNAME", StringUtil.RTrim( AV32Pgmname));
          GxWebStd.gx_hidden_field( context, "COMBO_PROJECTMANAGERID_Objectcall", StringUtil.RTrim( Combo_projectmanagerid_Objectcall));
          GxWebStd.gx_hidden_field( context, "COMBO_PROJECTMANAGERID_Cls", StringUtil.RTrim( Combo_projectmanagerid_Cls));
@@ -2090,6 +2107,10 @@ namespace GeneXus.Programs {
          AssignAttri("", false, "A104ProjectDescription", A104ProjectDescription);
          A167ProjectManagerName = "";
          AssignAttri("", false, "A167ProjectManagerName", A167ProjectManagerName);
+         A176ProjectManagerEmail = "";
+         AssignAttri("", false, "A176ProjectManagerEmail", A176ProjectManagerEmail);
+         A177ProjectManagerIsActive = false;
+         AssignAttri("", false, "A177ProjectManagerIsActive", A177ProjectManagerIsActive);
          A105ProjectStatus = "Active";
          AssignAttri("", false, "A105ProjectStatus", A105ProjectStatus);
          Z103ProjectName = "";
@@ -2122,7 +2143,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20246109432576", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202461314493932", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2138,7 +2159,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("project.js", "?20246109432577", false, true);
+         context.AddJavascriptSource("project.js", "?202461314493932", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Panel/BootstrapPanelRender.js", "", false, true);
@@ -2319,6 +2340,8 @@ namespace GeneXus.Programs {
             }
          }
          A167ProjectManagerName = T000E17_A167ProjectManagerName[0];
+         A176ProjectManagerEmail = T000E17_A176ProjectManagerEmail[0];
+         A177ProjectManagerIsActive = T000E17_A177ProjectManagerIsActive[0];
          pr_default.close(15);
          /* Using cursor T000E21 */
          pr_default.execute(19, new Object[] {n166ProjectManagerId, A166ProjectManagerId, A102ProjectId});
@@ -2335,6 +2358,8 @@ namespace GeneXus.Programs {
          dynload_actions( ) ;
          /*  Sending validation outputs */
          AssignAttri("", false, "A167ProjectManagerName", StringUtil.RTrim( A167ProjectManagerName));
+         AssignAttri("", false, "A176ProjectManagerEmail", A176ProjectManagerEmail);
+         AssignAttri("", false, "A177ProjectManagerIsActive", A177ProjectManagerIsActive);
       }
 
       public override bool SupportAjaxEvent( )
@@ -2354,8 +2379,8 @@ namespace GeneXus.Programs {
          setEventMetadata("VALID_PROJECTNAME",",oparms:[]}");
          setEventMetadata("VALID_PROJECTSTATUS","{handler:'Valid_Projectstatus',iparms:[]");
          setEventMetadata("VALID_PROJECTSTATUS",",oparms:[]}");
-         setEventMetadata("VALID_PROJECTMANAGERID","{handler:'Valid_Projectmanagerid',iparms:[{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'A167ProjectManagerName',fld:'PROJECTMANAGERNAME',pic:''}]");
-         setEventMetadata("VALID_PROJECTMANAGERID",",oparms:[{av:'A167ProjectManagerName',fld:'PROJECTMANAGERNAME',pic:''}]}");
+         setEventMetadata("VALID_PROJECTMANAGERID","{handler:'Valid_Projectmanagerid',iparms:[{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'A167ProjectManagerName',fld:'PROJECTMANAGERNAME',pic:''},{av:'A176ProjectManagerEmail',fld:'PROJECTMANAGEREMAIL',pic:''},{av:'A177ProjectManagerIsActive',fld:'PROJECTMANAGERISACTIVE',pic:''}]");
+         setEventMetadata("VALID_PROJECTMANAGERID",",oparms:[{av:'A167ProjectManagerName',fld:'PROJECTMANAGERNAME',pic:''},{av:'A176ProjectManagerEmail',fld:'PROJECTMANAGEREMAIL',pic:''},{av:'A177ProjectManagerIsActive',fld:'PROJECTMANAGERISACTIVE',pic:''}]}");
          setEventMetadata("VALIDV_COMBOPROJECTMANAGERID","{handler:'Validv_Comboprojectmanagerid',iparms:[]");
          setEventMetadata("VALIDV_COMBOPROJECTMANAGERID",",oparms:[]}");
          setEventMetadata("VALID_PROJECTID","{handler:'Valid_Projectid',iparms:[]");
@@ -2411,6 +2436,7 @@ namespace GeneXus.Programs {
          bttBtntrn_cancel_Jsonclick = "";
          bttBtntrn_delete_Jsonclick = "";
          A167ProjectManagerName = "";
+         A176ProjectManagerEmail = "";
          AV32Pgmname = "";
          Combo_projectmanagerid_Objectcall = "";
          Combo_projectmanagerid_Class = "";
@@ -2460,11 +2486,16 @@ namespace GeneXus.Programs {
          AV16ComboSelectedValue = "";
          AV27ComboSelectedText = "";
          Z167ProjectManagerName = "";
+         Z176ProjectManagerEmail = "";
          T000E4_A167ProjectManagerName = new string[] {""} ;
+         T000E4_A176ProjectManagerEmail = new string[] {""} ;
+         T000E4_A177ProjectManagerIsActive = new bool[] {false} ;
          T000E6_A103ProjectName = new string[] {""} ;
          T000E6_A104ProjectDescription = new string[] {""} ;
          T000E6_A105ProjectStatus = new string[] {""} ;
          T000E6_A167ProjectManagerName = new string[] {""} ;
+         T000E6_A176ProjectManagerEmail = new string[] {""} ;
+         T000E6_A177ProjectManagerIsActive = new bool[] {false} ;
          T000E6_A166ProjectManagerId = new long[1] ;
          T000E6_n166ProjectManagerId = new bool[] {false} ;
          T000E6_A102ProjectId = new long[1] ;
@@ -2472,6 +2503,8 @@ namespace GeneXus.Programs {
          T000E7_A103ProjectName = new string[] {""} ;
          T000E8_A106EmployeeId = new long[1] ;
          T000E9_A167ProjectManagerName = new string[] {""} ;
+         T000E9_A176ProjectManagerEmail = new string[] {""} ;
+         T000E9_A177ProjectManagerIsActive = new bool[] {false} ;
          T000E10_A102ProjectId = new long[1] ;
          T000E3_A103ProjectName = new string[] {""} ;
          T000E3_A104ProjectDescription = new string[] {""} ;
@@ -2489,6 +2522,8 @@ namespace GeneXus.Programs {
          T000E2_A102ProjectId = new long[1] ;
          T000E14_A102ProjectId = new long[1] ;
          T000E17_A167ProjectManagerName = new string[] {""} ;
+         T000E17_A176ProjectManagerEmail = new string[] {""} ;
+         T000E17_A177ProjectManagerIsActive = new bool[] {false} ;
          T000E18_A106EmployeeId = new long[1] ;
          T000E18_A102ProjectId = new long[1] ;
          T000E19_A102ProjectId = new long[1] ;
@@ -2511,13 +2546,13 @@ namespace GeneXus.Programs {
                T000E3_A103ProjectName, T000E3_A104ProjectDescription, T000E3_A105ProjectStatus, T000E3_A166ProjectManagerId, T000E3_n166ProjectManagerId, T000E3_A102ProjectId
                }
                , new Object[] {
-               T000E4_A167ProjectManagerName
+               T000E4_A167ProjectManagerName, T000E4_A176ProjectManagerEmail, T000E4_A177ProjectManagerIsActive
                }
                , new Object[] {
                T000E5_A106EmployeeId
                }
                , new Object[] {
-               T000E6_A103ProjectName, T000E6_A104ProjectDescription, T000E6_A105ProjectStatus, T000E6_A167ProjectManagerName, T000E6_A166ProjectManagerId, T000E6_n166ProjectManagerId, T000E6_A102ProjectId
+               T000E6_A103ProjectName, T000E6_A104ProjectDescription, T000E6_A105ProjectStatus, T000E6_A167ProjectManagerName, T000E6_A176ProjectManagerEmail, T000E6_A177ProjectManagerIsActive, T000E6_A166ProjectManagerId, T000E6_n166ProjectManagerId, T000E6_A102ProjectId
                }
                , new Object[] {
                T000E7_A103ProjectName
@@ -2526,7 +2561,7 @@ namespace GeneXus.Programs {
                T000E8_A106EmployeeId
                }
                , new Object[] {
-               T000E9_A167ProjectManagerName
+               T000E9_A167ProjectManagerName, T000E9_A176ProjectManagerEmail, T000E9_A177ProjectManagerIsActive
                }
                , new Object[] {
                T000E10_A102ProjectId
@@ -2547,7 +2582,7 @@ namespace GeneXus.Programs {
                , new Object[] {
                }
                , new Object[] {
-               T000E17_A167ProjectManagerName
+               T000E17_A167ProjectManagerName, T000E17_A176ProjectManagerEmail, T000E17_A177ProjectManagerIsActive
                }
                , new Object[] {
                T000E18_A106EmployeeId, T000E18_A102ProjectId
@@ -2597,6 +2632,7 @@ namespace GeneXus.Programs {
       private int edtProjectId_Visible ;
       private int Combo_projectmanagerid_Datalistupdateminimumcharacters ;
       private int Combo_projectmanagerid_Gxcontroltype ;
+      private int Dvpanel_tableattributes_Gxcontroltype ;
       private int AV33GXV1 ;
       private int idxLst ;
       private long wcpOAV7ProjectId ;
@@ -2718,6 +2754,7 @@ namespace GeneXus.Programs {
       private bool Dvpanel_tableattributes_Showcollapseicon ;
       private bool Dvpanel_tableattributes_Autoscroll ;
       private bool Combo_projectmanagerid_Emptyitem ;
+      private bool A177ProjectManagerIsActive ;
       private bool Combo_projectmanagerid_Enabled ;
       private bool Combo_projectmanagerid_Visible ;
       private bool Combo_projectmanagerid_Allowmultipleselection ;
@@ -2730,10 +2767,13 @@ namespace GeneXus.Programs {
       private bool Dvpanel_tableattributes_Showheader ;
       private bool Dvpanel_tableattributes_Visible ;
       private bool returnInSub ;
+      private bool Z177ProjectManagerIsActive ;
       private string Z104ProjectDescription ;
       private string A104ProjectDescription ;
+      private string A176ProjectManagerEmail ;
       private string AV16ComboSelectedValue ;
       private string AV27ComboSelectedText ;
+      private string Z176ProjectManagerEmail ;
       private IGxSession AV12WebSession ;
       private GXProperties forbiddenHiddens ;
       private GXUserControl ucDvpanel_tableattributes ;
@@ -2743,10 +2783,14 @@ namespace GeneXus.Programs {
       private GXCombobox cmbProjectStatus ;
       private IDataStoreProvider pr_default ;
       private string[] T000E4_A167ProjectManagerName ;
+      private string[] T000E4_A176ProjectManagerEmail ;
+      private bool[] T000E4_A177ProjectManagerIsActive ;
       private string[] T000E6_A103ProjectName ;
       private string[] T000E6_A104ProjectDescription ;
       private string[] T000E6_A105ProjectStatus ;
       private string[] T000E6_A167ProjectManagerName ;
+      private string[] T000E6_A176ProjectManagerEmail ;
+      private bool[] T000E6_A177ProjectManagerIsActive ;
       private long[] T000E6_A166ProjectManagerId ;
       private bool[] T000E6_n166ProjectManagerId ;
       private long[] T000E6_A102ProjectId ;
@@ -2754,6 +2798,8 @@ namespace GeneXus.Programs {
       private string[] T000E7_A103ProjectName ;
       private long[] T000E8_A106EmployeeId ;
       private string[] T000E9_A167ProjectManagerName ;
+      private string[] T000E9_A176ProjectManagerEmail ;
+      private bool[] T000E9_A177ProjectManagerIsActive ;
       private long[] T000E10_A102ProjectId ;
       private string[] T000E3_A103ProjectName ;
       private string[] T000E3_A104ProjectDescription ;
@@ -2771,6 +2817,8 @@ namespace GeneXus.Programs {
       private long[] T000E2_A102ProjectId ;
       private long[] T000E14_A102ProjectId ;
       private string[] T000E17_A167ProjectManagerName ;
+      private string[] T000E17_A176ProjectManagerEmail ;
+      private bool[] T000E17_A177ProjectManagerIsActive ;
       private long[] T000E18_A106EmployeeId ;
       private long[] T000E18_A102ProjectId ;
       private long[] T000E19_A102ProjectId ;
@@ -2946,12 +2994,12 @@ namespace GeneXus.Programs {
         def= new CursorDef[] {
             new CursorDef("T000E2", "SELECT ProjectName, ProjectDescription, ProjectStatus, ProjectManagerId, ProjectId FROM Project WHERE ProjectId = :ProjectId  FOR UPDATE OF Project NOWAIT",true, GxErrorMask.GX_NOMASK, false, this,prmT000E2,1, GxCacheFrequency.OFF ,true,false )
            ,new CursorDef("T000E3", "SELECT ProjectName, ProjectDescription, ProjectStatus, ProjectManagerId, ProjectId FROM Project WHERE ProjectId = :ProjectId ",true, GxErrorMask.GX_NOMASK, false, this,prmT000E3,1, GxCacheFrequency.OFF ,true,false )
-           ,new CursorDef("T000E4", "SELECT EmployeeName AS ProjectManagerName FROM Employee WHERE EmployeeId = :ProjectManagerId ",true, GxErrorMask.GX_NOMASK, false, this,prmT000E4,1, GxCacheFrequency.OFF ,true,false )
+           ,new CursorDef("T000E4", "SELECT EmployeeName AS ProjectManagerName, EmployeeEmail AS ProjectManagerEmail, EmployeeIsActive AS ProjectManagerIsActive FROM Employee WHERE EmployeeId = :ProjectManagerId ",true, GxErrorMask.GX_NOMASK, false, this,prmT000E4,1, GxCacheFrequency.OFF ,true,false )
            ,new CursorDef("T000E5", "SELECT EmployeeId FROM EmployeeProject WHERE EmployeeId = :ProjectManagerId AND ProjectId = :ProjectId ",true, GxErrorMask.GX_NOMASK, false, this,prmT000E5,1, GxCacheFrequency.OFF ,true,false )
-           ,new CursorDef("T000E6", "SELECT TM1.ProjectName, TM1.ProjectDescription, TM1.ProjectStatus, T2.EmployeeName AS ProjectManagerName, TM1.ProjectManagerId AS ProjectManagerId, TM1.ProjectId FROM (Project TM1 LEFT JOIN Employee T2 ON T2.EmployeeId = TM1.ProjectManagerId) WHERE TM1.ProjectId = :ProjectId ORDER BY TM1.ProjectId ",true, GxErrorMask.GX_NOMASK, false, this,prmT000E6,100, GxCacheFrequency.OFF ,true,false )
+           ,new CursorDef("T000E6", "SELECT TM1.ProjectName, TM1.ProjectDescription, TM1.ProjectStatus, T2.EmployeeName AS ProjectManagerName, T2.EmployeeEmail AS ProjectManagerEmail, T2.EmployeeIsActive AS ProjectManagerIsActive, TM1.ProjectManagerId AS ProjectManagerId, TM1.ProjectId FROM (Project TM1 LEFT JOIN Employee T2 ON T2.EmployeeId = TM1.ProjectManagerId) WHERE TM1.ProjectId = :ProjectId ORDER BY TM1.ProjectId ",true, GxErrorMask.GX_NOMASK, false, this,prmT000E6,100, GxCacheFrequency.OFF ,true,false )
            ,new CursorDef("T000E7", "SELECT ProjectName FROM Project WHERE (ProjectName = :ProjectName) AND (Not ( ProjectId = :ProjectId)) ",true, GxErrorMask.GX_NOMASK, false, this,prmT000E7,1, GxCacheFrequency.OFF ,true,false )
            ,new CursorDef("T000E8", "SELECT EmployeeId FROM EmployeeProject WHERE EmployeeId = :ProjectManagerId AND ProjectId = :ProjectId ",true, GxErrorMask.GX_NOMASK, false, this,prmT000E8,1, GxCacheFrequency.OFF ,true,false )
-           ,new CursorDef("T000E9", "SELECT EmployeeName AS ProjectManagerName FROM Employee WHERE EmployeeId = :ProjectManagerId ",true, GxErrorMask.GX_NOMASK, false, this,prmT000E9,1, GxCacheFrequency.OFF ,true,false )
+           ,new CursorDef("T000E9", "SELECT EmployeeName AS ProjectManagerName, EmployeeEmail AS ProjectManagerEmail, EmployeeIsActive AS ProjectManagerIsActive FROM Employee WHERE EmployeeId = :ProjectManagerId ",true, GxErrorMask.GX_NOMASK, false, this,prmT000E9,1, GxCacheFrequency.OFF ,true,false )
            ,new CursorDef("T000E10", "SELECT ProjectId FROM Project WHERE ProjectId = :ProjectId ",true, GxErrorMask.GX_NOMASK, false, this,prmT000E10,1, GxCacheFrequency.OFF ,true,false )
            ,new CursorDef("T000E11", "SELECT ProjectId FROM Project WHERE ( ProjectId > :ProjectId) ORDER BY ProjectId ",true, GxErrorMask.GX_NOMASK, false, this,prmT000E11,1, GxCacheFrequency.OFF ,true,true )
            ,new CursorDef("T000E12", "SELECT ProjectId FROM Project WHERE ( ProjectId < :ProjectId) ORDER BY ProjectId DESC ",true, GxErrorMask.GX_NOMASK, false, this,prmT000E12,1, GxCacheFrequency.OFF ,true,true )
@@ -2959,7 +3007,7 @@ namespace GeneXus.Programs {
            ,new CursorDef("T000E14", "SELECT currval('ProjectId') ",true, GxErrorMask.GX_NOMASK, false, this,prmT000E14,1, GxCacheFrequency.OFF ,true,false )
            ,new CursorDef("T000E15", "SAVEPOINT gxupdate;UPDATE Project SET ProjectName=:ProjectName, ProjectDescription=:ProjectDescription, ProjectStatus=:ProjectStatus, ProjectManagerId=:ProjectManagerId  WHERE ProjectId = :ProjectId;RELEASE SAVEPOINT gxupdate", GxErrorMask.GX_ROLLBACKSAVEPOINT | GxErrorMask.GX_NOMASK,prmT000E15)
            ,new CursorDef("T000E16", "SAVEPOINT gxupdate;DELETE FROM Project  WHERE ProjectId = :ProjectId;RELEASE SAVEPOINT gxupdate", GxErrorMask.GX_ROLLBACKSAVEPOINT | GxErrorMask.GX_NOMASK,prmT000E16)
-           ,new CursorDef("T000E17", "SELECT EmployeeName AS ProjectManagerName FROM Employee WHERE EmployeeId = :ProjectManagerId ",true, GxErrorMask.GX_NOMASK, false, this,prmT000E17,1, GxCacheFrequency.OFF ,true,false )
+           ,new CursorDef("T000E17", "SELECT EmployeeName AS ProjectManagerName, EmployeeEmail AS ProjectManagerEmail, EmployeeIsActive AS ProjectManagerIsActive FROM Employee WHERE EmployeeId = :ProjectManagerId ",true, GxErrorMask.GX_NOMASK, false, this,prmT000E17,1, GxCacheFrequency.OFF ,true,false )
            ,new CursorDef("T000E18", "SELECT EmployeeId, ProjectId FROM EmployeeProject WHERE ProjectId = :ProjectId ",true, GxErrorMask.GX_NOMASK, false, this,prmT000E18,1, GxCacheFrequency.OFF ,true,true )
            ,new CursorDef("T000E19", "SELECT ProjectId FROM Project ORDER BY ProjectId ",true, GxErrorMask.GX_NOMASK, false, this,prmT000E19,100, GxCacheFrequency.OFF ,true,false )
            ,new CursorDef("T000E20", "SELECT ProjectName FROM Project WHERE (ProjectName = :ProjectName) AND (Not ( ProjectId = :ProjectId)) ",true, GxErrorMask.GX_NOMASK, false, this,prmT000E20,1, GxCacheFrequency.OFF ,true,false )
@@ -2992,6 +3040,8 @@ namespace GeneXus.Programs {
               return;
            case 2 :
               ((string[]) buf[0])[0] = rslt.getString(1, 128);
+              ((string[]) buf[1])[0] = rslt.getVarchar(2);
+              ((bool[]) buf[2])[0] = rslt.getBool(3);
               return;
            case 3 :
               ((long[]) buf[0])[0] = rslt.getLong(1);
@@ -3001,9 +3051,11 @@ namespace GeneXus.Programs {
               ((string[]) buf[1])[0] = rslt.getVarchar(2);
               ((string[]) buf[2])[0] = rslt.getString(3, 20);
               ((string[]) buf[3])[0] = rslt.getString(4, 128);
-              ((long[]) buf[4])[0] = rslt.getLong(5);
-              ((bool[]) buf[5])[0] = rslt.wasNull(5);
-              ((long[]) buf[6])[0] = rslt.getLong(6);
+              ((string[]) buf[4])[0] = rslt.getVarchar(5);
+              ((bool[]) buf[5])[0] = rslt.getBool(6);
+              ((long[]) buf[6])[0] = rslt.getLong(7);
+              ((bool[]) buf[7])[0] = rslt.wasNull(7);
+              ((long[]) buf[8])[0] = rslt.getLong(8);
               return;
            case 5 :
               ((string[]) buf[0])[0] = rslt.getString(1, 100);
@@ -3013,6 +3065,8 @@ namespace GeneXus.Programs {
               return;
            case 7 :
               ((string[]) buf[0])[0] = rslt.getString(1, 128);
+              ((string[]) buf[1])[0] = rslt.getVarchar(2);
+              ((bool[]) buf[2])[0] = rslt.getBool(3);
               return;
            case 8 :
               ((long[]) buf[0])[0] = rslt.getLong(1);
@@ -3028,6 +3082,8 @@ namespace GeneXus.Programs {
               return;
            case 15 :
               ((string[]) buf[0])[0] = rslt.getString(1, 128);
+              ((string[]) buf[1])[0] = rslt.getVarchar(2);
+              ((bool[]) buf[2])[0] = rslt.getBool(3);
               return;
            case 16 :
               ((long[]) buf[0])[0] = rslt.getLong(1);

@@ -146,7 +146,7 @@ namespace GeneXus.Programs {
             Gxm1sdtleaveevent.gxTpr_End = GXt_char1;
             Gxm1sdtleaveevent.gxTpr_Group = (short)(A106EmployeeId);
             Gxm1sdtleaveevent.gxTpr_Classname = ((StringUtil.StrCmp(A132LeaveRequestStatus, "Approved")==0) ? "ApprovedLeave" : "PendingLeave "+StringUtil.Str( (decimal)(A127LeaveRequestId), 10, 0));
-            Gxm1sdtleaveevent.gxTpr_Color = ((StringUtil.StrCmp(A132LeaveRequestStatus, "Approved")==0) ? StringUtil.Trim( A175LeaveTypeColorApproved) : "#F8F0D6");
+            Gxm1sdtleaveevent.gxTpr_Color = ((StringUtil.StrCmp(A132LeaveRequestStatus, "Approved")==0) ? StringUtil.Trim( A175LeaveTypeColorApproved) : "#DDDDDD");
             pr_default.readNext(0);
          }
          pr_default.close(0);
@@ -256,7 +256,7 @@ namespace GeneXus.Programs {
           new ParDef("AV7CompanyLocationId",GXType.Int64,10,0)
           };
           def= new CursorDef[] {
-              new CursorDef("P001S2", "SELECT T1.LeaveTypeId, T2.CompanyId, T1.LeaveRequestEndDate, T1.LeaveRequestStartDate, T3.CompanyLocationId, T1.LeaveRequestStatus, T1.LeaveRequestId, T2.LeaveTypeName, T1.EmployeeId, T2.LeaveTypeColorApproved FROM ((LeaveRequest T1 INNER JOIN LeaveType T2 ON T2.LeaveTypeId = T1.LeaveTypeId) INNER JOIN Company T3 ON T3.CompanyId = T2.CompanyId) WHERE (T1.LeaveRequestStatus = ( 'Approved') or T1.LeaveRequestStatus = ( 'Pending')) AND (T1.LeaveRequestStartDate < :AV6ToDate) AND (T1.LeaveRequestEndDate > :AV5FromDate) AND (T3.CompanyLocationId = :AV7CompanyLocationId) ORDER BY T1.LeaveRequestId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP001S2,100, GxCacheFrequency.OFF ,true,false )
+              new CursorDef("P001S2", "SELECT T1.LeaveTypeId, T2.CompanyId, T1.LeaveRequestEndDate, T1.LeaveRequestStartDate, T3.CompanyLocationId, T1.LeaveRequestStatus, T1.LeaveRequestId, T2.LeaveTypeName, T1.EmployeeId, T2.LeaveTypeColorApproved FROM ((LeaveRequest T1 INNER JOIN LeaveType T2 ON T2.LeaveTypeId = T1.LeaveTypeId) INNER JOIN Company T3 ON T3.CompanyId = T2.CompanyId) WHERE (T1.LeaveRequestStatus = ( 'Approved') or T1.LeaveRequestStatus = ( 'Pending')) AND (T1.LeaveRequestStartDate <= :AV6ToDate) AND (T1.LeaveRequestEndDate >= :AV5FromDate) AND (T3.CompanyLocationId = :AV7CompanyLocationId) ORDER BY T1.LeaveRequestId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP001S2,100, GxCacheFrequency.OFF ,true,false )
           };
        }
     }

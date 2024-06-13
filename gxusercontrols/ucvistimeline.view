@@ -1,7 +1,15 @@
 
-<div style='display:none;'>
+<div style="display:none;">
 	{{gxTpr_startDate}}{{startDate}}
 	{{gxTpr_endDate}}{{endDate}}
 	{{gxTpr_item}}{{item}}
 </div>
-<div id="visualization"></div>
+<div id="visualization" style="margin: 5px">
+	
+</div>
+
+<div id="key" style="display:flex; margin-top: 10px">
+	<div style="display:flex;">
+		<div style="background: #dddddd; height:10px; width:10px; margin: 4px"></div> <label>Pending</label>
+	</div>
+</div>

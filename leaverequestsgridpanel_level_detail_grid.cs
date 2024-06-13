@@ -176,7 +176,7 @@ namespace GeneXus.Programs {
                Gxdynprop += ((StringUtil.StrCmp(Gxdynprop, "")==0) ? "" : ", ") + "[\"Approvedspacertable\",\"Visible\",\"" + "False" + "\"]";
             }
             AV9LeaveInfo = "<span>" + StringUtil.Trim( A125LeaveTypeName) + "</span>";
-            AV20LeavePeriod = StringUtil.Trim( StringUtil.Str( (decimal)(A131LeaveRequestDuration), 4, 0)) + " days - From " + StringUtil.Trim( context.localUtil.DToC( A129LeaveRequestStartDate, 1, "/")) + " to " + StringUtil.Trim( context.localUtil.DToC( A130LeaveRequestEndDate, 1, "/"));
+            AV20LeavePeriod = StringUtil.Trim( StringUtil.Str( A131LeaveRequestDuration, 4, 1)) + " days - From " + StringUtil.Trim( context.localUtil.DToC( A129LeaveRequestStartDate, 1, "/")) + " to " + StringUtil.Trim( context.localUtil.DToC( A130LeaveRequestEndDate, 1, "/"));
             AV31GXM2LeaveRequestsGridPanel_Level_Detail_GridSdt.gxTpr_Leaverequestid = A127LeaveRequestId;
             AV31GXM2LeaveRequestsGridPanel_Level_Detail_GridSdt.gxTpr_Leaverequestdescription = A133LeaveRequestDescription;
             AV31GXM2LeaveRequestsGridPanel_Level_Detail_GridSdt.gxTpr_Leaverequeststatus = A132LeaveRequestStatus;
@@ -247,7 +247,7 @@ namespace GeneXus.Programs {
          P00002_A132LeaveRequestStatus = new string[] {""} ;
          P00002_A130LeaveRequestEndDate = new DateTime[] {DateTime.MinValue} ;
          P00002_A129LeaveRequestStartDate = new DateTime[] {DateTime.MinValue} ;
-         P00002_A131LeaveRequestDuration = new short[1] ;
+         P00002_A131LeaveRequestDuration = new decimal[1] ;
          P00002_A127LeaveRequestId = new long[1] ;
          P00002_A128LeaveRequestDate = new DateTime[] {DateTime.MinValue} ;
          A132LeaveRequestStatus = "";
@@ -270,7 +270,6 @@ namespace GeneXus.Programs {
          /* GeneXus formulas. */
       }
 
-      private short A131LeaveRequestDuration ;
       private int AV22gxid ;
       private int GXPagingFrom2 ;
       private int GXPagingTo2 ;
@@ -282,6 +281,7 @@ namespace GeneXus.Programs {
       private long A124LeaveTypeId ;
       private long A127LeaveRequestId ;
       private long GRID_nRecordCount ;
+      private decimal A131LeaveRequestDuration ;
       private string Gxids ;
       private string AV9LeaveInfo ;
       private string scmdbuf ;
@@ -305,7 +305,7 @@ namespace GeneXus.Programs {
       private string[] P00002_A132LeaveRequestStatus ;
       private DateTime[] P00002_A130LeaveRequestEndDate ;
       private DateTime[] P00002_A129LeaveRequestStartDate ;
-      private short[] P00002_A131LeaveRequestDuration ;
+      private decimal[] P00002_A131LeaveRequestDuration ;
       private long[] P00002_A127LeaveRequestId ;
       private DateTime[] P00002_A128LeaveRequestDate ;
       private long[] P00003_AGRID_nRecordCount ;
@@ -443,7 +443,7 @@ namespace GeneXus.Programs {
                 ((string[]) buf[4])[0] = rslt.getString(5, 20);
                 ((DateTime[]) buf[5])[0] = rslt.getGXDate(6);
                 ((DateTime[]) buf[6])[0] = rslt.getGXDate(7);
-                ((short[]) buf[7])[0] = rslt.getShort(8);
+                ((decimal[]) buf[7])[0] = rslt.getDecimal(8);
                 ((long[]) buf[8])[0] = rslt.getLong(9);
                 ((DateTime[]) buf[9])[0] = rslt.getGXDate(10);
                 return;

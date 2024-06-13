@@ -144,4 +144,7 @@
   <Object name="DPEmployeeWeekReport" id="66" type="DataProvider" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="DPEmployeeWeekReport" xmlns="qv">
     <DefaultOutput type="OutputTypePivotTable" xmlns="qv" />
   </Object>
+  <Object name="DPLeaveType" id="67" type="DataProvider" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="DPLeaveType" xmlns="qv">
+    <DefaultOutput type="OutputTypePivotTable" xmlns="qv" />
+  </Object>
 </Objects>

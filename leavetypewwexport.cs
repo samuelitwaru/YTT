@@ -248,48 +248,6 @@ namespace GeneXus.Programs {
                AV53GXV2 = (int)(AV53GXV2+1);
             }
          }
-         if ( ! ( String.IsNullOrEmpty(StringUtil.RTrim( AV49TFLeaveTypeColorPending_Sel)) ) )
-         {
-            GXt_int2 = (short)(AV14CellRow);
-            new GeneXus.Programs.wwpbaseobjects.wwp_exportwritefilter(context ).execute( ref  AV11ExcelDocument,  true, ref  GXt_int2,  (short)(AV15FirstColumn),  "Color Pending") ;
-            AV14CellRow = GXt_int2;
-            GXt_char1 = "";
-            new GeneXus.Programs.wwpbaseobjects.wwp_export_securetext(context ).execute(  (String.IsNullOrEmpty(StringUtil.RTrim( AV49TFLeaveTypeColorPending_Sel)) ? "(Empty)" : AV49TFLeaveTypeColorPending_Sel), out  GXt_char1) ;
-            AV11ExcelDocument.get_Cells(AV14CellRow, AV15FirstColumn+1, 1, 1).Text = GXt_char1;
-         }
-         else
-         {
-            if ( ! ( String.IsNullOrEmpty(StringUtil.RTrim( AV48TFLeaveTypeColorPending)) ) )
-            {
-               GXt_int2 = (short)(AV14CellRow);
-               new GeneXus.Programs.wwpbaseobjects.wwp_exportwritefilter(context ).execute( ref  AV11ExcelDocument,  true, ref  GXt_int2,  (short)(AV15FirstColumn),  "Color Pending") ;
-               AV14CellRow = GXt_int2;
-               GXt_char1 = "";
-               new GeneXus.Programs.wwpbaseobjects.wwp_export_securetext(context ).execute(  AV48TFLeaveTypeColorPending, out  GXt_char1) ;
-               AV11ExcelDocument.get_Cells(AV14CellRow, AV15FirstColumn+1, 1, 1).Text = GXt_char1;
-            }
-         }
-         if ( ! ( String.IsNullOrEmpty(StringUtil.RTrim( AV51TFLeaveTypeColorApproved_Sel)) ) )
-         {
-            GXt_int2 = (short)(AV14CellRow);
-            new GeneXus.Programs.wwpbaseobjects.wwp_exportwritefilter(context ).execute( ref  AV11ExcelDocument,  true, ref  GXt_int2,  (short)(AV15FirstColumn),  "Color Approved") ;
-            AV14CellRow = GXt_int2;
-            GXt_char1 = "";
-            new GeneXus.Programs.wwpbaseobjects.wwp_export_securetext(context ).execute(  (String.IsNullOrEmpty(StringUtil.RTrim( AV51TFLeaveTypeColorApproved_Sel)) ? "(Empty)" : AV51TFLeaveTypeColorApproved_Sel), out  GXt_char1) ;
-            AV11ExcelDocument.get_Cells(AV14CellRow, AV15FirstColumn+1, 1, 1).Text = GXt_char1;
-         }
-         else
-         {
-            if ( ! ( String.IsNullOrEmpty(StringUtil.RTrim( AV50TFLeaveTypeColorApproved)) ) )
-            {
-               GXt_int2 = (short)(AV14CellRow);
-               new GeneXus.Programs.wwpbaseobjects.wwp_exportwritefilter(context ).execute( ref  AV11ExcelDocument,  true, ref  GXt_int2,  (short)(AV15FirstColumn),  "Color Approved") ;
-               AV14CellRow = GXt_int2;
-               GXt_char1 = "";
-               new GeneXus.Programs.wwpbaseobjects.wwp_export_securetext(context ).execute(  AV50TFLeaveTypeColorApproved, out  GXt_char1) ;
-               AV11ExcelDocument.get_Cells(AV14CellRow, AV15FirstColumn+1, 1, 1).Text = GXt_char1;
-            }
-         }
          AV14CellRow = (int)(AV14CellRow+2);
       }
 
@@ -334,17 +292,13 @@ namespace GeneXus.Programs {
          AV58Leavetypewwds_3_tfleavetypename_sel = AV38TFLeaveTypeName_Sel;
          AV59Leavetypewwds_4_tfleavetypevacationleave_sels = AV44TFLeaveTypeVacationLeave_Sels;
          AV60Leavetypewwds_5_tfleavetypeloggingworkhours_sels = AV47TFLeaveTypeLoggingWorkHours_Sels;
-         AV61Leavetypewwds_6_tfleavetypecolorpending = AV48TFLeaveTypeColorPending;
-         AV62Leavetypewwds_7_tfleavetypecolorpending_sel = AV49TFLeaveTypeColorPending_Sel;
-         AV63Leavetypewwds_8_tfleavetypecolorapproved = AV50TFLeaveTypeColorApproved;
-         AV64Leavetypewwds_9_tfleavetypecolorapproved_sel = AV51TFLeaveTypeColorApproved_Sel;
-         AV65Udparg10 = new getloggedinusercompanyid(context).executeUdp( );
-         AV65Udparg10 = new getloggedinusercompanyid(context).executeUdp( );
-         AV65Udparg10 = new getloggedinusercompanyid(context).executeUdp( );
-         AV65Udparg10 = new getloggedinusercompanyid(context).executeUdp( );
-         AV65Udparg10 = new getloggedinusercompanyid(context).executeUdp( );
-         AV65Udparg10 = new getloggedinusercompanyid(context).executeUdp( );
-         AV65Udparg10 = new getloggedinusercompanyid(context).executeUdp( );
+         AV61Udparg6 = new getloggedinusercompanyid(context).executeUdp( );
+         AV61Udparg6 = new getloggedinusercompanyid(context).executeUdp( );
+         AV61Udparg6 = new getloggedinusercompanyid(context).executeUdp( );
+         AV61Udparg6 = new getloggedinusercompanyid(context).executeUdp( );
+         AV61Udparg6 = new getloggedinusercompanyid(context).executeUdp( );
+         AV61Udparg6 = new getloggedinusercompanyid(context).executeUdp( );
+         AV61Udparg6 = new getloggedinusercompanyid(context).executeUdp( );
          pr_default.dynParam(0, new Object[]{ new Object[]{
                                               A144LeaveTypeVacationLeave ,
                                               AV59Leavetypewwds_4_tfleavetypevacationleave_sels ,
@@ -355,19 +309,13 @@ namespace GeneXus.Programs {
                                               AV57Leavetypewwds_2_tfleavetypename ,
                                               AV59Leavetypewwds_4_tfleavetypevacationleave_sels.Count ,
                                               AV60Leavetypewwds_5_tfleavetypeloggingworkhours_sels.Count ,
-                                              AV62Leavetypewwds_7_tfleavetypecolorpending_sel ,
-                                              AV61Leavetypewwds_6_tfleavetypecolorpending ,
-                                              AV64Leavetypewwds_9_tfleavetypecolorapproved_sel ,
-                                              AV63Leavetypewwds_8_tfleavetypecolorapproved ,
                                               A125LeaveTypeName ,
-                                              A174LeaveTypeColorPending ,
-                                              A175LeaveTypeColorApproved ,
                                               AV17OrderedBy ,
                                               AV18OrderedDsc ,
-                                              AV65Udparg10 ,
+                                              AV61Udparg6 ,
                                               A100CompanyId } ,
                                               new int[]{
-                                              TypeConstants.INT, TypeConstants.INT, TypeConstants.BOOLEAN, TypeConstants.BOOLEAN, TypeConstants.SHORT, TypeConstants.BOOLEAN, TypeConstants.LONG, TypeConstants.LONG
+                                              TypeConstants.INT, TypeConstants.INT, TypeConstants.SHORT, TypeConstants.BOOLEAN, TypeConstants.LONG, TypeConstants.LONG
                                               }
          });
          lV56Leavetypewwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV56Leavetypewwds_1_filterfulltext), "%", "");
@@ -375,20 +323,12 @@ namespace GeneXus.Programs {
          lV56Leavetypewwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV56Leavetypewwds_1_filterfulltext), "%", "");
          lV56Leavetypewwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV56Leavetypewwds_1_filterfulltext), "%", "");
          lV56Leavetypewwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV56Leavetypewwds_1_filterfulltext), "%", "");
-         lV56Leavetypewwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV56Leavetypewwds_1_filterfulltext), "%", "");
-         lV56Leavetypewwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV56Leavetypewwds_1_filterfulltext), "%", "");
          lV57Leavetypewwds_2_tfleavetypename = StringUtil.PadR( StringUtil.RTrim( AV57Leavetypewwds_2_tfleavetypename), 100, "%");
-         lV61Leavetypewwds_6_tfleavetypecolorpending = StringUtil.PadR( StringUtil.RTrim( AV61Leavetypewwds_6_tfleavetypecolorpending), 20, "%");
-         lV63Leavetypewwds_8_tfleavetypecolorapproved = StringUtil.PadR( StringUtil.RTrim( AV63Leavetypewwds_8_tfleavetypecolorapproved), 20, "%");
          /* Using cursor P005E2 */
-         pr_default.execute(0, new Object[] {AV65Udparg10, lV56Leavetypewwds_1_filterfulltext, lV56Leavetypewwds_1_filterfulltext, lV56Leavetypewwds_1_filterfulltext, lV56Leavetypewwds_1_filterfulltext, lV56Leavetypewwds_1_filterfulltext, lV56Leavetypewwds_1_filterfulltext, lV56Leavetypewwds_1_filterfulltext, lV57Leavetypewwds_2_tfleavetypename, AV58Leavetypewwds_3_tfleavetypename_sel, lV61Leavetypewwds_6_tfleavetypecolorpending, AV62Leavetypewwds_7_tfleavetypecolorpending_sel, lV63Leavetypewwds_8_tfleavetypecolorapproved, AV64Leavetypewwds_9_tfleavetypecolorapproved_sel});
+         pr_default.execute(0, new Object[] {AV61Udparg6, lV56Leavetypewwds_1_filterfulltext, lV56Leavetypewwds_1_filterfulltext, lV56Leavetypewwds_1_filterfulltext, lV56Leavetypewwds_1_filterfulltext, lV56Leavetypewwds_1_filterfulltext, lV57Leavetypewwds_2_tfleavetypename, AV58Leavetypewwds_3_tfleavetypename_sel});
          while ( (pr_default.getStatus(0) != 101) )
          {
             A100CompanyId = P005E2_A100CompanyId[0];
-            A175LeaveTypeColorApproved = P005E2_A175LeaveTypeColorApproved[0];
-            n175LeaveTypeColorApproved = P005E2_n175LeaveTypeColorApproved[0];
-            A174LeaveTypeColorPending = P005E2_A174LeaveTypeColorPending[0];
-            n174LeaveTypeColorPending = P005E2_n174LeaveTypeColorPending[0];
             A125LeaveTypeName = P005E2_A125LeaveTypeName[0];
             A145LeaveTypeLoggingWorkHours = P005E2_A145LeaveTypeLoggingWorkHours[0];
             A144LeaveTypeVacationLeave = P005E2_A144LeaveTypeVacationLeave[0];
@@ -403,10 +343,10 @@ namespace GeneXus.Programs {
                if (true) return;
             }
             AV32VisibleColumnCount = 0;
-            AV66GXV4 = 1;
-            while ( AV66GXV4 <= AV24ColumnsSelector.gxTpr_Columns.Count )
+            AV62GXV4 = 1;
+            while ( AV62GXV4 <= AV24ColumnsSelector.gxTpr_Columns.Count )
             {
-               AV26ColumnsSelector_Column = ((GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector_Column)AV24ColumnsSelector.gxTpr_Columns.Item(AV66GXV4));
+               AV26ColumnsSelector_Column = ((GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector_Column)AV24ColumnsSelector.gxTpr_Columns.Item(AV62GXV4));
                if ( AV26ColumnsSelector_Column.gxTpr_Isvisible )
                {
                   if ( StringUtil.StrCmp(AV26ColumnsSelector_Column.gxTpr_Columnname, "LeaveTypeName") == 0 )
@@ -439,21 +379,9 @@ namespace GeneXus.Programs {
                         AV11ExcelDocument.get_Cells(AV14CellRow, (int)(AV15FirstColumn+AV32VisibleColumnCount), 1, 1).Text = "Yes";
                      }
                   }
-                  else if ( StringUtil.StrCmp(AV26ColumnsSelector_Column.gxTpr_Columnname, "LeaveTypeColorPending") == 0 )
-                  {
-                     GXt_char1 = "";
-                     new GeneXus.Programs.wwpbaseobjects.wwp_export_securetext(context ).execute(  A174LeaveTypeColorPending, out  GXt_char1) ;
-                     AV11ExcelDocument.get_Cells(AV14CellRow, (int)(AV15FirstColumn+AV32VisibleColumnCount), 1, 1).Text = GXt_char1;
-                  }
-                  else if ( StringUtil.StrCmp(AV26ColumnsSelector_Column.gxTpr_Columnname, "LeaveTypeColorApproved") == 0 )
-                  {
-                     GXt_char1 = "";
-                     new GeneXus.Programs.wwpbaseobjects.wwp_export_securetext(context ).execute(  A175LeaveTypeColorApproved, out  GXt_char1) ;
-                     AV11ExcelDocument.get_Cells(AV14CellRow, (int)(AV15FirstColumn+AV32VisibleColumnCount), 1, 1).Text = GXt_char1;
-                  }
                   AV32VisibleColumnCount = (long)(AV32VisibleColumnCount+1);
                }
-               AV66GXV4 = (int)(AV66GXV4+1);
+               AV62GXV4 = (int)(AV62GXV4+1);
             }
             /* Execute user subroutine: 'AFTERWRITELINE' */
             S182 ();
@@ -504,8 +432,6 @@ namespace GeneXus.Programs {
          new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV24ColumnsSelector,  "LeaveTypeName",  "",  "Type Name",  true,  "") ;
          new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV24ColumnsSelector,  "LeaveTypeVacationLeave",  "",  "Vacation Leave",  true,  "") ;
          new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV24ColumnsSelector,  "LeaveTypeLoggingWorkHours",  "",  "Work Hours",  true,  "") ;
-         new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV24ColumnsSelector,  "LeaveTypeColorPending",  "",  "Color Pending",  true,  "") ;
-         new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV24ColumnsSelector,  "LeaveTypeColorApproved",  "",  "Color Approved",  true,  "") ;
          GXt_char1 = AV28UserCustomValue;
          new GeneXus.Programs.wwpbaseobjects.loadcolumnsselectorstate(context ).execute(  "LeaveTypeWWColumnsSelector", out  GXt_char1) ;
          AV28UserCustomValue = GXt_char1;
@@ -530,10 +456,10 @@ namespace GeneXus.Programs {
          }
          AV17OrderedBy = AV22GridState.gxTpr_Orderedby;
          AV18OrderedDsc = AV22GridState.gxTpr_Ordereddsc;
-         AV67GXV5 = 1;
-         while ( AV67GXV5 <= AV22GridState.gxTpr_Filtervalues.Count )
+         AV63GXV5 = 1;
+         while ( AV63GXV5 <= AV22GridState.gxTpr_Filtervalues.Count )
          {
-            AV23GridStateFilterValue = ((GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue)AV22GridState.gxTpr_Filtervalues.Item(AV67GXV5));
+            AV23GridStateFilterValue = ((GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue)AV22GridState.gxTpr_Filtervalues.Item(AV63GXV5));
             if ( StringUtil.StrCmp(AV23GridStateFilterValue.gxTpr_Name, "FILTERFULLTEXT") == 0 )
             {
                AV19FilterFullText = AV23GridStateFilterValue.gxTpr_Value;
@@ -556,23 +482,7 @@ namespace GeneXus.Programs {
                AV45TFLeaveTypeLoggingWorkHours_SelsJson = AV23GridStateFilterValue.gxTpr_Value;
                AV47TFLeaveTypeLoggingWorkHours_Sels.FromJSonString(AV45TFLeaveTypeLoggingWorkHours_SelsJson, null);
             }
-            else if ( StringUtil.StrCmp(AV23GridStateFilterValue.gxTpr_Name, "TFLEAVETYPECOLORPENDING") == 0 )
-            {
-               AV48TFLeaveTypeColorPending = AV23GridStateFilterValue.gxTpr_Value;
-            }
-            else if ( StringUtil.StrCmp(AV23GridStateFilterValue.gxTpr_Name, "TFLEAVETYPECOLORPENDING_SEL") == 0 )
-            {
-               AV49TFLeaveTypeColorPending_Sel = AV23GridStateFilterValue.gxTpr_Value;
-            }
-            else if ( StringUtil.StrCmp(AV23GridStateFilterValue.gxTpr_Name, "TFLEAVETYPECOLORAPPROVED") == 0 )
-            {
-               AV50TFLeaveTypeColorApproved = AV23GridStateFilterValue.gxTpr_Value;
-            }
-            else if ( StringUtil.StrCmp(AV23GridStateFilterValue.gxTpr_Name, "TFLEAVETYPECOLORAPPROVED_SEL") == 0 )
-            {
-               AV51TFLeaveTypeColorApproved_Sel = AV23GridStateFilterValue.gxTpr_Value;
-            }
-            AV67GXV5 = (int)(AV67GXV5+1);
+            AV63GXV5 = (int)(AV63GXV5+1);
          }
       }
 
@@ -615,10 +525,6 @@ namespace GeneXus.Programs {
          AV43TFLeaveTypeVacationLeave_Sel = "";
          AV47TFLeaveTypeLoggingWorkHours_Sels = new GxSimpleCollection<string>();
          AV46TFLeaveTypeLoggingWorkHours_Sel = "";
-         AV49TFLeaveTypeColorPending_Sel = "";
-         AV48TFLeaveTypeColorPending = "";
-         AV51TFLeaveTypeColorApproved_Sel = "";
-         AV50TFLeaveTypeColorApproved = "";
          AV20Session = context.GetSession();
          AV27ColumnsSelectorXML = "";
          AV24ColumnsSelector = new GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector(context);
@@ -628,25 +534,13 @@ namespace GeneXus.Programs {
          AV58Leavetypewwds_3_tfleavetypename_sel = "";
          AV59Leavetypewwds_4_tfleavetypevacationleave_sels = new GxSimpleCollection<string>();
          AV60Leavetypewwds_5_tfleavetypeloggingworkhours_sels = new GxSimpleCollection<string>();
-         AV61Leavetypewwds_6_tfleavetypecolorpending = "";
-         AV62Leavetypewwds_7_tfleavetypecolorpending_sel = "";
-         AV63Leavetypewwds_8_tfleavetypecolorapproved = "";
-         AV64Leavetypewwds_9_tfleavetypecolorapproved_sel = "";
          scmdbuf = "";
          lV56Leavetypewwds_1_filterfulltext = "";
          lV57Leavetypewwds_2_tfleavetypename = "";
-         lV61Leavetypewwds_6_tfleavetypecolorpending = "";
-         lV63Leavetypewwds_8_tfleavetypecolorapproved = "";
          A144LeaveTypeVacationLeave = "";
          A145LeaveTypeLoggingWorkHours = "";
          A125LeaveTypeName = "";
-         A174LeaveTypeColorPending = "";
-         A175LeaveTypeColorApproved = "";
          P005E2_A100CompanyId = new long[1] ;
-         P005E2_A175LeaveTypeColorApproved = new string[] {""} ;
-         P005E2_n175LeaveTypeColorApproved = new bool[] {false} ;
-         P005E2_A174LeaveTypeColorPending = new string[] {""} ;
-         P005E2_n174LeaveTypeColorPending = new bool[] {false} ;
          P005E2_A125LeaveTypeName = new string[] {""} ;
          P005E2_A145LeaveTypeLoggingWorkHours = new string[] {""} ;
          P005E2_A144LeaveTypeVacationLeave = new string[] {""} ;
@@ -661,7 +555,7 @@ namespace GeneXus.Programs {
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.leavetypewwexport__default(),
             new Object[][] {
                 new Object[] {
-               P005E2_A100CompanyId, P005E2_A175LeaveTypeColorApproved, P005E2_n175LeaveTypeColorApproved, P005E2_A174LeaveTypeColorPending, P005E2_n174LeaveTypeColorPending, P005E2_A125LeaveTypeName, P005E2_A145LeaveTypeLoggingWorkHours, P005E2_A144LeaveTypeVacationLeave, P005E2_A124LeaveTypeId
+               P005E2_A100CompanyId, P005E2_A125LeaveTypeName, P005E2_A145LeaveTypeLoggingWorkHours, P005E2_A144LeaveTypeVacationLeave, P005E2_A124LeaveTypeId
                }
             }
          );
@@ -678,41 +572,27 @@ namespace GeneXus.Programs {
       private int AV54GXV3 ;
       private int AV59Leavetypewwds_4_tfleavetypevacationleave_sels_Count ;
       private int AV60Leavetypewwds_5_tfleavetypeloggingworkhours_sels_Count ;
-      private int AV66GXV4 ;
-      private int AV67GXV5 ;
+      private int AV62GXV4 ;
+      private int AV63GXV5 ;
       private long AV41i ;
       private long AV32VisibleColumnCount ;
-      private long AV65Udparg10 ;
+      private long AV61Udparg6 ;
       private long A100CompanyId ;
       private long A124LeaveTypeId ;
       private string AV38TFLeaveTypeName_Sel ;
       private string AV37TFLeaveTypeName ;
       private string AV43TFLeaveTypeVacationLeave_Sel ;
       private string AV46TFLeaveTypeLoggingWorkHours_Sel ;
-      private string AV49TFLeaveTypeColorPending_Sel ;
-      private string AV48TFLeaveTypeColorPending ;
-      private string AV51TFLeaveTypeColorApproved_Sel ;
-      private string AV50TFLeaveTypeColorApproved ;
       private string AV57Leavetypewwds_2_tfleavetypename ;
       private string AV58Leavetypewwds_3_tfleavetypename_sel ;
-      private string AV61Leavetypewwds_6_tfleavetypecolorpending ;
-      private string AV62Leavetypewwds_7_tfleavetypecolorpending_sel ;
-      private string AV63Leavetypewwds_8_tfleavetypecolorapproved ;
-      private string AV64Leavetypewwds_9_tfleavetypecolorapproved_sel ;
       private string scmdbuf ;
       private string lV57Leavetypewwds_2_tfleavetypename ;
-      private string lV61Leavetypewwds_6_tfleavetypecolorpending ;
-      private string lV63Leavetypewwds_8_tfleavetypecolorapproved ;
       private string A144LeaveTypeVacationLeave ;
       private string A145LeaveTypeLoggingWorkHours ;
       private string A125LeaveTypeName ;
-      private string A174LeaveTypeColorPending ;
-      private string A175LeaveTypeColorApproved ;
       private string GXt_char1 ;
       private bool returnInSub ;
       private bool AV18OrderedDsc ;
-      private bool n175LeaveTypeColorApproved ;
-      private bool n174LeaveTypeColorPending ;
       private string AV27ColumnsSelectorXML ;
       private string AV28UserCustomValue ;
       private string AV42TFLeaveTypeVacationLeave_SelsJson ;
@@ -727,10 +607,6 @@ namespace GeneXus.Programs {
       private IGxDataStore dsDefault ;
       private IDataStoreProvider pr_default ;
       private long[] P005E2_A100CompanyId ;
-      private string[] P005E2_A175LeaveTypeColorApproved ;
-      private bool[] P005E2_n175LeaveTypeColorApproved ;
-      private string[] P005E2_A174LeaveTypeColorPending ;
-      private bool[] P005E2_n174LeaveTypeColorPending ;
       private string[] P005E2_A125LeaveTypeName ;
       private string[] P005E2_A145LeaveTypeLoggingWorkHours ;
       private string[] P005E2_A144LeaveTypeVacationLeave ;
@@ -762,27 +638,21 @@ namespace GeneXus.Programs {
                                              string AV57Leavetypewwds_2_tfleavetypename ,
                                              int AV59Leavetypewwds_4_tfleavetypevacationleave_sels_Count ,
                                              int AV60Leavetypewwds_5_tfleavetypeloggingworkhours_sels_Count ,
-                                             string AV62Leavetypewwds_7_tfleavetypecolorpending_sel ,
-                                             string AV61Leavetypewwds_6_tfleavetypecolorpending ,
-                                             string AV64Leavetypewwds_9_tfleavetypecolorapproved_sel ,
-                                             string AV63Leavetypewwds_8_tfleavetypecolorapproved ,
                                              string A125LeaveTypeName ,
-                                             string A174LeaveTypeColorPending ,
-                                             string A175LeaveTypeColorApproved ,
                                              short AV17OrderedBy ,
                                              bool AV18OrderedDsc ,
-                                             long AV65Udparg10 ,
+                                             long AV61Udparg6 ,
                                              long A100CompanyId )
       {
          System.Text.StringBuilder sWhereString = new System.Text.StringBuilder();
          string scmdbuf;
-         short[] GXv_int3 = new short[14];
+         short[] GXv_int3 = new short[8];
          Object[] GXv_Object4 = new Object[2];
-         scmdbuf = "SELECT CompanyId, LeaveTypeColorApproved, LeaveTypeColorPending, LeaveTypeName, LeaveTypeLoggingWorkHours, LeaveTypeVacationLeave, LeaveTypeId FROM LeaveType";
-         AddWhere(sWhereString, "(CompanyId = :AV65Udparg10)");
+         scmdbuf = "SELECT CompanyId, LeaveTypeName, LeaveTypeLoggingWorkHours, LeaveTypeVacationLeave, LeaveTypeId FROM LeaveType";
+         AddWhere(sWhereString, "(CompanyId = :AV61Udparg6)");
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV56Leavetypewwds_1_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( LOWER(LeaveTypeName) like '%' || LOWER(:lV56Leavetypewwds_1_filterfulltext)) or ( 'no' like '%' || LOWER(:lV56Leavetypewwds_1_filterfulltext) and LeaveTypeVacationLeave = ( 'No')) or ( 'yes' like '%' || LOWER(:lV56Leavetypewwds_1_filterfulltext) and LeaveTypeVacationLeave = ( 'Yes')) or ( 'no' like '%' || LOWER(:lV56Leavetypewwds_1_filterfulltext) and LeaveTypeLoggingWorkHours = ( 'No')) or ( 'yes' like '%' || LOWER(:lV56Leavetypewwds_1_filterfulltext) and LeaveTypeLoggingWorkHours = ( 'Yes')) or ( LOWER(LeaveTypeColorPending) like '%' || LOWER(:lV56Leavetypewwds_1_filterfulltext)) or ( LOWER(LeaveTypeColorApproved) like '%' || LOWER(:lV56Leavetypewwds_1_filterfulltext)))");
+            AddWhere(sWhereString, "(( LOWER(LeaveTypeName) like '%' || LOWER(:lV56Leavetypewwds_1_filterfulltext)) or ( 'no' like '%' || LOWER(:lV56Leavetypewwds_1_filterfulltext) and LeaveTypeVacationLeave = ( 'No')) or ( 'yes' like '%' || LOWER(:lV56Leavetypewwds_1_filterfulltext) and LeaveTypeVacationLeave = ( 'Yes')) or ( 'no' like '%' || LOWER(:lV56Leavetypewwds_1_filterfulltext) and LeaveTypeLoggingWorkHours = ( 'No')) or ( 'yes' like '%' || LOWER(:lV56Leavetypewwds_1_filterfulltext) and LeaveTypeLoggingWorkHours = ( 'Yes')))");
          }
          else
          {
@@ -791,8 +661,6 @@ namespace GeneXus.Programs {
             GXv_int3[3] = 1;
             GXv_int3[4] = 1;
             GXv_int3[5] = 1;
-            GXv_int3[6] = 1;
-            GXv_int3[7] = 1;
          }
          if ( String.IsNullOrEmpty(StringUtil.RTrim( AV58Leavetypewwds_3_tfleavetypename_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV57Leavetypewwds_2_tfleavetypename)) ) )
          {
@@ -800,7 +668,7 @@ namespace GeneXus.Programs {
          }
          else
          {
-            GXv_int3[8] = 1;
+            GXv_int3[6] = 1;
          }
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV58Leavetypewwds_3_tfleavetypename_sel)) && ! ( StringUtil.StrCmp(AV58Leavetypewwds_3_tfleavetypename_sel, "<#Empty#>") == 0 ) )
          {
@@ -808,7 +676,7 @@ namespace GeneXus.Programs {
          }
          else
          {
-            GXv_int3[9] = 1;
+            GXv_int3[7] = 1;
          }
          if ( StringUtil.StrCmp(AV58Leavetypewwds_3_tfleavetypename_sel, "<#Empty#>") == 0 )
          {
@@ -821,46 +689,6 @@ namespace GeneXus.Programs {
          if ( AV60Leavetypewwds_5_tfleavetypeloggingworkhours_sels_Count > 0 )
          {
             AddWhere(sWhereString, "("+new GxDbmsUtils( new GxPostgreSql()).ValueList(AV60Leavetypewwds_5_tfleavetypeloggingworkhours_sels, "LeaveTypeLoggingWorkHours IN (", ")")+")");
-         }
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV62Leavetypewwds_7_tfleavetypecolorpending_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV61Leavetypewwds_6_tfleavetypecolorpending)) ) )
-         {
-            AddWhere(sWhereString, "(LOWER(LeaveTypeColorPending) like LOWER(:lV61Leavetypewwds_6_tfleavetypecolorpending))");
-         }
-         else
-         {
-            GXv_int3[10] = 1;
-         }
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV62Leavetypewwds_7_tfleavetypecolorpending_sel)) && ! ( StringUtil.StrCmp(AV62Leavetypewwds_7_tfleavetypecolorpending_sel, "<#Empty#>") == 0 ) )
-         {
-            AddWhere(sWhereString, "(LeaveTypeColorPending = ( :AV62Leavetypewwds_7_tfleavetypecolorpending_sel))");
-         }
-         else
-         {
-            GXv_int3[11] = 1;
-         }
-         if ( StringUtil.StrCmp(AV62Leavetypewwds_7_tfleavetypecolorpending_sel, "<#Empty#>") == 0 )
-         {
-            AddWhere(sWhereString, "(LeaveTypeColorPending IS NULL or (char_length(trim(trailing ' ' from LeaveTypeColorPending))=0))");
-         }
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV64Leavetypewwds_9_tfleavetypecolorapproved_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV63Leavetypewwds_8_tfleavetypecolorapproved)) ) )
-         {
-            AddWhere(sWhereString, "(LOWER(LeaveTypeColorApproved) like LOWER(:lV63Leavetypewwds_8_tfleavetypecolorapproved))");
-         }
-         else
-         {
-            GXv_int3[12] = 1;
-         }
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV64Leavetypewwds_9_tfleavetypecolorapproved_sel)) && ! ( StringUtil.StrCmp(AV64Leavetypewwds_9_tfleavetypecolorapproved_sel, "<#Empty#>") == 0 ) )
-         {
-            AddWhere(sWhereString, "(LeaveTypeColorApproved = ( :AV64Leavetypewwds_9_tfleavetypecolorapproved_sel))");
-         }
-         else
-         {
-            GXv_int3[13] = 1;
-         }
-         if ( StringUtil.StrCmp(AV64Leavetypewwds_9_tfleavetypecolorapproved_sel, "<#Empty#>") == 0 )
-         {
-            AddWhere(sWhereString, "(LeaveTypeColorApproved IS NULL or (char_length(trim(trailing ' ' from LeaveTypeColorApproved))=0))");
          }
          scmdbuf += sWhereString;
          if ( ( AV17OrderedBy == 1 ) && ! AV18OrderedDsc )
@@ -887,22 +715,6 @@ namespace GeneXus.Programs {
          {
             scmdbuf += " ORDER BY LeaveTypeLoggingWorkHours DESC";
          }
-         else if ( ( AV17OrderedBy == 4 ) && ! AV18OrderedDsc )
-         {
-            scmdbuf += " ORDER BY LeaveTypeColorPending";
-         }
-         else if ( ( AV17OrderedBy == 4 ) && ( AV18OrderedDsc ) )
-         {
-            scmdbuf += " ORDER BY LeaveTypeColorPending DESC";
-         }
-         else if ( ( AV17OrderedBy == 5 ) && ! AV18OrderedDsc )
-         {
-            scmdbuf += " ORDER BY LeaveTypeColorApproved";
-         }
-         else if ( ( AV17OrderedBy == 5 ) && ( AV18OrderedDsc ) )
-         {
-            scmdbuf += " ORDER BY LeaveTypeColorApproved DESC";
-         }
          GXv_Object4[0] = scmdbuf;
          GXv_Object4[1] = GXv_int3;
          return GXv_Object4 ;
@@ -915,7 +727,7 @@ namespace GeneXus.Programs {
          switch ( cursor )
          {
                case 0 :
-                     return conditional_P005E2(context, (string)dynConstraints[0] , (GxSimpleCollection<string>)dynConstraints[1] , (string)dynConstraints[2] , (GxSimpleCollection<string>)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (int)dynConstraints[7] , (int)dynConstraints[8] , (string)dynConstraints[9] , (string)dynConstraints[10] , (string)dynConstraints[11] , (string)dynConstraints[12] , (string)dynConstraints[13] , (string)dynConstraints[14] , (string)dynConstraints[15] , (short)dynConstraints[16] , (bool)dynConstraints[17] , (long)dynConstraints[18] , (long)dynConstraints[19] );
+                     return conditional_P005E2(context, (string)dynConstraints[0] , (GxSimpleCollection<string>)dynConstraints[1] , (string)dynConstraints[2] , (GxSimpleCollection<string>)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (int)dynConstraints[7] , (int)dynConstraints[8] , (string)dynConstraints[9] , (short)dynConstraints[10] , (bool)dynConstraints[11] , (long)dynConstraints[12] , (long)dynConstraints[13] );
          }
          return base.getDynamicStatement(cursor, context, dynConstraints);
       }
@@ -935,20 +747,14 @@ namespace GeneXus.Programs {
        {
           Object[] prmP005E2;
           prmP005E2 = new Object[] {
-          new ParDef("AV65Udparg10",GXType.Int64,10,0) ,
-          new ParDef("lV56Leavetypewwds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV56Leavetypewwds_1_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("AV61Udparg6",GXType.Int64,10,0) ,
           new ParDef("lV56Leavetypewwds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV56Leavetypewwds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV56Leavetypewwds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV56Leavetypewwds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV56Leavetypewwds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV57Leavetypewwds_2_tfleavetypename",GXType.Char,100,0) ,
-          new ParDef("AV58Leavetypewwds_3_tfleavetypename_sel",GXType.Char,100,0) ,
-          new ParDef("lV61Leavetypewwds_6_tfleavetypecolorpending",GXType.Char,20,0) ,
-          new ParDef("AV62Leavetypewwds_7_tfleavetypecolorpending_sel",GXType.Char,20,0) ,
-          new ParDef("lV63Leavetypewwds_8_tfleavetypecolorapproved",GXType.Char,20,0) ,
-          new ParDef("AV64Leavetypewwds_9_tfleavetypecolorapproved_sel",GXType.Char,20,0)
+          new ParDef("AV58Leavetypewwds_3_tfleavetypename_sel",GXType.Char,100,0)
           };
           def= new CursorDef[] {
               new CursorDef("P005E2", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP005E2,100, GxCacheFrequency.OFF ,true,false )
@@ -964,14 +770,10 @@ namespace GeneXus.Programs {
        {
              case 0 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);
-                ((string[]) buf[1])[0] = rslt.getString(2, 20);
-                ((bool[]) buf[2])[0] = rslt.wasNull(2);
-                ((string[]) buf[3])[0] = rslt.getString(3, 20);
-                ((bool[]) buf[4])[0] = rslt.wasNull(3);
-                ((string[]) buf[5])[0] = rslt.getString(4, 100);
-                ((string[]) buf[6])[0] = rslt.getString(5, 20);
-                ((string[]) buf[7])[0] = rslt.getString(6, 20);
-                ((long[]) buf[8])[0] = rslt.getLong(7);
+                ((string[]) buf[1])[0] = rslt.getString(2, 100);
+                ((string[]) buf[2])[0] = rslt.getString(3, 20);
+                ((string[]) buf[3])[0] = rslt.getString(4, 20);
+                ((long[]) buf[4])[0] = rslt.getLong(5);
                 return;
        }
     }
