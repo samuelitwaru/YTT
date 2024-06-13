@@ -43,7 +43,7 @@ namespace GeneXus.Programs {
       }
 
       public void execute( long aP0_LeaveRequestId ,
-                           out short aP1_LeaveRequestDuration )
+                           out decimal aP1_LeaveRequestDuration )
       {
          this.AV8LeaveRequestId = aP0_LeaveRequestId;
          this.AV9LeaveRequestDuration = 0 ;
@@ -52,14 +52,14 @@ namespace GeneXus.Programs {
          aP1_LeaveRequestDuration=this.AV9LeaveRequestDuration;
       }
 
-      public short executeUdp( long aP0_LeaveRequestId )
+      public decimal executeUdp( long aP0_LeaveRequestId )
       {
          execute(aP0_LeaveRequestId, out aP1_LeaveRequestDuration);
          return AV9LeaveRequestDuration ;
       }
 
       public void executeSubmit( long aP0_LeaveRequestId ,
-                                 out short aP1_LeaveRequestDuration )
+                                 out decimal aP1_LeaveRequestDuration )
       {
          getleaverequestduration objgetleaverequestduration;
          objgetleaverequestduration = new getleaverequestduration();
@@ -120,7 +120,7 @@ namespace GeneXus.Programs {
       {
          scmdbuf = "";
          P009N2_A127LeaveRequestId = new long[1] ;
-         P009N2_A131LeaveRequestDuration = new short[1] ;
+         P009N2_A131LeaveRequestDuration = new decimal[1] ;
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.getleaverequestduration__default(),
             new Object[][] {
                 new Object[] {
@@ -131,17 +131,17 @@ namespace GeneXus.Programs {
          /* GeneXus formulas. */
       }
 
-      private short AV9LeaveRequestDuration ;
-      private short A131LeaveRequestDuration ;
       private long AV8LeaveRequestId ;
       private long A127LeaveRequestId ;
+      private decimal AV9LeaveRequestDuration ;
+      private decimal A131LeaveRequestDuration ;
       private string scmdbuf ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private IDataStoreProvider pr_default ;
       private long[] P009N2_A127LeaveRequestId ;
-      private short[] P009N2_A131LeaveRequestDuration ;
-      private short aP1_LeaveRequestDuration ;
+      private decimal[] P009N2_A131LeaveRequestDuration ;
+      private decimal aP1_LeaveRequestDuration ;
    }
 
    public class getleaverequestduration__default : DataStoreHelperBase, IDataStoreHelper
@@ -177,7 +177,7 @@ namespace GeneXus.Programs {
        {
              case 0 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);
-                ((short[]) buf[1])[0] = rslt.getShort(2);
+                ((decimal[]) buf[1])[0] = rslt.getDecimal(2);
                 return;
        }
     }

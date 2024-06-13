@@ -102,7 +102,7 @@ namespace GeneXus.Programs {
          /* Optimized group. */
          /* Using cursor P00642 */
          pr_default.execute(0, new Object[] {AV11EmployeeId, AV9DateTo, AV10DateFrom});
-         c131LeaveRequestDuration = P00642_A131LeaveRequestDuration[0];
+         c131LeaveRequestDuration = (long)(Math.Round(P00642_A131LeaveRequestDuration[0], 18, MidpointRounding.ToEven));
          pr_default.close(0);
          AV8TotalLeaveHours = (long)(AV8TotalLeaveHours+c131LeaveRequestDuration);
          /* End optimized group. */
@@ -126,7 +126,7 @@ namespace GeneXus.Programs {
       public override void initialize( )
       {
          scmdbuf = "";
-         P00642_A131LeaveRequestDuration = new long[1] ;
+         P00642_A131LeaveRequestDuration = new decimal[1] ;
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.procgetemployeeleavetotal__default(),
             new Object[][] {
                 new Object[] {
@@ -146,7 +146,7 @@ namespace GeneXus.Programs {
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private IDataStoreProvider pr_default ;
-      private long[] P00642_A131LeaveRequestDuration ;
+      private decimal[] P00642_A131LeaveRequestDuration ;
       private long aP3_TotalLeaveHours ;
    }
 
@@ -184,7 +184,7 @@ namespace GeneXus.Programs {
        switch ( cursor )
        {
              case 0 :
-                ((long[]) buf[0])[0] = rslt.getLong(1);
+                ((decimal[]) buf[0])[0] = rslt.getDecimal(1);
                 return;
        }
     }

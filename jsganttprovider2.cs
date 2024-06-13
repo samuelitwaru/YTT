@@ -106,6 +106,8 @@ namespace GeneXus.Programs {
          {
             A124LeaveTypeId = P001R2_A124LeaveTypeId[0];
             A106EmployeeId = P001R2_A106EmployeeId[0];
+            A129LeaveRequestStartDate = P001R2_A129LeaveRequestStartDate[0];
+            A130LeaveRequestEndDate = P001R2_A130LeaveRequestEndDate[0];
             A127LeaveRequestId = P001R2_A127LeaveRequestId[0];
             A125LeaveTypeName = P001R2_A125LeaveTypeName[0];
             A148EmployeeName = P001R2_A148EmployeeName[0];
@@ -113,10 +115,16 @@ namespace GeneXus.Programs {
             A148EmployeeName = P001R2_A148EmployeeName[0];
             Gxm1jsgantttask = new SdtjsGanttTask(context);
             Gxm2rootcol.Add(Gxm1jsgantttask, 0);
+            GXt_char1 = AV5pStart;
+            new formatdatetime(context ).execute(  A129LeaveRequestStartDate,  "DD/MM/YYYY", out  AV5pStart) ;
+            AV5pStart = GXt_char1;
+            GXt_char1 = AV6pEnd;
+            new formatdatetime(context ).execute(  A130LeaveRequestEndDate,  "DD/MM/YYYY", out  AV5pStart) ;
+            AV6pEnd = GXt_char1;
             Gxm1jsgantttask.gxTpr_Pid = (short)(A127LeaveRequestId);
             Gxm1jsgantttask.gxTpr_Pname = A125LeaveTypeName;
-            Gxm1jsgantttask.gxTpr_Pstart = "2024-01-01";
-            Gxm1jsgantttask.gxTpr_Pend = "2024-31-01";
+            Gxm1jsgantttask.gxTpr_Pstart = AV5pStart;
+            Gxm1jsgantttask.gxTpr_Pend = AV6pEnd;
             Gxm1jsgantttask.gxTpr_Pcolor = "ff0000";
             Gxm1jsgantttask.gxTpr_Plink = "http://www.gxtechnical.com/cp";
             Gxm1jsgantttask.gxTpr_Pmile = 0;
@@ -152,16 +160,23 @@ namespace GeneXus.Programs {
          scmdbuf = "";
          P001R2_A124LeaveTypeId = new long[1] ;
          P001R2_A106EmployeeId = new long[1] ;
+         P001R2_A129LeaveRequestStartDate = new DateTime[] {DateTime.MinValue} ;
+         P001R2_A130LeaveRequestEndDate = new DateTime[] {DateTime.MinValue} ;
          P001R2_A127LeaveRequestId = new long[1] ;
          P001R2_A125LeaveTypeName = new string[] {""} ;
          P001R2_A148EmployeeName = new string[] {""} ;
+         A129LeaveRequestStartDate = DateTime.MinValue;
+         A130LeaveRequestEndDate = DateTime.MinValue;
          A125LeaveTypeName = "";
          A148EmployeeName = "";
          Gxm1jsgantttask = new SdtjsGanttTask(context);
+         AV5pStart = "";
+         AV6pEnd = "";
+         GXt_char1 = "";
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.jsganttprovider2__default(),
             new Object[][] {
                 new Object[] {
-               P001R2_A124LeaveTypeId, P001R2_A106EmployeeId, P001R2_A127LeaveRequestId, P001R2_A125LeaveTypeName, P001R2_A148EmployeeName
+               P001R2_A124LeaveTypeId, P001R2_A106EmployeeId, P001R2_A129LeaveRequestStartDate, P001R2_A130LeaveRequestEndDate, P001R2_A127LeaveRequestId, P001R2_A125LeaveTypeName, P001R2_A148EmployeeName
                }
             }
          );
@@ -174,11 +189,18 @@ namespace GeneXus.Programs {
       private string scmdbuf ;
       private string A125LeaveTypeName ;
       private string A148EmployeeName ;
+      private string AV5pStart ;
+      private string AV6pEnd ;
+      private string GXt_char1 ;
+      private DateTime A129LeaveRequestStartDate ;
+      private DateTime A130LeaveRequestEndDate ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private IDataStoreProvider pr_default ;
       private long[] P001R2_A124LeaveTypeId ;
       private long[] P001R2_A106EmployeeId ;
+      private DateTime[] P001R2_A129LeaveRequestStartDate ;
+      private DateTime[] P001R2_A130LeaveRequestEndDate ;
       private long[] P001R2_A127LeaveRequestId ;
       private string[] P001R2_A125LeaveTypeName ;
       private string[] P001R2_A148EmployeeName ;
@@ -206,7 +228,7 @@ namespace GeneXus.Programs {
           prmP001R2 = new Object[] {
           };
           def= new CursorDef[] {
-              new CursorDef("P001R2", "SELECT T1.LeaveTypeId, T1.EmployeeId, T1.LeaveRequestId, T2.LeaveTypeName, T3.EmployeeName FROM ((LeaveRequest T1 INNER JOIN LeaveType T2 ON T2.LeaveTypeId = T1.LeaveTypeId) INNER JOIN Employee T3 ON T3.EmployeeId = T1.EmployeeId) ORDER BY T1.LeaveRequestId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP001R2,100, GxCacheFrequency.OFF ,false,false )
+              new CursorDef("P001R2", "SELECT T1.LeaveTypeId, T1.EmployeeId, T1.LeaveRequestStartDate, T1.LeaveRequestEndDate, T1.LeaveRequestId, T2.LeaveTypeName, T3.EmployeeName FROM ((LeaveRequest T1 INNER JOIN LeaveType T2 ON T2.LeaveTypeId = T1.LeaveTypeId) INNER JOIN Employee T3 ON T3.EmployeeId = T1.EmployeeId) ORDER BY T1.LeaveRequestId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP001R2,100, GxCacheFrequency.OFF ,true,false )
           };
        }
     }
@@ -220,9 +242,11 @@ namespace GeneXus.Programs {
              case 0 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);
                 ((long[]) buf[1])[0] = rslt.getLong(2);
-                ((long[]) buf[2])[0] = rslt.getLong(3);
-                ((string[]) buf[3])[0] = rslt.getString(4, 100);
-                ((string[]) buf[4])[0] = rslt.getString(5, 128);
+                ((DateTime[]) buf[2])[0] = rslt.getGXDate(3);
+                ((DateTime[]) buf[3])[0] = rslt.getGXDate(4);
+                ((long[]) buf[4])[0] = rslt.getLong(5);
+                ((string[]) buf[5])[0] = rslt.getString(6, 100);
+                ((string[]) buf[6])[0] = rslt.getString(7, 128);
                 return;
        }
     }

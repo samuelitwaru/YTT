@@ -92,7 +92,6 @@ namespace GeneXus.Programs {
          AV9GAMUser = new GeneXus.Programs.genexussecurity.SdtGAMUser(context).getbylogin("local", AV8Employee.gxTpr_Employeeemail, out  AV10GAMErrorCollection);
          AV9GAMUser.addrolebyid( AV11GAMRole.gxTpr_Id, out  AV10GAMErrorCollection);
          context.CommitDataStores("assignprojectmanagerrole",pr_default);
-         new logtofile(context ).execute(  "Hello world") ;
          this.cleanup();
       }
 

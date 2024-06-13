@@ -59,6 +59,10 @@ namespace GeneXus.Programs {
             A125LeaveTypeName = BC000I5_A125LeaveTypeName[0];
             A144LeaveTypeVacationLeave = BC000I5_A144LeaveTypeVacationLeave[0];
             A145LeaveTypeLoggingWorkHours = BC000I5_A145LeaveTypeLoggingWorkHours[0];
+            A174LeaveTypeColorPending = BC000I5_A174LeaveTypeColorPending[0];
+            n174LeaveTypeColorPending = BC000I5_n174LeaveTypeColorPending[0];
+            A175LeaveTypeColorApproved = BC000I5_A175LeaveTypeColorApproved[0];
+            n175LeaveTypeColorApproved = BC000I5_n175LeaveTypeColorApproved[0];
             A100CompanyId = BC000I5_A100CompanyId[0];
          }
          bcLeaveType = new SdtLeaveType(context);
@@ -80,6 +84,10 @@ namespace GeneXus.Programs {
                A125LeaveTypeName = BC000I5_A125LeaveTypeName[0];
                A144LeaveTypeVacationLeave = BC000I5_A144LeaveTypeVacationLeave[0];
                A145LeaveTypeLoggingWorkHours = BC000I5_A145LeaveTypeLoggingWorkHours[0];
+               A174LeaveTypeColorPending = BC000I5_A174LeaveTypeColorPending[0];
+               n174LeaveTypeColorPending = BC000I5_n174LeaveTypeColorPending[0];
+               A175LeaveTypeColorApproved = BC000I5_A175LeaveTypeColorApproved[0];
+               n175LeaveTypeColorApproved = BC000I5_n175LeaveTypeColorApproved[0];
                A100CompanyId = BC000I5_A100CompanyId[0];
             }
             Gx_mode = sMode20;
@@ -201,6 +209,8 @@ namespace GeneXus.Programs {
             Z125LeaveTypeName = A125LeaveTypeName;
             Z144LeaveTypeVacationLeave = A144LeaveTypeVacationLeave;
             Z145LeaveTypeLoggingWorkHours = A145LeaveTypeLoggingWorkHours;
+            Z174LeaveTypeColorPending = A174LeaveTypeColorPending;
+            Z175LeaveTypeColorApproved = A175LeaveTypeColorApproved;
             Z100CompanyId = A100CompanyId;
          }
          if ( ( GX_JID == 11 ) || ( GX_JID == 0 ) )
@@ -212,6 +222,8 @@ namespace GeneXus.Programs {
             Z125LeaveTypeName = A125LeaveTypeName;
             Z144LeaveTypeVacationLeave = A144LeaveTypeVacationLeave;
             Z145LeaveTypeLoggingWorkHours = A145LeaveTypeLoggingWorkHours;
+            Z174LeaveTypeColorPending = A174LeaveTypeColorPending;
+            Z175LeaveTypeColorApproved = A175LeaveTypeColorApproved;
             Z100CompanyId = A100CompanyId;
          }
       }
@@ -250,6 +262,10 @@ namespace GeneXus.Programs {
             A125LeaveTypeName = BC000I6_A125LeaveTypeName[0];
             A144LeaveTypeVacationLeave = BC000I6_A144LeaveTypeVacationLeave[0];
             A145LeaveTypeLoggingWorkHours = BC000I6_A145LeaveTypeLoggingWorkHours[0];
+            A174LeaveTypeColorPending = BC000I6_A174LeaveTypeColorPending[0];
+            n174LeaveTypeColorPending = BC000I6_n174LeaveTypeColorPending[0];
+            A175LeaveTypeColorApproved = BC000I6_A175LeaveTypeColorApproved[0];
+            n175LeaveTypeColorApproved = BC000I6_n175LeaveTypeColorApproved[0];
             A100CompanyId = BC000I6_A100CompanyId[0];
             ZM0I20( -10) ;
          }
@@ -321,6 +337,10 @@ namespace GeneXus.Programs {
             A125LeaveTypeName = BC000I3_A125LeaveTypeName[0];
             A144LeaveTypeVacationLeave = BC000I3_A144LeaveTypeVacationLeave[0];
             A145LeaveTypeLoggingWorkHours = BC000I3_A145LeaveTypeLoggingWorkHours[0];
+            A174LeaveTypeColorPending = BC000I3_A174LeaveTypeColorPending[0];
+            n174LeaveTypeColorPending = BC000I3_n174LeaveTypeColorPending[0];
+            A175LeaveTypeColorApproved = BC000I3_A175LeaveTypeColorApproved[0];
+            n175LeaveTypeColorApproved = BC000I3_n175LeaveTypeColorApproved[0];
             A100CompanyId = BC000I3_A100CompanyId[0];
             Z124LeaveTypeId = A124LeaveTypeId;
             sMode20 = Gx_mode;
@@ -388,7 +408,12 @@ namespace GeneXus.Programs {
                AnyError = 1;
                return  ;
             }
-            if ( (pr_default.getStatus(0) == 101) || ( StringUtil.StrCmp(Z125LeaveTypeName, BC000I2_A125LeaveTypeName[0]) != 0 ) || ( StringUtil.StrCmp(Z144LeaveTypeVacationLeave, BC000I2_A144LeaveTypeVacationLeave[0]) != 0 ) || ( StringUtil.StrCmp(Z145LeaveTypeLoggingWorkHours, BC000I2_A145LeaveTypeLoggingWorkHours[0]) != 0 ) || ( Z100CompanyId != BC000I2_A100CompanyId[0] ) )
+            Gx_longc = false;
+            if ( (pr_default.getStatus(0) == 101) || ( StringUtil.StrCmp(Z125LeaveTypeName, BC000I2_A125LeaveTypeName[0]) != 0 ) || ( StringUtil.StrCmp(Z144LeaveTypeVacationLeave, BC000I2_A144LeaveTypeVacationLeave[0]) != 0 ) || ( StringUtil.StrCmp(Z145LeaveTypeLoggingWorkHours, BC000I2_A145LeaveTypeLoggingWorkHours[0]) != 0 ) || ( StringUtil.StrCmp(Z174LeaveTypeColorPending, BC000I2_A174LeaveTypeColorPending[0]) != 0 ) || ( StringUtil.StrCmp(Z175LeaveTypeColorApproved, BC000I2_A175LeaveTypeColorApproved[0]) != 0 ) )
+            {
+               Gx_longc = true;
+            }
+            if ( Gx_longc || ( Z100CompanyId != BC000I2_A100CompanyId[0] ) )
             {
                GX_msglist.addItem(context.GetMessage( "GXM_waschg", new   object[]  {"LeaveType"}), "RecordWasChanged", 1, "");
                AnyError = 1;
@@ -417,7 +442,7 @@ namespace GeneXus.Programs {
                   if ( AnyError == 0 )
                   {
                      /* Using cursor BC000I8 */
-                     pr_default.execute(6, new Object[] {A125LeaveTypeName, A144LeaveTypeVacationLeave, A145LeaveTypeLoggingWorkHours, A100CompanyId});
+                     pr_default.execute(6, new Object[] {A125LeaveTypeName, A144LeaveTypeVacationLeave, A145LeaveTypeLoggingWorkHours, n174LeaveTypeColorPending, A174LeaveTypeColorPending, n175LeaveTypeColorApproved, A175LeaveTypeColorApproved, A100CompanyId});
                      pr_default.close(6);
                      /* Retrieving last key number assigned */
                      /* Using cursor BC000I9 */
@@ -472,7 +497,7 @@ namespace GeneXus.Programs {
                   if ( AnyError == 0 )
                   {
                      /* Using cursor BC000I10 */
-                     pr_default.execute(8, new Object[] {A125LeaveTypeName, A144LeaveTypeVacationLeave, A145LeaveTypeLoggingWorkHours, A100CompanyId, A124LeaveTypeId});
+                     pr_default.execute(8, new Object[] {A125LeaveTypeName, A144LeaveTypeVacationLeave, A145LeaveTypeLoggingWorkHours, n174LeaveTypeColorPending, A174LeaveTypeColorPending, n175LeaveTypeColorApproved, A175LeaveTypeColorApproved, A100CompanyId, A124LeaveTypeId});
                      pr_default.close(8);
                      pr_default.SmartCacheProvider.SetUpdated("LeaveType");
                      if ( (pr_default.getStatus(8) == 103) )
@@ -612,6 +637,10 @@ namespace GeneXus.Programs {
             A125LeaveTypeName = BC000I13_A125LeaveTypeName[0];
             A144LeaveTypeVacationLeave = BC000I13_A144LeaveTypeVacationLeave[0];
             A145LeaveTypeLoggingWorkHours = BC000I13_A145LeaveTypeLoggingWorkHours[0];
+            A174LeaveTypeColorPending = BC000I13_A174LeaveTypeColorPending[0];
+            n174LeaveTypeColorPending = BC000I13_n174LeaveTypeColorPending[0];
+            A175LeaveTypeColorApproved = BC000I13_A175LeaveTypeColorApproved[0];
+            n175LeaveTypeColorApproved = BC000I13_n175LeaveTypeColorApproved[0];
             A100CompanyId = BC000I13_A100CompanyId[0];
          }
          /* Load Subordinate Levels */
@@ -636,6 +665,10 @@ namespace GeneXus.Programs {
             A125LeaveTypeName = BC000I13_A125LeaveTypeName[0];
             A144LeaveTypeVacationLeave = BC000I13_A144LeaveTypeVacationLeave[0];
             A145LeaveTypeLoggingWorkHours = BC000I13_A145LeaveTypeLoggingWorkHours[0];
+            A174LeaveTypeColorPending = BC000I13_A174LeaveTypeColorPending[0];
+            n174LeaveTypeColorPending = BC000I13_n174LeaveTypeColorPending[0];
+            A175LeaveTypeColorApproved = BC000I13_A175LeaveTypeColorApproved[0];
+            n175LeaveTypeColorApproved = BC000I13_n175LeaveTypeColorApproved[0];
             A100CompanyId = BC000I13_A100CompanyId[0];
          }
          Gx_mode = sMode20;
@@ -698,11 +731,17 @@ namespace GeneXus.Programs {
       {
          A100CompanyId = 0;
          A125LeaveTypeName = "";
+         A174LeaveTypeColorPending = "";
+         n174LeaveTypeColorPending = false;
+         A175LeaveTypeColorApproved = "";
+         n175LeaveTypeColorApproved = false;
          A144LeaveTypeVacationLeave = "No";
          A145LeaveTypeLoggingWorkHours = "No";
          Z125LeaveTypeName = "";
          Z144LeaveTypeVacationLeave = "";
          Z145LeaveTypeLoggingWorkHours = "";
+         Z174LeaveTypeColorPending = "";
+         Z175LeaveTypeColorApproved = "";
          Z100CompanyId = 0;
       }
 
@@ -744,6 +783,8 @@ namespace GeneXus.Programs {
          obj20.gxTpr_Mode = Gx_mode;
          obj20.gxTpr_Companyid = A100CompanyId;
          obj20.gxTpr_Leavetypename = A125LeaveTypeName;
+         obj20.gxTpr_Leavetypecolorpending = A174LeaveTypeColorPending;
+         obj20.gxTpr_Leavetypecolorapproved = A175LeaveTypeColorApproved;
          obj20.gxTpr_Leavetypevacationleave = A144LeaveTypeVacationLeave;
          obj20.gxTpr_Leavetypeloggingworkhours = A145LeaveTypeLoggingWorkHours;
          obj20.gxTpr_Leavetypeid = A124LeaveTypeId;
@@ -751,7 +792,11 @@ namespace GeneXus.Programs {
          obj20.gxTpr_Leavetypename_Z = Z125LeaveTypeName;
          obj20.gxTpr_Leavetypevacationleave_Z = Z144LeaveTypeVacationLeave;
          obj20.gxTpr_Leavetypeloggingworkhours_Z = Z145LeaveTypeLoggingWorkHours;
+         obj20.gxTpr_Leavetypecolorpending_Z = Z174LeaveTypeColorPending;
+         obj20.gxTpr_Leavetypecolorapproved_Z = Z175LeaveTypeColorApproved;
          obj20.gxTpr_Companyid_Z = Z100CompanyId;
+         obj20.gxTpr_Leavetypecolorpending_N = (short)(Convert.ToInt16(n174LeaveTypeColorPending));
+         obj20.gxTpr_Leavetypecolorapproved_N = (short)(Convert.ToInt16(n175LeaveTypeColorApproved));
          obj20.gxTpr_Mode = Gx_mode;
          return  ;
       }
@@ -768,6 +813,10 @@ namespace GeneXus.Programs {
          Gx_mode = obj20.gxTpr_Mode;
          A100CompanyId = obj20.gxTpr_Companyid;
          A125LeaveTypeName = obj20.gxTpr_Leavetypename;
+         A174LeaveTypeColorPending = obj20.gxTpr_Leavetypecolorpending;
+         n174LeaveTypeColorPending = false;
+         A175LeaveTypeColorApproved = obj20.gxTpr_Leavetypecolorapproved;
+         n175LeaveTypeColorApproved = false;
          if ( ! ( ( StringUtil.StrCmp(obj20.gxTpr_Leavetypeloggingworkhours, "Yes") == 0 ) ) || ( forceLoad == 1 ) )
          {
             A144LeaveTypeVacationLeave = obj20.gxTpr_Leavetypevacationleave;
@@ -781,7 +830,11 @@ namespace GeneXus.Programs {
          Z125LeaveTypeName = obj20.gxTpr_Leavetypename_Z;
          Z144LeaveTypeVacationLeave = obj20.gxTpr_Leavetypevacationleave_Z;
          Z145LeaveTypeLoggingWorkHours = obj20.gxTpr_Leavetypeloggingworkhours_Z;
+         Z174LeaveTypeColorPending = obj20.gxTpr_Leavetypecolorpending_Z;
+         Z175LeaveTypeColorApproved = obj20.gxTpr_Leavetypecolorapproved_Z;
          Z100CompanyId = obj20.gxTpr_Companyid_Z;
+         n174LeaveTypeColorPending = (bool)(Convert.ToBoolean(obj20.gxTpr_Leavetypecolorpending_N));
+         n175LeaveTypeColorApproved = (bool)(Convert.ToBoolean(obj20.gxTpr_Leavetypecolorapproved_N));
          Gx_mode = obj20.gxTpr_Mode;
          return  ;
       }
@@ -1260,10 +1313,16 @@ namespace GeneXus.Programs {
          BC000I5_A125LeaveTypeName = new string[] {""} ;
          BC000I5_A144LeaveTypeVacationLeave = new string[] {""} ;
          BC000I5_A145LeaveTypeLoggingWorkHours = new string[] {""} ;
+         BC000I5_A174LeaveTypeColorPending = new string[] {""} ;
+         BC000I5_n174LeaveTypeColorPending = new bool[] {false} ;
+         BC000I5_A175LeaveTypeColorApproved = new string[] {""} ;
+         BC000I5_n175LeaveTypeColorApproved = new bool[] {false} ;
          BC000I5_A100CompanyId = new long[1] ;
          A125LeaveTypeName = "";
          A144LeaveTypeVacationLeave = "";
          A145LeaveTypeLoggingWorkHours = "";
+         A174LeaveTypeColorPending = "";
+         A175LeaveTypeColorApproved = "";
          gx_restcollection = new GXBCCollection<SdtLeaveType>( context, "LeaveType", "YTT_version4");
          sMode20 = "";
          Gx_mode = "";
@@ -1277,10 +1336,16 @@ namespace GeneXus.Programs {
          Z125LeaveTypeName = "";
          Z144LeaveTypeVacationLeave = "";
          Z145LeaveTypeLoggingWorkHours = "";
+         Z174LeaveTypeColorPending = "";
+         Z175LeaveTypeColorApproved = "";
          BC000I6_A124LeaveTypeId = new long[1] ;
          BC000I6_A125LeaveTypeName = new string[] {""} ;
          BC000I6_A144LeaveTypeVacationLeave = new string[] {""} ;
          BC000I6_A145LeaveTypeLoggingWorkHours = new string[] {""} ;
+         BC000I6_A174LeaveTypeColorPending = new string[] {""} ;
+         BC000I6_n174LeaveTypeColorPending = new bool[] {false} ;
+         BC000I6_A175LeaveTypeColorApproved = new string[] {""} ;
+         BC000I6_n175LeaveTypeColorApproved = new bool[] {false} ;
          BC000I6_A100CompanyId = new long[1] ;
          BC000I4_A100CompanyId = new long[1] ;
          BC000I7_A124LeaveTypeId = new long[1] ;
@@ -1288,11 +1353,19 @@ namespace GeneXus.Programs {
          BC000I3_A125LeaveTypeName = new string[] {""} ;
          BC000I3_A144LeaveTypeVacationLeave = new string[] {""} ;
          BC000I3_A145LeaveTypeLoggingWorkHours = new string[] {""} ;
+         BC000I3_A174LeaveTypeColorPending = new string[] {""} ;
+         BC000I3_n174LeaveTypeColorPending = new bool[] {false} ;
+         BC000I3_A175LeaveTypeColorApproved = new string[] {""} ;
+         BC000I3_n175LeaveTypeColorApproved = new bool[] {false} ;
          BC000I3_A100CompanyId = new long[1] ;
          BC000I2_A124LeaveTypeId = new long[1] ;
          BC000I2_A125LeaveTypeName = new string[] {""} ;
          BC000I2_A144LeaveTypeVacationLeave = new string[] {""} ;
          BC000I2_A145LeaveTypeLoggingWorkHours = new string[] {""} ;
+         BC000I2_A174LeaveTypeColorPending = new string[] {""} ;
+         BC000I2_n174LeaveTypeColorPending = new bool[] {false} ;
+         BC000I2_A175LeaveTypeColorApproved = new string[] {""} ;
+         BC000I2_n175LeaveTypeColorApproved = new bool[] {false} ;
          BC000I2_A100CompanyId = new long[1] ;
          BC000I9_A124LeaveTypeId = new long[1] ;
          BC000I12_A127LeaveRequestId = new long[1] ;
@@ -1300,6 +1373,10 @@ namespace GeneXus.Programs {
          BC000I13_A125LeaveTypeName = new string[] {""} ;
          BC000I13_A144LeaveTypeVacationLeave = new string[] {""} ;
          BC000I13_A145LeaveTypeLoggingWorkHours = new string[] {""} ;
+         BC000I13_A174LeaveTypeColorPending = new string[] {""} ;
+         BC000I13_n174LeaveTypeColorPending = new bool[] {false} ;
+         BC000I13_A175LeaveTypeColorApproved = new string[] {""} ;
+         BC000I13_n175LeaveTypeColorApproved = new bool[] {false} ;
          BC000I13_A100CompanyId = new long[1] ;
          N144LeaveTypeVacationLeave = "";
          N145LeaveTypeLoggingWorkHours = "";
@@ -1314,19 +1391,19 @@ namespace GeneXus.Programs {
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.leavetype_bc__default(),
             new Object[][] {
                 new Object[] {
-               BC000I2_A124LeaveTypeId, BC000I2_A125LeaveTypeName, BC000I2_A144LeaveTypeVacationLeave, BC000I2_A145LeaveTypeLoggingWorkHours, BC000I2_A100CompanyId
+               BC000I2_A124LeaveTypeId, BC000I2_A125LeaveTypeName, BC000I2_A144LeaveTypeVacationLeave, BC000I2_A145LeaveTypeLoggingWorkHours, BC000I2_A174LeaveTypeColorPending, BC000I2_n174LeaveTypeColorPending, BC000I2_A175LeaveTypeColorApproved, BC000I2_n175LeaveTypeColorApproved, BC000I2_A100CompanyId
                }
                , new Object[] {
-               BC000I3_A124LeaveTypeId, BC000I3_A125LeaveTypeName, BC000I3_A144LeaveTypeVacationLeave, BC000I3_A145LeaveTypeLoggingWorkHours, BC000I3_A100CompanyId
+               BC000I3_A124LeaveTypeId, BC000I3_A125LeaveTypeName, BC000I3_A144LeaveTypeVacationLeave, BC000I3_A145LeaveTypeLoggingWorkHours, BC000I3_A174LeaveTypeColorPending, BC000I3_n174LeaveTypeColorPending, BC000I3_A175LeaveTypeColorApproved, BC000I3_n175LeaveTypeColorApproved, BC000I3_A100CompanyId
                }
                , new Object[] {
                BC000I4_A100CompanyId
                }
                , new Object[] {
-               BC000I5_A124LeaveTypeId, BC000I5_A125LeaveTypeName, BC000I5_A144LeaveTypeVacationLeave, BC000I5_A145LeaveTypeLoggingWorkHours, BC000I5_A100CompanyId
+               BC000I5_A124LeaveTypeId, BC000I5_A125LeaveTypeName, BC000I5_A144LeaveTypeVacationLeave, BC000I5_A145LeaveTypeLoggingWorkHours, BC000I5_A174LeaveTypeColorPending, BC000I5_n174LeaveTypeColorPending, BC000I5_A175LeaveTypeColorApproved, BC000I5_n175LeaveTypeColorApproved, BC000I5_A100CompanyId
                }
                , new Object[] {
-               BC000I6_A124LeaveTypeId, BC000I6_A125LeaveTypeName, BC000I6_A144LeaveTypeVacationLeave, BC000I6_A145LeaveTypeLoggingWorkHours, BC000I6_A100CompanyId
+               BC000I6_A124LeaveTypeId, BC000I6_A125LeaveTypeName, BC000I6_A144LeaveTypeVacationLeave, BC000I6_A145LeaveTypeLoggingWorkHours, BC000I6_A174LeaveTypeColorPending, BC000I6_n174LeaveTypeColorPending, BC000I6_A175LeaveTypeColorApproved, BC000I6_n175LeaveTypeColorApproved, BC000I6_A100CompanyId
                }
                , new Object[] {
                BC000I7_A124LeaveTypeId
@@ -1344,7 +1421,7 @@ namespace GeneXus.Programs {
                BC000I12_A127LeaveRequestId
                }
                , new Object[] {
-               BC000I13_A124LeaveTypeId, BC000I13_A125LeaveTypeName, BC000I13_A144LeaveTypeVacationLeave, BC000I13_A145LeaveTypeLoggingWorkHours, BC000I13_A100CompanyId
+               BC000I13_A124LeaveTypeId, BC000I13_A125LeaveTypeName, BC000I13_A144LeaveTypeVacationLeave, BC000I13_A145LeaveTypeLoggingWorkHours, BC000I13_A174LeaveTypeColorPending, BC000I13_n174LeaveTypeColorPending, BC000I13_A175LeaveTypeColorApproved, BC000I13_n175LeaveTypeColorApproved, BC000I13_A100CompanyId
                }
             }
          );
@@ -1391,6 +1468,8 @@ namespace GeneXus.Programs {
       private string A125LeaveTypeName ;
       private string A144LeaveTypeVacationLeave ;
       private string A145LeaveTypeLoggingWorkHours ;
+      private string A174LeaveTypeColorPending ;
+      private string A175LeaveTypeColorApproved ;
       private string sMode20 ;
       private string Gx_mode ;
       private string endTrnMsgTxt ;
@@ -1399,11 +1478,16 @@ namespace GeneXus.Programs {
       private string Z125LeaveTypeName ;
       private string Z144LeaveTypeVacationLeave ;
       private string Z145LeaveTypeLoggingWorkHours ;
+      private string Z174LeaveTypeColorPending ;
+      private string Z175LeaveTypeColorApproved ;
       private string N144LeaveTypeVacationLeave ;
       private string N145LeaveTypeLoggingWorkHours ;
       private string i145LeaveTypeLoggingWorkHours ;
       private string i144LeaveTypeVacationLeave ;
+      private bool n174LeaveTypeColorPending ;
+      private bool n175LeaveTypeColorApproved ;
       private bool returnInSub ;
+      private bool Gx_longc ;
       private bool mustCommit ;
       private IGxSession AV11WebSession ;
       private GXBCCollection<SdtLeaveType> gx_restcollection ;
@@ -1416,11 +1500,19 @@ namespace GeneXus.Programs {
       private string[] BC000I5_A125LeaveTypeName ;
       private string[] BC000I5_A144LeaveTypeVacationLeave ;
       private string[] BC000I5_A145LeaveTypeLoggingWorkHours ;
+      private string[] BC000I5_A174LeaveTypeColorPending ;
+      private bool[] BC000I5_n174LeaveTypeColorPending ;
+      private string[] BC000I5_A175LeaveTypeColorApproved ;
+      private bool[] BC000I5_n175LeaveTypeColorApproved ;
       private long[] BC000I5_A100CompanyId ;
       private long[] BC000I6_A124LeaveTypeId ;
       private string[] BC000I6_A125LeaveTypeName ;
       private string[] BC000I6_A144LeaveTypeVacationLeave ;
       private string[] BC000I6_A145LeaveTypeLoggingWorkHours ;
+      private string[] BC000I6_A174LeaveTypeColorPending ;
+      private bool[] BC000I6_n174LeaveTypeColorPending ;
+      private string[] BC000I6_A175LeaveTypeColorApproved ;
+      private bool[] BC000I6_n175LeaveTypeColorApproved ;
       private long[] BC000I6_A100CompanyId ;
       private long[] BC000I4_A100CompanyId ;
       private long[] BC000I7_A124LeaveTypeId ;
@@ -1428,11 +1520,19 @@ namespace GeneXus.Programs {
       private string[] BC000I3_A125LeaveTypeName ;
       private string[] BC000I3_A144LeaveTypeVacationLeave ;
       private string[] BC000I3_A145LeaveTypeLoggingWorkHours ;
+      private string[] BC000I3_A174LeaveTypeColorPending ;
+      private bool[] BC000I3_n174LeaveTypeColorPending ;
+      private string[] BC000I3_A175LeaveTypeColorApproved ;
+      private bool[] BC000I3_n175LeaveTypeColorApproved ;
       private long[] BC000I3_A100CompanyId ;
       private long[] BC000I2_A124LeaveTypeId ;
       private string[] BC000I2_A125LeaveTypeName ;
       private string[] BC000I2_A144LeaveTypeVacationLeave ;
       private string[] BC000I2_A145LeaveTypeLoggingWorkHours ;
+      private string[] BC000I2_A174LeaveTypeColorPending ;
+      private bool[] BC000I2_n174LeaveTypeColorPending ;
+      private string[] BC000I2_A175LeaveTypeColorApproved ;
+      private bool[] BC000I2_n175LeaveTypeColorApproved ;
       private long[] BC000I2_A100CompanyId ;
       private long[] BC000I9_A124LeaveTypeId ;
       private long[] BC000I12_A127LeaveRequestId ;
@@ -1440,6 +1540,10 @@ namespace GeneXus.Programs {
       private string[] BC000I13_A125LeaveTypeName ;
       private string[] BC000I13_A144LeaveTypeVacationLeave ;
       private string[] BC000I13_A145LeaveTypeLoggingWorkHours ;
+      private string[] BC000I13_A174LeaveTypeColorPending ;
+      private bool[] BC000I13_n174LeaveTypeColorPending ;
+      private string[] BC000I13_A175LeaveTypeColorApproved ;
+      private bool[] BC000I13_n175LeaveTypeColorApproved ;
       private long[] BC000I13_A100CompanyId ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
@@ -1537,6 +1641,8 @@ namespace GeneXus.Programs {
         new ParDef("LeaveTypeName",GXType.Char,100,0) ,
         new ParDef("LeaveTypeVacationLeave",GXType.Char,20,0) ,
         new ParDef("LeaveTypeLoggingWorkHours",GXType.Char,20,0) ,
+        new ParDef("LeaveTypeColorPending",GXType.Char,20,0){Nullable=true} ,
+        new ParDef("LeaveTypeColorApproved",GXType.Char,20,0){Nullable=true} ,
         new ParDef("CompanyId",GXType.Int64,10,0)
         };
         Object[] prmBC000I9;
@@ -1547,6 +1653,8 @@ namespace GeneXus.Programs {
         new ParDef("LeaveTypeName",GXType.Char,100,0) ,
         new ParDef("LeaveTypeVacationLeave",GXType.Char,20,0) ,
         new ParDef("LeaveTypeLoggingWorkHours",GXType.Char,20,0) ,
+        new ParDef("LeaveTypeColorPending",GXType.Char,20,0){Nullable=true} ,
+        new ParDef("LeaveTypeColorApproved",GXType.Char,20,0){Nullable=true} ,
         new ParDef("CompanyId",GXType.Int64,10,0) ,
         new ParDef("LeaveTypeId",GXType.Int64,10,0)
         };
@@ -1563,18 +1671,18 @@ namespace GeneXus.Programs {
         new ParDef("LeaveTypeId",GXType.Int64,10,0)
         };
         def= new CursorDef[] {
-            new CursorDef("BC000I2", "SELECT LeaveTypeId, LeaveTypeName, LeaveTypeVacationLeave, LeaveTypeLoggingWorkHours, CompanyId FROM LeaveType WHERE LeaveTypeId = :LeaveTypeId  FOR UPDATE OF LeaveType",true, GxErrorMask.GX_NOMASK, false, this,prmBC000I2,1, GxCacheFrequency.OFF ,true,false )
-           ,new CursorDef("BC000I3", "SELECT LeaveTypeId, LeaveTypeName, LeaveTypeVacationLeave, LeaveTypeLoggingWorkHours, CompanyId FROM LeaveType WHERE LeaveTypeId = :LeaveTypeId ",true, GxErrorMask.GX_NOMASK, false, this,prmBC000I3,1, GxCacheFrequency.OFF ,true,false )
+            new CursorDef("BC000I2", "SELECT LeaveTypeId, LeaveTypeName, LeaveTypeVacationLeave, LeaveTypeLoggingWorkHours, LeaveTypeColorPending, LeaveTypeColorApproved, CompanyId FROM LeaveType WHERE LeaveTypeId = :LeaveTypeId  FOR UPDATE OF LeaveType",true, GxErrorMask.GX_NOMASK, false, this,prmBC000I2,1, GxCacheFrequency.OFF ,true,false )
+           ,new CursorDef("BC000I3", "SELECT LeaveTypeId, LeaveTypeName, LeaveTypeVacationLeave, LeaveTypeLoggingWorkHours, LeaveTypeColorPending, LeaveTypeColorApproved, CompanyId FROM LeaveType WHERE LeaveTypeId = :LeaveTypeId ",true, GxErrorMask.GX_NOMASK, false, this,prmBC000I3,1, GxCacheFrequency.OFF ,true,false )
            ,new CursorDef("BC000I4", "SELECT CompanyId FROM Company WHERE CompanyId = :CompanyId ",true, GxErrorMask.GX_NOMASK, false, this,prmBC000I4,1, GxCacheFrequency.OFF ,true,false )
-           ,new CursorDef("BC000I5", "SELECT TM1.LeaveTypeId, TM1.LeaveTypeName, TM1.LeaveTypeVacationLeave, TM1.LeaveTypeLoggingWorkHours, TM1.CompanyId FROM LeaveType TM1 ORDER BY TM1.LeaveTypeId  OFFSET :GXPagingFrom20 LIMIT CASE WHEN :GXPagingTo20 > 0 THEN :GXPagingTo20 ELSE 1e9 END",true, GxErrorMask.GX_NOMASK, false, this,prmBC000I5,100, GxCacheFrequency.OFF ,true,false )
-           ,new CursorDef("BC000I6", "SELECT TM1.LeaveTypeId, TM1.LeaveTypeName, TM1.LeaveTypeVacationLeave, TM1.LeaveTypeLoggingWorkHours, TM1.CompanyId FROM LeaveType TM1 WHERE TM1.LeaveTypeId = :LeaveTypeId ORDER BY TM1.LeaveTypeId ",true, GxErrorMask.GX_NOMASK, false, this,prmBC000I6,100, GxCacheFrequency.OFF ,true,false )
+           ,new CursorDef("BC000I5", "SELECT TM1.LeaveTypeId, TM1.LeaveTypeName, TM1.LeaveTypeVacationLeave, TM1.LeaveTypeLoggingWorkHours, TM1.LeaveTypeColorPending, TM1.LeaveTypeColorApproved, TM1.CompanyId FROM LeaveType TM1 ORDER BY TM1.LeaveTypeId  OFFSET :GXPagingFrom20 LIMIT CASE WHEN :GXPagingTo20 > 0 THEN :GXPagingTo20 ELSE 1e9 END",true, GxErrorMask.GX_NOMASK, false, this,prmBC000I5,100, GxCacheFrequency.OFF ,true,false )
+           ,new CursorDef("BC000I6", "SELECT TM1.LeaveTypeId, TM1.LeaveTypeName, TM1.LeaveTypeVacationLeave, TM1.LeaveTypeLoggingWorkHours, TM1.LeaveTypeColorPending, TM1.LeaveTypeColorApproved, TM1.CompanyId FROM LeaveType TM1 WHERE TM1.LeaveTypeId = :LeaveTypeId ORDER BY TM1.LeaveTypeId ",true, GxErrorMask.GX_NOMASK, false, this,prmBC000I6,100, GxCacheFrequency.OFF ,true,false )
            ,new CursorDef("BC000I7", "SELECT LeaveTypeId FROM LeaveType WHERE LeaveTypeId = :LeaveTypeId ",true, GxErrorMask.GX_NOMASK, false, this,prmBC000I7,1, GxCacheFrequency.OFF ,true,false )
-           ,new CursorDef("BC000I8", "SAVEPOINT gxupdate;INSERT INTO LeaveType(LeaveTypeName, LeaveTypeVacationLeave, LeaveTypeLoggingWorkHours, CompanyId) VALUES(:LeaveTypeName, :LeaveTypeVacationLeave, :LeaveTypeLoggingWorkHours, :CompanyId);RELEASE SAVEPOINT gxupdate", GxErrorMask.GX_ROLLBACKSAVEPOINT | GxErrorMask.GX_NOMASK,prmBC000I8)
+           ,new CursorDef("BC000I8", "SAVEPOINT gxupdate;INSERT INTO LeaveType(LeaveTypeName, LeaveTypeVacationLeave, LeaveTypeLoggingWorkHours, LeaveTypeColorPending, LeaveTypeColorApproved, CompanyId) VALUES(:LeaveTypeName, :LeaveTypeVacationLeave, :LeaveTypeLoggingWorkHours, :LeaveTypeColorPending, :LeaveTypeColorApproved, :CompanyId);RELEASE SAVEPOINT gxupdate", GxErrorMask.GX_ROLLBACKSAVEPOINT | GxErrorMask.GX_NOMASK,prmBC000I8)
            ,new CursorDef("BC000I9", "SELECT currval('LeaveTypeId') ",true, GxErrorMask.GX_NOMASK, false, this,prmBC000I9,1, GxCacheFrequency.OFF ,true,false )
-           ,new CursorDef("BC000I10", "SAVEPOINT gxupdate;UPDATE LeaveType SET LeaveTypeName=:LeaveTypeName, LeaveTypeVacationLeave=:LeaveTypeVacationLeave, LeaveTypeLoggingWorkHours=:LeaveTypeLoggingWorkHours, CompanyId=:CompanyId  WHERE LeaveTypeId = :LeaveTypeId;RELEASE SAVEPOINT gxupdate", GxErrorMask.GX_ROLLBACKSAVEPOINT | GxErrorMask.GX_NOMASK,prmBC000I10)
+           ,new CursorDef("BC000I10", "SAVEPOINT gxupdate;UPDATE LeaveType SET LeaveTypeName=:LeaveTypeName, LeaveTypeVacationLeave=:LeaveTypeVacationLeave, LeaveTypeLoggingWorkHours=:LeaveTypeLoggingWorkHours, LeaveTypeColorPending=:LeaveTypeColorPending, LeaveTypeColorApproved=:LeaveTypeColorApproved, CompanyId=:CompanyId  WHERE LeaveTypeId = :LeaveTypeId;RELEASE SAVEPOINT gxupdate", GxErrorMask.GX_ROLLBACKSAVEPOINT | GxErrorMask.GX_NOMASK,prmBC000I10)
            ,new CursorDef("BC000I11", "SAVEPOINT gxupdate;DELETE FROM LeaveType  WHERE LeaveTypeId = :LeaveTypeId;RELEASE SAVEPOINT gxupdate", GxErrorMask.GX_ROLLBACKSAVEPOINT | GxErrorMask.GX_NOMASK,prmBC000I11)
            ,new CursorDef("BC000I12", "SELECT LeaveRequestId FROM LeaveRequest WHERE LeaveTypeId = :LeaveTypeId ",true, GxErrorMask.GX_NOMASK, false, this,prmBC000I12,1, GxCacheFrequency.OFF ,true,true )
-           ,new CursorDef("BC000I13", "SELECT TM1.LeaveTypeId, TM1.LeaveTypeName, TM1.LeaveTypeVacationLeave, TM1.LeaveTypeLoggingWorkHours, TM1.CompanyId FROM LeaveType TM1 WHERE TM1.LeaveTypeId = :LeaveTypeId ORDER BY TM1.LeaveTypeId ",true, GxErrorMask.GX_NOMASK, false, this,prmBC000I13,100, GxCacheFrequency.OFF ,true,false )
+           ,new CursorDef("BC000I13", "SELECT TM1.LeaveTypeId, TM1.LeaveTypeName, TM1.LeaveTypeVacationLeave, TM1.LeaveTypeLoggingWorkHours, TM1.LeaveTypeColorPending, TM1.LeaveTypeColorApproved, TM1.CompanyId FROM LeaveType TM1 WHERE TM1.LeaveTypeId = :LeaveTypeId ORDER BY TM1.LeaveTypeId ",true, GxErrorMask.GX_NOMASK, false, this,prmBC000I13,100, GxCacheFrequency.OFF ,true,false )
         };
      }
   }
@@ -1590,14 +1698,22 @@ namespace GeneXus.Programs {
               ((string[]) buf[1])[0] = rslt.getString(2, 100);
               ((string[]) buf[2])[0] = rslt.getString(3, 20);
               ((string[]) buf[3])[0] = rslt.getString(4, 20);
-              ((long[]) buf[4])[0] = rslt.getLong(5);
+              ((string[]) buf[4])[0] = rslt.getString(5, 20);
+              ((bool[]) buf[5])[0] = rslt.wasNull(5);
+              ((string[]) buf[6])[0] = rslt.getString(6, 20);
+              ((bool[]) buf[7])[0] = rslt.wasNull(6);
+              ((long[]) buf[8])[0] = rslt.getLong(7);
               return;
            case 1 :
               ((long[]) buf[0])[0] = rslt.getLong(1);
               ((string[]) buf[1])[0] = rslt.getString(2, 100);
               ((string[]) buf[2])[0] = rslt.getString(3, 20);
               ((string[]) buf[3])[0] = rslt.getString(4, 20);
-              ((long[]) buf[4])[0] = rslt.getLong(5);
+              ((string[]) buf[4])[0] = rslt.getString(5, 20);
+              ((bool[]) buf[5])[0] = rslt.wasNull(5);
+              ((string[]) buf[6])[0] = rslt.getString(6, 20);
+              ((bool[]) buf[7])[0] = rslt.wasNull(6);
+              ((long[]) buf[8])[0] = rslt.getLong(7);
               return;
            case 2 :
               ((long[]) buf[0])[0] = rslt.getLong(1);
@@ -1607,14 +1723,22 @@ namespace GeneXus.Programs {
               ((string[]) buf[1])[0] = rslt.getString(2, 100);
               ((string[]) buf[2])[0] = rslt.getString(3, 20);
               ((string[]) buf[3])[0] = rslt.getString(4, 20);
-              ((long[]) buf[4])[0] = rslt.getLong(5);
+              ((string[]) buf[4])[0] = rslt.getString(5, 20);
+              ((bool[]) buf[5])[0] = rslt.wasNull(5);
+              ((string[]) buf[6])[0] = rslt.getString(6, 20);
+              ((bool[]) buf[7])[0] = rslt.wasNull(6);
+              ((long[]) buf[8])[0] = rslt.getLong(7);
               return;
            case 4 :
               ((long[]) buf[0])[0] = rslt.getLong(1);
               ((string[]) buf[1])[0] = rslt.getString(2, 100);
               ((string[]) buf[2])[0] = rslt.getString(3, 20);
               ((string[]) buf[3])[0] = rslt.getString(4, 20);
-              ((long[]) buf[4])[0] = rslt.getLong(5);
+              ((string[]) buf[4])[0] = rslt.getString(5, 20);
+              ((bool[]) buf[5])[0] = rslt.wasNull(5);
+              ((string[]) buf[6])[0] = rslt.getString(6, 20);
+              ((bool[]) buf[7])[0] = rslt.wasNull(6);
+              ((long[]) buf[8])[0] = rslt.getLong(7);
               return;
            case 5 :
               ((long[]) buf[0])[0] = rslt.getLong(1);
@@ -1630,7 +1754,11 @@ namespace GeneXus.Programs {
               ((string[]) buf[1])[0] = rslt.getString(2, 100);
               ((string[]) buf[2])[0] = rslt.getString(3, 20);
               ((string[]) buf[3])[0] = rslt.getString(4, 20);
-              ((long[]) buf[4])[0] = rslt.getLong(5);
+              ((string[]) buf[4])[0] = rslt.getString(5, 20);
+              ((bool[]) buf[5])[0] = rslt.wasNull(5);
+              ((string[]) buf[6])[0] = rslt.getString(6, 20);
+              ((bool[]) buf[7])[0] = rslt.wasNull(6);
+              ((long[]) buf[8])[0] = rslt.getLong(7);
               return;
      }
   }

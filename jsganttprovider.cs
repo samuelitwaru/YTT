@@ -114,8 +114,8 @@ namespace GeneXus.Programs {
          Gxm2rootcol.Add(Gxm1jsgantttask, 0);
          Gxm1jsgantttask.gxTpr_Pid = 11;
          Gxm1jsgantttask.gxTpr_Pname = "Construir Objeto";
-         Gxm1jsgantttask.gxTpr_Pstart = "03/03/2010";
-         Gxm1jsgantttask.gxTpr_Pend = "18/04/2010";
+         Gxm1jsgantttask.gxTpr_Pstart = "03/03/2024";
+         Gxm1jsgantttask.gxTpr_Pend = "18/04/2024";
          Gxm1jsgantttask.gxTpr_Pcolor = "00ffff";
          Gxm1jsgantttask.gxTpr_Plink = "http://www.pmsevolution.com";
          Gxm1jsgantttask.gxTpr_Pmile = 0;

@@ -41,8 +41,11 @@
  	<Compile Include="$(WebDirectory)\type_SdtSDTEmployeeProject_SDTEmployeeProjectItem.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDTEmployeeProjectHours.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDTEmployeeProjectHours_ProjectHoursItem.cs" />
+ 	<Compile Include="$(WebDirectory)\type_SdtSDTEmployeeWeekReport.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDTEmployeeWorkHourLogs.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDTEmployeeWorkHourLogs_WorkHourLogItem.cs" />
+ 	<Compile Include="$(WebDirectory)\type_SdtSDTLeaveEvent.cs" />
+ 	<Compile Include="$(WebDirectory)\type_SdtSDTLeaveEventGroup.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDTLeaveReport.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDTLeaveReport_PeriodCollectionItem.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDTPage.cs" />

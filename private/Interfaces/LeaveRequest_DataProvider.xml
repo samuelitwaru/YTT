@@ -76,6 +76,18 @@
               </Property>
             </Properties>
           </Field>
+          <Field name="LeaveRequestHalfDay" description="Leave Request Half Day">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>Character</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>20</Value>
+              </Property>
+            </Properties>
+          </Field>
           <Field name="LeaveRequestDuration" description="Leave Request Duration">
             <Properties>
               <Property>
@@ -85,6 +97,10 @@
               <Property>
                 <Name>Length</Name>
                 <Value>4</Value>
+              </Property>
+              <Property>
+                <Name>Decimals</Name>
+                <Value>1</Value>
               </Property>
             </Properties>
           </Field>

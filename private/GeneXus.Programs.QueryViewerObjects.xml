@@ -135,4 +135,13 @@
   <Object name="jsGanttProvider2" id="63" type="DataProvider" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="jsGanttProvider" xmlns="qv">
     <DefaultOutput type="OutputTypePivotTable" xmlns="qv" />
   </Object>
+  <Object name="DPLeaveEvent" id="64" type="DataProvider" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="DPLeaveEvent" xmlns="qv">
+    <DefaultOutput type="OutputTypePivotTable" xmlns="qv" />
+  </Object>
+  <Object name="DPLeaveEventGroup" id="65" type="DataProvider" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="DPLeaveEventGroup" xmlns="qv">
+    <DefaultOutput type="OutputTypePivotTable" xmlns="qv" />
+  </Object>
+  <Object name="DPEmployeeWeekReport" id="66" type="DataProvider" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="DPEmployeeWeekReport" xmlns="qv">
+    <DefaultOutput type="OutputTypePivotTable" xmlns="qv" />
+  </Object>
 </Objects>

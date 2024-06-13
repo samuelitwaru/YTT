@@ -37,32 +37,37 @@ namespace GeneXus.Programs {
       }
 
       public void execute( DateTime aP0_LeaveRequestStartDate ,
-                           out bool aP1_IsValid )
+                           string aP1_LeaveRequestHalfDay ,
+                           out bool aP2_IsValid )
       {
          this.AV9LeaveRequestStartDate = aP0_LeaveRequestStartDate;
+         this.AV11LeaveRequestHalfDay = aP1_LeaveRequestHalfDay;
          this.AV8IsValid = false ;
          initialize();
          executePrivate();
-         aP1_IsValid=this.AV8IsValid;
+         aP2_IsValid=this.AV8IsValid;
       }
 
-      public bool executeUdp( DateTime aP0_LeaveRequestStartDate )
+      public bool executeUdp( DateTime aP0_LeaveRequestStartDate ,
+                              string aP1_LeaveRequestHalfDay )
       {
-         execute(aP0_LeaveRequestStartDate, out aP1_IsValid);
+         execute(aP0_LeaveRequestStartDate, aP1_LeaveRequestHalfDay, out aP2_IsValid);
          return AV8IsValid ;
       }
 
       public void executeSubmit( DateTime aP0_LeaveRequestStartDate ,
-                                 out bool aP1_IsValid )
+                                 string aP1_LeaveRequestHalfDay ,
+                                 out bool aP2_IsValid )
       {
          checkleaverequesttimevalide objcheckleaverequesttimevalide;
          objcheckleaverequesttimevalide = new checkleaverequesttimevalide();
          objcheckleaverequesttimevalide.AV9LeaveRequestStartDate = aP0_LeaveRequestStartDate;
+         objcheckleaverequesttimevalide.AV11LeaveRequestHalfDay = aP1_LeaveRequestHalfDay;
          objcheckleaverequesttimevalide.AV8IsValid = false ;
          objcheckleaverequesttimevalide.context.SetSubmitInitialConfig(context);
          objcheckleaverequesttimevalide.initialize();
          Submit( executePrivateCatch,objcheckleaverequesttimevalide);
-         aP1_IsValid=this.AV8IsValid;
+         aP2_IsValid=this.AV8IsValid;
       }
 
       void executePrivateCatch( object stateInfo )
@@ -83,11 +88,16 @@ namespace GeneXus.Programs {
          /* GeneXus formulas */
          /* Output device settings */
          AV10systemTime = DateTimeUtil.ResetDate(DateTimeUtil.Now( context));
-         if ( ( DateTimeUtil.ResetTime ( AV9LeaveRequestStartDate ) == DateTimeUtil.ResetTime ( Gx_date ) ) && ( DateTimeUtil.Hour( AV10systemTime) > 7 ) )
+         AV8IsValid = true;
+         if ( ( DateTimeUtil.ResetTime ( AV9LeaveRequestStartDate ) == DateTimeUtil.ResetTime ( Gx_date ) ) && ( DateTimeUtil.Hour( AV10systemTime) > 9 ) && ( StringUtil.StrCmp(AV11LeaveRequestHalfDay, "Morning") == 0 ) )
          {
-            AV8IsValid = true;
+            AV8IsValid = false;
          }
-         else
+         if ( ( DateTimeUtil.ResetTime ( AV9LeaveRequestStartDate ) == DateTimeUtil.ResetTime ( Gx_date ) ) && ( DateTimeUtil.Hour( AV10systemTime) > 14 ) && ( StringUtil.StrCmp(AV11LeaveRequestHalfDay, "Afternoon") == 0 ) )
+         {
+            AV8IsValid = false;
+         }
+         if ( ( DateTimeUtil.ResetTime ( AV9LeaveRequestStartDate ) == DateTimeUtil.ResetTime ( Gx_date ) ) && ( DateTimeUtil.Hour( AV10systemTime) > 9 ) && ( StringUtil.StrCmp(AV11LeaveRequestHalfDay, "") == 0 ) )
          {
             AV8IsValid = false;
          }
@@ -117,11 +127,12 @@ namespace GeneXus.Programs {
          Gx_date = DateTimeUtil.Today( context);
       }
 
+      private string AV11LeaveRequestHalfDay ;
       private DateTime AV10systemTime ;
       private DateTime AV9LeaveRequestStartDate ;
       private DateTime Gx_date ;
       private bool AV8IsValid ;
-      private bool aP1_IsValid ;
+      private bool aP2_IsValid ;
    }
 
 }

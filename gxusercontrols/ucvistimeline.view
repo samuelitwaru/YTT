@@ -1,0 +1,7 @@
+
+<div style='display:none;'>
+	{{gxTpr_startDate}}{{startDate}}
+	{{gxTpr_endDate}}{{endDate}}
+	{{gxTpr_item}}{{item}}
+</div>
+<div id="visualization"></div>

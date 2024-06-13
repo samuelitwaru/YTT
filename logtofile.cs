@@ -72,7 +72,7 @@ namespace GeneXus.Programs {
          /* Output device settings */
          AV9File.Source = "C:\\Users\\samuelitwaru\\Desktop\\Data.txt";
          AV9File.Open("");
-         AV9File.WriteLine(context.localUtil.TToC( AV11ServerDateTime, 8, 5, 1, 2, "/", ":", " ")+": "+AV8Message);
+         AV9File.WriteLine(AV8Message);
          AV9File.Close();
          this.cleanup();
       }
@@ -94,11 +94,9 @@ namespace GeneXus.Programs {
       public override void initialize( )
       {
          AV9File = new GxFile(context.GetPhysicalPath());
-         AV11ServerDateTime = (DateTime)(DateTime.MinValue);
          /* GeneXus formulas. */
       }
 
-      private DateTime AV11ServerDateTime ;
       private string AV8Message ;
       private GxFile AV9File ;
    }

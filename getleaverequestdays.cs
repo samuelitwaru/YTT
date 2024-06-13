@@ -60,36 +60,41 @@ namespace GeneXus.Programs {
 
       public void execute( [GxJsonFormat("yyyy-MM-dd")] DateTime aP0_StartDate ,
                            [GxJsonFormat("yyyy-MM-dd")] DateTime aP1_EndDate ,
-                           out short aP2_FinalDuration )
+                           string aP2_LeaveRequestHalfDay ,
+                           out decimal aP3_FinalDuration )
       {
          this.AV14StartDate = aP0_StartDate;
          this.AV10EndDate = aP1_EndDate;
+         this.AV19LeaveRequestHalfDay = aP2_LeaveRequestHalfDay;
          this.AV17FinalDuration = 0 ;
          initialize();
          executePrivate();
-         aP2_FinalDuration=this.AV17FinalDuration;
+         aP3_FinalDuration=this.AV17FinalDuration;
       }
 
-      public short executeUdp( DateTime aP0_StartDate ,
-                               DateTime aP1_EndDate )
+      public decimal executeUdp( DateTime aP0_StartDate ,
+                                 DateTime aP1_EndDate ,
+                                 string aP2_LeaveRequestHalfDay )
       {
-         execute(aP0_StartDate, aP1_EndDate, out aP2_FinalDuration);
+         execute(aP0_StartDate, aP1_EndDate, aP2_LeaveRequestHalfDay, out aP3_FinalDuration);
          return AV17FinalDuration ;
       }
 
       public void executeSubmit( DateTime aP0_StartDate ,
                                  DateTime aP1_EndDate ,
-                                 out short aP2_FinalDuration )
+                                 string aP2_LeaveRequestHalfDay ,
+                                 out decimal aP3_FinalDuration )
       {
          getleaverequestdays objgetleaverequestdays;
          objgetleaverequestdays = new getleaverequestdays();
          objgetleaverequestdays.AV14StartDate = aP0_StartDate;
          objgetleaverequestdays.AV10EndDate = aP1_EndDate;
+         objgetleaverequestdays.AV19LeaveRequestHalfDay = aP2_LeaveRequestHalfDay;
          objgetleaverequestdays.AV17FinalDuration = 0 ;
          objgetleaverequestdays.context.SetSubmitInitialConfig(context);
          objgetleaverequestdays.initialize();
          Submit( executePrivateCatch,objgetleaverequestdays);
-         aP2_FinalDuration=this.AV17FinalDuration;
+         aP3_FinalDuration=this.AV17FinalDuration;
       }
 
       void executePrivateCatch( object stateInfo )
@@ -130,16 +135,37 @@ namespace GeneXus.Programs {
             pr_default.readNext(0);
          }
          pr_default.close(0);
-         while ( DateTimeUtil.ResetTime ( AV14StartDate ) <= DateTimeUtil.ResetTime ( AV10EndDate ) )
+         if ( StringUtil.StrCmp(AV19LeaveRequestHalfDay, "") != 0 )
          {
-            AV8dateNumber = DateTimeUtil.Dow( AV14StartDate);
-            if ( ( AV8dateNumber != 1 ) && ( AV8dateNumber != 7 ) )
+            if ( AV16totalHoliday == 0 )
             {
-               AV9Duration = (short)(AV9Duration+1);
+               if ( ( DateTimeUtil.Dow( AV14StartDate) != 1 ) && ( DateTimeUtil.Dow( AV14StartDate) != 7 ) )
+               {
+                  AV17FinalDuration = 0.5m;
+               }
+               else
+               {
+                  AV17FinalDuration = 0;
+               }
             }
-            AV14StartDate = DateTimeUtil.DAdd( AV14StartDate, (1));
+            else
+            {
+               AV17FinalDuration = 0;
+            }
          }
-         AV17FinalDuration = (short)(AV9Duration-AV16totalHoliday);
+         else
+         {
+            while ( DateTimeUtil.ResetTime ( AV14StartDate ) <= DateTimeUtil.ResetTime ( AV10EndDate ) )
+            {
+               AV8dateNumber = DateTimeUtil.Dow( AV14StartDate);
+               if ( ( AV8dateNumber != 1 ) && ( AV8dateNumber != 7 ) )
+               {
+                  AV9Duration = (short)(AV9Duration+1);
+               }
+               AV14StartDate = DateTimeUtil.DAdd( AV14StartDate, (1));
+            }
+            AV17FinalDuration = (decimal)(AV9Duration-AV16totalHoliday);
+         }
          this.cleanup();
       }
 
@@ -176,7 +202,6 @@ namespace GeneXus.Programs {
          /* GeneXus formulas. */
       }
 
-      private short AV17FinalDuration ;
       private short AV16totalHoliday ;
       private short AV9Duration ;
       private short AV8dateNumber ;
@@ -184,6 +209,8 @@ namespace GeneXus.Programs {
       private long GXt_int1 ;
       private long A100CompanyId ;
       private long A113HolidayId ;
+      private decimal AV17FinalDuration ;
+      private string AV19LeaveRequestHalfDay ;
       private string scmdbuf ;
       private DateTime AV14StartDate ;
       private DateTime AV10EndDate ;
@@ -197,7 +224,7 @@ namespace GeneXus.Programs {
       private long[] P005N2_A100CompanyId ;
       private DateTime[] P005N2_A115HolidayStartDate ;
       private long[] P005N2_A113HolidayId ;
-      private short aP2_FinalDuration ;
+      private decimal aP3_FinalDuration ;
    }
 
    public class getleaverequestdays__default : DataStoreHelperBase, IDataStoreHelper

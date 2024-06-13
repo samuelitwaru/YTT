@@ -38,18 +38,18 @@ namespace GeneXus.Programs.workwithplus.ai {
 
       public void execute( string aP0_Info ,
                            string aP1_ListName ,
-                           out GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData> aP2_WWP_AIListDatas )
+                           out GxSimpleCollection<short> aP2_WWP_AIListDatas )
       {
          this.AV8Info = aP0_Info;
          this.AV9ListName = aP1_ListName;
-         this.AV12WWP_AIListDatas = new GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData>( context, "WWP_AIListData", "YTT_version4") ;
+         this.AV12WWP_AIListDatas = new GxSimpleCollection<short>() ;
          initialize();
          executePrivate();
          aP2_WWP_AIListDatas=this.AV12WWP_AIListDatas;
       }
 
-      public GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData> executeUdp( string aP0_Info ,
-                                                                                              string aP1_ListName )
+      public GxSimpleCollection<short> executeUdp( string aP0_Info ,
+                                                   string aP1_ListName )
       {
          execute(aP0_Info, aP1_ListName, out aP2_WWP_AIListDatas);
          return AV12WWP_AIListDatas ;
@@ -57,13 +57,13 @@ namespace GeneXus.Programs.workwithplus.ai {
 
       public void executeSubmit( string aP0_Info ,
                                  string aP1_ListName ,
-                                 out GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData> aP2_WWP_AIListDatas )
+                                 out GxSimpleCollection<short> aP2_WWP_AIListDatas )
       {
          wwp_aigetlistdata objwwp_aigetlistdata;
          objwwp_aigetlistdata = new wwp_aigetlistdata();
          objwwp_aigetlistdata.AV8Info = aP0_Info;
          objwwp_aigetlistdata.AV9ListName = aP1_ListName;
-         objwwp_aigetlistdata.AV12WWP_AIListDatas = new GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData>( context, "WWP_AIListData", "YTT_version4") ;
+         objwwp_aigetlistdata.AV12WWP_AIListDatas = new GxSimpleCollection<short>() ;
          objwwp_aigetlistdata.context.SetSubmitInitialConfig(context);
          objwwp_aigetlistdata.initialize();
          Submit( executePrivateCatch,objwwp_aigetlistdata);
@@ -138,15 +138,15 @@ namespace GeneXus.Programs.workwithplus.ai {
 
       public override void initialize( )
       {
-         AV12WWP_AIListDatas = new GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData>( context, "WWP_AIListData", "YTT_version4");
+         AV12WWP_AIListDatas = new GxSimpleCollection<short>();
          /* GeneXus formulas. */
       }
 
       private bool returnInSub ;
       private string AV8Info ;
       private string AV9ListName ;
-      private GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData> aP2_WWP_AIListDatas ;
-      private GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData> AV12WWP_AIListDatas ;
+      private GxSimpleCollection<short> AV12WWP_AIListDatas ;
+      private GxSimpleCollection<short> aP2_WWP_AIListDatas ;
    }
 
 }

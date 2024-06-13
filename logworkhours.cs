@@ -2085,7 +2085,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024524824512", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20246131123560", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2103,7 +2103,7 @@ namespace GeneXus.Programs {
          if ( nGXWrapped != 1 )
          {
             context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-            context.AddJavascriptSource("logworkhours.js", "?2024524824513", false, true);
+            context.AddJavascriptSource("logworkhours.js", "?20246131123560", false, true);
             context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
             context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
             context.AddJavascriptSource("DVelop/Bootstrap/Panel/BootstrapPanelRender.js", "", false, true);

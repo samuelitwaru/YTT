@@ -52,6 +52,30 @@
               </Property>
             </Properties>
           </Field>
+          <Field name="LeaveTypeColorPending" description="Leave Type Color Pending">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>Character</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>20</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="LeaveTypeColorApproved" description="Leave Type Color Approved">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>Character</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>20</Value>
+              </Property>
+            </Properties>
+          </Field>
           <Field name="CompanyId" description="Company Id">
             <Properties>
               <Property>

@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: "YTT_version4"
-  version: "20240524050613"
+  version: "20240613082810"
 servers:
   - url: http://localhost:8082/YTT_version4NETPostgreSQL14/rest
 paths:
@@ -3308,10 +3308,13 @@ components:
           description: "Leave Request End Date"
           type: "string"
           format: "date"
+        LeaveRequestHalfDay:
+          description: "Leave Request Half Day"
+          type: "string"
         LeaveRequestDuration:
           description: "Leave Request Duration"
-          type: "integer"
-          format: "int32"
+          type: "number"
+          format: "double"
         LeaveRequestStatus:
           description: "Leave Request Status"
           type: "string"
@@ -3354,6 +3357,12 @@ components:
           type: "string"
         LeaveTypeLoggingWorkHours:
           description: "Leave Type Logging Work Hours"
+          type: "string"
+        LeaveTypeColorPending:
+          description: "Leave Type Color Pending"
+          type: "string"
+        LeaveTypeColorApproved:
+          description: "Leave Type Color Approved"
           type: "string"
         CompanyId:
           description: "Company Id"
@@ -3509,8 +3518,8 @@ components:
     GetLeaveRequestDaysOutput:
       properties:
         FinalDuration:
-          type: "integer"
-          format: "int32"
+          type: "number"
+          format: "double"
     GetLoggedInEmployeeIdOutput:
       properties:
         EmployeeId:
@@ -3938,6 +3947,8 @@ components:
         EndDate:
           type: "string"
           format: "date"
+        LeaveRequestHalfDay:
+          type: "string"
     GetWeeklyHoursInput:
       properties:
         WeekDate:

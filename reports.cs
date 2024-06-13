@@ -449,6 +449,7 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "PIVOTTABLE1_Totalformattedworktime", StringUtil.RTrim( Pivottable1_Totalformattedworktime));
          GxWebStd.gx_hidden_field( context, "COMBO_COMPANYLOCATIONID_Selectedvalue_get", StringUtil.RTrim( Combo_companylocationid_Selectedvalue_get));
          GxWebStd.gx_hidden_field( context, "COMBO_PROJECTID_Selectedvalue_get", StringUtil.RTrim( Combo_projectid_Selectedvalue_get));
+         GxWebStd.gx_hidden_field( context, "PIVOTTABLE1_Currentproject", StringUtil.LTrim( StringUtil.NToC( (decimal)(Pivottable1_Currentproject), 9, 0, ".", "")));
          GxWebStd.gx_hidden_field( context, "COMBO_EMPLOYEEID_Selectedvalue_get", StringUtil.RTrim( Combo_employeeid_Selectedvalue_get));
          GxWebStd.gx_hidden_field( context, "PIVOTTABLE1_Totalformattedworktime", StringUtil.RTrim( Pivottable1_Totalformattedworktime));
          GxWebStd.gx_hidden_field( context, "COMBO_COMPANYLOCATIONID_Selectedvalue_get", StringUtil.RTrim( Combo_companylocationid_Selectedvalue_get));
@@ -1141,7 +1142,7 @@ namespace GeneXus.Programs {
          new getloggedinemployeeid(context ).execute( out  GXt_int1) ;
          AV44LoggedInEmployeeId = GXt_int1;
          AssignAttri("", false, "AV44LoggedInEmployeeId", StringUtil.LTrimStr( (decimal)(AV44LoggedInEmployeeId), 10, 0));
-         AV8DateRange = context.localUtil.YMDToD( DateTimeUtil.Year( Gx_date), DateTimeUtil.Month( Gx_date)-1, 1);
+         AV8DateRange = context.localUtil.YMDToD( DateTimeUtil.Year( Gx_date), DateTimeUtil.Month( Gx_date), 1);
          AssignAttri("", false, "AV8DateRange", context.localUtil.Format(AV8DateRange, "99/99/99"));
          AV11DateRange_To = DateTimeUtil.DateEndOfMonth( AV8DateRange);
          AssignAttri("", false, "AV11DateRange_To", context.localUtil.Format(AV11DateRange_To, "99/99/99"));
@@ -1179,6 +1180,21 @@ namespace GeneXus.Programs {
                if (true) break;
             }
             pr_default.close(0);
+         }
+         if ( AV52IsManager )
+         {
+            /* Using cursor H00453 */
+            pr_default.execute(1, new Object[] {AV49EmployeeCompanyLocationId});
+            while ( (pr_default.getStatus(1) != 101) )
+            {
+               A100CompanyId = H00453_A100CompanyId[0];
+               A157CompanyLocationId = H00453_A157CompanyLocationId[0];
+               A106EmployeeId = H00453_A106EmployeeId[0];
+               A157CompanyLocationId = H00453_A157CompanyLocationId[0];
+               AV51EmployeeIds.Add(A106EmployeeId, 0);
+               pr_default.readNext(1);
+            }
+            pr_default.close(1);
          }
          /* Execute user subroutine: 'GETDATA' */
          S122 ();
@@ -1323,7 +1339,7 @@ namespace GeneXus.Programs {
       {
          /* 'LOADCOMBOEMPLOYEEID' Routine */
          returnInSub = false;
-         pr_default.dynParam(1, new Object[]{ new Object[]{
+         pr_default.dynParam(2, new Object[]{ new Object[]{
                                               A106EmployeeId ,
                                               AV51EmployeeIds ,
                                               AV51EmployeeIds.Count } ,
@@ -1331,19 +1347,19 @@ namespace GeneXus.Programs {
                                               TypeConstants.LONG, TypeConstants.INT
                                               }
          });
-         /* Using cursor H00453 */
-         pr_default.execute(1);
-         while ( (pr_default.getStatus(1) != 101) )
+         /* Using cursor H00454 */
+         pr_default.execute(2);
+         while ( (pr_default.getStatus(2) != 101) )
          {
-            A106EmployeeId = H00453_A106EmployeeId[0];
-            A148EmployeeName = H00453_A148EmployeeName[0];
+            A106EmployeeId = H00454_A106EmployeeId[0];
+            A148EmployeeName = H00454_A148EmployeeName[0];
             AV7Combo_DataItem = new GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item(context);
             AV7Combo_DataItem.gxTpr_Id = StringUtil.Trim( StringUtil.Str( (decimal)(A106EmployeeId), 10, 0));
             AV7Combo_DataItem.gxTpr_Title = A148EmployeeName;
             AV14EmployeeId_Data.Add(AV7Combo_DataItem, 0);
-            pr_default.readNext(1);
+            pr_default.readNext(2);
          }
-         pr_default.close(1);
+         pr_default.close(2);
          Combo_employeeid_Selectedvalue_set = AV13EmployeeId.ToJSonString(false);
          ucCombo_employeeid.SendProperty(context, "", false, Combo_employeeid_Internalname, "SelectedValue_set", Combo_employeeid_Selectedvalue_set);
       }
@@ -1352,7 +1368,7 @@ namespace GeneXus.Programs {
       {
          /* 'LOADCOMBOCOMPANYLOCATIONID' Routine */
          returnInSub = false;
-         pr_default.dynParam(2, new Object[]{ new Object[]{
+         pr_default.dynParam(3, new Object[]{ new Object[]{
                                               AV49EmployeeCompanyLocationId ,
                                               AV52IsManager ,
                                               AV53IsProjectManager ,
@@ -1361,19 +1377,19 @@ namespace GeneXus.Programs {
                                               TypeConstants.LONG, TypeConstants.BOOLEAN, TypeConstants.BOOLEAN, TypeConstants.LONG
                                               }
          });
-         /* Using cursor H00454 */
-         pr_default.execute(2, new Object[] {AV49EmployeeCompanyLocationId});
-         while ( (pr_default.getStatus(2) != 101) )
+         /* Using cursor H00455 */
+         pr_default.execute(3, new Object[] {AV49EmployeeCompanyLocationId});
+         while ( (pr_default.getStatus(3) != 101) )
          {
-            A157CompanyLocationId = H00454_A157CompanyLocationId[0];
-            A158CompanyLocationName = H00454_A158CompanyLocationName[0];
+            A157CompanyLocationId = H00455_A157CompanyLocationId[0];
+            A158CompanyLocationName = H00455_A158CompanyLocationName[0];
             AV7Combo_DataItem = new GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item(context);
             AV7Combo_DataItem.gxTpr_Id = StringUtil.Trim( StringUtil.Str( (decimal)(A157CompanyLocationId), 10, 0));
             AV7Combo_DataItem.gxTpr_Title = A158CompanyLocationName;
             AV22CompanyLocationId_Data.Add(AV7Combo_DataItem, 0);
-            pr_default.readNext(2);
+            pr_default.readNext(3);
          }
-         pr_default.close(2);
+         pr_default.close(3);
          Combo_companylocationid_Selectedvalue_set = AV21CompanyLocationId.ToJSonString(false);
          ucCombo_companylocationid.SendProperty(context, "", false, Combo_companylocationid_Internalname, "SelectedValue_set", Combo_companylocationid_Selectedvalue_set);
       }
@@ -1382,7 +1398,7 @@ namespace GeneXus.Programs {
       {
          /* 'LOADCOMBOPROJECTID' Routine */
          returnInSub = false;
-         pr_default.dynParam(3, new Object[]{ new Object[]{
+         pr_default.dynParam(4, new Object[]{ new Object[]{
                                               A102ProjectId ,
                                               AV50ProjectIds ,
                                               AV50ProjectIds.Count } ,
@@ -1390,19 +1406,19 @@ namespace GeneXus.Programs {
                                               TypeConstants.LONG, TypeConstants.INT
                                               }
          });
-         /* Using cursor H00455 */
-         pr_default.execute(3);
-         while ( (pr_default.getStatus(3) != 101) )
+         /* Using cursor H00456 */
+         pr_default.execute(4);
+         while ( (pr_default.getStatus(4) != 101) )
          {
-            A102ProjectId = H00455_A102ProjectId[0];
-            A103ProjectName = H00455_A103ProjectName[0];
+            A102ProjectId = H00456_A102ProjectId[0];
+            A103ProjectName = H00456_A103ProjectName[0];
             AV7Combo_DataItem = new GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item(context);
             AV7Combo_DataItem.gxTpr_Id = StringUtil.Trim( StringUtil.Str( (decimal)(A102ProjectId), 10, 0));
             AV7Combo_DataItem.gxTpr_Title = A103ProjectName;
             AV17ProjectId_Data.Add(AV7Combo_DataItem, 0);
-            pr_default.readNext(3);
+            pr_default.readNext(4);
          }
-         pr_default.close(3);
+         pr_default.close(4);
          Combo_projectid_Selectedvalue_set = AV16ProjectId.ToJSonString(false);
          ucCombo_projectid.SendProperty(context, "", false, Combo_projectid_Internalname, "SelectedValue_set", Combo_projectid_Selectedvalue_set);
       }
@@ -1506,18 +1522,18 @@ namespace GeneXus.Programs {
       {
          /* 'GETEMPLOYEEIDSBYPROJECT' Routine */
          returnInSub = false;
-         AV70Udparg1 = new getloggedinemployeeid(context).executeUdp( );
-         /* Using cursor H00456 */
-         pr_default.execute(4, new Object[] {AV70Udparg1});
-         while ( (pr_default.getStatus(4) != 101) )
+         AV71Udparg1 = new getloggedinemployeeid(context).executeUdp( );
+         /* Using cursor H00457 */
+         pr_default.execute(5, new Object[] {AV71Udparg1});
+         while ( (pr_default.getStatus(5) != 101) )
          {
-            A166ProjectManagerId = H00456_A166ProjectManagerId[0];
-            n166ProjectManagerId = H00456_n166ProjectManagerId[0];
-            A102ProjectId = H00456_A102ProjectId[0];
+            A166ProjectManagerId = H00457_A166ProjectManagerId[0];
+            n166ProjectManagerId = H00457_n166ProjectManagerId[0];
+            A102ProjectId = H00457_A102ProjectId[0];
             AV50ProjectIds.Add(A102ProjectId, 0);
-            pr_default.readNext(4);
+            pr_default.readNext(5);
          }
-         pr_default.close(4);
+         pr_default.close(5);
          GXt_objcol_int6 = AV51EmployeeIds;
          new getemployeeidsbyproject(context ).execute(  AV50ProjectIds, out  GXt_objcol_int6) ;
          AV51EmployeeIds = GXt_objcol_int6;
@@ -1597,7 +1613,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024524824782", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20246131124059", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1613,7 +1629,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("reports.js", "?2024524824784", false, true);
+         context.AddJavascriptSource("reports.js", "?20246131124061", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -1697,6 +1713,7 @@ namespace GeneXus.Programs {
          edtavDaterange_rangetext_Jsonclick = "";
          edtavDaterange_rangetext_Enabled = 1;
          divOverviewtable_Visible = 1;
+         Pivottable1_Currentproject = 0;
          Pivottable1_Showleavetotal = Convert.ToBoolean( -1);
          Pivottable1_Totalformattedtime = "";
          Pivottable1_Totalformattedworktime = "&TotalFormattedWorkTime";
@@ -1826,22 +1843,25 @@ namespace GeneXus.Programs {
          H00452_A100CompanyId = new long[1] ;
          H00452_A106EmployeeId = new long[1] ;
          H00452_A157CompanyLocationId = new long[1] ;
+         H00453_A100CompanyId = new long[1] ;
+         H00453_A157CompanyLocationId = new long[1] ;
+         H00453_A106EmployeeId = new long[1] ;
          GXt_SdtDVB_SDTDropDownOptionsTitleSettingsIcons3 = new GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsTitleSettingsIcons(context);
          GXt_SdtWWPDateRangePickerOptions4 = new GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions(context);
-         H00453_A106EmployeeId = new long[1] ;
-         H00453_A148EmployeeName = new string[] {""} ;
+         H00454_A106EmployeeId = new long[1] ;
+         H00454_A148EmployeeName = new string[] {""} ;
          AV7Combo_DataItem = new GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item(context);
-         H00454_A157CompanyLocationId = new long[1] ;
-         H00454_A158CompanyLocationName = new string[] {""} ;
+         H00455_A157CompanyLocationId = new long[1] ;
+         H00455_A158CompanyLocationName = new string[] {""} ;
          A158CompanyLocationName = "";
-         H00455_A102ProjectId = new long[1] ;
-         H00455_A103ProjectName = new string[] {""} ;
+         H00456_A102ProjectId = new long[1] ;
+         H00456_A103ProjectName = new string[] {""} ;
          A103ProjectName = "";
          AV6blank = "";
          GXt_char5 = "";
-         H00456_A166ProjectManagerId = new long[1] ;
-         H00456_n166ProjectManagerId = new bool[] {false} ;
-         H00456_A102ProjectId = new long[1] ;
+         H00457_A166ProjectManagerId = new long[1] ;
+         H00457_n166ProjectManagerId = new bool[] {false} ;
+         H00457_A102ProjectId = new long[1] ;
          GXt_objcol_int6 = new GxSimpleCollection<long>();
          AV58WebSession = context.GetSession();
          BackMsgLst = new msglist();
@@ -1852,16 +1872,19 @@ namespace GeneXus.Programs {
                H00452_A100CompanyId, H00452_A106EmployeeId, H00452_A157CompanyLocationId
                }
                , new Object[] {
-               H00453_A106EmployeeId, H00453_A148EmployeeName
+               H00453_A100CompanyId, H00453_A157CompanyLocationId, H00453_A106EmployeeId
                }
                , new Object[] {
-               H00454_A157CompanyLocationId, H00454_A158CompanyLocationName
+               H00454_A106EmployeeId, H00454_A148EmployeeName
                }
                , new Object[] {
-               H00455_A102ProjectId, H00455_A103ProjectName
+               H00455_A157CompanyLocationId, H00455_A158CompanyLocationName
                }
                , new Object[] {
-               H00456_A166ProjectManagerId, H00456_n166ProjectManagerId, H00456_A102ProjectId
+               H00456_A102ProjectId, H00456_A103ProjectName
+               }
+               , new Object[] {
+               H00457_A166ProjectManagerId, H00457_n166ProjectManagerId, H00457_A102ProjectId
                }
             }
          );
@@ -1870,6 +1893,8 @@ namespace GeneXus.Programs {
          Gx_date = DateTimeUtil.Today( context);
       }
 
+      private short nRcdExists_8 ;
+      private short nIsMod_8 ;
       private short nRcdExists_7 ;
       private short nIsMod_7 ;
       private short nRcdExists_6 ;
@@ -1890,6 +1915,7 @@ namespace GeneXus.Programs {
       private short nDonePA ;
       private short gxcookieaux ;
       private short nGXWrapped ;
+      private int Pivottable1_Currentproject ;
       private int divOverviewtable_Visible ;
       private int edtavDaterange_rangetext_Enabled ;
       private int divDetailtable_Visible ;
@@ -1904,7 +1930,7 @@ namespace GeneXus.Programs {
       private long A157CompanyLocationId ;
       private long AV49EmployeeCompanyLocationId ;
       private long A102ProjectId ;
-      private long AV70Udparg1 ;
+      private long AV71Udparg1 ;
       private long A166ProjectManagerId ;
       private string Combo_employeeid_Selectedvalue_get ;
       private string Pivottable1_Totalformattedworktime ;
@@ -2027,15 +2053,18 @@ namespace GeneXus.Programs {
       private long[] H00452_A100CompanyId ;
       private long[] H00452_A106EmployeeId ;
       private long[] H00452_A157CompanyLocationId ;
+      private long[] H00453_A100CompanyId ;
+      private long[] H00453_A157CompanyLocationId ;
       private long[] H00453_A106EmployeeId ;
-      private string[] H00453_A148EmployeeName ;
-      private long[] H00454_A157CompanyLocationId ;
-      private string[] H00454_A158CompanyLocationName ;
-      private long[] H00455_A102ProjectId ;
-      private string[] H00455_A103ProjectName ;
-      private long[] H00456_A166ProjectManagerId ;
-      private bool[] H00456_n166ProjectManagerId ;
+      private long[] H00454_A106EmployeeId ;
+      private string[] H00454_A148EmployeeName ;
+      private long[] H00455_A157CompanyLocationId ;
+      private string[] H00455_A158CompanyLocationName ;
       private long[] H00456_A102ProjectId ;
+      private string[] H00456_A103ProjectName ;
+      private long[] H00457_A166ProjectManagerId ;
+      private bool[] H00457_n166ProjectManagerId ;
+      private long[] H00457_A102ProjectId ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
       private IGxSession AV58WebSession ;
@@ -2054,7 +2083,7 @@ namespace GeneXus.Programs {
 
    public class reports__default : DataStoreHelperBase, IDataStoreHelper
    {
-      protected Object[] conditional_H00453( IGxContext context ,
+      protected Object[] conditional_H00454( IGxContext context ,
                                              long A106EmployeeId ,
                                              GxSimpleCollection<long> AV51EmployeeIds ,
                                              int AV51EmployeeIds_Count )
@@ -2073,7 +2102,7 @@ namespace GeneXus.Programs {
          return GXv_Object7 ;
       }
 
-      protected Object[] conditional_H00454( IGxContext context ,
+      protected Object[] conditional_H00455( IGxContext context ,
                                              long AV49EmployeeCompanyLocationId ,
                                              bool AV52IsManager ,
                                              bool AV53IsProjectManager ,
@@ -2099,7 +2128,7 @@ namespace GeneXus.Programs {
          return GXv_Object10 ;
       }
 
-      protected Object[] conditional_H00455( IGxContext context ,
+      protected Object[] conditional_H00456( IGxContext context ,
                                              long A102ProjectId ,
                                              GxSimpleCollection<long> AV50ProjectIds ,
                                              int AV50ProjectIds_Count )
@@ -2124,12 +2153,12 @@ namespace GeneXus.Programs {
       {
          switch ( cursor )
          {
-               case 1 :
-                     return conditional_H00453(context, (long)dynConstraints[0] , (GxSimpleCollection<long>)dynConstraints[1] , (int)dynConstraints[2] );
                case 2 :
-                     return conditional_H00454(context, (long)dynConstraints[0] , (bool)dynConstraints[1] , (bool)dynConstraints[2] , (long)dynConstraints[3] );
+                     return conditional_H00454(context, (long)dynConstraints[0] , (GxSimpleCollection<long>)dynConstraints[1] , (int)dynConstraints[2] );
                case 3 :
-                     return conditional_H00455(context, (long)dynConstraints[0] , (GxSimpleCollection<long>)dynConstraints[1] , (int)dynConstraints[2] );
+                     return conditional_H00455(context, (long)dynConstraints[0] , (bool)dynConstraints[1] , (bool)dynConstraints[2] , (long)dynConstraints[3] );
+               case 4 :
+                     return conditional_H00456(context, (long)dynConstraints[0] , (GxSimpleCollection<long>)dynConstraints[1] , (int)dynConstraints[2] );
          }
          return base.getDynamicStatement(cursor, context, dynConstraints);
       }
@@ -2143,6 +2172,7 @@ namespace GeneXus.Programs {
          ,new ForEachCursor(def[2])
          ,new ForEachCursor(def[3])
          ,new ForEachCursor(def[4])
+         ,new ForEachCursor(def[5])
        };
     }
 
@@ -2155,26 +2185,31 @@ namespace GeneXus.Programs {
           prmH00452 = new Object[] {
           new ParDef("AV44LoggedInEmployeeId",GXType.Int64,10,0)
           };
-          Object[] prmH00456;
-          prmH00456 = new Object[] {
-          new ParDef("AV70Udparg1",GXType.Int64,10,0)
-          };
           Object[] prmH00453;
           prmH00453 = new Object[] {
+          new ParDef("AV49EmployeeCompanyLocationId",GXType.Int64,10,0)
+          };
+          Object[] prmH00457;
+          prmH00457 = new Object[] {
+          new ParDef("AV71Udparg1",GXType.Int64,10,0)
           };
           Object[] prmH00454;
           prmH00454 = new Object[] {
-          new ParDef("AV49EmployeeCompanyLocationId",GXType.Int64,10,0)
           };
           Object[] prmH00455;
           prmH00455 = new Object[] {
+          new ParDef("AV49EmployeeCompanyLocationId",GXType.Int64,10,0)
+          };
+          Object[] prmH00456;
+          prmH00456 = new Object[] {
           };
           def= new CursorDef[] {
               new CursorDef("H00452", "SELECT T1.CompanyId, T1.EmployeeId, T2.CompanyLocationId FROM (Employee T1 INNER JOIN Company T2 ON T2.CompanyId = T1.CompanyId) WHERE T1.EmployeeId = :AV44LoggedInEmployeeId ORDER BY T1.EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00452,1, GxCacheFrequency.OFF ,false,true )
-             ,new CursorDef("H00453", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00453,100, GxCacheFrequency.OFF ,false,false )
+             ,new CursorDef("H00453", "SELECT T1.CompanyId, T2.CompanyLocationId, T1.EmployeeId FROM (Employee T1 INNER JOIN Company T2 ON T2.CompanyId = T1.CompanyId) WHERE T2.CompanyLocationId = :AV49EmployeeCompanyLocationId ORDER BY T1.EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00453,100, GxCacheFrequency.OFF ,false,false )
              ,new CursorDef("H00454", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00454,100, GxCacheFrequency.OFF ,false,false )
              ,new CursorDef("H00455", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00455,100, GxCacheFrequency.OFF ,false,false )
-             ,new CursorDef("H00456", "SELECT ProjectManagerId, ProjectId FROM Project WHERE ProjectManagerId = :AV70Udparg1 ORDER BY ProjectManagerId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00456,100, GxCacheFrequency.OFF ,false,false )
+             ,new CursorDef("H00456", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00456,100, GxCacheFrequency.OFF ,false,false )
+             ,new CursorDef("H00457", "SELECT ProjectManagerId, ProjectId FROM Project WHERE ProjectManagerId = :AV71Udparg1 ORDER BY ProjectManagerId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00457,100, GxCacheFrequency.OFF ,false,false )
           };
        }
     }
@@ -2192,17 +2227,22 @@ namespace GeneXus.Programs {
                 return;
              case 1 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);
-                ((string[]) buf[1])[0] = rslt.getString(2, 128);
+                ((long[]) buf[1])[0] = rslt.getLong(2);
+                ((long[]) buf[2])[0] = rslt.getLong(3);
                 return;
              case 2 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);
-                ((string[]) buf[1])[0] = rslt.getString(2, 100);
+                ((string[]) buf[1])[0] = rslt.getString(2, 128);
                 return;
              case 3 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);
                 ((string[]) buf[1])[0] = rslt.getString(2, 100);
                 return;
              case 4 :
+                ((long[]) buf[0])[0] = rslt.getLong(1);
+                ((string[]) buf[1])[0] = rslt.getString(2, 100);
+                return;
+             case 5 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);
                 ((bool[]) buf[1])[0] = rslt.wasNull(1);
                 ((long[]) buf[2])[0] = rslt.getLong(2);

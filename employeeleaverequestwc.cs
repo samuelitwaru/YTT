@@ -988,7 +988,7 @@ namespace GeneXus.Programs {
                               A128LeaveRequestDate = DateTimeUtil.ResetTime(context.localUtil.CToT( cgiGet( edtLeaveRequestDate_Internalname), 0));
                               A129LeaveRequestStartDate = DateTimeUtil.ResetTime(context.localUtil.CToT( cgiGet( edtLeaveRequestStartDate_Internalname), 0));
                               A130LeaveRequestEndDate = DateTimeUtil.ResetTime(context.localUtil.CToT( cgiGet( edtLeaveRequestEndDate_Internalname), 0));
-                              A131LeaveRequestDuration = (short)(Math.Round(context.localUtil.CToN( cgiGet( edtLeaveRequestDuration_Internalname), ".", ","), 18, MidpointRounding.ToEven));
+                              A131LeaveRequestDuration = context.localUtil.CToN( cgiGet( edtLeaveRequestDuration_Internalname), ".", ",");
                               cmbLeaveRequestStatus.Name = cmbLeaveRequestStatus_Internalname;
                               cmbLeaveRequestStatus.CurrentValue = cgiGet( cmbLeaveRequestStatus_Internalname);
                               A132LeaveRequestStatus = cgiGet( cmbLeaveRequestStatus_Internalname);
@@ -1281,7 +1281,7 @@ namespace GeneXus.Programs {
                                                  A106EmployeeId ,
                                                  AV8EmployeeId } ,
                                                  new int[]{
-                                                 TypeConstants.LONG, TypeConstants.LONG, TypeConstants.SHORT, TypeConstants.SHORT, TypeConstants.BOOLEAN, TypeConstants.LONG, TypeConstants.LONG
+                                                 TypeConstants.LONG, TypeConstants.LONG, TypeConstants.DECIMAL, TypeConstants.SHORT, TypeConstants.BOOLEAN, TypeConstants.LONG, TypeConstants.LONG
                                                  }
             });
             lV16FilterFullText = StringUtil.Concat( StringUtil.RTrim( AV16FilterFullText), "%", "");
@@ -1364,7 +1364,7 @@ namespace GeneXus.Programs {
                                               A106EmployeeId ,
                                               AV8EmployeeId } ,
                                               new int[]{
-                                              TypeConstants.LONG, TypeConstants.LONG, TypeConstants.SHORT, TypeConstants.SHORT, TypeConstants.BOOLEAN, TypeConstants.LONG, TypeConstants.LONG
+                                              TypeConstants.LONG, TypeConstants.LONG, TypeConstants.DECIMAL, TypeConstants.SHORT, TypeConstants.BOOLEAN, TypeConstants.LONG, TypeConstants.LONG
                                               }
          });
          lV16FilterFullText = StringUtil.Concat( StringUtil.RTrim( AV16FilterFullText), "%", "");
@@ -2330,7 +2330,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024524756303", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20246131151812", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2346,7 +2346,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("employeeleaverequestwc.js", "?2024524756304", false, true);
+         context.AddJavascriptSource("employeeleaverequestwc.js", "?20246131151812", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -2527,7 +2527,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtLeaveRequestDuration_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(A131LeaveRequestDuration), 4, 0, ".", "")),StringUtil.LTrim( context.localUtil.Format( (decimal)(A131LeaveRequestDuration), "ZZZ9")),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+sPrefix+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtLeaveRequestDuration_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn hidden-xs",(string)"",(short)-1,(short)0,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)4,(short)0,(short)0,(short)37,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtLeaveRequestDuration_Internalname,StringUtil.LTrim( StringUtil.NToC( A131LeaveRequestDuration, 4, 1, ".", "")),StringUtil.LTrim( context.localUtil.Format( A131LeaveRequestDuration, "Z9.9")),(string)"",(string)"'"+sPrefix+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtLeaveRequestDuration_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn hidden-xs",(string)"",(short)-1,(short)0,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)4,(short)0,(short)0,(short)37,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -2716,7 +2716,7 @@ namespace GeneXus.Programs {
             GridColumn.AddObjectProperty("Value", GXUtil.ValueEncode( context.localUtil.Format(A130LeaveRequestEndDate, "99/99/99")));
             GridContainer.AddColumnProperties(GridColumn);
             GridColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
-            GridColumn.AddObjectProperty("Value", GXUtil.ValueEncode( StringUtil.LTrim( StringUtil.NToC( (decimal)(A131LeaveRequestDuration), 4, 0, ".", ""))));
+            GridColumn.AddObjectProperty("Value", GXUtil.ValueEncode( StringUtil.LTrim( StringUtil.NToC( A131LeaveRequestDuration, 4, 1, ".", ""))));
             GridContainer.AddColumnProperties(GridColumn);
             GridColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
             GridColumn.AddObjectProperty("Value", GXUtil.ValueEncode( StringUtil.RTrim( A132LeaveRequestStatus)));
@@ -2958,7 +2958,7 @@ namespace GeneXus.Programs {
          H00362_A134LeaveRequestRejectionReason = new string[] {""} ;
          H00362_A133LeaveRequestDescription = new string[] {""} ;
          H00362_A132LeaveRequestStatus = new string[] {""} ;
-         H00362_A131LeaveRequestDuration = new short[1] ;
+         H00362_A131LeaveRequestDuration = new decimal[1] ;
          H00362_A130LeaveRequestEndDate = new DateTime[] {DateTime.MinValue} ;
          H00362_A129LeaveRequestStartDate = new DateTime[] {DateTime.MinValue} ;
          H00362_A128LeaveRequestDate = new DateTime[] {DateTime.MinValue} ;
@@ -3015,7 +3015,6 @@ namespace GeneXus.Programs {
       private short wbStart ;
       private short nDraw ;
       private short nDoneStart ;
-      private short A131LeaveRequestDuration ;
       private short nDonePA ;
       private short gxcookieaux ;
       private short subGrid_Backcolorstyle ;
@@ -3071,6 +3070,7 @@ namespace GeneXus.Programs {
       private long A124LeaveTypeId ;
       private long GRID_nCurrentRecord ;
       private long GRID_nRecordCount ;
+      private decimal A131LeaveRequestDuration ;
       private string Gridpaginationbar_Selectedpage ;
       private string Ddo_grid_Activeeventkey ;
       private string Ddo_grid_Selectedvalue_get ;
@@ -3224,7 +3224,7 @@ namespace GeneXus.Programs {
       private string[] H00362_A134LeaveRequestRejectionReason ;
       private string[] H00362_A133LeaveRequestDescription ;
       private string[] H00362_A132LeaveRequestStatus ;
-      private short[] H00362_A131LeaveRequestDuration ;
+      private decimal[] H00362_A131LeaveRequestDuration ;
       private DateTime[] H00362_A130LeaveRequestEndDate ;
       private DateTime[] H00362_A129LeaveRequestStartDate ;
       private DateTime[] H00362_A128LeaveRequestDate ;
@@ -3253,7 +3253,7 @@ namespace GeneXus.Programs {
                                              long A127LeaveRequestId ,
                                              long A124LeaveTypeId ,
                                              string A125LeaveTypeName ,
-                                             short A131LeaveRequestDuration ,
+                                             decimal A131LeaveRequestDuration ,
                                              string A132LeaveRequestStatus ,
                                              string A133LeaveRequestDescription ,
                                              string A134LeaveRequestRejectionReason ,
@@ -3275,7 +3275,7 @@ namespace GeneXus.Programs {
          AddWhere(sWhereString, "(T1.EmployeeId = :AV8EmployeeId)");
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV16FilterFullText)) )
          {
-            AddWhere(sWhereString, "(( SUBSTR(TO_CHAR(T1.LeaveRequestId,'9999999999'), 2) like '%' || :lV16FilterFullText) or ( SUBSTR(TO_CHAR(T1.LeaveTypeId,'9999999999'), 2) like '%' || :lV16FilterFullText) or ( LOWER(T2.LeaveTypeName) like '%' || LOWER(:lV16FilterFullText)) or ( SUBSTR(TO_CHAR(T1.LeaveRequestDuration,'9999'), 2) like '%' || :lV16FilterFullText) or ( 'pending' like '%' || LOWER(:lV16FilterFullText) and T1.LeaveRequestStatus = ( 'Pending')) or ( 'approved' like '%' || LOWER(:lV16FilterFullText) and T1.LeaveRequestStatus = ( 'Approved')) or ( 'rejected' like '%' || LOWER(:lV16FilterFullText) and T1.LeaveRequestStatus = ( 'Rejected')) or ( LOWER(T1.LeaveRequestDescription) like '%' || LOWER(:lV16FilterFullText)) or ( LOWER(T1.LeaveRequestRejectionReason) like '%' || LOWER(:lV16FilterFullText)))");
+            AddWhere(sWhereString, "(( SUBSTR(TO_CHAR(T1.LeaveRequestId,'9999999999'), 2) like '%' || :lV16FilterFullText) or ( SUBSTR(TO_CHAR(T1.LeaveTypeId,'9999999999'), 2) like '%' || :lV16FilterFullText) or ( LOWER(T2.LeaveTypeName) like '%' || LOWER(:lV16FilterFullText)) or ( SUBSTR(TO_CHAR(T1.LeaveRequestDuration,'90.9'), 2) like '%' || :lV16FilterFullText) or ( 'pending' like '%' || LOWER(:lV16FilterFullText) and T1.LeaveRequestStatus = ( 'Pending')) or ( 'approved' like '%' || LOWER(:lV16FilterFullText) and T1.LeaveRequestStatus = ( 'Approved')) or ( 'rejected' like '%' || LOWER(:lV16FilterFullText) and T1.LeaveRequestStatus = ( 'Rejected')) or ( LOWER(T1.LeaveRequestDescription) like '%' || LOWER(:lV16FilterFullText)) or ( LOWER(T1.LeaveRequestRejectionReason) like '%' || LOWER(:lV16FilterFullText)))");
          }
          else
          {
@@ -3384,7 +3384,7 @@ namespace GeneXus.Programs {
                                              long A127LeaveRequestId ,
                                              long A124LeaveTypeId ,
                                              string A125LeaveTypeName ,
-                                             short A131LeaveRequestDuration ,
+                                             decimal A131LeaveRequestDuration ,
                                              string A132LeaveRequestStatus ,
                                              string A133LeaveRequestDescription ,
                                              string A134LeaveRequestRejectionReason ,
@@ -3401,7 +3401,7 @@ namespace GeneXus.Programs {
          AddWhere(sWhereString, "(T1.EmployeeId = :AV8EmployeeId)");
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV16FilterFullText)) )
          {
-            AddWhere(sWhereString, "(( SUBSTR(TO_CHAR(T1.LeaveRequestId,'9999999999'), 2) like '%' || :lV16FilterFullText) or ( SUBSTR(TO_CHAR(T1.LeaveTypeId,'9999999999'), 2) like '%' || :lV16FilterFullText) or ( LOWER(T2.LeaveTypeName) like '%' || LOWER(:lV16FilterFullText)) or ( SUBSTR(TO_CHAR(T1.LeaveRequestDuration,'9999'), 2) like '%' || :lV16FilterFullText) or ( 'pending' like '%' || LOWER(:lV16FilterFullText) and T1.LeaveRequestStatus = ( 'Pending')) or ( 'approved' like '%' || LOWER(:lV16FilterFullText) and T1.LeaveRequestStatus = ( 'Approved')) or ( 'rejected' like '%' || LOWER(:lV16FilterFullText) and T1.LeaveRequestStatus = ( 'Rejected')) or ( LOWER(T1.LeaveRequestDescription) like '%' || LOWER(:lV16FilterFullText)) or ( LOWER(T1.LeaveRequestRejectionReason) like '%' || LOWER(:lV16FilterFullText)))");
+            AddWhere(sWhereString, "(( SUBSTR(TO_CHAR(T1.LeaveRequestId,'9999999999'), 2) like '%' || :lV16FilterFullText) or ( SUBSTR(TO_CHAR(T1.LeaveTypeId,'9999999999'), 2) like '%' || :lV16FilterFullText) or ( LOWER(T2.LeaveTypeName) like '%' || LOWER(:lV16FilterFullText)) or ( SUBSTR(TO_CHAR(T1.LeaveRequestDuration,'90.9'), 2) like '%' || :lV16FilterFullText) or ( 'pending' like '%' || LOWER(:lV16FilterFullText) and T1.LeaveRequestStatus = ( 'Pending')) or ( 'approved' like '%' || LOWER(:lV16FilterFullText) and T1.LeaveRequestStatus = ( 'Approved')) or ( 'rejected' like '%' || LOWER(:lV16FilterFullText) and T1.LeaveRequestStatus = ( 'Rejected')) or ( LOWER(T1.LeaveRequestDescription) like '%' || LOWER(:lV16FilterFullText)) or ( LOWER(T1.LeaveRequestRejectionReason) like '%' || LOWER(:lV16FilterFullText)))");
          }
          else
          {
@@ -3512,9 +3512,9 @@ namespace GeneXus.Programs {
          switch ( cursor )
          {
                case 0 :
-                     return conditional_H00362(context, (string)dynConstraints[0] , (long)dynConstraints[1] , (long)dynConstraints[2] , (string)dynConstraints[3] , (short)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (string)dynConstraints[7] , (short)dynConstraints[8] , (bool)dynConstraints[9] , (long)dynConstraints[10] , (long)dynConstraints[11] );
+                     return conditional_H00362(context, (string)dynConstraints[0] , (long)dynConstraints[1] , (long)dynConstraints[2] , (string)dynConstraints[3] , (decimal)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (string)dynConstraints[7] , (short)dynConstraints[8] , (bool)dynConstraints[9] , (long)dynConstraints[10] , (long)dynConstraints[11] );
                case 1 :
-                     return conditional_H00363(context, (string)dynConstraints[0] , (long)dynConstraints[1] , (long)dynConstraints[2] , (string)dynConstraints[3] , (short)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (string)dynConstraints[7] , (short)dynConstraints[8] , (bool)dynConstraints[9] , (long)dynConstraints[10] , (long)dynConstraints[11] );
+                     return conditional_H00363(context, (string)dynConstraints[0] , (long)dynConstraints[1] , (long)dynConstraints[2] , (string)dynConstraints[3] , (decimal)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (string)dynConstraints[7] , (short)dynConstraints[8] , (bool)dynConstraints[9] , (long)dynConstraints[10] , (long)dynConstraints[11] );
          }
          return base.getDynamicStatement(cursor, context, dynConstraints);
       }
@@ -3580,7 +3580,7 @@ namespace GeneXus.Programs {
                 ((string[]) buf[1])[0] = rslt.getVarchar(2);
                 ((string[]) buf[2])[0] = rslt.getVarchar(3);
                 ((string[]) buf[3])[0] = rslt.getString(4, 20);
-                ((short[]) buf[4])[0] = rslt.getShort(5);
+                ((decimal[]) buf[4])[0] = rslt.getDecimal(5);
                 ((DateTime[]) buf[5])[0] = rslt.getGXDate(6);
                 ((DateTime[]) buf[6])[0] = rslt.getGXDate(7);
                 ((DateTime[]) buf[7])[0] = rslt.getGXDate(8);

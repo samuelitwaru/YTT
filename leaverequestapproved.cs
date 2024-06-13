@@ -196,8 +196,8 @@ namespace GeneXus.Programs {
          AV39TFLeaveRequestStartDate_To = context.localUtil.ParseDateParm( GetPar( "TFLeaveRequestStartDate_To"));
          AV43TFLeaveRequestEndDate = context.localUtil.ParseDateParm( GetPar( "TFLeaveRequestEndDate"));
          AV44TFLeaveRequestEndDate_To = context.localUtil.ParseDateParm( GetPar( "TFLeaveRequestEndDate_To"));
-         AV48TFLeaveRequestDuration = (short)(Math.Round(NumberUtil.Val( GetPar( "TFLeaveRequestDuration"), "."), 18, MidpointRounding.ToEven));
-         AV49TFLeaveRequestDuration_To = (short)(Math.Round(NumberUtil.Val( GetPar( "TFLeaveRequestDuration_To"), "."), 18, MidpointRounding.ToEven));
+         AV48TFLeaveRequestDuration = NumberUtil.Val( GetPar( "TFLeaveRequestDuration"), ".");
+         AV49TFLeaveRequestDuration_To = NumberUtil.Val( GetPar( "TFLeaveRequestDuration_To"), ".");
          AV50TFLeaveRequestDescription = GetPar( "TFLeaveRequestDescription");
          AV51TFLeaveRequestDescription_Sel = GetPar( "TFLeaveRequestDescription_Sel");
          AV29TFEmployeeName = GetPar( "TFEmployeeName");
@@ -484,8 +484,8 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, sPrefix+"vTFLEAVEREQUESTSTARTDATE_TO", context.localUtil.DToC( AV39TFLeaveRequestStartDate_To, 0, "/"));
          GxWebStd.gx_hidden_field( context, sPrefix+"vTFLEAVEREQUESTENDDATE", context.localUtil.DToC( AV43TFLeaveRequestEndDate, 0, "/"));
          GxWebStd.gx_hidden_field( context, sPrefix+"vTFLEAVEREQUESTENDDATE_TO", context.localUtil.DToC( AV44TFLeaveRequestEndDate_To, 0, "/"));
-         GxWebStd.gx_hidden_field( context, sPrefix+"vTFLEAVEREQUESTDURATION", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV48TFLeaveRequestDuration), 4, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, sPrefix+"vTFLEAVEREQUESTDURATION_TO", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV49TFLeaveRequestDuration_To), 4, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"vTFLEAVEREQUESTDURATION", StringUtil.LTrim( StringUtil.NToC( AV48TFLeaveRequestDuration, 4, 1, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"vTFLEAVEREQUESTDURATION_TO", StringUtil.LTrim( StringUtil.NToC( AV49TFLeaveRequestDuration_To, 4, 1, ".", "")));
          GxWebStd.gx_hidden_field( context, sPrefix+"vTFLEAVEREQUESTDESCRIPTION", AV50TFLeaveRequestDescription);
          GxWebStd.gx_hidden_field( context, sPrefix+"vTFLEAVEREQUESTDESCRIPTION_SEL", AV51TFLeaveRequestDescription_Sel);
          GxWebStd.gx_hidden_field( context, sPrefix+"vTFEMPLOYEENAME", StringUtil.RTrim( AV29TFEmployeeName));
@@ -1168,7 +1168,7 @@ namespace GeneXus.Programs {
                               A128LeaveRequestDate = DateTimeUtil.ResetTime(context.localUtil.CToT( cgiGet( edtLeaveRequestDate_Internalname), 0));
                               A129LeaveRequestStartDate = DateTimeUtil.ResetTime(context.localUtil.CToT( cgiGet( edtLeaveRequestStartDate_Internalname), 0));
                               A130LeaveRequestEndDate = DateTimeUtil.ResetTime(context.localUtil.CToT( cgiGet( edtLeaveRequestEndDate_Internalname), 0));
-                              A131LeaveRequestDuration = (short)(Math.Round(context.localUtil.CToN( cgiGet( edtLeaveRequestDuration_Internalname), ".", ","), 18, MidpointRounding.ToEven));
+                              A131LeaveRequestDuration = context.localUtil.CToN( cgiGet( edtLeaveRequestDuration_Internalname), ".", ",");
                               cmbLeaveRequestStatus.Name = cmbLeaveRequestStatus_Internalname;
                               cmbLeaveRequestStatus.CurrentValue = cgiGet( cmbLeaveRequestStatus_Internalname);
                               A132LeaveRequestStatus = cgiGet( cmbLeaveRequestStatus_Internalname);
@@ -1367,8 +1367,8 @@ namespace GeneXus.Programs {
                                        DateTime AV39TFLeaveRequestStartDate_To ,
                                        DateTime AV43TFLeaveRequestEndDate ,
                                        DateTime AV44TFLeaveRequestEndDate_To ,
-                                       short AV48TFLeaveRequestDuration ,
-                                       short AV49TFLeaveRequestDuration_To ,
+                                       decimal AV48TFLeaveRequestDuration ,
+                                       decimal AV49TFLeaveRequestDuration_To ,
                                        string AV50TFLeaveRequestDescription ,
                                        string AV51TFLeaveRequestDescription_Sel ,
                                        string AV29TFEmployeeName ,
@@ -1485,7 +1485,7 @@ namespace GeneXus.Programs {
                                                  A100CompanyId ,
                                                  AV64Udparg2 } ,
                                                  new int[]{
-                                                 TypeConstants.LONG, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.SHORT, TypeConstants.SHORT, TypeConstants.SHORT, TypeConstants.DATE, TypeConstants.DATE,
+                                                 TypeConstants.LONG, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DECIMAL, TypeConstants.DECIMAL, TypeConstants.DECIMAL, TypeConstants.DATE, TypeConstants.DATE,
                                                  TypeConstants.SHORT, TypeConstants.BOOLEAN, TypeConstants.BOOLEAN, TypeConstants.LONG, TypeConstants.LONG
                                                  }
             });
@@ -1605,7 +1605,7 @@ namespace GeneXus.Programs {
                                               A100CompanyId ,
                                               AV64Udparg2 } ,
                                               new int[]{
-                                              TypeConstants.LONG, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.SHORT, TypeConstants.SHORT, TypeConstants.SHORT, TypeConstants.DATE, TypeConstants.DATE,
+                                              TypeConstants.LONG, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DECIMAL, TypeConstants.DECIMAL, TypeConstants.DECIMAL, TypeConstants.DATE, TypeConstants.DATE,
                                               TypeConstants.SHORT, TypeConstants.BOOLEAN, TypeConstants.BOOLEAN, TypeConstants.LONG, TypeConstants.LONG
                                               }
          });
@@ -2209,10 +2209,10 @@ namespace GeneXus.Programs {
             }
             else if ( StringUtil.StrCmp(Ddo_grid_Selectedcolumn, "LeaveRequestDuration") == 0 )
             {
-               AV48TFLeaveRequestDuration = (short)(Math.Round(NumberUtil.Val( Ddo_grid_Filteredtext_get, "."), 18, MidpointRounding.ToEven));
-               AssignAttri(sPrefix, false, "AV48TFLeaveRequestDuration", StringUtil.LTrimStr( (decimal)(AV48TFLeaveRequestDuration), 4, 0));
-               AV49TFLeaveRequestDuration_To = (short)(Math.Round(NumberUtil.Val( Ddo_grid_Filteredtextto_get, "."), 18, MidpointRounding.ToEven));
-               AssignAttri(sPrefix, false, "AV49TFLeaveRequestDuration_To", StringUtil.LTrimStr( (decimal)(AV49TFLeaveRequestDuration_To), 4, 0));
+               AV48TFLeaveRequestDuration = NumberUtil.Val( Ddo_grid_Filteredtext_get, ".");
+               AssignAttri(sPrefix, false, "AV48TFLeaveRequestDuration", StringUtil.LTrimStr( AV48TFLeaveRequestDuration, 4, 1));
+               AV49TFLeaveRequestDuration_To = NumberUtil.Val( Ddo_grid_Filteredtextto_get, ".");
+               AssignAttri(sPrefix, false, "AV49TFLeaveRequestDuration_To", StringUtil.LTrimStr( AV49TFLeaveRequestDuration_To, 4, 1));
             }
             else if ( StringUtil.StrCmp(Ddo_grid_Selectedcolumn, "LeaveRequestDescription") == 0 )
             {
@@ -2424,9 +2424,9 @@ namespace GeneXus.Programs {
          AV44TFLeaveRequestEndDate_To = DateTime.MinValue;
          AssignAttri(sPrefix, false, "AV44TFLeaveRequestEndDate_To", context.localUtil.Format(AV44TFLeaveRequestEndDate_To, "99/99/99"));
          AV48TFLeaveRequestDuration = 0;
-         AssignAttri(sPrefix, false, "AV48TFLeaveRequestDuration", StringUtil.LTrimStr( (decimal)(AV48TFLeaveRequestDuration), 4, 0));
+         AssignAttri(sPrefix, false, "AV48TFLeaveRequestDuration", StringUtil.LTrimStr( AV48TFLeaveRequestDuration, 4, 1));
          AV49TFLeaveRequestDuration_To = 0;
-         AssignAttri(sPrefix, false, "AV49TFLeaveRequestDuration_To", StringUtil.LTrimStr( (decimal)(AV49TFLeaveRequestDuration_To), 4, 0));
+         AssignAttri(sPrefix, false, "AV49TFLeaveRequestDuration_To", StringUtil.LTrimStr( AV49TFLeaveRequestDuration_To, 4, 1));
          AV50TFLeaveRequestDescription = "";
          AssignAttri(sPrefix, false, "AV50TFLeaveRequestDescription", AV50TFLeaveRequestDescription);
          AV51TFLeaveRequestDescription_Sel = "";
@@ -2520,10 +2520,10 @@ namespace GeneXus.Programs {
             }
             else if ( StringUtil.StrCmp(AV14GridStateFilterValue.gxTpr_Name, "TFLEAVEREQUESTDURATION") == 0 )
             {
-               AV48TFLeaveRequestDuration = (short)(Math.Round(NumberUtil.Val( AV14GridStateFilterValue.gxTpr_Value, "."), 18, MidpointRounding.ToEven));
-               AssignAttri(sPrefix, false, "AV48TFLeaveRequestDuration", StringUtil.LTrimStr( (decimal)(AV48TFLeaveRequestDuration), 4, 0));
-               AV49TFLeaveRequestDuration_To = (short)(Math.Round(NumberUtil.Val( AV14GridStateFilterValue.gxTpr_Valueto, "."), 18, MidpointRounding.ToEven));
-               AssignAttri(sPrefix, false, "AV49TFLeaveRequestDuration_To", StringUtil.LTrimStr( (decimal)(AV49TFLeaveRequestDuration_To), 4, 0));
+               AV48TFLeaveRequestDuration = NumberUtil.Val( AV14GridStateFilterValue.gxTpr_Value, ".");
+               AssignAttri(sPrefix, false, "AV48TFLeaveRequestDuration", StringUtil.LTrimStr( AV48TFLeaveRequestDuration, 4, 1));
+               AV49TFLeaveRequestDuration_To = NumberUtil.Val( AV14GridStateFilterValue.gxTpr_Valueto, ".");
+               AssignAttri(sPrefix, false, "AV49TFLeaveRequestDuration_To", StringUtil.LTrimStr( AV49TFLeaveRequestDuration_To, 4, 1));
             }
             else if ( StringUtil.StrCmp(AV14GridStateFilterValue.gxTpr_Name, "TFLEAVEREQUESTDESCRIPTION") == 0 )
             {
@@ -2561,9 +2561,9 @@ namespace GeneXus.Programs {
          new GeneXus.Programs.wwpbaseobjects.wwp_getfilterval(context ).execute(  String.IsNullOrEmpty(StringUtil.RTrim( AV50TFLeaveRequestDescription)),  AV50TFLeaveRequestDescription, out  GXt_char4) ;
          GXt_char2 = "";
          new GeneXus.Programs.wwpbaseobjects.wwp_getfilterval(context ).execute(  String.IsNullOrEmpty(StringUtil.RTrim( AV29TFEmployeeName)),  AV29TFEmployeeName, out  GXt_char2) ;
-         Ddo_grid_Filteredtext_set = GXt_char5+"|"+((DateTime.MinValue==AV38TFLeaveRequestStartDate) ? "" : context.localUtil.DToC( AV38TFLeaveRequestStartDate, 1, "/"))+"|"+((DateTime.MinValue==AV43TFLeaveRequestEndDate) ? "" : context.localUtil.DToC( AV43TFLeaveRequestEndDate, 1, "/"))+"|"+((0==AV48TFLeaveRequestDuration) ? "" : StringUtil.Str( (decimal)(AV48TFLeaveRequestDuration), 4, 0))+"|"+GXt_char4+"|"+GXt_char2;
+         Ddo_grid_Filteredtext_set = GXt_char5+"|"+((DateTime.MinValue==AV38TFLeaveRequestStartDate) ? "" : context.localUtil.DToC( AV38TFLeaveRequestStartDate, 1, "/"))+"|"+((DateTime.MinValue==AV43TFLeaveRequestEndDate) ? "" : context.localUtil.DToC( AV43TFLeaveRequestEndDate, 1, "/"))+"|"+((Convert.ToDecimal(0)==AV48TFLeaveRequestDuration) ? "" : StringUtil.Str( AV48TFLeaveRequestDuration, 4, 1))+"|"+GXt_char4+"|"+GXt_char2;
          ucDdo_grid.SendProperty(context, sPrefix, false, Ddo_grid_Internalname, "FilteredText_set", Ddo_grid_Filteredtext_set);
-         Ddo_grid_Filteredtextto_set = "|"+((DateTime.MinValue==AV39TFLeaveRequestStartDate_To) ? "" : context.localUtil.DToC( AV39TFLeaveRequestStartDate_To, 1, "/"))+"|"+((DateTime.MinValue==AV44TFLeaveRequestEndDate_To) ? "" : context.localUtil.DToC( AV44TFLeaveRequestEndDate_To, 1, "/"))+"|"+((0==AV49TFLeaveRequestDuration_To) ? "" : StringUtil.Str( (decimal)(AV49TFLeaveRequestDuration_To), 4, 0))+"||";
+         Ddo_grid_Filteredtextto_set = "|"+((DateTime.MinValue==AV39TFLeaveRequestStartDate_To) ? "" : context.localUtil.DToC( AV39TFLeaveRequestStartDate_To, 1, "/"))+"|"+((DateTime.MinValue==AV44TFLeaveRequestEndDate_To) ? "" : context.localUtil.DToC( AV44TFLeaveRequestEndDate_To, 1, "/"))+"|"+((Convert.ToDecimal(0)==AV49TFLeaveRequestDuration_To) ? "" : StringUtil.Str( AV49TFLeaveRequestDuration_To, 4, 1))+"||";
          ucDdo_grid.SendProperty(context, sPrefix, false, Ddo_grid_Internalname, "FilteredTextTo_set", Ddo_grid_Filteredtextto_set);
       }
 
@@ -2579,7 +2579,7 @@ namespace GeneXus.Programs {
          new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalueandsel(context ).execute( ref  AV13GridState,  "TFLEAVETYPENAME",  "Type Name",  !String.IsNullOrEmpty(StringUtil.RTrim( AV31TFLeaveTypeName)),  0,  AV31TFLeaveTypeName,  AV31TFLeaveTypeName,  false,  "",  "",  !String.IsNullOrEmpty(StringUtil.RTrim( AV32TFLeaveTypeName_Sel)),  AV32TFLeaveTypeName_Sel,  AV32TFLeaveTypeName_Sel) ;
          new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV13GridState,  "TFLEAVEREQUESTSTARTDATE",  "Start Date",  !((DateTime.MinValue==AV38TFLeaveRequestStartDate)&&(DateTime.MinValue==AV39TFLeaveRequestStartDate_To)),  0,  StringUtil.Trim( context.localUtil.DToC( AV38TFLeaveRequestStartDate, 1, "/")),  ((DateTime.MinValue==AV38TFLeaveRequestStartDate) ? "" : StringUtil.Trim( context.localUtil.Format( AV38TFLeaveRequestStartDate, "99/99/99"))),  true,  StringUtil.Trim( context.localUtil.DToC( AV39TFLeaveRequestStartDate_To, 1, "/")),  ((DateTime.MinValue==AV39TFLeaveRequestStartDate_To) ? "" : StringUtil.Trim( context.localUtil.Format( AV39TFLeaveRequestStartDate_To, "99/99/99")))) ;
          new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV13GridState,  "TFLEAVEREQUESTENDDATE",  "End Date",  !((DateTime.MinValue==AV43TFLeaveRequestEndDate)&&(DateTime.MinValue==AV44TFLeaveRequestEndDate_To)),  0,  StringUtil.Trim( context.localUtil.DToC( AV43TFLeaveRequestEndDate, 1, "/")),  ((DateTime.MinValue==AV43TFLeaveRequestEndDate) ? "" : StringUtil.Trim( context.localUtil.Format( AV43TFLeaveRequestEndDate, "99/99/99"))),  true,  StringUtil.Trim( context.localUtil.DToC( AV44TFLeaveRequestEndDate_To, 1, "/")),  ((DateTime.MinValue==AV44TFLeaveRequestEndDate_To) ? "" : StringUtil.Trim( context.localUtil.Format( AV44TFLeaveRequestEndDate_To, "99/99/99")))) ;
-         new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV13GridState,  "TFLEAVEREQUESTDURATION",  "Request Duration",  !((0==AV48TFLeaveRequestDuration)&&(0==AV49TFLeaveRequestDuration_To)),  0,  StringUtil.Trim( StringUtil.Str( (decimal)(AV48TFLeaveRequestDuration), 4, 0)),  ((0==AV48TFLeaveRequestDuration) ? "" : StringUtil.Trim( context.localUtil.Format( (decimal)(AV48TFLeaveRequestDuration), "ZZZ9"))),  true,  StringUtil.Trim( StringUtil.Str( (decimal)(AV49TFLeaveRequestDuration_To), 4, 0)),  ((0==AV49TFLeaveRequestDuration_To) ? "" : StringUtil.Trim( context.localUtil.Format( (decimal)(AV49TFLeaveRequestDuration_To), "ZZZ9")))) ;
+         new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV13GridState,  "TFLEAVEREQUESTDURATION",  "Request Duration",  !((Convert.ToDecimal(0)==AV48TFLeaveRequestDuration)&&(Convert.ToDecimal(0)==AV49TFLeaveRequestDuration_To)),  0,  StringUtil.Trim( StringUtil.Str( AV48TFLeaveRequestDuration, 4, 1)),  ((Convert.ToDecimal(0)==AV48TFLeaveRequestDuration) ? "" : StringUtil.Trim( context.localUtil.Format( AV48TFLeaveRequestDuration, "Z9.9"))),  true,  StringUtil.Trim( StringUtil.Str( AV49TFLeaveRequestDuration_To, 4, 1)),  ((Convert.ToDecimal(0)==AV49TFLeaveRequestDuration_To) ? "" : StringUtil.Trim( context.localUtil.Format( AV49TFLeaveRequestDuration_To, "Z9.9")))) ;
          new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalueandsel(context ).execute( ref  AV13GridState,  "TFLEAVEREQUESTDESCRIPTION",  "Request Description",  !String.IsNullOrEmpty(StringUtil.RTrim( AV50TFLeaveRequestDescription)),  0,  AV50TFLeaveRequestDescription,  AV50TFLeaveRequestDescription,  false,  "",  "",  !String.IsNullOrEmpty(StringUtil.RTrim( AV51TFLeaveRequestDescription_Sel)),  AV51TFLeaveRequestDescription_Sel,  AV51TFLeaveRequestDescription_Sel) ;
          new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalueandsel(context ).execute( ref  AV13GridState,  "TFEMPLOYEENAME",  "Employee Name",  !String.IsNullOrEmpty(StringUtil.RTrim( AV29TFEmployeeName)),  0,  AV29TFEmployeeName,  AV29TFEmployeeName,  false,  "",  "",  !String.IsNullOrEmpty(StringUtil.RTrim( AV30TFEmployeeName_Sel)),  AV30TFEmployeeName_Sel,  AV30TFEmployeeName_Sel) ;
          AV13GridState.gxTpr_Pagesize = StringUtil.Str( (decimal)(subGrid_Rows), 10, 0);
@@ -2890,7 +2890,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20245247562335", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20246131123549", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2906,7 +2906,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("leaverequestapproved.js", "?20245247562335", false, true);
+         context.AddJavascriptSource("leaverequestapproved.js", "?20246131123549", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -3089,7 +3089,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtLeaveRequestDuration_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(A131LeaveRequestDuration), 4, 0, ".", "")),StringUtil.LTrim( context.localUtil.Format( (decimal)(A131LeaveRequestDuration), "ZZZ9")),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+sPrefix+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtLeaveRequestDuration_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtLeaveRequestDuration_Visible,(short)0,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)4,(short)0,(short)0,(short)39,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtLeaveRequestDuration_Internalname,StringUtil.LTrim( StringUtil.NToC( A131LeaveRequestDuration, 4, 1, ".", "")),StringUtil.LTrim( context.localUtil.Format( A131LeaveRequestDuration, "Z9.9")),(string)"",(string)"'"+sPrefix+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtLeaveRequestDuration_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtLeaveRequestDuration_Visible,(short)0,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)4,(short)0,(short)0,(short)39,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -3285,7 +3285,7 @@ namespace GeneXus.Programs {
             GridColumn.AddObjectProperty("Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtLeaveRequestEndDate_Visible), 5, 0, ".", "")));
             GridContainer.AddColumnProperties(GridColumn);
             GridColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
-            GridColumn.AddObjectProperty("Value", GXUtil.ValueEncode( StringUtil.LTrim( StringUtil.NToC( (decimal)(A131LeaveRequestDuration), 4, 0, ".", ""))));
+            GridColumn.AddObjectProperty("Value", GXUtil.ValueEncode( StringUtil.LTrim( StringUtil.NToC( A131LeaveRequestDuration, 4, 1, ".", ""))));
             GridColumn.AddObjectProperty("Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtLeaveRequestDuration_Visible), 5, 0, ".", "")));
             GridContainer.AddColumnProperties(GridColumn);
             GridColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
@@ -3420,7 +3420,7 @@ namespace GeneXus.Programs {
          Ddo_gridcolumnsselector_Caption = "Select columns";
          Ddo_gridcolumnsselector_Icon = "fas fa-cog";
          Ddo_gridcolumnsselector_Icontype = "FontIcon";
-         Ddo_grid_Format = "|||4.0||";
+         Ddo_grid_Format = "|||4.1||";
          Ddo_grid_Datalistproc = "LeaveRequestApprovedGetFilterData";
          Ddo_grid_Datalisttype = "Dynamic||||Dynamic|Dynamic";
          Ddo_grid_Includedatalist = "T||||T|T";
@@ -3475,22 +3475,22 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'sPrefix'},{av:'AV28ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV23ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV18FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV65Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV31TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV32TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV38TFLeaveRequestStartDate',fld:'vTFLEAVEREQUESTSTARTDATE',pic:''},{av:'AV39TFLeaveRequestStartDate_To',fld:'vTFLEAVEREQUESTSTARTDATE_TO',pic:''},{av:'AV43TFLeaveRequestEndDate',fld:'vTFLEAVEREQUESTENDDATE',pic:''},{av:'AV44TFLeaveRequestEndDate_To',fld:'vTFLEAVEREQUESTENDDATE_TO',pic:''},{av:'AV48TFLeaveRequestDuration',fld:'vTFLEAVEREQUESTDURATION',pic:'ZZZ9'},{av:'AV49TFLeaveRequestDuration_To',fld:'vTFLEAVEREQUESTDURATION_TO',pic:'ZZZ9'},{av:'AV50TFLeaveRequestDescription',fld:'vTFLEAVEREQUESTDESCRIPTION',pic:''},{av:'AV51TFLeaveRequestDescription_Sel',fld:'vTFLEAVEREQUESTDESCRIPTION_SEL',pic:''},{av:'AV29TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV30TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV81Udparg16',fld:'vUDPARG16',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV61ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV15OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV16OrderedDsc',fld:'vORDEREDDSC',pic:''}]");
+         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'sPrefix'},{av:'AV28ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV23ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV18FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV65Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV31TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV32TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV38TFLeaveRequestStartDate',fld:'vTFLEAVEREQUESTSTARTDATE',pic:''},{av:'AV39TFLeaveRequestStartDate_To',fld:'vTFLEAVEREQUESTSTARTDATE_TO',pic:''},{av:'AV43TFLeaveRequestEndDate',fld:'vTFLEAVEREQUESTENDDATE',pic:''},{av:'AV44TFLeaveRequestEndDate_To',fld:'vTFLEAVEREQUESTENDDATE_TO',pic:''},{av:'AV48TFLeaveRequestDuration',fld:'vTFLEAVEREQUESTDURATION',pic:'Z9.9'},{av:'AV49TFLeaveRequestDuration_To',fld:'vTFLEAVEREQUESTDURATION_TO',pic:'Z9.9'},{av:'AV50TFLeaveRequestDescription',fld:'vTFLEAVEREQUESTDESCRIPTION',pic:''},{av:'AV51TFLeaveRequestDescription_Sel',fld:'vTFLEAVEREQUESTDESCRIPTION_SEL',pic:''},{av:'AV29TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV30TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV81Udparg16',fld:'vUDPARG16',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV61ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV15OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV16OrderedDsc',fld:'vORDEREDDSC',pic:''}]");
          setEventMetadata("REFRESH",",oparms:[{av:'AV28ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV23ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'edtLeaveTypeName_Visible',ctrl:'LEAVETYPENAME',prop:'Visible'},{av:'edtLeaveRequestStartDate_Visible',ctrl:'LEAVEREQUESTSTARTDATE',prop:'Visible'},{av:'edtLeaveRequestEndDate_Visible',ctrl:'LEAVEREQUESTENDDATE',prop:'Visible'},{av:'edtLeaveRequestDuration_Visible',ctrl:'LEAVEREQUESTDURATION',prop:'Visible'},{av:'edtLeaveRequestDescription_Visible',ctrl:'LEAVEREQUESTDESCRIPTION',prop:'Visible'},{av:'edtEmployeeName_Visible',ctrl:'EMPLOYEENAME',prop:'Visible'},{av:'AV54GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV55GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV56GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'AV61ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV26ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''},{av:'AV13GridState',fld:'vGRIDSTATE',pic:''}]}");
-         setEventMetadata("GRIDPAGINATIONBAR.CHANGEPAGE","{handler:'E123A2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV18FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV28ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV23ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV65Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV31TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV32TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV38TFLeaveRequestStartDate',fld:'vTFLEAVEREQUESTSTARTDATE',pic:''},{av:'AV39TFLeaveRequestStartDate_To',fld:'vTFLEAVEREQUESTSTARTDATE_TO',pic:''},{av:'AV43TFLeaveRequestEndDate',fld:'vTFLEAVEREQUESTENDDATE',pic:''},{av:'AV44TFLeaveRequestEndDate_To',fld:'vTFLEAVEREQUESTENDDATE_TO',pic:''},{av:'AV48TFLeaveRequestDuration',fld:'vTFLEAVEREQUESTDURATION',pic:'ZZZ9'},{av:'AV49TFLeaveRequestDuration_To',fld:'vTFLEAVEREQUESTDURATION_TO',pic:'ZZZ9'},{av:'AV50TFLeaveRequestDescription',fld:'vTFLEAVEREQUESTDESCRIPTION',pic:''},{av:'AV51TFLeaveRequestDescription_Sel',fld:'vTFLEAVEREQUESTDESCRIPTION_SEL',pic:''},{av:'AV29TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV30TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV81Udparg16',fld:'vUDPARG16',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV61ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV15OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV16OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'sPrefix'},{av:'Gridpaginationbar_Selectedpage',ctrl:'GRIDPAGINATIONBAR',prop:'SelectedPage'}]");
+         setEventMetadata("GRIDPAGINATIONBAR.CHANGEPAGE","{handler:'E123A2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV18FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV28ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV23ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV65Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV31TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV32TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV38TFLeaveRequestStartDate',fld:'vTFLEAVEREQUESTSTARTDATE',pic:''},{av:'AV39TFLeaveRequestStartDate_To',fld:'vTFLEAVEREQUESTSTARTDATE_TO',pic:''},{av:'AV43TFLeaveRequestEndDate',fld:'vTFLEAVEREQUESTENDDATE',pic:''},{av:'AV44TFLeaveRequestEndDate_To',fld:'vTFLEAVEREQUESTENDDATE_TO',pic:''},{av:'AV48TFLeaveRequestDuration',fld:'vTFLEAVEREQUESTDURATION',pic:'Z9.9'},{av:'AV49TFLeaveRequestDuration_To',fld:'vTFLEAVEREQUESTDURATION_TO',pic:'Z9.9'},{av:'AV50TFLeaveRequestDescription',fld:'vTFLEAVEREQUESTDESCRIPTION',pic:''},{av:'AV51TFLeaveRequestDescription_Sel',fld:'vTFLEAVEREQUESTDESCRIPTION_SEL',pic:''},{av:'AV29TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV30TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV81Udparg16',fld:'vUDPARG16',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV61ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV15OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV16OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'sPrefix'},{av:'Gridpaginationbar_Selectedpage',ctrl:'GRIDPAGINATIONBAR',prop:'SelectedPage'}]");
          setEventMetadata("GRIDPAGINATIONBAR.CHANGEPAGE",",oparms:[]}");
-         setEventMetadata("GRIDPAGINATIONBAR.CHANGEROWSPERPAGE","{handler:'E133A2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV18FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV28ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV23ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV65Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV31TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV32TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV38TFLeaveRequestStartDate',fld:'vTFLEAVEREQUESTSTARTDATE',pic:''},{av:'AV39TFLeaveRequestStartDate_To',fld:'vTFLEAVEREQUESTSTARTDATE_TO',pic:''},{av:'AV43TFLeaveRequestEndDate',fld:'vTFLEAVEREQUESTENDDATE',pic:''},{av:'AV44TFLeaveRequestEndDate_To',fld:'vTFLEAVEREQUESTENDDATE_TO',pic:''},{av:'AV48TFLeaveRequestDuration',fld:'vTFLEAVEREQUESTDURATION',pic:'ZZZ9'},{av:'AV49TFLeaveRequestDuration_To',fld:'vTFLEAVEREQUESTDURATION_TO',pic:'ZZZ9'},{av:'AV50TFLeaveRequestDescription',fld:'vTFLEAVEREQUESTDESCRIPTION',pic:''},{av:'AV51TFLeaveRequestDescription_Sel',fld:'vTFLEAVEREQUESTDESCRIPTION_SEL',pic:''},{av:'AV29TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV30TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV81Udparg16',fld:'vUDPARG16',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV61ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV15OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV16OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'sPrefix'},{av:'Gridpaginationbar_Rowsperpageselectedvalue',ctrl:'GRIDPAGINATIONBAR',prop:'RowsPerPageSelectedValue'}]");
+         setEventMetadata("GRIDPAGINATIONBAR.CHANGEROWSPERPAGE","{handler:'E133A2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV18FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV28ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV23ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV65Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV31TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV32TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV38TFLeaveRequestStartDate',fld:'vTFLEAVEREQUESTSTARTDATE',pic:''},{av:'AV39TFLeaveRequestStartDate_To',fld:'vTFLEAVEREQUESTSTARTDATE_TO',pic:''},{av:'AV43TFLeaveRequestEndDate',fld:'vTFLEAVEREQUESTENDDATE',pic:''},{av:'AV44TFLeaveRequestEndDate_To',fld:'vTFLEAVEREQUESTENDDATE_TO',pic:''},{av:'AV48TFLeaveRequestDuration',fld:'vTFLEAVEREQUESTDURATION',pic:'Z9.9'},{av:'AV49TFLeaveRequestDuration_To',fld:'vTFLEAVEREQUESTDURATION_TO',pic:'Z9.9'},{av:'AV50TFLeaveRequestDescription',fld:'vTFLEAVEREQUESTDESCRIPTION',pic:''},{av:'AV51TFLeaveRequestDescription_Sel',fld:'vTFLEAVEREQUESTDESCRIPTION_SEL',pic:''},{av:'AV29TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV30TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV81Udparg16',fld:'vUDPARG16',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV61ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV15OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV16OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'sPrefix'},{av:'Gridpaginationbar_Rowsperpageselectedvalue',ctrl:'GRIDPAGINATIONBAR',prop:'RowsPerPageSelectedValue'}]");
          setEventMetadata("GRIDPAGINATIONBAR.CHANGEROWSPERPAGE",",oparms:[{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'}]}");
-         setEventMetadata("DDO_GRID.ONOPTIONCLICKED","{handler:'E153A2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV18FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV28ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV23ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV65Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV31TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV32TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV38TFLeaveRequestStartDate',fld:'vTFLEAVEREQUESTSTARTDATE',pic:''},{av:'AV39TFLeaveRequestStartDate_To',fld:'vTFLEAVEREQUESTSTARTDATE_TO',pic:''},{av:'AV43TFLeaveRequestEndDate',fld:'vTFLEAVEREQUESTENDDATE',pic:''},{av:'AV44TFLeaveRequestEndDate_To',fld:'vTFLEAVEREQUESTENDDATE_TO',pic:''},{av:'AV48TFLeaveRequestDuration',fld:'vTFLEAVEREQUESTDURATION',pic:'ZZZ9'},{av:'AV49TFLeaveRequestDuration_To',fld:'vTFLEAVEREQUESTDURATION_TO',pic:'ZZZ9'},{av:'AV50TFLeaveRequestDescription',fld:'vTFLEAVEREQUESTDESCRIPTION',pic:''},{av:'AV51TFLeaveRequestDescription_Sel',fld:'vTFLEAVEREQUESTDESCRIPTION_SEL',pic:''},{av:'AV29TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV30TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV81Udparg16',fld:'vUDPARG16',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV61ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV15OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV16OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'sPrefix'},{av:'Ddo_grid_Activeeventkey',ctrl:'DDO_GRID',prop:'ActiveEventKey'},{av:'Ddo_grid_Selectedvalue_get',ctrl:'DDO_GRID',prop:'SelectedValue_get'},{av:'Ddo_grid_Filteredtextto_get',ctrl:'DDO_GRID',prop:'FilteredTextTo_get'},{av:'Ddo_grid_Filteredtext_get',ctrl:'DDO_GRID',prop:'FilteredText_get'},{av:'Ddo_grid_Selectedcolumn',ctrl:'DDO_GRID',prop:'SelectedColumn'}]");
-         setEventMetadata("DDO_GRID.ONOPTIONCLICKED",",oparms:[{av:'AV15OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV16OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV29TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV30TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'AV50TFLeaveRequestDescription',fld:'vTFLEAVEREQUESTDESCRIPTION',pic:''},{av:'AV51TFLeaveRequestDescription_Sel',fld:'vTFLEAVEREQUESTDESCRIPTION_SEL',pic:''},{av:'AV48TFLeaveRequestDuration',fld:'vTFLEAVEREQUESTDURATION',pic:'ZZZ9'},{av:'AV49TFLeaveRequestDuration_To',fld:'vTFLEAVEREQUESTDURATION_TO',pic:'ZZZ9'},{av:'AV43TFLeaveRequestEndDate',fld:'vTFLEAVEREQUESTENDDATE',pic:''},{av:'AV44TFLeaveRequestEndDate_To',fld:'vTFLEAVEREQUESTENDDATE_TO',pic:''},{av:'AV38TFLeaveRequestStartDate',fld:'vTFLEAVEREQUESTSTARTDATE',pic:''},{av:'AV39TFLeaveRequestStartDate_To',fld:'vTFLEAVEREQUESTSTARTDATE_TO',pic:''},{av:'AV31TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV32TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'Ddo_grid_Sortedstatus',ctrl:'DDO_GRID',prop:'SortedStatus'}]}");
+         setEventMetadata("DDO_GRID.ONOPTIONCLICKED","{handler:'E153A2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV18FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV28ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV23ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV65Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV31TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV32TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV38TFLeaveRequestStartDate',fld:'vTFLEAVEREQUESTSTARTDATE',pic:''},{av:'AV39TFLeaveRequestStartDate_To',fld:'vTFLEAVEREQUESTSTARTDATE_TO',pic:''},{av:'AV43TFLeaveRequestEndDate',fld:'vTFLEAVEREQUESTENDDATE',pic:''},{av:'AV44TFLeaveRequestEndDate_To',fld:'vTFLEAVEREQUESTENDDATE_TO',pic:''},{av:'AV48TFLeaveRequestDuration',fld:'vTFLEAVEREQUESTDURATION',pic:'Z9.9'},{av:'AV49TFLeaveRequestDuration_To',fld:'vTFLEAVEREQUESTDURATION_TO',pic:'Z9.9'},{av:'AV50TFLeaveRequestDescription',fld:'vTFLEAVEREQUESTDESCRIPTION',pic:''},{av:'AV51TFLeaveRequestDescription_Sel',fld:'vTFLEAVEREQUESTDESCRIPTION_SEL',pic:''},{av:'AV29TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV30TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV81Udparg16',fld:'vUDPARG16',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV61ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV15OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV16OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'sPrefix'},{av:'Ddo_grid_Activeeventkey',ctrl:'DDO_GRID',prop:'ActiveEventKey'},{av:'Ddo_grid_Selectedvalue_get',ctrl:'DDO_GRID',prop:'SelectedValue_get'},{av:'Ddo_grid_Filteredtextto_get',ctrl:'DDO_GRID',prop:'FilteredTextTo_get'},{av:'Ddo_grid_Filteredtext_get',ctrl:'DDO_GRID',prop:'FilteredText_get'},{av:'Ddo_grid_Selectedcolumn',ctrl:'DDO_GRID',prop:'SelectedColumn'}]");
+         setEventMetadata("DDO_GRID.ONOPTIONCLICKED",",oparms:[{av:'AV15OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV16OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV29TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV30TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'AV50TFLeaveRequestDescription',fld:'vTFLEAVEREQUESTDESCRIPTION',pic:''},{av:'AV51TFLeaveRequestDescription_Sel',fld:'vTFLEAVEREQUESTDESCRIPTION_SEL',pic:''},{av:'AV48TFLeaveRequestDuration',fld:'vTFLEAVEREQUESTDURATION',pic:'Z9.9'},{av:'AV49TFLeaveRequestDuration_To',fld:'vTFLEAVEREQUESTDURATION_TO',pic:'Z9.9'},{av:'AV43TFLeaveRequestEndDate',fld:'vTFLEAVEREQUESTENDDATE',pic:''},{av:'AV44TFLeaveRequestEndDate_To',fld:'vTFLEAVEREQUESTENDDATE_TO',pic:''},{av:'AV38TFLeaveRequestStartDate',fld:'vTFLEAVEREQUESTSTARTDATE',pic:''},{av:'AV39TFLeaveRequestStartDate_To',fld:'vTFLEAVEREQUESTSTARTDATE_TO',pic:''},{av:'AV31TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV32TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'Ddo_grid_Sortedstatus',ctrl:'DDO_GRID',prop:'SortedStatus'}]}");
          setEventMetadata("GRID.LOAD","{handler:'E193A2',iparms:[]");
          setEventMetadata("GRID.LOAD",",oparms:[]}");
-         setEventMetadata("DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED","{handler:'E163A2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV18FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV28ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV23ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV65Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV31TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV32TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV38TFLeaveRequestStartDate',fld:'vTFLEAVEREQUESTSTARTDATE',pic:''},{av:'AV39TFLeaveRequestStartDate_To',fld:'vTFLEAVEREQUESTSTARTDATE_TO',pic:''},{av:'AV43TFLeaveRequestEndDate',fld:'vTFLEAVEREQUESTENDDATE',pic:''},{av:'AV44TFLeaveRequestEndDate_To',fld:'vTFLEAVEREQUESTENDDATE_TO',pic:''},{av:'AV48TFLeaveRequestDuration',fld:'vTFLEAVEREQUESTDURATION',pic:'ZZZ9'},{av:'AV49TFLeaveRequestDuration_To',fld:'vTFLEAVEREQUESTDURATION_TO',pic:'ZZZ9'},{av:'AV50TFLeaveRequestDescription',fld:'vTFLEAVEREQUESTDESCRIPTION',pic:''},{av:'AV51TFLeaveRequestDescription_Sel',fld:'vTFLEAVEREQUESTDESCRIPTION_SEL',pic:''},{av:'AV29TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV30TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV81Udparg16',fld:'vUDPARG16',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV61ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV15OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV16OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'sPrefix'},{av:'Ddo_gridcolumnsselector_Columnsselectorvalues',ctrl:'DDO_GRIDCOLUMNSSELECTOR',prop:'ColumnsSelectorValues'}]");
+         setEventMetadata("DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED","{handler:'E163A2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV18FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV28ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV23ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV65Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV31TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV32TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV38TFLeaveRequestStartDate',fld:'vTFLEAVEREQUESTSTARTDATE',pic:''},{av:'AV39TFLeaveRequestStartDate_To',fld:'vTFLEAVEREQUESTSTARTDATE_TO',pic:''},{av:'AV43TFLeaveRequestEndDate',fld:'vTFLEAVEREQUESTENDDATE',pic:''},{av:'AV44TFLeaveRequestEndDate_To',fld:'vTFLEAVEREQUESTENDDATE_TO',pic:''},{av:'AV48TFLeaveRequestDuration',fld:'vTFLEAVEREQUESTDURATION',pic:'Z9.9'},{av:'AV49TFLeaveRequestDuration_To',fld:'vTFLEAVEREQUESTDURATION_TO',pic:'Z9.9'},{av:'AV50TFLeaveRequestDescription',fld:'vTFLEAVEREQUESTDESCRIPTION',pic:''},{av:'AV51TFLeaveRequestDescription_Sel',fld:'vTFLEAVEREQUESTDESCRIPTION_SEL',pic:''},{av:'AV29TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV30TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV81Udparg16',fld:'vUDPARG16',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV61ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV15OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV16OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'sPrefix'},{av:'Ddo_gridcolumnsselector_Columnsselectorvalues',ctrl:'DDO_GRIDCOLUMNSSELECTOR',prop:'ColumnsSelectorValues'}]");
          setEventMetadata("DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED",",oparms:[{av:'AV23ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV28ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'edtLeaveTypeName_Visible',ctrl:'LEAVETYPENAME',prop:'Visible'},{av:'edtLeaveRequestStartDate_Visible',ctrl:'LEAVEREQUESTSTARTDATE',prop:'Visible'},{av:'edtLeaveRequestEndDate_Visible',ctrl:'LEAVEREQUESTENDDATE',prop:'Visible'},{av:'edtLeaveRequestDuration_Visible',ctrl:'LEAVEREQUESTDURATION',prop:'Visible'},{av:'edtLeaveRequestDescription_Visible',ctrl:'LEAVEREQUESTDESCRIPTION',prop:'Visible'},{av:'edtEmployeeName_Visible',ctrl:'EMPLOYEENAME',prop:'Visible'},{av:'AV54GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV55GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV56GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'AV61ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV26ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''},{av:'AV13GridState',fld:'vGRIDSTATE',pic:''}]}");
-         setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED","{handler:'E113A2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV18FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV28ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV23ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV65Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV31TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV32TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV38TFLeaveRequestStartDate',fld:'vTFLEAVEREQUESTSTARTDATE',pic:''},{av:'AV39TFLeaveRequestStartDate_To',fld:'vTFLEAVEREQUESTSTARTDATE_TO',pic:''},{av:'AV43TFLeaveRequestEndDate',fld:'vTFLEAVEREQUESTENDDATE',pic:''},{av:'AV44TFLeaveRequestEndDate_To',fld:'vTFLEAVEREQUESTENDDATE_TO',pic:''},{av:'AV48TFLeaveRequestDuration',fld:'vTFLEAVEREQUESTDURATION',pic:'ZZZ9'},{av:'AV49TFLeaveRequestDuration_To',fld:'vTFLEAVEREQUESTDURATION_TO',pic:'ZZZ9'},{av:'AV50TFLeaveRequestDescription',fld:'vTFLEAVEREQUESTDESCRIPTION',pic:''},{av:'AV51TFLeaveRequestDescription_Sel',fld:'vTFLEAVEREQUESTDESCRIPTION_SEL',pic:''},{av:'AV29TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV30TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV81Udparg16',fld:'vUDPARG16',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV61ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV15OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV16OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'sPrefix'},{av:'Ddo_managefilters_Activeeventkey',ctrl:'DDO_MANAGEFILTERS',prop:'ActiveEventKey'},{av:'AV13GridState',fld:'vGRIDSTATE',pic:''}]");
-         setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED",",oparms:[{av:'AV28ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV13GridState',fld:'vGRIDSTATE',pic:''},{av:'AV15OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV16OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV18FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV31TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV32TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV38TFLeaveRequestStartDate',fld:'vTFLEAVEREQUESTSTARTDATE',pic:''},{av:'AV39TFLeaveRequestStartDate_To',fld:'vTFLEAVEREQUESTSTARTDATE_TO',pic:''},{av:'AV43TFLeaveRequestEndDate',fld:'vTFLEAVEREQUESTENDDATE',pic:''},{av:'AV44TFLeaveRequestEndDate_To',fld:'vTFLEAVEREQUESTENDDATE_TO',pic:''},{av:'AV48TFLeaveRequestDuration',fld:'vTFLEAVEREQUESTDURATION',pic:'ZZZ9'},{av:'AV49TFLeaveRequestDuration_To',fld:'vTFLEAVEREQUESTDURATION_TO',pic:'ZZZ9'},{av:'AV50TFLeaveRequestDescription',fld:'vTFLEAVEREQUESTDESCRIPTION',pic:''},{av:'AV51TFLeaveRequestDescription_Sel',fld:'vTFLEAVEREQUESTDESCRIPTION_SEL',pic:''},{av:'AV29TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV30TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'Ddo_grid_Selectedvalue_set',ctrl:'DDO_GRID',prop:'SelectedValue_set'},{av:'Ddo_grid_Filteredtext_set',ctrl:'DDO_GRID',prop:'FilteredText_set'},{av:'Ddo_grid_Filteredtextto_set',ctrl:'DDO_GRID',prop:'FilteredTextTo_set'},{av:'Ddo_grid_Sortedstatus',ctrl:'DDO_GRID',prop:'SortedStatus'},{av:'AV23ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'edtLeaveTypeName_Visible',ctrl:'LEAVETYPENAME',prop:'Visible'},{av:'edtLeaveRequestStartDate_Visible',ctrl:'LEAVEREQUESTSTARTDATE',prop:'Visible'},{av:'edtLeaveRequestEndDate_Visible',ctrl:'LEAVEREQUESTENDDATE',prop:'Visible'},{av:'edtLeaveRequestDuration_Visible',ctrl:'LEAVEREQUESTDURATION',prop:'Visible'},{av:'edtLeaveRequestDescription_Visible',ctrl:'LEAVEREQUESTDESCRIPTION',prop:'Visible'},{av:'edtEmployeeName_Visible',ctrl:'EMPLOYEENAME',prop:'Visible'},{av:'AV54GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV55GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV56GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'AV61ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV26ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''}]}");
-         setEventMetadata("DDO_AGEXPORT.ONOPTIONCLICKED","{handler:'E143A2',iparms:[{av:'Ddo_agexport_Activeeventkey',ctrl:'DDO_AGEXPORT',prop:'ActiveEventKey'},{av:'AV65Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV15OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV16OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV13GridState',fld:'vGRIDSTATE',pic:''},{av:'AV32TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV51TFLeaveRequestDescription_Sel',fld:'vTFLEAVEREQUESTDESCRIPTION_SEL',pic:''},{av:'AV30TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'AV31TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV38TFLeaveRequestStartDate',fld:'vTFLEAVEREQUESTSTARTDATE',pic:''},{av:'AV43TFLeaveRequestEndDate',fld:'vTFLEAVEREQUESTENDDATE',pic:''},{av:'AV48TFLeaveRequestDuration',fld:'vTFLEAVEREQUESTDURATION',pic:'ZZZ9'},{av:'AV50TFLeaveRequestDescription',fld:'vTFLEAVEREQUESTDESCRIPTION',pic:''},{av:'AV29TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV39TFLeaveRequestStartDate_To',fld:'vTFLEAVEREQUESTSTARTDATE_TO',pic:''},{av:'AV44TFLeaveRequestEndDate_To',fld:'vTFLEAVEREQUESTENDDATE_TO',pic:''},{av:'AV49TFLeaveRequestDuration_To',fld:'vTFLEAVEREQUESTDURATION_TO',pic:'ZZZ9'}]");
-         setEventMetadata("DDO_AGEXPORT.ONOPTIONCLICKED",",oparms:[{av:'AV13GridState',fld:'vGRIDSTATE',pic:''},{av:'AV15OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV16OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'AV18FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV28ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV23ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV65Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV31TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV32TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV38TFLeaveRequestStartDate',fld:'vTFLEAVEREQUESTSTARTDATE',pic:''},{av:'AV39TFLeaveRequestStartDate_To',fld:'vTFLEAVEREQUESTSTARTDATE_TO',pic:''},{av:'AV43TFLeaveRequestEndDate',fld:'vTFLEAVEREQUESTENDDATE',pic:''},{av:'AV44TFLeaveRequestEndDate_To',fld:'vTFLEAVEREQUESTENDDATE_TO',pic:''},{av:'AV48TFLeaveRequestDuration',fld:'vTFLEAVEREQUESTDURATION',pic:'ZZZ9'},{av:'AV49TFLeaveRequestDuration_To',fld:'vTFLEAVEREQUESTDURATION_TO',pic:'ZZZ9'},{av:'AV50TFLeaveRequestDescription',fld:'vTFLEAVEREQUESTDESCRIPTION',pic:''},{av:'AV51TFLeaveRequestDescription_Sel',fld:'vTFLEAVEREQUESTDESCRIPTION_SEL',pic:''},{av:'AV29TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV30TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV81Udparg16',fld:'vUDPARG16',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV61ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'sPrefix'},{av:'Ddo_grid_Sortedstatus',ctrl:'DDO_GRID',prop:'SortedStatus'},{av:'Ddo_grid_Selectedvalue_set',ctrl:'DDO_GRID',prop:'SelectedValue_set'},{av:'Ddo_grid_Filteredtext_set',ctrl:'DDO_GRID',prop:'FilteredText_set'},{av:'Ddo_grid_Filteredtextto_set',ctrl:'DDO_GRID',prop:'FilteredTextTo_set'}]}");
+         setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED","{handler:'E113A2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV18FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV28ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV23ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV65Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV31TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV32TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV38TFLeaveRequestStartDate',fld:'vTFLEAVEREQUESTSTARTDATE',pic:''},{av:'AV39TFLeaveRequestStartDate_To',fld:'vTFLEAVEREQUESTSTARTDATE_TO',pic:''},{av:'AV43TFLeaveRequestEndDate',fld:'vTFLEAVEREQUESTENDDATE',pic:''},{av:'AV44TFLeaveRequestEndDate_To',fld:'vTFLEAVEREQUESTENDDATE_TO',pic:''},{av:'AV48TFLeaveRequestDuration',fld:'vTFLEAVEREQUESTDURATION',pic:'Z9.9'},{av:'AV49TFLeaveRequestDuration_To',fld:'vTFLEAVEREQUESTDURATION_TO',pic:'Z9.9'},{av:'AV50TFLeaveRequestDescription',fld:'vTFLEAVEREQUESTDESCRIPTION',pic:''},{av:'AV51TFLeaveRequestDescription_Sel',fld:'vTFLEAVEREQUESTDESCRIPTION_SEL',pic:''},{av:'AV29TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV30TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV81Udparg16',fld:'vUDPARG16',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV61ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV15OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV16OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'sPrefix'},{av:'Ddo_managefilters_Activeeventkey',ctrl:'DDO_MANAGEFILTERS',prop:'ActiveEventKey'},{av:'AV13GridState',fld:'vGRIDSTATE',pic:''}]");
+         setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED",",oparms:[{av:'AV28ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV13GridState',fld:'vGRIDSTATE',pic:''},{av:'AV15OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV16OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV18FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV31TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV32TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV38TFLeaveRequestStartDate',fld:'vTFLEAVEREQUESTSTARTDATE',pic:''},{av:'AV39TFLeaveRequestStartDate_To',fld:'vTFLEAVEREQUESTSTARTDATE_TO',pic:''},{av:'AV43TFLeaveRequestEndDate',fld:'vTFLEAVEREQUESTENDDATE',pic:''},{av:'AV44TFLeaveRequestEndDate_To',fld:'vTFLEAVEREQUESTENDDATE_TO',pic:''},{av:'AV48TFLeaveRequestDuration',fld:'vTFLEAVEREQUESTDURATION',pic:'Z9.9'},{av:'AV49TFLeaveRequestDuration_To',fld:'vTFLEAVEREQUESTDURATION_TO',pic:'Z9.9'},{av:'AV50TFLeaveRequestDescription',fld:'vTFLEAVEREQUESTDESCRIPTION',pic:''},{av:'AV51TFLeaveRequestDescription_Sel',fld:'vTFLEAVEREQUESTDESCRIPTION_SEL',pic:''},{av:'AV29TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV30TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'Ddo_grid_Selectedvalue_set',ctrl:'DDO_GRID',prop:'SelectedValue_set'},{av:'Ddo_grid_Filteredtext_set',ctrl:'DDO_GRID',prop:'FilteredText_set'},{av:'Ddo_grid_Filteredtextto_set',ctrl:'DDO_GRID',prop:'FilteredTextTo_set'},{av:'Ddo_grid_Sortedstatus',ctrl:'DDO_GRID',prop:'SortedStatus'},{av:'AV23ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'edtLeaveTypeName_Visible',ctrl:'LEAVETYPENAME',prop:'Visible'},{av:'edtLeaveRequestStartDate_Visible',ctrl:'LEAVEREQUESTSTARTDATE',prop:'Visible'},{av:'edtLeaveRequestEndDate_Visible',ctrl:'LEAVEREQUESTENDDATE',prop:'Visible'},{av:'edtLeaveRequestDuration_Visible',ctrl:'LEAVEREQUESTDURATION',prop:'Visible'},{av:'edtLeaveRequestDescription_Visible',ctrl:'LEAVEREQUESTDESCRIPTION',prop:'Visible'},{av:'edtEmployeeName_Visible',ctrl:'EMPLOYEENAME',prop:'Visible'},{av:'AV54GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV55GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV56GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'AV61ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV26ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''}]}");
+         setEventMetadata("DDO_AGEXPORT.ONOPTIONCLICKED","{handler:'E143A2',iparms:[{av:'Ddo_agexport_Activeeventkey',ctrl:'DDO_AGEXPORT',prop:'ActiveEventKey'},{av:'AV65Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV15OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV16OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV13GridState',fld:'vGRIDSTATE',pic:''},{av:'AV32TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV51TFLeaveRequestDescription_Sel',fld:'vTFLEAVEREQUESTDESCRIPTION_SEL',pic:''},{av:'AV30TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'AV31TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV38TFLeaveRequestStartDate',fld:'vTFLEAVEREQUESTSTARTDATE',pic:''},{av:'AV43TFLeaveRequestEndDate',fld:'vTFLEAVEREQUESTENDDATE',pic:''},{av:'AV48TFLeaveRequestDuration',fld:'vTFLEAVEREQUESTDURATION',pic:'Z9.9'},{av:'AV50TFLeaveRequestDescription',fld:'vTFLEAVEREQUESTDESCRIPTION',pic:''},{av:'AV29TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV39TFLeaveRequestStartDate_To',fld:'vTFLEAVEREQUESTSTARTDATE_TO',pic:''},{av:'AV44TFLeaveRequestEndDate_To',fld:'vTFLEAVEREQUESTENDDATE_TO',pic:''},{av:'AV49TFLeaveRequestDuration_To',fld:'vTFLEAVEREQUESTDURATION_TO',pic:'Z9.9'}]");
+         setEventMetadata("DDO_AGEXPORT.ONOPTIONCLICKED",",oparms:[{av:'AV13GridState',fld:'vGRIDSTATE',pic:''},{av:'AV15OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV16OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'AV18FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV28ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV23ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV65Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV31TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV32TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV38TFLeaveRequestStartDate',fld:'vTFLEAVEREQUESTSTARTDATE',pic:''},{av:'AV39TFLeaveRequestStartDate_To',fld:'vTFLEAVEREQUESTSTARTDATE_TO',pic:''},{av:'AV43TFLeaveRequestEndDate',fld:'vTFLEAVEREQUESTENDDATE',pic:''},{av:'AV44TFLeaveRequestEndDate_To',fld:'vTFLEAVEREQUESTENDDATE_TO',pic:''},{av:'AV48TFLeaveRequestDuration',fld:'vTFLEAVEREQUESTDURATION',pic:'Z9.9'},{av:'AV49TFLeaveRequestDuration_To',fld:'vTFLEAVEREQUESTDURATION_TO',pic:'Z9.9'},{av:'AV50TFLeaveRequestDescription',fld:'vTFLEAVEREQUESTDESCRIPTION',pic:''},{av:'AV51TFLeaveRequestDescription_Sel',fld:'vTFLEAVEREQUESTDESCRIPTION_SEL',pic:''},{av:'AV29TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV30TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV81Udparg16',fld:'vUDPARG16',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV61ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'sPrefix'},{av:'Ddo_grid_Sortedstatus',ctrl:'DDO_GRID',prop:'SortedStatus'},{av:'Ddo_grid_Selectedvalue_set',ctrl:'DDO_GRID',prop:'SelectedValue_set'},{av:'Ddo_grid_Filteredtext_set',ctrl:'DDO_GRID',prop:'FilteredText_set'},{av:'Ddo_grid_Filteredtextto_set',ctrl:'DDO_GRID',prop:'FilteredTextTo_set'}]}");
          setEventMetadata("VALID_LEAVETYPEID","{handler:'Valid_Leavetypeid',iparms:[]");
          setEventMetadata("VALID_LEAVETYPEID",",oparms:[]}");
          setEventMetadata("VALID_EMPLOYEEID","{handler:'Valid_Employeeid',iparms:[]");
@@ -3617,7 +3617,7 @@ namespace GeneXus.Programs {
          H003A2_A134LeaveRequestRejectionReason = new string[] {""} ;
          H003A2_A133LeaveRequestDescription = new string[] {""} ;
          H003A2_A132LeaveRequestStatus = new string[] {""} ;
-         H003A2_A131LeaveRequestDuration = new short[1] ;
+         H003A2_A131LeaveRequestDuration = new decimal[1] ;
          H003A2_A130LeaveRequestEndDate = new DateTime[] {DateTime.MinValue} ;
          H003A2_A129LeaveRequestStartDate = new DateTime[] {DateTime.MinValue} ;
          H003A2_A128LeaveRequestDate = new DateTime[] {DateTime.MinValue} ;
@@ -3681,21 +3681,16 @@ namespace GeneXus.Programs {
       private short GxWebError ;
       private short nDynComponent ;
       private short AV28ManageFiltersExecutionStep ;
-      private short AV48TFLeaveRequestDuration ;
-      private short AV49TFLeaveRequestDuration_To ;
       private short AV15OrderedBy ;
       private short initialized ;
       private short wbEnd ;
       private short wbStart ;
       private short nDraw ;
       private short nDoneStart ;
-      private short A131LeaveRequestDuration ;
       private short nDonePA ;
       private short gxcookieaux ;
       private short subGrid_Backcolorstyle ;
       private short subGrid_Sortable ;
-      private short AV73Leaverequestapprovedds_10_tfleaverequestduration ;
-      private short AV74Leaverequestapprovedds_11_tfleaverequestduration_to ;
       private short nGXWrapped ;
       private short subGrid_Backstyle ;
       private short subGrid_Titlebackstyle ;
@@ -3751,6 +3746,11 @@ namespace GeneXus.Programs {
       private long A100CompanyId ;
       private long AV64Udparg2 ;
       private long GRID_nRecordCount ;
+      private decimal AV48TFLeaveRequestDuration ;
+      private decimal AV49TFLeaveRequestDuration_To ;
+      private decimal A131LeaveRequestDuration ;
+      private decimal AV73Leaverequestapprovedds_10_tfleaverequestduration ;
+      private decimal AV74Leaverequestapprovedds_11_tfleaverequestduration_to ;
       private string Gridpaginationbar_Selectedpage ;
       private string Ddo_grid_Activeeventkey ;
       private string Ddo_grid_Selectedvalue_get ;
@@ -3982,7 +3982,7 @@ namespace GeneXus.Programs {
       private string[] H003A2_A134LeaveRequestRejectionReason ;
       private string[] H003A2_A133LeaveRequestDescription ;
       private string[] H003A2_A132LeaveRequestStatus ;
-      private short[] H003A2_A131LeaveRequestDuration ;
+      private decimal[] H003A2_A131LeaveRequestDuration ;
       private DateTime[] H003A2_A130LeaveRequestEndDate ;
       private DateTime[] H003A2_A129LeaveRequestStartDate ;
       private DateTime[] H003A2_A128LeaveRequestDate ;
@@ -4022,14 +4022,14 @@ namespace GeneXus.Programs {
                                              DateTime AV70Leaverequestapprovedds_7_tfleaverequeststartdate_to ,
                                              DateTime AV71Leaverequestapprovedds_8_tfleaverequestenddate ,
                                              DateTime AV72Leaverequestapprovedds_9_tfleaverequestenddate_to ,
-                                             short AV73Leaverequestapprovedds_10_tfleaverequestduration ,
-                                             short AV74Leaverequestapprovedds_11_tfleaverequestduration_to ,
+                                             decimal AV73Leaverequestapprovedds_10_tfleaverequestduration ,
+                                             decimal AV74Leaverequestapprovedds_11_tfleaverequestduration_to ,
                                              string AV76Leaverequestapprovedds_13_tfleaverequestdescription_sel ,
                                              string AV75Leaverequestapprovedds_12_tfleaverequestdescription ,
                                              string AV78Leaverequestapprovedds_15_tfemployeename_sel ,
                                              string AV77Leaverequestapprovedds_14_tfemployeename ,
                                              string A125LeaveTypeName ,
-                                             short A131LeaveRequestDuration ,
+                                             decimal A131LeaveRequestDuration ,
                                              string A133LeaveRequestDescription ,
                                              string A148EmployeeName ,
                                              DateTime A129LeaveRequestStartDate ,
@@ -4055,7 +4055,7 @@ namespace GeneXus.Programs {
          AddWhere(sWhereString, "(Not ( :AV63Udparg1) or ( T3.CompanyId = :AV64Udparg2))");
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV66Leaverequestapprovedds_3_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( LOWER(T3.LeaveTypeName) like '%' || LOWER(:lV66Leaverequestapprovedds_3_filterfulltext)) or ( SUBSTR(TO_CHAR(T1.LeaveRequestDuration,'9999'), 2) like '%' || :lV66Leaverequestapprovedds_3_filterfulltext) or ( LOWER(T1.LeaveRequestDescription) like '%' || LOWER(:lV66Leaverequestapprovedds_3_filterfulltext)) or ( LOWER(T2.EmployeeName) like '%' || LOWER(:lV66Leaverequestapprovedds_3_filterfulltext)))");
+            AddWhere(sWhereString, "(( LOWER(T3.LeaveTypeName) like '%' || LOWER(:lV66Leaverequestapprovedds_3_filterfulltext)) or ( SUBSTR(TO_CHAR(T1.LeaveRequestDuration,'90.9'), 2) like '%' || :lV66Leaverequestapprovedds_3_filterfulltext) or ( LOWER(T1.LeaveRequestDescription) like '%' || LOWER(:lV66Leaverequestapprovedds_3_filterfulltext)) or ( LOWER(T2.EmployeeName) like '%' || LOWER(:lV66Leaverequestapprovedds_3_filterfulltext)))");
          }
          else
          {
@@ -4116,7 +4116,7 @@ namespace GeneXus.Programs {
          {
             GXv_int7[11] = 1;
          }
-         if ( ! (0==AV73Leaverequestapprovedds_10_tfleaverequestduration) )
+         if ( ! (Convert.ToDecimal(0)==AV73Leaverequestapprovedds_10_tfleaverequestduration) )
          {
             AddWhere(sWhereString, "(T1.LeaveRequestDuration >= :AV73Leaverequestapprovedds_10_tfleaverequestduration)");
          }
@@ -4124,7 +4124,7 @@ namespace GeneXus.Programs {
          {
             GXv_int7[12] = 1;
          }
-         if ( ! (0==AV74Leaverequestapprovedds_11_tfleaverequestduration_to) )
+         if ( ! (Convert.ToDecimal(0)==AV74Leaverequestapprovedds_11_tfleaverequestduration_to) )
          {
             AddWhere(sWhereString, "(T1.LeaveRequestDuration <= :AV74Leaverequestapprovedds_11_tfleaverequestduration_to)");
          }
@@ -4248,14 +4248,14 @@ namespace GeneXus.Programs {
                                              DateTime AV70Leaverequestapprovedds_7_tfleaverequeststartdate_to ,
                                              DateTime AV71Leaverequestapprovedds_8_tfleaverequestenddate ,
                                              DateTime AV72Leaverequestapprovedds_9_tfleaverequestenddate_to ,
-                                             short AV73Leaverequestapprovedds_10_tfleaverequestduration ,
-                                             short AV74Leaverequestapprovedds_11_tfleaverequestduration_to ,
+                                             decimal AV73Leaverequestapprovedds_10_tfleaverequestduration ,
+                                             decimal AV74Leaverequestapprovedds_11_tfleaverequestduration_to ,
                                              string AV76Leaverequestapprovedds_13_tfleaverequestdescription_sel ,
                                              string AV75Leaverequestapprovedds_12_tfleaverequestdescription ,
                                              string AV78Leaverequestapprovedds_15_tfemployeename_sel ,
                                              string AV77Leaverequestapprovedds_14_tfemployeename ,
                                              string A125LeaveTypeName ,
-                                             short A131LeaveRequestDuration ,
+                                             decimal A131LeaveRequestDuration ,
                                              string A133LeaveRequestDescription ,
                                              string A148EmployeeName ,
                                              DateTime A129LeaveRequestStartDate ,
@@ -4276,7 +4276,7 @@ namespace GeneXus.Programs {
          AddWhere(sWhereString, "(Not ( :AV63Udparg1) or ( T2.CompanyId = :AV64Udparg2))");
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV66Leaverequestapprovedds_3_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( LOWER(T2.LeaveTypeName) like '%' || LOWER(:lV66Leaverequestapprovedds_3_filterfulltext)) or ( SUBSTR(TO_CHAR(T1.LeaveRequestDuration,'9999'), 2) like '%' || :lV66Leaverequestapprovedds_3_filterfulltext) or ( LOWER(T1.LeaveRequestDescription) like '%' || LOWER(:lV66Leaverequestapprovedds_3_filterfulltext)) or ( LOWER(T3.EmployeeName) like '%' || LOWER(:lV66Leaverequestapprovedds_3_filterfulltext)))");
+            AddWhere(sWhereString, "(( LOWER(T2.LeaveTypeName) like '%' || LOWER(:lV66Leaverequestapprovedds_3_filterfulltext)) or ( SUBSTR(TO_CHAR(T1.LeaveRequestDuration,'90.9'), 2) like '%' || :lV66Leaverequestapprovedds_3_filterfulltext) or ( LOWER(T1.LeaveRequestDescription) like '%' || LOWER(:lV66Leaverequestapprovedds_3_filterfulltext)) or ( LOWER(T3.EmployeeName) like '%' || LOWER(:lV66Leaverequestapprovedds_3_filterfulltext)))");
          }
          else
          {
@@ -4337,7 +4337,7 @@ namespace GeneXus.Programs {
          {
             GXv_int9[11] = 1;
          }
-         if ( ! (0==AV73Leaverequestapprovedds_10_tfleaverequestduration) )
+         if ( ! (Convert.ToDecimal(0)==AV73Leaverequestapprovedds_10_tfleaverequestduration) )
          {
             AddWhere(sWhereString, "(T1.LeaveRequestDuration >= :AV73Leaverequestapprovedds_10_tfleaverequestduration)");
          }
@@ -4345,7 +4345,7 @@ namespace GeneXus.Programs {
          {
             GXv_int9[12] = 1;
          }
-         if ( ! (0==AV74Leaverequestapprovedds_11_tfleaverequestduration_to) )
+         if ( ! (Convert.ToDecimal(0)==AV74Leaverequestapprovedds_11_tfleaverequestduration_to) )
          {
             AddWhere(sWhereString, "(T1.LeaveRequestDuration <= :AV74Leaverequestapprovedds_11_tfleaverequestduration_to)");
          }
@@ -4466,9 +4466,9 @@ namespace GeneXus.Programs {
          switch ( cursor )
          {
                case 0 :
-                     return conditional_H003A2(context, (long)dynConstraints[0] , (GxSimpleCollection<long>)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (DateTime)dynConstraints[5] , (DateTime)dynConstraints[6] , (DateTime)dynConstraints[7] , (DateTime)dynConstraints[8] , (short)dynConstraints[9] , (short)dynConstraints[10] , (string)dynConstraints[11] , (string)dynConstraints[12] , (string)dynConstraints[13] , (string)dynConstraints[14] , (string)dynConstraints[15] , (short)dynConstraints[16] , (string)dynConstraints[17] , (string)dynConstraints[18] , (DateTime)dynConstraints[19] , (DateTime)dynConstraints[20] , (short)dynConstraints[21] , (bool)dynConstraints[22] , (string)dynConstraints[23] , (bool)dynConstraints[24] , (long)dynConstraints[25] , (long)dynConstraints[26] );
+                     return conditional_H003A2(context, (long)dynConstraints[0] , (GxSimpleCollection<long>)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (DateTime)dynConstraints[5] , (DateTime)dynConstraints[6] , (DateTime)dynConstraints[7] , (DateTime)dynConstraints[8] , (decimal)dynConstraints[9] , (decimal)dynConstraints[10] , (string)dynConstraints[11] , (string)dynConstraints[12] , (string)dynConstraints[13] , (string)dynConstraints[14] , (string)dynConstraints[15] , (decimal)dynConstraints[16] , (string)dynConstraints[17] , (string)dynConstraints[18] , (DateTime)dynConstraints[19] , (DateTime)dynConstraints[20] , (short)dynConstraints[21] , (bool)dynConstraints[22] , (string)dynConstraints[23] , (bool)dynConstraints[24] , (long)dynConstraints[25] , (long)dynConstraints[26] );
                case 1 :
-                     return conditional_H003A3(context, (long)dynConstraints[0] , (GxSimpleCollection<long>)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (DateTime)dynConstraints[5] , (DateTime)dynConstraints[6] , (DateTime)dynConstraints[7] , (DateTime)dynConstraints[8] , (short)dynConstraints[9] , (short)dynConstraints[10] , (string)dynConstraints[11] , (string)dynConstraints[12] , (string)dynConstraints[13] , (string)dynConstraints[14] , (string)dynConstraints[15] , (short)dynConstraints[16] , (string)dynConstraints[17] , (string)dynConstraints[18] , (DateTime)dynConstraints[19] , (DateTime)dynConstraints[20] , (short)dynConstraints[21] , (bool)dynConstraints[22] , (string)dynConstraints[23] , (bool)dynConstraints[24] , (long)dynConstraints[25] , (long)dynConstraints[26] );
+                     return conditional_H003A3(context, (long)dynConstraints[0] , (GxSimpleCollection<long>)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (DateTime)dynConstraints[5] , (DateTime)dynConstraints[6] , (DateTime)dynConstraints[7] , (DateTime)dynConstraints[8] , (decimal)dynConstraints[9] , (decimal)dynConstraints[10] , (string)dynConstraints[11] , (string)dynConstraints[12] , (string)dynConstraints[13] , (string)dynConstraints[14] , (string)dynConstraints[15] , (decimal)dynConstraints[16] , (string)dynConstraints[17] , (string)dynConstraints[18] , (DateTime)dynConstraints[19] , (DateTime)dynConstraints[20] , (short)dynConstraints[21] , (bool)dynConstraints[22] , (string)dynConstraints[23] , (bool)dynConstraints[24] , (long)dynConstraints[25] , (long)dynConstraints[26] );
          }
          return base.getDynamicStatement(cursor, context, dynConstraints);
       }
@@ -4506,8 +4506,8 @@ namespace GeneXus.Programs {
           new ParDef("AV70Leaverequestapprovedds_7_tfleaverequeststartdate_to",GXType.Date,8,0) ,
           new ParDef("AV71Leaverequestapprovedds_8_tfleaverequestenddate",GXType.Date,8,0) ,
           new ParDef("AV72Leaverequestapprovedds_9_tfleaverequestenddate_to",GXType.Date,8,0) ,
-          new ParDef("AV73Leaverequestapprovedds_10_tfleaverequestduration",GXType.Int16,4,0) ,
-          new ParDef("AV74Leaverequestapprovedds_11_tfleaverequestduration_to",GXType.Int16,4,0) ,
+          new ParDef("AV73Leaverequestapprovedds_10_tfleaverequestduration",GXType.Number,4,1) ,
+          new ParDef("AV74Leaverequestapprovedds_11_tfleaverequestduration_to",GXType.Number,4,1) ,
           new ParDef("lV75Leaverequestapprovedds_12_tfleaverequestdescription",GXType.VarChar,200,0) ,
           new ParDef("AV76Leaverequestapprovedds_13_tfleaverequestdescription_sel",GXType.VarChar,200,0) ,
           new ParDef("lV77Leaverequestapprovedds_14_tfemployeename",GXType.Char,128,0) ,
@@ -4530,8 +4530,8 @@ namespace GeneXus.Programs {
           new ParDef("AV70Leaverequestapprovedds_7_tfleaverequeststartdate_to",GXType.Date,8,0) ,
           new ParDef("AV71Leaverequestapprovedds_8_tfleaverequestenddate",GXType.Date,8,0) ,
           new ParDef("AV72Leaverequestapprovedds_9_tfleaverequestenddate_to",GXType.Date,8,0) ,
-          new ParDef("AV73Leaverequestapprovedds_10_tfleaverequestduration",GXType.Int16,4,0) ,
-          new ParDef("AV74Leaverequestapprovedds_11_tfleaverequestduration_to",GXType.Int16,4,0) ,
+          new ParDef("AV73Leaverequestapprovedds_10_tfleaverequestduration",GXType.Number,4,1) ,
+          new ParDef("AV74Leaverequestapprovedds_11_tfleaverequestduration_to",GXType.Number,4,1) ,
           new ParDef("lV75Leaverequestapprovedds_12_tfleaverequestdescription",GXType.VarChar,200,0) ,
           new ParDef("AV76Leaverequestapprovedds_13_tfleaverequestdescription_sel",GXType.VarChar,200,0) ,
           new ParDef("lV77Leaverequestapprovedds_14_tfemployeename",GXType.Char,128,0) ,
@@ -4558,7 +4558,7 @@ namespace GeneXus.Programs {
                 ((string[]) buf[3])[0] = rslt.getVarchar(4);
                 ((string[]) buf[4])[0] = rslt.getVarchar(5);
                 ((string[]) buf[5])[0] = rslt.getString(6, 20);
-                ((short[]) buf[6])[0] = rslt.getShort(7);
+                ((decimal[]) buf[6])[0] = rslt.getDecimal(7);
                 ((DateTime[]) buf[7])[0] = rslt.getGXDate(8);
                 ((DateTime[]) buf[8])[0] = rslt.getGXDate(9);
                 ((DateTime[]) buf[9])[0] = rslt.getGXDate(10);

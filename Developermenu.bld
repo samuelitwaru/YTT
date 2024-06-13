@@ -25,6 +25,8 @@ wwpbaseobjects\subscriptions\wwp_subscription
 wwpbaseobjects\wwp_entity
 workwithplus\wwp_parameter
 wwpbaseobjects\wwp_userextended
+employeeweekreport
+employeeweekreport
 fullcalendar
 fullcalendar
 gantchart
@@ -203,6 +205,9 @@ login
 login
 general\ui\masterprompt
 general\ui\masterunanimosidebar
+aemployeeleavetotal
+aemployeeleavereport
+aformatdatetime
 asendcontactusemail
 aweeklyremindertomanagerlk
 aweeklyremindertomanagerlk
@@ -353,13 +358,9 @@ sdsvc_LeaveRequestPanel_Level_Detail
 sdsvc_ViewLeaveRequest_Level_Detail
 sdsvc_UpdateLeaveRequest_Level_Detail
 yttv3sd
-yttv3sdnotauthorized
 gamsdnotauthorized
-landingpanel
-loginpanel
 gamsdchangepassword
 gamsdupdateuser
-passwordchangepanel
 profilepanel
 loghourspanel
 updateworkhourlog
@@ -368,4 +369,8 @@ leaverequestpanel
 viewleaverequest
 leaverequestsgridpanel
 updateleaverequest
+yttv3sdnotauthorized
+loginpanel
+passwordchangepanel
+landingpanel
 GeneXus.Programs.Common
