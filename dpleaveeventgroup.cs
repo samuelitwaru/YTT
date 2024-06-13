@@ -115,13 +115,11 @@ namespace GeneXus.Programs {
          /* GeneXus formulas */
          /* Output device settings */
          /* Using cursor P001T2 */
-         pr_default.execute(0, new Object[] {AV6ToDate, AV5FromDate, AV7CompanyLocationId});
+         pr_default.execute(0, new Object[] {AV7CompanyLocationId});
          while ( (pr_default.getStatus(0) != 101) )
          {
             A124LeaveTypeId = P001T2_A124LeaveTypeId[0];
             A100CompanyId = P001T2_A100CompanyId[0];
-            A130LeaveRequestEndDate = P001T2_A130LeaveRequestEndDate[0];
-            A129LeaveRequestStartDate = P001T2_A129LeaveRequestStartDate[0];
             A157CompanyLocationId = P001T2_A157CompanyLocationId[0];
             A132LeaveRequestStatus = P001T2_A132LeaveRequestStatus[0];
             A148EmployeeName = P001T2_A148EmployeeName[0];
@@ -158,21 +156,17 @@ namespace GeneXus.Programs {
          scmdbuf = "";
          P001T2_A124LeaveTypeId = new long[1] ;
          P001T2_A100CompanyId = new long[1] ;
-         P001T2_A130LeaveRequestEndDate = new DateTime[] {DateTime.MinValue} ;
-         P001T2_A129LeaveRequestStartDate = new DateTime[] {DateTime.MinValue} ;
          P001T2_A157CompanyLocationId = new long[1] ;
          P001T2_A132LeaveRequestStatus = new string[] {""} ;
          P001T2_A148EmployeeName = new string[] {""} ;
          P001T2_A106EmployeeId = new long[1] ;
-         A130LeaveRequestEndDate = DateTime.MinValue;
-         A129LeaveRequestStartDate = DateTime.MinValue;
          A132LeaveRequestStatus = "";
          A148EmployeeName = "";
          Gxm1sdtleaveeventgroup = new SdtSDTLeaveEventGroup(context);
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.dpleaveeventgroup__default(),
             new Object[][] {
                 new Object[] {
-               P001T2_A124LeaveTypeId, P001T2_A100CompanyId, P001T2_A130LeaveRequestEndDate, P001T2_A129LeaveRequestStartDate, P001T2_A157CompanyLocationId, P001T2_A132LeaveRequestStatus, P001T2_A148EmployeeName, P001T2_A106EmployeeId
+               P001T2_A124LeaveTypeId, P001T2_A100CompanyId, P001T2_A157CompanyLocationId, P001T2_A132LeaveRequestStatus, P001T2_A148EmployeeName, P001T2_A106EmployeeId
                }
             }
          );
@@ -189,15 +183,11 @@ namespace GeneXus.Programs {
       private string A148EmployeeName ;
       private DateTime AV5FromDate ;
       private DateTime AV6ToDate ;
-      private DateTime A130LeaveRequestEndDate ;
-      private DateTime A129LeaveRequestStartDate ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private IDataStoreProvider pr_default ;
       private long[] P001T2_A124LeaveTypeId ;
       private long[] P001T2_A100CompanyId ;
-      private DateTime[] P001T2_A130LeaveRequestEndDate ;
-      private DateTime[] P001T2_A129LeaveRequestStartDate ;
       private long[] P001T2_A157CompanyLocationId ;
       private string[] P001T2_A132LeaveRequestStatus ;
       private string[] P001T2_A148EmployeeName ;
@@ -224,12 +214,10 @@ namespace GeneXus.Programs {
        {
           Object[] prmP001T2;
           prmP001T2 = new Object[] {
-          new ParDef("AV6ToDate",GXType.Date,8,0) ,
-          new ParDef("AV5FromDate",GXType.Date,8,0) ,
           new ParDef("AV7CompanyLocationId",GXType.Int64,10,0)
           };
           def= new CursorDef[] {
-              new CursorDef("P001T2", "SELECT DISTINCT NULL AS LeaveTypeId, NULL AS CompanyId, NULL AS LeaveRequestEndDate, NULL AS LeaveRequestStartDate, NULL AS CompanyLocationId, NULL AS LeaveRequestStatus, EmployeeName, EmployeeId FROM ( SELECT T1.LeaveTypeId, T2.CompanyId, T1.LeaveRequestEndDate, T1.LeaveRequestStartDate, T3.CompanyLocationId, T1.LeaveRequestStatus, T4.EmployeeName, T1.EmployeeId FROM (((LeaveRequest T1 INNER JOIN LeaveType T2 ON T2.LeaveTypeId = T1.LeaveTypeId) INNER JOIN Company T3 ON T3.CompanyId = T2.CompanyId) INNER JOIN Employee T4 ON T4.EmployeeId = T1.EmployeeId) WHERE (T1.LeaveRequestStatus = ( 'Approved') or T1.LeaveRequestStatus = ( 'Pending')) AND (T1.LeaveRequestStartDate <= :AV6ToDate) AND (T1.LeaveRequestEndDate >= :AV5FromDate) AND (T3.CompanyLocationId = :AV7CompanyLocationId) ORDER BY T1.EmployeeId) DistinctT ORDER BY EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP001T2,100, GxCacheFrequency.OFF ,false,false )
+              new CursorDef("P001T2", "SELECT DISTINCT NULL AS LeaveTypeId, NULL AS CompanyId, NULL AS CompanyLocationId, NULL AS LeaveRequestStatus, EmployeeName, EmployeeId FROM ( SELECT T1.LeaveTypeId, T2.CompanyId, T3.CompanyLocationId, T1.LeaveRequestStatus, T4.EmployeeName, T1.EmployeeId FROM (((LeaveRequest T1 INNER JOIN LeaveType T2 ON T2.LeaveTypeId = T1.LeaveTypeId) INNER JOIN Company T3 ON T3.CompanyId = T2.CompanyId) INNER JOIN Employee T4 ON T4.EmployeeId = T1.EmployeeId) WHERE (T1.LeaveRequestStatus = ( 'Approved') or T1.LeaveRequestStatus = ( 'Pending')) AND (T3.CompanyLocationId = :AV7CompanyLocationId) ORDER BY T1.EmployeeId) DistinctT ORDER BY EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP001T2,100, GxCacheFrequency.OFF ,false,false )
           };
        }
     }
@@ -243,12 +231,10 @@ namespace GeneXus.Programs {
              case 0 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);
                 ((long[]) buf[1])[0] = rslt.getLong(2);
-                ((DateTime[]) buf[2])[0] = rslt.getGXDate(3);
-                ((DateTime[]) buf[3])[0] = rslt.getGXDate(4);
-                ((long[]) buf[4])[0] = rslt.getLong(5);
-                ((string[]) buf[5])[0] = rslt.getString(6, 20);
-                ((string[]) buf[6])[0] = rslt.getString(7, 128);
-                ((long[]) buf[7])[0] = rslt.getLong(8);
+                ((long[]) buf[2])[0] = rslt.getLong(3);
+                ((string[]) buf[3])[0] = rslt.getString(4, 20);
+                ((string[]) buf[4])[0] = rslt.getString(5, 128);
+                ((long[]) buf[5])[0] = rslt.getLong(6);
                 return;
        }
     }

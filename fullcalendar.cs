@@ -293,6 +293,14 @@ namespace GeneXus.Programs {
          /* Send hidden variables. */
          /* Send saved values. */
          send_integrity_footer_hashes( ) ;
+         if ( context.isAjaxRequest( ) )
+         {
+            context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "vSDTLEAVETYPES", AV23SDTLeaveTypes);
+         }
+         else
+         {
+            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("vSDTLEAVETYPES", AV23SDTLeaveTypes);
+         }
          GxWebStd.gx_hidden_field( context, "vDATERANGE", context.localUtil.DToC( AV10DateRange, 0, "/"));
          GxWebStd.gx_hidden_field( context, "vDATERANGE_TO", context.localUtil.DToC( AV16DateRange_To, 0, "/"));
          if ( context.isAjaxRequest( ) )
@@ -487,8 +495,10 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 CellMarginLeft5", "start", "top", "", "", "div");
             /* User Defined Control */
+            ucUcvistimeline1.SetProperty("leavetypes", AV23SDTLeaveTypes);
+            ucUcvistimeline1.SetProperty("leavetypes", AV23SDTLeaveTypes);
             ucUcvistimeline1.Render(context, "ucvistimeline", Ucvistimeline1_Internalname, "UCVISTIMELINE1Container");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -846,6 +856,7 @@ namespace GeneXus.Programs {
          if ( StringUtil.StrCmp(context.GetRequestMethod( ), "POST") == 0 )
          {
             /* Read saved SDTs. */
+            ajax_req_read_hidden_sdt(cgiGet( "vSDTLEAVETYPES"), AV23SDTLeaveTypes);
             ajax_req_read_hidden_sdt(cgiGet( "vDATERANGE_RANGEPICKEROPTIONS"), AV17DateRange_RangePickerOptions);
             /* Read saved values. */
             AV10DateRange = context.localUtil.CToD( cgiGet( "vDATERANGE"), 0);
@@ -886,6 +897,7 @@ namespace GeneXus.Programs {
          AV23SDTLeaveTypes = GXt_objcol_SdtSDTLeaveType1;
          Ucvistimeline1_Leavetypes = AV23SDTLeaveTypes.ToJSonString(false);
          ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "leavetypes", Ucvistimeline1_Leavetypes);
+         new logtofile(context ).execute(  AV23SDTLeaveTypes.ToJSonString(false)) ;
          GXt_int2 = AV18CompanyId;
          new getloggedinusercompanyid(context ).execute( out  GXt_int2) ;
          AV18CompanyId = GXt_int2;
@@ -1005,12 +1017,15 @@ namespace GeneXus.Programs {
       {
          /* 'GETDATA' Routine */
          returnInSub = false;
+         new logtofile(context ).execute(  context.localUtil.DToC( AV10DateRange, 1, "/")+" - "+context.localUtil.DToC( AV16DateRange_To, 1, "/")) ;
          GXt_objcol_SdtSDTLeaveEvent5 = AV6LeaveEvents;
          new dpleaveevent(context ).execute(  AV10DateRange,  AV16DateRange_To,  AV11CompanyLocationId, out  GXt_objcol_SdtSDTLeaveEvent5) ;
          AV6LeaveEvents = GXt_objcol_SdtSDTLeaveEvent5;
          GXt_objcol_SdtSDTLeaveEventGroup6 = AV7LeaveEventGroups;
          new dpleaveeventgroup(context ).execute(  AV10DateRange,  AV16DateRange_To,  AV11CompanyLocationId, out  GXt_objcol_SdtSDTLeaveEventGroup6) ;
          AV7LeaveEventGroups = GXt_objcol_SdtSDTLeaveEventGroup6;
+         new logtofile(context ).execute(  AV6LeaveEvents.ToJSonString(false)) ;
+         new logtofile(context ).execute(  AV7LeaveEventGroups.ToJSonString(false)) ;
       }
 
       protected void nextLoad( )
@@ -1063,7 +1078,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024613158363", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202461317423594", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1079,7 +1094,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("fullcalendar.js", "?2024613158364", false, true);
+         context.AddJavascriptSource("fullcalendar.js", "?202461317423594", false, true);
          context.AddJavascriptSource("UserControls/UCVISTimelineRender.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/daterangepicker/locales.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/daterangepicker/wwp-daterangepicker.js", "", false, true);
@@ -1199,6 +1214,7 @@ namespace GeneXus.Programs {
          bodyStyle = "";
          Gx_date = DateTime.MinValue;
          GXKey = "";
+         AV23SDTLeaveTypes = new GXBaseCollection<SdtSDTLeaveType>( context, "SDTLeaveType", "YTT_version4");
          AV10DateRange = DateTime.MinValue;
          AV16DateRange_To = DateTime.MinValue;
          AV17DateRange_RangePickerOptions = new GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions(context);
@@ -1228,7 +1244,6 @@ namespace GeneXus.Programs {
          H00562_A158CompanyLocationName = new string[] {""} ;
          H00563_A157CompanyLocationId = new long[1] ;
          H00563_A158CompanyLocationName = new string[] {""} ;
-         AV23SDTLeaveTypes = new GXBaseCollection<SdtSDTLeaveType>( context, "SDTLeaveType", "YTT_version4");
          GXt_objcol_SdtSDTLeaveType1 = new GXBaseCollection<SdtSDTLeaveType>( context, "SDTLeaveType", "YTT_version4");
          H00564_A100CompanyId = new long[1] ;
          H00564_A157CompanyLocationId = new long[1] ;
