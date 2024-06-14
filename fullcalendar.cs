@@ -896,11 +896,6 @@ namespace GeneXus.Programs {
          new getloggedinusercompanyid(context ).execute( out  GXt_int1) ;
          AV18CompanyId = GXt_int1;
          AssignAttri("", false, "AV18CompanyId", StringUtil.LTrimStr( (decimal)(AV18CompanyId), 10, 0));
-         GXt_objcol_SdtSDTLeaveType2 = AV23SDTLeaveTypes;
-         new dpleavetype(context ).execute(  AV18CompanyId, out  GXt_objcol_SdtSDTLeaveType2) ;
-         AV23SDTLeaveTypes = GXt_objcol_SdtSDTLeaveType2;
-         Ucvistimeline1_Leavetypes = AV23SDTLeaveTypes.ToJSonString(false);
-         ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "leavetypes", Ucvistimeline1_Leavetypes);
          if ( ! (0==AV18CompanyId) )
          {
             /* Using cursor H00564 */
@@ -920,6 +915,11 @@ namespace GeneXus.Programs {
             dynavCompanylocationid.Enabled = 0;
             AssignProp("", false, dynavCompanylocationid_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(dynavCompanylocationid.Enabled), 5, 0), true);
          }
+         GXt_objcol_SdtSDTLeaveType2 = AV23SDTLeaveTypes;
+         new dpleavetype(context ).execute(  AV11CompanyLocationId, out  GXt_objcol_SdtSDTLeaveType2) ;
+         AV23SDTLeaveTypes = GXt_objcol_SdtSDTLeaveType2;
+         Ucvistimeline1_Leavetypes = AV23SDTLeaveTypes.ToJSonString(false);
+         ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "leavetypes", Ucvistimeline1_Leavetypes);
          AV10DateRange = context.localUtil.YMDToD( DateTimeUtil.Year( Gx_date), DateTimeUtil.Month( Gx_date), 1);
          AssignAttri("", false, "AV10DateRange", context.localUtil.Format(AV10DateRange, "99/99/99"));
          AV16DateRange_To = DateTimeUtil.DateEndOfMonth( AV10DateRange);
@@ -995,6 +995,11 @@ namespace GeneXus.Programs {
       {
          /* Companylocationid_Controlvaluechanged Routine */
          returnInSub = false;
+         GXt_objcol_SdtSDTLeaveType2 = AV23SDTLeaveTypes;
+         new dpleavetype(context ).execute(  AV11CompanyLocationId, out  GXt_objcol_SdtSDTLeaveType2) ;
+         AV23SDTLeaveTypes = GXt_objcol_SdtSDTLeaveType2;
+         Ucvistimeline1_Leavetypes = AV23SDTLeaveTypes.ToJSonString(false);
+         ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "leavetypes", Ucvistimeline1_Leavetypes);
          /* Execute user subroutine: 'GETDATA' */
          S112 ();
          if (returnInSub) return;
@@ -1008,6 +1013,7 @@ namespace GeneXus.Programs {
          ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "stopDate", Ucvistimeline1_Stopdate);
          this.executeUsercontrolMethod("", false, "UCVISTIMELINE1Container", "Refresh", "", new Object[] {AV6LeaveEvents.ToJSonString(false),AV7LeaveEventGroups.ToJSonString(false)});
          /*  Sending Event outputs  */
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV23SDTLeaveTypes", AV23SDTLeaveTypes);
          context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV6LeaveEvents", AV6LeaveEvents);
          context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV7LeaveEventGroups", AV7LeaveEventGroups);
       }
@@ -1077,7 +1083,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202461412284963", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202461412405062", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1093,7 +1099,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("fullcalendar.js", "?202461412284964", false, true);
+         context.AddJavascriptSource("fullcalendar.js", "?202461412405063", false, true);
          context.AddJavascriptSource("UserControls/UCVISTimelineRender.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/daterangepicker/locales.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/daterangepicker/wwp-daterangepicker.js", "", false, true);
@@ -1185,8 +1191,8 @@ namespace GeneXus.Programs {
          setEventMetadata("'DOREPORT'",",oparms:[]}");
          setEventMetadata("DATERANGE_RANGEPICKER.DATERANGECHANGED","{handler:'E11562',iparms:[{av:'AV10DateRange',fld:'vDATERANGE',pic:''},{av:'AV16DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'Gx_date',fld:'vTODAY',pic:'',hsh:true},{av:'AV6LeaveEvents',fld:'vLEAVEEVENTS',pic:''},{av:'AV7LeaveEventGroups',fld:'vLEAVEEVENTGROUPS',pic:''},{av:'dynavCompanylocationid'},{av:'AV11CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'}]");
          setEventMetadata("DATERANGE_RANGEPICKER.DATERANGECHANGED",",oparms:[{av:'AV10DateRange',fld:'vDATERANGE',pic:''},{av:'AV16DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'Ucvistimeline1_Startdate',ctrl:'UCVISTIMELINE1',prop:'startDate'},{av:'Ucvistimeline1_Stopdate',ctrl:'UCVISTIMELINE1',prop:'stopDate'},{av:'AV6LeaveEvents',fld:'vLEAVEEVENTS',pic:''},{av:'AV7LeaveEventGroups',fld:'vLEAVEEVENTGROUPS',pic:''}]}");
-         setEventMetadata("VCOMPANYLOCATIONID.CONTROLVALUECHANGED","{handler:'E14562',iparms:[{av:'AV10DateRange',fld:'vDATERANGE',pic:''},{av:'AV16DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV6LeaveEvents',fld:'vLEAVEEVENTS',pic:''},{av:'AV7LeaveEventGroups',fld:'vLEAVEEVENTGROUPS',pic:''},{av:'dynavCompanylocationid'},{av:'AV11CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'}]");
-         setEventMetadata("VCOMPANYLOCATIONID.CONTROLVALUECHANGED",",oparms:[{av:'Ucvistimeline1_Startdate',ctrl:'UCVISTIMELINE1',prop:'startDate'},{av:'Ucvistimeline1_Stopdate',ctrl:'UCVISTIMELINE1',prop:'stopDate'},{av:'AV6LeaveEvents',fld:'vLEAVEEVENTS',pic:''},{av:'AV7LeaveEventGroups',fld:'vLEAVEEVENTGROUPS',pic:''}]}");
+         setEventMetadata("VCOMPANYLOCATIONID.CONTROLVALUECHANGED","{handler:'E14562',iparms:[{av:'dynavCompanylocationid'},{av:'AV11CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'},{av:'AV10DateRange',fld:'vDATERANGE',pic:''},{av:'AV16DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV6LeaveEvents',fld:'vLEAVEEVENTS',pic:''},{av:'AV7LeaveEventGroups',fld:'vLEAVEEVENTGROUPS',pic:''}]");
+         setEventMetadata("VCOMPANYLOCATIONID.CONTROLVALUECHANGED",",oparms:[{av:'AV23SDTLeaveTypes',fld:'vSDTLEAVETYPES',pic:''},{av:'Ucvistimeline1_Leavetypes',ctrl:'UCVISTIMELINE1',prop:'leavetypes'},{av:'Ucvistimeline1_Startdate',ctrl:'UCVISTIMELINE1',prop:'startDate'},{av:'Ucvistimeline1_Stopdate',ctrl:'UCVISTIMELINE1',prop:'stopDate'},{av:'AV6LeaveEvents',fld:'vLEAVEEVENTS',pic:''},{av:'AV7LeaveEventGroups',fld:'vLEAVEEVENTGROUPS',pic:''}]}");
          return  ;
       }
 
@@ -1243,12 +1249,12 @@ namespace GeneXus.Programs {
          H00562_A158CompanyLocationName = new string[] {""} ;
          H00563_A157CompanyLocationId = new long[1] ;
          H00563_A158CompanyLocationName = new string[] {""} ;
-         GXt_objcol_SdtSDTLeaveType2 = new GXBaseCollection<SdtSDTLeaveType>( context, "SDTLeaveType", "YTT_version4");
          H00564_A100CompanyId = new long[1] ;
          H00564_A157CompanyLocationId = new long[1] ;
          GXt_SdtWWPDateRangePickerOptions4 = new GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions(context);
          AV21ExcelFilename = "";
          AV20ErrorMessage = "";
+         GXt_objcol_SdtSDTLeaveType2 = new GXBaseCollection<SdtSDTLeaveType>( context, "SDTLeaveType", "YTT_version4");
          GXt_char3 = "";
          GXt_objcol_SdtSDTLeaveEvent5 = new GXBaseCollection<SdtSDTLeaveEvent>( context, "SDTLeaveEvent", "YTT_version4");
          GXt_objcol_SdtSDTLeaveEventGroup6 = new GXBaseCollection<SdtSDTLeaveEventGroup>( context, "SDTLeaveEventGroup", "YTT_version4");

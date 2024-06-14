@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <CallableObject guid="72894411-eb41-450e-a64e-6e2475e82dca" name="DPLeaveType" description="DPLeave Type" namespace="GeneXus.Programs">
   <Signature name="Par">
-    <Parameter name="CompanyId">
+    <Parameter name="CompanyLocationId">
       <Field>
         <Properties>
           <Property>
