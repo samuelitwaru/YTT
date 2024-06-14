@@ -318,6 +318,14 @@ namespace GeneXus.Programs {
          {
             context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("Leaverequest", AV8LeaveRequest);
          }
+         if ( context.isAjaxRequest( ) )
+         {
+            context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "Employee", AV16Employee);
+         }
+         else
+         {
+            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("Employee", AV16Employee);
+         }
          GxWebStd.gx_hidden_field( context, "vTRNMODE", StringUtil.RTrim( AV11TrnMode));
          GxWebStd.gx_hidden_field( context, "gxhash_vTRNMODE", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV11TrnMode, "")), context));
          GxWebStd.gx_hidden_field( context, "vLEAVEREQUESTID", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV15LeaveRequestId), 10, 0, ".", "")));
@@ -329,6 +337,14 @@ namespace GeneXus.Programs {
          else
          {
             context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("vLEAVEREQUEST", AV8LeaveRequest);
+         }
+         if ( context.isAjaxRequest( ) )
+         {
+            context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "vEMPLOYEE", AV16Employee);
+         }
+         else
+         {
+            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("vEMPLOYEE", AV16Employee);
          }
          GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEATTRIBUTES_Width", StringUtil.RTrim( Dvpanel_tableattributes_Width));
          GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEATTRIBUTES_Autowidth", StringUtil.BoolToStr( Dvpanel_tableattributes_Autowidth));
@@ -580,6 +596,22 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-sm-6 DataContentCell DscTop", "start", "top", "", "", "div");
             /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+edtavEmployee_employeebalance_Internalname+"\"", "", "div");
+            /* Attribute/Variable Label */
+            GxWebStd.gx_label_element( context, edtavEmployee_employeebalance_Internalname, "Vacation Days Left", " AttributeLabel", 1, true, "");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
+            /* Single line edit */
+            GxWebStd.gx_single_line_edit( context, edtavEmployee_employeebalance_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(AV16Employee.gxTpr_Employeebalance), 4, 0, ".", "")), StringUtil.LTrim( ((edtavEmployee_employeebalance_Enabled!=0) ? context.localUtil.Format( (decimal)(AV16Employee.gxTpr_Employeebalance), "ZZZ9") : context.localUtil.Format( (decimal)(AV16Employee.gxTpr_Employeebalance), "ZZZ9"))), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavEmployee_employeebalance_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavEmployee_employeebalance_Enabled, 0, "text", "1", 4, "chr", 1, "row", 4, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_Details.htm");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 DataContentCell DscTop", "start", "top", "", "", "div");
+            /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+cmbavLeaverequest_leaverequeststatus_Internalname+"\"", "", "div");
             /* Attribute/Variable Label */
             GxWebStd.gx_label_element( context, cmbavLeaverequest_leaverequeststatus_Internalname, "Request Status", " AttributeLabel", 1, true, "");
@@ -592,9 +624,6 @@ namespace GeneXus.Programs {
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-sm-6 DataContentCell DscTop", "start", "top", "", "", "div");
             /* Div Control */
@@ -612,6 +641,9 @@ namespace GeneXus.Programs {
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-sm-6 DataContentCell DscTop", "start", "top", "", "", "div");
             /* Div Control */
@@ -645,14 +677,14 @@ namespace GeneXus.Programs {
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-action-group CellMarginTop10", "start", "top", " "+"data-gx-actiongroup-type=\"toolbar\""+" ", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-button", "start", "top", "", "", "div");
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 67,'',false,'',0)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 72,'',false,'',0)\"";
             ClassString = "ButtonMaterialDefault";
             StyleString = "";
             GxWebStd.gx_button_ctrl( context, bttBtncancel_Internalname, "", "Cancel", bttBtncancel_Jsonclick, 1, "Cancel", "", StyleString, ClassString, 1, 1, "standard", "'"+""+"'"+",false,"+"'"+"ECANCEL."+"'", TempTags, "", context.GetButtonType( ), "HLP_Details.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-button", "start", "top", "", "", "div");
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 69,'',false,'',0)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 74,'',false,'',0)\"";
             ClassString = "ButtonMaterial";
             StyleString = "";
             GxWebStd.gx_button_ctrl( context, bttBtnapprovebutton_Internalname, "", "Approve", bttBtnapprovebutton_Jsonclick, 5, "Approve", "", StyleString, ClassString, bttBtnapprovebutton_Visible, 1, "standard", "'"+""+"'"+",false,"+"'"+"E\\'DOAPPROVEBUTTON\\'."+"'", TempTags, "", context.GetButtonType( ), "HLP_Details.htm");
@@ -670,11 +702,11 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, divHtml_bottomauxiliarcontrols_Internalname, 1, 0, "px", 0, "px", "Section", "start", "top", "", "", "div");
             /* Single line edit */
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 73,'',false,'',0)\"";
-            GxWebStd.gx_single_line_edit( context, edtavLeaverequest_leaverequestid_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(AV8LeaveRequest.gxTpr_Leaverequestid), 10, 0, ".", "")), StringUtil.LTrim( context.localUtil.Format( (decimal)(AV8LeaveRequest.gxTpr_Leaverequestid), "ZZZZZZZZZ9")), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+TempTags+" onchange=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onblur(this,73);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavLeaverequest_leaverequestid_Jsonclick, 0, "Attribute", "", "", "", "", edtavLeaverequest_leaverequestid_Visible, 1, 0, "text", "1", 10, "chr", 1, "row", 10, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_Details.htm");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 78,'',false,'',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtavLeaverequest_leaverequestid_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(AV8LeaveRequest.gxTpr_Leaverequestid), 10, 0, ".", "")), StringUtil.LTrim( context.localUtil.Format( (decimal)(AV8LeaveRequest.gxTpr_Leaverequestid), "ZZZZZZZZZ9")), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+TempTags+" onchange=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onblur(this,78);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavLeaverequest_leaverequestid_Jsonclick, 0, "Attribute", "", "", "", "", edtavLeaverequest_leaverequestid_Visible, 1, 0, "text", "1", 10, "chr", 1, "row", 10, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_Details.htm");
             /* Single line edit */
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 74,'',false,'',0)\"";
-            GxWebStd.gx_single_line_edit( context, edtavLeaverequest_leavetypeid_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(AV8LeaveRequest.gxTpr_Leavetypeid), 10, 0, ".", "")), StringUtil.LTrim( context.localUtil.Format( (decimal)(AV8LeaveRequest.gxTpr_Leavetypeid), "ZZZZZZZZZ9")), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+TempTags+" onchange=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onblur(this,74);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavLeaverequest_leavetypeid_Jsonclick, 0, "Attribute", "", "", "", "", edtavLeaverequest_leavetypeid_Visible, 1, 0, "text", "1", 10, "chr", 1, "row", 10, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_Details.htm");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 79,'',false,'',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtavLeaverequest_leavetypeid_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(AV8LeaveRequest.gxTpr_Leavetypeid), 10, 0, ".", "")), StringUtil.LTrim( context.localUtil.Format( (decimal)(AV8LeaveRequest.gxTpr_Leavetypeid), "ZZZZZZZZZ9")), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+TempTags+" onchange=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onblur(this,79);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavLeaverequest_leavetypeid_Jsonclick, 0, "Attribute", "", "", "", "", edtavLeaverequest_leavetypeid_Visible, 1, 0, "text", "1", 10, "chr", 1, "row", 10, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_Details.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -904,6 +936,8 @@ namespace GeneXus.Programs {
          AssignProp("", false, edtavLeaverequest_leaverequestenddate_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavLeaverequest_leaverequestenddate_Enabled), 5, 0), true);
          edtavLeaverequest_leaverequestduration_Enabled = 0;
          AssignProp("", false, edtavLeaverequest_leaverequestduration_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavLeaverequest_leaverequestduration_Enabled), 5, 0), true);
+         edtavEmployee_employeebalance_Enabled = 0;
+         AssignProp("", false, edtavEmployee_employeebalance_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavEmployee_employeebalance_Enabled), 5, 0), true);
          cmbavLeaverequest_leaverequeststatus.Enabled = 0;
          AssignProp("", false, cmbavLeaverequest_leaverequeststatus_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(cmbavLeaverequest_leaverequeststatus.Enabled), 5, 0), true);
          edtavLeaverequest_leaverequestdescription_Enabled = 0;
@@ -949,6 +983,8 @@ namespace GeneXus.Programs {
          AssignProp("", false, edtavLeaverequest_leaverequestenddate_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavLeaverequest_leaverequestenddate_Enabled), 5, 0), true);
          edtavLeaverequest_leaverequestduration_Enabled = 0;
          AssignProp("", false, edtavLeaverequest_leaverequestduration_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavLeaverequest_leaverequestduration_Enabled), 5, 0), true);
+         edtavEmployee_employeebalance_Enabled = 0;
+         AssignProp("", false, edtavEmployee_employeebalance_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavEmployee_employeebalance_Enabled), 5, 0), true);
          cmbavLeaverequest_leaverequeststatus.Enabled = 0;
          AssignProp("", false, cmbavLeaverequest_leaverequeststatus_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(cmbavLeaverequest_leaverequeststatus.Enabled), 5, 0), true);
          edtavLeaverequest_leaverequestdescription_Enabled = 0;
@@ -972,7 +1008,9 @@ namespace GeneXus.Programs {
          {
             /* Read saved SDTs. */
             ajax_req_read_hidden_sdt(cgiGet( "vLEAVEREQUEST"), AV8LeaveRequest);
+            ajax_req_read_hidden_sdt(cgiGet( "vEMPLOYEE"), AV16Employee);
             ajax_req_read_hidden_sdt(cgiGet( "Leaverequest"), AV8LeaveRequest);
+            ajax_req_read_hidden_sdt(cgiGet( "Employee"), AV16Employee);
             /* Read saved values. */
             Dvpanel_tableattributes_Width = cgiGet( "DVPANEL_TABLEATTRIBUTES_Width");
             Dvpanel_tableattributes_Autowidth = StringUtil.StrToBool( cgiGet( "DVPANEL_TABLEATTRIBUTES_Autowidth"));
@@ -1036,6 +1074,18 @@ namespace GeneXus.Programs {
             {
                AV8LeaveRequest.gxTpr_Leaverequestduration = context.localUtil.CToN( cgiGet( edtavLeaverequest_leaverequestduration_Internalname), ".", ",");
             }
+            if ( ( ( context.localUtil.CToN( cgiGet( edtavEmployee_employeebalance_Internalname), ".", ",") < Convert.ToDecimal( 0 )) ) || ( ( context.localUtil.CToN( cgiGet( edtavEmployee_employeebalance_Internalname), ".", ",") > Convert.ToDecimal( 9999 )) ) )
+            {
+               GX_msglist.addItem(context.GetMessage( "GXM_badnum", ""), 1, "EMPLOYEE_EMPLOYEEBALANCE");
+               GX_FocusControl = edtavEmployee_employeebalance_Internalname;
+               AssignAttri("", false, "GX_FocusControl", GX_FocusControl);
+               wbErr = true;
+               AV16Employee.gxTpr_Employeebalance = 0;
+            }
+            else
+            {
+               AV16Employee.gxTpr_Employeebalance = (short)(Math.Round(context.localUtil.CToN( cgiGet( edtavEmployee_employeebalance_Internalname), ".", ","), 18, MidpointRounding.ToEven));
+            }
             cmbavLeaverequest_leaverequeststatus.CurrentValue = cgiGet( cmbavLeaverequest_leaverequeststatus_Internalname);
             AV8LeaveRequest.gxTpr_Leaverequeststatus = cgiGet( cmbavLeaverequest_leaverequeststatus_Internalname);
             AV8LeaveRequest.gxTpr_Leaverequestdescription = cgiGet( edtavLeaverequest_leaverequestdescription_Internalname);
@@ -1086,6 +1136,7 @@ namespace GeneXus.Programs {
          /* Start Routine */
          returnInSub = false;
          AV8LeaveRequest.Load(AV15LeaveRequestId);
+         AV16Employee.Load(AV8LeaveRequest.gxTpr_Employeeid);
          divLayoutmaintable_Class = divLayoutmaintable_Class+" "+"EditForm";
          AssignProp("", false, divLayoutmaintable_Internalname, "Class", divLayoutmaintable_Class, true);
          AV12LoadSuccess = true;
@@ -1149,7 +1200,6 @@ namespace GeneXus.Programs {
             AV8LeaveRequest.gxTpr_Leaverequeststatus = "Approved";
             if ( AV8LeaveRequest.Update() )
             {
-               AV16Employee.Load(AV8LeaveRequest.gxTpr_Employeeid);
                AV17LeaveType.Load(AV8LeaveRequest.gxTpr_Leavetypeid);
                if ( StringUtil.StrCmp(AV17LeaveType.gxTpr_Leavetypevacationleave, "Yes") == 0 )
                {
@@ -1182,6 +1232,7 @@ namespace GeneXus.Programs {
          }
          /*  Sending Event outputs  */
          context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV8LeaveRequest", AV8LeaveRequest);
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV16Employee", AV16Employee);
       }
 
       protected void S122( )
@@ -1199,12 +1250,12 @@ namespace GeneXus.Programs {
       {
          /* 'SHOW MESSAGES' Routine */
          returnInSub = false;
-         AV30GXV13 = 1;
-         while ( AV30GXV13 <= AV10Messages.Count )
+         AV31GXV14 = 1;
+         while ( AV31GXV14 <= AV10Messages.Count )
          {
-            AV9Message = ((GeneXus.Utils.SdtMessages_Message)AV10Messages.Item(AV30GXV13));
+            AV9Message = ((GeneXus.Utils.SdtMessages_Message)AV10Messages.Item(AV31GXV14));
             GX_msglist.addItem(AV9Message.gxTpr_Description);
-            AV30GXV13 = (int)(AV30GXV13+1);
+            AV31GXV14 = (int)(AV31GXV14+1);
          }
       }
 
@@ -1264,7 +1315,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20246149114312", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20246149454618", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1280,7 +1331,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("details.js", "?20246149114313", false, true);
+         context.AddJavascriptSource("details.js", "?20246149454618", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Panel/BootstrapPanelRender.js", "", false, true);
@@ -1314,6 +1365,7 @@ namespace GeneXus.Programs {
          edtavLeaverequest_leaverequeststartdate_Internalname = "LEAVEREQUEST_LEAVEREQUESTSTARTDATE";
          edtavLeaverequest_leaverequestenddate_Internalname = "LEAVEREQUEST_LEAVEREQUESTENDDATE";
          edtavLeaverequest_leaverequestduration_Internalname = "LEAVEREQUEST_LEAVEREQUESTDURATION";
+         edtavEmployee_employeebalance_Internalname = "EMPLOYEE_EMPLOYEEBALANCE";
          cmbavLeaverequest_leaverequeststatus_Internalname = "LEAVEREQUEST_LEAVEREQUESTSTATUS";
          edtavLeaverequest_leaverequestdescription_Internalname = "LEAVEREQUEST_LEAVEREQUESTDESCRIPTION";
          edtavLeaverequest_leaverequestrejectionreason_Internalname = "LEAVEREQUEST_LEAVEREQUESTREJECTIONREASON";
@@ -1341,6 +1393,7 @@ namespace GeneXus.Programs {
          edtavLeaverequest_leaverequestrejectionreason_Enabled = -1;
          edtavLeaverequest_leaverequestdescription_Enabled = -1;
          cmbavLeaverequest_leaverequeststatus.Enabled = -1;
+         edtavEmployee_employeebalance_Enabled = -1;
          edtavLeaverequest_leaverequestduration_Enabled = -1;
          edtavLeaverequest_leaverequestenddate_Enabled = -1;
          edtavLeaverequest_leaverequeststartdate_Enabled = -1;
@@ -1356,6 +1409,8 @@ namespace GeneXus.Programs {
          edtavLeaverequest_leaverequestdescription_Enabled = 0;
          cmbavLeaverequest_leaverequeststatus_Jsonclick = "";
          cmbavLeaverequest_leaverequeststatus.Enabled = 0;
+         edtavEmployee_employeebalance_Jsonclick = "";
+         edtavEmployee_employeebalance_Enabled = 0;
          edtavLeaverequest_leaverequestduration_Jsonclick = "";
          edtavLeaverequest_leaverequestduration_Enabled = 0;
          edtavLeaverequest_leaverequestenddate_Jsonclick = "";
@@ -1402,10 +1457,10 @@ namespace GeneXus.Programs {
       {
          setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'AV8LeaveRequest',fld:'vLEAVEREQUEST',pic:''},{av:'radavLeaverequest_leavetypevacationleave'},{av:'GXV2',fld:'LEAVEREQUEST_LEAVETYPEVACATIONLEAVE',pic:''},{av:'AV11TrnMode',fld:'vTRNMODE',pic:'',hsh:true},{av:'AV15LeaveRequestId',fld:'vLEAVEREQUESTID',pic:'ZZZZZZZZZ9',hsh:true}]");
          setEventMetadata("REFRESH",",oparms:[{ctrl:'BTNAPPROVEBUTTON',prop:'Visible'}]}");
-         setEventMetadata("'DOAPPROVEBUTTON'","{handler:'E134M2',iparms:[{av:'AV8LeaveRequest',fld:'vLEAVEREQUEST',pic:''}]");
-         setEventMetadata("'DOAPPROVEBUTTON'",",oparms:[{av:'AV8LeaveRequest',fld:'vLEAVEREQUEST',pic:''}]}");
-         setEventMetadata("VALIDV_GXV8","{handler:'Validv_Gxv8',iparms:[]");
-         setEventMetadata("VALIDV_GXV8",",oparms:[]}");
+         setEventMetadata("'DOAPPROVEBUTTON'","{handler:'E134M2',iparms:[{av:'AV8LeaveRequest',fld:'vLEAVEREQUEST',pic:''},{av:'AV16Employee',fld:'vEMPLOYEE',pic:''}]");
+         setEventMetadata("'DOAPPROVEBUTTON'",",oparms:[{av:'AV8LeaveRequest',fld:'vLEAVEREQUEST',pic:''},{av:'AV16Employee',fld:'vEMPLOYEE',pic:''}]}");
+         setEventMetadata("VALIDV_GXV9","{handler:'Validv_Gxv9',iparms:[]");
+         setEventMetadata("VALIDV_GXV9",",oparms:[]}");
          return  ;
       }
 
@@ -1433,6 +1488,7 @@ namespace GeneXus.Programs {
          bodyStyle = "";
          GXKey = "";
          AV8LeaveRequest = new SdtLeaveRequest(context);
+         AV16Employee = new SdtEmployee(context);
          GX_FocusControl = "";
          Form = new GXWebForm();
          sPrefix = "";
@@ -1447,7 +1503,6 @@ namespace GeneXus.Programs {
          EvtRowId = "";
          sEvtType = "";
          AV10Messages = new GXBaseCollection<GeneXus.Utils.SdtMessages_Message>( context, "Message", "GeneXus");
-         AV16Employee = new SdtEmployee(context);
          AV17LeaveType = new SdtLeaveType(context);
          GXt_char1 = "";
          GXt_char2 = "";
@@ -1470,6 +1525,7 @@ namespace GeneXus.Programs {
          edtavLeaverequest_leaverequeststartdate_Enabled = 0;
          edtavLeaverequest_leaverequestenddate_Enabled = 0;
          edtavLeaverequest_leaverequestduration_Enabled = 0;
+         edtavEmployee_employeebalance_Enabled = 0;
          cmbavLeaverequest_leaverequeststatus.Enabled = 0;
          edtavLeaverequest_leaverequestdescription_Enabled = 0;
          edtavLeaverequest_leaverequestrejectionreason_Enabled = 0;
@@ -1490,12 +1546,13 @@ namespace GeneXus.Programs {
       private int edtavLeaverequest_leaverequeststartdate_Enabled ;
       private int edtavLeaverequest_leaverequestenddate_Enabled ;
       private int edtavLeaverequest_leaverequestduration_Enabled ;
+      private int edtavEmployee_employeebalance_Enabled ;
       private int edtavLeaverequest_leaverequestdescription_Enabled ;
       private int edtavLeaverequest_leaverequestrejectionreason_Enabled ;
       private int bttBtnapprovebutton_Visible ;
       private int edtavLeaverequest_leaverequestid_Visible ;
       private int edtavLeaverequest_leavetypeid_Visible ;
-      private int AV30GXV13 ;
+      private int AV31GXV14 ;
       private int idxLst ;
       private long AV15LeaveRequestId ;
       private long wcpOAV15LeaveRequestId ;
@@ -1536,6 +1593,8 @@ namespace GeneXus.Programs {
       private string edtavLeaverequest_leaverequestenddate_Jsonclick ;
       private string edtavLeaverequest_leaverequestduration_Internalname ;
       private string edtavLeaverequest_leaverequestduration_Jsonclick ;
+      private string edtavEmployee_employeebalance_Internalname ;
+      private string edtavEmployee_employeebalance_Jsonclick ;
       private string cmbavLeaverequest_leaverequeststatus_Internalname ;
       private string cmbavLeaverequest_leaverequeststatus_Jsonclick ;
       private string edtavLeaverequest_leaverequestdescription_Internalname ;
