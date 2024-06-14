@@ -175,26 +175,35 @@ namespace GeneXus.Programs {
          {
             A100CompanyId = P00AT2_A100CompanyId[0];
             A157CompanyLocationId = P00AT2_A157CompanyLocationId[0];
+            A101CompanyName = P00AT2_A101CompanyName[0];
             A125LeaveTypeName = P00AT2_A125LeaveTypeName[0];
             A124LeaveTypeId = P00AT2_A124LeaveTypeId[0];
             A157CompanyLocationId = P00AT2_A157CompanyLocationId[0];
+            A101CompanyName = P00AT2_A101CompanyName[0];
+            AV24CompanyName = StringUtil.Trim( A101CompanyName);
             AV8LeaveTypeNames.Add(StringUtil.Trim( A125LeaveTypeName), 0);
             pr_default.readNext(0);
          }
          pr_default.close(0);
-         AV8LeaveTypeNames.Add("Annual Leave Availability", 0);
+         AV8LeaveTypeNames.Add("Vacation Days Left", 0);
+         AV27excelCellStyle = new GeneXus.Programs.genexusoffice.office.excel.style.SdtExcelCellStyle(context);
+         AV27excelCellStyle.gxTpr_Font.gxTpr_Bold = true;
+         AV27excelCellStyle.gxTpr_Font.gxTpr_Color.setcolorrgb(25, 25, 112) ;
+         AV20ExcelCellRange = AV21excelSpreadsheet.cell(1, 1);
+         AV20ExcelCellRange.gxTpr_Valuetext = "Leave Report For "+AV24CompanyName;
+         AV20ExcelCellRange.setcellstyle( AV27excelCellStyle);
          AV12col = 1;
-         AV25GXV1 = 1;
-         while ( AV25GXV1 <= AV8LeaveTypeNames.Count )
+         AV29GXV1 = 1;
+         while ( AV29GXV1 <= AV8LeaveTypeNames.Count )
          {
-            AV15Name = AV8LeaveTypeNames.GetString(AV25GXV1);
-            AV9ExcelDocument.get_Cells(1, AV12col, 1, 1).Text = AV15Name;
-            AV9ExcelDocument.get_Cells(1, AV12col, 1, 1).Bold = 1;
-            AV9ExcelDocument.get_Cells(1, AV12col, 1, 1).Color = 11;
+            AV15Name = AV8LeaveTypeNames.GetString(AV29GXV1);
+            AV20ExcelCellRange = AV21excelSpreadsheet.cell(3, AV12col);
+            AV20ExcelCellRange.gxTpr_Valuetext = AV15Name;
+            AV20ExcelCellRange.setcellstyle( AV27excelCellStyle);
             AV12col = (short)(AV12col+1);
-            AV25GXV1 = (int)(AV25GXV1+1);
+            AV29GXV1 = (int)(AV29GXV1+1);
          }
-         AV13row = 2;
+         AV13row = 4;
          /* Using cursor P00AT3 */
          pr_default.execute(1, new Object[] {AV22CompanyLocationId});
          while ( (pr_default.getStatus(1) != 101) )
@@ -205,8 +214,10 @@ namespace GeneXus.Programs {
             A147EmployeeBalance = P00AT3_A147EmployeeBalance[0];
             A106EmployeeId = P00AT3_A106EmployeeId[0];
             A157CompanyLocationId = P00AT3_A157CompanyLocationId[0];
-            AV9ExcelDocument.get_Cells(AV13row, 1, 1, 1).Text = StringUtil.Trim( A148EmployeeName);
-            AV9ExcelDocument.get_Cells(AV13row, AV8LeaveTypeNames.IndexOf("Annual Leave Availability"), 1, 1).Number = A147EmployeeBalance;
+            AV20ExcelCellRange = AV21excelSpreadsheet.cell(AV13row, 1);
+            AV20ExcelCellRange.gxTpr_Valuetext = StringUtil.Trim( A148EmployeeName);
+            AV20ExcelCellRange = AV21excelSpreadsheet.cell(AV13row, AV8LeaveTypeNames.IndexOf("Vacation Days Left"));
+            AV20ExcelCellRange.gxTpr_Valuenumber = (decimal)(A147EmployeeBalance);
             /* Using cursor P00AT5 */
             pr_default.execute(2, new Object[] {A148EmployeeName, A100CompanyId});
             while ( (pr_default.getStatus(2) != 101) )
@@ -221,7 +232,8 @@ namespace GeneXus.Programs {
                if ( AV14count > 0 )
                {
                   AV17index = (short)(AV8LeaveTypeNames.IndexOf(StringUtil.Trim( A125LeaveTypeName)));
-                  AV9ExcelDocument.get_Cells(AV13row, AV17index, 1, 1).Number = AV14count;
+                  AV20ExcelCellRange = AV21excelSpreadsheet.cell(AV13row, AV17index);
+                  AV20ExcelCellRange.gxTpr_Valuenumber = (decimal)(AV14count);
                }
                pr_default.readNext(2);
             }
@@ -245,11 +257,7 @@ namespace GeneXus.Programs {
          /* 'OPENDOCUMENT' Routine */
          returnInSub = false;
          AV10Filename = "LeaveReport-" + StringUtil.Trim( StringUtil.Str( (decimal)(DateTimeUtil.Year( Gx_date)), 10, 0)) + "-" + StringUtil.Trim( StringUtil.Str( (decimal)(DateTimeUtil.Month( Gx_date)), 10, 0)) + "-" + StringUtil.Trim( StringUtil.Str( (decimal)(DateTimeUtil.Day( Gx_date)), 10, 0)) + ".xlsx";
-         AV9ExcelDocument.Open(AV10Filename);
-         /* Execute user subroutine: 'CHECKSTATUS' */
-         S121 ();
-         if (returnInSub) return;
-         AV9ExcelDocument.Clear();
+         AV21excelSpreadsheet.open( AV10Filename);
       }
 
       protected void S121( )
@@ -270,11 +278,17 @@ namespace GeneXus.Programs {
       {
          /* 'CLOSEDOCUMENT' Routine */
          returnInSub = false;
-         AV9ExcelDocument.Save();
-         /* Execute user subroutine: 'CHECKSTATUS' */
-         S121 ();
-         if (returnInSub) return;
-         AV9ExcelDocument.Close();
+         AV21excelSpreadsheet.gxTpr_Autofit = true;
+         AV26boolean = AV21excelSpreadsheet.save();
+         if ( AV26boolean )
+         {
+            AV21excelSpreadsheet.close();
+         }
+         else
+         {
+            GX_msglist.addItem("Error code:"+StringUtil.Str( (decimal)(AV21excelSpreadsheet.gxTpr_Errcode), 8, 0));
+            GX_msglist.addItem("Error description:"+AV21excelSpreadsheet.gxTpr_Errdescription);
+         }
          AV11Session.Set("WWPExportFilePath", AV10Filename);
          AV11Session.Set("WWPExportFileName", AV10Filename);
          AV10Filename = formatLink("wwpbaseobjects.wwp_downloadreport.aspx") ;
@@ -302,11 +316,16 @@ namespace GeneXus.Programs {
          scmdbuf = "";
          P00AT2_A100CompanyId = new long[1] ;
          P00AT2_A157CompanyLocationId = new long[1] ;
+         P00AT2_A101CompanyName = new string[] {""} ;
          P00AT2_A125LeaveTypeName = new string[] {""} ;
          P00AT2_A124LeaveTypeId = new long[1] ;
+         A101CompanyName = "";
          A125LeaveTypeName = "";
+         AV24CompanyName = "";
+         AV27excelCellStyle = new GeneXus.Programs.genexusoffice.office.excel.style.SdtExcelCellStyle(context);
+         AV20ExcelCellRange = new GeneXus.Programs.genexusoffice.office.excel.cells.SdtExcelCellRange(context);
+         AV21excelSpreadsheet = new GeneXus.Programs.genexusoffice.office.excel.SdtExcelSpreadsheet(context);
          AV15Name = "";
-         AV9ExcelDocument = new ExcelDocumentI();
          P00AT3_A100CompanyId = new long[1] ;
          P00AT3_A157CompanyLocationId = new long[1] ;
          P00AT3_A148EmployeeName = new string[] {""} ;
@@ -319,11 +338,12 @@ namespace GeneXus.Programs {
          P00AT5_A40000GXC1 = new decimal[1] ;
          P00AT5_n40000GXC1 = new bool[] {false} ;
          Gx_date = DateTime.MinValue;
+         AV9ExcelDocument = new ExcelDocumentI();
          AV11Session = context.GetSession();
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.aemployeeleavereport__default(),
             new Object[][] {
                 new Object[] {
-               P00AT2_A100CompanyId, P00AT2_A157CompanyLocationId, P00AT2_A125LeaveTypeName, P00AT2_A124LeaveTypeId
+               P00AT2_A100CompanyId, P00AT2_A157CompanyLocationId, P00AT2_A101CompanyName, P00AT2_A125LeaveTypeName, P00AT2_A124LeaveTypeId
                }
                , new Object[] {
                P00AT3_A100CompanyId, P00AT3_A157CompanyLocationId, P00AT3_A148EmployeeName, P00AT3_A147EmployeeBalance, P00AT3_A106EmployeeId
@@ -343,7 +363,7 @@ namespace GeneXus.Programs {
       private short A147EmployeeBalance ;
       private short AV14count ;
       private short AV17index ;
-      private int AV25GXV1 ;
+      private int AV29GXV1 ;
       private long AV22CompanyLocationId ;
       private long A100CompanyId ;
       private long A157CompanyLocationId ;
@@ -352,18 +372,23 @@ namespace GeneXus.Programs {
       private decimal A40000GXC1 ;
       private string AV10Filename ;
       private string scmdbuf ;
+      private string A101CompanyName ;
       private string A125LeaveTypeName ;
+      private string AV24CompanyName ;
       private string AV15Name ;
       private string A148EmployeeName ;
       private DateTime Gx_date ;
       private bool returnInSub ;
       private bool n40000GXC1 ;
+      private bool AV26boolean ;
       private string AV23ErrorMessage ;
+      private GeneXus.Programs.genexusoffice.office.excel.SdtExcelSpreadsheet AV21excelSpreadsheet ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private IDataStoreProvider pr_default ;
       private long[] P00AT2_A100CompanyId ;
       private long[] P00AT2_A157CompanyLocationId ;
+      private string[] P00AT2_A101CompanyName ;
       private string[] P00AT2_A125LeaveTypeName ;
       private long[] P00AT2_A124LeaveTypeId ;
       private long[] P00AT3_A100CompanyId ;
@@ -381,6 +406,8 @@ namespace GeneXus.Programs {
       private IGxSession AV11Session ;
       private ExcelDocumentI AV9ExcelDocument ;
       private GxSimpleCollection<string> AV8LeaveTypeNames ;
+      private GeneXus.Programs.genexusoffice.office.excel.cells.SdtExcelCellRange AV20ExcelCellRange ;
+      private GeneXus.Programs.genexusoffice.office.excel.style.SdtExcelCellStyle AV27excelCellStyle ;
    }
 
    public class aemployeeleavereport__default : DataStoreHelperBase, IDataStoreHelper
@@ -414,7 +441,7 @@ namespace GeneXus.Programs {
           new ParDef("CompanyId",GXType.Int64,10,0)
           };
           def= new CursorDef[] {
-              new CursorDef("P00AT2", "SELECT T1.CompanyId, T2.CompanyLocationId, T1.LeaveTypeName, T1.LeaveTypeId FROM (LeaveType T1 INNER JOIN Company T2 ON T2.CompanyId = T1.CompanyId) WHERE T2.CompanyLocationId = :AV22CompanyLocationId ORDER BY T1.LeaveTypeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00AT2,100, GxCacheFrequency.OFF ,false,false )
+              new CursorDef("P00AT2", "SELECT T1.CompanyId, T2.CompanyLocationId, T2.CompanyName, T1.LeaveTypeName, T1.LeaveTypeId FROM (LeaveType T1 INNER JOIN Company T2 ON T2.CompanyId = T1.CompanyId) WHERE T2.CompanyLocationId = :AV22CompanyLocationId ORDER BY T1.LeaveTypeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00AT2,100, GxCacheFrequency.OFF ,false,false )
              ,new CursorDef("P00AT3", "SELECT T1.CompanyId, T2.CompanyLocationId, T1.EmployeeName, T1.EmployeeBalance, T1.EmployeeId FROM (Employee T1 INNER JOIN Company T2 ON T2.CompanyId = T1.CompanyId) WHERE T2.CompanyLocationId = :AV22CompanyLocationId ORDER BY T1.EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00AT3,100, GxCacheFrequency.OFF ,true,false )
              ,new CursorDef("P00AT5", "SELECT T1.LeaveTypeId, T1.CompanyId, T1.LeaveTypeName, COALESCE( T2.GXC1, 0) AS GXC1 FROM (LeaveType T1 LEFT JOIN LATERAL (SELECT SUM(T3.LeaveRequestDuration) AS GXC1, T3.LeaveTypeId FROM (LeaveRequest T3 INNER JOIN Employee T4 ON T4.EmployeeId = T3.EmployeeId) WHERE (T1.LeaveTypeId = T3.LeaveTypeId) AND (T4.EmployeeName = ( :EmployeeName)) GROUP BY T3.LeaveTypeId ) T2 ON T2.LeaveTypeId = T1.LeaveTypeId) WHERE T1.CompanyId = :CompanyId ORDER BY T1.CompanyId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00AT5,100, GxCacheFrequency.OFF ,false,false )
           };
@@ -431,7 +458,8 @@ namespace GeneXus.Programs {
                 ((long[]) buf[0])[0] = rslt.getLong(1);
                 ((long[]) buf[1])[0] = rslt.getLong(2);
                 ((string[]) buf[2])[0] = rslt.getString(3, 100);
-                ((long[]) buf[3])[0] = rslt.getLong(4);
+                ((string[]) buf[3])[0] = rslt.getString(4, 100);
+                ((long[]) buf[4])[0] = rslt.getLong(5);
                 return;
              case 1 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);

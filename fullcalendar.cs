@@ -892,16 +892,15 @@ namespace GeneXus.Programs {
       {
          /* Start Routine */
          returnInSub = false;
-         GXt_objcol_SdtSDTLeaveType1 = AV23SDTLeaveTypes;
-         new dpleavetype(context ).execute( out  GXt_objcol_SdtSDTLeaveType1) ;
-         AV23SDTLeaveTypes = GXt_objcol_SdtSDTLeaveType1;
+         GXt_int1 = AV18CompanyId;
+         new getloggedinusercompanyid(context ).execute( out  GXt_int1) ;
+         AV18CompanyId = GXt_int1;
+         AssignAttri("", false, "AV18CompanyId", StringUtil.LTrimStr( (decimal)(AV18CompanyId), 10, 0));
+         GXt_objcol_SdtSDTLeaveType2 = AV23SDTLeaveTypes;
+         new dpleavetype(context ).execute(  AV18CompanyId, out  GXt_objcol_SdtSDTLeaveType2) ;
+         AV23SDTLeaveTypes = GXt_objcol_SdtSDTLeaveType2;
          Ucvistimeline1_Leavetypes = AV23SDTLeaveTypes.ToJSonString(false);
          ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "leavetypes", Ucvistimeline1_Leavetypes);
-         new logtofile(context ).execute(  AV23SDTLeaveTypes.ToJSonString(false)) ;
-         GXt_int2 = AV18CompanyId;
-         new getloggedinusercompanyid(context ).execute( out  GXt_int2) ;
-         AV18CompanyId = GXt_int2;
-         AssignAttri("", false, "AV18CompanyId", StringUtil.LTrimStr( (decimal)(AV18CompanyId), 10, 0));
          if ( ! (0==AV18CompanyId) )
          {
             /* Using cursor H00564 */
@@ -1078,7 +1077,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202461321153388", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202461412284963", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1094,7 +1093,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("fullcalendar.js", "?202461321153389", false, true);
+         context.AddJavascriptSource("fullcalendar.js", "?202461412284964", false, true);
          context.AddJavascriptSource("UserControls/UCVISTimelineRender.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/daterangepicker/locales.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/daterangepicker/wwp-daterangepicker.js", "", false, true);
@@ -1244,7 +1243,7 @@ namespace GeneXus.Programs {
          H00562_A158CompanyLocationName = new string[] {""} ;
          H00563_A157CompanyLocationId = new long[1] ;
          H00563_A158CompanyLocationName = new string[] {""} ;
-         GXt_objcol_SdtSDTLeaveType1 = new GXBaseCollection<SdtSDTLeaveType>( context, "SDTLeaveType", "YTT_version4");
+         GXt_objcol_SdtSDTLeaveType2 = new GXBaseCollection<SdtSDTLeaveType>( context, "SDTLeaveType", "YTT_version4");
          H00564_A100CompanyId = new long[1] ;
          H00564_A157CompanyLocationId = new long[1] ;
          GXt_SdtWWPDateRangePickerOptions4 = new GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions(context);
@@ -1295,7 +1294,7 @@ namespace GeneXus.Programs {
       private int idxLst ;
       private long AV11CompanyLocationId ;
       private long AV18CompanyId ;
-      private long GXt_int2 ;
+      private long GXt_int1 ;
       private long A100CompanyId ;
       private long A157CompanyLocationId ;
       private string gxfirstwebparm ;
@@ -1375,7 +1374,7 @@ namespace GeneXus.Programs {
       private GXBaseCollection<SdtSDTLeaveEvent> AV6LeaveEvents ;
       private GXBaseCollection<SdtSDTLeaveEvent> GXt_objcol_SdtSDTLeaveEvent5 ;
       private GXBaseCollection<SdtSDTLeaveType> AV23SDTLeaveTypes ;
-      private GXBaseCollection<SdtSDTLeaveType> GXt_objcol_SdtSDTLeaveType1 ;
+      private GXBaseCollection<SdtSDTLeaveType> GXt_objcol_SdtSDTLeaveType2 ;
       private GXWebForm Form ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions AV17DateRange_RangePickerOptions ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions GXt_SdtWWPDateRangePickerOptions4 ;

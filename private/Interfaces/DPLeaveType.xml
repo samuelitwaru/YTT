@@ -1,6 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <CallableObject guid="72894411-eb41-450e-a64e-6e2475e82dca" name="DPLeaveType" description="DPLeave Type" namespace="GeneXus.Programs">
-  <Signature name="parm">
+  <Signature name="Par">
+    <Parameter name="CompanyId">
+      <Field>
+        <Properties>
+          <Property>
+            <Name>Type</Name>
+            <Value>Numeric</Value>
+          </Property>
+          <Property>
+            <Name>Length</Name>
+            <Value>10</Value>
+          </Property>
+        </Properties>
+      </Field>
+    </Parameter>
     <Parameter name="ReturnValue" accessor="out" collection="true">
       <Field name="SDTLeaveType" description="SDTLeave Type">
         <Fields>
