@@ -123,21 +123,19 @@ namespace GeneXus.Programs {
             A157CompanyLocationId = P001S2_A157CompanyLocationId[0];
             A132LeaveRequestStatus = P001S2_A132LeaveRequestStatus[0];
             A127LeaveRequestId = P001S2_A127LeaveRequestId[0];
-            A125LeaveTypeName = P001S2_A125LeaveTypeName[0];
             A129LeaveRequestStartDate = P001S2_A129LeaveRequestStartDate[0];
             A130LeaveRequestEndDate = P001S2_A130LeaveRequestEndDate[0];
             A106EmployeeId = P001S2_A106EmployeeId[0];
             A175LeaveTypeColorApproved = P001S2_A175LeaveTypeColorApproved[0];
             n175LeaveTypeColorApproved = P001S2_n175LeaveTypeColorApproved[0];
             A100CompanyId = P001S2_A100CompanyId[0];
-            A125LeaveTypeName = P001S2_A125LeaveTypeName[0];
             A175LeaveTypeColorApproved = P001S2_A175LeaveTypeColorApproved[0];
             n175LeaveTypeColorApproved = P001S2_n175LeaveTypeColorApproved[0];
             A157CompanyLocationId = P001S2_A157CompanyLocationId[0];
             Gxm1sdtleaveevent = new SdtSDTLeaveEvent(context);
             Gxm2rootcol.Add(Gxm1sdtleaveevent, 0);
             Gxm1sdtleaveevent.gxTpr_Id = A127LeaveRequestId;
-            Gxm1sdtleaveevent.gxTpr_Content = StringUtil.Trim( A125LeaveTypeName);
+            Gxm1sdtleaveevent.gxTpr_Content = "";
             GXt_char1 = "";
             new formatdatetime(context ).execute(  A129LeaveRequestStartDate,  "YYYY-MM-DD", out  GXt_char1) ;
             Gxm1sdtleaveevent.gxTpr_Start = GXt_char1;
@@ -175,14 +173,12 @@ namespace GeneXus.Programs {
          P001S2_A157CompanyLocationId = new long[1] ;
          P001S2_A132LeaveRequestStatus = new string[] {""} ;
          P001S2_A127LeaveRequestId = new long[1] ;
-         P001S2_A125LeaveTypeName = new string[] {""} ;
          P001S2_A129LeaveRequestStartDate = new DateTime[] {DateTime.MinValue} ;
          P001S2_A130LeaveRequestEndDate = new DateTime[] {DateTime.MinValue} ;
          P001S2_A106EmployeeId = new long[1] ;
          P001S2_A175LeaveTypeColorApproved = new string[] {""} ;
          P001S2_n175LeaveTypeColorApproved = new bool[] {false} ;
          A132LeaveRequestStatus = "";
-         A125LeaveTypeName = "";
          A129LeaveRequestStartDate = DateTime.MinValue;
          A130LeaveRequestEndDate = DateTime.MinValue;
          A175LeaveTypeColorApproved = "";
@@ -191,8 +187,7 @@ namespace GeneXus.Programs {
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.dpleaveevent__default(),
             new Object[][] {
                 new Object[] {
-               P001S2_A124LeaveTypeId, P001S2_A100CompanyId, P001S2_A157CompanyLocationId, P001S2_A132LeaveRequestStatus, P001S2_A127LeaveRequestId, P001S2_A125LeaveTypeName, P001S2_A129LeaveRequestStartDate, P001S2_A130LeaveRequestEndDate, P001S2_A106EmployeeId, P001S2_A175LeaveTypeColorApproved,
-               P001S2_n175LeaveTypeColorApproved
+               P001S2_A124LeaveTypeId, P001S2_A100CompanyId, P001S2_A157CompanyLocationId, P001S2_A132LeaveRequestStatus, P001S2_A127LeaveRequestId, P001S2_A129LeaveRequestStartDate, P001S2_A130LeaveRequestEndDate, P001S2_A106EmployeeId, P001S2_A175LeaveTypeColorApproved, P001S2_n175LeaveTypeColorApproved
                }
             }
          );
@@ -207,7 +202,6 @@ namespace GeneXus.Programs {
       private long A106EmployeeId ;
       private string scmdbuf ;
       private string A132LeaveRequestStatus ;
-      private string A125LeaveTypeName ;
       private string A175LeaveTypeColorApproved ;
       private string GXt_char1 ;
       private DateTime AV5FromDate ;
@@ -223,7 +217,6 @@ namespace GeneXus.Programs {
       private long[] P001S2_A157CompanyLocationId ;
       private string[] P001S2_A132LeaveRequestStatus ;
       private long[] P001S2_A127LeaveRequestId ;
-      private string[] P001S2_A125LeaveTypeName ;
       private DateTime[] P001S2_A129LeaveRequestStartDate ;
       private DateTime[] P001S2_A130LeaveRequestEndDate ;
       private long[] P001S2_A106EmployeeId ;
@@ -254,7 +247,7 @@ namespace GeneXus.Programs {
           new ParDef("AV7CompanyLocationId",GXType.Int64,10,0)
           };
           def= new CursorDef[] {
-              new CursorDef("P001S2", "SELECT T1.LeaveTypeId, T2.CompanyId, T3.CompanyLocationId, T1.LeaveRequestStatus, T1.LeaveRequestId, T2.LeaveTypeName, T1.LeaveRequestStartDate, T1.LeaveRequestEndDate, T1.EmployeeId, T2.LeaveTypeColorApproved FROM ((LeaveRequest T1 INNER JOIN LeaveType T2 ON T2.LeaveTypeId = T1.LeaveTypeId) INNER JOIN Company T3 ON T3.CompanyId = T2.CompanyId) WHERE (T1.LeaveRequestStatus = ( 'Approved') or T1.LeaveRequestStatus = ( 'Pending')) AND (T3.CompanyLocationId = :AV7CompanyLocationId) ORDER BY T1.LeaveRequestId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP001S2,100, GxCacheFrequency.OFF ,true,false )
+              new CursorDef("P001S2", "SELECT T1.LeaveTypeId, T2.CompanyId, T3.CompanyLocationId, T1.LeaveRequestStatus, T1.LeaveRequestId, T1.LeaveRequestStartDate, T1.LeaveRequestEndDate, T1.EmployeeId, T2.LeaveTypeColorApproved FROM ((LeaveRequest T1 INNER JOIN LeaveType T2 ON T2.LeaveTypeId = T1.LeaveTypeId) INNER JOIN Company T3 ON T3.CompanyId = T2.CompanyId) WHERE (T1.LeaveRequestStatus = ( 'Approved') or T1.LeaveRequestStatus = ( 'Pending')) AND (T3.CompanyLocationId = :AV7CompanyLocationId) ORDER BY T1.LeaveRequestId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP001S2,100, GxCacheFrequency.OFF ,true,false )
           };
        }
     }
@@ -271,12 +264,11 @@ namespace GeneXus.Programs {
                 ((long[]) buf[2])[0] = rslt.getLong(3);
                 ((string[]) buf[3])[0] = rslt.getString(4, 20);
                 ((long[]) buf[4])[0] = rslt.getLong(5);
-                ((string[]) buf[5])[0] = rslt.getString(6, 100);
+                ((DateTime[]) buf[5])[0] = rslt.getGXDate(6);
                 ((DateTime[]) buf[6])[0] = rslt.getGXDate(7);
-                ((DateTime[]) buf[7])[0] = rslt.getGXDate(8);
-                ((long[]) buf[8])[0] = rslt.getLong(9);
-                ((string[]) buf[9])[0] = rslt.getString(10, 20);
-                ((bool[]) buf[10])[0] = rslt.wasNull(10);
+                ((long[]) buf[7])[0] = rslt.getLong(8);
+                ((string[]) buf[8])[0] = rslt.getString(9, 20);
+                ((bool[]) buf[9])[0] = rslt.wasNull(9);
                 return;
        }
     }
