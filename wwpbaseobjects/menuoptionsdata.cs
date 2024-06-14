@@ -147,7 +147,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          Gxm3dvelop_menu_subitems.gxTpr_Link = formatLink("reports.aspx") ;
          Gxm3dvelop_menu_subitems.gxTpr_Linktarget = "";
          Gxm3dvelop_menu_subitems.gxTpr_Iconclass = "";
-         Gxm3dvelop_menu_subitems.gxTpr_Caption = "General Reports";
+         Gxm3dvelop_menu_subitems.gxTpr_Caption = "Project Overview";
          Gxm3dvelop_menu_subitems = new GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item(context);
          Gxm1dvelop_menu.gxTpr_Subitems.Add(Gxm3dvelop_menu_subitems, 0);
          AV5id = (short)(AV5id+1);
@@ -156,7 +156,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          Gxm3dvelop_menu_subitems.gxTpr_Link = formatLink("employeeweekreport.aspx") ;
          Gxm3dvelop_menu_subitems.gxTpr_Linktarget = "";
          Gxm3dvelop_menu_subitems.gxTpr_Iconclass = "";
-         Gxm3dvelop_menu_subitems.gxTpr_Caption = "Week Reports";
+         Gxm3dvelop_menu_subitems.gxTpr_Caption = "Employee Week Hours";
          Gxm1dvelop_menu = new GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item(context);
          Gxm2rootcol.Add(Gxm1dvelop_menu, 0);
          AV5id = (short)(AV5id+1);

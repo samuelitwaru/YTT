@@ -218,6 +218,62 @@
               </Property>
             </Properties>
           </Field>
+          <Field name="Mon_IsHoliday" description="Mon_Is Holiday">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>Boolean</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="Tue_IsHoliday" description="Tue_Is Holiday">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>Boolean</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="Wed_IsHoliday" description="Wed_Is Holiday">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>Boolean</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="Thu_IsHoliday" description="Thu_Is Holiday">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>Boolean</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="Fri_IsHoliday" description="Fri_Is Holiday">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>Boolean</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="Sat_IsHoliday" description="Sat_Is Holiday">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>Boolean</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="Sun_IsHoliday" description="Sun_Is Holiday">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>Boolean</Value>
+              </Property>
+            </Properties>
+          </Field>
           <Field name="Mon_Formatted" description="Mon_Formatted">
             <Properties>
               <Property>

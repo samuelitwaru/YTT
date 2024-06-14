@@ -222,36 +222,57 @@ namespace GeneXus.Programs {
             Gxm1sdtemployeeweekreport.gxTpr_Leave = AV15Leave;
             Gxm1sdtemployeeweekreport.gxTpr_Total = AV12Total;
             Gxm1sdtemployeeweekreport.gxTpr_Expected = AV18Expected;
-            GXt_char3 = "";
-            new formattime(context ).execute(  AV5Mon, out  GXt_char3) ;
-            Gxm1sdtemployeeweekreport.gxTpr_Mon_formatted = GXt_char3;
-            GXt_char3 = "";
-            new formattime(context ).execute(  AV6Tue, out  GXt_char3) ;
-            Gxm1sdtemployeeweekreport.gxTpr_Tue_formatted = GXt_char3;
-            GXt_char3 = "";
-            new formattime(context ).execute(  AV7Wed, out  GXt_char3) ;
-            Gxm1sdtemployeeweekreport.gxTpr_Wed_formatted = GXt_char3;
-            GXt_char3 = "";
-            new formattime(context ).execute(  AV8Thu, out  GXt_char3) ;
-            Gxm1sdtemployeeweekreport.gxTpr_Thu_formatted = GXt_char3;
-            GXt_char3 = "";
-            new formattime(context ).execute(  AV9Fri, out  GXt_char3) ;
-            Gxm1sdtemployeeweekreport.gxTpr_Fri_formatted = GXt_char3;
-            GXt_char3 = "";
-            new formattime(context ).execute(  AV10Sat, out  GXt_char3) ;
-            Gxm1sdtemployeeweekreport.gxTpr_Sat_formatted = GXt_char3;
-            GXt_char3 = "";
-            new formattime(context ).execute(  AV11Sun, out  GXt_char3) ;
-            Gxm1sdtemployeeweekreport.gxTpr_Sun_formatted = GXt_char3;
-            GXt_char3 = "";
-            new formattime(context ).execute(  AV15Leave, out  GXt_char3) ;
-            Gxm1sdtemployeeweekreport.gxTpr_Leave_formatted = GXt_char3;
-            GXt_char3 = "";
-            new formattime(context ).execute(  AV12Total, out  GXt_char3) ;
-            Gxm1sdtemployeeweekreport.gxTpr_Total_formatted = GXt_char3;
-            GXt_char3 = "";
-            new formattime(context ).execute(  AV18Expected, out  GXt_char3) ;
-            Gxm1sdtemployeeweekreport.gxTpr_Expected_formatted = GXt_char3;
+            GXt_boolean3 = false;
+            new isdateholiday(context ).execute(  AV13FromDate,  A106EmployeeId, out  GXt_boolean3) ;
+            Gxm1sdtemployeeweekreport.gxTpr_Sun_isholiday = GXt_boolean3;
+            GXt_boolean3 = false;
+            new isdateholiday(context ).execute(  DateTimeUtil.DAdd( AV13FromDate, (1)),  A106EmployeeId, out  GXt_boolean3) ;
+            Gxm1sdtemployeeweekreport.gxTpr_Mon_isholiday = GXt_boolean3;
+            GXt_boolean3 = false;
+            new isdateholiday(context ).execute(  DateTimeUtil.DAdd( AV13FromDate, (2)),  A106EmployeeId, out  GXt_boolean3) ;
+            Gxm1sdtemployeeweekreport.gxTpr_Tue_isholiday = GXt_boolean3;
+            GXt_boolean3 = false;
+            new isdateholiday(context ).execute(  DateTimeUtil.DAdd( AV13FromDate, (3)),  A106EmployeeId, out  GXt_boolean3) ;
+            Gxm1sdtemployeeweekreport.gxTpr_Wed_isholiday = GXt_boolean3;
+            GXt_boolean3 = false;
+            new isdateholiday(context ).execute(  DateTimeUtil.DAdd( AV13FromDate, (4)),  A106EmployeeId, out  GXt_boolean3) ;
+            Gxm1sdtemployeeweekreport.gxTpr_Thu_isholiday = GXt_boolean3;
+            GXt_boolean3 = false;
+            new isdateholiday(context ).execute(  DateTimeUtil.DAdd( AV13FromDate, (5)),  A106EmployeeId, out  GXt_boolean3) ;
+            Gxm1sdtemployeeweekreport.gxTpr_Fri_isholiday = GXt_boolean3;
+            GXt_boolean3 = false;
+            new isdateholiday(context ).execute(  DateTimeUtil.DAdd( AV13FromDate, (6)),  A106EmployeeId, out  GXt_boolean3) ;
+            Gxm1sdtemployeeweekreport.gxTpr_Sat_isholiday = GXt_boolean3;
+            GXt_char4 = "";
+            new formattime(context ).execute(  AV5Mon, out  GXt_char4) ;
+            Gxm1sdtemployeeweekreport.gxTpr_Mon_formatted = GXt_char4;
+            GXt_char4 = "";
+            new formattime(context ).execute(  AV6Tue, out  GXt_char4) ;
+            Gxm1sdtemployeeweekreport.gxTpr_Tue_formatted = GXt_char4;
+            GXt_char4 = "";
+            new formattime(context ).execute(  AV7Wed, out  GXt_char4) ;
+            Gxm1sdtemployeeweekreport.gxTpr_Wed_formatted = GXt_char4;
+            GXt_char4 = "";
+            new formattime(context ).execute(  AV8Thu, out  GXt_char4) ;
+            Gxm1sdtemployeeweekreport.gxTpr_Thu_formatted = GXt_char4;
+            GXt_char4 = "";
+            new formattime(context ).execute(  AV9Fri, out  GXt_char4) ;
+            Gxm1sdtemployeeweekreport.gxTpr_Fri_formatted = GXt_char4;
+            GXt_char4 = "";
+            new formattime(context ).execute(  AV10Sat, out  GXt_char4) ;
+            Gxm1sdtemployeeweekreport.gxTpr_Sat_formatted = GXt_char4;
+            GXt_char4 = "";
+            new formattime(context ).execute(  AV11Sun, out  GXt_char4) ;
+            Gxm1sdtemployeeweekreport.gxTpr_Sun_formatted = GXt_char4;
+            GXt_char4 = "";
+            new formattime(context ).execute(  AV15Leave, out  GXt_char4) ;
+            Gxm1sdtemployeeweekreport.gxTpr_Leave_formatted = GXt_char4;
+            GXt_char4 = "";
+            new formattime(context ).execute(  AV12Total, out  GXt_char4) ;
+            Gxm1sdtemployeeweekreport.gxTpr_Total_formatted = GXt_char4;
+            GXt_char4 = "";
+            new formattime(context ).execute(  AV18Expected, out  GXt_char4) ;
+            Gxm1sdtemployeeweekreport.gxTpr_Expected_formatted = GXt_char4;
             pr_default.readNext(0);
          }
          pr_default.close(0);
@@ -313,7 +334,7 @@ namespace GeneXus.Programs {
          P001U10_n40015GXC16 = new bool[] {false} ;
          A148EmployeeName = "";
          Gxm1sdtemployeeweekreport = new SdtSDTEmployeeWeekReport(context);
-         GXt_char3 = "";
+         GXt_char4 = "";
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.dpemployeeweekreport__default(),
             new Object[][] {
                 new Object[] {
@@ -362,7 +383,7 @@ namespace GeneXus.Programs {
       private long AV18Expected ;
       private string scmdbuf ;
       private string A148EmployeeName ;
-      private string GXt_char3 ;
+      private string GXt_char4 ;
       private DateTime AV13FromDate ;
       private DateTime AV16ToDate ;
       private bool n40000GXC1 ;
@@ -381,6 +402,7 @@ namespace GeneXus.Programs {
       private bool n40013GXC14 ;
       private bool n40014GXC15 ;
       private bool n40015GXC16 ;
+      private bool GXt_boolean3 ;
       private GxSimpleCollection<long> AV14CompanyLocationId ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
@@ -435,8 +457,8 @@ namespace GeneXus.Programs {
       {
          System.Text.StringBuilder sWhereString = new System.Text.StringBuilder();
          string scmdbuf;
-         short[] GXv_int4 = new short[9];
-         Object[] GXv_Object5 = new Object[2];
+         short[] GXv_int5 = new short[9];
+         Object[] GXv_Object6 = new Object[2];
          scmdbuf = "SELECT T1.CompanyId, T2.CompanyLocationId, T1.EmployeeId, T1.EmployeeName, COALESCE( T3.GXC1, 0) AS GXC1, COALESCE( T3.GXC2, 0) AS GXC2, COALESCE( T4.GXC1, 0) AS GXC3, COALESCE( T4.GXC2, 0) AS GXC4, COALESCE( T5.GXC1, 0) AS GXC5, COALESCE( T5.GXC2, 0) AS GXC6, COALESCE( T6.GXC1, 0) AS GXC7, COALESCE( T6.GXC2, 0) AS GXC8, COALESCE( T7.GXC1, 0) AS GXC9, COALESCE( T7.GXC2, 0) AS GXC10, COALESCE( T8.GXC1, 0) AS GXC11, COALESCE( T8.GXC2, 0) AS GXC12, COALESCE( T9.GXC1, 0) AS GXC13, COALESCE( T9.GXC2, 0) AS GXC14, COALESCE( T10.GXC1, 0) AS GXC15, COALESCE( T10.GXC2, 0) AS GXC16 FROM (((((((((Employee T1 INNER JOIN Company T2 ON T2.CompanyId = T1.CompanyId) LEFT JOIN LATERAL (SELECT SUM(WorkHourLogHour) AS GXC1, EmployeeId, SUM(WorkHourLogMinute) AS GXC2 FROM WorkHourLog WHERE (T1.EmployeeId = EmployeeId) AND (WorkHourLogDate = :AV13FromDate) GROUP BY EmployeeId ) T3 ON T3.EmployeeId = T1.EmployeeId) LEFT JOIN LATERAL (SELECT SUM(WorkHourLogHour) AS GXC1, EmployeeId, SUM(WorkHourLogMinute) AS GXC2 FROM WorkHourLog WHERE (T1.EmployeeId = EmployeeId) AND (WorkHourLogDate = (CAST(:AV13FromDate AS date) + CAST (( 1) || ' DAY' AS INTERVAL))) GROUP BY EmployeeId ) T4 ON T4.EmployeeId = T1.EmployeeId) LEFT JOIN LATERAL (SELECT SUM(WorkHourLogHour) AS GXC1, EmployeeId, SUM(WorkHourLogMinute) AS GXC2 FROM WorkHourLog WHERE (T1.EmployeeId = EmployeeId) AND (WorkHourLogDate = (CAST(:AV13FromDate AS date) + CAST (( 2) || ' DAY' AS INTERVAL))) GROUP BY EmployeeId ) T5 ON T5.EmployeeId = T1.EmployeeId) LEFT JOIN LATERAL (SELECT SUM(WorkHourLogHour) AS GXC1, EmployeeId, SUM(WorkHourLogMinute) AS GXC2 FROM WorkHourLog WHERE (T1.EmployeeId = EmployeeId) AND (WorkHourLogDate = (CAST(:AV13FromDate AS date) + CAST (( 3) || ' DAY' AS INTERVAL))) GROUP BY EmployeeId ) T6 ON T6.EmployeeId = T1.EmployeeId)";
          scmdbuf += " LEFT JOIN LATERAL (SELECT SUM(WorkHourLogHour) AS GXC1, EmployeeId, SUM(WorkHourLogMinute) AS GXC2 FROM WorkHourLog WHERE (T1.EmployeeId = EmployeeId) AND (WorkHourLogDate = (CAST(:AV13FromDate AS date) + CAST (( 4) || ' DAY' AS INTERVAL))) GROUP BY EmployeeId ) T7 ON T7.EmployeeId = T1.EmployeeId) LEFT JOIN LATERAL (SELECT SUM(WorkHourLogHour) AS GXC1, EmployeeId, SUM(WorkHourLogMinute) AS GXC2 FROM WorkHourLog WHERE (T1.EmployeeId = EmployeeId) AND (WorkHourLogDate = (CAST(:AV13FromDate AS date) + CAST (( 5) || ' DAY' AS INTERVAL))) GROUP BY EmployeeId ) T8 ON T8.EmployeeId = T1.EmployeeId) LEFT JOIN LATERAL (SELECT SUM(WorkHourLogHour) AS GXC1, EmployeeId, SUM(WorkHourLogMinute) AS GXC2 FROM WorkHourLog WHERE (T1.EmployeeId = EmployeeId) AND (WorkHourLogDate = (CAST(:AV13FromDate AS date) + CAST (( 6) || ' DAY' AS INTERVAL))) GROUP BY EmployeeId ) T9 ON T9.EmployeeId = T1.EmployeeId) LEFT JOIN LATERAL (SELECT SUM(WorkHourLogHour) AS GXC1, EmployeeId, SUM(WorkHourLogMinute) AS GXC2 FROM WorkHourLog WHERE (T1.EmployeeId = EmployeeId) AND (WorkHourLogDate >= :AV13FromDate and WorkHourLogDate <= (CAST(:AV13FromDate AS date) + CAST (( 6) || ' DAY' AS INTERVAL))) GROUP BY EmployeeId ) T10 ON T10.EmployeeId = T1.EmployeeId)";
          if ( AV14CompanyLocationId_Count > 0 )
@@ -445,9 +467,9 @@ namespace GeneXus.Programs {
          }
          scmdbuf += sWhereString;
          scmdbuf += " ORDER BY T1.EmployeeId";
-         GXv_Object5[0] = scmdbuf;
-         GXv_Object5[1] = GXv_int4;
-         return GXv_Object5 ;
+         GXv_Object6[0] = scmdbuf;
+         GXv_Object6[1] = GXv_int5;
+         return GXv_Object6 ;
       }
 
       public override Object [] getDynamicStatement( int cursor ,

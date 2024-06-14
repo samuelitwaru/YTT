@@ -4,7 +4,7 @@
 	{{gxTpr_endDate}}{{endDate}}
 	{{gxTpr_item}}{{item}}
 </div>
-<div id="visualization" style="margin: 5px">
+<div id="visualization" style="">
 	
 </div>
 

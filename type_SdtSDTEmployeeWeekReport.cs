@@ -112,6 +112,27 @@ namespace GeneXus.Programs
 			AddObjectProperty("Total", gxTpr_Total, false);
 
 
+			AddObjectProperty("Mon_IsHoliday", gxTpr_Mon_isholiday, false);
+
+
+			AddObjectProperty("Tue_IsHoliday", gxTpr_Tue_isholiday, false);
+
+
+			AddObjectProperty("Wed_IsHoliday", gxTpr_Wed_isholiday, false);
+
+
+			AddObjectProperty("Thu_IsHoliday", gxTpr_Thu_isholiday, false);
+
+
+			AddObjectProperty("Fri_IsHoliday", gxTpr_Fri_isholiday, false);
+
+
+			AddObjectProperty("Sat_IsHoliday", gxTpr_Sat_isholiday, false);
+
+
+			AddObjectProperty("Sun_IsHoliday", gxTpr_Sun_isholiday, false);
+
+
 			AddObjectProperty("Mon_Formatted", gxTpr_Mon_formatted, false);
 
 
@@ -323,6 +344,118 @@ namespace GeneXus.Programs
 
 
 
+		[SoapElement(ElementName="Mon_IsHoliday")]
+		[XmlElement(ElementName="Mon_IsHoliday")]
+		public bool gxTpr_Mon_isholiday
+		{
+			get {
+				return gxTv_SdtSDTEmployeeWeekReport_Mon_isholiday; 
+			}
+			set {
+				gxTv_SdtSDTEmployeeWeekReport_Mon_isholiday = value;
+				SetDirty("Mon_isholiday");
+			}
+		}
+
+
+
+
+		[SoapElement(ElementName="Tue_IsHoliday")]
+		[XmlElement(ElementName="Tue_IsHoliday")]
+		public bool gxTpr_Tue_isholiday
+		{
+			get {
+				return gxTv_SdtSDTEmployeeWeekReport_Tue_isholiday; 
+			}
+			set {
+				gxTv_SdtSDTEmployeeWeekReport_Tue_isholiday = value;
+				SetDirty("Tue_isholiday");
+			}
+		}
+
+
+
+
+		[SoapElement(ElementName="Wed_IsHoliday")]
+		[XmlElement(ElementName="Wed_IsHoliday")]
+		public bool gxTpr_Wed_isholiday
+		{
+			get {
+				return gxTv_SdtSDTEmployeeWeekReport_Wed_isholiday; 
+			}
+			set {
+				gxTv_SdtSDTEmployeeWeekReport_Wed_isholiday = value;
+				SetDirty("Wed_isholiday");
+			}
+		}
+
+
+
+
+		[SoapElement(ElementName="Thu_IsHoliday")]
+		[XmlElement(ElementName="Thu_IsHoliday")]
+		public bool gxTpr_Thu_isholiday
+		{
+			get {
+				return gxTv_SdtSDTEmployeeWeekReport_Thu_isholiday; 
+			}
+			set {
+				gxTv_SdtSDTEmployeeWeekReport_Thu_isholiday = value;
+				SetDirty("Thu_isholiday");
+			}
+		}
+
+
+
+
+		[SoapElement(ElementName="Fri_IsHoliday")]
+		[XmlElement(ElementName="Fri_IsHoliday")]
+		public bool gxTpr_Fri_isholiday
+		{
+			get {
+				return gxTv_SdtSDTEmployeeWeekReport_Fri_isholiday; 
+			}
+			set {
+				gxTv_SdtSDTEmployeeWeekReport_Fri_isholiday = value;
+				SetDirty("Fri_isholiday");
+			}
+		}
+
+
+
+
+		[SoapElement(ElementName="Sat_IsHoliday")]
+		[XmlElement(ElementName="Sat_IsHoliday")]
+		public bool gxTpr_Sat_isholiday
+		{
+			get {
+				return gxTv_SdtSDTEmployeeWeekReport_Sat_isholiday; 
+			}
+			set {
+				gxTv_SdtSDTEmployeeWeekReport_Sat_isholiday = value;
+				SetDirty("Sat_isholiday");
+			}
+		}
+
+
+
+
+		[SoapElement(ElementName="Sun_IsHoliday")]
+		[XmlElement(ElementName="Sun_IsHoliday")]
+		public bool gxTpr_Sun_isholiday
+		{
+			get {
+				return gxTv_SdtSDTEmployeeWeekReport_Sun_isholiday; 
+			}
+			set {
+				gxTv_SdtSDTEmployeeWeekReport_Sun_isholiday = value;
+				SetDirty("Sun_isholiday");
+			}
+		}
+
+
+
+
 		[SoapElement(ElementName="Mon_Formatted")]
 		[XmlElement(ElementName="Mon_Formatted")]
 		public string gxTpr_Mon_formatted
@@ -506,6 +639,13 @@ namespace GeneXus.Programs
 
 
 
+
+
+
+
+
+
+
 			gxTv_SdtSDTEmployeeWeekReport_Mon_formatted = "";
 			gxTv_SdtSDTEmployeeWeekReport_Tue_formatted = "";
 			gxTv_SdtSDTEmployeeWeekReport_Wed_formatted = "";
@@ -556,6 +696,27 @@ namespace GeneXus.Programs
 		 
 
 		protected long gxTv_SdtSDTEmployeeWeekReport_Total;
+		 
+
+		protected bool gxTv_SdtSDTEmployeeWeekReport_Mon_isholiday;
+		 
+
+		protected bool gxTv_SdtSDTEmployeeWeekReport_Tue_isholiday;
+		 
+
+		protected bool gxTv_SdtSDTEmployeeWeekReport_Wed_isholiday;
+		 
+
+		protected bool gxTv_SdtSDTEmployeeWeekReport_Thu_isholiday;
+		 
+
+		protected bool gxTv_SdtSDTEmployeeWeekReport_Fri_isholiday;
+		 
+
+		protected bool gxTv_SdtSDTEmployeeWeekReport_Sat_isholiday;
+		 
+
+		protected bool gxTv_SdtSDTEmployeeWeekReport_Sun_isholiday;
 		 
 
 		protected string gxTv_SdtSDTEmployeeWeekReport_Mon_formatted;
@@ -737,7 +898,91 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="Mon_Formatted", Order=11)]
+		[DataMember(Name="Mon_IsHoliday", Order=11)]
+		public bool gxTpr_Mon_isholiday
+		{
+			get { 
+				return sdt.gxTpr_Mon_isholiday;
+
+			}
+			set { 
+				sdt.gxTpr_Mon_isholiday = value;
+			}
+		}
+
+		[DataMember(Name="Tue_IsHoliday", Order=12)]
+		public bool gxTpr_Tue_isholiday
+		{
+			get { 
+				return sdt.gxTpr_Tue_isholiday;
+
+			}
+			set { 
+				sdt.gxTpr_Tue_isholiday = value;
+			}
+		}
+
+		[DataMember(Name="Wed_IsHoliday", Order=13)]
+		public bool gxTpr_Wed_isholiday
+		{
+			get { 
+				return sdt.gxTpr_Wed_isholiday;
+
+			}
+			set { 
+				sdt.gxTpr_Wed_isholiday = value;
+			}
+		}
+
+		[DataMember(Name="Thu_IsHoliday", Order=14)]
+		public bool gxTpr_Thu_isholiday
+		{
+			get { 
+				return sdt.gxTpr_Thu_isholiday;
+
+			}
+			set { 
+				sdt.gxTpr_Thu_isholiday = value;
+			}
+		}
+
+		[DataMember(Name="Fri_IsHoliday", Order=15)]
+		public bool gxTpr_Fri_isholiday
+		{
+			get { 
+				return sdt.gxTpr_Fri_isholiday;
+
+			}
+			set { 
+				sdt.gxTpr_Fri_isholiday = value;
+			}
+		}
+
+		[DataMember(Name="Sat_IsHoliday", Order=16)]
+		public bool gxTpr_Sat_isholiday
+		{
+			get { 
+				return sdt.gxTpr_Sat_isholiday;
+
+			}
+			set { 
+				sdt.gxTpr_Sat_isholiday = value;
+			}
+		}
+
+		[DataMember(Name="Sun_IsHoliday", Order=17)]
+		public bool gxTpr_Sun_isholiday
+		{
+			get { 
+				return sdt.gxTpr_Sun_isholiday;
+
+			}
+			set { 
+				sdt.gxTpr_Sun_isholiday = value;
+			}
+		}
+
+		[DataMember(Name="Mon_Formatted", Order=18)]
 		public  string gxTpr_Mon_formatted
 		{
 			get { 
@@ -749,7 +994,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="Tue_Formatted", Order=12)]
+		[DataMember(Name="Tue_Formatted", Order=19)]
 		public  string gxTpr_Tue_formatted
 		{
 			get { 
@@ -761,7 +1006,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="Wed_Formatted", Order=13)]
+		[DataMember(Name="Wed_Formatted", Order=20)]
 		public  string gxTpr_Wed_formatted
 		{
 			get { 
@@ -773,7 +1018,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="Thu_Formatted", Order=14)]
+		[DataMember(Name="Thu_Formatted", Order=21)]
 		public  string gxTpr_Thu_formatted
 		{
 			get { 
@@ -785,7 +1030,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="Fri_Formatted", Order=15)]
+		[DataMember(Name="Fri_Formatted", Order=22)]
 		public  string gxTpr_Fri_formatted
 		{
 			get { 
@@ -797,7 +1042,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="Sat_Formatted", Order=16)]
+		[DataMember(Name="Sat_Formatted", Order=23)]
 		public  string gxTpr_Sat_formatted
 		{
 			get { 
@@ -809,7 +1054,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="Sun_Formatted", Order=17)]
+		[DataMember(Name="Sun_Formatted", Order=24)]
 		public  string gxTpr_Sun_formatted
 		{
 			get { 
@@ -821,7 +1066,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="Leave_Formatted", Order=18)]
+		[DataMember(Name="Leave_Formatted", Order=25)]
 		public  string gxTpr_Leave_formatted
 		{
 			get { 
@@ -833,7 +1078,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="Total_Formatted", Order=19)]
+		[DataMember(Name="Total_Formatted", Order=26)]
 		public  string gxTpr_Total_formatted
 		{
 			get { 
@@ -845,7 +1090,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="Expected_Formatted", Order=20)]
+		[DataMember(Name="Expected_Formatted", Order=27)]
 		public  string gxTpr_Expected_formatted
 		{
 			get { 
