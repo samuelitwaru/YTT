@@ -150,6 +150,7 @@ namespace GeneXus.Programs {
             AV11ExcelDocument.get_Cells(1, 1, 1, 1).Text = "Timeline Report ("+StringUtil.Trim( A103ProjectName)+")";
             AV11ExcelDocument.get_Cells(1, 1, 1, 1).Bold = 1;
             AV11ExcelDocument.get_Cells(1, 1, 1, 1).Color = 11;
+            AV11ExcelDocument.get_Cells(1, 1, 1, 1).Size = 14;
             /* Exit For each command. Update data (if necessary), close cursors & exit. */
             if (true) break;
             /* Exiting from a For First loop. */
@@ -191,7 +192,11 @@ namespace GeneXus.Programs {
       {
          /* 'OPENDOCUMENT' Routine */
          returnInSub = false;
-         AV12Filename = "DetailedReportExport-" + StringUtil.Trim( StringUtil.Str( (decimal)(DateTimeUtil.Year( Gx_date)), 10, 0)) + "-" + StringUtil.Trim( StringUtil.Str( (decimal)(DateTimeUtil.Month( Gx_date)), 10, 0)) + "-" + StringUtil.Trim( StringUtil.Str( (decimal)(DateTimeUtil.Day( Gx_date)), 10, 0)) + ".xlsx";
+         GXt_char1 = AV12Filename;
+         new formatdatetime(context ).execute(  AV65FromDate,  "YYYY-MM-DD", out  GXt_char1) ;
+         GXt_char2 = AV12Filename;
+         new formatdatetime(context ).execute(  AV66ToDate,  "YYYY-MM-DD", out  GXt_char2) ;
+         AV12Filename = "HoursReport-" + GXt_char1 + "_" + GXt_char2 + ".xlsx";
          AV11ExcelDocument.Open(AV12Filename);
          /* Execute user subroutine: 'CHECKSTATUS' */
          S121 ();
@@ -211,15 +216,16 @@ namespace GeneXus.Programs {
          AV48Columns.Add("Duration", 0);
          AV48Columns.Add("Description", 0);
          AV38VisibleColumnCount = 0;
-         AV78GXV1 = 1;
-         while ( AV78GXV1 <= AV48Columns.Count )
+         AV77GXV1 = 1;
+         while ( AV77GXV1 <= AV48Columns.Count )
          {
-            AV47Column = ((string)AV48Columns.Item(AV78GXV1));
+            AV47Column = ((string)AV48Columns.Item(AV77GXV1));
             AV11ExcelDocument.get_Cells(AV14CellRow, (int)(AV15FirstColumn+AV38VisibleColumnCount), 1, 1).Text = AV47Column;
             AV11ExcelDocument.get_Cells(AV14CellRow, (int)(AV15FirstColumn+AV38VisibleColumnCount), 1, 1).Bold = 1;
             AV11ExcelDocument.get_Cells(AV14CellRow, (int)(AV15FirstColumn+AV38VisibleColumnCount), 1, 1).Color = 11;
+            AV11ExcelDocument.get_Cells(AV14CellRow, (int)(AV15FirstColumn+AV38VisibleColumnCount), 1, 1).Color = 13;
             AV38VisibleColumnCount = (long)(AV38VisibleColumnCount+1);
-            AV78GXV1 = (int)(AV78GXV1+1);
+            AV77GXV1 = (int)(AV77GXV1+1);
          }
       }
 
@@ -280,9 +286,7 @@ namespace GeneXus.Programs {
                A102ProjectId = P009O3_A102ProjectId[0];
                A118WorkHourLogId = P009O3_A118WorkHourLogId[0];
                A103ProjectName = P009O3_A103ProjectName[0];
-               GXt_dtime1 = DateTimeUtil.ResetTime( A119WorkHourLogDate ) ;
-               AV11ExcelDocument.SetDateFormat(context, 8, 5, 1, 2, "/", ":", " ");
-               AV11ExcelDocument.get_Cells(AV14CellRow, AV15FirstColumn+0, 1, 1).Date = GXt_dtime1;
+               AV11ExcelDocument.get_Cells(AV14CellRow, AV15FirstColumn+0, 1, 1).Text = context.localUtil.DToC( A119WorkHourLogDate, 1, "/");
                AV11ExcelDocument.get_Cells(AV14CellRow, AV15FirstColumn+1, 1, 1).Text = StringUtil.Trim( A148EmployeeName);
                AV11ExcelDocument.get_Cells(AV14CellRow, AV15FirstColumn+2, 1, 1).Text = StringUtil.Trim( A103ProjectName);
                AV11ExcelDocument.get_Cells(AV14CellRow, AV15FirstColumn+3, 1, 1).Text = StringUtil.Trim( A120WorkHourLogDuration);
@@ -336,16 +340,16 @@ namespace GeneXus.Programs {
          AV11ExcelDocument.get_Cells(AV14CellRow, 1, 1, 1).Text = "Start Date";
          AV11ExcelDocument.get_Cells(AV14CellRow, 1, 1, 1).Size = 13;
          AV11ExcelDocument.get_Cells(AV14CellRow, 1, 1, 1).Bold = 1;
-         GXt_dtime1 = DateTimeUtil.ResetTime( AV65FromDate ) ;
-         AV11ExcelDocument.SetDateFormat(context, 8, 5, 1, 2, "/", ":", " ");
-         AV11ExcelDocument.get_Cells(AV14CellRow, 2, 1, 1).Date = GXt_dtime1;
+         AV11ExcelDocument.get_Cells(AV14CellRow, 2, 1, 1).Text = context.localUtil.DToC( AV65FromDate, 1, "/");
+         AV11ExcelDocument.get_Cells(AV14CellRow, 2, 1, 1).Bold = 1;
+         AV11ExcelDocument.get_Cells(AV14CellRow, 2, 1, 1).Size = 13;
          AV14CellRow = (int)(AV14CellRow+1);
          AV11ExcelDocument.get_Cells(AV14CellRow, 1, 1, 1).Text = "End Date";
          AV11ExcelDocument.get_Cells(AV14CellRow, 1, 1, 1).Size = 13;
          AV11ExcelDocument.get_Cells(AV14CellRow, 1, 1, 1).Bold = 1;
-         GXt_dtime1 = DateTimeUtil.ResetTime( AV66ToDate ) ;
-         AV11ExcelDocument.SetDateFormat(context, 8, 5, 1, 2, "/", ":", " ");
-         AV11ExcelDocument.get_Cells(AV14CellRow, 2, 1, 1).Date = GXt_dtime1;
+         AV11ExcelDocument.get_Cells(AV14CellRow, 2, 1, 1).Text = context.localUtil.DToC( AV66ToDate, 1, "/");
+         AV11ExcelDocument.get_Cells(AV14CellRow, 2, 1, 1).Bold = 1;
+         AV11ExcelDocument.get_Cells(AV14CellRow, 2, 1, 1).Size = 13;
          AV14CellRow = (int)(AV14CellRow+1);
          AV11ExcelDocument.get_Cells(AV14CellRow, 1, 1, 1).Text = "Hours Total";
          AV11ExcelDocument.get_Cells(AV14CellRow, 1, 1, 1).Size = 13;
@@ -361,6 +365,7 @@ namespace GeneXus.Programs {
       {
          /* 'CLOSEDOCUMENT' Routine */
          returnInSub = false;
+         AV11ExcelDocument.AutoFit = 1;
          AV11ExcelDocument.Save();
          /* Execute user subroutine: 'CHECKSTATUS' */
          S121 ();
@@ -420,7 +425,7 @@ namespace GeneXus.Programs {
          P009O2_A103ProjectName = new string[] {""} ;
          A103ProjectName = "";
          AV11ExcelDocument = new ExcelDocumentI();
-         Gx_date = DateTime.MinValue;
+         GXt_char1 = "";
          AV48Columns = new GxSimpleCollection<string>();
          AV47Column = "";
          A119WorkHourLogDate = DateTime.MinValue;
@@ -443,7 +448,6 @@ namespace GeneXus.Programs {
          P009O5_n40000GXC1 = new bool[] {false} ;
          P009O5_A40001GXC2 = new short[1] ;
          P009O5_n40001GXC2 = new bool[] {false} ;
-         GXt_dtime1 = (DateTime)(DateTime.MinValue);
          GXt_char2 = "";
          AV25Session = context.GetSession();
          AV69WebSession = context.GetSession();
@@ -461,9 +465,7 @@ namespace GeneXus.Programs {
                }
             }
          );
-         Gx_date = DateTimeUtil.Today( context);
          /* GeneXus formulas. */
-         Gx_date = DateTimeUtil.Today( context);
       }
 
       private short A122WorkHourLogMinute ;
@@ -472,7 +474,7 @@ namespace GeneXus.Programs {
       private short A40001GXC2 ;
       private int AV14CellRow ;
       private int AV15FirstColumn ;
-      private int AV78GXV1 ;
+      private int AV77GXV1 ;
       private int AV46CompanyLocationId_Count ;
       private int AV24EmployeeId_Count ;
       private long AV73OneProjectId ;
@@ -486,12 +488,11 @@ namespace GeneXus.Programs {
       private long AV74TotalMinutes ;
       private string scmdbuf ;
       private string A103ProjectName ;
+      private string GXt_char1 ;
       private string A148EmployeeName ;
       private string GXt_char2 ;
-      private DateTime GXt_dtime1 ;
       private DateTime AV65FromDate ;
       private DateTime AV66ToDate ;
-      private DateTime Gx_date ;
       private DateTime A119WorkHourLogDate ;
       private bool returnInSub ;
       private bool BRK9O3 ;

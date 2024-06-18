@@ -160,9 +160,9 @@ namespace GeneXus.Programs {
          AV30TFProjectName_Sel = GetPar( "TFProjectName_Sel");
          AV31TFProjectDescription = GetPar( "TFProjectDescription");
          AV32TFProjectDescription_Sel = GetPar( "TFProjectDescription_Sel");
+         ajax_req_read_hidden_sdt(GetNextPar( ), AV34TFProjectStatus_Sels);
          AV52TFProjectManagerName = GetPar( "TFProjectManagerName");
          AV53TFProjectManagerName_Sel = GetPar( "TFProjectManagerName_Sel");
-         ajax_req_read_hidden_sdt(GetNextPar( ), AV34TFProjectStatus_Sels);
          AV13OrderedBy = (short)(Math.Round(NumberUtil.Val( GetPar( "OrderedBy"), "."), 18, MidpointRounding.ToEven));
          AV14OrderedDsc = StringUtil.StrToBool( GetPar( "OrderedDsc"));
          AV43IsAuthorized_Update = StringUtil.StrToBool( GetPar( "IsAuthorized_Update"));
@@ -174,7 +174,7 @@ namespace GeneXus.Programs {
             GxWebError = 1;
             return  ;
          }
-         gxgrGrid_refresh( subGrid_Rows, AV16FilterFullText, AV26ManageFiltersExecutionStep, AV21ColumnsSelector, AV54Pgmname, AV29TFProjectName, AV30TFProjectName_Sel, AV31TFProjectDescription, AV32TFProjectDescription_Sel, AV52TFProjectManagerName, AV53TFProjectManagerName_Sel, AV34TFProjectStatus_Sels, AV13OrderedBy, AV14OrderedDsc, AV43IsAuthorized_Update, AV45IsAuthorized_Delete, AV48IsAuthorized_Insert) ;
+         gxgrGrid_refresh( subGrid_Rows, AV16FilterFullText, AV26ManageFiltersExecutionStep, AV21ColumnsSelector, AV54Pgmname, AV29TFProjectName, AV30TFProjectName_Sel, AV31TFProjectDescription, AV32TFProjectDescription_Sel, AV34TFProjectStatus_Sels, AV52TFProjectManagerName, AV53TFProjectManagerName_Sel, AV13OrderedBy, AV14OrderedDsc, AV43IsAuthorized_Update, AV45IsAuthorized_Delete, AV48IsAuthorized_Insert) ;
          AddString( context.getJSONResponse( )) ;
          /* End function gxgrGrid_refresh_invoke */
       }
@@ -409,8 +409,6 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "vTFPROJECTNAME_SEL", StringUtil.RTrim( AV30TFProjectName_Sel));
          GxWebStd.gx_hidden_field( context, "vTFPROJECTDESCRIPTION", AV31TFProjectDescription);
          GxWebStd.gx_hidden_field( context, "vTFPROJECTDESCRIPTION_SEL", AV32TFProjectDescription_Sel);
-         GxWebStd.gx_hidden_field( context, "vTFPROJECTMANAGERNAME", StringUtil.RTrim( AV52TFProjectManagerName));
-         GxWebStd.gx_hidden_field( context, "vTFPROJECTMANAGERNAME_SEL", StringUtil.RTrim( AV53TFProjectManagerName_Sel));
          if ( context.isAjaxRequest( ) )
          {
             context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "vTFPROJECTSTATUS_SELS", AV34TFProjectStatus_Sels);
@@ -419,6 +417,8 @@ namespace GeneXus.Programs {
          {
             context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("vTFPROJECTSTATUS_SELS", AV34TFProjectStatus_Sels);
          }
+         GxWebStd.gx_hidden_field( context, "vTFPROJECTMANAGERNAME", StringUtil.RTrim( AV52TFProjectManagerName));
+         GxWebStd.gx_hidden_field( context, "vTFPROJECTMANAGERNAME_SEL", StringUtil.RTrim( AV53TFProjectManagerName_Sel));
          GxWebStd.gx_hidden_field( context, "vORDEREDBY", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV13OrderedBy), 4, 0, ".", "")));
          GxWebStd.gx_boolean_hidden_field( context, "vORDEREDDSC", AV14OrderedDsc);
          GxWebStd.gx_boolean_hidden_field( context, "vISAUTHORIZED_UPDATE", AV43IsAuthorized_Update);
@@ -957,10 +957,10 @@ namespace GeneXus.Programs {
                               A102ProjectId = (long)(Math.Round(context.localUtil.CToN( cgiGet( edtProjectId_Internalname), ".", ","), 18, MidpointRounding.ToEven));
                               A103ProjectName = cgiGet( edtProjectName_Internalname);
                               A104ProjectDescription = cgiGet( edtProjectDescription_Internalname);
-                              A167ProjectManagerName = cgiGet( edtProjectManagerName_Internalname);
                               cmbProjectStatus.Name = cmbProjectStatus_Internalname;
                               cmbProjectStatus.CurrentValue = cgiGet( cmbProjectStatus_Internalname);
                               A105ProjectStatus = cgiGet( cmbProjectStatus_Internalname);
+                              A167ProjectManagerName = cgiGet( edtProjectManagerName_Internalname);
                               sEvtType = StringUtil.Right( sEvt, 1);
                               if ( StringUtil.StrCmp(sEvtType, ".") == 0 )
                               {
@@ -1098,9 +1098,9 @@ namespace GeneXus.Programs {
                                        string AV30TFProjectName_Sel ,
                                        string AV31TFProjectDescription ,
                                        string AV32TFProjectDescription_Sel ,
+                                       GxSimpleCollection<string> AV34TFProjectStatus_Sels ,
                                        string AV52TFProjectManagerName ,
                                        string AV53TFProjectManagerName_Sel ,
-                                       GxSimpleCollection<string> AV34TFProjectStatus_Sels ,
                                        short AV13OrderedBy ,
                                        bool AV14OrderedDsc ,
                                        bool AV43IsAuthorized_Update ,
@@ -1190,15 +1190,15 @@ namespace GeneXus.Programs {
             GXPagingTo2 = ((subGrid_Rows==0) ? 10000 : subGrid_fnc_Recordsperpage( )+1);
             pr_default.dynParam(0, new Object[]{ new Object[]{
                                                  A105ProjectStatus ,
-                                                 AV62Projectwwds_8_tfprojectstatus_sels ,
+                                                 AV60Projectwwds_6_tfprojectstatus_sels ,
                                                  AV55Projectwwds_1_filterfulltext ,
                                                  AV57Projectwwds_3_tfprojectname_sel ,
                                                  AV56Projectwwds_2_tfprojectname ,
                                                  AV59Projectwwds_5_tfprojectdescription_sel ,
                                                  AV58Projectwwds_4_tfprojectdescription ,
-                                                 AV61Projectwwds_7_tfprojectmanagername_sel ,
-                                                 AV60Projectwwds_6_tfprojectmanagername ,
-                                                 AV62Projectwwds_8_tfprojectstatus_sels.Count ,
+                                                 AV60Projectwwds_6_tfprojectstatus_sels.Count ,
+                                                 AV62Projectwwds_8_tfprojectmanagername_sel ,
+                                                 AV61Projectwwds_7_tfprojectmanagername ,
                                                  A103ProjectName ,
                                                  A104ProjectDescription ,
                                                  A167ProjectManagerName ,
@@ -1215,9 +1215,9 @@ namespace GeneXus.Programs {
             lV55Projectwwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV55Projectwwds_1_filterfulltext), "%", "");
             lV56Projectwwds_2_tfprojectname = StringUtil.PadR( StringUtil.RTrim( AV56Projectwwds_2_tfprojectname), 100, "%");
             lV58Projectwwds_4_tfprojectdescription = StringUtil.Concat( StringUtil.RTrim( AV58Projectwwds_4_tfprojectdescription), "%", "");
-            lV60Projectwwds_6_tfprojectmanagername = StringUtil.PadR( StringUtil.RTrim( AV60Projectwwds_6_tfprojectmanagername), 128, "%");
+            lV61Projectwwds_7_tfprojectmanagername = StringUtil.PadR( StringUtil.RTrim( AV61Projectwwds_7_tfprojectmanagername), 128, "%");
             /* Using cursor H003L2 */
-            pr_default.execute(0, new Object[] {lV55Projectwwds_1_filterfulltext, lV55Projectwwds_1_filterfulltext, lV55Projectwwds_1_filterfulltext, lV55Projectwwds_1_filterfulltext, lV55Projectwwds_1_filterfulltext, lV56Projectwwds_2_tfprojectname, AV57Projectwwds_3_tfprojectname_sel, lV58Projectwwds_4_tfprojectdescription, AV59Projectwwds_5_tfprojectdescription_sel, lV60Projectwwds_6_tfprojectmanagername, AV61Projectwwds_7_tfprojectmanagername_sel, GXPagingFrom2, GXPagingTo2, GXPagingTo2});
+            pr_default.execute(0, new Object[] {lV55Projectwwds_1_filterfulltext, lV55Projectwwds_1_filterfulltext, lV55Projectwwds_1_filterfulltext, lV55Projectwwds_1_filterfulltext, lV55Projectwwds_1_filterfulltext, lV56Projectwwds_2_tfprojectname, AV57Projectwwds_3_tfprojectname_sel, lV58Projectwwds_4_tfprojectdescription, AV59Projectwwds_5_tfprojectdescription_sel, lV61Projectwwds_7_tfprojectmanagername, AV62Projectwwds_8_tfprojectmanagername_sel, GXPagingFrom2, GXPagingTo2, GXPagingTo2});
             nGXsfl_41_idx = 1;
             sGXsfl_41_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_41_idx), 4, 0), 4, "0");
             SubsflControlProps_412( ) ;
@@ -1225,8 +1225,8 @@ namespace GeneXus.Programs {
             {
                A166ProjectManagerId = H003L2_A166ProjectManagerId[0];
                n166ProjectManagerId = H003L2_n166ProjectManagerId[0];
-               A105ProjectStatus = H003L2_A105ProjectStatus[0];
                A167ProjectManagerName = H003L2_A167ProjectManagerName[0];
+               A105ProjectStatus = H003L2_A105ProjectStatus[0];
                A104ProjectDescription = H003L2_A104ProjectDescription[0];
                A103ProjectName = H003L2_A103ProjectName[0];
                A102ProjectId = H003L2_A102ProjectId[0];
@@ -1273,20 +1273,20 @@ namespace GeneXus.Programs {
          AV57Projectwwds_3_tfprojectname_sel = AV30TFProjectName_Sel;
          AV58Projectwwds_4_tfprojectdescription = AV31TFProjectDescription;
          AV59Projectwwds_5_tfprojectdescription_sel = AV32TFProjectDescription_Sel;
-         AV60Projectwwds_6_tfprojectmanagername = AV52TFProjectManagerName;
-         AV61Projectwwds_7_tfprojectmanagername_sel = AV53TFProjectManagerName_Sel;
-         AV62Projectwwds_8_tfprojectstatus_sels = AV34TFProjectStatus_Sels;
+         AV60Projectwwds_6_tfprojectstatus_sels = AV34TFProjectStatus_Sels;
+         AV61Projectwwds_7_tfprojectmanagername = AV52TFProjectManagerName;
+         AV62Projectwwds_8_tfprojectmanagername_sel = AV53TFProjectManagerName_Sel;
          pr_default.dynParam(1, new Object[]{ new Object[]{
                                               A105ProjectStatus ,
-                                              AV62Projectwwds_8_tfprojectstatus_sels ,
+                                              AV60Projectwwds_6_tfprojectstatus_sels ,
                                               AV55Projectwwds_1_filterfulltext ,
                                               AV57Projectwwds_3_tfprojectname_sel ,
                                               AV56Projectwwds_2_tfprojectname ,
                                               AV59Projectwwds_5_tfprojectdescription_sel ,
                                               AV58Projectwwds_4_tfprojectdescription ,
-                                              AV61Projectwwds_7_tfprojectmanagername_sel ,
-                                              AV60Projectwwds_6_tfprojectmanagername ,
-                                              AV62Projectwwds_8_tfprojectstatus_sels.Count ,
+                                              AV60Projectwwds_6_tfprojectstatus_sels.Count ,
+                                              AV62Projectwwds_8_tfprojectmanagername_sel ,
+                                              AV61Projectwwds_7_tfprojectmanagername ,
                                               A103ProjectName ,
                                               A104ProjectDescription ,
                                               A167ProjectManagerName ,
@@ -1303,9 +1303,9 @@ namespace GeneXus.Programs {
          lV55Projectwwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV55Projectwwds_1_filterfulltext), "%", "");
          lV56Projectwwds_2_tfprojectname = StringUtil.PadR( StringUtil.RTrim( AV56Projectwwds_2_tfprojectname), 100, "%");
          lV58Projectwwds_4_tfprojectdescription = StringUtil.Concat( StringUtil.RTrim( AV58Projectwwds_4_tfprojectdescription), "%", "");
-         lV60Projectwwds_6_tfprojectmanagername = StringUtil.PadR( StringUtil.RTrim( AV60Projectwwds_6_tfprojectmanagername), 128, "%");
+         lV61Projectwwds_7_tfprojectmanagername = StringUtil.PadR( StringUtil.RTrim( AV61Projectwwds_7_tfprojectmanagername), 128, "%");
          /* Using cursor H003L3 */
-         pr_default.execute(1, new Object[] {lV55Projectwwds_1_filterfulltext, lV55Projectwwds_1_filterfulltext, lV55Projectwwds_1_filterfulltext, lV55Projectwwds_1_filterfulltext, lV55Projectwwds_1_filterfulltext, lV56Projectwwds_2_tfprojectname, AV57Projectwwds_3_tfprojectname_sel, lV58Projectwwds_4_tfprojectdescription, AV59Projectwwds_5_tfprojectdescription_sel, lV60Projectwwds_6_tfprojectmanagername, AV61Projectwwds_7_tfprojectmanagername_sel});
+         pr_default.execute(1, new Object[] {lV55Projectwwds_1_filterfulltext, lV55Projectwwds_1_filterfulltext, lV55Projectwwds_1_filterfulltext, lV55Projectwwds_1_filterfulltext, lV55Projectwwds_1_filterfulltext, lV56Projectwwds_2_tfprojectname, AV57Projectwwds_3_tfprojectname_sel, lV58Projectwwds_4_tfprojectdescription, AV59Projectwwds_5_tfprojectdescription_sel, lV61Projectwwds_7_tfprojectmanagername, AV62Projectwwds_8_tfprojectmanagername_sel});
          GRID_nRecordCount = H003L3_AGRID_nRecordCount[0];
          pr_default.close(1);
          return (int)(GRID_nRecordCount) ;
@@ -1335,14 +1335,14 @@ namespace GeneXus.Programs {
          AV57Projectwwds_3_tfprojectname_sel = AV30TFProjectName_Sel;
          AV58Projectwwds_4_tfprojectdescription = AV31TFProjectDescription;
          AV59Projectwwds_5_tfprojectdescription_sel = AV32TFProjectDescription_Sel;
-         AV60Projectwwds_6_tfprojectmanagername = AV52TFProjectManagerName;
-         AV61Projectwwds_7_tfprojectmanagername_sel = AV53TFProjectManagerName_Sel;
-         AV62Projectwwds_8_tfprojectstatus_sels = AV34TFProjectStatus_Sels;
+         AV60Projectwwds_6_tfprojectstatus_sels = AV34TFProjectStatus_Sels;
+         AV61Projectwwds_7_tfprojectmanagername = AV52TFProjectManagerName;
+         AV62Projectwwds_8_tfprojectmanagername_sel = AV53TFProjectManagerName_Sel;
          GRID_nFirstRecordOnPage = 0;
          GxWebStd.gx_hidden_field( context, "GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV16FilterFullText, AV26ManageFiltersExecutionStep, AV21ColumnsSelector, AV54Pgmname, AV29TFProjectName, AV30TFProjectName_Sel, AV31TFProjectDescription, AV32TFProjectDescription_Sel, AV52TFProjectManagerName, AV53TFProjectManagerName_Sel, AV34TFProjectStatus_Sels, AV13OrderedBy, AV14OrderedDsc, AV43IsAuthorized_Update, AV45IsAuthorized_Delete, AV48IsAuthorized_Insert) ;
+            gxgrGrid_refresh( subGrid_Rows, AV16FilterFullText, AV26ManageFiltersExecutionStep, AV21ColumnsSelector, AV54Pgmname, AV29TFProjectName, AV30TFProjectName_Sel, AV31TFProjectDescription, AV32TFProjectDescription_Sel, AV34TFProjectStatus_Sels, AV52TFProjectManagerName, AV53TFProjectManagerName_Sel, AV13OrderedBy, AV14OrderedDsc, AV43IsAuthorized_Update, AV45IsAuthorized_Delete, AV48IsAuthorized_Insert) ;
          }
          send_integrity_footer_hashes( ) ;
          return 0 ;
@@ -1355,9 +1355,9 @@ namespace GeneXus.Programs {
          AV57Projectwwds_3_tfprojectname_sel = AV30TFProjectName_Sel;
          AV58Projectwwds_4_tfprojectdescription = AV31TFProjectDescription;
          AV59Projectwwds_5_tfprojectdescription_sel = AV32TFProjectDescription_Sel;
-         AV60Projectwwds_6_tfprojectmanagername = AV52TFProjectManagerName;
-         AV61Projectwwds_7_tfprojectmanagername_sel = AV53TFProjectManagerName_Sel;
-         AV62Projectwwds_8_tfprojectstatus_sels = AV34TFProjectStatus_Sels;
+         AV60Projectwwds_6_tfprojectstatus_sels = AV34TFProjectStatus_Sels;
+         AV61Projectwwds_7_tfprojectmanagername = AV52TFProjectManagerName;
+         AV62Projectwwds_8_tfprojectmanagername_sel = AV53TFProjectManagerName_Sel;
          GRID_nRecordCount = subGrid_fnc_Recordcount( );
          if ( ( GRID_nRecordCount >= subGrid_fnc_Recordsperpage( ) ) && ( GRID_nEOF == 0 ) )
          {
@@ -1371,7 +1371,7 @@ namespace GeneXus.Programs {
          GridContainer.AddObjectProperty("GRID_nFirstRecordOnPage", GRID_nFirstRecordOnPage);
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV16FilterFullText, AV26ManageFiltersExecutionStep, AV21ColumnsSelector, AV54Pgmname, AV29TFProjectName, AV30TFProjectName_Sel, AV31TFProjectDescription, AV32TFProjectDescription_Sel, AV52TFProjectManagerName, AV53TFProjectManagerName_Sel, AV34TFProjectStatus_Sels, AV13OrderedBy, AV14OrderedDsc, AV43IsAuthorized_Update, AV45IsAuthorized_Delete, AV48IsAuthorized_Insert) ;
+            gxgrGrid_refresh( subGrid_Rows, AV16FilterFullText, AV26ManageFiltersExecutionStep, AV21ColumnsSelector, AV54Pgmname, AV29TFProjectName, AV30TFProjectName_Sel, AV31TFProjectDescription, AV32TFProjectDescription_Sel, AV34TFProjectStatus_Sels, AV52TFProjectManagerName, AV53TFProjectManagerName_Sel, AV13OrderedBy, AV14OrderedDsc, AV43IsAuthorized_Update, AV45IsAuthorized_Delete, AV48IsAuthorized_Insert) ;
          }
          send_integrity_footer_hashes( ) ;
          return (short)(((GRID_nEOF==0) ? 0 : 2)) ;
@@ -1384,9 +1384,9 @@ namespace GeneXus.Programs {
          AV57Projectwwds_3_tfprojectname_sel = AV30TFProjectName_Sel;
          AV58Projectwwds_4_tfprojectdescription = AV31TFProjectDescription;
          AV59Projectwwds_5_tfprojectdescription_sel = AV32TFProjectDescription_Sel;
-         AV60Projectwwds_6_tfprojectmanagername = AV52TFProjectManagerName;
-         AV61Projectwwds_7_tfprojectmanagername_sel = AV53TFProjectManagerName_Sel;
-         AV62Projectwwds_8_tfprojectstatus_sels = AV34TFProjectStatus_Sels;
+         AV60Projectwwds_6_tfprojectstatus_sels = AV34TFProjectStatus_Sels;
+         AV61Projectwwds_7_tfprojectmanagername = AV52TFProjectManagerName;
+         AV62Projectwwds_8_tfprojectmanagername_sel = AV53TFProjectManagerName_Sel;
          if ( GRID_nFirstRecordOnPage >= subGrid_fnc_Recordsperpage( ) )
          {
             GRID_nFirstRecordOnPage = (long)(GRID_nFirstRecordOnPage-subGrid_fnc_Recordsperpage( ));
@@ -1398,7 +1398,7 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV16FilterFullText, AV26ManageFiltersExecutionStep, AV21ColumnsSelector, AV54Pgmname, AV29TFProjectName, AV30TFProjectName_Sel, AV31TFProjectDescription, AV32TFProjectDescription_Sel, AV52TFProjectManagerName, AV53TFProjectManagerName_Sel, AV34TFProjectStatus_Sels, AV13OrderedBy, AV14OrderedDsc, AV43IsAuthorized_Update, AV45IsAuthorized_Delete, AV48IsAuthorized_Insert) ;
+            gxgrGrid_refresh( subGrid_Rows, AV16FilterFullText, AV26ManageFiltersExecutionStep, AV21ColumnsSelector, AV54Pgmname, AV29TFProjectName, AV30TFProjectName_Sel, AV31TFProjectDescription, AV32TFProjectDescription_Sel, AV34TFProjectStatus_Sels, AV52TFProjectManagerName, AV53TFProjectManagerName_Sel, AV13OrderedBy, AV14OrderedDsc, AV43IsAuthorized_Update, AV45IsAuthorized_Delete, AV48IsAuthorized_Insert) ;
          }
          send_integrity_footer_hashes( ) ;
          return 0 ;
@@ -1411,9 +1411,9 @@ namespace GeneXus.Programs {
          AV57Projectwwds_3_tfprojectname_sel = AV30TFProjectName_Sel;
          AV58Projectwwds_4_tfprojectdescription = AV31TFProjectDescription;
          AV59Projectwwds_5_tfprojectdescription_sel = AV32TFProjectDescription_Sel;
-         AV60Projectwwds_6_tfprojectmanagername = AV52TFProjectManagerName;
-         AV61Projectwwds_7_tfprojectmanagername_sel = AV53TFProjectManagerName_Sel;
-         AV62Projectwwds_8_tfprojectstatus_sels = AV34TFProjectStatus_Sels;
+         AV60Projectwwds_6_tfprojectstatus_sels = AV34TFProjectStatus_Sels;
+         AV61Projectwwds_7_tfprojectmanagername = AV52TFProjectManagerName;
+         AV62Projectwwds_8_tfprojectmanagername_sel = AV53TFProjectManagerName_Sel;
          GRID_nRecordCount = subGrid_fnc_Recordcount( );
          if ( GRID_nRecordCount > subGrid_fnc_Recordsperpage( ) )
          {
@@ -1433,7 +1433,7 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV16FilterFullText, AV26ManageFiltersExecutionStep, AV21ColumnsSelector, AV54Pgmname, AV29TFProjectName, AV30TFProjectName_Sel, AV31TFProjectDescription, AV32TFProjectDescription_Sel, AV52TFProjectManagerName, AV53TFProjectManagerName_Sel, AV34TFProjectStatus_Sels, AV13OrderedBy, AV14OrderedDsc, AV43IsAuthorized_Update, AV45IsAuthorized_Delete, AV48IsAuthorized_Insert) ;
+            gxgrGrid_refresh( subGrid_Rows, AV16FilterFullText, AV26ManageFiltersExecutionStep, AV21ColumnsSelector, AV54Pgmname, AV29TFProjectName, AV30TFProjectName_Sel, AV31TFProjectDescription, AV32TFProjectDescription_Sel, AV34TFProjectStatus_Sels, AV52TFProjectManagerName, AV53TFProjectManagerName_Sel, AV13OrderedBy, AV14OrderedDsc, AV43IsAuthorized_Update, AV45IsAuthorized_Delete, AV48IsAuthorized_Insert) ;
          }
          send_integrity_footer_hashes( ) ;
          return 0 ;
@@ -1446,9 +1446,9 @@ namespace GeneXus.Programs {
          AV57Projectwwds_3_tfprojectname_sel = AV30TFProjectName_Sel;
          AV58Projectwwds_4_tfprojectdescription = AV31TFProjectDescription;
          AV59Projectwwds_5_tfprojectdescription_sel = AV32TFProjectDescription_Sel;
-         AV60Projectwwds_6_tfprojectmanagername = AV52TFProjectManagerName;
-         AV61Projectwwds_7_tfprojectmanagername_sel = AV53TFProjectManagerName_Sel;
-         AV62Projectwwds_8_tfprojectstatus_sels = AV34TFProjectStatus_Sels;
+         AV60Projectwwds_6_tfprojectstatus_sels = AV34TFProjectStatus_Sels;
+         AV61Projectwwds_7_tfprojectmanagername = AV52TFProjectManagerName;
+         AV62Projectwwds_8_tfprojectmanagername_sel = AV53TFProjectManagerName_Sel;
          if ( nPageNo > 0 )
          {
             GRID_nFirstRecordOnPage = (long)(subGrid_fnc_Recordsperpage( )*(nPageNo-1));
@@ -1460,7 +1460,7 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV16FilterFullText, AV26ManageFiltersExecutionStep, AV21ColumnsSelector, AV54Pgmname, AV29TFProjectName, AV30TFProjectName_Sel, AV31TFProjectDescription, AV32TFProjectDescription_Sel, AV52TFProjectManagerName, AV53TFProjectManagerName_Sel, AV34TFProjectStatus_Sels, AV13OrderedBy, AV14OrderedDsc, AV43IsAuthorized_Update, AV45IsAuthorized_Delete, AV48IsAuthorized_Insert) ;
+            gxgrGrid_refresh( subGrid_Rows, AV16FilterFullText, AV26ManageFiltersExecutionStep, AV21ColumnsSelector, AV54Pgmname, AV29TFProjectName, AV30TFProjectName_Sel, AV31TFProjectDescription, AV32TFProjectDescription_Sel, AV34TFProjectStatus_Sels, AV52TFProjectManagerName, AV53TFProjectManagerName_Sel, AV13OrderedBy, AV14OrderedDsc, AV43IsAuthorized_Update, AV45IsAuthorized_Delete, AV48IsAuthorized_Insert) ;
          }
          send_integrity_footer_hashes( ) ;
          return (int)(0) ;
@@ -1479,10 +1479,10 @@ namespace GeneXus.Programs {
          AssignProp("", false, edtProjectName_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtProjectName_Enabled), 5, 0), !bGXsfl_41_Refreshing);
          edtProjectDescription_Enabled = 0;
          AssignProp("", false, edtProjectDescription_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtProjectDescription_Enabled), 5, 0), !bGXsfl_41_Refreshing);
-         edtProjectManagerName_Enabled = 0;
-         AssignProp("", false, edtProjectManagerName_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtProjectManagerName_Enabled), 5, 0), !bGXsfl_41_Refreshing);
          cmbProjectStatus.Enabled = 0;
          AssignProp("", false, cmbProjectStatus_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(cmbProjectStatus.Enabled), 5, 0), !bGXsfl_41_Refreshing);
+         edtProjectManagerName_Enabled = 0;
+         AssignProp("", false, edtProjectManagerName_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtProjectManagerName_Enabled), 5, 0), !bGXsfl_41_Refreshing);
          fix_multi_value_controls( ) ;
       }
 
@@ -1740,10 +1740,10 @@ namespace GeneXus.Programs {
          AssignProp("", false, edtProjectName_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtProjectName_Visible), 5, 0), !bGXsfl_41_Refreshing);
          edtProjectDescription_Visible = (((GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector_Column)AV21ColumnsSelector.gxTpr_Columns.Item(2)).gxTpr_Isvisible ? 1 : 0);
          AssignProp("", false, edtProjectDescription_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtProjectDescription_Visible), 5, 0), !bGXsfl_41_Refreshing);
-         edtProjectManagerName_Visible = (((GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector_Column)AV21ColumnsSelector.gxTpr_Columns.Item(3)).gxTpr_Isvisible ? 1 : 0);
-         AssignProp("", false, edtProjectManagerName_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtProjectManagerName_Visible), 5, 0), !bGXsfl_41_Refreshing);
-         cmbProjectStatus.Visible = (((GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector_Column)AV21ColumnsSelector.gxTpr_Columns.Item(4)).gxTpr_Isvisible ? 1 : 0);
+         cmbProjectStatus.Visible = (((GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector_Column)AV21ColumnsSelector.gxTpr_Columns.Item(3)).gxTpr_Isvisible ? 1 : 0);
          AssignProp("", false, cmbProjectStatus_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(cmbProjectStatus.Visible), 5, 0), !bGXsfl_41_Refreshing);
+         edtProjectManagerName_Visible = (((GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector_Column)AV21ColumnsSelector.gxTpr_Columns.Item(4)).gxTpr_Isvisible ? 1 : 0);
+         AssignProp("", false, edtProjectManagerName_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtProjectManagerName_Visible), 5, 0), !bGXsfl_41_Refreshing);
          AV39GridCurrentPage = subGrid_fnc_Currentpage( );
          AssignAttri("", false, "AV39GridCurrentPage", StringUtil.LTrimStr( (decimal)(AV39GridCurrentPage), 10, 0));
          AV40GridPageCount = subGrid_fnc_Pagecount( );
@@ -1757,9 +1757,9 @@ namespace GeneXus.Programs {
          AV57Projectwwds_3_tfprojectname_sel = AV30TFProjectName_Sel;
          AV58Projectwwds_4_tfprojectdescription = AV31TFProjectDescription;
          AV59Projectwwds_5_tfprojectdescription_sel = AV32TFProjectDescription_Sel;
-         AV60Projectwwds_6_tfprojectmanagername = AV52TFProjectManagerName;
-         AV61Projectwwds_7_tfprojectmanagername_sel = AV53TFProjectManagerName_Sel;
-         AV62Projectwwds_8_tfprojectstatus_sels = AV34TFProjectStatus_Sels;
+         AV60Projectwwds_6_tfprojectstatus_sels = AV34TFProjectStatus_Sels;
+         AV61Projectwwds_7_tfprojectmanagername = AV52TFProjectManagerName;
+         AV62Projectwwds_8_tfprojectmanagername_sel = AV53TFProjectManagerName_Sel;
          /*  Sending Event outputs  */
          context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV21ColumnsSelector", AV21ColumnsSelector);
          context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV24ManageFiltersData", AV24ManageFiltersData);
@@ -1830,18 +1830,18 @@ namespace GeneXus.Programs {
                AV32TFProjectDescription_Sel = Ddo_grid_Selectedvalue_get;
                AssignAttri("", false, "AV32TFProjectDescription_Sel", AV32TFProjectDescription_Sel);
             }
+            else if ( StringUtil.StrCmp(Ddo_grid_Selectedcolumn, "ProjectStatus") == 0 )
+            {
+               AV33TFProjectStatus_SelsJson = Ddo_grid_Selectedvalue_get;
+               AssignAttri("", false, "AV33TFProjectStatus_SelsJson", AV33TFProjectStatus_SelsJson);
+               AV34TFProjectStatus_Sels.FromJSonString(AV33TFProjectStatus_SelsJson, null);
+            }
             else if ( StringUtil.StrCmp(Ddo_grid_Selectedcolumn, "ProjectManagerName") == 0 )
             {
                AV52TFProjectManagerName = Ddo_grid_Filteredtext_get;
                AssignAttri("", false, "AV52TFProjectManagerName", AV52TFProjectManagerName);
                AV53TFProjectManagerName_Sel = Ddo_grid_Selectedvalue_get;
                AssignAttri("", false, "AV53TFProjectManagerName_Sel", AV53TFProjectManagerName_Sel);
-            }
-            else if ( StringUtil.StrCmp(Ddo_grid_Selectedcolumn, "ProjectStatus") == 0 )
-            {
-               AV33TFProjectStatus_SelsJson = Ddo_grid_Selectedvalue_get;
-               AssignAttri("", false, "AV33TFProjectStatus_SelsJson", AV33TFProjectStatus_SelsJson);
-               AV34TFProjectStatus_Sels.FromJSonString(AV33TFProjectStatus_SelsJson, null);
             }
             subgrid_firstpage( ) ;
          }
@@ -2031,8 +2031,8 @@ namespace GeneXus.Programs {
          AV21ColumnsSelector = new GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector(context);
          new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV21ColumnsSelector,  "ProjectName",  "",  "Name",  true,  "") ;
          new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV21ColumnsSelector,  "ProjectDescription",  "",  "Description",  true,  "") ;
-         new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV21ColumnsSelector,  "ProjectManagerName",  "",  "Manager Name",  true,  "") ;
          new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV21ColumnsSelector,  "ProjectStatus",  "",  "Status",  true,  "") ;
+         new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV21ColumnsSelector,  "ProjectManagerName",  "",  "Manager Name",  true,  "") ;
          GXt_char2 = AV20UserCustomValue;
          new GeneXus.Programs.wwpbaseobjects.loadcolumnsselectorstate(context ).execute(  "ProjectWWColumnsSelector", out  GXt_char2) ;
          AV20UserCustomValue = GXt_char2;
@@ -2102,11 +2102,11 @@ namespace GeneXus.Programs {
          AssignAttri("", false, "AV31TFProjectDescription", AV31TFProjectDescription);
          AV32TFProjectDescription_Sel = "";
          AssignAttri("", false, "AV32TFProjectDescription_Sel", AV32TFProjectDescription_Sel);
+         AV34TFProjectStatus_Sels = (GxSimpleCollection<string>)(new GxSimpleCollection<string>());
          AV52TFProjectManagerName = "";
          AssignAttri("", false, "AV52TFProjectManagerName", AV52TFProjectManagerName);
          AV53TFProjectManagerName_Sel = "";
          AssignAttri("", false, "AV53TFProjectManagerName_Sel", AV53TFProjectManagerName_Sel);
-         AV34TFProjectStatus_Sels = (GxSimpleCollection<string>)(new GxSimpleCollection<string>());
          Ddo_grid_Selectedvalue_set = "";
          ucDdo_grid.SendProperty(context, "", false, Ddo_grid_Internalname, "SelectedValue_set", Ddo_grid_Selectedvalue_set);
          Ddo_grid_Filteredtext_set = "";
@@ -2184,6 +2184,12 @@ namespace GeneXus.Programs {
                AV32TFProjectDescription_Sel = AV12GridStateFilterValue.gxTpr_Value;
                AssignAttri("", false, "AV32TFProjectDescription_Sel", AV32TFProjectDescription_Sel);
             }
+            else if ( StringUtil.StrCmp(AV12GridStateFilterValue.gxTpr_Name, "TFPROJECTSTATUS_SEL") == 0 )
+            {
+               AV33TFProjectStatus_SelsJson = AV12GridStateFilterValue.gxTpr_Value;
+               AssignAttri("", false, "AV33TFProjectStatus_SelsJson", AV33TFProjectStatus_SelsJson);
+               AV34TFProjectStatus_Sels.FromJSonString(AV33TFProjectStatus_SelsJson, null);
+            }
             else if ( StringUtil.StrCmp(AV12GridStateFilterValue.gxTpr_Name, "TFPROJECTMANAGERNAME") == 0 )
             {
                AV52TFProjectManagerName = AV12GridStateFilterValue.gxTpr_Value;
@@ -2194,12 +2200,6 @@ namespace GeneXus.Programs {
                AV53TFProjectManagerName_Sel = AV12GridStateFilterValue.gxTpr_Value;
                AssignAttri("", false, "AV53TFProjectManagerName_Sel", AV53TFProjectManagerName_Sel);
             }
-            else if ( StringUtil.StrCmp(AV12GridStateFilterValue.gxTpr_Name, "TFPROJECTSTATUS_SEL") == 0 )
-            {
-               AV33TFProjectStatus_SelsJson = AV12GridStateFilterValue.gxTpr_Value;
-               AssignAttri("", false, "AV33TFProjectStatus_SelsJson", AV33TFProjectStatus_SelsJson);
-               AV34TFProjectStatus_Sels.FromJSonString(AV33TFProjectStatus_SelsJson, null);
-            }
             AV63GXV1 = (int)(AV63GXV1+1);
          }
          GXt_char2 = "";
@@ -2207,9 +2207,9 @@ namespace GeneXus.Programs {
          GXt_char5 = "";
          new GeneXus.Programs.wwpbaseobjects.wwp_getfilterval(context ).execute(  String.IsNullOrEmpty(StringUtil.RTrim( AV32TFProjectDescription_Sel)),  AV32TFProjectDescription_Sel, out  GXt_char5) ;
          GXt_char6 = "";
-         new GeneXus.Programs.wwpbaseobjects.wwp_getfilterval(context ).execute(  String.IsNullOrEmpty(StringUtil.RTrim( AV53TFProjectManagerName_Sel)),  AV53TFProjectManagerName_Sel, out  GXt_char6) ;
+         new GeneXus.Programs.wwpbaseobjects.wwp_getfilterval(context ).execute(  (AV34TFProjectStatus_Sels.Count==0),  AV33TFProjectStatus_SelsJson, out  GXt_char6) ;
          GXt_char7 = "";
-         new GeneXus.Programs.wwpbaseobjects.wwp_getfilterval(context ).execute(  (AV34TFProjectStatus_Sels.Count==0),  AV33TFProjectStatus_SelsJson, out  GXt_char7) ;
+         new GeneXus.Programs.wwpbaseobjects.wwp_getfilterval(context ).execute(  String.IsNullOrEmpty(StringUtil.RTrim( AV53TFProjectManagerName_Sel)),  AV53TFProjectManagerName_Sel, out  GXt_char7) ;
          Ddo_grid_Selectedvalue_set = GXt_char2+"|"+GXt_char5+"|"+GXt_char6+"|"+GXt_char7;
          ucDdo_grid.SendProperty(context, "", false, Ddo_grid_Internalname, "SelectedValue_set", Ddo_grid_Selectedvalue_set);
          GXt_char7 = "";
@@ -2218,7 +2218,7 @@ namespace GeneXus.Programs {
          new GeneXus.Programs.wwpbaseobjects.wwp_getfilterval(context ).execute(  String.IsNullOrEmpty(StringUtil.RTrim( AV31TFProjectDescription)),  AV31TFProjectDescription, out  GXt_char6) ;
          GXt_char5 = "";
          new GeneXus.Programs.wwpbaseobjects.wwp_getfilterval(context ).execute(  String.IsNullOrEmpty(StringUtil.RTrim( AV52TFProjectManagerName)),  AV52TFProjectManagerName, out  GXt_char5) ;
-         Ddo_grid_Filteredtext_set = GXt_char7+"|"+GXt_char6+"|"+GXt_char5+"|";
+         Ddo_grid_Filteredtext_set = GXt_char7+"|"+GXt_char6+"||"+GXt_char5;
          ucDdo_grid.SendProperty(context, "", false, Ddo_grid_Internalname, "FilteredText_set", Ddo_grid_Filteredtext_set);
       }
 
@@ -2233,9 +2233,9 @@ namespace GeneXus.Programs {
          new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV11GridState,  "FILTERFULLTEXT",  "Main filter",  !String.IsNullOrEmpty(StringUtil.RTrim( AV16FilterFullText)),  0,  AV16FilterFullText,  AV16FilterFullText,  false,  "",  "") ;
          new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalueandsel(context ).execute( ref  AV11GridState,  "TFPROJECTNAME",  "Name",  !String.IsNullOrEmpty(StringUtil.RTrim( AV29TFProjectName)),  0,  AV29TFProjectName,  AV29TFProjectName,  false,  "",  "",  !String.IsNullOrEmpty(StringUtil.RTrim( AV30TFProjectName_Sel)),  AV30TFProjectName_Sel,  AV30TFProjectName_Sel) ;
          new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalueandsel(context ).execute( ref  AV11GridState,  "TFPROJECTDESCRIPTION",  "Description",  !String.IsNullOrEmpty(StringUtil.RTrim( AV31TFProjectDescription)),  0,  AV31TFProjectDescription,  AV31TFProjectDescription,  false,  "",  "",  !String.IsNullOrEmpty(StringUtil.RTrim( AV32TFProjectDescription_Sel)),  AV32TFProjectDescription_Sel,  AV32TFProjectDescription_Sel) ;
-         new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalueandsel(context ).execute( ref  AV11GridState,  "TFPROJECTMANAGERNAME",  "Manager Name",  !String.IsNullOrEmpty(StringUtil.RTrim( AV52TFProjectManagerName)),  0,  AV52TFProjectManagerName,  AV52TFProjectManagerName,  false,  "",  "",  !String.IsNullOrEmpty(StringUtil.RTrim( AV53TFProjectManagerName_Sel)),  AV53TFProjectManagerName_Sel,  AV53TFProjectManagerName_Sel) ;
          AV49AuxText = ((AV34TFProjectStatus_Sels.Count==1) ? "["+AV34TFProjectStatus_Sels.GetString(1)+"]" : "multiple values");
          new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV11GridState,  "TFPROJECTSTATUS_SEL",  "Status",  !(AV34TFProjectStatus_Sels.Count==0),  0,  AV34TFProjectStatus_Sels.ToJSonString(false),  ((StringUtil.StrCmp(AV49AuxText, "")==0) ? "" : StringUtil.StringReplace( StringUtil.StringReplace( AV49AuxText, "[Active]", "Active"), "[Inactive]", "Inactive")),  false,  "",  "") ;
+         new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalueandsel(context ).execute( ref  AV11GridState,  "TFPROJECTMANAGERNAME",  "Manager Name",  !String.IsNullOrEmpty(StringUtil.RTrim( AV52TFProjectManagerName)),  0,  AV52TFProjectManagerName,  AV52TFProjectManagerName,  false,  "",  "",  !String.IsNullOrEmpty(StringUtil.RTrim( AV53TFProjectManagerName_Sel)),  AV53TFProjectManagerName_Sel,  AV53TFProjectManagerName_Sel) ;
          AV11GridState.gxTpr_Pagesize = StringUtil.Str( (decimal)(subGrid_Rows), 10, 0);
          AV11GridState.gxTpr_Currentpage = (short)(subGrid_fnc_Currentpage( ));
          new GeneXus.Programs.wwpbaseobjects.savegridstate(context ).execute(  AV54Pgmname+"GridState",  AV11GridState.ToXml(false, true, "", "")) ;
@@ -2389,7 +2389,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202461314544033", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024618617888", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2405,7 +2405,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("projectww.js", "?202461314544036", false, true);
+         context.AddJavascriptSource("projectww.js", "?2024618617890", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -2433,8 +2433,8 @@ namespace GeneXus.Programs {
          edtProjectId_Internalname = "PROJECTID_"+sGXsfl_41_idx;
          edtProjectName_Internalname = "PROJECTNAME_"+sGXsfl_41_idx;
          edtProjectDescription_Internalname = "PROJECTDESCRIPTION_"+sGXsfl_41_idx;
-         edtProjectManagerName_Internalname = "PROJECTMANAGERNAME_"+sGXsfl_41_idx;
          cmbProjectStatus_Internalname = "PROJECTSTATUS_"+sGXsfl_41_idx;
+         edtProjectManagerName_Internalname = "PROJECTMANAGERNAME_"+sGXsfl_41_idx;
       }
 
       protected void SubsflControlProps_fel_412( )
@@ -2444,8 +2444,8 @@ namespace GeneXus.Programs {
          edtProjectId_Internalname = "PROJECTID_"+sGXsfl_41_fel_idx;
          edtProjectName_Internalname = "PROJECTNAME_"+sGXsfl_41_fel_idx;
          edtProjectDescription_Internalname = "PROJECTDESCRIPTION_"+sGXsfl_41_fel_idx;
-         edtProjectManagerName_Internalname = "PROJECTMANAGERNAME_"+sGXsfl_41_fel_idx;
          cmbProjectStatus_Internalname = "PROJECTSTATUS_"+sGXsfl_41_fel_idx;
+         edtProjectManagerName_Internalname = "PROJECTMANAGERNAME_"+sGXsfl_41_fel_idx;
       }
 
       protected void sendrow_412( )
@@ -2554,14 +2554,6 @@ namespace GeneXus.Programs {
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
-               context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+((edtProjectManagerName_Visible==0) ? "display:none;" : "")+"\">") ;
-            }
-            /* Single line edit */
-            ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtProjectManagerName_Internalname,StringUtil.RTrim( A167ProjectManagerName),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtProjectManagerName_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtProjectManagerName_Visible,(short)0,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)128,(short)0,(short)0,(short)41,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
-            /* Subfile cell */
-            if ( GridContainer.GetWrapped() == 1 )
-            {
                context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+((cmbProjectStatus.Visible==0) ? "display:none;" : "")+"\">") ;
             }
             if ( ( cmbProjectStatus.ItemCount == 0 ) && isAjaxCallMode( ) )
@@ -2580,6 +2572,14 @@ namespace GeneXus.Programs {
             GridRow.AddColumnProperties("combobox", 2, isAjaxCallMode( ), new Object[] {(GXCombobox)cmbProjectStatus,(string)cmbProjectStatus_Internalname,StringUtil.RTrim( A105ProjectStatus),(short)1,(string)cmbProjectStatus_Jsonclick,(short)0,(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"char",(string)"",cmbProjectStatus.Visible,(short)0,(short)0,(short)0,(short)0,(string)"px",(short)0,(string)"px",(string)"",(string)"Attribute",(string)"WWColumn",(string)"",(string)"",(string)"",(bool)true,(short)0});
             cmbProjectStatus.CurrentValue = StringUtil.RTrim( A105ProjectStatus);
             AssignProp("", false, cmbProjectStatus_Internalname, "Values", (string)(cmbProjectStatus.ToJavascriptSource()), !bGXsfl_41_Refreshing);
+            /* Subfile cell */
+            if ( GridContainer.GetWrapped() == 1 )
+            {
+               context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+((edtProjectManagerName_Visible==0) ? "display:none;" : "")+"\">") ;
+            }
+            /* Single line edit */
+            ROClassString = "Attribute";
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtProjectManagerName_Internalname,StringUtil.RTrim( A167ProjectManagerName),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtProjectManagerName_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn hidden-xs",(string)"",(int)edtProjectManagerName_Visible,(short)0,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)128,(short)0,(short)0,(short)41,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
             send_integrity_lvl_hashes3L2( ) ;
             GridContainer.AddRow(GridRow);
             nGXsfl_41_idx = ((subGrid_Islastpage==1)&&(nGXsfl_41_idx+1>subGrid_fnc_Recordsperpage( )) ? 1 : nGXsfl_41_idx+1);
@@ -2655,11 +2655,11 @@ namespace GeneXus.Programs {
             context.WriteHtmlText( "<th align=\""+"start"+"\" "+" nowrap=\"nowrap\" "+" class=\""+"Attribute"+"\" "+" style=\""+((edtProjectDescription_Visible==0) ? "display:none;" : "")+""+"\" "+">") ;
             context.SendWebValue( "Description") ;
             context.WriteHtmlTextNl( "</th>") ;
-            context.WriteHtmlText( "<th align=\""+"start"+"\" "+" nowrap=\"nowrap\" "+" class=\""+"Attribute"+"\" "+" style=\""+((edtProjectManagerName_Visible==0) ? "display:none;" : "")+""+"\" "+">") ;
-            context.SendWebValue( "Manager Name") ;
-            context.WriteHtmlTextNl( "</th>") ;
             context.WriteHtmlText( "<th align=\""+"start"+"\" "+" nowrap=\"nowrap\" "+" class=\""+"Attribute"+"\" "+" style=\""+((cmbProjectStatus.Visible==0) ? "display:none;" : "")+""+"\" "+">") ;
             context.SendWebValue( "Status") ;
+            context.WriteHtmlTextNl( "</th>") ;
+            context.WriteHtmlText( "<th align=\""+"start"+"\" "+" nowrap=\"nowrap\" "+" class=\""+"Attribute"+"\" "+" style=\""+((edtProjectManagerName_Visible==0) ? "display:none;" : "")+""+"\" "+">") ;
+            context.SendWebValue( "Manager Name") ;
             context.WriteHtmlTextNl( "</th>") ;
             context.WriteHtmlTextNl( "</tr>") ;
             GridContainer.AddObjectProperty("GridName", "Grid");
@@ -2708,12 +2708,12 @@ namespace GeneXus.Programs {
             GridColumn.AddObjectProperty("Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtProjectDescription_Visible), 5, 0, ".", "")));
             GridContainer.AddColumnProperties(GridColumn);
             GridColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
-            GridColumn.AddObjectProperty("Value", GXUtil.ValueEncode( StringUtil.RTrim( A167ProjectManagerName)));
-            GridColumn.AddObjectProperty("Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtProjectManagerName_Visible), 5, 0, ".", "")));
-            GridContainer.AddColumnProperties(GridColumn);
-            GridColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
             GridColumn.AddObjectProperty("Value", GXUtil.ValueEncode( StringUtil.RTrim( A105ProjectStatus)));
             GridColumn.AddObjectProperty("Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(cmbProjectStatus.Visible), 5, 0, ".", "")));
+            GridContainer.AddColumnProperties(GridColumn);
+            GridColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+            GridColumn.AddObjectProperty("Value", GXUtil.ValueEncode( StringUtil.RTrim( A167ProjectManagerName)));
+            GridColumn.AddObjectProperty("Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtProjectManagerName_Visible), 5, 0, ".", "")));
             GridContainer.AddColumnProperties(GridColumn);
             GridContainer.AddObjectProperty("Selectedindex", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Selectedindex), 4, 0, ".", "")));
             GridContainer.AddObjectProperty("Allowselection", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Allowselection), 1, 0, ".", "")));
@@ -2742,8 +2742,8 @@ namespace GeneXus.Programs {
          edtProjectId_Internalname = "PROJECTID";
          edtProjectName_Internalname = "PROJECTNAME";
          edtProjectDescription_Internalname = "PROJECTDESCRIPTION";
-         edtProjectManagerName_Internalname = "PROJECTMANAGERNAME";
          cmbProjectStatus_Internalname = "PROJECTSTATUS";
+         edtProjectManagerName_Internalname = "PROJECTMANAGERNAME";
          Gridpaginationbar_Internalname = "GRIDPAGINATIONBAR";
          divGridtablewithpaginationbar_Internalname = "GRIDTABLEWITHPAGINATIONBAR";
          divTablemain_Internalname = "TABLEMAIN";
@@ -2768,8 +2768,8 @@ namespace GeneXus.Programs {
          subGrid_Allowcollapsing = 0;
          subGrid_Allowselection = 0;
          subGrid_Header = "";
-         cmbProjectStatus_Jsonclick = "";
          edtProjectManagerName_Jsonclick = "";
+         cmbProjectStatus_Jsonclick = "";
          edtProjectDescription_Jsonclick = "";
          edtProjectName_Jsonclick = "";
          edtProjectId_Jsonclick = "";
@@ -2785,12 +2785,12 @@ namespace GeneXus.Programs {
          edtavFilterfulltext_Enabled = 1;
          edtavDelete_Visible = -1;
          edtavUpdate_Visible = -1;
-         cmbProjectStatus.Visible = -1;
          edtProjectManagerName_Visible = -1;
+         cmbProjectStatus.Visible = -1;
          edtProjectDescription_Visible = -1;
          edtProjectName_Visible = -1;
-         cmbProjectStatus.Enabled = 0;
          edtProjectManagerName_Enabled = 0;
+         cmbProjectStatus.Enabled = 0;
          edtProjectDescription_Enabled = 0;
          edtProjectName_Enabled = 0;
          edtProjectId_Enabled = 0;
@@ -2807,16 +2807,16 @@ namespace GeneXus.Programs {
          Ddo_gridcolumnsselector_Icon = "fas fa-cog";
          Ddo_gridcolumnsselector_Icontype = "FontIcon";
          Ddo_grid_Datalistproc = "ProjectWWGetFilterData";
-         Ddo_grid_Datalistfixedvalues = "|||Active:Active,Inactive:Inactive";
-         Ddo_grid_Allowmultipleselection = "|||T";
-         Ddo_grid_Datalisttype = "Dynamic|Dynamic|Dynamic|FixedValues";
+         Ddo_grid_Datalistfixedvalues = "||Active:Active,Inactive:Inactive|";
+         Ddo_grid_Allowmultipleselection = "||T|";
+         Ddo_grid_Datalisttype = "Dynamic|Dynamic|FixedValues|Dynamic";
          Ddo_grid_Includedatalist = "T";
-         Ddo_grid_Filtertype = "Character|Character|Character|";
-         Ddo_grid_Includefilter = "T|T|T|";
+         Ddo_grid_Filtertype = "Character|Character||Character";
+         Ddo_grid_Includefilter = "T|T||T";
          Ddo_grid_Fixable = "T";
          Ddo_grid_Includesortasc = "T";
          Ddo_grid_Columnssortvalues = "1|2|3|4";
-         Ddo_grid_Columnids = "3:ProjectName|4:ProjectDescription|5:ProjectManagerName|6:ProjectStatus";
+         Ddo_grid_Columnids = "3:ProjectName|4:ProjectDescription|5:ProjectStatus|6:ProjectManagerName";
          Ddo_grid_Gridinternalname = "";
          Ddo_agexport_Titlecontrolidtoreplace = "";
          Ddo_agexport_Cls = "ColumnsSelector";
@@ -2863,25 +2863,25 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'AV26ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV21ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV16FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV54Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV29TFProjectName',fld:'vTFPROJECTNAME',pic:''},{av:'AV30TFProjectName_Sel',fld:'vTFPROJECTNAME_SEL',pic:''},{av:'AV31TFProjectDescription',fld:'vTFPROJECTDESCRIPTION',pic:''},{av:'AV32TFProjectDescription_Sel',fld:'vTFPROJECTDESCRIPTION_SEL',pic:''},{av:'AV52TFProjectManagerName',fld:'vTFPROJECTMANAGERNAME',pic:''},{av:'AV53TFProjectManagerName_Sel',fld:'vTFPROJECTMANAGERNAME_SEL',pic:''},{av:'AV34TFProjectStatus_Sels',fld:'vTFPROJECTSTATUS_SELS',pic:''},{av:'AV13OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV14OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV43IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV45IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV48IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true}]");
-         setEventMetadata("REFRESH",",oparms:[{av:'AV26ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV21ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'edtProjectName_Visible',ctrl:'PROJECTNAME',prop:'Visible'},{av:'edtProjectDescription_Visible',ctrl:'PROJECTDESCRIPTION',prop:'Visible'},{av:'edtProjectManagerName_Visible',ctrl:'PROJECTMANAGERNAME',prop:'Visible'},{av:'cmbProjectStatus'},{av:'AV39GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV40GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV41GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'AV43IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'edtavUpdate_Visible',ctrl:'vUPDATE',prop:'Visible'},{av:'AV45IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'edtavDelete_Visible',ctrl:'vDELETE',prop:'Visible'},{av:'AV48IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{ctrl:'BTNINSERT',prop:'Visible'},{av:'AV24ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''},{av:'AV11GridState',fld:'vGRIDSTATE',pic:''}]}");
-         setEventMetadata("GRIDPAGINATIONBAR.CHANGEPAGE","{handler:'E123L2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV16FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV26ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV21ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV54Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV29TFProjectName',fld:'vTFPROJECTNAME',pic:''},{av:'AV30TFProjectName_Sel',fld:'vTFPROJECTNAME_SEL',pic:''},{av:'AV31TFProjectDescription',fld:'vTFPROJECTDESCRIPTION',pic:''},{av:'AV32TFProjectDescription_Sel',fld:'vTFPROJECTDESCRIPTION_SEL',pic:''},{av:'AV52TFProjectManagerName',fld:'vTFPROJECTMANAGERNAME',pic:''},{av:'AV53TFProjectManagerName_Sel',fld:'vTFPROJECTMANAGERNAME_SEL',pic:''},{av:'AV34TFProjectStatus_Sels',fld:'vTFPROJECTSTATUS_SELS',pic:''},{av:'AV13OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV14OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV43IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV45IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV48IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'Gridpaginationbar_Selectedpage',ctrl:'GRIDPAGINATIONBAR',prop:'SelectedPage'}]");
+         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'AV26ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV21ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV16FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV54Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV29TFProjectName',fld:'vTFPROJECTNAME',pic:''},{av:'AV30TFProjectName_Sel',fld:'vTFPROJECTNAME_SEL',pic:''},{av:'AV31TFProjectDescription',fld:'vTFPROJECTDESCRIPTION',pic:''},{av:'AV32TFProjectDescription_Sel',fld:'vTFPROJECTDESCRIPTION_SEL',pic:''},{av:'AV34TFProjectStatus_Sels',fld:'vTFPROJECTSTATUS_SELS',pic:''},{av:'AV52TFProjectManagerName',fld:'vTFPROJECTMANAGERNAME',pic:''},{av:'AV53TFProjectManagerName_Sel',fld:'vTFPROJECTMANAGERNAME_SEL',pic:''},{av:'AV13OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV14OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV43IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV45IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV48IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true}]");
+         setEventMetadata("REFRESH",",oparms:[{av:'AV26ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV21ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'edtProjectName_Visible',ctrl:'PROJECTNAME',prop:'Visible'},{av:'edtProjectDescription_Visible',ctrl:'PROJECTDESCRIPTION',prop:'Visible'},{av:'cmbProjectStatus'},{av:'edtProjectManagerName_Visible',ctrl:'PROJECTMANAGERNAME',prop:'Visible'},{av:'AV39GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV40GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV41GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'AV43IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'edtavUpdate_Visible',ctrl:'vUPDATE',prop:'Visible'},{av:'AV45IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'edtavDelete_Visible',ctrl:'vDELETE',prop:'Visible'},{av:'AV48IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{ctrl:'BTNINSERT',prop:'Visible'},{av:'AV24ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''},{av:'AV11GridState',fld:'vGRIDSTATE',pic:''}]}");
+         setEventMetadata("GRIDPAGINATIONBAR.CHANGEPAGE","{handler:'E123L2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV16FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV26ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV21ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV54Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV29TFProjectName',fld:'vTFPROJECTNAME',pic:''},{av:'AV30TFProjectName_Sel',fld:'vTFPROJECTNAME_SEL',pic:''},{av:'AV31TFProjectDescription',fld:'vTFPROJECTDESCRIPTION',pic:''},{av:'AV32TFProjectDescription_Sel',fld:'vTFPROJECTDESCRIPTION_SEL',pic:''},{av:'AV34TFProjectStatus_Sels',fld:'vTFPROJECTSTATUS_SELS',pic:''},{av:'AV52TFProjectManagerName',fld:'vTFPROJECTMANAGERNAME',pic:''},{av:'AV53TFProjectManagerName_Sel',fld:'vTFPROJECTMANAGERNAME_SEL',pic:''},{av:'AV13OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV14OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV43IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV45IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV48IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'Gridpaginationbar_Selectedpage',ctrl:'GRIDPAGINATIONBAR',prop:'SelectedPage'}]");
          setEventMetadata("GRIDPAGINATIONBAR.CHANGEPAGE",",oparms:[]}");
-         setEventMetadata("GRIDPAGINATIONBAR.CHANGEROWSPERPAGE","{handler:'E133L2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV16FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV26ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV21ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV54Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV29TFProjectName',fld:'vTFPROJECTNAME',pic:''},{av:'AV30TFProjectName_Sel',fld:'vTFPROJECTNAME_SEL',pic:''},{av:'AV31TFProjectDescription',fld:'vTFPROJECTDESCRIPTION',pic:''},{av:'AV32TFProjectDescription_Sel',fld:'vTFPROJECTDESCRIPTION_SEL',pic:''},{av:'AV52TFProjectManagerName',fld:'vTFPROJECTMANAGERNAME',pic:''},{av:'AV53TFProjectManagerName_Sel',fld:'vTFPROJECTMANAGERNAME_SEL',pic:''},{av:'AV34TFProjectStatus_Sels',fld:'vTFPROJECTSTATUS_SELS',pic:''},{av:'AV13OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV14OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV43IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV45IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV48IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'Gridpaginationbar_Rowsperpageselectedvalue',ctrl:'GRIDPAGINATIONBAR',prop:'RowsPerPageSelectedValue'}]");
+         setEventMetadata("GRIDPAGINATIONBAR.CHANGEROWSPERPAGE","{handler:'E133L2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV16FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV26ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV21ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV54Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV29TFProjectName',fld:'vTFPROJECTNAME',pic:''},{av:'AV30TFProjectName_Sel',fld:'vTFPROJECTNAME_SEL',pic:''},{av:'AV31TFProjectDescription',fld:'vTFPROJECTDESCRIPTION',pic:''},{av:'AV32TFProjectDescription_Sel',fld:'vTFPROJECTDESCRIPTION_SEL',pic:''},{av:'AV34TFProjectStatus_Sels',fld:'vTFPROJECTSTATUS_SELS',pic:''},{av:'AV52TFProjectManagerName',fld:'vTFPROJECTMANAGERNAME',pic:''},{av:'AV53TFProjectManagerName_Sel',fld:'vTFPROJECTMANAGERNAME_SEL',pic:''},{av:'AV13OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV14OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV43IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV45IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV48IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'Gridpaginationbar_Rowsperpageselectedvalue',ctrl:'GRIDPAGINATIONBAR',prop:'RowsPerPageSelectedValue'}]");
          setEventMetadata("GRIDPAGINATIONBAR.CHANGEROWSPERPAGE",",oparms:[{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'}]}");
-         setEventMetadata("DDO_GRID.ONOPTIONCLICKED","{handler:'E153L2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV16FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV26ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV21ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV54Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV29TFProjectName',fld:'vTFPROJECTNAME',pic:''},{av:'AV30TFProjectName_Sel',fld:'vTFPROJECTNAME_SEL',pic:''},{av:'AV31TFProjectDescription',fld:'vTFPROJECTDESCRIPTION',pic:''},{av:'AV32TFProjectDescription_Sel',fld:'vTFPROJECTDESCRIPTION_SEL',pic:''},{av:'AV52TFProjectManagerName',fld:'vTFPROJECTMANAGERNAME',pic:''},{av:'AV53TFProjectManagerName_Sel',fld:'vTFPROJECTMANAGERNAME_SEL',pic:''},{av:'AV34TFProjectStatus_Sels',fld:'vTFPROJECTSTATUS_SELS',pic:''},{av:'AV13OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV14OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV43IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV45IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV48IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'Ddo_grid_Activeeventkey',ctrl:'DDO_GRID',prop:'ActiveEventKey'},{av:'Ddo_grid_Selectedvalue_get',ctrl:'DDO_GRID',prop:'SelectedValue_get'},{av:'Ddo_grid_Selectedcolumn',ctrl:'DDO_GRID',prop:'SelectedColumn'},{av:'Ddo_grid_Filteredtext_get',ctrl:'DDO_GRID',prop:'FilteredText_get'}]");
-         setEventMetadata("DDO_GRID.ONOPTIONCLICKED",",oparms:[{av:'AV13OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV14OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV29TFProjectName',fld:'vTFPROJECTNAME',pic:''},{av:'AV30TFProjectName_Sel',fld:'vTFPROJECTNAME_SEL',pic:''},{av:'AV31TFProjectDescription',fld:'vTFPROJECTDESCRIPTION',pic:''},{av:'AV32TFProjectDescription_Sel',fld:'vTFPROJECTDESCRIPTION_SEL',pic:''},{av:'AV52TFProjectManagerName',fld:'vTFPROJECTMANAGERNAME',pic:''},{av:'AV53TFProjectManagerName_Sel',fld:'vTFPROJECTMANAGERNAME_SEL',pic:''},{av:'AV33TFProjectStatus_SelsJson',fld:'vTFPROJECTSTATUS_SELSJSON',pic:''},{av:'AV34TFProjectStatus_Sels',fld:'vTFPROJECTSTATUS_SELS',pic:''},{av:'Ddo_grid_Sortedstatus',ctrl:'DDO_GRID',prop:'SortedStatus'}]}");
+         setEventMetadata("DDO_GRID.ONOPTIONCLICKED","{handler:'E153L2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV16FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV26ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV21ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV54Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV29TFProjectName',fld:'vTFPROJECTNAME',pic:''},{av:'AV30TFProjectName_Sel',fld:'vTFPROJECTNAME_SEL',pic:''},{av:'AV31TFProjectDescription',fld:'vTFPROJECTDESCRIPTION',pic:''},{av:'AV32TFProjectDescription_Sel',fld:'vTFPROJECTDESCRIPTION_SEL',pic:''},{av:'AV34TFProjectStatus_Sels',fld:'vTFPROJECTSTATUS_SELS',pic:''},{av:'AV52TFProjectManagerName',fld:'vTFPROJECTMANAGERNAME',pic:''},{av:'AV53TFProjectManagerName_Sel',fld:'vTFPROJECTMANAGERNAME_SEL',pic:''},{av:'AV13OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV14OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV43IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV45IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV48IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'Ddo_grid_Activeeventkey',ctrl:'DDO_GRID',prop:'ActiveEventKey'},{av:'Ddo_grid_Selectedvalue_get',ctrl:'DDO_GRID',prop:'SelectedValue_get'},{av:'Ddo_grid_Selectedcolumn',ctrl:'DDO_GRID',prop:'SelectedColumn'},{av:'Ddo_grid_Filteredtext_get',ctrl:'DDO_GRID',prop:'FilteredText_get'}]");
+         setEventMetadata("DDO_GRID.ONOPTIONCLICKED",",oparms:[{av:'AV13OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV14OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV29TFProjectName',fld:'vTFPROJECTNAME',pic:''},{av:'AV30TFProjectName_Sel',fld:'vTFPROJECTNAME_SEL',pic:''},{av:'AV31TFProjectDescription',fld:'vTFPROJECTDESCRIPTION',pic:''},{av:'AV32TFProjectDescription_Sel',fld:'vTFPROJECTDESCRIPTION_SEL',pic:''},{av:'AV33TFProjectStatus_SelsJson',fld:'vTFPROJECTSTATUS_SELSJSON',pic:''},{av:'AV34TFProjectStatus_Sels',fld:'vTFPROJECTSTATUS_SELS',pic:''},{av:'AV52TFProjectManagerName',fld:'vTFPROJECTMANAGERNAME',pic:''},{av:'AV53TFProjectManagerName_Sel',fld:'vTFPROJECTMANAGERNAME_SEL',pic:''},{av:'Ddo_grid_Sortedstatus',ctrl:'DDO_GRID',prop:'SortedStatus'}]}");
          setEventMetadata("GRID.LOAD","{handler:'E203L2',iparms:[{av:'AV43IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9',hsh:true},{av:'AV45IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true}]");
          setEventMetadata("GRID.LOAD",",oparms:[{av:'AV42Update',fld:'vUPDATE',pic:''},{av:'edtavUpdate_Link',ctrl:'vUPDATE',prop:'Link'},{av:'AV44Delete',fld:'vDELETE',pic:''},{av:'edtavDelete_Link',ctrl:'vDELETE',prop:'Link'}]}");
-         setEventMetadata("DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED","{handler:'E163L2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV16FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV26ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV21ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV54Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV29TFProjectName',fld:'vTFPROJECTNAME',pic:''},{av:'AV30TFProjectName_Sel',fld:'vTFPROJECTNAME_SEL',pic:''},{av:'AV31TFProjectDescription',fld:'vTFPROJECTDESCRIPTION',pic:''},{av:'AV32TFProjectDescription_Sel',fld:'vTFPROJECTDESCRIPTION_SEL',pic:''},{av:'AV52TFProjectManagerName',fld:'vTFPROJECTMANAGERNAME',pic:''},{av:'AV53TFProjectManagerName_Sel',fld:'vTFPROJECTMANAGERNAME_SEL',pic:''},{av:'AV34TFProjectStatus_Sels',fld:'vTFPROJECTSTATUS_SELS',pic:''},{av:'AV13OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV14OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV43IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV45IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV48IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'Ddo_gridcolumnsselector_Columnsselectorvalues',ctrl:'DDO_GRIDCOLUMNSSELECTOR',prop:'ColumnsSelectorValues'}]");
-         setEventMetadata("DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED",",oparms:[{av:'AV21ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV26ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'edtProjectName_Visible',ctrl:'PROJECTNAME',prop:'Visible'},{av:'edtProjectDescription_Visible',ctrl:'PROJECTDESCRIPTION',prop:'Visible'},{av:'edtProjectManagerName_Visible',ctrl:'PROJECTMANAGERNAME',prop:'Visible'},{av:'cmbProjectStatus'},{av:'AV39GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV40GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV41GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'AV43IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'edtavUpdate_Visible',ctrl:'vUPDATE',prop:'Visible'},{av:'AV45IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'edtavDelete_Visible',ctrl:'vDELETE',prop:'Visible'},{av:'AV48IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{ctrl:'BTNINSERT',prop:'Visible'},{av:'AV24ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''},{av:'AV11GridState',fld:'vGRIDSTATE',pic:''}]}");
-         setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED","{handler:'E113L2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV16FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV26ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV21ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV54Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV29TFProjectName',fld:'vTFPROJECTNAME',pic:''},{av:'AV30TFProjectName_Sel',fld:'vTFPROJECTNAME_SEL',pic:''},{av:'AV31TFProjectDescription',fld:'vTFPROJECTDESCRIPTION',pic:''},{av:'AV32TFProjectDescription_Sel',fld:'vTFPROJECTDESCRIPTION_SEL',pic:''},{av:'AV52TFProjectManagerName',fld:'vTFPROJECTMANAGERNAME',pic:''},{av:'AV53TFProjectManagerName_Sel',fld:'vTFPROJECTMANAGERNAME_SEL',pic:''},{av:'AV34TFProjectStatus_Sels',fld:'vTFPROJECTSTATUS_SELS',pic:''},{av:'AV13OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV14OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV43IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV45IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV48IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'Ddo_managefilters_Activeeventkey',ctrl:'DDO_MANAGEFILTERS',prop:'ActiveEventKey'},{av:'AV11GridState',fld:'vGRIDSTATE',pic:''},{av:'AV33TFProjectStatus_SelsJson',fld:'vTFPROJECTSTATUS_SELSJSON',pic:''}]");
-         setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED",",oparms:[{av:'AV26ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV11GridState',fld:'vGRIDSTATE',pic:''},{av:'AV13OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV14OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV16FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV29TFProjectName',fld:'vTFPROJECTNAME',pic:''},{av:'AV30TFProjectName_Sel',fld:'vTFPROJECTNAME_SEL',pic:''},{av:'AV31TFProjectDescription',fld:'vTFPROJECTDESCRIPTION',pic:''},{av:'AV32TFProjectDescription_Sel',fld:'vTFPROJECTDESCRIPTION_SEL',pic:''},{av:'AV52TFProjectManagerName',fld:'vTFPROJECTMANAGERNAME',pic:''},{av:'AV53TFProjectManagerName_Sel',fld:'vTFPROJECTMANAGERNAME_SEL',pic:''},{av:'AV34TFProjectStatus_Sels',fld:'vTFPROJECTSTATUS_SELS',pic:''},{av:'Ddo_grid_Selectedvalue_set',ctrl:'DDO_GRID',prop:'SelectedValue_set'},{av:'Ddo_grid_Filteredtext_set',ctrl:'DDO_GRID',prop:'FilteredText_set'},{av:'Ddo_grid_Sortedstatus',ctrl:'DDO_GRID',prop:'SortedStatus'},{av:'AV33TFProjectStatus_SelsJson',fld:'vTFPROJECTSTATUS_SELSJSON',pic:''},{av:'AV21ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'edtProjectName_Visible',ctrl:'PROJECTNAME',prop:'Visible'},{av:'edtProjectDescription_Visible',ctrl:'PROJECTDESCRIPTION',prop:'Visible'},{av:'edtProjectManagerName_Visible',ctrl:'PROJECTMANAGERNAME',prop:'Visible'},{av:'cmbProjectStatus'},{av:'AV39GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV40GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV41GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'AV43IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'edtavUpdate_Visible',ctrl:'vUPDATE',prop:'Visible'},{av:'AV45IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'edtavDelete_Visible',ctrl:'vDELETE',prop:'Visible'},{av:'AV48IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{ctrl:'BTNINSERT',prop:'Visible'},{av:'AV24ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''}]}");
-         setEventMetadata("'DOINSERT'","{handler:'E173L2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV16FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV26ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV21ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV54Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV29TFProjectName',fld:'vTFPROJECTNAME',pic:''},{av:'AV30TFProjectName_Sel',fld:'vTFPROJECTNAME_SEL',pic:''},{av:'AV31TFProjectDescription',fld:'vTFPROJECTDESCRIPTION',pic:''},{av:'AV32TFProjectDescription_Sel',fld:'vTFPROJECTDESCRIPTION_SEL',pic:''},{av:'AV52TFProjectManagerName',fld:'vTFPROJECTMANAGERNAME',pic:''},{av:'AV53TFProjectManagerName_Sel',fld:'vTFPROJECTMANAGERNAME_SEL',pic:''},{av:'AV34TFProjectStatus_Sels',fld:'vTFPROJECTSTATUS_SELS',pic:''},{av:'AV13OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV14OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV43IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV45IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV48IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9',hsh:true}]");
-         setEventMetadata("'DOINSERT'",",oparms:[{av:'AV26ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV21ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'edtProjectName_Visible',ctrl:'PROJECTNAME',prop:'Visible'},{av:'edtProjectDescription_Visible',ctrl:'PROJECTDESCRIPTION',prop:'Visible'},{av:'edtProjectManagerName_Visible',ctrl:'PROJECTMANAGERNAME',prop:'Visible'},{av:'cmbProjectStatus'},{av:'AV39GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV40GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV41GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'AV43IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'edtavUpdate_Visible',ctrl:'vUPDATE',prop:'Visible'},{av:'AV45IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'edtavDelete_Visible',ctrl:'vDELETE',prop:'Visible'},{av:'AV48IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{ctrl:'BTNINSERT',prop:'Visible'},{av:'AV24ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''},{av:'AV11GridState',fld:'vGRIDSTATE',pic:''}]}");
-         setEventMetadata("DDO_AGEXPORT.ONOPTIONCLICKED","{handler:'E143L2',iparms:[{av:'Ddo_agexport_Activeeventkey',ctrl:'DDO_AGEXPORT',prop:'ActiveEventKey'},{av:'AV54Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV13OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV14OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV11GridState',fld:'vGRIDSTATE',pic:''},{av:'AV30TFProjectName_Sel',fld:'vTFPROJECTNAME_SEL',pic:''},{av:'AV32TFProjectDescription_Sel',fld:'vTFPROJECTDESCRIPTION_SEL',pic:''},{av:'AV53TFProjectManagerName_Sel',fld:'vTFPROJECTMANAGERNAME_SEL',pic:''},{av:'AV34TFProjectStatus_Sels',fld:'vTFPROJECTSTATUS_SELS',pic:''},{av:'AV33TFProjectStatus_SelsJson',fld:'vTFPROJECTSTATUS_SELSJSON',pic:''},{av:'AV29TFProjectName',fld:'vTFPROJECTNAME',pic:''},{av:'AV31TFProjectDescription',fld:'vTFPROJECTDESCRIPTION',pic:''},{av:'AV52TFProjectManagerName',fld:'vTFPROJECTMANAGERNAME',pic:''}]");
-         setEventMetadata("DDO_AGEXPORT.ONOPTIONCLICKED",",oparms:[{av:'AV11GridState',fld:'vGRIDSTATE',pic:''},{av:'AV13OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV14OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'AV16FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV26ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV21ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV54Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV29TFProjectName',fld:'vTFPROJECTNAME',pic:''},{av:'AV30TFProjectName_Sel',fld:'vTFPROJECTNAME_SEL',pic:''},{av:'AV31TFProjectDescription',fld:'vTFPROJECTDESCRIPTION',pic:''},{av:'AV32TFProjectDescription_Sel',fld:'vTFPROJECTDESCRIPTION_SEL',pic:''},{av:'AV52TFProjectManagerName',fld:'vTFPROJECTMANAGERNAME',pic:''},{av:'AV53TFProjectManagerName_Sel',fld:'vTFPROJECTMANAGERNAME_SEL',pic:''},{av:'AV34TFProjectStatus_Sels',fld:'vTFPROJECTSTATUS_SELS',pic:''},{av:'AV43IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV45IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV48IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'Ddo_grid_Sortedstatus',ctrl:'DDO_GRID',prop:'SortedStatus'},{av:'AV33TFProjectStatus_SelsJson',fld:'vTFPROJECTSTATUS_SELSJSON',pic:''},{av:'Ddo_grid_Selectedvalue_set',ctrl:'DDO_GRID',prop:'SelectedValue_set'},{av:'Ddo_grid_Filteredtext_set',ctrl:'DDO_GRID',prop:'FilteredText_set'}]}");
-         setEventMetadata("NULL","{handler:'Valid_Projectstatus',iparms:[]");
+         setEventMetadata("DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED","{handler:'E163L2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV16FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV26ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV21ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV54Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV29TFProjectName',fld:'vTFPROJECTNAME',pic:''},{av:'AV30TFProjectName_Sel',fld:'vTFPROJECTNAME_SEL',pic:''},{av:'AV31TFProjectDescription',fld:'vTFPROJECTDESCRIPTION',pic:''},{av:'AV32TFProjectDescription_Sel',fld:'vTFPROJECTDESCRIPTION_SEL',pic:''},{av:'AV34TFProjectStatus_Sels',fld:'vTFPROJECTSTATUS_SELS',pic:''},{av:'AV52TFProjectManagerName',fld:'vTFPROJECTMANAGERNAME',pic:''},{av:'AV53TFProjectManagerName_Sel',fld:'vTFPROJECTMANAGERNAME_SEL',pic:''},{av:'AV13OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV14OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV43IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV45IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV48IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'Ddo_gridcolumnsselector_Columnsselectorvalues',ctrl:'DDO_GRIDCOLUMNSSELECTOR',prop:'ColumnsSelectorValues'}]");
+         setEventMetadata("DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED",",oparms:[{av:'AV21ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV26ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'edtProjectName_Visible',ctrl:'PROJECTNAME',prop:'Visible'},{av:'edtProjectDescription_Visible',ctrl:'PROJECTDESCRIPTION',prop:'Visible'},{av:'cmbProjectStatus'},{av:'edtProjectManagerName_Visible',ctrl:'PROJECTMANAGERNAME',prop:'Visible'},{av:'AV39GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV40GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV41GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'AV43IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'edtavUpdate_Visible',ctrl:'vUPDATE',prop:'Visible'},{av:'AV45IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'edtavDelete_Visible',ctrl:'vDELETE',prop:'Visible'},{av:'AV48IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{ctrl:'BTNINSERT',prop:'Visible'},{av:'AV24ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''},{av:'AV11GridState',fld:'vGRIDSTATE',pic:''}]}");
+         setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED","{handler:'E113L2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV16FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV26ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV21ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV54Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV29TFProjectName',fld:'vTFPROJECTNAME',pic:''},{av:'AV30TFProjectName_Sel',fld:'vTFPROJECTNAME_SEL',pic:''},{av:'AV31TFProjectDescription',fld:'vTFPROJECTDESCRIPTION',pic:''},{av:'AV32TFProjectDescription_Sel',fld:'vTFPROJECTDESCRIPTION_SEL',pic:''},{av:'AV34TFProjectStatus_Sels',fld:'vTFPROJECTSTATUS_SELS',pic:''},{av:'AV52TFProjectManagerName',fld:'vTFPROJECTMANAGERNAME',pic:''},{av:'AV53TFProjectManagerName_Sel',fld:'vTFPROJECTMANAGERNAME_SEL',pic:''},{av:'AV13OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV14OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV43IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV45IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV48IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'Ddo_managefilters_Activeeventkey',ctrl:'DDO_MANAGEFILTERS',prop:'ActiveEventKey'},{av:'AV11GridState',fld:'vGRIDSTATE',pic:''},{av:'AV33TFProjectStatus_SelsJson',fld:'vTFPROJECTSTATUS_SELSJSON',pic:''}]");
+         setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED",",oparms:[{av:'AV26ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV11GridState',fld:'vGRIDSTATE',pic:''},{av:'AV13OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV14OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV16FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV29TFProjectName',fld:'vTFPROJECTNAME',pic:''},{av:'AV30TFProjectName_Sel',fld:'vTFPROJECTNAME_SEL',pic:''},{av:'AV31TFProjectDescription',fld:'vTFPROJECTDESCRIPTION',pic:''},{av:'AV32TFProjectDescription_Sel',fld:'vTFPROJECTDESCRIPTION_SEL',pic:''},{av:'AV34TFProjectStatus_Sels',fld:'vTFPROJECTSTATUS_SELS',pic:''},{av:'AV52TFProjectManagerName',fld:'vTFPROJECTMANAGERNAME',pic:''},{av:'AV53TFProjectManagerName_Sel',fld:'vTFPROJECTMANAGERNAME_SEL',pic:''},{av:'Ddo_grid_Selectedvalue_set',ctrl:'DDO_GRID',prop:'SelectedValue_set'},{av:'Ddo_grid_Filteredtext_set',ctrl:'DDO_GRID',prop:'FilteredText_set'},{av:'Ddo_grid_Sortedstatus',ctrl:'DDO_GRID',prop:'SortedStatus'},{av:'AV33TFProjectStatus_SelsJson',fld:'vTFPROJECTSTATUS_SELSJSON',pic:''},{av:'AV21ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'edtProjectName_Visible',ctrl:'PROJECTNAME',prop:'Visible'},{av:'edtProjectDescription_Visible',ctrl:'PROJECTDESCRIPTION',prop:'Visible'},{av:'cmbProjectStatus'},{av:'edtProjectManagerName_Visible',ctrl:'PROJECTMANAGERNAME',prop:'Visible'},{av:'AV39GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV40GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV41GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'AV43IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'edtavUpdate_Visible',ctrl:'vUPDATE',prop:'Visible'},{av:'AV45IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'edtavDelete_Visible',ctrl:'vDELETE',prop:'Visible'},{av:'AV48IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{ctrl:'BTNINSERT',prop:'Visible'},{av:'AV24ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''}]}");
+         setEventMetadata("'DOINSERT'","{handler:'E173L2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV16FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV26ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV21ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV54Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV29TFProjectName',fld:'vTFPROJECTNAME',pic:''},{av:'AV30TFProjectName_Sel',fld:'vTFPROJECTNAME_SEL',pic:''},{av:'AV31TFProjectDescription',fld:'vTFPROJECTDESCRIPTION',pic:''},{av:'AV32TFProjectDescription_Sel',fld:'vTFPROJECTDESCRIPTION_SEL',pic:''},{av:'AV34TFProjectStatus_Sels',fld:'vTFPROJECTSTATUS_SELS',pic:''},{av:'AV52TFProjectManagerName',fld:'vTFPROJECTMANAGERNAME',pic:''},{av:'AV53TFProjectManagerName_Sel',fld:'vTFPROJECTMANAGERNAME_SEL',pic:''},{av:'AV13OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV14OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV43IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV45IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV48IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9',hsh:true}]");
+         setEventMetadata("'DOINSERT'",",oparms:[{av:'AV26ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV21ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'edtProjectName_Visible',ctrl:'PROJECTNAME',prop:'Visible'},{av:'edtProjectDescription_Visible',ctrl:'PROJECTDESCRIPTION',prop:'Visible'},{av:'cmbProjectStatus'},{av:'edtProjectManagerName_Visible',ctrl:'PROJECTMANAGERNAME',prop:'Visible'},{av:'AV39GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV40GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV41GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'AV43IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'edtavUpdate_Visible',ctrl:'vUPDATE',prop:'Visible'},{av:'AV45IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'edtavDelete_Visible',ctrl:'vDELETE',prop:'Visible'},{av:'AV48IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{ctrl:'BTNINSERT',prop:'Visible'},{av:'AV24ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''},{av:'AV11GridState',fld:'vGRIDSTATE',pic:''}]}");
+         setEventMetadata("DDO_AGEXPORT.ONOPTIONCLICKED","{handler:'E143L2',iparms:[{av:'Ddo_agexport_Activeeventkey',ctrl:'DDO_AGEXPORT',prop:'ActiveEventKey'},{av:'AV54Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV13OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV14OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV11GridState',fld:'vGRIDSTATE',pic:''},{av:'AV30TFProjectName_Sel',fld:'vTFPROJECTNAME_SEL',pic:''},{av:'AV32TFProjectDescription_Sel',fld:'vTFPROJECTDESCRIPTION_SEL',pic:''},{av:'AV34TFProjectStatus_Sels',fld:'vTFPROJECTSTATUS_SELS',pic:''},{av:'AV33TFProjectStatus_SelsJson',fld:'vTFPROJECTSTATUS_SELSJSON',pic:''},{av:'AV53TFProjectManagerName_Sel',fld:'vTFPROJECTMANAGERNAME_SEL',pic:''},{av:'AV29TFProjectName',fld:'vTFPROJECTNAME',pic:''},{av:'AV31TFProjectDescription',fld:'vTFPROJECTDESCRIPTION',pic:''},{av:'AV52TFProjectManagerName',fld:'vTFPROJECTMANAGERNAME',pic:''}]");
+         setEventMetadata("DDO_AGEXPORT.ONOPTIONCLICKED",",oparms:[{av:'AV11GridState',fld:'vGRIDSTATE',pic:''},{av:'AV13OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV14OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'AV16FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV26ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV21ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV54Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV29TFProjectName',fld:'vTFPROJECTNAME',pic:''},{av:'AV30TFProjectName_Sel',fld:'vTFPROJECTNAME_SEL',pic:''},{av:'AV31TFProjectDescription',fld:'vTFPROJECTDESCRIPTION',pic:''},{av:'AV32TFProjectDescription_Sel',fld:'vTFPROJECTDESCRIPTION_SEL',pic:''},{av:'AV34TFProjectStatus_Sels',fld:'vTFPROJECTSTATUS_SELS',pic:''},{av:'AV52TFProjectManagerName',fld:'vTFPROJECTMANAGERNAME',pic:''},{av:'AV53TFProjectManagerName_Sel',fld:'vTFPROJECTMANAGERNAME_SEL',pic:''},{av:'AV43IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV45IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV48IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'Ddo_grid_Sortedstatus',ctrl:'DDO_GRID',prop:'SortedStatus'},{av:'AV33TFProjectStatus_SelsJson',fld:'vTFPROJECTSTATUS_SELSJSON',pic:''},{av:'Ddo_grid_Selectedvalue_set',ctrl:'DDO_GRID',prop:'SelectedValue_set'},{av:'Ddo_grid_Filteredtext_set',ctrl:'DDO_GRID',prop:'FilteredText_set'}]}");
+         setEventMetadata("NULL","{handler:'Valid_Projectmanagername',iparms:[]");
          setEventMetadata("NULL",",oparms:[]}");
          return  ;
       }
@@ -2919,9 +2919,9 @@ namespace GeneXus.Programs {
          AV30TFProjectName_Sel = "";
          AV31TFProjectDescription = "";
          AV32TFProjectDescription_Sel = "";
+         AV34TFProjectStatus_Sels = new GxSimpleCollection<string>();
          AV52TFProjectManagerName = "";
          AV53TFProjectManagerName_Sel = "";
-         AV34TFProjectStatus_Sels = new GxSimpleCollection<string>();
          sDynURL = "";
          FormProcess = "";
          bodyStyle = "";
@@ -2964,25 +2964,25 @@ namespace GeneXus.Programs {
          AV44Delete = "";
          A103ProjectName = "";
          A104ProjectDescription = "";
-         A167ProjectManagerName = "";
          A105ProjectStatus = "";
-         AV62Projectwwds_8_tfprojectstatus_sels = new GxSimpleCollection<string>();
+         A167ProjectManagerName = "";
+         AV60Projectwwds_6_tfprojectstatus_sels = new GxSimpleCollection<string>();
          scmdbuf = "";
          lV55Projectwwds_1_filterfulltext = "";
          lV56Projectwwds_2_tfprojectname = "";
          lV58Projectwwds_4_tfprojectdescription = "";
-         lV60Projectwwds_6_tfprojectmanagername = "";
+         lV61Projectwwds_7_tfprojectmanagername = "";
          AV55Projectwwds_1_filterfulltext = "";
          AV57Projectwwds_3_tfprojectname_sel = "";
          AV56Projectwwds_2_tfprojectname = "";
          AV59Projectwwds_5_tfprojectdescription_sel = "";
          AV58Projectwwds_4_tfprojectdescription = "";
-         AV61Projectwwds_7_tfprojectmanagername_sel = "";
-         AV60Projectwwds_6_tfprojectmanagername = "";
+         AV62Projectwwds_8_tfprojectmanagername_sel = "";
+         AV61Projectwwds_7_tfprojectmanagername = "";
          H003L2_A166ProjectManagerId = new long[1] ;
          H003L2_n166ProjectManagerId = new bool[] {false} ;
-         H003L2_A105ProjectStatus = new string[] {""} ;
          H003L2_A167ProjectManagerName = new string[] {""} ;
+         H003L2_A105ProjectStatus = new string[] {""} ;
          H003L2_A104ProjectDescription = new string[] {""} ;
          H003L2_A103ProjectName = new string[] {""} ;
          H003L2_A102ProjectId = new long[1] ;
@@ -3020,7 +3020,7 @@ namespace GeneXus.Programs {
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.projectww__default(),
             new Object[][] {
                 new Object[] {
-               H003L2_A166ProjectManagerId, H003L2_n166ProjectManagerId, H003L2_A105ProjectStatus, H003L2_A167ProjectManagerName, H003L2_A104ProjectDescription, H003L2_A103ProjectName, H003L2_A102ProjectId
+               H003L2_A166ProjectManagerId, H003L2_n166ProjectManagerId, H003L2_A167ProjectManagerName, H003L2_A105ProjectStatus, H003L2_A104ProjectDescription, H003L2_A103ProjectName, H003L2_A102ProjectId
                }
                , new Object[] {
                H003L3_AGRID_nRecordCount
@@ -3065,7 +3065,7 @@ namespace GeneXus.Programs {
       private int edtavDelete_Enabled ;
       private int GXPagingFrom2 ;
       private int GXPagingTo2 ;
-      private int AV62Projectwwds_8_tfprojectstatus_sels_Count ;
+      private int AV60Projectwwds_6_tfprojectstatus_sels_Count ;
       private int edtProjectId_Enabled ;
       private int edtProjectName_Enabled ;
       private int edtProjectDescription_Enabled ;
@@ -3195,18 +3195,18 @@ namespace GeneXus.Programs {
       private string A103ProjectName ;
       private string edtProjectName_Internalname ;
       private string edtProjectDescription_Internalname ;
-      private string A167ProjectManagerName ;
-      private string edtProjectManagerName_Internalname ;
       private string cmbProjectStatus_Internalname ;
       private string A105ProjectStatus ;
+      private string A167ProjectManagerName ;
+      private string edtProjectManagerName_Internalname ;
       private string edtavFilterfulltext_Internalname ;
       private string scmdbuf ;
       private string lV56Projectwwds_2_tfprojectname ;
-      private string lV60Projectwwds_6_tfprojectmanagername ;
+      private string lV61Projectwwds_7_tfprojectmanagername ;
       private string AV57Projectwwds_3_tfprojectname_sel ;
       private string AV56Projectwwds_2_tfprojectname ;
-      private string AV61Projectwwds_7_tfprojectmanagername_sel ;
-      private string AV60Projectwwds_6_tfprojectmanagername ;
+      private string AV62Projectwwds_8_tfprojectmanagername_sel ;
+      private string AV61Projectwwds_7_tfprojectmanagername ;
       private string edtavUpdate_Link ;
       private string edtavDelete_Link ;
       private string GXt_char2 ;
@@ -3227,9 +3227,9 @@ namespace GeneXus.Programs {
       private string edtProjectId_Jsonclick ;
       private string edtProjectName_Jsonclick ;
       private string edtProjectDescription_Jsonclick ;
-      private string edtProjectManagerName_Jsonclick ;
       private string GXCCtl ;
       private string cmbProjectStatus_Jsonclick ;
+      private string edtProjectManagerName_Jsonclick ;
       private string subGrid_Header ;
       private bool entryPointCalled ;
       private bool toggleJsOutput ;
@@ -3286,8 +3286,8 @@ namespace GeneXus.Programs {
       private IDataStoreProvider pr_default ;
       private long[] H003L2_A166ProjectManagerId ;
       private bool[] H003L2_n166ProjectManagerId ;
-      private string[] H003L2_A105ProjectStatus ;
       private string[] H003L2_A167ProjectManagerName ;
+      private string[] H003L2_A105ProjectStatus ;
       private string[] H003L2_A104ProjectDescription ;
       private string[] H003L2_A103ProjectName ;
       private long[] H003L2_A102ProjectId ;
@@ -3296,7 +3296,7 @@ namespace GeneXus.Programs {
       private msglist LclMsgLst ;
       private GxHttpRequest AV8HTTPRequest ;
       private GxSimpleCollection<string> AV34TFProjectStatus_Sels ;
-      private GxSimpleCollection<string> AV62Projectwwds_8_tfprojectstatus_sels ;
+      private GxSimpleCollection<string> AV60Projectwwds_6_tfprojectstatus_sels ;
       private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsData_Item> AV24ManageFiltersData ;
       private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsData_Item> AV46AGExportData ;
       private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsData_Item> GXt_objcol_SdtDVB_SDTDropDownOptionsData_Item4 ;
@@ -3318,15 +3318,15 @@ namespace GeneXus.Programs {
    {
       protected Object[] conditional_H003L2( IGxContext context ,
                                              string A105ProjectStatus ,
-                                             GxSimpleCollection<string> AV62Projectwwds_8_tfprojectstatus_sels ,
+                                             GxSimpleCollection<string> AV60Projectwwds_6_tfprojectstatus_sels ,
                                              string AV55Projectwwds_1_filterfulltext ,
                                              string AV57Projectwwds_3_tfprojectname_sel ,
                                              string AV56Projectwwds_2_tfprojectname ,
                                              string AV59Projectwwds_5_tfprojectdescription_sel ,
                                              string AV58Projectwwds_4_tfprojectdescription ,
-                                             string AV61Projectwwds_7_tfprojectmanagername_sel ,
-                                             string AV60Projectwwds_6_tfprojectmanagername ,
-                                             int AV62Projectwwds_8_tfprojectstatus_sels_Count ,
+                                             int AV60Projectwwds_6_tfprojectstatus_sels_Count ,
+                                             string AV62Projectwwds_8_tfprojectmanagername_sel ,
+                                             string AV61Projectwwds_7_tfprojectmanagername ,
                                              string A103ProjectName ,
                                              string A104ProjectDescription ,
                                              string A167ProjectManagerName ,
@@ -3340,12 +3340,12 @@ namespace GeneXus.Programs {
          string sSelectString;
          string sFromString;
          string sOrderString;
-         sSelectString = " T1.ProjectManagerId AS ProjectManagerId, T1.ProjectStatus, T2.EmployeeName AS ProjectManagerName, T1.ProjectDescription, T1.ProjectName, T1.ProjectId";
+         sSelectString = " T1.ProjectManagerId AS ProjectManagerId, T2.EmployeeName AS ProjectManagerName, T1.ProjectStatus, T1.ProjectDescription, T1.ProjectName, T1.ProjectId";
          sFromString = " FROM (Project T1 LEFT JOIN Employee T2 ON T2.EmployeeId = T1.ProjectManagerId)";
          sOrderString = "";
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV55Projectwwds_1_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( LOWER(T1.ProjectName) like '%' || LOWER(:lV55Projectwwds_1_filterfulltext)) or ( LOWER(T1.ProjectDescription) like '%' || LOWER(:lV55Projectwwds_1_filterfulltext)) or ( LOWER(T2.EmployeeName) like '%' || LOWER(:lV55Projectwwds_1_filterfulltext)) or ( 'active' like '%' || LOWER(:lV55Projectwwds_1_filterfulltext) and T1.ProjectStatus = ( 'Active')) or ( 'inactive' like '%' || LOWER(:lV55Projectwwds_1_filterfulltext) and T1.ProjectStatus = ( 'Inactive')))");
+            AddWhere(sWhereString, "(( LOWER(T1.ProjectName) like '%' || LOWER(:lV55Projectwwds_1_filterfulltext)) or ( LOWER(T1.ProjectDescription) like '%' || LOWER(:lV55Projectwwds_1_filterfulltext)) or ( 'active' like '%' || LOWER(:lV55Projectwwds_1_filterfulltext) and T1.ProjectStatus = ( 'Active')) or ( 'inactive' like '%' || LOWER(:lV55Projectwwds_1_filterfulltext) and T1.ProjectStatus = ( 'Inactive')) or ( LOWER(T2.EmployeeName) like '%' || LOWER(:lV55Projectwwds_1_filterfulltext)))");
          }
          else
          {
@@ -3395,29 +3395,29 @@ namespace GeneXus.Programs {
          {
             AddWhere(sWhereString, "((char_length(trim(trailing ' ' from T1.ProjectDescription))=0))");
          }
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV61Projectwwds_7_tfprojectmanagername_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV60Projectwwds_6_tfprojectmanagername)) ) )
+         if ( AV60Projectwwds_6_tfprojectstatus_sels_Count > 0 )
          {
-            AddWhere(sWhereString, "(LOWER(T2.EmployeeName) like LOWER(:lV60Projectwwds_6_tfprojectmanagername))");
+            AddWhere(sWhereString, "("+new GxDbmsUtils( new GxPostgreSql()).ValueList(AV60Projectwwds_6_tfprojectstatus_sels, "T1.ProjectStatus IN (", ")")+")");
+         }
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV62Projectwwds_8_tfprojectmanagername_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV61Projectwwds_7_tfprojectmanagername)) ) )
+         {
+            AddWhere(sWhereString, "(LOWER(T2.EmployeeName) like LOWER(:lV61Projectwwds_7_tfprojectmanagername))");
          }
          else
          {
             GXv_int8[9] = 1;
          }
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV61Projectwwds_7_tfprojectmanagername_sel)) && ! ( StringUtil.StrCmp(AV61Projectwwds_7_tfprojectmanagername_sel, "<#Empty#>") == 0 ) )
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV62Projectwwds_8_tfprojectmanagername_sel)) && ! ( StringUtil.StrCmp(AV62Projectwwds_8_tfprojectmanagername_sel, "<#Empty#>") == 0 ) )
          {
-            AddWhere(sWhereString, "(T2.EmployeeName = ( :AV61Projectwwds_7_tfprojectmanagername_sel))");
+            AddWhere(sWhereString, "(T2.EmployeeName = ( :AV62Projectwwds_8_tfprojectmanagername_sel))");
          }
          else
          {
             GXv_int8[10] = 1;
          }
-         if ( StringUtil.StrCmp(AV61Projectwwds_7_tfprojectmanagername_sel, "<#Empty#>") == 0 )
+         if ( StringUtil.StrCmp(AV62Projectwwds_8_tfprojectmanagername_sel, "<#Empty#>") == 0 )
          {
             AddWhere(sWhereString, "((char_length(trim(trailing ' ' from T2.EmployeeName))=0))");
-         }
-         if ( AV62Projectwwds_8_tfprojectstatus_sels_Count > 0 )
-         {
-            AddWhere(sWhereString, "("+new GxDbmsUtils( new GxPostgreSql()).ValueList(AV62Projectwwds_8_tfprojectstatus_sels, "T1.ProjectStatus IN (", ")")+")");
          }
          if ( ( AV13OrderedBy == 1 ) && ! AV14OrderedDsc )
          {
@@ -3437,19 +3437,19 @@ namespace GeneXus.Programs {
          }
          else if ( ( AV13OrderedBy == 3 ) && ! AV14OrderedDsc )
          {
-            sOrderString += " ORDER BY T2.EmployeeName, T1.ProjectId";
+            sOrderString += " ORDER BY T1.ProjectStatus, T1.ProjectId";
          }
          else if ( ( AV13OrderedBy == 3 ) && ( AV14OrderedDsc ) )
          {
-            sOrderString += " ORDER BY T2.EmployeeName DESC, T1.ProjectId";
+            sOrderString += " ORDER BY T1.ProjectStatus DESC, T1.ProjectId";
          }
          else if ( ( AV13OrderedBy == 4 ) && ! AV14OrderedDsc )
          {
-            sOrderString += " ORDER BY T1.ProjectStatus, T1.ProjectId";
+            sOrderString += " ORDER BY T2.EmployeeName, T1.ProjectId";
          }
          else if ( ( AV13OrderedBy == 4 ) && ( AV14OrderedDsc ) )
          {
-            sOrderString += " ORDER BY T1.ProjectStatus DESC, T1.ProjectId";
+            sOrderString += " ORDER BY T2.EmployeeName DESC, T1.ProjectId";
          }
          else if ( true )
          {
@@ -3463,15 +3463,15 @@ namespace GeneXus.Programs {
 
       protected Object[] conditional_H003L3( IGxContext context ,
                                              string A105ProjectStatus ,
-                                             GxSimpleCollection<string> AV62Projectwwds_8_tfprojectstatus_sels ,
+                                             GxSimpleCollection<string> AV60Projectwwds_6_tfprojectstatus_sels ,
                                              string AV55Projectwwds_1_filterfulltext ,
                                              string AV57Projectwwds_3_tfprojectname_sel ,
                                              string AV56Projectwwds_2_tfprojectname ,
                                              string AV59Projectwwds_5_tfprojectdescription_sel ,
                                              string AV58Projectwwds_4_tfprojectdescription ,
-                                             string AV61Projectwwds_7_tfprojectmanagername_sel ,
-                                             string AV60Projectwwds_6_tfprojectmanagername ,
-                                             int AV62Projectwwds_8_tfprojectstatus_sels_Count ,
+                                             int AV60Projectwwds_6_tfprojectstatus_sels_Count ,
+                                             string AV62Projectwwds_8_tfprojectmanagername_sel ,
+                                             string AV61Projectwwds_7_tfprojectmanagername ,
                                              string A103ProjectName ,
                                              string A104ProjectDescription ,
                                              string A167ProjectManagerName ,
@@ -3485,7 +3485,7 @@ namespace GeneXus.Programs {
          scmdbuf = "SELECT COUNT(*) FROM (Project T1 LEFT JOIN Employee T2 ON T2.EmployeeId = T1.ProjectManagerId)";
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV55Projectwwds_1_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( LOWER(T1.ProjectName) like '%' || LOWER(:lV55Projectwwds_1_filterfulltext)) or ( LOWER(T1.ProjectDescription) like '%' || LOWER(:lV55Projectwwds_1_filterfulltext)) or ( LOWER(T2.EmployeeName) like '%' || LOWER(:lV55Projectwwds_1_filterfulltext)) or ( 'active' like '%' || LOWER(:lV55Projectwwds_1_filterfulltext) and T1.ProjectStatus = ( 'Active')) or ( 'inactive' like '%' || LOWER(:lV55Projectwwds_1_filterfulltext) and T1.ProjectStatus = ( 'Inactive')))");
+            AddWhere(sWhereString, "(( LOWER(T1.ProjectName) like '%' || LOWER(:lV55Projectwwds_1_filterfulltext)) or ( LOWER(T1.ProjectDescription) like '%' || LOWER(:lV55Projectwwds_1_filterfulltext)) or ( 'active' like '%' || LOWER(:lV55Projectwwds_1_filterfulltext) and T1.ProjectStatus = ( 'Active')) or ( 'inactive' like '%' || LOWER(:lV55Projectwwds_1_filterfulltext) and T1.ProjectStatus = ( 'Inactive')) or ( LOWER(T2.EmployeeName) like '%' || LOWER(:lV55Projectwwds_1_filterfulltext)))");
          }
          else
          {
@@ -3535,29 +3535,29 @@ namespace GeneXus.Programs {
          {
             AddWhere(sWhereString, "((char_length(trim(trailing ' ' from T1.ProjectDescription))=0))");
          }
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV61Projectwwds_7_tfprojectmanagername_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV60Projectwwds_6_tfprojectmanagername)) ) )
+         if ( AV60Projectwwds_6_tfprojectstatus_sels_Count > 0 )
          {
-            AddWhere(sWhereString, "(LOWER(T2.EmployeeName) like LOWER(:lV60Projectwwds_6_tfprojectmanagername))");
+            AddWhere(sWhereString, "("+new GxDbmsUtils( new GxPostgreSql()).ValueList(AV60Projectwwds_6_tfprojectstatus_sels, "T1.ProjectStatus IN (", ")")+")");
+         }
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV62Projectwwds_8_tfprojectmanagername_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV61Projectwwds_7_tfprojectmanagername)) ) )
+         {
+            AddWhere(sWhereString, "(LOWER(T2.EmployeeName) like LOWER(:lV61Projectwwds_7_tfprojectmanagername))");
          }
          else
          {
             GXv_int10[9] = 1;
          }
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV61Projectwwds_7_tfprojectmanagername_sel)) && ! ( StringUtil.StrCmp(AV61Projectwwds_7_tfprojectmanagername_sel, "<#Empty#>") == 0 ) )
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV62Projectwwds_8_tfprojectmanagername_sel)) && ! ( StringUtil.StrCmp(AV62Projectwwds_8_tfprojectmanagername_sel, "<#Empty#>") == 0 ) )
          {
-            AddWhere(sWhereString, "(T2.EmployeeName = ( :AV61Projectwwds_7_tfprojectmanagername_sel))");
+            AddWhere(sWhereString, "(T2.EmployeeName = ( :AV62Projectwwds_8_tfprojectmanagername_sel))");
          }
          else
          {
             GXv_int10[10] = 1;
          }
-         if ( StringUtil.StrCmp(AV61Projectwwds_7_tfprojectmanagername_sel, "<#Empty#>") == 0 )
+         if ( StringUtil.StrCmp(AV62Projectwwds_8_tfprojectmanagername_sel, "<#Empty#>") == 0 )
          {
             AddWhere(sWhereString, "((char_length(trim(trailing ' ' from T2.EmployeeName))=0))");
-         }
-         if ( AV62Projectwwds_8_tfprojectstatus_sels_Count > 0 )
-         {
-            AddWhere(sWhereString, "("+new GxDbmsUtils( new GxPostgreSql()).ValueList(AV62Projectwwds_8_tfprojectstatus_sels, "T1.ProjectStatus IN (", ")")+")");
          }
          scmdbuf += sWhereString;
          if ( ( AV13OrderedBy == 1 ) && ! AV14OrderedDsc )
@@ -3608,9 +3608,9 @@ namespace GeneXus.Programs {
          switch ( cursor )
          {
                case 0 :
-                     return conditional_H003L2(context, (string)dynConstraints[0] , (GxSimpleCollection<string>)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (string)dynConstraints[7] , (string)dynConstraints[8] , (int)dynConstraints[9] , (string)dynConstraints[10] , (string)dynConstraints[11] , (string)dynConstraints[12] , (short)dynConstraints[13] , (bool)dynConstraints[14] );
+                     return conditional_H003L2(context, (string)dynConstraints[0] , (GxSimpleCollection<string>)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (int)dynConstraints[7] , (string)dynConstraints[8] , (string)dynConstraints[9] , (string)dynConstraints[10] , (string)dynConstraints[11] , (string)dynConstraints[12] , (short)dynConstraints[13] , (bool)dynConstraints[14] );
                case 1 :
-                     return conditional_H003L3(context, (string)dynConstraints[0] , (GxSimpleCollection<string>)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (string)dynConstraints[7] , (string)dynConstraints[8] , (int)dynConstraints[9] , (string)dynConstraints[10] , (string)dynConstraints[11] , (string)dynConstraints[12] , (short)dynConstraints[13] , (bool)dynConstraints[14] );
+                     return conditional_H003L3(context, (string)dynConstraints[0] , (GxSimpleCollection<string>)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (int)dynConstraints[7] , (string)dynConstraints[8] , (string)dynConstraints[9] , (string)dynConstraints[10] , (string)dynConstraints[11] , (string)dynConstraints[12] , (short)dynConstraints[13] , (bool)dynConstraints[14] );
          }
          return base.getDynamicStatement(cursor, context, dynConstraints);
       }
@@ -3640,8 +3640,8 @@ namespace GeneXus.Programs {
           new ParDef("AV57Projectwwds_3_tfprojectname_sel",GXType.Char,100,0) ,
           new ParDef("lV58Projectwwds_4_tfprojectdescription",GXType.VarChar,200,0) ,
           new ParDef("AV59Projectwwds_5_tfprojectdescription_sel",GXType.VarChar,200,0) ,
-          new ParDef("lV60Projectwwds_6_tfprojectmanagername",GXType.Char,128,0) ,
-          new ParDef("AV61Projectwwds_7_tfprojectmanagername_sel",GXType.Char,128,0) ,
+          new ParDef("lV61Projectwwds_7_tfprojectmanagername",GXType.Char,128,0) ,
+          new ParDef("AV62Projectwwds_8_tfprojectmanagername_sel",GXType.Char,128,0) ,
           new ParDef("GXPagingFrom2",GXType.Int32,9,0) ,
           new ParDef("GXPagingTo2",GXType.Int32,9,0) ,
           new ParDef("GXPagingTo2",GXType.Int32,9,0)
@@ -3657,8 +3657,8 @@ namespace GeneXus.Programs {
           new ParDef("AV57Projectwwds_3_tfprojectname_sel",GXType.Char,100,0) ,
           new ParDef("lV58Projectwwds_4_tfprojectdescription",GXType.VarChar,200,0) ,
           new ParDef("AV59Projectwwds_5_tfprojectdescription_sel",GXType.VarChar,200,0) ,
-          new ParDef("lV60Projectwwds_6_tfprojectmanagername",GXType.Char,128,0) ,
-          new ParDef("AV61Projectwwds_7_tfprojectmanagername_sel",GXType.Char,128,0)
+          new ParDef("lV61Projectwwds_7_tfprojectmanagername",GXType.Char,128,0) ,
+          new ParDef("AV62Projectwwds_8_tfprojectmanagername_sel",GXType.Char,128,0)
           };
           def= new CursorDef[] {
               new CursorDef("H003L2", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH003L2,11, GxCacheFrequency.OFF ,true,false )
@@ -3676,8 +3676,8 @@ namespace GeneXus.Programs {
              case 0 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);
                 ((bool[]) buf[1])[0] = rslt.wasNull(1);
-                ((string[]) buf[2])[0] = rslt.getString(2, 20);
-                ((string[]) buf[3])[0] = rslt.getString(3, 128);
+                ((string[]) buf[2])[0] = rslt.getString(2, 128);
+                ((string[]) buf[3])[0] = rslt.getString(3, 20);
                 ((string[]) buf[4])[0] = rslt.getVarchar(4);
                 ((string[]) buf[5])[0] = rslt.getString(5, 100);
                 ((long[]) buf[6])[0] = rslt.getLong(6);

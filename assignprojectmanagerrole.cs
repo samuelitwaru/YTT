@@ -85,8 +85,23 @@ namespace GeneXus.Programs {
          if ( ! (0==AV14Project.gxTpr_Projectmanagerid) )
          {
             AV15CurrentEmployee.Load(AV14Project.gxTpr_Projectmanagerid);
-            AV9GAMUser = new GeneXus.Programs.genexussecurity.SdtGAMUser(context).getbylogin("local", AV15CurrentEmployee.gxTpr_Employeeemail, out  AV10GAMErrorCollection);
-            AV9GAMUser.deleterole( AV11GAMRole, out  AV10GAMErrorCollection);
+            AV21GXLvl10 = 0;
+            /* Using cursor P00972 */
+            pr_default.execute(0, new Object[] {AV15CurrentEmployee.gxTpr_Employeeid, AV20ProjectId});
+            while ( (pr_default.getStatus(0) != 101) )
+            {
+               A166ProjectManagerId = P00972_A166ProjectManagerId[0];
+               n166ProjectManagerId = P00972_n166ProjectManagerId[0];
+               A102ProjectId = P00972_A102ProjectId[0];
+               AV21GXLvl10 = 1;
+               pr_default.readNext(0);
+            }
+            pr_default.close(0);
+            if ( AV21GXLvl10 == 0 )
+            {
+               AV9GAMUser = new GeneXus.Programs.genexussecurity.SdtGAMUser(context).getbylogin("local", AV15CurrentEmployee.gxTpr_Employeeemail, out  AV10GAMErrorCollection);
+               AV9GAMUser.deleterole( AV11GAMRole, out  AV10GAMErrorCollection);
+            }
          }
          AV8Employee.Load(AV19EmployeeId);
          AV9GAMUser = new GeneXus.Programs.genexussecurity.SdtGAMUser(context).getbylogin("local", AV8Employee.gxTpr_Employeeemail, out  AV10GAMErrorCollection);
@@ -116,6 +131,10 @@ namespace GeneXus.Programs {
          AV10GAMErrorCollection = new GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError>( context, "GeneXus.Programs.genexussecurity.SdtGAMError", "GeneXus.Programs");
          AV12GAMRepository = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context);
          AV15CurrentEmployee = new SdtEmployee(context);
+         scmdbuf = "";
+         P00972_A166ProjectManagerId = new long[1] ;
+         P00972_n166ProjectManagerId = new bool[] {false} ;
+         P00972_A102ProjectId = new long[1] ;
          AV9GAMUser = new GeneXus.Programs.genexussecurity.SdtGAMUser(context);
          AV8Employee = new SdtEmployee(context);
          pr_gam = new DataStoreProvider(context, new GeneXus.Programs.assignprojectmanagerrole__gam(),
@@ -124,17 +143,28 @@ namespace GeneXus.Programs {
          );
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.assignprojectmanagerrole__default(),
             new Object[][] {
+                new Object[] {
+               P00972_A166ProjectManagerId, P00972_n166ProjectManagerId, P00972_A102ProjectId
+               }
             }
          );
          /* GeneXus formulas. */
       }
 
+      private short AV21GXLvl10 ;
       private long AV19EmployeeId ;
       private long AV20ProjectId ;
+      private long A166ProjectManagerId ;
+      private long A102ProjectId ;
+      private string scmdbuf ;
+      private bool n166ProjectManagerId ;
       private GeneXus.Programs.genexussecurity.SdtGAMRepository AV12GAMRepository ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private IDataStoreProvider pr_default ;
+      private long[] P00972_A166ProjectManagerId ;
+      private bool[] P00972_n166ProjectManagerId ;
+      private long[] P00972_A102ProjectId ;
       private IDataStoreProvider pr_gam ;
       private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV10GAMErrorCollection ;
       private SdtEmployee AV15CurrentEmployee ;
@@ -182,6 +212,7 @@ namespace GeneXus.Programs {
     {
        cursorDefinitions();
        return new Cursor[] {
+        new ForEachCursor(def[0])
      };
   }
 
@@ -190,7 +221,13 @@ namespace GeneXus.Programs {
   {
      if ( def == null )
      {
+        Object[] prmP00972;
+        prmP00972 = new Object[] {
+        new ParDef("AV15Curr_1Employeeid",GXType.Int64,10,0) ,
+        new ParDef("AV20ProjectId",GXType.Int64,10,0)
+        };
         def= new CursorDef[] {
+            new CursorDef("P00972", "SELECT ProjectManagerId, ProjectId FROM Project WHERE (ProjectManagerId = :AV15Curr_1Employeeid) AND (ProjectId <> :AV20ProjectId) ORDER BY ProjectManagerId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00972,100, GxCacheFrequency.OFF ,false,false )
         };
      }
   }
@@ -199,6 +236,14 @@ namespace GeneXus.Programs {
                           IFieldGetter rslt ,
                           Object[] buf )
   {
+     switch ( cursor )
+     {
+           case 0 :
+              ((long[]) buf[0])[0] = rslt.getLong(1);
+              ((bool[]) buf[1])[0] = rslt.wasNull(1);
+              ((long[]) buf[2])[0] = rslt.getLong(2);
+              return;
+     }
   }
 
 }

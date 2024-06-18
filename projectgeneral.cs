@@ -436,19 +436,6 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-sm-6 DataContentCell DscTop", "start", "top", "", "", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+edtProjectName_Internalname+"\"", "", "div");
-            /* Attribute/Variable Label */
-            GxWebStd.gx_label_element( context, edtProjectName_Internalname, "Name", " AttributeLabel", 1, true, "");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
-            /* Single line edit */
-            GxWebStd.gx_single_line_edit( context, edtProjectName_Internalname, StringUtil.RTrim( A103ProjectName), StringUtil.RTrim( context.localUtil.Format( A103ProjectName, "")), "", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtProjectName_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtProjectName_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "Name", "start", true, "", "HLP_ProjectGeneral.htm");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-sm-6 DataContentCell DscTop", "start", "top", "", "", "div");
-            /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+edtProjectDescription_Internalname+"\"", "", "div");
             /* Attribute/Variable Label */
             GxWebStd.gx_label_element( context, edtProjectDescription_Internalname, "Description", " AttributeLabel", 1, true, "");
@@ -463,9 +450,6 @@ namespace GeneXus.Programs {
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-sm-6 DataContentCell DscTop", "start", "top", "", "", "div");
             /* Div Control */
@@ -481,6 +465,9 @@ namespace GeneXus.Programs {
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-sm-6 DataContentCell DscTop", "start", "top", "", "", "div");
             /* Div Control */
@@ -490,8 +477,8 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
             /* Single line edit */
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 27,'" + sPrefix + "',false,'',0)\"";
-            GxWebStd.gx_single_line_edit( context, edtavProjectmanagerid_description_Internalname, AV14ProjectManagerId_Description, StringUtil.RTrim( context.localUtil.Format( AV14ProjectManagerId_Description, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,27);\"", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavProjectmanagerid_description_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavProjectmanagerid_description_Enabled, 0, "text", "", 40, "chr", 1, "row", 40, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_ProjectGeneral.htm");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 23,'" + sPrefix + "',false,'',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtavProjectmanagerid_description_Internalname, AV14ProjectManagerId_Description, StringUtil.RTrim( context.localUtil.Format( AV14ProjectManagerId_Description, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,23);\"", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavProjectmanagerid_description_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavProjectmanagerid_description_Enabled, 0, "text", "", 40, "chr", 1, "row", 40, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_ProjectGeneral.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -507,14 +494,14 @@ namespace GeneXus.Programs {
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-action-group CellMarginTop10", "start", "top", " "+"data-gx-actiongroup-type=\"toolbar\""+" ", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-button", "start", "top", "", "", "div");
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 32,'" + sPrefix + "',false,'',0)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 28,'" + sPrefix + "',false,'',0)\"";
             ClassString = "ButtonMaterial";
             StyleString = "";
             GxWebStd.gx_button_ctrl( context, bttBtnupdate_Internalname, "", "Update", bttBtnupdate_Jsonclick, 7, "Update", "", StyleString, ClassString, bttBtnupdate_Visible, 1, "standard", "'"+sPrefix+"'"+",false,"+"'"+"e113m1_client"+"'", TempTags, "", 2, "HLP_ProjectGeneral.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-button", "start", "top", "", "", "div");
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 34,'" + sPrefix + "',false,'',0)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 30,'" + sPrefix + "',false,'',0)\"";
             ClassString = "ButtonMaterialDefault";
             StyleString = "";
             GxWebStd.gx_button_ctrl( context, bttBtndelete_Internalname, "", "Delete", bttBtndelete_Jsonclick, 7, "Delete", "", StyleString, ClassString, bttBtndelete_Visible, 1, "standard", "'"+sPrefix+"'"+",false,"+"'"+"e123m1_client"+"'", TempTags, "", 2, "HLP_ProjectGeneral.htm");
@@ -836,8 +823,6 @@ namespace GeneXus.Programs {
                AssignAttri(sPrefix, false, "A105ProjectStatus", A105ProjectStatus);
                A104ProjectDescription = H003M2_A104ProjectDescription[0];
                AssignAttri(sPrefix, false, "A104ProjectDescription", A104ProjectDescription);
-               A103ProjectName = H003M2_A103ProjectName[0];
-               AssignAttri(sPrefix, false, "A103ProjectName", A103ProjectName);
                /* Execute user event: Load */
                E143M2 ();
                /* Exiting from a For First loop. */
@@ -861,8 +846,6 @@ namespace GeneXus.Programs {
          AV18Pgmname = "ProjectGeneral";
          edtavProjectmanagerid_description_Enabled = 0;
          AssignProp(sPrefix, false, edtavProjectmanagerid_description_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavProjectmanagerid_description_Enabled), 5, 0), true);
-         edtProjectName_Enabled = 0;
-         AssignProp(sPrefix, false, edtProjectName_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtProjectName_Enabled), 5, 0), true);
          edtProjectDescription_Enabled = 0;
          AssignProp(sPrefix, false, edtProjectDescription_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtProjectDescription_Enabled), 5, 0), true);
          cmbProjectStatus.Enabled = 0;
@@ -892,8 +875,6 @@ namespace GeneXus.Programs {
             AV13IsAuthorized_Delete = StringUtil.StrToBool( cgiGet( sPrefix+"vISAUTHORIZED_DELETE"));
             AV12IsAuthorized_Update = StringUtil.StrToBool( cgiGet( sPrefix+"vISAUTHORIZED_UPDATE"));
             /* Read variables values. */
-            A103ProjectName = cgiGet( edtProjectName_Internalname);
-            AssignAttri(sPrefix, false, "A103ProjectName", A103ProjectName);
             A104ProjectDescription = cgiGet( edtProjectDescription_Internalname);
             AssignAttri(sPrefix, false, "A104ProjectDescription", A104ProjectDescription);
             cmbProjectStatus.CurrentValue = cgiGet( cmbProjectStatus_Internalname);
@@ -1184,7 +1165,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20246131454613", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20246186163556", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1200,7 +1181,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("projectgeneral.js", "?20246131454613", false, true);
+         context.AddJavascriptSource("projectgeneral.js", "?20246186163556", false, true);
          /* End function include_jscripts */
       }
 
@@ -1218,7 +1199,6 @@ namespace GeneXus.Programs {
 
       protected void init_default_properties( )
       {
-         edtProjectName_Internalname = sPrefix+"PROJECTNAME";
          edtProjectDescription_Internalname = sPrefix+"PROJECTDESCRIPTION";
          cmbProjectStatus_Internalname = sPrefix+"PROJECTSTATUS";
          edtavProjectmanagerid_description_Internalname = sPrefix+"vPROJECTMANAGERID_DESCRIPTION";
@@ -1256,8 +1236,6 @@ namespace GeneXus.Programs {
          cmbProjectStatus_Jsonclick = "";
          cmbProjectStatus.Enabled = 0;
          edtProjectDescription_Enabled = 0;
-         edtProjectName_Jsonclick = "";
-         edtProjectName_Enabled = 0;
          if ( StringUtil.Len( sPrefix) == 0 )
          {
             if ( context.isSpaRequest( ) )
@@ -1310,7 +1288,6 @@ namespace GeneXus.Programs {
          bodyStyle = "";
          GXKey = "";
          GX_FocusControl = "";
-         A103ProjectName = "";
          ClassString = "";
          StyleString = "";
          A104ProjectDescription = "";
@@ -1329,7 +1306,6 @@ namespace GeneXus.Programs {
          H003M2_A102ProjectId = new long[1] ;
          H003M2_A105ProjectStatus = new string[] {""} ;
          H003M2_A104ProjectDescription = new string[] {""} ;
-         H003M2_A103ProjectName = new string[] {""} ;
          AV6WWPContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPContext(context);
          AV15Combo_Data = new GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item>( context, "Item", "");
          AV17ComboSelectedValue = "";
@@ -1343,7 +1319,7 @@ namespace GeneXus.Programs {
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.projectgeneral__default(),
             new Object[][] {
                 new Object[] {
-               H003M2_A102ProjectId, H003M2_A105ProjectStatus, H003M2_A104ProjectDescription, H003M2_A103ProjectName
+               H003M2_A102ProjectId, H003M2_A105ProjectStatus, H003M2_A104ProjectDescription
                }
             }
          );
@@ -1365,7 +1341,6 @@ namespace GeneXus.Programs {
       private short gxcookieaux ;
       private short nGXWrapped ;
       private int edtavProjectmanagerid_description_Enabled ;
-      private int edtProjectName_Enabled ;
       private int edtProjectDescription_Enabled ;
       private int bttBtnupdate_Visible ;
       private int bttBtndelete_Visible ;
@@ -1389,9 +1364,6 @@ namespace GeneXus.Programs {
       private string divLayoutmaintable_Internalname ;
       private string divTable_Internalname ;
       private string divTransactiondetail_tableattributes_Internalname ;
-      private string edtProjectName_Internalname ;
-      private string A103ProjectName ;
-      private string edtProjectName_Jsonclick ;
       private string edtProjectDescription_Internalname ;
       private string ClassString ;
       private string StyleString ;
@@ -1435,7 +1407,6 @@ namespace GeneXus.Programs {
       private long[] H003M2_A102ProjectId ;
       private string[] H003M2_A105ProjectStatus ;
       private string[] H003M2_A104ProjectDescription ;
-      private string[] H003M2_A103ProjectName ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
       private GxHttpRequest AV11HTTPRequest ;
@@ -1466,7 +1437,7 @@ namespace GeneXus.Programs {
           new ParDef("ProjectId",GXType.Int64,10,0)
           };
           def= new CursorDef[] {
-              new CursorDef("H003M2", "SELECT ProjectId, ProjectStatus, ProjectDescription, ProjectName FROM Project WHERE ProjectId = :ProjectId ORDER BY ProjectId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH003M2,1, GxCacheFrequency.OFF ,true,true )
+              new CursorDef("H003M2", "SELECT ProjectId, ProjectStatus, ProjectDescription FROM Project WHERE ProjectId = :ProjectId ORDER BY ProjectId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH003M2,1, GxCacheFrequency.OFF ,true,true )
           };
        }
     }
@@ -1481,7 +1452,6 @@ namespace GeneXus.Programs {
                 ((long[]) buf[0])[0] = rslt.getLong(1);
                 ((string[]) buf[1])[0] = rslt.getString(2, 20);
                 ((string[]) buf[2])[0] = rslt.getVarchar(3);
-                ((string[]) buf[3])[0] = rslt.getString(4, 100);
                 return;
        }
     }

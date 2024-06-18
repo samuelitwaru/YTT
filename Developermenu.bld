@@ -358,7 +358,6 @@ sdsvc_UpdateWorkHourLog_Level_Detail
 sdsvc_LeaveRequestPanel_Level_Detail
 sdsvc_ViewLeaveRequest_Level_Detail
 sdsvc_UpdateLeaveRequest_Level_Detail
-yttv3sd
 gamsdnotauthorized
 gamsdchangepassword
 gamsdupdateuser
@@ -374,4 +373,5 @@ viewleaverequest
 updateleaverequest
 leaverequestsgridpanel
 worklogsgridcollectionpanel
+yttv3sd
 GeneXus.Programs.Common

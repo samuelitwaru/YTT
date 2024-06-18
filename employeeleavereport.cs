@@ -42,39 +42,46 @@ namespace GeneXus.Programs {
       }
 
       public void execute( long aP0_CompanyLocationId ,
-                           out string aP1_Filename ,
-                           out string aP2_ErrorMessage )
+                           ref DateTime aP1_Date ,
+                           out string aP2_Filename ,
+                           out string aP3_ErrorMessage )
       {
          this.AV2CompanyLocationId = aP0_CompanyLocationId;
-         this.AV3Filename = "" ;
-         this.AV4ErrorMessage = "" ;
+         this.AV3Date = aP1_Date;
+         this.AV4Filename = "" ;
+         this.AV5ErrorMessage = "" ;
          initialize();
          executePrivate();
-         aP1_Filename=this.AV3Filename;
-         aP2_ErrorMessage=this.AV4ErrorMessage;
+         aP1_Date=this.AV3Date;
+         aP2_Filename=this.AV4Filename;
+         aP3_ErrorMessage=this.AV5ErrorMessage;
       }
 
       public string executeUdp( long aP0_CompanyLocationId ,
-                                out string aP1_Filename )
+                                ref DateTime aP1_Date ,
+                                out string aP2_Filename )
       {
-         execute(aP0_CompanyLocationId, out aP1_Filename, out aP2_ErrorMessage);
-         return AV4ErrorMessage ;
+         execute(aP0_CompanyLocationId, ref aP1_Date, out aP2_Filename, out aP3_ErrorMessage);
+         return AV5ErrorMessage ;
       }
 
       public void executeSubmit( long aP0_CompanyLocationId ,
-                                 out string aP1_Filename ,
-                                 out string aP2_ErrorMessage )
+                                 ref DateTime aP1_Date ,
+                                 out string aP2_Filename ,
+                                 out string aP3_ErrorMessage )
       {
          employeeleavereport objemployeeleavereport;
          objemployeeleavereport = new employeeleavereport();
          objemployeeleavereport.AV2CompanyLocationId = aP0_CompanyLocationId;
-         objemployeeleavereport.AV3Filename = "" ;
-         objemployeeleavereport.AV4ErrorMessage = "" ;
+         objemployeeleavereport.AV3Date = aP1_Date;
+         objemployeeleavereport.AV4Filename = "" ;
+         objemployeeleavereport.AV5ErrorMessage = "" ;
          objemployeeleavereport.context.SetSubmitInitialConfig(context);
          objemployeeleavereport.initialize();
          Submit( executePrivateCatch,objemployeeleavereport);
-         aP1_Filename=this.AV3Filename;
-         aP2_ErrorMessage=this.AV4ErrorMessage;
+         aP1_Date=this.AV3Date;
+         aP2_Filename=this.AV4Filename;
+         aP3_ErrorMessage=this.AV5ErrorMessage;
       }
 
       void executePrivateCatch( object stateInfo )
@@ -94,12 +101,13 @@ namespace GeneXus.Programs {
       {
          /* GeneXus formulas */
          /* Output device settings */
-         args = new Object[] {(long)AV2CompanyLocationId,(string)AV3Filename,(string)AV4ErrorMessage} ;
+         args = new Object[] {(long)AV2CompanyLocationId,(DateTime)AV3Date,(string)AV4Filename,(string)AV5ErrorMessage} ;
          ClassLoader.Execute("aemployeeleavereport","GeneXus.Programs","aemployeeleavereport", new Object[] {context }, "execute", args);
-         if ( ( args != null ) && ( args.Length == 3 ) )
+         if ( ( args != null ) && ( args.Length == 4 ) )
          {
-            AV3Filename = (string)(args[1]) ;
-            AV4ErrorMessage = (string)(args[2]) ;
+            AV3Date = (DateTime)(args[1]) ;
+            AV4Filename = (string)(args[2]) ;
+            AV5ErrorMessage = (string)(args[3]) ;
          }
          this.cleanup();
       }
@@ -119,19 +127,21 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
-         AV3Filename = "";
-         AV4ErrorMessage = "";
+         AV4Filename = "";
+         AV5ErrorMessage = "";
          /* GeneXus formulas. */
       }
 
       private long AV2CompanyLocationId ;
-      private string AV3Filename ;
-      private string AV4ErrorMessage ;
+      private string AV4Filename ;
+      private DateTime AV3Date ;
+      private string AV5ErrorMessage ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private DateTime aP1_Date ;
       private Object[] args ;
-      private string aP1_Filename ;
-      private string aP2_ErrorMessage ;
+      private string aP2_Filename ;
+      private string aP3_ErrorMessage ;
    }
 
 }

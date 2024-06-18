@@ -299,7 +299,6 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "GXSCHEDULER_Autoload", StringUtil.RTrim( Gxscheduler_Autoload));
          GxWebStd.gx_hidden_field( context, "GXSCHEDULER_Loadeventsobject", StringUtil.RTrim( Gxscheduler_Loadeventsobject));
          GxWebStd.gx_hidden_field( context, "GXSCHEDULER_Detailsformobject", StringUtil.RTrim( Gxscheduler_Detailsformobject));
-         GxWebStd.gx_hidden_field( context, "GXSCHEDULER_Detailsformobjectname", StringUtil.RTrim( Gxscheduler_Detailsformobjectname));
          GxWebStd.gx_hidden_field( context, "GXSCHEDULER_View", StringUtil.RTrim( Gxscheduler_View));
          GxWebStd.gx_hidden_field( context, "GXSCHEDULER_Theme", StringUtil.RTrim( Gxscheduler_Theme));
          GxWebStd.gx_hidden_field( context, "GXSCHEDULER_Displayweektab", StringUtil.RTrim( Gxscheduler_Displayweektab));
@@ -453,7 +452,6 @@ namespace GeneXus.Programs {
             ucGxscheduler.SetProperty("AutoLoad", Gxscheduler_Autoload);
             ucGxscheduler.SetProperty("LoadEventsObject", Gxscheduler_Loadeventsobject);
             ucGxscheduler.SetProperty("DetailsFormObject", Gxscheduler_Detailsformobject);
-            ucGxscheduler.SetProperty("DetailsFormObjectName", Gxscheduler_Detailsformobjectname);
             ucGxscheduler.SetProperty("View", Gxscheduler_View);
             ucGxscheduler.SetProperty("Theme", Gxscheduler_Theme);
             ucGxscheduler.SetProperty("DisplayWeekTab", Gxscheduler_Displayweektab);
@@ -804,7 +802,6 @@ namespace GeneXus.Programs {
             Gxscheduler_Autoload = cgiGet( "GXSCHEDULER_Autoload");
             Gxscheduler_Loadeventsobject = cgiGet( "GXSCHEDULER_Loadeventsobject");
             Gxscheduler_Detailsformobject = cgiGet( "GXSCHEDULER_Detailsformobject");
-            Gxscheduler_Detailsformobjectname = cgiGet( "GXSCHEDULER_Detailsformobjectname");
             Gxscheduler_View = cgiGet( "GXSCHEDULER_View");
             Gxscheduler_Theme = cgiGet( "GXSCHEDULER_Theme");
             Gxscheduler_Displayweektab = cgiGet( "GXSCHEDULER_Displayweektab");
@@ -959,7 +956,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024524814239", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20246186163037", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -975,7 +972,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("leavecalendar.js", "?2024524814239", false, true);
+         context.AddJavascriptSource("leavecalendar.js", "?20246186163038", false, true);
          context.AddJavascriptSource("GXScheduler/dhtmlxscheduler.js", "", false, true);
          context.AddJavascriptSource("GXScheduler/GXSchedulerRender.js", "", false, true);
          /* End function include_jscripts */
@@ -1030,7 +1027,7 @@ namespace GeneXus.Programs {
          divUnnamedtable1_Visible = 1;
          Gxscheduler_Openlinknewwindow = "true";
          Gxscheduler_Detailsondblclick = "true";
-         Gxscheduler_Detailsoncreate = "false";
+         Gxscheduler_Detailsoncreate = "true";
          Gxscheduler_Readonly = "false";
          Gxscheduler_Montheventsview = "singleline";
          Gxscheduler_Displaynavigationbuttons = "true";
@@ -1038,7 +1035,6 @@ namespace GeneXus.Programs {
          Gxscheduler_Displayweektab = "true";
          Gxscheduler_Theme = "classic";
          Gxscheduler_View = "month";
-         Gxscheduler_Detailsformobjectname = "Details";
          Gxscheduler_Detailsformobject = "details.aspx";
          Gxscheduler_Loadeventsobject = "getleaveevents";
          Gxscheduler_Autoload = "month";
@@ -1169,7 +1165,6 @@ namespace GeneXus.Programs {
       private string Gxscheduler_Autoload ;
       private string Gxscheduler_Loadeventsobject ;
       private string Gxscheduler_Detailsformobject ;
-      private string Gxscheduler_Detailsformobjectname ;
       private string Gxscheduler_View ;
       private string Gxscheduler_Theme ;
       private string Gxscheduler_Displayweektab ;

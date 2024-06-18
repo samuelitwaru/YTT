@@ -148,8 +148,16 @@ namespace GeneXus.Programs {
       {
          /* GeneXus formulas */
          /* Output device settings */
+         AV95headerCellStyle = new GeneXus.Programs.genexusoffice.office.excel.style.SdtExcelCellStyle(context);
+         AV95headerCellStyle.gxTpr_Font.gxTpr_Bold = true;
+         AV95headerCellStyle.gxTpr_Font.gxTpr_Size = 13;
+         AV95headerCellStyle.gxTpr_Font.gxTpr_Color.setcolorrgb(25, 25, 112) ;
+         AV96footCellStyle = new GeneXus.Programs.genexusoffice.office.excel.style.SdtExcelCellStyle(context);
+         AV96footCellStyle.gxTpr_Font.gxTpr_Bold = true;
+         AV96footCellStyle.gxTpr_Font.gxTpr_Size = 13;
+         AV96footCellStyle.gxTpr_Alignment.gxTpr_Horizontal = 1;
          /* Execute user subroutine: 'GETSESSIONVARIABLES' */
-         S151 ();
+         S141 ();
          if ( returnInSub )
          {
             this.cleanup();
@@ -160,12 +168,12 @@ namespace GeneXus.Programs {
          new getworkhourlogdurationbyproject(context ).execute( ref  AV75FromDate, ref  AV76ToDate, ref  AV44ProjectId, ref  AV46CompanyLocationId, ref  AV24EmployeeId, ref  AV85ProjectIds, out  GXt_objcol_SdtSDTProject1) ;
          AV63SDTProjects = GXt_objcol_SdtSDTProject1;
          AV50Columns.Add("Projects:", 0);
-         AV91GXV1 = 1;
-         while ( AV91GXV1 <= AV63SDTProjects.Count )
+         AV98GXV1 = 1;
+         while ( AV98GXV1 <= AV63SDTProjects.Count )
          {
-            AV65SDTProject = ((SdtSDTProject)AV63SDTProjects.Item(AV91GXV1));
+            AV65SDTProject = ((SdtSDTProject)AV63SDTProjects.Item(AV98GXV1));
             AV50Columns.Add(StringUtil.Trim( AV65SDTProject.gxTpr_Projectname), 0);
-            AV91GXV1 = (int)(AV91GXV1+1);
+            AV98GXV1 = (int)(AV98GXV1+1);
          }
          AV50Columns.Add("Total Work Hours", 0);
          if ( AV88ShowLeaveTotal )
@@ -183,57 +191,73 @@ namespace GeneXus.Programs {
             this.cleanup();
             if (true) return;
          }
-         AV14CellRow = 1;
+         AV92excelcellrange = AV91excelSpreadsheet.cell(1, 1);
+         AV92excelcellrange.gxTpr_Valuetext = "Project Overview";
+         AV93excelCellStyle = new GeneXus.Programs.genexusoffice.office.excel.style.SdtExcelCellStyle(context);
+         AV93excelCellStyle.gxTpr_Font.gxTpr_Bold = true;
+         AV93excelCellStyle.gxTpr_Font.gxTpr_Size = 14;
+         AV93excelCellStyle.gxTpr_Font.gxTpr_Color.setcolorrgb(25, 25, 112) ;
+         AV92excelcellrange.setcellstyle( AV93excelCellStyle);
+         AV14CellRow = 2;
          AV15FirstColumn = 1;
          /* Execute user subroutine: 'WRITECOLUMNTITLES' */
-         S131 ();
+         S121 ();
          if ( returnInSub )
          {
             this.cleanup();
             if (true) return;
          }
-         AV93GXV2 = 1;
-         while ( AV93GXV2 <= AV64SDTEmployeeProjectHoursCollection.Count )
+         AV100GXV2 = 1;
+         while ( AV100GXV2 <= AV64SDTEmployeeProjectHoursCollection.Count )
          {
-            AV66SDTEmployeeProjectHours = ((SdtSDTEmployeeProjectHours)AV64SDTEmployeeProjectHoursCollection.Item(AV93GXV2));
+            AV66SDTEmployeeProjectHours = ((SdtSDTEmployeeProjectHours)AV64SDTEmployeeProjectHoursCollection.Item(AV100GXV2));
             AV14CellRow = (int)(AV14CellRow+1);
-            AV11ExcelDocument.get_Cells(AV14CellRow, 1, 1, 1).Text = StringUtil.Trim( AV66SDTEmployeeProjectHours.gxTpr_Employeename);
-            AV94GXV3 = 1;
-            while ( AV94GXV3 <= AV66SDTEmployeeProjectHours.gxTpr_Projecthours.Count )
+            AV92excelcellrange = AV91excelSpreadsheet.cell(AV14CellRow, 1);
+            AV92excelcellrange.gxTpr_Valuetext = StringUtil.Trim( AV66SDTEmployeeProjectHours.gxTpr_Employeename);
+            AV101GXV3 = 1;
+            while ( AV101GXV3 <= AV66SDTEmployeeProjectHours.gxTpr_Projecthours.Count )
             {
-               AV67ProjectHoursItem = ((SdtSDTEmployeeProjectHours_ProjectHoursItem)AV66SDTEmployeeProjectHours.gxTpr_Projecthours.Item(AV94GXV3));
-               AV11ExcelDocument.get_Cells(AV14CellRow, AV50Columns.IndexOf(StringUtil.Trim( AV67ProjectHoursItem.gxTpr_Projectname)), 1, 1).Text = AV67ProjectHoursItem.gxTpr_Projectformattedtime;
-               AV94GXV3 = (int)(AV94GXV3+1);
+               AV67ProjectHoursItem = ((SdtSDTEmployeeProjectHours_ProjectHoursItem)AV66SDTEmployeeProjectHours.gxTpr_Projecthours.Item(AV101GXV3));
+               AV92excelcellrange = AV91excelSpreadsheet.cell(AV14CellRow, AV50Columns.IndexOf(StringUtil.Trim( AV67ProjectHoursItem.gxTpr_Projectname)));
+               AV92excelcellrange.gxTpr_Valuetext = AV67ProjectHoursItem.gxTpr_Projectformattedtime;
+               AV101GXV3 = (int)(AV101GXV3+1);
             }
-            AV11ExcelDocument.get_Cells(AV14CellRow, AV50Columns.IndexOf("Total Work Hours"), 1, 1).Text = AV66SDTEmployeeProjectHours.gxTpr_Totalformattedtime;
+            AV92excelcellrange = AV91excelSpreadsheet.cell(AV14CellRow, AV50Columns.IndexOf("Total Work Hours"));
+            AV92excelcellrange.gxTpr_Valuetext = AV66SDTEmployeeProjectHours.gxTpr_Totalformattedtime;
             if ( AV88ShowLeaveTotal )
             {
-               AV11ExcelDocument.get_Cells(AV14CellRow, AV50Columns.IndexOf("Total Leave Hours"), 1, 1).Text = AV66SDTEmployeeProjectHours.gxTpr_Totalformattedleave;
-               AV11ExcelDocument.get_Cells(AV14CellRow, AV50Columns.IndexOf("Total"), 1, 1).Text = AV66SDTEmployeeProjectHours.gxTpr_Totalformattedtime;
+               AV92excelcellrange = AV91excelSpreadsheet.cell(AV14CellRow, AV50Columns.IndexOf("Total Leave Hours"));
+               AV92excelcellrange.gxTpr_Valuetext = AV66SDTEmployeeProjectHours.gxTpr_Totalformattedleave;
+               AV92excelcellrange = AV91excelSpreadsheet.cell(AV14CellRow, AV50Columns.IndexOf("Total"));
+               AV92excelcellrange.gxTpr_Valuetext = AV66SDTEmployeeProjectHours.gxTpr_Totalformattedtime;
             }
-            AV93GXV2 = (int)(AV93GXV2+1);
+            AV100GXV2 = (int)(AV100GXV2+1);
          }
          AV14CellRow = (int)(AV14CellRow+1);
          AV38VisibleColumnCount = 0;
-         AV11ExcelDocument.get_Cells(AV14CellRow, (int)(AV15FirstColumn+AV38VisibleColumnCount), 1, 1).Text = "Total";
-         AV11ExcelDocument.get_Cells(AV14CellRow, (int)(AV15FirstColumn+AV38VisibleColumnCount), 1, 1).Bold = 1;
-         AV95GXV4 = 1;
-         while ( AV95GXV4 <= AV63SDTProjects.Count )
+         AV92excelcellrange = AV91excelSpreadsheet.cell(AV14CellRow, (int)(AV15FirstColumn+AV38VisibleColumnCount));
+         AV92excelcellrange.gxTpr_Valuetext = "Total";
+         AV92excelcellrange.setcellstyle( AV96footCellStyle);
+         AV102GXV4 = 1;
+         while ( AV102GXV4 <= AV63SDTProjects.Count )
          {
-            AV65SDTProject = ((SdtSDTProject)AV63SDTProjects.Item(AV95GXV4));
-            AV11ExcelDocument.get_Cells(AV14CellRow, AV50Columns.IndexOf(StringUtil.Trim( AV65SDTProject.gxTpr_Projectname)), 1, 1).Text = AV65SDTProject.gxTpr_Projectformattedtime;
-            AV11ExcelDocument.get_Cells(AV14CellRow, AV50Columns.IndexOf(StringUtil.Trim( AV65SDTProject.gxTpr_Projectname)), 1, 1).Bold = 1;
-            AV95GXV4 = (int)(AV95GXV4+1);
+            AV65SDTProject = ((SdtSDTProject)AV63SDTProjects.Item(AV102GXV4));
+            AV92excelcellrange = AV91excelSpreadsheet.cell(AV14CellRow, AV50Columns.IndexOf(StringUtil.Trim( AV65SDTProject.gxTpr_Projectname)));
+            AV92excelcellrange.gxTpr_Valuetext = AV65SDTProject.gxTpr_Projectformattedtime;
+            AV92excelcellrange.setcellstyle( AV96footCellStyle);
+            AV102GXV4 = (int)(AV102GXV4+1);
          }
-         AV11ExcelDocument.get_Cells(AV14CellRow, AV50Columns.IndexOf("Total Work Hours"), 1, 1).Text = AV90TotalFormattedTime;
-         AV11ExcelDocument.get_Cells(AV14CellRow, AV50Columns.IndexOf("Total Work Hours"), 1, 1).Bold = 1;
+         AV92excelcellrange = AV91excelSpreadsheet.cell(AV14CellRow, AV50Columns.IndexOf("Total Work Hours"));
+         AV92excelcellrange.gxTpr_Valuetext = AV90TotalFormattedTime;
+         AV92excelcellrange.setcellstyle( AV93excelCellStyle);
          if ( AV88ShowLeaveTotal )
          {
-            AV11ExcelDocument.get_Cells(AV14CellRow, AV50Columns.IndexOf("Total"), 1, 1).Text = AV90TotalFormattedTime;
-            AV11ExcelDocument.get_Cells(AV14CellRow, AV50Columns.IndexOf("Total"), 1, 1).Bold = 1;
+            AV92excelcellrange = AV91excelSpreadsheet.cell(AV14CellRow, AV50Columns.IndexOf("Total"));
+            AV92excelcellrange.gxTpr_Valuetext = AV90TotalFormattedTime;
+            AV92excelcellrange.setcellstyle( AV93excelCellStyle);
          }
          /* Execute user subroutine: 'CLOSEDOCUMENT' */
-         S141 ();
+         S131 ();
          if ( returnInSub )
          {
             this.cleanup();
@@ -246,60 +270,54 @@ namespace GeneXus.Programs {
       {
          /* 'OPENDOCUMENT' Routine */
          returnInSub = false;
-         AV12Filename = "ReportExport-" + StringUtil.Trim( StringUtil.Str( (decimal)(DateTimeUtil.Year( Gx_date)), 10, 0)) + "-" + StringUtil.Trim( StringUtil.Str( (decimal)(DateTimeUtil.Month( Gx_date)), 10, 0)) + "-" + StringUtil.Trim( StringUtil.Str( (decimal)(DateTimeUtil.Day( Gx_date)), 10, 0)) + ".xlsx";
-         AV11ExcelDocument.Open(AV12Filename);
-         /* Execute user subroutine: 'CHECKSTATUS' */
-         S121 ();
-         if (returnInSub) return;
-         AV11ExcelDocument.Clear();
+         GXt_char2 = AV12Filename;
+         new formatdatetime(context ).execute(  AV75FromDate,  "YYYY-MM-DD", out  GXt_char2) ;
+         GXt_char3 = AV12Filename;
+         new formatdatetime(context ).execute(  AV76ToDate,  "YYYY-MM-DD", out  GXt_char3) ;
+         AV12Filename = "ReportExport-" + GXt_char2 + "_" + GXt_char3 + ".xlsx";
+         AV97File.Source = AV12Filename;
+         AV97File.Delete();
+         AV91excelSpreadsheet.open( AV12Filename);
       }
 
-      protected void S131( )
+      protected void S121( )
       {
          /* 'WRITECOLUMNTITLES' Routine */
          returnInSub = false;
          AV38VisibleColumnCount = 0;
-         AV97GXV5 = 1;
-         while ( AV97GXV5 <= AV50Columns.Count )
+         AV103GXV5 = 1;
+         while ( AV103GXV5 <= AV50Columns.Count )
          {
-            AV49Column = ((string)AV50Columns.Item(AV97GXV5));
-            AV11ExcelDocument.get_Cells(AV14CellRow, (int)(AV15FirstColumn+AV38VisibleColumnCount), 1, 1).Text = AV49Column;
-            AV11ExcelDocument.get_Cells(AV14CellRow, (int)(AV15FirstColumn+AV38VisibleColumnCount), 1, 1).Bold = 1;
-            AV11ExcelDocument.get_Cells(AV14CellRow, (int)(AV15FirstColumn+AV38VisibleColumnCount), 1, 1).Color = 11;
+            AV49Column = ((string)AV50Columns.Item(AV103GXV5));
+            AV92excelcellrange = AV91excelSpreadsheet.cell(AV14CellRow, (int)(AV15FirstColumn+AV38VisibleColumnCount));
+            AV92excelcellrange.gxTpr_Valuetext = AV49Column;
+            AV92excelcellrange.setcellstyle( AV95headerCellStyle);
             AV38VisibleColumnCount = (long)(AV38VisibleColumnCount+1);
-            AV97GXV5 = (int)(AV97GXV5+1);
+            AV103GXV5 = (int)(AV103GXV5+1);
          }
       }
 
-      protected void S141( )
+      protected void S131( )
       {
          /* 'CLOSEDOCUMENT' Routine */
          returnInSub = false;
-         AV11ExcelDocument.Save();
-         /* Execute user subroutine: 'CHECKSTATUS' */
-         S121 ();
-         if (returnInSub) return;
-         AV11ExcelDocument.Close();
+         AV91excelSpreadsheet.gxTpr_Autofit = true;
+         AV94boolean = AV91excelSpreadsheet.save();
+         if ( AV94boolean )
+         {
+            AV91excelSpreadsheet.close();
+         }
+         else
+         {
+            GX_msglist.addItem("Error code:"+StringUtil.Str( (decimal)(AV91excelSpreadsheet.gxTpr_Errcode), 8, 0));
+            GX_msglist.addItem("Error description:"+AV91excelSpreadsheet.gxTpr_Errdescription);
+         }
          AV25Session.Set("WWPExportFilePath", AV12Filename);
          AV25Session.Set("WWPExportFileName", AV12Filename);
          AV12Filename = formatLink("wwpbaseobjects.wwp_downloadreport.aspx") ;
       }
 
-      protected void S121( )
-      {
-         /* 'CHECKSTATUS' Routine */
-         returnInSub = false;
-         if ( AV11ExcelDocument.ErrCode != 0 )
-         {
-            AV12Filename = "";
-            AV13ErrorMessage = AV11ExcelDocument.ErrDescription;
-            AV11ExcelDocument.Close();
-            returnInSub = true;
-            if (true) return;
-         }
-      }
-
-      protected void S151( )
+      protected void S141( )
       {
          /* 'GETSESSIONVARIABLES' Routine */
          returnInSub = false;
@@ -325,6 +343,8 @@ namespace GeneXus.Programs {
       {
          AV12Filename = "";
          AV13ErrorMessage = "";
+         AV95headerCellStyle = new GeneXus.Programs.genexusoffice.office.excel.style.SdtExcelCellStyle(context);
+         AV96footCellStyle = new GeneXus.Programs.genexusoffice.office.excel.style.SdtExcelCellStyle(context);
          AV87WebSession = context.GetSession();
          AV63SDTProjects = new GXBaseCollection<SdtSDTProject>( context, "SDTProject", "YTT_version4");
          GXt_objcol_SdtSDTProject1 = new GXBaseCollection<SdtSDTProject>( context, "SDTProject", "YTT_version4");
@@ -332,33 +352,37 @@ namespace GeneXus.Programs {
          AV65SDTProject = new SdtSDTProject(context);
          AV68ColumnString = "";
          Gx_msg = "";
+         AV92excelcellrange = new GeneXus.Programs.genexusoffice.office.excel.cells.SdtExcelCellRange(context);
+         AV91excelSpreadsheet = new GeneXus.Programs.genexusoffice.office.excel.SdtExcelSpreadsheet(context);
+         AV93excelCellStyle = new GeneXus.Programs.genexusoffice.office.excel.style.SdtExcelCellStyle(context);
          AV66SDTEmployeeProjectHours = new SdtSDTEmployeeProjectHours(context);
-         AV11ExcelDocument = new ExcelDocumentI();
          AV67ProjectHoursItem = new SdtSDTEmployeeProjectHours_ProjectHoursItem(context);
-         Gx_date = DateTime.MinValue;
+         GXt_char2 = "";
+         GXt_char3 = "";
+         AV97File = new GxFile(context.GetPhysicalPath());
          AV49Column = "";
          AV25Session = context.GetSession();
-         Gx_date = DateTimeUtil.Today( context);
          /* GeneXus formulas. */
-         Gx_date = DateTimeUtil.Today( context);
       }
 
-      private int AV91GXV1 ;
+      private int AV98GXV1 ;
       private int AV14CellRow ;
       private int AV15FirstColumn ;
-      private int AV93GXV2 ;
-      private int AV94GXV3 ;
-      private int AV95GXV4 ;
-      private int AV97GXV5 ;
+      private int AV100GXV2 ;
+      private int AV101GXV3 ;
+      private int AV102GXV4 ;
+      private int AV103GXV5 ;
       private long AV38VisibleColumnCount ;
       private string AV89TotalFormattedWorkTime ;
       private string AV90TotalFormattedTime ;
       private string Gx_msg ;
+      private string GXt_char2 ;
+      private string GXt_char3 ;
       private DateTime AV75FromDate ;
       private DateTime AV76ToDate ;
-      private DateTime Gx_date ;
       private bool returnInSub ;
       private bool AV88ShowLeaveTotal ;
+      private bool AV94boolean ;
       private string AV68ColumnString ;
       private string AV12Filename ;
       private string AV13ErrorMessage ;
@@ -368,6 +392,7 @@ namespace GeneXus.Programs {
       private GxSimpleCollection<long> AV24EmployeeId ;
       private GxSimpleCollection<long> AV85ProjectIds ;
       private IGxSession AV87WebSession ;
+      private GeneXus.Programs.genexusoffice.office.excel.SdtExcelSpreadsheet AV91excelSpreadsheet ;
       private DateTime aP0_FromDate ;
       private DateTime aP1_ToDate ;
       private GxSimpleCollection<long> aP2_ProjectId ;
@@ -380,14 +405,18 @@ namespace GeneXus.Programs {
       private string aP9_Filename ;
       private string aP10_ErrorMessage ;
       private IGxSession AV25Session ;
-      private ExcelDocumentI AV11ExcelDocument ;
       private GxSimpleCollection<string> AV50Columns ;
       private GXBaseCollection<SdtSDTProject> AV63SDTProjects ;
       private GXBaseCollection<SdtSDTProject> GXt_objcol_SdtSDTProject1 ;
       private GXBaseCollection<SdtSDTEmployeeProjectHours> AV64SDTEmployeeProjectHoursCollection ;
+      private GxFile AV97File ;
       private SdtSDTProject AV65SDTProject ;
       private SdtSDTEmployeeProjectHours AV66SDTEmployeeProjectHours ;
       private SdtSDTEmployeeProjectHours_ProjectHoursItem AV67ProjectHoursItem ;
+      private GeneXus.Programs.genexusoffice.office.excel.cells.SdtExcelCellRange AV92excelcellrange ;
+      private GeneXus.Programs.genexusoffice.office.excel.style.SdtExcelCellStyle AV95headerCellStyle ;
+      private GeneXus.Programs.genexusoffice.office.excel.style.SdtExcelCellStyle AV96footCellStyle ;
+      private GeneXus.Programs.genexusoffice.office.excel.style.SdtExcelCellStyle AV93excelCellStyle ;
    }
 
 }

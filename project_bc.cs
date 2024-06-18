@@ -106,8 +106,8 @@ namespace GeneXus.Programs {
                CheckExtendedTable0E15( ) ;
                if ( AnyError == 0 )
                {
-                  ZM0E15( 10) ;
                   ZM0E15( 11) ;
+                  ZM0E15( 12) ;
                }
                CloseExtendedTableCursors0E15( ) ;
             }
@@ -148,23 +148,23 @@ namespace GeneXus.Programs {
 
       protected void ZM0E15( short GX_JID )
       {
-         if ( ( GX_JID == 8 ) || ( GX_JID == 0 ) )
+         if ( ( GX_JID == 9 ) || ( GX_JID == 0 ) )
          {
             Z103ProjectName = A103ProjectName;
             Z104ProjectDescription = A104ProjectDescription;
             Z105ProjectStatus = A105ProjectStatus;
             Z166ProjectManagerId = A166ProjectManagerId;
          }
-         if ( ( GX_JID == 10 ) || ( GX_JID == 0 ) )
+         if ( ( GX_JID == 11 ) || ( GX_JID == 0 ) )
          {
             Z167ProjectManagerName = A167ProjectManagerName;
             Z176ProjectManagerEmail = A176ProjectManagerEmail;
             Z177ProjectManagerIsActive = A177ProjectManagerIsActive;
          }
-         if ( ( GX_JID == 11 ) || ( GX_JID == 0 ) )
+         if ( ( GX_JID == 12 ) || ( GX_JID == 0 ) )
          {
          }
-         if ( GX_JID == -8 )
+         if ( GX_JID == -9 )
          {
             Z103ProjectName = A103ProjectName;
             Z104ProjectDescription = A104ProjectDescription;
@@ -209,7 +209,7 @@ namespace GeneXus.Programs {
             A177ProjectManagerIsActive = BC000E6_A177ProjectManagerIsActive[0];
             A166ProjectManagerId = BC000E6_A166ProjectManagerId[0];
             n166ProjectManagerId = BC000E6_n166ProjectManagerId[0];
-            ZM0E15( -8) ;
+            ZM0E15( -9) ;
          }
          pr_default.close(4);
          OnLoadActions0E15( ) ;
@@ -242,6 +242,11 @@ namespace GeneXus.Programs {
             AnyError = 1;
          }
          pr_default.close(5);
+         if ( new employeehasproject(context).executeUdp(  A166ProjectManagerId,  A102ProjectId) && IsUpd( )  )
+         {
+            GX_msglist.addItem("No matching Employee Project", 1, "");
+            AnyError = 1;
+         }
          if ( String.IsNullOrEmpty(StringUtil.RTrim( A103ProjectName)) )
          {
             GX_msglist.addItem("Project Name cannot be empty", 1, "");
@@ -299,7 +304,7 @@ namespace GeneXus.Programs {
          pr_default.execute(1, new Object[] {A102ProjectId});
          if ( (pr_default.getStatus(1) != 101) )
          {
-            ZM0E15( 8) ;
+            ZM0E15( 9) ;
             RcdFound15 = 1;
             A103ProjectName = BC000E3_A103ProjectName[0];
             A104ProjectDescription = BC000E3_A104ProjectDescription[0];
@@ -546,6 +551,11 @@ namespace GeneXus.Programs {
          if ( AnyError == 0 )
          {
             /* Delete mode formulas */
+            if ( new employeehasproject(context).executeUdp(  A166ProjectManagerId,  A102ProjectId) && IsUpd( )  )
+            {
+               GX_msglist.addItem("No matching Employee Project", 1, "");
+               AnyError = 1;
+            }
             /* Using cursor BC000E13 */
             pr_default.execute(11, new Object[] {n166ProjectManagerId, A166ProjectManagerId});
             A167ProjectManagerName = BC000E13_A167ProjectManagerName[0];
@@ -823,7 +833,7 @@ namespace GeneXus.Programs {
             Gx_mode = "UPD";
             Z102ProjectId = A102ProjectId;
          }
-         ZM0E15( -8) ;
+         ZM0E15( -9) ;
          OnLoadActions0E15( ) ;
          AddRow0E15( ) ;
          ScanKeyEnd0E15( ) ;
@@ -852,7 +862,7 @@ namespace GeneXus.Programs {
             Gx_mode = "UPD";
             Z102ProjectId = A102ProjectId;
          }
-         ZM0E15( -8) ;
+         ZM0E15( -9) ;
          OnLoadActions0E15( ) ;
          AddRow0E15( ) ;
          ScanKeyEnd0E15( ) ;

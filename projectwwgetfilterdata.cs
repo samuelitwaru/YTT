@@ -223,6 +223,11 @@ namespace GeneXus.Programs {
             {
                AV16TFProjectDescription_Sel = AV33GridStateFilterValue.gxTpr_Value;
             }
+            else if ( StringUtil.StrCmp(AV33GridStateFilterValue.gxTpr_Name, "TFPROJECTSTATUS_SEL") == 0 )
+            {
+               AV17TFProjectStatus_SelsJson = AV33GridStateFilterValue.gxTpr_Value;
+               AV18TFProjectStatus_Sels.FromJSonString(AV17TFProjectStatus_SelsJson, null);
+            }
             else if ( StringUtil.StrCmp(AV33GridStateFilterValue.gxTpr_Name, "TFPROJECTMANAGERNAME") == 0 )
             {
                AV44TFProjectManagerName = AV33GridStateFilterValue.gxTpr_Value;
@@ -230,11 +235,6 @@ namespace GeneXus.Programs {
             else if ( StringUtil.StrCmp(AV33GridStateFilterValue.gxTpr_Name, "TFPROJECTMANAGERNAME_SEL") == 0 )
             {
                AV45TFProjectManagerName_Sel = AV33GridStateFilterValue.gxTpr_Value;
-            }
-            else if ( StringUtil.StrCmp(AV33GridStateFilterValue.gxTpr_Name, "TFPROJECTSTATUS_SEL") == 0 )
-            {
-               AV17TFProjectStatus_SelsJson = AV33GridStateFilterValue.gxTpr_Value;
-               AV18TFProjectStatus_Sels.FromJSonString(AV17TFProjectStatus_SelsJson, null);
             }
             AV46GXV1 = (int)(AV46GXV1+1);
          }
@@ -251,20 +251,20 @@ namespace GeneXus.Programs {
          AV50Projectwwds_3_tfprojectname_sel = AV14TFProjectName_Sel;
          AV51Projectwwds_4_tfprojectdescription = AV15TFProjectDescription;
          AV52Projectwwds_5_tfprojectdescription_sel = AV16TFProjectDescription_Sel;
-         AV53Projectwwds_6_tfprojectmanagername = AV44TFProjectManagerName;
-         AV54Projectwwds_7_tfprojectmanagername_sel = AV45TFProjectManagerName_Sel;
-         AV55Projectwwds_8_tfprojectstatus_sels = AV18TFProjectStatus_Sels;
+         AV53Projectwwds_6_tfprojectstatus_sels = AV18TFProjectStatus_Sels;
+         AV54Projectwwds_7_tfprojectmanagername = AV44TFProjectManagerName;
+         AV55Projectwwds_8_tfprojectmanagername_sel = AV45TFProjectManagerName_Sel;
          pr_default.dynParam(0, new Object[]{ new Object[]{
                                               A105ProjectStatus ,
-                                              AV55Projectwwds_8_tfprojectstatus_sels ,
+                                              AV53Projectwwds_6_tfprojectstatus_sels ,
                                               AV48Projectwwds_1_filterfulltext ,
                                               AV50Projectwwds_3_tfprojectname_sel ,
                                               AV49Projectwwds_2_tfprojectname ,
                                               AV52Projectwwds_5_tfprojectdescription_sel ,
                                               AV51Projectwwds_4_tfprojectdescription ,
-                                              AV54Projectwwds_7_tfprojectmanagername_sel ,
-                                              AV53Projectwwds_6_tfprojectmanagername ,
-                                              AV55Projectwwds_8_tfprojectstatus_sels.Count ,
+                                              AV53Projectwwds_6_tfprojectstatus_sels.Count ,
+                                              AV55Projectwwds_8_tfprojectmanagername_sel ,
+                                              AV54Projectwwds_7_tfprojectmanagername ,
                                               A103ProjectName ,
                                               A104ProjectDescription ,
                                               A167ProjectManagerName } ,
@@ -279,9 +279,9 @@ namespace GeneXus.Programs {
          lV48Projectwwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV48Projectwwds_1_filterfulltext), "%", "");
          lV49Projectwwds_2_tfprojectname = StringUtil.PadR( StringUtil.RTrim( AV49Projectwwds_2_tfprojectname), 100, "%");
          lV51Projectwwds_4_tfprojectdescription = StringUtil.Concat( StringUtil.RTrim( AV51Projectwwds_4_tfprojectdescription), "%", "");
-         lV53Projectwwds_6_tfprojectmanagername = StringUtil.PadR( StringUtil.RTrim( AV53Projectwwds_6_tfprojectmanagername), 128, "%");
+         lV54Projectwwds_7_tfprojectmanagername = StringUtil.PadR( StringUtil.RTrim( AV54Projectwwds_7_tfprojectmanagername), 128, "%");
          /* Using cursor P007D2 */
-         pr_default.execute(0, new Object[] {lV48Projectwwds_1_filterfulltext, lV48Projectwwds_1_filterfulltext, lV48Projectwwds_1_filterfulltext, lV48Projectwwds_1_filterfulltext, lV48Projectwwds_1_filterfulltext, lV49Projectwwds_2_tfprojectname, AV50Projectwwds_3_tfprojectname_sel, lV51Projectwwds_4_tfprojectdescription, AV52Projectwwds_5_tfprojectdescription_sel, lV53Projectwwds_6_tfprojectmanagername, AV54Projectwwds_7_tfprojectmanagername_sel});
+         pr_default.execute(0, new Object[] {lV48Projectwwds_1_filterfulltext, lV48Projectwwds_1_filterfulltext, lV48Projectwwds_1_filterfulltext, lV48Projectwwds_1_filterfulltext, lV48Projectwwds_1_filterfulltext, lV49Projectwwds_2_tfprojectname, AV50Projectwwds_3_tfprojectname_sel, lV51Projectwwds_4_tfprojectdescription, AV52Projectwwds_5_tfprojectdescription_sel, lV54Projectwwds_7_tfprojectmanagername, AV55Projectwwds_8_tfprojectmanagername_sel});
          while ( (pr_default.getStatus(0) != 101) )
          {
             BRK7D2 = false;
@@ -337,20 +337,20 @@ namespace GeneXus.Programs {
          AV50Projectwwds_3_tfprojectname_sel = AV14TFProjectName_Sel;
          AV51Projectwwds_4_tfprojectdescription = AV15TFProjectDescription;
          AV52Projectwwds_5_tfprojectdescription_sel = AV16TFProjectDescription_Sel;
-         AV53Projectwwds_6_tfprojectmanagername = AV44TFProjectManagerName;
-         AV54Projectwwds_7_tfprojectmanagername_sel = AV45TFProjectManagerName_Sel;
-         AV55Projectwwds_8_tfprojectstatus_sels = AV18TFProjectStatus_Sels;
+         AV53Projectwwds_6_tfprojectstatus_sels = AV18TFProjectStatus_Sels;
+         AV54Projectwwds_7_tfprojectmanagername = AV44TFProjectManagerName;
+         AV55Projectwwds_8_tfprojectmanagername_sel = AV45TFProjectManagerName_Sel;
          pr_default.dynParam(1, new Object[]{ new Object[]{
                                               A105ProjectStatus ,
-                                              AV55Projectwwds_8_tfprojectstatus_sels ,
+                                              AV53Projectwwds_6_tfprojectstatus_sels ,
                                               AV48Projectwwds_1_filterfulltext ,
                                               AV50Projectwwds_3_tfprojectname_sel ,
                                               AV49Projectwwds_2_tfprojectname ,
                                               AV52Projectwwds_5_tfprojectdescription_sel ,
                                               AV51Projectwwds_4_tfprojectdescription ,
-                                              AV54Projectwwds_7_tfprojectmanagername_sel ,
-                                              AV53Projectwwds_6_tfprojectmanagername ,
-                                              AV55Projectwwds_8_tfprojectstatus_sels.Count ,
+                                              AV53Projectwwds_6_tfprojectstatus_sels.Count ,
+                                              AV55Projectwwds_8_tfprojectmanagername_sel ,
+                                              AV54Projectwwds_7_tfprojectmanagername ,
                                               A103ProjectName ,
                                               A104ProjectDescription ,
                                               A167ProjectManagerName } ,
@@ -365,9 +365,9 @@ namespace GeneXus.Programs {
          lV48Projectwwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV48Projectwwds_1_filterfulltext), "%", "");
          lV49Projectwwds_2_tfprojectname = StringUtil.PadR( StringUtil.RTrim( AV49Projectwwds_2_tfprojectname), 100, "%");
          lV51Projectwwds_4_tfprojectdescription = StringUtil.Concat( StringUtil.RTrim( AV51Projectwwds_4_tfprojectdescription), "%", "");
-         lV53Projectwwds_6_tfprojectmanagername = StringUtil.PadR( StringUtil.RTrim( AV53Projectwwds_6_tfprojectmanagername), 128, "%");
+         lV54Projectwwds_7_tfprojectmanagername = StringUtil.PadR( StringUtil.RTrim( AV54Projectwwds_7_tfprojectmanagername), 128, "%");
          /* Using cursor P007D3 */
-         pr_default.execute(1, new Object[] {lV48Projectwwds_1_filterfulltext, lV48Projectwwds_1_filterfulltext, lV48Projectwwds_1_filterfulltext, lV48Projectwwds_1_filterfulltext, lV48Projectwwds_1_filterfulltext, lV49Projectwwds_2_tfprojectname, AV50Projectwwds_3_tfprojectname_sel, lV51Projectwwds_4_tfprojectdescription, AV52Projectwwds_5_tfprojectdescription_sel, lV53Projectwwds_6_tfprojectmanagername, AV54Projectwwds_7_tfprojectmanagername_sel});
+         pr_default.execute(1, new Object[] {lV48Projectwwds_1_filterfulltext, lV48Projectwwds_1_filterfulltext, lV48Projectwwds_1_filterfulltext, lV48Projectwwds_1_filterfulltext, lV48Projectwwds_1_filterfulltext, lV49Projectwwds_2_tfprojectname, AV50Projectwwds_3_tfprojectname_sel, lV51Projectwwds_4_tfprojectdescription, AV52Projectwwds_5_tfprojectdescription_sel, lV54Projectwwds_7_tfprojectmanagername, AV55Projectwwds_8_tfprojectmanagername_sel});
          while ( (pr_default.getStatus(1) != 101) )
          {
             BRK7D4 = false;
@@ -423,20 +423,20 @@ namespace GeneXus.Programs {
          AV50Projectwwds_3_tfprojectname_sel = AV14TFProjectName_Sel;
          AV51Projectwwds_4_tfprojectdescription = AV15TFProjectDescription;
          AV52Projectwwds_5_tfprojectdescription_sel = AV16TFProjectDescription_Sel;
-         AV53Projectwwds_6_tfprojectmanagername = AV44TFProjectManagerName;
-         AV54Projectwwds_7_tfprojectmanagername_sel = AV45TFProjectManagerName_Sel;
-         AV55Projectwwds_8_tfprojectstatus_sels = AV18TFProjectStatus_Sels;
+         AV53Projectwwds_6_tfprojectstatus_sels = AV18TFProjectStatus_Sels;
+         AV54Projectwwds_7_tfprojectmanagername = AV44TFProjectManagerName;
+         AV55Projectwwds_8_tfprojectmanagername_sel = AV45TFProjectManagerName_Sel;
          pr_default.dynParam(2, new Object[]{ new Object[]{
                                               A105ProjectStatus ,
-                                              AV55Projectwwds_8_tfprojectstatus_sels ,
+                                              AV53Projectwwds_6_tfprojectstatus_sels ,
                                               AV48Projectwwds_1_filterfulltext ,
                                               AV50Projectwwds_3_tfprojectname_sel ,
                                               AV49Projectwwds_2_tfprojectname ,
                                               AV52Projectwwds_5_tfprojectdescription_sel ,
                                               AV51Projectwwds_4_tfprojectdescription ,
-                                              AV54Projectwwds_7_tfprojectmanagername_sel ,
-                                              AV53Projectwwds_6_tfprojectmanagername ,
-                                              AV55Projectwwds_8_tfprojectstatus_sels.Count ,
+                                              AV53Projectwwds_6_tfprojectstatus_sels.Count ,
+                                              AV55Projectwwds_8_tfprojectmanagername_sel ,
+                                              AV54Projectwwds_7_tfprojectmanagername ,
                                               A103ProjectName ,
                                               A104ProjectDescription ,
                                               A167ProjectManagerName } ,
@@ -451,9 +451,9 @@ namespace GeneXus.Programs {
          lV48Projectwwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV48Projectwwds_1_filterfulltext), "%", "");
          lV49Projectwwds_2_tfprojectname = StringUtil.PadR( StringUtil.RTrim( AV49Projectwwds_2_tfprojectname), 100, "%");
          lV51Projectwwds_4_tfprojectdescription = StringUtil.Concat( StringUtil.RTrim( AV51Projectwwds_4_tfprojectdescription), "%", "");
-         lV53Projectwwds_6_tfprojectmanagername = StringUtil.PadR( StringUtil.RTrim( AV53Projectwwds_6_tfprojectmanagername), 128, "%");
+         lV54Projectwwds_7_tfprojectmanagername = StringUtil.PadR( StringUtil.RTrim( AV54Projectwwds_7_tfprojectmanagername), 128, "%");
          /* Using cursor P007D4 */
-         pr_default.execute(2, new Object[] {lV48Projectwwds_1_filterfulltext, lV48Projectwwds_1_filterfulltext, lV48Projectwwds_1_filterfulltext, lV48Projectwwds_1_filterfulltext, lV48Projectwwds_1_filterfulltext, lV49Projectwwds_2_tfprojectname, AV50Projectwwds_3_tfprojectname_sel, lV51Projectwwds_4_tfprojectdescription, AV52Projectwwds_5_tfprojectdescription_sel, lV53Projectwwds_6_tfprojectmanagername, AV54Projectwwds_7_tfprojectmanagername_sel});
+         pr_default.execute(2, new Object[] {lV48Projectwwds_1_filterfulltext, lV48Projectwwds_1_filterfulltext, lV48Projectwwds_1_filterfulltext, lV48Projectwwds_1_filterfulltext, lV48Projectwwds_1_filterfulltext, lV49Projectwwds_2_tfprojectname, AV50Projectwwds_3_tfprojectname_sel, lV51Projectwwds_4_tfprojectdescription, AV52Projectwwds_5_tfprojectdescription_sel, lV54Projectwwds_7_tfprojectmanagername, AV55Projectwwds_8_tfprojectmanagername_sel});
          while ( (pr_default.getStatus(2) != 101) )
          {
             BRK7D6 = false;
@@ -532,23 +532,23 @@ namespace GeneXus.Programs {
          AV14TFProjectName_Sel = "";
          AV15TFProjectDescription = "";
          AV16TFProjectDescription_Sel = "";
-         AV44TFProjectManagerName = "";
-         AV45TFProjectManagerName_Sel = "";
          AV17TFProjectStatus_SelsJson = "";
          AV18TFProjectStatus_Sels = new GxSimpleCollection<string>();
+         AV44TFProjectManagerName = "";
+         AV45TFProjectManagerName_Sel = "";
          AV48Projectwwds_1_filterfulltext = "";
          AV49Projectwwds_2_tfprojectname = "";
          AV50Projectwwds_3_tfprojectname_sel = "";
          AV51Projectwwds_4_tfprojectdescription = "";
          AV52Projectwwds_5_tfprojectdescription_sel = "";
-         AV53Projectwwds_6_tfprojectmanagername = "";
-         AV54Projectwwds_7_tfprojectmanagername_sel = "";
-         AV55Projectwwds_8_tfprojectstatus_sels = new GxSimpleCollection<string>();
+         AV53Projectwwds_6_tfprojectstatus_sels = new GxSimpleCollection<string>();
+         AV54Projectwwds_7_tfprojectmanagername = "";
+         AV55Projectwwds_8_tfprojectmanagername_sel = "";
          scmdbuf = "";
          lV48Projectwwds_1_filterfulltext = "";
          lV49Projectwwds_2_tfprojectname = "";
          lV51Projectwwds_4_tfprojectdescription = "";
-         lV53Projectwwds_6_tfprojectmanagername = "";
+         lV54Projectwwds_7_tfprojectmanagername = "";
          A105ProjectStatus = "";
          A103ProjectName = "";
          A104ProjectDescription = "";
@@ -595,7 +595,7 @@ namespace GeneXus.Programs {
       private short AV21PageIndex ;
       private short AV20SkipItems ;
       private int AV46GXV1 ;
-      private int AV55Projectwwds_8_tfprojectstatus_sels_Count ;
+      private int AV53Projectwwds_6_tfprojectstatus_sels_Count ;
       private long A166ProjectManagerId ;
       private long A102ProjectId ;
       private long AV29count ;
@@ -605,11 +605,11 @@ namespace GeneXus.Programs {
       private string AV45TFProjectManagerName_Sel ;
       private string AV49Projectwwds_2_tfprojectname ;
       private string AV50Projectwwds_3_tfprojectname_sel ;
-      private string AV53Projectwwds_6_tfprojectmanagername ;
-      private string AV54Projectwwds_7_tfprojectmanagername_sel ;
+      private string AV54Projectwwds_7_tfprojectmanagername ;
+      private string AV55Projectwwds_8_tfprojectmanagername_sel ;
       private string scmdbuf ;
       private string lV49Projectwwds_2_tfprojectname ;
-      private string lV53Projectwwds_6_tfprojectmanagername ;
+      private string lV54Projectwwds_7_tfprojectmanagername ;
       private string A105ProjectStatus ;
       private string A103ProjectName ;
       private string A167ProjectManagerName ;
@@ -665,7 +665,7 @@ namespace GeneXus.Programs {
       private string aP4_OptionsDescJson ;
       private string aP5_OptionIndexesJson ;
       private GxSimpleCollection<string> AV18TFProjectStatus_Sels ;
-      private GxSimpleCollection<string> AV55Projectwwds_8_tfprojectstatus_sels ;
+      private GxSimpleCollection<string> AV53Projectwwds_6_tfprojectstatus_sels ;
       private GxSimpleCollection<string> AV25Options ;
       private GxSimpleCollection<string> AV27OptionsDesc ;
       private GxSimpleCollection<string> AV28OptionIndexes ;
@@ -678,15 +678,15 @@ namespace GeneXus.Programs {
    {
       protected Object[] conditional_P007D2( IGxContext context ,
                                              string A105ProjectStatus ,
-                                             GxSimpleCollection<string> AV55Projectwwds_8_tfprojectstatus_sels ,
+                                             GxSimpleCollection<string> AV53Projectwwds_6_tfprojectstatus_sels ,
                                              string AV48Projectwwds_1_filterfulltext ,
                                              string AV50Projectwwds_3_tfprojectname_sel ,
                                              string AV49Projectwwds_2_tfprojectname ,
                                              string AV52Projectwwds_5_tfprojectdescription_sel ,
                                              string AV51Projectwwds_4_tfprojectdescription ,
-                                             string AV54Projectwwds_7_tfprojectmanagername_sel ,
-                                             string AV53Projectwwds_6_tfprojectmanagername ,
-                                             int AV55Projectwwds_8_tfprojectstatus_sels_Count ,
+                                             int AV53Projectwwds_6_tfprojectstatus_sels_Count ,
+                                             string AV55Projectwwds_8_tfprojectmanagername_sel ,
+                                             string AV54Projectwwds_7_tfprojectmanagername ,
                                              string A103ProjectName ,
                                              string A104ProjectDescription ,
                                              string A167ProjectManagerName )
@@ -698,7 +698,7 @@ namespace GeneXus.Programs {
          scmdbuf = "SELECT T1.ProjectManagerId AS ProjectManagerId, T1.ProjectName, T2.EmployeeName AS ProjectManagerName, T1.ProjectDescription, T1.ProjectStatus, T1.ProjectId FROM (Project T1 LEFT JOIN Employee T2 ON T2.EmployeeId = T1.ProjectManagerId)";
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV48Projectwwds_1_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( LOWER(T1.ProjectName) like '%' || LOWER(:lV48Projectwwds_1_filterfulltext)) or ( LOWER(T1.ProjectDescription) like '%' || LOWER(:lV48Projectwwds_1_filterfulltext)) or ( LOWER(T2.EmployeeName) like '%' || LOWER(:lV48Projectwwds_1_filterfulltext)) or ( 'active' like '%' || LOWER(:lV48Projectwwds_1_filterfulltext) and T1.ProjectStatus = ( 'Active')) or ( 'inactive' like '%' || LOWER(:lV48Projectwwds_1_filterfulltext) and T1.ProjectStatus = ( 'Inactive')))");
+            AddWhere(sWhereString, "(( LOWER(T1.ProjectName) like '%' || LOWER(:lV48Projectwwds_1_filterfulltext)) or ( LOWER(T1.ProjectDescription) like '%' || LOWER(:lV48Projectwwds_1_filterfulltext)) or ( 'active' like '%' || LOWER(:lV48Projectwwds_1_filterfulltext) and T1.ProjectStatus = ( 'Active')) or ( 'inactive' like '%' || LOWER(:lV48Projectwwds_1_filterfulltext) and T1.ProjectStatus = ( 'Inactive')) or ( LOWER(T2.EmployeeName) like '%' || LOWER(:lV48Projectwwds_1_filterfulltext)))");
          }
          else
          {
@@ -748,29 +748,29 @@ namespace GeneXus.Programs {
          {
             AddWhere(sWhereString, "((char_length(trim(trailing ' ' from T1.ProjectDescription))=0))");
          }
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV54Projectwwds_7_tfprojectmanagername_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV53Projectwwds_6_tfprojectmanagername)) ) )
+         if ( AV53Projectwwds_6_tfprojectstatus_sels_Count > 0 )
          {
-            AddWhere(sWhereString, "(LOWER(T2.EmployeeName) like LOWER(:lV53Projectwwds_6_tfprojectmanagername))");
+            AddWhere(sWhereString, "("+new GxDbmsUtils( new GxPostgreSql()).ValueList(AV53Projectwwds_6_tfprojectstatus_sels, "T1.ProjectStatus IN (", ")")+")");
+         }
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV55Projectwwds_8_tfprojectmanagername_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV54Projectwwds_7_tfprojectmanagername)) ) )
+         {
+            AddWhere(sWhereString, "(LOWER(T2.EmployeeName) like LOWER(:lV54Projectwwds_7_tfprojectmanagername))");
          }
          else
          {
             GXv_int1[9] = 1;
          }
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV54Projectwwds_7_tfprojectmanagername_sel)) && ! ( StringUtil.StrCmp(AV54Projectwwds_7_tfprojectmanagername_sel, "<#Empty#>") == 0 ) )
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV55Projectwwds_8_tfprojectmanagername_sel)) && ! ( StringUtil.StrCmp(AV55Projectwwds_8_tfprojectmanagername_sel, "<#Empty#>") == 0 ) )
          {
-            AddWhere(sWhereString, "(T2.EmployeeName = ( :AV54Projectwwds_7_tfprojectmanagername_sel))");
+            AddWhere(sWhereString, "(T2.EmployeeName = ( :AV55Projectwwds_8_tfprojectmanagername_sel))");
          }
          else
          {
             GXv_int1[10] = 1;
          }
-         if ( StringUtil.StrCmp(AV54Projectwwds_7_tfprojectmanagername_sel, "<#Empty#>") == 0 )
+         if ( StringUtil.StrCmp(AV55Projectwwds_8_tfprojectmanagername_sel, "<#Empty#>") == 0 )
          {
             AddWhere(sWhereString, "((char_length(trim(trailing ' ' from T2.EmployeeName))=0))");
-         }
-         if ( AV55Projectwwds_8_tfprojectstatus_sels_Count > 0 )
-         {
-            AddWhere(sWhereString, "("+new GxDbmsUtils( new GxPostgreSql()).ValueList(AV55Projectwwds_8_tfprojectstatus_sels, "T1.ProjectStatus IN (", ")")+")");
          }
          scmdbuf += sWhereString;
          scmdbuf += " ORDER BY T1.ProjectName";
@@ -781,15 +781,15 @@ namespace GeneXus.Programs {
 
       protected Object[] conditional_P007D3( IGxContext context ,
                                              string A105ProjectStatus ,
-                                             GxSimpleCollection<string> AV55Projectwwds_8_tfprojectstatus_sels ,
+                                             GxSimpleCollection<string> AV53Projectwwds_6_tfprojectstatus_sels ,
                                              string AV48Projectwwds_1_filterfulltext ,
                                              string AV50Projectwwds_3_tfprojectname_sel ,
                                              string AV49Projectwwds_2_tfprojectname ,
                                              string AV52Projectwwds_5_tfprojectdescription_sel ,
                                              string AV51Projectwwds_4_tfprojectdescription ,
-                                             string AV54Projectwwds_7_tfprojectmanagername_sel ,
-                                             string AV53Projectwwds_6_tfprojectmanagername ,
-                                             int AV55Projectwwds_8_tfprojectstatus_sels_Count ,
+                                             int AV53Projectwwds_6_tfprojectstatus_sels_Count ,
+                                             string AV55Projectwwds_8_tfprojectmanagername_sel ,
+                                             string AV54Projectwwds_7_tfprojectmanagername ,
                                              string A103ProjectName ,
                                              string A104ProjectDescription ,
                                              string A167ProjectManagerName )
@@ -801,7 +801,7 @@ namespace GeneXus.Programs {
          scmdbuf = "SELECT T1.ProjectManagerId AS ProjectManagerId, T1.ProjectDescription, T2.EmployeeName AS ProjectManagerName, T1.ProjectName, T1.ProjectStatus, T1.ProjectId FROM (Project T1 LEFT JOIN Employee T2 ON T2.EmployeeId = T1.ProjectManagerId)";
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV48Projectwwds_1_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( LOWER(T1.ProjectName) like '%' || LOWER(:lV48Projectwwds_1_filterfulltext)) or ( LOWER(T1.ProjectDescription) like '%' || LOWER(:lV48Projectwwds_1_filterfulltext)) or ( LOWER(T2.EmployeeName) like '%' || LOWER(:lV48Projectwwds_1_filterfulltext)) or ( 'active' like '%' || LOWER(:lV48Projectwwds_1_filterfulltext) and T1.ProjectStatus = ( 'Active')) or ( 'inactive' like '%' || LOWER(:lV48Projectwwds_1_filterfulltext) and T1.ProjectStatus = ( 'Inactive')))");
+            AddWhere(sWhereString, "(( LOWER(T1.ProjectName) like '%' || LOWER(:lV48Projectwwds_1_filterfulltext)) or ( LOWER(T1.ProjectDescription) like '%' || LOWER(:lV48Projectwwds_1_filterfulltext)) or ( 'active' like '%' || LOWER(:lV48Projectwwds_1_filterfulltext) and T1.ProjectStatus = ( 'Active')) or ( 'inactive' like '%' || LOWER(:lV48Projectwwds_1_filterfulltext) and T1.ProjectStatus = ( 'Inactive')) or ( LOWER(T2.EmployeeName) like '%' || LOWER(:lV48Projectwwds_1_filterfulltext)))");
          }
          else
          {
@@ -851,29 +851,29 @@ namespace GeneXus.Programs {
          {
             AddWhere(sWhereString, "((char_length(trim(trailing ' ' from T1.ProjectDescription))=0))");
          }
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV54Projectwwds_7_tfprojectmanagername_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV53Projectwwds_6_tfprojectmanagername)) ) )
+         if ( AV53Projectwwds_6_tfprojectstatus_sels_Count > 0 )
          {
-            AddWhere(sWhereString, "(LOWER(T2.EmployeeName) like LOWER(:lV53Projectwwds_6_tfprojectmanagername))");
+            AddWhere(sWhereString, "("+new GxDbmsUtils( new GxPostgreSql()).ValueList(AV53Projectwwds_6_tfprojectstatus_sels, "T1.ProjectStatus IN (", ")")+")");
+         }
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV55Projectwwds_8_tfprojectmanagername_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV54Projectwwds_7_tfprojectmanagername)) ) )
+         {
+            AddWhere(sWhereString, "(LOWER(T2.EmployeeName) like LOWER(:lV54Projectwwds_7_tfprojectmanagername))");
          }
          else
          {
             GXv_int3[9] = 1;
          }
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV54Projectwwds_7_tfprojectmanagername_sel)) && ! ( StringUtil.StrCmp(AV54Projectwwds_7_tfprojectmanagername_sel, "<#Empty#>") == 0 ) )
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV55Projectwwds_8_tfprojectmanagername_sel)) && ! ( StringUtil.StrCmp(AV55Projectwwds_8_tfprojectmanagername_sel, "<#Empty#>") == 0 ) )
          {
-            AddWhere(sWhereString, "(T2.EmployeeName = ( :AV54Projectwwds_7_tfprojectmanagername_sel))");
+            AddWhere(sWhereString, "(T2.EmployeeName = ( :AV55Projectwwds_8_tfprojectmanagername_sel))");
          }
          else
          {
             GXv_int3[10] = 1;
          }
-         if ( StringUtil.StrCmp(AV54Projectwwds_7_tfprojectmanagername_sel, "<#Empty#>") == 0 )
+         if ( StringUtil.StrCmp(AV55Projectwwds_8_tfprojectmanagername_sel, "<#Empty#>") == 0 )
          {
             AddWhere(sWhereString, "((char_length(trim(trailing ' ' from T2.EmployeeName))=0))");
-         }
-         if ( AV55Projectwwds_8_tfprojectstatus_sels_Count > 0 )
-         {
-            AddWhere(sWhereString, "("+new GxDbmsUtils( new GxPostgreSql()).ValueList(AV55Projectwwds_8_tfprojectstatus_sels, "T1.ProjectStatus IN (", ")")+")");
          }
          scmdbuf += sWhereString;
          scmdbuf += " ORDER BY T1.ProjectDescription";
@@ -884,15 +884,15 @@ namespace GeneXus.Programs {
 
       protected Object[] conditional_P007D4( IGxContext context ,
                                              string A105ProjectStatus ,
-                                             GxSimpleCollection<string> AV55Projectwwds_8_tfprojectstatus_sels ,
+                                             GxSimpleCollection<string> AV53Projectwwds_6_tfprojectstatus_sels ,
                                              string AV48Projectwwds_1_filterfulltext ,
                                              string AV50Projectwwds_3_tfprojectname_sel ,
                                              string AV49Projectwwds_2_tfprojectname ,
                                              string AV52Projectwwds_5_tfprojectdescription_sel ,
                                              string AV51Projectwwds_4_tfprojectdescription ,
-                                             string AV54Projectwwds_7_tfprojectmanagername_sel ,
-                                             string AV53Projectwwds_6_tfprojectmanagername ,
-                                             int AV55Projectwwds_8_tfprojectstatus_sels_Count ,
+                                             int AV53Projectwwds_6_tfprojectstatus_sels_Count ,
+                                             string AV55Projectwwds_8_tfprojectmanagername_sel ,
+                                             string AV54Projectwwds_7_tfprojectmanagername ,
                                              string A103ProjectName ,
                                              string A104ProjectDescription ,
                                              string A167ProjectManagerName )
@@ -904,7 +904,7 @@ namespace GeneXus.Programs {
          scmdbuf = "SELECT T1.ProjectManagerId AS ProjectManagerId, T2.EmployeeName AS ProjectManagerName, T1.ProjectDescription, T1.ProjectName, T1.ProjectStatus, T1.ProjectId FROM (Project T1 LEFT JOIN Employee T2 ON T2.EmployeeId = T1.ProjectManagerId)";
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV48Projectwwds_1_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( LOWER(T1.ProjectName) like '%' || LOWER(:lV48Projectwwds_1_filterfulltext)) or ( LOWER(T1.ProjectDescription) like '%' || LOWER(:lV48Projectwwds_1_filterfulltext)) or ( LOWER(T2.EmployeeName) like '%' || LOWER(:lV48Projectwwds_1_filterfulltext)) or ( 'active' like '%' || LOWER(:lV48Projectwwds_1_filterfulltext) and T1.ProjectStatus = ( 'Active')) or ( 'inactive' like '%' || LOWER(:lV48Projectwwds_1_filterfulltext) and T1.ProjectStatus = ( 'Inactive')))");
+            AddWhere(sWhereString, "(( LOWER(T1.ProjectName) like '%' || LOWER(:lV48Projectwwds_1_filterfulltext)) or ( LOWER(T1.ProjectDescription) like '%' || LOWER(:lV48Projectwwds_1_filterfulltext)) or ( 'active' like '%' || LOWER(:lV48Projectwwds_1_filterfulltext) and T1.ProjectStatus = ( 'Active')) or ( 'inactive' like '%' || LOWER(:lV48Projectwwds_1_filterfulltext) and T1.ProjectStatus = ( 'Inactive')) or ( LOWER(T2.EmployeeName) like '%' || LOWER(:lV48Projectwwds_1_filterfulltext)))");
          }
          else
          {
@@ -954,29 +954,29 @@ namespace GeneXus.Programs {
          {
             AddWhere(sWhereString, "((char_length(trim(trailing ' ' from T1.ProjectDescription))=0))");
          }
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV54Projectwwds_7_tfprojectmanagername_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV53Projectwwds_6_tfprojectmanagername)) ) )
+         if ( AV53Projectwwds_6_tfprojectstatus_sels_Count > 0 )
          {
-            AddWhere(sWhereString, "(LOWER(T2.EmployeeName) like LOWER(:lV53Projectwwds_6_tfprojectmanagername))");
+            AddWhere(sWhereString, "("+new GxDbmsUtils( new GxPostgreSql()).ValueList(AV53Projectwwds_6_tfprojectstatus_sels, "T1.ProjectStatus IN (", ")")+")");
+         }
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV55Projectwwds_8_tfprojectmanagername_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV54Projectwwds_7_tfprojectmanagername)) ) )
+         {
+            AddWhere(sWhereString, "(LOWER(T2.EmployeeName) like LOWER(:lV54Projectwwds_7_tfprojectmanagername))");
          }
          else
          {
             GXv_int5[9] = 1;
          }
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV54Projectwwds_7_tfprojectmanagername_sel)) && ! ( StringUtil.StrCmp(AV54Projectwwds_7_tfprojectmanagername_sel, "<#Empty#>") == 0 ) )
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV55Projectwwds_8_tfprojectmanagername_sel)) && ! ( StringUtil.StrCmp(AV55Projectwwds_8_tfprojectmanagername_sel, "<#Empty#>") == 0 ) )
          {
-            AddWhere(sWhereString, "(T2.EmployeeName = ( :AV54Projectwwds_7_tfprojectmanagername_sel))");
+            AddWhere(sWhereString, "(T2.EmployeeName = ( :AV55Projectwwds_8_tfprojectmanagername_sel))");
          }
          else
          {
             GXv_int5[10] = 1;
          }
-         if ( StringUtil.StrCmp(AV54Projectwwds_7_tfprojectmanagername_sel, "<#Empty#>") == 0 )
+         if ( StringUtil.StrCmp(AV55Projectwwds_8_tfprojectmanagername_sel, "<#Empty#>") == 0 )
          {
             AddWhere(sWhereString, "((char_length(trim(trailing ' ' from T2.EmployeeName))=0))");
-         }
-         if ( AV55Projectwwds_8_tfprojectstatus_sels_Count > 0 )
-         {
-            AddWhere(sWhereString, "("+new GxDbmsUtils( new GxPostgreSql()).ValueList(AV55Projectwwds_8_tfprojectstatus_sels, "T1.ProjectStatus IN (", ")")+")");
          }
          scmdbuf += sWhereString;
          scmdbuf += " ORDER BY T2.EmployeeName";
@@ -992,11 +992,11 @@ namespace GeneXus.Programs {
          switch ( cursor )
          {
                case 0 :
-                     return conditional_P007D2(context, (string)dynConstraints[0] , (GxSimpleCollection<string>)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (string)dynConstraints[7] , (string)dynConstraints[8] , (int)dynConstraints[9] , (string)dynConstraints[10] , (string)dynConstraints[11] , (string)dynConstraints[12] );
+                     return conditional_P007D2(context, (string)dynConstraints[0] , (GxSimpleCollection<string>)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (int)dynConstraints[7] , (string)dynConstraints[8] , (string)dynConstraints[9] , (string)dynConstraints[10] , (string)dynConstraints[11] , (string)dynConstraints[12] );
                case 1 :
-                     return conditional_P007D3(context, (string)dynConstraints[0] , (GxSimpleCollection<string>)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (string)dynConstraints[7] , (string)dynConstraints[8] , (int)dynConstraints[9] , (string)dynConstraints[10] , (string)dynConstraints[11] , (string)dynConstraints[12] );
+                     return conditional_P007D3(context, (string)dynConstraints[0] , (GxSimpleCollection<string>)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (int)dynConstraints[7] , (string)dynConstraints[8] , (string)dynConstraints[9] , (string)dynConstraints[10] , (string)dynConstraints[11] , (string)dynConstraints[12] );
                case 2 :
-                     return conditional_P007D4(context, (string)dynConstraints[0] , (GxSimpleCollection<string>)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (string)dynConstraints[7] , (string)dynConstraints[8] , (int)dynConstraints[9] , (string)dynConstraints[10] , (string)dynConstraints[11] , (string)dynConstraints[12] );
+                     return conditional_P007D4(context, (string)dynConstraints[0] , (GxSimpleCollection<string>)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (int)dynConstraints[7] , (string)dynConstraints[8] , (string)dynConstraints[9] , (string)dynConstraints[10] , (string)dynConstraints[11] , (string)dynConstraints[12] );
          }
          return base.getDynamicStatement(cursor, context, dynConstraints);
       }
@@ -1027,8 +1027,8 @@ namespace GeneXus.Programs {
           new ParDef("AV50Projectwwds_3_tfprojectname_sel",GXType.Char,100,0) ,
           new ParDef("lV51Projectwwds_4_tfprojectdescription",GXType.VarChar,200,0) ,
           new ParDef("AV52Projectwwds_5_tfprojectdescription_sel",GXType.VarChar,200,0) ,
-          new ParDef("lV53Projectwwds_6_tfprojectmanagername",GXType.Char,128,0) ,
-          new ParDef("AV54Projectwwds_7_tfprojectmanagername_sel",GXType.Char,128,0)
+          new ParDef("lV54Projectwwds_7_tfprojectmanagername",GXType.Char,128,0) ,
+          new ParDef("AV55Projectwwds_8_tfprojectmanagername_sel",GXType.Char,128,0)
           };
           Object[] prmP007D3;
           prmP007D3 = new Object[] {
@@ -1041,8 +1041,8 @@ namespace GeneXus.Programs {
           new ParDef("AV50Projectwwds_3_tfprojectname_sel",GXType.Char,100,0) ,
           new ParDef("lV51Projectwwds_4_tfprojectdescription",GXType.VarChar,200,0) ,
           new ParDef("AV52Projectwwds_5_tfprojectdescription_sel",GXType.VarChar,200,0) ,
-          new ParDef("lV53Projectwwds_6_tfprojectmanagername",GXType.Char,128,0) ,
-          new ParDef("AV54Projectwwds_7_tfprojectmanagername_sel",GXType.Char,128,0)
+          new ParDef("lV54Projectwwds_7_tfprojectmanagername",GXType.Char,128,0) ,
+          new ParDef("AV55Projectwwds_8_tfprojectmanagername_sel",GXType.Char,128,0)
           };
           Object[] prmP007D4;
           prmP007D4 = new Object[] {
@@ -1055,8 +1055,8 @@ namespace GeneXus.Programs {
           new ParDef("AV50Projectwwds_3_tfprojectname_sel",GXType.Char,100,0) ,
           new ParDef("lV51Projectwwds_4_tfprojectdescription",GXType.VarChar,200,0) ,
           new ParDef("AV52Projectwwds_5_tfprojectdescription_sel",GXType.VarChar,200,0) ,
-          new ParDef("lV53Projectwwds_6_tfprojectmanagername",GXType.Char,128,0) ,
-          new ParDef("AV54Projectwwds_7_tfprojectmanagername_sel",GXType.Char,128,0)
+          new ParDef("lV54Projectwwds_7_tfprojectmanagername",GXType.Char,128,0) ,
+          new ParDef("AV55Projectwwds_8_tfprojectmanagername_sel",GXType.Char,128,0)
           };
           def= new CursorDef[] {
               new CursorDef("P007D2", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP007D2,100, GxCacheFrequency.OFF ,true,false )

@@ -40,11 +40,11 @@ type_SdtDevice.cs
 workwithplus\type_SdtWWP_Parameter.cs
 type_SdtCompany.cs
 type_SdtLeaveType.cs
-type_SdtProject.cs
 type_SdtWorkHourLog.cs
+type_SdtLeaveRequest.cs
 type_SdtEmployee.cs
 type_SdtEmployee_Project.cs
-type_SdtLeaveRequest.cs
+type_SdtProject.cs
 gxdomainwwpdomains.cs
 genexusreporting\gxdomainqueryviewervisible.cs
 gxdomainhomesampledatastatus.cs

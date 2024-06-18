@@ -686,7 +686,7 @@ namespace GeneXus.Programs {
                         {
                            sEvtType = StringUtil.Right( sEvt, 4);
                            sEvt = StringUtil.Left( sEvt, (short)(StringUtil.Len( sEvt)-4));
-                           if ( ( StringUtil.StrCmp(StringUtil.Left( sEvt, 5), "START") == 0 ) || ( StringUtil.StrCmp(StringUtil.Left( sEvt, 19), "FREESTYLEGRID1.LOAD") == 0 ) || ( StringUtil.StrCmp(StringUtil.Left( sEvt, 14), "'DOEXPORTSELF'") == 0 ) || ( StringUtil.StrCmp(StringUtil.Left( sEvt, 16), "'DOEXPORTPARENT'") == 0 ) || ( StringUtil.StrCmp(StringUtil.Left( sEvt, 13), "'DOEXPORTTOP'") == 0 ) || ( StringUtil.StrCmp(StringUtil.Left( sEvt, 5), "ENTER") == 0 ) || ( StringUtil.StrCmp(StringUtil.Left( sEvt, 6), "CANCEL") == 0 ) )
+                           if ( ( StringUtil.StrCmp(StringUtil.Left( sEvt, 5), "START") == 0 ) || ( StringUtil.StrCmp(StringUtil.Left( sEvt, 19), "FREESTYLEGRID1.LOAD") == 0 ) || ( StringUtil.StrCmp(StringUtil.Left( sEvt, 5), "ENTER") == 0 ) || ( StringUtil.StrCmp(StringUtil.Left( sEvt, 6), "CANCEL") == 0 ) )
                            {
                               nGXsfl_20_idx = (int)(Math.Round(NumberUtil.Val( sEvtType, "."), 18, MidpointRounding.ToEven));
                               sGXsfl_20_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_20_idx), 4, 0), 4, "0");
@@ -709,27 +709,6 @@ namespace GeneXus.Programs {
                                     context.wbHandled = 1;
                                     dynload_actions( ) ;
                                     E144Y2 ();
-                                 }
-                                 else if ( StringUtil.StrCmp(sEvt, "'DOEXPORTSELF'") == 0 )
-                                 {
-                                    context.wbHandled = 1;
-                                    dynload_actions( ) ;
-                                    /* Execute user event: 'DoExportSelf' */
-                                    E154Y2 ();
-                                 }
-                                 else if ( StringUtil.StrCmp(sEvt, "'DOEXPORTPARENT'") == 0 )
-                                 {
-                                    context.wbHandled = 1;
-                                    dynload_actions( ) ;
-                                    /* Execute user event: 'DoExportParent' */
-                                    E164Y2 ();
-                                 }
-                                 else if ( StringUtil.StrCmp(sEvt, "'DOEXPORTTOP'") == 0 )
-                                 {
-                                    context.wbHandled = 1;
-                                    dynload_actions( ) ;
-                                    /* Execute user event: 'DoExportTop' */
-                                    E174Y2 ();
                                  }
                                  else if ( StringUtil.StrCmp(sEvt, "ENTER") == 0 )
                                  {
@@ -1129,66 +1108,12 @@ namespace GeneXus.Programs {
       {
          /* 'DoExportExcel' Routine */
          returnInSub = false;
-         new exportdetailedreport(context ).execute( ref  AV21DateRange, ref  AV26DateRange_To, ref  AV14ProjectId, ref  AV12CompanyLocationId, ref  AV13EmployeeId, out  AV35ExcelFilename, out  AV36ErrorMessage) ;
+         new employeehoursreport(context ).execute( ref  AV21DateRange, ref  AV26DateRange_To, ref  AV14ProjectId, ref  AV12CompanyLocationId, ref  AV13EmployeeId, out  AV35ExcelFilename, out  AV36ErrorMessage) ;
          AssignAttri("", false, "AV21DateRange", context.localUtil.Format(AV21DateRange, "99/99/99"));
          AssignAttri("", false, "AV26DateRange_To", context.localUtil.Format(AV26DateRange_To, "99/99/99"));
          Innewwindow1_Target = AV35ExcelFilename;
          ucInnewwindow1.SendProperty(context, "", false, Innewwindow1_Internalname, "Target", Innewwindow1_Target);
          Innewwindow1_Name = "_parent";
-         ucInnewwindow1.SendProperty(context, "", false, Innewwindow1_Internalname, "Name", Innewwindow1_Name);
-         this.executeUsercontrolMethod("", false, "INNEWWINDOW1Container", "OpenWindow", "", new Object[] {});
-         /*  Sending Event outputs  */
-         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV13EmployeeId", AV13EmployeeId);
-         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV12CompanyLocationId", AV12CompanyLocationId);
-         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV14ProjectId", AV14ProjectId);
-      }
-
-      protected void E154Y2( )
-      {
-         /* 'DoExportSelf' Routine */
-         returnInSub = false;
-         new exportdetailedreport(context ).execute( ref  AV21DateRange, ref  AV26DateRange_To, ref  AV14ProjectId, ref  AV12CompanyLocationId, ref  AV13EmployeeId, out  AV35ExcelFilename, out  AV36ErrorMessage) ;
-         AssignAttri("", false, "AV21DateRange", context.localUtil.Format(AV21DateRange, "99/99/99"));
-         AssignAttri("", false, "AV26DateRange_To", context.localUtil.Format(AV26DateRange_To, "99/99/99"));
-         Innewwindow1_Target = AV35ExcelFilename;
-         ucInnewwindow1.SendProperty(context, "", false, Innewwindow1_Internalname, "Target", Innewwindow1_Target);
-         Innewwindow1_Name = "_self";
-         ucInnewwindow1.SendProperty(context, "", false, Innewwindow1_Internalname, "Name", Innewwindow1_Name);
-         this.executeUsercontrolMethod("", false, "INNEWWINDOW1Container", "OpenWindow", "", new Object[] {});
-         /*  Sending Event outputs  */
-         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV13EmployeeId", AV13EmployeeId);
-         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV12CompanyLocationId", AV12CompanyLocationId);
-         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV14ProjectId", AV14ProjectId);
-      }
-
-      protected void E164Y2( )
-      {
-         /* 'DoExportParent' Routine */
-         returnInSub = false;
-         new exportdetailedreport(context ).execute( ref  AV21DateRange, ref  AV26DateRange_To, ref  AV14ProjectId, ref  AV12CompanyLocationId, ref  AV13EmployeeId, out  AV35ExcelFilename, out  AV36ErrorMessage) ;
-         AssignAttri("", false, "AV21DateRange", context.localUtil.Format(AV21DateRange, "99/99/99"));
-         AssignAttri("", false, "AV26DateRange_To", context.localUtil.Format(AV26DateRange_To, "99/99/99"));
-         Innewwindow1_Target = AV35ExcelFilename;
-         ucInnewwindow1.SendProperty(context, "", false, Innewwindow1_Internalname, "Target", Innewwindow1_Target);
-         Innewwindow1_Name = "_parent";
-         ucInnewwindow1.SendProperty(context, "", false, Innewwindow1_Internalname, "Name", Innewwindow1_Name);
-         this.executeUsercontrolMethod("", false, "INNEWWINDOW1Container", "OpenWindow", "", new Object[] {});
-         /*  Sending Event outputs  */
-         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV13EmployeeId", AV13EmployeeId);
-         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV12CompanyLocationId", AV12CompanyLocationId);
-         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV14ProjectId", AV14ProjectId);
-      }
-
-      protected void E174Y2( )
-      {
-         /* 'DoExportTop' Routine */
-         returnInSub = false;
-         new exportdetailedreport(context ).execute( ref  AV21DateRange, ref  AV26DateRange_To, ref  AV14ProjectId, ref  AV12CompanyLocationId, ref  AV13EmployeeId, out  AV35ExcelFilename, out  AV36ErrorMessage) ;
-         AssignAttri("", false, "AV21DateRange", context.localUtil.Format(AV21DateRange, "99/99/99"));
-         AssignAttri("", false, "AV26DateRange_To", context.localUtil.Format(AV26DateRange_To, "99/99/99"));
-         Innewwindow1_Target = AV35ExcelFilename;
-         ucInnewwindow1.SendProperty(context, "", false, Innewwindow1_Internalname, "Target", Innewwindow1_Target);
-         Innewwindow1_Name = "_top";
          ucInnewwindow1.SendProperty(context, "", false, Innewwindow1_Internalname, "Name", Innewwindow1_Name);
          this.executeUsercontrolMethod("", false, "INNEWWINDOW1Container", "OpenWindow", "", new Object[] {});
          /*  Sending Event outputs  */
@@ -1298,7 +1223,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202461311235486", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202461764158", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1314,7 +1239,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("projectdetails.js", "?202461311235486", false, true);
+         context.AddJavascriptSource("projectdetails.js", "?202461764158", false, true);
          context.AddJavascriptSource("Window/InNewWindowRender.js", "", false, true);
          /* End function include_jscripts */
       }
@@ -1625,12 +1550,6 @@ namespace GeneXus.Programs {
          setEventMetadata("FREESTYLEGRID1.LOAD",",oparms:[{ctrl:'WCREPORTSWORKHOURLOGDETAILS'}]}");
          setEventMetadata("'DOEXPORTEXCEL'","{handler:'E114Y2',iparms:[{av:'AV21DateRange',fld:'vDATERANGE',pic:''},{av:'AV26DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV14ProjectId',fld:'vPROJECTID',pic:''},{av:'AV12CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:''},{av:'AV13EmployeeId',fld:'vEMPLOYEEID',pic:''}]");
          setEventMetadata("'DOEXPORTEXCEL'",",oparms:[{av:'AV13EmployeeId',fld:'vEMPLOYEEID',pic:''},{av:'AV12CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:''},{av:'AV14ProjectId',fld:'vPROJECTID',pic:''},{av:'AV26DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV21DateRange',fld:'vDATERANGE',pic:''},{av:'Innewwindow1_Target',ctrl:'INNEWWINDOW1',prop:'Target'},{av:'Innewwindow1_Name',ctrl:'INNEWWINDOW1',prop:'Name'}]}");
-         setEventMetadata("'DOEXPORTSELF'","{handler:'E154Y2',iparms:[{av:'AV21DateRange',fld:'vDATERANGE',pic:''},{av:'AV26DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV14ProjectId',fld:'vPROJECTID',pic:''},{av:'AV12CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:''},{av:'AV13EmployeeId',fld:'vEMPLOYEEID',pic:''}]");
-         setEventMetadata("'DOEXPORTSELF'",",oparms:[{av:'AV13EmployeeId',fld:'vEMPLOYEEID',pic:''},{av:'AV12CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:''},{av:'AV14ProjectId',fld:'vPROJECTID',pic:''},{av:'AV26DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV21DateRange',fld:'vDATERANGE',pic:''},{av:'Innewwindow1_Target',ctrl:'INNEWWINDOW1',prop:'Target'},{av:'Innewwindow1_Name',ctrl:'INNEWWINDOW1',prop:'Name'}]}");
-         setEventMetadata("'DOEXPORTPARENT'","{handler:'E164Y2',iparms:[{av:'AV21DateRange',fld:'vDATERANGE',pic:''},{av:'AV26DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV14ProjectId',fld:'vPROJECTID',pic:''},{av:'AV12CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:''},{av:'AV13EmployeeId',fld:'vEMPLOYEEID',pic:''}]");
-         setEventMetadata("'DOEXPORTPARENT'",",oparms:[{av:'AV13EmployeeId',fld:'vEMPLOYEEID',pic:''},{av:'AV12CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:''},{av:'AV14ProjectId',fld:'vPROJECTID',pic:''},{av:'AV26DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV21DateRange',fld:'vDATERANGE',pic:''},{av:'Innewwindow1_Target',ctrl:'INNEWWINDOW1',prop:'Target'},{av:'Innewwindow1_Name',ctrl:'INNEWWINDOW1',prop:'Name'}]}");
-         setEventMetadata("'DOEXPORTTOP'","{handler:'E174Y2',iparms:[{av:'AV21DateRange',fld:'vDATERANGE',pic:''},{av:'AV26DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV14ProjectId',fld:'vPROJECTID',pic:''},{av:'AV12CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:''},{av:'AV13EmployeeId',fld:'vEMPLOYEEID',pic:''}]");
-         setEventMetadata("'DOEXPORTTOP'",",oparms:[{av:'AV13EmployeeId',fld:'vEMPLOYEEID',pic:''},{av:'AV12CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:''},{av:'AV14ProjectId',fld:'vPROJECTID',pic:''},{av:'AV26DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV21DateRange',fld:'vDATERANGE',pic:''},{av:'Innewwindow1_Target',ctrl:'INNEWWINDOW1',prop:'Target'},{av:'Innewwindow1_Name',ctrl:'INNEWWINDOW1',prop:'Name'}]}");
          setEventMetadata("GLOBALEVENTS.REPORTSFILTERCHANAGED","{handler:'E124Y2',iparms:[{av:'FREESTYLEGRID1_nFirstRecordOnPage'},{av:'FREESTYLEGRID1_nEOF'},{av:'AV22OneProjectId',fld:'vONEPROJECTID',pic:'ZZZ9',hsh:true},{av:'edtEmployeeName_Visible',ctrl:'EMPLOYEENAME',prop:'Visible'},{av:'edtEmployeeId_Visible',ctrl:'EMPLOYEEID',prop:'Visible'},{av:'AV15FromDate',fld:'vFROMDATE',pic:''},{av:'AV16ToDate',fld:'vTODATE',pic:''},{av:'AV32InProjectId',fld:'vINPROJECTID',pic:''},{av:'AV31InEmployeeId',fld:'vINEMPLOYEEID',pic:''},{av:'AV30InCompanyLocationId',fld:'vINCOMPANYLOCATIONID',pic:''},{av:'AV12CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:''},{av:'AV13EmployeeId',fld:'vEMPLOYEEID',pic:''}]");
          setEventMetadata("GLOBALEVENTS.REPORTSFILTERCHANAGED",",oparms:[{av:'AV21DateRange',fld:'vDATERANGE',pic:''},{av:'AV26DateRange_To',fld:'vDATERANGE_TO',pic:''}]}");
          setEventMetadata("VALID_EMPLOYEEID","{handler:'Valid_Employeeid',iparms:[]");

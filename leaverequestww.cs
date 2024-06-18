@@ -2040,7 +2040,7 @@ namespace GeneXus.Programs {
          new GeneXus.Programs.wwpbaseobjects.wwp_getappliedfiltersdescription(context ).execute(  AV83Pgmname, out  GXt_char2) ;
          AV64GridAppliedFilters = GXt_char2;
          AssignAttri("", false, "AV64GridAppliedFilters", AV64GridAppliedFilters);
-         edtLeaveRequestHalfDay_Columnheaderclass = "WWColumn";
+         edtLeaveRequestHalfDay_Columnheaderclass = "WWColumn hidden-xs";
          AssignProp("", false, edtLeaveRequestHalfDay_Internalname, "Columnheaderclass", edtLeaveRequestHalfDay_Columnheaderclass, !bGXsfl_41_Refreshing);
          cmbLeaveRequestStatus_Columnheaderclass = "WWColumn hidden-xs";
          AssignProp("", false, cmbLeaveRequestStatus_Internalname, "Columnheaderclass", cmbLeaveRequestStatus_Columnheaderclass, !bGXsfl_41_Refreshing);
@@ -2283,15 +2283,15 @@ namespace GeneXus.Programs {
          }
          if ( StringUtil.StrCmp(A173LeaveRequestHalfDay, "Morning") == 0 )
          {
-            edtLeaveRequestHalfDay_Columnclass = "WWColumn WWColumnTag WWColumnTagInfo WWColumnTagInfoSingleCell";
+            edtLeaveRequestHalfDay_Columnclass = "WWColumn hidden-xs WWColumnTag WWColumnTagInfo WWColumnTagInfoSingleCell";
          }
          else if ( StringUtil.StrCmp(A173LeaveRequestHalfDay, "Afternoon") == 0 )
          {
-            edtLeaveRequestHalfDay_Columnclass = "WWColumn WWColumnTag WWColumnTagWarning WWColumnTagWarningSingleCell";
+            edtLeaveRequestHalfDay_Columnclass = "WWColumn hidden-xs WWColumnTag WWColumnTagWarning WWColumnTagWarningSingleCell";
          }
          else
          {
-            edtLeaveRequestHalfDay_Columnclass = "WWColumn";
+            edtLeaveRequestHalfDay_Columnclass = "WWColumn hidden-xs";
          }
          if ( StringUtil.StrCmp(A132LeaveRequestStatus, "Pending") == 0 )
          {
@@ -2920,7 +2920,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20246131153319", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20246186173112", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2936,7 +2936,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("leaverequestww.js", "?20246131153320", false, true);
+         context.AddJavascriptSource("leaverequestww.js", "?20246186173114", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -3455,7 +3455,7 @@ namespace GeneXus.Programs {
          cmbLeaveRequestStatus_Columnclass = "WWColumn hidden-xs";
          edtLeaveRequestDuration_Jsonclick = "";
          edtLeaveRequestHalfDay_Jsonclick = "";
-         edtLeaveRequestHalfDay_Columnclass = "WWColumn";
+         edtLeaveRequestHalfDay_Columnclass = "WWColumn hidden-xs";
          edtLeaveRequestEndDate_Jsonclick = "";
          edtLeaveRequestStartDate_Jsonclick = "";
          edtLeaveRequestDate_Jsonclick = "";
