@@ -932,6 +932,10 @@ namespace GeneXus.Programs {
          AssignAttri("", false, "AV10DateRange", context.localUtil.Format(AV10DateRange, "99/99/99"));
          AV16DateRange_To = DateTimeUtil.DateEndOfMonth( AV10DateRange);
          AssignAttri("", false, "AV16DateRange_To", context.localUtil.Format(AV16DateRange_To, "99/99/99"));
+         AV10DateRange = context.localUtil.YMDToD( 2024, 6, 16);
+         AssignAttri("", false, "AV10DateRange", context.localUtil.Format(AV10DateRange, "99/99/99"));
+         AV16DateRange_To = DateTimeUtil.DAdd( AV10DateRange, (6));
+         AssignAttri("", false, "AV16DateRange_To", context.localUtil.Format(AV16DateRange_To, "99/99/99"));
          /* Execute user subroutine: 'GETDATA' */
          S112 ();
          if (returnInSub) return;
@@ -940,7 +944,7 @@ namespace GeneXus.Programs {
          Ucvistimeline1_Startdate = GXt_char3;
          ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "startDate", Ucvistimeline1_Startdate);
          GXt_char3 = "";
-         new formatdatetime(context ).execute(  AV16DateRange_To,  "YYYY-MM-DD", out  GXt_char3) ;
+         new formatdatetime(context ).execute(  DateTimeUtil.DAdd( AV16DateRange_To, (1)),  "YYYY-MM-DD", out  GXt_char3) ;
          Ucvistimeline1_Stopdate = GXt_char3;
          ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "stopDate", Ucvistimeline1_Stopdate);
          Ucvistimeline1_Events = AV6LeaveEvents.ToJSonString(false);
@@ -994,7 +998,7 @@ namespace GeneXus.Programs {
          Ucvistimeline1_Startdate = GXt_char3;
          ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "startDate", Ucvistimeline1_Startdate);
          GXt_char3 = "";
-         new formatdatetime(context ).execute(  AV16DateRange_To,  "YYYY-MM-DD", out  GXt_char3) ;
+         new formatdatetime(context ).execute(  DateTimeUtil.DAdd( AV16DateRange_To, (1)),  "YYYY-MM-DD", out  GXt_char3) ;
          Ucvistimeline1_Stopdate = GXt_char3;
          ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "stopDate", Ucvistimeline1_Stopdate);
          this.executeUsercontrolMethod("", false, "UCVISTIMELINE1Container", "Refresh", "", new Object[] {AV6LeaveEvents.ToJSonString(false),AV7LeaveEventGroups.ToJSonString(false)});
@@ -1020,7 +1024,7 @@ namespace GeneXus.Programs {
          Ucvistimeline1_Startdate = GXt_char3;
          ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "startDate", Ucvistimeline1_Startdate);
          GXt_char3 = "";
-         new formatdatetime(context ).execute(  AV16DateRange_To,  "YYYY-MM-DD", out  GXt_char3) ;
+         new formatdatetime(context ).execute(  DateTimeUtil.DAdd( AV16DateRange_To, (1)),  "YYYY-MM-DD", out  GXt_char3) ;
          Ucvistimeline1_Stopdate = GXt_char3;
          ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "stopDate", Ucvistimeline1_Stopdate);
          this.executeUsercontrolMethod("", false, "UCVISTIMELINE1Container", "Refresh", "", new Object[] {AV6LeaveEvents.ToJSonString(false),AV7LeaveEventGroups.ToJSonString(false)});
@@ -1094,7 +1098,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024619964325", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20246191010266", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1110,7 +1114,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("leavecalendar.js", "?2024619964325", false, true);
+         context.AddJavascriptSource("leavecalendar.js", "?20246191010266", false, true);
          context.AddJavascriptSource("UserControls/UCVISTimelineRender.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/daterangepicker/locales.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/daterangepicker/wwp-daterangepicker.js", "", false, true);
