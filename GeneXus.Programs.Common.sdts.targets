@@ -24,7 +24,6 @@
  	<Compile Include="$(WebDirectory)\type_SdtGxMap_Line.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtGxMap_Line_Point.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtGxMap_RoutePoint.cs" />
- 	<Compile Include="$(WebDirectory)\type_SdtjsGanttTask.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtLocationHolidaysSDT.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtLocationHolidaysSDT_itemsItem.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtLocationHolidaysSDT_itemsItem_creator.cs" />
