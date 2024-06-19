@@ -1,5 +1,214 @@
-function UCVISTimeline(n){var i='<div style="display:none">\t{{startDate}}\t{{endDate}}\t{{item}}<\/div><br /><div id="visualization" style="">\t<\/div><div id="key" style="display:flex; margin-top: 10px">\t<div style="display:flex;">\t\t<div style="background: #dddddd; height:10px; width:10px; margin: 4px"><\/div> <label>Pending<\/label>\t<\/div><\/div>',f={},r,u,t;Mustache.parse(i);r=0;this.show=function(){u=n(this.getContainerControl());r=0;this.setHtml(Mustache.render(i,this,f));this.renderChildContainers();n(this.getContainerControl()).find("[data-event='Click']").on("click",this.onClickHandler.closure(this)).each(function(n){this.setAttribute("data-items-index",n+1)});this.Init2()};this.Scripts=[];this.Init2=function(){function y(n,t){var i=document.getElementsByClassName(n),r;for(let n=0;n<i.length;n++)r=i[n],r.style.background=t}function p(){for(var n,t=0;t<i.length;t++)n=i[t],console.log(n.className+" : "+`${n.id}`+" : "+n.color),y(`${n.id}`,n.color),y(n.className,n.color)}var l,u,r,a,v,t,w,n,f,e;const o=this;var i=JSON.parse(this.events),s=JSON.parse(this.groups),h=JSON.parse(this.leavetypes),b=moment().minutes(0).seconds(0).milliseconds(0),c=new vis.DataSet;for(n=0;n<s.length;n++)l=s[n],c.add(l);for(u=new vis.DataSet,n=0;n<i.length;n++)r=i[n],console.log(r),u.add(r),console.log(r);a=document.getElementById("visualization");v={groupOrder:"content",orientation:{axis:"both"},timeAxis:{scale:"day",step:1},showWeekScale:!0,start:this.startDate,end:this.stopDate,zoomable:!1,verticalScroll:!0,format:{minorLabels:{day:"ddd DD"}}};console.log(this.startDate);console.log(this.stopDate);t=new vis.Timeline(a);t.setOptions(v);t.setGroups(c);t.setItems(u);t.on("rangechange",function(n){console.log("rangechange",n);p()});t.on("click",function(n){console.log("click",n.item);console.log(t.itemSet.items);o.item=n.item;o.Click()});for(w=document.getElementById("key"),n=0;n<h.length;n++)f=h[n],e=document.createElement("div"),e.innerHTML=`
+function UCVISTimeline($) {
+	  
+	  
+	  
+	  
+	  
+	  
+
+	var template = '<div style=\"display:none\">	{{startDate}}	{{endDate}}	{{item}}</div><br /><div id=\"visualization\" style=\"\">	</div><div id=\"key\" style=\"display:flex; margin-top: 10px\">	<div style=\"display:flex;\">		<div style=\"background: #dddddd; height:10px; width:10px; margin: 4px\"></div> <label>Pending</label>	</div></div>';
+	var partials = {  }; 
+	Mustache.parse(template);
+	var _iOnClick = 0; 
+	var $container;
+	this.show = function() {
+			$container = $(this.getContainerControl());
+
+			// Raise before show scripts
+
+			_iOnClick = 0; 
+
+			//if (this.IsPostBack)
+				this.setHtml(Mustache.render(template, this, partials));
+			this.renderChildContainers();
+
+			$(this.getContainerControl())
+				.find("[data-event='Click']")
+				.on('click', this.onClickHandler.closure(this))
+				.each(function (i) {
+					this.setAttribute("data-items-index", i + 1);
+				}); 
+
+			// Raise after show scripts
+			this.Init2(); 
+	}
+
+	this.Scripts = [];
+
+		this.Init2 = function() {
+
+					const UC = this;
+					
+					var events = JSON.parse(this.events)
+					
+					var eventGroups = JSON.parse(this.groups)
+					var leavetypes = JSON.parse(this.leavetypes)
+					var now = moment().minutes(0).seconds(0).milliseconds(0);
+					var groupCount = 3;
+					var itemCount = 20;
+					
+					
+					// create a data set with groups
+					var names = ['John', 'Alston', 'Lee', 'Grant'];
+					
+					var groups = new vis.DataSet();
+			//		for (var g = 0; g < groupCount; g++) {
+			//			groups.add({id: g, content: names[g]});
+			//		}
+
+					
+					for (var i = 0; i < eventGroups.length; i++) {
+						var eventGroup = eventGroups[i]
+						groups.add(eventGroup)
+					}
+					
+					// create a dataset with items
+					var items = new vis.DataSet();
+			//		for (var i = 0; i < itemCount; i++) {
+			//			var start = now.clone().add(Math.random() * 200, 'hours');
+			//			var group = Math.floor(Math.random() * groupCount);
+			//			items.add({
+			//			id: i,
+			//			group: group,
+			//			content: 'item ' + i +
+			//				' <span style="color:#97B0F8;">(' + names[group] + ')</span>',
+			//			start: start,
+			//			type: 'box'
+			//			});
+			//		}
+					
+					for (var i = 0; i < events.length; i++) {
+						var event = events[i]
+						console.log(event)
+						items.add(event)
+						console.log(event)
+					}
+				
+					
+					
+					// create visualization
+					var container = document.getElementById('visualization');
+					var options = {
+						groupOrder: 'content',  // groupOrder can be a property name or a sorting function
+						orientation: {
+							axis: 'both'
+						},
+						timeAxis: {
+							scale: 'day',
+							step: 1
+						},
+						showWeekScale: true,
+						start: this.startDate,
+						end: this.stopDate,
+						zoomable:true,
+						verticalScroll: true,
+						format: {
+							minorLabels: {day: 'ddd DD'},
+							//majorLabels: {day: 'w'}
+			    		}
+					};
+				
+				
+					
+					var timeline = new vis.Timeline(container);
+					timeline.setOptions(options);
+					timeline.setGroups(groups);
+					timeline.setItems(items);
+				
+					timeline.on('rangechange', function (properties) {
+						console.log('rangechange', properties);
+						styleEvents()
+					});
+				
+					timeline.on('click', function (properties) {
+						console.log('click', properties.item);
+						console.log(timeline.itemSet.items)
+						UC.item = properties.item
+						UC.Click()
+					});
+				
+					function styleEventBG(className, color){
+						var elements = document.getElementsByClassName(className)
+						for (let i=0; i < elements.length; i++) {
+							var element = elements[i]
+							element.style.background = color
+						}
+					}
+					function styleEvents(){
+						for (var i = 0; i < events.length; i++) {
+							var event = events[i]
+							styleEventBG(`${event.id}`, event.color)
+							styleEventBG(event.className, event.color)
+						}
+					}
+				
+					
+					var keyDiv = document.getElementById('key')
+					
+							
+					for (var i=0; i < leavetypes.length; i++) {
+						var type = leavetypes[i]
+						var element = document.createElement('div')
+						element.innerHTML = `
 						<div style="display:flex;">
-						<div style="background: ${f.LeaveTypeColorApproved}; height:10px; width:10px; margin: 4px; margin-left: 10px"></div> <label>${f.LeaveTypeName}</label>
+						<div style="background: ${type.LeaveTypeColorApproved}; height:10px; width:10px; margin: 4px; margin-left: 10px"></div> <label>${type.LeaveTypeName}</label>
 						</div>
-						`,w.appendChild(e);p()};this.Refresh=function(n,t){this.events=n;this.groups=t;this.show()};this.onClickHandler=function(n){if(n){var t=n.currentTarget;n.preventDefault()}this.Click&&this.Click()};this.autoToggleVisibility=!0;t={};this.renderChildContainers=function(){u.find("[data-slot][data-parent='"+this.ContainerName+"']").each(function(i,r){var e=n(r),f=e.attr("data-slot"),u;u=t[f];u||(u=this.getChildContainer(f),t[f]=u,u.parentNode.removeChild(u));e.append(u);n(u).show()}.closure(this))}}
+						`
+						keyDiv.appendChild(element);
+					}
+				
+					
+				
+					styleEvents();
+					
+				
+		}
+		this.Refresh = function(events ,groups ) {
+
+					this.events = events
+					this.groups = groups
+					this.show()
+				
+		}
+
+
+		this.onClickHandler = function (e) {
+			if (e) {
+				var target = e.currentTarget;
+				e.preventDefault();
+				 
+				 
+				 
+				 
+				 
+				 
+			}
+
+			if (this.Click) {
+				this.Click();
+			}
+		} 
+
+	this.autoToggleVisibility = true;
+
+	var childContainers = {};
+	this.renderChildContainers = function () {
+		$container
+			.find("[data-slot][data-parent='" + this.ContainerName + "']")
+			.each((function (i, slot) {
+				var $slot = $(slot),
+					slotName = $slot.attr('data-slot'),
+					slotContentEl;
+
+				slotContentEl = childContainers[slotName];
+				if (!slotContentEl) {				
+					slotContentEl = this.getChildContainer(slotName)
+					childContainers[slotName] = slotContentEl;
+					slotContentEl.parentNode.removeChild(slotContentEl);
+				}
+				$slot.append(slotContentEl);
+				$(slotContentEl).show();
+			}).closure(this));
+	};
+
+}

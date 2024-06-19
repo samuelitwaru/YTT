@@ -1212,6 +1212,7 @@ namespace GeneXus.Programs {
                   new sendemail(context).executeSubmit(  AV16Employee.gxTpr_Employeeemail, ref  GXt_char1, ref  GXt_char2) ;
                   context.CommitDataStores("details",pr_default);
                   GX_msglist.addItem("Leave Approved Successfully");
+                  this.executeExternalObjectMethod("", false, "GlobalEvents", "LeaveRequestStatusChanged", new Object[] {}, true);
                   context.setWebReturnParms(new Object[] {});
                   context.setWebReturnParmsMetadata(new Object[] {});
                   context.wjLocDisableFrm = 1;
@@ -1315,7 +1316,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20246189543098", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20246191414561", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1331,7 +1332,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("details.js", "?20246189543099", false, true);
+         context.AddJavascriptSource("details.js", "?20246191414561", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Panel/BootstrapPanelRender.js", "", false, true);
