@@ -76,6 +76,26 @@
               </Property>
             </Properties>
           </Field>
+          <Field name="ProjectManagerEmail" description="Project Manager Email">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>VarChar</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>100</Value>
+              </Property>
+            </Properties>
+          </Field>
+          <Field name="ProjectManagerIsActive" description="Project Manager Is Active">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>Boolean</Value>
+              </Property>
+            </Properties>
+          </Field>
         </Fields>
       </Field>
     </Parameter>

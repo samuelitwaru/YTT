@@ -17,7 +17,6 @@ using GeneXus.XML;
 using GeneXus.Search;
 using GeneXus.Encryption;
 using GeneXus.Http.Client;
-using GeneXus.Http.Server;
 using System.Xml.Serialization;
 using System.Runtime.Serialization;
 namespace GeneXus.Programs {
@@ -143,7 +142,7 @@ namespace GeneXus.Programs {
       protected override string ExecutePermissionPrefix
       {
          get {
-            return "leavecalendar_Execute" ;
+            return "fullcalendar_Execute" ;
          }
 
       }
@@ -190,11 +189,11 @@ namespace GeneXus.Programs {
 
       public override short ExecuteStartEvent( )
       {
-         PA3I2( ) ;
+         PA562( ) ;
          gxajaxcallmode = (short)((isAjaxCallMode( ) ? 1 : 0));
          if ( ( gxajaxcallmode == 0 ) && ( GxWebError == 0 ) )
          {
-            START3I2( ) ;
+            START562( ) ;
          }
          return gxajaxcallmode ;
       }
@@ -238,8 +237,13 @@ namespace GeneXus.Programs {
          {
             enableOutput();
          }
-         context.AddJavascriptSource("GXScheduler/dhtmlxscheduler.js", "", false, true);
-         context.AddJavascriptSource("GXScheduler/GXSchedulerRender.js", "", false, true);
+         context.AddJavascriptSource("UserControls/UCVISTimelineRender.js", "", false, true);
+         context.AddJavascriptSource("DVelop/Shared/daterangepicker/locales.js", "", false, true);
+         context.AddJavascriptSource("DVelop/Shared/daterangepicker/wwp-daterangepicker.js", "", false, true);
+         context.AddJavascriptSource("DVelop/Shared/daterangepicker/moment.min.js", "", false, true);
+         context.AddJavascriptSource("DVelop/Shared/daterangepicker/daterangepicker.min.js", "", false, true);
+         context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
+         context.AddJavascriptSource("DVelop/DateRangePicker/DateRangePickerRender.js", "", false, true);
          context.WriteHtmlText( Form.Headerrawhtml) ;
          context.CloseHtmlHeader();
          if ( context.isSpaRequest( ) )
@@ -279,6 +283,8 @@ namespace GeneXus.Programs {
 
       protected void send_integrity_footer_hashes( )
       {
+         GxWebStd.gx_hidden_field( context, "vTODAY", context.localUtil.DToC( Gx_date, 0, "/"));
+         GxWebStd.gx_hidden_field( context, "gxhash_vTODAY", GetSecureSignedToken( "", Gx_date, context));
          GXKey = Decrypt64( context.GetCookie( "GX_SESSION_ID"), Crypto.GetServerKey( ));
       }
 
@@ -287,29 +293,40 @@ namespace GeneXus.Programs {
          /* Send hidden variables. */
          /* Send saved values. */
          send_integrity_footer_hashes( ) ;
+         GxWebStd.gx_hidden_field( context, "vDATERANGE", context.localUtil.DToC( AV10DateRange, 0, "/"));
+         GxWebStd.gx_hidden_field( context, "vDATERANGE_TO", context.localUtil.DToC( AV16DateRange_To, 0, "/"));
          if ( context.isAjaxRequest( ) )
          {
-            context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "vCURRENTEVENT", AV7currentEvent);
+            context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "vDATERANGE_RANGEPICKEROPTIONS", AV17DateRange_RangePickerOptions);
          }
          else
          {
-            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("vCURRENTEVENT", AV7currentEvent);
+            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("vDATERANGE_RANGEPICKEROPTIONS", AV17DateRange_RangePickerOptions);
          }
-         GxWebStd.gx_hidden_field( context, "vINITIALDATE", context.localUtil.DToC( AV8initialDate, 0, "/"));
-         GxWebStd.gx_hidden_field( context, "GXSCHEDULER_Autoload", StringUtil.RTrim( Gxscheduler_Autoload));
-         GxWebStd.gx_hidden_field( context, "GXSCHEDULER_Loadeventsobject", StringUtil.RTrim( Gxscheduler_Loadeventsobject));
-         GxWebStd.gx_hidden_field( context, "GXSCHEDULER_Detailsformobject", StringUtil.RTrim( Gxscheduler_Detailsformobject));
-         GxWebStd.gx_hidden_field( context, "GXSCHEDULER_View", StringUtil.RTrim( Gxscheduler_View));
-         GxWebStd.gx_hidden_field( context, "GXSCHEDULER_Theme", StringUtil.RTrim( Gxscheduler_Theme));
-         GxWebStd.gx_hidden_field( context, "GXSCHEDULER_Displayweektab", StringUtil.RTrim( Gxscheduler_Displayweektab));
-         GxWebStd.gx_hidden_field( context, "GXSCHEDULER_Displaydaytab", StringUtil.RTrim( Gxscheduler_Displaydaytab));
-         GxWebStd.gx_hidden_field( context, "GXSCHEDULER_Displaynavigationbuttons", StringUtil.RTrim( Gxscheduler_Displaynavigationbuttons));
-         GxWebStd.gx_hidden_field( context, "GXSCHEDULER_Montheventsview", StringUtil.RTrim( Gxscheduler_Montheventsview));
-         GxWebStd.gx_hidden_field( context, "GXSCHEDULER_Readonly", StringUtil.RTrim( Gxscheduler_Readonly));
-         GxWebStd.gx_hidden_field( context, "GXSCHEDULER_Detailsoncreate", StringUtil.RTrim( Gxscheduler_Detailsoncreate));
-         GxWebStd.gx_hidden_field( context, "GXSCHEDULER_Detailsondblclick", StringUtil.RTrim( Gxscheduler_Detailsondblclick));
-         GxWebStd.gx_hidden_field( context, "GXSCHEDULER_Openlinknewwindow", StringUtil.RTrim( Gxscheduler_Openlinknewwindow));
-         GxWebStd.gx_hidden_field( context, "vCURRENTEVENT_Id", StringUtil.RTrim( AV7currentEvent.gxTpr_Id));
+         GxWebStd.gx_hidden_field( context, "vTODAY", context.localUtil.DToC( Gx_date, 0, "/"));
+         GxWebStd.gx_hidden_field( context, "gxhash_vTODAY", GetSecureSignedToken( "", Gx_date, context));
+         if ( context.isAjaxRequest( ) )
+         {
+            context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "vLEAVEEVENTS", AV6LeaveEvents);
+         }
+         else
+         {
+            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("vLEAVEEVENTS", AV6LeaveEvents);
+         }
+         if ( context.isAjaxRequest( ) )
+         {
+            context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "vLEAVEEVENTGROUPS", AV7LeaveEventGroups);
+         }
+         else
+         {
+            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("vLEAVEEVENTGROUPS", AV7LeaveEventGroups);
+         }
+         GxWebStd.gx_hidden_field( context, "UCVISTIMELINE1_Events", StringUtil.RTrim( Ucvistimeline1_Events));
+         GxWebStd.gx_hidden_field( context, "UCVISTIMELINE1_Groups", StringUtil.RTrim( Ucvistimeline1_Groups));
+         GxWebStd.gx_hidden_field( context, "UCVISTIMELINE1_Leavetypes", StringUtil.RTrim( Ucvistimeline1_Leavetypes));
+         GxWebStd.gx_hidden_field( context, "UCVISTIMELINE1_Startdate", StringUtil.RTrim( Ucvistimeline1_Startdate));
+         GxWebStd.gx_hidden_field( context, "UCVISTIMELINE1_Stopdate", StringUtil.RTrim( Ucvistimeline1_Stopdate));
+         GxWebStd.gx_hidden_field( context, "UCVISTIMELINE1_Item", StringUtil.LTrim( StringUtil.NToC( (decimal)(Ucvistimeline1_Item), 9, 0, ".", "")));
       }
 
       public override void RenderHtmlCloseForm( )
@@ -341,14 +358,14 @@ namespace GeneXus.Programs {
             context.WriteHtmlText( "<div") ;
             GxWebStd.ClassAttribute( context, "gx-ct-body"+" "+(String.IsNullOrEmpty(StringUtil.RTrim( Form.Class)) ? "form-horizontal Form" : Form.Class)+"-fx");
             context.WriteHtmlText( ">") ;
-            WE3I2( ) ;
+            WE562( ) ;
             context.WriteHtmlText( "</div>") ;
          }
       }
 
       public override void DispatchEvents( )
       {
-         EVT3I2( ) ;
+         EVT562( ) ;
       }
 
       public override bool HasEnterEvent( )
@@ -376,7 +393,7 @@ namespace GeneXus.Programs {
          return "Leave Calendar" ;
       }
 
-      protected void WB3I0( )
+      protected void WB560( )
       {
          if ( context.isAjaxRequest( ) )
          {
@@ -398,7 +415,7 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, divTablemain_Internalname, 1, 0, "px", 0, "px", "TableMain", "start", "top", "", "", "div");
+            GxWebStd.gx_div_start( context, divMaintable_Internalname, 1, 0, "px", 0, "px", "TableMain", "start", "top", "", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
             /* Div Control */
@@ -413,9 +430,43 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, divUnnamedtable1_Internalname, divUnnamedtable1_Visible, 0, "px", 0, "px", "Flex", "start", "top", " "+"data-gx-flex"+" ", "", "div");
+            GxWebStd.gx_div_start( context, divTablecontent_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, divCompanylocationid_cell_Internalname, 1, 0, "px", 0, "px", divCompanylocationid_cell_Class, "start", "top", "", "flex-grow:1;", "div");
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, divTable1_Internalname, 1, 100, "%", 0, "px", "Table", "start", "top", " "+"data-gx-smarttable"+" ", "grid-template-columns:20fr 20fr 60fr;grid-template-rows:auto;", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "DscTop", "start", "top", " "+"data-gx-smarttable-cell"+" ", "display:flex;align-items:center;", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, divUnnamedtableaterange_rangetext_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 MergeLabelCell", "start", "top", "", "", "div");
+            /* Text block */
+            GxWebStd.gx_label_ctrl( context, lblTextblockdaterange_rangetext_Internalname, "Date Range", "", "", lblTextblockdaterange_rangetext_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "Label", 0, "", 1, 1, 0, 0, "HLP_LeaveCalendar.htm");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
+            /* Attribute/Variable Label */
+            GxWebStd.gx_label_element( context, edtavDaterange_rangetext_Internalname, "Date Range_Range Text", "col-sm-3 AttributeDateLabel", 0, true, "");
+            /* Single line edit */
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 23,'',false,'',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtavDaterange_rangetext_Internalname, AV15DateRange_RangeText, StringUtil.RTrim( context.localUtil.Format( AV15DateRange_RangeText, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,23);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavDaterange_rangetext_Jsonclick, 0, "AttributeDate", "", "", "", "", 1, edtavDaterange_rangetext_Enabled, 0, "text", "", 40, "chr", 1, "row", 40, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_LeaveCalendar.htm");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "DscTop", "start", "top", " "+"data-gx-smarttable-cell"+" ", "display:flex;align-items:center;", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, divUnnamedtablecompanylocationid_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
             /* Div Control */
@@ -431,14 +482,32 @@ namespace GeneXus.Programs {
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
             /* Attribute/Variable Label */
             GxWebStd.gx_label_element( context, dynavCompanylocationid_Internalname, "Company Location Id", "col-sm-3 AttributeLabel", 0, true, "");
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 20,'',false,'',0)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 31,'',false,'',0)\"";
             /* ComboBox */
-            GxWebStd.gx_combobox_ctrl1( context, dynavCompanylocationid, dynavCompanylocationid_Internalname, StringUtil.Trim( StringUtil.Str( (decimal)(AV10CompanyLocationId), 10, 0)), 1, dynavCompanylocationid_Jsonclick, 0, "'"+""+"'"+",false,"+"'"+""+"'", "int", "", dynavCompanylocationid.Visible, dynavCompanylocationid.Enabled, 1, 0, 0, "em", 0, "", "", "Attribute", "", "", TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,20);\"", "", true, 0, "HLP_LeaveCalendar.htm");
-            dynavCompanylocationid.CurrentValue = StringUtil.Trim( StringUtil.Str( (decimal)(AV10CompanyLocationId), 10, 0));
+            GxWebStd.gx_combobox_ctrl1( context, dynavCompanylocationid, dynavCompanylocationid_Internalname, StringUtil.Trim( StringUtil.Str( (decimal)(AV11CompanyLocationId), 10, 0)), 1, dynavCompanylocationid_Jsonclick, 0, "'"+""+"'"+",false,"+"'"+""+"'", "int", "", 1, dynavCompanylocationid.Enabled, 1, 0, 0, "em", 0, "", "", "Attribute", "", "", TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,31);\"", "", true, 0, "HLP_LeaveCalendar.htm");
+            dynavCompanylocationid.CurrentValue = StringUtil.Trim( StringUtil.Str( (decimal)(AV11CompanyLocationId), 10, 0));
             AssignProp("", false, dynavCompanylocationid_Internalname, "Values", (string)(dynavCompanylocationid.ToJavascriptSource()), true);
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "", "start", "top", " "+"data-gx-smarttable-cell"+" ", "display:flex;justify-content:flex-end;align-items:center;", "div");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 33,'',false,'',0)\"";
+            ClassString = "ButtonMaterial";
+            StyleString = "";
+            GxWebStd.gx_button_ctrl( context, bttBtnreport_Internalname, "", "Report", bttBtnreport_Jsonclick, 5, "Report", "", StyleString, ClassString, 1, 1, "standard", "'"+""+"'"+",false,"+"'"+"E\\'DOREPORT\\'."+"'", TempTags, "", context.GetButtonType( ), "HLP_LeaveCalendar.htm");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 CellMarginBottom20", "start", "top", "", "", "div");
+            /* User Defined Control */
+            ucUcvistimeline1.Render(context, "ucvistimeline", Ucvistimeline1_Internalname, "UCVISTIMELINE1Container");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -448,25 +517,13 @@ namespace GeneXus.Programs {
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, divHtml_bottomauxiliarcontrols_Internalname, 1, 0, "px", 0, "px", "Section", "start", "top", "", "", "div");
             /* User Defined Control */
-            ucGxscheduler.SetProperty("AutoLoad", Gxscheduler_Autoload);
-            ucGxscheduler.SetProperty("LoadEventsObject", Gxscheduler_Loadeventsobject);
-            ucGxscheduler.SetProperty("DetailsFormObject", Gxscheduler_Detailsformobject);
-            ucGxscheduler.SetProperty("View", Gxscheduler_View);
-            ucGxscheduler.SetProperty("Theme", Gxscheduler_Theme);
-            ucGxscheduler.SetProperty("DisplayWeekTab", Gxscheduler_Displayweektab);
-            ucGxscheduler.SetProperty("DisplayDayTab", Gxscheduler_Displaydaytab);
-            ucGxscheduler.SetProperty("DisplayNavigationButtons", Gxscheduler_Displaynavigationbuttons);
-            ucGxscheduler.SetProperty("MonthEventsView", Gxscheduler_Montheventsview);
-            ucGxscheduler.SetProperty("ReadOnly", Gxscheduler_Readonly);
-            ucGxscheduler.SetProperty("DetailsOnCreate", Gxscheduler_Detailsoncreate);
-            ucGxscheduler.SetProperty("DetailsOnDblClick", Gxscheduler_Detailsondblclick);
-            ucGxscheduler.SetProperty("OpenLinkNewWindow", Gxscheduler_Openlinknewwindow);
-            ucGxscheduler.SetProperty("CurrentEvent", AV7currentEvent);
-            ucGxscheduler.SetProperty("InitialDate", AV8initialDate);
-            ucGxscheduler.Render(context, "gxscheduler", Gxscheduler_Internalname, "GXSCHEDULERContainer");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
+            ucDaterange_rangepicker.SetProperty("Start Date", AV10DateRange);
+            ucDaterange_rangepicker.SetProperty("End Date", AV16DateRange_To);
+            ucDaterange_rangepicker.SetProperty("PickerOptions", AV17DateRange_RangePickerOptions);
+            ucDaterange_rangepicker.Render(context, "wwp.daterangepicker", Daterange_rangepicker_Internalname, "DATERANGE_RANGEPICKERContainer");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -476,7 +533,7 @@ namespace GeneXus.Programs {
          wbLoad = true;
       }
 
-      protected void START3I2( )
+      protected void START562( )
       {
          wbLoad = false;
          wbEnd = 0;
@@ -496,16 +553,16 @@ namespace GeneXus.Programs {
          {
          }
          wbErr = false;
-         STRUP3I0( ) ;
+         STRUP560( ) ;
       }
 
-      protected void WS3I2( )
+      protected void WS562( )
       {
-         START3I2( ) ;
-         EVT3I2( ) ;
+         START562( ) ;
+         EVT562( ) ;
       }
 
-      protected void EVT3I2( )
+      protected void EVT562( )
       {
          if ( StringUtil.StrCmp(context.GetRequestMethod( ), "POST") == 0 )
          {
@@ -532,31 +589,38 @@ namespace GeneXus.Programs {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
                            }
-                           else if ( StringUtil.StrCmp(sEvt, "GXSCHEDULER.EVENTSELECTED") == 0 )
+                           else if ( StringUtil.StrCmp(sEvt, "DATERANGE_RANGEPICKER.DATERANGECHANGED") == 0 )
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
-                              E113I2 ();
+                              E11562 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "START") == 0 )
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
                               /* Execute user event: Start */
-                              E123I2 ();
+                              E12562 ();
+                           }
+                           else if ( StringUtil.StrCmp(sEvt, "'DOREPORT'") == 0 )
+                           {
+                              context.wbHandled = 1;
+                              dynload_actions( ) ;
+                              /* Execute user event: 'DoReport' */
+                              E13562 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "VCOMPANYLOCATIONID.CONTROLVALUECHANGED") == 0 )
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
-                              E133I2 ();
+                              E14562 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "LOAD") == 0 )
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
                               /* Execute user event: Load */
-                              E143I2 ();
+                              E15562 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "ENTER") == 0 )
                            {
@@ -589,7 +653,7 @@ namespace GeneXus.Programs {
          }
       }
 
-      protected void WE3I2( )
+      protected void WE562( )
       {
          if ( ! GxWebStd.gx_redirect( context) )
          {
@@ -605,7 +669,7 @@ namespace GeneXus.Programs {
          }
       }
 
-      protected void PA3I2( )
+      protected void PA562( )
       {
          if ( nDonePA == 0 )
          {
@@ -629,7 +693,7 @@ namespace GeneXus.Programs {
             }
             if ( ! context.isAjaxRequest( ) )
             {
-               GX_FocusControl = dynavCompanylocationid_Internalname;
+               GX_FocusControl = edtavDaterange_rangetext_Internalname;
                AssignAttri("", false, "GX_FocusControl", GX_FocusControl);
             }
             nDonePA = 1;
@@ -641,14 +705,14 @@ namespace GeneXus.Programs {
          /* End function dynload_actions */
       }
 
-      protected void GXDLVvCOMPANYLOCATIONID3I1( )
+      protected void GXDLVvCOMPANYLOCATIONID561( )
       {
          if ( ! context.isAjaxRequest( ) )
          {
             context.GX_webresponse.AppendHeader("Cache-Control", "no-store");
          }
          AddString( "[[") ;
-         GXDLVvCOMPANYLOCATIONID_data3I1( ) ;
+         GXDLVvCOMPANYLOCATIONID_data561( ) ;
          gxdynajaxindex = 1;
          while ( gxdynajaxindex <= gxdynajaxctrlcodr.Count )
          {
@@ -664,10 +728,10 @@ namespace GeneXus.Programs {
          AddString( "]") ;
       }
 
-      protected void GXVvCOMPANYLOCATIONID_html3I1( )
+      protected void GXVvCOMPANYLOCATIONID_html561( )
       {
          long gxdynajaxvalue;
-         GXDLVvCOMPANYLOCATIONID_data3I1( ) ;
+         GXDLVvCOMPANYLOCATIONID_data561( ) ;
          gxdynajaxindex = 1;
          if ( ! ( gxdyncontrolsrefreshing && context.isAjaxRequest( ) ) )
          {
@@ -681,21 +745,21 @@ namespace GeneXus.Programs {
          }
          if ( dynavCompanylocationid.ItemCount > 0 )
          {
-            AV10CompanyLocationId = (long)(Math.Round(NumberUtil.Val( dynavCompanylocationid.getValidValue(StringUtil.Trim( StringUtil.Str( (decimal)(AV10CompanyLocationId), 10, 0))), "."), 18, MidpointRounding.ToEven));
-            AssignAttri("", false, "AV10CompanyLocationId", StringUtil.LTrimStr( (decimal)(AV10CompanyLocationId), 10, 0));
+            AV11CompanyLocationId = (long)(Math.Round(NumberUtil.Val( dynavCompanylocationid.getValidValue(StringUtil.Trim( StringUtil.Str( (decimal)(AV11CompanyLocationId), 10, 0))), "."), 18, MidpointRounding.ToEven));
+            AssignAttri("", false, "AV11CompanyLocationId", StringUtil.LTrimStr( (decimal)(AV11CompanyLocationId), 10, 0));
          }
       }
 
-      protected void GXDLVvCOMPANYLOCATIONID_data3I1( )
+      protected void GXDLVvCOMPANYLOCATIONID_data561( )
       {
          gxdynajaxctrlcodr.Clear();
          gxdynajaxctrldescr.Clear();
-         /* Using cursor H003I2 */
+         /* Using cursor H00562 */
          pr_default.execute(0);
          while ( (pr_default.getStatus(0) != 101) )
          {
-            gxdynajaxctrlcodr.Add(StringUtil.LTrim( StringUtil.NToC( (decimal)(H003I2_A157CompanyLocationId[0]), 10, 0, ".", "")));
-            gxdynajaxctrldescr.Add(StringUtil.RTrim( H003I2_A158CompanyLocationName[0]));
+            gxdynajaxctrlcodr.Add(StringUtil.LTrim( StringUtil.NToC( (decimal)(H00562_A157CompanyLocationId[0]), 10, 0, ".", "")));
+            gxdynajaxctrldescr.Add(StringUtil.RTrim( H00562_A158CompanyLocationName[0]));
             pr_default.readNext(0);
          }
          pr_default.close(0);
@@ -712,18 +776,18 @@ namespace GeneXus.Programs {
             dynavCompanylocationid.Name = "vCOMPANYLOCATIONID";
             dynavCompanylocationid.WebTags = "";
             dynavCompanylocationid.removeAllItems();
-            /* Using cursor H003I3 */
+            /* Using cursor H00563 */
             pr_default.execute(1);
             while ( (pr_default.getStatus(1) != 101) )
             {
-               dynavCompanylocationid.addItem(StringUtil.Trim( StringUtil.Str( (decimal)(H003I3_A157CompanyLocationId[0]), 10, 0)), H003I3_A158CompanyLocationName[0], 0);
+               dynavCompanylocationid.addItem(StringUtil.Trim( StringUtil.Str( (decimal)(H00563_A157CompanyLocationId[0]), 10, 0)), H00563_A158CompanyLocationName[0], 0);
                pr_default.readNext(1);
             }
             pr_default.close(1);
             if ( dynavCompanylocationid.ItemCount > 0 )
             {
-               AV10CompanyLocationId = (long)(Math.Round(NumberUtil.Val( dynavCompanylocationid.getValidValue(StringUtil.Trim( StringUtil.Str( (decimal)(AV10CompanyLocationId), 10, 0))), "."), 18, MidpointRounding.ToEven));
-               AssignAttri("", false, "AV10CompanyLocationId", StringUtil.LTrimStr( (decimal)(AV10CompanyLocationId), 10, 0));
+               AV11CompanyLocationId = (long)(Math.Round(NumberUtil.Val( dynavCompanylocationid.getValidValue(StringUtil.Trim( StringUtil.Str( (decimal)(AV11CompanyLocationId), 10, 0))), "."), 18, MidpointRounding.ToEven));
+               AssignAttri("", false, "AV11CompanyLocationId", StringUtil.LTrimStr( (decimal)(AV11CompanyLocationId), 10, 0));
             }
             dynload_actions( ) ;
             before_start_formulas( ) ;
@@ -734,12 +798,12 @@ namespace GeneXus.Programs {
       {
          if ( dynavCompanylocationid.ItemCount > 0 )
          {
-            AV10CompanyLocationId = (long)(Math.Round(NumberUtil.Val( dynavCompanylocationid.getValidValue(StringUtil.Trim( StringUtil.Str( (decimal)(AV10CompanyLocationId), 10, 0))), "."), 18, MidpointRounding.ToEven));
-            AssignAttri("", false, "AV10CompanyLocationId", StringUtil.LTrimStr( (decimal)(AV10CompanyLocationId), 10, 0));
+            AV11CompanyLocationId = (long)(Math.Round(NumberUtil.Val( dynavCompanylocationid.getValidValue(StringUtil.Trim( StringUtil.Str( (decimal)(AV11CompanyLocationId), 10, 0))), "."), 18, MidpointRounding.ToEven));
+            AssignAttri("", false, "AV11CompanyLocationId", StringUtil.LTrimStr( (decimal)(AV11CompanyLocationId), 10, 0));
          }
          if ( context.isAjaxRequest( ) )
          {
-            dynavCompanylocationid.CurrentValue = StringUtil.Trim( StringUtil.Str( (decimal)(AV10CompanyLocationId), 10, 0));
+            dynavCompanylocationid.CurrentValue = StringUtil.Trim( StringUtil.Str( (decimal)(AV11CompanyLocationId), 10, 0));
             AssignProp("", false, dynavCompanylocationid_Internalname, "Values", dynavCompanylocationid.ToJavascriptSource(), true);
          }
       }
@@ -747,7 +811,7 @@ namespace GeneXus.Programs {
       public void Refresh( )
       {
          send_integrity_hashes( ) ;
-         RF3I2( ) ;
+         RF562( ) ;
          if ( isFullAjaxMode( ) )
          {
             send_integrity_footer_hashes( ) ;
@@ -757,9 +821,10 @@ namespace GeneXus.Programs {
       protected void initialize_formulas( )
       {
          /* GeneXus formulas. */
+         Gx_date = DateTimeUtil.Today( context);
       }
 
-      protected void RF3I2( )
+      protected void RF562( )
       {
          initialize_formulas( ) ;
          clear_multi_value_controls( ) ;
@@ -769,53 +834,51 @@ namespace GeneXus.Programs {
          if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
          {
             /* Execute user event: Load */
-            E143I2 ();
-            WB3I0( ) ;
+            E15562 ();
+            WB560( ) ;
          }
       }
 
-      protected void send_integrity_lvl_hashes3I2( )
+      protected void send_integrity_lvl_hashes562( )
       {
+         GxWebStd.gx_hidden_field( context, "vTODAY", context.localUtil.DToC( Gx_date, 0, "/"));
+         GxWebStd.gx_hidden_field( context, "gxhash_vTODAY", GetSecureSignedToken( "", Gx_date, context));
       }
 
       protected void before_start_formulas( )
       {
+         Gx_date = DateTimeUtil.Today( context);
          fix_multi_value_controls( ) ;
       }
 
-      protected void STRUP3I0( )
+      protected void STRUP560( )
       {
          /* Before Start, stand alone formulas. */
          before_start_formulas( ) ;
          /* Execute Start event if defined. */
          context.wbGlbDoneStart = 0;
          /* Execute user event: Start */
-         E123I2 ();
+         E12562 ();
          context.wbGlbDoneStart = 1;
          /* After Start, stand alone formulas. */
          if ( StringUtil.StrCmp(context.GetRequestMethod( ), "POST") == 0 )
          {
             /* Read saved SDTs. */
-            ajax_req_read_hidden_sdt(cgiGet( "vCURRENTEVENT"), AV7currentEvent);
+            ajax_req_read_hidden_sdt(cgiGet( "vDATERANGE_RANGEPICKEROPTIONS"), AV17DateRange_RangePickerOptions);
             /* Read saved values. */
-            AV8initialDate = context.localUtil.CToD( cgiGet( "vINITIALDATE"), 0);
-            Gxscheduler_Autoload = cgiGet( "GXSCHEDULER_Autoload");
-            Gxscheduler_Loadeventsobject = cgiGet( "GXSCHEDULER_Loadeventsobject");
-            Gxscheduler_Detailsformobject = cgiGet( "GXSCHEDULER_Detailsformobject");
-            Gxscheduler_View = cgiGet( "GXSCHEDULER_View");
-            Gxscheduler_Theme = cgiGet( "GXSCHEDULER_Theme");
-            Gxscheduler_Displayweektab = cgiGet( "GXSCHEDULER_Displayweektab");
-            Gxscheduler_Displaydaytab = cgiGet( "GXSCHEDULER_Displaydaytab");
-            Gxscheduler_Displaynavigationbuttons = cgiGet( "GXSCHEDULER_Displaynavigationbuttons");
-            Gxscheduler_Montheventsview = cgiGet( "GXSCHEDULER_Montheventsview");
-            Gxscheduler_Readonly = cgiGet( "GXSCHEDULER_Readonly");
-            Gxscheduler_Detailsoncreate = cgiGet( "GXSCHEDULER_Detailsoncreate");
-            Gxscheduler_Detailsondblclick = cgiGet( "GXSCHEDULER_Detailsondblclick");
-            Gxscheduler_Openlinknewwindow = cgiGet( "GXSCHEDULER_Openlinknewwindow");
+            AV10DateRange = context.localUtil.CToD( cgiGet( "vDATERANGE"), 0);
+            AV16DateRange_To = context.localUtil.CToD( cgiGet( "vDATERANGE_TO"), 0);
+            Ucvistimeline1_Events = cgiGet( "UCVISTIMELINE1_Events");
+            Ucvistimeline1_Groups = cgiGet( "UCVISTIMELINE1_Groups");
+            Ucvistimeline1_Leavetypes = cgiGet( "UCVISTIMELINE1_Leavetypes");
+            Ucvistimeline1_Startdate = cgiGet( "UCVISTIMELINE1_Startdate");
+            Ucvistimeline1_Stopdate = cgiGet( "UCVISTIMELINE1_Stopdate");
             /* Read variables values. */
+            AV15DateRange_RangeText = cgiGet( edtavDaterange_rangetext_Internalname);
+            AssignAttri("", false, "AV15DateRange_RangeText", AV15DateRange_RangeText);
             dynavCompanylocationid.CurrentValue = cgiGet( dynavCompanylocationid_Internalname);
-            AV10CompanyLocationId = (long)(Math.Round(NumberUtil.Val( cgiGet( dynavCompanylocationid_Internalname), "."), 18, MidpointRounding.ToEven));
-            AssignAttri("", false, "AV10CompanyLocationId", StringUtil.LTrimStr( (decimal)(AV10CompanyLocationId), 10, 0));
+            AV11CompanyLocationId = (long)(Math.Round(NumberUtil.Val( cgiGet( dynavCompanylocationid_Internalname), "."), 18, MidpointRounding.ToEven));
+            AssignAttri("", false, "AV11CompanyLocationId", StringUtil.LTrimStr( (decimal)(AV11CompanyLocationId), 10, 0));
             /* Read subfile selected row values. */
             /* Read hidden variables. */
             GXKey = Decrypt64( context.GetCookie( "GX_SESSION_ID"), Crypto.GetServerKey( ));
@@ -829,28 +892,28 @@ namespace GeneXus.Programs {
       protected void GXStart( )
       {
          /* Execute user event: Start */
-         E123I2 ();
+         E12562 ();
          if (returnInSub) return;
       }
 
-      protected void E123I2( )
+      protected void E12562( )
       {
          /* Start Routine */
          returnInSub = false;
-         GXt_int1 = AV15CompanyId;
+         GXt_int1 = AV18CompanyId;
          new getloggedinusercompanyid(context ).execute( out  GXt_int1) ;
-         AV15CompanyId = GXt_int1;
-         AssignAttri("", false, "AV15CompanyId", StringUtil.LTrimStr( (decimal)(AV15CompanyId), 10, 0));
-         if ( ! (0==AV15CompanyId) )
+         AV18CompanyId = GXt_int1;
+         AssignAttri("", false, "AV18CompanyId", StringUtil.LTrimStr( (decimal)(AV18CompanyId), 10, 0));
+         if ( ! (0==AV18CompanyId) )
          {
-            /* Using cursor H003I4 */
-            pr_default.execute(2, new Object[] {AV15CompanyId});
+            /* Using cursor H00564 */
+            pr_default.execute(2, new Object[] {AV18CompanyId});
             while ( (pr_default.getStatus(2) != 101) )
             {
-               A100CompanyId = H003I4_A100CompanyId[0];
-               A157CompanyLocationId = H003I4_A157CompanyLocationId[0];
-               AV10CompanyLocationId = A157CompanyLocationId;
-               AssignAttri("", false, "AV10CompanyLocationId", StringUtil.LTrimStr( (decimal)(AV10CompanyLocationId), 10, 0));
+               A100CompanyId = H00564_A100CompanyId[0];
+               A157CompanyLocationId = H00564_A157CompanyLocationId[0];
+               AV11CompanyLocationId = A157CompanyLocationId;
+               AssignAttri("", false, "AV11CompanyLocationId", StringUtil.LTrimStr( (decimal)(AV11CompanyLocationId), 10, 0));
                /* Exit For each command. Update data (if necessary), close cursors & exit. */
                if (true) break;
                /* Exiting from a For First loop. */
@@ -860,58 +923,132 @@ namespace GeneXus.Programs {
             dynavCompanylocationid.Enabled = 0;
             AssignProp("", false, dynavCompanylocationid_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(dynavCompanylocationid.Enabled), 5, 0), true);
          }
-         /* Execute user subroutine: 'ATTRIBUTESSECURITYCODE' */
+         GXt_objcol_SdtSDTLeaveType2 = AV23SDTLeaveTypes;
+         new dpleavetype(context ).execute(  AV11CompanyLocationId, out  GXt_objcol_SdtSDTLeaveType2) ;
+         AV23SDTLeaveTypes = GXt_objcol_SdtSDTLeaveType2;
+         Ucvistimeline1_Leavetypes = AV23SDTLeaveTypes.ToJSonString(false);
+         ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "leavetypes", Ucvistimeline1_Leavetypes);
+         AV10DateRange = context.localUtil.YMDToD( DateTimeUtil.Year( Gx_date), DateTimeUtil.Month( Gx_date), 1);
+         AssignAttri("", false, "AV10DateRange", context.localUtil.Format(AV10DateRange, "99/99/99"));
+         AV16DateRange_To = DateTimeUtil.DateEndOfMonth( AV10DateRange);
+         AssignAttri("", false, "AV16DateRange_To", context.localUtil.Format(AV16DateRange_To, "99/99/99"));
+         /* Execute user subroutine: 'GETDATA' */
          S112 ();
          if (returnInSub) return;
-         AV12Session.Set("LeaveCalendarCompanyLocationId", StringUtil.Str( (decimal)(AV10CompanyLocationId), 10, 0));
-         this.executeUsercontrolMethod("", false, "GXSCHEDULERContainer", "Refresh", "", new Object[] {});
+         GXt_char3 = "";
+         new formatdatetime(context ).execute(  AV10DateRange,  "YYYY-MM-DD", out  GXt_char3) ;
+         Ucvistimeline1_Startdate = GXt_char3;
+         ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "startDate", Ucvistimeline1_Startdate);
+         GXt_char3 = "";
+         new formatdatetime(context ).execute(  AV16DateRange_To,  "YYYY-MM-DD", out  GXt_char3) ;
+         Ucvistimeline1_Stopdate = GXt_char3;
+         ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "stopDate", Ucvistimeline1_Stopdate);
+         Ucvistimeline1_Events = AV6LeaveEvents.ToJSonString(false);
+         ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "events", Ucvistimeline1_Events);
+         Ucvistimeline1_Groups = AV7LeaveEventGroups.ToJSonString(false);
+         ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "groups", Ucvistimeline1_Groups);
+         Ucvistimeline1_Leavetypes = AV23SDTLeaveTypes.ToJSonString(false);
+         ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "leavetypes", Ucvistimeline1_Leavetypes);
+         this.executeUsercontrolMethod("", false, "DATERANGE_RANGEPICKERContainer", "Attach", "", new Object[] {(string)edtavDaterange_rangetext_Internalname});
+         GXt_SdtWWPDateRangePickerOptions4 = AV17DateRange_RangePickerOptions;
+         new GeneXus.Programs.wwpbaseobjects.wwp_rangepicker_getoptionsreports(context ).execute( out  GXt_SdtWWPDateRangePickerOptions4) ;
+         AV17DateRange_RangePickerOptions = GXt_SdtWWPDateRangePickerOptions4;
+      }
+
+      protected void E13562( )
+      {
+         /* 'DoReport' Routine */
+         returnInSub = false;
+         new employeeleavereport(context ).execute(  AV11CompanyLocationId, ref  AV10DateRange, out  AV21ExcelFilename, out  AV20ErrorMessage) ;
+         AssignAttri("", false, "AV10DateRange", context.localUtil.Format(AV10DateRange, "99/99/99"));
+         if ( StringUtil.StrCmp(AV21ExcelFilename, "") != 0 )
+         {
+            CallWebObject(formatLink(AV21ExcelFilename) );
+            context.wjLocDisableFrm = 0;
+         }
+         else
+         {
+            GX_msglist.addItem(AV20ErrorMessage);
+         }
+         /*  Sending Event outputs  */
+      }
+
+      protected void E11562( )
+      {
+         /* Daterange_rangepicker_Daterangechanged Routine */
+         returnInSub = false;
+         if ( (DateTime.MinValue==AV10DateRange) && (DateTime.MinValue==AV16DateRange_To) )
+         {
+            AV10DateRange = Gx_date;
+            AssignAttri("", false, "AV10DateRange", context.localUtil.Format(AV10DateRange, "99/99/99"));
+            AV16DateRange_To = Gx_date;
+            AssignAttri("", false, "AV16DateRange_To", context.localUtil.Format(AV16DateRange_To, "99/99/99"));
+         }
+         AssignAttri("", false, "AV10DateRange", context.localUtil.Format(AV10DateRange, "99/99/99"));
+         AssignAttri("", false, "AV16DateRange_To", context.localUtil.Format(AV16DateRange_To, "99/99/99"));
+         /* Execute user subroutine: 'GETDATA' */
+         S112 ();
+         if (returnInSub) return;
+         GXt_char3 = "";
+         new formatdatetime(context ).execute(  AV10DateRange,  "YYYY-MM-DD", out  GXt_char3) ;
+         Ucvistimeline1_Startdate = GXt_char3;
+         ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "startDate", Ucvistimeline1_Startdate);
+         GXt_char3 = "";
+         new formatdatetime(context ).execute(  AV16DateRange_To,  "YYYY-MM-DD", out  GXt_char3) ;
+         Ucvistimeline1_Stopdate = GXt_char3;
+         ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "stopDate", Ucvistimeline1_Stopdate);
+         this.executeUsercontrolMethod("", false, "UCVISTIMELINE1Container", "Refresh", "", new Object[] {AV6LeaveEvents.ToJSonString(false),AV7LeaveEventGroups.ToJSonString(false)});
+         /*  Sending Event outputs  */
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV6LeaveEvents", AV6LeaveEvents);
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV7LeaveEventGroups", AV7LeaveEventGroups);
+      }
+
+      protected void E14562( )
+      {
+         /* Companylocationid_Controlvaluechanged Routine */
+         returnInSub = false;
+         GXt_objcol_SdtSDTLeaveType2 = AV23SDTLeaveTypes;
+         new dpleavetype(context ).execute(  AV11CompanyLocationId, out  GXt_objcol_SdtSDTLeaveType2) ;
+         AV23SDTLeaveTypes = GXt_objcol_SdtSDTLeaveType2;
+         Ucvistimeline1_Leavetypes = AV23SDTLeaveTypes.ToJSonString(false);
+         ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "leavetypes", Ucvistimeline1_Leavetypes);
+         /* Execute user subroutine: 'GETDATA' */
+         S112 ();
+         if (returnInSub) return;
+         GXt_char3 = "";
+         new formatdatetime(context ).execute(  AV10DateRange,  "YYYY-MM-DD", out  GXt_char3) ;
+         Ucvistimeline1_Startdate = GXt_char3;
+         ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "startDate", Ucvistimeline1_Startdate);
+         GXt_char3 = "";
+         new formatdatetime(context ).execute(  AV16DateRange_To,  "YYYY-MM-DD", out  GXt_char3) ;
+         Ucvistimeline1_Stopdate = GXt_char3;
+         ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "stopDate", Ucvistimeline1_Stopdate);
+         this.executeUsercontrolMethod("", false, "UCVISTIMELINE1Container", "Refresh", "", new Object[] {AV6LeaveEvents.ToJSonString(false),AV7LeaveEventGroups.ToJSonString(false)});
+         /*  Sending Event outputs  */
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV6LeaveEvents", AV6LeaveEvents);
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV7LeaveEventGroups", AV7LeaveEventGroups);
       }
 
       protected void S112( )
       {
-         /* 'ATTRIBUTESSECURITYCODE' Routine */
+         /* 'GETDATA' Routine */
          returnInSub = false;
-         if ( ! ( ( (0==AV15CompanyId) ) ) )
-         {
-            dynavCompanylocationid.Visible = 0;
-            AssignProp("", false, dynavCompanylocationid_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(dynavCompanylocationid.Visible), 5, 0), true);
-            divCompanylocationid_cell_Class = "Invisible";
-            AssignProp("", false, divCompanylocationid_cell_Internalname, "Class", divCompanylocationid_cell_Class, true);
-         }
-         else
-         {
-            dynavCompanylocationid.Visible = 1;
-            AssignProp("", false, dynavCompanylocationid_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(dynavCompanylocationid.Visible), 5, 0), true);
-            divCompanylocationid_cell_Class = "DscTop";
-            AssignProp("", false, divCompanylocationid_cell_Internalname, "Class", divCompanylocationid_cell_Class, true);
-         }
-         if ( dynavCompanylocationid.Visible == 0 )
-         {
-            divUnnamedtable1_Visible = 0;
-            AssignProp("", false, divUnnamedtable1_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(divUnnamedtable1_Visible), 5, 0), true);
-         }
-      }
-
-      protected void E133I2( )
-      {
-         /* Companylocationid_Controlvaluechanged Routine */
-         returnInSub = false;
-         AV12Session.Set("LeaveCalendarCompanyLocationId", StringUtil.Str( (decimal)(AV10CompanyLocationId), 10, 0));
-         this.executeUsercontrolMethod("", false, "GXSCHEDULERContainer", "Refresh", "", new Object[] {});
-      }
-
-      protected void E113I2( )
-      {
-         /* Gxscheduler_Eventselected Routine */
-         returnInSub = false;
-         AV9websession.Set("currentevent", AV7currentEvent.gxTpr_Id);
+         new logtofile(context ).execute(  context.localUtil.DToC( AV10DateRange, 1, "/")+" - "+context.localUtil.DToC( AV16DateRange_To, 1, "/")) ;
+         GXt_objcol_SdtSDTLeaveEvent5 = AV6LeaveEvents;
+         new dpleaveevent(context ).execute(  AV10DateRange,  AV16DateRange_To,  AV11CompanyLocationId, out  GXt_objcol_SdtSDTLeaveEvent5) ;
+         AV6LeaveEvents = GXt_objcol_SdtSDTLeaveEvent5;
+         GXt_objcol_SdtSDTLeaveEventGroup6 = AV7LeaveEventGroups;
+         new dpleaveeventgroup(context ).execute(  AV10DateRange,  AV16DateRange_To,  AV11CompanyLocationId, out  GXt_objcol_SdtSDTLeaveEventGroup6) ;
+         AV7LeaveEventGroups = GXt_objcol_SdtSDTLeaveEventGroup6;
+         new logtofile(context ).execute(  AV6LeaveEvents.ToJSonString(false)) ;
+         new logtofile(context ).execute(  AV7LeaveEventGroups.ToJSonString(false)) ;
       }
 
       protected void nextLoad( )
       {
       }
 
-      protected void E143I2( )
+      protected void E15562( )
       {
          /* Load Routine */
          returnInSub = false;
@@ -932,9 +1069,9 @@ namespace GeneXus.Programs {
          nGotPars = (short)(1);
          nGXWrapped = (short)(1);
          context.SetWrapped(true);
-         PA3I2( ) ;
-         WS3I2( ) ;
-         WE3I2( ) ;
+         PA562( ) ;
+         WS562( ) ;
+         WE562( ) ;
          this.cleanup();
          context.SetWrapped(false);
          context.GX_msglist = BackMsgLst;
@@ -947,6 +1084,7 @@ namespace GeneXus.Programs {
 
       protected void define_styles( )
       {
+         AddStyleSheetFile("DVelop/Shared/daterangepicker/daterangepicker.css", "");
          AddThemeStyleSheetFile("", context.GetTheme( )+".css", "?"+GetCacheInvalidationToken( ));
          bool outputEnabled = isOutputEnabled( );
          if ( context.isSpaRequest( ) )
@@ -956,7 +1094,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20246186163037", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024619964325", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -972,9 +1110,14 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("leavecalendar.js", "?20246186163038", false, true);
-         context.AddJavascriptSource("GXScheduler/dhtmlxscheduler.js", "", false, true);
-         context.AddJavascriptSource("GXScheduler/GXSchedulerRender.js", "", false, true);
+         context.AddJavascriptSource("leavecalendar.js", "?2024619964325", false, true);
+         context.AddJavascriptSource("UserControls/UCVISTimelineRender.js", "", false, true);
+         context.AddJavascriptSource("DVelop/Shared/daterangepicker/locales.js", "", false, true);
+         context.AddJavascriptSource("DVelop/Shared/daterangepicker/wwp-daterangepicker.js", "", false, true);
+         context.AddJavascriptSource("DVelop/Shared/daterangepicker/moment.min.js", "", false, true);
+         context.AddJavascriptSource("DVelop/Shared/daterangepicker/daterangepicker.min.js", "", false, true);
+         context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
+         context.AddJavascriptSource("DVelop/DateRangePicker/DateRangePickerRender.js", "", false, true);
          /* End function include_jscripts */
       }
 
@@ -983,31 +1126,37 @@ namespace GeneXus.Programs {
          dynavCompanylocationid.Name = "vCOMPANYLOCATIONID";
          dynavCompanylocationid.WebTags = "";
          dynavCompanylocationid.removeAllItems();
-         /* Using cursor H003I5 */
+         /* Using cursor H00565 */
          pr_default.execute(3);
          while ( (pr_default.getStatus(3) != 101) )
          {
-            dynavCompanylocationid.addItem(StringUtil.Trim( StringUtil.Str( (decimal)(H003I5_A157CompanyLocationId[0]), 10, 0)), H003I5_A158CompanyLocationName[0], 0);
+            dynavCompanylocationid.addItem(StringUtil.Trim( StringUtil.Str( (decimal)(H00565_A157CompanyLocationId[0]), 10, 0)), H00565_A158CompanyLocationName[0], 0);
             pr_default.readNext(3);
          }
          pr_default.close(3);
          if ( dynavCompanylocationid.ItemCount > 0 )
          {
-            AV10CompanyLocationId = (long)(Math.Round(NumberUtil.Val( dynavCompanylocationid.getValidValue(StringUtil.Trim( StringUtil.Str( (decimal)(AV10CompanyLocationId), 10, 0))), "."), 18, MidpointRounding.ToEven));
-            AssignAttri("", false, "AV10CompanyLocationId", StringUtil.LTrimStr( (decimal)(AV10CompanyLocationId), 10, 0));
+            AV11CompanyLocationId = (long)(Math.Round(NumberUtil.Val( dynavCompanylocationid.getValidValue(StringUtil.Trim( StringUtil.Str( (decimal)(AV11CompanyLocationId), 10, 0))), "."), 18, MidpointRounding.ToEven));
+            AssignAttri("", false, "AV11CompanyLocationId", StringUtil.LTrimStr( (decimal)(AV11CompanyLocationId), 10, 0));
          }
          /* End function init_web_controls */
       }
 
       protected void init_default_properties( )
       {
+         divTablecontent_Internalname = "TABLECONTENT";
+         lblTextblockdaterange_rangetext_Internalname = "TEXTBLOCKDATERANGE_RANGETEXT";
+         edtavDaterange_rangetext_Internalname = "vDATERANGE_RANGETEXT";
+         divUnnamedtableaterange_rangetext_Internalname = "UNNAMEDTABLEATERANGE_RANGETEXT";
          lblTextblockcompanylocationid_Internalname = "TEXTBLOCKCOMPANYLOCATIONID";
          dynavCompanylocationid_Internalname = "vCOMPANYLOCATIONID";
          divUnnamedtablecompanylocationid_Internalname = "UNNAMEDTABLECOMPANYLOCATIONID";
-         divCompanylocationid_cell_Internalname = "COMPANYLOCATIONID_CELL";
-         divUnnamedtable1_Internalname = "UNNAMEDTABLE1";
-         Gxscheduler_Internalname = "GXSCHEDULER";
-         divTablemain_Internalname = "TABLEMAIN";
+         bttBtnreport_Internalname = "BTNREPORT";
+         divTable1_Internalname = "TABLE1";
+         Ucvistimeline1_Internalname = "UCVISTIMELINE1";
+         divMaintable_Internalname = "MAINTABLE";
+         Daterange_rangepicker_Internalname = "DATERANGE_RANGEPICKER";
+         divHtml_bottomauxiliarcontrols_Internalname = "HTML_BOTTOMAUXILIARCONTROLS";
          divLayoutmaintable_Internalname = "LAYOUTMAINTABLE";
          Form.Internalname = "FORM";
       }
@@ -1021,23 +1170,15 @@ namespace GeneXus.Programs {
          }
          init_default_properties( ) ;
          dynavCompanylocationid_Jsonclick = "";
-         dynavCompanylocationid.Visible = 1;
          dynavCompanylocationid.Enabled = 1;
-         divCompanylocationid_cell_Class = "";
-         divUnnamedtable1_Visible = 1;
-         Gxscheduler_Openlinknewwindow = "true";
-         Gxscheduler_Detailsondblclick = "true";
-         Gxscheduler_Detailsoncreate = "true";
-         Gxscheduler_Readonly = "false";
-         Gxscheduler_Montheventsview = "singleline";
-         Gxscheduler_Displaynavigationbuttons = "true";
-         Gxscheduler_Displaydaytab = "false";
-         Gxscheduler_Displayweektab = "true";
-         Gxscheduler_Theme = "classic";
-         Gxscheduler_View = "month";
-         Gxscheduler_Detailsformobject = "details.aspx";
-         Gxscheduler_Loadeventsobject = "getleaveevents";
-         Gxscheduler_Autoload = "month";
+         edtavDaterange_rangetext_Jsonclick = "";
+         edtavDaterange_rangetext_Enabled = 1;
+         Ucvistimeline1_Item = 0;
+         Ucvistimeline1_Stopdate = "";
+         Ucvistimeline1_Startdate = "";
+         Ucvistimeline1_Leavetypes = "";
+         Ucvistimeline1_Groups = "";
+         Ucvistimeline1_Events = "";
          Form.Headerrawhtml = "";
          Form.Background = "";
          Form.Textcolor = 0;
@@ -1057,12 +1198,14 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'dynavCompanylocationid'},{av:'AV10CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'}]");
+         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'dynavCompanylocationid'},{av:'AV11CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'},{av:'Gx_date',fld:'vTODAY',pic:'',hsh:true}]");
          setEventMetadata("REFRESH",",oparms:[]}");
-         setEventMetadata("VCOMPANYLOCATIONID.CONTROLVALUECHANGED","{handler:'E133I2',iparms:[{av:'dynavCompanylocationid'},{av:'AV10CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'}]");
-         setEventMetadata("VCOMPANYLOCATIONID.CONTROLVALUECHANGED",",oparms:[]}");
-         setEventMetadata("GXSCHEDULER.EVENTSELECTED","{handler:'E113I2',iparms:[{av:'AV7currentEvent',fld:'vCURRENTEVENT',pic:''}]");
-         setEventMetadata("GXSCHEDULER.EVENTSELECTED",",oparms:[]}");
+         setEventMetadata("'DOREPORT'","{handler:'E13562',iparms:[{av:'dynavCompanylocationid'},{av:'AV11CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'},{av:'AV10DateRange',fld:'vDATERANGE',pic:''}]");
+         setEventMetadata("'DOREPORT'",",oparms:[{av:'AV10DateRange',fld:'vDATERANGE',pic:''}]}");
+         setEventMetadata("DATERANGE_RANGEPICKER.DATERANGECHANGED","{handler:'E11562',iparms:[{av:'AV10DateRange',fld:'vDATERANGE',pic:''},{av:'AV16DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'Gx_date',fld:'vTODAY',pic:'',hsh:true},{av:'AV6LeaveEvents',fld:'vLEAVEEVENTS',pic:''},{av:'AV7LeaveEventGroups',fld:'vLEAVEEVENTGROUPS',pic:''},{av:'dynavCompanylocationid'},{av:'AV11CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'}]");
+         setEventMetadata("DATERANGE_RANGEPICKER.DATERANGECHANGED",",oparms:[{av:'AV10DateRange',fld:'vDATERANGE',pic:''},{av:'AV16DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'Ucvistimeline1_Startdate',ctrl:'UCVISTIMELINE1',prop:'startDate'},{av:'Ucvistimeline1_Stopdate',ctrl:'UCVISTIMELINE1',prop:'stopDate'},{av:'AV6LeaveEvents',fld:'vLEAVEEVENTS',pic:''},{av:'AV7LeaveEventGroups',fld:'vLEAVEEVENTGROUPS',pic:''}]}");
+         setEventMetadata("VCOMPANYLOCATIONID.CONTROLVALUECHANGED","{handler:'E14562',iparms:[{av:'dynavCompanylocationid'},{av:'AV11CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'},{av:'AV10DateRange',fld:'vDATERANGE',pic:''},{av:'AV16DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV6LeaveEvents',fld:'vLEAVEEVENTS',pic:''},{av:'AV7LeaveEventGroups',fld:'vLEAVEEVENTGROUPS',pic:''}]");
+         setEventMetadata("VCOMPANYLOCATIONID.CONTROLVALUECHANGED",",oparms:[{av:'Ucvistimeline1_Leavetypes',ctrl:'UCVISTIMELINE1',prop:'leavetypes'},{av:'Ucvistimeline1_Startdate',ctrl:'UCVISTIMELINE1',prop:'startDate'},{av:'Ucvistimeline1_Stopdate',ctrl:'UCVISTIMELINE1',prop:'stopDate'},{av:'AV6LeaveEvents',fld:'vLEAVEEVENTS',pic:''},{av:'AV7LeaveEventGroups',fld:'vLEAVEEVENTGROUPS',pic:''}]}");
          return  ;
       }
 
@@ -1082,22 +1225,30 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
-         AV7currentEvent = new SdtSchedulerEvents_event(context);
          gxfirstwebparm = "";
          gxfirstwebparm_bkp = "";
          sDynURL = "";
          FormProcess = "";
          bodyStyle = "";
+         Gx_date = DateTime.MinValue;
          GXKey = "";
-         AV8initialDate = DateTime.MinValue;
+         AV10DateRange = DateTime.MinValue;
+         AV16DateRange_To = DateTime.MinValue;
+         AV17DateRange_RangePickerOptions = new GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions(context);
+         AV6LeaveEvents = new GXBaseCollection<SdtSDTLeaveEvent>( context, "SDTLeaveEvent", "YTT_version4");
+         AV7LeaveEventGroups = new GXBaseCollection<SdtSDTLeaveEventGroup>( context, "SDTLeaveEventGroup", "YTT_version4");
          GX_FocusControl = "";
          Form = new GXWebForm();
          sPrefix = "";
          ClassString = "";
          StyleString = "";
-         lblTextblockcompanylocationid_Jsonclick = "";
+         lblTextblockdaterange_rangetext_Jsonclick = "";
          TempTags = "";
-         ucGxscheduler = new GXUserControl();
+         AV15DateRange_RangeText = "";
+         lblTextblockcompanylocationid_Jsonclick = "";
+         bttBtnreport_Jsonclick = "";
+         ucUcvistimeline1 = new GXUserControl();
+         ucDaterange_rangepicker = new GXUserControl();
          sEvt = "";
          EvtGridId = "";
          EvtRowId = "";
@@ -1106,35 +1257,43 @@ namespace GeneXus.Programs {
          gxdynajaxctrldescr = new GeneXus.Utils.GxStringCollection();
          gxwrpcisep = "";
          scmdbuf = "";
-         H003I2_A157CompanyLocationId = new long[1] ;
-         H003I2_A158CompanyLocationName = new string[] {""} ;
-         H003I3_A157CompanyLocationId = new long[1] ;
-         H003I3_A158CompanyLocationName = new string[] {""} ;
-         H003I4_A100CompanyId = new long[1] ;
-         H003I4_A157CompanyLocationId = new long[1] ;
-         AV12Session = context.GetSession();
-         AV9websession = context.GetSession();
+         H00562_A157CompanyLocationId = new long[1] ;
+         H00562_A158CompanyLocationName = new string[] {""} ;
+         H00563_A157CompanyLocationId = new long[1] ;
+         H00563_A158CompanyLocationName = new string[] {""} ;
+         H00564_A100CompanyId = new long[1] ;
+         H00564_A157CompanyLocationId = new long[1] ;
+         AV23SDTLeaveTypes = new GXBaseCollection<SdtSDTLeaveType>( context, "SDTLeaveType", "YTT_version4");
+         GXt_SdtWWPDateRangePickerOptions4 = new GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions(context);
+         AV21ExcelFilename = "";
+         AV20ErrorMessage = "";
+         GXt_objcol_SdtSDTLeaveType2 = new GXBaseCollection<SdtSDTLeaveType>( context, "SDTLeaveType", "YTT_version4");
+         GXt_char3 = "";
+         GXt_objcol_SdtSDTLeaveEvent5 = new GXBaseCollection<SdtSDTLeaveEvent>( context, "SDTLeaveEvent", "YTT_version4");
+         GXt_objcol_SdtSDTLeaveEventGroup6 = new GXBaseCollection<SdtSDTLeaveEventGroup>( context, "SDTLeaveEventGroup", "YTT_version4");
          BackMsgLst = new msglist();
          LclMsgLst = new msglist();
-         H003I5_A157CompanyLocationId = new long[1] ;
-         H003I5_A158CompanyLocationName = new string[] {""} ;
+         H00565_A157CompanyLocationId = new long[1] ;
+         H00565_A158CompanyLocationName = new string[] {""} ;
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.leavecalendar__default(),
             new Object[][] {
                 new Object[] {
-               H003I2_A157CompanyLocationId, H003I2_A158CompanyLocationName
+               H00562_A157CompanyLocationId, H00562_A158CompanyLocationName
                }
                , new Object[] {
-               H003I3_A157CompanyLocationId, H003I3_A158CompanyLocationName
+               H00563_A157CompanyLocationId, H00563_A158CompanyLocationName
                }
                , new Object[] {
-               H003I4_A100CompanyId, H003I4_A157CompanyLocationId
+               H00564_A100CompanyId, H00564_A157CompanyLocationId
                }
                , new Object[] {
-               H003I5_A157CompanyLocationId, H003I5_A158CompanyLocationName
+               H00565_A157CompanyLocationId, H00565_A158CompanyLocationName
                }
             }
          );
+         Gx_date = DateTimeUtil.Today( context);
          /* GeneXus formulas. */
+         Gx_date = DateTimeUtil.Today( context);
       }
 
       private short nRcdExists_3 ;
@@ -1148,11 +1307,12 @@ namespace GeneXus.Programs {
       private short nDonePA ;
       private short gxcookieaux ;
       private short nGXWrapped ;
-      private int divUnnamedtable1_Visible ;
+      private int Ucvistimeline1_Item ;
+      private int edtavDaterange_rangetext_Enabled ;
       private int gxdynajaxindex ;
       private int idxLst ;
-      private long AV10CompanyLocationId ;
-      private long AV15CompanyId ;
+      private long AV11CompanyLocationId ;
+      private long AV18CompanyId ;
       private long GXt_int1 ;
       private long A100CompanyId ;
       private long A157CompanyLocationId ;
@@ -1162,42 +1322,45 @@ namespace GeneXus.Programs {
       private string FormProcess ;
       private string bodyStyle ;
       private string GXKey ;
-      private string Gxscheduler_Autoload ;
-      private string Gxscheduler_Loadeventsobject ;
-      private string Gxscheduler_Detailsformobject ;
-      private string Gxscheduler_View ;
-      private string Gxscheduler_Theme ;
-      private string Gxscheduler_Displayweektab ;
-      private string Gxscheduler_Displaydaytab ;
-      private string Gxscheduler_Displaynavigationbuttons ;
-      private string Gxscheduler_Montheventsview ;
-      private string Gxscheduler_Readonly ;
-      private string Gxscheduler_Detailsoncreate ;
-      private string Gxscheduler_Detailsondblclick ;
-      private string Gxscheduler_Openlinknewwindow ;
+      private string Ucvistimeline1_Events ;
+      private string Ucvistimeline1_Groups ;
+      private string Ucvistimeline1_Leavetypes ;
+      private string Ucvistimeline1_Startdate ;
+      private string Ucvistimeline1_Stopdate ;
       private string GX_FocusControl ;
       private string sPrefix ;
       private string divLayoutmaintable_Internalname ;
-      private string divTablemain_Internalname ;
+      private string divMaintable_Internalname ;
       private string ClassString ;
       private string StyleString ;
-      private string divUnnamedtable1_Internalname ;
-      private string divCompanylocationid_cell_Internalname ;
-      private string divCompanylocationid_cell_Class ;
+      private string divTablecontent_Internalname ;
+      private string divTable1_Internalname ;
+      private string divUnnamedtableaterange_rangetext_Internalname ;
+      private string lblTextblockdaterange_rangetext_Internalname ;
+      private string lblTextblockdaterange_rangetext_Jsonclick ;
+      private string edtavDaterange_rangetext_Internalname ;
+      private string TempTags ;
+      private string edtavDaterange_rangetext_Jsonclick ;
       private string divUnnamedtablecompanylocationid_Internalname ;
       private string lblTextblockcompanylocationid_Internalname ;
       private string lblTextblockcompanylocationid_Jsonclick ;
       private string dynavCompanylocationid_Internalname ;
-      private string TempTags ;
       private string dynavCompanylocationid_Jsonclick ;
-      private string Gxscheduler_Internalname ;
+      private string bttBtnreport_Internalname ;
+      private string bttBtnreport_Jsonclick ;
+      private string Ucvistimeline1_Internalname ;
+      private string divHtml_bottomauxiliarcontrols_Internalname ;
+      private string Daterange_rangepicker_Internalname ;
       private string sEvt ;
       private string EvtGridId ;
       private string EvtRowId ;
       private string sEvtType ;
       private string gxwrpcisep ;
       private string scmdbuf ;
-      private DateTime AV8initialDate ;
+      private string GXt_char3 ;
+      private DateTime Gx_date ;
+      private DateTime AV10DateRange ;
+      private DateTime AV16DateRange_To ;
       private bool entryPointCalled ;
       private bool toggleJsOutput ;
       private bool wbLoad ;
@@ -1205,27 +1368,36 @@ namespace GeneXus.Programs {
       private bool wbErr ;
       private bool gxdyncontrolsrefreshing ;
       private bool returnInSub ;
+      private string AV15DateRange_RangeText ;
+      private string AV21ExcelFilename ;
+      private string AV20ErrorMessage ;
       private GeneXus.Utils.GxStringCollection gxdynajaxctrlcodr ;
       private GeneXus.Utils.GxStringCollection gxdynajaxctrldescr ;
-      private GXUserControl ucGxscheduler ;
+      private GXUserControl ucUcvistimeline1 ;
+      private GXUserControl ucDaterange_rangepicker ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private GXCombobox dynavCompanylocationid ;
       private IDataStoreProvider pr_default ;
-      private long[] H003I2_A157CompanyLocationId ;
-      private string[] H003I2_A158CompanyLocationName ;
-      private long[] H003I3_A157CompanyLocationId ;
-      private string[] H003I3_A158CompanyLocationName ;
-      private long[] H003I4_A100CompanyId ;
-      private long[] H003I4_A157CompanyLocationId ;
+      private long[] H00562_A157CompanyLocationId ;
+      private string[] H00562_A158CompanyLocationName ;
+      private long[] H00563_A157CompanyLocationId ;
+      private string[] H00563_A158CompanyLocationName ;
+      private long[] H00564_A100CompanyId ;
+      private long[] H00564_A157CompanyLocationId ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
-      private long[] H003I5_A157CompanyLocationId ;
-      private string[] H003I5_A158CompanyLocationName ;
-      private IGxSession AV12Session ;
-      private IGxSession AV9websession ;
+      private long[] H00565_A157CompanyLocationId ;
+      private string[] H00565_A158CompanyLocationName ;
+      private GXBaseCollection<SdtSDTLeaveEventGroup> AV7LeaveEventGroups ;
+      private GXBaseCollection<SdtSDTLeaveEventGroup> GXt_objcol_SdtSDTLeaveEventGroup6 ;
+      private GXBaseCollection<SdtSDTLeaveEvent> AV6LeaveEvents ;
+      private GXBaseCollection<SdtSDTLeaveEvent> GXt_objcol_SdtSDTLeaveEvent5 ;
+      private GXBaseCollection<SdtSDTLeaveType> AV23SDTLeaveTypes ;
+      private GXBaseCollection<SdtSDTLeaveType> GXt_objcol_SdtSDTLeaveType2 ;
       private GXWebForm Form ;
-      private SdtSchedulerEvents_event AV7currentEvent ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions AV17DateRange_RangePickerOptions ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions GXt_SdtWWPDateRangePickerOptions4 ;
    }
 
    public class leavecalendar__default : DataStoreHelperBase, IDataStoreHelper
@@ -1246,24 +1418,24 @@ namespace GeneXus.Programs {
     {
        if ( def == null )
        {
-          Object[] prmH003I2;
-          prmH003I2 = new Object[] {
+          Object[] prmH00562;
+          prmH00562 = new Object[] {
           };
-          Object[] prmH003I3;
-          prmH003I3 = new Object[] {
+          Object[] prmH00563;
+          prmH00563 = new Object[] {
           };
-          Object[] prmH003I4;
-          prmH003I4 = new Object[] {
-          new ParDef("AV15CompanyId",GXType.Int64,10,0)
+          Object[] prmH00564;
+          prmH00564 = new Object[] {
+          new ParDef("AV18CompanyId",GXType.Int64,10,0)
           };
-          Object[] prmH003I5;
-          prmH003I5 = new Object[] {
+          Object[] prmH00565;
+          prmH00565 = new Object[] {
           };
           def= new CursorDef[] {
-              new CursorDef("H003I2", "SELECT CompanyLocationId, CompanyLocationName FROM CompanyLocation ORDER BY CompanyLocationName ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH003I2,0, GxCacheFrequency.OFF ,true,false )
-             ,new CursorDef("H003I3", "SELECT CompanyLocationId, CompanyLocationName FROM CompanyLocation ORDER BY CompanyLocationName ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH003I3,0, GxCacheFrequency.OFF ,true,false )
-             ,new CursorDef("H003I4", "SELECT CompanyId, CompanyLocationId FROM Company WHERE CompanyId = :AV15CompanyId ORDER BY CompanyId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH003I4,1, GxCacheFrequency.OFF ,false,true )
-             ,new CursorDef("H003I5", "SELECT CompanyLocationId, CompanyLocationName FROM CompanyLocation ORDER BY CompanyLocationName ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH003I5,0, GxCacheFrequency.OFF ,true,false )
+              new CursorDef("H00562", "SELECT CompanyLocationId, CompanyLocationName FROM CompanyLocation ORDER BY CompanyLocationName ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00562,0, GxCacheFrequency.OFF ,true,false )
+             ,new CursorDef("H00563", "SELECT CompanyLocationId, CompanyLocationName FROM CompanyLocation ORDER BY CompanyLocationName ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00563,0, GxCacheFrequency.OFF ,true,false )
+             ,new CursorDef("H00564", "SELECT CompanyId, CompanyLocationId FROM Company WHERE CompanyId = :AV18CompanyId ORDER BY CompanyId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00564,1, GxCacheFrequency.OFF ,false,true )
+             ,new CursorDef("H00565", "SELECT CompanyLocationId, CompanyLocationName FROM CompanyLocation ORDER BY CompanyLocationName ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00565,0, GxCacheFrequency.OFF ,true,false )
           };
        }
     }

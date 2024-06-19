@@ -118,7 +118,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          AV5id = (short)(AV5id+1);
          Gxm1dvelop_menu.gxTpr_Id = StringUtil.Str( (decimal)(AV5id), 4, 0);
          Gxm1dvelop_menu.gxTpr_Tooltip = "";
-         Gxm1dvelop_menu.gxTpr_Link = formatLink("fullcalendar.aspx") ;
+         Gxm1dvelop_menu.gxTpr_Link = formatLink("leavecalendar.aspx") ;
          Gxm1dvelop_menu.gxTpr_Linktarget = "";
          Gxm1dvelop_menu.gxTpr_Iconclass = "";
          Gxm1dvelop_menu.gxTpr_Caption = "Leave Calendar";

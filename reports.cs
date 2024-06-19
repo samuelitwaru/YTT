@@ -1221,6 +1221,8 @@ namespace GeneXus.Programs {
          if (returnInSub) return;
          edtavView_Visible = 0;
          AssignProp("", false, edtavView_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtavView_Visible), 5, 0), true);
+         Form.Caption = "Project Overview";
+         AssignProp("", false, "FORM", "Caption", Form.Caption, true);
          /* Execute user subroutine: 'UPDATESESSIONVARIABLES' */
          S172 ();
          if (returnInSub) return;
@@ -1602,7 +1604,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202461716134759", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024619753224", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1618,7 +1620,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("reports.js", "?202461716134760", false, true);
+         context.AddJavascriptSource("reports.js", "?2024619753226", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
