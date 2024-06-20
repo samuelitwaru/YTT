@@ -5,6 +5,9 @@
 	{{gxTpr_item}}{{item}}
 </div>
 <br />
+
+<p><strong>Zoom in/out:</strong> Hold Ctrl + Scroll up/down</p>
+
 <div id="visualization" style="">
 	
 </div>
