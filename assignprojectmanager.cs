@@ -80,6 +80,7 @@ namespace GeneXus.Programs {
       {
          /* GeneXus formulas */
          /* Output device settings */
+         new logtofile(context ).execute(  "AssignPM: "+StringUtil.Str( (decimal)(AV9ComboProjectManagerId), 10, 0)+" >> "+context.localUtil.Format( (decimal)(AV11ProjectId), "ZZZZZZZZZ9")) ;
          AV8Employee.Load(AV9ComboProjectManagerId);
          AV13EmployeeProject.gxTpr_Projectid = AV11ProjectId;
          AV8Employee.gxTpr_Project.Add(AV13EmployeeProject, 0);

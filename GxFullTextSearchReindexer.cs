@@ -57,9 +57,6 @@ namespace GeneXus.Programs {
          obj = new GeneXus.Programs.workwithplus.SdtWWP_Parameter(context);
          trn = obj.getTransaction();
          result = trn.Reindex();
-         obj = new SdtProject(context);
-         trn = obj.getTransaction();
-         result = trn.Reindex();
          obj = new SdtWorkHourLog(context);
          trn = obj.getTransaction();
          result = trn.Reindex();
@@ -79,6 +76,9 @@ namespace GeneXus.Programs {
          trn = obj.getTransaction();
          result = trn.Reindex();
          obj = new SdtCompanyLocation(context);
+         trn = obj.getTransaction();
+         result = trn.Reindex();
+         obj = new SdtProject(context);
          trn = obj.getTransaction();
          result = trn.Reindex();
          return 1 ;

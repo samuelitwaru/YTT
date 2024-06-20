@@ -80,6 +80,7 @@ namespace GeneXus.Programs {
       {
          /* GeneXus formulas */
          /* Output device settings */
+         new logtofile(context ).execute(  "EmployeeId: "+StringUtil.Str( (decimal)(AV19EmployeeId), 10, 0)+"ProjectId: "+StringUtil.Str( (decimal)(AV20ProjectId), 10, 0)) ;
          AV14Project.Load(AV20ProjectId);
          AV11GAMRole = AV12GAMRepository.getrolebyexternalid("IsProject Manager", out  AV10GAMErrorCollection);
          if ( ! (0==AV14Project.gxTpr_Projectmanagerid) )
@@ -104,7 +105,10 @@ namespace GeneXus.Programs {
             }
          }
          AV8Employee.Load(AV19EmployeeId);
+         new logtofile(context ).execute(  "Employee: "+AV8Employee.gxTpr_Employeename) ;
          AV9GAMUser = new GeneXus.Programs.genexussecurity.SdtGAMUser(context).getbylogin("local", AV8Employee.gxTpr_Employeeemail, out  AV10GAMErrorCollection);
+         new logtofile(context ).execute(  "Errors: "+AV10GAMErrorCollection.ToJSonString(false)) ;
+         new logtofile(context ).execute(  "User: "+AV9GAMUser.gxTpr_Email) ;
          AV9GAMUser.addrolebyid( AV11GAMRole.gxTpr_Id, out  AV10GAMErrorCollection);
          context.CommitDataStores("assignprojectmanagerrole",pr_default);
          this.cleanup();

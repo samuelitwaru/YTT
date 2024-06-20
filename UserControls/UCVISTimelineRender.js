@@ -6,7 +6,7 @@ function UCVISTimeline($) {
 	  
 	  
 
-	var template = '<div style=\"display:none\">	{{startDate}}	{{endDate}}	{{item}}</div><br /><p><strong>Zoom in/out:</strong> Hold Ctrl + Scroll up/down</p><div id=\"visualization\" style=\"\">	</div><div id=\"key\" style=\"display:flex; margin-top: 10px\">	<div style=\"display:flex;\">		<div style=\"background: #dddddd; height:10px; width:10px; margin: 4px\"></div> <label>Pending</label>	</div></div>';
+	var template = '<div style=\"display:none\">	{{startDate}}	{{endDate}}	{{item}}</div><br /><div class=\"tooltip1\">	<span class=\"fa fa-info-circle fa-lg\"></span>  	<span class=\"tooltip1text\">		<strong>Zoom in/out:</strong> Hold Ctrl + Scroll up/down	</span></div><div id=\"visualization\" style=\"\">	</div><div id=\"key\" style=\"display:flex; margin-top: 10px\">	<div style=\"display:flex;\">		<div style=\"background: #dddddd; height:10px; width:10px; margin: 4px\"></div> <label>Pending</label>	</div></div>';
 	var partials = {  }; 
 	Mustache.parse(template);
 	var _iOnClick = 0; 
@@ -102,6 +102,7 @@ function UCVISTimeline($) {
 						end: this.stopDate,
 						zoomable:true,
 						verticalScroll: true,
+						horizontalScroll: true,
 						zoomKey: 'ctrlKey',
 						format: {
 							minorLabels: {day: 'ddd DD'},
