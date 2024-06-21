@@ -1407,11 +1407,9 @@ namespace GeneXus.Programs {
          }
          else
          {
-            new logtofile(context ).execute(  "rolling back") ;
             context.RollbackDataStores("details",pr_default);
             GX_msglist.addItem(AV8LeaveRequest.GetMessages().ToJSonString(false));
          }
-         new logtofile(context ).execute(  AV8LeaveRequest.GetMessages().ToJSonString(false)) ;
       }
 
       protected void S122( )
@@ -1574,7 +1572,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202462114313730", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20246211434995", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1590,7 +1588,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("details.js", "?202462114313730", false, true);
+         context.AddJavascriptSource("details.js", "?20246211434996", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/ConfirmPanel/BootstrapConfirmPanelRender.js", "", false, true);
