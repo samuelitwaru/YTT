@@ -80,13 +80,12 @@ namespace GeneXus.Programs {
       {
          /* GeneXus formulas */
          /* Output device settings */
-         new logtofile(context ).execute(  "EmployeeId: "+StringUtil.Str( (decimal)(AV19EmployeeId), 10, 0)+"ProjectId: "+StringUtil.Str( (decimal)(AV20ProjectId), 10, 0)) ;
          AV14Project.Load(AV20ProjectId);
          AV11GAMRole = AV12GAMRepository.getrolebyexternalid("IsProject Manager", out  AV10GAMErrorCollection);
          if ( ! (0==AV14Project.gxTpr_Projectmanagerid) )
          {
             AV15CurrentEmployee.Load(AV14Project.gxTpr_Projectmanagerid);
-            AV21GXLvl10 = 0;
+            AV21GXLvl9 = 0;
             /* Using cursor P00972 */
             pr_default.execute(0, new Object[] {AV15CurrentEmployee.gxTpr_Employeeid, AV20ProjectId});
             while ( (pr_default.getStatus(0) != 101) )
@@ -94,21 +93,18 @@ namespace GeneXus.Programs {
                A166ProjectManagerId = P00972_A166ProjectManagerId[0];
                n166ProjectManagerId = P00972_n166ProjectManagerId[0];
                A102ProjectId = P00972_A102ProjectId[0];
-               AV21GXLvl10 = 1;
+               AV21GXLvl9 = 1;
                pr_default.readNext(0);
             }
             pr_default.close(0);
-            if ( AV21GXLvl10 == 0 )
+            if ( AV21GXLvl9 == 0 )
             {
                AV9GAMUser = new GeneXus.Programs.genexussecurity.SdtGAMUser(context).getbylogin("local", AV15CurrentEmployee.gxTpr_Employeeemail, out  AV10GAMErrorCollection);
                AV9GAMUser.deleterole( AV11GAMRole, out  AV10GAMErrorCollection);
             }
          }
          AV8Employee.Load(AV19EmployeeId);
-         new logtofile(context ).execute(  "Employee: "+AV8Employee.gxTpr_Employeename) ;
          AV9GAMUser = new GeneXus.Programs.genexussecurity.SdtGAMUser(context).getbylogin("local", AV8Employee.gxTpr_Employeeemail, out  AV10GAMErrorCollection);
-         new logtofile(context ).execute(  "Errors: "+AV10GAMErrorCollection.ToJSonString(false)) ;
-         new logtofile(context ).execute(  "User: "+AV9GAMUser.gxTpr_Email) ;
          AV9GAMUser.addrolebyid( AV11GAMRole.gxTpr_Id, out  AV10GAMErrorCollection);
          context.CommitDataStores("assignprojectmanagerrole",pr_default);
          this.cleanup();
@@ -155,7 +151,7 @@ namespace GeneXus.Programs {
          /* GeneXus formulas. */
       }
 
-      private short AV21GXLvl10 ;
+      private short AV21GXLvl9 ;
       private long AV19EmployeeId ;
       private long AV20ProjectId ;
       private long A166ProjectManagerId ;

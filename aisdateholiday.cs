@@ -185,7 +185,6 @@ namespace GeneXus.Programs {
             A113HolidayId = P00AY3_A113HolidayId[0];
             A157CompanyLocationId = P00AY3_A157CompanyLocationId[0];
             AV11IsHoliday = true;
-            new logtofile(context ).execute(  "    "+new formatdatetime(context).executeUdp(  AV8Date,  "MMMM DD")+" Is Public") ;
             pr_default.close(1);
             this.cleanup();
             if (true) return;
@@ -202,7 +201,6 @@ namespace GeneXus.Programs {
             A106EmployeeId = P00AY4_A106EmployeeId[0];
             A127LeaveRequestId = P00AY4_A127LeaveRequestId[0];
             AV11IsHoliday = true;
-            new logtofile(context ).execute(  "Is Employee Vacation") ;
             pr_default.close(2);
             this.cleanup();
             if (true) return;
@@ -330,8 +328,8 @@ namespace GeneXus.Programs {
           };
           def= new CursorDef[] {
               new CursorDef("P00AY2", "SELECT T1.CompanyId, T1.EmployeeId, T1.EmployeeName, T2.CompanyLocationId FROM (Employee T1 INNER JOIN Company T2 ON T2.CompanyId = T1.CompanyId) WHERE T1.EmployeeId = :AV9EmployeeId ORDER BY T1.EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00AY2,1, GxCacheFrequency.OFF ,true,true )
-             ,new CursorDef("P00AY3", "SELECT T1.CompanyId, T2.CompanyLocationId, T1.HolidayStartDate, T1.HolidayId FROM (Holiday T1 INNER JOIN Company T2 ON T2.CompanyId = T1.CompanyId) WHERE (T1.HolidayStartDate = :AV8Date) AND (T2.CompanyLocationId = :AV10CompanyLocationId) ORDER BY T1.HolidayId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00AY3,1, GxCacheFrequency.OFF ,true,true )
-             ,new CursorDef("P00AY4", "SELECT LeaveRequestEndDate, LeaveRequestStartDate, LeaveRequestStatus, EmployeeId, LeaveRequestId FROM LeaveRequest WHERE (EmployeeId = :AV9EmployeeId) AND (LeaveRequestStartDate <= :AV8Date) AND (LeaveRequestEndDate >= :AV8Date) AND (LeaveRequestStatus = ( 'Approved')) ORDER BY EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00AY4,1, GxCacheFrequency.OFF ,true,true )
+             ,new CursorDef("P00AY3", "SELECT T1.CompanyId, T2.CompanyLocationId, T1.HolidayStartDate, T1.HolidayId FROM (Holiday T1 INNER JOIN Company T2 ON T2.CompanyId = T1.CompanyId) WHERE (T1.HolidayStartDate = :AV8Date) AND (T2.CompanyLocationId = :AV10CompanyLocationId) ORDER BY T1.HolidayId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00AY3,1, GxCacheFrequency.OFF ,false,true )
+             ,new CursorDef("P00AY4", "SELECT LeaveRequestEndDate, LeaveRequestStartDate, LeaveRequestStatus, EmployeeId, LeaveRequestId FROM LeaveRequest WHERE (EmployeeId = :AV9EmployeeId) AND (LeaveRequestStartDate <= :AV8Date) AND (LeaveRequestEndDate >= :AV8Date) AND (LeaveRequestStatus = ( 'Approved')) ORDER BY EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00AY4,1, GxCacheFrequency.OFF ,false,true )
           };
        }
     }

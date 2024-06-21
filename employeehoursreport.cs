@@ -139,7 +139,6 @@ namespace GeneXus.Programs {
             this.cleanup();
             if (true) return;
          }
-         new logtofile(context ).execute(  context.localUtil.DToC( AV10FromDate, 1, "/")+" - "+context.localUtil.DToC( AV11ToDate, 1, "/")) ;
          AV31headerCellStyle = new GeneXus.Programs.genexusoffice.office.excel.style.SdtExcelCellStyle(context);
          AV31headerCellStyle.gxTpr_Font.gxTpr_Bold = true;
          AV31headerCellStyle.gxTpr_Font.gxTpr_Size = 13;

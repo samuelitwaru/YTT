@@ -1043,7 +1043,6 @@ namespace GeneXus.Programs {
       {
          /* General\GlobalEvents_Leaverequeststatuschanged Routine */
          returnInSub = false;
-         GX_msglist.addItem("Leave Request Approved Successfully");
          /* Execute user subroutine: 'GETDATA' */
          S112 ();
          if (returnInSub) return;
@@ -1065,15 +1064,12 @@ namespace GeneXus.Programs {
       {
          /* 'GETDATA' Routine */
          returnInSub = false;
-         new logtofile(context ).execute(  context.localUtil.DToC( AV10DateRange, 1, "/")+" - "+context.localUtil.DToC( AV16DateRange_To, 1, "/")) ;
          GXt_objcol_SdtSDTLeaveEvent5 = AV6LeaveEvents;
          new dpleaveevent(context ).execute(  AV10DateRange,  AV16DateRange_To,  AV11CompanyLocationId, out  GXt_objcol_SdtSDTLeaveEvent5) ;
          AV6LeaveEvents = GXt_objcol_SdtSDTLeaveEvent5;
          GXt_objcol_SdtSDTLeaveEventGroup6 = AV7LeaveEventGroups;
          new dpleaveeventgroup(context ).execute(  AV10DateRange,  AV16DateRange_To,  AV11CompanyLocationId, out  GXt_objcol_SdtSDTLeaveEventGroup6) ;
          AV7LeaveEventGroups = GXt_objcol_SdtSDTLeaveEventGroup6;
-         new logtofile(context ).execute(  AV6LeaveEvents.ToJSonString(false)) ;
-         new logtofile(context ).execute(  AV7LeaveEventGroups.ToJSonString(false)) ;
       }
 
       protected void nextLoad( )
@@ -1126,7 +1122,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202462110201467", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202462114252812", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1142,7 +1138,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("leavecalendar.js", "?202462110201467", false, true);
+         context.AddJavascriptSource("leavecalendar.js", "?202462114252812", false, true);
          context.AddJavascriptSource("UserControls/UCVISTimelineRender.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/daterangepicker/locales.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/daterangepicker/wwp-daterangepicker.js", "", false, true);
