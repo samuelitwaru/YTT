@@ -793,7 +793,7 @@ namespace GeneXus.Programs {
             }
             if ( AV48GamUser.checkrole("Manager") )
             {
-               CallWebObject(formatLink("leavecalendar.aspx") );
+               CallWebObject(formatLink("leavecalendarold.aspx") );
                context.wjLocDisableFrm = 1;
             }
             if ( AV48GamUser.checkrole("Project Manager") )
@@ -866,7 +866,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024524831524", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202462110202446", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -882,7 +882,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("setnewpassword.js", "?2024524831528", false, true);
+         context.AddJavascriptSource("setnewpassword.js", "?202462110202449", false, true);
          /* End function include_jscripts */
       }
 

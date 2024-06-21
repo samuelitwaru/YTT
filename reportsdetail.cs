@@ -276,7 +276,7 @@ namespace GeneXus.Programs {
                enableOutput();
             }
             context.WriteHtmlText( "<title>") ;
-            context.SendWebValue( " Employee") ;
+            context.SendWebValue( " Employees") ;
             context.WriteHtmlTextNl( "</title>") ;
             if ( context.isSpaRequest( ) )
             {
@@ -494,7 +494,7 @@ namespace GeneXus.Programs {
 
       public override string GetPgmdesc( )
       {
-         return " Employee" ;
+         return " Employees" ;
       }
 
       protected void WB4T0( )
@@ -652,7 +652,7 @@ namespace GeneXus.Programs {
                   Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
                }
             }
-            Form.Meta.addItem("description", " Employee", 0) ;
+            Form.Meta.addItem("description", " Employees", 0) ;
             context.wjLoc = "";
             context.nUserReturn = 0;
             context.wbHandled = 0;
@@ -1681,7 +1681,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024613158131", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202462110173632", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1697,7 +1697,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("reportsdetail.js", "?2024613158132", false, true);
+         context.AddJavascriptSource("reportsdetail.js", "?202462110173633", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/DVPaginationBar/DVPaginationBarRender.js", "", false, true);

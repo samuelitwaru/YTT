@@ -170,7 +170,7 @@ namespace GeneXus.Programs {
          if ( ! ( String.IsNullOrEmpty(StringUtil.RTrim( AV38TFProjectName_Sel)) ) )
          {
             GXt_int2 = (short)(AV14CellRow);
-            new GeneXus.Programs.wwpbaseobjects.wwp_exportwritefilter(context ).execute( ref  AV11ExcelDocument,  true, ref  GXt_int2,  (short)(AV15FirstColumn),  "Name") ;
+            new GeneXus.Programs.wwpbaseobjects.wwp_exportwritefilter(context ).execute( ref  AV11ExcelDocument,  true, ref  GXt_int2,  (short)(AV15FirstColumn),  "Project Name") ;
             AV14CellRow = GXt_int2;
             GXt_char1 = "";
             new GeneXus.Programs.wwpbaseobjects.wwp_export_securetext(context ).execute(  (String.IsNullOrEmpty(StringUtil.RTrim( AV38TFProjectName_Sel)) ? "(Empty)" : AV38TFProjectName_Sel), out  GXt_char1) ;
@@ -181,7 +181,7 @@ namespace GeneXus.Programs {
             if ( ! ( String.IsNullOrEmpty(StringUtil.RTrim( AV37TFProjectName)) ) )
             {
                GXt_int2 = (short)(AV14CellRow);
-               new GeneXus.Programs.wwpbaseobjects.wwp_exportwritefilter(context ).execute( ref  AV11ExcelDocument,  true, ref  GXt_int2,  (short)(AV15FirstColumn),  "Name") ;
+               new GeneXus.Programs.wwpbaseobjects.wwp_exportwritefilter(context ).execute( ref  AV11ExcelDocument,  true, ref  GXt_int2,  (short)(AV15FirstColumn),  "Project Name") ;
                AV14CellRow = GXt_int2;
                GXt_char1 = "";
                new GeneXus.Programs.wwpbaseobjects.wwp_export_securetext(context ).execute(  AV37TFProjectName, out  GXt_char1) ;
@@ -328,18 +328,18 @@ namespace GeneXus.Programs {
          lV53Projectwwds_2_tfprojectname = StringUtil.PadR( StringUtil.RTrim( AV53Projectwwds_2_tfprojectname), 100, "%");
          lV55Projectwwds_4_tfprojectdescription = StringUtil.Concat( StringUtil.RTrim( AV55Projectwwds_4_tfprojectdescription), "%", "");
          lV58Projectwwds_7_tfprojectmanagername = StringUtil.PadR( StringUtil.RTrim( AV58Projectwwds_7_tfprojectmanagername), 128, "%");
-         /* Using cursor P007G2 */
+         /* Using cursor P00B42 */
          pr_default.execute(0, new Object[] {lV52Projectwwds_1_filterfulltext, lV52Projectwwds_1_filterfulltext, lV52Projectwwds_1_filterfulltext, lV52Projectwwds_1_filterfulltext, lV52Projectwwds_1_filterfulltext, lV53Projectwwds_2_tfprojectname, AV54Projectwwds_3_tfprojectname_sel, lV55Projectwwds_4_tfprojectdescription, AV56Projectwwds_5_tfprojectdescription_sel, lV58Projectwwds_7_tfprojectmanagername, AV59Projectwwds_8_tfprojectmanagername_sel});
          while ( (pr_default.getStatus(0) != 101) )
          {
-            A166ProjectManagerId = P007G2_A166ProjectManagerId[0];
-            n166ProjectManagerId = P007G2_n166ProjectManagerId[0];
-            A167ProjectManagerName = P007G2_A167ProjectManagerName[0];
-            A104ProjectDescription = P007G2_A104ProjectDescription[0];
-            A103ProjectName = P007G2_A103ProjectName[0];
-            A105ProjectStatus = P007G2_A105ProjectStatus[0];
-            A102ProjectId = P007G2_A102ProjectId[0];
-            A167ProjectManagerName = P007G2_A167ProjectManagerName[0];
+            A166ProjectManagerId = P00B42_A166ProjectManagerId[0];
+            n166ProjectManagerId = P00B42_n166ProjectManagerId[0];
+            A167ProjectManagerName = P00B42_A167ProjectManagerName[0];
+            A104ProjectDescription = P00B42_A104ProjectDescription[0];
+            A103ProjectName = P00B42_A103ProjectName[0];
+            A105ProjectStatus = P00B42_A105ProjectStatus[0];
+            A102ProjectId = P00B42_A102ProjectId[0];
+            A167ProjectManagerName = P00B42_A167ProjectManagerName[0];
             AV14CellRow = (int)(AV14CellRow+1);
             /* Execute user subroutine: 'BEFOREWRITELINE' */
             S172 ();
@@ -428,7 +428,7 @@ namespace GeneXus.Programs {
          /* 'INITIALIZECOLUMNSSELECTOR' Routine */
          returnInSub = false;
          AV24ColumnsSelector = new GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector(context);
-         new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV24ColumnsSelector,  "ProjectName",  "",  "Name",  true,  "") ;
+         new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV24ColumnsSelector,  "ProjectName",  "",  "Project Name",  true,  "") ;
          new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV24ColumnsSelector,  "ProjectDescription",  "",  "Description",  true,  "") ;
          new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV24ColumnsSelector,  "ProjectStatus",  "",  "Status",  true,  "") ;
          new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV24ColumnsSelector,  "ProjectManagerName",  "",  "Manager Name",  true,  "") ;
@@ -559,13 +559,13 @@ namespace GeneXus.Programs {
          A103ProjectName = "";
          A104ProjectDescription = "";
          A167ProjectManagerName = "";
-         P007G2_A166ProjectManagerId = new long[1] ;
-         P007G2_n166ProjectManagerId = new bool[] {false} ;
-         P007G2_A167ProjectManagerName = new string[] {""} ;
-         P007G2_A104ProjectDescription = new string[] {""} ;
-         P007G2_A103ProjectName = new string[] {""} ;
-         P007G2_A105ProjectStatus = new string[] {""} ;
-         P007G2_A102ProjectId = new long[1] ;
+         P00B42_A166ProjectManagerId = new long[1] ;
+         P00B42_n166ProjectManagerId = new bool[] {false} ;
+         P00B42_A167ProjectManagerName = new string[] {""} ;
+         P00B42_A104ProjectDescription = new string[] {""} ;
+         P00B42_A103ProjectName = new string[] {""} ;
+         P00B42_A105ProjectStatus = new string[] {""} ;
+         P00B42_A102ProjectId = new long[1] ;
          AV28UserCustomValue = "";
          GXt_char1 = "";
          AV25ColumnsSelectorAux = new GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector(context);
@@ -575,7 +575,7 @@ namespace GeneXus.Programs {
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.projectwwexport__default(),
             new Object[][] {
                 new Object[] {
-               P007G2_A166ProjectManagerId, P007G2_n166ProjectManagerId, P007G2_A167ProjectManagerName, P007G2_A104ProjectDescription, P007G2_A103ProjectName, P007G2_A105ProjectStatus, P007G2_A102ProjectId
+               P00B42_A166ProjectManagerId, P00B42_n166ProjectManagerId, P00B42_A167ProjectManagerName, P00B42_A104ProjectDescription, P00B42_A103ProjectName, P00B42_A105ProjectStatus, P00B42_A102ProjectId
                }
             }
          );
@@ -633,13 +633,13 @@ namespace GeneXus.Programs {
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private IDataStoreProvider pr_default ;
-      private long[] P007G2_A166ProjectManagerId ;
-      private bool[] P007G2_n166ProjectManagerId ;
-      private string[] P007G2_A167ProjectManagerName ;
-      private string[] P007G2_A104ProjectDescription ;
-      private string[] P007G2_A103ProjectName ;
-      private string[] P007G2_A105ProjectStatus ;
-      private long[] P007G2_A102ProjectId ;
+      private long[] P00B42_A166ProjectManagerId ;
+      private bool[] P00B42_n166ProjectManagerId ;
+      private string[] P00B42_A167ProjectManagerName ;
+      private string[] P00B42_A104ProjectDescription ;
+      private string[] P00B42_A103ProjectName ;
+      private string[] P00B42_A105ProjectStatus ;
+      private long[] P00B42_A102ProjectId ;
       private string aP0_Filename ;
       private string aP1_ErrorMessage ;
       private ExcelDocumentI AV11ExcelDocument ;
@@ -655,7 +655,7 @@ namespace GeneXus.Programs {
 
    public class projectwwexport__default : DataStoreHelperBase, IDataStoreHelper
    {
-      protected Object[] conditional_P007G2( IGxContext context ,
+      protected Object[] conditional_P00B42( IGxContext context ,
                                              string A105ProjectStatus ,
                                              GxSimpleCollection<string> AV57Projectwwds_6_tfprojectstatus_sels ,
                                              string AV52Projectwwds_1_filterfulltext ,
@@ -798,7 +798,7 @@ namespace GeneXus.Programs {
          switch ( cursor )
          {
                case 0 :
-                     return conditional_P007G2(context, (string)dynConstraints[0] , (GxSimpleCollection<string>)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (int)dynConstraints[7] , (string)dynConstraints[8] , (string)dynConstraints[9] , (string)dynConstraints[10] , (string)dynConstraints[11] , (string)dynConstraints[12] , (short)dynConstraints[13] , (bool)dynConstraints[14] );
+                     return conditional_P00B42(context, (string)dynConstraints[0] , (GxSimpleCollection<string>)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (int)dynConstraints[7] , (string)dynConstraints[8] , (string)dynConstraints[9] , (string)dynConstraints[10] , (string)dynConstraints[11] , (string)dynConstraints[12] , (short)dynConstraints[13] , (bool)dynConstraints[14] );
          }
          return base.getDynamicStatement(cursor, context, dynConstraints);
       }
@@ -816,8 +816,8 @@ namespace GeneXus.Programs {
     {
        if ( def == null )
        {
-          Object[] prmP007G2;
-          prmP007G2 = new Object[] {
+          Object[] prmP00B42;
+          prmP00B42 = new Object[] {
           new ParDef("lV52Projectwwds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV52Projectwwds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV52Projectwwds_1_filterfulltext",GXType.VarChar,100,0) ,
@@ -831,7 +831,7 @@ namespace GeneXus.Programs {
           new ParDef("AV59Projectwwds_8_tfprojectmanagername_sel",GXType.Char,128,0)
           };
           def= new CursorDef[] {
-              new CursorDef("P007G2", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP007G2,100, GxCacheFrequency.OFF ,true,false )
+              new CursorDef("P00B42", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00B42,100, GxCacheFrequency.OFF ,true,false )
           };
        }
     }

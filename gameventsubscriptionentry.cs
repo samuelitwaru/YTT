@@ -254,9 +254,6 @@ namespace GeneXus.Programs {
          {
             enableOutput();
          }
-         context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
-         context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
-         context.AddJavascriptSource("DVelop/Bootstrap/Panel/BootstrapPanelRender.js", "", false, true);
          context.WriteHtmlText( Form.Headerrawhtml) ;
          context.CloseHtmlHeader();
          if ( context.isSpaRequest( ) )
@@ -312,16 +309,6 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "gxhash_vID", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV14Id, "")), context));
          GxWebStd.gx_hidden_field( context, "vMODE", StringUtil.RTrim( Gx_mode));
          GxWebStd.gx_hidden_field( context, "gxhash_vMODE", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( Gx_mode, "@!")), context));
-         GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEATTRIBUTES_Width", StringUtil.RTrim( Dvpanel_tableattributes_Width));
-         GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEATTRIBUTES_Autowidth", StringUtil.BoolToStr( Dvpanel_tableattributes_Autowidth));
-         GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEATTRIBUTES_Autoheight", StringUtil.BoolToStr( Dvpanel_tableattributes_Autoheight));
-         GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEATTRIBUTES_Cls", StringUtil.RTrim( Dvpanel_tableattributes_Cls));
-         GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEATTRIBUTES_Title", StringUtil.RTrim( Dvpanel_tableattributes_Title));
-         GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEATTRIBUTES_Collapsible", StringUtil.BoolToStr( Dvpanel_tableattributes_Collapsible));
-         GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEATTRIBUTES_Collapsed", StringUtil.BoolToStr( Dvpanel_tableattributes_Collapsed));
-         GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEATTRIBUTES_Showcollapseicon", StringUtil.BoolToStr( Dvpanel_tableattributes_Showcollapseicon));
-         GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEATTRIBUTES_Iconposition", StringUtil.RTrim( Dvpanel_tableattributes_Iconposition));
-         GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEATTRIBUTES_Autoscroll", StringUtil.BoolToStr( Dvpanel_tableattributes_Autoscroll));
       }
 
       public override void RenderHtmlCloseForm( )
@@ -430,19 +417,6 @@ namespace GeneXus.Programs {
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-sm-9 col-lg-6", "start", "top", "", "", "div");
-            /* User Defined Control */
-            ucDvpanel_tableattributes.SetProperty("Width", Dvpanel_tableattributes_Width);
-            ucDvpanel_tableattributes.SetProperty("AutoWidth", Dvpanel_tableattributes_Autowidth);
-            ucDvpanel_tableattributes.SetProperty("AutoHeight", Dvpanel_tableattributes_Autoheight);
-            ucDvpanel_tableattributes.SetProperty("Cls", Dvpanel_tableattributes_Cls);
-            ucDvpanel_tableattributes.SetProperty("Title", Dvpanel_tableattributes_Title);
-            ucDvpanel_tableattributes.SetProperty("Collapsible", Dvpanel_tableattributes_Collapsible);
-            ucDvpanel_tableattributes.SetProperty("Collapsed", Dvpanel_tableattributes_Collapsed);
-            ucDvpanel_tableattributes.SetProperty("ShowCollapseIcon", Dvpanel_tableattributes_Showcollapseicon);
-            ucDvpanel_tableattributes.SetProperty("IconPosition", Dvpanel_tableattributes_Iconposition);
-            ucDvpanel_tableattributes.SetProperty("AutoScroll", Dvpanel_tableattributes_Autoscroll);
-            ucDvpanel_tableattributes.Render(context, "dvelop.gxbootstrap.panel_al", Dvpanel_tableattributes_Internalname, "DVPANEL_TABLEATTRIBUTESContainer");
-            context.WriteHtmlText( "<div class=\"gx_usercontrol_child\" id=\""+"DVPANEL_TABLEATTRIBUTESContainer"+"TableAttributes"+"\" style=\"display:none;\">") ;
             /* Div Control */
             GxWebStd.gx_div_start( context, divTableattributes_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
             /* Div Control */
@@ -456,8 +430,8 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
             /* Single line edit */
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 22,'',false,'',0)\"";
-            GxWebStd.gx_single_line_edit( context, edtavDescription_Internalname, StringUtil.RTrim( AV8Description), StringUtil.RTrim( context.localUtil.Format( AV8Description, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,22);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavDescription_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavDescription_Enabled, 1, "text", "", 40, "chr", 1, "row", 40, 0, 0, 0, 0, -1, 0, true, "GeneXusSecurityCommon\\GAMGUID", "start", true, "", "HLP_GAMEventSubscriptionEntry.htm");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 20,'',false,'',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtavDescription_Internalname, StringUtil.RTrim( AV8Description), StringUtil.RTrim( context.localUtil.Format( AV8Description, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,20);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavDescription_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavDescription_Enabled, 1, "text", "", 40, "chr", 1, "row", 40, 0, 0, 0, 0, -1, 0, true, "GeneXusSecurityCommon\\GAMGUID", "start", true, "", "HLP_GAMEventSubscriptionEntry.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -469,9 +443,9 @@ namespace GeneXus.Programs {
             GxWebStd.gx_label_element( context, cmbavStatus_Internalname, "Status", " AttributeLabel", 1, true, "");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 26,'',false,'',0)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 24,'',false,'',0)\"";
             /* ComboBox */
-            GxWebStd.gx_combobox_ctrl1( context, cmbavStatus, cmbavStatus_Internalname, StringUtil.RTrim( AV16Status), 1, cmbavStatus_Jsonclick, 0, "'"+""+"'"+",false,"+"'"+""+"'", "char", "", 1, cmbavStatus.Enabled, 0, 0, 0, "em", 0, "", "", "Attribute", "", "", TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,26);\"", "", true, 0, "HLP_GAMEventSubscriptionEntry.htm");
+            GxWebStd.gx_combobox_ctrl1( context, cmbavStatus, cmbavStatus_Internalname, StringUtil.RTrim( AV16Status), 1, cmbavStatus_Jsonclick, 0, "'"+""+"'"+",false,"+"'"+""+"'", "char", "", 1, cmbavStatus.Enabled, 0, 0, 0, "em", 0, "", "", "Attribute", "", "", TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,24);\"", "", true, 0, "HLP_GAMEventSubscriptionEntry.htm");
             cmbavStatus.CurrentValue = StringUtil.RTrim( AV16Status);
             AssignProp("", false, cmbavStatus_Internalname, "Values", (string)(cmbavStatus.ToJavascriptSource()), true);
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -488,9 +462,9 @@ namespace GeneXus.Programs {
             GxWebStd.gx_label_element( context, cmbavEvent_Internalname, "Event", " AttributeLabel", 1, true, "");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 31,'',false,'',0)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 29,'',false,'',0)\"";
             /* ComboBox */
-            GxWebStd.gx_combobox_ctrl1( context, cmbavEvent, cmbavEvent_Internalname, StringUtil.RTrim( AV11Event), 1, cmbavEvent_Jsonclick, 0, "'"+""+"'"+",false,"+"'"+""+"'", "char", "", 1, cmbavEvent.Enabled, 1, 0, 0, "em", 0, "", "", "Attribute", "", "", TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,31);\"", "", true, 0, "HLP_GAMEventSubscriptionEntry.htm");
+            GxWebStd.gx_combobox_ctrl1( context, cmbavEvent, cmbavEvent_Internalname, StringUtil.RTrim( AV11Event), 1, cmbavEvent_Jsonclick, 0, "'"+""+"'"+",false,"+"'"+""+"'", "char", "", 1, cmbavEvent.Enabled, 1, 0, 0, "em", 0, "", "", "Attribute", "", "", TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,29);\"", "", true, 0, "HLP_GAMEventSubscriptionEntry.htm");
             cmbavEvent.CurrentValue = StringUtil.RTrim( AV11Event);
             AssignProp("", false, cmbavEvent_Internalname, "Values", (string)(cmbavEvent.ToJavascriptSource()), true);
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -505,8 +479,8 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
             /* Single line edit */
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 35,'',false,'',0)\"";
-            GxWebStd.gx_single_line_edit( context, edtavFilename_Internalname, StringUtil.RTrim( AV13FileName), StringUtil.RTrim( context.localUtil.Format( AV13FileName, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,35);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavFilename_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavFilename_Enabled, 1, "text", "", 0, "px", 1, "row", 254, 0, 0, 0, 0, -1, -1, true, "GeneXusSecurityCommon\\GAMDescriptionLong", "start", true, "", "HLP_GAMEventSubscriptionEntry.htm");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 33,'',false,'',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtavFilename_Internalname, StringUtil.RTrim( AV13FileName), StringUtil.RTrim( context.localUtil.Format( AV13FileName, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,33);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavFilename_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavFilename_Enabled, 1, "text", "", 0, "px", 1, "row", 254, 0, 0, 0, 0, -1, -1, true, "GeneXusSecurityCommon\\GAMDescriptionLong", "start", true, "", "HLP_GAMEventSubscriptionEntry.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -522,8 +496,8 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
             /* Single line edit */
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 40,'',false,'',0)\"";
-            GxWebStd.gx_single_line_edit( context, edtavClassname_Internalname, StringUtil.RTrim( AV7ClassName), StringUtil.RTrim( context.localUtil.Format( AV7ClassName, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,40);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavClassname_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavClassname_Enabled, 1, "text", "", 60, "chr", 1, "row", 60, 0, 0, 0, 0, -1, -1, true, "GeneXusSecurityCommon\\GAMDescriptionShort", "start", true, "", "HLP_GAMEventSubscriptionEntry.htm");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 38,'',false,'',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtavClassname_Internalname, StringUtil.RTrim( AV7ClassName), StringUtil.RTrim( context.localUtil.Format( AV7ClassName, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,38);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavClassname_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavClassname_Enabled, 1, "text", "", 60, "chr", 1, "row", 60, 0, 0, 0, 0, -1, -1, true, "GeneXusSecurityCommon\\GAMDescriptionShort", "start", true, "", "HLP_GAMEventSubscriptionEntry.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -536,14 +510,13 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
             /* Single line edit */
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 44,'',false,'',0)\"";
-            GxWebStd.gx_single_line_edit( context, edtavMethodname_Internalname, StringUtil.RTrim( AV15MethodName), StringUtil.RTrim( context.localUtil.Format( AV15MethodName, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,44);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavMethodname_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavMethodname_Enabled, 1, "text", "", 60, "chr", 1, "row", 60, 0, 0, 0, 0, -1, -1, true, "GeneXusSecurityCommon\\GAMDescriptionShort", "start", true, "", "HLP_GAMEventSubscriptionEntry.htm");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 42,'',false,'',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtavMethodname_Internalname, StringUtil.RTrim( AV15MethodName), StringUtil.RTrim( context.localUtil.Format( AV15MethodName, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,42);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavMethodname_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavMethodname_Enabled, 1, "text", "", 60, "chr", 1, "row", 60, 0, 0, 0, 0, -1, -1, true, "GeneXusSecurityCommon\\GAMDescriptionShort", "start", true, "", "HLP_GAMEventSubscriptionEntry.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
-            context.WriteHtmlText( "</div>") ;
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -557,14 +530,14 @@ namespace GeneXus.Programs {
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-action-group CellMarginTop10", "start", "top", " "+"data-gx-actiongroup-type=\"toolbar\""+" ", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-button", "start", "top", "", "", "div");
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 49,'',false,'',0)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 47,'',false,'',0)\"";
             ClassString = "ButtonMaterial";
             StyleString = "";
             GxWebStd.gx_button_ctrl( context, bttBtnenter_Internalname, "", bttBtnenter_Caption, bttBtnenter_Jsonclick, 5, "Confirm", "", StyleString, ClassString, bttBtnenter_Visible, 1, "standard", "'"+""+"'"+",false,"+"'"+"EENTER."+"'", TempTags, "", context.GetButtonType( ), "HLP_GAMEventSubscriptionEntry.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-button", "start", "top", "", "", "div");
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 51,'',false,'',0)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 49,'',false,'',0)\"";
             ClassString = "ButtonMaterialDefault";
             StyleString = "";
             GxWebStd.gx_button_ctrl( context, bttBtncancel_Internalname, "", "Cancel", bttBtncancel_Jsonclick, 1, "Cancel", "", StyleString, ClassString, 1, 1, "standard", "'"+""+"'"+",false,"+"'"+"ECANCEL."+"'", TempTags, "", context.GetButtonType( ), "HLP_GAMEventSubscriptionEntry.htm");
@@ -830,16 +803,6 @@ namespace GeneXus.Programs {
          {
             /* Read saved SDTs. */
             /* Read saved values. */
-            Dvpanel_tableattributes_Width = cgiGet( "DVPANEL_TABLEATTRIBUTES_Width");
-            Dvpanel_tableattributes_Autowidth = StringUtil.StrToBool( cgiGet( "DVPANEL_TABLEATTRIBUTES_Autowidth"));
-            Dvpanel_tableattributes_Autoheight = StringUtil.StrToBool( cgiGet( "DVPANEL_TABLEATTRIBUTES_Autoheight"));
-            Dvpanel_tableattributes_Cls = cgiGet( "DVPANEL_TABLEATTRIBUTES_Cls");
-            Dvpanel_tableattributes_Title = cgiGet( "DVPANEL_TABLEATTRIBUTES_Title");
-            Dvpanel_tableattributes_Collapsible = StringUtil.StrToBool( cgiGet( "DVPANEL_TABLEATTRIBUTES_Collapsible"));
-            Dvpanel_tableattributes_Collapsed = StringUtil.StrToBool( cgiGet( "DVPANEL_TABLEATTRIBUTES_Collapsed"));
-            Dvpanel_tableattributes_Showcollapseicon = StringUtil.StrToBool( cgiGet( "DVPANEL_TABLEATTRIBUTES_Showcollapseicon"));
-            Dvpanel_tableattributes_Iconposition = cgiGet( "DVPANEL_TABLEATTRIBUTES_Iconposition");
-            Dvpanel_tableattributes_Autoscroll = StringUtil.StrToBool( cgiGet( "DVPANEL_TABLEATTRIBUTES_Autoscroll"));
             /* Read variables values. */
             AV8Description = cgiGet( edtavDescription_Internalname);
             AssignAttri("", false, "AV8Description", AV8Description);
@@ -1021,7 +984,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024618957475", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20246211019816", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1037,10 +1000,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("gameventsubscriptionentry.js", "?2024618957475", false, true);
-         context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
-         context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
-         context.AddJavascriptSource("DVelop/Bootstrap/Panel/BootstrapPanelRender.js", "", false, true);
+         context.AddJavascriptSource("gameventsubscriptionentry.js", "?20246211019816", false, true);
          /* End function include_jscripts */
       }
 
@@ -1087,7 +1047,6 @@ namespace GeneXus.Programs {
          edtavClassname_Internalname = "vCLASSNAME";
          edtavMethodname_Internalname = "vMETHODNAME";
          divTableattributes_Internalname = "TABLEATTRIBUTES";
-         Dvpanel_tableattributes_Internalname = "DVPANEL_TABLEATTRIBUTES";
          divTablecontent_Internalname = "TABLECONTENT";
          bttBtnenter_Internalname = "BTNENTER";
          bttBtncancel_Internalname = "BTNCANCEL";
@@ -1119,16 +1078,6 @@ namespace GeneXus.Programs {
          edtavDescription_Jsonclick = "";
          edtavDescription_Enabled = 1;
          divLayoutmaintable_Class = "Table TableTransactionTemplate";
-         Dvpanel_tableattributes_Autoscroll = Convert.ToBoolean( 0);
-         Dvpanel_tableattributes_Iconposition = "Right";
-         Dvpanel_tableattributes_Showcollapseicon = Convert.ToBoolean( 0);
-         Dvpanel_tableattributes_Collapsed = Convert.ToBoolean( 0);
-         Dvpanel_tableattributes_Collapsible = Convert.ToBoolean( 0);
-         Dvpanel_tableattributes_Title = "General Information";
-         Dvpanel_tableattributes_Cls = "PanelCard_GrayTitle";
-         Dvpanel_tableattributes_Autoheight = Convert.ToBoolean( -1);
-         Dvpanel_tableattributes_Autowidth = Convert.ToBoolean( 0);
-         Dvpanel_tableattributes_Width = "100%";
          Form.Headerrawhtml = "";
          Form.Background = "";
          Form.Textcolor = 0;
@@ -1186,7 +1135,6 @@ namespace GeneXus.Programs {
          sPrefix = "";
          ClassString = "";
          StyleString = "";
-         ucDvpanel_tableattributes = new GXUserControl();
          TempTags = "";
          AV8Description = "";
          AV16Status = "";
@@ -1242,10 +1190,6 @@ namespace GeneXus.Programs {
       private string FormProcess ;
       private string bodyStyle ;
       private string GXKey ;
-      private string Dvpanel_tableattributes_Width ;
-      private string Dvpanel_tableattributes_Cls ;
-      private string Dvpanel_tableattributes_Title ;
-      private string Dvpanel_tableattributes_Iconposition ;
       private string GX_FocusControl ;
       private string sPrefix ;
       private string divLayoutmaintable_Internalname ;
@@ -1254,7 +1198,6 @@ namespace GeneXus.Programs {
       private string ClassString ;
       private string StyleString ;
       private string divTablecontent_Internalname ;
-      private string Dvpanel_tableattributes_Internalname ;
       private string divTableattributes_Internalname ;
       private string edtavDescription_Internalname ;
       private string TempTags ;
@@ -1286,18 +1229,11 @@ namespace GeneXus.Programs {
       private string sEvtType ;
       private bool entryPointCalled ;
       private bool toggleJsOutput ;
-      private bool Dvpanel_tableattributes_Autowidth ;
-      private bool Dvpanel_tableattributes_Autoheight ;
-      private bool Dvpanel_tableattributes_Collapsible ;
-      private bool Dvpanel_tableattributes_Collapsed ;
-      private bool Dvpanel_tableattributes_Showcollapseicon ;
-      private bool Dvpanel_tableattributes_Autoscroll ;
       private bool wbLoad ;
       private bool Rfr0gs ;
       private bool wbErr ;
       private bool gxdyncontrolsrefreshing ;
       private bool returnInSub ;
-      private GXUserControl ucDvpanel_tableattributes ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private string aP0_Gx_mode ;

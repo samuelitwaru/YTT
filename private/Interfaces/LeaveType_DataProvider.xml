@@ -2,7 +2,7 @@
 <CallableObject guid="6d119b52-4fc5-7236-8d66-918adb676961" name="LeaveType_DataProvider" description="Leave Type_Data Provider" namespace="GeneXus.Programs">
   <Signature name="parm">
     <Parameter name="ReturnValue" accessor="out" collection="true">
-      <Field name="LeaveType" description="Leave Type">
+      <Field name="LeaveType" description="Leave Types">
         <Fields>
           <Field name="LeaveTypeId" description="Leave Type Id">
             <Properties>

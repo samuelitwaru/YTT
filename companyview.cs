@@ -496,7 +496,7 @@ namespace GeneXus.Programs {
             context.WriteHtmlText( "</div>") ;
             context.WriteHtmlText( "<div class=\"gx_usercontrol_child\" id=\""+"TABSContainer"+"title2"+"\" style=\"display:none;\">") ;
             /* Text block */
-            GxWebStd.gx_label_ctrl( context, lblEmployee_title_Internalname, "Employee", "", "", lblEmployee_title_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "TextBlock", 0, "", 1, 1, 0, 0, "HLP_CompanyView.htm");
+            GxWebStd.gx_label_ctrl( context, lblEmployee_title_Internalname, "Employees", "", "", lblEmployee_title_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "TextBlock", 0, "", 1, 1, 0, 0, "HLP_CompanyView.htm");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "Section", "start", "top", "", "display:none;", "div");
             context.WriteHtmlText( "Employee") ;
@@ -537,7 +537,7 @@ namespace GeneXus.Programs {
             context.WriteHtmlText( "</div>") ;
             context.WriteHtmlText( "<div class=\"gx_usercontrol_child\" id=\""+"TABSContainer"+"title3"+"\" style=\"display:none;\">") ;
             /* Text block */
-            GxWebStd.gx_label_ctrl( context, lblHoliday_title_Internalname, "Holiday", "", "", lblHoliday_title_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "TextBlock", 0, "", 1, 1, 0, 0, "HLP_CompanyView.htm");
+            GxWebStd.gx_label_ctrl( context, lblHoliday_title_Internalname, "National Holidays", "", "", lblHoliday_title_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "TextBlock", 0, "", 1, 1, 0, 0, "HLP_CompanyView.htm");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "Section", "start", "top", "", "display:none;", "div");
             context.WriteHtmlText( "Holiday") ;
@@ -578,7 +578,7 @@ namespace GeneXus.Programs {
             context.WriteHtmlText( "</div>") ;
             context.WriteHtmlText( "<div class=\"gx_usercontrol_child\" id=\""+"TABSContainer"+"title4"+"\" style=\"display:none;\">") ;
             /* Text block */
-            GxWebStd.gx_label_ctrl( context, lblLeavetype_title_Internalname, "Leave Type", "", "", lblLeavetype_title_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "TextBlock", 0, "", 1, 1, 0, 0, "HLP_CompanyView.htm");
+            GxWebStd.gx_label_ctrl( context, lblLeavetype_title_Internalname, "Leave Types", "", "", lblLeavetype_title_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "TextBlock", 0, "", 1, 1, 0, 0, "HLP_CompanyView.htm");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "Section", "start", "top", "", "display:none;", "div");
             context.WriteHtmlText( "LeaveType") ;
@@ -1224,7 +1224,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20246189543885", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20246211019257", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1240,7 +1240,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("companyview.js", "?20246189543886", false, true);
+         context.AddJavascriptSource("companyview.js", "?20246211019257", false, true);
          context.AddJavascriptSource("shared/HistoryManager/HistoryManager.js", "", false, true);
          context.AddJavascriptSource("shared/HistoryManager/rsh/json2005.js", "", false, true);
          context.AddJavascriptSource("shared/HistoryManager/rsh/rsh.js", "", false, true);

@@ -475,7 +475,7 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+dynLeaveTypeId_Internalname+"\"", "", "div");
             /* Attribute/Variable Label */
-            GxWebStd.gx_label_element( context, dynLeaveTypeId_Internalname, "Leave Type", " AttributeLabel", 1, true, "");
+            GxWebStd.gx_label_element( context, dynLeaveTypeId_Internalname, "Leave Types", " AttributeLabel", 1, true, "");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
             /* ComboBox */
@@ -490,7 +490,7 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", dynEmployeeId.Visible, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+dynEmployeeId_Internalname+"\"", "", "div");
             /* Attribute/Variable Label */
-            GxWebStd.gx_label_element( context, dynEmployeeId_Internalname, "Employee", " AttributeLabel", 1, true, "");
+            GxWebStd.gx_label_element( context, dynEmployeeId_Internalname, "Employees", " AttributeLabel", 1, true, "");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
             /* ComboBox */
@@ -1477,7 +1477,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20246189534364", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202462110181662", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1493,7 +1493,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("leaverequestgeneral.js", "?20246189534364", false, true);
+         context.AddJavascriptSource("leaverequestgeneral.js", "?202462110181662", false, true);
          /* End function include_jscripts */
       }
 

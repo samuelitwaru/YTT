@@ -100,9 +100,14 @@ namespace GeneXus.Programs {
       {
          /* GeneXus formulas */
          /* Output device settings */
-         AV10Udparg3 = new getloggedinemployeeid(context).executeUdp( );
+         GXt_int1 = AV8EmployeeId;
+         new getloggedinemployeeid(context ).execute( out  GXt_int1) ;
+         AV8EmployeeId = GXt_int1;
+         GXt_objcol_SdtSDTEmployeeLeaveDay2 = AV12Leavedays;
+         new getleavedays(context ).execute(  AV8EmployeeId, out  AV9EmployeeLeaveDays) ;
+         AV12Leavedays = GXt_objcol_SdtSDTEmployeeLeaveDay2;
          /* Using cursor P00102 */
-         pr_default.execute(0, new Object[] {AV10Udparg3});
+         pr_default.execute(0, new Object[] {AV8EmployeeId});
          while ( (pr_default.getStatus(0) != 101) )
          {
             A106EmployeeId = P00102_A106EmployeeId[0];
@@ -110,19 +115,19 @@ namespace GeneXus.Programs {
             A118WorkHourLogId = P00102_A118WorkHourLogId[0];
             Gxm1wwpdaterangepickeroptions_formatteddays = new GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions_FormattedDaysItem(context);
             Gxm2wwpdaterangepickeroptions.gxTpr_Formatteddays.Add(Gxm1wwpdaterangepickeroptions_formatteddays, 0);
-            GXt_char1 = AV5blank;
+            GXt_char3 = AV5blank;
             new workhourlogdateduration(context ).execute(  A119WorkHourLogDate, out  AV6ToolTip) ;
-            AV5blank = GXt_char1;
-            GXt_dtime2 = DateTimeUtil.ResetTime( A119WorkHourLogDate ) ;
-            Gxm1wwpdaterangepickeroptions_formatteddays.gxTpr_Date = GXt_dtime2;
+            AV5blank = GXt_char3;
+            GXt_dtime4 = DateTimeUtil.ResetTime( A119WorkHourLogDate ) ;
+            Gxm1wwpdaterangepickeroptions_formatteddays.gxTpr_Date = GXt_dtime4;
             Gxm1wwpdaterangepickeroptions_formatteddays.gxTpr_Class = "daterangepicker-badge daterangepicker-badge-success";
             Gxm1wwpdaterangepickeroptions_formatteddays.gxTpr_Tooltip = AV6ToolTip;
             pr_default.readNext(0);
          }
          pr_default.close(0);
-         AV12Udparg4 = new getloggedinusercompanyid(context).executeUdp( );
+         AV15Udparg3 = new getloggedinusercompanyid(context).executeUdp( );
          /* Using cursor P00103 */
-         pr_default.execute(1, new Object[] {AV12Udparg4});
+         pr_default.execute(1, new Object[] {AV15Udparg3});
          while ( (pr_default.getStatus(1) != 101) )
          {
             A100CompanyId = P00103_A100CompanyId[0];
@@ -132,13 +137,25 @@ namespace GeneXus.Programs {
             A113HolidayId = P00103_A113HolidayId[0];
             Gxm1wwpdaterangepickeroptions_formatteddays = new GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions_FormattedDaysItem(context);
             Gxm2wwpdaterangepickeroptions.gxTpr_Formatteddays.Add(Gxm1wwpdaterangepickeroptions_formatteddays, 0);
-            GXt_dtime2 = DateTimeUtil.ResetTime( A115HolidayStartDate ) ;
-            Gxm1wwpdaterangepickeroptions_formatteddays.gxTpr_Date = GXt_dtime2;
+            GXt_dtime4 = DateTimeUtil.ResetTime( A115HolidayStartDate ) ;
+            Gxm1wwpdaterangepickeroptions_formatteddays.gxTpr_Date = GXt_dtime4;
             Gxm1wwpdaterangepickeroptions_formatteddays.gxTpr_Class = "daterangepicker-badge daterangepicker-badge-warning";
             Gxm1wwpdaterangepickeroptions_formatteddays.gxTpr_Tooltip = A114HolidayName;
             pr_default.readNext(1);
          }
          pr_default.close(1);
+         AV16GXV1 = 1;
+         while ( AV16GXV1 <= AV9EmployeeLeaveDays.Count )
+         {
+            AV7day = ((SdtSDTEmployeeLeaveDay)AV9EmployeeLeaveDays.Item(AV16GXV1));
+            Gxm1wwpdaterangepickeroptions_formatteddays = new GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions_FormattedDaysItem(context);
+            Gxm2wwpdaterangepickeroptions.gxTpr_Formatteddays.Add(Gxm1wwpdaterangepickeroptions_formatteddays, 0);
+            GXt_dtime4 = DateTimeUtil.ResetTime( AV7day.gxTpr_Date ) ;
+            Gxm1wwpdaterangepickeroptions_formatteddays.gxTpr_Date = GXt_dtime4;
+            Gxm1wwpdaterangepickeroptions_formatteddays.gxTpr_Class = "daterangepicker-badge daterangepicker-badge-info";
+            Gxm1wwpdaterangepickeroptions_formatteddays.gxTpr_Tooltip = AV7day.gxTpr_Leavetype;
+            AV16GXV1 = (int)(AV16GXV1+1);
+         }
          this.cleanup();
       }
 
@@ -158,6 +175,9 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
+         AV12Leavedays = new GXBaseCollection<SdtSDTEmployeeLeaveDay>( context, "SDTEmployeeLeaveDay", "YTT_version4");
+         GXt_objcol_SdtSDTEmployeeLeaveDay2 = new GXBaseCollection<SdtSDTEmployeeLeaveDay>( context, "SDTEmployeeLeaveDay", "YTT_version4");
+         AV9EmployeeLeaveDays = new GXBaseCollection<SdtSDTEmployeeLeaveDay>( context, "SDTEmployeeLeaveDay", "YTT_version4");
          scmdbuf = "";
          P00102_A106EmployeeId = new long[1] ;
          P00102_A119WorkHourLogDate = new DateTime[] {DateTime.MinValue} ;
@@ -165,7 +185,7 @@ namespace GeneXus.Programs {
          A119WorkHourLogDate = DateTime.MinValue;
          Gxm1wwpdaterangepickeroptions_formatteddays = new GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions_FormattedDaysItem(context);
          AV5blank = "";
-         GXt_char1 = "";
+         GXt_char3 = "";
          AV6ToolTip = "";
          P00103_A100CompanyId = new long[1] ;
          P00103_A139HolidayIsActive = new bool[] {false} ;
@@ -174,7 +194,8 @@ namespace GeneXus.Programs {
          P00103_A113HolidayId = new long[1] ;
          A115HolidayStartDate = DateTime.MinValue;
          A114HolidayName = "";
-         GXt_dtime2 = (DateTime)(DateTime.MinValue);
+         AV7day = new SdtSDTEmployeeLeaveDay(context);
+         GXt_dtime4 = (DateTime)(DateTime.MinValue);
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.dpdateformat__default(),
             new Object[][] {
                 new Object[] {
@@ -188,16 +209,18 @@ namespace GeneXus.Programs {
          /* GeneXus formulas. */
       }
 
-      private long AV10Udparg3 ;
+      private int AV16GXV1 ;
+      private long AV8EmployeeId ;
+      private long GXt_int1 ;
       private long A106EmployeeId ;
       private long A118WorkHourLogId ;
-      private long AV12Udparg4 ;
+      private long AV15Udparg3 ;
       private long A100CompanyId ;
       private long A113HolidayId ;
       private string scmdbuf ;
-      private string GXt_char1 ;
+      private string GXt_char3 ;
       private string A114HolidayName ;
-      private DateTime GXt_dtime2 ;
+      private DateTime GXt_dtime4 ;
       private DateTime A119WorkHourLogDate ;
       private DateTime A115HolidayStartDate ;
       private bool A139HolidayIsActive ;
@@ -215,6 +238,10 @@ namespace GeneXus.Programs {
       private string[] P00103_A114HolidayName ;
       private long[] P00103_A113HolidayId ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions aP0_Gxm2wwpdaterangepickeroptions ;
+      private GXBaseCollection<SdtSDTEmployeeLeaveDay> AV12Leavedays ;
+      private GXBaseCollection<SdtSDTEmployeeLeaveDay> GXt_objcol_SdtSDTEmployeeLeaveDay2 ;
+      private GXBaseCollection<SdtSDTEmployeeLeaveDay> AV9EmployeeLeaveDays ;
+      private SdtSDTEmployeeLeaveDay AV7day ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions Gxm2wwpdaterangepickeroptions ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions_FormattedDaysItem Gxm1wwpdaterangepickeroptions_formatteddays ;
    }
@@ -237,15 +264,15 @@ namespace GeneXus.Programs {
        {
           Object[] prmP00102;
           prmP00102 = new Object[] {
-          new ParDef("AV10Udparg3",GXType.Int64,10,0)
+          new ParDef("AV8EmployeeId",GXType.Int64,10,0)
           };
           Object[] prmP00103;
           prmP00103 = new Object[] {
-          new ParDef("AV12Udparg4",GXType.Int64,10,0)
+          new ParDef("AV15Udparg3",GXType.Int64,10,0)
           };
           def= new CursorDef[] {
-              new CursorDef("P00102", "SELECT EmployeeId, WorkHourLogDate, WorkHourLogId FROM WorkHourLog WHERE EmployeeId = :AV10Udparg3 ORDER BY EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00102,100, GxCacheFrequency.OFF ,true,false )
-             ,new CursorDef("P00103", "SELECT CompanyId, HolidayIsActive, HolidayStartDate, HolidayName, HolidayId FROM Holiday WHERE (CompanyId = :AV12Udparg4) AND (HolidayIsActive = TRUE) ORDER BY CompanyId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00103,100, GxCacheFrequency.OFF ,false,false )
+              new CursorDef("P00102", "SELECT EmployeeId, WorkHourLogDate, WorkHourLogId FROM WorkHourLog WHERE EmployeeId = :AV8EmployeeId ORDER BY EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00102,100, GxCacheFrequency.OFF ,true,false )
+             ,new CursorDef("P00103", "SELECT CompanyId, HolidayIsActive, HolidayStartDate, HolidayName, HolidayId FROM Holiday WHERE (CompanyId = :AV15Udparg3) AND (HolidayIsActive = TRUE) ORDER BY CompanyId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00103,100, GxCacheFrequency.OFF ,false,false )
           };
        }
     }

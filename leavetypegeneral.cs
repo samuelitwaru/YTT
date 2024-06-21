@@ -437,7 +437,7 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+edtLeaveTypeName_Internalname+"\"", "", "div");
             /* Attribute/Variable Label */
-            GxWebStd.gx_label_element( context, edtLeaveTypeName_Internalname, "Type Name", " AttributeLabel", 1, true, "");
+            GxWebStd.gx_label_element( context, edtLeaveTypeName_Internalname, "Leave Type Name", " AttributeLabel", 1, true, "");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
             /* Single line edit */
@@ -445,13 +445,20 @@ namespace GeneXus.Programs {
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-sm-6 DataContentCell DscTop", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+edtLeaveTypeColorApproved_Internalname+"\"", "", "div");
+            /* Attribute/Variable Label */
+            GxWebStd.gx_label_element( context, edtLeaveTypeColorApproved_Internalname, "Approved Leave Color", " AttributeLabel", 1, true, "");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
+            /* Single line edit */
+            GxWebStd.gx_single_line_edit( context, edtLeaveTypeColorApproved_Internalname, StringUtil.RTrim( A175LeaveTypeColorApproved), StringUtil.RTrim( context.localUtil.Format( A175LeaveTypeColorApproved, "")), "", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtLeaveTypeColorApproved_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtLeaveTypeColorApproved_Enabled, 0, "color", "", 20, "chr", 1, "row", 20, 0, 0, 0, 0, -1, -1, true, "Color", "start", true, "", "HLP_LeaveTypeGeneral.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, divUnnamedtable1_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
             /* Div Control */
@@ -459,7 +466,7 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+radLeaveTypeVacationLeave_Internalname+"\"", "", "div");
             /* Attribute/Variable Label */
-            GxWebStd.gx_label_element( context, "", "Deduct from vacation days", " AttributeLabel", 1, true, "");
+            GxWebStd.gx_label_element( context, "", "Deduct vacation days", " AttributeLabel", 1, true, "");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
             /* Radio button */
@@ -474,45 +481,13 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+radLeaveTypeLoggingWorkHours_Internalname+"\"", "", "div");
             /* Attribute/Variable Label */
-            GxWebStd.gx_label_element( context, "", "Log Work Hours", " AttributeLabel", 1, true, "");
+            GxWebStd.gx_label_element( context, "", "Log Work Hours During Leave", " AttributeLabel", 1, true, "");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
             /* Radio button */
             ClassString = "Attribute";
             StyleString = "";
             GxWebStd.gx_radio_ctrl( context, radLeaveTypeLoggingWorkHours, radLeaveTypeLoggingWorkHours_Internalname, StringUtil.RTrim( A145LeaveTypeLoggingWorkHours), "", 1, 0, 0, 0, StyleString, ClassString, "", "", 0, radLeaveTypeLoggingWorkHours_Jsonclick, "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "HLP_LeaveTypeGeneral.htm");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-sm-6 DataContentCell DscTop", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+edtLeaveTypeColorPending_Internalname+"\"", "", "div");
-            /* Attribute/Variable Label */
-            GxWebStd.gx_label_element( context, edtLeaveTypeColorPending_Internalname, "Color Pending", " AttributeLabel", 1, true, "");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
-            /* Single line edit */
-            GxWebStd.gx_single_line_edit( context, edtLeaveTypeColorPending_Internalname, StringUtil.RTrim( A174LeaveTypeColorPending), StringUtil.RTrim( context.localUtil.Format( A174LeaveTypeColorPending, "")), "", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtLeaveTypeColorPending_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtLeaveTypeColorPending_Enabled, 0, "color", "", 20, "chr", 1, "row", 20, 0, 0, 0, 0, -1, -1, true, "Color", "start", true, "", "HLP_LeaveTypeGeneral.htm");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-sm-6 DataContentCell DscTop", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+edtLeaveTypeColorApproved_Internalname+"\"", "", "div");
-            /* Attribute/Variable Label */
-            GxWebStd.gx_label_element( context, edtLeaveTypeColorApproved_Internalname, "Color Approved", " AttributeLabel", 1, true, "");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
-            /* Single line edit */
-            GxWebStd.gx_single_line_edit( context, edtLeaveTypeColorApproved_Internalname, StringUtil.RTrim( A175LeaveTypeColorApproved), StringUtil.RTrim( context.localUtil.Format( A175LeaveTypeColorApproved, "")), "", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtLeaveTypeColorApproved_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtLeaveTypeColorApproved_Enabled, 0, "color", "", 20, "chr", 1, "row", 20, 0, 0, 0, 0, -1, -1, true, "Color", "start", true, "", "HLP_LeaveTypeGeneral.htm");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -528,14 +503,14 @@ namespace GeneXus.Programs {
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-action-group CellMarginTop10", "start", "top", " "+"data-gx-actiongroup-type=\"toolbar\""+" ", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-button", "start", "top", "", "", "div");
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 40,'" + sPrefix + "',false,'',0)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 32,'" + sPrefix + "',false,'',0)\"";
             ClassString = "ButtonMaterial";
             StyleString = "";
             GxWebStd.gx_button_ctrl( context, bttBtnupdate_Internalname, "", "Update", bttBtnupdate_Jsonclick, 7, "Update", "", StyleString, ClassString, bttBtnupdate_Visible, 1, "standard", "'"+sPrefix+"'"+",false,"+"'"+"e112q1_client"+"'", TempTags, "", 2, "HLP_LeaveTypeGeneral.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-button", "start", "top", "", "", "div");
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 42,'" + sPrefix + "',false,'',0)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 34,'" + sPrefix + "',false,'',0)\"";
             ClassString = "ButtonMaterialDefault";
             StyleString = "";
             GxWebStd.gx_button_ctrl( context, bttBtndelete_Internalname, "", "Delete", bttBtndelete_Jsonclick, 7, "Delete", "", StyleString, ClassString, bttBtndelete_Visible, 1, "standard", "'"+sPrefix+"'"+",false,"+"'"+"e122q1_client"+"'", TempTags, "", 2, "HLP_LeaveTypeGeneral.htm");
@@ -556,6 +531,8 @@ namespace GeneXus.Programs {
             GxWebStd.gx_single_line_edit( context, edtLeaveTypeId_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(A124LeaveTypeId), 10, 0, ".", "")), StringUtil.LTrim( context.localUtil.Format( (decimal)(A124LeaveTypeId), "ZZZZZZZZZ9")), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtLeaveTypeId_Jsonclick, 0, "Attribute", "", "", "", "", edtLeaveTypeId_Visible, 0, 0, "text", "1", 10, "chr", 1, "row", 10, 0, 0, 0, 0, -1, 0, true, "Id", "end", false, "", "HLP_LeaveTypeGeneral.htm");
             /* Single line edit */
             GxWebStd.gx_single_line_edit( context, edtCompanyId_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(A100CompanyId), 10, 0, ".", "")), StringUtil.LTrim( context.localUtil.Format( (decimal)(A100CompanyId), "ZZZZZZZZZ9")), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtCompanyId_Jsonclick, 0, "Attribute", "", "", "", "", edtCompanyId_Visible, 0, 0, "text", "1", 10, "chr", 1, "row", 10, 0, 0, 0, 0, -1, 0, true, "Id", "end", false, "", "HLP_LeaveTypeGeneral.htm");
+            /* Single line edit */
+            GxWebStd.gx_single_line_edit( context, edtLeaveTypeColorPending_Internalname, StringUtil.RTrim( A174LeaveTypeColorPending), StringUtil.RTrim( context.localUtil.Format( A174LeaveTypeColorPending, "")), "", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtLeaveTypeColorPending_Jsonclick, 0, "Attribute", "", "", "", "", edtLeaveTypeColorPending_Visible, 0, 0, "color", "", 20, "chr", 1, "row", 20, 0, 0, 0, 0, -1, -1, true, "Color", "start", true, "", "HLP_LeaveTypeGeneral.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -843,18 +820,18 @@ namespace GeneXus.Programs {
             pr_default.execute(0, new Object[] {A124LeaveTypeId});
             while ( (pr_default.getStatus(0) != 101) )
             {
-               A100CompanyId = H002Q2_A100CompanyId[0];
-               AssignAttri(sPrefix, false, "A100CompanyId", StringUtil.LTrimStr( (decimal)(A100CompanyId), 10, 0));
-               A175LeaveTypeColorApproved = H002Q2_A175LeaveTypeColorApproved[0];
-               n175LeaveTypeColorApproved = H002Q2_n175LeaveTypeColorApproved[0];
-               AssignAttri(sPrefix, false, "A175LeaveTypeColorApproved", A175LeaveTypeColorApproved);
                A174LeaveTypeColorPending = H002Q2_A174LeaveTypeColorPending[0];
                n174LeaveTypeColorPending = H002Q2_n174LeaveTypeColorPending[0];
                AssignAttri(sPrefix, false, "A174LeaveTypeColorPending", A174LeaveTypeColorPending);
+               A100CompanyId = H002Q2_A100CompanyId[0];
+               AssignAttri(sPrefix, false, "A100CompanyId", StringUtil.LTrimStr( (decimal)(A100CompanyId), 10, 0));
                A145LeaveTypeLoggingWorkHours = H002Q2_A145LeaveTypeLoggingWorkHours[0];
                AssignAttri(sPrefix, false, "A145LeaveTypeLoggingWorkHours", A145LeaveTypeLoggingWorkHours);
                A144LeaveTypeVacationLeave = H002Q2_A144LeaveTypeVacationLeave[0];
                AssignAttri(sPrefix, false, "A144LeaveTypeVacationLeave", A144LeaveTypeVacationLeave);
+               A175LeaveTypeColorApproved = H002Q2_A175LeaveTypeColorApproved[0];
+               n175LeaveTypeColorApproved = H002Q2_n175LeaveTypeColorApproved[0];
+               AssignAttri(sPrefix, false, "A175LeaveTypeColorApproved", A175LeaveTypeColorApproved);
                A125LeaveTypeName = H002Q2_A125LeaveTypeName[0];
                AssignAttri(sPrefix, false, "A125LeaveTypeName", A125LeaveTypeName);
                /* Execute user event: Load */
@@ -880,18 +857,18 @@ namespace GeneXus.Programs {
          AV14Pgmname = "LeaveTypeGeneral";
          edtLeaveTypeName_Enabled = 0;
          AssignProp(sPrefix, false, edtLeaveTypeName_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtLeaveTypeName_Enabled), 5, 0), true);
+         edtLeaveTypeColorApproved_Enabled = 0;
+         AssignProp(sPrefix, false, edtLeaveTypeColorApproved_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtLeaveTypeColorApproved_Enabled), 5, 0), true);
          radLeaveTypeVacationLeave.Enabled = 0;
          AssignProp(sPrefix, false, radLeaveTypeVacationLeave_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(radLeaveTypeVacationLeave.Enabled), 5, 0), true);
          radLeaveTypeLoggingWorkHours.Enabled = 0;
          AssignProp(sPrefix, false, radLeaveTypeLoggingWorkHours_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(radLeaveTypeLoggingWorkHours.Enabled), 5, 0), true);
-         edtLeaveTypeColorPending_Enabled = 0;
-         AssignProp(sPrefix, false, edtLeaveTypeColorPending_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtLeaveTypeColorPending_Enabled), 5, 0), true);
-         edtLeaveTypeColorApproved_Enabled = 0;
-         AssignProp(sPrefix, false, edtLeaveTypeColorApproved_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtLeaveTypeColorApproved_Enabled), 5, 0), true);
          edtLeaveTypeId_Enabled = 0;
          AssignProp(sPrefix, false, edtLeaveTypeId_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtLeaveTypeId_Enabled), 5, 0), true);
          edtCompanyId_Enabled = 0;
          AssignProp(sPrefix, false, edtCompanyId_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtCompanyId_Enabled), 5, 0), true);
+         edtLeaveTypeColorPending_Enabled = 0;
+         AssignProp(sPrefix, false, edtLeaveTypeColorPending_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtLeaveTypeColorPending_Enabled), 5, 0), true);
          fix_multi_value_controls( ) ;
       }
 
@@ -917,18 +894,18 @@ namespace GeneXus.Programs {
             /* Read variables values. */
             A125LeaveTypeName = cgiGet( edtLeaveTypeName_Internalname);
             AssignAttri(sPrefix, false, "A125LeaveTypeName", A125LeaveTypeName);
+            A175LeaveTypeColorApproved = cgiGet( edtLeaveTypeColorApproved_Internalname);
+            n175LeaveTypeColorApproved = false;
+            AssignAttri(sPrefix, false, "A175LeaveTypeColorApproved", A175LeaveTypeColorApproved);
             A144LeaveTypeVacationLeave = cgiGet( radLeaveTypeVacationLeave_Internalname);
             AssignAttri(sPrefix, false, "A144LeaveTypeVacationLeave", A144LeaveTypeVacationLeave);
             A145LeaveTypeLoggingWorkHours = cgiGet( radLeaveTypeLoggingWorkHours_Internalname);
             AssignAttri(sPrefix, false, "A145LeaveTypeLoggingWorkHours", A145LeaveTypeLoggingWorkHours);
+            A100CompanyId = (long)(Math.Round(context.localUtil.CToN( cgiGet( edtCompanyId_Internalname), ".", ","), 18, MidpointRounding.ToEven));
+            AssignAttri(sPrefix, false, "A100CompanyId", StringUtil.LTrimStr( (decimal)(A100CompanyId), 10, 0));
             A174LeaveTypeColorPending = cgiGet( edtLeaveTypeColorPending_Internalname);
             n174LeaveTypeColorPending = false;
             AssignAttri(sPrefix, false, "A174LeaveTypeColorPending", A174LeaveTypeColorPending);
-            A175LeaveTypeColorApproved = cgiGet( edtLeaveTypeColorApproved_Internalname);
-            n175LeaveTypeColorApproved = false;
-            AssignAttri(sPrefix, false, "A175LeaveTypeColorApproved", A175LeaveTypeColorApproved);
-            A100CompanyId = (long)(Math.Round(context.localUtil.CToN( cgiGet( edtCompanyId_Internalname), ".", ","), 18, MidpointRounding.ToEven));
-            AssignAttri(sPrefix, false, "A100CompanyId", StringUtil.LTrimStr( (decimal)(A100CompanyId), 10, 0));
             /* Read subfile selected row values. */
             /* Read hidden variables. */
             GXKey = Decrypt64( context.GetCookie( "GX_SESSION_ID"), Crypto.GetServerKey( ));
@@ -976,6 +953,8 @@ namespace GeneXus.Programs {
          AssignProp(sPrefix, false, edtLeaveTypeId_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtLeaveTypeId_Visible), 5, 0), true);
          edtCompanyId_Visible = 0;
          AssignProp(sPrefix, false, edtCompanyId_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtCompanyId_Visible), 5, 0), true);
+         edtLeaveTypeColorPending_Visible = 0;
+         AssignProp(sPrefix, false, edtLeaveTypeColorPending_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtLeaveTypeColorPending_Visible), 5, 0), true);
          GXt_boolean1 = AV12IsAuthorized_Update;
          new GeneXus.Programs.wwpbaseobjects.secgamisauthbyfunctionalitykey(context ).execute(  "leavetype_Update", out  GXt_boolean1) ;
          AV12IsAuthorized_Update = GXt_boolean1;
@@ -1206,7 +1185,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20246189533546", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202462110182552", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1222,7 +1201,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("leavetypegeneral.js", "?20246189533546", false, true);
+         context.AddJavascriptSource("leavetypegeneral.js", "?202462110182552", false, true);
          /* End function include_jscripts */
       }
 
@@ -1242,17 +1221,16 @@ namespace GeneXus.Programs {
       protected void init_default_properties( )
       {
          edtLeaveTypeName_Internalname = sPrefix+"LEAVETYPENAME";
+         edtLeaveTypeColorApproved_Internalname = sPrefix+"LEAVETYPECOLORAPPROVED";
          radLeaveTypeVacationLeave_Internalname = sPrefix+"LEAVETYPEVACATIONLEAVE";
          radLeaveTypeLoggingWorkHours_Internalname = sPrefix+"LEAVETYPELOGGINGWORKHOURS";
-         edtLeaveTypeColorPending_Internalname = sPrefix+"LEAVETYPECOLORPENDING";
-         edtLeaveTypeColorApproved_Internalname = sPrefix+"LEAVETYPECOLORAPPROVED";
-         divUnnamedtable1_Internalname = sPrefix+"UNNAMEDTABLE1";
          divTransactiondetail_tableattributes_Internalname = sPrefix+"TRANSACTIONDETAIL_TABLEATTRIBUTES";
          bttBtnupdate_Internalname = sPrefix+"BTNUPDATE";
          bttBtndelete_Internalname = sPrefix+"BTNDELETE";
          divTable_Internalname = sPrefix+"TABLE";
          edtLeaveTypeId_Internalname = sPrefix+"LEAVETYPEID";
          edtCompanyId_Internalname = sPrefix+"COMPANYID";
+         edtLeaveTypeColorPending_Internalname = sPrefix+"LEAVETYPECOLORPENDING";
          divHtml_bottomauxiliarcontrols_Internalname = sPrefix+"HTML_BOTTOMAUXILIARCONTROLS";
          divLayoutmaintable_Internalname = sPrefix+"LAYOUTMAINTABLE";
          Form.Internalname = sPrefix+"FORM";
@@ -1272,22 +1250,23 @@ namespace GeneXus.Programs {
             }
          }
          init_default_properties( ) ;
+         edtLeaveTypeColorPending_Enabled = 0;
          edtCompanyId_Enabled = 0;
          edtLeaveTypeId_Enabled = 0;
          radLeaveTypeLoggingWorkHours.Enabled = 0;
          radLeaveTypeVacationLeave.Enabled = 0;
+         edtLeaveTypeColorPending_Jsonclick = "";
+         edtLeaveTypeColorPending_Visible = 1;
          edtCompanyId_Jsonclick = "";
          edtCompanyId_Visible = 1;
          edtLeaveTypeId_Jsonclick = "";
          edtLeaveTypeId_Visible = 1;
          bttBtndelete_Visible = 1;
          bttBtnupdate_Visible = 1;
-         edtLeaveTypeColorApproved_Jsonclick = "";
-         edtLeaveTypeColorApproved_Enabled = 0;
-         edtLeaveTypeColorPending_Jsonclick = "";
-         edtLeaveTypeColorPending_Enabled = 0;
          radLeaveTypeLoggingWorkHours_Jsonclick = "";
          radLeaveTypeVacationLeave_Jsonclick = "";
+         edtLeaveTypeColorApproved_Jsonclick = "";
+         edtLeaveTypeColorApproved_Enabled = 0;
          edtLeaveTypeName_Jsonclick = "";
          edtLeaveTypeName_Enabled = 0;
          if ( StringUtil.Len( sPrefix) == 0 )
@@ -1343,15 +1322,15 @@ namespace GeneXus.Programs {
          GXKey = "";
          GX_FocusControl = "";
          A125LeaveTypeName = "";
+         A175LeaveTypeColorApproved = "";
          ClassString = "";
          StyleString = "";
          A144LeaveTypeVacationLeave = "";
          A145LeaveTypeLoggingWorkHours = "";
-         A174LeaveTypeColorPending = "";
-         A175LeaveTypeColorApproved = "";
          TempTags = "";
          bttBtnupdate_Jsonclick = "";
          bttBtndelete_Jsonclick = "";
+         A174LeaveTypeColorPending = "";
          Form = new GXWebForm();
          sXEvt = "";
          sEvt = "";
@@ -1360,13 +1339,13 @@ namespace GeneXus.Programs {
          sEvtType = "";
          scmdbuf = "";
          H002Q2_A124LeaveTypeId = new long[1] ;
-         H002Q2_A100CompanyId = new long[1] ;
-         H002Q2_A175LeaveTypeColorApproved = new string[] {""} ;
-         H002Q2_n175LeaveTypeColorApproved = new bool[] {false} ;
          H002Q2_A174LeaveTypeColorPending = new string[] {""} ;
          H002Q2_n174LeaveTypeColorPending = new bool[] {false} ;
+         H002Q2_A100CompanyId = new long[1] ;
          H002Q2_A145LeaveTypeLoggingWorkHours = new string[] {""} ;
          H002Q2_A144LeaveTypeVacationLeave = new string[] {""} ;
+         H002Q2_A175LeaveTypeColorApproved = new string[] {""} ;
+         H002Q2_n175LeaveTypeColorApproved = new bool[] {false} ;
          H002Q2_A125LeaveTypeName = new string[] {""} ;
          AV6WWPContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPContext(context);
          AV8TrnContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext(context);
@@ -1378,7 +1357,7 @@ namespace GeneXus.Programs {
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.leavetypegeneral__default(),
             new Object[][] {
                 new Object[] {
-               H002Q2_A124LeaveTypeId, H002Q2_A100CompanyId, H002Q2_A175LeaveTypeColorApproved, H002Q2_n175LeaveTypeColorApproved, H002Q2_A174LeaveTypeColorPending, H002Q2_n174LeaveTypeColorPending, H002Q2_A145LeaveTypeLoggingWorkHours, H002Q2_A144LeaveTypeVacationLeave, H002Q2_A125LeaveTypeName
+               H002Q2_A124LeaveTypeId, H002Q2_A174LeaveTypeColorPending, H002Q2_n174LeaveTypeColorPending, H002Q2_A100CompanyId, H002Q2_A145LeaveTypeLoggingWorkHours, H002Q2_A144LeaveTypeVacationLeave, H002Q2_A175LeaveTypeColorApproved, H002Q2_n175LeaveTypeColorApproved, H002Q2_A125LeaveTypeName
                }
             }
          );
@@ -1399,14 +1378,15 @@ namespace GeneXus.Programs {
       private short gxcookieaux ;
       private short nGXWrapped ;
       private int edtLeaveTypeName_Enabled ;
-      private int edtLeaveTypeColorPending_Enabled ;
       private int edtLeaveTypeColorApproved_Enabled ;
       private int bttBtnupdate_Visible ;
       private int bttBtndelete_Visible ;
       private int edtLeaveTypeId_Visible ;
       private int edtCompanyId_Visible ;
+      private int edtLeaveTypeColorPending_Visible ;
       private int edtLeaveTypeId_Enabled ;
       private int edtCompanyId_Enabled ;
+      private int edtLeaveTypeColorPending_Enabled ;
       private int idxLst ;
       private long A124LeaveTypeId ;
       private long wcpOA124LeaveTypeId ;
@@ -1428,7 +1408,9 @@ namespace GeneXus.Programs {
       private string edtLeaveTypeName_Internalname ;
       private string A125LeaveTypeName ;
       private string edtLeaveTypeName_Jsonclick ;
-      private string divUnnamedtable1_Internalname ;
+      private string edtLeaveTypeColorApproved_Internalname ;
+      private string A175LeaveTypeColorApproved ;
+      private string edtLeaveTypeColorApproved_Jsonclick ;
       private string radLeaveTypeVacationLeave_Internalname ;
       private string ClassString ;
       private string StyleString ;
@@ -1437,12 +1419,6 @@ namespace GeneXus.Programs {
       private string radLeaveTypeLoggingWorkHours_Internalname ;
       private string A145LeaveTypeLoggingWorkHours ;
       private string radLeaveTypeLoggingWorkHours_Jsonclick ;
-      private string edtLeaveTypeColorPending_Internalname ;
-      private string A174LeaveTypeColorPending ;
-      private string edtLeaveTypeColorPending_Jsonclick ;
-      private string edtLeaveTypeColorApproved_Internalname ;
-      private string A175LeaveTypeColorApproved ;
-      private string edtLeaveTypeColorApproved_Jsonclick ;
       private string TempTags ;
       private string bttBtnupdate_Internalname ;
       private string bttBtnupdate_Jsonclick ;
@@ -1453,6 +1429,9 @@ namespace GeneXus.Programs {
       private string edtLeaveTypeId_Jsonclick ;
       private string edtCompanyId_Internalname ;
       private string edtCompanyId_Jsonclick ;
+      private string edtLeaveTypeColorPending_Internalname ;
+      private string A174LeaveTypeColorPending ;
+      private string edtLeaveTypeColorPending_Jsonclick ;
       private string sXEvt ;
       private string sEvt ;
       private string EvtGridId ;
@@ -1468,8 +1447,8 @@ namespace GeneXus.Programs {
       private bool Rfr0gs ;
       private bool wbErr ;
       private bool gxdyncontrolsrefreshing ;
-      private bool n175LeaveTypeColorApproved ;
       private bool n174LeaveTypeColorPending ;
+      private bool n175LeaveTypeColorApproved ;
       private bool returnInSub ;
       private bool GXt_boolean1 ;
       private GXWebForm Form ;
@@ -1479,13 +1458,13 @@ namespace GeneXus.Programs {
       private GXRadio radLeaveTypeLoggingWorkHours ;
       private IDataStoreProvider pr_default ;
       private long[] H002Q2_A124LeaveTypeId ;
-      private long[] H002Q2_A100CompanyId ;
-      private string[] H002Q2_A175LeaveTypeColorApproved ;
-      private bool[] H002Q2_n175LeaveTypeColorApproved ;
       private string[] H002Q2_A174LeaveTypeColorPending ;
       private bool[] H002Q2_n174LeaveTypeColorPending ;
+      private long[] H002Q2_A100CompanyId ;
       private string[] H002Q2_A145LeaveTypeLoggingWorkHours ;
       private string[] H002Q2_A144LeaveTypeVacationLeave ;
+      private string[] H002Q2_A175LeaveTypeColorApproved ;
+      private bool[] H002Q2_n175LeaveTypeColorApproved ;
       private string[] H002Q2_A125LeaveTypeName ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
@@ -1515,7 +1494,7 @@ namespace GeneXus.Programs {
           new ParDef("LeaveTypeId",GXType.Int64,10,0)
           };
           def= new CursorDef[] {
-              new CursorDef("H002Q2", "SELECT LeaveTypeId, CompanyId, LeaveTypeColorApproved, LeaveTypeColorPending, LeaveTypeLoggingWorkHours, LeaveTypeVacationLeave, LeaveTypeName FROM LeaveType WHERE LeaveTypeId = :LeaveTypeId ORDER BY LeaveTypeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH002Q2,1, GxCacheFrequency.OFF ,true,true )
+              new CursorDef("H002Q2", "SELECT LeaveTypeId, LeaveTypeColorPending, CompanyId, LeaveTypeLoggingWorkHours, LeaveTypeVacationLeave, LeaveTypeColorApproved, LeaveTypeName FROM LeaveType WHERE LeaveTypeId = :LeaveTypeId ORDER BY LeaveTypeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH002Q2,1, GxCacheFrequency.OFF ,true,true )
           };
        }
     }
@@ -1528,13 +1507,13 @@ namespace GeneXus.Programs {
        {
              case 0 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);
-                ((long[]) buf[1])[0] = rslt.getLong(2);
-                ((string[]) buf[2])[0] = rslt.getString(3, 20);
-                ((bool[]) buf[3])[0] = rslt.wasNull(3);
+                ((string[]) buf[1])[0] = rslt.getString(2, 20);
+                ((bool[]) buf[2])[0] = rslt.wasNull(2);
+                ((long[]) buf[3])[0] = rslt.getLong(3);
                 ((string[]) buf[4])[0] = rslt.getString(4, 20);
-                ((bool[]) buf[5])[0] = rslt.wasNull(4);
-                ((string[]) buf[6])[0] = rslt.getString(5, 20);
-                ((string[]) buf[7])[0] = rslt.getString(6, 20);
+                ((string[]) buf[5])[0] = rslt.getString(5, 20);
+                ((string[]) buf[6])[0] = rslt.getString(6, 20);
+                ((bool[]) buf[7])[0] = rslt.wasNull(6);
                 ((string[]) buf[8])[0] = rslt.getString(7, 100);
                 return;
        }

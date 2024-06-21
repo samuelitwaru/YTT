@@ -581,7 +581,7 @@ namespace GeneXus.Programs {
 
       public override string GetPgmdesc( )
       {
-         return " Leave Type" ;
+         return " Leave Types" ;
       }
 
       protected void WB2O0( )
@@ -850,7 +850,7 @@ namespace GeneXus.Programs {
                Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
             }
          }
-         Form.Meta.addItem("description", " Leave Type", 0) ;
+         Form.Meta.addItem("description", " Leave Types", 0) ;
          context.wjLoc = "";
          context.nUserReturn = 0;
          context.wbHandled = 0;
@@ -1633,7 +1633,7 @@ namespace GeneXus.Programs {
          ucDdo_grid.SendProperty(context, "", false, Ddo_grid_Internalname, "GridInternalName", Ddo_grid_Gridinternalname);
          Ddo_grid_Gamoauthtoken = AV38GAMSession.gxTpr_Token;
          ucDdo_grid.SendProperty(context, "", false, Ddo_grid_Internalname, "GAMOAuthToken", Ddo_grid_Gamoauthtoken);
-         Form.Caption = " Leave Type";
+         Form.Caption = " Leave Types";
          AssignProp("", false, "FORM", "Caption", Form.Caption, true);
          /* Execute user subroutine: 'PREPARETRANSACTION' */
          S122 ();
@@ -2018,9 +2018,9 @@ namespace GeneXus.Programs {
          /* 'INITIALIZECOLUMNSSELECTOR' Routine */
          returnInSub = false;
          AV25ColumnsSelector = new GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector(context);
-         new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV25ColumnsSelector,  "LeaveTypeName",  "",  "Type Name",  true,  "") ;
-         new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV25ColumnsSelector,  "LeaveTypeVacationLeave",  "",  "Vacation Leave",  true,  "") ;
-         new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV25ColumnsSelector,  "LeaveTypeLoggingWorkHours",  "",  "Work Hours",  true,  "") ;
+         new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV25ColumnsSelector,  "LeaveTypeName",  "",  "Leave Type Name",  true,  "") ;
+         new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV25ColumnsSelector,  "LeaveTypeVacationLeave",  "",  "Deduct Vacation Leave",  true,  "") ;
+         new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV25ColumnsSelector,  "LeaveTypeLoggingWorkHours",  "",  "Log Work Hours",  true,  "") ;
          GXt_char2 = AV24UserCustomValue;
          new GeneXus.Programs.wwpbaseobjects.loadcolumnsselectorstate(context ).execute(  "LeaveTypeWWColumnsSelector", out  GXt_char2) ;
          AV24UserCustomValue = GXt_char2;
@@ -2192,11 +2192,11 @@ namespace GeneXus.Programs {
          AV15GridState.gxTpr_Ordereddsc = AV18OrderedDsc;
          AV15GridState.gxTpr_Filtervalues.Clear();
          new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV15GridState,  "FILTERFULLTEXT",  "Main filter",  !String.IsNullOrEmpty(StringUtil.RTrim( AV20FilterFullText)),  0,  AV20FilterFullText,  AV20FilterFullText,  false,  "",  "") ;
-         new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalueandsel(context ).execute( ref  AV15GridState,  "TFLEAVETYPENAME",  "Type Name",  !String.IsNullOrEmpty(StringUtil.RTrim( AV33TFLeaveTypeName)),  0,  AV33TFLeaveTypeName,  AV33TFLeaveTypeName,  false,  "",  "",  !String.IsNullOrEmpty(StringUtil.RTrim( AV34TFLeaveTypeName_Sel)),  AV34TFLeaveTypeName_Sel,  AV34TFLeaveTypeName_Sel) ;
+         new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalueandsel(context ).execute( ref  AV15GridState,  "TFLEAVETYPENAME",  "Leave Type Name",  !String.IsNullOrEmpty(StringUtil.RTrim( AV33TFLeaveTypeName)),  0,  AV33TFLeaveTypeName,  AV33TFLeaveTypeName,  false,  "",  "",  !String.IsNullOrEmpty(StringUtil.RTrim( AV34TFLeaveTypeName_Sel)),  AV34TFLeaveTypeName_Sel,  AV34TFLeaveTypeName_Sel) ;
          AV55AuxText = ((AV52TFLeaveTypeVacationLeave_Sels.Count==1) ? "["+AV52TFLeaveTypeVacationLeave_Sels.GetString(1)+"]" : "multiple values");
-         new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV15GridState,  "TFLEAVETYPEVACATIONLEAVE_SEL",  "Vacation Leave",  !(AV52TFLeaveTypeVacationLeave_Sels.Count==0),  0,  AV52TFLeaveTypeVacationLeave_Sels.ToJSonString(false),  ((StringUtil.StrCmp(AV55AuxText, "")==0) ? "" : StringUtil.StringReplace( StringUtil.StringReplace( AV55AuxText, "[No]", "No"), "[Yes]", "Yes")),  false,  "",  "") ;
+         new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV15GridState,  "TFLEAVETYPEVACATIONLEAVE_SEL",  "Deduct Vacation Leave",  !(AV52TFLeaveTypeVacationLeave_Sels.Count==0),  0,  AV52TFLeaveTypeVacationLeave_Sels.ToJSonString(false),  ((StringUtil.StrCmp(AV55AuxText, "")==0) ? "" : StringUtil.StringReplace( StringUtil.StringReplace( AV55AuxText, "[No]", "No"), "[Yes]", "Yes")),  false,  "",  "") ;
          AV55AuxText = ((AV54TFLeaveTypeLoggingWorkHours_Sels.Count==1) ? "["+AV54TFLeaveTypeLoggingWorkHours_Sels.GetString(1)+"]" : "multiple values");
-         new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV15GridState,  "TFLEAVETYPELOGGINGWORKHOURS_SEL",  "Work Hours",  !(AV54TFLeaveTypeLoggingWorkHours_Sels.Count==0),  0,  AV54TFLeaveTypeLoggingWorkHours_Sels.ToJSonString(false),  ((StringUtil.StrCmp(AV55AuxText, "")==0) ? "" : StringUtil.StringReplace( StringUtil.StringReplace( AV55AuxText, "[No]", "No"), "[Yes]", "Yes")),  false,  "",  "") ;
+         new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV15GridState,  "TFLEAVETYPELOGGINGWORKHOURS_SEL",  "Log Work Hours",  !(AV54TFLeaveTypeLoggingWorkHours_Sels.Count==0),  0,  AV54TFLeaveTypeLoggingWorkHours_Sels.ToJSonString(false),  ((StringUtil.StrCmp(AV55AuxText, "")==0) ? "" : StringUtil.StringReplace( StringUtil.StringReplace( AV55AuxText, "[No]", "No"), "[Yes]", "Yes")),  false,  "",  "") ;
          AV15GridState.gxTpr_Pagesize = StringUtil.Str( (decimal)(subGrid_Rows), 10, 0);
          AV15GridState.gxTpr_Currentpage = (short)(subGrid_fnc_Currentpage( ));
          new GeneXus.Programs.wwpbaseobjects.savegridstate(context ).execute(  AV62Pgmname+"GridState",  AV15GridState.ToXml(false, true, "", "")) ;
@@ -2350,7 +2350,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20246197144282", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202462110194464", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2366,7 +2366,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("leavetypeww.js", "?20246197144284", false, true);
+         context.AddJavascriptSource("leavetypeww.js", "?202462110194466", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -2637,13 +2637,13 @@ namespace GeneXus.Programs {
             context.SendWebValue( "") ;
             context.WriteHtmlTextNl( "</th>") ;
             context.WriteHtmlText( "<th align=\""+"start"+"\" "+" nowrap=\"nowrap\" "+" class=\""+"Attribute"+"\" "+" style=\""+((edtLeaveTypeName_Visible==0) ? "display:none;" : "")+""+"\" "+">") ;
-            context.SendWebValue( "Type Name") ;
+            context.SendWebValue( "Leave Type Name") ;
             context.WriteHtmlTextNl( "</th>") ;
             context.WriteHtmlText( "<th align=\""+"start"+"\" "+" nowrap=\"nowrap\" "+" class=\""+"Attribute"+"\" "+" style=\""+((radLeaveTypeVacationLeave.Visible==0) ? "display:none;" : "")+""+"\" "+">") ;
-            context.SendWebValue( "Vacation Leave") ;
+            context.SendWebValue( "Deduct Vacation Leave") ;
             context.WriteHtmlTextNl( "</th>") ;
             context.WriteHtmlText( "<th align=\""+"start"+"\" "+" nowrap=\"nowrap\" "+" class=\""+"Attribute"+"\" "+" style=\""+((radLeaveTypeLoggingWorkHours.Visible==0) ? "display:none;" : "")+""+"\" "+">") ;
-            context.SendWebValue( "Work Hours") ;
+            context.SendWebValue( "Log Work Hours") ;
             context.WriteHtmlTextNl( "</th>") ;
             context.WriteHtmlText( "<th align=\""+"start"+"\" "+" nowrap=\"nowrap\" "+" class=\""+"Attribute"+"\" "+" style=\""+"display:none;"+""+"\" "+">") ;
             context.SendWebValue( "") ;
@@ -2850,7 +2850,7 @@ namespace GeneXus.Programs {
          Form.Background = "";
          Form.Textcolor = 0;
          Form.Backcolor = (int)(0xFFFFFF);
-         Form.Caption = " Leave Type";
+         Form.Caption = " Leave Types";
          subGrid_Rows = 0;
          context.GX_msglist.DisplayMode = 1;
          if ( context.isSpaRequest( ) )

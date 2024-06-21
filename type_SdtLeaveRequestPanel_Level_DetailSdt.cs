@@ -21,6 +21,7 @@ namespace GeneXus.Programs {
          /* Constructor for serialization */
          gxTv_SdtLeaveRequestPanel_Level_DetailSdt_Leaverequeststartdate = DateTime.MinValue;
          gxTv_SdtLeaveRequestPanel_Level_DetailSdt_Leaverequestenddate = DateTime.MinValue;
+         gxTv_SdtLeaveRequestPanel_Level_DetailSdt_Leaverequesthalfday = "";
          gxTv_SdtLeaveRequestPanel_Level_DetailSdt_Leaverequestdescription = "";
          gxTv_SdtLeaveRequestPanel_Level_DetailSdt_Today = DateTime.MinValue;
          gxTv_SdtLeaveRequestPanel_Level_DetailSdt_Msgvar = "";
@@ -80,6 +81,7 @@ namespace GeneXus.Programs {
          sNumToPad = StringUtil.Trim( StringUtil.Str( (decimal)(DateTimeUtil.Day( gxTv_SdtLeaveRequestPanel_Level_DetailSdt_Leaverequestenddate)), 10, 0));
          sDateCnv += StringUtil.Substring( "00", 1, 2-StringUtil.Len( sNumToPad)) + sNumToPad;
          AddObjectProperty("Leaverequestenddate", sDateCnv, false, false);
+         AddObjectProperty("Leaverequesthalfday", gxTv_SdtLeaveRequestPanel_Level_DetailSdt_Leaverequesthalfday, false, false);
          AddObjectProperty("Leaverequestduration", gxTv_SdtLeaveRequestPanel_Level_DetailSdt_Leaverequestduration, false, false);
          AddObjectProperty("Leaverequestdescription", gxTv_SdtLeaveRequestPanel_Level_DetailSdt_Leaverequestdescription, false, false);
          AddObjectProperty("Employeeid", gxTv_SdtLeaveRequestPanel_Level_DetailSdt_Employeeid, false, false);
@@ -182,6 +184,22 @@ namespace GeneXus.Programs {
             sdtIsNull = 0;
             gxTv_SdtLeaveRequestPanel_Level_DetailSdt_Leaverequestenddate = value;
             SetDirty("Leaverequestenddate");
+         }
+
+      }
+
+      [  SoapElement( ElementName = "Leaverequesthalfday" )]
+      [  XmlElement( ElementName = "Leaverequesthalfday"   )]
+      public string gxTpr_Leaverequesthalfday
+      {
+         get {
+            return gxTv_SdtLeaveRequestPanel_Level_DetailSdt_Leaverequesthalfday ;
+         }
+
+         set {
+            sdtIsNull = 0;
+            gxTv_SdtLeaveRequestPanel_Level_DetailSdt_Leaverequesthalfday = value;
+            SetDirty("Leaverequesthalfday");
          }
 
       }
@@ -337,6 +355,7 @@ namespace GeneXus.Programs {
       {
          gxTv_SdtLeaveRequestPanel_Level_DetailSdt_Leaverequeststartdate = DateTime.MinValue;
          gxTv_SdtLeaveRequestPanel_Level_DetailSdt_Leaverequestenddate = DateTime.MinValue;
+         gxTv_SdtLeaveRequestPanel_Level_DetailSdt_Leaverequesthalfday = "";
          gxTv_SdtLeaveRequestPanel_Level_DetailSdt_Leaverequestdescription = "";
          gxTv_SdtLeaveRequestPanel_Level_DetailSdt_Today = DateTime.MinValue;
          gxTv_SdtLeaveRequestPanel_Level_DetailSdt_Msgvar = "";
@@ -358,6 +377,7 @@ namespace GeneXus.Programs {
       protected long gxTv_SdtLeaveRequestPanel_Level_DetailSdt_Leavetypeid ;
       protected long gxTv_SdtLeaveRequestPanel_Level_DetailSdt_Employeeid ;
       protected decimal gxTv_SdtLeaveRequestPanel_Level_DetailSdt_Leaverequestduration ;
+      protected string gxTv_SdtLeaveRequestPanel_Level_DetailSdt_Leaverequesthalfday ;
       protected string gxTv_SdtLeaveRequestPanel_Level_DetailSdt_Msgvar ;
       protected string gxTv_SdtLeaveRequestPanel_Level_DetailSdt_Gxdynprop ;
       protected string sDateCnv ;
@@ -419,7 +439,20 @@ namespace GeneXus.Programs {
 
       }
 
-      [DataMember( Name = "Leaverequestduration" , Order = 3 )]
+      [DataMember( Name = "Leaverequesthalfday" , Order = 3 )]
+      public string gxTpr_Leaverequesthalfday
+      {
+         get {
+            return StringUtil.RTrim( sdt.gxTpr_Leaverequesthalfday) ;
+         }
+
+         set {
+            sdt.gxTpr_Leaverequesthalfday = value;
+         }
+
+      }
+
+      [DataMember( Name = "Leaverequestduration" , Order = 4 )]
       public Nullable<decimal> gxTpr_Leaverequestduration
       {
          get {
@@ -432,7 +465,7 @@ namespace GeneXus.Programs {
 
       }
 
-      [DataMember( Name = "Leaverequestdescription" , Order = 4 )]
+      [DataMember( Name = "Leaverequestdescription" , Order = 5 )]
       public string gxTpr_Leaverequestdescription
       {
          get {
@@ -445,7 +478,7 @@ namespace GeneXus.Programs {
 
       }
 
-      [DataMember( Name = "Employeeid" , Order = 5 )]
+      [DataMember( Name = "Employeeid" , Order = 6 )]
       public string gxTpr_Employeeid
       {
          get {
@@ -458,7 +491,7 @@ namespace GeneXus.Programs {
 
       }
 
-      [DataMember( Name = "Today" , Order = 6 )]
+      [DataMember( Name = "Today" , Order = 7 )]
       public string gxTpr_Today
       {
          get {
@@ -471,7 +504,7 @@ namespace GeneXus.Programs {
 
       }
 
-      [DataMember( Name = "Employyeeavailablevacationdays" , Order = 7 )]
+      [DataMember( Name = "Employyeeavailablevacationdays" , Order = 8 )]
       public Nullable<short> gxTpr_Employyeeavailablevacationdays
       {
          get {
@@ -484,7 +517,7 @@ namespace GeneXus.Programs {
 
       }
 
-      [DataMember( Name = "Msgvar" , Order = 8 )]
+      [DataMember( Name = "Msgvar" , Order = 9 )]
       public string gxTpr_Msgvar
       {
          get {
@@ -497,7 +530,7 @@ namespace GeneXus.Programs {
 
       }
 
-      [DataMember( Name = "Gxdynprop" , Order = 9 )]
+      [DataMember( Name = "Gxdynprop" , Order = 10 )]
       public string gxTpr_Gxdynprop
       {
          get {
@@ -510,7 +543,7 @@ namespace GeneXus.Programs {
 
       }
 
-      [DataMember( Name = "Gxdesc_leavetypeid" , Order = 10 )]
+      [DataMember( Name = "Gxdesc_leavetypeid" , Order = 11 )]
       public string gxTpr_Gxdesc_leavetypeid
       {
          get {

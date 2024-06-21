@@ -130,12 +130,12 @@ namespace GeneXus.Programs {
       {
          /* 'LOADCOMBOITEMS_PROJECTMANAGERID' Routine */
          returnInSub = false;
-         /* Using cursor P009B2 */
+         /* Using cursor P00B22 */
          pr_default.execute(0, new Object[] {AV15ProjectId});
          while ( (pr_default.getStatus(0) != 101) )
          {
-            A102ProjectId = P009B2_A102ProjectId[0];
-            A106EmployeeId = P009B2_A106EmployeeId[0];
+            A102ProjectId = P00B22_A102ProjectId[0];
+            A106EmployeeId = P00B22_A106EmployeeId[0];
             AV22EmployeeIds.Add(A106EmployeeId, 0);
             pr_default.readNext(0);
          }
@@ -156,13 +156,13 @@ namespace GeneXus.Programs {
          AV11Combo_Data.Sort("Title");
          if ( StringUtil.StrCmp(AV14TrnMode, "INS") != 0 )
          {
-            /* Using cursor P009B3 */
+            /* Using cursor P00B23 */
             pr_default.execute(1, new Object[] {AV15ProjectId});
             while ( (pr_default.getStatus(1) != 101) )
             {
-               A102ProjectId = P009B3_A102ProjectId[0];
-               A166ProjectManagerId = P009B3_A166ProjectManagerId[0];
-               n166ProjectManagerId = P009B3_n166ProjectManagerId[0];
+               A102ProjectId = P00B23_A102ProjectId[0];
+               A166ProjectManagerId = P00B23_A166ProjectManagerId[0];
+               n166ProjectManagerId = P00B23_n166ProjectManagerId[0];
                AV16SelectedValue = ((0==A166ProjectManagerId) ? "" : StringUtil.Trim( StringUtil.Str( (decimal)(A166ProjectManagerId), 10, 0)));
                /* Exiting from a For First loop. */
                if (true) break;
@@ -206,23 +206,23 @@ namespace GeneXus.Programs {
          AV11Combo_Data = new GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item>( context, "Item", "");
          AV9WWPContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPContext(context);
          scmdbuf = "";
-         P009B2_A102ProjectId = new long[1] ;
-         P009B2_A106EmployeeId = new long[1] ;
+         P00B22_A102ProjectId = new long[1] ;
+         P00B22_A106EmployeeId = new long[1] ;
          AV22EmployeeIds = new GxSimpleCollection<long>();
          AV25GXV1 = new GXBaseCollection<SdtSDTEmployee>( context, "SDTEmployee", "YTT_version4");
          GXt_objcol_SdtSDTEmployee1 = new GXBaseCollection<SdtSDTEmployee>( context, "SDTEmployee", "YTT_version4");
          AV20ProjectManagerId_DPItem = new SdtSDTEmployee(context);
          AV12Combo_DataItem = new GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item(context);
-         P009B3_A102ProjectId = new long[1] ;
-         P009B3_A166ProjectManagerId = new long[1] ;
-         P009B3_n166ProjectManagerId = new bool[] {false} ;
+         P00B23_A102ProjectId = new long[1] ;
+         P00B23_A166ProjectManagerId = new long[1] ;
+         P00B23_n166ProjectManagerId = new bool[] {false} ;
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.projectloaddvcombo__default(),
             new Object[][] {
                 new Object[] {
-               P009B2_A102ProjectId, P009B2_A106EmployeeId
+               P00B22_A102ProjectId, P00B22_A106EmployeeId
                }
                , new Object[] {
-               P009B3_A102ProjectId, P009B3_A166ProjectManagerId, P009B3_n166ProjectManagerId
+               P00B23_A102ProjectId, P00B23_A166ProjectManagerId, P00B23_n166ProjectManagerId
                }
             }
          );
@@ -246,11 +246,11 @@ namespace GeneXus.Programs {
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private IDataStoreProvider pr_default ;
-      private long[] P009B2_A102ProjectId ;
-      private long[] P009B2_A106EmployeeId ;
-      private long[] P009B3_A102ProjectId ;
-      private long[] P009B3_A166ProjectManagerId ;
-      private bool[] P009B3_n166ProjectManagerId ;
+      private long[] P00B22_A102ProjectId ;
+      private long[] P00B22_A106EmployeeId ;
+      private long[] P00B23_A102ProjectId ;
+      private long[] P00B23_A166ProjectManagerId ;
+      private bool[] P00B23_n166ProjectManagerId ;
       private string aP3_SelectedValue ;
       private string aP4_SelectedText ;
       private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item> aP5_Combo_Data ;
@@ -278,17 +278,17 @@ namespace GeneXus.Programs {
     {
        if ( def == null )
        {
-          Object[] prmP009B2;
-          prmP009B2 = new Object[] {
+          Object[] prmP00B22;
+          prmP00B22 = new Object[] {
           new ParDef("AV15ProjectId",GXType.Int64,10,0)
           };
-          Object[] prmP009B3;
-          prmP009B3 = new Object[] {
+          Object[] prmP00B23;
+          prmP00B23 = new Object[] {
           new ParDef("AV15ProjectId",GXType.Int64,10,0)
           };
           def= new CursorDef[] {
-              new CursorDef("P009B2", "SELECT ProjectId, EmployeeId FROM EmployeeProject WHERE ProjectId = :AV15ProjectId ORDER BY ProjectId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP009B2,100, GxCacheFrequency.OFF ,false,false )
-             ,new CursorDef("P009B3", "SELECT ProjectId, ProjectManagerId FROM Project WHERE ProjectId = :AV15ProjectId ORDER BY ProjectId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP009B3,1, GxCacheFrequency.OFF ,false,true )
+              new CursorDef("P00B22", "SELECT ProjectId, EmployeeId FROM EmployeeProject WHERE ProjectId = :AV15ProjectId ORDER BY ProjectId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00B22,100, GxCacheFrequency.OFF ,false,false )
+             ,new CursorDef("P00B23", "SELECT ProjectId, ProjectManagerId FROM Project WHERE ProjectId = :AV15ProjectId ORDER BY ProjectId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00B23,1, GxCacheFrequency.OFF ,false,true )
           };
        }
     }

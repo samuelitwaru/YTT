@@ -2,7 +2,7 @@
 <CallableObject guid="cf4f891d-b00a-7e0a-8c5b-5099d53db818" name="Employee_DataProvider" description="Employee_Data Provider" namespace="GeneXus.Programs">
   <Signature name="parm">
     <Parameter name="ReturnValue" accessor="out" collection="true">
-      <Field name="Employee" description="Employee">
+      <Field name="Employee" description="Employees">
         <Fields>
           <Field name="EmployeeId" description="Employee Id">
             <Properties>

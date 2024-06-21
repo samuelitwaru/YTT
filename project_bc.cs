@@ -665,9 +665,6 @@ namespace GeneXus.Programs {
       protected void BeforeUpdate0E15( )
       {
          /* Before Update Rules */
-         A166ProjectManagerId = 0;
-         n166ProjectManagerId = false;
-         n166ProjectManagerId = true;
          new assignprojectmanagerrole(context ).execute(  A166ProjectManagerId,  A102ProjectId) ;
       }
 

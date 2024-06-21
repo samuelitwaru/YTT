@@ -82,6 +82,12 @@
       <ObjLink>sitesetting.aspx</ObjLink>
    </Object>
    <Object>
+      <ObjCls>0</ObjCls>
+      <ObjName>SupportRequest</ObjName>
+      <ObjDesc>Support Request</ObjDesc>
+      <ObjLink>supportrequest.aspx</ObjLink>
+   </Object>
+   <Object>
       <ObjCls>13</ObjCls>
       <ObjName>Login</ObjName>
       <ObjDesc>Login</ObjDesc>
@@ -210,7 +216,7 @@
    <Object>
       <ObjCls>13</ObjCls>
       <ObjName>LeaveTypeWW</ObjName>
-      <ObjDesc> Leave Type</ObjDesc>
+      <ObjDesc> Leave Types</ObjDesc>
       <ObjLink>leavetypeww.aspx</ObjLink>
    </Object>
    <Object>
@@ -222,7 +228,7 @@
    <Object>
       <ObjCls>13</ObjCls>
       <ObjName>EmployeeWW</ObjName>
-      <ObjDesc> Employee</ObjDesc>
+      <ObjDesc> Employees</ObjDesc>
       <ObjLink>employeeww.aspx</ObjLink>
    </Object>
    <Object>
@@ -245,15 +251,9 @@
    </Object>
    <Object>
       <ObjCls>13</ObjCls>
-      <ObjName>LeaveCalendar</ObjName>
-      <ObjDesc>Leave Calendar</ObjDesc>
-      <ObjLink>leavecalendar.aspx</ObjLink>
-   </Object>
-   <Object>
-      <ObjCls>13</ObjCls>
-      <ObjName>ProjectWW</ObjName>
-      <ObjDesc> Project</ObjDesc>
-      <ObjLink>projectww.aspx</ObjLink>
+      <ObjName>LeaveCalendarOld</ObjName>
+      <ObjDesc>Leave Calendar Old</ObjDesc>
+      <ObjLink>leavecalendarold.aspx</ObjLink>
    </Object>
    <Object>
       <ObjCls>13</ObjCls>
@@ -264,7 +264,7 @@
    <Object>
       <ObjCls>13</ObjCls>
       <ObjName>EmployeeList</ObjName>
-      <ObjDesc> Employee</ObjDesc>
+      <ObjDesc> Employees</ObjDesc>
       <ObjLink>employeelist.aspx</ObjLink>
    </Object>
    <Object>
@@ -282,7 +282,7 @@
    <Object>
       <ObjCls>13</ObjCls>
       <ObjName>Reports</ObjName>
-      <ObjDesc>Reports</ObjDesc>
+      <ObjDesc>Project Overview</ObjDesc>
       <ObjLink>reports.aspx</ObjLink>
    </Object>
    <Object>
@@ -294,14 +294,8 @@
    <Object>
       <ObjCls>13</ObjCls>
       <ObjName>LogWorkHours</ObjName>
-      <ObjDesc>Hour Logs</ObjDesc>
+      <ObjDesc>Log Hours</ObjDesc>
       <ObjLink>logworkhours.aspx</ObjLink>
-   </Object>
-   <Object>
-      <ObjCls>13</ObjCls>
-      <ObjName>LeaveRequestWW</ObjName>
-      <ObjDesc> Leave Request</ObjDesc>
-      <ObjLink>leaverequestww.aspx</ObjLink>
    </Object>
    <Object>
       <ObjCls>13</ObjCls>
@@ -320,6 +314,36 @@
       <ObjName>ReportDetail4</ObjName>
       <ObjDesc>Report Detail4</ObjDesc>
       <ObjLink>reportdetail4.aspx</ObjLink>
+   </Object>
+   <Object>
+      <ObjCls>13</ObjCls>
+      <ObjName>VerifyEmail</ObjName>
+      <ObjDesc>Verify Email</ObjDesc>
+      <ObjLink>verifyemail.aspx</ObjLink>
+   </Object>
+   <Object>
+      <ObjCls>13</ObjCls>
+      <ObjName>ContactUs</ObjName>
+      <ObjDesc>Contact Us</ObjDesc>
+      <ObjLink>contactus.aspx</ObjLink>
+   </Object>
+   <Object>
+      <ObjCls>13</ObjCls>
+      <ObjName>LeaveCalendar</ObjName>
+      <ObjDesc>Leave Calendar</ObjDesc>
+      <ObjLink>leavecalendar.aspx</ObjLink>
+   </Object>
+   <Object>
+      <ObjCls>13</ObjCls>
+      <ObjName>EmployeeWeekReport</ObjName>
+      <ObjDesc>Employee Week Report</ObjDesc>
+      <ObjLink>employeeweekreport.aspx</ObjLink>
+   </Object>
+   <Object>
+      <ObjCls>13</ObjCls>
+      <ObjName>ProjectWW</ObjName>
+      <ObjDesc> Project</ObjDesc>
+      <ObjLink>projectww.aspx</ObjLink>
    </Object>
    <Object>
       <ObjCls>1</ObjCls>
@@ -398,5 +422,59 @@
       <ObjName>InsertRolePermissions</ObjName>
       <ObjDesc>Insert Role Permissions</ObjDesc>
       <ObjLink>ainsertrolepermissions.aspx</ObjLink>
+   </Object>
+   <Object>
+      <ObjCls>1</ObjCls>
+      <ObjName>Procedure1</ObjName>
+      <ObjDesc>Procedure1</ObjDesc>
+      <ObjLink>aprocedure1.aspx</ObjLink>
+   </Object>
+   <Object>
+      <ObjCls>1</ObjCls>
+      <ObjName>SampleEmailTest</ObjName>
+      <ObjDesc>Sample Email Test</ObjDesc>
+      <ObjLink>asampleemailtest.aspx</ObjLink>
+   </Object>
+   <Object>
+      <ObjCls>1</ObjCls>
+      <ObjName>ResetVacationHolidays</ObjName>
+      <ObjDesc>Reset Vacation Holidays</ObjDesc>
+      <ObjLink>aresetvacationholidays.aspx</ObjLink>
+   </Object>
+   <Object>
+      <ObjCls>1</ObjCls>
+      <ObjName>DailyReminderUG</ObjName>
+      <ObjDesc>Daily Reminder UG</ObjDesc>
+      <ObjLink>adailyreminderug.aspx</ObjLink>
+   </Object>
+   <Object>
+      <ObjCls>1</ObjCls>
+      <ObjName>DailyReminderUA</ObjName>
+      <ObjDesc>Daily Reminder UA</ObjDesc>
+      <ObjLink>adailyreminderua.aspx</ObjLink>
+   </Object>
+   <Object>
+      <ObjCls>1</ObjCls>
+      <ObjName>DailyReminderLK</ObjName>
+      <ObjDesc>Daily Reminder LK</ObjDesc>
+      <ObjLink>adailyreminderlk.aspx</ObjLink>
+   </Object>
+   <Object>
+      <ObjCls>1</ObjCls>
+      <ObjName>WeeklyReminderToManagerUG</ObjName>
+      <ObjDesc>Weekly Reminder To Manager UG</ObjDesc>
+      <ObjLink>aweeklyremindertomanagerug.aspx</ObjLink>
+   </Object>
+   <Object>
+      <ObjCls>1</ObjCls>
+      <ObjName>WeeklyReminderToManagerUA</ObjName>
+      <ObjDesc>Weekly Reminder To Manager UA</ObjDesc>
+      <ObjLink>aweeklyremindertomanagerua.aspx</ObjLink>
+   </Object>
+   <Object>
+      <ObjCls>1</ObjCls>
+      <ObjName>WeeklyReminderToManagerLK</ObjName>
+      <ObjDesc>Weekly Reminder To Manager LK</ObjDesc>
+      <ObjLink>aweeklyremindertomanagerlk.aspx</ObjLink>
    </Object>
 </Objects>

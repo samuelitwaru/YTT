@@ -62,18 +62,18 @@ namespace GeneXus.Programs {
                            out SdtUpdateLeaveRequest_Level_DetailSdt aP2_GXM1UpdateLeaveRequest_Level_DetailSdt )
       {
          this.A127LeaveRequestId = aP0_LeaveRequestId;
-         this.AV27gxid = aP1_gxid;
-         this.AV33GXM1UpdateLeaveRequest_Level_DetailSdt = new SdtUpdateLeaveRequest_Level_DetailSdt(context) ;
+         this.AV28gxid = aP1_gxid;
+         this.AV35GXM1UpdateLeaveRequest_Level_DetailSdt = new SdtUpdateLeaveRequest_Level_DetailSdt(context) ;
          initialize();
          executePrivate();
-         aP2_GXM1UpdateLeaveRequest_Level_DetailSdt=this.AV33GXM1UpdateLeaveRequest_Level_DetailSdt;
+         aP2_GXM1UpdateLeaveRequest_Level_DetailSdt=this.AV35GXM1UpdateLeaveRequest_Level_DetailSdt;
       }
 
       public SdtUpdateLeaveRequest_Level_DetailSdt executeUdp( long aP0_LeaveRequestId ,
                                                                int aP1_gxid )
       {
          execute(aP0_LeaveRequestId, aP1_gxid, out aP2_GXM1UpdateLeaveRequest_Level_DetailSdt);
-         return AV33GXM1UpdateLeaveRequest_Level_DetailSdt ;
+         return AV35GXM1UpdateLeaveRequest_Level_DetailSdt ;
       }
 
       public void executeSubmit( long aP0_LeaveRequestId ,
@@ -83,12 +83,12 @@ namespace GeneXus.Programs {
          updateleaverequest_level_detail objupdateleaverequest_level_detail;
          objupdateleaverequest_level_detail = new updateleaverequest_level_detail();
          objupdateleaverequest_level_detail.A127LeaveRequestId = aP0_LeaveRequestId;
-         objupdateleaverequest_level_detail.AV27gxid = aP1_gxid;
-         objupdateleaverequest_level_detail.AV33GXM1UpdateLeaveRequest_Level_DetailSdt = new SdtUpdateLeaveRequest_Level_DetailSdt(context) ;
+         objupdateleaverequest_level_detail.AV28gxid = aP1_gxid;
+         objupdateleaverequest_level_detail.AV35GXM1UpdateLeaveRequest_Level_DetailSdt = new SdtUpdateLeaveRequest_Level_DetailSdt(context) ;
          objupdateleaverequest_level_detail.context.SetSubmitInitialConfig(context);
          objupdateleaverequest_level_detail.initialize();
          Submit( executePrivateCatch,objupdateleaverequest_level_detail);
-         aP2_GXM1UpdateLeaveRequest_Level_DetailSdt=this.AV33GXM1UpdateLeaveRequest_Level_DetailSdt;
+         aP2_GXM1UpdateLeaveRequest_Level_DetailSdt=this.AV35GXM1UpdateLeaveRequest_Level_DetailSdt;
       }
 
       void executePrivateCatch( object stateInfo )
@@ -108,7 +108,7 @@ namespace GeneXus.Programs {
       {
          /* GeneXus formulas */
          /* Output device settings */
-         Gxids = "gxid_" + StringUtil.Str( (decimal)(AV27gxid), 8, 0);
+         Gxids = "gxid_" + StringUtil.Str( (decimal)(AV28gxid), 8, 0);
          if ( StringUtil.StrCmp(Gxwebsession.Get(Gxids), "") == 0 )
          {
             AV20LeaveRequest = new SdtLeaveRequest(context);
@@ -118,14 +118,25 @@ namespace GeneXus.Programs {
             AV21LeaveRequestDate = AV20LeaveRequest.gxTpr_Leaverequestdate;
             AV25LeaveRequestStartDate = AV20LeaveRequest.gxTpr_Leaverequeststartdate;
             AV24LeaveRequestEndDate = AV20LeaveRequest.gxTpr_Leaverequestenddate;
+            AV27LeaveRequestHalfDay = AV20LeaveRequest.gxTpr_Leaverequesthalfday;
             AV22LeaveRequestDescription = AV20LeaveRequest.gxTpr_Leaverequestdescription;
             AV23LeaveRequestDuration = AV20LeaveRequest.gxTpr_Leaverequestduration;
+            if ( StringUtil.StrCmp(AV27LeaveRequestHalfDay, "") != 0 )
+            {
+               AV24LeaveRequestEndDate = AV25LeaveRequestStartDate;
+               Gxdynprop += ((StringUtil.StrCmp(Gxdynprop, "")==0) ? "" : ", ") + "[\"&Leaverequestenddate\",\"Enabled\",\"" + "False" + "\"]";
+            }
+            else
+            {
+               Gxdynprop += ((StringUtil.StrCmp(Gxdynprop, "")==0) ? "" : ", ") + "[\"&Leaverequestenddate\",\"Enabled\",\"" + "True" + "\"]";
+            }
             AV19MsgVar = "Record Updated.";
             Gxwebsession.Set(Gxids+"gxvar_Leaverequestdate", context.localUtil.DToC( AV21LeaveRequestDate, 1, "/"));
             Gxwebsession.Set(Gxids+"gxvar_Leavetypeid", StringUtil.Str( (decimal)(AV26LeaveTypeId), 10, 0));
             Gxwebsession.Set(Gxids+"gxvar_Leaverequeststartdate", context.localUtil.DToC( AV25LeaveRequestStartDate, 1, "/"));
             Gxwebsession.Set(Gxids+"gxvar_Leaverequestenddate", context.localUtil.DToC( AV24LeaveRequestEndDate, 1, "/"));
             Gxwebsession.Set(Gxids+"gxvar_Leaverequestduration", StringUtil.Str( AV23LeaveRequestDuration, 4, 1));
+            Gxwebsession.Set(Gxids+"gxvar_Leaverequesthalfday", AV27LeaveRequestHalfDay);
             Gxwebsession.Set(Gxids+"gxvar_Leaverequestdescription", AV22LeaveRequestDescription);
             Gxwebsession.Set(Gxids+"gxvar_Leaverequest", AV20LeaveRequest.ToJSonString(true, true));
             Gxwebsession.Set(Gxids+"gxvar_Msgvar", AV19MsgVar);
@@ -138,19 +149,23 @@ namespace GeneXus.Programs {
             AV21LeaveRequestDate = context.localUtil.CToD( Gxwebsession.Get(Gxids+"gxvar_Leaverequestdate"), 1);
             AV25LeaveRequestStartDate = context.localUtil.CToD( Gxwebsession.Get(Gxids+"gxvar_Leaverequeststartdate"), 1);
             AV24LeaveRequestEndDate = context.localUtil.CToD( Gxwebsession.Get(Gxids+"gxvar_Leaverequestenddate"), 1);
+            AV27LeaveRequestHalfDay = Gxwebsession.Get(Gxids+"gxvar_Leaverequesthalfday");
             AV22LeaveRequestDescription = Gxwebsession.Get(Gxids+"gxvar_Leaverequestdescription");
             AV23LeaveRequestDuration = NumberUtil.Val( Gxwebsession.Get(Gxids+"gxvar_Leaverequestduration"), ".");
             AV19MsgVar = Gxwebsession.Get(Gxids+"gxvar_Msgvar");
          }
-         AV33GXM1UpdateLeaveRequest_Level_DetailSdt.gxTpr_Leaverequestdate = AV21LeaveRequestDate;
-         AV33GXM1UpdateLeaveRequest_Level_DetailSdt.gxTpr_Leavetypeid = AV26LeaveTypeId;
-         AV33GXM1UpdateLeaveRequest_Level_DetailSdt.gxTpr_Leaverequeststartdate = AV25LeaveRequestStartDate;
-         AV33GXM1UpdateLeaveRequest_Level_DetailSdt.gxTpr_Leaverequestenddate = AV24LeaveRequestEndDate;
-         AV33GXM1UpdateLeaveRequest_Level_DetailSdt.gxTpr_Leaverequestduration = AV23LeaveRequestDuration;
-         AV33GXM1UpdateLeaveRequest_Level_DetailSdt.gxTpr_Leaverequestdescription = AV22LeaveRequestDescription;
-         AV33GXM1UpdateLeaveRequest_Level_DetailSdt.gxTpr_Leaverequest = AV20LeaveRequest;
-         AV33GXM1UpdateLeaveRequest_Level_DetailSdt.gxTpr_Today = Gx_date;
-         AV33GXM1UpdateLeaveRequest_Level_DetailSdt.gxTpr_Msgvar = AV19MsgVar;
+         AV35GXM1UpdateLeaveRequest_Level_DetailSdt.gxTpr_Leaverequestdate = AV21LeaveRequestDate;
+         AV35GXM1UpdateLeaveRequest_Level_DetailSdt.gxTpr_Leavetypeid = AV26LeaveTypeId;
+         AV35GXM1UpdateLeaveRequest_Level_DetailSdt.gxTpr_Leaverequeststartdate = AV25LeaveRequestStartDate;
+         AV35GXM1UpdateLeaveRequest_Level_DetailSdt.gxTpr_Leaverequestenddate = AV24LeaveRequestEndDate;
+         AV35GXM1UpdateLeaveRequest_Level_DetailSdt.gxTpr_Leaverequestduration = AV23LeaveRequestDuration;
+         AV35GXM1UpdateLeaveRequest_Level_DetailSdt.gxTpr_Leaverequesthalfday = AV27LeaveRequestHalfDay;
+         AV35GXM1UpdateLeaveRequest_Level_DetailSdt.gxTpr_Leaverequestdescription = AV22LeaveRequestDescription;
+         AV35GXM1UpdateLeaveRequest_Level_DetailSdt.gxTpr_Leaverequest = AV20LeaveRequest;
+         AV35GXM1UpdateLeaveRequest_Level_DetailSdt.gxTpr_Today = Gx_date;
+         AV35GXM1UpdateLeaveRequest_Level_DetailSdt.gxTpr_Msgvar = AV19MsgVar;
+         AV35GXM1UpdateLeaveRequest_Level_DetailSdt.gxTpr_Gxdynprop = "[ "+Gxdynprop+" ]";
+         Gxdynprop = "";
          Gxval_leavetypeid = AV26LeaveTypeId;
          /* Execute user subroutine: Gxdesc_Leavetypeid */
          S111 ();
@@ -159,7 +174,7 @@ namespace GeneXus.Programs {
             this.cleanup();
             if (true) return;
          }
-         AV33GXM1UpdateLeaveRequest_Level_DetailSdt.gxTpr_Gxdesc_leavetypeid = Gxdesc_leavetypeid;
+         AV35GXM1UpdateLeaveRequest_Level_DetailSdt.gxTpr_Gxdesc_leavetypeid = Gxdesc_leavetypeid;
          this.cleanup();
       }
 
@@ -167,9 +182,9 @@ namespace GeneXus.Programs {
       {
          /* Gxdesc_Leavetypeid Routine */
          returnInSub = false;
-         AV35Udparg2 = new getloggedinusercompanyid(context).executeUdp( );
+         AV37Udparg2 = new getloggedinusercompanyid(context).executeUdp( );
          /* Using cursor P00002 */
-         pr_default.execute(0, new Object[] {Gxval_leavetypeid, AV35Udparg2});
+         pr_default.execute(0, new Object[] {Gxval_leavetypeid, AV37Udparg2});
          while ( (pr_default.getStatus(0) != 101) )
          {
             A100CompanyId = P00002_A100CompanyId[0];
@@ -201,7 +216,7 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
-         AV33GXM1UpdateLeaveRequest_Level_DetailSdt = new SdtUpdateLeaveRequest_Level_DetailSdt(context);
+         AV35GXM1UpdateLeaveRequest_Level_DetailSdt = new SdtUpdateLeaveRequest_Level_DetailSdt(context);
          Gxids = "";
          Gxwebsession = context.GetSession();
          AV20LeaveRequest = new SdtLeaveRequest(context);
@@ -209,7 +224,9 @@ namespace GeneXus.Programs {
          AV21LeaveRequestDate = DateTime.MinValue;
          AV25LeaveRequestStartDate = DateTime.MinValue;
          AV24LeaveRequestEndDate = DateTime.MinValue;
+         AV27LeaveRequestHalfDay = "";
          AV22LeaveRequestDescription = "";
+         Gxdynprop = "";
          AV19MsgVar = "";
          Gxdesc_leavetypeid = "";
          scmdbuf = "";
@@ -229,15 +246,16 @@ namespace GeneXus.Programs {
          Gx_date = DateTimeUtil.Today( context);
       }
 
-      private int AV27gxid ;
+      private int AV28gxid ;
       private long A127LeaveRequestId ;
       private long AV26LeaveTypeId ;
       private long Gxval_leavetypeid ;
-      private long AV35Udparg2 ;
+      private long AV37Udparg2 ;
       private long A100CompanyId ;
       private long A124LeaveTypeId ;
       private decimal AV23LeaveRequestDuration ;
       private string Gxids ;
+      private string AV27LeaveRequestHalfDay ;
       private string AV19MsgVar ;
       private string scmdbuf ;
       private string A125LeaveTypeName ;
@@ -247,6 +265,7 @@ namespace GeneXus.Programs {
       private DateTime AV24LeaveRequestEndDate ;
       private bool returnInSub ;
       private string AV22LeaveRequestDescription ;
+      private string Gxdynprop ;
       private string Gxdesc_leavetypeid ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
@@ -257,7 +276,7 @@ namespace GeneXus.Programs {
       private SdtUpdateLeaveRequest_Level_DetailSdt aP2_GXM1UpdateLeaveRequest_Level_DetailSdt ;
       private IGxSession Gxwebsession ;
       private SdtLeaveRequest AV20LeaveRequest ;
-      private SdtUpdateLeaveRequest_Level_DetailSdt AV33GXM1UpdateLeaveRequest_Level_DetailSdt ;
+      private SdtUpdateLeaveRequest_Level_DetailSdt AV35GXM1UpdateLeaveRequest_Level_DetailSdt ;
    }
 
    public class updateleaverequest_level_detail__default : DataStoreHelperBase, IDataStoreHelper
@@ -278,10 +297,10 @@ namespace GeneXus.Programs {
           Object[] prmP00002;
           prmP00002 = new Object[] {
           new ParDef("Gxval_leavetypeid",GXType.Int64,10,0) ,
-          new ParDef("AV35Udparg2",GXType.Int64,10,0)
+          new ParDef("AV37Udparg2",GXType.Int64,10,0)
           };
           def= new CursorDef[] {
-              new CursorDef("P00002", "SELECT CompanyId, LeaveTypeId, LeaveTypeName FROM LeaveType WHERE (LeaveTypeId = :Gxval_leavetypeid) AND (CompanyId = :AV35Udparg2) ORDER BY LeaveTypeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00002,1, GxCacheFrequency.OFF ,false,true )
+              new CursorDef("P00002", "SELECT CompanyId, LeaveTypeId, LeaveTypeName FROM LeaveType WHERE (LeaveTypeId = :Gxval_leavetypeid) AND (CompanyId = :AV37Udparg2) ORDER BY LeaveTypeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00002,1, GxCacheFrequency.OFF ,false,true )
           };
        }
     }

@@ -471,7 +471,7 @@ namespace GeneXus.Programs {
          A125LeaveTypeName = BC000J4_A125LeaveTypeName[0];
          A144LeaveTypeVacationLeave = BC000J4_A144LeaveTypeVacationLeave[0];
          pr_default.close(2);
-         if ( ( new checkemployeependingvacationleave(context).executeUdp(  A106EmployeeId) ) && ( StringUtil.StrCmp(A144LeaveTypeVacationLeave, "Yes") == 0 ) )
+         if ( ( new checkemployeependingvacationleave(context).executeUdp(  A106EmployeeId,  A127LeaveRequestId) ) && ( StringUtil.StrCmp(A144LeaveTypeVacationLeave, "Yes") == 0 ) && IsIns( )  )
          {
             GX_msglist.addItem("You already have a pending vacation leave", 1, "");
             AnyError = 1;
@@ -481,7 +481,7 @@ namespace GeneXus.Programs {
             GX_msglist.addItem("Start date is required", 1, "");
             AnyError = 1;
          }
-         if ( ! new checkleaverequesttimevalide(context).executeUdp(  A129LeaveRequestStartDate,  A173LeaveRequestHalfDay) )
+         if ( ! new checkleaverequesttimevalide(context).executeUdp(  A129LeaveRequestStartDate,  A173LeaveRequestHalfDay) && IsIns( )  )
          {
             GX_msglist.addItem("Request not permitted for this time", 1, "");
             AnyError = 1;
@@ -838,6 +838,16 @@ namespace GeneXus.Programs {
          if ( AnyError == 0 )
          {
             /* Delete mode formulas */
+            if ( ! new checkleaverequesttimevalide(context).executeUdp(  A129LeaveRequestStartDate,  A173LeaveRequestHalfDay) && IsIns( )  )
+            {
+               GX_msglist.addItem("Request not permitted for this time", 1, "");
+               AnyError = 1;
+            }
+            if ( ( new checkemployeependingvacationleave(context).executeUdp(  A106EmployeeId,  A127LeaveRequestId) ) && ( StringUtil.StrCmp(A144LeaveTypeVacationLeave, "Yes") == 0 ) && IsIns( )  )
+            {
+               GX_msglist.addItem("You already have a pending vacation leave", 1, "");
+               AnyError = 1;
+            }
             if ( ( DateTimeUtil.ResetTime ( A129LeaveRequestStartDate ) < DateTimeUtil.ResetTime ( Gx_date ) ) && IsIns( )  )
             {
                GX_msglist.addItem("Invalid Leave start date", 1, "");

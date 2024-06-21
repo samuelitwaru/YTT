@@ -163,7 +163,7 @@ namespace GeneXus.Programs {
                Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
             }
          }
-         Form.Meta.addItem("description", "Holiday", 0) ;
+         Form.Meta.addItem("description", "National Holidays", 0) ;
          context.wjLoc = "";
          context.nUserReturn = 0;
          context.wbHandled = 0;
@@ -339,20 +339,7 @@ namespace GeneXus.Programs {
          /* Div Control */
          GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
          /* Div Control */
-         GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-lg-9", "start", "top", "", "", "div");
-         /* User Defined Control */
-         ucDvpanel_tableattributes.SetProperty("Width", Dvpanel_tableattributes_Width);
-         ucDvpanel_tableattributes.SetProperty("AutoWidth", Dvpanel_tableattributes_Autowidth);
-         ucDvpanel_tableattributes.SetProperty("AutoHeight", Dvpanel_tableattributes_Autoheight);
-         ucDvpanel_tableattributes.SetProperty("Cls", Dvpanel_tableattributes_Cls);
-         ucDvpanel_tableattributes.SetProperty("Title", Dvpanel_tableattributes_Title);
-         ucDvpanel_tableattributes.SetProperty("Collapsible", Dvpanel_tableattributes_Collapsible);
-         ucDvpanel_tableattributes.SetProperty("Collapsed", Dvpanel_tableattributes_Collapsed);
-         ucDvpanel_tableattributes.SetProperty("ShowCollapseIcon", Dvpanel_tableattributes_Showcollapseicon);
-         ucDvpanel_tableattributes.SetProperty("IconPosition", Dvpanel_tableattributes_Iconposition);
-         ucDvpanel_tableattributes.SetProperty("AutoScroll", Dvpanel_tableattributes_Autoscroll);
-         ucDvpanel_tableattributes.Render(context, "dvelop.gxbootstrap.panel_al", Dvpanel_tableattributes_Internalname, "DVPANEL_TABLEATTRIBUTESContainer");
-         context.WriteHtmlText( "<div class=\"gx_usercontrol_child\" id=\""+"DVPANEL_TABLEATTRIBUTESContainer"+"TableAttributes"+"\" style=\"display:none;\">") ;
+         GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-md-9 col-lg-7", "start", "top", "", "", "div");
          /* Div Control */
          GxWebStd.gx_div_start( context, divTableattributes_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
          /* Div Control */
@@ -366,8 +353,8 @@ namespace GeneXus.Programs {
          /* Div Control */
          GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
          /* Single line edit */
-         TempTags = "  onfocus=\"gx.evt.onfocus(this, 22,'',false,'',0)\"";
-         GxWebStd.gx_single_line_edit( context, edtHolidayName_Internalname, StringUtil.RTrim( A114HolidayName), StringUtil.RTrim( context.localUtil.Format( A114HolidayName, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,22);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtHolidayName_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtHolidayName_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "Name", "start", true, "", "HLP_Holiday.htm");
+         TempTags = "  onfocus=\"gx.evt.onfocus(this, 20,'',false,'',0)\"";
+         GxWebStd.gx_single_line_edit( context, edtHolidayName_Internalname, StringUtil.RTrim( A114HolidayName), StringUtil.RTrim( context.localUtil.Format( A114HolidayName, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,20);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtHolidayName_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtHolidayName_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "Name", "start", true, "", "HLP_Holiday.htm");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -380,9 +367,9 @@ namespace GeneXus.Programs {
          /* Div Control */
          GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
          /* Single line edit */
-         TempTags = "  onfocus=\"gx.evt.onfocus(this, 26,'',false,'',0)\"";
+         TempTags = "  onfocus=\"gx.evt.onfocus(this, 24,'',false,'',0)\"";
          context.WriteHtmlText( "<div id=\""+edtHolidayStartDate_Internalname+"_dp_container\" class=\"dp_container\" style=\"white-space:nowrap;display:inline;\">") ;
-         GxWebStd.gx_single_line_edit( context, edtHolidayStartDate_Internalname, context.localUtil.Format(A115HolidayStartDate, "99/99/99"), context.localUtil.Format( A115HolidayStartDate, "99/99/99"), TempTags+" onchange=\""+"gx.date.valid_date(this, 8,'MDY',0,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 8,'MDY',0,12,'eng',false,0);"+";gx.evt.onblur(this,26);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtHolidayStartDate_Jsonclick, 0, "AttributeDate", "", "", "", "", 1, edtHolidayStartDate_Enabled, 0, "text", "", 8, "chr", 1, "row", 8, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_Holiday.htm");
+         GxWebStd.gx_single_line_edit( context, edtHolidayStartDate_Internalname, context.localUtil.Format(A115HolidayStartDate, "99/99/99"), context.localUtil.Format( A115HolidayStartDate, "99/99/99"), TempTags+" onchange=\""+"gx.date.valid_date(this, 8,'MDY',0,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 8,'MDY',0,12,'eng',false,0);"+";gx.evt.onblur(this,24);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtHolidayStartDate_Jsonclick, 0, "AttributeDate", "", "", "", "", 1, edtHolidayStartDate_Enabled, 0, "text", "", 8, "chr", 1, "row", 8, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_Holiday.htm");
          GxWebStd.gx_bitmap( context, edtHolidayStartDate_Internalname+"_dp_trigger", context.GetImagePath( "61b9b5d3-dff6-4d59-9b00-da61bc2cbe93", "", context.GetTheme( )), "", "", "", "", ((1==0)||(edtHolidayStartDate_Enabled==0) ? 0 : 1), 0, "Date selector", "Date selector", 0, 1, 0, "", 0, "", 0, 0, 0, "", "", "cursor: pointer;", "", "", "", "", "", "", "", "", 1, false, false, "", "HLP_Holiday.htm");
          context.WriteHtmlTextNl( "</div>") ;
          GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -400,16 +387,15 @@ namespace GeneXus.Programs {
          /* Div Control */
          GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
          /* Check box */
-         TempTags = "  onfocus=\"gx.evt.onfocus(this, 31,'',false,'',0)\"";
+         TempTags = "  onfocus=\"gx.evt.onfocus(this, 29,'',false,'',0)\"";
          ClassString = "AttributeCheckBox";
          StyleString = "";
-         GxWebStd.gx_checkbox_ctrl( context, chkHolidayIsActive_Internalname, StringUtil.BoolToStr( A139HolidayIsActive), "", "Active", chkHolidayIsActive.Visible, chkHolidayIsActive.Enabled, "true", "", StyleString, ClassString, "", "", TempTags+" onclick="+"\"gx.fn.checkboxClick(31, this, 'true', 'false',"+"''"+");"+"gx.evt.onchange(this, event);\""+" onblur=\""+""+";gx.evt.onblur(this,31);\"");
+         GxWebStd.gx_checkbox_ctrl( context, chkHolidayIsActive_Internalname, StringUtil.BoolToStr( A139HolidayIsActive), "", "Active", chkHolidayIsActive.Visible, chkHolidayIsActive.Enabled, "true", "", StyleString, ClassString, "", "", TempTags+" onclick="+"\"gx.fn.checkboxClick(29, this, 'true', 'false',"+"''"+");"+"gx.evt.onchange(this, event);\""+" onblur=\""+""+";gx.evt.onblur(this,29);\"");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
-         context.WriteHtmlText( "</div>") ;
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -423,21 +409,21 @@ namespace GeneXus.Programs {
          GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-action-group CellMarginTop10", "start", "top", " "+"data-gx-actiongroup-type=\"toolbar\""+" ", "", "div");
          /* Div Control */
          GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-button", "start", "top", "", "", "div");
-         TempTags = "  onfocus=\"gx.evt.onfocus(this, 36,'',false,'',0)\"";
+         TempTags = "  onfocus=\"gx.evt.onfocus(this, 34,'',false,'',0)\"";
          ClassString = "ButtonMaterial";
          StyleString = "";
          GxWebStd.gx_button_ctrl( context, bttBtntrn_enter_Internalname, "", "Confirm", bttBtntrn_enter_Jsonclick, 5, "Confirm", "", StyleString, ClassString, bttBtntrn_enter_Visible, bttBtntrn_enter_Enabled, "standard", "'"+""+"'"+",false,"+"'"+"EENTER."+"'", TempTags, "", context.GetButtonType( ), "HLP_Holiday.htm");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          /* Div Control */
          GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-button", "start", "top", "", "", "div");
-         TempTags = "  onfocus=\"gx.evt.onfocus(this, 38,'',false,'',0)\"";
+         TempTags = "  onfocus=\"gx.evt.onfocus(this, 36,'',false,'',0)\"";
          ClassString = "ButtonMaterialDefault";
          StyleString = "";
          GxWebStd.gx_button_ctrl( context, bttBtntrn_cancel_Internalname, "", "Cancel", bttBtntrn_cancel_Jsonclick, 1, "Cancel", "", StyleString, ClassString, bttBtntrn_cancel_Visible, 1, "standard", "'"+""+"'"+",false,"+"'"+"ECANCEL."+"'", TempTags, "", context.GetButtonType( ), "HLP_Holiday.htm");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          /* Div Control */
          GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-button", "start", "top", "", "", "div");
-         TempTags = "  onfocus=\"gx.evt.onfocus(this, 40,'',false,'',0)\"";
+         TempTags = "  onfocus=\"gx.evt.onfocus(this, 38,'',false,'',0)\"";
          ClassString = "ButtonMaterialDefault";
          StyleString = "";
          GxWebStd.gx_button_ctrl( context, bttBtntrn_delete_Internalname, "", "Delete", bttBtntrn_delete_Jsonclick, 5, "Delete", "", StyleString, ClassString, bttBtntrn_delete_Visible, bttBtntrn_delete_Enabled, "standard", "'"+""+"'"+",false,"+"'"+"EDELETE."+"'", TempTags, "", context.GetButtonType( ), "HLP_Holiday.htm");
@@ -457,17 +443,17 @@ namespace GeneXus.Programs {
          /* Single line edit */
          GxWebStd.gx_single_line_edit( context, edtHolidayId_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(A113HolidayId), 10, 0, ".", "")), StringUtil.LTrim( ((edtHolidayId_Enabled!=0) ? context.localUtil.Format( (decimal)(A113HolidayId), "ZZZZZZZZZ9") : context.localUtil.Format( (decimal)(A113HolidayId), "ZZZZZZZZZ9"))), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtHolidayId_Jsonclick, 0, "Attribute", "", "", "", "", edtHolidayId_Visible, edtHolidayId_Enabled, 0, "text", "1", 10, "chr", 1, "row", 10, 0, 0, 0, 0, -1, 0, true, "Id", "end", false, "", "HLP_Holiday.htm");
          /* Single line edit */
-         TempTags = "  onfocus=\"gx.evt.onfocus(this, 45,'',false,'',0)\"";
+         TempTags = "  onfocus=\"gx.evt.onfocus(this, 43,'',false,'',0)\"";
          context.WriteHtmlText( "<div id=\""+edtHolidayEndDate_Internalname+"_dp_container\" class=\"dp_container\" style=\"white-space:nowrap;display:inline;\">") ;
-         GxWebStd.gx_single_line_edit( context, edtHolidayEndDate_Internalname, context.localUtil.Format(A116HolidayEndDate, "99/99/99"), context.localUtil.Format( A116HolidayEndDate, "99/99/99"), TempTags+" onchange=\""+"gx.date.valid_date(this, 8,'MDY',0,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 8,'MDY',0,12,'eng',false,0);"+";gx.evt.onblur(this,45);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtHolidayEndDate_Jsonclick, 0, "Attribute", "", "", "", "", edtHolidayEndDate_Visible, edtHolidayEndDate_Enabled, 0, "text", "", 8, "chr", 1, "row", 8, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_Holiday.htm");
+         GxWebStd.gx_single_line_edit( context, edtHolidayEndDate_Internalname, context.localUtil.Format(A116HolidayEndDate, "99/99/99"), context.localUtil.Format( A116HolidayEndDate, "99/99/99"), TempTags+" onchange=\""+"gx.date.valid_date(this, 8,'MDY',0,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 8,'MDY',0,12,'eng',false,0);"+";gx.evt.onblur(this,43);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtHolidayEndDate_Jsonclick, 0, "Attribute", "", "", "", "", edtHolidayEndDate_Visible, edtHolidayEndDate_Enabled, 0, "text", "", 8, "chr", 1, "row", 8, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_Holiday.htm");
          GxWebStd.gx_bitmap( context, edtHolidayEndDate_Internalname+"_dp_trigger", context.GetImagePath( "61b9b5d3-dff6-4d59-9b00-da61bc2cbe93", "", context.GetTheme( )), "", "", "", "", ((edtHolidayEndDate_Visible==0)||(edtHolidayEndDate_Enabled==0) ? 0 : 1), 0, "Date selector", "Date selector", 0, 1, 0, "", 0, "", 0, 0, 0, "", "", "cursor: pointer;", "", "", "", "", "", "", "", "", 1, false, false, "", "HLP_Holiday.htm");
          context.WriteHtmlTextNl( "</div>") ;
          /* Single line edit */
-         TempTags = "  onfocus=\"gx.evt.onfocus(this, 46,'',false,'',0)\"";
-         GxWebStd.gx_single_line_edit( context, edtHolidayServiceId_Internalname, StringUtil.RTrim( A117HolidayServiceId), StringUtil.RTrim( context.localUtil.Format( A117HolidayServiceId, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,46);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtHolidayServiceId_Jsonclick, 0, "Attribute", "", "", "", "", edtHolidayServiceId_Visible, edtHolidayServiceId_Enabled, 0, "text", "", 40, "chr", 1, "row", 40, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_Holiday.htm");
+         TempTags = "  onfocus=\"gx.evt.onfocus(this, 44,'',false,'',0)\"";
+         GxWebStd.gx_single_line_edit( context, edtHolidayServiceId_Internalname, StringUtil.RTrim( A117HolidayServiceId), StringUtil.RTrim( context.localUtil.Format( A117HolidayServiceId, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,44);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtHolidayServiceId_Jsonclick, 0, "Attribute", "", "", "", "", edtHolidayServiceId_Visible, edtHolidayServiceId_Enabled, 0, "text", "", 40, "chr", 1, "row", 40, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_Holiday.htm");
          /* Single line edit */
-         TempTags = "  onfocus=\"gx.evt.onfocus(this, 47,'',false,'',0)\"";
-         GxWebStd.gx_single_line_edit( context, edtCompanyId_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(A100CompanyId), 10, 0, ".", "")), StringUtil.LTrim( context.localUtil.Format( (decimal)(A100CompanyId), "ZZZZZZZZZ9")), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+TempTags+" onchange=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onblur(this,47);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtCompanyId_Jsonclick, 0, "Attribute", "", "", "", "", edtCompanyId_Visible, edtCompanyId_Enabled, 1, "text", "1", 10, "chr", 1, "row", 10, 0, 0, 0, 0, -1, 0, true, "Id", "end", false, "", "HLP_Holiday.htm");
+         TempTags = "  onfocus=\"gx.evt.onfocus(this, 45,'',false,'',0)\"";
+         GxWebStd.gx_single_line_edit( context, edtCompanyId_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(A100CompanyId), 10, 0, ".", "")), StringUtil.LTrim( context.localUtil.Format( (decimal)(A100CompanyId), "ZZZZZZZZZ9")), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+TempTags+" onchange=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onblur(this,45);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtCompanyId_Jsonclick, 0, "Attribute", "", "", "", "", edtCompanyId_Visible, edtCompanyId_Enabled, 1, "text", "1", 10, "chr", 1, "row", 10, 0, 0, 0, 0, -1, 0, true, "Id", "end", false, "", "HLP_Holiday.htm");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -530,23 +516,6 @@ namespace GeneXus.Programs {
                A157CompanyLocationId = (long)(Math.Round(context.localUtil.CToN( cgiGet( "COMPANYLOCATIONID"), ".", ","), 18, MidpointRounding.ToEven));
                A159CompanyLocationCode = cgiGet( "COMPANYLOCATIONCODE");
                AV24Pgmname = cgiGet( "vPGMNAME");
-               Dvpanel_tableattributes_Objectcall = cgiGet( "DVPANEL_TABLEATTRIBUTES_Objectcall");
-               Dvpanel_tableattributes_Class = cgiGet( "DVPANEL_TABLEATTRIBUTES_Class");
-               Dvpanel_tableattributes_Enabled = StringUtil.StrToBool( cgiGet( "DVPANEL_TABLEATTRIBUTES_Enabled"));
-               Dvpanel_tableattributes_Width = cgiGet( "DVPANEL_TABLEATTRIBUTES_Width");
-               Dvpanel_tableattributes_Height = cgiGet( "DVPANEL_TABLEATTRIBUTES_Height");
-               Dvpanel_tableattributes_Autowidth = StringUtil.StrToBool( cgiGet( "DVPANEL_TABLEATTRIBUTES_Autowidth"));
-               Dvpanel_tableattributes_Autoheight = StringUtil.StrToBool( cgiGet( "DVPANEL_TABLEATTRIBUTES_Autoheight"));
-               Dvpanel_tableattributes_Cls = cgiGet( "DVPANEL_TABLEATTRIBUTES_Cls");
-               Dvpanel_tableattributes_Showheader = StringUtil.StrToBool( cgiGet( "DVPANEL_TABLEATTRIBUTES_Showheader"));
-               Dvpanel_tableattributes_Title = cgiGet( "DVPANEL_TABLEATTRIBUTES_Title");
-               Dvpanel_tableattributes_Collapsible = StringUtil.StrToBool( cgiGet( "DVPANEL_TABLEATTRIBUTES_Collapsible"));
-               Dvpanel_tableattributes_Collapsed = StringUtil.StrToBool( cgiGet( "DVPANEL_TABLEATTRIBUTES_Collapsed"));
-               Dvpanel_tableattributes_Showcollapseicon = StringUtil.StrToBool( cgiGet( "DVPANEL_TABLEATTRIBUTES_Showcollapseicon"));
-               Dvpanel_tableattributes_Iconposition = cgiGet( "DVPANEL_TABLEATTRIBUTES_Iconposition");
-               Dvpanel_tableattributes_Autoscroll = StringUtil.StrToBool( cgiGet( "DVPANEL_TABLEATTRIBUTES_Autoscroll"));
-               Dvpanel_tableattributes_Visible = StringUtil.StrToBool( cgiGet( "DVPANEL_TABLEATTRIBUTES_Visible"));
-               Dvpanel_tableattributes_Gxcontroltype = (int)(Math.Round(context.localUtil.CToN( cgiGet( "DVPANEL_TABLEATTRIBUTES_Gxcontroltype"), ".", ","), 18, MidpointRounding.ToEven));
                /* Read variables values. */
                A114HolidayName = cgiGet( edtHolidayName_Internalname);
                AssignAttri("", false, "A114HolidayName", A114HolidayName);
@@ -1832,9 +1801,6 @@ namespace GeneXus.Programs {
          context.AddJavascriptSource("calendar.js", "?"+context.GetBuildNumber( 312140), false, true);
          context.AddJavascriptSource("calendar-setup.js", "?"+context.GetBuildNumber( 312140), false, true);
          context.AddJavascriptSource("calendar-en.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
-         context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
-         context.AddJavascriptSource("DVelop/Bootstrap/Panel/BootstrapPanelRender.js", "", false, true);
          context.WriteHtmlText( Form.Headerrawhtml) ;
          context.CloseHtmlHeader();
          if ( context.isSpaRequest( ) )
@@ -1915,18 +1881,6 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "COMPANYLOCATIONID", StringUtil.LTrim( StringUtil.NToC( (decimal)(A157CompanyLocationId), 10, 0, ".", "")));
          GxWebStd.gx_hidden_field( context, "COMPANYLOCATIONCODE", StringUtil.RTrim( A159CompanyLocationCode));
          GxWebStd.gx_hidden_field( context, "vPGMNAME", StringUtil.RTrim( AV24Pgmname));
-         GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEATTRIBUTES_Objectcall", StringUtil.RTrim( Dvpanel_tableattributes_Objectcall));
-         GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEATTRIBUTES_Enabled", StringUtil.BoolToStr( Dvpanel_tableattributes_Enabled));
-         GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEATTRIBUTES_Width", StringUtil.RTrim( Dvpanel_tableattributes_Width));
-         GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEATTRIBUTES_Autowidth", StringUtil.BoolToStr( Dvpanel_tableattributes_Autowidth));
-         GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEATTRIBUTES_Autoheight", StringUtil.BoolToStr( Dvpanel_tableattributes_Autoheight));
-         GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEATTRIBUTES_Cls", StringUtil.RTrim( Dvpanel_tableattributes_Cls));
-         GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEATTRIBUTES_Title", StringUtil.RTrim( Dvpanel_tableattributes_Title));
-         GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEATTRIBUTES_Collapsible", StringUtil.BoolToStr( Dvpanel_tableattributes_Collapsible));
-         GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEATTRIBUTES_Collapsed", StringUtil.BoolToStr( Dvpanel_tableattributes_Collapsed));
-         GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEATTRIBUTES_Showcollapseicon", StringUtil.BoolToStr( Dvpanel_tableattributes_Showcollapseicon));
-         GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEATTRIBUTES_Iconposition", StringUtil.RTrim( Dvpanel_tableattributes_Iconposition));
-         GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEATTRIBUTES_Autoscroll", StringUtil.BoolToStr( Dvpanel_tableattributes_Autoscroll));
       }
 
       public override void RenderHtmlCloseForm( )
@@ -1993,7 +1947,7 @@ namespace GeneXus.Programs {
 
       public override string GetPgmdesc( )
       {
-         return "Holiday" ;
+         return "National Holidays" ;
       }
 
       protected void InitializeNonKey0G18( )
@@ -2051,7 +2005,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024619729293", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20246211018190", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2067,10 +2021,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("holiday.js", "?2024619729294", false, true);
-         context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
-         context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
-         context.AddJavascriptSource("DVelop/Bootstrap/Panel/BootstrapPanelRender.js", "", false, true);
+         context.AddJavascriptSource("holiday.js", "?20246211018193", false, true);
          /* End function include_jscripts */
       }
 
@@ -2081,7 +2032,6 @@ namespace GeneXus.Programs {
          chkHolidayIsActive_Internalname = "HOLIDAYISACTIVE";
          divHolidayisactive_cell_Internalname = "HOLIDAYISACTIVE_CELL";
          divTableattributes_Internalname = "TABLEATTRIBUTES";
-         Dvpanel_tableattributes_Internalname = "DVPANEL_TABLEATTRIBUTES";
          divTablecontent_Internalname = "TABLECONTENT";
          bttBtntrn_enter_Internalname = "BTNTRN_ENTER";
          bttBtntrn_cancel_Internalname = "BTNTRN_CANCEL";
@@ -2108,7 +2058,7 @@ namespace GeneXus.Programs {
          Form.Background = "";
          Form.Textcolor = 0;
          Form.Backcolor = (int)(0xFFFFFF);
-         Form.Caption = "Holiday";
+         Form.Caption = "National Holidays";
          edtCompanyId_Jsonclick = "";
          edtCompanyId_Enabled = 1;
          edtCompanyId_Visible = 1;
@@ -2133,16 +2083,6 @@ namespace GeneXus.Programs {
          edtHolidayStartDate_Enabled = 1;
          edtHolidayName_Jsonclick = "";
          edtHolidayName_Enabled = 1;
-         Dvpanel_tableattributes_Autoscroll = Convert.ToBoolean( 0);
-         Dvpanel_tableattributes_Iconposition = "Right";
-         Dvpanel_tableattributes_Showcollapseicon = Convert.ToBoolean( 0);
-         Dvpanel_tableattributes_Collapsed = Convert.ToBoolean( 0);
-         Dvpanel_tableattributes_Collapsible = Convert.ToBoolean( 0);
-         Dvpanel_tableattributes_Title = "General Information";
-         Dvpanel_tableattributes_Cls = "PanelCard_GrayTitle";
-         Dvpanel_tableattributes_Autoheight = Convert.ToBoolean( -1);
-         Dvpanel_tableattributes_Autowidth = Convert.ToBoolean( 0);
-         Dvpanel_tableattributes_Width = "100%";
          divLayoutmaintable_Class = "Table";
          context.GX_msglist.DisplayMode = 1;
          if ( context.isSpaRequest( ) )
@@ -2321,7 +2261,6 @@ namespace GeneXus.Programs {
          GX_FocusControl = "";
          ClassString = "";
          StyleString = "";
-         ucDvpanel_tableattributes = new GXUserControl();
          TempTags = "";
          A114HolidayName = "";
          A115HolidayStartDate = DateTime.MinValue;
@@ -2332,9 +2271,6 @@ namespace GeneXus.Programs {
          A117HolidayServiceId = "";
          A159CompanyLocationCode = "";
          AV24Pgmname = "";
-         Dvpanel_tableattributes_Objectcall = "";
-         Dvpanel_tableattributes_Class = "";
-         Dvpanel_tableattributes_Height = "";
          forbiddenHiddens = new GXProperties();
          hsh = "";
          sMode18 = "";
@@ -2493,7 +2429,6 @@ namespace GeneXus.Programs {
       private int edtHolidayServiceId_Enabled ;
       private int edtCompanyId_Visible ;
       private int edtCompanyId_Enabled ;
-      private int Dvpanel_tableattributes_Gxcontroltype ;
       private int AV25GXV1 ;
       private int idxLst ;
       private long wcpOAV7HolidayId ;
@@ -2526,11 +2461,6 @@ namespace GeneXus.Programs {
       private string ClassString ;
       private string StyleString ;
       private string divTablecontent_Internalname ;
-      private string Dvpanel_tableattributes_Width ;
-      private string Dvpanel_tableattributes_Cls ;
-      private string Dvpanel_tableattributes_Title ;
-      private string Dvpanel_tableattributes_Iconposition ;
-      private string Dvpanel_tableattributes_Internalname ;
       private string divTableattributes_Internalname ;
       private string TempTags ;
       private string A114HolidayName ;
@@ -2558,9 +2488,6 @@ namespace GeneXus.Programs {
       private string edtCompanyId_Jsonclick ;
       private string A159CompanyLocationCode ;
       private string AV24Pgmname ;
-      private string Dvpanel_tableattributes_Objectcall ;
-      private string Dvpanel_tableattributes_Class ;
-      private string Dvpanel_tableattributes_Height ;
       private string hsh ;
       private string sMode18 ;
       private string sEvt ;
@@ -2582,23 +2509,13 @@ namespace GeneXus.Programs {
       private bool toggleJsOutput ;
       private bool wbErr ;
       private bool A139HolidayIsActive ;
-      private bool Dvpanel_tableattributes_Autowidth ;
-      private bool Dvpanel_tableattributes_Autoheight ;
-      private bool Dvpanel_tableattributes_Collapsible ;
-      private bool Dvpanel_tableattributes_Collapsed ;
-      private bool Dvpanel_tableattributes_Showcollapseicon ;
-      private bool Dvpanel_tableattributes_Autoscroll ;
       private bool n116HolidayEndDate ;
       private bool n117HolidayServiceId ;
-      private bool Dvpanel_tableattributes_Enabled ;
-      private bool Dvpanel_tableattributes_Showheader ;
-      private bool Dvpanel_tableattributes_Visible ;
       private bool returnInSub ;
       private bool Gx_longc ;
       private bool i139HolidayIsActive ;
       private IGxSession AV12WebSession ;
       private GXProperties forbiddenHiddens ;
-      private GXUserControl ucDvpanel_tableattributes ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private GXCheckbox chkHolidayIsActive ;

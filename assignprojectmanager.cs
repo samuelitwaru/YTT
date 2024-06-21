@@ -42,21 +42,21 @@ namespace GeneXus.Programs {
          dsDefault = context.GetDataStore("Default");
       }
 
-      public void execute( long aP0_ComboProjectManagerId ,
+      public void execute( long aP0_ProjectManagerIdVariable ,
                            long aP1_ProjectId )
       {
-         this.AV9ComboProjectManagerId = aP0_ComboProjectManagerId;
+         this.AV14ProjectManagerIdVariable = aP0_ProjectManagerIdVariable;
          this.AV11ProjectId = aP1_ProjectId;
          initialize();
          executePrivate();
       }
 
-      public void executeSubmit( long aP0_ComboProjectManagerId ,
+      public void executeSubmit( long aP0_ProjectManagerIdVariable ,
                                  long aP1_ProjectId )
       {
          assignprojectmanager objassignprojectmanager;
          objassignprojectmanager = new assignprojectmanager();
-         objassignprojectmanager.AV9ComboProjectManagerId = aP0_ComboProjectManagerId;
+         objassignprojectmanager.AV14ProjectManagerIdVariable = aP0_ProjectManagerIdVariable;
          objassignprojectmanager.AV11ProjectId = aP1_ProjectId;
          objassignprojectmanager.context.SetSubmitInitialConfig(context);
          objassignprojectmanager.initialize();
@@ -80,16 +80,16 @@ namespace GeneXus.Programs {
       {
          /* GeneXus formulas */
          /* Output device settings */
-         new logtofile(context ).execute(  "AssignPM: "+StringUtil.Str( (decimal)(AV9ComboProjectManagerId), 10, 0)+" >> "+context.localUtil.Format( (decimal)(AV11ProjectId), "ZZZZZZZZZ9")) ;
-         AV8Employee.Load(AV9ComboProjectManagerId);
+         AV8Employee.Load(AV14ProjectManagerIdVariable);
          AV13EmployeeProject.gxTpr_Projectid = AV11ProjectId;
          AV8Employee.gxTpr_Project.Add(AV13EmployeeProject, 0);
          if ( AV8Employee.Update() )
          {
             AV10Project.Load(AV11ProjectId);
-            AV10Project.gxTpr_Projectmanagerid = AV9ComboProjectManagerId;
+            AV10Project.gxTpr_Projectmanagerid = AV14ProjectManagerIdVariable;
             if ( AV10Project.Update() )
             {
+               new assignprojectmanagerrole(context ).execute(  AV14ProjectManagerIdVariable,  AV11ProjectId) ;
                context.CommitDataStores("assignprojectmanager",pr_default);
             }
          }
@@ -126,7 +126,7 @@ namespace GeneXus.Programs {
          /* GeneXus formulas. */
       }
 
-      private long AV9ComboProjectManagerId ;
+      private long AV14ProjectManagerIdVariable ;
       private long AV11ProjectId ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
