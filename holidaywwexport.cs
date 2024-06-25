@@ -170,7 +170,7 @@ namespace GeneXus.Programs {
          if ( ! ( String.IsNullOrEmpty(StringUtil.RTrim( AV38TFHolidayName_Sel)) ) )
          {
             GXt_int2 = (short)(AV14CellRow);
-            new GeneXus.Programs.wwpbaseobjects.wwp_exportwritefilter(context ).execute( ref  AV11ExcelDocument,  true, ref  GXt_int2,  (short)(AV15FirstColumn),  "Name") ;
+            new GeneXus.Programs.wwpbaseobjects.wwp_exportwritefilter(context ).execute( ref  AV11ExcelDocument,  true, ref  GXt_int2,  (short)(AV15FirstColumn),  "National Holiday Name") ;
             AV14CellRow = GXt_int2;
             GXt_char1 = "";
             new GeneXus.Programs.wwpbaseobjects.wwp_export_securetext(context ).execute(  (String.IsNullOrEmpty(StringUtil.RTrim( AV38TFHolidayName_Sel)) ? "(Empty)" : AV38TFHolidayName_Sel), out  GXt_char1) ;
@@ -181,7 +181,7 @@ namespace GeneXus.Programs {
             if ( ! ( String.IsNullOrEmpty(StringUtil.RTrim( AV37TFHolidayName)) ) )
             {
                GXt_int2 = (short)(AV14CellRow);
-               new GeneXus.Programs.wwpbaseobjects.wwp_exportwritefilter(context ).execute( ref  AV11ExcelDocument,  true, ref  GXt_int2,  (short)(AV15FirstColumn),  "Name") ;
+               new GeneXus.Programs.wwpbaseobjects.wwp_exportwritefilter(context ).execute( ref  AV11ExcelDocument,  true, ref  GXt_int2,  (short)(AV15FirstColumn),  "National Holiday Name") ;
                AV14CellRow = GXt_int2;
                GXt_char1 = "";
                new GeneXus.Programs.wwpbaseobjects.wwp_export_securetext(context ).execute(  AV37TFHolidayName, out  GXt_char1) ;
@@ -382,7 +382,7 @@ namespace GeneXus.Programs {
          /* 'INITIALIZECOLUMNSSELECTOR' Routine */
          returnInSub = false;
          AV24ColumnsSelector = new GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector(context);
-         new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV24ColumnsSelector,  "HolidayName",  "",  "Name",  true,  "") ;
+         new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV24ColumnsSelector,  "HolidayName",  "",  "National Holiday Name",  true,  "") ;
          new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV24ColumnsSelector,  "HolidayStartDate",  "",  "Date",  true,  "") ;
          new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV24ColumnsSelector,  "HolidayIsActive",  "",  "Is Active",  true,  "") ;
          GXt_char1 = AV28UserCustomValue;
@@ -652,19 +652,19 @@ namespace GeneXus.Programs {
          scmdbuf += sWhereString;
          if ( ( AV17OrderedBy == 1 ) && ! AV18OrderedDsc )
          {
-            scmdbuf += " ORDER BY HolidayName";
+            scmdbuf += " ORDER BY HolidayStartDate";
          }
          else if ( ( AV17OrderedBy == 1 ) && ( AV18OrderedDsc ) )
          {
-            scmdbuf += " ORDER BY HolidayName DESC";
+            scmdbuf += " ORDER BY HolidayStartDate DESC";
          }
          else if ( ( AV17OrderedBy == 2 ) && ! AV18OrderedDsc )
          {
-            scmdbuf += " ORDER BY HolidayStartDate";
+            scmdbuf += " ORDER BY HolidayName";
          }
          else if ( ( AV17OrderedBy == 2 ) && ( AV18OrderedDsc ) )
          {
-            scmdbuf += " ORDER BY HolidayStartDate DESC";
+            scmdbuf += " ORDER BY HolidayName DESC";
          }
          else if ( ( AV17OrderedBy == 3 ) && ! AV18OrderedDsc )
          {

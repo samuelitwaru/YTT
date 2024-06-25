@@ -2060,7 +2060,7 @@ namespace GeneXus.Programs {
          /* 'INITIALIZECOLUMNSSELECTOR' Routine */
          returnInSub = false;
          AV25ColumnsSelector = new GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector(context);
-         new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV25ColumnsSelector,  "HolidayName",  "",  "Name",  true,  "") ;
+         new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV25ColumnsSelector,  "HolidayName",  "",  "National Holiday Name",  true,  "") ;
          new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV25ColumnsSelector,  "HolidayStartDate",  "",  "Date",  true,  "") ;
          new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV25ColumnsSelector,  "HolidayIsActive",  "",  "Is Active",  true,  "") ;
          GXt_char2 = AV24UserCustomValue;
@@ -2238,7 +2238,7 @@ namespace GeneXus.Programs {
          AV15GridState.gxTpr_Ordereddsc = AV18OrderedDsc;
          AV15GridState.gxTpr_Filtervalues.Clear();
          new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV15GridState,  "FILTERFULLTEXT",  "Main filter",  !String.IsNullOrEmpty(StringUtil.RTrim( AV20FilterFullText)),  0,  AV20FilterFullText,  AV20FilterFullText,  false,  "",  "") ;
-         new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalueandsel(context ).execute( ref  AV15GridState,  "TFHOLIDAYNAME",  "Name",  !String.IsNullOrEmpty(StringUtil.RTrim( AV33TFHolidayName)),  0,  AV33TFHolidayName,  AV33TFHolidayName,  false,  "",  "",  !String.IsNullOrEmpty(StringUtil.RTrim( AV34TFHolidayName_Sel)),  AV34TFHolidayName_Sel,  AV34TFHolidayName_Sel) ;
+         new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalueandsel(context ).execute( ref  AV15GridState,  "TFHOLIDAYNAME",  "National Holiday Name",  !String.IsNullOrEmpty(StringUtil.RTrim( AV33TFHolidayName)),  0,  AV33TFHolidayName,  AV33TFHolidayName,  false,  "",  "",  !String.IsNullOrEmpty(StringUtil.RTrim( AV34TFHolidayName_Sel)),  AV34TFHolidayName_Sel,  AV34TFHolidayName_Sel) ;
          new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV15GridState,  "TFHOLIDAYSTARTDATE",  "Date",  !((DateTime.MinValue==AV35TFHolidayStartDate)&&(DateTime.MinValue==AV36TFHolidayStartDate_To)),  0,  StringUtil.Trim( context.localUtil.DToC( AV35TFHolidayStartDate, 1, "/")),  ((DateTime.MinValue==AV35TFHolidayStartDate) ? "" : StringUtil.Trim( context.localUtil.Format( AV35TFHolidayStartDate, "99/99/99"))),  true,  StringUtil.Trim( context.localUtil.DToC( AV36TFHolidayStartDate_To, 1, "/")),  ((DateTime.MinValue==AV36TFHolidayStartDate_To) ? "" : StringUtil.Trim( context.localUtil.Format( AV36TFHolidayStartDate_To, "99/99/99")))) ;
          new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV15GridState,  "TFHOLIDAYISACTIVE_SEL",  "Is Active",  !(0==AV68TFHolidayIsActive_Sel),  0,  StringUtil.Trim( StringUtil.Str( (decimal)(AV68TFHolidayIsActive_Sel), 1, 0)),  ((AV68TFHolidayIsActive_Sel==1) ? "Checked" : "Unchecked"),  false,  "",  "") ;
          AV15GridState.gxTpr_Pagesize = StringUtil.Str( (decimal)(subGrid_Rows), 10, 0);
@@ -2362,7 +2362,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202462110194143", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202462512581734", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2378,7 +2378,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("holidayww.js", "?202462110194146", false, true);
+         context.AddJavascriptSource("holidayww.js", "?202462512581736", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -2642,7 +2642,7 @@ namespace GeneXus.Programs {
             context.SendWebValue( "") ;
             context.WriteHtmlTextNl( "</th>") ;
             context.WriteHtmlText( "<th align=\""+"start"+"\" "+" nowrap=\"nowrap\" "+" class=\""+"Attribute"+"\" "+" style=\""+((edtHolidayName_Visible==0) ? "display:none;" : "")+""+"\" "+">") ;
-            context.SendWebValue( "Name") ;
+            context.SendWebValue( "National Holiday Name") ;
             context.WriteHtmlTextNl( "</th>") ;
             context.WriteHtmlText( "<th align=\""+"end"+"\" "+" nowrap=\"nowrap\" "+" class=\""+"Attribute"+"\" "+" style=\""+((edtHolidayStartDate_Visible==0) ? "display:none;" : "")+""+"\" "+">") ;
             context.SendWebValue( "Date") ;
@@ -2827,7 +2827,7 @@ namespace GeneXus.Programs {
          Ddo_grid_Includefilter = "T|T|";
          Ddo_grid_Fixable = "T";
          Ddo_grid_Includesortasc = "T";
-         Ddo_grid_Columnssortvalues = "1|2|3";
+         Ddo_grid_Columnssortvalues = "2|1|3";
          Ddo_grid_Columnids = "3:HolidayName|4:HolidayStartDate|8:HolidayIsActive";
          Ddo_grid_Gridinternalname = "";
          Ddo_agexport_Titlecontrolidtoreplace = "";
@@ -3420,19 +3420,19 @@ namespace GeneXus.Programs {
          }
          if ( ( AV17OrderedBy == 1 ) && ! AV18OrderedDsc )
          {
-            sOrderString += " ORDER BY HolidayName, HolidayId";
+            sOrderString += " ORDER BY HolidayStartDate, HolidayId";
          }
          else if ( ( AV17OrderedBy == 1 ) && ( AV18OrderedDsc ) )
          {
-            sOrderString += " ORDER BY HolidayName DESC, HolidayId";
+            sOrderString += " ORDER BY HolidayStartDate DESC, HolidayId";
          }
          else if ( ( AV17OrderedBy == 2 ) && ! AV18OrderedDsc )
          {
-            sOrderString += " ORDER BY HolidayStartDate, HolidayId";
+            sOrderString += " ORDER BY HolidayName, HolidayId";
          }
          else if ( ( AV17OrderedBy == 2 ) && ( AV18OrderedDsc ) )
          {
-            sOrderString += " ORDER BY HolidayStartDate DESC, HolidayId";
+            sOrderString += " ORDER BY HolidayName DESC, HolidayId";
          }
          else if ( ( AV17OrderedBy == 3 ) && ! AV18OrderedDsc )
          {

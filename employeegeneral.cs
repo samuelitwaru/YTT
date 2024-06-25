@@ -578,11 +578,11 @@ namespace GeneXus.Programs {
             /* Single line edit */
             GxWebStd.gx_single_line_edit( context, edtEmployeeId_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(A106EmployeeId), 10, 0, ".", "")), StringUtil.LTrim( context.localUtil.Format( (decimal)(A106EmployeeId), "ZZZZZZZZZ9")), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtEmployeeId_Jsonclick, 0, "Attribute", "", "", "", "", edtEmployeeId_Visible, 0, 0, "text", "1", 10, "chr", 1, "row", 10, 0, 0, 0, 0, -1, 0, true, "Id", "end", false, "", "HLP_EmployeeGeneral.htm");
             /* Single line edit */
+            GxWebStd.gx_single_line_edit( context, edtEmployeeName_Internalname, StringUtil.RTrim( A148EmployeeName), StringUtil.RTrim( context.localUtil.Format( A148EmployeeName, "")), "", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtEmployeeName_Jsonclick, 0, "Attribute", "", "", "", "", edtEmployeeName_Visible, 0, 0, "text", "", 80, "chr", 1, "row", 128, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_EmployeeGeneral.htm");
+            /* Single line edit */
             GxWebStd.gx_single_line_edit( context, edtGAMUserGUID_Internalname, A111GAMUserGUID, StringUtil.RTrim( context.localUtil.Format( A111GAMUserGUID, "")), "", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtGAMUserGUID_Jsonclick, 0, "Attribute", "", "", "", "", edtGAMUserGUID_Visible, 0, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, 0, 0, true, "GeneXusSecurityCommon\\GAMUserIdentification", "start", true, "", "HLP_EmployeeGeneral.htm");
             /* Single line edit */
             GxWebStd.gx_single_line_edit( context, edtEmployeeBalance_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(A147EmployeeBalance), 4, 0, ".", "")), StringUtil.LTrim( context.localUtil.Format( (decimal)(A147EmployeeBalance), "ZZZ9")), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtEmployeeBalance_Jsonclick, 0, "Attribute", "", "", "", "", edtEmployeeBalance_Visible, 0, 0, "text", "1", 4, "chr", 1, "row", 4, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_EmployeeGeneral.htm");
-            /* Single line edit */
-            GxWebStd.gx_single_line_edit( context, edtEmployeeName_Internalname, StringUtil.RTrim( A148EmployeeName), StringUtil.RTrim( context.localUtil.Format( A148EmployeeName, "")), "", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtEmployeeName_Jsonclick, 0, "Attribute", "", "", "", "", edtEmployeeName_Visible, 0, 0, "text", "", 80, "chr", 1, "row", 128, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_EmployeeGeneral.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -956,12 +956,12 @@ namespace GeneXus.Programs {
             pr_default.execute(2, new Object[] {A106EmployeeId});
             while ( (pr_default.getStatus(2) != 101) )
             {
-               A148EmployeeName = H00344_A148EmployeeName[0];
-               AssignAttri(sPrefix, false, "A148EmployeeName", A148EmployeeName);
                A147EmployeeBalance = H00344_A147EmployeeBalance[0];
                AssignAttri(sPrefix, false, "A147EmployeeBalance", StringUtil.LTrimStr( (decimal)(A147EmployeeBalance), 4, 0));
                A111GAMUserGUID = H00344_A111GAMUserGUID[0];
                AssignAttri(sPrefix, false, "A111GAMUserGUID", A111GAMUserGUID);
+               A148EmployeeName = H00344_A148EmployeeName[0];
+               AssignAttri(sPrefix, false, "A148EmployeeName", A148EmployeeName);
                A112EmployeeIsActive = H00344_A112EmployeeIsActive[0];
                AssignAttri(sPrefix, false, "A112EmployeeIsActive", A112EmployeeIsActive);
                A110EmployeeIsManager = H00344_A110EmployeeIsManager[0];
@@ -1013,12 +1013,12 @@ namespace GeneXus.Programs {
          AssignProp(sPrefix, false, chkEmployeeIsActive_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(chkEmployeeIsActive.Enabled), 5, 0), true);
          edtEmployeeId_Enabled = 0;
          AssignProp(sPrefix, false, edtEmployeeId_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtEmployeeId_Enabled), 5, 0), true);
+         edtEmployeeName_Enabled = 0;
+         AssignProp(sPrefix, false, edtEmployeeName_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtEmployeeName_Enabled), 5, 0), true);
          edtGAMUserGUID_Enabled = 0;
          AssignProp(sPrefix, false, edtGAMUserGUID_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtGAMUserGUID_Enabled), 5, 0), true);
          edtEmployeeBalance_Enabled = 0;
          AssignProp(sPrefix, false, edtEmployeeBalance_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtEmployeeBalance_Enabled), 5, 0), true);
-         edtEmployeeName_Enabled = 0;
-         AssignProp(sPrefix, false, edtEmployeeName_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtEmployeeName_Enabled), 5, 0), true);
          fix_multi_value_controls( ) ;
       }
 
@@ -1057,12 +1057,12 @@ namespace GeneXus.Programs {
             AssignAttri(sPrefix, false, "A110EmployeeIsManager", A110EmployeeIsManager);
             A112EmployeeIsActive = StringUtil.StrToBool( cgiGet( chkEmployeeIsActive_Internalname));
             AssignAttri(sPrefix, false, "A112EmployeeIsActive", A112EmployeeIsActive);
+            A148EmployeeName = cgiGet( edtEmployeeName_Internalname);
+            AssignAttri(sPrefix, false, "A148EmployeeName", A148EmployeeName);
             A111GAMUserGUID = cgiGet( edtGAMUserGUID_Internalname);
             AssignAttri(sPrefix, false, "A111GAMUserGUID", A111GAMUserGUID);
             A147EmployeeBalance = (short)(Math.Round(context.localUtil.CToN( cgiGet( edtEmployeeBalance_Internalname), ".", ","), 18, MidpointRounding.ToEven));
             AssignAttri(sPrefix, false, "A147EmployeeBalance", StringUtil.LTrimStr( (decimal)(A147EmployeeBalance), 4, 0));
-            A148EmployeeName = cgiGet( edtEmployeeName_Internalname);
-            AssignAttri(sPrefix, false, "A148EmployeeName", A148EmployeeName);
             /* Read subfile selected row values. */
             /* Read hidden variables. */
             GXKey = Decrypt64( context.GetCookie( "GX_SESSION_ID"), Crypto.GetServerKey( ));
@@ -1108,12 +1108,12 @@ namespace GeneXus.Programs {
          returnInSub = false;
          edtEmployeeId_Visible = 0;
          AssignProp(sPrefix, false, edtEmployeeId_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtEmployeeId_Visible), 5, 0), true);
+         edtEmployeeName_Visible = 0;
+         AssignProp(sPrefix, false, edtEmployeeName_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtEmployeeName_Visible), 5, 0), true);
          edtGAMUserGUID_Visible = 0;
          AssignProp(sPrefix, false, edtGAMUserGUID_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtGAMUserGUID_Visible), 5, 0), true);
          edtEmployeeBalance_Visible = 0;
          AssignProp(sPrefix, false, edtEmployeeBalance_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtEmployeeBalance_Visible), 5, 0), true);
-         edtEmployeeName_Visible = 0;
-         AssignProp(sPrefix, false, edtEmployeeName_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtEmployeeName_Visible), 5, 0), true);
          GXt_boolean1 = AV12IsAuthorized_Update;
          new GeneXus.Programs.wwpbaseobjects.secgamisauthbyfunctionalitykey(context ).execute(  "employee_Update", out  GXt_boolean1) ;
          AV12IsAuthorized_Update = GXt_boolean1;
@@ -1344,7 +1344,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20246189523830", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202462512571096", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1360,7 +1360,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("employeegeneral.js", "?20246189523830", false, true);
+         context.AddJavascriptSource("employeegeneral.js", "?202462512571097", false, true);
          /* End function include_jscripts */
       }
 
@@ -1407,9 +1407,9 @@ namespace GeneXus.Programs {
          bttBtndelete_Internalname = sPrefix+"BTNDELETE";
          divTable_Internalname = sPrefix+"TABLE";
          edtEmployeeId_Internalname = sPrefix+"EMPLOYEEID";
+         edtEmployeeName_Internalname = sPrefix+"EMPLOYEENAME";
          edtGAMUserGUID_Internalname = sPrefix+"GAMUSERGUID";
          edtEmployeeBalance_Internalname = sPrefix+"EMPLOYEEBALANCE";
-         edtEmployeeName_Internalname = sPrefix+"EMPLOYEENAME";
          divHtml_bottomauxiliarcontrols_Internalname = sPrefix+"HTML_BOTTOMAUXILIARCONTROLS";
          divLayoutmaintable_Internalname = sPrefix+"LAYOUTMAINTABLE";
          Form.Internalname = sPrefix+"FORM";
@@ -1431,16 +1431,16 @@ namespace GeneXus.Programs {
          init_default_properties( ) ;
          chkEmployeeIsActive.Caption = "Is Active";
          chkEmployeeIsManager.Caption = "Is Manager";
-         edtEmployeeName_Enabled = 0;
          edtEmployeeBalance_Enabled = 0;
          edtGAMUserGUID_Enabled = 0;
+         edtEmployeeName_Enabled = 0;
          edtEmployeeId_Enabled = 0;
-         edtEmployeeName_Jsonclick = "";
-         edtEmployeeName_Visible = 1;
          edtEmployeeBalance_Jsonclick = "";
          edtEmployeeBalance_Visible = 1;
          edtGAMUserGUID_Jsonclick = "";
          edtGAMUserGUID_Visible = 1;
+         edtEmployeeName_Jsonclick = "";
+         edtEmployeeName_Visible = 1;
          edtEmployeeId_Jsonclick = "";
          edtEmployeeId_Visible = 1;
          bttBtndelete_Visible = 1;
@@ -1517,8 +1517,8 @@ namespace GeneXus.Programs {
          TempTags = "";
          bttBtnupdate_Jsonclick = "";
          bttBtndelete_Jsonclick = "";
-         A111GAMUserGUID = "";
          A148EmployeeName = "";
+         A111GAMUserGUID = "";
          Form = new GXWebForm();
          sXEvt = "";
          sEvt = "";
@@ -1534,9 +1534,9 @@ namespace GeneXus.Programs {
          H00343_A100CompanyId = new long[1] ;
          H00343_A101CompanyName = new string[] {""} ;
          H00344_A106EmployeeId = new long[1] ;
-         H00344_A148EmployeeName = new string[] {""} ;
          H00344_A147EmployeeBalance = new short[1] ;
          H00344_A111GAMUserGUID = new string[] {""} ;
+         H00344_A148EmployeeName = new string[] {""} ;
          H00344_A112EmployeeIsActive = new bool[] {false} ;
          H00344_A110EmployeeIsManager = new bool[] {false} ;
          H00344_A100CompanyId = new long[1] ;
@@ -1562,7 +1562,7 @@ namespace GeneXus.Programs {
                H00343_A100CompanyId, H00343_A101CompanyName
                }
                , new Object[] {
-               H00344_A106EmployeeId, H00344_A148EmployeeName, H00344_A147EmployeeBalance, H00344_A111GAMUserGUID, H00344_A112EmployeeIsActive, H00344_A110EmployeeIsManager, H00344_A100CompanyId, H00344_A146EmployeeVactionDays, H00344_A109EmployeeEmail, H00344_A108EmployeeLastName,
+               H00344_A106EmployeeId, H00344_A147EmployeeBalance, H00344_A111GAMUserGUID, H00344_A148EmployeeName, H00344_A112EmployeeIsActive, H00344_A110EmployeeIsManager, H00344_A100CompanyId, H00344_A146EmployeeVactionDays, H00344_A109EmployeeEmail, H00344_A108EmployeeLastName,
                H00344_A107EmployeeFirstName
                }
                , new Object[] {
@@ -1595,14 +1595,14 @@ namespace GeneXus.Programs {
       private int bttBtnupdate_Visible ;
       private int bttBtndelete_Visible ;
       private int edtEmployeeId_Visible ;
+      private int edtEmployeeName_Visible ;
       private int edtGAMUserGUID_Visible ;
       private int edtEmployeeBalance_Visible ;
-      private int edtEmployeeName_Visible ;
       private int gxdynajaxindex ;
       private int edtEmployeeId_Enabled ;
+      private int edtEmployeeName_Enabled ;
       private int edtGAMUserGUID_Enabled ;
       private int edtEmployeeBalance_Enabled ;
-      private int edtEmployeeName_Enabled ;
       private int idxLst ;
       private long A106EmployeeId ;
       private long wcpOA106EmployeeId ;
@@ -1645,13 +1645,13 @@ namespace GeneXus.Programs {
       private string divHtml_bottomauxiliarcontrols_Internalname ;
       private string edtEmployeeId_Internalname ;
       private string edtEmployeeId_Jsonclick ;
+      private string edtEmployeeName_Internalname ;
+      private string A148EmployeeName ;
+      private string edtEmployeeName_Jsonclick ;
       private string edtGAMUserGUID_Internalname ;
       private string edtGAMUserGUID_Jsonclick ;
       private string edtEmployeeBalance_Internalname ;
       private string edtEmployeeBalance_Jsonclick ;
-      private string edtEmployeeName_Internalname ;
-      private string A148EmployeeName ;
-      private string edtEmployeeName_Jsonclick ;
       private string sXEvt ;
       private string sEvt ;
       private string EvtGridId ;
@@ -1688,9 +1688,9 @@ namespace GeneXus.Programs {
       private long[] H00343_A100CompanyId ;
       private string[] H00343_A101CompanyName ;
       private long[] H00344_A106EmployeeId ;
-      private string[] H00344_A148EmployeeName ;
       private short[] H00344_A147EmployeeBalance ;
       private string[] H00344_A111GAMUserGUID ;
+      private string[] H00344_A148EmployeeName ;
       private bool[] H00344_A112EmployeeIsActive ;
       private bool[] H00344_A110EmployeeIsManager ;
       private long[] H00344_A100CompanyId ;
@@ -1742,7 +1742,7 @@ namespace GeneXus.Programs {
           def= new CursorDef[] {
               new CursorDef("H00342", "SELECT CompanyId, CompanyName FROM Company ORDER BY CompanyName ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00342,0, GxCacheFrequency.OFF ,true,false )
              ,new CursorDef("H00343", "SELECT CompanyId, CompanyName FROM Company ORDER BY CompanyName ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00343,0, GxCacheFrequency.OFF ,true,false )
-             ,new CursorDef("H00344", "SELECT EmployeeId, EmployeeName, EmployeeBalance, GAMUserGUID, EmployeeIsActive, EmployeeIsManager, CompanyId, EmployeeVactionDays, EmployeeEmail, EmployeeLastName, EmployeeFirstName FROM Employee WHERE EmployeeId = :EmployeeId ORDER BY EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00344,1, GxCacheFrequency.OFF ,true,true )
+             ,new CursorDef("H00344", "SELECT EmployeeId, EmployeeBalance, GAMUserGUID, EmployeeName, EmployeeIsActive, EmployeeIsManager, CompanyId, EmployeeVactionDays, EmployeeEmail, EmployeeLastName, EmployeeFirstName FROM Employee WHERE EmployeeId = :EmployeeId ORDER BY EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00344,1, GxCacheFrequency.OFF ,true,true )
              ,new CursorDef("H00345", "SELECT CompanyId, CompanyName FROM Company ORDER BY CompanyName ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00345,0, GxCacheFrequency.OFF ,true,false )
           };
        }
@@ -1764,9 +1764,9 @@ namespace GeneXus.Programs {
                 return;
              case 2 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);
-                ((string[]) buf[1])[0] = rslt.getString(2, 128);
-                ((short[]) buf[2])[0] = rslt.getShort(3);
-                ((string[]) buf[3])[0] = rslt.getVarchar(4);
+                ((short[]) buf[1])[0] = rslt.getShort(2);
+                ((string[]) buf[2])[0] = rslt.getVarchar(3);
+                ((string[]) buf[3])[0] = rslt.getString(4, 128);
                 ((bool[]) buf[4])[0] = rslt.getBool(5);
                 ((bool[]) buf[5])[0] = rslt.getBool(6);
                 ((long[]) buf[6])[0] = rslt.getLong(7);
