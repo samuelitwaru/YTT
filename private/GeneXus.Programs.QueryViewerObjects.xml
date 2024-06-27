@@ -111,28 +111,7 @@
   <Object name="EmployeeWorkHourLogs" id="46" type="DataProvider" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="WorkHourLogsByEmployee" xmlns="qv">
     <DefaultOutput type="OutputTypePivotTable" xmlns="qv" />
   </Object>
-  <Object name="Tests.PaginateTestData" id="52" type="DataProvider" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="PaginateTestData" xmlns="qv">
-    <DefaultOutput type="OutputTypePivotTable" xmlns="qv" />
-  </Object>
-  <Object name="Tests.GetEmployeeExpectedDaysTestData" id="59" type="DataProvider" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="GetEmployeeExpectedDaysTestData" xmlns="qv">
-    <DefaultOutput type="OutputTypePivotTable" xmlns="qv" />
-  </Object>
-  <Object name="Tests.CreateEmployeeAccount1TestData" id="60" type="DataProvider" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="CreateEmployeeAccount1TestData" xmlns="qv">
-    <DefaultOutput type="OutputTypePivotTable" xmlns="qv" />
-  </Object>
   <Object name="DPWorkHourLog" id="61" type="DataProvider" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="DPWorkHourLog" xmlns="qv">
-    <DefaultOutput type="OutputTypePivotTable" xmlns="qv" />
-  </Object>
-  <Object name="PeriodicWorkHourLog" id="1" type="Query" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="PeriodicWorkHourLog" xmlns="qv">
-    <DefaultOutput type="OutputTypeTable" xmlns="qv" />
-  </Object>
-  <Object name="DBEmployeeHours_Filter1" id="0" type="Query" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="DBEmployeeHours" xmlns="qv">
-    <DefaultOutput type="OutputTypeTable" xmlns="qv" />
-  </Object>
-  <Object name="jsGanttProvider" id="62" type="DataProvider" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="jsGanttProvider" xmlns="qv">
-    <DefaultOutput type="OutputTypePivotTable" xmlns="qv" />
-  </Object>
-  <Object name="jsGanttProvider2" id="63" type="DataProvider" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="jsGanttProvider" xmlns="qv">
     <DefaultOutput type="OutputTypePivotTable" xmlns="qv" />
   </Object>
   <Object name="DPLeaveEvent" id="64" type="DataProvider" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="DPLeaveEvent" xmlns="qv">
@@ -146,5 +125,11 @@
   </Object>
   <Object name="DPLeaveType" id="67" type="DataProvider" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="DPLeaveType" xmlns="qv">
     <DefaultOutput type="OutputTypePivotTable" xmlns="qv" />
+  </Object>
+  <Object name="PeriodicWorkHourLog" id="1" type="Query" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="PeriodicWorkHourLog" xmlns="qv">
+    <DefaultOutput type="OutputTypeTable" xmlns="qv" />
+  </Object>
+  <Object name="DBEmployeeHours_Filter1" id="0" type="Query" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="DBEmployeeHours" xmlns="qv">
+    <DefaultOutput type="OutputTypeTable" xmlns="qv" />
   </Object>
 </Objects>

@@ -55,9 +55,6 @@
  	<Compile Include="$(WebDirectory)\type_SdtSDTWorkHourLog_SDTWorkHourLogItem.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDTWorkHourLogReport.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDTWorkHourLogReport_WeekCollectionItem.cs" />
- 	<Compile Include="$(WebDirectory)\tests\type_SdtCreateEmployeeAccount1TestSDT.cs" />
- 	<Compile Include="$(WebDirectory)\tests\type_SdtGetEmployeeExpectedDaysTestSDT.cs" />
- 	<Compile Include="$(WebDirectory)\tests\type_SdtPaginateTestSDT.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtWorkLogsSDT.cs" />
  	<Compile Include="$(WebDirectory)\workwithplus\ai\type_SdtWWP_AIChatCompletionRequest.cs" />
  	<Compile Include="$(WebDirectory)\workwithplus\ai\type_SdtWWP_AIChatCompletionRequest_functionsItem.cs" />

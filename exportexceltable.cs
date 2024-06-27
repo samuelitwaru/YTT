@@ -256,6 +256,20 @@ namespace GeneXus.Programs {
             AV92excelcellrange.gxTpr_Valuetext = AV90TotalFormattedTime;
             AV92excelcellrange.setcellstyle( AV93excelCellStyle);
          }
+         AV92excelcellrange = AV91excelSpreadsheet.cell(AV14CellRow+2, 1);
+         AV92excelcellrange.gxTpr_Valuetext = "Start Date";
+         AV92excelcellrange.setcellstyle( AV96footCellStyle);
+         AV92excelcellrange = AV91excelSpreadsheet.cell(AV14CellRow+2, 2);
+         AV92excelcellrange.setcellstyle( AV96footCellStyle);
+         GXt_dtime2 = DateTimeUtil.ResetTime( AV75FromDate ) ;
+         AV92excelcellrange.gxTpr_Valuedate = GXt_dtime2;
+         AV92excelcellrange = AV91excelSpreadsheet.cell(AV14CellRow+3, 1);
+         AV92excelcellrange.gxTpr_Valuetext = "End Date";
+         AV92excelcellrange.setcellstyle( AV96footCellStyle);
+         AV92excelcellrange = AV91excelSpreadsheet.cell(AV14CellRow+3, 2);
+         AV92excelcellrange.setcellstyle( AV96footCellStyle);
+         GXt_dtime2 = DateTimeUtil.ResetTime( AV76ToDate ) ;
+         AV92excelcellrange.gxTpr_Valuedate = GXt_dtime2;
          /* Execute user subroutine: 'CLOSEDOCUMENT' */
          S131 ();
          if ( returnInSub )
@@ -270,11 +284,11 @@ namespace GeneXus.Programs {
       {
          /* 'OPENDOCUMENT' Routine */
          returnInSub = false;
-         GXt_char2 = AV12Filename;
-         new formatdatetime(context ).execute(  AV75FromDate,  "YYYY-MM-DD", out  GXt_char2) ;
          GXt_char3 = AV12Filename;
-         new formatdatetime(context ).execute(  AV76ToDate,  "YYYY-MM-DD", out  GXt_char3) ;
-         AV12Filename = "ReportExport-" + GXt_char2 + "_" + GXt_char3 + ".xlsx";
+         new formatdatetime(context ).execute(  AV75FromDate,  "YYYY-MM-DD", out  GXt_char3) ;
+         GXt_char4 = AV12Filename;
+         new formatdatetime(context ).execute(  AV76ToDate,  "YYYY-MM-DD", out  GXt_char4) ;
+         AV12Filename = "ReportExport-" + GXt_char3 + "_" + GXt_char4 + ".xlsx";
          AV97File.Source = AV12Filename;
          AV97File.Delete();
          AV91excelSpreadsheet.open( AV12Filename);
@@ -357,8 +371,9 @@ namespace GeneXus.Programs {
          AV93excelCellStyle = new GeneXus.Programs.genexusoffice.office.excel.style.SdtExcelCellStyle(context);
          AV66SDTEmployeeProjectHours = new SdtSDTEmployeeProjectHours(context);
          AV67ProjectHoursItem = new SdtSDTEmployeeProjectHours_ProjectHoursItem(context);
-         GXt_char2 = "";
+         GXt_dtime2 = (DateTime)(DateTime.MinValue);
          GXt_char3 = "";
+         GXt_char4 = "";
          AV97File = new GxFile(context.GetPhysicalPath());
          AV49Column = "";
          AV25Session = context.GetSession();
@@ -376,8 +391,9 @@ namespace GeneXus.Programs {
       private string AV89TotalFormattedWorkTime ;
       private string AV90TotalFormattedTime ;
       private string Gx_msg ;
-      private string GXt_char2 ;
       private string GXt_char3 ;
+      private string GXt_char4 ;
+      private DateTime GXt_dtime2 ;
       private DateTime AV75FromDate ;
       private DateTime AV76ToDate ;
       private bool returnInSub ;

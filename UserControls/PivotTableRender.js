@@ -1,1 +1,217 @@
-function PivotTable(n){var t,r,u,f,e,i;this.setSDTProjects=function(n){this.SDTProjects=n};this.getSDTProjects=function(){return this.SDTProjects};this.setSDTEmployeeProjectHoursCollection=function(n){this.SDTEmployeeProjectHoursCollection=n};this.getSDTEmployeeProjectHoursCollection=function(){return this.SDTEmployeeProjectHoursCollection};this.setProjectHours=function(n){this.ProjectHours=n};this.getProjectHours=function(){return this.ProjectHours};t="<div id='print' style='margin-left:5px; margin-right:-5px;' ><table class=\"gx-tab-spacing-fix-2 GridWithPaginationBar GridWithBorderColor WorkWith table-responsive\" style='border: 1px solid #dddddd; border-collapse: collapse;'>\t<thead  style='border: 1px solid #dddddd; border-collapse: collapse;'>\t\t<tr>\t\t\t<th style='border: 1px solid #dddddd; border-collapse: collapse;'>Projects:<\/th>\t\t\t{{#SDTProjects}}\t\t\t<th style='border: 1px solid #dddddd; border-collapse: collapse;padding: 5px;' scope=\"col\" class='text-center'><a id='Project-{{Id}}' style='cursor:pointer' class='project' >{{ProjectName}}<\/a><\/th>\t\t\t{{/SDTProjects}}\t\t\t<th style='border: 1px solid #dddddd; border-collapse: collapse; padding:5px' class='text-center'>Total Work Hours<\/th>\t\t\t{{#ShowLeaveTotal}}<th style=\"border: 1px solid #dddddd; border-collapse: collapse; padding:5px\" class=\"leave text-center\">Total Leave Hours<\/th><th style=\"border: 1px solid #dddddd; border-collapse: collapse; padding:5px\" class=\"leave text-center\">Total<\/th>{{/ShowLeaveTotal}}\t\t<\/tr>\t<\/thead>\t<tbody>\t\t{{#SDTEmployeeProjectHoursCollection}}\t\t<tr class=\"GridWithPaginationBar GridNoBorder WorkWithOdd text-center\">\t\t\t\t<td style='border: 1px solid #dddddd; border-collapse: collapse;font-weight: bold;background:#f5f5f5;' class='text-center'><a href=''  data-event=\"Click\" >{{EmployeeName}}<\/a><\/td>\t\t\t\t\t\t{{#SDTProjects}}\t\t\t<td id='{{EmployeeId}}-{{Id}}' style='border: 1px solid #dddddd; border-collapse: collapse;' class=\"text-center\"><\/td>\t\t\t{{/SDTProjects}}\t\t\t\t\t\t<td class=\"text-center\" style='border: 1px solid #dddddd; border-collapse: collapse;font-weight: bold;background:#f5f5f5;'>\t\t\t\t<span class=\"tag\" style='padding: 0.5rem; {{#IsWorkTimeOptimal}} background:#00a95c; color:white; border-radius:5px;{{/IsWorkTimeOptimal}}'>{{TotalFormattedTime}}<\/span>\t\t\t<\/td>\t\t\t<!--<td style='border: 1px solid #dddddd; border-collapse: collapse;font-weight: bold;background:#f5f5f5;'>{{TotalTime}} {{ExpectedWorkTime}} {{IsWorkTimeOptimal}}<\/td>-->\t\t\t{{#ShowLeaveTotal}}<td class=\"leave text-center\" style='border: 1px solid #dddddd;font-weight: bold; border-collapse: collapse;background:#f5f5f5;'>{{TotalFormattedLeave}}<\/td>{{/ShowLeaveTotal}}\t\t\t{{#ShowLeaveTotal}}<td class='leave' style='border: 1px solid #dddddd;font-weight: bold; border-collapse: collapse;background:#f5f5f5;'>{{FormattedTotal}}<\/td>{{/ShowLeaveTotal}}\t\t\t<!--<td style='border: 1px solid #dddddd; border-collapse: collapse;'><a href=''  data-event=\"Click\" >Details<\/a><\/td>-->\t\t<\/tr>\t\t{{/SDTEmployeeProjectHoursCollection}}\t<\/tbody>\t\t<tfoot>\t\t<tr class=\"GridWithPaginationBar GridNoBorder WorkWithOdd\">\t\t\t<td style='border: 1px solid #dddddd; border-collapse: collapse;'>Total<\/td>\t\t\t{{#SDTProjects}}\t\t\t<td class=\"project-total text-center\" id='{{Id}}' style='border: 1px solid #dddddd; border-collapse: collapse;' scope=\"col\">0<\/td>\t\t\t{{/SDTProjects}}\t\t\t<td id='totalWorkHours' class='text-center' style='border: 1px solid #dddddd; border-collapse: collapse;bold;background:#f5f5f5;'>{{TotalFormattedWorkTime}}<\/td>\t\t\t{{#ShowLeaveTotal}}<td class=\"leave text-center\" style='border: 1px solid #dddddd; border-collapse: collapse;'><\/td>{{/ShowLeaveTotal}}\t\t\t{{#ShowLeaveTotal}}<td class=\"leave text-center\" style='border: 1px solid #dddddd; border-collapse: collapse;'>{{TotalFormattedTime}}<\/td>{{/ShowLeaveTotal}}\t\t\t<!--<td style='border: 1px solid #dddddd; border-collapse: collapse;'><\/td>-->\t\t<\/tr>\t<tfoot>\t\t<\/table><\/div>";r={};Mustache.parse(t);u=0;f=0;this.show=function(){e=n(this.getContainerControl());u=0;f=0;this.setHtml(Mustache.render(t,this,r));this.renderChildContainers();n(this.getContainerControl()).find("[data-event='Click']").on("click",this.onClickHandler.closure(this)).each(function(n){this.setAttribute("data-items-index",n+1)});n(this.getContainerControl()).find("[data-event='ProjectClicked']").on("projectclicked",this.onProjectClickedHandler.closure(this)).each(function(n){this.setAttribute("data-items-index",n+1)});this.Start()};this.Scripts=[];this.Start=function(){function u(n){var t=Math.floor(n/60),i=n%60,r=t<10?"0"+t:t,u=i<10?"0"+i:i;return r+":"+u}var n,e,o,r,t,s,h,c;const l=this;for(let r=0;r<this.SDTEmployeeProjectHoursCollection.length;r++){var i=this.SDTEmployeeProjectHoursCollection[r],a=i.EmployeeId,f=i.ProjectHours;if(console.log(i.ExpectedWorkTime),console.log(i.TotalTime),f)for(let i=0;i<f.length;i++)n=f[i],t=document.getElementById(`${a}-${n.ProjectId}`),t.innerHTML=n.ProjectFormattedTime,e=document.getElementById(`${n.ProjectId}`),e.innerHTML=parseInt(e.innerHTML)+n.ProjectTime}o=document.getElementsByClassName("project-total");r=0;for(let n=0;n<o.length;n++)t=o[n],s=parseInt(t.innerHTML),r+=s,t.innerHTML=u(s),document.getElementById("totalWorkHours").innerHTML=u(r),this.TotalFormattedWorkTime=u(r);this.toggleLeave();h=document.getElementsByClassName("project");for(let n=0;n<h.length;n++)c=h[n],c.onclick=n=>{var t=parseInt(n.target.id.replace("Project-",""));console.log(t);l.CurrentProject=t;l.ProjectClicked()},console.log(c)};this.Refresh=function(n,t){this.SDTProjects=n;this.SDTEmployeeProjectHoursCollection=t;this.show();this.TotalFormattedWorkTime=this.TotalFormattedWorkTime};this.GetLS=function(){return window.localStorage.get("Hello")};this.toggleLeave=function(){for(var t=document.getElementsByClassName("leave"),n=0;n<t.length;n++)this.ShowLeaveTotal=="true"?(console.log(typeof this.ShowLeaveTotal),t[n].classList.remove("hidden")):t[n].classList.add("hidden")};this.onClickHandler=function(t){if(t){var i=t.currentTarget;t.preventDefault();this.SDTProjectsCurrentIndex=parseInt(n(i).attr("data-items-index"),10)||1;this.SDTEmployeeProjectHoursCollectionCurrentIndex=parseInt(n(i).attr("data-items-index"),10)||1;this.ProjectHoursCurrentIndex=parseInt(n(i).attr("data-items-index"),10)||1}this.Click&&this.Click()};this.onProjectClickedHandler=function(t){if(t){var i=t.currentTarget;t.preventDefault();this.SDTProjectsCurrentIndex=parseInt(n(i).attr("data-items-index"),10)||1;this.SDTEmployeeProjectHoursCollectionCurrentIndex=parseInt(n(i).attr("data-items-index"),10)||1;this.ProjectHoursCurrentIndex=parseInt(n(i).attr("data-items-index"),10)||1}this.ProjectClicked&&this.ProjectClicked()};this.autoToggleVisibility=!0;i={};this.renderChildContainers=function(){e.find("[data-slot][data-parent='"+this.ContainerName+"']").each(function(t,r){var e=n(r),f=e.attr("data-slot"),u;u=i[f];u||(u=this.getChildContainer(f),i[f]=u,u.parentNode.removeChild(u));e.append(u);n(u).show()}.closure(this))}}
+function PivotTable($) {
+	 this.setSDTProjects = function(value) {
+			this.SDTProjects = value;
+		}
+
+		this.getSDTProjects = function() {
+			return this.SDTProjects;
+		} 
+	  
+	 this.setSDTEmployeeProjectHoursCollection = function(value) {
+			this.SDTEmployeeProjectHoursCollection = value;
+		}
+
+		this.getSDTEmployeeProjectHoursCollection = function() {
+			return this.SDTEmployeeProjectHoursCollection;
+		} 
+	  
+	 this.setProjectHours = function(value) {
+			this.ProjectHours = value;
+		}
+
+		this.getProjectHours = function() {
+			return this.ProjectHours;
+		} 
+	  
+	  
+	  
+	  
+	  
+
+	var template = '<div id=\'print\' style=\'margin-left:5px; margin-right:-5px;\' ><table class=\"gx-tab-spacing-fix-2 GridWithPaginationBar GridWithBorderColor WorkWith table-responsive\" style=\'border: 1px solid #dddddd; border-collapse: collapse;\'>	<thead  style=\'border: 1px solid #dddddd; border-collapse: collapse;\'>		<tr>			<th style=\'border: 1px solid #dddddd; border-collapse: collapse;\'>Projects:</th>			{{#SDTProjects}}			<th style=\'border: 1px solid #dddddd; border-collapse: collapse;padding: 5px;\' scope=\"col\" class=\'text-center\'><a id=\'Project-{{Id}}\' style=\'cursor:pointer\' class=\'project\' >{{ProjectName}}</a></th>			{{/SDTProjects}}			<th style=\'border: 1px solid #dddddd; border-collapse: collapse; padding:5px\' class=\'text-center\'>Total Work Hours</th>			{{#ShowLeaveTotal}}<th style=\"border: 1px solid #dddddd; border-collapse: collapse; padding:5px\" class=\"leave text-center\">Total Leave Hours</th><th style=\"border: 1px solid #dddddd; border-collapse: collapse; padding:5px\" class=\"leave text-center\">Total</th>{{/ShowLeaveTotal}}		</tr>	</thead>	<tbody>		{{#SDTEmployeeProjectHoursCollection}}		<tr class=\"GridWithPaginationBar GridNoBorder WorkWithOdd text-center\">				<td style=\'border: 1px solid #dddddd; border-collapse: collapse;font-weight: bold;background:#f5f5f5;\' class=\'text-center\'><a href=\'\'  data-event=\"Click\" >{{EmployeeName}}</a></td>						{{#SDTProjects}}			<td id=\'{{EmployeeId}}-{{Id}}\' style=\'border: 1px solid #dddddd; border-collapse: collapse;\' class=\"text-center\"></td>			{{/SDTProjects}}						<td class=\"text-center\" style=\'border: 1px solid #dddddd; border-collapse: collapse;font-weight: bold;background:#f5f5f5;\'>				<span class=\"tag\" style=\'padding: 0.5rem; {{#IsWorkTimeOptimal}} background:#00a95c; color:white; border-radius:5px;{{/IsWorkTimeOptimal}}\'>{{TotalFormattedTime}}</span>			</td>			<!--<td style=\'border: 1px solid #dddddd; border-collapse: collapse;font-weight: bold;background:#f5f5f5;\'>{{TotalTime}} {{ExpectedWorkTime}} {{IsWorkTimeOptimal}}</td>-->			{{#ShowLeaveTotal}}<td class=\"leave text-center\" style=\'border: 1px solid #dddddd;font-weight: bold; border-collapse: collapse;background:#f5f5f5;\'>{{TotalFormattedLeave}}</td>{{/ShowLeaveTotal}}			{{#ShowLeaveTotal}}<td class=\'leave\' style=\'border: 1px solid #dddddd;font-weight: bold; border-collapse: collapse;background:#f5f5f5;\'>{{FormattedTotal}}</td>{{/ShowLeaveTotal}}			<!--<td style=\'border: 1px solid #dddddd; border-collapse: collapse;\'><a href=\'\'  data-event=\"Click\" >Details</a></td>-->		</tr>		{{/SDTEmployeeProjectHoursCollection}}	</tbody>		<tfoot>		<tr class=\"GridWithPaginationBar GridNoBorder WorkWithOdd\">			<td style=\'border: 1px solid #dddddd; border-collapse: collapse;\'>Total</td>			{{#SDTProjects}}			<td class=\"project-total text-center\" id=\'{{Id}}\' style=\'border: 1px solid #dddddd; border-collapse: collapse;\' scope=\"col\">0</td>			{{/SDTProjects}}			<td id=\'totalWorkHours\' class=\'text-center\' style=\'border: 1px solid #dddddd; border-collapse: collapse;bold;background:#f5f5f5;\'>{{TotalFormattedWorkTime}}</td>			{{#ShowLeaveTotal}}<td class=\"leave text-center\" style=\'border: 1px solid #dddddd; border-collapse: collapse;\'></td>{{/ShowLeaveTotal}}			{{#ShowLeaveTotal}}<td class=\"leave text-center\" style=\'border: 1px solid #dddddd; border-collapse: collapse;\'>{{TotalFormattedTime}}</td>{{/ShowLeaveTotal}}			<!--<td style=\'border: 1px solid #dddddd; border-collapse: collapse;\'></td>-->		</tr>	<tfoot>		</table></div>';
+	var partials = {  }; 
+	Mustache.parse(template);
+	var _iOnClick = 0; 
+	var _iOnProjectClicked = 0; 
+	var $container;
+	this.show = function() {
+			$container = $(this.getContainerControl());
+
+			// Raise before show scripts
+
+			_iOnClick = 0; 
+			_iOnProjectClicked = 0; 
+
+			//if (this.IsPostBack)
+				this.setHtml(Mustache.render(template, this, partials));
+			this.renderChildContainers();
+
+			$(this.getContainerControl())
+				.find("[data-event='Click']")
+				.on('click', this.onClickHandler.closure(this))
+				.each(function (i) {
+					this.setAttribute("data-items-index", i + 1);
+				}); 
+			$(this.getContainerControl())
+				.find("[data-event='ProjectClicked']")
+				.on('projectclicked', this.onProjectClickedHandler.closure(this))
+				.each(function (i) {
+					this.setAttribute("data-items-index", i + 1);
+				}); 
+
+			// Raise after show scripts
+			this.Start(); 
+	}
+
+	this.Scripts = [];
+
+		this.Start = function() {
+
+					const UC = this;
+					function formatMinutesToHHMM(minutes) {
+						var hours = Math.floor(minutes / 60);
+						var remainingMinutes = minutes % 60;
+						// Adding leading zeros if necessary
+						var formattedHours = hours < 10 ? '0' + hours : hours;
+						var formattedMinutes = remainingMinutes < 10 ? '0' + remainingMinutes : remainingMinutes;	
+						return formattedHours + ':' + formattedMinutes;
+					}
+				
+					for (let i = 0; i < this.SDTEmployeeProjectHoursCollection.length; i++) {
+						var employee = this.SDTEmployeeProjectHoursCollection[i]
+						var employeeId = employee.EmployeeId
+						var projects = employee.ProjectHours
+						console.log(employee.ExpectedWorkTime)
+						console.log(employee.TotalTime)
+						
+						
+						if (projects) {
+							for (let j=0; j < projects.length; j++) {
+								var project = projects[j]
+								var cell = document.getElementById(`${employeeId}-${project.ProjectId}`)
+								cell.innerHTML = project.ProjectFormattedTime
+								var totalCell = document.getElementById(`${project.ProjectId}`)
+								totalCell.innerHTML = parseInt(totalCell.innerHTML) + project.ProjectTime
+							}
+						}
+					}
+					var totalCells = document.getElementsByClassName('project-total')
+					var totalWorkHours = 0
+					for (let i=0; i<totalCells.length;i++) {
+						var cell = totalCells[i]
+						var projectTime = parseInt(cell.innerHTML)
+						totalWorkHours += projectTime
+						cell.innerHTML = formatMinutesToHHMM(projectTime)
+						document.getElementById('totalWorkHours').innerHTML = formatMinutesToHHMM(totalWorkHours)
+						this.TotalFormattedWorkTime = formatMinutesToHHMM(totalWorkHours)
+					}
+					this.toggleLeave()
+					
+					var elements = document.getElementsByClassName('project')
+					for (let i=0; i < elements.length; i++) {
+						var element = elements[i]
+						element.onclick = (event) => {
+							var projectId = parseInt(event.target.id.replace('Project-',''))
+							console.log(projectId)
+							UC.CurrentProject = projectId
+							UC.ProjectClicked()
+						}
+						console.log(element)
+					}
+			  	
+		}
+		this.Refresh = function(SDTProjects ,SDTEmployeeProjectHoursCollection ) {
+
+					this.SDTProjects = SDTProjects
+					this.SDTEmployeeProjectHoursCollection = SDTEmployeeProjectHoursCollection
+					this.show()
+					this.TotalFormattedWorkTime = this.TotalFormattedWorkTime
+				
+		}
+		this.GetLS = function() {
+
+					return window.localStorage.get('Hello')
+				
+		}
+		this.toggleLeave = function() {
+
+					var elements = document.getElementsByClassName("leave");
+					
+					for (var i = 0; i < elements.length; i++) {
+						
+						if (this.ShowLeaveTotal=='true') {
+							console.log(typeof this.ShowLeaveTotal)
+							elements[i].classList.remove("hidden");
+						} else {
+							elements[i].classList.add("hidden");
+						}
+					}
+				
+		}
+
+
+		this.onClickHandler = function (e) {
+			if (e) {
+				var target = e.currentTarget;
+				e.preventDefault();
+				 this.SDTProjectsCurrentIndex = (parseInt($(target).attr('data-items-index'), 10) || 1);  
+				 
+				 this.SDTEmployeeProjectHoursCollectionCurrentIndex = (parseInt($(target).attr('data-items-index'), 10) || 1);  
+				 
+				 this.ProjectHoursCurrentIndex = (parseInt($(target).attr('data-items-index'), 10) || 1);  
+				 
+				 
+				 
+				 
+				 
+			}
+
+			if (this.Click) {
+				this.Click();
+			}
+		} 
+
+		this.onProjectClickedHandler = function (e) {
+			if (e) {
+				var target = e.currentTarget;
+				e.preventDefault();
+				 this.SDTProjectsCurrentIndex = (parseInt($(target).attr('data-items-index'), 10) || 1);  
+				 
+				 this.SDTEmployeeProjectHoursCollectionCurrentIndex = (parseInt($(target).attr('data-items-index'), 10) || 1);  
+				 
+				 this.ProjectHoursCurrentIndex = (parseInt($(target).attr('data-items-index'), 10) || 1);  
+				 
+				 
+				 
+				 
+				 
+			}
+
+			if (this.ProjectClicked) {
+				this.ProjectClicked();
+			}
+		} 
+
+	this.autoToggleVisibility = true;
+
+	var childContainers = {};
+	this.renderChildContainers = function () {
+		$container
+			.find("[data-slot][data-parent='" + this.ContainerName + "']")
+			.each((function (i, slot) {
+				var $slot = $(slot),
+					slotName = $slot.attr('data-slot'),
+					slotContentEl;
+
+				slotContentEl = childContainers[slotName];
+				if (!slotContentEl) {				
+					slotContentEl = this.getChildContainer(slotName)
+					childContainers[slotName] = slotContentEl;
+					slotContentEl.parentNode.removeChild(slotContentEl);
+				}
+				$slot.append(slotContentEl);
+				$(slotContentEl).show();
+			}).closure(this));
+	};
+
+}

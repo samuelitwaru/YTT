@@ -516,7 +516,7 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, divTable_Internalname, 1, 100, "%", 0, "px", "Table", "start", "top", " "+"data-gx-smarttable"+" ", "grid-template-columns:30fr 70fr;grid-template-rows:auto;grid-column-gap:10px;", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "CellMarginBottom20", "start", "top", " "+"data-gx-smarttable-cell"+" ", "", "div");
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "ActionGrouped CellMarginBottom20", "start", "top", " "+"data-gx-smarttable-cell"+" ", "", "div");
             wb_table1_11_582( true) ;
          }
          else
@@ -532,7 +532,7 @@ namespace GeneXus.Programs {
          {
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "DscTop ExtendedComboCell", "start", "top", " "+"data-gx-smarttable-cell"+" ", "display:flex;align-items:center;", "div");
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "DscTop ExtendedComboCell", "start", "top", " "+"data-gx-smarttable-cell"+" ", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, divTablesplittedcompanylocationid_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
             /* Div Control */
@@ -1887,7 +1887,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20246249533146", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202462713261777", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1905,7 +1905,7 @@ namespace GeneXus.Programs {
          if ( nGXWrapped != 1 )
          {
             context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-            context.AddJavascriptSource("employeeweekreport.js", "?20246249533147", false, true);
+            context.AddJavascriptSource("employeeweekreport.js", "?202462713261778", false, true);
             context.AddJavascriptSource("UserControls/WWP_IconButtonRender.js", "", false, true);
             context.AddJavascriptSource("UserControls/WWP_IconButtonRender.js", "", false, true);
             context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
@@ -2566,15 +2566,15 @@ namespace GeneXus.Programs {
          edtavSdtemployeeweekreports__employeename_Enabled = 0;
          subGrid_Class = "GridWithPaginationBar WorkWith";
          subGrid_Backcolorstyle = 0;
-         Btnnext_Class = "ButtonAsLink";
+         Btnnext_Class = "ButtonAsLinkBasecolor";
          Btnnext_Caption = "Next";
-         Btnnext_Aftericonclass = "fa fa-arrow-right";
+         Btnnext_Aftericonclass = "fa fa-caret-right";
          Btnnext_Tooltiptext = "";
          edtavDaterange_rangetext_Jsonclick = "";
          edtavDaterange_rangetext_Enabled = 1;
-         Btnprev_Class = "ButtonAsLink";
+         Btnprev_Class = "ButtonAsLinkBasecolor";
          Btnprev_Caption = "Prev";
-         Btnprev_Beforeiconclass = "fa fa-arrow-left";
+         Btnprev_Beforeiconclass = "fa fa-caret-left";
          Btnprev_Tooltiptext = "";
          edtavSdtemployeeweekreports__total_formatted_Enabled = -1;
          edtavSdtemployeeweekreports__expected_formatted_Enabled = -1;
