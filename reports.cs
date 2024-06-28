@@ -1226,9 +1226,6 @@ namespace GeneXus.Programs {
          /* Execute user subroutine: 'UPDATESESSIONVARIABLES' */
          S172 ();
          if (returnInSub) return;
-         /* Execute user subroutine: 'EMITGLOBALEVENT' */
-         S182 ();
-         if (returnInSub) return;
       }
 
       protected void E16452( )
@@ -1261,9 +1258,6 @@ namespace GeneXus.Programs {
          /* Execute user subroutine: 'UPDATESESSIONVARIABLES' */
          S172 ();
          if (returnInSub) return;
-         /* Execute user subroutine: 'EMITGLOBALEVENT' */
-         S182 ();
-         if (returnInSub) return;
          context.DoAjaxRefresh();
          /* Execute user subroutine: 'GETDATA' */
          S122 ();
@@ -1281,9 +1275,6 @@ namespace GeneXus.Programs {
          AV21CompanyLocationId.FromJSonString(Combo_companylocationid_Selectedvalue_get, null);
          /* Execute user subroutine: 'UPDATESESSIONVARIABLES' */
          S172 ();
-         if (returnInSub) return;
-         /* Execute user subroutine: 'EMITGLOBALEVENT' */
-         S182 ();
          if (returnInSub) return;
          /* Execute user subroutine: 'GETDATA' */
          S122 ();
@@ -1305,9 +1296,6 @@ namespace GeneXus.Programs {
          AV16ProjectId.FromJSonString(Combo_projectid_Selectedvalue_get, null);
          /* Execute user subroutine: 'UPDATESESSIONVARIABLES' */
          S172 ();
-         if (returnInSub) return;
-         /* Execute user subroutine: 'EMITGLOBALEVENT' */
-         S182 ();
          if (returnInSub) return;
          /* Execute user subroutine: 'GETDATA' */
          S122 ();
@@ -1430,9 +1418,6 @@ namespace GeneXus.Programs {
          }
          AssignAttri("", false, "AV8DateRange", context.localUtil.Format(AV8DateRange, "99/99/99"));
          AssignAttri("", false, "AV11DateRange_To", context.localUtil.Format(AV11DateRange_To, "99/99/99"));
-         /* Execute user subroutine: 'EMITGLOBALEVENT' */
-         S182 ();
-         if (returnInSub) return;
          /* Execute user subroutine: 'GETDATA' */
          S122 ();
          if (returnInSub) return;
@@ -1462,9 +1447,6 @@ namespace GeneXus.Programs {
             chkavShowleavetotal.Visible = 0;
             AssignProp("", false, chkavShowleavetotal_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(chkavShowleavetotal.Visible), 5, 0), true);
          }
-         /* Execute user subroutine: 'EMITGLOBALEVENT' */
-         S182 ();
-         if (returnInSub) return;
          /* Execute user subroutine: 'GETDATA' */
          S122 ();
          if (returnInSub) return;
@@ -1544,16 +1526,6 @@ namespace GeneXus.Programs {
          AV58WebSession.Set("TotalFormattedTime", AV61TotalFormattedTime);
       }
 
-      protected void S182( )
-      {
-         /* 'EMITGLOBALEVENT' Routine */
-         returnInSub = false;
-         if ( AV54View == 2 )
-         {
-            this.executeExternalObjectMethod("", false, "GlobalEvents", "ReportsFilterChanaged", new Object[] {(GxSimpleCollection<long>)AV21CompanyLocationId,(GxSimpleCollection<long>)AV13EmployeeId,(GxSimpleCollection<long>)AV16ProjectId,(DateTime)AV8DateRange,(DateTime)AV11DateRange_To}, true);
-         }
-      }
-
       protected void nextLoad( )
       {
       }
@@ -1604,7 +1576,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202462814473666", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202462818553464", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1620,7 +1592,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("reports.js", "?202462814473667", false, true);
+         context.AddJavascriptSource("reports.js", "?202462818553466", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -1745,15 +1717,15 @@ namespace GeneXus.Programs {
          setEventMetadata("REFRESH",",oparms:[]}");
          setEventMetadata("'DOEXPORTEXCEL'","{handler:'E16452',iparms:[{av:'AV8DateRange',fld:'vDATERANGE',pic:''},{av:'AV11DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV16ProjectId',fld:'vPROJECTID',pic:''},{av:'AV21CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:''},{av:'AV13EmployeeId',fld:'vEMPLOYEEID',pic:''},{av:'AV50ProjectIds',fld:'vPROJECTIDS',pic:''},{av:'AV5SDTEmployeeProjectHoursCollection',fld:'vSDTEMPLOYEEPROJECTHOURSCOLLECTION',pic:''},{av:'AV41TotalFormattedWorkTime',fld:'vTOTALFORMATTEDWORKTIME',pic:''},{av:'AV61TotalFormattedTime',fld:'vTOTALFORMATTEDTIME',pic:''},{av:'AV38ExcelFilename',fld:'vEXCELFILENAME',pic:''},{av:'AV37ErrorMessage',fld:'vERRORMESSAGE',pic:''},{av:'Gx_msg',fld:'vMSG',pic:''}]");
          setEventMetadata("'DOEXPORTEXCEL'",",oparms:[{av:'Gx_msg',fld:'vMSG',pic:''},{av:'AV37ErrorMessage',fld:'vERRORMESSAGE',pic:''},{av:'AV38ExcelFilename',fld:'vEXCELFILENAME',pic:''},{av:'AV61TotalFormattedTime',fld:'vTOTALFORMATTEDTIME',pic:''},{av:'AV41TotalFormattedWorkTime',fld:'vTOTALFORMATTEDWORKTIME',pic:''},{av:'AV5SDTEmployeeProjectHoursCollection',fld:'vSDTEMPLOYEEPROJECTHOURSCOLLECTION',pic:''},{av:'AV50ProjectIds',fld:'vPROJECTIDS',pic:''},{av:'AV13EmployeeId',fld:'vEMPLOYEEID',pic:''},{av:'AV21CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:''},{av:'AV16ProjectId',fld:'vPROJECTID',pic:''},{av:'AV11DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV8DateRange',fld:'vDATERANGE',pic:''}]}");
-         setEventMetadata("COMBO_EMPLOYEEID.ONOPTIONCLICKED","{handler:'E13452',iparms:[{av:'Combo_employeeid_Selectedvalue_get',ctrl:'COMBO_EMPLOYEEID',prop:'SelectedValue_get'},{av:'AV19SDTProjects',fld:'vSDTPROJECTS',pic:''},{av:'AV5SDTEmployeeProjectHoursCollection',fld:'vSDTEMPLOYEEPROJECTHOURSCOLLECTION',pic:''},{av:'AV21CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:''},{av:'AV13EmployeeId',fld:'vEMPLOYEEID',pic:''},{av:'AV16ProjectId',fld:'vPROJECTID',pic:''},{av:'AV8DateRange',fld:'vDATERANGE',pic:''},{av:'AV11DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV56ShowLeaveTotal',fld:'vSHOWLEAVETOTAL',pic:''},{av:'Pivottable1_Totalformattedworktime',ctrl:'PIVOTTABLE1',prop:'TotalFormattedWorkTime'},{av:'AV61TotalFormattedTime',fld:'vTOTALFORMATTEDTIME',pic:''},{av:'AV54View',fld:'vVIEW',pic:'ZZZ9'},{av:'AV52IsManager',fld:'vISMANAGER',pic:'',hsh:true},{av:'AV51EmployeeIds',fld:'vEMPLOYEEIDS',pic:'',hsh:true},{av:'AV50ProjectIds',fld:'vPROJECTIDS',pic:''},{av:'AV41TotalFormattedWorkTime',fld:'vTOTALFORMATTEDWORKTIME',pic:''}]");
+         setEventMetadata("COMBO_EMPLOYEEID.ONOPTIONCLICKED","{handler:'E13452',iparms:[{av:'Combo_employeeid_Selectedvalue_get',ctrl:'COMBO_EMPLOYEEID',prop:'SelectedValue_get'},{av:'AV19SDTProjects',fld:'vSDTPROJECTS',pic:''},{av:'AV5SDTEmployeeProjectHoursCollection',fld:'vSDTEMPLOYEEPROJECTHOURSCOLLECTION',pic:''},{av:'AV21CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:''},{av:'AV13EmployeeId',fld:'vEMPLOYEEID',pic:''},{av:'AV16ProjectId',fld:'vPROJECTID',pic:''},{av:'AV8DateRange',fld:'vDATERANGE',pic:''},{av:'AV11DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV56ShowLeaveTotal',fld:'vSHOWLEAVETOTAL',pic:''},{av:'Pivottable1_Totalformattedworktime',ctrl:'PIVOTTABLE1',prop:'TotalFormattedWorkTime'},{av:'AV61TotalFormattedTime',fld:'vTOTALFORMATTEDTIME',pic:''},{av:'AV52IsManager',fld:'vISMANAGER',pic:'',hsh:true},{av:'AV51EmployeeIds',fld:'vEMPLOYEEIDS',pic:'',hsh:true},{av:'AV50ProjectIds',fld:'vPROJECTIDS',pic:''},{av:'AV41TotalFormattedWorkTime',fld:'vTOTALFORMATTEDWORKTIME',pic:''}]");
          setEventMetadata("COMBO_EMPLOYEEID.ONOPTIONCLICKED",",oparms:[{av:'AV13EmployeeId',fld:'vEMPLOYEEID',pic:''},{av:'Pivottable1_Totalformattedworktime',ctrl:'PIVOTTABLE1',prop:'TotalFormattedWorkTime'},{av:'Pivottable1_Totalformattedtime',ctrl:'PIVOTTABLE1',prop:'TotalFormattedTime'}]}");
-         setEventMetadata("COMBO_COMPANYLOCATIONID.ONOPTIONCLICKED","{handler:'E12452',iparms:[{av:'Combo_companylocationid_Selectedvalue_get',ctrl:'COMBO_COMPANYLOCATIONID',prop:'SelectedValue_get'},{av:'AV19SDTProjects',fld:'vSDTPROJECTS',pic:''},{av:'AV5SDTEmployeeProjectHoursCollection',fld:'vSDTEMPLOYEEPROJECTHOURSCOLLECTION',pic:''},{av:'AV21CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:''},{av:'AV13EmployeeId',fld:'vEMPLOYEEID',pic:''},{av:'AV16ProjectId',fld:'vPROJECTID',pic:''},{av:'AV8DateRange',fld:'vDATERANGE',pic:''},{av:'AV11DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV56ShowLeaveTotal',fld:'vSHOWLEAVETOTAL',pic:''},{av:'Pivottable1_Totalformattedworktime',ctrl:'PIVOTTABLE1',prop:'TotalFormattedWorkTime'},{av:'AV61TotalFormattedTime',fld:'vTOTALFORMATTEDTIME',pic:''},{av:'AV54View',fld:'vVIEW',pic:'ZZZ9'},{av:'AV52IsManager',fld:'vISMANAGER',pic:'',hsh:true},{av:'AV51EmployeeIds',fld:'vEMPLOYEEIDS',pic:'',hsh:true},{av:'AV50ProjectIds',fld:'vPROJECTIDS',pic:''},{av:'AV41TotalFormattedWorkTime',fld:'vTOTALFORMATTEDWORKTIME',pic:''},{av:'A148EmployeeName',fld:'EMPLOYEENAME',pic:''},{av:'A106EmployeeId',fld:'EMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'AV14EmployeeId_Data',fld:'vEMPLOYEEID_DATA',pic:''}]");
+         setEventMetadata("COMBO_COMPANYLOCATIONID.ONOPTIONCLICKED","{handler:'E12452',iparms:[{av:'Combo_companylocationid_Selectedvalue_get',ctrl:'COMBO_COMPANYLOCATIONID',prop:'SelectedValue_get'},{av:'AV19SDTProjects',fld:'vSDTPROJECTS',pic:''},{av:'AV5SDTEmployeeProjectHoursCollection',fld:'vSDTEMPLOYEEPROJECTHOURSCOLLECTION',pic:''},{av:'AV21CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:''},{av:'AV13EmployeeId',fld:'vEMPLOYEEID',pic:''},{av:'AV16ProjectId',fld:'vPROJECTID',pic:''},{av:'AV8DateRange',fld:'vDATERANGE',pic:''},{av:'AV11DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV56ShowLeaveTotal',fld:'vSHOWLEAVETOTAL',pic:''},{av:'Pivottable1_Totalformattedworktime',ctrl:'PIVOTTABLE1',prop:'TotalFormattedWorkTime'},{av:'AV61TotalFormattedTime',fld:'vTOTALFORMATTEDTIME',pic:''},{av:'AV52IsManager',fld:'vISMANAGER',pic:'',hsh:true},{av:'AV51EmployeeIds',fld:'vEMPLOYEEIDS',pic:'',hsh:true},{av:'AV50ProjectIds',fld:'vPROJECTIDS',pic:''},{av:'AV41TotalFormattedWorkTime',fld:'vTOTALFORMATTEDWORKTIME',pic:''},{av:'A148EmployeeName',fld:'EMPLOYEENAME',pic:''},{av:'A106EmployeeId',fld:'EMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'AV14EmployeeId_Data',fld:'vEMPLOYEEID_DATA',pic:''}]");
          setEventMetadata("COMBO_COMPANYLOCATIONID.ONOPTIONCLICKED",",oparms:[{av:'AV21CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:''},{av:'Pivottable1_Totalformattedworktime',ctrl:'PIVOTTABLE1',prop:'TotalFormattedWorkTime'},{av:'Pivottable1_Totalformattedtime',ctrl:'PIVOTTABLE1',prop:'TotalFormattedTime'},{av:'AV14EmployeeId_Data',fld:'vEMPLOYEEID_DATA',pic:''},{av:'Combo_employeeid_Selectedvalue_set',ctrl:'COMBO_EMPLOYEEID',prop:'SelectedValue_set'}]}");
-         setEventMetadata("COMBO_PROJECTID.ONOPTIONCLICKED","{handler:'E11452',iparms:[{av:'Combo_projectid_Selectedvalue_get',ctrl:'COMBO_PROJECTID',prop:'SelectedValue_get'},{av:'AV19SDTProjects',fld:'vSDTPROJECTS',pic:''},{av:'AV5SDTEmployeeProjectHoursCollection',fld:'vSDTEMPLOYEEPROJECTHOURSCOLLECTION',pic:''},{av:'AV21CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:''},{av:'AV13EmployeeId',fld:'vEMPLOYEEID',pic:''},{av:'AV16ProjectId',fld:'vPROJECTID',pic:''},{av:'AV8DateRange',fld:'vDATERANGE',pic:''},{av:'AV11DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV56ShowLeaveTotal',fld:'vSHOWLEAVETOTAL',pic:''},{av:'Pivottable1_Totalformattedworktime',ctrl:'PIVOTTABLE1',prop:'TotalFormattedWorkTime'},{av:'AV61TotalFormattedTime',fld:'vTOTALFORMATTEDTIME',pic:''},{av:'AV54View',fld:'vVIEW',pic:'ZZZ9'},{av:'AV52IsManager',fld:'vISMANAGER',pic:'',hsh:true},{av:'AV51EmployeeIds',fld:'vEMPLOYEEIDS',pic:'',hsh:true},{av:'AV50ProjectIds',fld:'vPROJECTIDS',pic:''},{av:'AV41TotalFormattedWorkTime',fld:'vTOTALFORMATTEDWORKTIME',pic:''}]");
+         setEventMetadata("COMBO_PROJECTID.ONOPTIONCLICKED","{handler:'E11452',iparms:[{av:'Combo_projectid_Selectedvalue_get',ctrl:'COMBO_PROJECTID',prop:'SelectedValue_get'},{av:'AV19SDTProjects',fld:'vSDTPROJECTS',pic:''},{av:'AV5SDTEmployeeProjectHoursCollection',fld:'vSDTEMPLOYEEPROJECTHOURSCOLLECTION',pic:''},{av:'AV21CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:''},{av:'AV13EmployeeId',fld:'vEMPLOYEEID',pic:''},{av:'AV16ProjectId',fld:'vPROJECTID',pic:''},{av:'AV8DateRange',fld:'vDATERANGE',pic:''},{av:'AV11DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV56ShowLeaveTotal',fld:'vSHOWLEAVETOTAL',pic:''},{av:'Pivottable1_Totalformattedworktime',ctrl:'PIVOTTABLE1',prop:'TotalFormattedWorkTime'},{av:'AV61TotalFormattedTime',fld:'vTOTALFORMATTEDTIME',pic:''},{av:'AV52IsManager',fld:'vISMANAGER',pic:'',hsh:true},{av:'AV51EmployeeIds',fld:'vEMPLOYEEIDS',pic:'',hsh:true},{av:'AV50ProjectIds',fld:'vPROJECTIDS',pic:''},{av:'AV41TotalFormattedWorkTime',fld:'vTOTALFORMATTEDWORKTIME',pic:''}]");
          setEventMetadata("COMBO_PROJECTID.ONOPTIONCLICKED",",oparms:[{av:'AV16ProjectId',fld:'vPROJECTID',pic:''},{av:'Pivottable1_Totalformattedworktime',ctrl:'PIVOTTABLE1',prop:'TotalFormattedWorkTime'},{av:'Pivottable1_Totalformattedtime',ctrl:'PIVOTTABLE1',prop:'TotalFormattedTime'}]}");
-         setEventMetadata("DATERANGE_RANGEPICKER.DATERANGECHANGED","{handler:'E14452',iparms:[{av:'AV8DateRange',fld:'vDATERANGE',pic:''},{av:'AV11DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'Gx_date',fld:'vTODAY',pic:'',hsh:true},{av:'AV19SDTProjects',fld:'vSDTPROJECTS',pic:''},{av:'AV5SDTEmployeeProjectHoursCollection',fld:'vSDTEMPLOYEEPROJECTHOURSCOLLECTION',pic:''},{av:'AV21CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:''},{av:'AV13EmployeeId',fld:'vEMPLOYEEID',pic:''},{av:'AV16ProjectId',fld:'vPROJECTID',pic:''},{av:'AV56ShowLeaveTotal',fld:'vSHOWLEAVETOTAL',pic:''},{av:'Pivottable1_Totalformattedworktime',ctrl:'PIVOTTABLE1',prop:'TotalFormattedWorkTime'},{av:'AV61TotalFormattedTime',fld:'vTOTALFORMATTEDTIME',pic:''},{av:'AV54View',fld:'vVIEW',pic:'ZZZ9'},{av:'AV52IsManager',fld:'vISMANAGER',pic:'',hsh:true},{av:'AV51EmployeeIds',fld:'vEMPLOYEEIDS',pic:'',hsh:true},{av:'AV50ProjectIds',fld:'vPROJECTIDS',pic:''},{av:'AV41TotalFormattedWorkTime',fld:'vTOTALFORMATTEDWORKTIME',pic:''}]");
+         setEventMetadata("DATERANGE_RANGEPICKER.DATERANGECHANGED","{handler:'E14452',iparms:[{av:'AV8DateRange',fld:'vDATERANGE',pic:''},{av:'AV11DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'Gx_date',fld:'vTODAY',pic:'',hsh:true},{av:'AV19SDTProjects',fld:'vSDTPROJECTS',pic:''},{av:'AV5SDTEmployeeProjectHoursCollection',fld:'vSDTEMPLOYEEPROJECTHOURSCOLLECTION',pic:''},{av:'AV21CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:''},{av:'AV13EmployeeId',fld:'vEMPLOYEEID',pic:''},{av:'AV16ProjectId',fld:'vPROJECTID',pic:''},{av:'AV56ShowLeaveTotal',fld:'vSHOWLEAVETOTAL',pic:''},{av:'Pivottable1_Totalformattedworktime',ctrl:'PIVOTTABLE1',prop:'TotalFormattedWorkTime'},{av:'AV61TotalFormattedTime',fld:'vTOTALFORMATTEDTIME',pic:''},{av:'AV52IsManager',fld:'vISMANAGER',pic:'',hsh:true},{av:'AV51EmployeeIds',fld:'vEMPLOYEEIDS',pic:'',hsh:true},{av:'AV50ProjectIds',fld:'vPROJECTIDS',pic:''},{av:'AV41TotalFormattedWorkTime',fld:'vTOTALFORMATTEDWORKTIME',pic:''}]");
          setEventMetadata("DATERANGE_RANGEPICKER.DATERANGECHANGED",",oparms:[{av:'AV8DateRange',fld:'vDATERANGE',pic:''},{av:'AV11DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'Pivottable1_Totalformattedworktime',ctrl:'PIVOTTABLE1',prop:'TotalFormattedWorkTime'},{av:'Pivottable1_Totalformattedtime',ctrl:'PIVOTTABLE1',prop:'TotalFormattedTime'}]}");
-         setEventMetadata("VVIEW.CONTROLVALUECHANGED","{handler:'E17452',iparms:[{av:'AV54View',fld:'vVIEW',pic:'ZZZ9'},{av:'AV21CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:''},{av:'AV13EmployeeId',fld:'vEMPLOYEEID',pic:''},{av:'AV16ProjectId',fld:'vPROJECTID',pic:''},{av:'AV8DateRange',fld:'vDATERANGE',pic:''},{av:'AV11DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV52IsManager',fld:'vISMANAGER',pic:'',hsh:true},{av:'AV51EmployeeIds',fld:'vEMPLOYEEIDS',pic:'',hsh:true},{av:'AV50ProjectIds',fld:'vPROJECTIDS',pic:''},{av:'AV19SDTProjects',fld:'vSDTPROJECTS',pic:''},{av:'AV5SDTEmployeeProjectHoursCollection',fld:'vSDTEMPLOYEEPROJECTHOURSCOLLECTION',pic:''},{av:'AV41TotalFormattedWorkTime',fld:'vTOTALFORMATTEDWORKTIME',pic:''},{av:'AV61TotalFormattedTime',fld:'vTOTALFORMATTEDTIME',pic:''},{av:'AV56ShowLeaveTotal',fld:'vSHOWLEAVETOTAL',pic:''},{av:'Pivottable1_Totalformattedworktime',ctrl:'PIVOTTABLE1',prop:'TotalFormattedWorkTime'}]");
+         setEventMetadata("VVIEW.CONTROLVALUECHANGED","{handler:'E17452',iparms:[{av:'AV54View',fld:'vVIEW',pic:'ZZZ9'},{av:'AV52IsManager',fld:'vISMANAGER',pic:'',hsh:true},{av:'AV21CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:''},{av:'AV8DateRange',fld:'vDATERANGE',pic:''},{av:'AV11DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV16ProjectId',fld:'vPROJECTID',pic:''},{av:'AV13EmployeeId',fld:'vEMPLOYEEID',pic:''},{av:'AV51EmployeeIds',fld:'vEMPLOYEEIDS',pic:'',hsh:true},{av:'AV50ProjectIds',fld:'vPROJECTIDS',pic:''},{av:'AV19SDTProjects',fld:'vSDTPROJECTS',pic:''},{av:'AV5SDTEmployeeProjectHoursCollection',fld:'vSDTEMPLOYEEPROJECTHOURSCOLLECTION',pic:''},{av:'AV41TotalFormattedWorkTime',fld:'vTOTALFORMATTEDWORKTIME',pic:''},{av:'AV61TotalFormattedTime',fld:'vTOTALFORMATTEDTIME',pic:''},{av:'AV56ShowLeaveTotal',fld:'vSHOWLEAVETOTAL',pic:''},{av:'Pivottable1_Totalformattedworktime',ctrl:'PIVOTTABLE1',prop:'TotalFormattedWorkTime'}]");
          setEventMetadata("VVIEW.CONTROLVALUECHANGED",",oparms:[{av:'divDetailtable_Visible',ctrl:'DETAILTABLE',prop:'Visible'},{av:'divOverviewtable_Visible',ctrl:'OVERVIEWTABLE',prop:'Visible'},{av:'chkavShowleavetotal.Visible',ctrl:'vSHOWLEAVETOTAL',prop:'Visible'},{av:'Pivottable1_Totalformattedworktime',ctrl:'PIVOTTABLE1',prop:'TotalFormattedWorkTime'},{av:'Pivottable1_Totalformattedtime',ctrl:'PIVOTTABLE1',prop:'TotalFormattedTime'}]}");
          setEventMetadata("VSHOWLEAVETOTAL.CONTROLVALUECHANGED","{handler:'E18452',iparms:[{av:'AV19SDTProjects',fld:'vSDTPROJECTS',pic:''},{av:'AV5SDTEmployeeProjectHoursCollection',fld:'vSDTEMPLOYEEPROJECTHOURSCOLLECTION',pic:''},{av:'AV56ShowLeaveTotal',fld:'vSHOWLEAVETOTAL',pic:''},{av:'AV52IsManager',fld:'vISMANAGER',pic:'',hsh:true},{av:'AV21CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:''},{av:'AV8DateRange',fld:'vDATERANGE',pic:''},{av:'AV11DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV16ProjectId',fld:'vPROJECTID',pic:''},{av:'AV13EmployeeId',fld:'vEMPLOYEEID',pic:''},{av:'AV51EmployeeIds',fld:'vEMPLOYEEIDS',pic:'',hsh:true},{av:'AV50ProjectIds',fld:'vPROJECTIDS',pic:''},{av:'AV41TotalFormattedWorkTime',fld:'vTOTALFORMATTEDWORKTIME',pic:''},{av:'AV61TotalFormattedTime',fld:'vTOTALFORMATTEDTIME',pic:''},{av:'Pivottable1_Totalformattedworktime',ctrl:'PIVOTTABLE1',prop:'TotalFormattedWorkTime'}]");
          setEventMetadata("VSHOWLEAVETOTAL.CONTROLVALUECHANGED",",oparms:[{av:'Pivottable1_Showleavetotal',ctrl:'PIVOTTABLE1',prop:'ShowLeaveTotal'},{av:'Pivottable1_Totalformattedworktime',ctrl:'PIVOTTABLE1',prop:'TotalFormattedWorkTime'},{av:'Pivottable1_Totalformattedtime',ctrl:'PIVOTTABLE1',prop:'TotalFormattedTime'}]}");
