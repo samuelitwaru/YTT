@@ -357,8 +357,8 @@ workwithplus\awwp_parameter_dataprovider
 sdsvc_UpdateWorkHourLog_Level_Detail
 sdsvc_LogHoursPanel_Level_Detail
 sdsvc_LeaveRequestPanel_Level_Detail
-sdsvc_UpdateLeaveRequest_Level_Detail
 sdsvc_ViewLeaveRequest_Level_Detail
+sdsvc_UpdateLeaveRequest_Level_Detail
 yttv3sdnotauthorized
 yttv3sd
 gamsdnotauthorized
@@ -372,7 +372,7 @@ updateworkhourlog
 loghourspanel
 worklogsgridcollectionpanel
 leaverequestpanel
-updateleaverequest
 viewleaverequest
 leaverequestsgridpanel
+updateleaverequest
 GeneXus.Programs.Common

@@ -164,6 +164,18 @@
               </Property>
             </Properties>
           </Field>
+          <Field name="EmployeeBalance" description="Employee Balance">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>Numeric</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>4</Value>
+              </Property>
+            </Properties>
+          </Field>
           <Field name="LeaveTypeVacationLeave" description="Leave Type Vacation Leave">
             <Properties>
               <Property>
