@@ -1413,7 +1413,7 @@ namespace GeneXus.Programs {
                }
                if ( AV48GAMUser.checkrole("Manager") )
                {
-                  CallWebObject(formatLink("leavecalendarold.aspx") );
+                  CallWebObject(formatLink("leavecalendar.aspx") );
                   context.wjLocDisableFrm = 1;
                }
                if ( AV48GAMUser.checkrole("Project Manager") )
@@ -1719,7 +1719,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202462819251934", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202462820181059", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1735,7 +1735,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("login.js", "?202462819251938", false, true);
+         context.AddJavascriptSource("login.js", "?202462820181062", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Mask/jquery.mask.js", "", false, true);
          context.AddJavascriptSource("DVelop/WorkWithPlusUtilities/BootstrapSelect.js", "", false, true);
