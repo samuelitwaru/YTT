@@ -375,6 +375,7 @@ namespace GeneXus.Programs {
          AV82Udparg16 = new getloggedinusercompanyid(context).executeUdp( );
          AV82Udparg16 = new getloggedinusercompanyid(context).executeUdp( );
          AV82Udparg16 = new getloggedinusercompanyid(context).executeUdp( );
+         AV82Udparg16 = new getloggedinusercompanyid(context).executeUdp( );
          AV83Udparg17 = new getloggedinemployeeid(context).executeUdp( );
          pr_default.dynParam(0, new Object[]{ new Object[]{
                                               A132LeaveRequestStatus ,

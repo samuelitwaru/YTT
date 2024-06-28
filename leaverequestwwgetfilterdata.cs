@@ -280,6 +280,7 @@ namespace GeneXus.Programs {
          AV78Udparg16 = new getloggedinusercompanyid(context).executeUdp( );
          AV78Udparg16 = new getloggedinusercompanyid(context).executeUdp( );
          AV78Udparg16 = new getloggedinusercompanyid(context).executeUdp( );
+         AV78Udparg16 = new getloggedinusercompanyid(context).executeUdp( );
          AV79Udparg17 = new getloggedinemployeeid(context).executeUdp( );
          pr_default.dynParam(0, new Object[]{ new Object[]{
                                               A132LeaveRequestStatus ,
@@ -397,6 +398,7 @@ namespace GeneXus.Programs {
          AV75Leaverequestwwds_13_tfleaverequeststatus = AV58TFLeaveRequestStatus;
          AV76Leaverequestwwds_14_tfleaverequeststatusoperator = AV59TFLeaveRequestStatusOperator;
          AV77Leaverequestwwds_15_tfleaverequeststatus_sels = AV26TFLeaveRequestStatus_Sels;
+         AV82Udparg18 = new getloggedinusercompanyid(context).executeUdp( );
          AV82Udparg18 = new getloggedinusercompanyid(context).executeUdp( );
          AV82Udparg18 = new getloggedinusercompanyid(context).executeUdp( );
          AV82Udparg18 = new getloggedinusercompanyid(context).executeUdp( );

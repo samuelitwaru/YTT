@@ -82,6 +82,7 @@ namespace GeneXus.Programs {
          state.Add("gxTpr_Leaverequestrejectionreason_Z");
          state.Add("gxTpr_Employeeid_Z");
          state.Add("gxTpr_Employeename_Z");
+         state.Add("gxTpr_Employeebalance_Z");
          state.Add("gxTpr_Leavetypevacationleave_Z");
          state.Add("gxTpr_Leaverequesthalfday_N");
          return state ;
@@ -104,6 +105,7 @@ namespace GeneXus.Programs {
          gxTv_SdtLeaveRequest_Leaverequestrejectionreason = sdt.gxTv_SdtLeaveRequest_Leaverequestrejectionreason ;
          gxTv_SdtLeaveRequest_Employeeid = sdt.gxTv_SdtLeaveRequest_Employeeid ;
          gxTv_SdtLeaveRequest_Employeename = sdt.gxTv_SdtLeaveRequest_Employeename ;
+         gxTv_SdtLeaveRequest_Employeebalance = sdt.gxTv_SdtLeaveRequest_Employeebalance ;
          gxTv_SdtLeaveRequest_Leavetypevacationleave = sdt.gxTv_SdtLeaveRequest_Leavetypevacationleave ;
          gxTv_SdtLeaveRequest_Mode = sdt.gxTv_SdtLeaveRequest_Mode ;
          gxTv_SdtLeaveRequest_Initialized = sdt.gxTv_SdtLeaveRequest_Initialized ;
@@ -120,6 +122,7 @@ namespace GeneXus.Programs {
          gxTv_SdtLeaveRequest_Leaverequestrejectionreason_Z = sdt.gxTv_SdtLeaveRequest_Leaverequestrejectionreason_Z ;
          gxTv_SdtLeaveRequest_Employeeid_Z = sdt.gxTv_SdtLeaveRequest_Employeeid_Z ;
          gxTv_SdtLeaveRequest_Employeename_Z = sdt.gxTv_SdtLeaveRequest_Employeename_Z ;
+         gxTv_SdtLeaveRequest_Employeebalance_Z = sdt.gxTv_SdtLeaveRequest_Employeebalance_Z ;
          gxTv_SdtLeaveRequest_Leavetypevacationleave_Z = sdt.gxTv_SdtLeaveRequest_Leavetypevacationleave_Z ;
          gxTv_SdtLeaveRequest_Leaverequesthalfday_N = sdt.gxTv_SdtLeaveRequest_Leaverequesthalfday_N ;
          return  ;
@@ -181,6 +184,7 @@ namespace GeneXus.Programs {
          AddObjectProperty("LeaveRequestRejectionReason", gxTv_SdtLeaveRequest_Leaverequestrejectionreason, false, includeNonInitialized);
          AddObjectProperty("EmployeeId", gxTv_SdtLeaveRequest_Employeeid, false, includeNonInitialized);
          AddObjectProperty("EmployeeName", gxTv_SdtLeaveRequest_Employeename, false, includeNonInitialized);
+         AddObjectProperty("EmployeeBalance", gxTv_SdtLeaveRequest_Employeebalance, false, includeNonInitialized);
          AddObjectProperty("LeaveTypeVacationLeave", gxTv_SdtLeaveRequest_Leavetypevacationleave, false, includeNonInitialized);
          if ( includeState )
          {
@@ -226,6 +230,7 @@ namespace GeneXus.Programs {
             AddObjectProperty("LeaveRequestRejectionReason_Z", gxTv_SdtLeaveRequest_Leaverequestrejectionreason_Z, false, includeNonInitialized);
             AddObjectProperty("EmployeeId_Z", gxTv_SdtLeaveRequest_Employeeid_Z, false, includeNonInitialized);
             AddObjectProperty("EmployeeName_Z", gxTv_SdtLeaveRequest_Employeename_Z, false, includeNonInitialized);
+            AddObjectProperty("EmployeeBalance_Z", gxTv_SdtLeaveRequest_Employeebalance_Z, false, includeNonInitialized);
             AddObjectProperty("LeaveTypeVacationLeave_Z", gxTv_SdtLeaveRequest_Leavetypevacationleave_Z, false, includeNonInitialized);
             AddObjectProperty("LeaveRequestHalfDay_N", gxTv_SdtLeaveRequest_Leaverequesthalfday_N, false, includeNonInitialized);
          }
@@ -300,6 +305,11 @@ namespace GeneXus.Programs {
             sdtIsNull = 0;
             gxTv_SdtLeaveRequest_Employeename = sdt.gxTv_SdtLeaveRequest_Employeename ;
          }
+         if ( sdt.IsDirty("EmployeeBalance") )
+         {
+            sdtIsNull = 0;
+            gxTv_SdtLeaveRequest_Employeebalance = sdt.gxTv_SdtLeaveRequest_Employeebalance ;
+         }
          if ( sdt.IsDirty("LeaveTypeVacationLeave") )
          {
             sdtIsNull = 0;
@@ -334,6 +344,7 @@ namespace GeneXus.Programs {
                this.gxTv_SdtLeaveRequest_Leaverequestrejectionreason_Z_SetNull( );
                this.gxTv_SdtLeaveRequest_Employeeid_Z_SetNull( );
                this.gxTv_SdtLeaveRequest_Employeename_Z_SetNull( );
+               this.gxTv_SdtLeaveRequest_Employeebalance_Z_SetNull( );
                this.gxTv_SdtLeaveRequest_Leavetypevacationleave_Z_SetNull( );
             }
             gxTv_SdtLeaveRequest_Leaverequestid = value;
@@ -601,6 +612,22 @@ namespace GeneXus.Programs {
             sdtIsNull = 0;
             gxTv_SdtLeaveRequest_Employeename = value;
             SetDirty("Employeename");
+         }
+
+      }
+
+      [  SoapElement( ElementName = "EmployeeBalance" )]
+      [  XmlElement( ElementName = "EmployeeBalance"   )]
+      public short gxTpr_Employeebalance
+      {
+         get {
+            return gxTv_SdtLeaveRequest_Employeebalance ;
+         }
+
+         set {
+            sdtIsNull = 0;
+            gxTv_SdtLeaveRequest_Employeebalance = value;
+            SetDirty("Employeebalance");
          }
 
       }
@@ -1098,6 +1125,34 @@ namespace GeneXus.Programs {
          return false ;
       }
 
+      [  SoapElement( ElementName = "EmployeeBalance_Z" )]
+      [  XmlElement( ElementName = "EmployeeBalance_Z"   )]
+      public short gxTpr_Employeebalance_Z
+      {
+         get {
+            return gxTv_SdtLeaveRequest_Employeebalance_Z ;
+         }
+
+         set {
+            sdtIsNull = 0;
+            gxTv_SdtLeaveRequest_Employeebalance_Z = value;
+            SetDirty("Employeebalance_Z");
+         }
+
+      }
+
+      public void gxTv_SdtLeaveRequest_Employeebalance_Z_SetNull( )
+      {
+         gxTv_SdtLeaveRequest_Employeebalance_Z = 0;
+         SetDirty("Employeebalance_Z");
+         return  ;
+      }
+
+      public bool gxTv_SdtLeaveRequest_Employeebalance_Z_IsNull( )
+      {
+         return false ;
+      }
+
       [  SoapElement( ElementName = "LeaveTypeVacationLeave_Z" )]
       [  XmlElement( ElementName = "LeaveTypeVacationLeave_Z"   )]
       public string gxTpr_Leavetypevacationleave_Z
@@ -1195,7 +1250,9 @@ namespace GeneXus.Programs {
       }
 
       private short sdtIsNull ;
+      private short gxTv_SdtLeaveRequest_Employeebalance ;
       private short gxTv_SdtLeaveRequest_Initialized ;
+      private short gxTv_SdtLeaveRequest_Employeebalance_Z ;
       private short gxTv_SdtLeaveRequest_Leaverequesthalfday_N ;
       private long gxTv_SdtLeaveRequest_Leaverequestid ;
       private long gxTv_SdtLeaveRequest_Leavetypeid ;
@@ -1423,7 +1480,21 @@ namespace GeneXus.Programs {
 
       }
 
-      [DataMember( Name = "LeaveTypeVacationLeave" , Order = 13 )]
+      [DataMember( Name = "EmployeeBalance" , Order = 13 )]
+      [GxSeudo()]
+      public Nullable<short> gxTpr_Employeebalance
+      {
+         get {
+            return sdt.gxTpr_Employeebalance ;
+         }
+
+         set {
+            sdt.gxTpr_Employeebalance = (short)(value.HasValue ? value.Value : 0);
+         }
+
+      }
+
+      [DataMember( Name = "LeaveTypeVacationLeave" , Order = 14 )]
       [GxSeudo()]
       public string gxTpr_Leavetypevacationleave
       {
@@ -1458,7 +1529,7 @@ namespace GeneXus.Programs {
          }
       }
 
-      [DataMember( Name = "gx_md5_hash", Order = 14 )]
+      [DataMember( Name = "gx_md5_hash", Order = 15 )]
       public string Hash
       {
          get {
