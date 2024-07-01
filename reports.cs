@@ -1495,9 +1495,9 @@ namespace GeneXus.Programs {
       {
          /* 'GETEMPLOYEEIDSBYPROJECT' Routine */
          returnInSub = false;
-         AV71Udparg1 = new getloggedinemployeeid(context).executeUdp( );
+         AV72Udparg1 = new getloggedinemployeeid(context).executeUdp( );
          /* Using cursor H00457 */
-         pr_default.execute(5, new Object[] {AV71Udparg1});
+         pr_default.execute(5, new Object[] {AV72Udparg1});
          while ( (pr_default.getStatus(5) != 101) )
          {
             A166ProjectManagerId = H00457_A166ProjectManagerId[0];
@@ -1576,7 +1576,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202462821154115", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202462922441849", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1592,7 +1592,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("reports.js", "?202462821154117", false, true);
+         context.AddJavascriptSource("reports.js", "?202462922441850", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -1893,7 +1893,7 @@ namespace GeneXus.Programs {
       private long A157CompanyLocationId ;
       private long AV49EmployeeCompanyLocationId ;
       private long A102ProjectId ;
-      private long AV71Udparg1 ;
+      private long AV72Udparg1 ;
       private long A166ProjectManagerId ;
       private string Combo_employeeid_Selectedvalue_get ;
       private string Pivottable1_Totalformattedworktime ;
@@ -2154,7 +2154,7 @@ namespace GeneXus.Programs {
           };
           Object[] prmH00457;
           prmH00457 = new Object[] {
-          new ParDef("AV71Udparg1",GXType.Int64,10,0)
+          new ParDef("AV72Udparg1",GXType.Int64,10,0)
           };
           Object[] prmH00454;
           prmH00454 = new Object[] {
@@ -2172,7 +2172,7 @@ namespace GeneXus.Programs {
              ,new CursorDef("H00454", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00454,100, GxCacheFrequency.OFF ,false,false )
              ,new CursorDef("H00455", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00455,100, GxCacheFrequency.OFF ,false,false )
              ,new CursorDef("H00456", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00456,100, GxCacheFrequency.OFF ,false,false )
-             ,new CursorDef("H00457", "SELECT ProjectManagerId, ProjectId FROM Project WHERE ProjectManagerId = :AV71Udparg1 ORDER BY ProjectManagerId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00457,100, GxCacheFrequency.OFF ,false,false )
+             ,new CursorDef("H00457", "SELECT ProjectManagerId, ProjectId FROM Project WHERE ProjectManagerId = :AV72Udparg1 ORDER BY ProjectManagerId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00457,100, GxCacheFrequency.OFF ,false,false )
           };
        }
     }

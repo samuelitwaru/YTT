@@ -272,6 +272,7 @@ namespace GeneXus.Programs {
          context.AddJavascriptSource("DVelop/Mask/jquery.mask.js", "", false, true);
          context.AddJavascriptSource("DVelop/WorkWithPlusUtilities/BootstrapSelect.js", "", false, true);
          context.AddJavascriptSource("DVelop/WorkWithPlusUtilities/WorkWithPlusUtilitiesRender.js", "", false, true);
+         context.AddJavascriptSource("GXGoogleVisualizationLibrary/GoogleAnalytics/GoogleAnalyticsRender.js", "", false, true);
          context.WriteHtmlText( Form.Headerrawhtml) ;
          context.CloseHtmlHeader();
          if ( context.isSpaRequest( ) )
@@ -341,6 +342,8 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "WWPUTILITIES_Allowcolumnreordering", StringUtil.BoolToStr( Wwputilities_Allowcolumnreordering));
          GxWebStd.gx_hidden_field( context, "WWPUTILITIES_Allowcolumnsrestore", StringUtil.BoolToStr( Wwputilities_Allowcolumnsrestore));
          GxWebStd.gx_hidden_field( context, "WWPUTILITIES_Comboloadtype", StringUtil.RTrim( Wwputilities_Comboloadtype));
+         GxWebStd.gx_hidden_field( context, "GOOGLEANALYTICS_Code", StringUtil.RTrim( Googleanalytics_Code));
+         GxWebStd.gx_hidden_field( context, "GOOGLEANALYTICS_Domainname", StringUtil.RTrim( Googleanalytics_Domainname));
          GxWebStd.gx_hidden_field( context, "GRIDAUTHTYPES_Class", StringUtil.RTrim( subGridauthtypes_Class));
          GxWebStd.gx_hidden_field( context, "GRIDAUTHTYPES_Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGridauthtypes_Visible), 5, 0, ".", "")));
          GxWebStd.gx_hidden_field( context, "TABLEBUTTONS_Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(divTablebuttons_Visible), 5, 0, ".", "")));
@@ -440,7 +443,7 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-lg-11 CellMarginLogin", "Center", "top", "", "", "div");
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 CellMarginLogin", "Center", "top", "", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, divTablecontent_Internalname, 1, 0, "px", 0, "px", "CellMarginTop", "start", "top", "", "", "div");
             /* Div Control */
@@ -664,6 +667,16 @@ namespace GeneXus.Programs {
             ucWwputilities.Render(context, "wwp.workwithplusutilities_fal", Wwputilities_Internalname, "WWPUTILITIESContainer");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
+            /* User Defined Control */
+            ucGoogleanalytics.SetProperty("Code", Googleanalytics_Code);
+            ucGoogleanalytics.SetProperty("DomainName", Googleanalytics_Domainname);
+            ucGoogleanalytics.Render(context, "googleanalytics", Googleanalytics_Internalname, "GOOGLEANALYTICSContainer");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -674,8 +687,8 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, divHtml_bottomauxiliarcontrols_Internalname, 1, 0, "px", 0, "px", "Section", "start", "top", "", "", "div");
             /* Single line edit */
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 82,'',false,'" + sGXsfl_60_idx + "',0)\"";
-            GxWebStd.gx_single_line_edit( context, edtavUrl_Internalname, AV30URL, StringUtil.RTrim( context.localUtil.Format( AV30URL, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,82);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavUrl_Jsonclick, 0, "Attribute", "", "", "", "", edtavUrl_Visible, 1, 0, "text", "", 0, "px", 1, "row", 2048, 0, 0, 0, 0, -1, 0, true, "GeneXusSecurityCommon\\GAMURL", "start", true, "", "HLP_Login.htm");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 85,'',false,'" + sGXsfl_60_idx + "',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtavUrl_Internalname, AV30URL, StringUtil.RTrim( context.localUtil.Format( AV30URL, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,85);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavUrl_Jsonclick, 0, "Attribute", "", "", "", "", edtavUrl_Visible, 1, 0, "text", "", 0, "px", 1, "row", 2048, 0, 0, 0, 0, -1, 0, true, "GeneXusSecurityCommon\\GAMURL", "start", true, "", "HLP_Login.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -1113,6 +1126,8 @@ namespace GeneXus.Programs {
             Wwputilities_Allowcolumnreordering = StringUtil.StrToBool( cgiGet( "WWPUTILITIES_Allowcolumnreordering"));
             Wwputilities_Allowcolumnsrestore = StringUtil.StrToBool( cgiGet( "WWPUTILITIES_Allowcolumnsrestore"));
             Wwputilities_Comboloadtype = cgiGet( "WWPUTILITIES_Comboloadtype");
+            Googleanalytics_Code = cgiGet( "GOOGLEANALYTICS_Code");
+            Googleanalytics_Domainname = cgiGet( "GOOGLEANALYTICS_Domainname");
             subGridauthtypes_Class = cgiGet( "GRIDAUTHTYPES_Class");
             subGridauthtypes_Visible = (int)(Math.Round(context.localUtil.CToN( cgiGet( "GRIDAUTHTYPES_Visible"), ".", ","), 18, MidpointRounding.ToEven));
             divTablebuttons_Visible = (int)(Math.Round(context.localUtil.CToN( cgiGet( "TABLEBUTTONS_Visible"), ".", ","), 18, MidpointRounding.ToEven));
@@ -1719,7 +1734,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024629749396", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202462921142339", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1735,11 +1750,12 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("login.js", "?202462974941", false, true);
+         context.AddJavascriptSource("login.js", "?202462921142343", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Mask/jquery.mask.js", "", false, true);
          context.AddJavascriptSource("DVelop/WorkWithPlusUtilities/BootstrapSelect.js", "", false, true);
          context.AddJavascriptSource("DVelop/WorkWithPlusUtilities/WorkWithPlusUtilitiesRender.js", "", false, true);
+         context.AddJavascriptSource("GXGoogleVisualizationLibrary/GoogleAnalytics/GoogleAnalyticsRender.js", "", false, true);
          /* End function include_jscripts */
       }
 
@@ -2105,6 +2121,7 @@ namespace GeneXus.Programs {
          divTablelogin_Internalname = "TABLELOGIN";
          divTablecontent_Internalname = "TABLECONTENT";
          Wwputilities_Internalname = "WWPUTILITIES";
+         Googleanalytics_Internalname = "GOOGLEANALYTICS";
          divTablemain_Internalname = "TABLEMAIN";
          edtavUrl_Internalname = "vURL";
          divHtml_bottomauxiliarcontrols_Internalname = "HTML_BOTTOMAUXILIARCONTROLS";
@@ -2160,6 +2177,8 @@ namespace GeneXus.Programs {
          cmbavLogonto.Enabled = 1;
          divLayoutmaintable_Class = "Table";
          subGridauthtypes_Class = "FreeStyleGrid";
+         Googleanalytics_Domainname = "staging.timetracker.software";
+         Googleanalytics_Code = "<script async src=\"https://www.googletagmanager.com/gtag/js?id=G-EW3Z3FWJHB\"></script><script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-EW3Z3FWJHB');</script>";
          Wwputilities_Comboloadtype = "InfiniteScrolling";
          Wwputilities_Allowcolumnsrestore = Convert.ToBoolean( -1);
          Wwputilities_Allowcolumnreordering = Convert.ToBoolean( -1);
@@ -2253,6 +2272,7 @@ namespace GeneXus.Programs {
          GridauthtypesContainer = new GXWebGrid( context);
          sStyleString = "";
          ucWwputilities = new GXUserControl();
+         ucGoogleanalytics = new GXUserControl();
          AV30URL = "";
          sEvt = "";
          EvtGridId = "";
@@ -2344,6 +2364,8 @@ namespace GeneXus.Programs {
       private string GXKey ;
       private string AV16IDP_State ;
       private string Wwputilities_Comboloadtype ;
+      private string Googleanalytics_Code ;
+      private string Googleanalytics_Domainname ;
       private string subGridauthtypes_Class ;
       private string GX_FocusControl ;
       private string sPrefix ;
@@ -2393,6 +2415,7 @@ namespace GeneXus.Programs {
       private string sStyleString ;
       private string subGridauthtypes_Internalname ;
       private string Wwputilities_Internalname ;
+      private string Googleanalytics_Internalname ;
       private string divHtml_bottomauxiliarcontrols_Internalname ;
       private string edtavUrl_Internalname ;
       private string edtavUrl_Jsonclick ;
@@ -2451,6 +2474,7 @@ namespace GeneXus.Programs {
       private GXWebRow GridauthtypesRow ;
       private GXWebColumn GridauthtypesColumn ;
       private GXUserControl ucWwputilities ;
+      private GXUserControl ucGoogleanalytics ;
       private GeneXus.Programs.genexussecurity.SdtGAMUser AV48GAMUser ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;

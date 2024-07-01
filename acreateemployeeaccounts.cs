@@ -111,6 +111,7 @@ namespace GeneXus.Programs {
       {
          /* GeneXus formulas */
          /* Output device settings */
+         new creategamroles(context ).execute( ) ;
          /* Using cursor P00B02 */
          pr_default.execute(0);
          while ( (pr_default.getStatus(0) != 101) )
