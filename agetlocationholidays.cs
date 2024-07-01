@@ -115,56 +115,59 @@ namespace GeneXus.Programs {
                AV16GXV1 = 1;
                while ( AV16GXV1 <= AV11holidays.gxTpr_Items.Count )
                {
-                  AV12holiday = ((SdtLocationHolidaysSDT_itemsItem)AV11holidays.gxTpr_Items.Item(AV16GXV1));
-                  /*
-                     INSERT RECORD ON TABLE Holiday
+                  AV12holiday = ((SdtLocationHoliDayUpdateSDT_itemsItem)AV11holidays.gxTpr_Items.Item(AV16GXV1));
+                  if ( StringUtil.StrCmp(AV12holiday.gxTpr_Extendedproperties.gxTpr_Private.gxTpr_Item_1, "OFFICIAL") == 0 )
+                  {
+                     /*
+                        INSERT RECORD ON TABLE Holiday
 
-                  */
-                  /* Using cursor P005A4 */
-                  pr_default.execute(1, new Object[] {AV9LocationCode});
-                  if ( (pr_default.getStatus(1) != 101) )
-                  {
-                     A40000CompanyId = P005A4_A40000CompanyId[0];
-                     n40000CompanyId = P005A4_n40000CompanyId[0];
+                     */
+                     /* Using cursor P005A4 */
+                     pr_default.execute(1, new Object[] {AV9LocationCode});
+                     if ( (pr_default.getStatus(1) != 101) )
+                     {
+                        A40000CompanyId = P005A4_A40000CompanyId[0];
+                        n40000CompanyId = P005A4_n40000CompanyId[0];
+                     }
+                     else
+                     {
+                        A40000CompanyId = 0;
+                        n40000CompanyId = false;
+                     }
+                     pr_default.close(1);
+                     A114HolidayName = AV12holiday.gxTpr_Summary;
+                     GXt_date1 = A115HolidayStartDate;
+                     new convertdate(context ).execute(  AV12holiday.gxTpr_Start.gxTpr_Date, out  GXt_date1) ;
+                     A115HolidayStartDate = GXt_date1;
+                     GXt_date1 = A116HolidayEndDate;
+                     new convertdate(context ).execute(  AV12holiday.gxTpr_End.gxTpr_Date, out  GXt_date1) ;
+                     A116HolidayEndDate = GXt_date1;
+                     n116HolidayEndDate = false;
+                     A117HolidayServiceId = AV12holiday.gxTpr_Id;
+                     n117HolidayServiceId = false;
+                     A139HolidayIsActive = true;
+                     A100CompanyId = A40000CompanyId;
+                     /* Using cursor P005A5 */
+                     pr_default.execute(2, new Object[] {A114HolidayName, A115HolidayStartDate, n116HolidayEndDate, A116HolidayEndDate, n117HolidayServiceId, A117HolidayServiceId, A100CompanyId, A139HolidayIsActive});
+                     pr_default.close(2);
+                     /* Retrieving last key number assigned */
+                     /* Using cursor P005A6 */
+                     pr_default.execute(3);
+                     A113HolidayId = P005A6_A113HolidayId[0];
+                     pr_default.close(3);
+                     pr_default.SmartCacheProvider.SetUpdated("Holiday");
+                     if ( (pr_default.getStatus(2) == 1) )
+                     {
+                        context.Gx_err = 1;
+                        Gx_emsg = (string)(context.GetMessage( "GXM_noupdate", ""));
+                     }
+                     else
+                     {
+                        context.Gx_err = 0;
+                        Gx_emsg = "";
+                     }
+                     /* End Insert */
                   }
-                  else
-                  {
-                     A40000CompanyId = 0;
-                     n40000CompanyId = false;
-                  }
-                  pr_default.close(1);
-                  A114HolidayName = AV12holiday.gxTpr_Summary;
-                  GXt_date1 = A115HolidayStartDate;
-                  new convertdate(context ).execute(  AV12holiday.gxTpr_Start.gxTpr_Date, out  GXt_date1) ;
-                  A115HolidayStartDate = GXt_date1;
-                  GXt_date1 = A116HolidayEndDate;
-                  new convertdate(context ).execute(  AV12holiday.gxTpr_End.gxTpr_Date, out  GXt_date1) ;
-                  A116HolidayEndDate = GXt_date1;
-                  n116HolidayEndDate = false;
-                  A117HolidayServiceId = AV12holiday.gxTpr_Id;
-                  n117HolidayServiceId = false;
-                  A139HolidayIsActive = true;
-                  A100CompanyId = A40000CompanyId;
-                  /* Using cursor P005A5 */
-                  pr_default.execute(2, new Object[] {A114HolidayName, A115HolidayStartDate, n116HolidayEndDate, A116HolidayEndDate, n117HolidayServiceId, A117HolidayServiceId, A100CompanyId, A139HolidayIsActive});
-                  pr_default.close(2);
-                  /* Retrieving last key number assigned */
-                  /* Using cursor P005A6 */
-                  pr_default.execute(3);
-                  A113HolidayId = P005A6_A113HolidayId[0];
-                  pr_default.close(3);
-                  pr_default.SmartCacheProvider.SetUpdated("Holiday");
-                  if ( (pr_default.getStatus(2) == 1) )
-                  {
-                     context.Gx_err = 1;
-                     Gx_emsg = (string)(context.GetMessage( "GXM_noupdate", ""));
-                  }
-                  else
-                  {
-                     context.Gx_err = 0;
-                     Gx_emsg = "";
-                  }
-                  /* End Insert */
                   AV16GXV1 = (int)(AV16GXV1+1);
                }
             }
@@ -208,9 +211,9 @@ namespace GeneXus.Programs {
          AV9LocationCode = "";
          AV14concat = "";
          AV10result = "";
-         AV11holidays = new SdtLocationHolidaysSDT(context);
+         AV11holidays = new SdtLocationHoliDayUpdateSDT(context);
          AV13code = "";
-         AV12holiday = new SdtLocationHolidaysSDT_itemsItem(context);
+         AV12holiday = new SdtLocationHoliDayUpdateSDT_itemsItem(context);
          P005A4_A40000CompanyId = new long[1] ;
          P005A4_n40000CompanyId = new bool[] {false} ;
          A114HolidayName = "";
@@ -275,8 +278,8 @@ namespace GeneXus.Programs {
       private bool[] P005A4_n40000CompanyId ;
       private long[] P005A6_A113HolidayId ;
       private GxHttpClient AV8httpClient ;
-      private SdtLocationHolidaysSDT AV11holidays ;
-      private SdtLocationHolidaysSDT_itemsItem AV12holiday ;
+      private SdtLocationHoliDayUpdateSDT AV11holidays ;
+      private SdtLocationHoliDayUpdateSDT_itemsItem AV12holiday ;
    }
 
    public class agetlocationholidays__default : DataStoreHelperBase, IDataStoreHelper

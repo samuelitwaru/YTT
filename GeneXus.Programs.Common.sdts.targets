@@ -30,6 +30,14 @@
  	<Compile Include="$(WebDirectory)\type_SdtLocationHolidaysSDT_itemsItem_organizer.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtLocationHolidaysSDT_itemsItem_start.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtLocationHolidaysSDT_itemsItem_end.cs" />
+ 	<Compile Include="$(WebDirectory)\type_SdtLocationHoliDayUpdateSDT.cs" />
+ 	<Compile Include="$(WebDirectory)\type_SdtLocationHoliDayUpdateSDT_itemsItem.cs" />
+ 	<Compile Include="$(WebDirectory)\type_SdtLocationHoliDayUpdateSDT_itemsItem_creator.cs" />
+ 	<Compile Include="$(WebDirectory)\type_SdtLocationHoliDayUpdateSDT_itemsItem_organizer.cs" />
+ 	<Compile Include="$(WebDirectory)\type_SdtLocationHoliDayUpdateSDT_itemsItem_start.cs" />
+ 	<Compile Include="$(WebDirectory)\type_SdtLocationHoliDayUpdateSDT_itemsItem_end.cs" />
+ 	<Compile Include="$(WebDirectory)\type_SdtLocationHoliDayUpdateSDT_itemsItem_extendedProperties.cs" />
+ 	<Compile Include="$(WebDirectory)\type_SdtLocationHoliDayUpdateSDT_itemsItem_extendedProperties_private.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtRoleSDT.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSchedulerEvents.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSchedulerEvents_event.cs" />

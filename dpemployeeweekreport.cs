@@ -473,7 +473,7 @@ namespace GeneXus.Programs {
             AddWhere(sWhereString, "("+new GxDbmsUtils( new GxPostgreSql()).ValueList(AV14CompanyLocationId, "T2.CompanyLocationId IN (", ")")+")");
          }
          scmdbuf += sWhereString;
-         scmdbuf += " ORDER BY T1.EmployeeId";
+         scmdbuf += " ORDER BY T1.EmployeeName";
          GXv_Object6[0] = scmdbuf;
          GXv_Object6[1] = GXv_int5;
          return GXv_Object6 ;

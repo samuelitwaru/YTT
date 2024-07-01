@@ -173,7 +173,7 @@ namespace GeneXus.Programs {
          subGrid_Rows = (int)(Math.Round(NumberUtil.Val( GetPar( "subGrid_Rows"), "."), 18, MidpointRounding.ToEven));
          AV24ManageFiltersExecutionStep = (short)(Math.Round(NumberUtil.Val( GetPar( "ManageFiltersExecutionStep"), "."), 18, MidpointRounding.ToEven));
          ajax_req_read_hidden_sdt(GetNextPar( ), AV19ColumnsSelector);
-         AV50Pgmname = GetPar( "Pgmname");
+         AV52Pgmname = GetPar( "Pgmname");
          AV13FilterFullText = GetPar( "FilterFullText");
          ajax_req_read_hidden_sdt(GetNextPar( ), AV14SDTWorkHourLog);
          AV34EmployeeId = (long)(Math.Round(NumberUtil.Val( GetPar( "EmployeeId"), "."), 18, MidpointRounding.ToEven));
@@ -185,7 +185,7 @@ namespace GeneXus.Programs {
             GxWebError = 1;
             return  ;
          }
-         gxgrGrid_refresh( subGrid_Rows, AV24ManageFiltersExecutionStep, AV19ColumnsSelector, AV50Pgmname, AV13FilterFullText, AV14SDTWorkHourLog, AV34EmployeeId, AV35FromDate, AV36ToDate) ;
+         gxgrGrid_refresh( subGrid_Rows, AV24ManageFiltersExecutionStep, AV19ColumnsSelector, AV52Pgmname, AV13FilterFullText, AV14SDTWorkHourLog, AV34EmployeeId, AV35FromDate, AV36ToDate) ;
          AddString( context.getJSONResponse( )) ;
          /* End function gxgrGrid_refresh_invoke */
       }
@@ -337,8 +337,8 @@ namespace GeneXus.Programs {
 
       protected void send_integrity_footer_hashes( )
       {
-         GxWebStd.gx_hidden_field( context, "vPGMNAME", StringUtil.RTrim( AV50Pgmname));
-         GxWebStd.gx_hidden_field( context, "gxhash_vPGMNAME", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV50Pgmname, "")), context));
+         GxWebStd.gx_hidden_field( context, "vPGMNAME", StringUtil.RTrim( AV52Pgmname));
+         GxWebStd.gx_hidden_field( context, "gxhash_vPGMNAME", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV52Pgmname, "")), context));
          if ( context.isAjaxRequest( ) )
          {
             context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "vSDTWORKHOURLOG", AV14SDTWorkHourLog);
@@ -400,8 +400,8 @@ namespace GeneXus.Programs {
             context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("vCOLUMNSSELECTOR", AV19ColumnsSelector);
          }
          GxWebStd.gx_hidden_field( context, "vMANAGEFILTERSEXECUTIONSTEP", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV24ManageFiltersExecutionStep), 1, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "vPGMNAME", StringUtil.RTrim( AV50Pgmname));
-         GxWebStd.gx_hidden_field( context, "gxhash_vPGMNAME", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV50Pgmname, "")), context));
+         GxWebStd.gx_hidden_field( context, "vPGMNAME", StringUtil.RTrim( AV52Pgmname));
+         GxWebStd.gx_hidden_field( context, "gxhash_vPGMNAME", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV52Pgmname, "")), context));
          if ( context.isAjaxRequest( ) )
          {
             context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "vGRIDSTATE", AV11GridState);
@@ -658,7 +658,7 @@ namespace GeneXus.Programs {
             }
             else
             {
-               AV39GXV1 = nGXsfl_39_idx;
+               AV41GXV1 = nGXsfl_39_idx;
                sStyleString = "";
                context.WriteHtmlText( "<div id=\""+"GridContainer"+"Div\" "+sStyleString+">"+"</div>") ;
                context.httpAjaxContext.ajax_rsp_assign_grid("_"+"Grid", GridContainer, subGrid_Internalname);
@@ -763,7 +763,7 @@ namespace GeneXus.Programs {
                }
                else
                {
-                  AV39GXV1 = nGXsfl_39_idx;
+                  AV41GXV1 = nGXsfl_39_idx;
                   sStyleString = "";
                   context.WriteHtmlText( "<div id=\""+"GridContainer"+"Div\" "+sStyleString+">"+"</div>") ;
                   context.httpAjaxContext.ajax_rsp_assign_grid("_"+"Grid", GridContainer, subGrid_Internalname);
@@ -888,10 +888,10 @@ namespace GeneXus.Programs {
                               nGXsfl_39_idx = (int)(Math.Round(NumberUtil.Val( sEvtType, "."), 18, MidpointRounding.ToEven));
                               sGXsfl_39_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_39_idx), 4, 0), 4, "0");
                               SubsflControlProps_392( ) ;
-                              AV39GXV1 = (int)(nGXsfl_39_idx+GRID_nFirstRecordOnPage);
-                              if ( ( AV14SDTWorkHourLog.Count >= AV39GXV1 ) && ( AV39GXV1 > 0 ) )
+                              AV41GXV1 = (int)(nGXsfl_39_idx+GRID_nFirstRecordOnPage);
+                              if ( ( AV14SDTWorkHourLog.Count >= AV41GXV1 ) && ( AV41GXV1 > 0 ) )
                               {
-                                 AV14SDTWorkHourLog.CurrentItem = ((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV39GXV1));
+                                 AV14SDTWorkHourLog.CurrentItem = ((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV41GXV1));
                               }
                               sEvtType = StringUtil.Right( sEvt, 1);
                               if ( StringUtil.StrCmp(sEvtType, ".") == 0 )
@@ -1019,7 +1019,7 @@ namespace GeneXus.Programs {
       protected void gxgrGrid_refresh( int subGrid_Rows ,
                                        short AV24ManageFiltersExecutionStep ,
                                        GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector AV19ColumnsSelector ,
-                                       string AV50Pgmname ,
+                                       string AV52Pgmname ,
                                        string AV13FilterFullText ,
                                        GXBaseCollection<SdtSDTWorkHourLog_SDTWorkHourLogItem> AV14SDTWorkHourLog ,
                                        long AV34EmployeeId ,
@@ -1066,7 +1066,7 @@ namespace GeneXus.Programs {
       protected void initialize_formulas( )
       {
          /* GeneXus formulas. */
-         AV50Pgmname = "WorkHourLogDetail";
+         AV52Pgmname = "WorkHourLogDetail";
          edtavSdtworkhourlog__workhourlogid_Enabled = 0;
          AssignProp("", false, edtavSdtworkhourlog__workhourlogid_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavSdtworkhourlog__workhourlogid_Enabled), 5, 0), !bGXsfl_39_Refreshing);
          edtavSdtworkhourlog__employeename_Enabled = 0;
@@ -1135,8 +1135,8 @@ namespace GeneXus.Programs {
 
       protected void send_integrity_lvl_hashes532( )
       {
-         GxWebStd.gx_hidden_field( context, "vPGMNAME", StringUtil.RTrim( AV50Pgmname));
-         GxWebStd.gx_hidden_field( context, "gxhash_vPGMNAME", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV50Pgmname, "")), context));
+         GxWebStd.gx_hidden_field( context, "vPGMNAME", StringUtil.RTrim( AV52Pgmname));
+         GxWebStd.gx_hidden_field( context, "gxhash_vPGMNAME", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV52Pgmname, "")), context));
          if ( context.isAjaxRequest( ) )
          {
             context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "vSDTWORKHOURLOG", AV14SDTWorkHourLog);
@@ -1186,7 +1186,7 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV24ManageFiltersExecutionStep, AV19ColumnsSelector, AV50Pgmname, AV13FilterFullText, AV14SDTWorkHourLog, AV34EmployeeId, AV35FromDate, AV36ToDate) ;
+            gxgrGrid_refresh( subGrid_Rows, AV24ManageFiltersExecutionStep, AV19ColumnsSelector, AV52Pgmname, AV13FilterFullText, AV14SDTWorkHourLog, AV34EmployeeId, AV35FromDate, AV36ToDate) ;
          }
          send_integrity_footer_hashes( ) ;
          return 0 ;
@@ -1207,7 +1207,7 @@ namespace GeneXus.Programs {
          GridContainer.AddObjectProperty("GRID_nFirstRecordOnPage", GRID_nFirstRecordOnPage);
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV24ManageFiltersExecutionStep, AV19ColumnsSelector, AV50Pgmname, AV13FilterFullText, AV14SDTWorkHourLog, AV34EmployeeId, AV35FromDate, AV36ToDate) ;
+            gxgrGrid_refresh( subGrid_Rows, AV24ManageFiltersExecutionStep, AV19ColumnsSelector, AV52Pgmname, AV13FilterFullText, AV14SDTWorkHourLog, AV34EmployeeId, AV35FromDate, AV36ToDate) ;
          }
          send_integrity_footer_hashes( ) ;
          return (short)(((GRID_nEOF==0) ? 0 : 2)) ;
@@ -1226,7 +1226,7 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV24ManageFiltersExecutionStep, AV19ColumnsSelector, AV50Pgmname, AV13FilterFullText, AV14SDTWorkHourLog, AV34EmployeeId, AV35FromDate, AV36ToDate) ;
+            gxgrGrid_refresh( subGrid_Rows, AV24ManageFiltersExecutionStep, AV19ColumnsSelector, AV52Pgmname, AV13FilterFullText, AV14SDTWorkHourLog, AV34EmployeeId, AV35FromDate, AV36ToDate) ;
          }
          send_integrity_footer_hashes( ) ;
          return 0 ;
@@ -1253,7 +1253,7 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV24ManageFiltersExecutionStep, AV19ColumnsSelector, AV50Pgmname, AV13FilterFullText, AV14SDTWorkHourLog, AV34EmployeeId, AV35FromDate, AV36ToDate) ;
+            gxgrGrid_refresh( subGrid_Rows, AV24ManageFiltersExecutionStep, AV19ColumnsSelector, AV52Pgmname, AV13FilterFullText, AV14SDTWorkHourLog, AV34EmployeeId, AV35FromDate, AV36ToDate) ;
          }
          send_integrity_footer_hashes( ) ;
          return 0 ;
@@ -1272,7 +1272,7 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV24ManageFiltersExecutionStep, AV19ColumnsSelector, AV50Pgmname, AV13FilterFullText, AV14SDTWorkHourLog, AV34EmployeeId, AV35FromDate, AV36ToDate) ;
+            gxgrGrid_refresh( subGrid_Rows, AV24ManageFiltersExecutionStep, AV19ColumnsSelector, AV52Pgmname, AV13FilterFullText, AV14SDTWorkHourLog, AV34EmployeeId, AV35FromDate, AV36ToDate) ;
          }
          send_integrity_footer_hashes( ) ;
          return (int)(0) ;
@@ -1280,7 +1280,7 @@ namespace GeneXus.Programs {
 
       protected void before_start_formulas( )
       {
-         AV50Pgmname = "WorkHourLogDetail";
+         AV52Pgmname = "WorkHourLogDetail";
          edtavSdtworkhourlog__workhourlogid_Enabled = 0;
          AssignProp("", false, edtavSdtworkhourlog__workhourlogid_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavSdtworkhourlog__workhourlogid_Enabled), 5, 0), !bGXsfl_39_Refreshing);
          edtavSdtworkhourlog__employeename_Enabled = 0;
@@ -1385,10 +1385,10 @@ namespace GeneXus.Programs {
                nGXsfl_39_fel_idx = ((subGrid_Islastpage==1)&&(nGXsfl_39_fel_idx+1>subGrid_fnc_Recordsperpage( )) ? 1 : nGXsfl_39_fel_idx+1);
                sGXsfl_39_fel_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_39_fel_idx), 4, 0), 4, "0");
                SubsflControlProps_fel_392( ) ;
-               AV39GXV1 = (int)(nGXsfl_39_fel_idx+GRID_nFirstRecordOnPage);
-               if ( ( AV14SDTWorkHourLog.Count >= AV39GXV1 ) && ( AV39GXV1 > 0 ) )
+               AV41GXV1 = (int)(nGXsfl_39_fel_idx+GRID_nFirstRecordOnPage);
+               if ( ( AV14SDTWorkHourLog.Count >= AV41GXV1 ) && ( AV41GXV1 > 0 ) )
                {
-                  AV14SDTWorkHourLog.CurrentItem = ((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV39GXV1));
+                  AV14SDTWorkHourLog.CurrentItem = ((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV41GXV1));
                }
             }
             if ( nGXsfl_39_fel_idx == 0 )
@@ -1423,8 +1423,9 @@ namespace GeneXus.Programs {
       {
          /* Start Routine */
          returnInSub = false;
+         AV39ProjectIds.FromJSonString(AV40WebSession.Get("ProjectId"), null);
          GXt_objcol_SdtSDTWorkHourLog_SDTWorkHourLogItem1 = AV14SDTWorkHourLog;
-         new dpworkhourlog(context ).execute(  AV34EmployeeId,  AV35FromDate,  AV36ToDate, out  GXt_objcol_SdtSDTWorkHourLog_SDTWorkHourLogItem1) ;
+         new dpworkhourlog(context ).execute(  AV34EmployeeId,  AV35FromDate,  AV36ToDate,  AV39ProjectIds, out  GXt_objcol_SdtSDTWorkHourLog_SDTWorkHourLogItem1) ;
          AV14SDTWorkHourLog = GXt_objcol_SdtSDTWorkHourLog_SDTWorkHourLogItem1;
          gx_BV39 = true;
          subGrid_Rows = 20;
@@ -1510,7 +1511,7 @@ namespace GeneXus.Programs {
          AV28GridPageCount = subGrid_fnc_Pagecount( );
          AssignAttri("", false, "AV28GridPageCount", StringUtil.LTrimStr( (decimal)(AV28GridPageCount), 10, 0));
          GXt_char3 = AV29GridAppliedFilters;
-         new GeneXus.Programs.wwpbaseobjects.wwp_getappliedfiltersdescription(context ).execute(  AV50Pgmname, out  GXt_char3) ;
+         new GeneXus.Programs.wwpbaseobjects.wwp_getappliedfiltersdescription(context ).execute(  AV52Pgmname, out  GXt_char3) ;
          AV29GridAppliedFilters = GXt_char3;
          AssignAttri("", false, "AV29GridAppliedFilters", AV29GridAppliedFilters);
          /*  Sending Event outputs  */
@@ -1552,10 +1553,10 @@ namespace GeneXus.Programs {
       {
          /* Grid_Load Routine */
          returnInSub = false;
-         AV39GXV1 = 1;
-         while ( AV39GXV1 <= AV14SDTWorkHourLog.Count )
+         AV41GXV1 = 1;
+         while ( AV41GXV1 <= AV14SDTWorkHourLog.Count )
          {
-            AV14SDTWorkHourLog.CurrentItem = ((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV39GXV1));
+            AV14SDTWorkHourLog.CurrentItem = ((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV41GXV1));
             /* Load Method */
             if ( wbStart != -1 )
             {
@@ -1572,7 +1573,7 @@ namespace GeneXus.Programs {
             {
                DoAjaxLoad(39, GridRow);
             }
-            AV39GXV1 = (int)(AV39GXV1+1);
+            AV41GXV1 = (int)(AV41GXV1+1);
          }
       }
 
@@ -1606,7 +1607,7 @@ namespace GeneXus.Programs {
             /* Execute user subroutine: 'SAVEGRIDSTATE' */
             S132 ();
             if (returnInSub) return;
-            context.PopUp(formatLink("wwpbaseobjects.savefilteras.aspx", new object[] {UrlEncode(StringUtil.RTrim("WorkHourLogDetailFilters")),UrlEncode(StringUtil.RTrim(AV50Pgmname+"GridState"))}, new string[] {"UserKey","GridStateKey"}) , new Object[] {});
+            context.PopUp(formatLink("wwpbaseobjects.savefilteras.aspx", new object[] {UrlEncode(StringUtil.RTrim("WorkHourLogDetailFilters")),UrlEncode(StringUtil.RTrim(AV52Pgmname+"GridState"))}, new string[] {"UserKey","GridStateKey"}) , new Object[] {});
             AV24ManageFiltersExecutionStep = 2;
             AssignAttri("", false, "AV24ManageFiltersExecutionStep", StringUtil.Str( (decimal)(AV24ManageFiltersExecutionStep), 1, 0));
             context.DoAjaxRefresh();
@@ -1632,7 +1633,7 @@ namespace GeneXus.Programs {
                /* Execute user subroutine: 'CLEANFILTERS' */
                S162 ();
                if (returnInSub) return;
-               new GeneXus.Programs.wwpbaseobjects.savegridstate(context ).execute(  AV50Pgmname+"GridState",  AV23ManageFiltersXml) ;
+               new GeneXus.Programs.wwpbaseobjects.savegridstate(context ).execute(  AV52Pgmname+"GridState",  AV23ManageFiltersXml) ;
                AV11GridState.FromXml(AV23ManageFiltersXml, null, "", "");
                /* Execute user subroutine: 'LOADREGFILTERSSTATE' */
                S172 ();
@@ -1648,10 +1649,10 @@ namespace GeneXus.Programs {
 
       protected void E15532( )
       {
-         AV39GXV1 = (int)(nGXsfl_39_idx+GRID_nFirstRecordOnPage);
-         if ( ( AV39GXV1 > 0 ) && ( AV14SDTWorkHourLog.Count >= AV39GXV1 ) )
+         AV41GXV1 = (int)(nGXsfl_39_idx+GRID_nFirstRecordOnPage);
+         if ( ( AV41GXV1 > 0 ) && ( AV14SDTWorkHourLog.Count >= AV41GXV1 ) )
          {
-            AV14SDTWorkHourLog.CurrentItem = ((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV39GXV1));
+            AV14SDTWorkHourLog.CurrentItem = ((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV41GXV1));
          }
          /* 'DoUserAction1' Routine */
          returnInSub = false;
@@ -1715,13 +1716,13 @@ namespace GeneXus.Programs {
       {
          /* 'LOADGRIDSTATE' Routine */
          returnInSub = false;
-         if ( StringUtil.StrCmp(AV21Session.Get(AV50Pgmname+"GridState"), "") == 0 )
+         if ( StringUtil.StrCmp(AV21Session.Get(AV52Pgmname+"GridState"), "") == 0 )
          {
-            AV11GridState.FromXml(new GeneXus.Programs.wwpbaseobjects.loadgridstate(context).executeUdp(  AV50Pgmname+"GridState"), null, "", "");
+            AV11GridState.FromXml(new GeneXus.Programs.wwpbaseobjects.loadgridstate(context).executeUdp(  AV52Pgmname+"GridState"), null, "", "");
          }
          else
          {
-            AV11GridState.FromXml(AV21Session.Get(AV50Pgmname+"GridState"), null, "", "");
+            AV11GridState.FromXml(AV21Session.Get(AV52Pgmname+"GridState"), null, "", "");
          }
          /* Execute user subroutine: 'LOADREGFILTERSSTATE' */
          S172 ();
@@ -1738,16 +1739,16 @@ namespace GeneXus.Programs {
       {
          /* 'LOADREGFILTERSSTATE' Routine */
          returnInSub = false;
-         AV51GXV12 = 1;
-         while ( AV51GXV12 <= AV11GridState.gxTpr_Filtervalues.Count )
+         AV53GXV12 = 1;
+         while ( AV53GXV12 <= AV11GridState.gxTpr_Filtervalues.Count )
          {
-            AV12GridStateFilterValue = ((GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue)AV11GridState.gxTpr_Filtervalues.Item(AV51GXV12));
+            AV12GridStateFilterValue = ((GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue)AV11GridState.gxTpr_Filtervalues.Item(AV53GXV12));
             if ( StringUtil.StrCmp(AV12GridStateFilterValue.gxTpr_Name, "FILTERFULLTEXT") == 0 )
             {
                AV13FilterFullText = AV12GridStateFilterValue.gxTpr_Value;
                AssignAttri("", false, "AV13FilterFullText", AV13FilterFullText);
             }
-            AV51GXV12 = (int)(AV51GXV12+1);
+            AV53GXV12 = (int)(AV53GXV12+1);
          }
       }
 
@@ -1755,12 +1756,12 @@ namespace GeneXus.Programs {
       {
          /* 'SAVEGRIDSTATE' Routine */
          returnInSub = false;
-         AV11GridState.FromXml(AV21Session.Get(AV50Pgmname+"GridState"), null, "", "");
+         AV11GridState.FromXml(AV21Session.Get(AV52Pgmname+"GridState"), null, "", "");
          AV11GridState.gxTpr_Filtervalues.Clear();
          new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV11GridState,  "FILTERFULLTEXT",  "Main filter",  !String.IsNullOrEmpty(StringUtil.RTrim( AV13FilterFullText)),  0,  AV13FilterFullText,  AV13FilterFullText,  false,  "",  "") ;
          AV11GridState.gxTpr_Pagesize = StringUtil.Str( (decimal)(subGrid_Rows), 10, 0);
          AV11GridState.gxTpr_Currentpage = (short)(subGrid_fnc_Currentpage( ));
-         new GeneXus.Programs.wwpbaseobjects.savegridstate(context ).execute(  AV50Pgmname+"GridState",  AV11GridState.ToXml(false, true, "", "")) ;
+         new GeneXus.Programs.wwpbaseobjects.savegridstate(context ).execute(  AV52Pgmname+"GridState",  AV11GridState.ToXml(false, true, "", "")) ;
       }
 
       protected void wb_table1_21_532( bool wbgen )
@@ -1886,7 +1887,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202462922441217", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247112254854", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1902,7 +1903,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("workhourlogdetail.js", "?202462922441217", false, true);
+         context.AddJavascriptSource("workhourlogdetail.js", "?20247112254854", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -2019,7 +2020,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtworkhourlog__workhourlogid_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV39GXV1)).gxTpr_Workhourlogid), 10, 0, ".", "")),StringUtil.LTrim( ((edtavSdtworkhourlog__workhourlogid_Enabled!=0) ? context.localUtil.Format( (decimal)(((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV39GXV1)).gxTpr_Workhourlogid), "ZZZZZZZZZ9") : context.localUtil.Format( (decimal)(((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV39GXV1)).gxTpr_Workhourlogid), "ZZZZZZZZZ9"))),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtworkhourlog__workhourlogid_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(int)edtavSdtworkhourlog__workhourlogid_Enabled,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)10,(short)0,(short)0,(short)39,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtworkhourlog__workhourlogid_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV41GXV1)).gxTpr_Workhourlogid), 10, 0, ".", "")),StringUtil.LTrim( ((edtavSdtworkhourlog__workhourlogid_Enabled!=0) ? context.localUtil.Format( (decimal)(((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV41GXV1)).gxTpr_Workhourlogid), "ZZZZZZZZZ9") : context.localUtil.Format( (decimal)(((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV41GXV1)).gxTpr_Workhourlogid), "ZZZZZZZZZ9"))),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtworkhourlog__workhourlogid_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(int)edtavSdtworkhourlog__workhourlogid_Enabled,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)10,(short)0,(short)0,(short)39,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -2027,7 +2028,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtworkhourlog__employeename_Internalname,StringUtil.RTrim( ((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV39GXV1)).gxTpr_Employeename),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtworkhourlog__employeename_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtavSdtworkhourlog__employeename_Visible,(int)edtavSdtworkhourlog__employeename_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)100,(short)0,(short)0,(short)39,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtworkhourlog__employeename_Internalname,StringUtil.RTrim( ((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV41GXV1)).gxTpr_Employeename),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtworkhourlog__employeename_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtavSdtworkhourlog__employeename_Visible,(int)edtavSdtworkhourlog__employeename_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)100,(short)0,(short)0,(short)39,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -2035,7 +2036,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtworkhourlog__projectname_Internalname,StringUtil.RTrim( ((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV39GXV1)).gxTpr_Projectname),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtworkhourlog__projectname_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtavSdtworkhourlog__projectname_Visible,(int)edtavSdtworkhourlog__projectname_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)100,(short)0,(short)0,(short)39,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtworkhourlog__projectname_Internalname,StringUtil.RTrim( ((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV41GXV1)).gxTpr_Projectname),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtworkhourlog__projectname_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtavSdtworkhourlog__projectname_Visible,(int)edtavSdtworkhourlog__projectname_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)100,(short)0,(short)0,(short)39,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -2043,7 +2044,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtworkhourlog__workhourlogdate_Internalname,context.localUtil.Format(((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV39GXV1)).gxTpr_Workhourlogdate, "99/99/99"),context.localUtil.Format( ((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV39GXV1)).gxTpr_Workhourlogdate, "99/99/99"),(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtworkhourlog__workhourlogdate_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtavSdtworkhourlog__workhourlogdate_Visible,(int)edtavSdtworkhourlog__workhourlogdate_Enabled,(short)0,(string)"text",(string)"",(short)100,(string)"px",(short)17,(string)"px",(short)8,(short)0,(short)0,(short)39,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtworkhourlog__workhourlogdate_Internalname,context.localUtil.Format(((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV41GXV1)).gxTpr_Workhourlogdate, "99/99/99"),context.localUtil.Format( ((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV41GXV1)).gxTpr_Workhourlogdate, "99/99/99"),(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtworkhourlog__workhourlogdate_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtavSdtworkhourlog__workhourlogdate_Visible,(int)edtavSdtworkhourlog__workhourlogdate_Enabled,(short)0,(string)"text",(string)"",(short)100,(string)"px",(short)17,(string)"px",(short)8,(short)0,(short)0,(short)39,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -2051,7 +2052,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtworkhourlog__workhourlogduration_Internalname,((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV39GXV1)).gxTpr_Workhourlogduration,(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtworkhourlog__workhourlogduration_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtavSdtworkhourlog__workhourlogduration_Visible,(int)edtavSdtworkhourlog__workhourlogduration_Enabled,(short)0,(string)"text",(string)"",(short)100,(string)"px",(short)17,(string)"px",(short)40,(short)0,(short)0,(short)39,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtworkhourlog__workhourlogduration_Internalname,((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV41GXV1)).gxTpr_Workhourlogduration,(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtworkhourlog__workhourlogduration_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtavSdtworkhourlog__workhourlogduration_Visible,(int)edtavSdtworkhourlog__workhourlogduration_Enabled,(short)0,(string)"text",(string)"",(short)100,(string)"px",(short)17,(string)"px",(short)40,(short)0,(short)0,(short)39,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -2059,7 +2060,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtworkhourlog__workhourloghour_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV39GXV1)).gxTpr_Workhourloghour), 4, 0, ".", "")),StringUtil.LTrim( ((edtavSdtworkhourlog__workhourloghour_Enabled!=0) ? context.localUtil.Format( (decimal)(((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV39GXV1)).gxTpr_Workhourloghour), "ZZZ9") : context.localUtil.Format( (decimal)(((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV39GXV1)).gxTpr_Workhourloghour), "ZZZ9"))),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtworkhourlog__workhourloghour_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(int)edtavSdtworkhourlog__workhourloghour_Enabled,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)4,(short)0,(short)0,(short)39,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtworkhourlog__workhourloghour_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV41GXV1)).gxTpr_Workhourloghour), 4, 0, ".", "")),StringUtil.LTrim( ((edtavSdtworkhourlog__workhourloghour_Enabled!=0) ? context.localUtil.Format( (decimal)(((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV41GXV1)).gxTpr_Workhourloghour), "ZZZ9") : context.localUtil.Format( (decimal)(((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV41GXV1)).gxTpr_Workhourloghour), "ZZZ9"))),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtworkhourlog__workhourloghour_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(int)edtavSdtworkhourlog__workhourloghour_Enabled,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)4,(short)0,(short)0,(short)39,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -2067,7 +2068,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtworkhourlog__workhourlogminute_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV39GXV1)).gxTpr_Workhourlogminute), 4, 0, ".", "")),StringUtil.LTrim( ((edtavSdtworkhourlog__workhourlogminute_Enabled!=0) ? context.localUtil.Format( (decimal)(((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV39GXV1)).gxTpr_Workhourlogminute), "ZZZ9") : context.localUtil.Format( (decimal)(((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV39GXV1)).gxTpr_Workhourlogminute), "ZZZ9"))),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtworkhourlog__workhourlogminute_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(int)edtavSdtworkhourlog__workhourlogminute_Enabled,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)4,(short)0,(short)0,(short)39,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtworkhourlog__workhourlogminute_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV41GXV1)).gxTpr_Workhourlogminute), 4, 0, ".", "")),StringUtil.LTrim( ((edtavSdtworkhourlog__workhourlogminute_Enabled!=0) ? context.localUtil.Format( (decimal)(((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV41GXV1)).gxTpr_Workhourlogminute), "ZZZ9") : context.localUtil.Format( (decimal)(((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV41GXV1)).gxTpr_Workhourlogminute), "ZZZ9"))),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtworkhourlog__workhourlogminute_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(int)edtavSdtworkhourlog__workhourlogminute_Enabled,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)4,(short)0,(short)0,(short)39,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -2075,7 +2076,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtworkhourlog__workhourlogdescription_Internalname,((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV39GXV1)).gxTpr_Workhourlogdescription,((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV39GXV1)).gxTpr_Workhourlogdescription,(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtworkhourlog__workhourlogdescription_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtavSdtworkhourlog__workhourlogdescription_Visible,(int)edtavSdtworkhourlog__workhourlogdescription_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(int)2097152,(short)0,(short)0,(short)39,(short)0,(short)0,(short)-1,(bool)true,(string)"",(string)"start",(bool)false,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtworkhourlog__workhourlogdescription_Internalname,((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV41GXV1)).gxTpr_Workhourlogdescription,((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV41GXV1)).gxTpr_Workhourlogdescription,(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtworkhourlog__workhourlogdescription_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtavSdtworkhourlog__workhourlogdescription_Visible,(int)edtavSdtworkhourlog__workhourlogdescription_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(int)2097152,(short)0,(short)0,(short)39,(short)0,(short)0,(short)-1,(bool)true,(string)"",(string)"start",(bool)false,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -2083,7 +2084,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtworkhourlog__employeeid_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV39GXV1)).gxTpr_Employeeid), 10, 0, ".", "")),StringUtil.LTrim( ((edtavSdtworkhourlog__employeeid_Enabled!=0) ? context.localUtil.Format( (decimal)(((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV39GXV1)).gxTpr_Employeeid), "ZZZZZZZZZ9") : context.localUtil.Format( (decimal)(((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV39GXV1)).gxTpr_Employeeid), "ZZZZZZZZZ9"))),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtworkhourlog__employeeid_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(int)edtavSdtworkhourlog__employeeid_Enabled,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)10,(short)0,(short)0,(short)39,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtworkhourlog__employeeid_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV41GXV1)).gxTpr_Employeeid), 10, 0, ".", "")),StringUtil.LTrim( ((edtavSdtworkhourlog__employeeid_Enabled!=0) ? context.localUtil.Format( (decimal)(((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV41GXV1)).gxTpr_Employeeid), "ZZZZZZZZZ9") : context.localUtil.Format( (decimal)(((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV41GXV1)).gxTpr_Employeeid), "ZZZZZZZZZ9"))),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtworkhourlog__employeeid_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(int)edtavSdtworkhourlog__employeeid_Enabled,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)10,(short)0,(short)0,(short)39,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -2091,7 +2092,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtworkhourlog__projectid_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV39GXV1)).gxTpr_Projectid), 10, 0, ".", "")),StringUtil.LTrim( ((edtavSdtworkhourlog__projectid_Enabled!=0) ? context.localUtil.Format( (decimal)(((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV39GXV1)).gxTpr_Projectid), "ZZZZZZZZZ9") : context.localUtil.Format( (decimal)(((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV39GXV1)).gxTpr_Projectid), "ZZZZZZZZZ9"))),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtworkhourlog__projectid_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(int)edtavSdtworkhourlog__projectid_Enabled,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)10,(short)0,(short)0,(short)39,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtworkhourlog__projectid_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV41GXV1)).gxTpr_Projectid), 10, 0, ".", "")),StringUtil.LTrim( ((edtavSdtworkhourlog__projectid_Enabled!=0) ? context.localUtil.Format( (decimal)(((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV41GXV1)).gxTpr_Projectid), "ZZZZZZZZZ9") : context.localUtil.Format( (decimal)(((SdtSDTWorkHourLog_SDTWorkHourLogItem)AV14SDTWorkHourLog.Item(AV41GXV1)).gxTpr_Projectid), "ZZZZZZZZZ9"))),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtworkhourlog__projectid_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(int)edtavSdtworkhourlog__projectid_Enabled,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)10,(short)0,(short)0,(short)39,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
             send_integrity_lvl_hashes532( ) ;
             GridContainer.AddRow(GridRow);
             nGXsfl_39_idx = ((subGrid_Islastpage==1)&&(nGXsfl_39_idx+1>subGrid_fnc_Recordsperpage( )) ? 1 : nGXsfl_39_idx+1);
@@ -2378,20 +2379,20 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'AV24ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV19ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV50Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV13FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV14SDTWorkHourLog',fld:'vSDTWORKHOURLOG',grid:39,pic:'',hsh:true},{av:'nGXsfl_39_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:39},{av:'nRC_GXsfl_39',ctrl:'GRID',prop:'GridRC',grid:39},{av:'AV34EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9',hsh:true},{av:'AV35FromDate',fld:'vFROMDATE',pic:'',hsh:true},{av:'AV36ToDate',fld:'vTODATE',pic:'',hsh:true}]");
+         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'AV24ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV19ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV52Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV13FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV14SDTWorkHourLog',fld:'vSDTWORKHOURLOG',grid:39,pic:'',hsh:true},{av:'nGXsfl_39_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:39},{av:'nRC_GXsfl_39',ctrl:'GRID',prop:'GridRC',grid:39},{av:'AV34EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9',hsh:true},{av:'AV35FromDate',fld:'vFROMDATE',pic:'',hsh:true},{av:'AV36ToDate',fld:'vTODATE',pic:'',hsh:true}]");
          setEventMetadata("REFRESH",",oparms:[{av:'AV24ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV19ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{ctrl:'SDTWORKHOURLOG__EMPLOYEENAME',prop:'Visible'},{ctrl:'SDTWORKHOURLOG__PROJECTNAME',prop:'Visible'},{ctrl:'SDTWORKHOURLOG__WORKHOURLOGDATE',prop:'Visible'},{ctrl:'SDTWORKHOURLOG__WORKHOURLOGDURATION',prop:'Visible'},{ctrl:'SDTWORKHOURLOG__WORKHOURLOGDESCRIPTION',prop:'Visible'},{av:'AV27GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV28GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV29GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'AV22ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''},{av:'AV11GridState',fld:'vGRIDSTATE',pic:''}]}");
-         setEventMetadata("GRIDPAGINATIONBAR.CHANGEPAGE","{handler:'E12532',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV24ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV19ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV50Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV13FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV14SDTWorkHourLog',fld:'vSDTWORKHOURLOG',grid:39,pic:'',hsh:true},{av:'nGXsfl_39_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:39},{av:'nRC_GXsfl_39',ctrl:'GRID',prop:'GridRC',grid:39},{av:'AV34EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9',hsh:true},{av:'AV35FromDate',fld:'vFROMDATE',pic:'',hsh:true},{av:'AV36ToDate',fld:'vTODATE',pic:'',hsh:true},{av:'Gridpaginationbar_Selectedpage',ctrl:'GRIDPAGINATIONBAR',prop:'SelectedPage'}]");
+         setEventMetadata("GRIDPAGINATIONBAR.CHANGEPAGE","{handler:'E12532',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV24ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV19ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV52Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV13FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV14SDTWorkHourLog',fld:'vSDTWORKHOURLOG',grid:39,pic:'',hsh:true},{av:'nGXsfl_39_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:39},{av:'nRC_GXsfl_39',ctrl:'GRID',prop:'GridRC',grid:39},{av:'AV34EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9',hsh:true},{av:'AV35FromDate',fld:'vFROMDATE',pic:'',hsh:true},{av:'AV36ToDate',fld:'vTODATE',pic:'',hsh:true},{av:'Gridpaginationbar_Selectedpage',ctrl:'GRIDPAGINATIONBAR',prop:'SelectedPage'}]");
          setEventMetadata("GRIDPAGINATIONBAR.CHANGEPAGE",",oparms:[]}");
-         setEventMetadata("GRIDPAGINATIONBAR.CHANGEROWSPERPAGE","{handler:'E13532',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV24ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV19ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV50Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV13FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV14SDTWorkHourLog',fld:'vSDTWORKHOURLOG',grid:39,pic:'',hsh:true},{av:'nGXsfl_39_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:39},{av:'nRC_GXsfl_39',ctrl:'GRID',prop:'GridRC',grid:39},{av:'AV34EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9',hsh:true},{av:'AV35FromDate',fld:'vFROMDATE',pic:'',hsh:true},{av:'AV36ToDate',fld:'vTODATE',pic:'',hsh:true},{av:'Gridpaginationbar_Rowsperpageselectedvalue',ctrl:'GRIDPAGINATIONBAR',prop:'RowsPerPageSelectedValue'}]");
+         setEventMetadata("GRIDPAGINATIONBAR.CHANGEROWSPERPAGE","{handler:'E13532',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV24ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV19ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV52Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV13FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV14SDTWorkHourLog',fld:'vSDTWORKHOURLOG',grid:39,pic:'',hsh:true},{av:'nGXsfl_39_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:39},{av:'nRC_GXsfl_39',ctrl:'GRID',prop:'GridRC',grid:39},{av:'AV34EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9',hsh:true},{av:'AV35FromDate',fld:'vFROMDATE',pic:'',hsh:true},{av:'AV36ToDate',fld:'vTODATE',pic:'',hsh:true},{av:'Gridpaginationbar_Rowsperpageselectedvalue',ctrl:'GRIDPAGINATIONBAR',prop:'RowsPerPageSelectedValue'}]");
          setEventMetadata("GRIDPAGINATIONBAR.CHANGEROWSPERPAGE",",oparms:[{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'}]}");
          setEventMetadata("GRID.LOAD","{handler:'E18532',iparms:[]");
          setEventMetadata("GRID.LOAD",",oparms:[]}");
-         setEventMetadata("DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED","{handler:'E14532',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV24ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV19ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV50Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV13FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV14SDTWorkHourLog',fld:'vSDTWORKHOURLOG',grid:39,pic:'',hsh:true},{av:'nGXsfl_39_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:39},{av:'nRC_GXsfl_39',ctrl:'GRID',prop:'GridRC',grid:39},{av:'AV34EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9',hsh:true},{av:'AV35FromDate',fld:'vFROMDATE',pic:'',hsh:true},{av:'AV36ToDate',fld:'vTODATE',pic:'',hsh:true},{av:'Ddo_gridcolumnsselector_Columnsselectorvalues',ctrl:'DDO_GRIDCOLUMNSSELECTOR',prop:'ColumnsSelectorValues'}]");
+         setEventMetadata("DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED","{handler:'E14532',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV24ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV19ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV52Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV13FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV14SDTWorkHourLog',fld:'vSDTWORKHOURLOG',grid:39,pic:'',hsh:true},{av:'nGXsfl_39_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:39},{av:'nRC_GXsfl_39',ctrl:'GRID',prop:'GridRC',grid:39},{av:'AV34EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9',hsh:true},{av:'AV35FromDate',fld:'vFROMDATE',pic:'',hsh:true},{av:'AV36ToDate',fld:'vTODATE',pic:'',hsh:true},{av:'Ddo_gridcolumnsselector_Columnsselectorvalues',ctrl:'DDO_GRIDCOLUMNSSELECTOR',prop:'ColumnsSelectorValues'}]");
          setEventMetadata("DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED",",oparms:[{av:'AV19ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV24ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{ctrl:'SDTWORKHOURLOG__EMPLOYEENAME',prop:'Visible'},{ctrl:'SDTWORKHOURLOG__PROJECTNAME',prop:'Visible'},{ctrl:'SDTWORKHOURLOG__WORKHOURLOGDATE',prop:'Visible'},{ctrl:'SDTWORKHOURLOG__WORKHOURLOGDURATION',prop:'Visible'},{ctrl:'SDTWORKHOURLOG__WORKHOURLOGDESCRIPTION',prop:'Visible'},{av:'AV27GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV28GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV29GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'AV22ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''},{av:'AV11GridState',fld:'vGRIDSTATE',pic:''}]}");
-         setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED","{handler:'E11532',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV24ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV19ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV50Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV13FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV14SDTWorkHourLog',fld:'vSDTWORKHOURLOG',grid:39,pic:'',hsh:true},{av:'nGXsfl_39_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:39},{av:'nRC_GXsfl_39',ctrl:'GRID',prop:'GridRC',grid:39},{av:'AV34EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9',hsh:true},{av:'AV35FromDate',fld:'vFROMDATE',pic:'',hsh:true},{av:'AV36ToDate',fld:'vTODATE',pic:'',hsh:true},{av:'Ddo_managefilters_Activeeventkey',ctrl:'DDO_MANAGEFILTERS',prop:'ActiveEventKey'},{av:'AV11GridState',fld:'vGRIDSTATE',pic:''}]");
+         setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED","{handler:'E11532',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV24ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV19ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV52Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV13FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV14SDTWorkHourLog',fld:'vSDTWORKHOURLOG',grid:39,pic:'',hsh:true},{av:'nGXsfl_39_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:39},{av:'nRC_GXsfl_39',ctrl:'GRID',prop:'GridRC',grid:39},{av:'AV34EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9',hsh:true},{av:'AV35FromDate',fld:'vFROMDATE',pic:'',hsh:true},{av:'AV36ToDate',fld:'vTODATE',pic:'',hsh:true},{av:'Ddo_managefilters_Activeeventkey',ctrl:'DDO_MANAGEFILTERS',prop:'ActiveEventKey'},{av:'AV11GridState',fld:'vGRIDSTATE',pic:''}]");
          setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED",",oparms:[{av:'AV24ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV11GridState',fld:'vGRIDSTATE',pic:''},{av:'AV13FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV19ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{ctrl:'SDTWORKHOURLOG__EMPLOYEENAME',prop:'Visible'},{ctrl:'SDTWORKHOURLOG__PROJECTNAME',prop:'Visible'},{ctrl:'SDTWORKHOURLOG__WORKHOURLOGDATE',prop:'Visible'},{ctrl:'SDTWORKHOURLOG__WORKHOURLOGDURATION',prop:'Visible'},{ctrl:'SDTWORKHOURLOG__WORKHOURLOGDESCRIPTION',prop:'Visible'},{av:'AV27GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV28GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV29GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'AV22ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''}]}");
-         setEventMetadata("'DOUSERACTION1'","{handler:'E15532',iparms:[{av:'AV14SDTWorkHourLog',fld:'vSDTWORKHOURLOG',grid:39,pic:'',hsh:true},{av:'nGXsfl_39_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:39},{av:'GRID_nFirstRecordOnPage'},{av:'nRC_GXsfl_39',ctrl:'GRID',prop:'GridRC',grid:39},{av:'AV50Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV11GridState',fld:'vGRIDSTATE',pic:''}]");
-         setEventMetadata("'DOUSERACTION1'",",oparms:[{av:'Innewwindow1_Name',ctrl:'INNEWWINDOW1',prop:'Name'},{av:'Innewwindow1_Target',ctrl:'INNEWWINDOW1',prop:'Target'},{av:'AV11GridState',fld:'vGRIDSTATE',pic:''},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'AV24ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV19ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV50Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV13FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV14SDTWorkHourLog',fld:'vSDTWORKHOURLOG',grid:39,pic:'',hsh:true},{av:'nGXsfl_39_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:39},{av:'nRC_GXsfl_39',ctrl:'GRID',prop:'GridRC',grid:39},{av:'AV34EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9',hsh:true},{av:'AV35FromDate',fld:'vFROMDATE',pic:'',hsh:true},{av:'AV36ToDate',fld:'vTODATE',pic:'',hsh:true}]}");
+         setEventMetadata("'DOUSERACTION1'","{handler:'E15532',iparms:[{av:'AV14SDTWorkHourLog',fld:'vSDTWORKHOURLOG',grid:39,pic:'',hsh:true},{av:'nGXsfl_39_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:39},{av:'GRID_nFirstRecordOnPage'},{av:'nRC_GXsfl_39',ctrl:'GRID',prop:'GridRC',grid:39},{av:'AV52Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV11GridState',fld:'vGRIDSTATE',pic:''}]");
+         setEventMetadata("'DOUSERACTION1'",",oparms:[{av:'Innewwindow1_Name',ctrl:'INNEWWINDOW1',prop:'Name'},{av:'Innewwindow1_Target',ctrl:'INNEWWINDOW1',prop:'Target'},{av:'AV11GridState',fld:'vGRIDSTATE',pic:''},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'AV24ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV19ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV52Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV13FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV14SDTWorkHourLog',fld:'vSDTWORKHOURLOG',grid:39,pic:'',hsh:true},{av:'nGXsfl_39_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:39},{av:'nRC_GXsfl_39',ctrl:'GRID',prop:'GridRC',grid:39},{av:'AV34EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9',hsh:true},{av:'AV35FromDate',fld:'vFROMDATE',pic:'',hsh:true},{av:'AV36ToDate',fld:'vTODATE',pic:'',hsh:true}]}");
          setEventMetadata("NULL","{handler:'Validv_Gxv11',iparms:[]");
          setEventMetadata("NULL",",oparms:[]}");
          return  ;
@@ -2421,7 +2422,7 @@ namespace GeneXus.Programs {
          gxfirstwebparm = "";
          gxfirstwebparm_bkp = "";
          AV19ColumnsSelector = new GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector(context);
-         AV50Pgmname = "";
+         AV52Pgmname = "";
          AV13FilterFullText = "";
          AV14SDTWorkHourLog = new GXBaseCollection<SdtSDTWorkHourLog_SDTWorkHourLogItem>( context, "SDTWorkHourLogItem", "YTT_version4");
          sDynURL = "";
@@ -2454,6 +2455,8 @@ namespace GeneXus.Programs {
          EvtGridId = "";
          EvtRowId = "";
          sEvtType = "";
+         AV39ProjectIds = new GxSimpleCollection<long>();
+         AV40WebSession = context.GetSession();
          GXt_objcol_SdtSDTWorkHourLog_SDTWorkHourLogItem1 = new GXBaseCollection<SdtSDTWorkHourLog_SDTWorkHourLogItem>( context, "SDTWorkHourLogItem", "YTT_version4");
          AV8HTTPRequest = new GxHttpRequest( context);
          GXt_SdtDVB_SDTDropDownOptionsTitleSettingsIcons2 = new GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsTitleSettingsIcons(context);
@@ -2476,9 +2479,9 @@ namespace GeneXus.Programs {
          subGrid_Linesclass = "";
          ROClassString = "";
          GridColumn = new GXWebColumn();
-         AV50Pgmname = "WorkHourLogDetail";
+         AV52Pgmname = "WorkHourLogDetail";
          /* GeneXus formulas. */
-         AV50Pgmname = "WorkHourLogDetail";
+         AV52Pgmname = "WorkHourLogDetail";
          edtavSdtworkhourlog__workhourlogid_Enabled = 0;
          edtavSdtworkhourlog__employeename_Enabled = 0;
          edtavSdtworkhourlog__projectname_Enabled = 0;
@@ -2515,7 +2518,7 @@ namespace GeneXus.Programs {
       private int nRC_GXsfl_39 ;
       private int nGXsfl_39_idx=1 ;
       private int Gridpaginationbar_Pagestoshow ;
-      private int AV39GXV1 ;
+      private int AV41GXV1 ;
       private int subGrid_Islastpage ;
       private int edtavSdtworkhourlog__workhourlogid_Enabled ;
       private int edtavSdtworkhourlog__employeename_Enabled ;
@@ -2535,7 +2538,7 @@ namespace GeneXus.Programs {
       private int edtavSdtworkhourlog__workhourlogduration_Visible ;
       private int edtavSdtworkhourlog__workhourlogdescription_Visible ;
       private int AV26PageToGo ;
-      private int AV51GXV12 ;
+      private int AV53GXV12 ;
       private int edtavFilterfulltext_Enabled ;
       private int idxLst ;
       private int subGrid_Backcolor ;
@@ -2557,7 +2560,7 @@ namespace GeneXus.Programs {
       private string gxfirstwebparm ;
       private string gxfirstwebparm_bkp ;
       private string sGXsfl_39_idx="0001" ;
-      private string AV50Pgmname ;
+      private string AV52Pgmname ;
       private string sDynURL ;
       private string FormProcess ;
       private string bodyStyle ;
@@ -2679,6 +2682,8 @@ namespace GeneXus.Programs {
       private string AV29GridAppliedFilters ;
       private string AV15ExcelFilename ;
       private string AV16ErrorMessage ;
+      private GxSimpleCollection<long> AV39ProjectIds ;
+      private IGxSession AV40WebSession ;
       private IGxSession AV21Session ;
       private GXWebGrid GridContainer ;
       private GXWebRow GridRow ;
