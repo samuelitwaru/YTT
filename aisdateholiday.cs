@@ -195,11 +195,14 @@ namespace GeneXus.Programs {
          pr_default.execute(2, new Object[] {AV9EmployeeId, AV8Date});
          while ( (pr_default.getStatus(2) != 101) )
          {
+            A124LeaveTypeId = P00AY4_A124LeaveTypeId[0];
             A130LeaveRequestEndDate = P00AY4_A130LeaveRequestEndDate[0];
             A129LeaveRequestStartDate = P00AY4_A129LeaveRequestStartDate[0];
+            A145LeaveTypeLoggingWorkHours = P00AY4_A145LeaveTypeLoggingWorkHours[0];
             A132LeaveRequestStatus = P00AY4_A132LeaveRequestStatus[0];
             A106EmployeeId = P00AY4_A106EmployeeId[0];
             A127LeaveRequestId = P00AY4_A127LeaveRequestId[0];
+            A145LeaveTypeLoggingWorkHours = P00AY4_A145LeaveTypeLoggingWorkHours[0];
             AV11IsHoliday = true;
             pr_default.close(2);
             this.cleanup();
@@ -237,13 +240,16 @@ namespace GeneXus.Programs {
          P00AY3_A115HolidayStartDate = new DateTime[] {DateTime.MinValue} ;
          P00AY3_A113HolidayId = new long[1] ;
          A115HolidayStartDate = DateTime.MinValue;
+         P00AY4_A124LeaveTypeId = new long[1] ;
          P00AY4_A130LeaveRequestEndDate = new DateTime[] {DateTime.MinValue} ;
          P00AY4_A129LeaveRequestStartDate = new DateTime[] {DateTime.MinValue} ;
+         P00AY4_A145LeaveTypeLoggingWorkHours = new string[] {""} ;
          P00AY4_A132LeaveRequestStatus = new string[] {""} ;
          P00AY4_A106EmployeeId = new long[1] ;
          P00AY4_A127LeaveRequestId = new long[1] ;
          A130LeaveRequestEndDate = DateTime.MinValue;
          A129LeaveRequestStartDate = DateTime.MinValue;
+         A145LeaveTypeLoggingWorkHours = "";
          A132LeaveRequestStatus = "";
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.aisdateholiday__default(),
             new Object[][] {
@@ -254,7 +260,7 @@ namespace GeneXus.Programs {
                P00AY3_A100CompanyId, P00AY3_A157CompanyLocationId, P00AY3_A115HolidayStartDate, P00AY3_A113HolidayId
                }
                , new Object[] {
-               P00AY4_A130LeaveRequestEndDate, P00AY4_A129LeaveRequestStartDate, P00AY4_A132LeaveRequestStatus, P00AY4_A106EmployeeId, P00AY4_A127LeaveRequestId
+               P00AY4_A124LeaveTypeId, P00AY4_A130LeaveRequestEndDate, P00AY4_A129LeaveRequestStartDate, P00AY4_A145LeaveTypeLoggingWorkHours, P00AY4_A132LeaveRequestStatus, P00AY4_A106EmployeeId, P00AY4_A127LeaveRequestId
                }
             }
          );
@@ -267,9 +273,11 @@ namespace GeneXus.Programs {
       private long A157CompanyLocationId ;
       private long AV10CompanyLocationId ;
       private long A113HolidayId ;
+      private long A124LeaveTypeId ;
       private long A127LeaveRequestId ;
       private string scmdbuf ;
       private string A148EmployeeName ;
+      private string A145LeaveTypeLoggingWorkHours ;
       private string A132LeaveRequestStatus ;
       private DateTime AV8Date ;
       private DateTime A115HolidayStartDate ;
@@ -287,8 +295,10 @@ namespace GeneXus.Programs {
       private long[] P00AY3_A157CompanyLocationId ;
       private DateTime[] P00AY3_A115HolidayStartDate ;
       private long[] P00AY3_A113HolidayId ;
+      private long[] P00AY4_A124LeaveTypeId ;
       private DateTime[] P00AY4_A130LeaveRequestEndDate ;
       private DateTime[] P00AY4_A129LeaveRequestStartDate ;
+      private string[] P00AY4_A145LeaveTypeLoggingWorkHours ;
       private string[] P00AY4_A132LeaveRequestStatus ;
       private long[] P00AY4_A106EmployeeId ;
       private long[] P00AY4_A127LeaveRequestId ;
@@ -329,7 +339,7 @@ namespace GeneXus.Programs {
           def= new CursorDef[] {
               new CursorDef("P00AY2", "SELECT T1.CompanyId, T1.EmployeeId, T1.EmployeeName, T2.CompanyLocationId FROM (Employee T1 INNER JOIN Company T2 ON T2.CompanyId = T1.CompanyId) WHERE T1.EmployeeId = :AV9EmployeeId ORDER BY T1.EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00AY2,1, GxCacheFrequency.OFF ,true,true )
              ,new CursorDef("P00AY3", "SELECT T1.CompanyId, T2.CompanyLocationId, T1.HolidayStartDate, T1.HolidayId FROM (Holiday T1 INNER JOIN Company T2 ON T2.CompanyId = T1.CompanyId) WHERE (T1.HolidayStartDate = :AV8Date) AND (T2.CompanyLocationId = :AV10CompanyLocationId) ORDER BY T1.HolidayId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00AY3,1, GxCacheFrequency.OFF ,false,true )
-             ,new CursorDef("P00AY4", "SELECT LeaveRequestEndDate, LeaveRequestStartDate, LeaveRequestStatus, EmployeeId, LeaveRequestId FROM LeaveRequest WHERE (EmployeeId = :AV9EmployeeId) AND (LeaveRequestStartDate <= :AV8Date) AND (LeaveRequestEndDate >= :AV8Date) AND (LeaveRequestStatus = ( 'Approved')) ORDER BY EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00AY4,1, GxCacheFrequency.OFF ,false,true )
+             ,new CursorDef("P00AY4", "SELECT T1.LeaveTypeId, T1.LeaveRequestEndDate, T1.LeaveRequestStartDate, T2.LeaveTypeLoggingWorkHours, T1.LeaveRequestStatus, T1.EmployeeId, T1.LeaveRequestId FROM (LeaveRequest T1 INNER JOIN LeaveType T2 ON T2.LeaveTypeId = T1.LeaveTypeId) WHERE (T1.EmployeeId = :AV9EmployeeId) AND (T1.LeaveRequestStartDate <= :AV8Date) AND (T1.LeaveRequestEndDate >= :AV8Date) AND (T1.LeaveRequestStatus = ( 'Approved')) AND (T2.LeaveTypeLoggingWorkHours = ( 'No')) ORDER BY T1.EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00AY4,1, GxCacheFrequency.OFF ,false,true )
           };
        }
     }
@@ -353,11 +363,13 @@ namespace GeneXus.Programs {
                 ((long[]) buf[3])[0] = rslt.getLong(4);
                 return;
              case 2 :
-                ((DateTime[]) buf[0])[0] = rslt.getGXDate(1);
+                ((long[]) buf[0])[0] = rslt.getLong(1);
                 ((DateTime[]) buf[1])[0] = rslt.getGXDate(2);
-                ((string[]) buf[2])[0] = rslt.getString(3, 20);
-                ((long[]) buf[3])[0] = rslt.getLong(4);
-                ((long[]) buf[4])[0] = rslt.getLong(5);
+                ((DateTime[]) buf[2])[0] = rslt.getGXDate(3);
+                ((string[]) buf[3])[0] = rslt.getString(4, 20);
+                ((string[]) buf[4])[0] = rslt.getString(5, 20);
+                ((long[]) buf[5])[0] = rslt.getLong(6);
+                ((long[]) buf[6])[0] = rslt.getLong(7);
                 return;
        }
     }

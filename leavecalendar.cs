@@ -1045,11 +1045,7 @@ namespace GeneXus.Programs {
          AV23SDTLeaveTypes = GXt_objcol_SdtSDTLeaveType2;
          Ucvistimeline1_Leavetypes = AV23SDTLeaveTypes.ToJSonString(false);
          ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "leavetypes", Ucvistimeline1_Leavetypes);
-         AV10DateRange = context.localUtil.YMDToD( DateTimeUtil.Year( Gx_date), DateTimeUtil.Month( Gx_date), 1);
-         AssignAttri("", false, "AV10DateRange", context.localUtil.Format(AV10DateRange, "99/99/99"));
-         AV16DateRange_To = DateTimeUtil.DateEndOfMonth( AV10DateRange);
-         AssignAttri("", false, "AV16DateRange_To", context.localUtil.Format(AV16DateRange_To, "99/99/99"));
-         AV10DateRange = context.localUtil.YMDToD( 2024, 6, 16);
+         AV10DateRange = DateTimeUtil.DAdd( Gx_date, (-1*(DateTimeUtil.Dow( Gx_date)-1)));
          AssignAttri("", false, "AV10DateRange", context.localUtil.Format(AV10DateRange, "99/99/99"));
          AV16DateRange_To = DateTimeUtil.DAdd( AV10DateRange, (6));
          AssignAttri("", false, "AV16DateRange_To", context.localUtil.Format(AV16DateRange_To, "99/99/99"));
@@ -1279,7 +1275,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20246301123166", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024711955447", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1295,7 +1291,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("leavecalendar.js", "?20246301123166", false, true);
+         context.AddJavascriptSource("leavecalendar.js", "?2024711955447", false, true);
          context.AddJavascriptSource("UserControls/UCToolTipRender.js", "", false, true);
          context.AddJavascriptSource("UserControls/UCVISTimelineRender.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/daterangepicker/locales.js", "", false, true);
