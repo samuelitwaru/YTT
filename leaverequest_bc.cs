@@ -429,16 +429,9 @@ namespace GeneXus.Programs {
                AV33CheckEmployeeOnLeave = false;
             }
          }
-         if ( IsIns( )  && (DateTime.MinValue==A130LeaveRequestEndDate) && ( Gx_BScreen == 0 ) )
+         if ( StringUtil.StrCmp(A173LeaveRequestHalfDay, "") != 0 )
          {
-            A130LeaveRequestEndDate = Gx_date;
-         }
-         else
-         {
-            if ( StringUtil.StrCmp(A173LeaveRequestHalfDay, "") != 0 )
-            {
-               A130LeaveRequestEndDate = A129LeaveRequestStartDate;
-            }
+            A130LeaveRequestEndDate = A129LeaveRequestStartDate;
          }
          GXt_decimal1 = A131LeaveRequestDuration;
          new getleaverequestdays(context ).execute(  A129LeaveRequestStartDate,  A130LeaveRequestEndDate,  A173LeaveRequestHalfDay, out  GXt_decimal1) ;
@@ -477,14 +470,43 @@ namespace GeneXus.Programs {
          A125LeaveTypeName = BC000J4_A125LeaveTypeName[0];
          A144LeaveTypeVacationLeave = BC000J4_A144LeaveTypeVacationLeave[0];
          pr_default.close(2);
+         if ( ( new checkemployeependingvacationleave(context).executeUdp(  A106EmployeeId,  A127LeaveRequestId) ) && ( StringUtil.StrCmp(A144LeaveTypeVacationLeave, "Yes") == 0 ) && IsIns( )  )
+         {
+            GX_msglist.addItem("You already have a pending vacation leave", 1, "");
+            AnyError = 1;
+         }
+         if ( StringUtil.StrCmp(A173LeaveRequestHalfDay, "") != 0 )
+         {
+            nIsDirty_21 = 1;
+            A130LeaveRequestEndDate = A129LeaveRequestStartDate;
+         }
+         nIsDirty_21 = 1;
+         GXt_decimal1 = A131LeaveRequestDuration;
+         new getleaverequestdays(context ).execute(  A129LeaveRequestStartDate,  A130LeaveRequestEndDate,  A173LeaveRequestHalfDay, out  GXt_decimal1) ;
+         A131LeaveRequestDuration = GXt_decimal1;
          if ( (DateTime.MinValue==A129LeaveRequestStartDate) )
          {
             GX_msglist.addItem("Start date is required", 1, "");
             AnyError = 1;
          }
-         if ( ! new checkleaverequesttimevalide(context).executeUdp(  A129LeaveRequestStartDate,  A173LeaveRequestHalfDay) && IsIns( )  )
+         if ( ! (DateTime.MinValue==A130LeaveRequestEndDate) && ( DateTimeUtil.ResetTime ( A130LeaveRequestEndDate ) < DateTimeUtil.ResetTime ( A129LeaveRequestStartDate ) ) )
          {
-            GX_msglist.addItem("Request not permitted for this time", 1, "");
+            GX_msglist.addItem("Invalid Leave end date", 1, "");
+            AnyError = 1;
+         }
+         if ( (DateTime.MinValue==A130LeaveRequestEndDate) )
+         {
+            GX_msglist.addItem("End date is required", 1, "");
+            AnyError = 1;
+         }
+         if ( ! (Convert.ToDecimal(0)==A131LeaveRequestDuration) && ( A131LeaveRequestDuration > Convert.ToDecimal( new getemployeevactiondaysleft(context).executeUdp(  A106EmployeeId) )) && ( StringUtil.StrCmp(A144LeaveTypeVacationLeave, "Yes") == 0 ) )
+         {
+            GX_msglist.addItem("Vacation days exceeded.", 1, "");
+            AnyError = 1;
+         }
+         if ( ( A131LeaveRequestDuration <= Convert.ToDecimal( 0 )) )
+         {
+            GX_msglist.addItem("Invalid Leave Duration", 1, "");
             AnyError = 1;
          }
          if ( ! ( ( StringUtil.StrCmp(A132LeaveRequestStatus, "Pending") == 0 ) || ( StringUtil.StrCmp(A132LeaveRequestStatus, "Approved") == 0 ) || ( StringUtil.StrCmp(A132LeaveRequestStatus, "Rejected") == 0 ) ) )
@@ -507,46 +529,9 @@ namespace GeneXus.Programs {
          A148EmployeeName = BC000J5_A148EmployeeName[0];
          A147EmployeeBalance = BC000J5_A147EmployeeBalance[0];
          pr_default.close(3);
-         if ( IsIns( )  && (DateTime.MinValue==A130LeaveRequestEndDate) && ( Gx_BScreen == 0 ) )
-         {
-            nIsDirty_21 = 1;
-            A130LeaveRequestEndDate = Gx_date;
-         }
-         else
-         {
-            if ( StringUtil.StrCmp(A173LeaveRequestHalfDay, "") != 0 )
-            {
-               nIsDirty_21 = 1;
-               A130LeaveRequestEndDate = A129LeaveRequestStartDate;
-            }
-         }
          if ( ( DateTimeUtil.ResetTime ( A129LeaveRequestStartDate ) < DateTimeUtil.ResetTime ( Gx_date ) ) && IsIns( )  )
          {
             GX_msglist.addItem("Invalid Leave start date", 1, "");
-            AnyError = 1;
-         }
-         nIsDirty_21 = 1;
-         GXt_decimal1 = A131LeaveRequestDuration;
-         new getleaverequestdays(context ).execute(  A129LeaveRequestStartDate,  A130LeaveRequestEndDate,  A173LeaveRequestHalfDay, out  GXt_decimal1) ;
-         A131LeaveRequestDuration = GXt_decimal1;
-         if ( ! (DateTime.MinValue==A130LeaveRequestEndDate) && ( DateTimeUtil.ResetTime ( A130LeaveRequestEndDate ) < DateTimeUtil.ResetTime ( A129LeaveRequestStartDate ) ) )
-         {
-            GX_msglist.addItem("Invalid Leave end date", 1, "");
-            AnyError = 1;
-         }
-         if ( (DateTime.MinValue==A130LeaveRequestEndDate) )
-         {
-            GX_msglist.addItem("End date is required", 1, "");
-            AnyError = 1;
-         }
-         if ( ! (Convert.ToDecimal(0)==A131LeaveRequestDuration) && ( A131LeaveRequestDuration > Convert.ToDecimal( new getemployeevactiondaysleft(context).executeUdp(  A106EmployeeId) )) && ( StringUtil.StrCmp(A144LeaveTypeVacationLeave, "Yes") == 0 ) )
-         {
-            GX_msglist.addItem("Vacation days exceeded.", 1, "");
-            AnyError = 1;
-         }
-         if ( ( A131LeaveRequestDuration <= Convert.ToDecimal( 0 )) )
-         {
-            GX_msglist.addItem("Invalid Leave Duration", 1, "");
             AnyError = 1;
          }
       }
@@ -840,9 +825,9 @@ namespace GeneXus.Programs {
          if ( AnyError == 0 )
          {
             /* Delete mode formulas */
-            if ( ! new checkleaverequesttimevalide(context).executeUdp(  A129LeaveRequestStartDate,  A173LeaveRequestHalfDay) && IsIns( )  )
+            if ( ( new checkemployeependingvacationleave(context).executeUdp(  A106EmployeeId,  A127LeaveRequestId) ) && ( StringUtil.StrCmp(A144LeaveTypeVacationLeave, "Yes") == 0 ) && IsIns( )  )
             {
-               GX_msglist.addItem("Request not permitted for this time", 1, "");
+               GX_msglist.addItem("You already have a pending vacation leave", 1, "");
                AnyError = 1;
             }
             if ( ( DateTimeUtil.ResetTime ( A129LeaveRequestStartDate ) < DateTimeUtil.ResetTime ( Gx_date ) ) && IsIns( )  )
@@ -1024,6 +1009,7 @@ namespace GeneXus.Programs {
       {
          A131LeaveRequestDuration = 0;
          AV33CheckEmployeeOnLeave = false;
+         A130LeaveRequestEndDate = DateTime.MinValue;
          A124LeaveTypeId = 0;
          A125LeaveTypeName = "";
          A128LeaveRequestDate = DateTime.MinValue;
@@ -1035,7 +1021,6 @@ namespace GeneXus.Programs {
          A148EmployeeName = "";
          A147EmployeeBalance = 0;
          A144LeaveTypeVacationLeave = "";
-         A130LeaveRequestEndDate = Gx_date;
          A129LeaveRequestStartDate = Gx_date;
          A106EmployeeId = AV18EmployeeId;
          Z131LeaveRequestDuration = 0;
@@ -1086,6 +1071,7 @@ namespace GeneXus.Programs {
       {
          obj21.gxTpr_Mode = Gx_mode;
          obj21.gxTpr_Leaverequestduration = A131LeaveRequestDuration;
+         obj21.gxTpr_Leaverequestenddate = A130LeaveRequestEndDate;
          obj21.gxTpr_Leavetypeid = A124LeaveTypeId;
          obj21.gxTpr_Leavetypename = A125LeaveTypeName;
          obj21.gxTpr_Leaverequestdate = A128LeaveRequestDate;
@@ -1096,7 +1082,6 @@ namespace GeneXus.Programs {
          obj21.gxTpr_Employeename = A148EmployeeName;
          obj21.gxTpr_Employeebalance = A147EmployeeBalance;
          obj21.gxTpr_Leavetypevacationleave = A144LeaveTypeVacationLeave;
-         obj21.gxTpr_Leaverequestenddate = A130LeaveRequestEndDate;
          obj21.gxTpr_Leaverequeststartdate = A129LeaveRequestStartDate;
          obj21.gxTpr_Employeeid = A106EmployeeId;
          obj21.gxTpr_Leaverequestid = A127LeaveRequestId;
@@ -1131,6 +1116,10 @@ namespace GeneXus.Programs {
       {
          Gx_mode = obj21.gxTpr_Mode;
          A131LeaveRequestDuration = obj21.gxTpr_Leaverequestduration;
+         if ( ! ( ( StringUtil.StrCmp(obj21.gxTpr_Leaverequesthalfday, "") != 0 ) ) || ( forceLoad == 1 ) )
+         {
+            A130LeaveRequestEndDate = obj21.gxTpr_Leaverequestenddate;
+         }
          A124LeaveTypeId = obj21.gxTpr_Leavetypeid;
          A125LeaveTypeName = obj21.gxTpr_Leavetypename;
          A128LeaveRequestDate = obj21.gxTpr_Leaverequestdate;
@@ -1142,10 +1131,6 @@ namespace GeneXus.Programs {
          A148EmployeeName = obj21.gxTpr_Employeename;
          A147EmployeeBalance = obj21.gxTpr_Employeebalance;
          A144LeaveTypeVacationLeave = obj21.gxTpr_Leavetypevacationleave;
-         if ( ! ( ( StringUtil.StrCmp(obj21.gxTpr_Leaverequesthalfday, "") != 0 ) ) || ( forceLoad == 1 ) )
-         {
-            A130LeaveRequestEndDate = obj21.gxTpr_Leaverequestenddate;
-         }
          A129LeaveRequestStartDate = obj21.gxTpr_Leaverequeststartdate;
          if ( ! ( IsUpd( )  ) || ( forceLoad == 1 ) )
          {
@@ -1819,9 +1804,6 @@ namespace GeneXus.Programs {
          A106EmployeeId = 0;
          Z106EmployeeId = 0;
          i106EmployeeId = 0;
-         A130LeaveRequestEndDate = DateTime.MinValue;
-         Z130LeaveRequestEndDate = DateTime.MinValue;
-         N130LeaveRequestEndDate = DateTime.MinValue;
          A129LeaveRequestStartDate = DateTime.MinValue;
          Z129LeaveRequestStartDate = DateTime.MinValue;
          i129LeaveRequestStartDate = DateTime.MinValue;
