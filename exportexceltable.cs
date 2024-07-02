@@ -152,10 +152,13 @@ namespace GeneXus.Programs {
          AV95headerCellStyle.gxTpr_Font.gxTpr_Bold = true;
          AV95headerCellStyle.gxTpr_Font.gxTpr_Size = 13;
          AV95headerCellStyle.gxTpr_Font.gxTpr_Color.setcolorrgb(25, 25, 112) ;
+         AV95headerCellStyle.gxTpr_Alignment.gxTpr_Horizontal = 2;
+         AV98bodyCellStyle = new GeneXus.Programs.genexusoffice.office.excel.style.SdtExcelCellStyle(context);
+         AV98bodyCellStyle.gxTpr_Alignment.gxTpr_Horizontal = 2;
          AV96footCellStyle = new GeneXus.Programs.genexusoffice.office.excel.style.SdtExcelCellStyle(context);
          AV96footCellStyle.gxTpr_Font.gxTpr_Bold = true;
          AV96footCellStyle.gxTpr_Font.gxTpr_Size = 13;
-         AV96footCellStyle.gxTpr_Alignment.gxTpr_Horizontal = 1;
+         AV96footCellStyle.gxTpr_Alignment.gxTpr_Horizontal = 2;
          /* Execute user subroutine: 'GETSESSIONVARIABLES' */
          S141 ();
          if ( returnInSub )
@@ -168,12 +171,12 @@ namespace GeneXus.Programs {
          new getworkhourlogdurationbyproject(context ).execute( ref  AV75FromDate, ref  AV76ToDate, ref  AV44ProjectId, ref  AV46CompanyLocationId, ref  AV24EmployeeId, ref  AV85ProjectIds, out  GXt_objcol_SdtSDTProject1) ;
          AV63SDTProjects = GXt_objcol_SdtSDTProject1;
          AV50Columns.Add("Projects:", 0);
-         AV98GXV1 = 1;
-         while ( AV98GXV1 <= AV63SDTProjects.Count )
+         AV99GXV1 = 1;
+         while ( AV99GXV1 <= AV63SDTProjects.Count )
          {
-            AV65SDTProject = ((SdtSDTProject)AV63SDTProjects.Item(AV98GXV1));
+            AV65SDTProject = ((SdtSDTProject)AV63SDTProjects.Item(AV99GXV1));
             AV50Columns.Add(StringUtil.Trim( AV65SDTProject.gxTpr_Projectname), 0);
-            AV98GXV1 = (int)(AV98GXV1+1);
+            AV99GXV1 = (int)(AV99GXV1+1);
          }
          AV50Columns.Add("Total Work Hours", 0);
          if ( AV88ShowLeaveTotal )
@@ -197,6 +200,7 @@ namespace GeneXus.Programs {
          AV93excelCellStyle.gxTpr_Font.gxTpr_Bold = true;
          AV93excelCellStyle.gxTpr_Font.gxTpr_Size = 14;
          AV93excelCellStyle.gxTpr_Font.gxTpr_Color.setcolorrgb(25, 25, 112) ;
+         AV93excelCellStyle.gxTpr_Alignment.gxTpr_Horizontal = 2;
          AV92excelcellrange.setcellstyle( AV93excelCellStyle);
          AV14CellRow = 2;
          AV15FirstColumn = 1;
@@ -207,45 +211,50 @@ namespace GeneXus.Programs {
             this.cleanup();
             if (true) return;
          }
-         AV100GXV2 = 1;
-         while ( AV100GXV2 <= AV64SDTEmployeeProjectHoursCollection.Count )
+         AV101GXV2 = 1;
+         while ( AV101GXV2 <= AV64SDTEmployeeProjectHoursCollection.Count )
          {
-            AV66SDTEmployeeProjectHours = ((SdtSDTEmployeeProjectHours)AV64SDTEmployeeProjectHoursCollection.Item(AV100GXV2));
+            AV66SDTEmployeeProjectHours = ((SdtSDTEmployeeProjectHours)AV64SDTEmployeeProjectHoursCollection.Item(AV101GXV2));
             AV14CellRow = (int)(AV14CellRow+1);
             AV92excelcellrange = AV91excelSpreadsheet.cell(AV14CellRow, 1);
             AV92excelcellrange.gxTpr_Valuetext = StringUtil.Trim( AV66SDTEmployeeProjectHours.gxTpr_Employeename);
-            AV101GXV3 = 1;
-            while ( AV101GXV3 <= AV66SDTEmployeeProjectHours.gxTpr_Projecthours.Count )
+            AV92excelcellrange.setcellstyle( AV98bodyCellStyle);
+            AV102GXV3 = 1;
+            while ( AV102GXV3 <= AV66SDTEmployeeProjectHours.gxTpr_Projecthours.Count )
             {
-               AV67ProjectHoursItem = ((SdtSDTEmployeeProjectHours_ProjectHoursItem)AV66SDTEmployeeProjectHours.gxTpr_Projecthours.Item(AV101GXV3));
+               AV67ProjectHoursItem = ((SdtSDTEmployeeProjectHours_ProjectHoursItem)AV66SDTEmployeeProjectHours.gxTpr_Projecthours.Item(AV102GXV3));
                AV92excelcellrange = AV91excelSpreadsheet.cell(AV14CellRow, AV50Columns.IndexOf(StringUtil.Trim( AV67ProjectHoursItem.gxTpr_Projectname)));
                AV92excelcellrange.gxTpr_Valuetext = AV67ProjectHoursItem.gxTpr_Projectformattedtime;
-               AV101GXV3 = (int)(AV101GXV3+1);
+               AV92excelcellrange.setcellstyle( AV98bodyCellStyle);
+               AV102GXV3 = (int)(AV102GXV3+1);
             }
             AV92excelcellrange = AV91excelSpreadsheet.cell(AV14CellRow, AV50Columns.IndexOf("Total Work Hours"));
             AV92excelcellrange.gxTpr_Valuetext = AV66SDTEmployeeProjectHours.gxTpr_Totalformattedtime;
+            AV92excelcellrange.setcellstyle( AV98bodyCellStyle);
             if ( AV88ShowLeaveTotal )
             {
                AV92excelcellrange = AV91excelSpreadsheet.cell(AV14CellRow, AV50Columns.IndexOf("Total Leave Hours"));
                AV92excelcellrange.gxTpr_Valuetext = AV66SDTEmployeeProjectHours.gxTpr_Totalformattedleave;
+               AV92excelcellrange.setcellstyle( AV98bodyCellStyle);
                AV92excelcellrange = AV91excelSpreadsheet.cell(AV14CellRow, AV50Columns.IndexOf("Total"));
                AV92excelcellrange.gxTpr_Valuetext = AV66SDTEmployeeProjectHours.gxTpr_Totalformattedtime;
+               AV92excelcellrange.setcellstyle( AV98bodyCellStyle);
             }
-            AV100GXV2 = (int)(AV100GXV2+1);
+            AV101GXV2 = (int)(AV101GXV2+1);
          }
          AV14CellRow = (int)(AV14CellRow+1);
          AV38VisibleColumnCount = 0;
          AV92excelcellrange = AV91excelSpreadsheet.cell(AV14CellRow, (int)(AV15FirstColumn+AV38VisibleColumnCount));
          AV92excelcellrange.gxTpr_Valuetext = "Total";
          AV92excelcellrange.setcellstyle( AV96footCellStyle);
-         AV102GXV4 = 1;
-         while ( AV102GXV4 <= AV63SDTProjects.Count )
+         AV103GXV4 = 1;
+         while ( AV103GXV4 <= AV63SDTProjects.Count )
          {
-            AV65SDTProject = ((SdtSDTProject)AV63SDTProjects.Item(AV102GXV4));
+            AV65SDTProject = ((SdtSDTProject)AV63SDTProjects.Item(AV103GXV4));
             AV92excelcellrange = AV91excelSpreadsheet.cell(AV14CellRow, AV50Columns.IndexOf(StringUtil.Trim( AV65SDTProject.gxTpr_Projectname)));
             AV92excelcellrange.gxTpr_Valuetext = AV65SDTProject.gxTpr_Projectformattedtime;
             AV92excelcellrange.setcellstyle( AV96footCellStyle);
-            AV102GXV4 = (int)(AV102GXV4+1);
+            AV103GXV4 = (int)(AV103GXV4+1);
          }
          AV92excelcellrange = AV91excelSpreadsheet.cell(AV14CellRow, AV50Columns.IndexOf("Total Work Hours"));
          AV92excelcellrange.gxTpr_Valuetext = AV90TotalFormattedTime;
@@ -257,19 +266,15 @@ namespace GeneXus.Programs {
             AV92excelcellrange.setcellstyle( AV93excelCellStyle);
          }
          AV92excelcellrange = AV91excelSpreadsheet.cell(AV14CellRow+2, 1);
-         AV92excelcellrange.gxTpr_Valuetext = "Start Date";
+         GXt_char2 = "";
+         new formatdatetime(context ).execute(  AV75FromDate,  "DD.MM.YYYY", out  GXt_char2) ;
+         AV92excelcellrange.gxTpr_Valuetext = "Start Date "+GXt_char2;
          AV92excelcellrange.setcellstyle( AV96footCellStyle);
-         AV92excelcellrange = AV91excelSpreadsheet.cell(AV14CellRow+2, 2);
-         AV92excelcellrange.setcellstyle( AV96footCellStyle);
-         GXt_dtime2 = DateTimeUtil.ResetTime( AV75FromDate ) ;
-         AV92excelcellrange.gxTpr_Valuedate = GXt_dtime2;
          AV92excelcellrange = AV91excelSpreadsheet.cell(AV14CellRow+3, 1);
-         AV92excelcellrange.gxTpr_Valuetext = "End Date";
+         GXt_char2 = "";
+         new formatdatetime(context ).execute(  AV76ToDate,  "DD.MM.YYYY", out  GXt_char2) ;
+         AV92excelcellrange.gxTpr_Valuetext = "End Date "+GXt_char2;
          AV92excelcellrange.setcellstyle( AV96footCellStyle);
-         AV92excelcellrange = AV91excelSpreadsheet.cell(AV14CellRow+3, 2);
-         AV92excelcellrange.setcellstyle( AV96footCellStyle);
-         GXt_dtime2 = DateTimeUtil.ResetTime( AV76ToDate ) ;
-         AV92excelcellrange.gxTpr_Valuedate = GXt_dtime2;
          /* Execute user subroutine: 'CLOSEDOCUMENT' */
          S131 ();
          if ( returnInSub )
@@ -284,11 +289,11 @@ namespace GeneXus.Programs {
       {
          /* 'OPENDOCUMENT' Routine */
          returnInSub = false;
+         GXt_char2 = AV12Filename;
+         new formatdatetime(context ).execute(  AV75FromDate,  "YYYY-MM-DD", out  GXt_char2) ;
          GXt_char3 = AV12Filename;
-         new formatdatetime(context ).execute(  AV75FromDate,  "YYYY-MM-DD", out  GXt_char3) ;
-         GXt_char4 = AV12Filename;
-         new formatdatetime(context ).execute(  AV76ToDate,  "YYYY-MM-DD", out  GXt_char4) ;
-         AV12Filename = "ReportExport-" + GXt_char3 + "_" + GXt_char4 + ".xlsx";
+         new formatdatetime(context ).execute(  AV76ToDate,  "YYYY-MM-DD", out  GXt_char3) ;
+         AV12Filename = "ReportExport-" + GXt_char2 + "_" + GXt_char3 + ".xlsx";
          AV97File.Source = AV12Filename;
          AV97File.Delete();
          AV91excelSpreadsheet.open( AV12Filename);
@@ -299,15 +304,15 @@ namespace GeneXus.Programs {
          /* 'WRITECOLUMNTITLES' Routine */
          returnInSub = false;
          AV38VisibleColumnCount = 0;
-         AV103GXV5 = 1;
-         while ( AV103GXV5 <= AV50Columns.Count )
+         AV104GXV5 = 1;
+         while ( AV104GXV5 <= AV50Columns.Count )
          {
-            AV49Column = ((string)AV50Columns.Item(AV103GXV5));
+            AV49Column = ((string)AV50Columns.Item(AV104GXV5));
             AV92excelcellrange = AV91excelSpreadsheet.cell(AV14CellRow, (int)(AV15FirstColumn+AV38VisibleColumnCount));
             AV92excelcellrange.gxTpr_Valuetext = AV49Column;
             AV92excelcellrange.setcellstyle( AV95headerCellStyle);
             AV38VisibleColumnCount = (long)(AV38VisibleColumnCount+1);
-            AV103GXV5 = (int)(AV103GXV5+1);
+            AV104GXV5 = (int)(AV104GXV5+1);
          }
       }
 
@@ -358,6 +363,7 @@ namespace GeneXus.Programs {
          AV12Filename = "";
          AV13ErrorMessage = "";
          AV95headerCellStyle = new GeneXus.Programs.genexusoffice.office.excel.style.SdtExcelCellStyle(context);
+         AV98bodyCellStyle = new GeneXus.Programs.genexusoffice.office.excel.style.SdtExcelCellStyle(context);
          AV96footCellStyle = new GeneXus.Programs.genexusoffice.office.excel.style.SdtExcelCellStyle(context);
          AV87WebSession = context.GetSession();
          AV63SDTProjects = new GXBaseCollection<SdtSDTProject>( context, "SDTProject", "YTT_version4");
@@ -371,29 +377,27 @@ namespace GeneXus.Programs {
          AV93excelCellStyle = new GeneXus.Programs.genexusoffice.office.excel.style.SdtExcelCellStyle(context);
          AV66SDTEmployeeProjectHours = new SdtSDTEmployeeProjectHours(context);
          AV67ProjectHoursItem = new SdtSDTEmployeeProjectHours_ProjectHoursItem(context);
-         GXt_dtime2 = (DateTime)(DateTime.MinValue);
+         GXt_char2 = "";
          GXt_char3 = "";
-         GXt_char4 = "";
          AV97File = new GxFile(context.GetPhysicalPath());
          AV49Column = "";
          AV25Session = context.GetSession();
          /* GeneXus formulas. */
       }
 
-      private int AV98GXV1 ;
+      private int AV99GXV1 ;
       private int AV14CellRow ;
       private int AV15FirstColumn ;
-      private int AV100GXV2 ;
-      private int AV101GXV3 ;
-      private int AV102GXV4 ;
-      private int AV103GXV5 ;
+      private int AV101GXV2 ;
+      private int AV102GXV3 ;
+      private int AV103GXV4 ;
+      private int AV104GXV5 ;
       private long AV38VisibleColumnCount ;
       private string AV89TotalFormattedWorkTime ;
       private string AV90TotalFormattedTime ;
       private string Gx_msg ;
+      private string GXt_char2 ;
       private string GXt_char3 ;
-      private string GXt_char4 ;
-      private DateTime GXt_dtime2 ;
       private DateTime AV75FromDate ;
       private DateTime AV76ToDate ;
       private bool returnInSub ;
@@ -431,6 +435,7 @@ namespace GeneXus.Programs {
       private SdtSDTEmployeeProjectHours_ProjectHoursItem AV67ProjectHoursItem ;
       private GeneXus.Programs.genexusoffice.office.excel.cells.SdtExcelCellRange AV92excelcellrange ;
       private GeneXus.Programs.genexusoffice.office.excel.style.SdtExcelCellStyle AV95headerCellStyle ;
+      private GeneXus.Programs.genexusoffice.office.excel.style.SdtExcelCellStyle AV98bodyCellStyle ;
       private GeneXus.Programs.genexusoffice.office.excel.style.SdtExcelCellStyle AV96footCellStyle ;
       private GeneXus.Programs.genexusoffice.office.excel.style.SdtExcelCellStyle AV93excelCellStyle ;
    }
