@@ -248,7 +248,7 @@ namespace GeneXus.Programs {
          lV54Holidaywwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV54Holidaywwds_1_filterfulltext), "%", "");
          lV55Holidaywwds_2_tfholidayname = StringUtil.PadR( StringUtil.RTrim( AV55Holidaywwds_2_tfholidayname), 100, "%");
          /* Using cursor P00412 */
-         pr_default.execute(0, new Object[] {Gx_date, AV60Udparg7, lV54Holidaywwds_1_filterfulltext, lV55Holidaywwds_2_tfholidayname, AV56Holidaywwds_3_tfholidayname_sel, AV57Holidaywwds_4_tfholidaystartdate, AV58Holidaywwds_5_tfholidaystartdate_to});
+         pr_default.execute(0, new Object[] {Gx_date, Gx_date, AV60Udparg7, lV54Holidaywwds_1_filterfulltext, lV55Holidaywwds_2_tfholidayname, AV56Holidaywwds_3_tfholidayname_sel, AV57Holidaywwds_4_tfholidaystartdate, AV58Holidaywwds_5_tfholidaystartdate_to});
          while ( (pr_default.getStatus(0) != 101) )
          {
             BRK412 = false;
@@ -426,10 +426,10 @@ namespace GeneXus.Programs {
       {
          System.Text.StringBuilder sWhereString = new System.Text.StringBuilder();
          string scmdbuf;
-         short[] GXv_int1 = new short[7];
+         short[] GXv_int1 = new short[8];
          Object[] GXv_Object2 = new Object[2];
          scmdbuf = "SELECT CompanyId, HolidayName, HolidayIsActive, HolidayStartDate, HolidayId FROM Holiday";
-         AddWhere(sWhereString, "(date_part('year', HolidayStartDate) = date_part('year', :Gx_date))");
+         AddWhere(sWhereString, "(date_part('year', HolidayStartDate) = date_part('year', :Gx_date) or date_part('year', HolidayStartDate) = date_part('year', (CAST(:Gx_date AS date) + CAST (1 || ' YEAR' AS INTERVAL))))");
          AddWhere(sWhereString, "(CompanyId = :AV60Udparg7)");
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV54Holidaywwds_1_filterfulltext)) )
          {
@@ -437,7 +437,7 @@ namespace GeneXus.Programs {
          }
          else
          {
-            GXv_int1[2] = 1;
+            GXv_int1[3] = 1;
          }
          if ( String.IsNullOrEmpty(StringUtil.RTrim( AV56Holidaywwds_3_tfholidayname_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV55Holidaywwds_2_tfholidayname)) ) )
          {
@@ -445,7 +445,7 @@ namespace GeneXus.Programs {
          }
          else
          {
-            GXv_int1[3] = 1;
+            GXv_int1[4] = 1;
          }
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV56Holidaywwds_3_tfholidayname_sel)) && ! ( StringUtil.StrCmp(AV56Holidaywwds_3_tfholidayname_sel, "<#Empty#>") == 0 ) )
          {
@@ -453,7 +453,7 @@ namespace GeneXus.Programs {
          }
          else
          {
-            GXv_int1[4] = 1;
+            GXv_int1[5] = 1;
          }
          if ( StringUtil.StrCmp(AV56Holidaywwds_3_tfholidayname_sel, "<#Empty#>") == 0 )
          {
@@ -465,7 +465,7 @@ namespace GeneXus.Programs {
          }
          else
          {
-            GXv_int1[5] = 1;
+            GXv_int1[6] = 1;
          }
          if ( ! (DateTime.MinValue==AV58Holidaywwds_5_tfholidaystartdate_to) )
          {
@@ -473,7 +473,7 @@ namespace GeneXus.Programs {
          }
          else
          {
-            GXv_int1[6] = 1;
+            GXv_int1[7] = 1;
          }
          if ( AV59Holidaywwds_6_tfholidayisactive_sel == 1 )
          {
@@ -517,6 +517,7 @@ namespace GeneXus.Programs {
        {
           Object[] prmP00412;
           prmP00412 = new Object[] {
+          new ParDef("Gx_date",GXType.Date,8,0) ,
           new ParDef("Gx_date",GXType.Date,8,0) ,
           new ParDef("AV60Udparg7",GXType.Int64,10,0) ,
           new ParDef("lV54Holidaywwds_1_filterfulltext",GXType.VarChar,100,0) ,

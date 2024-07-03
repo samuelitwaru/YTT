@@ -103,7 +103,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          Gxm1dvelop_menu.gxTpr_Link = formatLink("logworkhours.aspx") ;
          Gxm1dvelop_menu.gxTpr_Linktarget = "";
          Gxm1dvelop_menu.gxTpr_Iconclass = "";
-         Gxm1dvelop_menu.gxTpr_Caption = "Log hours";
+         Gxm1dvelop_menu.gxTpr_Caption = "Log Hours";
          Gxm1dvelop_menu = new GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item(context);
          Gxm2rootcol.Add(Gxm1dvelop_menu, 0);
          AV5id = (short)(AV5id+1);

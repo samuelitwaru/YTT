@@ -111,7 +111,7 @@ namespace GeneXus.Programs {
       {
          /* GeneXus formulas */
          /* Output device settings */
-         AV10EmployeeIds.FromJSonString("[529,457,88,389,141,130,146,167,198,93,86,373,233,348,409,87,179,137,94,134,352,274,152,204,99,91,92,98,355,190,346,97,299,436,193,449,260,208,564,143,138,215,378,206,479,560,159,103,176,161,201,269,320,455,104,232,147,306,178,105,322,377,405,356,219,328,385,332,360,162,353,351,354,347,387,106,466,400,240,109,108,142,180,565,497,371,319,111,532,113,246,112,473,474,325,300,154,559,244,429,136,115,278,175,187,372,242,211,185,379,114,129,183,116,315,117,561,192,410,139,426,357,395,392,218,399,184,375,350,145,330,249,188,303,359,163,333,362,393,216,140,463,197,200,34,326,481,420,123,132,257,317,202,231,207,270,124,266,228,170,169,390,324,461,229,349,168,133,174,280,275,165,182,365,144,344,358,126,323,157,343,125,374,432,433,402,422,421,403]", null);
+         new creategamroles(context ).execute( ) ;
          pr_default.dynParam(0, new Object[]{ new Object[]{
                                               A106EmployeeId ,
                                               AV10EmployeeIds } ,
@@ -156,8 +156,8 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
-         AV10EmployeeIds = new GxSimpleCollection<short>();
          scmdbuf = "";
+         AV10EmployeeIds = new GxSimpleCollection<short>();
          P00B02_A106EmployeeId = new long[1] ;
          P00B02_A109EmployeeEmail = new string[] {""} ;
          P00B02_A107EmployeeFirstName = new string[] {""} ;

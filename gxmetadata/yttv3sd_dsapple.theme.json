@@ -81,6 +81,10 @@
         "Name" : "TabPageUnselected",
         "font_size" : "16dip",
         "font_weight" : "bolder"
+    }, { 
+        "Name" : "AttributeEditRadio",
+        "padding_top" : "6dip",
+        "padding_bottom" : "8dip"
     } ],
     "Transformations" : [ { 
         "Name" : "tablegrow100x100",

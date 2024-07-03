@@ -1047,7 +1047,7 @@ namespace GeneXus.Programs {
          ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "leavetypes", Ucvistimeline1_Leavetypes);
          AV10DateRange = DateTimeUtil.DAdd( Gx_date, (-1*(DateTimeUtil.Dow( Gx_date)-1)));
          AssignAttri("", false, "AV10DateRange", context.localUtil.Format(AV10DateRange, "99/99/99"));
-         AV16DateRange_To = DateTimeUtil.DAdd( AV10DateRange, (6));
+         AV16DateRange_To = DateTimeUtil.DAdd( AV10DateRange, (13));
          AssignAttri("", false, "AV16DateRange_To", context.localUtil.Format(AV16DateRange_To, "99/99/99"));
          /* Execute user subroutine: 'GETDATA' */
          S112 ();
@@ -1114,7 +1114,7 @@ namespace GeneXus.Programs {
          S112 ();
          if (returnInSub) return;
          GXt_char3 = "";
-         new formatdatetime(context ).execute(  AV10DateRange,  "YYYY-MM-DD", out  GXt_char3) ;
+         new formatdatetime(context ).execute(  DateTimeUtil.DAdd( AV10DateRange, (1)),  "YYYY-MM-DD", out  GXt_char3) ;
          Ucvistimeline1_Startdate = GXt_char3;
          ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "startDate", Ucvistimeline1_Startdate);
          GXt_char3 = "";
@@ -1140,7 +1140,7 @@ namespace GeneXus.Programs {
          S112 ();
          if (returnInSub) return;
          GXt_char3 = "";
-         new formatdatetime(context ).execute(  AV10DateRange,  "YYYY-MM-DD", out  GXt_char3) ;
+         new formatdatetime(context ).execute(  DateTimeUtil.DAdd( AV10DateRange, (1)),  "YYYY-MM-DD", out  GXt_char3) ;
          Ucvistimeline1_Startdate = GXt_char3;
          ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "startDate", Ucvistimeline1_Startdate);
          GXt_char3 = "";
@@ -1161,7 +1161,7 @@ namespace GeneXus.Programs {
          S112 ();
          if (returnInSub) return;
          GXt_char3 = "";
-         new formatdatetime(context ).execute(  AV10DateRange,  "YYYY-MM-DD", out  GXt_char3) ;
+         new formatdatetime(context ).execute(  DateTimeUtil.DAdd( AV10DateRange, (1)),  "YYYY-MM-DD", out  GXt_char3) ;
          Ucvistimeline1_Startdate = GXt_char3;
          ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "startDate", Ucvistimeline1_Startdate);
          GXt_char3 = "";
@@ -1275,7 +1275,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024711955447", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024731657282", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1291,7 +1291,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("leavecalendar.js", "?2024711955447", false, true);
+         context.AddJavascriptSource("leavecalendar.js", "?2024731657282", false, true);
          context.AddJavascriptSource("UserControls/UCToolTipRender.js", "", false, true);
          context.AddJavascriptSource("UserControls/UCVISTimelineRender.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/daterangepicker/locales.js", "", false, true);
