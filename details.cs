@@ -1346,7 +1346,14 @@ namespace GeneXus.Programs {
          else
          {
             context.RollbackDataStores("details",pr_default);
-            GX_msglist.addItem(AV8LeaveRequest.GetMessages().ToJSonString(false));
+            AV33GXV15 = 1;
+            AV32GXV14 = AV8LeaveRequest.GetMessages();
+            while ( AV33GXV15 <= AV32GXV14.Count )
+            {
+               AV9Message = ((GeneXus.Utils.SdtMessages_Message)AV32GXV14.Item(AV33GXV15));
+               GX_msglist.addItem(AV9Message.gxTpr_Description);
+               AV33GXV15 = (int)(AV33GXV15+1);
+            }
          }
       }
 
@@ -1380,7 +1387,14 @@ namespace GeneXus.Programs {
          else
          {
             context.RollbackDataStores("details",pr_default);
-            GX_msglist.addItem(AV8LeaveRequest.GetMessages().ToJSonString(false));
+            AV35GXV17 = 1;
+            AV34GXV16 = AV8LeaveRequest.GetMessages();
+            while ( AV35GXV17 <= AV34GXV16.Count )
+            {
+               AV9Message = ((GeneXus.Utils.SdtMessages_Message)AV34GXV16.Item(AV35GXV17));
+               GX_msglist.addItem(AV9Message.gxTpr_Description);
+               AV35GXV17 = (int)(AV35GXV17+1);
+            }
          }
       }
 
@@ -1408,12 +1422,12 @@ namespace GeneXus.Programs {
       {
          /* 'SHOW MESSAGES' Routine */
          returnInSub = false;
-         AV32GXV14 = 1;
-         while ( AV32GXV14 <= AV10Messages.Count )
+         AV36GXV18 = 1;
+         while ( AV36GXV18 <= AV10Messages.Count )
          {
-            AV9Message = ((GeneXus.Utils.SdtMessages_Message)AV10Messages.Item(AV32GXV14));
+            AV9Message = ((GeneXus.Utils.SdtMessages_Message)AV10Messages.Item(AV36GXV18));
             GX_msglist.addItem(AV9Message.gxTpr_Description);
-            AV32GXV14 = (int)(AV32GXV14+1);
+            AV36GXV18 = (int)(AV36GXV18+1);
          }
       }
 
@@ -1544,7 +1558,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247314421772", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024741310361", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1560,7 +1574,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("details.js", "?20247314421772", false, true);
+         context.AddJavascriptSource("details.js", "?2024741310361", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/ConfirmPanel/BootstrapConfirmPanelRender.js", "", false, true);
@@ -1765,9 +1779,11 @@ namespace GeneXus.Programs {
          ucDvelop_confirmpanel_rejectbutton = new GXUserControl();
          AV16Employee = new SdtEmployee(context);
          AV17LeaveType = new SdtLeaveType(context);
+         AV32GXV14 = new GXBaseCollection<GeneXus.Utils.SdtMessages_Message>( context, "Message", "GeneXus");
+         AV9Message = new GeneXus.Utils.SdtMessages_Message(context);
          GXt_char2 = "";
          GXt_char1 = "";
-         AV9Message = new GeneXus.Utils.SdtMessages_Message(context);
+         AV34GXV16 = new GXBaseCollection<GeneXus.Utils.SdtMessages_Message>( context, "Message", "GeneXus");
          sStyleString = "";
          ucDvelop_confirmpanel_approvebutton = new GXUserControl();
          BackMsgLst = new msglist();
@@ -1817,7 +1833,9 @@ namespace GeneXus.Programs {
       private int bttBtnrejectbutton_Visible ;
       private int edtavLeaverequest_leaverequestid_Visible ;
       private int edtavLeaverequest_leavetypeid_Visible ;
-      private int AV32GXV14 ;
+      private int AV33GXV15 ;
+      private int AV35GXV17 ;
+      private int AV36GXV18 ;
       private int idxLst ;
       private long AV15LeaveRequestId ;
       private long wcpOAV15LeaveRequestId ;
@@ -1926,6 +1944,8 @@ namespace GeneXus.Programs {
       private msglist LclMsgLst ;
       private IDataStoreProvider pr_gam ;
       private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> AV10Messages ;
+      private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> AV32GXV14 ;
+      private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> AV34GXV16 ;
       private GXWebForm Form ;
       private SdtEmployee AV16Employee ;
       private GeneXus.Utils.SdtMessages_Message AV9Message ;

@@ -211,15 +211,15 @@ namespace GeneXus.Programs {
          AV20ExcelCellRange.gxTpr_Valuetext = "Leave Overview "+GXt_char1+" For "+AV24CompanyName;
          AV20ExcelCellRange.setcellstyle( AV27excelCellStyle);
          AV12col = 1;
-         AV30GXV1 = 1;
-         while ( AV30GXV1 <= AV8LeaveTypeNames.Count )
+         AV31GXV1 = 1;
+         while ( AV31GXV1 <= AV8LeaveTypeNames.Count )
          {
-            AV15Name = AV8LeaveTypeNames.GetString(AV30GXV1);
+            AV15Name = AV8LeaveTypeNames.GetString(AV31GXV1);
             AV20ExcelCellRange = AV21excelSpreadsheet.cell(3, AV12col);
             AV20ExcelCellRange.gxTpr_Valuetext = AV15Name;
             AV20ExcelCellRange.setcellstyle( AV27excelCellStyle);
             AV12col = (short)(AV12col+1);
-            AV30GXV1 = (int)(AV30GXV1+1);
+            AV31GXV1 = (int)(AV31GXV1+1);
          }
          AV13row = 4;
          /* Using cursor P00AT3 */
@@ -275,6 +275,9 @@ namespace GeneXus.Programs {
          /* 'OPENDOCUMENT' Routine */
          returnInSub = false;
          AV10Filename = "LeaveReport-" + StringUtil.Trim( StringUtil.Str( (decimal)(DateTimeUtil.Year( Gx_date)), 10, 0)) + "-" + StringUtil.Trim( StringUtil.Str( (decimal)(DateTimeUtil.Month( Gx_date)), 10, 0)) + "-" + StringUtil.Trim( StringUtil.Str( (decimal)(DateTimeUtil.Day( Gx_date)), 10, 0)) + ".xlsx";
+         AV21excelSpreadsheet.open( AV10Filename);
+         AV29File.Source = AV10Filename;
+         AV29File.Delete();
          AV21excelSpreadsheet.open( AV10Filename);
       }
 
@@ -357,6 +360,7 @@ namespace GeneXus.Programs {
          P00AT5_A40000GXC1 = new decimal[1] ;
          P00AT5_n40000GXC1 = new bool[] {false} ;
          Gx_date = DateTime.MinValue;
+         AV29File = new GxFile(context.GetPhysicalPath());
          AV9ExcelDocument = new ExcelDocumentI();
          AV11Session = context.GetSession();
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.aemployeeleavereport__default(),
@@ -382,7 +386,7 @@ namespace GeneXus.Programs {
       private short A147EmployeeBalance ;
       private short AV14count ;
       private short AV17index ;
-      private int AV30GXV1 ;
+      private int AV31GXV1 ;
       private long AV22CompanyLocationId ;
       private long A100CompanyId ;
       private long A157CompanyLocationId ;
@@ -428,6 +432,7 @@ namespace GeneXus.Programs {
       private IGxSession AV11Session ;
       private ExcelDocumentI AV9ExcelDocument ;
       private GxSimpleCollection<string> AV8LeaveTypeNames ;
+      private GxFile AV29File ;
       private GeneXus.Programs.genexusoffice.office.excel.cells.SdtExcelCellRange AV20ExcelCellRange ;
       private GeneXus.Programs.genexusoffice.office.excel.style.SdtExcelCellStyle AV27excelCellStyle ;
    }

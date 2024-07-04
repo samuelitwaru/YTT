@@ -529,7 +529,7 @@ namespace GeneXus.Programs {
          A148EmployeeName = BC000J5_A148EmployeeName[0];
          A147EmployeeBalance = BC000J5_A147EmployeeBalance[0];
          pr_default.close(3);
-         if ( ( DateTimeUtil.ResetTime ( A129LeaveRequestStartDate ) < DateTimeUtil.ResetTime ( Gx_date ) ) && IsIns( )  )
+         if ( ( DateTimeUtil.ResetTime ( A129LeaveRequestStartDate ) < DateTimeUtil.ResetTime ( Gx_date ) ) && ! AV10checking )
          {
             GX_msglist.addItem("Invalid Leave start date", 1, "");
             AnyError = 1;
@@ -828,11 +828,6 @@ namespace GeneXus.Programs {
             if ( ( new checkemployeependingvacationleave(context).executeUdp(  A106EmployeeId,  A127LeaveRequestId) ) && ( StringUtil.StrCmp(A144LeaveTypeVacationLeave, "Yes") == 0 ) && IsIns( )  )
             {
                GX_msglist.addItem("You already have a pending vacation leave", 1, "");
-               AnyError = 1;
-            }
-            if ( ( DateTimeUtil.ResetTime ( A129LeaveRequestStartDate ) < DateTimeUtil.ResetTime ( Gx_date ) ) && IsIns( )  )
-            {
-               GX_msglist.addItem("Invalid Leave start date", 1, "");
                AnyError = 1;
             }
             /* Using cursor BC000J13 */

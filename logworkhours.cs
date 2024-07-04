@@ -365,6 +365,7 @@ namespace GeneXus.Programs {
             context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("vWORKHOURLOG", AV60WorkHourLog);
          }
          GxWebStd.gx_hidden_field( context, "vFORMWORKHOURLOGEMPLOYEEID", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV25FormWorkHourLogEmployeeId), 10, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, "vOLDDATE", context.localUtil.DToC( AV73OldDate, 0, "/"));
          GxWebStd.gx_hidden_field( context, "GRID1_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID1_nFirstRecordOnPage), 15, 0, ".", "")));
          GxWebStd.gx_hidden_field( context, "GRID1_nEOF", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID1_nEOF), 1, 0, ".", "")));
          GxWebStd.gx_hidden_field( context, "GRID1_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid1_Rows), 6, 0, ".", "")));
@@ -1261,7 +1262,7 @@ namespace GeneXus.Programs {
             GXPagingFrom2 = (int)(((subGrid1_Rows==0) ? 0 : GRID1_nFirstRecordOnPage));
             GXPagingTo2 = ((subGrid1_Rows==0) ? 10000 : subGrid1_fnc_Recordsperpage( )+1);
             /* Using cursor H004A2 */
-            pr_default.execute(0, new Object[] {AV75Udparg1, AV10date, GXPagingFrom2, GXPagingTo2});
+            pr_default.execute(0, new Object[] {AV76Udparg1, AV10date, GXPagingFrom2, GXPagingTo2});
             nGXsfl_86_idx = 1;
             sGXsfl_86_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_86_idx), 4, 0), 4, "0");
             SubsflControlProps_862( ) ;
@@ -1314,9 +1315,9 @@ namespace GeneXus.Programs {
 
       protected int subGrid1_fnc_Recordcount( )
       {
-         AV75Udparg1 = new getloggedinemployeeid(context).executeUdp( );
+         AV76Udparg1 = new getloggedinemployeeid(context).executeUdp( );
          /* Using cursor H004A3 */
-         pr_default.execute(1, new Object[] {AV75Udparg1, AV10date});
+         pr_default.execute(1, new Object[] {AV76Udparg1, AV10date});
          GRID1_nRecordCount = H004A3_AGRID1_nRecordCount[0];
          pr_default.close(1);
          return (int)(GRID1_nRecordCount) ;
@@ -1609,6 +1610,8 @@ namespace GeneXus.Programs {
          returnInSub = false;
          AV10date = Gx_date;
          AssignAttri("", false, "AV10date", context.localUtil.Format(AV10date, "99/99/99"));
+         AV73OldDate = AV10date;
+         AssignAttri("", false, "AV73OldDate", context.localUtil.Format(AV73OldDate, "99/99/99"));
          AV22FormWorkHourLogDate = Gx_date;
          AssignAttri("", false, "AV22FormWorkHourLogDate", context.localUtil.Format(AV22FormWorkHourLogDate, "99/99/99"));
          GXt_int1 = AV25FormWorkHourLogEmployeeId;
@@ -1829,8 +1832,15 @@ namespace GeneXus.Programs {
       {
          /* Date_Controlvaluechanged Routine */
          returnInSub = false;
+         if ( (DateTime.MinValue==AV10date) )
+         {
+            AV10date = AV73OldDate;
+            AssignAttri("", false, "AV10date", context.localUtil.Format(AV10date, "99/99/99"));
+         }
          AV22FormWorkHourLogDate = AV10date;
          AssignAttri("", false, "AV22FormWorkHourLogDate", context.localUtil.Format(AV22FormWorkHourLogDate, "99/99/99"));
+         AV73OldDate = AV10date;
+         AssignAttri("", false, "AV73OldDate", context.localUtil.Format(AV73OldDate, "99/99/99"));
          new getweeklyhours(context ).execute(  AV10date, out  AV57weeklyTotal, out  AV8DailyTotal) ;
          lblWeeklytotal_Caption = "Weekly Total "+AV57weeklyTotal;
          AssignProp("", false, lblWeeklytotal_Internalname, "Caption", lblWeeklytotal_Caption, true);
@@ -1879,12 +1889,12 @@ namespace GeneXus.Programs {
          {
             context.RollbackDataStores("logworkhours",pr_default);
             AV5Messages = AV60WorkHourLog.GetMessages();
-            AV74GXV1 = 1;
-            while ( AV74GXV1 <= AV5Messages.Count )
+            AV75GXV1 = 1;
+            while ( AV75GXV1 <= AV5Messages.Count )
             {
-               AV47message = ((GeneXus.Utils.SdtMessages_Message)AV5Messages.Item(AV74GXV1));
+               AV47message = ((GeneXus.Utils.SdtMessages_Message)AV5Messages.Item(AV75GXV1));
                GX_msglist.addItem(AV47message.gxTpr_Description);
-               AV74GXV1 = (int)(AV74GXV1+1);
+               AV75GXV1 = (int)(AV75GXV1+1);
             }
          }
          /*  Sending Event outputs  */
@@ -1917,7 +1927,7 @@ namespace GeneXus.Programs {
          AssignAttri("", false, "AV72IsLogHourOpen", AV72IsLogHourOpen);
          lblTtopentext_Visible = (AV72IsLogHourOpen ? 1 : 0);
          AssignProp("", false, lblTtopentext_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(lblTtopentext_Visible), 5, 0), true);
-         AV75Udparg1 = new getloggedinemployeeid(context).executeUdp( );
+         AV76Udparg1 = new getloggedinemployeeid(context).executeUdp( );
          /*  Sending Event outputs  */
       }
 
@@ -1990,12 +2000,12 @@ namespace GeneXus.Programs {
          {
             context.RollbackDataStores("logworkhours",pr_default);
             AV5Messages = AV60WorkHourLog.GetMessages();
-            AV76GXV2 = 1;
-            while ( AV76GXV2 <= AV5Messages.Count )
+            AV77GXV2 = 1;
+            while ( AV77GXV2 <= AV5Messages.Count )
             {
-               AV47message = ((GeneXus.Utils.SdtMessages_Message)AV5Messages.Item(AV76GXV2));
+               AV47message = ((GeneXus.Utils.SdtMessages_Message)AV5Messages.Item(AV77GXV2));
                GX_msglist.addItem(AV47message.gxTpr_Description);
-               AV76GXV2 = (int)(AV76GXV2+1);
+               AV77GXV2 = (int)(AV77GXV2+1);
             }
          }
       }
@@ -2041,7 +2051,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202462821154213", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247410455182", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2059,7 +2069,7 @@ namespace GeneXus.Programs {
          if ( nGXWrapped != 1 )
          {
             context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-            context.AddJavascriptSource("logworkhours.js", "?202462821154213", false, true);
+            context.AddJavascriptSource("logworkhours.js", "?20247410455182", false, true);
             context.AddJavascriptSource("Switch/switch.min.js", "", false, true);
             context.AddJavascriptSource("Switch/switch.min.js", "", false, true);
             context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
@@ -2547,8 +2557,8 @@ namespace GeneXus.Programs {
          setEventMetadata("'DOSAVE'",",oparms:[{av:'AV60WorkHourLog',fld:'vWORKHOURLOG',pic:''},{av:'AV27FormWorkHourLogId',fld:'vFORMWORKHOURLOGID',pic:'ZZZZZZZZZ9'},{av:'AV22FormWorkHourLogDate',fld:'vFORMWORKHOURLOGDATE',pic:''},{av:'AV26FormWorkHourLogHours',fld:'vFORMWORKHOURLOGHOURS',pic:'ZZZ9'},{av:'AV28FormWorkHourLogMinutes',fld:'vFORMWORKHOURLOGMINUTES',pic:'ZZZ9'},{av:'AV23FormWorkHourLogDescription',fld:'vFORMWORKHOURLOGDESCRIPTION',pic:''},{av:'AV24FormWorkHourLogDuration',fld:'vFORMWORKHOURLOGDURATION',pic:''},{av:'lblWeeklytotal_Caption',ctrl:'WEEKLYTOTAL',prop:'Caption'},{av:'lblDailytotal_Caption',ctrl:'DAILYTOTAL',prop:'Caption'},{av:'AV72IsLogHourOpen',fld:'vISLOGHOUROPEN',pic:''},{av:'lblTtopentext_Visible',ctrl:'TTOPENTEXT',prop:'Visible'}]}");
          setEventMetadata("'DOUSERACTION1'","{handler:'E114A1',iparms:[{av:'AV10date',fld:'vDATE',pic:''}]");
          setEventMetadata("'DOUSERACTION1'",",oparms:[{av:'AV27FormWorkHourLogId',fld:'vFORMWORKHOURLOGID',pic:'ZZZZZZZZZ9'},{av:'AV22FormWorkHourLogDate',fld:'vFORMWORKHOURLOGDATE',pic:''},{av:'AV26FormWorkHourLogHours',fld:'vFORMWORKHOURLOGHOURS',pic:'ZZZ9'},{av:'AV28FormWorkHourLogMinutes',fld:'vFORMWORKHOURLOGMINUTES',pic:'ZZZ9'},{av:'AV23FormWorkHourLogDescription',fld:'vFORMWORKHOURLOGDESCRIPTION',pic:''},{av:'AV24FormWorkHourLogDuration',fld:'vFORMWORKHOURLOGDURATION',pic:''}]}");
-         setEventMetadata("VDATE.CONTROLVALUECHANGED","{handler:'E144A2',iparms:[{av:'AV10date',fld:'vDATE',pic:''}]");
-         setEventMetadata("VDATE.CONTROLVALUECHANGED",",oparms:[{av:'AV22FormWorkHourLogDate',fld:'vFORMWORKHOURLOGDATE',pic:''},{av:'lblWeeklytotal_Caption',ctrl:'WEEKLYTOTAL',prop:'Caption'},{av:'lblDailytotal_Caption',ctrl:'DAILYTOTAL',prop:'Caption'},{av:'AV27FormWorkHourLogId',fld:'vFORMWORKHOURLOGID',pic:'ZZZZZZZZZ9'},{av:'AV26FormWorkHourLogHours',fld:'vFORMWORKHOURLOGHOURS',pic:'ZZZ9'},{av:'AV28FormWorkHourLogMinutes',fld:'vFORMWORKHOURLOGMINUTES',pic:'ZZZ9'},{av:'AV23FormWorkHourLogDescription',fld:'vFORMWORKHOURLOGDESCRIPTION',pic:''},{av:'AV24FormWorkHourLogDuration',fld:'vFORMWORKHOURLOGDURATION',pic:''}]}");
+         setEventMetadata("VDATE.CONTROLVALUECHANGED","{handler:'E144A2',iparms:[{av:'AV10date',fld:'vDATE',pic:''},{av:'AV73OldDate',fld:'vOLDDATE',pic:''}]");
+         setEventMetadata("VDATE.CONTROLVALUECHANGED",",oparms:[{av:'AV10date',fld:'vDATE',pic:''},{av:'AV22FormWorkHourLogDate',fld:'vFORMWORKHOURLOGDATE',pic:''},{av:'AV73OldDate',fld:'vOLDDATE',pic:''},{av:'lblWeeklytotal_Caption',ctrl:'WEEKLYTOTAL',prop:'Caption'},{av:'lblDailytotal_Caption',ctrl:'DAILYTOTAL',prop:'Caption'},{av:'AV27FormWorkHourLogId',fld:'vFORMWORKHOURLOGID',pic:'ZZZZZZZZZ9'},{av:'AV26FormWorkHourLogHours',fld:'vFORMWORKHOURLOGHOURS',pic:'ZZZ9'},{av:'AV28FormWorkHourLogMinutes',fld:'vFORMWORKHOURLOGMINUTES',pic:'ZZZ9'},{av:'AV23FormWorkHourLogDescription',fld:'vFORMWORKHOURLOGDESCRIPTION',pic:''},{av:'AV24FormWorkHourLogDuration',fld:'vFORMWORKHOURLOGDURATION',pic:''}]}");
          setEventMetadata("VUPDATE.CLICK","{handler:'E194A2',iparms:[{av:'A118WorkHourLogId',fld:'WORKHOURLOGID',pic:'ZZZZZZZZZ9',hsh:true},{av:'A106EmployeeId',fld:'EMPLOYEEID',pic:'ZZZZZZZZZ9',hsh:true},{av:'A119WorkHourLogDate',fld:'WORKHOURLOGDATE',pic:'',hsh:true},{av:'A121WorkHourLogHour',fld:'WORKHOURLOGHOUR',pic:'ZZZ9',hsh:true},{av:'A122WorkHourLogMinute',fld:'WORKHOURLOGMINUTE',pic:'ZZZ9',hsh:true},{av:'A123WorkHourLogDescription',fld:'WORKHOURLOGDESCRIPTION',pic:'',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9',hsh:true}]");
          setEventMetadata("VUPDATE.CLICK",",oparms:[{av:'AV27FormWorkHourLogId',fld:'vFORMWORKHOURLOGID',pic:'ZZZZZZZZZ9'},{av:'AV25FormWorkHourLogEmployeeId',fld:'vFORMWORKHOURLOGEMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'AV22FormWorkHourLogDate',fld:'vFORMWORKHOURLOGDATE',pic:''},{av:'AV26FormWorkHourLogHours',fld:'vFORMWORKHOURLOGHOURS',pic:'ZZZ9'},{av:'AV28FormWorkHourLogMinutes',fld:'vFORMWORKHOURLOGMINUTES',pic:'ZZZ9'},{av:'AV23FormWorkHourLogDescription',fld:'vFORMWORKHOURLOGDESCRIPTION',pic:''},{av:'dynavFormworkhourlogprojectid'},{av:'AV29FormWorkHourLogProjectId',fld:'vFORMWORKHOURLOGPROJECTID',pic:'ZZZZZZZZZ9'}]}");
          setEventMetadata("VDELETE.CLICK","{handler:'E174A2',iparms:[{av:'GRID1_nFirstRecordOnPage'},{av:'GRID1_nEOF'},{av:'subGrid1_Rows',ctrl:'GRID1',prop:'Rows'},{av:'AV10date',fld:'vDATE',pic:''},{av:'Gx_date',fld:'vTODAY',pic:'',hsh:true},{av:'dynavFormworkhourlogprojectid'},{av:'AV29FormWorkHourLogProjectId',fld:'vFORMWORKHOURLOGPROJECTID',pic:'ZZZZZZZZZ9'},{av:'A118WorkHourLogId',fld:'WORKHOURLOGID',pic:'ZZZZZZZZZ9',hsh:true},{av:'AV27FormWorkHourLogId',fld:'vFORMWORKHOURLOGID',pic:'ZZZZZZZZZ9'}]");
@@ -2596,6 +2606,7 @@ namespace GeneXus.Programs {
          GXKey = "";
          AV72IsLogHourOpen = false;
          AV60WorkHourLog = new SdtWorkHourLog(context);
+         AV73OldDate = DateTime.MinValue;
          Grid1_empowerer_Gridinternalname = "";
          GX_FocusControl = "";
          Form = new GXWebForm();
@@ -2726,8 +2737,8 @@ namespace GeneXus.Programs {
       private int edtWorkHourLogMinute_Enabled ;
       private int edtavUpdate_Visible ;
       private int edtavDelete_Visible ;
-      private int AV74GXV1 ;
-      private int AV76GXV2 ;
+      private int AV75GXV1 ;
+      private int AV77GXV2 ;
       private int idxLst ;
       private int subGrid1_Backcolor ;
       private int subGrid1_Allbackcolor ;
@@ -2743,7 +2754,7 @@ namespace GeneXus.Programs {
       private long A106EmployeeId ;
       private long A118WorkHourLogId ;
       private long GRID1_nCurrentRecord ;
-      private long AV75Udparg1 ;
+      private long AV76Udparg1 ;
       private long GRID1_nRecordCount ;
       private long AV42LastLoggedProjectId ;
       private long GXt_int1 ;
@@ -2852,6 +2863,7 @@ namespace GeneXus.Programs {
       private string subGrid1_Header ;
       private DateTime AV10date ;
       private DateTime Gx_date ;
+      private DateTime AV73OldDate ;
       private DateTime AV22FormWorkHourLogDate ;
       private DateTime A119WorkHourLogDate ;
       private bool entryPointCalled ;
@@ -2957,19 +2969,19 @@ namespace GeneXus.Programs {
      {
         Object[] prmH004A2;
         prmH004A2 = new Object[] {
-        new ParDef("AV75Udparg1",GXType.Int64,10,0) ,
+        new ParDef("AV76Udparg1",GXType.Int64,10,0) ,
         new ParDef("AV10date",GXType.Date,8,0) ,
         new ParDef("GXPagingFrom2",GXType.Int32,9,0) ,
         new ParDef("GXPagingTo2",GXType.Int32,9,0)
         };
         Object[] prmH004A3;
         prmH004A3 = new Object[] {
-        new ParDef("AV75Udparg1",GXType.Int64,10,0) ,
+        new ParDef("AV76Udparg1",GXType.Int64,10,0) ,
         new ParDef("AV10date",GXType.Date,8,0)
         };
         def= new CursorDef[] {
-            new CursorDef("H004A2", "SELECT T1.WorkHourLogMinute, T1.WorkHourLogId, T1.WorkHourLogHour, T1.WorkHourLogDescription, T1.WorkHourLogDuration, T1.EmployeeId, T2.ProjectName, T1.WorkHourLogDate, T1.ProjectId FROM (WorkHourLog T1 INNER JOIN Project T2 ON T2.ProjectId = T1.ProjectId) WHERE (T1.EmployeeId = :AV75Udparg1) AND (T1.WorkHourLogDate = :AV10date) ORDER BY T1.WorkHourLogId DESC  OFFSET :GXPagingFrom2 LIMIT CASE WHEN :GXPagingTo2 > 0 THEN :GXPagingTo2 ELSE 1e9 END",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH004A2,11, GxCacheFrequency.OFF ,true,false )
-           ,new CursorDef("H004A3", "SELECT COUNT(*) FROM (WorkHourLog T1 INNER JOIN Project T2 ON T2.ProjectId = T1.ProjectId) WHERE (T1.EmployeeId = :AV75Udparg1) AND (T1.WorkHourLogDate = :AV10date) ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH004A3,1, GxCacheFrequency.OFF ,true,false )
+            new CursorDef("H004A2", "SELECT T1.WorkHourLogMinute, T1.WorkHourLogId, T1.WorkHourLogHour, T1.WorkHourLogDescription, T1.WorkHourLogDuration, T1.EmployeeId, T2.ProjectName, T1.WorkHourLogDate, T1.ProjectId FROM (WorkHourLog T1 INNER JOIN Project T2 ON T2.ProjectId = T1.ProjectId) WHERE (T1.EmployeeId = :AV76Udparg1) AND (T1.WorkHourLogDate = :AV10date) ORDER BY T1.WorkHourLogId DESC  OFFSET :GXPagingFrom2 LIMIT CASE WHEN :GXPagingTo2 > 0 THEN :GXPagingTo2 ELSE 1e9 END",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH004A2,11, GxCacheFrequency.OFF ,true,false )
+           ,new CursorDef("H004A3", "SELECT COUNT(*) FROM (WorkHourLog T1 INNER JOIN Project T2 ON T2.ProjectId = T1.ProjectId) WHERE (T1.EmployeeId = :AV76Udparg1) AND (T1.WorkHourLogDate = :AV10date) ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH004A3,1, GxCacheFrequency.OFF ,true,false )
         };
      }
   }
