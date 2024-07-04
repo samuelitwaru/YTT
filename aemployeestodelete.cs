@@ -334,14 +334,14 @@ namespace GeneXus.Programs {
                 ((DateTime[]) buf[1])[0] = rslt.getGXDate(2);
                 ((string[]) buf[2])[0] = rslt.getVarchar(3);
                 ((long[]) buf[3])[0] = rslt.getLong(4);
-                ((string[]) buf[4])[0] = rslt.getString(5, 128);
+                ((string[]) buf[4])[0] = rslt.getString(5, 100);
                 return;
              case 1 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);
                 ((long[]) buf[1])[0] = rslt.getLong(2);
                 ((string[]) buf[2])[0] = rslt.getVarchar(3);
                 ((string[]) buf[3])[0] = rslt.getVarchar(4);
-                ((string[]) buf[4])[0] = rslt.getString(5, 128);
+                ((string[]) buf[4])[0] = rslt.getString(5, 100);
                 return;
        }
     }

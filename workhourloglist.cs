@@ -1239,7 +1239,7 @@ namespace GeneXus.Programs {
             lV54Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV54Workhourloglistds_1_filterfulltext), "%", "");
             lV54Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV54Workhourloglistds_1_filterfulltext), "%", "");
             lV54Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV54Workhourloglistds_1_filterfulltext), "%", "");
-            lV55Workhourloglistds_2_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV55Workhourloglistds_2_tfemployeename), 128, "%");
+            lV55Workhourloglistds_2_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV55Workhourloglistds_2_tfemployeename), 100, "%");
             lV57Workhourloglistds_4_tfprojectname = StringUtil.PadR( StringUtil.RTrim( AV57Workhourloglistds_4_tfprojectname), 100, "%");
             lV61Workhourloglistds_8_tfworkhourlogduration = StringUtil.Concat( StringUtil.RTrim( AV61Workhourloglistds_8_tfworkhourlogduration), "%", "");
             lV63Workhourloglistds_10_tfworkhourlogdescription = StringUtil.Concat( StringUtil.RTrim( AV63Workhourloglistds_10_tfworkhourlogdescription), "%", "");
@@ -1336,7 +1336,7 @@ namespace GeneXus.Programs {
          lV54Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV54Workhourloglistds_1_filterfulltext), "%", "");
          lV54Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV54Workhourloglistds_1_filterfulltext), "%", "");
          lV54Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV54Workhourloglistds_1_filterfulltext), "%", "");
-         lV55Workhourloglistds_2_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV55Workhourloglistds_2_tfemployeename), 128, "%");
+         lV55Workhourloglistds_2_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV55Workhourloglistds_2_tfemployeename), 100, "%");
          lV57Workhourloglistds_4_tfprojectname = StringUtil.PadR( StringUtil.RTrim( AV57Workhourloglistds_4_tfprojectname), 100, "%");
          lV61Workhourloglistds_8_tfworkhourlogduration = StringUtil.Concat( StringUtil.RTrim( AV61Workhourloglistds_8_tfworkhourlogduration), "%", "");
          lV63Workhourloglistds_10_tfworkhourlogdescription = StringUtil.Concat( StringUtil.RTrim( AV63Workhourloglistds_10_tfworkhourlogdescription), "%", "");
@@ -2425,7 +2425,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202462821155168", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247415553373", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2441,7 +2441,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("workhourloglist.js", "?202462821155169", false, true);
+         context.AddJavascriptSource("workhourloglist.js", "?20247415553375", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -2568,7 +2568,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtEmployeeName_Internalname,StringUtil.RTrim( A148EmployeeName),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtEmployeeName_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtEmployeeName_Visible,(short)0,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)128,(short)0,(short)0,(short)39,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtEmployeeName_Internalname,StringUtil.RTrim( A148EmployeeName),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtEmployeeName_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtEmployeeName_Visible,(short)0,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)100,(short)0,(short)0,(short)39,(short)0,(short)-1,(short)-1,(bool)true,(string)"Name",(string)"start",(bool)true,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -3903,8 +3903,8 @@ namespace GeneXus.Programs {
           new ParDef("lV54Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV54Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV54Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV55Workhourloglistds_2_tfemployeename",GXType.Char,128,0) ,
-          new ParDef("AV56Workhourloglistds_3_tfemployeename_sel",GXType.Char,128,0) ,
+          new ParDef("lV55Workhourloglistds_2_tfemployeename",GXType.Char,100,0) ,
+          new ParDef("AV56Workhourloglistds_3_tfemployeename_sel",GXType.Char,100,0) ,
           new ParDef("lV57Workhourloglistds_4_tfprojectname",GXType.Char,100,0) ,
           new ParDef("AV58Workhourloglistds_5_tfprojectname_sel",GXType.Char,100,0) ,
           new ParDef("AV59Workhourloglistds_6_tfworkhourlogdate",GXType.Date,8,0) ,
@@ -3926,8 +3926,8 @@ namespace GeneXus.Programs {
           new ParDef("lV54Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV54Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV54Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV55Workhourloglistds_2_tfemployeename",GXType.Char,128,0) ,
-          new ParDef("AV56Workhourloglistds_3_tfemployeename_sel",GXType.Char,128,0) ,
+          new ParDef("lV55Workhourloglistds_2_tfemployeename",GXType.Char,100,0) ,
+          new ParDef("AV56Workhourloglistds_3_tfemployeename_sel",GXType.Char,100,0) ,
           new ParDef("lV57Workhourloglistds_4_tfprojectname",GXType.Char,100,0) ,
           new ParDef("AV58Workhourloglistds_5_tfprojectname_sel",GXType.Char,100,0) ,
           new ParDef("AV59Workhourloglistds_6_tfworkhourlogdate",GXType.Date,8,0) ,
@@ -3964,7 +3964,7 @@ namespace GeneXus.Programs {
                 ((DateTime[]) buf[7])[0] = rslt.getGXDate(8);
                 ((long[]) buf[8])[0] = rslt.getLong(9);
                 ((string[]) buf[9])[0] = rslt.getString(10, 100);
-                ((string[]) buf[10])[0] = rslt.getString(11, 128);
+                ((string[]) buf[10])[0] = rslt.getString(11, 100);
                 return;
              case 1 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);

@@ -626,7 +626,7 @@ namespace GeneXus.Programs {
                 ((long[]) buf[0])[0] = rslt.getLong(1);
                 ((long[]) buf[1])[0] = rslt.getLong(2);
                 ((long[]) buf[2])[0] = rslt.getLong(3);
-                ((string[]) buf[3])[0] = rslt.getString(4, 128);
+                ((string[]) buf[3])[0] = rslt.getString(4, 100);
                 return;
              case 2 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);

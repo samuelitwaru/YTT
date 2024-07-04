@@ -286,7 +286,7 @@ namespace GeneXus.Programs {
          lV55Leaverequestpendingds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV55Leaverequestpendingds_1_filterfulltext), "%", "");
          lV55Leaverequestpendingds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV55Leaverequestpendingds_1_filterfulltext), "%", "");
          lV55Leaverequestpendingds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV55Leaverequestpendingds_1_filterfulltext), "%", "");
-         lV56Leaverequestpendingds_2_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV56Leaverequestpendingds_2_tfemployeename), 128, "%");
+         lV56Leaverequestpendingds_2_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV56Leaverequestpendingds_2_tfemployeename), 100, "%");
          lV58Leaverequestpendingds_4_tfleavetypename = StringUtil.PadR( StringUtil.RTrim( AV58Leaverequestpendingds_4_tfleavetypename), 100, "%");
          lV64Leaverequestpendingds_10_tfleaverequesthalfday = StringUtil.PadR( StringUtil.RTrim( AV64Leaverequestpendingds_10_tfleaverequesthalfday), 20, "%");
          /* Using cursor P006V2 */
@@ -399,7 +399,7 @@ namespace GeneXus.Programs {
          lV55Leaverequestpendingds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV55Leaverequestpendingds_1_filterfulltext), "%", "");
          lV55Leaverequestpendingds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV55Leaverequestpendingds_1_filterfulltext), "%", "");
          lV55Leaverequestpendingds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV55Leaverequestpendingds_1_filterfulltext), "%", "");
-         lV56Leaverequestpendingds_2_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV56Leaverequestpendingds_2_tfemployeename), 128, "%");
+         lV56Leaverequestpendingds_2_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV56Leaverequestpendingds_2_tfemployeename), 100, "%");
          lV58Leaverequestpendingds_4_tfleavetypename = StringUtil.PadR( StringUtil.RTrim( AV58Leaverequestpendingds_4_tfleavetypename), 100, "%");
          lV64Leaverequestpendingds_10_tfleaverequesthalfday = StringUtil.PadR( StringUtil.RTrim( AV64Leaverequestpendingds_10_tfleaverequesthalfday), 20, "%");
          /* Using cursor P006V3 */
@@ -516,7 +516,7 @@ namespace GeneXus.Programs {
          lV55Leaverequestpendingds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV55Leaverequestpendingds_1_filterfulltext), "%", "");
          lV55Leaverequestpendingds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV55Leaverequestpendingds_1_filterfulltext), "%", "");
          lV55Leaverequestpendingds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV55Leaverequestpendingds_1_filterfulltext), "%", "");
-         lV56Leaverequestpendingds_2_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV56Leaverequestpendingds_2_tfemployeename), 128, "%");
+         lV56Leaverequestpendingds_2_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV56Leaverequestpendingds_2_tfemployeename), 100, "%");
          lV58Leaverequestpendingds_4_tfleavetypename = StringUtil.PadR( StringUtil.RTrim( AV58Leaverequestpendingds_4_tfleavetypename), 100, "%");
          lV64Leaverequestpendingds_10_tfleaverequesthalfday = StringUtil.PadR( StringUtil.RTrim( AV64Leaverequestpendingds_10_tfleaverequesthalfday), 20, "%");
          /* Using cursor P006V4 */
@@ -1381,8 +1381,8 @@ namespace GeneXus.Programs {
           new ParDef("lV55Leaverequestpendingds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV55Leaverequestpendingds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV55Leaverequestpendingds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV56Leaverequestpendingds_2_tfemployeename",GXType.Char,128,0) ,
-          new ParDef("AV57Leaverequestpendingds_3_tfemployeename_sel",GXType.Char,128,0) ,
+          new ParDef("lV56Leaverequestpendingds_2_tfemployeename",GXType.Char,100,0) ,
+          new ParDef("AV57Leaverequestpendingds_3_tfemployeename_sel",GXType.Char,100,0) ,
           new ParDef("lV58Leaverequestpendingds_4_tfleavetypename",GXType.Char,100,0) ,
           new ParDef("AV59Leaverequestpendingds_5_tfleavetypename_sel",GXType.Char,100,0) ,
           new ParDef("AV60Leaverequestpendingds_6_tfleaverequeststartdate",GXType.Date,8,0) ,
@@ -1401,8 +1401,8 @@ namespace GeneXus.Programs {
           new ParDef("lV55Leaverequestpendingds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV55Leaverequestpendingds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV55Leaverequestpendingds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV56Leaverequestpendingds_2_tfemployeename",GXType.Char,128,0) ,
-          new ParDef("AV57Leaverequestpendingds_3_tfemployeename_sel",GXType.Char,128,0) ,
+          new ParDef("lV56Leaverequestpendingds_2_tfemployeename",GXType.Char,100,0) ,
+          new ParDef("AV57Leaverequestpendingds_3_tfemployeename_sel",GXType.Char,100,0) ,
           new ParDef("lV58Leaverequestpendingds_4_tfleavetypename",GXType.Char,100,0) ,
           new ParDef("AV59Leaverequestpendingds_5_tfleavetypename_sel",GXType.Char,100,0) ,
           new ParDef("AV60Leaverequestpendingds_6_tfleaverequeststartdate",GXType.Date,8,0) ,
@@ -1421,8 +1421,8 @@ namespace GeneXus.Programs {
           new ParDef("lV55Leaverequestpendingds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV55Leaverequestpendingds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV55Leaverequestpendingds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV56Leaverequestpendingds_2_tfemployeename",GXType.Char,128,0) ,
-          new ParDef("AV57Leaverequestpendingds_3_tfemployeename_sel",GXType.Char,128,0) ,
+          new ParDef("lV56Leaverequestpendingds_2_tfemployeename",GXType.Char,100,0) ,
+          new ParDef("AV57Leaverequestpendingds_3_tfemployeename_sel",GXType.Char,100,0) ,
           new ParDef("lV58Leaverequestpendingds_4_tfleavetypename",GXType.Char,100,0) ,
           new ParDef("AV59Leaverequestpendingds_5_tfleavetypename_sel",GXType.Char,100,0) ,
           new ParDef("AV60Leaverequestpendingds_6_tfleaverequeststartdate",GXType.Date,8,0) ,
@@ -1452,7 +1452,7 @@ namespace GeneXus.Programs {
              case 0 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);
                 ((string[]) buf[1])[0] = rslt.getString(2, 20);
-                ((string[]) buf[2])[0] = rslt.getString(3, 128);
+                ((string[]) buf[2])[0] = rslt.getString(3, 100);
                 ((long[]) buf[3])[0] = rslt.getLong(4);
                 ((long[]) buf[4])[0] = rslt.getLong(5);
                 ((decimal[]) buf[5])[0] = rslt.getDecimal(6);
@@ -1474,7 +1474,7 @@ namespace GeneXus.Programs {
                 ((DateTime[]) buf[7])[0] = rslt.getGXDate(7);
                 ((DateTime[]) buf[8])[0] = rslt.getGXDate(8);
                 ((string[]) buf[9])[0] = rslt.getString(9, 100);
-                ((string[]) buf[10])[0] = rslt.getString(10, 128);
+                ((string[]) buf[10])[0] = rslt.getString(10, 100);
                 ((long[]) buf[11])[0] = rslt.getLong(11);
                 return;
              case 2 :
@@ -1488,7 +1488,7 @@ namespace GeneXus.Programs {
                 ((DateTime[]) buf[7])[0] = rslt.getGXDate(7);
                 ((DateTime[]) buf[8])[0] = rslt.getGXDate(8);
                 ((string[]) buf[9])[0] = rslt.getString(9, 100);
-                ((string[]) buf[10])[0] = rslt.getString(10, 128);
+                ((string[]) buf[10])[0] = rslt.getString(10, 100);
                 ((long[]) buf[11])[0] = rslt.getLong(11);
                 return;
        }

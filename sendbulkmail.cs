@@ -290,7 +290,7 @@ namespace GeneXus.Programs {
                 ((bool[]) buf[1])[0] = rslt.getBool(2);
                 ((long[]) buf[2])[0] = rslt.getLong(3);
                 ((string[]) buf[3])[0] = rslt.getVarchar(4);
-                ((string[]) buf[4])[0] = rslt.getString(5, 128);
+                ((string[]) buf[4])[0] = rslt.getString(5, 100);
                 ((long[]) buf[5])[0] = rslt.getLong(6);
                 return;
        }

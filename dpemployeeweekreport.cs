@@ -533,7 +533,7 @@ namespace GeneXus.Programs {
                 ((bool[]) buf[1])[0] = rslt.getBool(2);
                 ((long[]) buf[2])[0] = rslt.getLong(3);
                 ((long[]) buf[3])[0] = rslt.getLong(4);
-                ((string[]) buf[4])[0] = rslt.getString(5, 128);
+                ((string[]) buf[4])[0] = rslt.getString(5, 100);
                 ((short[]) buf[5])[0] = rslt.getShort(6);
                 ((bool[]) buf[6])[0] = rslt.wasNull(6);
                 ((short[]) buf[7])[0] = rslt.getShort(7);

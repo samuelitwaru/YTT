@@ -343,7 +343,7 @@ namespace GeneXus.Programs {
          lV61Employeewwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV61Employeewwds_1_filterfulltext), "%", "");
          lV61Employeewwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV61Employeewwds_1_filterfulltext), "%", "");
          lV61Employeewwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV61Employeewwds_1_filterfulltext), "%", "");
-         lV62Employeewwds_2_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV62Employeewwds_2_tfemployeename), 128, "%");
+         lV62Employeewwds_2_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV62Employeewwds_2_tfemployeename), 100, "%");
          lV64Employeewwds_4_tfemployeeemail = StringUtil.Concat( StringUtil.RTrim( AV64Employeewwds_4_tfemployeeemail), "%", "");
          /* Using cursor P006T2 */
          pr_default.execute(0, new Object[] {lV61Employeewwds_1_filterfulltext, lV61Employeewwds_1_filterfulltext, lV61Employeewwds_1_filterfulltext, lV61Employeewwds_1_filterfulltext, lV62Employeewwds_2_tfemployeename, AV63Employeewwds_3_tfemployeename_sel, lV64Employeewwds_4_tfemployeeemail, AV65Employeewwds_5_tfemployeeemail_sel, AV68Employeewwds_8_tfemployeevactiondays, AV69Employeewwds_9_tfemployeevactiondays_to, AV70Employeewwds_10_tfemployeebalance, AV71Employeewwds_11_tfemployeebalance_to, AV72Udparg12});
@@ -915,8 +915,8 @@ namespace GeneXus.Programs {
           new ParDef("lV61Employeewwds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV61Employeewwds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV61Employeewwds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV62Employeewwds_2_tfemployeename",GXType.Char,128,0) ,
-          new ParDef("AV63Employeewwds_3_tfemployeename_sel",GXType.Char,128,0) ,
+          new ParDef("lV62Employeewwds_2_tfemployeename",GXType.Char,100,0) ,
+          new ParDef("AV63Employeewwds_3_tfemployeename_sel",GXType.Char,100,0) ,
           new ParDef("lV64Employeewwds_4_tfemployeeemail",GXType.VarChar,100,0) ,
           new ParDef("AV65Employeewwds_5_tfemployeeemail_sel",GXType.VarChar,100,0) ,
           new ParDef("AV68Employeewwds_8_tfemployeevactiondays",GXType.Int16,4,0) ,
@@ -945,7 +945,7 @@ namespace GeneXus.Programs {
                 ((bool[]) buf[4])[0] = rslt.getBool(5);
                 ((bool[]) buf[5])[0] = rslt.getBool(6);
                 ((string[]) buf[6])[0] = rslt.getVarchar(7);
-                ((string[]) buf[7])[0] = rslt.getString(8, 128);
+                ((string[]) buf[7])[0] = rslt.getString(8, 100);
                 ((string[]) buf[8])[0] = rslt.getString(9, 100);
                 return;
        }

@@ -374,7 +374,7 @@ namespace GeneXus.Programs {
          lV56Leaverequestapprovedds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV56Leaverequestapprovedds_1_filterfulltext), "%", "");
          lV56Leaverequestapprovedds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV56Leaverequestapprovedds_1_filterfulltext), "%", "");
          lV56Leaverequestapprovedds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV56Leaverequestapprovedds_1_filterfulltext), "%", "");
-         lV57Leaverequestapprovedds_2_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV57Leaverequestapprovedds_2_tfemployeename), 128, "%");
+         lV57Leaverequestapprovedds_2_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV57Leaverequestapprovedds_2_tfemployeename), 100, "%");
          lV59Leaverequestapprovedds_4_tfleavetypename = StringUtil.PadR( StringUtil.RTrim( AV59Leaverequestapprovedds_4_tfleavetypename), 100, "%");
          lV65Leaverequestapprovedds_10_tfleaverequesthalfday = StringUtil.PadR( StringUtil.RTrim( AV65Leaverequestapprovedds_10_tfleaverequesthalfday), 20, "%");
          /* Using cursor P006X2 */
@@ -1045,8 +1045,8 @@ namespace GeneXus.Programs {
           new ParDef("lV56Leaverequestapprovedds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV56Leaverequestapprovedds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV56Leaverequestapprovedds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV57Leaverequestapprovedds_2_tfemployeename",GXType.Char,128,0) ,
-          new ParDef("AV58Leaverequestapprovedds_3_tfemployeename_sel",GXType.Char,128,0) ,
+          new ParDef("lV57Leaverequestapprovedds_2_tfemployeename",GXType.Char,100,0) ,
+          new ParDef("AV58Leaverequestapprovedds_3_tfemployeename_sel",GXType.Char,100,0) ,
           new ParDef("lV59Leaverequestapprovedds_4_tfleavetypename",GXType.Char,100,0) ,
           new ParDef("AV60Leaverequestapprovedds_5_tfleavetypename_sel",GXType.Char,100,0) ,
           new ParDef("AV61Leaverequestapprovedds_6_tfleaverequeststartdate",GXType.Date,8,0) ,
@@ -1082,7 +1082,7 @@ namespace GeneXus.Programs {
                 ((DateTime[]) buf[7])[0] = rslt.getGXDate(7);
                 ((DateTime[]) buf[8])[0] = rslt.getGXDate(8);
                 ((string[]) buf[9])[0] = rslt.getString(9, 100);
-                ((string[]) buf[10])[0] = rslt.getString(10, 128);
+                ((string[]) buf[10])[0] = rslt.getString(10, 100);
                 ((long[]) buf[11])[0] = rslt.getLong(11);
                 return;
        }

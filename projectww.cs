@@ -1215,7 +1215,7 @@ namespace GeneXus.Programs {
             lV55Projectwwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV55Projectwwds_1_filterfulltext), "%", "");
             lV56Projectwwds_2_tfprojectname = StringUtil.PadR( StringUtil.RTrim( AV56Projectwwds_2_tfprojectname), 100, "%");
             lV58Projectwwds_4_tfprojectdescription = StringUtil.Concat( StringUtil.RTrim( AV58Projectwwds_4_tfprojectdescription), "%", "");
-            lV61Projectwwds_7_tfprojectmanagername = StringUtil.PadR( StringUtil.RTrim( AV61Projectwwds_7_tfprojectmanagername), 128, "%");
+            lV61Projectwwds_7_tfprojectmanagername = StringUtil.PadR( StringUtil.RTrim( AV61Projectwwds_7_tfprojectmanagername), 100, "%");
             /* Using cursor H00592 */
             pr_default.execute(0, new Object[] {lV55Projectwwds_1_filterfulltext, lV55Projectwwds_1_filterfulltext, lV55Projectwwds_1_filterfulltext, lV55Projectwwds_1_filterfulltext, lV55Projectwwds_1_filterfulltext, lV56Projectwwds_2_tfprojectname, AV57Projectwwds_3_tfprojectname_sel, lV58Projectwwds_4_tfprojectdescription, AV59Projectwwds_5_tfprojectdescription_sel, lV61Projectwwds_7_tfprojectmanagername, AV62Projectwwds_8_tfprojectmanagername_sel, GXPagingFrom2, GXPagingTo2, GXPagingTo2});
             nGXsfl_41_idx = 1;
@@ -1303,7 +1303,7 @@ namespace GeneXus.Programs {
          lV55Projectwwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV55Projectwwds_1_filterfulltext), "%", "");
          lV56Projectwwds_2_tfprojectname = StringUtil.PadR( StringUtil.RTrim( AV56Projectwwds_2_tfprojectname), 100, "%");
          lV58Projectwwds_4_tfprojectdescription = StringUtil.Concat( StringUtil.RTrim( AV58Projectwwds_4_tfprojectdescription), "%", "");
-         lV61Projectwwds_7_tfprojectmanagername = StringUtil.PadR( StringUtil.RTrim( AV61Projectwwds_7_tfprojectmanagername), 128, "%");
+         lV61Projectwwds_7_tfprojectmanagername = StringUtil.PadR( StringUtil.RTrim( AV61Projectwwds_7_tfprojectmanagername), 100, "%");
          /* Using cursor H00593 */
          pr_default.execute(1, new Object[] {lV55Projectwwds_1_filterfulltext, lV55Projectwwds_1_filterfulltext, lV55Projectwwds_1_filterfulltext, lV55Projectwwds_1_filterfulltext, lV55Projectwwds_1_filterfulltext, lV56Projectwwds_2_tfprojectname, AV57Projectwwds_3_tfprojectname_sel, lV58Projectwwds_4_tfprojectdescription, AV59Projectwwds_5_tfprojectdescription_sel, lV61Projectwwds_7_tfprojectmanagername, AV62Projectwwds_8_tfprojectmanagername_sel});
          GRID_nRecordCount = H00593_AGRID_nRecordCount[0];
@@ -2391,7 +2391,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202462821164150", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024741556943", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2407,7 +2407,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("projectww.js", "?202462821164151", false, true);
+         context.AddJavascriptSource("projectww.js", "?2024741556945", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -2581,7 +2581,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtProjectManagerName_Internalname,StringUtil.RTrim( A167ProjectManagerName),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtProjectManagerName_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn hidden-xs",(string)"",(int)edtProjectManagerName_Visible,(short)0,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)128,(short)0,(short)0,(short)41,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtProjectManagerName_Internalname,StringUtil.RTrim( A167ProjectManagerName),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtProjectManagerName_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn hidden-xs",(string)"",(int)edtProjectManagerName_Visible,(short)0,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)100,(short)0,(short)0,(short)41,(short)0,(short)-1,(short)-1,(bool)true,(string)"Name",(string)"start",(bool)true,(string)""});
             send_integrity_lvl_hashes592( ) ;
             GridContainer.AddRow(GridRow);
             nGXsfl_41_idx = ((subGrid_Islastpage==1)&&(nGXsfl_41_idx+1>subGrid_fnc_Recordsperpage( )) ? 1 : nGXsfl_41_idx+1);
@@ -3642,8 +3642,8 @@ namespace GeneXus.Programs {
           new ParDef("AV57Projectwwds_3_tfprojectname_sel",GXType.Char,100,0) ,
           new ParDef("lV58Projectwwds_4_tfprojectdescription",GXType.VarChar,200,0) ,
           new ParDef("AV59Projectwwds_5_tfprojectdescription_sel",GXType.VarChar,200,0) ,
-          new ParDef("lV61Projectwwds_7_tfprojectmanagername",GXType.Char,128,0) ,
-          new ParDef("AV62Projectwwds_8_tfprojectmanagername_sel",GXType.Char,128,0) ,
+          new ParDef("lV61Projectwwds_7_tfprojectmanagername",GXType.Char,100,0) ,
+          new ParDef("AV62Projectwwds_8_tfprojectmanagername_sel",GXType.Char,100,0) ,
           new ParDef("GXPagingFrom2",GXType.Int32,9,0) ,
           new ParDef("GXPagingTo2",GXType.Int32,9,0) ,
           new ParDef("GXPagingTo2",GXType.Int32,9,0)
@@ -3659,8 +3659,8 @@ namespace GeneXus.Programs {
           new ParDef("AV57Projectwwds_3_tfprojectname_sel",GXType.Char,100,0) ,
           new ParDef("lV58Projectwwds_4_tfprojectdescription",GXType.VarChar,200,0) ,
           new ParDef("AV59Projectwwds_5_tfprojectdescription_sel",GXType.VarChar,200,0) ,
-          new ParDef("lV61Projectwwds_7_tfprojectmanagername",GXType.Char,128,0) ,
-          new ParDef("AV62Projectwwds_8_tfprojectmanagername_sel",GXType.Char,128,0)
+          new ParDef("lV61Projectwwds_7_tfprojectmanagername",GXType.Char,100,0) ,
+          new ParDef("AV62Projectwwds_8_tfprojectmanagername_sel",GXType.Char,100,0)
           };
           def= new CursorDef[] {
               new CursorDef("H00592", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00592,11, GxCacheFrequency.OFF ,true,false )
@@ -3678,7 +3678,7 @@ namespace GeneXus.Programs {
              case 0 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);
                 ((bool[]) buf[1])[0] = rslt.wasNull(1);
-                ((string[]) buf[2])[0] = rslt.getString(2, 128);
+                ((string[]) buf[2])[0] = rslt.getString(2, 100);
                 ((string[]) buf[3])[0] = rslt.getString(3, 20);
                 ((string[]) buf[4])[0] = rslt.getVarchar(4);
                 ((string[]) buf[5])[0] = rslt.getString(5, 100);

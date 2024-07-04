@@ -756,7 +756,7 @@ namespace GeneXus.Programs {
             GxWebStd.gx_single_line_edit( context, edtavEmployee_employeeid_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(AV7Employee.gxTpr_Employeeid), 10, 0, ".", "")), StringUtil.LTrim( context.localUtil.Format( (decimal)(AV7Employee.gxTpr_Employeeid), "ZZZZZZZZZ9")), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+TempTags+" onchange=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onblur(this,79);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavEmployee_employeeid_Jsonclick, 0, "Attribute", "", "", "", "", edtavEmployee_employeeid_Visible, 1, 0, "text", "1", 10, "chr", 1, "row", 10, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_CreateEmployee.htm");
             /* Single line edit */
             TempTags = "  onfocus=\"gx.evt.onfocus(this, 80,'',false,'" + sGXsfl_58_idx + "',0)\"";
-            GxWebStd.gx_single_line_edit( context, edtavEmployee_employeename_Internalname, StringUtil.RTrim( AV7Employee.gxTpr_Employeename), StringUtil.RTrim( context.localUtil.Format( AV7Employee.gxTpr_Employeename, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,80);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavEmployee_employeename_Jsonclick, 0, "Attribute", "", "", "", "", edtavEmployee_employeename_Visible, 1, 0, "text", "", 80, "chr", 1, "row", 128, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_CreateEmployee.htm");
+            GxWebStd.gx_single_line_edit( context, edtavEmployee_employeename_Internalname, StringUtil.RTrim( AV7Employee.gxTpr_Employeename), StringUtil.RTrim( context.localUtil.Format( AV7Employee.gxTpr_Employeename, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,80);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavEmployee_employeename_Jsonclick, 0, "Attribute", "", "", "", "", edtavEmployee_employeename_Visible, 1, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_CreateEmployee.htm");
             /* Single line edit */
             TempTags = "  onfocus=\"gx.evt.onfocus(this, 81,'',false,'" + sGXsfl_58_idx + "',0)\"";
             GxWebStd.gx_single_line_edit( context, edtavEmployee_companyname_Internalname, StringUtil.RTrim( AV7Employee.gxTpr_Companyname), StringUtil.RTrim( context.localUtil.Format( AV7Employee.gxTpr_Companyname, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,81);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavEmployee_companyname_Jsonclick, 0, "Attribute", "", "", "", "", edtavEmployee_companyname_Visible, 1, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_CreateEmployee.htm");
@@ -1952,7 +1952,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202462821153933", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024741555799", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1968,7 +1968,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("createemployee.js", "?202462821153933", false, true);
+         context.AddJavascriptSource("createemployee.js", "?2024741555799", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/GridEmpowerer/GridEmpowererRender.js", "", false, true);
          /* End function include_jscripts */

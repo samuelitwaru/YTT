@@ -327,7 +327,7 @@ namespace GeneXus.Programs {
          lV52Projectwwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV52Projectwwds_1_filterfulltext), "%", "");
          lV53Projectwwds_2_tfprojectname = StringUtil.PadR( StringUtil.RTrim( AV53Projectwwds_2_tfprojectname), 100, "%");
          lV55Projectwwds_4_tfprojectdescription = StringUtil.Concat( StringUtil.RTrim( AV55Projectwwds_4_tfprojectdescription), "%", "");
-         lV58Projectwwds_7_tfprojectmanagername = StringUtil.PadR( StringUtil.RTrim( AV58Projectwwds_7_tfprojectmanagername), 128, "%");
+         lV58Projectwwds_7_tfprojectmanagername = StringUtil.PadR( StringUtil.RTrim( AV58Projectwwds_7_tfprojectmanagername), 100, "%");
          /* Using cursor P00B42 */
          pr_default.execute(0, new Object[] {lV52Projectwwds_1_filterfulltext, lV52Projectwwds_1_filterfulltext, lV52Projectwwds_1_filterfulltext, lV52Projectwwds_1_filterfulltext, lV52Projectwwds_1_filterfulltext, lV53Projectwwds_2_tfprojectname, AV54Projectwwds_3_tfprojectname_sel, lV55Projectwwds_4_tfprojectdescription, AV56Projectwwds_5_tfprojectdescription_sel, lV58Projectwwds_7_tfprojectmanagername, AV59Projectwwds_8_tfprojectmanagername_sel});
          while ( (pr_default.getStatus(0) != 101) )
@@ -827,8 +827,8 @@ namespace GeneXus.Programs {
           new ParDef("AV54Projectwwds_3_tfprojectname_sel",GXType.Char,100,0) ,
           new ParDef("lV55Projectwwds_4_tfprojectdescription",GXType.VarChar,200,0) ,
           new ParDef("AV56Projectwwds_5_tfprojectdescription_sel",GXType.VarChar,200,0) ,
-          new ParDef("lV58Projectwwds_7_tfprojectmanagername",GXType.Char,128,0) ,
-          new ParDef("AV59Projectwwds_8_tfprojectmanagername_sel",GXType.Char,128,0)
+          new ParDef("lV58Projectwwds_7_tfprojectmanagername",GXType.Char,100,0) ,
+          new ParDef("AV59Projectwwds_8_tfprojectmanagername_sel",GXType.Char,100,0)
           };
           def= new CursorDef[] {
               new CursorDef("P00B42", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00B42,100, GxCacheFrequency.OFF ,true,false )
@@ -845,7 +845,7 @@ namespace GeneXus.Programs {
              case 0 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);
                 ((bool[]) buf[1])[0] = rslt.wasNull(1);
-                ((string[]) buf[2])[0] = rslt.getString(2, 128);
+                ((string[]) buf[2])[0] = rslt.getString(2, 100);
                 ((string[]) buf[3])[0] = rslt.getVarchar(3);
                 ((string[]) buf[4])[0] = rslt.getString(4, 100);
                 ((string[]) buf[5])[0] = rslt.getString(5, 20);

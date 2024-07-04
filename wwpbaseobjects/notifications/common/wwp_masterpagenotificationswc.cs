@@ -1412,7 +1412,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20246282184290", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247415495668", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1428,7 +1428,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("wwpbaseobjects/notifications/common/wwp_masterpagenotificationswc.js", "?20246282184290", false, true);
+         context.AddJavascriptSource("wwpbaseobjects/notifications/common/wwp_masterpagenotificationswc.js", "?20247415495669", false, true);
          /* End function include_jscripts */
       }
 

@@ -464,7 +464,7 @@ namespace GeneXus.Programs {
           };
           Object[] prmP00AT5;
           prmP00AT5 = new Object[] {
-          new ParDef("EmployeeName",GXType.Char,128,0) ,
+          new ParDef("EmployeeName",GXType.Char,100,0) ,
           new ParDef("AV28Date",GXType.Date,8,0) ,
           new ParDef("CompanyId",GXType.Int64,10,0)
           };
@@ -492,7 +492,7 @@ namespace GeneXus.Programs {
              case 1 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);
                 ((long[]) buf[1])[0] = rslt.getLong(2);
-                ((string[]) buf[2])[0] = rslt.getString(3, 128);
+                ((string[]) buf[2])[0] = rslt.getString(3, 100);
                 ((short[]) buf[3])[0] = rslt.getShort(4);
                 ((long[]) buf[4])[0] = rslt.getLong(5);
                 return;

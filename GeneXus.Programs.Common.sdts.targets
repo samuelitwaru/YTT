@@ -6,6 +6,7 @@
 
 <ItemGroup>
  	<Compile Include="$(WebDirectory)\type_SdtColorSDTCollection_ColorSDT.cs" />
+ 	<Compile Include="$(WebDirectory)\type_SdtEmployeeListSDT_EmployeeListSDTItem.cs" />
  	<Compile Include="$(WebDirectory)\genexusreporting\type_SdtQueryViewerElements_Element.cs" />
  	<Compile Include="$(WebDirectory)\genexusreporting\type_SdtQueryViewerElements_Element_Filter.cs" />
  	<Compile Include="$(WebDirectory)\genexusreporting\type_SdtQueryViewerElements_Element_ExpandCollapse.cs" />

@@ -374,7 +374,7 @@ namespace GeneXus.Programs {
          lV57Leaverequestpendingds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV57Leaverequestpendingds_1_filterfulltext), "%", "");
          lV57Leaverequestpendingds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV57Leaverequestpendingds_1_filterfulltext), "%", "");
          lV57Leaverequestpendingds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV57Leaverequestpendingds_1_filterfulltext), "%", "");
-         lV58Leaverequestpendingds_2_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV58Leaverequestpendingds_2_tfemployeename), 128, "%");
+         lV58Leaverequestpendingds_2_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV58Leaverequestpendingds_2_tfemployeename), 100, "%");
          lV60Leaverequestpendingds_4_tfleavetypename = StringUtil.PadR( StringUtil.RTrim( AV60Leaverequestpendingds_4_tfleavetypename), 100, "%");
          lV66Leaverequestpendingds_10_tfleaverequesthalfday = StringUtil.PadR( StringUtil.RTrim( AV66Leaverequestpendingds_10_tfleaverequesthalfday), 20, "%");
          /* Using cursor P006U2 */
@@ -1045,8 +1045,8 @@ namespace GeneXus.Programs {
           new ParDef("lV57Leaverequestpendingds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV57Leaverequestpendingds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV57Leaverequestpendingds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV58Leaverequestpendingds_2_tfemployeename",GXType.Char,128,0) ,
-          new ParDef("AV59Leaverequestpendingds_3_tfemployeename_sel",GXType.Char,128,0) ,
+          new ParDef("lV58Leaverequestpendingds_2_tfemployeename",GXType.Char,100,0) ,
+          new ParDef("AV59Leaverequestpendingds_3_tfemployeename_sel",GXType.Char,100,0) ,
           new ParDef("lV60Leaverequestpendingds_4_tfleavetypename",GXType.Char,100,0) ,
           new ParDef("AV61Leaverequestpendingds_5_tfleavetypename_sel",GXType.Char,100,0) ,
           new ParDef("AV62Leaverequestpendingds_6_tfleaverequeststartdate",GXType.Date,8,0) ,
@@ -1082,7 +1082,7 @@ namespace GeneXus.Programs {
                 ((DateTime[]) buf[7])[0] = rslt.getGXDate(7);
                 ((DateTime[]) buf[8])[0] = rslt.getGXDate(8);
                 ((string[]) buf[9])[0] = rslt.getString(9, 100);
-                ((string[]) buf[10])[0] = rslt.getString(10, 128);
+                ((string[]) buf[10])[0] = rslt.getString(10, 100);
                 ((long[]) buf[11])[0] = rslt.getLong(11);
                 return;
        }

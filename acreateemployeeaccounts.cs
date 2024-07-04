@@ -297,7 +297,7 @@ namespace GeneXus.Programs {
               ((string[]) buf[1])[0] = rslt.getVarchar(2);
               ((string[]) buf[2])[0] = rslt.getString(3, 100);
               ((string[]) buf[3])[0] = rslt.getString(4, 100);
-              ((string[]) buf[4])[0] = rslt.getString(5, 128);
+              ((string[]) buf[4])[0] = rslt.getString(5, 100);
               return;
      }
   }
