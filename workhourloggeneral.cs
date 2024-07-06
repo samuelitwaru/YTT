@@ -962,7 +962,7 @@ namespace GeneXus.Programs {
             AV13IsAuthorized_Delete = StringUtil.StrToBool( cgiGet( sPrefix+"vISAUTHORIZED_DELETE"));
             AV12IsAuthorized_Update = StringUtil.StrToBool( cgiGet( sPrefix+"vISAUTHORIZED_UPDATE"));
             /* Read variables values. */
-            A119WorkHourLogDate = context.localUtil.CToD( cgiGet( edtWorkHourLogDate_Internalname), 1);
+            A119WorkHourLogDate = context.localUtil.CToD( cgiGet( edtWorkHourLogDate_Internalname), 2);
             AssignAttri(sPrefix, false, "A119WorkHourLogDate", context.localUtil.Format(A119WorkHourLogDate, "99/99/99"));
             A120WorkHourLogDuration = cgiGet( edtWorkHourLogDuration_Internalname);
             AssignAttri(sPrefix, false, "A120WorkHourLogDuration", A120WorkHourLogDuration);
@@ -1252,7 +1252,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247415494920", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247615355651", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1268,7 +1268,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("workhourloggeneral.js", "?20247415494920", false, true);
+         context.AddJavascriptSource("workhourloggeneral.js", "?20247615355651", false, true);
          /* End function include_jscripts */
       }
 

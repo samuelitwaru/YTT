@@ -56,7 +56,7 @@ namespace GeneXus.Programs {
          }
          if ( 1 < args.Length )
          {
-            aP1_Date=((DateTime)(context.localUtil.CToD( (string)(args[1]), 1)));
+            aP1_Date=((DateTime)(context.localUtil.CToD( (string)(args[1]), 2)));
          }
          else
          {
@@ -235,7 +235,7 @@ namespace GeneXus.Programs {
             AV20ExcelCellRange = AV21excelSpreadsheet.cell(AV13row, 1);
             AV20ExcelCellRange.gxTpr_Valuetext = StringUtil.Trim( A148EmployeeName);
             AV20ExcelCellRange = AV21excelSpreadsheet.cell(AV13row, AV8LeaveTypeNames.IndexOf("Vacation Days Left"));
-            AV20ExcelCellRange.gxTpr_Valuenumber = (decimal)(A147EmployeeBalance);
+            AV20ExcelCellRange.gxTpr_Valuenumber = A147EmployeeBalance;
             /* Using cursor P00AT5 */
             pr_default.execute(2, new Object[] {A148EmployeeName, AV28Date, A100CompanyId});
             while ( (pr_default.getStatus(2) != 101) )
@@ -351,7 +351,7 @@ namespace GeneXus.Programs {
          P00AT3_A100CompanyId = new long[1] ;
          P00AT3_A157CompanyLocationId = new long[1] ;
          P00AT3_A148EmployeeName = new string[] {""} ;
-         P00AT3_A147EmployeeBalance = new short[1] ;
+         P00AT3_A147EmployeeBalance = new decimal[1] ;
          P00AT3_A106EmployeeId = new long[1] ;
          A148EmployeeName = "";
          P00AT5_A124LeaveTypeId = new long[1] ;
@@ -383,7 +383,6 @@ namespace GeneXus.Programs {
 
       private short AV12col ;
       private short AV13row ;
-      private short A147EmployeeBalance ;
       private short AV14count ;
       private short AV17index ;
       private int AV31GXV1 ;
@@ -392,6 +391,7 @@ namespace GeneXus.Programs {
       private long A157CompanyLocationId ;
       private long A124LeaveTypeId ;
       private long A106EmployeeId ;
+      private decimal A147EmployeeBalance ;
       private decimal A40000GXC1 ;
       private string AV10Filename ;
       private string scmdbuf ;
@@ -420,7 +420,7 @@ namespace GeneXus.Programs {
       private long[] P00AT3_A100CompanyId ;
       private long[] P00AT3_A157CompanyLocationId ;
       private string[] P00AT3_A148EmployeeName ;
-      private short[] P00AT3_A147EmployeeBalance ;
+      private decimal[] P00AT3_A147EmployeeBalance ;
       private long[] P00AT3_A106EmployeeId ;
       private long[] P00AT5_A124LeaveTypeId ;
       private long[] P00AT5_A100CompanyId ;
@@ -493,7 +493,7 @@ namespace GeneXus.Programs {
                 ((long[]) buf[0])[0] = rslt.getLong(1);
                 ((long[]) buf[1])[0] = rslt.getLong(2);
                 ((string[]) buf[2])[0] = rslt.getString(3, 100);
-                ((short[]) buf[3])[0] = rslt.getShort(4);
+                ((decimal[]) buf[3])[0] = rslt.getDecimal(4);
                 ((long[]) buf[4])[0] = rslt.getLong(5);
                 return;
              case 2 :

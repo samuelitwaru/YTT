@@ -484,7 +484,7 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
             /* Single line edit */
-            GxWebStd.gx_single_line_edit( context, edtEmployeeVactionDays_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(A146EmployeeVactionDays), 4, 0, ".", "")), StringUtil.LTrim( ((edtEmployeeVactionDays_Enabled!=0) ? context.localUtil.Format( (decimal)(A146EmployeeVactionDays), "ZZZ9") : context.localUtil.Format( (decimal)(A146EmployeeVactionDays), "ZZZ9"))), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtEmployeeVactionDays_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtEmployeeVactionDays_Enabled, 0, "text", "1", 4, "chr", 1, "row", 4, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_EmployeeGeneral.htm");
+            GxWebStd.gx_single_line_edit( context, edtEmployeeVactionDays_Internalname, StringUtil.LTrim( StringUtil.NToC( A146EmployeeVactionDays, 4, 1, ".", "")), StringUtil.LTrim( ((edtEmployeeVactionDays_Enabled!=0) ? context.localUtil.Format( A146EmployeeVactionDays, "Z9.9") : context.localUtil.Format( A146EmployeeVactionDays, "Z9.9"))), "", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtEmployeeVactionDays_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtEmployeeVactionDays_Enabled, 0, "text", "", 4, "chr", 1, "row", 4, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_EmployeeGeneral.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -582,7 +582,7 @@ namespace GeneXus.Programs {
             /* Single line edit */
             GxWebStd.gx_single_line_edit( context, edtGAMUserGUID_Internalname, A111GAMUserGUID, StringUtil.RTrim( context.localUtil.Format( A111GAMUserGUID, "")), "", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtGAMUserGUID_Jsonclick, 0, "Attribute", "", "", "", "", edtGAMUserGUID_Visible, 0, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, 0, 0, true, "GeneXusSecurityCommon\\GAMUserIdentification", "start", true, "", "HLP_EmployeeGeneral.htm");
             /* Single line edit */
-            GxWebStd.gx_single_line_edit( context, edtEmployeeBalance_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(A147EmployeeBalance), 4, 0, ".", "")), StringUtil.LTrim( context.localUtil.Format( (decimal)(A147EmployeeBalance), "ZZZ9")), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtEmployeeBalance_Jsonclick, 0, "Attribute", "", "", "", "", edtEmployeeBalance_Visible, 0, 0, "text", "1", 4, "chr", 1, "row", 4, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_EmployeeGeneral.htm");
+            GxWebStd.gx_single_line_edit( context, edtEmployeeBalance_Internalname, StringUtil.LTrim( StringUtil.NToC( A147EmployeeBalance, 4, 1, ".", "")), StringUtil.LTrim( context.localUtil.Format( A147EmployeeBalance, "Z9.9")), "", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtEmployeeBalance_Jsonclick, 0, "Attribute", "", "", "", "", edtEmployeeBalance_Visible, 0, 0, "text", "", 4, "chr", 1, "row", 4, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_EmployeeGeneral.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -957,7 +957,7 @@ namespace GeneXus.Programs {
             while ( (pr_default.getStatus(2) != 101) )
             {
                A147EmployeeBalance = H00344_A147EmployeeBalance[0];
-               AssignAttri(sPrefix, false, "A147EmployeeBalance", StringUtil.LTrimStr( (decimal)(A147EmployeeBalance), 4, 0));
+               AssignAttri(sPrefix, false, "A147EmployeeBalance", StringUtil.LTrimStr( A147EmployeeBalance, 4, 1));
                A111GAMUserGUID = H00344_A111GAMUserGUID[0];
                AssignAttri(sPrefix, false, "A111GAMUserGUID", A111GAMUserGUID);
                A148EmployeeName = H00344_A148EmployeeName[0];
@@ -969,7 +969,7 @@ namespace GeneXus.Programs {
                A100CompanyId = H00344_A100CompanyId[0];
                AssignAttri(sPrefix, false, "A100CompanyId", StringUtil.LTrimStr( (decimal)(A100CompanyId), 10, 0));
                A146EmployeeVactionDays = H00344_A146EmployeeVactionDays[0];
-               AssignAttri(sPrefix, false, "A146EmployeeVactionDays", StringUtil.LTrimStr( (decimal)(A146EmployeeVactionDays), 4, 0));
+               AssignAttri(sPrefix, false, "A146EmployeeVactionDays", StringUtil.LTrimStr( A146EmployeeVactionDays, 4, 1));
                A109EmployeeEmail = H00344_A109EmployeeEmail[0];
                AssignAttri(sPrefix, false, "A109EmployeeEmail", A109EmployeeEmail);
                A108EmployeeLastName = H00344_A108EmployeeLastName[0];
@@ -1048,8 +1048,8 @@ namespace GeneXus.Programs {
             AssignAttri(sPrefix, false, "A108EmployeeLastName", A108EmployeeLastName);
             A109EmployeeEmail = cgiGet( edtEmployeeEmail_Internalname);
             AssignAttri(sPrefix, false, "A109EmployeeEmail", A109EmployeeEmail);
-            A146EmployeeVactionDays = (short)(Math.Round(context.localUtil.CToN( cgiGet( edtEmployeeVactionDays_Internalname), ".", ","), 18, MidpointRounding.ToEven));
-            AssignAttri(sPrefix, false, "A146EmployeeVactionDays", StringUtil.LTrimStr( (decimal)(A146EmployeeVactionDays), 4, 0));
+            A146EmployeeVactionDays = context.localUtil.CToN( cgiGet( edtEmployeeVactionDays_Internalname), ".", ",");
+            AssignAttri(sPrefix, false, "A146EmployeeVactionDays", StringUtil.LTrimStr( A146EmployeeVactionDays, 4, 1));
             dynCompanyId.CurrentValue = cgiGet( dynCompanyId_Internalname);
             A100CompanyId = (long)(Math.Round(NumberUtil.Val( cgiGet( dynCompanyId_Internalname), "."), 18, MidpointRounding.ToEven));
             AssignAttri(sPrefix, false, "A100CompanyId", StringUtil.LTrimStr( (decimal)(A100CompanyId), 10, 0));
@@ -1061,8 +1061,8 @@ namespace GeneXus.Programs {
             AssignAttri(sPrefix, false, "A148EmployeeName", A148EmployeeName);
             A111GAMUserGUID = cgiGet( edtGAMUserGUID_Internalname);
             AssignAttri(sPrefix, false, "A111GAMUserGUID", A111GAMUserGUID);
-            A147EmployeeBalance = (short)(Math.Round(context.localUtil.CToN( cgiGet( edtEmployeeBalance_Internalname), ".", ","), 18, MidpointRounding.ToEven));
-            AssignAttri(sPrefix, false, "A147EmployeeBalance", StringUtil.LTrimStr( (decimal)(A147EmployeeBalance), 4, 0));
+            A147EmployeeBalance = context.localUtil.CToN( cgiGet( edtEmployeeBalance_Internalname), ".", ",");
+            AssignAttri(sPrefix, false, "A147EmployeeBalance", StringUtil.LTrimStr( A147EmployeeBalance, 4, 1));
             /* Read subfile selected row values. */
             /* Read hidden variables. */
             GXKey = Decrypt64( context.GetCookie( "GX_SESSION_ID"), Crypto.GetServerKey( ));
@@ -1344,7 +1344,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247415495124", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247615435911", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1360,7 +1360,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("employeegeneral.js", "?20247415495124", false, true);
+         context.AddJavascriptSource("employeegeneral.js", "?20247615435911", false, true);
          /* End function include_jscripts */
       }
 
@@ -1534,13 +1534,13 @@ namespace GeneXus.Programs {
          H00343_A100CompanyId = new long[1] ;
          H00343_A101CompanyName = new string[] {""} ;
          H00344_A106EmployeeId = new long[1] ;
-         H00344_A147EmployeeBalance = new short[1] ;
+         H00344_A147EmployeeBalance = new decimal[1] ;
          H00344_A111GAMUserGUID = new string[] {""} ;
          H00344_A148EmployeeName = new string[] {""} ;
          H00344_A112EmployeeIsActive = new bool[] {false} ;
          H00344_A110EmployeeIsManager = new bool[] {false} ;
          H00344_A100CompanyId = new long[1] ;
-         H00344_A146EmployeeVactionDays = new short[1] ;
+         H00344_A146EmployeeVactionDays = new decimal[1] ;
          H00344_A109EmployeeEmail = new string[] {""} ;
          H00344_A108EmployeeLastName = new string[] {""} ;
          H00344_A107EmployeeFirstName = new string[] {""} ;
@@ -1581,8 +1581,6 @@ namespace GeneXus.Programs {
       private short initialized ;
       private short wbEnd ;
       private short wbStart ;
-      private short A146EmployeeVactionDays ;
-      private short A147EmployeeBalance ;
       private short nDraw ;
       private short nDoneStart ;
       private short nDonePA ;
@@ -1607,6 +1605,8 @@ namespace GeneXus.Programs {
       private long A106EmployeeId ;
       private long wcpOA106EmployeeId ;
       private long A100CompanyId ;
+      private decimal A146EmployeeVactionDays ;
+      private decimal A147EmployeeBalance ;
       private string gxfirstwebparm ;
       private string gxfirstwebparm_bkp ;
       private string sPrefix ;
@@ -1688,13 +1688,13 @@ namespace GeneXus.Programs {
       private long[] H00343_A100CompanyId ;
       private string[] H00343_A101CompanyName ;
       private long[] H00344_A106EmployeeId ;
-      private short[] H00344_A147EmployeeBalance ;
+      private decimal[] H00344_A147EmployeeBalance ;
       private string[] H00344_A111GAMUserGUID ;
       private string[] H00344_A148EmployeeName ;
       private bool[] H00344_A112EmployeeIsActive ;
       private bool[] H00344_A110EmployeeIsManager ;
       private long[] H00344_A100CompanyId ;
-      private short[] H00344_A146EmployeeVactionDays ;
+      private decimal[] H00344_A146EmployeeVactionDays ;
       private string[] H00344_A109EmployeeEmail ;
       private string[] H00344_A108EmployeeLastName ;
       private string[] H00344_A107EmployeeFirstName ;
@@ -1764,13 +1764,13 @@ namespace GeneXus.Programs {
                 return;
              case 2 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);
-                ((short[]) buf[1])[0] = rslt.getShort(2);
+                ((decimal[]) buf[1])[0] = rslt.getDecimal(2);
                 ((string[]) buf[2])[0] = rslt.getVarchar(3);
                 ((string[]) buf[3])[0] = rslt.getString(4, 100);
                 ((bool[]) buf[4])[0] = rslt.getBool(5);
                 ((bool[]) buf[5])[0] = rslt.getBool(6);
                 ((long[]) buf[6])[0] = rslt.getLong(7);
-                ((short[]) buf[7])[0] = rslt.getShort(8);
+                ((decimal[]) buf[7])[0] = rslt.getDecimal(8);
                 ((string[]) buf[8])[0] = rslt.getVarchar(9);
                 ((string[]) buf[9])[0] = rslt.getString(10, 100);
                 ((string[]) buf[10])[0] = rslt.getString(11, 100);

@@ -709,12 +709,12 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
                                  AssignAttri("", false, "GX_FocusControl", GX_FocusControl);
                                  wbErr = true;
                                  AV18WWPNotificationCreated = (DateTime)(DateTime.MinValue);
-                                 AssignAttri("", false, edtavWwpnotificationcreated_Internalname, context.localUtil.TToC( AV18WWPNotificationCreated, 8, 5, 1, 2, "/", ":", " "));
+                                 AssignAttri("", false, edtavWwpnotificationcreated_Internalname, context.localUtil.TToC( AV18WWPNotificationCreated, 8, 5, 1, 3, "/", ":", " "));
                               }
                               else
                               {
                                  AV18WWPNotificationCreated = context.localUtil.CToT( cgiGet( edtavWwpnotificationcreated_Internalname), 0);
-                                 AssignAttri("", false, edtavWwpnotificationcreated_Internalname, context.localUtil.TToC( AV18WWPNotificationCreated, 8, 5, 1, 2, "/", ":", " "));
+                                 AssignAttri("", false, edtavWwpnotificationcreated_Internalname, context.localUtil.TToC( AV18WWPNotificationCreated, 8, 5, 1, 3, "/", ":", " "));
                               }
                               A78WWPNotificationShortDescriptio = cgiGet( edtWWPNotificationShortDescriptio_Internalname);
                               A22WWPNotificationId = (long)(Math.Round(context.localUtil.CToN( cgiGet( edtWWPNotificationId_Internalname), ".", ","), 18, MidpointRounding.ToEven));
@@ -1255,7 +1255,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
          }
          lblNotificationitemicon_Caption = StringUtil.Format( "<i class='%1 %2'></i>", "NotificationFontIcon", A76WWPNotificationIcon, "", "", "", "", "", "", "");
          AV18WWPNotificationCreated = A24WWPNotificationCreated;
-         AssignAttri("", false, edtavWwpnotificationcreated_Internalname, context.localUtil.TToC( AV18WWPNotificationCreated, 8, 5, 1, 2, "/", ":", " "));
+         AssignAttri("", false, edtavWwpnotificationcreated_Internalname, context.localUtil.TToC( AV18WWPNotificationCreated, 8, 5, 1, 3, "/", ":", " "));
          if ( A82WWPNotificationIsRead )
          {
             lblMarkasread_Caption = "<i class=\"fas fa-envelope DiscussionsSendIcon\"></i>";
@@ -1417,7 +1417,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247415542589", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202475215083", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1435,7 +1435,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
          if ( nGXWrapped != 1 )
          {
             context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-            context.AddJavascriptSource("wwpbaseobjects/notifications/common/wwp_visualizeallnotifications.js", "?20247415542590", false, true);
+            context.AddJavascriptSource("wwpbaseobjects/notifications/common/wwp_visualizeallnotifications.js", "?202475215083", false, true);
          }
          /* End function include_jscripts */
       }
@@ -1580,7 +1580,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
             /* Single line edit */
             TempTags = " " + ((edtavWwpnotificationcreated_Enabled!=0)&&(edtavWwpnotificationcreated_Visible!=0) ? " onfocus=\"gx.evt.onfocus(this, 44,'',false,'"+sGXsfl_24_idx+"',24)\"" : " ");
             ROClassString = "NotificationItemDatetimeDateTime";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavWwpnotificationcreated_Internalname,context.localUtil.TToC( AV18WWPNotificationCreated, 10, 8, 1, 2, "/", ":", " "),context.localUtil.Format( AV18WWPNotificationCreated, "99/99/99 99:99"),TempTags+" onchange=\""+"gx.date.valid_date(this, 8,'MDY',5,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+((edtavWwpnotificationcreated_Enabled!=0)&&(edtavWwpnotificationcreated_Visible!=0) ? " onblur=\""+"gx.date.valid_date(this, 8,'MDY',5,12,'eng',false,0);"+";gx.evt.onblur(this,44);\"" : " "),(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavWwpnotificationcreated_Jsonclick,(short)0,(string)"NotificationItemDatetimeDateTime",(string)"",(string)ROClassString,(string)"",(string)"",(short)1,(int)edtavWwpnotificationcreated_Enabled,(short)0,(string)"text",(string)"",(short)17,(string)"chr",(short)1,(string)"row",(short)17,(short)0,(short)0,(short)24,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavWwpnotificationcreated_Internalname,context.localUtil.TToC( AV18WWPNotificationCreated, 10, 8, 1, 3, "/", ":", " "),context.localUtil.Format( AV18WWPNotificationCreated, "99/99/99 99:99"),TempTags+" onchange=\""+"gx.date.valid_date(this, 8,'DMY',5,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+((edtavWwpnotificationcreated_Enabled!=0)&&(edtavWwpnotificationcreated_Visible!=0) ? " onblur=\""+"gx.date.valid_date(this, 8,'DMY',5,12,'eng',false,0);"+";gx.evt.onblur(this,44);\"" : " "),(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavWwpnotificationcreated_Jsonclick,(short)0,(string)"NotificationItemDatetimeDateTime",(string)"",(string)ROClassString,(string)"",(string)"",(short)1,(int)edtavWwpnotificationcreated_Enabled,(short)0,(string)"text",(string)"",(short)17,(string)"chr",(short)1,(string)"row",(short)17,(short)0,(short)0,(short)24,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
             GridRow.AddColumnProperties("div_end", -1, isAjaxCallMode( ), new Object[] {(string)"start",(string)"top",(string)"div"});
             GridRow.AddColumnProperties("div_end", -1, isAjaxCallMode( ), new Object[] {(string)"start",(string)"top",(string)"div"});
             /* Div Control */
@@ -1780,7 +1780,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
             GridColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
             GridContainer.AddColumnProperties(GridColumn);
             GridColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
-            GridColumn.AddObjectProperty("Value", GXUtil.ValueEncode( context.localUtil.TToC( AV18WWPNotificationCreated, 10, 8, 1, 2, "/", ":", " ")));
+            GridColumn.AddObjectProperty("Value", GXUtil.ValueEncode( context.localUtil.TToC( AV18WWPNotificationCreated, 10, 8, 1, 3, "/", ":", " ")));
             GridColumn.AddObjectProperty("Enabled", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtavWwpnotificationcreated_Enabled), 5, 0, ".", "")));
             GridContainer.AddColumnProperties(GridColumn);
             GridColumn = GXWebColumn.GetNew(isAjaxCallMode( ));

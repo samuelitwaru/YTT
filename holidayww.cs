@@ -1846,9 +1846,9 @@ namespace GeneXus.Programs {
             }
             else if ( StringUtil.StrCmp(Ddo_grid_Selectedcolumn, "HolidayStartDate") == 0 )
             {
-               AV35TFHolidayStartDate = context.localUtil.CToD( Ddo_grid_Filteredtext_get, 1);
+               AV35TFHolidayStartDate = context.localUtil.CToD( Ddo_grid_Filteredtext_get, 2);
                AssignAttri("", false, "AV35TFHolidayStartDate", context.localUtil.Format(AV35TFHolidayStartDate, "99/99/99"));
-               AV36TFHolidayStartDate_To = context.localUtil.CToD( Ddo_grid_Filteredtextto_get, 1);
+               AV36TFHolidayStartDate_To = context.localUtil.CToD( Ddo_grid_Filteredtextto_get, 2);
                AssignAttri("", false, "AV36TFHolidayStartDate_To", context.localUtil.Format(AV36TFHolidayStartDate_To, "99/99/99"));
             }
             else if ( StringUtil.StrCmp(Ddo_grid_Selectedcolumn, "HolidayIsActive") == 0 )
@@ -2184,9 +2184,9 @@ namespace GeneXus.Programs {
             }
             else if ( StringUtil.StrCmp(AV16GridStateFilterValue.gxTpr_Name, "TFHOLIDAYSTARTDATE") == 0 )
             {
-               AV35TFHolidayStartDate = context.localUtil.CToD( AV16GridStateFilterValue.gxTpr_Value, 1);
+               AV35TFHolidayStartDate = context.localUtil.CToD( AV16GridStateFilterValue.gxTpr_Value, 2);
                AssignAttri("", false, "AV35TFHolidayStartDate", context.localUtil.Format(AV35TFHolidayStartDate, "99/99/99"));
-               AV36TFHolidayStartDate_To = context.localUtil.CToD( AV16GridStateFilterValue.gxTpr_Valueto, 1);
+               AV36TFHolidayStartDate_To = context.localUtil.CToD( AV16GridStateFilterValue.gxTpr_Valueto, 2);
                AssignAttri("", false, "AV36TFHolidayStartDate_To", context.localUtil.Format(AV36TFHolidayStartDate_To, "99/99/99"));
             }
             else if ( StringUtil.StrCmp(AV16GridStateFilterValue.gxTpr_Name, "TFHOLIDAYISACTIVE_SEL") == 0 )
@@ -2202,9 +2202,9 @@ namespace GeneXus.Programs {
          ucDdo_grid.SendProperty(context, "", false, Ddo_grid_Internalname, "SelectedValue_set", Ddo_grid_Selectedvalue_set);
          GXt_char2 = "";
          new GeneXus.Programs.wwpbaseobjects.wwp_getfilterval(context ).execute(  String.IsNullOrEmpty(StringUtil.RTrim( AV33TFHolidayName)),  AV33TFHolidayName, out  GXt_char2) ;
-         Ddo_grid_Filteredtext_set = GXt_char2+"|"+((DateTime.MinValue==AV35TFHolidayStartDate) ? "" : context.localUtil.DToC( AV35TFHolidayStartDate, 1, "/"))+"|";
+         Ddo_grid_Filteredtext_set = GXt_char2+"|"+((DateTime.MinValue==AV35TFHolidayStartDate) ? "" : context.localUtil.DToC( AV35TFHolidayStartDate, 2, "/"))+"|";
          ucDdo_grid.SendProperty(context, "", false, Ddo_grid_Internalname, "FilteredText_set", Ddo_grid_Filteredtext_set);
-         Ddo_grid_Filteredtextto_set = "|"+((DateTime.MinValue==AV36TFHolidayStartDate_To) ? "" : context.localUtil.DToC( AV36TFHolidayStartDate_To, 1, "/"))+"|";
+         Ddo_grid_Filteredtextto_set = "|"+((DateTime.MinValue==AV36TFHolidayStartDate_To) ? "" : context.localUtil.DToC( AV36TFHolidayStartDate_To, 2, "/"))+"|";
          ucDdo_grid.SendProperty(context, "", false, Ddo_grid_Internalname, "FilteredTextTo_set", Ddo_grid_Filteredtextto_set);
       }
 
@@ -2218,7 +2218,7 @@ namespace GeneXus.Programs {
          AV15GridState.gxTpr_Filtervalues.Clear();
          new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV15GridState,  "FILTERFULLTEXT",  "Main filter",  !String.IsNullOrEmpty(StringUtil.RTrim( AV20FilterFullText)),  0,  AV20FilterFullText,  AV20FilterFullText,  false,  "",  "") ;
          new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalueandsel(context ).execute( ref  AV15GridState,  "TFHOLIDAYNAME",  "National Holiday Name",  !String.IsNullOrEmpty(StringUtil.RTrim( AV33TFHolidayName)),  0,  AV33TFHolidayName,  AV33TFHolidayName,  false,  "",  "",  !String.IsNullOrEmpty(StringUtil.RTrim( AV34TFHolidayName_Sel)),  AV34TFHolidayName_Sel,  AV34TFHolidayName_Sel) ;
-         new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV15GridState,  "TFHOLIDAYSTARTDATE",  "Date",  !((DateTime.MinValue==AV35TFHolidayStartDate)&&(DateTime.MinValue==AV36TFHolidayStartDate_To)),  0,  StringUtil.Trim( context.localUtil.DToC( AV35TFHolidayStartDate, 1, "/")),  ((DateTime.MinValue==AV35TFHolidayStartDate) ? "" : StringUtil.Trim( context.localUtil.Format( AV35TFHolidayStartDate, "99/99/99"))),  true,  StringUtil.Trim( context.localUtil.DToC( AV36TFHolidayStartDate_To, 1, "/")),  ((DateTime.MinValue==AV36TFHolidayStartDate_To) ? "" : StringUtil.Trim( context.localUtil.Format( AV36TFHolidayStartDate_To, "99/99/99")))) ;
+         new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV15GridState,  "TFHOLIDAYSTARTDATE",  "Date",  !((DateTime.MinValue==AV35TFHolidayStartDate)&&(DateTime.MinValue==AV36TFHolidayStartDate_To)),  0,  StringUtil.Trim( context.localUtil.DToC( AV35TFHolidayStartDate, 2, "/")),  ((DateTime.MinValue==AV35TFHolidayStartDate) ? "" : StringUtil.Trim( context.localUtil.Format( AV35TFHolidayStartDate, "99/99/99"))),  true,  StringUtil.Trim( context.localUtil.DToC( AV36TFHolidayStartDate_To, 2, "/")),  ((DateTime.MinValue==AV36TFHolidayStartDate_To) ? "" : StringUtil.Trim( context.localUtil.Format( AV36TFHolidayStartDate_To, "99/99/99")))) ;
          new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV15GridState,  "TFHOLIDAYISACTIVE_SEL",  "Is Active",  !(0==AV68TFHolidayIsActive_Sel),  0,  StringUtil.Trim( StringUtil.Str( (decimal)(AV68TFHolidayIsActive_Sel), 1, 0)),  ((AV68TFHolidayIsActive_Sel==1) ? "Checked" : "Unchecked"),  false,  "",  "") ;
          AV15GridState.gxTpr_Pagesize = StringUtil.Str( (decimal)(subGrid_Rows), 10, 0);
          AV15GridState.gxTpr_Currentpage = (short)(subGrid_fnc_Currentpage( ));
@@ -2355,7 +2355,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247412492569", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024752150507", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2371,7 +2371,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("holidayww.js", "?20247412492570", false, true);
+         context.AddJavascriptSource("holidayww.js", "?20247521505010", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);

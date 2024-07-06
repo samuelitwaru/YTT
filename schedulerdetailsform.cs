@@ -128,9 +128,9 @@ namespace GeneXus.Programs {
                   AV8eventId = GetPar( "eventId");
                   AssignAttri("", false, "AV8eventId", AV8eventId);
                   AV9eventStartTime = context.localUtil.ParseDTimeParm( GetPar( "eventStartTime"));
-                  AssignAttri("", false, "AV9eventStartTime", context.localUtil.TToC( AV9eventStartTime, 8, 5, 1, 2, "/", ":", " "));
+                  AssignAttri("", false, "AV9eventStartTime", context.localUtil.TToC( AV9eventStartTime, 8, 5, 1, 3, "/", ":", " "));
                   AV7eventEndTime = context.localUtil.ParseDTimeParm( GetPar( "eventEndTime"));
-                  AssignAttri("", false, "AV7eventEndTime", context.localUtil.TToC( AV7eventEndTime, 8, 5, 1, 2, "/", ":", " "));
+                  AssignAttri("", false, "AV7eventEndTime", context.localUtil.TToC( AV7eventEndTime, 8, 5, 1, 3, "/", ":", " "));
                }
             }
             if ( toggleJsOutput )
@@ -653,7 +653,7 @@ namespace GeneXus.Programs {
             context.WriteHtmlText( "<td>") ;
             /* Single line edit */
             context.WriteHtmlText( "<div id=\""+edtavEventstarttime_Internalname+"_dp_container\" class=\"dp_container\" style=\"white-space:nowrap;display:inline;\">") ;
-            GxWebStd.gx_single_line_edit( context, edtavEventstarttime_Internalname, context.localUtil.TToC( AV9eventStartTime, 10, 8, 1, 2, "/", ":", " "), context.localUtil.Format( AV9eventStartTime, "99/99/99 99:99"), "", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavEventstarttime_Jsonclick, 0, "Attribute", "", "", "", "", 1, 0, 0, "text", "", 17, "chr", 1, "row", 17, 0, 0, 0, 0, -1, 0, false, "", "end", false, "", "HLP_SchedulerDetailsForm.htm");
+            GxWebStd.gx_single_line_edit( context, edtavEventstarttime_Internalname, context.localUtil.TToC( AV9eventStartTime, 10, 8, 1, 3, "/", ":", " "), context.localUtil.Format( AV9eventStartTime, "99/99/99 99:99"), "", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavEventstarttime_Jsonclick, 0, "Attribute", "", "", "", "", 1, 0, 0, "text", "", 17, "chr", 1, "row", 17, 0, 0, 0, 0, -1, 0, false, "", "end", false, "", "HLP_SchedulerDetailsForm.htm");
             GxWebStd.gx_bitmap( context, edtavEventstarttime_Internalname+"_dp_trigger", context.GetImagePath( "61b9b5d3-dff6-4d59-9b00-da61bc2cbe93", "", context.GetTheme( )), "", "", "", "", ((1==0)||(0==0) ? 0 : 1), 0, "Date selector", "Date selector", 0, 1, 0, "", 0, "", 0, 0, 0, "", "", "cursor: pointer;", "", "", "", "", "", "", "", "", 1, false, false, "", "HLP_SchedulerDetailsForm.htm");
             context.WriteHtmlTextNl( "</div>") ;
             context.WriteHtmlText( "</td>") ;
@@ -666,7 +666,7 @@ namespace GeneXus.Programs {
             context.WriteHtmlText( "<td>") ;
             /* Single line edit */
             context.WriteHtmlText( "<div id=\""+edtavEventendtime_Internalname+"_dp_container\" class=\"dp_container\" style=\"white-space:nowrap;display:inline;\">") ;
-            GxWebStd.gx_single_line_edit( context, edtavEventendtime_Internalname, context.localUtil.TToC( AV7eventEndTime, 10, 8, 1, 2, "/", ":", " "), context.localUtil.Format( AV7eventEndTime, "99/99/99 99:99"), "", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavEventendtime_Jsonclick, 0, "Attribute", "", "", "", "", 1, 0, 0, "text", "", 17, "chr", 1, "row", 17, 0, 0, 0, 0, -1, 0, false, "", "end", false, "", "HLP_SchedulerDetailsForm.htm");
+            GxWebStd.gx_single_line_edit( context, edtavEventendtime_Internalname, context.localUtil.TToC( AV7eventEndTime, 10, 8, 1, 3, "/", ":", " "), context.localUtil.Format( AV7eventEndTime, "99/99/99 99:99"), "", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavEventendtime_Jsonclick, 0, "Attribute", "", "", "", "", 1, 0, 0, "text", "", 17, "chr", 1, "row", 17, 0, 0, 0, 0, -1, 0, false, "", "end", false, "", "HLP_SchedulerDetailsForm.htm");
             GxWebStd.gx_bitmap( context, edtavEventendtime_Internalname+"_dp_trigger", context.GetImagePath( "61b9b5d3-dff6-4d59-9b00-da61bc2cbe93", "", context.GetTheme( )), "", "", "", "", ((1==0)||(0==0) ? 0 : 1), 0, "Date selector", "Date selector", 0, 1, 0, "", 0, "", 0, 0, 0, "", "", "cursor: pointer;", "", "", "", "", "", "", "", "", 1, false, false, "", "HLP_SchedulerDetailsForm.htm");
             context.WriteHtmlTextNl( "</div>") ;
             context.WriteHtmlText( "</td>") ;
@@ -691,9 +691,9 @@ namespace GeneXus.Programs {
          AV8eventId = (string)getParm(obj,1);
          AssignAttri("", false, "AV8eventId", AV8eventId);
          AV9eventStartTime = (DateTime)getParm(obj,2);
-         AssignAttri("", false, "AV9eventStartTime", context.localUtil.TToC( AV9eventStartTime, 8, 5, 1, 2, "/", ":", " "));
+         AssignAttri("", false, "AV9eventStartTime", context.localUtil.TToC( AV9eventStartTime, 8, 5, 1, 3, "/", ":", " "));
          AV7eventEndTime = (DateTime)getParm(obj,3);
-         AssignAttri("", false, "AV7eventEndTime", context.localUtil.TToC( AV7eventEndTime, 8, 5, 1, 2, "/", ":", " "));
+         AssignAttri("", false, "AV7eventEndTime", context.localUtil.TToC( AV7eventEndTime, 8, 5, 1, 3, "/", ":", " "));
       }
 
       public override string getresponse( string sGXDynURL )
@@ -730,7 +730,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20246282115862", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024752151653", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -748,7 +748,7 @@ namespace GeneXus.Programs {
          if ( nGXWrapped != 1 )
          {
             context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-            context.AddJavascriptSource("schedulerdetailsform.js", "?20246282115862", false, true);
+            context.AddJavascriptSource("schedulerdetailsform.js", "?2024752151653", false, true);
          }
          /* End function include_jscripts */
       }

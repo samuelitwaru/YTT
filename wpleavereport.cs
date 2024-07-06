@@ -2426,9 +2426,9 @@ namespace GeneXus.Programs {
             AV14GridStateFilterValue = ((GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue)AV13GridState.gxTpr_Filtervalues.Item(AV73GXV10));
             if ( StringUtil.StrCmp(AV14GridStateFilterValue.gxTpr_Name, "DATE") == 0 )
             {
-               AV48Date = context.localUtil.CToD( AV14GridStateFilterValue.gxTpr_Value, 1);
+               AV48Date = context.localUtil.CToD( AV14GridStateFilterValue.gxTpr_Value, 2);
                AssignAttri("", false, "AV48Date", context.localUtil.Format(AV48Date, "99/99/99"));
-               AV49Date_To = context.localUtil.CToD( AV14GridStateFilterValue.gxTpr_Valueto, 1);
+               AV49Date_To = context.localUtil.CToD( AV14GridStateFilterValue.gxTpr_Valueto, 2);
                AssignAttri("", false, "AV49Date_To", context.localUtil.Format(AV49Date_To, "99/99/99"));
             }
             else if ( StringUtil.StrCmp(AV14GridStateFilterValue.gxTpr_Name, "PERIODICCATEGORY") == 0 )
@@ -2472,7 +2472,7 @@ namespace GeneXus.Programs {
          returnInSub = false;
          AV13GridState.FromXml(AV23Session.Get(AV72Pgmname+"GridState"), null, "", "");
          AV13GridState.gxTpr_Filtervalues.Clear();
-         new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV13GridState,  "DATE",  "Date Range",  !((DateTime.MinValue==AV48Date)&&(DateTime.MinValue==AV49Date_To)),  0,  StringUtil.Trim( context.localUtil.DToC( AV48Date, 1, "/")),  ((DateTime.MinValue==AV48Date) ? "" : StringUtil.Trim( context.localUtil.Format( AV48Date, "99/99/99"))),  true,  StringUtil.Trim( context.localUtil.DToC( AV49Date_To, 1, "/")),  ((DateTime.MinValue==AV49Date_To) ? "" : StringUtil.Trim( context.localUtil.Format( AV49Date_To, "99/99/99")))) ;
+         new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV13GridState,  "DATE",  "Date Range",  !((DateTime.MinValue==AV48Date)&&(DateTime.MinValue==AV49Date_To)),  0,  StringUtil.Trim( context.localUtil.DToC( AV48Date, 2, "/")),  ((DateTime.MinValue==AV48Date) ? "" : StringUtil.Trim( context.localUtil.Format( AV48Date, "99/99/99"))),  true,  StringUtil.Trim( context.localUtil.DToC( AV49Date_To, 2, "/")),  ((DateTime.MinValue==AV49Date_To) ? "" : StringUtil.Trim( context.localUtil.Format( AV49Date_To, "99/99/99")))) ;
          new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV13GridState,  "PERIODICCATEGORY",  "View",  !(0==AV40PeriodicCategory),  0,  StringUtil.Trim( StringUtil.Str( (decimal)(AV40PeriodicCategory), 4, 0)),  StringUtil.Trim( gxdomainperiodiccategory.getDescription(context,AV40PeriodicCategory)),  false,  "",  "") ;
          GXt_char4 = AV47AuxText;
          new wpleavereportloaddvcombo(context ).execute(  "EmployeeId",  "GET_DSC",  StringUtil.Str( (decimal)(AV39EmployeeId), 10, 0), out  GXt_char4) ;
@@ -2635,7 +2635,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024731532272", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247521513443", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2651,7 +2651,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wpleavereport.js", "?2024731532273", false, true);
+         context.AddJavascriptSource("wpleavereport.js", "?20247521513446", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);

@@ -887,11 +887,11 @@ namespace GeneXus.Programs {
             /* Read variables values. */
             A114HolidayName = cgiGet( edtHolidayName_Internalname);
             AssignAttri(sPrefix, false, "A114HolidayName", A114HolidayName);
-            A115HolidayStartDate = context.localUtil.CToD( cgiGet( edtHolidayStartDate_Internalname), 1);
+            A115HolidayStartDate = context.localUtil.CToD( cgiGet( edtHolidayStartDate_Internalname), 2);
             AssignAttri(sPrefix, false, "A115HolidayStartDate", context.localUtil.Format(A115HolidayStartDate, "99/99/99"));
             A139HolidayIsActive = StringUtil.StrToBool( cgiGet( chkHolidayIsActive_Internalname));
             AssignAttri(sPrefix, false, "A139HolidayIsActive", A139HolidayIsActive);
-            A116HolidayEndDate = context.localUtil.CToD( cgiGet( edtHolidayEndDate_Internalname), 1);
+            A116HolidayEndDate = context.localUtil.CToD( cgiGet( edtHolidayEndDate_Internalname), 2);
             n116HolidayEndDate = false;
             AssignAttri(sPrefix, false, "A116HolidayEndDate", context.localUtil.Format(A116HolidayEndDate, "99/99/99"));
             A117HolidayServiceId = cgiGet( edtHolidayServiceId_Internalname);
@@ -1195,7 +1195,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202474155192", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247521444190", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1211,7 +1211,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("holidaygeneral.js", "?202474155192", false, true);
+         context.AddJavascriptSource("holidaygeneral.js", "?20247521444191", false, true);
          /* End function include_jscripts */
       }
 

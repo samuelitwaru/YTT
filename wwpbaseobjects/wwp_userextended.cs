@@ -568,7 +568,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          /* Single line edit */
          TempTags = "  onfocus=\"gx.evt.onfocus(this, 89,'',false,'',0)\"";
          context.WriteHtmlText( "<div id=\""+edtWWPUserExtendedDeletedIn_Internalname+"_dp_container\" class=\"dp_container\" style=\"white-space:nowrap;display:inline;\">") ;
-         GxWebStd.gx_single_line_edit( context, edtWWPUserExtendedDeletedIn_Internalname, context.localUtil.TToC( A18WWPUserExtendedDeletedIn, 10, 8, 1, 2, "/", ":", " "), context.localUtil.Format( A18WWPUserExtendedDeletedIn, "99/99/99 99:99"), TempTags+" onchange=\""+"gx.date.valid_date(this, 8,'MDY',5,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 8,'MDY',5,12,'eng',false,0);"+";gx.evt.onblur(this,89);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtWWPUserExtendedDeletedIn_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtWWPUserExtendedDeletedIn_Enabled, 0, "text", "", 17, "chr", 1, "row", 17, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_WWPBaseObjects/WWP_UserExtended.htm");
+         GxWebStd.gx_single_line_edit( context, edtWWPUserExtendedDeletedIn_Internalname, context.localUtil.TToC( A18WWPUserExtendedDeletedIn, 10, 8, 1, 3, "/", ":", " "), context.localUtil.Format( A18WWPUserExtendedDeletedIn, "99/99/99 99:99"), TempTags+" onchange=\""+"gx.date.valid_date(this, 8,'DMY',5,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 8,'DMY',5,12,'eng',false,0);"+";gx.evt.onblur(this,89);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtWWPUserExtendedDeletedIn_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtWWPUserExtendedDeletedIn_Enabled, 0, "text", "", 17, "chr", 1, "row", 17, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_WWPBaseObjects/WWP_UserExtended.htm");
          GxWebStd.gx_bitmap( context, edtWWPUserExtendedDeletedIn_Internalname+"_dp_trigger", context.GetImagePath( "61b9b5d3-dff6-4d59-9b00-da61bc2cbe93", "", context.GetTheme( )), "", "", "", "", ((1==0)||(edtWWPUserExtendedDeletedIn_Enabled==0) ? 0 : 1), 0, "Date selector", "Date selector", 0, 1, 0, "", 0, "", 0, 0, 0, "", "", "cursor: pointer;", "", "", "", "", "", "", "", "", 1, false, false, "", "HLP_WWPBaseObjects/WWP_UserExtended.htm");
          context.WriteHtmlTextNl( "</div>") ;
          GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -682,7 +682,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
             AssignAttri("", false, "A14WWPUserExtendedDesktopNotif", A14WWPUserExtendedDesktopNotif);
             A17WWPUserExtendedDeleted = StringUtil.StrToBool( cgiGet( chkWWPUserExtendedDeleted_Internalname));
             AssignAttri("", false, "A17WWPUserExtendedDeleted", A17WWPUserExtendedDeleted);
-            if ( context.localUtil.VCDateTime( cgiGet( edtWWPUserExtendedDeletedIn_Internalname), 1, 1) == 0 )
+            if ( context.localUtil.VCDateTime( cgiGet( edtWWPUserExtendedDeletedIn_Internalname), 2, 1) == 0 )
             {
                GX_msglist.addItem(context.GetMessage( "GXM_baddatetime", new   object[]  {"WWPUser Extended Deleted In"}), 1, "WWPUSEREXTENDEDDELETEDIN");
                AnyError = 1;
@@ -691,13 +691,13 @@ namespace GeneXus.Programs.wwpbaseobjects {
                wbErr = true;
                A18WWPUserExtendedDeletedIn = (DateTime)(DateTime.MinValue);
                n18WWPUserExtendedDeletedIn = false;
-               AssignAttri("", false, "A18WWPUserExtendedDeletedIn", context.localUtil.TToC( A18WWPUserExtendedDeletedIn, 8, 5, 1, 2, "/", ":", " "));
+               AssignAttri("", false, "A18WWPUserExtendedDeletedIn", context.localUtil.TToC( A18WWPUserExtendedDeletedIn, 8, 5, 1, 3, "/", ":", " "));
             }
             else
             {
                A18WWPUserExtendedDeletedIn = context.localUtil.CToT( cgiGet( edtWWPUserExtendedDeletedIn_Internalname));
                n18WWPUserExtendedDeletedIn = false;
-               AssignAttri("", false, "A18WWPUserExtendedDeletedIn", context.localUtil.TToC( A18WWPUserExtendedDeletedIn, 8, 5, 1, 2, "/", ":", " "));
+               AssignAttri("", false, "A18WWPUserExtendedDeletedIn", context.localUtil.TToC( A18WWPUserExtendedDeletedIn, 8, 5, 1, 3, "/", ":", " "));
             }
             n18WWPUserExtendedDeletedIn = ((DateTime.MinValue==A18WWPUserExtendedDeletedIn) ? true : false);
             /* Read subfile selected row values. */
@@ -994,7 +994,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
             AssignAttri("", false, "A17WWPUserExtendedDeleted", A17WWPUserExtendedDeleted);
             A18WWPUserExtendedDeletedIn = T00014_A18WWPUserExtendedDeletedIn[0];
             n18WWPUserExtendedDeletedIn = T00014_n18WWPUserExtendedDeletedIn[0];
-            AssignAttri("", false, "A18WWPUserExtendedDeletedIn", context.localUtil.TToC( A18WWPUserExtendedDeletedIn, 8, 5, 1, 2, "/", ":", " "));
+            AssignAttri("", false, "A18WWPUserExtendedDeletedIn", context.localUtil.TToC( A18WWPUserExtendedDeletedIn, 8, 5, 1, 3, "/", ":", " "));
             A10WWPUserExtendedPhoto = T00014_A10WWPUserExtendedPhoto[0];
             AssignAttri("", false, "A10WWPUserExtendedPhoto", A10WWPUserExtendedPhoto);
             AssignProp("", false, imgWWPUserExtendedPhoto_Internalname, "Bitmap", (String.IsNullOrEmpty(StringUtil.RTrim( A10WWPUserExtendedPhoto)) ? A40000WWPUserExtendedPhoto_GXI : context.convertURL( context.PathToRelativeUrl( A10WWPUserExtendedPhoto))), true);
@@ -1080,7 +1080,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
             AssignAttri("", false, "A17WWPUserExtendedDeleted", A17WWPUserExtendedDeleted);
             A18WWPUserExtendedDeletedIn = T00013_A18WWPUserExtendedDeletedIn[0];
             n18WWPUserExtendedDeletedIn = T00013_n18WWPUserExtendedDeletedIn[0];
-            AssignAttri("", false, "A18WWPUserExtendedDeletedIn", context.localUtil.TToC( A18WWPUserExtendedDeletedIn, 8, 5, 1, 2, "/", ":", " "));
+            AssignAttri("", false, "A18WWPUserExtendedDeletedIn", context.localUtil.TToC( A18WWPUserExtendedDeletedIn, 8, 5, 1, 3, "/", ":", " "));
             A10WWPUserExtendedPhoto = T00013_A10WWPUserExtendedPhoto[0];
             AssignAttri("", false, "A10WWPUserExtendedPhoto", A10WWPUserExtendedPhoto);
             AssignProp("", false, imgWWPUserExtendedPhoto_Internalname, "Bitmap", (String.IsNullOrEmpty(StringUtil.RTrim( A10WWPUserExtendedPhoto)) ? A40000WWPUserExtendedPhoto_GXI : context.convertURL( context.PathToRelativeUrl( A10WWPUserExtendedPhoto))), true);
@@ -2070,7 +2070,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          AssignAttri("", false, "A17WWPUserExtendedDeleted", A17WWPUserExtendedDeleted);
          A18WWPUserExtendedDeletedIn = (DateTime)(DateTime.MinValue);
          n18WWPUserExtendedDeletedIn = false;
-         AssignAttri("", false, "A18WWPUserExtendedDeletedIn", context.localUtil.TToC( A18WWPUserExtendedDeletedIn, 8, 5, 1, 2, "/", ":", " "));
+         AssignAttri("", false, "A18WWPUserExtendedDeletedIn", context.localUtil.TToC( A18WWPUserExtendedDeletedIn, 8, 5, 1, 3, "/", ":", " "));
          n18WWPUserExtendedDeletedIn = ((DateTime.MinValue==A18WWPUserExtendedDeletedIn) ? true : false);
          Z16WWPUserExtendedName = "";
          Z8WWPUserExtendedFullName = "";
@@ -2108,7 +2108,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024741551834", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024752144027", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2124,7 +2124,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wwpbaseobjects/wwp_userextended.js", "?2024741551834", false, true);
+         context.AddJavascriptSource("wwpbaseobjects/wwp_userextended.js", "?2024752144028", false, true);
          /* End function include_jscripts */
       }
 
@@ -2304,7 +2304,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          AssignAttri("", false, "A13WWPUserExtendedMobileNotif", A13WWPUserExtendedMobileNotif);
          AssignAttri("", false, "A14WWPUserExtendedDesktopNotif", A14WWPUserExtendedDesktopNotif);
          AssignAttri("", false, "A17WWPUserExtendedDeleted", A17WWPUserExtendedDeleted);
-         AssignAttri("", false, "A18WWPUserExtendedDeletedIn", context.localUtil.TToC( A18WWPUserExtendedDeletedIn, 10, 8, 1, 2, "/", ":", " "));
+         AssignAttri("", false, "A18WWPUserExtendedDeletedIn", context.localUtil.TToC( A18WWPUserExtendedDeletedIn, 10, 8, 1, 3, "/", ":", " "));
          AssignAttri("", false, "Gx_mode", StringUtil.RTrim( Gx_mode));
          GxWebStd.gx_hidden_field( context, "Z7WWPUserExtendedId", StringUtil.RTrim( Z7WWPUserExtendedId));
          GxWebStd.gx_hidden_field( context, "Z10WWPUserExtendedPhoto", context.PathToRelativeUrl( Z10WWPUserExtendedPhoto));
@@ -2318,7 +2318,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          GxWebStd.gx_hidden_field( context, "Z13WWPUserExtendedMobileNotif", StringUtil.BoolToStr( Z13WWPUserExtendedMobileNotif));
          GxWebStd.gx_hidden_field( context, "Z14WWPUserExtendedDesktopNotif", StringUtil.BoolToStr( Z14WWPUserExtendedDesktopNotif));
          GxWebStd.gx_hidden_field( context, "Z17WWPUserExtendedDeleted", StringUtil.BoolToStr( Z17WWPUserExtendedDeleted));
-         GxWebStd.gx_hidden_field( context, "Z18WWPUserExtendedDeletedIn", context.localUtil.TToC( Z18WWPUserExtendedDeletedIn, 10, 8, 1, 2, "/", ":", " "));
+         GxWebStd.gx_hidden_field( context, "Z18WWPUserExtendedDeletedIn", context.localUtil.TToC( Z18WWPUserExtendedDeletedIn, 10, 8, 1, 3, "/", ":", " "));
          AssignProp("", false, bttBtn_delete_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(bttBtn_delete_Enabled), 5, 0), true);
          AssignProp("", false, bttBtn_enter_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(bttBtn_enter_Enabled), 5, 0), true);
          SendCloseFormHiddens( ) ;

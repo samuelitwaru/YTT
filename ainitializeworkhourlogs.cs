@@ -146,7 +146,7 @@ namespace GeneXus.Programs {
                {
                   AV8Date = DateTimeUtil.DAdd( AV8Date, (1));
                }
-               AV18SDate = context.localUtil.DToC( AV8Date, 1, "/");
+               AV18SDate = context.localUtil.DToC( AV8Date, 2, "/");
                AV14Hour = 8;
                AV15Minute = 0;
                AV10Description = ((string)AV12DescriptionSet.Item(AV20Index));

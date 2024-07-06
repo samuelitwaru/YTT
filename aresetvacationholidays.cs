@@ -128,7 +128,7 @@ namespace GeneXus.Programs {
             A106EmployeeId = P00AH2_A106EmployeeId[0];
             AV8EmployeeBalance = A147EmployeeBalance;
             AV9EmployeeVactionDays = A146EmployeeVactionDays;
-            A147EmployeeBalance = (short)(AV8EmployeeBalance+AV9EmployeeVactionDays);
+            A147EmployeeBalance = (decimal)(AV8EmployeeBalance+AV9EmployeeVactionDays);
             /* Using cursor P00AH3 */
             pr_default.execute(1, new Object[] {A147EmployeeBalance, A106EmployeeId});
             pr_default.close(1);
@@ -165,8 +165,8 @@ namespace GeneXus.Programs {
          GXKey = "";
          gxfirstwebparm = "";
          scmdbuf = "";
-         P00AH2_A147EmployeeBalance = new short[1] ;
-         P00AH2_A146EmployeeVactionDays = new short[1] ;
+         P00AH2_A147EmployeeBalance = new decimal[1] ;
+         P00AH2_A146EmployeeVactionDays = new decimal[1] ;
          P00AH2_A106EmployeeId = new long[1] ;
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.aresetvacationholidays__default(),
             new Object[][] {
@@ -183,11 +183,11 @@ namespace GeneXus.Programs {
       private short gxcookieaux ;
       private short nGotPars ;
       private short GxWebError ;
-      private short A147EmployeeBalance ;
-      private short A146EmployeeVactionDays ;
-      private short AV8EmployeeBalance ;
-      private short AV9EmployeeVactionDays ;
       private long A106EmployeeId ;
+      private decimal A147EmployeeBalance ;
+      private decimal A146EmployeeVactionDays ;
+      private decimal AV8EmployeeBalance ;
+      private decimal AV9EmployeeVactionDays ;
       private string GXKey ;
       private string gxfirstwebparm ;
       private string scmdbuf ;
@@ -195,8 +195,8 @@ namespace GeneXus.Programs {
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private IDataStoreProvider pr_default ;
-      private short[] P00AH2_A147EmployeeBalance ;
-      private short[] P00AH2_A146EmployeeVactionDays ;
+      private decimal[] P00AH2_A147EmployeeBalance ;
+      private decimal[] P00AH2_A146EmployeeVactionDays ;
       private long[] P00AH2_A106EmployeeId ;
    }
 
@@ -221,7 +221,7 @@ namespace GeneXus.Programs {
           };
           Object[] prmP00AH3;
           prmP00AH3 = new Object[] {
-          new ParDef("EmployeeBalance",GXType.Int16,4,0) ,
+          new ParDef("EmployeeBalance",GXType.Number,4,1) ,
           new ParDef("EmployeeId",GXType.Int64,10,0)
           };
           def= new CursorDef[] {
@@ -238,8 +238,8 @@ namespace GeneXus.Programs {
        switch ( cursor )
        {
              case 0 :
-                ((short[]) buf[0])[0] = rslt.getShort(1);
-                ((short[]) buf[1])[0] = rslt.getShort(2);
+                ((decimal[]) buf[0])[0] = rslt.getDecimal(1);
+                ((decimal[]) buf[1])[0] = rslt.getDecimal(2);
                 ((long[]) buf[2])[0] = rslt.getLong(3);
                 return;
        }

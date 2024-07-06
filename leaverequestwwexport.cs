@@ -194,13 +194,13 @@ namespace GeneXus.Programs {
             new GeneXus.Programs.wwpbaseobjects.wwp_exportwritefilter(context ).execute( ref  AV11ExcelDocument,  true, ref  GXt_int2,  (short)(AV15FirstColumn),  "Start Date") ;
             AV14CellRow = GXt_int2;
             GXt_dtime3 = DateTimeUtil.ResetTime( AV43TFLeaveRequestStartDate ) ;
-            AV11ExcelDocument.SetDateFormat(context, 8, 5, 1, 2, "/", ":", " ");
+            AV11ExcelDocument.SetDateFormat(context, 8, 5, 1, 3, "/", ":", " ");
             AV11ExcelDocument.get_Cells(AV14CellRow, AV15FirstColumn+1, 1, 1).Date = GXt_dtime3;
             GXt_int2 = (short)(AV14CellRow);
             new GeneXus.Programs.wwpbaseobjects.wwp_exportwritefilter(context ).execute( ref  AV11ExcelDocument,  false, ref  GXt_int2,  (short)(AV15FirstColumn+2),  "To") ;
             AV14CellRow = GXt_int2;
             GXt_dtime3 = DateTimeUtil.ResetTime( AV44TFLeaveRequestStartDate_To ) ;
-            AV11ExcelDocument.SetDateFormat(context, 8, 5, 1, 2, "/", ":", " ");
+            AV11ExcelDocument.SetDateFormat(context, 8, 5, 1, 3, "/", ":", " ");
             AV11ExcelDocument.get_Cells(AV14CellRow, AV15FirstColumn+3, 1, 1).Date = GXt_dtime3;
          }
          if ( ! ( (DateTime.MinValue==AV45TFLeaveRequestEndDate) && (DateTime.MinValue==AV46TFLeaveRequestEndDate_To) ) )
@@ -209,13 +209,13 @@ namespace GeneXus.Programs {
             new GeneXus.Programs.wwpbaseobjects.wwp_exportwritefilter(context ).execute( ref  AV11ExcelDocument,  true, ref  GXt_int2,  (short)(AV15FirstColumn),  "End Date") ;
             AV14CellRow = GXt_int2;
             GXt_dtime3 = DateTimeUtil.ResetTime( AV45TFLeaveRequestEndDate ) ;
-            AV11ExcelDocument.SetDateFormat(context, 8, 5, 1, 2, "/", ":", " ");
+            AV11ExcelDocument.SetDateFormat(context, 8, 5, 1, 3, "/", ":", " ");
             AV11ExcelDocument.get_Cells(AV14CellRow, AV15FirstColumn+1, 1, 1).Date = GXt_dtime3;
             GXt_int2 = (short)(AV14CellRow);
             new GeneXus.Programs.wwpbaseobjects.wwp_exportwritefilter(context ).execute( ref  AV11ExcelDocument,  false, ref  GXt_int2,  (short)(AV15FirstColumn+2),  "To") ;
             AV14CellRow = GXt_int2;
             GXt_dtime3 = DateTimeUtil.ResetTime( AV46TFLeaveRequestEndDate_To ) ;
-            AV11ExcelDocument.SetDateFormat(context, 8, 5, 1, 2, "/", ":", " ");
+            AV11ExcelDocument.SetDateFormat(context, 8, 5, 1, 3, "/", ":", " ");
             AV11ExcelDocument.get_Cells(AV14CellRow, AV15FirstColumn+3, 1, 1).Date = GXt_dtime3;
          }
          if ( ! ( String.IsNullOrEmpty(StringUtil.RTrim( AV60TFLeaveRequestHalfDay_Sel)) ) )
@@ -460,13 +460,13 @@ namespace GeneXus.Programs {
                   else if ( StringUtil.StrCmp(AV26ColumnsSelector_Column.gxTpr_Columnname, "LeaveRequestStartDate") == 0 )
                   {
                      GXt_dtime3 = DateTimeUtil.ResetTime( A129LeaveRequestStartDate ) ;
-                     AV11ExcelDocument.SetDateFormat(context, 8, 5, 1, 2, "/", ":", " ");
+                     AV11ExcelDocument.SetDateFormat(context, 8, 5, 1, 3, "/", ":", " ");
                      AV11ExcelDocument.get_Cells(AV14CellRow, (int)(AV15FirstColumn+AV32VisibleColumnCount), 1, 1).Date = GXt_dtime3;
                   }
                   else if ( StringUtil.StrCmp(AV26ColumnsSelector_Column.gxTpr_Columnname, "LeaveRequestEndDate") == 0 )
                   {
                      GXt_dtime3 = DateTimeUtil.ResetTime( A130LeaveRequestEndDate ) ;
-                     AV11ExcelDocument.SetDateFormat(context, 8, 5, 1, 2, "/", ":", " ");
+                     AV11ExcelDocument.SetDateFormat(context, 8, 5, 1, 3, "/", ":", " ");
                      AV11ExcelDocument.get_Cells(AV14CellRow, (int)(AV15FirstColumn+AV32VisibleColumnCount), 1, 1).Date = GXt_dtime3;
                   }
                   else if ( StringUtil.StrCmp(AV26ColumnsSelector_Column.gxTpr_Columnname, "LeaveRequestHalfDay") == 0 )
@@ -603,13 +603,13 @@ namespace GeneXus.Programs {
             }
             else if ( StringUtil.StrCmp(AV23GridStateFilterValue.gxTpr_Name, "TFLEAVEREQUESTSTARTDATE") == 0 )
             {
-               AV43TFLeaveRequestStartDate = context.localUtil.CToD( AV23GridStateFilterValue.gxTpr_Value, 1);
-               AV44TFLeaveRequestStartDate_To = context.localUtil.CToD( AV23GridStateFilterValue.gxTpr_Valueto, 1);
+               AV43TFLeaveRequestStartDate = context.localUtil.CToD( AV23GridStateFilterValue.gxTpr_Value, 2);
+               AV44TFLeaveRequestStartDate_To = context.localUtil.CToD( AV23GridStateFilterValue.gxTpr_Valueto, 2);
             }
             else if ( StringUtil.StrCmp(AV23GridStateFilterValue.gxTpr_Name, "TFLEAVEREQUESTENDDATE") == 0 )
             {
-               AV45TFLeaveRequestEndDate = context.localUtil.CToD( AV23GridStateFilterValue.gxTpr_Value, 1);
-               AV46TFLeaveRequestEndDate_To = context.localUtil.CToD( AV23GridStateFilterValue.gxTpr_Valueto, 1);
+               AV45TFLeaveRequestEndDate = context.localUtil.CToD( AV23GridStateFilterValue.gxTpr_Value, 2);
+               AV46TFLeaveRequestEndDate_To = context.localUtil.CToD( AV23GridStateFilterValue.gxTpr_Valueto, 2);
             }
             else if ( StringUtil.StrCmp(AV23GridStateFilterValue.gxTpr_Name, "TFLEAVEREQUESTHALFDAY") == 0 )
             {

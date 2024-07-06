@@ -789,7 +789,7 @@ namespace GeneXus.Programs {
             A127LeaveRequestId = H004B2_A127LeaveRequestId[0];
             A128LeaveRequestDate = H004B2_A128LeaveRequestDate[0];
             AV14GXLvl9 = 1;
-            Form.Caption = context.localUtil.DToC( A128LeaveRequestDate, 1, "/");
+            Form.Caption = context.localUtil.DToC( A128LeaveRequestDate, 2, "/");
             AssignProp("", false, "FORM", "Caption", Form.Caption, true);
             AV9Exists = true;
             /* Exiting from a For First loop. */
@@ -909,7 +909,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024731442555", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024762311435", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -925,7 +925,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("leaverequestview.js", "?2024731442555", false, true);
+         context.AddJavascriptSource("leaverequestview.js", "?2024762311435", false, true);
          context.AddJavascriptSource("shared/HistoryManager/HistoryManager.js", "", false, true);
          context.AddJavascriptSource("shared/HistoryManager/rsh/json2005.js", "", false, true);
          context.AddJavascriptSource("shared/HistoryManager/rsh/rsh.js", "", false, true);

@@ -613,7 +613,7 @@ namespace GeneXus.Programs {
             /* Single line edit */
             TempTags = "  onfocus=\"gx.evt.onfocus(this, 70,'',false,'',0)\"";
             context.WriteHtmlText( "<div id=\""+edtavBirthday_Internalname+"_dp_container\" class=\"dp_container\" style=\"white-space:nowrap;display:inline;\">") ;
-            GxWebStd.gx_single_line_edit( context, edtavBirthday_Internalname, context.localUtil.Format(AV11Birthday, "99/99/9999"), context.localUtil.Format( AV11Birthday, "99/99/9999"), TempTags+" onchange=\""+"gx.date.valid_date(this, 10,'MDY',0,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 10,'MDY',0,12,'eng',false,0);"+";gx.evt.onblur(this,70);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavBirthday_Jsonclick, 0, "AttributeDate", "", "", "", "", 1, edtavBirthday_Enabled, 1, "text", "", 10, "chr", 1, "row", 10, 0, 0, 0, 0, -1, 0, true, "GeneXusSecurityCommon\\GAMDate", "end", false, "", "HLP_GAMUserEntry.htm");
+            GxWebStd.gx_single_line_edit( context, edtavBirthday_Internalname, context.localUtil.Format(AV11Birthday, "99/99/9999"), context.localUtil.Format( AV11Birthday, "99/99/9999"), TempTags+" onchange=\""+"gx.date.valid_date(this, 10,'DMY',0,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 10,'DMY',0,12,'eng',false,0);"+";gx.evt.onblur(this,70);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavBirthday_Jsonclick, 0, "AttributeDate", "", "", "", "", 1, edtavBirthday_Enabled, 1, "text", "", 10, "chr", 1, "row", 10, 0, 0, 0, 0, -1, 0, true, "GeneXusSecurityCommon\\GAMDate", "end", false, "", "HLP_GAMUserEntry.htm");
             GxWebStd.gx_bitmap( context, edtavBirthday_Internalname+"_dp_trigger", context.GetImagePath( "61b9b5d3-dff6-4d59-9b00-da61bc2cbe93", "", context.GetTheme( )), "", "", "", "", ((1==0)||(edtavBirthday_Enabled==0) ? 0 : 1), 0, "Date selector", "Date selector", 0, 1, 0, "", 0, "", 0, 0, 0, "", "", "cursor: pointer;", "", "", "", "", "", "", "", "", 1, false, false, "", "HLP_GAMUserEntry.htm");
             context.WriteHtmlTextNl( "</div>") ;
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -753,7 +753,7 @@ namespace GeneXus.Programs {
             /* Single line edit */
             TempTags = "  onfocus=\"gx.evt.onfocus(this, 111,'',false,'',0)\"";
             context.WriteHtmlText( "<div id=\""+edtavActivationdate_Internalname+"_dp_container\" class=\"dp_container\" style=\"white-space:nowrap;display:inline;\">") ;
-            GxWebStd.gx_single_line_edit( context, edtavActivationdate_Internalname, context.localUtil.TToC( AV5ActivationDate, 10, 8, 1, 2, "/", ":", " "), context.localUtil.Format( AV5ActivationDate, "99/99/9999 99:99"), TempTags+" onchange=\""+"gx.date.valid_date(this, 10,'MDY',5,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 10,'MDY',5,12,'eng',false,0);"+";gx.evt.onblur(this,111);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavActivationdate_Jsonclick, 0, "AttributeDateTime", "", "", "", "", edtavActivationdate_Visible, edtavActivationdate_Enabled, 0, "text", "", 19, "chr", 1, "row", 19, 0, 0, 0, 0, -1, 0, true, "GeneXusSecurityCommon\\GAMDateTime", "end", false, "", "HLP_GAMUserEntry.htm");
+            GxWebStd.gx_single_line_edit( context, edtavActivationdate_Internalname, context.localUtil.TToC( AV5ActivationDate, 10, 8, 1, 3, "/", ":", " "), context.localUtil.Format( AV5ActivationDate, "99/99/9999 99:99"), TempTags+" onchange=\""+"gx.date.valid_date(this, 10,'DMY',5,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 10,'DMY',5,12,'eng',false,0);"+";gx.evt.onblur(this,111);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavActivationdate_Jsonclick, 0, "AttributeDateTime", "", "", "", "", edtavActivationdate_Visible, edtavActivationdate_Enabled, 0, "text", "", 19, "chr", 1, "row", 19, 0, 0, 0, 0, -1, 0, true, "GeneXusSecurityCommon\\GAMDateTime", "end", false, "", "HLP_GAMUserEntry.htm");
             GxWebStd.gx_bitmap( context, edtavActivationdate_Internalname+"_dp_trigger", context.GetImagePath( "61b9b5d3-dff6-4d59-9b00-da61bc2cbe93", "", context.GetTheme( )), "", "", "", "", ((edtavActivationdate_Visible==0)||(edtavActivationdate_Enabled==0) ? 0 : 1), 0, "Date selector", "Date selector", 0, 1, 0, "", 0, "", 0, 0, 0, "", "", "cursor: pointer;", "", "", "", "", "", "", "", "", 1, false, false, "", "HLP_GAMUserEntry.htm");
             context.WriteHtmlTextNl( "</div>") ;
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -905,7 +905,7 @@ namespace GeneXus.Programs {
             /* Single line edit */
             TempTags = "  onfocus=\"gx.evt.onfocus(this, 149,'',false,'',0)\"";
             context.WriteHtmlText( "<div id=\""+edtavDatelastauthentication_Internalname+"_dp_container\" class=\"dp_container\" style=\"white-space:nowrap;display:inline;\">") ;
-            GxWebStd.gx_single_line_edit( context, edtavDatelastauthentication_Internalname, context.localUtil.TToC( AV14DateLastAuthentication, 10, 8, 1, 2, "/", ":", " "), context.localUtil.Format( AV14DateLastAuthentication, "99/99/9999 99:99"), TempTags+" onchange=\""+"gx.date.valid_date(this, 10,'MDY',5,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 10,'MDY',5,12,'eng',false,0);"+";gx.evt.onblur(this,149);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavDatelastauthentication_Jsonclick, 0, "AttributeDateTime", "", "", "", "", edtavDatelastauthentication_Visible, edtavDatelastauthentication_Enabled, 0, "text", "", 19, "chr", 1, "row", 19, 0, 0, 0, 0, -1, 0, true, "GeneXusSecurityCommon\\GAMDateTime", "end", false, "", "HLP_GAMUserEntry.htm");
+            GxWebStd.gx_single_line_edit( context, edtavDatelastauthentication_Internalname, context.localUtil.TToC( AV14DateLastAuthentication, 10, 8, 1, 3, "/", ":", " "), context.localUtil.Format( AV14DateLastAuthentication, "99/99/9999 99:99"), TempTags+" onchange=\""+"gx.date.valid_date(this, 10,'DMY',5,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 10,'DMY',5,12,'eng',false,0);"+";gx.evt.onblur(this,149);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavDatelastauthentication_Jsonclick, 0, "AttributeDateTime", "", "", "", "", edtavDatelastauthentication_Visible, edtavDatelastauthentication_Enabled, 0, "text", "", 19, "chr", 1, "row", 19, 0, 0, 0, 0, -1, 0, true, "GeneXusSecurityCommon\\GAMDateTime", "end", false, "", "HLP_GAMUserEntry.htm");
             GxWebStd.gx_bitmap( context, edtavDatelastauthentication_Internalname+"_dp_trigger", context.GetImagePath( "61b9b5d3-dff6-4d59-9b00-da61bc2cbe93", "", context.GetTheme( )), "", "", "", "", ((edtavDatelastauthentication_Visible==0)||(edtavDatelastauthentication_Enabled==0) ? 0 : 1), 0, "Date selector", "Date selector", 0, 1, 0, "", 0, "", 0, 0, 0, "", "", "cursor: pointer;", "", "", "", "", "", "", "", "", 1, false, false, "", "HLP_GAMUserEntry.htm");
             context.WriteHtmlTextNl( "</div>") ;
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -958,7 +958,7 @@ namespace GeneXus.Programs {
             /* Single line edit */
             TempTags = "  onfocus=\"gx.evt.onfocus(this, 163,'',false,'',0)\"";
             context.WriteHtmlText( "<div id=\""+edtavOtplastlockeddate_Internalname+"_dp_container\" class=\"dp_container\" style=\"white-space:nowrap;display:inline;\">") ;
-            GxWebStd.gx_single_line_edit( context, edtavOtplastlockeddate_Internalname, context.localUtil.TToC( AV39OTPLastLockedDate, 10, 8, 1, 2, "/", ":", " "), context.localUtil.Format( AV39OTPLastLockedDate, "99/99/9999 99:99"), TempTags+" onchange=\""+"gx.date.valid_date(this, 10,'MDY',5,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 10,'MDY',5,12,'eng',false,0);"+";gx.evt.onblur(this,163);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavOtplastlockeddate_Jsonclick, 0, "AttributeDateTime", "", "", "", "", edtavOtplastlockeddate_Visible, edtavOtplastlockeddate_Enabled, 1, "text", "", 19, "chr", 1, "row", 19, 0, 0, 0, 0, -1, 0, true, "GeneXusSecurityCommon\\GAMDateTime", "end", false, "", "HLP_GAMUserEntry.htm");
+            GxWebStd.gx_single_line_edit( context, edtavOtplastlockeddate_Internalname, context.localUtil.TToC( AV39OTPLastLockedDate, 10, 8, 1, 3, "/", ":", " "), context.localUtil.Format( AV39OTPLastLockedDate, "99/99/9999 99:99"), TempTags+" onchange=\""+"gx.date.valid_date(this, 10,'DMY',5,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 10,'DMY',5,12,'eng',false,0);"+";gx.evt.onblur(this,163);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavOtplastlockeddate_Jsonclick, 0, "AttributeDateTime", "", "", "", "", edtavOtplastlockeddate_Visible, edtavOtplastlockeddate_Enabled, 1, "text", "", 19, "chr", 1, "row", 19, 0, 0, 0, 0, -1, 0, true, "GeneXusSecurityCommon\\GAMDateTime", "end", false, "", "HLP_GAMUserEntry.htm");
             GxWebStd.gx_bitmap( context, edtavOtplastlockeddate_Internalname+"_dp_trigger", context.GetImagePath( "61b9b5d3-dff6-4d59-9b00-da61bc2cbe93", "", context.GetTheme( )), "", "", "", "", ((edtavOtplastlockeddate_Visible==0)||(edtavOtplastlockeddate_Enabled==0) ? 0 : 1), 0, "Date selector", "Date selector", 0, 1, 0, "", 0, "", 0, 0, 0, "", "", "cursor: pointer;", "", "", "", "", "", "", "", "", 1, false, false, "", "HLP_GAMUserEntry.htm");
             context.WriteHtmlTextNl( "</div>") ;
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -992,7 +992,7 @@ namespace GeneXus.Programs {
             /* Single line edit */
             TempTags = "  onfocus=\"gx.evt.onfocus(this, 172,'',false,'',0)\"";
             context.WriteHtmlText( "<div id=\""+edtavOtplastdaterequestcode_Internalname+"_dp_container\" class=\"dp_container\" style=\"white-space:nowrap;display:inline;\">") ;
-            GxWebStd.gx_single_line_edit( context, edtavOtplastdaterequestcode_Internalname, context.localUtil.Format(AV38OTPLastDateRequestCode, "99/99/9999"), context.localUtil.Format( AV38OTPLastDateRequestCode, "99/99/9999"), TempTags+" onchange=\""+"gx.date.valid_date(this, 10,'MDY',0,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 10,'MDY',0,12,'eng',false,0);"+";gx.evt.onblur(this,172);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavOtplastdaterequestcode_Jsonclick, 0, "AttributeDate", "", "", "", "", edtavOtplastdaterequestcode_Visible, edtavOtplastdaterequestcode_Enabled, 1, "text", "", 10, "chr", 1, "row", 10, 0, 0, 0, 0, -1, 0, true, "GeneXusSecurityCommon\\GAMDate", "end", false, "", "HLP_GAMUserEntry.htm");
+            GxWebStd.gx_single_line_edit( context, edtavOtplastdaterequestcode_Internalname, context.localUtil.Format(AV38OTPLastDateRequestCode, "99/99/9999"), context.localUtil.Format( AV38OTPLastDateRequestCode, "99/99/9999"), TempTags+" onchange=\""+"gx.date.valid_date(this, 10,'DMY',0,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 10,'DMY',0,12,'eng',false,0);"+";gx.evt.onblur(this,172);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavOtplastdaterequestcode_Jsonclick, 0, "AttributeDate", "", "", "", "", edtavOtplastdaterequestcode_Visible, edtavOtplastdaterequestcode_Enabled, 1, "text", "", 10, "chr", 1, "row", 10, 0, 0, 0, 0, -1, 0, true, "GeneXusSecurityCommon\\GAMDate", "end", false, "", "HLP_GAMUserEntry.htm");
             GxWebStd.gx_bitmap( context, edtavOtplastdaterequestcode_Internalname+"_dp_trigger", context.GetImagePath( "61b9b5d3-dff6-4d59-9b00-da61bc2cbe93", "", context.GetTheme( )), "", "", "", "", ((edtavOtplastdaterequestcode_Visible==0)||(edtavOtplastdaterequestcode_Enabled==0) ? 0 : 1), 0, "Date selector", "Date selector", 0, 1, 0, "", 0, "", 0, 0, 0, "", "", "cursor: pointer;", "", "", "", "", "", "", "", "", 1, false, false, "", "HLP_GAMUserEntry.htm");
             context.WriteHtmlTextNl( "</div>") ;
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -1411,7 +1411,7 @@ namespace GeneXus.Programs {
             AssignAttri("", false, "AV31LastName", AV31LastName);
             AV20ExternalId = cgiGet( edtavExternalid_Internalname);
             AssignAttri("", false, "AV20ExternalId", AV20ExternalId);
-            if ( context.localUtil.VCDate( cgiGet( edtavBirthday_Internalname), 1) == 0 )
+            if ( context.localUtil.VCDate( cgiGet( edtavBirthday_Internalname), 2) == 0 )
             {
                GX_msglist.addItem(context.GetMessage( "GXM_faildate", new   object[]  {"Birthday"}), 1, "vBIRTHDAY");
                GX_FocusControl = edtavBirthday_Internalname;
@@ -1422,7 +1422,7 @@ namespace GeneXus.Programs {
             }
             else
             {
-               AV11Birthday = context.localUtil.CToD( cgiGet( edtavBirthday_Internalname), 1);
+               AV11Birthday = context.localUtil.CToD( cgiGet( edtavBirthday_Internalname), 2);
                AssignAttri("", false, "AV11Birthday", context.localUtil.Format(AV11Birthday, "99/99/9999"));
             }
             cmbavGender.CurrentValue = cgiGet( cmbavGender_Internalname);
@@ -1435,19 +1435,19 @@ namespace GeneXus.Programs {
             AV25Image = cgiGet( imgavImage_Internalname);
             AV26IsActive = StringUtil.StrToBool( cgiGet( chkavIsactive_Internalname));
             AssignAttri("", false, "AV26IsActive", AV26IsActive);
-            if ( context.localUtil.VCDateTime( cgiGet( edtavActivationdate_Internalname), 1, 1) == 0 )
+            if ( context.localUtil.VCDateTime( cgiGet( edtavActivationdate_Internalname), 2, 1) == 0 )
             {
                GX_msglist.addItem(context.GetMessage( "GXM_baddatetime", new   object[]  {"Activation Date"}), 1, "vACTIVATIONDATE");
                GX_FocusControl = edtavActivationdate_Internalname;
                AssignAttri("", false, "GX_FocusControl", GX_FocusControl);
                wbErr = true;
                AV5ActivationDate = (DateTime)(DateTime.MinValue);
-               AssignAttri("", false, "AV5ActivationDate", context.localUtil.TToC( AV5ActivationDate, 10, 5, 1, 2, "/", ":", " "));
+               AssignAttri("", false, "AV5ActivationDate", context.localUtil.TToC( AV5ActivationDate, 10, 5, 1, 3, "/", ":", " "));
             }
             else
             {
                AV5ActivationDate = context.localUtil.CToT( cgiGet( edtavActivationdate_Internalname));
-               AssignAttri("", false, "AV5ActivationDate", context.localUtil.TToC( AV5ActivationDate, 10, 5, 1, 2, "/", ":", " "));
+               AssignAttri("", false, "AV5ActivationDate", context.localUtil.TToC( AV5ActivationDate, 10, 5, 1, 3, "/", ":", " "));
             }
             AV15DontReceiveInformation = StringUtil.StrToBool( cgiGet( chkavDontreceiveinformation_Internalname));
             AssignAttri("", false, "AV15DontReceiveInformation", AV15DontReceiveInformation);
@@ -1464,19 +1464,19 @@ namespace GeneXus.Programs {
             AssignAttri("", false, "AV50SecurityPolicyId", StringUtil.LTrimStr( (decimal)(AV50SecurityPolicyId), 9, 0));
             AV28IsEnabledInRepository = StringUtil.StrToBool( cgiGet( chkavIsenabledinrepository_Internalname));
             AssignAttri("", false, "AV28IsEnabledInRepository", AV28IsEnabledInRepository);
-            if ( context.localUtil.VCDateTime( cgiGet( edtavDatelastauthentication_Internalname), 1, 1) == 0 )
+            if ( context.localUtil.VCDateTime( cgiGet( edtavDatelastauthentication_Internalname), 2, 1) == 0 )
             {
                GX_msglist.addItem(context.GetMessage( "GXM_baddatetime", new   object[]  {"Date Last Authentication"}), 1, "vDATELASTAUTHENTICATION");
                GX_FocusControl = edtavDatelastauthentication_Internalname;
                AssignAttri("", false, "GX_FocusControl", GX_FocusControl);
                wbErr = true;
                AV14DateLastAuthentication = (DateTime)(DateTime.MinValue);
-               AssignAttri("", false, "AV14DateLastAuthentication", context.localUtil.TToC( AV14DateLastAuthentication, 10, 5, 1, 2, "/", ":", " "));
+               AssignAttri("", false, "AV14DateLastAuthentication", context.localUtil.TToC( AV14DateLastAuthentication, 10, 5, 1, 3, "/", ":", " "));
             }
             else
             {
                AV14DateLastAuthentication = context.localUtil.CToT( cgiGet( edtavDatelastauthentication_Internalname));
-               AssignAttri("", false, "AV14DateLastAuthentication", context.localUtil.TToC( AV14DateLastAuthentication, 10, 5, 1, 2, "/", ":", " "));
+               AssignAttri("", false, "AV14DateLastAuthentication", context.localUtil.TToC( AV14DateLastAuthentication, 10, 5, 1, 3, "/", ":", " "));
             }
             AV17EnableTwoFactorAuthentication = StringUtil.StrToBool( cgiGet( chkavEnabletwofactorauthentication_Internalname));
             AssignAttri("", false, "AV17EnableTwoFactorAuthentication", AV17EnableTwoFactorAuthentication);
@@ -1494,19 +1494,19 @@ namespace GeneXus.Programs {
                AV40OTPNumberLocked = (short)(Math.Round(context.localUtil.CToN( cgiGet( edtavOtpnumberlocked_Internalname), ".", ","), 18, MidpointRounding.ToEven));
                AssignAttri("", false, "AV40OTPNumberLocked", StringUtil.LTrimStr( (decimal)(AV40OTPNumberLocked), 3, 0));
             }
-            if ( context.localUtil.VCDateTime( cgiGet( edtavOtplastlockeddate_Internalname), 1, 1) == 0 )
+            if ( context.localUtil.VCDateTime( cgiGet( edtavOtplastlockeddate_Internalname), 2, 1) == 0 )
             {
                GX_msglist.addItem(context.GetMessage( "GXM_baddatetime", new   object[]  {"Last time OTP code is locked"}), 1, "vOTPLASTLOCKEDDATE");
                GX_FocusControl = edtavOtplastlockeddate_Internalname;
                AssignAttri("", false, "GX_FocusControl", GX_FocusControl);
                wbErr = true;
                AV39OTPLastLockedDate = (DateTime)(DateTime.MinValue);
-               AssignAttri("", false, "AV39OTPLastLockedDate", context.localUtil.TToC( AV39OTPLastLockedDate, 10, 5, 1, 2, "/", ":", " "));
+               AssignAttri("", false, "AV39OTPLastLockedDate", context.localUtil.TToC( AV39OTPLastLockedDate, 10, 5, 1, 3, "/", ":", " "));
             }
             else
             {
                AV39OTPLastLockedDate = context.localUtil.CToT( cgiGet( edtavOtplastlockeddate_Internalname));
-               AssignAttri("", false, "AV39OTPLastLockedDate", context.localUtil.TToC( AV39OTPLastLockedDate, 10, 5, 1, 2, "/", ":", " "));
+               AssignAttri("", false, "AV39OTPLastLockedDate", context.localUtil.TToC( AV39OTPLastLockedDate, 10, 5, 1, 3, "/", ":", " "));
             }
             if ( ( ( context.localUtil.CToN( cgiGet( edtavOtpdailynumbercodes_Internalname), ".", ",") < Convert.ToDecimal( 0 )) ) || ( ( context.localUtil.CToN( cgiGet( edtavOtpdailynumbercodes_Internalname), ".", ",") > Convert.ToDecimal( 9999 )) ) )
             {
@@ -1522,7 +1522,7 @@ namespace GeneXus.Programs {
                AV37OTPDailyNumberCodes = (short)(Math.Round(context.localUtil.CToN( cgiGet( edtavOtpdailynumbercodes_Internalname), ".", ","), 18, MidpointRounding.ToEven));
                AssignAttri("", false, "AV37OTPDailyNumberCodes", StringUtil.LTrimStr( (decimal)(AV37OTPDailyNumberCodes), 4, 0));
             }
-            if ( context.localUtil.VCDate( cgiGet( edtavOtplastdaterequestcode_Internalname), 1) == 0 )
+            if ( context.localUtil.VCDate( cgiGet( edtavOtplastdaterequestcode_Internalname), 2) == 0 )
             {
                GX_msglist.addItem(context.GetMessage( "GXM_faildate", new   object[]  {"Last date requested a OTP code"}), 1, "vOTPLASTDATEREQUESTCODE");
                GX_FocusControl = edtavOtplastdaterequestcode_Internalname;
@@ -1533,7 +1533,7 @@ namespace GeneXus.Programs {
             }
             else
             {
-               AV38OTPLastDateRequestCode = context.localUtil.CToD( cgiGet( edtavOtplastdaterequestcode_Internalname), 1);
+               AV38OTPLastDateRequestCode = context.localUtil.CToD( cgiGet( edtavOtplastdaterequestcode_Internalname), 2);
                AssignAttri("", false, "AV38OTPLastDateRequestCode", context.localUtil.Format(AV38OTPLastDateRequestCode, "99/99/9999"));
             }
             AV53User.gxTpr_Isenabledinrepository = StringUtil.StrToBool( cgiGet( chkavUser_isenabledinrepository_Internalname));
@@ -1661,7 +1661,7 @@ namespace GeneXus.Programs {
             AV26IsActive = AV53User.gxTpr_Isactive;
             AssignAttri("", false, "AV26IsActive", AV26IsActive);
             AV5ActivationDate = AV53User.gxTpr_Activationdate;
-            AssignAttri("", false, "AV5ActivationDate", context.localUtil.TToC( AV5ActivationDate, 10, 5, 1, 2, "/", ":", " "));
+            AssignAttri("", false, "AV5ActivationDate", context.localUtil.TToC( AV5ActivationDate, 10, 5, 1, 3, "/", ":", " "));
             AV15DontReceiveInformation = AV53User.gxTpr_Dontreceiveinformation;
             AssignAttri("", false, "AV15DontReceiveInformation", AV15DontReceiveInformation);
             AV13CannotChangePassword = AV53User.gxTpr_Cannotchangepassword;
@@ -1677,7 +1677,7 @@ namespace GeneXus.Programs {
             AV28IsEnabledInRepository = AV53User.gxTpr_Isenabledinrepository;
             AssignAttri("", false, "AV28IsEnabledInRepository", AV28IsEnabledInRepository);
             AV14DateLastAuthentication = AV53User.gxTpr_Datelastauthentication;
-            AssignAttri("", false, "AV14DateLastAuthentication", context.localUtil.TToC( AV14DateLastAuthentication, 10, 5, 1, 2, "/", ":", " "));
+            AssignAttri("", false, "AV14DateLastAuthentication", context.localUtil.TToC( AV14DateLastAuthentication, 10, 5, 1, 3, "/", ":", " "));
             AV17EnableTwoFactorAuthentication = AV53User.gxTpr_Enabletwofactorauthentication;
             AssignAttri("", false, "AV17EnableTwoFactorAuthentication", AV17EnableTwoFactorAuthentication);
             AV37OTPDailyNumberCodes = AV53User.gxTpr_Otpdailynumbercodes;
@@ -1685,7 +1685,7 @@ namespace GeneXus.Programs {
             AV38OTPLastDateRequestCode = AV53User.gxTpr_Otplastdaterequestcode;
             AssignAttri("", false, "AV38OTPLastDateRequestCode", context.localUtil.Format(AV38OTPLastDateRequestCode, "99/99/9999"));
             AV39OTPLastLockedDate = DateTimeUtil.ResetTime( AV53User.gxTpr_Otplastlockeddate ) ;
-            AssignAttri("", false, "AV39OTPLastLockedDate", context.localUtil.TToC( AV39OTPLastLockedDate, 10, 5, 1, 2, "/", ":", " "));
+            AssignAttri("", false, "AV39OTPLastLockedDate", context.localUtil.TToC( AV39OTPLastLockedDate, 10, 5, 1, 3, "/", ":", " "));
             AV40OTPNumberLocked = AV53User.gxTpr_Otpnumberlocked;
             AssignAttri("", false, "AV40OTPNumberLocked", StringUtil.LTrimStr( (decimal)(AV40OTPNumberLocked), 3, 0));
          }
@@ -2357,7 +2357,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247314425879", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024752149542", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2373,7 +2373,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("gamuserentry.js", "?20247314425881", false, true);
+         context.AddJavascriptSource("gamuserentry.js", "?2024752149546", false, true);
          /* End function include_jscripts */
       }
 

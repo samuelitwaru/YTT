@@ -1160,16 +1160,16 @@ namespace GeneXus.Programs {
             dynEmployeeId.CurrentValue = cgiGet( dynEmployeeId_Internalname);
             A106EmployeeId = (long)(Math.Round(NumberUtil.Val( cgiGet( dynEmployeeId_Internalname), "."), 18, MidpointRounding.ToEven));
             AssignAttri(sPrefix, false, "A106EmployeeId", StringUtil.LTrimStr( (decimal)(A106EmployeeId), 10, 0));
-            A129LeaveRequestStartDate = context.localUtil.CToD( cgiGet( edtLeaveRequestStartDate_Internalname), 1);
+            A129LeaveRequestStartDate = context.localUtil.CToD( cgiGet( edtLeaveRequestStartDate_Internalname), 2);
             AssignAttri(sPrefix, false, "A129LeaveRequestStartDate", context.localUtil.Format(A129LeaveRequestStartDate, "99/99/99"));
-            A130LeaveRequestEndDate = context.localUtil.CToD( cgiGet( edtLeaveRequestEndDate_Internalname), 1);
+            A130LeaveRequestEndDate = context.localUtil.CToD( cgiGet( edtLeaveRequestEndDate_Internalname), 2);
             AssignAttri(sPrefix, false, "A130LeaveRequestEndDate", context.localUtil.Format(A130LeaveRequestEndDate, "99/99/99"));
             A173LeaveRequestHalfDay = cgiGet( radLeaveRequestHalfDay_Internalname);
             n173LeaveRequestHalfDay = false;
             AssignAttri(sPrefix, false, "A173LeaveRequestHalfDay", A173LeaveRequestHalfDay);
             A133LeaveRequestDescription = cgiGet( edtLeaveRequestDescription_Internalname);
             AssignAttri(sPrefix, false, "A133LeaveRequestDescription", A133LeaveRequestDescription);
-            A128LeaveRequestDate = context.localUtil.CToD( cgiGet( edtLeaveRequestDate_Internalname), 1);
+            A128LeaveRequestDate = context.localUtil.CToD( cgiGet( edtLeaveRequestDate_Internalname), 2);
             AssignAttri(sPrefix, false, "A128LeaveRequestDate", context.localUtil.Format(A128LeaveRequestDate, "99/99/99"));
             A131LeaveRequestDuration = context.localUtil.CToN( cgiGet( edtLeaveRequestDuration_Internalname), ".", ",");
             AssignAttri(sPrefix, false, "A131LeaveRequestDuration", StringUtil.LTrimStr( A131LeaveRequestDuration, 4, 1));
@@ -1252,7 +1252,7 @@ namespace GeneXus.Programs {
             bttBtndelete_Visible = 0;
             AssignProp(sPrefix, false, bttBtndelete_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(bttBtndelete_Visible), 5, 0), true);
          }
-         if ( ! ( ( AV14Checking == Convert.ToDecimal( true )) ) )
+         if ( ! ( ( AV14Ismanager == Convert.ToDecimal( true )) ) )
          {
             dynEmployeeId.Visible = 0;
             AssignProp(sPrefix, false, dynEmployeeId_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(dynEmployeeId.Visible), 5, 0), true);
@@ -1477,7 +1477,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247415494712", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024762359094", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1493,7 +1493,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("leaverequestgeneral.js", "?20247415494713", false, true);
+         context.AddJavascriptSource("leaverequestgeneral.js", "?2024762359094", false, true);
          /* End function include_jscripts */
       }
 
@@ -1737,7 +1737,7 @@ namespace GeneXus.Programs {
       private long A106EmployeeId ;
       private decimal AV16Employeecompany ;
       private decimal A131LeaveRequestDuration ;
-      private decimal AV14Checking ;
+      private decimal AV14Ismanager ;
       private string gxfirstwebparm ;
       private string gxfirstwebparm_bkp ;
       private string sPrefix ;

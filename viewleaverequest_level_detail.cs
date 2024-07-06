@@ -121,10 +121,10 @@ namespace GeneXus.Programs {
             AV22LeaveRequestDescription = AV20LeaveRequest.gxTpr_Leaverequestdescription;
             AV23LeaveRequestDuration = AV20LeaveRequest.gxTpr_Leaverequestduration;
             AV28LeaveRejectionReason = AV20LeaveRequest.gxTpr_Leaverequestrejectionreason;
-            Gxwebsession.Set(Gxids+"gxvar_Leaverequestdate", context.localUtil.DToC( AV21LeaveRequestDate, 1, "/"));
+            Gxwebsession.Set(Gxids+"gxvar_Leaverequestdate", context.localUtil.DToC( AV21LeaveRequestDate, 2, "/"));
             Gxwebsession.Set(Gxids+"gxvar_Leavetypeid", StringUtil.Str( (decimal)(AV26LeaveTypeId), 10, 0));
-            Gxwebsession.Set(Gxids+"gxvar_Leaverequeststartdate", context.localUtil.DToC( AV25LeaveRequestStartDate, 1, "/"));
-            Gxwebsession.Set(Gxids+"gxvar_Leaverequestenddate", context.localUtil.DToC( AV24LeaveRequestEndDate, 1, "/"));
+            Gxwebsession.Set(Gxids+"gxvar_Leaverequeststartdate", context.localUtil.DToC( AV25LeaveRequestStartDate, 2, "/"));
+            Gxwebsession.Set(Gxids+"gxvar_Leaverequestenddate", context.localUtil.DToC( AV24LeaveRequestEndDate, 2, "/"));
             Gxwebsession.Set(Gxids+"gxvar_Leaverequestduration", StringUtil.Str( AV23LeaveRequestDuration, 4, 1));
             Gxwebsession.Set(Gxids+"gxvar_Leaverequestdescription", AV22LeaveRequestDescription);
             Gxwebsession.Set(Gxids+"gxvar_Leaverejectionreason", AV28LeaveRejectionReason);
@@ -133,9 +133,9 @@ namespace GeneXus.Programs {
          else
          {
             AV26LeaveTypeId = (long)(Math.Round(NumberUtil.Val( Gxwebsession.Get(Gxids+"gxvar_Leavetypeid"), "."), 18, MidpointRounding.ToEven));
-            AV21LeaveRequestDate = context.localUtil.CToD( Gxwebsession.Get(Gxids+"gxvar_Leaverequestdate"), 1);
-            AV25LeaveRequestStartDate = context.localUtil.CToD( Gxwebsession.Get(Gxids+"gxvar_Leaverequeststartdate"), 1);
-            AV24LeaveRequestEndDate = context.localUtil.CToD( Gxwebsession.Get(Gxids+"gxvar_Leaverequestenddate"), 1);
+            AV21LeaveRequestDate = context.localUtil.CToD( Gxwebsession.Get(Gxids+"gxvar_Leaverequestdate"), 2);
+            AV25LeaveRequestStartDate = context.localUtil.CToD( Gxwebsession.Get(Gxids+"gxvar_Leaverequeststartdate"), 2);
+            AV24LeaveRequestEndDate = context.localUtil.CToD( Gxwebsession.Get(Gxids+"gxvar_Leaverequestenddate"), 2);
             AV22LeaveRequestDescription = Gxwebsession.Get(Gxids+"gxvar_Leaverequestdescription");
             AV23LeaveRequestDuration = NumberUtil.Val( Gxwebsession.Get(Gxids+"gxvar_Leaverequestduration"), ".");
             AV28LeaveRejectionReason = Gxwebsession.Get(Gxids+"gxvar_Leaverejectionreason");

@@ -207,13 +207,13 @@ namespace GeneXus.Programs {
             }
             else if ( StringUtil.StrCmp(AV47GridStateFilterValue.gxTpr_Name, "TFLEAVEREQUESTSTARTDATE") == 0 )
             {
-               AV19TFLeaveRequestStartDate = context.localUtil.CToD( AV47GridStateFilterValue.gxTpr_Value, 1);
-               AV20TFLeaveRequestStartDate_To = context.localUtil.CToD( AV47GridStateFilterValue.gxTpr_Valueto, 1);
+               AV19TFLeaveRequestStartDate = context.localUtil.CToD( AV47GridStateFilterValue.gxTpr_Value, 2);
+               AV20TFLeaveRequestStartDate_To = context.localUtil.CToD( AV47GridStateFilterValue.gxTpr_Valueto, 2);
             }
             else if ( StringUtil.StrCmp(AV47GridStateFilterValue.gxTpr_Name, "TFLEAVEREQUESTENDDATE") == 0 )
             {
-               AV21TFLeaveRequestEndDate = context.localUtil.CToD( AV47GridStateFilterValue.gxTpr_Value, 1);
-               AV22TFLeaveRequestEndDate_To = context.localUtil.CToD( AV47GridStateFilterValue.gxTpr_Valueto, 1);
+               AV21TFLeaveRequestEndDate = context.localUtil.CToD( AV47GridStateFilterValue.gxTpr_Value, 2);
+               AV22TFLeaveRequestEndDate_To = context.localUtil.CToD( AV47GridStateFilterValue.gxTpr_Valueto, 2);
             }
             else if ( StringUtil.StrCmp(AV47GridStateFilterValue.gxTpr_Name, "TFLEAVEREQUESTHALFDAY") == 0 )
             {

@@ -1158,8 +1158,8 @@ namespace GeneXus.Programs {
          AV34WebSession.Set("CompanyLocationId", AV12CompanyLocationId.ToJSonString(false));
          AV34WebSession.Set("EmployeeId", AV13EmployeeId.ToJSonString(false));
          AV34WebSession.Set("OneProjectId", StringUtil.Str( (decimal)(AV22OneProjectId), 4, 0));
-         AV34WebSession.Set("FromDate", context.localUtil.DToC( AV15FromDate, 1, "/"));
-         AV34WebSession.Set("ToDate", context.localUtil.DToC( AV16ToDate, 1, "/"));
+         AV34WebSession.Set("FromDate", context.localUtil.DToC( AV15FromDate, 2, "/"));
+         AV34WebSession.Set("ToDate", context.localUtil.DToC( AV16ToDate, 2, "/"));
       }
 
       protected void S112( )
@@ -1168,9 +1168,9 @@ namespace GeneXus.Programs {
          returnInSub = false;
          AV12CompanyLocationId.FromJSonString(AV34WebSession.Get("CompanyLocationId"), null);
          AV13EmployeeId.FromJSonString(AV34WebSession.Get("EmployeeId"), null);
-         AV15FromDate = context.localUtil.CToD( AV34WebSession.Get("FromDate"), 1);
+         AV15FromDate = context.localUtil.CToD( AV34WebSession.Get("FromDate"), 2);
          AssignAttri("", false, "AV15FromDate", context.localUtil.Format(AV15FromDate, "99/99/99"));
-         AV16ToDate = context.localUtil.CToD( AV34WebSession.Get("ToDate"), 1);
+         AV16ToDate = context.localUtil.CToD( AV34WebSession.Get("ToDate"), 2);
          AssignAttri("", false, "AV16ToDate", context.localUtil.Format(AV16ToDate, "99/99/99"));
       }
 
@@ -1223,7 +1223,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247415551867", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247615362548", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1239,7 +1239,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("projectdetails.js", "?20247415551867", false, true);
+         context.AddJavascriptSource("projectdetails.js", "?20247615362548", false, true);
          context.AddJavascriptSource("Window/InNewWindowRender.js", "", false, true);
          /* End function include_jscripts */
       }

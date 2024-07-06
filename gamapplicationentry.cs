@@ -2043,19 +2043,19 @@ namespace GeneXus.Programs {
             cmbavMainmenu.CurrentValue = cgiGet( cmbavMainmenu_Internalname);
             AV46MainMenu = (long)(Math.Round(NumberUtil.Val( cgiGet( cmbavMainmenu_Internalname), "."), 18, MidpointRounding.ToEven));
             AssignAttri("", false, "AV46MainMenu", StringUtil.LTrimStr( (decimal)(AV46MainMenu), 12, 0));
-            if ( context.localUtil.VCDateTime( cgiGet( edtavClientrevoked_Internalname), 1, 1) == 0 )
+            if ( context.localUtil.VCDateTime( cgiGet( edtavClientrevoked_Internalname), 2, 1) == 0 )
             {
                GX_msglist.addItem(context.GetMessage( "GXM_baddatetime", new   object[]  {"Client Revoked"}), 1, "vCLIENTREVOKED");
                GX_FocusControl = edtavClientrevoked_Internalname;
                AssignAttri("", false, "GX_FocusControl", GX_FocusControl);
                wbErr = true;
                AV26ClientRevoked = (DateTime)(DateTime.MinValue);
-               AssignAttri("", false, "AV26ClientRevoked", context.localUtil.TToC( AV26ClientRevoked, 10, 5, 1, 2, "/", ":", " "));
+               AssignAttri("", false, "AV26ClientRevoked", context.localUtil.TToC( AV26ClientRevoked, 10, 5, 1, 3, "/", ":", " "));
             }
             else
             {
                AV26ClientRevoked = context.localUtil.CToT( cgiGet( edtavClientrevoked_Internalname));
-               AssignAttri("", false, "AV26ClientRevoked", context.localUtil.TToC( AV26ClientRevoked, 10, 5, 1, 2, "/", ":", " "));
+               AssignAttri("", false, "AV26ClientRevoked", context.localUtil.TToC( AV26ClientRevoked, 10, 5, 1, 3, "/", ":", " "));
             }
             AV5AccessRequiresPermission = StringUtil.StrToBool( cgiGet( chkavAccessrequirespermission_Internalname));
             AssignAttri("", false, "AV5AccessRequiresPermission", AV5AccessRequiresPermission);
@@ -2221,7 +2221,7 @@ namespace GeneXus.Programs {
             AV8ClientAccessUniqueByUser = AV114Application.gxTpr_Clientaccessuniquebyuser;
             AssignAttri("", false, "AV8ClientAccessUniqueByUser", AV8ClientAccessUniqueByUser);
             AV26ClientRevoked = AV114Application.gxTpr_Clientrevoked;
-            AssignAttri("", false, "AV26ClientRevoked", context.localUtil.TToC( AV26ClientRevoked, 10, 5, 1, 2, "/", ":", " "));
+            AssignAttri("", false, "AV26ClientRevoked", context.localUtil.TToC( AV26ClientRevoked, 10, 5, 1, 3, "/", ":", " "));
             AV17ClientAllowRemoteAuth = AV114Application.gxTpr_Clientallowremoteauthentication;
             AssignAttri("", false, "AV17ClientAllowRemoteAuth", AV17ClientAllowRemoteAuth);
             AV15ClientAllowGetUserRoles = AV114Application.gxTpr_Clientallowgetuserroles;
@@ -2796,7 +2796,7 @@ namespace GeneXus.Programs {
             /* Single line edit */
             TempTags = "  onfocus=\"gx.evt.onfocus(this, 97,'',false,'',0)\"";
             context.WriteHtmlText( "<div id=\""+edtavClientrevoked_Internalname+"_dp_container\" class=\"dp_container\" style=\"white-space:nowrap;display:inline;\">") ;
-            GxWebStd.gx_single_line_edit( context, edtavClientrevoked_Internalname, context.localUtil.TToC( AV26ClientRevoked, 10, 8, 1, 2, "/", ":", " "), context.localUtil.Format( AV26ClientRevoked, "99/99/9999 99:99"), TempTags+" onchange=\""+"gx.date.valid_date(this, 10,'MDY',5,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 10,'MDY',5,12,'eng',false,0);"+";gx.evt.onblur(this,97);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavClientrevoked_Jsonclick, 0, "AttributeDateTime", "", "", "", "", 1, edtavClientrevoked_Enabled, 1, "text", "", 19, "chr", 1, "row", 19, 0, 0, 0, 0, -1, 0, true, "GeneXusSecurityCommon\\GAMDateTime", "end", false, "", "HLP_GAMApplicationEntry.htm");
+            GxWebStd.gx_single_line_edit( context, edtavClientrevoked_Internalname, context.localUtil.TToC( AV26ClientRevoked, 10, 8, 1, 3, "/", ":", " "), context.localUtil.Format( AV26ClientRevoked, "99/99/9999 99:99"), TempTags+" onchange=\""+"gx.date.valid_date(this, 10,'DMY',5,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 10,'DMY',5,12,'eng',false,0);"+";gx.evt.onblur(this,97);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavClientrevoked_Jsonclick, 0, "AttributeDateTime", "", "", "", "", 1, edtavClientrevoked_Enabled, 1, "text", "", 19, "chr", 1, "row", 19, 0, 0, 0, 0, -1, 0, true, "GeneXusSecurityCommon\\GAMDateTime", "end", false, "", "HLP_GAMApplicationEntry.htm");
             GxWebStd.gx_bitmap( context, edtavClientrevoked_Internalname+"_dp_trigger", context.GetImagePath( "61b9b5d3-dff6-4d59-9b00-da61bc2cbe93", "", context.GetTheme( )), "", "", "", "", ((1==0)||(edtavClientrevoked_Enabled==0) ? 0 : 1), 0, "Date selector", "Date selector", 0, 1, 0, "", 0, "", 0, 0, 0, "", "", "cursor: pointer;", "", "", "", "", "", "", "", "", 1, false, false, "", "HLP_GAMApplicationEntry.htm");
             context.WriteHtmlTextNl( "</div>") ;
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -2863,7 +2863,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247314424350", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247521472654", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2879,7 +2879,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("gamapplicationentry.js", "?20247314424351", false, true);
+         context.AddJavascriptSource("gamapplicationentry.js", "?20247521472655", false, true);
          context.AddJavascriptSource("shared/HistoryManager/HistoryManager.js", "", false, true);
          context.AddJavascriptSource("shared/HistoryManager/rsh/json2005.js", "", false, true);
          context.AddJavascriptSource("shared/HistoryManager/rsh/rsh.js", "", false, true);

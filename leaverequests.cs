@@ -1955,16 +1955,16 @@ namespace GeneXus.Programs {
             }
             else if ( StringUtil.StrCmp(Ddo_grid_Selectedcolumn, "LeaveRequestStartDate") == 0 )
             {
-               AV51TFLeaveRequestStartDate = context.localUtil.CToD( Ddo_grid_Filteredtext_get, 1);
+               AV51TFLeaveRequestStartDate = context.localUtil.CToD( Ddo_grid_Filteredtext_get, 2);
                AssignAttri("", false, "AV51TFLeaveRequestStartDate", context.localUtil.Format(AV51TFLeaveRequestStartDate, "99/99/99"));
-               AV52TFLeaveRequestStartDate_To = context.localUtil.CToD( Ddo_grid_Filteredtextto_get, 1);
+               AV52TFLeaveRequestStartDate_To = context.localUtil.CToD( Ddo_grid_Filteredtextto_get, 2);
                AssignAttri("", false, "AV52TFLeaveRequestStartDate_To", context.localUtil.Format(AV52TFLeaveRequestStartDate_To, "99/99/99"));
             }
             else if ( StringUtil.StrCmp(Ddo_grid_Selectedcolumn, "LeaveRequestEndDate") == 0 )
             {
-               AV47TFLeaveRequestEndDate = context.localUtil.CToD( Ddo_grid_Filteredtext_get, 1);
+               AV47TFLeaveRequestEndDate = context.localUtil.CToD( Ddo_grid_Filteredtext_get, 2);
                AssignAttri("", false, "AV47TFLeaveRequestEndDate", context.localUtil.Format(AV47TFLeaveRequestEndDate, "99/99/99"));
-               AV48TFLeaveRequestEndDate_To = context.localUtil.CToD( Ddo_grid_Filteredtextto_get, 1);
+               AV48TFLeaveRequestEndDate_To = context.localUtil.CToD( Ddo_grid_Filteredtextto_get, 2);
                AssignAttri("", false, "AV48TFLeaveRequestEndDate_To", context.localUtil.Format(AV48TFLeaveRequestEndDate_To, "99/99/99"));
             }
             else if ( StringUtil.StrCmp(Ddo_grid_Selectedcolumn, "LeaveRequestHalfDay") == 0 )
@@ -2202,16 +2202,16 @@ namespace GeneXus.Programs {
             }
             else if ( StringUtil.StrCmp(AV26GridStateFilterValue.gxTpr_Name, "TFLEAVEREQUESTSTARTDATE") == 0 )
             {
-               AV51TFLeaveRequestStartDate = context.localUtil.CToD( AV26GridStateFilterValue.gxTpr_Value, 1);
+               AV51TFLeaveRequestStartDate = context.localUtil.CToD( AV26GridStateFilterValue.gxTpr_Value, 2);
                AssignAttri("", false, "AV51TFLeaveRequestStartDate", context.localUtil.Format(AV51TFLeaveRequestStartDate, "99/99/99"));
-               AV52TFLeaveRequestStartDate_To = context.localUtil.CToD( AV26GridStateFilterValue.gxTpr_Valueto, 1);
+               AV52TFLeaveRequestStartDate_To = context.localUtil.CToD( AV26GridStateFilterValue.gxTpr_Valueto, 2);
                AssignAttri("", false, "AV52TFLeaveRequestStartDate_To", context.localUtil.Format(AV52TFLeaveRequestStartDate_To, "99/99/99"));
             }
             else if ( StringUtil.StrCmp(AV26GridStateFilterValue.gxTpr_Name, "TFLEAVEREQUESTENDDATE") == 0 )
             {
-               AV47TFLeaveRequestEndDate = context.localUtil.CToD( AV26GridStateFilterValue.gxTpr_Value, 1);
+               AV47TFLeaveRequestEndDate = context.localUtil.CToD( AV26GridStateFilterValue.gxTpr_Value, 2);
                AssignAttri("", false, "AV47TFLeaveRequestEndDate", context.localUtil.Format(AV47TFLeaveRequestEndDate, "99/99/99"));
-               AV48TFLeaveRequestEndDate_To = context.localUtil.CToD( AV26GridStateFilterValue.gxTpr_Valueto, 1);
+               AV48TFLeaveRequestEndDate_To = context.localUtil.CToD( AV26GridStateFilterValue.gxTpr_Valueto, 2);
                AssignAttri("", false, "AV48TFLeaveRequestEndDate_To", context.localUtil.Format(AV48TFLeaveRequestEndDate_To, "99/99/99"));
             }
             else if ( StringUtil.StrCmp(AV26GridStateFilterValue.gxTpr_Name, "TFLEAVEREQUESTHALFDAY") == 0 )
@@ -2279,9 +2279,9 @@ namespace GeneXus.Programs {
          new GeneXus.Programs.wwpbaseobjects.wwp_getfilterval(context ).execute(  String.IsNullOrEmpty(StringUtil.RTrim( AV43TFLeaveRequestDescription)),  AV43TFLeaveRequestDescription, out  GXt_char5) ;
          GXt_char4 = "";
          new GeneXus.Programs.wwpbaseobjects.wwp_getfilterval(context ).execute(  String.IsNullOrEmpty(StringUtil.RTrim( AV49TFLeaveRequestRejectionReason)),  AV49TFLeaveRequestRejectionReason, out  GXt_char4) ;
-         Ddo_grid_Filteredtext_set = GXt_char7+"|"+((DateTime.MinValue==AV51TFLeaveRequestStartDate) ? "" : context.localUtil.DToC( AV51TFLeaveRequestStartDate, 1, "/"))+"|"+((DateTime.MinValue==AV47TFLeaveRequestEndDate) ? "" : context.localUtil.DToC( AV47TFLeaveRequestEndDate, 1, "/"))+"|"+GXt_char6+"|"+((Convert.ToDecimal(0)==AV45TFLeaveRequestDuration) ? "" : StringUtil.Str( AV45TFLeaveRequestDuration, 4, 1))+"||"+GXt_char5+"|"+GXt_char4;
+         Ddo_grid_Filteredtext_set = GXt_char7+"|"+((DateTime.MinValue==AV51TFLeaveRequestStartDate) ? "" : context.localUtil.DToC( AV51TFLeaveRequestStartDate, 2, "/"))+"|"+((DateTime.MinValue==AV47TFLeaveRequestEndDate) ? "" : context.localUtil.DToC( AV47TFLeaveRequestEndDate, 2, "/"))+"|"+GXt_char6+"|"+((Convert.ToDecimal(0)==AV45TFLeaveRequestDuration) ? "" : StringUtil.Str( AV45TFLeaveRequestDuration, 4, 1))+"||"+GXt_char5+"|"+GXt_char4;
          ucDdo_grid.SendProperty(context, "", false, Ddo_grid_Internalname, "FilteredText_set", Ddo_grid_Filteredtext_set);
-         Ddo_grid_Filteredtextto_set = "|"+((DateTime.MinValue==AV52TFLeaveRequestStartDate_To) ? "" : context.localUtil.DToC( AV52TFLeaveRequestStartDate_To, 1, "/"))+"|"+((DateTime.MinValue==AV48TFLeaveRequestEndDate_To) ? "" : context.localUtil.DToC( AV48TFLeaveRequestEndDate_To, 1, "/"))+"||"+((Convert.ToDecimal(0)==AV46TFLeaveRequestDuration_To) ? "" : StringUtil.Str( AV46TFLeaveRequestDuration_To, 4, 1))+"|||";
+         Ddo_grid_Filteredtextto_set = "|"+((DateTime.MinValue==AV52TFLeaveRequestStartDate_To) ? "" : context.localUtil.DToC( AV52TFLeaveRequestStartDate_To, 2, "/"))+"|"+((DateTime.MinValue==AV48TFLeaveRequestEndDate_To) ? "" : context.localUtil.DToC( AV48TFLeaveRequestEndDate_To, 2, "/"))+"||"+((Convert.ToDecimal(0)==AV46TFLeaveRequestDuration_To) ? "" : StringUtil.Str( AV46TFLeaveRequestDuration_To, 4, 1))+"|||";
          ucDdo_grid.SendProperty(context, "", false, Ddo_grid_Internalname, "FilteredTextTo_set", Ddo_grid_Filteredtextto_set);
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( StringUtil.Trim( AV25GridState.gxTpr_Pagesize))) )
          {
@@ -2301,8 +2301,8 @@ namespace GeneXus.Programs {
          AV25GridState.gxTpr_Filtervalues.Clear();
          new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV25GridState,  "FILTERFULLTEXT",  "Main filter",  !String.IsNullOrEmpty(StringUtil.RTrim( AV19FilterFullText)),  0,  AV19FilterFullText,  AV19FilterFullText,  false,  "",  "") ;
          new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalueandsel(context ).execute( ref  AV25GridState,  "TFLEAVETYPENAME",  "Type Name",  !String.IsNullOrEmpty(StringUtil.RTrim( AV55TFLeaveTypeName)),  0,  AV55TFLeaveTypeName,  AV55TFLeaveTypeName,  false,  "",  "",  !String.IsNullOrEmpty(StringUtil.RTrim( AV56TFLeaveTypeName_Sel)),  AV56TFLeaveTypeName_Sel,  AV56TFLeaveTypeName_Sel) ;
-         new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV25GridState,  "TFLEAVEREQUESTSTARTDATE",  "Start Date",  !((DateTime.MinValue==AV51TFLeaveRequestStartDate)&&(DateTime.MinValue==AV52TFLeaveRequestStartDate_To)),  0,  StringUtil.Trim( context.localUtil.DToC( AV51TFLeaveRequestStartDate, 1, "/")),  ((DateTime.MinValue==AV51TFLeaveRequestStartDate) ? "" : StringUtil.Trim( context.localUtil.Format( AV51TFLeaveRequestStartDate, "99/99/99"))),  true,  StringUtil.Trim( context.localUtil.DToC( AV52TFLeaveRequestStartDate_To, 1, "/")),  ((DateTime.MinValue==AV52TFLeaveRequestStartDate_To) ? "" : StringUtil.Trim( context.localUtil.Format( AV52TFLeaveRequestStartDate_To, "99/99/99")))) ;
-         new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV25GridState,  "TFLEAVEREQUESTENDDATE",  "End Date",  !((DateTime.MinValue==AV47TFLeaveRequestEndDate)&&(DateTime.MinValue==AV48TFLeaveRequestEndDate_To)),  0,  StringUtil.Trim( context.localUtil.DToC( AV47TFLeaveRequestEndDate, 1, "/")),  ((DateTime.MinValue==AV47TFLeaveRequestEndDate) ? "" : StringUtil.Trim( context.localUtil.Format( AV47TFLeaveRequestEndDate, "99/99/99"))),  true,  StringUtil.Trim( context.localUtil.DToC( AV48TFLeaveRequestEndDate_To, 1, "/")),  ((DateTime.MinValue==AV48TFLeaveRequestEndDate_To) ? "" : StringUtil.Trim( context.localUtil.Format( AV48TFLeaveRequestEndDate_To, "99/99/99")))) ;
+         new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV25GridState,  "TFLEAVEREQUESTSTARTDATE",  "Start Date",  !((DateTime.MinValue==AV51TFLeaveRequestStartDate)&&(DateTime.MinValue==AV52TFLeaveRequestStartDate_To)),  0,  StringUtil.Trim( context.localUtil.DToC( AV51TFLeaveRequestStartDate, 2, "/")),  ((DateTime.MinValue==AV51TFLeaveRequestStartDate) ? "" : StringUtil.Trim( context.localUtil.Format( AV51TFLeaveRequestStartDate, "99/99/99"))),  true,  StringUtil.Trim( context.localUtil.DToC( AV52TFLeaveRequestStartDate_To, 2, "/")),  ((DateTime.MinValue==AV52TFLeaveRequestStartDate_To) ? "" : StringUtil.Trim( context.localUtil.Format( AV52TFLeaveRequestStartDate_To, "99/99/99")))) ;
+         new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV25GridState,  "TFLEAVEREQUESTENDDATE",  "End Date",  !((DateTime.MinValue==AV47TFLeaveRequestEndDate)&&(DateTime.MinValue==AV48TFLeaveRequestEndDate_To)),  0,  StringUtil.Trim( context.localUtil.DToC( AV47TFLeaveRequestEndDate, 2, "/")),  ((DateTime.MinValue==AV47TFLeaveRequestEndDate) ? "" : StringUtil.Trim( context.localUtil.Format( AV47TFLeaveRequestEndDate, "99/99/99"))),  true,  StringUtil.Trim( context.localUtil.DToC( AV48TFLeaveRequestEndDate_To, 2, "/")),  ((DateTime.MinValue==AV48TFLeaveRequestEndDate_To) ? "" : StringUtil.Trim( context.localUtil.Format( AV48TFLeaveRequestEndDate_To, "99/99/99")))) ;
          new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalueandsel(context ).execute( ref  AV25GridState,  "TFLEAVEREQUESTHALFDAY",  "Half Day",  !String.IsNullOrEmpty(StringUtil.RTrim( AV68TFLeaveRequestHalfDay)),  0,  AV68TFLeaveRequestHalfDay,  AV68TFLeaveRequestHalfDay,  false,  "",  "",  !String.IsNullOrEmpty(StringUtil.RTrim( AV69TFLeaveRequestHalfDay_Sel)),  AV69TFLeaveRequestHalfDay_Sel,  AV69TFLeaveRequestHalfDay_Sel) ;
          new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV25GridState,  "TFLEAVEREQUESTDURATION",  "Request Duration",  !((Convert.ToDecimal(0)==AV45TFLeaveRequestDuration)&&(Convert.ToDecimal(0)==AV46TFLeaveRequestDuration_To)),  0,  StringUtil.Trim( StringUtil.Str( AV45TFLeaveRequestDuration, 4, 1)),  ((Convert.ToDecimal(0)==AV45TFLeaveRequestDuration) ? "" : StringUtil.Trim( context.localUtil.Format( AV45TFLeaveRequestDuration, "Z9.9"))),  true,  StringUtil.Trim( StringUtil.Str( AV46TFLeaveRequestDuration_To, 4, 1)),  ((Convert.ToDecimal(0)==AV46TFLeaveRequestDuration_To) ? "" : StringUtil.Trim( context.localUtil.Format( AV46TFLeaveRequestDuration_To, "Z9.9")))) ;
          AV5AuxText = ((AV53TFLeaveRequestStatus_Sels.Count==1) ? "["+AV53TFLeaveRequestStatus_Sels.GetString(1)+"]" : "multiple values");
@@ -2456,7 +2456,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024741556485", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247521523811", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2472,7 +2472,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("leaverequests.js", "?2024741556488", false, true);
+         context.AddJavascriptSource("leaverequests.js", "?20247521523814", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/DVPaginationBar/DVPaginationBarRender.js", "", false, true);

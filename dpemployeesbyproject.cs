@@ -191,8 +191,8 @@ namespace GeneXus.Programs {
          P00152_A110EmployeeIsManager = new bool[] {false} ;
          P00152_A111GAMUserGUID = new string[] {""} ;
          P00152_A112EmployeeIsActive = new bool[] {false} ;
-         P00152_A146EmployeeVactionDays = new short[1] ;
-         P00152_A147EmployeeBalance = new short[1] ;
+         P00152_A146EmployeeVactionDays = new decimal[1] ;
+         P00152_A147EmployeeBalance = new decimal[1] ;
          A107EmployeeFirstName = "";
          A108EmployeeLastName = "";
          A148EmployeeName = "";
@@ -220,13 +220,13 @@ namespace GeneXus.Programs {
          /* GeneXus formulas. */
       }
 
-      private short A146EmployeeVactionDays ;
-      private short A147EmployeeBalance ;
       private int AV5EmployeeIds_Count ;
       private long A106EmployeeId ;
       private long A100CompanyId ;
       private long A166ProjectManagerId ;
       private long A102ProjectId ;
+      private decimal A146EmployeeVactionDays ;
+      private decimal A147EmployeeBalance ;
       private string scmdbuf ;
       private string A107EmployeeFirstName ;
       private string A108EmployeeLastName ;
@@ -252,8 +252,8 @@ namespace GeneXus.Programs {
       private bool[] P00152_A110EmployeeIsManager ;
       private string[] P00152_A111GAMUserGUID ;
       private bool[] P00152_A112EmployeeIsActive ;
-      private short[] P00152_A146EmployeeVactionDays ;
-      private short[] P00152_A147EmployeeBalance ;
+      private decimal[] P00152_A146EmployeeVactionDays ;
+      private decimal[] P00152_A147EmployeeBalance ;
       private long[] P00153_A166ProjectManagerId ;
       private bool[] P00153_n166ProjectManagerId ;
       private long[] P00153_A102ProjectId ;
@@ -342,8 +342,8 @@ namespace GeneXus.Programs {
                 ((bool[]) buf[7])[0] = rslt.getBool(8);
                 ((string[]) buf[8])[0] = rslt.getVarchar(9);
                 ((bool[]) buf[9])[0] = rslt.getBool(10);
-                ((short[]) buf[10])[0] = rslt.getShort(11);
-                ((short[]) buf[11])[0] = rslt.getShort(12);
+                ((decimal[]) buf[10])[0] = rslt.getDecimal(11);
+                ((decimal[]) buf[11])[0] = rslt.getDecimal(12);
                 return;
              case 1 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);

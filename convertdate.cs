@@ -83,7 +83,7 @@ namespace GeneXus.Programs {
          /* GeneXus formulas */
          /* Output device settings */
          AV12FinalDateCharacter = StringUtil.Substring( AV10DateCharacter, 6, 2) + "/" + StringUtil.Substring( AV10DateCharacter, 9, 2) + "/" + StringUtil.Substring( AV10DateCharacter, 1, 4);
-         AV11FinalDate = context.localUtil.CToD( AV12FinalDateCharacter, 1);
+         AV11FinalDate = context.localUtil.CToD( AV12FinalDateCharacter, 2);
          this.cleanup();
       }
 

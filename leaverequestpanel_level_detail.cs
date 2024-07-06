@@ -119,7 +119,7 @@ namespace GeneXus.Programs {
             Gxdynprop += ((StringUtil.StrCmp(Gxdynprop, "")==0) ? "" : ", ") + "[\"Btnsubmitbutton\",\"Enabled\",\"" + "False" + "\"]";
             Gxdynprop += ((StringUtil.StrCmp(Gxdynprop, "")==0) ? "" : ", ") + "[\"Btnsubmitbutton\",\"Class\",\"" + StringUtil.JSONEncode( "LogHoursSubmitBtnDisabled") + "\"]";
             AV31LeaveRequestStartDate = Gx_date;
-            Gxwebsession.Set(Gxids+"gxvar_Leaverequeststartdate", context.localUtil.DToC( AV31LeaveRequestStartDate, 1, "/"));
+            Gxwebsession.Set(Gxids+"gxvar_Leaverequeststartdate", context.localUtil.DToC( AV31LeaveRequestStartDate, 2, "/"));
             Gxwebsession.Set(Gxids+"gxvar_Employeeid", StringUtil.Str( (decimal)(AV20EmployeeId), 10, 0));
             Gxwebsession.Set(Gxids+"gxvar_Msgvar", AV29MsgVar);
             Gxwebsession.Set(Gxids+"gxvar_Employyeeavailablevacationdays", StringUtil.Str( (decimal)(AV37EmployyeeAvailableVacationDays), 4, 0));
@@ -130,7 +130,7 @@ namespace GeneXus.Programs {
             AV37EmployyeeAvailableVacationDays = (short)(Math.Round(NumberUtil.Val( Gxwebsession.Get(Gxids+"gxvar_Employyeeavailablevacationdays"), "."), 18, MidpointRounding.ToEven));
             AV20EmployeeId = (long)(Math.Round(NumberUtil.Val( Gxwebsession.Get(Gxids+"gxvar_Employeeid"), "."), 18, MidpointRounding.ToEven));
             AV29MsgVar = Gxwebsession.Get(Gxids+"gxvar_Msgvar");
-            AV31LeaveRequestStartDate = context.localUtil.CToD( Gxwebsession.Get(Gxids+"gxvar_Leaverequeststartdate"), 1);
+            AV31LeaveRequestStartDate = context.localUtil.CToD( Gxwebsession.Get(Gxids+"gxvar_Leaverequeststartdate"), 2);
          }
          Gxdynprop2 = "Vacation Days: " + StringUtil.Str( (decimal)(AV37EmployyeeAvailableVacationDays), 4, 0);
          Gxdynprop += ((StringUtil.StrCmp(Gxdynprop, "")==0) ? "" : ", ") + "[\"Vactiondays\",\"Caption\",\"" + StringUtil.JSONEncode( Gxdynprop2) + "\"]";

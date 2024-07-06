@@ -92,10 +92,18 @@ namespace GeneXus.Programs {
          /* Output device settings */
          new getloggedinuser(context ).execute( out  AV10GAMUser, out  AV9Employee) ;
          AV8Device.Load(new GeneXus.Core.genexus.client.SdtClientInformation(context).gxTpr_Id);
-         AV8Device.gxTpr_Deviceuser = AV10GAMUser.gxTpr_Guid;
-         if ( AV8Device.Update() )
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV8Device.gxTpr_Deviceuser)) || ( StringUtil.StrCmp(AV8Device.gxTpr_Deviceuser, AV10GAMUser.gxTpr_Guid) != 0 ) )
          {
-            context.CommitDataStores("sdassignuserdevice",pr_default);
+            AV8Device.gxTpr_Deviceuser = AV10GAMUser.gxTpr_Guid;
+            AV8Device.Update();
+            if ( AV8Device.Success() )
+            {
+               context.CommitDataStores("sdassignuserdevice",pr_default);
+            }
+            else
+            {
+               GX_msglist.addItem(AV8Device.GetMessages().ToJSonString(false));
+            }
          }
          this.cleanup();
       }

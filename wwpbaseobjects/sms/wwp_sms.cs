@@ -475,7 +475,7 @@ namespace GeneXus.Programs.wwpbaseobjects.sms {
          /* Single line edit */
          TempTags = "  onfocus=\"gx.evt.onfocus(this, 59,'',false,'',0)\"";
          context.WriteHtmlText( "<div id=\""+edtWWPSMSCreated_Internalname+"_dp_container\" class=\"dp_container\" style=\"white-space:nowrap;display:inline;\">") ;
-         GxWebStd.gx_single_line_edit( context, edtWWPSMSCreated_Internalname, context.localUtil.TToC( A40WWPSMSCreated, 10, 12, 1, 2, "/", ":", " "), context.localUtil.Format( A40WWPSMSCreated, "99/99/9999 99:99:99.999"), TempTags+" onchange=\""+"gx.date.valid_date(this, 10,'MDY',12,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 10,'MDY',12,12,'eng',false,0);"+";gx.evt.onblur(this,59);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtWWPSMSCreated_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtWWPSMSCreated_Enabled, 0, "text", "", 27, "chr", 1, "row", 27, 0, 0, 0, 0, -1, 0, true, "WWPBaseObjects\\WWP_DateTimeMillis", "end", false, "", "HLP_WWPBaseObjects/SMS/WWP_SMS.htm");
+         GxWebStd.gx_single_line_edit( context, edtWWPSMSCreated_Internalname, context.localUtil.TToC( A40WWPSMSCreated, 10, 12, 1, 3, "/", ":", " "), context.localUtil.Format( A40WWPSMSCreated, "99/99/9999 99:99:99.999"), TempTags+" onchange=\""+"gx.date.valid_date(this, 10,'DMY',12,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 10,'DMY',12,12,'eng',false,0);"+";gx.evt.onblur(this,59);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtWWPSMSCreated_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtWWPSMSCreated_Enabled, 0, "text", "", 27, "chr", 1, "row", 27, 0, 0, 0, 0, -1, 0, true, "WWPBaseObjects\\WWP_DateTimeMillis", "end", false, "", "HLP_WWPBaseObjects/SMS/WWP_SMS.htm");
          GxWebStd.gx_bitmap( context, edtWWPSMSCreated_Internalname+"_dp_trigger", context.GetImagePath( "61b9b5d3-dff6-4d59-9b00-da61bc2cbe93", "", context.GetTheme( )), "", "", "", "", ((1==0)||(edtWWPSMSCreated_Enabled==0) ? 0 : 1), 0, "Date selector", "Date selector", 0, 1, 0, "", 0, "", 0, 0, 0, "", "", "cursor: pointer;", "", "", "", "", "", "", "", "", 1, false, false, "", "HLP_WWPBaseObjects/SMS/WWP_SMS.htm");
          context.WriteHtmlTextNl( "</div>") ;
          GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -495,7 +495,7 @@ namespace GeneXus.Programs.wwpbaseobjects.sms {
          /* Single line edit */
          TempTags = "  onfocus=\"gx.evt.onfocus(this, 64,'',false,'',0)\"";
          context.WriteHtmlText( "<div id=\""+edtWWPSMSScheduled_Internalname+"_dp_container\" class=\"dp_container\" style=\"white-space:nowrap;display:inline;\">") ;
-         GxWebStd.gx_single_line_edit( context, edtWWPSMSScheduled_Internalname, context.localUtil.TToC( A41WWPSMSScheduled, 10, 12, 1, 2, "/", ":", " "), context.localUtil.Format( A41WWPSMSScheduled, "99/99/9999 99:99:99.999"), TempTags+" onchange=\""+"gx.date.valid_date(this, 10,'MDY',12,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 10,'MDY',12,12,'eng',false,0);"+";gx.evt.onblur(this,64);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtWWPSMSScheduled_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtWWPSMSScheduled_Enabled, 0, "text", "", 27, "chr", 1, "row", 27, 0, 0, 0, 0, -1, 0, true, "WWPBaseObjects\\WWP_DateTimeMillis", "end", false, "", "HLP_WWPBaseObjects/SMS/WWP_SMS.htm");
+         GxWebStd.gx_single_line_edit( context, edtWWPSMSScheduled_Internalname, context.localUtil.TToC( A41WWPSMSScheduled, 10, 12, 1, 3, "/", ":", " "), context.localUtil.Format( A41WWPSMSScheduled, "99/99/9999 99:99:99.999"), TempTags+" onchange=\""+"gx.date.valid_date(this, 10,'DMY',12,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 10,'DMY',12,12,'eng',false,0);"+";gx.evt.onblur(this,64);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtWWPSMSScheduled_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtWWPSMSScheduled_Enabled, 0, "text", "", 27, "chr", 1, "row", 27, 0, 0, 0, 0, -1, 0, true, "WWPBaseObjects\\WWP_DateTimeMillis", "end", false, "", "HLP_WWPBaseObjects/SMS/WWP_SMS.htm");
          GxWebStd.gx_bitmap( context, edtWWPSMSScheduled_Internalname+"_dp_trigger", context.GetImagePath( "61b9b5d3-dff6-4d59-9b00-da61bc2cbe93", "", context.GetTheme( )), "", "", "", "", ((1==0)||(edtWWPSMSScheduled_Enabled==0) ? 0 : 1), 0, "Date selector", "Date selector", 0, 1, 0, "", 0, "", 0, 0, 0, "", "", "cursor: pointer;", "", "", "", "", "", "", "", "", 1, false, false, "", "HLP_WWPBaseObjects/SMS/WWP_SMS.htm");
          context.WriteHtmlTextNl( "</div>") ;
          GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -515,7 +515,7 @@ namespace GeneXus.Programs.wwpbaseobjects.sms {
          /* Single line edit */
          TempTags = "  onfocus=\"gx.evt.onfocus(this, 69,'',false,'',0)\"";
          context.WriteHtmlText( "<div id=\""+edtWWPSMSProcessed_Internalname+"_dp_container\" class=\"dp_container\" style=\"white-space:nowrap;display:inline;\">") ;
-         GxWebStd.gx_single_line_edit( context, edtWWPSMSProcessed_Internalname, context.localUtil.TToC( A35WWPSMSProcessed, 10, 12, 1, 2, "/", ":", " "), context.localUtil.Format( A35WWPSMSProcessed, "99/99/9999 99:99:99.999"), TempTags+" onchange=\""+"gx.date.valid_date(this, 10,'MDY',12,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 10,'MDY',12,12,'eng',false,0);"+";gx.evt.onblur(this,69);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtWWPSMSProcessed_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtWWPSMSProcessed_Enabled, 0, "text", "", 27, "chr", 1, "row", 27, 0, 0, 0, 0, -1, 0, true, "WWPBaseObjects\\WWP_DateTimeMillis", "end", false, "", "HLP_WWPBaseObjects/SMS/WWP_SMS.htm");
+         GxWebStd.gx_single_line_edit( context, edtWWPSMSProcessed_Internalname, context.localUtil.TToC( A35WWPSMSProcessed, 10, 12, 1, 3, "/", ":", " "), context.localUtil.Format( A35WWPSMSProcessed, "99/99/9999 99:99:99.999"), TempTags+" onchange=\""+"gx.date.valid_date(this, 10,'DMY',12,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 10,'DMY',12,12,'eng',false,0);"+";gx.evt.onblur(this,69);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtWWPSMSProcessed_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtWWPSMSProcessed_Enabled, 0, "text", "", 27, "chr", 1, "row", 27, 0, 0, 0, 0, -1, 0, true, "WWPBaseObjects\\WWP_DateTimeMillis", "end", false, "", "HLP_WWPBaseObjects/SMS/WWP_SMS.htm");
          GxWebStd.gx_bitmap( context, edtWWPSMSProcessed_Internalname+"_dp_trigger", context.GetImagePath( "61b9b5d3-dff6-4d59-9b00-da61bc2cbe93", "", context.GetTheme( )), "", "", "", "", ((1==0)||(edtWWPSMSProcessed_Enabled==0) ? 0 : 1), 0, "Date selector", "Date selector", 0, 1, 0, "", 0, "", 0, 0, 0, "", "", "cursor: pointer;", "", "", "", "", "", "", "", "", 1, false, false, "", "HLP_WWPBaseObjects/SMS/WWP_SMS.htm");
          context.WriteHtmlTextNl( "</div>") ;
          GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -572,7 +572,7 @@ namespace GeneXus.Programs.wwpbaseobjects.sms {
          GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-sm-9 gx-attribute", "start", "top", "", "", "div");
          /* Single line edit */
          context.WriteHtmlText( "<div id=\""+edtWWPNotificationCreated_Internalname+"_dp_container\" class=\"dp_container\" style=\"white-space:nowrap;display:inline;\">") ;
-         GxWebStd.gx_single_line_edit( context, edtWWPNotificationCreated_Internalname, context.localUtil.TToC( A24WWPNotificationCreated, 10, 12, 1, 2, "/", ":", " "), context.localUtil.Format( A24WWPNotificationCreated, "99/99/9999 99:99:99.999"), "", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtWWPNotificationCreated_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtWWPNotificationCreated_Enabled, 0, "text", "", 27, "chr", 1, "row", 27, 0, 0, 0, 0, -1, 0, true, "WWPBaseObjects\\WWP_DateTimeMillis", "end", false, "", "HLP_WWPBaseObjects/SMS/WWP_SMS.htm");
+         GxWebStd.gx_single_line_edit( context, edtWWPNotificationCreated_Internalname, context.localUtil.TToC( A24WWPNotificationCreated, 10, 12, 1, 3, "/", ":", " "), context.localUtil.Format( A24WWPNotificationCreated, "99/99/9999 99:99:99.999"), "", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtWWPNotificationCreated_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtWWPNotificationCreated_Enabled, 0, "text", "", 27, "chr", 1, "row", 27, 0, 0, 0, 0, -1, 0, true, "WWPBaseObjects\\WWP_DateTimeMillis", "end", false, "", "HLP_WWPBaseObjects/SMS/WWP_SMS.htm");
          GxWebStd.gx_bitmap( context, edtWWPNotificationCreated_Internalname+"_dp_trigger", context.GetImagePath( "61b9b5d3-dff6-4d59-9b00-da61bc2cbe93", "", context.GetTheme( )), "", "", "", "", ((1==0)||(edtWWPNotificationCreated_Enabled==0) ? 0 : 1), 0, "Date selector", "Date selector", 0, 1, 0, "", 0, "", 0, 0, 0, "", "", "cursor: pointer;", "", "", "", "", "", "", "", "", 1, false, false, "", "HLP_WWPBaseObjects/SMS/WWP_SMS.htm");
          context.WriteHtmlTextNl( "</div>") ;
          GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -683,7 +683,7 @@ namespace GeneXus.Programs.wwpbaseobjects.sms {
             cmbWWPSMSStatus.CurrentValue = cgiGet( cmbWWPSMSStatus_Internalname);
             A34WWPSMSStatus = (short)(Math.Round(NumberUtil.Val( cgiGet( cmbWWPSMSStatus_Internalname), "."), 18, MidpointRounding.ToEven));
             AssignAttri("", false, "A34WWPSMSStatus", StringUtil.LTrimStr( (decimal)(A34WWPSMSStatus), 4, 0));
-            if ( context.localUtil.VCDateTime( cgiGet( edtWWPSMSCreated_Internalname), 1, 1) == 0 )
+            if ( context.localUtil.VCDateTime( cgiGet( edtWWPSMSCreated_Internalname), 2, 1) == 0 )
             {
                GX_msglist.addItem(context.GetMessage( "GXM_baddatetime", new   object[]  {"SMS Created"}), 1, "WWPSMSCREATED");
                AnyError = 1;
@@ -691,14 +691,14 @@ namespace GeneXus.Programs.wwpbaseobjects.sms {
                AssignAttri("", false, "GX_FocusControl", GX_FocusControl);
                wbErr = true;
                A40WWPSMSCreated = (DateTime)(DateTime.MinValue);
-               AssignAttri("", false, "A40WWPSMSCreated", context.localUtil.TToC( A40WWPSMSCreated, 10, 12, 1, 2, "/", ":", " "));
+               AssignAttri("", false, "A40WWPSMSCreated", context.localUtil.TToC( A40WWPSMSCreated, 10, 12, 1, 3, "/", ":", " "));
             }
             else
             {
                A40WWPSMSCreated = context.localUtil.CToT( cgiGet( edtWWPSMSCreated_Internalname));
-               AssignAttri("", false, "A40WWPSMSCreated", context.localUtil.TToC( A40WWPSMSCreated, 10, 12, 1, 2, "/", ":", " "));
+               AssignAttri("", false, "A40WWPSMSCreated", context.localUtil.TToC( A40WWPSMSCreated, 10, 12, 1, 3, "/", ":", " "));
             }
-            if ( context.localUtil.VCDateTime( cgiGet( edtWWPSMSScheduled_Internalname), 1, 1) == 0 )
+            if ( context.localUtil.VCDateTime( cgiGet( edtWWPSMSScheduled_Internalname), 2, 1) == 0 )
             {
                GX_msglist.addItem(context.GetMessage( "GXM_baddatetime", new   object[]  {"SMS Scheduled"}), 1, "WWPSMSSCHEDULED");
                AnyError = 1;
@@ -706,14 +706,14 @@ namespace GeneXus.Programs.wwpbaseobjects.sms {
                AssignAttri("", false, "GX_FocusControl", GX_FocusControl);
                wbErr = true;
                A41WWPSMSScheduled = (DateTime)(DateTime.MinValue);
-               AssignAttri("", false, "A41WWPSMSScheduled", context.localUtil.TToC( A41WWPSMSScheduled, 10, 12, 1, 2, "/", ":", " "));
+               AssignAttri("", false, "A41WWPSMSScheduled", context.localUtil.TToC( A41WWPSMSScheduled, 10, 12, 1, 3, "/", ":", " "));
             }
             else
             {
                A41WWPSMSScheduled = context.localUtil.CToT( cgiGet( edtWWPSMSScheduled_Internalname));
-               AssignAttri("", false, "A41WWPSMSScheduled", context.localUtil.TToC( A41WWPSMSScheduled, 10, 12, 1, 2, "/", ":", " "));
+               AssignAttri("", false, "A41WWPSMSScheduled", context.localUtil.TToC( A41WWPSMSScheduled, 10, 12, 1, 3, "/", ":", " "));
             }
-            if ( context.localUtil.VCDateTime( cgiGet( edtWWPSMSProcessed_Internalname), 1, 1) == 0 )
+            if ( context.localUtil.VCDateTime( cgiGet( edtWWPSMSProcessed_Internalname), 2, 1) == 0 )
             {
                GX_msglist.addItem(context.GetMessage( "GXM_baddatetime", new   object[]  {"SMS Processed"}), 1, "WWPSMSPROCESSED");
                AnyError = 1;
@@ -722,13 +722,13 @@ namespace GeneXus.Programs.wwpbaseobjects.sms {
                wbErr = true;
                A35WWPSMSProcessed = (DateTime)(DateTime.MinValue);
                n35WWPSMSProcessed = false;
-               AssignAttri("", false, "A35WWPSMSProcessed", context.localUtil.TToC( A35WWPSMSProcessed, 10, 12, 1, 2, "/", ":", " "));
+               AssignAttri("", false, "A35WWPSMSProcessed", context.localUtil.TToC( A35WWPSMSProcessed, 10, 12, 1, 3, "/", ":", " "));
             }
             else
             {
                A35WWPSMSProcessed = context.localUtil.CToT( cgiGet( edtWWPSMSProcessed_Internalname));
                n35WWPSMSProcessed = false;
-               AssignAttri("", false, "A35WWPSMSProcessed", context.localUtil.TToC( A35WWPSMSProcessed, 10, 12, 1, 2, "/", ":", " "));
+               AssignAttri("", false, "A35WWPSMSProcessed", context.localUtil.TToC( A35WWPSMSProcessed, 10, 12, 1, 3, "/", ":", " "));
             }
             n35WWPSMSProcessed = ((DateTime.MinValue==A35WWPSMSProcessed) ? true : false);
             A36WWPSMSDetail = cgiGet( edtWWPSMSDetail_Internalname);
@@ -754,7 +754,7 @@ namespace GeneXus.Programs.wwpbaseobjects.sms {
             }
             n22WWPNotificationId = ((0==A22WWPNotificationId) ? true : false);
             A24WWPNotificationCreated = context.localUtil.CToT( cgiGet( edtWWPNotificationCreated_Internalname));
-            AssignAttri("", false, "A24WWPNotificationCreated", context.localUtil.TToC( A24WWPNotificationCreated, 10, 12, 1, 2, "/", ":", " "));
+            AssignAttri("", false, "A24WWPNotificationCreated", context.localUtil.TToC( A24WWPNotificationCreated, 10, 12, 1, 3, "/", ":", " "));
             /* Read subfile selected row values. */
             /* Read hidden variables. */
             GXKey = Decrypt64( context.GetCookie( "GX_SESSION_ID"), Crypto.GetServerKey( ));
@@ -993,12 +993,12 @@ namespace GeneXus.Programs.wwpbaseobjects.sms {
          if ( IsIns( )  && (DateTime.MinValue==A40WWPSMSCreated) && ( Gx_BScreen == 0 ) )
          {
             A40WWPSMSCreated = DateTimeUtil.ServerNowMs( context, pr_default);
-            AssignAttri("", false, "A40WWPSMSCreated", context.localUtil.TToC( A40WWPSMSCreated, 10, 12, 1, 2, "/", ":", " "));
+            AssignAttri("", false, "A40WWPSMSCreated", context.localUtil.TToC( A40WWPSMSCreated, 10, 12, 1, 3, "/", ":", " "));
          }
          if ( IsIns( )  && (DateTime.MinValue==A41WWPSMSScheduled) && ( Gx_BScreen == 0 ) )
          {
             A41WWPSMSScheduled = DateTimeUtil.ServerNowMs( context, pr_default);
-            AssignAttri("", false, "A41WWPSMSScheduled", context.localUtil.TToC( A41WWPSMSScheduled, 10, 12, 1, 2, "/", ":", " "));
+            AssignAttri("", false, "A41WWPSMSScheduled", context.localUtil.TToC( A41WWPSMSScheduled, 10, 12, 1, 3, "/", ":", " "));
          }
          if ( StringUtil.StrCmp(Gx_mode, "INS") == 0 )
          {
@@ -1041,17 +1041,17 @@ namespace GeneXus.Programs.wwpbaseobjects.sms {
             A34WWPSMSStatus = T00055_A34WWPSMSStatus[0];
             AssignAttri("", false, "A34WWPSMSStatus", StringUtil.LTrimStr( (decimal)(A34WWPSMSStatus), 4, 0));
             A40WWPSMSCreated = T00055_A40WWPSMSCreated[0];
-            AssignAttri("", false, "A40WWPSMSCreated", context.localUtil.TToC( A40WWPSMSCreated, 10, 12, 1, 2, "/", ":", " "));
+            AssignAttri("", false, "A40WWPSMSCreated", context.localUtil.TToC( A40WWPSMSCreated, 10, 12, 1, 3, "/", ":", " "));
             A41WWPSMSScheduled = T00055_A41WWPSMSScheduled[0];
-            AssignAttri("", false, "A41WWPSMSScheduled", context.localUtil.TToC( A41WWPSMSScheduled, 10, 12, 1, 2, "/", ":", " "));
+            AssignAttri("", false, "A41WWPSMSScheduled", context.localUtil.TToC( A41WWPSMSScheduled, 10, 12, 1, 3, "/", ":", " "));
             A35WWPSMSProcessed = T00055_A35WWPSMSProcessed[0];
             n35WWPSMSProcessed = T00055_n35WWPSMSProcessed[0];
-            AssignAttri("", false, "A35WWPSMSProcessed", context.localUtil.TToC( A35WWPSMSProcessed, 10, 12, 1, 2, "/", ":", " "));
+            AssignAttri("", false, "A35WWPSMSProcessed", context.localUtil.TToC( A35WWPSMSProcessed, 10, 12, 1, 3, "/", ":", " "));
             A36WWPSMSDetail = T00055_A36WWPSMSDetail[0];
             n36WWPSMSDetail = T00055_n36WWPSMSDetail[0];
             AssignAttri("", false, "A36WWPSMSDetail", A36WWPSMSDetail);
             A24WWPNotificationCreated = T00055_A24WWPNotificationCreated[0];
-            AssignAttri("", false, "A24WWPNotificationCreated", context.localUtil.TToC( A24WWPNotificationCreated, 10, 12, 1, 2, "/", ":", " "));
+            AssignAttri("", false, "A24WWPNotificationCreated", context.localUtil.TToC( A24WWPNotificationCreated, 10, 12, 1, 3, "/", ":", " "));
             A22WWPNotificationId = T00055_A22WWPNotificationId[0];
             n22WWPNotificationId = T00055_n22WWPNotificationId[0];
             AssignAttri("", false, "A22WWPNotificationId", StringUtil.LTrimStr( (decimal)(A22WWPNotificationId), 10, 0));
@@ -1091,7 +1091,7 @@ namespace GeneXus.Programs.wwpbaseobjects.sms {
             }
          }
          A24WWPNotificationCreated = T00054_A24WWPNotificationCreated[0];
-         AssignAttri("", false, "A24WWPNotificationCreated", context.localUtil.TToC( A24WWPNotificationCreated, 10, 12, 1, 2, "/", ":", " "));
+         AssignAttri("", false, "A24WWPNotificationCreated", context.localUtil.TToC( A24WWPNotificationCreated, 10, 12, 1, 3, "/", ":", " "));
          pr_default.close(2);
       }
 
@@ -1119,10 +1119,10 @@ namespace GeneXus.Programs.wwpbaseobjects.sms {
             }
          }
          A24WWPNotificationCreated = T00056_A24WWPNotificationCreated[0];
-         AssignAttri("", false, "A24WWPNotificationCreated", context.localUtil.TToC( A24WWPNotificationCreated, 10, 12, 1, 2, "/", ":", " "));
+         AssignAttri("", false, "A24WWPNotificationCreated", context.localUtil.TToC( A24WWPNotificationCreated, 10, 12, 1, 3, "/", ":", " "));
          GxWebStd.set_html_headers( context, 0, "", "");
          AddString( "[[") ;
-         AddString( "\""+GXUtil.EncodeJSConstant( context.localUtil.TToC( A24WWPNotificationCreated, 10, 12, 1, 2, "/", ":", " "))+"\"") ;
+         AddString( "\""+GXUtil.EncodeJSConstant( context.localUtil.TToC( A24WWPNotificationCreated, 10, 12, 1, 3, "/", ":", " "))+"\"") ;
          AddString( "]") ;
          if ( (pr_default.getStatus(4) == 101) )
          {
@@ -1167,12 +1167,12 @@ namespace GeneXus.Programs.wwpbaseobjects.sms {
             A34WWPSMSStatus = T00053_A34WWPSMSStatus[0];
             AssignAttri("", false, "A34WWPSMSStatus", StringUtil.LTrimStr( (decimal)(A34WWPSMSStatus), 4, 0));
             A40WWPSMSCreated = T00053_A40WWPSMSCreated[0];
-            AssignAttri("", false, "A40WWPSMSCreated", context.localUtil.TToC( A40WWPSMSCreated, 10, 12, 1, 2, "/", ":", " "));
+            AssignAttri("", false, "A40WWPSMSCreated", context.localUtil.TToC( A40WWPSMSCreated, 10, 12, 1, 3, "/", ":", " "));
             A41WWPSMSScheduled = T00053_A41WWPSMSScheduled[0];
-            AssignAttri("", false, "A41WWPSMSScheduled", context.localUtil.TToC( A41WWPSMSScheduled, 10, 12, 1, 2, "/", ":", " "));
+            AssignAttri("", false, "A41WWPSMSScheduled", context.localUtil.TToC( A41WWPSMSScheduled, 10, 12, 1, 3, "/", ":", " "));
             A35WWPSMSProcessed = T00053_A35WWPSMSProcessed[0];
             n35WWPSMSProcessed = T00053_n35WWPSMSProcessed[0];
-            AssignAttri("", false, "A35WWPSMSProcessed", context.localUtil.TToC( A35WWPSMSProcessed, 10, 12, 1, 2, "/", ":", " "));
+            AssignAttri("", false, "A35WWPSMSProcessed", context.localUtil.TToC( A35WWPSMSProcessed, 10, 12, 1, 3, "/", ":", " "));
             A36WWPSMSDetail = T00053_A36WWPSMSDetail[0];
             n36WWPSMSDetail = T00053_n36WWPSMSDetail[0];
             AssignAttri("", false, "A36WWPSMSDetail", A36WWPSMSDetail);
@@ -1760,7 +1760,7 @@ namespace GeneXus.Programs.wwpbaseobjects.sms {
             /* Using cursor T000514 */
             pr_default.execute(12, new Object[] {n22WWPNotificationId, A22WWPNotificationId});
             A24WWPNotificationCreated = T000514_A24WWPNotificationCreated[0];
-            AssignAttri("", false, "A24WWPNotificationCreated", context.localUtil.TToC( A24WWPNotificationCreated, 10, 12, 1, 2, "/", ":", " "));
+            AssignAttri("", false, "A24WWPNotificationCreated", context.localUtil.TToC( A24WWPNotificationCreated, 10, 12, 1, 3, "/", ":", " "));
             pr_default.close(12);
          }
       }
@@ -2070,7 +2070,7 @@ namespace GeneXus.Programs.wwpbaseobjects.sms {
          AssignAttri("", false, "A39WWPSMSRecipientNumbers", A39WWPSMSRecipientNumbers);
          A35WWPSMSProcessed = (DateTime)(DateTime.MinValue);
          n35WWPSMSProcessed = false;
-         AssignAttri("", false, "A35WWPSMSProcessed", context.localUtil.TToC( A35WWPSMSProcessed, 10, 12, 1, 2, "/", ":", " "));
+         AssignAttri("", false, "A35WWPSMSProcessed", context.localUtil.TToC( A35WWPSMSProcessed, 10, 12, 1, 3, "/", ":", " "));
          n35WWPSMSProcessed = ((DateTime.MinValue==A35WWPSMSProcessed) ? true : false);
          A36WWPSMSDetail = "";
          n36WWPSMSDetail = false;
@@ -2081,13 +2081,13 @@ namespace GeneXus.Programs.wwpbaseobjects.sms {
          AssignAttri("", false, "A22WWPNotificationId", StringUtil.LTrimStr( (decimal)(A22WWPNotificationId), 10, 0));
          n22WWPNotificationId = ((0==A22WWPNotificationId) ? true : false);
          A24WWPNotificationCreated = (DateTime)(DateTime.MinValue);
-         AssignAttri("", false, "A24WWPNotificationCreated", context.localUtil.TToC( A24WWPNotificationCreated, 10, 12, 1, 2, "/", ":", " "));
+         AssignAttri("", false, "A24WWPNotificationCreated", context.localUtil.TToC( A24WWPNotificationCreated, 10, 12, 1, 3, "/", ":", " "));
          A34WWPSMSStatus = 1;
          AssignAttri("", false, "A34WWPSMSStatus", StringUtil.LTrimStr( (decimal)(A34WWPSMSStatus), 4, 0));
          A40WWPSMSCreated = DateTimeUtil.ServerNowMs( context, pr_default);
-         AssignAttri("", false, "A40WWPSMSCreated", context.localUtil.TToC( A40WWPSMSCreated, 10, 12, 1, 2, "/", ":", " "));
+         AssignAttri("", false, "A40WWPSMSCreated", context.localUtil.TToC( A40WWPSMSCreated, 10, 12, 1, 3, "/", ":", " "));
          A41WWPSMSScheduled = DateTimeUtil.ServerNowMs( context, pr_default);
-         AssignAttri("", false, "A41WWPSMSScheduled", context.localUtil.TToC( A41WWPSMSScheduled, 10, 12, 1, 2, "/", ":", " "));
+         AssignAttri("", false, "A41WWPSMSScheduled", context.localUtil.TToC( A41WWPSMSScheduled, 10, 12, 1, 3, "/", ":", " "));
          Z34WWPSMSStatus = 0;
          Z40WWPSMSCreated = (DateTime)(DateTime.MinValue);
          Z41WWPSMSScheduled = (DateTime)(DateTime.MinValue);
@@ -2107,9 +2107,9 @@ namespace GeneXus.Programs.wwpbaseobjects.sms {
          A34WWPSMSStatus = i34WWPSMSStatus;
          AssignAttri("", false, "A34WWPSMSStatus", StringUtil.LTrimStr( (decimal)(A34WWPSMSStatus), 4, 0));
          A40WWPSMSCreated = i40WWPSMSCreated;
-         AssignAttri("", false, "A40WWPSMSCreated", context.localUtil.TToC( A40WWPSMSCreated, 10, 12, 1, 2, "/", ":", " "));
+         AssignAttri("", false, "A40WWPSMSCreated", context.localUtil.TToC( A40WWPSMSCreated, 10, 12, 1, 3, "/", ":", " "));
          A41WWPSMSScheduled = i41WWPSMSScheduled;
-         AssignAttri("", false, "A41WWPSMSScheduled", context.localUtil.TToC( A41WWPSMSScheduled, 10, 12, 1, 2, "/", ":", " "));
+         AssignAttri("", false, "A41WWPSMSScheduled", context.localUtil.TToC( A41WWPSMSScheduled, 10, 12, 1, 3, "/", ":", " "));
       }
 
       protected void define_styles( )
@@ -2124,7 +2124,7 @@ namespace GeneXus.Programs.wwpbaseobjects.sms {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20246282110467", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202475214443", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2140,7 +2140,7 @@ namespace GeneXus.Programs.wwpbaseobjects.sms {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wwpbaseobjects/sms/wwp_sms.js", "?20246282110468", false, true);
+         context.AddJavascriptSource("wwpbaseobjects/sms/wwp_sms.js", "?202475214443", false, true);
          /* End function include_jscripts */
       }
 
@@ -2301,24 +2301,24 @@ namespace GeneXus.Programs.wwpbaseobjects.sms {
          AssignAttri("", false, "A34WWPSMSStatus", StringUtil.LTrim( StringUtil.NToC( (decimal)(A34WWPSMSStatus), 4, 0, ".", "")));
          cmbWWPSMSStatus.CurrentValue = StringUtil.Trim( StringUtil.Str( (decimal)(A34WWPSMSStatus), 4, 0));
          AssignProp("", false, cmbWWPSMSStatus_Internalname, "Values", cmbWWPSMSStatus.ToJavascriptSource(), true);
-         AssignAttri("", false, "A40WWPSMSCreated", context.localUtil.TToC( A40WWPSMSCreated, 10, 12, 1, 2, "/", ":", " "));
-         AssignAttri("", false, "A41WWPSMSScheduled", context.localUtil.TToC( A41WWPSMSScheduled, 10, 12, 1, 2, "/", ":", " "));
-         AssignAttri("", false, "A35WWPSMSProcessed", context.localUtil.TToC( A35WWPSMSProcessed, 10, 12, 1, 2, "/", ":", " "));
+         AssignAttri("", false, "A40WWPSMSCreated", context.localUtil.TToC( A40WWPSMSCreated, 10, 12, 1, 3, "/", ":", " "));
+         AssignAttri("", false, "A41WWPSMSScheduled", context.localUtil.TToC( A41WWPSMSScheduled, 10, 12, 1, 3, "/", ":", " "));
+         AssignAttri("", false, "A35WWPSMSProcessed", context.localUtil.TToC( A35WWPSMSProcessed, 10, 12, 1, 3, "/", ":", " "));
          AssignAttri("", false, "A36WWPSMSDetail", A36WWPSMSDetail);
          AssignAttri("", false, "A22WWPNotificationId", StringUtil.LTrim( StringUtil.NToC( (decimal)(A22WWPNotificationId), 10, 0, ".", "")));
-         AssignAttri("", false, "A24WWPNotificationCreated", context.localUtil.TToC( A24WWPNotificationCreated, 10, 12, 1, 2, "/", ":", " "));
+         AssignAttri("", false, "A24WWPNotificationCreated", context.localUtil.TToC( A24WWPNotificationCreated, 10, 12, 1, 3, "/", ":", " "));
          AssignAttri("", false, "Gx_mode", StringUtil.RTrim( Gx_mode));
          GxWebStd.gx_hidden_field( context, "Z33WWPSMSId", StringUtil.LTrim( StringUtil.NToC( (decimal)(Z33WWPSMSId), 10, 0, ".", "")));
          GxWebStd.gx_hidden_field( context, "Z37WWPSMSMessage", Z37WWPSMSMessage);
          GxWebStd.gx_hidden_field( context, "Z38WWPSMSSenderNumber", Z38WWPSMSSenderNumber);
          GxWebStd.gx_hidden_field( context, "Z39WWPSMSRecipientNumbers", Z39WWPSMSRecipientNumbers);
          GxWebStd.gx_hidden_field( context, "Z34WWPSMSStatus", StringUtil.LTrim( StringUtil.NToC( (decimal)(Z34WWPSMSStatus), 4, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "Z40WWPSMSCreated", context.localUtil.TToC( Z40WWPSMSCreated, 10, 12, 1, 2, "/", ":", " "));
-         GxWebStd.gx_hidden_field( context, "Z41WWPSMSScheduled", context.localUtil.TToC( Z41WWPSMSScheduled, 10, 12, 1, 2, "/", ":", " "));
-         GxWebStd.gx_hidden_field( context, "Z35WWPSMSProcessed", context.localUtil.TToC( Z35WWPSMSProcessed, 10, 12, 1, 2, "/", ":", " "));
+         GxWebStd.gx_hidden_field( context, "Z40WWPSMSCreated", context.localUtil.TToC( Z40WWPSMSCreated, 10, 12, 1, 3, "/", ":", " "));
+         GxWebStd.gx_hidden_field( context, "Z41WWPSMSScheduled", context.localUtil.TToC( Z41WWPSMSScheduled, 10, 12, 1, 3, "/", ":", " "));
+         GxWebStd.gx_hidden_field( context, "Z35WWPSMSProcessed", context.localUtil.TToC( Z35WWPSMSProcessed, 10, 12, 1, 3, "/", ":", " "));
          GxWebStd.gx_hidden_field( context, "Z36WWPSMSDetail", Z36WWPSMSDetail);
          GxWebStd.gx_hidden_field( context, "Z22WWPNotificationId", StringUtil.LTrim( StringUtil.NToC( (decimal)(Z22WWPNotificationId), 10, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "Z24WWPNotificationCreated", context.localUtil.TToC( Z24WWPNotificationCreated, 10, 12, 1, 2, "/", ":", " "));
+         GxWebStd.gx_hidden_field( context, "Z24WWPNotificationCreated", context.localUtil.TToC( Z24WWPNotificationCreated, 10, 12, 1, 3, "/", ":", " "));
          AssignProp("", false, bttBtn_delete_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(bttBtn_delete_Enabled), 5, 0), true);
          AssignProp("", false, bttBtn_enter_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(bttBtn_enter_Enabled), 5, 0), true);
          SendCloseFormHiddens( ) ;
@@ -2342,7 +2342,7 @@ namespace GeneXus.Programs.wwpbaseobjects.sms {
          pr_default.close(12);
          dynload_actions( ) ;
          /*  Sending validation outputs */
-         AssignAttri("", false, "A24WWPNotificationCreated", context.localUtil.TToC( A24WWPNotificationCreated, 10, 12, 1, 2, "/", ":", " "));
+         AssignAttri("", false, "A24WWPNotificationCreated", context.localUtil.TToC( A24WWPNotificationCreated, 10, 12, 1, 3, "/", ":", " "));
       }
 
       public override bool SupportAjaxEvent( )

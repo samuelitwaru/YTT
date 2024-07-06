@@ -687,7 +687,7 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
             /* Single line edit */
-            GxWebStd.gx_single_line_edit( context, edtavLeaverequest_employeebalance_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(AV9LeaveRequest.gxTpr_Employeebalance), 4, 0, ".", "")), StringUtil.LTrim( ((edtavLeaverequest_employeebalance_Enabled!=0) ? context.localUtil.Format( (decimal)(AV9LeaveRequest.gxTpr_Employeebalance), "ZZZ9") : context.localUtil.Format( (decimal)(AV9LeaveRequest.gxTpr_Employeebalance), "ZZZ9"))), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavLeaverequest_employeebalance_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavLeaverequest_employeebalance_Enabled, 0, "text", "1", 4, "chr", 1, "row", 4, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_WCLeaveDetails.htm");
+            GxWebStd.gx_single_line_edit( context, edtavLeaverequest_employeebalance_Internalname, StringUtil.LTrim( StringUtil.NToC( AV9LeaveRequest.gxTpr_Employeebalance, 4, 1, ".", "")), StringUtil.LTrim( ((edtavLeaverequest_employeebalance_Enabled!=0) ? context.localUtil.Format( AV9LeaveRequest.gxTpr_Employeebalance, "Z9.9") : context.localUtil.Format( AV9LeaveRequest.gxTpr_Employeebalance, "Z9.9"))), "", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavLeaverequest_employeebalance_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavLeaverequest_employeebalance_Enabled, 0, "text", "", 4, "chr", 1, "row", 4, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_WCLeaveDetails.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -1252,7 +1252,7 @@ namespace GeneXus.Programs {
             AV20Vacation = cgiGet( radavVacation_Internalname);
             AssignAttri(sPrefix, false, "AV20Vacation", AV20Vacation);
             AV9LeaveRequest.gxTpr_Leavetypename = cgiGet( edtavLeaverequest_leavetypename_Internalname);
-            if ( context.localUtil.VCDate( cgiGet( edtavLeaverequest_leaverequestdate_Internalname), 1) == 0 )
+            if ( context.localUtil.VCDate( cgiGet( edtavLeaverequest_leaverequestdate_Internalname), 2) == 0 )
             {
                GX_msglist.addItem(context.GetMessage( "GXM_faildate", new   object[]  {"Leave Request Date"}), 1, "LEAVEREQUEST_LEAVEREQUESTDATE");
                GX_FocusControl = edtavLeaverequest_leaverequestdate_Internalname;
@@ -1262,9 +1262,9 @@ namespace GeneXus.Programs {
             }
             else
             {
-               AV9LeaveRequest.gxTpr_Leaverequestdate = context.localUtil.CToD( cgiGet( edtavLeaverequest_leaverequestdate_Internalname), 1);
+               AV9LeaveRequest.gxTpr_Leaverequestdate = context.localUtil.CToD( cgiGet( edtavLeaverequest_leaverequestdate_Internalname), 2);
             }
-            if ( context.localUtil.VCDate( cgiGet( edtavLeaverequest_leaverequeststartdate_Internalname), 1) == 0 )
+            if ( context.localUtil.VCDate( cgiGet( edtavLeaverequest_leaverequeststartdate_Internalname), 2) == 0 )
             {
                GX_msglist.addItem(context.GetMessage( "GXM_faildate", new   object[]  {"Leave Request Start Date"}), 1, "LEAVEREQUEST_LEAVEREQUESTSTARTDATE");
                GX_FocusControl = edtavLeaverequest_leaverequeststartdate_Internalname;
@@ -1274,9 +1274,9 @@ namespace GeneXus.Programs {
             }
             else
             {
-               AV9LeaveRequest.gxTpr_Leaverequeststartdate = context.localUtil.CToD( cgiGet( edtavLeaverequest_leaverequeststartdate_Internalname), 1);
+               AV9LeaveRequest.gxTpr_Leaverequeststartdate = context.localUtil.CToD( cgiGet( edtavLeaverequest_leaverequeststartdate_Internalname), 2);
             }
-            if ( context.localUtil.VCDate( cgiGet( edtavLeaverequest_leaverequestenddate_Internalname), 1) == 0 )
+            if ( context.localUtil.VCDate( cgiGet( edtavLeaverequest_leaverequestenddate_Internalname), 2) == 0 )
             {
                GX_msglist.addItem(context.GetMessage( "GXM_faildate", new   object[]  {"Leave Request End Date"}), 1, "LEAVEREQUEST_LEAVEREQUESTENDDATE");
                GX_FocusControl = edtavLeaverequest_leaverequestenddate_Internalname;
@@ -1286,7 +1286,7 @@ namespace GeneXus.Programs {
             }
             else
             {
-               AV9LeaveRequest.gxTpr_Leaverequestenddate = context.localUtil.CToD( cgiGet( edtavLeaverequest_leaverequestenddate_Internalname), 1);
+               AV9LeaveRequest.gxTpr_Leaverequestenddate = context.localUtil.CToD( cgiGet( edtavLeaverequest_leaverequestenddate_Internalname), 2);
             }
             if ( ( ( context.localUtil.CToN( cgiGet( edtavLeaverequest_leaverequestduration_Internalname), ".", ",") < Convert.ToDecimal( 0 )) ) || ( ( context.localUtil.CToN( cgiGet( edtavLeaverequest_leaverequestduration_Internalname), ".", ",") > 99.9m ) ) )
             {
@@ -1303,7 +1303,7 @@ namespace GeneXus.Programs {
             cmbavLeaverequest_leaverequeststatus.CurrentValue = cgiGet( cmbavLeaverequest_leaverequeststatus_Internalname);
             AV9LeaveRequest.gxTpr_Leaverequeststatus = cgiGet( cmbavLeaverequest_leaverequeststatus_Internalname);
             AV9LeaveRequest.gxTpr_Leaverequestdescription = cgiGet( edtavLeaverequest_leaverequestdescription_Internalname);
-            if ( ( ( context.localUtil.CToN( cgiGet( edtavLeaverequest_employeebalance_Internalname), ".", ",") < Convert.ToDecimal( 0 )) ) || ( ( context.localUtil.CToN( cgiGet( edtavLeaverequest_employeebalance_Internalname), ".", ",") > Convert.ToDecimal( 9999 )) ) )
+            if ( ( ( context.localUtil.CToN( cgiGet( edtavLeaverequest_employeebalance_Internalname), ".", ",") < Convert.ToDecimal( 0 )) ) || ( ( context.localUtil.CToN( cgiGet( edtavLeaverequest_employeebalance_Internalname), ".", ",") > 99.9m ) ) )
             {
                GX_msglist.addItem(context.GetMessage( "GXM_badnum", ""), 1, "LEAVEREQUEST_EMPLOYEEBALANCE");
                GX_FocusControl = edtavLeaverequest_employeebalance_Internalname;
@@ -1313,7 +1313,7 @@ namespace GeneXus.Programs {
             }
             else
             {
-               AV9LeaveRequest.gxTpr_Employeebalance = (short)(Math.Round(context.localUtil.CToN( cgiGet( edtavLeaverequest_employeebalance_Internalname), ".", ","), 18, MidpointRounding.ToEven));
+               AV9LeaveRequest.gxTpr_Employeebalance = context.localUtil.CToN( cgiGet( edtavLeaverequest_employeebalance_Internalname), ".", ",");
             }
             AV9LeaveRequest.gxTpr_Leaverequestrejectionreason = cgiGet( edtavLeaverequest_leaverequestrejectionreason_Internalname);
             AV9LeaveRequest.gxTpr_Leavetypevacationleave = cgiGet( radavLeaverequest_leavetypevacationleave_Internalname);
@@ -1415,12 +1415,12 @@ namespace GeneXus.Programs {
             AV11LeaveType.Load(AV9LeaveRequest.gxTpr_Leavetypeid);
             if ( StringUtil.StrCmp(AV11LeaveType.gxTpr_Leavetypevacationleave, "Yes") == 0 )
             {
-               AV7Employee.gxTpr_Employeebalance = (short)(AV7Employee.gxTpr_Employeebalance-AV9LeaveRequest.gxTpr_Leaverequestduration);
+               AV7Employee.gxTpr_Employeebalance = (decimal)(AV7Employee.gxTpr_Employeebalance-AV9LeaveRequest.gxTpr_Leaverequestduration);
             }
             if ( AV7Employee.Update() )
             {
                GXt_char1 = AV11LeaveType.gxTpr_Leavetypename + " approved";
-               GXt_char2 = "<div style=\"max-width:600px;margin:0 auto;font-family:Arial,sans-serif;border:1px solid #e0e0e0;padding:20px;box-shadow:0 4px 8px rgba(0,0,0,.1)\"><div style=\"background-color:#f6d300;color:#000;text-align:center;padding:20px 0\"><h2>Leave Request Approved</h2></div><div style=\"padding:20px;line-height:1.5\"><p>Dear " + AV7Employee.gxTpr_Employeename + ",</p>" + "<p>We are pleased to inform you that your leave request has been approved. </p>" + "<p>Start Date: <b>" + context.localUtil.DToC( AV9LeaveRequest.gxTpr_Leaverequeststartdate, 1, "/") + "</b></p>" + "<p>End Date: <b>" + context.localUtil.DToC( AV9LeaveRequest.gxTpr_Leaverequestenddate, 1, "/") + "</b></p>" + "<p>Description: <b>" + AV9LeaveRequest.gxTpr_Leaverequestdescription + "</b></p><p>If you have any questions or need further assistance, please do not hesitate to contact us.</p><p>Best Regards,</p><p>Yukon Time Tracker Team</p></div></div>";
+               GXt_char2 = "<div style=\"max-width:600px;margin:0 auto;font-family:Arial,sans-serif;border:1px solid #e0e0e0;padding:20px;box-shadow:0 4px 8px rgba(0,0,0,.1)\"><div style=\"background-color:#f6d300;color:#000;text-align:center;padding:20px 0\"><h2>Leave Request Approved</h2></div><div style=\"padding:20px;line-height:1.5\"><p>Dear " + AV7Employee.gxTpr_Employeename + ",</p>" + "<p>We are pleased to inform you that your leave request has been approved. </p>" + "<p>Start Date: <b>" + context.localUtil.DToC( AV9LeaveRequest.gxTpr_Leaverequeststartdate, 2, "/") + "</b></p>" + "<p>End Date: <b>" + context.localUtil.DToC( AV9LeaveRequest.gxTpr_Leaverequestenddate, 2, "/") + "</b></p>" + "<p>Description: <b>" + AV9LeaveRequest.gxTpr_Leaverequestdescription + "</b></p><p>If you have any questions or need further assistance, please do not hesitate to contact us.</p><p>Best Regards,</p><p>Yukon Time Tracker Team</p></div></div>";
                new sendemail(context).executeSubmit(  AV7Employee.gxTpr_Employeeemail, ref  GXt_char1, ref  GXt_char2) ;
                context.CommitDataStores("wcleavedetails",pr_default);
                context.DoAjaxRefreshCmp(sPrefix);
@@ -1434,7 +1434,7 @@ namespace GeneXus.Programs {
                context.nUserReturn = 1;
                returnInSub = true;
                if (true) return;
-               new sdsendpushnotifications(context ).execute(  "Leave Request Approved",  "Your leave request made on "+context.localUtil.DToC( AV9LeaveRequest.gxTpr_Leaverequestdate, 1, "/")+" has been approved",  AV9LeaveRequest.gxTpr_Employeeid) ;
+               new sdsendpushnotifications(context ).execute(  "Leave Request Approved",  "Your leave request made on "+context.localUtil.DToC( AV9LeaveRequest.gxTpr_Leaverequestdate, 2, "/")+" has been approved",  AV9LeaveRequest.gxTpr_Employeeid) ;
             }
             else
             {
@@ -1459,12 +1459,12 @@ namespace GeneXus.Programs {
             AV7Employee.Load(AV9LeaveRequest.gxTpr_Employeeid);
             AV11LeaveType.Load(AV9LeaveRequest.gxTpr_Leavetypeid);
             GXt_char2 = AV11LeaveType.gxTpr_Leavetypename + " rejected";
-            GXt_char1 = "<div style=\"max-width:600px;margin:0 auto;font-family:Arial,sans-serif;border:1px solid #e0e0e0;padding:20px;box-shadow:0 4px 8px rgba(0,0,0,.1)\"><div style=\"background-color:#f6d300;color:#000;text-align:center;padding:20px 0\"><h2>Leave Request Rejected</h2></div><div style=\"padding:20px;line-height:1.5\"><p>Dear " + AV7Employee.gxTpr_Employeename + ",</p>" + "<p>We regret to inform you that your leave request has been rejected. </p>" + "<p>Start Date: <b>" + context.localUtil.DToC( AV9LeaveRequest.gxTpr_Leaverequeststartdate, 1, "/") + "</b></p>" + "<p>EndDate: <b>" + context.localUtil.DToC( AV9LeaveRequest.gxTpr_Leaverequestenddate, 1, "/") + "</b></p>" + "<p>Reason for Rejection: <b>" + AV9LeaveRequest.gxTpr_Leaverequestrejectionreason + "</b></p><p>If you have any concerns or need clarification, please reach out to us.</p><p> Best Regards</p><p>The Yukon Time Tracker Team</p></div></div>";
+            GXt_char1 = "<div style=\"max-width:600px;margin:0 auto;font-family:Arial,sans-serif;border:1px solid #e0e0e0;padding:20px;box-shadow:0 4px 8px rgba(0,0,0,.1)\"><div style=\"background-color:#f6d300;color:#000;text-align:center;padding:20px 0\"><h2>Leave Request Rejected</h2></div><div style=\"padding:20px;line-height:1.5\"><p>Dear " + AV7Employee.gxTpr_Employeename + ",</p>" + "<p>We regret to inform you that your leave request has been rejected. </p>" + "<p>Start Date: <b>" + context.localUtil.DToC( AV9LeaveRequest.gxTpr_Leaverequeststartdate, 2, "/") + "</b></p>" + "<p>EndDate: <b>" + context.localUtil.DToC( AV9LeaveRequest.gxTpr_Leaverequestenddate, 2, "/") + "</b></p>" + "<p>Reason for Rejection: <b>" + AV9LeaveRequest.gxTpr_Leaverequestrejectionreason + "</b></p><p>If you have any concerns or need clarification, please reach out to us.</p><p> Best Regards</p><p>The Yukon Time Tracker Team</p></div></div>";
             new sendemail(context).executeSubmit(  AV7Employee.gxTpr_Employeeemail, ref  GXt_char2, ref  GXt_char1) ;
             new logtofile(context ).execute(  "rejected") ;
             context.CommitDataStores("wcleavedetails",pr_default);
             GX_msglist.addItem("Leave Rejected Successfully");
-            new sdsendpushnotifications(context ).execute(  "Leave Request Rejected",  "Your leave request made on "+context.localUtil.DToC( AV9LeaveRequest.gxTpr_Leaverequestdate, 1, "/")+" has been rejected",  AV9LeaveRequest.gxTpr_Employeeid) ;
+            new sdsendpushnotifications(context ).execute(  "Leave Request Rejected",  "Your leave request made on "+context.localUtil.DToC( AV9LeaveRequest.gxTpr_Leaverequestdate, 2, "/")+" has been rejected",  AV9LeaveRequest.gxTpr_Employeeid) ;
             this.executeExternalObjectMethod(sPrefix, false, "GlobalEvents", "PendingLeaveRequests", new Object[] {}, true);
             this.executeExternalObjectMethod(sPrefix, false, "GlobalEvents", "RejectedLeaveRequests", new Object[] {}, true);
             this.executeExternalObjectMethod(sPrefix, false, "GlobalEvents", "LeaveRequestStatusChanged", new Object[] {}, true);
@@ -1782,7 +1782,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247415494783", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247615441144", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1798,7 +1798,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("wcleavedetails.js", "?20247415494783", false, true);
+         context.AddJavascriptSource("wcleavedetails.js", "?20247615441145", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/ConfirmPanel/BootstrapConfirmPanelRender.js", "", false, true);

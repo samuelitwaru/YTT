@@ -273,10 +273,19 @@ namespace GeneXus.Programs
 
 
 
-
 		[SoapElement(ElementName="EmployeeVactionDays")]
 		[XmlElement(ElementName="EmployeeVactionDays")]
-		public short gxTpr_Employeevactiondays
+		public string gxTpr_Employeevactiondays_double
+		{
+			get {
+				return Convert.ToString(gxTv_SdtSDTEmployee_Employeevactiondays, System.Globalization.CultureInfo.InvariantCulture);
+			}
+			set {
+				gxTv_SdtSDTEmployee_Employeevactiondays = (decimal)(Convert.ToDecimal(value, System.Globalization.CultureInfo.InvariantCulture));
+			}
+		}
+		[XmlIgnore]
+		public decimal gxTpr_Employeevactiondays
 		{
 			get {
 				return gxTv_SdtSDTEmployee_Employeevactiondays; 
@@ -289,10 +298,19 @@ namespace GeneXus.Programs
 
 
 
-
 		[SoapElement(ElementName="EmployeeBalance")]
 		[XmlElement(ElementName="EmployeeBalance")]
-		public short gxTpr_Employeebalance
+		public string gxTpr_Employeebalance_double
+		{
+			get {
+				return Convert.ToString(gxTv_SdtSDTEmployee_Employeebalance, System.Globalization.CultureInfo.InvariantCulture);
+			}
+			set {
+				gxTv_SdtSDTEmployee_Employeebalance = (decimal)(Convert.ToDecimal(value, System.Globalization.CultureInfo.InvariantCulture));
+			}
+		}
+		[XmlIgnore]
+		public decimal gxTpr_Employeebalance
 		{
 			get {
 				return gxTv_SdtSDTEmployee_Employeebalance; 
@@ -408,10 +426,10 @@ namespace GeneXus.Programs
 		protected bool gxTv_SdtSDTEmployee_Employeeisactive;
 		 
 
-		protected short gxTv_SdtSDTEmployee_Employeevactiondays;
+		protected decimal gxTv_SdtSDTEmployee_Employeevactiondays;
 		 
 
-		protected short gxTv_SdtSDTEmployee_Employeebalance;
+		protected decimal gxTv_SdtSDTEmployee_Employeebalance;
 		 
 		protected bool gxTv_SdtSDTEmployee_Project_N;
 		protected GXBaseCollection<SdtSDTEmployee_ProjectItem> gxTv_SdtSDTEmployee_Project = null; 
@@ -555,7 +573,7 @@ namespace GeneXus.Programs
 		}
 
 		[DataMember(Name="EmployeeVactionDays", Order=10)]
-		public short gxTpr_Employeevactiondays
+		public decimal gxTpr_Employeevactiondays
 		{
 			get { 
 				return sdt.gxTpr_Employeevactiondays;
@@ -567,7 +585,7 @@ namespace GeneXus.Programs
 		}
 
 		[DataMember(Name="EmployeeBalance", Order=11)]
-		public short gxTpr_Employeebalance
+		public decimal gxTpr_Employeebalance
 		{
 			get { 
 				return sdt.gxTpr_Employeebalance;

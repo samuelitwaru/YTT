@@ -197,8 +197,8 @@ namespace GeneXus.Programs {
             }
             else if ( StringUtil.StrCmp(AV39GridStateFilterValue.gxTpr_Name, "TFHOLIDAYSTARTDATE") == 0 )
             {
-               AV15TFHolidayStartDate = context.localUtil.CToD( AV39GridStateFilterValue.gxTpr_Value, 1);
-               AV16TFHolidayStartDate_To = context.localUtil.CToD( AV39GridStateFilterValue.gxTpr_Valueto, 1);
+               AV15TFHolidayStartDate = context.localUtil.CToD( AV39GridStateFilterValue.gxTpr_Value, 2);
+               AV16TFHolidayStartDate_To = context.localUtil.CToD( AV39GridStateFilterValue.gxTpr_Valueto, 2);
             }
             else if ( StringUtil.StrCmp(AV39GridStateFilterValue.gxTpr_Name, "TFHOLIDAYISACTIVE_SEL") == 0 )
             {

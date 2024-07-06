@@ -590,7 +590,7 @@ namespace GeneXus.Programs {
             /* Single line edit */
             TempTags = "  onfocus=\"gx.evt.onfocus(this, 59,'',false,'',0)\"";
             context.WriteHtmlText( "<div id=\""+edtavExpires_Internalname+"_dp_container\" class=\"dp_container\" style=\"white-space:nowrap;display:inline;\">") ;
-            GxWebStd.gx_single_line_edit( context, edtavExpires_Internalname, context.localUtil.TToC( AV8Expires, 10, 8, 1, 2, "/", ":", " "), context.localUtil.Format( AV8Expires, "99/99/9999 99:99"), TempTags+" onchange=\""+"gx.date.valid_date(this, 10,'MDY',5,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 10,'MDY',5,12,'eng',false,0);"+";gx.evt.onblur(this,59);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavExpires_Jsonclick, 0, "AttributeDateTime", "", "", "", "", edtavExpires_Visible, edtavExpires_Enabled, 0, "text", "", 19, "chr", 1, "row", 19, 0, 0, 0, 0, -1, 0, true, "GeneXusSecurityCommon\\GAMDateTime", "end", false, "", "HLP_GAMUserApplicationAPIkey.htm");
+            GxWebStd.gx_single_line_edit( context, edtavExpires_Internalname, context.localUtil.TToC( AV8Expires, 10, 8, 1, 3, "/", ":", " "), context.localUtil.Format( AV8Expires, "99/99/9999 99:99"), TempTags+" onchange=\""+"gx.date.valid_date(this, 10,'DMY',5,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 10,'DMY',5,12,'eng',false,0);"+";gx.evt.onblur(this,59);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavExpires_Jsonclick, 0, "AttributeDateTime", "", "", "", "", edtavExpires_Visible, edtavExpires_Enabled, 0, "text", "", 19, "chr", 1, "row", 19, 0, 0, 0, 0, -1, 0, true, "GeneXusSecurityCommon\\GAMDateTime", "end", false, "", "HLP_GAMUserApplicationAPIkey.htm");
             GxWebStd.gx_bitmap( context, edtavExpires_Internalname+"_dp_trigger", context.GetImagePath( "61b9b5d3-dff6-4d59-9b00-da61bc2cbe93", "", context.GetTheme( )), "", "", "", "", ((edtavExpires_Visible==0)||(edtavExpires_Enabled==0) ? 0 : 1), 0, "Date selector", "Date selector", 0, 1, 0, "", 0, "", 0, 0, 0, "", "", "cursor: pointer;", "", "", "", "", "", "", "", "", 1, false, false, "", "HLP_GAMUserApplicationAPIkey.htm");
             context.WriteHtmlTextNl( "</div>") ;
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -923,19 +923,19 @@ namespace GeneXus.Programs {
             AssignAttri("", false, "AV18ClientAllowGetSessionAppDataREST", AV18ClientAllowGetSessionAppDataREST);
             AV19ClientAllowAdditionalScopeREST = cgiGet( edtavClientallowadditionalscoperest_Internalname);
             AssignAttri("", false, "AV19ClientAllowAdditionalScopeREST", AV19ClientAllowAdditionalScopeREST);
-            if ( context.localUtil.VCDateTime( cgiGet( edtavExpires_Internalname), 1, 1) == 0 )
+            if ( context.localUtil.VCDateTime( cgiGet( edtavExpires_Internalname), 2, 1) == 0 )
             {
                GX_msglist.addItem(context.GetMessage( "GXM_baddatetime", new   object[]  {"Expires"}), 1, "vEXPIRES");
                GX_FocusControl = edtavExpires_Internalname;
                AssignAttri("", false, "GX_FocusControl", GX_FocusControl);
                wbErr = true;
                AV8Expires = (DateTime)(DateTime.MinValue);
-               AssignAttri("", false, "AV8Expires", context.localUtil.TToC( AV8Expires, 10, 5, 1, 2, "/", ":", " "));
+               AssignAttri("", false, "AV8Expires", context.localUtil.TToC( AV8Expires, 10, 5, 1, 3, "/", ":", " "));
             }
             else
             {
                AV8Expires = context.localUtil.CToT( cgiGet( edtavExpires_Internalname));
-               AssignAttri("", false, "AV8Expires", context.localUtil.TToC( AV8Expires, 10, 5, 1, 2, "/", ":", " "));
+               AssignAttri("", false, "AV8Expires", context.localUtil.TToC( AV8Expires, 10, 5, 1, 3, "/", ":", " "));
             }
             AV5APIkey = cgiGet( edtavApikey_Internalname);
             AssignAttri("", false, "AV5APIkey", AV5APIkey);
@@ -1094,7 +1094,7 @@ namespace GeneXus.Programs {
                if ( ! (DateTime.MinValue==AV23UserAPIkeyExpires) )
                {
                   AV8Expires = AV23UserAPIkeyExpires;
-                  AssignAttri("", false, "AV8Expires", context.localUtil.TToC( AV8Expires, 10, 5, 1, 2, "/", ":", " "));
+                  AssignAttri("", false, "AV8Expires", context.localUtil.TToC( AV8Expires, 10, 5, 1, 3, "/", ":", " "));
                   edtavExpires_Visible = 1;
                   AssignProp("", false, edtavExpires_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtavExpires_Visible), 5, 0), true);
                }
@@ -1164,7 +1164,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202462821153456", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247521515129", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1180,7 +1180,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("gamuserapplicationapikey.js", "?202462821153460", false, true);
+         context.AddJavascriptSource("gamuserapplicationapikey.js", "?20247521515133", false, true);
          /* End function include_jscripts */
       }
 

@@ -381,7 +381,7 @@ namespace GeneXus.Programs {
          /* Single line edit */
          TempTags = "  onfocus=\"gx.evt.onfocus(this, 29,'',false,'',0)\"";
          context.WriteHtmlText( "<div id=\""+edtHolidayStartDate_Internalname+"_dp_container\" class=\"dp_container\" style=\"white-space:nowrap;display:inline;\">") ;
-         GxWebStd.gx_single_line_edit( context, edtHolidayStartDate_Internalname, context.localUtil.Format(A115HolidayStartDate, "99/99/99"), context.localUtil.Format( A115HolidayStartDate, "99/99/99"), TempTags+" onchange=\""+"gx.date.valid_date(this, 8,'MDY',0,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 8,'MDY',0,12,'eng',false,0);"+";gx.evt.onblur(this,29);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtHolidayStartDate_Jsonclick, 0, "AttributeDate", "", "", "", "", 1, edtHolidayStartDate_Enabled, 0, "text", "", 8, "chr", 1, "row", 8, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_Holiday.htm");
+         GxWebStd.gx_single_line_edit( context, edtHolidayStartDate_Internalname, context.localUtil.Format(A115HolidayStartDate, "99/99/99"), context.localUtil.Format( A115HolidayStartDate, "99/99/99"), TempTags+" onchange=\""+"gx.date.valid_date(this, 8,'DMY',0,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 8,'DMY',0,12,'eng',false,0);"+";gx.evt.onblur(this,29);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtHolidayStartDate_Jsonclick, 0, "AttributeDate", "", "", "", "", 1, edtHolidayStartDate_Enabled, 0, "text", "", 8, "chr", 1, "row", 8, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_Holiday.htm");
          GxWebStd.gx_bitmap( context, edtHolidayStartDate_Internalname+"_dp_trigger", context.GetImagePath( "61b9b5d3-dff6-4d59-9b00-da61bc2cbe93", "", context.GetTheme( )), "", "", "", "", ((1==0)||(edtHolidayStartDate_Enabled==0) ? 0 : 1), 0, "Date selector", "Date selector", 0, 1, 0, "", 0, "", 0, 0, 0, "", "", "cursor: pointer;", "", "", "", "", "", "", "", "", 1, false, false, "", "HLP_Holiday.htm");
          context.WriteHtmlTextNl( "</div>") ;
          GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -466,7 +466,7 @@ namespace GeneXus.Programs {
          /* Single line edit */
          TempTags = "  onfocus=\"gx.evt.onfocus(this, 50,'',false,'',0)\"";
          context.WriteHtmlText( "<div id=\""+edtHolidayEndDate_Internalname+"_dp_container\" class=\"dp_container\" style=\"white-space:nowrap;display:inline;\">") ;
-         GxWebStd.gx_single_line_edit( context, edtHolidayEndDate_Internalname, context.localUtil.Format(A116HolidayEndDate, "99/99/99"), context.localUtil.Format( A116HolidayEndDate, "99/99/99"), TempTags+" onchange=\""+"gx.date.valid_date(this, 8,'MDY',0,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 8,'MDY',0,12,'eng',false,0);"+";gx.evt.onblur(this,50);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtHolidayEndDate_Jsonclick, 0, "Attribute", "", "", "", "", edtHolidayEndDate_Visible, edtHolidayEndDate_Enabled, 0, "text", "", 8, "chr", 1, "row", 8, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_Holiday.htm");
+         GxWebStd.gx_single_line_edit( context, edtHolidayEndDate_Internalname, context.localUtil.Format(A116HolidayEndDate, "99/99/99"), context.localUtil.Format( A116HolidayEndDate, "99/99/99"), TempTags+" onchange=\""+"gx.date.valid_date(this, 8,'DMY',0,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 8,'DMY',0,12,'eng',false,0);"+";gx.evt.onblur(this,50);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtHolidayEndDate_Jsonclick, 0, "Attribute", "", "", "", "", edtHolidayEndDate_Visible, edtHolidayEndDate_Enabled, 0, "text", "", 8, "chr", 1, "row", 8, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_Holiday.htm");
          GxWebStd.gx_bitmap( context, edtHolidayEndDate_Internalname+"_dp_trigger", context.GetImagePath( "61b9b5d3-dff6-4d59-9b00-da61bc2cbe93", "", context.GetTheme( )), "", "", "", "", ((edtHolidayEndDate_Visible==0)||(edtHolidayEndDate_Enabled==0) ? 0 : 1), 0, "Date selector", "Date selector", 0, 1, 0, "", 0, "", 0, 0, 0, "", "", "cursor: pointer;", "", "", "", "", "", "", "", "", 1, false, false, "", "HLP_Holiday.htm");
          context.WriteHtmlTextNl( "</div>") ;
          /* Single line edit */
@@ -540,7 +540,7 @@ namespace GeneXus.Programs {
                /* Read variables values. */
                A114HolidayName = cgiGet( edtHolidayName_Internalname);
                AssignAttri("", false, "A114HolidayName", A114HolidayName);
-               if ( context.localUtil.VCDate( cgiGet( edtHolidayStartDate_Internalname), 1) == 0 )
+               if ( context.localUtil.VCDate( cgiGet( edtHolidayStartDate_Internalname), 2) == 0 )
                {
                   GX_msglist.addItem(context.GetMessage( "GXM_faildate", new   object[]  {"Holiday Start Date"}), 1, "HOLIDAYSTARTDATE");
                   AnyError = 1;
@@ -552,14 +552,14 @@ namespace GeneXus.Programs {
                }
                else
                {
-                  A115HolidayStartDate = context.localUtil.CToD( cgiGet( edtHolidayStartDate_Internalname), 1);
+                  A115HolidayStartDate = context.localUtil.CToD( cgiGet( edtHolidayStartDate_Internalname), 2);
                   AssignAttri("", false, "A115HolidayStartDate", context.localUtil.Format(A115HolidayStartDate, "99/99/99"));
                }
                A139HolidayIsActive = StringUtil.StrToBool( cgiGet( chkHolidayIsActive_Internalname));
                AssignAttri("", false, "A139HolidayIsActive", A139HolidayIsActive);
                A113HolidayId = (long)(Math.Round(context.localUtil.CToN( cgiGet( edtHolidayId_Internalname), ".", ","), 18, MidpointRounding.ToEven));
                AssignAttri("", false, "A113HolidayId", StringUtil.LTrimStr( (decimal)(A113HolidayId), 10, 0));
-               if ( context.localUtil.VCDate( cgiGet( edtHolidayEndDate_Internalname), 1) == 0 )
+               if ( context.localUtil.VCDate( cgiGet( edtHolidayEndDate_Internalname), 2) == 0 )
                {
                   GX_msglist.addItem(context.GetMessage( "GXM_faildate", new   object[]  {"Holiday End Date"}), 1, "HOLIDAYENDDATE");
                   AnyError = 1;
@@ -572,7 +572,7 @@ namespace GeneXus.Programs {
                }
                else
                {
-                  A116HolidayEndDate = context.localUtil.CToD( cgiGet( edtHolidayEndDate_Internalname), 1);
+                  A116HolidayEndDate = context.localUtil.CToD( cgiGet( edtHolidayEndDate_Internalname), 2);
                   n116HolidayEndDate = false;
                   AssignAttri("", false, "A116HolidayEndDate", context.localUtil.Format(A116HolidayEndDate, "99/99/99"));
                }
@@ -2026,7 +2026,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247412473243", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024752144487", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2042,7 +2042,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("holiday.js", "?20247412473244", false, true);
+         context.AddJavascriptSource("holiday.js", "?2024752144489", false, true);
          /* End function include_jscripts */
       }
 

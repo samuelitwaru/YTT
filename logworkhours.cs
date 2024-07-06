@@ -543,7 +543,7 @@ namespace GeneXus.Programs {
             /* Single line edit */
             TempTags = "  onfocus=\"gx.evt.onfocus(this, 30,'',false,'" + sGXsfl_86_idx + "',0)\"";
             context.WriteHtmlText( "<div id=\""+edtavDate_Internalname+"_dp_container\" class=\"dp_container\" style=\"white-space:nowrap;display:inline;\">") ;
-            GxWebStd.gx_single_line_edit( context, edtavDate_Internalname, context.localUtil.Format(AV10date, "99/99/99"), context.localUtil.Format( AV10date, "99/99/99"), TempTags+" onchange=\""+"gx.date.valid_date(this, 8,'MDY',0,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 8,'MDY',0,12,'eng',false,0);"+";gx.evt.onblur(this,30);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavDate_Jsonclick, 0, "AttributeDate", "", "", "", "", 1, edtavDate_Enabled, 0, "text", "", 8, "chr", 1, "row", 8, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_LogWorkHours.htm");
+            GxWebStd.gx_single_line_edit( context, edtavDate_Internalname, context.localUtil.Format(AV10date, "99/99/99"), context.localUtil.Format( AV10date, "99/99/99"), TempTags+" onchange=\""+"gx.date.valid_date(this, 8,'DMY',0,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 8,'DMY',0,12,'eng',false,0);"+";gx.evt.onblur(this,30);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavDate_Jsonclick, 0, "AttributeDate", "", "", "", "", 1, edtavDate_Enabled, 0, "text", "", 8, "chr", 1, "row", 8, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_LogWorkHours.htm");
             context.WriteHtmlTextNl( "</div>") ;
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -604,7 +604,7 @@ namespace GeneXus.Programs {
             /* Single line edit */
             TempTags = "  onfocus=\"gx.evt.onfocus(this, 52,'',false,'" + sGXsfl_86_idx + "',0)\"";
             context.WriteHtmlText( "<div id=\""+edtavFormworkhourlogdate_Internalname+"_dp_container\" class=\"dp_container\" style=\"white-space:nowrap;display:inline;\">") ;
-            GxWebStd.gx_single_line_edit( context, edtavFormworkhourlogdate_Internalname, context.localUtil.Format(AV22FormWorkHourLogDate, "99/99/99"), context.localUtil.Format( AV22FormWorkHourLogDate, "99/99/99"), TempTags+" onchange=\""+"gx.date.valid_date(this, 8,'MDY',0,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 8,'MDY',0,12,'eng',false,0);"+";gx.evt.onblur(this,52);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavFormworkhourlogdate_Jsonclick, 0, "AttributeDate", "", "", "", "", 1, edtavFormworkhourlogdate_Enabled, 0, "text", "", 8, "chr", 1, "row", 8, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_LogWorkHours.htm");
+            GxWebStd.gx_single_line_edit( context, edtavFormworkhourlogdate_Internalname, context.localUtil.Format(AV22FormWorkHourLogDate, "99/99/99"), context.localUtil.Format( AV22FormWorkHourLogDate, "99/99/99"), TempTags+" onchange=\""+"gx.date.valid_date(this, 8,'DMY',0,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 8,'DMY',0,12,'eng',false,0);"+";gx.evt.onblur(this,52);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavFormworkhourlogdate_Jsonclick, 0, "AttributeDate", "", "", "", "", 1, edtavFormworkhourlogdate_Enabled, 0, "text", "", 8, "chr", 1, "row", 8, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_LogWorkHours.htm");
             GxWebStd.gx_bitmap( context, edtavFormworkhourlogdate_Internalname+"_dp_trigger", context.GetImagePath( "61b9b5d3-dff6-4d59-9b00-da61bc2cbe93", "", context.GetTheme( )), "", "", "", "", ((1==0)||(edtavFormworkhourlogdate_Enabled==0) ? 0 : 1), 0, "Date selector", "Date selector", 0, 1, 0, "", 0, "", 0, 0, 0, "", "", "cursor: pointer;", "", "", "", "", "", "", "", "", 1, false, false, "", "HLP_LogWorkHours.htm");
             context.WriteHtmlTextNl( "</div>") ;
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -1500,7 +1500,7 @@ namespace GeneXus.Programs {
             Isloghouropen_Visible = StringUtil.StrToBool( cgiGet( "ISLOGHOUROPEN_Visible"));
             Grid1_empowerer_Gridinternalname = cgiGet( "GRID1_EMPOWERER_Gridinternalname");
             /* Read variables values. */
-            if ( context.localUtil.VCDate( cgiGet( edtavDate_Internalname), 1) == 0 )
+            if ( context.localUtil.VCDate( cgiGet( edtavDate_Internalname), 2) == 0 )
             {
                GX_msglist.addItem(context.GetMessage( "GXM_faildate", new   object[]  {"date"}), 1, "vDATE");
                GX_FocusControl = edtavDate_Internalname;
@@ -1511,10 +1511,10 @@ namespace GeneXus.Programs {
             }
             else
             {
-               AV10date = context.localUtil.CToD( cgiGet( edtavDate_Internalname), 1);
+               AV10date = context.localUtil.CToD( cgiGet( edtavDate_Internalname), 2);
                AssignAttri("", false, "AV10date", context.localUtil.Format(AV10date, "99/99/99"));
             }
-            if ( context.localUtil.VCDate( cgiGet( edtavFormworkhourlogdate_Internalname), 1) == 0 )
+            if ( context.localUtil.VCDate( cgiGet( edtavFormworkhourlogdate_Internalname), 2) == 0 )
             {
                GX_msglist.addItem(context.GetMessage( "GXM_faildate", new   object[]  {"Work Hour Log Date"}), 1, "vFORMWORKHOURLOGDATE");
                GX_FocusControl = edtavFormworkhourlogdate_Internalname;
@@ -1525,7 +1525,7 @@ namespace GeneXus.Programs {
             }
             else
             {
-               AV22FormWorkHourLogDate = context.localUtil.CToD( cgiGet( edtavFormworkhourlogdate_Internalname), 1);
+               AV22FormWorkHourLogDate = context.localUtil.CToD( cgiGet( edtavFormworkhourlogdate_Internalname), 2);
                AssignAttri("", false, "AV22FormWorkHourLogDate", context.localUtil.Format(AV22FormWorkHourLogDate, "99/99/99"));
             }
             dynavFormworkhourlogprojectid.Name = dynavFormworkhourlogprojectid_Internalname;
@@ -1582,7 +1582,7 @@ namespace GeneXus.Programs {
             /* Read hidden variables. */
             GXKey = Decrypt64( context.GetCookie( "GX_SESSION_ID"), Crypto.GetServerKey( ));
             /* Check if conditions changed and reset current page numbers */
-            if ( DateTimeUtil.ResetTime ( context.localUtil.CToD( cgiGet( "GXH_vDATE"), 1) ) != DateTimeUtil.ResetTime ( AV10date ) )
+            if ( DateTimeUtil.ResetTime ( context.localUtil.CToD( cgiGet( "GXH_vDATE"), 2) ) != DateTimeUtil.ResetTime ( AV10date ) )
             {
                GRID1_nFirstRecordOnPage = 0;
             }
@@ -2051,7 +2051,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247410455182", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247521514784", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2069,7 +2069,7 @@ namespace GeneXus.Programs {
          if ( nGXWrapped != 1 )
          {
             context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-            context.AddJavascriptSource("logworkhours.js", "?20247410455182", false, true);
+            context.AddJavascriptSource("logworkhours.js", "?20247521514785", false, true);
             context.AddJavascriptSource("Switch/switch.min.js", "", false, true);
             context.AddJavascriptSource("Switch/switch.min.js", "", false, true);
             context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);

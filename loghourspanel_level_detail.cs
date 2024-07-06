@@ -119,7 +119,7 @@ namespace GeneXus.Programs {
             {
                AV10ProjectId = (short)(AV31LastLoggedProjectId);
             }
-            Gxwebsession.Set(Gxids+"gxvar_Workhourlogdate", context.localUtil.DToC( AV7WorkHourLogDate, 1, "/"));
+            Gxwebsession.Set(Gxids+"gxvar_Workhourlogdate", context.localUtil.DToC( AV7WorkHourLogDate, 2, "/"));
             Gxwebsession.Set(Gxids+"gxvar_Projectid", StringUtil.Str( (decimal)(AV10ProjectId), 4, 0));
             Gxwebsession.Set(Gxids+"gxvar_Loghour", StringUtil.Str( (decimal)(AV23LogHour), 2, 0));
             Gxwebsession.Set(Gxids+"gxvar_Employeeid", StringUtil.Str( (decimal)(AV20EmployeeId), 10, 0));
@@ -128,7 +128,7 @@ namespace GeneXus.Programs {
          }
          else
          {
-            AV7WorkHourLogDate = context.localUtil.CToD( Gxwebsession.Get(Gxids+"gxvar_Workhourlogdate"), 1);
+            AV7WorkHourLogDate = context.localUtil.CToD( Gxwebsession.Get(Gxids+"gxvar_Workhourlogdate"), 2);
             AV20EmployeeId = (long)(Math.Round(NumberUtil.Val( Gxwebsession.Get(Gxids+"gxvar_Employeeid"), "."), 18, MidpointRounding.ToEven));
             AV29MsgVar = Gxwebsession.Get(Gxids+"gxvar_Msgvar");
             AV23LogHour = (short)(Math.Round(NumberUtil.Val( Gxwebsession.Get(Gxids+"gxvar_Loghour"), "."), 18, MidpointRounding.ToEven));
@@ -148,7 +148,7 @@ namespace GeneXus.Programs {
          AV43GXM3LogHoursPanel_Level_DetailSdt.gxTpr_Msgvar = AV29MsgVar;
          AV43GXM3LogHoursPanel_Level_DetailSdt.gxTpr_Gxdynprop = "[ "+Gxdynprop+" ]";
          Gxdynprop = "";
-         Gxwebsession.Set(Gxids+"gxvar_Workhourlogdate", context.localUtil.DToC( AV7WorkHourLogDate, 1, "/"));
+         Gxwebsession.Set(Gxids+"gxvar_Workhourlogdate", context.localUtil.DToC( AV7WorkHourLogDate, 2, "/"));
          this.cleanup();
       }
 

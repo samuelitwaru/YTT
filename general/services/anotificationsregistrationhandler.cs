@@ -145,18 +145,19 @@ namespace GeneXus.Programs.general.services {
       {
          /* GeneXus formulas */
          /* Output device settings */
-         AV13GXLvl7 = 0;
+         AV13AvailableUser = new GeneXus.Programs.genexussecurity.SdtGAMUser(context).getid();
+         AV14GXLvl9 = 0;
          /* Optimized UPDATE. */
          /* Using cursor P003V2 */
          pr_default.execute(0, new Object[] {AV9DeviceName, AV10DeviceToken, AV8DeviceId, AV11DeviceType});
          if ( (pr_default.getStatus(0) != 101) )
          {
-            AV13GXLvl7 = 1;
+            AV14GXLvl9 = 1;
          }
          pr_default.close(0);
          pr_default.SmartCacheProvider.SetUpdated("Device");
          /* End optimized UPDATE. */
-         if ( AV13GXLvl7 == 0 )
+         if ( AV14GXLvl9 == 0 )
          {
             /*
                INSERT RECORD ON TABLE Device
@@ -166,7 +167,7 @@ namespace GeneXus.Programs.general.services {
             A151DeviceId = AV8DeviceId;
             A149DeviceToken = AV10DeviceToken;
             A153DeviceName = AV9DeviceName;
-            A150DeviceUser = "";
+            A150DeviceUser = AV13AvailableUser;
             n150DeviceUser = false;
             /* Using cursor P003V3 */
             pr_default.execute(1, new Object[] {A151DeviceId, A152DeviceType, A149DeviceToken, A153DeviceName, n150DeviceUser, A150DeviceUser});
@@ -204,6 +205,7 @@ namespace GeneXus.Programs.general.services {
 
       public override void initialize( )
       {
+         AV13AvailableUser = "";
          A153DeviceName = "";
          A149DeviceToken = "";
          A151DeviceId = "";
@@ -221,7 +223,7 @@ namespace GeneXus.Programs.general.services {
       }
 
       private short AV11DeviceType ;
-      private short AV13GXLvl7 ;
+      private short AV14GXLvl9 ;
       private short A152DeviceType ;
       private int GX_INS23 ;
       private string AV8DeviceId ;
@@ -232,6 +234,7 @@ namespace GeneXus.Programs.general.services {
       private string A151DeviceId ;
       private string Gx_emsg ;
       private bool n150DeviceUser ;
+      private string AV13AvailableUser ;
       private string A150DeviceUser ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;

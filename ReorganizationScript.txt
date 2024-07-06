@@ -1,3 +1,22 @@
-UPDATE Employee SET EmployeeName = SUBSTR(EmployeeName, 1, 100);
-ALTER TABLE Employee ALTER COLUMN EmployeeName TYPE CHAR(100);
+CREATE TABLE GXA0016 (EmployeeId bigint NOT NULL DEFAULT nextval('EmployeeId'), EmployeeFirstName CHAR(100) NOT NULL , EmployeeLastName CHAR(100) NOT NULL , EmployeeEmail VARCHAR(100) NOT NULL , CompanyId bigint NOT NULL , EmployeeIsManager BOOLEAN NOT NULL , GAMUserGUID VARCHAR(100) NOT NULL , EmployeeIsActive BOOLEAN NOT NULL , EmployeeVactionDays NUMERIC(3,1) NOT NULL , EmployeeBalance NUMERIC(3,1) NOT NULL , EmployeeName CHAR(100) NOT NULL );
+Run conversion program for table Employee;
+DROP TABLE Employee CASCADE;
+ALTER TABLE GXA0016 RENAME TO Employee;
+ALTER TABLE Employee ADD CONSTRAINT Employee_pkey PRIMARY KEY(EmployeeId);
+CREATE UNIQUE INDEX UEMPLOYEE ON Employee (EmployeeEmail );
+CREATE INDEX IEMPLOYEE1 ON Employee (CompanyId );
+CREATE INDEX UEMPLOYEE1 ON Employee (EmployeeName );
+
+ALTER TABLE Project ADD CONSTRAINT GX_000F004M FOREIGN KEY (ProjectManagerId) REFERENCES Employee (EmployeeId);
+ALTER TABLE Project ADD CONSTRAINT IPROJECT1 FOREIGN KEY (ProjectManagerId, ProjectId) REFERENCES EmployeeProject (EmployeeId, ProjectId);
+
+ALTER TABLE SupportRequest ADD CONSTRAINT ISUPPORTREQUEST1 FOREIGN KEY (EmployeeId) REFERENCES Employee (EmployeeId);
+
+ALTER TABLE LeaveRequest ADD CONSTRAINT ILEAVEREQUEST2 FOREIGN KEY (LeaveTypeId) REFERENCES LeaveType (LeaveTypeId);
+ALTER TABLE LeaveRequest ADD CONSTRAINT ILEAVEREQUEST1 FOREIGN KEY (EmployeeId) REFERENCES Employee (EmployeeId);
+
+ALTER TABLE EmployeeProject ADD CONSTRAINT IEMPLOYEEPROJECT2 FOREIGN KEY (EmployeeId) REFERENCES Employee (EmployeeId);
+ALTER TABLE EmployeeProject ADD CONSTRAINT IEMPLOYEEPROJECT1 FOREIGN KEY (ProjectId) REFERENCES Project (ProjectId);
+
+ALTER TABLE Employee ADD CONSTRAINT IEMPLOYEE1 FOREIGN KEY (CompanyId) REFERENCES Company (CompanyId);
 

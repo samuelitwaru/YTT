@@ -48,7 +48,7 @@
               </Property>
               <Property>
                 <Name>Length</Name>
-                <Value>128</Value>
+                <Value>100</Value>
               </Property>
             </Properties>
           </Field>
@@ -120,7 +120,7 @@
               </Property>
             </Properties>
           </Field>
-          <Field name="EmployeeVactionDays" description="Employee Vaction Days">
+          <Field name="EmployeeVactionDays" description="Employee Vacation Days">
             <Properties>
               <Property>
                 <Name>Type</Name>
@@ -129,6 +129,10 @@
               <Property>
                 <Name>Length</Name>
                 <Value>4</Value>
+              </Property>
+              <Property>
+                <Name>Decimals</Name>
+                <Value>1</Value>
               </Property>
             </Properties>
           </Field>
@@ -141,6 +145,10 @@
               <Property>
                 <Name>Length</Name>
                 <Value>4</Value>
+              </Property>
+              <Property>
+                <Name>Decimals</Name>
+                <Value>1</Value>
               </Property>
             </Properties>
           </Field>

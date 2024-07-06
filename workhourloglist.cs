@@ -1896,9 +1896,9 @@ namespace GeneXus.Programs {
             }
             else if ( StringUtil.StrCmp(Ddo_grid_Selectedcolumn, "WorkHourLogDate") == 0 )
             {
-               AV31TFWorkHourLogDate = context.localUtil.CToD( Ddo_grid_Filteredtext_get, 1);
+               AV31TFWorkHourLogDate = context.localUtil.CToD( Ddo_grid_Filteredtext_get, 2);
                AssignAttri("", false, "AV31TFWorkHourLogDate", context.localUtil.Format(AV31TFWorkHourLogDate, "99/99/99"));
-               AV32TFWorkHourLogDate_To = context.localUtil.CToD( Ddo_grid_Filteredtextto_get, 1);
+               AV32TFWorkHourLogDate_To = context.localUtil.CToD( Ddo_grid_Filteredtextto_get, 2);
                AssignAttri("", false, "AV32TFWorkHourLogDate_To", context.localUtil.Format(AV32TFWorkHourLogDate_To, "99/99/99"));
             }
             else if ( StringUtil.StrCmp(Ddo_grid_Selectedcolumn, "WorkHourLogDuration") == 0 )
@@ -2196,9 +2196,9 @@ namespace GeneXus.Programs {
             }
             else if ( StringUtil.StrCmp(AV12GridStateFilterValue.gxTpr_Name, "TFWORKHOURLOGDATE") == 0 )
             {
-               AV31TFWorkHourLogDate = context.localUtil.CToD( AV12GridStateFilterValue.gxTpr_Value, 1);
+               AV31TFWorkHourLogDate = context.localUtil.CToD( AV12GridStateFilterValue.gxTpr_Value, 2);
                AssignAttri("", false, "AV31TFWorkHourLogDate", context.localUtil.Format(AV31TFWorkHourLogDate, "99/99/99"));
-               AV32TFWorkHourLogDate_To = context.localUtil.CToD( AV12GridStateFilterValue.gxTpr_Valueto, 1);
+               AV32TFWorkHourLogDate_To = context.localUtil.CToD( AV12GridStateFilterValue.gxTpr_Valueto, 2);
                AssignAttri("", false, "AV32TFWorkHourLogDate_To", context.localUtil.Format(AV32TFWorkHourLogDate_To, "99/99/99"));
             }
             else if ( StringUtil.StrCmp(AV12GridStateFilterValue.gxTpr_Name, "TFWORKHOURLOGDURATION") == 0 )
@@ -2241,9 +2241,9 @@ namespace GeneXus.Programs {
          new GeneXus.Programs.wwpbaseobjects.wwp_getfilterval(context ).execute(  String.IsNullOrEmpty(StringUtil.RTrim( AV36TFWorkHourLogDuration)),  AV36TFWorkHourLogDuration, out  GXt_char4) ;
          GXt_char2 = "";
          new GeneXus.Programs.wwpbaseobjects.wwp_getfilterval(context ).execute(  String.IsNullOrEmpty(StringUtil.RTrim( AV38TFWorkHourLogDescription)),  AV38TFWorkHourLogDescription, out  GXt_char2) ;
-         Ddo_grid_Filteredtext_set = GXt_char6+"|"+GXt_char5+"|"+((DateTime.MinValue==AV31TFWorkHourLogDate) ? "" : context.localUtil.DToC( AV31TFWorkHourLogDate, 1, "/"))+"|"+GXt_char4+"|"+GXt_char2;
+         Ddo_grid_Filteredtext_set = GXt_char6+"|"+GXt_char5+"|"+((DateTime.MinValue==AV31TFWorkHourLogDate) ? "" : context.localUtil.DToC( AV31TFWorkHourLogDate, 2, "/"))+"|"+GXt_char4+"|"+GXt_char2;
          ucDdo_grid.SendProperty(context, "", false, Ddo_grid_Internalname, "FilteredText_set", Ddo_grid_Filteredtext_set);
-         Ddo_grid_Filteredtextto_set = "||"+((DateTime.MinValue==AV32TFWorkHourLogDate_To) ? "" : context.localUtil.DToC( AV32TFWorkHourLogDate_To, 1, "/"))+"||";
+         Ddo_grid_Filteredtextto_set = "||"+((DateTime.MinValue==AV32TFWorkHourLogDate_To) ? "" : context.localUtil.DToC( AV32TFWorkHourLogDate_To, 2, "/"))+"||";
          ucDdo_grid.SendProperty(context, "", false, Ddo_grid_Internalname, "FilteredTextTo_set", Ddo_grid_Filteredtextto_set);
       }
 
@@ -2258,7 +2258,7 @@ namespace GeneXus.Programs {
          new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV11GridState,  "FILTERFULLTEXT",  "Main filter",  !String.IsNullOrEmpty(StringUtil.RTrim( AV16FilterFullText)),  0,  AV16FilterFullText,  AV16FilterFullText,  false,  "",  "") ;
          new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalueandsel(context ).execute( ref  AV11GridState,  "TFEMPLOYEENAME",  "Employee Name",  !String.IsNullOrEmpty(StringUtil.RTrim( AV27TFEmployeeName)),  0,  AV27TFEmployeeName,  AV27TFEmployeeName,  false,  "",  "",  !String.IsNullOrEmpty(StringUtil.RTrim( AV28TFEmployeeName_Sel)),  AV28TFEmployeeName_Sel,  AV28TFEmployeeName_Sel) ;
          new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalueandsel(context ).execute( ref  AV11GridState,  "TFPROJECTNAME",  "Project Name",  !String.IsNullOrEmpty(StringUtil.RTrim( AV29TFProjectName)),  0,  AV29TFProjectName,  AV29TFProjectName,  false,  "",  "",  !String.IsNullOrEmpty(StringUtil.RTrim( AV30TFProjectName_Sel)),  AV30TFProjectName_Sel,  AV30TFProjectName_Sel) ;
-         new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV11GridState,  "TFWORKHOURLOGDATE",  "Log Date",  !((DateTime.MinValue==AV31TFWorkHourLogDate)&&(DateTime.MinValue==AV32TFWorkHourLogDate_To)),  0,  StringUtil.Trim( context.localUtil.DToC( AV31TFWorkHourLogDate, 1, "/")),  ((DateTime.MinValue==AV31TFWorkHourLogDate) ? "" : StringUtil.Trim( context.localUtil.Format( AV31TFWorkHourLogDate, "99/99/99"))),  true,  StringUtil.Trim( context.localUtil.DToC( AV32TFWorkHourLogDate_To, 1, "/")),  ((DateTime.MinValue==AV32TFWorkHourLogDate_To) ? "" : StringUtil.Trim( context.localUtil.Format( AV32TFWorkHourLogDate_To, "99/99/99")))) ;
+         new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV11GridState,  "TFWORKHOURLOGDATE",  "Log Date",  !((DateTime.MinValue==AV31TFWorkHourLogDate)&&(DateTime.MinValue==AV32TFWorkHourLogDate_To)),  0,  StringUtil.Trim( context.localUtil.DToC( AV31TFWorkHourLogDate, 2, "/")),  ((DateTime.MinValue==AV31TFWorkHourLogDate) ? "" : StringUtil.Trim( context.localUtil.Format( AV31TFWorkHourLogDate, "99/99/99"))),  true,  StringUtil.Trim( context.localUtil.DToC( AV32TFWorkHourLogDate_To, 2, "/")),  ((DateTime.MinValue==AV32TFWorkHourLogDate_To) ? "" : StringUtil.Trim( context.localUtil.Format( AV32TFWorkHourLogDate_To, "99/99/99")))) ;
          new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalueandsel(context ).execute( ref  AV11GridState,  "TFWORKHOURLOGDURATION",  "Log Duration",  !String.IsNullOrEmpty(StringUtil.RTrim( AV36TFWorkHourLogDuration)),  0,  AV36TFWorkHourLogDuration,  AV36TFWorkHourLogDuration,  false,  "",  "",  !String.IsNullOrEmpty(StringUtil.RTrim( AV37TFWorkHourLogDuration_Sel)),  AV37TFWorkHourLogDuration_Sel,  AV37TFWorkHourLogDuration_Sel) ;
          new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalueandsel(context ).execute( ref  AV11GridState,  "TFWORKHOURLOGDESCRIPTION",  "Log Description",  !String.IsNullOrEmpty(StringUtil.RTrim( AV38TFWorkHourLogDescription)),  0,  AV38TFWorkHourLogDescription,  AV38TFWorkHourLogDescription,  false,  "",  "",  !String.IsNullOrEmpty(StringUtil.RTrim( AV39TFWorkHourLogDescription_Sel)),  AV39TFWorkHourLogDescription_Sel,  AV39TFWorkHourLogDescription_Sel) ;
          AV11GridState.gxTpr_Pagesize = StringUtil.Str( (decimal)(subGrid_Rows), 10, 0);
@@ -2425,7 +2425,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247415553373", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024752152928", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2441,7 +2441,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("workhourloglist.js", "?20247415553375", false, true);
+         context.AddJavascriptSource("workhourloglist.js", "?2024752152930", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);

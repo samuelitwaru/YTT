@@ -310,9 +310,9 @@ namespace GeneXus.Programs {
          {
             A112EmployeeIsActive = false;
          }
-         if ( IsIns( )  && (0==A146EmployeeVactionDays) && ( Gx_BScreen == 0 ) )
+         if ( IsIns( )  && (Convert.ToDecimal(0)==A146EmployeeVactionDays) && ( Gx_BScreen == 0 ) )
          {
-            A146EmployeeVactionDays = 21;
+            A146EmployeeVactionDays = (decimal)(21);
          }
          if ( ( StringUtil.StrCmp(Gx_mode, "INS") == 0 ) && ( Gx_BScreen == 0 ) )
          {
@@ -350,7 +350,7 @@ namespace GeneXus.Programs {
       protected void OnLoadActions0F16( )
       {
          A148EmployeeName = StringUtil.Trim( A107EmployeeFirstName) + " " + StringUtil.Trim( A108EmployeeLastName);
-         if ( IsIns( )  && (0==A147EmployeeBalance) && ( Gx_BScreen == 0 ) )
+         if ( IsIns( )  && (Convert.ToDecimal(0)==A147EmployeeBalance) && ( Gx_BScreen == 0 ) )
          {
             A147EmployeeBalance = A146EmployeeVactionDays;
          }
@@ -364,9 +364,9 @@ namespace GeneXus.Programs {
             {
                if ( IsUpd( )  )
                {
-                  GXt_int3 = A147EmployeeBalance;
-                  new getemployeeapprovedvacationdays(context ).execute(  A106EmployeeId,  context.localUtil.YMDToD( DateTimeUtil.Year( Gx_date), 1, 1),  context.localUtil.YMDToD( DateTimeUtil.Year( Gx_date), 12, 31), out  GXt_int3) ;
-                  A147EmployeeBalance = (short)(A146EmployeeVactionDays-GXt_int3);
+                  GXt_decimal3 = A147EmployeeBalance;
+                  new getemployeeapprovedvacationdays(context ).execute(  A106EmployeeId,  context.localUtil.YMDToD( DateTimeUtil.Year( Gx_date), 1, 1),  context.localUtil.YMDToD( DateTimeUtil.Year( Gx_date), 12, 31), out  GXt_decimal3) ;
+                  A147EmployeeBalance = (decimal)(A146EmployeeVactionDays-GXt_decimal3);
                }
             }
          }
@@ -424,7 +424,7 @@ namespace GeneXus.Programs {
             GX_msglist.addItem(StringUtil.Format( "%1 is required.", "Company Id", "", "", "", "", "", "", "", ""), 1, "");
             AnyError = 1;
          }
-         if ( IsIns( )  && (0==A147EmployeeBalance) && ( Gx_BScreen == 0 ) )
+         if ( IsIns( )  && (Convert.ToDecimal(0)==A147EmployeeBalance) && ( Gx_BScreen == 0 ) )
          {
             nIsDirty_16 = 1;
             A147EmployeeBalance = A146EmployeeVactionDays;
@@ -441,9 +441,9 @@ namespace GeneXus.Programs {
                if ( IsUpd( )  )
                {
                   nIsDirty_16 = 1;
-                  GXt_int3 = A147EmployeeBalance;
-                  new getemployeeapprovedvacationdays(context ).execute(  A106EmployeeId,  context.localUtil.YMDToD( DateTimeUtil.Year( Gx_date), 1, 1),  context.localUtil.YMDToD( DateTimeUtil.Year( Gx_date), 12, 31), out  GXt_int3) ;
-                  A147EmployeeBalance = (short)(A146EmployeeVactionDays-GXt_int3);
+                  GXt_decimal3 = A147EmployeeBalance;
+                  new getemployeeapprovedvacationdays(context ).execute(  A106EmployeeId,  context.localUtil.YMDToD( DateTimeUtil.Year( Gx_date), 1, 1),  context.localUtil.YMDToD( DateTimeUtil.Year( Gx_date), 12, 31), out  GXt_decimal3) ;
+                  A147EmployeeBalance = (decimal)(A146EmployeeVactionDays-GXt_decimal3);
                }
             }
          }
@@ -1467,7 +1467,7 @@ namespace GeneXus.Programs {
          A101CompanyName = "";
          A110EmployeeIsManager = false;
          A112EmployeeIsActive = false;
-         A146EmployeeVactionDays = 21;
+         A146EmployeeVactionDays = (decimal)(21);
          Z148EmployeeName = "";
          Z111GAMUserGUID = "";
          Z147EmployeeBalance = 0;
@@ -2140,14 +2140,14 @@ namespace GeneXus.Programs {
          BC000F8_A106EmployeeId = new long[1] ;
          BC000F8_A148EmployeeName = new string[] {""} ;
          BC000F8_A111GAMUserGUID = new string[] {""} ;
-         BC000F8_A147EmployeeBalance = new short[1] ;
+         BC000F8_A147EmployeeBalance = new decimal[1] ;
          BC000F8_A107EmployeeFirstName = new string[] {""} ;
          BC000F8_A108EmployeeLastName = new string[] {""} ;
          BC000F8_A109EmployeeEmail = new string[] {""} ;
          BC000F8_A101CompanyName = new string[] {""} ;
          BC000F8_A110EmployeeIsManager = new bool[] {false} ;
          BC000F8_A112EmployeeIsActive = new bool[] {false} ;
-         BC000F8_A146EmployeeVactionDays = new short[1] ;
+         BC000F8_A146EmployeeVactionDays = new decimal[1] ;
          BC000F8_A100CompanyId = new long[1] ;
          BC000F9_A109EmployeeEmail = new string[] {""} ;
          A109EmployeeEmail_Internalname = "";
@@ -2155,24 +2155,24 @@ namespace GeneXus.Programs {
          BC000F6_A106EmployeeId = new long[1] ;
          BC000F6_A148EmployeeName = new string[] {""} ;
          BC000F6_A111GAMUserGUID = new string[] {""} ;
-         BC000F6_A147EmployeeBalance = new short[1] ;
+         BC000F6_A147EmployeeBalance = new decimal[1] ;
          BC000F6_A107EmployeeFirstName = new string[] {""} ;
          BC000F6_A108EmployeeLastName = new string[] {""} ;
          BC000F6_A109EmployeeEmail = new string[] {""} ;
          BC000F6_A110EmployeeIsManager = new bool[] {false} ;
          BC000F6_A112EmployeeIsActive = new bool[] {false} ;
-         BC000F6_A146EmployeeVactionDays = new short[1] ;
+         BC000F6_A146EmployeeVactionDays = new decimal[1] ;
          BC000F6_A100CompanyId = new long[1] ;
          BC000F5_A106EmployeeId = new long[1] ;
          BC000F5_A148EmployeeName = new string[] {""} ;
          BC000F5_A111GAMUserGUID = new string[] {""} ;
-         BC000F5_A147EmployeeBalance = new short[1] ;
+         BC000F5_A147EmployeeBalance = new decimal[1] ;
          BC000F5_A107EmployeeFirstName = new string[] {""} ;
          BC000F5_A108EmployeeLastName = new string[] {""} ;
          BC000F5_A109EmployeeEmail = new string[] {""} ;
          BC000F5_A110EmployeeIsManager = new bool[] {false} ;
          BC000F5_A112EmployeeIsActive = new bool[] {false} ;
-         BC000F5_A146EmployeeVactionDays = new short[1] ;
+         BC000F5_A146EmployeeVactionDays = new decimal[1] ;
          BC000F5_A100CompanyId = new long[1] ;
          BC000F12_A106EmployeeId = new long[1] ;
          BC000F15_A101CompanyName = new string[] {""} ;
@@ -2183,14 +2183,14 @@ namespace GeneXus.Programs {
          BC000F20_A106EmployeeId = new long[1] ;
          BC000F20_A148EmployeeName = new string[] {""} ;
          BC000F20_A111GAMUserGUID = new string[] {""} ;
-         BC000F20_A147EmployeeBalance = new short[1] ;
+         BC000F20_A147EmployeeBalance = new decimal[1] ;
          BC000F20_A107EmployeeFirstName = new string[] {""} ;
          BC000F20_A108EmployeeLastName = new string[] {""} ;
          BC000F20_A109EmployeeEmail = new string[] {""} ;
          BC000F20_A101CompanyName = new string[] {""} ;
          BC000F20_A110EmployeeIsManager = new bool[] {false} ;
          BC000F20_A112EmployeeIsActive = new bool[] {false} ;
-         BC000F20_A146EmployeeVactionDays = new short[1] ;
+         BC000F20_A146EmployeeVactionDays = new decimal[1] ;
          BC000F20_A100CompanyId = new long[1] ;
          AV24Password = "";
          Z103ProjectName = "";
@@ -2305,9 +2305,9 @@ namespace GeneXus.Programs {
          );
          AV32Pgmname = "Employee_BC";
          Gx_date = DateTimeUtil.Today( context);
-         Z146EmployeeVactionDays = 21;
-         A146EmployeeVactionDays = 21;
-         i146EmployeeVactionDays = 21;
+         Z146EmployeeVactionDays = (decimal)(21);
+         A146EmployeeVactionDays = (decimal)(21);
+         i146EmployeeVactionDays = (decimal)(21);
          Z112EmployeeIsActive = false;
          A112EmployeeIsActive = false;
          i112EmployeeIsActive = false;
@@ -2330,18 +2330,12 @@ namespace GeneXus.Programs {
       private short nIsMod_28 ;
       private short RcdFound28 ;
       private short GX_JID ;
-      private short Z147EmployeeBalance ;
-      private short A147EmployeeBalance ;
-      private short Z146EmployeeVactionDays ;
-      private short A146EmployeeVactionDays ;
       private short Gx_BScreen ;
       private short RcdFound16 ;
       private short nIsDirty_16 ;
-      private short GXt_int3 ;
       private short nRcdExists_28 ;
       private short Gxremove28 ;
       private short nIsDirty_28 ;
-      private short i146EmployeeVactionDays ;
       private int trnEnded ;
       private int nGXsfl_28_idx=1 ;
       private int AV33GXV1 ;
@@ -2354,6 +2348,12 @@ namespace GeneXus.Programs {
       private long Z102ProjectId ;
       private long A102ProjectId ;
       private long i100CompanyId ;
+      private decimal Z147EmployeeBalance ;
+      private decimal A147EmployeeBalance ;
+      private decimal Z146EmployeeVactionDays ;
+      private decimal A146EmployeeVactionDays ;
+      private decimal GXt_decimal3 ;
+      private decimal i146EmployeeVactionDays ;
       private string scmdbuf ;
       private string PreviousTooltip ;
       private string PreviousCaption ;
@@ -2399,38 +2399,38 @@ namespace GeneXus.Programs {
       private long[] BC000F8_A106EmployeeId ;
       private string[] BC000F8_A148EmployeeName ;
       private string[] BC000F8_A111GAMUserGUID ;
-      private short[] BC000F8_A147EmployeeBalance ;
+      private decimal[] BC000F8_A147EmployeeBalance ;
       private string[] BC000F8_A107EmployeeFirstName ;
       private string[] BC000F8_A108EmployeeLastName ;
       private string[] BC000F8_A109EmployeeEmail ;
       private string[] BC000F8_A101CompanyName ;
       private bool[] BC000F8_A110EmployeeIsManager ;
       private bool[] BC000F8_A112EmployeeIsActive ;
-      private short[] BC000F8_A146EmployeeVactionDays ;
+      private decimal[] BC000F8_A146EmployeeVactionDays ;
       private long[] BC000F8_A100CompanyId ;
       private string[] BC000F9_A109EmployeeEmail ;
       private long[] BC000F10_A106EmployeeId ;
       private long[] BC000F6_A106EmployeeId ;
       private string[] BC000F6_A148EmployeeName ;
       private string[] BC000F6_A111GAMUserGUID ;
-      private short[] BC000F6_A147EmployeeBalance ;
+      private decimal[] BC000F6_A147EmployeeBalance ;
       private string[] BC000F6_A107EmployeeFirstName ;
       private string[] BC000F6_A108EmployeeLastName ;
       private string[] BC000F6_A109EmployeeEmail ;
       private bool[] BC000F6_A110EmployeeIsManager ;
       private bool[] BC000F6_A112EmployeeIsActive ;
-      private short[] BC000F6_A146EmployeeVactionDays ;
+      private decimal[] BC000F6_A146EmployeeVactionDays ;
       private long[] BC000F6_A100CompanyId ;
       private long[] BC000F5_A106EmployeeId ;
       private string[] BC000F5_A148EmployeeName ;
       private string[] BC000F5_A111GAMUserGUID ;
-      private short[] BC000F5_A147EmployeeBalance ;
+      private decimal[] BC000F5_A147EmployeeBalance ;
       private string[] BC000F5_A107EmployeeFirstName ;
       private string[] BC000F5_A108EmployeeLastName ;
       private string[] BC000F5_A109EmployeeEmail ;
       private bool[] BC000F5_A110EmployeeIsManager ;
       private bool[] BC000F5_A112EmployeeIsActive ;
-      private short[] BC000F5_A146EmployeeVactionDays ;
+      private decimal[] BC000F5_A146EmployeeVactionDays ;
       private long[] BC000F5_A100CompanyId ;
       private long[] BC000F12_A106EmployeeId ;
       private string[] BC000F15_A101CompanyName ;
@@ -2441,14 +2441,14 @@ namespace GeneXus.Programs {
       private long[] BC000F20_A106EmployeeId ;
       private string[] BC000F20_A148EmployeeName ;
       private string[] BC000F20_A111GAMUserGUID ;
-      private short[] BC000F20_A147EmployeeBalance ;
+      private decimal[] BC000F20_A147EmployeeBalance ;
       private string[] BC000F20_A107EmployeeFirstName ;
       private string[] BC000F20_A108EmployeeLastName ;
       private string[] BC000F20_A109EmployeeEmail ;
       private string[] BC000F20_A101CompanyName ;
       private bool[] BC000F20_A110EmployeeIsManager ;
       private bool[] BC000F20_A112EmployeeIsActive ;
-      private short[] BC000F20_A146EmployeeVactionDays ;
+      private decimal[] BC000F20_A146EmployeeVactionDays ;
       private long[] BC000F20_A100CompanyId ;
       private long[] BC000F21_A106EmployeeId ;
       private string[] BC000F21_A103ProjectName ;
@@ -2574,15 +2574,15 @@ namespace GeneXus.Programs {
         };
         Object[] prmBC000F11;
         prmBC000F11 = new Object[] {
-        new ParDef("EmployeeName",GXType.Char,128,0) ,
+        new ParDef("EmployeeName",GXType.Char,100,0) ,
         new ParDef("GAMUserGUID",GXType.VarChar,100,60) ,
-        new ParDef("EmployeeBalance",GXType.Int16,4,0) ,
+        new ParDef("EmployeeBalance",GXType.Number,4,1) ,
         new ParDef("EmployeeFirstName",GXType.Char,100,0) ,
         new ParDef("EmployeeLastName",GXType.Char,100,0) ,
         new ParDef("EmployeeEmail",GXType.VarChar,100,0) ,
         new ParDef("EmployeeIsManager",GXType.Boolean,4,0) ,
         new ParDef("EmployeeIsActive",GXType.Boolean,4,0) ,
-        new ParDef("EmployeeVactionDays",GXType.Int16,4,0) ,
+        new ParDef("EmployeeVactionDays",GXType.Number,4,1) ,
         new ParDef("CompanyId",GXType.Int64,10,0)
         };
         Object[] prmBC000F12;
@@ -2590,15 +2590,15 @@ namespace GeneXus.Programs {
         };
         Object[] prmBC000F13;
         prmBC000F13 = new Object[] {
-        new ParDef("EmployeeName",GXType.Char,128,0) ,
+        new ParDef("EmployeeName",GXType.Char,100,0) ,
         new ParDef("GAMUserGUID",GXType.VarChar,100,60) ,
-        new ParDef("EmployeeBalance",GXType.Int16,4,0) ,
+        new ParDef("EmployeeBalance",GXType.Number,4,1) ,
         new ParDef("EmployeeFirstName",GXType.Char,100,0) ,
         new ParDef("EmployeeLastName",GXType.Char,100,0) ,
         new ParDef("EmployeeEmail",GXType.VarChar,100,0) ,
         new ParDef("EmployeeIsManager",GXType.Boolean,4,0) ,
         new ParDef("EmployeeIsActive",GXType.Boolean,4,0) ,
-        new ParDef("EmployeeVactionDays",GXType.Int16,4,0) ,
+        new ParDef("EmployeeVactionDays",GXType.Number,4,1) ,
         new ParDef("CompanyId",GXType.Int64,10,0) ,
         new ParDef("EmployeeId",GXType.Int64,10,0)
         };
@@ -2733,28 +2733,28 @@ namespace GeneXus.Programs {
               return;
            case 3 :
               ((long[]) buf[0])[0] = rslt.getLong(1);
-              ((string[]) buf[1])[0] = rslt.getString(2, 128);
+              ((string[]) buf[1])[0] = rslt.getString(2, 100);
               ((string[]) buf[2])[0] = rslt.getVarchar(3);
-              ((short[]) buf[3])[0] = rslt.getShort(4);
+              ((decimal[]) buf[3])[0] = rslt.getDecimal(4);
               ((string[]) buf[4])[0] = rslt.getString(5, 100);
               ((string[]) buf[5])[0] = rslt.getString(6, 100);
               ((string[]) buf[6])[0] = rslt.getVarchar(7);
               ((bool[]) buf[7])[0] = rslt.getBool(8);
               ((bool[]) buf[8])[0] = rslt.getBool(9);
-              ((short[]) buf[9])[0] = rslt.getShort(10);
+              ((decimal[]) buf[9])[0] = rslt.getDecimal(10);
               ((long[]) buf[10])[0] = rslt.getLong(11);
               return;
            case 4 :
               ((long[]) buf[0])[0] = rslt.getLong(1);
-              ((string[]) buf[1])[0] = rslt.getString(2, 128);
+              ((string[]) buf[1])[0] = rslt.getString(2, 100);
               ((string[]) buf[2])[0] = rslt.getVarchar(3);
-              ((short[]) buf[3])[0] = rslt.getShort(4);
+              ((decimal[]) buf[3])[0] = rslt.getDecimal(4);
               ((string[]) buf[4])[0] = rslt.getString(5, 100);
               ((string[]) buf[5])[0] = rslt.getString(6, 100);
               ((string[]) buf[6])[0] = rslt.getVarchar(7);
               ((bool[]) buf[7])[0] = rslt.getBool(8);
               ((bool[]) buf[8])[0] = rslt.getBool(9);
-              ((short[]) buf[9])[0] = rslt.getShort(10);
+              ((decimal[]) buf[9])[0] = rslt.getDecimal(10);
               ((long[]) buf[10])[0] = rslt.getLong(11);
               return;
            case 5 :
@@ -2762,16 +2762,16 @@ namespace GeneXus.Programs {
               return;
            case 6 :
               ((long[]) buf[0])[0] = rslt.getLong(1);
-              ((string[]) buf[1])[0] = rslt.getString(2, 128);
+              ((string[]) buf[1])[0] = rslt.getString(2, 100);
               ((string[]) buf[2])[0] = rslt.getVarchar(3);
-              ((short[]) buf[3])[0] = rslt.getShort(4);
+              ((decimal[]) buf[3])[0] = rslt.getDecimal(4);
               ((string[]) buf[4])[0] = rslt.getString(5, 100);
               ((string[]) buf[5])[0] = rslt.getString(6, 100);
               ((string[]) buf[6])[0] = rslt.getVarchar(7);
               ((string[]) buf[7])[0] = rslt.getString(8, 100);
               ((bool[]) buf[8])[0] = rslt.getBool(9);
               ((bool[]) buf[9])[0] = rslt.getBool(10);
-              ((short[]) buf[10])[0] = rslt.getShort(11);
+              ((decimal[]) buf[10])[0] = rslt.getDecimal(11);
               ((long[]) buf[11])[0] = rslt.getLong(12);
               return;
            case 7 :
@@ -2800,16 +2800,16 @@ namespace GeneXus.Programs {
               return;
            case 18 :
               ((long[]) buf[0])[0] = rslt.getLong(1);
-              ((string[]) buf[1])[0] = rslt.getString(2, 128);
+              ((string[]) buf[1])[0] = rslt.getString(2, 100);
               ((string[]) buf[2])[0] = rslt.getVarchar(3);
-              ((short[]) buf[3])[0] = rslt.getShort(4);
+              ((decimal[]) buf[3])[0] = rslt.getDecimal(4);
               ((string[]) buf[4])[0] = rslt.getString(5, 100);
               ((string[]) buf[5])[0] = rslt.getString(6, 100);
               ((string[]) buf[6])[0] = rslt.getVarchar(7);
               ((string[]) buf[7])[0] = rslt.getString(8, 100);
               ((bool[]) buf[8])[0] = rslt.getBool(9);
               ((bool[]) buf[9])[0] = rslt.getBool(10);
-              ((short[]) buf[10])[0] = rslt.getShort(11);
+              ((decimal[]) buf[10])[0] = rslt.getDecimal(11);
               ((long[]) buf[11])[0] = rslt.getLong(12);
               return;
            case 19 :

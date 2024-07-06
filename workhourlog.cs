@@ -379,7 +379,7 @@ namespace GeneXus.Programs {
          /* Single line edit */
          TempTags = "  onfocus=\"gx.evt.onfocus(this, 29,'',false,'',0)\"";
          context.WriteHtmlText( "<div id=\""+edtWorkHourLogDate_Internalname+"_dp_container\" class=\"dp_container\" style=\"white-space:nowrap;display:inline;\">") ;
-         GxWebStd.gx_single_line_edit( context, edtWorkHourLogDate_Internalname, context.localUtil.Format(A119WorkHourLogDate, "99/99/99"), context.localUtil.Format( A119WorkHourLogDate, "99/99/99"), TempTags+" onchange=\""+"gx.date.valid_date(this, 8,'MDY',0,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 8,'MDY',0,12,'eng',false,0);"+";gx.evt.onblur(this,29);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtWorkHourLogDate_Jsonclick, 0, "AttributeDate", "", "", "", "", 1, edtWorkHourLogDate_Enabled, 0, "text", "", 8, "chr", 1, "row", 8, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_WorkHourLog.htm");
+         GxWebStd.gx_single_line_edit( context, edtWorkHourLogDate_Internalname, context.localUtil.Format(A119WorkHourLogDate, "99/99/99"), context.localUtil.Format( A119WorkHourLogDate, "99/99/99"), TempTags+" onchange=\""+"gx.date.valid_date(this, 8,'DMY',0,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 8,'DMY',0,12,'eng',false,0);"+";gx.evt.onblur(this,29);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtWorkHourLogDate_Jsonclick, 0, "AttributeDate", "", "", "", "", 1, edtWorkHourLogDate_Enabled, 0, "text", "", 8, "chr", 1, "row", 8, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_WorkHourLog.htm");
          GxWebStd.gx_bitmap( context, edtWorkHourLogDate_Internalname+"_dp_trigger", context.GetImagePath( "61b9b5d3-dff6-4d59-9b00-da61bc2cbe93", "", context.GetTheme( )), "", "", "", "", ((1==0)||(edtWorkHourLogDate_Enabled==0) ? 0 : 1), 0, "Date selector", "Date selector", 0, 1, 0, "", 0, "", 0, 0, 0, "", "", "cursor: pointer;", "", "", "", "", "", "", "", "", 1, false, false, "", "HLP_WorkHourLog.htm");
          context.WriteHtmlTextNl( "</div>") ;
          GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -712,6 +712,7 @@ namespace GeneXus.Programs {
                Combo_employeeid_Selectalltext = cgiGet( "COMBO_EMPLOYEEID_Selectalltext");
                Combo_employeeid_Multiplevaluesseparator = cgiGet( "COMBO_EMPLOYEEID_Multiplevaluesseparator");
                Combo_employeeid_Addnewoptiontext = cgiGet( "COMBO_EMPLOYEEID_Addnewoptiontext");
+               Combo_employeeid_Gxcontroltype = (int)(Math.Round(context.localUtil.CToN( cgiGet( "COMBO_EMPLOYEEID_Gxcontroltype"), ".", ","), 18, MidpointRounding.ToEven));
                Combo_projectid_Objectcall = cgiGet( "COMBO_PROJECTID_Objectcall");
                Combo_projectid_Class = cgiGet( "COMBO_PROJECTID_Class");
                Combo_projectid_Icontype = cgiGet( "COMBO_PROJECTID_Icontype");
@@ -752,10 +753,11 @@ namespace GeneXus.Programs {
                Combo_projectid_Selectalltext = cgiGet( "COMBO_PROJECTID_Selectalltext");
                Combo_projectid_Multiplevaluesseparator = cgiGet( "COMBO_PROJECTID_Multiplevaluesseparator");
                Combo_projectid_Addnewoptiontext = cgiGet( "COMBO_PROJECTID_Addnewoptiontext");
+               Combo_projectid_Gxcontroltype = (int)(Math.Round(context.localUtil.CToN( cgiGet( "COMBO_PROJECTID_Gxcontroltype"), ".", ","), 18, MidpointRounding.ToEven));
                /* Read variables values. */
                A118WorkHourLogId = (long)(Math.Round(context.localUtil.CToN( cgiGet( edtWorkHourLogId_Internalname), ".", ","), 18, MidpointRounding.ToEven));
                AssignAttri("", false, "A118WorkHourLogId", StringUtil.LTrimStr( (decimal)(A118WorkHourLogId), 10, 0));
-               if ( context.localUtil.VCDate( cgiGet( edtWorkHourLogDate_Internalname), 1) == 0 )
+               if ( context.localUtil.VCDate( cgiGet( edtWorkHourLogDate_Internalname), 2) == 0 )
                {
                   GX_msglist.addItem(context.GetMessage( "GXM_faildate", new   object[]  {"Work Hour Log Date"}), 1, "WORKHOURLOGDATE");
                   AnyError = 1;
@@ -767,7 +769,7 @@ namespace GeneXus.Programs {
                }
                else
                {
-                  A119WorkHourLogDate = context.localUtil.CToD( cgiGet( edtWorkHourLogDate_Internalname), 1);
+                  A119WorkHourLogDate = context.localUtil.CToD( cgiGet( edtWorkHourLogDate_Internalname), 2);
                   AssignAttri("", false, "A119WorkHourLogDate", context.localUtil.Format(A119WorkHourLogDate, "99/99/99"));
                }
                A120WorkHourLogDuration = cgiGet( edtWorkHourLogDuration_Internalname);
@@ -2429,7 +2431,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247415444512", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024761536725", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2445,7 +2447,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("workhourlog.js", "?20247415444515", false, true);
+         context.AddJavascriptSource("workhourlog.js", "?2024761536727", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -2927,7 +2929,9 @@ namespace GeneXus.Programs {
       private int edtavComboprojectid_Enabled ;
       private int edtavComboprojectid_Visible ;
       private int Combo_employeeid_Datalistupdateminimumcharacters ;
+      private int Combo_employeeid_Gxcontroltype ;
       private int Combo_projectid_Datalistupdateminimumcharacters ;
+      private int Combo_projectid_Gxcontroltype ;
       private int AV28GXV1 ;
       private int idxLst ;
       private long wcpOAV7WorkHourLogId ;

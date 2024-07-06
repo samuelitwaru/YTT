@@ -113,7 +113,7 @@ namespace GeneXus.Programs {
             AV17WorkLogMinute = AV8WorkHourLog.gxTpr_Workhourlogminute;
             AV18WorkLogDescription = AV8WorkHourLog.gxTpr_Workhourlogdescription;
             AV19MsgVar = "Record Updated.";
-            Gxwebsession.Set(Gxids+"gxvar_Worklogdate", context.localUtil.DToC( AV14WorkLogDate, 1, "/"));
+            Gxwebsession.Set(Gxids+"gxvar_Worklogdate", context.localUtil.DToC( AV14WorkLogDate, 2, "/"));
             Gxwebsession.Set(Gxids+"gxvar_Worklogproject", StringUtil.Str( (decimal)(AV15WorkLogProject), 4, 0));
             Gxwebsession.Set(Gxids+"gxvar_Workloghour", StringUtil.Str( (decimal)(AV16WorkLogHour), 2, 0));
             Gxwebsession.Set(Gxids+"gxvar_Worklogminute", StringUtil.Str( (decimal)(AV17WorkLogMinute), 2, 0));
@@ -126,7 +126,7 @@ namespace GeneXus.Programs {
          {
             AV8WorkHourLog.FromJSonString(Gxwebsession.Get(Gxids+"gxvar_Workhourlog"), null);
             AV15WorkLogProject = (short)(Math.Round(NumberUtil.Val( Gxwebsession.Get(Gxids+"gxvar_Worklogproject"), "."), 18, MidpointRounding.ToEven));
-            AV14WorkLogDate = context.localUtil.CToD( Gxwebsession.Get(Gxids+"gxvar_Worklogdate"), 1);
+            AV14WorkLogDate = context.localUtil.CToD( Gxwebsession.Get(Gxids+"gxvar_Worklogdate"), 2);
             AV16WorkLogHour = (short)(Math.Round(NumberUtil.Val( Gxwebsession.Get(Gxids+"gxvar_Workloghour"), "."), 18, MidpointRounding.ToEven));
             AV17WorkLogMinute = (short)(Math.Round(NumberUtil.Val( Gxwebsession.Get(Gxids+"gxvar_Worklogminute"), "."), 18, MidpointRounding.ToEven));
             AV18WorkLogDescription = Gxwebsession.Get(Gxids+"gxvar_Worklogdescription");

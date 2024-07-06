@@ -433,7 +433,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
          /* Single line edit */
          TempTags = "  onfocus=\"gx.evt.onfocus(this, 49,'',false,'',0)\"";
          context.WriteHtmlText( "<div id=\""+edtWWPWebClientFirstRegistered_Internalname+"_dp_container\" class=\"dp_container\" style=\"white-space:nowrap;display:inline;\">") ;
-         GxWebStd.gx_single_line_edit( context, edtWWPWebClientFirstRegistered_Internalname, context.localUtil.TToC( A51WWPWebClientFirstRegistered, 10, 12, 1, 2, "/", ":", " "), context.localUtil.Format( A51WWPWebClientFirstRegistered, "99/99/9999 99:99:99.999"), TempTags+" onchange=\""+"gx.date.valid_date(this, 10,'MDY',12,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 10,'MDY',12,12,'eng',false,0);"+";gx.evt.onblur(this,49);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtWWPWebClientFirstRegistered_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtWWPWebClientFirstRegistered_Enabled, 0, "text", "", 27, "chr", 1, "row", 27, 0, 0, 0, 0, -1, 0, true, "WWPBaseObjects\\WWP_DateTimeMillis", "end", false, "", "HLP_WWPBaseObjects/Notifications/Web/WWP_WebClient.htm");
+         GxWebStd.gx_single_line_edit( context, edtWWPWebClientFirstRegistered_Internalname, context.localUtil.TToC( A51WWPWebClientFirstRegistered, 10, 12, 1, 3, "/", ":", " "), context.localUtil.Format( A51WWPWebClientFirstRegistered, "99/99/9999 99:99:99.999"), TempTags+" onchange=\""+"gx.date.valid_date(this, 10,'DMY',12,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 10,'DMY',12,12,'eng',false,0);"+";gx.evt.onblur(this,49);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtWWPWebClientFirstRegistered_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtWWPWebClientFirstRegistered_Enabled, 0, "text", "", 27, "chr", 1, "row", 27, 0, 0, 0, 0, -1, 0, true, "WWPBaseObjects\\WWP_DateTimeMillis", "end", false, "", "HLP_WWPBaseObjects/Notifications/Web/WWP_WebClient.htm");
          GxWebStd.gx_bitmap( context, edtWWPWebClientFirstRegistered_Internalname+"_dp_trigger", context.GetImagePath( "61b9b5d3-dff6-4d59-9b00-da61bc2cbe93", "", context.GetTheme( )), "", "", "", "", ((1==0)||(edtWWPWebClientFirstRegistered_Enabled==0) ? 0 : 1), 0, "Date selector", "Date selector", 0, 1, 0, "", 0, "", 0, 0, 0, "", "", "cursor: pointer;", "", "", "", "", "", "", "", "", 1, false, false, "", "HLP_WWPBaseObjects/Notifications/Web/WWP_WebClient.htm");
          context.WriteHtmlTextNl( "</div>") ;
          GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -453,7 +453,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
          /* Single line edit */
          TempTags = "  onfocus=\"gx.evt.onfocus(this, 54,'',false,'',0)\"";
          context.WriteHtmlText( "<div id=\""+edtWWPWebClientLastRegistered_Internalname+"_dp_container\" class=\"dp_container\" style=\"white-space:nowrap;display:inline;\">") ;
-         GxWebStd.gx_single_line_edit( context, edtWWPWebClientLastRegistered_Internalname, context.localUtil.TToC( A52WWPWebClientLastRegistered, 10, 12, 1, 2, "/", ":", " "), context.localUtil.Format( A52WWPWebClientLastRegistered, "99/99/9999 99:99:99.999"), TempTags+" onchange=\""+"gx.date.valid_date(this, 10,'MDY',12,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 10,'MDY',12,12,'eng',false,0);"+";gx.evt.onblur(this,54);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtWWPWebClientLastRegistered_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtWWPWebClientLastRegistered_Enabled, 0, "text", "", 27, "chr", 1, "row", 27, 0, 0, 0, 0, -1, 0, true, "WWPBaseObjects\\WWP_DateTimeMillis", "end", false, "", "HLP_WWPBaseObjects/Notifications/Web/WWP_WebClient.htm");
+         GxWebStd.gx_single_line_edit( context, edtWWPWebClientLastRegistered_Internalname, context.localUtil.TToC( A52WWPWebClientLastRegistered, 10, 12, 1, 3, "/", ":", " "), context.localUtil.Format( A52WWPWebClientLastRegistered, "99/99/9999 99:99:99.999"), TempTags+" onchange=\""+"gx.date.valid_date(this, 10,'DMY',12,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 10,'DMY',12,12,'eng',false,0);"+";gx.evt.onblur(this,54);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtWWPWebClientLastRegistered_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtWWPWebClientLastRegistered_Enabled, 0, "text", "", 27, "chr", 1, "row", 27, 0, 0, 0, 0, -1, 0, true, "WWPBaseObjects\\WWP_DateTimeMillis", "end", false, "", "HLP_WWPBaseObjects/Notifications/Web/WWP_WebClient.htm");
          GxWebStd.gx_bitmap( context, edtWWPWebClientLastRegistered_Internalname+"_dp_trigger", context.GetImagePath( "61b9b5d3-dff6-4d59-9b00-da61bc2cbe93", "", context.GetTheme( )), "", "", "", "", ((1==0)||(edtWWPWebClientLastRegistered_Enabled==0) ? 0 : 1), 0, "Date selector", "Date selector", 0, 1, 0, "", 0, "", 0, 0, 0, "", "", "cursor: pointer;", "", "", "", "", "", "", "", "", 1, false, false, "", "HLP_WWPBaseObjects/Notifications/Web/WWP_WebClient.htm");
          context.WriteHtmlTextNl( "</div>") ;
          GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -562,7 +562,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
             AssignAttri("", false, "A49WWPWebClientBrowserId", StringUtil.LTrimStr( (decimal)(A49WWPWebClientBrowserId), 4, 0));
             A50WWPWebClientBrowserVersion = cgiGet( edtWWPWebClientBrowserVersion_Internalname);
             AssignAttri("", false, "A50WWPWebClientBrowserVersion", A50WWPWebClientBrowserVersion);
-            if ( context.localUtil.VCDateTime( cgiGet( edtWWPWebClientFirstRegistered_Internalname), 1, 1) == 0 )
+            if ( context.localUtil.VCDateTime( cgiGet( edtWWPWebClientFirstRegistered_Internalname), 2, 1) == 0 )
             {
                GX_msglist.addItem(context.GetMessage( "GXM_baddatetime", new   object[]  {"Web Client First Registered"}), 1, "WWPWEBCLIENTFIRSTREGISTERED");
                AnyError = 1;
@@ -570,14 +570,14 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
                AssignAttri("", false, "GX_FocusControl", GX_FocusControl);
                wbErr = true;
                A51WWPWebClientFirstRegistered = (DateTime)(DateTime.MinValue);
-               AssignAttri("", false, "A51WWPWebClientFirstRegistered", context.localUtil.TToC( A51WWPWebClientFirstRegistered, 10, 12, 1, 2, "/", ":", " "));
+               AssignAttri("", false, "A51WWPWebClientFirstRegistered", context.localUtil.TToC( A51WWPWebClientFirstRegistered, 10, 12, 1, 3, "/", ":", " "));
             }
             else
             {
                A51WWPWebClientFirstRegistered = context.localUtil.CToT( cgiGet( edtWWPWebClientFirstRegistered_Internalname));
-               AssignAttri("", false, "A51WWPWebClientFirstRegistered", context.localUtil.TToC( A51WWPWebClientFirstRegistered, 10, 12, 1, 2, "/", ":", " "));
+               AssignAttri("", false, "A51WWPWebClientFirstRegistered", context.localUtil.TToC( A51WWPWebClientFirstRegistered, 10, 12, 1, 3, "/", ":", " "));
             }
-            if ( context.localUtil.VCDateTime( cgiGet( edtWWPWebClientLastRegistered_Internalname), 1, 1) == 0 )
+            if ( context.localUtil.VCDateTime( cgiGet( edtWWPWebClientLastRegistered_Internalname), 2, 1) == 0 )
             {
                GX_msglist.addItem(context.GetMessage( "GXM_baddatetime", new   object[]  {"Web Client Last Registered"}), 1, "WWPWEBCLIENTLASTREGISTERED");
                AnyError = 1;
@@ -585,12 +585,12 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
                AssignAttri("", false, "GX_FocusControl", GX_FocusControl);
                wbErr = true;
                A52WWPWebClientLastRegistered = (DateTime)(DateTime.MinValue);
-               AssignAttri("", false, "A52WWPWebClientLastRegistered", context.localUtil.TToC( A52WWPWebClientLastRegistered, 10, 12, 1, 2, "/", ":", " "));
+               AssignAttri("", false, "A52WWPWebClientLastRegistered", context.localUtil.TToC( A52WWPWebClientLastRegistered, 10, 12, 1, 3, "/", ":", " "));
             }
             else
             {
                A52WWPWebClientLastRegistered = context.localUtil.CToT( cgiGet( edtWWPWebClientLastRegistered_Internalname));
-               AssignAttri("", false, "A52WWPWebClientLastRegistered", context.localUtil.TToC( A52WWPWebClientLastRegistered, 10, 12, 1, 2, "/", ":", " "));
+               AssignAttri("", false, "A52WWPWebClientLastRegistered", context.localUtil.TToC( A52WWPWebClientLastRegistered, 10, 12, 1, 3, "/", ":", " "));
             }
             A7WWPUserExtendedId = cgiGet( edtWWPUserExtendedId_Internalname);
             n7WWPUserExtendedId = false;
@@ -822,12 +822,12 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
          if ( IsIns( )  && (DateTime.MinValue==A51WWPWebClientFirstRegistered) && ( Gx_BScreen == 0 ) )
          {
             A51WWPWebClientFirstRegistered = DateTimeUtil.ServerNowMs( context, pr_default);
-            AssignAttri("", false, "A51WWPWebClientFirstRegistered", context.localUtil.TToC( A51WWPWebClientFirstRegistered, 10, 12, 1, 2, "/", ":", " "));
+            AssignAttri("", false, "A51WWPWebClientFirstRegistered", context.localUtil.TToC( A51WWPWebClientFirstRegistered, 10, 12, 1, 3, "/", ":", " "));
          }
          if ( IsIns( )  && (DateTime.MinValue==A52WWPWebClientLastRegistered) && ( Gx_BScreen == 0 ) )
          {
             A52WWPWebClientLastRegistered = DateTimeUtil.ServerNowMs( context, pr_default);
-            AssignAttri("", false, "A52WWPWebClientLastRegistered", context.localUtil.TToC( A52WWPWebClientLastRegistered, 10, 12, 1, 2, "/", ":", " "));
+            AssignAttri("", false, "A52WWPWebClientLastRegistered", context.localUtil.TToC( A52WWPWebClientLastRegistered, 10, 12, 1, 3, "/", ":", " "));
          }
          if ( StringUtil.StrCmp(Gx_mode, "INS") == 0 )
          {
@@ -863,9 +863,9 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
             A50WWPWebClientBrowserVersion = T00075_A50WWPWebClientBrowserVersion[0];
             AssignAttri("", false, "A50WWPWebClientBrowserVersion", A50WWPWebClientBrowserVersion);
             A51WWPWebClientFirstRegistered = T00075_A51WWPWebClientFirstRegistered[0];
-            AssignAttri("", false, "A51WWPWebClientFirstRegistered", context.localUtil.TToC( A51WWPWebClientFirstRegistered, 10, 12, 1, 2, "/", ":", " "));
+            AssignAttri("", false, "A51WWPWebClientFirstRegistered", context.localUtil.TToC( A51WWPWebClientFirstRegistered, 10, 12, 1, 3, "/", ":", " "));
             A52WWPWebClientLastRegistered = T00075_A52WWPWebClientLastRegistered[0];
-            AssignAttri("", false, "A52WWPWebClientLastRegistered", context.localUtil.TToC( A52WWPWebClientLastRegistered, 10, 12, 1, 2, "/", ":", " "));
+            AssignAttri("", false, "A52WWPWebClientLastRegistered", context.localUtil.TToC( A52WWPWebClientLastRegistered, 10, 12, 1, 3, "/", ":", " "));
             A7WWPUserExtendedId = T00075_A7WWPUserExtendedId[0];
             n7WWPUserExtendedId = T00075_n7WWPUserExtendedId[0];
             AssignAttri("", false, "A7WWPUserExtendedId", A7WWPUserExtendedId);
@@ -972,9 +972,9 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
             A50WWPWebClientBrowserVersion = T00073_A50WWPWebClientBrowserVersion[0];
             AssignAttri("", false, "A50WWPWebClientBrowserVersion", A50WWPWebClientBrowserVersion);
             A51WWPWebClientFirstRegistered = T00073_A51WWPWebClientFirstRegistered[0];
-            AssignAttri("", false, "A51WWPWebClientFirstRegistered", context.localUtil.TToC( A51WWPWebClientFirstRegistered, 10, 12, 1, 2, "/", ":", " "));
+            AssignAttri("", false, "A51WWPWebClientFirstRegistered", context.localUtil.TToC( A51WWPWebClientFirstRegistered, 10, 12, 1, 3, "/", ":", " "));
             A52WWPWebClientLastRegistered = T00073_A52WWPWebClientLastRegistered[0];
-            AssignAttri("", false, "A52WWPWebClientLastRegistered", context.localUtil.TToC( A52WWPWebClientLastRegistered, 10, 12, 1, 2, "/", ":", " "));
+            AssignAttri("", false, "A52WWPWebClientLastRegistered", context.localUtil.TToC( A52WWPWebClientLastRegistered, 10, 12, 1, 3, "/", ":", " "));
             A7WWPUserExtendedId = T00073_A7WWPUserExtendedId[0];
             n7WWPUserExtendedId = T00073_n7WWPUserExtendedId[0];
             AssignAttri("", false, "A7WWPUserExtendedId", A7WWPUserExtendedId);
@@ -1844,9 +1844,9 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
          AssignAttri("", false, "A7WWPUserExtendedId", A7WWPUserExtendedId);
          n7WWPUserExtendedId = (String.IsNullOrEmpty(StringUtil.RTrim( A7WWPUserExtendedId)) ? true : false);
          A51WWPWebClientFirstRegistered = DateTimeUtil.ServerNowMs( context, pr_default);
-         AssignAttri("", false, "A51WWPWebClientFirstRegistered", context.localUtil.TToC( A51WWPWebClientFirstRegistered, 10, 12, 1, 2, "/", ":", " "));
+         AssignAttri("", false, "A51WWPWebClientFirstRegistered", context.localUtil.TToC( A51WWPWebClientFirstRegistered, 10, 12, 1, 3, "/", ":", " "));
          A52WWPWebClientLastRegistered = DateTimeUtil.ServerNowMs( context, pr_default);
-         AssignAttri("", false, "A52WWPWebClientLastRegistered", context.localUtil.TToC( A52WWPWebClientLastRegistered, 10, 12, 1, 2, "/", ":", " "));
+         AssignAttri("", false, "A52WWPWebClientLastRegistered", context.localUtil.TToC( A52WWPWebClientLastRegistered, 10, 12, 1, 3, "/", ":", " "));
          Z49WWPWebClientBrowserId = 0;
          Z51WWPWebClientFirstRegistered = (DateTime)(DateTime.MinValue);
          Z52WWPWebClientLastRegistered = (DateTime)(DateTime.MinValue);
@@ -1863,9 +1863,9 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
       protected void StandaloneModalInsert( )
       {
          A51WWPWebClientFirstRegistered = i51WWPWebClientFirstRegistered;
-         AssignAttri("", false, "A51WWPWebClientFirstRegistered", context.localUtil.TToC( A51WWPWebClientFirstRegistered, 10, 12, 1, 2, "/", ":", " "));
+         AssignAttri("", false, "A51WWPWebClientFirstRegistered", context.localUtil.TToC( A51WWPWebClientFirstRegistered, 10, 12, 1, 3, "/", ":", " "));
          A52WWPWebClientLastRegistered = i52WWPWebClientLastRegistered;
-         AssignAttri("", false, "A52WWPWebClientLastRegistered", context.localUtil.TToC( A52WWPWebClientLastRegistered, 10, 12, 1, 2, "/", ":", " "));
+         AssignAttri("", false, "A52WWPWebClientLastRegistered", context.localUtil.TToC( A52WWPWebClientLastRegistered, 10, 12, 1, 3, "/", ":", " "));
       }
 
       protected void define_styles( )
@@ -1880,7 +1880,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20246282110518", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024752144210", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1896,7 +1896,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wwpbaseobjects/notifications/web/wwp_webclient.js", "?20246282110518", false, true);
+         context.AddJavascriptSource("wwpbaseobjects/notifications/web/wwp_webclient.js", "?2024752144210", false, true);
          /* End function include_jscripts */
       }
 
@@ -2046,15 +2046,15 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
          cmbWWPWebClientBrowserId.CurrentValue = StringUtil.Trim( StringUtil.Str( (decimal)(A49WWPWebClientBrowserId), 4, 0));
          AssignProp("", false, cmbWWPWebClientBrowserId_Internalname, "Values", cmbWWPWebClientBrowserId.ToJavascriptSource(), true);
          AssignAttri("", false, "A50WWPWebClientBrowserVersion", A50WWPWebClientBrowserVersion);
-         AssignAttri("", false, "A51WWPWebClientFirstRegistered", context.localUtil.TToC( A51WWPWebClientFirstRegistered, 10, 12, 1, 2, "/", ":", " "));
-         AssignAttri("", false, "A52WWPWebClientLastRegistered", context.localUtil.TToC( A52WWPWebClientLastRegistered, 10, 12, 1, 2, "/", ":", " "));
+         AssignAttri("", false, "A51WWPWebClientFirstRegistered", context.localUtil.TToC( A51WWPWebClientFirstRegistered, 10, 12, 1, 3, "/", ":", " "));
+         AssignAttri("", false, "A52WWPWebClientLastRegistered", context.localUtil.TToC( A52WWPWebClientLastRegistered, 10, 12, 1, 3, "/", ":", " "));
          AssignAttri("", false, "A7WWPUserExtendedId", StringUtil.RTrim( A7WWPUserExtendedId));
          AssignAttri("", false, "Gx_mode", StringUtil.RTrim( Gx_mode));
          GxWebStd.gx_hidden_field( context, "Z48WWPWebClientId", StringUtil.RTrim( Z48WWPWebClientId));
          GxWebStd.gx_hidden_field( context, "Z49WWPWebClientBrowserId", StringUtil.LTrim( StringUtil.NToC( (decimal)(Z49WWPWebClientBrowserId), 4, 0, ".", "")));
          GxWebStd.gx_hidden_field( context, "Z50WWPWebClientBrowserVersion", Z50WWPWebClientBrowserVersion);
-         GxWebStd.gx_hidden_field( context, "Z51WWPWebClientFirstRegistered", context.localUtil.TToC( Z51WWPWebClientFirstRegistered, 10, 12, 1, 2, "/", ":", " "));
-         GxWebStd.gx_hidden_field( context, "Z52WWPWebClientLastRegistered", context.localUtil.TToC( Z52WWPWebClientLastRegistered, 10, 12, 1, 2, "/", ":", " "));
+         GxWebStd.gx_hidden_field( context, "Z51WWPWebClientFirstRegistered", context.localUtil.TToC( Z51WWPWebClientFirstRegistered, 10, 12, 1, 3, "/", ":", " "));
+         GxWebStd.gx_hidden_field( context, "Z52WWPWebClientLastRegistered", context.localUtil.TToC( Z52WWPWebClientLastRegistered, 10, 12, 1, 3, "/", ":", " "));
          GxWebStd.gx_hidden_field( context, "Z7WWPUserExtendedId", StringUtil.RTrim( Z7WWPUserExtendedId));
          AssignProp("", false, bttBtn_delete_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(bttBtn_delete_Enabled), 5, 0), true);
          AssignProp("", false, bttBtn_enter_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(bttBtn_enter_Enabled), 5, 0), true);

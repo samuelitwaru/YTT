@@ -789,7 +789,7 @@ namespace GeneXus.Programs {
             A118WorkHourLogId = H002W2_A118WorkHourLogId[0];
             A119WorkHourLogDate = H002W2_A119WorkHourLogDate[0];
             AV16GXLvl9 = 1;
-            Form.Caption = context.localUtil.DToC( A119WorkHourLogDate, 1, "/");
+            Form.Caption = context.localUtil.DToC( A119WorkHourLogDate, 2, "/");
             AssignProp("", false, "FORM", "Caption", Form.Caption, true);
             AV9Exists = true;
             /* Exiting from a For First loop. */
@@ -909,7 +909,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247415542717", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247521502966", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -925,7 +925,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("workhourlogview.js", "?20247415542717", false, true);
+         context.AddJavascriptSource("workhourlogview.js", "?20247521502966", false, true);
          context.AddJavascriptSource("shared/HistoryManager/HistoryManager.js", "", false, true);
          context.AddJavascriptSource("shared/HistoryManager/rsh/json2005.js", "", false, true);
          context.AddJavascriptSource("shared/HistoryManager/rsh/rsh.js", "", false, true);

@@ -202,21 +202,21 @@ namespace GeneXus.Programs.workwithplus.ai {
                         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( StringUtil.Trim( AV17GridStateFilterValue.gxTpr_Value))) )
                         {
                            AV32DateTimeAux = (DateTime)(DateTime.MinValue);
-                           AV32DateTimeAux = context.localUtil.CToT( AV17GridStateFilterValue.gxTpr_Value, 1);
+                           AV32DateTimeAux = context.localUtil.CToT( AV17GridStateFilterValue.gxTpr_Value, 2);
                            if ( ! (DateTime.MinValue==AV32DateTimeAux) )
                            {
                               AV32DateTimeAux = context.localUtil.YMDHMSToT( (short)(DateTimeUtil.Year( AV32DateTimeAux)), (short)(DateTimeUtil.Month( AV32DateTimeAux)), (short)(DateTimeUtil.Day( AV32DateTimeAux)), 0, 0, 0);
-                              AV17GridStateFilterValue.gxTpr_Value = StringUtil.Trim( context.localUtil.TToC( AV32DateTimeAux, 8, 5, 1, 2, "/", ":", " "));
+                              AV17GridStateFilterValue.gxTpr_Value = StringUtil.Trim( context.localUtil.TToC( AV32DateTimeAux, 8, 5, 1, 3, "/", ":", " "));
                            }
                         }
                         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( StringUtil.Trim( AV17GridStateFilterValue.gxTpr_Valueto))) )
                         {
                            AV32DateTimeAux = (DateTime)(DateTime.MinValue);
-                           AV32DateTimeAux = context.localUtil.CToT( AV17GridStateFilterValue.gxTpr_Valueto, 1);
+                           AV32DateTimeAux = context.localUtil.CToT( AV17GridStateFilterValue.gxTpr_Valueto, 2);
                            if ( ! (DateTime.MinValue==AV32DateTimeAux) )
                            {
                               AV32DateTimeAux = context.localUtil.YMDHMSToT( (short)(DateTimeUtil.Year( AV32DateTimeAux)), (short)(DateTimeUtil.Month( AV32DateTimeAux)), (short)(DateTimeUtil.Day( AV32DateTimeAux)), 23, 59, 59);
-                              AV17GridStateFilterValue.gxTpr_Valueto = StringUtil.Trim( context.localUtil.TToC( AV32DateTimeAux, 8, 5, 1, 2, "/", ":", " "));
+                              AV17GridStateFilterValue.gxTpr_Valueto = StringUtil.Trim( context.localUtil.TToC( AV32DateTimeAux, 8, 5, 1, 3, "/", ":", " "));
                            }
                         }
                      }

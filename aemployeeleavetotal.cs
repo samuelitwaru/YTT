@@ -55,7 +55,7 @@ namespace GeneXus.Programs {
          }
          if ( 1 < args.Length )
          {
-            aP1_FromDate=((DateTime)(context.localUtil.CToD( (string)(args[1]), 1)));
+            aP1_FromDate=((DateTime)(context.localUtil.CToD( (string)(args[1]), 2)));
          }
          else
          {
@@ -63,7 +63,7 @@ namespace GeneXus.Programs {
          }
          if ( 2 < args.Length )
          {
-            aP2_ToDate=((DateTime)(context.localUtil.CToD( (string)(args[2]), 1)));
+            aP2_ToDate=((DateTime)(context.localUtil.CToD( (string)(args[2]), 2)));
          }
          else
          {

@@ -235,8 +235,8 @@ namespace GeneXus.Programs {
             }
             else if ( StringUtil.StrCmp(AV39GridStateFilterValue.gxTpr_Name, "TFWORKHOURLOGDATE") == 0 )
             {
-               AV15TFWorkHourLogDate = context.localUtil.CToD( AV39GridStateFilterValue.gxTpr_Value, 1);
-               AV16TFWorkHourLogDate_To = context.localUtil.CToD( AV39GridStateFilterValue.gxTpr_Valueto, 1);
+               AV15TFWorkHourLogDate = context.localUtil.CToD( AV39GridStateFilterValue.gxTpr_Value, 2);
+               AV16TFWorkHourLogDate_To = context.localUtil.CToD( AV39GridStateFilterValue.gxTpr_Valueto, 2);
             }
             else if ( StringUtil.StrCmp(AV39GridStateFilterValue.gxTpr_Name, "TFWORKHOURLOGDURATION") == 0 )
             {

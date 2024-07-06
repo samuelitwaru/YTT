@@ -163,14 +163,14 @@ namespace GeneXus.Programs {
             new GeneXus.Programs.wwpbaseobjects.wwp_exportwritefilter(context ).execute( ref  AV11ExcelDocument,  true, ref  GXt_int2,  (short)(AV15FirstColumn),  "Date Range") ;
             AV14CellRow = GXt_int2;
             GXt_dtime3 = DateTimeUtil.ResetTime( AV18Date ) ;
-            AV11ExcelDocument.SetDateFormat(context, 8, 5, 1, 2, "/", ":", " ");
+            AV11ExcelDocument.SetDateFormat(context, 8, 5, 1, 3, "/", ":", " ");
             AV11ExcelDocument.get_Cells(AV14CellRow, AV15FirstColumn+1, 1, 1).Date = GXt_dtime3;
             GXt_int2 = (short)(AV14CellRow);
             new GeneXus.Programs.wwpbaseobjects.wwp_exportwritefilter(context ).execute( ref  AV11ExcelDocument,  false, ref  GXt_int2,  (short)(AV15FirstColumn+2),  " - ") ;
             AV14CellRow = GXt_int2;
             AV11ExcelDocument.get_Cells(AV14CellRow, AV15FirstColumn+3, 1, 1).Italic = 1;
             GXt_dtime3 = DateTimeUtil.ResetTime( AV19Date_To ) ;
-            AV11ExcelDocument.SetDateFormat(context, 8, 5, 1, 2, "/", ":", " ");
+            AV11ExcelDocument.SetDateFormat(context, 8, 5, 1, 3, "/", ":", " ");
             AV11ExcelDocument.get_Cells(AV14CellRow, AV15FirstColumn+3, 1, 1).Date = GXt_dtime3;
          }
          if ( ! ( (0==AV20PeriodicCategory) ) )
@@ -270,13 +270,13 @@ namespace GeneXus.Programs {
                   else if ( StringUtil.StrCmp(AV32ColumnsSelector_Column.gxTpr_Columnname, "SDTLeaveReport_PeriodCollection__FromDate") == 0 )
                   {
                      GXt_dtime3 = DateTimeUtil.ResetTime( AV17SDTLeaveReportItem.gxTpr_Fromdate ) ;
-                     AV11ExcelDocument.SetDateFormat(context, 8, 5, 1, 2, "/", ":", " ");
+                     AV11ExcelDocument.SetDateFormat(context, 8, 5, 1, 3, "/", ":", " ");
                      AV11ExcelDocument.get_Cells(AV14CellRow, (int)(AV15FirstColumn+AV38VisibleColumnCount), 1, 1).Date = GXt_dtime3;
                   }
                   else if ( StringUtil.StrCmp(AV32ColumnsSelector_Column.gxTpr_Columnname, "SDTLeaveReport_PeriodCollection__ToDate") == 0 )
                   {
                      GXt_dtime3 = DateTimeUtil.ResetTime( AV17SDTLeaveReportItem.gxTpr_Todate ) ;
-                     AV11ExcelDocument.SetDateFormat(context, 8, 5, 1, 2, "/", ":", " ");
+                     AV11ExcelDocument.SetDateFormat(context, 8, 5, 1, 3, "/", ":", " ");
                      AV11ExcelDocument.get_Cells(AV14CellRow, (int)(AV15FirstColumn+AV38VisibleColumnCount), 1, 1).Date = GXt_dtime3;
                   }
                   else if ( StringUtil.StrCmp(AV32ColumnsSelector_Column.gxTpr_Columnname, "SDTLeaveReport_PeriodCollection__FormattedTotalWork") == 0 )
@@ -368,8 +368,8 @@ namespace GeneXus.Programs {
             AV28GridStateFilterValue = ((GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue)AV27GridState.gxTpr_Filtervalues.Item(AV50GXV4));
             if ( StringUtil.StrCmp(AV28GridStateFilterValue.gxTpr_Name, "DATE") == 0 )
             {
-               AV18Date = context.localUtil.CToD( AV28GridStateFilterValue.gxTpr_Value, 1);
-               AV19Date_To = context.localUtil.CToD( AV28GridStateFilterValue.gxTpr_Valueto, 1);
+               AV18Date = context.localUtil.CToD( AV28GridStateFilterValue.gxTpr_Value, 2);
+               AV19Date_To = context.localUtil.CToD( AV28GridStateFilterValue.gxTpr_Valueto, 2);
             }
             else if ( StringUtil.StrCmp(AV28GridStateFilterValue.gxTpr_Name, "PERIODICCATEGORY") == 0 )
             {

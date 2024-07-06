@@ -163,10 +163,10 @@ namespace GeneXus.Programs {
          AV38TFEmployeeEmail_Sel = GetPar( "TFEmployeeEmail_Sel");
          AV43TFEmployeeIsManager_Sel = (short)(Math.Round(NumberUtil.Val( GetPar( "TFEmployeeIsManager_Sel"), "."), 18, MidpointRounding.ToEven));
          AV46TFEmployeeIsActive_Sel = (short)(Math.Round(NumberUtil.Val( GetPar( "TFEmployeeIsActive_Sel"), "."), 18, MidpointRounding.ToEven));
-         AV47TFEmployeeVactionDays = (short)(Math.Round(NumberUtil.Val( GetPar( "TFEmployeeVactionDays"), "."), 18, MidpointRounding.ToEven));
-         AV48TFEmployeeVactionDays_To = (short)(Math.Round(NumberUtil.Val( GetPar( "TFEmployeeVactionDays_To"), "."), 18, MidpointRounding.ToEven));
-         AV49TFEmployeeBalance = (short)(Math.Round(NumberUtil.Val( GetPar( "TFEmployeeBalance"), "."), 18, MidpointRounding.ToEven));
-         AV50TFEmployeeBalance_To = (short)(Math.Round(NumberUtil.Val( GetPar( "TFEmployeeBalance_To"), "."), 18, MidpointRounding.ToEven));
+         AV47TFEmployeeVactionDays = NumberUtil.Val( GetPar( "TFEmployeeVactionDays"), ".");
+         AV48TFEmployeeVactionDays_To = NumberUtil.Val( GetPar( "TFEmployeeVactionDays_To"), ".");
+         AV49TFEmployeeBalance = NumberUtil.Val( GetPar( "TFEmployeeBalance"), ".");
+         AV50TFEmployeeBalance_To = NumberUtil.Val( GetPar( "TFEmployeeBalance_To"), ".");
          A166ProjectManagerId = (long)(Math.Round(NumberUtil.Val( GetPar( "ProjectManagerId"), "."), 18, MidpointRounding.ToEven));
          n166ProjectManagerId = false;
          AV99Udparg14 = (long)(Math.Round(NumberUtil.Val( GetPar( "Udparg14"), "."), 18, MidpointRounding.ToEven));
@@ -434,10 +434,10 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "vTFEMPLOYEEEMAIL_SEL", AV38TFEmployeeEmail_Sel);
          GxWebStd.gx_hidden_field( context, "vTFEMPLOYEEISMANAGER_SEL", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV43TFEmployeeIsManager_Sel), 1, 0, ".", "")));
          GxWebStd.gx_hidden_field( context, "vTFEMPLOYEEISACTIVE_SEL", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV46TFEmployeeIsActive_Sel), 1, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "vTFEMPLOYEEVACTIONDAYS", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV47TFEmployeeVactionDays), 4, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "vTFEMPLOYEEVACTIONDAYS_TO", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV48TFEmployeeVactionDays_To), 4, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "vTFEMPLOYEEBALANCE", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV49TFEmployeeBalance), 4, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "vTFEMPLOYEEBALANCE_TO", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV50TFEmployeeBalance_To), 4, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, "vTFEMPLOYEEVACTIONDAYS", StringUtil.LTrim( StringUtil.NToC( AV47TFEmployeeVactionDays, 4, 1, ".", "")));
+         GxWebStd.gx_hidden_field( context, "vTFEMPLOYEEVACTIONDAYS_TO", StringUtil.LTrim( StringUtil.NToC( AV48TFEmployeeVactionDays_To, 4, 1, ".", "")));
+         GxWebStd.gx_hidden_field( context, "vTFEMPLOYEEBALANCE", StringUtil.LTrim( StringUtil.NToC( AV49TFEmployeeBalance, 4, 1, ".", "")));
+         GxWebStd.gx_hidden_field( context, "vTFEMPLOYEEBALANCE_TO", StringUtil.LTrim( StringUtil.NToC( AV50TFEmployeeBalance_To, 4, 1, ".", "")));
          GxWebStd.gx_hidden_field( context, "PROJECTMANAGERID", StringUtil.LTrim( StringUtil.NToC( (decimal)(A166ProjectManagerId), 10, 0, ".", "")));
          GxWebStd.gx_hidden_field( context, "vUDPARG14", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV99Udparg14), 10, 0, ".", "")));
          GxWebStd.gx_hidden_field( context, "gxhash_vUDPARG14", GetSecureSignedToken( "", context.localUtil.Format( (decimal)(AV99Udparg14), "9999999999"), context));
@@ -1004,8 +1004,8 @@ namespace GeneXus.Programs {
                               A110EmployeeIsManager = StringUtil.StrToBool( cgiGet( chkEmployeeIsManager_Internalname));
                               A111GAMUserGUID = cgiGet( edtGAMUserGUID_Internalname);
                               A112EmployeeIsActive = StringUtil.StrToBool( cgiGet( chkEmployeeIsActive_Internalname));
-                              A146EmployeeVactionDays = (short)(Math.Round(context.localUtil.CToN( cgiGet( edtEmployeeVactionDays_Internalname), ".", ","), 18, MidpointRounding.ToEven));
-                              A147EmployeeBalance = (short)(Math.Round(context.localUtil.CToN( cgiGet( edtEmployeeBalance_Internalname), ".", ","), 18, MidpointRounding.ToEven));
+                              A146EmployeeVactionDays = context.localUtil.CToN( cgiGet( edtEmployeeVactionDays_Internalname), ".", ",");
+                              A147EmployeeBalance = context.localUtil.CToN( cgiGet( edtEmployeeBalance_Internalname), ".", ",");
                               sEvtType = StringUtil.Right( sEvt, 1);
                               if ( StringUtil.StrCmp(sEvtType, ".") == 0 )
                               {
@@ -1151,10 +1151,10 @@ namespace GeneXus.Programs {
                                        string AV38TFEmployeeEmail_Sel ,
                                        short AV43TFEmployeeIsManager_Sel ,
                                        short AV46TFEmployeeIsActive_Sel ,
-                                       short AV47TFEmployeeVactionDays ,
-                                       short AV48TFEmployeeVactionDays_To ,
-                                       short AV49TFEmployeeBalance ,
-                                       short AV50TFEmployeeBalance_To ,
+                                       decimal AV47TFEmployeeVactionDays ,
+                                       decimal AV48TFEmployeeVactionDays_To ,
+                                       decimal AV49TFEmployeeBalance ,
+                                       decimal AV50TFEmployeeBalance_To ,
                                        long A166ProjectManagerId ,
                                        long AV99Udparg14 ,
                                        long A102ProjectId ,
@@ -1275,7 +1275,7 @@ namespace GeneXus.Programs {
                                                  A100CompanyId ,
                                                  AV84Udparg2 } ,
                                                  new int[]{
-                                                 TypeConstants.LONG, TypeConstants.SHORT, TypeConstants.SHORT, TypeConstants.SHORT, TypeConstants.SHORT, TypeConstants.SHORT, TypeConstants.SHORT, TypeConstants.SHORT, TypeConstants.SHORT, TypeConstants.BOOLEAN,
+                                                 TypeConstants.LONG, TypeConstants.SHORT, TypeConstants.SHORT, TypeConstants.DECIMAL, TypeConstants.DECIMAL, TypeConstants.DECIMAL, TypeConstants.DECIMAL, TypeConstants.DECIMAL, TypeConstants.DECIMAL, TypeConstants.BOOLEAN,
                                                  TypeConstants.BOOLEAN, TypeConstants.SHORT, TypeConstants.BOOLEAN, TypeConstants.BOOLEAN, TypeConstants.LONG, TypeConstants.LONG
                                                  }
             });
@@ -1395,7 +1395,7 @@ namespace GeneXus.Programs {
                                               A100CompanyId ,
                                               AV84Udparg2 } ,
                                               new int[]{
-                                              TypeConstants.LONG, TypeConstants.SHORT, TypeConstants.SHORT, TypeConstants.SHORT, TypeConstants.SHORT, TypeConstants.SHORT, TypeConstants.SHORT, TypeConstants.SHORT, TypeConstants.SHORT, TypeConstants.BOOLEAN,
+                                              TypeConstants.LONG, TypeConstants.SHORT, TypeConstants.SHORT, TypeConstants.DECIMAL, TypeConstants.DECIMAL, TypeConstants.DECIMAL, TypeConstants.DECIMAL, TypeConstants.DECIMAL, TypeConstants.DECIMAL, TypeConstants.BOOLEAN,
                                               TypeConstants.BOOLEAN, TypeConstants.SHORT, TypeConstants.BOOLEAN, TypeConstants.BOOLEAN, TypeConstants.LONG, TypeConstants.LONG
                                               }
          });
@@ -2012,17 +2012,17 @@ namespace GeneXus.Programs {
             }
             else if ( StringUtil.StrCmp(Ddo_grid_Selectedcolumn, "EmployeeVactionDays") == 0 )
             {
-               AV47TFEmployeeVactionDays = (short)(Math.Round(NumberUtil.Val( Ddo_grid_Filteredtext_get, "."), 18, MidpointRounding.ToEven));
-               AssignAttri("", false, "AV47TFEmployeeVactionDays", StringUtil.LTrimStr( (decimal)(AV47TFEmployeeVactionDays), 4, 0));
-               AV48TFEmployeeVactionDays_To = (short)(Math.Round(NumberUtil.Val( Ddo_grid_Filteredtextto_get, "."), 18, MidpointRounding.ToEven));
-               AssignAttri("", false, "AV48TFEmployeeVactionDays_To", StringUtil.LTrimStr( (decimal)(AV48TFEmployeeVactionDays_To), 4, 0));
+               AV47TFEmployeeVactionDays = NumberUtil.Val( Ddo_grid_Filteredtext_get, ".");
+               AssignAttri("", false, "AV47TFEmployeeVactionDays", StringUtil.LTrimStr( AV47TFEmployeeVactionDays, 4, 1));
+               AV48TFEmployeeVactionDays_To = NumberUtil.Val( Ddo_grid_Filteredtextto_get, ".");
+               AssignAttri("", false, "AV48TFEmployeeVactionDays_To", StringUtil.LTrimStr( AV48TFEmployeeVactionDays_To, 4, 1));
             }
             else if ( StringUtil.StrCmp(Ddo_grid_Selectedcolumn, "EmployeeBalance") == 0 )
             {
-               AV49TFEmployeeBalance = (short)(Math.Round(NumberUtil.Val( Ddo_grid_Filteredtext_get, "."), 18, MidpointRounding.ToEven));
-               AssignAttri("", false, "AV49TFEmployeeBalance", StringUtil.LTrimStr( (decimal)(AV49TFEmployeeBalance), 4, 0));
-               AV50TFEmployeeBalance_To = (short)(Math.Round(NumberUtil.Val( Ddo_grid_Filteredtextto_get, "."), 18, MidpointRounding.ToEven));
-               AssignAttri("", false, "AV50TFEmployeeBalance_To", StringUtil.LTrimStr( (decimal)(AV50TFEmployeeBalance_To), 4, 0));
+               AV49TFEmployeeBalance = NumberUtil.Val( Ddo_grid_Filteredtext_get, ".");
+               AssignAttri("", false, "AV49TFEmployeeBalance", StringUtil.LTrimStr( AV49TFEmployeeBalance, 4, 1));
+               AV50TFEmployeeBalance_To = NumberUtil.Val( Ddo_grid_Filteredtextto_get, ".");
+               AssignAttri("", false, "AV50TFEmployeeBalance_To", StringUtil.LTrimStr( AV50TFEmployeeBalance_To, 4, 1));
             }
             subgrid_firstpage( ) ;
          }
@@ -2303,13 +2303,13 @@ namespace GeneXus.Programs {
          AV46TFEmployeeIsActive_Sel = 0;
          AssignAttri("", false, "AV46TFEmployeeIsActive_Sel", StringUtil.Str( (decimal)(AV46TFEmployeeIsActive_Sel), 1, 0));
          AV47TFEmployeeVactionDays = 0;
-         AssignAttri("", false, "AV47TFEmployeeVactionDays", StringUtil.LTrimStr( (decimal)(AV47TFEmployeeVactionDays), 4, 0));
+         AssignAttri("", false, "AV47TFEmployeeVactionDays", StringUtil.LTrimStr( AV47TFEmployeeVactionDays, 4, 1));
          AV48TFEmployeeVactionDays_To = 0;
-         AssignAttri("", false, "AV48TFEmployeeVactionDays_To", StringUtil.LTrimStr( (decimal)(AV48TFEmployeeVactionDays_To), 4, 0));
+         AssignAttri("", false, "AV48TFEmployeeVactionDays_To", StringUtil.LTrimStr( AV48TFEmployeeVactionDays_To, 4, 1));
          AV49TFEmployeeBalance = 0;
-         AssignAttri("", false, "AV49TFEmployeeBalance", StringUtil.LTrimStr( (decimal)(AV49TFEmployeeBalance), 4, 0));
+         AssignAttri("", false, "AV49TFEmployeeBalance", StringUtil.LTrimStr( AV49TFEmployeeBalance, 4, 1));
          AV50TFEmployeeBalance_To = 0;
-         AssignAttri("", false, "AV50TFEmployeeBalance_To", StringUtil.LTrimStr( (decimal)(AV50TFEmployeeBalance_To), 4, 0));
+         AssignAttri("", false, "AV50TFEmployeeBalance_To", StringUtil.LTrimStr( AV50TFEmployeeBalance_To, 4, 1));
          Ddo_grid_Selectedvalue_set = "";
          ucDdo_grid.SendProperty(context, "", false, Ddo_grid_Internalname, "SelectedValue_set", Ddo_grid_Selectedvalue_set);
          Ddo_grid_Filteredtext_set = "";
@@ -2401,17 +2401,17 @@ namespace GeneXus.Programs {
             }
             else if ( StringUtil.StrCmp(AV16GridStateFilterValue.gxTpr_Name, "TFEMPLOYEEVACTIONDAYS") == 0 )
             {
-               AV47TFEmployeeVactionDays = (short)(Math.Round(NumberUtil.Val( AV16GridStateFilterValue.gxTpr_Value, "."), 18, MidpointRounding.ToEven));
-               AssignAttri("", false, "AV47TFEmployeeVactionDays", StringUtil.LTrimStr( (decimal)(AV47TFEmployeeVactionDays), 4, 0));
-               AV48TFEmployeeVactionDays_To = (short)(Math.Round(NumberUtil.Val( AV16GridStateFilterValue.gxTpr_Valueto, "."), 18, MidpointRounding.ToEven));
-               AssignAttri("", false, "AV48TFEmployeeVactionDays_To", StringUtil.LTrimStr( (decimal)(AV48TFEmployeeVactionDays_To), 4, 0));
+               AV47TFEmployeeVactionDays = NumberUtil.Val( AV16GridStateFilterValue.gxTpr_Value, ".");
+               AssignAttri("", false, "AV47TFEmployeeVactionDays", StringUtil.LTrimStr( AV47TFEmployeeVactionDays, 4, 1));
+               AV48TFEmployeeVactionDays_To = NumberUtil.Val( AV16GridStateFilterValue.gxTpr_Valueto, ".");
+               AssignAttri("", false, "AV48TFEmployeeVactionDays_To", StringUtil.LTrimStr( AV48TFEmployeeVactionDays_To, 4, 1));
             }
             else if ( StringUtil.StrCmp(AV16GridStateFilterValue.gxTpr_Name, "TFEMPLOYEEBALANCE") == 0 )
             {
-               AV49TFEmployeeBalance = (short)(Math.Round(NumberUtil.Val( AV16GridStateFilterValue.gxTpr_Value, "."), 18, MidpointRounding.ToEven));
-               AssignAttri("", false, "AV49TFEmployeeBalance", StringUtil.LTrimStr( (decimal)(AV49TFEmployeeBalance), 4, 0));
-               AV50TFEmployeeBalance_To = (short)(Math.Round(NumberUtil.Val( AV16GridStateFilterValue.gxTpr_Valueto, "."), 18, MidpointRounding.ToEven));
-               AssignAttri("", false, "AV50TFEmployeeBalance_To", StringUtil.LTrimStr( (decimal)(AV50TFEmployeeBalance_To), 4, 0));
+               AV49TFEmployeeBalance = NumberUtil.Val( AV16GridStateFilterValue.gxTpr_Value, ".");
+               AssignAttri("", false, "AV49TFEmployeeBalance", StringUtil.LTrimStr( AV49TFEmployeeBalance, 4, 1));
+               AV50TFEmployeeBalance_To = NumberUtil.Val( AV16GridStateFilterValue.gxTpr_Valueto, ".");
+               AssignAttri("", false, "AV50TFEmployeeBalance_To", StringUtil.LTrimStr( AV50TFEmployeeBalance_To, 4, 1));
             }
             AV97GXV1 = (int)(AV97GXV1+1);
          }
@@ -2425,9 +2425,9 @@ namespace GeneXus.Programs {
          new GeneXus.Programs.wwpbaseobjects.wwp_getfilterval(context ).execute(  String.IsNullOrEmpty(StringUtil.RTrim( AV66TFEmployeeName)),  AV66TFEmployeeName, out  GXt_char7) ;
          GXt_char5 = "";
          new GeneXus.Programs.wwpbaseobjects.wwp_getfilterval(context ).execute(  String.IsNullOrEmpty(StringUtil.RTrim( AV37TFEmployeeEmail)),  AV37TFEmployeeEmail, out  GXt_char5) ;
-         Ddo_grid_Filteredtext_set = GXt_char7+"|"+GXt_char5+"|||"+((0==AV47TFEmployeeVactionDays) ? "" : StringUtil.Str( (decimal)(AV47TFEmployeeVactionDays), 4, 0))+"|"+((0==AV49TFEmployeeBalance) ? "" : StringUtil.Str( (decimal)(AV49TFEmployeeBalance), 4, 0));
+         Ddo_grid_Filteredtext_set = GXt_char7+"|"+GXt_char5+"|||"+((Convert.ToDecimal(0)==AV47TFEmployeeVactionDays) ? "" : StringUtil.Str( AV47TFEmployeeVactionDays, 4, 1))+"|"+((Convert.ToDecimal(0)==AV49TFEmployeeBalance) ? "" : StringUtil.Str( AV49TFEmployeeBalance, 4, 1));
          ucDdo_grid.SendProperty(context, "", false, Ddo_grid_Internalname, "FilteredText_set", Ddo_grid_Filteredtext_set);
-         Ddo_grid_Filteredtextto_set = "||||"+((0==AV48TFEmployeeVactionDays_To) ? "" : StringUtil.Str( (decimal)(AV48TFEmployeeVactionDays_To), 4, 0))+"|"+((0==AV50TFEmployeeBalance_To) ? "" : StringUtil.Str( (decimal)(AV50TFEmployeeBalance_To), 4, 0));
+         Ddo_grid_Filteredtextto_set = "||||"+((Convert.ToDecimal(0)==AV48TFEmployeeVactionDays_To) ? "" : StringUtil.Str( AV48TFEmployeeVactionDays_To, 4, 1))+"|"+((Convert.ToDecimal(0)==AV50TFEmployeeBalance_To) ? "" : StringUtil.Str( AV50TFEmployeeBalance_To, 4, 1));
          ucDdo_grid.SendProperty(context, "", false, Ddo_grid_Internalname, "FilteredTextTo_set", Ddo_grid_Filteredtextto_set);
       }
 
@@ -2444,8 +2444,8 @@ namespace GeneXus.Programs {
          new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalueandsel(context ).execute( ref  AV15GridState,  "TFEMPLOYEEEMAIL",  "Email",  !String.IsNullOrEmpty(StringUtil.RTrim( AV37TFEmployeeEmail)),  0,  AV37TFEmployeeEmail,  AV37TFEmployeeEmail,  false,  "",  "",  !String.IsNullOrEmpty(StringUtil.RTrim( AV38TFEmployeeEmail_Sel)),  AV38TFEmployeeEmail_Sel,  AV38TFEmployeeEmail_Sel) ;
          new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV15GridState,  "TFEMPLOYEEISMANAGER_SEL",  "Is Manager",  !(0==AV43TFEmployeeIsManager_Sel),  0,  StringUtil.Trim( StringUtil.Str( (decimal)(AV43TFEmployeeIsManager_Sel), 1, 0)),  ((AV43TFEmployeeIsManager_Sel==1) ? "Checked" : "Unchecked"),  false,  "",  "") ;
          new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV15GridState,  "TFEMPLOYEEISACTIVE_SEL",  "Is Active",  !(0==AV46TFEmployeeIsActive_Sel),  0,  StringUtil.Trim( StringUtil.Str( (decimal)(AV46TFEmployeeIsActive_Sel), 1, 0)),  ((AV46TFEmployeeIsActive_Sel==1) ? "Checked" : "Unchecked"),  false,  "",  "") ;
-         new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV15GridState,  "TFEMPLOYEEVACTIONDAYS",  "Vacation Days",  !((0==AV47TFEmployeeVactionDays)&&(0==AV48TFEmployeeVactionDays_To)),  0,  StringUtil.Trim( StringUtil.Str( (decimal)(AV47TFEmployeeVactionDays), 4, 0)),  ((0==AV47TFEmployeeVactionDays) ? "" : StringUtil.Trim( context.localUtil.Format( (decimal)(AV47TFEmployeeVactionDays), "ZZZ9"))),  true,  StringUtil.Trim( StringUtil.Str( (decimal)(AV48TFEmployeeVactionDays_To), 4, 0)),  ((0==AV48TFEmployeeVactionDays_To) ? "" : StringUtil.Trim( context.localUtil.Format( (decimal)(AV48TFEmployeeVactionDays_To), "ZZZ9")))) ;
-         new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV15GridState,  "TFEMPLOYEEBALANCE",  "Balance",  !((0==AV49TFEmployeeBalance)&&(0==AV50TFEmployeeBalance_To)),  0,  StringUtil.Trim( StringUtil.Str( (decimal)(AV49TFEmployeeBalance), 4, 0)),  ((0==AV49TFEmployeeBalance) ? "" : StringUtil.Trim( context.localUtil.Format( (decimal)(AV49TFEmployeeBalance), "ZZZ9"))),  true,  StringUtil.Trim( StringUtil.Str( (decimal)(AV50TFEmployeeBalance_To), 4, 0)),  ((0==AV50TFEmployeeBalance_To) ? "" : StringUtil.Trim( context.localUtil.Format( (decimal)(AV50TFEmployeeBalance_To), "ZZZ9")))) ;
+         new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV15GridState,  "TFEMPLOYEEVACTIONDAYS",  "Vacation Days",  !((Convert.ToDecimal(0)==AV47TFEmployeeVactionDays)&&(Convert.ToDecimal(0)==AV48TFEmployeeVactionDays_To)),  0,  StringUtil.Trim( StringUtil.Str( AV47TFEmployeeVactionDays, 4, 1)),  ((Convert.ToDecimal(0)==AV47TFEmployeeVactionDays) ? "" : StringUtil.Trim( context.localUtil.Format( AV47TFEmployeeVactionDays, "Z9.9"))),  true,  StringUtil.Trim( StringUtil.Str( AV48TFEmployeeVactionDays_To, 4, 1)),  ((Convert.ToDecimal(0)==AV48TFEmployeeVactionDays_To) ? "" : StringUtil.Trim( context.localUtil.Format( AV48TFEmployeeVactionDays_To, "Z9.9")))) ;
+         new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV15GridState,  "TFEMPLOYEEBALANCE",  "Balance",  !((Convert.ToDecimal(0)==AV49TFEmployeeBalance)&&(Convert.ToDecimal(0)==AV50TFEmployeeBalance_To)),  0,  StringUtil.Trim( StringUtil.Str( AV49TFEmployeeBalance, 4, 1)),  ((Convert.ToDecimal(0)==AV49TFEmployeeBalance) ? "" : StringUtil.Trim( context.localUtil.Format( AV49TFEmployeeBalance, "Z9.9"))),  true,  StringUtil.Trim( StringUtil.Str( AV50TFEmployeeBalance_To, 4, 1)),  ((Convert.ToDecimal(0)==AV50TFEmployeeBalance_To) ? "" : StringUtil.Trim( context.localUtil.Format( AV50TFEmployeeBalance_To, "Z9.9")))) ;
          AV15GridState.gxTpr_Pagesize = StringUtil.Str( (decimal)(subGrid_Rows), 10, 0);
          AV15GridState.gxTpr_Currentpage = (short)(subGrid_fnc_Currentpage( ));
          new GeneXus.Programs.wwpbaseobjects.savegridstate(context ).execute(  AV85Pgmname+"GridState",  AV15GridState.ToXml(false, true, "", "")) ;
@@ -2628,7 +2628,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024741555426", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247615443930", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2644,7 +2644,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("employeeww.js", "?2024741555428", false, true);
+         context.AddJavascriptSource("employeeww.js", "?20247615443932", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -2896,7 +2896,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtEmployeeVactionDays_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(A146EmployeeVactionDays), 4, 0, ".", "")),StringUtil.LTrim( context.localUtil.Format( (decimal)(A146EmployeeVactionDays), "ZZZ9")),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtEmployeeVactionDays_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtEmployeeVactionDays_Visible,(short)0,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)4,(short)0,(short)0,(short)41,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtEmployeeVactionDays_Internalname,StringUtil.LTrim( StringUtil.NToC( A146EmployeeVactionDays, 4, 1, ".", "")),StringUtil.LTrim( context.localUtil.Format( A146EmployeeVactionDays, "Z9.9")),(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtEmployeeVactionDays_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtEmployeeVactionDays_Visible,(short)0,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)4,(short)0,(short)0,(short)41,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -2904,7 +2904,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtEmployeeBalance_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(A147EmployeeBalance), 4, 0, ".", "")),StringUtil.LTrim( context.localUtil.Format( (decimal)(A147EmployeeBalance), "ZZZ9")),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtEmployeeBalance_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtEmployeeBalance_Visible,(short)0,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)4,(short)0,(short)0,(short)41,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtEmployeeBalance_Internalname,StringUtil.LTrim( StringUtil.NToC( A147EmployeeBalance, 4, 1, ".", "")),StringUtil.LTrim( context.localUtil.Format( A147EmployeeBalance, "Z9.9")),(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtEmployeeBalance_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtEmployeeBalance_Visible,(short)0,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)4,(short)0,(short)0,(short)41,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
             send_integrity_lvl_hashes2V2( ) ;
             GridContainer.AddRow(GridRow);
             nGXsfl_41_idx = ((subGrid_Islastpage==1)&&(nGXsfl_41_idx+1>subGrid_fnc_Recordsperpage( )) ? 1 : nGXsfl_41_idx+1);
@@ -3090,11 +3090,11 @@ namespace GeneXus.Programs {
             GridColumn.AddObjectProperty("Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(chkEmployeeIsActive.Visible), 5, 0, ".", "")));
             GridContainer.AddColumnProperties(GridColumn);
             GridColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
-            GridColumn.AddObjectProperty("Value", GXUtil.ValueEncode( StringUtil.LTrim( StringUtil.NToC( (decimal)(A146EmployeeVactionDays), 4, 0, ".", ""))));
+            GridColumn.AddObjectProperty("Value", GXUtil.ValueEncode( StringUtil.LTrim( StringUtil.NToC( A146EmployeeVactionDays, 4, 1, ".", ""))));
             GridColumn.AddObjectProperty("Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtEmployeeVactionDays_Visible), 5, 0, ".", "")));
             GridContainer.AddColumnProperties(GridColumn);
             GridColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
-            GridColumn.AddObjectProperty("Value", GXUtil.ValueEncode( StringUtil.LTrim( StringUtil.NToC( (decimal)(A147EmployeeBalance), 4, 0, ".", ""))));
+            GridColumn.AddObjectProperty("Value", GXUtil.ValueEncode( StringUtil.LTrim( StringUtil.NToC( A147EmployeeBalance, 4, 1, ".", ""))));
             GridColumn.AddObjectProperty("Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtEmployeeBalance_Visible), 5, 0, ".", "")));
             GridContainer.AddColumnProperties(GridColumn);
             GridContainer.AddObjectProperty("Selectedindex", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Selectedindex), 4, 0, ".", "")));
@@ -3216,7 +3216,7 @@ namespace GeneXus.Programs {
          Ddo_gridcolumnsselector_Caption = "Select columns";
          Ddo_gridcolumnsselector_Icon = "fas fa-cog";
          Ddo_gridcolumnsselector_Icontype = "FontIcon";
-         Ddo_grid_Format = "||||4.0|4.0";
+         Ddo_grid_Format = "||||4.1|4.1";
          Ddo_grid_Datalistproc = "EmployeeWWGetFilterData";
          Ddo_grid_Datalistfixedvalues = "||1:WWP_TSChecked,2:WWP_TSUnChecked|1:WWP_TSChecked,2:WWP_TSUnChecked||";
          Ddo_grid_Datalisttype = "Dynamic|Dynamic|FixedValues|FixedValues||";
@@ -3274,24 +3274,24 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV20FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV85Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV66TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV67TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'AV37TFEmployeeEmail',fld:'vTFEMPLOYEEEMAIL',pic:''},{av:'AV38TFEmployeeEmail_Sel',fld:'vTFEMPLOYEEEMAIL_SEL',pic:''},{av:'AV43TFEmployeeIsManager_Sel',fld:'vTFEMPLOYEEISMANAGER_SEL',pic:'9'},{av:'AV46TFEmployeeIsActive_Sel',fld:'vTFEMPLOYEEISACTIVE_SEL',pic:'9'},{av:'AV47TFEmployeeVactionDays',fld:'vTFEMPLOYEEVACTIONDAYS',pic:'ZZZ9'},{av:'AV48TFEmployeeVactionDays_To',fld:'vTFEMPLOYEEVACTIONDAYS_TO',pic:'ZZZ9'},{av:'AV49TFEmployeeBalance',fld:'vTFEMPLOYEEBALANCE',pic:'ZZZ9'},{av:'AV50TFEmployeeBalance_To',fld:'vTFEMPLOYEEBALANCE_TO',pic:'ZZZ9'},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV99Udparg14',fld:'vUDPARG14',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV68ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV58IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV60IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV80InviteEmployee',fld:'vINVITEEMPLOYEE',pic:'',hsh:true},{av:'AV65IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true}]");
+         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV20FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV85Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV66TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV67TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'AV37TFEmployeeEmail',fld:'vTFEMPLOYEEEMAIL',pic:''},{av:'AV38TFEmployeeEmail_Sel',fld:'vTFEMPLOYEEEMAIL_SEL',pic:''},{av:'AV43TFEmployeeIsManager_Sel',fld:'vTFEMPLOYEEISMANAGER_SEL',pic:'9'},{av:'AV46TFEmployeeIsActive_Sel',fld:'vTFEMPLOYEEISACTIVE_SEL',pic:'9'},{av:'AV47TFEmployeeVactionDays',fld:'vTFEMPLOYEEVACTIONDAYS',pic:'Z9.9'},{av:'AV48TFEmployeeVactionDays_To',fld:'vTFEMPLOYEEVACTIONDAYS_TO',pic:'Z9.9'},{av:'AV49TFEmployeeBalance',fld:'vTFEMPLOYEEBALANCE',pic:'Z9.9'},{av:'AV50TFEmployeeBalance_To',fld:'vTFEMPLOYEEBALANCE_TO',pic:'Z9.9'},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV99Udparg14',fld:'vUDPARG14',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV68ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV58IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV60IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV80InviteEmployee',fld:'vINVITEEMPLOYEE',pic:'',hsh:true},{av:'AV65IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true}]");
          setEventMetadata("REFRESH",",oparms:[{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'edtEmployeeName_Visible',ctrl:'EMPLOYEENAME',prop:'Visible'},{av:'edtEmployeeEmail_Visible',ctrl:'EMPLOYEEEMAIL',prop:'Visible'},{av:'chkEmployeeIsManager.Visible',ctrl:'EMPLOYEEISMANAGER',prop:'Visible'},{av:'chkEmployeeIsActive.Visible',ctrl:'EMPLOYEEISACTIVE',prop:'Visible'},{av:'edtEmployeeVactionDays_Visible',ctrl:'EMPLOYEEVACTIONDAYS',prop:'Visible'},{av:'edtEmployeeBalance_Visible',ctrl:'EMPLOYEEBALANCE',prop:'Visible'},{av:'AV55GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV56GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV9GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'AV68ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV58IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'edtavUpdate_Visible',ctrl:'vUPDATE',prop:'Visible'},{av:'AV60IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'edtavDelete_Visible',ctrl:'vDELETE',prop:'Visible'},{av:'AV65IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{ctrl:'BTNINSERT',prop:'Visible'},{av:'AV28ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''},{av:'AV15GridState',fld:'vGRIDSTATE',pic:''}]}");
-         setEventMetadata("GRIDPAGINATIONBAR.CHANGEPAGE","{handler:'E122V2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV20FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV85Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV66TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV67TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'AV37TFEmployeeEmail',fld:'vTFEMPLOYEEEMAIL',pic:''},{av:'AV38TFEmployeeEmail_Sel',fld:'vTFEMPLOYEEEMAIL_SEL',pic:''},{av:'AV43TFEmployeeIsManager_Sel',fld:'vTFEMPLOYEEISMANAGER_SEL',pic:'9'},{av:'AV46TFEmployeeIsActive_Sel',fld:'vTFEMPLOYEEISACTIVE_SEL',pic:'9'},{av:'AV47TFEmployeeVactionDays',fld:'vTFEMPLOYEEVACTIONDAYS',pic:'ZZZ9'},{av:'AV48TFEmployeeVactionDays_To',fld:'vTFEMPLOYEEVACTIONDAYS_TO',pic:'ZZZ9'},{av:'AV49TFEmployeeBalance',fld:'vTFEMPLOYEEBALANCE',pic:'ZZZ9'},{av:'AV50TFEmployeeBalance_To',fld:'vTFEMPLOYEEBALANCE_TO',pic:'ZZZ9'},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV99Udparg14',fld:'vUDPARG14',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV68ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV58IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV60IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV80InviteEmployee',fld:'vINVITEEMPLOYEE',pic:'',hsh:true},{av:'AV65IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'Gridpaginationbar_Selectedpage',ctrl:'GRIDPAGINATIONBAR',prop:'SelectedPage'}]");
+         setEventMetadata("GRIDPAGINATIONBAR.CHANGEPAGE","{handler:'E122V2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV20FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV85Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV66TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV67TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'AV37TFEmployeeEmail',fld:'vTFEMPLOYEEEMAIL',pic:''},{av:'AV38TFEmployeeEmail_Sel',fld:'vTFEMPLOYEEEMAIL_SEL',pic:''},{av:'AV43TFEmployeeIsManager_Sel',fld:'vTFEMPLOYEEISMANAGER_SEL',pic:'9'},{av:'AV46TFEmployeeIsActive_Sel',fld:'vTFEMPLOYEEISACTIVE_SEL',pic:'9'},{av:'AV47TFEmployeeVactionDays',fld:'vTFEMPLOYEEVACTIONDAYS',pic:'Z9.9'},{av:'AV48TFEmployeeVactionDays_To',fld:'vTFEMPLOYEEVACTIONDAYS_TO',pic:'Z9.9'},{av:'AV49TFEmployeeBalance',fld:'vTFEMPLOYEEBALANCE',pic:'Z9.9'},{av:'AV50TFEmployeeBalance_To',fld:'vTFEMPLOYEEBALANCE_TO',pic:'Z9.9'},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV99Udparg14',fld:'vUDPARG14',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV68ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV58IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV60IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV80InviteEmployee',fld:'vINVITEEMPLOYEE',pic:'',hsh:true},{av:'AV65IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'Gridpaginationbar_Selectedpage',ctrl:'GRIDPAGINATIONBAR',prop:'SelectedPage'}]");
          setEventMetadata("GRIDPAGINATIONBAR.CHANGEPAGE",",oparms:[]}");
-         setEventMetadata("GRIDPAGINATIONBAR.CHANGEROWSPERPAGE","{handler:'E132V2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV20FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV85Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV66TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV67TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'AV37TFEmployeeEmail',fld:'vTFEMPLOYEEEMAIL',pic:''},{av:'AV38TFEmployeeEmail_Sel',fld:'vTFEMPLOYEEEMAIL_SEL',pic:''},{av:'AV43TFEmployeeIsManager_Sel',fld:'vTFEMPLOYEEISMANAGER_SEL',pic:'9'},{av:'AV46TFEmployeeIsActive_Sel',fld:'vTFEMPLOYEEISACTIVE_SEL',pic:'9'},{av:'AV47TFEmployeeVactionDays',fld:'vTFEMPLOYEEVACTIONDAYS',pic:'ZZZ9'},{av:'AV48TFEmployeeVactionDays_To',fld:'vTFEMPLOYEEVACTIONDAYS_TO',pic:'ZZZ9'},{av:'AV49TFEmployeeBalance',fld:'vTFEMPLOYEEBALANCE',pic:'ZZZ9'},{av:'AV50TFEmployeeBalance_To',fld:'vTFEMPLOYEEBALANCE_TO',pic:'ZZZ9'},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV99Udparg14',fld:'vUDPARG14',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV68ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV58IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV60IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV80InviteEmployee',fld:'vINVITEEMPLOYEE',pic:'',hsh:true},{av:'AV65IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'Gridpaginationbar_Rowsperpageselectedvalue',ctrl:'GRIDPAGINATIONBAR',prop:'RowsPerPageSelectedValue'}]");
+         setEventMetadata("GRIDPAGINATIONBAR.CHANGEROWSPERPAGE","{handler:'E132V2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV20FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV85Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV66TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV67TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'AV37TFEmployeeEmail',fld:'vTFEMPLOYEEEMAIL',pic:''},{av:'AV38TFEmployeeEmail_Sel',fld:'vTFEMPLOYEEEMAIL_SEL',pic:''},{av:'AV43TFEmployeeIsManager_Sel',fld:'vTFEMPLOYEEISMANAGER_SEL',pic:'9'},{av:'AV46TFEmployeeIsActive_Sel',fld:'vTFEMPLOYEEISACTIVE_SEL',pic:'9'},{av:'AV47TFEmployeeVactionDays',fld:'vTFEMPLOYEEVACTIONDAYS',pic:'Z9.9'},{av:'AV48TFEmployeeVactionDays_To',fld:'vTFEMPLOYEEVACTIONDAYS_TO',pic:'Z9.9'},{av:'AV49TFEmployeeBalance',fld:'vTFEMPLOYEEBALANCE',pic:'Z9.9'},{av:'AV50TFEmployeeBalance_To',fld:'vTFEMPLOYEEBALANCE_TO',pic:'Z9.9'},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV99Udparg14',fld:'vUDPARG14',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV68ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV58IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV60IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV80InviteEmployee',fld:'vINVITEEMPLOYEE',pic:'',hsh:true},{av:'AV65IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'Gridpaginationbar_Rowsperpageselectedvalue',ctrl:'GRIDPAGINATIONBAR',prop:'RowsPerPageSelectedValue'}]");
          setEventMetadata("GRIDPAGINATIONBAR.CHANGEROWSPERPAGE",",oparms:[{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'}]}");
-         setEventMetadata("DDO_GRID.ONOPTIONCLICKED","{handler:'E152V2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV20FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV85Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV66TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV67TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'AV37TFEmployeeEmail',fld:'vTFEMPLOYEEEMAIL',pic:''},{av:'AV38TFEmployeeEmail_Sel',fld:'vTFEMPLOYEEEMAIL_SEL',pic:''},{av:'AV43TFEmployeeIsManager_Sel',fld:'vTFEMPLOYEEISMANAGER_SEL',pic:'9'},{av:'AV46TFEmployeeIsActive_Sel',fld:'vTFEMPLOYEEISACTIVE_SEL',pic:'9'},{av:'AV47TFEmployeeVactionDays',fld:'vTFEMPLOYEEVACTIONDAYS',pic:'ZZZ9'},{av:'AV48TFEmployeeVactionDays_To',fld:'vTFEMPLOYEEVACTIONDAYS_TO',pic:'ZZZ9'},{av:'AV49TFEmployeeBalance',fld:'vTFEMPLOYEEBALANCE',pic:'ZZZ9'},{av:'AV50TFEmployeeBalance_To',fld:'vTFEMPLOYEEBALANCE_TO',pic:'ZZZ9'},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV99Udparg14',fld:'vUDPARG14',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV68ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV58IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV60IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV80InviteEmployee',fld:'vINVITEEMPLOYEE',pic:'',hsh:true},{av:'AV65IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'Ddo_grid_Activeeventkey',ctrl:'DDO_GRID',prop:'ActiveEventKey'},{av:'Ddo_grid_Selectedvalue_get',ctrl:'DDO_GRID',prop:'SelectedValue_get'},{av:'Ddo_grid_Filteredtextto_get',ctrl:'DDO_GRID',prop:'FilteredTextTo_get'},{av:'Ddo_grid_Filteredtext_get',ctrl:'DDO_GRID',prop:'FilteredText_get'},{av:'Ddo_grid_Selectedcolumn',ctrl:'DDO_GRID',prop:'SelectedColumn'}]");
-         setEventMetadata("DDO_GRID.ONOPTIONCLICKED",",oparms:[{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV49TFEmployeeBalance',fld:'vTFEMPLOYEEBALANCE',pic:'ZZZ9'},{av:'AV50TFEmployeeBalance_To',fld:'vTFEMPLOYEEBALANCE_TO',pic:'ZZZ9'},{av:'AV47TFEmployeeVactionDays',fld:'vTFEMPLOYEEVACTIONDAYS',pic:'ZZZ9'},{av:'AV48TFEmployeeVactionDays_To',fld:'vTFEMPLOYEEVACTIONDAYS_TO',pic:'ZZZ9'},{av:'AV46TFEmployeeIsActive_Sel',fld:'vTFEMPLOYEEISACTIVE_SEL',pic:'9'},{av:'AV43TFEmployeeIsManager_Sel',fld:'vTFEMPLOYEEISMANAGER_SEL',pic:'9'},{av:'AV37TFEmployeeEmail',fld:'vTFEMPLOYEEEMAIL',pic:''},{av:'AV38TFEmployeeEmail_Sel',fld:'vTFEMPLOYEEEMAIL_SEL',pic:''},{av:'AV66TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV67TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'Ddo_grid_Sortedstatus',ctrl:'DDO_GRID',prop:'SortedStatus'}]}");
+         setEventMetadata("DDO_GRID.ONOPTIONCLICKED","{handler:'E152V2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV20FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV85Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV66TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV67TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'AV37TFEmployeeEmail',fld:'vTFEMPLOYEEEMAIL',pic:''},{av:'AV38TFEmployeeEmail_Sel',fld:'vTFEMPLOYEEEMAIL_SEL',pic:''},{av:'AV43TFEmployeeIsManager_Sel',fld:'vTFEMPLOYEEISMANAGER_SEL',pic:'9'},{av:'AV46TFEmployeeIsActive_Sel',fld:'vTFEMPLOYEEISACTIVE_SEL',pic:'9'},{av:'AV47TFEmployeeVactionDays',fld:'vTFEMPLOYEEVACTIONDAYS',pic:'Z9.9'},{av:'AV48TFEmployeeVactionDays_To',fld:'vTFEMPLOYEEVACTIONDAYS_TO',pic:'Z9.9'},{av:'AV49TFEmployeeBalance',fld:'vTFEMPLOYEEBALANCE',pic:'Z9.9'},{av:'AV50TFEmployeeBalance_To',fld:'vTFEMPLOYEEBALANCE_TO',pic:'Z9.9'},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV99Udparg14',fld:'vUDPARG14',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV68ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV58IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV60IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV80InviteEmployee',fld:'vINVITEEMPLOYEE',pic:'',hsh:true},{av:'AV65IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'Ddo_grid_Activeeventkey',ctrl:'DDO_GRID',prop:'ActiveEventKey'},{av:'Ddo_grid_Selectedvalue_get',ctrl:'DDO_GRID',prop:'SelectedValue_get'},{av:'Ddo_grid_Filteredtextto_get',ctrl:'DDO_GRID',prop:'FilteredTextTo_get'},{av:'Ddo_grid_Filteredtext_get',ctrl:'DDO_GRID',prop:'FilteredText_get'},{av:'Ddo_grid_Selectedcolumn',ctrl:'DDO_GRID',prop:'SelectedColumn'}]");
+         setEventMetadata("DDO_GRID.ONOPTIONCLICKED",",oparms:[{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV49TFEmployeeBalance',fld:'vTFEMPLOYEEBALANCE',pic:'Z9.9'},{av:'AV50TFEmployeeBalance_To',fld:'vTFEMPLOYEEBALANCE_TO',pic:'Z9.9'},{av:'AV47TFEmployeeVactionDays',fld:'vTFEMPLOYEEVACTIONDAYS',pic:'Z9.9'},{av:'AV48TFEmployeeVactionDays_To',fld:'vTFEMPLOYEEVACTIONDAYS_TO',pic:'Z9.9'},{av:'AV46TFEmployeeIsActive_Sel',fld:'vTFEMPLOYEEISACTIVE_SEL',pic:'9'},{av:'AV43TFEmployeeIsManager_Sel',fld:'vTFEMPLOYEEISMANAGER_SEL',pic:'9'},{av:'AV37TFEmployeeEmail',fld:'vTFEMPLOYEEEMAIL',pic:''},{av:'AV38TFEmployeeEmail_Sel',fld:'vTFEMPLOYEEEMAIL_SEL',pic:''},{av:'AV66TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV67TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'Ddo_grid_Sortedstatus',ctrl:'DDO_GRID',prop:'SortedStatus'}]}");
          setEventMetadata("GRID.LOAD","{handler:'E202V2',iparms:[{av:'A111GAMUserGUID',fld:'GAMUSERGUID',pic:''},{av:'AV58IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'A106EmployeeId',fld:'EMPLOYEEID',pic:'ZZZZZZZZZ9',hsh:true},{av:'AV60IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV80InviteEmployee',fld:'vINVITEEMPLOYEE',pic:'',hsh:true}]");
          setEventMetadata("GRID.LOAD",",oparms:[{av:'AV57Update',fld:'vUPDATE',pic:''},{av:'edtavUpdate_Link',ctrl:'vUPDATE',prop:'Link'},{av:'AV59Delete',fld:'vDELETE',pic:''},{av:'edtavDelete_Link',ctrl:'vDELETE',prop:'Link'},{av:'AV70Invite',fld:'vINVITE',pic:''},{av:'edtavInvite_Class',ctrl:'vINVITE',prop:'Class'}]}");
-         setEventMetadata("DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED","{handler:'E162V2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV20FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV85Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV66TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV67TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'AV37TFEmployeeEmail',fld:'vTFEMPLOYEEEMAIL',pic:''},{av:'AV38TFEmployeeEmail_Sel',fld:'vTFEMPLOYEEEMAIL_SEL',pic:''},{av:'AV43TFEmployeeIsManager_Sel',fld:'vTFEMPLOYEEISMANAGER_SEL',pic:'9'},{av:'AV46TFEmployeeIsActive_Sel',fld:'vTFEMPLOYEEISACTIVE_SEL',pic:'9'},{av:'AV47TFEmployeeVactionDays',fld:'vTFEMPLOYEEVACTIONDAYS',pic:'ZZZ9'},{av:'AV48TFEmployeeVactionDays_To',fld:'vTFEMPLOYEEVACTIONDAYS_TO',pic:'ZZZ9'},{av:'AV49TFEmployeeBalance',fld:'vTFEMPLOYEEBALANCE',pic:'ZZZ9'},{av:'AV50TFEmployeeBalance_To',fld:'vTFEMPLOYEEBALANCE_TO',pic:'ZZZ9'},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV99Udparg14',fld:'vUDPARG14',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV68ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV58IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV60IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV80InviteEmployee',fld:'vINVITEEMPLOYEE',pic:'',hsh:true},{av:'AV65IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'Ddo_gridcolumnsselector_Columnsselectorvalues',ctrl:'DDO_GRIDCOLUMNSSELECTOR',prop:'ColumnsSelectorValues'}]");
+         setEventMetadata("DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED","{handler:'E162V2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV20FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV85Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV66TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV67TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'AV37TFEmployeeEmail',fld:'vTFEMPLOYEEEMAIL',pic:''},{av:'AV38TFEmployeeEmail_Sel',fld:'vTFEMPLOYEEEMAIL_SEL',pic:''},{av:'AV43TFEmployeeIsManager_Sel',fld:'vTFEMPLOYEEISMANAGER_SEL',pic:'9'},{av:'AV46TFEmployeeIsActive_Sel',fld:'vTFEMPLOYEEISACTIVE_SEL',pic:'9'},{av:'AV47TFEmployeeVactionDays',fld:'vTFEMPLOYEEVACTIONDAYS',pic:'Z9.9'},{av:'AV48TFEmployeeVactionDays_To',fld:'vTFEMPLOYEEVACTIONDAYS_TO',pic:'Z9.9'},{av:'AV49TFEmployeeBalance',fld:'vTFEMPLOYEEBALANCE',pic:'Z9.9'},{av:'AV50TFEmployeeBalance_To',fld:'vTFEMPLOYEEBALANCE_TO',pic:'Z9.9'},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV99Udparg14',fld:'vUDPARG14',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV68ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV58IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV60IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV80InviteEmployee',fld:'vINVITEEMPLOYEE',pic:'',hsh:true},{av:'AV65IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'Ddo_gridcolumnsselector_Columnsselectorvalues',ctrl:'DDO_GRIDCOLUMNSSELECTOR',prop:'ColumnsSelectorValues'}]");
          setEventMetadata("DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED",",oparms:[{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'edtEmployeeName_Visible',ctrl:'EMPLOYEENAME',prop:'Visible'},{av:'edtEmployeeEmail_Visible',ctrl:'EMPLOYEEEMAIL',prop:'Visible'},{av:'chkEmployeeIsManager.Visible',ctrl:'EMPLOYEEISMANAGER',prop:'Visible'},{av:'chkEmployeeIsActive.Visible',ctrl:'EMPLOYEEISACTIVE',prop:'Visible'},{av:'edtEmployeeVactionDays_Visible',ctrl:'EMPLOYEEVACTIONDAYS',prop:'Visible'},{av:'edtEmployeeBalance_Visible',ctrl:'EMPLOYEEBALANCE',prop:'Visible'},{av:'AV55GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV56GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV9GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'AV68ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV58IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'edtavUpdate_Visible',ctrl:'vUPDATE',prop:'Visible'},{av:'AV60IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'edtavDelete_Visible',ctrl:'vDELETE',prop:'Visible'},{av:'AV65IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{ctrl:'BTNINSERT',prop:'Visible'},{av:'AV28ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''},{av:'AV15GridState',fld:'vGRIDSTATE',pic:''}]}");
-         setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED","{handler:'E112V2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV20FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV85Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV66TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV67TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'AV37TFEmployeeEmail',fld:'vTFEMPLOYEEEMAIL',pic:''},{av:'AV38TFEmployeeEmail_Sel',fld:'vTFEMPLOYEEEMAIL_SEL',pic:''},{av:'AV43TFEmployeeIsManager_Sel',fld:'vTFEMPLOYEEISMANAGER_SEL',pic:'9'},{av:'AV46TFEmployeeIsActive_Sel',fld:'vTFEMPLOYEEISACTIVE_SEL',pic:'9'},{av:'AV47TFEmployeeVactionDays',fld:'vTFEMPLOYEEVACTIONDAYS',pic:'ZZZ9'},{av:'AV48TFEmployeeVactionDays_To',fld:'vTFEMPLOYEEVACTIONDAYS_TO',pic:'ZZZ9'},{av:'AV49TFEmployeeBalance',fld:'vTFEMPLOYEEBALANCE',pic:'ZZZ9'},{av:'AV50TFEmployeeBalance_To',fld:'vTFEMPLOYEEBALANCE_TO',pic:'ZZZ9'},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV99Udparg14',fld:'vUDPARG14',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV68ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV58IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV60IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV80InviteEmployee',fld:'vINVITEEMPLOYEE',pic:'',hsh:true},{av:'AV65IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'Ddo_managefilters_Activeeventkey',ctrl:'DDO_MANAGEFILTERS',prop:'ActiveEventKey'},{av:'AV15GridState',fld:'vGRIDSTATE',pic:''}]");
-         setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED",",oparms:[{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV15GridState',fld:'vGRIDSTATE',pic:''},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV20FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV66TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV67TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'AV37TFEmployeeEmail',fld:'vTFEMPLOYEEEMAIL',pic:''},{av:'AV38TFEmployeeEmail_Sel',fld:'vTFEMPLOYEEEMAIL_SEL',pic:''},{av:'AV43TFEmployeeIsManager_Sel',fld:'vTFEMPLOYEEISMANAGER_SEL',pic:'9'},{av:'AV46TFEmployeeIsActive_Sel',fld:'vTFEMPLOYEEISACTIVE_SEL',pic:'9'},{av:'AV47TFEmployeeVactionDays',fld:'vTFEMPLOYEEVACTIONDAYS',pic:'ZZZ9'},{av:'AV48TFEmployeeVactionDays_To',fld:'vTFEMPLOYEEVACTIONDAYS_TO',pic:'ZZZ9'},{av:'AV49TFEmployeeBalance',fld:'vTFEMPLOYEEBALANCE',pic:'ZZZ9'},{av:'AV50TFEmployeeBalance_To',fld:'vTFEMPLOYEEBALANCE_TO',pic:'ZZZ9'},{av:'Ddo_grid_Selectedvalue_set',ctrl:'DDO_GRID',prop:'SelectedValue_set'},{av:'Ddo_grid_Filteredtext_set',ctrl:'DDO_GRID',prop:'FilteredText_set'},{av:'Ddo_grid_Filteredtextto_set',ctrl:'DDO_GRID',prop:'FilteredTextTo_set'},{av:'Ddo_grid_Sortedstatus',ctrl:'DDO_GRID',prop:'SortedStatus'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'edtEmployeeName_Visible',ctrl:'EMPLOYEENAME',prop:'Visible'},{av:'edtEmployeeEmail_Visible',ctrl:'EMPLOYEEEMAIL',prop:'Visible'},{av:'chkEmployeeIsManager.Visible',ctrl:'EMPLOYEEISMANAGER',prop:'Visible'},{av:'chkEmployeeIsActive.Visible',ctrl:'EMPLOYEEISACTIVE',prop:'Visible'},{av:'edtEmployeeVactionDays_Visible',ctrl:'EMPLOYEEVACTIONDAYS',prop:'Visible'},{av:'edtEmployeeBalance_Visible',ctrl:'EMPLOYEEBALANCE',prop:'Visible'},{av:'AV55GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV56GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV9GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'AV68ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV58IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'edtavUpdate_Visible',ctrl:'vUPDATE',prop:'Visible'},{av:'AV60IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'edtavDelete_Visible',ctrl:'vDELETE',prop:'Visible'},{av:'AV65IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{ctrl:'BTNINSERT',prop:'Visible'},{av:'AV28ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''}]}");
-         setEventMetadata("'DOINSERT'","{handler:'E172V2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV20FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV85Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV66TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV67TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'AV37TFEmployeeEmail',fld:'vTFEMPLOYEEEMAIL',pic:''},{av:'AV38TFEmployeeEmail_Sel',fld:'vTFEMPLOYEEEMAIL_SEL',pic:''},{av:'AV43TFEmployeeIsManager_Sel',fld:'vTFEMPLOYEEISMANAGER_SEL',pic:'9'},{av:'AV46TFEmployeeIsActive_Sel',fld:'vTFEMPLOYEEISACTIVE_SEL',pic:'9'},{av:'AV47TFEmployeeVactionDays',fld:'vTFEMPLOYEEVACTIONDAYS',pic:'ZZZ9'},{av:'AV48TFEmployeeVactionDays_To',fld:'vTFEMPLOYEEVACTIONDAYS_TO',pic:'ZZZ9'},{av:'AV49TFEmployeeBalance',fld:'vTFEMPLOYEEBALANCE',pic:'ZZZ9'},{av:'AV50TFEmployeeBalance_To',fld:'vTFEMPLOYEEBALANCE_TO',pic:'ZZZ9'},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV99Udparg14',fld:'vUDPARG14',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV68ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV58IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV60IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV80InviteEmployee',fld:'vINVITEEMPLOYEE',pic:'',hsh:true},{av:'AV65IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'A106EmployeeId',fld:'EMPLOYEEID',pic:'ZZZZZZZZZ9',hsh:true}]");
+         setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED","{handler:'E112V2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV20FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV85Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV66TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV67TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'AV37TFEmployeeEmail',fld:'vTFEMPLOYEEEMAIL',pic:''},{av:'AV38TFEmployeeEmail_Sel',fld:'vTFEMPLOYEEEMAIL_SEL',pic:''},{av:'AV43TFEmployeeIsManager_Sel',fld:'vTFEMPLOYEEISMANAGER_SEL',pic:'9'},{av:'AV46TFEmployeeIsActive_Sel',fld:'vTFEMPLOYEEISACTIVE_SEL',pic:'9'},{av:'AV47TFEmployeeVactionDays',fld:'vTFEMPLOYEEVACTIONDAYS',pic:'Z9.9'},{av:'AV48TFEmployeeVactionDays_To',fld:'vTFEMPLOYEEVACTIONDAYS_TO',pic:'Z9.9'},{av:'AV49TFEmployeeBalance',fld:'vTFEMPLOYEEBALANCE',pic:'Z9.9'},{av:'AV50TFEmployeeBalance_To',fld:'vTFEMPLOYEEBALANCE_TO',pic:'Z9.9'},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV99Udparg14',fld:'vUDPARG14',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV68ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV58IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV60IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV80InviteEmployee',fld:'vINVITEEMPLOYEE',pic:'',hsh:true},{av:'AV65IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'Ddo_managefilters_Activeeventkey',ctrl:'DDO_MANAGEFILTERS',prop:'ActiveEventKey'},{av:'AV15GridState',fld:'vGRIDSTATE',pic:''}]");
+         setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED",",oparms:[{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV15GridState',fld:'vGRIDSTATE',pic:''},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV20FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV66TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV67TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'AV37TFEmployeeEmail',fld:'vTFEMPLOYEEEMAIL',pic:''},{av:'AV38TFEmployeeEmail_Sel',fld:'vTFEMPLOYEEEMAIL_SEL',pic:''},{av:'AV43TFEmployeeIsManager_Sel',fld:'vTFEMPLOYEEISMANAGER_SEL',pic:'9'},{av:'AV46TFEmployeeIsActive_Sel',fld:'vTFEMPLOYEEISACTIVE_SEL',pic:'9'},{av:'AV47TFEmployeeVactionDays',fld:'vTFEMPLOYEEVACTIONDAYS',pic:'Z9.9'},{av:'AV48TFEmployeeVactionDays_To',fld:'vTFEMPLOYEEVACTIONDAYS_TO',pic:'Z9.9'},{av:'AV49TFEmployeeBalance',fld:'vTFEMPLOYEEBALANCE',pic:'Z9.9'},{av:'AV50TFEmployeeBalance_To',fld:'vTFEMPLOYEEBALANCE_TO',pic:'Z9.9'},{av:'Ddo_grid_Selectedvalue_set',ctrl:'DDO_GRID',prop:'SelectedValue_set'},{av:'Ddo_grid_Filteredtext_set',ctrl:'DDO_GRID',prop:'FilteredText_set'},{av:'Ddo_grid_Filteredtextto_set',ctrl:'DDO_GRID',prop:'FilteredTextTo_set'},{av:'Ddo_grid_Sortedstatus',ctrl:'DDO_GRID',prop:'SortedStatus'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'edtEmployeeName_Visible',ctrl:'EMPLOYEENAME',prop:'Visible'},{av:'edtEmployeeEmail_Visible',ctrl:'EMPLOYEEEMAIL',prop:'Visible'},{av:'chkEmployeeIsManager.Visible',ctrl:'EMPLOYEEISMANAGER',prop:'Visible'},{av:'chkEmployeeIsActive.Visible',ctrl:'EMPLOYEEISACTIVE',prop:'Visible'},{av:'edtEmployeeVactionDays_Visible',ctrl:'EMPLOYEEVACTIONDAYS',prop:'Visible'},{av:'edtEmployeeBalance_Visible',ctrl:'EMPLOYEEBALANCE',prop:'Visible'},{av:'AV55GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV56GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV9GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'AV68ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV58IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'edtavUpdate_Visible',ctrl:'vUPDATE',prop:'Visible'},{av:'AV60IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'edtavDelete_Visible',ctrl:'vDELETE',prop:'Visible'},{av:'AV65IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{ctrl:'BTNINSERT',prop:'Visible'},{av:'AV28ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''}]}");
+         setEventMetadata("'DOINSERT'","{handler:'E172V2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV20FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV85Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV66TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV67TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'AV37TFEmployeeEmail',fld:'vTFEMPLOYEEEMAIL',pic:''},{av:'AV38TFEmployeeEmail_Sel',fld:'vTFEMPLOYEEEMAIL_SEL',pic:''},{av:'AV43TFEmployeeIsManager_Sel',fld:'vTFEMPLOYEEISMANAGER_SEL',pic:'9'},{av:'AV46TFEmployeeIsActive_Sel',fld:'vTFEMPLOYEEISACTIVE_SEL',pic:'9'},{av:'AV47TFEmployeeVactionDays',fld:'vTFEMPLOYEEVACTIONDAYS',pic:'Z9.9'},{av:'AV48TFEmployeeVactionDays_To',fld:'vTFEMPLOYEEVACTIONDAYS_TO',pic:'Z9.9'},{av:'AV49TFEmployeeBalance',fld:'vTFEMPLOYEEBALANCE',pic:'Z9.9'},{av:'AV50TFEmployeeBalance_To',fld:'vTFEMPLOYEEBALANCE_TO',pic:'Z9.9'},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV99Udparg14',fld:'vUDPARG14',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV68ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV58IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV60IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV80InviteEmployee',fld:'vINVITEEMPLOYEE',pic:'',hsh:true},{av:'AV65IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'A106EmployeeId',fld:'EMPLOYEEID',pic:'ZZZZZZZZZ9',hsh:true}]");
          setEventMetadata("'DOINSERT'",",oparms:[{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'edtEmployeeName_Visible',ctrl:'EMPLOYEENAME',prop:'Visible'},{av:'edtEmployeeEmail_Visible',ctrl:'EMPLOYEEEMAIL',prop:'Visible'},{av:'chkEmployeeIsManager.Visible',ctrl:'EMPLOYEEISMANAGER',prop:'Visible'},{av:'chkEmployeeIsActive.Visible',ctrl:'EMPLOYEEISACTIVE',prop:'Visible'},{av:'edtEmployeeVactionDays_Visible',ctrl:'EMPLOYEEVACTIONDAYS',prop:'Visible'},{av:'edtEmployeeBalance_Visible',ctrl:'EMPLOYEEBALANCE',prop:'Visible'},{av:'AV55GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV56GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV9GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'AV68ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV58IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'edtavUpdate_Visible',ctrl:'vUPDATE',prop:'Visible'},{av:'AV60IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'edtavDelete_Visible',ctrl:'vDELETE',prop:'Visible'},{av:'AV65IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{ctrl:'BTNINSERT',prop:'Visible'},{av:'AV28ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''},{av:'AV15GridState',fld:'vGRIDSTATE',pic:''}]}");
-         setEventMetadata("DDO_AGEXPORT.ONOPTIONCLICKED","{handler:'E142V2',iparms:[{av:'Ddo_agexport_Activeeventkey',ctrl:'DDO_AGEXPORT',prop:'ActiveEventKey'},{av:'AV85Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV15GridState',fld:'vGRIDSTATE',pic:''},{av:'AV67TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'AV38TFEmployeeEmail_Sel',fld:'vTFEMPLOYEEEMAIL_SEL',pic:''},{av:'AV43TFEmployeeIsManager_Sel',fld:'vTFEMPLOYEEISMANAGER_SEL',pic:'9'},{av:'AV46TFEmployeeIsActive_Sel',fld:'vTFEMPLOYEEISACTIVE_SEL',pic:'9'},{av:'AV66TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV37TFEmployeeEmail',fld:'vTFEMPLOYEEEMAIL',pic:''},{av:'AV47TFEmployeeVactionDays',fld:'vTFEMPLOYEEVACTIONDAYS',pic:'ZZZ9'},{av:'AV49TFEmployeeBalance',fld:'vTFEMPLOYEEBALANCE',pic:'ZZZ9'},{av:'AV48TFEmployeeVactionDays_To',fld:'vTFEMPLOYEEVACTIONDAYS_TO',pic:'ZZZ9'},{av:'AV50TFEmployeeBalance_To',fld:'vTFEMPLOYEEBALANCE_TO',pic:'ZZZ9'}]");
-         setEventMetadata("DDO_AGEXPORT.ONOPTIONCLICKED",",oparms:[{av:'AV15GridState',fld:'vGRIDSTATE',pic:''},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'AV20FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV85Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV66TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV67TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'AV37TFEmployeeEmail',fld:'vTFEMPLOYEEEMAIL',pic:''},{av:'AV38TFEmployeeEmail_Sel',fld:'vTFEMPLOYEEEMAIL_SEL',pic:''},{av:'AV43TFEmployeeIsManager_Sel',fld:'vTFEMPLOYEEISMANAGER_SEL',pic:'9'},{av:'AV46TFEmployeeIsActive_Sel',fld:'vTFEMPLOYEEISACTIVE_SEL',pic:'9'},{av:'AV47TFEmployeeVactionDays',fld:'vTFEMPLOYEEVACTIONDAYS',pic:'ZZZ9'},{av:'AV48TFEmployeeVactionDays_To',fld:'vTFEMPLOYEEVACTIONDAYS_TO',pic:'ZZZ9'},{av:'AV49TFEmployeeBalance',fld:'vTFEMPLOYEEBALANCE',pic:'ZZZ9'},{av:'AV50TFEmployeeBalance_To',fld:'vTFEMPLOYEEBALANCE_TO',pic:'ZZZ9'},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV99Udparg14',fld:'vUDPARG14',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV68ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV58IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV60IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV80InviteEmployee',fld:'vINVITEEMPLOYEE',pic:'',hsh:true},{av:'AV65IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'Ddo_grid_Sortedstatus',ctrl:'DDO_GRID',prop:'SortedStatus'},{av:'Ddo_grid_Selectedvalue_set',ctrl:'DDO_GRID',prop:'SelectedValue_set'},{av:'Ddo_grid_Filteredtext_set',ctrl:'DDO_GRID',prop:'FilteredText_set'},{av:'Ddo_grid_Filteredtextto_set',ctrl:'DDO_GRID',prop:'FilteredTextTo_set'}]}");
+         setEventMetadata("DDO_AGEXPORT.ONOPTIONCLICKED","{handler:'E142V2',iparms:[{av:'Ddo_agexport_Activeeventkey',ctrl:'DDO_AGEXPORT',prop:'ActiveEventKey'},{av:'AV85Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV15GridState',fld:'vGRIDSTATE',pic:''},{av:'AV67TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'AV38TFEmployeeEmail_Sel',fld:'vTFEMPLOYEEEMAIL_SEL',pic:''},{av:'AV43TFEmployeeIsManager_Sel',fld:'vTFEMPLOYEEISMANAGER_SEL',pic:'9'},{av:'AV46TFEmployeeIsActive_Sel',fld:'vTFEMPLOYEEISACTIVE_SEL',pic:'9'},{av:'AV66TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV37TFEmployeeEmail',fld:'vTFEMPLOYEEEMAIL',pic:''},{av:'AV47TFEmployeeVactionDays',fld:'vTFEMPLOYEEVACTIONDAYS',pic:'Z9.9'},{av:'AV49TFEmployeeBalance',fld:'vTFEMPLOYEEBALANCE',pic:'Z9.9'},{av:'AV48TFEmployeeVactionDays_To',fld:'vTFEMPLOYEEVACTIONDAYS_TO',pic:'Z9.9'},{av:'AV50TFEmployeeBalance_To',fld:'vTFEMPLOYEEBALANCE_TO',pic:'Z9.9'}]");
+         setEventMetadata("DDO_AGEXPORT.ONOPTIONCLICKED",",oparms:[{av:'AV15GridState',fld:'vGRIDSTATE',pic:''},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'AV20FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV85Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV66TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV67TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'AV37TFEmployeeEmail',fld:'vTFEMPLOYEEEMAIL',pic:''},{av:'AV38TFEmployeeEmail_Sel',fld:'vTFEMPLOYEEEMAIL_SEL',pic:''},{av:'AV43TFEmployeeIsManager_Sel',fld:'vTFEMPLOYEEISMANAGER_SEL',pic:'9'},{av:'AV46TFEmployeeIsActive_Sel',fld:'vTFEMPLOYEEISACTIVE_SEL',pic:'9'},{av:'AV47TFEmployeeVactionDays',fld:'vTFEMPLOYEEVACTIONDAYS',pic:'Z9.9'},{av:'AV48TFEmployeeVactionDays_To',fld:'vTFEMPLOYEEVACTIONDAYS_TO',pic:'Z9.9'},{av:'AV49TFEmployeeBalance',fld:'vTFEMPLOYEEBALANCE',pic:'Z9.9'},{av:'AV50TFEmployeeBalance_To',fld:'vTFEMPLOYEEBALANCE_TO',pic:'Z9.9'},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV99Udparg14',fld:'vUDPARG14',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV68ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV58IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV60IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV80InviteEmployee',fld:'vINVITEEMPLOYEE',pic:'',hsh:true},{av:'AV65IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'Ddo_grid_Sortedstatus',ctrl:'DDO_GRID',prop:'SortedStatus'},{av:'Ddo_grid_Selectedvalue_set',ctrl:'DDO_GRID',prop:'SelectedValue_set'},{av:'Ddo_grid_Filteredtext_set',ctrl:'DDO_GRID',prop:'FilteredText_set'},{av:'Ddo_grid_Filteredtextto_set',ctrl:'DDO_GRID',prop:'FilteredTextTo_set'}]}");
          setEventMetadata("VINVITE.CLICK","{handler:'E212V2',iparms:[{av:'A106EmployeeId',fld:'EMPLOYEEID',pic:'ZZZZZZZZZ9',hsh:true}]");
          setEventMetadata("VINVITE.CLICK",",oparms:[]}");
          setEventMetadata("VALID_COMPANYID","{handler:'Valid_Companyid',iparms:[]");
@@ -3393,8 +3393,8 @@ namespace GeneXus.Programs {
          AV87Employeewwds_4_tfemployeename = "";
          AV90Employeewwds_7_tfemployeeemail_sel = "";
          AV89Employeewwds_6_tfemployeeemail = "";
-         H002V2_A147EmployeeBalance = new short[1] ;
-         H002V2_A146EmployeeVactionDays = new short[1] ;
+         H002V2_A147EmployeeBalance = new decimal[1] ;
+         H002V2_A146EmployeeVactionDays = new decimal[1] ;
          H002V2_A112EmployeeIsActive = new bool[] {false} ;
          H002V2_A111GAMUserGUID = new string[] {""} ;
          H002V2_A110EmployeeIsManager = new bool[] {false} ;
@@ -3469,27 +3469,17 @@ namespace GeneXus.Programs {
       private short AV30ManageFiltersExecutionStep ;
       private short AV43TFEmployeeIsManager_Sel ;
       private short AV46TFEmployeeIsActive_Sel ;
-      private short AV47TFEmployeeVactionDays ;
-      private short AV48TFEmployeeVactionDays_To ;
-      private short AV49TFEmployeeBalance ;
-      private short AV50TFEmployeeBalance_To ;
       private short AV17OrderedBy ;
       private short initialized ;
       private short gxajaxcallmode ;
       private short wbEnd ;
       private short wbStart ;
-      private short A146EmployeeVactionDays ;
-      private short A147EmployeeBalance ;
       private short nDonePA ;
       private short gxcookieaux ;
       private short subGrid_Backcolorstyle ;
       private short subGrid_Sortable ;
       private short AV91Employeewwds_8_tfemployeeismanager_sel ;
       private short AV92Employeewwds_9_tfemployeeisactive_sel ;
-      private short AV93Employeewwds_10_tfemployeevactiondays ;
-      private short AV94Employeewwds_11_tfemployeevactiondays_to ;
-      private short AV95Employeewwds_12_tfemployeebalance ;
-      private short AV96Employeewwds_13_tfemployeebalance_to ;
       private short nGXWrapped ;
       private short subGrid_Backstyle ;
       private short subGrid_Titlebackstyle ;
@@ -3547,6 +3537,16 @@ namespace GeneXus.Programs {
       private long GRID_nCurrentRecord ;
       private long AV84Udparg2 ;
       private long GRID_nRecordCount ;
+      private decimal AV47TFEmployeeVactionDays ;
+      private decimal AV48TFEmployeeVactionDays_To ;
+      private decimal AV49TFEmployeeBalance ;
+      private decimal AV50TFEmployeeBalance_To ;
+      private decimal A146EmployeeVactionDays ;
+      private decimal A147EmployeeBalance ;
+      private decimal AV93Employeewwds_10_tfemployeevactiondays ;
+      private decimal AV94Employeewwds_11_tfemployeevactiondays_to ;
+      private decimal AV95Employeewwds_12_tfemployeebalance ;
+      private decimal AV96Employeewwds_13_tfemployeebalance_to ;
       private string Gridpaginationbar_Selectedpage ;
       private string Ddo_grid_Activeeventkey ;
       private string Ddo_grid_Selectedvalue_get ;
@@ -3764,8 +3764,8 @@ namespace GeneXus.Programs {
       private GXCheckbox chkEmployeeIsManager ;
       private GXCheckbox chkEmployeeIsActive ;
       private IDataStoreProvider pr_default ;
-      private short[] H002V2_A147EmployeeBalance ;
-      private short[] H002V2_A146EmployeeVactionDays ;
+      private decimal[] H002V2_A147EmployeeBalance ;
+      private decimal[] H002V2_A146EmployeeVactionDays ;
       private bool[] H002V2_A112EmployeeIsActive ;
       private string[] H002V2_A111GAMUserGUID ;
       private bool[] H002V2_A110EmployeeIsManager ;
@@ -3813,14 +3813,14 @@ namespace GeneXus.Programs {
                                              string AV89Employeewwds_6_tfemployeeemail ,
                                              short AV91Employeewwds_8_tfemployeeismanager_sel ,
                                              short AV92Employeewwds_9_tfemployeeisactive_sel ,
-                                             short AV93Employeewwds_10_tfemployeevactiondays ,
-                                             short AV94Employeewwds_11_tfemployeevactiondays_to ,
-                                             short AV95Employeewwds_12_tfemployeebalance ,
-                                             short AV96Employeewwds_13_tfemployeebalance_to ,
+                                             decimal AV93Employeewwds_10_tfemployeevactiondays ,
+                                             decimal AV94Employeewwds_11_tfemployeevactiondays_to ,
+                                             decimal AV95Employeewwds_12_tfemployeebalance ,
+                                             decimal AV96Employeewwds_13_tfemployeebalance_to ,
                                              string A148EmployeeName ,
                                              string A109EmployeeEmail ,
-                                             short A146EmployeeVactionDays ,
-                                             short A147EmployeeBalance ,
+                                             decimal A146EmployeeVactionDays ,
+                                             decimal A147EmployeeBalance ,
                                              bool A110EmployeeIsManager ,
                                              bool A112EmployeeIsActive ,
                                              short AV17OrderedBy ,
@@ -3842,7 +3842,7 @@ namespace GeneXus.Programs {
          AddWhere(sWhereString, "(Not ( :AV83Udparg1) or ( T1.CompanyId = :AV84Udparg2))");
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV86Employeewwds_3_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( LOWER(T1.EmployeeName) like '%' || LOWER(:lV86Employeewwds_3_filterfulltext)) or ( LOWER(T1.EmployeeEmail) like '%' || LOWER(:lV86Employeewwds_3_filterfulltext)) or ( SUBSTR(TO_CHAR(T1.EmployeeVactionDays,'9999'), 2) like '%' || :lV86Employeewwds_3_filterfulltext) or ( SUBSTR(TO_CHAR(T1.EmployeeBalance,'9999'), 2) like '%' || :lV86Employeewwds_3_filterfulltext))");
+            AddWhere(sWhereString, "(( LOWER(T1.EmployeeName) like '%' || LOWER(:lV86Employeewwds_3_filterfulltext)) or ( LOWER(T1.EmployeeEmail) like '%' || LOWER(:lV86Employeewwds_3_filterfulltext)) or ( SUBSTR(TO_CHAR(T1.EmployeeVactionDays,'90.9'), 2) like '%' || :lV86Employeewwds_3_filterfulltext) or ( SUBSTR(TO_CHAR(T1.EmployeeBalance,'90.9'), 2) like '%' || :lV86Employeewwds_3_filterfulltext))");
          }
          else
          {
@@ -3907,7 +3907,7 @@ namespace GeneXus.Programs {
          {
             AddWhere(sWhereString, "(T1.EmployeeIsActive = FALSE)");
          }
-         if ( ! (0==AV93Employeewwds_10_tfemployeevactiondays) )
+         if ( ! (Convert.ToDecimal(0)==AV93Employeewwds_10_tfemployeevactiondays) )
          {
             AddWhere(sWhereString, "(T1.EmployeeVactionDays >= :AV93Employeewwds_10_tfemployeevactiondays)");
          }
@@ -3915,7 +3915,7 @@ namespace GeneXus.Programs {
          {
             GXv_int9[10] = 1;
          }
-         if ( ! (0==AV94Employeewwds_11_tfemployeevactiondays_to) )
+         if ( ! (Convert.ToDecimal(0)==AV94Employeewwds_11_tfemployeevactiondays_to) )
          {
             AddWhere(sWhereString, "(T1.EmployeeVactionDays <= :AV94Employeewwds_11_tfemployeevactiondays_to)");
          }
@@ -3923,7 +3923,7 @@ namespace GeneXus.Programs {
          {
             GXv_int9[11] = 1;
          }
-         if ( ! (0==AV95Employeewwds_12_tfemployeebalance) )
+         if ( ! (Convert.ToDecimal(0)==AV95Employeewwds_12_tfemployeebalance) )
          {
             AddWhere(sWhereString, "(T1.EmployeeBalance >= :AV95Employeewwds_12_tfemployeebalance)");
          }
@@ -3931,7 +3931,7 @@ namespace GeneXus.Programs {
          {
             GXv_int9[12] = 1;
          }
-         if ( ! (0==AV96Employeewwds_13_tfemployeebalance_to) )
+         if ( ! (Convert.ToDecimal(0)==AV96Employeewwds_13_tfemployeebalance_to) )
          {
             AddWhere(sWhereString, "(T1.EmployeeBalance <= :AV96Employeewwds_13_tfemployeebalance_to)");
          }
@@ -4015,14 +4015,14 @@ namespace GeneXus.Programs {
                                              string AV89Employeewwds_6_tfemployeeemail ,
                                              short AV91Employeewwds_8_tfemployeeismanager_sel ,
                                              short AV92Employeewwds_9_tfemployeeisactive_sel ,
-                                             short AV93Employeewwds_10_tfemployeevactiondays ,
-                                             short AV94Employeewwds_11_tfemployeevactiondays_to ,
-                                             short AV95Employeewwds_12_tfemployeebalance ,
-                                             short AV96Employeewwds_13_tfemployeebalance_to ,
+                                             decimal AV93Employeewwds_10_tfemployeevactiondays ,
+                                             decimal AV94Employeewwds_11_tfemployeevactiondays_to ,
+                                             decimal AV95Employeewwds_12_tfemployeebalance ,
+                                             decimal AV96Employeewwds_13_tfemployeebalance_to ,
                                              string A148EmployeeName ,
                                              string A109EmployeeEmail ,
-                                             short A146EmployeeVactionDays ,
-                                             short A147EmployeeBalance ,
+                                             decimal A146EmployeeVactionDays ,
+                                             decimal A147EmployeeBalance ,
                                              bool A110EmployeeIsManager ,
                                              bool A112EmployeeIsActive ,
                                              short AV17OrderedBy ,
@@ -4039,7 +4039,7 @@ namespace GeneXus.Programs {
          AddWhere(sWhereString, "(Not ( :AV83Udparg1) or ( T1.CompanyId = :AV84Udparg2))");
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV86Employeewwds_3_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( LOWER(T1.EmployeeName) like '%' || LOWER(:lV86Employeewwds_3_filterfulltext)) or ( LOWER(T1.EmployeeEmail) like '%' || LOWER(:lV86Employeewwds_3_filterfulltext)) or ( SUBSTR(TO_CHAR(T1.EmployeeVactionDays,'9999'), 2) like '%' || :lV86Employeewwds_3_filterfulltext) or ( SUBSTR(TO_CHAR(T1.EmployeeBalance,'9999'), 2) like '%' || :lV86Employeewwds_3_filterfulltext))");
+            AddWhere(sWhereString, "(( LOWER(T1.EmployeeName) like '%' || LOWER(:lV86Employeewwds_3_filterfulltext)) or ( LOWER(T1.EmployeeEmail) like '%' || LOWER(:lV86Employeewwds_3_filterfulltext)) or ( SUBSTR(TO_CHAR(T1.EmployeeVactionDays,'90.9'), 2) like '%' || :lV86Employeewwds_3_filterfulltext) or ( SUBSTR(TO_CHAR(T1.EmployeeBalance,'90.9'), 2) like '%' || :lV86Employeewwds_3_filterfulltext))");
          }
          else
          {
@@ -4104,7 +4104,7 @@ namespace GeneXus.Programs {
          {
             AddWhere(sWhereString, "(T1.EmployeeIsActive = FALSE)");
          }
-         if ( ! (0==AV93Employeewwds_10_tfemployeevactiondays) )
+         if ( ! (Convert.ToDecimal(0)==AV93Employeewwds_10_tfemployeevactiondays) )
          {
             AddWhere(sWhereString, "(T1.EmployeeVactionDays >= :AV93Employeewwds_10_tfemployeevactiondays)");
          }
@@ -4112,7 +4112,7 @@ namespace GeneXus.Programs {
          {
             GXv_int11[10] = 1;
          }
-         if ( ! (0==AV94Employeewwds_11_tfemployeevactiondays_to) )
+         if ( ! (Convert.ToDecimal(0)==AV94Employeewwds_11_tfemployeevactiondays_to) )
          {
             AddWhere(sWhereString, "(T1.EmployeeVactionDays <= :AV94Employeewwds_11_tfemployeevactiondays_to)");
          }
@@ -4120,7 +4120,7 @@ namespace GeneXus.Programs {
          {
             GXv_int11[11] = 1;
          }
-         if ( ! (0==AV95Employeewwds_12_tfemployeebalance) )
+         if ( ! (Convert.ToDecimal(0)==AV95Employeewwds_12_tfemployeebalance) )
          {
             AddWhere(sWhereString, "(T1.EmployeeBalance >= :AV95Employeewwds_12_tfemployeebalance)");
          }
@@ -4128,7 +4128,7 @@ namespace GeneXus.Programs {
          {
             GXv_int11[12] = 1;
          }
-         if ( ! (0==AV96Employeewwds_13_tfemployeebalance_to) )
+         if ( ! (Convert.ToDecimal(0)==AV96Employeewwds_13_tfemployeebalance_to) )
          {
             AddWhere(sWhereString, "(T1.EmployeeBalance <= :AV96Employeewwds_13_tfemployeebalance_to)");
          }
@@ -4209,9 +4209,9 @@ namespace GeneXus.Programs {
          switch ( cursor )
          {
                case 0 :
-                     return conditional_H002V2(context, (long)dynConstraints[0] , (GxSimpleCollection<long>)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (short)dynConstraints[7] , (short)dynConstraints[8] , (short)dynConstraints[9] , (short)dynConstraints[10] , (short)dynConstraints[11] , (short)dynConstraints[12] , (string)dynConstraints[13] , (string)dynConstraints[14] , (short)dynConstraints[15] , (short)dynConstraints[16] , (bool)dynConstraints[17] , (bool)dynConstraints[18] , (short)dynConstraints[19] , (bool)dynConstraints[20] , (bool)dynConstraints[21] , (long)dynConstraints[22] , (long)dynConstraints[23] );
+                     return conditional_H002V2(context, (long)dynConstraints[0] , (GxSimpleCollection<long>)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (short)dynConstraints[7] , (short)dynConstraints[8] , (decimal)dynConstraints[9] , (decimal)dynConstraints[10] , (decimal)dynConstraints[11] , (decimal)dynConstraints[12] , (string)dynConstraints[13] , (string)dynConstraints[14] , (decimal)dynConstraints[15] , (decimal)dynConstraints[16] , (bool)dynConstraints[17] , (bool)dynConstraints[18] , (short)dynConstraints[19] , (bool)dynConstraints[20] , (bool)dynConstraints[21] , (long)dynConstraints[22] , (long)dynConstraints[23] );
                case 1 :
-                     return conditional_H002V3(context, (long)dynConstraints[0] , (GxSimpleCollection<long>)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (short)dynConstraints[7] , (short)dynConstraints[8] , (short)dynConstraints[9] , (short)dynConstraints[10] , (short)dynConstraints[11] , (short)dynConstraints[12] , (string)dynConstraints[13] , (string)dynConstraints[14] , (short)dynConstraints[15] , (short)dynConstraints[16] , (bool)dynConstraints[17] , (bool)dynConstraints[18] , (short)dynConstraints[19] , (bool)dynConstraints[20] , (bool)dynConstraints[21] , (long)dynConstraints[22] , (long)dynConstraints[23] );
+                     return conditional_H002V3(context, (long)dynConstraints[0] , (GxSimpleCollection<long>)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (short)dynConstraints[7] , (short)dynConstraints[8] , (decimal)dynConstraints[9] , (decimal)dynConstraints[10] , (decimal)dynConstraints[11] , (decimal)dynConstraints[12] , (string)dynConstraints[13] , (string)dynConstraints[14] , (decimal)dynConstraints[15] , (decimal)dynConstraints[16] , (bool)dynConstraints[17] , (bool)dynConstraints[18] , (short)dynConstraints[19] , (bool)dynConstraints[20] , (bool)dynConstraints[21] , (long)dynConstraints[22] , (long)dynConstraints[23] );
          }
          return base.getDynamicStatement(cursor, context, dynConstraints);
       }
@@ -4247,10 +4247,10 @@ namespace GeneXus.Programs {
           new ParDef("AV88Employeewwds_5_tfemployeename_sel",GXType.Char,100,0) ,
           new ParDef("lV89Employeewwds_6_tfemployeeemail",GXType.VarChar,100,0) ,
           new ParDef("AV90Employeewwds_7_tfemployeeemail_sel",GXType.VarChar,100,0) ,
-          new ParDef("AV93Employeewwds_10_tfemployeevactiondays",GXType.Int16,4,0) ,
-          new ParDef("AV94Employeewwds_11_tfemployeevactiondays_to",GXType.Int16,4,0) ,
-          new ParDef("AV95Employeewwds_12_tfemployeebalance",GXType.Int16,4,0) ,
-          new ParDef("AV96Employeewwds_13_tfemployeebalance_to",GXType.Int16,4,0) ,
+          new ParDef("AV93Employeewwds_10_tfemployeevactiondays",GXType.Number,4,1) ,
+          new ParDef("AV94Employeewwds_11_tfemployeevactiondays_to",GXType.Number,4,1) ,
+          new ParDef("AV95Employeewwds_12_tfemployeebalance",GXType.Number,4,1) ,
+          new ParDef("AV96Employeewwds_13_tfemployeebalance_to",GXType.Number,4,1) ,
           new ParDef("GXPagingFrom2",GXType.Int32,9,0) ,
           new ParDef("GXPagingTo2",GXType.Int32,9,0) ,
           new ParDef("GXPagingTo2",GXType.Int32,9,0)
@@ -4267,10 +4267,10 @@ namespace GeneXus.Programs {
           new ParDef("AV88Employeewwds_5_tfemployeename_sel",GXType.Char,100,0) ,
           new ParDef("lV89Employeewwds_6_tfemployeeemail",GXType.VarChar,100,0) ,
           new ParDef("AV90Employeewwds_7_tfemployeeemail_sel",GXType.VarChar,100,0) ,
-          new ParDef("AV93Employeewwds_10_tfemployeevactiondays",GXType.Int16,4,0) ,
-          new ParDef("AV94Employeewwds_11_tfemployeevactiondays_to",GXType.Int16,4,0) ,
-          new ParDef("AV95Employeewwds_12_tfemployeebalance",GXType.Int16,4,0) ,
-          new ParDef("AV96Employeewwds_13_tfemployeebalance_to",GXType.Int16,4,0)
+          new ParDef("AV93Employeewwds_10_tfemployeevactiondays",GXType.Number,4,1) ,
+          new ParDef("AV94Employeewwds_11_tfemployeevactiondays_to",GXType.Number,4,1) ,
+          new ParDef("AV95Employeewwds_12_tfemployeebalance",GXType.Number,4,1) ,
+          new ParDef("AV96Employeewwds_13_tfemployeebalance_to",GXType.Number,4,1)
           };
           def= new CursorDef[] {
               new CursorDef("H002V2", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH002V2,11, GxCacheFrequency.OFF ,true,false )
@@ -4287,8 +4287,8 @@ namespace GeneXus.Programs {
        switch ( cursor )
        {
              case 0 :
-                ((short[]) buf[0])[0] = rslt.getShort(1);
-                ((short[]) buf[1])[0] = rslt.getShort(2);
+                ((decimal[]) buf[0])[0] = rslt.getDecimal(1);
+                ((decimal[]) buf[1])[0] = rslt.getDecimal(2);
                 ((bool[]) buf[2])[0] = rslt.getBool(3);
                 ((string[]) buf[3])[0] = rslt.getVarchar(4);
                 ((bool[]) buf[4])[0] = rslt.getBool(5);

@@ -189,7 +189,7 @@ namespace GeneXus.Programs {
          AV18FilterFullText = GetPar( "FilterFullText");
          AV28ManageFiltersExecutionStep = (short)(Math.Round(NumberUtil.Val( GetPar( "ManageFiltersExecutionStep"), "."), 18, MidpointRounding.ToEven));
          ajax_req_read_hidden_sdt(GetNextPar( ), AV23ColumnsSelector);
-         AV74Pgmname = GetPar( "Pgmname");
+         AV76Pgmname = GetPar( "Pgmname");
          AV29TFEmployeeName = GetPar( "TFEmployeeName");
          AV30TFEmployeeName_Sel = GetPar( "TFEmployeeName_Sel");
          AV31TFLeaveTypeName = GetPar( "TFLeaveTypeName");
@@ -203,9 +203,11 @@ namespace GeneXus.Programs {
          AV66TFLeaveRequestHalfDay_Sel = GetPar( "TFLeaveRequestHalfDay_Sel");
          AV48TFLeaveRequestDuration = NumberUtil.Val( GetPar( "TFLeaveRequestDuration"), ".");
          AV49TFLeaveRequestDuration_To = NumberUtil.Val( GetPar( "TFLeaveRequestDuration_To"), ".");
+         AV70TFEmployeeBalance = NumberUtil.Val( GetPar( "TFEmployeeBalance"), ".");
+         AV71TFEmployeeBalance_To = NumberUtil.Val( GetPar( "TFEmployeeBalance_To"), ".");
          A166ProjectManagerId = (long)(Math.Round(NumberUtil.Val( GetPar( "ProjectManagerId"), "."), 18, MidpointRounding.ToEven));
          n166ProjectManagerId = false;
-         AV73Udparg17 = (long)(Math.Round(NumberUtil.Val( GetPar( "Udparg17"), "."), 18, MidpointRounding.ToEven));
+         AV75Udparg19 = (long)(Math.Round(NumberUtil.Val( GetPar( "Udparg19"), "."), 18, MidpointRounding.ToEven));
          A102ProjectId = (long)(Math.Round(NumberUtil.Val( GetPar( "ProjectId"), "."), 18, MidpointRounding.ToEven));
          ajax_req_read_hidden_sdt(GetNextPar( ), AV64ProjectIds);
          AV15OrderedBy = (short)(Math.Round(NumberUtil.Val( GetPar( "OrderedBy"), "."), 18, MidpointRounding.ToEven));
@@ -218,7 +220,7 @@ namespace GeneXus.Programs {
             GxWebError = 1;
             return  ;
          }
-         gxgrGrid_refresh( subGrid_Rows, AV18FilterFullText, AV28ManageFiltersExecutionStep, AV23ColumnsSelector, AV74Pgmname, AV29TFEmployeeName, AV30TFEmployeeName_Sel, AV31TFLeaveTypeName, AV32TFLeaveTypeName_Sel, AV38TFLeaveRequestStartDate, AV39TFLeaveRequestStartDate_To, AV43TFLeaveRequestEndDate, AV44TFLeaveRequestEndDate_To, AV65TFLeaveRequestHalfDay, AV67TFLeaveRequestHalfDayOperator, AV66TFLeaveRequestHalfDay_Sel, AV48TFLeaveRequestDuration, AV49TFLeaveRequestDuration_To, A166ProjectManagerId, AV73Udparg17, A102ProjectId, AV64ProjectIds, AV15OrderedBy, AV16OrderedDsc, sPrefix) ;
+         gxgrGrid_refresh( subGrid_Rows, AV18FilterFullText, AV28ManageFiltersExecutionStep, AV23ColumnsSelector, AV76Pgmname, AV29TFEmployeeName, AV30TFEmployeeName_Sel, AV31TFLeaveTypeName, AV32TFLeaveTypeName_Sel, AV38TFLeaveRequestStartDate, AV39TFLeaveRequestStartDate_To, AV43TFLeaveRequestEndDate, AV44TFLeaveRequestEndDate_To, AV65TFLeaveRequestHalfDay, AV67TFLeaveRequestHalfDayOperator, AV66TFLeaveRequestHalfDay_Sel, AV48TFLeaveRequestDuration, AV49TFLeaveRequestDuration_To, AV70TFEmployeeBalance, AV71TFEmployeeBalance_To, A166ProjectManagerId, AV75Udparg19, A102ProjectId, AV64ProjectIds, AV15OrderedBy, AV16OrderedDsc, sPrefix) ;
          AddString( context.getJSONResponse( )) ;
          /* End function gxgrGrid_refresh_invoke */
       }
@@ -241,7 +243,7 @@ namespace GeneXus.Programs {
             if ( ( GxWebError == 0 ) && ! isAjaxCallMode( ) )
             {
                /* GeneXus formulas. */
-               AV74Pgmname = "LeaveRequestRejected";
+               AV76Pgmname = "LeaveRequestRejected";
                edtavLeaverequestdescriptionvariable_Enabled = 0;
                AssignProp(sPrefix, false, edtavLeaverequestdescriptionvariable_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavLeaverequestdescriptionvariable_Enabled), 5, 0), !bGXsfl_39_Refreshing);
                edtavLeaverequestrejectionreasonvariable_Enabled = 0;
@@ -418,10 +420,10 @@ namespace GeneXus.Programs {
 
       protected void send_integrity_footer_hashes( )
       {
-         GxWebStd.gx_hidden_field( context, sPrefix+"vPGMNAME", StringUtil.RTrim( AV74Pgmname));
-         GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vPGMNAME", GetSecureSignedToken( sPrefix, StringUtil.RTrim( context.localUtil.Format( AV74Pgmname, "")), context));
-         GxWebStd.gx_hidden_field( context, sPrefix+"vUDPARG17", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV73Udparg17), 10, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vUDPARG17", GetSecureSignedToken( sPrefix, context.localUtil.Format( (decimal)(AV73Udparg17), "9999999999"), context));
+         GxWebStd.gx_hidden_field( context, sPrefix+"vPGMNAME", StringUtil.RTrim( AV76Pgmname));
+         GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vPGMNAME", GetSecureSignedToken( sPrefix, StringUtil.RTrim( context.localUtil.Format( AV76Pgmname, "")), context));
+         GxWebStd.gx_hidden_field( context, sPrefix+"vUDPARG19", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV75Udparg19), 10, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vUDPARG19", GetSecureSignedToken( sPrefix, context.localUtil.Format( (decimal)(AV75Udparg19), "9999999999"), context));
          if ( context.isAjaxRequest( ) )
          {
             context.httpAjaxContext.ajax_rsp_assign_sdt_attri(sPrefix, false, sPrefix+"vPROJECTIDS", AV64ProjectIds);
@@ -481,8 +483,8 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, sPrefix+"vDDO_LEAVEREQUESTENDDATEAUXDATE", context.localUtil.DToC( AV45DDO_LeaveRequestEndDateAuxDate, 0, "/"));
          GxWebStd.gx_hidden_field( context, sPrefix+"vDDO_LEAVEREQUESTENDDATEAUXDATETO", context.localUtil.DToC( AV46DDO_LeaveRequestEndDateAuxDateTo, 0, "/"));
          GxWebStd.gx_hidden_field( context, sPrefix+"vMANAGEFILTERSEXECUTIONSTEP", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV28ManageFiltersExecutionStep), 1, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, sPrefix+"vPGMNAME", StringUtil.RTrim( AV74Pgmname));
-         GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vPGMNAME", GetSecureSignedToken( sPrefix, StringUtil.RTrim( context.localUtil.Format( AV74Pgmname, "")), context));
+         GxWebStd.gx_hidden_field( context, sPrefix+"vPGMNAME", StringUtil.RTrim( AV76Pgmname));
+         GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vPGMNAME", GetSecureSignedToken( sPrefix, StringUtil.RTrim( context.localUtil.Format( AV76Pgmname, "")), context));
          GxWebStd.gx_hidden_field( context, sPrefix+"vTFEMPLOYEENAME", StringUtil.RTrim( AV29TFEmployeeName));
          GxWebStd.gx_hidden_field( context, sPrefix+"vTFEMPLOYEENAME_SEL", StringUtil.RTrim( AV30TFEmployeeName_Sel));
          GxWebStd.gx_hidden_field( context, sPrefix+"vTFLEAVETYPENAME", StringUtil.RTrim( AV31TFLeaveTypeName));
@@ -496,9 +498,11 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, sPrefix+"vTFLEAVEREQUESTHALFDAY_SEL", StringUtil.RTrim( AV66TFLeaveRequestHalfDay_Sel));
          GxWebStd.gx_hidden_field( context, sPrefix+"vTFLEAVEREQUESTDURATION", StringUtil.LTrim( StringUtil.NToC( AV48TFLeaveRequestDuration, 4, 1, ".", "")));
          GxWebStd.gx_hidden_field( context, sPrefix+"vTFLEAVEREQUESTDURATION_TO", StringUtil.LTrim( StringUtil.NToC( AV49TFLeaveRequestDuration_To, 4, 1, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"vTFEMPLOYEEBALANCE", StringUtil.LTrim( StringUtil.NToC( AV70TFEmployeeBalance, 4, 1, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"vTFEMPLOYEEBALANCE_TO", StringUtil.LTrim( StringUtil.NToC( AV71TFEmployeeBalance_To, 4, 1, ".", "")));
          GxWebStd.gx_hidden_field( context, sPrefix+"PROJECTMANAGERID", StringUtil.LTrim( StringUtil.NToC( (decimal)(A166ProjectManagerId), 10, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, sPrefix+"vUDPARG17", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV73Udparg17), 10, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vUDPARG17", GetSecureSignedToken( sPrefix, context.localUtil.Format( (decimal)(AV73Udparg17), "9999999999"), context));
+         GxWebStd.gx_hidden_field( context, sPrefix+"vUDPARG19", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV75Udparg19), 10, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vUDPARG19", GetSecureSignedToken( sPrefix, context.localUtil.Format( (decimal)(AV75Udparg19), "9999999999"), context));
          GxWebStd.gx_hidden_field( context, sPrefix+"PROJECTID", StringUtil.LTrim( StringUtil.NToC( (decimal)(A102ProjectId), 10, 0, ".", "")));
          if ( context.isAjaxRequest( ) )
          {
@@ -906,8 +910,8 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, divDdo_leaverequeststartdateauxdates_Internalname, 1, 0, "px", 0, "px", "Invisible", "start", "top", "", "", "div");
             /* Single line edit */
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 66,'" + sPrefix + "',false,'" + sGXsfl_39_idx + "',0)\"";
-            GxWebStd.gx_single_line_edit( context, edtavDdo_leaverequeststartdateauxdatetext_Internalname, AV42DDO_LeaveRequestStartDateAuxDateText, StringUtil.RTrim( context.localUtil.Format( AV42DDO_LeaveRequestStartDateAuxDateText, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,66);\"", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavDdo_leaverequeststartdateauxdatetext_Jsonclick, 0, "Attribute", "", "", "", "", 1, 1, 0, "text", "", 40, "chr", 1, "row", 40, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_LeaveRequestRejected.htm");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 67,'" + sPrefix + "',false,'" + sGXsfl_39_idx + "',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtavDdo_leaverequeststartdateauxdatetext_Internalname, AV42DDO_LeaveRequestStartDateAuxDateText, StringUtil.RTrim( context.localUtil.Format( AV42DDO_LeaveRequestStartDateAuxDateText, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,67);\"", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavDdo_leaverequeststartdateauxdatetext_Jsonclick, 0, "Attribute", "", "", "", "", 1, 1, 0, "text", "", 40, "chr", 1, "row", 40, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_LeaveRequestRejected.htm");
             /* User Defined Control */
             ucTfleaverequeststartdate_rangepicker.SetProperty("Start Date", AV40DDO_LeaveRequestStartDateAuxDate);
             ucTfleaverequeststartdate_rangepicker.SetProperty("End Date", AV41DDO_LeaveRequestStartDateAuxDateTo);
@@ -916,8 +920,8 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, divDdo_leaverequestenddateauxdates_Internalname, 1, 0, "px", 0, "px", "Invisible", "start", "top", "", "", "div");
             /* Single line edit */
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 69,'" + sPrefix + "',false,'" + sGXsfl_39_idx + "',0)\"";
-            GxWebStd.gx_single_line_edit( context, edtavDdo_leaverequestenddateauxdatetext_Internalname, AV47DDO_LeaveRequestEndDateAuxDateText, StringUtil.RTrim( context.localUtil.Format( AV47DDO_LeaveRequestEndDateAuxDateText, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,69);\"", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavDdo_leaverequestenddateauxdatetext_Jsonclick, 0, "Attribute", "", "", "", "", 1, 1, 0, "text", "", 40, "chr", 1, "row", 40, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_LeaveRequestRejected.htm");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 70,'" + sPrefix + "',false,'" + sGXsfl_39_idx + "',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtavDdo_leaverequestenddateauxdatetext_Internalname, AV47DDO_LeaveRequestEndDateAuxDateText, StringUtil.RTrim( context.localUtil.Format( AV47DDO_LeaveRequestEndDateAuxDateText, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,70);\"", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavDdo_leaverequestenddateauxdatetext_Jsonclick, 0, "Attribute", "", "", "", "", 1, 1, 0, "text", "", 40, "chr", 1, "row", 40, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_LeaveRequestRejected.htm");
             /* User Defined Control */
             ucTfleaverequestenddate_rangepicker.SetProperty("Start Date", AV45DDO_LeaveRequestEndDateAuxDate);
             ucTfleaverequestenddate_rangepicker.SetProperty("End Date", AV46DDO_LeaveRequestEndDateAuxDateTo);
@@ -1193,6 +1197,7 @@ namespace GeneXus.Programs {
                               A106EmployeeId = (long)(Math.Round(context.localUtil.CToN( cgiGet( edtEmployeeId_Internalname), ".", ","), 18, MidpointRounding.ToEven));
                               AV69LeaveRequestRejectionReasonVariable = cgiGet( edtavLeaverequestrejectionreasonvariable_Internalname);
                               AssignAttri(sPrefix, false, edtavLeaverequestrejectionreasonvariable_Internalname, AV69LeaveRequestRejectionReasonVariable);
+                              A147EmployeeBalance = context.localUtil.CToN( cgiGet( edtEmployeeBalance_Internalname), ".", ",");
                               sEvtType = StringUtil.Right( sEvt, 1);
                               if ( StringUtil.StrCmp(sEvtType, ".") == 0 )
                               {
@@ -1377,7 +1382,7 @@ namespace GeneXus.Programs {
                                        string AV18FilterFullText ,
                                        short AV28ManageFiltersExecutionStep ,
                                        GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector AV23ColumnsSelector ,
-                                       string AV74Pgmname ,
+                                       string AV76Pgmname ,
                                        string AV29TFEmployeeName ,
                                        string AV30TFEmployeeName_Sel ,
                                        string AV31TFLeaveTypeName ,
@@ -1391,8 +1396,10 @@ namespace GeneXus.Programs {
                                        string AV66TFLeaveRequestHalfDay_Sel ,
                                        decimal AV48TFLeaveRequestDuration ,
                                        decimal AV49TFLeaveRequestDuration_To ,
+                                       decimal AV70TFEmployeeBalance ,
+                                       decimal AV71TFEmployeeBalance_To ,
                                        long A166ProjectManagerId ,
-                                       long AV73Udparg17 ,
+                                       long AV75Udparg19 ,
                                        long A102ProjectId ,
                                        GxSimpleCollection<long> AV64ProjectIds ,
                                        short AV15OrderedBy ,
@@ -1441,7 +1448,7 @@ namespace GeneXus.Programs {
       protected void initialize_formulas( )
       {
          /* GeneXus formulas. */
-         AV74Pgmname = "LeaveRequestRejected";
+         AV76Pgmname = "LeaveRequestRejected";
          edtavLeaverequestdescriptionvariable_Enabled = 0;
          AssignProp(sPrefix, false, edtavLeaverequestdescriptionvariable_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavLeaverequestdescriptionvariable_Enabled), 5, 0), !bGXsfl_39_Refreshing);
          edtavLeaverequestrejectionreasonvariable_Enabled = 0;
@@ -1483,52 +1490,57 @@ namespace GeneXus.Programs {
             pr_default.dynParam(0, new Object[]{ new Object[]{
                                                  A106EmployeeId ,
                                                  AV63EmployeeIds ,
-                                                 AV75Leaverequestrejectedds_3_filterfulltext ,
-                                                 AV77Leaverequestrejectedds_5_tfemployeename_sel ,
-                                                 AV76Leaverequestrejectedds_4_tfemployeename ,
-                                                 AV79Leaverequestrejectedds_7_tfleavetypename_sel ,
-                                                 AV78Leaverequestrejectedds_6_tfleavetypename ,
-                                                 AV80Leaverequestrejectedds_8_tfleaverequeststartdate ,
-                                                 AV81Leaverequestrejectedds_9_tfleaverequeststartdate_to ,
-                                                 AV82Leaverequestrejectedds_10_tfleaverequestenddate ,
-                                                 AV83Leaverequestrejectedds_11_tfleaverequestenddate_to ,
-                                                 AV86Leaverequestrejectedds_14_tfleaverequesthalfday_sel ,
-                                                 AV84Leaverequestrejectedds_12_tfleaverequesthalfday ,
-                                                 AV85Leaverequestrejectedds_13_tfleaverequesthalfdayoperator ,
-                                                 AV87Leaverequestrejectedds_15_tfleaverequestduration ,
-                                                 AV88Leaverequestrejectedds_16_tfleaverequestduration_to ,
+                                                 AV77Leaverequestrejectedds_3_filterfulltext ,
+                                                 AV79Leaverequestrejectedds_5_tfemployeename_sel ,
+                                                 AV78Leaverequestrejectedds_4_tfemployeename ,
+                                                 AV81Leaverequestrejectedds_7_tfleavetypename_sel ,
+                                                 AV80Leaverequestrejectedds_6_tfleavetypename ,
+                                                 AV82Leaverequestrejectedds_8_tfleaverequeststartdate ,
+                                                 AV83Leaverequestrejectedds_9_tfleaverequeststartdate_to ,
+                                                 AV84Leaverequestrejectedds_10_tfleaverequestenddate ,
+                                                 AV85Leaverequestrejectedds_11_tfleaverequestenddate_to ,
+                                                 AV88Leaverequestrejectedds_14_tfleaverequesthalfday_sel ,
+                                                 AV86Leaverequestrejectedds_12_tfleaverequesthalfday ,
+                                                 AV87Leaverequestrejectedds_13_tfleaverequesthalfdayoperator ,
+                                                 AV89Leaverequestrejectedds_15_tfleaverequestduration ,
+                                                 AV90Leaverequestrejectedds_16_tfleaverequestduration_to ,
+                                                 AV91Leaverequestrejectedds_17_tfemployeebalance ,
+                                                 AV92Leaverequestrejectedds_18_tfemployeebalance_to ,
                                                  A148EmployeeName ,
                                                  A125LeaveTypeName ,
                                                  A173LeaveRequestHalfDay ,
                                                  A131LeaveRequestDuration ,
+                                                 A147EmployeeBalance ,
                                                  A129LeaveRequestStartDate ,
                                                  A130LeaveRequestEndDate ,
                                                  AV15OrderedBy ,
                                                  AV16OrderedDsc ,
                                                  A132LeaveRequestStatus ,
-                                                 AV70Udparg1 ,
+                                                 AV72Udparg1 ,
                                                  A100CompanyId ,
-                                                 AV71Udparg2 } ,
+                                                 AV73Udparg2 } ,
                                                  new int[]{
-                                                 TypeConstants.LONG, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.SHORT, TypeConstants.DECIMAL, TypeConstants.DECIMAL, TypeConstants.BOOLEAN, TypeConstants.DECIMAL,
-                                                 TypeConstants.DATE, TypeConstants.DATE, TypeConstants.SHORT, TypeConstants.BOOLEAN, TypeConstants.BOOLEAN, TypeConstants.LONG, TypeConstants.LONG
+                                                 TypeConstants.LONG, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.SHORT, TypeConstants.DECIMAL, TypeConstants.DECIMAL, TypeConstants.DECIMAL, TypeConstants.DECIMAL,
+                                                 TypeConstants.BOOLEAN, TypeConstants.DECIMAL, TypeConstants.DECIMAL, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.SHORT, TypeConstants.BOOLEAN, TypeConstants.BOOLEAN, TypeConstants.LONG, TypeConstants.LONG
                                                  }
             });
-            lV75Leaverequestrejectedds_3_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV75Leaverequestrejectedds_3_filterfulltext), "%", "");
-            lV75Leaverequestrejectedds_3_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV75Leaverequestrejectedds_3_filterfulltext), "%", "");
-            lV75Leaverequestrejectedds_3_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV75Leaverequestrejectedds_3_filterfulltext), "%", "");
-            lV75Leaverequestrejectedds_3_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV75Leaverequestrejectedds_3_filterfulltext), "%", "");
-            lV76Leaverequestrejectedds_4_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV76Leaverequestrejectedds_4_tfemployeename), 100, "%");
-            lV78Leaverequestrejectedds_6_tfleavetypename = StringUtil.PadR( StringUtil.RTrim( AV78Leaverequestrejectedds_6_tfleavetypename), 100, "%");
-            lV84Leaverequestrejectedds_12_tfleaverequesthalfday = StringUtil.PadR( StringUtil.RTrim( AV84Leaverequestrejectedds_12_tfleaverequesthalfday), 20, "%");
+            lV77Leaverequestrejectedds_3_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV77Leaverequestrejectedds_3_filterfulltext), "%", "");
+            lV77Leaverequestrejectedds_3_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV77Leaverequestrejectedds_3_filterfulltext), "%", "");
+            lV77Leaverequestrejectedds_3_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV77Leaverequestrejectedds_3_filterfulltext), "%", "");
+            lV77Leaverequestrejectedds_3_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV77Leaverequestrejectedds_3_filterfulltext), "%", "");
+            lV77Leaverequestrejectedds_3_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV77Leaverequestrejectedds_3_filterfulltext), "%", "");
+            lV78Leaverequestrejectedds_4_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV78Leaverequestrejectedds_4_tfemployeename), 100, "%");
+            lV80Leaverequestrejectedds_6_tfleavetypename = StringUtil.PadR( StringUtil.RTrim( AV80Leaverequestrejectedds_6_tfleavetypename), 100, "%");
+            lV86Leaverequestrejectedds_12_tfleaverequesthalfday = StringUtil.PadR( StringUtil.RTrim( AV86Leaverequestrejectedds_12_tfleaverequesthalfday), 20, "%");
             /* Using cursor H003B2 */
-            pr_default.execute(0, new Object[] {AV70Udparg1, AV71Udparg2, lV75Leaverequestrejectedds_3_filterfulltext, lV75Leaverequestrejectedds_3_filterfulltext, lV75Leaverequestrejectedds_3_filterfulltext, lV75Leaverequestrejectedds_3_filterfulltext, lV76Leaverequestrejectedds_4_tfemployeename, AV77Leaverequestrejectedds_5_tfemployeename_sel, lV78Leaverequestrejectedds_6_tfleavetypename, AV79Leaverequestrejectedds_7_tfleavetypename_sel, AV80Leaverequestrejectedds_8_tfleaverequeststartdate, AV81Leaverequestrejectedds_9_tfleaverequeststartdate_to, AV82Leaverequestrejectedds_10_tfleaverequestenddate, AV83Leaverequestrejectedds_11_tfleaverequestenddate_to, lV84Leaverequestrejectedds_12_tfleaverequesthalfday, AV86Leaverequestrejectedds_14_tfleaverequesthalfday_sel, AV87Leaverequestrejectedds_15_tfleaverequestduration, AV88Leaverequestrejectedds_16_tfleaverequestduration_to, GXPagingFrom2, GXPagingTo2, GXPagingTo2});
+            pr_default.execute(0, new Object[] {AV72Udparg1, AV73Udparg2, lV77Leaverequestrejectedds_3_filterfulltext, lV77Leaverequestrejectedds_3_filterfulltext, lV77Leaverequestrejectedds_3_filterfulltext, lV77Leaverequestrejectedds_3_filterfulltext, lV77Leaverequestrejectedds_3_filterfulltext, lV78Leaverequestrejectedds_4_tfemployeename, AV79Leaverequestrejectedds_5_tfemployeename_sel, lV80Leaverequestrejectedds_6_tfleavetypename, AV81Leaverequestrejectedds_7_tfleavetypename_sel, AV82Leaverequestrejectedds_8_tfleaverequeststartdate, AV83Leaverequestrejectedds_9_tfleaverequeststartdate_to, AV84Leaverequestrejectedds_10_tfleaverequestenddate, AV85Leaverequestrejectedds_11_tfleaverequestenddate_to, lV86Leaverequestrejectedds_12_tfleaverequesthalfday, AV88Leaverequestrejectedds_14_tfleaverequesthalfday_sel, AV89Leaverequestrejectedds_15_tfleaverequestduration, AV90Leaverequestrejectedds_16_tfleaverequestduration_to, AV91Leaverequestrejectedds_17_tfemployeebalance, AV92Leaverequestrejectedds_18_tfemployeebalance_to, GXPagingFrom2, GXPagingTo2, GXPagingTo2});
             nGXsfl_39_idx = 1;
             sGXsfl_39_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_39_idx), 4, 0), 4, "0");
             SubsflControlProps_392( ) ;
             while ( ( (pr_default.getStatus(0) != 101) ) && ( ( ( subGrid_Rows == 0 ) || ( GRID_nCurrentRecord < subGrid_fnc_Recordsperpage( ) ) ) ) )
             {
                A100CompanyId = H003B2_A100CompanyId[0];
+               A147EmployeeBalance = H003B2_A147EmployeeBalance[0];
                A106EmployeeId = H003B2_A106EmployeeId[0];
                A134LeaveRequestRejectionReason = H003B2_A134LeaveRequestRejectionReason[0];
                A133LeaveRequestDescription = H003B2_A133LeaveRequestDescription[0];
@@ -1543,6 +1555,7 @@ namespace GeneXus.Programs {
                A148EmployeeName = H003B2_A148EmployeeName[0];
                A124LeaveTypeId = H003B2_A124LeaveTypeId[0];
                A127LeaveRequestId = H003B2_A127LeaveRequestId[0];
+               A147EmployeeBalance = H003B2_A147EmployeeBalance[0];
                A148EmployeeName = H003B2_A148EmployeeName[0];
                A100CompanyId = H003B2_A100CompanyId[0];
                A125LeaveTypeName = H003B2_A125LeaveTypeName[0];
@@ -1560,10 +1573,10 @@ namespace GeneXus.Programs {
 
       protected void send_integrity_lvl_hashes3B2( )
       {
-         GxWebStd.gx_hidden_field( context, sPrefix+"vPGMNAME", StringUtil.RTrim( AV74Pgmname));
-         GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vPGMNAME", GetSecureSignedToken( sPrefix, StringUtil.RTrim( context.localUtil.Format( AV74Pgmname, "")), context));
-         GxWebStd.gx_hidden_field( context, sPrefix+"vUDPARG17", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV73Udparg17), 10, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vUDPARG17", GetSecureSignedToken( sPrefix, context.localUtil.Format( (decimal)(AV73Udparg17), "9999999999"), context));
+         GxWebStd.gx_hidden_field( context, sPrefix+"vPGMNAME", StringUtil.RTrim( AV76Pgmname));
+         GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vPGMNAME", GetSecureSignedToken( sPrefix, StringUtil.RTrim( context.localUtil.Format( AV76Pgmname, "")), context));
+         GxWebStd.gx_hidden_field( context, sPrefix+"vUDPARG19", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV75Udparg19), 10, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vUDPARG19", GetSecureSignedToken( sPrefix, context.localUtil.Format( (decimal)(AV75Udparg19), "9999999999"), context));
          if ( context.isAjaxRequest( ) )
          {
             context.httpAjaxContext.ajax_rsp_assign_sdt_attri(sPrefix, false, sPrefix+"vPROJECTIDS", AV64ProjectIds);
@@ -1588,67 +1601,73 @@ namespace GeneXus.Programs {
 
       protected int subGrid_fnc_Recordcount( )
       {
-         AV75Leaverequestrejectedds_3_filterfulltext = AV18FilterFullText;
-         AV76Leaverequestrejectedds_4_tfemployeename = AV29TFEmployeeName;
-         AV77Leaverequestrejectedds_5_tfemployeename_sel = AV30TFEmployeeName_Sel;
-         AV78Leaverequestrejectedds_6_tfleavetypename = AV31TFLeaveTypeName;
-         AV79Leaverequestrejectedds_7_tfleavetypename_sel = AV32TFLeaveTypeName_Sel;
-         AV80Leaverequestrejectedds_8_tfleaverequeststartdate = AV38TFLeaveRequestStartDate;
-         AV81Leaverequestrejectedds_9_tfleaverequeststartdate_to = AV39TFLeaveRequestStartDate_To;
-         AV82Leaverequestrejectedds_10_tfleaverequestenddate = AV43TFLeaveRequestEndDate;
-         AV83Leaverequestrejectedds_11_tfleaverequestenddate_to = AV44TFLeaveRequestEndDate_To;
-         AV84Leaverequestrejectedds_12_tfleaverequesthalfday = AV65TFLeaveRequestHalfDay;
-         AV85Leaverequestrejectedds_13_tfleaverequesthalfdayoperator = AV67TFLeaveRequestHalfDayOperator;
-         AV86Leaverequestrejectedds_14_tfleaverequesthalfday_sel = AV66TFLeaveRequestHalfDay_Sel;
-         AV87Leaverequestrejectedds_15_tfleaverequestduration = AV48TFLeaveRequestDuration;
-         AV88Leaverequestrejectedds_16_tfleaverequestduration_to = AV49TFLeaveRequestDuration_To;
-         AV73Udparg17 = new getloggedinemployeeid(context).executeUdp( );
-         AV70Udparg1 = new userhasrole(context).executeUdp(  "Manager");
-         AV71Udparg2 = new getloggedinusercompanyid(context).executeUdp( );
-         AV73Udparg17 = new getloggedinemployeeid(context).executeUdp( );
+         AV77Leaverequestrejectedds_3_filterfulltext = AV18FilterFullText;
+         AV78Leaverequestrejectedds_4_tfemployeename = AV29TFEmployeeName;
+         AV79Leaverequestrejectedds_5_tfemployeename_sel = AV30TFEmployeeName_Sel;
+         AV80Leaverequestrejectedds_6_tfleavetypename = AV31TFLeaveTypeName;
+         AV81Leaverequestrejectedds_7_tfleavetypename_sel = AV32TFLeaveTypeName_Sel;
+         AV82Leaverequestrejectedds_8_tfleaverequeststartdate = AV38TFLeaveRequestStartDate;
+         AV83Leaverequestrejectedds_9_tfleaverequeststartdate_to = AV39TFLeaveRequestStartDate_To;
+         AV84Leaverequestrejectedds_10_tfleaverequestenddate = AV43TFLeaveRequestEndDate;
+         AV85Leaverequestrejectedds_11_tfleaverequestenddate_to = AV44TFLeaveRequestEndDate_To;
+         AV86Leaverequestrejectedds_12_tfleaverequesthalfday = AV65TFLeaveRequestHalfDay;
+         AV87Leaverequestrejectedds_13_tfleaverequesthalfdayoperator = AV67TFLeaveRequestHalfDayOperator;
+         AV88Leaverequestrejectedds_14_tfleaverequesthalfday_sel = AV66TFLeaveRequestHalfDay_Sel;
+         AV89Leaverequestrejectedds_15_tfleaverequestduration = AV48TFLeaveRequestDuration;
+         AV90Leaverequestrejectedds_16_tfleaverequestduration_to = AV49TFLeaveRequestDuration_To;
+         AV91Leaverequestrejectedds_17_tfemployeebalance = AV70TFEmployeeBalance;
+         AV92Leaverequestrejectedds_18_tfemployeebalance_to = AV71TFEmployeeBalance_To;
+         AV75Udparg19 = new getloggedinemployeeid(context).executeUdp( );
+         AV72Udparg1 = new userhasrole(context).executeUdp(  "Manager");
+         AV73Udparg2 = new getloggedinusercompanyid(context).executeUdp( );
+         AV75Udparg19 = new getloggedinemployeeid(context).executeUdp( );
          pr_default.dynParam(1, new Object[]{ new Object[]{
                                               A106EmployeeId ,
                                               AV63EmployeeIds ,
-                                              AV75Leaverequestrejectedds_3_filterfulltext ,
-                                              AV77Leaverequestrejectedds_5_tfemployeename_sel ,
-                                              AV76Leaverequestrejectedds_4_tfemployeename ,
-                                              AV79Leaverequestrejectedds_7_tfleavetypename_sel ,
-                                              AV78Leaverequestrejectedds_6_tfleavetypename ,
-                                              AV80Leaverequestrejectedds_8_tfleaverequeststartdate ,
-                                              AV81Leaverequestrejectedds_9_tfleaverequeststartdate_to ,
-                                              AV82Leaverequestrejectedds_10_tfleaverequestenddate ,
-                                              AV83Leaverequestrejectedds_11_tfleaverequestenddate_to ,
-                                              AV86Leaverequestrejectedds_14_tfleaverequesthalfday_sel ,
-                                              AV84Leaverequestrejectedds_12_tfleaverequesthalfday ,
-                                              AV85Leaverequestrejectedds_13_tfleaverequesthalfdayoperator ,
-                                              AV87Leaverequestrejectedds_15_tfleaverequestduration ,
-                                              AV88Leaverequestrejectedds_16_tfleaverequestduration_to ,
+                                              AV77Leaverequestrejectedds_3_filterfulltext ,
+                                              AV79Leaverequestrejectedds_5_tfemployeename_sel ,
+                                              AV78Leaverequestrejectedds_4_tfemployeename ,
+                                              AV81Leaverequestrejectedds_7_tfleavetypename_sel ,
+                                              AV80Leaverequestrejectedds_6_tfleavetypename ,
+                                              AV82Leaverequestrejectedds_8_tfleaverequeststartdate ,
+                                              AV83Leaverequestrejectedds_9_tfleaverequeststartdate_to ,
+                                              AV84Leaverequestrejectedds_10_tfleaverequestenddate ,
+                                              AV85Leaverequestrejectedds_11_tfleaverequestenddate_to ,
+                                              AV88Leaverequestrejectedds_14_tfleaverequesthalfday_sel ,
+                                              AV86Leaverequestrejectedds_12_tfleaverequesthalfday ,
+                                              AV87Leaverequestrejectedds_13_tfleaverequesthalfdayoperator ,
+                                              AV89Leaverequestrejectedds_15_tfleaverequestduration ,
+                                              AV90Leaverequestrejectedds_16_tfleaverequestduration_to ,
+                                              AV91Leaverequestrejectedds_17_tfemployeebalance ,
+                                              AV92Leaverequestrejectedds_18_tfemployeebalance_to ,
                                               A148EmployeeName ,
                                               A125LeaveTypeName ,
                                               A173LeaveRequestHalfDay ,
                                               A131LeaveRequestDuration ,
+                                              A147EmployeeBalance ,
                                               A129LeaveRequestStartDate ,
                                               A130LeaveRequestEndDate ,
                                               AV15OrderedBy ,
                                               AV16OrderedDsc ,
                                               A132LeaveRequestStatus ,
-                                              AV70Udparg1 ,
+                                              AV72Udparg1 ,
                                               A100CompanyId ,
-                                              AV71Udparg2 } ,
+                                              AV73Udparg2 } ,
                                               new int[]{
-                                              TypeConstants.LONG, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.SHORT, TypeConstants.DECIMAL, TypeConstants.DECIMAL, TypeConstants.BOOLEAN, TypeConstants.DECIMAL,
-                                              TypeConstants.DATE, TypeConstants.DATE, TypeConstants.SHORT, TypeConstants.BOOLEAN, TypeConstants.BOOLEAN, TypeConstants.LONG, TypeConstants.LONG
+                                              TypeConstants.LONG, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.SHORT, TypeConstants.DECIMAL, TypeConstants.DECIMAL, TypeConstants.DECIMAL, TypeConstants.DECIMAL,
+                                              TypeConstants.BOOLEAN, TypeConstants.DECIMAL, TypeConstants.DECIMAL, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.SHORT, TypeConstants.BOOLEAN, TypeConstants.BOOLEAN, TypeConstants.LONG, TypeConstants.LONG
                                               }
          });
-         lV75Leaverequestrejectedds_3_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV75Leaverequestrejectedds_3_filterfulltext), "%", "");
-         lV75Leaverequestrejectedds_3_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV75Leaverequestrejectedds_3_filterfulltext), "%", "");
-         lV75Leaverequestrejectedds_3_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV75Leaverequestrejectedds_3_filterfulltext), "%", "");
-         lV75Leaverequestrejectedds_3_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV75Leaverequestrejectedds_3_filterfulltext), "%", "");
-         lV76Leaverequestrejectedds_4_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV76Leaverequestrejectedds_4_tfemployeename), 100, "%");
-         lV78Leaverequestrejectedds_6_tfleavetypename = StringUtil.PadR( StringUtil.RTrim( AV78Leaverequestrejectedds_6_tfleavetypename), 100, "%");
-         lV84Leaverequestrejectedds_12_tfleaverequesthalfday = StringUtil.PadR( StringUtil.RTrim( AV84Leaverequestrejectedds_12_tfleaverequesthalfday), 20, "%");
+         lV77Leaverequestrejectedds_3_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV77Leaverequestrejectedds_3_filterfulltext), "%", "");
+         lV77Leaverequestrejectedds_3_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV77Leaverequestrejectedds_3_filterfulltext), "%", "");
+         lV77Leaverequestrejectedds_3_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV77Leaverequestrejectedds_3_filterfulltext), "%", "");
+         lV77Leaverequestrejectedds_3_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV77Leaverequestrejectedds_3_filterfulltext), "%", "");
+         lV77Leaverequestrejectedds_3_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV77Leaverequestrejectedds_3_filterfulltext), "%", "");
+         lV78Leaverequestrejectedds_4_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV78Leaverequestrejectedds_4_tfemployeename), 100, "%");
+         lV80Leaverequestrejectedds_6_tfleavetypename = StringUtil.PadR( StringUtil.RTrim( AV80Leaverequestrejectedds_6_tfleavetypename), 100, "%");
+         lV86Leaverequestrejectedds_12_tfleaverequesthalfday = StringUtil.PadR( StringUtil.RTrim( AV86Leaverequestrejectedds_12_tfleaverequesthalfday), 20, "%");
          /* Using cursor H003B3 */
-         pr_default.execute(1, new Object[] {AV70Udparg1, AV71Udparg2, lV75Leaverequestrejectedds_3_filterfulltext, lV75Leaverequestrejectedds_3_filterfulltext, lV75Leaverequestrejectedds_3_filterfulltext, lV75Leaverequestrejectedds_3_filterfulltext, lV76Leaverequestrejectedds_4_tfemployeename, AV77Leaverequestrejectedds_5_tfemployeename_sel, lV78Leaverequestrejectedds_6_tfleavetypename, AV79Leaverequestrejectedds_7_tfleavetypename_sel, AV80Leaverequestrejectedds_8_tfleaverequeststartdate, AV81Leaverequestrejectedds_9_tfleaverequeststartdate_to, AV82Leaverequestrejectedds_10_tfleaverequestenddate, AV83Leaverequestrejectedds_11_tfleaverequestenddate_to, lV84Leaverequestrejectedds_12_tfleaverequesthalfday, AV86Leaverequestrejectedds_14_tfleaverequesthalfday_sel, AV87Leaverequestrejectedds_15_tfleaverequestduration, AV88Leaverequestrejectedds_16_tfleaverequestduration_to});
+         pr_default.execute(1, new Object[] {AV72Udparg1, AV73Udparg2, lV77Leaverequestrejectedds_3_filterfulltext, lV77Leaverequestrejectedds_3_filterfulltext, lV77Leaverequestrejectedds_3_filterfulltext, lV77Leaverequestrejectedds_3_filterfulltext, lV77Leaverequestrejectedds_3_filterfulltext, lV78Leaverequestrejectedds_4_tfemployeename, AV79Leaverequestrejectedds_5_tfemployeename_sel, lV80Leaverequestrejectedds_6_tfleavetypename, AV81Leaverequestrejectedds_7_tfleavetypename_sel, AV82Leaverequestrejectedds_8_tfleaverequeststartdate, AV83Leaverequestrejectedds_9_tfleaverequeststartdate_to, AV84Leaverequestrejectedds_10_tfleaverequestenddate, AV85Leaverequestrejectedds_11_tfleaverequestenddate_to, lV86Leaverequestrejectedds_12_tfleaverequesthalfday, AV88Leaverequestrejectedds_14_tfleaverequesthalfday_sel, AV89Leaverequestrejectedds_15_tfleaverequestduration, AV90Leaverequestrejectedds_16_tfleaverequestduration_to, AV91Leaverequestrejectedds_17_tfemployeebalance, AV92Leaverequestrejectedds_18_tfemployeebalance_to});
          GRID_nRecordCount = H003B3_AGRID_nRecordCount[0];
          pr_default.close(1);
          return (int)(GRID_nRecordCount) ;
@@ -1673,25 +1692,27 @@ namespace GeneXus.Programs {
 
       protected short subgrid_firstpage( )
       {
-         AV75Leaverequestrejectedds_3_filterfulltext = AV18FilterFullText;
-         AV76Leaverequestrejectedds_4_tfemployeename = AV29TFEmployeeName;
-         AV77Leaverequestrejectedds_5_tfemployeename_sel = AV30TFEmployeeName_Sel;
-         AV78Leaverequestrejectedds_6_tfleavetypename = AV31TFLeaveTypeName;
-         AV79Leaverequestrejectedds_7_tfleavetypename_sel = AV32TFLeaveTypeName_Sel;
-         AV80Leaverequestrejectedds_8_tfleaverequeststartdate = AV38TFLeaveRequestStartDate;
-         AV81Leaverequestrejectedds_9_tfleaverequeststartdate_to = AV39TFLeaveRequestStartDate_To;
-         AV82Leaverequestrejectedds_10_tfleaverequestenddate = AV43TFLeaveRequestEndDate;
-         AV83Leaverequestrejectedds_11_tfleaverequestenddate_to = AV44TFLeaveRequestEndDate_To;
-         AV84Leaverequestrejectedds_12_tfleaverequesthalfday = AV65TFLeaveRequestHalfDay;
-         AV85Leaverequestrejectedds_13_tfleaverequesthalfdayoperator = AV67TFLeaveRequestHalfDayOperator;
-         AV86Leaverequestrejectedds_14_tfleaverequesthalfday_sel = AV66TFLeaveRequestHalfDay_Sel;
-         AV87Leaverequestrejectedds_15_tfleaverequestduration = AV48TFLeaveRequestDuration;
-         AV88Leaverequestrejectedds_16_tfleaverequestduration_to = AV49TFLeaveRequestDuration_To;
+         AV77Leaverequestrejectedds_3_filterfulltext = AV18FilterFullText;
+         AV78Leaverequestrejectedds_4_tfemployeename = AV29TFEmployeeName;
+         AV79Leaverequestrejectedds_5_tfemployeename_sel = AV30TFEmployeeName_Sel;
+         AV80Leaverequestrejectedds_6_tfleavetypename = AV31TFLeaveTypeName;
+         AV81Leaverequestrejectedds_7_tfleavetypename_sel = AV32TFLeaveTypeName_Sel;
+         AV82Leaverequestrejectedds_8_tfleaverequeststartdate = AV38TFLeaveRequestStartDate;
+         AV83Leaverequestrejectedds_9_tfleaverequeststartdate_to = AV39TFLeaveRequestStartDate_To;
+         AV84Leaverequestrejectedds_10_tfleaverequestenddate = AV43TFLeaveRequestEndDate;
+         AV85Leaverequestrejectedds_11_tfleaverequestenddate_to = AV44TFLeaveRequestEndDate_To;
+         AV86Leaverequestrejectedds_12_tfleaverequesthalfday = AV65TFLeaveRequestHalfDay;
+         AV87Leaverequestrejectedds_13_tfleaverequesthalfdayoperator = AV67TFLeaveRequestHalfDayOperator;
+         AV88Leaverequestrejectedds_14_tfleaverequesthalfday_sel = AV66TFLeaveRequestHalfDay_Sel;
+         AV89Leaverequestrejectedds_15_tfleaverequestduration = AV48TFLeaveRequestDuration;
+         AV90Leaverequestrejectedds_16_tfleaverequestduration_to = AV49TFLeaveRequestDuration_To;
+         AV91Leaverequestrejectedds_17_tfemployeebalance = AV70TFEmployeeBalance;
+         AV92Leaverequestrejectedds_18_tfemployeebalance_to = AV71TFEmployeeBalance_To;
          GRID_nFirstRecordOnPage = 0;
          GxWebStd.gx_hidden_field( context, sPrefix+"GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV18FilterFullText, AV28ManageFiltersExecutionStep, AV23ColumnsSelector, AV74Pgmname, AV29TFEmployeeName, AV30TFEmployeeName_Sel, AV31TFLeaveTypeName, AV32TFLeaveTypeName_Sel, AV38TFLeaveRequestStartDate, AV39TFLeaveRequestStartDate_To, AV43TFLeaveRequestEndDate, AV44TFLeaveRequestEndDate_To, AV65TFLeaveRequestHalfDay, AV67TFLeaveRequestHalfDayOperator, AV66TFLeaveRequestHalfDay_Sel, AV48TFLeaveRequestDuration, AV49TFLeaveRequestDuration_To, A166ProjectManagerId, AV73Udparg17, A102ProjectId, AV64ProjectIds, AV15OrderedBy, AV16OrderedDsc, sPrefix) ;
+            gxgrGrid_refresh( subGrid_Rows, AV18FilterFullText, AV28ManageFiltersExecutionStep, AV23ColumnsSelector, AV76Pgmname, AV29TFEmployeeName, AV30TFEmployeeName_Sel, AV31TFLeaveTypeName, AV32TFLeaveTypeName_Sel, AV38TFLeaveRequestStartDate, AV39TFLeaveRequestStartDate_To, AV43TFLeaveRequestEndDate, AV44TFLeaveRequestEndDate_To, AV65TFLeaveRequestHalfDay, AV67TFLeaveRequestHalfDayOperator, AV66TFLeaveRequestHalfDay_Sel, AV48TFLeaveRequestDuration, AV49TFLeaveRequestDuration_To, AV70TFEmployeeBalance, AV71TFEmployeeBalance_To, A166ProjectManagerId, AV75Udparg19, A102ProjectId, AV64ProjectIds, AV15OrderedBy, AV16OrderedDsc, sPrefix) ;
          }
          send_integrity_footer_hashes( ) ;
          return 0 ;
@@ -1699,20 +1720,22 @@ namespace GeneXus.Programs {
 
       protected short subgrid_nextpage( )
       {
-         AV75Leaverequestrejectedds_3_filterfulltext = AV18FilterFullText;
-         AV76Leaverequestrejectedds_4_tfemployeename = AV29TFEmployeeName;
-         AV77Leaverequestrejectedds_5_tfemployeename_sel = AV30TFEmployeeName_Sel;
-         AV78Leaverequestrejectedds_6_tfleavetypename = AV31TFLeaveTypeName;
-         AV79Leaverequestrejectedds_7_tfleavetypename_sel = AV32TFLeaveTypeName_Sel;
-         AV80Leaverequestrejectedds_8_tfleaverequeststartdate = AV38TFLeaveRequestStartDate;
-         AV81Leaverequestrejectedds_9_tfleaverequeststartdate_to = AV39TFLeaveRequestStartDate_To;
-         AV82Leaverequestrejectedds_10_tfleaverequestenddate = AV43TFLeaveRequestEndDate;
-         AV83Leaverequestrejectedds_11_tfleaverequestenddate_to = AV44TFLeaveRequestEndDate_To;
-         AV84Leaverequestrejectedds_12_tfleaverequesthalfday = AV65TFLeaveRequestHalfDay;
-         AV85Leaverequestrejectedds_13_tfleaverequesthalfdayoperator = AV67TFLeaveRequestHalfDayOperator;
-         AV86Leaverequestrejectedds_14_tfleaverequesthalfday_sel = AV66TFLeaveRequestHalfDay_Sel;
-         AV87Leaverequestrejectedds_15_tfleaverequestduration = AV48TFLeaveRequestDuration;
-         AV88Leaverequestrejectedds_16_tfleaverequestduration_to = AV49TFLeaveRequestDuration_To;
+         AV77Leaverequestrejectedds_3_filterfulltext = AV18FilterFullText;
+         AV78Leaverequestrejectedds_4_tfemployeename = AV29TFEmployeeName;
+         AV79Leaverequestrejectedds_5_tfemployeename_sel = AV30TFEmployeeName_Sel;
+         AV80Leaverequestrejectedds_6_tfleavetypename = AV31TFLeaveTypeName;
+         AV81Leaverequestrejectedds_7_tfleavetypename_sel = AV32TFLeaveTypeName_Sel;
+         AV82Leaverequestrejectedds_8_tfleaverequeststartdate = AV38TFLeaveRequestStartDate;
+         AV83Leaverequestrejectedds_9_tfleaverequeststartdate_to = AV39TFLeaveRequestStartDate_To;
+         AV84Leaverequestrejectedds_10_tfleaverequestenddate = AV43TFLeaveRequestEndDate;
+         AV85Leaverequestrejectedds_11_tfleaverequestenddate_to = AV44TFLeaveRequestEndDate_To;
+         AV86Leaverequestrejectedds_12_tfleaverequesthalfday = AV65TFLeaveRequestHalfDay;
+         AV87Leaverequestrejectedds_13_tfleaverequesthalfdayoperator = AV67TFLeaveRequestHalfDayOperator;
+         AV88Leaverequestrejectedds_14_tfleaverequesthalfday_sel = AV66TFLeaveRequestHalfDay_Sel;
+         AV89Leaverequestrejectedds_15_tfleaverequestduration = AV48TFLeaveRequestDuration;
+         AV90Leaverequestrejectedds_16_tfleaverequestduration_to = AV49TFLeaveRequestDuration_To;
+         AV91Leaverequestrejectedds_17_tfemployeebalance = AV70TFEmployeeBalance;
+         AV92Leaverequestrejectedds_18_tfemployeebalance_to = AV71TFEmployeeBalance_To;
          GRID_nRecordCount = subGrid_fnc_Recordcount( );
          if ( ( GRID_nRecordCount >= subGrid_fnc_Recordsperpage( ) ) && ( GRID_nEOF == 0 ) )
          {
@@ -1726,7 +1749,7 @@ namespace GeneXus.Programs {
          GridContainer.AddObjectProperty("GRID_nFirstRecordOnPage", GRID_nFirstRecordOnPage);
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV18FilterFullText, AV28ManageFiltersExecutionStep, AV23ColumnsSelector, AV74Pgmname, AV29TFEmployeeName, AV30TFEmployeeName_Sel, AV31TFLeaveTypeName, AV32TFLeaveTypeName_Sel, AV38TFLeaveRequestStartDate, AV39TFLeaveRequestStartDate_To, AV43TFLeaveRequestEndDate, AV44TFLeaveRequestEndDate_To, AV65TFLeaveRequestHalfDay, AV67TFLeaveRequestHalfDayOperator, AV66TFLeaveRequestHalfDay_Sel, AV48TFLeaveRequestDuration, AV49TFLeaveRequestDuration_To, A166ProjectManagerId, AV73Udparg17, A102ProjectId, AV64ProjectIds, AV15OrderedBy, AV16OrderedDsc, sPrefix) ;
+            gxgrGrid_refresh( subGrid_Rows, AV18FilterFullText, AV28ManageFiltersExecutionStep, AV23ColumnsSelector, AV76Pgmname, AV29TFEmployeeName, AV30TFEmployeeName_Sel, AV31TFLeaveTypeName, AV32TFLeaveTypeName_Sel, AV38TFLeaveRequestStartDate, AV39TFLeaveRequestStartDate_To, AV43TFLeaveRequestEndDate, AV44TFLeaveRequestEndDate_To, AV65TFLeaveRequestHalfDay, AV67TFLeaveRequestHalfDayOperator, AV66TFLeaveRequestHalfDay_Sel, AV48TFLeaveRequestDuration, AV49TFLeaveRequestDuration_To, AV70TFEmployeeBalance, AV71TFEmployeeBalance_To, A166ProjectManagerId, AV75Udparg19, A102ProjectId, AV64ProjectIds, AV15OrderedBy, AV16OrderedDsc, sPrefix) ;
          }
          send_integrity_footer_hashes( ) ;
          return (short)(((GRID_nEOF==0) ? 0 : 2)) ;
@@ -1734,20 +1757,22 @@ namespace GeneXus.Programs {
 
       protected short subgrid_previouspage( )
       {
-         AV75Leaverequestrejectedds_3_filterfulltext = AV18FilterFullText;
-         AV76Leaverequestrejectedds_4_tfemployeename = AV29TFEmployeeName;
-         AV77Leaverequestrejectedds_5_tfemployeename_sel = AV30TFEmployeeName_Sel;
-         AV78Leaverequestrejectedds_6_tfleavetypename = AV31TFLeaveTypeName;
-         AV79Leaverequestrejectedds_7_tfleavetypename_sel = AV32TFLeaveTypeName_Sel;
-         AV80Leaverequestrejectedds_8_tfleaverequeststartdate = AV38TFLeaveRequestStartDate;
-         AV81Leaverequestrejectedds_9_tfleaverequeststartdate_to = AV39TFLeaveRequestStartDate_To;
-         AV82Leaverequestrejectedds_10_tfleaverequestenddate = AV43TFLeaveRequestEndDate;
-         AV83Leaverequestrejectedds_11_tfleaverequestenddate_to = AV44TFLeaveRequestEndDate_To;
-         AV84Leaverequestrejectedds_12_tfleaverequesthalfday = AV65TFLeaveRequestHalfDay;
-         AV85Leaverequestrejectedds_13_tfleaverequesthalfdayoperator = AV67TFLeaveRequestHalfDayOperator;
-         AV86Leaverequestrejectedds_14_tfleaverequesthalfday_sel = AV66TFLeaveRequestHalfDay_Sel;
-         AV87Leaverequestrejectedds_15_tfleaverequestduration = AV48TFLeaveRequestDuration;
-         AV88Leaverequestrejectedds_16_tfleaverequestduration_to = AV49TFLeaveRequestDuration_To;
+         AV77Leaverequestrejectedds_3_filterfulltext = AV18FilterFullText;
+         AV78Leaverequestrejectedds_4_tfemployeename = AV29TFEmployeeName;
+         AV79Leaverequestrejectedds_5_tfemployeename_sel = AV30TFEmployeeName_Sel;
+         AV80Leaverequestrejectedds_6_tfleavetypename = AV31TFLeaveTypeName;
+         AV81Leaverequestrejectedds_7_tfleavetypename_sel = AV32TFLeaveTypeName_Sel;
+         AV82Leaverequestrejectedds_8_tfleaverequeststartdate = AV38TFLeaveRequestStartDate;
+         AV83Leaverequestrejectedds_9_tfleaverequeststartdate_to = AV39TFLeaveRequestStartDate_To;
+         AV84Leaverequestrejectedds_10_tfleaverequestenddate = AV43TFLeaveRequestEndDate;
+         AV85Leaverequestrejectedds_11_tfleaverequestenddate_to = AV44TFLeaveRequestEndDate_To;
+         AV86Leaverequestrejectedds_12_tfleaverequesthalfday = AV65TFLeaveRequestHalfDay;
+         AV87Leaverequestrejectedds_13_tfleaverequesthalfdayoperator = AV67TFLeaveRequestHalfDayOperator;
+         AV88Leaverequestrejectedds_14_tfleaverequesthalfday_sel = AV66TFLeaveRequestHalfDay_Sel;
+         AV89Leaverequestrejectedds_15_tfleaverequestduration = AV48TFLeaveRequestDuration;
+         AV90Leaverequestrejectedds_16_tfleaverequestduration_to = AV49TFLeaveRequestDuration_To;
+         AV91Leaverequestrejectedds_17_tfemployeebalance = AV70TFEmployeeBalance;
+         AV92Leaverequestrejectedds_18_tfemployeebalance_to = AV71TFEmployeeBalance_To;
          if ( GRID_nFirstRecordOnPage >= subGrid_fnc_Recordsperpage( ) )
          {
             GRID_nFirstRecordOnPage = (long)(GRID_nFirstRecordOnPage-subGrid_fnc_Recordsperpage( ));
@@ -1759,7 +1784,7 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, sPrefix+"GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV18FilterFullText, AV28ManageFiltersExecutionStep, AV23ColumnsSelector, AV74Pgmname, AV29TFEmployeeName, AV30TFEmployeeName_Sel, AV31TFLeaveTypeName, AV32TFLeaveTypeName_Sel, AV38TFLeaveRequestStartDate, AV39TFLeaveRequestStartDate_To, AV43TFLeaveRequestEndDate, AV44TFLeaveRequestEndDate_To, AV65TFLeaveRequestHalfDay, AV67TFLeaveRequestHalfDayOperator, AV66TFLeaveRequestHalfDay_Sel, AV48TFLeaveRequestDuration, AV49TFLeaveRequestDuration_To, A166ProjectManagerId, AV73Udparg17, A102ProjectId, AV64ProjectIds, AV15OrderedBy, AV16OrderedDsc, sPrefix) ;
+            gxgrGrid_refresh( subGrid_Rows, AV18FilterFullText, AV28ManageFiltersExecutionStep, AV23ColumnsSelector, AV76Pgmname, AV29TFEmployeeName, AV30TFEmployeeName_Sel, AV31TFLeaveTypeName, AV32TFLeaveTypeName_Sel, AV38TFLeaveRequestStartDate, AV39TFLeaveRequestStartDate_To, AV43TFLeaveRequestEndDate, AV44TFLeaveRequestEndDate_To, AV65TFLeaveRequestHalfDay, AV67TFLeaveRequestHalfDayOperator, AV66TFLeaveRequestHalfDay_Sel, AV48TFLeaveRequestDuration, AV49TFLeaveRequestDuration_To, AV70TFEmployeeBalance, AV71TFEmployeeBalance_To, A166ProjectManagerId, AV75Udparg19, A102ProjectId, AV64ProjectIds, AV15OrderedBy, AV16OrderedDsc, sPrefix) ;
          }
          send_integrity_footer_hashes( ) ;
          return 0 ;
@@ -1767,20 +1792,22 @@ namespace GeneXus.Programs {
 
       protected short subgrid_lastpage( )
       {
-         AV75Leaverequestrejectedds_3_filterfulltext = AV18FilterFullText;
-         AV76Leaverequestrejectedds_4_tfemployeename = AV29TFEmployeeName;
-         AV77Leaverequestrejectedds_5_tfemployeename_sel = AV30TFEmployeeName_Sel;
-         AV78Leaverequestrejectedds_6_tfleavetypename = AV31TFLeaveTypeName;
-         AV79Leaverequestrejectedds_7_tfleavetypename_sel = AV32TFLeaveTypeName_Sel;
-         AV80Leaverequestrejectedds_8_tfleaverequeststartdate = AV38TFLeaveRequestStartDate;
-         AV81Leaverequestrejectedds_9_tfleaverequeststartdate_to = AV39TFLeaveRequestStartDate_To;
-         AV82Leaverequestrejectedds_10_tfleaverequestenddate = AV43TFLeaveRequestEndDate;
-         AV83Leaverequestrejectedds_11_tfleaverequestenddate_to = AV44TFLeaveRequestEndDate_To;
-         AV84Leaverequestrejectedds_12_tfleaverequesthalfday = AV65TFLeaveRequestHalfDay;
-         AV85Leaverequestrejectedds_13_tfleaverequesthalfdayoperator = AV67TFLeaveRequestHalfDayOperator;
-         AV86Leaverequestrejectedds_14_tfleaverequesthalfday_sel = AV66TFLeaveRequestHalfDay_Sel;
-         AV87Leaverequestrejectedds_15_tfleaverequestduration = AV48TFLeaveRequestDuration;
-         AV88Leaverequestrejectedds_16_tfleaverequestduration_to = AV49TFLeaveRequestDuration_To;
+         AV77Leaverequestrejectedds_3_filterfulltext = AV18FilterFullText;
+         AV78Leaverequestrejectedds_4_tfemployeename = AV29TFEmployeeName;
+         AV79Leaverequestrejectedds_5_tfemployeename_sel = AV30TFEmployeeName_Sel;
+         AV80Leaverequestrejectedds_6_tfleavetypename = AV31TFLeaveTypeName;
+         AV81Leaverequestrejectedds_7_tfleavetypename_sel = AV32TFLeaveTypeName_Sel;
+         AV82Leaverequestrejectedds_8_tfleaverequeststartdate = AV38TFLeaveRequestStartDate;
+         AV83Leaverequestrejectedds_9_tfleaverequeststartdate_to = AV39TFLeaveRequestStartDate_To;
+         AV84Leaverequestrejectedds_10_tfleaverequestenddate = AV43TFLeaveRequestEndDate;
+         AV85Leaverequestrejectedds_11_tfleaverequestenddate_to = AV44TFLeaveRequestEndDate_To;
+         AV86Leaverequestrejectedds_12_tfleaverequesthalfday = AV65TFLeaveRequestHalfDay;
+         AV87Leaverequestrejectedds_13_tfleaverequesthalfdayoperator = AV67TFLeaveRequestHalfDayOperator;
+         AV88Leaverequestrejectedds_14_tfleaverequesthalfday_sel = AV66TFLeaveRequestHalfDay_Sel;
+         AV89Leaverequestrejectedds_15_tfleaverequestduration = AV48TFLeaveRequestDuration;
+         AV90Leaverequestrejectedds_16_tfleaverequestduration_to = AV49TFLeaveRequestDuration_To;
+         AV91Leaverequestrejectedds_17_tfemployeebalance = AV70TFEmployeeBalance;
+         AV92Leaverequestrejectedds_18_tfemployeebalance_to = AV71TFEmployeeBalance_To;
          GRID_nRecordCount = subGrid_fnc_Recordcount( );
          if ( GRID_nRecordCount > subGrid_fnc_Recordsperpage( ) )
          {
@@ -1800,7 +1827,7 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, sPrefix+"GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV18FilterFullText, AV28ManageFiltersExecutionStep, AV23ColumnsSelector, AV74Pgmname, AV29TFEmployeeName, AV30TFEmployeeName_Sel, AV31TFLeaveTypeName, AV32TFLeaveTypeName_Sel, AV38TFLeaveRequestStartDate, AV39TFLeaveRequestStartDate_To, AV43TFLeaveRequestEndDate, AV44TFLeaveRequestEndDate_To, AV65TFLeaveRequestHalfDay, AV67TFLeaveRequestHalfDayOperator, AV66TFLeaveRequestHalfDay_Sel, AV48TFLeaveRequestDuration, AV49TFLeaveRequestDuration_To, A166ProjectManagerId, AV73Udparg17, A102ProjectId, AV64ProjectIds, AV15OrderedBy, AV16OrderedDsc, sPrefix) ;
+            gxgrGrid_refresh( subGrid_Rows, AV18FilterFullText, AV28ManageFiltersExecutionStep, AV23ColumnsSelector, AV76Pgmname, AV29TFEmployeeName, AV30TFEmployeeName_Sel, AV31TFLeaveTypeName, AV32TFLeaveTypeName_Sel, AV38TFLeaveRequestStartDate, AV39TFLeaveRequestStartDate_To, AV43TFLeaveRequestEndDate, AV44TFLeaveRequestEndDate_To, AV65TFLeaveRequestHalfDay, AV67TFLeaveRequestHalfDayOperator, AV66TFLeaveRequestHalfDay_Sel, AV48TFLeaveRequestDuration, AV49TFLeaveRequestDuration_To, AV70TFEmployeeBalance, AV71TFEmployeeBalance_To, A166ProjectManagerId, AV75Udparg19, A102ProjectId, AV64ProjectIds, AV15OrderedBy, AV16OrderedDsc, sPrefix) ;
          }
          send_integrity_footer_hashes( ) ;
          return 0 ;
@@ -1808,20 +1835,22 @@ namespace GeneXus.Programs {
 
       protected int subgrid_gotopage( int nPageNo )
       {
-         AV75Leaverequestrejectedds_3_filterfulltext = AV18FilterFullText;
-         AV76Leaverequestrejectedds_4_tfemployeename = AV29TFEmployeeName;
-         AV77Leaverequestrejectedds_5_tfemployeename_sel = AV30TFEmployeeName_Sel;
-         AV78Leaverequestrejectedds_6_tfleavetypename = AV31TFLeaveTypeName;
-         AV79Leaverequestrejectedds_7_tfleavetypename_sel = AV32TFLeaveTypeName_Sel;
-         AV80Leaverequestrejectedds_8_tfleaverequeststartdate = AV38TFLeaveRequestStartDate;
-         AV81Leaverequestrejectedds_9_tfleaverequeststartdate_to = AV39TFLeaveRequestStartDate_To;
-         AV82Leaverequestrejectedds_10_tfleaverequestenddate = AV43TFLeaveRequestEndDate;
-         AV83Leaverequestrejectedds_11_tfleaverequestenddate_to = AV44TFLeaveRequestEndDate_To;
-         AV84Leaverequestrejectedds_12_tfleaverequesthalfday = AV65TFLeaveRequestHalfDay;
-         AV85Leaverequestrejectedds_13_tfleaverequesthalfdayoperator = AV67TFLeaveRequestHalfDayOperator;
-         AV86Leaverequestrejectedds_14_tfleaverequesthalfday_sel = AV66TFLeaveRequestHalfDay_Sel;
-         AV87Leaverequestrejectedds_15_tfleaverequestduration = AV48TFLeaveRequestDuration;
-         AV88Leaverequestrejectedds_16_tfleaverequestduration_to = AV49TFLeaveRequestDuration_To;
+         AV77Leaverequestrejectedds_3_filterfulltext = AV18FilterFullText;
+         AV78Leaverequestrejectedds_4_tfemployeename = AV29TFEmployeeName;
+         AV79Leaverequestrejectedds_5_tfemployeename_sel = AV30TFEmployeeName_Sel;
+         AV80Leaverequestrejectedds_6_tfleavetypename = AV31TFLeaveTypeName;
+         AV81Leaverequestrejectedds_7_tfleavetypename_sel = AV32TFLeaveTypeName_Sel;
+         AV82Leaverequestrejectedds_8_tfleaverequeststartdate = AV38TFLeaveRequestStartDate;
+         AV83Leaverequestrejectedds_9_tfleaverequeststartdate_to = AV39TFLeaveRequestStartDate_To;
+         AV84Leaverequestrejectedds_10_tfleaverequestenddate = AV43TFLeaveRequestEndDate;
+         AV85Leaverequestrejectedds_11_tfleaverequestenddate_to = AV44TFLeaveRequestEndDate_To;
+         AV86Leaverequestrejectedds_12_tfleaverequesthalfday = AV65TFLeaveRequestHalfDay;
+         AV87Leaverequestrejectedds_13_tfleaverequesthalfdayoperator = AV67TFLeaveRequestHalfDayOperator;
+         AV88Leaverequestrejectedds_14_tfleaverequesthalfday_sel = AV66TFLeaveRequestHalfDay_Sel;
+         AV89Leaverequestrejectedds_15_tfleaverequestduration = AV48TFLeaveRequestDuration;
+         AV90Leaverequestrejectedds_16_tfleaverequestduration_to = AV49TFLeaveRequestDuration_To;
+         AV91Leaverequestrejectedds_17_tfemployeebalance = AV70TFEmployeeBalance;
+         AV92Leaverequestrejectedds_18_tfemployeebalance_to = AV71TFEmployeeBalance_To;
          if ( nPageNo > 0 )
          {
             GRID_nFirstRecordOnPage = (long)(subGrid_fnc_Recordsperpage( )*(nPageNo-1));
@@ -1833,7 +1862,7 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, sPrefix+"GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV18FilterFullText, AV28ManageFiltersExecutionStep, AV23ColumnsSelector, AV74Pgmname, AV29TFEmployeeName, AV30TFEmployeeName_Sel, AV31TFLeaveTypeName, AV32TFLeaveTypeName_Sel, AV38TFLeaveRequestStartDate, AV39TFLeaveRequestStartDate_To, AV43TFLeaveRequestEndDate, AV44TFLeaveRequestEndDate_To, AV65TFLeaveRequestHalfDay, AV67TFLeaveRequestHalfDayOperator, AV66TFLeaveRequestHalfDay_Sel, AV48TFLeaveRequestDuration, AV49TFLeaveRequestDuration_To, A166ProjectManagerId, AV73Udparg17, A102ProjectId, AV64ProjectIds, AV15OrderedBy, AV16OrderedDsc, sPrefix) ;
+            gxgrGrid_refresh( subGrid_Rows, AV18FilterFullText, AV28ManageFiltersExecutionStep, AV23ColumnsSelector, AV76Pgmname, AV29TFEmployeeName, AV30TFEmployeeName_Sel, AV31TFLeaveTypeName, AV32TFLeaveTypeName_Sel, AV38TFLeaveRequestStartDate, AV39TFLeaveRequestStartDate_To, AV43TFLeaveRequestEndDate, AV44TFLeaveRequestEndDate_To, AV65TFLeaveRequestHalfDay, AV67TFLeaveRequestHalfDayOperator, AV66TFLeaveRequestHalfDay_Sel, AV48TFLeaveRequestDuration, AV49TFLeaveRequestDuration_To, AV70TFEmployeeBalance, AV71TFEmployeeBalance_To, A166ProjectManagerId, AV75Udparg19, A102ProjectId, AV64ProjectIds, AV15OrderedBy, AV16OrderedDsc, sPrefix) ;
          }
          send_integrity_footer_hashes( ) ;
          return (int)(0) ;
@@ -1841,7 +1870,7 @@ namespace GeneXus.Programs {
 
       protected void before_start_formulas( )
       {
-         AV74Pgmname = "LeaveRequestRejected";
+         AV76Pgmname = "LeaveRequestRejected";
          edtavLeaverequestdescriptionvariable_Enabled = 0;
          AssignProp(sPrefix, false, edtavLeaverequestdescriptionvariable_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavLeaverequestdescriptionvariable_Enabled), 5, 0), !bGXsfl_39_Refreshing);
          edtavLeaverequestrejectionreasonvariable_Enabled = 0;
@@ -1872,6 +1901,8 @@ namespace GeneXus.Programs {
          AssignProp(sPrefix, false, edtLeaveRequestRejectionReason_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtLeaveRequestRejectionReason_Enabled), 5, 0), !bGXsfl_39_Refreshing);
          edtEmployeeId_Enabled = 0;
          AssignProp(sPrefix, false, edtEmployeeId_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtEmployeeId_Enabled), 5, 0), !bGXsfl_39_Refreshing);
+         edtEmployeeBalance_Enabled = 0;
+         AssignProp(sPrefix, false, edtEmployeeBalance_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtEmployeeBalance_Enabled), 5, 0), !bGXsfl_39_Refreshing);
          fix_multi_value_controls( ) ;
       }
 
@@ -2022,9 +2053,9 @@ namespace GeneXus.Programs {
             returnInSub = true;
             if (true) return;
          }
-         AV73Udparg17 = new getloggedinemployeeid(context).executeUdp( );
+         AV75Udparg19 = new getloggedinemployeeid(context).executeUdp( );
          /* Using cursor H003B4 */
-         pr_default.execute(2, new Object[] {AV73Udparg17});
+         pr_default.execute(2, new Object[] {AV75Udparg19});
          while ( (pr_default.getStatus(2) != 101) )
          {
             A166ProjectManagerId = H003B4_A166ProjectManagerId[0];
@@ -2170,32 +2201,36 @@ namespace GeneXus.Programs {
          AssignProp(sPrefix, false, edtavLeaverequestdescriptionvariable_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtavLeaverequestdescriptionvariable_Visible), 5, 0), !bGXsfl_39_Refreshing);
          edtavLeaverequestrejectionreasonvariable_Visible = (((GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector_Column)AV23ColumnsSelector.gxTpr_Columns.Item(8)).gxTpr_Isvisible ? 1 : 0);
          AssignProp(sPrefix, false, edtavLeaverequestrejectionreasonvariable_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtavLeaverequestrejectionreasonvariable_Visible), 5, 0), !bGXsfl_39_Refreshing);
+         edtEmployeeBalance_Visible = (((GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector_Column)AV23ColumnsSelector.gxTpr_Columns.Item(9)).gxTpr_Isvisible ? 1 : 0);
+         AssignProp(sPrefix, false, edtEmployeeBalance_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtEmployeeBalance_Visible), 5, 0), !bGXsfl_39_Refreshing);
          AV56GridCurrentPage = subGrid_fnc_Currentpage( );
          AssignAttri(sPrefix, false, "AV56GridCurrentPage", StringUtil.LTrimStr( (decimal)(AV56GridCurrentPage), 10, 0));
          AV57GridPageCount = subGrid_fnc_Pagecount( );
          AssignAttri(sPrefix, false, "AV57GridPageCount", StringUtil.LTrimStr( (decimal)(AV57GridPageCount), 10, 0));
          GXt_char3 = AV58GridAppliedFilters;
-         new GeneXus.Programs.wwpbaseobjects.wwp_getappliedfiltersdescription(context ).execute(  AV74Pgmname, out  GXt_char3) ;
+         new GeneXus.Programs.wwpbaseobjects.wwp_getappliedfiltersdescription(context ).execute(  AV76Pgmname, out  GXt_char3) ;
          AV58GridAppliedFilters = GXt_char3;
          AssignAttri(sPrefix, false, "AV58GridAppliedFilters", AV58GridAppliedFilters);
          edtLeaveRequestHalfDay_Columnheaderclass = "WWColumn hidden-xs";
          AssignProp(sPrefix, false, edtLeaveRequestHalfDay_Internalname, "Columnheaderclass", edtLeaveRequestHalfDay_Columnheaderclass, !bGXsfl_39_Refreshing);
-         AV75Leaverequestrejectedds_3_filterfulltext = AV18FilterFullText;
-         AV76Leaverequestrejectedds_4_tfemployeename = AV29TFEmployeeName;
-         AV77Leaverequestrejectedds_5_tfemployeename_sel = AV30TFEmployeeName_Sel;
-         AV78Leaverequestrejectedds_6_tfleavetypename = AV31TFLeaveTypeName;
-         AV79Leaverequestrejectedds_7_tfleavetypename_sel = AV32TFLeaveTypeName_Sel;
-         AV80Leaverequestrejectedds_8_tfleaverequeststartdate = AV38TFLeaveRequestStartDate;
-         AV81Leaverequestrejectedds_9_tfleaverequeststartdate_to = AV39TFLeaveRequestStartDate_To;
-         AV82Leaverequestrejectedds_10_tfleaverequestenddate = AV43TFLeaveRequestEndDate;
-         AV83Leaverequestrejectedds_11_tfleaverequestenddate_to = AV44TFLeaveRequestEndDate_To;
-         AV84Leaverequestrejectedds_12_tfleaverequesthalfday = AV65TFLeaveRequestHalfDay;
-         AV85Leaverequestrejectedds_13_tfleaverequesthalfdayoperator = AV67TFLeaveRequestHalfDayOperator;
-         AV86Leaverequestrejectedds_14_tfleaverequesthalfday_sel = AV66TFLeaveRequestHalfDay_Sel;
-         AV87Leaverequestrejectedds_15_tfleaverequestduration = AV48TFLeaveRequestDuration;
-         AV88Leaverequestrejectedds_16_tfleaverequestduration_to = AV49TFLeaveRequestDuration_To;
-         AV70Udparg1 = new userhasrole(context).executeUdp(  "Manager");
-         AV71Udparg2 = new getloggedinusercompanyid(context).executeUdp( );
+         AV77Leaverequestrejectedds_3_filterfulltext = AV18FilterFullText;
+         AV78Leaverequestrejectedds_4_tfemployeename = AV29TFEmployeeName;
+         AV79Leaverequestrejectedds_5_tfemployeename_sel = AV30TFEmployeeName_Sel;
+         AV80Leaverequestrejectedds_6_tfleavetypename = AV31TFLeaveTypeName;
+         AV81Leaverequestrejectedds_7_tfleavetypename_sel = AV32TFLeaveTypeName_Sel;
+         AV82Leaverequestrejectedds_8_tfleaverequeststartdate = AV38TFLeaveRequestStartDate;
+         AV83Leaverequestrejectedds_9_tfleaverequeststartdate_to = AV39TFLeaveRequestStartDate_To;
+         AV84Leaverequestrejectedds_10_tfleaverequestenddate = AV43TFLeaveRequestEndDate;
+         AV85Leaverequestrejectedds_11_tfleaverequestenddate_to = AV44TFLeaveRequestEndDate_To;
+         AV86Leaverequestrejectedds_12_tfleaverequesthalfday = AV65TFLeaveRequestHalfDay;
+         AV87Leaverequestrejectedds_13_tfleaverequesthalfdayoperator = AV67TFLeaveRequestHalfDayOperator;
+         AV88Leaverequestrejectedds_14_tfleaverequesthalfday_sel = AV66TFLeaveRequestHalfDay_Sel;
+         AV89Leaverequestrejectedds_15_tfleaverequestduration = AV48TFLeaveRequestDuration;
+         AV90Leaverequestrejectedds_16_tfleaverequestduration_to = AV49TFLeaveRequestDuration_To;
+         AV91Leaverequestrejectedds_17_tfemployeebalance = AV70TFEmployeeBalance;
+         AV92Leaverequestrejectedds_18_tfemployeebalance_to = AV71TFEmployeeBalance_To;
+         AV72Udparg1 = new userhasrole(context).executeUdp(  "Manager");
+         AV73Udparg2 = new getloggedinusercompanyid(context).executeUdp( );
          /*  Sending Event outputs  */
          context.httpAjaxContext.ajax_rsp_assign_sdt_attri(sPrefix, false, "AV23ColumnsSelector", AV23ColumnsSelector);
          context.httpAjaxContext.ajax_rsp_assign_sdt_attri(sPrefix, false, "AV64ProjectIds", AV64ProjectIds);
@@ -2269,16 +2304,16 @@ namespace GeneXus.Programs {
             }
             else if ( StringUtil.StrCmp(Ddo_grid_Selectedcolumn, "LeaveRequestStartDate") == 0 )
             {
-               AV38TFLeaveRequestStartDate = context.localUtil.CToD( Ddo_grid_Filteredtext_get, 1);
+               AV38TFLeaveRequestStartDate = context.localUtil.CToD( Ddo_grid_Filteredtext_get, 2);
                AssignAttri(sPrefix, false, "AV38TFLeaveRequestStartDate", context.localUtil.Format(AV38TFLeaveRequestStartDate, "99/99/99"));
-               AV39TFLeaveRequestStartDate_To = context.localUtil.CToD( Ddo_grid_Filteredtextto_get, 1);
+               AV39TFLeaveRequestStartDate_To = context.localUtil.CToD( Ddo_grid_Filteredtextto_get, 2);
                AssignAttri(sPrefix, false, "AV39TFLeaveRequestStartDate_To", context.localUtil.Format(AV39TFLeaveRequestStartDate_To, "99/99/99"));
             }
             else if ( StringUtil.StrCmp(Ddo_grid_Selectedcolumn, "LeaveRequestEndDate") == 0 )
             {
-               AV43TFLeaveRequestEndDate = context.localUtil.CToD( Ddo_grid_Filteredtext_get, 1);
+               AV43TFLeaveRequestEndDate = context.localUtil.CToD( Ddo_grid_Filteredtext_get, 2);
                AssignAttri(sPrefix, false, "AV43TFLeaveRequestEndDate", context.localUtil.Format(AV43TFLeaveRequestEndDate, "99/99/99"));
-               AV44TFLeaveRequestEndDate_To = context.localUtil.CToD( Ddo_grid_Filteredtextto_get, 1);
+               AV44TFLeaveRequestEndDate_To = context.localUtil.CToD( Ddo_grid_Filteredtextto_get, 2);
                AssignAttri(sPrefix, false, "AV44TFLeaveRequestEndDate_To", context.localUtil.Format(AV44TFLeaveRequestEndDate_To, "99/99/99"));
             }
             else if ( StringUtil.StrCmp(Ddo_grid_Selectedcolumn, "LeaveRequestHalfDay") == 0 )
@@ -2317,6 +2352,13 @@ namespace GeneXus.Programs {
                AssignAttri(sPrefix, false, "AV48TFLeaveRequestDuration", StringUtil.LTrimStr( AV48TFLeaveRequestDuration, 4, 1));
                AV49TFLeaveRequestDuration_To = NumberUtil.Val( Ddo_grid_Filteredtextto_get, ".");
                AssignAttri(sPrefix, false, "AV49TFLeaveRequestDuration_To", StringUtil.LTrimStr( AV49TFLeaveRequestDuration_To, 4, 1));
+            }
+            else if ( StringUtil.StrCmp(Ddo_grid_Selectedcolumn, "EmployeeBalance") == 0 )
+            {
+               AV70TFEmployeeBalance = NumberUtil.Val( Ddo_grid_Filteredtext_get, ".");
+               AssignAttri(sPrefix, false, "AV70TFEmployeeBalance", StringUtil.LTrimStr( AV70TFEmployeeBalance, 4, 1));
+               AV71TFEmployeeBalance_To = NumberUtil.Val( Ddo_grid_Filteredtextto_get, ".");
+               AssignAttri(sPrefix, false, "AV71TFEmployeeBalance_To", StringUtil.LTrimStr( AV71TFEmployeeBalance_To, 4, 1));
             }
             subgrid_firstpage( ) ;
          }
@@ -2412,7 +2454,7 @@ namespace GeneXus.Programs {
                returnInSub = true;
                if (true) return;
             }
-            context.PopUp(formatLink("wwpbaseobjects.savefilteras.aspx", new object[] {UrlEncode(StringUtil.RTrim("LeaveRequestRejectedFilters")),UrlEncode(StringUtil.RTrim(AV74Pgmname+"GridState"))}, new string[] {"UserKey","GridStateKey"}) , new Object[] {});
+            context.PopUp(formatLink("wwpbaseobjects.savefilteras.aspx", new object[] {UrlEncode(StringUtil.RTrim("LeaveRequestRejectedFilters")),UrlEncode(StringUtil.RTrim(AV76Pgmname+"GridState"))}, new string[] {"UserKey","GridStateKey"}) , new Object[] {});
             AV28ManageFiltersExecutionStep = 2;
             AssignAttri(sPrefix, false, "AV28ManageFiltersExecutionStep", StringUtil.Str( (decimal)(AV28ManageFiltersExecutionStep), 1, 0));
             context.DoAjaxRefreshCmp(sPrefix);
@@ -2442,7 +2484,7 @@ namespace GeneXus.Programs {
                   returnInSub = true;
                   if (true) return;
                }
-               new GeneXus.Programs.wwpbaseobjects.savegridstate(context ).execute(  AV74Pgmname+"GridState",  AV27ManageFiltersXml) ;
+               new GeneXus.Programs.wwpbaseobjects.savegridstate(context ).execute(  AV76Pgmname+"GridState",  AV27ManageFiltersXml) ;
                AV13GridState.FromXml(AV27ManageFiltersXml, null, "", "");
                AV15OrderedBy = AV13GridState.gxTpr_Orderedby;
                AssignAttri(sPrefix, false, "AV15OrderedBy", StringUtil.LTrimStr( (decimal)(AV15OrderedBy), 4, 0));
@@ -2511,6 +2553,7 @@ namespace GeneXus.Programs {
          new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV23ColumnsSelector,  "LeaveRequestDuration",  "",  "Request Duration",  true,  "") ;
          new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV23ColumnsSelector,  "&LeaveRequestDescriptionVariable",  "",  "Leave Description",  true,  "") ;
          new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV23ColumnsSelector,  "&LeaveRequestRejectionReasonVariable",  "",  "Rejection Reason",  true,  "") ;
+         new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV23ColumnsSelector,  "EmployeeBalance",  "",  "Vacation Balance",  true,  "") ;
          GXt_char3 = AV22UserCustomValue;
          new GeneXus.Programs.wwpbaseobjects.loadcolumnsselectorstate(context ).execute(  "LeaveRequestRejectedColumnsSelector", out  GXt_char3) ;
          AV22UserCustomValue = GXt_char3;
@@ -2564,6 +2607,10 @@ namespace GeneXus.Programs {
          AssignAttri(sPrefix, false, "AV48TFLeaveRequestDuration", StringUtil.LTrimStr( AV48TFLeaveRequestDuration, 4, 1));
          AV49TFLeaveRequestDuration_To = 0;
          AssignAttri(sPrefix, false, "AV49TFLeaveRequestDuration_To", StringUtil.LTrimStr( AV49TFLeaveRequestDuration_To, 4, 1));
+         AV70TFEmployeeBalance = 0;
+         AssignAttri(sPrefix, false, "AV70TFEmployeeBalance", StringUtil.LTrimStr( AV70TFEmployeeBalance, 4, 1));
+         AV71TFEmployeeBalance_To = 0;
+         AssignAttri(sPrefix, false, "AV71TFEmployeeBalance_To", StringUtil.LTrimStr( AV71TFEmployeeBalance_To, 4, 1));
          Ddo_grid_Selectedvalue_set = "";
          ucDdo_grid.SendProperty(context, sPrefix, false, Ddo_grid_Internalname, "SelectedValue_set", Ddo_grid_Selectedvalue_set);
          Ddo_grid_Filteredtext_set = "";
@@ -2576,13 +2623,13 @@ namespace GeneXus.Programs {
       {
          /* 'LOADGRIDSTATE' Routine */
          returnInSub = false;
-         if ( StringUtil.StrCmp(AV25Session.Get(AV74Pgmname+"GridState"), "") == 0 )
+         if ( StringUtil.StrCmp(AV25Session.Get(AV76Pgmname+"GridState"), "") == 0 )
          {
-            AV13GridState.FromXml(new GeneXus.Programs.wwpbaseobjects.loadgridstate(context).executeUdp(  AV74Pgmname+"GridState"), null, "", "");
+            AV13GridState.FromXml(new GeneXus.Programs.wwpbaseobjects.loadgridstate(context).executeUdp(  AV76Pgmname+"GridState"), null, "", "");
          }
          else
          {
-            AV13GridState.FromXml(AV25Session.Get(AV74Pgmname+"GridState"), null, "", "");
+            AV13GridState.FromXml(AV25Session.Get(AV76Pgmname+"GridState"), null, "", "");
          }
          AV15OrderedBy = AV13GridState.gxTpr_Orderedby;
          AssignAttri(sPrefix, false, "AV15OrderedBy", StringUtil.LTrimStr( (decimal)(AV15OrderedBy), 4, 0));
@@ -2614,10 +2661,10 @@ namespace GeneXus.Programs {
       {
          /* 'LOADREGFILTERSSTATE' Routine */
          returnInSub = false;
-         AV89GXV1 = 1;
-         while ( AV89GXV1 <= AV13GridState.gxTpr_Filtervalues.Count )
+         AV93GXV1 = 1;
+         while ( AV93GXV1 <= AV13GridState.gxTpr_Filtervalues.Count )
          {
-            AV14GridStateFilterValue = ((GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue)AV13GridState.gxTpr_Filtervalues.Item(AV89GXV1));
+            AV14GridStateFilterValue = ((GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue)AV13GridState.gxTpr_Filtervalues.Item(AV93GXV1));
             if ( StringUtil.StrCmp(AV14GridStateFilterValue.gxTpr_Name, "FILTERFULLTEXT") == 0 )
             {
                AV18FilterFullText = AV14GridStateFilterValue.gxTpr_Value;
@@ -2645,16 +2692,16 @@ namespace GeneXus.Programs {
             }
             else if ( StringUtil.StrCmp(AV14GridStateFilterValue.gxTpr_Name, "TFLEAVEREQUESTSTARTDATE") == 0 )
             {
-               AV38TFLeaveRequestStartDate = context.localUtil.CToD( AV14GridStateFilterValue.gxTpr_Value, 1);
+               AV38TFLeaveRequestStartDate = context.localUtil.CToD( AV14GridStateFilterValue.gxTpr_Value, 2);
                AssignAttri(sPrefix, false, "AV38TFLeaveRequestStartDate", context.localUtil.Format(AV38TFLeaveRequestStartDate, "99/99/99"));
-               AV39TFLeaveRequestStartDate_To = context.localUtil.CToD( AV14GridStateFilterValue.gxTpr_Valueto, 1);
+               AV39TFLeaveRequestStartDate_To = context.localUtil.CToD( AV14GridStateFilterValue.gxTpr_Valueto, 2);
                AssignAttri(sPrefix, false, "AV39TFLeaveRequestStartDate_To", context.localUtil.Format(AV39TFLeaveRequestStartDate_To, "99/99/99"));
             }
             else if ( StringUtil.StrCmp(AV14GridStateFilterValue.gxTpr_Name, "TFLEAVEREQUESTENDDATE") == 0 )
             {
-               AV43TFLeaveRequestEndDate = context.localUtil.CToD( AV14GridStateFilterValue.gxTpr_Value, 1);
+               AV43TFLeaveRequestEndDate = context.localUtil.CToD( AV14GridStateFilterValue.gxTpr_Value, 2);
                AssignAttri(sPrefix, false, "AV43TFLeaveRequestEndDate", context.localUtil.Format(AV43TFLeaveRequestEndDate, "99/99/99"));
-               AV44TFLeaveRequestEndDate_To = context.localUtil.CToD( AV14GridStateFilterValue.gxTpr_Valueto, 1);
+               AV44TFLeaveRequestEndDate_To = context.localUtil.CToD( AV14GridStateFilterValue.gxTpr_Valueto, 2);
                AssignAttri(sPrefix, false, "AV44TFLeaveRequestEndDate_To", context.localUtil.Format(AV44TFLeaveRequestEndDate_To, "99/99/99"));
             }
             else if ( StringUtil.StrCmp(AV14GridStateFilterValue.gxTpr_Name, "TFLEAVEREQUESTHALFDAY") == 0 )
@@ -2679,7 +2726,14 @@ namespace GeneXus.Programs {
                AV49TFLeaveRequestDuration_To = NumberUtil.Val( AV14GridStateFilterValue.gxTpr_Valueto, ".");
                AssignAttri(sPrefix, false, "AV49TFLeaveRequestDuration_To", StringUtil.LTrimStr( AV49TFLeaveRequestDuration_To, 4, 1));
             }
-            AV89GXV1 = (int)(AV89GXV1+1);
+            else if ( StringUtil.StrCmp(AV14GridStateFilterValue.gxTpr_Name, "TFEMPLOYEEBALANCE") == 0 )
+            {
+               AV70TFEmployeeBalance = NumberUtil.Val( AV14GridStateFilterValue.gxTpr_Value, ".");
+               AssignAttri(sPrefix, false, "AV70TFEmployeeBalance", StringUtil.LTrimStr( AV70TFEmployeeBalance, 4, 1));
+               AV71TFEmployeeBalance_To = NumberUtil.Val( AV14GridStateFilterValue.gxTpr_Valueto, ".");
+               AssignAttri(sPrefix, false, "AV71TFEmployeeBalance_To", StringUtil.LTrimStr( AV71TFEmployeeBalance_To, 4, 1));
+            }
+            AV93GXV1 = (int)(AV93GXV1+1);
          }
          GXt_char3 = "";
          new GeneXus.Programs.wwpbaseobjects.wwp_getfilterval(context ).execute(  String.IsNullOrEmpty(StringUtil.RTrim( AV30TFEmployeeName_Sel)),  AV30TFEmployeeName_Sel, out  GXt_char3) ;
@@ -2687,7 +2741,7 @@ namespace GeneXus.Programs {
          new GeneXus.Programs.wwpbaseobjects.wwp_getfilterval(context ).execute(  String.IsNullOrEmpty(StringUtil.RTrim( AV32TFLeaveTypeName_Sel)),  AV32TFLeaveTypeName_Sel, out  GXt_char5) ;
          GXt_char6 = "";
          new GeneXus.Programs.wwpbaseobjects.wwp_getfilterval(context ).execute(  String.IsNullOrEmpty(StringUtil.RTrim( AV66TFLeaveRequestHalfDay_Sel)),  AV66TFLeaveRequestHalfDay_Sel, out  GXt_char6) ;
-         Ddo_grid_Selectedvalue_set = GXt_char3+"|"+GXt_char5+"|||"+GXt_char6+"|||";
+         Ddo_grid_Selectedvalue_set = GXt_char3+"|"+GXt_char5+"|||"+GXt_char6+"||||";
          ucDdo_grid.SendProperty(context, sPrefix, false, Ddo_grid_Internalname, "SelectedValue_set", Ddo_grid_Selectedvalue_set);
          GXt_char6 = "";
          new GeneXus.Programs.wwpbaseobjects.wwp_getfilterval(context ).execute(  String.IsNullOrEmpty(StringUtil.RTrim( AV29TFEmployeeName)),  AV29TFEmployeeName, out  GXt_char6) ;
@@ -2695,11 +2749,11 @@ namespace GeneXus.Programs {
          new GeneXus.Programs.wwpbaseobjects.wwp_getfilterval(context ).execute(  String.IsNullOrEmpty(StringUtil.RTrim( AV31TFLeaveTypeName)),  AV31TFLeaveTypeName, out  GXt_char5) ;
          GXt_char3 = "";
          new GeneXus.Programs.wwpbaseobjects.wwp_getfilterval(context ).execute(  !(0==AV67TFLeaveRequestHalfDayOperator)||String.IsNullOrEmpty(StringUtil.RTrim( AV65TFLeaveRequestHalfDay)),  AV65TFLeaveRequestHalfDay, out  GXt_char3) ;
-         Ddo_grid_Filteredtext_set = GXt_char6+"|"+GXt_char5+"|"+((DateTime.MinValue==AV38TFLeaveRequestStartDate) ? "" : context.localUtil.DToC( AV38TFLeaveRequestStartDate, 1, "/"))+"|"+((DateTime.MinValue==AV43TFLeaveRequestEndDate) ? "" : context.localUtil.DToC( AV43TFLeaveRequestEndDate, 1, "/"))+"|"+GXt_char3+"|"+((Convert.ToDecimal(0)==AV48TFLeaveRequestDuration) ? "" : StringUtil.Str( AV48TFLeaveRequestDuration, 4, 1))+"||";
+         Ddo_grid_Filteredtext_set = GXt_char6+"|"+GXt_char5+"|"+((DateTime.MinValue==AV38TFLeaveRequestStartDate) ? "" : context.localUtil.DToC( AV38TFLeaveRequestStartDate, 2, "/"))+"|"+((DateTime.MinValue==AV43TFLeaveRequestEndDate) ? "" : context.localUtil.DToC( AV43TFLeaveRequestEndDate, 2, "/"))+"|"+GXt_char3+"|"+((Convert.ToDecimal(0)==AV48TFLeaveRequestDuration) ? "" : StringUtil.Str( AV48TFLeaveRequestDuration, 4, 1))+"|||"+((Convert.ToDecimal(0)==AV70TFEmployeeBalance) ? "" : StringUtil.Str( AV70TFEmployeeBalance, 4, 1));
          ucDdo_grid.SendProperty(context, sPrefix, false, Ddo_grid_Internalname, "FilteredText_set", Ddo_grid_Filteredtext_set);
-         Ddo_grid_Filteredtextto_set = "||"+((DateTime.MinValue==AV39TFLeaveRequestStartDate_To) ? "" : context.localUtil.DToC( AV39TFLeaveRequestStartDate_To, 1, "/"))+"|"+((DateTime.MinValue==AV44TFLeaveRequestEndDate_To) ? "" : context.localUtil.DToC( AV44TFLeaveRequestEndDate_To, 1, "/"))+"||"+((Convert.ToDecimal(0)==AV49TFLeaveRequestDuration_To) ? "" : StringUtil.Str( AV49TFLeaveRequestDuration_To, 4, 1))+"||";
+         Ddo_grid_Filteredtextto_set = "||"+((DateTime.MinValue==AV39TFLeaveRequestStartDate_To) ? "" : context.localUtil.DToC( AV39TFLeaveRequestStartDate_To, 2, "/"))+"|"+((DateTime.MinValue==AV44TFLeaveRequestEndDate_To) ? "" : context.localUtil.DToC( AV44TFLeaveRequestEndDate_To, 2, "/"))+"||"+((Convert.ToDecimal(0)==AV49TFLeaveRequestDuration_To) ? "" : StringUtil.Str( AV49TFLeaveRequestDuration_To, 4, 1))+"|||"+((Convert.ToDecimal(0)==AV71TFEmployeeBalance_To) ? "" : StringUtil.Str( AV71TFEmployeeBalance_To, 4, 1));
          ucDdo_grid.SendProperty(context, sPrefix, false, Ddo_grid_Internalname, "FilteredTextTo_set", Ddo_grid_Filteredtextto_set);
-         Ddo_grid_Selectedfixedfilter = "||||"+((AV67TFLeaveRequestHalfDayOperator!=1) ? "" : "1")+((AV67TFLeaveRequestHalfDayOperator!=2) ? "" : "2")+"|||";
+         Ddo_grid_Selectedfixedfilter = "||||"+((AV67TFLeaveRequestHalfDayOperator!=1) ? "" : "1")+((AV67TFLeaveRequestHalfDayOperator!=2) ? "" : "2")+"||||";
          ucDdo_grid.SendProperty(context, sPrefix, false, Ddo_grid_Internalname, "SelectedFixedFilter", Ddo_grid_Selectedfixedfilter);
       }
 
@@ -2707,20 +2761,21 @@ namespace GeneXus.Programs {
       {
          /* 'SAVEGRIDSTATE' Routine */
          returnInSub = false;
-         AV13GridState.FromXml(AV25Session.Get(AV74Pgmname+"GridState"), null, "", "");
+         AV13GridState.FromXml(AV25Session.Get(AV76Pgmname+"GridState"), null, "", "");
          AV13GridState.gxTpr_Orderedby = AV15OrderedBy;
          AV13GridState.gxTpr_Ordereddsc = AV16OrderedDsc;
          AV13GridState.gxTpr_Filtervalues.Clear();
          new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV13GridState,  "FILTERFULLTEXT",  "Main filter",  !String.IsNullOrEmpty(StringUtil.RTrim( AV18FilterFullText)),  0,  AV18FilterFullText,  AV18FilterFullText,  false,  "",  "") ;
          new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalueandsel(context ).execute( ref  AV13GridState,  "TFEMPLOYEENAME",  "Employee Name",  !String.IsNullOrEmpty(StringUtil.RTrim( AV29TFEmployeeName)),  0,  AV29TFEmployeeName,  AV29TFEmployeeName,  false,  "",  "",  !String.IsNullOrEmpty(StringUtil.RTrim( AV30TFEmployeeName_Sel)),  AV30TFEmployeeName_Sel,  AV30TFEmployeeName_Sel) ;
          new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalueandsel(context ).execute( ref  AV13GridState,  "TFLEAVETYPENAME",  "Leave Type Name",  !String.IsNullOrEmpty(StringUtil.RTrim( AV31TFLeaveTypeName)),  0,  AV31TFLeaveTypeName,  AV31TFLeaveTypeName,  false,  "",  "",  !String.IsNullOrEmpty(StringUtil.RTrim( AV32TFLeaveTypeName_Sel)),  AV32TFLeaveTypeName_Sel,  AV32TFLeaveTypeName_Sel) ;
-         new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV13GridState,  "TFLEAVEREQUESTSTARTDATE",  "Start Date",  !((DateTime.MinValue==AV38TFLeaveRequestStartDate)&&(DateTime.MinValue==AV39TFLeaveRequestStartDate_To)),  0,  StringUtil.Trim( context.localUtil.DToC( AV38TFLeaveRequestStartDate, 1, "/")),  ((DateTime.MinValue==AV38TFLeaveRequestStartDate) ? "" : StringUtil.Trim( context.localUtil.Format( AV38TFLeaveRequestStartDate, "99/99/99"))),  true,  StringUtil.Trim( context.localUtil.DToC( AV39TFLeaveRequestStartDate_To, 1, "/")),  ((DateTime.MinValue==AV39TFLeaveRequestStartDate_To) ? "" : StringUtil.Trim( context.localUtil.Format( AV39TFLeaveRequestStartDate_To, "99/99/99")))) ;
-         new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV13GridState,  "TFLEAVEREQUESTENDDATE",  "End Date",  !((DateTime.MinValue==AV43TFLeaveRequestEndDate)&&(DateTime.MinValue==AV44TFLeaveRequestEndDate_To)),  0,  StringUtil.Trim( context.localUtil.DToC( AV43TFLeaveRequestEndDate, 1, "/")),  ((DateTime.MinValue==AV43TFLeaveRequestEndDate) ? "" : StringUtil.Trim( context.localUtil.Format( AV43TFLeaveRequestEndDate, "99/99/99"))),  true,  StringUtil.Trim( context.localUtil.DToC( AV44TFLeaveRequestEndDate_To, 1, "/")),  ((DateTime.MinValue==AV44TFLeaveRequestEndDate_To) ? "" : StringUtil.Trim( context.localUtil.Format( AV44TFLeaveRequestEndDate_To, "99/99/99")))) ;
+         new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV13GridState,  "TFLEAVEREQUESTSTARTDATE",  "Start Date",  !((DateTime.MinValue==AV38TFLeaveRequestStartDate)&&(DateTime.MinValue==AV39TFLeaveRequestStartDate_To)),  0,  StringUtil.Trim( context.localUtil.DToC( AV38TFLeaveRequestStartDate, 2, "/")),  ((DateTime.MinValue==AV38TFLeaveRequestStartDate) ? "" : StringUtil.Trim( context.localUtil.Format( AV38TFLeaveRequestStartDate, "99/99/99"))),  true,  StringUtil.Trim( context.localUtil.DToC( AV39TFLeaveRequestStartDate_To, 2, "/")),  ((DateTime.MinValue==AV39TFLeaveRequestStartDate_To) ? "" : StringUtil.Trim( context.localUtil.Format( AV39TFLeaveRequestStartDate_To, "99/99/99")))) ;
+         new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV13GridState,  "TFLEAVEREQUESTENDDATE",  "End Date",  !((DateTime.MinValue==AV43TFLeaveRequestEndDate)&&(DateTime.MinValue==AV44TFLeaveRequestEndDate_To)),  0,  StringUtil.Trim( context.localUtil.DToC( AV43TFLeaveRequestEndDate, 2, "/")),  ((DateTime.MinValue==AV43TFLeaveRequestEndDate) ? "" : StringUtil.Trim( context.localUtil.Format( AV43TFLeaveRequestEndDate, "99/99/99"))),  true,  StringUtil.Trim( context.localUtil.DToC( AV44TFLeaveRequestEndDate_To, 2, "/")),  ((DateTime.MinValue==AV44TFLeaveRequestEndDate_To) ? "" : StringUtil.Trim( context.localUtil.Format( AV44TFLeaveRequestEndDate_To, "99/99/99")))) ;
          new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalueandsel(context ).execute( ref  AV13GridState,  "TFLEAVEREQUESTHALFDAY",  "Half Day",  !(String.IsNullOrEmpty(StringUtil.RTrim( AV65TFLeaveRequestHalfDay))&&(0==AV67TFLeaveRequestHalfDayOperator)),  AV67TFLeaveRequestHalfDayOperator,  AV65TFLeaveRequestHalfDay,  StringUtil.Format( "%"+StringUtil.Trim( StringUtil.Str( (decimal)(AV67TFLeaveRequestHalfDayOperator+1), 10, 0)), AV65TFLeaveRequestHalfDay, "Morning", "Afternoon", "", "", "", "", "", ""),  false,  "",  "",  !String.IsNullOrEmpty(StringUtil.RTrim( AV66TFLeaveRequestHalfDay_Sel)),  AV66TFLeaveRequestHalfDay_Sel,  AV66TFLeaveRequestHalfDay_Sel) ;
          new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV13GridState,  "TFLEAVEREQUESTDURATION",  "Request Duration",  !((Convert.ToDecimal(0)==AV48TFLeaveRequestDuration)&&(Convert.ToDecimal(0)==AV49TFLeaveRequestDuration_To)),  0,  StringUtil.Trim( StringUtil.Str( AV48TFLeaveRequestDuration, 4, 1)),  ((Convert.ToDecimal(0)==AV48TFLeaveRequestDuration) ? "" : StringUtil.Trim( context.localUtil.Format( AV48TFLeaveRequestDuration, "Z9.9"))),  true,  StringUtil.Trim( StringUtil.Str( AV49TFLeaveRequestDuration_To, 4, 1)),  ((Convert.ToDecimal(0)==AV49TFLeaveRequestDuration_To) ? "" : StringUtil.Trim( context.localUtil.Format( AV49TFLeaveRequestDuration_To, "Z9.9")))) ;
+         new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV13GridState,  "TFEMPLOYEEBALANCE",  "Vacation Balance",  !((Convert.ToDecimal(0)==AV70TFEmployeeBalance)&&(Convert.ToDecimal(0)==AV71TFEmployeeBalance_To)),  0,  StringUtil.Trim( StringUtil.Str( AV70TFEmployeeBalance, 4, 1)),  ((Convert.ToDecimal(0)==AV70TFEmployeeBalance) ? "" : StringUtil.Trim( context.localUtil.Format( AV70TFEmployeeBalance, "Z9.9"))),  true,  StringUtil.Trim( StringUtil.Str( AV71TFEmployeeBalance_To, 4, 1)),  ((Convert.ToDecimal(0)==AV71TFEmployeeBalance_To) ? "" : StringUtil.Trim( context.localUtil.Format( AV71TFEmployeeBalance_To, "Z9.9")))) ;
          AV13GridState.gxTpr_Pagesize = StringUtil.Str( (decimal)(subGrid_Rows), 10, 0);
          AV13GridState.gxTpr_Currentpage = (short)(subGrid_fnc_Currentpage( ));
-         new GeneXus.Programs.wwpbaseobjects.savegridstate(context ).execute(  AV74Pgmname+"GridState",  AV13GridState.ToXml(false, true, "", "")) ;
+         new GeneXus.Programs.wwpbaseobjects.savegridstate(context ).execute(  AV76Pgmname+"GridState",  AV13GridState.ToXml(false, true, "", "")) ;
       }
 
       protected void S132( )
@@ -2728,7 +2783,7 @@ namespace GeneXus.Programs {
          /* 'PREPARETRANSACTION' Routine */
          returnInSub = false;
          AV11TrnContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext(context);
-         AV11TrnContext.gxTpr_Callerobject = AV74Pgmname;
+         AV11TrnContext.gxTpr_Callerobject = AV76Pgmname;
          AV11TrnContext.gxTpr_Callerondelete = true;
          AV11TrnContext.gxTpr_Callerurl = AV10HTTPRequest.ScriptName+"?"+AV10HTTPRequest.QueryString;
          AV11TrnContext.gxTpr_Transactionname = "LeaveRequest";
@@ -2762,9 +2817,9 @@ namespace GeneXus.Programs {
       {
          /* 'GETEMPLOYEEIDSBYPROJECT' Routine */
          returnInSub = false;
-         AV73Udparg17 = new getloggedinemployeeid(context).executeUdp( );
+         AV75Udparg19 = new getloggedinemployeeid(context).executeUdp( );
          /* Using cursor H003B5 */
-         pr_default.execute(3, new Object[] {AV73Udparg17});
+         pr_default.execute(3, new Object[] {AV75Udparg19});
          while ( (pr_default.getStatus(3) != 101) )
          {
             A166ProjectManagerId = H003B5_A166ProjectManagerId[0];
@@ -3026,7 +3081,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202474155002", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247623483695", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -3042,7 +3097,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("leaverequestrejected.js", "?202474155002", false, true);
+         context.AddJavascriptSource("leaverequestrejected.js", "?20247623483696", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -3092,6 +3147,7 @@ namespace GeneXus.Programs {
          edtLeaveRequestRejectionReason_Internalname = sPrefix+"LEAVEREQUESTREJECTIONREASON_"+sGXsfl_39_idx;
          edtEmployeeId_Internalname = sPrefix+"EMPLOYEEID_"+sGXsfl_39_idx;
          edtavLeaverequestrejectionreasonvariable_Internalname = sPrefix+"vLEAVEREQUESTREJECTIONREASONVARIABLE_"+sGXsfl_39_idx;
+         edtEmployeeBalance_Internalname = sPrefix+"EMPLOYEEBALANCE_"+sGXsfl_39_idx;
       }
 
       protected void SubsflControlProps_fel_392( )
@@ -3111,6 +3167,7 @@ namespace GeneXus.Programs {
          edtLeaveRequestRejectionReason_Internalname = sPrefix+"LEAVEREQUESTREJECTIONREASON_"+sGXsfl_39_fel_idx;
          edtEmployeeId_Internalname = sPrefix+"EMPLOYEEID_"+sGXsfl_39_fel_idx;
          edtavLeaverequestrejectionreasonvariable_Internalname = sPrefix+"vLEAVEREQUESTREJECTIONREASONVARIABLE_"+sGXsfl_39_fel_idx;
+         edtEmployeeBalance_Internalname = sPrefix+"EMPLOYEEBALANCE_"+sGXsfl_39_fel_idx;
       }
 
       protected void sendrow_392( )
@@ -3310,6 +3367,14 @@ namespace GeneXus.Programs {
             /* Single line edit */
             ROClassString = "Attribute";
             GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavLeaverequestrejectionreasonvariable_Internalname,(string)AV69LeaveRequestRejectionReasonVariable,(string)"",(string)"",(string)"'"+sPrefix+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavLeaverequestrejectionreasonvariable_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtavLeaverequestrejectionreasonvariable_Visible,(int)edtavLeaverequestrejectionreasonvariable_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)100,(short)0,(short)0,(short)39,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
+            /* Subfile cell */
+            if ( GridContainer.GetWrapped() == 1 )
+            {
+               context.WriteHtmlText( "<td valign=\"middle\" align=\""+"end"+"\""+" style=\""+((edtEmployeeBalance_Visible==0) ? "display:none;" : "")+"\">") ;
+            }
+            /* Single line edit */
+            ROClassString = "Attribute";
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtEmployeeBalance_Internalname,StringUtil.LTrim( StringUtil.NToC( A147EmployeeBalance, 4, 1, ".", "")),StringUtil.LTrim( context.localUtil.Format( A147EmployeeBalance, "Z9.9")),(string)"",(string)"'"+sPrefix+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtEmployeeBalance_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtEmployeeBalance_Visible,(short)0,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)4,(short)0,(short)0,(short)39,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
             send_integrity_lvl_hashes3B2( ) ;
             GridContainer.AddRow(GridRow);
             nGXsfl_39_idx = ((subGrid_Islastpage==1)&&(nGXsfl_39_idx+1>subGrid_fnc_Recordsperpage( )) ? 1 : nGXsfl_39_idx+1);
@@ -3415,6 +3480,9 @@ namespace GeneXus.Programs {
             context.WriteHtmlText( "<th align=\""+"start"+"\" "+" nowrap=\"nowrap\" "+" class=\""+"Attribute"+"\" "+" style=\""+((edtavLeaverequestrejectionreasonvariable_Visible==0) ? "display:none;" : "")+""+"\" "+">") ;
             context.SendWebValue( "Rejection Reason") ;
             context.WriteHtmlTextNl( "</th>") ;
+            context.WriteHtmlText( "<th align=\""+"end"+"\" "+" nowrap=\"nowrap\" "+" class=\""+"Attribute"+"\" "+" style=\""+((edtEmployeeBalance_Visible==0) ? "display:none;" : "")+""+"\" "+">") ;
+            context.SendWebValue( "Vacation Balance") ;
+            context.WriteHtmlTextNl( "</th>") ;
             context.WriteHtmlTextNl( "</tr>") ;
             GridContainer.AddObjectProperty("GridName", "Grid");
          }
@@ -3495,6 +3563,10 @@ namespace GeneXus.Programs {
             GridColumn.AddObjectProperty("Enabled", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtavLeaverequestrejectionreasonvariable_Enabled), 5, 0, ".", "")));
             GridColumn.AddObjectProperty("Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtavLeaverequestrejectionreasonvariable_Visible), 5, 0, ".", "")));
             GridContainer.AddColumnProperties(GridColumn);
+            GridColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+            GridColumn.AddObjectProperty("Value", GXUtil.ValueEncode( StringUtil.LTrim( StringUtil.NToC( A147EmployeeBalance, 4, 1, ".", ""))));
+            GridColumn.AddObjectProperty("Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtEmployeeBalance_Visible), 5, 0, ".", "")));
+            GridContainer.AddColumnProperties(GridColumn);
             GridContainer.AddObjectProperty("Selectedindex", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Selectedindex), 4, 0, ".", "")));
             GridContainer.AddObjectProperty("Allowselection", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Allowselection), 1, 0, ".", "")));
             GridContainer.AddObjectProperty("Selectioncolor", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Selectioncolor), 9, 0, ".", "")));
@@ -3531,6 +3603,7 @@ namespace GeneXus.Programs {
          edtLeaveRequestRejectionReason_Internalname = sPrefix+"LEAVEREQUESTREJECTIONREASON";
          edtEmployeeId_Internalname = sPrefix+"EMPLOYEEID";
          edtavLeaverequestrejectionreasonvariable_Internalname = sPrefix+"vLEAVEREQUESTREJECTIONREASONVARIABLE";
+         edtEmployeeBalance_Internalname = sPrefix+"EMPLOYEEBALANCE";
          Gridpaginationbar_Internalname = sPrefix+"GRIDPAGINATIONBAR";
          divGridtablewithpaginationbar_Internalname = sPrefix+"GRIDTABLEWITHPAGINATIONBAR";
          divTablemain_Internalname = sPrefix+"TABLEMAIN";
@@ -3567,6 +3640,7 @@ namespace GeneXus.Programs {
          subGrid_Allowcollapsing = 0;
          subGrid_Allowselection = 0;
          subGrid_Header = "";
+         edtEmployeeBalance_Jsonclick = "";
          edtavLeaverequestrejectionreasonvariable_Jsonclick = "";
          edtavLeaverequestrejectionreasonvariable_Enabled = 0;
          edtEmployeeId_Jsonclick = "";
@@ -3590,6 +3664,7 @@ namespace GeneXus.Programs {
          edtavFilterfulltext_Jsonclick = "";
          edtavFilterfulltext_Enabled = 1;
          edtLeaveRequestHalfDay_Columnheaderclass = "";
+         edtEmployeeBalance_Visible = -1;
          edtavLeaverequestrejectionreasonvariable_Visible = -1;
          edtavLeaverequestdescriptionvariable_Visible = -1;
          edtLeaveRequestDuration_Visible = -1;
@@ -3598,6 +3673,7 @@ namespace GeneXus.Programs {
          edtLeaveRequestStartDate_Visible = -1;
          edtLeaveTypeName_Visible = -1;
          edtEmployeeName_Visible = -1;
+         edtEmployeeBalance_Enabled = 0;
          edtEmployeeId_Enabled = 0;
          edtLeaveRequestRejectionReason_Enabled = 0;
          edtLeaveRequestDescription_Enabled = 0;
@@ -3623,18 +3699,18 @@ namespace GeneXus.Programs {
          Ddo_gridcolumnsselector_Caption = "Select columns";
          Ddo_gridcolumnsselector_Icon = "fas fa-cog";
          Ddo_gridcolumnsselector_Icontype = "FontIcon";
-         Ddo_grid_Format = "|||||4.1||";
-         Ddo_grid_Fixedfilters = "||||1:Morning:fa fa-circle FontColorIconInfo FontColorIconSmall ConditionalFormattingFilterIcon,2:Afternoon:fa fa-circle FontColorIconWarning FontColorIconSmall ConditionalFormattingFilterIcon|||";
+         Ddo_grid_Format = "|||||4.1|||4.1";
+         Ddo_grid_Fixedfilters = "||||1:Morning:fa fa-circle FontColorIconInfo FontColorIconSmall ConditionalFormattingFilterIcon,2:Afternoon:fa fa-circle FontColorIconWarning FontColorIconSmall ConditionalFormattingFilterIcon||||";
          Ddo_grid_Datalistproc = "LeaveRequestRejectedGetFilterData";
-         Ddo_grid_Datalisttype = "Dynamic|Dynamic|||Dynamic|||";
-         Ddo_grid_Includedatalist = "T|T|||T|||";
-         Ddo_grid_Filterisrange = "||P|P||T||";
-         Ddo_grid_Filtertype = "Character|Character|Date|Date|Character|Numeric||";
-         Ddo_grid_Includefilter = "T|T|T|T|T|T||";
+         Ddo_grid_Datalisttype = "Dynamic|Dynamic|||Dynamic||||";
+         Ddo_grid_Includedatalist = "T|T|||T||||";
+         Ddo_grid_Filterisrange = "||P|P||T|||T";
+         Ddo_grid_Filtertype = "Character|Character|Date|Date|Character|Numeric|||Numeric";
+         Ddo_grid_Includefilter = "T|T|T|T|T|T|||T";
          Ddo_grid_Fixable = "T";
-         Ddo_grid_Includesortasc = "T|T|T|T|T|T||";
-         Ddo_grid_Columnssortvalues = "2|3|4|5|6|7||";
-         Ddo_grid_Columnids = "2:EmployeeName|3:LeaveTypeName|5:LeaveRequestStartDate|6:LeaveRequestEndDate|7:LeaveRequestHalfDay|8:LeaveRequestDuration|11:LeaveRequestDescriptionVariable|14:LeaveRequestRejectionReasonVariable";
+         Ddo_grid_Includesortasc = "T|T|T|T|T|T|||T";
+         Ddo_grid_Columnssortvalues = "2|3|4|5|6|7|||8";
+         Ddo_grid_Columnids = "2:EmployeeName|3:LeaveTypeName|5:LeaveRequestStartDate|6:LeaveRequestEndDate|7:LeaveRequestHalfDay|8:LeaveRequestDuration|11:LeaveRequestDescriptionVariable|14:LeaveRequestRejectionReasonVariable|15:EmployeeBalance";
          Ddo_grid_Gridinternalname = "";
          Ddo_agexport_Titlecontrolidtoreplace = "";
          Ddo_agexport_Cls = "ColumnsSelector";
@@ -3679,27 +3755,27 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'sPrefix'},{av:'AV28ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV23ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV18FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV74Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV29TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV30TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'AV31TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV32TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV38TFLeaveRequestStartDate',fld:'vTFLEAVEREQUESTSTARTDATE',pic:''},{av:'AV39TFLeaveRequestStartDate_To',fld:'vTFLEAVEREQUESTSTARTDATE_TO',pic:''},{av:'AV43TFLeaveRequestEndDate',fld:'vTFLEAVEREQUESTENDDATE',pic:''},{av:'AV44TFLeaveRequestEndDate_To',fld:'vTFLEAVEREQUESTENDDATE_TO',pic:''},{av:'AV65TFLeaveRequestHalfDay',fld:'vTFLEAVEREQUESTHALFDAY',pic:''},{av:'AV67TFLeaveRequestHalfDayOperator',fld:'vTFLEAVEREQUESTHALFDAYOPERATOR',pic:'ZZZ9'},{av:'AV66TFLeaveRequestHalfDay_Sel',fld:'vTFLEAVEREQUESTHALFDAY_SEL',pic:''},{av:'AV48TFLeaveRequestDuration',fld:'vTFLEAVEREQUESTDURATION',pic:'Z9.9'},{av:'AV49TFLeaveRequestDuration_To',fld:'vTFLEAVEREQUESTDURATION_TO',pic:'Z9.9'},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV73Udparg17',fld:'vUDPARG17',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV64ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV15OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV16OrderedDsc',fld:'vORDEREDDSC',pic:''}]");
-         setEventMetadata("REFRESH",",oparms:[{av:'AV28ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV23ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'edtEmployeeName_Visible',ctrl:'EMPLOYEENAME',prop:'Visible'},{av:'edtLeaveTypeName_Visible',ctrl:'LEAVETYPENAME',prop:'Visible'},{av:'edtLeaveRequestStartDate_Visible',ctrl:'LEAVEREQUESTSTARTDATE',prop:'Visible'},{av:'edtLeaveRequestEndDate_Visible',ctrl:'LEAVEREQUESTENDDATE',prop:'Visible'},{av:'edtLeaveRequestHalfDay_Visible',ctrl:'LEAVEREQUESTHALFDAY',prop:'Visible'},{av:'edtLeaveRequestDuration_Visible',ctrl:'LEAVEREQUESTDURATION',prop:'Visible'},{av:'edtavLeaverequestdescriptionvariable_Visible',ctrl:'vLEAVEREQUESTDESCRIPTIONVARIABLE',prop:'Visible'},{av:'edtavLeaverequestrejectionreasonvariable_Visible',ctrl:'vLEAVEREQUESTREJECTIONREASONVARIABLE',prop:'Visible'},{av:'AV56GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV57GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV58GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'edtLeaveRequestHalfDay_Columnheaderclass',ctrl:'LEAVEREQUESTHALFDAY',prop:'Columnheaderclass'},{av:'AV64ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV26ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''},{av:'AV13GridState',fld:'vGRIDSTATE',pic:''}]}");
-         setEventMetadata("GRIDPAGINATIONBAR.CHANGEPAGE","{handler:'E123B2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV18FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV28ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV23ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV74Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV29TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV30TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'AV31TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV32TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV38TFLeaveRequestStartDate',fld:'vTFLEAVEREQUESTSTARTDATE',pic:''},{av:'AV39TFLeaveRequestStartDate_To',fld:'vTFLEAVEREQUESTSTARTDATE_TO',pic:''},{av:'AV43TFLeaveRequestEndDate',fld:'vTFLEAVEREQUESTENDDATE',pic:''},{av:'AV44TFLeaveRequestEndDate_To',fld:'vTFLEAVEREQUESTENDDATE_TO',pic:''},{av:'AV65TFLeaveRequestHalfDay',fld:'vTFLEAVEREQUESTHALFDAY',pic:''},{av:'AV67TFLeaveRequestHalfDayOperator',fld:'vTFLEAVEREQUESTHALFDAYOPERATOR',pic:'ZZZ9'},{av:'AV66TFLeaveRequestHalfDay_Sel',fld:'vTFLEAVEREQUESTHALFDAY_SEL',pic:''},{av:'AV48TFLeaveRequestDuration',fld:'vTFLEAVEREQUESTDURATION',pic:'Z9.9'},{av:'AV49TFLeaveRequestDuration_To',fld:'vTFLEAVEREQUESTDURATION_TO',pic:'Z9.9'},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV73Udparg17',fld:'vUDPARG17',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV64ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV15OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV16OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'sPrefix'},{av:'Gridpaginationbar_Selectedpage',ctrl:'GRIDPAGINATIONBAR',prop:'SelectedPage'}]");
+         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'sPrefix'},{av:'AV28ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV23ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV18FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV76Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV29TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV30TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'AV31TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV32TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV38TFLeaveRequestStartDate',fld:'vTFLEAVEREQUESTSTARTDATE',pic:''},{av:'AV39TFLeaveRequestStartDate_To',fld:'vTFLEAVEREQUESTSTARTDATE_TO',pic:''},{av:'AV43TFLeaveRequestEndDate',fld:'vTFLEAVEREQUESTENDDATE',pic:''},{av:'AV44TFLeaveRequestEndDate_To',fld:'vTFLEAVEREQUESTENDDATE_TO',pic:''},{av:'AV65TFLeaveRequestHalfDay',fld:'vTFLEAVEREQUESTHALFDAY',pic:''},{av:'AV67TFLeaveRequestHalfDayOperator',fld:'vTFLEAVEREQUESTHALFDAYOPERATOR',pic:'ZZZ9'},{av:'AV66TFLeaveRequestHalfDay_Sel',fld:'vTFLEAVEREQUESTHALFDAY_SEL',pic:''},{av:'AV48TFLeaveRequestDuration',fld:'vTFLEAVEREQUESTDURATION',pic:'Z9.9'},{av:'AV49TFLeaveRequestDuration_To',fld:'vTFLEAVEREQUESTDURATION_TO',pic:'Z9.9'},{av:'AV70TFEmployeeBalance',fld:'vTFEMPLOYEEBALANCE',pic:'Z9.9'},{av:'AV71TFEmployeeBalance_To',fld:'vTFEMPLOYEEBALANCE_TO',pic:'Z9.9'},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV75Udparg19',fld:'vUDPARG19',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV64ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV15OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV16OrderedDsc',fld:'vORDEREDDSC',pic:''}]");
+         setEventMetadata("REFRESH",",oparms:[{av:'AV28ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV23ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'edtEmployeeName_Visible',ctrl:'EMPLOYEENAME',prop:'Visible'},{av:'edtLeaveTypeName_Visible',ctrl:'LEAVETYPENAME',prop:'Visible'},{av:'edtLeaveRequestStartDate_Visible',ctrl:'LEAVEREQUESTSTARTDATE',prop:'Visible'},{av:'edtLeaveRequestEndDate_Visible',ctrl:'LEAVEREQUESTENDDATE',prop:'Visible'},{av:'edtLeaveRequestHalfDay_Visible',ctrl:'LEAVEREQUESTHALFDAY',prop:'Visible'},{av:'edtLeaveRequestDuration_Visible',ctrl:'LEAVEREQUESTDURATION',prop:'Visible'},{av:'edtavLeaverequestdescriptionvariable_Visible',ctrl:'vLEAVEREQUESTDESCRIPTIONVARIABLE',prop:'Visible'},{av:'edtavLeaverequestrejectionreasonvariable_Visible',ctrl:'vLEAVEREQUESTREJECTIONREASONVARIABLE',prop:'Visible'},{av:'edtEmployeeBalance_Visible',ctrl:'EMPLOYEEBALANCE',prop:'Visible'},{av:'AV56GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV57GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV58GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'edtLeaveRequestHalfDay_Columnheaderclass',ctrl:'LEAVEREQUESTHALFDAY',prop:'Columnheaderclass'},{av:'AV64ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV26ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''},{av:'AV13GridState',fld:'vGRIDSTATE',pic:''}]}");
+         setEventMetadata("GRIDPAGINATIONBAR.CHANGEPAGE","{handler:'E123B2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV18FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV28ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV23ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV76Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV29TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV30TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'AV31TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV32TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV38TFLeaveRequestStartDate',fld:'vTFLEAVEREQUESTSTARTDATE',pic:''},{av:'AV39TFLeaveRequestStartDate_To',fld:'vTFLEAVEREQUESTSTARTDATE_TO',pic:''},{av:'AV43TFLeaveRequestEndDate',fld:'vTFLEAVEREQUESTENDDATE',pic:''},{av:'AV44TFLeaveRequestEndDate_To',fld:'vTFLEAVEREQUESTENDDATE_TO',pic:''},{av:'AV65TFLeaveRequestHalfDay',fld:'vTFLEAVEREQUESTHALFDAY',pic:''},{av:'AV67TFLeaveRequestHalfDayOperator',fld:'vTFLEAVEREQUESTHALFDAYOPERATOR',pic:'ZZZ9'},{av:'AV66TFLeaveRequestHalfDay_Sel',fld:'vTFLEAVEREQUESTHALFDAY_SEL',pic:''},{av:'AV48TFLeaveRequestDuration',fld:'vTFLEAVEREQUESTDURATION',pic:'Z9.9'},{av:'AV49TFLeaveRequestDuration_To',fld:'vTFLEAVEREQUESTDURATION_TO',pic:'Z9.9'},{av:'AV70TFEmployeeBalance',fld:'vTFEMPLOYEEBALANCE',pic:'Z9.9'},{av:'AV71TFEmployeeBalance_To',fld:'vTFEMPLOYEEBALANCE_TO',pic:'Z9.9'},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV75Udparg19',fld:'vUDPARG19',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV64ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV15OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV16OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'sPrefix'},{av:'Gridpaginationbar_Selectedpage',ctrl:'GRIDPAGINATIONBAR',prop:'SelectedPage'}]");
          setEventMetadata("GRIDPAGINATIONBAR.CHANGEPAGE",",oparms:[]}");
-         setEventMetadata("GRIDPAGINATIONBAR.CHANGEROWSPERPAGE","{handler:'E133B2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV18FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV28ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV23ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV74Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV29TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV30TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'AV31TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV32TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV38TFLeaveRequestStartDate',fld:'vTFLEAVEREQUESTSTARTDATE',pic:''},{av:'AV39TFLeaveRequestStartDate_To',fld:'vTFLEAVEREQUESTSTARTDATE_TO',pic:''},{av:'AV43TFLeaveRequestEndDate',fld:'vTFLEAVEREQUESTENDDATE',pic:''},{av:'AV44TFLeaveRequestEndDate_To',fld:'vTFLEAVEREQUESTENDDATE_TO',pic:''},{av:'AV65TFLeaveRequestHalfDay',fld:'vTFLEAVEREQUESTHALFDAY',pic:''},{av:'AV67TFLeaveRequestHalfDayOperator',fld:'vTFLEAVEREQUESTHALFDAYOPERATOR',pic:'ZZZ9'},{av:'AV66TFLeaveRequestHalfDay_Sel',fld:'vTFLEAVEREQUESTHALFDAY_SEL',pic:''},{av:'AV48TFLeaveRequestDuration',fld:'vTFLEAVEREQUESTDURATION',pic:'Z9.9'},{av:'AV49TFLeaveRequestDuration_To',fld:'vTFLEAVEREQUESTDURATION_TO',pic:'Z9.9'},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV73Udparg17',fld:'vUDPARG17',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV64ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV15OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV16OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'sPrefix'},{av:'Gridpaginationbar_Rowsperpageselectedvalue',ctrl:'GRIDPAGINATIONBAR',prop:'RowsPerPageSelectedValue'}]");
+         setEventMetadata("GRIDPAGINATIONBAR.CHANGEROWSPERPAGE","{handler:'E133B2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV18FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV28ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV23ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV76Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV29TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV30TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'AV31TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV32TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV38TFLeaveRequestStartDate',fld:'vTFLEAVEREQUESTSTARTDATE',pic:''},{av:'AV39TFLeaveRequestStartDate_To',fld:'vTFLEAVEREQUESTSTARTDATE_TO',pic:''},{av:'AV43TFLeaveRequestEndDate',fld:'vTFLEAVEREQUESTENDDATE',pic:''},{av:'AV44TFLeaveRequestEndDate_To',fld:'vTFLEAVEREQUESTENDDATE_TO',pic:''},{av:'AV65TFLeaveRequestHalfDay',fld:'vTFLEAVEREQUESTHALFDAY',pic:''},{av:'AV67TFLeaveRequestHalfDayOperator',fld:'vTFLEAVEREQUESTHALFDAYOPERATOR',pic:'ZZZ9'},{av:'AV66TFLeaveRequestHalfDay_Sel',fld:'vTFLEAVEREQUESTHALFDAY_SEL',pic:''},{av:'AV48TFLeaveRequestDuration',fld:'vTFLEAVEREQUESTDURATION',pic:'Z9.9'},{av:'AV49TFLeaveRequestDuration_To',fld:'vTFLEAVEREQUESTDURATION_TO',pic:'Z9.9'},{av:'AV70TFEmployeeBalance',fld:'vTFEMPLOYEEBALANCE',pic:'Z9.9'},{av:'AV71TFEmployeeBalance_To',fld:'vTFEMPLOYEEBALANCE_TO',pic:'Z9.9'},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV75Udparg19',fld:'vUDPARG19',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV64ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV15OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV16OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'sPrefix'},{av:'Gridpaginationbar_Rowsperpageselectedvalue',ctrl:'GRIDPAGINATIONBAR',prop:'RowsPerPageSelectedValue'}]");
          setEventMetadata("GRIDPAGINATIONBAR.CHANGEROWSPERPAGE",",oparms:[{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'}]}");
-         setEventMetadata("DDO_GRID.ONOPTIONCLICKED","{handler:'E153B2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV18FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV28ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV23ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV74Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV29TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV30TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'AV31TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV32TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV38TFLeaveRequestStartDate',fld:'vTFLEAVEREQUESTSTARTDATE',pic:''},{av:'AV39TFLeaveRequestStartDate_To',fld:'vTFLEAVEREQUESTSTARTDATE_TO',pic:''},{av:'AV43TFLeaveRequestEndDate',fld:'vTFLEAVEREQUESTENDDATE',pic:''},{av:'AV44TFLeaveRequestEndDate_To',fld:'vTFLEAVEREQUESTENDDATE_TO',pic:''},{av:'AV65TFLeaveRequestHalfDay',fld:'vTFLEAVEREQUESTHALFDAY',pic:''},{av:'AV67TFLeaveRequestHalfDayOperator',fld:'vTFLEAVEREQUESTHALFDAYOPERATOR',pic:'ZZZ9'},{av:'AV66TFLeaveRequestHalfDay_Sel',fld:'vTFLEAVEREQUESTHALFDAY_SEL',pic:''},{av:'AV48TFLeaveRequestDuration',fld:'vTFLEAVEREQUESTDURATION',pic:'Z9.9'},{av:'AV49TFLeaveRequestDuration_To',fld:'vTFLEAVEREQUESTDURATION_TO',pic:'Z9.9'},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV73Udparg17',fld:'vUDPARG17',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV64ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV15OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV16OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'sPrefix'},{av:'Ddo_grid_Activeeventkey',ctrl:'DDO_GRID',prop:'ActiveEventKey'},{av:'Ddo_grid_Selectedvalue_get',ctrl:'DDO_GRID',prop:'SelectedValue_get'},{av:'Ddo_grid_Selectedcolumnfixedfilter',ctrl:'DDO_GRID',prop:'SelectedColumnFixedFilter'},{av:'Ddo_grid_Filteredtextto_get',ctrl:'DDO_GRID',prop:'FilteredTextTo_get'},{av:'Ddo_grid_Filteredtext_get',ctrl:'DDO_GRID',prop:'FilteredText_get'},{av:'Ddo_grid_Selectedcolumn',ctrl:'DDO_GRID',prop:'SelectedColumn'}]");
-         setEventMetadata("DDO_GRID.ONOPTIONCLICKED",",oparms:[{av:'AV15OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV16OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV48TFLeaveRequestDuration',fld:'vTFLEAVEREQUESTDURATION',pic:'Z9.9'},{av:'AV49TFLeaveRequestDuration_To',fld:'vTFLEAVEREQUESTDURATION_TO',pic:'Z9.9'},{av:'AV67TFLeaveRequestHalfDayOperator',fld:'vTFLEAVEREQUESTHALFDAYOPERATOR',pic:'ZZZ9'},{av:'AV65TFLeaveRequestHalfDay',fld:'vTFLEAVEREQUESTHALFDAY',pic:''},{av:'AV66TFLeaveRequestHalfDay_Sel',fld:'vTFLEAVEREQUESTHALFDAY_SEL',pic:''},{av:'AV43TFLeaveRequestEndDate',fld:'vTFLEAVEREQUESTENDDATE',pic:''},{av:'AV44TFLeaveRequestEndDate_To',fld:'vTFLEAVEREQUESTENDDATE_TO',pic:''},{av:'AV38TFLeaveRequestStartDate',fld:'vTFLEAVEREQUESTSTARTDATE',pic:''},{av:'AV39TFLeaveRequestStartDate_To',fld:'vTFLEAVEREQUESTSTARTDATE_TO',pic:''},{av:'AV31TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV32TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV29TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV30TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'Ddo_grid_Sortedstatus',ctrl:'DDO_GRID',prop:'SortedStatus'}]}");
+         setEventMetadata("DDO_GRID.ONOPTIONCLICKED","{handler:'E153B2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV18FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV28ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV23ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV76Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV29TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV30TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'AV31TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV32TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV38TFLeaveRequestStartDate',fld:'vTFLEAVEREQUESTSTARTDATE',pic:''},{av:'AV39TFLeaveRequestStartDate_To',fld:'vTFLEAVEREQUESTSTARTDATE_TO',pic:''},{av:'AV43TFLeaveRequestEndDate',fld:'vTFLEAVEREQUESTENDDATE',pic:''},{av:'AV44TFLeaveRequestEndDate_To',fld:'vTFLEAVEREQUESTENDDATE_TO',pic:''},{av:'AV65TFLeaveRequestHalfDay',fld:'vTFLEAVEREQUESTHALFDAY',pic:''},{av:'AV67TFLeaveRequestHalfDayOperator',fld:'vTFLEAVEREQUESTHALFDAYOPERATOR',pic:'ZZZ9'},{av:'AV66TFLeaveRequestHalfDay_Sel',fld:'vTFLEAVEREQUESTHALFDAY_SEL',pic:''},{av:'AV48TFLeaveRequestDuration',fld:'vTFLEAVEREQUESTDURATION',pic:'Z9.9'},{av:'AV49TFLeaveRequestDuration_To',fld:'vTFLEAVEREQUESTDURATION_TO',pic:'Z9.9'},{av:'AV70TFEmployeeBalance',fld:'vTFEMPLOYEEBALANCE',pic:'Z9.9'},{av:'AV71TFEmployeeBalance_To',fld:'vTFEMPLOYEEBALANCE_TO',pic:'Z9.9'},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV75Udparg19',fld:'vUDPARG19',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV64ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV15OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV16OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'sPrefix'},{av:'Ddo_grid_Activeeventkey',ctrl:'DDO_GRID',prop:'ActiveEventKey'},{av:'Ddo_grid_Selectedvalue_get',ctrl:'DDO_GRID',prop:'SelectedValue_get'},{av:'Ddo_grid_Selectedcolumnfixedfilter',ctrl:'DDO_GRID',prop:'SelectedColumnFixedFilter'},{av:'Ddo_grid_Filteredtextto_get',ctrl:'DDO_GRID',prop:'FilteredTextTo_get'},{av:'Ddo_grid_Filteredtext_get',ctrl:'DDO_GRID',prop:'FilteredText_get'},{av:'Ddo_grid_Selectedcolumn',ctrl:'DDO_GRID',prop:'SelectedColumn'}]");
+         setEventMetadata("DDO_GRID.ONOPTIONCLICKED",",oparms:[{av:'AV15OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV16OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV70TFEmployeeBalance',fld:'vTFEMPLOYEEBALANCE',pic:'Z9.9'},{av:'AV71TFEmployeeBalance_To',fld:'vTFEMPLOYEEBALANCE_TO',pic:'Z9.9'},{av:'AV48TFLeaveRequestDuration',fld:'vTFLEAVEREQUESTDURATION',pic:'Z9.9'},{av:'AV49TFLeaveRequestDuration_To',fld:'vTFLEAVEREQUESTDURATION_TO',pic:'Z9.9'},{av:'AV67TFLeaveRequestHalfDayOperator',fld:'vTFLEAVEREQUESTHALFDAYOPERATOR',pic:'ZZZ9'},{av:'AV65TFLeaveRequestHalfDay',fld:'vTFLEAVEREQUESTHALFDAY',pic:''},{av:'AV66TFLeaveRequestHalfDay_Sel',fld:'vTFLEAVEREQUESTHALFDAY_SEL',pic:''},{av:'AV43TFLeaveRequestEndDate',fld:'vTFLEAVEREQUESTENDDATE',pic:''},{av:'AV44TFLeaveRequestEndDate_To',fld:'vTFLEAVEREQUESTENDDATE_TO',pic:''},{av:'AV38TFLeaveRequestStartDate',fld:'vTFLEAVEREQUESTSTARTDATE',pic:''},{av:'AV39TFLeaveRequestStartDate_To',fld:'vTFLEAVEREQUESTSTARTDATE_TO',pic:''},{av:'AV31TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV32TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV29TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV30TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'Ddo_grid_Sortedstatus',ctrl:'DDO_GRID',prop:'SortedStatus'}]}");
          setEventMetadata("GRID.LOAD","{handler:'E193B2',iparms:[{av:'A133LeaveRequestDescription',fld:'LEAVEREQUESTDESCRIPTION',pic:''},{av:'A134LeaveRequestRejectionReason',fld:'LEAVEREQUESTREJECTIONREASON',pic:''},{av:'A173LeaveRequestHalfDay',fld:'LEAVEREQUESTHALFDAY',pic:''}]");
          setEventMetadata("GRID.LOAD",",oparms:[{av:'AV68LeaveRequestDescriptionVariable',fld:'vLEAVEREQUESTDESCRIPTIONVARIABLE',pic:''},{av:'AV69LeaveRequestRejectionReasonVariable',fld:'vLEAVEREQUESTREJECTIONREASONVARIABLE',pic:''},{av:'edtLeaveRequestHalfDay_Columnclass',ctrl:'LEAVEREQUESTHALFDAY',prop:'Columnclass'}]}");
-         setEventMetadata("DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED","{handler:'E163B2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV18FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV28ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV23ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV74Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV29TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV30TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'AV31TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV32TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV38TFLeaveRequestStartDate',fld:'vTFLEAVEREQUESTSTARTDATE',pic:''},{av:'AV39TFLeaveRequestStartDate_To',fld:'vTFLEAVEREQUESTSTARTDATE_TO',pic:''},{av:'AV43TFLeaveRequestEndDate',fld:'vTFLEAVEREQUESTENDDATE',pic:''},{av:'AV44TFLeaveRequestEndDate_To',fld:'vTFLEAVEREQUESTENDDATE_TO',pic:''},{av:'AV65TFLeaveRequestHalfDay',fld:'vTFLEAVEREQUESTHALFDAY',pic:''},{av:'AV67TFLeaveRequestHalfDayOperator',fld:'vTFLEAVEREQUESTHALFDAYOPERATOR',pic:'ZZZ9'},{av:'AV66TFLeaveRequestHalfDay_Sel',fld:'vTFLEAVEREQUESTHALFDAY_SEL',pic:''},{av:'AV48TFLeaveRequestDuration',fld:'vTFLEAVEREQUESTDURATION',pic:'Z9.9'},{av:'AV49TFLeaveRequestDuration_To',fld:'vTFLEAVEREQUESTDURATION_TO',pic:'Z9.9'},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV73Udparg17',fld:'vUDPARG17',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV64ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV15OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV16OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'sPrefix'},{av:'Ddo_gridcolumnsselector_Columnsselectorvalues',ctrl:'DDO_GRIDCOLUMNSSELECTOR',prop:'ColumnsSelectorValues'}]");
-         setEventMetadata("DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED",",oparms:[{av:'AV23ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV28ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'edtEmployeeName_Visible',ctrl:'EMPLOYEENAME',prop:'Visible'},{av:'edtLeaveTypeName_Visible',ctrl:'LEAVETYPENAME',prop:'Visible'},{av:'edtLeaveRequestStartDate_Visible',ctrl:'LEAVEREQUESTSTARTDATE',prop:'Visible'},{av:'edtLeaveRequestEndDate_Visible',ctrl:'LEAVEREQUESTENDDATE',prop:'Visible'},{av:'edtLeaveRequestHalfDay_Visible',ctrl:'LEAVEREQUESTHALFDAY',prop:'Visible'},{av:'edtLeaveRequestDuration_Visible',ctrl:'LEAVEREQUESTDURATION',prop:'Visible'},{av:'edtavLeaverequestdescriptionvariable_Visible',ctrl:'vLEAVEREQUESTDESCRIPTIONVARIABLE',prop:'Visible'},{av:'edtavLeaverequestrejectionreasonvariable_Visible',ctrl:'vLEAVEREQUESTREJECTIONREASONVARIABLE',prop:'Visible'},{av:'AV56GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV57GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV58GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'edtLeaveRequestHalfDay_Columnheaderclass',ctrl:'LEAVEREQUESTHALFDAY',prop:'Columnheaderclass'},{av:'AV64ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV26ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''},{av:'AV13GridState',fld:'vGRIDSTATE',pic:''}]}");
-         setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED","{handler:'E113B2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV18FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV28ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV23ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV74Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV29TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV30TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'AV31TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV32TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV38TFLeaveRequestStartDate',fld:'vTFLEAVEREQUESTSTARTDATE',pic:''},{av:'AV39TFLeaveRequestStartDate_To',fld:'vTFLEAVEREQUESTSTARTDATE_TO',pic:''},{av:'AV43TFLeaveRequestEndDate',fld:'vTFLEAVEREQUESTENDDATE',pic:''},{av:'AV44TFLeaveRequestEndDate_To',fld:'vTFLEAVEREQUESTENDDATE_TO',pic:''},{av:'AV65TFLeaveRequestHalfDay',fld:'vTFLEAVEREQUESTHALFDAY',pic:''},{av:'AV67TFLeaveRequestHalfDayOperator',fld:'vTFLEAVEREQUESTHALFDAYOPERATOR',pic:'ZZZ9'},{av:'AV66TFLeaveRequestHalfDay_Sel',fld:'vTFLEAVEREQUESTHALFDAY_SEL',pic:''},{av:'AV48TFLeaveRequestDuration',fld:'vTFLEAVEREQUESTDURATION',pic:'Z9.9'},{av:'AV49TFLeaveRequestDuration_To',fld:'vTFLEAVEREQUESTDURATION_TO',pic:'Z9.9'},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV73Udparg17',fld:'vUDPARG17',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV64ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV15OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV16OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'sPrefix'},{av:'Ddo_managefilters_Activeeventkey',ctrl:'DDO_MANAGEFILTERS',prop:'ActiveEventKey'},{av:'AV13GridState',fld:'vGRIDSTATE',pic:''}]");
-         setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED",",oparms:[{av:'AV28ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV13GridState',fld:'vGRIDSTATE',pic:''},{av:'AV15OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV16OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV18FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV29TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV30TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'AV31TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV32TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV38TFLeaveRequestStartDate',fld:'vTFLEAVEREQUESTSTARTDATE',pic:''},{av:'AV39TFLeaveRequestStartDate_To',fld:'vTFLEAVEREQUESTSTARTDATE_TO',pic:''},{av:'AV43TFLeaveRequestEndDate',fld:'vTFLEAVEREQUESTENDDATE',pic:''},{av:'AV44TFLeaveRequestEndDate_To',fld:'vTFLEAVEREQUESTENDDATE_TO',pic:''},{av:'AV65TFLeaveRequestHalfDay',fld:'vTFLEAVEREQUESTHALFDAY',pic:''},{av:'AV66TFLeaveRequestHalfDay_Sel',fld:'vTFLEAVEREQUESTHALFDAY_SEL',pic:''},{av:'AV67TFLeaveRequestHalfDayOperator',fld:'vTFLEAVEREQUESTHALFDAYOPERATOR',pic:'ZZZ9'},{av:'Ddo_grid_Selectedfixedfilter',ctrl:'DDO_GRID',prop:'SelectedFixedFilter'},{av:'AV48TFLeaveRequestDuration',fld:'vTFLEAVEREQUESTDURATION',pic:'Z9.9'},{av:'AV49TFLeaveRequestDuration_To',fld:'vTFLEAVEREQUESTDURATION_TO',pic:'Z9.9'},{av:'Ddo_grid_Selectedvalue_set',ctrl:'DDO_GRID',prop:'SelectedValue_set'},{av:'Ddo_grid_Filteredtext_set',ctrl:'DDO_GRID',prop:'FilteredText_set'},{av:'Ddo_grid_Filteredtextto_set',ctrl:'DDO_GRID',prop:'FilteredTextTo_set'},{av:'Ddo_grid_Sortedstatus',ctrl:'DDO_GRID',prop:'SortedStatus'},{av:'AV23ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'edtEmployeeName_Visible',ctrl:'EMPLOYEENAME',prop:'Visible'},{av:'edtLeaveTypeName_Visible',ctrl:'LEAVETYPENAME',prop:'Visible'},{av:'edtLeaveRequestStartDate_Visible',ctrl:'LEAVEREQUESTSTARTDATE',prop:'Visible'},{av:'edtLeaveRequestEndDate_Visible',ctrl:'LEAVEREQUESTENDDATE',prop:'Visible'},{av:'edtLeaveRequestHalfDay_Visible',ctrl:'LEAVEREQUESTHALFDAY',prop:'Visible'},{av:'edtLeaveRequestDuration_Visible',ctrl:'LEAVEREQUESTDURATION',prop:'Visible'},{av:'edtavLeaverequestdescriptionvariable_Visible',ctrl:'vLEAVEREQUESTDESCRIPTIONVARIABLE',prop:'Visible'},{av:'edtavLeaverequestrejectionreasonvariable_Visible',ctrl:'vLEAVEREQUESTREJECTIONREASONVARIABLE',prop:'Visible'},{av:'AV56GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV57GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV58GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'edtLeaveRequestHalfDay_Columnheaderclass',ctrl:'LEAVEREQUESTHALFDAY',prop:'Columnheaderclass'},{av:'AV64ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV26ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''}]}");
-         setEventMetadata("DDO_AGEXPORT.ONOPTIONCLICKED","{handler:'E143B2',iparms:[{av:'Ddo_agexport_Activeeventkey',ctrl:'DDO_AGEXPORT',prop:'ActiveEventKey'},{av:'AV74Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV15OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV16OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV13GridState',fld:'vGRIDSTATE',pic:''},{av:'AV30TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'AV32TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV66TFLeaveRequestHalfDay_Sel',fld:'vTFLEAVEREQUESTHALFDAY_SEL',pic:''},{av:'AV29TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV31TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV38TFLeaveRequestStartDate',fld:'vTFLEAVEREQUESTSTARTDATE',pic:''},{av:'AV43TFLeaveRequestEndDate',fld:'vTFLEAVEREQUESTENDDATE',pic:''},{av:'AV67TFLeaveRequestHalfDayOperator',fld:'vTFLEAVEREQUESTHALFDAYOPERATOR',pic:'ZZZ9'},{av:'AV65TFLeaveRequestHalfDay',fld:'vTFLEAVEREQUESTHALFDAY',pic:''},{av:'AV48TFLeaveRequestDuration',fld:'vTFLEAVEREQUESTDURATION',pic:'Z9.9'},{av:'AV39TFLeaveRequestStartDate_To',fld:'vTFLEAVEREQUESTSTARTDATE_TO',pic:''},{av:'AV44TFLeaveRequestEndDate_To',fld:'vTFLEAVEREQUESTENDDATE_TO',pic:''},{av:'AV49TFLeaveRequestDuration_To',fld:'vTFLEAVEREQUESTDURATION_TO',pic:'Z9.9'}]");
-         setEventMetadata("DDO_AGEXPORT.ONOPTIONCLICKED",",oparms:[{av:'AV13GridState',fld:'vGRIDSTATE',pic:''},{av:'AV15OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV16OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'AV18FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV28ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV23ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV74Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV29TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV30TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'AV31TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV32TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV38TFLeaveRequestStartDate',fld:'vTFLEAVEREQUESTSTARTDATE',pic:''},{av:'AV39TFLeaveRequestStartDate_To',fld:'vTFLEAVEREQUESTSTARTDATE_TO',pic:''},{av:'AV43TFLeaveRequestEndDate',fld:'vTFLEAVEREQUESTENDDATE',pic:''},{av:'AV44TFLeaveRequestEndDate_To',fld:'vTFLEAVEREQUESTENDDATE_TO',pic:''},{av:'AV65TFLeaveRequestHalfDay',fld:'vTFLEAVEREQUESTHALFDAY',pic:''},{av:'AV67TFLeaveRequestHalfDayOperator',fld:'vTFLEAVEREQUESTHALFDAYOPERATOR',pic:'ZZZ9'},{av:'AV66TFLeaveRequestHalfDay_Sel',fld:'vTFLEAVEREQUESTHALFDAY_SEL',pic:''},{av:'AV48TFLeaveRequestDuration',fld:'vTFLEAVEREQUESTDURATION',pic:'Z9.9'},{av:'AV49TFLeaveRequestDuration_To',fld:'vTFLEAVEREQUESTDURATION_TO',pic:'Z9.9'},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV73Udparg17',fld:'vUDPARG17',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV64ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'sPrefix'},{av:'Ddo_grid_Sortedstatus',ctrl:'DDO_GRID',prop:'SortedStatus'},{av:'Ddo_grid_Selectedvalue_set',ctrl:'DDO_GRID',prop:'SelectedValue_set'},{av:'Ddo_grid_Filteredtext_set',ctrl:'DDO_GRID',prop:'FilteredText_set'},{av:'Ddo_grid_Filteredtextto_set',ctrl:'DDO_GRID',prop:'FilteredTextTo_set'},{av:'Ddo_grid_Selectedfixedfilter',ctrl:'DDO_GRID',prop:'SelectedFixedFilter'}]}");
+         setEventMetadata("DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED","{handler:'E163B2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV18FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV28ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV23ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV76Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV29TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV30TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'AV31TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV32TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV38TFLeaveRequestStartDate',fld:'vTFLEAVEREQUESTSTARTDATE',pic:''},{av:'AV39TFLeaveRequestStartDate_To',fld:'vTFLEAVEREQUESTSTARTDATE_TO',pic:''},{av:'AV43TFLeaveRequestEndDate',fld:'vTFLEAVEREQUESTENDDATE',pic:''},{av:'AV44TFLeaveRequestEndDate_To',fld:'vTFLEAVEREQUESTENDDATE_TO',pic:''},{av:'AV65TFLeaveRequestHalfDay',fld:'vTFLEAVEREQUESTHALFDAY',pic:''},{av:'AV67TFLeaveRequestHalfDayOperator',fld:'vTFLEAVEREQUESTHALFDAYOPERATOR',pic:'ZZZ9'},{av:'AV66TFLeaveRequestHalfDay_Sel',fld:'vTFLEAVEREQUESTHALFDAY_SEL',pic:''},{av:'AV48TFLeaveRequestDuration',fld:'vTFLEAVEREQUESTDURATION',pic:'Z9.9'},{av:'AV49TFLeaveRequestDuration_To',fld:'vTFLEAVEREQUESTDURATION_TO',pic:'Z9.9'},{av:'AV70TFEmployeeBalance',fld:'vTFEMPLOYEEBALANCE',pic:'Z9.9'},{av:'AV71TFEmployeeBalance_To',fld:'vTFEMPLOYEEBALANCE_TO',pic:'Z9.9'},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV75Udparg19',fld:'vUDPARG19',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV64ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV15OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV16OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'sPrefix'},{av:'Ddo_gridcolumnsselector_Columnsselectorvalues',ctrl:'DDO_GRIDCOLUMNSSELECTOR',prop:'ColumnsSelectorValues'}]");
+         setEventMetadata("DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED",",oparms:[{av:'AV23ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV28ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'edtEmployeeName_Visible',ctrl:'EMPLOYEENAME',prop:'Visible'},{av:'edtLeaveTypeName_Visible',ctrl:'LEAVETYPENAME',prop:'Visible'},{av:'edtLeaveRequestStartDate_Visible',ctrl:'LEAVEREQUESTSTARTDATE',prop:'Visible'},{av:'edtLeaveRequestEndDate_Visible',ctrl:'LEAVEREQUESTENDDATE',prop:'Visible'},{av:'edtLeaveRequestHalfDay_Visible',ctrl:'LEAVEREQUESTHALFDAY',prop:'Visible'},{av:'edtLeaveRequestDuration_Visible',ctrl:'LEAVEREQUESTDURATION',prop:'Visible'},{av:'edtavLeaverequestdescriptionvariable_Visible',ctrl:'vLEAVEREQUESTDESCRIPTIONVARIABLE',prop:'Visible'},{av:'edtavLeaverequestrejectionreasonvariable_Visible',ctrl:'vLEAVEREQUESTREJECTIONREASONVARIABLE',prop:'Visible'},{av:'edtEmployeeBalance_Visible',ctrl:'EMPLOYEEBALANCE',prop:'Visible'},{av:'AV56GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV57GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV58GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'edtLeaveRequestHalfDay_Columnheaderclass',ctrl:'LEAVEREQUESTHALFDAY',prop:'Columnheaderclass'},{av:'AV64ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV26ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''},{av:'AV13GridState',fld:'vGRIDSTATE',pic:''}]}");
+         setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED","{handler:'E113B2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV18FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV28ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV23ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV76Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV29TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV30TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'AV31TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV32TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV38TFLeaveRequestStartDate',fld:'vTFLEAVEREQUESTSTARTDATE',pic:''},{av:'AV39TFLeaveRequestStartDate_To',fld:'vTFLEAVEREQUESTSTARTDATE_TO',pic:''},{av:'AV43TFLeaveRequestEndDate',fld:'vTFLEAVEREQUESTENDDATE',pic:''},{av:'AV44TFLeaveRequestEndDate_To',fld:'vTFLEAVEREQUESTENDDATE_TO',pic:''},{av:'AV65TFLeaveRequestHalfDay',fld:'vTFLEAVEREQUESTHALFDAY',pic:''},{av:'AV67TFLeaveRequestHalfDayOperator',fld:'vTFLEAVEREQUESTHALFDAYOPERATOR',pic:'ZZZ9'},{av:'AV66TFLeaveRequestHalfDay_Sel',fld:'vTFLEAVEREQUESTHALFDAY_SEL',pic:''},{av:'AV48TFLeaveRequestDuration',fld:'vTFLEAVEREQUESTDURATION',pic:'Z9.9'},{av:'AV49TFLeaveRequestDuration_To',fld:'vTFLEAVEREQUESTDURATION_TO',pic:'Z9.9'},{av:'AV70TFEmployeeBalance',fld:'vTFEMPLOYEEBALANCE',pic:'Z9.9'},{av:'AV71TFEmployeeBalance_To',fld:'vTFEMPLOYEEBALANCE_TO',pic:'Z9.9'},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV75Udparg19',fld:'vUDPARG19',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV64ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV15OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV16OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'sPrefix'},{av:'Ddo_managefilters_Activeeventkey',ctrl:'DDO_MANAGEFILTERS',prop:'ActiveEventKey'},{av:'AV13GridState',fld:'vGRIDSTATE',pic:''}]");
+         setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED",",oparms:[{av:'AV28ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV13GridState',fld:'vGRIDSTATE',pic:''},{av:'AV15OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV16OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV18FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV29TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV30TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'AV31TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV32TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV38TFLeaveRequestStartDate',fld:'vTFLEAVEREQUESTSTARTDATE',pic:''},{av:'AV39TFLeaveRequestStartDate_To',fld:'vTFLEAVEREQUESTSTARTDATE_TO',pic:''},{av:'AV43TFLeaveRequestEndDate',fld:'vTFLEAVEREQUESTENDDATE',pic:''},{av:'AV44TFLeaveRequestEndDate_To',fld:'vTFLEAVEREQUESTENDDATE_TO',pic:''},{av:'AV65TFLeaveRequestHalfDay',fld:'vTFLEAVEREQUESTHALFDAY',pic:''},{av:'AV66TFLeaveRequestHalfDay_Sel',fld:'vTFLEAVEREQUESTHALFDAY_SEL',pic:''},{av:'AV67TFLeaveRequestHalfDayOperator',fld:'vTFLEAVEREQUESTHALFDAYOPERATOR',pic:'ZZZ9'},{av:'Ddo_grid_Selectedfixedfilter',ctrl:'DDO_GRID',prop:'SelectedFixedFilter'},{av:'AV48TFLeaveRequestDuration',fld:'vTFLEAVEREQUESTDURATION',pic:'Z9.9'},{av:'AV49TFLeaveRequestDuration_To',fld:'vTFLEAVEREQUESTDURATION_TO',pic:'Z9.9'},{av:'AV70TFEmployeeBalance',fld:'vTFEMPLOYEEBALANCE',pic:'Z9.9'},{av:'AV71TFEmployeeBalance_To',fld:'vTFEMPLOYEEBALANCE_TO',pic:'Z9.9'},{av:'Ddo_grid_Selectedvalue_set',ctrl:'DDO_GRID',prop:'SelectedValue_set'},{av:'Ddo_grid_Filteredtext_set',ctrl:'DDO_GRID',prop:'FilteredText_set'},{av:'Ddo_grid_Filteredtextto_set',ctrl:'DDO_GRID',prop:'FilteredTextTo_set'},{av:'Ddo_grid_Sortedstatus',ctrl:'DDO_GRID',prop:'SortedStatus'},{av:'AV23ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'edtEmployeeName_Visible',ctrl:'EMPLOYEENAME',prop:'Visible'},{av:'edtLeaveTypeName_Visible',ctrl:'LEAVETYPENAME',prop:'Visible'},{av:'edtLeaveRequestStartDate_Visible',ctrl:'LEAVEREQUESTSTARTDATE',prop:'Visible'},{av:'edtLeaveRequestEndDate_Visible',ctrl:'LEAVEREQUESTENDDATE',prop:'Visible'},{av:'edtLeaveRequestHalfDay_Visible',ctrl:'LEAVEREQUESTHALFDAY',prop:'Visible'},{av:'edtLeaveRequestDuration_Visible',ctrl:'LEAVEREQUESTDURATION',prop:'Visible'},{av:'edtavLeaverequestdescriptionvariable_Visible',ctrl:'vLEAVEREQUESTDESCRIPTIONVARIABLE',prop:'Visible'},{av:'edtavLeaverequestrejectionreasonvariable_Visible',ctrl:'vLEAVEREQUESTREJECTIONREASONVARIABLE',prop:'Visible'},{av:'edtEmployeeBalance_Visible',ctrl:'EMPLOYEEBALANCE',prop:'Visible'},{av:'AV56GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV57GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV58GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'edtLeaveRequestHalfDay_Columnheaderclass',ctrl:'LEAVEREQUESTHALFDAY',prop:'Columnheaderclass'},{av:'AV64ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV26ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''}]}");
+         setEventMetadata("DDO_AGEXPORT.ONOPTIONCLICKED","{handler:'E143B2',iparms:[{av:'Ddo_agexport_Activeeventkey',ctrl:'DDO_AGEXPORT',prop:'ActiveEventKey'},{av:'AV76Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV15OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV16OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV13GridState',fld:'vGRIDSTATE',pic:''},{av:'AV30TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'AV32TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV66TFLeaveRequestHalfDay_Sel',fld:'vTFLEAVEREQUESTHALFDAY_SEL',pic:''},{av:'AV29TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV31TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV38TFLeaveRequestStartDate',fld:'vTFLEAVEREQUESTSTARTDATE',pic:''},{av:'AV43TFLeaveRequestEndDate',fld:'vTFLEAVEREQUESTENDDATE',pic:''},{av:'AV67TFLeaveRequestHalfDayOperator',fld:'vTFLEAVEREQUESTHALFDAYOPERATOR',pic:'ZZZ9'},{av:'AV65TFLeaveRequestHalfDay',fld:'vTFLEAVEREQUESTHALFDAY',pic:''},{av:'AV48TFLeaveRequestDuration',fld:'vTFLEAVEREQUESTDURATION',pic:'Z9.9'},{av:'AV70TFEmployeeBalance',fld:'vTFEMPLOYEEBALANCE',pic:'Z9.9'},{av:'AV39TFLeaveRequestStartDate_To',fld:'vTFLEAVEREQUESTSTARTDATE_TO',pic:''},{av:'AV44TFLeaveRequestEndDate_To',fld:'vTFLEAVEREQUESTENDDATE_TO',pic:''},{av:'AV49TFLeaveRequestDuration_To',fld:'vTFLEAVEREQUESTDURATION_TO',pic:'Z9.9'},{av:'AV71TFEmployeeBalance_To',fld:'vTFEMPLOYEEBALANCE_TO',pic:'Z9.9'}]");
+         setEventMetadata("DDO_AGEXPORT.ONOPTIONCLICKED",",oparms:[{av:'AV13GridState',fld:'vGRIDSTATE',pic:''},{av:'AV15OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV16OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'AV18FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV28ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV23ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV76Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV29TFEmployeeName',fld:'vTFEMPLOYEENAME',pic:''},{av:'AV30TFEmployeeName_Sel',fld:'vTFEMPLOYEENAME_SEL',pic:''},{av:'AV31TFLeaveTypeName',fld:'vTFLEAVETYPENAME',pic:''},{av:'AV32TFLeaveTypeName_Sel',fld:'vTFLEAVETYPENAME_SEL',pic:''},{av:'AV38TFLeaveRequestStartDate',fld:'vTFLEAVEREQUESTSTARTDATE',pic:''},{av:'AV39TFLeaveRequestStartDate_To',fld:'vTFLEAVEREQUESTSTARTDATE_TO',pic:''},{av:'AV43TFLeaveRequestEndDate',fld:'vTFLEAVEREQUESTENDDATE',pic:''},{av:'AV44TFLeaveRequestEndDate_To',fld:'vTFLEAVEREQUESTENDDATE_TO',pic:''},{av:'AV65TFLeaveRequestHalfDay',fld:'vTFLEAVEREQUESTHALFDAY',pic:''},{av:'AV67TFLeaveRequestHalfDayOperator',fld:'vTFLEAVEREQUESTHALFDAYOPERATOR',pic:'ZZZ9'},{av:'AV66TFLeaveRequestHalfDay_Sel',fld:'vTFLEAVEREQUESTHALFDAY_SEL',pic:''},{av:'AV48TFLeaveRequestDuration',fld:'vTFLEAVEREQUESTDURATION',pic:'Z9.9'},{av:'AV49TFLeaveRequestDuration_To',fld:'vTFLEAVEREQUESTDURATION_TO',pic:'Z9.9'},{av:'AV70TFEmployeeBalance',fld:'vTFEMPLOYEEBALANCE',pic:'Z9.9'},{av:'AV71TFEmployeeBalance_To',fld:'vTFEMPLOYEEBALANCE_TO',pic:'Z9.9'},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV75Udparg19',fld:'vUDPARG19',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV64ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'sPrefix'},{av:'Ddo_grid_Sortedstatus',ctrl:'DDO_GRID',prop:'SortedStatus'},{av:'Ddo_grid_Selectedvalue_set',ctrl:'DDO_GRID',prop:'SelectedValue_set'},{av:'Ddo_grid_Filteredtext_set',ctrl:'DDO_GRID',prop:'FilteredText_set'},{av:'Ddo_grid_Filteredtextto_set',ctrl:'DDO_GRID',prop:'FilteredTextTo_set'},{av:'Ddo_grid_Selectedfixedfilter',ctrl:'DDO_GRID',prop:'SelectedFixedFilter'}]}");
          setEventMetadata("VALID_LEAVETYPEID","{handler:'Valid_Leavetypeid',iparms:[]");
          setEventMetadata("VALID_LEAVETYPEID",",oparms:[]}");
          setEventMetadata("VALID_EMPLOYEEID","{handler:'Valid_Employeeid',iparms:[]");
          setEventMetadata("VALID_EMPLOYEEID",",oparms:[]}");
-         setEventMetadata("NULL","{handler:'Validv_Leaverequestrejectionreasonvariable',iparms:[]");
+         setEventMetadata("NULL","{handler:'Valid_Employeebalance',iparms:[]");
          setEventMetadata("NULL",",oparms:[]}");
          return  ;
       }
@@ -3735,7 +3811,7 @@ namespace GeneXus.Programs {
          sPrefix = "";
          AV18FilterFullText = "";
          AV23ColumnsSelector = new GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector(context);
-         AV74Pgmname = "";
+         AV76Pgmname = "";
          AV29TFEmployeeName = "";
          AV30TFEmployeeName_Sel = "";
          AV31TFLeaveTypeName = "";
@@ -3804,23 +3880,24 @@ namespace GeneXus.Programs {
          A134LeaveRequestRejectionReason = "";
          AV69LeaveRequestRejectionReasonVariable = "";
          scmdbuf = "";
-         lV75Leaverequestrejectedds_3_filterfulltext = "";
-         lV76Leaverequestrejectedds_4_tfemployeename = "";
-         lV78Leaverequestrejectedds_6_tfleavetypename = "";
-         lV84Leaverequestrejectedds_12_tfleaverequesthalfday = "";
+         lV77Leaverequestrejectedds_3_filterfulltext = "";
+         lV78Leaverequestrejectedds_4_tfemployeename = "";
+         lV80Leaverequestrejectedds_6_tfleavetypename = "";
+         lV86Leaverequestrejectedds_12_tfleaverequesthalfday = "";
          AV63EmployeeIds = new GxSimpleCollection<long>();
-         AV75Leaverequestrejectedds_3_filterfulltext = "";
-         AV77Leaverequestrejectedds_5_tfemployeename_sel = "";
-         AV76Leaverequestrejectedds_4_tfemployeename = "";
-         AV79Leaverequestrejectedds_7_tfleavetypename_sel = "";
-         AV78Leaverequestrejectedds_6_tfleavetypename = "";
-         AV80Leaverequestrejectedds_8_tfleaverequeststartdate = DateTime.MinValue;
-         AV81Leaverequestrejectedds_9_tfleaverequeststartdate_to = DateTime.MinValue;
-         AV82Leaverequestrejectedds_10_tfleaverequestenddate = DateTime.MinValue;
-         AV83Leaverequestrejectedds_11_tfleaverequestenddate_to = DateTime.MinValue;
-         AV86Leaverequestrejectedds_14_tfleaverequesthalfday_sel = "";
-         AV84Leaverequestrejectedds_12_tfleaverequesthalfday = "";
+         AV77Leaverequestrejectedds_3_filterfulltext = "";
+         AV79Leaverequestrejectedds_5_tfemployeename_sel = "";
+         AV78Leaverequestrejectedds_4_tfemployeename = "";
+         AV81Leaverequestrejectedds_7_tfleavetypename_sel = "";
+         AV80Leaverequestrejectedds_6_tfleavetypename = "";
+         AV82Leaverequestrejectedds_8_tfleaverequeststartdate = DateTime.MinValue;
+         AV83Leaverequestrejectedds_9_tfleaverequeststartdate_to = DateTime.MinValue;
+         AV84Leaverequestrejectedds_10_tfleaverequestenddate = DateTime.MinValue;
+         AV85Leaverequestrejectedds_11_tfleaverequestenddate_to = DateTime.MinValue;
+         AV88Leaverequestrejectedds_14_tfleaverequesthalfday_sel = "";
+         AV86Leaverequestrejectedds_12_tfleaverequesthalfday = "";
          H003B2_A100CompanyId = new long[1] ;
+         H003B2_A147EmployeeBalance = new decimal[1] ;
          H003B2_A106EmployeeId = new long[1] ;
          H003B2_A134LeaveRequestRejectionReason = new string[] {""} ;
          H003B2_A133LeaveRequestDescription = new string[] {""} ;
@@ -3872,8 +3949,8 @@ namespace GeneXus.Programs {
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.leaverequestrejected__default(),
             new Object[][] {
                 new Object[] {
-               H003B2_A100CompanyId, H003B2_A106EmployeeId, H003B2_A134LeaveRequestRejectionReason, H003B2_A133LeaveRequestDescription, H003B2_A132LeaveRequestStatus, H003B2_A131LeaveRequestDuration, H003B2_A173LeaveRequestHalfDay, H003B2_n173LeaveRequestHalfDay, H003B2_A130LeaveRequestEndDate, H003B2_A129LeaveRequestStartDate,
-               H003B2_A128LeaveRequestDate, H003B2_A125LeaveTypeName, H003B2_A148EmployeeName, H003B2_A124LeaveTypeId, H003B2_A127LeaveRequestId
+               H003B2_A100CompanyId, H003B2_A147EmployeeBalance, H003B2_A106EmployeeId, H003B2_A134LeaveRequestRejectionReason, H003B2_A133LeaveRequestDescription, H003B2_A132LeaveRequestStatus, H003B2_A131LeaveRequestDuration, H003B2_A173LeaveRequestHalfDay, H003B2_n173LeaveRequestHalfDay, H003B2_A130LeaveRequestEndDate,
+               H003B2_A129LeaveRequestStartDate, H003B2_A128LeaveRequestDate, H003B2_A125LeaveTypeName, H003B2_A148EmployeeName, H003B2_A124LeaveTypeId, H003B2_A127LeaveRequestId
                }
                , new Object[] {
                H003B3_AGRID_nRecordCount
@@ -3886,9 +3963,9 @@ namespace GeneXus.Programs {
                }
             }
          );
-         AV74Pgmname = "LeaveRequestRejected";
+         AV76Pgmname = "LeaveRequestRejected";
          /* GeneXus formulas. */
-         AV74Pgmname = "LeaveRequestRejected";
+         AV76Pgmname = "LeaveRequestRejected";
          edtavLeaverequestdescriptionvariable_Enabled = 0;
          edtavLeaverequestrejectionreasonvariable_Enabled = 0;
       }
@@ -3913,7 +3990,7 @@ namespace GeneXus.Programs {
       private short gxcookieaux ;
       private short subGrid_Backcolorstyle ;
       private short subGrid_Sortable ;
-      private short AV85Leaverequestrejectedds_13_tfleaverequesthalfdayoperator ;
+      private short AV87Leaverequestrejectedds_13_tfleaverequesthalfdayoperator ;
       private short nGXWrapped ;
       private short subGrid_Backstyle ;
       private short subGrid_Titlebackstyle ;
@@ -3943,6 +4020,7 @@ namespace GeneXus.Programs {
       private int edtLeaveRequestDescription_Enabled ;
       private int edtLeaveRequestRejectionReason_Enabled ;
       private int edtEmployeeId_Enabled ;
+      private int edtEmployeeBalance_Enabled ;
       private int edtEmployeeName_Visible ;
       private int edtLeaveTypeName_Visible ;
       private int edtLeaveRequestStartDate_Visible ;
@@ -3951,8 +4029,9 @@ namespace GeneXus.Programs {
       private int edtLeaveRequestDuration_Visible ;
       private int edtavLeaverequestdescriptionvariable_Visible ;
       private int edtavLeaverequestrejectionreasonvariable_Visible ;
+      private int edtEmployeeBalance_Visible ;
       private int AV55PageToGo ;
-      private int AV89GXV1 ;
+      private int AV93GXV1 ;
       private int edtavFilterfulltext_Enabled ;
       private int idxLst ;
       private int subGrid_Backcolor ;
@@ -3963,7 +4042,7 @@ namespace GeneXus.Programs {
       private int subGrid_Hoveringcolor ;
       private long GRID_nFirstRecordOnPage ;
       private long A166ProjectManagerId ;
-      private long AV73Udparg17 ;
+      private long AV75Udparg19 ;
       private long A102ProjectId ;
       private long AV56GridCurrentPage ;
       private long AV57GridPageCount ;
@@ -3972,13 +4051,18 @@ namespace GeneXus.Programs {
       private long A106EmployeeId ;
       private long GRID_nCurrentRecord ;
       private long A100CompanyId ;
-      private long AV71Udparg2 ;
+      private long AV73Udparg2 ;
       private long GRID_nRecordCount ;
       private decimal AV48TFLeaveRequestDuration ;
       private decimal AV49TFLeaveRequestDuration_To ;
+      private decimal AV70TFEmployeeBalance ;
+      private decimal AV71TFEmployeeBalance_To ;
       private decimal A131LeaveRequestDuration ;
-      private decimal AV87Leaverequestrejectedds_15_tfleaverequestduration ;
-      private decimal AV88Leaverequestrejectedds_16_tfleaverequestduration_to ;
+      private decimal A147EmployeeBalance ;
+      private decimal AV89Leaverequestrejectedds_15_tfleaverequestduration ;
+      private decimal AV90Leaverequestrejectedds_16_tfleaverequestduration_to ;
+      private decimal AV91Leaverequestrejectedds_17_tfemployeebalance ;
+      private decimal AV92Leaverequestrejectedds_18_tfemployeebalance_to ;
       private string Gridpaginationbar_Selectedpage ;
       private string Ddo_grid_Activeeventkey ;
       private string Ddo_grid_Selectedvalue_get ;
@@ -3995,7 +4079,7 @@ namespace GeneXus.Programs {
       private string sCompPrefix ;
       private string sSFPrefix ;
       private string sGXsfl_39_idx="0001" ;
-      private string AV74Pgmname ;
+      private string AV76Pgmname ;
       private string AV29TFEmployeeName ;
       private string AV30TFEmployeeName_Sel ;
       private string AV31TFLeaveTypeName ;
@@ -4108,16 +4192,17 @@ namespace GeneXus.Programs {
       private string edtLeaveRequestDescription_Internalname ;
       private string edtLeaveRequestRejectionReason_Internalname ;
       private string edtEmployeeId_Internalname ;
+      private string edtEmployeeBalance_Internalname ;
       private string scmdbuf ;
-      private string lV76Leaverequestrejectedds_4_tfemployeename ;
-      private string lV78Leaverequestrejectedds_6_tfleavetypename ;
-      private string lV84Leaverequestrejectedds_12_tfleaverequesthalfday ;
-      private string AV77Leaverequestrejectedds_5_tfemployeename_sel ;
-      private string AV76Leaverequestrejectedds_4_tfemployeename ;
-      private string AV79Leaverequestrejectedds_7_tfleavetypename_sel ;
-      private string AV78Leaverequestrejectedds_6_tfleavetypename ;
-      private string AV86Leaverequestrejectedds_14_tfleaverequesthalfday_sel ;
-      private string AV84Leaverequestrejectedds_12_tfleaverequesthalfday ;
+      private string lV78Leaverequestrejectedds_4_tfemployeename ;
+      private string lV80Leaverequestrejectedds_6_tfleavetypename ;
+      private string lV86Leaverequestrejectedds_12_tfleaverequesthalfday ;
+      private string AV79Leaverequestrejectedds_5_tfemployeename_sel ;
+      private string AV78Leaverequestrejectedds_4_tfemployeename ;
+      private string AV81Leaverequestrejectedds_7_tfleavetypename_sel ;
+      private string AV80Leaverequestrejectedds_6_tfleavetypename ;
+      private string AV88Leaverequestrejectedds_14_tfleaverequesthalfday_sel ;
+      private string AV86Leaverequestrejectedds_12_tfleaverequesthalfday ;
       private string edtLeaveRequestHalfDay_Columnheaderclass ;
       private string edtLeaveRequestHalfDay_Columnclass ;
       private string GXt_char6 ;
@@ -4148,6 +4233,7 @@ namespace GeneXus.Programs {
       private string edtLeaveRequestRejectionReason_Jsonclick ;
       private string edtEmployeeId_Jsonclick ;
       private string edtavLeaverequestrejectionreasonvariable_Jsonclick ;
+      private string edtEmployeeBalance_Jsonclick ;
       private string subGrid_Header ;
       private DateTime AV38TFLeaveRequestStartDate ;
       private DateTime AV39TFLeaveRequestStartDate_To ;
@@ -4160,10 +4246,10 @@ namespace GeneXus.Programs {
       private DateTime A128LeaveRequestDate ;
       private DateTime A129LeaveRequestStartDate ;
       private DateTime A130LeaveRequestEndDate ;
-      private DateTime AV80Leaverequestrejectedds_8_tfleaverequeststartdate ;
-      private DateTime AV81Leaverequestrejectedds_9_tfleaverequeststartdate_to ;
-      private DateTime AV82Leaverequestrejectedds_10_tfleaverequestenddate ;
-      private DateTime AV83Leaverequestrejectedds_11_tfleaverequestenddate_to ;
+      private DateTime AV82Leaverequestrejectedds_8_tfleaverequeststartdate ;
+      private DateTime AV83Leaverequestrejectedds_9_tfleaverequeststartdate_to ;
+      private DateTime AV84Leaverequestrejectedds_10_tfleaverequestenddate ;
+      private DateTime AV85Leaverequestrejectedds_11_tfleaverequestenddate_to ;
       private bool entryPointCalled ;
       private bool toggleJsOutput ;
       private bool n166ProjectManagerId ;
@@ -4181,7 +4267,7 @@ namespace GeneXus.Programs {
       private bool wbErr ;
       private bool n173LeaveRequestHalfDay ;
       private bool gxdyncontrolsrefreshing ;
-      private bool AV70Udparg1 ;
+      private bool AV72Udparg1 ;
       private bool returnInSub ;
       private bool gx_refresh_fired ;
       private string AV21ColumnsSelectorXML ;
@@ -4195,8 +4281,8 @@ namespace GeneXus.Programs {
       private string AV68LeaveRequestDescriptionVariable ;
       private string A134LeaveRequestRejectionReason ;
       private string AV69LeaveRequestRejectionReasonVariable ;
-      private string lV75Leaverequestrejectedds_3_filterfulltext ;
-      private string AV75Leaverequestrejectedds_3_filterfulltext ;
+      private string lV77Leaverequestrejectedds_3_filterfulltext ;
+      private string AV77Leaverequestrejectedds_3_filterfulltext ;
       private string AV19ExcelFilename ;
       private string AV20ErrorMessage ;
       private GxSimpleCollection<long> AV64ProjectIds ;
@@ -4220,6 +4306,7 @@ namespace GeneXus.Programs {
       private GXCombobox cmbLeaveRequestStatus ;
       private IDataStoreProvider pr_default ;
       private long[] H003B2_A100CompanyId ;
+      private decimal[] H003B2_A147EmployeeBalance ;
       private long[] H003B2_A106EmployeeId ;
       private string[] H003B2_A134LeaveRequestRejectionReason ;
       private string[] H003B2_A133LeaveRequestDescription ;
@@ -4263,48 +4350,51 @@ namespace GeneXus.Programs {
       protected Object[] conditional_H003B2( IGxContext context ,
                                              long A106EmployeeId ,
                                              GxSimpleCollection<long> AV63EmployeeIds ,
-                                             string AV75Leaverequestrejectedds_3_filterfulltext ,
-                                             string AV77Leaverequestrejectedds_5_tfemployeename_sel ,
-                                             string AV76Leaverequestrejectedds_4_tfemployeename ,
-                                             string AV79Leaverequestrejectedds_7_tfleavetypename_sel ,
-                                             string AV78Leaverequestrejectedds_6_tfleavetypename ,
-                                             DateTime AV80Leaverequestrejectedds_8_tfleaverequeststartdate ,
-                                             DateTime AV81Leaverequestrejectedds_9_tfleaverequeststartdate_to ,
-                                             DateTime AV82Leaverequestrejectedds_10_tfleaverequestenddate ,
-                                             DateTime AV83Leaverequestrejectedds_11_tfleaverequestenddate_to ,
-                                             string AV86Leaverequestrejectedds_14_tfleaverequesthalfday_sel ,
-                                             string AV84Leaverequestrejectedds_12_tfleaverequesthalfday ,
-                                             short AV85Leaverequestrejectedds_13_tfleaverequesthalfdayoperator ,
-                                             decimal AV87Leaverequestrejectedds_15_tfleaverequestduration ,
-                                             decimal AV88Leaverequestrejectedds_16_tfleaverequestduration_to ,
+                                             string AV77Leaverequestrejectedds_3_filterfulltext ,
+                                             string AV79Leaverequestrejectedds_5_tfemployeename_sel ,
+                                             string AV78Leaverequestrejectedds_4_tfemployeename ,
+                                             string AV81Leaverequestrejectedds_7_tfleavetypename_sel ,
+                                             string AV80Leaverequestrejectedds_6_tfleavetypename ,
+                                             DateTime AV82Leaverequestrejectedds_8_tfleaverequeststartdate ,
+                                             DateTime AV83Leaverequestrejectedds_9_tfleaverequeststartdate_to ,
+                                             DateTime AV84Leaverequestrejectedds_10_tfleaverequestenddate ,
+                                             DateTime AV85Leaverequestrejectedds_11_tfleaverequestenddate_to ,
+                                             string AV88Leaverequestrejectedds_14_tfleaverequesthalfday_sel ,
+                                             string AV86Leaverequestrejectedds_12_tfleaverequesthalfday ,
+                                             short AV87Leaverequestrejectedds_13_tfleaverequesthalfdayoperator ,
+                                             decimal AV89Leaverequestrejectedds_15_tfleaverequestduration ,
+                                             decimal AV90Leaverequestrejectedds_16_tfleaverequestduration_to ,
+                                             decimal AV91Leaverequestrejectedds_17_tfemployeebalance ,
+                                             decimal AV92Leaverequestrejectedds_18_tfemployeebalance_to ,
                                              string A148EmployeeName ,
                                              string A125LeaveTypeName ,
                                              string A173LeaveRequestHalfDay ,
                                              decimal A131LeaveRequestDuration ,
+                                             decimal A147EmployeeBalance ,
                                              DateTime A129LeaveRequestStartDate ,
                                              DateTime A130LeaveRequestEndDate ,
                                              short AV15OrderedBy ,
                                              bool AV16OrderedDsc ,
                                              string A132LeaveRequestStatus ,
-                                             bool AV70Udparg1 ,
+                                             bool AV72Udparg1 ,
                                              long A100CompanyId ,
-                                             long AV71Udparg2 )
+                                             long AV73Udparg2 )
       {
          System.Text.StringBuilder sWhereString = new System.Text.StringBuilder();
          string scmdbuf;
-         short[] GXv_int7 = new short[21];
+         short[] GXv_int7 = new short[24];
          Object[] GXv_Object8 = new Object[2];
          string sSelectString;
          string sFromString;
          string sOrderString;
-         sSelectString = " T3.CompanyId, T1.EmployeeId, T1.LeaveRequestRejectionReason, T1.LeaveRequestDescription, T1.LeaveRequestStatus, T1.LeaveRequestDuration, T1.LeaveRequestHalfDay, T1.LeaveRequestEndDate, T1.LeaveRequestStartDate, T1.LeaveRequestDate, T3.LeaveTypeName, T2.EmployeeName, T1.LeaveTypeId, T1.LeaveRequestId";
+         sSelectString = " T3.CompanyId, T2.EmployeeBalance, T1.EmployeeId, T1.LeaveRequestRejectionReason, T1.LeaveRequestDescription, T1.LeaveRequestStatus, T1.LeaveRequestDuration, T1.LeaveRequestHalfDay, T1.LeaveRequestEndDate, T1.LeaveRequestStartDate, T1.LeaveRequestDate, T3.LeaveTypeName, T2.EmployeeName, T1.LeaveTypeId, T1.LeaveRequestId";
          sFromString = " FROM ((LeaveRequest T1 INNER JOIN Employee T2 ON T2.EmployeeId = T1.EmployeeId) INNER JOIN LeaveType T3 ON T3.LeaveTypeId = T1.LeaveTypeId)";
          sOrderString = "";
          AddWhere(sWhereString, "(T1.LeaveRequestStatus = ( 'Rejected'))");
-         AddWhere(sWhereString, "(Not ( :AV70Udparg1) or ( T3.CompanyId = :AV71Udparg2))");
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV75Leaverequestrejectedds_3_filterfulltext)) )
+         AddWhere(sWhereString, "(Not ( :AV72Udparg1) or ( T3.CompanyId = :AV73Udparg2))");
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV77Leaverequestrejectedds_3_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( LOWER(T2.EmployeeName) like '%' || LOWER(:lV75Leaverequestrejectedds_3_filterfulltext)) or ( LOWER(T3.LeaveTypeName) like '%' || LOWER(:lV75Leaverequestrejectedds_3_filterfulltext)) or ( LOWER(T1.LeaveRequestHalfDay) like '%' || LOWER(:lV75Leaverequestrejectedds_3_filterfulltext)) or ( SUBSTR(TO_CHAR(T1.LeaveRequestDuration,'90.9'), 2) like '%' || :lV75Leaverequestrejectedds_3_filterfulltext))");
+            AddWhere(sWhereString, "(( LOWER(T2.EmployeeName) like '%' || LOWER(:lV77Leaverequestrejectedds_3_filterfulltext)) or ( LOWER(T3.LeaveTypeName) like '%' || LOWER(:lV77Leaverequestrejectedds_3_filterfulltext)) or ( LOWER(T1.LeaveRequestHalfDay) like '%' || LOWER(:lV77Leaverequestrejectedds_3_filterfulltext)) or ( SUBSTR(TO_CHAR(T1.LeaveRequestDuration,'90.9'), 2) like '%' || :lV77Leaverequestrejectedds_3_filterfulltext) or ( SUBSTR(TO_CHAR(T2.EmployeeBalance,'90.9'), 2) like '%' || :lV77Leaverequestrejectedds_3_filterfulltext))");
          }
          else
          {
@@ -4312,122 +4402,139 @@ namespace GeneXus.Programs {
             GXv_int7[3] = 1;
             GXv_int7[4] = 1;
             GXv_int7[5] = 1;
-         }
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV77Leaverequestrejectedds_5_tfemployeename_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV76Leaverequestrejectedds_4_tfemployeename)) ) )
-         {
-            AddWhere(sWhereString, "(LOWER(T2.EmployeeName) like LOWER(:lV76Leaverequestrejectedds_4_tfemployeename))");
-         }
-         else
-         {
             GXv_int7[6] = 1;
          }
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV77Leaverequestrejectedds_5_tfemployeename_sel)) && ! ( StringUtil.StrCmp(AV77Leaverequestrejectedds_5_tfemployeename_sel, "<#Empty#>") == 0 ) )
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV79Leaverequestrejectedds_5_tfemployeename_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV78Leaverequestrejectedds_4_tfemployeename)) ) )
          {
-            AddWhere(sWhereString, "(T2.EmployeeName = ( :AV77Leaverequestrejectedds_5_tfemployeename_sel))");
+            AddWhere(sWhereString, "(LOWER(T2.EmployeeName) like LOWER(:lV78Leaverequestrejectedds_4_tfemployeename))");
          }
          else
          {
             GXv_int7[7] = 1;
          }
-         if ( StringUtil.StrCmp(AV77Leaverequestrejectedds_5_tfemployeename_sel, "<#Empty#>") == 0 )
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV79Leaverequestrejectedds_5_tfemployeename_sel)) && ! ( StringUtil.StrCmp(AV79Leaverequestrejectedds_5_tfemployeename_sel, "<#Empty#>") == 0 ) )
          {
-            AddWhere(sWhereString, "((char_length(trim(trailing ' ' from T2.EmployeeName))=0))");
-         }
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV79Leaverequestrejectedds_7_tfleavetypename_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV78Leaverequestrejectedds_6_tfleavetypename)) ) )
-         {
-            AddWhere(sWhereString, "(LOWER(T3.LeaveTypeName) like LOWER(:lV78Leaverequestrejectedds_6_tfleavetypename))");
+            AddWhere(sWhereString, "(T2.EmployeeName = ( :AV79Leaverequestrejectedds_5_tfemployeename_sel))");
          }
          else
          {
             GXv_int7[8] = 1;
          }
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV79Leaverequestrejectedds_7_tfleavetypename_sel)) && ! ( StringUtil.StrCmp(AV79Leaverequestrejectedds_7_tfleavetypename_sel, "<#Empty#>") == 0 ) )
+         if ( StringUtil.StrCmp(AV79Leaverequestrejectedds_5_tfemployeename_sel, "<#Empty#>") == 0 )
          {
-            AddWhere(sWhereString, "(T3.LeaveTypeName = ( :AV79Leaverequestrejectedds_7_tfleavetypename_sel))");
+            AddWhere(sWhereString, "((char_length(trim(trailing ' ' from T2.EmployeeName))=0))");
+         }
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV81Leaverequestrejectedds_7_tfleavetypename_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV80Leaverequestrejectedds_6_tfleavetypename)) ) )
+         {
+            AddWhere(sWhereString, "(LOWER(T3.LeaveTypeName) like LOWER(:lV80Leaverequestrejectedds_6_tfleavetypename))");
          }
          else
          {
             GXv_int7[9] = 1;
          }
-         if ( StringUtil.StrCmp(AV79Leaverequestrejectedds_7_tfleavetypename_sel, "<#Empty#>") == 0 )
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV81Leaverequestrejectedds_7_tfleavetypename_sel)) && ! ( StringUtil.StrCmp(AV81Leaverequestrejectedds_7_tfleavetypename_sel, "<#Empty#>") == 0 ) )
          {
-            AddWhere(sWhereString, "((char_length(trim(trailing ' ' from T3.LeaveTypeName))=0))");
-         }
-         if ( ! (DateTime.MinValue==AV80Leaverequestrejectedds_8_tfleaverequeststartdate) )
-         {
-            AddWhere(sWhereString, "(T1.LeaveRequestStartDate >= :AV80Leaverequestrejectedds_8_tfleaverequeststartdate)");
+            AddWhere(sWhereString, "(T3.LeaveTypeName = ( :AV81Leaverequestrejectedds_7_tfleavetypename_sel))");
          }
          else
          {
             GXv_int7[10] = 1;
          }
-         if ( ! (DateTime.MinValue==AV81Leaverequestrejectedds_9_tfleaverequeststartdate_to) )
+         if ( StringUtil.StrCmp(AV81Leaverequestrejectedds_7_tfleavetypename_sel, "<#Empty#>") == 0 )
          {
-            AddWhere(sWhereString, "(T1.LeaveRequestStartDate <= :AV81Leaverequestrejectedds_9_tfleaverequeststartdate_to)");
+            AddWhere(sWhereString, "((char_length(trim(trailing ' ' from T3.LeaveTypeName))=0))");
+         }
+         if ( ! (DateTime.MinValue==AV82Leaverequestrejectedds_8_tfleaverequeststartdate) )
+         {
+            AddWhere(sWhereString, "(T1.LeaveRequestStartDate >= :AV82Leaverequestrejectedds_8_tfleaverequeststartdate)");
          }
          else
          {
             GXv_int7[11] = 1;
          }
-         if ( ! (DateTime.MinValue==AV82Leaverequestrejectedds_10_tfleaverequestenddate) )
+         if ( ! (DateTime.MinValue==AV83Leaverequestrejectedds_9_tfleaverequeststartdate_to) )
          {
-            AddWhere(sWhereString, "(T1.LeaveRequestEndDate >= :AV82Leaverequestrejectedds_10_tfleaverequestenddate)");
+            AddWhere(sWhereString, "(T1.LeaveRequestStartDate <= :AV83Leaverequestrejectedds_9_tfleaverequeststartdate_to)");
          }
          else
          {
             GXv_int7[12] = 1;
          }
-         if ( ! (DateTime.MinValue==AV83Leaverequestrejectedds_11_tfleaverequestenddate_to) )
+         if ( ! (DateTime.MinValue==AV84Leaverequestrejectedds_10_tfleaverequestenddate) )
          {
-            AddWhere(sWhereString, "(T1.LeaveRequestEndDate <= :AV83Leaverequestrejectedds_11_tfleaverequestenddate_to)");
+            AddWhere(sWhereString, "(T1.LeaveRequestEndDate >= :AV84Leaverequestrejectedds_10_tfleaverequestenddate)");
          }
          else
          {
             GXv_int7[13] = 1;
          }
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV86Leaverequestrejectedds_14_tfleaverequesthalfday_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV84Leaverequestrejectedds_12_tfleaverequesthalfday)) ) )
+         if ( ! (DateTime.MinValue==AV85Leaverequestrejectedds_11_tfleaverequestenddate_to) )
          {
-            AddWhere(sWhereString, "(LOWER(T1.LeaveRequestHalfDay) like LOWER(:lV84Leaverequestrejectedds_12_tfleaverequesthalfday))");
+            AddWhere(sWhereString, "(T1.LeaveRequestEndDate <= :AV85Leaverequestrejectedds_11_tfleaverequestenddate_to)");
          }
          else
          {
             GXv_int7[14] = 1;
          }
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV86Leaverequestrejectedds_14_tfleaverequesthalfday_sel)) && ! ( StringUtil.StrCmp(AV86Leaverequestrejectedds_14_tfleaverequesthalfday_sel, "<#Empty#>") == 0 ) )
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV88Leaverequestrejectedds_14_tfleaverequesthalfday_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV86Leaverequestrejectedds_12_tfleaverequesthalfday)) ) )
          {
-            AddWhere(sWhereString, "(T1.LeaveRequestHalfDay = ( :AV86Leaverequestrejectedds_14_tfleaverequesthalfday_sel))");
+            AddWhere(sWhereString, "(LOWER(T1.LeaveRequestHalfDay) like LOWER(:lV86Leaverequestrejectedds_12_tfleaverequesthalfday))");
          }
          else
          {
             GXv_int7[15] = 1;
          }
-         if ( StringUtil.StrCmp(AV86Leaverequestrejectedds_14_tfleaverequesthalfday_sel, "<#Empty#>") == 0 )
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV88Leaverequestrejectedds_14_tfleaverequesthalfday_sel)) && ! ( StringUtil.StrCmp(AV88Leaverequestrejectedds_14_tfleaverequesthalfday_sel, "<#Empty#>") == 0 ) )
          {
-            AddWhere(sWhereString, "(T1.LeaveRequestHalfDay IS NULL or (char_length(trim(trailing ' ' from T1.LeaveRequestHalfDay))=0))");
-         }
-         if ( AV85Leaverequestrejectedds_13_tfleaverequesthalfdayoperator == 1 )
-         {
-            AddWhere(sWhereString, "(T1.LeaveRequestHalfDay = ( 'Morning'))");
-         }
-         if ( AV85Leaverequestrejectedds_13_tfleaverequesthalfdayoperator == 2 )
-         {
-            AddWhere(sWhereString, "(T1.LeaveRequestHalfDay = ( 'Afternoon'))");
-         }
-         if ( ! (Convert.ToDecimal(0)==AV87Leaverequestrejectedds_15_tfleaverequestduration) )
-         {
-            AddWhere(sWhereString, "(T1.LeaveRequestDuration >= :AV87Leaverequestrejectedds_15_tfleaverequestduration)");
+            AddWhere(sWhereString, "(T1.LeaveRequestHalfDay = ( :AV88Leaverequestrejectedds_14_tfleaverequesthalfday_sel))");
          }
          else
          {
             GXv_int7[16] = 1;
          }
-         if ( ! (Convert.ToDecimal(0)==AV88Leaverequestrejectedds_16_tfleaverequestduration_to) )
+         if ( StringUtil.StrCmp(AV88Leaverequestrejectedds_14_tfleaverequesthalfday_sel, "<#Empty#>") == 0 )
          {
-            AddWhere(sWhereString, "(T1.LeaveRequestDuration <= :AV88Leaverequestrejectedds_16_tfleaverequestduration_to)");
+            AddWhere(sWhereString, "(T1.LeaveRequestHalfDay IS NULL or (char_length(trim(trailing ' ' from T1.LeaveRequestHalfDay))=0))");
+         }
+         if ( AV87Leaverequestrejectedds_13_tfleaverequesthalfdayoperator == 1 )
+         {
+            AddWhere(sWhereString, "(T1.LeaveRequestHalfDay = ( 'Morning'))");
+         }
+         if ( AV87Leaverequestrejectedds_13_tfleaverequesthalfdayoperator == 2 )
+         {
+            AddWhere(sWhereString, "(T1.LeaveRequestHalfDay = ( 'Afternoon'))");
+         }
+         if ( ! (Convert.ToDecimal(0)==AV89Leaverequestrejectedds_15_tfleaverequestduration) )
+         {
+            AddWhere(sWhereString, "(T1.LeaveRequestDuration >= :AV89Leaverequestrejectedds_15_tfleaverequestduration)");
          }
          else
          {
             GXv_int7[17] = 1;
+         }
+         if ( ! (Convert.ToDecimal(0)==AV90Leaverequestrejectedds_16_tfleaverequestduration_to) )
+         {
+            AddWhere(sWhereString, "(T1.LeaveRequestDuration <= :AV90Leaverequestrejectedds_16_tfleaverequestduration_to)");
+         }
+         else
+         {
+            GXv_int7[18] = 1;
+         }
+         if ( ! (Convert.ToDecimal(0)==AV91Leaverequestrejectedds_17_tfemployeebalance) )
+         {
+            AddWhere(sWhereString, "(T2.EmployeeBalance >= :AV91Leaverequestrejectedds_17_tfemployeebalance)");
+         }
+         else
+         {
+            GXv_int7[19] = 1;
+         }
+         if ( ! (Convert.ToDecimal(0)==AV92Leaverequestrejectedds_18_tfemployeebalance_to) )
+         {
+            AddWhere(sWhereString, "(T2.EmployeeBalance <= :AV92Leaverequestrejectedds_18_tfemployeebalance_to)");
+         }
+         else
+         {
+            GXv_int7[20] = 1;
          }
          if ( ! new userhasrole(context).executeUdp(  "Manager") && new userhasrole(context).executeUdp(  "Project Manager") )
          {
@@ -4485,6 +4592,14 @@ namespace GeneXus.Programs {
          {
             sOrderString += " ORDER BY T1.LeaveRequestDuration DESC, T1.LeaveRequestId";
          }
+         else if ( ( AV15OrderedBy == 8 ) && ! AV16OrderedDsc )
+         {
+            sOrderString += " ORDER BY T2.EmployeeBalance, T1.LeaveRequestId";
+         }
+         else if ( ( AV15OrderedBy == 8 ) && ( AV16OrderedDsc ) )
+         {
+            sOrderString += " ORDER BY T2.EmployeeBalance DESC, T1.LeaveRequestId";
+         }
          else if ( true )
          {
             sOrderString += " ORDER BY T1.LeaveRequestId";
@@ -4498,43 +4613,46 @@ namespace GeneXus.Programs {
       protected Object[] conditional_H003B3( IGxContext context ,
                                              long A106EmployeeId ,
                                              GxSimpleCollection<long> AV63EmployeeIds ,
-                                             string AV75Leaverequestrejectedds_3_filterfulltext ,
-                                             string AV77Leaverequestrejectedds_5_tfemployeename_sel ,
-                                             string AV76Leaverequestrejectedds_4_tfemployeename ,
-                                             string AV79Leaverequestrejectedds_7_tfleavetypename_sel ,
-                                             string AV78Leaverequestrejectedds_6_tfleavetypename ,
-                                             DateTime AV80Leaverequestrejectedds_8_tfleaverequeststartdate ,
-                                             DateTime AV81Leaverequestrejectedds_9_tfleaverequeststartdate_to ,
-                                             DateTime AV82Leaverequestrejectedds_10_tfleaverequestenddate ,
-                                             DateTime AV83Leaverequestrejectedds_11_tfleaverequestenddate_to ,
-                                             string AV86Leaverequestrejectedds_14_tfleaverequesthalfday_sel ,
-                                             string AV84Leaverequestrejectedds_12_tfleaverequesthalfday ,
-                                             short AV85Leaverequestrejectedds_13_tfleaverequesthalfdayoperator ,
-                                             decimal AV87Leaverequestrejectedds_15_tfleaverequestduration ,
-                                             decimal AV88Leaverequestrejectedds_16_tfleaverequestduration_to ,
+                                             string AV77Leaverequestrejectedds_3_filterfulltext ,
+                                             string AV79Leaverequestrejectedds_5_tfemployeename_sel ,
+                                             string AV78Leaverequestrejectedds_4_tfemployeename ,
+                                             string AV81Leaverequestrejectedds_7_tfleavetypename_sel ,
+                                             string AV80Leaverequestrejectedds_6_tfleavetypename ,
+                                             DateTime AV82Leaverequestrejectedds_8_tfleaverequeststartdate ,
+                                             DateTime AV83Leaverequestrejectedds_9_tfleaverequeststartdate_to ,
+                                             DateTime AV84Leaverequestrejectedds_10_tfleaverequestenddate ,
+                                             DateTime AV85Leaverequestrejectedds_11_tfleaverequestenddate_to ,
+                                             string AV88Leaverequestrejectedds_14_tfleaverequesthalfday_sel ,
+                                             string AV86Leaverequestrejectedds_12_tfleaverequesthalfday ,
+                                             short AV87Leaverequestrejectedds_13_tfleaverequesthalfdayoperator ,
+                                             decimal AV89Leaverequestrejectedds_15_tfleaverequestduration ,
+                                             decimal AV90Leaverequestrejectedds_16_tfleaverequestduration_to ,
+                                             decimal AV91Leaverequestrejectedds_17_tfemployeebalance ,
+                                             decimal AV92Leaverequestrejectedds_18_tfemployeebalance_to ,
                                              string A148EmployeeName ,
                                              string A125LeaveTypeName ,
                                              string A173LeaveRequestHalfDay ,
                                              decimal A131LeaveRequestDuration ,
+                                             decimal A147EmployeeBalance ,
                                              DateTime A129LeaveRequestStartDate ,
                                              DateTime A130LeaveRequestEndDate ,
                                              short AV15OrderedBy ,
                                              bool AV16OrderedDsc ,
                                              string A132LeaveRequestStatus ,
-                                             bool AV70Udparg1 ,
+                                             bool AV72Udparg1 ,
                                              long A100CompanyId ,
-                                             long AV71Udparg2 )
+                                             long AV73Udparg2 )
       {
          System.Text.StringBuilder sWhereString = new System.Text.StringBuilder();
          string scmdbuf;
-         short[] GXv_int9 = new short[18];
+         short[] GXv_int9 = new short[21];
          Object[] GXv_Object10 = new Object[2];
          scmdbuf = "SELECT COUNT(*) FROM ((LeaveRequest T1 INNER JOIN Employee T3 ON T3.EmployeeId = T1.EmployeeId) INNER JOIN LeaveType T2 ON T2.LeaveTypeId = T1.LeaveTypeId)";
          AddWhere(sWhereString, "(T1.LeaveRequestStatus = ( 'Rejected'))");
-         AddWhere(sWhereString, "(Not ( :AV70Udparg1) or ( T2.CompanyId = :AV71Udparg2))");
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV75Leaverequestrejectedds_3_filterfulltext)) )
+         AddWhere(sWhereString, "(Not ( :AV72Udparg1) or ( T2.CompanyId = :AV73Udparg2))");
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV77Leaverequestrejectedds_3_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( LOWER(T3.EmployeeName) like '%' || LOWER(:lV75Leaverequestrejectedds_3_filterfulltext)) or ( LOWER(T2.LeaveTypeName) like '%' || LOWER(:lV75Leaverequestrejectedds_3_filterfulltext)) or ( LOWER(T1.LeaveRequestHalfDay) like '%' || LOWER(:lV75Leaverequestrejectedds_3_filterfulltext)) or ( SUBSTR(TO_CHAR(T1.LeaveRequestDuration,'90.9'), 2) like '%' || :lV75Leaverequestrejectedds_3_filterfulltext))");
+            AddWhere(sWhereString, "(( LOWER(T3.EmployeeName) like '%' || LOWER(:lV77Leaverequestrejectedds_3_filterfulltext)) or ( LOWER(T2.LeaveTypeName) like '%' || LOWER(:lV77Leaverequestrejectedds_3_filterfulltext)) or ( LOWER(T1.LeaveRequestHalfDay) like '%' || LOWER(:lV77Leaverequestrejectedds_3_filterfulltext)) or ( SUBSTR(TO_CHAR(T1.LeaveRequestDuration,'90.9'), 2) like '%' || :lV77Leaverequestrejectedds_3_filterfulltext) or ( SUBSTR(TO_CHAR(T3.EmployeeBalance,'90.9'), 2) like '%' || :lV77Leaverequestrejectedds_3_filterfulltext))");
          }
          else
          {
@@ -4542,122 +4660,139 @@ namespace GeneXus.Programs {
             GXv_int9[3] = 1;
             GXv_int9[4] = 1;
             GXv_int9[5] = 1;
-         }
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV77Leaverequestrejectedds_5_tfemployeename_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV76Leaverequestrejectedds_4_tfemployeename)) ) )
-         {
-            AddWhere(sWhereString, "(LOWER(T3.EmployeeName) like LOWER(:lV76Leaverequestrejectedds_4_tfemployeename))");
-         }
-         else
-         {
             GXv_int9[6] = 1;
          }
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV77Leaverequestrejectedds_5_tfemployeename_sel)) && ! ( StringUtil.StrCmp(AV77Leaverequestrejectedds_5_tfemployeename_sel, "<#Empty#>") == 0 ) )
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV79Leaverequestrejectedds_5_tfemployeename_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV78Leaverequestrejectedds_4_tfemployeename)) ) )
          {
-            AddWhere(sWhereString, "(T3.EmployeeName = ( :AV77Leaverequestrejectedds_5_tfemployeename_sel))");
+            AddWhere(sWhereString, "(LOWER(T3.EmployeeName) like LOWER(:lV78Leaverequestrejectedds_4_tfemployeename))");
          }
          else
          {
             GXv_int9[7] = 1;
          }
-         if ( StringUtil.StrCmp(AV77Leaverequestrejectedds_5_tfemployeename_sel, "<#Empty#>") == 0 )
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV79Leaverequestrejectedds_5_tfemployeename_sel)) && ! ( StringUtil.StrCmp(AV79Leaverequestrejectedds_5_tfemployeename_sel, "<#Empty#>") == 0 ) )
          {
-            AddWhere(sWhereString, "((char_length(trim(trailing ' ' from T3.EmployeeName))=0))");
-         }
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV79Leaverequestrejectedds_7_tfleavetypename_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV78Leaverequestrejectedds_6_tfleavetypename)) ) )
-         {
-            AddWhere(sWhereString, "(LOWER(T2.LeaveTypeName) like LOWER(:lV78Leaverequestrejectedds_6_tfleavetypename))");
+            AddWhere(sWhereString, "(T3.EmployeeName = ( :AV79Leaverequestrejectedds_5_tfemployeename_sel))");
          }
          else
          {
             GXv_int9[8] = 1;
          }
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV79Leaverequestrejectedds_7_tfleavetypename_sel)) && ! ( StringUtil.StrCmp(AV79Leaverequestrejectedds_7_tfleavetypename_sel, "<#Empty#>") == 0 ) )
+         if ( StringUtil.StrCmp(AV79Leaverequestrejectedds_5_tfemployeename_sel, "<#Empty#>") == 0 )
          {
-            AddWhere(sWhereString, "(T2.LeaveTypeName = ( :AV79Leaverequestrejectedds_7_tfleavetypename_sel))");
+            AddWhere(sWhereString, "((char_length(trim(trailing ' ' from T3.EmployeeName))=0))");
+         }
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV81Leaverequestrejectedds_7_tfleavetypename_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV80Leaverequestrejectedds_6_tfleavetypename)) ) )
+         {
+            AddWhere(sWhereString, "(LOWER(T2.LeaveTypeName) like LOWER(:lV80Leaverequestrejectedds_6_tfleavetypename))");
          }
          else
          {
             GXv_int9[9] = 1;
          }
-         if ( StringUtil.StrCmp(AV79Leaverequestrejectedds_7_tfleavetypename_sel, "<#Empty#>") == 0 )
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV81Leaverequestrejectedds_7_tfleavetypename_sel)) && ! ( StringUtil.StrCmp(AV81Leaverequestrejectedds_7_tfleavetypename_sel, "<#Empty#>") == 0 ) )
          {
-            AddWhere(sWhereString, "((char_length(trim(trailing ' ' from T2.LeaveTypeName))=0))");
-         }
-         if ( ! (DateTime.MinValue==AV80Leaverequestrejectedds_8_tfleaverequeststartdate) )
-         {
-            AddWhere(sWhereString, "(T1.LeaveRequestStartDate >= :AV80Leaverequestrejectedds_8_tfleaverequeststartdate)");
+            AddWhere(sWhereString, "(T2.LeaveTypeName = ( :AV81Leaverequestrejectedds_7_tfleavetypename_sel))");
          }
          else
          {
             GXv_int9[10] = 1;
          }
-         if ( ! (DateTime.MinValue==AV81Leaverequestrejectedds_9_tfleaverequeststartdate_to) )
+         if ( StringUtil.StrCmp(AV81Leaverequestrejectedds_7_tfleavetypename_sel, "<#Empty#>") == 0 )
          {
-            AddWhere(sWhereString, "(T1.LeaveRequestStartDate <= :AV81Leaverequestrejectedds_9_tfleaverequeststartdate_to)");
+            AddWhere(sWhereString, "((char_length(trim(trailing ' ' from T2.LeaveTypeName))=0))");
+         }
+         if ( ! (DateTime.MinValue==AV82Leaverequestrejectedds_8_tfleaverequeststartdate) )
+         {
+            AddWhere(sWhereString, "(T1.LeaveRequestStartDate >= :AV82Leaverequestrejectedds_8_tfleaverequeststartdate)");
          }
          else
          {
             GXv_int9[11] = 1;
          }
-         if ( ! (DateTime.MinValue==AV82Leaverequestrejectedds_10_tfleaverequestenddate) )
+         if ( ! (DateTime.MinValue==AV83Leaverequestrejectedds_9_tfleaverequeststartdate_to) )
          {
-            AddWhere(sWhereString, "(T1.LeaveRequestEndDate >= :AV82Leaverequestrejectedds_10_tfleaverequestenddate)");
+            AddWhere(sWhereString, "(T1.LeaveRequestStartDate <= :AV83Leaverequestrejectedds_9_tfleaverequeststartdate_to)");
          }
          else
          {
             GXv_int9[12] = 1;
          }
-         if ( ! (DateTime.MinValue==AV83Leaverequestrejectedds_11_tfleaverequestenddate_to) )
+         if ( ! (DateTime.MinValue==AV84Leaverequestrejectedds_10_tfleaverequestenddate) )
          {
-            AddWhere(sWhereString, "(T1.LeaveRequestEndDate <= :AV83Leaverequestrejectedds_11_tfleaverequestenddate_to)");
+            AddWhere(sWhereString, "(T1.LeaveRequestEndDate >= :AV84Leaverequestrejectedds_10_tfleaverequestenddate)");
          }
          else
          {
             GXv_int9[13] = 1;
          }
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV86Leaverequestrejectedds_14_tfleaverequesthalfday_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV84Leaverequestrejectedds_12_tfleaverequesthalfday)) ) )
+         if ( ! (DateTime.MinValue==AV85Leaverequestrejectedds_11_tfleaverequestenddate_to) )
          {
-            AddWhere(sWhereString, "(LOWER(T1.LeaveRequestHalfDay) like LOWER(:lV84Leaverequestrejectedds_12_tfleaverequesthalfday))");
+            AddWhere(sWhereString, "(T1.LeaveRequestEndDate <= :AV85Leaverequestrejectedds_11_tfleaverequestenddate_to)");
          }
          else
          {
             GXv_int9[14] = 1;
          }
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV86Leaverequestrejectedds_14_tfleaverequesthalfday_sel)) && ! ( StringUtil.StrCmp(AV86Leaverequestrejectedds_14_tfleaverequesthalfday_sel, "<#Empty#>") == 0 ) )
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV88Leaverequestrejectedds_14_tfleaverequesthalfday_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV86Leaverequestrejectedds_12_tfleaverequesthalfday)) ) )
          {
-            AddWhere(sWhereString, "(T1.LeaveRequestHalfDay = ( :AV86Leaverequestrejectedds_14_tfleaverequesthalfday_sel))");
+            AddWhere(sWhereString, "(LOWER(T1.LeaveRequestHalfDay) like LOWER(:lV86Leaverequestrejectedds_12_tfleaverequesthalfday))");
          }
          else
          {
             GXv_int9[15] = 1;
          }
-         if ( StringUtil.StrCmp(AV86Leaverequestrejectedds_14_tfleaverequesthalfday_sel, "<#Empty#>") == 0 )
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV88Leaverequestrejectedds_14_tfleaverequesthalfday_sel)) && ! ( StringUtil.StrCmp(AV88Leaverequestrejectedds_14_tfleaverequesthalfday_sel, "<#Empty#>") == 0 ) )
          {
-            AddWhere(sWhereString, "(T1.LeaveRequestHalfDay IS NULL or (char_length(trim(trailing ' ' from T1.LeaveRequestHalfDay))=0))");
-         }
-         if ( AV85Leaverequestrejectedds_13_tfleaverequesthalfdayoperator == 1 )
-         {
-            AddWhere(sWhereString, "(T1.LeaveRequestHalfDay = ( 'Morning'))");
-         }
-         if ( AV85Leaverequestrejectedds_13_tfleaverequesthalfdayoperator == 2 )
-         {
-            AddWhere(sWhereString, "(T1.LeaveRequestHalfDay = ( 'Afternoon'))");
-         }
-         if ( ! (Convert.ToDecimal(0)==AV87Leaverequestrejectedds_15_tfleaverequestduration) )
-         {
-            AddWhere(sWhereString, "(T1.LeaveRequestDuration >= :AV87Leaverequestrejectedds_15_tfleaverequestduration)");
+            AddWhere(sWhereString, "(T1.LeaveRequestHalfDay = ( :AV88Leaverequestrejectedds_14_tfleaverequesthalfday_sel))");
          }
          else
          {
             GXv_int9[16] = 1;
          }
-         if ( ! (Convert.ToDecimal(0)==AV88Leaverequestrejectedds_16_tfleaverequestduration_to) )
+         if ( StringUtil.StrCmp(AV88Leaverequestrejectedds_14_tfleaverequesthalfday_sel, "<#Empty#>") == 0 )
          {
-            AddWhere(sWhereString, "(T1.LeaveRequestDuration <= :AV88Leaverequestrejectedds_16_tfleaverequestduration_to)");
+            AddWhere(sWhereString, "(T1.LeaveRequestHalfDay IS NULL or (char_length(trim(trailing ' ' from T1.LeaveRequestHalfDay))=0))");
+         }
+         if ( AV87Leaverequestrejectedds_13_tfleaverequesthalfdayoperator == 1 )
+         {
+            AddWhere(sWhereString, "(T1.LeaveRequestHalfDay = ( 'Morning'))");
+         }
+         if ( AV87Leaverequestrejectedds_13_tfleaverequesthalfdayoperator == 2 )
+         {
+            AddWhere(sWhereString, "(T1.LeaveRequestHalfDay = ( 'Afternoon'))");
+         }
+         if ( ! (Convert.ToDecimal(0)==AV89Leaverequestrejectedds_15_tfleaverequestduration) )
+         {
+            AddWhere(sWhereString, "(T1.LeaveRequestDuration >= :AV89Leaverequestrejectedds_15_tfleaverequestduration)");
          }
          else
          {
             GXv_int9[17] = 1;
+         }
+         if ( ! (Convert.ToDecimal(0)==AV90Leaverequestrejectedds_16_tfleaverequestduration_to) )
+         {
+            AddWhere(sWhereString, "(T1.LeaveRequestDuration <= :AV90Leaverequestrejectedds_16_tfleaverequestduration_to)");
+         }
+         else
+         {
+            GXv_int9[18] = 1;
+         }
+         if ( ! (Convert.ToDecimal(0)==AV91Leaverequestrejectedds_17_tfemployeebalance) )
+         {
+            AddWhere(sWhereString, "(T3.EmployeeBalance >= :AV91Leaverequestrejectedds_17_tfemployeebalance)");
+         }
+         else
+         {
+            GXv_int9[19] = 1;
+         }
+         if ( ! (Convert.ToDecimal(0)==AV92Leaverequestrejectedds_18_tfemployeebalance_to) )
+         {
+            AddWhere(sWhereString, "(T3.EmployeeBalance <= :AV92Leaverequestrejectedds_18_tfemployeebalance_to)");
+         }
+         else
+         {
+            GXv_int9[20] = 1;
          }
          if ( ! new userhasrole(context).executeUdp(  "Manager") && new userhasrole(context).executeUdp(  "Project Manager") )
          {
@@ -4716,6 +4851,14 @@ namespace GeneXus.Programs {
          {
             scmdbuf += "";
          }
+         else if ( ( AV15OrderedBy == 8 ) && ! AV16OrderedDsc )
+         {
+            scmdbuf += "";
+         }
+         else if ( ( AV15OrderedBy == 8 ) && ( AV16OrderedDsc ) )
+         {
+            scmdbuf += "";
+         }
          else if ( true )
          {
             scmdbuf += "";
@@ -4732,9 +4875,9 @@ namespace GeneXus.Programs {
          switch ( cursor )
          {
                case 0 :
-                     return conditional_H003B2(context, (long)dynConstraints[0] , (GxSimpleCollection<long>)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (DateTime)dynConstraints[7] , (DateTime)dynConstraints[8] , (DateTime)dynConstraints[9] , (DateTime)dynConstraints[10] , (string)dynConstraints[11] , (string)dynConstraints[12] , (short)dynConstraints[13] , (decimal)dynConstraints[14] , (decimal)dynConstraints[15] , (string)dynConstraints[16] , (string)dynConstraints[17] , (string)dynConstraints[18] , (decimal)dynConstraints[19] , (DateTime)dynConstraints[20] , (DateTime)dynConstraints[21] , (short)dynConstraints[22] , (bool)dynConstraints[23] , (string)dynConstraints[24] , (bool)dynConstraints[25] , (long)dynConstraints[26] , (long)dynConstraints[27] );
+                     return conditional_H003B2(context, (long)dynConstraints[0] , (GxSimpleCollection<long>)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (DateTime)dynConstraints[7] , (DateTime)dynConstraints[8] , (DateTime)dynConstraints[9] , (DateTime)dynConstraints[10] , (string)dynConstraints[11] , (string)dynConstraints[12] , (short)dynConstraints[13] , (decimal)dynConstraints[14] , (decimal)dynConstraints[15] , (decimal)dynConstraints[16] , (decimal)dynConstraints[17] , (string)dynConstraints[18] , (string)dynConstraints[19] , (string)dynConstraints[20] , (decimal)dynConstraints[21] , (decimal)dynConstraints[22] , (DateTime)dynConstraints[23] , (DateTime)dynConstraints[24] , (short)dynConstraints[25] , (bool)dynConstraints[26] , (string)dynConstraints[27] , (bool)dynConstraints[28] , (long)dynConstraints[29] , (long)dynConstraints[30] );
                case 1 :
-                     return conditional_H003B3(context, (long)dynConstraints[0] , (GxSimpleCollection<long>)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (DateTime)dynConstraints[7] , (DateTime)dynConstraints[8] , (DateTime)dynConstraints[9] , (DateTime)dynConstraints[10] , (string)dynConstraints[11] , (string)dynConstraints[12] , (short)dynConstraints[13] , (decimal)dynConstraints[14] , (decimal)dynConstraints[15] , (string)dynConstraints[16] , (string)dynConstraints[17] , (string)dynConstraints[18] , (decimal)dynConstraints[19] , (DateTime)dynConstraints[20] , (DateTime)dynConstraints[21] , (short)dynConstraints[22] , (bool)dynConstraints[23] , (string)dynConstraints[24] , (bool)dynConstraints[25] , (long)dynConstraints[26] , (long)dynConstraints[27] );
+                     return conditional_H003B3(context, (long)dynConstraints[0] , (GxSimpleCollection<long>)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (DateTime)dynConstraints[7] , (DateTime)dynConstraints[8] , (DateTime)dynConstraints[9] , (DateTime)dynConstraints[10] , (string)dynConstraints[11] , (string)dynConstraints[12] , (short)dynConstraints[13] , (decimal)dynConstraints[14] , (decimal)dynConstraints[15] , (decimal)dynConstraints[16] , (decimal)dynConstraints[17] , (string)dynConstraints[18] , (string)dynConstraints[19] , (string)dynConstraints[20] , (decimal)dynConstraints[21] , (decimal)dynConstraints[22] , (DateTime)dynConstraints[23] , (DateTime)dynConstraints[24] , (short)dynConstraints[25] , (bool)dynConstraints[26] , (string)dynConstraints[27] , (bool)dynConstraints[28] , (long)dynConstraints[29] , (long)dynConstraints[30] );
          }
          return base.getDynamicStatement(cursor, context, dynConstraints);
       }
@@ -4757,62 +4900,68 @@ namespace GeneXus.Programs {
        {
           Object[] prmH003B4;
           prmH003B4 = new Object[] {
-          new ParDef("AV73Udparg17",GXType.Int64,10,0)
+          new ParDef("AV75Udparg19",GXType.Int64,10,0)
           };
           Object[] prmH003B5;
           prmH003B5 = new Object[] {
-          new ParDef("AV73Udparg17",GXType.Int64,10,0)
+          new ParDef("AV75Udparg19",GXType.Int64,10,0)
           };
           Object[] prmH003B2;
           prmH003B2 = new Object[] {
-          new ParDef("AV70Udparg1",GXType.Boolean,4,0) ,
-          new ParDef("AV71Udparg2",GXType.Int64,10,0) ,
-          new ParDef("lV75Leaverequestrejectedds_3_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV75Leaverequestrejectedds_3_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV75Leaverequestrejectedds_3_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV75Leaverequestrejectedds_3_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV76Leaverequestrejectedds_4_tfemployeename",GXType.Char,100,0) ,
-          new ParDef("AV77Leaverequestrejectedds_5_tfemployeename_sel",GXType.Char,100,0) ,
-          new ParDef("lV78Leaverequestrejectedds_6_tfleavetypename",GXType.Char,100,0) ,
-          new ParDef("AV79Leaverequestrejectedds_7_tfleavetypename_sel",GXType.Char,100,0) ,
-          new ParDef("AV80Leaverequestrejectedds_8_tfleaverequeststartdate",GXType.Date,8,0) ,
-          new ParDef("AV81Leaverequestrejectedds_9_tfleaverequeststartdate_to",GXType.Date,8,0) ,
-          new ParDef("AV82Leaverequestrejectedds_10_tfleaverequestenddate",GXType.Date,8,0) ,
-          new ParDef("AV83Leaverequestrejectedds_11_tfleaverequestenddate_to",GXType.Date,8,0) ,
-          new ParDef("lV84Leaverequestrejectedds_12_tfleaverequesthalfday",GXType.Char,20,0) ,
-          new ParDef("AV86Leaverequestrejectedds_14_tfleaverequesthalfday_sel",GXType.Char,20,0) ,
-          new ParDef("AV87Leaverequestrejectedds_15_tfleaverequestduration",GXType.Number,4,1) ,
-          new ParDef("AV88Leaverequestrejectedds_16_tfleaverequestduration_to",GXType.Number,4,1) ,
+          new ParDef("AV72Udparg1",GXType.Boolean,4,0) ,
+          new ParDef("AV73Udparg2",GXType.Int64,10,0) ,
+          new ParDef("lV77Leaverequestrejectedds_3_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("lV77Leaverequestrejectedds_3_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("lV77Leaverequestrejectedds_3_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("lV77Leaverequestrejectedds_3_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("lV77Leaverequestrejectedds_3_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("lV78Leaverequestrejectedds_4_tfemployeename",GXType.Char,100,0) ,
+          new ParDef("AV79Leaverequestrejectedds_5_tfemployeename_sel",GXType.Char,100,0) ,
+          new ParDef("lV80Leaverequestrejectedds_6_tfleavetypename",GXType.Char,100,0) ,
+          new ParDef("AV81Leaverequestrejectedds_7_tfleavetypename_sel",GXType.Char,100,0) ,
+          new ParDef("AV82Leaverequestrejectedds_8_tfleaverequeststartdate",GXType.Date,8,0) ,
+          new ParDef("AV83Leaverequestrejectedds_9_tfleaverequeststartdate_to",GXType.Date,8,0) ,
+          new ParDef("AV84Leaverequestrejectedds_10_tfleaverequestenddate",GXType.Date,8,0) ,
+          new ParDef("AV85Leaverequestrejectedds_11_tfleaverequestenddate_to",GXType.Date,8,0) ,
+          new ParDef("lV86Leaverequestrejectedds_12_tfleaverequesthalfday",GXType.Char,20,0) ,
+          new ParDef("AV88Leaverequestrejectedds_14_tfleaverequesthalfday_sel",GXType.Char,20,0) ,
+          new ParDef("AV89Leaverequestrejectedds_15_tfleaverequestduration",GXType.Number,4,1) ,
+          new ParDef("AV90Leaverequestrejectedds_16_tfleaverequestduration_to",GXType.Number,4,1) ,
+          new ParDef("AV91Leaverequestrejectedds_17_tfemployeebalance",GXType.Number,4,1) ,
+          new ParDef("AV92Leaverequestrejectedds_18_tfemployeebalance_to",GXType.Number,4,1) ,
           new ParDef("GXPagingFrom2",GXType.Int32,9,0) ,
           new ParDef("GXPagingTo2",GXType.Int32,9,0) ,
           new ParDef("GXPagingTo2",GXType.Int32,9,0)
           };
           Object[] prmH003B3;
           prmH003B3 = new Object[] {
-          new ParDef("AV70Udparg1",GXType.Boolean,4,0) ,
-          new ParDef("AV71Udparg2",GXType.Int64,10,0) ,
-          new ParDef("lV75Leaverequestrejectedds_3_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV75Leaverequestrejectedds_3_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV75Leaverequestrejectedds_3_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV75Leaverequestrejectedds_3_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV76Leaverequestrejectedds_4_tfemployeename",GXType.Char,100,0) ,
-          new ParDef("AV77Leaverequestrejectedds_5_tfemployeename_sel",GXType.Char,100,0) ,
-          new ParDef("lV78Leaverequestrejectedds_6_tfleavetypename",GXType.Char,100,0) ,
-          new ParDef("AV79Leaverequestrejectedds_7_tfleavetypename_sel",GXType.Char,100,0) ,
-          new ParDef("AV80Leaverequestrejectedds_8_tfleaverequeststartdate",GXType.Date,8,0) ,
-          new ParDef("AV81Leaverequestrejectedds_9_tfleaverequeststartdate_to",GXType.Date,8,0) ,
-          new ParDef("AV82Leaverequestrejectedds_10_tfleaverequestenddate",GXType.Date,8,0) ,
-          new ParDef("AV83Leaverequestrejectedds_11_tfleaverequestenddate_to",GXType.Date,8,0) ,
-          new ParDef("lV84Leaverequestrejectedds_12_tfleaverequesthalfday",GXType.Char,20,0) ,
-          new ParDef("AV86Leaverequestrejectedds_14_tfleaverequesthalfday_sel",GXType.Char,20,0) ,
-          new ParDef("AV87Leaverequestrejectedds_15_tfleaverequestduration",GXType.Number,4,1) ,
-          new ParDef("AV88Leaverequestrejectedds_16_tfleaverequestduration_to",GXType.Number,4,1)
+          new ParDef("AV72Udparg1",GXType.Boolean,4,0) ,
+          new ParDef("AV73Udparg2",GXType.Int64,10,0) ,
+          new ParDef("lV77Leaverequestrejectedds_3_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("lV77Leaverequestrejectedds_3_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("lV77Leaverequestrejectedds_3_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("lV77Leaverequestrejectedds_3_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("lV77Leaverequestrejectedds_3_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("lV78Leaverequestrejectedds_4_tfemployeename",GXType.Char,100,0) ,
+          new ParDef("AV79Leaverequestrejectedds_5_tfemployeename_sel",GXType.Char,100,0) ,
+          new ParDef("lV80Leaverequestrejectedds_6_tfleavetypename",GXType.Char,100,0) ,
+          new ParDef("AV81Leaverequestrejectedds_7_tfleavetypename_sel",GXType.Char,100,0) ,
+          new ParDef("AV82Leaverequestrejectedds_8_tfleaverequeststartdate",GXType.Date,8,0) ,
+          new ParDef("AV83Leaverequestrejectedds_9_tfleaverequeststartdate_to",GXType.Date,8,0) ,
+          new ParDef("AV84Leaverequestrejectedds_10_tfleaverequestenddate",GXType.Date,8,0) ,
+          new ParDef("AV85Leaverequestrejectedds_11_tfleaverequestenddate_to",GXType.Date,8,0) ,
+          new ParDef("lV86Leaverequestrejectedds_12_tfleaverequesthalfday",GXType.Char,20,0) ,
+          new ParDef("AV88Leaverequestrejectedds_14_tfleaverequesthalfday_sel",GXType.Char,20,0) ,
+          new ParDef("AV89Leaverequestrejectedds_15_tfleaverequestduration",GXType.Number,4,1) ,
+          new ParDef("AV90Leaverequestrejectedds_16_tfleaverequestduration_to",GXType.Number,4,1) ,
+          new ParDef("AV91Leaverequestrejectedds_17_tfemployeebalance",GXType.Number,4,1) ,
+          new ParDef("AV92Leaverequestrejectedds_18_tfemployeebalance_to",GXType.Number,4,1)
           };
           def= new CursorDef[] {
               new CursorDef("H003B2", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH003B2,11, GxCacheFrequency.OFF ,true,false )
              ,new CursorDef("H003B3", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH003B3,1, GxCacheFrequency.OFF ,true,false )
-             ,new CursorDef("H003B4", "SELECT ProjectManagerId, ProjectId FROM Project WHERE ProjectManagerId = :AV73Udparg17 ORDER BY ProjectManagerId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH003B4,100, GxCacheFrequency.OFF ,false,false )
-             ,new CursorDef("H003B5", "SELECT ProjectManagerId, ProjectId FROM Project WHERE ProjectManagerId = :AV73Udparg17 ORDER BY ProjectManagerId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH003B5,100, GxCacheFrequency.OFF ,false,false )
+             ,new CursorDef("H003B4", "SELECT ProjectManagerId, ProjectId FROM Project WHERE ProjectManagerId = :AV75Udparg19 ORDER BY ProjectManagerId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH003B4,100, GxCacheFrequency.OFF ,false,false )
+             ,new CursorDef("H003B5", "SELECT ProjectManagerId, ProjectId FROM Project WHERE ProjectManagerId = :AV75Udparg19 ORDER BY ProjectManagerId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH003B5,100, GxCacheFrequency.OFF ,false,false )
           };
        }
     }
@@ -4825,20 +4974,21 @@ namespace GeneXus.Programs {
        {
              case 0 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);
-                ((long[]) buf[1])[0] = rslt.getLong(2);
-                ((string[]) buf[2])[0] = rslt.getVarchar(3);
+                ((decimal[]) buf[1])[0] = rslt.getDecimal(2);
+                ((long[]) buf[2])[0] = rslt.getLong(3);
                 ((string[]) buf[3])[0] = rslt.getVarchar(4);
-                ((string[]) buf[4])[0] = rslt.getString(5, 20);
-                ((decimal[]) buf[5])[0] = rslt.getDecimal(6);
-                ((string[]) buf[6])[0] = rslt.getString(7, 20);
-                ((bool[]) buf[7])[0] = rslt.wasNull(7);
-                ((DateTime[]) buf[8])[0] = rslt.getGXDate(8);
+                ((string[]) buf[4])[0] = rslt.getVarchar(5);
+                ((string[]) buf[5])[0] = rslt.getString(6, 20);
+                ((decimal[]) buf[6])[0] = rslt.getDecimal(7);
+                ((string[]) buf[7])[0] = rslt.getString(8, 20);
+                ((bool[]) buf[8])[0] = rslt.wasNull(8);
                 ((DateTime[]) buf[9])[0] = rslt.getGXDate(9);
                 ((DateTime[]) buf[10])[0] = rslt.getGXDate(10);
-                ((string[]) buf[11])[0] = rslt.getString(11, 100);
+                ((DateTime[]) buf[11])[0] = rslt.getGXDate(11);
                 ((string[]) buf[12])[0] = rslt.getString(12, 100);
-                ((long[]) buf[13])[0] = rslt.getLong(13);
+                ((string[]) buf[13])[0] = rslt.getString(13, 100);
                 ((long[]) buf[14])[0] = rslt.getLong(14);
+                ((long[]) buf[15])[0] = rslt.getLong(15);
                 return;
              case 1 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);

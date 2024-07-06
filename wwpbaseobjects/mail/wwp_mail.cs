@@ -576,7 +576,7 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
          /* Single line edit */
          TempTags = "  onfocus=\"gx.evt.onfocus(this, 79,'',false,'',0)\"";
          context.WriteHtmlText( "<div id=\""+edtWWPMailCreated_Internalname+"_dp_container\" class=\"dp_container\" style=\"white-space:nowrap;display:inline;\">") ;
-         GxWebStd.gx_single_line_edit( context, edtWWPMailCreated_Internalname, context.localUtil.TToC( A91WWPMailCreated, 10, 12, 1, 2, "/", ":", " "), context.localUtil.Format( A91WWPMailCreated, "99/99/9999 99:99:99.999"), TempTags+" onchange=\""+"gx.date.valid_date(this, 10,'MDY',12,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 10,'MDY',12,12,'eng',false,0);"+";gx.evt.onblur(this,79);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtWWPMailCreated_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtWWPMailCreated_Enabled, 0, "text", "", 27, "chr", 1, "row", 27, 0, 0, 0, 0, -1, 0, true, "WWPBaseObjects\\WWP_DateTimeMillis", "end", false, "", "HLP_WWPBaseObjects/Mail/WWP_Mail.htm");
+         GxWebStd.gx_single_line_edit( context, edtWWPMailCreated_Internalname, context.localUtil.TToC( A91WWPMailCreated, 10, 12, 1, 3, "/", ":", " "), context.localUtil.Format( A91WWPMailCreated, "99/99/9999 99:99:99.999"), TempTags+" onchange=\""+"gx.date.valid_date(this, 10,'DMY',12,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 10,'DMY',12,12,'eng',false,0);"+";gx.evt.onblur(this,79);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtWWPMailCreated_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtWWPMailCreated_Enabled, 0, "text", "", 27, "chr", 1, "row", 27, 0, 0, 0, 0, -1, 0, true, "WWPBaseObjects\\WWP_DateTimeMillis", "end", false, "", "HLP_WWPBaseObjects/Mail/WWP_Mail.htm");
          GxWebStd.gx_bitmap( context, edtWWPMailCreated_Internalname+"_dp_trigger", context.GetImagePath( "61b9b5d3-dff6-4d59-9b00-da61bc2cbe93", "", context.GetTheme( )), "", "", "", "", ((1==0)||(edtWWPMailCreated_Enabled==0) ? 0 : 1), 0, "Date selector", "Date selector", 0, 1, 0, "", 0, "", 0, 0, 0, "", "", "cursor: pointer;", "", "", "", "", "", "", "", "", 1, false, false, "", "HLP_WWPBaseObjects/Mail/WWP_Mail.htm");
          context.WriteHtmlTextNl( "</div>") ;
          GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -596,7 +596,7 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
          /* Single line edit */
          TempTags = "  onfocus=\"gx.evt.onfocus(this, 84,'',false,'',0)\"";
          context.WriteHtmlText( "<div id=\""+edtWWPMailScheduled_Internalname+"_dp_container\" class=\"dp_container\" style=\"white-space:nowrap;display:inline;\">") ;
-         GxWebStd.gx_single_line_edit( context, edtWWPMailScheduled_Internalname, context.localUtil.TToC( A92WWPMailScheduled, 10, 12, 1, 2, "/", ":", " "), context.localUtil.Format( A92WWPMailScheduled, "99/99/9999 99:99:99.999"), TempTags+" onchange=\""+"gx.date.valid_date(this, 10,'MDY',12,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 10,'MDY',12,12,'eng',false,0);"+";gx.evt.onblur(this,84);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtWWPMailScheduled_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtWWPMailScheduled_Enabled, 0, "text", "", 27, "chr", 1, "row", 27, 0, 0, 0, 0, -1, 0, true, "WWPBaseObjects\\WWP_DateTimeMillis", "end", false, "", "HLP_WWPBaseObjects/Mail/WWP_Mail.htm");
+         GxWebStd.gx_single_line_edit( context, edtWWPMailScheduled_Internalname, context.localUtil.TToC( A92WWPMailScheduled, 10, 12, 1, 3, "/", ":", " "), context.localUtil.Format( A92WWPMailScheduled, "99/99/9999 99:99:99.999"), TempTags+" onchange=\""+"gx.date.valid_date(this, 10,'DMY',12,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 10,'DMY',12,12,'eng',false,0);"+";gx.evt.onblur(this,84);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtWWPMailScheduled_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtWWPMailScheduled_Enabled, 0, "text", "", 27, "chr", 1, "row", 27, 0, 0, 0, 0, -1, 0, true, "WWPBaseObjects\\WWP_DateTimeMillis", "end", false, "", "HLP_WWPBaseObjects/Mail/WWP_Mail.htm");
          GxWebStd.gx_bitmap( context, edtWWPMailScheduled_Internalname+"_dp_trigger", context.GetImagePath( "61b9b5d3-dff6-4d59-9b00-da61bc2cbe93", "", context.GetTheme( )), "", "", "", "", ((1==0)||(edtWWPMailScheduled_Enabled==0) ? 0 : 1), 0, "Date selector", "Date selector", 0, 1, 0, "", 0, "", 0, 0, 0, "", "", "cursor: pointer;", "", "", "", "", "", "", "", "", 1, false, false, "", "HLP_WWPBaseObjects/Mail/WWP_Mail.htm");
          context.WriteHtmlTextNl( "</div>") ;
          GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -616,7 +616,7 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
          /* Single line edit */
          TempTags = "  onfocus=\"gx.evt.onfocus(this, 89,'',false,'',0)\"";
          context.WriteHtmlText( "<div id=\""+edtWWPMailProcessed_Internalname+"_dp_container\" class=\"dp_container\" style=\"white-space:nowrap;display:inline;\">") ;
-         GxWebStd.gx_single_line_edit( context, edtWWPMailProcessed_Internalname, context.localUtil.TToC( A86WWPMailProcessed, 10, 12, 1, 2, "/", ":", " "), context.localUtil.Format( A86WWPMailProcessed, "99/99/9999 99:99:99.999"), TempTags+" onchange=\""+"gx.date.valid_date(this, 10,'MDY',12,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 10,'MDY',12,12,'eng',false,0);"+";gx.evt.onblur(this,89);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtWWPMailProcessed_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtWWPMailProcessed_Enabled, 0, "text", "", 27, "chr", 1, "row", 27, 0, 0, 0, 0, -1, 0, true, "WWPBaseObjects\\WWP_DateTimeMillis", "end", false, "", "HLP_WWPBaseObjects/Mail/WWP_Mail.htm");
+         GxWebStd.gx_single_line_edit( context, edtWWPMailProcessed_Internalname, context.localUtil.TToC( A86WWPMailProcessed, 10, 12, 1, 3, "/", ":", " "), context.localUtil.Format( A86WWPMailProcessed, "99/99/9999 99:99:99.999"), TempTags+" onchange=\""+"gx.date.valid_date(this, 10,'DMY',12,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 10,'DMY',12,12,'eng',false,0);"+";gx.evt.onblur(this,89);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtWWPMailProcessed_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtWWPMailProcessed_Enabled, 0, "text", "", 27, "chr", 1, "row", 27, 0, 0, 0, 0, -1, 0, true, "WWPBaseObjects\\WWP_DateTimeMillis", "end", false, "", "HLP_WWPBaseObjects/Mail/WWP_Mail.htm");
          GxWebStd.gx_bitmap( context, edtWWPMailProcessed_Internalname+"_dp_trigger", context.GetImagePath( "61b9b5d3-dff6-4d59-9b00-da61bc2cbe93", "", context.GetTheme( )), "", "", "", "", ((1==0)||(edtWWPMailProcessed_Enabled==0) ? 0 : 1), 0, "Date selector", "Date selector", 0, 1, 0, "", 0, "", 0, 0, 0, "", "", "cursor: pointer;", "", "", "", "", "", "", "", "", 1, false, false, "", "HLP_WWPBaseObjects/Mail/WWP_Mail.htm");
          context.WriteHtmlTextNl( "</div>") ;
          GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -673,7 +673,7 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
          GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-sm-9 gx-attribute", "start", "top", "", "", "div");
          /* Single line edit */
          context.WriteHtmlText( "<div id=\""+edtWWPNotificationCreated_Internalname+"_dp_container\" class=\"dp_container\" style=\"white-space:nowrap;display:inline;\">") ;
-         GxWebStd.gx_single_line_edit( context, edtWWPNotificationCreated_Internalname, context.localUtil.TToC( A24WWPNotificationCreated, 10, 12, 1, 2, "/", ":", " "), context.localUtil.Format( A24WWPNotificationCreated, "99/99/9999 99:99:99.999"), "", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtWWPNotificationCreated_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtWWPNotificationCreated_Enabled, 0, "text", "", 27, "chr", 1, "row", 27, 0, 0, 0, 0, -1, 0, true, "WWPBaseObjects\\WWP_DateTimeMillis", "end", false, "", "HLP_WWPBaseObjects/Mail/WWP_Mail.htm");
+         GxWebStd.gx_single_line_edit( context, edtWWPNotificationCreated_Internalname, context.localUtil.TToC( A24WWPNotificationCreated, 10, 12, 1, 3, "/", ":", " "), context.localUtil.Format( A24WWPNotificationCreated, "99/99/9999 99:99:99.999"), "", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtWWPNotificationCreated_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtWWPNotificationCreated_Enabled, 0, "text", "", 27, "chr", 1, "row", 27, 0, 0, 0, 0, -1, 0, true, "WWPBaseObjects\\WWP_DateTimeMillis", "end", false, "", "HLP_WWPBaseObjects/Mail/WWP_Mail.htm");
          GxWebStd.gx_bitmap( context, edtWWPNotificationCreated_Internalname+"_dp_trigger", context.GetImagePath( "61b9b5d3-dff6-4d59-9b00-da61bc2cbe93", "", context.GetTheme( )), "", "", "", "", ((1==0)||(edtWWPNotificationCreated_Enabled==0) ? 0 : 1), 0, "Date selector", "Date selector", 0, 1, 0, "", 0, "", 0, 0, 0, "", "", "cursor: pointer;", "", "", "", "", "", "", "", "", 1, false, false, "", "HLP_WWPBaseObjects/Mail/WWP_Mail.htm");
          context.WriteHtmlTextNl( "</div>") ;
          GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -943,7 +943,7 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
             cmbWWPMailStatus.CurrentValue = cgiGet( cmbWWPMailStatus_Internalname);
             A81WWPMailStatus = (short)(Math.Round(NumberUtil.Val( cgiGet( cmbWWPMailStatus_Internalname), "."), 18, MidpointRounding.ToEven));
             AssignAttri("", false, "A81WWPMailStatus", StringUtil.LTrimStr( (decimal)(A81WWPMailStatus), 4, 0));
-            if ( context.localUtil.VCDateTime( cgiGet( edtWWPMailCreated_Internalname), 1, 1) == 0 )
+            if ( context.localUtil.VCDateTime( cgiGet( edtWWPMailCreated_Internalname), 2, 1) == 0 )
             {
                GX_msglist.addItem(context.GetMessage( "GXM_baddatetime", new   object[]  {"Mail Created"}), 1, "WWPMAILCREATED");
                AnyError = 1;
@@ -951,14 +951,14 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
                AssignAttri("", false, "GX_FocusControl", GX_FocusControl);
                wbErr = true;
                A91WWPMailCreated = (DateTime)(DateTime.MinValue);
-               AssignAttri("", false, "A91WWPMailCreated", context.localUtil.TToC( A91WWPMailCreated, 10, 12, 1, 2, "/", ":", " "));
+               AssignAttri("", false, "A91WWPMailCreated", context.localUtil.TToC( A91WWPMailCreated, 10, 12, 1, 3, "/", ":", " "));
             }
             else
             {
                A91WWPMailCreated = context.localUtil.CToT( cgiGet( edtWWPMailCreated_Internalname));
-               AssignAttri("", false, "A91WWPMailCreated", context.localUtil.TToC( A91WWPMailCreated, 10, 12, 1, 2, "/", ":", " "));
+               AssignAttri("", false, "A91WWPMailCreated", context.localUtil.TToC( A91WWPMailCreated, 10, 12, 1, 3, "/", ":", " "));
             }
-            if ( context.localUtil.VCDateTime( cgiGet( edtWWPMailScheduled_Internalname), 1, 1) == 0 )
+            if ( context.localUtil.VCDateTime( cgiGet( edtWWPMailScheduled_Internalname), 2, 1) == 0 )
             {
                GX_msglist.addItem(context.GetMessage( "GXM_baddatetime", new   object[]  {"Mail Scheduled"}), 1, "WWPMAILSCHEDULED");
                AnyError = 1;
@@ -966,14 +966,14 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
                AssignAttri("", false, "GX_FocusControl", GX_FocusControl);
                wbErr = true;
                A92WWPMailScheduled = (DateTime)(DateTime.MinValue);
-               AssignAttri("", false, "A92WWPMailScheduled", context.localUtil.TToC( A92WWPMailScheduled, 10, 12, 1, 2, "/", ":", " "));
+               AssignAttri("", false, "A92WWPMailScheduled", context.localUtil.TToC( A92WWPMailScheduled, 10, 12, 1, 3, "/", ":", " "));
             }
             else
             {
                A92WWPMailScheduled = context.localUtil.CToT( cgiGet( edtWWPMailScheduled_Internalname));
-               AssignAttri("", false, "A92WWPMailScheduled", context.localUtil.TToC( A92WWPMailScheduled, 10, 12, 1, 2, "/", ":", " "));
+               AssignAttri("", false, "A92WWPMailScheduled", context.localUtil.TToC( A92WWPMailScheduled, 10, 12, 1, 3, "/", ":", " "));
             }
-            if ( context.localUtil.VCDateTime( cgiGet( edtWWPMailProcessed_Internalname), 1, 1) == 0 )
+            if ( context.localUtil.VCDateTime( cgiGet( edtWWPMailProcessed_Internalname), 2, 1) == 0 )
             {
                GX_msglist.addItem(context.GetMessage( "GXM_baddatetime", new   object[]  {"Mail Processed"}), 1, "WWPMAILPROCESSED");
                AnyError = 1;
@@ -982,13 +982,13 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
                wbErr = true;
                A86WWPMailProcessed = (DateTime)(DateTime.MinValue);
                n86WWPMailProcessed = false;
-               AssignAttri("", false, "A86WWPMailProcessed", context.localUtil.TToC( A86WWPMailProcessed, 10, 12, 1, 2, "/", ":", " "));
+               AssignAttri("", false, "A86WWPMailProcessed", context.localUtil.TToC( A86WWPMailProcessed, 10, 12, 1, 3, "/", ":", " "));
             }
             else
             {
                A86WWPMailProcessed = context.localUtil.CToT( cgiGet( edtWWPMailProcessed_Internalname));
                n86WWPMailProcessed = false;
-               AssignAttri("", false, "A86WWPMailProcessed", context.localUtil.TToC( A86WWPMailProcessed, 10, 12, 1, 2, "/", ":", " "));
+               AssignAttri("", false, "A86WWPMailProcessed", context.localUtil.TToC( A86WWPMailProcessed, 10, 12, 1, 3, "/", ":", " "));
             }
             n86WWPMailProcessed = ((DateTime.MinValue==A86WWPMailProcessed) ? true : false);
             A87WWPMailDetail = cgiGet( edtWWPMailDetail_Internalname);
@@ -1014,7 +1014,7 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
             }
             n22WWPNotificationId = ((0==A22WWPNotificationId) ? true : false);
             A24WWPNotificationCreated = context.localUtil.CToT( cgiGet( edtWWPNotificationCreated_Internalname));
-            AssignAttri("", false, "A24WWPNotificationCreated", context.localUtil.TToC( A24WWPNotificationCreated, 10, 12, 1, 2, "/", ":", " "));
+            AssignAttri("", false, "A24WWPNotificationCreated", context.localUtil.TToC( A24WWPNotificationCreated, 10, 12, 1, 3, "/", ":", " "));
             /* Read subfile selected row values. */
             /* Read hidden variables. */
             GXKey = Decrypt64( context.GetCookie( "GX_SESSION_ID"), Crypto.GetServerKey( ));
@@ -1363,12 +1363,12 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
          if ( IsIns( )  && (DateTime.MinValue==A91WWPMailCreated) && ( Gx_BScreen == 0 ) )
          {
             A91WWPMailCreated = DateTimeUtil.ServerNowMs( context, pr_default);
-            AssignAttri("", false, "A91WWPMailCreated", context.localUtil.TToC( A91WWPMailCreated, 10, 12, 1, 2, "/", ":", " "));
+            AssignAttri("", false, "A91WWPMailCreated", context.localUtil.TToC( A91WWPMailCreated, 10, 12, 1, 3, "/", ":", " "));
          }
          if ( IsIns( )  && (DateTime.MinValue==A92WWPMailScheduled) && ( Gx_BScreen == 0 ) )
          {
             A92WWPMailScheduled = DateTimeUtil.ServerNowMs( context, pr_default);
-            AssignAttri("", false, "A92WWPMailScheduled", context.localUtil.TToC( A92WWPMailScheduled, 10, 12, 1, 2, "/", ":", " "));
+            AssignAttri("", false, "A92WWPMailScheduled", context.localUtil.TToC( A92WWPMailScheduled, 10, 12, 1, 3, "/", ":", " "));
          }
          if ( StringUtil.StrCmp(Gx_mode, "INS") == 0 )
          {
@@ -1422,17 +1422,17 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
             A81WWPMailStatus = T000B7_A81WWPMailStatus[0];
             AssignAttri("", false, "A81WWPMailStatus", StringUtil.LTrimStr( (decimal)(A81WWPMailStatus), 4, 0));
             A91WWPMailCreated = T000B7_A91WWPMailCreated[0];
-            AssignAttri("", false, "A91WWPMailCreated", context.localUtil.TToC( A91WWPMailCreated, 10, 12, 1, 2, "/", ":", " "));
+            AssignAttri("", false, "A91WWPMailCreated", context.localUtil.TToC( A91WWPMailCreated, 10, 12, 1, 3, "/", ":", " "));
             A92WWPMailScheduled = T000B7_A92WWPMailScheduled[0];
-            AssignAttri("", false, "A92WWPMailScheduled", context.localUtil.TToC( A92WWPMailScheduled, 10, 12, 1, 2, "/", ":", " "));
+            AssignAttri("", false, "A92WWPMailScheduled", context.localUtil.TToC( A92WWPMailScheduled, 10, 12, 1, 3, "/", ":", " "));
             A86WWPMailProcessed = T000B7_A86WWPMailProcessed[0];
             n86WWPMailProcessed = T000B7_n86WWPMailProcessed[0];
-            AssignAttri("", false, "A86WWPMailProcessed", context.localUtil.TToC( A86WWPMailProcessed, 10, 12, 1, 2, "/", ":", " "));
+            AssignAttri("", false, "A86WWPMailProcessed", context.localUtil.TToC( A86WWPMailProcessed, 10, 12, 1, 3, "/", ":", " "));
             A87WWPMailDetail = T000B7_A87WWPMailDetail[0];
             n87WWPMailDetail = T000B7_n87WWPMailDetail[0];
             AssignAttri("", false, "A87WWPMailDetail", A87WWPMailDetail);
             A24WWPNotificationCreated = T000B7_A24WWPNotificationCreated[0];
-            AssignAttri("", false, "A24WWPNotificationCreated", context.localUtil.TToC( A24WWPNotificationCreated, 10, 12, 1, 2, "/", ":", " "));
+            AssignAttri("", false, "A24WWPNotificationCreated", context.localUtil.TToC( A24WWPNotificationCreated, 10, 12, 1, 3, "/", ":", " "));
             A22WWPNotificationId = T000B7_A22WWPNotificationId[0];
             n22WWPNotificationId = T000B7_n22WWPNotificationId[0];
             AssignAttri("", false, "A22WWPNotificationId", StringUtil.LTrimStr( (decimal)(A22WWPNotificationId), 10, 0));
@@ -1472,7 +1472,7 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
             }
          }
          A24WWPNotificationCreated = T000B6_A24WWPNotificationCreated[0];
-         AssignAttri("", false, "A24WWPNotificationCreated", context.localUtil.TToC( A24WWPNotificationCreated, 10, 12, 1, 2, "/", ":", " "));
+         AssignAttri("", false, "A24WWPNotificationCreated", context.localUtil.TToC( A24WWPNotificationCreated, 10, 12, 1, 3, "/", ":", " "));
          pr_default.close(4);
       }
 
@@ -1500,10 +1500,10 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
             }
          }
          A24WWPNotificationCreated = T000B8_A24WWPNotificationCreated[0];
-         AssignAttri("", false, "A24WWPNotificationCreated", context.localUtil.TToC( A24WWPNotificationCreated, 10, 12, 1, 2, "/", ":", " "));
+         AssignAttri("", false, "A24WWPNotificationCreated", context.localUtil.TToC( A24WWPNotificationCreated, 10, 12, 1, 3, "/", ":", " "));
          GxWebStd.set_html_headers( context, 0, "", "");
          AddString( "[[") ;
-         AddString( "\""+GXUtil.EncodeJSConstant( context.localUtil.TToC( A24WWPNotificationCreated, 10, 12, 1, 2, "/", ":", " "))+"\"") ;
+         AddString( "\""+GXUtil.EncodeJSConstant( context.localUtil.TToC( A24WWPNotificationCreated, 10, 12, 1, 3, "/", ":", " "))+"\"") ;
          AddString( "]") ;
          if ( (pr_default.getStatus(6) == 101) )
          {
@@ -1559,12 +1559,12 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
             A81WWPMailStatus = T000B5_A81WWPMailStatus[0];
             AssignAttri("", false, "A81WWPMailStatus", StringUtil.LTrimStr( (decimal)(A81WWPMailStatus), 4, 0));
             A91WWPMailCreated = T000B5_A91WWPMailCreated[0];
-            AssignAttri("", false, "A91WWPMailCreated", context.localUtil.TToC( A91WWPMailCreated, 10, 12, 1, 2, "/", ":", " "));
+            AssignAttri("", false, "A91WWPMailCreated", context.localUtil.TToC( A91WWPMailCreated, 10, 12, 1, 3, "/", ":", " "));
             A92WWPMailScheduled = T000B5_A92WWPMailScheduled[0];
-            AssignAttri("", false, "A92WWPMailScheduled", context.localUtil.TToC( A92WWPMailScheduled, 10, 12, 1, 2, "/", ":", " "));
+            AssignAttri("", false, "A92WWPMailScheduled", context.localUtil.TToC( A92WWPMailScheduled, 10, 12, 1, 3, "/", ":", " "));
             A86WWPMailProcessed = T000B5_A86WWPMailProcessed[0];
             n86WWPMailProcessed = T000B5_n86WWPMailProcessed[0];
-            AssignAttri("", false, "A86WWPMailProcessed", context.localUtil.TToC( A86WWPMailProcessed, 10, 12, 1, 2, "/", ":", " "));
+            AssignAttri("", false, "A86WWPMailProcessed", context.localUtil.TToC( A86WWPMailProcessed, 10, 12, 1, 3, "/", ":", " "));
             A87WWPMailDetail = T000B5_A87WWPMailDetail[0];
             n87WWPMailDetail = T000B5_n87WWPMailDetail[0];
             AssignAttri("", false, "A87WWPMailDetail", A87WWPMailDetail);
@@ -2181,7 +2181,7 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
             /* Using cursor T000B16 */
             pr_default.execute(14, new Object[] {n22WWPNotificationId, A22WWPNotificationId});
             A24WWPNotificationCreated = T000B16_A24WWPNotificationCreated[0];
-            AssignAttri("", false, "A24WWPNotificationCreated", context.localUtil.TToC( A24WWPNotificationCreated, 10, 12, 1, 2, "/", ":", " "));
+            AssignAttri("", false, "A24WWPNotificationCreated", context.localUtil.TToC( A24WWPNotificationCreated, 10, 12, 1, 3, "/", ":", " "));
             pr_default.close(14);
          }
       }
@@ -3142,7 +3142,7 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
          AssignAttri("", false, "A72WWPMailSenderName", A72WWPMailSenderName);
          A86WWPMailProcessed = (DateTime)(DateTime.MinValue);
          n86WWPMailProcessed = false;
-         AssignAttri("", false, "A86WWPMailProcessed", context.localUtil.TToC( A86WWPMailProcessed, 10, 12, 1, 2, "/", ":", " "));
+         AssignAttri("", false, "A86WWPMailProcessed", context.localUtil.TToC( A86WWPMailProcessed, 10, 12, 1, 3, "/", ":", " "));
          n86WWPMailProcessed = ((DateTime.MinValue==A86WWPMailProcessed) ? true : false);
          A87WWPMailDetail = "";
          n87WWPMailDetail = false;
@@ -3153,13 +3153,13 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
          AssignAttri("", false, "A22WWPNotificationId", StringUtil.LTrimStr( (decimal)(A22WWPNotificationId), 10, 0));
          n22WWPNotificationId = ((0==A22WWPNotificationId) ? true : false);
          A24WWPNotificationCreated = (DateTime)(DateTime.MinValue);
-         AssignAttri("", false, "A24WWPNotificationCreated", context.localUtil.TToC( A24WWPNotificationCreated, 10, 12, 1, 2, "/", ":", " "));
+         AssignAttri("", false, "A24WWPNotificationCreated", context.localUtil.TToC( A24WWPNotificationCreated, 10, 12, 1, 3, "/", ":", " "));
          A81WWPMailStatus = 1;
          AssignAttri("", false, "A81WWPMailStatus", StringUtil.LTrimStr( (decimal)(A81WWPMailStatus), 4, 0));
          A91WWPMailCreated = DateTimeUtil.ServerNowMs( context, pr_default);
-         AssignAttri("", false, "A91WWPMailCreated", context.localUtil.TToC( A91WWPMailCreated, 10, 12, 1, 2, "/", ":", " "));
+         AssignAttri("", false, "A91WWPMailCreated", context.localUtil.TToC( A91WWPMailCreated, 10, 12, 1, 3, "/", ":", " "));
          A92WWPMailScheduled = DateTimeUtil.ServerNowMs( context, pr_default);
-         AssignAttri("", false, "A92WWPMailScheduled", context.localUtil.TToC( A92WWPMailScheduled, 10, 12, 1, 2, "/", ":", " "));
+         AssignAttri("", false, "A92WWPMailScheduled", context.localUtil.TToC( A92WWPMailScheduled, 10, 12, 1, 3, "/", ":", " "));
          Z69WWPMailSubject = "";
          Z81WWPMailStatus = 0;
          Z91WWPMailCreated = (DateTime)(DateTime.MinValue);
@@ -3180,9 +3180,9 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
          A81WWPMailStatus = i81WWPMailStatus;
          AssignAttri("", false, "A81WWPMailStatus", StringUtil.LTrimStr( (decimal)(A81WWPMailStatus), 4, 0));
          A91WWPMailCreated = i91WWPMailCreated;
-         AssignAttri("", false, "A91WWPMailCreated", context.localUtil.TToC( A91WWPMailCreated, 10, 12, 1, 2, "/", ":", " "));
+         AssignAttri("", false, "A91WWPMailCreated", context.localUtil.TToC( A91WWPMailCreated, 10, 12, 1, 3, "/", ":", " "));
          A92WWPMailScheduled = i92WWPMailScheduled;
-         AssignAttri("", false, "A92WWPMailScheduled", context.localUtil.TToC( A92WWPMailScheduled, 10, 12, 1, 2, "/", ":", " "));
+         AssignAttri("", false, "A92WWPMailScheduled", context.localUtil.TToC( A92WWPMailScheduled, 10, 12, 1, 3, "/", ":", " "));
       }
 
       protected void InitializeNonKey0B12( )
@@ -3212,7 +3212,7 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247415511325", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024752144954", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -3228,7 +3228,7 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wwpbaseobjects/mail/wwp_mail.js", "?20247415511326", false, true);
+         context.AddJavascriptSource("wwpbaseobjects/mail/wwp_mail.js", "?2024752144955", false, true);
          /* End function include_jscripts */
       }
 
@@ -3472,12 +3472,12 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
          AssignAttri("", false, "A81WWPMailStatus", StringUtil.LTrim( StringUtil.NToC( (decimal)(A81WWPMailStatus), 4, 0, ".", "")));
          cmbWWPMailStatus.CurrentValue = StringUtil.Trim( StringUtil.Str( (decimal)(A81WWPMailStatus), 4, 0));
          AssignProp("", false, cmbWWPMailStatus_Internalname, "Values", cmbWWPMailStatus.ToJavascriptSource(), true);
-         AssignAttri("", false, "A91WWPMailCreated", context.localUtil.TToC( A91WWPMailCreated, 10, 12, 1, 2, "/", ":", " "));
-         AssignAttri("", false, "A92WWPMailScheduled", context.localUtil.TToC( A92WWPMailScheduled, 10, 12, 1, 2, "/", ":", " "));
-         AssignAttri("", false, "A86WWPMailProcessed", context.localUtil.TToC( A86WWPMailProcessed, 10, 12, 1, 2, "/", ":", " "));
+         AssignAttri("", false, "A91WWPMailCreated", context.localUtil.TToC( A91WWPMailCreated, 10, 12, 1, 3, "/", ":", " "));
+         AssignAttri("", false, "A92WWPMailScheduled", context.localUtil.TToC( A92WWPMailScheduled, 10, 12, 1, 3, "/", ":", " "));
+         AssignAttri("", false, "A86WWPMailProcessed", context.localUtil.TToC( A86WWPMailProcessed, 10, 12, 1, 3, "/", ":", " "));
          AssignAttri("", false, "A87WWPMailDetail", A87WWPMailDetail);
          AssignAttri("", false, "A22WWPNotificationId", StringUtil.LTrim( StringUtil.NToC( (decimal)(A22WWPNotificationId), 10, 0, ".", "")));
-         AssignAttri("", false, "A24WWPNotificationCreated", context.localUtil.TToC( A24WWPNotificationCreated, 10, 12, 1, 2, "/", ":", " "));
+         AssignAttri("", false, "A24WWPNotificationCreated", context.localUtil.TToC( A24WWPNotificationCreated, 10, 12, 1, 3, "/", ":", " "));
          AssignAttri("", false, "Gx_mode", StringUtil.RTrim( Gx_mode));
          GxWebStd.gx_hidden_field( context, "Z80WWPMailId", StringUtil.LTrim( StringUtil.NToC( (decimal)(Z80WWPMailId), 10, 0, ".", "")));
          GxWebStd.gx_hidden_field( context, "Z69WWPMailSubject", Z69WWPMailSubject);
@@ -3488,12 +3488,12 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
          GxWebStd.gx_hidden_field( context, "Z71WWPMailSenderAddress", Z71WWPMailSenderAddress);
          GxWebStd.gx_hidden_field( context, "Z72WWPMailSenderName", Z72WWPMailSenderName);
          GxWebStd.gx_hidden_field( context, "Z81WWPMailStatus", StringUtil.LTrim( StringUtil.NToC( (decimal)(Z81WWPMailStatus), 4, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "Z91WWPMailCreated", context.localUtil.TToC( Z91WWPMailCreated, 10, 12, 1, 2, "/", ":", " "));
-         GxWebStd.gx_hidden_field( context, "Z92WWPMailScheduled", context.localUtil.TToC( Z92WWPMailScheduled, 10, 12, 1, 2, "/", ":", " "));
-         GxWebStd.gx_hidden_field( context, "Z86WWPMailProcessed", context.localUtil.TToC( Z86WWPMailProcessed, 10, 12, 1, 2, "/", ":", " "));
+         GxWebStd.gx_hidden_field( context, "Z91WWPMailCreated", context.localUtil.TToC( Z91WWPMailCreated, 10, 12, 1, 3, "/", ":", " "));
+         GxWebStd.gx_hidden_field( context, "Z92WWPMailScheduled", context.localUtil.TToC( Z92WWPMailScheduled, 10, 12, 1, 3, "/", ":", " "));
+         GxWebStd.gx_hidden_field( context, "Z86WWPMailProcessed", context.localUtil.TToC( Z86WWPMailProcessed, 10, 12, 1, 3, "/", ":", " "));
          GxWebStd.gx_hidden_field( context, "Z87WWPMailDetail", Z87WWPMailDetail);
          GxWebStd.gx_hidden_field( context, "Z22WWPNotificationId", StringUtil.LTrim( StringUtil.NToC( (decimal)(Z22WWPNotificationId), 10, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "Z24WWPNotificationCreated", context.localUtil.TToC( Z24WWPNotificationCreated, 10, 12, 1, 2, "/", ":", " "));
+         GxWebStd.gx_hidden_field( context, "Z24WWPNotificationCreated", context.localUtil.TToC( Z24WWPNotificationCreated, 10, 12, 1, 3, "/", ":", " "));
          AssignProp("", false, bttBtn_delete_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(bttBtn_delete_Enabled), 5, 0), true);
          AssignProp("", false, bttBtn_enter_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(bttBtn_enter_Enabled), 5, 0), true);
          SendCloseFormHiddens( ) ;
@@ -3517,7 +3517,7 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
          pr_default.close(14);
          dynload_actions( ) ;
          /*  Sending validation outputs */
-         AssignAttri("", false, "A24WWPNotificationCreated", context.localUtil.TToC( A24WWPNotificationCreated, 10, 12, 1, 2, "/", ":", " "));
+         AssignAttri("", false, "A24WWPNotificationCreated", context.localUtil.TToC( A24WWPNotificationCreated, 10, 12, 1, 3, "/", ":", " "));
       }
 
       public override bool SupportAjaxEvent( )

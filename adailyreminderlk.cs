@@ -97,25 +97,29 @@ namespace GeneXus.Programs {
          /* GeneXus formulas */
          /* Output device settings */
          AV16CurrentHour = (short)(DateTimeUtil.Hour( DateTimeUtil.Now( context)));
-         if ( AV16CurrentHour >= 15 )
+         if ( AV16CurrentHour >= 17 )
          {
             AV14CheckDate = Gx_date;
          }
          else
          {
-            AV14CheckDate = DateTimeUtil.DAdd( Gx_date, (-1));
-            AV17DayOfWeek = DateTimeUtil.Dow( AV14CheckDate);
+            AV17DayOfWeek = DateTimeUtil.Dow( Gx_date);
             if ( AV17DayOfWeek == 7 )
             {
-               AV14CheckDate = DateTimeUtil.DAdd( AV14CheckDate, (-1));
+               AV14CheckDate = DateTimeUtil.DAdd( Gx_date, (-1));
             }
             else
             {
                if ( AV17DayOfWeek == 1 )
                {
-                  AV14CheckDate = DateTimeUtil.DAdd( AV14CheckDate, (-2));
+                  AV14CheckDate = DateTimeUtil.DAdd( Gx_date, (-2));
+               }
+               else
+               {
+                  AV14CheckDate = DateTimeUtil.DAdd( Gx_date, (-1));
                }
             }
+            AV14CheckDate = DateTimeUtil.DAdd( Gx_date, (-1));
          }
          /* Using cursor P00AL2 */
          pr_default.execute(0);
@@ -130,27 +134,18 @@ namespace GeneXus.Programs {
             A109EmployeeEmail = P00AL2_A109EmployeeEmail[0];
             A157CompanyLocationId = P00AL2_A157CompanyLocationId[0];
             A159CompanyLocationCode = P00AL2_A159CompanyLocationCode[0];
-            AV15HasLoggedHours = false;
+            AV20GXLvl23 = 0;
             /* Using cursor P00AL3 */
             pr_default.execute(1, new Object[] {AV14CheckDate, A106EmployeeId});
             while ( (pr_default.getStatus(1) != 101) )
             {
                A119WorkHourLogDate = P00AL3_A119WorkHourLogDate[0];
                A118WorkHourLogId = P00AL3_A118WorkHourLogId[0];
-               AV15HasLoggedHours = true;
-               context.nUserReturn = 1;
-               if ( context.WillRedirect( ) )
-               {
-                  context.Redirect( context.wjLoc );
-                  context.wjLoc = "";
-               }
-               pr_default.close(1);
-               this.cleanup();
-               if (true) return;
+               AV20GXLvl23 = 1;
                pr_default.readNext(1);
             }
             pr_default.close(1);
-            if ( ! AV15HasLoggedHours )
+            if ( AV20GXLvl23 == 0 )
             {
                AV10name = A107EmployeeFirstName;
                AV9email = A109EmployeeEmail;
@@ -231,6 +226,7 @@ namespace GeneXus.Programs {
       private short GxWebError ;
       private short AV16CurrentHour ;
       private short AV17DayOfWeek ;
+      private short AV20GXLvl23 ;
       private long A100CompanyId ;
       private long A157CompanyLocationId ;
       private long A106EmployeeId ;
@@ -246,7 +242,6 @@ namespace GeneXus.Programs {
       private DateTime A119WorkHourLogDate ;
       private bool entryPointCalled ;
       private bool A112EmployeeIsActive ;
-      private bool AV15HasLoggedHours ;
       private string AV8Body ;
       private string A109EmployeeEmail ;
       private string AV9email ;
@@ -293,7 +288,7 @@ namespace GeneXus.Programs {
           };
           def= new CursorDef[] {
               new CursorDef("P00AL2", "SELECT T1.CompanyId, T2.CompanyLocationId, T1.EmployeeId, T3.CompanyLocationCode, T1.EmployeeIsActive, T1.EmployeeFirstName, T1.EmployeeEmail FROM ((Employee T1 INNER JOIN Company T2 ON T2.CompanyId = T1.CompanyId) INNER JOIN CompanyLocation T3 ON T3.CompanyLocationId = T2.CompanyLocationId) WHERE (T1.EmployeeIsActive = TRUE) AND (T3.CompanyLocationCode = ( 'lk')) ORDER BY T1.EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00AL2,100, GxCacheFrequency.OFF ,true,false )
-             ,new CursorDef("P00AL3", "SELECT EmployeeId, WorkHourLogDate, WorkHourLogId FROM WorkHourLog WHERE (WorkHourLogDate = :AV14CheckDate) AND (EmployeeId = :EmployeeId) ORDER BY WorkHourLogDate ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00AL3,1, GxCacheFrequency.OFF ,false,true )
+             ,new CursorDef("P00AL3", "SELECT EmployeeId, WorkHourLogDate, WorkHourLogId FROM WorkHourLog WHERE (WorkHourLogDate = :AV14CheckDate) AND (EmployeeId = :EmployeeId) ORDER BY WorkHourLogDate ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00AL3,100, GxCacheFrequency.OFF ,false,false )
           };
        }
     }

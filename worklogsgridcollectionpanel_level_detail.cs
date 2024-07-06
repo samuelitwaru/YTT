@@ -118,7 +118,7 @@ namespace GeneXus.Programs {
                if (true) return;
             }
             Gxwebsession.Set(Gxids+"gxvar_Worklogssdts", AV16WorkLogsSDTs.ToJSonString(false));
-            Gxwebsession.Set(Gxids+"gxvar_Datetoday", context.localUtil.DToC( AV21DateToday, 1, "/"));
+            Gxwebsession.Set(Gxids+"gxvar_Datetoday", context.localUtil.DToC( AV21DateToday, 2, "/"));
             Gxwebsession.Set(Gxids+"gxvar_Msgvar", AV15MsgVar);
             Gxwebsession.Set(Gxids+"gxvar_Lateupdatemsgvar", AV22lateUpdateMsgVar);
             Gxwebsession.Set(Gxids+"gxvar_Latedeletemsgvar", AV23lateDeleteMsgVar);
@@ -127,7 +127,7 @@ namespace GeneXus.Programs {
          else
          {
             AV16WorkLogsSDTs.FromJSonString(Gxwebsession.Get(Gxids+"gxvar_Worklogssdts"), null);
-            AV21DateToday = context.localUtil.CToD( Gxwebsession.Get(Gxids+"gxvar_Datetoday"), 1);
+            AV21DateToday = context.localUtil.CToD( Gxwebsession.Get(Gxids+"gxvar_Datetoday"), 2);
             AV15MsgVar = Gxwebsession.Get(Gxids+"gxvar_Msgvar");
             AV22lateUpdateMsgVar = Gxwebsession.Get(Gxids+"gxvar_Lateupdatemsgvar");
             AV23lateDeleteMsgVar = Gxwebsession.Get(Gxids+"gxvar_Latedeletemsgvar");

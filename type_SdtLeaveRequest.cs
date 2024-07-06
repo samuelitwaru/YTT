@@ -618,7 +618,7 @@ namespace GeneXus.Programs {
 
       [  SoapElement( ElementName = "EmployeeBalance" )]
       [  XmlElement( ElementName = "EmployeeBalance"   )]
-      public short gxTpr_Employeebalance
+      public decimal gxTpr_Employeebalance
       {
          get {
             return gxTv_SdtLeaveRequest_Employeebalance ;
@@ -1127,7 +1127,7 @@ namespace GeneXus.Programs {
 
       [  SoapElement( ElementName = "EmployeeBalance_Z" )]
       [  XmlElement( ElementName = "EmployeeBalance_Z"   )]
-      public short gxTpr_Employeebalance_Z
+      public decimal gxTpr_Employeebalance_Z
       {
          get {
             return gxTv_SdtLeaveRequest_Employeebalance_Z ;
@@ -1250,9 +1250,7 @@ namespace GeneXus.Programs {
       }
 
       private short sdtIsNull ;
-      private short gxTv_SdtLeaveRequest_Employeebalance ;
       private short gxTv_SdtLeaveRequest_Initialized ;
-      private short gxTv_SdtLeaveRequest_Employeebalance_Z ;
       private short gxTv_SdtLeaveRequest_Leaverequesthalfday_N ;
       private long gxTv_SdtLeaveRequest_Leaverequestid ;
       private long gxTv_SdtLeaveRequest_Leavetypeid ;
@@ -1261,7 +1259,9 @@ namespace GeneXus.Programs {
       private long gxTv_SdtLeaveRequest_Leavetypeid_Z ;
       private long gxTv_SdtLeaveRequest_Employeeid_Z ;
       private decimal gxTv_SdtLeaveRequest_Leaverequestduration ;
+      private decimal gxTv_SdtLeaveRequest_Employeebalance ;
       private decimal gxTv_SdtLeaveRequest_Leaverequestduration_Z ;
+      private decimal gxTv_SdtLeaveRequest_Employeebalance_Z ;
       private string gxTv_SdtLeaveRequest_Leavetypename ;
       private string gxTv_SdtLeaveRequest_Leaverequesthalfday ;
       private string gxTv_SdtLeaveRequest_Leaverequeststatus ;
@@ -1482,14 +1482,14 @@ namespace GeneXus.Programs {
 
       [DataMember( Name = "EmployeeBalance" , Order = 13 )]
       [GxSeudo()]
-      public Nullable<short> gxTpr_Employeebalance
+      public Nullable<decimal> gxTpr_Employeebalance
       {
          get {
             return sdt.gxTpr_Employeebalance ;
          }
 
          set {
-            sdt.gxTpr_Employeebalance = (short)(value.HasValue ? value.Value : 0);
+            sdt.gxTpr_Employeebalance = (decimal)(value.HasValue ? value.Value : 0);
          }
 
       }

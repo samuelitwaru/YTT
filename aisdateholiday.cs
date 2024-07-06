@@ -46,7 +46,7 @@ namespace GeneXus.Programs {
          bool aP2_IsHoliday = new bool()  ;
          if ( 0 < args.Length )
          {
-            aP0_Date=((DateTime)(context.localUtil.CToD( (string)(args[0]), 1)));
+            aP0_Date=((DateTime)(context.localUtil.CToD( (string)(args[0]), 2)));
          }
          else
          {

@@ -134,7 +134,7 @@ namespace GeneXus.Programs {
             if ( AV16PeriodicCategory == 1 )
             {
                AV20Period.gxTpr_Todate = DateTimeUtil.DAdd( AV9FromDate, (6));
-               AV20Period.gxTpr_Label = "Week "+context.localUtil.DToC( AV20Period.gxTpr_Fromdate, 1, "/")+" - "+context.localUtil.DToC( AV20Period.gxTpr_Todate, 1, "/");
+               AV20Period.gxTpr_Label = "Week "+context.localUtil.DToC( AV20Period.gxTpr_Fromdate, 2, "/")+" - "+context.localUtil.DToC( AV20Period.gxTpr_Todate, 2, "/");
             }
             else if ( AV16PeriodicCategory == 2 )
             {

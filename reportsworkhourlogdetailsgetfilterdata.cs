@@ -181,8 +181,8 @@ namespace GeneXus.Programs {
             AV31GridStateFilterValue = ((GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue)AV30GridState.gxTpr_Filtervalues.Item(AV45GXV1));
             if ( StringUtil.StrCmp(AV31GridStateFilterValue.gxTpr_Name, "TFWORKHOURLOGDATE") == 0 )
             {
-               AV11TFWorkHourLogDate = context.localUtil.CToD( AV31GridStateFilterValue.gxTpr_Value, 1);
-               AV12TFWorkHourLogDate_To = context.localUtil.CToD( AV31GridStateFilterValue.gxTpr_Valueto, 1);
+               AV11TFWorkHourLogDate = context.localUtil.CToD( AV31GridStateFilterValue.gxTpr_Value, 2);
+               AV12TFWorkHourLogDate_To = context.localUtil.CToD( AV31GridStateFilterValue.gxTpr_Valueto, 2);
             }
             else if ( StringUtil.StrCmp(AV31GridStateFilterValue.gxTpr_Name, "TFPROJECTNAME") == 0 )
             {

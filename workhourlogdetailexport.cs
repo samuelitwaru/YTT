@@ -235,7 +235,7 @@ namespace GeneXus.Programs {
                   else if ( StringUtil.StrCmp(AV26ColumnsSelector_Column.gxTpr_Columnname, "SDTWorkHourLog__WorkHourLogDate") == 0 )
                   {
                      GXt_dtime3 = DateTimeUtil.ResetTime( AV17SDTWorkHourLogItem.gxTpr_Workhourlogdate ) ;
-                     AV11ExcelDocument.SetDateFormat(context, 8, 5, 1, 2, "/", ":", " ");
+                     AV11ExcelDocument.SetDateFormat(context, 8, 5, 1, 3, "/", ":", " ");
                      AV11ExcelDocument.get_Cells(AV14CellRow, (int)(AV15FirstColumn+AV32VisibleColumnCount), 1, 1).Date = GXt_dtime3;
                   }
                   else if ( StringUtil.StrCmp(AV26ColumnsSelector_Column.gxTpr_Columnname, "SDTWorkHourLog__WorkHourLogDuration") == 0 )

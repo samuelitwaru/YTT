@@ -230,13 +230,13 @@ namespace GeneXus.Programs {
             new GeneXus.Programs.wwpbaseobjects.wwp_exportwritefilter(context ).execute( ref  AV11ExcelDocument,  true, ref  GXt_int2,  (short)(AV15FirstColumn),  "Log Date") ;
             AV14CellRow = GXt_int2;
             GXt_dtime3 = DateTimeUtil.ResetTime( AV39TFWorkHourLogDate ) ;
-            AV11ExcelDocument.SetDateFormat(context, 8, 5, 1, 2, "/", ":", " ");
+            AV11ExcelDocument.SetDateFormat(context, 8, 5, 1, 3, "/", ":", " ");
             AV11ExcelDocument.get_Cells(AV14CellRow, AV15FirstColumn+1, 1, 1).Date = GXt_dtime3;
             GXt_int2 = (short)(AV14CellRow);
             new GeneXus.Programs.wwpbaseobjects.wwp_exportwritefilter(context ).execute( ref  AV11ExcelDocument,  false, ref  GXt_int2,  (short)(AV15FirstColumn+2),  "To") ;
             AV14CellRow = GXt_int2;
             GXt_dtime3 = DateTimeUtil.ResetTime( AV40TFWorkHourLogDate_To ) ;
-            AV11ExcelDocument.SetDateFormat(context, 8, 5, 1, 2, "/", ":", " ");
+            AV11ExcelDocument.SetDateFormat(context, 8, 5, 1, 3, "/", ":", " ");
             AV11ExcelDocument.get_Cells(AV14CellRow, AV15FirstColumn+3, 1, 1).Date = GXt_dtime3;
          }
          if ( ! ( String.IsNullOrEmpty(StringUtil.RTrim( AV42TFWorkHourLogDuration_Sel)) ) )
@@ -411,7 +411,7 @@ namespace GeneXus.Programs {
                   else if ( StringUtil.StrCmp(AV26ColumnsSelector_Column.gxTpr_Columnname, "WorkHourLogDate") == 0 )
                   {
                      GXt_dtime3 = DateTimeUtil.ResetTime( A119WorkHourLogDate ) ;
-                     AV11ExcelDocument.SetDateFormat(context, 8, 5, 1, 2, "/", ":", " ");
+                     AV11ExcelDocument.SetDateFormat(context, 8, 5, 1, 3, "/", ":", " ");
                      AV11ExcelDocument.get_Cells(AV14CellRow, (int)(AV15FirstColumn+AV32VisibleColumnCount), 1, 1).Date = GXt_dtime3;
                   }
                   else if ( StringUtil.StrCmp(AV26ColumnsSelector_Column.gxTpr_Columnname, "WorkHourLogDuration") == 0 )
@@ -531,8 +531,8 @@ namespace GeneXus.Programs {
             }
             else if ( StringUtil.StrCmp(AV23GridStateFilterValue.gxTpr_Name, "TFWORKHOURLOGDATE") == 0 )
             {
-               AV39TFWorkHourLogDate = context.localUtil.CToD( AV23GridStateFilterValue.gxTpr_Value, 1);
-               AV40TFWorkHourLogDate_To = context.localUtil.CToD( AV23GridStateFilterValue.gxTpr_Valueto, 1);
+               AV39TFWorkHourLogDate = context.localUtil.CToD( AV23GridStateFilterValue.gxTpr_Value, 2);
+               AV40TFWorkHourLogDate_To = context.localUtil.CToD( AV23GridStateFilterValue.gxTpr_Valueto, 2);
             }
             else if ( StringUtil.StrCmp(AV23GridStateFilterValue.gxTpr_Name, "TFWORKHOURLOGDURATION") == 0 )
             {

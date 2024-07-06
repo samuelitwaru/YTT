@@ -410,8 +410,8 @@ namespace GeneXus.Programs {
          AV14EmployeeId.FromJSonString(AV16WebSession.Get("EmployeeId"), null);
          AV17ProjectId.FromJSonString(AV16WebSession.Get("ProjectId"), null);
          AV8OneProjectId = (long)(Math.Round(NumberUtil.Val( AV16WebSession.Get("OneProjectId"), "."), 18, MidpointRounding.ToEven));
-         AV10FromDate = context.localUtil.CToD( AV16WebSession.Get("FromDate"), 1);
-         AV11ToDate = context.localUtil.CToD( AV16WebSession.Get("ToDate"), 1);
+         AV10FromDate = context.localUtil.CToD( AV16WebSession.Get("FromDate"), 2);
+         AV11ToDate = context.localUtil.CToD( AV16WebSession.Get("ToDate"), 2);
       }
 
       public override void cleanup( )

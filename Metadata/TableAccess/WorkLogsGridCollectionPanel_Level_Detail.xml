@@ -2,11 +2,11 @@
 <Dependencies type="name" name="WorkLogsGridCollectionPanel_Level_Detail">
   <Table name="Holiday" />
   <Table name="WorkHourLog" />
+  <Table name="LeaveType" />
+  <Table name="LeaveRequest" />
   <Table name="Employee" />
   <Table name="Company" />
   <Table name="Project" />
-  <Table name="LeaveRequest" />
   <Table name="EmployeeProject" />
   <Table name="SupportRequest" />
-  <Table name="LeaveType" />
 </Dependencies>

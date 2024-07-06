@@ -176,7 +176,7 @@ namespace GeneXus.Programs {
                Gxdynprop += ((StringUtil.StrCmp(Gxdynprop, "")==0) ? "" : ", ") + "[\"Approvedspacertable\",\"Visible\",\"" + "False" + "\"]";
             }
             AV9LeaveInfo = "<span>" + StringUtil.Trim( A125LeaveTypeName) + "</span>";
-            AV20LeavePeriod = StringUtil.Trim( StringUtil.Str( A131LeaveRequestDuration, 4, 1)) + " days - From " + StringUtil.Trim( context.localUtil.DToC( A129LeaveRequestStartDate, 1, "/")) + " to " + StringUtil.Trim( context.localUtil.DToC( A130LeaveRequestEndDate, 1, "/"));
+            AV20LeavePeriod = StringUtil.Trim( StringUtil.Str( A131LeaveRequestDuration, 4, 1)) + " days - From " + StringUtil.Trim( context.localUtil.DToC( A129LeaveRequestStartDate, 2, "/")) + " to " + StringUtil.Trim( context.localUtil.DToC( A130LeaveRequestEndDate, 2, "/"));
             AV31GXM2LeaveRequestsGridPanel_Level_Detail_GridSdt.gxTpr_Leaverequestid = A127LeaveRequestId;
             AV31GXM2LeaveRequestsGridPanel_Level_Detail_GridSdt.gxTpr_Leaverequestdescription = A133LeaveRequestDescription;
             AV31GXM2LeaveRequestsGridPanel_Level_Detail_GridSdt.gxTpr_Leaverequeststatus = A132LeaveRequestStatus;

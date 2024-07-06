@@ -44,7 +44,7 @@ namespace GeneXus.Programs {
          string aP2_FinalDateString = new string(' ',0)  ;
          if ( 0 < args.Length )
          {
-            aP0_Date=((DateTime)(context.localUtil.CToD( (string)(args[0]), 1)));
+            aP0_Date=((DateTime)(context.localUtil.CToD( (string)(args[0]), 2)));
          }
          else
          {

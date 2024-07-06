@@ -94,7 +94,7 @@ namespace GeneXus.Programs {
          {
             A106EmployeeId = P007I2_A106EmployeeId[0];
             A147EmployeeBalance = P007I2_A147EmployeeBalance[0];
-            AV9EmployeeVacationDays = A147EmployeeBalance;
+            AV9EmployeeVacationDays = (short)(Math.Round(A147EmployeeBalance, 18, MidpointRounding.ToEven));
             /* Exiting from a For First loop. */
             if (true) break;
          }
@@ -120,7 +120,7 @@ namespace GeneXus.Programs {
       {
          scmdbuf = "";
          P007I2_A106EmployeeId = new long[1] ;
-         P007I2_A147EmployeeBalance = new short[1] ;
+         P007I2_A147EmployeeBalance = new decimal[1] ;
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.getemployeevactiondaysleft__default(),
             new Object[][] {
                 new Object[] {
@@ -132,15 +132,15 @@ namespace GeneXus.Programs {
       }
 
       private short AV9EmployeeVacationDays ;
-      private short A147EmployeeBalance ;
       private long AV8EmployeeId ;
       private long A106EmployeeId ;
+      private decimal A147EmployeeBalance ;
       private string scmdbuf ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private IDataStoreProvider pr_default ;
       private long[] P007I2_A106EmployeeId ;
-      private short[] P007I2_A147EmployeeBalance ;
+      private decimal[] P007I2_A147EmployeeBalance ;
       private short aP1_EmployeeVacationDays ;
    }
 
@@ -177,7 +177,7 @@ namespace GeneXus.Programs {
        {
              case 0 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);
-                ((short[]) buf[1])[0] = rslt.getShort(2);
+                ((decimal[]) buf[1])[0] = rslt.getDecimal(2);
                 return;
        }
     }

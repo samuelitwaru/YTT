@@ -993,8 +993,8 @@ namespace GeneXus.Programs {
                               A110EmployeeIsManager = StringUtil.StrToBool( cgiGet( chkEmployeeIsManager_Internalname));
                               A111GAMUserGUID = cgiGet( edtGAMUserGUID_Internalname);
                               A112EmployeeIsActive = StringUtil.StrToBool( cgiGet( chkEmployeeIsActive_Internalname));
-                              A146EmployeeVactionDays = (short)(Math.Round(context.localUtil.CToN( cgiGet( edtEmployeeVactionDays_Internalname), ".", ","), 18, MidpointRounding.ToEven));
-                              A147EmployeeBalance = (short)(Math.Round(context.localUtil.CToN( cgiGet( edtEmployeeBalance_Internalname), ".", ","), 18, MidpointRounding.ToEven));
+                              A146EmployeeVactionDays = context.localUtil.CToN( cgiGet( edtEmployeeVactionDays_Internalname), ".", ",");
+                              A147EmployeeBalance = context.localUtil.CToN( cgiGet( edtEmployeeBalance_Internalname), ".", ",");
                               sEvtType = StringUtil.Right( sEvt, 1);
                               if ( StringUtil.StrCmp(sEvtType, ".") == 0 )
                               {
@@ -1282,7 +1282,7 @@ namespace GeneXus.Programs {
                                                  A102ProjectId ,
                                                  AV8ProjectId } ,
                                                  new int[]{
-                                                 TypeConstants.LONG, TypeConstants.SHORT, TypeConstants.SHORT, TypeConstants.SHORT, TypeConstants.BOOLEAN, TypeConstants.LONG, TypeConstants.LONG
+                                                 TypeConstants.LONG, TypeConstants.DECIMAL, TypeConstants.DECIMAL, TypeConstants.SHORT, TypeConstants.BOOLEAN, TypeConstants.LONG, TypeConstants.LONG
                                                  }
             });
             lV16FilterFullText = StringUtil.Concat( StringUtil.RTrim( AV16FilterFullText), "%", "");
@@ -1376,7 +1376,7 @@ namespace GeneXus.Programs {
                                               A102ProjectId ,
                                               AV8ProjectId } ,
                                               new int[]{
-                                              TypeConstants.LONG, TypeConstants.SHORT, TypeConstants.SHORT, TypeConstants.SHORT, TypeConstants.BOOLEAN, TypeConstants.LONG, TypeConstants.LONG
+                                              TypeConstants.LONG, TypeConstants.DECIMAL, TypeConstants.DECIMAL, TypeConstants.SHORT, TypeConstants.BOOLEAN, TypeConstants.LONG, TypeConstants.LONG
                                               }
          });
          lV16FilterFullText = StringUtil.Concat( StringUtil.RTrim( AV16FilterFullText), "%", "");
@@ -2340,7 +2340,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024741313070", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024761544110", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2356,7 +2356,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("projectprojectemployeewc.js", "?2024741313070", false, true);
+         context.AddJavascriptSource("projectprojectemployeewc.js", "?2024761544110", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -2567,7 +2567,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtEmployeeVactionDays_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(A146EmployeeVactionDays), 4, 0, ".", "")),StringUtil.LTrim( context.localUtil.Format( (decimal)(A146EmployeeVactionDays), "ZZZ9")),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+sPrefix+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtEmployeeVactionDays_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn hidden-xs",(string)"",(short)-1,(short)0,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)4,(short)0,(short)0,(short)37,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtEmployeeVactionDays_Internalname,StringUtil.LTrim( StringUtil.NToC( A146EmployeeVactionDays, 4, 1, ".", "")),StringUtil.LTrim( context.localUtil.Format( A146EmployeeVactionDays, "Z9.9")),(string)"",(string)"'"+sPrefix+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtEmployeeVactionDays_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn hidden-xs",(string)"",(short)-1,(short)0,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)4,(short)0,(short)0,(short)37,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -2575,7 +2575,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtEmployeeBalance_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(A147EmployeeBalance), 4, 0, ".", "")),StringUtil.LTrim( context.localUtil.Format( (decimal)(A147EmployeeBalance), "ZZZ9")),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+sPrefix+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtEmployeeBalance_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn hidden-xs",(string)"",(short)-1,(short)0,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)4,(short)0,(short)0,(short)37,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtEmployeeBalance_Internalname,StringUtil.LTrim( StringUtil.NToC( A147EmployeeBalance, 4, 1, ".", "")),StringUtil.LTrim( context.localUtil.Format( A147EmployeeBalance, "Z9.9")),(string)"",(string)"'"+sPrefix+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtEmployeeBalance_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn hidden-xs",(string)"",(short)-1,(short)0,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)4,(short)0,(short)0,(short)37,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
             send_integrity_lvl_hashes5C2( ) ;
             GridContainer.AddRow(GridRow);
             nGXsfl_37_idx = ((subGrid_Islastpage==1)&&(nGXsfl_37_idx+1>subGrid_fnc_Recordsperpage( )) ? 1 : nGXsfl_37_idx+1);
@@ -2735,10 +2735,10 @@ namespace GeneXus.Programs {
             GridColumn.AddObjectProperty("Value", GXUtil.ValueEncode( StringUtil.BoolToStr( A112EmployeeIsActive)));
             GridContainer.AddColumnProperties(GridColumn);
             GridColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
-            GridColumn.AddObjectProperty("Value", GXUtil.ValueEncode( StringUtil.LTrim( StringUtil.NToC( (decimal)(A146EmployeeVactionDays), 4, 0, ".", ""))));
+            GridColumn.AddObjectProperty("Value", GXUtil.ValueEncode( StringUtil.LTrim( StringUtil.NToC( A146EmployeeVactionDays, 4, 1, ".", ""))));
             GridContainer.AddColumnProperties(GridColumn);
             GridColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
-            GridColumn.AddObjectProperty("Value", GXUtil.ValueEncode( StringUtil.LTrim( StringUtil.NToC( (decimal)(A147EmployeeBalance), 4, 0, ".", ""))));
+            GridColumn.AddObjectProperty("Value", GXUtil.ValueEncode( StringUtil.LTrim( StringUtil.NToC( A147EmployeeBalance, 4, 1, ".", ""))));
             GridContainer.AddColumnProperties(GridColumn);
             GridContainer.AddObjectProperty("Selectedindex", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Selectedindex), 4, 0, ".", "")));
             GridContainer.AddObjectProperty("Allowselection", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Allowselection), 1, 0, ".", "")));
@@ -2967,8 +2967,8 @@ namespace GeneXus.Programs {
          lV16FilterFullText = "";
          H005C2_A106EmployeeId = new long[1] ;
          H005C2_A102ProjectId = new long[1] ;
-         H005C2_A147EmployeeBalance = new short[1] ;
-         H005C2_A146EmployeeVactionDays = new short[1] ;
+         H005C2_A147EmployeeBalance = new decimal[1] ;
+         H005C2_A146EmployeeVactionDays = new decimal[1] ;
          H005C2_A112EmployeeIsActive = new bool[] {false} ;
          H005C2_A111GAMUserGUID = new string[] {""} ;
          H005C2_A110EmployeeIsManager = new bool[] {false} ;
@@ -3027,8 +3027,6 @@ namespace GeneXus.Programs {
       private short wbStart ;
       private short nDraw ;
       private short nDoneStart ;
-      private short A146EmployeeVactionDays ;
-      private short A147EmployeeBalance ;
       private short nDonePA ;
       private short gxcookieaux ;
       private short subGrid_Backcolorstyle ;
@@ -3083,6 +3081,8 @@ namespace GeneXus.Programs {
       private long A100CompanyId ;
       private long GRID_nCurrentRecord ;
       private long GRID_nRecordCount ;
+      private decimal A146EmployeeVactionDays ;
+      private decimal A147EmployeeBalance ;
       private string Gridpaginationbar_Selectedpage ;
       private string Ddo_grid_Activeeventkey ;
       private string Ddo_grid_Selectedvalue_get ;
@@ -3233,8 +3233,8 @@ namespace GeneXus.Programs {
       private IDataStoreProvider pr_default ;
       private long[] H005C2_A106EmployeeId ;
       private long[] H005C2_A102ProjectId ;
-      private short[] H005C2_A147EmployeeBalance ;
-      private short[] H005C2_A146EmployeeVactionDays ;
+      private decimal[] H005C2_A147EmployeeBalance ;
+      private decimal[] H005C2_A146EmployeeVactionDays ;
       private bool[] H005C2_A112EmployeeIsActive ;
       private string[] H005C2_A111GAMUserGUID ;
       private bool[] H005C2_A110EmployeeIsManager ;
@@ -3268,8 +3268,8 @@ namespace GeneXus.Programs {
                                              long A100CompanyId ,
                                              string A101CompanyName ,
                                              string A111GAMUserGUID ,
-                                             short A146EmployeeVactionDays ,
-                                             short A147EmployeeBalance ,
+                                             decimal A146EmployeeVactionDays ,
+                                             decimal A147EmployeeBalance ,
                                              short AV14OrderedBy ,
                                              bool AV15OrderedDsc ,
                                              long A102ProjectId ,
@@ -3288,7 +3288,7 @@ namespace GeneXus.Programs {
          AddWhere(sWhereString, "(T1.ProjectId = :AV8ProjectId)");
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV16FilterFullText)) )
          {
-            AddWhere(sWhereString, "(( LOWER(T2.EmployeeFirstName) like '%' || LOWER(:lV16FilterFullText)) or ( LOWER(T2.EmployeeLastName) like '%' || LOWER(:lV16FilterFullText)) or ( LOWER(T2.EmployeeEmail) like '%' || LOWER(:lV16FilterFullText)) or ( SUBSTR(TO_CHAR(T2.CompanyId,'9999999999'), 2) like '%' || :lV16FilterFullText) or ( LOWER(T3.CompanyName) like '%' || LOWER(:lV16FilterFullText)) or ( LOWER(T2.GAMUserGUID) like '%' || LOWER(:lV16FilterFullText)) or ( SUBSTR(TO_CHAR(T2.EmployeeVactionDays,'9999'), 2) like '%' || :lV16FilterFullText) or ( SUBSTR(TO_CHAR(T2.EmployeeBalance,'9999'), 2) like '%' || :lV16FilterFullText))");
+            AddWhere(sWhereString, "(( LOWER(T2.EmployeeFirstName) like '%' || LOWER(:lV16FilterFullText)) or ( LOWER(T2.EmployeeLastName) like '%' || LOWER(:lV16FilterFullText)) or ( LOWER(T2.EmployeeEmail) like '%' || LOWER(:lV16FilterFullText)) or ( SUBSTR(TO_CHAR(T2.CompanyId,'9999999999'), 2) like '%' || :lV16FilterFullText) or ( LOWER(T3.CompanyName) like '%' || LOWER(:lV16FilterFullText)) or ( LOWER(T2.GAMUserGUID) like '%' || LOWER(:lV16FilterFullText)) or ( SUBSTR(TO_CHAR(T2.EmployeeVactionDays,'90.9'), 2) like '%' || :lV16FilterFullText) or ( SUBSTR(TO_CHAR(T2.EmployeeBalance,'90.9'), 2) like '%' || :lV16FilterFullText))");
          }
          else
          {
@@ -3399,8 +3399,8 @@ namespace GeneXus.Programs {
                                              long A100CompanyId ,
                                              string A101CompanyName ,
                                              string A111GAMUserGUID ,
-                                             short A146EmployeeVactionDays ,
-                                             short A147EmployeeBalance ,
+                                             decimal A146EmployeeVactionDays ,
+                                             decimal A147EmployeeBalance ,
                                              short AV14OrderedBy ,
                                              bool AV15OrderedDsc ,
                                              long A102ProjectId ,
@@ -3414,7 +3414,7 @@ namespace GeneXus.Programs {
          AddWhere(sWhereString, "(T1.ProjectId = :AV8ProjectId)");
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV16FilterFullText)) )
          {
-            AddWhere(sWhereString, "(( LOWER(T2.EmployeeFirstName) like '%' || LOWER(:lV16FilterFullText)) or ( LOWER(T2.EmployeeLastName) like '%' || LOWER(:lV16FilterFullText)) or ( LOWER(T2.EmployeeEmail) like '%' || LOWER(:lV16FilterFullText)) or ( SUBSTR(TO_CHAR(T2.CompanyId,'9999999999'), 2) like '%' || :lV16FilterFullText) or ( LOWER(T3.CompanyName) like '%' || LOWER(:lV16FilterFullText)) or ( LOWER(T2.GAMUserGUID) like '%' || LOWER(:lV16FilterFullText)) or ( SUBSTR(TO_CHAR(T2.EmployeeVactionDays,'9999'), 2) like '%' || :lV16FilterFullText) or ( SUBSTR(TO_CHAR(T2.EmployeeBalance,'9999'), 2) like '%' || :lV16FilterFullText))");
+            AddWhere(sWhereString, "(( LOWER(T2.EmployeeFirstName) like '%' || LOWER(:lV16FilterFullText)) or ( LOWER(T2.EmployeeLastName) like '%' || LOWER(:lV16FilterFullText)) or ( LOWER(T2.EmployeeEmail) like '%' || LOWER(:lV16FilterFullText)) or ( SUBSTR(TO_CHAR(T2.CompanyId,'9999999999'), 2) like '%' || :lV16FilterFullText) or ( LOWER(T3.CompanyName) like '%' || LOWER(:lV16FilterFullText)) or ( LOWER(T2.GAMUserGUID) like '%' || LOWER(:lV16FilterFullText)) or ( SUBSTR(TO_CHAR(T2.EmployeeVactionDays,'90.9'), 2) like '%' || :lV16FilterFullText) or ( SUBSTR(TO_CHAR(T2.EmployeeBalance,'90.9'), 2) like '%' || :lV16FilterFullText))");
          }
          else
          {
@@ -3524,9 +3524,9 @@ namespace GeneXus.Programs {
          switch ( cursor )
          {
                case 0 :
-                     return conditional_H005C2(context, (string)dynConstraints[0] , (string)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (long)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (short)dynConstraints[7] , (short)dynConstraints[8] , (short)dynConstraints[9] , (bool)dynConstraints[10] , (long)dynConstraints[11] , (long)dynConstraints[12] );
+                     return conditional_H005C2(context, (string)dynConstraints[0] , (string)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (long)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (decimal)dynConstraints[7] , (decimal)dynConstraints[8] , (short)dynConstraints[9] , (bool)dynConstraints[10] , (long)dynConstraints[11] , (long)dynConstraints[12] );
                case 1 :
-                     return conditional_H005C3(context, (string)dynConstraints[0] , (string)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (long)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (short)dynConstraints[7] , (short)dynConstraints[8] , (short)dynConstraints[9] , (bool)dynConstraints[10] , (long)dynConstraints[11] , (long)dynConstraints[12] );
+                     return conditional_H005C3(context, (string)dynConstraints[0] , (string)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (long)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (decimal)dynConstraints[7] , (decimal)dynConstraints[8] , (short)dynConstraints[9] , (bool)dynConstraints[10] , (long)dynConstraints[11] , (long)dynConstraints[12] );
          }
          return base.getDynamicStatement(cursor, context, dynConstraints);
       }
@@ -3588,8 +3588,8 @@ namespace GeneXus.Programs {
              case 0 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);
                 ((long[]) buf[1])[0] = rslt.getLong(2);
-                ((short[]) buf[2])[0] = rslt.getShort(3);
-                ((short[]) buf[3])[0] = rslt.getShort(4);
+                ((decimal[]) buf[2])[0] = rslt.getDecimal(3);
+                ((decimal[]) buf[3])[0] = rslt.getDecimal(4);
                 ((bool[]) buf[4])[0] = rslt.getBool(5);
                 ((string[]) buf[5])[0] = rslt.getVarchar(6);
                 ((bool[]) buf[6])[0] = rslt.getBool(7);
