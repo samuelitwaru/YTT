@@ -61,40 +61,45 @@ namespace GeneXus.Programs {
       public void execute( DateTime aP0_FromDate ,
                            DateTime aP1_ToDate ,
                            GxSimpleCollection<long> aP2_CompanyLocationId ,
-                           out GXBaseCollection<SdtSDTEmployeeWeekReport> aP3_Gxm2rootcol )
+                           GxSimpleCollection<long> aP3_EmployeeIds ,
+                           out GXBaseCollection<SdtSDTEmployeeWeekReport> aP4_Gxm2rootcol )
       {
          this.AV13FromDate = aP0_FromDate;
          this.AV16ToDate = aP1_ToDate;
          this.AV14CompanyLocationId = aP2_CompanyLocationId;
+         this.AV19EmployeeIds = aP3_EmployeeIds;
          this.Gxm2rootcol = new GXBaseCollection<SdtSDTEmployeeWeekReport>( context, "SDTEmployeeWeekReport", "YTT_version4") ;
          initialize();
          executePrivate();
-         aP3_Gxm2rootcol=this.Gxm2rootcol;
+         aP4_Gxm2rootcol=this.Gxm2rootcol;
       }
 
       public GXBaseCollection<SdtSDTEmployeeWeekReport> executeUdp( DateTime aP0_FromDate ,
                                                                     DateTime aP1_ToDate ,
-                                                                    GxSimpleCollection<long> aP2_CompanyLocationId )
+                                                                    GxSimpleCollection<long> aP2_CompanyLocationId ,
+                                                                    GxSimpleCollection<long> aP3_EmployeeIds )
       {
-         execute(aP0_FromDate, aP1_ToDate, aP2_CompanyLocationId, out aP3_Gxm2rootcol);
+         execute(aP0_FromDate, aP1_ToDate, aP2_CompanyLocationId, aP3_EmployeeIds, out aP4_Gxm2rootcol);
          return Gxm2rootcol ;
       }
 
       public void executeSubmit( DateTime aP0_FromDate ,
                                  DateTime aP1_ToDate ,
                                  GxSimpleCollection<long> aP2_CompanyLocationId ,
-                                 out GXBaseCollection<SdtSDTEmployeeWeekReport> aP3_Gxm2rootcol )
+                                 GxSimpleCollection<long> aP3_EmployeeIds ,
+                                 out GXBaseCollection<SdtSDTEmployeeWeekReport> aP4_Gxm2rootcol )
       {
          dpemployeeweekreport objdpemployeeweekreport;
          objdpemployeeweekreport = new dpemployeeweekreport();
          objdpemployeeweekreport.AV13FromDate = aP0_FromDate;
          objdpemployeeweekreport.AV16ToDate = aP1_ToDate;
          objdpemployeeweekreport.AV14CompanyLocationId = aP2_CompanyLocationId;
+         objdpemployeeweekreport.AV19EmployeeIds = aP3_EmployeeIds;
          objdpemployeeweekreport.Gxm2rootcol = new GXBaseCollection<SdtSDTEmployeeWeekReport>( context, "SDTEmployeeWeekReport", "YTT_version4") ;
          objdpemployeeweekreport.context.SetSubmitInitialConfig(context);
          objdpemployeeweekreport.initialize();
          Submit( executePrivateCatch,objdpemployeeweekreport);
-         aP3_Gxm2rootcol=this.Gxm2rootcol;
+         aP4_Gxm2rootcol=this.Gxm2rootcol;
       }
 
       void executePrivateCatch( object stateInfo )
@@ -117,10 +122,13 @@ namespace GeneXus.Programs {
          pr_default.dynParam(0, new Object[]{ new Object[]{
                                               A157CompanyLocationId ,
                                               AV14CompanyLocationId ,
+                                              A106EmployeeId ,
+                                              AV19EmployeeIds ,
                                               AV14CompanyLocationId.Count ,
+                                              AV19EmployeeIds.Count ,
                                               A112EmployeeIsActive } ,
                                               new int[]{
-                                              TypeConstants.LONG, TypeConstants.INT, TypeConstants.BOOLEAN
+                                              TypeConstants.LONG, TypeConstants.LONG, TypeConstants.INT, TypeConstants.INT, TypeConstants.BOOLEAN
                                               }
          });
          /* Using cursor P001U10 */
@@ -129,8 +137,8 @@ namespace GeneXus.Programs {
          {
             A100CompanyId = P001U10_A100CompanyId[0];
             A112EmployeeIsActive = P001U10_A112EmployeeIsActive[0];
-            A157CompanyLocationId = P001U10_A157CompanyLocationId[0];
             A106EmployeeId = P001U10_A106EmployeeId[0];
+            A157CompanyLocationId = P001U10_A157CompanyLocationId[0];
             A148EmployeeName = P001U10_A148EmployeeName[0];
             A40000GXC1 = P001U10_A40000GXC1[0];
             n40000GXC1 = P001U10_n40000GXC1[0];
@@ -300,8 +308,8 @@ namespace GeneXus.Programs {
          scmdbuf = "";
          P001U10_A100CompanyId = new long[1] ;
          P001U10_A112EmployeeIsActive = new bool[] {false} ;
-         P001U10_A157CompanyLocationId = new long[1] ;
          P001U10_A106EmployeeId = new long[1] ;
+         P001U10_A157CompanyLocationId = new long[1] ;
          P001U10_A148EmployeeName = new string[] {""} ;
          P001U10_A40000GXC1 = new short[1] ;
          P001U10_n40000GXC1 = new bool[] {false} ;
@@ -341,7 +349,7 @@ namespace GeneXus.Programs {
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.dpemployeeweekreport__default(),
             new Object[][] {
                 new Object[] {
-               P001U10_A100CompanyId, P001U10_A112EmployeeIsActive, P001U10_A157CompanyLocationId, P001U10_A106EmployeeId, P001U10_A148EmployeeName, P001U10_A40000GXC1, P001U10_n40000GXC1, P001U10_A40001GXC2, P001U10_n40001GXC2, P001U10_A40002GXC3,
+               P001U10_A100CompanyId, P001U10_A112EmployeeIsActive, P001U10_A106EmployeeId, P001U10_A157CompanyLocationId, P001U10_A148EmployeeName, P001U10_A40000GXC1, P001U10_n40000GXC1, P001U10_A40001GXC2, P001U10_n40001GXC2, P001U10_A40002GXC3,
                P001U10_n40002GXC3, P001U10_A40003GXC4, P001U10_n40003GXC4, P001U10_A40004GXC5, P001U10_n40004GXC5, P001U10_A40005GXC6, P001U10_n40005GXC6, P001U10_A40006GXC7, P001U10_n40006GXC7, P001U10_A40007GXC8,
                P001U10_n40007GXC8, P001U10_A40008GXC9, P001U10_n40008GXC9, P001U10_A40009GXC10, P001U10_n40009GXC10, P001U10_A40010GXC11, P001U10_n40010GXC11, P001U10_A40011GXC12, P001U10_n40011GXC12, P001U10_A40012GXC13,
                P001U10_n40012GXC13, P001U10_A40013GXC14, P001U10_n40013GXC14, P001U10_A40014GXC15, P001U10_n40014GXC15, P001U10_A40015GXC16, P001U10_n40015GXC16
@@ -371,9 +379,10 @@ namespace GeneXus.Programs {
       private short GXt_int1 ;
       private short GXt_int2 ;
       private int AV14CompanyLocationId_Count ;
+      private int AV19EmployeeIds_Count ;
       private long A157CompanyLocationId ;
-      private long A100CompanyId ;
       private long A106EmployeeId ;
+      private long A100CompanyId ;
       private long AV11Sun ;
       private long AV5Mon ;
       private long AV6Tue ;
@@ -408,13 +417,14 @@ namespace GeneXus.Programs {
       private bool n40015GXC16 ;
       private bool GXt_boolean3 ;
       private GxSimpleCollection<long> AV14CompanyLocationId ;
+      private GxSimpleCollection<long> AV19EmployeeIds ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private IDataStoreProvider pr_default ;
       private long[] P001U10_A100CompanyId ;
       private bool[] P001U10_A112EmployeeIsActive ;
-      private long[] P001U10_A157CompanyLocationId ;
       private long[] P001U10_A106EmployeeId ;
+      private long[] P001U10_A157CompanyLocationId ;
       private string[] P001U10_A148EmployeeName ;
       private short[] P001U10_A40000GXC1 ;
       private bool[] P001U10_n40000GXC1 ;
@@ -448,7 +458,7 @@ namespace GeneXus.Programs {
       private bool[] P001U10_n40014GXC15 ;
       private short[] P001U10_A40015GXC16 ;
       private bool[] P001U10_n40015GXC16 ;
-      private GXBaseCollection<SdtSDTEmployeeWeekReport> aP3_Gxm2rootcol ;
+      private GXBaseCollection<SdtSDTEmployeeWeekReport> aP4_Gxm2rootcol ;
       private GXBaseCollection<SdtSDTEmployeeWeekReport> Gxm2rootcol ;
       private SdtSDTEmployeeWeekReport Gxm1sdtemployeeweekreport ;
    }
@@ -458,19 +468,26 @@ namespace GeneXus.Programs {
       protected Object[] conditional_P001U10( IGxContext context ,
                                               long A157CompanyLocationId ,
                                               GxSimpleCollection<long> AV14CompanyLocationId ,
+                                              long A106EmployeeId ,
+                                              GxSimpleCollection<long> AV19EmployeeIds ,
                                               int AV14CompanyLocationId_Count ,
+                                              int AV19EmployeeIds_Count ,
                                               bool A112EmployeeIsActive )
       {
          System.Text.StringBuilder sWhereString = new System.Text.StringBuilder();
          string scmdbuf;
          short[] GXv_int5 = new short[9];
          Object[] GXv_Object6 = new Object[2];
-         scmdbuf = "SELECT T1.CompanyId, T1.EmployeeIsActive, T2.CompanyLocationId, T1.EmployeeId, T1.EmployeeName, COALESCE( T3.GXC1, 0) AS GXC1, COALESCE( T3.GXC2, 0) AS GXC2, COALESCE( T4.GXC1, 0) AS GXC3, COALESCE( T4.GXC2, 0) AS GXC4, COALESCE( T5.GXC1, 0) AS GXC5, COALESCE( T5.GXC2, 0) AS GXC6, COALESCE( T6.GXC1, 0) AS GXC7, COALESCE( T6.GXC2, 0) AS GXC8, COALESCE( T7.GXC1, 0) AS GXC9, COALESCE( T7.GXC2, 0) AS GXC10, COALESCE( T8.GXC1, 0) AS GXC11, COALESCE( T8.GXC2, 0) AS GXC12, COALESCE( T9.GXC1, 0) AS GXC13, COALESCE( T9.GXC2, 0) AS GXC14, COALESCE( T10.GXC1, 0) AS GXC15, COALESCE( T10.GXC2, 0) AS GXC16 FROM (((((((((Employee T1 INNER JOIN Company T2 ON T2.CompanyId = T1.CompanyId) LEFT JOIN LATERAL (SELECT SUM(WorkHourLogHour) AS GXC1, EmployeeId, SUM(WorkHourLogMinute) AS GXC2 FROM WorkHourLog WHERE (T1.EmployeeId = EmployeeId) AND (WorkHourLogDate = :AV13FromDate) GROUP BY EmployeeId ) T3 ON T3.EmployeeId = T1.EmployeeId) LEFT JOIN LATERAL (SELECT SUM(WorkHourLogHour) AS GXC1, EmployeeId, SUM(WorkHourLogMinute) AS GXC2 FROM WorkHourLog WHERE (T1.EmployeeId = EmployeeId) AND (WorkHourLogDate = (CAST(:AV13FromDate AS date) + CAST (( 1) || ' DAY' AS INTERVAL))) GROUP BY EmployeeId ) T4 ON T4.EmployeeId = T1.EmployeeId) LEFT JOIN LATERAL (SELECT SUM(WorkHourLogHour) AS GXC1, EmployeeId, SUM(WorkHourLogMinute) AS GXC2 FROM WorkHourLog WHERE (T1.EmployeeId = EmployeeId) AND (WorkHourLogDate = (CAST(:AV13FromDate AS date) + CAST (( 2) || ' DAY' AS INTERVAL))) GROUP BY EmployeeId ) T5 ON T5.EmployeeId = T1.EmployeeId) LEFT JOIN LATERAL (SELECT SUM(WorkHourLogHour) AS GXC1, EmployeeId, SUM(WorkHourLogMinute) AS GXC2 FROM WorkHourLog WHERE (T1.EmployeeId = EmployeeId) AND (WorkHourLogDate = (CAST(:AV13FromDate AS date) + CAST (( 3) || ' DAY' AS INTERVAL))) GROUP BY EmployeeId ) T6 ON T6.EmployeeId";
+         scmdbuf = "SELECT T1.CompanyId, T1.EmployeeIsActive, T1.EmployeeId, T2.CompanyLocationId, T1.EmployeeName, COALESCE( T3.GXC1, 0) AS GXC1, COALESCE( T3.GXC2, 0) AS GXC2, COALESCE( T4.GXC1, 0) AS GXC3, COALESCE( T4.GXC2, 0) AS GXC4, COALESCE( T5.GXC1, 0) AS GXC5, COALESCE( T5.GXC2, 0) AS GXC6, COALESCE( T6.GXC1, 0) AS GXC7, COALESCE( T6.GXC2, 0) AS GXC8, COALESCE( T7.GXC1, 0) AS GXC9, COALESCE( T7.GXC2, 0) AS GXC10, COALESCE( T8.GXC1, 0) AS GXC11, COALESCE( T8.GXC2, 0) AS GXC12, COALESCE( T9.GXC1, 0) AS GXC13, COALESCE( T9.GXC2, 0) AS GXC14, COALESCE( T10.GXC1, 0) AS GXC15, COALESCE( T10.GXC2, 0) AS GXC16 FROM (((((((((Employee T1 INNER JOIN Company T2 ON T2.CompanyId = T1.CompanyId) LEFT JOIN LATERAL (SELECT SUM(WorkHourLogHour) AS GXC1, EmployeeId, SUM(WorkHourLogMinute) AS GXC2 FROM WorkHourLog WHERE (T1.EmployeeId = EmployeeId) AND (WorkHourLogDate = :AV13FromDate) GROUP BY EmployeeId ) T3 ON T3.EmployeeId = T1.EmployeeId) LEFT JOIN LATERAL (SELECT SUM(WorkHourLogHour) AS GXC1, EmployeeId, SUM(WorkHourLogMinute) AS GXC2 FROM WorkHourLog WHERE (T1.EmployeeId = EmployeeId) AND (WorkHourLogDate = (CAST(:AV13FromDate AS date) + CAST (( 1) || ' DAY' AS INTERVAL))) GROUP BY EmployeeId ) T4 ON T4.EmployeeId = T1.EmployeeId) LEFT JOIN LATERAL (SELECT SUM(WorkHourLogHour) AS GXC1, EmployeeId, SUM(WorkHourLogMinute) AS GXC2 FROM WorkHourLog WHERE (T1.EmployeeId = EmployeeId) AND (WorkHourLogDate = (CAST(:AV13FromDate AS date) + CAST (( 2) || ' DAY' AS INTERVAL))) GROUP BY EmployeeId ) T5 ON T5.EmployeeId = T1.EmployeeId) LEFT JOIN LATERAL (SELECT SUM(WorkHourLogHour) AS GXC1, EmployeeId, SUM(WorkHourLogMinute) AS GXC2 FROM WorkHourLog WHERE (T1.EmployeeId = EmployeeId) AND (WorkHourLogDate = (CAST(:AV13FromDate AS date) + CAST (( 3) || ' DAY' AS INTERVAL))) GROUP BY EmployeeId ) T6 ON T6.EmployeeId";
          scmdbuf += " = T1.EmployeeId) LEFT JOIN LATERAL (SELECT SUM(WorkHourLogHour) AS GXC1, EmployeeId, SUM(WorkHourLogMinute) AS GXC2 FROM WorkHourLog WHERE (T1.EmployeeId = EmployeeId) AND (WorkHourLogDate = (CAST(:AV13FromDate AS date) + CAST (( 4) || ' DAY' AS INTERVAL))) GROUP BY EmployeeId ) T7 ON T7.EmployeeId = T1.EmployeeId) LEFT JOIN LATERAL (SELECT SUM(WorkHourLogHour) AS GXC1, EmployeeId, SUM(WorkHourLogMinute) AS GXC2 FROM WorkHourLog WHERE (T1.EmployeeId = EmployeeId) AND (WorkHourLogDate = (CAST(:AV13FromDate AS date) + CAST (( 5) || ' DAY' AS INTERVAL))) GROUP BY EmployeeId ) T8 ON T8.EmployeeId = T1.EmployeeId) LEFT JOIN LATERAL (SELECT SUM(WorkHourLogHour) AS GXC1, EmployeeId, SUM(WorkHourLogMinute) AS GXC2 FROM WorkHourLog WHERE (T1.EmployeeId = EmployeeId) AND (WorkHourLogDate = (CAST(:AV13FromDate AS date) + CAST (( 6) || ' DAY' AS INTERVAL))) GROUP BY EmployeeId ) T9 ON T9.EmployeeId = T1.EmployeeId) LEFT JOIN LATERAL (SELECT SUM(WorkHourLogHour) AS GXC1, EmployeeId, SUM(WorkHourLogMinute) AS GXC2 FROM WorkHourLog WHERE (T1.EmployeeId = EmployeeId) AND (WorkHourLogDate >= :AV13FromDate and WorkHourLogDate <= (CAST(:AV13FromDate AS date) + CAST (( 6) || ' DAY' AS INTERVAL))) GROUP BY EmployeeId ) T10 ON T10.EmployeeId = T1.EmployeeId)";
          AddWhere(sWhereString, "(T1.EmployeeIsActive = TRUE)");
-         if ( AV14CompanyLocationId_Count > 0 )
+         if ( ( AV14CompanyLocationId_Count > 0 ) && ( AV19EmployeeIds_Count == 0 ) )
          {
             AddWhere(sWhereString, "("+new GxDbmsUtils( new GxPostgreSql()).ValueList(AV14CompanyLocationId, "T2.CompanyLocationId IN (", ")")+")");
+         }
+         if ( AV19EmployeeIds_Count > 0 )
+         {
+            AddWhere(sWhereString, "("+new GxDbmsUtils( new GxPostgreSql()).ValueList(AV19EmployeeIds, "T1.EmployeeId IN (", ")")+")");
          }
          scmdbuf += sWhereString;
          scmdbuf += " ORDER BY T1.EmployeeName";
@@ -486,7 +503,7 @@ namespace GeneXus.Programs {
          switch ( cursor )
          {
                case 0 :
-                     return conditional_P001U10(context, (long)dynConstraints[0] , (GxSimpleCollection<long>)dynConstraints[1] , (int)dynConstraints[2] , (bool)dynConstraints[3] );
+                     return conditional_P001U10(context, (long)dynConstraints[0] , (GxSimpleCollection<long>)dynConstraints[1] , (long)dynConstraints[2] , (GxSimpleCollection<long>)dynConstraints[3] , (int)dynConstraints[4] , (int)dynConstraints[5] , (bool)dynConstraints[6] );
          }
          return base.getDynamicStatement(cursor, context, dynConstraints);
       }

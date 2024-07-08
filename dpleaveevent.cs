@@ -61,40 +61,45 @@ namespace GeneXus.Programs {
       public void execute( DateTime aP0_FromDate ,
                            DateTime aP1_ToDate ,
                            long aP2_CompanyLocationId ,
-                           out GXBaseCollection<SdtSDTLeaveEvent> aP3_Gxm2rootcol )
+                           GxSimpleCollection<long> aP3_EmployeeIds ,
+                           out GXBaseCollection<SdtSDTLeaveEvent> aP4_Gxm2rootcol )
       {
          this.AV5FromDate = aP0_FromDate;
          this.AV6ToDate = aP1_ToDate;
          this.AV7CompanyLocationId = aP2_CompanyLocationId;
+         this.AV8EmployeeIds = aP3_EmployeeIds;
          this.Gxm2rootcol = new GXBaseCollection<SdtSDTLeaveEvent>( context, "SDTLeaveEvent", "YTT_version4") ;
          initialize();
          executePrivate();
-         aP3_Gxm2rootcol=this.Gxm2rootcol;
+         aP4_Gxm2rootcol=this.Gxm2rootcol;
       }
 
       public GXBaseCollection<SdtSDTLeaveEvent> executeUdp( DateTime aP0_FromDate ,
                                                             DateTime aP1_ToDate ,
-                                                            long aP2_CompanyLocationId )
+                                                            long aP2_CompanyLocationId ,
+                                                            GxSimpleCollection<long> aP3_EmployeeIds )
       {
-         execute(aP0_FromDate, aP1_ToDate, aP2_CompanyLocationId, out aP3_Gxm2rootcol);
+         execute(aP0_FromDate, aP1_ToDate, aP2_CompanyLocationId, aP3_EmployeeIds, out aP4_Gxm2rootcol);
          return Gxm2rootcol ;
       }
 
       public void executeSubmit( DateTime aP0_FromDate ,
                                  DateTime aP1_ToDate ,
                                  long aP2_CompanyLocationId ,
-                                 out GXBaseCollection<SdtSDTLeaveEvent> aP3_Gxm2rootcol )
+                                 GxSimpleCollection<long> aP3_EmployeeIds ,
+                                 out GXBaseCollection<SdtSDTLeaveEvent> aP4_Gxm2rootcol )
       {
          dpleaveevent objdpleaveevent;
          objdpleaveevent = new dpleaveevent();
          objdpleaveevent.AV5FromDate = aP0_FromDate;
          objdpleaveevent.AV6ToDate = aP1_ToDate;
          objdpleaveevent.AV7CompanyLocationId = aP2_CompanyLocationId;
+         objdpleaveevent.AV8EmployeeIds = aP3_EmployeeIds;
          objdpleaveevent.Gxm2rootcol = new GXBaseCollection<SdtSDTLeaveEvent>( context, "SDTLeaveEvent", "YTT_version4") ;
          objdpleaveevent.context.SetSubmitInitialConfig(context);
          objdpleaveevent.initialize();
          Submit( executePrivateCatch,objdpleaveevent);
-         aP3_Gxm2rootcol=this.Gxm2rootcol;
+         aP4_Gxm2rootcol=this.Gxm2rootcol;
       }
 
       void executePrivateCatch( object stateInfo )
@@ -114,18 +119,29 @@ namespace GeneXus.Programs {
       {
          /* GeneXus formulas */
          /* Output device settings */
+         pr_default.dynParam(0, new Object[]{ new Object[]{
+                                              A106EmployeeId ,
+                                              AV8EmployeeIds ,
+                                              AV8EmployeeIds.Count ,
+                                              A132LeaveRequestStatus ,
+                                              A157CompanyLocationId ,
+                                              AV7CompanyLocationId } ,
+                                              new int[]{
+                                              TypeConstants.LONG, TypeConstants.INT, TypeConstants.LONG, TypeConstants.LONG
+                                              }
+         });
          /* Using cursor P001S2 */
          pr_default.execute(0, new Object[] {AV7CompanyLocationId});
          while ( (pr_default.getStatus(0) != 101) )
          {
             A124LeaveTypeId = P001S2_A124LeaveTypeId[0];
             A100CompanyId = P001S2_A100CompanyId[0];
+            A106EmployeeId = P001S2_A106EmployeeId[0];
             A157CompanyLocationId = P001S2_A157CompanyLocationId[0];
             A132LeaveRequestStatus = P001S2_A132LeaveRequestStatus[0];
             A127LeaveRequestId = P001S2_A127LeaveRequestId[0];
             A129LeaveRequestStartDate = P001S2_A129LeaveRequestStartDate[0];
             A130LeaveRequestEndDate = P001S2_A130LeaveRequestEndDate[0];
-            A106EmployeeId = P001S2_A106EmployeeId[0];
             A175LeaveTypeColorApproved = P001S2_A175LeaveTypeColorApproved[0];
             n175LeaveTypeColorApproved = P001S2_n175LeaveTypeColorApproved[0];
             A100CompanyId = P001S2_A100CompanyId[0];
@@ -168,17 +184,17 @@ namespace GeneXus.Programs {
       public override void initialize( )
       {
          scmdbuf = "";
+         A132LeaveRequestStatus = "";
          P001S2_A124LeaveTypeId = new long[1] ;
          P001S2_A100CompanyId = new long[1] ;
+         P001S2_A106EmployeeId = new long[1] ;
          P001S2_A157CompanyLocationId = new long[1] ;
          P001S2_A132LeaveRequestStatus = new string[] {""} ;
          P001S2_A127LeaveRequestId = new long[1] ;
          P001S2_A129LeaveRequestStartDate = new DateTime[] {DateTime.MinValue} ;
          P001S2_A130LeaveRequestEndDate = new DateTime[] {DateTime.MinValue} ;
-         P001S2_A106EmployeeId = new long[1] ;
          P001S2_A175LeaveTypeColorApproved = new string[] {""} ;
          P001S2_n175LeaveTypeColorApproved = new bool[] {false} ;
-         A132LeaveRequestStatus = "";
          A129LeaveRequestStartDate = DateTime.MinValue;
          A130LeaveRequestEndDate = DateTime.MinValue;
          A175LeaveTypeColorApproved = "";
@@ -187,19 +203,20 @@ namespace GeneXus.Programs {
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.dpleaveevent__default(),
             new Object[][] {
                 new Object[] {
-               P001S2_A124LeaveTypeId, P001S2_A100CompanyId, P001S2_A157CompanyLocationId, P001S2_A132LeaveRequestStatus, P001S2_A127LeaveRequestId, P001S2_A129LeaveRequestStartDate, P001S2_A130LeaveRequestEndDate, P001S2_A106EmployeeId, P001S2_A175LeaveTypeColorApproved, P001S2_n175LeaveTypeColorApproved
+               P001S2_A124LeaveTypeId, P001S2_A100CompanyId, P001S2_A106EmployeeId, P001S2_A157CompanyLocationId, P001S2_A132LeaveRequestStatus, P001S2_A127LeaveRequestId, P001S2_A129LeaveRequestStartDate, P001S2_A130LeaveRequestEndDate, P001S2_A175LeaveTypeColorApproved, P001S2_n175LeaveTypeColorApproved
                }
             }
          );
          /* GeneXus formulas. */
       }
 
+      private int AV8EmployeeIds_Count ;
       private long AV7CompanyLocationId ;
+      private long A106EmployeeId ;
+      private long A157CompanyLocationId ;
       private long A124LeaveTypeId ;
       private long A100CompanyId ;
-      private long A157CompanyLocationId ;
       private long A127LeaveRequestId ;
-      private long A106EmployeeId ;
       private string scmdbuf ;
       private string A132LeaveRequestStatus ;
       private string A175LeaveTypeColorApproved ;
@@ -209,26 +226,65 @@ namespace GeneXus.Programs {
       private DateTime A129LeaveRequestStartDate ;
       private DateTime A130LeaveRequestEndDate ;
       private bool n175LeaveTypeColorApproved ;
+      private GxSimpleCollection<long> AV8EmployeeIds ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private IDataStoreProvider pr_default ;
       private long[] P001S2_A124LeaveTypeId ;
       private long[] P001S2_A100CompanyId ;
+      private long[] P001S2_A106EmployeeId ;
       private long[] P001S2_A157CompanyLocationId ;
       private string[] P001S2_A132LeaveRequestStatus ;
       private long[] P001S2_A127LeaveRequestId ;
       private DateTime[] P001S2_A129LeaveRequestStartDate ;
       private DateTime[] P001S2_A130LeaveRequestEndDate ;
-      private long[] P001S2_A106EmployeeId ;
       private string[] P001S2_A175LeaveTypeColorApproved ;
       private bool[] P001S2_n175LeaveTypeColorApproved ;
-      private GXBaseCollection<SdtSDTLeaveEvent> aP3_Gxm2rootcol ;
+      private GXBaseCollection<SdtSDTLeaveEvent> aP4_Gxm2rootcol ;
       private GXBaseCollection<SdtSDTLeaveEvent> Gxm2rootcol ;
       private SdtSDTLeaveEvent Gxm1sdtleaveevent ;
    }
 
    public class dpleaveevent__default : DataStoreHelperBase, IDataStoreHelper
    {
+      protected Object[] conditional_P001S2( IGxContext context ,
+                                             long A106EmployeeId ,
+                                             GxSimpleCollection<long> AV8EmployeeIds ,
+                                             int AV8EmployeeIds_Count ,
+                                             string A132LeaveRequestStatus ,
+                                             long A157CompanyLocationId ,
+                                             long AV7CompanyLocationId )
+      {
+         System.Text.StringBuilder sWhereString = new System.Text.StringBuilder();
+         string scmdbuf;
+         short[] GXv_int2 = new short[1];
+         Object[] GXv_Object3 = new Object[2];
+         scmdbuf = "SELECT T1.LeaveTypeId, T2.CompanyId, T1.EmployeeId, T3.CompanyLocationId, T1.LeaveRequestStatus, T1.LeaveRequestId, T1.LeaveRequestStartDate, T1.LeaveRequestEndDate, T2.LeaveTypeColorApproved FROM ((LeaveRequest T1 INNER JOIN LeaveType T2 ON T2.LeaveTypeId = T1.LeaveTypeId) INNER JOIN Company T3 ON T3.CompanyId = T2.CompanyId)";
+         AddWhere(sWhereString, "(T1.LeaveRequestStatus = ( 'Approved') or T1.LeaveRequestStatus = ( 'Pending'))");
+         AddWhere(sWhereString, "(T3.CompanyLocationId = :AV7CompanyLocationId)");
+         if ( AV8EmployeeIds_Count > 0 )
+         {
+            AddWhere(sWhereString, "("+new GxDbmsUtils( new GxPostgreSql()).ValueList(AV8EmployeeIds, "T1.EmployeeId IN (", ")")+")");
+         }
+         scmdbuf += sWhereString;
+         scmdbuf += " ORDER BY T1.LeaveRequestId";
+         GXv_Object3[0] = scmdbuf;
+         GXv_Object3[1] = GXv_int2;
+         return GXv_Object3 ;
+      }
+
+      public override Object [] getDynamicStatement( int cursor ,
+                                                     IGxContext context ,
+                                                     Object [] dynConstraints )
+      {
+         switch ( cursor )
+         {
+               case 0 :
+                     return conditional_P001S2(context, (long)dynConstraints[0] , (GxSimpleCollection<long>)dynConstraints[1] , (int)dynConstraints[2] , (string)dynConstraints[3] , (long)dynConstraints[4] , (long)dynConstraints[5] );
+         }
+         return base.getDynamicStatement(cursor, context, dynConstraints);
+      }
+
       public ICursor[] getCursors( )
       {
          cursorDefinitions();
@@ -247,7 +303,7 @@ namespace GeneXus.Programs {
           new ParDef("AV7CompanyLocationId",GXType.Int64,10,0)
           };
           def= new CursorDef[] {
-              new CursorDef("P001S2", "SELECT T1.LeaveTypeId, T2.CompanyId, T3.CompanyLocationId, T1.LeaveRequestStatus, T1.LeaveRequestId, T1.LeaveRequestStartDate, T1.LeaveRequestEndDate, T1.EmployeeId, T2.LeaveTypeColorApproved FROM ((LeaveRequest T1 INNER JOIN LeaveType T2 ON T2.LeaveTypeId = T1.LeaveTypeId) INNER JOIN Company T3 ON T3.CompanyId = T2.CompanyId) WHERE (T1.LeaveRequestStatus = ( 'Approved') or T1.LeaveRequestStatus = ( 'Pending')) AND (T3.CompanyLocationId = :AV7CompanyLocationId) ORDER BY T1.LeaveRequestId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP001S2,100, GxCacheFrequency.OFF ,true,false )
+              new CursorDef("P001S2", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP001S2,100, GxCacheFrequency.OFF ,true,false )
           };
        }
     }
@@ -262,11 +318,11 @@ namespace GeneXus.Programs {
                 ((long[]) buf[0])[0] = rslt.getLong(1);
                 ((long[]) buf[1])[0] = rslt.getLong(2);
                 ((long[]) buf[2])[0] = rslt.getLong(3);
-                ((string[]) buf[3])[0] = rslt.getString(4, 20);
-                ((long[]) buf[4])[0] = rslt.getLong(5);
-                ((DateTime[]) buf[5])[0] = rslt.getGXDate(6);
+                ((long[]) buf[3])[0] = rslt.getLong(4);
+                ((string[]) buf[4])[0] = rslt.getString(5, 20);
+                ((long[]) buf[5])[0] = rslt.getLong(6);
                 ((DateTime[]) buf[6])[0] = rslt.getGXDate(7);
-                ((long[]) buf[7])[0] = rslt.getLong(8);
+                ((DateTime[]) buf[7])[0] = rslt.getGXDate(8);
                 ((string[]) buf[8])[0] = rslt.getString(9, 20);
                 ((bool[]) buf[9])[0] = rslt.wasNull(9);
                 return;

@@ -163,7 +163,7 @@ namespace GeneXus.Programs {
          scmdbuf = "SELECT ProjectId, EmployeeId FROM EmployeeProject";
          AddWhere(sWhereString, "("+new GxDbmsUtils( new GxPostgreSql()).ValueList(AV11ProjectIds, "ProjectId IN (", ")")+")");
          scmdbuf += sWhereString;
-         scmdbuf += " ORDER BY EmployeeId, ProjectId";
+         scmdbuf += " ORDER BY ProjectId";
          GXv_Object1[0] = scmdbuf;
          return GXv_Object1 ;
       }

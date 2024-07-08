@@ -43,6 +43,20 @@
         </Properties>
       </Field>
     </Parameter>
+    <Parameter name="EmployeeIds" collection="true">
+      <Field>
+        <Properties>
+          <Property>
+            <Name>Type</Name>
+            <Value>Numeric</Value>
+          </Property>
+          <Property>
+            <Name>Length</Name>
+            <Value>10</Value>
+          </Property>
+        </Properties>
+      </Field>
+    </Parameter>
     <Parameter name="ReturnValue" accessor="out" collection="true">
       <Field name="SDTEmployeeWeekReport" description="SDTEmployee Week Report">
         <Fields>

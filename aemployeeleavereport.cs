@@ -42,43 +42,7 @@ namespace GeneXus.Programs {
 
       public int executeCmdLine( string[] args )
       {
-          long aP0_CompanyLocationId ;
-         DateTime aP1_Date = new DateTime()  ;
-         string aP2_Filename = new string(' ',0)  ;
-         string aP3_ErrorMessage = new string(' ',0)  ;
-         if ( 0 < args.Length )
-         {
-            aP0_CompanyLocationId=((long)(NumberUtil.Val( (string)(args[0]), ".")));
-         }
-         else
-         {
-            aP0_CompanyLocationId=0;
-         }
-         if ( 1 < args.Length )
-         {
-            aP1_Date=((DateTime)(context.localUtil.CToD( (string)(args[1]), 2)));
-         }
-         else
-         {
-            aP1_Date=DateTime.MinValue;
-         }
-         if ( 2 < args.Length )
-         {
-            aP2_Filename=((string)(args[2]));
-         }
-         else
-         {
-            aP2_Filename="";
-         }
-         if ( 3 < args.Length )
-         {
-            aP3_ErrorMessage=((string)(args[3]));
-         }
-         else
-         {
-            aP3_ErrorMessage="";
-         }
-         execute(aP0_CompanyLocationId, ref aP1_Date, out aP2_Filename, out aP3_ErrorMessage);
+         context.StatusMessage( "Command line using complex types not supported." );
          return GX.GXRuntime.ExitCode ;
       }
 
@@ -117,46 +81,53 @@ namespace GeneXus.Programs {
       }
 
       public void execute( long aP0_CompanyLocationId ,
-                           ref DateTime aP1_Date ,
-                           out string aP2_Filename ,
-                           out string aP3_ErrorMessage )
+                           ref GxSimpleCollection<long> aP1_EmployeeIds ,
+                           ref DateTime aP2_Date ,
+                           out string aP3_Filename ,
+                           out string aP4_ErrorMessage )
       {
          this.AV22CompanyLocationId = aP0_CompanyLocationId;
-         this.AV28Date = aP1_Date;
+         this.AV30EmployeeIds = aP1_EmployeeIds;
+         this.AV28Date = aP2_Date;
          this.AV10Filename = "" ;
          this.AV23ErrorMessage = "" ;
          initialize();
          executePrivate();
-         aP1_Date=this.AV28Date;
-         aP2_Filename=this.AV10Filename;
-         aP3_ErrorMessage=this.AV23ErrorMessage;
+         aP1_EmployeeIds=this.AV30EmployeeIds;
+         aP2_Date=this.AV28Date;
+         aP3_Filename=this.AV10Filename;
+         aP4_ErrorMessage=this.AV23ErrorMessage;
       }
 
       public string executeUdp( long aP0_CompanyLocationId ,
-                                ref DateTime aP1_Date ,
-                                out string aP2_Filename )
+                                ref GxSimpleCollection<long> aP1_EmployeeIds ,
+                                ref DateTime aP2_Date ,
+                                out string aP3_Filename )
       {
-         execute(aP0_CompanyLocationId, ref aP1_Date, out aP2_Filename, out aP3_ErrorMessage);
+         execute(aP0_CompanyLocationId, ref aP1_EmployeeIds, ref aP2_Date, out aP3_Filename, out aP4_ErrorMessage);
          return AV23ErrorMessage ;
       }
 
       public void executeSubmit( long aP0_CompanyLocationId ,
-                                 ref DateTime aP1_Date ,
-                                 out string aP2_Filename ,
-                                 out string aP3_ErrorMessage )
+                                 ref GxSimpleCollection<long> aP1_EmployeeIds ,
+                                 ref DateTime aP2_Date ,
+                                 out string aP3_Filename ,
+                                 out string aP4_ErrorMessage )
       {
          aemployeeleavereport objaemployeeleavereport;
          objaemployeeleavereport = new aemployeeleavereport();
          objaemployeeleavereport.AV22CompanyLocationId = aP0_CompanyLocationId;
-         objaemployeeleavereport.AV28Date = aP1_Date;
+         objaemployeeleavereport.AV30EmployeeIds = aP1_EmployeeIds;
+         objaemployeeleavereport.AV28Date = aP2_Date;
          objaemployeeleavereport.AV10Filename = "" ;
          objaemployeeleavereport.AV23ErrorMessage = "" ;
          objaemployeeleavereport.context.SetSubmitInitialConfig(context);
          objaemployeeleavereport.initialize();
          Submit( executePrivateCatch,objaemployeeleavereport);
-         aP1_Date=this.AV28Date;
-         aP2_Filename=this.AV10Filename;
-         aP3_ErrorMessage=this.AV23ErrorMessage;
+         aP1_EmployeeIds=this.AV30EmployeeIds;
+         aP2_Date=this.AV28Date;
+         aP3_Filename=this.AV10Filename;
+         aP4_ErrorMessage=this.AV23ErrorMessage;
       }
 
       void executePrivateCatch( object stateInfo )
@@ -211,26 +182,36 @@ namespace GeneXus.Programs {
          AV20ExcelCellRange.gxTpr_Valuetext = "Leave Overview "+GXt_char1+" For "+AV24CompanyName;
          AV20ExcelCellRange.setcellstyle( AV27excelCellStyle);
          AV12col = 1;
-         AV31GXV1 = 1;
-         while ( AV31GXV1 <= AV8LeaveTypeNames.Count )
+         AV32GXV1 = 1;
+         while ( AV32GXV1 <= AV8LeaveTypeNames.Count )
          {
-            AV15Name = AV8LeaveTypeNames.GetString(AV31GXV1);
+            AV15Name = AV8LeaveTypeNames.GetString(AV32GXV1);
             AV20ExcelCellRange = AV21excelSpreadsheet.cell(3, AV12col);
             AV20ExcelCellRange.gxTpr_Valuetext = AV15Name;
             AV20ExcelCellRange.setcellstyle( AV27excelCellStyle);
             AV12col = (short)(AV12col+1);
-            AV31GXV1 = (int)(AV31GXV1+1);
+            AV32GXV1 = (int)(AV32GXV1+1);
          }
          AV13row = 4;
+         pr_default.dynParam(1, new Object[]{ new Object[]{
+                                              A106EmployeeId ,
+                                              AV30EmployeeIds ,
+                                              AV30EmployeeIds.Count ,
+                                              A157CompanyLocationId ,
+                                              AV22CompanyLocationId } ,
+                                              new int[]{
+                                              TypeConstants.LONG, TypeConstants.INT, TypeConstants.LONG, TypeConstants.LONG
+                                              }
+         });
          /* Using cursor P00AT3 */
          pr_default.execute(1, new Object[] {AV22CompanyLocationId});
          while ( (pr_default.getStatus(1) != 101) )
          {
             A100CompanyId = P00AT3_A100CompanyId[0];
             A157CompanyLocationId = P00AT3_A157CompanyLocationId[0];
+            A106EmployeeId = P00AT3_A106EmployeeId[0];
             A148EmployeeName = P00AT3_A148EmployeeName[0];
             A147EmployeeBalance = P00AT3_A147EmployeeBalance[0];
-            A106EmployeeId = P00AT3_A106EmployeeId[0];
             A157CompanyLocationId = P00AT3_A157CompanyLocationId[0];
             AV20ExcelCellRange = AV21excelSpreadsheet.cell(AV13row, 1);
             AV20ExcelCellRange.gxTpr_Valuetext = StringUtil.Trim( A148EmployeeName);
@@ -350,9 +331,9 @@ namespace GeneXus.Programs {
          AV15Name = "";
          P00AT3_A100CompanyId = new long[1] ;
          P00AT3_A157CompanyLocationId = new long[1] ;
+         P00AT3_A106EmployeeId = new long[1] ;
          P00AT3_A148EmployeeName = new string[] {""} ;
          P00AT3_A147EmployeeBalance = new decimal[1] ;
-         P00AT3_A106EmployeeId = new long[1] ;
          A148EmployeeName = "";
          P00AT5_A124LeaveTypeId = new long[1] ;
          P00AT5_A100CompanyId = new long[1] ;
@@ -369,7 +350,7 @@ namespace GeneXus.Programs {
                P00AT2_A100CompanyId, P00AT2_A157CompanyLocationId, P00AT2_A101CompanyName, P00AT2_A125LeaveTypeName, P00AT2_A124LeaveTypeId
                }
                , new Object[] {
-               P00AT3_A100CompanyId, P00AT3_A157CompanyLocationId, P00AT3_A148EmployeeName, P00AT3_A147EmployeeBalance, P00AT3_A106EmployeeId
+               P00AT3_A100CompanyId, P00AT3_A157CompanyLocationId, P00AT3_A106EmployeeId, P00AT3_A148EmployeeName, P00AT3_A147EmployeeBalance
                }
                , new Object[] {
                P00AT5_A124LeaveTypeId, P00AT5_A100CompanyId, P00AT5_A125LeaveTypeName, P00AT5_A40000GXC1, P00AT5_n40000GXC1
@@ -385,7 +366,8 @@ namespace GeneXus.Programs {
       private short AV13row ;
       private short AV14count ;
       private short AV17index ;
-      private int AV31GXV1 ;
+      private int AV32GXV1 ;
+      private int AV30EmployeeIds_Count ;
       private long AV22CompanyLocationId ;
       private long A100CompanyId ;
       private long A157CompanyLocationId ;
@@ -407,10 +389,12 @@ namespace GeneXus.Programs {
       private bool n40000GXC1 ;
       private bool AV26boolean ;
       private string AV23ErrorMessage ;
+      private GxSimpleCollection<long> AV30EmployeeIds ;
       private GeneXus.Programs.genexusoffice.office.excel.SdtExcelSpreadsheet AV21excelSpreadsheet ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
-      private DateTime aP1_Date ;
+      private GxSimpleCollection<long> aP1_EmployeeIds ;
+      private DateTime aP2_Date ;
       private IDataStoreProvider pr_default ;
       private long[] P00AT2_A100CompanyId ;
       private long[] P00AT2_A157CompanyLocationId ;
@@ -419,16 +403,16 @@ namespace GeneXus.Programs {
       private long[] P00AT2_A124LeaveTypeId ;
       private long[] P00AT3_A100CompanyId ;
       private long[] P00AT3_A157CompanyLocationId ;
+      private long[] P00AT3_A106EmployeeId ;
       private string[] P00AT3_A148EmployeeName ;
       private decimal[] P00AT3_A147EmployeeBalance ;
-      private long[] P00AT3_A106EmployeeId ;
       private long[] P00AT5_A124LeaveTypeId ;
       private long[] P00AT5_A100CompanyId ;
       private string[] P00AT5_A125LeaveTypeName ;
       private decimal[] P00AT5_A40000GXC1 ;
       private bool[] P00AT5_n40000GXC1 ;
-      private string aP2_Filename ;
-      private string aP3_ErrorMessage ;
+      private string aP3_Filename ;
+      private string aP4_ErrorMessage ;
       private IGxSession AV11Session ;
       private ExcelDocumentI AV9ExcelDocument ;
       private GxSimpleCollection<string> AV8LeaveTypeNames ;
@@ -439,6 +423,42 @@ namespace GeneXus.Programs {
 
    public class aemployeeleavereport__default : DataStoreHelperBase, IDataStoreHelper
    {
+      protected Object[] conditional_P00AT3( IGxContext context ,
+                                             long A106EmployeeId ,
+                                             GxSimpleCollection<long> AV30EmployeeIds ,
+                                             int AV30EmployeeIds_Count ,
+                                             long A157CompanyLocationId ,
+                                             long AV22CompanyLocationId )
+      {
+         System.Text.StringBuilder sWhereString = new System.Text.StringBuilder();
+         string scmdbuf;
+         short[] GXv_int2 = new short[1];
+         Object[] GXv_Object3 = new Object[2];
+         scmdbuf = "SELECT T1.CompanyId, T2.CompanyLocationId, T1.EmployeeId, T1.EmployeeName, T1.EmployeeBalance FROM (Employee T1 INNER JOIN Company T2 ON T2.CompanyId = T1.CompanyId)";
+         AddWhere(sWhereString, "(T2.CompanyLocationId = :AV22CompanyLocationId)");
+         if ( AV30EmployeeIds_Count > 0 )
+         {
+            AddWhere(sWhereString, "("+new GxDbmsUtils( new GxPostgreSql()).ValueList(AV30EmployeeIds, "T1.EmployeeId IN (", ")")+")");
+         }
+         scmdbuf += sWhereString;
+         scmdbuf += " ORDER BY T1.EmployeeId";
+         GXv_Object3[0] = scmdbuf;
+         GXv_Object3[1] = GXv_int2;
+         return GXv_Object3 ;
+      }
+
+      public override Object [] getDynamicStatement( int cursor ,
+                                                     IGxContext context ,
+                                                     Object [] dynConstraints )
+      {
+         switch ( cursor )
+         {
+               case 1 :
+                     return conditional_P00AT3(context, (long)dynConstraints[0] , (GxSimpleCollection<long>)dynConstraints[1] , (int)dynConstraints[2] , (long)dynConstraints[3] , (long)dynConstraints[4] );
+         }
+         return base.getDynamicStatement(cursor, context, dynConstraints);
+      }
+
       public ICursor[] getCursors( )
       {
          cursorDefinitions();
@@ -458,19 +478,19 @@ namespace GeneXus.Programs {
           prmP00AT2 = new Object[] {
           new ParDef("AV22CompanyLocationId",GXType.Int64,10,0)
           };
-          Object[] prmP00AT3;
-          prmP00AT3 = new Object[] {
-          new ParDef("AV22CompanyLocationId",GXType.Int64,10,0)
-          };
           Object[] prmP00AT5;
           prmP00AT5 = new Object[] {
           new ParDef("EmployeeName",GXType.Char,100,0) ,
           new ParDef("AV28Date",GXType.Date,8,0) ,
           new ParDef("CompanyId",GXType.Int64,10,0)
           };
+          Object[] prmP00AT3;
+          prmP00AT3 = new Object[] {
+          new ParDef("AV22CompanyLocationId",GXType.Int64,10,0)
+          };
           def= new CursorDef[] {
               new CursorDef("P00AT2", "SELECT T1.CompanyId, T2.CompanyLocationId, T2.CompanyName, T1.LeaveTypeName, T1.LeaveTypeId FROM (LeaveType T1 INNER JOIN Company T2 ON T2.CompanyId = T1.CompanyId) WHERE T2.CompanyLocationId = :AV22CompanyLocationId ORDER BY T1.LeaveTypeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00AT2,100, GxCacheFrequency.OFF ,false,false )
-             ,new CursorDef("P00AT3", "SELECT T1.CompanyId, T2.CompanyLocationId, T1.EmployeeName, T1.EmployeeBalance, T1.EmployeeId FROM (Employee T1 INNER JOIN Company T2 ON T2.CompanyId = T1.CompanyId) WHERE T2.CompanyLocationId = :AV22CompanyLocationId ORDER BY T1.EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00AT3,100, GxCacheFrequency.OFF ,true,false )
+             ,new CursorDef("P00AT3", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00AT3,100, GxCacheFrequency.OFF ,true,false )
              ,new CursorDef("P00AT5", "SELECT T1.LeaveTypeId, T1.CompanyId, T1.LeaveTypeName, COALESCE( T2.GXC1, 0) AS GXC1 FROM (LeaveType T1 LEFT JOIN LATERAL (SELECT SUM(T3.LeaveRequestDuration) AS GXC1, T3.LeaveTypeId FROM (LeaveRequest T3 INNER JOIN Employee T4 ON T4.EmployeeId = T3.EmployeeId) WHERE (T1.LeaveTypeId = T3.LeaveTypeId) AND (T4.EmployeeName = ( :EmployeeName) and T3.LeaveRequestStartDate >= TO_DATE(date_part('year', :AV28Date)||'-'||1||'-'||1, 'YYYY-MM-DD') and T3.LeaveRequestStartDate < TO_DATE(date_part('year', :AV28Date)||'-'||12||'-'||31, 'YYYY-MM-DD')) GROUP BY T3.LeaveTypeId ) T2 ON T2.LeaveTypeId = T1.LeaveTypeId) WHERE T1.CompanyId = :CompanyId ORDER BY T1.CompanyId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00AT5,100, GxCacheFrequency.OFF ,false,false )
           };
        }
@@ -492,9 +512,9 @@ namespace GeneXus.Programs {
              case 1 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);
                 ((long[]) buf[1])[0] = rslt.getLong(2);
-                ((string[]) buf[2])[0] = rslt.getString(3, 100);
-                ((decimal[]) buf[3])[0] = rslt.getDecimal(4);
-                ((long[]) buf[4])[0] = rslt.getLong(5);
+                ((long[]) buf[2])[0] = rslt.getLong(3);
+                ((string[]) buf[3])[0] = rslt.getString(4, 100);
+                ((decimal[]) buf[4])[0] = rslt.getDecimal(5);
                 return;
              case 2 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);

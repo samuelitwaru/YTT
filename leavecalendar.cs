@@ -54,6 +54,7 @@ namespace GeneXus.Programs {
       protected override void createObjects( )
       {
          dynavCompanylocationid = new GXCombobox();
+         dynavProjectid = new GXCombobox();
       }
 
       protected void INITWEB( )
@@ -79,6 +80,17 @@ namespace GeneXus.Programs {
                   return  ;
                }
                dyncall( GetNextPar( )) ;
+               return  ;
+            }
+            else if ( StringUtil.StrCmp(gxfirstwebparm, "gxajaxCallCrl"+"_"+"vPROJECTID") == 0 )
+            {
+               setAjaxCallMode();
+               if ( ! IsValidAjaxCall( true) )
+               {
+                  GxWebError = 1;
+                  return  ;
+               }
+               GXDLVvPROJECTID562( ) ;
                return  ;
             }
             else if ( StringUtil.StrCmp(gxfirstwebparm, "gxajaxEvt") == 0 )
@@ -287,6 +299,10 @@ namespace GeneXus.Programs {
 
       protected void send_integrity_footer_hashes( )
       {
+         GxWebStd.gx_boolean_hidden_field( context, "vISPROJECTMANAGER", AV29IsProjectManager);
+         GxWebStd.gx_hidden_field( context, "gxhash_vISPROJECTMANAGER", GetSecureSignedToken( "", AV29IsProjectManager, context));
+         GxWebStd.gx_hidden_field( context, "vUDPARG1", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV33Udparg1), 10, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, "gxhash_vUDPARG1", GetSecureSignedToken( "", context.localUtil.Format( (decimal)(AV33Udparg1), "9999999999"), context));
          GxWebStd.gx_hidden_field( context, "vTODAY", context.localUtil.DToC( Gx_date, 0, "/"));
          GxWebStd.gx_hidden_field( context, "gxhash_vTODAY", GetSecureSignedToken( "", Gx_date, context));
          GXKey = Decrypt64( context.GetCookie( "GX_SESSION_ID"), Crypto.GetServerKey( ));
@@ -308,8 +324,14 @@ namespace GeneXus.Programs {
             context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("vDATERANGE_RANGEPICKEROPTIONS", AV17DateRange_RangePickerOptions);
          }
          GxWebStd.gx_hidden_field( context, "vLEAVEREQUESTID", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV25LeaveRequestId), 10, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "vTODAY", context.localUtil.DToC( Gx_date, 0, "/"));
-         GxWebStd.gx_hidden_field( context, "gxhash_vTODAY", GetSecureSignedToken( "", Gx_date, context));
+         if ( context.isAjaxRequest( ) )
+         {
+            context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "vEMPLOYEEIDS", AV28EmployeeIds);
+         }
+         else
+         {
+            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("vEMPLOYEEIDS", AV28EmployeeIds);
+         }
          if ( context.isAjaxRequest( ) )
          {
             context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "vLEAVEEVENTS", AV6LeaveEvents);
@@ -326,6 +348,22 @@ namespace GeneXus.Programs {
          {
             context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("vLEAVEEVENTGROUPS", AV7LeaveEventGroups);
          }
+         GxWebStd.gx_boolean_hidden_field( context, "vISPROJECTMANAGER", AV29IsProjectManager);
+         GxWebStd.gx_hidden_field( context, "gxhash_vISPROJECTMANAGER", GetSecureSignedToken( "", AV29IsProjectManager, context));
+         GxWebStd.gx_hidden_field( context, "PROJECTMANAGERID", StringUtil.LTrim( StringUtil.NToC( (decimal)(A166ProjectManagerId), 10, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, "vUDPARG1", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV33Udparg1), 10, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, "gxhash_vUDPARG1", GetSecureSignedToken( "", context.localUtil.Format( (decimal)(AV33Udparg1), "9999999999"), context));
+         GxWebStd.gx_hidden_field( context, "PROJECTID", StringUtil.LTrim( StringUtil.NToC( (decimal)(A102ProjectId), 10, 0, ".", "")));
+         if ( context.isAjaxRequest( ) )
+         {
+            context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "vPROJECTIDS", AV27ProjectIds);
+         }
+         else
+         {
+            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("vPROJECTIDS", AV27ProjectIds);
+         }
+         GxWebStd.gx_hidden_field( context, "vTODAY", context.localUtil.DToC( Gx_date, 0, "/"));
+         GxWebStd.gx_hidden_field( context, "gxhash_vTODAY", GetSecureSignedToken( "", Gx_date, context));
          GxWebStd.gx_hidden_field( context, "UCVISTIMELINE1_Events", StringUtil.RTrim( Ucvistimeline1_Events));
          GxWebStd.gx_hidden_field( context, "UCVISTIMELINE1_Groups", StringUtil.RTrim( Ucvistimeline1_Groups));
          GxWebStd.gx_hidden_field( context, "UCVISTIMELINE1_Leavetypes", StringUtil.RTrim( Ucvistimeline1_Leavetypes));
@@ -336,8 +374,6 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "USERACTION1_MODAL_Confirmtype", StringUtil.RTrim( Useraction1_modal_Confirmtype));
          GxWebStd.gx_hidden_field( context, "USERACTION1_MODAL_Bodytype", StringUtil.RTrim( Useraction1_modal_Bodytype));
          GxWebStd.gx_hidden_field( context, "UCVISTIMELINE1_Item", StringUtil.LTrim( StringUtil.NToC( (decimal)(Ucvistimeline1_Item), 9, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "UCVISTIMELINE1_Newstartdate", StringUtil.RTrim( Ucvistimeline1_Newstartdate));
-         GxWebStd.gx_hidden_field( context, "UCVISTIMELINE1_Newstopdate", StringUtil.RTrim( Ucvistimeline1_Newstopdate));
       }
 
       public override void RenderHtmlCloseForm( )
@@ -454,7 +490,7 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, divTable1_Internalname, 1, 100, "%", 0, "px", "Table", "start", "top", " "+"data-gx-smarttable"+" ", "grid-template-columns:3fr 20fr 20fr 57fr;grid-template-rows:auto;grid-column-gap:2px;", "div");
+            GxWebStd.gx_div_start( context, divTable1_Internalname, 1, 100, "%", 0, "px", "Table", "start", "top", " "+"data-gx-smarttable"+" ", "grid-template-columns:3fr 20fr 20fr 20fr 37fr;grid-template-rows:auto;grid-column-gap:2px;", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "CellPaddingTop", "start", "top", " "+"data-gx-smarttable-cell"+" ", "display:flex;justify-content:center;align-items:center;", "div");
             /* User Defined Control */
@@ -513,8 +549,35 @@ namespace GeneXus.Programs {
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "DscTop", "start", "top", " "+"data-gx-smarttable-cell"+" ", "display:flex;align-items:center;", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, divUnnamedtableprojectid_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 MergeLabelCell", "start", "top", "", "", "div");
+            /* Text block */
+            GxWebStd.gx_label_ctrl( context, lblTextblockprojectid_Internalname, "Project", "", "", lblTextblockprojectid_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "Label", 0, "", 1, 1, 0, 0, "HLP_LeaveCalendar.htm");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
+            /* Attribute/Variable Label */
+            GxWebStd.gx_label_element( context, dynavProjectid_Internalname, "Project Id", "col-sm-3 AttributeLabel", 0, true, "");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 41,'',false,'',0)\"";
+            /* ComboBox */
+            GxWebStd.gx_combobox_ctrl1( context, dynavProjectid, dynavProjectid_Internalname, StringUtil.Trim( StringUtil.Str( (decimal)(AV26ProjectId), 10, 0)), 1, dynavProjectid_Jsonclick, 0, "'"+""+"'"+",false,"+"'"+""+"'", "int", "", 1, dynavProjectid.Enabled, 0, 0, 0, "em", 0, "", "", "Attribute", "", "", TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,41);\"", "", true, 0, "HLP_LeaveCalendar.htm");
+            dynavProjectid.CurrentValue = StringUtil.Trim( StringUtil.Str( (decimal)(AV26ProjectId), 10, 0));
+            AssignProp("", false, dynavProjectid_Internalname, "Values", (string)(dynavProjectid.ToJavascriptSource()), true);
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "", "start", "top", " "+"data-gx-smarttable-cell"+" ", "display:flex;justify-content:flex-end;align-items:center;", "div");
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 35,'',false,'',0)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 43,'',false,'',0)\"";
             ClassString = "ButtonMaterial";
             StyleString = "";
             GxWebStd.gx_button_ctrl( context, bttBtnreport_Internalname, "", "Report", bttBtnreport_Jsonclick, 5, "Report", "", StyleString, ClassString, 1, 1, "standard", "'"+""+"'"+",false,"+"'"+"E\\'DOREPORT\\'."+"'", TempTags, "", context.GetButtonType( ), "HLP_LeaveCalendar.htm");
@@ -534,7 +597,7 @@ namespace GeneXus.Programs {
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 hidden-xs hidden-sm hidden-md hidden-lg", "start", "top", "", "", "div");
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 41,'',false,'',0)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 49,'',false,'',0)\"";
             ClassString = "ButtonMaterial";
             StyleString = "";
             GxWebStd.gx_button_ctrl( context, bttBtnuseraction1_Internalname, "", "Popup", bttBtnuseraction1_Jsonclick, 7, "Popup", "", StyleString, ClassString, 1, 1, "standard", "'"+""+"'"+",false,"+"'"+"e11561_client"+"'", TempTags, "", 2, "HLP_LeaveCalendar.htm");
@@ -554,16 +617,16 @@ namespace GeneXus.Programs {
             ucDaterange_rangepicker.SetProperty("End Date", AV16DateRange_To);
             ucDaterange_rangepicker.SetProperty("PickerOptions", AV17DateRange_RangePickerOptions);
             ucDaterange_rangepicker.Render(context, "wwp.daterangepicker", Daterange_rangepicker_Internalname, "DATERANGE_RANGEPICKERContainer");
-            wb_table1_46_562( true) ;
+            wb_table1_54_562( true) ;
          }
          else
          {
-            wb_table1_46_562( false) ;
+            wb_table1_54_562( false) ;
          }
          return  ;
       }
 
-      protected void wb_table1_46_562e( bool wbgen )
+      protected void wb_table1_54_562e( bool wbgen )
       {
          if ( wbgen )
          {
@@ -572,16 +635,16 @@ namespace GeneXus.Programs {
             if ( ! isFullAjaxMode( ) )
             {
                /* WebComponent */
-               GxWebStd.gx_hidden_field( context, "W0052"+"", StringUtil.RTrim( WebComp_Wwpaux_wc_Component));
+               GxWebStd.gx_hidden_field( context, "W0060"+"", StringUtil.RTrim( WebComp_Wwpaux_wc_Component));
                context.WriteHtmlText( "<div") ;
                GxWebStd.ClassAttribute( context, "gxwebcomponent");
-               context.WriteHtmlText( " id=\""+"gxHTMLWrpW0052"+""+"\""+"") ;
+               context.WriteHtmlText( " id=\""+"gxHTMLWrpW0060"+""+"\""+"") ;
                context.WriteHtmlText( ">") ;
                if ( StringUtil.Len( WebComp_Wwpaux_wc_Component) != 0 )
                {
                   if ( StringUtil.StrCmp(StringUtil.Lower( OldWwpaux_wc), StringUtil.Lower( WebComp_Wwpaux_wc_Component)) != 0 )
                   {
-                     context.httpAjaxContext.ajax_rspStartCmp("gxHTMLWrpW0052"+"");
+                     context.httpAjaxContext.ajax_rspStartCmp("gxHTMLWrpW0060"+"");
                   }
                   WebComp_Wwpaux_wc.componentdraw();
                   if ( StringUtil.StrCmp(StringUtil.Lower( OldWwpaux_wc), StringUtil.Lower( WebComp_Wwpaux_wc_Component)) != 0 )
@@ -683,24 +746,30 @@ namespace GeneXus.Programs {
                               /* Execute user event: 'DoReport' */
                               E15562 ();
                            }
-                           else if ( StringUtil.StrCmp(sEvt, "VCOMPANYLOCATIONID.CONTROLVALUECHANGED") == 0 )
+                           else if ( StringUtil.StrCmp(sEvt, "VPROJECTID.CONTROLVALUECHANGED") == 0 )
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
                               E16562 ();
                            }
-                           else if ( StringUtil.StrCmp(sEvt, "GLOBALEVENTS.LEAVEREQUESTSTATUSCHANGED") == 0 )
+                           else if ( StringUtil.StrCmp(sEvt, "VCOMPANYLOCATIONID.CONTROLVALUECHANGED") == 0 )
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
                               E17562 ();
+                           }
+                           else if ( StringUtil.StrCmp(sEvt, "GLOBALEVENTS.LEAVEREQUESTSTATUSCHANGED") == 0 )
+                           {
+                              context.wbHandled = 1;
+                              dynload_actions( ) ;
+                              E18562 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "LOAD") == 0 )
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
                               /* Execute user event: Load */
-                              E18562 ();
+                              E19562 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "ENTER") == 0 )
                            {
@@ -731,9 +800,9 @@ namespace GeneXus.Programs {
                         sEvtType = StringUtil.Left( sEvt, 4);
                         sEvt = StringUtil.Right( sEvt, (short)(StringUtil.Len( sEvt)-4));
                         nCmpId = (short)(Math.Round(NumberUtil.Val( sEvtType, "."), 18, MidpointRounding.ToEven));
-                        if ( nCmpId == 52 )
+                        if ( nCmpId == 60 )
                         {
-                           OldWwpaux_wc = cgiGet( "W0052");
+                           OldWwpaux_wc = cgiGet( "W0060");
                            if ( ( StringUtil.Len( OldWwpaux_wc) == 0 ) || ( StringUtil.StrCmp(OldWwpaux_wc, WebComp_Wwpaux_wc_Component) != 0 ) )
                            {
                               WebComp_Wwpaux_wc = getWebComponent(GetType(), "GeneXus.Programs", OldWwpaux_wc, new Object[] {context} );
@@ -743,7 +812,7 @@ namespace GeneXus.Programs {
                            }
                            if ( StringUtil.Len( WebComp_Wwpaux_wc_Component) != 0 )
                            {
-                              WebComp_Wwpaux_wc.componentprocess("W0052", "", sEvt);
+                              WebComp_Wwpaux_wc.componentprocess("W0060", "", sEvt);
                            }
                            WebComp_Wwpaux_wc_Component = OldWwpaux_wc;
                         }
@@ -867,6 +936,66 @@ namespace GeneXus.Programs {
          pr_default.close(0);
       }
 
+      protected void GXDLVvPROJECTID562( )
+      {
+         if ( ! context.isAjaxRequest( ) )
+         {
+            context.GX_webresponse.AppendHeader("Cache-Control", "no-store");
+         }
+         AddString( "[[") ;
+         GXDLVvPROJECTID_data562( ) ;
+         gxdynajaxindex = 1;
+         while ( gxdynajaxindex <= gxdynajaxctrlcodr.Count )
+         {
+            AddString( gxwrpcisep+"{\"c\":\""+GXUtil.EncodeJSConstant( ((string)gxdynajaxctrlcodr.Item(gxdynajaxindex)))+"\",\"d\":\""+GXUtil.EncodeJSConstant( ((string)gxdynajaxctrldescr.Item(gxdynajaxindex)))+"\"}") ;
+            gxdynajaxindex = (int)(gxdynajaxindex+1);
+            gxwrpcisep = ",";
+         }
+         AddString( "]") ;
+         if ( gxdynajaxctrlcodr.Count == 0 )
+         {
+            AddString( ",101") ;
+         }
+         AddString( "]") ;
+      }
+
+      protected void GXVvPROJECTID_html562( )
+      {
+         long gxdynajaxvalue;
+         GXDLVvPROJECTID_data562( ) ;
+         gxdynajaxindex = 1;
+         if ( ! ( gxdyncontrolsrefreshing && context.isAjaxRequest( ) ) )
+         {
+            dynavProjectid.removeAllItems();
+         }
+         while ( gxdynajaxindex <= gxdynajaxctrlcodr.Count )
+         {
+            gxdynajaxvalue = (long)(Math.Round(NumberUtil.Val( ((string)gxdynajaxctrlcodr.Item(gxdynajaxindex)), "."), 18, MidpointRounding.ToEven));
+            dynavProjectid.addItem(StringUtil.Trim( StringUtil.Str( (decimal)(gxdynajaxvalue), 10, 0)), ((string)gxdynajaxctrldescr.Item(gxdynajaxindex)), 0);
+            gxdynajaxindex = (int)(gxdynajaxindex+1);
+         }
+      }
+
+      protected void GXDLVvPROJECTID_data562( )
+      {
+         gxdynajaxctrlcodr.Clear();
+         gxdynajaxctrldescr.Clear();
+         gxdynajaxctrlcodr.Add(StringUtil.Str( (decimal)(0), 1, 0));
+         gxdynajaxctrldescr.Add("(None)");
+         /* Using cursor H00563 */
+         pr_default.execute(1);
+         while ( (pr_default.getStatus(1) != 101) )
+         {
+            if ( H00563_A166ProjectManagerId[0] == new getloggedinemployeeid(context).executeUdp( ) )
+            {
+               gxdynajaxctrlcodr.Add(StringUtil.LTrim( StringUtil.NToC( (decimal)(H00563_A102ProjectId[0]), 10, 0, ".", "")));
+               gxdynajaxctrldescr.Add(StringUtil.RTrim( H00563_A103ProjectName[0]));
+            }
+            pr_default.readNext(1);
+         }
+         pr_default.close(1);
+      }
+
       protected void send_integrity_hashes( )
       {
       }
@@ -875,17 +1004,18 @@ namespace GeneXus.Programs {
       {
          if ( context.isAjaxRequest( ) )
          {
+            GXVvPROJECTID_html562( ) ;
             dynavCompanylocationid.Name = "vCOMPANYLOCATIONID";
             dynavCompanylocationid.WebTags = "";
             dynavCompanylocationid.removeAllItems();
-            /* Using cursor H00563 */
-            pr_default.execute(1);
-            while ( (pr_default.getStatus(1) != 101) )
+            /* Using cursor H00564 */
+            pr_default.execute(2);
+            while ( (pr_default.getStatus(2) != 101) )
             {
-               dynavCompanylocationid.addItem(StringUtil.Trim( StringUtil.Str( (decimal)(H00563_A157CompanyLocationId[0]), 10, 0)), H00563_A158CompanyLocationName[0], 0);
-               pr_default.readNext(1);
+               dynavCompanylocationid.addItem(StringUtil.Trim( StringUtil.Str( (decimal)(H00564_A157CompanyLocationId[0]), 10, 0)), H00564_A158CompanyLocationName[0], 0);
+               pr_default.readNext(2);
             }
-            pr_default.close(1);
+            pr_default.close(2);
             if ( dynavCompanylocationid.ItemCount > 0 )
             {
                AV11CompanyLocationId = (long)(Math.Round(NumberUtil.Val( dynavCompanylocationid.getValidValue(StringUtil.Trim( StringUtil.Str( (decimal)(AV11CompanyLocationId), 10, 0))), "."), 18, MidpointRounding.ToEven));
@@ -907,6 +1037,16 @@ namespace GeneXus.Programs {
          {
             dynavCompanylocationid.CurrentValue = StringUtil.Trim( StringUtil.Str( (decimal)(AV11CompanyLocationId), 10, 0));
             AssignProp("", false, dynavCompanylocationid_Internalname, "Values", dynavCompanylocationid.ToJavascriptSource(), true);
+         }
+         if ( dynavProjectid.ItemCount > 0 )
+         {
+            AV26ProjectId = (long)(Math.Round(NumberUtil.Val( dynavProjectid.getValidValue(StringUtil.Trim( StringUtil.Str( (decimal)(AV26ProjectId), 10, 0))), "."), 18, MidpointRounding.ToEven));
+            AssignAttri("", false, "AV26ProjectId", StringUtil.LTrimStr( (decimal)(AV26ProjectId), 10, 0));
+         }
+         if ( context.isAjaxRequest( ) )
+         {
+            dynavProjectid.CurrentValue = StringUtil.Trim( StringUtil.Str( (decimal)(AV26ProjectId), 10, 0));
+            AssignProp("", false, dynavProjectid_Internalname, "Values", dynavProjectid.ToJavascriptSource(), true);
          }
       }
 
@@ -946,13 +1086,17 @@ namespace GeneXus.Programs {
          if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
          {
             /* Execute user event: Load */
-            E18562 ();
+            E19562 ();
             WB560( ) ;
          }
       }
 
       protected void send_integrity_lvl_hashes562( )
       {
+         GxWebStd.gx_boolean_hidden_field( context, "vISPROJECTMANAGER", AV29IsProjectManager);
+         GxWebStd.gx_hidden_field( context, "gxhash_vISPROJECTMANAGER", GetSecureSignedToken( "", AV29IsProjectManager, context));
+         GxWebStd.gx_hidden_field( context, "vUDPARG1", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV33Udparg1), 10, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, "gxhash_vUDPARG1", GetSecureSignedToken( "", context.localUtil.Format( (decimal)(AV33Udparg1), "9999999999"), context));
          GxWebStd.gx_hidden_field( context, "vTODAY", context.localUtil.DToC( Gx_date, 0, "/"));
          GxWebStd.gx_hidden_field( context, "gxhash_vTODAY", GetSecureSignedToken( "", Gx_date, context));
       }
@@ -960,6 +1104,7 @@ namespace GeneXus.Programs {
       protected void before_start_formulas( )
       {
          Gx_date = DateTimeUtil.Today( context);
+         GXVvPROJECTID_html562( ) ;
          fix_multi_value_controls( ) ;
       }
 
@@ -996,9 +1141,13 @@ namespace GeneXus.Programs {
             dynavCompanylocationid.CurrentValue = cgiGet( dynavCompanylocationid_Internalname);
             AV11CompanyLocationId = (long)(Math.Round(NumberUtil.Val( cgiGet( dynavCompanylocationid_Internalname), "."), 18, MidpointRounding.ToEven));
             AssignAttri("", false, "AV11CompanyLocationId", StringUtil.LTrimStr( (decimal)(AV11CompanyLocationId), 10, 0));
+            dynavProjectid.CurrentValue = cgiGet( dynavProjectid_Internalname);
+            AV26ProjectId = (long)(Math.Round(NumberUtil.Val( cgiGet( dynavProjectid_Internalname), "."), 18, MidpointRounding.ToEven));
+            AssignAttri("", false, "AV26ProjectId", StringUtil.LTrimStr( (decimal)(AV26ProjectId), 10, 0));
             /* Read subfile selected row values. */
             /* Read hidden variables. */
             GXKey = Decrypt64( context.GetCookie( "GX_SESSION_ID"), Crypto.GetServerKey( ));
+            GXVvPROJECTID_html562( ) ;
          }
          else
          {
@@ -1021,14 +1170,19 @@ namespace GeneXus.Programs {
          new getloggedinusercompanyid(context ).execute( out  GXt_int1) ;
          AV18CompanyId = GXt_int1;
          AssignAttri("", false, "AV18CompanyId", StringUtil.LTrimStr( (decimal)(AV18CompanyId), 10, 0));
-         if ( ! (0==AV18CompanyId) )
+         GXt_boolean2 = AV29IsProjectManager;
+         new userhasrole(context ).execute(  "Project Manager", out  GXt_boolean2) ;
+         AV29IsProjectManager = GXt_boolean2;
+         AssignAttri("", false, "AV29IsProjectManager", AV29IsProjectManager);
+         GxWebStd.gx_hidden_field( context, "gxhash_vISPROJECTMANAGER", GetSecureSignedToken( "", AV29IsProjectManager, context));
+         if ( ! (0==AV18CompanyId) && ! AV29IsProjectManager )
          {
-            /* Using cursor H00564 */
-            pr_default.execute(2, new Object[] {AV18CompanyId});
-            while ( (pr_default.getStatus(2) != 101) )
+            /* Using cursor H00565 */
+            pr_default.execute(3, new Object[] {AV18CompanyId});
+            while ( (pr_default.getStatus(3) != 101) )
             {
-               A100CompanyId = H00564_A100CompanyId[0];
-               A157CompanyLocationId = H00564_A157CompanyLocationId[0];
+               A100CompanyId = H00565_A100CompanyId[0];
+               A157CompanyLocationId = H00565_A157CompanyLocationId[0];
                AV11CompanyLocationId = A157CompanyLocationId;
                AssignAttri("", false, "AV11CompanyLocationId", StringUtil.LTrimStr( (decimal)(AV11CompanyLocationId), 10, 0));
                /* Exit For each command. Update data (if necessary), close cursors & exit. */
@@ -1036,13 +1190,13 @@ namespace GeneXus.Programs {
                /* Exiting from a For First loop. */
                if (true) break;
             }
-            pr_default.close(2);
+            pr_default.close(3);
             dynavCompanylocationid.Enabled = 0;
             AssignProp("", false, dynavCompanylocationid_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(dynavCompanylocationid.Enabled), 5, 0), true);
          }
-         GXt_objcol_SdtSDTLeaveType2 = AV23SDTLeaveTypes;
-         new dpleavetype(context ).execute(  AV11CompanyLocationId, out  GXt_objcol_SdtSDTLeaveType2) ;
-         AV23SDTLeaveTypes = GXt_objcol_SdtSDTLeaveType2;
+         GXt_objcol_SdtSDTLeaveType3 = AV23SDTLeaveTypes;
+         new dpleavetype(context ).execute(  AV11CompanyLocationId, out  GXt_objcol_SdtSDTLeaveType3) ;
+         AV23SDTLeaveTypes = GXt_objcol_SdtSDTLeaveType3;
          Ucvistimeline1_Leavetypes = AV23SDTLeaveTypes.ToJSonString(false);
          ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "leavetypes", Ucvistimeline1_Leavetypes);
          AV10DateRange = DateTimeUtil.DAdd( Gx_date, (-1*(DateTimeUtil.Dow( Gx_date)-1)));
@@ -1052,13 +1206,13 @@ namespace GeneXus.Programs {
          /* Execute user subroutine: 'GETDATA' */
          S112 ();
          if (returnInSub) return;
-         GXt_char3 = "";
-         new formatdatetime(context ).execute(  AV10DateRange,  "YYYY-MM-DD", out  GXt_char3) ;
-         Ucvistimeline1_Startdate = GXt_char3;
+         GXt_char4 = "";
+         new formatdatetime(context ).execute(  AV10DateRange,  "YYYY-MM-DD", out  GXt_char4) ;
+         Ucvistimeline1_Startdate = GXt_char4;
          ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "startDate", Ucvistimeline1_Startdate);
-         GXt_char3 = "";
-         new formatdatetime(context ).execute(  AV16DateRange_To,  "YYYY-MM-DD", out  GXt_char3) ;
-         Ucvistimeline1_Stopdate = GXt_char3;
+         GXt_char4 = "";
+         new formatdatetime(context ).execute(  AV16DateRange_To,  "YYYY-MM-DD", out  GXt_char4) ;
+         Ucvistimeline1_Stopdate = GXt_char4;
          ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "stopDate", Ucvistimeline1_Stopdate);
          Ucvistimeline1_Events = AV6LeaveEvents.ToJSonString(false);
          ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "events", Ucvistimeline1_Events);
@@ -1067,9 +1221,9 @@ namespace GeneXus.Programs {
          Ucvistimeline1_Leavetypes = AV23SDTLeaveTypes.ToJSonString(false);
          ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "leavetypes", Ucvistimeline1_Leavetypes);
          this.executeUsercontrolMethod("", false, "DATERANGE_RANGEPICKERContainer", "Attach", "", new Object[] {(string)edtavDaterange_rangetext_Internalname});
-         GXt_SdtWWPDateRangePickerOptions4 = AV17DateRange_RangePickerOptions;
-         new GeneXus.Programs.wwpbaseobjects.wwp_rangepicker_getoptionsreports(context ).execute( out  GXt_SdtWWPDateRangePickerOptions4) ;
-         AV17DateRange_RangePickerOptions = GXt_SdtWWPDateRangePickerOptions4;
+         GXt_SdtWWPDateRangePickerOptions5 = AV17DateRange_RangePickerOptions;
+         new GeneXus.Programs.wwpbaseobjects.wwp_rangepicker_getoptionsreports(context ).execute( out  GXt_SdtWWPDateRangePickerOptions5) ;
+         AV17DateRange_RangePickerOptions = GXt_SdtWWPDateRangePickerOptions5;
       }
 
       protected void E13562( )
@@ -1083,7 +1237,7 @@ namespace GeneXus.Programs {
       {
          /* 'DoReport' Routine */
          returnInSub = false;
-         new employeeleavereport(context ).execute(  AV11CompanyLocationId, ref  AV10DateRange, out  AV21ExcelFilename, out  AV20ErrorMessage) ;
+         new employeeleavereport(context ).execute(  AV11CompanyLocationId, ref  AV28EmployeeIds, ref  AV10DateRange, out  AV21ExcelFilename, out  AV20ErrorMessage) ;
          AssignAttri("", false, "AV10DateRange", context.localUtil.Format(AV10DateRange, "99/99/99"));
          if ( StringUtil.StrCmp(AV21ExcelFilename, "") != 0 )
          {
@@ -1095,6 +1249,30 @@ namespace GeneXus.Programs {
             GX_msglist.addItem(AV20ErrorMessage);
          }
          /*  Sending Event outputs  */
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV28EmployeeIds", AV28EmployeeIds);
+      }
+
+      protected void E16562( )
+      {
+         /* Projectid_Controlvaluechanged Routine */
+         returnInSub = false;
+         /* Execute user subroutine: 'GETDATA' */
+         S112 ();
+         if (returnInSub) return;
+         GXt_char4 = "";
+         new formatdatetime(context ).execute(  DateTimeUtil.DAdd( AV10DateRange, (1)),  "YYYY-MM-DD", out  GXt_char4) ;
+         Ucvistimeline1_Startdate = GXt_char4;
+         ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "startDate", Ucvistimeline1_Startdate);
+         GXt_char4 = "";
+         new formatdatetime(context ).execute(  AV16DateRange_To,  "YYYY-MM-DD", out  GXt_char4) ;
+         Ucvistimeline1_Stopdate = GXt_char4;
+         ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "stopDate", Ucvistimeline1_Stopdate);
+         this.executeUsercontrolMethod("", false, "UCVISTIMELINE1Container", "Refresh", "", new Object[] {AV6LeaveEvents.ToJSonString(false),AV7LeaveEventGroups.ToJSonString(false)});
+         /*  Sending Event outputs  */
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV28EmployeeIds", AV28EmployeeIds);
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV27ProjectIds", AV27ProjectIds);
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV6LeaveEvents", AV6LeaveEvents);
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV7LeaveEventGroups", AV7LeaveEventGroups);
       }
 
       protected void E12562( )
@@ -1113,63 +1291,69 @@ namespace GeneXus.Programs {
          /* Execute user subroutine: 'GETDATA' */
          S112 ();
          if (returnInSub) return;
-         GXt_char3 = "";
-         new formatdatetime(context ).execute(  DateTimeUtil.DAdd( AV10DateRange, (1)),  "YYYY-MM-DD", out  GXt_char3) ;
-         Ucvistimeline1_Startdate = GXt_char3;
+         GXt_char4 = "";
+         new formatdatetime(context ).execute(  DateTimeUtil.DAdd( AV10DateRange, (1)),  "YYYY-MM-DD", out  GXt_char4) ;
+         Ucvistimeline1_Startdate = GXt_char4;
          ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "startDate", Ucvistimeline1_Startdate);
-         GXt_char3 = "";
-         new formatdatetime(context ).execute(  AV16DateRange_To,  "YYYY-MM-DD", out  GXt_char3) ;
-         Ucvistimeline1_Stopdate = GXt_char3;
+         GXt_char4 = "";
+         new formatdatetime(context ).execute(  AV16DateRange_To,  "YYYY-MM-DD", out  GXt_char4) ;
+         Ucvistimeline1_Stopdate = GXt_char4;
          ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "stopDate", Ucvistimeline1_Stopdate);
          this.executeUsercontrolMethod("", false, "UCVISTIMELINE1Container", "Refresh", "", new Object[] {AV6LeaveEvents.ToJSonString(false),AV7LeaveEventGroups.ToJSonString(false)});
          /*  Sending Event outputs  */
-         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV6LeaveEvents", AV6LeaveEvents);
-         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV7LeaveEventGroups", AV7LeaveEventGroups);
-      }
-
-      protected void E16562( )
-      {
-         /* Companylocationid_Controlvaluechanged Routine */
-         returnInSub = false;
-         GXt_objcol_SdtSDTLeaveType2 = AV23SDTLeaveTypes;
-         new dpleavetype(context ).execute(  AV11CompanyLocationId, out  GXt_objcol_SdtSDTLeaveType2) ;
-         AV23SDTLeaveTypes = GXt_objcol_SdtSDTLeaveType2;
-         Ucvistimeline1_Leavetypes = AV23SDTLeaveTypes.ToJSonString(false);
-         ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "leavetypes", Ucvistimeline1_Leavetypes);
-         /* Execute user subroutine: 'GETDATA' */
-         S112 ();
-         if (returnInSub) return;
-         GXt_char3 = "";
-         new formatdatetime(context ).execute(  DateTimeUtil.DAdd( AV10DateRange, (1)),  "YYYY-MM-DD", out  GXt_char3) ;
-         Ucvistimeline1_Startdate = GXt_char3;
-         ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "startDate", Ucvistimeline1_Startdate);
-         GXt_char3 = "";
-         new formatdatetime(context ).execute(  AV16DateRange_To,  "YYYY-MM-DD", out  GXt_char3) ;
-         Ucvistimeline1_Stopdate = GXt_char3;
-         ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "stopDate", Ucvistimeline1_Stopdate);
-         this.executeUsercontrolMethod("", false, "UCVISTIMELINE1Container", "Refresh", "", new Object[] {AV6LeaveEvents.ToJSonString(false),AV7LeaveEventGroups.ToJSonString(false)});
-         /*  Sending Event outputs  */
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV28EmployeeIds", AV28EmployeeIds);
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV27ProjectIds", AV27ProjectIds);
          context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV6LeaveEvents", AV6LeaveEvents);
          context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV7LeaveEventGroups", AV7LeaveEventGroups);
       }
 
       protected void E17562( )
       {
+         /* Companylocationid_Controlvaluechanged Routine */
+         returnInSub = false;
+         GXt_objcol_SdtSDTLeaveType3 = AV23SDTLeaveTypes;
+         new dpleavetype(context ).execute(  AV11CompanyLocationId, out  GXt_objcol_SdtSDTLeaveType3) ;
+         AV23SDTLeaveTypes = GXt_objcol_SdtSDTLeaveType3;
+         Ucvistimeline1_Leavetypes = AV23SDTLeaveTypes.ToJSonString(false);
+         ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "leavetypes", Ucvistimeline1_Leavetypes);
+         /* Execute user subroutine: 'GETDATA' */
+         S112 ();
+         if (returnInSub) return;
+         GXt_char4 = "";
+         new formatdatetime(context ).execute(  DateTimeUtil.DAdd( AV10DateRange, (1)),  "YYYY-MM-DD", out  GXt_char4) ;
+         Ucvistimeline1_Startdate = GXt_char4;
+         ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "startDate", Ucvistimeline1_Startdate);
+         GXt_char4 = "";
+         new formatdatetime(context ).execute(  AV16DateRange_To,  "YYYY-MM-DD", out  GXt_char4) ;
+         Ucvistimeline1_Stopdate = GXt_char4;
+         ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "stopDate", Ucvistimeline1_Stopdate);
+         this.executeUsercontrolMethod("", false, "UCVISTIMELINE1Container", "Refresh", "", new Object[] {AV6LeaveEvents.ToJSonString(false),AV7LeaveEventGroups.ToJSonString(false)});
+         /*  Sending Event outputs  */
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV28EmployeeIds", AV28EmployeeIds);
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV27ProjectIds", AV27ProjectIds);
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV6LeaveEvents", AV6LeaveEvents);
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV7LeaveEventGroups", AV7LeaveEventGroups);
+      }
+
+      protected void E18562( )
+      {
          /* General\GlobalEvents_Leaverequeststatuschanged Routine */
          returnInSub = false;
          /* Execute user subroutine: 'GETDATA' */
          S112 ();
          if (returnInSub) return;
-         GXt_char3 = "";
-         new formatdatetime(context ).execute(  DateTimeUtil.DAdd( AV10DateRange, (1)),  "YYYY-MM-DD", out  GXt_char3) ;
-         Ucvistimeline1_Startdate = GXt_char3;
+         GXt_char4 = "";
+         new formatdatetime(context ).execute(  DateTimeUtil.DAdd( AV10DateRange, (1)),  "YYYY-MM-DD", out  GXt_char4) ;
+         Ucvistimeline1_Startdate = GXt_char4;
          ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "startDate", Ucvistimeline1_Startdate);
-         GXt_char3 = "";
-         new formatdatetime(context ).execute(  AV16DateRange_To,  "YYYY-MM-DD", out  GXt_char3) ;
-         Ucvistimeline1_Stopdate = GXt_char3;
+         GXt_char4 = "";
+         new formatdatetime(context ).execute(  AV16DateRange_To,  "YYYY-MM-DD", out  GXt_char4) ;
+         Ucvistimeline1_Stopdate = GXt_char4;
          ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "stopDate", Ucvistimeline1_Stopdate);
          this.executeUsercontrolMethod("", false, "UCVISTIMELINE1Container", "Refresh", "", new Object[] {AV6LeaveEvents.ToJSonString(false),AV7LeaveEventGroups.ToJSonString(false)});
          /*  Sending Event outputs  */
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV28EmployeeIds", AV28EmployeeIds);
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV27ProjectIds", AV27ProjectIds);
          context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV6LeaveEvents", AV6LeaveEvents);
          context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV7LeaveEventGroups", AV7LeaveEventGroups);
       }
@@ -1178,25 +1362,64 @@ namespace GeneXus.Programs {
       {
          /* 'GETDATA' Routine */
          returnInSub = false;
-         GXt_objcol_SdtSDTLeaveEvent5 = AV6LeaveEvents;
-         new dpleaveevent(context ).execute(  AV10DateRange,  AV16DateRange_To,  AV11CompanyLocationId, out  GXt_objcol_SdtSDTLeaveEvent5) ;
-         AV6LeaveEvents = GXt_objcol_SdtSDTLeaveEvent5;
-         GXt_objcol_SdtSDTLeaveEventGroup6 = AV7LeaveEventGroups;
-         new dpleaveeventgroup(context ).execute(  AV10DateRange,  AV16DateRange_To,  AV11CompanyLocationId, out  GXt_objcol_SdtSDTLeaveEventGroup6) ;
-         AV7LeaveEventGroups = GXt_objcol_SdtSDTLeaveEventGroup6;
+         AV28EmployeeIds.Clear();
+         AV27ProjectIds.Clear();
+         if ( ! (0==AV26ProjectId) )
+         {
+            AV27ProjectIds.Add(AV26ProjectId, 0);
+            GXt_objcol_int6 = AV28EmployeeIds;
+            new getemployeeidsbyproject(context ).execute(  AV27ProjectIds, out  GXt_objcol_int6) ;
+            AV28EmployeeIds = GXt_objcol_int6;
+         }
+         else
+         {
+            if ( AV29IsProjectManager )
+            {
+               /* Execute user subroutine: 'GETEMPLOYEEIDSBYPROJECT' */
+               S122 ();
+               if (returnInSub) return;
+            }
+         }
+         GXt_objcol_SdtSDTLeaveEvent7 = AV6LeaveEvents;
+         new dpleaveevent(context ).execute(  AV10DateRange,  AV16DateRange_To,  AV11CompanyLocationId,  AV28EmployeeIds, out  GXt_objcol_SdtSDTLeaveEvent7) ;
+         AV6LeaveEvents = GXt_objcol_SdtSDTLeaveEvent7;
+         GXt_objcol_SdtSDTLeaveEventGroup8 = AV7LeaveEventGroups;
+         new dpleaveeventgroup(context ).execute(  AV10DateRange,  AV16DateRange_To,  AV11CompanyLocationId,  AV28EmployeeIds, out  GXt_objcol_SdtSDTLeaveEventGroup8) ;
+         AV7LeaveEventGroups = GXt_objcol_SdtSDTLeaveEventGroup8;
+      }
+
+      protected void S122( )
+      {
+         /* 'GETEMPLOYEEIDSBYPROJECT' Routine */
+         returnInSub = false;
+         AV33Udparg1 = new getloggedinemployeeid(context).executeUdp( );
+         /* Using cursor H00566 */
+         pr_default.execute(4, new Object[] {AV33Udparg1});
+         while ( (pr_default.getStatus(4) != 101) )
+         {
+            A166ProjectManagerId = H00566_A166ProjectManagerId[0];
+            n166ProjectManagerId = H00566_n166ProjectManagerId[0];
+            A102ProjectId = H00566_A102ProjectId[0];
+            AV27ProjectIds.Add(A102ProjectId, 0);
+            pr_default.readNext(4);
+         }
+         pr_default.close(4);
+         GXt_objcol_int6 = AV28EmployeeIds;
+         new getemployeeidsbyproject(context ).execute(  AV27ProjectIds, out  GXt_objcol_int6) ;
+         AV28EmployeeIds = GXt_objcol_int6;
       }
 
       protected void nextLoad( )
       {
       }
 
-      protected void E18562( )
+      protected void E19562( )
       {
          /* Load Routine */
          returnInSub = false;
       }
 
-      protected void wb_table1_46_562( bool wbgen )
+      protected void wb_table1_54_562( bool wbgen )
       {
          if ( wbgen )
          {
@@ -1219,11 +1442,11 @@ namespace GeneXus.Programs {
             context.WriteHtmlText( "</tbody>") ;
             /* End of table */
             context.WriteHtmlText( "</table>") ;
-            wb_table1_46_562e( true) ;
+            wb_table1_54_562e( true) ;
          }
          else
          {
-            wb_table1_46_562e( false) ;
+            wb_table1_54_562e( false) ;
          }
       }
 
@@ -1275,7 +1498,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024752152219", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247812502141", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1291,7 +1514,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("leavecalendar.js", "?2024752152219", false, true);
+         context.AddJavascriptSource("leavecalendar.js", "?20247812502141", false, true);
          context.AddJavascriptSource("UserControls/UCToolTipRender.js", "", false, true);
          context.AddJavascriptSource("UserControls/UCVISTimelineRender.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/daterangepicker/locales.js", "", false, true);
@@ -1311,19 +1534,21 @@ namespace GeneXus.Programs {
          dynavCompanylocationid.Name = "vCOMPANYLOCATIONID";
          dynavCompanylocationid.WebTags = "";
          dynavCompanylocationid.removeAllItems();
-         /* Using cursor H00565 */
-         pr_default.execute(3);
-         while ( (pr_default.getStatus(3) != 101) )
+         /* Using cursor H00567 */
+         pr_default.execute(5);
+         while ( (pr_default.getStatus(5) != 101) )
          {
-            dynavCompanylocationid.addItem(StringUtil.Trim( StringUtil.Str( (decimal)(H00565_A157CompanyLocationId[0]), 10, 0)), H00565_A158CompanyLocationName[0], 0);
-            pr_default.readNext(3);
+            dynavCompanylocationid.addItem(StringUtil.Trim( StringUtil.Str( (decimal)(H00567_A157CompanyLocationId[0]), 10, 0)), H00567_A158CompanyLocationName[0], 0);
+            pr_default.readNext(5);
          }
-         pr_default.close(3);
+         pr_default.close(5);
          if ( dynavCompanylocationid.ItemCount > 0 )
          {
             AV11CompanyLocationId = (long)(Math.Round(NumberUtil.Val( dynavCompanylocationid.getValidValue(StringUtil.Trim( StringUtil.Str( (decimal)(AV11CompanyLocationId), 10, 0))), "."), 18, MidpointRounding.ToEven));
             AssignAttri("", false, "AV11CompanyLocationId", StringUtil.LTrimStr( (decimal)(AV11CompanyLocationId), 10, 0));
          }
+         dynavProjectid.Name = "vPROJECTID";
+         dynavProjectid.WebTags = "";
          /* End function init_web_controls */
       }
 
@@ -1337,6 +1562,9 @@ namespace GeneXus.Programs {
          lblTextblockcompanylocationid_Internalname = "TEXTBLOCKCOMPANYLOCATIONID";
          dynavCompanylocationid_Internalname = "vCOMPANYLOCATIONID";
          divUnnamedtablecompanylocationid_Internalname = "UNNAMEDTABLECOMPANYLOCATIONID";
+         lblTextblockprojectid_Internalname = "TEXTBLOCKPROJECTID";
+         dynavProjectid_Internalname = "vPROJECTID";
+         divUnnamedtableprojectid_Internalname = "UNNAMEDTABLEPROJECTID";
          bttBtnreport_Internalname = "BTNREPORT";
          divTable1_Internalname = "TABLE1";
          Ucvistimeline1_Internalname = "UCVISTIMELINE1";
@@ -1359,12 +1587,12 @@ namespace GeneXus.Programs {
             disableJsOutput();
          }
          init_default_properties( ) ;
+         dynavProjectid_Jsonclick = "";
+         dynavProjectid.Enabled = 1;
          dynavCompanylocationid_Jsonclick = "";
          dynavCompanylocationid.Enabled = 1;
          edtavDaterange_rangetext_Jsonclick = "";
          edtavDaterange_rangetext_Enabled = 1;
-         Ucvistimeline1_Newstopdate = "";
-         Ucvistimeline1_Newstartdate = "";
          Ucvistimeline1_Item = 0;
          Useraction1_modal_Bodytype = "WebComponent";
          Useraction1_modal_Confirmtype = "";
@@ -1394,20 +1622,22 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'dynavCompanylocationid'},{av:'AV11CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'},{av:'Gx_date',fld:'vTODAY',pic:'',hsh:true}]");
+         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'dynavProjectid'},{av:'AV26ProjectId',fld:'vPROJECTID',pic:'ZZZZZZZZZ9'},{av:'dynavCompanylocationid'},{av:'AV11CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'},{av:'AV29IsProjectManager',fld:'vISPROJECTMANAGER',pic:'',hsh:true},{av:'AV33Udparg1',fld:'vUDPARG1',pic:'9999999999',hsh:true},{av:'Gx_date',fld:'vTODAY',pic:'',hsh:true}]");
          setEventMetadata("REFRESH",",oparms:[]}");
          setEventMetadata("'DOUSERACTION1'","{handler:'E11561',iparms:[]");
          setEventMetadata("'DOUSERACTION1'",",oparms:[]}");
          setEventMetadata("USERACTION1_MODAL.CLOSE","{handler:'E13562',iparms:[]");
          setEventMetadata("USERACTION1_MODAL.CLOSE",",oparms:[]}");
-         setEventMetadata("'DOREPORT'","{handler:'E15562',iparms:[{av:'dynavCompanylocationid'},{av:'AV11CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'},{av:'AV10DateRange',fld:'vDATERANGE',pic:''}]");
-         setEventMetadata("'DOREPORT'",",oparms:[{av:'AV10DateRange',fld:'vDATERANGE',pic:''}]}");
-         setEventMetadata("DATERANGE_RANGEPICKER.DATERANGECHANGED","{handler:'E12562',iparms:[{av:'AV10DateRange',fld:'vDATERANGE',pic:''},{av:'AV16DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'Gx_date',fld:'vTODAY',pic:'',hsh:true},{av:'AV6LeaveEvents',fld:'vLEAVEEVENTS',pic:''},{av:'AV7LeaveEventGroups',fld:'vLEAVEEVENTGROUPS',pic:''},{av:'dynavCompanylocationid'},{av:'AV11CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'}]");
-         setEventMetadata("DATERANGE_RANGEPICKER.DATERANGECHANGED",",oparms:[{av:'AV10DateRange',fld:'vDATERANGE',pic:''},{av:'AV16DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'Ucvistimeline1_Startdate',ctrl:'UCVISTIMELINE1',prop:'startDate'},{av:'Ucvistimeline1_Stopdate',ctrl:'UCVISTIMELINE1',prop:'stopDate'},{av:'AV6LeaveEvents',fld:'vLEAVEEVENTS',pic:''},{av:'AV7LeaveEventGroups',fld:'vLEAVEEVENTGROUPS',pic:''}]}");
-         setEventMetadata("VCOMPANYLOCATIONID.CONTROLVALUECHANGED","{handler:'E16562',iparms:[{av:'dynavCompanylocationid'},{av:'AV11CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'},{av:'AV10DateRange',fld:'vDATERANGE',pic:''},{av:'AV16DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV6LeaveEvents',fld:'vLEAVEEVENTS',pic:''},{av:'AV7LeaveEventGroups',fld:'vLEAVEEVENTGROUPS',pic:''}]");
-         setEventMetadata("VCOMPANYLOCATIONID.CONTROLVALUECHANGED",",oparms:[{av:'Ucvistimeline1_Leavetypes',ctrl:'UCVISTIMELINE1',prop:'leavetypes'},{av:'Ucvistimeline1_Startdate',ctrl:'UCVISTIMELINE1',prop:'startDate'},{av:'Ucvistimeline1_Stopdate',ctrl:'UCVISTIMELINE1',prop:'stopDate'},{av:'AV6LeaveEvents',fld:'vLEAVEEVENTS',pic:''},{av:'AV7LeaveEventGroups',fld:'vLEAVEEVENTGROUPS',pic:''}]}");
-         setEventMetadata("GLOBALEVENTS.LEAVEREQUESTSTATUSCHANGED","{handler:'E17562',iparms:[{av:'AV10DateRange',fld:'vDATERANGE',pic:''},{av:'AV16DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV6LeaveEvents',fld:'vLEAVEEVENTS',pic:''},{av:'AV7LeaveEventGroups',fld:'vLEAVEEVENTGROUPS',pic:''},{av:'dynavCompanylocationid'},{av:'AV11CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'}]");
-         setEventMetadata("GLOBALEVENTS.LEAVEREQUESTSTATUSCHANGED",",oparms:[{av:'Ucvistimeline1_Startdate',ctrl:'UCVISTIMELINE1',prop:'startDate'},{av:'Ucvistimeline1_Stopdate',ctrl:'UCVISTIMELINE1',prop:'stopDate'},{av:'AV6LeaveEvents',fld:'vLEAVEEVENTS',pic:''},{av:'AV7LeaveEventGroups',fld:'vLEAVEEVENTGROUPS',pic:''}]}");
+         setEventMetadata("'DOREPORT'","{handler:'E15562',iparms:[{av:'dynavCompanylocationid'},{av:'AV11CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'},{av:'AV28EmployeeIds',fld:'vEMPLOYEEIDS',pic:''},{av:'AV10DateRange',fld:'vDATERANGE',pic:''}]");
+         setEventMetadata("'DOREPORT'",",oparms:[{av:'AV10DateRange',fld:'vDATERANGE',pic:''},{av:'AV28EmployeeIds',fld:'vEMPLOYEEIDS',pic:''}]}");
+         setEventMetadata("VPROJECTID.CONTROLVALUECHANGED","{handler:'E16562',iparms:[{av:'AV10DateRange',fld:'vDATERANGE',pic:''},{av:'AV16DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV6LeaveEvents',fld:'vLEAVEEVENTS',pic:''},{av:'AV7LeaveEventGroups',fld:'vLEAVEEVENTGROUPS',pic:''},{av:'dynavProjectid'},{av:'AV26ProjectId',fld:'vPROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV29IsProjectManager',fld:'vISPROJECTMANAGER',pic:'',hsh:true},{av:'dynavCompanylocationid'},{av:'AV11CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV33Udparg1',fld:'vUDPARG1',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV27ProjectIds',fld:'vPROJECTIDS',pic:''}]");
+         setEventMetadata("VPROJECTID.CONTROLVALUECHANGED",",oparms:[{av:'Ucvistimeline1_Startdate',ctrl:'UCVISTIMELINE1',prop:'startDate'},{av:'Ucvistimeline1_Stopdate',ctrl:'UCVISTIMELINE1',prop:'stopDate'},{av:'AV28EmployeeIds',fld:'vEMPLOYEEIDS',pic:''},{av:'AV27ProjectIds',fld:'vPROJECTIDS',pic:''},{av:'AV6LeaveEvents',fld:'vLEAVEEVENTS',pic:''},{av:'AV7LeaveEventGroups',fld:'vLEAVEEVENTGROUPS',pic:''}]}");
+         setEventMetadata("DATERANGE_RANGEPICKER.DATERANGECHANGED","{handler:'E12562',iparms:[{av:'AV10DateRange',fld:'vDATERANGE',pic:''},{av:'AV16DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'Gx_date',fld:'vTODAY',pic:'',hsh:true},{av:'AV6LeaveEvents',fld:'vLEAVEEVENTS',pic:''},{av:'AV7LeaveEventGroups',fld:'vLEAVEEVENTGROUPS',pic:''},{av:'dynavProjectid'},{av:'AV26ProjectId',fld:'vPROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV29IsProjectManager',fld:'vISPROJECTMANAGER',pic:'',hsh:true},{av:'dynavCompanylocationid'},{av:'AV11CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV33Udparg1',fld:'vUDPARG1',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV27ProjectIds',fld:'vPROJECTIDS',pic:''}]");
+         setEventMetadata("DATERANGE_RANGEPICKER.DATERANGECHANGED",",oparms:[{av:'AV10DateRange',fld:'vDATERANGE',pic:''},{av:'AV16DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'Ucvistimeline1_Startdate',ctrl:'UCVISTIMELINE1',prop:'startDate'},{av:'Ucvistimeline1_Stopdate',ctrl:'UCVISTIMELINE1',prop:'stopDate'},{av:'AV28EmployeeIds',fld:'vEMPLOYEEIDS',pic:''},{av:'AV27ProjectIds',fld:'vPROJECTIDS',pic:''},{av:'AV6LeaveEvents',fld:'vLEAVEEVENTS',pic:''},{av:'AV7LeaveEventGroups',fld:'vLEAVEEVENTGROUPS',pic:''}]}");
+         setEventMetadata("VCOMPANYLOCATIONID.CONTROLVALUECHANGED","{handler:'E17562',iparms:[{av:'dynavCompanylocationid'},{av:'AV11CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'},{av:'AV10DateRange',fld:'vDATERANGE',pic:''},{av:'AV16DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV6LeaveEvents',fld:'vLEAVEEVENTS',pic:''},{av:'AV7LeaveEventGroups',fld:'vLEAVEEVENTGROUPS',pic:''},{av:'dynavProjectid'},{av:'AV26ProjectId',fld:'vPROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV29IsProjectManager',fld:'vISPROJECTMANAGER',pic:'',hsh:true},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV33Udparg1',fld:'vUDPARG1',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV27ProjectIds',fld:'vPROJECTIDS',pic:''}]");
+         setEventMetadata("VCOMPANYLOCATIONID.CONTROLVALUECHANGED",",oparms:[{av:'Ucvistimeline1_Leavetypes',ctrl:'UCVISTIMELINE1',prop:'leavetypes'},{av:'Ucvistimeline1_Startdate',ctrl:'UCVISTIMELINE1',prop:'startDate'},{av:'Ucvistimeline1_Stopdate',ctrl:'UCVISTIMELINE1',prop:'stopDate'},{av:'AV28EmployeeIds',fld:'vEMPLOYEEIDS',pic:''},{av:'AV27ProjectIds',fld:'vPROJECTIDS',pic:''},{av:'AV6LeaveEvents',fld:'vLEAVEEVENTS',pic:''},{av:'AV7LeaveEventGroups',fld:'vLEAVEEVENTGROUPS',pic:''}]}");
+         setEventMetadata("GLOBALEVENTS.LEAVEREQUESTSTATUSCHANGED","{handler:'E18562',iparms:[{av:'AV10DateRange',fld:'vDATERANGE',pic:''},{av:'AV16DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV6LeaveEvents',fld:'vLEAVEEVENTS',pic:''},{av:'AV7LeaveEventGroups',fld:'vLEAVEEVENTGROUPS',pic:''},{av:'dynavProjectid'},{av:'AV26ProjectId',fld:'vPROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV29IsProjectManager',fld:'vISPROJECTMANAGER',pic:'',hsh:true},{av:'dynavCompanylocationid'},{av:'AV11CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV33Udparg1',fld:'vUDPARG1',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV27ProjectIds',fld:'vPROJECTIDS',pic:''}]");
+         setEventMetadata("GLOBALEVENTS.LEAVEREQUESTSTATUSCHANGED",",oparms:[{av:'Ucvistimeline1_Startdate',ctrl:'UCVISTIMELINE1',prop:'startDate'},{av:'Ucvistimeline1_Stopdate',ctrl:'UCVISTIMELINE1',prop:'stopDate'},{av:'AV28EmployeeIds',fld:'vEMPLOYEEIDS',pic:''},{av:'AV27ProjectIds',fld:'vPROJECTIDS',pic:''},{av:'AV6LeaveEvents',fld:'vLEAVEEVENTS',pic:''},{av:'AV7LeaveEventGroups',fld:'vLEAVEEVENTGROUPS',pic:''}]}");
          return  ;
       }
 
@@ -1437,8 +1667,10 @@ namespace GeneXus.Programs {
          AV10DateRange = DateTime.MinValue;
          AV16DateRange_To = DateTime.MinValue;
          AV17DateRange_RangePickerOptions = new GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions(context);
+         AV28EmployeeIds = new GxSimpleCollection<long>();
          AV6LeaveEvents = new GXBaseCollection<SdtSDTLeaveEvent>( context, "SDTLeaveEvent", "YTT_version4");
          AV7LeaveEventGroups = new GXBaseCollection<SdtSDTLeaveEventGroup>( context, "SDTLeaveEventGroup", "YTT_version4");
+         AV27ProjectIds = new GxSimpleCollection<long>();
          GX_FocusControl = "";
          Form = new GXWebForm();
          sPrefix = "";
@@ -1449,6 +1681,7 @@ namespace GeneXus.Programs {
          TempTags = "";
          AV15DateRange_RangeText = "";
          lblTextblockcompanylocationid_Jsonclick = "";
+         lblTextblockprojectid_Jsonclick = "";
          bttBtnreport_Jsonclick = "";
          ucUcvistimeline1 = new GXUserControl();
          bttBtnuseraction1_Jsonclick = "";
@@ -1465,37 +1698,51 @@ namespace GeneXus.Programs {
          scmdbuf = "";
          H00562_A157CompanyLocationId = new long[1] ;
          H00562_A158CompanyLocationName = new string[] {""} ;
-         H00563_A157CompanyLocationId = new long[1] ;
-         H00563_A158CompanyLocationName = new string[] {""} ;
-         H00564_A100CompanyId = new long[1] ;
+         H00563_A102ProjectId = new long[1] ;
+         H00563_A103ProjectName = new string[] {""} ;
+         H00563_A166ProjectManagerId = new long[1] ;
+         H00563_n166ProjectManagerId = new bool[] {false} ;
          H00564_A157CompanyLocationId = new long[1] ;
+         H00564_A158CompanyLocationName = new string[] {""} ;
+         H00565_A100CompanyId = new long[1] ;
+         H00565_A157CompanyLocationId = new long[1] ;
          AV23SDTLeaveTypes = new GXBaseCollection<SdtSDTLeaveType>( context, "SDTLeaveType", "YTT_version4");
-         GXt_SdtWWPDateRangePickerOptions4 = new GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions(context);
+         GXt_SdtWWPDateRangePickerOptions5 = new GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions(context);
          AV21ExcelFilename = "";
          AV20ErrorMessage = "";
-         GXt_objcol_SdtSDTLeaveType2 = new GXBaseCollection<SdtSDTLeaveType>( context, "SDTLeaveType", "YTT_version4");
-         GXt_char3 = "";
-         GXt_objcol_SdtSDTLeaveEvent5 = new GXBaseCollection<SdtSDTLeaveEvent>( context, "SDTLeaveEvent", "YTT_version4");
-         GXt_objcol_SdtSDTLeaveEventGroup6 = new GXBaseCollection<SdtSDTLeaveEventGroup>( context, "SDTLeaveEventGroup", "YTT_version4");
+         GXt_objcol_SdtSDTLeaveType3 = new GXBaseCollection<SdtSDTLeaveType>( context, "SDTLeaveType", "YTT_version4");
+         GXt_char4 = "";
+         GXt_objcol_SdtSDTLeaveEvent7 = new GXBaseCollection<SdtSDTLeaveEvent>( context, "SDTLeaveEvent", "YTT_version4");
+         GXt_objcol_SdtSDTLeaveEventGroup8 = new GXBaseCollection<SdtSDTLeaveEventGroup>( context, "SDTLeaveEventGroup", "YTT_version4");
+         H00566_A166ProjectManagerId = new long[1] ;
+         H00566_n166ProjectManagerId = new bool[] {false} ;
+         H00566_A102ProjectId = new long[1] ;
+         GXt_objcol_int6 = new GxSimpleCollection<long>();
          sStyleString = "";
          ucUseraction1_modal = new GXUserControl();
          BackMsgLst = new msglist();
          LclMsgLst = new msglist();
-         H00565_A157CompanyLocationId = new long[1] ;
-         H00565_A158CompanyLocationName = new string[] {""} ;
+         H00567_A157CompanyLocationId = new long[1] ;
+         H00567_A158CompanyLocationName = new string[] {""} ;
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.leavecalendar__default(),
             new Object[][] {
                 new Object[] {
                H00562_A157CompanyLocationId, H00562_A158CompanyLocationName
                }
                , new Object[] {
-               H00563_A157CompanyLocationId, H00563_A158CompanyLocationName
+               H00563_A102ProjectId, H00563_A103ProjectName, H00563_A166ProjectManagerId, H00563_n166ProjectManagerId
                }
                , new Object[] {
-               H00564_A100CompanyId, H00564_A157CompanyLocationId
+               H00564_A157CompanyLocationId, H00564_A158CompanyLocationName
                }
                , new Object[] {
-               H00565_A157CompanyLocationId, H00565_A158CompanyLocationName
+               H00565_A100CompanyId, H00565_A157CompanyLocationId
+               }
+               , new Object[] {
+               H00566_A166ProjectManagerId, H00566_n166ProjectManagerId, H00566_A102ProjectId
+               }
+               , new Object[] {
+               H00567_A157CompanyLocationId, H00567_A158CompanyLocationName
                }
             }
          );
@@ -1505,6 +1752,8 @@ namespace GeneXus.Programs {
          Gx_date = DateTimeUtil.Today( context);
       }
 
+      private short nRcdExists_4 ;
+      private short nIsMod_4 ;
       private short nRcdExists_3 ;
       private short nIsMod_3 ;
       private short nGotPars ;
@@ -1521,14 +1770,16 @@ namespace GeneXus.Programs {
       private int edtavDaterange_rangetext_Enabled ;
       private int gxdynajaxindex ;
       private int idxLst ;
+      private long AV33Udparg1 ;
       private long AV25LeaveRequestId ;
+      private long A166ProjectManagerId ;
+      private long A102ProjectId ;
       private long AV11CompanyLocationId ;
+      private long AV26ProjectId ;
       private long AV18CompanyId ;
       private long GXt_int1 ;
       private long A100CompanyId ;
       private long A157CompanyLocationId ;
-      private string Ucvistimeline1_Newstartdate ;
-      private string Ucvistimeline1_Newstopdate ;
       private string gxfirstwebparm ;
       private string gxfirstwebparm_bkp ;
       private string sDynURL ;
@@ -1564,6 +1815,11 @@ namespace GeneXus.Programs {
       private string lblTextblockcompanylocationid_Jsonclick ;
       private string dynavCompanylocationid_Internalname ;
       private string dynavCompanylocationid_Jsonclick ;
+      private string divUnnamedtableprojectid_Internalname ;
+      private string lblTextblockprojectid_Internalname ;
+      private string lblTextblockprojectid_Jsonclick ;
+      private string dynavProjectid_Internalname ;
+      private string dynavProjectid_Jsonclick ;
       private string bttBtnreport_Internalname ;
       private string bttBtnreport_Jsonclick ;
       private string Ucvistimeline1_Internalname ;
@@ -1580,7 +1836,7 @@ namespace GeneXus.Programs {
       private string sEvtType ;
       private string gxwrpcisep ;
       private string scmdbuf ;
-      private string GXt_char3 ;
+      private string GXt_char4 ;
       private string sStyleString ;
       private string tblTableuseraction1_modal_Internalname ;
       private string Useraction1_modal_Internalname ;
@@ -1589,14 +1845,20 @@ namespace GeneXus.Programs {
       private DateTime AV16DateRange_To ;
       private bool entryPointCalled ;
       private bool toggleJsOutput ;
+      private bool AV29IsProjectManager ;
       private bool wbLoad ;
       private bool Rfr0gs ;
       private bool wbErr ;
       private bool gxdyncontrolsrefreshing ;
       private bool returnInSub ;
+      private bool GXt_boolean2 ;
+      private bool n166ProjectManagerId ;
       private string AV15DateRange_RangeText ;
       private string AV21ExcelFilename ;
       private string AV20ErrorMessage ;
+      private GxSimpleCollection<long> AV28EmployeeIds ;
+      private GxSimpleCollection<long> AV27ProjectIds ;
+      private GxSimpleCollection<long> GXt_objcol_int6 ;
       private GXWebComponent WebComp_Wwpaux_wc ;
       private GeneXus.Utils.GxStringCollection gxdynajaxctrlcodr ;
       private GeneXus.Utils.GxStringCollection gxdynajaxctrldescr ;
@@ -1607,26 +1869,34 @@ namespace GeneXus.Programs {
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private GXCombobox dynavCompanylocationid ;
+      private GXCombobox dynavProjectid ;
       private IDataStoreProvider pr_default ;
       private long[] H00562_A157CompanyLocationId ;
       private string[] H00562_A158CompanyLocationName ;
-      private long[] H00563_A157CompanyLocationId ;
-      private string[] H00563_A158CompanyLocationName ;
-      private long[] H00564_A100CompanyId ;
+      private long[] H00563_A102ProjectId ;
+      private string[] H00563_A103ProjectName ;
+      private long[] H00563_A166ProjectManagerId ;
+      private bool[] H00563_n166ProjectManagerId ;
       private long[] H00564_A157CompanyLocationId ;
+      private string[] H00564_A158CompanyLocationName ;
+      private long[] H00565_A100CompanyId ;
+      private long[] H00565_A157CompanyLocationId ;
+      private long[] H00566_A166ProjectManagerId ;
+      private bool[] H00566_n166ProjectManagerId ;
+      private long[] H00566_A102ProjectId ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
-      private long[] H00565_A157CompanyLocationId ;
-      private string[] H00565_A158CompanyLocationName ;
+      private long[] H00567_A157CompanyLocationId ;
+      private string[] H00567_A158CompanyLocationName ;
       private GXBaseCollection<SdtSDTLeaveEventGroup> AV7LeaveEventGroups ;
-      private GXBaseCollection<SdtSDTLeaveEventGroup> GXt_objcol_SdtSDTLeaveEventGroup6 ;
+      private GXBaseCollection<SdtSDTLeaveEventGroup> GXt_objcol_SdtSDTLeaveEventGroup8 ;
       private GXBaseCollection<SdtSDTLeaveEvent> AV6LeaveEvents ;
-      private GXBaseCollection<SdtSDTLeaveEvent> GXt_objcol_SdtSDTLeaveEvent5 ;
+      private GXBaseCollection<SdtSDTLeaveEvent> GXt_objcol_SdtSDTLeaveEvent7 ;
       private GXBaseCollection<SdtSDTLeaveType> AV23SDTLeaveTypes ;
-      private GXBaseCollection<SdtSDTLeaveType> GXt_objcol_SdtSDTLeaveType2 ;
+      private GXBaseCollection<SdtSDTLeaveType> GXt_objcol_SdtSDTLeaveType3 ;
       private GXWebForm Form ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions AV17DateRange_RangePickerOptions ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions GXt_SdtWWPDateRangePickerOptions4 ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions GXt_SdtWWPDateRangePickerOptions5 ;
    }
 
    public class leavecalendar__default : DataStoreHelperBase, IDataStoreHelper
@@ -1639,6 +1909,8 @@ namespace GeneXus.Programs {
          ,new ForEachCursor(def[1])
          ,new ForEachCursor(def[2])
          ,new ForEachCursor(def[3])
+         ,new ForEachCursor(def[4])
+         ,new ForEachCursor(def[5])
        };
     }
 
@@ -1655,16 +1927,25 @@ namespace GeneXus.Programs {
           };
           Object[] prmH00564;
           prmH00564 = new Object[] {
-          new ParDef("AV18CompanyId",GXType.Int64,10,0)
           };
           Object[] prmH00565;
           prmH00565 = new Object[] {
+          new ParDef("AV18CompanyId",GXType.Int64,10,0)
+          };
+          Object[] prmH00566;
+          prmH00566 = new Object[] {
+          new ParDef("AV33Udparg1",GXType.Int64,10,0)
+          };
+          Object[] prmH00567;
+          prmH00567 = new Object[] {
           };
           def= new CursorDef[] {
               new CursorDef("H00562", "SELECT CompanyLocationId, CompanyLocationName FROM CompanyLocation ORDER BY CompanyLocationName ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00562,0, GxCacheFrequency.OFF ,true,false )
-             ,new CursorDef("H00563", "SELECT CompanyLocationId, CompanyLocationName FROM CompanyLocation ORDER BY CompanyLocationName ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00563,0, GxCacheFrequency.OFF ,true,false )
-             ,new CursorDef("H00564", "SELECT CompanyId, CompanyLocationId FROM Company WHERE CompanyId = :AV18CompanyId ORDER BY CompanyId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00564,1, GxCacheFrequency.OFF ,false,true )
-             ,new CursorDef("H00565", "SELECT CompanyLocationId, CompanyLocationName FROM CompanyLocation ORDER BY CompanyLocationName ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00565,0, GxCacheFrequency.OFF ,true,false )
+             ,new CursorDef("H00563", "SELECT ProjectId, ProjectName, ProjectManagerId FROM Project ORDER BY ProjectName ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00563,0, GxCacheFrequency.OFF ,true,false )
+             ,new CursorDef("H00564", "SELECT CompanyLocationId, CompanyLocationName FROM CompanyLocation ORDER BY CompanyLocationName ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00564,0, GxCacheFrequency.OFF ,true,false )
+             ,new CursorDef("H00565", "SELECT CompanyId, CompanyLocationId FROM Company WHERE CompanyId = :AV18CompanyId ORDER BY CompanyId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00565,1, GxCacheFrequency.OFF ,false,true )
+             ,new CursorDef("H00566", "SELECT ProjectManagerId, ProjectId FROM Project WHERE ProjectManagerId = :AV33Udparg1 ORDER BY ProjectManagerId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00566,100, GxCacheFrequency.OFF ,false,false )
+             ,new CursorDef("H00567", "SELECT CompanyLocationId, CompanyLocationName FROM CompanyLocation ORDER BY CompanyLocationName ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00567,0, GxCacheFrequency.OFF ,true,false )
           };
        }
     }
@@ -1682,12 +1963,23 @@ namespace GeneXus.Programs {
              case 1 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);
                 ((string[]) buf[1])[0] = rslt.getString(2, 100);
+                ((long[]) buf[2])[0] = rslt.getLong(3);
+                ((bool[]) buf[3])[0] = rslt.wasNull(3);
                 return;
              case 2 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);
-                ((long[]) buf[1])[0] = rslt.getLong(2);
+                ((string[]) buf[1])[0] = rslt.getString(2, 100);
                 return;
              case 3 :
+                ((long[]) buf[0])[0] = rslt.getLong(1);
+                ((long[]) buf[1])[0] = rslt.getLong(2);
+                return;
+             case 4 :
+                ((long[]) buf[0])[0] = rslt.getLong(1);
+                ((bool[]) buf[1])[0] = rslt.wasNull(1);
+                ((long[]) buf[2])[0] = rslt.getLong(2);
+                return;
+             case 5 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);
                 ((string[]) buf[1])[0] = rslt.getString(2, 100);
                 return;

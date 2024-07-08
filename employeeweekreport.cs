@@ -152,10 +152,16 @@ namespace GeneXus.Programs {
       protected void gxgrGrid_refresh_invoke( )
       {
          subGrid_Rows = (int)(Math.Round(NumberUtil.Val( GetPar( "subGrid_Rows"), "."), 18, MidpointRounding.ToEven));
-         AV82Pgmname = GetPar( "Pgmname");
+         AV85Pgmname = GetPar( "Pgmname");
          AV52DateRange_To = context.localUtil.ParseDateParm( GetPar( "DateRange_To"));
          AV50DateRange = context.localUtil.ParseDateParm( GetPar( "DateRange"));
          ajax_req_read_hidden_sdt(GetNextPar( ), AV45CompanyLocationId);
+         ajax_req_read_hidden_sdt(GetNextPar( ), AV60EmployeeIds);
+         A166ProjectManagerId = (long)(Math.Round(NumberUtil.Val( GetPar( "ProjectManagerId"), "."), 18, MidpointRounding.ToEven));
+         n166ProjectManagerId = false;
+         AV88Udparg1 = (long)(Math.Round(NumberUtil.Val( GetPar( "Udparg1"), "."), 18, MidpointRounding.ToEven));
+         A102ProjectId = (long)(Math.Round(NumberUtil.Val( GetPar( "ProjectId"), "."), 18, MidpointRounding.ToEven));
+         ajax_req_read_hidden_sdt(GetNextPar( ), AV59ProjectIds);
          ajax_req_read_hidden_sdt(GetNextPar( ), AV15SDTEmployeeWeekReports);
          setAjaxCallMode();
          if ( ! IsValidAjaxCall( true) )
@@ -163,7 +169,7 @@ namespace GeneXus.Programs {
             GxWebError = 1;
             return  ;
          }
-         gxgrGrid_refresh( subGrid_Rows, AV82Pgmname, AV52DateRange_To, AV50DateRange, AV45CompanyLocationId, AV15SDTEmployeeWeekReports) ;
+         gxgrGrid_refresh( subGrid_Rows, AV85Pgmname, AV52DateRange_To, AV50DateRange, AV45CompanyLocationId, AV60EmployeeIds, A166ProjectManagerId, AV88Udparg1, A102ProjectId, AV59ProjectIds, AV15SDTEmployeeWeekReports) ;
          AddString( context.getJSONResponse( )) ;
          /* End function gxgrGrid_refresh_invoke */
       }
@@ -340,8 +346,10 @@ namespace GeneXus.Programs {
 
       protected void send_integrity_footer_hashes( )
       {
-         GxWebStd.gx_hidden_field( context, "vPGMNAME", StringUtil.RTrim( AV82Pgmname));
-         GxWebStd.gx_hidden_field( context, "gxhash_vPGMNAME", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV82Pgmname, "")), context));
+         GxWebStd.gx_hidden_field( context, "vPGMNAME", StringUtil.RTrim( AV85Pgmname));
+         GxWebStd.gx_hidden_field( context, "gxhash_vPGMNAME", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV85Pgmname, "")), context));
+         GxWebStd.gx_hidden_field( context, "vUDPARG1", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV88Udparg1), 10, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, "gxhash_vUDPARG1", GetSecureSignedToken( "", context.localUtil.Format( (decimal)(AV88Udparg1), "9999999999"), context));
          GXKey = Decrypt64( context.GetCookie( "GX_SESSION_ID"), Crypto.GetServerKey( ));
       }
 
@@ -388,8 +396,8 @@ namespace GeneXus.Programs {
          {
             context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("vDATERANGE_RANGEPICKEROPTIONS", AV53DateRange_RangePickerOptions);
          }
-         GxWebStd.gx_hidden_field( context, "vPGMNAME", StringUtil.RTrim( AV82Pgmname));
-         GxWebStd.gx_hidden_field( context, "gxhash_vPGMNAME", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV82Pgmname, "")), context));
+         GxWebStd.gx_hidden_field( context, "vPGMNAME", StringUtil.RTrim( AV85Pgmname));
+         GxWebStd.gx_hidden_field( context, "gxhash_vPGMNAME", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV85Pgmname, "")), context));
          if ( context.isAjaxRequest( ) )
          {
             context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "vCOMPANYLOCATIONID", AV45CompanyLocationId);
@@ -397,6 +405,26 @@ namespace GeneXus.Programs {
          else
          {
             context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("vCOMPANYLOCATIONID", AV45CompanyLocationId);
+         }
+         if ( context.isAjaxRequest( ) )
+         {
+            context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "vEMPLOYEEIDS", AV60EmployeeIds);
+         }
+         else
+         {
+            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("vEMPLOYEEIDS", AV60EmployeeIds);
+         }
+         GxWebStd.gx_hidden_field( context, "PROJECTMANAGERID", StringUtil.LTrim( StringUtil.NToC( (decimal)(A166ProjectManagerId), 10, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, "vUDPARG1", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV88Udparg1), 10, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, "gxhash_vUDPARG1", GetSecureSignedToken( "", context.localUtil.Format( (decimal)(AV88Udparg1), "9999999999"), context));
+         GxWebStd.gx_hidden_field( context, "PROJECTID", StringUtil.LTrim( StringUtil.NToC( (decimal)(A102ProjectId), 10, 0, ".", "")));
+         if ( context.isAjaxRequest( ) )
+         {
+            context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "vPROJECTIDS", AV59ProjectIds);
+         }
+         else
+         {
+            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("vPROJECTIDS", AV59ProjectIds);
          }
          if ( context.isAjaxRequest( ) )
          {
@@ -595,7 +623,7 @@ namespace GeneXus.Programs {
             }
             else
             {
-               AV58GXV1 = nGXsfl_40_idx;
+               AV61GXV1 = nGXsfl_40_idx;
                sStyleString = "";
                context.WriteHtmlText( "<div id=\""+"GridContainer"+"Div\" "+sStyleString+">"+"</div>") ;
                context.httpAjaxContext.ajax_rsp_assign_grid("_"+"Grid", GridContainer, subGrid_Internalname);
@@ -678,7 +706,7 @@ namespace GeneXus.Programs {
                }
                else
                {
-                  AV58GXV1 = nGXsfl_40_idx;
+                  AV61GXV1 = nGXsfl_40_idx;
                   sStyleString = "";
                   context.WriteHtmlText( "<div id=\""+"GridContainer"+"Div\" "+sStyleString+">"+"</div>") ;
                   context.httpAjaxContext.ajax_rsp_assign_grid("_"+"Grid", GridContainer, subGrid_Internalname);
@@ -810,10 +838,10 @@ namespace GeneXus.Programs {
                               nGXsfl_40_idx = (int)(Math.Round(NumberUtil.Val( sEvtType, "."), 18, MidpointRounding.ToEven));
                               sGXsfl_40_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_40_idx), 4, 0), 4, "0");
                               SubsflControlProps_402( ) ;
-                              AV58GXV1 = (int)(nGXsfl_40_idx+GRID_nFirstRecordOnPage);
-                              if ( ( AV15SDTEmployeeWeekReports.Count >= AV58GXV1 ) && ( AV58GXV1 > 0 ) )
+                              AV61GXV1 = (int)(nGXsfl_40_idx+GRID_nFirstRecordOnPage);
+                              if ( ( AV15SDTEmployeeWeekReports.Count >= AV61GXV1 ) && ( AV61GXV1 > 0 ) )
                               {
-                                 AV15SDTEmployeeWeekReports.CurrentItem = ((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1));
+                                 AV15SDTEmployeeWeekReports.CurrentItem = ((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1));
                               }
                               sEvtType = StringUtil.Right( sEvt, 1);
                               if ( StringUtil.StrCmp(sEvtType, ".") == 0 )
@@ -939,10 +967,15 @@ namespace GeneXus.Programs {
       }
 
       protected void gxgrGrid_refresh( int subGrid_Rows ,
-                                       string AV82Pgmname ,
+                                       string AV85Pgmname ,
                                        DateTime AV52DateRange_To ,
                                        DateTime AV50DateRange ,
                                        GxSimpleCollection<long> AV45CompanyLocationId ,
+                                       GxSimpleCollection<long> AV60EmployeeIds ,
+                                       long A166ProjectManagerId ,
+                                       long AV88Udparg1 ,
+                                       long A102ProjectId ,
+                                       GxSimpleCollection<long> AV59ProjectIds ,
                                        GXBaseCollection<SdtSDTEmployeeWeekReport> AV15SDTEmployeeWeekReports )
       {
          initialize_formulas( ) ;
@@ -985,7 +1018,7 @@ namespace GeneXus.Programs {
       protected void initialize_formulas( )
       {
          /* GeneXus formulas. */
-         AV82Pgmname = "EmployeeWeekReport";
+         AV85Pgmname = "EmployeeWeekReport";
          edtavSdtemployeeweekreports__employeename_Enabled = 0;
          AssignProp("", false, edtavSdtemployeeweekreports__employeename_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavSdtemployeeweekreports__employeename_Enabled), 5, 0), !bGXsfl_40_Refreshing);
          edtavSdtemployeeweekreports__mon_Enabled = 0;
@@ -1077,8 +1110,10 @@ namespace GeneXus.Programs {
 
       protected void send_integrity_lvl_hashes582( )
       {
-         GxWebStd.gx_hidden_field( context, "vPGMNAME", StringUtil.RTrim( AV82Pgmname));
-         GxWebStd.gx_hidden_field( context, "gxhash_vPGMNAME", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV82Pgmname, "")), context));
+         GxWebStd.gx_hidden_field( context, "vPGMNAME", StringUtil.RTrim( AV85Pgmname));
+         GxWebStd.gx_hidden_field( context, "gxhash_vPGMNAME", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV85Pgmname, "")), context));
+         GxWebStd.gx_hidden_field( context, "vUDPARG1", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV88Udparg1), 10, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, "gxhash_vUDPARG1", GetSecureSignedToken( "", context.localUtil.Format( (decimal)(AV88Udparg1), "9999999999"), context));
       }
 
       protected int subGrid_fnc_Pagecount( )
@@ -1119,7 +1154,7 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV82Pgmname, AV52DateRange_To, AV50DateRange, AV45CompanyLocationId, AV15SDTEmployeeWeekReports) ;
+            gxgrGrid_refresh( subGrid_Rows, AV85Pgmname, AV52DateRange_To, AV50DateRange, AV45CompanyLocationId, AV60EmployeeIds, A166ProjectManagerId, AV88Udparg1, A102ProjectId, AV59ProjectIds, AV15SDTEmployeeWeekReports) ;
          }
          send_integrity_footer_hashes( ) ;
          return 0 ;
@@ -1140,7 +1175,7 @@ namespace GeneXus.Programs {
          GridContainer.AddObjectProperty("GRID_nFirstRecordOnPage", GRID_nFirstRecordOnPage);
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV82Pgmname, AV52DateRange_To, AV50DateRange, AV45CompanyLocationId, AV15SDTEmployeeWeekReports) ;
+            gxgrGrid_refresh( subGrid_Rows, AV85Pgmname, AV52DateRange_To, AV50DateRange, AV45CompanyLocationId, AV60EmployeeIds, A166ProjectManagerId, AV88Udparg1, A102ProjectId, AV59ProjectIds, AV15SDTEmployeeWeekReports) ;
          }
          send_integrity_footer_hashes( ) ;
          return (short)(((GRID_nEOF==0) ? 0 : 2)) ;
@@ -1159,7 +1194,7 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV82Pgmname, AV52DateRange_To, AV50DateRange, AV45CompanyLocationId, AV15SDTEmployeeWeekReports) ;
+            gxgrGrid_refresh( subGrid_Rows, AV85Pgmname, AV52DateRange_To, AV50DateRange, AV45CompanyLocationId, AV60EmployeeIds, A166ProjectManagerId, AV88Udparg1, A102ProjectId, AV59ProjectIds, AV15SDTEmployeeWeekReports) ;
          }
          send_integrity_footer_hashes( ) ;
          return 0 ;
@@ -1186,7 +1221,7 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV82Pgmname, AV52DateRange_To, AV50DateRange, AV45CompanyLocationId, AV15SDTEmployeeWeekReports) ;
+            gxgrGrid_refresh( subGrid_Rows, AV85Pgmname, AV52DateRange_To, AV50DateRange, AV45CompanyLocationId, AV60EmployeeIds, A166ProjectManagerId, AV88Udparg1, A102ProjectId, AV59ProjectIds, AV15SDTEmployeeWeekReports) ;
          }
          send_integrity_footer_hashes( ) ;
          return 0 ;
@@ -1205,7 +1240,7 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV82Pgmname, AV52DateRange_To, AV50DateRange, AV45CompanyLocationId, AV15SDTEmployeeWeekReports) ;
+            gxgrGrid_refresh( subGrid_Rows, AV85Pgmname, AV52DateRange_To, AV50DateRange, AV45CompanyLocationId, AV60EmployeeIds, A166ProjectManagerId, AV88Udparg1, A102ProjectId, AV59ProjectIds, AV15SDTEmployeeWeekReports) ;
          }
          send_integrity_footer_hashes( ) ;
          return (int)(0) ;
@@ -1213,7 +1248,7 @@ namespace GeneXus.Programs {
 
       protected void before_start_formulas( )
       {
-         AV82Pgmname = "EmployeeWeekReport";
+         AV85Pgmname = "EmployeeWeekReport";
          edtavSdtemployeeweekreports__employeename_Enabled = 0;
          AssignProp("", false, edtavSdtemployeeweekreports__employeename_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavSdtemployeeweekreports__employeename_Enabled), 5, 0), !bGXsfl_40_Refreshing);
          edtavSdtemployeeweekreports__mon_Enabled = 0;
@@ -1302,10 +1337,10 @@ namespace GeneXus.Programs {
                nGXsfl_40_fel_idx = ((subGrid_Islastpage==1)&&(nGXsfl_40_fel_idx+1>subGrid_fnc_Recordsperpage( )) ? 1 : nGXsfl_40_fel_idx+1);
                sGXsfl_40_fel_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_40_fel_idx), 4, 0), 4, "0");
                SubsflControlProps_fel_402( ) ;
-               AV58GXV1 = (int)(nGXsfl_40_fel_idx+GRID_nFirstRecordOnPage);
-               if ( ( AV15SDTEmployeeWeekReports.Count >= AV58GXV1 ) && ( AV58GXV1 > 0 ) )
+               AV61GXV1 = (int)(nGXsfl_40_fel_idx+GRID_nFirstRecordOnPage);
+               if ( ( AV15SDTEmployeeWeekReports.Count >= AV61GXV1 ) && ( AV61GXV1 > 0 ) )
                {
-                  AV15SDTEmployeeWeekReports.CurrentItem = ((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1));
+                  AV15SDTEmployeeWeekReports.CurrentItem = ((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1));
                }
             }
             if ( nGXsfl_40_fel_idx == 0 )
@@ -1424,7 +1459,7 @@ namespace GeneXus.Programs {
          AV29GridPageCount = subGrid_fnc_Pagecount( );
          AssignAttri("", false, "AV29GridPageCount", StringUtil.LTrimStr( (decimal)(AV29GridPageCount), 10, 0));
          GXt_char4 = AV30GridAppliedFilters;
-         new GeneXus.Programs.wwpbaseobjects.wwp_getappliedfiltersdescription(context ).execute(  AV82Pgmname, out  GXt_char4) ;
+         new GeneXus.Programs.wwpbaseobjects.wwp_getappliedfiltersdescription(context ).execute(  AV85Pgmname, out  GXt_char4) ;
          AV30GridAppliedFilters = GXt_char4;
          AssignAttri("", false, "AV30GridAppliedFilters", AV30GridAppliedFilters);
          edtavSdtemployeeweekreports__mon_formatted_Columnheaderclass = "WWColumn ColumnAlignCenter";
@@ -1441,6 +1476,8 @@ namespace GeneXus.Programs {
          AssignProp("", false, edtavSdtemployeeweekreports__total_formatted_Internalname, "Columnheaderclass", edtavSdtemployeeweekreports__total_formatted_Columnheaderclass, !bGXsfl_40_Refreshing);
          /*  Sending Event outputs  */
          context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV15SDTEmployeeWeekReports", AV15SDTEmployeeWeekReports);
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV59ProjectIds", AV59ProjectIds);
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV60EmployeeIds", AV60EmployeeIds);
       }
 
       protected void E12582( )
@@ -1476,10 +1513,10 @@ namespace GeneXus.Programs {
       {
          /* Grid_Load Routine */
          returnInSub = false;
-         AV58GXV1 = 1;
-         while ( AV58GXV1 <= AV15SDTEmployeeWeekReports.Count )
+         AV61GXV1 = 1;
+         while ( AV61GXV1 <= AV15SDTEmployeeWeekReports.Count )
          {
-            AV15SDTEmployeeWeekReports.CurrentItem = ((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1));
+            AV15SDTEmployeeWeekReports.CurrentItem = ((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1));
             if ( ((SdtSDTEmployeeWeekReport)(AV15SDTEmployeeWeekReports.CurrentItem)).gxTpr_Mon_isholiday )
             {
                edtavSdtemployeeweekreports__mon_formatted_Columnclass = "WWColumn ColumnAlignCenter WWColumnWarning WWColumnWarningSingleCell";
@@ -1590,17 +1627,17 @@ namespace GeneXus.Programs {
             {
                DoAjaxLoad(40, GridRow);
             }
-            AV58GXV1 = (int)(AV58GXV1+1);
+            AV61GXV1 = (int)(AV61GXV1+1);
          }
          /*  Sending Event outputs  */
       }
 
       protected void E15582( )
       {
-         AV58GXV1 = (int)(nGXsfl_40_idx+GRID_nFirstRecordOnPage);
-         if ( ( AV58GXV1 > 0 ) && ( AV15SDTEmployeeWeekReports.Count >= AV58GXV1 ) )
+         AV61GXV1 = (int)(nGXsfl_40_idx+GRID_nFirstRecordOnPage);
+         if ( ( AV61GXV1 > 0 ) && ( AV15SDTEmployeeWeekReports.Count >= AV61GXV1 ) )
          {
-            AV15SDTEmployeeWeekReports.CurrentItem = ((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1));
+            AV15SDTEmployeeWeekReports.CurrentItem = ((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1));
          }
          /* 'DoPrev' Routine */
          returnInSub = false;
@@ -1614,19 +1651,21 @@ namespace GeneXus.Programs {
          {
             context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV15SDTEmployeeWeekReports", AV15SDTEmployeeWeekReports);
             nGXsfl_40_bak_idx = nGXsfl_40_idx;
-            gxgrGrid_refresh( subGrid_Rows, AV82Pgmname, AV52DateRange_To, AV50DateRange, AV45CompanyLocationId, AV15SDTEmployeeWeekReports) ;
+            gxgrGrid_refresh( subGrid_Rows, AV85Pgmname, AV52DateRange_To, AV50DateRange, AV45CompanyLocationId, AV60EmployeeIds, A166ProjectManagerId, AV88Udparg1, A102ProjectId, AV59ProjectIds, AV15SDTEmployeeWeekReports) ;
             nGXsfl_40_idx = nGXsfl_40_bak_idx;
             sGXsfl_40_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_40_idx), 4, 0), 4, "0");
             SubsflControlProps_402( ) ;
          }
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV59ProjectIds", AV59ProjectIds);
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV60EmployeeIds", AV60EmployeeIds);
       }
 
       protected void E16582( )
       {
-         AV58GXV1 = (int)(nGXsfl_40_idx+GRID_nFirstRecordOnPage);
-         if ( ( AV58GXV1 > 0 ) && ( AV15SDTEmployeeWeekReports.Count >= AV58GXV1 ) )
+         AV61GXV1 = (int)(nGXsfl_40_idx+GRID_nFirstRecordOnPage);
+         if ( ( AV61GXV1 > 0 ) && ( AV15SDTEmployeeWeekReports.Count >= AV61GXV1 ) )
          {
-            AV15SDTEmployeeWeekReports.CurrentItem = ((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1));
+            AV15SDTEmployeeWeekReports.CurrentItem = ((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1));
          }
          /* 'DoNext' Routine */
          returnInSub = false;
@@ -1640,19 +1679,21 @@ namespace GeneXus.Programs {
          {
             context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV15SDTEmployeeWeekReports", AV15SDTEmployeeWeekReports);
             nGXsfl_40_bak_idx = nGXsfl_40_idx;
-            gxgrGrid_refresh( subGrid_Rows, AV82Pgmname, AV52DateRange_To, AV50DateRange, AV45CompanyLocationId, AV15SDTEmployeeWeekReports) ;
+            gxgrGrid_refresh( subGrid_Rows, AV85Pgmname, AV52DateRange_To, AV50DateRange, AV45CompanyLocationId, AV60EmployeeIds, A166ProjectManagerId, AV88Udparg1, A102ProjectId, AV59ProjectIds, AV15SDTEmployeeWeekReports) ;
             nGXsfl_40_idx = nGXsfl_40_bak_idx;
             sGXsfl_40_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_40_idx), 4, 0), 4, "0");
             SubsflControlProps_402( ) ;
          }
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV59ProjectIds", AV59ProjectIds);
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV60EmployeeIds", AV60EmployeeIds);
       }
 
       protected void E11582( )
       {
-         AV58GXV1 = (int)(nGXsfl_40_idx+GRID_nFirstRecordOnPage);
-         if ( ( AV58GXV1 > 0 ) && ( AV15SDTEmployeeWeekReports.Count >= AV58GXV1 ) )
+         AV61GXV1 = (int)(nGXsfl_40_idx+GRID_nFirstRecordOnPage);
+         if ( ( AV61GXV1 > 0 ) && ( AV15SDTEmployeeWeekReports.Count >= AV61GXV1 ) )
          {
-            AV15SDTEmployeeWeekReports.CurrentItem = ((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1));
+            AV15SDTEmployeeWeekReports.CurrentItem = ((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1));
          }
          /* Combo_companylocationid_Onoptionclicked Routine */
          returnInSub = false;
@@ -1667,11 +1708,13 @@ namespace GeneXus.Programs {
          {
             context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV15SDTEmployeeWeekReports", AV15SDTEmployeeWeekReports);
             nGXsfl_40_bak_idx = nGXsfl_40_idx;
-            gxgrGrid_refresh( subGrid_Rows, AV82Pgmname, AV52DateRange_To, AV50DateRange, AV45CompanyLocationId, AV15SDTEmployeeWeekReports) ;
+            gxgrGrid_refresh( subGrid_Rows, AV85Pgmname, AV52DateRange_To, AV50DateRange, AV45CompanyLocationId, AV60EmployeeIds, A166ProjectManagerId, AV88Udparg1, A102ProjectId, AV59ProjectIds, AV15SDTEmployeeWeekReports) ;
             nGXsfl_40_idx = nGXsfl_40_bak_idx;
             sGXsfl_40_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_40_idx), 4, 0), 4, "0");
             SubsflControlProps_402( ) ;
          }
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV59ProjectIds", AV59ProjectIds);
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV60EmployeeIds", AV60EmployeeIds);
       }
 
       protected void S152( )
@@ -1684,13 +1727,13 @@ namespace GeneXus.Programs {
       {
          /* 'LOADGRIDSTATE' Routine */
          returnInSub = false;
-         if ( StringUtil.StrCmp(AV22Session.Get(AV82Pgmname+"GridState"), "") == 0 )
+         if ( StringUtil.StrCmp(AV22Session.Get(AV85Pgmname+"GridState"), "") == 0 )
          {
-            AV12GridState.FromXml(new GeneXus.Programs.wwpbaseobjects.loadgridstate(context).executeUdp(  AV82Pgmname+"GridState"), null, "", "");
+            AV12GridState.FromXml(new GeneXus.Programs.wwpbaseobjects.loadgridstate(context).executeUdp(  AV85Pgmname+"GridState"), null, "", "");
          }
          else
          {
-            AV12GridState.FromXml(AV22Session.Get(AV82Pgmname+"GridState"), null, "", "");
+            AV12GridState.FromXml(AV22Session.Get(AV85Pgmname+"GridState"), null, "", "");
          }
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( StringUtil.Trim( AV12GridState.gxTpr_Pagesize))) )
          {
@@ -1704,10 +1747,10 @@ namespace GeneXus.Programs {
       {
          /* 'SAVEGRIDSTATE' Routine */
          returnInSub = false;
-         AV12GridState.FromXml(AV22Session.Get(AV82Pgmname+"GridState"), null, "", "");
+         AV12GridState.FromXml(AV22Session.Get(AV85Pgmname+"GridState"), null, "", "");
          AV12GridState.gxTpr_Pagesize = StringUtil.Str( (decimal)(subGrid_Rows), 10, 0);
          AV12GridState.gxTpr_Currentpage = (short)(subGrid_fnc_Currentpage( ));
-         new GeneXus.Programs.wwpbaseobjects.savegridstate(context ).execute(  AV82Pgmname+"GridState",  AV12GridState.ToXml(false, true, "", "")) ;
+         new GeneXus.Programs.wwpbaseobjects.savegridstate(context ).execute(  AV85Pgmname+"GridState",  AV12GridState.ToXml(false, true, "", "")) ;
       }
 
       protected void S122( )
@@ -1752,11 +1795,13 @@ namespace GeneXus.Programs {
          {
             context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV15SDTEmployeeWeekReports", AV15SDTEmployeeWeekReports);
             nGXsfl_40_bak_idx = nGXsfl_40_idx;
-            gxgrGrid_refresh( subGrid_Rows, AV82Pgmname, AV52DateRange_To, AV50DateRange, AV45CompanyLocationId, AV15SDTEmployeeWeekReports) ;
+            gxgrGrid_refresh( subGrid_Rows, AV85Pgmname, AV52DateRange_To, AV50DateRange, AV45CompanyLocationId, AV60EmployeeIds, A166ProjectManagerId, AV88Udparg1, A102ProjectId, AV59ProjectIds, AV15SDTEmployeeWeekReports) ;
             nGXsfl_40_idx = nGXsfl_40_bak_idx;
             sGXsfl_40_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_40_idx), 4, 0), 4, "0");
             SubsflControlProps_402( ) ;
          }
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV59ProjectIds", AV59ProjectIds);
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV60EmployeeIds", AV60EmployeeIds);
       }
 
       protected void S162( )
@@ -1781,10 +1826,40 @@ namespace GeneXus.Programs {
             AV52DateRange_To = DateTimeUtil.DAdd( AV50DateRange, (6));
             AssignAttri("", false, "AV52DateRange_To", context.localUtil.Format(AV52DateRange_To, "99/99/99"));
          }
-         GXt_objcol_SdtSDTEmployeeWeekReport5 = AV15SDTEmployeeWeekReports;
-         new dpemployeeweekreport(context ).execute(  AV50DateRange,  AV52DateRange_To,  AV45CompanyLocationId, out  GXt_objcol_SdtSDTEmployeeWeekReport5) ;
-         AV15SDTEmployeeWeekReports = GXt_objcol_SdtSDTEmployeeWeekReport5;
+         GXt_boolean5 = AV58IsProjectManager;
+         new userhasrole(context ).execute(  "Project Manager", out  GXt_boolean5) ;
+         AV58IsProjectManager = GXt_boolean5;
+         if ( AV58IsProjectManager )
+         {
+            /* Execute user subroutine: 'GETEMPLOYEEIDSBYPROJECT' */
+            S172 ();
+            if (returnInSub) return;
+         }
+         GXt_objcol_SdtSDTEmployeeWeekReport6 = AV15SDTEmployeeWeekReports;
+         new dpemployeeweekreport(context ).execute(  AV50DateRange,  AV52DateRange_To,  AV45CompanyLocationId,  AV60EmployeeIds, out  GXt_objcol_SdtSDTEmployeeWeekReport6) ;
+         AV15SDTEmployeeWeekReports = GXt_objcol_SdtSDTEmployeeWeekReport6;
          gx_BV40 = true;
+      }
+
+      protected void S172( )
+      {
+         /* 'GETEMPLOYEEIDSBYPROJECT' Routine */
+         returnInSub = false;
+         AV88Udparg1 = new getloggedinemployeeid(context).executeUdp( );
+         /* Using cursor H00584 */
+         pr_default.execute(2, new Object[] {AV88Udparg1});
+         while ( (pr_default.getStatus(2) != 101) )
+         {
+            A166ProjectManagerId = H00584_A166ProjectManagerId[0];
+            n166ProjectManagerId = H00584_n166ProjectManagerId[0];
+            A102ProjectId = H00584_A102ProjectId[0];
+            AV59ProjectIds.Add(A102ProjectId, 0);
+            pr_default.readNext(2);
+         }
+         pr_default.close(2);
+         GXt_objcol_int7 = AV60EmployeeIds;
+         new getemployeeidsbyproject(context ).execute(  AV59ProjectIds, out  GXt_objcol_int7) ;
+         AV60EmployeeIds = GXt_objcol_int7;
       }
 
       protected void wb_table1_11_582( bool wbgen )
@@ -1887,7 +1962,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247615364916", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247811201152", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1905,7 +1980,7 @@ namespace GeneXus.Programs {
          if ( nGXWrapped != 1 )
          {
             context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-            context.AddJavascriptSource("employeeweekreport.js", "?20247615364917", false, true);
+            context.AddJavascriptSource("employeeweekreport.js", "?20247811201153", false, true);
             context.AddJavascriptSource("UserControls/WWP_IconButtonRender.js", "", false, true);
             context.AddJavascriptSource("UserControls/WWP_IconButtonRender.js", "", false, true);
             context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
@@ -2048,7 +2123,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtemployeeweekreports__employeename_Internalname,StringUtil.RTrim( ((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1)).gxTpr_Employeename),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtemployeeweekreports__employeename_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)-1,(int)edtavSdtemployeeweekreports__employeename_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)100,(short)0,(short)0,(short)40,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtemployeeweekreports__employeename_Internalname,StringUtil.RTrim( ((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1)).gxTpr_Employeename),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtemployeeweekreports__employeename_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)-1,(int)edtavSdtemployeeweekreports__employeename_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)100,(short)0,(short)0,(short)40,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -2056,7 +2131,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtemployeeweekreports__mon_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1)).gxTpr_Mon), 10, 0, ".", "")),StringUtil.LTrim( ((edtavSdtemployeeweekreports__mon_Enabled!=0) ? context.localUtil.Format( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1)).gxTpr_Mon), "ZZZZZZZZZ9") : context.localUtil.Format( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1)).gxTpr_Mon), "ZZZZZZZZZ9"))),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtemployeeweekreports__mon_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(int)edtavSdtemployeeweekreports__mon_Enabled,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)10,(short)0,(short)0,(short)40,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtemployeeweekreports__mon_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1)).gxTpr_Mon), 10, 0, ".", "")),StringUtil.LTrim( ((edtavSdtemployeeweekreports__mon_Enabled!=0) ? context.localUtil.Format( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1)).gxTpr_Mon), "ZZZZZZZZZ9") : context.localUtil.Format( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1)).gxTpr_Mon), "ZZZZZZZZZ9"))),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtemployeeweekreports__mon_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(int)edtavSdtemployeeweekreports__mon_Enabled,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)10,(short)0,(short)0,(short)40,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -2064,7 +2139,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtemployeeweekreports__tue_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1)).gxTpr_Tue), 10, 0, ".", "")),StringUtil.LTrim( ((edtavSdtemployeeweekreports__tue_Enabled!=0) ? context.localUtil.Format( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1)).gxTpr_Tue), "ZZZZZZZZZ9") : context.localUtil.Format( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1)).gxTpr_Tue), "ZZZZZZZZZ9"))),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtemployeeweekreports__tue_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(int)edtavSdtemployeeweekreports__tue_Enabled,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)10,(short)0,(short)0,(short)40,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtemployeeweekreports__tue_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1)).gxTpr_Tue), 10, 0, ".", "")),StringUtil.LTrim( ((edtavSdtemployeeweekreports__tue_Enabled!=0) ? context.localUtil.Format( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1)).gxTpr_Tue), "ZZZZZZZZZ9") : context.localUtil.Format( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1)).gxTpr_Tue), "ZZZZZZZZZ9"))),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtemployeeweekreports__tue_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(int)edtavSdtemployeeweekreports__tue_Enabled,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)10,(short)0,(short)0,(short)40,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -2072,7 +2147,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtemployeeweekreports__wed_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1)).gxTpr_Wed), 10, 0, ".", "")),StringUtil.LTrim( ((edtavSdtemployeeweekreports__wed_Enabled!=0) ? context.localUtil.Format( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1)).gxTpr_Wed), "ZZZZZZZZZ9") : context.localUtil.Format( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1)).gxTpr_Wed), "ZZZZZZZZZ9"))),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtemployeeweekreports__wed_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(int)edtavSdtemployeeweekreports__wed_Enabled,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)10,(short)0,(short)0,(short)40,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtemployeeweekreports__wed_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1)).gxTpr_Wed), 10, 0, ".", "")),StringUtil.LTrim( ((edtavSdtemployeeweekreports__wed_Enabled!=0) ? context.localUtil.Format( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1)).gxTpr_Wed), "ZZZZZZZZZ9") : context.localUtil.Format( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1)).gxTpr_Wed), "ZZZZZZZZZ9"))),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtemployeeweekreports__wed_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(int)edtavSdtemployeeweekreports__wed_Enabled,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)10,(short)0,(short)0,(short)40,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -2080,7 +2155,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtemployeeweekreports__thu_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1)).gxTpr_Thu), 10, 0, ".", "")),StringUtil.LTrim( ((edtavSdtemployeeweekreports__thu_Enabled!=0) ? context.localUtil.Format( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1)).gxTpr_Thu), "ZZZZZZZZZ9") : context.localUtil.Format( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1)).gxTpr_Thu), "ZZZZZZZZZ9"))),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtemployeeweekreports__thu_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(int)edtavSdtemployeeweekreports__thu_Enabled,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)10,(short)0,(short)0,(short)40,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtemployeeweekreports__thu_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1)).gxTpr_Thu), 10, 0, ".", "")),StringUtil.LTrim( ((edtavSdtemployeeweekreports__thu_Enabled!=0) ? context.localUtil.Format( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1)).gxTpr_Thu), "ZZZZZZZZZ9") : context.localUtil.Format( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1)).gxTpr_Thu), "ZZZZZZZZZ9"))),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtemployeeweekreports__thu_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(int)edtavSdtemployeeweekreports__thu_Enabled,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)10,(short)0,(short)0,(short)40,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -2088,7 +2163,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtemployeeweekreports__fri_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1)).gxTpr_Fri), 10, 0, ".", "")),StringUtil.LTrim( ((edtavSdtemployeeweekreports__fri_Enabled!=0) ? context.localUtil.Format( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1)).gxTpr_Fri), "ZZZZZZZZZ9") : context.localUtil.Format( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1)).gxTpr_Fri), "ZZZZZZZZZ9"))),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtemployeeweekreports__fri_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(int)edtavSdtemployeeweekreports__fri_Enabled,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)10,(short)0,(short)0,(short)40,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtemployeeweekreports__fri_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1)).gxTpr_Fri), 10, 0, ".", "")),StringUtil.LTrim( ((edtavSdtemployeeweekreports__fri_Enabled!=0) ? context.localUtil.Format( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1)).gxTpr_Fri), "ZZZZZZZZZ9") : context.localUtil.Format( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1)).gxTpr_Fri), "ZZZZZZZZZ9"))),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtemployeeweekreports__fri_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(int)edtavSdtemployeeweekreports__fri_Enabled,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)10,(short)0,(short)0,(short)40,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -2096,7 +2171,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtemployeeweekreports__sat_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1)).gxTpr_Sat), 10, 0, ".", "")),StringUtil.LTrim( ((edtavSdtemployeeweekreports__sat_Enabled!=0) ? context.localUtil.Format( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1)).gxTpr_Sat), "ZZZZZZZZZ9") : context.localUtil.Format( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1)).gxTpr_Sat), "ZZZZZZZZZ9"))),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtemployeeweekreports__sat_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(int)edtavSdtemployeeweekreports__sat_Enabled,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)10,(short)0,(short)0,(short)40,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtemployeeweekreports__sat_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1)).gxTpr_Sat), 10, 0, ".", "")),StringUtil.LTrim( ((edtavSdtemployeeweekreports__sat_Enabled!=0) ? context.localUtil.Format( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1)).gxTpr_Sat), "ZZZZZZZZZ9") : context.localUtil.Format( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1)).gxTpr_Sat), "ZZZZZZZZZ9"))),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtemployeeweekreports__sat_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(int)edtavSdtemployeeweekreports__sat_Enabled,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)10,(short)0,(short)0,(short)40,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -2104,7 +2179,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtemployeeweekreports__sun_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1)).gxTpr_Sun), 10, 0, ".", "")),StringUtil.LTrim( ((edtavSdtemployeeweekreports__sun_Enabled!=0) ? context.localUtil.Format( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1)).gxTpr_Sun), "ZZZZZZZZZ9") : context.localUtil.Format( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1)).gxTpr_Sun), "ZZZZZZZZZ9"))),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtemployeeweekreports__sun_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(int)edtavSdtemployeeweekreports__sun_Enabled,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)10,(short)0,(short)0,(short)40,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtemployeeweekreports__sun_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1)).gxTpr_Sun), 10, 0, ".", "")),StringUtil.LTrim( ((edtavSdtemployeeweekreports__sun_Enabled!=0) ? context.localUtil.Format( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1)).gxTpr_Sun), "ZZZZZZZZZ9") : context.localUtil.Format( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1)).gxTpr_Sun), "ZZZZZZZZZ9"))),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtemployeeweekreports__sun_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(int)edtavSdtemployeeweekreports__sun_Enabled,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)10,(short)0,(short)0,(short)40,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -2112,7 +2187,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtemployeeweekreports__leave_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1)).gxTpr_Leave), 10, 0, ".", "")),StringUtil.LTrim( ((edtavSdtemployeeweekreports__leave_Enabled!=0) ? context.localUtil.Format( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1)).gxTpr_Leave), "ZZZZZZZZZ9") : context.localUtil.Format( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1)).gxTpr_Leave), "ZZZZZZZZZ9"))),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtemployeeweekreports__leave_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(int)edtavSdtemployeeweekreports__leave_Enabled,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)10,(short)0,(short)0,(short)40,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtemployeeweekreports__leave_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1)).gxTpr_Leave), 10, 0, ".", "")),StringUtil.LTrim( ((edtavSdtemployeeweekreports__leave_Enabled!=0) ? context.localUtil.Format( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1)).gxTpr_Leave), "ZZZZZZZZZ9") : context.localUtil.Format( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1)).gxTpr_Leave), "ZZZZZZZZZ9"))),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtemployeeweekreports__leave_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(int)edtavSdtemployeeweekreports__leave_Enabled,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)10,(short)0,(short)0,(short)40,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -2120,7 +2195,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtemployeeweekreports__expected_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1)).gxTpr_Expected), 10, 0, ".", "")),StringUtil.LTrim( ((edtavSdtemployeeweekreports__expected_Enabled!=0) ? context.localUtil.Format( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1)).gxTpr_Expected), "ZZZZZZZZZ9") : context.localUtil.Format( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1)).gxTpr_Expected), "ZZZZZZZZZ9"))),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtemployeeweekreports__expected_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(int)edtavSdtemployeeweekreports__expected_Enabled,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)10,(short)0,(short)0,(short)40,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtemployeeweekreports__expected_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1)).gxTpr_Expected), 10, 0, ".", "")),StringUtil.LTrim( ((edtavSdtemployeeweekreports__expected_Enabled!=0) ? context.localUtil.Format( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1)).gxTpr_Expected), "ZZZZZZZZZ9") : context.localUtil.Format( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1)).gxTpr_Expected), "ZZZZZZZZZ9"))),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtemployeeweekreports__expected_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(int)edtavSdtemployeeweekreports__expected_Enabled,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)10,(short)0,(short)0,(short)40,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -2128,7 +2203,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtemployeeweekreports__total_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1)).gxTpr_Total), 10, 0, ".", "")),StringUtil.LTrim( ((edtavSdtemployeeweekreports__total_Enabled!=0) ? context.localUtil.Format( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1)).gxTpr_Total), "ZZZZZZZZZ9") : context.localUtil.Format( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1)).gxTpr_Total), "ZZZZZZZZZ9"))),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtemployeeweekreports__total_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(int)edtavSdtemployeeweekreports__total_Enabled,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)10,(short)0,(short)0,(short)40,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtemployeeweekreports__total_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1)).gxTpr_Total), 10, 0, ".", "")),StringUtil.LTrim( ((edtavSdtemployeeweekreports__total_Enabled!=0) ? context.localUtil.Format( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1)).gxTpr_Total), "ZZZZZZZZZ9") : context.localUtil.Format( (decimal)(((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1)).gxTpr_Total), "ZZZZZZZZZ9"))),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtemployeeweekreports__total_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(int)edtavSdtemployeeweekreports__total_Enabled,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)10,(short)0,(short)0,(short)40,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -2136,7 +2211,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtemployeeweekreports__mon_formatted_Internalname,StringUtil.RTrim( ((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1)).gxTpr_Mon_formatted),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtemployeeweekreports__mon_formatted_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)edtavSdtemployeeweekreports__mon_formatted_Columnclass,(string)edtavSdtemployeeweekreports__mon_formatted_Columnheaderclass,(short)-1,(int)edtavSdtemployeeweekreports__mon_formatted_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)0,(short)40,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtemployeeweekreports__mon_formatted_Internalname,StringUtil.RTrim( ((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1)).gxTpr_Mon_formatted),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtemployeeweekreports__mon_formatted_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)edtavSdtemployeeweekreports__mon_formatted_Columnclass,(string)edtavSdtemployeeweekreports__mon_formatted_Columnheaderclass,(short)-1,(int)edtavSdtemployeeweekreports__mon_formatted_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)0,(short)40,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -2144,7 +2219,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtemployeeweekreports__tue_formatted_Internalname,StringUtil.RTrim( ((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1)).gxTpr_Tue_formatted),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtemployeeweekreports__tue_formatted_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)edtavSdtemployeeweekreports__tue_formatted_Columnclass,(string)edtavSdtemployeeweekreports__tue_formatted_Columnheaderclass,(short)-1,(int)edtavSdtemployeeweekreports__tue_formatted_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)0,(short)40,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtemployeeweekreports__tue_formatted_Internalname,StringUtil.RTrim( ((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1)).gxTpr_Tue_formatted),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtemployeeweekreports__tue_formatted_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)edtavSdtemployeeweekreports__tue_formatted_Columnclass,(string)edtavSdtemployeeweekreports__tue_formatted_Columnheaderclass,(short)-1,(int)edtavSdtemployeeweekreports__tue_formatted_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)0,(short)40,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -2152,7 +2227,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtemployeeweekreports__wed_formatted_Internalname,StringUtil.RTrim( ((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1)).gxTpr_Wed_formatted),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtemployeeweekreports__wed_formatted_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)edtavSdtemployeeweekreports__wed_formatted_Columnclass,(string)edtavSdtemployeeweekreports__wed_formatted_Columnheaderclass,(short)-1,(int)edtavSdtemployeeweekreports__wed_formatted_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)0,(short)40,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtemployeeweekreports__wed_formatted_Internalname,StringUtil.RTrim( ((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1)).gxTpr_Wed_formatted),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtemployeeweekreports__wed_formatted_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)edtavSdtemployeeweekreports__wed_formatted_Columnclass,(string)edtavSdtemployeeweekreports__wed_formatted_Columnheaderclass,(short)-1,(int)edtavSdtemployeeweekreports__wed_formatted_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)0,(short)40,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -2160,7 +2235,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtemployeeweekreports__thu_formatted_Internalname,StringUtil.RTrim( ((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1)).gxTpr_Thu_formatted),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtemployeeweekreports__thu_formatted_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)edtavSdtemployeeweekreports__thu_formatted_Columnclass,(string)edtavSdtemployeeweekreports__thu_formatted_Columnheaderclass,(short)-1,(int)edtavSdtemployeeweekreports__thu_formatted_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)0,(short)40,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtemployeeweekreports__thu_formatted_Internalname,StringUtil.RTrim( ((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1)).gxTpr_Thu_formatted),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtemployeeweekreports__thu_formatted_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)edtavSdtemployeeweekreports__thu_formatted_Columnclass,(string)edtavSdtemployeeweekreports__thu_formatted_Columnheaderclass,(short)-1,(int)edtavSdtemployeeweekreports__thu_formatted_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)0,(short)40,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -2168,7 +2243,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtemployeeweekreports__fri_formatted_Internalname,StringUtil.RTrim( ((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1)).gxTpr_Fri_formatted),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtemployeeweekreports__fri_formatted_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)edtavSdtemployeeweekreports__fri_formatted_Columnclass,(string)edtavSdtemployeeweekreports__fri_formatted_Columnheaderclass,(short)-1,(int)edtavSdtemployeeweekreports__fri_formatted_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)0,(short)40,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtemployeeweekreports__fri_formatted_Internalname,StringUtil.RTrim( ((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1)).gxTpr_Fri_formatted),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtemployeeweekreports__fri_formatted_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)edtavSdtemployeeweekreports__fri_formatted_Columnclass,(string)edtavSdtemployeeweekreports__fri_formatted_Columnheaderclass,(short)-1,(int)edtavSdtemployeeweekreports__fri_formatted_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)0,(short)40,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -2176,7 +2251,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtemployeeweekreports__sat_formatted_Internalname,StringUtil.RTrim( ((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1)).gxTpr_Sat_formatted),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtemployeeweekreports__sat_formatted_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn ColumnAlignCenter",(string)"",(short)-1,(int)edtavSdtemployeeweekreports__sat_formatted_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)0,(short)40,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtemployeeweekreports__sat_formatted_Internalname,StringUtil.RTrim( ((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1)).gxTpr_Sat_formatted),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtemployeeweekreports__sat_formatted_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn ColumnAlignCenter",(string)"",(short)-1,(int)edtavSdtemployeeweekreports__sat_formatted_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)0,(short)40,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -2184,7 +2259,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtemployeeweekreports__sun_formatted_Internalname,StringUtil.RTrim( ((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1)).gxTpr_Sun_formatted),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtemployeeweekreports__sun_formatted_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn ColumnAlignCenter",(string)"",(short)-1,(int)edtavSdtemployeeweekreports__sun_formatted_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)0,(short)40,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtemployeeweekreports__sun_formatted_Internalname,StringUtil.RTrim( ((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1)).gxTpr_Sun_formatted),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtemployeeweekreports__sun_formatted_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn ColumnAlignCenter",(string)"",(short)-1,(int)edtavSdtemployeeweekreports__sun_formatted_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)0,(short)40,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -2199,7 +2274,7 @@ namespace GeneXus.Programs {
             chkavSdtemployeeweekreports__mon_isholiday.Caption = "";
             AssignProp("", false, chkavSdtemployeeweekreports__mon_isholiday_Internalname, "TitleCaption", chkavSdtemployeeweekreports__mon_isholiday.Caption, !bGXsfl_40_Refreshing);
             chkavSdtemployeeweekreports__mon_isholiday.CheckedValue = "false";
-            GridRow.AddColumnProperties("checkbox", 1, isAjaxCallMode( ), new Object[] {(string)chkavSdtemployeeweekreports__mon_isholiday_Internalname,StringUtil.BoolToStr( ((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1)).gxTpr_Mon_isholiday),(string)"",(string)"",(short)0,chkavSdtemployeeweekreports__mon_isholiday.Enabled,(string)"true",(string)"",(string)StyleString,(string)ClassString,(string)chkavSdtemployeeweekreports__mon_isholiday_Columnclass,(string)"",(string)""});
+            GridRow.AddColumnProperties("checkbox", 1, isAjaxCallMode( ), new Object[] {(string)chkavSdtemployeeweekreports__mon_isholiday_Internalname,StringUtil.BoolToStr( ((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1)).gxTpr_Mon_isholiday),(string)"",(string)"",(short)0,chkavSdtemployeeweekreports__mon_isholiday.Enabled,(string)"true",(string)"",(string)StyleString,(string)ClassString,(string)chkavSdtemployeeweekreports__mon_isholiday_Columnclass,(string)"",(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -2207,7 +2282,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtemployeeweekreports__leave_formatted_Internalname,StringUtil.RTrim( ((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1)).gxTpr_Leave_formatted),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtemployeeweekreports__leave_formatted_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)edtavSdtemployeeweekreports__leave_formatted_Columnclass,(string)"",(short)0,(int)edtavSdtemployeeweekreports__leave_formatted_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)0,(short)40,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtemployeeweekreports__leave_formatted_Internalname,StringUtil.RTrim( ((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1)).gxTpr_Leave_formatted),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtemployeeweekreports__leave_formatted_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)edtavSdtemployeeweekreports__leave_formatted_Columnclass,(string)"",(short)0,(int)edtavSdtemployeeweekreports__leave_formatted_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)0,(short)40,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -2215,7 +2290,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtemployeeweekreports__expected_formatted_Internalname,StringUtil.RTrim( ((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1)).gxTpr_Expected_formatted),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtemployeeweekreports__expected_formatted_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn ColumnAlignCenter",(string)"",(short)-1,(int)edtavSdtemployeeweekreports__expected_formatted_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)0,(short)40,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtemployeeweekreports__expected_formatted_Internalname,StringUtil.RTrim( ((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1)).gxTpr_Expected_formatted),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtemployeeweekreports__expected_formatted_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn ColumnAlignCenter",(string)"",(short)-1,(int)edtavSdtemployeeweekreports__expected_formatted_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)0,(short)40,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -2223,7 +2298,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtemployeeweekreports__total_formatted_Internalname,StringUtil.RTrim( ((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV58GXV1)).gxTpr_Total_formatted),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtemployeeweekreports__total_formatted_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)edtavSdtemployeeweekreports__total_formatted_Columnclass,(string)edtavSdtemployeeweekreports__total_formatted_Columnheaderclass,(short)-1,(int)edtavSdtemployeeweekreports__total_formatted_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)0,(short)40,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtemployeeweekreports__total_formatted_Internalname,StringUtil.RTrim( ((SdtSDTEmployeeWeekReport)AV15SDTEmployeeWeekReports.Item(AV61GXV1)).gxTpr_Total_formatted),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtemployeeweekreports__total_formatted_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)edtavSdtemployeeweekreports__total_formatted_Columnclass,(string)edtavSdtemployeeweekreports__total_formatted_Columnheaderclass,(short)-1,(int)edtavSdtemployeeweekreports__total_formatted_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)0,(short)40,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
             send_integrity_lvl_hashes582( ) ;
             GridContainer.AddRow(GridRow);
             nGXsfl_40_idx = ((subGrid_Islastpage==1)&&(nGXsfl_40_idx+1>subGrid_fnc_Recordsperpage( )) ? 1 : nGXsfl_40_idx+1);
@@ -2642,22 +2717,22 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'AV15SDTEmployeeWeekReports',fld:'vSDTEMPLOYEEWEEKREPORTS',grid:40,pic:''},{av:'nGXsfl_40_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:40},{av:'nRC_GXsfl_40',ctrl:'GRID',prop:'GridRC',grid:40},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV82Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV52DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV50DateRange',fld:'vDATERANGE',pic:''},{av:'AV45CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:''}]");
-         setEventMetadata("REFRESH",",oparms:[{av:'AV28GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV29GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV30GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{ctrl:'SDTEMPLOYEEWEEKREPORTS__MON_FORMATTED',prop:'Columnheaderclass'},{ctrl:'SDTEMPLOYEEWEEKREPORTS__TUE_FORMATTED',prop:'Columnheaderclass'},{ctrl:'SDTEMPLOYEEWEEKREPORTS__WED_FORMATTED',prop:'Columnheaderclass'},{ctrl:'SDTEMPLOYEEWEEKREPORTS__THU_FORMATTED',prop:'Columnheaderclass'},{ctrl:'SDTEMPLOYEEWEEKREPORTS__FRI_FORMATTED',prop:'Columnheaderclass'},{ctrl:'SDTEMPLOYEEWEEKREPORTS__TOTAL_FORMATTED',prop:'Columnheaderclass'},{av:'AV52DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV15SDTEmployeeWeekReports',fld:'vSDTEMPLOYEEWEEKREPORTS',grid:40,pic:''},{av:'nGXsfl_40_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:40},{av:'GRID_nFirstRecordOnPage'},{av:'nRC_GXsfl_40',ctrl:'GRID',prop:'GridRC',grid:40},{av:'AV50DateRange',fld:'vDATERANGE',pic:''}]}");
-         setEventMetadata("GRIDPAGINATIONBAR.CHANGEPAGE","{handler:'E12582',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV82Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV52DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV50DateRange',fld:'vDATERANGE',pic:''},{av:'AV45CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:''},{av:'AV15SDTEmployeeWeekReports',fld:'vSDTEMPLOYEEWEEKREPORTS',grid:40,pic:''},{av:'nGXsfl_40_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:40},{av:'nRC_GXsfl_40',ctrl:'GRID',prop:'GridRC',grid:40},{av:'Gridpaginationbar_Selectedpage',ctrl:'GRIDPAGINATIONBAR',prop:'SelectedPage'}]");
+         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'AV15SDTEmployeeWeekReports',fld:'vSDTEMPLOYEEWEEKREPORTS',grid:40,pic:''},{av:'nGXsfl_40_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:40},{av:'nRC_GXsfl_40',ctrl:'GRID',prop:'GridRC',grid:40},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV85Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV52DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV50DateRange',fld:'vDATERANGE',pic:''},{av:'AV45CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:''},{av:'AV60EmployeeIds',fld:'vEMPLOYEEIDS',pic:''},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV88Udparg1',fld:'vUDPARG1',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV59ProjectIds',fld:'vPROJECTIDS',pic:''}]");
+         setEventMetadata("REFRESH",",oparms:[{av:'AV28GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV29GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV30GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{ctrl:'SDTEMPLOYEEWEEKREPORTS__MON_FORMATTED',prop:'Columnheaderclass'},{ctrl:'SDTEMPLOYEEWEEKREPORTS__TUE_FORMATTED',prop:'Columnheaderclass'},{ctrl:'SDTEMPLOYEEWEEKREPORTS__WED_FORMATTED',prop:'Columnheaderclass'},{ctrl:'SDTEMPLOYEEWEEKREPORTS__THU_FORMATTED',prop:'Columnheaderclass'},{ctrl:'SDTEMPLOYEEWEEKREPORTS__FRI_FORMATTED',prop:'Columnheaderclass'},{ctrl:'SDTEMPLOYEEWEEKREPORTS__TOTAL_FORMATTED',prop:'Columnheaderclass'},{av:'AV52DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV15SDTEmployeeWeekReports',fld:'vSDTEMPLOYEEWEEKREPORTS',grid:40,pic:''},{av:'nGXsfl_40_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:40},{av:'GRID_nFirstRecordOnPage'},{av:'nRC_GXsfl_40',ctrl:'GRID',prop:'GridRC',grid:40},{av:'AV50DateRange',fld:'vDATERANGE',pic:''},{av:'AV59ProjectIds',fld:'vPROJECTIDS',pic:''},{av:'AV60EmployeeIds',fld:'vEMPLOYEEIDS',pic:''}]}");
+         setEventMetadata("GRIDPAGINATIONBAR.CHANGEPAGE","{handler:'E12582',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV85Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV52DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV50DateRange',fld:'vDATERANGE',pic:''},{av:'AV45CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:''},{av:'AV60EmployeeIds',fld:'vEMPLOYEEIDS',pic:''},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV88Udparg1',fld:'vUDPARG1',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV59ProjectIds',fld:'vPROJECTIDS',pic:''},{av:'AV15SDTEmployeeWeekReports',fld:'vSDTEMPLOYEEWEEKREPORTS',grid:40,pic:''},{av:'nGXsfl_40_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:40},{av:'nRC_GXsfl_40',ctrl:'GRID',prop:'GridRC',grid:40},{av:'Gridpaginationbar_Selectedpage',ctrl:'GRIDPAGINATIONBAR',prop:'SelectedPage'}]");
          setEventMetadata("GRIDPAGINATIONBAR.CHANGEPAGE",",oparms:[]}");
-         setEventMetadata("GRIDPAGINATIONBAR.CHANGEROWSPERPAGE","{handler:'E13582',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV82Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV52DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV50DateRange',fld:'vDATERANGE',pic:''},{av:'AV45CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:''},{av:'AV15SDTEmployeeWeekReports',fld:'vSDTEMPLOYEEWEEKREPORTS',grid:40,pic:''},{av:'nGXsfl_40_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:40},{av:'nRC_GXsfl_40',ctrl:'GRID',prop:'GridRC',grid:40},{av:'Gridpaginationbar_Rowsperpageselectedvalue',ctrl:'GRIDPAGINATIONBAR',prop:'RowsPerPageSelectedValue'}]");
+         setEventMetadata("GRIDPAGINATIONBAR.CHANGEROWSPERPAGE","{handler:'E13582',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV85Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV52DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV50DateRange',fld:'vDATERANGE',pic:''},{av:'AV45CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:''},{av:'AV60EmployeeIds',fld:'vEMPLOYEEIDS',pic:''},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV88Udparg1',fld:'vUDPARG1',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV59ProjectIds',fld:'vPROJECTIDS',pic:''},{av:'AV15SDTEmployeeWeekReports',fld:'vSDTEMPLOYEEWEEKREPORTS',grid:40,pic:''},{av:'nGXsfl_40_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:40},{av:'nRC_GXsfl_40',ctrl:'GRID',prop:'GridRC',grid:40},{av:'Gridpaginationbar_Rowsperpageselectedvalue',ctrl:'GRIDPAGINATIONBAR',prop:'RowsPerPageSelectedValue'}]");
          setEventMetadata("GRIDPAGINATIONBAR.CHANGEROWSPERPAGE",",oparms:[{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'}]}");
          setEventMetadata("GRID.LOAD","{handler:'E19582',iparms:[{av:'AV15SDTEmployeeWeekReports',fld:'vSDTEMPLOYEEWEEKREPORTS',grid:40,pic:''},{av:'nGXsfl_40_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:40},{av:'GRID_nFirstRecordOnPage'},{av:'nRC_GXsfl_40',ctrl:'GRID',prop:'GridRC',grid:40}]");
          setEventMetadata("GRID.LOAD",",oparms:[{ctrl:'SDTEMPLOYEEWEEKREPORTS__MON_FORMATTED',prop:'Columnclass'},{ctrl:'SDTEMPLOYEEWEEKREPORTS__TUE_FORMATTED',prop:'Columnclass'},{ctrl:'SDTEMPLOYEEWEEKREPORTS__WED_FORMATTED',prop:'Columnclass'},{ctrl:'SDTEMPLOYEEWEEKREPORTS__THU_FORMATTED',prop:'Columnclass'},{ctrl:'SDTEMPLOYEEWEEKREPORTS__FRI_FORMATTED',prop:'Columnclass'},{ctrl:'SDTEMPLOYEEWEEKREPORTS__MON_ISHOLIDAY',prop:'Columnclass'},{ctrl:'SDTEMPLOYEEWEEKREPORTS__LEAVE_FORMATTED',prop:'Columnclass'},{ctrl:'SDTEMPLOYEEWEEKREPORTS__TOTAL_FORMATTED',prop:'Columnclass'}]}");
-         setEventMetadata("'DOPREV'","{handler:'E15582',iparms:[{av:'AV50DateRange',fld:'vDATERANGE',pic:''},{av:'AV52DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV45CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:''},{av:'AV15SDTEmployeeWeekReports',fld:'vSDTEMPLOYEEWEEKREPORTS',grid:40,pic:''},{av:'nGXsfl_40_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:40},{av:'GRID_nFirstRecordOnPage'},{av:'nRC_GXsfl_40',ctrl:'GRID',prop:'GridRC',grid:40},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV82Pgmname',fld:'vPGMNAME',pic:'',hsh:true}]");
-         setEventMetadata("'DOPREV'",",oparms:[{av:'AV50DateRange',fld:'vDATERANGE',pic:''},{av:'AV52DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV15SDTEmployeeWeekReports',fld:'vSDTEMPLOYEEWEEKREPORTS',grid:40,pic:''},{av:'nGXsfl_40_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:40},{av:'GRID_nFirstRecordOnPage'},{av:'nRC_GXsfl_40',ctrl:'GRID',prop:'GridRC',grid:40}]}");
-         setEventMetadata("'DONEXT'","{handler:'E16582',iparms:[{av:'AV50DateRange',fld:'vDATERANGE',pic:''},{av:'AV52DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV45CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:''},{av:'AV15SDTEmployeeWeekReports',fld:'vSDTEMPLOYEEWEEKREPORTS',grid:40,pic:''},{av:'nGXsfl_40_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:40},{av:'GRID_nFirstRecordOnPage'},{av:'nRC_GXsfl_40',ctrl:'GRID',prop:'GridRC',grid:40},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV82Pgmname',fld:'vPGMNAME',pic:'',hsh:true}]");
-         setEventMetadata("'DONEXT'",",oparms:[{av:'AV50DateRange',fld:'vDATERANGE',pic:''},{av:'AV52DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV15SDTEmployeeWeekReports',fld:'vSDTEMPLOYEEWEEKREPORTS',grid:40,pic:''},{av:'nGXsfl_40_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:40},{av:'GRID_nFirstRecordOnPage'},{av:'nRC_GXsfl_40',ctrl:'GRID',prop:'GridRC',grid:40}]}");
-         setEventMetadata("COMBO_COMPANYLOCATIONID.ONOPTIONCLICKED","{handler:'E11582',iparms:[{av:'Combo_companylocationid_Selectedvalue_get',ctrl:'COMBO_COMPANYLOCATIONID',prop:'SelectedValue_get'},{av:'AV52DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV50DateRange',fld:'vDATERANGE',pic:''},{av:'AV45CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:''},{av:'AV15SDTEmployeeWeekReports',fld:'vSDTEMPLOYEEWEEKREPORTS',grid:40,pic:''},{av:'nGXsfl_40_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:40},{av:'GRID_nFirstRecordOnPage'},{av:'nRC_GXsfl_40',ctrl:'GRID',prop:'GridRC',grid:40},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV82Pgmname',fld:'vPGMNAME',pic:'',hsh:true}]");
-         setEventMetadata("COMBO_COMPANYLOCATIONID.ONOPTIONCLICKED",",oparms:[{av:'AV45CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:''},{av:'AV52DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV15SDTEmployeeWeekReports',fld:'vSDTEMPLOYEEWEEKREPORTS',grid:40,pic:''},{av:'nGXsfl_40_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:40},{av:'GRID_nFirstRecordOnPage'},{av:'nRC_GXsfl_40',ctrl:'GRID',prop:'GridRC',grid:40},{av:'AV50DateRange',fld:'vDATERANGE',pic:''}]}");
-         setEventMetadata("DATERANGE_RANGEPICKER.DATERANGECHANGED","{handler:'E14582',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV82Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV52DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV50DateRange',fld:'vDATERANGE',pic:''},{av:'AV45CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:''},{av:'AV15SDTEmployeeWeekReports',fld:'vSDTEMPLOYEEWEEKREPORTS',grid:40,pic:''},{av:'nGXsfl_40_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:40},{av:'nRC_GXsfl_40',ctrl:'GRID',prop:'GridRC',grid:40}]");
-         setEventMetadata("DATERANGE_RANGEPICKER.DATERANGECHANGED",",oparms:[{av:'AV53DateRange_RangePickerOptions',fld:'vDATERANGE_RANGEPICKEROPTIONS',pic:''},{av:'AV28GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV29GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV30GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{ctrl:'SDTEMPLOYEEWEEKREPORTS__MON_FORMATTED',prop:'Columnheaderclass'},{ctrl:'SDTEMPLOYEEWEEKREPORTS__TUE_FORMATTED',prop:'Columnheaderclass'},{ctrl:'SDTEMPLOYEEWEEKREPORTS__WED_FORMATTED',prop:'Columnheaderclass'},{ctrl:'SDTEMPLOYEEWEEKREPORTS__THU_FORMATTED',prop:'Columnheaderclass'},{ctrl:'SDTEMPLOYEEWEEKREPORTS__FRI_FORMATTED',prop:'Columnheaderclass'},{ctrl:'SDTEMPLOYEEWEEKREPORTS__TOTAL_FORMATTED',prop:'Columnheaderclass'},{av:'AV52DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV15SDTEmployeeWeekReports',fld:'vSDTEMPLOYEEWEEKREPORTS',grid:40,pic:''},{av:'nGXsfl_40_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:40},{av:'GRID_nFirstRecordOnPage'},{av:'nRC_GXsfl_40',ctrl:'GRID',prop:'GridRC',grid:40},{av:'AV50DateRange',fld:'vDATERANGE',pic:''}]}");
+         setEventMetadata("'DOPREV'","{handler:'E15582',iparms:[{av:'AV50DateRange',fld:'vDATERANGE',pic:''},{av:'AV52DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV45CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:''},{av:'AV60EmployeeIds',fld:'vEMPLOYEEIDS',pic:''},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV88Udparg1',fld:'vUDPARG1',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV59ProjectIds',fld:'vPROJECTIDS',pic:''},{av:'AV15SDTEmployeeWeekReports',fld:'vSDTEMPLOYEEWEEKREPORTS',grid:40,pic:''},{av:'nGXsfl_40_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:40},{av:'GRID_nFirstRecordOnPage'},{av:'nRC_GXsfl_40',ctrl:'GRID',prop:'GridRC',grid:40},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV85Pgmname',fld:'vPGMNAME',pic:'',hsh:true}]");
+         setEventMetadata("'DOPREV'",",oparms:[{av:'AV50DateRange',fld:'vDATERANGE',pic:''},{av:'AV52DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV15SDTEmployeeWeekReports',fld:'vSDTEMPLOYEEWEEKREPORTS',grid:40,pic:''},{av:'nGXsfl_40_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:40},{av:'GRID_nFirstRecordOnPage'},{av:'nRC_GXsfl_40',ctrl:'GRID',prop:'GridRC',grid:40},{av:'AV59ProjectIds',fld:'vPROJECTIDS',pic:''},{av:'AV60EmployeeIds',fld:'vEMPLOYEEIDS',pic:''}]}");
+         setEventMetadata("'DONEXT'","{handler:'E16582',iparms:[{av:'AV50DateRange',fld:'vDATERANGE',pic:''},{av:'AV52DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV45CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:''},{av:'AV60EmployeeIds',fld:'vEMPLOYEEIDS',pic:''},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV88Udparg1',fld:'vUDPARG1',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV59ProjectIds',fld:'vPROJECTIDS',pic:''},{av:'AV15SDTEmployeeWeekReports',fld:'vSDTEMPLOYEEWEEKREPORTS',grid:40,pic:''},{av:'nGXsfl_40_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:40},{av:'GRID_nFirstRecordOnPage'},{av:'nRC_GXsfl_40',ctrl:'GRID',prop:'GridRC',grid:40},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV85Pgmname',fld:'vPGMNAME',pic:'',hsh:true}]");
+         setEventMetadata("'DONEXT'",",oparms:[{av:'AV50DateRange',fld:'vDATERANGE',pic:''},{av:'AV52DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV15SDTEmployeeWeekReports',fld:'vSDTEMPLOYEEWEEKREPORTS',grid:40,pic:''},{av:'nGXsfl_40_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:40},{av:'GRID_nFirstRecordOnPage'},{av:'nRC_GXsfl_40',ctrl:'GRID',prop:'GridRC',grid:40},{av:'AV59ProjectIds',fld:'vPROJECTIDS',pic:''},{av:'AV60EmployeeIds',fld:'vEMPLOYEEIDS',pic:''}]}");
+         setEventMetadata("COMBO_COMPANYLOCATIONID.ONOPTIONCLICKED","{handler:'E11582',iparms:[{av:'Combo_companylocationid_Selectedvalue_get',ctrl:'COMBO_COMPANYLOCATIONID',prop:'SelectedValue_get'},{av:'AV52DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV50DateRange',fld:'vDATERANGE',pic:''},{av:'AV45CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:''},{av:'AV60EmployeeIds',fld:'vEMPLOYEEIDS',pic:''},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV88Udparg1',fld:'vUDPARG1',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV59ProjectIds',fld:'vPROJECTIDS',pic:''},{av:'AV15SDTEmployeeWeekReports',fld:'vSDTEMPLOYEEWEEKREPORTS',grid:40,pic:''},{av:'nGXsfl_40_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:40},{av:'GRID_nFirstRecordOnPage'},{av:'nRC_GXsfl_40',ctrl:'GRID',prop:'GridRC',grid:40},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV85Pgmname',fld:'vPGMNAME',pic:'',hsh:true}]");
+         setEventMetadata("COMBO_COMPANYLOCATIONID.ONOPTIONCLICKED",",oparms:[{av:'AV45CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:''},{av:'AV52DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV15SDTEmployeeWeekReports',fld:'vSDTEMPLOYEEWEEKREPORTS',grid:40,pic:''},{av:'nGXsfl_40_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:40},{av:'GRID_nFirstRecordOnPage'},{av:'nRC_GXsfl_40',ctrl:'GRID',prop:'GridRC',grid:40},{av:'AV50DateRange',fld:'vDATERANGE',pic:''},{av:'AV59ProjectIds',fld:'vPROJECTIDS',pic:''},{av:'AV60EmployeeIds',fld:'vEMPLOYEEIDS',pic:''}]}");
+         setEventMetadata("DATERANGE_RANGEPICKER.DATERANGECHANGED","{handler:'E14582',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV85Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV52DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV50DateRange',fld:'vDATERANGE',pic:''},{av:'AV45CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:''},{av:'AV60EmployeeIds',fld:'vEMPLOYEEIDS',pic:''},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV88Udparg1',fld:'vUDPARG1',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV59ProjectIds',fld:'vPROJECTIDS',pic:''},{av:'AV15SDTEmployeeWeekReports',fld:'vSDTEMPLOYEEWEEKREPORTS',grid:40,pic:''},{av:'nGXsfl_40_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:40},{av:'nRC_GXsfl_40',ctrl:'GRID',prop:'GridRC',grid:40}]");
+         setEventMetadata("DATERANGE_RANGEPICKER.DATERANGECHANGED",",oparms:[{av:'AV53DateRange_RangePickerOptions',fld:'vDATERANGE_RANGEPICKEROPTIONS',pic:''},{av:'AV28GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV29GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV30GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{ctrl:'SDTEMPLOYEEWEEKREPORTS__MON_FORMATTED',prop:'Columnheaderclass'},{ctrl:'SDTEMPLOYEEWEEKREPORTS__TUE_FORMATTED',prop:'Columnheaderclass'},{ctrl:'SDTEMPLOYEEWEEKREPORTS__WED_FORMATTED',prop:'Columnheaderclass'},{ctrl:'SDTEMPLOYEEWEEKREPORTS__THU_FORMATTED',prop:'Columnheaderclass'},{ctrl:'SDTEMPLOYEEWEEKREPORTS__FRI_FORMATTED',prop:'Columnheaderclass'},{ctrl:'SDTEMPLOYEEWEEKREPORTS__TOTAL_FORMATTED',prop:'Columnheaderclass'},{av:'AV52DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV15SDTEmployeeWeekReports',fld:'vSDTEMPLOYEEWEEKREPORTS',grid:40,pic:''},{av:'nGXsfl_40_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:40},{av:'GRID_nFirstRecordOnPage'},{av:'nRC_GXsfl_40',ctrl:'GRID',prop:'GridRC',grid:40},{av:'AV50DateRange',fld:'vDATERANGE',pic:''},{av:'AV59ProjectIds',fld:'vPROJECTIDS',pic:''},{av:'AV60EmployeeIds',fld:'vEMPLOYEEIDS',pic:''}]}");
          setEventMetadata("NULL","{handler:'Validv_Gxv23',iparms:[]");
          setEventMetadata("NULL",",oparms:[]}");
          return  ;
@@ -2683,10 +2758,12 @@ namespace GeneXus.Programs {
          Combo_companylocationid_Selectedvalue_get = "";
          gxfirstwebparm = "";
          gxfirstwebparm_bkp = "";
-         AV82Pgmname = "";
+         AV85Pgmname = "";
          AV52DateRange_To = DateTime.MinValue;
          AV50DateRange = DateTime.MinValue;
          AV45CompanyLocationId = new GxSimpleCollection<long>();
+         AV60EmployeeIds = new GxSimpleCollection<long>();
+         AV59ProjectIds = new GxSimpleCollection<long>();
          AV15SDTEmployeeWeekReports = new GXBaseCollection<SdtSDTEmployeeWeekReport>( context, "SDTEmployeeWeekReport", "YTT_version4");
          sDynURL = "";
          FormProcess = "";
@@ -2731,7 +2808,11 @@ namespace GeneXus.Programs {
          AV47Combo_DataItem = new GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item(context);
          Combo_companylocationid_Selectedvalue_set = "";
          GXt_SdtWWPDateRangePickerOptions3 = new GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions(context);
-         GXt_objcol_SdtSDTEmployeeWeekReport5 = new GXBaseCollection<SdtSDTEmployeeWeekReport>( context, "SDTEmployeeWeekReport", "YTT_version4");
+         GXt_objcol_SdtSDTEmployeeWeekReport6 = new GXBaseCollection<SdtSDTEmployeeWeekReport>( context, "SDTEmployeeWeekReport", "YTT_version4");
+         H00584_A166ProjectManagerId = new long[1] ;
+         H00584_n166ProjectManagerId = new bool[] {false} ;
+         H00584_A102ProjectId = new long[1] ;
+         GXt_objcol_int7 = new GxSimpleCollection<long>();
          ucBtnprev = new GXUserControl();
          lblTextblockdaterange_rangetext_Jsonclick = "";
          TempTags = "";
@@ -2750,11 +2831,14 @@ namespace GeneXus.Programs {
                , new Object[] {
                H00583_A157CompanyLocationId, H00583_A158CompanyLocationName
                }
+               , new Object[] {
+               H00584_A166ProjectManagerId, H00584_n166ProjectManagerId, H00584_A102ProjectId
+               }
             }
          );
-         AV82Pgmname = "EmployeeWeekReport";
+         AV85Pgmname = "EmployeeWeekReport";
          /* GeneXus formulas. */
-         AV82Pgmname = "EmployeeWeekReport";
+         AV85Pgmname = "EmployeeWeekReport";
          edtavSdtemployeeweekreports__employeename_Enabled = 0;
          edtavSdtemployeeweekreports__mon_Enabled = 0;
          edtavSdtemployeeweekreports__tue_Enabled = 0;
@@ -2780,6 +2864,8 @@ namespace GeneXus.Programs {
       }
 
       private short GRID_nEOF ;
+      private short nRcdExists_5 ;
+      private short nIsMod_5 ;
       private short nRcdExists_4 ;
       private short nIsMod_4 ;
       private short nRcdExists_3 ;
@@ -2804,7 +2890,7 @@ namespace GeneXus.Programs {
       private int Gridpaginationbar_Rowsperpageselectedvalue ;
       private int nRC_GXsfl_40 ;
       private int nGXsfl_40_idx=1 ;
-      private int AV58GXV1 ;
+      private int AV61GXV1 ;
       private int Gridpaginationbar_Pagestoshow ;
       private int subGrid_Islastpage ;
       private int edtavSdtemployeeweekreports__employeename_Enabled ;
@@ -2841,6 +2927,9 @@ namespace GeneXus.Programs {
       private int subGrid_Selectioncolor ;
       private int subGrid_Hoveringcolor ;
       private long GRID_nFirstRecordOnPage ;
+      private long A166ProjectManagerId ;
+      private long AV88Udparg1 ;
+      private long A102ProjectId ;
       private long AV28GridCurrentPage ;
       private long AV29GridPageCount ;
       private long GRID_nCurrentRecord ;
@@ -2856,7 +2945,7 @@ namespace GeneXus.Programs {
       private string gxfirstwebparm ;
       private string gxfirstwebparm_bkp ;
       private string sGXsfl_40_idx="0001" ;
-      private string AV82Pgmname ;
+      private string AV85Pgmname ;
       private string sDynURL ;
       private string FormProcess ;
       private string bodyStyle ;
@@ -2985,6 +3074,7 @@ namespace GeneXus.Programs {
       private DateTime AV50DateRange ;
       private bool entryPointCalled ;
       private bool toggleJsOutput ;
+      private bool n166ProjectManagerId ;
       private bool wbLoad ;
       private bool Combo_companylocationid_Allowmultipleselection ;
       private bool Combo_companylocationid_Includeonlyselectedoption ;
@@ -3001,10 +3091,15 @@ namespace GeneXus.Programs {
       private bool returnInSub ;
       private bool Combo_companylocationid_Enabled ;
       private bool gx_refresh_fired ;
+      private bool AV58IsProjectManager ;
+      private bool GXt_boolean5 ;
       private bool gx_BV40 ;
       private string AV30GridAppliedFilters ;
       private string AV51DateRange_RangeText ;
       private GxSimpleCollection<long> AV45CompanyLocationId ;
+      private GxSimpleCollection<long> AV60EmployeeIds ;
+      private GxSimpleCollection<long> AV59ProjectIds ;
+      private GxSimpleCollection<long> GXt_objcol_int7 ;
       private IGxSession AV22Session ;
       private GXWebGrid GridContainer ;
       private GXWebRow GridRow ;
@@ -3024,11 +3119,14 @@ namespace GeneXus.Programs {
       private long[] H00582_A157CompanyLocationId ;
       private long[] H00583_A157CompanyLocationId ;
       private string[] H00583_A158CompanyLocationName ;
+      private long[] H00584_A166ProjectManagerId ;
+      private bool[] H00584_n166ProjectManagerId ;
+      private long[] H00584_A102ProjectId ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
       private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item> AV46CompanyLocationId_Data ;
       private GXBaseCollection<SdtSDTEmployeeWeekReport> AV15SDTEmployeeWeekReports ;
-      private GXBaseCollection<SdtSDTEmployeeWeekReport> GXt_objcol_SdtSDTEmployeeWeekReport5 ;
+      private GXBaseCollection<SdtSDTEmployeeWeekReport> GXt_objcol_SdtSDTEmployeeWeekReport6 ;
       private GXWebForm Form ;
       private GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item AV47Combo_DataItem ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions AV53DateRange_RangePickerOptions ;
@@ -3048,8 +3146,8 @@ namespace GeneXus.Programs {
       {
          System.Text.StringBuilder sWhereString = new System.Text.StringBuilder();
          string scmdbuf;
-         short[] GXv_int6 = new short[1];
-         Object[] GXv_Object7 = new Object[2];
+         short[] GXv_int8 = new short[1];
+         Object[] GXv_Object9 = new Object[2];
          scmdbuf = "SELECT CompanyLocationId, CompanyLocationName FROM CompanyLocation";
          if ( ! (0==AV49EmployeeCompanyLocationId) )
          {
@@ -3057,13 +3155,13 @@ namespace GeneXus.Programs {
          }
          else
          {
-            GXv_int6[0] = 1;
+            GXv_int8[0] = 1;
          }
          scmdbuf += sWhereString;
          scmdbuf += " ORDER BY CompanyLocationName";
-         GXv_Object7[0] = scmdbuf;
-         GXv_Object7[1] = GXv_int6;
-         return GXv_Object7 ;
+         GXv_Object9[0] = scmdbuf;
+         GXv_Object9[1] = GXv_int8;
+         return GXv_Object9 ;
       }
 
       public override Object [] getDynamicStatement( int cursor ,
@@ -3084,6 +3182,7 @@ namespace GeneXus.Programs {
          return new Cursor[] {
           new ForEachCursor(def[0])
          ,new ForEachCursor(def[1])
+         ,new ForEachCursor(def[2])
        };
     }
 
@@ -3096,6 +3195,10 @@ namespace GeneXus.Programs {
           prmH00582 = new Object[] {
           new ParDef("AV48LoggedInEmployeeId",GXType.Int64,10,0)
           };
+          Object[] prmH00584;
+          prmH00584 = new Object[] {
+          new ParDef("AV88Udparg1",GXType.Int64,10,0)
+          };
           Object[] prmH00583;
           prmH00583 = new Object[] {
           new ParDef("AV49EmployeeCompanyLocationId",GXType.Int64,10,0)
@@ -3103,6 +3206,7 @@ namespace GeneXus.Programs {
           def= new CursorDef[] {
               new CursorDef("H00582", "SELECT T1.CompanyId, T1.EmployeeId, T2.CompanyLocationId FROM (Employee T1 INNER JOIN Company T2 ON T2.CompanyId = T1.CompanyId) WHERE T1.EmployeeId = :AV48LoggedInEmployeeId ORDER BY T1.EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00582,1, GxCacheFrequency.OFF ,false,true )
              ,new CursorDef("H00583", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00583,100, GxCacheFrequency.OFF ,false,false )
+             ,new CursorDef("H00584", "SELECT ProjectManagerId, ProjectId FROM Project WHERE ProjectManagerId = :AV88Udparg1 ORDER BY ProjectManagerId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00584,100, GxCacheFrequency.OFF ,false,false )
           };
        }
     }
@@ -3121,6 +3225,11 @@ namespace GeneXus.Programs {
              case 1 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);
                 ((string[]) buf[1])[0] = rslt.getString(2, 100);
+                return;
+             case 2 :
+                ((long[]) buf[0])[0] = rslt.getLong(1);
+                ((bool[]) buf[1])[0] = rslt.wasNull(1);
+                ((long[]) buf[2])[0] = rslt.getLong(2);
                 return;
        }
     }
