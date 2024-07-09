@@ -511,13 +511,13 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+chkEmployeeIsManager_Internalname+"\"", "", "div");
             /* Attribute/Variable Label */
-            GxWebStd.gx_label_element( context, chkEmployeeIsManager_Internalname, "Is Manager", " AttributeLabel", 1, true, "");
+            GxWebStd.gx_label_element( context, chkEmployeeIsManager_Internalname, "Is HR Manager", " AttributeLabel", 1, true, "");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
             /* Check box */
             ClassString = "Attribute";
             StyleString = "";
-            GxWebStd.gx_checkbox_ctrl( context, chkEmployeeIsManager_Internalname, StringUtil.BoolToStr( A110EmployeeIsManager), "", "Is Manager", 1, chkEmployeeIsManager.Enabled, "true", "", StyleString, ClassString, "", "", "");
+            GxWebStd.gx_checkbox_ctrl( context, chkEmployeeIsManager_Internalname, StringUtil.BoolToStr( A110EmployeeIsManager), "", "Is HR Manager", 1, chkEmployeeIsManager.Enabled, "true", "", StyleString, ClassString, "", "", "");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -1344,7 +1344,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247615435911", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247914373267", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1360,7 +1360,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("employeegeneral.js", "?20247615435911", false, true);
+         context.AddJavascriptSource("employeegeneral.js", "?20247914373267", false, true);
          /* End function include_jscripts */
       }
 
@@ -1430,7 +1430,7 @@ namespace GeneXus.Programs {
          }
          init_default_properties( ) ;
          chkEmployeeIsActive.Caption = "Is Active";
-         chkEmployeeIsManager.Caption = "Is Manager";
+         chkEmployeeIsManager.Caption = "Is HR Manager";
          edtEmployeeBalance_Enabled = 0;
          edtGAMUserGUID_Enabled = 0;
          edtEmployeeName_Enabled = 0;

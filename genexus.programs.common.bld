@@ -41,10 +41,10 @@ type_SdtCompanyLocation.cs
 type_SdtCompany.cs
 type_SdtProject.cs
 type_SdtWorkHourLog.cs
+type_SdtLeaveType.cs
+type_SdtLeaveRequest.cs
 type_SdtEmployee.cs
 type_SdtEmployee_Project.cs
-type_SdtLeaveRequest.cs
-type_SdtLeaveType.cs
 gxdomainwwpdomains.cs
 genexusreporting\gxdomainqueryviewervisible.cs
 gxdomainhomesampledatastatus.cs

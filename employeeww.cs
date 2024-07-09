@@ -2225,7 +2225,7 @@ namespace GeneXus.Programs {
          AV25ColumnsSelector = new GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector(context);
          new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV25ColumnsSelector,  "EmployeeName",  "",  "Employee Name",  true,  "") ;
          new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV25ColumnsSelector,  "EmployeeEmail",  "",  "Email",  true,  "") ;
-         new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV25ColumnsSelector,  "EmployeeIsManager",  "",  "Is Manager",  true,  "") ;
+         new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV25ColumnsSelector,  "EmployeeIsManager",  "",  "Is HR Manager",  true,  "") ;
          new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV25ColumnsSelector,  "EmployeeIsActive",  "",  "Is Active",  true,  "") ;
          new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV25ColumnsSelector,  "EmployeeVactionDays",  "",  "Vacation Days",  true,  "") ;
          new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV25ColumnsSelector,  "EmployeeBalance",  "",  "Balance",  true,  "") ;
@@ -2442,7 +2442,7 @@ namespace GeneXus.Programs {
          new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV15GridState,  "FILTERFULLTEXT",  "Main filter",  !String.IsNullOrEmpty(StringUtil.RTrim( AV20FilterFullText)),  0,  AV20FilterFullText,  AV20FilterFullText,  false,  "",  "") ;
          new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalueandsel(context ).execute( ref  AV15GridState,  "TFEMPLOYEENAME",  "Employee Name",  !String.IsNullOrEmpty(StringUtil.RTrim( AV66TFEmployeeName)),  0,  AV66TFEmployeeName,  AV66TFEmployeeName,  false,  "",  "",  !String.IsNullOrEmpty(StringUtil.RTrim( AV67TFEmployeeName_Sel)),  AV67TFEmployeeName_Sel,  AV67TFEmployeeName_Sel) ;
          new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalueandsel(context ).execute( ref  AV15GridState,  "TFEMPLOYEEEMAIL",  "Email",  !String.IsNullOrEmpty(StringUtil.RTrim( AV37TFEmployeeEmail)),  0,  AV37TFEmployeeEmail,  AV37TFEmployeeEmail,  false,  "",  "",  !String.IsNullOrEmpty(StringUtil.RTrim( AV38TFEmployeeEmail_Sel)),  AV38TFEmployeeEmail_Sel,  AV38TFEmployeeEmail_Sel) ;
-         new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV15GridState,  "TFEMPLOYEEISMANAGER_SEL",  "Is Manager",  !(0==AV43TFEmployeeIsManager_Sel),  0,  StringUtil.Trim( StringUtil.Str( (decimal)(AV43TFEmployeeIsManager_Sel), 1, 0)),  ((AV43TFEmployeeIsManager_Sel==1) ? "Checked" : "Unchecked"),  false,  "",  "") ;
+         new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV15GridState,  "TFEMPLOYEEISMANAGER_SEL",  "Is HR Manager",  !(0==AV43TFEmployeeIsManager_Sel),  0,  StringUtil.Trim( StringUtil.Str( (decimal)(AV43TFEmployeeIsManager_Sel), 1, 0)),  ((AV43TFEmployeeIsManager_Sel==1) ? "Checked" : "Unchecked"),  false,  "",  "") ;
          new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV15GridState,  "TFEMPLOYEEISACTIVE_SEL",  "Is Active",  !(0==AV46TFEmployeeIsActive_Sel),  0,  StringUtil.Trim( StringUtil.Str( (decimal)(AV46TFEmployeeIsActive_Sel), 1, 0)),  ((AV46TFEmployeeIsActive_Sel==1) ? "Checked" : "Unchecked"),  false,  "",  "") ;
          new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV15GridState,  "TFEMPLOYEEVACTIONDAYS",  "Vacation Days",  !((Convert.ToDecimal(0)==AV47TFEmployeeVactionDays)&&(Convert.ToDecimal(0)==AV48TFEmployeeVactionDays_To)),  0,  StringUtil.Trim( StringUtil.Str( AV47TFEmployeeVactionDays, 4, 1)),  ((Convert.ToDecimal(0)==AV47TFEmployeeVactionDays) ? "" : StringUtil.Trim( context.localUtil.Format( AV47TFEmployeeVactionDays, "Z9.9"))),  true,  StringUtil.Trim( StringUtil.Str( AV48TFEmployeeVactionDays_To, 4, 1)),  ((Convert.ToDecimal(0)==AV48TFEmployeeVactionDays_To) ? "" : StringUtil.Trim( context.localUtil.Format( AV48TFEmployeeVactionDays_To, "Z9.9")))) ;
          new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV15GridState,  "TFEMPLOYEEBALANCE",  "Balance",  !((Convert.ToDecimal(0)==AV49TFEmployeeBalance)&&(Convert.ToDecimal(0)==AV50TFEmployeeBalance_To)),  0,  StringUtil.Trim( StringUtil.Str( AV49TFEmployeeBalance, 4, 1)),  ((Convert.ToDecimal(0)==AV49TFEmployeeBalance) ? "" : StringUtil.Trim( context.localUtil.Format( AV49TFEmployeeBalance, "Z9.9"))),  true,  StringUtil.Trim( StringUtil.Str( AV50TFEmployeeBalance_To, 4, 1)),  ((Convert.ToDecimal(0)==AV50TFEmployeeBalance_To) ? "" : StringUtil.Trim( context.localUtil.Format( AV50TFEmployeeBalance_To, "Z9.9")))) ;
@@ -2628,7 +2628,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247615443930", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024791438976", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2644,7 +2644,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("employeeww.js", "?20247615443932", false, true);
+         context.AddJavascriptSource("employeeww.js", "?2024791438978", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -3001,7 +3001,7 @@ namespace GeneXus.Programs {
             context.SendWebValue( "") ;
             context.WriteHtmlTextNl( "</th>") ;
             context.WriteHtmlText( "<th align=\""+""+"\" "+" nowrap=\"nowrap\" "+" class=\""+"AttributeCheckBox"+"\" "+" style=\""+((chkEmployeeIsManager.Visible==0) ? "display:none;" : "")+""+"\" "+">") ;
-            context.SendWebValue( "Is Manager") ;
+            context.SendWebValue( "Is HR Manager") ;
             context.WriteHtmlTextNl( "</th>") ;
             context.WriteHtmlText( "<th align=\""+"start"+"\" "+" nowrap=\"nowrap\" "+" class=\""+"Attribute"+"\" "+" style=\""+"display:none;"+""+"\" "+">") ;
             context.SendWebValue( "") ;
