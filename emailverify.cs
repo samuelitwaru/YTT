@@ -501,7 +501,7 @@ namespace GeneXus.Programs {
             TempTags = "  onfocus=\"gx.evt.onfocus(this, 51,'',false,'',0)\"";
             ClassString = "ButtonMaterial";
             StyleString = "";
-            GxWebStd.gx_button_ctrl( context, bttBtnenter_Internalname, "", "Confirm", bttBtnenter_Jsonclick, 5, "Confirm", "", StyleString, ClassString, 1, 1, "standard", "'"+""+"'"+",false,"+"'"+"E\\'SETPASSWORD\\'."+"'", TempTags, "", context.GetButtonType( ), "HLP_EmailVerify.htm");
+            GxWebStd.gx_button_ctrl( context, bttBtnenter_Internalname, "", "Confirm", bttBtnenter_Jsonclick, 5, "Confirm", "", StyleString, ClassString, 1, 1, "standard", "'"+""+"'"+",false,"+"'"+"E\\'DO SETPASSWORD\\'."+"'", TempTags, "", context.GetButtonType( ), "HLP_EmailVerify.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -599,18 +599,20 @@ namespace GeneXus.Programs {
                                  dynload_actions( ) ;
                               }
                            }
+                           else if ( StringUtil.StrCmp(sEvt, "'DO SETPASSWORD'") == 0 )
+                           {
+                              context.wbHandled = 1;
+                              dynload_actions( ) ;
+                              /* Execute user event: 'Do SetPassword' */
+                              E13502 ();
+                           }
                            else if ( StringUtil.StrCmp(sEvt, "LOAD") == 0 )
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
                               /* Execute user event: Load */
-                              E13502 ();
+                              E14502 ();
                               /* No code required for Cancel button. It is implemented as the Reset button. */
-                           }
-                           else if ( StringUtil.StrCmp(sEvt, "'SETPASSWORD'") == 0 )
-                           {
-                              context.wbHandled = 1;
-                              dynload_actions( ) ;
                            }
                            else if ( StringUtil.StrCmp(sEvt, "LSCR") == 0 )
                            {
@@ -724,7 +726,7 @@ namespace GeneXus.Programs {
          if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
          {
             /* Execute user event: Load */
-            E13502 ();
+            E14502 ();
             WB500( ) ;
          }
       }
@@ -818,6 +820,18 @@ namespace GeneXus.Programs {
       protected void E12502( )
       {
          /* Enter Routine */
+         returnInSub = false;
+         /* Execute user subroutine: 'SETPASSWORD' */
+         S112 ();
+         if (returnInSub) return;
+         /*  Sending Event outputs  */
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV44GAMUser", AV44GAMUser);
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV5AdditionalParameter", AV5AdditionalParameter);
+      }
+
+      protected void E13502( )
+      {
+         /* 'Do SetPassword' Routine */
          returnInSub = false;
          /* Execute user subroutine: 'SETPASSWORD' */
          S112 ();
@@ -965,7 +979,7 @@ namespace GeneXus.Programs {
       {
       }
 
-      protected void E13502( )
+      protected void E14502( )
       {
          /* Load Routine */
          returnInSub = false;
@@ -1016,7 +1030,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202471015332977", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202471015432075", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1032,7 +1046,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("emailverify.js", "?202471015332979", false, true);
+         context.AddJavascriptSource("emailverify.js", "?202471015432077", false, true);
          /* End function include_jscripts */
       }
 
@@ -1098,6 +1112,8 @@ namespace GeneXus.Programs {
          setEventMetadata("REFRESH",",oparms:[]}");
          setEventMetadata("ENTER","{handler:'E12502',iparms:[{av:'AV49NewPassword',fld:'vNEWPASSWORD',pic:''},{av:'AV50ConfirmPassword',fld:'vCONFIRMPASSWORD',pic:''},{av:'AV45GamGuid',fld:'vGAMGUID',pic:'',hsh:true},{av:'AV48ActivationKey',fld:'vACTIVATIONKEY',pic:'',hsh:true}]");
          setEventMetadata("ENTER",",oparms:[]}");
+         setEventMetadata("'DO SETPASSWORD'","{handler:'E13502',iparms:[{av:'AV49NewPassword',fld:'vNEWPASSWORD',pic:''},{av:'AV50ConfirmPassword',fld:'vCONFIRMPASSWORD',pic:''},{av:'AV45GamGuid',fld:'vGAMGUID',pic:'',hsh:true},{av:'AV48ActivationKey',fld:'vACTIVATIONKEY',pic:'',hsh:true}]");
+         setEventMetadata("'DO SETPASSWORD'",",oparms:[]}");
          return  ;
       }
 
