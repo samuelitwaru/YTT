@@ -854,6 +854,13 @@ namespace GeneXus.Programs {
          {
             AV44GAMUser.load( AV45GamGuid);
             AV18isOK = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).activateuser(AV48ActivationKey, true, out  AV11Errors);
+            AV53GXV1 = 1;
+            while ( AV53GXV1 <= AV11Errors.Count )
+            {
+               AV10Error = ((GeneXus.Programs.genexussecurity.SdtGAMError)AV11Errors.Item(AV53GXV1));
+               GX_msglist.addItem(AV10Error.gxTpr_Message);
+               AV53GXV1 = (int)(AV53GXV1+1);
+            }
             if ( AV18isOK )
             {
                AV51ChangePwdOK = AV44GAMUser.setpassword(AV34UserPassword, out  AV11Errors);
@@ -873,6 +880,7 @@ namespace GeneXus.Programs {
                      AV52Employee.gxTpr_Employeeisactive = true;
                      AV52Employee.Save();
                   }
+                  GX_msglist.addItem("Commiting");
                   context.CommitDataStores("emailverify",pr_default);
                   /* Execute user subroutine: 'LOGINUSER' */
                   S112 ();
@@ -905,10 +913,10 @@ namespace GeneXus.Programs {
       {
          /* 'DISPLAYMESSAGES' Routine */
          returnInSub = false;
-         AV53GXV1 = 1;
-         while ( AV53GXV1 <= AV11Errors.Count )
+         AV54GXV2 = 1;
+         while ( AV54GXV2 <= AV11Errors.Count )
          {
-            AV10Error = ((GeneXus.Programs.genexussecurity.SdtGAMError)AV11Errors.Item(AV53GXV1));
+            AV10Error = ((GeneXus.Programs.genexussecurity.SdtGAMError)AV11Errors.Item(AV54GXV2));
             if ( AV10Error.gxTpr_Code == 52 )
             {
                GX_msglist.addItem("Your activation link has expired, Please contact the manager");
@@ -917,7 +925,7 @@ namespace GeneXus.Programs {
             {
                GX_msglist.addItem(StringUtil.Format( "Error: %1 (GAM%2)", AV10Error.gxTpr_Message, StringUtil.LTrimStr( (decimal)(AV10Error.gxTpr_Code), 12, 0), "", "", "", "", "", "", ""));
             }
-            AV53GXV1 = (int)(AV53GXV1+1);
+            AV54GXV2 = (int)(AV54GXV2+1);
          }
       }
 
@@ -1017,7 +1025,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247101136028", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202471011535054", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1033,7 +1041,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("emailverify.js", "?20247101136032", false, true);
+         context.AddJavascriptSource("emailverify.js", "?202471011535059", false, true);
          /* End function include_jscripts */
       }
 
@@ -1154,9 +1162,9 @@ namespace GeneXus.Programs {
          H00505_A40000EmployeeId = new long[1] ;
          H00505_n40000EmployeeId = new bool[] {false} ;
          AV11Errors = new GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError>( context, "GeneXus.Programs.genexussecurity.SdtGAMError", "GeneXus.Programs");
+         AV10Error = new GeneXus.Programs.genexussecurity.SdtGAMError(context);
          AV52Employee = new SdtEmployee(context);
          AV5AdditionalParameter = new GeneXus.Programs.genexussecurity.SdtGAMLoginAdditionalParameters(context);
-         AV10Error = new GeneXus.Programs.genexussecurity.SdtGAMError(context);
          BackMsgLst = new msglist();
          LclMsgLst = new msglist();
          pr_gam = new DataStoreProvider(context, new GeneXus.Programs.emailverify__gam(),
@@ -1190,6 +1198,7 @@ namespace GeneXus.Programs {
       private int edtavUserpassword_Enabled ;
       private int edtavConfirmpassword_Enabled ;
       private int AV53GXV1 ;
+      private int AV54GXV2 ;
       private int idxLst ;
       private long A40000EmployeeId ;
       private string AV48ActivationKey ;
