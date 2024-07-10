@@ -467,10 +467,10 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
             /* Attribute/Variable Label */
-            GxWebStd.gx_label_element( context, edtavUserpassword_Internalname, "User Password", "col-sm-3 AttributeLoginLabel", 0, true, "");
+            GxWebStd.gx_label_element( context, edtavNewpassword_Internalname, "New Password", "col-sm-3 AttributeLoginLabel", 0, true, "");
             /* Single line edit */
             TempTags = "  onfocus=\"gx.evt.onfocus(this, 42,'',false,'',0)\"";
-            GxWebStd.gx_single_line_edit( context, edtavUserpassword_Internalname, StringUtil.RTrim( AV34UserPassword), StringUtil.RTrim( context.localUtil.Format( AV34UserPassword, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,42);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "New Password", edtavUserpassword_Jsonclick, 0, "AttributeLogin", "", "", "", "", 1, edtavUserpassword_Enabled, 0, "text", "", 50, "chr", 1, "row", 50, -1, 0, 0, 0, 0, 0, true, "GeneXusSecurityCommon\\GAMPassword", "start", true, "", "HLP_EmailVerify.htm");
+            GxWebStd.gx_single_line_edit( context, edtavNewpassword_Internalname, StringUtil.RTrim( AV49NewPassword), StringUtil.RTrim( context.localUtil.Format( AV49NewPassword, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,42);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "New Password", edtavNewpassword_Jsonclick, 0, "AttributeLogin", "", "", "", "", 1, edtavNewpassword_Enabled, 0, "text", "", 20, "chr", 1, "row", 20, -1, 0, 0, 0, 0, -1, true, "", "start", true, "", "HLP_EmailVerify.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -599,20 +599,18 @@ namespace GeneXus.Programs {
                                  dynload_actions( ) ;
                               }
                            }
-                           else if ( StringUtil.StrCmp(sEvt, "'SETPASSWORD'") == 0 )
-                           {
-                              context.wbHandled = 1;
-                              dynload_actions( ) ;
-                              /* Execute user event: 'SetPassword' */
-                              E13502 ();
-                           }
                            else if ( StringUtil.StrCmp(sEvt, "LOAD") == 0 )
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
                               /* Execute user event: Load */
-                              E14502 ();
+                              E13502 ();
                               /* No code required for Cancel button. It is implemented as the Reset button. */
+                           }
+                           else if ( StringUtil.StrCmp(sEvt, "'SETPASSWORD'") == 0 )
+                           {
+                              context.wbHandled = 1;
+                              dynload_actions( ) ;
                            }
                            else if ( StringUtil.StrCmp(sEvt, "LSCR") == 0 )
                            {
@@ -672,7 +670,7 @@ namespace GeneXus.Programs {
             }
             if ( ! context.isAjaxRequest( ) )
             {
-               GX_FocusControl = edtavUserpassword_Internalname;
+               GX_FocusControl = edtavNewpassword_Internalname;
                AssignAttri("", false, "GX_FocusControl", GX_FocusControl);
             }
             nDonePA = 1;
@@ -726,7 +724,7 @@ namespace GeneXus.Programs {
          if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
          {
             /* Execute user event: Load */
-            E14502 ();
+            E13502 ();
             WB500( ) ;
          }
       }
@@ -768,8 +766,8 @@ namespace GeneXus.Programs {
             /* Read saved SDTs. */
             /* Read saved values. */
             /* Read variables values. */
-            AV34UserPassword = cgiGet( edtavUserpassword_Internalname);
-            AssignAttri("", false, "AV34UserPassword", AV34UserPassword);
+            AV49NewPassword = cgiGet( edtavNewpassword_Internalname);
+            AssignAttri("", false, "AV49NewPassword", AV49NewPassword);
             AV50ConfirmPassword = cgiGet( edtavConfirmpassword_Internalname);
             AssignAttri("", false, "AV50ConfirmPassword", AV50ConfirmPassword);
             /* Read subfile selected row values. */
@@ -821,13 +819,17 @@ namespace GeneXus.Programs {
       {
          /* Enter Routine */
          returnInSub = false;
-         CallWebObject(formatLink("login.aspx") );
-         context.wjLocDisableFrm = 1;
+         /* Execute user subroutine: 'SETPASSWORD' */
+         S112 ();
+         if (returnInSub) return;
+         /*  Sending Event outputs  */
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV44GAMUser", AV44GAMUser);
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV5AdditionalParameter", AV5AdditionalParameter);
       }
 
-      protected void E13502( )
+      protected void S112( )
       {
-         /* 'SetPassword' Routine */
+         /* 'SETPASSWORD' Routine */
          returnInSub = false;
          /* Using cursor H00505 */
          pr_default.execute(1, new Object[] {AV45GamGuid});
@@ -842,72 +844,70 @@ namespace GeneXus.Programs {
             n40000EmployeeId = false;
          }
          pr_default.close(1);
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV34UserPassword)) )
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV49NewPassword)) )
          {
-            GX_msglist.addItem(new GeneXus.Programs.wwpbaseobjects.dvmessagegetbasicnotificationmsg(context).executeUdp(  "Error!",  "New password is required",  "error",  "#"+edtavUserpassword_Internalname,  "true",  ""));
+            GX_msglist.addItem(new GeneXus.Programs.wwpbaseobjects.dvmessagegetbasicnotificationmsg(context).executeUdp(  "Error!",  "New password is required",  "error",  "#"+edtavNewpassword_Internalname,  "true",  ""));
          }
          if ( String.IsNullOrEmpty(StringUtil.RTrim( AV50ConfirmPassword)) )
          {
             GX_msglist.addItem(new GeneXus.Programs.wwpbaseobjects.dvmessagegetbasicnotificationmsg(context).executeUdp(  "Error!",  "Password should be confirmed",  "error",  "#"+edtavConfirmpassword_Internalname,  "true",  ""));
          }
-         if ( ( StringUtil.StrCmp(AV34UserPassword, AV50ConfirmPassword) == 0 ) && ! String.IsNullOrEmpty(StringUtil.RTrim( AV34UserPassword)) )
+         if ( ( StringUtil.StrCmp(AV49NewPassword, AV50ConfirmPassword) == 0 ) && ! String.IsNullOrEmpty(StringUtil.RTrim( AV49NewPassword)) )
          {
             AV44GAMUser.load( AV45GamGuid);
             AV18isOK = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).activateuser(AV48ActivationKey, true, out  AV11Errors);
-            AV53GXV1 = 1;
-            while ( AV53GXV1 <= AV11Errors.Count )
-            {
-               AV10Error = ((GeneXus.Programs.genexussecurity.SdtGAMError)AV11Errors.Item(AV53GXV1));
-               GX_msglist.addItem(AV10Error.gxTpr_Message);
-               AV53GXV1 = (int)(AV53GXV1+1);
-            }
             if ( AV18isOK )
             {
-               AV51ChangePwdOK = AV44GAMUser.setpassword(AV34UserPassword, out  AV11Errors);
-               AV44GAMUser.gxTpr_Password = AV34UserPassword;
-               AV44GAMUser.gxTpr_Authenticationtypename = "local";
-               AV44GAMUser.gxTpr_Namespace = "YTT_version4";
-               AV44GAMUser.gxTpr_Isblocked = false;
-               AV44GAMUser.save();
-               if ( new userhasrole(context).executeUdp(  "General Manager") )
+               AV51ChangePwdOK = AV44GAMUser.setpassword(AV49NewPassword, out  AV11Errors);
+               if ( AV51ChangePwdOK )
                {
-                  context.CommitDataStores("emailverify",pr_default);
-                  /* Execute user subroutine: 'LOGINUSER' */
-                  S112 ();
-                  if (returnInSub) return;
+                  if ( new userhasrole(context).executeUdp(  "General Manager") )
+                  {
+                     context.CommitDataStores("emailverify",pr_default);
+                     /* Execute user subroutine: 'LOGINUSER' */
+                     S122 ();
+                     if (returnInSub) return;
+                  }
+                  else
+                  {
+                     AV44GAMUser.gxTpr_Isblocked = false;
+                     AV52Employee.Load(A40000EmployeeId);
+                     AV52Employee.gxTpr_Employeeisactive = true;
+                     AV52Employee.Save();
+                     context.CommitDataStores("emailverify",pr_default);
+                     /* Execute user subroutine: 'LOGINUSER' */
+                     S122 ();
+                     if (returnInSub) return;
+                  }
                }
                else
                {
-                  AV52Employee.Load(A40000EmployeeId);
-                  AV52Employee.gxTpr_Employeeisactive = true;
-                  AV52Employee.Save();
-                  context.CommitDataStores("emailverify",pr_default);
+                  /* Execute user subroutine: 'DISPLAYMESSAGES' */
+                  S132 ();
+                  if (returnInSub) return;
                }
             }
             else
             {
                /* Execute user subroutine: 'DISPLAYMESSAGES' */
-               S122 ();
+               S132 ();
                if (returnInSub) return;
             }
          }
          else
          {
-            GX_msglist.addItem(new GeneXus.Programs.wwpbaseobjects.dvmessagegetbasicnotificationmsg(context).executeUdp(  "Error!",  "Passwords do not match",  "error",  "#"+edtavUserpassword_Internalname,  "true",  ""));
+            GX_msglist.addItem(new GeneXus.Programs.wwpbaseobjects.dvmessagegetbasicnotificationmsg(context).executeUdp(  "Error!",  "Passwords do not match",  "error",  "#"+edtavNewpassword_Internalname,  "true",  ""));
          }
-         /*  Sending Event outputs  */
-         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV44GAMUser", AV44GAMUser);
-         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV5AdditionalParameter", AV5AdditionalParameter);
       }
 
-      protected void S122( )
+      protected void S132( )
       {
          /* 'DISPLAYMESSAGES' Routine */
          returnInSub = false;
-         AV54GXV2 = 1;
-         while ( AV54GXV2 <= AV11Errors.Count )
+         AV53GXV1 = 1;
+         while ( AV53GXV1 <= AV11Errors.Count )
          {
-            AV10Error = ((GeneXus.Programs.genexussecurity.SdtGAMError)AV11Errors.Item(AV54GXV2));
+            AV10Error = ((GeneXus.Programs.genexussecurity.SdtGAMError)AV11Errors.Item(AV53GXV1));
             if ( AV10Error.gxTpr_Code == 52 )
             {
                GX_msglist.addItem("Your activation link has expired, Please contact the manager");
@@ -916,24 +916,16 @@ namespace GeneXus.Programs {
             {
                GX_msglist.addItem(StringUtil.Format( "Error: %1 (GAM%2)", AV10Error.gxTpr_Message, StringUtil.LTrimStr( (decimal)(AV10Error.gxTpr_Code), 12, 0), "", "", "", "", "", "", ""));
             }
-            AV54GXV2 = (int)(AV54GXV2+1);
+            AV53GXV1 = (int)(AV53GXV1+1);
          }
       }
 
-      protected void S112( )
+      protected void S122( )
       {
          /* 'LOGINUSER' Routine */
          returnInSub = false;
          AV5AdditionalParameter.gxTpr_Authenticationtypename = "local";
-         AV23LoginOK = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).login(AV44GAMUser.gxTpr_Email, AV34UserPassword, AV5AdditionalParameter, out  AV11Errors);
-         CallWebObject(formatLink("login.aspx") );
-         context.wjLocDisableFrm = 1;
-         context.setWebReturnParms(new Object[] {});
-         context.setWebReturnParmsMetadata(new Object[] {});
-         context.wjLocDisableFrm = 1;
-         context.nUserReturn = 1;
-         returnInSub = true;
-         if (true) return;
+         AV23LoginOK = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).login(AV44GAMUser.gxTpr_Email, AV49NewPassword, AV5AdditionalParameter, out  AV11Errors);
          if ( AV23LoginOK )
          {
             if ( AV44GAMUser.checkrole("Administrator") )
@@ -973,7 +965,7 @@ namespace GeneXus.Programs {
       {
       }
 
-      protected void E14502( )
+      protected void E13502( )
       {
          /* Load Routine */
          returnInSub = false;
@@ -1024,7 +1016,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024710149137", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202471015332977", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1040,7 +1032,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("emailverify.js", "?20247101491311", false, true);
+         context.AddJavascriptSource("emailverify.js", "?202471015332979", false, true);
          /* End function include_jscripts */
       }
 
@@ -1059,7 +1051,7 @@ namespace GeneXus.Programs {
          divTable4_Internalname = "TABLE4";
          divAlreadyactivetable_Internalname = "ALREADYACTIVETABLE";
          lblSignin_Internalname = "SIGNIN";
-         edtavUserpassword_Internalname = "vUSERPASSWORD";
+         edtavNewpassword_Internalname = "vNEWPASSWORD";
          edtavConfirmpassword_Internalname = "vCONFIRMPASSWORD";
          bttBtnenter_Internalname = "BTNENTER";
          divUnnamedtable1_Internalname = "UNNAMEDTABLE1";
@@ -1080,8 +1072,8 @@ namespace GeneXus.Programs {
          init_default_properties( ) ;
          edtavConfirmpassword_Jsonclick = "";
          edtavConfirmpassword_Enabled = 1;
-         edtavUserpassword_Jsonclick = "";
-         edtavUserpassword_Enabled = 1;
+         edtavNewpassword_Jsonclick = "";
+         edtavNewpassword_Enabled = 1;
          divAfteractivationtable_Visible = 1;
          divAlreadyactivetable_Visible = 1;
          Form.Headerrawhtml = "";
@@ -1104,10 +1096,8 @@ namespace GeneXus.Programs {
       {
          setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'AV45GamGuid',fld:'vGAMGUID',pic:'',hsh:true},{av:'AV48ActivationKey',fld:'vACTIVATIONKEY',pic:'',hsh:true}]");
          setEventMetadata("REFRESH",",oparms:[]}");
-         setEventMetadata("ENTER","{handler:'E12502',iparms:[]");
+         setEventMetadata("ENTER","{handler:'E12502',iparms:[{av:'AV49NewPassword',fld:'vNEWPASSWORD',pic:''},{av:'AV50ConfirmPassword',fld:'vCONFIRMPASSWORD',pic:''},{av:'AV45GamGuid',fld:'vGAMGUID',pic:'',hsh:true},{av:'AV48ActivationKey',fld:'vACTIVATIONKEY',pic:'',hsh:true}]");
          setEventMetadata("ENTER",",oparms:[]}");
-         setEventMetadata("'SETPASSWORD'","{handler:'E13502',iparms:[{av:'AV34UserPassword',fld:'vUSERPASSWORD',pic:''},{av:'AV50ConfirmPassword',fld:'vCONFIRMPASSWORD',pic:''},{av:'AV45GamGuid',fld:'vGAMGUID',pic:'',hsh:true},{av:'AV48ActivationKey',fld:'vACTIVATIONKEY',pic:'',hsh:true}]");
-         setEventMetadata("'SETPASSWORD'",",oparms:[]}");
          return  ;
       }
 
@@ -1147,7 +1137,7 @@ namespace GeneXus.Programs {
          TempTags = "";
          bttEnter_Jsonclick = "";
          lblSignin_Jsonclick = "";
-         AV34UserPassword = "";
+         AV49NewPassword = "";
          AV50ConfirmPassword = "";
          bttBtnenter_Jsonclick = "";
          sEvt = "";
@@ -1158,12 +1148,12 @@ namespace GeneXus.Programs {
          H00503_A40000EmployeeId = new long[1] ;
          H00503_n40000EmployeeId = new bool[] {false} ;
          AV44GAMUser = new GeneXus.Programs.genexussecurity.SdtGAMUser(context);
+         AV5AdditionalParameter = new GeneXus.Programs.genexussecurity.SdtGAMLoginAdditionalParameters(context);
          H00505_A40000EmployeeId = new long[1] ;
          H00505_n40000EmployeeId = new bool[] {false} ;
          AV11Errors = new GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError>( context, "GeneXus.Programs.genexussecurity.SdtGAMError", "GeneXus.Programs");
-         AV10Error = new GeneXus.Programs.genexussecurity.SdtGAMError(context);
          AV52Employee = new SdtEmployee(context);
-         AV5AdditionalParameter = new GeneXus.Programs.genexussecurity.SdtGAMLoginAdditionalParameters(context);
+         AV10Error = new GeneXus.Programs.genexussecurity.SdtGAMError(context);
          BackMsgLst = new msglist();
          LclMsgLst = new msglist();
          pr_gam = new DataStoreProvider(context, new GeneXus.Programs.emailverify__gam(),
@@ -1194,10 +1184,9 @@ namespace GeneXus.Programs {
       private short nGXWrapped ;
       private int divAlreadyactivetable_Visible ;
       private int divAfteractivationtable_Visible ;
-      private int edtavUserpassword_Enabled ;
+      private int edtavNewpassword_Enabled ;
       private int edtavConfirmpassword_Enabled ;
       private int AV53GXV1 ;
-      private int AV54GXV2 ;
       private int idxLst ;
       private long A40000EmployeeId ;
       private string AV48ActivationKey ;
@@ -1234,9 +1223,9 @@ namespace GeneXus.Programs {
       private string lblSignin_Internalname ;
       private string lblSignin_Jsonclick ;
       private string divUnnamedtable1_Internalname ;
-      private string edtavUserpassword_Internalname ;
-      private string AV34UserPassword ;
-      private string edtavUserpassword_Jsonclick ;
+      private string edtavNewpassword_Internalname ;
+      private string AV49NewPassword ;
+      private string edtavNewpassword_Jsonclick ;
       private string edtavConfirmpassword_Internalname ;
       private string edtavConfirmpassword_Jsonclick ;
       private string bttBtnenter_Internalname ;
@@ -1271,9 +1260,9 @@ namespace GeneXus.Programs {
       private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV11Errors ;
       private GXWebForm Form ;
       private GeneXus.Programs.genexussecurity.SdtGAMLoginAdditionalParameters AV5AdditionalParameter ;
-      private SdtEmployee AV52Employee ;
       private GeneXus.Programs.genexussecurity.SdtGAMError AV10Error ;
       private GeneXus.Programs.genexussecurity.SdtGAMUser AV44GAMUser ;
+      private SdtEmployee AV52Employee ;
    }
 
    public class emailverify__gam : DataStoreHelperBase, IDataStoreHelper
