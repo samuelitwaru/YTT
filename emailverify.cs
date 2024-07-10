@@ -854,24 +854,13 @@ namespace GeneXus.Programs {
          {
             AV44GAMUser.load( AV45GamGuid);
             AV18isOK = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).activateuser(AV48ActivationKey, true, out  AV11Errors);
-            if ( new userhasrole(context).executeUdp(  "General Manager") )
+            if ( AV18isOK )
             {
-               context.CommitDataStores("emailverify",pr_default);
-               /* Execute user subroutine: 'LOGINUSER' */
-               S112 ();
-               if (returnInSub) return;
-            }
-            else
-            {
-               if ( AV18isOK )
+               AV51ChangePwdOK = AV44GAMUser.setpassword(AV34UserPassword, out  AV11Errors);
+               if ( AV51ChangePwdOK )
                {
-                  AV51ChangePwdOK = AV44GAMUser.setpassword(AV34UserPassword, out  AV11Errors);
-                  if ( AV51ChangePwdOK )
+                  if ( new userhasrole(context).executeUdp(  "General Manager") )
                   {
-                     AV44GAMUser.gxTpr_Isblocked = false;
-                     AV52Employee.Load(A40000EmployeeId);
-                     AV52Employee.gxTpr_Employeeisactive = true;
-                     AV52Employee.Save();
                      context.CommitDataStores("emailverify",pr_default);
                      /* Execute user subroutine: 'LOGINUSER' */
                      S112 ();
@@ -879,10 +868,15 @@ namespace GeneXus.Programs {
                   }
                   else
                   {
-                     /* Execute user subroutine: 'DISPLAYMESSAGES' */
-                     S122 ();
-                     if (returnInSub) return;
+                     AV44GAMUser.gxTpr_Isblocked = false;
+                     AV52Employee.Load(A40000EmployeeId);
+                     AV52Employee.gxTpr_Employeeisactive = true;
+                     AV52Employee.Save();
                   }
+                  context.CommitDataStores("emailverify",pr_default);
+                  /* Execute user subroutine: 'LOGINUSER' */
+                  S112 ();
+                  if (returnInSub) return;
                }
                else
                {
@@ -890,6 +884,12 @@ namespace GeneXus.Programs {
                   S122 ();
                   if (returnInSub) return;
                }
+            }
+            else
+            {
+               /* Execute user subroutine: 'DISPLAYMESSAGES' */
+               S122 ();
+               if (returnInSub) return;
             }
          }
          else
@@ -1017,7 +1017,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202471010533611", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247101136028", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1033,7 +1033,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("emailverify.js", "?202471010533615", false, true);
+         context.AddJavascriptSource("emailverify.js", "?20247101136032", false, true);
          /* End function include_jscripts */
       }
 
