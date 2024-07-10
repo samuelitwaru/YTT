@@ -864,23 +864,13 @@ namespace GeneXus.Programs {
             if ( AV18isOK )
             {
                AV51ChangePwdOK = AV44GAMUser.setpassword(AV34UserPassword, out  AV11Errors);
-               if ( AV51ChangePwdOK )
+               AV44GAMUser.gxTpr_Password = AV34UserPassword;
+               AV44GAMUser.gxTpr_Authenticationtypename = "local";
+               AV44GAMUser.gxTpr_Namespace = "YTT_version4";
+               AV44GAMUser.gxTpr_Isblocked = false;
+               AV44GAMUser.save();
+               if ( new userhasrole(context).executeUdp(  "General Manager") )
                {
-                  if ( new userhasrole(context).executeUdp(  "General Manager") )
-                  {
-                     context.CommitDataStores("emailverify",pr_default);
-                     /* Execute user subroutine: 'LOGINUSER' */
-                     S112 ();
-                     if (returnInSub) return;
-                  }
-                  else
-                  {
-                     AV44GAMUser.gxTpr_Isblocked = false;
-                     AV52Employee.Load(A40000EmployeeId);
-                     AV52Employee.gxTpr_Employeeisactive = true;
-                     AV52Employee.Save();
-                  }
-                  GX_msglist.addItem("Commiting");
                   context.CommitDataStores("emailverify",pr_default);
                   /* Execute user subroutine: 'LOGINUSER' */
                   S112 ();
@@ -888,9 +878,10 @@ namespace GeneXus.Programs {
                }
                else
                {
-                  /* Execute user subroutine: 'DISPLAYMESSAGES' */
-                  S122 ();
-                  if (returnInSub) return;
+                  AV52Employee.Load(A40000EmployeeId);
+                  AV52Employee.gxTpr_Employeeisactive = true;
+                  AV52Employee.Save();
+                  context.CommitDataStores("emailverify",pr_default);
                }
             }
             else
@@ -935,6 +926,14 @@ namespace GeneXus.Programs {
          returnInSub = false;
          AV5AdditionalParameter.gxTpr_Authenticationtypename = "local";
          AV23LoginOK = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).login(AV44GAMUser.gxTpr_Email, AV34UserPassword, AV5AdditionalParameter, out  AV11Errors);
+         CallWebObject(formatLink("login.aspx") );
+         context.wjLocDisableFrm = 1;
+         context.setWebReturnParms(new Object[] {});
+         context.setWebReturnParmsMetadata(new Object[] {});
+         context.wjLocDisableFrm = 1;
+         context.nUserReturn = 1;
+         returnInSub = true;
+         if (true) return;
          if ( AV23LoginOK )
          {
             if ( AV44GAMUser.checkrole("Administrator") )
@@ -1025,7 +1024,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202471011535054", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024710149137", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1041,7 +1040,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("emailverify.js", "?202471011535059", false, true);
+         context.AddJavascriptSource("emailverify.js", "?20247101491311", false, true);
          /* End function include_jscripts */
       }
 
