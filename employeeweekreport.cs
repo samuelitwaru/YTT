@@ -1412,7 +1412,7 @@ namespace GeneXus.Programs {
          /* Execute user subroutine: 'LOADCOMBOCOMPANYLOCATIONID' */
          S122 ();
          if (returnInSub) return;
-         tblUnnamedtable1_Width = 400;
+         tblUnnamedtable1_Width = 300;
          AssignProp("", false, tblUnnamedtable1_Internalname, "Width", StringUtil.LTrimStr( (decimal)(tblUnnamedtable1_Width), 9, 0), true);
          this.executeUsercontrolMethod("", false, "DATERANGE_RANGEPICKERContainer", "Attach", "", new Object[] {(string)edtavDaterange_rangetext_Internalname});
          GXt_SdtWWPDateRangePickerOptions3 = AV53DateRange_RangePickerOptions;
@@ -1810,7 +1810,7 @@ namespace GeneXus.Programs {
       {
          /* 'GETWEEKSTARTDATE' Routine */
          returnInSub = false;
-         AV50DateRange = DateTimeUtil.DAdd( AV50DateRange, (-1*(DateTimeUtil.Dow( AV50DateRange)-1)));
+         AV50DateRange = DateTimeUtil.DAdd( AV50DateRange, (-1*(DateTimeUtil.Dow( AV50DateRange)-2)));
          AssignAttri("", false, "AV50DateRange", context.localUtil.Format(AV50DateRange, "99/99/99"));
          AV52DateRange_To = DateTimeUtil.DAdd( AV50DateRange, (6));
          AssignAttri("", false, "AV52DateRange_To", context.localUtil.Format(AV52DateRange_To, "99/99/99"));
@@ -1965,7 +1965,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202471219493868", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202471220183310", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1983,7 +1983,7 @@ namespace GeneXus.Programs {
          if ( nGXWrapped != 1 )
          {
             context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-            context.AddJavascriptSource("employeeweekreport.js", "?202471219493869", false, true);
+            context.AddJavascriptSource("employeeweekreport.js", "?202471220183311", false, true);
             context.AddJavascriptSource("UserControls/WWP_IconButtonRender.js", "", false, true);
             context.AddJavascriptSource("UserControls/WWP_IconButtonRender.js", "", false, true);
             context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);

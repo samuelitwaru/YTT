@@ -112,7 +112,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       {
          /* 'GETWEEKSTARTDATE' Routine */
          returnInSub = false;
-         AV12WeekStartDate = DateTimeUtil.DAdd( Gx_date, (-1*(DateTimeUtil.Dow( Gx_date)-1)));
+         AV12WeekStartDate = DateTimeUtil.DAdd( Gx_date, (-1*(DateTimeUtil.Dow( Gx_date)-2)));
          AV12WeekStartDate = DateTimeUtil.DAdd( AV12WeekStartDate, (-42));
       }
 
