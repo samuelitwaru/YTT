@@ -2,7 +2,7 @@ swagger: '2.0'
 info:
   title: "sdsvc_UpdateWorkHourLog_Level_Detail"
   description: "sdsvc_UpdateWorkHourLog_Level_Detail"
-  version: "20240712082456"
+  version: "20240712104914"
 host: localhost:8082
 schemes:
   - http

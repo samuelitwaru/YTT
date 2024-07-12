@@ -24,9 +24,6 @@ namespace GeneXus.Programs {
          obj = new GeneXus.Programs.wwpbaseobjects.SdtWWP_Entity(context);
          trn = obj.getTransaction();
          result = trn.Reindex();
-         obj = new GeneXus.Programs.workwithplus.SdtWWP_Parameter(context);
-         trn = obj.getTransaction();
-         result = trn.Reindex();
          obj = new GeneXus.Programs.wwpbaseobjects.SdtWWP_UserExtended(context);
          trn = obj.getTransaction();
          result = trn.Reindex();
@@ -60,10 +57,7 @@ namespace GeneXus.Programs {
          obj = new SdtDevice(context);
          trn = obj.getTransaction();
          result = trn.Reindex();
-         obj = new SdtCompanyLocation(context);
-         trn = obj.getTransaction();
-         result = trn.Reindex();
-         obj = new SdtLeaveType(context);
+         obj = new GeneXus.Programs.workwithplus.SdtWWP_Parameter(context);
          trn = obj.getTransaction();
          result = trn.Reindex();
          obj = new SdtCompany(context);
@@ -75,7 +69,13 @@ namespace GeneXus.Programs {
          obj = new SdtWorkHourLog(context);
          trn = obj.getTransaction();
          result = trn.Reindex();
+         obj = new SdtLeaveType(context);
+         trn = obj.getTransaction();
+         result = trn.Reindex();
          obj = new SdtLeaveRequest(context);
+         trn = obj.getTransaction();
+         result = trn.Reindex();
+         obj = new SdtCompanyLocation(context);
          trn = obj.getTransaction();
          result = trn.Reindex();
          obj = new SdtEmployee(context);

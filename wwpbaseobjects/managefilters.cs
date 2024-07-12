@@ -468,19 +468,19 @@ namespace GeneXus.Programs.wwpbaseobjects {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, divNewtable_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
+            GxWebStd.gx_div_start( context, divMaintable_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-3 hidden-xs hidden-sm", "start", "top", "", "", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, divTableleft_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
+            GxWebStd.gx_div_start( context, divLefttable_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-md-6 PopupContentCell", "start", "top", "", "", "div");
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-md-6 PopupContentCell", "Center", "top", "", "", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, divTablecontent_Internalname, 1, 0, "px", 0, "px", "TableContent", "start", "top", "", "", "div");
+            GxWebStd.gx_div_start( context, divTablecontent_Internalname, 1, divTablecontent_Width, "px", 0, "px", "TableContent", "start", "top", "", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
             /* Div Control */
@@ -545,11 +545,11 @@ namespace GeneXus.Programs.wwpbaseobjects {
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "Center", "top", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-3 hidden-xs hidden-sm", "start", "top", "", "", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, divTableright_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
+            GxWebStd.gx_div_start( context, divRighttable_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -1197,6 +1197,8 @@ namespace GeneXus.Programs.wwpbaseobjects {
          returnInSub = false;
          divLayoutmaintable_Class = divLayoutmaintable_Class+" "+"EditForm";
          AssignProp("", false, divLayoutmaintable_Internalname, "Class", divLayoutmaintable_Class, true);
+         divTablecontent_Width = 500;
+         AssignProp("", false, divTablecontent_Internalname, "Width", StringUtil.LTrimStr( (decimal)(divTablecontent_Width), 9, 0), true);
          chkavCollectionisempty.Visible = 0;
          AssignProp("", false, chkavCollectionisempty_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(chkavCollectionisempty.Visible), 5, 0), true);
          Gridgridstatecollections_empowerer_Gridinternalname = subGridgridstatecollections_Internalname;
@@ -1478,7 +1480,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247521462535", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202471213203591", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1494,7 +1496,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wwpbaseobjects/managefilters.js", "?20247521462535", false, true);
+         context.AddJavascriptSource("wwpbaseobjects/managefilters.js", "?202471213203591", false, true);
          context.AddJavascriptSource("shared/jquery/jquery1.9.1.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/bootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
@@ -1748,7 +1750,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       protected void init_default_properties( )
       {
-         divTableleft_Internalname = "TABLELEFT";
+         divLefttable_Internalname = "LEFTTABLE";
          bttBtnenter_Internalname = "BTNENTER";
          bttBtncancel_Internalname = "BTNCANCEL";
          edtavMoveup_Internalname = "vMOVEUP";
@@ -1757,8 +1759,8 @@ namespace GeneXus.Programs.wwpbaseobjects {
          edtavGridstatecollection__gridstatexml_Internalname = "GRIDSTATECOLLECTION__GRIDSTATEXML";
          edtavUdelete_Internalname = "vUDELETE";
          divTablecontent_Internalname = "TABLECONTENT";
-         divTableright_Internalname = "TABLERIGHT";
-         divNewtable_Internalname = "NEWTABLE";
+         divRighttable_Internalname = "RIGHTTABLE";
+         divMaintable_Internalname = "MAINTABLE";
          Dvelop_bootstrap_panel1_Internalname = "DVELOP_BOOTSTRAP_PANEL1";
          tblUtpaneldummy_Internalname = "UTPANELDUMMY";
          divHtml_usertable_utpaneldummy_Internalname = "HTML_USERTABLE_UTPANELDUMMY";
@@ -1807,6 +1809,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          edtavGridstatecollection__gridstatexml_Visible = -1;
          edtavGridstatecollection__title_Title = "Filters";
          chkavCollectionisempty.Visible = 1;
+         divTablecontent_Width = 0;
          divLayoutmaintable_Class = "Table TableTransactionTemplate";
          Form.Headerrawhtml = "";
          Form.Background = "";
@@ -1932,6 +1935,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private int nRC_GXsfl_27 ;
       private int subGridgridstatecollections_Rows ;
       private int nGXsfl_27_idx=1 ;
+      private int divTablecontent_Width ;
       private int AV17GXV1 ;
       private int subGridgridstatecollections_Islastpage ;
       private int edtavMoveup_Enabled ;
@@ -1973,8 +1977,8 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private string divTablemain_Internalname ;
       private string ClassString ;
       private string StyleString ;
-      private string divNewtable_Internalname ;
-      private string divTableleft_Internalname ;
+      private string divMaintable_Internalname ;
+      private string divLefttable_Internalname ;
       private string divTablecontent_Internalname ;
       private string TempTags ;
       private string bttBtnenter_Internalname ;
@@ -1983,7 +1987,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private string bttBtncancel_Jsonclick ;
       private string sStyleString ;
       private string subGridgridstatecollections_Internalname ;
-      private string divTableright_Internalname ;
+      private string divRighttable_Internalname ;
       private string divHtml_usertable_utpaneldummy_Internalname ;
       private string divHtml_bottomauxiliarcontrols_Internalname ;
       private string chkavCollectionisempty_Internalname ;

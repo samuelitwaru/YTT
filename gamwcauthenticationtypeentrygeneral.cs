@@ -461,19 +461,19 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, divNewtable_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
+            GxWebStd.gx_div_start( context, divMaintable_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-3 hidden-xs hidden-sm", "start", "top", "", "", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, divTableleft_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
+            GxWebStd.gx_div_start( context, divLefttable_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-md-6", "start", "top", "", "", "div");
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-md-6", "Center", "top", "", "", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, divTablecontent_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
+            GxWebStd.gx_div_start( context, divTablecontent_Internalname, 1, divTablecontent_Width, "px", 0, "px", "Table", "start", "top", "", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
             /* Div Control */
@@ -1528,11 +1528,11 @@ namespace GeneXus.Programs {
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "Center", "top", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-3 hidden-xs hidden-sm", "start", "top", "", "", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, divTableright_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
+            GxWebStd.gx_div_start( context, divRighttable_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -2520,6 +2520,8 @@ namespace GeneXus.Programs {
          if (returnInSub) return;
          divLayoutmaintable_Class = divLayoutmaintable_Class+" "+"EditForm";
          AssignProp(sPrefix, false, divLayoutmaintable_Internalname, "Class", divLayoutmaintable_Class, true);
+         divTablecontent_Width = 500;
+         AssignProp(sPrefix, false, divTablecontent_Internalname, "Width", StringUtil.LTrimStr( (decimal)(divTablecontent_Width), 9, 0), true);
          /* Execute user subroutine: 'ATTRIBUTESSECURITYCODE' */
          S232 ();
          if (returnInSub) return;
@@ -4480,7 +4482,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247111345939", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202471213234437", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -4496,7 +4498,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("gamwcauthenticationtypeentrygeneral.js", "?20247111345946", false, true);
+         context.AddJavascriptSource("gamwcauthenticationtypeentrygeneral.js", "?202471213234441", false, true);
          /* End function include_jscripts */
       }
 
@@ -4622,7 +4624,7 @@ namespace GeneXus.Programs {
 
       protected void init_default_properties( )
       {
-         divTableleft_Internalname = sPrefix+"TABLELEFT";
+         divLefttable_Internalname = sPrefix+"LEFTTABLE";
          edtavName_Internalname = sPrefix+"vNAME";
          cmbavFunctionid_Internalname = sPrefix+"vFUNCTIONID";
          chkavIsenable_Internalname = sPrefix+"vISENABLE";
@@ -4726,8 +4728,8 @@ namespace GeneXus.Programs {
          bttBtnenter_Internalname = sPrefix+"BTNENTER";
          bttBtncancel_Internalname = sPrefix+"BTNCANCEL";
          divTablecontent_Internalname = sPrefix+"TABLECONTENT";
-         divTableright_Internalname = sPrefix+"TABLERIGHT";
-         divNewtable_Internalname = sPrefix+"NEWTABLE";
+         divRighttable_Internalname = sPrefix+"RIGHTTABLE";
+         divMaintable_Internalname = sPrefix+"MAINTABLE";
          divTablemain_Internalname = sPrefix+"TABLEMAIN";
          divLayoutmaintable_Internalname = sPrefix+"LAYOUTMAINTABLE";
          Form.Internalname = sPrefix+"FORM";
@@ -4920,6 +4922,7 @@ namespace GeneXus.Programs {
          cmbavFunctionid.Enabled = 1;
          edtavName_Jsonclick = "";
          edtavName_Enabled = 0;
+         divTablecontent_Width = 0;
          divLayoutmaintable_Class = "Table TableTransactionTemplate";
          context.GX_msglist.DisplayMode = 1;
          if ( StringUtil.Len( sPrefix) == 0 )
@@ -5098,6 +5101,7 @@ namespace GeneXus.Programs {
       private short nDonePA ;
       private short gxcookieaux ;
       private short nGXWrapped ;
+      private int divTablecontent_Width ;
       private int edtavName_Enabled ;
       private int edtavDsc_Enabled ;
       private int edtavSmallimagename_Enabled ;
@@ -5191,8 +5195,8 @@ namespace GeneXus.Programs {
       private string divTablemain_Internalname ;
       private string ClassString ;
       private string StyleString ;
-      private string divNewtable_Internalname ;
-      private string divTableleft_Internalname ;
+      private string divMaintable_Internalname ;
+      private string divLefttable_Internalname ;
       private string divTablecontent_Internalname ;
       private string divTableattributes_Internalname ;
       private string edtavName_Internalname ;
@@ -5395,7 +5399,7 @@ namespace GeneXus.Programs {
       private string bttBtnenter_Jsonclick ;
       private string bttBtncancel_Internalname ;
       private string bttBtncancel_Jsonclick ;
-      private string divTableright_Internalname ;
+      private string divRighttable_Internalname ;
       private string sXEvt ;
       private string sEvt ;
       private string EvtGridId ;
