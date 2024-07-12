@@ -542,7 +542,7 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, divTable_Internalname, 1, 100, "%", 0, "px", "Table", "start", "top", " "+"data-gx-smarttable"+" ", "grid-template-columns:30fr 70fr;grid-template-rows:auto;grid-column-gap:10px;", "div");
+            GxWebStd.gx_div_start( context, divTable_Internalname, 1, 700, "px", 0, "px", "Table", "start", "top", " "+"data-gx-smarttable"+" ", "grid-template-columns:30fr 70fr;grid-template-rows:auto;grid-column-gap:10px;", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "ActionGrouped CellMarginBottom20", "start", "top", " "+"data-gx-smarttable-cell"+" ", "", "div");
             wb_table1_11_582( true) ;
@@ -1412,6 +1412,8 @@ namespace GeneXus.Programs {
          /* Execute user subroutine: 'LOADCOMBOCOMPANYLOCATIONID' */
          S122 ();
          if (returnInSub) return;
+         tblUnnamedtable1_Width = 400;
+         AssignProp("", false, tblUnnamedtable1_Internalname, "Width", StringUtil.LTrimStr( (decimal)(tblUnnamedtable1_Width), 9, 0), true);
          this.executeUsercontrolMethod("", false, "DATERANGE_RANGEPICKERContainer", "Attach", "", new Object[] {(string)edtavDaterange_rangetext_Internalname});
          GXt_SdtWWPDateRangePickerOptions3 = AV53DateRange_RangePickerOptions;
          new GeneXus.Programs.wwpbaseobjects.wwp_rangepicker_employeeweekreport(context ).execute( out  GXt_SdtWWPDateRangePickerOptions3) ;
@@ -1868,6 +1870,7 @@ namespace GeneXus.Programs {
          {
             /* Table start */
             sStyleString = "";
+            sStyleString += " width: " + StringUtil.LTrimStr( (decimal)(tblUnnamedtable1_Width), 10, 0) + "px" + ";";
             GxWebStd.gx_table_start( context, tblUnnamedtable1_Internalname, tblUnnamedtable1_Internalname, "", "Table", 0, "", "", 1, 2, sStyleString, "", "", 0);
             context.WriteHtmlText( "<tr>") ;
             context.WriteHtmlText( "<td data-align=\"Right\"  style=\""+CSSHelper.Prettify( "text-align:-khtml-Right;text-align:-moz-Right;text-align:-webkit-Right")+"\" class='CellPaddingTop10'>") ;
@@ -1962,7 +1965,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247111259246", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202471219493868", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1980,7 +1983,7 @@ namespace GeneXus.Programs {
          if ( nGXWrapped != 1 )
          {
             context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-            context.AddJavascriptSource("employeeweekreport.js", "?20247111259247", false, true);
+            context.AddJavascriptSource("employeeweekreport.js", "?202471219493869", false, true);
             context.AddJavascriptSource("UserControls/WWP_IconButtonRender.js", "", false, true);
             context.AddJavascriptSource("UserControls/WWP_IconButtonRender.js", "", false, true);
             context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
@@ -2651,6 +2654,7 @@ namespace GeneXus.Programs {
          Btnprev_Caption = "Prev";
          Btnprev_Beforeiconclass = "fa fa-caret-left";
          Btnprev_Tooltiptext = "";
+         tblUnnamedtable1_Width = 0;
          edtavSdtemployeeweekreports__total_formatted_Enabled = -1;
          edtavSdtemployeeweekreports__expected_formatted_Enabled = -1;
          edtavSdtemployeeweekreports__leave_formatted_Enabled = -1;
@@ -2916,6 +2920,7 @@ namespace GeneXus.Programs {
       private int edtavSdtemployeeweekreports__total_formatted_Enabled ;
       private int GRID_nGridOutOfScope ;
       private int nGXsfl_40_fel_idx=1 ;
+      private int tblUnnamedtable1_Width ;
       private int AV27PageToGo ;
       private int nGXsfl_40_bak_idx=1 ;
       private int edtavDaterange_rangetext_Enabled ;
@@ -3010,6 +3015,7 @@ namespace GeneXus.Programs {
       private string edtavSdtemployeeweekreports__total_formatted_Internalname ;
       private string sGXsfl_40_fel_idx="0001" ;
       private string scmdbuf ;
+      private string tblUnnamedtable1_Internalname ;
       private string Grid_empowerer_Gridinternalname ;
       private string GXt_char4 ;
       private string edtavSdtemployeeweekreports__mon_formatted_Columnheaderclass ;
@@ -3028,7 +3034,6 @@ namespace GeneXus.Programs {
       private string edtavSdtemployeeweekreports__total_formatted_Columnclass ;
       private string A158CompanyLocationName ;
       private string Combo_companylocationid_Selectedvalue_set ;
-      private string tblUnnamedtable1_Internalname ;
       private string Btnprev_Tooltiptext ;
       private string Btnprev_Beforeiconclass ;
       private string Btnprev_Caption ;

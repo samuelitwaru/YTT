@@ -178,8 +178,8 @@ namespace GeneXus.Programs {
                CheckExtendedTable0J21( ) ;
                if ( AnyError == 0 )
                {
-                  ZM0J21( 19) ;
-                  ZM0J21( 20) ;
+                  ZM0J21( 17) ;
+                  ZM0J21( 18) ;
                }
                CloseExtendedTableCursors0J21( ) ;
             }
@@ -251,10 +251,6 @@ namespace GeneXus.Programs {
          }
          if ( ( ( StringUtil.StrCmp(Gx_mode, "UPD") == 0 ) ) && ( StringUtil.StrCmp(A132LeaveRequestStatus, "Pending") == 0 ) )
          {
-            new sendleaveupdatetmail(context).executeSubmit(  A127LeaveRequestId) ;
-            AV37Mesage = "Leave Request update successful";
-            CallWebObject(formatLink("leaverequestww.aspx", new object[] {UrlEncode(StringUtil.RTrim(AV37Mesage))}, new string[] {"Mesage"}) );
-            context.wjLocDisableFrm = 1;
          }
       }
 
@@ -302,7 +298,7 @@ namespace GeneXus.Programs {
 
       protected void ZM0J21( short GX_JID )
       {
-         if ( ( GX_JID == 18 ) || ( GX_JID == 0 ) )
+         if ( ( GX_JID == 16 ) || ( GX_JID == 0 ) )
          {
             Z131LeaveRequestDuration = A131LeaveRequestDuration;
             Z130LeaveRequestEndDate = A130LeaveRequestEndDate;
@@ -315,17 +311,17 @@ namespace GeneXus.Programs {
             Z124LeaveTypeId = A124LeaveTypeId;
             Z106EmployeeId = A106EmployeeId;
          }
-         if ( ( GX_JID == 19 ) || ( GX_JID == 0 ) )
+         if ( ( GX_JID == 17 ) || ( GX_JID == 0 ) )
          {
             Z125LeaveTypeName = A125LeaveTypeName;
             Z144LeaveTypeVacationLeave = A144LeaveTypeVacationLeave;
          }
-         if ( ( GX_JID == 20 ) || ( GX_JID == 0 ) )
+         if ( ( GX_JID == 18 ) || ( GX_JID == 0 ) )
          {
             Z148EmployeeName = A148EmployeeName;
             Z147EmployeeBalance = A147EmployeeBalance;
          }
-         if ( GX_JID == -18 )
+         if ( GX_JID == -16 )
          {
             Z127LeaveRequestId = A127LeaveRequestId;
             Z131LeaveRequestDuration = A131LeaveRequestDuration;
@@ -395,7 +391,7 @@ namespace GeneXus.Programs {
             A144LeaveTypeVacationLeave = BC000J7_A144LeaveTypeVacationLeave[0];
             A124LeaveTypeId = BC000J7_A124LeaveTypeId[0];
             A106EmployeeId = BC000J7_A106EmployeeId[0];
-            ZM0J21( -18) ;
+            ZM0J21( -16) ;
          }
          pr_default.close(5);
          OnLoadActions0J21( ) ;
@@ -448,16 +444,6 @@ namespace GeneXus.Programs {
          if ( (DateTime.MinValue==A130LeaveRequestEndDate) )
          {
             GX_msglist.addItem("End date is required", 1, "");
-            AnyError = 1;
-         }
-         if ( ! (Convert.ToDecimal(0)==A131LeaveRequestDuration) && ( A131LeaveRequestDuration > Convert.ToDecimal( new getemployeevactiondaysleft(context).executeUdp(  A106EmployeeId) )) && ( StringUtil.StrCmp(A144LeaveTypeVacationLeave, "Yes") == 0 ) )
-         {
-            GX_msglist.addItem("Vacation days exceeded.", 1, "");
-            AnyError = 1;
-         }
-         if ( ( A131LeaveRequestDuration <= Convert.ToDecimal( 0 )) )
-         {
-            GX_msglist.addItem("Invalid Leave Duration", 1, "");
             AnyError = 1;
          }
          if ( ! ( ( StringUtil.StrCmp(A132LeaveRequestStatus, "Pending") == 0 ) || ( StringUtil.StrCmp(A132LeaveRequestStatus, "Approved") == 0 ) || ( StringUtil.StrCmp(A132LeaveRequestStatus, "Rejected") == 0 ) ) )
@@ -518,7 +504,7 @@ namespace GeneXus.Programs {
          pr_default.execute(1, new Object[] {A127LeaveRequestId});
          if ( (pr_default.getStatus(1) != 101) )
          {
-            ZM0J21( 18) ;
+            ZM0J21( 16) ;
             RcdFound21 = 1;
             A127LeaveRequestId = BC000J3_A127LeaveRequestId[0];
             A131LeaveRequestDuration = BC000J3_A131LeaveRequestDuration[0];
@@ -1102,7 +1088,7 @@ namespace GeneXus.Programs {
             Gx_mode = "UPD";
             Z127LeaveRequestId = A127LeaveRequestId;
          }
-         ZM0J21( -18) ;
+         ZM0J21( -16) ;
          OnLoadActions0J21( ) ;
          AddRow0J21( ) ;
          ScanKeyEnd0J21( ) ;
@@ -1131,7 +1117,7 @@ namespace GeneXus.Programs {
             Gx_mode = "UPD";
             Z127LeaveRequestId = A127LeaveRequestId;
          }
-         ZM0J21( -18) ;
+         ZM0J21( -16) ;
          OnLoadActions0J21( ) ;
          AddRow0J21( ) ;
          ScanKeyEnd0J21( ) ;

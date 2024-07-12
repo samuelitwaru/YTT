@@ -35,7 +35,15 @@ namespace GeneXus.Programs {
       protected override GAMSecurityLevel IntegratedSecurityLevel
       {
          get {
-            return GAMSecurityLevel.SecurityLow ;
+            return GAMSecurityLevel.SecurityHigh ;
+         }
+
+      }
+
+      protected override string ExecutePermissionPrefix
+      {
+         get {
+            return "getleaverequestdays_Services_Execute" ;
          }
 
       }
@@ -119,6 +127,10 @@ namespace GeneXus.Programs {
          GXt_int1 = AV18CompanyId;
          new getloggedinusercompanyid(context ).execute( out  GXt_int1) ;
          AV18CompanyId = GXt_int1;
+         if ( (0==AV18CompanyId) )
+         {
+            AV18CompanyId = 1;
+         }
          /* Using cursor P005N2 */
          pr_default.execute(0, new Object[] {AV18CompanyId});
          while ( (pr_default.getStatus(0) != 101) )
