@@ -63,6 +63,9 @@ namespace GeneXus.Programs {
          obj = new SdtCompanyLocation(context);
          trn = obj.getTransaction();
          result = trn.Reindex();
+         obj = new SdtLeaveType(context);
+         trn = obj.getTransaction();
+         result = trn.Reindex();
          obj = new SdtCompany(context);
          trn = obj.getTransaction();
          result = trn.Reindex();
@@ -70,9 +73,6 @@ namespace GeneXus.Programs {
          trn = obj.getTransaction();
          result = trn.Reindex();
          obj = new SdtWorkHourLog(context);
-         trn = obj.getTransaction();
-         result = trn.Reindex();
-         obj = new SdtLeaveType(context);
          trn = obj.getTransaction();
          result = trn.Reindex();
          obj = new SdtLeaveRequest(context);

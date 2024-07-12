@@ -241,8 +241,8 @@ namespace GeneXus.Programs {
             }
             else if ( StringUtil.StrCmp(AV47GridStateFilterValue.gxTpr_Name, "TFEMPLOYEEVACTIONDAYS") == 0 )
             {
-               AV29TFEmployeeVactionDays = (short)(Math.Round(NumberUtil.Val( AV47GridStateFilterValue.gxTpr_Value, "."), 18, MidpointRounding.ToEven));
-               AV30TFEmployeeVactionDays_To = (short)(Math.Round(NumberUtil.Val( AV47GridStateFilterValue.gxTpr_Valueto, "."), 18, MidpointRounding.ToEven));
+               AV29TFEmployeeVactionDays = NumberUtil.Val( AV47GridStateFilterValue.gxTpr_Value, ".");
+               AV30TFEmployeeVactionDays_To = NumberUtil.Val( AV47GridStateFilterValue.gxTpr_Valueto, ".");
             }
             AV56GXV1 = (int)(AV56GXV1+1);
          }
@@ -284,7 +284,7 @@ namespace GeneXus.Programs {
                                               A110EmployeeIsManager ,
                                               A112EmployeeIsActive } ,
                                               new int[]{
-                                              TypeConstants.SHORT, TypeConstants.SHORT, TypeConstants.SHORT, TypeConstants.SHORT, TypeConstants.SHORT, TypeConstants.BOOLEAN, TypeConstants.BOOLEAN
+                                              TypeConstants.SHORT, TypeConstants.SHORT, TypeConstants.DECIMAL, TypeConstants.DECIMAL, TypeConstants.DECIMAL, TypeConstants.BOOLEAN, TypeConstants.BOOLEAN
                                               }
          });
          lV58Employeelistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV58Employeelistds_1_filterfulltext), "%", "");
@@ -377,7 +377,7 @@ namespace GeneXus.Programs {
                                               A110EmployeeIsManager ,
                                               A112EmployeeIsActive } ,
                                               new int[]{
-                                              TypeConstants.SHORT, TypeConstants.SHORT, TypeConstants.SHORT, TypeConstants.SHORT, TypeConstants.SHORT, TypeConstants.BOOLEAN, TypeConstants.BOOLEAN
+                                              TypeConstants.SHORT, TypeConstants.SHORT, TypeConstants.DECIMAL, TypeConstants.DECIMAL, TypeConstants.DECIMAL, TypeConstants.BOOLEAN, TypeConstants.BOOLEAN
                                               }
          });
          lV58Employeelistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV58Employeelistds_1_filterfulltext), "%", "");
@@ -470,7 +470,7 @@ namespace GeneXus.Programs {
                                               A110EmployeeIsManager ,
                                               A112EmployeeIsActive } ,
                                               new int[]{
-                                              TypeConstants.SHORT, TypeConstants.SHORT, TypeConstants.SHORT, TypeConstants.SHORT, TypeConstants.SHORT, TypeConstants.BOOLEAN, TypeConstants.BOOLEAN
+                                              TypeConstants.SHORT, TypeConstants.SHORT, TypeConstants.DECIMAL, TypeConstants.DECIMAL, TypeConstants.DECIMAL, TypeConstants.BOOLEAN, TypeConstants.BOOLEAN
                                               }
          });
          lV58Employeelistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV58Employeelistds_1_filterfulltext), "%", "");
@@ -582,7 +582,7 @@ namespace GeneXus.Programs {
          A101CompanyName = "";
          P007S2_A100CompanyId = new long[1] ;
          P007S2_A148EmployeeName = new string[] {""} ;
-         P007S2_A146EmployeeVactionDays = new short[1] ;
+         P007S2_A146EmployeeVactionDays = new decimal[1] ;
          P007S2_A112EmployeeIsActive = new bool[] {false} ;
          P007S2_A110EmployeeIsManager = new bool[] {false} ;
          P007S2_A101CompanyName = new string[] {""} ;
@@ -591,14 +591,14 @@ namespace GeneXus.Programs {
          AV38Option = "";
          P007S3_A100CompanyId = new long[1] ;
          P007S3_A109EmployeeEmail = new string[] {""} ;
-         P007S3_A146EmployeeVactionDays = new short[1] ;
+         P007S3_A146EmployeeVactionDays = new decimal[1] ;
          P007S3_A112EmployeeIsActive = new bool[] {false} ;
          P007S3_A110EmployeeIsManager = new bool[] {false} ;
          P007S3_A101CompanyName = new string[] {""} ;
          P007S3_A148EmployeeName = new string[] {""} ;
          P007S3_A106EmployeeId = new long[1] ;
          P007S4_A100CompanyId = new long[1] ;
-         P007S4_A146EmployeeVactionDays = new short[1] ;
+         P007S4_A146EmployeeVactionDays = new decimal[1] ;
          P007S4_A112EmployeeIsActive = new bool[] {false} ;
          P007S4_A110EmployeeIsManager = new bool[] {false} ;
          P007S4_A101CompanyName = new string[] {""} ;
@@ -626,18 +626,18 @@ namespace GeneXus.Programs {
       private short AV34SkipItems ;
       private short AV25TFEmployeeIsManager_Sel ;
       private short AV28TFEmployeeIsActive_Sel ;
-      private short AV29TFEmployeeVactionDays ;
-      private short AV30TFEmployeeVactionDays_To ;
       private short AV65Employeelistds_8_tfemployeeismanager_sel ;
       private short AV66Employeelistds_9_tfemployeeisactive_sel ;
-      private short AV67Employeelistds_10_tfemployeevactiondays ;
-      private short AV68Employeelistds_11_tfemployeevactiondays_to ;
-      private short A146EmployeeVactionDays ;
       private int AV56GXV1 ;
       private int AV37InsertIndex ;
       private long A100CompanyId ;
       private long A106EmployeeId ;
       private long AV43count ;
+      private decimal AV29TFEmployeeVactionDays ;
+      private decimal AV30TFEmployeeVactionDays_To ;
+      private decimal AV67Employeelistds_10_tfemployeevactiondays ;
+      private decimal AV68Employeelistds_11_tfemployeevactiondays_to ;
+      private decimal A146EmployeeVactionDays ;
       private string AV17TFEmployeeName ;
       private string AV18TFEmployeeName_Sel ;
       private string AV23TFCompanyName ;
@@ -680,7 +680,7 @@ namespace GeneXus.Programs {
       private IDataStoreProvider pr_default ;
       private long[] P007S2_A100CompanyId ;
       private string[] P007S2_A148EmployeeName ;
-      private short[] P007S2_A146EmployeeVactionDays ;
+      private decimal[] P007S2_A146EmployeeVactionDays ;
       private bool[] P007S2_A112EmployeeIsActive ;
       private bool[] P007S2_A110EmployeeIsManager ;
       private string[] P007S2_A101CompanyName ;
@@ -688,14 +688,14 @@ namespace GeneXus.Programs {
       private long[] P007S2_A106EmployeeId ;
       private long[] P007S3_A100CompanyId ;
       private string[] P007S3_A109EmployeeEmail ;
-      private short[] P007S3_A146EmployeeVactionDays ;
+      private decimal[] P007S3_A146EmployeeVactionDays ;
       private bool[] P007S3_A112EmployeeIsActive ;
       private bool[] P007S3_A110EmployeeIsManager ;
       private string[] P007S3_A101CompanyName ;
       private string[] P007S3_A148EmployeeName ;
       private long[] P007S3_A106EmployeeId ;
       private long[] P007S4_A100CompanyId ;
-      private short[] P007S4_A146EmployeeVactionDays ;
+      private decimal[] P007S4_A146EmployeeVactionDays ;
       private bool[] P007S4_A112EmployeeIsActive ;
       private bool[] P007S4_A110EmployeeIsManager ;
       private string[] P007S4_A101CompanyName ;
@@ -725,12 +725,12 @@ namespace GeneXus.Programs {
                                              string AV63Employeelistds_6_tfcompanyname ,
                                              short AV65Employeelistds_8_tfemployeeismanager_sel ,
                                              short AV66Employeelistds_9_tfemployeeisactive_sel ,
-                                             short AV67Employeelistds_10_tfemployeevactiondays ,
-                                             short AV68Employeelistds_11_tfemployeevactiondays_to ,
+                                             decimal AV67Employeelistds_10_tfemployeevactiondays ,
+                                             decimal AV68Employeelistds_11_tfemployeevactiondays_to ,
                                              string A148EmployeeName ,
                                              string A109EmployeeEmail ,
                                              string A101CompanyName ,
-                                             short A146EmployeeVactionDays ,
+                                             decimal A146EmployeeVactionDays ,
                                              bool A110EmployeeIsManager ,
                                              bool A112EmployeeIsActive )
       {
@@ -741,7 +741,7 @@ namespace GeneXus.Programs {
          scmdbuf = "SELECT T1.CompanyId, T1.EmployeeName, T1.EmployeeVactionDays, T1.EmployeeIsActive, T1.EmployeeIsManager, T2.CompanyName, T1.EmployeeEmail, T1.EmployeeId FROM (Employee T1 INNER JOIN Company T2 ON T2.CompanyId = T1.CompanyId)";
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV58Employeelistds_1_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( LOWER(T1.EmployeeName) like '%' || LOWER(:lV58Employeelistds_1_filterfulltext)) or ( LOWER(T1.EmployeeEmail) like '%' || LOWER(:lV58Employeelistds_1_filterfulltext)) or ( LOWER(T2.CompanyName) like '%' || LOWER(:lV58Employeelistds_1_filterfulltext)) or ( SUBSTR(TO_CHAR(T1.EmployeeVactionDays,'9999'), 2) like '%' || :lV58Employeelistds_1_filterfulltext))");
+            AddWhere(sWhereString, "(( LOWER(T1.EmployeeName) like '%' || LOWER(:lV58Employeelistds_1_filterfulltext)) or ( LOWER(T1.EmployeeEmail) like '%' || LOWER(:lV58Employeelistds_1_filterfulltext)) or ( LOWER(T2.CompanyName) like '%' || LOWER(:lV58Employeelistds_1_filterfulltext)) or ( SUBSTR(TO_CHAR(T1.EmployeeVactionDays,'90.9'), 2) like '%' || :lV58Employeelistds_1_filterfulltext))");
          }
          else
          {
@@ -826,7 +826,7 @@ namespace GeneXus.Programs {
          {
             AddWhere(sWhereString, "(T1.EmployeeIsActive = FALSE)");
          }
-         if ( ! (0==AV67Employeelistds_10_tfemployeevactiondays) )
+         if ( ! (Convert.ToDecimal(0)==AV67Employeelistds_10_tfemployeevactiondays) )
          {
             AddWhere(sWhereString, "(T1.EmployeeVactionDays >= :AV67Employeelistds_10_tfemployeevactiondays)");
          }
@@ -834,7 +834,7 @@ namespace GeneXus.Programs {
          {
             GXv_int1[10] = 1;
          }
-         if ( ! (0==AV68Employeelistds_11_tfemployeevactiondays_to) )
+         if ( ! (Convert.ToDecimal(0)==AV68Employeelistds_11_tfemployeevactiondays_to) )
          {
             AddWhere(sWhereString, "(T1.EmployeeVactionDays <= :AV68Employeelistds_11_tfemployeevactiondays_to)");
          }
@@ -859,12 +859,12 @@ namespace GeneXus.Programs {
                                              string AV63Employeelistds_6_tfcompanyname ,
                                              short AV65Employeelistds_8_tfemployeeismanager_sel ,
                                              short AV66Employeelistds_9_tfemployeeisactive_sel ,
-                                             short AV67Employeelistds_10_tfemployeevactiondays ,
-                                             short AV68Employeelistds_11_tfemployeevactiondays_to ,
+                                             decimal AV67Employeelistds_10_tfemployeevactiondays ,
+                                             decimal AV68Employeelistds_11_tfemployeevactiondays_to ,
                                              string A148EmployeeName ,
                                              string A109EmployeeEmail ,
                                              string A101CompanyName ,
-                                             short A146EmployeeVactionDays ,
+                                             decimal A146EmployeeVactionDays ,
                                              bool A110EmployeeIsManager ,
                                              bool A112EmployeeIsActive )
       {
@@ -875,7 +875,7 @@ namespace GeneXus.Programs {
          scmdbuf = "SELECT T1.CompanyId, T1.EmployeeEmail, T1.EmployeeVactionDays, T1.EmployeeIsActive, T1.EmployeeIsManager, T2.CompanyName, T1.EmployeeName, T1.EmployeeId FROM (Employee T1 INNER JOIN Company T2 ON T2.CompanyId = T1.CompanyId)";
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV58Employeelistds_1_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( LOWER(T1.EmployeeName) like '%' || LOWER(:lV58Employeelistds_1_filterfulltext)) or ( LOWER(T1.EmployeeEmail) like '%' || LOWER(:lV58Employeelistds_1_filterfulltext)) or ( LOWER(T2.CompanyName) like '%' || LOWER(:lV58Employeelistds_1_filterfulltext)) or ( SUBSTR(TO_CHAR(T1.EmployeeVactionDays,'9999'), 2) like '%' || :lV58Employeelistds_1_filterfulltext))");
+            AddWhere(sWhereString, "(( LOWER(T1.EmployeeName) like '%' || LOWER(:lV58Employeelistds_1_filterfulltext)) or ( LOWER(T1.EmployeeEmail) like '%' || LOWER(:lV58Employeelistds_1_filterfulltext)) or ( LOWER(T2.CompanyName) like '%' || LOWER(:lV58Employeelistds_1_filterfulltext)) or ( SUBSTR(TO_CHAR(T1.EmployeeVactionDays,'90.9'), 2) like '%' || :lV58Employeelistds_1_filterfulltext))");
          }
          else
          {
@@ -960,7 +960,7 @@ namespace GeneXus.Programs {
          {
             AddWhere(sWhereString, "(T1.EmployeeIsActive = FALSE)");
          }
-         if ( ! (0==AV67Employeelistds_10_tfemployeevactiondays) )
+         if ( ! (Convert.ToDecimal(0)==AV67Employeelistds_10_tfemployeevactiondays) )
          {
             AddWhere(sWhereString, "(T1.EmployeeVactionDays >= :AV67Employeelistds_10_tfemployeevactiondays)");
          }
@@ -968,7 +968,7 @@ namespace GeneXus.Programs {
          {
             GXv_int3[10] = 1;
          }
-         if ( ! (0==AV68Employeelistds_11_tfemployeevactiondays_to) )
+         if ( ! (Convert.ToDecimal(0)==AV68Employeelistds_11_tfemployeevactiondays_to) )
          {
             AddWhere(sWhereString, "(T1.EmployeeVactionDays <= :AV68Employeelistds_11_tfemployeevactiondays_to)");
          }
@@ -993,12 +993,12 @@ namespace GeneXus.Programs {
                                              string AV63Employeelistds_6_tfcompanyname ,
                                              short AV65Employeelistds_8_tfemployeeismanager_sel ,
                                              short AV66Employeelistds_9_tfemployeeisactive_sel ,
-                                             short AV67Employeelistds_10_tfemployeevactiondays ,
-                                             short AV68Employeelistds_11_tfemployeevactiondays_to ,
+                                             decimal AV67Employeelistds_10_tfemployeevactiondays ,
+                                             decimal AV68Employeelistds_11_tfemployeevactiondays_to ,
                                              string A148EmployeeName ,
                                              string A109EmployeeEmail ,
                                              string A101CompanyName ,
-                                             short A146EmployeeVactionDays ,
+                                             decimal A146EmployeeVactionDays ,
                                              bool A110EmployeeIsManager ,
                                              bool A112EmployeeIsActive )
       {
@@ -1009,7 +1009,7 @@ namespace GeneXus.Programs {
          scmdbuf = "SELECT T1.CompanyId, T1.EmployeeVactionDays, T1.EmployeeIsActive, T1.EmployeeIsManager, T2.CompanyName, T1.EmployeeEmail, T1.EmployeeName, T1.EmployeeId FROM (Employee T1 INNER JOIN Company T2 ON T2.CompanyId = T1.CompanyId)";
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV58Employeelistds_1_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( LOWER(T1.EmployeeName) like '%' || LOWER(:lV58Employeelistds_1_filterfulltext)) or ( LOWER(T1.EmployeeEmail) like '%' || LOWER(:lV58Employeelistds_1_filterfulltext)) or ( LOWER(T2.CompanyName) like '%' || LOWER(:lV58Employeelistds_1_filterfulltext)) or ( SUBSTR(TO_CHAR(T1.EmployeeVactionDays,'9999'), 2) like '%' || :lV58Employeelistds_1_filterfulltext))");
+            AddWhere(sWhereString, "(( LOWER(T1.EmployeeName) like '%' || LOWER(:lV58Employeelistds_1_filterfulltext)) or ( LOWER(T1.EmployeeEmail) like '%' || LOWER(:lV58Employeelistds_1_filterfulltext)) or ( LOWER(T2.CompanyName) like '%' || LOWER(:lV58Employeelistds_1_filterfulltext)) or ( SUBSTR(TO_CHAR(T1.EmployeeVactionDays,'90.9'), 2) like '%' || :lV58Employeelistds_1_filterfulltext))");
          }
          else
          {
@@ -1094,7 +1094,7 @@ namespace GeneXus.Programs {
          {
             AddWhere(sWhereString, "(T1.EmployeeIsActive = FALSE)");
          }
-         if ( ! (0==AV67Employeelistds_10_tfemployeevactiondays) )
+         if ( ! (Convert.ToDecimal(0)==AV67Employeelistds_10_tfemployeevactiondays) )
          {
             AddWhere(sWhereString, "(T1.EmployeeVactionDays >= :AV67Employeelistds_10_tfemployeevactiondays)");
          }
@@ -1102,7 +1102,7 @@ namespace GeneXus.Programs {
          {
             GXv_int5[10] = 1;
          }
-         if ( ! (0==AV68Employeelistds_11_tfemployeevactiondays_to) )
+         if ( ! (Convert.ToDecimal(0)==AV68Employeelistds_11_tfemployeevactiondays_to) )
          {
             AddWhere(sWhereString, "(T1.EmployeeVactionDays <= :AV68Employeelistds_11_tfemployeevactiondays_to)");
          }
@@ -1124,11 +1124,11 @@ namespace GeneXus.Programs {
          switch ( cursor )
          {
                case 0 :
-                     return conditional_P007S2(context, (string)dynConstraints[0] , (string)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (short)dynConstraints[7] , (short)dynConstraints[8] , (short)dynConstraints[9] , (short)dynConstraints[10] , (string)dynConstraints[11] , (string)dynConstraints[12] , (string)dynConstraints[13] , (short)dynConstraints[14] , (bool)dynConstraints[15] , (bool)dynConstraints[16] );
+                     return conditional_P007S2(context, (string)dynConstraints[0] , (string)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (short)dynConstraints[7] , (short)dynConstraints[8] , (decimal)dynConstraints[9] , (decimal)dynConstraints[10] , (string)dynConstraints[11] , (string)dynConstraints[12] , (string)dynConstraints[13] , (decimal)dynConstraints[14] , (bool)dynConstraints[15] , (bool)dynConstraints[16] );
                case 1 :
-                     return conditional_P007S3(context, (string)dynConstraints[0] , (string)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (short)dynConstraints[7] , (short)dynConstraints[8] , (short)dynConstraints[9] , (short)dynConstraints[10] , (string)dynConstraints[11] , (string)dynConstraints[12] , (string)dynConstraints[13] , (short)dynConstraints[14] , (bool)dynConstraints[15] , (bool)dynConstraints[16] );
+                     return conditional_P007S3(context, (string)dynConstraints[0] , (string)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (short)dynConstraints[7] , (short)dynConstraints[8] , (decimal)dynConstraints[9] , (decimal)dynConstraints[10] , (string)dynConstraints[11] , (string)dynConstraints[12] , (string)dynConstraints[13] , (decimal)dynConstraints[14] , (bool)dynConstraints[15] , (bool)dynConstraints[16] );
                case 2 :
-                     return conditional_P007S4(context, (string)dynConstraints[0] , (string)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (short)dynConstraints[7] , (short)dynConstraints[8] , (short)dynConstraints[9] , (short)dynConstraints[10] , (string)dynConstraints[11] , (string)dynConstraints[12] , (string)dynConstraints[13] , (short)dynConstraints[14] , (bool)dynConstraints[15] , (bool)dynConstraints[16] );
+                     return conditional_P007S4(context, (string)dynConstraints[0] , (string)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (short)dynConstraints[7] , (short)dynConstraints[8] , (decimal)dynConstraints[9] , (decimal)dynConstraints[10] , (string)dynConstraints[11] , (string)dynConstraints[12] , (string)dynConstraints[13] , (decimal)dynConstraints[14] , (bool)dynConstraints[15] , (bool)dynConstraints[16] );
          }
          return base.getDynamicStatement(cursor, context, dynConstraints);
       }
@@ -1160,8 +1160,8 @@ namespace GeneXus.Programs {
           new ParDef("AV62Employeelistds_5_tfemployeeemail_sel",GXType.VarChar,100,0) ,
           new ParDef("lV63Employeelistds_6_tfcompanyname",GXType.Char,100,0) ,
           new ParDef("AV64Employeelistds_7_tfcompanyname_sel",GXType.Char,100,0) ,
-          new ParDef("AV67Employeelistds_10_tfemployeevactiondays",GXType.Int16,4,0) ,
-          new ParDef("AV68Employeelistds_11_tfemployeevactiondays_to",GXType.Int16,4,0)
+          new ParDef("AV67Employeelistds_10_tfemployeevactiondays",GXType.Number,4,1) ,
+          new ParDef("AV68Employeelistds_11_tfemployeevactiondays_to",GXType.Number,4,1)
           };
           Object[] prmP007S3;
           prmP007S3 = new Object[] {
@@ -1175,8 +1175,8 @@ namespace GeneXus.Programs {
           new ParDef("AV62Employeelistds_5_tfemployeeemail_sel",GXType.VarChar,100,0) ,
           new ParDef("lV63Employeelistds_6_tfcompanyname",GXType.Char,100,0) ,
           new ParDef("AV64Employeelistds_7_tfcompanyname_sel",GXType.Char,100,0) ,
-          new ParDef("AV67Employeelistds_10_tfemployeevactiondays",GXType.Int16,4,0) ,
-          new ParDef("AV68Employeelistds_11_tfemployeevactiondays_to",GXType.Int16,4,0)
+          new ParDef("AV67Employeelistds_10_tfemployeevactiondays",GXType.Number,4,1) ,
+          new ParDef("AV68Employeelistds_11_tfemployeevactiondays_to",GXType.Number,4,1)
           };
           Object[] prmP007S4;
           prmP007S4 = new Object[] {
@@ -1190,8 +1190,8 @@ namespace GeneXus.Programs {
           new ParDef("AV62Employeelistds_5_tfemployeeemail_sel",GXType.VarChar,100,0) ,
           new ParDef("lV63Employeelistds_6_tfcompanyname",GXType.Char,100,0) ,
           new ParDef("AV64Employeelistds_7_tfcompanyname_sel",GXType.Char,100,0) ,
-          new ParDef("AV67Employeelistds_10_tfemployeevactiondays",GXType.Int16,4,0) ,
-          new ParDef("AV68Employeelistds_11_tfemployeevactiondays_to",GXType.Int16,4,0)
+          new ParDef("AV67Employeelistds_10_tfemployeevactiondays",GXType.Number,4,1) ,
+          new ParDef("AV68Employeelistds_11_tfemployeevactiondays_to",GXType.Number,4,1)
           };
           def= new CursorDef[] {
               new CursorDef("P007S2", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP007S2,100, GxCacheFrequency.OFF ,true,false )
@@ -1210,7 +1210,7 @@ namespace GeneXus.Programs {
              case 0 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);
                 ((string[]) buf[1])[0] = rslt.getString(2, 100);
-                ((short[]) buf[2])[0] = rslt.getShort(3);
+                ((decimal[]) buf[2])[0] = rslt.getDecimal(3);
                 ((bool[]) buf[3])[0] = rslt.getBool(4);
                 ((bool[]) buf[4])[0] = rslt.getBool(5);
                 ((string[]) buf[5])[0] = rslt.getString(6, 100);
@@ -1220,7 +1220,7 @@ namespace GeneXus.Programs {
              case 1 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);
                 ((string[]) buf[1])[0] = rslt.getVarchar(2);
-                ((short[]) buf[2])[0] = rslt.getShort(3);
+                ((decimal[]) buf[2])[0] = rslt.getDecimal(3);
                 ((bool[]) buf[3])[0] = rslt.getBool(4);
                 ((bool[]) buf[4])[0] = rslt.getBool(5);
                 ((string[]) buf[5])[0] = rslt.getString(6, 100);
@@ -1229,7 +1229,7 @@ namespace GeneXus.Programs {
                 return;
              case 2 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);
-                ((short[]) buf[1])[0] = rslt.getShort(2);
+                ((decimal[]) buf[1])[0] = rslt.getDecimal(2);
                 ((bool[]) buf[2])[0] = rslt.getBool(3);
                 ((bool[]) buf[3])[0] = rslt.getBool(4);
                 ((string[]) buf[4])[0] = rslt.getString(5, 100);

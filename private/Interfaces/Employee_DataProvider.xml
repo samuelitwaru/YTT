@@ -136,6 +136,18 @@
               </Property>
             </Properties>
           </Field>
+          <Field name="EmployeeVacationDaysSetDate" description="Employee Vacation Days Set Date">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>Date</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>8</Value>
+              </Property>
+            </Properties>
+          </Field>
           <Field name="EmployeeBalance" description="Employee Balance">
             <Properties>
               <Property>

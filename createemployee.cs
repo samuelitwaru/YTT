@@ -628,12 +628,12 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+edtavEmployee_employeevactiondays_Internalname+"\"", "", "div");
             /* Attribute/Variable Label */
-            GxWebStd.gx_label_element( context, edtavEmployee_employeevactiondays_Internalname, "Vaction Days", " AttributeLabel", 1, true, "");
+            GxWebStd.gx_label_element( context, edtavEmployee_employeevactiondays_Internalname, "Vacation Days", " AttributeLabel", 1, true, "");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
             /* Single line edit */
             TempTags = "  onfocus=\"gx.evt.onfocus(this, 52,'',false,'" + sGXsfl_58_idx + "',0)\"";
-            GxWebStd.gx_single_line_edit( context, edtavEmployee_employeevactiondays_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(AV7Employee.gxTpr_Employeevactiondays), 4, 0, ".", "")), StringUtil.LTrim( context.localUtil.Format( (decimal)(AV7Employee.gxTpr_Employeevactiondays), "ZZZ9")), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+TempTags+" onchange=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onblur(this,52);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavEmployee_employeevactiondays_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavEmployee_employeevactiondays_Enabled, 1, "text", "1", 4, "chr", 1, "row", 4, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_CreateEmployee.htm");
+            GxWebStd.gx_single_line_edit( context, edtavEmployee_employeevactiondays_Internalname, StringUtil.LTrim( StringUtil.NToC( AV7Employee.gxTpr_Employeevactiondays, 4, 1, ".", "")), StringUtil.LTrim( context.localUtil.Format( AV7Employee.gxTpr_Employeevactiondays, "Z9.9")), TempTags+" onchange=\""+"gx.num.valid_decimal( this, ',','.','1');"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.num.valid_decimal( this, ',','.','1');"+";gx.evt.onblur(this,52);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavEmployee_employeevactiondays_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavEmployee_employeevactiondays_Enabled, 1, "text", "", 4, "chr", 1, "row", 4, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_CreateEmployee.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -765,7 +765,7 @@ namespace GeneXus.Programs {
             GxWebStd.gx_single_line_edit( context, edtavEmployee_gamuserguid_Internalname, AV7Employee.gxTpr_Gamuserguid, StringUtil.RTrim( context.localUtil.Format( AV7Employee.gxTpr_Gamuserguid, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,82);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavEmployee_gamuserguid_Jsonclick, 0, "Attribute", "", "", "", "", edtavEmployee_gamuserguid_Visible, 1, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, 0, 0, true, "", "start", true, "", "HLP_CreateEmployee.htm");
             /* Single line edit */
             TempTags = "  onfocus=\"gx.evt.onfocus(this, 83,'',false,'" + sGXsfl_58_idx + "',0)\"";
-            GxWebStd.gx_single_line_edit( context, edtavEmployee_employeebalance_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(AV7Employee.gxTpr_Employeebalance), 4, 0, ".", "")), StringUtil.LTrim( context.localUtil.Format( (decimal)(AV7Employee.gxTpr_Employeebalance), "ZZZ9")), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+TempTags+" onchange=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onblur(this,83);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavEmployee_employeebalance_Jsonclick, 0, "Attribute", "", "", "", "", edtavEmployee_employeebalance_Visible, 1, 0, "text", "1", 4, "chr", 1, "row", 4, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_CreateEmployee.htm");
+            GxWebStd.gx_single_line_edit( context, edtavEmployee_employeebalance_Internalname, StringUtil.LTrim( StringUtil.NToC( AV7Employee.gxTpr_Employeebalance, 4, 1, ".", "")), StringUtil.LTrim( context.localUtil.Format( AV7Employee.gxTpr_Employeebalance, "Z9.9")), TempTags+" onchange=\""+"gx.num.valid_decimal( this, ',','.','1');"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.num.valid_decimal( this, ',','.','1');"+";gx.evt.onblur(this,83);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavEmployee_employeebalance_Jsonclick, 0, "Attribute", "", "", "", "", edtavEmployee_employeebalance_Visible, 1, 0, "text", "", 4, "chr", 1, "row", 4, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_CreateEmployee.htm");
             /* User Defined Control */
             ucGridlevel_project_empowerer.Render(context, "wwp.gridempowerer", Gridlevel_project_empowerer_Internalname, "GRIDLEVEL_PROJECT_EMPOWERERContainer");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -1489,7 +1489,7 @@ namespace GeneXus.Programs {
             AV7Employee.gxTpr_Companyid = (long)(Math.Round(NumberUtil.Val( cgiGet( dynavEmployee_companyid_Internalname), "."), 18, MidpointRounding.ToEven));
             AV7Employee.gxTpr_Employeeismanager = StringUtil.StrToBool( cgiGet( chkavEmployee_employeeismanager_Internalname));
             AV7Employee.gxTpr_Employeeisactive = StringUtil.StrToBool( cgiGet( chkavEmployee_employeeisactive_Internalname));
-            if ( ( ( context.localUtil.CToN( cgiGet( edtavEmployee_employeevactiondays_Internalname), ".", ",") < Convert.ToDecimal( 0 )) ) || ( ( context.localUtil.CToN( cgiGet( edtavEmployee_employeevactiondays_Internalname), ".", ",") > Convert.ToDecimal( 9999 )) ) )
+            if ( ( ( context.localUtil.CToN( cgiGet( edtavEmployee_employeevactiondays_Internalname), ".", ",") < Convert.ToDecimal( 0 )) ) || ( ( context.localUtil.CToN( cgiGet( edtavEmployee_employeevactiondays_Internalname), ".", ",") > 99.9m ) ) )
             {
                GX_msglist.addItem(context.GetMessage( "GXM_badnum", ""), 1, "EMPLOYEE_EMPLOYEEVACTIONDAYS");
                GX_FocusControl = edtavEmployee_employeevactiondays_Internalname;
@@ -1499,7 +1499,7 @@ namespace GeneXus.Programs {
             }
             else
             {
-               AV7Employee.gxTpr_Employeevactiondays = (short)(Math.Round(context.localUtil.CToN( cgiGet( edtavEmployee_employeevactiondays_Internalname), ".", ","), 18, MidpointRounding.ToEven));
+               AV7Employee.gxTpr_Employeevactiondays = context.localUtil.CToN( cgiGet( edtavEmployee_employeevactiondays_Internalname), ".", ",");
             }
             if ( ( ( context.localUtil.CToN( cgiGet( edtavEmployee_employeeid_Internalname), ".", ",") < Convert.ToDecimal( 0 )) ) || ( ( context.localUtil.CToN( cgiGet( edtavEmployee_employeeid_Internalname), ".", ",") > Convert.ToDecimal( 9999999999L )) ) )
             {
@@ -1516,7 +1516,7 @@ namespace GeneXus.Programs {
             AV7Employee.gxTpr_Employeename = cgiGet( edtavEmployee_employeename_Internalname);
             AV7Employee.gxTpr_Companyname = cgiGet( edtavEmployee_companyname_Internalname);
             AV7Employee.gxTpr_Gamuserguid = cgiGet( edtavEmployee_gamuserguid_Internalname);
-            if ( ( ( context.localUtil.CToN( cgiGet( edtavEmployee_employeebalance_Internalname), ".", ",") < Convert.ToDecimal( 0 )) ) || ( ( context.localUtil.CToN( cgiGet( edtavEmployee_employeebalance_Internalname), ".", ",") > Convert.ToDecimal( 9999 )) ) )
+            if ( ( ( context.localUtil.CToN( cgiGet( edtavEmployee_employeebalance_Internalname), ".", ",") < Convert.ToDecimal( 0 )) ) || ( ( context.localUtil.CToN( cgiGet( edtavEmployee_employeebalance_Internalname), ".", ",") > 99.9m ) ) )
             {
                GX_msglist.addItem(context.GetMessage( "GXM_badnum", ""), 1, "EMPLOYEE_EMPLOYEEBALANCE");
                GX_FocusControl = edtavEmployee_employeebalance_Internalname;
@@ -1526,7 +1526,7 @@ namespace GeneXus.Programs {
             }
             else
             {
-               AV7Employee.gxTpr_Employeebalance = (short)(Math.Round(context.localUtil.CToN( cgiGet( edtavEmployee_employeebalance_Internalname), ".", ","), 18, MidpointRounding.ToEven));
+               AV7Employee.gxTpr_Employeebalance = context.localUtil.CToN( cgiGet( edtavEmployee_employeebalance_Internalname), ".", ",");
             }
             /* Read subfile selected row values. */
             /* Read hidden variables. */
@@ -1952,7 +1952,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247521513148", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202471112591858", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1968,7 +1968,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("createemployee.js", "?20247521513148", false, true);
+         context.AddJavascriptSource("createemployee.js", "?202471112591858", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/GridEmpowerer/GridEmpowererRender.js", "", false, true);
          /* End function include_jscripts */
