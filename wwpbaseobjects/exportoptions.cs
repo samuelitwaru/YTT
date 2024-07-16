@@ -832,17 +832,17 @@ namespace GeneXus.Programs.wwpbaseobjects {
             context.WriteHtmlText( "<tr>") ;
             context.WriteHtmlText( "<td>") ;
             /* Div Control */
-            GxWebStd.gx_div_start( context, divNewtable_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
+            GxWebStd.gx_div_start( context, divMaintable_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-3 hidden-xs hidden-sm", "start", "top", "", "", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, divTableleft_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
+            GxWebStd.gx_div_start( context, divLefttable_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-md-6 PopupContentCell", "start", "top", "", "", "div");
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-md-6 PopupContentCell", "Center", "top", "", "", "div");
             wb_table2_20_0G2( true) ;
          }
          else
@@ -856,11 +856,11 @@ namespace GeneXus.Programs.wwpbaseobjects {
       {
          if ( wbgen )
          {
-            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "Center", "top", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-3 hidden-xs hidden-sm", "start", "top", "", "", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, divTableright_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
+            GxWebStd.gx_div_start( context, divRighttable_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -1154,7 +1154,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024752146120", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202471517103635", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1170,7 +1170,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wwpbaseobjects/exportoptions.js", "?2024752146120", false, true);
+         context.AddJavascriptSource("wwpbaseobjects/exportoptions.js", "?202471517103635", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Panel/BootstrapPanelRender.js", "", false, true);
@@ -1195,7 +1195,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       protected void init_default_properties( )
       {
          lblJs_Internalname = "JS";
-         divTableleft_Internalname = "TABLELEFT";
+         divLefttable_Internalname = "LEFTTABLE";
          bttBtndownloadtofile_Internalname = "BTNDOWNLOADTOFILE";
          bttBtnsavegoogledrive_Internalname = "BTNSAVEGOOGLEDRIVE";
          bttBtncancel_Internalname = "BTNCANCEL";
@@ -1208,8 +1208,8 @@ namespace GeneXus.Programs.wwpbaseobjects {
          divTableattributes_Internalname = "TABLEATTRIBUTES";
          tblTablegoogledriveinfo_Internalname = "TABLEGOOGLEDRIVEINFO";
          tblTablecontent_Internalname = "TABLECONTENT";
-         divTableright_Internalname = "TABLERIGHT";
-         divNewtable_Internalname = "NEWTABLE";
+         divRighttable_Internalname = "RIGHTTABLE";
+         divMaintable_Internalname = "MAINTABLE";
          Innewwindow1_Internalname = "INNEWWINDOW1";
          tblUt_Internalname = "UT";
          divHtml_usertable_ut_Internalname = "HTML_USERTABLE_UT";
@@ -1403,9 +1403,9 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private string lblJs_Jsonclick ;
       private string ClassString ;
       private string StyleString ;
-      private string divNewtable_Internalname ;
-      private string divTableleft_Internalname ;
-      private string divTableright_Internalname ;
+      private string divMaintable_Internalname ;
+      private string divLefttable_Internalname ;
+      private string divRighttable_Internalname ;
       private string divHtml_usertable_ut_Internalname ;
       private string tblUt_Internalname ;
       private string TempTags ;
