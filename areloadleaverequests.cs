@@ -36,7 +36,15 @@ namespace GeneXus.Programs {
          if ( nGotPars == 0 )
          {
             entryPointCalled = false;
-            gxfirstwebparm = GetNextPar( );
+            gxfirstwebparm = GetFirstPar( "FromDate");
+            if ( ! entryPointCalled )
+            {
+               AV10FromDate = context.localUtil.ParseDateParm( gxfirstwebparm);
+               if ( StringUtil.StrCmp(gxfirstwebparm, "viewer") != 0 )
+               {
+                  AV9ToDate = context.localUtil.ParseDateParm( GetPar( "ToDate"));
+               }
+            }
          }
          if ( GxWebError == 0 )
          {
@@ -63,16 +71,22 @@ namespace GeneXus.Programs {
          dsDefault = context.GetDataStore("Default");
       }
 
-      public void execute( )
+      public void execute( DateTime aP0_FromDate ,
+                           DateTime aP1_ToDate )
       {
+         this.AV10FromDate = aP0_FromDate;
+         this.AV9ToDate = aP1_ToDate;
          initialize();
          executePrivate();
       }
 
-      public void executeSubmit( )
+      public void executeSubmit( DateTime aP0_FromDate ,
+                                 DateTime aP1_ToDate )
       {
          areloadleaverequests objareloadleaverequests;
          objareloadleaverequests = new areloadleaverequests();
+         objareloadleaverequests.AV10FromDate = aP0_FromDate;
+         objareloadleaverequests.AV9ToDate = aP1_ToDate;
          objareloadleaverequests.context.SetSubmitInitialConfig(context);
          objareloadleaverequests.initialize();
          Submit( executePrivateCatch,objareloadleaverequests);
@@ -95,15 +109,23 @@ namespace GeneXus.Programs {
       {
          /* GeneXus formulas */
          /* Output device settings */
-         new logtofile(context ).execute(  "Starting...") ;
+         pr_default.dynParam(0, new Object[]{ new Object[]{
+                                              AV10FromDate ,
+                                              AV9ToDate ,
+                                              A129LeaveRequestStartDate ,
+                                              A100CompanyId } ,
+                                              new int[]{
+                                              TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.LONG
+                                              }
+         });
          /* Using cursor P00BA2 */
-         pr_default.execute(0);
+         pr_default.execute(0, new Object[] {AV10FromDate, AV9ToDate});
          while ( (pr_default.getStatus(0) != 101) )
          {
             A124LeaveTypeId = P00BA2_A124LeaveTypeId[0];
+            A129LeaveRequestStartDate = P00BA2_A129LeaveRequestStartDate[0];
             A100CompanyId = P00BA2_A100CompanyId[0];
             A127LeaveRequestId = P00BA2_A127LeaveRequestId[0];
-            A129LeaveRequestStartDate = P00BA2_A129LeaveRequestStartDate[0];
             A130LeaveRequestEndDate = P00BA2_A130LeaveRequestEndDate[0];
             A173LeaveRequestHalfDay = P00BA2_A173LeaveRequestHalfDay[0];
             n173LeaveRequestHalfDay = P00BA2_n173LeaveRequestHalfDay[0];
@@ -114,7 +136,6 @@ namespace GeneXus.Programs {
             AV8LeaveRequest.gxTpr_Leaverequestduration = GXt_decimal1;
             if ( AV8LeaveRequest.Update() )
             {
-               new logtofile(context ).execute(  "Commiting...") ;
                context.CommitDataStores("reloadleaverequests",pr_default);
             }
             else
@@ -152,14 +173,14 @@ namespace GeneXus.Programs {
          GXKey = "";
          gxfirstwebparm = "";
          scmdbuf = "";
+         A129LeaveRequestStartDate = DateTime.MinValue;
          P00BA2_A124LeaveTypeId = new long[1] ;
+         P00BA2_A129LeaveRequestStartDate = new DateTime[] {DateTime.MinValue} ;
          P00BA2_A100CompanyId = new long[1] ;
          P00BA2_A127LeaveRequestId = new long[1] ;
-         P00BA2_A129LeaveRequestStartDate = new DateTime[] {DateTime.MinValue} ;
          P00BA2_A130LeaveRequestEndDate = new DateTime[] {DateTime.MinValue} ;
          P00BA2_A173LeaveRequestHalfDay = new string[] {""} ;
          P00BA2_n173LeaveRequestHalfDay = new bool[] {false} ;
-         A129LeaveRequestStartDate = DateTime.MinValue;
          A130LeaveRequestEndDate = DateTime.MinValue;
          A173LeaveRequestHalfDay = "";
          AV8LeaveRequest = new SdtLeaveRequest(context);
@@ -170,7 +191,7 @@ namespace GeneXus.Programs {
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.areloadleaverequests__default(),
             new Object[][] {
                 new Object[] {
-               P00BA2_A124LeaveTypeId, P00BA2_A100CompanyId, P00BA2_A127LeaveRequestId, P00BA2_A129LeaveRequestStartDate, P00BA2_A130LeaveRequestEndDate, P00BA2_A173LeaveRequestHalfDay, P00BA2_n173LeaveRequestHalfDay
+               P00BA2_A124LeaveTypeId, P00BA2_A129LeaveRequestStartDate, P00BA2_A100CompanyId, P00BA2_A127LeaveRequestId, P00BA2_A130LeaveRequestEndDate, P00BA2_A173LeaveRequestHalfDay, P00BA2_n173LeaveRequestHalfDay
                }
             }
          );
@@ -180,14 +201,16 @@ namespace GeneXus.Programs {
       private short gxcookieaux ;
       private short nGotPars ;
       private short GxWebError ;
-      private long A124LeaveTypeId ;
       private long A100CompanyId ;
+      private long A124LeaveTypeId ;
       private long A127LeaveRequestId ;
       private decimal GXt_decimal1 ;
       private string GXKey ;
       private string gxfirstwebparm ;
       private string scmdbuf ;
       private string A173LeaveRequestHalfDay ;
+      private DateTime AV10FromDate ;
+      private DateTime AV9ToDate ;
       private DateTime A129LeaveRequestStartDate ;
       private DateTime A130LeaveRequestEndDate ;
       private bool entryPointCalled ;
@@ -196,9 +219,9 @@ namespace GeneXus.Programs {
       private IGxDataStore dsDefault ;
       private IDataStoreProvider pr_default ;
       private long[] P00BA2_A124LeaveTypeId ;
+      private DateTime[] P00BA2_A129LeaveRequestStartDate ;
       private long[] P00BA2_A100CompanyId ;
       private long[] P00BA2_A127LeaveRequestId ;
-      private DateTime[] P00BA2_A129LeaveRequestStartDate ;
       private DateTime[] P00BA2_A130LeaveRequestEndDate ;
       private string[] P00BA2_A173LeaveRequestHalfDay ;
       private bool[] P00BA2_n173LeaveRequestHalfDay ;
@@ -240,6 +263,53 @@ namespace GeneXus.Programs {
 
  public class areloadleaverequests__default : DataStoreHelperBase, IDataStoreHelper
  {
+    protected Object[] conditional_P00BA2( IGxContext context ,
+                                           DateTime AV10FromDate ,
+                                           DateTime AV9ToDate ,
+                                           DateTime A129LeaveRequestStartDate ,
+                                           long A100CompanyId )
+    {
+       System.Text.StringBuilder sWhereString = new System.Text.StringBuilder();
+       string scmdbuf;
+       short[] GXv_int2 = new short[2];
+       Object[] GXv_Object3 = new Object[2];
+       scmdbuf = "SELECT T1.LeaveTypeId, T1.LeaveRequestStartDate, T2.CompanyId, T1.LeaveRequestId, T1.LeaveRequestEndDate, T1.LeaveRequestHalfDay FROM (LeaveRequest T1 INNER JOIN LeaveType T2 ON T2.LeaveTypeId = T1.LeaveTypeId)";
+       AddWhere(sWhereString, "(T2.CompanyId = 1)");
+       if ( ! (DateTime.MinValue==AV10FromDate) )
+       {
+          AddWhere(sWhereString, "(T1.LeaveRequestStartDate > :AV10FromDate)");
+       }
+       else
+       {
+          GXv_int2[0] = 1;
+       }
+       if ( ! (DateTime.MinValue==AV9ToDate) )
+       {
+          AddWhere(sWhereString, "(T1.LeaveRequestStartDate <= :AV9ToDate)");
+       }
+       else
+       {
+          GXv_int2[1] = 1;
+       }
+       scmdbuf += sWhereString;
+       scmdbuf += " ORDER BY T1.LeaveRequestId";
+       GXv_Object3[0] = scmdbuf;
+       GXv_Object3[1] = GXv_int2;
+       return GXv_Object3 ;
+    }
+
+    public override Object [] getDynamicStatement( int cursor ,
+                                                   IGxContext context ,
+                                                   Object [] dynConstraints )
+    {
+       switch ( cursor )
+       {
+             case 0 :
+                   return conditional_P00BA2(context, (DateTime)dynConstraints[0] , (DateTime)dynConstraints[1] , (DateTime)dynConstraints[2] , (long)dynConstraints[3] );
+       }
+       return base.getDynamicStatement(cursor, context, dynConstraints);
+    }
+
     public ICursor[] getCursors( )
     {
        cursorDefinitions();
@@ -255,9 +325,11 @@ namespace GeneXus.Programs {
      {
         Object[] prmP00BA2;
         prmP00BA2 = new Object[] {
+        new ParDef("AV10FromDate",GXType.Date,8,0) ,
+        new ParDef("AV9ToDate",GXType.Date,8,0)
         };
         def= new CursorDef[] {
-            new CursorDef("P00BA2", "SELECT T1.LeaveTypeId, T2.CompanyId, T1.LeaveRequestId, T1.LeaveRequestStartDate, T1.LeaveRequestEndDate, T1.LeaveRequestHalfDay FROM (LeaveRequest T1 INNER JOIN LeaveType T2 ON T2.LeaveTypeId = T1.LeaveTypeId) WHERE T2.CompanyId = 1 ORDER BY T1.LeaveRequestId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00BA2,100, GxCacheFrequency.OFF ,true,false )
+            new CursorDef("P00BA2", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00BA2,100, GxCacheFrequency.OFF ,true,false )
         };
      }
   }
@@ -270,9 +342,9 @@ namespace GeneXus.Programs {
      {
            case 0 :
               ((long[]) buf[0])[0] = rslt.getLong(1);
-              ((long[]) buf[1])[0] = rslt.getLong(2);
+              ((DateTime[]) buf[1])[0] = rslt.getGXDate(2);
               ((long[]) buf[2])[0] = rslt.getLong(3);
-              ((DateTime[]) buf[3])[0] = rslt.getGXDate(4);
+              ((long[]) buf[3])[0] = rslt.getLong(4);
               ((DateTime[]) buf[4])[0] = rslt.getGXDate(5);
               ((string[]) buf[5])[0] = rslt.getString(6, 20);
               ((bool[]) buf[6])[0] = rslt.wasNull(6);

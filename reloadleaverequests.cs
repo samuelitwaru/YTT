@@ -41,16 +41,22 @@ namespace GeneXus.Programs {
          dsDefault = context.GetDataStore("Default");
       }
 
-      public void execute( )
+      public void execute( DateTime aP0_FromDate ,
+                           DateTime aP1_ToDate )
       {
+         this.AV2FromDate = aP0_FromDate;
+         this.AV3ToDate = aP1_ToDate;
          initialize();
          executePrivate();
       }
 
-      public void executeSubmit( )
+      public void executeSubmit( DateTime aP0_FromDate ,
+                                 DateTime aP1_ToDate )
       {
          reloadleaverequests objreloadleaverequests;
          objreloadleaverequests = new reloadleaverequests();
+         objreloadleaverequests.AV2FromDate = aP0_FromDate;
+         objreloadleaverequests.AV3ToDate = aP1_ToDate;
          objreloadleaverequests.context.SetSubmitInitialConfig(context);
          objreloadleaverequests.initialize();
          Submit( executePrivateCatch,objreloadleaverequests);
@@ -73,8 +79,11 @@ namespace GeneXus.Programs {
       {
          /* GeneXus formulas */
          /* Output device settings */
-         args = new Object[] {} ;
+         args = new Object[] {(DateTime)AV2FromDate,(DateTime)AV3ToDate} ;
          ClassLoader.Execute("areloadleaverequests","GeneXus.Programs","areloadleaverequests", new Object[] {context }, "execute", args);
+         if ( ( args != null ) && ( args.Length == 2 ) )
+         {
+         }
          this.cleanup();
       }
 
@@ -96,6 +105,8 @@ namespace GeneXus.Programs {
          /* GeneXus formulas. */
       }
 
+      private DateTime AV2FromDate ;
+      private DateTime AV3ToDate ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private Object[] args ;
