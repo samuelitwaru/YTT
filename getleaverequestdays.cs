@@ -147,7 +147,6 @@ namespace GeneXus.Programs {
             pr_default.readNext(0);
          }
          pr_default.close(0);
-         new logtofile(context ).execute(  ">>>>>"+AV19LeaveRequestHalfDay) ;
          if ( StringUtil.StrCmp(AV19LeaveRequestHalfDay, "") != 0 )
          {
             if ( AV16totalHoliday == 0 )
@@ -165,7 +164,6 @@ namespace GeneXus.Programs {
             {
                AV17FinalDuration = 0;
             }
-            new logtofile(context ).execute(  "Final Duration 1:"+StringUtil.Str( AV17FinalDuration, 4, 1)) ;
          }
          else
          {
@@ -180,7 +178,6 @@ namespace GeneXus.Programs {
             }
             AV17FinalDuration = (decimal)(AV9Duration-AV16totalHoliday);
          }
-         new logtofile(context ).execute(  "Final Duration:"+StringUtil.Str( AV17FinalDuration, 4, 1)) ;
          this.cleanup();
       }
 
