@@ -255,12 +255,6 @@
   </Object>
   <Object>
     <ObjCls>13</ObjCls>
-    <ObjName>LeaveDetailsPopup</ObjName>
-    <ObjDesc>Leave Details Popup</ObjDesc>
-    <ObjLink>leavedetailspopup.aspx</ObjLink>
-  </Object>
-  <Object>
-    <ObjCls>13</ObjCls>
     <ObjName>EmployeeList</ObjName>
     <ObjDesc> Employees</ObjDesc>
     <ObjLink>employeelist.aspx</ObjLink>

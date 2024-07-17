@@ -437,11 +437,11 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+edtLeaveTypeName_Internalname+"\"", "", "div");
             /* Attribute/Variable Label */
-            GxWebStd.gx_label_element( context, edtLeaveTypeName_Internalname, "Leave Type Name", " AttributeLabel", 1, true, "");
+            GxWebStd.gx_label_element( context, edtLeaveTypeName_Internalname, "Leave Type Name", " AttributeLabel MaxWidthLabel", 1, true, "");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
             /* Single line edit */
-            GxWebStd.gx_single_line_edit( context, edtLeaveTypeName_Internalname, StringUtil.RTrim( A125LeaveTypeName), StringUtil.RTrim( context.localUtil.Format( A125LeaveTypeName, "")), "", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtLeaveTypeName_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtLeaveTypeName_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "Name", "start", true, "", "HLP_LeaveTypeGeneral.htm");
+            GxWebStd.gx_single_line_edit( context, edtLeaveTypeName_Internalname, StringUtil.RTrim( A125LeaveTypeName), StringUtil.RTrim( context.localUtil.Format( A125LeaveTypeName, "")), "", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtLeaveTypeName_Jsonclick, 0, "Attribute MaxWidth", "", "", "", "", 1, edtLeaveTypeName_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "Name", "start", true, "", "HLP_LeaveTypeGeneral.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -450,11 +450,11 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+edtLeaveTypeColorApproved_Internalname+"\"", "", "div");
             /* Attribute/Variable Label */
-            GxWebStd.gx_label_element( context, edtLeaveTypeColorApproved_Internalname, "Approved Leave Color", " AttributeLabel", 1, true, "");
+            GxWebStd.gx_label_element( context, edtLeaveTypeColorApproved_Internalname, "Approved Leave Color", " AttributeLabel MaxWidthLabel", 1, true, "");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
             /* Single line edit */
-            GxWebStd.gx_single_line_edit( context, edtLeaveTypeColorApproved_Internalname, StringUtil.RTrim( A175LeaveTypeColorApproved), StringUtil.RTrim( context.localUtil.Format( A175LeaveTypeColorApproved, "")), "", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtLeaveTypeColorApproved_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtLeaveTypeColorApproved_Enabled, 0, "color", "", 20, "chr", 1, "row", 20, 0, 0, 0, 0, -1, -1, true, "Color", "start", true, "", "HLP_LeaveTypeGeneral.htm");
+            GxWebStd.gx_single_line_edit( context, edtLeaveTypeColorApproved_Internalname, StringUtil.RTrim( A175LeaveTypeColorApproved), StringUtil.RTrim( context.localUtil.Format( A175LeaveTypeColorApproved, "")), "", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtLeaveTypeColorApproved_Jsonclick, 0, "Attribute MaxWidth", "", "", "", "", 1, edtLeaveTypeColorApproved_Enabled, 0, "color", "", 20, "chr", 1, "row", 20, 0, 0, 0, 0, -1, -1, true, "Color", "start", true, "", "HLP_LeaveTypeGeneral.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -466,11 +466,11 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+radLeaveTypeVacationLeave_Internalname+"\"", "", "div");
             /* Attribute/Variable Label */
-            GxWebStd.gx_label_element( context, "", "Deduct from vacation days", " AttributeLabel", 1, true, "");
+            GxWebStd.gx_label_element( context, "", "Deduct from vacation days", " AttributeLabel MaxWidthLabel", 1, true, "");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
             /* Radio button */
-            ClassString = "Attribute";
+            ClassString = "Attribute MaxWidth";
             StyleString = "";
             GxWebStd.gx_radio_ctrl( context, radLeaveTypeVacationLeave, radLeaveTypeVacationLeave_Internalname, StringUtil.RTrim( A144LeaveTypeVacationLeave), "", 1, 0, 0, 0, StyleString, ClassString, "", "", 0, radLeaveTypeVacationLeave_Jsonclick, "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "HLP_LeaveTypeGeneral.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -481,11 +481,11 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+radLeaveTypeLoggingWorkHours_Internalname+"\"", "", "div");
             /* Attribute/Variable Label */
-            GxWebStd.gx_label_element( context, "", "Log Work Hours During Leave", " AttributeLabel", 1, true, "");
+            GxWebStd.gx_label_element( context, "", "Log Work Hours During Leave", " AttributeLabel MaxWidthLabel", 1, true, "");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
             /* Radio button */
-            ClassString = "Attribute";
+            ClassString = "Attribute MaxWidth";
             StyleString = "";
             GxWebStd.gx_radio_ctrl( context, radLeaveTypeLoggingWorkHours, radLeaveTypeLoggingWorkHours_Internalname, StringUtil.RTrim( A145LeaveTypeLoggingWorkHours), "", 1, 0, 0, 0, StyleString, ClassString, "", "", 0, radLeaveTypeLoggingWorkHours_Jsonclick, "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "HLP_LeaveTypeGeneral.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -1185,7 +1185,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247721204725", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202471712102951", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1201,7 +1201,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("leavetypegeneral.js", "?20247721204725", false, true);
+         context.AddJavascriptSource("leavetypegeneral.js", "?202471712102951", false, true);
          /* End function include_jscripts */
       }
 

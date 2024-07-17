@@ -435,11 +435,11 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+edtCompanyLocationName_Internalname+"\"", "", "div");
             /* Attribute/Variable Label */
-            GxWebStd.gx_label_element( context, edtCompanyLocationName_Internalname, "Country Name", " AttributeLabel", 1, true, "");
+            GxWebStd.gx_label_element( context, edtCompanyLocationName_Internalname, "Country Name", " AttributeLabel MaxWidthLabel", 1, true, "");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
             /* Single line edit */
-            GxWebStd.gx_single_line_edit( context, edtCompanyLocationName_Internalname, StringUtil.RTrim( A158CompanyLocationName), StringUtil.RTrim( context.localUtil.Format( A158CompanyLocationName, "")), "", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtCompanyLocationName_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtCompanyLocationName_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "Name", "start", true, "", "HLP_CompanyLocationGeneral.htm");
+            GxWebStd.gx_single_line_edit( context, edtCompanyLocationName_Internalname, StringUtil.RTrim( A158CompanyLocationName), StringUtil.RTrim( context.localUtil.Format( A158CompanyLocationName, "")), "", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtCompanyLocationName_Jsonclick, 0, "Attribute MaxWidth", "", "", "", "", 1, edtCompanyLocationName_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "Name", "start", true, "", "HLP_CompanyLocationGeneral.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -448,11 +448,11 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+edtCompanyLocationCode_Internalname+"\"", "", "div");
             /* Attribute/Variable Label */
-            GxWebStd.gx_label_element( context, edtCompanyLocationCode_Internalname, "Country Code", " AttributeLabel", 1, true, "");
+            GxWebStd.gx_label_element( context, edtCompanyLocationCode_Internalname, "Country Code", " AttributeLabel MaxWidthLabel", 1, true, "");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
             /* Single line edit */
-            GxWebStd.gx_single_line_edit( context, edtCompanyLocationCode_Internalname, StringUtil.RTrim( A159CompanyLocationCode), StringUtil.RTrim( context.localUtil.Format( A159CompanyLocationCode, "")), "", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtCompanyLocationCode_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtCompanyLocationCode_Enabled, 0, "text", "", 20, "chr", 1, "row", 20, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_CompanyLocationGeneral.htm");
+            GxWebStd.gx_single_line_edit( context, edtCompanyLocationCode_Internalname, StringUtil.RTrim( A159CompanyLocationCode), StringUtil.RTrim( context.localUtil.Format( A159CompanyLocationCode, "")), "", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtCompanyLocationCode_Jsonclick, 0, "Attribute MaxWidth", "", "", "", "", 1, edtCompanyLocationCode_Enabled, 0, "text", "", 20, "chr", 1, "row", 20, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_CompanyLocationGeneral.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -1110,7 +1110,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247121301957", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202471712112351", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1126,7 +1126,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("companylocationgeneral.js", "?20247121301957", false, true);
+         context.AddJavascriptSource("companylocationgeneral.js", "?202471712112351", false, true);
          /* End function include_jscripts */
       }
 

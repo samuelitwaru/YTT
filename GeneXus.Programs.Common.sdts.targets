@@ -99,7 +99,6 @@
  	<Compile Include="$(WebDirectory)\wwpbaseobjects\notifications\common\type_SdtWWP_SDTNotificationMetadata.cs" />
  	<Compile Include="$(WebDirectory)\wwpbaseobjects\notifications\common\type_SdtWWP_SDTNotificationsData_WWP_SDTNotificationsDataItem.cs" />
  	<Compile Include="$(WebDirectory)\wwpbaseobjects\type_SdtProgramNames_ProgramName.cs" />
- 	<Compile Include="$(WebDirectory)\wwpbaseobjects\type_SdtSecGAMFunctionalitiesToLoad.cs" />
  	<Compile Include="$(WebDirectory)\wwpbaseobjects\type_SdtSplitScreenDetailInfo.cs" />
  	<Compile Include="$(WebDirectory)\wwpbaseobjects\type_SdtWizardSteps_WizardStepsItem.cs" />
  	<Compile Include="$(WebDirectory)\wwpbaseobjects\type_SdtWWPColumnsSelector.cs" />

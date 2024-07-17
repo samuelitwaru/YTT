@@ -903,14 +903,14 @@ namespace GeneXus.Programs.workwithplus {
                               nGXsfl_39_idx = (int)(Math.Round(NumberUtil.Val( sEvtType, "."), 18, MidpointRounding.ToEven));
                               sGXsfl_39_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_39_idx), 4, 0), 4, "0");
                               SubsflControlProps_392( ) ;
-                              AV48Update = cgiGet( edtavUpdate_Internalname);
-                              AssignAttri("", false, edtavUpdate_Internalname, AV48Update);
-                              AV50Delete = cgiGet( edtavDelete_Internalname);
-                              AssignAttri("", false, edtavDelete_Internalname, AV50Delete);
                               A1WWPParameterKey = cgiGet( edtWWPParameterKey_Internalname);
                               A3WWPParameterCategory = cgiGet( edtWWPParameterCategory_Internalname);
                               A4WWPParameterDescription = cgiGet( edtWWPParameterDescription_Internalname);
                               A6WWPParameterValueTrimmed = cgiGet( edtWWPParameterValueTrimmed_Internalname);
+                              AV48Update = cgiGet( edtavUpdate_Internalname);
+                              AssignAttri("", false, edtavUpdate_Internalname, AV48Update);
+                              AV50Delete = cgiGet( edtavDelete_Internalname);
+                              AssignAttri("", false, edtavDelete_Internalname, AV50Delete);
                               sEvtType = StringUtil.Right( sEvt, 1);
                               if ( StringUtil.StrCmp(sEvtType, ".") == 0 )
                               {
@@ -2320,7 +2320,7 @@ namespace GeneXus.Programs.workwithplus {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247151812976", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202471712123551", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2336,7 +2336,7 @@ namespace GeneXus.Programs.workwithplus {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("workwithplus/wwp_parameterww.js", "?20247151812977", false, true);
+         context.AddJavascriptSource("workwithplus/wwp_parameterww.js", "?202471712123553", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -2356,22 +2356,22 @@ namespace GeneXus.Programs.workwithplus {
 
       protected void SubsflControlProps_392( )
       {
-         edtavUpdate_Internalname = "vUPDATE_"+sGXsfl_39_idx;
-         edtavDelete_Internalname = "vDELETE_"+sGXsfl_39_idx;
          edtWWPParameterKey_Internalname = "WWPPARAMETERKEY_"+sGXsfl_39_idx;
          edtWWPParameterCategory_Internalname = "WWPPARAMETERCATEGORY_"+sGXsfl_39_idx;
          edtWWPParameterDescription_Internalname = "WWPPARAMETERDESCRIPTION_"+sGXsfl_39_idx;
          edtWWPParameterValueTrimmed_Internalname = "WWPPARAMETERVALUETRIMMED_"+sGXsfl_39_idx;
+         edtavUpdate_Internalname = "vUPDATE_"+sGXsfl_39_idx;
+         edtavDelete_Internalname = "vDELETE_"+sGXsfl_39_idx;
       }
 
       protected void SubsflControlProps_fel_392( )
       {
-         edtavUpdate_Internalname = "vUPDATE_"+sGXsfl_39_fel_idx;
-         edtavDelete_Internalname = "vDELETE_"+sGXsfl_39_fel_idx;
          edtWWPParameterKey_Internalname = "WWPPARAMETERKEY_"+sGXsfl_39_fel_idx;
          edtWWPParameterCategory_Internalname = "WWPPARAMETERCATEGORY_"+sGXsfl_39_fel_idx;
          edtWWPParameterDescription_Internalname = "WWPPARAMETERDESCRIPTION_"+sGXsfl_39_fel_idx;
          edtWWPParameterValueTrimmed_Internalname = "WWPPARAMETERVALUETRIMMED_"+sGXsfl_39_fel_idx;
+         edtavUpdate_Internalname = "vUPDATE_"+sGXsfl_39_fel_idx;
+         edtavDelete_Internalname = "vDELETE_"+sGXsfl_39_fel_idx;
       }
 
       protected void sendrow_392( )
@@ -2440,22 +2440,6 @@ namespace GeneXus.Programs.workwithplus {
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
-               context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+((edtavUpdate_Visible==0) ? "display:none;" : "")+"\">") ;
-            }
-            /* Single line edit */
-            ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavUpdate_Internalname,StringUtil.RTrim( AV48Update),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)edtavUpdate_Link,(string)"",(string)"Update",(string)"",(string)edtavUpdate_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWIconActionColumn",(string)"",(int)edtavUpdate_Visible,(int)edtavUpdate_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)1,(short)39,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
-            /* Subfile cell */
-            if ( GridContainer.GetWrapped() == 1 )
-            {
-               context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+((edtavDelete_Visible==0) ? "display:none;" : "")+"\">") ;
-            }
-            /* Single line edit */
-            ROClassString = edtavDelete_Class;
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavDelete_Internalname,StringUtil.RTrim( AV50Delete),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)edtavDelete_Link,(string)"",(string)"Delete",(string)"",(string)edtavDelete_Jsonclick,(short)0,(string)edtavDelete_Class,(string)"",(string)ROClassString,(string)"WWIconActionColumn",(string)"",(int)edtavDelete_Visible,(int)edtavDelete_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)1,(short)39,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
-            /* Subfile cell */
-            if ( GridContainer.GetWrapped() == 1 )
-            {
                context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+((edtWWPParameterKey_Visible==0) ? "display:none;" : "")+"\">") ;
             }
             /* Single line edit */
@@ -2485,6 +2469,22 @@ namespace GeneXus.Programs.workwithplus {
             /* Single line edit */
             ROClassString = "Attribute";
             GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtWWPParameterValueTrimmed_Internalname,(string)A6WWPParameterValueTrimmed,(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtWWPParameterValueTrimmed_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtWWPParameterValueTrimmed_Visible,(short)0,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)30,(short)0,(short)0,(short)39,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
+            /* Subfile cell */
+            if ( GridContainer.GetWrapped() == 1 )
+            {
+               context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+((edtavUpdate_Visible==0) ? "display:none;" : "")+"\">") ;
+            }
+            /* Single line edit */
+            ROClassString = "Attribute";
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavUpdate_Internalname,StringUtil.RTrim( AV48Update),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)edtavUpdate_Link,(string)"",(string)"Update",(string)"",(string)edtavUpdate_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWIconActionColumn",(string)"",(int)edtavUpdate_Visible,(int)edtavUpdate_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)1,(short)39,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
+            /* Subfile cell */
+            if ( GridContainer.GetWrapped() == 1 )
+            {
+               context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+((edtavDelete_Visible==0) ? "display:none;" : "")+"\">") ;
+            }
+            /* Single line edit */
+            ROClassString = edtavDelete_Class;
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavDelete_Internalname,StringUtil.RTrim( AV50Delete),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)edtavDelete_Link,(string)"",(string)"Delete",(string)"",(string)edtavDelete_Jsonclick,(short)0,(string)edtavDelete_Class,(string)"",(string)ROClassString,(string)"WWIconActionColumn",(string)"",(int)edtavDelete_Visible,(int)edtavDelete_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)1,(short)39,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
             send_integrity_lvl_hashes0X2( ) ;
             GridContainer.AddRow(GridRow);
             nGXsfl_39_idx = ((subGrid_Islastpage==1)&&(nGXsfl_39_idx+1>subGrid_fnc_Recordsperpage( )) ? 1 : nGXsfl_39_idx+1);
@@ -2536,12 +2536,6 @@ namespace GeneXus.Programs.workwithplus {
                   }
                }
             }
-            context.WriteHtmlText( "<th align=\""+"start"+"\" "+" nowrap=\"nowrap\" "+" class=\""+"Attribute"+"\" "+" style=\""+((edtavUpdate_Visible==0) ? "display:none;" : "")+""+"\" "+">") ;
-            context.SendWebValue( "") ;
-            context.WriteHtmlTextNl( "</th>") ;
-            context.WriteHtmlText( "<th align=\""+"start"+"\" "+" nowrap=\"nowrap\" "+" class=\""+edtavDelete_Class+"\" "+" style=\""+((edtavDelete_Visible==0) ? "display:none;" : "")+""+"\" "+">") ;
-            context.SendWebValue( "") ;
-            context.WriteHtmlTextNl( "</th>") ;
             context.WriteHtmlText( "<th align=\""+"start"+"\" "+" nowrap=\"nowrap\" "+" class=\""+"Attribute"+"\" "+" style=\""+((edtWWPParameterKey_Visible==0) ? "display:none;" : "")+""+"\" "+">") ;
             context.SendWebValue( "Key") ;
             context.WriteHtmlTextNl( "</th>") ;
@@ -2553,6 +2547,12 @@ namespace GeneXus.Programs.workwithplus {
             context.WriteHtmlTextNl( "</th>") ;
             context.WriteHtmlText( "<th align=\""+"start"+"\" "+" nowrap=\"nowrap\" "+" class=\""+"Attribute"+"\" "+" style=\""+((edtWWPParameterValueTrimmed_Visible==0) ? "display:none;" : "")+""+"\" "+">") ;
             context.SendWebValue( "Value") ;
+            context.WriteHtmlTextNl( "</th>") ;
+            context.WriteHtmlText( "<th align=\""+"start"+"\" "+" nowrap=\"nowrap\" "+" class=\""+"Attribute"+"\" "+" style=\""+((edtavUpdate_Visible==0) ? "display:none;" : "")+""+"\" "+">") ;
+            context.SendWebValue( "") ;
+            context.WriteHtmlTextNl( "</th>") ;
+            context.WriteHtmlText( "<th align=\""+"start"+"\" "+" nowrap=\"nowrap\" "+" class=\""+edtavDelete_Class+"\" "+" style=\""+((edtavDelete_Visible==0) ? "display:none;" : "")+""+"\" "+">") ;
+            context.SendWebValue( "") ;
             context.WriteHtmlTextNl( "</th>") ;
             context.WriteHtmlTextNl( "</tr>") ;
             GridContainer.AddObjectProperty("GridName", "Grid");
@@ -2578,19 +2578,6 @@ namespace GeneXus.Programs.workwithplus {
             GridContainer.AddObjectProperty("CmpContext", "");
             GridContainer.AddObjectProperty("InMasterPage", "false");
             GridColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
-            GridColumn.AddObjectProperty("Value", GXUtil.ValueEncode( StringUtil.RTrim( AV48Update)));
-            GridColumn.AddObjectProperty("Enabled", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtavUpdate_Enabled), 5, 0, ".", "")));
-            GridColumn.AddObjectProperty("Link", StringUtil.RTrim( edtavUpdate_Link));
-            GridColumn.AddObjectProperty("Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtavUpdate_Visible), 5, 0, ".", "")));
-            GridContainer.AddColumnProperties(GridColumn);
-            GridColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
-            GridColumn.AddObjectProperty("Value", GXUtil.ValueEncode( StringUtil.RTrim( AV50Delete)));
-            GridColumn.AddObjectProperty("Class", StringUtil.RTrim( edtavDelete_Class));
-            GridColumn.AddObjectProperty("Enabled", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtavDelete_Enabled), 5, 0, ".", "")));
-            GridColumn.AddObjectProperty("Link", StringUtil.RTrim( edtavDelete_Link));
-            GridColumn.AddObjectProperty("Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtavDelete_Visible), 5, 0, ".", "")));
-            GridContainer.AddColumnProperties(GridColumn);
-            GridColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
             GridColumn.AddObjectProperty("Value", GXUtil.ValueEncode( A1WWPParameterKey));
             GridColumn.AddObjectProperty("Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtWWPParameterKey_Visible), 5, 0, ".", "")));
             GridContainer.AddColumnProperties(GridColumn);
@@ -2605,6 +2592,19 @@ namespace GeneXus.Programs.workwithplus {
             GridColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
             GridColumn.AddObjectProperty("Value", GXUtil.ValueEncode( A6WWPParameterValueTrimmed));
             GridColumn.AddObjectProperty("Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtWWPParameterValueTrimmed_Visible), 5, 0, ".", "")));
+            GridContainer.AddColumnProperties(GridColumn);
+            GridColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+            GridColumn.AddObjectProperty("Value", GXUtil.ValueEncode( StringUtil.RTrim( AV48Update)));
+            GridColumn.AddObjectProperty("Enabled", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtavUpdate_Enabled), 5, 0, ".", "")));
+            GridColumn.AddObjectProperty("Link", StringUtil.RTrim( edtavUpdate_Link));
+            GridColumn.AddObjectProperty("Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtavUpdate_Visible), 5, 0, ".", "")));
+            GridContainer.AddColumnProperties(GridColumn);
+            GridColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+            GridColumn.AddObjectProperty("Value", GXUtil.ValueEncode( StringUtil.RTrim( AV50Delete)));
+            GridColumn.AddObjectProperty("Class", StringUtil.RTrim( edtavDelete_Class));
+            GridColumn.AddObjectProperty("Enabled", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtavDelete_Enabled), 5, 0, ".", "")));
+            GridColumn.AddObjectProperty("Link", StringUtil.RTrim( edtavDelete_Link));
+            GridColumn.AddObjectProperty("Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtavDelete_Visible), 5, 0, ".", "")));
             GridContainer.AddColumnProperties(GridColumn);
             GridContainer.AddObjectProperty("Selectedindex", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Selectedindex), 4, 0, ".", "")));
             GridContainer.AddObjectProperty("Allowselection", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Allowselection), 1, 0, ".", "")));
@@ -2627,12 +2627,12 @@ namespace GeneXus.Programs.workwithplus {
          tblTablerightheader_Internalname = "TABLERIGHTHEADER";
          divTableheadercontent_Internalname = "TABLEHEADERCONTENT";
          divTableheader_Internalname = "TABLEHEADER";
-         edtavUpdate_Internalname = "vUPDATE";
-         edtavDelete_Internalname = "vDELETE";
          edtWWPParameterKey_Internalname = "WWPPARAMETERKEY";
          edtWWPParameterCategory_Internalname = "WWPPARAMETERCATEGORY";
          edtWWPParameterDescription_Internalname = "WWPPARAMETERDESCRIPTION";
          edtWWPParameterValueTrimmed_Internalname = "WWPPARAMETERVALUETRIMMED";
+         edtavUpdate_Internalname = "vUPDATE";
+         edtavDelete_Internalname = "vDELETE";
          Gridpaginationbar_Internalname = "GRIDPAGINATIONBAR";
          divGridtablewithpaginationbar_Internalname = "GRIDTABLEWITHPAGINATIONBAR";
          divTablemain_Internalname = "TABLEMAIN";
@@ -2656,10 +2656,6 @@ namespace GeneXus.Programs.workwithplus {
          subGrid_Allowcollapsing = 0;
          subGrid_Allowselection = 0;
          subGrid_Header = "";
-         edtWWPParameterValueTrimmed_Jsonclick = "";
-         edtWWPParameterDescription_Jsonclick = "";
-         edtWWPParameterCategory_Jsonclick = "";
-         edtWWPParameterKey_Jsonclick = "";
          edtavDelete_Jsonclick = "";
          edtavDelete_Class = "Attribute";
          edtavDelete_Link = "";
@@ -2667,6 +2663,10 @@ namespace GeneXus.Programs.workwithplus {
          edtavUpdate_Jsonclick = "";
          edtavUpdate_Link = "";
          edtavUpdate_Enabled = 0;
+         edtWWPParameterValueTrimmed_Jsonclick = "";
+         edtWWPParameterDescription_Jsonclick = "";
+         edtWWPParameterCategory_Jsonclick = "";
+         edtWWPParameterKey_Jsonclick = "";
          subGrid_Class = "GridWithPaginationBar WorkWith";
          subGrid_Backcolorstyle = 0;
          edtavFilterfulltext_Jsonclick = "";
@@ -2700,7 +2700,7 @@ namespace GeneXus.Programs.workwithplus {
          Ddo_grid_Fixable = "T";
          Ddo_grid_Includesortasc = "T|T|T|";
          Ddo_grid_Columnssortvalues = "1|2|3|";
-         Ddo_grid_Columnids = "2:WWPParameterKey|3:WWPParameterCategory|4:WWPParameterDescription|5:WWPParameterValueTrimmed";
+         Ddo_grid_Columnids = "0:WWPParameterKey|1:WWPParameterCategory|2:WWPParameterDescription|3:WWPParameterValueTrimmed";
          Ddo_grid_Gridinternalname = "";
          Gridpaginationbar_Rowsperpagecaption = "WWP_PagingRowsPerPage";
          Gridpaginationbar_Emptygridcaption = "WWP_PagingEmptyGridCaption";
@@ -2759,7 +2759,7 @@ namespace GeneXus.Programs.workwithplus {
          setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED",",oparms:[{av:'AV29ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV14GridState',fld:'vGRIDSTATE',pic:''},{av:'AV16OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV17OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV19FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV30TFWWPParameterKey',fld:'vTFWWPPARAMETERKEY',pic:''},{av:'AV31TFWWPParameterKey_Sel',fld:'vTFWWPPARAMETERKEY_SEL',pic:''},{av:'AV32TFWWPParameterCategory',fld:'vTFWWPPARAMETERCATEGORY',pic:''},{av:'AV33TFWWPParameterCategory_Sel',fld:'vTFWWPPARAMETERCATEGORY_SEL',pic:''},{av:'AV34TFWWPParameterDescription',fld:'vTFWWPPARAMETERDESCRIPTION',pic:''},{av:'AV35TFWWPParameterDescription_Sel',fld:'vTFWWPPARAMETERDESCRIPTION_SEL',pic:''},{av:'AV36TFWWPParameterValueTrimmed',fld:'vTFWWPPARAMETERVALUETRIMMED',pic:''},{av:'AV37TFWWPParameterValueTrimmed_Sel',fld:'vTFWWPPARAMETERVALUETRIMMED_SEL',pic:''},{av:'Ddo_grid_Selectedvalue_set',ctrl:'DDO_GRID',prop:'SelectedValue_set'},{av:'Ddo_grid_Filteredtext_set',ctrl:'DDO_GRID',prop:'FilteredText_set'},{av:'Ddo_grid_Sortedstatus',ctrl:'DDO_GRID',prop:'SortedStatus'},{av:'AV24ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'edtWWPParameterKey_Visible',ctrl:'WWPPARAMETERKEY',prop:'Visible'},{av:'edtWWPParameterCategory_Visible',ctrl:'WWPPARAMETERCATEGORY',prop:'Visible'},{av:'edtWWPParameterDescription_Visible',ctrl:'WWPPARAMETERDESCRIPTION',prop:'Visible'},{av:'edtWWPParameterValueTrimmed_Visible',ctrl:'WWPPARAMETERVALUETRIMMED',prop:'Visible'},{av:'AV40GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV41GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV8GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'AV49IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'edtavUpdate_Visible',ctrl:'vUPDATE',prop:'Visible'},{av:'AV51IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'edtavDelete_Visible',ctrl:'vDELETE',prop:'Visible'},{av:'AV52IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{ctrl:'BTNINSERT',prop:'Visible'},{av:'AV27ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''}]}");
          setEventMetadata("'DOINSERT'","{handler:'E160X2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV19FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'A100CompanyId',fld:'COMPANYID',pic:'ZZZZZZZZZ9'},{av:'AV29ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV24ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV53Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV30TFWWPParameterKey',fld:'vTFWWPPARAMETERKEY',pic:''},{av:'AV31TFWWPParameterKey_Sel',fld:'vTFWWPPARAMETERKEY_SEL',pic:''},{av:'AV32TFWWPParameterCategory',fld:'vTFWWPPARAMETERCATEGORY',pic:''},{av:'AV33TFWWPParameterCategory_Sel',fld:'vTFWWPPARAMETERCATEGORY_SEL',pic:''},{av:'AV34TFWWPParameterDescription',fld:'vTFWWPPARAMETERDESCRIPTION',pic:''},{av:'AV35TFWWPParameterDescription_Sel',fld:'vTFWWPPARAMETERDESCRIPTION_SEL',pic:''},{av:'AV36TFWWPParameterValueTrimmed',fld:'vTFWWPPARAMETERVALUETRIMMED',pic:''},{av:'AV37TFWWPParameterValueTrimmed_Sel',fld:'vTFWWPPARAMETERVALUETRIMMED_SEL',pic:''},{av:'AV16OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV17OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV49IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV51IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV52IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'A1WWPParameterKey',fld:'WWPPARAMETERKEY',pic:'',hsh:true}]");
          setEventMetadata("'DOINSERT'",",oparms:[{av:'AV29ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV24ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'edtWWPParameterKey_Visible',ctrl:'WWPPARAMETERKEY',prop:'Visible'},{av:'edtWWPParameterCategory_Visible',ctrl:'WWPPARAMETERCATEGORY',prop:'Visible'},{av:'edtWWPParameterDescription_Visible',ctrl:'WWPPARAMETERDESCRIPTION',prop:'Visible'},{av:'edtWWPParameterValueTrimmed_Visible',ctrl:'WWPPARAMETERVALUETRIMMED',prop:'Visible'},{av:'AV40GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV41GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV8GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'AV49IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'edtavUpdate_Visible',ctrl:'vUPDATE',prop:'Visible'},{av:'AV51IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'edtavDelete_Visible',ctrl:'vDELETE',prop:'Visible'},{av:'AV52IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{ctrl:'BTNINSERT',prop:'Visible'},{av:'AV27ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''},{av:'AV14GridState',fld:'vGRIDSTATE',pic:''}]}");
-         setEventMetadata("NULL","{handler:'Valid_Wwpparametervaluetrimmed',iparms:[]");
+         setEventMetadata("NULL","{handler:'Validv_Delete',iparms:[]");
          setEventMetadata("NULL",",oparms:[]}");
          return  ;
       }
@@ -2834,12 +2834,12 @@ namespace GeneXus.Programs.workwithplus {
          EvtGridId = "";
          EvtRowId = "";
          sEvtType = "";
-         AV48Update = "";
-         AV50Delete = "";
          A1WWPParameterKey = "";
          A3WWPParameterCategory = "";
          A4WWPParameterDescription = "";
          A6WWPParameterValueTrimmed = "";
+         AV48Update = "";
+         AV50Delete = "";
          scmdbuf = "";
          lV54Workwithplus_wwp_parameterwwds_1_filterfulltext = "";
          lV55Workwithplus_wwp_parameterwwds_2_tfwwpparameterkey = "";
@@ -3040,14 +3040,14 @@ namespace GeneXus.Programs.workwithplus {
       private string EvtGridId ;
       private string EvtRowId ;
       private string sEvtType ;
-      private string AV48Update ;
-      private string edtavUpdate_Internalname ;
-      private string AV50Delete ;
-      private string edtavDelete_Internalname ;
       private string edtWWPParameterKey_Internalname ;
       private string edtWWPParameterCategory_Internalname ;
       private string edtWWPParameterDescription_Internalname ;
       private string edtWWPParameterValueTrimmed_Internalname ;
+      private string AV48Update ;
+      private string edtavUpdate_Internalname ;
+      private string AV50Delete ;
+      private string edtavDelete_Internalname ;
       private string edtavFilterfulltext_Internalname ;
       private string scmdbuf ;
       private string edtavUpdate_Link ;
@@ -3066,12 +3066,12 @@ namespace GeneXus.Programs.workwithplus {
       private string subGrid_Class ;
       private string subGrid_Linesclass ;
       private string ROClassString ;
-      private string edtavUpdate_Jsonclick ;
-      private string edtavDelete_Jsonclick ;
       private string edtWWPParameterKey_Jsonclick ;
       private string edtWWPParameterCategory_Jsonclick ;
       private string edtWWPParameterDescription_Jsonclick ;
       private string edtWWPParameterValueTrimmed_Jsonclick ;
+      private string edtavUpdate_Jsonclick ;
+      private string edtavDelete_Jsonclick ;
       private string subGrid_Header ;
       private bool entryPointCalled ;
       private bool toggleJsOutput ;

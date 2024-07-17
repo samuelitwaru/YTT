@@ -374,7 +374,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
          TempTags = "  onfocus=\"gx.evt.onfocus(this, 29,'',false,'',0)\"";
          ClassString = "Button button-secondary";
          StyleString = "";
-         GxWebStd.gx_button_ctrl( context, bttBtn_select_Internalname, "", "Select", bttBtn_select_Jsonclick, 5, "Select", "", StyleString, ClassString, bttBtn_select_Visible, 1, "standard", "'"+""+"'"+",false,"+"'"+"ESELECT."+"'", TempTags, "", 2, "HLP_WWPBaseObjects/Notifications/Web/WWP_WebNotification.htm");
+         GxWebStd.gx_button_ctrl( context, bttBtn_select_Internalname, "", "Select", bttBtn_select_Jsonclick, 4, "Select", "", StyleString, ClassString, bttBtn_select_Visible, 1, "standard", "'"+""+"'"+",false,"+"'"+"ESELECT."+"'", TempTags, "gx.popup.openPrompt('"+"wwpbaseobjects.notifications.web.gx0060.aspx"+"',["+"{Ctrl:gx.dom.el('"+"WWPWEBNOTIFICATIONID"+"'), id:'"+"WWPWEBNOTIFICATIONID"+"'"+",IOType:'out',isKey:true,isLastKey:true}"+"],"+"null"+","+"'', false"+","+"true"+");"+"return false;", 2, "HLP_WWPBaseObjects/Notifications/Web/WWP_WebNotification.htm");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -427,6 +427,11 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
          /* Single line edit */
          TempTags = "  onfocus=\"gx.evt.onfocus(this, 44,'',false,'',0)\"";
          GxWebStd.gx_single_line_edit( context, edtWWPNotificationId_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(A22WWPNotificationId), 10, 0, ".", "")), StringUtil.LTrim( ((edtWWPNotificationId_Enabled!=0) ? context.localUtil.Format( (decimal)(A22WWPNotificationId), "ZZZZZZZZZ9") : context.localUtil.Format( (decimal)(A22WWPNotificationId), "ZZZZZZZZZ9"))), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+TempTags+" onchange=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onblur(this,44);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtWWPNotificationId_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtWWPNotificationId_Enabled, 0, "text", "1", 10, "chr", 1, "row", 10, 0, 0, 0, 0, -1, 0, true, "WWPBaseObjects\\WWP_Id", "end", false, "", "HLP_WWPBaseObjects/Notifications/Web/WWP_WebNotification.htm");
+         /* Static images/pictures */
+         ClassString = "gx-prompt Image" + " " + ((StringUtil.StrCmp(imgprompt_22_gximage, "")==0) ? "" : "GX_Image_"+imgprompt_22_gximage+"_Class");
+         StyleString = "";
+         sImgUrl = (string)(context.GetImagePath( "f5b04895-0024-488b-8e3b-b687ca4598ee", "", context.GetTheme( )));
+         GxWebStd.gx_bitmap( context, imgprompt_22_Internalname, sImgUrl, imgprompt_22_Link, "", "", context.GetTheme( ), imgprompt_22_Visible, 1, "", "", 0, 0, 0, "", 0, "", 0, 0, 0, "", "", StyleString, ClassString, "", "", "", "", "", "", "", 1, false, false, context.GetImageSrcSet( sImgUrl), "HLP_WWPBaseObjects/Notifications/Web/WWP_WebNotification.htm");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -1135,6 +1140,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
       {
          Gx_BScreen = 0;
          AssignAttri("", false, "Gx_BScreen", StringUtil.Str( (decimal)(Gx_BScreen), 1, 0));
+         imgprompt_22_Link = ((StringUtil.StrCmp(Gx_mode, "DSP")==0) ? "" : "javascript:"+"gx.popup.openPrompt('"+"wwpbaseobjects.notifications.common.gx0090.aspx"+"',["+"{Ctrl:gx.dom.el('"+"WWPNOTIFICATIONID"+"'), id:'"+"WWPNOTIFICATIONID"+"'"+",IOType:'out'}"+"],"+"null"+","+"'', false"+","+"false"+");");
       }
 
       protected void standaloneModal( )
@@ -2427,7 +2433,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247168443634", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247171295726", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2443,7 +2449,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wwpbaseobjects/notifications/web/wwp_webnotification.js", "?20247168443634", false, true);
+         context.AddJavascriptSource("wwpbaseobjects/notifications/web/wwp_webnotification.js", "?20247171295726", false, true);
          /* End function include_jscripts */
       }
 
@@ -2479,6 +2485,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
          bttBtn_delete_Internalname = "BTN_DELETE";
          divMaintable_Internalname = "MAINTABLE";
          Form.Internalname = "FORM";
+         imgprompt_22_Internalname = "PROMPT_22";
       }
 
       public override void initialize_properties( )
@@ -2520,6 +2527,8 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
          edtWWPNotificationMetadata_Enabled = 0;
          edtWWPNotificationCreated_Jsonclick = "";
          edtWWPNotificationCreated_Enabled = 0;
+         imgprompt_22_Visible = 1;
+         imgprompt_22_Link = "";
          edtWWPNotificationId_Jsonclick = "";
          edtWWPNotificationId_Enabled = 1;
          edtWWPWebNotificationTitle_Jsonclick = "";
@@ -2768,6 +2777,8 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
          bttBtn_last_Jsonclick = "";
          bttBtn_select_Jsonclick = "";
          A42WWPWebNotificationTitle = "";
+         imgprompt_22_gximage = "";
+         sImgUrl = "";
          A24WWPNotificationCreated = (DateTime)(DateTime.MinValue);
          A60WWPNotificationMetadata = "";
          A59WWPNotificationDefinitionName = "";
@@ -2984,6 +2995,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
       private int edtWWPWebNotificationId_Enabled ;
       private int edtWWPWebNotificationTitle_Enabled ;
       private int edtWWPNotificationId_Enabled ;
+      private int imgprompt_22_Visible ;
       private int edtWWPNotificationCreated_Enabled ;
       private int edtWWPNotificationMetadata_Enabled ;
       private int edtWWPNotificationDefinitionName_Enabled ;
@@ -3044,6 +3056,10 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
       private string edtWWPWebNotificationTitle_Jsonclick ;
       private string edtWWPNotificationId_Internalname ;
       private string edtWWPNotificationId_Jsonclick ;
+      private string imgprompt_22_gximage ;
+      private string sImgUrl ;
+      private string imgprompt_22_Internalname ;
+      private string imgprompt_22_Link ;
       private string edtWWPNotificationCreated_Internalname ;
       private string edtWWPNotificationCreated_Jsonclick ;
       private string edtWWPNotificationMetadata_Internalname ;

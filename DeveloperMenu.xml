@@ -257,12 +257,6 @@
    </Object>
    <Object>
       <ObjCls>13</ObjCls>
-      <ObjName>LeaveDetailsPopup</ObjName>
-      <ObjDesc>Leave Details Popup</ObjDesc>
-      <ObjLink>leavedetailspopup.aspx</ObjLink>
-   </Object>
-   <Object>
-      <ObjCls>13</ObjCls>
       <ObjName>EmployeeList</ObjName>
       <ObjDesc> Employees</ObjDesc>
       <ObjLink>employeelist.aspx</ObjLink>
@@ -365,9 +359,9 @@
    </Object>
    <Object>
       <ObjCls>1</ObjCls>
-      <ObjName>WeeklyReminderToManager</ObjName>
-      <ObjDesc>Weekly Reminder To Manager</ObjDesc>
-      <ObjLink>aweeklyremindertomanager.aspx</ObjLink>
+      <ObjName>DailyReminderToManagerUG</ObjName>
+      <ObjDesc>Daily Reminder To Manager UG</ObjDesc>
+      <ObjLink>adailyremindertomanagerug.aspx</ObjLink>
    </Object>
    <Object>
       <ObjCls>1</ObjCls>
@@ -395,12 +389,6 @@
    </Object>
    <Object>
       <ObjCls>1</ObjCls>
-      <ObjName>EmployeeHasProjectCopy1</ObjName>
-      <ObjDesc>Employee Has Project Copy1</ObjDesc>
-      <ObjLink>aemployeehasprojectcopy1.aspx</ObjLink>
-   </Object>
-   <Object>
-      <ObjCls>1</ObjCls>
       <ObjName>ProjectsInCompanyTest</ObjName>
       <ObjDesc>Projects In Company Test</ObjDesc>
       <ObjLink>aprojectsincompanytest.aspx</ObjLink>
@@ -416,12 +404,6 @@
       <ObjName>RejectOverdueLeaves</ObjName>
       <ObjDesc>Reject Overdue Leaves</ObjDesc>
       <ObjLink>arejectoverdueleaves.aspx</ObjLink>
-   </Object>
-   <Object>
-      <ObjCls>1</ObjCls>
-      <ObjName>InsertRolePermissions</ObjName>
-      <ObjDesc>Insert Role Permissions</ObjDesc>
-      <ObjLink>ainsertrolepermissions.aspx</ObjLink>
    </Object>
    <Object>
       <ObjCls>1</ObjCls>
@@ -473,8 +455,20 @@
    </Object>
    <Object>
       <ObjCls>1</ObjCls>
-      <ObjName>WeeklyReminderToManagerLK</ObjName>
+      <ObjName>WeekReminderToManagerLK</ObjName>
       <ObjDesc>Weekly Reminder To Manager LK</ObjDesc>
-      <ObjLink>aweeklyremindertomanagerlk.aspx</ObjLink>
+      <ObjLink>aweekremindertomanagerlk.aspx</ObjLink>
+   </Object>
+   <Object>
+      <ObjCls>1</ObjCls>
+      <ObjName>DailyReminderToManagerLK</ObjName>
+      <ObjDesc>Daily Reminder To Manager LK</ObjDesc>
+      <ObjLink>adailyremindertomanagerlk.aspx</ObjLink>
+   </Object>
+   <Object>
+      <ObjCls>1</ObjCls>
+      <ObjName>DailyReminderToManagerUA</ObjName>
+      <ObjDesc>Daily Reminder To Manager UA</ObjDesc>
+      <ObjLink>adailyremindertomanagerua.aspx</ObjLink>
    </Object>
 </Objects>

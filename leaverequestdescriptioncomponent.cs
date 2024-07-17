@@ -427,11 +427,11 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
             /* Attribute/Variable Label */
-            GxWebStd.gx_label_element( context, edtavLeaverequestdescription_Internalname, "Leave Request Description", "col-sm-3 AttributeLabel", 0, true, "");
+            GxWebStd.gx_label_element( context, edtavLeaverequestdescription_Internalname, "Leave Request Description", "col-sm-3 AttributeLabel MaxWidthLabel", 0, true, "");
             /* Multiple line edit */
-            ClassString = "Attribute";
+            ClassString = "Attribute MaxWidth";
             StyleString = "";
-            ClassString = "Attribute";
+            ClassString = "Attribute MaxWidth";
             StyleString = "";
             GxWebStd.gx_html_textarea( context, edtavLeaverequestdescription_Internalname, AV7LeaveRequestDescription, "", "", 0, 1, edtavLeaverequestdescription_Enabled, 0, 80, "chr", 3, "row", 0, StyleString, ClassString, "", "", "200", -1, 0, "", "", -1, false, "", "'"+sPrefix+"'"+",false,"+"'"+""+"'", 0, "", "HLP_LeaveRequestDescriptionComponent.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -983,7 +983,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202471213385448", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247171262194", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1001,7 +1001,7 @@ namespace GeneXus.Programs {
       {
          if ( nGXWrapped != 1 )
          {
-            context.AddJavascriptSource("leaverequestdescriptioncomponent.js", "?202471213385449", false, true);
+            context.AddJavascriptSource("leaverequestdescriptioncomponent.js", "?20247171262195", false, true);
          }
          /* End function include_jscripts */
       }
