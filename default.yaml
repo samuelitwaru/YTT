@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: "YTT_version4"
-  version: "20240717170255"
+  version: "20240718084404"
 servers:
   - url: http://localhost:8082/YTT_version4NETPostgreSQL14/rest
 paths:
@@ -1582,6 +1582,31 @@ paths:
       responses:
         200:
           description: "Successful operation"
+        404:
+          description: "Not found"
+  /TestProjectLogsByEmployeeGetFilterData:
+    post:
+      tags:
+        - TestProjectLogsByEmployeeGetFilterData
+      operationId: "TestProjectLogsByEmployeeGetFilterData"
+      summary: "Test Project Logs By Employee Get Filter Data"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TestProjectLogsByEmployeeGetFilterDataInput"
+
+
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestProjectLogsByEmployeeGetFilterDataOutput"
         404:
           description: "Not found"
   /WebPanel1LoadDVCombo:
@@ -3648,6 +3673,14 @@ components:
       properties:
         isInactive:
           type: "boolean"
+    TestProjectLogsByEmployeeGetFilterDataOutput:
+      properties:
+        OptionsJson:
+          type: "string"
+        OptionsDescJson:
+          type: "string"
+        OptionIndexesJson:
+          type: "string"
     WebPanel1LoadDVComboOutput:
       properties:
         Combo_DataJson:
@@ -4066,6 +4099,14 @@ components:
         LeaveRequestId:
           type: "integer"
           format: "int64"
+    TestProjectLogsByEmployeeGetFilterDataInput:
+      properties:
+        DDOName:
+          type: "string"
+        SearchTxtParms:
+          type: "string"
+        SearchTxtTo:
+          type: "string"
     WebPanel1LoadDVComboInput:
       properties:
         ComboName:

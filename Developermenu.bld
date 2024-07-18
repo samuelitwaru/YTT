@@ -25,6 +25,8 @@ wwpbaseobjects\subscriptions\wwp_subscription
 wwpbaseobjects\wwp_entity
 workwithplus\wwp_parameter
 wwpbaseobjects\wwp_userextended
+testprojectlogsbyemployee
+testprojectlogsbyemployee
 gx00e0
 gx00s1
 gx00f0
@@ -208,6 +210,7 @@ login
 login
 general\ui\masterprompt
 general\ui\masterunanimosidebar
+testprojectlogsbyemployeegetfilterdata
 areloadleaverequests
 areloadleaverequests
 atest
