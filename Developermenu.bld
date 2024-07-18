@@ -25,6 +25,9 @@ wwpbaseobjects\subscriptions\wwp_subscription
 wwpbaseobjects\wwp_entity
 workwithplus\wwp_parameter
 wwpbaseobjects\wwp_userextended
+gx00e0
+gx00s1
+gx00f0
 wwpbaseobjects\notifications\common\gx0090
 wwpbaseobjects\notifications\web\gx0060
 wcleavedetails
@@ -367,7 +370,6 @@ sdsvc_ViewLeaveRequest_Level_Detail
 yttv3sdnotauthorized
 yttv3sd
 gamsdnotauthorized
-landingpanel
 loginpanel
 passwordchangepanel
 gamsdchangepassword
@@ -380,4 +382,5 @@ leaverequestpanel
 updateleaverequest
 viewleaverequest
 leaverequestsgridpanel
+landingpanel
 GeneXus.Programs.Common

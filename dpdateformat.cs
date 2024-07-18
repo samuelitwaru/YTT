@@ -140,7 +140,7 @@ namespace GeneXus.Programs {
             GXt_dtime4 = DateTimeUtil.ResetTime( A115HolidayStartDate ) ;
             Gxm1wwpdaterangepickeroptions_formatteddays.gxTpr_Date = GXt_dtime4;
             Gxm1wwpdaterangepickeroptions_formatteddays.gxTpr_Class = "daterangepicker-badge daterangepicker-badge-warning";
-            Gxm1wwpdaterangepickeroptions_formatteddays.gxTpr_Tooltip = A114HolidayName;
+            Gxm1wwpdaterangepickeroptions_formatteddays.gxTpr_Tooltip = StringUtil.Trim( A114HolidayName);
             pr_default.readNext(1);
          }
          pr_default.close(1);

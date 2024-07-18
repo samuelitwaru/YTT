@@ -469,6 +469,11 @@ namespace GeneXus.Programs {
          /* Single line edit */
          TempTags = "  onfocus=\"gx.evt.onfocus(this, 54,'',false,'',0)\"";
          GxWebStd.gx_single_line_edit( context, edtCompanyId_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(A100CompanyId), 10, 0, ".", "")), StringUtil.LTrim( context.localUtil.Format( (decimal)(A100CompanyId), "ZZZZZZZZZ9")), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+TempTags+" onchange=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onblur(this,54);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtCompanyId_Jsonclick, 0, "Attribute", "", "", "", "", edtCompanyId_Visible, edtCompanyId_Enabled, 1, "text", "1", 10, "chr", 1, "row", 10, 0, 0, 0, 0, -1, 0, true, "Id", "end", false, "", "HLP_LeaveType.htm");
+         /* Static images/pictures */
+         ClassString = "gx-prompt Image" + " " + ((StringUtil.StrCmp(imgprompt_100_gximage, "")==0) ? "" : "GX_Image_"+imgprompt_100_gximage+"_Class");
+         StyleString = "";
+         sImgUrl = (string)(context.GetImagePath( "f5b04895-0024-488b-8e3b-b687ca4598ee", "", context.GetTheme( )));
+         GxWebStd.gx_bitmap( context, imgprompt_100_Internalname, sImgUrl, imgprompt_100_Link, "", "", context.GetTheme( ), imgprompt_100_Visible, 1, "", "", 0, 0, 0, "", 0, "", 0, 0, 0, "", "", StyleString, ClassString, "", "", "", "", "", "", "", 1, false, false, context.GetImageSrcSet( sImgUrl), "HLP_LeaveType.htm");
          /* Single line edit */
          TempTags = "  onfocus=\"gx.evt.onfocus(this, 55,'',false,'',0)\"";
          GxWebStd.gx_single_line_edit( context, edtLeaveTypeColorPending_Internalname, StringUtil.RTrim( A174LeaveTypeColorPending), StringUtil.RTrim( context.localUtil.Format( A174LeaveTypeColorPending, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,55);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtLeaveTypeColorPending_Jsonclick, 0, "Attribute", "", "", "", "", edtLeaveTypeColorPending_Visible, edtLeaveTypeColorPending_Enabled, 0, "color", "", 20, "chr", 1, "row", 20, 0, 0, 0, 0, -1, -1, true, "Color", "start", true, "", "HLP_LeaveType.htm");
@@ -885,6 +890,7 @@ namespace GeneXus.Programs {
          AssignAttri("", false, "AV24Pgmname", AV24Pgmname);
          Gx_BScreen = 0;
          AssignAttri("", false, "Gx_BScreen", StringUtil.Str( (decimal)(Gx_BScreen), 1, 0));
+         imgprompt_100_Link = ((StringUtil.StrCmp(Gx_mode, "DSP")==0) ? "" : "javascript:"+"gx.popup.openPrompt('"+"gx00e0.aspx"+"',["+"{Ctrl:gx.dom.el('"+"COMPANYID"+"'), id:'"+"COMPANYID"+"'"+",IOType:'out'}"+"],"+"null"+","+"'', false"+","+"false"+");");
          edtLeaveTypeId_Enabled = 0;
          AssignProp("", false, edtLeaveTypeId_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtLeaveTypeId_Enabled), 5, 0), true);
          bttBtntrn_delete_Enabled = 0;
@@ -1986,7 +1992,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202471712104151", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202471719571775", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2002,7 +2008,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("leavetype.js", "?202471712104154", false, true);
+         context.AddJavascriptSource("leavetype.js", "?202471719571777", false, true);
          /* End function include_jscripts */
       }
 
@@ -2027,6 +2033,7 @@ namespace GeneXus.Programs {
          divHtml_bottomauxiliarcontrols_Internalname = "HTML_BOTTOMAUXILIARCONTROLS";
          divLayoutmaintable_Internalname = "LAYOUTMAINTABLE";
          Form.Internalname = "FORM";
+         imgprompt_100_Internalname = "PROMPT_100";
       }
 
       public override void initialize_properties( )
@@ -2045,6 +2052,8 @@ namespace GeneXus.Programs {
          edtLeaveTypeColorPending_Jsonclick = "";
          edtLeaveTypeColorPending_Enabled = 1;
          edtLeaveTypeColorPending_Visible = 1;
+         imgprompt_100_Visible = 1;
+         imgprompt_100_Link = "";
          edtCompanyId_Jsonclick = "";
          edtCompanyId_Enabled = 1;
          edtCompanyId_Visible = 1;
@@ -2223,6 +2232,8 @@ namespace GeneXus.Programs {
          bttBtntrn_enter_Jsonclick = "";
          bttBtntrn_cancel_Jsonclick = "";
          bttBtntrn_delete_Jsonclick = "";
+         imgprompt_100_gximage = "";
+         sImgUrl = "";
          A174LeaveTypeColorPending = "";
          AV24Pgmname = "";
          forbiddenHiddens = new GXProperties();
@@ -2365,6 +2376,7 @@ namespace GeneXus.Programs {
       private int edtLeaveTypeId_Visible ;
       private int edtCompanyId_Visible ;
       private int edtCompanyId_Enabled ;
+      private int imgprompt_100_Visible ;
       private int edtLeaveTypeColorPending_Visible ;
       private int edtLeaveTypeColorPending_Enabled ;
       private int AV25GXV1 ;
@@ -2429,6 +2441,10 @@ namespace GeneXus.Programs {
       private string edtLeaveTypeId_Jsonclick ;
       private string edtCompanyId_Internalname ;
       private string edtCompanyId_Jsonclick ;
+      private string imgprompt_100_gximage ;
+      private string sImgUrl ;
+      private string imgprompt_100_Internalname ;
+      private string imgprompt_100_Link ;
       private string edtLeaveTypeColorPending_Internalname ;
       private string A174LeaveTypeColorPending ;
       private string edtLeaveTypeColorPending_Jsonclick ;
