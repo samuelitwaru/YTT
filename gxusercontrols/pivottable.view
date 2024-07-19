@@ -1,16 +1,16 @@
-<div id="print" style="max-width: 100%; overflow-x: auto; border-right: 1px solid #dddddd; border-left: 1px solid #dddddd">
+<div id="print" style="padding-top:1px;overflow:scroll; scrollbar-width:none; border-right: 1px solid #dddddd; border-left: 1px solid #dddddd">
 	<table class="my-sticky-column-table gx-tab-spacing-fix-2 GridWithPaginationBar GridWithBorderColor WorkWith table-responsive" style='border: 1px solid #dddddd; border-collapse: collapse;'>
-		<thead  style="border: 1px solid #dddddd; border-collapse: collapse;">
+		<thead  style="border-collapse: collapse; position:sticky; top:0; z-index:10">
 			<tr>
 				<th style='border: 1px solid #dddddd; border-collapse: collapse;'>Projects:</th>
 				{{#SDTProjects}}
-				<th style='border: 1px solid #dddddd; border-collapse: collapse;padding: 5px;' scope="col" class='text-center'><a id='Project-{{gxTpr_Id}}{{Id}}' style='cursor:pointer' class='project' >{{gxTpr_ProjectName}}{{ProjectName}}</a></th>
+				<th style='border: 1px solid #dddddd; border-collapse: collapse;padding: 5px; background:#f5f5f5;' scope="col" class='text-center'><a id='Project-{{gxTpr_Id}}{{Id}}' style='cursor:pointer' class='project' >{{gxTpr_ProjectName}}{{ProjectName}}</a></th>
 				{{/SDTProjects}}
 				<th style='border: 1px solid #dddddd; border-collapse: collapse; padding:5px' class='text-center'>Total Work Hours</th>
 				{{#ShowLeaveTotal}}<th style="border: 1px solid #dddddd; border-collapse: collapse; padding:5px" class="leave text-center">Total Leave Hours</th><th style="border: 1px solid #dddddd; border-collapse: collapse; padding:5px" class="leave text-center">Total</th>{{/ShowLeaveTotal}}{{#gxTpr_ShowLeaveTotal}}<th style="border: 1px solid #dddddd; border-collapse: collapse; padding:5px" class="leave text-center">Total Leave Hours</th><th style="border: 1px solid #dddddd; border-collapse: collapse; padding:5px" class="leave text-center">Total</th>{{/gxTpr_ShowLeaveTotal}}
 			</tr>
 		</thead>
-		<tbody>
+		<tbody style='max-height:100px'>
 			{{#SDTEmployeeProjectHoursCollection}}
 			<tr class="GridWithPaginationBar GridNoBorder WorkWithOdd text-center">	
 				<td style='border: 1px solid #dddddd; border-collapse: collapse;font-weight: bold;background:#f5f5f5;' class='text-center'><a href=''  data-event="Click" >{{gxTpr_EmployeeName}}{{EmployeeName}}</a></td>
@@ -44,3 +44,17 @@
 		<tfoot>		
 	</table>
 </div>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+	
+		$(window).on('resize', function() {
+			// Your code here
+			var newHeight = $(window).height();
+			console.log("New height: " + newHeight);
+			$('#print').css("height", newHeight-100)
+			// Perform actions based on the new height
+		});
+  });
+  </script>
