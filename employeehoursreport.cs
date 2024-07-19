@@ -374,7 +374,7 @@ namespace GeneXus.Programs {
          AV20excelcellrange = AV12excelSpreadsheet.cell(AV24CellRow, 1);
          AV20excelcellrange.gxTpr_Valuetext = "Hours Total";
          AV20excelcellrange.setcellstyle( AV34footCellStyle);
-         AV26TotalMinutes = (short)(A40000GXC1*60+A40001GXC2);
+         AV26TotalMinutes = (int)(A40000GXC1*60+A40001GXC2);
          AV20excelcellrange = AV12excelSpreadsheet.cell(AV24CellRow, 2);
          GXt_char2 = "";
          new procformattime(context ).execute(  AV26TotalMinutes, out  GXt_char2) ;
@@ -494,10 +494,10 @@ namespace GeneXus.Programs {
       private short A121WorkHourLogHour ;
       private short A40000GXC1 ;
       private short A40001GXC2 ;
-      private short AV26TotalMinutes ;
       private int AV36GXV1 ;
       private int AV13CompanyLocationId_Count ;
       private int AV14EmployeeId_Count ;
+      private int AV26TotalMinutes ;
       private long AV8OneProjectId ;
       private long A102ProjectId ;
       private long A157CompanyLocationId ;

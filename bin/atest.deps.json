@@ -15,9 +15,7 @@
           "iTextSharp-LGPL": "4.1.6",
           "GeneXus": "0.0.0.0",
           "GeneXus.Security.API.Common": "0.0.0.0",
-          "GeneXusSecurity": "1.0.0.0",
-          "GeneXusSecurityCommon": "1.0.0.0",
-          "GeneXusUnanimo": "0.0.0.0"
+          "GeneXusSecurity": "1.0.0.0"
         },
         "runtime": {
           "atest.dll": {}
@@ -1224,19 +1222,11 @@
           }
         }
       },
-      "GeneXusSecurityCommon/1.0.0.0": {
+      "GeneXus.Security/1.0.0.0": {
         "runtime": {
-          "GeneXusSecurityCommon.dll": {
+          "GeneXus.Security.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
-          }
-        }
-      },
-      "GeneXusUnanimo/0.0.0.0": {
-        "runtime": {
-          "GeneXusUnanimo.dll": {
-            "assemblyVersion": "0.0.0.0",
-            "fileVersion": "0.0.0.0"
           }
         }
       },
@@ -1245,14 +1235,6 @@
           "GxMaps.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.26.1.0"
-          }
-        }
-      },
-      "GeneXus.Security/1.0.0.0": {
-        "runtime": {
-          "GeneXus.Security.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
           }
         }
       },
@@ -1312,6 +1294,14 @@
           }
         }
       },
+      "GeneXusSecurityCommon/1.0.0.0": {
+        "runtime": {
+          "GeneXusSecurityCommon.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
       "MailKit/3.1.0.0": {
         "runtime": {
           "MailKit.dll": {
@@ -1349,14 +1339,6 @@
           "Org.Mentalis.Security.dll": {
             "assemblyVersion": "1.0.13.715",
             "fileVersion": "1.0.13.715"
-          }
-        }
-      },
-      "BouncyCastle.Crypto/1.9.0.0": {
-        "runtime": {
-          "BouncyCastle.Crypto.dll": {
-            "assemblyVersion": "1.9.0.0",
-            "fileVersion": "1.9.0.1"
           }
         }
       },
@@ -2236,22 +2218,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "GeneXusSecurityCommon/1.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "GeneXusUnanimo/0.0.0.0": {
+    "GeneXus.Security/1.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
     },
     "GxMaps/1.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "GeneXus.Security/1.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
@@ -2291,6 +2263,11 @@
       "serviceable": false,
       "sha512": ""
     },
+    "GeneXusSecurityCommon/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
     "MailKit/3.1.0.0": {
       "type": "reference",
       "serviceable": false,
@@ -2312,11 +2289,6 @@
       "sha512": ""
     },
     "Org.Mentalis.Security/1.0.13.715": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "BouncyCastle.Crypto/1.9.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
