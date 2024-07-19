@@ -125,7 +125,7 @@ namespace GeneXus.Programs {
          }
          pr_default.close(0);
          /* Using cursor P00B95 */
-         pr_default.execute(1, new Object[] {AV8FromDate, AV9ToDate, AV12EmployeeId, AV13OneProjectId});
+         pr_default.execute(1, new Object[] {AV8FromDate, AV9ToDate, AV13OneProjectId});
          if ( (pr_default.getStatus(1) != 101) )
          {
             A40001GXC2 = P00B95_A40001GXC2[0];
@@ -137,22 +137,36 @@ namespace GeneXus.Programs {
             n40001GXC2 = false;
          }
          pr_default.close(1);
+         /* Using cursor P00B97 */
+         pr_default.execute(2, new Object[] {AV8FromDate, AV9ToDate, AV12EmployeeId, AV13OneProjectId});
+         if ( (pr_default.getStatus(2) != 101) )
+         {
+            A40002GXC3 = P00B97_A40002GXC3[0];
+            n40002GXC3 = P00B97_n40002GXC3[0];
+         }
+         else
+         {
+            A40002GXC3 = 0;
+            n40002GXC3 = false;
+         }
+         pr_default.close(2);
          AV12EmployeeId = 120;
          AV8FromDate = context.localUtil.YMDToD( 2024, 7, 1);
          AV9ToDate = context.localUtil.YMDToD( 2024, 7, 31);
          AV13OneProjectId = 69;
          AV11Hours = A40000GXC1;
-         AV14Minutes = A40001GXC2;
+         AV11Hours = A40001GXC2;
+         AV14Minutes = A40002GXC3;
          new logtofile(context ).execute(  StringUtil.Str( (decimal)(AV12EmployeeId), 10, 0)+","+context.localUtil.DToC( AV8FromDate, 2, "/")+","+context.localUtil.DToC( AV9ToDate, 2, "/")+","+StringUtil.Str( (decimal)(AV13OneProjectId), 10, 0)) ;
          new logtofile(context ).execute(  StringUtil.Str( (decimal)(AV11Hours), 8, 0)+" : "+StringUtil.Str( (decimal)(AV14Minutes), 8, 0)) ;
          AV11Hours = 0;
          AV14Minutes = 0;
          /* Optimized group. */
-         /* Using cursor P00B96 */
-         pr_default.execute(2, new Object[] {AV12EmployeeId, AV13OneProjectId, AV8FromDate, AV9ToDate});
-         c121WorkHourLogHour = P00B96_A121WorkHourLogHour[0];
-         c122WorkHourLogMinute = P00B96_A122WorkHourLogMinute[0];
-         pr_default.close(2);
+         /* Using cursor P00B98 */
+         pr_default.execute(3, new Object[] {AV12EmployeeId, AV13OneProjectId, AV8FromDate, AV9ToDate});
+         c121WorkHourLogHour = P00B98_A121WorkHourLogHour[0];
+         c122WorkHourLogMinute = P00B98_A122WorkHourLogMinute[0];
+         pr_default.close(3);
          AV11Hours = (int)(AV11Hours+c121WorkHourLogHour);
          AV14Minutes = (int)(AV14Minutes+c122WorkHourLogMinute);
          /* End optimized group. */
@@ -184,8 +198,10 @@ namespace GeneXus.Programs {
          AV9ToDate = DateTime.MinValue;
          P00B95_A40001GXC2 = new short[1] ;
          P00B95_n40001GXC2 = new bool[] {false} ;
-         P00B96_A121WorkHourLogHour = new int[1] ;
-         P00B96_A122WorkHourLogMinute = new short[1] ;
+         P00B97_A40002GXC3 = new short[1] ;
+         P00B97_n40002GXC3 = new bool[] {false} ;
+         P00B98_A121WorkHourLogHour = new int[1] ;
+         P00B98_A122WorkHourLogMinute = new short[1] ;
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.atest__default(),
             new Object[][] {
                 new Object[] {
@@ -195,7 +211,10 @@ namespace GeneXus.Programs {
                P00B95_A40001GXC2, P00B95_n40001GXC2
                }
                , new Object[] {
-               P00B96_A121WorkHourLogHour, P00B96_A122WorkHourLogMinute
+               P00B97_A40002GXC3, P00B97_n40002GXC3
+               }
+               , new Object[] {
+               P00B98_A121WorkHourLogHour, P00B98_A122WorkHourLogMinute
                }
             }
          );
@@ -204,6 +223,7 @@ namespace GeneXus.Programs {
 
       private short A40000GXC1 ;
       private short A40001GXC2 ;
+      private short A40002GXC3 ;
       private int AV11Hours ;
       private int AV14Minutes ;
       private int c121WorkHourLogHour ;
@@ -215,6 +235,7 @@ namespace GeneXus.Programs {
       private DateTime AV9ToDate ;
       private bool n40000GXC1 ;
       private bool n40001GXC2 ;
+      private bool n40002GXC3 ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private IDataStoreProvider pr_default ;
@@ -222,8 +243,10 @@ namespace GeneXus.Programs {
       private bool[] P00B93_n40000GXC1 ;
       private short[] P00B95_A40001GXC2 ;
       private bool[] P00B95_n40001GXC2 ;
-      private int[] P00B96_A121WorkHourLogHour ;
-      private short[] P00B96_A122WorkHourLogMinute ;
+      private short[] P00B97_A40002GXC3 ;
+      private bool[] P00B97_n40002GXC3 ;
+      private int[] P00B98_A121WorkHourLogHour ;
+      private short[] P00B98_A122WorkHourLogMinute ;
    }
 
    public class atest__default : DataStoreHelperBase, IDataStoreHelper
@@ -235,6 +258,7 @@ namespace GeneXus.Programs {
           new ForEachCursor(def[0])
          ,new ForEachCursor(def[1])
          ,new ForEachCursor(def[2])
+         ,new ForEachCursor(def[3])
        };
     }
 
@@ -251,11 +275,17 @@ namespace GeneXus.Programs {
           prmP00B95 = new Object[] {
           new ParDef("AV8FromDate",GXType.Date,8,0) ,
           new ParDef("AV9ToDate",GXType.Date,8,0) ,
+          new ParDef("AV13OneProjectId",GXType.Int64,10,0)
+          };
+          Object[] prmP00B97;
+          prmP00B97 = new Object[] {
+          new ParDef("AV8FromDate",GXType.Date,8,0) ,
+          new ParDef("AV9ToDate",GXType.Date,8,0) ,
           new ParDef("AV12EmployeeId",GXType.Int64,10,0) ,
           new ParDef("AV13OneProjectId",GXType.Int64,10,0)
           };
-          Object[] prmP00B96;
-          prmP00B96 = new Object[] {
+          Object[] prmP00B98;
+          prmP00B98 = new Object[] {
           new ParDef("AV12EmployeeId",GXType.Int64,10,0) ,
           new ParDef("AV13OneProjectId",GXType.Int64,10,0) ,
           new ParDef("AV8FromDate",GXType.Date,8,0) ,
@@ -263,8 +293,9 @@ namespace GeneXus.Programs {
           };
           def= new CursorDef[] {
               new CursorDef("P00B93", "SELECT COALESCE( T1.GXC1, 0) AS GXC1 FROM (SELECT SUM(WorkHourLogHour) AS GXC1 FROM WorkHourLog WHERE EmployeeId = :AV12EmployeeId ) T1 ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00B93,1, GxCacheFrequency.OFF ,true,false )
-             ,new CursorDef("P00B95", "SELECT COALESCE( T1.GXC2, 0) AS GXC2 FROM (SELECT SUM(WorkHourLogMinute) AS GXC2 FROM WorkHourLog WHERE (WorkHourLogDate >= :AV8FromDate) AND (WorkHourLogDate <= :AV9ToDate) AND (EmployeeId = :AV12EmployeeId) AND (ProjectId = :AV13OneProjectId) ) T1 ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00B95,1, GxCacheFrequency.OFF ,true,false )
-             ,new CursorDef("P00B96", "SELECT SUM(WorkHourLogHour) AS GXC1, SUM(WorkHourLogMinute) AS GXC2 FROM WorkHourLog WHERE (EmployeeId = :AV12EmployeeId and ProjectId = :AV13OneProjectId) AND (WorkHourLogDate >= :AV8FromDate) AND (WorkHourLogDate <= :AV9ToDate) ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00B96,1, GxCacheFrequency.OFF ,true,false )
+             ,new CursorDef("P00B95", "SELECT COALESCE( T1.GXC1, 0) AS GXC2 FROM (SELECT SUM(WorkHourLogHour) AS GXC1 FROM WorkHourLog WHERE (WorkHourLogDate >= :AV8FromDate) AND (WorkHourLogDate <= :AV9ToDate) AND (ProjectId = :AV13OneProjectId) ) T1 ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00B95,1, GxCacheFrequency.OFF ,true,false )
+             ,new CursorDef("P00B97", "SELECT COALESCE( T1.GXC3, 0) AS GXC3 FROM (SELECT SUM(WorkHourLogMinute) AS GXC3 FROM WorkHourLog WHERE (WorkHourLogDate >= :AV8FromDate) AND (WorkHourLogDate <= :AV9ToDate) AND (EmployeeId = :AV12EmployeeId) AND (ProjectId = :AV13OneProjectId) ) T1 ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00B97,1, GxCacheFrequency.OFF ,true,false )
+             ,new CursorDef("P00B98", "SELECT SUM(WorkHourLogHour) AS GXC1, SUM(WorkHourLogMinute) AS GXC3 FROM WorkHourLog WHERE (EmployeeId = :AV12EmployeeId and ProjectId = :AV13OneProjectId) AND (WorkHourLogDate >= :AV8FromDate) AND (WorkHourLogDate <= :AV9ToDate) ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00B98,1, GxCacheFrequency.OFF ,true,false )
           };
        }
     }
@@ -284,6 +315,10 @@ namespace GeneXus.Programs {
                 ((bool[]) buf[1])[0] = rslt.wasNull(1);
                 return;
              case 2 :
+                ((short[]) buf[0])[0] = rslt.getShort(1);
+                ((bool[]) buf[1])[0] = rslt.wasNull(1);
+                return;
+             case 3 :
                 ((int[]) buf[0])[0] = rslt.getInt(1);
                 ((short[]) buf[1])[0] = rslt.getShort(2);
                 return;
