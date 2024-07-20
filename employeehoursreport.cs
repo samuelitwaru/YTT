@@ -139,6 +139,7 @@ namespace GeneXus.Programs {
             this.cleanup();
             if (true) return;
          }
+         AV26TotalMinutes = 0;
          AV31headerCellStyle = new GeneXus.Programs.genexusoffice.office.excel.style.SdtExcelCellStyle(context);
          AV31headerCellStyle.gxTpr_Font.gxTpr_Bold = true;
          AV31headerCellStyle.gxTpr_Font.gxTpr_Size = 13;
@@ -322,6 +323,7 @@ namespace GeneXus.Programs {
             new procformattime(context ).execute(  (long)(Math.Round(AV15TotalWorkTime, 18, MidpointRounding.ToEven)), out  GXt_char2) ;
             AV20excelcellrange.gxTpr_Valuetext = GXt_char2;
             AV20excelcellrange.setcellstyle( AV21excelCellStyle);
+            AV26TotalMinutes = (int)(AV26TotalMinutes+AV15TotalWorkTime);
             AV24CellRow = (short)(AV24CellRow+2);
             if ( ! BRKAZ3 )
             {
@@ -336,23 +338,6 @@ namespace GeneXus.Programs {
       {
          /* 'WRITEFOOT' Routine */
          returnInSub = false;
-         /* Using cursor P00AZ5 */
-         pr_default.execute(2, new Object[] {AV10FromDate, AV11ToDate, AV8OneProjectId});
-         if ( (pr_default.getStatus(2) != 101) )
-         {
-            A40000GXC1 = P00AZ5_A40000GXC1[0];
-            n40000GXC1 = P00AZ5_n40000GXC1[0];
-            A40001GXC2 = P00AZ5_A40001GXC2[0];
-            n40001GXC2 = P00AZ5_n40001GXC2[0];
-         }
-         else
-         {
-            A40000GXC1 = 0;
-            n40000GXC1 = false;
-            A40001GXC2 = 0;
-            n40001GXC2 = false;
-         }
-         pr_default.close(2);
          AV24CellRow = (short)(AV24CellRow+1);
          AV20excelcellrange = AV12excelSpreadsheet.cell(AV24CellRow, 1);
          AV20excelcellrange.gxTpr_Valuetext = "Start Date";
@@ -374,7 +359,6 @@ namespace GeneXus.Programs {
          AV20excelcellrange = AV12excelSpreadsheet.cell(AV24CellRow, 1);
          AV20excelcellrange.gxTpr_Valuetext = "Hours Total";
          AV20excelcellrange.setcellstyle( AV34footCellStyle);
-         AV26TotalMinutes = (int)(A40000GXC1*60+A40001GXC2);
          AV20excelcellrange = AV12excelSpreadsheet.cell(AV24CellRow, 2);
          GXt_char2 = "";
          new procformattime(context ).execute(  AV26TotalMinutes, out  GXt_char2) ;
@@ -462,10 +446,6 @@ namespace GeneXus.Programs {
          A148EmployeeName = "";
          A120WorkHourLogDuration = "";
          A123WorkHourLogDescription = "";
-         P00AZ5_A40000GXC1 = new short[1] ;
-         P00AZ5_n40000GXC1 = new bool[] {false} ;
-         P00AZ5_A40001GXC2 = new short[1] ;
-         P00AZ5_n40001GXC2 = new bool[] {false} ;
          GXt_dtime3 = (DateTime)(DateTime.MinValue);
          GXt_char2 = "";
          AV18Session = context.GetSession();
@@ -479,9 +459,6 @@ namespace GeneXus.Programs {
                P00AZ3_A100CompanyId, P00AZ3_A148EmployeeName, P00AZ3_A103ProjectName, P00AZ3_A120WorkHourLogDuration, P00AZ3_A123WorkHourLogDescription, P00AZ3_A122WorkHourLogMinute, P00AZ3_A121WorkHourLogHour, P00AZ3_A119WorkHourLogDate, P00AZ3_A106EmployeeId, P00AZ3_A157CompanyLocationId,
                P00AZ3_A102ProjectId, P00AZ3_A118WorkHourLogId
                }
-               , new Object[] {
-               P00AZ5_A40000GXC1, P00AZ5_n40000GXC1, P00AZ5_A40001GXC2, P00AZ5_n40001GXC2
-               }
             }
          );
          /* GeneXus formulas. */
@@ -492,12 +469,10 @@ namespace GeneXus.Programs {
       private short AV29VisibleColumnCount ;
       private short A122WorkHourLogMinute ;
       private short A121WorkHourLogHour ;
-      private short A40000GXC1 ;
-      private short A40001GXC2 ;
+      private int AV26TotalMinutes ;
       private int AV36GXV1 ;
       private int AV13CompanyLocationId_Count ;
       private int AV14EmployeeId_Count ;
-      private int AV26TotalMinutes ;
       private long AV8OneProjectId ;
       private long A102ProjectId ;
       private long A157CompanyLocationId ;
@@ -517,8 +492,6 @@ namespace GeneXus.Programs {
       private DateTime A119WorkHourLogDate ;
       private bool returnInSub ;
       private bool BRKAZ3 ;
-      private bool n40000GXC1 ;
-      private bool n40001GXC2 ;
       private bool AV19boolean ;
       private string A123WorkHourLogDescription ;
       private string AV28Filename ;
@@ -551,10 +524,6 @@ namespace GeneXus.Programs {
       private long[] P00AZ3_A157CompanyLocationId ;
       private long[] P00AZ3_A102ProjectId ;
       private long[] P00AZ3_A118WorkHourLogId ;
-      private short[] P00AZ5_A40000GXC1 ;
-      private bool[] P00AZ5_n40000GXC1 ;
-      private short[] P00AZ5_A40001GXC2 ;
-      private bool[] P00AZ5_n40001GXC2 ;
       private string aP5_Filename ;
       private string aP6_ErrorMessage ;
       private IGxSession AV18Session ;
@@ -644,7 +613,6 @@ namespace GeneXus.Programs {
          return new Cursor[] {
           new ForEachCursor(def[0])
          ,new ForEachCursor(def[1])
-         ,new ForEachCursor(def[2])
        };
     }
 
@@ -657,12 +625,6 @@ namespace GeneXus.Programs {
           prmP00AZ2 = new Object[] {
           new ParDef("AV8OneProjectId",GXType.Int64,10,0)
           };
-          Object[] prmP00AZ5;
-          prmP00AZ5 = new Object[] {
-          new ParDef("AV10FromDate",GXType.Date,8,0) ,
-          new ParDef("AV11ToDate",GXType.Date,8,0) ,
-          new ParDef("AV8OneProjectId",GXType.Int64,10,0)
-          };
           Object[] prmP00AZ3;
           prmP00AZ3 = new Object[] {
           new ParDef("AV8OneProjectId",GXType.Int64,10,0) ,
@@ -672,7 +634,6 @@ namespace GeneXus.Programs {
           def= new CursorDef[] {
               new CursorDef("P00AZ2", "SELECT ProjectId, ProjectName FROM Project WHERE ProjectId = :AV8OneProjectId ORDER BY ProjectId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00AZ2,1, GxCacheFrequency.OFF ,true,true )
              ,new CursorDef("P00AZ3", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00AZ3,100, GxCacheFrequency.OFF ,true,false )
-             ,new CursorDef("P00AZ5", "SELECT COALESCE( T1.GXC1, 0) AS GXC1, COALESCE( T1.GXC2, 0) AS GXC2 FROM (SELECT SUM(WorkHourLogHour) AS GXC1, SUM(WorkHourLogMinute) AS GXC2 FROM WorkHourLog WHERE (WorkHourLogDate >= :AV10FromDate) AND (WorkHourLogDate <= :AV11ToDate) AND (ProjectId = :AV8OneProjectId) ) T1 ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00AZ5,1, GxCacheFrequency.OFF ,true,true )
           };
        }
     }
@@ -700,12 +661,6 @@ namespace GeneXus.Programs {
                 ((long[]) buf[9])[0] = rslt.getLong(10);
                 ((long[]) buf[10])[0] = rslt.getLong(11);
                 ((long[]) buf[11])[0] = rslt.getLong(12);
-                return;
-             case 2 :
-                ((short[]) buf[0])[0] = rslt.getShort(1);
-                ((bool[]) buf[1])[0] = rslt.wasNull(1);
-                ((short[]) buf[2])[0] = rslt.getShort(2);
-                ((bool[]) buf[3])[0] = rslt.wasNull(2);
                 return;
        }
     }

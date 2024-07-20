@@ -112,16 +112,20 @@ namespace GeneXus.Programs {
          /* GeneXus formulas */
          /* Output device settings */
          /* Using cursor P00B93 */
-         pr_default.execute(0, new Object[] {AV12EmployeeId});
+         pr_default.execute(0, new Object[] {AV8FromDate, AV9ToDate, AV12EmployeeId, AV13OneProjectId});
          if ( (pr_default.getStatus(0) != 101) )
          {
             A40000GXC1 = P00B93_A40000GXC1[0];
             n40000GXC1 = P00B93_n40000GXC1[0];
+            A40002GXC3 = P00B93_A40002GXC3[0];
+            n40002GXC3 = P00B93_n40002GXC3[0];
          }
          else
          {
             A40000GXC1 = 0;
             n40000GXC1 = false;
+            A40002GXC3 = 0;
+            n40002GXC3 = false;
          }
          pr_default.close(0);
          /* Using cursor P00B95 */
@@ -137,23 +141,10 @@ namespace GeneXus.Programs {
             n40001GXC2 = false;
          }
          pr_default.close(1);
-         /* Using cursor P00B97 */
-         pr_default.execute(2, new Object[] {AV8FromDate, AV9ToDate, AV12EmployeeId, AV13OneProjectId});
-         if ( (pr_default.getStatus(2) != 101) )
-         {
-            A40002GXC3 = P00B97_A40002GXC3[0];
-            n40002GXC3 = P00B97_n40002GXC3[0];
-         }
-         else
-         {
-            A40002GXC3 = 0;
-            n40002GXC3 = false;
-         }
-         pr_default.close(2);
          AV12EmployeeId = 120;
          AV8FromDate = context.localUtil.YMDToD( 2024, 7, 1);
          AV9ToDate = context.localUtil.YMDToD( 2024, 7, 31);
-         AV13OneProjectId = 69;
+         AV15ProjectId = 69;
          AV11Hours = A40000GXC1;
          AV11Hours = A40001GXC2;
          AV14Minutes = A40002GXC3;
@@ -162,11 +153,11 @@ namespace GeneXus.Programs {
          AV11Hours = 0;
          AV14Minutes = 0;
          /* Optimized group. */
-         /* Using cursor P00B98 */
-         pr_default.execute(3, new Object[] {AV12EmployeeId, AV13OneProjectId, AV8FromDate, AV9ToDate});
-         c121WorkHourLogHour = P00B98_A121WorkHourLogHour[0];
-         c122WorkHourLogMinute = P00B98_A122WorkHourLogMinute[0];
-         pr_default.close(3);
+         /* Using cursor P00B96 */
+         pr_default.execute(2, new Object[] {AV12EmployeeId, AV13OneProjectId, AV8FromDate, AV9ToDate});
+         c121WorkHourLogHour = P00B96_A121WorkHourLogHour[0];
+         c122WorkHourLogMinute = P00B96_A122WorkHourLogMinute[0];
+         pr_default.close(2);
          AV11Hours = (int)(AV11Hours+c121WorkHourLogHour);
          AV14Minutes = (int)(AV14Minutes+c122WorkHourLogMinute);
          /* End optimized group. */
@@ -192,29 +183,26 @@ namespace GeneXus.Programs {
       public override void initialize( )
       {
          scmdbuf = "";
-         P00B93_A40000GXC1 = new short[1] ;
-         P00B93_n40000GXC1 = new bool[] {false} ;
          AV8FromDate = DateTime.MinValue;
          AV9ToDate = DateTime.MinValue;
+         P00B93_A40000GXC1 = new short[1] ;
+         P00B93_n40000GXC1 = new bool[] {false} ;
+         P00B93_A40002GXC3 = new short[1] ;
+         P00B93_n40002GXC3 = new bool[] {false} ;
          P00B95_A40001GXC2 = new short[1] ;
          P00B95_n40001GXC2 = new bool[] {false} ;
-         P00B97_A40002GXC3 = new short[1] ;
-         P00B97_n40002GXC3 = new bool[] {false} ;
-         P00B98_A121WorkHourLogHour = new int[1] ;
-         P00B98_A122WorkHourLogMinute = new short[1] ;
+         P00B96_A121WorkHourLogHour = new int[1] ;
+         P00B96_A122WorkHourLogMinute = new short[1] ;
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.atest__default(),
             new Object[][] {
                 new Object[] {
-               P00B93_A40000GXC1, P00B93_n40000GXC1
+               P00B93_A40000GXC1, P00B93_n40000GXC1, P00B93_A40002GXC3, P00B93_n40002GXC3
                }
                , new Object[] {
                P00B95_A40001GXC2, P00B95_n40001GXC2
                }
                , new Object[] {
-               P00B97_A40002GXC3, P00B97_n40002GXC3
-               }
-               , new Object[] {
-               P00B98_A121WorkHourLogHour, P00B98_A122WorkHourLogMinute
+               P00B96_A121WorkHourLogHour, P00B96_A122WorkHourLogMinute
                }
             }
          );
@@ -222,31 +210,32 @@ namespace GeneXus.Programs {
       }
 
       private short A40000GXC1 ;
-      private short A40001GXC2 ;
       private short A40002GXC3 ;
+      private short A40001GXC2 ;
       private int AV11Hours ;
       private int AV14Minutes ;
       private int c121WorkHourLogHour ;
       private int c122WorkHourLogMinute ;
       private long AV12EmployeeId ;
       private long AV13OneProjectId ;
+      private long AV15ProjectId ;
       private string scmdbuf ;
       private DateTime AV8FromDate ;
       private DateTime AV9ToDate ;
       private bool n40000GXC1 ;
-      private bool n40001GXC2 ;
       private bool n40002GXC3 ;
+      private bool n40001GXC2 ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private IDataStoreProvider pr_default ;
       private short[] P00B93_A40000GXC1 ;
       private bool[] P00B93_n40000GXC1 ;
+      private short[] P00B93_A40002GXC3 ;
+      private bool[] P00B93_n40002GXC3 ;
       private short[] P00B95_A40001GXC2 ;
       private bool[] P00B95_n40001GXC2 ;
-      private short[] P00B97_A40002GXC3 ;
-      private bool[] P00B97_n40002GXC3 ;
-      private int[] P00B98_A121WorkHourLogHour ;
-      private short[] P00B98_A122WorkHourLogMinute ;
+      private int[] P00B96_A121WorkHourLogHour ;
+      private short[] P00B96_A122WorkHourLogMinute ;
    }
 
    public class atest__default : DataStoreHelperBase, IDataStoreHelper
@@ -258,7 +247,6 @@ namespace GeneXus.Programs {
           new ForEachCursor(def[0])
          ,new ForEachCursor(def[1])
          ,new ForEachCursor(def[2])
-         ,new ForEachCursor(def[3])
        };
     }
 
@@ -269,7 +257,10 @@ namespace GeneXus.Programs {
        {
           Object[] prmP00B93;
           prmP00B93 = new Object[] {
-          new ParDef("AV12EmployeeId",GXType.Int64,10,0)
+          new ParDef("AV8FromDate",GXType.Date,8,0) ,
+          new ParDef("AV9ToDate",GXType.Date,8,0) ,
+          new ParDef("AV12EmployeeId",GXType.Int64,10,0) ,
+          new ParDef("AV13OneProjectId",GXType.Int64,10,0)
           };
           Object[] prmP00B95;
           prmP00B95 = new Object[] {
@@ -277,25 +268,17 @@ namespace GeneXus.Programs {
           new ParDef("AV9ToDate",GXType.Date,8,0) ,
           new ParDef("AV13OneProjectId",GXType.Int64,10,0)
           };
-          Object[] prmP00B97;
-          prmP00B97 = new Object[] {
-          new ParDef("AV8FromDate",GXType.Date,8,0) ,
-          new ParDef("AV9ToDate",GXType.Date,8,0) ,
-          new ParDef("AV12EmployeeId",GXType.Int64,10,0) ,
-          new ParDef("AV13OneProjectId",GXType.Int64,10,0)
-          };
-          Object[] prmP00B98;
-          prmP00B98 = new Object[] {
+          Object[] prmP00B96;
+          prmP00B96 = new Object[] {
           new ParDef("AV12EmployeeId",GXType.Int64,10,0) ,
           new ParDef("AV13OneProjectId",GXType.Int64,10,0) ,
           new ParDef("AV8FromDate",GXType.Date,8,0) ,
           new ParDef("AV9ToDate",GXType.Date,8,0)
           };
           def= new CursorDef[] {
-              new CursorDef("P00B93", "SELECT COALESCE( T1.GXC1, 0) AS GXC1 FROM (SELECT SUM(WorkHourLogHour) AS GXC1 FROM WorkHourLog WHERE EmployeeId = :AV12EmployeeId ) T1 ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00B93,1, GxCacheFrequency.OFF ,true,false )
+              new CursorDef("P00B93", "SELECT COALESCE( T1.GXC1, 0) AS GXC1, COALESCE( T1.GXC3, 0) AS GXC3 FROM (SELECT SUM(WorkHourLogHour) AS GXC1, SUM(WorkHourLogMinute) AS GXC3 FROM WorkHourLog WHERE (WorkHourLogDate >= :AV8FromDate) AND (WorkHourLogDate <= :AV9ToDate) AND (EmployeeId = :AV12EmployeeId) AND (ProjectId = :AV13OneProjectId) ) T1 ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00B93,1, GxCacheFrequency.OFF ,true,false )
              ,new CursorDef("P00B95", "SELECT COALESCE( T1.GXC1, 0) AS GXC2 FROM (SELECT SUM(WorkHourLogHour) AS GXC1 FROM WorkHourLog WHERE (WorkHourLogDate >= :AV8FromDate) AND (WorkHourLogDate <= :AV9ToDate) AND (ProjectId = :AV13OneProjectId) ) T1 ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00B95,1, GxCacheFrequency.OFF ,true,false )
-             ,new CursorDef("P00B97", "SELECT COALESCE( T1.GXC3, 0) AS GXC3 FROM (SELECT SUM(WorkHourLogMinute) AS GXC3 FROM WorkHourLog WHERE (WorkHourLogDate >= :AV8FromDate) AND (WorkHourLogDate <= :AV9ToDate) AND (EmployeeId = :AV12EmployeeId) AND (ProjectId = :AV13OneProjectId) ) T1 ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00B97,1, GxCacheFrequency.OFF ,true,false )
-             ,new CursorDef("P00B98", "SELECT SUM(WorkHourLogHour) AS GXC1, SUM(WorkHourLogMinute) AS GXC3 FROM WorkHourLog WHERE (EmployeeId = :AV12EmployeeId and ProjectId = :AV13OneProjectId) AND (WorkHourLogDate >= :AV8FromDate) AND (WorkHourLogDate <= :AV9ToDate) ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00B98,1, GxCacheFrequency.OFF ,true,false )
+             ,new CursorDef("P00B96", "SELECT SUM(WorkHourLogHour) AS GXC1, SUM(WorkHourLogMinute) AS GXC3 FROM WorkHourLog WHERE (EmployeeId = :AV12EmployeeId and ProjectId = :AV13OneProjectId) AND (WorkHourLogDate >= :AV8FromDate) AND (WorkHourLogDate <= :AV9ToDate) ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00B96,1, GxCacheFrequency.OFF ,true,false )
           };
        }
     }
@@ -309,16 +292,14 @@ namespace GeneXus.Programs {
              case 0 :
                 ((short[]) buf[0])[0] = rslt.getShort(1);
                 ((bool[]) buf[1])[0] = rslt.wasNull(1);
+                ((short[]) buf[2])[0] = rslt.getShort(2);
+                ((bool[]) buf[3])[0] = rslt.wasNull(2);
                 return;
              case 1 :
                 ((short[]) buf[0])[0] = rslt.getShort(1);
                 ((bool[]) buf[1])[0] = rslt.wasNull(1);
                 return;
              case 2 :
-                ((short[]) buf[0])[0] = rslt.getShort(1);
-                ((bool[]) buf[1])[0] = rslt.wasNull(1);
-                return;
-             case 3 :
                 ((int[]) buf[0])[0] = rslt.getInt(1);
                 ((short[]) buf[1])[0] = rslt.getShort(2);
                 return;
