@@ -15,7 +15,8 @@
           "iTextSharp-LGPL": "4.1.6",
           "GeneXus": "0.0.0.0",
           "GeneXus.Security.API.Common": "0.0.0.0",
-          "GeneXusSecurity": "1.0.0.0"
+          "GeneXusSecurity": "1.0.0.0",
+          "GeneXusUnanimo": "0.0.0.0"
         },
         "runtime": {
           "atest.dll": {}
@@ -1222,6 +1223,14 @@
           }
         }
       },
+      "GeneXusUnanimo/0.0.0.0": {
+        "runtime": {
+          "GeneXusUnanimo.dll": {
+            "assemblyVersion": "0.0.0.0",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
       "GeneXus.Security/1.0.0.0": {
         "runtime": {
           "GeneXus.Security.dll": {
@@ -2214,6 +2223,11 @@
       "sha512": ""
     },
     "GeneXusSecurity/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "GeneXusUnanimo/0.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""

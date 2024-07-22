@@ -57,6 +57,20 @@
         </Properties>
       </Field>
     </Parameter>
+    <Parameter name="FilterFullText">
+      <Field>
+        <Properties>
+          <Property>
+            <Name>Type</Name>
+            <Value>Character</Value>
+          </Property>
+          <Property>
+            <Name>Length</Name>
+            <Value>100</Value>
+          </Property>
+        </Properties>
+      </Field>
+    </Parameter>
     <Parameter name="ReturnValue" accessor="out">
       <Field name="SDTWorkHourLog" description="SDTWork Hour Log" collection="true">
         <Fields>

@@ -1083,7 +1083,6 @@ namespace GeneXus.Programs {
             ajax_req_read_hidden_sdt(cgiGet( "vSDTPROJECTS"), AV19SDTProjects);
             ajax_req_read_hidden_sdt(cgiGet( "vSDTEMPLOYEEPROJECTHOURSCOLLECTION"), AV5SDTEmployeeProjectHoursCollection);
             ajax_req_read_hidden_sdt(cgiGet( "vDATERANGE_RANGEPICKEROPTIONS"), AV9DateRange_RangePickerOptions);
-            ajax_req_read_hidden_sdt(cgiGet( "vPROJECTID"), AV16ProjectId);
             /* Read saved values. */
             AV8DateRange = context.localUtil.CToD( cgiGet( "vDATERANGE"), 0);
             AV11DateRange_To = context.localUtil.CToD( cgiGet( "vDATERANGE_TO"), 0);
@@ -1595,7 +1594,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247199332412", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024722852135", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1611,7 +1610,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("reports.js", "?20247199332413", false, true);
+         context.AddJavascriptSource("reports.js", "?2024722852136", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
