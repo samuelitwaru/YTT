@@ -48,14 +48,14 @@
 
 
 <script type="text/javascript">
-//    $(document).ready(function() {
-//	
-//		$(window).on('resize', function() {
-//			// Your code here
-//			var newHeight = $(window).height();
-//			console.log("New height: " + newHeight);
-//			$('#print').css("height", newHeight-100)
-//			// Perform actions based on the new height
-//		});
-//  });
+    $(document).ready(function() {
+	
+		$(window).on('resize', function() {
+			// Your code here
+			var newHeight = $(window).height();
+			console.log("New height: " + newHeight);
+			$('#print').css("height", newHeight-100)
+			// Perform actions based on the new height
+		});
+  });
   </script>

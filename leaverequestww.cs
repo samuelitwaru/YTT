@@ -2009,7 +2009,7 @@ namespace GeneXus.Programs {
          AV90Checking = AV79GAMUser.checkrole("Manager");
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV73Mesage)) )
          {
-            GX_msglist.addItem(AV73Mesage);
+            GX_msglist.addItem(new GeneXus.Programs.wwpbaseobjects.dvmessagegetbasicnotificationmsg(context).executeUdp(  "Success",  AV73Mesage,  "success",  "",  "true",  ""));
             AV73Mesage = "";
             AssignAttri("", false, "AV73Mesage", AV73Mesage);
             GxWebStd.gx_hidden_field( context, "gxhash_vMESAGE", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV73Mesage, "")), context));
@@ -3036,7 +3036,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247221023994", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202472222391736", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -3052,7 +3052,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("leaverequestww.js", "?20247221023995", false, true);
+         context.AddJavascriptSource("leaverequestww.js", "?202472222391737", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);

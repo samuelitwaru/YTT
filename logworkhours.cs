@@ -1932,7 +1932,7 @@ namespace GeneXus.Programs {
                returnInSub = true;
                if (true) return;
             }
-            GX_msglist.addItem("Log deleted successfully");
+            GX_msglist.addItem(new GeneXus.Programs.wwpbaseobjects.dvmessagegetbasicnotificationmsg(context).executeUdp(  "Success",  "Work hour log deleted successfully",  "success",  "",  "true",  ""));
          }
          else
          {
@@ -2043,7 +2043,7 @@ namespace GeneXus.Programs {
                if (true) return;
             }
             gxgrGrid1_refresh( subGrid1_Rows, AV10date, Gx_date, AV29FormWorkHourLogProjectId) ;
-            GX_msglist.addItem("Log saved successfully");
+            GX_msglist.addItem(new GeneXus.Programs.wwpbaseobjects.dvmessagegetbasicnotificationmsg(context).executeUdp(  "Success",  "Work hour log saved successfully",  "success",  "",  "true",  ""));
          }
          else
          {
@@ -2100,7 +2100,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247229571893", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202472222335691", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2118,7 +2118,7 @@ namespace GeneXus.Programs {
          if ( nGXWrapped != 1 )
          {
             context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-            context.AddJavascriptSource("logworkhours.js", "?20247229571894", false, true);
+            context.AddJavascriptSource("logworkhours.js", "?202472222335692", false, true);
             context.AddJavascriptSource("Switch/switch.min.js", "", false, true);
             context.AddJavascriptSource("Switch/switch.min.js", "", false, true);
             context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
