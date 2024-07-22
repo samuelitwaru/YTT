@@ -1,8 +1,9 @@
 <div id="print" style="padding-top:1px;overflow:scroll; scrollbar-width:none; border-right: 1px solid #dddddd; border-left: 1px solid #dddddd">
 	<table class="my-sticky-column-table gx-tab-spacing-fix-2 GridWithPaginationBar GridWithBorderColor WorkWith table-responsive" style='border: 1px solid #dddddd; border-collapse: collapse;'>
-		<thead  style="border-collapse: collapse; position:sticky; top:0; z-index:10">
+		<thead  style="">
+		<!-- border-collapse: collapse; position:sticky; top:0; z-index:10 -->
 			<tr>
-				<th style='border: 1px solid #dddddd; border-collapse: collapse;'>Projects:</th>
+				<th class='text-center' style='border: 1px solid #dddddd; border-collapse: collapse;'>Projects per employee:</th>
 				{{#SDTProjects}}
 				<th style='border: 1px solid #dddddd; border-collapse: collapse;padding: 5px; background:#f5f5f5;' scope="col" class='text-center'><a id='Project-{{gxTpr_Id}}{{Id}}' style='cursor:pointer' class='project' >{{gxTpr_ProjectName}}{{ProjectName}}</a></th>
 				{{/SDTProjects}}
