@@ -113,17 +113,26 @@ namespace GeneXus.Programs {
          /* Output device settings */
          AV21TotalHour = 0;
          AV24TotalMinute = 0;
-         if ( DateTimeUtil.Dow( AV25WeekDate) == 1 )
+         if ( DateTimeUtil.Dow( AV25WeekDate) == 2 )
          {
             AV17StartDate = AV25WeekDate;
             AV11EndDate = DateTimeUtil.DAdd( AV25WeekDate, (6));
          }
          else
          {
-            AV9daysToStart = (short)(DateTimeUtil.Dow( AV25WeekDate)-1);
-            AV17StartDate = DateTimeUtil.DAdd( AV25WeekDate, (-AV9daysToStart));
-            AV11EndDate = DateTimeUtil.DAdd( AV17StartDate, (6));
+            if ( DateTimeUtil.Dow( AV25WeekDate) == 1 )
+            {
+               AV17StartDate = DateTimeUtil.DAdd( AV25WeekDate, (-6));
+               AV11EndDate = DateTimeUtil.DAdd( AV17StartDate, (6));
+            }
+            else
+            {
+               AV9daysToStart = (short)(DateTimeUtil.Dow( AV25WeekDate)-2);
+               AV17StartDate = DateTimeUtil.DAdd( AV25WeekDate, (-AV9daysToStart));
+               AV11EndDate = DateTimeUtil.DAdd( AV17StartDate, (6));
+            }
          }
+         new logtofile(context ).execute(  StringUtil.Str( (decimal)(DateTimeUtil.Dow( AV25WeekDate)), 10, 0)+" >> "+context.localUtil.DToC( AV17StartDate, 2, "/")+" - "+context.localUtil.DToC( AV11EndDate, 2, "/")) ;
          AV32Udparg1 = new getloggedinemployeeid(context).executeUdp( );
          /* Optimized group. */
          /* Using cursor P008B2 */

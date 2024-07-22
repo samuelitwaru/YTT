@@ -98,7 +98,7 @@ namespace GeneXus.Programs {
             A118WorkHourLogId = P00BG2_A118WorkHourLogId[0];
             AV11GXLvl1 = 1;
             AV10FinalWorkHourlogDate = DateTimeUtil.DAdd( A119WorkHourLogDate, (1));
-            if ( DateTimeUtil.ResetTime ( AV10FinalWorkHourlogDate ) > DateTimeUtil.ResetTime ( Gx_date ) )
+            if ( ( ( ( DateTimeUtil.Dow( A119WorkHourLogDate) == 1 ) || ( DateTimeUtil.Dow( A119WorkHourLogDate) >= 6 ) ) && ( DateTimeUtil.Dow( Gx_date) == 2 ) ) || ( DateTimeUtil.ResetTime ( AV10FinalWorkHourlogDate ) > DateTimeUtil.ResetTime ( Gx_date ) ) )
             {
                AV10FinalWorkHourlogDate = Gx_date;
             }
