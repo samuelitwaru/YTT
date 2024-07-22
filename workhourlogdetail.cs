@@ -1806,8 +1806,7 @@ namespace GeneXus.Programs {
          /* 'GETDATA' Routine */
          returnInSub = false;
          GXt_objcol_SdtSDTWorkHourLog_SDTWorkHourLogItem4 = AV14SDTWorkHourLog;
-         GXt_objcol_SdtSDTWorkHourLog_SDTWorkHourLogItem5 = new GXBaseCollection<SdtSDTWorkHourLog_SDTWorkHourLogItem>();
-         new dpworkhourlog(context ).execute(  AV34EmployeeId,  AV35FromDate,  AV36ToDate,  AV39ProjectIds,  (string)(GXt_objcol_SdtSDTWorkHourLog_SDTWorkHourLogItem4), out  GXt_objcol_SdtSDTWorkHourLog_SDTWorkHourLogItem5) ;
+         new dpworkhourlog(context ).execute(  AV34EmployeeId,  AV35FromDate,  AV36ToDate,  AV39ProjectIds, out  GXt_objcol_SdtSDTWorkHourLog_SDTWorkHourLogItem4) ;
          AV14SDTWorkHourLog = GXt_objcol_SdtSDTWorkHourLog_SDTWorkHourLogItem4;
          gx_BV39 = true;
       }
@@ -1935,7 +1934,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247228473161", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202472211572482", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1951,7 +1950,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("workhourlogdetail.js", "?20247228473161", false, true);
+         context.AddJavascriptSource("workhourlogdetail.js", "?202472211572482", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -2522,7 +2521,6 @@ namespace GeneXus.Programs {
          GXt_objcol_SdtDVB_SDTDropDownOptionsData_Item3 = new GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsData_Item>( context, "Item", "");
          AV12GridStateFilterValue = new GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue(context);
          GXt_objcol_SdtSDTWorkHourLog_SDTWorkHourLogItem4 = new GXBaseCollection<SdtSDTWorkHourLog_SDTWorkHourLogItem>( context, "SDTWorkHourLogItem", "YTT_version4");
-         GXt_objcol_SdtSDTWorkHourLog_SDTWorkHourLogItem5 = new GXBaseCollection<SdtSDTWorkHourLog_SDTWorkHourLogItem>( context, "SDTWorkHourLogItem", "YTT_version4");
          ucDdo_managefilters = new GXUserControl();
          Ddo_managefilters_Caption = "";
          BackMsgLst = new msglist();
@@ -2753,7 +2751,6 @@ namespace GeneXus.Programs {
       private GxHttpRequest AV8HTTPRequest ;
       private GXBaseCollection<SdtSDTWorkHourLog_SDTWorkHourLogItem> AV14SDTWorkHourLog ;
       private GXBaseCollection<SdtSDTWorkHourLog_SDTWorkHourLogItem> GXt_objcol_SdtSDTWorkHourLog_SDTWorkHourLogItem4 ;
-      private GXBaseCollection<SdtSDTWorkHourLog_SDTWorkHourLogItem> GXt_objcol_SdtSDTWorkHourLog_SDTWorkHourLogItem5 ;
       private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsData_Item> AV22ManageFiltersData ;
       private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsData_Item> GXt_objcol_SdtDVB_SDTDropDownOptionsData_Item3 ;
       private GXWebForm Form ;

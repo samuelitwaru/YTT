@@ -132,7 +132,6 @@ namespace GeneXus.Programs {
                AV11EndDate = DateTimeUtil.DAdd( AV17StartDate, (6));
             }
          }
-         new logtofile(context ).execute(  StringUtil.Str( (decimal)(DateTimeUtil.Dow( AV25WeekDate)), 10, 0)+" >> "+context.localUtil.DToC( AV17StartDate, 2, "/")+" - "+context.localUtil.DToC( AV11EndDate, 2, "/")) ;
          AV32Udparg1 = new getloggedinemployeeid(context).executeUdp( );
          /* Optimized group. */
          /* Using cursor P008B2 */

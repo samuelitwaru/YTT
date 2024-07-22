@@ -349,11 +349,11 @@ namespace GeneXus.Programs {
                                               AV50FromDate ,
                                               AV51ToDate ,
                                               AV53ProjectIds.Count ,
-                                              A148EmployeeName ,
                                               A103ProjectName ,
+                                              A148EmployeeName ,
+                                              A119WorkHourLogDate ,
                                               A120WorkHourLogDuration ,
                                               A123WorkHourLogDescription ,
-                                              A119WorkHourLogDate ,
                                               A106EmployeeId ,
                                               AV17OrderedBy ,
                                               AV18OrderedDsc } ,
@@ -363,15 +363,12 @@ namespace GeneXus.Programs {
                                               }
          });
          lV56Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV56Workhourloglistds_1_filterfulltext), "%", "");
-         lV56Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV56Workhourloglistds_1_filterfulltext), "%", "");
-         lV56Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV56Workhourloglistds_1_filterfulltext), "%", "");
-         lV56Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV56Workhourloglistds_1_filterfulltext), "%", "");
          lV57Workhourloglistds_2_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV57Workhourloglistds_2_tfemployeename), 100, "%");
          lV59Workhourloglistds_4_tfprojectname = StringUtil.PadR( StringUtil.RTrim( AV59Workhourloglistds_4_tfprojectname), 100, "%");
          lV63Workhourloglistds_8_tfworkhourlogduration = StringUtil.Concat( StringUtil.RTrim( AV63Workhourloglistds_8_tfworkhourlogduration), "%", "");
          lV65Workhourloglistds_10_tfworkhourlogdescription = StringUtil.Concat( StringUtil.RTrim( AV65Workhourloglistds_10_tfworkhourlogdescription), "%", "");
          /* Using cursor P00862 */
-         pr_default.execute(0, new Object[] {lV56Workhourloglistds_1_filterfulltext, lV56Workhourloglistds_1_filterfulltext, lV56Workhourloglistds_1_filterfulltext, lV56Workhourloglistds_1_filterfulltext, lV57Workhourloglistds_2_tfemployeename, AV58Workhourloglistds_3_tfemployeename_sel, lV59Workhourloglistds_4_tfprojectname, AV60Workhourloglistds_5_tfprojectname_sel, AV61Workhourloglistds_6_tfworkhourlogdate, AV62Workhourloglistds_7_tfworkhourlogdate_to, lV63Workhourloglistds_8_tfworkhourlogduration, AV64Workhourloglistds_9_tfworkhourlogduration_sel, lV65Workhourloglistds_10_tfworkhourlogdescription, AV66Workhourloglistds_11_tfworkhourlogdescription_sel, AV52EmployeeId, AV50FromDate, AV51ToDate});
+         pr_default.execute(0, new Object[] {lV56Workhourloglistds_1_filterfulltext, lV57Workhourloglistds_2_tfemployeename, AV58Workhourloglistds_3_tfemployeename_sel, lV59Workhourloglistds_4_tfprojectname, AV60Workhourloglistds_5_tfprojectname_sel, AV61Workhourloglistds_6_tfworkhourlogdate, AV62Workhourloglistds_7_tfworkhourlogdate_to, lV63Workhourloglistds_8_tfworkhourlogduration, AV64Workhourloglistds_9_tfworkhourlogduration_sel, lV65Workhourloglistds_10_tfworkhourlogdescription, AV66Workhourloglistds_11_tfworkhourlogdescription_sel, AV52EmployeeId, AV50FromDate, AV51ToDate});
          while ( (pr_default.getStatus(0) != 101) )
          {
             A102ProjectId = P00862_A102ProjectId[0];
@@ -623,11 +620,11 @@ namespace GeneXus.Programs {
          lV59Workhourloglistds_4_tfprojectname = "";
          lV63Workhourloglistds_8_tfworkhourlogduration = "";
          lV65Workhourloglistds_10_tfworkhourlogdescription = "";
-         A148EmployeeName = "";
          A103ProjectName = "";
+         A148EmployeeName = "";
+         A119WorkHourLogDate = DateTime.MinValue;
          A120WorkHourLogDuration = "";
          A123WorkHourLogDescription = "";
-         A119WorkHourLogDate = DateTime.MinValue;
          P00862_A102ProjectId = new long[1] ;
          P00862_A106EmployeeId = new long[1] ;
          P00862_A123WorkHourLogDescription = new string[] {""} ;
@@ -677,8 +674,8 @@ namespace GeneXus.Programs {
       private string scmdbuf ;
       private string lV57Workhourloglistds_2_tfemployeename ;
       private string lV59Workhourloglistds_4_tfprojectname ;
-      private string A148EmployeeName ;
       private string A103ProjectName ;
+      private string A148EmployeeName ;
       private string GXt_char1 ;
       private DateTime GXt_dtime3 ;
       private DateTime AV50FromDate ;
@@ -753,30 +750,27 @@ namespace GeneXus.Programs {
                                              DateTime AV50FromDate ,
                                              DateTime AV51ToDate ,
                                              int AV53ProjectIds_Count ,
-                                             string A148EmployeeName ,
                                              string A103ProjectName ,
+                                             string A148EmployeeName ,
+                                             DateTime A119WorkHourLogDate ,
                                              string A120WorkHourLogDuration ,
                                              string A123WorkHourLogDescription ,
-                                             DateTime A119WorkHourLogDate ,
                                              long A106EmployeeId ,
                                              short AV17OrderedBy ,
                                              bool AV18OrderedDsc )
       {
          System.Text.StringBuilder sWhereString = new System.Text.StringBuilder();
          string scmdbuf;
-         short[] GXv_int4 = new short[17];
+         short[] GXv_int4 = new short[14];
          Object[] GXv_Object5 = new Object[2];
          scmdbuf = "SELECT T1.ProjectId, T1.EmployeeId, T1.WorkHourLogDescription, T1.WorkHourLogDuration, T1.WorkHourLogDate, T2.ProjectName, T3.EmployeeName, T1.WorkHourLogId FROM ((WorkHourLog T1 INNER JOIN Project T2 ON T2.ProjectId = T1.ProjectId) INNER JOIN Employee T3 ON T3.EmployeeId = T1.EmployeeId)";
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV56Workhourloglistds_1_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( LOWER(T3.EmployeeName) like '%' || LOWER(:lV56Workhourloglistds_1_filterfulltext)) or ( LOWER(T2.ProjectName) like '%' || LOWER(:lV56Workhourloglistds_1_filterfulltext)) or ( LOWER(T1.WorkHourLogDuration) like '%' || LOWER(:lV56Workhourloglistds_1_filterfulltext)) or ( LOWER(T1.WorkHourLogDescription) like '%' || LOWER(:lV56Workhourloglistds_1_filterfulltext)))");
+            AddWhere(sWhereString, "(( LOWER(T2.ProjectName) like '%' || LOWER(:lV56Workhourloglistds_1_filterfulltext)))");
          }
          else
          {
             GXv_int4[0] = 1;
-            GXv_int4[1] = 1;
-            GXv_int4[2] = 1;
-            GXv_int4[3] = 1;
          }
          if ( String.IsNullOrEmpty(StringUtil.RTrim( AV58Workhourloglistds_3_tfemployeename_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV57Workhourloglistds_2_tfemployeename)) ) )
          {
@@ -784,7 +778,7 @@ namespace GeneXus.Programs {
          }
          else
          {
-            GXv_int4[4] = 1;
+            GXv_int4[1] = 1;
          }
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV58Workhourloglistds_3_tfemployeename_sel)) && ! ( StringUtil.StrCmp(AV58Workhourloglistds_3_tfemployeename_sel, "<#Empty#>") == 0 ) )
          {
@@ -792,7 +786,7 @@ namespace GeneXus.Programs {
          }
          else
          {
-            GXv_int4[5] = 1;
+            GXv_int4[2] = 1;
          }
          if ( StringUtil.StrCmp(AV58Workhourloglistds_3_tfemployeename_sel, "<#Empty#>") == 0 )
          {
@@ -804,7 +798,7 @@ namespace GeneXus.Programs {
          }
          else
          {
-            GXv_int4[6] = 1;
+            GXv_int4[3] = 1;
          }
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV60Workhourloglistds_5_tfprojectname_sel)) && ! ( StringUtil.StrCmp(AV60Workhourloglistds_5_tfprojectname_sel, "<#Empty#>") == 0 ) )
          {
@@ -812,7 +806,7 @@ namespace GeneXus.Programs {
          }
          else
          {
-            GXv_int4[7] = 1;
+            GXv_int4[4] = 1;
          }
          if ( StringUtil.StrCmp(AV60Workhourloglistds_5_tfprojectname_sel, "<#Empty#>") == 0 )
          {
@@ -824,7 +818,7 @@ namespace GeneXus.Programs {
          }
          else
          {
-            GXv_int4[8] = 1;
+            GXv_int4[5] = 1;
          }
          if ( ! (DateTime.MinValue==AV62Workhourloglistds_7_tfworkhourlogdate_to) )
          {
@@ -832,7 +826,7 @@ namespace GeneXus.Programs {
          }
          else
          {
-            GXv_int4[9] = 1;
+            GXv_int4[6] = 1;
          }
          if ( String.IsNullOrEmpty(StringUtil.RTrim( AV64Workhourloglistds_9_tfworkhourlogduration_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV63Workhourloglistds_8_tfworkhourlogduration)) ) )
          {
@@ -840,7 +834,7 @@ namespace GeneXus.Programs {
          }
          else
          {
-            GXv_int4[10] = 1;
+            GXv_int4[7] = 1;
          }
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV64Workhourloglistds_9_tfworkhourlogduration_sel)) && ! ( StringUtil.StrCmp(AV64Workhourloglistds_9_tfworkhourlogduration_sel, "<#Empty#>") == 0 ) )
          {
@@ -848,7 +842,7 @@ namespace GeneXus.Programs {
          }
          else
          {
-            GXv_int4[11] = 1;
+            GXv_int4[8] = 1;
          }
          if ( StringUtil.StrCmp(AV64Workhourloglistds_9_tfworkhourlogduration_sel, "<#Empty#>") == 0 )
          {
@@ -860,7 +854,7 @@ namespace GeneXus.Programs {
          }
          else
          {
-            GXv_int4[12] = 1;
+            GXv_int4[9] = 1;
          }
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV66Workhourloglistds_11_tfworkhourlogdescription_sel)) && ! ( StringUtil.StrCmp(AV66Workhourloglistds_11_tfworkhourlogdescription_sel, "<#Empty#>") == 0 ) )
          {
@@ -868,7 +862,7 @@ namespace GeneXus.Programs {
          }
          else
          {
-            GXv_int4[13] = 1;
+            GXv_int4[10] = 1;
          }
          if ( StringUtil.StrCmp(AV66Workhourloglistds_11_tfworkhourlogdescription_sel, "<#Empty#>") == 0 )
          {
@@ -880,7 +874,7 @@ namespace GeneXus.Programs {
          }
          else
          {
-            GXv_int4[14] = 1;
+            GXv_int4[11] = 1;
          }
          if ( ! (DateTime.MinValue==AV50FromDate) )
          {
@@ -888,7 +882,7 @@ namespace GeneXus.Programs {
          }
          else
          {
-            GXv_int4[15] = 1;
+            GXv_int4[12] = 1;
          }
          if ( ! (DateTime.MinValue==AV51ToDate) )
          {
@@ -896,20 +890,16 @@ namespace GeneXus.Programs {
          }
          else
          {
-            GXv_int4[16] = 1;
+            GXv_int4[13] = 1;
          }
          if ( AV53ProjectIds_Count > 0 )
          {
             AddWhere(sWhereString, "("+new GxDbmsUtils( new GxPostgreSql()).ValueList(AV53ProjectIds, "T1.ProjectId IN (", ")")+")");
          }
          scmdbuf += sWhereString;
-         if ( ( AV17OrderedBy == 1 ) && ! AV18OrderedDsc )
+         if ( AV17OrderedBy == 1 )
          {
-            scmdbuf += " ORDER BY T1.WorkHourLogDate";
-         }
-         else if ( ( AV17OrderedBy == 1 ) && ( AV18OrderedDsc ) )
-         {
-            scmdbuf += " ORDER BY T1.WorkHourLogDate DESC";
+            scmdbuf += " ORDER BY T1.WorkHourLogDate, T2.ProjectName";
          }
          else if ( ( AV17OrderedBy == 2 ) && ! AV18OrderedDsc )
          {
@@ -929,17 +919,25 @@ namespace GeneXus.Programs {
          }
          else if ( ( AV17OrderedBy == 4 ) && ! AV18OrderedDsc )
          {
-            scmdbuf += " ORDER BY T1.WorkHourLogDuration";
+            scmdbuf += " ORDER BY T1.WorkHourLogDate";
          }
          else if ( ( AV17OrderedBy == 4 ) && ( AV18OrderedDsc ) )
          {
-            scmdbuf += " ORDER BY T1.WorkHourLogDuration DESC";
+            scmdbuf += " ORDER BY T1.WorkHourLogDate DESC";
          }
          else if ( ( AV17OrderedBy == 5 ) && ! AV18OrderedDsc )
          {
-            scmdbuf += " ORDER BY T1.WorkHourLogDescription";
+            scmdbuf += " ORDER BY T1.WorkHourLogDuration";
          }
          else if ( ( AV17OrderedBy == 5 ) && ( AV18OrderedDsc ) )
+         {
+            scmdbuf += " ORDER BY T1.WorkHourLogDuration DESC";
+         }
+         else if ( ( AV17OrderedBy == 6 ) && ! AV18OrderedDsc )
+         {
+            scmdbuf += " ORDER BY T1.WorkHourLogDescription";
+         }
+         else if ( ( AV17OrderedBy == 6 ) && ( AV18OrderedDsc ) )
          {
             scmdbuf += " ORDER BY T1.WorkHourLogDescription DESC";
          }
@@ -955,7 +953,7 @@ namespace GeneXus.Programs {
          switch ( cursor )
          {
                case 0 :
-                     return conditional_P00862(context, (long)dynConstraints[0] , (GxSimpleCollection<long>)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (DateTime)dynConstraints[7] , (DateTime)dynConstraints[8] , (string)dynConstraints[9] , (string)dynConstraints[10] , (string)dynConstraints[11] , (string)dynConstraints[12] , (long)dynConstraints[13] , (DateTime)dynConstraints[14] , (DateTime)dynConstraints[15] , (int)dynConstraints[16] , (string)dynConstraints[17] , (string)dynConstraints[18] , (string)dynConstraints[19] , (string)dynConstraints[20] , (DateTime)dynConstraints[21] , (long)dynConstraints[22] , (short)dynConstraints[23] , (bool)dynConstraints[24] );
+                     return conditional_P00862(context, (long)dynConstraints[0] , (GxSimpleCollection<long>)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (DateTime)dynConstraints[7] , (DateTime)dynConstraints[8] , (string)dynConstraints[9] , (string)dynConstraints[10] , (string)dynConstraints[11] , (string)dynConstraints[12] , (long)dynConstraints[13] , (DateTime)dynConstraints[14] , (DateTime)dynConstraints[15] , (int)dynConstraints[16] , (string)dynConstraints[17] , (string)dynConstraints[18] , (DateTime)dynConstraints[19] , (string)dynConstraints[20] , (string)dynConstraints[21] , (long)dynConstraints[22] , (short)dynConstraints[23] , (bool)dynConstraints[24] );
          }
          return base.getDynamicStatement(cursor, context, dynConstraints);
       }
@@ -975,9 +973,6 @@ namespace GeneXus.Programs {
        {
           Object[] prmP00862;
           prmP00862 = new Object[] {
-          new ParDef("lV56Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV56Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV56Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV56Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV57Workhourloglistds_2_tfemployeename",GXType.Char,100,0) ,
           new ParDef("AV58Workhourloglistds_3_tfemployeename_sel",GXType.Char,100,0) ,
