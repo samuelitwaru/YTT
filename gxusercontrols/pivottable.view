@@ -5,10 +5,10 @@
 			<tr>
 				<th class='text-center' style="border: 1px solid #dddddd; border-collapse: collapse; position:sticky;left:0; background:white;">Projects per employee:</th>
 				{{#SDTProjects}}
-				<th style='border: 1px solid #dddddd; border-collapse: collapse;padding: 5px; background:#f5f5f5;' scope="col" class='text-center'><a id='Project-{{gxTpr_Id}}{{Id}}' style='cursor:pointer' class='project' >{{gxTpr_ProjectName}}{{ProjectName}}</a></th>
+				<th style="border: 1px solid #dddddd; border-collapse: collapse;padding: 5px; background:#f5f5f5;" scope="col" class='text-center'><a id='Project-{{gxTpr_Id}}{{Id}}' style='cursor:pointer' class='project' >{{gxTpr_ProjectName}}{{ProjectName}}</a></th>
 				{{/SDTProjects}}
-				<th style='border: 1px solid #dddddd; border-collapse: collapse; padding:5px' class='text-center'>Total Work Hours</th>
-				{{#ShowLeaveTotal}}<th style="border: 1px solid #dddddd; border-collapse: collapse; padding:5px" class="leave text-center">Total Leave Hours</th><th style="border: 1px solid #dddddd; border-collapse: collapse; padding:5px" class="leave text-center">Total</th>{{/ShowLeaveTotal}}{{#gxTpr_ShowLeaveTotal}}<th style="border: 1px solid #dddddd; border-collapse: collapse; padding:5px" class="leave text-center">Total Leave Hours</th><th style="border: 1px solid #dddddd; border-collapse: collapse; padding:5px" class="leave text-center">Total</th>{{/gxTpr_ShowLeaveTotal}}
+				<th style="border: 1px solid #dddddd; border-collapse: collapse; padding:5px; background:#f5f5f5;" class='text-center'>Total Work Hours</th>
+				{{#ShowLeaveTotal}}<th style="border: 1px solid #dddddd; border-collapse: collapse; padding:5px; background:#f5f5f5;" class="leave text-center">Total Leave Hours</th><th style="border: 1px solid #dddddd; border-collapse: collapse; padding:5px; background:#f5f5f5;" class="leave text-center">Total</th>{{/ShowLeaveTotal}}{{#gxTpr_ShowLeaveTotal}}<th style="border: 1px solid #dddddd; border-collapse: collapse; padding:5px; background:#f5f5f5;" class="leave text-center">Total Leave Hours</th><th style="border: 1px solid #dddddd; border-collapse: collapse; padding:5px; background:#f5f5f5;" class="leave text-center">Total</th>{{/gxTpr_ShowLeaveTotal}}
 			</tr>
 		</thead>
 		<tbody style='max-height:100px'>
