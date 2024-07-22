@@ -1642,16 +1642,18 @@ namespace GeneXus.Programs {
       {
          /* Start Routine */
          returnInSub = false;
-         AV10date = Gx_date;
-         AssignAttri("", false, "AV10date", context.localUtil.Format(AV10date, "99/99/99"));
-         AV73OldDate = AV10date;
-         AssignAttri("", false, "AV73OldDate", context.localUtil.Format(AV73OldDate, "99/99/99"));
-         AV22FormWorkHourLogDate = Gx_date;
-         AssignAttri("", false, "AV22FormWorkHourLogDate", context.localUtil.Format(AV22FormWorkHourLogDate, "99/99/99"));
          GXt_int1 = AV25FormWorkHourLogEmployeeId;
          new getloggedinemployeeid(context ).execute( out  GXt_int1) ;
          AV25FormWorkHourLogEmployeeId = GXt_int1;
          AssignAttri("", false, "AV25FormWorkHourLogEmployeeId", StringUtil.LTrimStr( (decimal)(AV25FormWorkHourLogEmployeeId), 10, 0));
+         AV10date = Gx_date;
+         AssignAttri("", false, "AV10date", context.localUtil.Format(AV10date, "99/99/99"));
+         AV73OldDate = AV10date;
+         AssignAttri("", false, "AV73OldDate", context.localUtil.Format(AV73OldDate, "99/99/99"));
+         GXt_date2 = AV22FormWorkHourLogDate;
+         new getlastworkhourlogdate(context ).execute(  AV25FormWorkHourLogEmployeeId, out  GXt_date2) ;
+         AV22FormWorkHourLogDate = GXt_date2;
+         AssignAttri("", false, "AV22FormWorkHourLogDate", context.localUtil.Format(AV22FormWorkHourLogDate, "99/99/99"));
          GXt_int1 = AV42LastLoggedProjectId;
          new getemployeelastloggedproject(context ).execute( out  GXt_int1) ;
          AV42LastLoggedProjectId = GXt_int1;
@@ -1667,9 +1669,9 @@ namespace GeneXus.Programs {
             returnInSub = true;
             if (true) return;
          }
-         GXt_boolean2 = AV72IsLogHourOpen;
-         new istimetrackeropen(context ).execute( out  GXt_boolean2) ;
-         AV72IsLogHourOpen = GXt_boolean2;
+         GXt_boolean3 = AV72IsLogHourOpen;
+         new istimetrackeropen(context ).execute( out  GXt_boolean3) ;
+         AV72IsLogHourOpen = GXt_boolean3;
          AssignAttri("", false, "AV72IsLogHourOpen", AV72IsLogHourOpen);
          lblTtopentext_Visible = (AV72IsLogHourOpen ? 1 : 0);
          AssignProp("", false, lblTtopentext_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(lblTtopentext_Visible), 5, 0), true);
@@ -1968,9 +1970,9 @@ namespace GeneXus.Programs {
          gx_refresh_fired = true;
          /* Refresh Routine */
          returnInSub = false;
-         GXt_boolean2 = AV72IsLogHourOpen;
-         new istimetrackeropen(context ).execute( out  GXt_boolean2) ;
-         AV72IsLogHourOpen = GXt_boolean2;
+         GXt_boolean3 = AV72IsLogHourOpen;
+         new istimetrackeropen(context ).execute( out  GXt_boolean3) ;
+         AV72IsLogHourOpen = GXt_boolean3;
          AssignAttri("", false, "AV72IsLogHourOpen", AV72IsLogHourOpen);
          lblTtopentext_Visible = (AV72IsLogHourOpen ? 1 : 0);
          AssignProp("", false, lblTtopentext_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(lblTtopentext_Visible), 5, 0), true);
@@ -1987,9 +1989,9 @@ namespace GeneXus.Programs {
          AssignProp("", false, lblWeeklytotal_Internalname, "Caption", lblWeeklytotal_Caption, true);
          lblDailytotal_Caption = ": "+AV8DailyTotal;
          AssignProp("", false, lblDailytotal_Internalname, "Caption", lblDailytotal_Caption, true);
-         GXt_SdtWWPDateRangePickerOptions3 = AV69WWPDateRangePickerOptions;
-         new dpdateformat(context ).execute( out  GXt_SdtWWPDateRangePickerOptions3) ;
-         AV69WWPDateRangePickerOptions = GXt_SdtWWPDateRangePickerOptions3;
+         GXt_SdtWWPDateRangePickerOptions4 = AV69WWPDateRangePickerOptions;
+         new dpdateformat(context ).execute( out  GXt_SdtWWPDateRangePickerOptions4) ;
+         AV69WWPDateRangePickerOptions = GXt_SdtWWPDateRangePickerOptions4;
          this.executeExternalObjectMethod("", false, "WWPActions", "DateTimePicker_SetOptions", new Object[] {(string)edtavDate_Internalname,AV69WWPDateRangePickerOptions.ToJSonString(false, true)}, false);
       }
 
@@ -2098,7 +2100,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202471712203464", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247229571893", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2116,7 +2118,7 @@ namespace GeneXus.Programs {
          if ( nGXWrapped != 1 )
          {
             context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-            context.AddJavascriptSource("logworkhours.js", "?202471712203465", false, true);
+            context.AddJavascriptSource("logworkhours.js", "?20247229571894", false, true);
             context.AddJavascriptSource("Switch/switch.min.js", "", false, true);
             context.AddJavascriptSource("Switch/switch.min.js", "", false, true);
             context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
@@ -2710,6 +2712,7 @@ namespace GeneXus.Programs {
          H004A2_A119WorkHourLogDate = new DateTime[] {DateTime.MinValue} ;
          H004A2_A102ProjectId = new long[1] ;
          H004A3_AGRID1_nRecordCount = new long[1] ;
+         GXt_date2 = DateTime.MinValue;
          Grid1Row = new GXWebRow();
          AV55trimmedhour = "";
          AV57weeklyTotal = "";
@@ -2717,7 +2720,7 @@ namespace GeneXus.Programs {
          AV5Messages = new GXBaseCollection<GeneXus.Utils.SdtMessages_Message>( context, "Message", "GeneXus");
          AV47message = new GeneXus.Utils.SdtMessages_Message(context);
          AV69WWPDateRangePickerOptions = new GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions(context);
-         GXt_SdtWWPDateRangePickerOptions3 = new GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions(context);
+         GXt_SdtWWPDateRangePickerOptions4 = new GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions(context);
          BackMsgLst = new msglist();
          LclMsgLst = new msglist();
          subGrid1_Linesclass = "";
@@ -2939,6 +2942,7 @@ namespace GeneXus.Programs {
       private DateTime AV73OldDate ;
       private DateTime AV22FormWorkHourLogDate ;
       private DateTime A119WorkHourLogDate ;
+      private DateTime GXt_date2 ;
       private bool entryPointCalled ;
       private bool toggleJsOutput ;
       private bool AV72IsLogHourOpen ;
@@ -2953,7 +2957,7 @@ namespace GeneXus.Programs {
       private bool AV21formIsValid ;
       private bool AV6CheckRequiredFieldsResult ;
       private bool gx_refresh_fired ;
-      private bool GXt_boolean2 ;
+      private bool GXt_boolean3 ;
       private string AV23FormWorkHourLogDescription ;
       private string A123WorkHourLogDescription ;
       private string AV24FormWorkHourLogDuration ;
@@ -2989,7 +2993,7 @@ namespace GeneXus.Programs {
       private GeneXus.Utils.SdtMessages_Message AV47message ;
       private SdtWorkHourLog AV60WorkHourLog ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions AV69WWPDateRangePickerOptions ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions GXt_SdtWWPDateRangePickerOptions3 ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions GXt_SdtWWPDateRangePickerOptions4 ;
    }
 
    public class logworkhours__gam : DataStoreHelperBase, IDataStoreHelper

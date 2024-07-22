@@ -209,10 +209,10 @@ namespace GeneXus.Programs {
          {
             AV38GridState.FromXml(AV36Session.Get("WorkHourLogListGridState"), null, "", "");
          }
-         AV51GXV1 = 1;
-         while ( AV51GXV1 <= AV38GridState.gxTpr_Filtervalues.Count )
+         AV52GXV1 = 1;
+         while ( AV52GXV1 <= AV38GridState.gxTpr_Filtervalues.Count )
          {
-            AV39GridStateFilterValue = ((GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue)AV38GridState.gxTpr_Filtervalues.Item(AV51GXV1));
+            AV39GridStateFilterValue = ((GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue)AV38GridState.gxTpr_Filtervalues.Item(AV52GXV1));
             if ( StringUtil.StrCmp(AV39GridStateFilterValue.gxTpr_Name, "FILTERFULLTEXT") == 0 )
             {
                AV47FilterFullText = AV39GridStateFilterValue.gxTpr_Value;
@@ -254,7 +254,7 @@ namespace GeneXus.Programs {
             {
                AV24TFWorkHourLogDescription_Sel = AV39GridStateFilterValue.gxTpr_Value;
             }
-            AV51GXV1 = (int)(AV51GXV1+1);
+            AV52GXV1 = (int)(AV52GXV1+1);
          }
       }
 
@@ -264,32 +264,35 @@ namespace GeneXus.Programs {
          returnInSub = false;
          AV11TFEmployeeName = AV25SearchTxt;
          AV12TFEmployeeName_Sel = "";
-         AV53Workhourloglistds_1_filterfulltext = AV47FilterFullText;
-         AV54Workhourloglistds_2_tfemployeename = AV11TFEmployeeName;
-         AV55Workhourloglistds_3_tfemployeename_sel = AV12TFEmployeeName_Sel;
-         AV56Workhourloglistds_4_tfprojectname = AV13TFProjectName;
-         AV57Workhourloglistds_5_tfprojectname_sel = AV14TFProjectName_Sel;
-         AV58Workhourloglistds_6_tfworkhourlogdate = AV15TFWorkHourLogDate;
-         AV59Workhourloglistds_7_tfworkhourlogdate_to = AV16TFWorkHourLogDate_To;
-         AV60Workhourloglistds_8_tfworkhourlogduration = AV17TFWorkHourLogDuration;
-         AV61Workhourloglistds_9_tfworkhourlogduration_sel = AV18TFWorkHourLogDuration_Sel;
-         AV62Workhourloglistds_10_tfworkhourlogdescription = AV23TFWorkHourLogDescription;
-         AV63Workhourloglistds_11_tfworkhourlogdescription_sel = AV24TFWorkHourLogDescription_Sel;
+         AV54Workhourloglistds_1_filterfulltext = AV47FilterFullText;
+         AV55Workhourloglistds_2_tfemployeename = AV11TFEmployeeName;
+         AV56Workhourloglistds_3_tfemployeename_sel = AV12TFEmployeeName_Sel;
+         AV57Workhourloglistds_4_tfprojectname = AV13TFProjectName;
+         AV58Workhourloglistds_5_tfprojectname_sel = AV14TFProjectName_Sel;
+         AV59Workhourloglistds_6_tfworkhourlogdate = AV15TFWorkHourLogDate;
+         AV60Workhourloglistds_7_tfworkhourlogdate_to = AV16TFWorkHourLogDate_To;
+         AV61Workhourloglistds_8_tfworkhourlogduration = AV17TFWorkHourLogDuration;
+         AV62Workhourloglistds_9_tfworkhourlogduration_sel = AV18TFWorkHourLogDuration_Sel;
+         AV63Workhourloglistds_10_tfworkhourlogdescription = AV23TFWorkHourLogDescription;
+         AV64Workhourloglistds_11_tfworkhourlogdescription_sel = AV24TFWorkHourLogDescription_Sel;
          pr_default.dynParam(0, new Object[]{ new Object[]{
-                                              AV53Workhourloglistds_1_filterfulltext ,
-                                              AV55Workhourloglistds_3_tfemployeename_sel ,
-                                              AV54Workhourloglistds_2_tfemployeename ,
-                                              AV57Workhourloglistds_5_tfprojectname_sel ,
-                                              AV56Workhourloglistds_4_tfprojectname ,
-                                              AV58Workhourloglistds_6_tfworkhourlogdate ,
-                                              AV59Workhourloglistds_7_tfworkhourlogdate_to ,
-                                              AV61Workhourloglistds_9_tfworkhourlogduration_sel ,
-                                              AV60Workhourloglistds_8_tfworkhourlogduration ,
-                                              AV63Workhourloglistds_11_tfworkhourlogdescription_sel ,
-                                              AV62Workhourloglistds_10_tfworkhourlogdescription ,
+                                              A102ProjectId ,
+                                              AV51ProjectIds ,
+                                              AV54Workhourloglistds_1_filterfulltext ,
+                                              AV56Workhourloglistds_3_tfemployeename_sel ,
+                                              AV55Workhourloglistds_2_tfemployeename ,
+                                              AV58Workhourloglistds_5_tfprojectname_sel ,
+                                              AV57Workhourloglistds_4_tfprojectname ,
+                                              AV59Workhourloglistds_6_tfworkhourlogdate ,
+                                              AV60Workhourloglistds_7_tfworkhourlogdate_to ,
+                                              AV62Workhourloglistds_9_tfworkhourlogduration_sel ,
+                                              AV61Workhourloglistds_8_tfworkhourlogduration ,
+                                              AV64Workhourloglistds_11_tfworkhourlogdescription_sel ,
+                                              AV63Workhourloglistds_10_tfworkhourlogdescription ,
                                               AV50EmployeeId ,
                                               AV48FromDate ,
                                               AV49ToDate ,
+                                              AV51ProjectIds.Count ,
                                               A148EmployeeName ,
                                               A103ProjectName ,
                                               A120WorkHourLogDuration ,
@@ -297,24 +300,24 @@ namespace GeneXus.Programs {
                                               A119WorkHourLogDate ,
                                               A106EmployeeId } ,
                                               new int[]{
-                                              TypeConstants.DATE, TypeConstants.DATE, TypeConstants.LONG, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.LONG
+                                              TypeConstants.LONG, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.LONG, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.INT, TypeConstants.DATE, TypeConstants.LONG
                                               }
          });
-         lV53Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV53Workhourloglistds_1_filterfulltext), "%", "");
-         lV53Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV53Workhourloglistds_1_filterfulltext), "%", "");
-         lV53Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV53Workhourloglistds_1_filterfulltext), "%", "");
-         lV53Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV53Workhourloglistds_1_filterfulltext), "%", "");
-         lV54Workhourloglistds_2_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV54Workhourloglistds_2_tfemployeename), 100, "%");
-         lV56Workhourloglistds_4_tfprojectname = StringUtil.PadR( StringUtil.RTrim( AV56Workhourloglistds_4_tfprojectname), 100, "%");
-         lV60Workhourloglistds_8_tfworkhourlogduration = StringUtil.Concat( StringUtil.RTrim( AV60Workhourloglistds_8_tfworkhourlogduration), "%", "");
-         lV62Workhourloglistds_10_tfworkhourlogdescription = StringUtil.Concat( StringUtil.RTrim( AV62Workhourloglistds_10_tfworkhourlogdescription), "%", "");
+         lV54Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV54Workhourloglistds_1_filterfulltext), "%", "");
+         lV54Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV54Workhourloglistds_1_filterfulltext), "%", "");
+         lV54Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV54Workhourloglistds_1_filterfulltext), "%", "");
+         lV54Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV54Workhourloglistds_1_filterfulltext), "%", "");
+         lV55Workhourloglistds_2_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV55Workhourloglistds_2_tfemployeename), 100, "%");
+         lV57Workhourloglistds_4_tfprojectname = StringUtil.PadR( StringUtil.RTrim( AV57Workhourloglistds_4_tfprojectname), 100, "%");
+         lV61Workhourloglistds_8_tfworkhourlogduration = StringUtil.Concat( StringUtil.RTrim( AV61Workhourloglistds_8_tfworkhourlogduration), "%", "");
+         lV63Workhourloglistds_10_tfworkhourlogdescription = StringUtil.Concat( StringUtil.RTrim( AV63Workhourloglistds_10_tfworkhourlogdescription), "%", "");
          /* Using cursor P00872 */
-         pr_default.execute(0, new Object[] {lV53Workhourloglistds_1_filterfulltext, lV53Workhourloglistds_1_filterfulltext, lV53Workhourloglistds_1_filterfulltext, lV53Workhourloglistds_1_filterfulltext, lV54Workhourloglistds_2_tfemployeename, AV55Workhourloglistds_3_tfemployeename_sel, lV56Workhourloglistds_4_tfprojectname, AV57Workhourloglistds_5_tfprojectname_sel, AV58Workhourloglistds_6_tfworkhourlogdate, AV59Workhourloglistds_7_tfworkhourlogdate_to, lV60Workhourloglistds_8_tfworkhourlogduration, AV61Workhourloglistds_9_tfworkhourlogduration_sel, lV62Workhourloglistds_10_tfworkhourlogdescription, AV63Workhourloglistds_11_tfworkhourlogdescription_sel, AV50EmployeeId, AV48FromDate, AV49ToDate});
+         pr_default.execute(0, new Object[] {lV54Workhourloglistds_1_filterfulltext, lV54Workhourloglistds_1_filterfulltext, lV54Workhourloglistds_1_filterfulltext, lV54Workhourloglistds_1_filterfulltext, lV55Workhourloglistds_2_tfemployeename, AV56Workhourloglistds_3_tfemployeename_sel, lV57Workhourloglistds_4_tfprojectname, AV58Workhourloglistds_5_tfprojectname_sel, AV59Workhourloglistds_6_tfworkhourlogdate, AV60Workhourloglistds_7_tfworkhourlogdate_to, lV61Workhourloglistds_8_tfworkhourlogduration, AV62Workhourloglistds_9_tfworkhourlogduration_sel, lV63Workhourloglistds_10_tfworkhourlogdescription, AV64Workhourloglistds_11_tfworkhourlogdescription_sel, AV50EmployeeId, AV48FromDate, AV49ToDate});
          while ( (pr_default.getStatus(0) != 101) )
          {
             BRK872 = false;
-            A102ProjectId = P00872_A102ProjectId[0];
             A148EmployeeName = P00872_A148EmployeeName[0];
+            A102ProjectId = P00872_A102ProjectId[0];
             A106EmployeeId = P00872_A106EmployeeId[0];
             A123WorkHourLogDescription = P00872_A123WorkHourLogDescription[0];
             A120WorkHourLogDuration = P00872_A120WorkHourLogDuration[0];
@@ -363,32 +366,35 @@ namespace GeneXus.Programs {
          returnInSub = false;
          AV13TFProjectName = AV25SearchTxt;
          AV14TFProjectName_Sel = "";
-         AV53Workhourloglistds_1_filterfulltext = AV47FilterFullText;
-         AV54Workhourloglistds_2_tfemployeename = AV11TFEmployeeName;
-         AV55Workhourloglistds_3_tfemployeename_sel = AV12TFEmployeeName_Sel;
-         AV56Workhourloglistds_4_tfprojectname = AV13TFProjectName;
-         AV57Workhourloglistds_5_tfprojectname_sel = AV14TFProjectName_Sel;
-         AV58Workhourloglistds_6_tfworkhourlogdate = AV15TFWorkHourLogDate;
-         AV59Workhourloglistds_7_tfworkhourlogdate_to = AV16TFWorkHourLogDate_To;
-         AV60Workhourloglistds_8_tfworkhourlogduration = AV17TFWorkHourLogDuration;
-         AV61Workhourloglistds_9_tfworkhourlogduration_sel = AV18TFWorkHourLogDuration_Sel;
-         AV62Workhourloglistds_10_tfworkhourlogdescription = AV23TFWorkHourLogDescription;
-         AV63Workhourloglistds_11_tfworkhourlogdescription_sel = AV24TFWorkHourLogDescription_Sel;
+         AV54Workhourloglistds_1_filterfulltext = AV47FilterFullText;
+         AV55Workhourloglistds_2_tfemployeename = AV11TFEmployeeName;
+         AV56Workhourloglistds_3_tfemployeename_sel = AV12TFEmployeeName_Sel;
+         AV57Workhourloglistds_4_tfprojectname = AV13TFProjectName;
+         AV58Workhourloglistds_5_tfprojectname_sel = AV14TFProjectName_Sel;
+         AV59Workhourloglistds_6_tfworkhourlogdate = AV15TFWorkHourLogDate;
+         AV60Workhourloglistds_7_tfworkhourlogdate_to = AV16TFWorkHourLogDate_To;
+         AV61Workhourloglistds_8_tfworkhourlogduration = AV17TFWorkHourLogDuration;
+         AV62Workhourloglistds_9_tfworkhourlogduration_sel = AV18TFWorkHourLogDuration_Sel;
+         AV63Workhourloglistds_10_tfworkhourlogdescription = AV23TFWorkHourLogDescription;
+         AV64Workhourloglistds_11_tfworkhourlogdescription_sel = AV24TFWorkHourLogDescription_Sel;
          pr_default.dynParam(1, new Object[]{ new Object[]{
-                                              AV53Workhourloglistds_1_filterfulltext ,
-                                              AV55Workhourloglistds_3_tfemployeename_sel ,
-                                              AV54Workhourloglistds_2_tfemployeename ,
-                                              AV57Workhourloglistds_5_tfprojectname_sel ,
-                                              AV56Workhourloglistds_4_tfprojectname ,
-                                              AV58Workhourloglistds_6_tfworkhourlogdate ,
-                                              AV59Workhourloglistds_7_tfworkhourlogdate_to ,
-                                              AV61Workhourloglistds_9_tfworkhourlogduration_sel ,
-                                              AV60Workhourloglistds_8_tfworkhourlogduration ,
-                                              AV63Workhourloglistds_11_tfworkhourlogdescription_sel ,
-                                              AV62Workhourloglistds_10_tfworkhourlogdescription ,
+                                              A102ProjectId ,
+                                              AV51ProjectIds ,
+                                              AV54Workhourloglistds_1_filterfulltext ,
+                                              AV56Workhourloglistds_3_tfemployeename_sel ,
+                                              AV55Workhourloglistds_2_tfemployeename ,
+                                              AV58Workhourloglistds_5_tfprojectname_sel ,
+                                              AV57Workhourloglistds_4_tfprojectname ,
+                                              AV59Workhourloglistds_6_tfworkhourlogdate ,
+                                              AV60Workhourloglistds_7_tfworkhourlogdate_to ,
+                                              AV62Workhourloglistds_9_tfworkhourlogduration_sel ,
+                                              AV61Workhourloglistds_8_tfworkhourlogduration ,
+                                              AV64Workhourloglistds_11_tfworkhourlogdescription_sel ,
+                                              AV63Workhourloglistds_10_tfworkhourlogdescription ,
                                               AV50EmployeeId ,
                                               AV48FromDate ,
                                               AV49ToDate ,
+                                              AV51ProjectIds.Count ,
                                               A148EmployeeName ,
                                               A103ProjectName ,
                                               A120WorkHourLogDuration ,
@@ -396,24 +402,24 @@ namespace GeneXus.Programs {
                                               A119WorkHourLogDate ,
                                               A106EmployeeId } ,
                                               new int[]{
-                                              TypeConstants.DATE, TypeConstants.DATE, TypeConstants.LONG, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.LONG
+                                              TypeConstants.LONG, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.LONG, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.INT, TypeConstants.DATE, TypeConstants.LONG
                                               }
          });
-         lV53Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV53Workhourloglistds_1_filterfulltext), "%", "");
-         lV53Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV53Workhourloglistds_1_filterfulltext), "%", "");
-         lV53Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV53Workhourloglistds_1_filterfulltext), "%", "");
-         lV53Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV53Workhourloglistds_1_filterfulltext), "%", "");
-         lV54Workhourloglistds_2_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV54Workhourloglistds_2_tfemployeename), 100, "%");
-         lV56Workhourloglistds_4_tfprojectname = StringUtil.PadR( StringUtil.RTrim( AV56Workhourloglistds_4_tfprojectname), 100, "%");
-         lV60Workhourloglistds_8_tfworkhourlogduration = StringUtil.Concat( StringUtil.RTrim( AV60Workhourloglistds_8_tfworkhourlogduration), "%", "");
-         lV62Workhourloglistds_10_tfworkhourlogdescription = StringUtil.Concat( StringUtil.RTrim( AV62Workhourloglistds_10_tfworkhourlogdescription), "%", "");
+         lV54Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV54Workhourloglistds_1_filterfulltext), "%", "");
+         lV54Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV54Workhourloglistds_1_filterfulltext), "%", "");
+         lV54Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV54Workhourloglistds_1_filterfulltext), "%", "");
+         lV54Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV54Workhourloglistds_1_filterfulltext), "%", "");
+         lV55Workhourloglistds_2_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV55Workhourloglistds_2_tfemployeename), 100, "%");
+         lV57Workhourloglistds_4_tfprojectname = StringUtil.PadR( StringUtil.RTrim( AV57Workhourloglistds_4_tfprojectname), 100, "%");
+         lV61Workhourloglistds_8_tfworkhourlogduration = StringUtil.Concat( StringUtil.RTrim( AV61Workhourloglistds_8_tfworkhourlogduration), "%", "");
+         lV63Workhourloglistds_10_tfworkhourlogdescription = StringUtil.Concat( StringUtil.RTrim( AV63Workhourloglistds_10_tfworkhourlogdescription), "%", "");
          /* Using cursor P00873 */
-         pr_default.execute(1, new Object[] {lV53Workhourloglistds_1_filterfulltext, lV53Workhourloglistds_1_filterfulltext, lV53Workhourloglistds_1_filterfulltext, lV53Workhourloglistds_1_filterfulltext, lV54Workhourloglistds_2_tfemployeename, AV55Workhourloglistds_3_tfemployeename_sel, lV56Workhourloglistds_4_tfprojectname, AV57Workhourloglistds_5_tfprojectname_sel, AV58Workhourloglistds_6_tfworkhourlogdate, AV59Workhourloglistds_7_tfworkhourlogdate_to, lV60Workhourloglistds_8_tfworkhourlogduration, AV61Workhourloglistds_9_tfworkhourlogduration_sel, lV62Workhourloglistds_10_tfworkhourlogdescription, AV63Workhourloglistds_11_tfworkhourlogdescription_sel, AV50EmployeeId, AV48FromDate, AV49ToDate});
+         pr_default.execute(1, new Object[] {lV54Workhourloglistds_1_filterfulltext, lV54Workhourloglistds_1_filterfulltext, lV54Workhourloglistds_1_filterfulltext, lV54Workhourloglistds_1_filterfulltext, lV55Workhourloglistds_2_tfemployeename, AV56Workhourloglistds_3_tfemployeename_sel, lV57Workhourloglistds_4_tfprojectname, AV58Workhourloglistds_5_tfprojectname_sel, AV59Workhourloglistds_6_tfworkhourlogdate, AV60Workhourloglistds_7_tfworkhourlogdate_to, lV61Workhourloglistds_8_tfworkhourlogduration, AV62Workhourloglistds_9_tfworkhourlogduration_sel, lV63Workhourloglistds_10_tfworkhourlogdescription, AV64Workhourloglistds_11_tfworkhourlogdescription_sel, AV50EmployeeId, AV48FromDate, AV49ToDate});
          while ( (pr_default.getStatus(1) != 101) )
          {
             BRK874 = false;
-            A102ProjectId = P00873_A102ProjectId[0];
             A103ProjectName = P00873_A103ProjectName[0];
+            A102ProjectId = P00873_A102ProjectId[0];
             A106EmployeeId = P00873_A106EmployeeId[0];
             A123WorkHourLogDescription = P00873_A123WorkHourLogDescription[0];
             A120WorkHourLogDuration = P00873_A120WorkHourLogDuration[0];
@@ -462,32 +468,35 @@ namespace GeneXus.Programs {
          returnInSub = false;
          AV17TFWorkHourLogDuration = AV25SearchTxt;
          AV18TFWorkHourLogDuration_Sel = "";
-         AV53Workhourloglistds_1_filterfulltext = AV47FilterFullText;
-         AV54Workhourloglistds_2_tfemployeename = AV11TFEmployeeName;
-         AV55Workhourloglistds_3_tfemployeename_sel = AV12TFEmployeeName_Sel;
-         AV56Workhourloglistds_4_tfprojectname = AV13TFProjectName;
-         AV57Workhourloglistds_5_tfprojectname_sel = AV14TFProjectName_Sel;
-         AV58Workhourloglistds_6_tfworkhourlogdate = AV15TFWorkHourLogDate;
-         AV59Workhourloglistds_7_tfworkhourlogdate_to = AV16TFWorkHourLogDate_To;
-         AV60Workhourloglistds_8_tfworkhourlogduration = AV17TFWorkHourLogDuration;
-         AV61Workhourloglistds_9_tfworkhourlogduration_sel = AV18TFWorkHourLogDuration_Sel;
-         AV62Workhourloglistds_10_tfworkhourlogdescription = AV23TFWorkHourLogDescription;
-         AV63Workhourloglistds_11_tfworkhourlogdescription_sel = AV24TFWorkHourLogDescription_Sel;
+         AV54Workhourloglistds_1_filterfulltext = AV47FilterFullText;
+         AV55Workhourloglistds_2_tfemployeename = AV11TFEmployeeName;
+         AV56Workhourloglistds_3_tfemployeename_sel = AV12TFEmployeeName_Sel;
+         AV57Workhourloglistds_4_tfprojectname = AV13TFProjectName;
+         AV58Workhourloglistds_5_tfprojectname_sel = AV14TFProjectName_Sel;
+         AV59Workhourloglistds_6_tfworkhourlogdate = AV15TFWorkHourLogDate;
+         AV60Workhourloglistds_7_tfworkhourlogdate_to = AV16TFWorkHourLogDate_To;
+         AV61Workhourloglistds_8_tfworkhourlogduration = AV17TFWorkHourLogDuration;
+         AV62Workhourloglistds_9_tfworkhourlogduration_sel = AV18TFWorkHourLogDuration_Sel;
+         AV63Workhourloglistds_10_tfworkhourlogdescription = AV23TFWorkHourLogDescription;
+         AV64Workhourloglistds_11_tfworkhourlogdescription_sel = AV24TFWorkHourLogDescription_Sel;
          pr_default.dynParam(2, new Object[]{ new Object[]{
-                                              AV53Workhourloglistds_1_filterfulltext ,
-                                              AV55Workhourloglistds_3_tfemployeename_sel ,
-                                              AV54Workhourloglistds_2_tfemployeename ,
-                                              AV57Workhourloglistds_5_tfprojectname_sel ,
-                                              AV56Workhourloglistds_4_tfprojectname ,
-                                              AV58Workhourloglistds_6_tfworkhourlogdate ,
-                                              AV59Workhourloglistds_7_tfworkhourlogdate_to ,
-                                              AV61Workhourloglistds_9_tfworkhourlogduration_sel ,
-                                              AV60Workhourloglistds_8_tfworkhourlogduration ,
-                                              AV63Workhourloglistds_11_tfworkhourlogdescription_sel ,
-                                              AV62Workhourloglistds_10_tfworkhourlogdescription ,
+                                              A102ProjectId ,
+                                              AV51ProjectIds ,
+                                              AV54Workhourloglistds_1_filterfulltext ,
+                                              AV56Workhourloglistds_3_tfemployeename_sel ,
+                                              AV55Workhourloglistds_2_tfemployeename ,
+                                              AV58Workhourloglistds_5_tfprojectname_sel ,
+                                              AV57Workhourloglistds_4_tfprojectname ,
+                                              AV59Workhourloglistds_6_tfworkhourlogdate ,
+                                              AV60Workhourloglistds_7_tfworkhourlogdate_to ,
+                                              AV62Workhourloglistds_9_tfworkhourlogduration_sel ,
+                                              AV61Workhourloglistds_8_tfworkhourlogduration ,
+                                              AV64Workhourloglistds_11_tfworkhourlogdescription_sel ,
+                                              AV63Workhourloglistds_10_tfworkhourlogdescription ,
                                               AV50EmployeeId ,
                                               AV48FromDate ,
                                               AV49ToDate ,
+                                              AV51ProjectIds.Count ,
                                               A148EmployeeName ,
                                               A103ProjectName ,
                                               A120WorkHourLogDuration ,
@@ -495,24 +504,24 @@ namespace GeneXus.Programs {
                                               A119WorkHourLogDate ,
                                               A106EmployeeId } ,
                                               new int[]{
-                                              TypeConstants.DATE, TypeConstants.DATE, TypeConstants.LONG, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.LONG
+                                              TypeConstants.LONG, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.LONG, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.INT, TypeConstants.DATE, TypeConstants.LONG
                                               }
          });
-         lV53Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV53Workhourloglistds_1_filterfulltext), "%", "");
-         lV53Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV53Workhourloglistds_1_filterfulltext), "%", "");
-         lV53Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV53Workhourloglistds_1_filterfulltext), "%", "");
-         lV53Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV53Workhourloglistds_1_filterfulltext), "%", "");
-         lV54Workhourloglistds_2_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV54Workhourloglistds_2_tfemployeename), 100, "%");
-         lV56Workhourloglistds_4_tfprojectname = StringUtil.PadR( StringUtil.RTrim( AV56Workhourloglistds_4_tfprojectname), 100, "%");
-         lV60Workhourloglistds_8_tfworkhourlogduration = StringUtil.Concat( StringUtil.RTrim( AV60Workhourloglistds_8_tfworkhourlogduration), "%", "");
-         lV62Workhourloglistds_10_tfworkhourlogdescription = StringUtil.Concat( StringUtil.RTrim( AV62Workhourloglistds_10_tfworkhourlogdescription), "%", "");
+         lV54Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV54Workhourloglistds_1_filterfulltext), "%", "");
+         lV54Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV54Workhourloglistds_1_filterfulltext), "%", "");
+         lV54Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV54Workhourloglistds_1_filterfulltext), "%", "");
+         lV54Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV54Workhourloglistds_1_filterfulltext), "%", "");
+         lV55Workhourloglistds_2_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV55Workhourloglistds_2_tfemployeename), 100, "%");
+         lV57Workhourloglistds_4_tfprojectname = StringUtil.PadR( StringUtil.RTrim( AV57Workhourloglistds_4_tfprojectname), 100, "%");
+         lV61Workhourloglistds_8_tfworkhourlogduration = StringUtil.Concat( StringUtil.RTrim( AV61Workhourloglistds_8_tfworkhourlogduration), "%", "");
+         lV63Workhourloglistds_10_tfworkhourlogdescription = StringUtil.Concat( StringUtil.RTrim( AV63Workhourloglistds_10_tfworkhourlogdescription), "%", "");
          /* Using cursor P00874 */
-         pr_default.execute(2, new Object[] {lV53Workhourloglistds_1_filterfulltext, lV53Workhourloglistds_1_filterfulltext, lV53Workhourloglistds_1_filterfulltext, lV53Workhourloglistds_1_filterfulltext, lV54Workhourloglistds_2_tfemployeename, AV55Workhourloglistds_3_tfemployeename_sel, lV56Workhourloglistds_4_tfprojectname, AV57Workhourloglistds_5_tfprojectname_sel, AV58Workhourloglistds_6_tfworkhourlogdate, AV59Workhourloglistds_7_tfworkhourlogdate_to, lV60Workhourloglistds_8_tfworkhourlogduration, AV61Workhourloglistds_9_tfworkhourlogduration_sel, lV62Workhourloglistds_10_tfworkhourlogdescription, AV63Workhourloglistds_11_tfworkhourlogdescription_sel, AV50EmployeeId, AV48FromDate, AV49ToDate});
+         pr_default.execute(2, new Object[] {lV54Workhourloglistds_1_filterfulltext, lV54Workhourloglistds_1_filterfulltext, lV54Workhourloglistds_1_filterfulltext, lV54Workhourloglistds_1_filterfulltext, lV55Workhourloglistds_2_tfemployeename, AV56Workhourloglistds_3_tfemployeename_sel, lV57Workhourloglistds_4_tfprojectname, AV58Workhourloglistds_5_tfprojectname_sel, AV59Workhourloglistds_6_tfworkhourlogdate, AV60Workhourloglistds_7_tfworkhourlogdate_to, lV61Workhourloglistds_8_tfworkhourlogduration, AV62Workhourloglistds_9_tfworkhourlogduration_sel, lV63Workhourloglistds_10_tfworkhourlogdescription, AV64Workhourloglistds_11_tfworkhourlogdescription_sel, AV50EmployeeId, AV48FromDate, AV49ToDate});
          while ( (pr_default.getStatus(2) != 101) )
          {
             BRK876 = false;
-            A102ProjectId = P00874_A102ProjectId[0];
             A120WorkHourLogDuration = P00874_A120WorkHourLogDuration[0];
+            A102ProjectId = P00874_A102ProjectId[0];
             A106EmployeeId = P00874_A106EmployeeId[0];
             A123WorkHourLogDescription = P00874_A123WorkHourLogDescription[0];
             A119WorkHourLogDate = P00874_A119WorkHourLogDate[0];
@@ -560,32 +569,35 @@ namespace GeneXus.Programs {
          returnInSub = false;
          AV23TFWorkHourLogDescription = AV25SearchTxt;
          AV24TFWorkHourLogDescription_Sel = "";
-         AV53Workhourloglistds_1_filterfulltext = AV47FilterFullText;
-         AV54Workhourloglistds_2_tfemployeename = AV11TFEmployeeName;
-         AV55Workhourloglistds_3_tfemployeename_sel = AV12TFEmployeeName_Sel;
-         AV56Workhourloglistds_4_tfprojectname = AV13TFProjectName;
-         AV57Workhourloglistds_5_tfprojectname_sel = AV14TFProjectName_Sel;
-         AV58Workhourloglistds_6_tfworkhourlogdate = AV15TFWorkHourLogDate;
-         AV59Workhourloglistds_7_tfworkhourlogdate_to = AV16TFWorkHourLogDate_To;
-         AV60Workhourloglistds_8_tfworkhourlogduration = AV17TFWorkHourLogDuration;
-         AV61Workhourloglistds_9_tfworkhourlogduration_sel = AV18TFWorkHourLogDuration_Sel;
-         AV62Workhourloglistds_10_tfworkhourlogdescription = AV23TFWorkHourLogDescription;
-         AV63Workhourloglistds_11_tfworkhourlogdescription_sel = AV24TFWorkHourLogDescription_Sel;
+         AV54Workhourloglistds_1_filterfulltext = AV47FilterFullText;
+         AV55Workhourloglistds_2_tfemployeename = AV11TFEmployeeName;
+         AV56Workhourloglistds_3_tfemployeename_sel = AV12TFEmployeeName_Sel;
+         AV57Workhourloglistds_4_tfprojectname = AV13TFProjectName;
+         AV58Workhourloglistds_5_tfprojectname_sel = AV14TFProjectName_Sel;
+         AV59Workhourloglistds_6_tfworkhourlogdate = AV15TFWorkHourLogDate;
+         AV60Workhourloglistds_7_tfworkhourlogdate_to = AV16TFWorkHourLogDate_To;
+         AV61Workhourloglistds_8_tfworkhourlogduration = AV17TFWorkHourLogDuration;
+         AV62Workhourloglistds_9_tfworkhourlogduration_sel = AV18TFWorkHourLogDuration_Sel;
+         AV63Workhourloglistds_10_tfworkhourlogdescription = AV23TFWorkHourLogDescription;
+         AV64Workhourloglistds_11_tfworkhourlogdescription_sel = AV24TFWorkHourLogDescription_Sel;
          pr_default.dynParam(3, new Object[]{ new Object[]{
-                                              AV53Workhourloglistds_1_filterfulltext ,
-                                              AV55Workhourloglistds_3_tfemployeename_sel ,
-                                              AV54Workhourloglistds_2_tfemployeename ,
-                                              AV57Workhourloglistds_5_tfprojectname_sel ,
-                                              AV56Workhourloglistds_4_tfprojectname ,
-                                              AV58Workhourloglistds_6_tfworkhourlogdate ,
-                                              AV59Workhourloglistds_7_tfworkhourlogdate_to ,
-                                              AV61Workhourloglistds_9_tfworkhourlogduration_sel ,
-                                              AV60Workhourloglistds_8_tfworkhourlogduration ,
-                                              AV63Workhourloglistds_11_tfworkhourlogdescription_sel ,
-                                              AV62Workhourloglistds_10_tfworkhourlogdescription ,
+                                              A102ProjectId ,
+                                              AV51ProjectIds ,
+                                              AV54Workhourloglistds_1_filterfulltext ,
+                                              AV56Workhourloglistds_3_tfemployeename_sel ,
+                                              AV55Workhourloglistds_2_tfemployeename ,
+                                              AV58Workhourloglistds_5_tfprojectname_sel ,
+                                              AV57Workhourloglistds_4_tfprojectname ,
+                                              AV59Workhourloglistds_6_tfworkhourlogdate ,
+                                              AV60Workhourloglistds_7_tfworkhourlogdate_to ,
+                                              AV62Workhourloglistds_9_tfworkhourlogduration_sel ,
+                                              AV61Workhourloglistds_8_tfworkhourlogduration ,
+                                              AV64Workhourloglistds_11_tfworkhourlogdescription_sel ,
+                                              AV63Workhourloglistds_10_tfworkhourlogdescription ,
                                               AV50EmployeeId ,
                                               AV48FromDate ,
                                               AV49ToDate ,
+                                              AV51ProjectIds.Count ,
                                               A148EmployeeName ,
                                               A103ProjectName ,
                                               A120WorkHourLogDuration ,
@@ -593,24 +605,24 @@ namespace GeneXus.Programs {
                                               A119WorkHourLogDate ,
                                               A106EmployeeId } ,
                                               new int[]{
-                                              TypeConstants.DATE, TypeConstants.DATE, TypeConstants.LONG, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.LONG
+                                              TypeConstants.LONG, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.LONG, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.INT, TypeConstants.DATE, TypeConstants.LONG
                                               }
          });
-         lV53Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV53Workhourloglistds_1_filterfulltext), "%", "");
-         lV53Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV53Workhourloglistds_1_filterfulltext), "%", "");
-         lV53Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV53Workhourloglistds_1_filterfulltext), "%", "");
-         lV53Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV53Workhourloglistds_1_filterfulltext), "%", "");
-         lV54Workhourloglistds_2_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV54Workhourloglistds_2_tfemployeename), 100, "%");
-         lV56Workhourloglistds_4_tfprojectname = StringUtil.PadR( StringUtil.RTrim( AV56Workhourloglistds_4_tfprojectname), 100, "%");
-         lV60Workhourloglistds_8_tfworkhourlogduration = StringUtil.Concat( StringUtil.RTrim( AV60Workhourloglistds_8_tfworkhourlogduration), "%", "");
-         lV62Workhourloglistds_10_tfworkhourlogdescription = StringUtil.Concat( StringUtil.RTrim( AV62Workhourloglistds_10_tfworkhourlogdescription), "%", "");
+         lV54Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV54Workhourloglistds_1_filterfulltext), "%", "");
+         lV54Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV54Workhourloglistds_1_filterfulltext), "%", "");
+         lV54Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV54Workhourloglistds_1_filterfulltext), "%", "");
+         lV54Workhourloglistds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV54Workhourloglistds_1_filterfulltext), "%", "");
+         lV55Workhourloglistds_2_tfemployeename = StringUtil.PadR( StringUtil.RTrim( AV55Workhourloglistds_2_tfemployeename), 100, "%");
+         lV57Workhourloglistds_4_tfprojectname = StringUtil.PadR( StringUtil.RTrim( AV57Workhourloglistds_4_tfprojectname), 100, "%");
+         lV61Workhourloglistds_8_tfworkhourlogduration = StringUtil.Concat( StringUtil.RTrim( AV61Workhourloglistds_8_tfworkhourlogduration), "%", "");
+         lV63Workhourloglistds_10_tfworkhourlogdescription = StringUtil.Concat( StringUtil.RTrim( AV63Workhourloglistds_10_tfworkhourlogdescription), "%", "");
          /* Using cursor P00875 */
-         pr_default.execute(3, new Object[] {lV53Workhourloglistds_1_filterfulltext, lV53Workhourloglistds_1_filterfulltext, lV53Workhourloglistds_1_filterfulltext, lV53Workhourloglistds_1_filterfulltext, lV54Workhourloglistds_2_tfemployeename, AV55Workhourloglistds_3_tfemployeename_sel, lV56Workhourloglistds_4_tfprojectname, AV57Workhourloglistds_5_tfprojectname_sel, AV58Workhourloglistds_6_tfworkhourlogdate, AV59Workhourloglistds_7_tfworkhourlogdate_to, lV60Workhourloglistds_8_tfworkhourlogduration, AV61Workhourloglistds_9_tfworkhourlogduration_sel, lV62Workhourloglistds_10_tfworkhourlogdescription, AV63Workhourloglistds_11_tfworkhourlogdescription_sel, AV50EmployeeId, AV48FromDate, AV49ToDate});
+         pr_default.execute(3, new Object[] {lV54Workhourloglistds_1_filterfulltext, lV54Workhourloglistds_1_filterfulltext, lV54Workhourloglistds_1_filterfulltext, lV54Workhourloglistds_1_filterfulltext, lV55Workhourloglistds_2_tfemployeename, AV56Workhourloglistds_3_tfemployeename_sel, lV57Workhourloglistds_4_tfprojectname, AV58Workhourloglistds_5_tfprojectname_sel, AV59Workhourloglistds_6_tfworkhourlogdate, AV60Workhourloglistds_7_tfworkhourlogdate_to, lV61Workhourloglistds_8_tfworkhourlogduration, AV62Workhourloglistds_9_tfworkhourlogduration_sel, lV63Workhourloglistds_10_tfworkhourlogdescription, AV64Workhourloglistds_11_tfworkhourlogdescription_sel, AV50EmployeeId, AV48FromDate, AV49ToDate});
          while ( (pr_default.getStatus(3) != 101) )
          {
             BRK878 = false;
-            A102ProjectId = P00875_A102ProjectId[0];
             A123WorkHourLogDescription = P00875_A123WorkHourLogDescription[0];
+            A102ProjectId = P00875_A102ProjectId[0];
             A106EmployeeId = P00875_A106EmployeeId[0];
             A120WorkHourLogDuration = P00875_A120WorkHourLogDuration[0];
             A119WorkHourLogDate = P00875_A119WorkHourLogDate[0];
@@ -690,23 +702,24 @@ namespace GeneXus.Programs {
          AV18TFWorkHourLogDuration_Sel = "";
          AV23TFWorkHourLogDescription = "";
          AV24TFWorkHourLogDescription_Sel = "";
-         AV53Workhourloglistds_1_filterfulltext = "";
-         AV54Workhourloglistds_2_tfemployeename = "";
-         AV55Workhourloglistds_3_tfemployeename_sel = "";
-         AV56Workhourloglistds_4_tfprojectname = "";
-         AV57Workhourloglistds_5_tfprojectname_sel = "";
-         AV58Workhourloglistds_6_tfworkhourlogdate = DateTime.MinValue;
-         AV59Workhourloglistds_7_tfworkhourlogdate_to = DateTime.MinValue;
-         AV60Workhourloglistds_8_tfworkhourlogduration = "";
-         AV61Workhourloglistds_9_tfworkhourlogduration_sel = "";
-         AV62Workhourloglistds_10_tfworkhourlogdescription = "";
-         AV63Workhourloglistds_11_tfworkhourlogdescription_sel = "";
+         AV54Workhourloglistds_1_filterfulltext = "";
+         AV55Workhourloglistds_2_tfemployeename = "";
+         AV56Workhourloglistds_3_tfemployeename_sel = "";
+         AV57Workhourloglistds_4_tfprojectname = "";
+         AV58Workhourloglistds_5_tfprojectname_sel = "";
+         AV59Workhourloglistds_6_tfworkhourlogdate = DateTime.MinValue;
+         AV60Workhourloglistds_7_tfworkhourlogdate_to = DateTime.MinValue;
+         AV61Workhourloglistds_8_tfworkhourlogduration = "";
+         AV62Workhourloglistds_9_tfworkhourlogduration_sel = "";
+         AV63Workhourloglistds_10_tfworkhourlogdescription = "";
+         AV64Workhourloglistds_11_tfworkhourlogdescription_sel = "";
+         AV51ProjectIds = new GxSimpleCollection<long>();
          scmdbuf = "";
-         lV53Workhourloglistds_1_filterfulltext = "";
-         lV54Workhourloglistds_2_tfemployeename = "";
-         lV56Workhourloglistds_4_tfprojectname = "";
-         lV60Workhourloglistds_8_tfworkhourlogduration = "";
-         lV62Workhourloglistds_10_tfworkhourlogdescription = "";
+         lV54Workhourloglistds_1_filterfulltext = "";
+         lV55Workhourloglistds_2_tfemployeename = "";
+         lV57Workhourloglistds_4_tfprojectname = "";
+         lV61Workhourloglistds_8_tfworkhourlogduration = "";
+         lV63Workhourloglistds_10_tfworkhourlogdescription = "";
          AV48FromDate = DateTime.MinValue;
          AV49ToDate = DateTime.MinValue;
          A148EmployeeName = "";
@@ -714,8 +727,8 @@ namespace GeneXus.Programs {
          A120WorkHourLogDuration = "";
          A123WorkHourLogDescription = "";
          A119WorkHourLogDate = DateTime.MinValue;
-         P00872_A102ProjectId = new long[1] ;
          P00872_A148EmployeeName = new string[] {""} ;
+         P00872_A102ProjectId = new long[1] ;
          P00872_A106EmployeeId = new long[1] ;
          P00872_A123WorkHourLogDescription = new string[] {""} ;
          P00872_A120WorkHourLogDuration = new string[] {""} ;
@@ -723,24 +736,24 @@ namespace GeneXus.Programs {
          P00872_A103ProjectName = new string[] {""} ;
          P00872_A118WorkHourLogId = new long[1] ;
          AV30Option = "";
-         P00873_A102ProjectId = new long[1] ;
          P00873_A103ProjectName = new string[] {""} ;
+         P00873_A102ProjectId = new long[1] ;
          P00873_A106EmployeeId = new long[1] ;
          P00873_A123WorkHourLogDescription = new string[] {""} ;
          P00873_A120WorkHourLogDuration = new string[] {""} ;
          P00873_A119WorkHourLogDate = new DateTime[] {DateTime.MinValue} ;
          P00873_A148EmployeeName = new string[] {""} ;
          P00873_A118WorkHourLogId = new long[1] ;
-         P00874_A102ProjectId = new long[1] ;
          P00874_A120WorkHourLogDuration = new string[] {""} ;
+         P00874_A102ProjectId = new long[1] ;
          P00874_A106EmployeeId = new long[1] ;
          P00874_A123WorkHourLogDescription = new string[] {""} ;
          P00874_A119WorkHourLogDate = new DateTime[] {DateTime.MinValue} ;
          P00874_A103ProjectName = new string[] {""} ;
          P00874_A148EmployeeName = new string[] {""} ;
          P00874_A118WorkHourLogId = new long[1] ;
-         P00875_A102ProjectId = new long[1] ;
          P00875_A123WorkHourLogDescription = new string[] {""} ;
+         P00875_A102ProjectId = new long[1] ;
          P00875_A106EmployeeId = new long[1] ;
          P00875_A120WorkHourLogDuration = new string[] {""} ;
          P00875_A119WorkHourLogDate = new DateTime[] {DateTime.MinValue} ;
@@ -750,16 +763,16 @@ namespace GeneXus.Programs {
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.workhourloglistgetfilterdata__default(),
             new Object[][] {
                 new Object[] {
-               P00872_A102ProjectId, P00872_A148EmployeeName, P00872_A106EmployeeId, P00872_A123WorkHourLogDescription, P00872_A120WorkHourLogDuration, P00872_A119WorkHourLogDate, P00872_A103ProjectName, P00872_A118WorkHourLogId
+               P00872_A148EmployeeName, P00872_A102ProjectId, P00872_A106EmployeeId, P00872_A123WorkHourLogDescription, P00872_A120WorkHourLogDuration, P00872_A119WorkHourLogDate, P00872_A103ProjectName, P00872_A118WorkHourLogId
                }
                , new Object[] {
-               P00873_A102ProjectId, P00873_A103ProjectName, P00873_A106EmployeeId, P00873_A123WorkHourLogDescription, P00873_A120WorkHourLogDuration, P00873_A119WorkHourLogDate, P00873_A148EmployeeName, P00873_A118WorkHourLogId
+               P00873_A103ProjectName, P00873_A102ProjectId, P00873_A106EmployeeId, P00873_A123WorkHourLogDescription, P00873_A120WorkHourLogDuration, P00873_A119WorkHourLogDate, P00873_A148EmployeeName, P00873_A118WorkHourLogId
                }
                , new Object[] {
-               P00874_A102ProjectId, P00874_A120WorkHourLogDuration, P00874_A106EmployeeId, P00874_A123WorkHourLogDescription, P00874_A119WorkHourLogDate, P00874_A103ProjectName, P00874_A148EmployeeName, P00874_A118WorkHourLogId
+               P00874_A120WorkHourLogDuration, P00874_A102ProjectId, P00874_A106EmployeeId, P00874_A123WorkHourLogDescription, P00874_A119WorkHourLogDate, P00874_A103ProjectName, P00874_A148EmployeeName, P00874_A118WorkHourLogId
                }
                , new Object[] {
-               P00875_A102ProjectId, P00875_A123WorkHourLogDescription, P00875_A106EmployeeId, P00875_A120WorkHourLogDuration, P00875_A119WorkHourLogDate, P00875_A103ProjectName, P00875_A148EmployeeName, P00875_A118WorkHourLogId
+               P00875_A123WorkHourLogDescription, P00875_A102ProjectId, P00875_A106EmployeeId, P00875_A120WorkHourLogDuration, P00875_A119WorkHourLogDate, P00875_A103ProjectName, P00875_A148EmployeeName, P00875_A118WorkHourLogId
                }
             }
          );
@@ -769,29 +782,30 @@ namespace GeneXus.Programs {
       private short AV28MaxItems ;
       private short AV27PageIndex ;
       private short AV26SkipItems ;
-      private int AV51GXV1 ;
+      private int AV52GXV1 ;
+      private int AV51ProjectIds_Count ;
+      private long A102ProjectId ;
       private long AV50EmployeeId ;
       private long A106EmployeeId ;
-      private long A102ProjectId ;
       private long A118WorkHourLogId ;
       private long AV35count ;
       private string AV11TFEmployeeName ;
       private string AV12TFEmployeeName_Sel ;
       private string AV13TFProjectName ;
       private string AV14TFProjectName_Sel ;
-      private string AV54Workhourloglistds_2_tfemployeename ;
-      private string AV55Workhourloglistds_3_tfemployeename_sel ;
-      private string AV56Workhourloglistds_4_tfprojectname ;
-      private string AV57Workhourloglistds_5_tfprojectname_sel ;
+      private string AV55Workhourloglistds_2_tfemployeename ;
+      private string AV56Workhourloglistds_3_tfemployeename_sel ;
+      private string AV57Workhourloglistds_4_tfprojectname ;
+      private string AV58Workhourloglistds_5_tfprojectname_sel ;
       private string scmdbuf ;
-      private string lV54Workhourloglistds_2_tfemployeename ;
-      private string lV56Workhourloglistds_4_tfprojectname ;
+      private string lV55Workhourloglistds_2_tfemployeename ;
+      private string lV57Workhourloglistds_4_tfprojectname ;
       private string A148EmployeeName ;
       private string A103ProjectName ;
       private DateTime AV15TFWorkHourLogDate ;
       private DateTime AV16TFWorkHourLogDate_To ;
-      private DateTime AV58Workhourloglistds_6_tfworkhourlogdate ;
-      private DateTime AV59Workhourloglistds_7_tfworkhourlogdate_to ;
+      private DateTime AV59Workhourloglistds_6_tfworkhourlogdate ;
+      private DateTime AV60Workhourloglistds_7_tfworkhourlogdate_to ;
       private DateTime AV48FromDate ;
       private DateTime AV49ToDate ;
       private DateTime A119WorkHourLogDate ;
@@ -813,46 +827,47 @@ namespace GeneXus.Programs {
       private string AV18TFWorkHourLogDuration_Sel ;
       private string AV23TFWorkHourLogDescription ;
       private string AV24TFWorkHourLogDescription_Sel ;
-      private string AV53Workhourloglistds_1_filterfulltext ;
-      private string AV60Workhourloglistds_8_tfworkhourlogduration ;
-      private string AV61Workhourloglistds_9_tfworkhourlogduration_sel ;
-      private string AV62Workhourloglistds_10_tfworkhourlogdescription ;
-      private string AV63Workhourloglistds_11_tfworkhourlogdescription_sel ;
-      private string lV53Workhourloglistds_1_filterfulltext ;
-      private string lV60Workhourloglistds_8_tfworkhourlogduration ;
-      private string lV62Workhourloglistds_10_tfworkhourlogdescription ;
+      private string AV54Workhourloglistds_1_filterfulltext ;
+      private string AV61Workhourloglistds_8_tfworkhourlogduration ;
+      private string AV62Workhourloglistds_9_tfworkhourlogduration_sel ;
+      private string AV63Workhourloglistds_10_tfworkhourlogdescription ;
+      private string AV64Workhourloglistds_11_tfworkhourlogdescription_sel ;
+      private string lV54Workhourloglistds_1_filterfulltext ;
+      private string lV61Workhourloglistds_8_tfworkhourlogduration ;
+      private string lV63Workhourloglistds_10_tfworkhourlogdescription ;
       private string A120WorkHourLogDuration ;
       private string AV30Option ;
+      private GxSimpleCollection<long> AV51ProjectIds ;
       private IGxSession AV36Session ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private IDataStoreProvider pr_default ;
-      private long[] P00872_A102ProjectId ;
       private string[] P00872_A148EmployeeName ;
+      private long[] P00872_A102ProjectId ;
       private long[] P00872_A106EmployeeId ;
       private string[] P00872_A123WorkHourLogDescription ;
       private string[] P00872_A120WorkHourLogDuration ;
       private DateTime[] P00872_A119WorkHourLogDate ;
       private string[] P00872_A103ProjectName ;
       private long[] P00872_A118WorkHourLogId ;
-      private long[] P00873_A102ProjectId ;
       private string[] P00873_A103ProjectName ;
+      private long[] P00873_A102ProjectId ;
       private long[] P00873_A106EmployeeId ;
       private string[] P00873_A123WorkHourLogDescription ;
       private string[] P00873_A120WorkHourLogDuration ;
       private DateTime[] P00873_A119WorkHourLogDate ;
       private string[] P00873_A148EmployeeName ;
       private long[] P00873_A118WorkHourLogId ;
-      private long[] P00874_A102ProjectId ;
       private string[] P00874_A120WorkHourLogDuration ;
+      private long[] P00874_A102ProjectId ;
       private long[] P00874_A106EmployeeId ;
       private string[] P00874_A123WorkHourLogDescription ;
       private DateTime[] P00874_A119WorkHourLogDate ;
       private string[] P00874_A103ProjectName ;
       private string[] P00874_A148EmployeeName ;
       private long[] P00874_A118WorkHourLogId ;
-      private long[] P00875_A102ProjectId ;
       private string[] P00875_A123WorkHourLogDescription ;
+      private long[] P00875_A102ProjectId ;
       private long[] P00875_A106EmployeeId ;
       private string[] P00875_A120WorkHourLogDuration ;
       private DateTime[] P00875_A119WorkHourLogDate ;
@@ -873,20 +888,23 @@ namespace GeneXus.Programs {
    public class workhourloglistgetfilterdata__default : DataStoreHelperBase, IDataStoreHelper
    {
       protected Object[] conditional_P00872( IGxContext context ,
-                                             string AV53Workhourloglistds_1_filterfulltext ,
-                                             string AV55Workhourloglistds_3_tfemployeename_sel ,
-                                             string AV54Workhourloglistds_2_tfemployeename ,
-                                             string AV57Workhourloglistds_5_tfprojectname_sel ,
-                                             string AV56Workhourloglistds_4_tfprojectname ,
-                                             DateTime AV58Workhourloglistds_6_tfworkhourlogdate ,
-                                             DateTime AV59Workhourloglistds_7_tfworkhourlogdate_to ,
-                                             string AV61Workhourloglistds_9_tfworkhourlogduration_sel ,
-                                             string AV60Workhourloglistds_8_tfworkhourlogduration ,
-                                             string AV63Workhourloglistds_11_tfworkhourlogdescription_sel ,
-                                             string AV62Workhourloglistds_10_tfworkhourlogdescription ,
+                                             long A102ProjectId ,
+                                             GxSimpleCollection<long> AV51ProjectIds ,
+                                             string AV54Workhourloglistds_1_filterfulltext ,
+                                             string AV56Workhourloglistds_3_tfemployeename_sel ,
+                                             string AV55Workhourloglistds_2_tfemployeename ,
+                                             string AV58Workhourloglistds_5_tfprojectname_sel ,
+                                             string AV57Workhourloglistds_4_tfprojectname ,
+                                             DateTime AV59Workhourloglistds_6_tfworkhourlogdate ,
+                                             DateTime AV60Workhourloglistds_7_tfworkhourlogdate_to ,
+                                             string AV62Workhourloglistds_9_tfworkhourlogduration_sel ,
+                                             string AV61Workhourloglistds_8_tfworkhourlogduration ,
+                                             string AV64Workhourloglistds_11_tfworkhourlogdescription_sel ,
+                                             string AV63Workhourloglistds_10_tfworkhourlogdescription ,
                                              long AV50EmployeeId ,
                                              DateTime AV48FromDate ,
                                              DateTime AV49ToDate ,
+                                             int AV51ProjectIds_Count ,
                                              string A148EmployeeName ,
                                              string A103ProjectName ,
                                              string A120WorkHourLogDuration ,
@@ -898,10 +916,10 @@ namespace GeneXus.Programs {
          string scmdbuf;
          short[] GXv_int1 = new short[17];
          Object[] GXv_Object2 = new Object[2];
-         scmdbuf = "SELECT T1.ProjectId, T3.EmployeeName, T1.EmployeeId, T1.WorkHourLogDescription, T1.WorkHourLogDuration, T1.WorkHourLogDate, T2.ProjectName, T1.WorkHourLogId FROM ((WorkHourLog T1 INNER JOIN Project T2 ON T2.ProjectId = T1.ProjectId) INNER JOIN Employee T3 ON T3.EmployeeId = T1.EmployeeId)";
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV53Workhourloglistds_1_filterfulltext)) )
+         scmdbuf = "SELECT T3.EmployeeName, T1.ProjectId, T1.EmployeeId, T1.WorkHourLogDescription, T1.WorkHourLogDuration, T1.WorkHourLogDate, T2.ProjectName, T1.WorkHourLogId FROM ((WorkHourLog T1 INNER JOIN Project T2 ON T2.ProjectId = T1.ProjectId) INNER JOIN Employee T3 ON T3.EmployeeId = T1.EmployeeId)";
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV54Workhourloglistds_1_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( LOWER(T3.EmployeeName) like '%' || LOWER(:lV53Workhourloglistds_1_filterfulltext)) or ( LOWER(T2.ProjectName) like '%' || LOWER(:lV53Workhourloglistds_1_filterfulltext)) or ( LOWER(T1.WorkHourLogDuration) like '%' || LOWER(:lV53Workhourloglistds_1_filterfulltext)) or ( LOWER(T1.WorkHourLogDescription) like '%' || LOWER(:lV53Workhourloglistds_1_filterfulltext)))");
+            AddWhere(sWhereString, "(( LOWER(T3.EmployeeName) like '%' || LOWER(:lV54Workhourloglistds_1_filterfulltext)) or ( LOWER(T2.ProjectName) like '%' || LOWER(:lV54Workhourloglistds_1_filterfulltext)) or ( LOWER(T1.WorkHourLogDuration) like '%' || LOWER(:lV54Workhourloglistds_1_filterfulltext)) or ( LOWER(T1.WorkHourLogDescription) like '%' || LOWER(:lV54Workhourloglistds_1_filterfulltext)))");
          }
          else
          {
@@ -910,99 +928,99 @@ namespace GeneXus.Programs {
             GXv_int1[2] = 1;
             GXv_int1[3] = 1;
          }
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV55Workhourloglistds_3_tfemployeename_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV54Workhourloglistds_2_tfemployeename)) ) )
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV56Workhourloglistds_3_tfemployeename_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV55Workhourloglistds_2_tfemployeename)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(T3.EmployeeName) like LOWER(:lV54Workhourloglistds_2_tfemployeename))");
+            AddWhere(sWhereString, "(LOWER(T3.EmployeeName) like LOWER(:lV55Workhourloglistds_2_tfemployeename))");
          }
          else
          {
             GXv_int1[4] = 1;
          }
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV55Workhourloglistds_3_tfemployeename_sel)) && ! ( StringUtil.StrCmp(AV55Workhourloglistds_3_tfemployeename_sel, "<#Empty#>") == 0 ) )
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV56Workhourloglistds_3_tfemployeename_sel)) && ! ( StringUtil.StrCmp(AV56Workhourloglistds_3_tfemployeename_sel, "<#Empty#>") == 0 ) )
          {
-            AddWhere(sWhereString, "(T3.EmployeeName = ( :AV55Workhourloglistds_3_tfemployeename_sel))");
+            AddWhere(sWhereString, "(T3.EmployeeName = ( :AV56Workhourloglistds_3_tfemployeename_sel))");
          }
          else
          {
             GXv_int1[5] = 1;
          }
-         if ( StringUtil.StrCmp(AV55Workhourloglistds_3_tfemployeename_sel, "<#Empty#>") == 0 )
+         if ( StringUtil.StrCmp(AV56Workhourloglistds_3_tfemployeename_sel, "<#Empty#>") == 0 )
          {
             AddWhere(sWhereString, "((char_length(trim(trailing ' ' from T3.EmployeeName))=0))");
          }
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV57Workhourloglistds_5_tfprojectname_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV56Workhourloglistds_4_tfprojectname)) ) )
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV58Workhourloglistds_5_tfprojectname_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV57Workhourloglistds_4_tfprojectname)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(T2.ProjectName) like LOWER(:lV56Workhourloglistds_4_tfprojectname))");
+            AddWhere(sWhereString, "(LOWER(T2.ProjectName) like LOWER(:lV57Workhourloglistds_4_tfprojectname))");
          }
          else
          {
             GXv_int1[6] = 1;
          }
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV57Workhourloglistds_5_tfprojectname_sel)) && ! ( StringUtil.StrCmp(AV57Workhourloglistds_5_tfprojectname_sel, "<#Empty#>") == 0 ) )
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV58Workhourloglistds_5_tfprojectname_sel)) && ! ( StringUtil.StrCmp(AV58Workhourloglistds_5_tfprojectname_sel, "<#Empty#>") == 0 ) )
          {
-            AddWhere(sWhereString, "(T2.ProjectName = ( :AV57Workhourloglistds_5_tfprojectname_sel))");
+            AddWhere(sWhereString, "(T2.ProjectName = ( :AV58Workhourloglistds_5_tfprojectname_sel))");
          }
          else
          {
             GXv_int1[7] = 1;
          }
-         if ( StringUtil.StrCmp(AV57Workhourloglistds_5_tfprojectname_sel, "<#Empty#>") == 0 )
+         if ( StringUtil.StrCmp(AV58Workhourloglistds_5_tfprojectname_sel, "<#Empty#>") == 0 )
          {
             AddWhere(sWhereString, "((char_length(trim(trailing ' ' from T2.ProjectName))=0))");
          }
-         if ( ! (DateTime.MinValue==AV58Workhourloglistds_6_tfworkhourlogdate) )
+         if ( ! (DateTime.MinValue==AV59Workhourloglistds_6_tfworkhourlogdate) )
          {
-            AddWhere(sWhereString, "(T1.WorkHourLogDate >= :AV58Workhourloglistds_6_tfworkhourlogdate)");
+            AddWhere(sWhereString, "(T1.WorkHourLogDate >= :AV59Workhourloglistds_6_tfworkhourlogdate)");
          }
          else
          {
             GXv_int1[8] = 1;
          }
-         if ( ! (DateTime.MinValue==AV59Workhourloglistds_7_tfworkhourlogdate_to) )
+         if ( ! (DateTime.MinValue==AV60Workhourloglistds_7_tfworkhourlogdate_to) )
          {
-            AddWhere(sWhereString, "(T1.WorkHourLogDate <= :AV59Workhourloglistds_7_tfworkhourlogdate_to)");
+            AddWhere(sWhereString, "(T1.WorkHourLogDate <= :AV60Workhourloglistds_7_tfworkhourlogdate_to)");
          }
          else
          {
             GXv_int1[9] = 1;
          }
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV61Workhourloglistds_9_tfworkhourlogduration_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV60Workhourloglistds_8_tfworkhourlogduration)) ) )
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV62Workhourloglistds_9_tfworkhourlogduration_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV61Workhourloglistds_8_tfworkhourlogduration)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(T1.WorkHourLogDuration) like LOWER(:lV60Workhourloglistds_8_tfworkhourlogduration))");
+            AddWhere(sWhereString, "(LOWER(T1.WorkHourLogDuration) like LOWER(:lV61Workhourloglistds_8_tfworkhourlogduration))");
          }
          else
          {
             GXv_int1[10] = 1;
          }
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV61Workhourloglistds_9_tfworkhourlogduration_sel)) && ! ( StringUtil.StrCmp(AV61Workhourloglistds_9_tfworkhourlogduration_sel, "<#Empty#>") == 0 ) )
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV62Workhourloglistds_9_tfworkhourlogduration_sel)) && ! ( StringUtil.StrCmp(AV62Workhourloglistds_9_tfworkhourlogduration_sel, "<#Empty#>") == 0 ) )
          {
-            AddWhere(sWhereString, "(T1.WorkHourLogDuration = ( :AV61Workhourloglistds_9_tfworkhourlogduration_sel))");
+            AddWhere(sWhereString, "(T1.WorkHourLogDuration = ( :AV62Workhourloglistds_9_tfworkhourlogduration_sel))");
          }
          else
          {
             GXv_int1[11] = 1;
          }
-         if ( StringUtil.StrCmp(AV61Workhourloglistds_9_tfworkhourlogduration_sel, "<#Empty#>") == 0 )
+         if ( StringUtil.StrCmp(AV62Workhourloglistds_9_tfworkhourlogduration_sel, "<#Empty#>") == 0 )
          {
             AddWhere(sWhereString, "((char_length(trim(trailing ' ' from T1.WorkHourLogDuration))=0))");
          }
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV63Workhourloglistds_11_tfworkhourlogdescription_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV62Workhourloglistds_10_tfworkhourlogdescription)) ) )
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV64Workhourloglistds_11_tfworkhourlogdescription_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV63Workhourloglistds_10_tfworkhourlogdescription)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(T1.WorkHourLogDescription) like LOWER(:lV62Workhourloglistds_10_tfworkhourlogdescription))");
+            AddWhere(sWhereString, "(LOWER(T1.WorkHourLogDescription) like LOWER(:lV63Workhourloglistds_10_tfworkhourlogdescription))");
          }
          else
          {
             GXv_int1[12] = 1;
          }
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV63Workhourloglistds_11_tfworkhourlogdescription_sel)) && ! ( StringUtil.StrCmp(AV63Workhourloglistds_11_tfworkhourlogdescription_sel, "<#Empty#>") == 0 ) )
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV64Workhourloglistds_11_tfworkhourlogdescription_sel)) && ! ( StringUtil.StrCmp(AV64Workhourloglistds_11_tfworkhourlogdescription_sel, "<#Empty#>") == 0 ) )
          {
-            AddWhere(sWhereString, "(T1.WorkHourLogDescription = ( :AV63Workhourloglistds_11_tfworkhourlogdescription_sel))");
+            AddWhere(sWhereString, "(T1.WorkHourLogDescription = ( :AV64Workhourloglistds_11_tfworkhourlogdescription_sel))");
          }
          else
          {
             GXv_int1[13] = 1;
          }
-         if ( StringUtil.StrCmp(AV63Workhourloglistds_11_tfworkhourlogdescription_sel, "<#Empty#>") == 0 )
+         if ( StringUtil.StrCmp(AV64Workhourloglistds_11_tfworkhourlogdescription_sel, "<#Empty#>") == 0 )
          {
             AddWhere(sWhereString, "((char_length(trim(trailing ' ' from T1.WorkHourLogDescription))=0))");
          }
@@ -1030,6 +1048,10 @@ namespace GeneXus.Programs {
          {
             GXv_int1[16] = 1;
          }
+         if ( AV51ProjectIds_Count > 0 )
+         {
+            AddWhere(sWhereString, "("+new GxDbmsUtils( new GxPostgreSql()).ValueList(AV51ProjectIds, "T1.ProjectId IN (", ")")+")");
+         }
          scmdbuf += sWhereString;
          scmdbuf += " ORDER BY T3.EmployeeName";
          GXv_Object2[0] = scmdbuf;
@@ -1038,20 +1060,23 @@ namespace GeneXus.Programs {
       }
 
       protected Object[] conditional_P00873( IGxContext context ,
-                                             string AV53Workhourloglistds_1_filterfulltext ,
-                                             string AV55Workhourloglistds_3_tfemployeename_sel ,
-                                             string AV54Workhourloglistds_2_tfemployeename ,
-                                             string AV57Workhourloglistds_5_tfprojectname_sel ,
-                                             string AV56Workhourloglistds_4_tfprojectname ,
-                                             DateTime AV58Workhourloglistds_6_tfworkhourlogdate ,
-                                             DateTime AV59Workhourloglistds_7_tfworkhourlogdate_to ,
-                                             string AV61Workhourloglistds_9_tfworkhourlogduration_sel ,
-                                             string AV60Workhourloglistds_8_tfworkhourlogduration ,
-                                             string AV63Workhourloglistds_11_tfworkhourlogdescription_sel ,
-                                             string AV62Workhourloglistds_10_tfworkhourlogdescription ,
+                                             long A102ProjectId ,
+                                             GxSimpleCollection<long> AV51ProjectIds ,
+                                             string AV54Workhourloglistds_1_filterfulltext ,
+                                             string AV56Workhourloglistds_3_tfemployeename_sel ,
+                                             string AV55Workhourloglistds_2_tfemployeename ,
+                                             string AV58Workhourloglistds_5_tfprojectname_sel ,
+                                             string AV57Workhourloglistds_4_tfprojectname ,
+                                             DateTime AV59Workhourloglistds_6_tfworkhourlogdate ,
+                                             DateTime AV60Workhourloglistds_7_tfworkhourlogdate_to ,
+                                             string AV62Workhourloglistds_9_tfworkhourlogduration_sel ,
+                                             string AV61Workhourloglistds_8_tfworkhourlogduration ,
+                                             string AV64Workhourloglistds_11_tfworkhourlogdescription_sel ,
+                                             string AV63Workhourloglistds_10_tfworkhourlogdescription ,
                                              long AV50EmployeeId ,
                                              DateTime AV48FromDate ,
                                              DateTime AV49ToDate ,
+                                             int AV51ProjectIds_Count ,
                                              string A148EmployeeName ,
                                              string A103ProjectName ,
                                              string A120WorkHourLogDuration ,
@@ -1063,10 +1088,10 @@ namespace GeneXus.Programs {
          string scmdbuf;
          short[] GXv_int3 = new short[17];
          Object[] GXv_Object4 = new Object[2];
-         scmdbuf = "SELECT T1.ProjectId, T2.ProjectName, T1.EmployeeId, T1.WorkHourLogDescription, T1.WorkHourLogDuration, T1.WorkHourLogDate, T3.EmployeeName, T1.WorkHourLogId FROM ((WorkHourLog T1 INNER JOIN Project T2 ON T2.ProjectId = T1.ProjectId) INNER JOIN Employee T3 ON T3.EmployeeId = T1.EmployeeId)";
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV53Workhourloglistds_1_filterfulltext)) )
+         scmdbuf = "SELECT T2.ProjectName, T1.ProjectId, T1.EmployeeId, T1.WorkHourLogDescription, T1.WorkHourLogDuration, T1.WorkHourLogDate, T3.EmployeeName, T1.WorkHourLogId FROM ((WorkHourLog T1 INNER JOIN Project T2 ON T2.ProjectId = T1.ProjectId) INNER JOIN Employee T3 ON T3.EmployeeId = T1.EmployeeId)";
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV54Workhourloglistds_1_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( LOWER(T3.EmployeeName) like '%' || LOWER(:lV53Workhourloglistds_1_filterfulltext)) or ( LOWER(T2.ProjectName) like '%' || LOWER(:lV53Workhourloglistds_1_filterfulltext)) or ( LOWER(T1.WorkHourLogDuration) like '%' || LOWER(:lV53Workhourloglistds_1_filterfulltext)) or ( LOWER(T1.WorkHourLogDescription) like '%' || LOWER(:lV53Workhourloglistds_1_filterfulltext)))");
+            AddWhere(sWhereString, "(( LOWER(T3.EmployeeName) like '%' || LOWER(:lV54Workhourloglistds_1_filterfulltext)) or ( LOWER(T2.ProjectName) like '%' || LOWER(:lV54Workhourloglistds_1_filterfulltext)) or ( LOWER(T1.WorkHourLogDuration) like '%' || LOWER(:lV54Workhourloglistds_1_filterfulltext)) or ( LOWER(T1.WorkHourLogDescription) like '%' || LOWER(:lV54Workhourloglistds_1_filterfulltext)))");
          }
          else
          {
@@ -1075,99 +1100,99 @@ namespace GeneXus.Programs {
             GXv_int3[2] = 1;
             GXv_int3[3] = 1;
          }
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV55Workhourloglistds_3_tfemployeename_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV54Workhourloglistds_2_tfemployeename)) ) )
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV56Workhourloglistds_3_tfemployeename_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV55Workhourloglistds_2_tfemployeename)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(T3.EmployeeName) like LOWER(:lV54Workhourloglistds_2_tfemployeename))");
+            AddWhere(sWhereString, "(LOWER(T3.EmployeeName) like LOWER(:lV55Workhourloglistds_2_tfemployeename))");
          }
          else
          {
             GXv_int3[4] = 1;
          }
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV55Workhourloglistds_3_tfemployeename_sel)) && ! ( StringUtil.StrCmp(AV55Workhourloglistds_3_tfemployeename_sel, "<#Empty#>") == 0 ) )
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV56Workhourloglistds_3_tfemployeename_sel)) && ! ( StringUtil.StrCmp(AV56Workhourloglistds_3_tfemployeename_sel, "<#Empty#>") == 0 ) )
          {
-            AddWhere(sWhereString, "(T3.EmployeeName = ( :AV55Workhourloglistds_3_tfemployeename_sel))");
+            AddWhere(sWhereString, "(T3.EmployeeName = ( :AV56Workhourloglistds_3_tfemployeename_sel))");
          }
          else
          {
             GXv_int3[5] = 1;
          }
-         if ( StringUtil.StrCmp(AV55Workhourloglistds_3_tfemployeename_sel, "<#Empty#>") == 0 )
+         if ( StringUtil.StrCmp(AV56Workhourloglistds_3_tfemployeename_sel, "<#Empty#>") == 0 )
          {
             AddWhere(sWhereString, "((char_length(trim(trailing ' ' from T3.EmployeeName))=0))");
          }
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV57Workhourloglistds_5_tfprojectname_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV56Workhourloglistds_4_tfprojectname)) ) )
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV58Workhourloglistds_5_tfprojectname_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV57Workhourloglistds_4_tfprojectname)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(T2.ProjectName) like LOWER(:lV56Workhourloglistds_4_tfprojectname))");
+            AddWhere(sWhereString, "(LOWER(T2.ProjectName) like LOWER(:lV57Workhourloglistds_4_tfprojectname))");
          }
          else
          {
             GXv_int3[6] = 1;
          }
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV57Workhourloglistds_5_tfprojectname_sel)) && ! ( StringUtil.StrCmp(AV57Workhourloglistds_5_tfprojectname_sel, "<#Empty#>") == 0 ) )
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV58Workhourloglistds_5_tfprojectname_sel)) && ! ( StringUtil.StrCmp(AV58Workhourloglistds_5_tfprojectname_sel, "<#Empty#>") == 0 ) )
          {
-            AddWhere(sWhereString, "(T2.ProjectName = ( :AV57Workhourloglistds_5_tfprojectname_sel))");
+            AddWhere(sWhereString, "(T2.ProjectName = ( :AV58Workhourloglistds_5_tfprojectname_sel))");
          }
          else
          {
             GXv_int3[7] = 1;
          }
-         if ( StringUtil.StrCmp(AV57Workhourloglistds_5_tfprojectname_sel, "<#Empty#>") == 0 )
+         if ( StringUtil.StrCmp(AV58Workhourloglistds_5_tfprojectname_sel, "<#Empty#>") == 0 )
          {
             AddWhere(sWhereString, "((char_length(trim(trailing ' ' from T2.ProjectName))=0))");
          }
-         if ( ! (DateTime.MinValue==AV58Workhourloglistds_6_tfworkhourlogdate) )
+         if ( ! (DateTime.MinValue==AV59Workhourloglistds_6_tfworkhourlogdate) )
          {
-            AddWhere(sWhereString, "(T1.WorkHourLogDate >= :AV58Workhourloglistds_6_tfworkhourlogdate)");
+            AddWhere(sWhereString, "(T1.WorkHourLogDate >= :AV59Workhourloglistds_6_tfworkhourlogdate)");
          }
          else
          {
             GXv_int3[8] = 1;
          }
-         if ( ! (DateTime.MinValue==AV59Workhourloglistds_7_tfworkhourlogdate_to) )
+         if ( ! (DateTime.MinValue==AV60Workhourloglistds_7_tfworkhourlogdate_to) )
          {
-            AddWhere(sWhereString, "(T1.WorkHourLogDate <= :AV59Workhourloglistds_7_tfworkhourlogdate_to)");
+            AddWhere(sWhereString, "(T1.WorkHourLogDate <= :AV60Workhourloglistds_7_tfworkhourlogdate_to)");
          }
          else
          {
             GXv_int3[9] = 1;
          }
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV61Workhourloglistds_9_tfworkhourlogduration_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV60Workhourloglistds_8_tfworkhourlogduration)) ) )
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV62Workhourloglistds_9_tfworkhourlogduration_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV61Workhourloglistds_8_tfworkhourlogduration)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(T1.WorkHourLogDuration) like LOWER(:lV60Workhourloglistds_8_tfworkhourlogduration))");
+            AddWhere(sWhereString, "(LOWER(T1.WorkHourLogDuration) like LOWER(:lV61Workhourloglistds_8_tfworkhourlogduration))");
          }
          else
          {
             GXv_int3[10] = 1;
          }
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV61Workhourloglistds_9_tfworkhourlogduration_sel)) && ! ( StringUtil.StrCmp(AV61Workhourloglistds_9_tfworkhourlogduration_sel, "<#Empty#>") == 0 ) )
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV62Workhourloglistds_9_tfworkhourlogduration_sel)) && ! ( StringUtil.StrCmp(AV62Workhourloglistds_9_tfworkhourlogduration_sel, "<#Empty#>") == 0 ) )
          {
-            AddWhere(sWhereString, "(T1.WorkHourLogDuration = ( :AV61Workhourloglistds_9_tfworkhourlogduration_sel))");
+            AddWhere(sWhereString, "(T1.WorkHourLogDuration = ( :AV62Workhourloglistds_9_tfworkhourlogduration_sel))");
          }
          else
          {
             GXv_int3[11] = 1;
          }
-         if ( StringUtil.StrCmp(AV61Workhourloglistds_9_tfworkhourlogduration_sel, "<#Empty#>") == 0 )
+         if ( StringUtil.StrCmp(AV62Workhourloglistds_9_tfworkhourlogduration_sel, "<#Empty#>") == 0 )
          {
             AddWhere(sWhereString, "((char_length(trim(trailing ' ' from T1.WorkHourLogDuration))=0))");
          }
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV63Workhourloglistds_11_tfworkhourlogdescription_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV62Workhourloglistds_10_tfworkhourlogdescription)) ) )
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV64Workhourloglistds_11_tfworkhourlogdescription_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV63Workhourloglistds_10_tfworkhourlogdescription)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(T1.WorkHourLogDescription) like LOWER(:lV62Workhourloglistds_10_tfworkhourlogdescription))");
+            AddWhere(sWhereString, "(LOWER(T1.WorkHourLogDescription) like LOWER(:lV63Workhourloglistds_10_tfworkhourlogdescription))");
          }
          else
          {
             GXv_int3[12] = 1;
          }
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV63Workhourloglistds_11_tfworkhourlogdescription_sel)) && ! ( StringUtil.StrCmp(AV63Workhourloglistds_11_tfworkhourlogdescription_sel, "<#Empty#>") == 0 ) )
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV64Workhourloglistds_11_tfworkhourlogdescription_sel)) && ! ( StringUtil.StrCmp(AV64Workhourloglistds_11_tfworkhourlogdescription_sel, "<#Empty#>") == 0 ) )
          {
-            AddWhere(sWhereString, "(T1.WorkHourLogDescription = ( :AV63Workhourloglistds_11_tfworkhourlogdescription_sel))");
+            AddWhere(sWhereString, "(T1.WorkHourLogDescription = ( :AV64Workhourloglistds_11_tfworkhourlogdescription_sel))");
          }
          else
          {
             GXv_int3[13] = 1;
          }
-         if ( StringUtil.StrCmp(AV63Workhourloglistds_11_tfworkhourlogdescription_sel, "<#Empty#>") == 0 )
+         if ( StringUtil.StrCmp(AV64Workhourloglistds_11_tfworkhourlogdescription_sel, "<#Empty#>") == 0 )
          {
             AddWhere(sWhereString, "((char_length(trim(trailing ' ' from T1.WorkHourLogDescription))=0))");
          }
@@ -1195,6 +1220,10 @@ namespace GeneXus.Programs {
          {
             GXv_int3[16] = 1;
          }
+         if ( AV51ProjectIds_Count > 0 )
+         {
+            AddWhere(sWhereString, "("+new GxDbmsUtils( new GxPostgreSql()).ValueList(AV51ProjectIds, "T1.ProjectId IN (", ")")+")");
+         }
          scmdbuf += sWhereString;
          scmdbuf += " ORDER BY T2.ProjectName";
          GXv_Object4[0] = scmdbuf;
@@ -1203,20 +1232,23 @@ namespace GeneXus.Programs {
       }
 
       protected Object[] conditional_P00874( IGxContext context ,
-                                             string AV53Workhourloglistds_1_filterfulltext ,
-                                             string AV55Workhourloglistds_3_tfemployeename_sel ,
-                                             string AV54Workhourloglistds_2_tfemployeename ,
-                                             string AV57Workhourloglistds_5_tfprojectname_sel ,
-                                             string AV56Workhourloglistds_4_tfprojectname ,
-                                             DateTime AV58Workhourloglistds_6_tfworkhourlogdate ,
-                                             DateTime AV59Workhourloglistds_7_tfworkhourlogdate_to ,
-                                             string AV61Workhourloglistds_9_tfworkhourlogduration_sel ,
-                                             string AV60Workhourloglistds_8_tfworkhourlogduration ,
-                                             string AV63Workhourloglistds_11_tfworkhourlogdescription_sel ,
-                                             string AV62Workhourloglistds_10_tfworkhourlogdescription ,
+                                             long A102ProjectId ,
+                                             GxSimpleCollection<long> AV51ProjectIds ,
+                                             string AV54Workhourloglistds_1_filterfulltext ,
+                                             string AV56Workhourloglistds_3_tfemployeename_sel ,
+                                             string AV55Workhourloglistds_2_tfemployeename ,
+                                             string AV58Workhourloglistds_5_tfprojectname_sel ,
+                                             string AV57Workhourloglistds_4_tfprojectname ,
+                                             DateTime AV59Workhourloglistds_6_tfworkhourlogdate ,
+                                             DateTime AV60Workhourloglistds_7_tfworkhourlogdate_to ,
+                                             string AV62Workhourloglistds_9_tfworkhourlogduration_sel ,
+                                             string AV61Workhourloglistds_8_tfworkhourlogduration ,
+                                             string AV64Workhourloglistds_11_tfworkhourlogdescription_sel ,
+                                             string AV63Workhourloglistds_10_tfworkhourlogdescription ,
                                              long AV50EmployeeId ,
                                              DateTime AV48FromDate ,
                                              DateTime AV49ToDate ,
+                                             int AV51ProjectIds_Count ,
                                              string A148EmployeeName ,
                                              string A103ProjectName ,
                                              string A120WorkHourLogDuration ,
@@ -1228,10 +1260,10 @@ namespace GeneXus.Programs {
          string scmdbuf;
          short[] GXv_int5 = new short[17];
          Object[] GXv_Object6 = new Object[2];
-         scmdbuf = "SELECT T1.ProjectId, T1.WorkHourLogDuration, T1.EmployeeId, T1.WorkHourLogDescription, T1.WorkHourLogDate, T2.ProjectName, T3.EmployeeName, T1.WorkHourLogId FROM ((WorkHourLog T1 INNER JOIN Project T2 ON T2.ProjectId = T1.ProjectId) INNER JOIN Employee T3 ON T3.EmployeeId = T1.EmployeeId)";
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV53Workhourloglistds_1_filterfulltext)) )
+         scmdbuf = "SELECT T1.WorkHourLogDuration, T1.ProjectId, T1.EmployeeId, T1.WorkHourLogDescription, T1.WorkHourLogDate, T2.ProjectName, T3.EmployeeName, T1.WorkHourLogId FROM ((WorkHourLog T1 INNER JOIN Project T2 ON T2.ProjectId = T1.ProjectId) INNER JOIN Employee T3 ON T3.EmployeeId = T1.EmployeeId)";
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV54Workhourloglistds_1_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( LOWER(T3.EmployeeName) like '%' || LOWER(:lV53Workhourloglistds_1_filterfulltext)) or ( LOWER(T2.ProjectName) like '%' || LOWER(:lV53Workhourloglistds_1_filterfulltext)) or ( LOWER(T1.WorkHourLogDuration) like '%' || LOWER(:lV53Workhourloglistds_1_filterfulltext)) or ( LOWER(T1.WorkHourLogDescription) like '%' || LOWER(:lV53Workhourloglistds_1_filterfulltext)))");
+            AddWhere(sWhereString, "(( LOWER(T3.EmployeeName) like '%' || LOWER(:lV54Workhourloglistds_1_filterfulltext)) or ( LOWER(T2.ProjectName) like '%' || LOWER(:lV54Workhourloglistds_1_filterfulltext)) or ( LOWER(T1.WorkHourLogDuration) like '%' || LOWER(:lV54Workhourloglistds_1_filterfulltext)) or ( LOWER(T1.WorkHourLogDescription) like '%' || LOWER(:lV54Workhourloglistds_1_filterfulltext)))");
          }
          else
          {
@@ -1240,99 +1272,99 @@ namespace GeneXus.Programs {
             GXv_int5[2] = 1;
             GXv_int5[3] = 1;
          }
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV55Workhourloglistds_3_tfemployeename_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV54Workhourloglistds_2_tfemployeename)) ) )
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV56Workhourloglistds_3_tfemployeename_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV55Workhourloglistds_2_tfemployeename)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(T3.EmployeeName) like LOWER(:lV54Workhourloglistds_2_tfemployeename))");
+            AddWhere(sWhereString, "(LOWER(T3.EmployeeName) like LOWER(:lV55Workhourloglistds_2_tfemployeename))");
          }
          else
          {
             GXv_int5[4] = 1;
          }
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV55Workhourloglistds_3_tfemployeename_sel)) && ! ( StringUtil.StrCmp(AV55Workhourloglistds_3_tfemployeename_sel, "<#Empty#>") == 0 ) )
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV56Workhourloglistds_3_tfemployeename_sel)) && ! ( StringUtil.StrCmp(AV56Workhourloglistds_3_tfemployeename_sel, "<#Empty#>") == 0 ) )
          {
-            AddWhere(sWhereString, "(T3.EmployeeName = ( :AV55Workhourloglistds_3_tfemployeename_sel))");
+            AddWhere(sWhereString, "(T3.EmployeeName = ( :AV56Workhourloglistds_3_tfemployeename_sel))");
          }
          else
          {
             GXv_int5[5] = 1;
          }
-         if ( StringUtil.StrCmp(AV55Workhourloglistds_3_tfemployeename_sel, "<#Empty#>") == 0 )
+         if ( StringUtil.StrCmp(AV56Workhourloglistds_3_tfemployeename_sel, "<#Empty#>") == 0 )
          {
             AddWhere(sWhereString, "((char_length(trim(trailing ' ' from T3.EmployeeName))=0))");
          }
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV57Workhourloglistds_5_tfprojectname_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV56Workhourloglistds_4_tfprojectname)) ) )
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV58Workhourloglistds_5_tfprojectname_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV57Workhourloglistds_4_tfprojectname)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(T2.ProjectName) like LOWER(:lV56Workhourloglistds_4_tfprojectname))");
+            AddWhere(sWhereString, "(LOWER(T2.ProjectName) like LOWER(:lV57Workhourloglistds_4_tfprojectname))");
          }
          else
          {
             GXv_int5[6] = 1;
          }
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV57Workhourloglistds_5_tfprojectname_sel)) && ! ( StringUtil.StrCmp(AV57Workhourloglistds_5_tfprojectname_sel, "<#Empty#>") == 0 ) )
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV58Workhourloglistds_5_tfprojectname_sel)) && ! ( StringUtil.StrCmp(AV58Workhourloglistds_5_tfprojectname_sel, "<#Empty#>") == 0 ) )
          {
-            AddWhere(sWhereString, "(T2.ProjectName = ( :AV57Workhourloglistds_5_tfprojectname_sel))");
+            AddWhere(sWhereString, "(T2.ProjectName = ( :AV58Workhourloglistds_5_tfprojectname_sel))");
          }
          else
          {
             GXv_int5[7] = 1;
          }
-         if ( StringUtil.StrCmp(AV57Workhourloglistds_5_tfprojectname_sel, "<#Empty#>") == 0 )
+         if ( StringUtil.StrCmp(AV58Workhourloglistds_5_tfprojectname_sel, "<#Empty#>") == 0 )
          {
             AddWhere(sWhereString, "((char_length(trim(trailing ' ' from T2.ProjectName))=0))");
          }
-         if ( ! (DateTime.MinValue==AV58Workhourloglistds_6_tfworkhourlogdate) )
+         if ( ! (DateTime.MinValue==AV59Workhourloglistds_6_tfworkhourlogdate) )
          {
-            AddWhere(sWhereString, "(T1.WorkHourLogDate >= :AV58Workhourloglistds_6_tfworkhourlogdate)");
+            AddWhere(sWhereString, "(T1.WorkHourLogDate >= :AV59Workhourloglistds_6_tfworkhourlogdate)");
          }
          else
          {
             GXv_int5[8] = 1;
          }
-         if ( ! (DateTime.MinValue==AV59Workhourloglistds_7_tfworkhourlogdate_to) )
+         if ( ! (DateTime.MinValue==AV60Workhourloglistds_7_tfworkhourlogdate_to) )
          {
-            AddWhere(sWhereString, "(T1.WorkHourLogDate <= :AV59Workhourloglistds_7_tfworkhourlogdate_to)");
+            AddWhere(sWhereString, "(T1.WorkHourLogDate <= :AV60Workhourloglistds_7_tfworkhourlogdate_to)");
          }
          else
          {
             GXv_int5[9] = 1;
          }
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV61Workhourloglistds_9_tfworkhourlogduration_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV60Workhourloglistds_8_tfworkhourlogduration)) ) )
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV62Workhourloglistds_9_tfworkhourlogduration_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV61Workhourloglistds_8_tfworkhourlogduration)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(T1.WorkHourLogDuration) like LOWER(:lV60Workhourloglistds_8_tfworkhourlogduration))");
+            AddWhere(sWhereString, "(LOWER(T1.WorkHourLogDuration) like LOWER(:lV61Workhourloglistds_8_tfworkhourlogduration))");
          }
          else
          {
             GXv_int5[10] = 1;
          }
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV61Workhourloglistds_9_tfworkhourlogduration_sel)) && ! ( StringUtil.StrCmp(AV61Workhourloglistds_9_tfworkhourlogduration_sel, "<#Empty#>") == 0 ) )
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV62Workhourloglistds_9_tfworkhourlogduration_sel)) && ! ( StringUtil.StrCmp(AV62Workhourloglistds_9_tfworkhourlogduration_sel, "<#Empty#>") == 0 ) )
          {
-            AddWhere(sWhereString, "(T1.WorkHourLogDuration = ( :AV61Workhourloglistds_9_tfworkhourlogduration_sel))");
+            AddWhere(sWhereString, "(T1.WorkHourLogDuration = ( :AV62Workhourloglistds_9_tfworkhourlogduration_sel))");
          }
          else
          {
             GXv_int5[11] = 1;
          }
-         if ( StringUtil.StrCmp(AV61Workhourloglistds_9_tfworkhourlogduration_sel, "<#Empty#>") == 0 )
+         if ( StringUtil.StrCmp(AV62Workhourloglistds_9_tfworkhourlogduration_sel, "<#Empty#>") == 0 )
          {
             AddWhere(sWhereString, "((char_length(trim(trailing ' ' from T1.WorkHourLogDuration))=0))");
          }
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV63Workhourloglistds_11_tfworkhourlogdescription_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV62Workhourloglistds_10_tfworkhourlogdescription)) ) )
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV64Workhourloglistds_11_tfworkhourlogdescription_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV63Workhourloglistds_10_tfworkhourlogdescription)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(T1.WorkHourLogDescription) like LOWER(:lV62Workhourloglistds_10_tfworkhourlogdescription))");
+            AddWhere(sWhereString, "(LOWER(T1.WorkHourLogDescription) like LOWER(:lV63Workhourloglistds_10_tfworkhourlogdescription))");
          }
          else
          {
             GXv_int5[12] = 1;
          }
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV63Workhourloglistds_11_tfworkhourlogdescription_sel)) && ! ( StringUtil.StrCmp(AV63Workhourloglistds_11_tfworkhourlogdescription_sel, "<#Empty#>") == 0 ) )
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV64Workhourloglistds_11_tfworkhourlogdescription_sel)) && ! ( StringUtil.StrCmp(AV64Workhourloglistds_11_tfworkhourlogdescription_sel, "<#Empty#>") == 0 ) )
          {
-            AddWhere(sWhereString, "(T1.WorkHourLogDescription = ( :AV63Workhourloglistds_11_tfworkhourlogdescription_sel))");
+            AddWhere(sWhereString, "(T1.WorkHourLogDescription = ( :AV64Workhourloglistds_11_tfworkhourlogdescription_sel))");
          }
          else
          {
             GXv_int5[13] = 1;
          }
-         if ( StringUtil.StrCmp(AV63Workhourloglistds_11_tfworkhourlogdescription_sel, "<#Empty#>") == 0 )
+         if ( StringUtil.StrCmp(AV64Workhourloglistds_11_tfworkhourlogdescription_sel, "<#Empty#>") == 0 )
          {
             AddWhere(sWhereString, "((char_length(trim(trailing ' ' from T1.WorkHourLogDescription))=0))");
          }
@@ -1360,6 +1392,10 @@ namespace GeneXus.Programs {
          {
             GXv_int5[16] = 1;
          }
+         if ( AV51ProjectIds_Count > 0 )
+         {
+            AddWhere(sWhereString, "("+new GxDbmsUtils( new GxPostgreSql()).ValueList(AV51ProjectIds, "T1.ProjectId IN (", ")")+")");
+         }
          scmdbuf += sWhereString;
          scmdbuf += " ORDER BY T1.WorkHourLogDuration";
          GXv_Object6[0] = scmdbuf;
@@ -1368,20 +1404,23 @@ namespace GeneXus.Programs {
       }
 
       protected Object[] conditional_P00875( IGxContext context ,
-                                             string AV53Workhourloglistds_1_filterfulltext ,
-                                             string AV55Workhourloglistds_3_tfemployeename_sel ,
-                                             string AV54Workhourloglistds_2_tfemployeename ,
-                                             string AV57Workhourloglistds_5_tfprojectname_sel ,
-                                             string AV56Workhourloglistds_4_tfprojectname ,
-                                             DateTime AV58Workhourloglistds_6_tfworkhourlogdate ,
-                                             DateTime AV59Workhourloglistds_7_tfworkhourlogdate_to ,
-                                             string AV61Workhourloglistds_9_tfworkhourlogduration_sel ,
-                                             string AV60Workhourloglistds_8_tfworkhourlogduration ,
-                                             string AV63Workhourloglistds_11_tfworkhourlogdescription_sel ,
-                                             string AV62Workhourloglistds_10_tfworkhourlogdescription ,
+                                             long A102ProjectId ,
+                                             GxSimpleCollection<long> AV51ProjectIds ,
+                                             string AV54Workhourloglistds_1_filterfulltext ,
+                                             string AV56Workhourloglistds_3_tfemployeename_sel ,
+                                             string AV55Workhourloglistds_2_tfemployeename ,
+                                             string AV58Workhourloglistds_5_tfprojectname_sel ,
+                                             string AV57Workhourloglistds_4_tfprojectname ,
+                                             DateTime AV59Workhourloglistds_6_tfworkhourlogdate ,
+                                             DateTime AV60Workhourloglistds_7_tfworkhourlogdate_to ,
+                                             string AV62Workhourloglistds_9_tfworkhourlogduration_sel ,
+                                             string AV61Workhourloglistds_8_tfworkhourlogduration ,
+                                             string AV64Workhourloglistds_11_tfworkhourlogdescription_sel ,
+                                             string AV63Workhourloglistds_10_tfworkhourlogdescription ,
                                              long AV50EmployeeId ,
                                              DateTime AV48FromDate ,
                                              DateTime AV49ToDate ,
+                                             int AV51ProjectIds_Count ,
                                              string A148EmployeeName ,
                                              string A103ProjectName ,
                                              string A120WorkHourLogDuration ,
@@ -1393,10 +1432,10 @@ namespace GeneXus.Programs {
          string scmdbuf;
          short[] GXv_int7 = new short[17];
          Object[] GXv_Object8 = new Object[2];
-         scmdbuf = "SELECT T1.ProjectId, T1.WorkHourLogDescription, T1.EmployeeId, T1.WorkHourLogDuration, T1.WorkHourLogDate, T2.ProjectName, T3.EmployeeName, T1.WorkHourLogId FROM ((WorkHourLog T1 INNER JOIN Project T2 ON T2.ProjectId = T1.ProjectId) INNER JOIN Employee T3 ON T3.EmployeeId = T1.EmployeeId)";
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV53Workhourloglistds_1_filterfulltext)) )
+         scmdbuf = "SELECT T1.WorkHourLogDescription, T1.ProjectId, T1.EmployeeId, T1.WorkHourLogDuration, T1.WorkHourLogDate, T2.ProjectName, T3.EmployeeName, T1.WorkHourLogId FROM ((WorkHourLog T1 INNER JOIN Project T2 ON T2.ProjectId = T1.ProjectId) INNER JOIN Employee T3 ON T3.EmployeeId = T1.EmployeeId)";
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV54Workhourloglistds_1_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( LOWER(T3.EmployeeName) like '%' || LOWER(:lV53Workhourloglistds_1_filterfulltext)) or ( LOWER(T2.ProjectName) like '%' || LOWER(:lV53Workhourloglistds_1_filterfulltext)) or ( LOWER(T1.WorkHourLogDuration) like '%' || LOWER(:lV53Workhourloglistds_1_filterfulltext)) or ( LOWER(T1.WorkHourLogDescription) like '%' || LOWER(:lV53Workhourloglistds_1_filterfulltext)))");
+            AddWhere(sWhereString, "(( LOWER(T3.EmployeeName) like '%' || LOWER(:lV54Workhourloglistds_1_filterfulltext)) or ( LOWER(T2.ProjectName) like '%' || LOWER(:lV54Workhourloglistds_1_filterfulltext)) or ( LOWER(T1.WorkHourLogDuration) like '%' || LOWER(:lV54Workhourloglistds_1_filterfulltext)) or ( LOWER(T1.WorkHourLogDescription) like '%' || LOWER(:lV54Workhourloglistds_1_filterfulltext)))");
          }
          else
          {
@@ -1405,99 +1444,99 @@ namespace GeneXus.Programs {
             GXv_int7[2] = 1;
             GXv_int7[3] = 1;
          }
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV55Workhourloglistds_3_tfemployeename_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV54Workhourloglistds_2_tfemployeename)) ) )
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV56Workhourloglistds_3_tfemployeename_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV55Workhourloglistds_2_tfemployeename)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(T3.EmployeeName) like LOWER(:lV54Workhourloglistds_2_tfemployeename))");
+            AddWhere(sWhereString, "(LOWER(T3.EmployeeName) like LOWER(:lV55Workhourloglistds_2_tfemployeename))");
          }
          else
          {
             GXv_int7[4] = 1;
          }
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV55Workhourloglistds_3_tfemployeename_sel)) && ! ( StringUtil.StrCmp(AV55Workhourloglistds_3_tfemployeename_sel, "<#Empty#>") == 0 ) )
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV56Workhourloglistds_3_tfemployeename_sel)) && ! ( StringUtil.StrCmp(AV56Workhourloglistds_3_tfemployeename_sel, "<#Empty#>") == 0 ) )
          {
-            AddWhere(sWhereString, "(T3.EmployeeName = ( :AV55Workhourloglistds_3_tfemployeename_sel))");
+            AddWhere(sWhereString, "(T3.EmployeeName = ( :AV56Workhourloglistds_3_tfemployeename_sel))");
          }
          else
          {
             GXv_int7[5] = 1;
          }
-         if ( StringUtil.StrCmp(AV55Workhourloglistds_3_tfemployeename_sel, "<#Empty#>") == 0 )
+         if ( StringUtil.StrCmp(AV56Workhourloglistds_3_tfemployeename_sel, "<#Empty#>") == 0 )
          {
             AddWhere(sWhereString, "((char_length(trim(trailing ' ' from T3.EmployeeName))=0))");
          }
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV57Workhourloglistds_5_tfprojectname_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV56Workhourloglistds_4_tfprojectname)) ) )
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV58Workhourloglistds_5_tfprojectname_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV57Workhourloglistds_4_tfprojectname)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(T2.ProjectName) like LOWER(:lV56Workhourloglistds_4_tfprojectname))");
+            AddWhere(sWhereString, "(LOWER(T2.ProjectName) like LOWER(:lV57Workhourloglistds_4_tfprojectname))");
          }
          else
          {
             GXv_int7[6] = 1;
          }
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV57Workhourloglistds_5_tfprojectname_sel)) && ! ( StringUtil.StrCmp(AV57Workhourloglistds_5_tfprojectname_sel, "<#Empty#>") == 0 ) )
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV58Workhourloglistds_5_tfprojectname_sel)) && ! ( StringUtil.StrCmp(AV58Workhourloglistds_5_tfprojectname_sel, "<#Empty#>") == 0 ) )
          {
-            AddWhere(sWhereString, "(T2.ProjectName = ( :AV57Workhourloglistds_5_tfprojectname_sel))");
+            AddWhere(sWhereString, "(T2.ProjectName = ( :AV58Workhourloglistds_5_tfprojectname_sel))");
          }
          else
          {
             GXv_int7[7] = 1;
          }
-         if ( StringUtil.StrCmp(AV57Workhourloglistds_5_tfprojectname_sel, "<#Empty#>") == 0 )
+         if ( StringUtil.StrCmp(AV58Workhourloglistds_5_tfprojectname_sel, "<#Empty#>") == 0 )
          {
             AddWhere(sWhereString, "((char_length(trim(trailing ' ' from T2.ProjectName))=0))");
          }
-         if ( ! (DateTime.MinValue==AV58Workhourloglistds_6_tfworkhourlogdate) )
+         if ( ! (DateTime.MinValue==AV59Workhourloglistds_6_tfworkhourlogdate) )
          {
-            AddWhere(sWhereString, "(T1.WorkHourLogDate >= :AV58Workhourloglistds_6_tfworkhourlogdate)");
+            AddWhere(sWhereString, "(T1.WorkHourLogDate >= :AV59Workhourloglistds_6_tfworkhourlogdate)");
          }
          else
          {
             GXv_int7[8] = 1;
          }
-         if ( ! (DateTime.MinValue==AV59Workhourloglistds_7_tfworkhourlogdate_to) )
+         if ( ! (DateTime.MinValue==AV60Workhourloglistds_7_tfworkhourlogdate_to) )
          {
-            AddWhere(sWhereString, "(T1.WorkHourLogDate <= :AV59Workhourloglistds_7_tfworkhourlogdate_to)");
+            AddWhere(sWhereString, "(T1.WorkHourLogDate <= :AV60Workhourloglistds_7_tfworkhourlogdate_to)");
          }
          else
          {
             GXv_int7[9] = 1;
          }
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV61Workhourloglistds_9_tfworkhourlogduration_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV60Workhourloglistds_8_tfworkhourlogduration)) ) )
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV62Workhourloglistds_9_tfworkhourlogduration_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV61Workhourloglistds_8_tfworkhourlogduration)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(T1.WorkHourLogDuration) like LOWER(:lV60Workhourloglistds_8_tfworkhourlogduration))");
+            AddWhere(sWhereString, "(LOWER(T1.WorkHourLogDuration) like LOWER(:lV61Workhourloglistds_8_tfworkhourlogduration))");
          }
          else
          {
             GXv_int7[10] = 1;
          }
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV61Workhourloglistds_9_tfworkhourlogduration_sel)) && ! ( StringUtil.StrCmp(AV61Workhourloglistds_9_tfworkhourlogduration_sel, "<#Empty#>") == 0 ) )
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV62Workhourloglistds_9_tfworkhourlogduration_sel)) && ! ( StringUtil.StrCmp(AV62Workhourloglistds_9_tfworkhourlogduration_sel, "<#Empty#>") == 0 ) )
          {
-            AddWhere(sWhereString, "(T1.WorkHourLogDuration = ( :AV61Workhourloglistds_9_tfworkhourlogduration_sel))");
+            AddWhere(sWhereString, "(T1.WorkHourLogDuration = ( :AV62Workhourloglistds_9_tfworkhourlogduration_sel))");
          }
          else
          {
             GXv_int7[11] = 1;
          }
-         if ( StringUtil.StrCmp(AV61Workhourloglistds_9_tfworkhourlogduration_sel, "<#Empty#>") == 0 )
+         if ( StringUtil.StrCmp(AV62Workhourloglistds_9_tfworkhourlogduration_sel, "<#Empty#>") == 0 )
          {
             AddWhere(sWhereString, "((char_length(trim(trailing ' ' from T1.WorkHourLogDuration))=0))");
          }
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV63Workhourloglistds_11_tfworkhourlogdescription_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV62Workhourloglistds_10_tfworkhourlogdescription)) ) )
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV64Workhourloglistds_11_tfworkhourlogdescription_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV63Workhourloglistds_10_tfworkhourlogdescription)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(T1.WorkHourLogDescription) like LOWER(:lV62Workhourloglistds_10_tfworkhourlogdescription))");
+            AddWhere(sWhereString, "(LOWER(T1.WorkHourLogDescription) like LOWER(:lV63Workhourloglistds_10_tfworkhourlogdescription))");
          }
          else
          {
             GXv_int7[12] = 1;
          }
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV63Workhourloglistds_11_tfworkhourlogdescription_sel)) && ! ( StringUtil.StrCmp(AV63Workhourloglistds_11_tfworkhourlogdescription_sel, "<#Empty#>") == 0 ) )
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV64Workhourloglistds_11_tfworkhourlogdescription_sel)) && ! ( StringUtil.StrCmp(AV64Workhourloglistds_11_tfworkhourlogdescription_sel, "<#Empty#>") == 0 ) )
          {
-            AddWhere(sWhereString, "(T1.WorkHourLogDescription = ( :AV63Workhourloglistds_11_tfworkhourlogdescription_sel))");
+            AddWhere(sWhereString, "(T1.WorkHourLogDescription = ( :AV64Workhourloglistds_11_tfworkhourlogdescription_sel))");
          }
          else
          {
             GXv_int7[13] = 1;
          }
-         if ( StringUtil.StrCmp(AV63Workhourloglistds_11_tfworkhourlogdescription_sel, "<#Empty#>") == 0 )
+         if ( StringUtil.StrCmp(AV64Workhourloglistds_11_tfworkhourlogdescription_sel, "<#Empty#>") == 0 )
          {
             AddWhere(sWhereString, "((char_length(trim(trailing ' ' from T1.WorkHourLogDescription))=0))");
          }
@@ -1525,6 +1564,10 @@ namespace GeneXus.Programs {
          {
             GXv_int7[16] = 1;
          }
+         if ( AV51ProjectIds_Count > 0 )
+         {
+            AddWhere(sWhereString, "("+new GxDbmsUtils( new GxPostgreSql()).ValueList(AV51ProjectIds, "T1.ProjectId IN (", ")")+")");
+         }
          scmdbuf += sWhereString;
          scmdbuf += " ORDER BY T1.WorkHourLogDescription";
          GXv_Object8[0] = scmdbuf;
@@ -1539,13 +1582,13 @@ namespace GeneXus.Programs {
          switch ( cursor )
          {
                case 0 :
-                     return conditional_P00872(context, (string)dynConstraints[0] , (string)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (DateTime)dynConstraints[5] , (DateTime)dynConstraints[6] , (string)dynConstraints[7] , (string)dynConstraints[8] , (string)dynConstraints[9] , (string)dynConstraints[10] , (long)dynConstraints[11] , (DateTime)dynConstraints[12] , (DateTime)dynConstraints[13] , (string)dynConstraints[14] , (string)dynConstraints[15] , (string)dynConstraints[16] , (string)dynConstraints[17] , (DateTime)dynConstraints[18] , (long)dynConstraints[19] );
+                     return conditional_P00872(context, (long)dynConstraints[0] , (GxSimpleCollection<long>)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (DateTime)dynConstraints[7] , (DateTime)dynConstraints[8] , (string)dynConstraints[9] , (string)dynConstraints[10] , (string)dynConstraints[11] , (string)dynConstraints[12] , (long)dynConstraints[13] , (DateTime)dynConstraints[14] , (DateTime)dynConstraints[15] , (int)dynConstraints[16] , (string)dynConstraints[17] , (string)dynConstraints[18] , (string)dynConstraints[19] , (string)dynConstraints[20] , (DateTime)dynConstraints[21] , (long)dynConstraints[22] );
                case 1 :
-                     return conditional_P00873(context, (string)dynConstraints[0] , (string)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (DateTime)dynConstraints[5] , (DateTime)dynConstraints[6] , (string)dynConstraints[7] , (string)dynConstraints[8] , (string)dynConstraints[9] , (string)dynConstraints[10] , (long)dynConstraints[11] , (DateTime)dynConstraints[12] , (DateTime)dynConstraints[13] , (string)dynConstraints[14] , (string)dynConstraints[15] , (string)dynConstraints[16] , (string)dynConstraints[17] , (DateTime)dynConstraints[18] , (long)dynConstraints[19] );
+                     return conditional_P00873(context, (long)dynConstraints[0] , (GxSimpleCollection<long>)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (DateTime)dynConstraints[7] , (DateTime)dynConstraints[8] , (string)dynConstraints[9] , (string)dynConstraints[10] , (string)dynConstraints[11] , (string)dynConstraints[12] , (long)dynConstraints[13] , (DateTime)dynConstraints[14] , (DateTime)dynConstraints[15] , (int)dynConstraints[16] , (string)dynConstraints[17] , (string)dynConstraints[18] , (string)dynConstraints[19] , (string)dynConstraints[20] , (DateTime)dynConstraints[21] , (long)dynConstraints[22] );
                case 2 :
-                     return conditional_P00874(context, (string)dynConstraints[0] , (string)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (DateTime)dynConstraints[5] , (DateTime)dynConstraints[6] , (string)dynConstraints[7] , (string)dynConstraints[8] , (string)dynConstraints[9] , (string)dynConstraints[10] , (long)dynConstraints[11] , (DateTime)dynConstraints[12] , (DateTime)dynConstraints[13] , (string)dynConstraints[14] , (string)dynConstraints[15] , (string)dynConstraints[16] , (string)dynConstraints[17] , (DateTime)dynConstraints[18] , (long)dynConstraints[19] );
+                     return conditional_P00874(context, (long)dynConstraints[0] , (GxSimpleCollection<long>)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (DateTime)dynConstraints[7] , (DateTime)dynConstraints[8] , (string)dynConstraints[9] , (string)dynConstraints[10] , (string)dynConstraints[11] , (string)dynConstraints[12] , (long)dynConstraints[13] , (DateTime)dynConstraints[14] , (DateTime)dynConstraints[15] , (int)dynConstraints[16] , (string)dynConstraints[17] , (string)dynConstraints[18] , (string)dynConstraints[19] , (string)dynConstraints[20] , (DateTime)dynConstraints[21] , (long)dynConstraints[22] );
                case 3 :
-                     return conditional_P00875(context, (string)dynConstraints[0] , (string)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (DateTime)dynConstraints[5] , (DateTime)dynConstraints[6] , (string)dynConstraints[7] , (string)dynConstraints[8] , (string)dynConstraints[9] , (string)dynConstraints[10] , (long)dynConstraints[11] , (DateTime)dynConstraints[12] , (DateTime)dynConstraints[13] , (string)dynConstraints[14] , (string)dynConstraints[15] , (string)dynConstraints[16] , (string)dynConstraints[17] , (DateTime)dynConstraints[18] , (long)dynConstraints[19] );
+                     return conditional_P00875(context, (long)dynConstraints[0] , (GxSimpleCollection<long>)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (DateTime)dynConstraints[7] , (DateTime)dynConstraints[8] , (string)dynConstraints[9] , (string)dynConstraints[10] , (string)dynConstraints[11] , (string)dynConstraints[12] , (long)dynConstraints[13] , (DateTime)dynConstraints[14] , (DateTime)dynConstraints[15] , (int)dynConstraints[16] , (string)dynConstraints[17] , (string)dynConstraints[18] , (string)dynConstraints[19] , (string)dynConstraints[20] , (DateTime)dynConstraints[21] , (long)dynConstraints[22] );
          }
          return base.getDynamicStatement(cursor, context, dynConstraints);
       }
@@ -1568,80 +1611,80 @@ namespace GeneXus.Programs {
        {
           Object[] prmP00872;
           prmP00872 = new Object[] {
-          new ParDef("lV53Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV53Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV53Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV53Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV54Workhourloglistds_2_tfemployeename",GXType.Char,100,0) ,
-          new ParDef("AV55Workhourloglistds_3_tfemployeename_sel",GXType.Char,100,0) ,
-          new ParDef("lV56Workhourloglistds_4_tfprojectname",GXType.Char,100,0) ,
-          new ParDef("AV57Workhourloglistds_5_tfprojectname_sel",GXType.Char,100,0) ,
-          new ParDef("AV58Workhourloglistds_6_tfworkhourlogdate",GXType.Date,8,0) ,
-          new ParDef("AV59Workhourloglistds_7_tfworkhourlogdate_to",GXType.Date,8,0) ,
-          new ParDef("lV60Workhourloglistds_8_tfworkhourlogduration",GXType.VarChar,40,3) ,
-          new ParDef("AV61Workhourloglistds_9_tfworkhourlogduration_sel",GXType.VarChar,40,3) ,
-          new ParDef("lV62Workhourloglistds_10_tfworkhourlogdescription",GXType.VarChar,200,0) ,
-          new ParDef("AV63Workhourloglistds_11_tfworkhourlogdescription_sel",GXType.VarChar,200,0) ,
+          new ParDef("lV54Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("lV54Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("lV54Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("lV54Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("lV55Workhourloglistds_2_tfemployeename",GXType.Char,100,0) ,
+          new ParDef("AV56Workhourloglistds_3_tfemployeename_sel",GXType.Char,100,0) ,
+          new ParDef("lV57Workhourloglistds_4_tfprojectname",GXType.Char,100,0) ,
+          new ParDef("AV58Workhourloglistds_5_tfprojectname_sel",GXType.Char,100,0) ,
+          new ParDef("AV59Workhourloglistds_6_tfworkhourlogdate",GXType.Date,8,0) ,
+          new ParDef("AV60Workhourloglistds_7_tfworkhourlogdate_to",GXType.Date,8,0) ,
+          new ParDef("lV61Workhourloglistds_8_tfworkhourlogduration",GXType.VarChar,40,3) ,
+          new ParDef("AV62Workhourloglistds_9_tfworkhourlogduration_sel",GXType.VarChar,40,3) ,
+          new ParDef("lV63Workhourloglistds_10_tfworkhourlogdescription",GXType.VarChar,200,0) ,
+          new ParDef("AV64Workhourloglistds_11_tfworkhourlogdescription_sel",GXType.VarChar,200,0) ,
           new ParDef("AV50EmployeeId",GXType.Int64,10,0) ,
           new ParDef("AV48FromDate",GXType.Date,8,0) ,
           new ParDef("AV49ToDate",GXType.Date,8,0)
           };
           Object[] prmP00873;
           prmP00873 = new Object[] {
-          new ParDef("lV53Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV53Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV53Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV53Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV54Workhourloglistds_2_tfemployeename",GXType.Char,100,0) ,
-          new ParDef("AV55Workhourloglistds_3_tfemployeename_sel",GXType.Char,100,0) ,
-          new ParDef("lV56Workhourloglistds_4_tfprojectname",GXType.Char,100,0) ,
-          new ParDef("AV57Workhourloglistds_5_tfprojectname_sel",GXType.Char,100,0) ,
-          new ParDef("AV58Workhourloglistds_6_tfworkhourlogdate",GXType.Date,8,0) ,
-          new ParDef("AV59Workhourloglistds_7_tfworkhourlogdate_to",GXType.Date,8,0) ,
-          new ParDef("lV60Workhourloglistds_8_tfworkhourlogduration",GXType.VarChar,40,3) ,
-          new ParDef("AV61Workhourloglistds_9_tfworkhourlogduration_sel",GXType.VarChar,40,3) ,
-          new ParDef("lV62Workhourloglistds_10_tfworkhourlogdescription",GXType.VarChar,200,0) ,
-          new ParDef("AV63Workhourloglistds_11_tfworkhourlogdescription_sel",GXType.VarChar,200,0) ,
+          new ParDef("lV54Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("lV54Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("lV54Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("lV54Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("lV55Workhourloglistds_2_tfemployeename",GXType.Char,100,0) ,
+          new ParDef("AV56Workhourloglistds_3_tfemployeename_sel",GXType.Char,100,0) ,
+          new ParDef("lV57Workhourloglistds_4_tfprojectname",GXType.Char,100,0) ,
+          new ParDef("AV58Workhourloglistds_5_tfprojectname_sel",GXType.Char,100,0) ,
+          new ParDef("AV59Workhourloglistds_6_tfworkhourlogdate",GXType.Date,8,0) ,
+          new ParDef("AV60Workhourloglistds_7_tfworkhourlogdate_to",GXType.Date,8,0) ,
+          new ParDef("lV61Workhourloglistds_8_tfworkhourlogduration",GXType.VarChar,40,3) ,
+          new ParDef("AV62Workhourloglistds_9_tfworkhourlogduration_sel",GXType.VarChar,40,3) ,
+          new ParDef("lV63Workhourloglistds_10_tfworkhourlogdescription",GXType.VarChar,200,0) ,
+          new ParDef("AV64Workhourloglistds_11_tfworkhourlogdescription_sel",GXType.VarChar,200,0) ,
           new ParDef("AV50EmployeeId",GXType.Int64,10,0) ,
           new ParDef("AV48FromDate",GXType.Date,8,0) ,
           new ParDef("AV49ToDate",GXType.Date,8,0)
           };
           Object[] prmP00874;
           prmP00874 = new Object[] {
-          new ParDef("lV53Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV53Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV53Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV53Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV54Workhourloglistds_2_tfemployeename",GXType.Char,100,0) ,
-          new ParDef("AV55Workhourloglistds_3_tfemployeename_sel",GXType.Char,100,0) ,
-          new ParDef("lV56Workhourloglistds_4_tfprojectname",GXType.Char,100,0) ,
-          new ParDef("AV57Workhourloglistds_5_tfprojectname_sel",GXType.Char,100,0) ,
-          new ParDef("AV58Workhourloglistds_6_tfworkhourlogdate",GXType.Date,8,0) ,
-          new ParDef("AV59Workhourloglistds_7_tfworkhourlogdate_to",GXType.Date,8,0) ,
-          new ParDef("lV60Workhourloglistds_8_tfworkhourlogduration",GXType.VarChar,40,3) ,
-          new ParDef("AV61Workhourloglistds_9_tfworkhourlogduration_sel",GXType.VarChar,40,3) ,
-          new ParDef("lV62Workhourloglistds_10_tfworkhourlogdescription",GXType.VarChar,200,0) ,
-          new ParDef("AV63Workhourloglistds_11_tfworkhourlogdescription_sel",GXType.VarChar,200,0) ,
+          new ParDef("lV54Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("lV54Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("lV54Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("lV54Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("lV55Workhourloglistds_2_tfemployeename",GXType.Char,100,0) ,
+          new ParDef("AV56Workhourloglistds_3_tfemployeename_sel",GXType.Char,100,0) ,
+          new ParDef("lV57Workhourloglistds_4_tfprojectname",GXType.Char,100,0) ,
+          new ParDef("AV58Workhourloglistds_5_tfprojectname_sel",GXType.Char,100,0) ,
+          new ParDef("AV59Workhourloglistds_6_tfworkhourlogdate",GXType.Date,8,0) ,
+          new ParDef("AV60Workhourloglistds_7_tfworkhourlogdate_to",GXType.Date,8,0) ,
+          new ParDef("lV61Workhourloglistds_8_tfworkhourlogduration",GXType.VarChar,40,3) ,
+          new ParDef("AV62Workhourloglistds_9_tfworkhourlogduration_sel",GXType.VarChar,40,3) ,
+          new ParDef("lV63Workhourloglistds_10_tfworkhourlogdescription",GXType.VarChar,200,0) ,
+          new ParDef("AV64Workhourloglistds_11_tfworkhourlogdescription_sel",GXType.VarChar,200,0) ,
           new ParDef("AV50EmployeeId",GXType.Int64,10,0) ,
           new ParDef("AV48FromDate",GXType.Date,8,0) ,
           new ParDef("AV49ToDate",GXType.Date,8,0)
           };
           Object[] prmP00875;
           prmP00875 = new Object[] {
-          new ParDef("lV53Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV53Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV53Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV53Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV54Workhourloglistds_2_tfemployeename",GXType.Char,100,0) ,
-          new ParDef("AV55Workhourloglistds_3_tfemployeename_sel",GXType.Char,100,0) ,
-          new ParDef("lV56Workhourloglistds_4_tfprojectname",GXType.Char,100,0) ,
-          new ParDef("AV57Workhourloglistds_5_tfprojectname_sel",GXType.Char,100,0) ,
-          new ParDef("AV58Workhourloglistds_6_tfworkhourlogdate",GXType.Date,8,0) ,
-          new ParDef("AV59Workhourloglistds_7_tfworkhourlogdate_to",GXType.Date,8,0) ,
-          new ParDef("lV60Workhourloglistds_8_tfworkhourlogduration",GXType.VarChar,40,3) ,
-          new ParDef("AV61Workhourloglistds_9_tfworkhourlogduration_sel",GXType.VarChar,40,3) ,
-          new ParDef("lV62Workhourloglistds_10_tfworkhourlogdescription",GXType.VarChar,200,0) ,
-          new ParDef("AV63Workhourloglistds_11_tfworkhourlogdescription_sel",GXType.VarChar,200,0) ,
+          new ParDef("lV54Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("lV54Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("lV54Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("lV54Workhourloglistds_1_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("lV55Workhourloglistds_2_tfemployeename",GXType.Char,100,0) ,
+          new ParDef("AV56Workhourloglistds_3_tfemployeename_sel",GXType.Char,100,0) ,
+          new ParDef("lV57Workhourloglistds_4_tfprojectname",GXType.Char,100,0) ,
+          new ParDef("AV58Workhourloglistds_5_tfprojectname_sel",GXType.Char,100,0) ,
+          new ParDef("AV59Workhourloglistds_6_tfworkhourlogdate",GXType.Date,8,0) ,
+          new ParDef("AV60Workhourloglistds_7_tfworkhourlogdate_to",GXType.Date,8,0) ,
+          new ParDef("lV61Workhourloglistds_8_tfworkhourlogduration",GXType.VarChar,40,3) ,
+          new ParDef("AV62Workhourloglistds_9_tfworkhourlogduration_sel",GXType.VarChar,40,3) ,
+          new ParDef("lV63Workhourloglistds_10_tfworkhourlogdescription",GXType.VarChar,200,0) ,
+          new ParDef("AV64Workhourloglistds_11_tfworkhourlogdescription_sel",GXType.VarChar,200,0) ,
           new ParDef("AV50EmployeeId",GXType.Int64,10,0) ,
           new ParDef("AV48FromDate",GXType.Date,8,0) ,
           new ParDef("AV49ToDate",GXType.Date,8,0)
@@ -1662,8 +1705,8 @@ namespace GeneXus.Programs {
        switch ( cursor )
        {
              case 0 :
-                ((long[]) buf[0])[0] = rslt.getLong(1);
-                ((string[]) buf[1])[0] = rslt.getString(2, 100);
+                ((string[]) buf[0])[0] = rslt.getString(1, 100);
+                ((long[]) buf[1])[0] = rslt.getLong(2);
                 ((long[]) buf[2])[0] = rslt.getLong(3);
                 ((string[]) buf[3])[0] = rslt.getLongVarchar(4);
                 ((string[]) buf[4])[0] = rslt.getVarchar(5);
@@ -1672,8 +1715,8 @@ namespace GeneXus.Programs {
                 ((long[]) buf[7])[0] = rslt.getLong(8);
                 return;
              case 1 :
-                ((long[]) buf[0])[0] = rslt.getLong(1);
-                ((string[]) buf[1])[0] = rslt.getString(2, 100);
+                ((string[]) buf[0])[0] = rslt.getString(1, 100);
+                ((long[]) buf[1])[0] = rslt.getLong(2);
                 ((long[]) buf[2])[0] = rslt.getLong(3);
                 ((string[]) buf[3])[0] = rslt.getLongVarchar(4);
                 ((string[]) buf[4])[0] = rslt.getVarchar(5);
@@ -1682,8 +1725,8 @@ namespace GeneXus.Programs {
                 ((long[]) buf[7])[0] = rslt.getLong(8);
                 return;
              case 2 :
-                ((long[]) buf[0])[0] = rslt.getLong(1);
-                ((string[]) buf[1])[0] = rslt.getVarchar(2);
+                ((string[]) buf[0])[0] = rslt.getVarchar(1);
+                ((long[]) buf[1])[0] = rslt.getLong(2);
                 ((long[]) buf[2])[0] = rslt.getLong(3);
                 ((string[]) buf[3])[0] = rslt.getLongVarchar(4);
                 ((DateTime[]) buf[4])[0] = rslt.getGXDate(5);
@@ -1692,8 +1735,8 @@ namespace GeneXus.Programs {
                 ((long[]) buf[7])[0] = rslt.getLong(8);
                 return;
              case 3 :
-                ((long[]) buf[0])[0] = rslt.getLong(1);
-                ((string[]) buf[1])[0] = rslt.getLongVarchar(2);
+                ((string[]) buf[0])[0] = rslt.getLongVarchar(1);
+                ((long[]) buf[1])[0] = rslt.getLong(2);
                 ((long[]) buf[2])[0] = rslt.getLong(3);
                 ((string[]) buf[3])[0] = rslt.getVarchar(4);
                 ((DateTime[]) buf[4])[0] = rslt.getGXDate(5);

@@ -1785,9 +1785,7 @@ namespace GeneXus.Programs {
          }
          /* Filterfulltext_Controlvaluechanged Routine */
          returnInSub = false;
-         /* Execute user subroutine: 'LOADREGFILTERSSTATE' */
-         S182 ();
-         if (returnInSub) return;
+         GX_msglist.addItem(AV13FilterFullText);
          /* Execute user subroutine: 'GETDATA' */
          S112 ();
          if (returnInSub) return;
@@ -1807,9 +1805,9 @@ namespace GeneXus.Programs {
       {
          /* 'GETDATA' Routine */
          returnInSub = false;
-         new logtofile(context ).execute(  StringUtil.Str( (decimal)(AV34EmployeeId), 10, 0)+","+context.localUtil.DToC( AV35FromDate, 2, "/")+","+context.localUtil.DToC( AV36ToDate, 2, "/")+","+AV39ProjectIds.ToJSonString(false)) ;
          GXt_objcol_SdtSDTWorkHourLog_SDTWorkHourLogItem4 = AV14SDTWorkHourLog;
-         new dpworkhourlog(context ).execute(  AV34EmployeeId,  AV35FromDate,  AV36ToDate,  AV39ProjectIds,  "car", out  GXt_objcol_SdtSDTWorkHourLog_SDTWorkHourLogItem4) ;
+         GXt_objcol_SdtSDTWorkHourLog_SDTWorkHourLogItem5 = new GXBaseCollection<SdtSDTWorkHourLog_SDTWorkHourLogItem>();
+         new dpworkhourlog(context ).execute(  AV34EmployeeId,  AV35FromDate,  AV36ToDate,  AV39ProjectIds,  (string)(GXt_objcol_SdtSDTWorkHourLog_SDTWorkHourLogItem4), out  GXt_objcol_SdtSDTWorkHourLog_SDTWorkHourLogItem5) ;
          AV14SDTWorkHourLog = GXt_objcol_SdtSDTWorkHourLog_SDTWorkHourLogItem4;
          gx_BV39 = true;
       }
@@ -1937,7 +1935,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247227564458", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247228473161", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1953,7 +1951,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("workhourlogdetail.js", "?20247227564459", false, true);
+         context.AddJavascriptSource("workhourlogdetail.js", "?20247228473161", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -2443,8 +2441,8 @@ namespace GeneXus.Programs {
          setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED",",oparms:[{av:'AV24ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV11GridState',fld:'vGRIDSTATE',pic:''},{av:'AV13FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV19ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{ctrl:'SDTWORKHOURLOG__EMPLOYEENAME',prop:'Visible'},{ctrl:'SDTWORKHOURLOG__PROJECTNAME',prop:'Visible'},{ctrl:'SDTWORKHOURLOG__WORKHOURLOGDATE',prop:'Visible'},{ctrl:'SDTWORKHOURLOG__WORKHOURLOGDURATION',prop:'Visible'},{ctrl:'SDTWORKHOURLOG__WORKHOURLOGDESCRIPTION',prop:'Visible'},{av:'AV27GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV28GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV29GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'AV22ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''}]}");
          setEventMetadata("'DOUSERACTION1'","{handler:'E15532',iparms:[{av:'AV14SDTWorkHourLog',fld:'vSDTWORKHOURLOG',grid:39,pic:''},{av:'nGXsfl_39_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:39},{av:'GRID_nFirstRecordOnPage'},{av:'nRC_GXsfl_39',ctrl:'GRID',prop:'GridRC',grid:39},{av:'AV52Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV11GridState',fld:'vGRIDSTATE',pic:''}]");
          setEventMetadata("'DOUSERACTION1'",",oparms:[{av:'Innewwindow1_Name',ctrl:'INNEWWINDOW1',prop:'Name'},{av:'Innewwindow1_Target',ctrl:'INNEWWINDOW1',prop:'Target'},{av:'AV11GridState',fld:'vGRIDSTATE',pic:''},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'AV14SDTWorkHourLog',fld:'vSDTWORKHOURLOG',grid:39,pic:''},{av:'nGXsfl_39_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:39},{av:'nRC_GXsfl_39',ctrl:'GRID',prop:'GridRC',grid:39},{av:'AV24ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV19ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV52Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV13FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV34EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9',hsh:true},{av:'AV35FromDate',fld:'vFROMDATE',pic:'',hsh:true},{av:'AV36ToDate',fld:'vTODATE',pic:'',hsh:true},{av:'AV39ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true}]}");
-         setEventMetadata("VFILTERFULLTEXT.CONTROLVALUECHANGED","{handler:'E16532',iparms:[{av:'AV11GridState',fld:'vGRIDSTATE',pic:''},{av:'AV34EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9',hsh:true},{av:'AV35FromDate',fld:'vFROMDATE',pic:'',hsh:true},{av:'AV36ToDate',fld:'vTODATE',pic:'',hsh:true},{av:'AV39ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV14SDTWorkHourLog',fld:'vSDTWORKHOURLOG',grid:39,pic:''},{av:'nGXsfl_39_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:39},{av:'GRID_nFirstRecordOnPage'},{av:'nRC_GXsfl_39',ctrl:'GRID',prop:'GridRC',grid:39},{av:'GRID_nEOF'},{av:'AV24ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV19ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV52Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV13FilterFullText',fld:'vFILTERFULLTEXT',pic:''}]");
-         setEventMetadata("VFILTERFULLTEXT.CONTROLVALUECHANGED",",oparms:[{av:'AV13FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV14SDTWorkHourLog',fld:'vSDTWORKHOURLOG',grid:39,pic:''},{av:'nGXsfl_39_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:39},{av:'GRID_nFirstRecordOnPage'},{av:'nRC_GXsfl_39',ctrl:'GRID',prop:'GridRC',grid:39}]}");
+         setEventMetadata("VFILTERFULLTEXT.CONTROLVALUECHANGED","{handler:'E16532',iparms:[{av:'AV13FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV34EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9',hsh:true},{av:'AV35FromDate',fld:'vFROMDATE',pic:'',hsh:true},{av:'AV36ToDate',fld:'vTODATE',pic:'',hsh:true},{av:'AV39ProjectIds',fld:'vPROJECTIDS',pic:'',hsh:true},{av:'AV14SDTWorkHourLog',fld:'vSDTWORKHOURLOG',grid:39,pic:''},{av:'nGXsfl_39_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:39},{av:'GRID_nFirstRecordOnPage'},{av:'nRC_GXsfl_39',ctrl:'GRID',prop:'GridRC',grid:39},{av:'GRID_nEOF'},{av:'AV24ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV19ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV52Pgmname',fld:'vPGMNAME',pic:'',hsh:true}]");
+         setEventMetadata("VFILTERFULLTEXT.CONTROLVALUECHANGED",",oparms:[{av:'AV14SDTWorkHourLog',fld:'vSDTWORKHOURLOG',grid:39,pic:''},{av:'nGXsfl_39_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:39},{av:'GRID_nFirstRecordOnPage'},{av:'nRC_GXsfl_39',ctrl:'GRID',prop:'GridRC',grid:39}]}");
          setEventMetadata("NULL","{handler:'Validv_Gxv11',iparms:[]");
          setEventMetadata("NULL",",oparms:[]}");
          return  ;
@@ -2524,6 +2522,7 @@ namespace GeneXus.Programs {
          GXt_objcol_SdtDVB_SDTDropDownOptionsData_Item3 = new GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsData_Item>( context, "Item", "");
          AV12GridStateFilterValue = new GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue(context);
          GXt_objcol_SdtSDTWorkHourLog_SDTWorkHourLogItem4 = new GXBaseCollection<SdtSDTWorkHourLog_SDTWorkHourLogItem>( context, "SDTWorkHourLogItem", "YTT_version4");
+         GXt_objcol_SdtSDTWorkHourLog_SDTWorkHourLogItem5 = new GXBaseCollection<SdtSDTWorkHourLog_SDTWorkHourLogItem>( context, "SDTWorkHourLogItem", "YTT_version4");
          ucDdo_managefilters = new GXUserControl();
          Ddo_managefilters_Caption = "";
          BackMsgLst = new msglist();
@@ -2754,6 +2753,7 @@ namespace GeneXus.Programs {
       private GxHttpRequest AV8HTTPRequest ;
       private GXBaseCollection<SdtSDTWorkHourLog_SDTWorkHourLogItem> AV14SDTWorkHourLog ;
       private GXBaseCollection<SdtSDTWorkHourLog_SDTWorkHourLogItem> GXt_objcol_SdtSDTWorkHourLog_SDTWorkHourLogItem4 ;
+      private GXBaseCollection<SdtSDTWorkHourLog_SDTWorkHourLogItem> GXt_objcol_SdtSDTWorkHourLog_SDTWorkHourLogItem5 ;
       private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsData_Item> AV22ManageFiltersData ;
       private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsData_Item> GXt_objcol_SdtDVB_SDTDropDownOptionsData_Item3 ;
       private GXWebForm Form ;

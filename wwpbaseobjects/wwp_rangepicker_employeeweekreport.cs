@@ -103,8 +103,22 @@ namespace GeneXus.Programs.wwpbaseobjects {
             AV12WeekStartDate = DateTimeUtil.DAdd( AV12WeekStartDate, (7));
             AV13Count = (short)(AV13Count-1);
          }
-         new GeneXus.Programs.wwpbaseobjects.wwp_rangepicker_addpredefinedrange(context ).gxep_lastweek( ref  AV8PickerOptions) ;
-         new GeneXus.Programs.wwpbaseobjects.wwp_rangepicker_addpredefinedrange(context ).gxep_thisweek( ref  AV8PickerOptions) ;
+         AV12WeekStartDate = DateTimeUtil.DAdd( Gx_date, (-1*(DateTimeUtil.Dow( Gx_date)-2)));
+         AV14ThisWeekRange = new GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions_RangesItem(context);
+         GXt_dtime1 = DateTimeUtil.ResetTime( AV12WeekStartDate ) ;
+         AV14ThisWeekRange.gxTpr_Startdate = GXt_dtime1;
+         GXt_dtime1 = DateTimeUtil.ResetTime( DateTimeUtil.DAdd( AV12WeekStartDate, (6)) ) ;
+         AV14ThisWeekRange.gxTpr_Enddate = GXt_dtime1;
+         AV14ThisWeekRange.gxTpr_Displayname = "This Week";
+         AV12WeekStartDate = DateTimeUtil.DAdd( AV12WeekStartDate, (-7));
+         AV15LastWeekRange = new GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions_RangesItem(context);
+         GXt_dtime1 = DateTimeUtil.ResetTime( AV12WeekStartDate ) ;
+         AV15LastWeekRange.gxTpr_Startdate = GXt_dtime1;
+         GXt_dtime1 = DateTimeUtil.ResetTime( DateTimeUtil.DAdd( AV12WeekStartDate, (6)) ) ;
+         AV15LastWeekRange.gxTpr_Enddate = GXt_dtime1;
+         AV15LastWeekRange.gxTpr_Displayname = "Last Week";
+         AV8PickerOptions.gxTpr_Ranges.Add(AV15LastWeekRange, 0);
+         AV8PickerOptions.gxTpr_Ranges.Add(AV14ThisWeekRange, 0);
          this.cleanup();
       }
 
@@ -135,10 +149,12 @@ namespace GeneXus.Programs.wwpbaseobjects {
          AV8PickerOptions = new GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions(context);
          AV11Range = new GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions_RangesItem(context);
          AV12WeekStartDate = DateTime.MinValue;
-         GXt_dtime1 = (DateTime)(DateTime.MinValue);
          GXt_char2 = "";
          GXt_char3 = "";
          Gx_date = DateTime.MinValue;
+         AV14ThisWeekRange = new GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions_RangesItem(context);
+         AV15LastWeekRange = new GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions_RangesItem(context);
+         GXt_dtime1 = (DateTime)(DateTime.MinValue);
          Gx_date = DateTimeUtil.Today( context);
          /* GeneXus formulas. */
          Gx_date = DateTimeUtil.Today( context);
@@ -154,6 +170,8 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions aP0_PickerOptions ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions AV8PickerOptions ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions_RangesItem AV11Range ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions_RangesItem AV14ThisWeekRange ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions_RangesItem AV15LastWeekRange ;
    }
 
 }
