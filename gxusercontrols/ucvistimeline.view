@@ -6,7 +6,7 @@
 </div>
 <br />
 
-<div id="visualization" style="">
+<div id="visualization" style="position: relative; max-height: 1200px;overflow:auto">
 </div>
 <div id="key" style="display:flex; margin-top: 10px">
 	<div style="display:flex;">
