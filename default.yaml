@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: "YTT_version4"
-  version: "20240722202711"
+  version: "20240724101005"
 servers:
   - url: http://localhost:8082/YTT_version4NETPostgreSQL14/rest
 paths:
@@ -1582,6 +1582,31 @@ paths:
       responses:
         200:
           description: "Successful operation"
+        404:
+          description: "Not found"
+  /SiteSettingLoadDVCombo:
+    post:
+      tags:
+        - SiteSettingLoadDVCombo
+      operationId: "SiteSettingLoadDVCombo"
+      summary: "Site Setting Load DVCombo"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SiteSettingLoadDVComboInput"
+
+
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SiteSettingLoadDVComboOutput"
         404:
           description: "Not found"
   /TestProjectLogsByEmployeeGetFilterData:
@@ -3673,6 +3698,14 @@ components:
       properties:
         isInactive:
           type: "boolean"
+    SiteSettingLoadDVComboOutput:
+      properties:
+        SelectedValue:
+          type: "string"
+        SelectedText:
+          type: "string"
+        Combo_DataJson:
+          type: "string"
     TestProjectLogsByEmployeeGetFilterDataOutput:
       properties:
         OptionsJson:
@@ -4099,6 +4132,19 @@ components:
         LeaveRequestId:
           type: "integer"
           format: "int64"
+    SiteSettingLoadDVComboInput:
+      properties:
+        ComboName:
+          type: "string"
+        TrnMode:
+          type: "string"
+        IsDynamicCall:
+          type: "boolean"
+        SiteSettingId:
+          type: "integer"
+          format: "int64"
+        SearchTxtParms:
+          type: "string"
     TestProjectLogsByEmployeeGetFilterDataInput:
       properties:
         DDOName:

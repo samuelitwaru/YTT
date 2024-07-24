@@ -573,11 +573,24 @@ namespace GeneXus.Programs {
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "CellPaddingTop", "start", "top", " "+"data-gx-smarttable-cell"+" ", "display:flex;justify-content:flex-end;align-items:center;", "div");
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 42,'',false,'',0)\"";
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "", "start", "top", " "+"data-gx-smarttable-cell"+" ", "display:flex;justify-content:flex-end;align-items:center;", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, divUnnamedtable2_Internalname, 1, 0, "px", 0, "px", "Flex", "start", "top", " "+"data-gx-flex"+" ", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "CellPaddingTop", "start", "top", "", "flex-grow:1;", "div");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 44,'',false,'',0)\"";
             ClassString = "Button";
             StyleString = "";
             GxWebStd.gx_button_ctrl( context, bttBtnreport_Internalname, "", "Report", bttBtnreport_Jsonclick, 5, "Report", "", StyleString, ClassString, 1, 1, "standard", "'"+""+"'"+",false,"+"'"+"E\\'DOREPORT\\'."+"'", TempTags, "", context.GetButtonType( ), "HLP_LeaveCalendar.htm");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "CellPaddingTop", "start", "top", "", "flex-grow:1;", "div");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 46,'',false,'',0)\"";
+            ClassString = "Button";
+            StyleString = "";
+            GxWebStd.gx_button_ctrl( context, bttBtnexportics_Internalname, "", "Export ICS", bttBtnexportics_Jsonclick, 5, "Export ICS", "", StyleString, ClassString, 1, 1, "standard", "'"+""+"'"+",false,"+"'"+"E\\'DOEXPORTICS\\'."+"'", TempTags, "", context.GetButtonType( ), "HLP_LeaveCalendar.htm");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -603,7 +616,7 @@ namespace GeneXus.Programs {
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 hidden-xs hidden-sm hidden-md hidden-lg", "start", "top", "", "", "div");
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 51,'',false,'',0)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 55,'',false,'',0)\"";
             ClassString = "ButtonMaterial";
             StyleString = "";
             GxWebStd.gx_button_ctrl( context, bttBtnuseraction1_Internalname, "", "Popup", bttBtnuseraction1_Jsonclick, 7, "Popup", "", StyleString, ClassString, 1, 1, "standard", "'"+""+"'"+",false,"+"'"+"e11561_client"+"'", TempTags, "", 2, "HLP_LeaveCalendar.htm");
@@ -623,16 +636,16 @@ namespace GeneXus.Programs {
             ucDaterange_rangepicker.SetProperty("End Date", AV16DateRange_To);
             ucDaterange_rangepicker.SetProperty("PickerOptions", AV17DateRange_RangePickerOptions);
             ucDaterange_rangepicker.Render(context, "wwp.daterangepicker", Daterange_rangepicker_Internalname, "DATERANGE_RANGEPICKERContainer");
-            wb_table1_56_562( true) ;
+            wb_table1_60_562( true) ;
          }
          else
          {
-            wb_table1_56_562( false) ;
+            wb_table1_60_562( false) ;
          }
          return  ;
       }
 
-      protected void wb_table1_56_562e( bool wbgen )
+      protected void wb_table1_60_562e( bool wbgen )
       {
          if ( wbgen )
          {
@@ -641,16 +654,16 @@ namespace GeneXus.Programs {
             if ( ! isFullAjaxMode( ) )
             {
                /* WebComponent */
-               GxWebStd.gx_hidden_field( context, "W0062"+"", StringUtil.RTrim( WebComp_Wwpaux_wc_Component));
+               GxWebStd.gx_hidden_field( context, "W0066"+"", StringUtil.RTrim( WebComp_Wwpaux_wc_Component));
                context.WriteHtmlText( "<div") ;
                GxWebStd.ClassAttribute( context, "gxwebcomponent");
-               context.WriteHtmlText( " id=\""+"gxHTMLWrpW0062"+""+"\""+"") ;
+               context.WriteHtmlText( " id=\""+"gxHTMLWrpW0066"+""+"\""+"") ;
                context.WriteHtmlText( ">") ;
                if ( StringUtil.Len( WebComp_Wwpaux_wc_Component) != 0 )
                {
                   if ( StringUtil.StrCmp(StringUtil.Lower( OldWwpaux_wc), StringUtil.Lower( WebComp_Wwpaux_wc_Component)) != 0 )
                   {
-                     context.httpAjaxContext.ajax_rspStartCmp("gxHTMLWrpW0062"+"");
+                     context.httpAjaxContext.ajax_rspStartCmp("gxHTMLWrpW0066"+"");
                   }
                   WebComp_Wwpaux_wc.componentdraw();
                   if ( StringUtil.StrCmp(StringUtil.Lower( OldWwpaux_wc), StringUtil.Lower( WebComp_Wwpaux_wc_Component)) != 0 )
@@ -752,30 +765,37 @@ namespace GeneXus.Programs {
                               /* Execute user event: 'DoReport' */
                               E15562 ();
                            }
-                           else if ( StringUtil.StrCmp(sEvt, "VPROJECTID.CONTROLVALUECHANGED") == 0 )
+                           else if ( StringUtil.StrCmp(sEvt, "'DOEXPORTICS'") == 0 )
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
+                              /* Execute user event: 'DoExportICS' */
                               E16562 ();
                            }
-                           else if ( StringUtil.StrCmp(sEvt, "VCOMPANYLOCATIONID.CONTROLVALUECHANGED") == 0 )
+                           else if ( StringUtil.StrCmp(sEvt, "VPROJECTID.CONTROLVALUECHANGED") == 0 )
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
                               E17562 ();
                            }
-                           else if ( StringUtil.StrCmp(sEvt, "GLOBALEVENTS.LEAVEREQUESTSTATUSCHANGED") == 0 )
+                           else if ( StringUtil.StrCmp(sEvt, "VCOMPANYLOCATIONID.CONTROLVALUECHANGED") == 0 )
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
                               E18562 ();
+                           }
+                           else if ( StringUtil.StrCmp(sEvt, "GLOBALEVENTS.LEAVEREQUESTSTATUSCHANGED") == 0 )
+                           {
+                              context.wbHandled = 1;
+                              dynload_actions( ) ;
+                              E19562 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "LOAD") == 0 )
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
                               /* Execute user event: Load */
-                              E19562 ();
+                              E20562 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "ENTER") == 0 )
                            {
@@ -806,9 +826,9 @@ namespace GeneXus.Programs {
                         sEvtType = StringUtil.Left( sEvt, 4);
                         sEvt = StringUtil.Right( sEvt, (short)(StringUtil.Len( sEvt)-4));
                         nCmpId = (short)(Math.Round(NumberUtil.Val( sEvtType, "."), 18, MidpointRounding.ToEven));
-                        if ( nCmpId == 62 )
+                        if ( nCmpId == 66 )
                         {
-                           OldWwpaux_wc = cgiGet( "W0062");
+                           OldWwpaux_wc = cgiGet( "W0066");
                            if ( ( StringUtil.Len( OldWwpaux_wc) == 0 ) || ( StringUtil.StrCmp(OldWwpaux_wc, WebComp_Wwpaux_wc_Component) != 0 ) )
                            {
                               WebComp_Wwpaux_wc = getWebComponent(GetType(), "GeneXus.Programs", OldWwpaux_wc, new Object[] {context} );
@@ -818,7 +838,7 @@ namespace GeneXus.Programs {
                            }
                            if ( StringUtil.Len( WebComp_Wwpaux_wc_Component) != 0 )
                            {
-                              WebComp_Wwpaux_wc.componentprocess("W0062", "", sEvt);
+                              WebComp_Wwpaux_wc.componentprocess("W0066", "", sEvt);
                            }
                            WebComp_Wwpaux_wc_Component = OldWwpaux_wc;
                         }
@@ -1092,7 +1112,7 @@ namespace GeneXus.Programs {
          if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
          {
             /* Execute user event: Load */
-            E19562 ();
+            E20562 ();
             WB560( ) ;
          }
       }
@@ -1260,6 +1280,22 @@ namespace GeneXus.Programs {
 
       protected void E16562( )
       {
+         /* 'DoExportICS' Routine */
+         returnInSub = false;
+         new exporticsleaves(context ).execute(  AV10DateRange,  AV16DateRange_To,  AV11CompanyLocationId,  AV28EmployeeIds, out  AV21ExcelFilename, out  AV20ErrorMessage) ;
+         if ( StringUtil.StrCmp(AV21ExcelFilename, "") != 0 )
+         {
+            CallWebObject(formatLink(AV21ExcelFilename) );
+            context.wjLocDisableFrm = 0;
+         }
+         else
+         {
+            GX_msglist.addItem(AV20ErrorMessage);
+         }
+      }
+
+      protected void E17562( )
+      {
          /* Projectid_Controlvaluechanged Routine */
          returnInSub = false;
          /* Execute user subroutine: 'GETDATA' */
@@ -1313,7 +1349,7 @@ namespace GeneXus.Programs {
          context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV7LeaveEventGroups", AV7LeaveEventGroups);
       }
 
-      protected void E17562( )
+      protected void E18562( )
       {
          /* Companylocationid_Controlvaluechanged Routine */
          returnInSub = false;
@@ -1341,7 +1377,7 @@ namespace GeneXus.Programs {
          context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV7LeaveEventGroups", AV7LeaveEventGroups);
       }
 
-      protected void E18562( )
+      protected void E19562( )
       {
          /* General\GlobalEvents_Leaverequeststatuschanged Routine */
          returnInSub = false;
@@ -1368,7 +1404,6 @@ namespace GeneXus.Programs {
       {
          /* 'GETDATA' Routine */
          returnInSub = false;
-         new logtofile(context ).execute(  ">>>>>>> refreshing") ;
          AV28EmployeeIds.Clear();
          AV27ProjectIds.Clear();
          if ( ! (0==AV26ProjectId) )
@@ -1420,13 +1455,13 @@ namespace GeneXus.Programs {
       {
       }
 
-      protected void E19562( )
+      protected void E20562( )
       {
          /* Load Routine */
          returnInSub = false;
       }
 
-      protected void wb_table1_56_562( bool wbgen )
+      protected void wb_table1_60_562( bool wbgen )
       {
          if ( wbgen )
          {
@@ -1449,11 +1484,11 @@ namespace GeneXus.Programs {
             context.WriteHtmlText( "</tbody>") ;
             /* End of table */
             context.WriteHtmlText( "</table>") ;
-            wb_table1_56_562e( true) ;
+            wb_table1_60_562e( true) ;
          }
          else
          {
-            wb_table1_56_562e( false) ;
+            wb_table1_60_562e( false) ;
          }
       }
 
@@ -1505,7 +1540,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202471817285687", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247241323146", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1521,7 +1556,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("leavecalendar.js", "?202471817285688", false, true);
+         context.AddJavascriptSource("leavecalendar.js", "?20247241323146", false, true);
          context.AddJavascriptSource("UserControls/UCToolTipRender.js", "", false, true);
          context.AddJavascriptSource("UserControls/UCVISTimelineRender.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/daterangepicker/locales.js", "", false, true);
@@ -1573,6 +1608,8 @@ namespace GeneXus.Programs {
          divUnnamedtableprojectid_Internalname = "UNNAMEDTABLEPROJECTID";
          divTable1_Internalname = "TABLE1";
          bttBtnreport_Internalname = "BTNREPORT";
+         bttBtnexportics_Internalname = "BTNEXPORTICS";
+         divUnnamedtable2_Internalname = "UNNAMEDTABLE2";
          divUnnamedtable1_Internalname = "UNNAMEDTABLE1";
          divTablecontent_Internalname = "TABLECONTENT";
          Ucvistimeline1_Internalname = "UCVISTIMELINE1";
@@ -1638,13 +1675,15 @@ namespace GeneXus.Programs {
          setEventMetadata("USERACTION1_MODAL.CLOSE",",oparms:[]}");
          setEventMetadata("'DOREPORT'","{handler:'E15562',iparms:[{av:'dynavCompanylocationid'},{av:'AV11CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'},{av:'AV28EmployeeIds',fld:'vEMPLOYEEIDS',pic:''},{av:'AV10DateRange',fld:'vDATERANGE',pic:''}]");
          setEventMetadata("'DOREPORT'",",oparms:[{av:'AV10DateRange',fld:'vDATERANGE',pic:''},{av:'AV28EmployeeIds',fld:'vEMPLOYEEIDS',pic:''}]}");
-         setEventMetadata("VPROJECTID.CONTROLVALUECHANGED","{handler:'E16562',iparms:[{av:'AV10DateRange',fld:'vDATERANGE',pic:''},{av:'AV16DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV6LeaveEvents',fld:'vLEAVEEVENTS',pic:''},{av:'AV7LeaveEventGroups',fld:'vLEAVEEVENTGROUPS',pic:''},{av:'dynavProjectid'},{av:'AV26ProjectId',fld:'vPROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV29IsProjectManager',fld:'vISPROJECTMANAGER',pic:'',hsh:true},{av:'dynavCompanylocationid'},{av:'AV11CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV33Udparg1',fld:'vUDPARG1',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV27ProjectIds',fld:'vPROJECTIDS',pic:''}]");
+         setEventMetadata("'DOEXPORTICS'","{handler:'E16562',iparms:[{av:'AV10DateRange',fld:'vDATERANGE',pic:''},{av:'AV16DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'dynavCompanylocationid'},{av:'AV11CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'},{av:'AV28EmployeeIds',fld:'vEMPLOYEEIDS',pic:''}]");
+         setEventMetadata("'DOEXPORTICS'",",oparms:[]}");
+         setEventMetadata("VPROJECTID.CONTROLVALUECHANGED","{handler:'E17562',iparms:[{av:'AV10DateRange',fld:'vDATERANGE',pic:''},{av:'AV16DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV6LeaveEvents',fld:'vLEAVEEVENTS',pic:''},{av:'AV7LeaveEventGroups',fld:'vLEAVEEVENTGROUPS',pic:''},{av:'dynavProjectid'},{av:'AV26ProjectId',fld:'vPROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV29IsProjectManager',fld:'vISPROJECTMANAGER',pic:'',hsh:true},{av:'dynavCompanylocationid'},{av:'AV11CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV33Udparg1',fld:'vUDPARG1',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV27ProjectIds',fld:'vPROJECTIDS',pic:''}]");
          setEventMetadata("VPROJECTID.CONTROLVALUECHANGED",",oparms:[{av:'Ucvistimeline1_Startdate',ctrl:'UCVISTIMELINE1',prop:'startDate'},{av:'Ucvistimeline1_Stopdate',ctrl:'UCVISTIMELINE1',prop:'stopDate'},{av:'AV28EmployeeIds',fld:'vEMPLOYEEIDS',pic:''},{av:'AV27ProjectIds',fld:'vPROJECTIDS',pic:''},{av:'AV6LeaveEvents',fld:'vLEAVEEVENTS',pic:''},{av:'AV7LeaveEventGroups',fld:'vLEAVEEVENTGROUPS',pic:''}]}");
          setEventMetadata("DATERANGE_RANGEPICKER.DATERANGECHANGED","{handler:'E12562',iparms:[{av:'AV10DateRange',fld:'vDATERANGE',pic:''},{av:'AV16DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'Gx_date',fld:'vTODAY',pic:'',hsh:true},{av:'AV6LeaveEvents',fld:'vLEAVEEVENTS',pic:''},{av:'AV7LeaveEventGroups',fld:'vLEAVEEVENTGROUPS',pic:''},{av:'dynavProjectid'},{av:'AV26ProjectId',fld:'vPROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV29IsProjectManager',fld:'vISPROJECTMANAGER',pic:'',hsh:true},{av:'dynavCompanylocationid'},{av:'AV11CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV33Udparg1',fld:'vUDPARG1',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV27ProjectIds',fld:'vPROJECTIDS',pic:''}]");
          setEventMetadata("DATERANGE_RANGEPICKER.DATERANGECHANGED",",oparms:[{av:'AV10DateRange',fld:'vDATERANGE',pic:''},{av:'AV16DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'Ucvistimeline1_Startdate',ctrl:'UCVISTIMELINE1',prop:'startDate'},{av:'Ucvistimeline1_Stopdate',ctrl:'UCVISTIMELINE1',prop:'stopDate'},{av:'AV28EmployeeIds',fld:'vEMPLOYEEIDS',pic:''},{av:'AV27ProjectIds',fld:'vPROJECTIDS',pic:''},{av:'AV6LeaveEvents',fld:'vLEAVEEVENTS',pic:''},{av:'AV7LeaveEventGroups',fld:'vLEAVEEVENTGROUPS',pic:''}]}");
-         setEventMetadata("VCOMPANYLOCATIONID.CONTROLVALUECHANGED","{handler:'E17562',iparms:[{av:'dynavCompanylocationid'},{av:'AV11CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'},{av:'AV10DateRange',fld:'vDATERANGE',pic:''},{av:'AV16DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV6LeaveEvents',fld:'vLEAVEEVENTS',pic:''},{av:'AV7LeaveEventGroups',fld:'vLEAVEEVENTGROUPS',pic:''},{av:'dynavProjectid'},{av:'AV26ProjectId',fld:'vPROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV29IsProjectManager',fld:'vISPROJECTMANAGER',pic:'',hsh:true},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV33Udparg1',fld:'vUDPARG1',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV27ProjectIds',fld:'vPROJECTIDS',pic:''}]");
+         setEventMetadata("VCOMPANYLOCATIONID.CONTROLVALUECHANGED","{handler:'E18562',iparms:[{av:'dynavCompanylocationid'},{av:'AV11CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'},{av:'AV10DateRange',fld:'vDATERANGE',pic:''},{av:'AV16DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV6LeaveEvents',fld:'vLEAVEEVENTS',pic:''},{av:'AV7LeaveEventGroups',fld:'vLEAVEEVENTGROUPS',pic:''},{av:'dynavProjectid'},{av:'AV26ProjectId',fld:'vPROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV29IsProjectManager',fld:'vISPROJECTMANAGER',pic:'',hsh:true},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV33Udparg1',fld:'vUDPARG1',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV27ProjectIds',fld:'vPROJECTIDS',pic:''}]");
          setEventMetadata("VCOMPANYLOCATIONID.CONTROLVALUECHANGED",",oparms:[{av:'Ucvistimeline1_Leavetypes',ctrl:'UCVISTIMELINE1',prop:'leavetypes'},{av:'Ucvistimeline1_Startdate',ctrl:'UCVISTIMELINE1',prop:'startDate'},{av:'Ucvistimeline1_Stopdate',ctrl:'UCVISTIMELINE1',prop:'stopDate'},{av:'AV28EmployeeIds',fld:'vEMPLOYEEIDS',pic:''},{av:'AV27ProjectIds',fld:'vPROJECTIDS',pic:''},{av:'AV6LeaveEvents',fld:'vLEAVEEVENTS',pic:''},{av:'AV7LeaveEventGroups',fld:'vLEAVEEVENTGROUPS',pic:''}]}");
-         setEventMetadata("GLOBALEVENTS.LEAVEREQUESTSTATUSCHANGED","{handler:'E18562',iparms:[{av:'AV10DateRange',fld:'vDATERANGE',pic:''},{av:'AV16DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV6LeaveEvents',fld:'vLEAVEEVENTS',pic:''},{av:'AV7LeaveEventGroups',fld:'vLEAVEEVENTGROUPS',pic:''},{av:'dynavProjectid'},{av:'AV26ProjectId',fld:'vPROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV29IsProjectManager',fld:'vISPROJECTMANAGER',pic:'',hsh:true},{av:'dynavCompanylocationid'},{av:'AV11CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV33Udparg1',fld:'vUDPARG1',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV27ProjectIds',fld:'vPROJECTIDS',pic:''}]");
+         setEventMetadata("GLOBALEVENTS.LEAVEREQUESTSTATUSCHANGED","{handler:'E19562',iparms:[{av:'AV10DateRange',fld:'vDATERANGE',pic:''},{av:'AV16DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV6LeaveEvents',fld:'vLEAVEEVENTS',pic:''},{av:'AV7LeaveEventGroups',fld:'vLEAVEEVENTGROUPS',pic:''},{av:'dynavProjectid'},{av:'AV26ProjectId',fld:'vPROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV29IsProjectManager',fld:'vISPROJECTMANAGER',pic:'',hsh:true},{av:'dynavCompanylocationid'},{av:'AV11CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV33Udparg1',fld:'vUDPARG1',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV27ProjectIds',fld:'vPROJECTIDS',pic:''}]");
          setEventMetadata("GLOBALEVENTS.LEAVEREQUESTSTATUSCHANGED",",oparms:[{av:'Ucvistimeline1_Startdate',ctrl:'UCVISTIMELINE1',prop:'startDate'},{av:'Ucvistimeline1_Stopdate',ctrl:'UCVISTIMELINE1',prop:'stopDate'},{av:'AV28EmployeeIds',fld:'vEMPLOYEEIDS',pic:''},{av:'AV27ProjectIds',fld:'vPROJECTIDS',pic:''},{av:'AV6LeaveEvents',fld:'vLEAVEEVENTS',pic:''},{av:'AV7LeaveEventGroups',fld:'vLEAVEEVENTGROUPS',pic:''}]}");
          return  ;
       }
@@ -1691,6 +1730,7 @@ namespace GeneXus.Programs {
          lblTextblockcompanylocationid_Jsonclick = "";
          lblTextblockprojectid_Jsonclick = "";
          bttBtnreport_Jsonclick = "";
+         bttBtnexportics_Jsonclick = "";
          ucUcvistimeline1 = new GXUserControl();
          bttBtnuseraction1_Jsonclick = "";
          ucDaterange_rangepicker = new GXUserControl();
@@ -1828,8 +1868,11 @@ namespace GeneXus.Programs {
       private string lblTextblockprojectid_Jsonclick ;
       private string dynavProjectid_Internalname ;
       private string dynavProjectid_Jsonclick ;
+      private string divUnnamedtable2_Internalname ;
       private string bttBtnreport_Internalname ;
       private string bttBtnreport_Jsonclick ;
+      private string bttBtnexportics_Internalname ;
+      private string bttBtnexportics_Jsonclick ;
       private string divTablecontent_Internalname ;
       private string Ucvistimeline1_Internalname ;
       private string bttBtnuseraction1_Internalname ;

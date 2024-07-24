@@ -5,8 +5,6 @@ using GeneXus.Resources;
 using GeneXus.Application;
 using GeneXus.Metadata;
 using GeneXus.Cryptography;
-using System.Data;
-using GeneXus.Data;
 using com.genexus;
 using GeneXus.Data.ADO;
 using GeneXus.Data.NTier;
@@ -65,8 +63,6 @@ namespace GeneXus.Programs {
       {
          context = new GxContext(  );
          DataStoreUtil.LoadDataStores( context);
-         dsGAM = context.GetDataStore("GAM");
-         dsDefault = context.GetDataStore("Default");
          IsMain = true;
          context.SetDefaultTheme("WorkWithPlusDS", true);
       }
@@ -75,8 +71,6 @@ namespace GeneXus.Programs {
       {
          this.context = context;
          IsMain = false;
-         dsGAM = context.GetDataStore("GAM");
-         dsDefault = context.GetDataStore("Default");
       }
 
       public void execute( )
@@ -111,72 +105,8 @@ namespace GeneXus.Programs {
       {
          /* GeneXus formulas */
          /* Output device settings */
-         /* Using cursor P00B92 */
-         pr_default.execute(0);
-         while ( (pr_default.getStatus(0) != 101) )
-         {
-            A102ProjectId = P00B92_A102ProjectId[0];
-            A103ProjectName = P00B92_A103ProjectName[0];
-            A118WorkHourLogId = P00B92_A118WorkHourLogId[0];
-            A103ProjectName = P00B92_A103ProjectName[0];
-            new logtofile(context ).execute(  StringUtil.Trim( A103ProjectName)) ;
-            pr_default.readNext(0);
-         }
-         pr_default.close(0);
-         /* Using cursor P00B94 */
-         pr_default.execute(1, new Object[] {AV8FromDate, AV9ToDate, AV12EmployeeId, AV13OneProjectId});
-         if ( (pr_default.getStatus(1) != 101) )
-         {
-            A40000GXC1 = P00B94_A40000GXC1[0];
-            n40000GXC1 = P00B94_n40000GXC1[0];
-            A40002GXC3 = P00B94_A40002GXC3[0];
-            n40002GXC3 = P00B94_n40002GXC3[0];
-         }
-         else
-         {
-            A40000GXC1 = 0;
-            n40000GXC1 = false;
-            A40002GXC3 = 0;
-            n40002GXC3 = false;
-         }
-         pr_default.close(1);
-         /* Using cursor P00B96 */
-         pr_default.execute(2, new Object[] {AV8FromDate, AV9ToDate, AV13OneProjectId});
-         if ( (pr_default.getStatus(2) != 101) )
-         {
-            A40001GXC2 = P00B96_A40001GXC2[0];
-            n40001GXC2 = P00B96_n40001GXC2[0];
-         }
-         else
-         {
-            A40001GXC2 = 0;
-            n40001GXC2 = false;
-         }
-         pr_default.close(2);
-         this.cleanup();
-         if (true) return;
-         AV12EmployeeId = 120;
-         AV8FromDate = context.localUtil.YMDToD( 2024, 7, 1);
-         AV9ToDate = context.localUtil.YMDToD( 2024, 7, 31);
-         AV15ProjectId = 69;
-         AV11Hours = A40000GXC1;
-         AV11Hours = A40001GXC2;
-         AV14Minutes = A40002GXC3;
-         new logtofile(context ).execute(  StringUtil.Str( (decimal)(AV12EmployeeId), 10, 0)+","+context.localUtil.DToC( AV8FromDate, 2, "/")+","+context.localUtil.DToC( AV9ToDate, 2, "/")+","+StringUtil.Str( (decimal)(AV13OneProjectId), 10, 0)) ;
-         new logtofile(context ).execute(  StringUtil.Str( (decimal)(AV11Hours), 8, 0)+" : "+StringUtil.Str( (decimal)(AV14Minutes), 8, 0)) ;
-         AV11Hours = 0;
-         AV14Minutes = 0;
-         /* Optimized group. */
-         /* Using cursor P00B97 */
-         pr_default.execute(3, new Object[] {AV12EmployeeId, AV13OneProjectId, AV8FromDate, AV9ToDate});
-         c121WorkHourLogHour = P00B97_A121WorkHourLogHour[0];
-         c122WorkHourLogMinute = P00B97_A122WorkHourLogMinute[0];
-         pr_default.close(3);
-         AV11Hours = (int)(AV11Hours+c121WorkHourLogHour);
-         AV14Minutes = (int)(AV14Minutes+c122WorkHourLogMinute);
-         /* End optimized group. */
-         new logtofile(context ).execute(  ">>>>>>>>>> "+StringUtil.Str( (decimal)(AV11Hours), 8, 0)) ;
-         new logtofile(context ).execute(  ">>>>>>>>>> "+StringUtil.Str( (decimal)(AV14Minutes), 8, 0)) ;
+         AV16GAMUser.load( "04ee8dcb-f015-4652-858a-5c15766f8470");
+         new logtofile(context ).execute(  AV16GAMUser.tojsonstring()) ;
          this.cleanup();
       }
 
@@ -196,153 +126,11 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
-         scmdbuf = "";
-         P00B92_A102ProjectId = new long[1] ;
-         P00B92_A103ProjectName = new string[] {""} ;
-         P00B92_A118WorkHourLogId = new long[1] ;
-         A103ProjectName = "";
-         AV8FromDate = DateTime.MinValue;
-         AV9ToDate = DateTime.MinValue;
-         P00B94_A40000GXC1 = new short[1] ;
-         P00B94_n40000GXC1 = new bool[] {false} ;
-         P00B94_A40002GXC3 = new short[1] ;
-         P00B94_n40002GXC3 = new bool[] {false} ;
-         P00B96_A40001GXC2 = new short[1] ;
-         P00B96_n40001GXC2 = new bool[] {false} ;
-         P00B97_A121WorkHourLogHour = new int[1] ;
-         P00B97_A122WorkHourLogMinute = new short[1] ;
-         pr_default = new DataStoreProvider(context, new GeneXus.Programs.atest__default(),
-            new Object[][] {
-                new Object[] {
-               P00B92_A102ProjectId, P00B92_A103ProjectName, P00B92_A118WorkHourLogId
-               }
-               , new Object[] {
-               P00B94_A40000GXC1, P00B94_n40000GXC1, P00B94_A40002GXC3, P00B94_n40002GXC3
-               }
-               , new Object[] {
-               P00B96_A40001GXC2, P00B96_n40001GXC2
-               }
-               , new Object[] {
-               P00B97_A121WorkHourLogHour, P00B97_A122WorkHourLogMinute
-               }
-            }
-         );
+         AV16GAMUser = new GeneXus.Programs.genexussecurity.SdtGAMUser(context);
          /* GeneXus formulas. */
       }
 
-      private short A40000GXC1 ;
-      private short A40002GXC3 ;
-      private short A40001GXC2 ;
-      private int AV11Hours ;
-      private int AV14Minutes ;
-      private int c121WorkHourLogHour ;
-      private int c122WorkHourLogMinute ;
-      private long A102ProjectId ;
-      private long A118WorkHourLogId ;
-      private long AV12EmployeeId ;
-      private long AV13OneProjectId ;
-      private long AV15ProjectId ;
-      private string scmdbuf ;
-      private string A103ProjectName ;
-      private DateTime AV8FromDate ;
-      private DateTime AV9ToDate ;
-      private bool n40000GXC1 ;
-      private bool n40002GXC3 ;
-      private bool n40001GXC2 ;
-      private IGxDataStore dsGAM ;
-      private IGxDataStore dsDefault ;
-      private IDataStoreProvider pr_default ;
-      private long[] P00B92_A102ProjectId ;
-      private string[] P00B92_A103ProjectName ;
-      private long[] P00B92_A118WorkHourLogId ;
-      private short[] P00B94_A40000GXC1 ;
-      private bool[] P00B94_n40000GXC1 ;
-      private short[] P00B94_A40002GXC3 ;
-      private bool[] P00B94_n40002GXC3 ;
-      private short[] P00B96_A40001GXC2 ;
-      private bool[] P00B96_n40001GXC2 ;
-      private int[] P00B97_A121WorkHourLogHour ;
-      private short[] P00B97_A122WorkHourLogMinute ;
+      private GeneXus.Programs.genexussecurity.SdtGAMUser AV16GAMUser ;
    }
-
-   public class atest__default : DataStoreHelperBase, IDataStoreHelper
-   {
-      public ICursor[] getCursors( )
-      {
-         cursorDefinitions();
-         return new Cursor[] {
-          new ForEachCursor(def[0])
-         ,new ForEachCursor(def[1])
-         ,new ForEachCursor(def[2])
-         ,new ForEachCursor(def[3])
-       };
-    }
-
-    private static CursorDef[] def;
-    private void cursorDefinitions( )
-    {
-       if ( def == null )
-       {
-          Object[] prmP00B92;
-          prmP00B92 = new Object[] {
-          };
-          Object[] prmP00B94;
-          prmP00B94 = new Object[] {
-          new ParDef("AV8FromDate",GXType.Date,8,0) ,
-          new ParDef("AV9ToDate",GXType.Date,8,0) ,
-          new ParDef("AV12EmployeeId",GXType.Int64,10,0) ,
-          new ParDef("AV13OneProjectId",GXType.Int64,10,0)
-          };
-          Object[] prmP00B96;
-          prmP00B96 = new Object[] {
-          new ParDef("AV8FromDate",GXType.Date,8,0) ,
-          new ParDef("AV9ToDate",GXType.Date,8,0) ,
-          new ParDef("AV13OneProjectId",GXType.Int64,10,0)
-          };
-          Object[] prmP00B97;
-          prmP00B97 = new Object[] {
-          new ParDef("AV12EmployeeId",GXType.Int64,10,0) ,
-          new ParDef("AV13OneProjectId",GXType.Int64,10,0) ,
-          new ParDef("AV8FromDate",GXType.Date,8,0) ,
-          new ParDef("AV9ToDate",GXType.Date,8,0)
-          };
-          def= new CursorDef[] {
-              new CursorDef("P00B92", "SELECT T1.ProjectId, T2.ProjectName, T1.WorkHourLogId FROM (WorkHourLog T1 INNER JOIN Project T2 ON T2.ProjectId = T1.ProjectId) WHERE POSITION(RTRIM('genexus') IN LOWER(T2.ProjectName)) >= 1 ORDER BY T1.WorkHourLogId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00B92,100, GxCacheFrequency.OFF ,true,false )
-             ,new CursorDef("P00B94", "SELECT COALESCE( T1.GXC1, 0) AS GXC1, COALESCE( T1.GXC3, 0) AS GXC3 FROM (SELECT SUM(WorkHourLogHour) AS GXC1, SUM(WorkHourLogMinute) AS GXC3 FROM WorkHourLog WHERE (WorkHourLogDate >= :AV8FromDate) AND (WorkHourLogDate <= :AV9ToDate) AND (EmployeeId = :AV12EmployeeId) AND (ProjectId = :AV13OneProjectId) ) T1 ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00B94,1, GxCacheFrequency.OFF ,true,false )
-             ,new CursorDef("P00B96", "SELECT COALESCE( T1.GXC1, 0) AS GXC2 FROM (SELECT SUM(WorkHourLogHour) AS GXC1 FROM WorkHourLog WHERE (WorkHourLogDate >= :AV8FromDate) AND (WorkHourLogDate <= :AV9ToDate) AND (ProjectId = :AV13OneProjectId) ) T1 ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00B96,1, GxCacheFrequency.OFF ,true,false )
-             ,new CursorDef("P00B97", "SELECT SUM(WorkHourLogHour) AS GXC1, SUM(WorkHourLogMinute) AS GXC3 FROM WorkHourLog WHERE (EmployeeId = :AV12EmployeeId and ProjectId = :AV13OneProjectId) AND (WorkHourLogDate >= :AV8FromDate) AND (WorkHourLogDate <= :AV9ToDate) ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00B97,1, GxCacheFrequency.OFF ,true,false )
-          };
-       }
-    }
-
-    public void getResults( int cursor ,
-                            IFieldGetter rslt ,
-                            Object[] buf )
-    {
-       switch ( cursor )
-       {
-             case 0 :
-                ((long[]) buf[0])[0] = rslt.getLong(1);
-                ((string[]) buf[1])[0] = rslt.getString(2, 100);
-                ((long[]) buf[2])[0] = rslt.getLong(3);
-                return;
-             case 1 :
-                ((short[]) buf[0])[0] = rslt.getShort(1);
-                ((bool[]) buf[1])[0] = rslt.wasNull(1);
-                ((short[]) buf[2])[0] = rslt.getShort(2);
-                ((bool[]) buf[3])[0] = rslt.wasNull(2);
-                return;
-             case 2 :
-                ((short[]) buf[0])[0] = rslt.getShort(1);
-                ((bool[]) buf[1])[0] = rslt.wasNull(1);
-                return;
-             case 3 :
-                ((int[]) buf[0])[0] = rslt.getInt(1);
-                ((short[]) buf[1])[0] = rslt.getShort(2);
-                return;
-       }
-    }
-
- }
 
 }

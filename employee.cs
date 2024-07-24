@@ -143,8 +143,6 @@ namespace GeneXus.Programs {
             AssignAttri("", false, "Gx_BScreen", StringUtil.Str( (decimal)(Gx_BScreen), 1, 0));
             A106EmployeeId = (long)(Math.Round(NumberUtil.Val( GetPar( "EmployeeId"), "."), 18, MidpointRounding.ToEven));
             AssignAttri("", false, "A106EmployeeId", StringUtil.LTrimStr( (decimal)(A106EmployeeId), 10, 0));
-            A178EmployeeVacationDaysSetDate = context.localUtil.ParseDateParm( GetPar( "EmployeeVacationDaysSetDate"));
-            AssignAttri("", false, "A178EmployeeVacationDaysSetDate", context.localUtil.Format(A178EmployeeVacationDaysSetDate, "99/99/99"));
             Gx_date = context.localUtil.ParseDateParm( GetPar( "Gx_date"));
             AssignAttri("", false, "Gx_date", context.localUtil.Format(Gx_date, "99/99/99"));
             setAjaxCallMode();
@@ -153,7 +151,7 @@ namespace GeneXus.Programs {
                GxWebError = 1;
                return  ;
             }
-            GX11ASAEMPLOYEEBALANCE0F16( A146EmployeeVactionDays, Gx_BScreen, A106EmployeeId, A178EmployeeVacationDaysSetDate, Gx_date) ;
+            GX11ASAEMPLOYEEBALANCE0F16( A146EmployeeVactionDays, Gx_BScreen, A106EmployeeId, Gx_date) ;
             return  ;
          }
          else if ( StringUtil.StrCmp(gxfirstwebparm, "gxajaxAggSel35"+"_"+"") == 0 )
@@ -881,9 +879,9 @@ namespace GeneXus.Programs {
                AV7EmployeeId = (long)(Math.Round(context.localUtil.CToN( cgiGet( "vEMPLOYEEID"), ".", ","), 18, MidpointRounding.ToEven));
                AV13Insert_CompanyId = (long)(Math.Round(context.localUtil.CToN( cgiGet( "vINSERT_COMPANYID"), ".", ","), 18, MidpointRounding.ToEven));
                Gx_BScreen = (short)(Math.Round(context.localUtil.CToN( cgiGet( "vGXBSCREEN"), ".", ","), 18, MidpointRounding.ToEven));
-               A178EmployeeVacationDaysSetDate = context.localUtil.CToD( cgiGet( "EMPLOYEEVACATIONDAYSSETDATE"), 0);
                Gx_date = context.localUtil.CToD( cgiGet( "vTODAY"), 0);
                AV24Password = cgiGet( "vPASSWORD");
+               A178EmployeeVacationDaysSetDate = context.localUtil.CToD( cgiGet( "EMPLOYEEVACATIONDAYSSETDATE"), 0);
                A101CompanyName = cgiGet( "COMPANYNAME");
                AV32Pgmname = cgiGet( "vPGMNAME");
                A103ProjectName = cgiGet( "PROJECTNAME");
@@ -927,6 +925,7 @@ namespace GeneXus.Programs {
                Combo_projectid_Selectalltext = cgiGet( "COMBO_PROJECTID_Selectalltext");
                Combo_projectid_Multiplevaluesseparator = cgiGet( "COMBO_PROJECTID_Multiplevaluesseparator");
                Combo_projectid_Addnewoptiontext = cgiGet( "COMBO_PROJECTID_Addnewoptiontext");
+               Combo_projectid_Gxcontroltype = (int)(Math.Round(context.localUtil.CToN( cgiGet( "COMBO_PROJECTID_Gxcontroltype"), ".", ","), 18, MidpointRounding.ToEven));
                /* Read variables values. */
                A107EmployeeFirstName = cgiGet( edtEmployeeFirstName_Internalname);
                AssignAttri("", false, "A107EmployeeFirstName", A107EmployeeFirstName);
@@ -1640,7 +1639,7 @@ namespace GeneXus.Programs {
                if ( IsUpd( )  )
                {
                   GXt_decimal4 = A147EmployeeBalance;
-                  new getemployeeapprovedvacationdays(context ).execute(  A106EmployeeId,  A178EmployeeVacationDaysSetDate,  context.localUtil.YMDToD( DateTimeUtil.Year( Gx_date), 12, 31), out  GXt_decimal4) ;
+                  new getemployeeapprovedvacationdays(context ).execute(  A106EmployeeId,  context.localUtil.YMDToD( DateTimeUtil.Year( Gx_date), 1, 1),  context.localUtil.YMDToD( DateTimeUtil.Year( Gx_date), 12, 31), out  GXt_decimal4) ;
                   A147EmployeeBalance = (decimal)(A146EmployeeVactionDays-GXt_decimal4);
                   AssignAttri("", false, "A147EmployeeBalance", StringUtil.LTrimStr( A147EmployeeBalance, 4, 1));
                }
@@ -1737,7 +1736,7 @@ namespace GeneXus.Programs {
                {
                   nIsDirty_16 = 1;
                   GXt_decimal4 = A147EmployeeBalance;
-                  new getemployeeapprovedvacationdays(context ).execute(  A106EmployeeId,  A178EmployeeVacationDaysSetDate,  context.localUtil.YMDToD( DateTimeUtil.Year( Gx_date), 12, 31), out  GXt_decimal4) ;
+                  new getemployeeapprovedvacationdays(context ).execute(  A106EmployeeId,  context.localUtil.YMDToD( DateTimeUtil.Year( Gx_date), 1, 1),  context.localUtil.YMDToD( DateTimeUtil.Year( Gx_date), 12, 31), out  GXt_decimal4) ;
                   A147EmployeeBalance = (decimal)(A146EmployeeVactionDays-GXt_decimal4);
                   AssignAttri("", false, "A147EmployeeBalance", StringUtil.LTrimStr( A147EmployeeBalance, 4, 1));
                }
@@ -3349,9 +3348,9 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "gxhash_vEMPLOYEEID", GetSecureSignedToken( "", context.localUtil.Format( (decimal)(AV7EmployeeId), "ZZZZZZZZZ9"), context));
          GxWebStd.gx_hidden_field( context, "vINSERT_COMPANYID", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV13Insert_CompanyId), 10, 0, ".", "")));
          GxWebStd.gx_hidden_field( context, "vGXBSCREEN", StringUtil.LTrim( StringUtil.NToC( (decimal)(Gx_BScreen), 1, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "EMPLOYEEVACATIONDAYSSETDATE", context.localUtil.DToC( A178EmployeeVacationDaysSetDate, 0, "/"));
          GxWebStd.gx_hidden_field( context, "vTODAY", context.localUtil.DToC( Gx_date, 0, "/"));
          GxWebStd.gx_hidden_field( context, "vPASSWORD", StringUtil.RTrim( AV24Password));
+         GxWebStd.gx_hidden_field( context, "EMPLOYEEVACATIONDAYSSETDATE", context.localUtil.DToC( A178EmployeeVacationDaysSetDate, 0, "/"));
          GxWebStd.gx_hidden_field( context, "COMPANYNAME", StringUtil.RTrim( A101CompanyName));
          GxWebStd.gx_hidden_field( context, "vPGMNAME", StringUtil.RTrim( AV32Pgmname));
          GxWebStd.gx_hidden_field( context, "PROJECTNAME", StringUtil.RTrim( A103ProjectName));
@@ -3513,7 +3512,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202472223254876", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202472411522442", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -3529,7 +3528,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("employee.js", "?202472223254878", false, true);
+         context.AddJavascriptSource("employee.js", "?202472411522445", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -3788,7 +3787,6 @@ namespace GeneXus.Programs {
       protected void GX11ASAEMPLOYEEBALANCE0F16( decimal A146EmployeeVactionDays ,
                                                  short Gx_BScreen ,
                                                  long A106EmployeeId ,
-                                                 DateTime A178EmployeeVacationDaysSetDate ,
                                                  DateTime Gx_date )
       {
          if ( IsIns( )  && (Convert.ToDecimal(0)==A147EmployeeBalance) && ( Gx_BScreen == 0 ) )
@@ -3808,7 +3806,7 @@ namespace GeneXus.Programs {
                if ( IsUpd( )  )
                {
                   GXt_decimal4 = A147EmployeeBalance;
-                  new getemployeeapprovedvacationdays(context ).execute(  A106EmployeeId,  A178EmployeeVacationDaysSetDate,  context.localUtil.YMDToD( DateTimeUtil.Year( Gx_date), 12, 31), out  GXt_decimal4) ;
+                  new getemployeeapprovedvacationdays(context ).execute(  A106EmployeeId,  context.localUtil.YMDToD( DateTimeUtil.Year( Gx_date), 1, 1),  context.localUtil.YMDToD( DateTimeUtil.Year( Gx_date), 12, 31), out  GXt_decimal4) ;
                   A147EmployeeBalance = (decimal)(A146EmployeeVactionDays-GXt_decimal4);
                   AssignAttri("", false, "A147EmployeeBalance", StringUtil.LTrimStr( A147EmployeeBalance, 4, 1));
                }
@@ -4036,7 +4034,7 @@ namespace GeneXus.Programs {
                if ( IsUpd( )  )
                {
                   GXt_decimal4 = A147EmployeeBalance;
-                  new getemployeeapprovedvacationdays(context ).execute(  A106EmployeeId,  A178EmployeeVacationDaysSetDate,  context.localUtil.YMDToD( DateTimeUtil.Year( Gx_date), 12, 31), out  GXt_decimal4) ;
+                  new getemployeeapprovedvacationdays(context ).execute(  A106EmployeeId,  context.localUtil.YMDToD( DateTimeUtil.Year( Gx_date), 1, 1),  context.localUtil.YMDToD( DateTimeUtil.Year( Gx_date), 12, 31), out  GXt_decimal4) ;
                   A147EmployeeBalance = (decimal)(A146EmployeeVactionDays-GXt_decimal4);
                }
             }
@@ -4109,7 +4107,7 @@ namespace GeneXus.Programs {
          setEventMetadata("VALID_EMPLOYEELASTNAME",",oparms:[{av:'dynCompanyId'},{av:'A100CompanyId',fld:'COMPANYID',pic:'ZZZZZZZZZ9'},{av:'A110EmployeeIsManager',fld:'EMPLOYEEISMANAGER',pic:''},{av:'A112EmployeeIsActive',fld:'EMPLOYEEISACTIVE',pic:''}]}");
          setEventMetadata("VALID_EMPLOYEEEMAIL","{handler:'Valid_Employeeemail',iparms:[{av:'A109EmployeeEmail',fld:'EMPLOYEEEMAIL',pic:''},{av:'A106EmployeeId',fld:'EMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'dynCompanyId'},{av:'A100CompanyId',fld:'COMPANYID',pic:'ZZZZZZZZZ9'},{av:'A110EmployeeIsManager',fld:'EMPLOYEEISMANAGER',pic:''},{av:'A112EmployeeIsActive',fld:'EMPLOYEEISACTIVE',pic:''}]");
          setEventMetadata("VALID_EMPLOYEEEMAIL",",oparms:[{av:'dynCompanyId'},{av:'A100CompanyId',fld:'COMPANYID',pic:'ZZZZZZZZZ9'},{av:'A110EmployeeIsManager',fld:'EMPLOYEEISMANAGER',pic:''},{av:'A112EmployeeIsActive',fld:'EMPLOYEEISACTIVE',pic:''}]}");
-         setEventMetadata("VALID_EMPLOYEEVACTIONDAYS","{handler:'Valid_Employeevactiondays',iparms:[{av:'Gx_mode',fld:'vMODE',pic:'@!',hsh:true},{av:'A146EmployeeVactionDays',fld:'EMPLOYEEVACTIONDAYS',pic:'Z9.9'},{av:'Gx_BScreen',fld:'vGXBSCREEN',pic:'9'},{av:'A106EmployeeId',fld:'EMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'A178EmployeeVacationDaysSetDate',fld:'EMPLOYEEVACATIONDAYSSETDATE',pic:''},{av:'Gx_date',fld:'vTODAY',pic:''},{av:'A147EmployeeBalance',fld:'EMPLOYEEBALANCE',pic:'Z9.9'},{av:'dynCompanyId'},{av:'A100CompanyId',fld:'COMPANYID',pic:'ZZZZZZZZZ9'},{av:'A110EmployeeIsManager',fld:'EMPLOYEEISMANAGER',pic:''},{av:'A112EmployeeIsActive',fld:'EMPLOYEEISACTIVE',pic:''}]");
+         setEventMetadata("VALID_EMPLOYEEVACTIONDAYS","{handler:'Valid_Employeevactiondays',iparms:[{av:'Gx_mode',fld:'vMODE',pic:'@!',hsh:true},{av:'A146EmployeeVactionDays',fld:'EMPLOYEEVACTIONDAYS',pic:'Z9.9'},{av:'Gx_BScreen',fld:'vGXBSCREEN',pic:'9'},{av:'A106EmployeeId',fld:'EMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'Gx_date',fld:'vTODAY',pic:''},{av:'A147EmployeeBalance',fld:'EMPLOYEEBALANCE',pic:'Z9.9'},{av:'dynCompanyId'},{av:'A100CompanyId',fld:'COMPANYID',pic:'ZZZZZZZZZ9'},{av:'A110EmployeeIsManager',fld:'EMPLOYEEISMANAGER',pic:''},{av:'A112EmployeeIsActive',fld:'EMPLOYEEISACTIVE',pic:''}]");
          setEventMetadata("VALID_EMPLOYEEVACTIONDAYS",",oparms:[{av:'A147EmployeeBalance',fld:'EMPLOYEEBALANCE',pic:'Z9.9'},{av:'dynCompanyId'},{av:'A100CompanyId',fld:'COMPANYID',pic:'ZZZZZZZZZ9'},{av:'A110EmployeeIsManager',fld:'EMPLOYEEISMANAGER',pic:''},{av:'A112EmployeeIsActive',fld:'EMPLOYEEISACTIVE',pic:''}]}");
          setEventMetadata("VALID_COMPANYID","{handler:'Valid_Companyid',iparms:[{av:'A101CompanyName',fld:'COMPANYNAME',pic:''},{av:'dynCompanyId'},{av:'A100CompanyId',fld:'COMPANYID',pic:'ZZZZZZZZZ9'},{av:'A110EmployeeIsManager',fld:'EMPLOYEEISMANAGER',pic:''},{av:'A112EmployeeIsActive',fld:'EMPLOYEEISACTIVE',pic:''}]");
          setEventMetadata("VALID_COMPANYID",",oparms:[{av:'A101CompanyName',fld:'COMPANYNAME',pic:''},{av:'dynCompanyId'},{av:'A100CompanyId',fld:'COMPANYID',pic:'ZZZZZZZZZ9'},{av:'A110EmployeeIsManager',fld:'EMPLOYEEISMANAGER',pic:''},{av:'A112EmployeeIsActive',fld:'EMPLOYEEISACTIVE',pic:''}]}");
@@ -4155,7 +4153,6 @@ namespace GeneXus.Programs {
          A109EmployeeEmail = "";
          A107EmployeeFirstName = "";
          A108EmployeeLastName = "";
-         A178EmployeeVacationDaysSetDate = DateTime.MinValue;
          Gx_date = DateTime.MinValue;
          GXKey = "";
          PreviousTooltip = "";
@@ -4175,6 +4172,7 @@ namespace GeneXus.Programs {
          Gridlevel_projectContainer = new GXWebGrid( context);
          sMode28 = "";
          sStyleString = "";
+         A178EmployeeVacationDaysSetDate = DateTime.MinValue;
          AV24Password = "";
          A101CompanyName = "";
          AV32Pgmname = "";
@@ -4478,6 +4476,7 @@ namespace GeneXus.Programs {
       private int edtProjectId_Enabled ;
       private int fRowAdded ;
       private int Combo_projectid_Datalistupdateminimumcharacters ;
+      private int Combo_projectid_Gxcontroltype ;
       private int AV33GXV1 ;
       private int subGridlevel_project_Backcolor ;
       private int subGridlevel_project_Allbackcolor ;
@@ -4624,8 +4623,8 @@ namespace GeneXus.Programs {
       private string subGridlevel_project_Header ;
       private string gxwrpcisep ;
       private DateTime Z178EmployeeVacationDaysSetDate ;
-      private DateTime A178EmployeeVacationDaysSetDate ;
       private DateTime Gx_date ;
+      private DateTime A178EmployeeVacationDaysSetDate ;
       private bool Z110EmployeeIsManager ;
       private bool Z112EmployeeIsActive ;
       private bool entryPointCalled ;

@@ -118,8 +118,7 @@ namespace GeneXus.Programs {
          AV12Perms = (GxSimpleCollection<string>)(GxRegex.Split(AV24ManagerPerms,","));
          AV8GAMRole = AV18GAMRepository.getrolebyexternalid("Is"+"Manager", out  AV10GAMErrorCollection);
          AV14GAMUser = AV18GAMRepository.getuserbylogin("local", "admin", out  AV10GAMErrorCollection);
-         new logtofile(context ).execute(  "gam user email >>> "+AV14GAMUser.gxTpr_Email) ;
-         AV14GAMUser = AV18GAMRepository.getuserbyguid("8fc55d96-1793-407d-bbe0-eb9a224683e9", out  AV10GAMErrorCollection);
+         new logtofile(context ).execute(  AV14GAMUser.tojsonstring()) ;
          AV15GAMPermissionFilter.gxTpr_Applicationid = 2;
          AV16GAMPermissions = AV14GAMUser.getallpermissions(AV15GAMPermissionFilter, out  AV10GAMErrorCollection);
          AV28GXV1 = 1;

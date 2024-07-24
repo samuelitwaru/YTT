@@ -183,6 +183,7 @@ namespace GeneXus.Programs {
             pr_default.readNext(1);
          }
          pr_default.close(1);
+         new logtofile(context ).execute(  StringUtil.Str( AV17Days, 4, 1)) ;
          this.cleanup();
       }
 
@@ -291,7 +292,7 @@ namespace GeneXus.Programs {
          short[] GXv_int1 = new short[3];
          Object[] GXv_Object2 = new Object[2];
          scmdbuf = "SELECT COUNT(*) FROM (LeaveRequest T1 INNER JOIN LeaveType T2 ON T2.LeaveTypeId = T1.LeaveTypeId)";
-         AddWhere(sWhereString, "(Not T1.LeaveRequestHalfDay IS NULL)");
+         AddWhere(sWhereString, "(T1.LeaveRequestHalfDay = ( 'Morning') or T1.LeaveRequestHalfDay = ( 'Afternoon'))");
          AddWhere(sWhereString, "(T1.LeaveRequestStartDate >= :AV10DateFrom)");
          AddWhere(sWhereString, "(T1.LeaveRequestStartDate <= :AV9DateTo)");
          AddWhere(sWhereString, "(T1.LeaveRequestStatus = ( 'Approved'))");
@@ -322,7 +323,7 @@ namespace GeneXus.Programs {
          short[] GXv_int3 = new short[1];
          Object[] GXv_Object4 = new Object[2];
          scmdbuf = "SELECT T1.LeaveTypeId, T1.LeaveRequestEndDate, T1.LeaveRequestStartDate, T1.EmployeeId, T1.LeaveRequestHalfDay, T2.LeaveTypeVacationLeave, T1.LeaveRequestStatus, T2.CompanyId, T1.LeaveRequestId FROM (LeaveRequest T1 INNER JOIN LeaveType T2 ON T2.LeaveTypeId = T1.LeaveTypeId)";
-         AddWhere(sWhereString, "(T1.LeaveRequestHalfDay IS NULL)");
+         AddWhere(sWhereString, "(T1.LeaveRequestHalfDay <> ( 'Morning') or T1.LeaveRequestHalfDay <> ( 'Afternoon'))");
          AddWhere(sWhereString, "(T1.LeaveRequestStatus = ( 'Approved'))");
          AddWhere(sWhereString, "(T2.LeaveTypeVacationLeave = ( 'Yes'))");
          if ( ! (0==AV11EmployeeId) )

@@ -119,10 +119,8 @@ namespace GeneXus.Programs {
             A109EmployeeEmail = P00B02_A109EmployeeEmail[0];
             A107EmployeeFirstName = P00B02_A107EmployeeFirstName[0];
             A108EmployeeLastName = P00B02_A108EmployeeLastName[0];
-            A148EmployeeName = P00B02_A148EmployeeName[0];
             A106EmployeeId = P00B02_A106EmployeeId[0];
             new createemployeeaccount1(context ).execute(  StringUtil.Trim( A109EmployeeEmail),  StringUtil.Trim( A107EmployeeFirstName),  StringUtil.Trim( A108EmployeeLastName),  "IsEmployee", out  AV8GAMUserGUID) ;
-            new logtofile(context ).execute(  StringUtil.Trim( A148EmployeeName)+">>>"+AV8GAMUserGUID) ;
             AV11Employee.Load(A106EmployeeId);
             AV11Employee.gxTpr_Gamuserguid = AV8GAMUserGUID;
             AV11Employee.Save();
@@ -153,12 +151,10 @@ namespace GeneXus.Programs {
          P00B02_A109EmployeeEmail = new string[] {""} ;
          P00B02_A107EmployeeFirstName = new string[] {""} ;
          P00B02_A108EmployeeLastName = new string[] {""} ;
-         P00B02_A148EmployeeName = new string[] {""} ;
          P00B02_A106EmployeeId = new long[1] ;
          A109EmployeeEmail = "";
          A107EmployeeFirstName = "";
          A108EmployeeLastName = "";
-         A148EmployeeName = "";
          AV8GAMUserGUID = "";
          AV11Employee = new SdtEmployee(context);
          pr_gam = new DataStoreProvider(context, new GeneXus.Programs.acreateemployeeaccounts__gam(),
@@ -168,7 +164,7 @@ namespace GeneXus.Programs {
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.acreateemployeeaccounts__default(),
             new Object[][] {
                 new Object[] {
-               P00B02_A109EmployeeEmail, P00B02_A107EmployeeFirstName, P00B02_A108EmployeeLastName, P00B02_A148EmployeeName, P00B02_A106EmployeeId
+               P00B02_A109EmployeeEmail, P00B02_A107EmployeeFirstName, P00B02_A108EmployeeLastName, P00B02_A106EmployeeId
                }
             }
          );
@@ -179,7 +175,6 @@ namespace GeneXus.Programs {
       private string scmdbuf ;
       private string A107EmployeeFirstName ;
       private string A108EmployeeLastName ;
-      private string A148EmployeeName ;
       private string A109EmployeeEmail ;
       private string AV8GAMUserGUID ;
       private IGxDataStore dsGAM ;
@@ -188,7 +183,6 @@ namespace GeneXus.Programs {
       private string[] P00B02_A109EmployeeEmail ;
       private string[] P00B02_A107EmployeeFirstName ;
       private string[] P00B02_A108EmployeeLastName ;
-      private string[] P00B02_A148EmployeeName ;
       private long[] P00B02_A106EmployeeId ;
       private IDataStoreProvider pr_gam ;
       private SdtEmployee AV11Employee ;
@@ -245,7 +239,7 @@ namespace GeneXus.Programs {
         prmP00B02 = new Object[] {
         };
         def= new CursorDef[] {
-            new CursorDef("P00B02", "SELECT EmployeeEmail, EmployeeFirstName, EmployeeLastName, EmployeeName, EmployeeId FROM Employee ORDER BY EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00B02,100, GxCacheFrequency.OFF ,true,false )
+            new CursorDef("P00B02", "SELECT EmployeeEmail, EmployeeFirstName, EmployeeLastName, EmployeeId FROM Employee ORDER BY EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00B02,100, GxCacheFrequency.OFF ,true,false )
         };
      }
   }
@@ -260,8 +254,7 @@ namespace GeneXus.Programs {
               ((string[]) buf[0])[0] = rslt.getVarchar(1);
               ((string[]) buf[1])[0] = rslt.getString(2, 100);
               ((string[]) buf[2])[0] = rslt.getString(3, 100);
-              ((string[]) buf[3])[0] = rslt.getString(4, 100);
-              ((long[]) buf[4])[0] = rslt.getLong(5);
+              ((long[]) buf[3])[0] = rslt.getLong(4);
               return;
      }
   }

@@ -126,13 +126,11 @@ namespace GeneXus.Programs {
             A100CompanyId = P00852_A100CompanyId[0];
             A109EmployeeEmail = P00852_A109EmployeeEmail[0];
             A148EmployeeName = P00852_A148EmployeeName[0];
-            new logtofile(context ).execute(  StringUtil.Str( (decimal)(AV12Count), 4, 0)+" - "+StringUtil.Trim( A148EmployeeName)+", "+StringUtil.Trim( StringUtil.Str( (decimal)(A106EmployeeId), 10, 0))+", "+StringUtil.Trim( A109EmployeeEmail)) ;
             AV11EmployeeEmails.Add(StringUtil.Trim( A109EmployeeEmail), 0);
             AV12Count = (short)(AV12Count+1);
             pr_default.readNext(0);
          }
          pr_default.close(0);
-         new logtofile(context ).execute(  AV11EmployeeEmails.ToJSonString(false)) ;
          AV12Count = 1;
          AV17DeleteExceptions.Add(619, 0);
          AV17DeleteExceptions.Add(615, 0);
@@ -157,7 +155,6 @@ namespace GeneXus.Programs {
             A109EmployeeEmail = P00853_A109EmployeeEmail[0];
             A111GAMUserGUID = P00853_A111GAMUserGUID[0];
             A148EmployeeName = P00853_A148EmployeeName[0];
-            new logtofile(context ).execute(  StringUtil.Str( (decimal)(AV12Count), 4, 0)+" - "+StringUtil.Trim( A148EmployeeName)+", "+StringUtil.Trim( StringUtil.Str( (decimal)(A106EmployeeId), 10, 0))+", "+StringUtil.Trim( A109EmployeeEmail)) ;
             AV13EmployeeEmailsToDelete.Add(StringUtil.Trim( A109EmployeeEmail), 0);
             AV16EmployeeIdsToDelete.Add(A106EmployeeId, 0);
             AV18GUIDs.Add(A111GAMUserGUID, 0);
@@ -165,9 +162,6 @@ namespace GeneXus.Programs {
             pr_default.readNext(1);
          }
          pr_default.close(1);
-         new logtofile(context ).execute(  AV13EmployeeEmailsToDelete.ToJSonString(false)) ;
-         new logtofile(context ).execute(  AV16EmployeeIdsToDelete.ToJSonString(false)) ;
-         new logtofile(context ).execute(  AV18GUIDs.ToJSonString(false)) ;
          this.cleanup();
       }
 
@@ -317,8 +311,8 @@ namespace GeneXus.Programs {
           new ParDef("AV14CompanyId",GXType.Int64,10,0)
           };
           def= new CursorDef[] {
-              new CursorDef("P00852", "SELECT DISTINCT NULL AS CompanyId, NULL AS WorkHourLogDate, EmployeeEmail, EmployeeId, EmployeeName FROM ( SELECT T2.CompanyId, T1.WorkHourLogDate, T2.EmployeeEmail, T1.EmployeeId, T2.EmployeeName FROM (WorkHourLog T1 INNER JOIN Employee T2 ON T2.EmployeeId = T1.EmployeeId) WHERE (T1.WorkHourLogDate > :AV15StartDate) AND (T2.CompanyId = :AV14CompanyId) ORDER BY T2.EmployeeName) DistinctT ORDER BY EmployeeName ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00852,100, GxCacheFrequency.OFF ,true,false )
-             ,new CursorDef("P00853", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00853,100, GxCacheFrequency.OFF ,true,false )
+              new CursorDef("P00852", "SELECT DISTINCT NULL AS CompanyId, NULL AS WorkHourLogDate, EmployeeEmail, EmployeeId, NULL AS EmployeeName FROM ( SELECT T2.CompanyId, T1.WorkHourLogDate, T2.EmployeeEmail, T1.EmployeeId, T2.EmployeeName FROM (WorkHourLog T1 INNER JOIN Employee T2 ON T2.EmployeeId = T1.EmployeeId) WHERE (T1.WorkHourLogDate > :AV15StartDate) AND (T2.CompanyId = :AV14CompanyId) ORDER BY T2.EmployeeName) DistinctT ORDER BY EmployeeName ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00852,100, GxCacheFrequency.OFF ,false,false )
+             ,new CursorDef("P00853", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00853,100, GxCacheFrequency.OFF ,false,false )
           };
        }
     }
