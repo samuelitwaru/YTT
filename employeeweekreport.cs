@@ -1475,7 +1475,11 @@ namespace GeneXus.Programs {
          new getloggedinemployeeid(context ).execute( out  GXt_int1) ;
          AV48LoggedInEmployeeId = GXt_int1;
          AssignAttri("", false, "AV48LoggedInEmployeeId", StringUtil.LTrimStr( (decimal)(AV48LoggedInEmployeeId), 10, 0));
-         if ( ! (0==AV48LoggedInEmployeeId) )
+         GXt_boolean2 = AV58IsProjectManager;
+         new userhasrole(context ).execute(  "Project Manager", out  GXt_boolean2) ;
+         AV58IsProjectManager = GXt_boolean2;
+         AssignAttri("", false, "AV58IsProjectManager", AV58IsProjectManager);
+         if ( ! (0==AV48LoggedInEmployeeId) && ! AV58IsProjectManager )
          {
             /* Using cursor H00582 */
             pr_default.execute(0, new Object[] {AV48LoggedInEmployeeId});
@@ -1497,10 +1501,6 @@ namespace GeneXus.Programs {
             }
             pr_default.close(0);
          }
-         GXt_boolean2 = AV58IsProjectManager;
-         new userhasrole(context ).execute(  "Project Manager", out  GXt_boolean2) ;
-         AV58IsProjectManager = GXt_boolean2;
-         AssignAttri("", false, "AV58IsProjectManager", AV58IsProjectManager);
          pr_default.dynParam(1, new Object[]{ new Object[]{
                                               AV58IsProjectManager ,
                                               A166ProjectManagerId ,
@@ -2057,7 +2057,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247241382679", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024724158589", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2075,7 +2075,7 @@ namespace GeneXus.Programs {
          if ( nGXWrapped != 1 )
          {
             context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-            context.AddJavascriptSource("employeeweekreport.js", "?20247241382680", false, true);
+            context.AddJavascriptSource("employeeweekreport.js", "?2024724158589", false, true);
             context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
             context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
             context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
