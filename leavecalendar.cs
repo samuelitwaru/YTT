@@ -301,10 +301,12 @@ namespace GeneXus.Programs {
       {
          GxWebStd.gx_boolean_hidden_field( context, "vISPROJECTMANAGER", AV29IsProjectManager);
          GxWebStd.gx_hidden_field( context, "gxhash_vISPROJECTMANAGER", GetSecureSignedToken( "", AV29IsProjectManager, context));
-         GxWebStd.gx_hidden_field( context, "vUDPARG1", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV33Udparg1), 10, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "gxhash_vUDPARG1", GetSecureSignedToken( "", context.localUtil.Format( (decimal)(AV33Udparg1), "9999999999"), context));
+         GxWebStd.gx_hidden_field( context, "vUDPARG1", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV34Udparg1), 10, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, "gxhash_vUDPARG1", GetSecureSignedToken( "", context.localUtil.Format( (decimal)(AV34Udparg1), "9999999999"), context));
          GxWebStd.gx_hidden_field( context, "vTODAY", context.localUtil.DToC( Gx_date, 0, "/"));
          GxWebStd.gx_hidden_field( context, "gxhash_vTODAY", GetSecureSignedToken( "", Gx_date, context));
+         GxWebStd.gx_boolean_hidden_field( context, "vISCOLORED", AV30IsColored);
+         GxWebStd.gx_hidden_field( context, "gxhash_vISCOLORED", GetSecureSignedToken( "", AV30IsColored, context));
          GXKey = Decrypt64( context.GetCookie( "GX_SESSION_ID"), Crypto.GetServerKey( ));
       }
 
@@ -351,8 +353,8 @@ namespace GeneXus.Programs {
          GxWebStd.gx_boolean_hidden_field( context, "vISPROJECTMANAGER", AV29IsProjectManager);
          GxWebStd.gx_hidden_field( context, "gxhash_vISPROJECTMANAGER", GetSecureSignedToken( "", AV29IsProjectManager, context));
          GxWebStd.gx_hidden_field( context, "PROJECTMANAGERID", StringUtil.LTrim( StringUtil.NToC( (decimal)(A166ProjectManagerId), 10, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "vUDPARG1", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV33Udparg1), 10, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "gxhash_vUDPARG1", GetSecureSignedToken( "", context.localUtil.Format( (decimal)(AV33Udparg1), "9999999999"), context));
+         GxWebStd.gx_hidden_field( context, "vUDPARG1", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV34Udparg1), 10, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, "gxhash_vUDPARG1", GetSecureSignedToken( "", context.localUtil.Format( (decimal)(AV34Udparg1), "9999999999"), context));
          GxWebStd.gx_hidden_field( context, "PROJECTID", StringUtil.LTrim( StringUtil.NToC( (decimal)(A102ProjectId), 10, 0, ".", "")));
          if ( context.isAjaxRequest( ) )
          {
@@ -364,6 +366,8 @@ namespace GeneXus.Programs {
          }
          GxWebStd.gx_hidden_field( context, "vTODAY", context.localUtil.DToC( Gx_date, 0, "/"));
          GxWebStd.gx_hidden_field( context, "gxhash_vTODAY", GetSecureSignedToken( "", Gx_date, context));
+         GxWebStd.gx_boolean_hidden_field( context, "vISCOLORED", AV30IsColored);
+         GxWebStd.gx_hidden_field( context, "gxhash_vISCOLORED", GetSecureSignedToken( "", AV30IsColored, context));
          GxWebStd.gx_hidden_field( context, "UCVISTIMELINE1_Events", StringUtil.RTrim( Ucvistimeline1_Events));
          GxWebStd.gx_hidden_field( context, "UCVISTIMELINE1_Groups", StringUtil.RTrim( Ucvistimeline1_Groups));
          GxWebStd.gx_hidden_field( context, "UCVISTIMELINE1_Leavetypes", StringUtil.RTrim( Ucvistimeline1_Leavetypes));
@@ -1121,10 +1125,12 @@ namespace GeneXus.Programs {
       {
          GxWebStd.gx_boolean_hidden_field( context, "vISPROJECTMANAGER", AV29IsProjectManager);
          GxWebStd.gx_hidden_field( context, "gxhash_vISPROJECTMANAGER", GetSecureSignedToken( "", AV29IsProjectManager, context));
-         GxWebStd.gx_hidden_field( context, "vUDPARG1", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV33Udparg1), 10, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "gxhash_vUDPARG1", GetSecureSignedToken( "", context.localUtil.Format( (decimal)(AV33Udparg1), "9999999999"), context));
+         GxWebStd.gx_hidden_field( context, "vUDPARG1", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV34Udparg1), 10, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, "gxhash_vUDPARG1", GetSecureSignedToken( "", context.localUtil.Format( (decimal)(AV34Udparg1), "9999999999"), context));
          GxWebStd.gx_hidden_field( context, "vTODAY", context.localUtil.DToC( Gx_date, 0, "/"));
          GxWebStd.gx_hidden_field( context, "gxhash_vTODAY", GetSecureSignedToken( "", Gx_date, context));
+         GxWebStd.gx_boolean_hidden_field( context, "vISCOLORED", AV30IsColored);
+         GxWebStd.gx_hidden_field( context, "gxhash_vISCOLORED", GetSecureSignedToken( "", AV30IsColored, context));
       }
 
       protected void before_start_formulas( )
@@ -1220,8 +1226,11 @@ namespace GeneXus.Programs {
             dynavCompanylocationid.Enabled = 0;
             AssignProp("", false, dynavCompanylocationid_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(dynavCompanylocationid.Enabled), 5, 0), true);
          }
+         AV30IsColored = true;
+         AssignAttri("", false, "AV30IsColored", AV30IsColored);
+         GxWebStd.gx_hidden_field( context, "gxhash_vISCOLORED", GetSecureSignedToken( "", AV30IsColored, context));
          GXt_objcol_SdtSDTLeaveType3 = AV23SDTLeaveTypes;
-         new dpleavetype(context ).execute(  AV11CompanyLocationId, out  GXt_objcol_SdtSDTLeaveType3) ;
+         new dpleavetype(context ).execute(  AV11CompanyLocationId,  AV30IsColored, out  GXt_objcol_SdtSDTLeaveType3) ;
          AV23SDTLeaveTypes = GXt_objcol_SdtSDTLeaveType3;
          Ucvistimeline1_Leavetypes = AV23SDTLeaveTypes.ToJSonString(false);
          ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "leavetypes", Ucvistimeline1_Leavetypes);
@@ -1354,7 +1363,7 @@ namespace GeneXus.Programs {
          /* Companylocationid_Controlvaluechanged Routine */
          returnInSub = false;
          GXt_objcol_SdtSDTLeaveType3 = AV23SDTLeaveTypes;
-         new dpleavetype(context ).execute(  AV11CompanyLocationId, out  GXt_objcol_SdtSDTLeaveType3) ;
+         new dpleavetype(context ).execute(  AV11CompanyLocationId,  AV30IsColored, out  GXt_objcol_SdtSDTLeaveType3) ;
          AV23SDTLeaveTypes = GXt_objcol_SdtSDTLeaveType3;
          Ucvistimeline1_Leavetypes = AV23SDTLeaveTypes.ToJSonString(false);
          ucUcvistimeline1.SendProperty(context, "", false, Ucvistimeline1_Internalname, "leavetypes", Ucvistimeline1_Leavetypes);
@@ -1434,9 +1443,9 @@ namespace GeneXus.Programs {
       {
          /* 'GETEMPLOYEEIDSBYPROJECT' Routine */
          returnInSub = false;
-         AV33Udparg1 = new getloggedinemployeeid(context).executeUdp( );
+         AV34Udparg1 = new getloggedinemployeeid(context).executeUdp( );
          /* Using cursor H00566 */
-         pr_default.execute(4, new Object[] {AV33Udparg1});
+         pr_default.execute(4, new Object[] {AV34Udparg1});
          while ( (pr_default.getStatus(4) != 101) )
          {
             A166ProjectManagerId = H00566_A166ProjectManagerId[0];
@@ -1540,7 +1549,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202472414324247", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202472513361164", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1556,7 +1565,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("leavecalendar.js", "?202472414324247", false, true);
+         context.AddJavascriptSource("leavecalendar.js", "?202472513361164", false, true);
          context.AddJavascriptSource("UserControls/UCToolTipRender.js", "", false, true);
          context.AddJavascriptSource("UserControls/UCVISTimelineRender.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/daterangepicker/locales.js", "", false, true);
@@ -1667,7 +1676,7 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'dynavProjectid'},{av:'AV26ProjectId',fld:'vPROJECTID',pic:'ZZZZZZZZZ9'},{av:'dynavCompanylocationid'},{av:'AV11CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'},{av:'AV29IsProjectManager',fld:'vISPROJECTMANAGER',pic:'',hsh:true},{av:'AV33Udparg1',fld:'vUDPARG1',pic:'9999999999',hsh:true},{av:'Gx_date',fld:'vTODAY',pic:'',hsh:true}]");
+         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'dynavProjectid'},{av:'AV26ProjectId',fld:'vPROJECTID',pic:'ZZZZZZZZZ9'},{av:'dynavCompanylocationid'},{av:'AV11CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'},{av:'AV29IsProjectManager',fld:'vISPROJECTMANAGER',pic:'',hsh:true},{av:'AV34Udparg1',fld:'vUDPARG1',pic:'9999999999',hsh:true},{av:'Gx_date',fld:'vTODAY',pic:'',hsh:true},{av:'AV30IsColored',fld:'vISCOLORED',pic:'',hsh:true}]");
          setEventMetadata("REFRESH",",oparms:[]}");
          setEventMetadata("'DOUSERACTION1'","{handler:'E11561',iparms:[]");
          setEventMetadata("'DOUSERACTION1'",",oparms:[]}");
@@ -1677,13 +1686,13 @@ namespace GeneXus.Programs {
          setEventMetadata("'DOREPORT'",",oparms:[{av:'AV10DateRange',fld:'vDATERANGE',pic:''},{av:'AV28EmployeeIds',fld:'vEMPLOYEEIDS',pic:''}]}");
          setEventMetadata("'DOEXPORTICS'","{handler:'E16562',iparms:[{av:'AV10DateRange',fld:'vDATERANGE',pic:''},{av:'AV16DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'dynavCompanylocationid'},{av:'AV11CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'},{av:'AV28EmployeeIds',fld:'vEMPLOYEEIDS',pic:''}]");
          setEventMetadata("'DOEXPORTICS'",",oparms:[]}");
-         setEventMetadata("VPROJECTID.CONTROLVALUECHANGED","{handler:'E17562',iparms:[{av:'AV10DateRange',fld:'vDATERANGE',pic:''},{av:'AV16DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV6LeaveEvents',fld:'vLEAVEEVENTS',pic:''},{av:'AV7LeaveEventGroups',fld:'vLEAVEEVENTGROUPS',pic:''},{av:'dynavProjectid'},{av:'AV26ProjectId',fld:'vPROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV29IsProjectManager',fld:'vISPROJECTMANAGER',pic:'',hsh:true},{av:'dynavCompanylocationid'},{av:'AV11CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV33Udparg1',fld:'vUDPARG1',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV27ProjectIds',fld:'vPROJECTIDS',pic:''}]");
+         setEventMetadata("VPROJECTID.CONTROLVALUECHANGED","{handler:'E17562',iparms:[{av:'AV10DateRange',fld:'vDATERANGE',pic:''},{av:'AV16DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV6LeaveEvents',fld:'vLEAVEEVENTS',pic:''},{av:'AV7LeaveEventGroups',fld:'vLEAVEEVENTGROUPS',pic:''},{av:'dynavProjectid'},{av:'AV26ProjectId',fld:'vPROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV29IsProjectManager',fld:'vISPROJECTMANAGER',pic:'',hsh:true},{av:'dynavCompanylocationid'},{av:'AV11CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV34Udparg1',fld:'vUDPARG1',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV27ProjectIds',fld:'vPROJECTIDS',pic:''}]");
          setEventMetadata("VPROJECTID.CONTROLVALUECHANGED",",oparms:[{av:'Ucvistimeline1_Startdate',ctrl:'UCVISTIMELINE1',prop:'startDate'},{av:'Ucvistimeline1_Stopdate',ctrl:'UCVISTIMELINE1',prop:'stopDate'},{av:'AV28EmployeeIds',fld:'vEMPLOYEEIDS',pic:''},{av:'AV27ProjectIds',fld:'vPROJECTIDS',pic:''},{av:'AV6LeaveEvents',fld:'vLEAVEEVENTS',pic:''},{av:'AV7LeaveEventGroups',fld:'vLEAVEEVENTGROUPS',pic:''}]}");
-         setEventMetadata("DATERANGE_RANGEPICKER.DATERANGECHANGED","{handler:'E12562',iparms:[{av:'AV10DateRange',fld:'vDATERANGE',pic:''},{av:'AV16DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'Gx_date',fld:'vTODAY',pic:'',hsh:true},{av:'AV6LeaveEvents',fld:'vLEAVEEVENTS',pic:''},{av:'AV7LeaveEventGroups',fld:'vLEAVEEVENTGROUPS',pic:''},{av:'dynavProjectid'},{av:'AV26ProjectId',fld:'vPROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV29IsProjectManager',fld:'vISPROJECTMANAGER',pic:'',hsh:true},{av:'dynavCompanylocationid'},{av:'AV11CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV33Udparg1',fld:'vUDPARG1',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV27ProjectIds',fld:'vPROJECTIDS',pic:''}]");
+         setEventMetadata("DATERANGE_RANGEPICKER.DATERANGECHANGED","{handler:'E12562',iparms:[{av:'AV10DateRange',fld:'vDATERANGE',pic:''},{av:'AV16DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'Gx_date',fld:'vTODAY',pic:'',hsh:true},{av:'AV6LeaveEvents',fld:'vLEAVEEVENTS',pic:''},{av:'AV7LeaveEventGroups',fld:'vLEAVEEVENTGROUPS',pic:''},{av:'dynavProjectid'},{av:'AV26ProjectId',fld:'vPROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV29IsProjectManager',fld:'vISPROJECTMANAGER',pic:'',hsh:true},{av:'dynavCompanylocationid'},{av:'AV11CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV34Udparg1',fld:'vUDPARG1',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV27ProjectIds',fld:'vPROJECTIDS',pic:''}]");
          setEventMetadata("DATERANGE_RANGEPICKER.DATERANGECHANGED",",oparms:[{av:'AV10DateRange',fld:'vDATERANGE',pic:''},{av:'AV16DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'Ucvistimeline1_Startdate',ctrl:'UCVISTIMELINE1',prop:'startDate'},{av:'Ucvistimeline1_Stopdate',ctrl:'UCVISTIMELINE1',prop:'stopDate'},{av:'AV28EmployeeIds',fld:'vEMPLOYEEIDS',pic:''},{av:'AV27ProjectIds',fld:'vPROJECTIDS',pic:''},{av:'AV6LeaveEvents',fld:'vLEAVEEVENTS',pic:''},{av:'AV7LeaveEventGroups',fld:'vLEAVEEVENTGROUPS',pic:''}]}");
-         setEventMetadata("VCOMPANYLOCATIONID.CONTROLVALUECHANGED","{handler:'E18562',iparms:[{av:'dynavCompanylocationid'},{av:'AV11CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'},{av:'AV10DateRange',fld:'vDATERANGE',pic:''},{av:'AV16DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV6LeaveEvents',fld:'vLEAVEEVENTS',pic:''},{av:'AV7LeaveEventGroups',fld:'vLEAVEEVENTGROUPS',pic:''},{av:'dynavProjectid'},{av:'AV26ProjectId',fld:'vPROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV29IsProjectManager',fld:'vISPROJECTMANAGER',pic:'',hsh:true},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV33Udparg1',fld:'vUDPARG1',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV27ProjectIds',fld:'vPROJECTIDS',pic:''}]");
+         setEventMetadata("VCOMPANYLOCATIONID.CONTROLVALUECHANGED","{handler:'E18562',iparms:[{av:'dynavCompanylocationid'},{av:'AV11CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'},{av:'AV30IsColored',fld:'vISCOLORED',pic:'',hsh:true},{av:'AV10DateRange',fld:'vDATERANGE',pic:''},{av:'AV16DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV6LeaveEvents',fld:'vLEAVEEVENTS',pic:''},{av:'AV7LeaveEventGroups',fld:'vLEAVEEVENTGROUPS',pic:''},{av:'dynavProjectid'},{av:'AV26ProjectId',fld:'vPROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV29IsProjectManager',fld:'vISPROJECTMANAGER',pic:'',hsh:true},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV34Udparg1',fld:'vUDPARG1',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV27ProjectIds',fld:'vPROJECTIDS',pic:''}]");
          setEventMetadata("VCOMPANYLOCATIONID.CONTROLVALUECHANGED",",oparms:[{av:'Ucvistimeline1_Leavetypes',ctrl:'UCVISTIMELINE1',prop:'leavetypes'},{av:'Ucvistimeline1_Startdate',ctrl:'UCVISTIMELINE1',prop:'startDate'},{av:'Ucvistimeline1_Stopdate',ctrl:'UCVISTIMELINE1',prop:'stopDate'},{av:'AV28EmployeeIds',fld:'vEMPLOYEEIDS',pic:''},{av:'AV27ProjectIds',fld:'vPROJECTIDS',pic:''},{av:'AV6LeaveEvents',fld:'vLEAVEEVENTS',pic:''},{av:'AV7LeaveEventGroups',fld:'vLEAVEEVENTGROUPS',pic:''}]}");
-         setEventMetadata("GLOBALEVENTS.LEAVEREQUESTSTATUSCHANGED","{handler:'E19562',iparms:[{av:'AV10DateRange',fld:'vDATERANGE',pic:''},{av:'AV16DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV6LeaveEvents',fld:'vLEAVEEVENTS',pic:''},{av:'AV7LeaveEventGroups',fld:'vLEAVEEVENTGROUPS',pic:''},{av:'dynavProjectid'},{av:'AV26ProjectId',fld:'vPROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV29IsProjectManager',fld:'vISPROJECTMANAGER',pic:'',hsh:true},{av:'dynavCompanylocationid'},{av:'AV11CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV33Udparg1',fld:'vUDPARG1',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV27ProjectIds',fld:'vPROJECTIDS',pic:''}]");
+         setEventMetadata("GLOBALEVENTS.LEAVEREQUESTSTATUSCHANGED","{handler:'E19562',iparms:[{av:'AV10DateRange',fld:'vDATERANGE',pic:''},{av:'AV16DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV6LeaveEvents',fld:'vLEAVEEVENTS',pic:''},{av:'AV7LeaveEventGroups',fld:'vLEAVEEVENTGROUPS',pic:''},{av:'dynavProjectid'},{av:'AV26ProjectId',fld:'vPROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV29IsProjectManager',fld:'vISPROJECTMANAGER',pic:'',hsh:true},{av:'dynavCompanylocationid'},{av:'AV11CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'},{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'AV34Udparg1',fld:'vUDPARG1',pic:'9999999999',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV27ProjectIds',fld:'vPROJECTIDS',pic:''}]");
          setEventMetadata("GLOBALEVENTS.LEAVEREQUESTSTATUSCHANGED",",oparms:[{av:'Ucvistimeline1_Startdate',ctrl:'UCVISTIMELINE1',prop:'startDate'},{av:'Ucvistimeline1_Stopdate',ctrl:'UCVISTIMELINE1',prop:'stopDate'},{av:'AV28EmployeeIds',fld:'vEMPLOYEEIDS',pic:''},{av:'AV27ProjectIds',fld:'vPROJECTIDS',pic:''},{av:'AV6LeaveEvents',fld:'vLEAVEEVENTS',pic:''},{av:'AV7LeaveEventGroups',fld:'vLEAVEEVENTGROUPS',pic:''}]}");
          return  ;
       }
@@ -1818,7 +1827,7 @@ namespace GeneXus.Programs {
       private int edtavDaterange_rangetext_Enabled ;
       private int gxdynajaxindex ;
       private int idxLst ;
-      private long AV33Udparg1 ;
+      private long AV34Udparg1 ;
       private long AV25LeaveRequestId ;
       private long A166ProjectManagerId ;
       private long A102ProjectId ;
@@ -1898,6 +1907,7 @@ namespace GeneXus.Programs {
       private bool entryPointCalled ;
       private bool toggleJsOutput ;
       private bool AV29IsProjectManager ;
+      private bool AV30IsColored ;
       private bool wbLoad ;
       private bool Rfr0gs ;
       private bool wbErr ;
@@ -1986,7 +1996,7 @@ namespace GeneXus.Programs {
           };
           Object[] prmH00566;
           prmH00566 = new Object[] {
-          new ParDef("AV33Udparg1",GXType.Int64,10,0)
+          new ParDef("AV34Udparg1",GXType.Int64,10,0)
           };
           Object[] prmH00567;
           prmH00567 = new Object[] {
@@ -1996,7 +2006,7 @@ namespace GeneXus.Programs {
              ,new CursorDef("H00563", "SELECT ProjectId, ProjectName, ProjectManagerId FROM Project ORDER BY ProjectName ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00563,0, GxCacheFrequency.OFF ,true,false )
              ,new CursorDef("H00564", "SELECT CompanyLocationId, CompanyLocationName FROM CompanyLocation ORDER BY CompanyLocationName ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00564,0, GxCacheFrequency.OFF ,true,false )
              ,new CursorDef("H00565", "SELECT CompanyId, CompanyLocationId FROM Company WHERE CompanyId = :AV18CompanyId ORDER BY CompanyId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00565,1, GxCacheFrequency.OFF ,false,true )
-             ,new CursorDef("H00566", "SELECT ProjectManagerId, ProjectId FROM Project WHERE ProjectManagerId = :AV33Udparg1 ORDER BY ProjectManagerId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00566,100, GxCacheFrequency.OFF ,false,false )
+             ,new CursorDef("H00566", "SELECT ProjectManagerId, ProjectId FROM Project WHERE ProjectManagerId = :AV34Udparg1 ORDER BY ProjectManagerId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00566,100, GxCacheFrequency.OFF ,false,false )
              ,new CursorDef("H00567", "SELECT CompanyLocationId, CompanyLocationName FROM CompanyLocation ORDER BY CompanyLocationName ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00567,0, GxCacheFrequency.OFF ,true,false )
           };
        }

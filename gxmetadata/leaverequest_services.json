@@ -1,4 +1,4 @@
 {"ControlServices":[
-{"Attribute":"LeaveTypeId", "Parameters":[]},
-{"Attribute":"EmployeeId", "Parameters":["EmployeeCompany"]}
+{"Attribute":"&EmployeeId", "Parameters":[]},
+{"Attribute":"&LeaveTypeId", "Parameters":["LeaveTypeCompanyId"]}
 ]}

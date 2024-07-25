@@ -15,6 +15,16 @@
         </Properties>
       </Field>
     </Parameter>
+    <Parameter name="IsColored">
+      <Field>
+        <Properties>
+          <Property>
+            <Name>Type</Name>
+            <Value>Boolean</Value>
+          </Property>
+        </Properties>
+      </Field>
+    </Parameter>
     <Parameter name="ReturnValue" accessor="out" collection="true">
       <Field name="SDTLeaveType" description="SDTLeave Type">
         <Fields>

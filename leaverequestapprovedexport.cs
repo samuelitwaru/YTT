@@ -399,8 +399,8 @@ namespace GeneXus.Programs {
          while ( (pr_default.getStatus(0) != 101) )
          {
             A124LeaveTypeId = P006X2_A124LeaveTypeId[0];
-            A100CompanyId = P006X2_A100CompanyId[0];
             A106EmployeeId = P006X2_A106EmployeeId[0];
+            A100CompanyId = P006X2_A100CompanyId[0];
             A132LeaveRequestStatus = P006X2_A132LeaveRequestStatus[0];
             A147EmployeeBalance = P006X2_A147EmployeeBalance[0];
             A131LeaveRequestDuration = P006X2_A131LeaveRequestDuration[0];
@@ -690,8 +690,8 @@ namespace GeneXus.Programs {
          A130LeaveRequestEndDate = DateTime.MinValue;
          A132LeaveRequestStatus = "";
          P006X2_A124LeaveTypeId = new long[1] ;
-         P006X2_A100CompanyId = new long[1] ;
          P006X2_A106EmployeeId = new long[1] ;
+         P006X2_A100CompanyId = new long[1] ;
          P006X2_A132LeaveRequestStatus = new string[] {""} ;
          P006X2_A147EmployeeBalance = new decimal[1] ;
          P006X2_A131LeaveRequestDuration = new decimal[1] ;
@@ -711,7 +711,7 @@ namespace GeneXus.Programs {
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.leaverequestapprovedexport__default(),
             new Object[][] {
                 new Object[] {
-               P006X2_A124LeaveTypeId, P006X2_A100CompanyId, P006X2_A106EmployeeId, P006X2_A132LeaveRequestStatus, P006X2_A147EmployeeBalance, P006X2_A131LeaveRequestDuration, P006X2_A173LeaveRequestHalfDay, P006X2_n173LeaveRequestHalfDay, P006X2_A130LeaveRequestEndDate, P006X2_A129LeaveRequestStartDate,
+               P006X2_A124LeaveTypeId, P006X2_A106EmployeeId, P006X2_A100CompanyId, P006X2_A132LeaveRequestStatus, P006X2_A147EmployeeBalance, P006X2_A131LeaveRequestDuration, P006X2_A173LeaveRequestHalfDay, P006X2_n173LeaveRequestHalfDay, P006X2_A130LeaveRequestEndDate, P006X2_A129LeaveRequestStartDate,
                P006X2_A125LeaveTypeName, P006X2_A148EmployeeName, P006X2_A127LeaveRequestId
                }
             }
@@ -793,8 +793,8 @@ namespace GeneXus.Programs {
       private IGxDataStore dsDefault ;
       private IDataStoreProvider pr_default ;
       private long[] P006X2_A124LeaveTypeId ;
-      private long[] P006X2_A100CompanyId ;
       private long[] P006X2_A106EmployeeId ;
+      private long[] P006X2_A100CompanyId ;
       private string[] P006X2_A132LeaveRequestStatus ;
       private decimal[] P006X2_A147EmployeeBalance ;
       private decimal[] P006X2_A131LeaveRequestDuration ;
@@ -854,7 +854,7 @@ namespace GeneXus.Programs {
          string scmdbuf;
          short[] GXv_int4 = new short[20];
          Object[] GXv_Object5 = new Object[2];
-         scmdbuf = "SELECT T1.LeaveTypeId, T2.CompanyId, T1.EmployeeId, T1.LeaveRequestStatus, T3.EmployeeBalance, T1.LeaveRequestDuration, T1.LeaveRequestHalfDay, T1.LeaveRequestEndDate, T1.LeaveRequestStartDate, T2.LeaveTypeName, T3.EmployeeName, T1.LeaveRequestId FROM ((LeaveRequest T1 INNER JOIN LeaveType T2 ON T2.LeaveTypeId = T1.LeaveTypeId) INNER JOIN Employee T3 ON T3.EmployeeId = T1.EmployeeId)";
+         scmdbuf = "SELECT T1.LeaveTypeId, T1.EmployeeId, T2.CompanyId, T1.LeaveRequestStatus, T3.EmployeeBalance, T1.LeaveRequestDuration, T1.LeaveRequestHalfDay, T1.LeaveRequestEndDate, T1.LeaveRequestStartDate, T2.LeaveTypeName, T3.EmployeeName, T1.LeaveRequestId FROM ((LeaveRequest T1 INNER JOIN LeaveType T2 ON T2.LeaveTypeId = T1.LeaveTypeId) INNER JOIN Employee T3 ON T3.EmployeeId = T1.EmployeeId)";
          AddWhere(sWhereString, "(T1.LeaveRequestStatus = ( 'Approved'))");
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV58Leaverequestapprovedds_1_filterfulltext)) )
          {
@@ -1000,17 +1000,17 @@ namespace GeneXus.Programs {
          {
             GXv_int4[18] = 1;
          }
-         if ( ! new userhasrole(context).executeUdp(  "Manager") && new userhasrole(context).executeUdp(  "Project Manager") )
-         {
-            AddWhere(sWhereString, "("+new GxDbmsUtils( new GxPostgreSql()).ValueList(AV50EmployeeIds, "T1.EmployeeId IN (", ")")+")");
-         }
-         if ( new userhasrole(context).executeUdp(  "Manager") )
+         if ( new userhasrole(context).executeUdp(  "Manager") && ! new userhasrole(context).executeUdp(  "Project Manager") )
          {
             AddWhere(sWhereString, "(T2.CompanyId = :AV74Udparg17)");
          }
          else
          {
             GXv_int4[19] = 1;
+         }
+         if ( new userhasrole(context).executeUdp(  "Project Manager") )
+         {
+            AddWhere(sWhereString, "("+new GxDbmsUtils( new GxPostgreSql()).ValueList(AV50EmployeeIds, "T1.EmployeeId IN (", ")")+")");
          }
          scmdbuf += sWhereString;
          if ( AV17OrderedBy == 1 )

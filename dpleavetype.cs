@@ -59,32 +59,37 @@ namespace GeneXus.Programs {
       }
 
       public void execute( long aP0_CompanyLocationId ,
-                           out GXBaseCollection<SdtSDTLeaveType> aP1_Gxm2rootcol )
+                           bool aP1_IsColored ,
+                           out GXBaseCollection<SdtSDTLeaveType> aP2_Gxm2rootcol )
       {
          this.AV6CompanyLocationId = aP0_CompanyLocationId;
+         this.AV7IsColored = aP1_IsColored;
          this.Gxm2rootcol = new GXBaseCollection<SdtSDTLeaveType>( context, "SDTLeaveType", "YTT_version4") ;
          initialize();
          executePrivate();
-         aP1_Gxm2rootcol=this.Gxm2rootcol;
+         aP2_Gxm2rootcol=this.Gxm2rootcol;
       }
 
-      public GXBaseCollection<SdtSDTLeaveType> executeUdp( long aP0_CompanyLocationId )
+      public GXBaseCollection<SdtSDTLeaveType> executeUdp( long aP0_CompanyLocationId ,
+                                                           bool aP1_IsColored )
       {
-         execute(aP0_CompanyLocationId, out aP1_Gxm2rootcol);
+         execute(aP0_CompanyLocationId, aP1_IsColored, out aP2_Gxm2rootcol);
          return Gxm2rootcol ;
       }
 
       public void executeSubmit( long aP0_CompanyLocationId ,
-                                 out GXBaseCollection<SdtSDTLeaveType> aP1_Gxm2rootcol )
+                                 bool aP1_IsColored ,
+                                 out GXBaseCollection<SdtSDTLeaveType> aP2_Gxm2rootcol )
       {
          dpleavetype objdpleavetype;
          objdpleavetype = new dpleavetype();
          objdpleavetype.AV6CompanyLocationId = aP0_CompanyLocationId;
+         objdpleavetype.AV7IsColored = aP1_IsColored;
          objdpleavetype.Gxm2rootcol = new GXBaseCollection<SdtSDTLeaveType>( context, "SDTLeaveType", "YTT_version4") ;
          objdpleavetype.context.SetSubmitInitialConfig(context);
          objdpleavetype.initialize();
          Submit( executePrivateCatch,objdpleavetype);
-         aP1_Gxm2rootcol=this.Gxm2rootcol;
+         aP2_Gxm2rootcol=this.Gxm2rootcol;
       }
 
       void executePrivateCatch( object stateInfo )
@@ -104,6 +109,15 @@ namespace GeneXus.Programs {
       {
          /* GeneXus formulas */
          /* Output device settings */
+         pr_default.dynParam(0, new Object[]{ new Object[]{
+                                              AV7IsColored ,
+                                              A175LeaveTypeColorApproved ,
+                                              AV6CompanyLocationId ,
+                                              A100CompanyId } ,
+                                              new int[]{
+                                              TypeConstants.BOOLEAN, TypeConstants.BOOLEAN, TypeConstants.LONG, TypeConstants.LONG
+                                              }
+         });
          /* Using cursor P001V2 */
          pr_default.execute(0, new Object[] {AV6CompanyLocationId});
          while ( (pr_default.getStatus(0) != 101) )
@@ -149,6 +163,7 @@ namespace GeneXus.Programs {
       public override void initialize( )
       {
          scmdbuf = "";
+         A175LeaveTypeColorApproved = "";
          P001V2_A175LeaveTypeColorApproved = new string[] {""} ;
          P001V2_n175LeaveTypeColorApproved = new bool[] {false} ;
          P001V2_A100CompanyId = new long[1] ;
@@ -158,7 +173,6 @@ namespace GeneXus.Programs {
          P001V2_A145LeaveTypeLoggingWorkHours = new string[] {""} ;
          P001V2_A174LeaveTypeColorPending = new string[] {""} ;
          P001V2_n174LeaveTypeColorPending = new bool[] {false} ;
-         A175LeaveTypeColorApproved = "";
          A125LeaveTypeName = "";
          A144LeaveTypeVacationLeave = "";
          A145LeaveTypeLoggingWorkHours = "";
@@ -183,6 +197,7 @@ namespace GeneXus.Programs {
       private string A144LeaveTypeVacationLeave ;
       private string A145LeaveTypeLoggingWorkHours ;
       private string A174LeaveTypeColorPending ;
+      private bool AV7IsColored ;
       private bool n175LeaveTypeColorApproved ;
       private bool n174LeaveTypeColorPending ;
       private IGxDataStore dsGAM ;
@@ -197,13 +212,48 @@ namespace GeneXus.Programs {
       private string[] P001V2_A145LeaveTypeLoggingWorkHours ;
       private string[] P001V2_A174LeaveTypeColorPending ;
       private bool[] P001V2_n174LeaveTypeColorPending ;
-      private GXBaseCollection<SdtSDTLeaveType> aP1_Gxm2rootcol ;
+      private GXBaseCollection<SdtSDTLeaveType> aP2_Gxm2rootcol ;
       private GXBaseCollection<SdtSDTLeaveType> Gxm2rootcol ;
       private SdtSDTLeaveType Gxm1sdtleavetype ;
    }
 
    public class dpleavetype__default : DataStoreHelperBase, IDataStoreHelper
    {
+      protected Object[] conditional_P001V2( IGxContext context ,
+                                             bool AV7IsColored ,
+                                             string A175LeaveTypeColorApproved ,
+                                             long AV6CompanyLocationId ,
+                                             long A100CompanyId )
+      {
+         System.Text.StringBuilder sWhereString = new System.Text.StringBuilder();
+         string scmdbuf;
+         short[] GXv_int1 = new short[1];
+         Object[] GXv_Object2 = new Object[2];
+         scmdbuf = "SELECT LeaveTypeColorApproved, CompanyId, LeaveTypeId, LeaveTypeName, LeaveTypeVacationLeave, LeaveTypeLoggingWorkHours, LeaveTypeColorPending FROM LeaveType";
+         AddWhere(sWhereString, "(CompanyId = :AV6CompanyLocationId)");
+         if ( AV7IsColored )
+         {
+            AddWhere(sWhereString, "(Not (char_length(trim(trailing ' ' from LeaveTypeColorApproved))=0))");
+         }
+         scmdbuf += sWhereString;
+         scmdbuf += " ORDER BY CompanyId";
+         GXv_Object2[0] = scmdbuf;
+         GXv_Object2[1] = GXv_int1;
+         return GXv_Object2 ;
+      }
+
+      public override Object [] getDynamicStatement( int cursor ,
+                                                     IGxContext context ,
+                                                     Object [] dynConstraints )
+      {
+         switch ( cursor )
+         {
+               case 0 :
+                     return conditional_P001V2(context, (bool)dynConstraints[0] , (string)dynConstraints[1] , (long)dynConstraints[2] , (long)dynConstraints[3] );
+         }
+         return base.getDynamicStatement(cursor, context, dynConstraints);
+      }
+
       public ICursor[] getCursors( )
       {
          cursorDefinitions();
@@ -222,7 +272,7 @@ namespace GeneXus.Programs {
           new ParDef("AV6CompanyLocationId",GXType.Int64,10,0)
           };
           def= new CursorDef[] {
-              new CursorDef("P001V2", "SELECT LeaveTypeColorApproved, CompanyId, LeaveTypeId, LeaveTypeName, LeaveTypeVacationLeave, LeaveTypeLoggingWorkHours, LeaveTypeColorPending FROM LeaveType WHERE (CompanyId = :AV6CompanyLocationId) AND (Not (char_length(trim(trailing ' ' from LeaveTypeColorApproved))=0)) ORDER BY CompanyId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP001V2,100, GxCacheFrequency.OFF ,false,false )
+              new CursorDef("P001V2", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP001V2,100, GxCacheFrequency.OFF ,false,false )
           };
        }
     }

@@ -178,8 +178,8 @@ namespace GeneXus.Programs {
                CheckExtendedTable0J21( ) ;
                if ( AnyError == 0 )
                {
-                  ZM0J21( 17) ;
                   ZM0J21( 18) ;
+                  ZM0J21( 19) ;
                }
                CloseExtendedTableCursors0J21( ) ;
             }
@@ -203,28 +203,35 @@ namespace GeneXus.Programs {
          GXt_int2 = AV17EmployeeCompany;
          new getloggedinusercompanyid(context ).execute( out  GXt_int2) ;
          AV17EmployeeCompany = (short)(GXt_int2);
+         AV46LeaveTypeCompanyId = AV17EmployeeCompany;
          GXt_int2 = AV18EmployeeId;
          new getloggedinemployeeid(context ).execute( out  GXt_int2) ;
          AV18EmployeeId = GXt_int2;
          AV36ISManager = AV9GAMUser.checkrole("Manager");
-         GXt_int3 = AV20EmployyeeAvailableVacationDays;
-         new getemployeevactiondaysleft(context ).execute(  AV18EmployeeId, out  GXt_int3) ;
-         AV20EmployyeeAvailableVacationDays = GXt_int3;
-         new GeneXus.Programs.wwpbaseobjects.loadwwpcontext(context ).execute( out  AV32WWPContext) ;
-         /* Execute user subroutine: 'ATTRIBUTESSECURITYCODE' */
-         S112 ();
-         if ( returnInSub )
+         AV40IsProjectManager = AV9GAMUser.checkrole("Project Manager");
+         if ( ( AV40IsProjectManager ) || ( AV36ISManager ) )
          {
-            returnInSub = true;
-            if (true) return;
+            GXt_objcol_int3 = AV42projectIds;
+            new projectsformanager(context ).execute(  AV18EmployeeId, out  GXt_objcol_int3) ;
+            AV42projectIds = GXt_objcol_int3;
+            GXt_int2 = AV44CompanyId;
+            new getloggedinusercompanyid(context ).execute( out  GXt_int2) ;
+            AV44CompanyId = GXt_int2;
+            GXt_objcol_int3 = AV45Employees;
+            new getemployeeidsbyprojectorcompany(context ).execute(  AV42projectIds,  AV44CompanyId, out  GXt_objcol_int3) ;
+            AV45Employees = GXt_objcol_int3;
          }
+         GXt_int4 = AV20EmployyeeAvailableVacationDays;
+         new getemployeevactiondaysleft(context ).execute(  AV18EmployeeId, out  GXt_int4) ;
+         AV20EmployyeeAvailableVacationDays = GXt_int4;
+         new GeneXus.Programs.wwpbaseobjects.loadwwpcontext(context ).execute( out  AV32WWPContext) ;
          AV29TrnContext.FromXml(AV31WebSession.Get("TrnContext"), null, "", "");
-         if ( ( StringUtil.StrCmp(AV29TrnContext.gxTpr_Transactionname, AV42Pgmname) == 0 ) && ( StringUtil.StrCmp(Gx_mode, "INS") == 0 ) )
+         if ( ( StringUtil.StrCmp(AV29TrnContext.gxTpr_Transactionname, AV53Pgmname) == 0 ) && ( StringUtil.StrCmp(Gx_mode, "INS") == 0 ) )
          {
-            AV43GXV1 = 1;
-            while ( AV43GXV1 <= AV29TrnContext.gxTpr_Attributes.Count )
+            AV54GXV1 = 1;
+            while ( AV54GXV1 <= AV29TrnContext.gxTpr_Attributes.Count )
             {
-               AV30TrnContextAtt = ((GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext_Attribute)AV29TrnContext.gxTpr_Attributes.Item(AV43GXV1));
+               AV30TrnContextAtt = ((GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext_Attribute)AV29TrnContext.gxTpr_Attributes.Item(AV54GXV1));
                if ( StringUtil.StrCmp(AV30TrnContextAtt.gxTpr_Attributename, "LeaveTypeId") == 0 )
                {
                   AV24Insert_LeaveTypeId = (long)(Math.Round(NumberUtil.Val( AV30TrnContextAtt.gxTpr_Attributevalue, "."), 18, MidpointRounding.ToEven));
@@ -233,7 +240,7 @@ namespace GeneXus.Programs {
                {
                   AV23Insert_EmployeeId = (long)(Math.Round(NumberUtil.Val( AV30TrnContextAtt.gxTpr_Attributevalue, "."), 18, MidpointRounding.ToEven));
                }
-               AV43GXV1 = (int)(AV43GXV1+1);
+               AV54GXV1 = (int)(AV54GXV1+1);
             }
          }
       }
@@ -252,12 +259,6 @@ namespace GeneXus.Programs {
          if ( ( ( StringUtil.StrCmp(Gx_mode, "UPD") == 0 ) ) && ( StringUtil.StrCmp(A132LeaveRequestStatus, "Pending") == 0 ) )
          {
          }
-      }
-
-      protected void S112( )
-      {
-         /* 'ATTRIBUTESSECURITYCODE' Routine */
-         returnInSub = false;
       }
 
       protected void E130J2( )
@@ -282,12 +283,23 @@ namespace GeneXus.Programs {
       {
          /* EmployeeId_Controlvaluechanged Routine */
          returnInSub = false;
-         GXt_int3 = AV20EmployyeeAvailableVacationDays;
-         new getemployeevactiondaysleft(context ).execute(  A106EmployeeId, out  GXt_int3) ;
-         AV20EmployyeeAvailableVacationDays = GXt_int3;
+         GXt_int4 = AV20EmployyeeAvailableVacationDays;
+         new getemployeevactiondaysleft(context ).execute(  A106EmployeeId, out  GXt_int4) ;
+         AV20EmployyeeAvailableVacationDays = GXt_int4;
       }
 
       protected void E160J2( )
+      {
+         /* Employeeid_Controlvaluechanged Routine */
+         returnInSub = false;
+         AV7Employee.Load(AV18EmployeeId);
+         AV46LeaveTypeCompanyId = AV7Employee.gxTpr_Companyid;
+         GXt_int4 = AV20EmployyeeAvailableVacationDays;
+         new getemployeevactiondaysleft(context ).execute(  AV18EmployeeId, out  GXt_int4) ;
+         AV20EmployyeeAvailableVacationDays = GXt_int4;
+      }
+
+      protected void E170J2( )
       {
          /* LeaveRequestHalfDay_Click Routine */
          returnInSub = false;
@@ -298,7 +310,7 @@ namespace GeneXus.Programs {
 
       protected void ZM0J21( short GX_JID )
       {
-         if ( ( GX_JID == 16 ) || ( GX_JID == 0 ) )
+         if ( ( GX_JID == 17 ) || ( GX_JID == 0 ) )
          {
             Z131LeaveRequestDuration = A131LeaveRequestDuration;
             Z130LeaveRequestEndDate = A130LeaveRequestEndDate;
@@ -311,17 +323,17 @@ namespace GeneXus.Programs {
             Z124LeaveTypeId = A124LeaveTypeId;
             Z106EmployeeId = A106EmployeeId;
          }
-         if ( ( GX_JID == 17 ) || ( GX_JID == 0 ) )
+         if ( ( GX_JID == 18 ) || ( GX_JID == 0 ) )
          {
             Z125LeaveTypeName = A125LeaveTypeName;
             Z144LeaveTypeVacationLeave = A144LeaveTypeVacationLeave;
          }
-         if ( ( GX_JID == 18 ) || ( GX_JID == 0 ) )
+         if ( ( GX_JID == 19 ) || ( GX_JID == 0 ) )
          {
             Z148EmployeeName = A148EmployeeName;
             Z147EmployeeBalance = A147EmployeeBalance;
          }
-         if ( GX_JID == -16 )
+         if ( GX_JID == -17 )
          {
             Z127LeaveRequestId = A127LeaveRequestId;
             Z131LeaveRequestDuration = A131LeaveRequestDuration;
@@ -343,7 +355,7 @@ namespace GeneXus.Programs {
 
       protected void standaloneNotModal( )
       {
-         AV42Pgmname = "LeaveRequest_BC";
+         AV53Pgmname = "LeaveRequest_BC";
          Gx_BScreen = 0;
          Gx_date = DateTimeUtil.Today( context);
       }
@@ -351,13 +363,20 @@ namespace GeneXus.Programs {
       protected void standaloneModal( )
       {
          A128LeaveRequestDate = Gx_date;
-         if ( IsIns( )  && (DateTime.MinValue==A129LeaveRequestStartDate) && ( Gx_BScreen == 0 ) )
-         {
-            A129LeaveRequestStartDate = Gx_date;
-         }
          if ( IsIns( )  && (0==A106EmployeeId) && ( Gx_BScreen == 0 ) )
          {
             A106EmployeeId = AV18EmployeeId;
+         }
+         else
+         {
+            if ( IsIns( )  )
+            {
+               A106EmployeeId = AV18EmployeeId;
+            }
+         }
+         if ( IsIns( )  && (DateTime.MinValue==A129LeaveRequestStartDate) && ( Gx_BScreen == 0 ) )
+         {
+            A129LeaveRequestStartDate = Gx_date;
          }
          if ( ( StringUtil.StrCmp(Gx_mode, "INS") == 0 ) && ( Gx_BScreen == 0 ) )
          {
@@ -391,7 +410,7 @@ namespace GeneXus.Programs {
             A144LeaveTypeVacationLeave = BC000J7_A144LeaveTypeVacationLeave[0];
             A124LeaveTypeId = BC000J7_A124LeaveTypeId[0];
             A106EmployeeId = BC000J7_A106EmployeeId[0];
-            ZM0J21( -16) ;
+            ZM0J21( -17) ;
          }
          pr_default.close(5);
          OnLoadActions0J21( ) ;
@@ -444,6 +463,11 @@ namespace GeneXus.Programs {
          if ( (DateTime.MinValue==A130LeaveRequestEndDate) )
          {
             GX_msglist.addItem("End date is required", 1, "");
+            AnyError = 1;
+         }
+         if ( ( A131LeaveRequestDuration <= Convert.ToDecimal( 0 )) )
+         {
+            GX_msglist.addItem("Invalid Leave Duration", 1, "");
             AnyError = 1;
          }
          if ( ! ( ( StringUtil.StrCmp(A132LeaveRequestStatus, "Pending") == 0 ) || ( StringUtil.StrCmp(A132LeaveRequestStatus, "Approved") == 0 ) || ( StringUtil.StrCmp(A132LeaveRequestStatus, "Rejected") == 0 ) ) )
@@ -504,7 +528,7 @@ namespace GeneXus.Programs {
          pr_default.execute(1, new Object[] {A127LeaveRequestId});
          if ( (pr_default.getStatus(1) != 101) )
          {
-            ZM0J21( 16) ;
+            ZM0J21( 17) ;
             RcdFound21 = 1;
             A127LeaveRequestId = BC000J3_A127LeaveRequestId[0];
             A131LeaveRequestDuration = BC000J3_A131LeaveRequestDuration[0];
@@ -923,6 +947,7 @@ namespace GeneXus.Programs {
       {
          A131LeaveRequestDuration = 0;
          A130LeaveRequestEndDate = DateTime.MinValue;
+         A106EmployeeId = AV18EmployeeId;
          A124LeaveTypeId = 0;
          A125LeaveTypeName = "";
          A128LeaveRequestDate = DateTime.MinValue;
@@ -935,7 +960,6 @@ namespace GeneXus.Programs {
          A147EmployeeBalance = 0;
          A144LeaveTypeVacationLeave = "";
          A129LeaveRequestStartDate = Gx_date;
-         A106EmployeeId = AV18EmployeeId;
          Z131LeaveRequestDuration = 0;
          Z130LeaveRequestEndDate = DateTime.MinValue;
          Z128LeaveRequestDate = DateTime.MinValue;
@@ -956,8 +980,8 @@ namespace GeneXus.Programs {
 
       protected void StandaloneModalInsert( )
       {
-         A129LeaveRequestStartDate = i129LeaveRequestStartDate;
          A106EmployeeId = i106EmployeeId;
+         A129LeaveRequestStartDate = i129LeaveRequestStartDate;
       }
 
       protected bool IsIns( )
@@ -985,6 +1009,7 @@ namespace GeneXus.Programs {
          obj21.gxTpr_Mode = Gx_mode;
          obj21.gxTpr_Leaverequestduration = A131LeaveRequestDuration;
          obj21.gxTpr_Leaverequestenddate = A130LeaveRequestEndDate;
+         obj21.gxTpr_Employeeid = A106EmployeeId;
          obj21.gxTpr_Leavetypeid = A124LeaveTypeId;
          obj21.gxTpr_Leavetypename = A125LeaveTypeName;
          obj21.gxTpr_Leaverequestdate = A128LeaveRequestDate;
@@ -996,7 +1021,6 @@ namespace GeneXus.Programs {
          obj21.gxTpr_Employeebalance = A147EmployeeBalance;
          obj21.gxTpr_Leavetypevacationleave = A144LeaveTypeVacationLeave;
          obj21.gxTpr_Leaverequeststartdate = A129LeaveRequestStartDate;
-         obj21.gxTpr_Employeeid = A106EmployeeId;
          obj21.gxTpr_Leaverequestid = A127LeaveRequestId;
          obj21.gxTpr_Leaverequestid_Z = Z127LeaveRequestId;
          obj21.gxTpr_Leavetypeid_Z = Z124LeaveTypeId;
@@ -1033,6 +1057,10 @@ namespace GeneXus.Programs {
          {
             A130LeaveRequestEndDate = obj21.gxTpr_Leaverequestenddate;
          }
+         if ( ! ( IsUpd( )  ) || ( forceLoad == 1 ) )
+         {
+            A106EmployeeId = obj21.gxTpr_Employeeid;
+         }
          A124LeaveTypeId = obj21.gxTpr_Leavetypeid;
          A125LeaveTypeName = obj21.gxTpr_Leavetypename;
          A128LeaveRequestDate = obj21.gxTpr_Leaverequestdate;
@@ -1045,10 +1073,6 @@ namespace GeneXus.Programs {
          A147EmployeeBalance = obj21.gxTpr_Employeebalance;
          A144LeaveTypeVacationLeave = obj21.gxTpr_Leavetypevacationleave;
          A129LeaveRequestStartDate = obj21.gxTpr_Leaverequeststartdate;
-         if ( ! ( IsUpd( )  ) || ( forceLoad == 1 ) )
-         {
-            A106EmployeeId = obj21.gxTpr_Employeeid;
-         }
          A127LeaveRequestId = obj21.gxTpr_Leaverequestid;
          Z127LeaveRequestId = obj21.gxTpr_Leaverequestid_Z;
          Z124LeaveTypeId = obj21.gxTpr_Leavetypeid_Z;
@@ -1088,7 +1112,7 @@ namespace GeneXus.Programs {
             Gx_mode = "UPD";
             Z127LeaveRequestId = A127LeaveRequestId;
          }
-         ZM0J21( -16) ;
+         ZM0J21( -17) ;
          OnLoadActions0J21( ) ;
          AddRow0J21( ) ;
          ScanKeyEnd0J21( ) ;
@@ -1117,7 +1141,7 @@ namespace GeneXus.Programs {
             Gx_mode = "UPD";
             Z127LeaveRequestId = A127LeaveRequestId;
          }
-         ZM0J21( -16) ;
+         ZM0J21( -17) ;
          OnLoadActions0J21( ) ;
          AddRow0J21( ) ;
          ScanKeyEnd0J21( ) ;
@@ -1574,12 +1598,16 @@ namespace GeneXus.Programs {
          endTrnMsgTxt = "";
          endTrnMsgCod = "";
          AV9GAMUser = new GeneXus.Programs.genexussecurity.SdtGAMUser(context);
+         AV42projectIds = new GxSimpleCollection<long>();
+         AV45Employees = new GxSimpleCollection<long>();
+         GXt_objcol_int3 = new GxSimpleCollection<long>();
          AV32WWPContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPContext(context);
          AV29TrnContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext(context);
          AV31WebSession = context.GetSession();
-         AV42Pgmname = "";
+         AV53Pgmname = "";
          AV30TrnContextAtt = new GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext_Attribute(context);
          AV37Mesage = "";
+         AV7Employee = new SdtEmployee(context);
          Z130LeaveRequestEndDate = DateTime.MinValue;
          Z128LeaveRequestDate = DateTime.MinValue;
          Z129LeaveRequestStartDate = DateTime.MinValue;
@@ -1713,7 +1741,7 @@ namespace GeneXus.Programs {
                }
             }
          );
-         AV42Pgmname = "LeaveRequest_BC";
+         AV53Pgmname = "LeaveRequest_BC";
          A106EmployeeId = 0;
          Z106EmployeeId = 0;
          i106EmployeeId = 0;
@@ -1735,7 +1763,7 @@ namespace GeneXus.Programs {
       private short RcdFound21 ;
       private short AV17EmployeeCompany ;
       private short AV20EmployyeeAvailableVacationDays ;
-      private short GXt_int3 ;
+      private short GXt_int4 ;
       private short GX_JID ;
       private short Gx_BScreen ;
       private short nIsDirty_21 ;
@@ -1744,13 +1772,15 @@ namespace GeneXus.Programs {
       private int Count ;
       private int GXPagingFrom21 ;
       private int GXPagingTo21 ;
-      private int AV43GXV1 ;
+      private int AV54GXV1 ;
       private long A127LeaveRequestId ;
       private long A124LeaveTypeId ;
       private long A106EmployeeId ;
       private long Z127LeaveRequestId ;
       private long AV26LeaveRequestId ;
+      private long AV46LeaveTypeCompanyId ;
       private long AV18EmployeeId ;
+      private long AV44CompanyId ;
       private long GXt_int2 ;
       private long AV24Insert_LeaveTypeId ;
       private long AV23Insert_EmployeeId ;
@@ -1775,7 +1805,7 @@ namespace GeneXus.Programs {
       private string Gx_mode ;
       private string endTrnMsgTxt ;
       private string endTrnMsgCod ;
-      private string AV42Pgmname ;
+      private string AV53Pgmname ;
       private string AV37Mesage ;
       private string Z173LeaveRequestHalfDay ;
       private string Z132LeaveRequestStatus ;
@@ -1794,12 +1824,16 @@ namespace GeneXus.Programs {
       private bool n173LeaveRequestHalfDay ;
       private bool returnInSub ;
       private bool AV36ISManager ;
+      private bool AV40IsProjectManager ;
       private bool Gx_longc ;
       private bool mustCommit ;
       private string A133LeaveRequestDescription ;
       private string A134LeaveRequestRejectionReason ;
       private string Z133LeaveRequestDescription ;
       private string Z134LeaveRequestRejectionReason ;
+      private GxSimpleCollection<long> AV42projectIds ;
+      private GxSimpleCollection<long> AV45Employees ;
+      private GxSimpleCollection<long> GXt_objcol_int3 ;
       private IGxSession AV31WebSession ;
       private GXBCCollection<SdtLeaveRequest> gx_restcollection ;
       private GeneXus.Programs.genexussecurity.SdtGAMUser AV9GAMUser ;
@@ -1893,6 +1927,7 @@ namespace GeneXus.Programs {
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
       private IDataStoreProvider pr_gam ;
+      private SdtEmployee AV7Employee ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext AV29TrnContext ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext_Attribute AV30TrnContextAtt ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV32WWPContext ;

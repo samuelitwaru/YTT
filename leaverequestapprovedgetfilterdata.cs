@@ -308,8 +308,8 @@ namespace GeneXus.Programs {
             A124LeaveTypeId = P006Y2_A124LeaveTypeId[0];
             A132LeaveRequestStatus = P006Y2_A132LeaveRequestStatus[0];
             A148EmployeeName = P006Y2_A148EmployeeName[0];
-            A100CompanyId = P006Y2_A100CompanyId[0];
             A106EmployeeId = P006Y2_A106EmployeeId[0];
+            A100CompanyId = P006Y2_A100CompanyId[0];
             A147EmployeeBalance = P006Y2_A147EmployeeBalance[0];
             A131LeaveRequestDuration = P006Y2_A131LeaveRequestDuration[0];
             A173LeaveRequestHalfDay = P006Y2_A173LeaveRequestHalfDay[0];
@@ -427,8 +427,8 @@ namespace GeneXus.Programs {
          {
             BRK6Y4 = false;
             A124LeaveTypeId = P006Y3_A124LeaveTypeId[0];
-            A100CompanyId = P006Y3_A100CompanyId[0];
             A106EmployeeId = P006Y3_A106EmployeeId[0];
+            A100CompanyId = P006Y3_A100CompanyId[0];
             A132LeaveRequestStatus = P006Y3_A132LeaveRequestStatus[0];
             A147EmployeeBalance = P006Y3_A147EmployeeBalance[0];
             A131LeaveRequestDuration = P006Y3_A131LeaveRequestDuration[0];
@@ -555,8 +555,8 @@ namespace GeneXus.Programs {
             A132LeaveRequestStatus = P006Y4_A132LeaveRequestStatus[0];
             A173LeaveRequestHalfDay = P006Y4_A173LeaveRequestHalfDay[0];
             n173LeaveRequestHalfDay = P006Y4_n173LeaveRequestHalfDay[0];
-            A100CompanyId = P006Y4_A100CompanyId[0];
             A106EmployeeId = P006Y4_A106EmployeeId[0];
+            A100CompanyId = P006Y4_A100CompanyId[0];
             A147EmployeeBalance = P006Y4_A147EmployeeBalance[0];
             A131LeaveRequestDuration = P006Y4_A131LeaveRequestDuration[0];
             A130LeaveRequestEndDate = P006Y4_A130LeaveRequestEndDate[0];
@@ -665,8 +665,8 @@ namespace GeneXus.Programs {
          P006Y2_A124LeaveTypeId = new long[1] ;
          P006Y2_A132LeaveRequestStatus = new string[] {""} ;
          P006Y2_A148EmployeeName = new string[] {""} ;
-         P006Y2_A100CompanyId = new long[1] ;
          P006Y2_A106EmployeeId = new long[1] ;
+         P006Y2_A100CompanyId = new long[1] ;
          P006Y2_A147EmployeeBalance = new decimal[1] ;
          P006Y2_A131LeaveRequestDuration = new decimal[1] ;
          P006Y2_A173LeaveRequestHalfDay = new string[] {""} ;
@@ -677,8 +677,8 @@ namespace GeneXus.Programs {
          P006Y2_A127LeaveRequestId = new long[1] ;
          AV30Option = "";
          P006Y3_A124LeaveTypeId = new long[1] ;
-         P006Y3_A100CompanyId = new long[1] ;
          P006Y3_A106EmployeeId = new long[1] ;
+         P006Y3_A100CompanyId = new long[1] ;
          P006Y3_A132LeaveRequestStatus = new string[] {""} ;
          P006Y3_A147EmployeeBalance = new decimal[1] ;
          P006Y3_A131LeaveRequestDuration = new decimal[1] ;
@@ -693,8 +693,8 @@ namespace GeneXus.Programs {
          P006Y4_A132LeaveRequestStatus = new string[] {""} ;
          P006Y4_A173LeaveRequestHalfDay = new string[] {""} ;
          P006Y4_n173LeaveRequestHalfDay = new bool[] {false} ;
-         P006Y4_A100CompanyId = new long[1] ;
          P006Y4_A106EmployeeId = new long[1] ;
+         P006Y4_A100CompanyId = new long[1] ;
          P006Y4_A147EmployeeBalance = new decimal[1] ;
          P006Y4_A131LeaveRequestDuration = new decimal[1] ;
          P006Y4_A130LeaveRequestEndDate = new DateTime[] {DateTime.MinValue} ;
@@ -705,15 +705,15 @@ namespace GeneXus.Programs {
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.leaverequestapprovedgetfilterdata__default(),
             new Object[][] {
                 new Object[] {
-               P006Y2_A124LeaveTypeId, P006Y2_A132LeaveRequestStatus, P006Y2_A148EmployeeName, P006Y2_A100CompanyId, P006Y2_A106EmployeeId, P006Y2_A147EmployeeBalance, P006Y2_A131LeaveRequestDuration, P006Y2_A173LeaveRequestHalfDay, P006Y2_n173LeaveRequestHalfDay, P006Y2_A130LeaveRequestEndDate,
+               P006Y2_A124LeaveTypeId, P006Y2_A132LeaveRequestStatus, P006Y2_A148EmployeeName, P006Y2_A106EmployeeId, P006Y2_A100CompanyId, P006Y2_A147EmployeeBalance, P006Y2_A131LeaveRequestDuration, P006Y2_A173LeaveRequestHalfDay, P006Y2_n173LeaveRequestHalfDay, P006Y2_A130LeaveRequestEndDate,
                P006Y2_A129LeaveRequestStartDate, P006Y2_A125LeaveTypeName, P006Y2_A127LeaveRequestId
                }
                , new Object[] {
-               P006Y3_A124LeaveTypeId, P006Y3_A100CompanyId, P006Y3_A106EmployeeId, P006Y3_A132LeaveRequestStatus, P006Y3_A147EmployeeBalance, P006Y3_A131LeaveRequestDuration, P006Y3_A173LeaveRequestHalfDay, P006Y3_n173LeaveRequestHalfDay, P006Y3_A130LeaveRequestEndDate, P006Y3_A129LeaveRequestStartDate,
+               P006Y3_A124LeaveTypeId, P006Y3_A106EmployeeId, P006Y3_A100CompanyId, P006Y3_A132LeaveRequestStatus, P006Y3_A147EmployeeBalance, P006Y3_A131LeaveRequestDuration, P006Y3_A173LeaveRequestHalfDay, P006Y3_n173LeaveRequestHalfDay, P006Y3_A130LeaveRequestEndDate, P006Y3_A129LeaveRequestStartDate,
                P006Y3_A125LeaveTypeName, P006Y3_A148EmployeeName, P006Y3_A127LeaveRequestId
                }
                , new Object[] {
-               P006Y4_A124LeaveTypeId, P006Y4_A132LeaveRequestStatus, P006Y4_A173LeaveRequestHalfDay, P006Y4_n173LeaveRequestHalfDay, P006Y4_A100CompanyId, P006Y4_A106EmployeeId, P006Y4_A147EmployeeBalance, P006Y4_A131LeaveRequestDuration, P006Y4_A130LeaveRequestEndDate, P006Y4_A129LeaveRequestStartDate,
+               P006Y4_A124LeaveTypeId, P006Y4_A132LeaveRequestStatus, P006Y4_A173LeaveRequestHalfDay, P006Y4_n173LeaveRequestHalfDay, P006Y4_A106EmployeeId, P006Y4_A100CompanyId, P006Y4_A147EmployeeBalance, P006Y4_A131LeaveRequestDuration, P006Y4_A130LeaveRequestEndDate, P006Y4_A129LeaveRequestStartDate,
                P006Y4_A125LeaveTypeName, P006Y4_A148EmployeeName, P006Y4_A127LeaveRequestId
                }
             }
@@ -798,8 +798,8 @@ namespace GeneXus.Programs {
       private long[] P006Y2_A124LeaveTypeId ;
       private string[] P006Y2_A132LeaveRequestStatus ;
       private string[] P006Y2_A148EmployeeName ;
-      private long[] P006Y2_A100CompanyId ;
       private long[] P006Y2_A106EmployeeId ;
+      private long[] P006Y2_A100CompanyId ;
       private decimal[] P006Y2_A147EmployeeBalance ;
       private decimal[] P006Y2_A131LeaveRequestDuration ;
       private string[] P006Y2_A173LeaveRequestHalfDay ;
@@ -809,8 +809,8 @@ namespace GeneXus.Programs {
       private string[] P006Y2_A125LeaveTypeName ;
       private long[] P006Y2_A127LeaveRequestId ;
       private long[] P006Y3_A124LeaveTypeId ;
-      private long[] P006Y3_A100CompanyId ;
       private long[] P006Y3_A106EmployeeId ;
+      private long[] P006Y3_A100CompanyId ;
       private string[] P006Y3_A132LeaveRequestStatus ;
       private decimal[] P006Y3_A147EmployeeBalance ;
       private decimal[] P006Y3_A131LeaveRequestDuration ;
@@ -825,8 +825,8 @@ namespace GeneXus.Programs {
       private string[] P006Y4_A132LeaveRequestStatus ;
       private string[] P006Y4_A173LeaveRequestHalfDay ;
       private bool[] P006Y4_n173LeaveRequestHalfDay ;
-      private long[] P006Y4_A100CompanyId ;
       private long[] P006Y4_A106EmployeeId ;
+      private long[] P006Y4_A100CompanyId ;
       private decimal[] P006Y4_A147EmployeeBalance ;
       private decimal[] P006Y4_A131LeaveRequestDuration ;
       private DateTime[] P006Y4_A130LeaveRequestEndDate ;
@@ -881,7 +881,7 @@ namespace GeneXus.Programs {
          string scmdbuf;
          short[] GXv_int1 = new short[20];
          Object[] GXv_Object2 = new Object[2];
-         scmdbuf = "SELECT T1.LeaveTypeId, T1.LeaveRequestStatus, T3.EmployeeName, T2.CompanyId, T1.EmployeeId, T3.EmployeeBalance, T1.LeaveRequestDuration, T1.LeaveRequestHalfDay, T1.LeaveRequestEndDate, T1.LeaveRequestStartDate, T2.LeaveTypeName, T1.LeaveRequestId FROM ((LeaveRequest T1 INNER JOIN LeaveType T2 ON T2.LeaveTypeId = T1.LeaveTypeId) INNER JOIN Employee T3 ON T3.EmployeeId = T1.EmployeeId)";
+         scmdbuf = "SELECT T1.LeaveTypeId, T1.LeaveRequestStatus, T3.EmployeeName, T1.EmployeeId, T2.CompanyId, T3.EmployeeBalance, T1.LeaveRequestDuration, T1.LeaveRequestHalfDay, T1.LeaveRequestEndDate, T1.LeaveRequestStartDate, T2.LeaveTypeName, T1.LeaveRequestId FROM ((LeaveRequest T1 INNER JOIN LeaveType T2 ON T2.LeaveTypeId = T1.LeaveTypeId) INNER JOIN Employee T3 ON T3.EmployeeId = T1.EmployeeId)";
          AddWhere(sWhereString, "(T1.LeaveRequestStatus = ( 'Approved'))");
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV56Leaverequestapprovedds_1_filterfulltext)) )
          {
@@ -1027,17 +1027,17 @@ namespace GeneXus.Programs {
          {
             GXv_int1[18] = 1;
          }
-         if ( ! new userhasrole(context).executeUdp(  "Manager") && new userhasrole(context).executeUdp(  "Project Manager") )
-         {
-            AddWhere(sWhereString, "("+new GxDbmsUtils( new GxPostgreSql()).ValueList(AV48EmployeeIds, "T1.EmployeeId IN (", ")")+")");
-         }
-         if ( new userhasrole(context).executeUdp(  "Manager") )
+         if ( new userhasrole(context).executeUdp(  "Manager") && ! new userhasrole(context).executeUdp(  "Project Manager") )
          {
             AddWhere(sWhereString, "(T2.CompanyId = :AV72Udparg17)");
          }
          else
          {
             GXv_int1[19] = 1;
+         }
+         if ( new userhasrole(context).executeUdp(  "Project Manager") )
+         {
+            AddWhere(sWhereString, "("+new GxDbmsUtils( new GxPostgreSql()).ValueList(AV48EmployeeIds, "T1.EmployeeId IN (", ")")+")");
          }
          scmdbuf += sWhereString;
          scmdbuf += " ORDER BY T3.EmployeeName";
@@ -1080,7 +1080,7 @@ namespace GeneXus.Programs {
          string scmdbuf;
          short[] GXv_int3 = new short[20];
          Object[] GXv_Object4 = new Object[2];
-         scmdbuf = "SELECT T1.LeaveTypeId, T2.CompanyId, T1.EmployeeId, T1.LeaveRequestStatus, T3.EmployeeBalance, T1.LeaveRequestDuration, T1.LeaveRequestHalfDay, T1.LeaveRequestEndDate, T1.LeaveRequestStartDate, T2.LeaveTypeName, T3.EmployeeName, T1.LeaveRequestId FROM ((LeaveRequest T1 INNER JOIN LeaveType T2 ON T2.LeaveTypeId = T1.LeaveTypeId) INNER JOIN Employee T3 ON T3.EmployeeId = T1.EmployeeId)";
+         scmdbuf = "SELECT T1.LeaveTypeId, T1.EmployeeId, T2.CompanyId, T1.LeaveRequestStatus, T3.EmployeeBalance, T1.LeaveRequestDuration, T1.LeaveRequestHalfDay, T1.LeaveRequestEndDate, T1.LeaveRequestStartDate, T2.LeaveTypeName, T3.EmployeeName, T1.LeaveRequestId FROM ((LeaveRequest T1 INNER JOIN LeaveType T2 ON T2.LeaveTypeId = T1.LeaveTypeId) INNER JOIN Employee T3 ON T3.EmployeeId = T1.EmployeeId)";
          AddWhere(sWhereString, "(T1.LeaveRequestStatus = ( 'Approved'))");
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV56Leaverequestapprovedds_1_filterfulltext)) )
          {
@@ -1226,17 +1226,17 @@ namespace GeneXus.Programs {
          {
             GXv_int3[18] = 1;
          }
-         if ( ! new userhasrole(context).executeUdp(  "Manager") && new userhasrole(context).executeUdp(  "Project Manager") )
-         {
-            AddWhere(sWhereString, "("+new GxDbmsUtils( new GxPostgreSql()).ValueList(AV48EmployeeIds, "T1.EmployeeId IN (", ")")+")");
-         }
-         if ( new userhasrole(context).executeUdp(  "Manager") )
+         if ( new userhasrole(context).executeUdp(  "Manager") && ! new userhasrole(context).executeUdp(  "Project Manager") )
          {
             AddWhere(sWhereString, "(T2.CompanyId = :AV72Udparg17)");
          }
          else
          {
             GXv_int3[19] = 1;
+         }
+         if ( new userhasrole(context).executeUdp(  "Project Manager") )
+         {
+            AddWhere(sWhereString, "("+new GxDbmsUtils( new GxPostgreSql()).ValueList(AV48EmployeeIds, "T1.EmployeeId IN (", ")")+")");
          }
          scmdbuf += sWhereString;
          scmdbuf += " ORDER BY T1.LeaveTypeId";
@@ -1279,7 +1279,7 @@ namespace GeneXus.Programs {
          string scmdbuf;
          short[] GXv_int5 = new short[20];
          Object[] GXv_Object6 = new Object[2];
-         scmdbuf = "SELECT T1.LeaveTypeId, T1.LeaveRequestStatus, T1.LeaveRequestHalfDay, T2.CompanyId, T1.EmployeeId, T3.EmployeeBalance, T1.LeaveRequestDuration, T1.LeaveRequestEndDate, T1.LeaveRequestStartDate, T2.LeaveTypeName, T3.EmployeeName, T1.LeaveRequestId FROM ((LeaveRequest T1 INNER JOIN LeaveType T2 ON T2.LeaveTypeId = T1.LeaveTypeId) INNER JOIN Employee T3 ON T3.EmployeeId = T1.EmployeeId)";
+         scmdbuf = "SELECT T1.LeaveTypeId, T1.LeaveRequestStatus, T1.LeaveRequestHalfDay, T1.EmployeeId, T2.CompanyId, T3.EmployeeBalance, T1.LeaveRequestDuration, T1.LeaveRequestEndDate, T1.LeaveRequestStartDate, T2.LeaveTypeName, T3.EmployeeName, T1.LeaveRequestId FROM ((LeaveRequest T1 INNER JOIN LeaveType T2 ON T2.LeaveTypeId = T1.LeaveTypeId) INNER JOIN Employee T3 ON T3.EmployeeId = T1.EmployeeId)";
          AddWhere(sWhereString, "(T1.LeaveRequestStatus = ( 'Approved'))");
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV56Leaverequestapprovedds_1_filterfulltext)) )
          {
@@ -1425,17 +1425,17 @@ namespace GeneXus.Programs {
          {
             GXv_int5[18] = 1;
          }
-         if ( ! new userhasrole(context).executeUdp(  "Manager") && new userhasrole(context).executeUdp(  "Project Manager") )
-         {
-            AddWhere(sWhereString, "("+new GxDbmsUtils( new GxPostgreSql()).ValueList(AV48EmployeeIds, "T1.EmployeeId IN (", ")")+")");
-         }
-         if ( new userhasrole(context).executeUdp(  "Manager") )
+         if ( new userhasrole(context).executeUdp(  "Manager") && ! new userhasrole(context).executeUdp(  "Project Manager") )
          {
             AddWhere(sWhereString, "(T2.CompanyId = :AV72Udparg17)");
          }
          else
          {
             GXv_int5[19] = 1;
+         }
+         if ( new userhasrole(context).executeUdp(  "Project Manager") )
+         {
+            AddWhere(sWhereString, "("+new GxDbmsUtils( new GxPostgreSql()).ValueList(AV48EmployeeIds, "T1.EmployeeId IN (", ")")+")");
          }
          scmdbuf += sWhereString;
          scmdbuf += " ORDER BY T1.LeaveRequestHalfDay";

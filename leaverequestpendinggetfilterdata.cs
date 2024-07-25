@@ -1027,7 +1027,7 @@ namespace GeneXus.Programs {
          {
             GXv_int1[18] = 1;
          }
-         if ( new userhasrole(context).executeUdp(  "Manager") )
+         if ( new userhasrole(context).executeUdp(  "Manager") && ! new userhasrole(context).executeUdp(  "Project Manager") )
          {
             AddWhere(sWhereString, "(T2.CompanyId = :AV73Udparg17)");
          }
@@ -1035,7 +1035,7 @@ namespace GeneXus.Programs {
          {
             GXv_int1[19] = 1;
          }
-         if ( ! new userhasrole(context).executeUdp(  "Manager") && new userhasrole(context).executeUdp(  "Project Manager") )
+         if ( new userhasrole(context).executeUdp(  "Project Manager") )
          {
             AddWhere(sWhereString, "("+new GxDbmsUtils( new GxPostgreSql()).ValueList(AV48EmployeeIds, "T1.EmployeeId IN (", ")")+")");
          }
@@ -1226,7 +1226,7 @@ namespace GeneXus.Programs {
          {
             GXv_int3[18] = 1;
          }
-         if ( new userhasrole(context).executeUdp(  "Manager") )
+         if ( new userhasrole(context).executeUdp(  "Manager") && ! new userhasrole(context).executeUdp(  "Project Manager") )
          {
             AddWhere(sWhereString, "(T2.CompanyId = :AV73Udparg17)");
          }
@@ -1234,7 +1234,7 @@ namespace GeneXus.Programs {
          {
             GXv_int3[19] = 1;
          }
-         if ( ! new userhasrole(context).executeUdp(  "Manager") && new userhasrole(context).executeUdp(  "Project Manager") )
+         if ( new userhasrole(context).executeUdp(  "Project Manager") )
          {
             AddWhere(sWhereString, "("+new GxDbmsUtils( new GxPostgreSql()).ValueList(AV48EmployeeIds, "T1.EmployeeId IN (", ")")+")");
          }
@@ -1425,7 +1425,7 @@ namespace GeneXus.Programs {
          {
             GXv_int5[18] = 1;
          }
-         if ( new userhasrole(context).executeUdp(  "Manager") )
+         if ( new userhasrole(context).executeUdp(  "Manager") && ! new userhasrole(context).executeUdp(  "Project Manager") )
          {
             AddWhere(sWhereString, "(T2.CompanyId = :AV73Udparg17)");
          }
@@ -1433,7 +1433,7 @@ namespace GeneXus.Programs {
          {
             GXv_int5[19] = 1;
          }
-         if ( ! new userhasrole(context).executeUdp(  "Manager") && new userhasrole(context).executeUdp(  "Project Manager") )
+         if ( new userhasrole(context).executeUdp(  "Project Manager") )
          {
             AddWhere(sWhereString, "("+new GxDbmsUtils( new GxPostgreSql()).ValueList(AV48EmployeeIds, "T1.EmployeeId IN (", ")")+")");
          }

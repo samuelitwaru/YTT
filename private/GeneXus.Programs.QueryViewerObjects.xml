@@ -132,4 +132,7 @@
   <Object name="DBEmployeeHours_Filter1" id="0" type="Query" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="DBEmployeeHours" xmlns="qv">
     <DefaultOutput type="OutputTypeTable" xmlns="qv" />
   </Object>
+  <Object name="DPEmployees" id="68" type="DataProvider" IntegratedSecurityLevel="SecurityHigh" PermissionPrefix="DPEmployees" xmlns="qv">
+    <DefaultOutput type="OutputTypePivotTable" xmlns="qv" />
+  </Object>
 </Objects>

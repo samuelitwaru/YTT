@@ -63,8 +63,6 @@ namespace GeneXus.Programs {
 
       protected override void createObjects( )
       {
-         dynLeaveTypeId = new GXCombobox();
-         dynEmployeeId = new GXCombobox();
          radLeaveRequestHalfDay = new GXRadio();
          cmbLeaveRequestStatus = new GXCombobox();
       }
@@ -115,29 +113,6 @@ namespace GeneXus.Programs {
                   context.httpAjaxContext.ajax_rspStartCmp(sPrefix);
                   componentdraw();
                   context.httpAjaxContext.ajax_rspEndCmp();
-                  return  ;
-               }
-               else if ( StringUtil.StrCmp(gxfirstwebparm, "gxajaxCallCrl"+"_"+"LEAVETYPEID") == 0 )
-               {
-                  setAjaxCallMode();
-                  if ( ! IsValidAjaxCall( true) )
-                  {
-                     GxWebError = 1;
-                     return  ;
-                  }
-                  GXDLALEAVETYPEID4E2( ) ;
-                  return  ;
-               }
-               else if ( StringUtil.StrCmp(gxfirstwebparm, "gxajaxCallCrl"+"_"+"EMPLOYEEID") == 0 )
-               {
-                  AV16Employeecompany = NumberUtil.Val( GetPar( "Employeecompany"), ".");
-                  setAjaxCallMode();
-                  if ( ! IsValidAjaxCall( true) )
-                  {
-                     GxWebError = 1;
-                     return  ;
-                  }
-                  GXDLAEMPLOYEEID4E2( AV16Employeecompany) ;
                   return  ;
                }
                else if ( StringUtil.StrCmp(gxfirstwebparm, "gxajaxEvt") == 0 )
@@ -204,8 +179,7 @@ namespace GeneXus.Programs {
             if ( ( GxWebError == 0 ) && ! isAjaxCallMode( ) )
             {
                /* GeneXus formulas. */
-               AV15Pgmname = "LeaveRequestGeneral";
-               GXALEAVETYPEID_html4E2( ) ;
+               AV18Pgmname = "LeaveRequestGeneral";
                WS4E2( ) ;
                if ( ! isAjaxCallMode( ) )
                {
@@ -366,7 +340,6 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vISAUTHORIZED_UPDATE", GetSecureSignedToken( sPrefix, AV12IsAuthorized_Update, context));
          GxWebStd.gx_boolean_hidden_field( context, sPrefix+"vISAUTHORIZED_DELETE", AV13IsAuthorized_Delete);
          GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vISAUTHORIZED_DELETE", GetSecureSignedToken( sPrefix, AV13IsAuthorized_Delete, context));
-         GxWebStd.gx_hidden_field( context, sPrefix+"vEMPLOYEECOMPANY", StringUtil.LTrim( StringUtil.NToC( AV16Employeecompany, 10, 2, ".", "")));
       }
 
       protected void RenderHtmlCloseForm4E2( )
@@ -473,39 +446,6 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-sm-6 DataContentCell DscTop", "start", "top", "", "", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+dynLeaveTypeId_Internalname+"\"", "", "div");
-            /* Attribute/Variable Label */
-            GxWebStd.gx_label_element( context, dynLeaveTypeId_Internalname, "Leave Types", " AttributeLabel MaxWidthLabel", 1, true, "");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
-            /* ComboBox */
-            GxWebStd.gx_combobox_ctrl1( context, dynLeaveTypeId, dynLeaveTypeId_Internalname, StringUtil.Trim( StringUtil.Str( (decimal)(A124LeaveTypeId), 10, 0)), 1, dynLeaveTypeId_Jsonclick, 0, "'"+sPrefix+"'"+",false,"+"'"+""+"'", "int", "", 1, dynLeaveTypeId.Enabled, 0, 0, 0, "em", 0, "", "", "Attribute MaxWidth", "", "", "", "", true, 0, "HLP_LeaveRequestGeneral.htm");
-            dynLeaveTypeId.CurrentValue = StringUtil.Trim( StringUtil.Str( (decimal)(A124LeaveTypeId), 10, 0));
-            AssignProp(sPrefix, false, dynLeaveTypeId_Internalname, "Values", (string)(dynLeaveTypeId.ToJavascriptSource()), true);
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, divEmployeeid_cell_Internalname, 1, 0, "px", 0, "px", divEmployeeid_cell_Class, "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", dynEmployeeId.Visible, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+dynEmployeeId_Internalname+"\"", "", "div");
-            /* Attribute/Variable Label */
-            GxWebStd.gx_label_element( context, dynEmployeeId_Internalname, "Employees", " AttributeLabel MaxWidthLabel", 1, true, "");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
-            /* ComboBox */
-            GxWebStd.gx_combobox_ctrl1( context, dynEmployeeId, dynEmployeeId_Internalname, StringUtil.Trim( StringUtil.Str( (decimal)(A106EmployeeId), 10, 0)), 1, dynEmployeeId_Jsonclick, 0, "'"+sPrefix+"'"+",false,"+"'"+""+"'", "int", "", dynEmployeeId.Visible, dynEmployeeId.Enabled, 0, 0, 0, "em", 0, "", "", "Attribute MaxWidth", "", "", "", "", true, 0, "HLP_LeaveRequestGeneral.htm");
-            dynEmployeeId.CurrentValue = StringUtil.Trim( StringUtil.Str( (decimal)(A106EmployeeId), 10, 0));
-            AssignProp(sPrefix, false, dynEmployeeId_Internalname, "Values", (string)(dynEmployeeId.ToJavascriptSource()), true);
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-sm-6 DataContentCell DscTop", "start", "top", "", "", "div");
-            /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+edtLeaveRequestStartDate_Internalname+"\"", "", "div");
             /* Attribute/Variable Label */
             GxWebStd.gx_label_element( context, edtLeaveRequestStartDate_Internalname, "Start Date", " AttributeLabel MaxWidthLabel", 1, true, "");
@@ -582,14 +522,14 @@ namespace GeneXus.Programs {
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-action-group CellMarginTop10", "start", "top", " "+"data-gx-actiongroup-type=\"toolbar\""+" ", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-button", "start", "top", "", "", "div");
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 44,'" + sPrefix + "',false,'',0)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 35,'" + sPrefix + "',false,'',0)\"";
             ClassString = "ButtonMaterial";
             StyleString = "";
             GxWebStd.gx_button_ctrl( context, bttBtnupdate_Internalname, "", "Update", bttBtnupdate_Jsonclick, 7, "Update", "", StyleString, ClassString, bttBtnupdate_Visible, 1, "standard", "'"+sPrefix+"'"+",false,"+"'"+"e114e1_client"+"'", TempTags, "", 2, "HLP_LeaveRequestGeneral.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-button", "start", "top", "", "", "div");
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 46,'" + sPrefix + "',false,'',0)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 37,'" + sPrefix + "',false,'',0)\"";
             ClassString = "ButtonMaterialDefault";
             StyleString = "";
             GxWebStd.gx_button_ctrl( context, bttBtndelete_Internalname, "", "Delete", bttBtndelete_Jsonclick, 7, "Delete", "", StyleString, ClassString, bttBtndelete_Visible, 1, "standard", "'"+sPrefix+"'"+",false,"+"'"+"e124e1_client"+"'", TempTags, "", 2, "HLP_LeaveRequestGeneral.htm");
@@ -607,7 +547,11 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, divHtml_bottomauxiliarcontrols_Internalname, 1, 0, "px", 0, "px", "Section", "start", "top", "", "", "div");
             /* Single line edit */
+            GxWebStd.gx_single_line_edit( context, edtEmployeeId_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(A106EmployeeId), 10, 0, ".", "")), StringUtil.LTrim( context.localUtil.Format( (decimal)(A106EmployeeId), "ZZZZZZZZZ9")), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtEmployeeId_Jsonclick, 0, "Attribute", "", "", "", "", edtEmployeeId_Visible, 0, 0, "text", "1", 10, "chr", 1, "row", 10, 0, 0, 0, 0, -1, 0, true, "Id", "end", false, "", "HLP_LeaveRequestGeneral.htm");
+            /* Single line edit */
             GxWebStd.gx_single_line_edit( context, edtLeaveRequestId_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(A127LeaveRequestId), 10, 0, ".", "")), StringUtil.LTrim( context.localUtil.Format( (decimal)(A127LeaveRequestId), "ZZZZZZZZZ9")), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtLeaveRequestId_Jsonclick, 0, "Attribute", "", "", "", "", edtLeaveRequestId_Visible, 0, 0, "text", "1", 10, "chr", 1, "row", 10, 0, 0, 0, 0, -1, 0, true, "Id", "end", false, "", "HLP_LeaveRequestGeneral.htm");
+            /* Single line edit */
+            GxWebStd.gx_single_line_edit( context, edtLeaveTypeId_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(A124LeaveTypeId), 10, 0, ".", "")), StringUtil.LTrim( context.localUtil.Format( (decimal)(A124LeaveTypeId), "ZZZZZZZZZ9")), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtLeaveTypeId_Jsonclick, 0, "Attribute", "", "", "", "", edtLeaveTypeId_Visible, 0, 0, "text", "1", 10, "chr", 1, "row", 10, 0, 0, 0, 0, -1, 0, true, "Id", "end", false, "", "HLP_LeaveRequestGeneral.htm");
             /* Single line edit */
             context.WriteHtmlText( "<div id=\""+edtLeaveRequestDate_Internalname+"_dp_container\" class=\"dp_container\" style=\"white-space:nowrap;display:inline;\">") ;
             GxWebStd.gx_single_line_edit( context, edtLeaveRequestDate_Internalname, context.localUtil.Format(A128LeaveRequestDate, "99/99/99"), context.localUtil.Format( A128LeaveRequestDate, "99/99/99"), "", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtLeaveRequestDate_Jsonclick, 0, "Attribute", "", "", "", "", edtLeaveRequestDate_Visible, 0, 0, "text", "", 8, "chr", 1, "row", 8, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_LeaveRequestGeneral.htm");
@@ -862,129 +806,6 @@ namespace GeneXus.Programs {
          /* End function dynload_actions */
       }
 
-      protected void GXDLALEAVETYPEID4E2( )
-      {
-         if ( ! context.isAjaxRequest( ) )
-         {
-            context.GX_webresponse.AppendHeader("Cache-Control", "no-store");
-         }
-         AddString( "[[") ;
-         GXDLALEAVETYPEID_data4E2( ) ;
-         gxdynajaxindex = 1;
-         while ( gxdynajaxindex <= gxdynajaxctrlcodr.Count )
-         {
-            AddString( gxwrpcisep+"{\"c\":\""+GXUtil.EncodeJSConstant( ((string)gxdynajaxctrlcodr.Item(gxdynajaxindex)))+"\",\"d\":\""+GXUtil.EncodeJSConstant( ((string)gxdynajaxctrldescr.Item(gxdynajaxindex)))+"\"}") ;
-            gxdynajaxindex = (int)(gxdynajaxindex+1);
-            gxwrpcisep = ",";
-         }
-         AddString( "]") ;
-         if ( gxdynajaxctrlcodr.Count == 0 )
-         {
-            AddString( ",101") ;
-         }
-         AddString( "]") ;
-      }
-
-      protected void GXALEAVETYPEID_html4E2( )
-      {
-         long gxdynajaxvalue;
-         GXDLALEAVETYPEID_data4E2( ) ;
-         gxdynajaxindex = 1;
-         if ( ! ( gxdyncontrolsrefreshing && context.isAjaxRequest( ) ) )
-         {
-            dynLeaveTypeId.removeAllItems();
-         }
-         while ( gxdynajaxindex <= gxdynajaxctrlcodr.Count )
-         {
-            gxdynajaxvalue = (long)(Math.Round(NumberUtil.Val( ((string)gxdynajaxctrlcodr.Item(gxdynajaxindex)), "."), 18, MidpointRounding.ToEven));
-            dynLeaveTypeId.addItem(StringUtil.Trim( StringUtil.Str( (decimal)(gxdynajaxvalue), 10, 0)), ((string)gxdynajaxctrldescr.Item(gxdynajaxindex)), 0);
-            gxdynajaxindex = (int)(gxdynajaxindex+1);
-         }
-         if ( dynLeaveTypeId.ItemCount > 0 )
-         {
-            A124LeaveTypeId = (long)(Math.Round(NumberUtil.Val( dynLeaveTypeId.getValidValue(StringUtil.Trim( StringUtil.Str( (decimal)(A124LeaveTypeId), 10, 0))), "."), 18, MidpointRounding.ToEven));
-            AssignAttri(sPrefix, false, "A124LeaveTypeId", StringUtil.LTrimStr( (decimal)(A124LeaveTypeId), 10, 0));
-         }
-      }
-
-      protected void GXDLALEAVETYPEID_data4E2( )
-      {
-         gxdynajaxctrlcodr.Clear();
-         gxdynajaxctrldescr.Clear();
-         /* Using cursor H004E2 */
-         pr_default.execute(0);
-         while ( (pr_default.getStatus(0) != 101) )
-         {
-            if ( H004E2_A100CompanyId[0] == new getloggedinusercompanyid(context).executeUdp( ) )
-            {
-               gxdynajaxctrlcodr.Add(StringUtil.LTrim( StringUtil.NToC( (decimal)(H004E2_A124LeaveTypeId[0]), 10, 0, ".", "")));
-               gxdynajaxctrldescr.Add(StringUtil.RTrim( H004E2_A125LeaveTypeName[0]));
-            }
-            pr_default.readNext(0);
-         }
-         pr_default.close(0);
-      }
-
-      protected void GXDLAEMPLOYEEID4E2( decimal AV16Employeecompany )
-      {
-         if ( ! context.isAjaxRequest( ) )
-         {
-            context.GX_webresponse.AppendHeader("Cache-Control", "no-store");
-         }
-         AddString( "[[") ;
-         GXDLAEMPLOYEEID_data4E2( AV16Employeecompany) ;
-         gxdynajaxindex = 1;
-         while ( gxdynajaxindex <= gxdynajaxctrlcodr.Count )
-         {
-            AddString( gxwrpcisep+"{\"c\":\""+GXUtil.EncodeJSConstant( ((string)gxdynajaxctrlcodr.Item(gxdynajaxindex)))+"\",\"d\":\""+GXUtil.EncodeJSConstant( ((string)gxdynajaxctrldescr.Item(gxdynajaxindex)))+"\"}") ;
-            gxdynajaxindex = (int)(gxdynajaxindex+1);
-            gxwrpcisep = ",";
-         }
-         AddString( "]") ;
-         if ( gxdynajaxctrlcodr.Count == 0 )
-         {
-            AddString( ",101") ;
-         }
-         AddString( "]") ;
-      }
-
-      protected void GXAEMPLOYEEID_html4E2( decimal AV16Employeecompany )
-      {
-         long gxdynajaxvalue;
-         GXDLAEMPLOYEEID_data4E2( AV16Employeecompany) ;
-         gxdynajaxindex = 1;
-         if ( ! ( gxdyncontrolsrefreshing && context.isAjaxRequest( ) ) )
-         {
-            dynEmployeeId.removeAllItems();
-         }
-         while ( gxdynajaxindex <= gxdynajaxctrlcodr.Count )
-         {
-            gxdynajaxvalue = (long)(Math.Round(NumberUtil.Val( ((string)gxdynajaxctrlcodr.Item(gxdynajaxindex)), "."), 18, MidpointRounding.ToEven));
-            dynEmployeeId.addItem(StringUtil.Trim( StringUtil.Str( (decimal)(gxdynajaxvalue), 10, 0)), ((string)gxdynajaxctrldescr.Item(gxdynajaxindex)), 0);
-            gxdynajaxindex = (int)(gxdynajaxindex+1);
-         }
-         if ( dynEmployeeId.ItemCount > 0 )
-         {
-            A106EmployeeId = (long)(Math.Round(NumberUtil.Val( dynEmployeeId.getValidValue(StringUtil.Trim( StringUtil.Str( (decimal)(A106EmployeeId), 10, 0))), "."), 18, MidpointRounding.ToEven));
-            AssignAttri(sPrefix, false, "A106EmployeeId", StringUtil.LTrimStr( (decimal)(A106EmployeeId), 10, 0));
-         }
-      }
-
-      protected void GXDLAEMPLOYEEID_data4E2( decimal AV16Employeecompany )
-      {
-         gxdynajaxctrlcodr.Clear();
-         gxdynajaxctrldescr.Clear();
-         /* Using cursor H004E3 */
-         pr_default.execute(1, new Object[] {AV16Employeecompany});
-         while ( (pr_default.getStatus(1) != 101) )
-         {
-            gxdynajaxctrlcodr.Add(StringUtil.LTrim( StringUtil.NToC( (decimal)(H004E3_A106EmployeeId[0]), 10, 0, ".", "")));
-            gxdynajaxctrldescr.Add(StringUtil.RTrim( H004E3_A148EmployeeName[0]));
-            pr_default.readNext(1);
-         }
-         pr_default.close(1);
-      }
-
       protected void send_integrity_hashes( )
       {
       }
@@ -993,7 +814,6 @@ namespace GeneXus.Programs {
       {
          if ( context.isAjaxRequest( ) )
          {
-            GXALEAVETYPEID_html4E2( ) ;
             dynload_actions( ) ;
             before_start_formulas( ) ;
          }
@@ -1001,26 +821,6 @@ namespace GeneXus.Programs {
 
       protected void fix_multi_value_controls( )
       {
-         if ( dynLeaveTypeId.ItemCount > 0 )
-         {
-            A124LeaveTypeId = (long)(Math.Round(NumberUtil.Val( dynLeaveTypeId.getValidValue(StringUtil.Trim( StringUtil.Str( (decimal)(A124LeaveTypeId), 10, 0))), "."), 18, MidpointRounding.ToEven));
-            AssignAttri(sPrefix, false, "A124LeaveTypeId", StringUtil.LTrimStr( (decimal)(A124LeaveTypeId), 10, 0));
-         }
-         if ( context.isAjaxRequest( ) )
-         {
-            dynLeaveTypeId.CurrentValue = StringUtil.Trim( StringUtil.Str( (decimal)(A124LeaveTypeId), 10, 0));
-            AssignProp(sPrefix, false, dynLeaveTypeId_Internalname, "Values", dynLeaveTypeId.ToJavascriptSource(), true);
-         }
-         if ( dynEmployeeId.ItemCount > 0 )
-         {
-            A106EmployeeId = (long)(Math.Round(NumberUtil.Val( dynEmployeeId.getValidValue(StringUtil.Trim( StringUtil.Str( (decimal)(A106EmployeeId), 10, 0))), "."), 18, MidpointRounding.ToEven));
-            AssignAttri(sPrefix, false, "A106EmployeeId", StringUtil.LTrimStr( (decimal)(A106EmployeeId), 10, 0));
-         }
-         if ( context.isAjaxRequest( ) )
-         {
-            dynEmployeeId.CurrentValue = StringUtil.Trim( StringUtil.Str( (decimal)(A106EmployeeId), 10, 0));
-            AssignProp(sPrefix, false, dynEmployeeId_Internalname, "Values", dynEmployeeId.ToJavascriptSource(), true);
-         }
          A173LeaveRequestHalfDay = StringUtil.RTrim( A173LeaveRequestHalfDay);
          n173LeaveRequestHalfDay = false;
          AssignAttri(sPrefix, false, "A173LeaveRequestHalfDay", A173LeaveRequestHalfDay);
@@ -1049,7 +849,7 @@ namespace GeneXus.Programs {
       protected void initialize_formulas( )
       {
          /* GeneXus formulas. */
-         AV15Pgmname = "LeaveRequestGeneral";
+         AV18Pgmname = "LeaveRequestGeneral";
       }
 
       protected void RF4E2( )
@@ -1061,38 +861,37 @@ namespace GeneXus.Programs {
          gxdyncontrolsrefreshing = false;
          if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
          {
-            /* Using cursor H004E4 */
-            pr_default.execute(2, new Object[] {A127LeaveRequestId});
-            while ( (pr_default.getStatus(2) != 101) )
+            /* Using cursor H004E2 */
+            pr_default.execute(0, new Object[] {A127LeaveRequestId});
+            while ( (pr_default.getStatus(0) != 101) )
             {
-               A134LeaveRequestRejectionReason = H004E4_A134LeaveRequestRejectionReason[0];
+               A134LeaveRequestRejectionReason = H004E2_A134LeaveRequestRejectionReason[0];
                AssignAttri(sPrefix, false, "A134LeaveRequestRejectionReason", A134LeaveRequestRejectionReason);
-               A132LeaveRequestStatus = H004E4_A132LeaveRequestStatus[0];
+               A132LeaveRequestStatus = H004E2_A132LeaveRequestStatus[0];
                AssignAttri(sPrefix, false, "A132LeaveRequestStatus", A132LeaveRequestStatus);
-               A131LeaveRequestDuration = H004E4_A131LeaveRequestDuration[0];
+               A131LeaveRequestDuration = H004E2_A131LeaveRequestDuration[0];
                AssignAttri(sPrefix, false, "A131LeaveRequestDuration", StringUtil.LTrimStr( A131LeaveRequestDuration, 4, 1));
-               A128LeaveRequestDate = H004E4_A128LeaveRequestDate[0];
+               A128LeaveRequestDate = H004E2_A128LeaveRequestDate[0];
                AssignAttri(sPrefix, false, "A128LeaveRequestDate", context.localUtil.Format(A128LeaveRequestDate, "99/99/99"));
-               A133LeaveRequestDescription = H004E4_A133LeaveRequestDescription[0];
-               AssignAttri(sPrefix, false, "A133LeaveRequestDescription", A133LeaveRequestDescription);
-               A173LeaveRequestHalfDay = H004E4_A173LeaveRequestHalfDay[0];
-               n173LeaveRequestHalfDay = H004E4_n173LeaveRequestHalfDay[0];
-               AssignAttri(sPrefix, false, "A173LeaveRequestHalfDay", A173LeaveRequestHalfDay);
-               A130LeaveRequestEndDate = H004E4_A130LeaveRequestEndDate[0];
-               AssignAttri(sPrefix, false, "A130LeaveRequestEndDate", context.localUtil.Format(A130LeaveRequestEndDate, "99/99/99"));
-               A129LeaveRequestStartDate = H004E4_A129LeaveRequestStartDate[0];
-               AssignAttri(sPrefix, false, "A129LeaveRequestStartDate", context.localUtil.Format(A129LeaveRequestStartDate, "99/99/99"));
-               A106EmployeeId = H004E4_A106EmployeeId[0];
-               AssignAttri(sPrefix, false, "A106EmployeeId", StringUtil.LTrimStr( (decimal)(A106EmployeeId), 10, 0));
-               A124LeaveTypeId = H004E4_A124LeaveTypeId[0];
+               A124LeaveTypeId = H004E2_A124LeaveTypeId[0];
                AssignAttri(sPrefix, false, "A124LeaveTypeId", StringUtil.LTrimStr( (decimal)(A124LeaveTypeId), 10, 0));
-               GXALEAVETYPEID_html4E2( ) ;
+               A106EmployeeId = H004E2_A106EmployeeId[0];
+               AssignAttri(sPrefix, false, "A106EmployeeId", StringUtil.LTrimStr( (decimal)(A106EmployeeId), 10, 0));
+               A133LeaveRequestDescription = H004E2_A133LeaveRequestDescription[0];
+               AssignAttri(sPrefix, false, "A133LeaveRequestDescription", A133LeaveRequestDescription);
+               A173LeaveRequestHalfDay = H004E2_A173LeaveRequestHalfDay[0];
+               n173LeaveRequestHalfDay = H004E2_n173LeaveRequestHalfDay[0];
+               AssignAttri(sPrefix, false, "A173LeaveRequestHalfDay", A173LeaveRequestHalfDay);
+               A130LeaveRequestEndDate = H004E2_A130LeaveRequestEndDate[0];
+               AssignAttri(sPrefix, false, "A130LeaveRequestEndDate", context.localUtil.Format(A130LeaveRequestEndDate, "99/99/99"));
+               A129LeaveRequestStartDate = H004E2_A129LeaveRequestStartDate[0];
+               AssignAttri(sPrefix, false, "A129LeaveRequestStartDate", context.localUtil.Format(A129LeaveRequestStartDate, "99/99/99"));
                /* Execute user event: Load */
                E144E2 ();
                /* Exiting from a For First loop. */
                if (true) break;
             }
-            pr_default.close(2);
+            pr_default.close(0);
             WB4E0( ) ;
          }
       }
@@ -1107,12 +906,7 @@ namespace GeneXus.Programs {
 
       protected void before_start_formulas( )
       {
-         AV15Pgmname = "LeaveRequestGeneral";
-         GXALEAVETYPEID_html4E2( ) ;
-         dynLeaveTypeId.Enabled = 0;
-         AssignProp(sPrefix, false, dynLeaveTypeId_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(dynLeaveTypeId.Enabled), 5, 0), true);
-         dynEmployeeId.Enabled = 0;
-         AssignProp(sPrefix, false, dynEmployeeId_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(dynEmployeeId.Enabled), 5, 0), true);
+         AV18Pgmname = "LeaveRequestGeneral";
          edtLeaveRequestStartDate_Enabled = 0;
          AssignProp(sPrefix, false, edtLeaveRequestStartDate_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtLeaveRequestStartDate_Enabled), 5, 0), true);
          edtLeaveRequestEndDate_Enabled = 0;
@@ -1121,8 +915,12 @@ namespace GeneXus.Programs {
          AssignProp(sPrefix, false, radLeaveRequestHalfDay_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(radLeaveRequestHalfDay.Enabled), 5, 0), true);
          edtLeaveRequestDescription_Enabled = 0;
          AssignProp(sPrefix, false, edtLeaveRequestDescription_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtLeaveRequestDescription_Enabled), 5, 0), true);
+         edtEmployeeId_Enabled = 0;
+         AssignProp(sPrefix, false, edtEmployeeId_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtEmployeeId_Enabled), 5, 0), true);
          edtLeaveRequestId_Enabled = 0;
          AssignProp(sPrefix, false, edtLeaveRequestId_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtLeaveRequestId_Enabled), 5, 0), true);
+         edtLeaveTypeId_Enabled = 0;
+         AssignProp(sPrefix, false, edtLeaveTypeId_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtLeaveTypeId_Enabled), 5, 0), true);
          edtLeaveRequestDate_Enabled = 0;
          AssignProp(sPrefix, false, edtLeaveRequestDate_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtLeaveRequestDate_Enabled), 5, 0), true);
          edtLeaveRequestDuration_Enabled = 0;
@@ -1154,12 +952,6 @@ namespace GeneXus.Programs {
             AV13IsAuthorized_Delete = StringUtil.StrToBool( cgiGet( sPrefix+"vISAUTHORIZED_DELETE"));
             AV12IsAuthorized_Update = StringUtil.StrToBool( cgiGet( sPrefix+"vISAUTHORIZED_UPDATE"));
             /* Read variables values. */
-            dynLeaveTypeId.CurrentValue = cgiGet( dynLeaveTypeId_Internalname);
-            A124LeaveTypeId = (long)(Math.Round(NumberUtil.Val( cgiGet( dynLeaveTypeId_Internalname), "."), 18, MidpointRounding.ToEven));
-            AssignAttri(sPrefix, false, "A124LeaveTypeId", StringUtil.LTrimStr( (decimal)(A124LeaveTypeId), 10, 0));
-            dynEmployeeId.CurrentValue = cgiGet( dynEmployeeId_Internalname);
-            A106EmployeeId = (long)(Math.Round(NumberUtil.Val( cgiGet( dynEmployeeId_Internalname), "."), 18, MidpointRounding.ToEven));
-            AssignAttri(sPrefix, false, "A106EmployeeId", StringUtil.LTrimStr( (decimal)(A106EmployeeId), 10, 0));
             A129LeaveRequestStartDate = context.localUtil.CToD( cgiGet( edtLeaveRequestStartDate_Internalname), 2);
             AssignAttri(sPrefix, false, "A129LeaveRequestStartDate", context.localUtil.Format(A129LeaveRequestStartDate, "99/99/99"));
             A130LeaveRequestEndDate = context.localUtil.CToD( cgiGet( edtLeaveRequestEndDate_Internalname), 2);
@@ -1169,6 +961,10 @@ namespace GeneXus.Programs {
             AssignAttri(sPrefix, false, "A173LeaveRequestHalfDay", A173LeaveRequestHalfDay);
             A133LeaveRequestDescription = cgiGet( edtLeaveRequestDescription_Internalname);
             AssignAttri(sPrefix, false, "A133LeaveRequestDescription", A133LeaveRequestDescription);
+            A106EmployeeId = (long)(Math.Round(context.localUtil.CToN( cgiGet( edtEmployeeId_Internalname), ".", ","), 18, MidpointRounding.ToEven));
+            AssignAttri(sPrefix, false, "A106EmployeeId", StringUtil.LTrimStr( (decimal)(A106EmployeeId), 10, 0));
+            A124LeaveTypeId = (long)(Math.Round(context.localUtil.CToN( cgiGet( edtLeaveTypeId_Internalname), ".", ","), 18, MidpointRounding.ToEven));
+            AssignAttri(sPrefix, false, "A124LeaveTypeId", StringUtil.LTrimStr( (decimal)(A124LeaveTypeId), 10, 0));
             A128LeaveRequestDate = context.localUtil.CToD( cgiGet( edtLeaveRequestDate_Internalname), 2);
             AssignAttri(sPrefix, false, "A128LeaveRequestDate", context.localUtil.Format(A128LeaveRequestDate, "99/99/99"));
             A131LeaveRequestDuration = context.localUtil.CToN( cgiGet( edtLeaveRequestDuration_Internalname), ".", ",");
@@ -1181,7 +977,6 @@ namespace GeneXus.Programs {
             /* Read subfile selected row values. */
             /* Read hidden variables. */
             GXKey = Decrypt64( context.GetCookie( "GX_SESSION_ID"), Crypto.GetServerKey( ));
-            GXALEAVETYPEID_html4E2( ) ;
          }
          else
          {
@@ -1222,8 +1017,12 @@ namespace GeneXus.Programs {
       {
          /* Load Routine */
          returnInSub = false;
+         edtEmployeeId_Visible = 0;
+         AssignProp(sPrefix, false, edtEmployeeId_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtEmployeeId_Visible), 5, 0), true);
          edtLeaveRequestId_Visible = 0;
          AssignProp(sPrefix, false, edtLeaveRequestId_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtLeaveRequestId_Visible), 5, 0), true);
+         edtLeaveTypeId_Visible = 0;
+         AssignProp(sPrefix, false, edtLeaveTypeId_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtLeaveTypeId_Visible), 5, 0), true);
          edtLeaveRequestDate_Visible = 0;
          AssignProp(sPrefix, false, edtLeaveRequestDate_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtLeaveRequestDate_Visible), 5, 0), true);
          edtLeaveRequestDuration_Visible = 0;
@@ -1252,20 +1051,6 @@ namespace GeneXus.Programs {
             bttBtndelete_Visible = 0;
             AssignProp(sPrefix, false, bttBtndelete_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(bttBtndelete_Visible), 5, 0), true);
          }
-         if ( ! ( ( AV14Ismanager == Convert.ToDecimal( true )) ) )
-         {
-            dynEmployeeId.Visible = 0;
-            AssignProp(sPrefix, false, dynEmployeeId_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(dynEmployeeId.Visible), 5, 0), true);
-            divEmployeeid_cell_Class = "Invisible";
-            AssignProp(sPrefix, false, divEmployeeid_cell_Internalname, "Class", divEmployeeid_cell_Class, true);
-         }
-         else
-         {
-            dynEmployeeId.Visible = 1;
-            AssignProp(sPrefix, false, dynEmployeeId_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(dynEmployeeId.Visible), 5, 0), true);
-            divEmployeeid_cell_Class = "col-xs-12 col-sm-6 DataContentCell DscTop";
-            AssignProp(sPrefix, false, divEmployeeid_cell_Internalname, "Class", divEmployeeid_cell_Class, true);
-         }
       }
 
       protected void S112( )
@@ -1273,7 +1058,7 @@ namespace GeneXus.Programs {
          /* 'PREPARETRANSACTION' Routine */
          returnInSub = false;
          AV8TrnContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext(context);
-         AV8TrnContext.gxTpr_Callerobject = AV15Pgmname;
+         AV8TrnContext.gxTpr_Callerobject = AV18Pgmname;
          AV8TrnContext.gxTpr_Callerondelete = false;
          AV8TrnContext.gxTpr_Callerurl = AV11HTTPRequest.ScriptName+"?"+AV11HTTPRequest.QueryString;
          AV8TrnContext.gxTpr_Transactionname = "LeaveRequest";
@@ -1477,7 +1262,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202471712112761", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202472512403772", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1493,16 +1278,12 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("leaverequestgeneral.js", "?202471712112761", false, true);
+         context.AddJavascriptSource("leaverequestgeneral.js", "?202472512403772", false, true);
          /* End function include_jscripts */
       }
 
       protected void init_web_controls( )
       {
-         dynLeaveTypeId.Name = "LEAVETYPEID";
-         dynLeaveTypeId.WebTags = "";
-         dynEmployeeId.Name = "EMPLOYEEID";
-         dynEmployeeId.WebTags = "";
          radLeaveRequestHalfDay.Name = "LEAVEREQUESTHALFDAY";
          radLeaveRequestHalfDay.WebTags = "";
          radLeaveRequestHalfDay.addItem("", "None", 0);
@@ -1522,9 +1303,6 @@ namespace GeneXus.Programs {
       protected void init_default_properties( )
       {
          lblTransactiondetail_textblock_Internalname = sPrefix+"TRANSACTIONDETAIL_TEXTBLOCK";
-         dynLeaveTypeId_Internalname = sPrefix+"LEAVETYPEID";
-         dynEmployeeId_Internalname = sPrefix+"EMPLOYEEID";
-         divEmployeeid_cell_Internalname = sPrefix+"EMPLOYEEID_CELL";
          edtLeaveRequestStartDate_Internalname = sPrefix+"LEAVEREQUESTSTARTDATE";
          edtLeaveRequestEndDate_Internalname = sPrefix+"LEAVEREQUESTENDDATE";
          radLeaveRequestHalfDay_Internalname = sPrefix+"LEAVEREQUESTHALFDAY";
@@ -1533,7 +1311,9 @@ namespace GeneXus.Programs {
          bttBtnupdate_Internalname = sPrefix+"BTNUPDATE";
          bttBtndelete_Internalname = sPrefix+"BTNDELETE";
          divTable_Internalname = sPrefix+"TABLE";
+         edtEmployeeId_Internalname = sPrefix+"EMPLOYEEID";
          edtLeaveRequestId_Internalname = sPrefix+"LEAVEREQUESTID";
+         edtLeaveTypeId_Internalname = sPrefix+"LEAVETYPEID";
          edtLeaveRequestDate_Internalname = sPrefix+"LEAVEREQUESTDATE";
          edtLeaveRequestDuration_Internalname = sPrefix+"LEAVEREQUESTDURATION";
          cmbLeaveRequestStatus_Internalname = sPrefix+"LEAVEREQUESTSTATUS";
@@ -1561,7 +1341,9 @@ namespace GeneXus.Programs {
          cmbLeaveRequestStatus.Enabled = 0;
          edtLeaveRequestDuration_Enabled = 0;
          edtLeaveRequestDate_Enabled = 0;
+         edtLeaveTypeId_Enabled = 0;
          edtLeaveRequestId_Enabled = 0;
+         edtEmployeeId_Enabled = 0;
          radLeaveRequestHalfDay.Enabled = 0;
          edtLeaveRequestRejectionReason_Visible = 1;
          cmbLeaveRequestStatus_Jsonclick = "";
@@ -1570,8 +1352,12 @@ namespace GeneXus.Programs {
          edtLeaveRequestDuration_Visible = 1;
          edtLeaveRequestDate_Jsonclick = "";
          edtLeaveRequestDate_Visible = 1;
+         edtLeaveTypeId_Jsonclick = "";
+         edtLeaveTypeId_Visible = 1;
          edtLeaveRequestId_Jsonclick = "";
          edtLeaveRequestId_Visible = 1;
+         edtEmployeeId_Jsonclick = "";
+         edtEmployeeId_Visible = 1;
          bttBtndelete_Visible = 1;
          bttBtnupdate_Visible = 1;
          edtLeaveRequestDescription_Enabled = 0;
@@ -1580,12 +1366,6 @@ namespace GeneXus.Programs {
          edtLeaveRequestEndDate_Enabled = 0;
          edtLeaveRequestStartDate_Jsonclick = "";
          edtLeaveRequestStartDate_Enabled = 0;
-         dynEmployeeId_Jsonclick = "";
-         dynEmployeeId.Enabled = 0;
-         dynEmployeeId.Visible = 1;
-         divEmployeeid_cell_Class = "col-xs-12 col-sm-6";
-         dynLeaveTypeId_Jsonclick = "";
-         dynLeaveTypeId.Enabled = 0;
          if ( StringUtil.Len( sPrefix) == 0 )
          {
             if ( context.isSpaRequest( ) )
@@ -1602,7 +1382,7 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'A127LeaveRequestId',fld:'LEAVEREQUESTID',pic:'ZZZZZZZZZ9'},{av:'dynLeaveTypeId'},{av:'A124LeaveTypeId',fld:'LEAVETYPEID',pic:'ZZZZZZZZZ9'},{av:'radLeaveRequestHalfDay'},{av:'A173LeaveRequestHalfDay',fld:'LEAVEREQUESTHALFDAY',pic:''},{av:'AV12IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV13IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true}]");
+         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'A127LeaveRequestId',fld:'LEAVEREQUESTID',pic:'ZZZZZZZZZ9'},{av:'radLeaveRequestHalfDay'},{av:'A173LeaveRequestHalfDay',fld:'LEAVEREQUESTHALFDAY',pic:''},{av:'AV12IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV13IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true}]");
          setEventMetadata("REFRESH",",oparms:[]}");
          setEventMetadata("'DOUPDATE'","{handler:'E114E1',iparms:[{av:'AV12IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'A127LeaveRequestId',fld:'LEAVEREQUESTID',pic:'ZZZZZZZZZ9'}]");
          setEventMetadata("'DOUPDATE'",",oparms:[{ctrl:'BTNUPDATE',prop:'Visible'}]}");
@@ -1632,7 +1412,7 @@ namespace GeneXus.Programs {
          gxfirstwebparm = "";
          gxfirstwebparm_bkp = "";
          sPrefix = "";
-         AV15Pgmname = "";
+         AV18Pgmname = "";
          sDynURL = "";
          FormProcess = "";
          bodyStyle = "";
@@ -1657,28 +1437,19 @@ namespace GeneXus.Programs {
          EvtGridId = "";
          EvtRowId = "";
          sEvtType = "";
-         gxdynajaxctrlcodr = new GeneXus.Utils.GxStringCollection();
-         gxdynajaxctrldescr = new GeneXus.Utils.GxStringCollection();
-         gxwrpcisep = "";
          scmdbuf = "";
+         H004E2_A127LeaveRequestId = new long[1] ;
+         H004E2_A134LeaveRequestRejectionReason = new string[] {""} ;
+         H004E2_A132LeaveRequestStatus = new string[] {""} ;
+         H004E2_A131LeaveRequestDuration = new decimal[1] ;
+         H004E2_A128LeaveRequestDate = new DateTime[] {DateTime.MinValue} ;
          H004E2_A124LeaveTypeId = new long[1] ;
-         H004E2_A125LeaveTypeName = new string[] {""} ;
-         H004E2_A100CompanyId = new long[1] ;
-         H004E3_A106EmployeeId = new long[1] ;
-         H004E3_A148EmployeeName = new string[] {""} ;
-         H004E3_A100CompanyId = new long[1] ;
-         H004E4_A127LeaveRequestId = new long[1] ;
-         H004E4_A134LeaveRequestRejectionReason = new string[] {""} ;
-         H004E4_A132LeaveRequestStatus = new string[] {""} ;
-         H004E4_A131LeaveRequestDuration = new decimal[1] ;
-         H004E4_A128LeaveRequestDate = new DateTime[] {DateTime.MinValue} ;
-         H004E4_A133LeaveRequestDescription = new string[] {""} ;
-         H004E4_A173LeaveRequestHalfDay = new string[] {""} ;
-         H004E4_n173LeaveRequestHalfDay = new bool[] {false} ;
-         H004E4_A130LeaveRequestEndDate = new DateTime[] {DateTime.MinValue} ;
-         H004E4_A129LeaveRequestStartDate = new DateTime[] {DateTime.MinValue} ;
-         H004E4_A106EmployeeId = new long[1] ;
-         H004E4_A124LeaveTypeId = new long[1] ;
+         H004E2_A106EmployeeId = new long[1] ;
+         H004E2_A133LeaveRequestDescription = new string[] {""} ;
+         H004E2_A173LeaveRequestHalfDay = new string[] {""} ;
+         H004E2_n173LeaveRequestHalfDay = new bool[] {false} ;
+         H004E2_A130LeaveRequestEndDate = new DateTime[] {DateTime.MinValue} ;
+         H004E2_A129LeaveRequestStartDate = new DateTime[] {DateTime.MinValue} ;
          AV6WWPContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPContext(context);
          AV8TrnContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext(context);
          AV11HTTPRequest = new GxHttpRequest( context);
@@ -1689,20 +1460,14 @@ namespace GeneXus.Programs {
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.leaverequestgeneral__default(),
             new Object[][] {
                 new Object[] {
-               H004E2_A124LeaveTypeId, H004E2_A125LeaveTypeName, H004E2_A100CompanyId
-               }
-               , new Object[] {
-               H004E3_A106EmployeeId, H004E3_A148EmployeeName, H004E3_A100CompanyId
-               }
-               , new Object[] {
-               H004E4_A127LeaveRequestId, H004E4_A134LeaveRequestRejectionReason, H004E4_A132LeaveRequestStatus, H004E4_A131LeaveRequestDuration, H004E4_A128LeaveRequestDate, H004E4_A133LeaveRequestDescription, H004E4_A173LeaveRequestHalfDay, H004E4_n173LeaveRequestHalfDay, H004E4_A130LeaveRequestEndDate, H004E4_A129LeaveRequestStartDate,
-               H004E4_A106EmployeeId, H004E4_A124LeaveTypeId
+               H004E2_A127LeaveRequestId, H004E2_A134LeaveRequestRejectionReason, H004E2_A132LeaveRequestStatus, H004E2_A131LeaveRequestDuration, H004E2_A128LeaveRequestDate, H004E2_A124LeaveTypeId, H004E2_A106EmployeeId, H004E2_A133LeaveRequestDescription, H004E2_A173LeaveRequestHalfDay, H004E2_n173LeaveRequestHalfDay,
+               H004E2_A130LeaveRequestEndDate, H004E2_A129LeaveRequestStartDate
                }
             }
          );
-         AV15Pgmname = "LeaveRequestGeneral";
+         AV18Pgmname = "LeaveRequestGeneral";
          /* GeneXus formulas. */
-         AV15Pgmname = "LeaveRequestGeneral";
+         AV18Pgmname = "LeaveRequestGeneral";
       }
 
       private short nGotPars ;
@@ -1721,29 +1486,30 @@ namespace GeneXus.Programs {
       private int edtLeaveRequestDescription_Enabled ;
       private int bttBtnupdate_Visible ;
       private int bttBtndelete_Visible ;
+      private int edtEmployeeId_Visible ;
       private int edtLeaveRequestId_Visible ;
+      private int edtLeaveTypeId_Visible ;
       private int edtLeaveRequestDate_Visible ;
       private int edtLeaveRequestDuration_Visible ;
       private int edtLeaveRequestRejectionReason_Visible ;
-      private int gxdynajaxindex ;
+      private int edtEmployeeId_Enabled ;
       private int edtLeaveRequestId_Enabled ;
+      private int edtLeaveTypeId_Enabled ;
       private int edtLeaveRequestDate_Enabled ;
       private int edtLeaveRequestDuration_Enabled ;
       private int edtLeaveRequestRejectionReason_Enabled ;
       private int idxLst ;
       private long A127LeaveRequestId ;
       private long wcpOA127LeaveRequestId ;
-      private long A124LeaveTypeId ;
       private long A106EmployeeId ;
-      private decimal AV16Employeecompany ;
+      private long A124LeaveTypeId ;
       private decimal A131LeaveRequestDuration ;
-      private decimal AV14Ismanager ;
       private string gxfirstwebparm ;
       private string gxfirstwebparm_bkp ;
       private string sPrefix ;
       private string sCompPrefix ;
       private string sSFPrefix ;
-      private string AV15Pgmname ;
+      private string AV18Pgmname ;
       private string sDynURL ;
       private string FormProcess ;
       private string bodyStyle ;
@@ -1754,12 +1520,6 @@ namespace GeneXus.Programs {
       private string divTransactiondetail_tableattributes_Internalname ;
       private string lblTransactiondetail_textblock_Internalname ;
       private string lblTransactiondetail_textblock_Jsonclick ;
-      private string dynLeaveTypeId_Internalname ;
-      private string dynLeaveTypeId_Jsonclick ;
-      private string divEmployeeid_cell_Internalname ;
-      private string divEmployeeid_cell_Class ;
-      private string dynEmployeeId_Internalname ;
-      private string dynEmployeeId_Jsonclick ;
       private string edtLeaveRequestStartDate_Internalname ;
       private string edtLeaveRequestStartDate_Jsonclick ;
       private string edtLeaveRequestEndDate_Internalname ;
@@ -1776,8 +1536,12 @@ namespace GeneXus.Programs {
       private string bttBtndelete_Internalname ;
       private string bttBtndelete_Jsonclick ;
       private string divHtml_bottomauxiliarcontrols_Internalname ;
+      private string edtEmployeeId_Internalname ;
+      private string edtEmployeeId_Jsonclick ;
       private string edtLeaveRequestId_Internalname ;
       private string edtLeaveRequestId_Jsonclick ;
+      private string edtLeaveTypeId_Internalname ;
+      private string edtLeaveTypeId_Jsonclick ;
       private string edtLeaveRequestDate_Internalname ;
       private string edtLeaveRequestDate_Jsonclick ;
       private string edtLeaveRequestDuration_Internalname ;
@@ -1791,7 +1555,6 @@ namespace GeneXus.Programs {
       private string EvtGridId ;
       private string EvtRowId ;
       private string sEvtType ;
-      private string gxwrpcisep ;
       private string scmdbuf ;
       private string sCtrlA127LeaveRequestId ;
       private DateTime A129LeaveRequestStartDate ;
@@ -1804,46 +1567,36 @@ namespace GeneXus.Programs {
       private bool wbLoad ;
       private bool Rfr0gs ;
       private bool wbErr ;
-      private bool gxdyncontrolsrefreshing ;
       private bool n173LeaveRequestHalfDay ;
+      private bool gxdyncontrolsrefreshing ;
       private bool returnInSub ;
       private bool GXt_boolean1 ;
       private string A133LeaveRequestDescription ;
       private string A134LeaveRequestRejectionReason ;
-      private GeneXus.Utils.GxStringCollection gxdynajaxctrlcodr ;
-      private GeneXus.Utils.GxStringCollection gxdynajaxctrldescr ;
       private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
-      private GXCombobox dynLeaveTypeId ;
-      private GXCombobox dynEmployeeId ;
       private GXRadio radLeaveRequestHalfDay ;
       private GXCombobox cmbLeaveRequestStatus ;
       private IDataStoreProvider pr_default ;
+      private long[] H004E2_A127LeaveRequestId ;
+      private string[] H004E2_A134LeaveRequestRejectionReason ;
+      private string[] H004E2_A132LeaveRequestStatus ;
+      private decimal[] H004E2_A131LeaveRequestDuration ;
+      private DateTime[] H004E2_A128LeaveRequestDate ;
       private long[] H004E2_A124LeaveTypeId ;
-      private string[] H004E2_A125LeaveTypeName ;
-      private long[] H004E2_A100CompanyId ;
-      private long[] H004E3_A106EmployeeId ;
-      private string[] H004E3_A148EmployeeName ;
-      private long[] H004E3_A100CompanyId ;
-      private long[] H004E4_A127LeaveRequestId ;
-      private string[] H004E4_A134LeaveRequestRejectionReason ;
-      private string[] H004E4_A132LeaveRequestStatus ;
-      private decimal[] H004E4_A131LeaveRequestDuration ;
-      private DateTime[] H004E4_A128LeaveRequestDate ;
-      private string[] H004E4_A133LeaveRequestDescription ;
-      private string[] H004E4_A173LeaveRequestHalfDay ;
-      private bool[] H004E4_n173LeaveRequestHalfDay ;
-      private DateTime[] H004E4_A130LeaveRequestEndDate ;
-      private DateTime[] H004E4_A129LeaveRequestStartDate ;
-      private long[] H004E4_A106EmployeeId ;
-      private long[] H004E4_A124LeaveTypeId ;
+      private long[] H004E2_A106EmployeeId ;
+      private string[] H004E2_A133LeaveRequestDescription ;
+      private string[] H004E2_A173LeaveRequestHalfDay ;
+      private bool[] H004E2_n173LeaveRequestHalfDay ;
+      private DateTime[] H004E2_A130LeaveRequestEndDate ;
+      private DateTime[] H004E2_A129LeaveRequestStartDate ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
       private GxHttpRequest AV11HTTPRequest ;
       private IGxSession AV10Session ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV6WWPContext ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext AV8TrnContext ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV6WWPContext ;
    }
 
    public class leaverequestgeneral__default : DataStoreHelperBase, IDataStoreHelper
@@ -1853,8 +1606,6 @@ namespace GeneXus.Programs {
          cursorDefinitions();
          return new Cursor[] {
           new ForEachCursor(def[0])
-         ,new ForEachCursor(def[1])
-         ,new ForEachCursor(def[2])
        };
     }
 
@@ -1865,19 +1616,10 @@ namespace GeneXus.Programs {
        {
           Object[] prmH004E2;
           prmH004E2 = new Object[] {
-          };
-          Object[] prmH004E3;
-          prmH004E3 = new Object[] {
-          new ParDef("AV16Employeecompany",GXType.Number,10,2)
-          };
-          Object[] prmH004E4;
-          prmH004E4 = new Object[] {
           new ParDef("LeaveRequestId",GXType.Int64,10,0)
           };
           def= new CursorDef[] {
-              new CursorDef("H004E2", "SELECT LeaveTypeId, LeaveTypeName, CompanyId FROM LeaveType ORDER BY LeaveTypeName ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH004E2,0, GxCacheFrequency.OFF ,true,false )
-             ,new CursorDef("H004E3", "SELECT EmployeeId, EmployeeName, CompanyId FROM Employee WHERE :AV16Employeecompany = CompanyId ORDER BY EmployeeName ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH004E3,0, GxCacheFrequency.OFF ,true,false )
-             ,new CursorDef("H004E4", "SELECT LeaveRequestId, LeaveRequestRejectionReason, LeaveRequestStatus, LeaveRequestDuration, LeaveRequestDate, LeaveRequestDescription, LeaveRequestHalfDay, LeaveRequestEndDate, LeaveRequestStartDate, EmployeeId, LeaveTypeId FROM LeaveRequest WHERE LeaveRequestId = :LeaveRequestId ORDER BY LeaveRequestId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH004E4,1, GxCacheFrequency.OFF ,true,true )
+              new CursorDef("H004E2", "SELECT LeaveRequestId, LeaveRequestRejectionReason, LeaveRequestStatus, LeaveRequestDuration, LeaveRequestDate, LeaveTypeId, EmployeeId, LeaveRequestDescription, LeaveRequestHalfDay, LeaveRequestEndDate, LeaveRequestStartDate FROM LeaveRequest WHERE LeaveRequestId = :LeaveRequestId ORDER BY LeaveRequestId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH004E2,1, GxCacheFrequency.OFF ,true,true )
           };
        }
     }
@@ -1890,27 +1632,17 @@ namespace GeneXus.Programs {
        {
              case 0 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);
-                ((string[]) buf[1])[0] = rslt.getString(2, 100);
-                ((long[]) buf[2])[0] = rslt.getLong(3);
-                return;
-             case 1 :
-                ((long[]) buf[0])[0] = rslt.getLong(1);
-                ((string[]) buf[1])[0] = rslt.getString(2, 100);
-                ((long[]) buf[2])[0] = rslt.getLong(3);
-                return;
-             case 2 :
-                ((long[]) buf[0])[0] = rslt.getLong(1);
                 ((string[]) buf[1])[0] = rslt.getVarchar(2);
                 ((string[]) buf[2])[0] = rslt.getString(3, 20);
                 ((decimal[]) buf[3])[0] = rslt.getDecimal(4);
                 ((DateTime[]) buf[4])[0] = rslt.getGXDate(5);
-                ((string[]) buf[5])[0] = rslt.getVarchar(6);
-                ((string[]) buf[6])[0] = rslt.getString(7, 20);
-                ((bool[]) buf[7])[0] = rslt.wasNull(7);
-                ((DateTime[]) buf[8])[0] = rslt.getGXDate(8);
-                ((DateTime[]) buf[9])[0] = rslt.getGXDate(9);
-                ((long[]) buf[10])[0] = rslt.getLong(10);
-                ((long[]) buf[11])[0] = rslt.getLong(11);
+                ((long[]) buf[5])[0] = rslt.getLong(6);
+                ((long[]) buf[6])[0] = rslt.getLong(7);
+                ((string[]) buf[7])[0] = rslt.getVarchar(8);
+                ((string[]) buf[8])[0] = rslt.getString(9, 20);
+                ((bool[]) buf[9])[0] = rslt.wasNull(9);
+                ((DateTime[]) buf[10])[0] = rslt.getGXDate(10);
+                ((DateTime[]) buf[11])[0] = rslt.getGXDate(11);
                 return;
        }
     }
