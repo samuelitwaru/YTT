@@ -221,6 +221,10 @@ namespace GeneXus.Programs {
             new getemployeeidsbyprojectorcompany(context ).execute(  AV42projectIds,  AV44CompanyId, out  GXt_objcol_int3) ;
             AV45Employees = GXt_objcol_int3;
          }
+         else
+         {
+            AV45Employees.Add(AV18EmployeeId, 0);
+         }
          GXt_int4 = AV20EmployyeeAvailableVacationDays;
          new getemployeevactiondaysleft(context ).execute(  AV18EmployeeId, out  GXt_int4) ;
          AV20EmployyeeAvailableVacationDays = GXt_int4;

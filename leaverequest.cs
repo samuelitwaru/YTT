@@ -1097,6 +1097,10 @@ namespace GeneXus.Programs {
             new getemployeeidsbyprojectorcompany(context ).execute(  AV42projectIds,  AV44CompanyId, out  GXt_objcol_int3) ;
             AV45Employees = GXt_objcol_int3;
          }
+         else
+         {
+            AV45Employees.Add(AV18EmployeeId, 0);
+         }
          GXt_int4 = AV20EmployyeeAvailableVacationDays;
          new getemployeevactiondaysleft(context ).execute(  AV18EmployeeId, out  GXt_int4) ;
          AV20EmployyeeAvailableVacationDays = GXt_int4;
@@ -2628,7 +2632,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247251636462", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202473015125351", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2644,7 +2648,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("leaverequest.js", "?20247251636463", false, true);
+         context.AddJavascriptSource("leaverequest.js", "?202473015125353", false, true);
          /* End function include_jscripts */
       }
 
