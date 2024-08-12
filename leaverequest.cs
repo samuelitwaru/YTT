@@ -559,21 +559,21 @@ namespace GeneXus.Programs {
          /* Div Control */
          GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-button", "start", "top", "", "", "div");
          TempTags = "  onfocus=\"gx.evt.onfocus(this, 59,'',false,'',0)\"";
-         ClassString = "ButtonMaterial";
+         ClassString = "Button";
          StyleString = "";
          GxWebStd.gx_button_ctrl( context, bttBtntrn_enter_Internalname, "", "Confirm", bttBtntrn_enter_Jsonclick, 5, "Confirm", "", StyleString, ClassString, bttBtntrn_enter_Visible, bttBtntrn_enter_Enabled, "standard", "'"+""+"'"+",false,"+"'"+"EENTER."+"'", TempTags, "", context.GetButtonType( ), "HLP_LeaveRequest.htm");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          /* Div Control */
          GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-button", "start", "top", "", "", "div");
          TempTags = "  onfocus=\"gx.evt.onfocus(this, 61,'',false,'',0)\"";
-         ClassString = "ButtonMaterialDefault";
+         ClassString = "BtnDefault";
          StyleString = "";
          GxWebStd.gx_button_ctrl( context, bttBtntrn_cancel_Internalname, "", "Cancel", bttBtntrn_cancel_Jsonclick, 1, "Cancel", "", StyleString, ClassString, bttBtntrn_cancel_Visible, 1, "standard", "'"+""+"'"+",false,"+"'"+"ECANCEL."+"'", TempTags, "", context.GetButtonType( ), "HLP_LeaveRequest.htm");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          /* Div Control */
          GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-button", "start", "top", "", "", "div");
          TempTags = "  onfocus=\"gx.evt.onfocus(this, 63,'',false,'',0)\"";
-         ClassString = "ButtonMaterialDefault";
+         ClassString = "BtnDefault";
          StyleString = "";
          GxWebStd.gx_button_ctrl( context, bttBtntrn_delete_Internalname, "", "Delete", bttBtntrn_delete_Jsonclick, 5, "Delete", "", StyleString, ClassString, bttBtntrn_delete_Visible, bttBtntrn_delete_Enabled, "standard", "'"+""+"'"+",false,"+"'"+"EDELETE."+"'", TempTags, "", context.GetButtonType( ), "HLP_LeaveRequest.htm");
          GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -1101,11 +1101,11 @@ namespace GeneXus.Programs {
          {
             AV45Employees.Add(AV18EmployeeId, 0);
          }
-         GXt_int4 = AV20EmployyeeAvailableVacationDays;
+         GXt_int4 = (short)(Math.Round(AV20EmployyeeAvailableVacationDays, 18, MidpointRounding.ToEven));
          new getemployeevactiondaysleft(context ).execute(  AV18EmployeeId, out  GXt_int4) ;
-         AV20EmployyeeAvailableVacationDays = GXt_int4;
-         AssignAttri("", false, "AV20EmployyeeAvailableVacationDays", StringUtil.LTrimStr( (decimal)(AV20EmployyeeAvailableVacationDays), 4, 0));
-         lblTextblock_Caption = "Vacation Days: "+StringUtil.Str( (decimal)(AV20EmployyeeAvailableVacationDays), 4, 0);
+         AV20EmployyeeAvailableVacationDays = (decimal)(GXt_int4);
+         AssignAttri("", false, "AV20EmployyeeAvailableVacationDays", StringUtil.LTrimStr( AV20EmployyeeAvailableVacationDays, 4, 1));
+         lblTextblock_Caption = "Vacation Days: "+StringUtil.Str( AV20EmployyeeAvailableVacationDays, 4, 1);
          AssignProp("", false, lblTextblock_Internalname, "Caption", lblTextblock_Caption, true);
          lblTextblock_Fontbold = 1;
          AssignProp("", false, lblTextblock_Internalname, "Fontbold", StringUtil.Str( (decimal)(lblTextblock_Fontbold), 1, 0), true);
@@ -1206,11 +1206,11 @@ namespace GeneXus.Programs {
       {
          /* EmployeeId_Controlvaluechanged Routine */
          returnInSub = false;
-         GXt_int4 = AV20EmployyeeAvailableVacationDays;
+         GXt_int4 = (short)(Math.Round(AV20EmployyeeAvailableVacationDays, 18, MidpointRounding.ToEven));
          new getemployeevactiondaysleft(context ).execute(  A106EmployeeId, out  GXt_int4) ;
-         AV20EmployyeeAvailableVacationDays = GXt_int4;
-         AssignAttri("", false, "AV20EmployyeeAvailableVacationDays", StringUtil.LTrimStr( (decimal)(AV20EmployyeeAvailableVacationDays), 4, 0));
-         lblTextblock_Caption = "Vacation Days: "+StringUtil.Str( (decimal)(AV20EmployyeeAvailableVacationDays), 4, 0);
+         AV20EmployyeeAvailableVacationDays = (decimal)(GXt_int4);
+         AssignAttri("", false, "AV20EmployyeeAvailableVacationDays", StringUtil.LTrimStr( AV20EmployyeeAvailableVacationDays, 4, 1));
+         lblTextblock_Caption = "Vacation Days: "+StringUtil.Str( AV20EmployyeeAvailableVacationDays, 4, 1);
          AssignProp("", false, lblTextblock_Internalname, "Caption", lblTextblock_Caption, true);
          lblTextblock_Fontbold = 1;
          AssignProp("", false, lblTextblock_Internalname, "Fontbold", StringUtil.Str( (decimal)(lblTextblock_Fontbold), 1, 0), true);
@@ -1224,10 +1224,10 @@ namespace GeneXus.Programs {
          AV7Employee.Load(AV18EmployeeId);
          AV46LeaveTypeCompanyId = AV7Employee.gxTpr_Companyid;
          AssignAttri("", false, "AV46LeaveTypeCompanyId", StringUtil.LTrimStr( (decimal)(AV46LeaveTypeCompanyId), 10, 0));
-         GXt_int4 = AV20EmployyeeAvailableVacationDays;
+         GXt_int4 = (short)(Math.Round(AV20EmployyeeAvailableVacationDays, 18, MidpointRounding.ToEven));
          new getemployeevactiondaysleft(context ).execute(  AV18EmployeeId, out  GXt_int4) ;
-         AV20EmployyeeAvailableVacationDays = GXt_int4;
-         AssignAttri("", false, "AV20EmployyeeAvailableVacationDays", StringUtil.LTrimStr( (decimal)(AV20EmployyeeAvailableVacationDays), 4, 0));
+         AV20EmployyeeAvailableVacationDays = (decimal)(GXt_int4);
+         AssignAttri("", false, "AV20EmployyeeAvailableVacationDays", StringUtil.LTrimStr( AV20EmployyeeAvailableVacationDays, 4, 1));
          dynavLeavetypeid.removeAllItems();
          AV50IsColored = false;
          GXt_objcol_SdtSDTLeaveType5 = AV49LeaveTypes;
@@ -1241,7 +1241,7 @@ namespace GeneXus.Programs {
             dynavLeavetypeid.addItem(StringUtil.Trim( StringUtil.Str( (decimal)(AV48LeaveType.gxTpr_Leavetypeid), 10, 0)), AV48LeaveType.gxTpr_Leavetypename, 0);
             AV55GXV2 = (int)(AV55GXV2+1);
          }
-         lblTextblock_Caption = "Vacation Days: "+StringUtil.Str( (decimal)(AV20EmployyeeAvailableVacationDays), 4, 0);
+         lblTextblock_Caption = "Vacation Days: "+StringUtil.Str( AV20EmployyeeAvailableVacationDays, 4, 1);
          AssignProp("", false, lblTextblock_Internalname, "Caption", lblTextblock_Caption, true);
          lblTextblock_Fontbold = 1;
          AssignProp("", false, lblTextblock_Internalname, "Fontbold", StringUtil.Str( (decimal)(lblTextblock_Fontbold), 1, 0), true);
@@ -2632,7 +2632,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202473016182752", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20248121543263", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2648,7 +2648,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("leaverequest.js", "?202473016182754", false, true);
+         context.AddJavascriptSource("leaverequest.js", "?20248121543265", false, true);
          /* End function include_jscripts */
       }
 
@@ -3074,9 +3074,9 @@ namespace GeneXus.Programs {
          setEventMetadata("LEAVEREQUESTSTARTDATE.CONTROLVALUECHANGED","{handler:'E140J2',iparms:[{av:'A129LeaveRequestStartDate',fld:'LEAVEREQUESTSTARTDATE',pic:''},{av:'A130LeaveRequestEndDate',fld:'LEAVEREQUESTENDDATE',pic:''},{av:'dynavEmployeeid'},{av:'AV18EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'radLeaveRequestHalfDay'},{av:'A173LeaveRequestHalfDay',fld:'LEAVEREQUESTHALFDAY',pic:''}]");
          setEventMetadata("LEAVEREQUESTSTARTDATE.CONTROLVALUECHANGED",",oparms:[{av:'AV35LeaveRequestDuration',fld:'vLEAVEREQUESTDURATION',pic:'Z9.9'},{av:'dynavEmployeeid'},{av:'AV18EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'radLeaveRequestHalfDay'},{av:'A173LeaveRequestHalfDay',fld:'LEAVEREQUESTHALFDAY',pic:''}]}");
          setEventMetadata("EMPLOYEEID.CONTROLVALUECHANGED","{handler:'E150J2',iparms:[{av:'A106EmployeeId',fld:'EMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'dynavEmployeeid'},{av:'AV18EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'radLeaveRequestHalfDay'},{av:'A173LeaveRequestHalfDay',fld:'LEAVEREQUESTHALFDAY',pic:''}]");
-         setEventMetadata("EMPLOYEEID.CONTROLVALUECHANGED",",oparms:[{av:'AV20EmployyeeAvailableVacationDays',fld:'vEMPLOYYEEAVAILABLEVACATIONDAYS',pic:'ZZZ9'},{av:'lblTextblock_Caption',ctrl:'TEXTBLOCK',prop:'Caption'},{av:'lblTextblock_Fontbold',ctrl:'TEXTBLOCK',prop:'Fontbold'},{av:'dynavEmployeeid'},{av:'AV18EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'radLeaveRequestHalfDay'},{av:'A173LeaveRequestHalfDay',fld:'LEAVEREQUESTHALFDAY',pic:''}]}");
+         setEventMetadata("EMPLOYEEID.CONTROLVALUECHANGED",",oparms:[{av:'AV20EmployyeeAvailableVacationDays',fld:'vEMPLOYYEEAVAILABLEVACATIONDAYS',pic:'Z9.9'},{av:'lblTextblock_Caption',ctrl:'TEXTBLOCK',prop:'Caption'},{av:'lblTextblock_Fontbold',ctrl:'TEXTBLOCK',prop:'Fontbold'},{av:'dynavEmployeeid'},{av:'AV18EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'radLeaveRequestHalfDay'},{av:'A173LeaveRequestHalfDay',fld:'LEAVEREQUESTHALFDAY',pic:''}]}");
          setEventMetadata("VEMPLOYEEID.CONTROLVALUECHANGED","{handler:'E160J2',iparms:[{av:'dynavEmployeeid'},{av:'AV18EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'radLeaveRequestHalfDay'},{av:'A173LeaveRequestHalfDay',fld:'LEAVEREQUESTHALFDAY',pic:''}]");
-         setEventMetadata("VEMPLOYEEID.CONTROLVALUECHANGED",",oparms:[{av:'AV46LeaveTypeCompanyId',fld:'vLEAVETYPECOMPANYID',pic:'ZZZZZZZZZ9'},{av:'AV20EmployyeeAvailableVacationDays',fld:'vEMPLOYYEEAVAILABLEVACATIONDAYS',pic:'ZZZ9'},{av:'dynavLeavetypeid'},{av:'AV47LeaveTypeId',fld:'vLEAVETYPEID',pic:'ZZZZZZZZZ9'},{av:'lblTextblock_Caption',ctrl:'TEXTBLOCK',prop:'Caption'},{av:'lblTextblock_Fontbold',ctrl:'TEXTBLOCK',prop:'Fontbold'},{av:'dynavEmployeeid'},{av:'AV18EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'radLeaveRequestHalfDay'},{av:'A173LeaveRequestHalfDay',fld:'LEAVEREQUESTHALFDAY',pic:''}]}");
+         setEventMetadata("VEMPLOYEEID.CONTROLVALUECHANGED",",oparms:[{av:'AV46LeaveTypeCompanyId',fld:'vLEAVETYPECOMPANYID',pic:'ZZZZZZZZZ9'},{av:'AV20EmployyeeAvailableVacationDays',fld:'vEMPLOYYEEAVAILABLEVACATIONDAYS',pic:'Z9.9'},{av:'dynavLeavetypeid'},{av:'AV47LeaveTypeId',fld:'vLEAVETYPEID',pic:'ZZZZZZZZZ9'},{av:'lblTextblock_Caption',ctrl:'TEXTBLOCK',prop:'Caption'},{av:'lblTextblock_Fontbold',ctrl:'TEXTBLOCK',prop:'Fontbold'},{av:'dynavEmployeeid'},{av:'AV18EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'radLeaveRequestHalfDay'},{av:'A173LeaveRequestHalfDay',fld:'LEAVEREQUESTHALFDAY',pic:''}]}");
          setEventMetadata("LEAVEREQUESTHALFDAY.CLICK","{handler:'E170J2',iparms:[{av:'A129LeaveRequestStartDate',fld:'LEAVEREQUESTSTARTDATE',pic:''},{av:'A130LeaveRequestEndDate',fld:'LEAVEREQUESTENDDATE',pic:''},{av:'dynavEmployeeid'},{av:'AV18EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'radLeaveRequestHalfDay'},{av:'A173LeaveRequestHalfDay',fld:'LEAVEREQUESTHALFDAY',pic:''}]");
          setEventMetadata("LEAVEREQUESTHALFDAY.CLICK",",oparms:[{av:'AV35LeaveRequestDuration',fld:'vLEAVEREQUESTDURATION',pic:'Z9.9'},{av:'dynavEmployeeid'},{av:'AV18EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'radLeaveRequestHalfDay'},{av:'A173LeaveRequestHalfDay',fld:'LEAVEREQUESTHALFDAY',pic:''}]}");
          setEventMetadata("VALIDV_EMPLOYEEID","{handler:'Validv_Employeeid',iparms:[{av:'dynavEmployeeid'},{av:'AV18EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'radLeaveRequestHalfDay'},{av:'A173LeaveRequestHalfDay',fld:'LEAVEREQUESTHALFDAY',pic:''}]");
@@ -3353,7 +3353,6 @@ namespace GeneXus.Programs {
       private short Gx_BScreen ;
       private short RcdFound21 ;
       private short AV17EmployeeCompany ;
-      private short AV20EmployyeeAvailableVacationDays ;
       private short GXt_int4 ;
       private short GX_JID ;
       private short nIsDirty_21 ;
@@ -3407,6 +3406,7 @@ namespace GeneXus.Programs {
       private decimal AV35LeaveRequestDuration ;
       private decimal A131LeaveRequestDuration ;
       private decimal A147EmployeeBalance ;
+      private decimal AV20EmployyeeAvailableVacationDays ;
       private decimal Z147EmployeeBalance ;
       private decimal GXt_decimal1 ;
       private string sPrefix ;

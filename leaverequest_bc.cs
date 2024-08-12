@@ -225,9 +225,9 @@ namespace GeneXus.Programs {
          {
             AV45Employees.Add(AV18EmployeeId, 0);
          }
-         GXt_int4 = AV20EmployyeeAvailableVacationDays;
+         GXt_int4 = (short)(Math.Round(AV20EmployyeeAvailableVacationDays, 18, MidpointRounding.ToEven));
          new getemployeevactiondaysleft(context ).execute(  AV18EmployeeId, out  GXt_int4) ;
-         AV20EmployyeeAvailableVacationDays = GXt_int4;
+         AV20EmployyeeAvailableVacationDays = (decimal)(GXt_int4);
          new GeneXus.Programs.wwpbaseobjects.loadwwpcontext(context ).execute( out  AV32WWPContext) ;
          AV29TrnContext.FromXml(AV31WebSession.Get("TrnContext"), null, "", "");
          if ( ( StringUtil.StrCmp(AV29TrnContext.gxTpr_Transactionname, AV53Pgmname) == 0 ) && ( StringUtil.StrCmp(Gx_mode, "INS") == 0 ) )
@@ -287,9 +287,9 @@ namespace GeneXus.Programs {
       {
          /* EmployeeId_Controlvaluechanged Routine */
          returnInSub = false;
-         GXt_int4 = AV20EmployyeeAvailableVacationDays;
+         GXt_int4 = (short)(Math.Round(AV20EmployyeeAvailableVacationDays, 18, MidpointRounding.ToEven));
          new getemployeevactiondaysleft(context ).execute(  A106EmployeeId, out  GXt_int4) ;
-         AV20EmployyeeAvailableVacationDays = GXt_int4;
+         AV20EmployyeeAvailableVacationDays = (decimal)(GXt_int4);
       }
 
       protected void E160J2( )
@@ -298,9 +298,9 @@ namespace GeneXus.Programs {
          returnInSub = false;
          AV7Employee.Load(AV18EmployeeId);
          AV46LeaveTypeCompanyId = AV7Employee.gxTpr_Companyid;
-         GXt_int4 = AV20EmployyeeAvailableVacationDays;
+         GXt_int4 = (short)(Math.Round(AV20EmployyeeAvailableVacationDays, 18, MidpointRounding.ToEven));
          new getemployeevactiondaysleft(context ).execute(  AV18EmployeeId, out  GXt_int4) ;
-         AV20EmployyeeAvailableVacationDays = GXt_int4;
+         AV20EmployyeeAvailableVacationDays = (decimal)(GXt_int4);
       }
 
       protected void E170J2( )
@@ -1766,7 +1766,6 @@ namespace GeneXus.Programs {
       private short nKeyPressed ;
       private short RcdFound21 ;
       private short AV17EmployeeCompany ;
-      private short AV20EmployyeeAvailableVacationDays ;
       private short GXt_int4 ;
       private short GX_JID ;
       private short Gx_BScreen ;
@@ -1794,6 +1793,7 @@ namespace GeneXus.Programs {
       private decimal A131LeaveRequestDuration ;
       private decimal A147EmployeeBalance ;
       private decimal AV35LeaveRequestDuration ;
+      private decimal AV20EmployyeeAvailableVacationDays ;
       private decimal Z131LeaveRequestDuration ;
       private decimal Z147EmployeeBalance ;
       private decimal GXt_decimal1 ;

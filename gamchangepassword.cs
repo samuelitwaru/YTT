@@ -704,7 +704,7 @@ namespace GeneXus.Programs {
       {
          /* Start Routine */
          returnInSub = false;
-         Form.Headerrawhtml = "<link rel=\"shortcut icon\" type=\"image/x-icon\" href=\""+context.convertURL( (string)(context.GetImagePath( "4b7c8d3b-9d59-4d39-b71d-3e57f0096512", "", context.GetTheme( ))))+"\">";
+         Form.Headerrawhtml = "<link rel=\"shortcut icon\" type=\"image/x-icon\" href=\""+context.convertURL( (string)(context.GetImagePath( "fac54406-4978-42bf-9e0f-abe1151bba87", "", context.GetTheme( ))))+"\">";
          if ( StringUtil.StrCmp(AV15HTTPRequest.Method, "GET") == 0 )
          {
             this.executeExternalObjectMethod("", false, "gx.core.ds", "setOption", new Object[] {(string)"base-color",(string)"SkyBlue"}, false);
@@ -756,25 +756,16 @@ namespace GeneXus.Programs {
                   }
                   else
                   {
-                     if ( AV25GAMUser.checkrole("Administrator") )
+                     AV8URL = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).getlasterrorsurl();
+                     if ( String.IsNullOrEmpty(StringUtil.RTrim( AV8URL)) )
                      {
                         CallWebObject(formatLink("gamhome.aspx") );
                         context.wjLocDisableFrm = 1;
                      }
-                     if ( AV25GAMUser.checkrole("General Manager") )
+                     else
                      {
-                        CallWebObject(formatLink("reports.aspx") );
-                        context.wjLocDisableFrm = 1;
-                     }
-                     if ( AV25GAMUser.checkrole("Manager") )
-                     {
-                        CallWebObject(formatLink("leavecalendarold.aspx") );
-                        context.wjLocDisableFrm = 1;
-                     }
-                     if ( AV25GAMUser.checkrole("Employee") )
-                     {
-                        CallWebObject(formatLink("logworkhours.aspx") );
-                        context.wjLocDisableFrm = 1;
+                        CallWebObject(formatLink(AV8URL) );
+                        context.wjLocDisableFrm = 0;
                      }
                   }
                }
@@ -805,12 +796,12 @@ namespace GeneXus.Programs {
       {
          /* 'DISPLAYMESSAGES' Routine */
          returnInSub = false;
-         AV26GXV1 = 1;
-         while ( AV26GXV1 <= AV17Errors.Count )
+         AV25GXV1 = 1;
+         while ( AV25GXV1 <= AV17Errors.Count )
          {
-            AV16Error = ((GeneXus.Programs.genexussecurity.SdtGAMError)AV17Errors.Item(AV26GXV1));
+            AV16Error = ((GeneXus.Programs.genexussecurity.SdtGAMError)AV17Errors.Item(AV25GXV1));
             GX_msglist.addItem(StringUtil.Format( "%1 (GAM%2)", AV16Error.gxTpr_Message, StringUtil.LTrimStr( (decimal)(AV16Error.gxTpr_Code), 12, 0), "", "", "", "", "", "", ""));
-            AV26GXV1 = (int)(AV26GXV1+1);
+            AV25GXV1 = (int)(AV25GXV1+1);
          }
       }
 
@@ -847,10 +838,10 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
             /* Attribute/Variable Label */
-            GxWebStd.gx_label_element( context, edtavUsername_Internalname, "User Name", "col-sm-3 AttributeLabel MaxWidthLabel", 0, true, "");
+            GxWebStd.gx_label_element( context, edtavUsername_Internalname, "User Name", "col-sm-3 AttributeLabel", 0, true, "");
             /* Single line edit */
             TempTags = "  onfocus=\"gx.evt.onfocus(this, 30,'',false,'',0)\"";
-            GxWebStd.gx_single_line_edit( context, edtavUsername_Internalname, AV10UserName, StringUtil.RTrim( context.localUtil.Format( AV10UserName, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,30);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "User", edtavUsername_Jsonclick, 0, "Attribute MaxWidth", "", "", "", "", 1, edtavUsername_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, 0, true, "GeneXusSecurityCommon\\GAMEMail", "start", true, "", "HLP_GAMChangePassword.htm");
+            GxWebStd.gx_single_line_edit( context, edtavUsername_Internalname, AV10UserName, StringUtil.RTrim( context.localUtil.Format( AV10UserName, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,30);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "User", edtavUsername_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavUsername_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, 0, true, "GeneXusSecurityCommon\\GAMEMail", "start", true, "", "HLP_GAMChangePassword.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -942,7 +933,7 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "", "start", "top", "", "align-self:center;", "div");
             TempTags = "  onfocus=\"gx.evt.onfocus(this, 62,'',false,'',0)\"";
-            ClassString = "ButtonMaterial";
+            ClassString = "Button";
             StyleString = "";
             GxWebStd.gx_button_ctrl( context, bttBtnenter_Internalname, "", "Confirm", bttBtnenter_Jsonclick, 5, "Confirm", "", StyleString, ClassString, 1, 1, "standard", "'"+""+"'"+",false,"+"'"+"EENTER."+"'", TempTags, "", context.GetButtonType( ), "HLP_GAMChangePassword.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -1009,7 +1000,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202471712114457", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20248121534589", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1025,7 +1016,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("gamchangepassword.js", "?202471712114461", false, true);
+         context.AddJavascriptSource("gamchangepassword.js", "?20248121534592", false, true);
          context.AddJavascriptSource("DVelop/DVMessage/pnotify.custom.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/DVMessage/DVMessageRender.js", "", false, true);
@@ -1164,7 +1155,7 @@ namespace GeneXus.Programs {
          AV15HTTPRequest = new GxHttpRequest( context);
          AV18User = new GeneXus.Programs.genexussecurity.SdtGAMUser(context);
          AV17Errors = new GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError>( context, "GeneXus.Programs.genexussecurity.SdtGAMError", "GeneXus.Programs");
-         AV25GAMUser = new GeneXus.Programs.genexussecurity.SdtGAMUser(context);
+         AV8URL = "";
          AV16Error = new GeneXus.Programs.genexussecurity.SdtGAMError(context);
          sStyleString = "";
          lblTextblockusername_Jsonclick = "";
@@ -1189,7 +1180,7 @@ namespace GeneXus.Programs {
       private short gxcookieaux ;
       private short nGXWrapped ;
       private int edtavUsername_Enabled ;
-      private int AV26GXV1 ;
+      private int AV25GXV1 ;
       private int edtavUserpassword_Enabled ;
       private int edtavUserpasswordnew_Enabled ;
       private int edtavUserpasswordnewconf_Enabled ;
@@ -1272,10 +1263,10 @@ namespace GeneXus.Programs {
       private bool returnInSub ;
       private bool AV7isOK ;
       private string AV10UserName ;
+      private string AV8URL ;
       private GXUserControl ucUcmessage ;
       private GXUserControl ucWwputilities ;
       private GXWebForm Form ;
-      private GeneXus.Programs.genexussecurity.SdtGAMUser AV25GAMUser ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private string aP0_IDP_State ;
