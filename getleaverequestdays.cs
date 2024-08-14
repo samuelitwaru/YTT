@@ -69,40 +69,45 @@ namespace GeneXus.Programs {
       public void execute( [GxJsonFormat("yyyy-MM-dd")] DateTime aP0_StartDate ,
                            [GxJsonFormat("yyyy-MM-dd")] DateTime aP1_EndDate ,
                            string aP2_LeaveRequestHalfDay ,
-                           out decimal aP3_FinalDuration )
+                           long aP3_EmployeeId ,
+                           out decimal aP4_FinalDuration )
       {
          this.AV14StartDate = aP0_StartDate;
          this.AV10EndDate = aP1_EndDate;
          this.AV19LeaveRequestHalfDay = aP2_LeaveRequestHalfDay;
+         this.AV20EmployeeId = aP3_EmployeeId;
          this.AV17FinalDuration = 0 ;
          initialize();
          executePrivate();
-         aP3_FinalDuration=this.AV17FinalDuration;
+         aP4_FinalDuration=this.AV17FinalDuration;
       }
 
       public decimal executeUdp( DateTime aP0_StartDate ,
                                  DateTime aP1_EndDate ,
-                                 string aP2_LeaveRequestHalfDay )
+                                 string aP2_LeaveRequestHalfDay ,
+                                 long aP3_EmployeeId )
       {
-         execute(aP0_StartDate, aP1_EndDate, aP2_LeaveRequestHalfDay, out aP3_FinalDuration);
+         execute(aP0_StartDate, aP1_EndDate, aP2_LeaveRequestHalfDay, aP3_EmployeeId, out aP4_FinalDuration);
          return AV17FinalDuration ;
       }
 
       public void executeSubmit( DateTime aP0_StartDate ,
                                  DateTime aP1_EndDate ,
                                  string aP2_LeaveRequestHalfDay ,
-                                 out decimal aP3_FinalDuration )
+                                 long aP3_EmployeeId ,
+                                 out decimal aP4_FinalDuration )
       {
          getleaverequestdays objgetleaverequestdays;
          objgetleaverequestdays = new getleaverequestdays();
          objgetleaverequestdays.AV14StartDate = aP0_StartDate;
          objgetleaverequestdays.AV10EndDate = aP1_EndDate;
          objgetleaverequestdays.AV19LeaveRequestHalfDay = aP2_LeaveRequestHalfDay;
+         objgetleaverequestdays.AV20EmployeeId = aP3_EmployeeId;
          objgetleaverequestdays.AV17FinalDuration = 0 ;
          objgetleaverequestdays.context.SetSubmitInitialConfig(context);
          objgetleaverequestdays.initialize();
          Submit( executePrivateCatch,objgetleaverequestdays);
-         aP3_FinalDuration=this.AV17FinalDuration;
+         aP4_FinalDuration=this.AV17FinalDuration;
       }
 
       void executePrivateCatch( object stateInfo )
@@ -124,29 +129,31 @@ namespace GeneXus.Programs {
          /* Output device settings */
          AV16totalHoliday = 0;
          AV9Duration = 0;
-         GXt_int1 = AV18CompanyId;
-         new getloggedinusercompanyid(context ).execute( out  GXt_int1) ;
-         AV18CompanyId = GXt_int1;
-         if ( (0==AV18CompanyId) )
-         {
-            AV18CompanyId = 1;
-         }
          /* Using cursor P005N2 */
-         pr_default.execute(0, new Object[] {AV18CompanyId});
+         pr_default.execute(0, new Object[] {AV20EmployeeId});
          while ( (pr_default.getStatus(0) != 101) )
          {
-            A139HolidayIsActive = P005N2_A139HolidayIsActive[0];
-            A100CompanyId = P005N2_A100CompanyId[0];
-            A115HolidayStartDate = P005N2_A115HolidayStartDate[0];
-            A113HolidayId = P005N2_A113HolidayId[0];
+            A106EmployeeId = P005N2_A106EmployeeId[0];
+            /* Exiting from a For First loop. */
+            if (true) break;
+         }
+         pr_default.close(0);
+         /* Using cursor P005N3 */
+         pr_default.execute(1, new Object[] {AV18CompanyId});
+         while ( (pr_default.getStatus(1) != 101) )
+         {
+            A139HolidayIsActive = P005N3_A139HolidayIsActive[0];
+            A100CompanyId = P005N3_A100CompanyId[0];
+            A115HolidayStartDate = P005N3_A115HolidayStartDate[0];
+            A113HolidayId = P005N3_A113HolidayId[0];
             AV13MyDate = A115HolidayStartDate;
             if ( ( DateTimeUtil.ResetTime ( AV13MyDate ) >= DateTimeUtil.ResetTime ( AV14StartDate ) ) && ( DateTimeUtil.ResetTime ( AV13MyDate ) <= DateTimeUtil.ResetTime ( AV10EndDate ) ) && ( DateTimeUtil.Dow( AV13MyDate) != 1 ) && ( DateTimeUtil.Dow( AV13MyDate) != 7 ) )
             {
                AV16totalHoliday = (short)(AV16totalHoliday+1);
             }
-            pr_default.readNext(0);
+            pr_default.readNext(1);
          }
-         pr_default.close(0);
+         pr_default.close(1);
          if ( StringUtil.StrCmp(AV19LeaveRequestHalfDay, "") != 0 )
          {
             if ( AV16totalHoliday == 0 )
@@ -198,16 +205,20 @@ namespace GeneXus.Programs {
       public override void initialize( )
       {
          scmdbuf = "";
-         P005N2_A139HolidayIsActive = new bool[] {false} ;
-         P005N2_A100CompanyId = new long[1] ;
-         P005N2_A115HolidayStartDate = new DateTime[] {DateTime.MinValue} ;
-         P005N2_A113HolidayId = new long[1] ;
+         P005N2_A106EmployeeId = new long[1] ;
+         P005N3_A139HolidayIsActive = new bool[] {false} ;
+         P005N3_A100CompanyId = new long[1] ;
+         P005N3_A115HolidayStartDate = new DateTime[] {DateTime.MinValue} ;
+         P005N3_A113HolidayId = new long[1] ;
          A115HolidayStartDate = DateTime.MinValue;
          AV13MyDate = DateTime.MinValue;
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.getleaverequestdays__default(),
             new Object[][] {
                 new Object[] {
-               P005N2_A139HolidayIsActive, P005N2_A100CompanyId, P005N2_A115HolidayStartDate, P005N2_A113HolidayId
+               P005N2_A106EmployeeId
+               }
+               , new Object[] {
+               P005N3_A139HolidayIsActive, P005N3_A100CompanyId, P005N3_A115HolidayStartDate, P005N3_A113HolidayId
                }
             }
          );
@@ -217,8 +228,9 @@ namespace GeneXus.Programs {
       private short AV16totalHoliday ;
       private short AV9Duration ;
       private short AV8dateNumber ;
+      private long AV20EmployeeId ;
+      private long A106EmployeeId ;
       private long AV18CompanyId ;
-      private long GXt_int1 ;
       private long A100CompanyId ;
       private long A113HolidayId ;
       private decimal AV17FinalDuration ;
@@ -232,11 +244,12 @@ namespace GeneXus.Programs {
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private IDataStoreProvider pr_default ;
-      private bool[] P005N2_A139HolidayIsActive ;
-      private long[] P005N2_A100CompanyId ;
-      private DateTime[] P005N2_A115HolidayStartDate ;
-      private long[] P005N2_A113HolidayId ;
-      private decimal aP3_FinalDuration ;
+      private long[] P005N2_A106EmployeeId ;
+      private bool[] P005N3_A139HolidayIsActive ;
+      private long[] P005N3_A100CompanyId ;
+      private DateTime[] P005N3_A115HolidayStartDate ;
+      private long[] P005N3_A113HolidayId ;
+      private decimal aP4_FinalDuration ;
    }
 
    public class getleaverequestdays__default : DataStoreHelperBase, IDataStoreHelper
@@ -246,6 +259,7 @@ namespace GeneXus.Programs {
          cursorDefinitions();
          return new Cursor[] {
           new ForEachCursor(def[0])
+         ,new ForEachCursor(def[1])
        };
     }
 
@@ -256,10 +270,15 @@ namespace GeneXus.Programs {
        {
           Object[] prmP005N2;
           prmP005N2 = new Object[] {
+          new ParDef("AV20EmployeeId",GXType.Int64,10,0)
+          };
+          Object[] prmP005N3;
+          prmP005N3 = new Object[] {
           new ParDef("AV18CompanyId",GXType.Int64,10,0)
           };
           def= new CursorDef[] {
-              new CursorDef("P005N2", "SELECT HolidayIsActive, CompanyId, HolidayStartDate, HolidayId FROM Holiday WHERE (CompanyId = :AV18CompanyId) AND (HolidayIsActive = TRUE) ORDER BY CompanyId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP005N2,100, GxCacheFrequency.OFF ,false,false )
+              new CursorDef("P005N2", "SELECT EmployeeId FROM Employee WHERE EmployeeId = :AV20EmployeeId ORDER BY EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP005N2,1, GxCacheFrequency.OFF ,false,true )
+             ,new CursorDef("P005N3", "SELECT HolidayIsActive, CompanyId, HolidayStartDate, HolidayId FROM Holiday WHERE (CompanyId = :AV18CompanyId) AND (HolidayIsActive = TRUE) ORDER BY CompanyId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP005N3,100, GxCacheFrequency.OFF ,false,false )
           };
        }
     }
@@ -271,6 +290,9 @@ namespace GeneXus.Programs {
        switch ( cursor )
        {
              case 0 :
+                ((long[]) buf[0])[0] = rslt.getLong(1);
+                return;
+             case 1 :
                 ((bool[]) buf[0])[0] = rslt.getBool(1);
                 ((long[]) buf[1])[0] = rslt.getLong(2);
                 ((DateTime[]) buf[2])[0] = rslt.getGXDate(3);

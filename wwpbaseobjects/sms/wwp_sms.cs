@@ -2124,7 +2124,7 @@ namespace GeneXus.Programs.wwpbaseobjects.sms {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024717129890", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202481416561923", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2140,7 +2140,7 @@ namespace GeneXus.Programs.wwpbaseobjects.sms {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wwpbaseobjects/sms/wwp_sms.js", "?2024717129891", false, true);
+         context.AddJavascriptSource("wwpbaseobjects/sms/wwp_sms.js", "?202481416561923", false, true);
          /* End function include_jscripts */
       }
 

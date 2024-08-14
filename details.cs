@@ -1831,7 +1831,7 @@ namespace GeneXus.Programs {
          /* 'LEAVEDURATIONSUB' Routine */
          returnInSub = false;
          GXt_decimal3 = 0;
-         new getleaverequestdays(context ).execute(  AV8LeaveRequest.gxTpr_Leaverequeststartdate,  AV8LeaveRequest.gxTpr_Leaverequestenddate,  AV8LeaveRequest.gxTpr_Leaverequesthalfday, out  GXt_decimal3) ;
+         new getleaverequestdays(context ).execute(  AV8LeaveRequest.gxTpr_Leaverequeststartdate,  AV8LeaveRequest.gxTpr_Leaverequestenddate,  AV8LeaveRequest.gxTpr_Leaverequesthalfday,  AV8LeaveRequest.gxTpr_Employeeid, out  GXt_decimal3) ;
          AV8LeaveRequest.gxTpr_Leaverequestduration = GXt_decimal3;
       }
 
@@ -2035,7 +2035,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202481215590", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202481415235432", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2051,7 +2051,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("details.js", "?202481215590", false, true);
+         context.AddJavascriptSource("details.js", "?202481415235432", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/ConfirmPanel/BootstrapConfirmPanelRender.js", "", false, true);

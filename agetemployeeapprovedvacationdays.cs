@@ -171,91 +171,42 @@ namespace GeneXus.Programs {
       {
          /* GeneXus formulas */
          /* Output device settings */
-         AV17Days = 0;
-         /* Optimized group. */
-         pr_default.dynParam(0, new Object[]{ new Object[]{
-                                              AV11EmployeeId ,
-                                              A106EmployeeId ,
-                                              AV10DateFrom ,
-                                              AV9DateTo } ,
-                                              new int[]{
-                                              TypeConstants.LONG, TypeConstants.LONG, TypeConstants.DATE, TypeConstants.DATE
-                                              }
-         });
-         /* Using cursor P008F2 */
-         pr_default.execute(0, new Object[] {AV10DateFrom, AV9DateTo, AV11EmployeeId});
-         cV17Days = P008F2_AV17Days[0];
-         pr_default.close(0);
-         AV17Days = (decimal)(AV17Days+cV17Days*0.5m);
-         /* End optimized group. */
-         pr_default.dynParam(1, new Object[]{ new Object[]{
-                                              AV11EmployeeId ,
-                                              A106EmployeeId ,
-                                              A173LeaveRequestHalfDay ,
-                                              A132LeaveRequestStatus ,
-                                              A144LeaveTypeVacationLeave } ,
-                                              new int[]{
-                                              TypeConstants.LONG, TypeConstants.LONG, TypeConstants.BOOLEAN
-                                              }
-         });
-         /* Using cursor P008F3 */
-         pr_default.execute(1, new Object[] {AV11EmployeeId});
-         while ( (pr_default.getStatus(1) != 101) )
+         /* Using cursor P00BP2 */
+         pr_default.execute(0, new Object[] {AV11EmployeeId, AV10DateFrom, AV9DateTo});
+         while ( (pr_default.getStatus(0) != 101) )
          {
-            A124LeaveTypeId = P008F3_A124LeaveTypeId[0];
-            A130LeaveRequestEndDate = P008F3_A130LeaveRequestEndDate[0];
-            A129LeaveRequestStartDate = P008F3_A129LeaveRequestStartDate[0];
-            A106EmployeeId = P008F3_A106EmployeeId[0];
-            A173LeaveRequestHalfDay = P008F3_A173LeaveRequestHalfDay[0];
-            n173LeaveRequestHalfDay = P008F3_n173LeaveRequestHalfDay[0];
-            A144LeaveTypeVacationLeave = P008F3_A144LeaveTypeVacationLeave[0];
-            A132LeaveRequestStatus = P008F3_A132LeaveRequestStatus[0];
-            A100CompanyId = P008F3_A100CompanyId[0];
-            A127LeaveRequestId = P008F3_A127LeaveRequestId[0];
-            A144LeaveTypeVacationLeave = P008F3_A144LeaveTypeVacationLeave[0];
-            A100CompanyId = P008F3_A100CompanyId[0];
-            AV20CompanyId = A100CompanyId;
-            AV13LeaveDayCount = 0;
-            AV12LeaveDay = A129LeaveRequestStartDate;
-            if ( DateTimeUtil.ResetTime ( A129LeaveRequestStartDate ) < DateTimeUtil.ResetTime ( AV10DateFrom ) )
+            A124LeaveTypeId = P00BP2_A124LeaveTypeId[0];
+            A144LeaveTypeVacationLeave = P00BP2_A144LeaveTypeVacationLeave[0];
+            A132LeaveRequestStatus = P00BP2_A132LeaveRequestStatus[0];
+            A130LeaveRequestEndDate = P00BP2_A130LeaveRequestEndDate[0];
+            A129LeaveRequestStartDate = P00BP2_A129LeaveRequestStartDate[0];
+            A106EmployeeId = P00BP2_A106EmployeeId[0];
+            A173LeaveRequestHalfDay = P00BP2_A173LeaveRequestHalfDay[0];
+            n173LeaveRequestHalfDay = P00BP2_n173LeaveRequestHalfDay[0];
+            A131LeaveRequestDuration = P00BP2_A131LeaveRequestDuration[0];
+            A127LeaveRequestId = P00BP2_A127LeaveRequestId[0];
+            A144LeaveTypeVacationLeave = P00BP2_A144LeaveTypeVacationLeave[0];
+            if ( ( DateTimeUtil.ResetTime ( A129LeaveRequestStartDate ) < DateTimeUtil.ResetTime ( AV10DateFrom ) ) && ( DateTimeUtil.ResetTime ( A130LeaveRequestEndDate ) <= DateTimeUtil.ResetTime ( AV9DateTo ) ) )
             {
-               AV21LeaveStartDate = AV9DateTo;
+               GXt_decimal1 = AV22ExceptDays;
+               new getleaverequestdays(context ).execute(  AV10DateFrom,  A130LeaveRequestEndDate,  A173LeaveRequestHalfDay,  AV11EmployeeId, out  GXt_decimal1) ;
+               AV22ExceptDays = GXt_decimal1;
+               AV17Days = (decimal)(AV17Days+AV22ExceptDays);
+            }
+            else if ( ( DateTimeUtil.ResetTime ( A129LeaveRequestStartDate ) >= DateTimeUtil.ResetTime ( AV10DateFrom ) ) && ( DateTimeUtil.ResetTime ( A130LeaveRequestEndDate ) > DateTimeUtil.ResetTime ( AV9DateTo ) ) )
+            {
+               GXt_decimal1 = AV22ExceptDays;
+               new getleaverequestdays(context ).execute(  A129LeaveRequestStartDate,  AV9DateTo,  A173LeaveRequestHalfDay,  AV11EmployeeId, out  GXt_decimal1) ;
+               AV22ExceptDays = GXt_decimal1;
+               AV17Days = (decimal)(AV17Days+AV22ExceptDays);
             }
             else
             {
-               AV21LeaveStartDate = A129LeaveRequestStartDate;
+               AV17Days = (decimal)(AV17Days+A131LeaveRequestDuration);
             }
-            if ( DateTimeUtil.ResetTime ( A130LeaveRequestEndDate ) > DateTimeUtil.ResetTime ( AV9DateTo ) )
-            {
-               AV22LeaveEndDate = AV9DateTo;
-            }
-            else
-            {
-               AV22LeaveEndDate = A130LeaveRequestEndDate;
-            }
-            while ( DateTimeUtil.ResetTime ( AV21LeaveStartDate ) <= DateTimeUtil.ResetTime ( AV22LeaveEndDate ) )
-            {
-               if ( DateTimeUtil.Dow( AV21LeaveStartDate) == 7 )
-               {
-                  AV21LeaveStartDate = DateTimeUtil.DAdd( AV21LeaveStartDate, (2));
-               }
-               else
-               {
-                  AV13LeaveDayCount = (short)(AV13LeaveDayCount+1);
-                  AV21LeaveStartDate = DateTimeUtil.DAdd( AV21LeaveStartDate, (1));
-               }
-            }
-            AV17Days = (decimal)(AV17Days+AV13LeaveDayCount);
-            /* Optimized group. */
-            /* Using cursor P008F4 */
-            pr_default.execute(2, new Object[] {AV20CompanyId, A129LeaveRequestStartDate, A130LeaveRequestEndDate});
-            cV17Days = P008F4_AV17Days[0];
-            pr_default.close(2);
-            AV17Days = (decimal)(AV17Days-cV17Days*1);
-            /* End optimized group. */
-            pr_default.readNext(1);
+            pr_default.readNext(0);
          }
-         pr_default.close(1);
+         pr_default.close(0);
          this.cleanup();
       }
 
@@ -276,164 +227,71 @@ namespace GeneXus.Programs {
       public override void initialize( )
       {
          scmdbuf = "";
-         P008F2_AV17Days = new decimal[1] ;
-         A173LeaveRequestHalfDay = "";
-         A132LeaveRequestStatus = "";
+         P00BP2_A124LeaveTypeId = new long[1] ;
+         P00BP2_A144LeaveTypeVacationLeave = new string[] {""} ;
+         P00BP2_A132LeaveRequestStatus = new string[] {""} ;
+         P00BP2_A130LeaveRequestEndDate = new DateTime[] {DateTime.MinValue} ;
+         P00BP2_A129LeaveRequestStartDate = new DateTime[] {DateTime.MinValue} ;
+         P00BP2_A106EmployeeId = new long[1] ;
+         P00BP2_A173LeaveRequestHalfDay = new string[] {""} ;
+         P00BP2_n173LeaveRequestHalfDay = new bool[] {false} ;
+         P00BP2_A131LeaveRequestDuration = new decimal[1] ;
+         P00BP2_A127LeaveRequestId = new long[1] ;
          A144LeaveTypeVacationLeave = "";
-         P008F3_A124LeaveTypeId = new long[1] ;
-         P008F3_A130LeaveRequestEndDate = new DateTime[] {DateTime.MinValue} ;
-         P008F3_A129LeaveRequestStartDate = new DateTime[] {DateTime.MinValue} ;
-         P008F3_A106EmployeeId = new long[1] ;
-         P008F3_A173LeaveRequestHalfDay = new string[] {""} ;
-         P008F3_n173LeaveRequestHalfDay = new bool[] {false} ;
-         P008F3_A144LeaveTypeVacationLeave = new string[] {""} ;
-         P008F3_A132LeaveRequestStatus = new string[] {""} ;
-         P008F3_A100CompanyId = new long[1] ;
-         P008F3_A127LeaveRequestId = new long[1] ;
+         A132LeaveRequestStatus = "";
          A130LeaveRequestEndDate = DateTime.MinValue;
          A129LeaveRequestStartDate = DateTime.MinValue;
-         AV12LeaveDay = DateTime.MinValue;
-         AV21LeaveStartDate = DateTime.MinValue;
-         AV22LeaveEndDate = DateTime.MinValue;
-         P008F4_AV17Days = new decimal[1] ;
+         A173LeaveRequestHalfDay = "";
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.agetemployeeapprovedvacationdays__default(),
             new Object[][] {
                 new Object[] {
-               P008F2_AV17Days
-               }
-               , new Object[] {
-               P008F3_A124LeaveTypeId, P008F3_A130LeaveRequestEndDate, P008F3_A129LeaveRequestStartDate, P008F3_A106EmployeeId, P008F3_A173LeaveRequestHalfDay, P008F3_n173LeaveRequestHalfDay, P008F3_A144LeaveTypeVacationLeave, P008F3_A132LeaveRequestStatus, P008F3_A100CompanyId, P008F3_A127LeaveRequestId
-               }
-               , new Object[] {
-               P008F4_AV17Days
+               P00BP2_A124LeaveTypeId, P00BP2_A144LeaveTypeVacationLeave, P00BP2_A132LeaveRequestStatus, P00BP2_A130LeaveRequestEndDate, P00BP2_A129LeaveRequestStartDate, P00BP2_A106EmployeeId, P00BP2_A173LeaveRequestHalfDay, P00BP2_n173LeaveRequestHalfDay, P00BP2_A131LeaveRequestDuration, P00BP2_A127LeaveRequestId
                }
             }
          );
          /* GeneXus formulas. */
       }
 
-      private short AV13LeaveDayCount ;
       private long AV11EmployeeId ;
-      private long A106EmployeeId ;
       private long A124LeaveTypeId ;
-      private long A100CompanyId ;
+      private long A106EmployeeId ;
       private long A127LeaveRequestId ;
-      private long AV20CompanyId ;
       private decimal AV17Days ;
-      private decimal cV17Days ;
+      private decimal A131LeaveRequestDuration ;
+      private decimal AV22ExceptDays ;
+      private decimal GXt_decimal1 ;
       private string scmdbuf ;
-      private string A173LeaveRequestHalfDay ;
-      private string A132LeaveRequestStatus ;
       private string A144LeaveTypeVacationLeave ;
+      private string A132LeaveRequestStatus ;
+      private string A173LeaveRequestHalfDay ;
       private DateTime AV10DateFrom ;
       private DateTime AV9DateTo ;
       private DateTime A130LeaveRequestEndDate ;
       private DateTime A129LeaveRequestStartDate ;
-      private DateTime AV12LeaveDay ;
-      private DateTime AV21LeaveStartDate ;
-      private DateTime AV22LeaveEndDate ;
       private bool n173LeaveRequestHalfDay ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private IDataStoreProvider pr_default ;
-      private decimal[] P008F2_AV17Days ;
-      private long[] P008F3_A124LeaveTypeId ;
-      private DateTime[] P008F3_A130LeaveRequestEndDate ;
-      private DateTime[] P008F3_A129LeaveRequestStartDate ;
-      private long[] P008F3_A106EmployeeId ;
-      private string[] P008F3_A173LeaveRequestHalfDay ;
-      private bool[] P008F3_n173LeaveRequestHalfDay ;
-      private string[] P008F3_A144LeaveTypeVacationLeave ;
-      private string[] P008F3_A132LeaveRequestStatus ;
-      private long[] P008F3_A100CompanyId ;
-      private long[] P008F3_A127LeaveRequestId ;
-      private decimal[] P008F4_AV17Days ;
+      private long[] P00BP2_A124LeaveTypeId ;
+      private string[] P00BP2_A144LeaveTypeVacationLeave ;
+      private string[] P00BP2_A132LeaveRequestStatus ;
+      private DateTime[] P00BP2_A130LeaveRequestEndDate ;
+      private DateTime[] P00BP2_A129LeaveRequestStartDate ;
+      private long[] P00BP2_A106EmployeeId ;
+      private string[] P00BP2_A173LeaveRequestHalfDay ;
+      private bool[] P00BP2_n173LeaveRequestHalfDay ;
+      private decimal[] P00BP2_A131LeaveRequestDuration ;
+      private long[] P00BP2_A127LeaveRequestId ;
       private decimal aP3_Days ;
    }
 
    public class agetemployeeapprovedvacationdays__default : DataStoreHelperBase, IDataStoreHelper
    {
-      protected Object[] conditional_P008F2( IGxContext context ,
-                                             long AV11EmployeeId ,
-                                             long A106EmployeeId ,
-                                             DateTime AV10DateFrom ,
-                                             DateTime AV9DateTo )
-      {
-         System.Text.StringBuilder sWhereString = new System.Text.StringBuilder();
-         string scmdbuf;
-         short[] GXv_int1 = new short[3];
-         Object[] GXv_Object2 = new Object[2];
-         scmdbuf = "SELECT COUNT(*) FROM (LeaveRequest T1 INNER JOIN LeaveType T2 ON T2.LeaveTypeId = T1.LeaveTypeId)";
-         AddWhere(sWhereString, "(T1.LeaveRequestHalfDay = ( 'Morning') or T1.LeaveRequestHalfDay = ( 'Afternoon'))");
-         AddWhere(sWhereString, "(T1.LeaveRequestStartDate >= :AV10DateFrom)");
-         AddWhere(sWhereString, "(T1.LeaveRequestStartDate <= :AV9DateTo)");
-         AddWhere(sWhereString, "(T1.LeaveRequestStatus = ( 'Approved'))");
-         AddWhere(sWhereString, "(T2.LeaveTypeVacationLeave = ( 'Yes'))");
-         if ( ! (0==AV11EmployeeId) )
-         {
-            AddWhere(sWhereString, "(T1.EmployeeId = :AV11EmployeeId)");
-         }
-         else
-         {
-            GXv_int1[2] = 1;
-         }
-         scmdbuf += sWhereString;
-         GXv_Object2[0] = scmdbuf;
-         GXv_Object2[1] = GXv_int1;
-         return GXv_Object2 ;
-      }
-
-      protected Object[] conditional_P008F3( IGxContext context ,
-                                             long AV11EmployeeId ,
-                                             long A106EmployeeId ,
-                                             string A173LeaveRequestHalfDay ,
-                                             string A132LeaveRequestStatus ,
-                                             string A144LeaveTypeVacationLeave )
-      {
-         System.Text.StringBuilder sWhereString = new System.Text.StringBuilder();
-         string scmdbuf;
-         short[] GXv_int3 = new short[1];
-         Object[] GXv_Object4 = new Object[2];
-         scmdbuf = "SELECT T1.LeaveTypeId, T1.LeaveRequestEndDate, T1.LeaveRequestStartDate, T1.EmployeeId, T1.LeaveRequestHalfDay, T2.LeaveTypeVacationLeave, T1.LeaveRequestStatus, T2.CompanyId, T1.LeaveRequestId FROM (LeaveRequest T1 INNER JOIN LeaveType T2 ON T2.LeaveTypeId = T1.LeaveTypeId)";
-         AddWhere(sWhereString, "((char_length(trim(trailing ' ' from T1.LeaveRequestHalfDay))=0))");
-         AddWhere(sWhereString, "(T1.LeaveRequestStatus = ( 'Approved'))");
-         AddWhere(sWhereString, "(T2.LeaveTypeVacationLeave = ( 'Yes'))");
-         if ( ! (0==AV11EmployeeId) )
-         {
-            AddWhere(sWhereString, "(T1.EmployeeId = :AV11EmployeeId)");
-         }
-         else
-         {
-            GXv_int3[0] = 1;
-         }
-         scmdbuf += sWhereString;
-         scmdbuf += " ORDER BY T1.LeaveRequestId";
-         GXv_Object4[0] = scmdbuf;
-         GXv_Object4[1] = GXv_int3;
-         return GXv_Object4 ;
-      }
-
-      public override Object [] getDynamicStatement( int cursor ,
-                                                     IGxContext context ,
-                                                     Object [] dynConstraints )
-      {
-         switch ( cursor )
-         {
-               case 0 :
-                     return conditional_P008F2(context, (long)dynConstraints[0] , (long)dynConstraints[1] , (DateTime)dynConstraints[2] , (DateTime)dynConstraints[3] );
-               case 1 :
-                     return conditional_P008F3(context, (long)dynConstraints[0] , (long)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] );
-         }
-         return base.getDynamicStatement(cursor, context, dynConstraints);
-      }
-
       public ICursor[] getCursors( )
       {
          cursorDefinitions();
          return new Cursor[] {
           new ForEachCursor(def[0])
-         ,new ForEachCursor(def[1])
-         ,new ForEachCursor(def[2])
        };
     }
 
@@ -442,26 +300,14 @@ namespace GeneXus.Programs {
     {
        if ( def == null )
        {
-          Object[] prmP008F4;
-          prmP008F4 = new Object[] {
-          new ParDef("AV20CompanyId",GXType.Int64,10,0) ,
-          new ParDef("LeaveRequestStartDate",GXType.Date,8,0) ,
-          new ParDef("LeaveRequestEndDate",GXType.Date,8,0)
-          };
-          Object[] prmP008F2;
-          prmP008F2 = new Object[] {
+          Object[] prmP00BP2;
+          prmP00BP2 = new Object[] {
+          new ParDef("AV11EmployeeId",GXType.Int64,10,0) ,
           new ParDef("AV10DateFrom",GXType.Date,8,0) ,
-          new ParDef("AV9DateTo",GXType.Date,8,0) ,
-          new ParDef("AV11EmployeeId",GXType.Int64,10,0)
-          };
-          Object[] prmP008F3;
-          prmP008F3 = new Object[] {
-          new ParDef("AV11EmployeeId",GXType.Int64,10,0)
+          new ParDef("AV9DateTo",GXType.Date,8,0)
           };
           def= new CursorDef[] {
-              new CursorDef("P008F2", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP008F2,1, GxCacheFrequency.OFF ,true,false )
-             ,new CursorDef("P008F3", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP008F3,100, GxCacheFrequency.OFF ,true,false )
-             ,new CursorDef("P008F4", "SELECT COUNT(*) FROM Holiday WHERE (CompanyId = :AV20CompanyId) AND (HolidayStartDate >= :LeaveRequestStartDate) AND (HolidayStartDate <= :LeaveRequestEndDate) AND ((date_part('dow', CAST(HolidayStartDate AS date)) + 1) <> 1) AND ((date_part('dow', CAST(HolidayStartDate AS date)) + 1) <> 7) ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP008F4,1, GxCacheFrequency.OFF ,true,false )
+              new CursorDef("P00BP2", "SELECT T1.LeaveTypeId, T2.LeaveTypeVacationLeave, T1.LeaveRequestStatus, T1.LeaveRequestEndDate, T1.LeaveRequestStartDate, T1.EmployeeId, T1.LeaveRequestHalfDay, T1.LeaveRequestDuration, T1.LeaveRequestId FROM (LeaveRequest T1 INNER JOIN LeaveType T2 ON T2.LeaveTypeId = T1.LeaveTypeId) WHERE (T1.EmployeeId = :AV11EmployeeId) AND (T1.LeaveRequestStartDate >= :AV10DateFrom and T1.LeaveRequestEndDate <= :AV9DateTo or T1.LeaveRequestStartDate < :AV10DateFrom and T1.LeaveRequestEndDate <= :AV9DateTo or T1.LeaveRequestStartDate >= :AV10DateFrom and T1.LeaveRequestEndDate > :AV9DateTo) AND (T1.LeaveRequestStatus = ( 'Approved')) AND (T2.LeaveTypeVacationLeave = ( 'Yes')) ORDER BY T1.EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00BP2,100, GxCacheFrequency.OFF ,true,false )
           };
        }
     }
@@ -473,22 +319,16 @@ namespace GeneXus.Programs {
        switch ( cursor )
        {
              case 0 :
-                ((decimal[]) buf[0])[0] = rslt.getDecimal(1);
-                return;
-             case 1 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);
-                ((DateTime[]) buf[1])[0] = rslt.getGXDate(2);
-                ((DateTime[]) buf[2])[0] = rslt.getGXDate(3);
-                ((long[]) buf[3])[0] = rslt.getLong(4);
-                ((string[]) buf[4])[0] = rslt.getString(5, 20);
-                ((bool[]) buf[5])[0] = rslt.wasNull(5);
-                ((string[]) buf[6])[0] = rslt.getString(6, 20);
-                ((string[]) buf[7])[0] = rslt.getString(7, 20);
-                ((long[]) buf[8])[0] = rslt.getLong(8);
+                ((string[]) buf[1])[0] = rslt.getString(2, 20);
+                ((string[]) buf[2])[0] = rslt.getString(3, 20);
+                ((DateTime[]) buf[3])[0] = rslt.getGXDate(4);
+                ((DateTime[]) buf[4])[0] = rslt.getGXDate(5);
+                ((long[]) buf[5])[0] = rslt.getLong(6);
+                ((string[]) buf[6])[0] = rslt.getString(7, 20);
+                ((bool[]) buf[7])[0] = rslt.wasNull(7);
+                ((decimal[]) buf[8])[0] = rslt.getDecimal(8);
                 ((long[]) buf[9])[0] = rslt.getLong(9);
-                return;
-             case 2 :
-                ((decimal[]) buf[0])[0] = rslt.getDecimal(1);
                 return;
        }
     }

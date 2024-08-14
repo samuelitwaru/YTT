@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: "YTT_version4"
-  version: "20240812121000"
+  version: "20240814140903"
 servers:
   - url: http://localhost:8082/YTT_version4NETPostgreSQL14/rest
 paths:
@@ -4019,6 +4019,9 @@ components:
           format: "date"
         LeaveRequestHalfDay:
           type: "string"
+        EmployeeId:
+          type: "integer"
+          format: "int64"
     GetWeeklyHoursInput:
       properties:
         WeekDate:

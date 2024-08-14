@@ -86,13 +86,15 @@ namespace GeneXus.Programs {
             A173LeaveRequestHalfDay = GetPar( "LeaveRequestHalfDay");
             n173LeaveRequestHalfDay = false;
             AssignAttri("", false, "A173LeaveRequestHalfDay", A173LeaveRequestHalfDay);
+            AV18EmployeeId = (long)(Math.Round(NumberUtil.Val( GetPar( "EmployeeId"), "."), 18, MidpointRounding.ToEven));
+            AssignAttri("", false, "AV18EmployeeId", StringUtil.LTrimStr( (decimal)(AV18EmployeeId), 10, 0));
             setAjaxCallMode();
             if ( ! IsValidAjaxCall( true) )
             {
                GxWebError = 1;
                return  ;
             }
-            GX11ASALEAVEREQUESTDURATION0J21( A129LeaveRequestStartDate, A130LeaveRequestEndDate, A173LeaveRequestHalfDay) ;
+            GX11ASALEAVEREQUESTDURATION0J21( A129LeaveRequestStartDate, A130LeaveRequestEndDate, A173LeaveRequestHalfDay, AV18EmployeeId) ;
             return  ;
          }
          else if ( StringUtil.StrCmp(gxfirstwebparm, "gxajaxExecAct_"+"gxLoad_30") == 0 )
@@ -1185,7 +1187,8 @@ namespace GeneXus.Programs {
          /* LeaveRequestEndDate_Controlvaluechanged Routine */
          returnInSub = false;
          GXt_decimal1 = AV35LeaveRequestDuration;
-         new getleaverequestdays(context ).execute(  A129LeaveRequestStartDate,  A130LeaveRequestEndDate,  A173LeaveRequestHalfDay, out  GXt_decimal1) ;
+         GXt_decimal5 = 0;
+         new getleaverequestdays(context ).execute(  A129LeaveRequestStartDate,  A130LeaveRequestEndDate,  A173LeaveRequestHalfDay,  (long)(Math.Round(GXt_decimal1, 18, MidpointRounding.ToEven)), out  GXt_decimal5) ;
          AV35LeaveRequestDuration = GXt_decimal1;
          AssignAttri("", false, "AV35LeaveRequestDuration", StringUtil.LTrimStr( AV35LeaveRequestDuration, 4, 1));
          /*  Sending Event outputs  */
@@ -1195,9 +1198,10 @@ namespace GeneXus.Programs {
       {
          /* LeaveRequestStartDate_Controlvaluechanged Routine */
          returnInSub = false;
-         GXt_decimal1 = AV35LeaveRequestDuration;
-         new getleaverequestdays(context ).execute(  A129LeaveRequestStartDate,  A130LeaveRequestEndDate,  A173LeaveRequestHalfDay, out  GXt_decimal1) ;
-         AV35LeaveRequestDuration = GXt_decimal1;
+         GXt_decimal5 = AV35LeaveRequestDuration;
+         GXt_decimal1 = 0;
+         new getleaverequestdays(context ).execute(  A129LeaveRequestStartDate,  A130LeaveRequestEndDate,  A173LeaveRequestHalfDay,  (long)(Math.Round(GXt_decimal5, 18, MidpointRounding.ToEven)), out  GXt_decimal1) ;
+         AV35LeaveRequestDuration = GXt_decimal5;
          AssignAttri("", false, "AV35LeaveRequestDuration", StringUtil.LTrimStr( AV35LeaveRequestDuration, 4, 1));
          /*  Sending Event outputs  */
       }
@@ -1230,9 +1234,9 @@ namespace GeneXus.Programs {
          AssignAttri("", false, "AV20EmployyeeAvailableVacationDays", StringUtil.LTrimStr( AV20EmployyeeAvailableVacationDays, 4, 1));
          dynavLeavetypeid.removeAllItems();
          AV50IsColored = false;
-         GXt_objcol_SdtSDTLeaveType5 = AV49LeaveTypes;
-         new dpleavetype(context ).execute(  AV46LeaveTypeCompanyId,  AV50IsColored, out  GXt_objcol_SdtSDTLeaveType5) ;
-         AV49LeaveTypes = GXt_objcol_SdtSDTLeaveType5;
+         GXt_objcol_SdtSDTLeaveType6 = AV49LeaveTypes;
+         new dpleavetype(context ).execute(  AV46LeaveTypeCompanyId,  AV50IsColored, out  GXt_objcol_SdtSDTLeaveType6) ;
+         AV49LeaveTypes = GXt_objcol_SdtSDTLeaveType6;
          AV49LeaveTypes.Sort("");
          AV55GXV2 = 1;
          while ( AV55GXV2 <= AV49LeaveTypes.Count )
@@ -1255,9 +1259,10 @@ namespace GeneXus.Programs {
       {
          /* LeaveRequestHalfDay_Click Routine */
          returnInSub = false;
-         GXt_decimal1 = AV35LeaveRequestDuration;
-         new getleaverequestdays(context ).execute(  A129LeaveRequestStartDate,  A130LeaveRequestEndDate,  A173LeaveRequestHalfDay, out  GXt_decimal1) ;
-         AV35LeaveRequestDuration = GXt_decimal1;
+         GXt_decimal5 = AV35LeaveRequestDuration;
+         GXt_decimal1 = 0;
+         new getleaverequestdays(context ).execute(  A129LeaveRequestStartDate,  A130LeaveRequestEndDate,  A173LeaveRequestHalfDay,  (long)(Math.Round(GXt_decimal5, 18, MidpointRounding.ToEven)), out  GXt_decimal1) ;
+         AV35LeaveRequestDuration = GXt_decimal5;
          AssignAttri("", false, "AV35LeaveRequestDuration", StringUtil.LTrimStr( AV35LeaveRequestDuration, 4, 1));
          /*  Sending Event outputs  */
       }
@@ -1468,9 +1473,9 @@ namespace GeneXus.Programs {
             A130LeaveRequestEndDate = A129LeaveRequestStartDate;
             AssignAttri("", false, "A130LeaveRequestEndDate", context.localUtil.Format(A130LeaveRequestEndDate, "99/99/99"));
          }
-         GXt_decimal1 = A131LeaveRequestDuration;
-         new getleaverequestdays(context ).execute(  A129LeaveRequestStartDate,  A130LeaveRequestEndDate,  A173LeaveRequestHalfDay, out  GXt_decimal1) ;
-         A131LeaveRequestDuration = GXt_decimal1;
+         GXt_decimal5 = A131LeaveRequestDuration;
+         new getleaverequestdays(context ).execute(  A129LeaveRequestStartDate,  A130LeaveRequestEndDate,  A173LeaveRequestHalfDay,  AV18EmployeeId, out  GXt_decimal5) ;
+         A131LeaveRequestDuration = GXt_decimal5;
          AssignAttri("", false, "A131LeaveRequestDuration", StringUtil.LTrimStr( A131LeaveRequestDuration, 4, 1));
          if ( StringUtil.StrCmp(A173LeaveRequestHalfDay, "") != 0 )
          {
@@ -1510,9 +1515,9 @@ namespace GeneXus.Programs {
             AssignAttri("", false, "A130LeaveRequestEndDate", context.localUtil.Format(A130LeaveRequestEndDate, "99/99/99"));
          }
          nIsDirty_21 = 1;
-         GXt_decimal1 = A131LeaveRequestDuration;
-         new getleaverequestdays(context ).execute(  A129LeaveRequestStartDate,  A130LeaveRequestEndDate,  A173LeaveRequestHalfDay, out  GXt_decimal1) ;
-         A131LeaveRequestDuration = GXt_decimal1;
+         GXt_decimal5 = A131LeaveRequestDuration;
+         new getleaverequestdays(context ).execute(  A129LeaveRequestStartDate,  A130LeaveRequestEndDate,  A173LeaveRequestHalfDay,  AV18EmployeeId, out  GXt_decimal5) ;
+         A131LeaveRequestDuration = GXt_decimal5;
          AssignAttri("", false, "A131LeaveRequestDuration", StringUtil.LTrimStr( A131LeaveRequestDuration, 4, 1));
          if ( (DateTime.MinValue==A129LeaveRequestStartDate) )
          {
@@ -2632,7 +2637,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20248121543263", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20248141522868", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2648,7 +2653,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("leaverequest.js", "?20248121543265", false, true);
+         context.AddJavascriptSource("leaverequest.js", "?20248141522870", false, true);
          /* End function include_jscripts */
       }
 
@@ -2890,11 +2895,12 @@ namespace GeneXus.Programs {
 
       protected void GX11ASALEAVEREQUESTDURATION0J21( DateTime A129LeaveRequestStartDate ,
                                                       DateTime A130LeaveRequestEndDate ,
-                                                      string A173LeaveRequestHalfDay )
+                                                      string A173LeaveRequestHalfDay ,
+                                                      long AV18EmployeeId )
       {
-         GXt_decimal1 = A131LeaveRequestDuration;
-         new getleaverequestdays(context ).execute(  A129LeaveRequestStartDate,  A130LeaveRequestEndDate,  A173LeaveRequestHalfDay, out  GXt_decimal1) ;
-         A131LeaveRequestDuration = GXt_decimal1;
+         GXt_decimal5 = A131LeaveRequestDuration;
+         new getleaverequestdays(context ).execute(  A129LeaveRequestStartDate,  A130LeaveRequestEndDate,  A173LeaveRequestHalfDay,  AV18EmployeeId, out  GXt_decimal5) ;
+         A131LeaveRequestDuration = GXt_decimal5;
          AssignAttri("", false, "A131LeaveRequestDuration", StringUtil.LTrimStr( A131LeaveRequestDuration, 4, 1));
          GxWebStd.set_html_headers( context, 0, "", "");
          AddString( "[[") ;
@@ -2991,9 +2997,9 @@ namespace GeneXus.Programs {
             GX_msglist.addItem("Invalid Leave end date", 1, "LEAVEREQUESTHALFDAY");
             AnyError = 1;
          }
-         GXt_decimal1 = A131LeaveRequestDuration;
-         new getleaverequestdays(context ).execute(  A129LeaveRequestStartDate,  A130LeaveRequestEndDate,  A173LeaveRequestHalfDay, out  GXt_decimal1) ;
-         A131LeaveRequestDuration = GXt_decimal1;
+         GXt_decimal5 = A131LeaveRequestDuration;
+         new getleaverequestdays(context ).execute(  A129LeaveRequestStartDate,  A130LeaveRequestEndDate,  A173LeaveRequestHalfDay,  AV18EmployeeId, out  GXt_decimal5) ;
+         A131LeaveRequestDuration = GXt_decimal5;
          if ( ( A131LeaveRequestDuration <= Convert.ToDecimal( 0 )) )
          {
             GX_msglist.addItem("Invalid Leave Duration", 1, "LEAVEREQUESTHALFDAY");
@@ -3182,7 +3188,7 @@ namespace GeneXus.Programs {
          AV37Mesage = "";
          AV7Employee = new SdtEmployee(context);
          AV49LeaveTypes = new GXBaseCollection<SdtSDTLeaveType>( context, "SDTLeaveType", "YTT_version4");
-         GXt_objcol_SdtSDTLeaveType5 = new GXBaseCollection<SdtSDTLeaveType>( context, "SDTLeaveType", "YTT_version4");
+         GXt_objcol_SdtSDTLeaveType6 = new GXBaseCollection<SdtSDTLeaveType>( context, "SDTLeaveType", "YTT_version4");
          AV48LeaveType = new SdtSDTLeaveType(context);
          Z125LeaveTypeName = "";
          Z144LeaveTypeVacationLeave = "";
@@ -3391,10 +3397,10 @@ namespace GeneXus.Programs {
       private long N124LeaveTypeId ;
       private long N106EmployeeId ;
       private long AV46LeaveTypeCompanyId ;
+      private long AV18EmployeeId ;
       private long A106EmployeeId ;
       private long A124LeaveTypeId ;
       private long AV26LeaveRequestId ;
-      private long AV18EmployeeId ;
       private long AV47LeaveTypeId ;
       private long A127LeaveRequestId ;
       private long AV24Insert_LeaveTypeId ;
@@ -3407,8 +3413,9 @@ namespace GeneXus.Programs {
       private decimal A131LeaveRequestDuration ;
       private decimal A147EmployeeBalance ;
       private decimal AV20EmployyeeAvailableVacationDays ;
-      private decimal Z147EmployeeBalance ;
       private decimal GXt_decimal1 ;
+      private decimal Z147EmployeeBalance ;
+      private decimal GXt_decimal5 ;
       private string sPrefix ;
       private string wcpOGx_mode ;
       private string Z173LeaveRequestHalfDay ;
@@ -3596,7 +3603,7 @@ namespace GeneXus.Programs {
       private string[] T000J22_A144LeaveTypeVacationLeave ;
       private IDataStoreProvider pr_gam ;
       private GXBaseCollection<SdtSDTLeaveType> AV49LeaveTypes ;
-      private GXBaseCollection<SdtSDTLeaveType> GXt_objcol_SdtSDTLeaveType5 ;
+      private GXBaseCollection<SdtSDTLeaveType> GXt_objcol_SdtSDTLeaveType6 ;
       private GXWebForm Form ;
       private SdtEmployee AV7Employee ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext AV29TrnContext ;
@@ -3645,13 +3652,13 @@ namespace GeneXus.Programs {
     {
        System.Text.StringBuilder sWhereString = new System.Text.StringBuilder();
        string scmdbuf;
-       Object[] GXv_Object6 = new Object[2];
+       Object[] GXv_Object7 = new Object[2];
        scmdbuf = "SELECT EmployeeId, EmployeeName FROM Employee";
        AddWhere(sWhereString, "("+new GxDbmsUtils( new GxPostgreSql()).ValueList(AV45Employees, "EmployeeId IN (", ")")+")");
        scmdbuf += sWhereString;
        scmdbuf += " ORDER BY EmployeeName";
-       GXv_Object6[0] = scmdbuf;
-       return GXv_Object6 ;
+       GXv_Object7[0] = scmdbuf;
+       return GXv_Object7 ;
     }
 
     public override Object [] getDynamicStatement( int cursor ,
