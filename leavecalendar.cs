@@ -489,12 +489,7 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "", "start", "top", " "+"data-gx-smarttable-cell"+" ", "display:flex;align-items:center;", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, divTable1_Internalname, 1, 800, "px", 0, "px", "Table", "start", "top", " "+"data-gx-smarttable"+" ", "grid-template-columns:5fr 32fr 32fr 31fr;grid-template-rows:auto;grid-column-gap:2px;", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "CellPaddingTop", "start", "top", " "+"data-gx-smarttable-cell"+" ", "display:flex;justify-content:center;align-items:center;", "div");
-            /* User Defined Control */
-            ucUsercontrol1.Render(context, "uctooltip", Usercontrol1_Internalname, "USERCONTROL1Container");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_start( context, divTable1_Internalname, 1, 800, "px", 0, "px", "Table", "start", "top", " "+"data-gx-smarttable"+" ", "grid-template-columns:32fr 32fr 32fr 4fr;grid-template-rows:auto;grid-column-gap:2px;", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "DscTop", "start", "top", " "+"data-gx-smarttable-cell"+" ", "display:flex;align-items:center;", "div");
             /* Div Control */
@@ -504,7 +499,7 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 MergeLabelCell", "start", "top", "", "", "div");
             /* Text block */
-            GxWebStd.gx_label_ctrl( context, lblTextblockdaterange_rangetext_Internalname, "Date Range", "", "", lblTextblockdaterange_rangetext_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "Label", 0, "", 1, 1, 0, 0, "HLP_LeaveCalendar.htm");
+            GxWebStd.gx_label_ctrl( context, lblTextblockdaterange_rangetext_Internalname, " Date Range", "", "", lblTextblockdaterange_rangetext_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "Label", 0, "", 1, 1, 0, 0, "HLP_LeaveCalendar.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
@@ -513,8 +508,8 @@ namespace GeneXus.Programs {
             /* Attribute/Variable Label */
             GxWebStd.gx_label_element( context, edtavDaterange_rangetext_Internalname, "Date Range_Range Text", "col-sm-3 AttributeDateLabel", 0, true, "");
             /* Single line edit */
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 24,'',false,'',0)\"";
-            GxWebStd.gx_single_line_edit( context, edtavDaterange_rangetext_Internalname, AV15DateRange_RangeText, StringUtil.RTrim( context.localUtil.Format( AV15DateRange_RangeText, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,24);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavDaterange_rangetext_Jsonclick, 0, "AttributeDate", "", "", "", "", 1, edtavDaterange_rangetext_Enabled, 0, "text", "", 40, "chr", 1, "row", 40, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_LeaveCalendar.htm");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 22,'',false,'',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtavDaterange_rangetext_Internalname, AV15DateRange_RangeText, StringUtil.RTrim( context.localUtil.Format( AV15DateRange_RangeText, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,22);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavDaterange_rangetext_Jsonclick, 0, "AttributeDate", "", "", "", "", 1, edtavDaterange_rangetext_Enabled, 0, "text", "", 40, "chr", 1, "row", 40, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_LeaveCalendar.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -537,9 +532,9 @@ namespace GeneXus.Programs {
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
             /* Attribute/Variable Label */
             GxWebStd.gx_label_element( context, dynavCompanylocationid_Internalname, "Company Location Id", "col-sm-3 AttributeLabel", 0, true, "");
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 32,'',false,'',0)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 30,'',false,'',0)\"";
             /* ComboBox */
-            GxWebStd.gx_combobox_ctrl1( context, dynavCompanylocationid, dynavCompanylocationid_Internalname, StringUtil.Trim( StringUtil.Str( (decimal)(AV11CompanyLocationId), 10, 0)), 1, dynavCompanylocationid_Jsonclick, 0, "'"+""+"'"+",false,"+"'"+""+"'", "int", "", 1, dynavCompanylocationid.Enabled, 1, 0, 0, "em", 0, "", "", "Attribute", "", "", TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,32);\"", "", true, 0, "HLP_LeaveCalendar.htm");
+            GxWebStd.gx_combobox_ctrl1( context, dynavCompanylocationid, dynavCompanylocationid_Internalname, StringUtil.Trim( StringUtil.Str( (decimal)(AV11CompanyLocationId), 10, 0)), 1, dynavCompanylocationid_Jsonclick, 0, "'"+""+"'"+",false,"+"'"+""+"'", "int", "", 1, dynavCompanylocationid.Enabled, 1, 0, 0, "em", 0, "", "", "Attribute", "", "", TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,30);\"", "", true, 0, "HLP_LeaveCalendar.htm");
             dynavCompanylocationid.CurrentValue = StringUtil.Trim( StringUtil.Str( (decimal)(AV11CompanyLocationId), 10, 0));
             AssignProp("", false, dynavCompanylocationid_Internalname, "Values", (string)(dynavCompanylocationid.ToJavascriptSource()), true);
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -564,15 +559,20 @@ namespace GeneXus.Programs {
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
             /* Attribute/Variable Label */
             GxWebStd.gx_label_element( context, dynavProjectid_Internalname, "Project Id", "col-sm-3 AttributeLabel", 0, true, "");
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 40,'',false,'',0)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 38,'',false,'',0)\"";
             /* ComboBox */
-            GxWebStd.gx_combobox_ctrl1( context, dynavProjectid, dynavProjectid_Internalname, StringUtil.Trim( StringUtil.Str( (decimal)(AV26ProjectId), 10, 0)), 1, dynavProjectid_Jsonclick, 0, "'"+""+"'"+",false,"+"'"+""+"'", "int", "", 1, dynavProjectid.Enabled, 0, 0, 0, "em", 0, "", "", "Attribute", "", "", TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,40);\"", "", true, 0, "HLP_LeaveCalendar.htm");
+            GxWebStd.gx_combobox_ctrl1( context, dynavProjectid, dynavProjectid_Internalname, StringUtil.Trim( StringUtil.Str( (decimal)(AV26ProjectId), 10, 0)), 1, dynavProjectid_Jsonclick, 0, "'"+""+"'"+",false,"+"'"+""+"'", "int", "", 1, dynavProjectid.Enabled, 0, 0, 0, "em", 0, "", "", "Attribute", "", "", TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,38);\"", "", true, 0, "HLP_LeaveCalendar.htm");
             dynavProjectid.CurrentValue = StringUtil.Trim( StringUtil.Str( (decimal)(AV26ProjectId), 10, 0));
             AssignProp("", false, dynavProjectid_Internalname, "Values", (string)(dynavProjectid.ToJavascriptSource()), true);
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "CellPaddingTop", "start", "top", " "+"data-gx-smarttable-cell"+" ", "display:flex;justify-content:center;align-items:center;", "div");
+            /* User Defined Control */
+            ucUsercontrol1.Render(context, "uctooltip", Usercontrol1_Internalname, "USERCONTROL1Container");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -1549,7 +1549,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20248121542160", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20248152342414", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1565,7 +1565,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("leavecalendar.js", "?20248121542160", false, true);
+         context.AddJavascriptSource("leavecalendar.js", "?20248152342414", false, true);
          context.AddJavascriptSource("UserControls/UCToolTipRender.js", "", false, true);
          context.AddJavascriptSource("UserControls/UCVISTimelineRender.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/daterangepicker/locales.js", "", false, true);
@@ -1605,7 +1605,6 @@ namespace GeneXus.Programs {
 
       protected void init_default_properties( )
       {
-         Usercontrol1_Internalname = "USERCONTROL1";
          lblTextblockdaterange_rangetext_Internalname = "TEXTBLOCKDATERANGE_RANGETEXT";
          edtavDaterange_rangetext_Internalname = "vDATERANGE_RANGETEXT";
          divUnnamedtableaterange_rangetext_Internalname = "UNNAMEDTABLEATERANGE_RANGETEXT";
@@ -1615,6 +1614,7 @@ namespace GeneXus.Programs {
          lblTextblockprojectid_Internalname = "TEXTBLOCKPROJECTID";
          dynavProjectid_Internalname = "vPROJECTID";
          divUnnamedtableprojectid_Internalname = "UNNAMEDTABLEPROJECTID";
+         Usercontrol1_Internalname = "USERCONTROL1";
          divTable1_Internalname = "TABLE1";
          bttBtnreport_Internalname = "BTNREPORT";
          bttBtnexportics_Internalname = "BTNEXPORTICS";
@@ -1732,12 +1732,12 @@ namespace GeneXus.Programs {
          sPrefix = "";
          ClassString = "";
          StyleString = "";
-         ucUsercontrol1 = new GXUserControl();
          lblTextblockdaterange_rangetext_Jsonclick = "";
          TempTags = "";
          AV15DateRange_RangeText = "";
          lblTextblockcompanylocationid_Jsonclick = "";
          lblTextblockprojectid_Jsonclick = "";
+         ucUsercontrol1 = new GXUserControl();
          bttBtnreport_Jsonclick = "";
          bttBtnexportics_Jsonclick = "";
          ucUcvistimeline1 = new GXUserControl();
@@ -1860,7 +1860,6 @@ namespace GeneXus.Programs {
       private string StyleString ;
       private string divUnnamedtable1_Internalname ;
       private string divTable1_Internalname ;
-      private string Usercontrol1_Internalname ;
       private string divUnnamedtableaterange_rangetext_Internalname ;
       private string lblTextblockdaterange_rangetext_Internalname ;
       private string lblTextblockdaterange_rangetext_Jsonclick ;
@@ -1877,6 +1876,7 @@ namespace GeneXus.Programs {
       private string lblTextblockprojectid_Jsonclick ;
       private string dynavProjectid_Internalname ;
       private string dynavProjectid_Jsonclick ;
+      private string Usercontrol1_Internalname ;
       private string divUnnamedtable2_Internalname ;
       private string bttBtnreport_Internalname ;
       private string bttBtnreport_Jsonclick ;

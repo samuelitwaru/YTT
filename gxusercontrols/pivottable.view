@@ -33,7 +33,7 @@
 		
 		<tfoot>
 			<tr class="GridWithPaginationBar GridNoBorder WorkWithOdd">
-				<td style='border: 1px solid #dddddd; border-collapse: collapse;'>Total</td>
+				<td style="border: 1px solid #dddddd; border-collapse: collapse;font-weight: bold;background:#fff; position:sticky; left:0; z-index:1">Total</td>
 				{{#SDTProjects}}
 				<td class="project-total text-center" id='{{gxTpr_Id}}{{Id}}' style='border: 1px solid #dddddd; border-collapse: collapse;' scope="col">0</td>
 				{{/SDTProjects}}

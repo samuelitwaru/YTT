@@ -6,10 +6,12 @@
 </div>
 <br />
 
-<div id="visualization" style="position: relative; max-height: 1200px;overflow:auto">
+<div id="visualization" >
+
 </div>
 <div id="key" style="display:flex; margin-top: 10px">
 	<div style="display:flex;">
 		<div style="background: #dddddd; height:10px; width:10px; margin: 4px"></div> <label>Pending</label>
 	</div>
 </div>
+
