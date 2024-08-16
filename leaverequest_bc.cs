@@ -270,8 +270,7 @@ namespace GeneXus.Programs {
          /* LeaveRequestEndDate_Controlvaluechanged Routine */
          returnInSub = false;
          GXt_decimal1 = AV35LeaveRequestDuration;
-         GXt_decimal5 = 0;
-         new getleaverequestdays(context ).execute(  A129LeaveRequestStartDate,  A130LeaveRequestEndDate,  A173LeaveRequestHalfDay,  (long)(Math.Round(GXt_decimal1, 18, MidpointRounding.ToEven)), out  GXt_decimal5) ;
+         new getleaverequestdays(context ).execute(  A129LeaveRequestStartDate,  A130LeaveRequestEndDate,  A173LeaveRequestHalfDay,  AV18EmployeeId, out  GXt_decimal1) ;
          AV35LeaveRequestDuration = GXt_decimal1;
       }
 
@@ -279,10 +278,9 @@ namespace GeneXus.Programs {
       {
          /* LeaveRequestStartDate_Controlvaluechanged Routine */
          returnInSub = false;
-         GXt_decimal5 = AV35LeaveRequestDuration;
-         GXt_decimal1 = 0;
-         new getleaverequestdays(context ).execute(  A129LeaveRequestStartDate,  A130LeaveRequestEndDate,  A173LeaveRequestHalfDay,  (long)(Math.Round(GXt_decimal5, 18, MidpointRounding.ToEven)), out  GXt_decimal1) ;
-         AV35LeaveRequestDuration = GXt_decimal5;
+         GXt_decimal1 = AV35LeaveRequestDuration;
+         new getleaverequestdays(context ).execute(  A129LeaveRequestStartDate,  A130LeaveRequestEndDate,  A173LeaveRequestHalfDay,  AV18EmployeeId, out  GXt_decimal1) ;
+         AV35LeaveRequestDuration = GXt_decimal1;
       }
 
       protected void E150J2( )
@@ -309,10 +307,9 @@ namespace GeneXus.Programs {
       {
          /* LeaveRequestHalfDay_Click Routine */
          returnInSub = false;
-         GXt_decimal5 = AV35LeaveRequestDuration;
-         GXt_decimal1 = 0;
-         new getleaverequestdays(context ).execute(  A129LeaveRequestStartDate,  A130LeaveRequestEndDate,  A173LeaveRequestHalfDay,  (long)(Math.Round(GXt_decimal5, 18, MidpointRounding.ToEven)), out  GXt_decimal1) ;
-         AV35LeaveRequestDuration = GXt_decimal5;
+         GXt_decimal1 = AV35LeaveRequestDuration;
+         new getleaverequestdays(context ).execute(  A129LeaveRequestStartDate,  A130LeaveRequestEndDate,  A173LeaveRequestHalfDay,  AV18EmployeeId, out  GXt_decimal1) ;
+         AV35LeaveRequestDuration = GXt_decimal1;
       }
 
       protected void ZM0J21( short GX_JID )
@@ -429,9 +426,9 @@ namespace GeneXus.Programs {
          {
             A130LeaveRequestEndDate = A129LeaveRequestStartDate;
          }
-         GXt_decimal5 = A131LeaveRequestDuration;
-         new getleaverequestdays(context ).execute(  A129LeaveRequestStartDate,  A130LeaveRequestEndDate,  A173LeaveRequestHalfDay,  AV18EmployeeId, out  GXt_decimal5) ;
-         A131LeaveRequestDuration = GXt_decimal5;
+         GXt_decimal1 = A131LeaveRequestDuration;
+         new getleaverequestdays(context ).execute(  A129LeaveRequestStartDate,  A130LeaveRequestEndDate,  A173LeaveRequestHalfDay,  AV18EmployeeId, out  GXt_decimal1) ;
+         A131LeaveRequestDuration = GXt_decimal1;
       }
 
       protected void CheckExtendedTable0J21( )
@@ -454,9 +451,9 @@ namespace GeneXus.Programs {
             A130LeaveRequestEndDate = A129LeaveRequestStartDate;
          }
          nIsDirty_21 = 1;
-         GXt_decimal5 = A131LeaveRequestDuration;
-         new getleaverequestdays(context ).execute(  A129LeaveRequestStartDate,  A130LeaveRequestEndDate,  A173LeaveRequestHalfDay,  AV18EmployeeId, out  GXt_decimal5) ;
-         A131LeaveRequestDuration = GXt_decimal5;
+         GXt_decimal1 = A131LeaveRequestDuration;
+         new getleaverequestdays(context ).execute(  A129LeaveRequestStartDate,  A130LeaveRequestEndDate,  A173LeaveRequestHalfDay,  AV18EmployeeId, out  GXt_decimal1) ;
+         A131LeaveRequestDuration = GXt_decimal1;
          if ( (DateTime.MinValue==A129LeaveRequestStartDate) )
          {
             GX_msglist.addItem("Start date is required", 1, "");
@@ -1797,10 +1794,9 @@ namespace GeneXus.Programs {
       private decimal A147EmployeeBalance ;
       private decimal AV35LeaveRequestDuration ;
       private decimal AV20EmployyeeAvailableVacationDays ;
-      private decimal GXt_decimal1 ;
       private decimal Z131LeaveRequestDuration ;
       private decimal Z147EmployeeBalance ;
-      private decimal GXt_decimal5 ;
+      private decimal GXt_decimal1 ;
       private string scmdbuf ;
       private string PreviousTooltip ;
       private string PreviousCaption ;
