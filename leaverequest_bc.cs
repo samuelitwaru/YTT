@@ -494,7 +494,7 @@ namespace GeneXus.Programs {
          A148EmployeeName = BC000J5_A148EmployeeName[0];
          A147EmployeeBalance = BC000J5_A147EmployeeBalance[0];
          pr_default.close(3);
-         if ( ( DateTimeUtil.ResetTime ( A129LeaveRequestStartDate ) < DateTimeUtil.ResetTime ( Gx_date ) ) && ! AV36ISManager )
+         if ( ( DateTimeUtil.ResetTime ( A129LeaveRequestStartDate ) < DateTimeUtil.ResetTime ( Gx_date ) ) && ! ( new userhasrole(context).executeUdp(  "Project Manager") || new userhasrole(context).executeUdp(  "Manager") ) )
          {
             GX_msglist.addItem("Invalid Leave start date", 1, "");
             AnyError = 1;

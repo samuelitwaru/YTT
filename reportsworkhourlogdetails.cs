@@ -608,7 +608,7 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, divTablemain_Internalname, 1, 0, "px", 0, "px", "TableMain", "start", "top", "", "", "div");
+            GxWebStd.gx_div_start( context, divTablemain_Internalname, 1, divTablemain_Width, "px", 0, "px", "TableMain", "start", "top", "", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
             /* Div Control */
@@ -1631,6 +1631,8 @@ namespace GeneXus.Programs {
          AssignProp(sPrefix, false, lblTextblock1_Internalname, "Fontsize", StringUtil.LTrimStr( (decimal)(lblTextblock1_Fontsize), 9, 0), true);
          lblTextblock1_Fontbold = 1;
          AssignProp(sPrefix, false, lblTextblock1_Internalname, "Fontbold", StringUtil.Str( (decimal)(lblTextblock1_Fontbold), 1, 0), true);
+         divTablemain_Width = 1200;
+         AssignProp(sPrefix, false, divTablemain_Internalname, "Width", StringUtil.LTrimStr( (decimal)(divTablemain_Width), 9, 0), true);
          this.executeUsercontrolMethod(sPrefix, false, "TFWORKHOURLOGDATE_RANGEPICKERContainer", "Attach", "", new Object[] {(string)edtavDdo_workhourlogdateauxdatetext_Internalname});
          subGrid_Rows = 5;
          GxWebStd.gx_hidden_field( context, sPrefix+"GRID_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Rows), 6, 0, ".", "")));
@@ -2223,7 +2225,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20248121533439", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202481910123250", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2239,7 +2241,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("reportsworkhourlogdetails.js", "?20248121533440", false, true);
+         context.AddJavascriptSource("reportsworkhourlogdetails.js", "?202481910123252", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/DVPaginationBar/DVPaginationBarRender.js", "", false, true);
@@ -2643,6 +2645,7 @@ namespace GeneXus.Programs {
          lblTextblock1_Fontbold = 0;
          lblTextblock1_Fontsize = (int)(Math.Round(12.0m, 18, MidpointRounding.ToEven));
          lblTextblock1_Caption = "";
+         divTablemain_Width = 0;
          Grid_empowerer_Hastitlesettings = Convert.ToBoolean( -1);
          Ddo_grid_Datalistproc = "ReportsWorkHourLogDetailsGetFilterData";
          Ddo_grid_Datalisttype = "|Dynamic|Dynamic|Dynamic";
@@ -2876,6 +2879,7 @@ namespace GeneXus.Programs {
       private int nRC_GXsfl_15 ;
       private int nGXsfl_15_idx=1 ;
       private int Gridpaginationbar_Pagestoshow ;
+      private int divTablemain_Width ;
       private int lblTextblock1_Fontsize ;
       private int subGrid_Islastpage ;
       private int GXPagingFrom2 ;

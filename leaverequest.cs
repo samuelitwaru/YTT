@@ -698,7 +698,6 @@ namespace GeneXus.Programs {
                Gx_BScreen = (short)(Math.Round(context.localUtil.CToN( cgiGet( "vGXBSCREEN"), ".", ","), 18, MidpointRounding.ToEven));
                Gx_date = context.localUtil.CToD( cgiGet( "vTODAY"), 0);
                AV46LeaveTypeCompanyId = (long)(Math.Round(context.localUtil.CToN( cgiGet( "vLEAVETYPECOMPANYID"), ".", ","), 18, MidpointRounding.ToEven));
-               AV36ISManager = StringUtil.StrToBool( cgiGet( "vISMANAGER"));
                A125LeaveTypeName = cgiGet( "LEAVETYPENAME");
                A144LeaveTypeVacationLeave = cgiGet( "LEAVETYPEVACATIONLEAVE");
                A148EmployeeName = cgiGet( "EMPLOYEENAME");
@@ -1593,7 +1592,7 @@ namespace GeneXus.Programs {
             GX_msglist.addItem("Invalid Leave Duration", 1, "");
             AnyError = 1;
          }
-         if ( ( DateTimeUtil.ResetTime ( A129LeaveRequestStartDate ) < DateTimeUtil.ResetTime ( Gx_date ) ) && ! AV36ISManager )
+         if ( ( DateTimeUtil.ResetTime ( A129LeaveRequestStartDate ) < DateTimeUtil.ResetTime ( Gx_date ) ) && ! ( new userhasrole(context).executeUdp(  "Project Manager") || new userhasrole(context).executeUdp(  "Manager") ) )
          {
             GX_msglist.addItem("Invalid Leave start date", 1, "LEAVEREQUESTSTARTDATE");
             AnyError = 1;
@@ -2486,7 +2485,6 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "vGXBSCREEN", StringUtil.LTrim( StringUtil.NToC( (decimal)(Gx_BScreen), 1, 0, ".", "")));
          GxWebStd.gx_hidden_field( context, "vTODAY", context.localUtil.DToC( Gx_date, 0, "/"));
          GxWebStd.gx_hidden_field( context, "vLEAVETYPECOMPANYID", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV46LeaveTypeCompanyId), 10, 0, ".", "")));
-         GxWebStd.gx_boolean_hidden_field( context, "vISMANAGER", AV36ISManager);
          GxWebStd.gx_hidden_field( context, "LEAVETYPENAME", StringUtil.RTrim( A125LeaveTypeName));
          GxWebStd.gx_hidden_field( context, "LEAVETYPEVACATIONLEAVE", StringUtil.RTrim( A144LeaveTypeVacationLeave));
          GxWebStd.gx_hidden_field( context, "EMPLOYEENAME", StringUtil.RTrim( A148EmployeeName));
@@ -2634,7 +2632,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202481613204973", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202481615552151", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2650,7 +2648,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("leaverequest.js", "?202481613204975", false, true);
+         context.AddJavascriptSource("leaverequest.js", "?202481615552154", false, true);
          /* End function include_jscripts */
       }
 
@@ -2975,6 +2973,26 @@ namespace GeneXus.Programs {
          AssignAttri("", false, "A124LeaveTypeId", StringUtil.LTrim( StringUtil.NToC( (decimal)(A124LeaveTypeId), 10, 0, ".", "")));
       }
 
+      public void Valid_Leaverequeststartdate( )
+      {
+         AV18EmployeeId = (long)(Math.Round(NumberUtil.Val( dynavEmployeeid.CurrentValue, "."), 18, MidpointRounding.ToEven));
+         AV47LeaveTypeId = (long)(Math.Round(NumberUtil.Val( dynavLeavetypeid.CurrentValue, "."), 18, MidpointRounding.ToEven));
+         if ( (DateTime.MinValue==A129LeaveRequestStartDate) )
+         {
+            GX_msglist.addItem("Start date is required", 1, "LEAVEREQUESTSTARTDATE");
+            AnyError = 1;
+            GX_FocusControl = edtLeaveRequestStartDate_Internalname;
+         }
+         if ( ( DateTimeUtil.ResetTime ( A129LeaveRequestStartDate ) < DateTimeUtil.ResetTime ( Gx_date ) ) && ! ( new userhasrole(context).executeUdp(  "Project Manager") || new userhasrole(context).executeUdp(  "Manager") ) )
+         {
+            GX_msglist.addItem("Invalid Leave start date", 1, "LEAVEREQUESTSTARTDATE");
+            AnyError = 1;
+            GX_FocusControl = edtLeaveRequestStartDate_Internalname;
+         }
+         dynload_actions( ) ;
+         /*  Sending validation outputs */
+      }
+
       public void Valid_Leaverequesthalfday( )
       {
          n173LeaveRequestHalfDay = false;
@@ -3086,7 +3104,7 @@ namespace GeneXus.Programs {
          setEventMetadata("VALIDV_EMPLOYEEID",",oparms:[{av:'dynavEmployeeid'},{av:'AV18EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'radLeaveRequestHalfDay'},{av:'A173LeaveRequestHalfDay',fld:'LEAVEREQUESTHALFDAY',pic:''}]}");
          setEventMetadata("VALIDV_LEAVETYPEID","{handler:'Validv_Leavetypeid',iparms:[{av:'Gx_mode',fld:'vMODE',pic:'@!',hsh:true},{av:'AV24Insert_LeaveTypeId',fld:'vINSERT_LEAVETYPEID',pic:'ZZZZZZZZZ9'},{av:'AV46LeaveTypeCompanyId',fld:'vLEAVETYPECOMPANYID',pic:'ZZZZZZZZZ9'},{av:'dynavLeavetypeid'},{av:'AV47LeaveTypeId',fld:'vLEAVETYPEID',pic:'ZZZZZZZZZ9'},{av:'A124LeaveTypeId',fld:'LEAVETYPEID',pic:'ZZZZZZZZZ9'},{av:'dynavEmployeeid'},{av:'AV18EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'radLeaveRequestHalfDay'},{av:'A173LeaveRequestHalfDay',fld:'LEAVEREQUESTHALFDAY',pic:''}]");
          setEventMetadata("VALIDV_LEAVETYPEID",",oparms:[{av:'A124LeaveTypeId',fld:'LEAVETYPEID',pic:'ZZZZZZZZZ9'},{av:'dynavEmployeeid'},{av:'AV18EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'radLeaveRequestHalfDay'},{av:'A173LeaveRequestHalfDay',fld:'LEAVEREQUESTHALFDAY',pic:''}]}");
-         setEventMetadata("VALID_LEAVEREQUESTSTARTDATE","{handler:'Valid_Leaverequeststartdate',iparms:[{av:'dynavEmployeeid'},{av:'AV18EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'radLeaveRequestHalfDay'},{av:'A173LeaveRequestHalfDay',fld:'LEAVEREQUESTHALFDAY',pic:''}]");
+         setEventMetadata("VALID_LEAVEREQUESTSTARTDATE","{handler:'Valid_Leaverequeststartdate',iparms:[{av:'A129LeaveRequestStartDate',fld:'LEAVEREQUESTSTARTDATE',pic:''},{av:'Gx_date',fld:'vTODAY',pic:''},{av:'AV46LeaveTypeCompanyId',fld:'vLEAVETYPECOMPANYID',pic:'ZZZZZZZZZ9'},{av:'dynavLeavetypeid'},{av:'AV47LeaveTypeId',fld:'vLEAVETYPEID',pic:'ZZZZZZZZZ9'},{av:'dynavEmployeeid'},{av:'AV18EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'radLeaveRequestHalfDay'},{av:'A173LeaveRequestHalfDay',fld:'LEAVEREQUESTHALFDAY',pic:''}]");
          setEventMetadata("VALID_LEAVEREQUESTSTARTDATE",",oparms:[{av:'dynavEmployeeid'},{av:'AV18EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'radLeaveRequestHalfDay'},{av:'A173LeaveRequestHalfDay',fld:'LEAVEREQUESTHALFDAY',pic:''}]}");
          setEventMetadata("VALID_LEAVEREQUESTENDDATE","{handler:'Valid_Leaverequestenddate',iparms:[{av:'dynavEmployeeid'},{av:'AV18EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'radLeaveRequestHalfDay'},{av:'A173LeaveRequestHalfDay',fld:'LEAVEREQUESTHALFDAY',pic:''}]");
          setEventMetadata("VALID_LEAVEREQUESTENDDATE",",oparms:[{av:'dynavEmployeeid'},{av:'AV18EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'radLeaveRequestHalfDay'},{av:'A173LeaveRequestHalfDay',fld:'LEAVEREQUESTHALFDAY',pic:''}]}");
@@ -3506,8 +3524,8 @@ namespace GeneXus.Programs {
       private bool toggleJsOutput ;
       private bool n173LeaveRequestHalfDay ;
       private bool wbErr ;
-      private bool AV36ISManager ;
       private bool returnInSub ;
+      private bool AV36ISManager ;
       private bool AV40IsProjectManager ;
       private bool AV50IsColored ;
       private bool Gx_longc ;
