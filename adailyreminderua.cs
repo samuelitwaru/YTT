@@ -228,7 +228,7 @@ namespace GeneXus.Programs {
                {
                   AV10name = A107EmployeeFirstName;
                   AV9email = A109EmployeeEmail;
-                  AV12Subject = "Daily Time Tracker Reminder" + " " + context.localUtil.DToC( AV15CheckDate, 2, "/");
+                  AV12Subject = "Daily Time Tracker Reminder";
                   AV8Body = "<div style=\"max-width:600px;margin:0 auto;font-family:Arial,sans-serif;border:1px solid #e0e0e0;padding:20px;box-shadow:0 4px 8px rgba(0,0,0,.1)\"><div style=\"background-color:#333;color:#fff;text-align:center;padding:20px 0\"><h2>Time Tracker Reminder</h2></div><div style=\"padding:20px;line-height:1.5\"><p>Dear " + StringUtil.Trim( AV10name) + ",</p><p>Check your Time Tracker hours for today and fill them.</p><p>We think you forgot to fill them in.</p><a href=\" " + AV13HttpRequest.BaseURL + "logworkhours.aspx\" style=\"display: block; padding: 10px 20px; width: 150px;  margin: 20px auto; background-color: #FFCC00; text-align: center; border-radius: 8px; color: white; font-weight: bold; line-height: 30px; text-decoration: none;\">Fill now</a></div></div>";
                   new sendemail(context ).execute(  AV9email, ref  AV12Subject, ref  AV8Body) ;
                   new sdsendpushnotifications(context ).execute(  "Time Tracker Reminder",  "Check your time tracker hours, you may have missed a log.",  A106EmployeeId) ;

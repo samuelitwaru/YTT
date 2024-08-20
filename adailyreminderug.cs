@@ -104,6 +104,7 @@ namespace GeneXus.Programs {
          else
          {
             AV16DayOfWeek = DateTimeUtil.Dow( Gx_date);
+            AV16DayOfWeek = 2;
             if ( AV16DayOfWeek == 7 )
             {
                AV15CheckDate = DateTimeUtil.DAdd( Gx_date, (-1));
@@ -116,10 +117,16 @@ namespace GeneXus.Programs {
                }
                else
                {
-                  AV15CheckDate = DateTimeUtil.DAdd( Gx_date, (-1));
+                  if ( AV16DayOfWeek == 2 )
+                  {
+                     AV15CheckDate = DateTimeUtil.DAdd( Gx_date, (-3));
+                  }
+                  else
+                  {
+                     AV15CheckDate = DateTimeUtil.DAdd( Gx_date, (-1));
+                  }
                }
             }
-            AV15CheckDate = DateTimeUtil.DAdd( Gx_date, (-1));
          }
          /* Using cursor P00AJ2 */
          pr_default.execute(0, new Object[] {AV15CheckDate});
@@ -157,7 +164,7 @@ namespace GeneXus.Programs {
             A109EmployeeEmail = P00AJ3_A109EmployeeEmail[0];
             A157CompanyLocationId = P00AJ3_A157CompanyLocationId[0];
             A159CompanyLocationCode = P00AJ3_A159CompanyLocationCode[0];
-            AV23GXLvl33 = 0;
+            AV23GXLvl36 = 0;
             /* Using cursor P00AJ4 */
             pr_default.execute(2, new Object[] {A106EmployeeId, AV15CheckDate});
             while ( (pr_default.getStatus(2) != 101) )
@@ -171,7 +178,7 @@ namespace GeneXus.Programs {
                n173LeaveRequestHalfDay = P00AJ4_n173LeaveRequestHalfDay[0];
                A127LeaveRequestId = P00AJ4_A127LeaveRequestId[0];
                A145LeaveTypeLoggingWorkHours = P00AJ4_A145LeaveTypeLoggingWorkHours[0];
-               AV23GXLvl33 = 1;
+               AV23GXLvl36 = 1;
                AV19HasNoLeave = false;
                AV18HasToLogOnLeave = false;
                if ( StringUtil.StrCmp(A145LeaveTypeLoggingWorkHours, "Yes") == 0 )
@@ -199,25 +206,25 @@ namespace GeneXus.Programs {
                pr_default.readNext(2);
             }
             pr_default.close(2);
-            if ( AV23GXLvl33 == 0 )
+            if ( AV23GXLvl36 == 0 )
             {
                AV19HasNoLeave = true;
             }
-            AV24GXLvl59 = 0;
+            AV24GXLvl62 = 0;
             /* Using cursor P00AJ5 */
             pr_default.execute(3, new Object[] {AV15CheckDate, A106EmployeeId});
             while ( (pr_default.getStatus(3) != 101) )
             {
                A119WorkHourLogDate = P00AJ5_A119WorkHourLogDate[0];
                A118WorkHourLogId = P00AJ5_A118WorkHourLogId[0];
-               AV24GXLvl59 = 1;
+               AV24GXLvl62 = 1;
                AV17HasLoggedHours = true;
                /* Exit For each command. Update data (if necessary), close cursors & exit. */
                if (true) break;
                pr_default.readNext(3);
             }
             pr_default.close(3);
-            if ( AV24GXLvl59 == 0 )
+            if ( AV24GXLvl62 == 0 )
             {
                AV17HasLoggedHours = false;
             }
@@ -227,7 +234,7 @@ namespace GeneXus.Programs {
                {
                   AV10name = A107EmployeeFirstName;
                   AV9email = A109EmployeeEmail;
-                  AV12Subject = "Daily Time Tracker Reminder" + " " + context.localUtil.DToC( AV15CheckDate, 2, "/");
+                  AV12Subject = "Daily Time Tracker Reminder";
                   AV8Body = "<div style=\"max-width:600px;margin:0 auto;font-family:Arial,sans-serif;border:1px solid #e0e0e0;padding:20px;box-shadow:0 4px 8px rgba(0,0,0,.1)\"><div style=\"background-color:#333;color:#fff;text-align:center;padding:20px 0\"><h2>Time Tracker Reminder</h2></div><div style=\"padding:20px;line-height:1.5\"><p>Dear " + StringUtil.Trim( AV10name) + ",</p><p>Check your Time Tracker hours for today and fill them.</p><p>We think you forgot to fill them in.</p><a href=\" " + AV13HttpRequest.BaseURL + "logworkhours.aspx\" style=\"display: block; padding: 10px 20px; width: 150px;  margin: 20px auto; background-color: #FFCC00; text-align: center; border-radius: 8px; color: white; font-weight: bold; line-height: 30px; text-decoration: none;\">Fill now</a></div></div>";
                   new sendemail(context ).execute(  AV9email, ref  AV12Subject, ref  AV8Body) ;
                   new sdsendpushnotifications(context ).execute(  "Time Tracker Reminder",  "Check your time tracker hours, you may have missed a log.",  A106EmployeeId) ;
@@ -331,8 +338,8 @@ namespace GeneXus.Programs {
       private short GxWebError ;
       private short AV14CurrentHour ;
       private short AV16DayOfWeek ;
-      private short AV23GXLvl33 ;
-      private short AV24GXLvl59 ;
+      private short AV23GXLvl36 ;
+      private short AV24GXLvl62 ;
       private long A100CompanyId ;
       private long A157CompanyLocationId ;
       private long A113HolidayId ;
