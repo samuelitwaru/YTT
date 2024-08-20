@@ -66,7 +66,7 @@ namespace GeneXus.Programs {
             GX5ASACOMPANYID0I20( AV12Insert_CompanyId) ;
             return  ;
          }
-         else if ( StringUtil.StrCmp(gxfirstwebparm, "gxajaxExecAct_"+"gxLoad_17") == 0 )
+         else if ( StringUtil.StrCmp(gxfirstwebparm, "gxajaxExecAct_"+"gxLoad_18") == 0 )
          {
             A100CompanyId = (long)(Math.Round(NumberUtil.Val( GetPar( "CompanyId"), "."), 18, MidpointRounding.ToEven));
             AssignAttri("", false, "A100CompanyId", StringUtil.LTrimStr( (decimal)(A100CompanyId), 10, 0));
@@ -76,7 +76,7 @@ namespace GeneXus.Programs {
                GxWebError = 1;
                return  ;
             }
-            gxLoad_17( A100CompanyId) ;
+            gxLoad_18( A100CompanyId) ;
             return  ;
          }
          else if ( StringUtil.StrCmp(gxfirstwebparm, "gxajaxEvt") == 0 )
@@ -844,7 +844,7 @@ namespace GeneXus.Programs {
 
       protected void ZM0I20( short GX_JID )
       {
-         if ( ( GX_JID == 16 ) || ( GX_JID == 0 ) )
+         if ( ( GX_JID == 17 ) || ( GX_JID == 0 ) )
          {
             if ( ! IsIns( ) )
             {
@@ -865,7 +865,7 @@ namespace GeneXus.Programs {
                Z100CompanyId = A100CompanyId;
             }
          }
-         if ( GX_JID == -16 )
+         if ( GX_JID == -17 )
          {
             Z124LeaveTypeId = A124LeaveTypeId;
             Z125LeaveTypeName = A125LeaveTypeName;
@@ -940,6 +940,12 @@ namespace GeneXus.Programs {
             A144LeaveTypeVacationLeave = "No";
             AssignAttri("", false, "A144LeaveTypeVacationLeave", A144LeaveTypeVacationLeave);
          }
+         if ( IsIns( )  && String.IsNullOrEmpty(StringUtil.RTrim( A175LeaveTypeColorApproved)) && ( Gx_BScreen == 0 ) )
+         {
+            A175LeaveTypeColorApproved = "#D5DDF6";
+            n175LeaveTypeColorApproved = false;
+            AssignAttri("", false, "A175LeaveTypeColorApproved", A175LeaveTypeColorApproved);
+         }
          if ( ( StringUtil.StrCmp(Gx_mode, "INS") == 0 ) && ( Gx_BScreen == 0 ) )
          {
             if ( StringUtil.StrCmp(A145LeaveTypeLoggingWorkHours, "Yes") == 0 )
@@ -986,7 +992,7 @@ namespace GeneXus.Programs {
             AssignAttri("", false, "A175LeaveTypeColorApproved", A175LeaveTypeColorApproved);
             A100CompanyId = T000I5_A100CompanyId[0];
             AssignAttri("", false, "A100CompanyId", StringUtil.LTrimStr( (decimal)(A100CompanyId), 10, 0));
-            ZM0I20( -16) ;
+            ZM0I20( -17) ;
          }
          pr_default.close(3);
          OnLoadActions0I20( ) ;
@@ -1075,7 +1081,7 @@ namespace GeneXus.Programs {
       {
       }
 
-      protected void gxLoad_17( long A100CompanyId )
+      protected void gxLoad_18( long A100CompanyId )
       {
          /* Using cursor T000I6 */
          pr_default.execute(4, new Object[] {A100CompanyId});
@@ -1119,7 +1125,7 @@ namespace GeneXus.Programs {
          pr_default.execute(1, new Object[] {A124LeaveTypeId});
          if ( (pr_default.getStatus(1) != 101) )
          {
-            ZM0I20( 16) ;
+            ZM0I20( 17) ;
             RcdFound20 = 1;
             A124LeaveTypeId = T000I3_A124LeaveTypeId[0];
             AssignAttri("", false, "A124LeaveTypeId", StringUtil.LTrimStr( (decimal)(A124LeaveTypeId), 10, 0));
@@ -1944,14 +1950,13 @@ namespace GeneXus.Programs {
          n174LeaveTypeColorPending = false;
          AssignAttri("", false, "A174LeaveTypeColorPending", A174LeaveTypeColorPending);
          n174LeaveTypeColorPending = (String.IsNullOrEmpty(StringUtil.RTrim( A174LeaveTypeColorPending)) ? true : false);
-         A175LeaveTypeColorApproved = "";
-         n175LeaveTypeColorApproved = false;
-         AssignAttri("", false, "A175LeaveTypeColorApproved", A175LeaveTypeColorApproved);
-         n175LeaveTypeColorApproved = (String.IsNullOrEmpty(StringUtil.RTrim( A175LeaveTypeColorApproved)) ? true : false);
          A144LeaveTypeVacationLeave = "No";
          AssignAttri("", false, "A144LeaveTypeVacationLeave", A144LeaveTypeVacationLeave);
          A145LeaveTypeLoggingWorkHours = "No";
          AssignAttri("", false, "A145LeaveTypeLoggingWorkHours", A145LeaveTypeLoggingWorkHours);
+         A175LeaveTypeColorApproved = "#D5DDF6";
+         n175LeaveTypeColorApproved = false;
+         AssignAttri("", false, "A175LeaveTypeColorApproved", A175LeaveTypeColorApproved);
          Z125LeaveTypeName = "";
          Z144LeaveTypeVacationLeave = "";
          Z145LeaveTypeLoggingWorkHours = "";
@@ -1973,6 +1978,9 @@ namespace GeneXus.Programs {
          AssignAttri("", false, "A145LeaveTypeLoggingWorkHours", A145LeaveTypeLoggingWorkHours);
          A144LeaveTypeVacationLeave = i144LeaveTypeVacationLeave;
          AssignAttri("", false, "A144LeaveTypeVacationLeave", A144LeaveTypeVacationLeave);
+         A175LeaveTypeColorApproved = i175LeaveTypeColorApproved;
+         n175LeaveTypeColorApproved = false;
+         AssignAttri("", false, "A175LeaveTypeColorApproved", A175LeaveTypeColorApproved);
       }
 
       protected void define_styles( )
@@ -1986,7 +1994,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20248121542435", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20248201615512", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2002,7 +2010,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("leavetype.js", "?20248121542437", false, true);
+         context.AddJavascriptSource("leavetype.js", "?20248201615513", false, true);
          /* End function include_jscripts */
       }
 
@@ -2278,6 +2286,7 @@ namespace GeneXus.Programs {
          bodyStyle = "";
          i145LeaveTypeLoggingWorkHours = "";
          i144LeaveTypeVacationLeave = "";
+         i175LeaveTypeColorApproved = "";
          T000I16_A100CompanyId = new long[1] ;
          pr_gam = new DataStoreProvider(context, new GeneXus.Programs.leavetype__gam(),
             new Object[][] {
@@ -2330,6 +2339,12 @@ namespace GeneXus.Programs {
             }
          );
          AV24Pgmname = "LeaveType";
+         Z175LeaveTypeColorApproved = "#D5DDF6";
+         n175LeaveTypeColorApproved = false;
+         A175LeaveTypeColorApproved = "#D5DDF6";
+         n175LeaveTypeColorApproved = false;
+         i175LeaveTypeColorApproved = "#D5DDF6";
+         n175LeaveTypeColorApproved = false;
          Z144LeaveTypeVacationLeave = "No";
          N144LeaveTypeVacationLeave = "No";
          A144LeaveTypeVacationLeave = "No";
@@ -2446,6 +2461,7 @@ namespace GeneXus.Programs {
       private string bodyStyle ;
       private string i145LeaveTypeLoggingWorkHours ;
       private string i144LeaveTypeVacationLeave ;
+      private string i175LeaveTypeColorApproved ;
       private bool entryPointCalled ;
       private bool toggleJsOutput ;
       private bool wbErr ;
