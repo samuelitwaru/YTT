@@ -62,15 +62,17 @@ namespace GeneXus.Programs {
                            [GxJsonFormat("yyyy-MM-dd")] DateTime aP1_LeaveRequestEndDate ,
                            string aP2_LeaveRequestDescription ,
                            string aP3_LeaveTypeName ,
-                           string aP4_EmployeeName ,
-                           long aP5_EmployeeId )
+                           string aP4_LeaveRequestHalfDay ,
+                           string aP5_EmployeeName ,
+                           long aP6_EmployeeId )
       {
          this.AV16LeaveRequestStartDate = aP0_LeaveRequestStartDate;
          this.AV17LeaveRequestEndDate = aP1_LeaveRequestEndDate;
          this.AV18LeaveRequestDescription = aP2_LeaveRequestDescription;
          this.AV19LeaveTypeName = aP3_LeaveTypeName;
-         this.AV20EmployeeName = aP4_EmployeeName;
-         this.AV22EmployeeId = aP5_EmployeeId;
+         this.AV25LeaveRequestHalfDay = aP4_LeaveRequestHalfDay;
+         this.AV20EmployeeName = aP5_EmployeeName;
+         this.AV22EmployeeId = aP6_EmployeeId;
          initialize();
          executePrivate();
       }
@@ -79,8 +81,9 @@ namespace GeneXus.Programs {
                                  DateTime aP1_LeaveRequestEndDate ,
                                  string aP2_LeaveRequestDescription ,
                                  string aP3_LeaveTypeName ,
-                                 string aP4_EmployeeName ,
-                                 long aP5_EmployeeId )
+                                 string aP4_LeaveRequestHalfDay ,
+                                 string aP5_EmployeeName ,
+                                 long aP6_EmployeeId )
       {
          sdsendleaverequestmail objsdsendleaverequestmail;
          objsdsendleaverequestmail = new sdsendleaverequestmail();
@@ -88,8 +91,9 @@ namespace GeneXus.Programs {
          objsdsendleaverequestmail.AV17LeaveRequestEndDate = aP1_LeaveRequestEndDate;
          objsdsendleaverequestmail.AV18LeaveRequestDescription = aP2_LeaveRequestDescription;
          objsdsendleaverequestmail.AV19LeaveTypeName = aP3_LeaveTypeName;
-         objsdsendleaverequestmail.AV20EmployeeName = aP4_EmployeeName;
-         objsdsendleaverequestmail.AV22EmployeeId = aP5_EmployeeId;
+         objsdsendleaverequestmail.AV25LeaveRequestHalfDay = aP4_LeaveRequestHalfDay;
+         objsdsendleaverequestmail.AV20EmployeeName = aP5_EmployeeName;
+         objsdsendleaverequestmail.AV22EmployeeId = aP6_EmployeeId;
          objsdsendleaverequestmail.context.SetSubmitInitialConfig(context);
          objsdsendleaverequestmail.initialize();
          Submit( executePrivateCatch,objsdsendleaverequestmail);
@@ -161,7 +165,11 @@ namespace GeneXus.Programs {
          }
          pr_default.close(2);
          AV15Subject = "New Leave Request";
-         AV13Body = "<div style=\"max-width:600px;margin:0 auto;font-family:Arial,sans-serif;border:1px solid #e0e0e0;padding:20px;box-shadow:0 4px 8px rgba(0,0,0,.1)\"><div style=\"background-color:#f6d300;color:#000;text-align:center;padding:20px 0\"><h2>New Leave Request </h2></div><div style=\"padding:20px;line-height:1.5\">" + "<p>Dear Manager, </p>" + "<p>This is to inform you that <b>" + AV20EmployeeName + "</b> would like to request leave for the following period: </p>" + "<p>Leave Type: <b>" + StringUtil.Upper( AV19LeaveTypeName) + "</b></p>" + "<p>Start Date: <b>" + context.localUtil.DToC( AV16LeaveRequestStartDate, 2, "/") + "</b></p>" + "<p>End Date: <b>" + context.localUtil.DToC( AV17LeaveRequestEndDate, 2, "/") + "</b></p>" + "<p>Reason for Leave: <b>" + AV18LeaveRequestDescription + "</b></p>" + "<p>Best Regards,</p>" + "<p>The Yukon Time Tracker Team</p>";
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV25LeaveRequestHalfDay)) )
+         {
+            AV25LeaveRequestHalfDay = "(" + AV25LeaveRequestHalfDay + ")";
+         }
+         AV13Body = "<div style=\"max-width:600px;margin:0 auto;font-family:Arial,sans-serif;border:1px solid #e0e0e0;padding:20px;box-shadow:0 4px 8px rgba(0,0,0,.1)\"><div style=\"background-color:#f6d300;color:#000;text-align:center;padding:20px 0\"><h2>New Leave Request </h2></div><div style=\"padding:20px;line-height:1.5\">" + "<p>Dear Manager, </p>" + "<p>This is to inform you that <b>" + AV20EmployeeName + "</b> would like to request leave for the following period: </p>" + "<p>Leave Type: <b>" + StringUtil.Upper( AV19LeaveTypeName) + " " + AV25LeaveRequestHalfDay + "</b></p>" + "<p>Start Date: <b>" + context.localUtil.DToC( AV16LeaveRequestStartDate, 2, "/") + "</b></p>" + "<p>End Date: <b>" + context.localUtil.DToC( AV17LeaveRequestEndDate, 2, "/") + "</b></p>" + "<p>Reason for Leave: <b>" + AV18LeaveRequestDescription + "</b></p>" + "<p>Best Regards,</p>" + "<p>The Yukon Time Tracker Team</p>";
          new sendbulkmail(context ).execute(  AV24emails, ref  AV15Subject, ref  AV13Body) ;
          AV14NotificationText = "New: " + StringUtil.Trim( AV9Employee.gxTpr_Employeefirstname) + " " + StringUtil.Trim( AV9Employee.gxTpr_Employeelastname) + " has submitted a leave request.";
          new sdsendpushnotifications(context ).execute(  "Leave Request",  AV14NotificationText,  0) ;
@@ -229,6 +237,7 @@ namespace GeneXus.Programs {
       private long A166ProjectManagerId ;
       private long A100CompanyId ;
       private string AV19LeaveTypeName ;
+      private string AV25LeaveRequestHalfDay ;
       private string AV20EmployeeName ;
       private string scmdbuf ;
       private DateTime AV16LeaveRequestStartDate ;

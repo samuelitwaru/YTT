@@ -1159,7 +1159,7 @@ namespace GeneXus.Programs {
          returnInSub = false;
          if ( ( ( StringUtil.StrCmp(Gx_mode, "INS") == 0 ) ) && ( StringUtil.StrCmp(A132LeaveRequestStatus, "Pending") == 0 ) )
          {
-            new sdsendleaverequestmail(context).executeSubmit(  A129LeaveRequestStartDate,  A130LeaveRequestEndDate,  A133LeaveRequestDescription,  A125LeaveTypeName,  A148EmployeeName,  A106EmployeeId) ;
+            new sdsendleaverequestmail(context).executeSubmit(  A129LeaveRequestStartDate,  A130LeaveRequestEndDate,  A133LeaveRequestDescription,  A125LeaveTypeName,  A173LeaveRequestHalfDay,  A148EmployeeName,  A106EmployeeId) ;
             AV37Mesage = "Leave Request successful";
             CallWebObject(formatLink("leaverequestww.aspx", new object[] {UrlEncode(StringUtil.RTrim(AV37Mesage))}, new string[] {"Mesage"}) );
             context.wjLocDisableFrm = 1;
@@ -1179,6 +1179,8 @@ namespace GeneXus.Programs {
          returnInSub = true;
          if (true) return;
          /*  Sending Event outputs  */
+         radLeaveRequestHalfDay.CurrentValue = StringUtil.RTrim( A173LeaveRequestHalfDay);
+         AssignProp("", false, radLeaveRequestHalfDay_Internalname, "Values", radLeaveRequestHalfDay.ToJavascriptSource(), true);
       }
 
       protected void E130J2( )
@@ -2632,7 +2634,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202481615552151", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202482413203365", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2648,7 +2650,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("leaverequest.js", "?202481615552154", false, true);
+         context.AddJavascriptSource("leaverequest.js", "?202482413203367", false, true);
          /* End function include_jscripts */
       }
 

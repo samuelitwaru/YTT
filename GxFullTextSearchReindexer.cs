@@ -75,10 +75,10 @@ namespace GeneXus.Programs {
          obj = new GeneXus.Programs.wwpbaseobjects.notifications.common.SdtWWP_Notification(context);
          trn = obj.getTransaction();
          result = trn.Reindex();
-         obj = new SdtLeaveRequest(context);
+         obj = new SdtLeaveType(context);
          trn = obj.getTransaction();
          result = trn.Reindex();
-         obj = new SdtLeaveType(context);
+         obj = new SdtLeaveRequest(context);
          trn = obj.getTransaction();
          result = trn.Reindex();
          return 1 ;
