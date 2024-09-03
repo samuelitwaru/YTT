@@ -297,8 +297,9 @@ namespace GeneXus.Programs {
                A103ProjectName = P00AZ3_A103ProjectName[0];
                AV20excelcellrange = AV12excelSpreadsheet.cell(AV24CellRow, AV25FirstColumn+0);
                AV20excelcellrange.setcellstyle( AV32leftAlign);
-               GXt_dtime3 = DateTimeUtil.ResetTime( A119WorkHourLogDate ) ;
-               AV20excelcellrange.gxTpr_Valuedate = GXt_dtime3;
+               GXt_char2 = "";
+               new formatdatetime(context ).execute(  A119WorkHourLogDate,  "DD/MM/YYYY", out  GXt_char2) ;
+               AV20excelcellrange.gxTpr_Valuetext = GXt_char2;
                AV20excelcellrange = AV12excelSpreadsheet.cell(AV24CellRow, AV25FirstColumn+1);
                AV20excelcellrange.gxTpr_Valuetext = StringUtil.Trim( A148EmployeeName);
                AV20excelcellrange = AV12excelSpreadsheet.cell(AV24CellRow, AV25FirstColumn+2);
@@ -344,8 +345,9 @@ namespace GeneXus.Programs {
          AV20excelcellrange.setcellstyle( AV34footCellStyle);
          AV20excelcellrange = AV12excelSpreadsheet.cell(AV24CellRow, 2);
          AV20excelcellrange.setcellstyle( AV34footCellStyle);
-         GXt_dtime3 = DateTimeUtil.ResetTime( AV10FromDate ) ;
-         AV20excelcellrange.gxTpr_Valuedate = GXt_dtime3;
+         GXt_char2 = "";
+         new formatdatetime(context ).execute(  AV10FromDate,  "DD/MM/YYYY", out  GXt_char2) ;
+         AV20excelcellrange.gxTpr_Valuetext = GXt_char2;
          AV24CellRow = (short)(AV24CellRow+1);
          AV20excelcellrange = AV12excelSpreadsheet.cell(AV24CellRow, 1);
          AV20excelcellrange.gxTpr_Valuetext = "End Date";
@@ -353,8 +355,9 @@ namespace GeneXus.Programs {
          AV20excelcellrange = new GeneXus.Programs.genexusoffice.office.excel.cells.SdtExcelCellRange(context);
          AV20excelcellrange = AV12excelSpreadsheet.cell(AV24CellRow, 2);
          AV20excelcellrange.setcellstyle( AV34footCellStyle);
-         GXt_dtime3 = DateTimeUtil.ResetTime( AV11ToDate ) ;
-         AV20excelcellrange.gxTpr_Valuedate = GXt_dtime3;
+         GXt_char2 = "";
+         new formatdatetime(context ).execute(  AV11ToDate,  "DD/MM/YYYY", out  GXt_char2) ;
+         AV20excelcellrange.gxTpr_Valuetext = GXt_char2;
          AV24CellRow = (short)(AV24CellRow+1);
          AV20excelcellrange = AV12excelSpreadsheet.cell(AV24CellRow, 1);
          AV20excelcellrange.gxTpr_Valuetext = "Hours Total";
@@ -446,7 +449,6 @@ namespace GeneXus.Programs {
          A148EmployeeName = "";
          A120WorkHourLogDuration = "";
          A123WorkHourLogDescription = "";
-         GXt_dtime3 = (DateTime)(DateTime.MinValue);
          GXt_char2 = "";
          AV18Session = context.GetSession();
          AV16WebSession = context.GetSession();
@@ -486,7 +488,6 @@ namespace GeneXus.Programs {
       private string AV23Column ;
       private string A148EmployeeName ;
       private string GXt_char2 ;
-      private DateTime GXt_dtime3 ;
       private DateTime AV10FromDate ;
       private DateTime AV11ToDate ;
       private DateTime A119WorkHourLogDate ;
@@ -553,8 +554,8 @@ namespace GeneXus.Programs {
       {
          System.Text.StringBuilder sWhereString = new System.Text.StringBuilder();
          string scmdbuf;
-         short[] GXv_int4 = new short[3];
-         Object[] GXv_Object5 = new Object[2];
+         short[] GXv_int3 = new short[3];
+         Object[] GXv_Object4 = new Object[2];
          scmdbuf = "SELECT T2.CompanyId, T2.EmployeeName, T4.ProjectName, T1.WorkHourLogDuration, T1.WorkHourLogDescription, T1.WorkHourLogMinute, T1.WorkHourLogHour, T1.WorkHourLogDate, T1.EmployeeId, T3.CompanyLocationId, T1.ProjectId, T1.WorkHourLogId FROM (((WorkHourLog T1 INNER JOIN Employee T2 ON T2.EmployeeId = T1.EmployeeId) INNER JOIN Company T3 ON T3.CompanyId = T2.CompanyId) INNER JOIN Project T4 ON T4.ProjectId = T1.ProjectId)";
          if ( ! (0==AV8OneProjectId) )
          {
@@ -562,7 +563,7 @@ namespace GeneXus.Programs {
          }
          else
          {
-            GXv_int4[0] = 1;
+            GXv_int3[0] = 1;
          }
          if ( AV13CompanyLocationId_Count > 0 )
          {
@@ -578,7 +579,7 @@ namespace GeneXus.Programs {
          }
          else
          {
-            GXv_int4[1] = 1;
+            GXv_int3[1] = 1;
          }
          if ( ! (DateTime.MinValue==AV11ToDate) )
          {
@@ -586,13 +587,13 @@ namespace GeneXus.Programs {
          }
          else
          {
-            GXv_int4[2] = 1;
+            GXv_int3[2] = 1;
          }
          scmdbuf += sWhereString;
          scmdbuf += " ORDER BY T2.EmployeeName, T1.WorkHourLogDate";
-         GXv_Object5[0] = scmdbuf;
-         GXv_Object5[1] = GXv_int4;
-         return GXv_Object5 ;
+         GXv_Object4[0] = scmdbuf;
+         GXv_Object4[1] = GXv_int3;
+         return GXv_Object4 ;
       }
 
       public override Object [] getDynamicStatement( int cursor ,
