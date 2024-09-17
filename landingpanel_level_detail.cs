@@ -41,7 +41,7 @@ namespace GeneXus.Programs {
          this.AV8gxid = aP0_gxid;
          this.AV11GXM1LandingPanel_Level_DetailSdt = new SdtLandingPanel_Level_DetailSdt(context) ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_GXM1LandingPanel_Level_DetailSdt=this.AV11GXM1LandingPanel_Level_DetailSdt;
       }
 
@@ -54,30 +54,13 @@ namespace GeneXus.Programs {
       public void executeSubmit( int aP0_gxid ,
                                  out SdtLandingPanel_Level_DetailSdt aP1_GXM1LandingPanel_Level_DetailSdt )
       {
-         landingpanel_level_detail objlandingpanel_level_detail;
-         objlandingpanel_level_detail = new landingpanel_level_detail();
-         objlandingpanel_level_detail.AV8gxid = aP0_gxid;
-         objlandingpanel_level_detail.AV11GXM1LandingPanel_Level_DetailSdt = new SdtLandingPanel_Level_DetailSdt(context) ;
-         objlandingpanel_level_detail.context.SetSubmitInitialConfig(context);
-         objlandingpanel_level_detail.initialize();
-         Submit( executePrivateCatch,objlandingpanel_level_detail);
+         this.AV8gxid = aP0_gxid;
+         this.AV11GXM1LandingPanel_Level_DetailSdt = new SdtLandingPanel_Level_DetailSdt(context) ;
+         SubmitImpl();
          aP1_GXM1LandingPanel_Level_DetailSdt=this.AV11GXM1LandingPanel_Level_DetailSdt;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((landingpanel_level_detail)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -87,21 +70,17 @@ namespace GeneXus.Programs {
             new sdassignuserdevice(context ).execute( ) ;
             Gxwebsession.Set(Gxids, "true");
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -114,9 +93,9 @@ namespace GeneXus.Programs {
 
       private int AV8gxid ;
       private string Gxids ;
-      private SdtLandingPanel_Level_DetailSdt aP1_GXM1LandingPanel_Level_DetailSdt ;
       private IGxSession Gxwebsession ;
       private SdtLandingPanel_Level_DetailSdt AV11GXM1LandingPanel_Level_DetailSdt ;
+      private SdtLandingPanel_Level_DetailSdt aP1_GXM1LandingPanel_Level_DetailSdt ;
    }
 
 }

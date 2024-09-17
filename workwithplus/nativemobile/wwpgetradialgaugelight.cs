@@ -181,6 +181,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
                }
                if ( StringUtil.StringSearch( GXSoapXMLReader.Name, "Body", 1) > 0 )
                {
+                  this.SetPrefixesFromReader( GXSoapXMLReader);
                   if (true) break;
                }
                GXSoapError = GXSoapXMLReader.Read();
@@ -283,7 +284,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          }
          if ( currSoapErr == 0 )
          {
-            executePrivate();
+            ExecutePrivate();
          }
          context.CloseConnections();
          sIncludeState = true;
@@ -342,7 +343,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          this.AV9ProgressColor = aP1_ProgressColor;
          this.AV8HTML = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP2_HTML=this.AV8HTML;
       }
 
@@ -357,31 +358,14 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
                                  string aP1_ProgressColor ,
                                  out string aP2_HTML )
       {
-         wwpgetradialgaugelight objwwpgetradialgaugelight;
-         objwwpgetradialgaugelight = new wwpgetradialgaugelight();
-         objwwpgetradialgaugelight.AV10Value = aP0_Value;
-         objwwpgetradialgaugelight.AV9ProgressColor = aP1_ProgressColor;
-         objwwpgetradialgaugelight.AV8HTML = "" ;
-         objwwpgetradialgaugelight.context.SetSubmitInitialConfig(context);
-         objwwpgetradialgaugelight.initialize();
-         Submit( executePrivateCatch,objwwpgetradialgaugelight);
+         this.AV10Value = aP0_Value;
+         this.AV9ProgressColor = aP1_ProgressColor;
+         this.AV8HTML = "" ;
+         SubmitImpl();
          aP2_HTML=this.AV8HTML;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwpgetradialgaugelight)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -393,22 +377,18 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
             context.Redirect( context.wjLoc );
             context.wjLoc = "";
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          base.cleanup();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )

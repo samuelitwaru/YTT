@@ -62,7 +62,7 @@ namespace GeneXus.Programs {
       {
          this.Gxm2rootcol = new GXBaseCollection<SdtSDTEmployeeProject_SDTEmployeeProjectItem>( context, "SDTEmployeeProjectItem", "YTT_version4") ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_Gxm2rootcol=this.Gxm2rootcol;
       }
 
@@ -74,29 +74,12 @@ namespace GeneXus.Programs {
 
       public void executeSubmit( out GXBaseCollection<SdtSDTEmployeeProject_SDTEmployeeProjectItem> aP0_Gxm2rootcol )
       {
-         dpemployeeprojects objdpemployeeprojects;
-         objdpemployeeprojects = new dpemployeeprojects();
-         objdpemployeeprojects.Gxm2rootcol = new GXBaseCollection<SdtSDTEmployeeProject_SDTEmployeeProjectItem>( context, "SDTEmployeeProjectItem", "YTT_version4") ;
-         objdpemployeeprojects.context.SetSubmitInitialConfig(context);
-         objdpemployeeprojects.initialize();
-         Submit( executePrivateCatch,objdpemployeeprojects);
+         this.Gxm2rootcol = new GXBaseCollection<SdtSDTEmployeeProject_SDTEmployeeProjectItem>( context, "SDTEmployeeProjectItem", "YTT_version4") ;
+         SubmitImpl();
          aP0_Gxm2rootcol=this.Gxm2rootcol;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((dpemployeeprojects)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -122,12 +105,12 @@ namespace GeneXus.Programs {
             pr_default.readNext(0);
          }
          pr_default.close(0);
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -135,13 +118,8 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
-         scmdbuf = "";
          P00132_A106EmployeeId = new long[1] ;
          P00132_A105ProjectStatus = new string[] {""} ;
          P00132_A102ProjectId = new long[1] ;
@@ -164,21 +142,20 @@ namespace GeneXus.Programs {
       private long AV9Udparg3 ;
       private long A106EmployeeId ;
       private long A102ProjectId ;
-      private string scmdbuf ;
       private string A105ProjectStatus ;
       private string A103ProjectName ;
       private string A104ProjectDescription ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GXBaseCollection<SdtSDTEmployeeProject_SDTEmployeeProjectItem> Gxm2rootcol ;
       private IDataStoreProvider pr_default ;
       private long[] P00132_A106EmployeeId ;
       private string[] P00132_A105ProjectStatus ;
       private long[] P00132_A102ProjectId ;
       private string[] P00132_A103ProjectName ;
       private string[] P00132_A104ProjectDescription ;
-      private GXBaseCollection<SdtSDTEmployeeProject_SDTEmployeeProjectItem> aP0_Gxm2rootcol ;
-      private GXBaseCollection<SdtSDTEmployeeProject_SDTEmployeeProjectItem> Gxm2rootcol ;
       private SdtSDTEmployeeProject_SDTEmployeeProjectItem Gxm1sdtemployeeproject ;
+      private GXBaseCollection<SdtSDTEmployeeProject_SDTEmployeeProjectItem> aP0_Gxm2rootcol ;
    }
 
    public class dpemployeeprojects__default : DataStoreHelperBase, IDataStoreHelper

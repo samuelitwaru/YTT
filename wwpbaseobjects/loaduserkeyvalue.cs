@@ -39,68 +39,51 @@ namespace GeneXus.Programs.wwpbaseobjects {
       public void execute( string aP0_UserCustomizationsKey ,
                            out string aP1_UserCustomizationsValue )
       {
-         this.AV32UserCustomizationsKey = aP0_UserCustomizationsKey;
-         this.AV33UserCustomizationsValue = "" ;
+         this.AV39UserCustomizationsKey = aP0_UserCustomizationsKey;
+         this.AV40UserCustomizationsValue = "" ;
          initialize();
-         executePrivate();
-         aP1_UserCustomizationsValue=this.AV33UserCustomizationsValue;
+         ExecuteImpl();
+         aP1_UserCustomizationsValue=this.AV40UserCustomizationsValue;
       }
 
       public string executeUdp( string aP0_UserCustomizationsKey )
       {
          execute(aP0_UserCustomizationsKey, out aP1_UserCustomizationsValue);
-         return AV33UserCustomizationsValue ;
+         return AV40UserCustomizationsValue ;
       }
 
       public void executeSubmit( string aP0_UserCustomizationsKey ,
                                  out string aP1_UserCustomizationsValue )
       {
-         loaduserkeyvalue objloaduserkeyvalue;
-         objloaduserkeyvalue = new loaduserkeyvalue();
-         objloaduserkeyvalue.AV32UserCustomizationsKey = aP0_UserCustomizationsKey;
-         objloaduserkeyvalue.AV33UserCustomizationsValue = "" ;
-         objloaduserkeyvalue.context.SetSubmitInitialConfig(context);
-         objloaduserkeyvalue.initialize();
-         Submit( executePrivateCatch,objloaduserkeyvalue);
-         aP1_UserCustomizationsValue=this.AV33UserCustomizationsValue;
+         this.AV39UserCustomizationsKey = aP0_UserCustomizationsKey;
+         this.AV40UserCustomizationsValue = "" ;
+         SubmitImpl();
+         aP1_UserCustomizationsValue=this.AV40UserCustomizationsValue;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((loaduserkeyvalue)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
-         AV33UserCustomizationsValue = AV31Session.Get(AV32UserCustomizationsKey);
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV33UserCustomizationsValue)) )
+         AV40UserCustomizationsValue = AV38Session.Get(AV39UserCustomizationsKey);
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV40UserCustomizationsValue)) )
          {
-            AV35UserCustomizations.Load(new GeneXus.Programs.genexussecurity.SdtGAMUser(context).getid(), AV32UserCustomizationsKey);
-            if ( AV35UserCustomizations.Success() )
+            AV42UserCustomizations.Load(new GeneXus.Programs.genexussecurity.SdtGAMUser(context).getid(), AV39UserCustomizationsKey);
+            if ( AV42UserCustomizations.Success() )
             {
-               AV33UserCustomizationsValue = AV35UserCustomizations.gxTpr_Usercustomizationsvalue;
+               AV40UserCustomizationsValue = AV42UserCustomizations.gxTpr_Usercustomizationsvalue;
             }
             else
             {
-               AV33UserCustomizationsValue = "";
+               AV40UserCustomizationsValue = "";
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -108,23 +91,19 @@ namespace GeneXus.Programs.wwpbaseobjects {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
-         AV33UserCustomizationsValue = "";
-         AV31Session = context.GetSession();
-         AV35UserCustomizations = new GeneXus.Programs.wwpbaseobjects.SdtUserCustomizations(context);
+         AV40UserCustomizationsValue = "";
+         AV38Session = context.GetSession();
+         AV42UserCustomizations = new GeneXus.Programs.wwpbaseobjects.SdtUserCustomizations(context);
          /* GeneXus formulas. */
       }
 
-      private string AV33UserCustomizationsValue ;
-      private string AV32UserCustomizationsKey ;
-      private IGxSession AV31Session ;
+      private string AV40UserCustomizationsValue ;
+      private string AV39UserCustomizationsKey ;
+      private IGxSession AV38Session ;
+      private GeneXus.Programs.wwpbaseobjects.SdtUserCustomizations AV42UserCustomizations ;
       private string aP1_UserCustomizationsValue ;
-      private GeneXus.Programs.wwpbaseobjects.SdtUserCustomizations AV35UserCustomizations ;
    }
 
 }

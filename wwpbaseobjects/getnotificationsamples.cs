@@ -56,7 +56,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       {
          this.Gxm2rootcol = new GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtWWP_SDTNotificationsDataSample_WWP_SDTNotificationsDataSampleItem>( context, "WWP_SDTNotificationsDataSampleItem", "YTT_version4") ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_Gxm2rootcol=this.Gxm2rootcol;
       }
 
@@ -68,29 +68,12 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       public void executeSubmit( out GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtWWP_SDTNotificationsDataSample_WWP_SDTNotificationsDataSampleItem> aP0_Gxm2rootcol )
       {
-         getnotificationsamples objgetnotificationsamples;
-         objgetnotificationsamples = new getnotificationsamples();
-         objgetnotificationsamples.Gxm2rootcol = new GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtWWP_SDTNotificationsDataSample_WWP_SDTNotificationsDataSampleItem>( context, "WWP_SDTNotificationsDataSampleItem", "YTT_version4") ;
-         objgetnotificationsamples.context.SetSubmitInitialConfig(context);
-         objgetnotificationsamples.initialize();
-         Submit( executePrivateCatch,objgetnotificationsamples);
+         this.Gxm2rootcol = new GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtWWP_SDTNotificationsDataSample_WWP_SDTNotificationsDataSampleItem>( context, "WWP_SDTNotificationsDataSampleItem", "YTT_version4") ;
+         SubmitImpl();
          aP0_Gxm2rootcol=this.Gxm2rootcol;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((getnotificationsamples)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -136,21 +119,17 @@ namespace GeneXus.Programs.wwpbaseobjects {
          Gxm1wwp_sdtnotificationsdatasample.gxTpr_Notificationdescription = "Expand record of a grid in order to visualize more information";
          AV5DateTime = DateTimeUtil.TAdd( AV5DateTime, 3600*(-65));
          Gxm1wwp_sdtnotificationsdatasample.gxTpr_Notificationdatetime = AV5DateTime;
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -161,9 +140,9 @@ namespace GeneXus.Programs.wwpbaseobjects {
       }
 
       private DateTime AV5DateTime ;
-      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtWWP_SDTNotificationsDataSample_WWP_SDTNotificationsDataSampleItem> aP0_Gxm2rootcol ;
       private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtWWP_SDTNotificationsDataSample_WWP_SDTNotificationsDataSampleItem> Gxm2rootcol ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWP_SDTNotificationsDataSample_WWP_SDTNotificationsDataSampleItem Gxm1wwp_sdtnotificationsdatasample ;
+      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtWWP_SDTNotificationsDataSample_WWP_SDTNotificationsDataSampleItem> aP0_Gxm2rootcol ;
    }
 
 }

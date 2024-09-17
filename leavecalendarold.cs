@@ -43,10 +43,10 @@ namespace GeneXus.Programs {
 
       public void execute( )
       {
-         executePrivate();
+         ExecuteImpl();
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -150,11 +150,8 @@ namespace GeneXus.Programs {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITWEB( ) ;
          if ( ! isAjaxCallMode( ) )
          {
@@ -185,7 +182,7 @@ namespace GeneXus.Programs {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override short ExecuteStartEvent( )
@@ -229,10 +226,10 @@ namespace GeneXus.Programs {
          CloseStyles();
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
@@ -485,7 +482,7 @@ namespace GeneXus.Programs {
          {
             if ( context.ExposeMetadata( ) )
             {
-               Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+               Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
             }
          }
          Form.Meta.addItem("description", "Leave Calendar Old", 0) ;
@@ -536,6 +533,7 @@ namespace GeneXus.Programs {
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
+                              /* Execute user event: Gxscheduler.Eventselected */
                               E113I2 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "START") == 0 )
@@ -935,7 +933,7 @@ namespace GeneXus.Programs {
          PA3I2( ) ;
          WS3I2( ) ;
          WE3I2( ) ;
-         this.cleanup();
+         cleanup();
          context.SetWrapped(false);
          context.GX_msglist = BackMsgLst;
          return "";
@@ -956,7 +954,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20248141656433", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202491613191029", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -972,7 +970,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("leavecalendarold.js", "?20248141656433", false, true);
+         context.AddJavascriptSource("leavecalendarold.js", "?202491613191029", false, true);
          context.AddJavascriptSource("GXScheduler/dhtmlxscheduler.js", "", false, true);
          context.AddJavascriptSource("GXScheduler/GXSchedulerRender.js", "", false, true);
          /* End function include_jscripts */
@@ -1057,27 +1055,19 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'dynavCompanylocationid'},{av:'AV10CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'}]");
-         setEventMetadata("REFRESH",",oparms:[]}");
-         setEventMetadata("VCOMPANYLOCATIONID.CONTROLVALUECHANGED","{handler:'E133I2',iparms:[{av:'dynavCompanylocationid'},{av:'AV10CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'}]");
-         setEventMetadata("VCOMPANYLOCATIONID.CONTROLVALUECHANGED",",oparms:[]}");
-         setEventMetadata("GXSCHEDULER.EVENTSELECTED","{handler:'E113I2',iparms:[{av:'AV7currentEvent',fld:'vCURRENTEVENT',pic:''}]");
-         setEventMetadata("GXSCHEDULER.EVENTSELECTED",",oparms:[]}");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"dynavCompanylocationid"},{"av":"AV10CompanyLocationId","fld":"vCOMPANYLOCATIONID","pic":"ZZZZZZZZZ9"}]}""");
+         setEventMetadata("VCOMPANYLOCATIONID.CONTROLVALUECHANGED","""{"handler":"E133I2","iparms":[{"av":"dynavCompanylocationid"},{"av":"AV10CompanyLocationId","fld":"vCOMPANYLOCATIONID","pic":"ZZZZZZZZZ9"}]}""");
+         setEventMetadata("GXSCHEDULER.EVENTSELECTED","""{"handler":"E113I2","iparms":[{"av":"AV7currentEvent","fld":"vCURRENTEVENT"}]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -1105,7 +1095,6 @@ namespace GeneXus.Programs {
          gxdynajaxctrlcodr = new GeneXus.Utils.GxStringCollection();
          gxdynajaxctrldescr = new GeneXus.Utils.GxStringCollection();
          gxwrpcisep = "";
-         scmdbuf = "";
          H003I2_A157CompanyLocationId = new long[1] ;
          H003I2_A158CompanyLocationName = new string[] {""} ;
          H003I3_A157CompanyLocationId = new long[1] ;
@@ -1141,7 +1130,6 @@ namespace GeneXus.Programs {
       private short nIsMod_3 ;
       private short nGotPars ;
       private short GxWebError ;
-      private short initialized ;
       private short gxajaxcallmode ;
       private short wbEnd ;
       private short wbStart ;
@@ -1196,7 +1184,6 @@ namespace GeneXus.Programs {
       private string EvtRowId ;
       private string sEvtType ;
       private string gxwrpcisep ;
-      private string scmdbuf ;
       private DateTime AV8initialDate ;
       private bool entryPointCalled ;
       private bool toggleJsOutput ;
@@ -1208,9 +1195,13 @@ namespace GeneXus.Programs {
       private GeneXus.Utils.GxStringCollection gxdynajaxctrlcodr ;
       private GeneXus.Utils.GxStringCollection gxdynajaxctrldescr ;
       private GXUserControl ucGxscheduler ;
+      private IGxSession AV12Session ;
+      private IGxSession AV9websession ;
+      private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private GXCombobox dynavCompanylocationid ;
+      private SdtSchedulerEvents_event AV7currentEvent ;
       private IDataStoreProvider pr_default ;
       private long[] H003I2_A157CompanyLocationId ;
       private string[] H003I2_A158CompanyLocationName ;
@@ -1222,10 +1213,6 @@ namespace GeneXus.Programs {
       private msglist LclMsgLst ;
       private long[] H003I5_A157CompanyLocationId ;
       private string[] H003I5_A158CompanyLocationName ;
-      private IGxSession AV12Session ;
-      private IGxSession AV9websession ;
-      private GXWebForm Form ;
-      private SdtSchedulerEvents_event AV7currentEvent ;
    }
 
    public class leavecalendarold__default : DataStoreHelperBase, IDataStoreHelper

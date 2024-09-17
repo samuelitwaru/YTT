@@ -48,7 +48,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          this.AV8WWPEntityName = aP0_WWPEntityName;
          this.AV9WWPEntityId = 0 ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_WWPEntityId=this.AV9WWPEntityId;
       }
 
@@ -61,30 +61,13 @@ namespace GeneXus.Programs.wwpbaseobjects {
       public void executeSubmit( string aP0_WWPEntityName ,
                                  out long aP1_WWPEntityId )
       {
-         wwp_getentitybyname objwwp_getentitybyname;
-         objwwp_getentitybyname = new wwp_getentitybyname();
-         objwwp_getentitybyname.AV8WWPEntityName = aP0_WWPEntityName;
-         objwwp_getentitybyname.AV9WWPEntityId = 0 ;
-         objwwp_getentitybyname.context.SetSubmitInitialConfig(context);
-         objwwp_getentitybyname.initialize();
-         Submit( executePrivateCatch,objwwp_getentitybyname);
+         this.AV8WWPEntityName = aP0_WWPEntityName;
+         this.AV9WWPEntityId = 0 ;
+         SubmitImpl();
          aP1_WWPEntityId=this.AV9WWPEntityId;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwp_getentitybyname)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -112,12 +95,12 @@ namespace GeneXus.Programs.wwpbaseobjects {
                AV9WWPEntityId = AV10WWP_Entity.gxTpr_Wwpentityid;
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -125,13 +108,8 @@ namespace GeneXus.Programs.wwpbaseobjects {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
-         scmdbuf = "";
          P002G2_A21WWPEntityName = new string[] {""} ;
          P002G2_A20WWPEntityId = new long[1] ;
          A21WWPEntityName = "";
@@ -149,7 +127,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private short AV11GXLvl1 ;
       private long AV9WWPEntityId ;
       private long A20WWPEntityId ;
-      private string scmdbuf ;
       private string AV8WWPEntityName ;
       private string A21WWPEntityName ;
       private IGxDataStore dsGAM ;
@@ -157,8 +134,8 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private IDataStoreProvider pr_default ;
       private string[] P002G2_A21WWPEntityName ;
       private long[] P002G2_A20WWPEntityId ;
-      private long aP1_WWPEntityId ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWP_Entity AV10WWP_Entity ;
+      private long aP1_WWPEntityId ;
    }
 
    public class wwp_getentitybyname__default : DataStoreHelperBase, IDataStoreHelper

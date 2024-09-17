@@ -74,7 +74,7 @@ namespace GeneXus.Programs {
          this.AV20EmployeeName = aP5_EmployeeName;
          this.AV22EmployeeId = aP6_EmployeeId;
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
       public void executeSubmit( DateTime aP0_LeaveRequestStartDate ,
@@ -85,34 +85,17 @@ namespace GeneXus.Programs {
                                  string aP5_EmployeeName ,
                                  long aP6_EmployeeId )
       {
-         sdsendleaverequestmail objsdsendleaverequestmail;
-         objsdsendleaverequestmail = new sdsendleaverequestmail();
-         objsdsendleaverequestmail.AV16LeaveRequestStartDate = aP0_LeaveRequestStartDate;
-         objsdsendleaverequestmail.AV17LeaveRequestEndDate = aP1_LeaveRequestEndDate;
-         objsdsendleaverequestmail.AV18LeaveRequestDescription = aP2_LeaveRequestDescription;
-         objsdsendleaverequestmail.AV19LeaveTypeName = aP3_LeaveTypeName;
-         objsdsendleaverequestmail.AV25LeaveRequestHalfDay = aP4_LeaveRequestHalfDay;
-         objsdsendleaverequestmail.AV20EmployeeName = aP5_EmployeeName;
-         objsdsendleaverequestmail.AV22EmployeeId = aP6_EmployeeId;
-         objsdsendleaverequestmail.context.SetSubmitInitialConfig(context);
-         objsdsendleaverequestmail.initialize();
-         Submit( executePrivateCatch,objsdsendleaverequestmail);
+         this.AV16LeaveRequestStartDate = aP0_LeaveRequestStartDate;
+         this.AV17LeaveRequestEndDate = aP1_LeaveRequestEndDate;
+         this.AV18LeaveRequestDescription = aP2_LeaveRequestDescription;
+         this.AV19LeaveTypeName = aP3_LeaveTypeName;
+         this.AV25LeaveRequestHalfDay = aP4_LeaveRequestHalfDay;
+         this.AV20EmployeeName = aP5_EmployeeName;
+         this.AV22EmployeeId = aP6_EmployeeId;
+         SubmitImpl();
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((sdsendleaverequestmail)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -173,12 +156,12 @@ namespace GeneXus.Programs {
          new sendbulkmail(context ).execute(  AV24emails, ref  AV15Subject, ref  AV13Body) ;
          AV14NotificationText = "New: " + StringUtil.Trim( AV9Employee.gxTpr_Employeefirstname) + " " + StringUtil.Trim( AV9Employee.gxTpr_Employeelastname) + " has submitted a leave request.";
          new sdsendpushnotifications(context ).execute(  "Leave Request",  AV14NotificationText,  0) ;
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -186,15 +169,10 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
          AV8GAMUser = new GeneXus.Programs.genexussecurity.SdtGAMUser(context);
          AV9Employee = new SdtEmployee(context);
-         scmdbuf = "";
          P007J2_A106EmployeeId = new long[1] ;
          P007J2_A102ProjectId = new long[1] ;
          AV23ProjectIds = new GxSimpleCollection<long>();
@@ -239,7 +217,6 @@ namespace GeneXus.Programs {
       private string AV19LeaveTypeName ;
       private string AV25LeaveRequestHalfDay ;
       private string AV20EmployeeName ;
-      private string scmdbuf ;
       private DateTime AV16LeaveRequestStartDate ;
       private DateTime AV17LeaveRequestEndDate ;
       private bool A177ProjectManagerIsActive ;
@@ -253,25 +230,25 @@ namespace GeneXus.Programs {
       private string AV12ManagerEmail ;
       private string AV15Subject ;
       private string AV14NotificationText ;
-      private GxSimpleCollection<long> AV23ProjectIds ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GeneXus.Programs.genexussecurity.SdtGAMUser AV8GAMUser ;
+      private SdtEmployee AV9Employee ;
       private IDataStoreProvider pr_default ;
       private long[] P007J2_A106EmployeeId ;
       private long[] P007J2_A102ProjectId ;
+      private GxSimpleCollection<long> AV23ProjectIds ;
       private long[] P007J3_A166ProjectManagerId ;
       private bool[] P007J3_n166ProjectManagerId ;
       private bool[] P007J3_A177ProjectManagerIsActive ;
       private long[] P007J3_A102ProjectId ;
       private string[] P007J3_A176ProjectManagerEmail ;
+      private GxSimpleCollection<string> AV24emails ;
       private bool[] P007J4_A112EmployeeIsActive ;
       private bool[] P007J4_A110EmployeeIsManager ;
       private long[] P007J4_A100CompanyId ;
       private string[] P007J4_A109EmployeeEmail ;
       private long[] P007J4_A106EmployeeId ;
-      private GxSimpleCollection<string> AV24emails ;
-      private SdtEmployee AV9Employee ;
-      private GeneXus.Programs.genexussecurity.SdtGAMUser AV8GAMUser ;
    }
 
    public class sdsendleaverequestmail__default : DataStoreHelperBase, IDataStoreHelper

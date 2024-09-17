@@ -51,7 +51,7 @@ namespace GeneXus.Programs {
          this.AV4ToDate = aP2_ToDate;
          this.AV5Duration = 0 ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP3_Duration=this.AV5Duration;
       }
 
@@ -68,32 +68,15 @@ namespace GeneXus.Programs {
                                  DateTime aP2_ToDate ,
                                  out short aP3_Duration )
       {
-         employeeleavetotal objemployeeleavetotal;
-         objemployeeleavetotal = new employeeleavetotal();
-         objemployeeleavetotal.AV2EmployeeId = aP0_EmployeeId;
-         objemployeeleavetotal.AV3FromDate = aP1_FromDate;
-         objemployeeleavetotal.AV4ToDate = aP2_ToDate;
-         objemployeeleavetotal.AV5Duration = 0 ;
-         objemployeeleavetotal.context.SetSubmitInitialConfig(context);
-         objemployeeleavetotal.initialize();
-         Submit( executePrivateCatch,objemployeeleavetotal);
+         this.AV2EmployeeId = aP0_EmployeeId;
+         this.AV3FromDate = aP1_FromDate;
+         this.AV4ToDate = aP2_ToDate;
+         this.AV5Duration = 0 ;
+         SubmitImpl();
          aP3_Duration=this.AV5Duration;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((employeeleavetotal)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -103,20 +86,16 @@ namespace GeneXus.Programs {
          {
             AV5Duration = (short)(args[3]) ;
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )

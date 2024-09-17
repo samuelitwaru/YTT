@@ -42,10 +42,10 @@ namespace GeneXus.Programs {
 
       public void execute( )
       {
-         executePrivate();
+         ExecuteImpl();
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -124,11 +124,8 @@ namespace GeneXus.Programs {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITWEB( ) ;
          if ( ! isAjaxCallMode( ) )
          {
@@ -159,7 +156,7 @@ namespace GeneXus.Programs {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override short ExecuteStartEvent( )
@@ -203,10 +200,10 @@ namespace GeneXus.Programs {
          CloseStyles();
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
@@ -255,8 +252,8 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "gxhash_vBIRTHDAY", GetSecureSignedToken( "", AV6Birthday, context));
          GxWebStd.gx_hidden_field( context, "vGENDER", StringUtil.RTrim( AV12Gender));
          GxWebStd.gx_hidden_field( context, "gxhash_vGENDER", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV12Gender, "")), context));
-         GxWebStd.gx_hidden_field( context, "vUSERREMEMBERME", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV28UserRememberMe), 2, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "gxhash_vUSERREMEMBERME", GetSecureSignedToken( "", context.localUtil.Format( (decimal)(AV28UserRememberMe), "Z9"), context));
+         GxWebStd.gx_hidden_field( context, "vUSERREMEMBERME", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV55UserRememberMe), 2, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, "gxhash_vUSERREMEMBERME", GetSecureSignedToken( "", context.localUtil.Format( (decimal)(AV55UserRememberMe), "Z9"), context));
          GXKey = Decrypt64( context.GetCookie( "GX_SESSION_ID"), Crypto.GetServerKey( ));
       }
 
@@ -265,13 +262,13 @@ namespace GeneXus.Programs {
          /* Send hidden variables. */
          /* Send saved values. */
          send_integrity_footer_hashes( ) ;
-         GxWebStd.gx_boolean_hidden_field( context, "vCHECKREQUIREDFIELDSRESULT", AV29CheckRequiredFieldsResult);
+         GxWebStd.gx_boolean_hidden_field( context, "vCHECKREQUIREDFIELDSRESULT", AV56CheckRequiredFieldsResult);
          GxWebStd.gx_hidden_field( context, "vBIRTHDAY", context.localUtil.DToC( AV6Birthday, 0, "/"));
          GxWebStd.gx_hidden_field( context, "gxhash_vBIRTHDAY", GetSecureSignedToken( "", AV6Birthday, context));
          GxWebStd.gx_hidden_field( context, "vGENDER", StringUtil.RTrim( AV12Gender));
          GxWebStd.gx_hidden_field( context, "gxhash_vGENDER", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV12Gender, "")), context));
-         GxWebStd.gx_hidden_field( context, "vUSERREMEMBERME", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV28UserRememberMe), 2, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "gxhash_vUSERREMEMBERME", GetSecureSignedToken( "", context.localUtil.Format( (decimal)(AV28UserRememberMe), "Z9"), context));
+         GxWebStd.gx_hidden_field( context, "vUSERREMEMBERME", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV55UserRememberMe), 2, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, "gxhash_vUSERREMEMBERME", GetSecureSignedToken( "", context.localUtil.Format( (decimal)(AV55UserRememberMe), "Z9"), context));
       }
 
       public override void RenderHtmlCloseForm( )
@@ -373,9 +370,9 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "Center", "top", "", "", "div");
             /* Static images/pictures */
-            ClassString = "Image" + " " + ((StringUtil.StrCmp(imgHeaderoriginal_gximage, "")==0) ? "GX_Image_yukon_app_logo_Class" : "GX_Image_"+imgHeaderoriginal_gximage+"_Class");
+            ClassString = "Image" + " " + ((StringUtil.StrCmp(imgHeaderoriginal_gximage, "")==0) ? "GX_Image_LogoLogin_Class" : "GX_Image_"+imgHeaderoriginal_gximage+"_Class");
             StyleString = "";
-            sImgUrl = (string)(context.GetImagePath( "3b6682a4-794f-4e83-af42-03de378e152a", "", context.GetTheme( )));
+            sImgUrl = (string)(context.GetImagePath( "e9edf59f-db45-4e16-b6a6-2c2b6611a4a3", "", context.GetTheme( )));
             GxWebStd.gx_bitmap( context, imgHeaderoriginal_Internalname, sImgUrl, "", "", "", context.GetTheme( ), 1, 1, "", "", 0, 0, 0, "px", 0, "px", 0, 0, 0, "", "", StyleString, ClassString, "", "", "", "", " "+"data-gx-image"+" ", "", "", 1, false, false, context.GetImageSrcSet( sImgUrl), "HLP_GAMRegisterUser.htm");
             GxWebStd.gx_div_end( context, "Center", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -524,7 +521,7 @@ namespace GeneXus.Programs {
          {
             if ( context.ExposeMetadata( ) )
             {
-               Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+               Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
             }
          }
          Form.Meta.addItem("description", "Register user ", 0) ;
@@ -723,8 +720,8 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "gxhash_vBIRTHDAY", GetSecureSignedToken( "", AV6Birthday, context));
          GxWebStd.gx_hidden_field( context, "vGENDER", StringUtil.RTrim( AV12Gender));
          GxWebStd.gx_hidden_field( context, "gxhash_vGENDER", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV12Gender, "")), context));
-         GxWebStd.gx_hidden_field( context, "vUSERREMEMBERME", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV28UserRememberMe), 2, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "gxhash_vUSERREMEMBERME", GetSecureSignedToken( "", context.localUtil.Format( (decimal)(AV28UserRememberMe), "Z9"), context));
+         GxWebStd.gx_hidden_field( context, "vUSERREMEMBERME", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV55UserRememberMe), 2, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, "gxhash_vUSERREMEMBERME", GetSecureSignedToken( "", context.localUtil.Format( (decimal)(AV55UserRememberMe), "Z9"), context));
       }
 
       protected void before_start_formulas( )
@@ -786,7 +783,7 @@ namespace GeneXus.Programs {
          AssignProp("", false, divLayoutmaintable_Internalname, "Class", divLayoutmaintable_Class, true);
          edtavPassword_Ispassword = 1;
          AssignProp("", false, edtavPassword_Internalname, "Ispassword", StringUtil.Str( (decimal)(edtavPassword_Ispassword), 1, 0), true);
-         AV26Repository = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).get();
+         AV53Repository = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).get();
          /* Execute user subroutine: 'ATTRIBUTESSECURITYCODE' */
          S112 ();
          if (returnInSub) return;
@@ -806,26 +803,26 @@ namespace GeneXus.Programs {
          /* Execute user subroutine: 'CHECKREQUIREDFIELDS' */
          S122 ();
          if (returnInSub) return;
-         if ( AV29CheckRequiredFieldsResult )
+         if ( AV56CheckRequiredFieldsResult )
          {
-            AV26Repository = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).get();
+            AV53Repository = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).get();
             if ( StringUtil.StrCmp(AV18Password, AV19PasswordConf) == 0 )
             {
-               AV27User.gxTpr_Name = AV17Name;
-               AV27User.gxTpr_Email = AV7EMail;
-               AV27User.gxTpr_Firstname = AV9FirstName;
-               AV27User.gxTpr_Lastname = AV13LastName;
-               AV27User.gxTpr_Birthday = AV6Birthday;
-               AV27User.gxTpr_Gender = AV12Gender;
-               AV27User.gxTpr_Password = AV18Password;
-               AV27User.save();
-               if ( AV27User.success() )
+               AV54User.gxTpr_Name = AV17Name;
+               AV54User.gxTpr_Email = AV7EMail;
+               AV54User.gxTpr_Firstname = AV9FirstName;
+               AV54User.gxTpr_Lastname = AV13LastName;
+               AV54User.gxTpr_Birthday = AV6Birthday;
+               AV54User.gxTpr_Gender = AV12Gender;
+               AV54User.gxTpr_Password = AV18Password;
+               AV54User.save();
+               if ( AV54User.success() )
                {
                   context.CommitDataStores("gamregisteruser",pr_default);
-                  if ( StringUtil.StrCmp(AV26Repository.gxTpr_Useractivationmethod, "A") == 0 )
+                  if ( StringUtil.StrCmp(AV53Repository.gxTpr_Useractivationmethod, "A") == 0 )
                   {
-                     AV24AdditionalParameter.gxTpr_Rememberusertype = AV28UserRememberMe;
-                     AV15LoginOK = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).login(AV17Name, AV18Password, AV24AdditionalParameter, out  AV8Errors);
+                     AV50AdditionalParameter.gxTpr_Rememberusertype = AV55UserRememberMe;
+                     AV15LoginOK = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).login(AV17Name, AV18Password, AV50AdditionalParameter, out  AV52Errors);
                      if ( AV15LoginOK )
                      {
                         new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).applicationgohome("8d9934db-05db-4d64-adba-5e0466c3appU") ;
@@ -846,19 +843,19 @@ namespace GeneXus.Programs {
                         AV14LinkURL = StringUtil.Trim( AV33GAMApplication.gxTpr_Environment.gxTpr_Url) + formatLink("gamactivateuseraccount.aspx", new object[] {UrlEncode(StringUtil.RTrim(""))}, new string[] {"ActivationKey"}) ;
                         AV14LinkURL += "?%1";
                      }
-                     new gam_checkuseractivationmethod(context ).execute(  AV27User.gxTpr_Guid,  AV14LinkURL, out  AV16Messages) ;
-                     AV34GXV1 = 1;
-                     while ( AV34GXV1 <= AV16Messages.Count )
+                     new gam_checkuseractivationmethod(context ).execute(  AV54User.gxTpr_Guid,  AV14LinkURL, out  AV16Messages) ;
+                     AV60GXV1 = 1;
+                     while ( AV60GXV1 <= AV16Messages.Count )
                      {
-                        AV20Message = ((GeneXus.Utils.SdtMessages_Message)AV16Messages.Item(AV34GXV1));
+                        AV20Message = ((GeneXus.Utils.SdtMessages_Message)AV16Messages.Item(AV60GXV1));
                         GX_msglist.addItem(AV20Message.gxTpr_Description);
-                        AV34GXV1 = (int)(AV34GXV1+1);
+                        AV60GXV1 = (int)(AV60GXV1+1);
                      }
                   }
                }
                else
                {
-                  AV8Errors = AV27User.geterrors();
+                  AV52Errors = AV54User.geterrors();
                   /* Execute user subroutine: 'DISPLAYMESSAGES' */
                   S132 ();
                   if (returnInSub) return;
@@ -870,52 +867,52 @@ namespace GeneXus.Programs {
             }
          }
          /*  Sending Event outputs  */
-         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV26Repository", AV26Repository);
-         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV27User", AV27User);
-         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV24AdditionalParameter", AV24AdditionalParameter);
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV53Repository", AV53Repository);
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV54User", AV54User);
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV50AdditionalParameter", AV50AdditionalParameter);
       }
 
       protected void S122( )
       {
          /* 'CHECKREQUIREDFIELDS' Routine */
          returnInSub = false;
-         AV29CheckRequiredFieldsResult = true;
-         AssignAttri("", false, "AV29CheckRequiredFieldsResult", AV29CheckRequiredFieldsResult);
+         AV56CheckRequiredFieldsResult = true;
+         AssignAttri("", false, "AV56CheckRequiredFieldsResult", AV56CheckRequiredFieldsResult);
          if ( ( true ) && String.IsNullOrEmpty(StringUtil.RTrim( AV17Name)) )
          {
             GX_msglist.addItem(new GeneXus.Programs.wwpbaseobjects.dvmessagegetbasicnotificationmsg(context).executeUdp(  "",  StringUtil.Format( "%1 is required.", "Name", "", "", "", "", "", "", "", ""),  "error",  edtavName_Internalname,  "true",  ""));
-            AV29CheckRequiredFieldsResult = false;
-            AssignAttri("", false, "AV29CheckRequiredFieldsResult", AV29CheckRequiredFieldsResult);
+            AV56CheckRequiredFieldsResult = false;
+            AssignAttri("", false, "AV56CheckRequiredFieldsResult", AV56CheckRequiredFieldsResult);
          }
-         if ( ( AV26Repository.gxTpr_Requiredemail ) && String.IsNullOrEmpty(StringUtil.RTrim( AV7EMail)) )
+         if ( ( AV53Repository.gxTpr_Requiredemail ) && String.IsNullOrEmpty(StringUtil.RTrim( AV7EMail)) )
          {
             GX_msglist.addItem(new GeneXus.Programs.wwpbaseobjects.dvmessagegetbasicnotificationmsg(context).executeUdp(  "",  StringUtil.Format( "%1 is required.", "Email", "", "", "", "", "", "", "", ""),  "error",  edtavEmail_Internalname,  "true",  ""));
-            AV29CheckRequiredFieldsResult = false;
-            AssignAttri("", false, "AV29CheckRequiredFieldsResult", AV29CheckRequiredFieldsResult);
+            AV56CheckRequiredFieldsResult = false;
+            AssignAttri("", false, "AV56CheckRequiredFieldsResult", AV56CheckRequiredFieldsResult);
          }
-         if ( ( AV26Repository.gxTpr_Requiredpassword ) && String.IsNullOrEmpty(StringUtil.RTrim( AV18Password)) )
+         if ( ( AV53Repository.gxTpr_Requiredpassword ) && String.IsNullOrEmpty(StringUtil.RTrim( AV18Password)) )
          {
             GX_msglist.addItem(new GeneXus.Programs.wwpbaseobjects.dvmessagegetbasicnotificationmsg(context).executeUdp(  "",  StringUtil.Format( "%1 is required.", "Password", "", "", "", "", "", "", "", ""),  "error",  edtavPassword_Internalname,  "true",  ""));
-            AV29CheckRequiredFieldsResult = false;
-            AssignAttri("", false, "AV29CheckRequiredFieldsResult", AV29CheckRequiredFieldsResult);
+            AV56CheckRequiredFieldsResult = false;
+            AssignAttri("", false, "AV56CheckRequiredFieldsResult", AV56CheckRequiredFieldsResult);
          }
-         if ( ( AV26Repository.gxTpr_Requiredpassword ) && String.IsNullOrEmpty(StringUtil.RTrim( AV19PasswordConf)) )
+         if ( ( AV53Repository.gxTpr_Requiredpassword ) && String.IsNullOrEmpty(StringUtil.RTrim( AV19PasswordConf)) )
          {
             GX_msglist.addItem(new GeneXus.Programs.wwpbaseobjects.dvmessagegetbasicnotificationmsg(context).executeUdp(  "",  StringUtil.Format( "%1 is required.", "Password confirmation", "", "", "", "", "", "", "", ""),  "error",  edtavPasswordconf_Internalname,  "true",  ""));
-            AV29CheckRequiredFieldsResult = false;
-            AssignAttri("", false, "AV29CheckRequiredFieldsResult", AV29CheckRequiredFieldsResult);
+            AV56CheckRequiredFieldsResult = false;
+            AssignAttri("", false, "AV56CheckRequiredFieldsResult", AV56CheckRequiredFieldsResult);
          }
-         if ( ( AV26Repository.gxTpr_Requiredfirstname ) && String.IsNullOrEmpty(StringUtil.RTrim( AV9FirstName)) )
+         if ( ( AV53Repository.gxTpr_Requiredfirstname ) && String.IsNullOrEmpty(StringUtil.RTrim( AV9FirstName)) )
          {
             GX_msglist.addItem(new GeneXus.Programs.wwpbaseobjects.dvmessagegetbasicnotificationmsg(context).executeUdp(  "",  StringUtil.Format( "%1 is required.", "First name", "", "", "", "", "", "", "", ""),  "error",  edtavFirstname_Internalname,  "true",  ""));
-            AV29CheckRequiredFieldsResult = false;
-            AssignAttri("", false, "AV29CheckRequiredFieldsResult", AV29CheckRequiredFieldsResult);
+            AV56CheckRequiredFieldsResult = false;
+            AssignAttri("", false, "AV56CheckRequiredFieldsResult", AV56CheckRequiredFieldsResult);
          }
-         if ( ( AV26Repository.gxTpr_Requiredlastname ) && String.IsNullOrEmpty(StringUtil.RTrim( AV13LastName)) )
+         if ( ( AV53Repository.gxTpr_Requiredlastname ) && String.IsNullOrEmpty(StringUtil.RTrim( AV13LastName)) )
          {
             GX_msglist.addItem(new GeneXus.Programs.wwpbaseobjects.dvmessagegetbasicnotificationmsg(context).executeUdp(  "",  StringUtil.Format( "%1 is required.", "Last name", "", "", "", "", "", "", "", ""),  "error",  edtavLastname_Internalname,  "true",  ""));
-            AV29CheckRequiredFieldsResult = false;
-            AssignAttri("", false, "AV29CheckRequiredFieldsResult", AV29CheckRequiredFieldsResult);
+            AV56CheckRequiredFieldsResult = false;
+            AssignAttri("", false, "AV56CheckRequiredFieldsResult", AV56CheckRequiredFieldsResult);
          }
       }
 
@@ -933,7 +930,7 @@ namespace GeneXus.Programs {
             divName_cell_Class = "col-xs-12 col-sm-6 DataContentCellLogin CellPaddingLogin";
             AssignProp("", false, divName_cell_Internalname, "Class", divName_cell_Class, true);
          }
-         if ( AV26Repository.gxTpr_Requiredemail )
+         if ( AV53Repository.gxTpr_Requiredemail )
          {
             divEmail_cell_Class = "col-xs-12 col-sm-6 RequiredDataContentCellLogin CellPaddingLogin";
             AssignProp("", false, divEmail_cell_Internalname, "Class", divEmail_cell_Class, true);
@@ -943,7 +940,7 @@ namespace GeneXus.Programs {
             divEmail_cell_Class = "col-xs-12 col-sm-6 DataContentCellLogin CellPaddingLogin";
             AssignProp("", false, divEmail_cell_Internalname, "Class", divEmail_cell_Class, true);
          }
-         if ( AV26Repository.gxTpr_Requiredpassword )
+         if ( AV53Repository.gxTpr_Requiredpassword )
          {
             divPassword_cell_Class = "col-xs-12 col-sm-6 RequiredDataContentCellLogin CellPaddingLogin";
             AssignProp("", false, divPassword_cell_Internalname, "Class", divPassword_cell_Class, true);
@@ -953,7 +950,7 @@ namespace GeneXus.Programs {
             divPassword_cell_Class = "col-xs-12 col-sm-6 DataContentCellLogin CellPaddingLogin";
             AssignProp("", false, divPassword_cell_Internalname, "Class", divPassword_cell_Class, true);
          }
-         if ( AV26Repository.gxTpr_Requiredpassword )
+         if ( AV53Repository.gxTpr_Requiredpassword )
          {
             divPasswordconf_cell_Class = "col-xs-12 col-sm-6 RequiredDataContentCellLogin CellPaddingLogin";
             AssignProp("", false, divPasswordconf_cell_Internalname, "Class", divPasswordconf_cell_Class, true);
@@ -963,7 +960,7 @@ namespace GeneXus.Programs {
             divPasswordconf_cell_Class = "col-xs-12 col-sm-6 DataContentCellLogin CellPaddingLogin";
             AssignProp("", false, divPasswordconf_cell_Internalname, "Class", divPasswordconf_cell_Class, true);
          }
-         if ( AV26Repository.gxTpr_Requiredfirstname )
+         if ( AV53Repository.gxTpr_Requiredfirstname )
          {
             divFirstname_cell_Class = "col-xs-12 col-sm-6 RequiredDataContentCellLogin CellPaddingLogin";
             AssignProp("", false, divFirstname_cell_Internalname, "Class", divFirstname_cell_Class, true);
@@ -973,7 +970,7 @@ namespace GeneXus.Programs {
             divFirstname_cell_Class = "col-xs-12 col-sm-6 DataContentCellLogin CellPaddingLogin";
             AssignProp("", false, divFirstname_cell_Internalname, "Class", divFirstname_cell_Class, true);
          }
-         if ( AV26Repository.gxTpr_Requiredlastname )
+         if ( AV53Repository.gxTpr_Requiredlastname )
          {
             divLastname_cell_Class = "col-xs-12 col-sm-6 RequiredDataContentCellLogin CellPaddingLogin";
             AssignProp("", false, divLastname_cell_Internalname, "Class", divLastname_cell_Class, true);
@@ -989,12 +986,12 @@ namespace GeneXus.Programs {
       {
          /* 'DISPLAYMESSAGES' Routine */
          returnInSub = false;
-         AV35GXV2 = 1;
-         while ( AV35GXV2 <= AV8Errors.Count )
+         AV61GXV2 = 1;
+         while ( AV61GXV2 <= AV52Errors.Count )
          {
-            AV25Error = ((GeneXus.Programs.genexussecurity.SdtGAMError)AV8Errors.Item(AV35GXV2));
-            GX_msglist.addItem(StringUtil.Format( "%1 (GAM%2)", AV25Error.gxTpr_Message, StringUtil.LTrimStr( (decimal)(AV25Error.gxTpr_Code), 12, 0), "", "", "", "", "", "", ""));
-            AV35GXV2 = (int)(AV35GXV2+1);
+            AV51Error = ((GeneXus.Programs.genexussecurity.SdtGAMError)AV52Errors.Item(AV61GXV2));
+            GX_msglist.addItem(StringUtil.Format( "%1 (GAM%2)", AV51Error.gxTpr_Message, StringUtil.LTrimStr( (decimal)(AV51Error.gxTpr_Code), 12, 0), "", "", "", "", "", "", ""));
+            AV61GXV2 = (int)(AV61GXV2+1);
          }
       }
 
@@ -1026,7 +1023,7 @@ namespace GeneXus.Programs {
          PA0A2( ) ;
          WS0A2( ) ;
          WE0A2( ) ;
-         this.cleanup();
+         cleanup();
          context.SetWrapped(false);
          context.GX_msglist = BackMsgLst;
          return "";
@@ -1047,7 +1044,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20248121541370", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202491613151449", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1063,7 +1060,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("gamregisteruser.js", "?20248121541378", false, true);
+         context.AddJavascriptSource("gamregisteruser.js", "?202491613151453", false, true);
          /* End function include_jscripts */
       }
 
@@ -1145,25 +1142,19 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'AV6Birthday',fld:'vBIRTHDAY',pic:'',hsh:true},{av:'AV12Gender',fld:'vGENDER',pic:'',hsh:true},{av:'AV28UserRememberMe',fld:'vUSERREMEMBERME',pic:'Z9',hsh:true}]");
-         setEventMetadata("REFRESH",",oparms:[]}");
-         setEventMetadata("ENTER","{handler:'E120A2',iparms:[{av:'AV29CheckRequiredFieldsResult',fld:'vCHECKREQUIREDFIELDSRESULT',pic:''},{av:'AV18Password',fld:'vPASSWORD',pic:''},{av:'AV19PasswordConf',fld:'vPASSWORDCONF',pic:''},{av:'AV17Name',fld:'vNAME',pic:''},{av:'AV7EMail',fld:'vEMAIL',pic:''},{av:'AV9FirstName',fld:'vFIRSTNAME',pic:''},{av:'AV13LastName',fld:'vLASTNAME',pic:''},{av:'AV6Birthday',fld:'vBIRTHDAY',pic:'',hsh:true},{av:'AV12Gender',fld:'vGENDER',pic:'',hsh:true},{av:'AV28UserRememberMe',fld:'vUSERREMEMBERME',pic:'Z9',hsh:true}]");
-         setEventMetadata("ENTER",",oparms:[{av:'AV29CheckRequiredFieldsResult',fld:'vCHECKREQUIREDFIELDSRESULT',pic:''}]}");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"AV6Birthday","fld":"vBIRTHDAY","hsh":true},{"av":"AV12Gender","fld":"vGENDER","hsh":true},{"av":"AV55UserRememberMe","fld":"vUSERREMEMBERME","pic":"Z9","hsh":true}]}""");
+         setEventMetadata("ENTER","""{"handler":"E120A2","iparms":[{"av":"AV56CheckRequiredFieldsResult","fld":"vCHECKREQUIREDFIELDSRESULT"},{"av":"AV18Password","fld":"vPASSWORD"},{"av":"AV19PasswordConf","fld":"vPASSWORDCONF"},{"av":"AV17Name","fld":"vNAME"},{"av":"AV7EMail","fld":"vEMAIL"},{"av":"AV9FirstName","fld":"vFIRSTNAME"},{"av":"AV13LastName","fld":"vLASTNAME"},{"av":"AV6Birthday","fld":"vBIRTHDAY","hsh":true},{"av":"AV12Gender","fld":"vGENDER","hsh":true},{"av":"AV55UserRememberMe","fld":"vUSERREMEMBERME","pic":"Z9","hsh":true}]""");
+         setEventMetadata("ENTER",""","oparms":[{"av":"AV56CheckRequiredFieldsResult","fld":"vCHECKREQUIREDFIELDSRESULT"}]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -1197,15 +1188,15 @@ namespace GeneXus.Programs {
          EvtGridId = "";
          EvtRowId = "";
          sEvtType = "";
-         AV26Repository = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context);
-         AV27User = new GeneXus.Programs.genexussecurity.SdtGAMUser(context);
-         AV24AdditionalParameter = new GeneXus.Programs.genexussecurity.SdtGAMLoginAdditionalParameters(context);
-         AV8Errors = new GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError>( context, "GeneXus.Programs.genexussecurity.SdtGAMError", "GeneXus.Programs");
+         AV53Repository = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context);
+         AV54User = new GeneXus.Programs.genexussecurity.SdtGAMUser(context);
+         AV50AdditionalParameter = new GeneXus.Programs.genexussecurity.SdtGAMLoginAdditionalParameters(context);
+         AV52Errors = new GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError>( context, "GeneXus.Programs.genexussecurity.SdtGAMError", "GeneXus.Programs");
          AV14LinkURL = "";
          AV33GAMApplication = new GeneXus.Programs.genexussecurity.SdtGAMApplication(context);
          AV16Messages = new GXBaseCollection<GeneXus.Utils.SdtMessages_Message>( context, "Message", "GeneXus");
          AV20Message = new GeneXus.Utils.SdtMessages_Message(context);
-         AV25Error = new GeneXus.Programs.genexussecurity.SdtGAMError(context);
+         AV51Error = new GeneXus.Programs.genexussecurity.SdtGAMError(context);
          BackMsgLst = new msglist();
          LclMsgLst = new msglist();
          pr_gam = new DataStoreProvider(context, new GeneXus.Programs.gamregisteruser__gam(),
@@ -1221,9 +1212,8 @@ namespace GeneXus.Programs {
 
       private short nGotPars ;
       private short GxWebError ;
-      private short initialized ;
       private short gxajaxcallmode ;
-      private short AV28UserRememberMe ;
+      private short AV55UserRememberMe ;
       private short wbEnd ;
       private short wbStart ;
       private short edtavPassword_Ispassword ;
@@ -1236,8 +1226,8 @@ namespace GeneXus.Programs {
       private int edtavPasswordconf_Enabled ;
       private int edtavFirstname_Enabled ;
       private int edtavLastname_Enabled ;
-      private int AV34GXV1 ;
-      private int AV35GXV2 ;
+      private int AV60GXV1 ;
+      private int AV61GXV2 ;
       private int idxLst ;
       private string gxfirstwebparm ;
       private string gxfirstwebparm_bkp ;
@@ -1302,7 +1292,7 @@ namespace GeneXus.Programs {
       private DateTime AV6Birthday ;
       private bool entryPointCalled ;
       private bool toggleJsOutput ;
-      private bool AV29CheckRequiredFieldsResult ;
+      private bool AV56CheckRequiredFieldsResult ;
       private bool wbLoad ;
       private bool Rfr0gs ;
       private bool wbErr ;
@@ -1312,21 +1302,21 @@ namespace GeneXus.Programs {
       private string AV17Name ;
       private string AV7EMail ;
       private string AV14LinkURL ;
+      private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GeneXus.Programs.genexussecurity.SdtGAMRepository AV53Repository ;
+      private GeneXus.Programs.genexussecurity.SdtGAMUser AV54User ;
       private IDataStoreProvider pr_default ;
+      private GeneXus.Programs.genexussecurity.SdtGAMLoginAdditionalParameters AV50AdditionalParameter ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV52Errors ;
+      private GeneXus.Programs.genexussecurity.SdtGAMApplication AV33GAMApplication ;
+      private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> AV16Messages ;
+      private GeneXus.Utils.SdtMessages_Message AV20Message ;
+      private GeneXus.Programs.genexussecurity.SdtGAMError AV51Error ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
       private IDataStoreProvider pr_gam ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV8Errors ;
-      private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> AV16Messages ;
-      private GXWebForm Form ;
-      private GeneXus.Programs.genexussecurity.SdtGAMLoginAdditionalParameters AV24AdditionalParameter ;
-      private GeneXus.Programs.genexussecurity.SdtGAMError AV25Error ;
-      private GeneXus.Utils.SdtMessages_Message AV20Message ;
-      private GeneXus.Programs.genexussecurity.SdtGAMRepository AV26Repository ;
-      private GeneXus.Programs.genexussecurity.SdtGAMUser AV27User ;
-      private GeneXus.Programs.genexussecurity.SdtGAMApplication AV33GAMApplication ;
    }
 
    public class gamregisteruser__gam : DataStoreHelperBase, IDataStoreHelper

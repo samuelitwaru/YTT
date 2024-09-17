@@ -48,10 +48,10 @@ namespace GeneXus.Programs.wwpbaseobjects {
       {
          this.AV18WizardSteps = aP0_WizardSteps;
          this.AV11SelectedStep = aP1_SelectedStep;
-         executePrivate();
+         ExecuteImpl();
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -214,11 +214,8 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITWEB( ) ;
          if ( ! isAjaxCallMode( ) )
          {
@@ -264,7 +261,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void RenderHtmlHeaders( )
@@ -295,10 +292,10 @@ namespace GeneXus.Programs.wwpbaseobjects {
          }
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
@@ -588,7 +585,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
             {
                if ( context.ExposeMetadata( ) )
                {
-                  Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+                  Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
                }
             }
             Form.Meta.addItem("description", "Wizard Steps Arrow WC", 0) ;
@@ -720,6 +717,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
                                        if ( ! wbErr )
                                        {
                                           dynload_actions( ) ;
+                                          /* Execute user event: Gridwizardsteps.Load */
                                           E120K2 ();
                                        }
                                     }
@@ -900,7 +898,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
       {
          /* GeneXus formulas. */
          edtavWizardstepsaux__title_Enabled = 0;
-         AssignProp(sPrefix, false, edtavWizardstepsaux__title_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavWizardstepsaux__title_Enabled), 5, 0), !bGXsfl_5_Refreshing);
       }
 
       protected void RF0K2( )
@@ -931,6 +928,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
          {
             SubsflControlProps_52( ) ;
+            /* Execute user event: Gridwizardsteps.Load */
             E120K2 ();
             wbEnd = 5;
             WB0K0( ) ;
@@ -988,7 +986,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
       protected void before_start_formulas( )
       {
          edtavWizardstepsaux__title_Enabled = 0;
-         AssignProp(sPrefix, false, edtavWizardstepsaux__title_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavWizardstepsaux__title_Enabled), 5, 0), !bGXsfl_5_Refreshing);
          fix_multi_value_controls( ) ;
       }
 
@@ -1331,7 +1328,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          PA0K2( ) ;
          WS0K2( ) ;
          WE0K2( ) ;
-         this.cleanup();
+         cleanup();
          context.SetWrapped(false);
          SaveComponentMsgList(sPrefix);
          context.GX_msglist = BackMsgLst;
@@ -1530,7 +1527,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20248141656270", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20249161311555", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1548,7 +1545,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       {
          if ( nGXWrapped != 1 )
          {
-            context.AddJavascriptSource("wwpbaseobjects/wizardstepsarrowwc.js", "?20248141656270", false, true);
+            context.AddJavascriptSource("wwpbaseobjects/wizardstepsarrowwc.js", "?20249161311555", false, true);
          }
          /* End function include_jscripts */
       }
@@ -1569,6 +1566,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       protected void sendrow_52( )
       {
+         sGXsfl_5_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_5_idx), 4, 0), 4, "0");
          SubsflControlProps_52( ) ;
          WB0K0( ) ;
          GridwizardstepsRow = GXWebRow.GetNew(context,GridwizardstepsContainer);
@@ -1651,8 +1649,9 @@ namespace GeneXus.Programs.wwpbaseobjects {
          }
          GridwizardstepsRow.AddColumnProperties("cell", -1, isAjaxCallMode( ), new Object[] {(string)"",(string)"",(string)"AttributeStepCell"});
          /* Single line edit */
+         TempTags = "  onfocus=\"gx.evt.onfocus(this, 20,'" + sPrefix + "',false,'" + sGXsfl_5_idx + "',5)\"";
          ROClassString = edtavWizardstepsaux__title_Class;
-         GridwizardstepsRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavWizardstepsaux__title_Internalname,((GeneXus.Programs.wwpbaseobjects.SdtWizardSteps_WizardStepsItem)AV19WizardStepsAux.Item(AV22GXV1)).gxTpr_Title,(string)"",(string)"",(string)"'"+sPrefix+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavWizardstepsaux__title_Jsonclick,(short)0,(string)edtavWizardstepsaux__title_Class,(string)"",(string)ROClassString,(string)"",(string)"",(int)edtavWizardstepsaux__title_Visible,(int)edtavWizardstepsaux__title_Enabled,(short)0,(string)"text",(string)"",(short)40,(string)"chr",(short)1,(string)"row",(short)40,(short)0,(short)0,(short)5,(short)0,(short)-1,(short)-1,(bool)false,(string)"",(string)"start",(bool)true,(string)""});
+         GridwizardstepsRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavWizardstepsaux__title_Internalname,((GeneXus.Programs.wwpbaseobjects.SdtWizardSteps_WizardStepsItem)AV19WizardStepsAux.Item(AV22GXV1)).gxTpr_Title,(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,20);\"",(string)"'"+sPrefix+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavWizardstepsaux__title_Jsonclick,(short)0,(string)edtavWizardstepsaux__title_Class,(string)"",(string)ROClassString,(string)"",(string)"",(int)edtavWizardstepsaux__title_Visible,(int)edtavWizardstepsaux__title_Enabled,(short)0,(string)"text",(string)"",(short)40,(string)"chr",(short)1,(string)"row",(short)40,(short)0,(short)0,(short)5,(short)0,(short)-1,(short)-1,(bool)false,(string)"",(string)"start",(bool)true,(string)""});
          if ( GridwizardstepsContainer.GetWrapped() == 1 )
          {
             GridwizardstepsContainer.CloseTag("cell");
@@ -1738,6 +1737,17 @@ namespace GeneXus.Programs.wwpbaseobjects {
             GridwizardstepsColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
             GridwizardstepsContainer.AddColumnProperties(GridwizardstepsColumn);
             GridwizardstepsColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+            GridwizardstepsContainer.AddColumnProperties(GridwizardstepsColumn);
+            GridwizardstepsColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+            GridwizardstepsContainer.AddColumnProperties(GridwizardstepsColumn);
+            GridwizardstepsColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+            GridwizardstepsContainer.AddColumnProperties(GridwizardstepsColumn);
+            GridwizardstepsColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+            GridwizardstepsContainer.AddColumnProperties(GridwizardstepsColumn);
+            GridwizardstepsColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+            GridwizardstepsContainer.AddColumnProperties(GridwizardstepsColumn);
+            GridwizardstepsColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+            GridwizardstepsColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
             GridwizardstepsColumn.AddObjectProperty("Class", StringUtil.RTrim( edtavWizardstepsaux__title_Class));
             GridwizardstepsColumn.AddObjectProperty("Enabled", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtavWizardstepsaux__title_Enabled), 5, 0, ".", "")));
             GridwizardstepsColumn.AddObjectProperty("Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtavWizardstepsaux__title_Visible), 5, 0, ".", "")));
@@ -1813,27 +1823,20 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'GRIDWIZARDSTEPS_nFirstRecordOnPage'},{av:'GRIDWIZARDSTEPS_nEOF'},{av:'AV11SelectedStep',fld:'vSELECTEDSTEP',pic:''},{av:'AV18WizardSteps',fld:'vWIZARDSTEPS',pic:''},{av:'sPrefix'},{av:'AV19WizardStepsAux',fld:'vWIZARDSTEPSAUX',grid:5,pic:'',hsh:true},{av:'nGXsfl_5_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:5},{av:'nRC_GXsfl_5',ctrl:'GRIDWIZARDSTEPS',prop:'GridRC',grid:5},{av:'AV15StepRealNumber',fld:'vSTEPREALNUMBER',pic:'ZZZ9',hsh:true},{av:'AV9PreviousSelected',fld:'vPREVIOUSSELECTED',pic:'',hsh:true},{av:'AV14StepNumber',fld:'vSTEPNUMBER',pic:'ZZZ9',hsh:true},{av:'AV5FirstIsDummy',fld:'vFIRSTISDUMMY',pic:'',hsh:true},{av:'AV6LastIsDummy',fld:'vLASTISDUMMY',pic:'',hsh:true},{av:'AV10SecondIsDummy',fld:'vSECONDISDUMMY',pic:'',hsh:true},{av:'AV8PenultimateIsDummy',fld:'vPENULTIMATEISDUMMY',pic:'',hsh:true}]");
-         setEventMetadata("REFRESH",",oparms:[]}");
-         setEventMetadata("GRIDWIZARDSTEPS.LOAD","{handler:'E120K2',iparms:[{av:'AV15StepRealNumber',fld:'vSTEPREALNUMBER',pic:'ZZZ9',hsh:true},{av:'AV19WizardStepsAux',fld:'vWIZARDSTEPSAUX',grid:5,pic:'',hsh:true},{av:'nGXsfl_5_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:5},{av:'GRIDWIZARDSTEPS_nFirstRecordOnPage'},{av:'nRC_GXsfl_5',ctrl:'GRIDWIZARDSTEPS',prop:'GridRC',grid:5},{av:'AV11SelectedStep',fld:'vSELECTEDSTEP',pic:''},{av:'AV9PreviousSelected',fld:'vPREVIOUSSELECTED',pic:'',hsh:true},{av:'AV14StepNumber',fld:'vSTEPNUMBER',pic:'ZZZ9',hsh:true},{av:'AV5FirstIsDummy',fld:'vFIRSTISDUMMY',pic:'',hsh:true},{av:'AV6LastIsDummy',fld:'vLASTISDUMMY',pic:'',hsh:true},{av:'AV18WizardSteps',fld:'vWIZARDSTEPS',pic:''},{av:'AV10SecondIsDummy',fld:'vSECONDISDUMMY',pic:'',hsh:true},{av:'AV8PenultimateIsDummy',fld:'vPENULTIMATEISDUMMY',pic:'',hsh:true}]");
-         setEventMetadata("GRIDWIZARDSTEPS.LOAD",",oparms:[{av:'lblStepnumber_Caption',ctrl:'STEPNUMBER',prop:'Caption'},{ctrl:'WIZARDSTEPSAUX__TITLE',prop:'Class'},{av:'imgStepimg_Class',ctrl:'STEPIMG',prop:'Class'},{av:'lblStepnumber_Class',ctrl:'STEPNUMBER',prop:'Class'},{av:'divTblstep_Class',ctrl:'TBLSTEP',prop:'Class'},{av:'AV9PreviousSelected',fld:'vPREVIOUSSELECTED',pic:'',hsh:true},{av:'imgStepimg_Visible',ctrl:'STEPIMG',prop:'Visible'},{av:'tblTblcontainerstep_Class',ctrl:'TBLCONTAINERSTEP',prop:'Class'},{av:'divTblstep_Visible',ctrl:'TBLSTEP',prop:'Visible'},{av:'lblStepnumber_Visible',ctrl:'STEPNUMBER',prop:'Visible'},{ctrl:'WIZARDSTEPSAUX__TITLE',prop:'Visible'},{av:'AV15StepRealNumber',fld:'vSTEPREALNUMBER',pic:'ZZZ9',hsh:true},{av:'AV14StepNumber',fld:'vSTEPNUMBER',pic:'ZZZ9',hsh:true}]}");
-         setEventMetadata("NULL","{handler:'Validv_Gxv2',iparms:[]");
-         setEventMetadata("NULL",",oparms:[]}");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"GRIDWIZARDSTEPS_nFirstRecordOnPage"},{"av":"GRIDWIZARDSTEPS_nEOF"},{"av":"AV11SelectedStep","fld":"vSELECTEDSTEP"},{"av":"AV18WizardSteps","fld":"vWIZARDSTEPS"},{"av":"sPrefix"},{"av":"AV19WizardStepsAux","fld":"vWIZARDSTEPSAUX","grid":5,"hsh":true},{"av":"nGXsfl_5_idx","ctrl":"GRID","prop":"GridCurrRow","grid":5},{"av":"nRC_GXsfl_5","ctrl":"GRIDWIZARDSTEPS","prop":"GridRC","grid":5},{"av":"AV15StepRealNumber","fld":"vSTEPREALNUMBER","pic":"ZZZ9","hsh":true},{"av":"AV9PreviousSelected","fld":"vPREVIOUSSELECTED","hsh":true},{"av":"AV14StepNumber","fld":"vSTEPNUMBER","pic":"ZZZ9","hsh":true},{"av":"AV5FirstIsDummy","fld":"vFIRSTISDUMMY","hsh":true},{"av":"AV6LastIsDummy","fld":"vLASTISDUMMY","hsh":true},{"av":"AV10SecondIsDummy","fld":"vSECONDISDUMMY","hsh":true},{"av":"AV8PenultimateIsDummy","fld":"vPENULTIMATEISDUMMY","hsh":true}]}""");
+         setEventMetadata("GRIDWIZARDSTEPS.LOAD","""{"handler":"E120K2","iparms":[{"av":"AV15StepRealNumber","fld":"vSTEPREALNUMBER","pic":"ZZZ9","hsh":true},{"av":"AV19WizardStepsAux","fld":"vWIZARDSTEPSAUX","grid":5,"hsh":true},{"av":"nGXsfl_5_idx","ctrl":"GRID","prop":"GridCurrRow","grid":5},{"av":"GRIDWIZARDSTEPS_nFirstRecordOnPage"},{"av":"nRC_GXsfl_5","ctrl":"GRIDWIZARDSTEPS","prop":"GridRC","grid":5},{"av":"AV11SelectedStep","fld":"vSELECTEDSTEP"},{"av":"AV9PreviousSelected","fld":"vPREVIOUSSELECTED","hsh":true},{"av":"AV14StepNumber","fld":"vSTEPNUMBER","pic":"ZZZ9","hsh":true},{"av":"AV5FirstIsDummy","fld":"vFIRSTISDUMMY","hsh":true},{"av":"AV6LastIsDummy","fld":"vLASTISDUMMY","hsh":true},{"av":"AV18WizardSteps","fld":"vWIZARDSTEPS"},{"av":"AV10SecondIsDummy","fld":"vSECONDISDUMMY","hsh":true},{"av":"AV8PenultimateIsDummy","fld":"vPENULTIMATEISDUMMY","hsh":true}]""");
+         setEventMetadata("GRIDWIZARDSTEPS.LOAD",""","oparms":[{"av":"lblStepnumber_Caption","ctrl":"STEPNUMBER","prop":"Caption"},{"ctrl":"WIZARDSTEPSAUX__TITLE","prop":"Class"},{"av":"imgStepimg_Class","ctrl":"STEPIMG","prop":"Class"},{"av":"lblStepnumber_Class","ctrl":"STEPNUMBER","prop":"Class"},{"av":"divTblstep_Class","ctrl":"TBLSTEP","prop":"Class"},{"av":"AV9PreviousSelected","fld":"vPREVIOUSSELECTED","hsh":true},{"av":"imgStepimg_Visible","ctrl":"STEPIMG","prop":"Visible"},{"av":"tblTblcontainerstep_Class","ctrl":"TBLCONTAINERSTEP","prop":"Class"},{"av":"divTblstep_Visible","ctrl":"TBLSTEP","prop":"Visible"},{"av":"lblStepnumber_Visible","ctrl":"STEPNUMBER","prop":"Visible"},{"ctrl":"WIZARDSTEPSAUX__TITLE","prop":"Visible"},{"av":"AV15StepRealNumber","fld":"vSTEPREALNUMBER","pic":"ZZZ9","hsh":true},{"av":"AV14StepNumber","fld":"vSTEPNUMBER","pic":"ZZZ9","hsh":true}]}""");
+         setEventMetadata("NULL","""{"handler":"Validv_Gxv2","iparms":[]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -1870,6 +1873,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          StyleString = "";
          sImgUrl = "";
          lblStepnumber_Jsonclick = "";
+         TempTags = "";
          ROClassString = "";
          subGridwizardsteps_Header = "";
          GridwizardstepsColumn = new GXWebColumn();
@@ -1882,7 +1886,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private short nDynComponent ;
       private short AV15StepRealNumber ;
       private short AV14StepNumber ;
-      private short initialized ;
       private short nGXWrapped ;
       private short wbEnd ;
       private short wbStart ;
@@ -1960,6 +1963,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private string sImgUrl ;
       private string divLayout_tblstep_Internalname ;
       private string lblStepnumber_Jsonclick ;
+      private string TempTags ;
       private string ROClassString ;
       private string edtavWizardstepsaux__title_Jsonclick ;
       private string subGridwizardsteps_Header ;
@@ -1987,11 +1991,11 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
-      private msglist BackMsgLst ;
-      private msglist LclMsgLst ;
       private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtWizardSteps_WizardStepsItem> AV18WizardSteps ;
       private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtWizardSteps_WizardStepsItem> AV19WizardStepsAux ;
       private GeneXus.Programs.wwpbaseobjects.SdtWizardSteps_WizardStepsItem AV17WizardStep ;
+      private msglist BackMsgLst ;
+      private msglist LclMsgLst ;
    }
 
 }

@@ -171,7 +171,6 @@ namespace GeneXus.Programs {
          }
          if ( AnyError == 0 )
          {
-            IsConfirmed = 1;
          }
       }
 
@@ -284,7 +283,6 @@ namespace GeneXus.Programs {
 
       protected void CheckExtendedTable0I20( )
       {
-         nIsDirty_20 = 0;
          standaloneModal( ) ;
          if ( String.IsNullOrEmpty(StringUtil.RTrim( A125LeaveTypeName)) )
          {
@@ -388,7 +386,6 @@ namespace GeneXus.Programs {
       protected void insert_Check( )
       {
          CONFIRM_0I0( ) ;
-         IsConfirmed = 0;
       }
 
       protected void update_Check( )
@@ -621,7 +618,6 @@ namespace GeneXus.Programs {
          else
          {
          }
-         IsModified = 0;
          if ( AnyError != 0 )
          {
             context.wjLoc = "";
@@ -907,7 +903,6 @@ namespace GeneXus.Programs {
 
       protected void SaveImpl( )
       {
-         nKeyPressed = 1;
          GetKey0I20( ) ;
          if ( IsIns( ) )
          {
@@ -985,7 +980,6 @@ namespace GeneXus.Programs {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars20( bcLeaveType, 1) ;
          SaveImpl( ) ;
          VarsToRow20( bcLeaveType) ;
@@ -999,7 +993,6 @@ namespace GeneXus.Programs {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars20( bcLeaveType, 1) ;
          Gx_mode = "INS";
          /* Insert record */
@@ -1045,7 +1038,6 @@ namespace GeneXus.Programs {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars20( bcLeaveType, 1) ;
          UpdateImpl( ) ;
          context.GX_msglist = BackMsgLst;
@@ -1058,7 +1050,6 @@ namespace GeneXus.Programs {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars20( bcLeaveType, 1) ;
          Gx_mode = "INS";
          /* Insert record */
@@ -1092,8 +1083,6 @@ namespace GeneXus.Programs {
          AnyError = 0;
          context.GX_msglist.removeAllItems();
          RowToVars20( bcLeaveType, 0) ;
-         nKeyPressed = 3;
-         IsConfirmed = 0;
          GetKey0I20( ) ;
          if ( RcdFound20 == 1 )
          {
@@ -1209,7 +1198,6 @@ namespace GeneXus.Programs {
 
       public void ForceCommitOnExit( )
       {
-         mustCommit = true;
          return  ;
       }
 
@@ -1298,24 +1286,20 @@ namespace GeneXus.Programs {
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
       }
 
-      protected void CloseOpenCursors( )
+      protected override void CloseCursors( )
       {
          pr_default.close(1);
       }
 
       public override void initialize( )
       {
-         scmdbuf = "";
-         PreviousTooltip = "";
-         PreviousCaption = "";
          BC000I5_A124LeaveTypeId = new long[1] ;
          BC000I5_A125LeaveTypeName = new string[] {""} ;
          BC000I5_A144LeaveTypeVacationLeave = new string[] {""} ;
@@ -1455,14 +1439,9 @@ namespace GeneXus.Programs {
          standaloneNotModal( ) ;
       }
 
-      private short IsConfirmed ;
-      private short IsModified ;
       private short AnyError ;
-      private short nKeyPressed ;
       private short RcdFound20 ;
-      private short GX_JID ;
       private short Gx_BScreen ;
-      private short nIsDirty_20 ;
       private int trnEnded ;
       private int Start ;
       private int Count ;
@@ -1476,9 +1455,6 @@ namespace GeneXus.Programs {
       private long Z100CompanyId ;
       private long GXt_int1 ;
       private long i100CompanyId ;
-      private string scmdbuf ;
-      private string PreviousTooltip ;
-      private string PreviousCaption ;
       private string A125LeaveTypeName ;
       private string A144LeaveTypeVacationLeave ;
       private string A145LeaveTypeLoggingWorkHours ;
@@ -1503,13 +1479,10 @@ namespace GeneXus.Programs {
       private bool n175LeaveTypeColorApproved ;
       private bool returnInSub ;
       private bool Gx_longc ;
-      private bool mustCommit ;
       private IGxSession AV11WebSession ;
-      private GXBCCollection<SdtLeaveType> gx_restcollection ;
-      private SdtLeaveType bcLeaveType ;
-      private SdtLeaveType gx_sdt_item ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private SdtLeaveType bcLeaveType ;
       private IDataStoreProvider pr_default ;
       private long[] BC000I5_A124LeaveTypeId ;
       private string[] BC000I5_A125LeaveTypeName ;
@@ -1520,6 +1493,11 @@ namespace GeneXus.Programs {
       private string[] BC000I5_A175LeaveTypeColorApproved ;
       private bool[] BC000I5_n175LeaveTypeColorApproved ;
       private long[] BC000I5_A100CompanyId ;
+      private SdtLeaveType gx_sdt_item ;
+      private GXBCCollection<SdtLeaveType> gx_restcollection ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV7WWPContext ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext AV10TrnContext ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext_Attribute AV13TrnContextAtt ;
       private long[] BC000I6_A124LeaveTypeId ;
       private string[] BC000I6_A125LeaveTypeName ;
       private string[] BC000I6_A144LeaveTypeVacationLeave ;
@@ -1563,9 +1541,6 @@ namespace GeneXus.Programs {
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
       private IDataStoreProvider pr_gam ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV7WWPContext ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext AV10TrnContext ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext_Attribute AV13TrnContextAtt ;
    }
 
    public class leavetype_bc__gam : DataStoreHelperBase, IDataStoreHelper
@@ -1626,6 +1601,18 @@ namespace GeneXus.Programs {
   {
      if ( def == null )
      {
+        Object[] prmBC000I2;
+        prmBC000I2 = new Object[] {
+        new ParDef("LeaveTypeId",GXType.Int64,10,0)
+        };
+        Object[] prmBC000I3;
+        prmBC000I3 = new Object[] {
+        new ParDef("LeaveTypeId",GXType.Int64,10,0)
+        };
+        Object[] prmBC000I4;
+        prmBC000I4 = new Object[] {
+        new ParDef("CompanyId",GXType.Int64,10,0)
+        };
         Object[] prmBC000I5;
         prmBC000I5 = new Object[] {
         new ParDef("GXPagingFrom20",GXType.Int32,9,0) ,
@@ -1635,20 +1622,8 @@ namespace GeneXus.Programs {
         prmBC000I6 = new Object[] {
         new ParDef("LeaveTypeId",GXType.Int64,10,0)
         };
-        Object[] prmBC000I4;
-        prmBC000I4 = new Object[] {
-        new ParDef("CompanyId",GXType.Int64,10,0)
-        };
         Object[] prmBC000I7;
         prmBC000I7 = new Object[] {
-        new ParDef("LeaveTypeId",GXType.Int64,10,0)
-        };
-        Object[] prmBC000I3;
-        prmBC000I3 = new Object[] {
-        new ParDef("LeaveTypeId",GXType.Int64,10,0)
-        };
-        Object[] prmBC000I2;
-        prmBC000I2 = new Object[] {
         new ParDef("LeaveTypeId",GXType.Int64,10,0)
         };
         Object[] prmBC000I8;

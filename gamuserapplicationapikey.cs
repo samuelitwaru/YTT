@@ -45,10 +45,10 @@ namespace GeneXus.Programs {
       {
          this.AV13UserGUID = aP0_UserGUID;
          this.AV6ClientID = aP1_ClientID;
-         executePrivate();
+         ExecuteImpl();
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -168,11 +168,8 @@ namespace GeneXus.Programs {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITWEB( ) ;
          if ( ! isAjaxCallMode( ) )
          {
@@ -203,7 +200,7 @@ namespace GeneXus.Programs {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override short ExecuteStartEvent( )
@@ -247,18 +244,18 @@ namespace GeneXus.Programs {
          CloseStyles();
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
             enableOutput();
          }
-         context.AddJavascriptSource("calendar.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("calendar-setup.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("calendar-en.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("calendar.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("calendar-setup.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("calendar-en.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.WriteHtmlText( Form.Headerrawhtml) ;
          context.CloseHtmlHeader();
          if ( context.isSpaRequest( ) )
@@ -455,7 +452,8 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
             /* Single line edit */
-            GxWebStd.gx_single_line_edit( context, edtavClientid_Internalname, StringUtil.RTrim( AV6ClientID), StringUtil.RTrim( context.localUtil.Format( AV6ClientID, "")), "", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavClientid_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavClientid_Enabled, 0, "text", "", 40, "chr", 1, "row", 40, 0, 0, 0, 0, -1, 0, true, "GeneXusSecurityCommon\\GAMClientApplicationId", "start", true, "", "HLP_GAMUserApplicationAPIkey.htm");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 22,'',false,'',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtavClientid_Internalname, StringUtil.RTrim( AV6ClientID), StringUtil.RTrim( context.localUtil.Format( AV6ClientID, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,22);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavClientid_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavClientid_Enabled, 0, "text", "", 40, "chr", 1, "row", 40, 0, 0, 0, 0, -1, 0, true, "GeneXusSecurityCommon\\GAMClientApplicationId", "start", true, "", "HLP_GAMUserApplicationAPIkey.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -661,7 +659,7 @@ namespace GeneXus.Programs {
          {
             if ( context.ExposeMetadata( ) )
             {
-               Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+               Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
             }
          }
          Form.Meta.addItem("description", "Application API key", 0) ;
@@ -1148,7 +1146,7 @@ namespace GeneXus.Programs {
          PA3G2( ) ;
          WS3G2( ) ;
          WE3G2( ) ;
-         this.cleanup();
+         cleanup();
          context.SetWrapped(false);
          context.GX_msglist = BackMsgLst;
          return "";
@@ -1170,7 +1168,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20248121585257", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202491716182367", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1186,7 +1184,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("gamuserapplicationapikey.js", "?20248121585259", false, true);
+         context.AddJavascriptSource("gamuserapplicationapikey.js", "?202491716182371", false, true);
          /* End function include_jscripts */
       }
 
@@ -1208,7 +1206,7 @@ namespace GeneXus.Programs {
          AssignAttri("", false, "AV15ClientAllowGetUserAddDataREST", AV15ClientAllowGetUserAddDataREST);
          chkavClientallowgetuserrolesrest.Name = "vCLIENTALLOWGETUSERROLESREST";
          chkavClientallowgetuserrolesrest.WebTags = "";
-         chkavClientallowgetuserrolesrest.Caption = "Roles of user";
+         chkavClientallowgetuserrolesrest.Caption = "User roles";
          AssignProp("", false, chkavClientallowgetuserrolesrest_Internalname, "TitleCaption", chkavClientallowgetuserrolesrest.Caption, true);
          chkavClientallowgetuserrolesrest.CheckedValue = "false";
          AV16ClientAllowGetUserRolesRest = StringUtil.StrToBool( StringUtil.BoolToStr( AV16ClientAllowGetUserRolesRest));
@@ -1312,25 +1310,19 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'AV14ClientAllowGetUserDataREST',fld:'vCLIENTALLOWGETUSERDATAREST',pic:''},{av:'AV15ClientAllowGetUserAddDataREST',fld:'vCLIENTALLOWGETUSERADDDATAREST',pic:''},{av:'AV16ClientAllowGetUserRolesRest',fld:'vCLIENTALLOWGETUSERROLESREST',pic:''},{av:'AV17ClientAllowGetSessionIniPropREST',fld:'vCLIENTALLOWGETSESSIONINIPROPREST',pic:''},{av:'AV18ClientAllowGetSessionAppDataREST',fld:'vCLIENTALLOWGETSESSIONAPPDATAREST',pic:''},{av:'AV13UserGUID',fld:'vUSERGUID',pic:'',hsh:true},{av:'AV20DetailedScope',fld:'vDETAILEDSCOPE',pic:'',hsh:true},{av:'AV22UserAPIkey',fld:'vUSERAPIKEY',pic:'',hsh:true},{av:'AV23UserAPIkeyExpires',fld:'vUSERAPIKEYEXPIRES',pic:'99/99/9999 99:99',hsh:true},{av:'AV6ClientID',fld:'vCLIENTID',pic:'',hsh:true}]");
-         setEventMetadata("REFRESH",",oparms:[]}");
-         setEventMetadata("'CONFIRM'","{handler:'E123G2',iparms:[{av:'AV13UserGUID',fld:'vUSERGUID',pic:'',hsh:true},{av:'AV14ClientAllowGetUserDataREST',fld:'vCLIENTALLOWGETUSERDATAREST',pic:''},{av:'AV15ClientAllowGetUserAddDataREST',fld:'vCLIENTALLOWGETUSERADDDATAREST',pic:''},{av:'AV16ClientAllowGetUserRolesRest',fld:'vCLIENTALLOWGETUSERROLESREST',pic:''},{av:'AV17ClientAllowGetSessionIniPropREST',fld:'vCLIENTALLOWGETSESSIONINIPROPREST',pic:''},{av:'AV18ClientAllowGetSessionAppDataREST',fld:'vCLIENTALLOWGETSESSIONAPPDATAREST',pic:''},{av:'AV19ClientAllowAdditionalScopeREST',fld:'vCLIENTALLOWADDITIONALSCOPEREST',pic:''},{av:'AV20DetailedScope',fld:'vDETAILEDSCOPE',pic:'',hsh:true},{av:'AV6ClientID',fld:'vCLIENTID',pic:'',hsh:true},{av:'AV22UserAPIkey',fld:'vUSERAPIKEY',pic:'',hsh:true},{av:'AV23UserAPIkeyExpires',fld:'vUSERAPIKEYEXPIRES',pic:'99/99/9999 99:99',hsh:true}]");
-         setEventMetadata("'CONFIRM'",",oparms:[{av:'AV5APIkey',fld:'vAPIKEY',pic:''},{av:'chkavClientallowgetuserdatarest.Enabled',ctrl:'vCLIENTALLOWGETUSERDATAREST',prop:'Enabled'},{av:'chkavClientallowgetuseradddatarest.Enabled',ctrl:'vCLIENTALLOWGETUSERADDDATAREST',prop:'Enabled'},{av:'chkavClientallowgetuserrolesrest.Enabled',ctrl:'vCLIENTALLOWGETUSERROLESREST',prop:'Enabled'},{av:'chkavClientallowgetsessioniniproprest.Enabled',ctrl:'vCLIENTALLOWGETSESSIONINIPROPREST',prop:'Enabled'},{av:'chkavClientallowgetsessionappdatarest.Enabled',ctrl:'vCLIENTALLOWGETSESSIONAPPDATAREST',prop:'Enabled'},{av:'edtavClientallowadditionalscoperest_Enabled',ctrl:'vCLIENTALLOWADDITIONALSCOPEREST',prop:'Enabled'},{av:'AV8Expires',fld:'vEXPIRES',pic:'99/99/9999 99:99'},{av:'edtavExpires_Visible',ctrl:'vEXPIRES',prop:'Visible'},{ctrl:'BTNENTER',prop:'Visible'},{ctrl:'BTNCANCEL',prop:'Caption'}]}");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"AV14ClientAllowGetUserDataREST","fld":"vCLIENTALLOWGETUSERDATAREST"},{"av":"AV15ClientAllowGetUserAddDataREST","fld":"vCLIENTALLOWGETUSERADDDATAREST"},{"av":"AV16ClientAllowGetUserRolesRest","fld":"vCLIENTALLOWGETUSERROLESREST"},{"av":"AV17ClientAllowGetSessionIniPropREST","fld":"vCLIENTALLOWGETSESSIONINIPROPREST"},{"av":"AV18ClientAllowGetSessionAppDataREST","fld":"vCLIENTALLOWGETSESSIONAPPDATAREST"},{"av":"AV13UserGUID","fld":"vUSERGUID","hsh":true},{"av":"AV20DetailedScope","fld":"vDETAILEDSCOPE","hsh":true},{"av":"AV22UserAPIkey","fld":"vUSERAPIKEY","hsh":true},{"av":"AV23UserAPIkeyExpires","fld":"vUSERAPIKEYEXPIRES","pic":"99/99/9999 99:99","hsh":true},{"av":"AV6ClientID","fld":"vCLIENTID","hsh":true}]}""");
+         setEventMetadata("'CONFIRM'","""{"handler":"E123G2","iparms":[{"av":"AV13UserGUID","fld":"vUSERGUID","hsh":true},{"av":"AV14ClientAllowGetUserDataREST","fld":"vCLIENTALLOWGETUSERDATAREST"},{"av":"AV15ClientAllowGetUserAddDataREST","fld":"vCLIENTALLOWGETUSERADDDATAREST"},{"av":"AV16ClientAllowGetUserRolesRest","fld":"vCLIENTALLOWGETUSERROLESREST"},{"av":"AV17ClientAllowGetSessionIniPropREST","fld":"vCLIENTALLOWGETSESSIONINIPROPREST"},{"av":"AV18ClientAllowGetSessionAppDataREST","fld":"vCLIENTALLOWGETSESSIONAPPDATAREST"},{"av":"AV19ClientAllowAdditionalScopeREST","fld":"vCLIENTALLOWADDITIONALSCOPEREST"},{"av":"AV20DetailedScope","fld":"vDETAILEDSCOPE","hsh":true},{"av":"AV6ClientID","fld":"vCLIENTID","hsh":true},{"av":"AV22UserAPIkey","fld":"vUSERAPIKEY","hsh":true},{"av":"AV23UserAPIkeyExpires","fld":"vUSERAPIKEYEXPIRES","pic":"99/99/9999 99:99","hsh":true}]""");
+         setEventMetadata("'CONFIRM'",""","oparms":[{"av":"AV5APIkey","fld":"vAPIKEY"},{"av":"chkavClientallowgetuserdatarest.Enabled","ctrl":"vCLIENTALLOWGETUSERDATAREST","prop":"Enabled"},{"av":"chkavClientallowgetuseradddatarest.Enabled","ctrl":"vCLIENTALLOWGETUSERADDDATAREST","prop":"Enabled"},{"av":"chkavClientallowgetuserrolesrest.Enabled","ctrl":"vCLIENTALLOWGETUSERROLESREST","prop":"Enabled"},{"av":"chkavClientallowgetsessioniniproprest.Enabled","ctrl":"vCLIENTALLOWGETSESSIONINIPROPREST","prop":"Enabled"},{"av":"chkavClientallowgetsessionappdatarest.Enabled","ctrl":"vCLIENTALLOWGETSESSIONAPPDATAREST","prop":"Enabled"},{"av":"edtavClientallowadditionalscoperest_Enabled","ctrl":"vCLIENTALLOWADDITIONALSCOPEREST","prop":"Enabled"},{"av":"AV8Expires","fld":"vEXPIRES","pic":"99/99/9999 99:99"},{"av":"edtavExpires_Visible","ctrl":"vEXPIRES","prop":"Visible"},{"ctrl":"BTNENTER","prop":"Visible"},{"ctrl":"BTNCANCEL","prop":"Caption"}]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -1385,7 +1377,6 @@ namespace GeneXus.Programs {
 
       private short nGotPars ;
       private short GxWebError ;
-      private short initialized ;
       private short gxajaxcallmode ;
       private short wbEnd ;
       private short wbStart ;
@@ -1470,6 +1461,7 @@ namespace GeneXus.Programs {
       private string AV12GAMUserEmail ;
       private string AV19ClientAllowAdditionalScopeREST ;
       private string AV5APIkey ;
+      private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private GXCheckbox chkavClientallowgetuserdatarest ;
@@ -1477,14 +1469,13 @@ namespace GeneXus.Programs {
       private GXCheckbox chkavClientallowgetuserrolesrest ;
       private GXCheckbox chkavClientallowgetsessioniniproprest ;
       private GXCheckbox chkavClientallowgetsessionappdatarest ;
+      private GeneXus.Programs.genexussecurity.SdtGAMUser AV11GAMUser ;
+      private GeneXus.Programs.genexussecurity.SdtGAMApplication AV9GAMApplication ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV10GAMErrorCollection ;
       private IDataStoreProvider pr_default ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
       private IDataStoreProvider pr_gam ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV10GAMErrorCollection ;
-      private GXWebForm Form ;
-      private GeneXus.Programs.genexussecurity.SdtGAMApplication AV9GAMApplication ;
-      private GeneXus.Programs.genexussecurity.SdtGAMUser AV11GAMUser ;
    }
 
    public class gamuserapplicationapikey__gam : DataStoreHelperBase, IDataStoreHelper

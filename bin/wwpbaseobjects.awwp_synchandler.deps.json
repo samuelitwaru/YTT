@@ -1,22 +1,17 @@
 {
   "runtimeTarget": {
-    "name": ".NETCoreApp,Version=v6.0",
+    "name": ".NETCoreApp,Version=v8.0",
     "signature": ""
   },
   "compilationOptions": {},
   "targets": {
-    ".NETCoreApp,Version=v6.0": {
+    ".NETCoreApp,Version=v8.0": {
       "wwpbaseobjects.awwp_synchandler/1.0.0": {
         "dependencies": {
-          "GeneXus.Classes.Web.Core": "1.26.1",
-          "GeneXus.PdfReportsCS.Core": "1.26.1",
+          "GeneXus.Classes.Web.Core": "1.30.0",
+          "GeneXus.PdfReportsCS.Core": "1.30.0",
           "GeneXus.Programs.Common": "1.0.0",
-          "Npgsql": "3.2.7",
-          "iTextSharp-LGPL": "4.1.6",
-          "GeneXus": "0.0.0.0",
-          "GeneXus.Security.API.Common": "0.0.0.0",
-          "GeneXusSecurity": "1.0.0.0",
-          "GeneXusSecurityCommon": "1.0.0.0"
+          "Npgsql": "8.0.3"
         },
         "runtime": {
           "wwpbaseobjects.awwp_synchandler.dll": {}
@@ -30,115 +25,107 @@
           }
         }
       },
-      "GeneXus.Classes.Core/1.26.1": {
+      "GeneXus.Classes.Core/1.30.0": {
         "dependencies": {
           "Experimental.System.Messaging.Signed": "1.0.0",
-          "GeneXus.Cryptography": "1.26.1",
-          "GeneXus.Cryptography.Common": "1.26.1",
-          "GeneXus.Encrypt": "1.26.1",
-          "GeneXus.Xsl.Core": "1.26.1",
-          "Microsoft.Data.SqlClient": "2.1.2",
-          "Microsoft.IdentityModel.Tokens": "6.8.0",
+          "GeneXus.Cryptography": "1.30.0",
+          "GeneXus.Cryptography.Common": "1.30.0",
+          "GeneXus.Encrypt": "1.30.0",
+          "GeneXus.Xsl.Core": "1.30.0",
+          "Microsoft.Data.SqlClient": "2.1.7",
+          "Microsoft.Extensions.Logging": "8.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "8.0.0",
+          "Microsoft.IdentityModel.Tokens": "6.35.0",
           "Microsoft.Win32.Registry": "4.7.0",
           "MySqlConnector": "2.2.3",
           "NUglify": "1.16.4",
           "NetTopologySuite": "2.0.0",
-          "NetTopologySuite.Core": "1.15.3",
           "NodaTime": "3.1.9",
           "Novell.Directory.Ldap.NETStandard": "3.3.1",
-          "Npgsql": "3.2.7",
+          "Npgsql": "8.0.3",
           "Sandwych.GeographicLib": "1.49.3",
           "Stubble.Core": "1.8.4",
+          "System.Diagnostics.DiagnosticSource": "8.0.0",
           "System.DirectoryServices": "4.7.0",
           "System.Drawing.Common": "4.7.2",
-          "System.IdentityModel.Tokens.Jwt": "6.8.0",
+          "System.IdentityModel.Tokens.Jwt": "6.35.0",
           "log4net": "2.0.15"
         },
         "runtime": {
-          "lib/net6.0/GxClasses.dll": {
+          "lib/net8.0/GxClasses.dll": {
             "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.26.1.0"
+            "fileVersion": "1.30.0.0"
+          },
+          "lib/net8.0/Jayrock.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "18.0.5.42193"
           }
         }
       },
-      "GeneXus.Classes.Web.Core/1.26.1": {
+      "GeneXus.Classes.Web.Core/1.30.0": {
         "dependencies": {
-          "GeneXus.Classes.Core": "1.26.1",
-          "log4net": "2.0.15"
+          "GeneXus.Classes.Core": "1.30.0",
+          "Microsoft.Extensions.Configuration": "8.0.0",
+          "Microsoft.Extensions.Logging": "8.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "8.0.0"
         },
         "runtime": {
-          "lib/net6.0/GxClasses.Web.dll": {
+          "lib/net8.0/GxClasses.Web.dll": {
             "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.26.1.0"
+            "fileVersion": "1.30.0.0"
           }
         }
       },
-      "GeneXus.Cryptography/1.26.1": {
+      "GeneXus.Cryptography/1.30.0": {
         "dependencies": {
-          "GeneXus.Cryptography.Common": "1.26.1"
+          "GeneXus.Cryptography.Common": "1.30.0"
         },
         "runtime": {
-          "lib/net6.0/GxCryptography.dll": {
+          "lib/net8.0/GxCryptography.dll": {
             "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.26.1.0"
+            "fileVersion": "1.30.0.0"
           }
         }
       },
-      "GeneXus.Cryptography.Common/1.26.1": {
+      "GeneXus.Cryptography.Common/1.30.0": {
         "runtime": {
-          "lib/net6.0/GxCryptographyCommon.dll": {
+          "lib/net8.0/GxCryptographyCommon.dll": {
             "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.26.1.0"
+            "fileVersion": "1.30.0.0"
           }
         }
       },
-      "GeneXus.Encrypt/1.26.1": {
+      "GeneXus.Encrypt/1.30.0": {
         "dependencies": {
-          "Microsoft.IdentityModel.Tokens": "6.8.0"
+          "Microsoft.IdentityModel.Tokens": "6.35.0"
         },
         "runtime": {
-          "lib/net6.0/GxEncrypt.dll": {
+          "lib/net8.0/GxEncrypt.dll": {
             "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.26.1.0"
+            "fileVersion": "1.30.0.0"
           }
         }
       },
-      "GeneXus.PdfReportsCS.Core/1.26.1": {
+      "GeneXus.PdfReportsCS.Core/1.30.0": {
         "dependencies": {
-          "GeneXus.Classes.Core": "1.26.1",
+          "GeneXus.Classes.Core": "1.30.0",
+          "Microsoft.Extensions.Configuration": "8.0.0",
           "Microsoft.Win32.Registry": "4.7.0",
           "System.Drawing.Common": "4.7.2",
-          "System.Text.Encoding.CodePages": "4.7.0",
-          "log4net": "2.0.15"
+          "System.Text.Encoding.CodePages": "4.7.0"
         },
         "runtime": {
-          "lib/net6.0/GxPdfReportsCS.dll": {
+          "lib/net8.0/GxPdfReportsCS.dll": {
             "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.26.1.0"
+            "fileVersion": "1.30.0.0"
           }
         }
       },
-      "GeneXus.Xsl.Core/1.26.1": {
+      "GeneXus.Xsl.Core/1.30.0": {
         "runtime": {
-          "lib/net6.0/GxXsl.dll": {
+          "lib/net8.0/GxXsl.dll": {
             "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.26.1.0"
-          }
-        }
-      },
-      "GeoAPI.Core/1.7.5": {
-        "runtime": {
-          "lib/netstandard2.0/GeoAPI.dll": {
-            "assemblyVersion": "1.7.5.0",
-            "fileVersion": "1.7.5.0"
-          }
-        }
-      },
-      "iTextSharp-LGPL/4.1.6": {
-        "runtime": {
-          "lib/iTextSharp.dll": {
-            "assemblyVersion": "4.1.6.0",
-            "fileVersion": "4.1.6.0"
+            "fileVersion": "1.30.0.0"
           }
         }
       },
@@ -154,15 +141,15 @@
         }
       },
       "Microsoft.CSharp/4.5.0": {},
-      "Microsoft.Data.SqlClient/2.1.2": {
+      "Microsoft.Data.SqlClient/2.1.7": {
         "dependencies": {
           "Microsoft.Data.SqlClient.SNI.runtime": "2.1.1",
           "Microsoft.Identity.Client": "4.21.1",
-          "Microsoft.IdentityModel.JsonWebTokens": "6.8.0",
+          "Microsoft.IdentityModel.JsonWebTokens": "6.35.0",
           "Microsoft.IdentityModel.Protocols.OpenIdConnect": "6.8.0",
           "Microsoft.Win32.Registry": "4.7.0",
           "System.Configuration.ConfigurationManager": "4.7.0",
-          "System.Diagnostics.DiagnosticSource": "4.7.0",
+          "System.Diagnostics.DiagnosticSource": "8.0.0",
           "System.Runtime.Caching": "4.7.0",
           "System.Security.Principal.Windows": "4.7.0",
           "System.Text.Encoding.CodePages": "4.7.0"
@@ -212,7 +199,42 @@
           }
         }
       },
-      "Microsoft.Extensions.Logging.Abstractions/3.1.7": {},
+      "Microsoft.Extensions.Configuration/8.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.Configuration.Abstractions": "8.0.0",
+          "Microsoft.Extensions.Primitives": "8.0.0"
+        }
+      },
+      "Microsoft.Extensions.Configuration.Abstractions/8.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.Primitives": "8.0.0"
+        }
+      },
+      "Microsoft.Extensions.DependencyInjection/8.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0"
+        }
+      },
+      "Microsoft.Extensions.DependencyInjection.Abstractions/8.0.0": {},
+      "Microsoft.Extensions.Logging/8.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection": "8.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "8.0.0",
+          "Microsoft.Extensions.Options": "8.0.0"
+        }
+      },
+      "Microsoft.Extensions.Logging.Abstractions/8.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0"
+        }
+      },
+      "Microsoft.Extensions.Options/8.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0",
+          "Microsoft.Extensions.Primitives": "8.0.0"
+        }
+      },
+      "Microsoft.Extensions.Primitives/8.0.0": {},
       "Microsoft.Identity.Client/4.21.1": {
         "runtime": {
           "lib/netcoreapp2.1/Microsoft.Identity.Client.dll": {
@@ -221,29 +243,43 @@
           }
         }
       },
-      "Microsoft.IdentityModel.JsonWebTokens/6.8.0": {
-        "dependencies": {
-          "Microsoft.IdentityModel.Tokens": "6.8.0"
-        },
+      "Microsoft.IdentityModel.Abstractions/6.35.0": {
         "runtime": {
-          "lib/netstandard2.0/Microsoft.IdentityModel.JsonWebTokens.dll": {
-            "assemblyVersion": "6.8.0.0",
-            "fileVersion": "6.8.0.11012"
+          "lib/net6.0/Microsoft.IdentityModel.Abstractions.dll": {
+            "assemblyVersion": "6.35.0.0",
+            "fileVersion": "6.35.0.41201"
           }
         }
       },
-      "Microsoft.IdentityModel.Logging/6.8.0": {
+      "Microsoft.IdentityModel.JsonWebTokens/6.35.0": {
+        "dependencies": {
+          "Microsoft.IdentityModel.Tokens": "6.35.0",
+          "System.Text.Encoding": "4.3.0",
+          "System.Text.Encodings.Web": "4.7.2",
+          "System.Text.Json": "4.7.2"
+        },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.IdentityModel.Logging.dll": {
-            "assemblyVersion": "6.8.0.0",
-            "fileVersion": "6.8.0.11012"
+          "lib/net6.0/Microsoft.IdentityModel.JsonWebTokens.dll": {
+            "assemblyVersion": "6.35.0.0",
+            "fileVersion": "6.35.0.41201"
+          }
+        }
+      },
+      "Microsoft.IdentityModel.Logging/6.35.0": {
+        "dependencies": {
+          "Microsoft.IdentityModel.Abstractions": "6.35.0"
+        },
+        "runtime": {
+          "lib/net6.0/Microsoft.IdentityModel.Logging.dll": {
+            "assemblyVersion": "6.35.0.0",
+            "fileVersion": "6.35.0.41201"
           }
         }
       },
       "Microsoft.IdentityModel.Protocols/6.8.0": {
         "dependencies": {
-          "Microsoft.IdentityModel.Logging": "6.8.0",
-          "Microsoft.IdentityModel.Tokens": "6.8.0"
+          "Microsoft.IdentityModel.Logging": "6.35.0",
+          "Microsoft.IdentityModel.Tokens": "6.35.0"
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.IdentityModel.Protocols.dll": {
@@ -255,7 +291,7 @@
       "Microsoft.IdentityModel.Protocols.OpenIdConnect/6.8.0": {
         "dependencies": {
           "Microsoft.IdentityModel.Protocols": "6.8.0",
-          "System.IdentityModel.Tokens.Jwt": "6.8.0"
+          "System.IdentityModel.Tokens.Jwt": "6.35.0"
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll": {
@@ -264,16 +300,16 @@
           }
         }
       },
-      "Microsoft.IdentityModel.Tokens/6.8.0": {
+      "Microsoft.IdentityModel.Tokens/6.35.0": {
         "dependencies": {
           "Microsoft.CSharp": "4.5.0",
-          "Microsoft.IdentityModel.Logging": "6.8.0",
+          "Microsoft.IdentityModel.Logging": "6.35.0",
           "System.Security.Cryptography.Cng": "4.5.0"
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.IdentityModel.Tokens.dll": {
-            "assemblyVersion": "6.8.0.0",
-            "fileVersion": "6.8.0.11012"
+          "lib/net6.0/Microsoft.IdentityModel.Tokens.dll": {
+            "assemblyVersion": "6.35.0.0",
+            "fileVersion": "6.35.0.41201"
           }
         }
       },
@@ -313,7 +349,7 @@
       },
       "MySqlConnector/2.2.3": {
         "runtime": {
-          "lib/net6.0/MySqlConnector.dll": {
+          "lib/net7.0/MySqlConnector.dll": {
             "assemblyVersion": "2.0.0.0",
             "fileVersion": "2.2.3.0"
           }
@@ -378,11 +414,6 @@
           }
         }
       },
-      "NetTopologySuite.Core/1.15.3": {
-        "dependencies": {
-          "GeoAPI.Core": "1.7.5"
-        }
-      },
       "NodaTime/3.1.9": {
         "dependencies": {
           "System.Runtime.CompilerServices.Unsafe": "4.7.1"
@@ -396,7 +427,7 @@
       },
       "Novell.Directory.Ldap.NETStandard/3.3.1": {
         "dependencies": {
-          "Microsoft.Extensions.Logging.Abstractions": "3.1.7"
+          "Microsoft.Extensions.Logging.Abstractions": "8.0.0"
         },
         "runtime": {
           "lib/netstandard2.1/Novell.Directory.Ldap.NETStandard.dll": {
@@ -405,15 +436,9 @@
           }
         }
       },
-      "Npgsql/3.2.7": {
+      "Npgsql/8.0.3": {
         "dependencies": {
-          "System.Threading.Tasks.Extensions": "4.5.1"
-        },
-        "runtime": {
-          "lib/netstandard2.0/Npgsql.dll": {
-            "assemblyVersion": "3.2.7.0",
-            "fileVersion": "3.2.7.0"
-          }
+          "Microsoft.Extensions.Logging.Abstractions": "8.0.0"
         }
       },
       "NUglify/1.16.4": {
@@ -560,7 +585,7 @@
           "System.Runtime": "4.3.0"
         }
       },
-      "System.Diagnostics.DiagnosticSource/4.7.0": {},
+      "System.Diagnostics.DiagnosticSource/8.0.0": {},
       "System.Diagnostics.Tools/4.3.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "3.1.4",
@@ -649,15 +674,15 @@
           "System.Runtime.InteropServices": "4.3.0"
         }
       },
-      "System.IdentityModel.Tokens.Jwt/6.8.0": {
+      "System.IdentityModel.Tokens.Jwt/6.35.0": {
         "dependencies": {
-          "Microsoft.IdentityModel.JsonWebTokens": "6.8.0",
-          "Microsoft.IdentityModel.Tokens": "6.8.0"
+          "Microsoft.IdentityModel.JsonWebTokens": "6.35.0",
+          "Microsoft.IdentityModel.Tokens": "6.35.0"
         },
         "runtime": {
-          "lib/netstandard2.0/System.IdentityModel.Tokens.Jwt.dll": {
-            "assemblyVersion": "6.8.0.0",
-            "fileVersion": "6.8.0.11012"
+          "lib/net6.0/System.IdentityModel.Tokens.Jwt.dll": {
+            "assemblyVersion": "6.35.0.0",
+            "fileVersion": "6.35.0.41201"
           }
         }
       },
@@ -761,7 +786,7 @@
           "Microsoft.NETCore.Platforms": "3.1.4",
           "System.Collections": "4.3.0",
           "System.Diagnostics.Debug": "4.3.0",
-          "System.Diagnostics.DiagnosticSource": "4.7.0",
+          "System.Diagnostics.DiagnosticSource": "8.0.0",
           "System.Diagnostics.Tracing": "4.3.0",
           "System.Globalization": "4.3.0",
           "System.Globalization.Extensions": "4.3.0",
@@ -1109,6 +1134,8 @@
           "System.Text.Encoding": "4.3.0"
         }
       },
+      "System.Text.Encodings.Web/4.7.2": {},
+      "System.Text.Json/4.7.2": {},
       "System.Text.RegularExpressions/4.3.0": {
         "dependencies": {
           "System.Runtime": "4.3.0"
@@ -1188,168 +1215,6 @@
           "System.Threading": "4.3.0",
           "System.Xml.ReaderWriter": "4.3.0"
         }
-      },
-      "GeneXus.Programs.Common/1.0.0": {
-        "dependencies": {
-          "GeneXus.Classes.Web.Core": "1.26.1",
-          "GeneXus.PdfReportsCS.Core": "1.26.1",
-          "iTextSharp-LGPL": "4.1.6"
-        },
-        "runtime": {
-          "GeneXus.Programs.Common.dll": {}
-        }
-      },
-      "GeneXus/0.0.0.0": {
-        "runtime": {
-          "GeneXus.dll": {
-            "assemblyVersion": "0.0.0.0",
-            "fileVersion": "0.0.0.0"
-          }
-        }
-      },
-      "GeneXus.Security.API.Common/0.0.0.0": {
-        "runtime": {
-          "GeneXus.Security.API.Common.dll": {
-            "assemblyVersion": "0.0.0.0",
-            "fileVersion": "0.0.0.0"
-          }
-        }
-      },
-      "GeneXusSecurity/1.0.0.0": {
-        "runtime": {
-          "GeneXusSecurity.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        }
-      },
-      "GeneXusSecurityCommon/1.0.0.0": {
-        "runtime": {
-          "GeneXusSecurityCommon.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        }
-      },
-      "GeneXus.Security/1.0.0.0": {
-        "runtime": {
-          "GeneXus.Security.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        }
-      },
-      "GxMaps/1.0.0.0": {
-        "runtime": {
-          "GxMaps.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.26.1.0"
-          }
-        }
-      },
-      "GXzip/1.0.0.0": {
-        "runtime": {
-          "GXzip.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        }
-      },
-      "Artech.Security.API.DynamicCall/1.0.0.0": {
-        "runtime": {
-          "Artech.Security.API.DynamicCall.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        }
-      },
-      "GeneXus.Security.API.TOTP/1.0.0.0": {
-        "runtime": {
-          "GeneXus.Security.API.TOTP.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        }
-      },
-      "Artech.Security.API.OAuthLib/1.0.0.0": {
-        "runtime": {
-          "Artech.Security.API.OAuthLib.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        }
-      },
-      "Artech.Security.API.Cryptography/1.0.0.0": {
-        "runtime": {
-          "Artech.Security.API.Cryptography.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        }
-      },
-      "agamapi/0.0.0.0": {
-        "runtime": {
-          "agamapi.dll": {
-            "assemblyVersion": "0.0.0.0",
-            "fileVersion": "0.0.0.0"
-          }
-        }
-      },
-      "GxMail/1.0.0.0": {
-        "runtime": {
-          "GxMail.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.26.1.0"
-          }
-        }
-      },
-      "MailKit/3.1.0.0": {
-        "runtime": {
-          "MailKit.dll": {
-            "assemblyVersion": "3.1.0.0",
-            "fileVersion": "3.1.1.0"
-          }
-        }
-      },
-      "MimeKit/3.1.0.0": {
-        "runtime": {
-          "MimeKit.dll": {
-            "assemblyVersion": "3.1.0.0",
-            "fileVersion": "3.1.1.0"
-          }
-        }
-      },
-      "OpenPop/2.0.6.2": {
-        "runtime": {
-          "OpenPop.dll": {
-            "assemblyVersion": "2.0.6.2",
-            "fileVersion": "2.0.6.2"
-          }
-        }
-      },
-      "Microsoft.Exchange.WebServices/15.0.0.0": {
-        "runtime": {
-          "Microsoft.Exchange.WebServices.dll": {
-            "assemblyVersion": "15.0.0.0",
-            "fileVersion": "15.0.913.15"
-          }
-        }
-      },
-      "Org.Mentalis.Security/1.0.13.715": {
-        "runtime": {
-          "Org.Mentalis.Security.dll": {
-            "assemblyVersion": "1.0.13.715",
-            "fileVersion": "1.0.13.715"
-          }
-        }
-      },
-      "System.Security.Cryptography.Pkcs/6.0.0.0": {
-        "runtime": {
-          "System.Security.Cryptography.Pkcs.dll": {
-            "assemblyVersion": "6.0.0.0",
-            "fileVersion": "6.0.1823.26907"
-          }
-        }
       }
     }
   },
@@ -1366,68 +1231,54 @@
       "path": "experimental.system.messaging.signed/1.0.0",
       "hashPath": "experimental.system.messaging.signed.1.0.0.nupkg.sha512"
     },
-    "GeneXus.Classes.Core/1.26.1": {
+    "GeneXus.Classes.Core/1.30.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-1KG7aQrSgcNPu9sRGtm1yWFHQQewdsh/efFjhQ0vBkhG7o24IpL0Ewzrivt5R/qiRuqYhvxqgwDo4cPoFd0V7w==",
-      "path": "genexus.classes.core/1.26.1",
-      "hashPath": "genexus.classes.core.1.26.1.nupkg.sha512"
+      "sha512": "sha512-s4/+J+NNBlCxVf6CZwqN3X7BurCHX3mOlx+7CB+Sb2xhhINPVaLsI0ny30XQavIQgXWo84AKdVKnH47tR6124A==",
+      "path": "genexus.classes.core/1.30.0",
+      "hashPath": "genexus.classes.core.1.30.0.nupkg.sha512"
     },
-    "GeneXus.Classes.Web.Core/1.26.1": {
+    "GeneXus.Classes.Web.Core/1.30.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-RRh40X29d6l+sSpEB7AboDyCHsHnCHI5pnclPxME4rsfRc4/5Ty3DkVQX1QaDXfXkrb66BebzsOcg0h7S4CNrQ==",
-      "path": "genexus.classes.web.core/1.26.1",
-      "hashPath": "genexus.classes.web.core.1.26.1.nupkg.sha512"
+      "sha512": "sha512-Yn9o3Busj4ZJnRLoqCg/fRP9VRhQLLYaBv9Q15q7vrBIZDWHEybjcuyHJjdXzUo30gYJ3Gh80U31A7NPheaBVw==",
+      "path": "genexus.classes.web.core/1.30.0",
+      "hashPath": "genexus.classes.web.core.1.30.0.nupkg.sha512"
     },
-    "GeneXus.Cryptography/1.26.1": {
+    "GeneXus.Cryptography/1.30.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-fC69uuOEPF2AodUqCVHbmTbyhto0aK7O7D50nEvzbuwv43KtaAlqIP9eP0nVy9joSRqBnc1tL1ysOc48Uhoosg==",
-      "path": "genexus.cryptography/1.26.1",
-      "hashPath": "genexus.cryptography.1.26.1.nupkg.sha512"
+      "sha512": "sha512-uuPXS7M3ib2//Vjhn6auJpxcL3UbmifI5voZmOU3ZIn9jx5mKdKmq4EyZeDCvXz+HID6iw5y1xPLTiNIXIYsRg==",
+      "path": "genexus.cryptography/1.30.0",
+      "hashPath": "genexus.cryptography.1.30.0.nupkg.sha512"
     },
-    "GeneXus.Cryptography.Common/1.26.1": {
+    "GeneXus.Cryptography.Common/1.30.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-idDQADfurT0rUQ8jZsGWkLqj0qa3LZm7cvy7rMoOkPpPTG/OcO1fd+eIlQsVV+dh7vypXIv025qVvRy/zsK3fQ==",
-      "path": "genexus.cryptography.common/1.26.1",
-      "hashPath": "genexus.cryptography.common.1.26.1.nupkg.sha512"
+      "sha512": "sha512-OqCoeman/qqxr5KvqJ68eJigwhbaee5NgvrGgD+GLkiLVCcAHmn3nlFI/tQ+wD+rHVSKMQWrjc5d0ndIHilqCg==",
+      "path": "genexus.cryptography.common/1.30.0",
+      "hashPath": "genexus.cryptography.common.1.30.0.nupkg.sha512"
     },
-    "GeneXus.Encrypt/1.26.1": {
+    "GeneXus.Encrypt/1.30.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-1KxfK2+gAZ0zpou2r4+9HEIRhpF92Q2IaByrf495DK1zZ+RW6vOJ9I/PzeRzglcz0GoddH7Ubh69HuVkXyMFvQ==",
-      "path": "genexus.encrypt/1.26.1",
-      "hashPath": "genexus.encrypt.1.26.1.nupkg.sha512"
+      "sha512": "sha512-a9wRT8KmqMDk5QvZVqVeelnrR6LyL1GcXU/hA1fi+wUvefSWVN6QnGa5RGApFBS5++GJjrN2HzCX/BsFxA0b2g==",
+      "path": "genexus.encrypt/1.30.0",
+      "hashPath": "genexus.encrypt.1.30.0.nupkg.sha512"
     },
-    "GeneXus.PdfReportsCS.Core/1.26.1": {
+    "GeneXus.PdfReportsCS.Core/1.30.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-05vmMdzpmi2Nt3Cy/HeSkirER8zdR8r0Oo/qOsSlrfRcSzF5RPVT9v3ch8dF2T+jVGx5sPOgFX6Pd8mQc8q6kg==",
-      "path": "genexus.pdfreportscs.core/1.26.1",
-      "hashPath": "genexus.pdfreportscs.core.1.26.1.nupkg.sha512"
+      "sha512": "sha512-mMaSXOaaYT9oanhmLyy/huaI3OK+Bh4d7N6fi4n8r+eniRvpOVi46qaVKl1upLEsgExnQid2VG5n3inhfkI2LA==",
+      "path": "genexus.pdfreportscs.core/1.30.0",
+      "hashPath": "genexus.pdfreportscs.core.1.30.0.nupkg.sha512"
     },
-    "GeneXus.Xsl.Core/1.26.1": {
+    "GeneXus.Xsl.Core/1.30.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-0XyNFB+luIuurh8mFJN7/5hx12L0CLKitM+ARU7dLM8LQtuPp8oDvJ5pgBnkmO4DtKI+jgrQzTssgvqjKinr5g==",
-      "path": "genexus.xsl.core/1.26.1",
-      "hashPath": "genexus.xsl.core.1.26.1.nupkg.sha512"
-    },
-    "GeoAPI.Core/1.7.5": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-Dy/YkgZ1szgx+xbVWqMi+4++Fm6v3szbVdei1LKPRZ3meSvgNSMZxqhar5IAeaTj5LcUHLtLGdfyUtkjnYbg3A==",
-      "path": "geoapi.core/1.7.5",
-      "hashPath": "geoapi.core.1.7.5.nupkg.sha512"
-    },
-    "iTextSharp-LGPL/4.1.6": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-35STyoGKJOX1oTUWHOzn8/I1NXQMbkxKZfBsYwj8ZjOICVEZIi88wfOekQbYeU6MK0VOoZrMMO1e7KQVjJSIxQ==",
-      "path": "itextsharp-lgpl/4.1.6",
-      "hashPath": "itextsharp-lgpl.4.1.6.nupkg.sha512"
+      "sha512": "sha512-9M9ch4qiS99qgBKM50G8QJfE9WN57vpN0v7OIN+te9btpVGCodQJHl0FDi01OBDKb53uJaiigWWragKjzi9LiQ==",
+      "path": "genexus.xsl.core/1.30.0",
+      "hashPath": "genexus.xsl.core.1.30.0.nupkg.sha512"
     },
     "log4net/2.0.15": {
       "type": "package",
@@ -1443,12 +1294,12 @@
       "path": "microsoft.csharp/4.5.0",
       "hashPath": "microsoft.csharp.4.5.0.nupkg.sha512"
     },
-    "Microsoft.Data.SqlClient/2.1.2": {
+    "Microsoft.Data.SqlClient/2.1.7": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-FCR+H1Fs4908IZMBhCBiWbyqc7vTABkF2EF9S/TViCtE6Di0XN+WcKInWOVCfh5qLOQXswHD1b5A4i1d92ubgw==",
-      "path": "microsoft.data.sqlclient/2.1.2",
-      "hashPath": "microsoft.data.sqlclient.2.1.2.nupkg.sha512"
+      "sha512": "sha512-dSdlcXPszeOjjDX9a0buMFgYqKrI5bTxdSgX3JyCa+OL80NUstJSxOJr0j9oOn8mpP5PgWeRC2bVf/Zf2Cjv+g==",
+      "path": "microsoft.data.sqlclient/2.1.7",
+      "hashPath": "microsoft.data.sqlclient.2.1.7.nupkg.sha512"
     },
     "Microsoft.Data.SqlClient.SNI.runtime/2.1.1": {
       "type": "package",
@@ -1457,12 +1308,61 @@
       "path": "microsoft.data.sqlclient.sni.runtime/2.1.1",
       "hashPath": "microsoft.data.sqlclient.sni.runtime.2.1.1.nupkg.sha512"
     },
-    "Microsoft.Extensions.Logging.Abstractions/3.1.7": {
+    "Microsoft.Extensions.Configuration/8.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-oD7LQbMuaqq/yAz8PKX0hl4+H/vDFTQHo8rxbKB36P1/bG8FG7JUVKBoHkSt1MaJUtgyiHrH1AlAhaucKUKyEg==",
-      "path": "microsoft.extensions.logging.abstractions/3.1.7",
-      "hashPath": "microsoft.extensions.logging.abstractions.3.1.7.nupkg.sha512"
+      "sha512": "sha512-0J/9YNXTMWSZP2p2+nvl8p71zpSwokZXZuJW+VjdErkegAnFdO1XlqtA62SJtgVYHdKu3uPxJHcMR/r35HwFBA==",
+      "path": "microsoft.extensions.configuration/8.0.0",
+      "hashPath": "microsoft.extensions.configuration.8.0.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Configuration.Abstractions/8.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-3lE/iLSutpgX1CC0NOW70FJoGARRHbyKmG7dc0klnUZ9Dd9hS6N/POPWhKhMLCEuNN5nXEY5agmlFtH562vqhQ==",
+      "path": "microsoft.extensions.configuration.abstractions/8.0.0",
+      "hashPath": "microsoft.extensions.configuration.abstractions.8.0.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.DependencyInjection/8.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-V8S3bsm50ig6JSyrbcJJ8bW2b9QLGouz+G1miK3UTaOWmMtFwNNNzUf4AleyDWUmTrWMLNnFSLEQtxmxgNQnNQ==",
+      "path": "microsoft.extensions.dependencyinjection/8.0.0",
+      "hashPath": "microsoft.extensions.dependencyinjection.8.0.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.DependencyInjection.Abstractions/8.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-cjWrLkJXK0rs4zofsK4bSdg+jhDLTaxrkXu4gS6Y7MAlCvRyNNgwY/lJi5RDlQOnSZweHqoyvgvbdvQsRIW+hg==",
+      "path": "microsoft.extensions.dependencyinjection.abstractions/8.0.0",
+      "hashPath": "microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Logging/8.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-tvRkov9tAJ3xP51LCv3FJ2zINmv1P8Hi8lhhtcKGqM+ImiTCC84uOPEI4z8Cdq2C3o9e+Aa0Gw0rmrsJD77W+w==",
+      "path": "microsoft.extensions.logging/8.0.0",
+      "hashPath": "microsoft.extensions.logging.8.0.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Logging.Abstractions/8.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-arDBqTgFCyS0EvRV7O3MZturChstm50OJ0y9bDJvAcmEPJm0FFpFyjU/JLYyStNGGey081DvnQYlncNX5SJJGA==",
+      "path": "microsoft.extensions.logging.abstractions/8.0.0",
+      "hashPath": "microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Options/8.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-JOVOfqpnqlVLUzINQ2fox8evY2SKLYJ3BV8QDe/Jyp21u1T7r45x/R/5QdteURMR5r01GxeJSBBUOCOyaNXA3g==",
+      "path": "microsoft.extensions.options/8.0.0",
+      "hashPath": "microsoft.extensions.options.8.0.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Primitives/8.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-bXJEZrW9ny8vjMF1JV253WeLhpEVzFo1lyaZu1vQ4ZxWUlVvknZ/+ftFgVheLubb4eZPSwwxBeqS1JkCOjxd8g==",
+      "path": "microsoft.extensions.primitives/8.0.0",
+      "hashPath": "microsoft.extensions.primitives.8.0.0.nupkg.sha512"
     },
     "Microsoft.Identity.Client/4.21.1": {
       "type": "package",
@@ -1471,19 +1371,26 @@
       "path": "microsoft.identity.client/4.21.1",
       "hashPath": "microsoft.identity.client.4.21.1.nupkg.sha512"
     },
-    "Microsoft.IdentityModel.JsonWebTokens/6.8.0": {
+    "Microsoft.IdentityModel.Abstractions/6.35.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-+7JIww64PkMt7NWFxoe4Y/joeF7TAtA/fQ0b2GFGcagzB59sKkTt/sMZWR6aSZht5YC7SdHi3W6yM1yylRGJCQ==",
-      "path": "microsoft.identitymodel.jsonwebtokens/6.8.0",
-      "hashPath": "microsoft.identitymodel.jsonwebtokens.6.8.0.nupkg.sha512"
+      "sha512": "sha512-xuR8E4Rd96M41CnUSCiOJ2DBh+z+zQSmyrYHdYhD6K4fXBcQGVnRCFQ0efROUYpP+p0zC1BLKr0JRpVuujTZSg==",
+      "path": "microsoft.identitymodel.abstractions/6.35.0",
+      "hashPath": "microsoft.identitymodel.abstractions.6.35.0.nupkg.sha512"
     },
-    "Microsoft.IdentityModel.Logging/6.8.0": {
+    "Microsoft.IdentityModel.JsonWebTokens/6.35.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Rfh/p4MaN4gkmhPxwbu8IjrmoDncGfHHPh1sTnc0AcM/Oc39/fzC9doKNWvUAjzFb8LqA6lgZyblTrIsX/wDXg==",
-      "path": "microsoft.identitymodel.logging/6.8.0",
-      "hashPath": "microsoft.identitymodel.logging.6.8.0.nupkg.sha512"
+      "sha512": "sha512-9wxai3hKgZUb4/NjdRKfQd0QJvtXKDlvmGMYACbEC8DFaicMFCFhQFZq9ZET1kJLwZahf2lfY5Gtcpsx8zYzbg==",
+      "path": "microsoft.identitymodel.jsonwebtokens/6.35.0",
+      "hashPath": "microsoft.identitymodel.jsonwebtokens.6.35.0.nupkg.sha512"
+    },
+    "Microsoft.IdentityModel.Logging/6.35.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-jePrSfGAmqT81JDCNSY+fxVWoGuJKt9e6eJ+vT7+quVS55nWl//jGjUQn4eFtVKt4rt5dXaleZdHRB9J9AJZ7Q==",
+      "path": "microsoft.identitymodel.logging/6.35.0",
+      "hashPath": "microsoft.identitymodel.logging.6.35.0.nupkg.sha512"
     },
     "Microsoft.IdentityModel.Protocols/6.8.0": {
       "type": "package",
@@ -1499,12 +1406,12 @@
       "path": "microsoft.identitymodel.protocols.openidconnect/6.8.0",
       "hashPath": "microsoft.identitymodel.protocols.openidconnect.6.8.0.nupkg.sha512"
     },
-    "Microsoft.IdentityModel.Tokens/6.8.0": {
+    "Microsoft.IdentityModel.Tokens/6.35.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-gTqzsGcmD13HgtNePPcuVHZ/NXWmyV+InJgalW/FhWpII1D7V1k0obIseGlWMeA4G+tZfeGMfXr0klnWbMR/mQ==",
-      "path": "microsoft.identitymodel.tokens/6.8.0",
-      "hashPath": "microsoft.identitymodel.tokens.6.8.0.nupkg.sha512"
+      "sha512": "sha512-RN7lvp7s3Boucg1NaNAbqDbxtlLj5Qeb+4uSS1TeK5FSBVM40P4DKaTKChT43sHyKfh7V0zkrMph6DdHvyA4bg==",
+      "path": "microsoft.identitymodel.tokens/6.35.0",
+      "hashPath": "microsoft.identitymodel.tokens.6.35.0.nupkg.sha512"
     },
     "Microsoft.NETCore.Platforms/3.1.4": {
       "type": "package",
@@ -1562,13 +1469,6 @@
       "path": "nettopologysuite/2.0.0",
       "hashPath": "nettopologysuite.2.0.0.nupkg.sha512"
     },
-    "NetTopologySuite.Core/1.15.3": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-PvO7lSWjzaazm1m9fYBZkxAtXSkF+t9jneGyyMxKQ/4lso2RzZWrBO0KWeA5Zp8IWoI1Ar/jTodYmC5Nbwo4xw==",
-      "path": "nettopologysuite.core/1.15.3",
-      "hashPath": "nettopologysuite.core.1.15.3.nupkg.sha512"
-    },
     "NodaTime/3.1.9": {
       "type": "package",
       "serviceable": true,
@@ -1583,12 +1483,12 @@
       "path": "novell.directory.ldap.netstandard/3.3.1",
       "hashPath": "novell.directory.ldap.netstandard.3.3.1.nupkg.sha512"
     },
-    "Npgsql/3.2.7": {
+    "Npgsql/8.0.3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-CxSXzWn/MNbHX8L1xfQSzrZfJEA2Yt5cvT27Az5abmvbqtUY1ab6xAkmBj5FfLyKCIYEnmSrxn1IY1+Jy13oFA==",
-      "path": "npgsql/3.2.7",
-      "hashPath": "npgsql.3.2.7.nupkg.sha512"
+      "sha512": "sha512-6WEmzsQJCZAlUG1pThKg/RmeF6V+I0DmBBBE/8YzpRtEzhyZzKcK7ulMANDm5CkxrALBEC8H+5plxHWtIL7xnA==",
+      "path": "npgsql/8.0.3",
+      "hashPath": "npgsql.8.0.3.nupkg.sha512"
     },
     "NUglify/1.16.4": {
       "type": "package",
@@ -1779,12 +1679,12 @@
       "path": "system.diagnostics.debug/4.3.0",
       "hashPath": "system.diagnostics.debug.4.3.0.nupkg.sha512"
     },
-    "System.Diagnostics.DiagnosticSource/4.7.0": {
+    "System.Diagnostics.DiagnosticSource/8.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-oJjw3uFuVDJiJNbCD8HB4a2p3NYLdt1fiT5OGsPLw+WTOuG0KpP4OXelMmmVKpClueMsit6xOlzy4wNKQFiBLg==",
-      "path": "system.diagnostics.diagnosticsource/4.7.0",
-      "hashPath": "system.diagnostics.diagnosticsource.4.7.0.nupkg.sha512"
+      "sha512": "sha512-c9xLpVz6PL9lp/djOWtk5KPDZq3cSYpmXoJQY524EOtuFl5z9ZtsotpsyrDW40U1DRnQSYvcPKEUV0X//u6gkQ==",
+      "path": "system.diagnostics.diagnosticsource/8.0.0",
+      "hashPath": "system.diagnostics.diagnosticsource.8.0.0.nupkg.sha512"
     },
     "System.Diagnostics.Tools/4.3.0": {
       "type": "package",
@@ -1835,12 +1735,12 @@
       "path": "system.globalization.extensions/4.3.0",
       "hashPath": "system.globalization.extensions.4.3.0.nupkg.sha512"
     },
-    "System.IdentityModel.Tokens.Jwt/6.8.0": {
+    "System.IdentityModel.Tokens.Jwt/6.35.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-5tBCjAub2Bhd5qmcd0WhR5s354e4oLYa//kOWrkX+6/7ZbDDJjMTfwLSOiZ/MMpWdE4DWPLOfTLOq/juj9CKzA==",
-      "path": "system.identitymodel.tokens.jwt/6.8.0",
-      "hashPath": "system.identitymodel.tokens.jwt.6.8.0.nupkg.sha512"
+      "sha512": "sha512-yxGIQd3BFK7F6S62/7RdZk3C/mfwyVxvh6ngd1VYMBmbJ1YZZA9+Ku6suylVtso0FjI0wbElpJ0d27CdsyLpBQ==",
+      "path": "system.identitymodel.tokens.jwt/6.35.0",
+      "hashPath": "system.identitymodel.tokens.jwt.6.35.0.nupkg.sha512"
     },
     "System.IO/4.3.0": {
       "type": "package",
@@ -2143,6 +2043,20 @@
       "path": "system.text.encoding.extensions/4.3.0",
       "hashPath": "system.text.encoding.extensions.4.3.0.nupkg.sha512"
     },
+    "System.Text.Encodings.Web/4.7.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-iTUgB/WtrZ1sWZs84F2hwyQhiRH6QNjQv2DkwrH+WP6RoFga2Q1m3f9/Q7FG8cck8AdHitQkmkXSY8qylcDmuA==",
+      "path": "system.text.encodings.web/4.7.2",
+      "hashPath": "system.text.encodings.web.4.7.2.nupkg.sha512"
+    },
+    "System.Text.Json/4.7.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-TcMd95wcrubm9nHvJEQs70rC0H/8omiSGGpU4FQ/ZA1URIqD4pjmFJh2Mfv1yH1eHgJDWTi2hMDXwTET+zOOyg==",
+      "path": "system.text.json/4.7.2",
+      "hashPath": "system.text.json.4.7.2.nupkg.sha512"
+    },
     "System.Text.RegularExpressions/4.3.0": {
       "type": "package",
       "serviceable": true,
@@ -2198,106 +2112,6 @@
       "sha512": "sha512-5zJ0XDxAIg8iy+t4aMnQAu0MqVbqyvfoUVl1yDV61xdo3Vth45oA2FoY4pPkxYAH5f8ixpmTqXeEIya95x0aCQ==",
       "path": "system.xml.xdocument/4.3.0",
       "hashPath": "system.xml.xdocument.4.3.0.nupkg.sha512"
-    },
-    "GeneXus.Programs.Common/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "GeneXus/0.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "GeneXus.Security.API.Common/0.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "GeneXusSecurity/1.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "GeneXusSecurityCommon/1.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "GeneXus.Security/1.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "GxMaps/1.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "GXzip/1.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Artech.Security.API.DynamicCall/1.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "GeneXus.Security.API.TOTP/1.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Artech.Security.API.OAuthLib/1.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Artech.Security.API.Cryptography/1.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "agamapi/0.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "GxMail/1.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "MailKit/3.1.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "MimeKit/3.1.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "OpenPop/2.0.6.2": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Microsoft.Exchange.WebServices/15.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Org.Mentalis.Security/1.0.13.715": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "System.Security.Cryptography.Pkcs/6.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
     }
   }
 }

@@ -54,7 +54,7 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
          this.AV10WWPSubscriptionEntityRecordId = aP3_WWPSubscriptionEntityRecordId;
          this.AV11WWPSubscriptionEntityRecordDescription = aP4_WWPSubscriptionEntityRecordDescription;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_WWPSubscriptionId=this.AV8WWPSubscriptionId;
       }
 
@@ -64,33 +64,16 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
                                  string aP3_WWPSubscriptionEntityRecordId ,
                                  string aP4_WWPSubscriptionEntityRecordDescription )
       {
-         wwp_userupdatesubscription objwwp_userupdatesubscription;
-         objwwp_userupdatesubscription = new wwp_userupdatesubscription();
-         objwwp_userupdatesubscription.AV12Subscribe = aP0_Subscribe;
-         objwwp_userupdatesubscription.AV8WWPSubscriptionId = aP1_WWPSubscriptionId;
-         objwwp_userupdatesubscription.AV9WWPNotificationDefinitionId = aP2_WWPNotificationDefinitionId;
-         objwwp_userupdatesubscription.AV10WWPSubscriptionEntityRecordId = aP3_WWPSubscriptionEntityRecordId;
-         objwwp_userupdatesubscription.AV11WWPSubscriptionEntityRecordDescription = aP4_WWPSubscriptionEntityRecordDescription;
-         objwwp_userupdatesubscription.context.SetSubmitInitialConfig(context);
-         objwwp_userupdatesubscription.initialize();
-         Submit( executePrivateCatch,objwwp_userupdatesubscription);
+         this.AV12Subscribe = aP0_Subscribe;
+         this.AV8WWPSubscriptionId = aP1_WWPSubscriptionId;
+         this.AV9WWPNotificationDefinitionId = aP2_WWPNotificationDefinitionId;
+         this.AV10WWPSubscriptionEntityRecordId = aP3_WWPSubscriptionEntityRecordId;
+         this.AV11WWPSubscriptionEntityRecordDescription = aP4_WWPSubscriptionEntityRecordDescription;
+         SubmitImpl();
          aP1_WWPSubscriptionId=this.AV8WWPSubscriptionId;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwp_userupdatesubscription)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -124,7 +107,7 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
                S111 ();
                if ( returnInSub )
                {
-                  this.cleanup();
+                  cleanup();
                   if (true) return;
                }
             }
@@ -141,7 +124,7 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
                   S111 ();
                   if ( returnInSub )
                   {
-                     this.cleanup();
+                     cleanup();
                      if (true) return;
                   }
                }
@@ -151,7 +134,7 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
          {
             context.CommitDataStores("wwpbaseobjects.subscriptions.wwp_userupdatesubscription",pr_default);
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void S111( )
@@ -172,16 +155,12 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -209,9 +188,9 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private long aP1_WWPSubscriptionId ;
+      private GeneXus.Programs.wwpbaseobjects.subscriptions.SdtWWP_Subscription AV13WWPSubscription ;
       private IDataStoreProvider pr_default ;
       private IDataStoreProvider pr_gam ;
-      private GeneXus.Programs.wwpbaseobjects.subscriptions.SdtWWP_Subscription AV13WWPSubscription ;
    }
 
    public class wwp_userupdatesubscription__gam : DataStoreHelperBase, IDataStoreHelper

@@ -1,7 +1,7 @@
 /*
 				   File: type_SdtWWP_AIChatCompletionResponse_choicesItem
 			Description: choices
-				 Author: Nemo 🐠 for C# (.NET) version 18.0.6.177934
+				 Author: Nemo 🐠 for C# (.NET) version 18.0.10.184260
 		   Program type: Callable routine
 			  Main DBMS: 
 */
@@ -152,6 +152,14 @@ namespace GeneXus.Programs.workwithplus.ai
 
 		#endregion
 
+		#region Static Type Properties
+
+		[XmlIgnore]
+		private static GXTypeInfo _typeProps;
+		protected override GXTypeInfo TypeInfo { get { return _typeProps; } set { _typeProps = value; } }
+
+		#endregion
+
 		#region Initialization
 
 		public void initialize( )
@@ -181,6 +189,7 @@ namespace GeneXus.Programs.workwithplus.ai
 		#endregion
 	}
 	#region Rest interface
+	[GxJsonSerialization("wrapped")]
 	[DataContract(Name=@"WWP_AIChatCompletionResponse.choicesItem", Namespace="YTT_version4")]
 	public class SdtWWP_AIChatCompletionResponse_choicesItem_RESTInterface : GxGenericCollectionItem<SdtWWP_AIChatCompletionResponse_choicesItem>, System.Web.SessionState.IRequiresSessionState
 	{

@@ -43,11 +43,11 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
       public void execute( ref long aP0_WWPNotificationId )
       {
          this.AV7WWPNotificationId = aP0_WWPNotificationId;
-         executePrivate();
+         ExecuteImpl();
          aP0_WWPNotificationId=this.AV7WWPNotificationId;
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -155,11 +155,8 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITWEB( ) ;
          if ( ! isAjaxCallMode( ) )
          {
@@ -190,7 +187,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override short ExecuteStartEvent( )
@@ -234,18 +231,18 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
          CloseStyles();
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
             enableOutput();
          }
-         context.AddJavascriptSource("calendar.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("calendar-setup.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("calendar-en.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("calendar.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("calendar-setup.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("calendar-en.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.WriteHtmlText( Form.Headerrawhtml) ;
          context.CloseHtmlHeader();
          if ( context.isSpaRequest( ) )
@@ -418,11 +415,12 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
             /* Attribute/Variable Label */
             GxWebStd.gx_label_element( context, edtWWPNotificationTitle_Internalname, "Notification Title", "gx-form-item SimpleCardAttributeTitleLabel", 0, true, "width: 25%;");
             /* Multiple line edit */
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 22,'',false,'',0)\"";
             ClassString = "SimpleCardAttributeTitle";
             StyleString = "";
             ClassString = "SimpleCardAttributeTitle";
             StyleString = "";
-            GxWebStd.gx_html_textarea( context, edtWWPNotificationTitle_Internalname, A77WWPNotificationTitle, "", "", 0, 1, edtWWPNotificationTitle_Enabled, 0, 80, "chr", 3, "row", 0, StyleString, ClassString, "", "", "200", -1, 0, "", "", -1, true, "", "'"+""+"'"+",false,"+"'"+""+"'", 0, "", "HLP_WWPBaseObjects/Notifications/Common/WWP_VisualizeNotification.htm");
+            GxWebStd.gx_html_textarea( context, edtWWPNotificationTitle_Internalname, A77WWPNotificationTitle, "", TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,22);\"", 0, 1, edtWWPNotificationTitle_Enabled, 0, 80, "chr", 3, "row", 0, StyleString, ClassString, "", "", "200", -1, 0, "", "", -1, true, "", "'"+""+"'"+",false,"+"'"+""+"'", 0, "", "HLP_WWPBaseObjects/Notifications/Common/WWP_VisualizeNotification.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
@@ -432,8 +430,9 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
             /* Attribute/Variable Label */
             GxWebStd.gx_label_element( context, edtWWPNotificationCreated_Internalname, "Notification Created Date", "gx-form-item NotificationItemDatetimeLabel", 0, true, "width: 25%;");
             /* Single line edit */
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 25,'',false,'',0)\"";
             context.WriteHtmlText( "<div id=\""+edtWWPNotificationCreated_Internalname+"_dp_container\" class=\"dp_container\" style=\"white-space:nowrap;display:inline;\">") ;
-            GxWebStd.gx_single_line_edit( context, edtWWPNotificationCreated_Internalname, context.localUtil.TToC( A24WWPNotificationCreated, 10, 12, 1, 3, "/", ":", " "), context.localUtil.Format( A24WWPNotificationCreated, "99/99/9999 99:99:99.999"), "", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtWWPNotificationCreated_Jsonclick, 0, "NotificationItemDatetime", "", "", "", "", 1, edtWWPNotificationCreated_Enabled, 0, "text", "", 27, "chr", 1, "row", 27, 0, 0, 0, 0, -1, 0, true, "WWPBaseObjects\\WWP_DateTimeMillis", "end", false, "", "HLP_WWPBaseObjects/Notifications/Common/WWP_VisualizeNotification.htm");
+            GxWebStd.gx_single_line_edit( context, edtWWPNotificationCreated_Internalname, context.localUtil.TToC( A24WWPNotificationCreated, 10, 12, 1, 3, "/", ":", " "), context.localUtil.Format( A24WWPNotificationCreated, "99/99/9999 99:99:99.999"), TempTags+" onchange=\""+"gx.date.valid_date(this, 10,'DMY',12,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 10,'DMY',12,12,'eng',false,0);"+";gx.evt.onblur(this,25);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtWWPNotificationCreated_Jsonclick, 0, "NotificationItemDatetime", "", "", "", "", 1, edtWWPNotificationCreated_Enabled, 0, "text", "", 27, "chr", 1, "row", 27, 0, 0, 0, 0, -1, 0, true, "WWPBaseObjects\\WWP_DateTimeMillis", "end", false, "", "HLP_WWPBaseObjects/Notifications/Common/WWP_VisualizeNotification.htm");
             GxWebStd.gx_bitmap( context, edtWWPNotificationCreated_Internalname+"_dp_trigger", context.GetImagePath( "61b9b5d3-dff6-4d59-9b00-da61bc2cbe93", "", context.GetTheme( )), "", "", "", "", ((1==0)||(edtWWPNotificationCreated_Enabled==0) ? 0 : 1), 0, "Date selector", "Date selector", 0, 1, 0, "", 0, "", 0, 0, 0, "", "", "cursor: pointer;", "", "", "", "", "", "", "", "", 1, false, false, "", "HLP_WWPBaseObjects/Notifications/Common/WWP_VisualizeNotification.htm");
             context.WriteHtmlTextNl( "</div>") ;
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -455,11 +454,12 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
             /* Attribute/Variable Label */
             GxWebStd.gx_label_element( context, edtWWPNotificationShortDescriptio_Internalname, "Notification Short Description", "col-sm-3 CardNotificationAttributeDescriptionLabel", 0, true, "");
             /* Multiple line edit */
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 31,'',false,'',0)\"";
             ClassString = "CardNotificationAttributeDescription";
             StyleString = "";
             ClassString = "CardNotificationAttributeDescription";
             StyleString = "";
-            GxWebStd.gx_html_textarea( context, edtWWPNotificationShortDescriptio_Internalname, A78WWPNotificationShortDescriptio, "", "", 0, 1, edtWWPNotificationShortDescriptio_Enabled, 0, 80, "chr", 3, "row", 0, StyleString, ClassString, "", "", "200", -1, 0, "", "", -1, true, "", "'"+""+"'"+",false,"+"'"+""+"'", 0, "", "HLP_WWPBaseObjects/Notifications/Common/WWP_VisualizeNotification.htm");
+            GxWebStd.gx_html_textarea( context, edtWWPNotificationShortDescriptio_Internalname, A78WWPNotificationShortDescriptio, "", TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,31);\"", 0, 1, edtWWPNotificationShortDescriptio_Enabled, 0, 80, "chr", 3, "row", 0, StyleString, ClassString, "", "", "200", -1, 0, "", "", -1, true, "", "'"+""+"'"+",false,"+"'"+""+"'", 0, "", "HLP_WWPBaseObjects/Notifications/Common/WWP_VisualizeNotification.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -489,7 +489,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
          {
             if ( context.ExposeMetadata( ) )
             {
-               Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+               Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
             }
          }
          Form.Meta.addItem("description", "Visualize one notification", 0) ;
@@ -848,7 +848,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
          PA242( ) ;
          WS242( ) ;
          WE242( ) ;
-         this.cleanup();
+         cleanup();
          context.SetWrapped(false);
          context.GX_msglist = BackMsgLst;
          return "";
@@ -870,7 +870,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202481416562437", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202491613182319", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -886,7 +886,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wwpbaseobjects/notifications/common/wwp_visualizenotification.js", "?202481416562437", false, true);
+         context.AddJavascriptSource("wwpbaseobjects/notifications/common/wwp_visualizenotification.js", "?202491613182320", false, true);
          /* End function include_jscripts */
       }
 
@@ -944,25 +944,18 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'AV7WWPNotificationId',fld:'vWWPNOTIFICATIONID',pic:'ZZZZZZZZZ9'}]");
-         setEventMetadata("REFRESH",",oparms:[]}");
-         setEventMetadata("'DOMARKASREAD'","{handler:'E12242',iparms:[{av:'AV7WWPNotificationId',fld:'vWWPNOTIFICATIONID',pic:'ZZZZZZZZZ9'}]");
-         setEventMetadata("'DOMARKASREAD'",",oparms:[]}");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"AV7WWPNotificationId","fld":"vWWPNOTIFICATIONID","pic":"ZZZZZZZZZ9"}]}""");
+         setEventMetadata("'DOMARKASREAD'","""{"handler":"E12242","iparms":[{"av":"AV7WWPNotificationId","fld":"vWWPNOTIFICATIONID","pic":"ZZZZZZZZZ9"}]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -977,6 +970,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
          Form = new GXWebForm();
          sPrefix = "";
          lblNotificationitemicon_Jsonclick = "";
+         TempTags = "";
          ClassString = "";
          StyleString = "";
          A77WWPNotificationTitle = "";
@@ -987,7 +981,6 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
          EvtGridId = "";
          EvtRowId = "";
          sEvtType = "";
-         scmdbuf = "";
          H00242_A22WWPNotificationId = new long[1] ;
          H00242_A82WWPNotificationIsRead = new bool[] {false} ;
          H00242_A78WWPNotificationShortDescriptio = new string[] {""} ;
@@ -1023,7 +1016,6 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
       private short nIsMod_3 ;
       private short nGotPars ;
       private short GxWebError ;
-      private short initialized ;
       private short gxajaxcallmode ;
       private short wbEnd ;
       private short wbStart ;
@@ -1055,6 +1047,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
       private string divTablecontent_Internalname ;
       private string divUnnamedtable2_Internalname ;
       private string edtWWPNotificationTitle_Internalname ;
+      private string TempTags ;
       private string ClassString ;
       private string StyleString ;
       private string edtWWPNotificationCreated_Internalname ;
@@ -1068,7 +1061,6 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
       private string EvtGridId ;
       private string EvtRowId ;
       private string sEvtType ;
-      private string scmdbuf ;
       private string A7WWPUserExtendedId ;
       private DateTime A24WWPNotificationCreated ;
       private bool entryPointCalled ;
@@ -1085,6 +1077,8 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
       private string A77WWPNotificationTitle ;
       private string A78WWPNotificationShortDescriptio ;
       private string A79WWPNotificationLink ;
+      private IGxSession AV8WebSession ;
+      private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private long aP0_WWPNotificationId ;
@@ -1100,11 +1094,9 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
       private string[] H00243_A79WWPNotificationLink ;
       private string[] H00243_A60WWPNotificationMetadata ;
       private bool[] H00243_n60WWPNotificationMetadata ;
+      private GeneXus.Programs.wwpbaseobjects.notifications.common.SdtWWP_SDTNotificationMetadata AV9WWPNotificationMetadataSDT ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
-      private IGxSession AV8WebSession ;
-      private GXWebForm Form ;
-      private GeneXus.Programs.wwpbaseobjects.notifications.common.SdtWWP_SDTNotificationMetadata AV9WWPNotificationMetadataSDT ;
    }
 
    public class wwp_visualizenotification__default : DataStoreHelperBase, IDataStoreHelper

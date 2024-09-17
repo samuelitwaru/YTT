@@ -39,36 +39,19 @@ namespace GeneXus.Programs.wwpbaseobjects {
       public void execute( )
       {
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
       public void executeSubmit( )
       {
-         wwp_logger objwwp_logger;
-         objwwp_logger = new wwp_logger();
-         objwwp_logger.context.SetSubmitInitialConfig(context);
-         objwwp_logger.initialize();
-         Submit( executePrivateCatch,objwwp_logger);
+         SubmitImpl();
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwp_logger)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
-         this.cleanup();
+         cleanup();
       }
 
       public void gxep_debug( string aP0_Topic ,
@@ -83,12 +66,12 @@ namespace GeneXus.Programs.wwpbaseobjects {
          if ( returnInSub )
          {
             returnInSub = true;
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          new GeneXus.Core.genexus.common.SdtLog(context).debug(AV8FormattedMessage, StringUtil.Trim( AV10Topic)) ;
-         executePrivate();
-         this.cleanup();
+         ExecuteImpl();
+         cleanup();
       }
 
       public void gxep_info( string aP0_Topic ,
@@ -103,12 +86,12 @@ namespace GeneXus.Programs.wwpbaseobjects {
          if ( returnInSub )
          {
             returnInSub = true;
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          new GeneXus.Core.genexus.common.SdtLog(context).info(AV8FormattedMessage, StringUtil.Trim( AV10Topic)) ;
-         executePrivate();
-         this.cleanup();
+         ExecuteImpl();
+         cleanup();
       }
 
       public void gxep_warning( string aP0_Topic ,
@@ -123,12 +106,12 @@ namespace GeneXus.Programs.wwpbaseobjects {
          if ( returnInSub )
          {
             returnInSub = true;
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          new GeneXus.Core.genexus.common.SdtLog(context).warning(AV8FormattedMessage, StringUtil.Trim( AV10Topic)) ;
-         executePrivate();
-         this.cleanup();
+         ExecuteImpl();
+         cleanup();
       }
 
       public void gxep_error( string aP0_Topic ,
@@ -143,12 +126,12 @@ namespace GeneXus.Programs.wwpbaseobjects {
          if ( returnInSub )
          {
             returnInSub = true;
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          new GeneXus.Core.genexus.common.SdtLog(context).error(AV8FormattedMessage, StringUtil.Trim( AV10Topic)) ;
-         executePrivate();
-         this.cleanup();
+         ExecuteImpl();
+         cleanup();
       }
 
       protected void S111( )
@@ -180,16 +163,12 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )

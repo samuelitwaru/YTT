@@ -47,10 +47,10 @@ namespace GeneXus.Programs {
       public void execute( long aP0_WorkHourLogId )
       {
          this.A118WorkHourLogId = aP0_WorkHourLogId;
-         executePrivate();
+         ExecuteImpl();
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -161,11 +161,8 @@ namespace GeneXus.Programs {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITWEB( ) ;
          if ( ! isAjaxCallMode( ) )
          {
@@ -210,7 +207,7 @@ namespace GeneXus.Programs {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void RenderHtmlHeaders( )
@@ -241,18 +238,18 @@ namespace GeneXus.Programs {
          }
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
             enableOutput();
          }
-         context.AddJavascriptSource("calendar.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("calendar-setup.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("calendar-en.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("calendar.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("calendar-setup.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("calendar-en.js", "?"+context.GetBuildNumber( 1918140), false, true);
          if ( StringUtil.Len( sPrefix) == 0 )
          {
             context.CloseHtmlHeader();
@@ -442,7 +439,8 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
             /* Single line edit */
-            GxWebStd.gx_single_line_edit( context, edtWorkHourLogId_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(A118WorkHourLogId), 10, 0, ".", "")), StringUtil.LTrim( ((edtWorkHourLogId_Enabled!=0) ? context.localUtil.Format( (decimal)(A118WorkHourLogId), "ZZZZZZZZZ9") : context.localUtil.Format( (decimal)(A118WorkHourLogId), "ZZZZZZZZZ9"))), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtWorkHourLogId_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtWorkHourLogId_Enabled, 0, "text", "1", 10, "chr", 1, "row", 10, 0, 0, 0, 0, -1, 0, true, "Id", "end", false, "", "HLP_WorkHourLogGeneral.htm");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 14,'" + sPrefix + "',false,'',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtWorkHourLogId_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(A118WorkHourLogId), 10, 0, ".", "")), StringUtil.LTrim( ((edtWorkHourLogId_Enabled!=0) ? context.localUtil.Format( (decimal)(A118WorkHourLogId), "ZZZZZZZZZ9") : context.localUtil.Format( (decimal)(A118WorkHourLogId), "ZZZZZZZZZ9"))), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+TempTags+" onchange=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onblur(this,14);\"", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtWorkHourLogId_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtWorkHourLogId_Enabled, 0, "text", "1", 10, "chr", 1, "row", 10, 0, 0, 0, 0, -1, 0, true, "Id", "end", false, "", "HLP_WorkHourLogGeneral.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -455,8 +453,9 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
             /* Single line edit */
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 18,'" + sPrefix + "',false,'',0)\"";
             context.WriteHtmlText( "<div id=\""+edtWorkHourLogDate_Internalname+"_dp_container\" class=\"dp_container\" style=\"white-space:nowrap;display:inline;\">") ;
-            GxWebStd.gx_single_line_edit( context, edtWorkHourLogDate_Internalname, context.localUtil.Format(A119WorkHourLogDate, "99/99/99"), context.localUtil.Format( A119WorkHourLogDate, "99/99/99"), "", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtWorkHourLogDate_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtWorkHourLogDate_Enabled, 0, "text", "", 8, "chr", 1, "row", 8, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_WorkHourLogGeneral.htm");
+            GxWebStd.gx_single_line_edit( context, edtWorkHourLogDate_Internalname, context.localUtil.Format(A119WorkHourLogDate, "99/99/99"), context.localUtil.Format( A119WorkHourLogDate, "99/99/99"), TempTags+" onchange=\""+"gx.date.valid_date(this, 8,'DMY',0,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 8,'DMY',0,12,'eng',false,0);"+";gx.evt.onblur(this,18);\"", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtWorkHourLogDate_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtWorkHourLogDate_Enabled, 0, "text", "", 8, "chr", 1, "row", 8, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_WorkHourLogGeneral.htm");
             GxWebStd.gx_bitmap( context, edtWorkHourLogDate_Internalname+"_dp_trigger", context.GetImagePath( "61b9b5d3-dff6-4d59-9b00-da61bc2cbe93", "", context.GetTheme( )), "", "", "", "", ((1==0)||(edtWorkHourLogDate_Enabled==0) ? 0 : 1), 0, "Date selector", "Date selector", 0, 1, 0, "", 0, "", 0, 0, 0, "", "", "cursor: pointer;", "", "", "", "", "", "", "", "", 1, false, false, "", "HLP_WorkHourLogGeneral.htm");
             context.WriteHtmlTextNl( "</div>") ;
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -474,7 +473,8 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
             /* Single line edit */
-            GxWebStd.gx_single_line_edit( context, edtWorkHourLogDuration_Internalname, A120WorkHourLogDuration, StringUtil.RTrim( context.localUtil.Format( A120WorkHourLogDuration, "")), "", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtWorkHourLogDuration_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtWorkHourLogDuration_Enabled, 0, "text", "", 40, "chr", 1, "row", 40, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_WorkHourLogGeneral.htm");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 23,'" + sPrefix + "',false,'',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtWorkHourLogDuration_Internalname, A120WorkHourLogDuration, StringUtil.RTrim( context.localUtil.Format( A120WorkHourLogDuration, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,23);\"", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtWorkHourLogDuration_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtWorkHourLogDuration_Enabled, 0, "text", "", 40, "chr", 1, "row", 40, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_WorkHourLogGeneral.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -487,7 +487,8 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
             /* Single line edit */
-            GxWebStd.gx_single_line_edit( context, edtWorkHourLogHour_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(A121WorkHourLogHour), 4, 0, ".", "")), StringUtil.LTrim( ((edtWorkHourLogHour_Enabled!=0) ? context.localUtil.Format( (decimal)(A121WorkHourLogHour), "ZZZ9") : context.localUtil.Format( (decimal)(A121WorkHourLogHour), "ZZZ9"))), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtWorkHourLogHour_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtWorkHourLogHour_Enabled, 0, "text", "1", 4, "chr", 1, "row", 4, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_WorkHourLogGeneral.htm");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 27,'" + sPrefix + "',false,'',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtWorkHourLogHour_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(A121WorkHourLogHour), 4, 0, ".", "")), StringUtil.LTrim( ((edtWorkHourLogHour_Enabled!=0) ? context.localUtil.Format( (decimal)(A121WorkHourLogHour), "ZZZ9") : context.localUtil.Format( (decimal)(A121WorkHourLogHour), "ZZZ9"))), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+TempTags+" onchange=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onblur(this,27);\"", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtWorkHourLogHour_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtWorkHourLogHour_Enabled, 0, "text", "1", 4, "chr", 1, "row", 4, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_WorkHourLogGeneral.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -503,7 +504,8 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
             /* Single line edit */
-            GxWebStd.gx_single_line_edit( context, edtWorkHourLogMinute_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(A122WorkHourLogMinute), 4, 0, ".", "")), StringUtil.LTrim( ((edtWorkHourLogMinute_Enabled!=0) ? context.localUtil.Format( (decimal)(A122WorkHourLogMinute), "ZZZ9") : context.localUtil.Format( (decimal)(A122WorkHourLogMinute), "ZZZ9"))), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtWorkHourLogMinute_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtWorkHourLogMinute_Enabled, 0, "text", "1", 4, "chr", 1, "row", 4, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_WorkHourLogGeneral.htm");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 32,'" + sPrefix + "',false,'',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtWorkHourLogMinute_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(A122WorkHourLogMinute), 4, 0, ".", "")), StringUtil.LTrim( ((edtWorkHourLogMinute_Enabled!=0) ? context.localUtil.Format( (decimal)(A122WorkHourLogMinute), "ZZZ9") : context.localUtil.Format( (decimal)(A122WorkHourLogMinute), "ZZZ9"))), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+TempTags+" onchange=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onblur(this,32);\"", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtWorkHourLogMinute_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtWorkHourLogMinute_Enabled, 0, "text", "1", 4, "chr", 1, "row", 4, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_WorkHourLogGeneral.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -516,11 +518,12 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
             /* Multiple line edit */
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 36,'" + sPrefix + "',false,'',0)\"";
             ClassString = "Attribute";
             StyleString = "";
             ClassString = "Attribute";
             StyleString = "";
-            GxWebStd.gx_html_textarea( context, edtWorkHourLogDescription_Internalname, A123WorkHourLogDescription, "", "", 0, 1, edtWorkHourLogDescription_Enabled, 0, 80, "chr", 10, "row", 0, StyleString, ClassString, "", "", "2097152", -1, 0, "", "", -1, true, "", "'"+sPrefix+"'"+",false,"+"'"+""+"'", 0, "", "HLP_WorkHourLogGeneral.htm");
+            GxWebStd.gx_html_textarea( context, edtWorkHourLogDescription_Internalname, A123WorkHourLogDescription, "", TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,36);\"", 0, 1, edtWorkHourLogDescription_Enabled, 0, 80, "chr", 10, "row", 0, StyleString, ClassString, "", "", "2097152", -1, 0, "", "", -1, true, "", "'"+sPrefix+"'"+",false,"+"'"+""+"'", 0, "", "HLP_WorkHourLogGeneral.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -536,7 +539,8 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
             /* Single line edit */
-            GxWebStd.gx_single_line_edit( context, edtEmployeeFirstName_Internalname, StringUtil.RTrim( A107EmployeeFirstName), StringUtil.RTrim( context.localUtil.Format( A107EmployeeFirstName, "")), "", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtEmployeeFirstName_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtEmployeeFirstName_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "Name", "start", true, "", "HLP_WorkHourLogGeneral.htm");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 41,'" + sPrefix + "',false,'',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtEmployeeFirstName_Internalname, StringUtil.RTrim( A107EmployeeFirstName), StringUtil.RTrim( context.localUtil.Format( A107EmployeeFirstName, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,41);\"", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtEmployeeFirstName_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtEmployeeFirstName_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "Name", "start", true, "", "HLP_WorkHourLogGeneral.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -549,7 +553,8 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
             /* Single line edit */
-            GxWebStd.gx_single_line_edit( context, edtProjectId_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(A102ProjectId), 10, 0, ".", "")), StringUtil.LTrim( ((edtProjectId_Enabled!=0) ? context.localUtil.Format( (decimal)(A102ProjectId), "ZZZZZZZZZ9") : context.localUtil.Format( (decimal)(A102ProjectId), "ZZZZZZZZZ9"))), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtProjectId_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtProjectId_Enabled, 0, "text", "1", 10, "chr", 1, "row", 10, 0, 0, 0, 0, -1, 0, true, "Id", "end", false, "", "HLP_WorkHourLogGeneral.htm");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 45,'" + sPrefix + "',false,'',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtProjectId_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(A102ProjectId), 10, 0, ".", "")), StringUtil.LTrim( ((edtProjectId_Enabled!=0) ? context.localUtil.Format( (decimal)(A102ProjectId), "ZZZZZZZZZ9") : context.localUtil.Format( (decimal)(A102ProjectId), "ZZZZZZZZZ9"))), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+TempTags+" onchange=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onblur(this,45);\"", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtProjectId_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtProjectId_Enabled, 0, "text", "1", 10, "chr", 1, "row", 10, 0, 0, 0, 0, -1, 0, true, "Id", "end", false, "", "HLP_WorkHourLogGeneral.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -565,7 +570,8 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
             /* Single line edit */
-            GxWebStd.gx_single_line_edit( context, edtProjectName_Internalname, StringUtil.RTrim( A103ProjectName), StringUtil.RTrim( context.localUtil.Format( A103ProjectName, "")), "", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtProjectName_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtProjectName_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "Name", "start", true, "", "HLP_WorkHourLogGeneral.htm");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 50,'" + sPrefix + "',false,'',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtProjectName_Internalname, StringUtil.RTrim( A103ProjectName), StringUtil.RTrim( context.localUtil.Format( A103ProjectName, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,50);\"", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtProjectName_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtProjectName_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "Name", "start", true, "", "HLP_WorkHourLogGeneral.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -582,14 +588,14 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-button", "start", "top", "", "", "div");
             TempTags = "  onfocus=\"gx.evt.onfocus(this, 55,'" + sPrefix + "',false,'',0)\"";
-            ClassString = "ButtonMaterial";
+            ClassString = "Button";
             StyleString = "";
             GxWebStd.gx_button_ctrl( context, bttBtnupdate_Internalname, "", "Update", bttBtnupdate_Jsonclick, 7, "Update", "", StyleString, ClassString, bttBtnupdate_Visible, 1, "standard", "'"+sPrefix+"'"+",false,"+"'"+"e11371_client"+"'", TempTags, "", 2, "HLP_WorkHourLogGeneral.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-button", "start", "top", "", "", "div");
             TempTags = "  onfocus=\"gx.evt.onfocus(this, 57,'" + sPrefix + "',false,'',0)\"";
-            ClassString = "ButtonMaterialDefault";
+            ClassString = "BtnDefault";
             StyleString = "";
             GxWebStd.gx_button_ctrl( context, bttBtndelete_Internalname, "", "Delete", bttBtndelete_Jsonclick, 7, "Delete", "", StyleString, ClassString, bttBtndelete_Visible, 1, "standard", "'"+sPrefix+"'"+",false,"+"'"+"e12371_client"+"'", TempTags, "", 2, "HLP_WorkHourLogGeneral.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -616,7 +622,7 @@ namespace GeneXus.Programs {
             {
                if ( context.ExposeMetadata( ) )
                {
-                  Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+                  Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
                }
             }
             Form.Meta.addItem("description", "Work Hour Log General", 0) ;
@@ -1075,7 +1081,7 @@ namespace GeneXus.Programs {
          PA372( ) ;
          WS372( ) ;
          WE372( ) ;
-         this.cleanup();
+         cleanup();
          context.SetWrapped(false);
          SaveComponentMsgList(sPrefix);
          context.GX_msglist = BackMsgLst;
@@ -1252,7 +1258,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20248141426147", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20249171617519", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1268,7 +1274,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("workhourloggeneral.js", "?20248141426147", false, true);
+         context.AddJavascriptSource("workhourloggeneral.js", "?20249171617519", false, true);
          /* End function include_jscripts */
       }
 
@@ -1345,31 +1351,23 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'A118WorkHourLogId',fld:'WORKHOURLOGID',pic:'ZZZZZZZZZ9'},{av:'AV12IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV13IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true}]");
-         setEventMetadata("REFRESH",",oparms:[]}");
-         setEventMetadata("'DOUPDATE'","{handler:'E11371',iparms:[{av:'AV12IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'A118WorkHourLogId',fld:'WORKHOURLOGID',pic:'ZZZZZZZZZ9'}]");
-         setEventMetadata("'DOUPDATE'",",oparms:[{ctrl:'BTNUPDATE',prop:'Visible'}]}");
-         setEventMetadata("'DODELETE'","{handler:'E12371',iparms:[{av:'AV13IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'A118WorkHourLogId',fld:'WORKHOURLOGID',pic:'ZZZZZZZZZ9'}]");
-         setEventMetadata("'DODELETE'",",oparms:[{ctrl:'BTNDELETE',prop:'Visible'}]}");
-         setEventMetadata("VALID_WORKHOURLOGID","{handler:'Valid_Workhourlogid',iparms:[]");
-         setEventMetadata("VALID_WORKHOURLOGID",",oparms:[]}");
-         setEventMetadata("VALID_PROJECTID","{handler:'Valid_Projectid',iparms:[]");
-         setEventMetadata("VALID_PROJECTID",",oparms:[]}");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"A118WorkHourLogId","fld":"WORKHOURLOGID","pic":"ZZZZZZZZZ9"},{"av":"AV12IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV13IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true}]}""");
+         setEventMetadata("'DOUPDATE'","""{"handler":"E11371","iparms":[{"av":"AV12IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"A118WorkHourLogId","fld":"WORKHOURLOGID","pic":"ZZZZZZZZZ9"}]""");
+         setEventMetadata("'DOUPDATE'",""","oparms":[{"ctrl":"BTNUPDATE","prop":"Visible"}]}""");
+         setEventMetadata("'DODELETE'","""{"handler":"E12371","iparms":[{"av":"AV13IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"A118WorkHourLogId","fld":"WORKHOURLOGID","pic":"ZZZZZZZZZ9"}]""");
+         setEventMetadata("'DODELETE'",""","oparms":[{"ctrl":"BTNDELETE","prop":"Visible"}]}""");
+         setEventMetadata("VALID_WORKHOURLOGID","""{"handler":"Valid_Workhourlogid","iparms":[]}""");
+         setEventMetadata("VALID_PROJECTID","""{"handler":"Valid_Projectid","iparms":[]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -1383,6 +1381,7 @@ namespace GeneXus.Programs {
          bodyStyle = "";
          GXKey = "";
          GX_FocusControl = "";
+         TempTags = "";
          A119WorkHourLogDate = DateTime.MinValue;
          A120WorkHourLogDuration = "";
          ClassString = "";
@@ -1390,7 +1389,6 @@ namespace GeneXus.Programs {
          A123WorkHourLogDescription = "";
          A107EmployeeFirstName = "";
          A103ProjectName = "";
-         TempTags = "";
          bttBtnupdate_Jsonclick = "";
          bttBtndelete_Jsonclick = "";
          Form = new GXWebForm();
@@ -1399,7 +1397,6 @@ namespace GeneXus.Programs {
          EvtGridId = "";
          EvtRowId = "";
          sEvtType = "";
-         scmdbuf = "";
          H00372_A106EmployeeId = new long[1] ;
          H00372_A118WorkHourLogId = new long[1] ;
          H00372_A103ProjectName = new string[] {""} ;
@@ -1432,7 +1429,6 @@ namespace GeneXus.Programs {
       private short nGotPars ;
       private short GxWebError ;
       private short nDynComponent ;
-      private short initialized ;
       private short wbEnd ;
       private short wbStart ;
       private short A121WorkHourLogHour ;
@@ -1473,6 +1469,7 @@ namespace GeneXus.Programs {
       private string divTable_Internalname ;
       private string divTransactiondetail_tableattributes_Internalname ;
       private string edtWorkHourLogId_Internalname ;
+      private string TempTags ;
       private string edtWorkHourLogId_Jsonclick ;
       private string edtWorkHourLogDate_Internalname ;
       private string edtWorkHourLogDate_Jsonclick ;
@@ -1493,7 +1490,6 @@ namespace GeneXus.Programs {
       private string edtProjectName_Internalname ;
       private string A103ProjectName ;
       private string edtProjectName_Jsonclick ;
-      private string TempTags ;
       private string bttBtnupdate_Internalname ;
       private string bttBtnupdate_Jsonclick ;
       private string bttBtndelete_Internalname ;
@@ -1503,7 +1499,6 @@ namespace GeneXus.Programs {
       private string EvtGridId ;
       private string EvtRowId ;
       private string sEvtType ;
-      private string scmdbuf ;
       private string sCtrlA118WorkHourLogId ;
       private DateTime A119WorkHourLogDate ;
       private bool entryPointCalled ;
@@ -1519,6 +1514,8 @@ namespace GeneXus.Programs {
       private string A123WorkHourLogDescription ;
       private string A120WorkHourLogDuration ;
       private GXWebForm Form ;
+      private GxHttpRequest AV11HTTPRequest ;
+      private IGxSession AV10Session ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private IDataStoreProvider pr_default ;
@@ -1532,12 +1529,10 @@ namespace GeneXus.Programs {
       private short[] H00372_A121WorkHourLogHour ;
       private string[] H00372_A120WorkHourLogDuration ;
       private DateTime[] H00372_A119WorkHourLogDate ;
-      private msglist BackMsgLst ;
-      private msglist LclMsgLst ;
-      private GxHttpRequest AV11HTTPRequest ;
-      private IGxSession AV10Session ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV6WWPContext ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext AV8TrnContext ;
+      private msglist BackMsgLst ;
+      private msglist LclMsgLst ;
    }
 
    public class workhourloggeneral__default : DataStoreHelperBase, IDataStoreHelper

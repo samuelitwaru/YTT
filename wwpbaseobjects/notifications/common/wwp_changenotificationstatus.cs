@@ -45,36 +45,19 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
       public void execute( )
       {
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
       public void executeSubmit( )
       {
-         wwp_changenotificationstatus objwwp_changenotificationstatus;
-         objwwp_changenotificationstatus = new wwp_changenotificationstatus();
-         objwwp_changenotificationstatus.context.SetSubmitInitialConfig(context);
-         objwwp_changenotificationstatus.initialize();
-         Submit( executePrivateCatch,objwwp_changenotificationstatus);
+         SubmitImpl();
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwp_changenotificationstatus)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
-         this.cleanup();
+         cleanup();
       }
 
       public void gxep_setnotificationreadunreadbyid( ref long aP0_WWPNotificationId )
@@ -104,9 +87,9 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
             if (true) break;
          }
          pr_default.close(0);
-         executePrivate();
+         ExecuteImpl();
          aP0_WWPNotificationId=this.AV8WWPNotificationId;
-         this.cleanup();
+         cleanup();
       }
 
       public void gxep_setnotificationreadbyid( ref long aP0_WWPNotificationId )
@@ -120,9 +103,9 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
          pr_default.close(2);
          pr_default.SmartCacheProvider.SetUpdated("WWP_Notification");
          /* End optimized UPDATE. */
-         executePrivate();
+         ExecuteImpl();
          aP0_WWPNotificationId=this.AV8WWPNotificationId;
-         this.cleanup();
+         cleanup();
       }
 
       public void gxep_setallnotificationsofloggeduserread( )
@@ -136,14 +119,14 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
          pr_default.close(3);
          pr_default.SmartCacheProvider.SetUpdated("WWP_Notification");
          /* End optimized UPDATE. */
-         executePrivate();
-         this.cleanup();
+         ExecuteImpl();
+         cleanup();
       }
 
       public override void cleanup( )
       {
          context.CommitDataStores("wwpbaseobjects.notifications.common.wwp_changenotificationstatus",pr_default);
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -151,13 +134,8 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
-         scmdbuf = "";
          P00372_A22WWPNotificationId = new long[1] ;
          P00372_A82WWPNotificationIsRead = new bool[] {false} ;
          AV12Udparg1 = "";
@@ -179,7 +157,6 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
 
       private long AV8WWPNotificationId ;
       private long A22WWPNotificationId ;
-      private string scmdbuf ;
       private string AV12Udparg1 ;
       private bool A82WWPNotificationIsRead ;
       private IGxDataStore dsGAM ;

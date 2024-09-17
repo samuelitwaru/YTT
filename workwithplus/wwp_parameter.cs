@@ -121,7 +121,7 @@ namespace GeneXus.Programs.workwithplus {
          {
             if ( context.ExposeMetadata( ) )
             {
-               Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+               Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
             }
          }
          Form.Meta.addItem("description", "Parameter", 0) ;
@@ -167,10 +167,10 @@ namespace GeneXus.Programs.workwithplus {
       {
          this.Gx_mode = aP0_Gx_mode;
          this.AV7WWPParameterKey = aP1_WWPParameterKey;
-         executePrivate();
+         ExecuteImpl();
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -206,11 +206,8 @@ namespace GeneXus.Programs.workwithplus {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITENV( ) ;
          INITTRN( ) ;
          if ( ( GxWebError == 0 ) && ! isAjaxCallMode( ) )
@@ -242,7 +239,7 @@ namespace GeneXus.Programs.workwithplus {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void fix_multi_value_controls( )
@@ -857,7 +854,6 @@ namespace GeneXus.Programs.workwithplus {
 
       protected void CheckExtendedTable022( )
       {
-         nIsDirty_2 = 0;
          Gx_BScreen = 1;
          standaloneModal( ) ;
          if ( String.IsNullOrEmpty(StringUtil.RTrim( A1WWPParameterKey)) )
@@ -869,13 +865,11 @@ namespace GeneXus.Programs.workwithplus {
          }
          if ( StringUtil.Len( A2WWPParameterValue) <= 30 )
          {
-            nIsDirty_2 = 1;
             A6WWPParameterValueTrimmed = A2WWPParameterValue;
             AssignAttri("", false, "A6WWPParameterValueTrimmed", A6WWPParameterValueTrimmed);
          }
          else
          {
-            nIsDirty_2 = 1;
             A6WWPParameterValueTrimmed = StringUtil.Trim( StringUtil.Substring( A2WWPParameterValue, 1, 27)) + "...";
             AssignAttri("", false, "A6WWPParameterValueTrimmed", A6WWPParameterValueTrimmed);
          }
@@ -1509,10 +1503,10 @@ namespace GeneXus.Programs.workwithplus {
          CloseStyles();
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
@@ -1714,7 +1708,7 @@ namespace GeneXus.Programs.workwithplus {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024812154442", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202491613124173", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1730,7 +1724,7 @@ namespace GeneXus.Programs.workwithplus {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("workwithplus/wwp_parameter.js", "?2024812154442", false, true);
+         context.AddJavascriptSource("workwithplus/wwp_parameter.js", "?202491613124174", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Panel/BootstrapPanelRender.js", "", false, true);
@@ -1833,30 +1827,24 @@ namespace GeneXus.Programs.workwithplus {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("ENTER","{handler:'UserMainFullajax',iparms:[{postForm:true},{av:'Gx_mode',fld:'vMODE',pic:'@!',hsh:true},{av:'AV7WWPParameterKey',fld:'vWWPPARAMETERKEY',pic:'',hsh:true}]");
-         setEventMetadata("ENTER",",oparms:[]}");
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'Gx_mode',fld:'vMODE',pic:'@!',hsh:true},{av:'AV9TrnContext',fld:'vTRNCONTEXT',pic:'',hsh:true},{av:'AV7WWPParameterKey',fld:'vWWPPARAMETERKEY',pic:'',hsh:true},{av:'A5WWPParameterDisableDelete',fld:'WWPPARAMETERDISABLEDELETE',pic:''}]");
-         setEventMetadata("REFRESH",",oparms:[]}");
-         setEventMetadata("AFTER TRN","{handler:'E12022',iparms:[{av:'Gx_mode',fld:'vMODE',pic:'@!',hsh:true},{av:'AV9TrnContext',fld:'vTRNCONTEXT',pic:'',hsh:true}]");
-         setEventMetadata("AFTER TRN",",oparms:[]}");
-         setEventMetadata("VALID_WWPPARAMETERKEY","{handler:'Valid_Wwpparameterkey',iparms:[]");
-         setEventMetadata("VALID_WWPPARAMETERKEY",",oparms:[]}");
-         setEventMetadata("VALID_WWPPARAMETERVALUE","{handler:'Valid_Wwpparametervalue',iparms:[]");
-         setEventMetadata("VALID_WWPPARAMETERVALUE",",oparms:[]}");
+         setEventMetadata("ENTER","""{"handler":"UserMainFullajax","iparms":[{"postForm":true},{"av":"Gx_mode","fld":"vMODE","pic":"@!","hsh":true},{"av":"AV7WWPParameterKey","fld":"vWWPPARAMETERKEY","hsh":true}]}""");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"Gx_mode","fld":"vMODE","pic":"@!","hsh":true},{"av":"AV9TrnContext","fld":"vTRNCONTEXT","hsh":true},{"av":"AV7WWPParameterKey","fld":"vWWPPARAMETERKEY","hsh":true},{"av":"A5WWPParameterDisableDelete","fld":"WWPPARAMETERDISABLEDELETE"}]}""");
+         setEventMetadata("AFTER TRN","""{"handler":"E12022","iparms":[{"av":"Gx_mode","fld":"vMODE","pic":"@!","hsh":true},{"av":"AV9TrnContext","fld":"vTRNCONTEXT","hsh":true}]}""");
+         setEventMetadata("VALID_WWPPARAMETERKEY","""{"handler":"Valid_Wwpparameterkey","iparms":[]}""");
+         setEventMetadata("VALID_WWPPARAMETERVALUE","""{"handler":"Valid_Wwpparametervalue","iparms":[]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
       }
 
-      protected void CloseOpenCursors( )
+      protected override void CloseCursors( )
       {
          pr_default.close(1);
       }
@@ -1869,7 +1857,6 @@ namespace GeneXus.Programs.workwithplus {
          Z1WWPParameterKey = "";
          Z3WWPParameterCategory = "";
          Z4WWPParameterDescription = "";
-         scmdbuf = "";
          gxfirstwebparm = "";
          gxfirstwebparm_bkp = "";
          GXKey = "";
@@ -1966,15 +1953,12 @@ namespace GeneXus.Programs.workwithplus {
 
       private short GxWebError ;
       private short gxcookieaux ;
-      private short IsConfirmed ;
-      private short IsModified ;
       private short AnyError ;
+      private short IsModified ;
+      private short IsConfirmed ;
       private short nKeyPressed ;
-      private short initialized ;
       private short RcdFound2 ;
-      private short GX_JID ;
       private short Gx_BScreen ;
-      private short nIsDirty_2 ;
       private short gxajaxcallmode ;
       private int trnEnded ;
       private int edtWWPParameterKey_Enabled ;
@@ -1990,7 +1974,6 @@ namespace GeneXus.Programs.workwithplus {
       private int idxLst ;
       private string sPrefix ;
       private string wcpOGx_mode ;
-      private string scmdbuf ;
       private string gxfirstwebparm ;
       private string gxfirstwebparm_bkp ;
       private string Gx_mode ;
@@ -2066,8 +2049,11 @@ namespace GeneXus.Programs.workwithplus {
       private IGxSession AV10WebSession ;
       private GXProperties forbiddenHiddens ;
       private GXUserControl ucDvpanel_tableattributes ;
+      private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV8WWPContext ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext AV9TrnContext ;
       private IDataStoreProvider pr_default ;
       private string[] T00024_A1WWPParameterKey ;
       private string[] T00024_A3WWPParameterCategory ;
@@ -2089,9 +2075,6 @@ namespace GeneXus.Programs.workwithplus {
       private bool[] T00022_A5WWPParameterDisableDelete ;
       private string[] T000211_A1WWPParameterKey ;
       private IDataStoreProvider pr_gam ;
-      private GXWebForm Form ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV8WWPContext ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext AV9TrnContext ;
    }
 
    public class wwp_parameter__gam : DataStoreHelperBase, IDataStoreHelper
@@ -2150,6 +2133,14 @@ namespace GeneXus.Programs.workwithplus {
   {
      if ( def == null )
      {
+        Object[] prmT00022;
+        prmT00022 = new Object[] {
+        new ParDef("WWPParameterKey",GXType.VarChar,300,0)
+        };
+        Object[] prmT00023;
+        prmT00023 = new Object[] {
+        new ParDef("WWPParameterKey",GXType.VarChar,300,0)
+        };
         Object[] prmT00024;
         prmT00024 = new Object[] {
         new ParDef("WWPParameterKey",GXType.VarChar,300,0)
@@ -2158,20 +2149,12 @@ namespace GeneXus.Programs.workwithplus {
         prmT00025 = new Object[] {
         new ParDef("WWPParameterKey",GXType.VarChar,300,0)
         };
-        Object[] prmT00023;
-        prmT00023 = new Object[] {
-        new ParDef("WWPParameterKey",GXType.VarChar,300,0)
-        };
         Object[] prmT00026;
         prmT00026 = new Object[] {
         new ParDef("WWPParameterKey",GXType.VarChar,300,0)
         };
         Object[] prmT00027;
         prmT00027 = new Object[] {
-        new ParDef("WWPParameterKey",GXType.VarChar,300,0)
-        };
-        Object[] prmT00022;
-        prmT00022 = new Object[] {
         new ParDef("WWPParameterKey",GXType.VarChar,300,0)
         };
         Object[] prmT00028;

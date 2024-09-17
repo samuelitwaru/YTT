@@ -56,10 +56,10 @@ namespace GeneXus.Programs {
 
       public void execute( )
       {
-         executePrivate();
+         ExecuteImpl();
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -89,18 +89,13 @@ namespace GeneXus.Programs {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
-      }
-
-      protected void CloseOpenCursors( )
-      {
+         CloseCursors();
       }
 
       public override void initialize( )
       {
          gxdynajaxctrlcodr = new GeneXus.Utils.GxStringCollection();
          gxdynajaxctrldescr = new GeneXus.Utils.GxStringCollection();
-         scmdbuf = "";
          SDSVC_LEAV2_A124LeaveTypeId = new long[1] ;
          SDSVC_LEAV2_A125LeaveTypeName = new string[] {""} ;
          SDSVC_LEAV2_A100CompanyId = new long[1] ;
@@ -114,7 +109,6 @@ namespace GeneXus.Programs {
          /* GeneXus formulas. */
       }
 
-      protected string scmdbuf ;
       protected GeneXus.Utils.GxStringCollection gxdynajaxctrlcodr ;
       protected GeneXus.Utils.GxStringCollection gxdynajaxctrldescr ;
       protected IGxDataStore dsGAM ;

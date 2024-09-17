@@ -56,7 +56,7 @@ namespace GeneXus.Programs {
          this.AV37OptionsDescJson = "" ;
          this.AV38OptionIndexesJson = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP3_OptionsJson=this.AV36OptionsJson;
          aP4_OptionsDescJson=this.AV37OptionsDescJson;
          aP5_OptionIndexesJson=this.AV38OptionIndexesJson;
@@ -79,36 +79,19 @@ namespace GeneXus.Programs {
                                  out string aP4_OptionsDescJson ,
                                  out string aP5_OptionIndexesJson )
       {
-         reportsworkhourlogdetailsgetfilterdata objreportsworkhourlogdetailsgetfilterdata;
-         objreportsworkhourlogdetailsgetfilterdata = new reportsworkhourlogdetailsgetfilterdata();
-         objreportsworkhourlogdetailsgetfilterdata.AV33DDOName = aP0_DDOName;
-         objreportsworkhourlogdetailsgetfilterdata.AV34SearchTxtParms = aP1_SearchTxtParms;
-         objreportsworkhourlogdetailsgetfilterdata.AV35SearchTxtTo = aP2_SearchTxtTo;
-         objreportsworkhourlogdetailsgetfilterdata.AV36OptionsJson = "" ;
-         objreportsworkhourlogdetailsgetfilterdata.AV37OptionsDescJson = "" ;
-         objreportsworkhourlogdetailsgetfilterdata.AV38OptionIndexesJson = "" ;
-         objreportsworkhourlogdetailsgetfilterdata.context.SetSubmitInitialConfig(context);
-         objreportsworkhourlogdetailsgetfilterdata.initialize();
-         Submit( executePrivateCatch,objreportsworkhourlogdetailsgetfilterdata);
+         this.AV33DDOName = aP0_DDOName;
+         this.AV34SearchTxtParms = aP1_SearchTxtParms;
+         this.AV35SearchTxtTo = aP2_SearchTxtTo;
+         this.AV36OptionsJson = "" ;
+         this.AV37OptionsDescJson = "" ;
+         this.AV38OptionIndexesJson = "" ;
+         SubmitImpl();
          aP3_OptionsJson=this.AV36OptionsJson;
          aP4_OptionsDescJson=this.AV37OptionsDescJson;
          aP5_OptionIndexesJson=this.AV38OptionIndexesJson;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((reportsworkhourlogdetailsgetfilterdata)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -124,7 +107,7 @@ namespace GeneXus.Programs {
          S111 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          if ( StringUtil.StrCmp(StringUtil.Upper( AV33DDOName), "DDO_PROJECTNAME") == 0 )
@@ -133,7 +116,7 @@ namespace GeneXus.Programs {
             S121 ();
             if ( returnInSub )
             {
-               this.cleanup();
+               cleanup();
                if (true) return;
             }
          }
@@ -143,7 +126,7 @@ namespace GeneXus.Programs {
             S131 ();
             if ( returnInSub )
             {
-               this.cleanup();
+               cleanup();
                if (true) return;
             }
          }
@@ -153,14 +136,14 @@ namespace GeneXus.Programs {
             S141 ();
             if ( returnInSub )
             {
-               this.cleanup();
+               cleanup();
                if (true) return;
             }
          }
          AV36OptionsJson = AV23Options.ToJSonString(false);
          AV37OptionsDescJson = AV25OptionsDesc.ToJSonString(false);
          AV38OptionIndexesJson = AV26OptionIndexes.ToJSonString(false);
-         this.cleanup();
+         cleanup();
       }
 
       protected void S111( )
@@ -473,16 +456,12 @@ namespace GeneXus.Programs {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -514,7 +493,6 @@ namespace GeneXus.Programs {
          AV52Reportsworkhourlogdetailsds_6_tfworkhourlogduration_sel = "";
          AV53Reportsworkhourlogdetailsds_7_tfworkhourlogdescription = "";
          AV54Reportsworkhourlogdetailsds_8_tfworkhourlogdescription_sel = "";
-         scmdbuf = "";
          lV49Reportsworkhourlogdetailsds_3_tfprojectname = "";
          lV51Reportsworkhourlogdetailsds_5_tfworkhourlogduration = "";
          lV53Reportsworkhourlogdetailsds_7_tfworkhourlogdescription = "";
@@ -576,7 +554,6 @@ namespace GeneXus.Programs {
       private string AV42TFProjectName_Sel ;
       private string AV49Reportsworkhourlogdetailsds_3_tfprojectname ;
       private string AV50Reportsworkhourlogdetailsds_4_tfprojectname_sel ;
-      private string scmdbuf ;
       private string lV49Reportsworkhourlogdetailsds_3_tfprojectname ;
       private string A103ProjectName ;
       private DateTime AV11TFWorkHourLogDate ;
@@ -613,6 +590,12 @@ namespace GeneXus.Programs {
       private IGxSession AV28Session ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GxSimpleCollection<string> AV23Options ;
+      private GxSimpleCollection<string> AV25OptionsDesc ;
+      private GxSimpleCollection<string> AV26OptionIndexes ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV9WWPContext ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState AV30GridState ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue AV31GridStateFilterValue ;
       private IDataStoreProvider pr_default ;
       private long[] P009U2_A106EmployeeId ;
       private long[] P009U2_A102ProjectId ;
@@ -638,12 +621,6 @@ namespace GeneXus.Programs {
       private string aP3_OptionsJson ;
       private string aP4_OptionsDescJson ;
       private string aP5_OptionIndexesJson ;
-      private GxSimpleCollection<string> AV23Options ;
-      private GxSimpleCollection<string> AV25OptionsDesc ;
-      private GxSimpleCollection<string> AV26OptionIndexes ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV9WWPContext ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState AV30GridState ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue AV31GridStateFilterValue ;
    }
 
    public class reportsworkhourlogdetailsgetfilterdata__default : DataStoreHelperBase, IDataStoreHelper
@@ -693,7 +670,7 @@ namespace GeneXus.Programs {
          }
          if ( String.IsNullOrEmpty(StringUtil.RTrim( AV50Reportsworkhourlogdetailsds_4_tfprojectname_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV49Reportsworkhourlogdetailsds_3_tfprojectname)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(T2.ProjectName) like LOWER(:lV49Reportsworkhourlogdetailsds_3_tfprojectname))");
+            AddWhere(sWhereString, "(T2.ProjectName like :lV49Reportsworkhourlogdetailsds_3_tfprojectname)");
          }
          else
          {
@@ -713,7 +690,7 @@ namespace GeneXus.Programs {
          }
          if ( String.IsNullOrEmpty(StringUtil.RTrim( AV52Reportsworkhourlogdetailsds_6_tfworkhourlogduration_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV51Reportsworkhourlogdetailsds_5_tfworkhourlogduration)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(T1.WorkHourLogDuration) like LOWER(:lV51Reportsworkhourlogdetailsds_5_tfworkhourlogduration))");
+            AddWhere(sWhereString, "(T1.WorkHourLogDuration like :lV51Reportsworkhourlogdetailsds_5_tfworkhourlogduration)");
          }
          else
          {
@@ -733,7 +710,7 @@ namespace GeneXus.Programs {
          }
          if ( String.IsNullOrEmpty(StringUtil.RTrim( AV54Reportsworkhourlogdetailsds_8_tfworkhourlogdescription_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV53Reportsworkhourlogdetailsds_7_tfworkhourlogdescription)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(T1.WorkHourLogDescription) like LOWER(:lV53Reportsworkhourlogdetailsds_7_tfworkhourlogdescription))");
+            AddWhere(sWhereString, "(T1.WorkHourLogDescription like :lV53Reportsworkhourlogdetailsds_7_tfworkhourlogdescription)");
          }
          else
          {
@@ -819,7 +796,7 @@ namespace GeneXus.Programs {
          }
          if ( String.IsNullOrEmpty(StringUtil.RTrim( AV50Reportsworkhourlogdetailsds_4_tfprojectname_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV49Reportsworkhourlogdetailsds_3_tfprojectname)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(T2.ProjectName) like LOWER(:lV49Reportsworkhourlogdetailsds_3_tfprojectname))");
+            AddWhere(sWhereString, "(T2.ProjectName like :lV49Reportsworkhourlogdetailsds_3_tfprojectname)");
          }
          else
          {
@@ -839,7 +816,7 @@ namespace GeneXus.Programs {
          }
          if ( String.IsNullOrEmpty(StringUtil.RTrim( AV52Reportsworkhourlogdetailsds_6_tfworkhourlogduration_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV51Reportsworkhourlogdetailsds_5_tfworkhourlogduration)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(T1.WorkHourLogDuration) like LOWER(:lV51Reportsworkhourlogdetailsds_5_tfworkhourlogduration))");
+            AddWhere(sWhereString, "(T1.WorkHourLogDuration like :lV51Reportsworkhourlogdetailsds_5_tfworkhourlogduration)");
          }
          else
          {
@@ -859,7 +836,7 @@ namespace GeneXus.Programs {
          }
          if ( String.IsNullOrEmpty(StringUtil.RTrim( AV54Reportsworkhourlogdetailsds_8_tfworkhourlogdescription_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV53Reportsworkhourlogdetailsds_7_tfworkhourlogdescription)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(T1.WorkHourLogDescription) like LOWER(:lV53Reportsworkhourlogdetailsds_7_tfworkhourlogdescription))");
+            AddWhere(sWhereString, "(T1.WorkHourLogDescription like :lV53Reportsworkhourlogdetailsds_7_tfworkhourlogdescription)");
          }
          else
          {
@@ -945,7 +922,7 @@ namespace GeneXus.Programs {
          }
          if ( String.IsNullOrEmpty(StringUtil.RTrim( AV50Reportsworkhourlogdetailsds_4_tfprojectname_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV49Reportsworkhourlogdetailsds_3_tfprojectname)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(T2.ProjectName) like LOWER(:lV49Reportsworkhourlogdetailsds_3_tfprojectname))");
+            AddWhere(sWhereString, "(T2.ProjectName like :lV49Reportsworkhourlogdetailsds_3_tfprojectname)");
          }
          else
          {
@@ -965,7 +942,7 @@ namespace GeneXus.Programs {
          }
          if ( String.IsNullOrEmpty(StringUtil.RTrim( AV52Reportsworkhourlogdetailsds_6_tfworkhourlogduration_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV51Reportsworkhourlogdetailsds_5_tfworkhourlogduration)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(T1.WorkHourLogDuration) like LOWER(:lV51Reportsworkhourlogdetailsds_5_tfworkhourlogduration))");
+            AddWhere(sWhereString, "(T1.WorkHourLogDuration like :lV51Reportsworkhourlogdetailsds_5_tfworkhourlogduration)");
          }
          else
          {
@@ -985,7 +962,7 @@ namespace GeneXus.Programs {
          }
          if ( String.IsNullOrEmpty(StringUtil.RTrim( AV54Reportsworkhourlogdetailsds_8_tfworkhourlogdescription_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV53Reportsworkhourlogdetailsds_7_tfworkhourlogdescription)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(T1.WorkHourLogDescription) like LOWER(:lV53Reportsworkhourlogdetailsds_7_tfworkhourlogdescription))");
+            AddWhere(sWhereString, "(T1.WorkHourLogDescription like :lV53Reportsworkhourlogdetailsds_7_tfworkhourlogdescription)");
          }
          else
          {

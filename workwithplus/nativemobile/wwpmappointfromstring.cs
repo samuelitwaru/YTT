@@ -66,7 +66,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          this.AV12SelectedItem = aP0_SelectedItem;
          this.AV8Geopoint = new Geospatial() ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_Geopoint=this.AV8Geopoint;
       }
 
@@ -79,30 +79,13 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
       public void executeSubmit( string aP0_SelectedItem ,
                                  out Geospatial aP1_Geopoint )
       {
-         wwpmappointfromstring objwwpmappointfromstring;
-         objwwpmappointfromstring = new wwpmappointfromstring();
-         objwwpmappointfromstring.AV12SelectedItem = aP0_SelectedItem;
-         objwwpmappointfromstring.AV8Geopoint = new Geospatial() ;
-         objwwpmappointfromstring.context.SetSubmitInitialConfig(context);
-         objwwpmappointfromstring.initialize();
-         Submit( executePrivateCatch,objwwpmappointfromstring);
+         this.AV12SelectedItem = aP0_SelectedItem;
+         this.AV8Geopoint = new Geospatial() ;
+         SubmitImpl();
          aP1_Geopoint=this.AV8Geopoint;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwpmappointfromstring)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -122,21 +105,17 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          {
             AV8Geopoint = (Geospatial)(new Geospatial(AV12SelectedItem));
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -152,8 +131,8 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
       private string AV10Latitude ;
       private string AV11Longitude ;
       private Geospatial AV8Geopoint ;
-      private Geospatial aP1_Geopoint ;
       private GxSimpleCollection<string> AV9ItemList ;
+      private Geospatial aP1_Geopoint ;
    }
 
 }

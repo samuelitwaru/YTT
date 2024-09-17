@@ -47,13 +47,13 @@ namespace GeneXus.Programs {
          this.Gx_mode = aP0_Gx_mode;
          this.AV7ApplicationId = aP1_ApplicationId;
          this.AV13Id = aP2_Id;
-         executePrivate();
+         ExecuteImpl();
          aP0_Gx_mode=this.Gx_mode;
          aP1_ApplicationId=this.AV7ApplicationId;
          aP2_Id=this.AV13Id;
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -170,11 +170,8 @@ namespace GeneXus.Programs {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITWEB( ) ;
          if ( ! isAjaxCallMode( ) )
          {
@@ -205,7 +202,7 @@ namespace GeneXus.Programs {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override short ExecuteStartEvent( )
@@ -249,10 +246,10 @@ namespace GeneXus.Programs {
          CloseStyles();
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
@@ -465,11 +462,12 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
             /* Multiple line edit */
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 22,'',false,'',0)\"";
             ClassString = "Attribute";
             StyleString = "";
             ClassString = "Attribute";
             StyleString = "";
-            GxWebStd.gx_html_textarea( context, edtavGamapplication_name_Internalname, StringUtil.RTrim( AV5GAMApplication.gxTpr_Name), "", "", 0, 1, edtavGamapplication_name_Enabled, 0, 80, "chr", 4, "row", 0, StyleString, ClassString, "", "", "254", -1, 0, "", "", -1, true, "", "'"+""+"'"+",false,"+"'"+""+"'", 0, "", "HLP_GAMAppMenuEntry.htm");
+            GxWebStd.gx_html_textarea( context, edtavGamapplication_name_Internalname, StringUtil.RTrim( AV5GAMApplication.gxTpr_Name), "", TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,22);\"", 0, 1, edtavGamapplication_name_Enabled, 0, 80, "chr", 4, "row", 0, StyleString, ClassString, "", "", "254", -1, 0, "", "", -1, true, "", "'"+""+"'"+",false,"+"'"+""+"'", 0, "", "HLP_GAMAppMenuEntry.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -567,7 +565,7 @@ namespace GeneXus.Programs {
          {
             if ( context.ExposeMetadata( ) )
             {
-               Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+               Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
             }
          }
          Form.Meta.addItem("description", "Application Menu", 0) ;
@@ -971,7 +969,7 @@ namespace GeneXus.Programs {
          PA1Z2( ) ;
          WS1Z2( ) ;
          WE1Z2( ) ;
-         this.cleanup();
+         cleanup();
          context.SetWrapped(false);
          context.GX_msglist = BackMsgLst;
          return "";
@@ -992,7 +990,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20248121581371", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20249161318882", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1008,7 +1006,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("gamappmenuentry.js", "?20248121581372", false, true);
+         context.AddJavascriptSource("gamappmenuentry.js", "?20249161318883", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Panel/BootstrapPanelRender.js", "", false, true);
@@ -1084,25 +1082,19 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'AV7ApplicationId',fld:'vAPPLICATIONID',pic:'ZZZZZZZZZZZ9',hsh:true},{av:'Gx_mode',fld:'vMODE',pic:'@!',hsh:true},{av:'AV13Id',fld:'vID',pic:'ZZZZZZZZZZZ9',hsh:true}]");
-         setEventMetadata("REFRESH",",oparms:[]}");
-         setEventMetadata("ENTER","{handler:'E121Z2',iparms:[{av:'AV7ApplicationId',fld:'vAPPLICATIONID',pic:'ZZZZZZZZZZZ9',hsh:true},{av:'AV14Name',fld:'vNAME',pic:''},{av:'Gx_mode',fld:'vMODE',pic:'@!',hsh:true},{av:'AV12GUID',fld:'vGUID',pic:''},{av:'AV9Dsc',fld:'vDSC',pic:''},{av:'AV13Id',fld:'vID',pic:'ZZZZZZZZZZZ9',hsh:true},{av:'AV6isOK',fld:'vISOK',pic:''}]");
-         setEventMetadata("ENTER",",oparms:[{av:'AV6isOK',fld:'vISOK',pic:''}]}");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"AV7ApplicationId","fld":"vAPPLICATIONID","pic":"ZZZZZZZZZZZ9","hsh":true},{"av":"Gx_mode","fld":"vMODE","pic":"@!","hsh":true},{"av":"AV13Id","fld":"vID","pic":"ZZZZZZZZZZZ9","hsh":true}]}""");
+         setEventMetadata("ENTER","""{"handler":"E121Z2","iparms":[{"av":"AV7ApplicationId","fld":"vAPPLICATIONID","pic":"ZZZZZZZZZZZ9","hsh":true},{"av":"AV14Name","fld":"vNAME"},{"av":"Gx_mode","fld":"vMODE","pic":"@!","hsh":true},{"av":"AV12GUID","fld":"vGUID"},{"av":"AV9Dsc","fld":"vDSC"},{"av":"AV13Id","fld":"vID","pic":"ZZZZZZZZZZZ9","hsh":true},{"av":"AV6isOK","fld":"vISOK"}]""");
+         setEventMetadata("ENTER",""","oparms":[{"av":"AV6isOK","fld":"vISOK"}]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -1120,8 +1112,8 @@ namespace GeneXus.Programs {
          ClassString = "";
          StyleString = "";
          ucDvpanel_tableattributes = new GXUserControl();
-         AV5GAMApplication = new GeneXus.Programs.genexussecurity.SdtGAMApplication(context);
          TempTags = "";
+         AV5GAMApplication = new GeneXus.Programs.genexussecurity.SdtGAMApplication(context);
          AV12GUID = "";
          AV9Dsc = "";
          AV14Name = "";
@@ -1150,7 +1142,6 @@ namespace GeneXus.Programs {
 
       private short nGotPars ;
       private short GxWebError ;
-      private short initialized ;
       private short gxajaxcallmode ;
       private short wbEnd ;
       private short wbStart ;
@@ -1191,8 +1182,8 @@ namespace GeneXus.Programs {
       private string Dvpanel_tableattributes_Internalname ;
       private string divTableattributes_Internalname ;
       private string edtavGamapplication_name_Internalname ;
-      private string edtavGuid_Internalname ;
       private string TempTags ;
+      private string edtavGuid_Internalname ;
       private string AV12GUID ;
       private string edtavGuid_Jsonclick ;
       private string edtavDsc_Internalname ;
@@ -1225,20 +1216,20 @@ namespace GeneXus.Programs {
       private bool gxdyncontrolsrefreshing ;
       private bool returnInSub ;
       private GXUserControl ucDvpanel_tableattributes ;
+      private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private string aP0_Gx_mode ;
       private long aP1_ApplicationId ;
       private long aP2_Id ;
+      private GeneXus.Programs.genexussecurity.SdtGAMApplication AV5GAMApplication ;
+      private GeneXus.Programs.genexussecurity.SdtGAMApplicationMenu AV8ApplicationMenu ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV11Errors ;
+      private GeneXus.Programs.genexussecurity.SdtGAMError AV10Error ;
       private IDataStoreProvider pr_default ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
       private IDataStoreProvider pr_gam ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV11Errors ;
-      private GXWebForm Form ;
-      private GeneXus.Programs.genexussecurity.SdtGAMApplication AV5GAMApplication ;
-      private GeneXus.Programs.genexussecurity.SdtGAMError AV10Error ;
-      private GeneXus.Programs.genexussecurity.SdtGAMApplicationMenu AV8ApplicationMenu ;
    }
 
    public class gamappmenuentry__gam : DataStoreHelperBase, IDataStoreHelper

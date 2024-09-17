@@ -113,7 +113,6 @@ namespace GeneXus.Programs {
          }
          if ( AnyError == 0 )
          {
-            IsConfirmed = 1;
          }
       }
 
@@ -195,7 +194,6 @@ namespace GeneXus.Programs {
 
       protected void CheckExtendedTable0D14( )
       {
-         nIsDirty_14 = 0;
          standaloneModal( ) ;
          /* Using cursor BC000D6 */
          pr_default.execute(4, new Object[] {A101CompanyName, A100CompanyId});
@@ -297,7 +295,6 @@ namespace GeneXus.Programs {
       protected void insert_Check( )
       {
          CONFIRM_0D0( ) ;
-         IsConfirmed = 0;
       }
 
       protected void update_Check( )
@@ -556,7 +553,6 @@ namespace GeneXus.Programs {
          else
          {
          }
-         IsModified = 0;
          if ( AnyError != 0 )
          {
             context.wjLoc = "";
@@ -794,7 +790,6 @@ namespace GeneXus.Programs {
 
       protected void SaveImpl( )
       {
-         nKeyPressed = 1;
          GetKey0D14( ) ;
          if ( IsIns( ) )
          {
@@ -872,7 +867,6 @@ namespace GeneXus.Programs {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars14( bcCompany, 1) ;
          SaveImpl( ) ;
          VarsToRow14( bcCompany) ;
@@ -886,7 +880,6 @@ namespace GeneXus.Programs {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars14( bcCompany, 1) ;
          Gx_mode = "INS";
          /* Insert record */
@@ -932,7 +925,6 @@ namespace GeneXus.Programs {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars14( bcCompany, 1) ;
          UpdateImpl( ) ;
          context.GX_msglist = BackMsgLst;
@@ -945,7 +937,6 @@ namespace GeneXus.Programs {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars14( bcCompany, 1) ;
          Gx_mode = "INS";
          /* Insert record */
@@ -979,8 +970,6 @@ namespace GeneXus.Programs {
          AnyError = 0;
          context.GX_msglist.removeAllItems();
          RowToVars14( bcCompany, 0) ;
-         nKeyPressed = 3;
-         IsConfirmed = 0;
          GetKey0D14( ) ;
          if ( RcdFound14 == 1 )
          {
@@ -1096,7 +1085,6 @@ namespace GeneXus.Programs {
 
       public void ForceCommitOnExit( )
       {
-         mustCommit = true;
          return  ;
       }
 
@@ -1153,15 +1141,14 @@ namespace GeneXus.Programs {
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
       }
 
-      protected void CloseOpenCursors( )
+      protected override void CloseCursors( )
       {
          pr_default.close(1);
          pr_default.close(10);
@@ -1169,9 +1156,6 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
-         scmdbuf = "";
-         PreviousTooltip = "";
-         PreviousCaption = "";
          Gx_mode = "";
          endTrnMsgTxt = "";
          endTrnMsgCod = "";
@@ -1271,13 +1255,8 @@ namespace GeneXus.Programs {
          standaloneNotModal( ) ;
       }
 
-      private short IsConfirmed ;
-      private short IsModified ;
       private short AnyError ;
-      private short nKeyPressed ;
-      private short GX_JID ;
       private short RcdFound14 ;
-      private short nIsDirty_14 ;
       private int trnEnded ;
       private int AV25GXV1 ;
       private long Z100CompanyId ;
@@ -1285,9 +1264,6 @@ namespace GeneXus.Programs {
       private long AV23Insert_CompanyLocationId ;
       private long Z157CompanyLocationId ;
       private long A157CompanyLocationId ;
-      private string scmdbuf ;
-      private string PreviousTooltip ;
-      private string PreviousCaption ;
       private string Gx_mode ;
       private string endTrnMsgTxt ;
       private string endTrnMsgCod ;
@@ -1298,11 +1274,12 @@ namespace GeneXus.Programs {
       private string A158CompanyLocationName ;
       private string sMode14 ;
       private bool returnInSub ;
-      private bool mustCommit ;
       private IGxSession AV12WebSession ;
-      private SdtCompany bcCompany ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV8WWPContext ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext AV11TrnContext ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext_Attribute AV14TrnContextAtt ;
       private IDataStoreProvider pr_default ;
       private long[] BC000D5_A100CompanyId ;
       private string[] BC000D5_A101CompanyName ;
@@ -1327,12 +1304,10 @@ namespace GeneXus.Programs {
       private string[] BC000D17_A101CompanyName ;
       private string[] BC000D17_A158CompanyLocationName ;
       private long[] BC000D17_A157CompanyLocationId ;
+      private SdtCompany bcCompany ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
       private IDataStoreProvider pr_gam ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV8WWPContext ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext AV11TrnContext ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext_Attribute AV14TrnContextAtt ;
    }
 
    public class company_bc__gam : DataStoreHelperBase, IDataStoreHelper
@@ -1397,6 +1372,18 @@ namespace GeneXus.Programs {
   {
      if ( def == null )
      {
+        Object[] prmBC000D2;
+        prmBC000D2 = new Object[] {
+        new ParDef("CompanyId",GXType.Int64,10,0)
+        };
+        Object[] prmBC000D3;
+        prmBC000D3 = new Object[] {
+        new ParDef("CompanyId",GXType.Int64,10,0)
+        };
+        Object[] prmBC000D4;
+        prmBC000D4 = new Object[] {
+        new ParDef("CompanyLocationId",GXType.Int64,10,0)
+        };
         Object[] prmBC000D5;
         prmBC000D5 = new Object[] {
         new ParDef("CompanyId",GXType.Int64,10,0)
@@ -1406,20 +1393,8 @@ namespace GeneXus.Programs {
         new ParDef("CompanyName",GXType.Char,100,0) ,
         new ParDef("CompanyId",GXType.Int64,10,0)
         };
-        Object[] prmBC000D4;
-        prmBC000D4 = new Object[] {
-        new ParDef("CompanyLocationId",GXType.Int64,10,0)
-        };
         Object[] prmBC000D7;
         prmBC000D7 = new Object[] {
-        new ParDef("CompanyId",GXType.Int64,10,0)
-        };
-        Object[] prmBC000D3;
-        prmBC000D3 = new Object[] {
-        new ParDef("CompanyId",GXType.Int64,10,0)
-        };
-        Object[] prmBC000D2;
-        prmBC000D2 = new Object[] {
         new ParDef("CompanyId",GXType.Int64,10,0)
         };
         Object[] prmBC000D8;

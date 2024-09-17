@@ -69,7 +69,7 @@ namespace GeneXus.Programs {
          this.AV22gxid = aP3_gxid;
          this.AV30GXM3RootCol = new GXBaseCollection<SdtLeaveRequestsGridPanel_Level_Detail_GridSdt_Item>( context, "LeaveRequestsGridPanel_Level_Detail_GridSdt.Item", "") ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP4_GXM3RootCol=this.AV30GXM3RootCol;
       }
 
@@ -88,33 +88,16 @@ namespace GeneXus.Programs {
                                  int aP3_gxid ,
                                  out GXBaseCollection<SdtLeaveRequestsGridPanel_Level_Detail_GridSdt_Item> aP4_GXM3RootCol )
       {
-         leaverequestsgridpanel_level_detail_grid objleaverequestsgridpanel_level_detail_grid;
-         objleaverequestsgridpanel_level_detail_grid = new leaverequestsgridpanel_level_detail_grid();
-         objleaverequestsgridpanel_level_detail_grid.AV28SearchText = aP0_SearchText;
-         objleaverequestsgridpanel_level_detail_grid.AV25start = aP1_start;
-         objleaverequestsgridpanel_level_detail_grid.AV26count = aP2_count;
-         objleaverequestsgridpanel_level_detail_grid.AV22gxid = aP3_gxid;
-         objleaverequestsgridpanel_level_detail_grid.AV30GXM3RootCol = new GXBaseCollection<SdtLeaveRequestsGridPanel_Level_Detail_GridSdt_Item>( context, "LeaveRequestsGridPanel_Level_Detail_GridSdt.Item", "") ;
-         objleaverequestsgridpanel_level_detail_grid.context.SetSubmitInitialConfig(context);
-         objleaverequestsgridpanel_level_detail_grid.initialize();
-         Submit( executePrivateCatch,objleaverequestsgridpanel_level_detail_grid);
+         this.AV28SearchText = aP0_SearchText;
+         this.AV25start = aP1_start;
+         this.AV26count = aP2_count;
+         this.AV22gxid = aP3_gxid;
+         this.AV30GXM3RootCol = new GXBaseCollection<SdtLeaveRequestsGridPanel_Level_Detail_GridSdt_Item>( context, "LeaveRequestsGridPanel_Level_Detail_GridSdt.Item", "") ;
+         SubmitImpl();
          aP4_GXM3RootCol=this.AV30GXM3RootCol;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((leaverequestsgridpanel_level_detail_grid)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -190,7 +173,7 @@ namespace GeneXus.Programs {
          pr_default.close(0);
          Gxwebsession.Set(Gxids+"gxvar_Leaveinfo", AV9LeaveInfo);
          Gxwebsession.Set(Gxids+"gxvar_Leaveperiod", AV20LeavePeriod);
-         this.cleanup();
+         cleanup();
       }
 
       protected override long RecordCount( )
@@ -216,16 +199,12 @@ namespace GeneXus.Programs {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -235,7 +214,6 @@ namespace GeneXus.Programs {
          AV9LeaveInfo = "";
          Gxwebsession = context.GetSession();
          AV20LeavePeriod = "";
-         scmdbuf = "";
          lV28SearchText = "";
          A125LeaveTypeName = "";
          A133LeaveRequestDescription = "";
@@ -284,7 +262,6 @@ namespace GeneXus.Programs {
       private decimal A131LeaveRequestDuration ;
       private string Gxids ;
       private string AV9LeaveInfo ;
-      private string scmdbuf ;
       private string A125LeaveTypeName ;
       private string A132LeaveRequestStatus ;
       private DateTime A130LeaveRequestEndDate ;
@@ -295,8 +272,10 @@ namespace GeneXus.Programs {
       private string lV28SearchText ;
       private string A133LeaveRequestDescription ;
       private string Gxdynprop ;
+      private IGxSession Gxwebsession ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GXBaseCollection<SdtLeaveRequestsGridPanel_Level_Detail_GridSdt_Item> AV30GXM3RootCol ;
       private IDataStoreProvider pr_default ;
       private long[] P00002_A124LeaveTypeId ;
       private long[] P00002_A106EmployeeId ;
@@ -308,11 +287,9 @@ namespace GeneXus.Programs {
       private decimal[] P00002_A131LeaveRequestDuration ;
       private long[] P00002_A127LeaveRequestId ;
       private DateTime[] P00002_A128LeaveRequestDate ;
+      private SdtLeaveRequestsGridPanel_Level_Detail_GridSdt_Item AV31GXM2LeaveRequestsGridPanel_Level_Detail_GridSdt ;
       private long[] P00003_AGRID_nRecordCount ;
       private GXBaseCollection<SdtLeaveRequestsGridPanel_Level_Detail_GridSdt_Item> aP4_GXM3RootCol ;
-      private IGxSession Gxwebsession ;
-      private GXBaseCollection<SdtLeaveRequestsGridPanel_Level_Detail_GridSdt_Item> AV30GXM3RootCol ;
-      private SdtLeaveRequestsGridPanel_Level_Detail_GridSdt_Item AV31GXM2LeaveRequestsGridPanel_Level_Detail_GridSdt ;
    }
 
    public class leaverequestsgridpanel_level_detail_grid__default : DataStoreHelperBase, IDataStoreHelper

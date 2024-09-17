@@ -48,10 +48,10 @@ namespace GeneXus.Programs.workwithplus.ai {
       {
          this.AV8ListName = aP0_ListName;
          this.AV5CurrentQuery = aP1_CurrentQuery;
-         executePrivate();
+         ExecuteImpl();
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -164,11 +164,8 @@ namespace GeneXus.Programs.workwithplus.ai {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITWEB( ) ;
          if ( ! isAjaxCallMode( ) )
          {
@@ -212,7 +209,7 @@ namespace GeneXus.Programs.workwithplus.ai {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void RenderHtmlHeaders( )
@@ -243,10 +240,10 @@ namespace GeneXus.Programs.workwithplus.ai {
          }
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
@@ -474,7 +471,7 @@ namespace GeneXus.Programs.workwithplus.ai {
             {
                if ( context.ExposeMetadata( ) )
                {
-                  Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+                  Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
                }
             }
             Form.Meta.addItem("description", "WWP_Search In NLWC", 0) ;
@@ -941,7 +938,7 @@ namespace GeneXus.Programs.workwithplus.ai {
          PA2C2( ) ;
          WS2C2( ) ;
          WE2C2( ) ;
-         this.cleanup();
+         cleanup();
          context.SetWrapped(false);
          SaveComponentMsgList(sPrefix);
          context.GX_msglist = BackMsgLst;
@@ -1137,7 +1134,7 @@ namespace GeneXus.Programs.workwithplus.ai {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202481416554850", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20249161311331", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1153,7 +1150,7 @@ namespace GeneXus.Programs.workwithplus.ai {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("workwithplus/ai/wwp_searchinnlwc.js", "?202481416554851", false, true);
+         context.AddJavascriptSource("workwithplus/ai/wwp_searchinnlwc.js", "?20249161311332", false, true);
          /* End function include_jscripts */
       }
 
@@ -1208,25 +1205,18 @@ namespace GeneXus.Programs.workwithplus.ai {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'AV9UserQuery',fld:'vUSERQUERY',pic:''}]");
-         setEventMetadata("REFRESH",",oparms:[]}");
-         setEventMetadata("'DOUSERACTIONSEARCH'","{handler:'E122C2',iparms:[{av:'AV9UserQuery',fld:'vUSERQUERY',pic:''},{av:'AV8ListName',fld:'vLISTNAME',pic:''}]");
-         setEventMetadata("'DOUSERACTIONSEARCH'",",oparms:[]}");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"AV9UserQuery","fld":"vUSERQUERY"}]}""");
+         setEventMetadata("'DOUSERACTIONSEARCH'","""{"handler":"E122C2","iparms":[{"av":"AV9UserQuery","fld":"vUSERQUERY"},{"av":"AV8ListName","fld":"vLISTNAME"}]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -1266,7 +1256,6 @@ namespace GeneXus.Programs.workwithplus.ai {
       private short nGotPars ;
       private short GxWebError ;
       private short nDynComponent ;
-      private short initialized ;
       private short wbEnd ;
       private short wbStart ;
       private short nDraw ;

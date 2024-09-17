@@ -46,7 +46,7 @@ namespace GeneXus.Programs {
       {
          this.AV8ProjectId = 0 ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_ProjectId=this.AV8ProjectId;
       }
 
@@ -58,29 +58,12 @@ namespace GeneXus.Programs {
 
       public void executeSubmit( out long aP0_ProjectId )
       {
-         getemployeelastloggedproject objgetemployeelastloggedproject;
-         objgetemployeelastloggedproject = new getemployeelastloggedproject();
-         objgetemployeelastloggedproject.AV8ProjectId = 0 ;
-         objgetemployeelastloggedproject.context.SetSubmitInitialConfig(context);
-         objgetemployeelastloggedproject.initialize();
-         Submit( executePrivateCatch,objgetemployeelastloggedproject);
+         this.AV8ProjectId = 0 ;
+         SubmitImpl();
          aP0_ProjectId=this.AV8ProjectId;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((getemployeelastloggedproject)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -98,12 +81,12 @@ namespace GeneXus.Programs {
             pr_default.readNext(0);
          }
          pr_default.close(0);
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -111,13 +94,8 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
-         scmdbuf = "";
          P00752_A106EmployeeId = new long[1] ;
          P00752_A102ProjectId = new long[1] ;
          P00752_A118WorkHourLogId = new long[1] ;
@@ -136,7 +114,6 @@ namespace GeneXus.Programs {
       private long A106EmployeeId ;
       private long A102ProjectId ;
       private long A118WorkHourLogId ;
-      private string scmdbuf ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private IDataStoreProvider pr_default ;

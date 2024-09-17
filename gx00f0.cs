@@ -43,11 +43,11 @@ namespace GeneXus.Programs {
       public void execute( out long aP0_pProjectId )
       {
          this.AV10pProjectId = 0 ;
-         executePrivate();
+         ExecuteImpl();
          aP0_pProjectId=this.AV10pProjectId;
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -200,11 +200,8 @@ namespace GeneXus.Programs {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITWEB( ) ;
          if ( ! isAjaxCallMode( ) )
          {
@@ -235,7 +232,7 @@ namespace GeneXus.Programs {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override short ExecuteStartEvent( )
@@ -279,10 +276,10 @@ namespace GeneXus.Programs {
          CloseStyles();
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
@@ -680,7 +677,7 @@ namespace GeneXus.Programs {
          {
             if ( context.ExposeMetadata( ) )
             {
-               Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+               Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
             }
          }
          Form.Meta.addItem("description", "Selection List Project", 0) ;
@@ -1180,9 +1177,7 @@ namespace GeneXus.Programs {
       protected void before_start_formulas( )
       {
          edtProjectId_Enabled = 0;
-         AssignProp("", false, edtProjectId_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtProjectId_Enabled), 5, 0), !bGXsfl_54_Refreshing);
          edtProjectName_Enabled = 0;
-         AssignProp("", false, edtProjectName_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtProjectName_Enabled), 5, 0), !bGXsfl_54_Refreshing);
          fix_multi_value_controls( ) ;
       }
 
@@ -1289,10 +1284,10 @@ namespace GeneXus.Programs {
       {
          /* Load Routine */
          returnInSub = false;
-         edtavLinkselection_gximage = "";
+         edtavLinkselection_gximage = "SelectRow";
          AV5LinkSelection = context.GetImagePath( "3914535b-0c03-44c5-9538-906a99cdd2bc", "", context.GetTheme( ));
          AssignAttri("", false, edtavLinkselection_Internalname, AV5LinkSelection);
-         AV12Linkselection_GXI = GXDbFile.PathToUrl( context.GetImagePath( "3914535b-0c03-44c5-9538-906a99cdd2bc", "", context.GetTheme( )));
+         AV12Linkselection_GXI = GXDbFile.PathToUrl( context.GetImagePath( "3914535b-0c03-44c5-9538-906a99cdd2bc", "", context.GetTheme( )), context);
          sendrow_542( ) ;
          GRID1_nCurrentRecord = (long)(GRID1_nCurrentRecord+1);
          if ( isFullAjaxMode( ) && ! bGXsfl_54_Refreshing )
@@ -1347,7 +1342,7 @@ namespace GeneXus.Programs {
          PA5J2( ) ;
          WS5J2( ) ;
          WE5J2( ) ;
-         this.cleanup();
+         cleanup();
          context.SetWrapped(false);
          context.GX_msglist = BackMsgLst;
          return "";
@@ -1368,7 +1363,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247171432498", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202491613202411", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1384,7 +1379,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("gx00f0.js", "?20247171432498", false, true);
+         context.AddJavascriptSource("gx00f0.js", "?202491613202411", false, true);
          /* End function include_jscripts */
       }
 
@@ -1404,6 +1399,7 @@ namespace GeneXus.Programs {
 
       protected void sendrow_542( )
       {
+         sGXsfl_54_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_54_idx), 4, 0), 4, "0");
          SubsflControlProps_542( ) ;
          WB5J0( ) ;
          if ( ( 10 * 1 == 0 ) || ( nGXsfl_54_idx <= subGrid1_fnc_Recordsperpage( ) * 1 ) )
@@ -1691,47 +1687,35 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'GRID1_nFirstRecordOnPage'},{av:'GRID1_nEOF'},{av:'subGrid1_Rows',ctrl:'GRID1',prop:'Rows'},{av:'AV6cProjectId',fld:'vCPROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV7cProjectName',fld:'vCPROJECTNAME',pic:''},{av:'cmbavCprojectstatus'},{av:'AV8cProjectStatus',fld:'vCPROJECTSTATUS',pic:''},{av:'AV9cProjectManagerId',fld:'vCPROJECTMANAGERID',pic:'ZZZZZZZZZ9'}]");
-         setEventMetadata("REFRESH",",oparms:[]}");
-         setEventMetadata("'TOGGLE'","{handler:'E155J1',iparms:[{av:'divAdvancedcontainer_Class',ctrl:'ADVANCEDCONTAINER',prop:'Class'},{ctrl:'BTNTOGGLE',prop:'Class'}]");
-         setEventMetadata("'TOGGLE'",",oparms:[{av:'divAdvancedcontainer_Class',ctrl:'ADVANCEDCONTAINER',prop:'Class'},{ctrl:'BTNTOGGLE',prop:'Class'}]}");
-         setEventMetadata("LBLPROJECTIDFILTER.CLICK","{handler:'E115J1',iparms:[{av:'divProjectidfiltercontainer_Class',ctrl:'PROJECTIDFILTERCONTAINER',prop:'Class'}]");
-         setEventMetadata("LBLPROJECTIDFILTER.CLICK",",oparms:[{av:'divProjectidfiltercontainer_Class',ctrl:'PROJECTIDFILTERCONTAINER',prop:'Class'},{av:'edtavCprojectid_Visible',ctrl:'vCPROJECTID',prop:'Visible'}]}");
-         setEventMetadata("LBLPROJECTNAMEFILTER.CLICK","{handler:'E125J1',iparms:[{av:'divProjectnamefiltercontainer_Class',ctrl:'PROJECTNAMEFILTERCONTAINER',prop:'Class'}]");
-         setEventMetadata("LBLPROJECTNAMEFILTER.CLICK",",oparms:[{av:'divProjectnamefiltercontainer_Class',ctrl:'PROJECTNAMEFILTERCONTAINER',prop:'Class'},{av:'edtavCprojectname_Visible',ctrl:'vCPROJECTNAME',prop:'Visible'}]}");
-         setEventMetadata("LBLPROJECTSTATUSFILTER.CLICK","{handler:'E135J1',iparms:[{av:'divProjectstatusfiltercontainer_Class',ctrl:'PROJECTSTATUSFILTERCONTAINER',prop:'Class'}]");
-         setEventMetadata("LBLPROJECTSTATUSFILTER.CLICK",",oparms:[{av:'divProjectstatusfiltercontainer_Class',ctrl:'PROJECTSTATUSFILTERCONTAINER',prop:'Class'},{av:'cmbavCprojectstatus'}]}");
-         setEventMetadata("LBLPROJECTMANAGERIDFILTER.CLICK","{handler:'E145J1',iparms:[{av:'divProjectmanageridfiltercontainer_Class',ctrl:'PROJECTMANAGERIDFILTERCONTAINER',prop:'Class'}]");
-         setEventMetadata("LBLPROJECTMANAGERIDFILTER.CLICK",",oparms:[{av:'divProjectmanageridfiltercontainer_Class',ctrl:'PROJECTMANAGERIDFILTERCONTAINER',prop:'Class'},{av:'edtavCprojectmanagerid_Visible',ctrl:'vCPROJECTMANAGERID',prop:'Visible'}]}");
-         setEventMetadata("ENTER","{handler:'E185J2',iparms:[{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9',hsh:true}]");
-         setEventMetadata("ENTER",",oparms:[{av:'AV10pProjectId',fld:'vPPROJECTID',pic:'ZZZZZZZZZ9'}]}");
-         setEventMetadata("GRID1_FIRSTPAGE","{handler:'subgrid1_firstpage',iparms:[{av:'GRID1_nFirstRecordOnPage'},{av:'GRID1_nEOF'},{av:'subGrid1_Rows',ctrl:'GRID1',prop:'Rows'},{av:'AV6cProjectId',fld:'vCPROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV7cProjectName',fld:'vCPROJECTNAME',pic:''},{av:'cmbavCprojectstatus'},{av:'AV8cProjectStatus',fld:'vCPROJECTSTATUS',pic:''},{av:'AV9cProjectManagerId',fld:'vCPROJECTMANAGERID',pic:'ZZZZZZZZZ9'}]");
-         setEventMetadata("GRID1_FIRSTPAGE",",oparms:[]}");
-         setEventMetadata("GRID1_PREVPAGE","{handler:'subgrid1_previouspage',iparms:[{av:'GRID1_nFirstRecordOnPage'},{av:'GRID1_nEOF'},{av:'subGrid1_Rows',ctrl:'GRID1',prop:'Rows'},{av:'AV6cProjectId',fld:'vCPROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV7cProjectName',fld:'vCPROJECTNAME',pic:''},{av:'cmbavCprojectstatus'},{av:'AV8cProjectStatus',fld:'vCPROJECTSTATUS',pic:''},{av:'AV9cProjectManagerId',fld:'vCPROJECTMANAGERID',pic:'ZZZZZZZZZ9'}]");
-         setEventMetadata("GRID1_PREVPAGE",",oparms:[]}");
-         setEventMetadata("GRID1_NEXTPAGE","{handler:'subgrid1_nextpage',iparms:[{av:'GRID1_nFirstRecordOnPage'},{av:'GRID1_nEOF'},{av:'subGrid1_Rows',ctrl:'GRID1',prop:'Rows'},{av:'AV6cProjectId',fld:'vCPROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV7cProjectName',fld:'vCPROJECTNAME',pic:''},{av:'cmbavCprojectstatus'},{av:'AV8cProjectStatus',fld:'vCPROJECTSTATUS',pic:''},{av:'AV9cProjectManagerId',fld:'vCPROJECTMANAGERID',pic:'ZZZZZZZZZ9'}]");
-         setEventMetadata("GRID1_NEXTPAGE",",oparms:[]}");
-         setEventMetadata("GRID1_LASTPAGE","{handler:'subgrid1_lastpage',iparms:[{av:'GRID1_nFirstRecordOnPage'},{av:'GRID1_nEOF'},{av:'subGrid1_Rows',ctrl:'GRID1',prop:'Rows'},{av:'AV6cProjectId',fld:'vCPROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV7cProjectName',fld:'vCPROJECTNAME',pic:''},{av:'cmbavCprojectstatus'},{av:'AV8cProjectStatus',fld:'vCPROJECTSTATUS',pic:''},{av:'AV9cProjectManagerId',fld:'vCPROJECTMANAGERID',pic:'ZZZZZZZZZ9'}]");
-         setEventMetadata("GRID1_LASTPAGE",",oparms:[]}");
-         setEventMetadata("VALIDV_CPROJECTSTATUS","{handler:'Validv_Cprojectstatus',iparms:[]");
-         setEventMetadata("VALIDV_CPROJECTSTATUS",",oparms:[]}");
-         setEventMetadata("NULL","{handler:'Valid_Projectname',iparms:[]");
-         setEventMetadata("NULL",",oparms:[]}");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"GRID1_nFirstRecordOnPage"},{"av":"GRID1_nEOF"},{"av":"subGrid1_Rows","ctrl":"GRID1","prop":"Rows"},{"av":"AV6cProjectId","fld":"vCPROJECTID","pic":"ZZZZZZZZZ9"},{"av":"AV7cProjectName","fld":"vCPROJECTNAME"},{"av":"cmbavCprojectstatus"},{"av":"AV8cProjectStatus","fld":"vCPROJECTSTATUS"},{"av":"AV9cProjectManagerId","fld":"vCPROJECTMANAGERID","pic":"ZZZZZZZZZ9"}]}""");
+         setEventMetadata("'TOGGLE'","""{"handler":"E155J1","iparms":[{"av":"divAdvancedcontainer_Class","ctrl":"ADVANCEDCONTAINER","prop":"Class"},{"ctrl":"BTNTOGGLE","prop":"Class"}]""");
+         setEventMetadata("'TOGGLE'",""","oparms":[{"av":"divAdvancedcontainer_Class","ctrl":"ADVANCEDCONTAINER","prop":"Class"},{"ctrl":"BTNTOGGLE","prop":"Class"}]}""");
+         setEventMetadata("LBLPROJECTIDFILTER.CLICK","""{"handler":"E115J1","iparms":[{"av":"divProjectidfiltercontainer_Class","ctrl":"PROJECTIDFILTERCONTAINER","prop":"Class"}]""");
+         setEventMetadata("LBLPROJECTIDFILTER.CLICK",""","oparms":[{"av":"divProjectidfiltercontainer_Class","ctrl":"PROJECTIDFILTERCONTAINER","prop":"Class"},{"av":"edtavCprojectid_Visible","ctrl":"vCPROJECTID","prop":"Visible"}]}""");
+         setEventMetadata("LBLPROJECTNAMEFILTER.CLICK","""{"handler":"E125J1","iparms":[{"av":"divProjectnamefiltercontainer_Class","ctrl":"PROJECTNAMEFILTERCONTAINER","prop":"Class"}]""");
+         setEventMetadata("LBLPROJECTNAMEFILTER.CLICK",""","oparms":[{"av":"divProjectnamefiltercontainer_Class","ctrl":"PROJECTNAMEFILTERCONTAINER","prop":"Class"},{"av":"edtavCprojectname_Visible","ctrl":"vCPROJECTNAME","prop":"Visible"}]}""");
+         setEventMetadata("LBLPROJECTSTATUSFILTER.CLICK","""{"handler":"E135J1","iparms":[{"av":"divProjectstatusfiltercontainer_Class","ctrl":"PROJECTSTATUSFILTERCONTAINER","prop":"Class"}]""");
+         setEventMetadata("LBLPROJECTSTATUSFILTER.CLICK",""","oparms":[{"av":"divProjectstatusfiltercontainer_Class","ctrl":"PROJECTSTATUSFILTERCONTAINER","prop":"Class"},{"av":"cmbavCprojectstatus"}]}""");
+         setEventMetadata("LBLPROJECTMANAGERIDFILTER.CLICK","""{"handler":"E145J1","iparms":[{"av":"divProjectmanageridfiltercontainer_Class","ctrl":"PROJECTMANAGERIDFILTERCONTAINER","prop":"Class"}]""");
+         setEventMetadata("LBLPROJECTMANAGERIDFILTER.CLICK",""","oparms":[{"av":"divProjectmanageridfiltercontainer_Class","ctrl":"PROJECTMANAGERIDFILTERCONTAINER","prop":"Class"},{"av":"edtavCprojectmanagerid_Visible","ctrl":"vCPROJECTMANAGERID","prop":"Visible"}]}""");
+         setEventMetadata("ENTER","""{"handler":"E185J2","iparms":[{"av":"A102ProjectId","fld":"PROJECTID","pic":"ZZZZZZZZZ9","hsh":true}]""");
+         setEventMetadata("ENTER",""","oparms":[{"av":"AV10pProjectId","fld":"vPPROJECTID","pic":"ZZZZZZZZZ9"}]}""");
+         setEventMetadata("GRID1_FIRSTPAGE","""{"handler":"subgrid1_firstpage","iparms":[{"av":"GRID1_nFirstRecordOnPage"},{"av":"GRID1_nEOF"},{"av":"subGrid1_Rows","ctrl":"GRID1","prop":"Rows"},{"av":"AV6cProjectId","fld":"vCPROJECTID","pic":"ZZZZZZZZZ9"},{"av":"AV7cProjectName","fld":"vCPROJECTNAME"},{"av":"cmbavCprojectstatus"},{"av":"AV8cProjectStatus","fld":"vCPROJECTSTATUS"},{"av":"AV9cProjectManagerId","fld":"vCPROJECTMANAGERID","pic":"ZZZZZZZZZ9"}]}""");
+         setEventMetadata("GRID1_PREVPAGE","""{"handler":"subgrid1_previouspage","iparms":[{"av":"GRID1_nFirstRecordOnPage"},{"av":"GRID1_nEOF"},{"av":"subGrid1_Rows","ctrl":"GRID1","prop":"Rows"},{"av":"AV6cProjectId","fld":"vCPROJECTID","pic":"ZZZZZZZZZ9"},{"av":"AV7cProjectName","fld":"vCPROJECTNAME"},{"av":"cmbavCprojectstatus"},{"av":"AV8cProjectStatus","fld":"vCPROJECTSTATUS"},{"av":"AV9cProjectManagerId","fld":"vCPROJECTMANAGERID","pic":"ZZZZZZZZZ9"}]}""");
+         setEventMetadata("GRID1_NEXTPAGE","""{"handler":"subgrid1_nextpage","iparms":[{"av":"GRID1_nFirstRecordOnPage"},{"av":"GRID1_nEOF"},{"av":"subGrid1_Rows","ctrl":"GRID1","prop":"Rows"},{"av":"AV6cProjectId","fld":"vCPROJECTID","pic":"ZZZZZZZZZ9"},{"av":"AV7cProjectName","fld":"vCPROJECTNAME"},{"av":"cmbavCprojectstatus"},{"av":"AV8cProjectStatus","fld":"vCPROJECTSTATUS"},{"av":"AV9cProjectManagerId","fld":"vCPROJECTMANAGERID","pic":"ZZZZZZZZZ9"}]}""");
+         setEventMetadata("GRID1_LASTPAGE","""{"handler":"subgrid1_lastpage","iparms":[{"av":"GRID1_nFirstRecordOnPage"},{"av":"GRID1_nEOF"},{"av":"subGrid1_Rows","ctrl":"GRID1","prop":"Rows"},{"av":"AV6cProjectId","fld":"vCPROJECTID","pic":"ZZZZZZZZZ9"},{"av":"AV7cProjectName","fld":"vCPROJECTNAME"},{"av":"cmbavCprojectstatus"},{"av":"AV8cProjectStatus","fld":"vCPROJECTSTATUS"},{"av":"AV9cProjectManagerId","fld":"vCPROJECTMANAGERID","pic":"ZZZZZZZZZ9"}]}""");
+         setEventMetadata("VALIDV_CPROJECTSTATUS","""{"handler":"Validv_Cprojectstatus","iparms":[]}""");
+         setEventMetadata("NULL","""{"handler":"Valid_Projectname","iparms":[]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -1765,7 +1749,6 @@ namespace GeneXus.Programs {
          AV5LinkSelection = "";
          AV12Linkselection_GXI = "";
          A103ProjectName = "";
-         scmdbuf = "";
          lV7cProjectName = "";
          lV8cProjectStatus = "";
          A105ProjectStatus = "";
@@ -1799,7 +1782,6 @@ namespace GeneXus.Programs {
       private short GRID1_nEOF ;
       private short nGotPars ;
       private short GxWebError ;
-      private short initialized ;
       private short gxajaxcallmode ;
       private short wbEnd ;
       private short wbStart ;
@@ -1899,7 +1881,6 @@ namespace GeneXus.Programs {
       private string edtProjectId_Internalname ;
       private string A103ProjectName ;
       private string edtProjectName_Internalname ;
-      private string scmdbuf ;
       private string lV7cProjectName ;
       private string lV8cProjectStatus ;
       private string A105ProjectStatus ;
@@ -1930,6 +1911,7 @@ namespace GeneXus.Programs {
       private GXWebGrid Grid1Container ;
       private GXWebRow Grid1Row ;
       private GXWebColumn Grid1Column ;
+      private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private GXCombobox cmbavCprojectstatus ;
@@ -1943,7 +1925,6 @@ namespace GeneXus.Programs {
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
       private long aP0_pProjectId ;
-      private GXWebForm Form ;
    }
 
    public class gx00f0__default : DataStoreHelperBase, IDataStoreHelper

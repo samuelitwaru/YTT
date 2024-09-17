@@ -49,7 +49,7 @@ namespace GeneXus.Programs {
          this.AV3dateTo = aP1_dateTo;
          this.AV4events = new SdtSchedulerEvents(context) ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP2_events=this.AV4events;
       }
 
@@ -64,31 +64,14 @@ namespace GeneXus.Programs {
                                  DateTime aP1_dateTo ,
                                  out SdtSchedulerEvents aP2_events )
       {
-         loadeventssampleproc objloadeventssampleproc;
-         objloadeventssampleproc = new loadeventssampleproc();
-         objloadeventssampleproc.AV2dateFrom = aP0_dateFrom;
-         objloadeventssampleproc.AV3dateTo = aP1_dateTo;
-         objloadeventssampleproc.AV4events = new SdtSchedulerEvents(context) ;
-         objloadeventssampleproc.context.SetSubmitInitialConfig(context);
-         objloadeventssampleproc.initialize();
-         Submit( executePrivateCatch,objloadeventssampleproc);
+         this.AV2dateFrom = aP0_dateFrom;
+         this.AV3dateTo = aP1_dateTo;
+         this.AV4events = new SdtSchedulerEvents(context) ;
+         SubmitImpl();
          aP2_events=this.AV4events;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((loadeventssampleproc)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -98,20 +81,16 @@ namespace GeneXus.Programs {
          {
             AV4events = (SdtSchedulerEvents)(args[2]) ;
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -124,9 +103,9 @@ namespace GeneXus.Programs {
       private DateTime AV3dateTo ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private SdtSchedulerEvents AV4events ;
       private Object[] args ;
       private SdtSchedulerEvents aP2_events ;
-      private SdtSchedulerEvents AV4events ;
    }
 
 }

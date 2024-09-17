@@ -64,7 +64,7 @@ namespace GeneXus.Programs {
          }
          if ( GxWebError == 0 )
          {
-            executePrivate();
+            ExecutePrivate();
          }
          cleanup();
       }
@@ -90,32 +90,15 @@ namespace GeneXus.Programs {
       public void execute( )
       {
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
       public void executeSubmit( )
       {
-         aresetvacationholidays objaresetvacationholidays;
-         objaresetvacationholidays = new aresetvacationholidays();
-         objaresetvacationholidays.context.SetSubmitInitialConfig(context);
-         objaresetvacationholidays.initialize();
-         Submit( executePrivateCatch,objaresetvacationholidays);
+         SubmitImpl();
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((aresetvacationholidays)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -141,13 +124,13 @@ namespace GeneXus.Programs {
             context.Redirect( context.wjLoc );
             context.wjLoc = "";
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
          context.CommitDataStores("resetvacationholidays",pr_default);
-         CloseOpenCursors();
+         CloseCursors();
          base.cleanup();
          if ( IsMain )
          {
@@ -156,15 +139,10 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
          GXKey = "";
          gxfirstwebparm = "";
-         scmdbuf = "";
          P00AH2_A147EmployeeBalance = new decimal[1] ;
          P00AH2_A146EmployeeVactionDays = new decimal[1] ;
          P00AH2_A106EmployeeId = new long[1] ;
@@ -190,7 +168,6 @@ namespace GeneXus.Programs {
       private decimal AV9EmployeeVactionDays ;
       private string GXKey ;
       private string gxfirstwebparm ;
-      private string scmdbuf ;
       private bool entryPointCalled ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;

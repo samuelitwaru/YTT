@@ -57,7 +57,7 @@ namespace GeneXus.Programs {
          this.AV22gxid = aP0_gxid;
          this.AV26GXM1LeaveRequestsGridPanel_Level_DetailSdt = new SdtLeaveRequestsGridPanel_Level_DetailSdt(context) ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_GXM1LeaveRequestsGridPanel_Level_DetailSdt=this.AV26GXM1LeaveRequestsGridPanel_Level_DetailSdt;
       }
 
@@ -70,30 +70,13 @@ namespace GeneXus.Programs {
       public void executeSubmit( int aP0_gxid ,
                                  out SdtLeaveRequestsGridPanel_Level_DetailSdt aP1_GXM1LeaveRequestsGridPanel_Level_DetailSdt )
       {
-         leaverequestsgridpanel_level_detail objleaverequestsgridpanel_level_detail;
-         objleaverequestsgridpanel_level_detail = new leaverequestsgridpanel_level_detail();
-         objleaverequestsgridpanel_level_detail.AV22gxid = aP0_gxid;
-         objleaverequestsgridpanel_level_detail.AV26GXM1LeaveRequestsGridPanel_Level_DetailSdt = new SdtLeaveRequestsGridPanel_Level_DetailSdt(context) ;
-         objleaverequestsgridpanel_level_detail.context.SetSubmitInitialConfig(context);
-         objleaverequestsgridpanel_level_detail.initialize();
-         Submit( executePrivateCatch,objleaverequestsgridpanel_level_detail);
+         this.AV22gxid = aP0_gxid;
+         this.AV26GXM1LeaveRequestsGridPanel_Level_DetailSdt = new SdtLeaveRequestsGridPanel_Level_DetailSdt(context) ;
+         SubmitImpl();
          aP1_GXM1LeaveRequestsGridPanel_Level_DetailSdt=this.AV26GXM1LeaveRequestsGridPanel_Level_DetailSdt;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((leaverequestsgridpanel_level_detail)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -115,21 +98,17 @@ namespace GeneXus.Programs {
          AV26GXM1LeaveRequestsGridPanel_Level_DetailSdt.gxTpr_Msgvar = AV15MsgVar;
          AV26GXM1LeaveRequestsGridPanel_Level_DetailSdt.gxTpr_Gxdynprop = "[ "+Gxdynprop+" ]";
          Gxdynprop = "";
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -151,10 +130,10 @@ namespace GeneXus.Programs {
       private string AV9LeaveInfo ;
       private string Gxdynprop ;
       private string AV20LeavePeriod ;
-      private SdtLeaveRequestsGridPanel_Level_DetailSdt aP1_GXM1LeaveRequestsGridPanel_Level_DetailSdt ;
       private IGxSession Gxwebsession ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV7WWPContext ;
       private SdtLeaveRequestsGridPanel_Level_DetailSdt AV26GXM1LeaveRequestsGridPanel_Level_DetailSdt ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV7WWPContext ;
+      private SdtLeaveRequestsGridPanel_Level_DetailSdt aP1_GXM1LeaveRequestsGridPanel_Level_DetailSdt ;
    }
 
 }

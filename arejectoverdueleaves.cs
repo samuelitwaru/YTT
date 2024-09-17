@@ -40,7 +40,7 @@ namespace GeneXus.Programs {
          }
          if ( GxWebError == 0 )
          {
-            executePrivate();
+            ExecutePrivate();
          }
          cleanup();
       }
@@ -66,32 +66,15 @@ namespace GeneXus.Programs {
       public void execute( )
       {
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
       public void executeSubmit( )
       {
-         arejectoverdueleaves objarejectoverdueleaves;
-         objarejectoverdueleaves = new arejectoverdueleaves();
-         objarejectoverdueleaves.context.SetSubmitInitialConfig(context);
-         objarejectoverdueleaves.initialize();
-         Submit( executePrivateCatch,objarejectoverdueleaves);
+         SubmitImpl();
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((arejectoverdueleaves)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -135,13 +118,13 @@ namespace GeneXus.Programs {
             context.Redirect( context.wjLoc );
             context.wjLoc = "";
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
          context.CommitDataStores("rejectoverdueleaves",pr_default);
-         CloseOpenCursors();
+         CloseCursors();
          base.cleanup();
          if ( IsMain )
          {
@@ -150,15 +133,10 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
          GXKey = "";
          gxfirstwebparm = "";
-         scmdbuf = "";
          Gx_date = DateTime.MinValue;
          P00A02_A124LeaveTypeId = new long[1] ;
          P00A02_A132LeaveRequestStatus = new string[] {""} ;
@@ -207,7 +185,6 @@ namespace GeneXus.Programs {
       private long A127LeaveRequestId ;
       private string GXKey ;
       private string gxfirstwebparm ;
-      private string scmdbuf ;
       private string A132LeaveRequestStatus ;
       private string A125LeaveTypeName ;
       private string GXt_char1 ;
@@ -232,8 +209,8 @@ namespace GeneXus.Programs {
       private DateTime[] P00A02_A128LeaveRequestDate ;
       private long[] P00A02_A106EmployeeId ;
       private long[] P00A02_A127LeaveRequestId ;
-      private IDataStoreProvider pr_gam ;
       private SdtEmployee AV8Employee ;
+      private IDataStoreProvider pr_gam ;
    }
 
    public class arejectoverdueleaves__gam : DataStoreHelperBase, IDataStoreHelper

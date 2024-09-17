@@ -174,6 +174,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
                }
                if ( StringUtil.StringSearch( GXSoapXMLReader.Name, "Body", 1) > 0 )
                {
+                  this.SetPrefixesFromReader( GXSoapXMLReader);
                   if (true) break;
                }
                GXSoapError = GXSoapXMLReader.Read();
@@ -266,7 +267,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          }
          if ( currSoapErr == 0 )
          {
-            executePrivate();
+            ExecutePrivate();
          }
          context.CloseConnections();
          sIncludeState = true;
@@ -320,33 +321,16 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
       {
          this.AV10ImageBase64 = aP0_ImageBase64;
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
       public void executeSubmit( string aP0_ImageBase64 )
       {
-         examplegetimagefrombase64 objexamplegetimagefrombase64;
-         objexamplegetimagefrombase64 = new examplegetimagefrombase64();
-         objexamplegetimagefrombase64.AV10ImageBase64 = aP0_ImageBase64;
-         objexamplegetimagefrombase64.context.SetSubmitInitialConfig(context);
-         objexamplegetimagefrombase64.initialize();
-         Submit( executePrivateCatch,objexamplegetimagefrombase64);
+         this.AV10ImageBase64 = aP0_ImageBase64;
+         SubmitImpl();
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((examplegetimagefrombase64)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -360,22 +344,18 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
             context.Redirect( context.wjLoc );
             context.wjLoc = "";
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          base.cleanup();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )

@@ -54,10 +54,10 @@ namespace GeneXus.Programs {
          this.AV18PrimaryID = aP3_PrimaryID;
          this.AV20SecondaryID = aP4_SecondaryID;
          this.AV21TertiaryID = aP5_TertiaryID;
-         executePrivate();
+         ExecuteImpl();
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -229,11 +229,8 @@ namespace GeneXus.Programs {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITWEB( ) ;
          if ( ! isAjaxCallMode( ) )
          {
@@ -264,7 +261,7 @@ namespace GeneXus.Programs {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override short ExecuteStartEvent( )
@@ -308,10 +305,10 @@ namespace GeneXus.Programs {
          CloseStyles();
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
@@ -674,7 +671,7 @@ namespace GeneXus.Programs {
          {
             if ( context.ExposeMetadata( ) )
             {
-               Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+               Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
             }
          }
          Form.Meta.addItem("description", "GAMExampleTranslations", 0) ;
@@ -725,12 +722,14 @@ namespace GeneXus.Programs {
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
+                              /* Execute user event: Gridpaginationbar.Changepage */
                               E113E2 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "GRIDPAGINATIONBAR.CHANGEROWSPERPAGE") == 0 )
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
+                              /* Execute user event: Gridpaginationbar.Changerowsperpage */
                               E123E2 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "ENTER") == 0 )
@@ -795,6 +794,7 @@ namespace GeneXus.Programs {
                                  {
                                     context.wbHandled = 1;
                                     dynload_actions( ) ;
+                                    /* Execute user event: Grid.Load */
                                     E153E2 ();
                                  }
                                  else if ( StringUtil.StrCmp(sEvt, "'CONFIRM'") == 0 )
@@ -941,15 +941,10 @@ namespace GeneXus.Programs {
          /* GeneXus formulas. */
          AV43Pgmname = "GAMTranslations";
          edtavLngid_Enabled = 0;
-         AssignProp("", false, edtavLngid_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavLngid_Enabled), 5, 0), !bGXsfl_12_Refreshing);
          edtavLanguage_Enabled = 0;
-         AssignProp("", false, edtavLanguage_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavLanguage_Enabled), 5, 0), !bGXsfl_12_Refreshing);
          edtavName_Enabled = 0;
-         AssignProp("", false, edtavName_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavName_Enabled), 5, 0), !bGXsfl_12_Refreshing);
          edtavText_Enabled = 0;
-         AssignProp("", false, edtavText_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavText_Enabled), 5, 0), !bGXsfl_12_Refreshing);
          edtavDelete_Enabled = 0;
-         AssignProp("", false, edtavDelete_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavDelete_Enabled), 5, 0), !bGXsfl_12_Refreshing);
       }
 
       protected void RF3E2( )
@@ -987,12 +982,14 @@ namespace GeneXus.Programs {
          if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
          {
             SubsflControlProps_122( ) ;
+            /* Execute user event: Grid.Load */
             E153E2 ();
             if ( ( subGrid_Islastpage == 0 ) && ( GRID_nCurrentRecord > 0 ) && ( GRID_nGridOutOfScope == 0 ) && ( nGXsfl_12_idx == 1 ) )
             {
                GRID_nCurrentRecord = 0;
                GRID_nGridOutOfScope = 1;
                subgrid_firstpage( ) ;
+               /* Execute user event: Grid.Load */
                E153E2 ();
             }
             wbEnd = 12;
@@ -1116,15 +1113,10 @@ namespace GeneXus.Programs {
       {
          AV43Pgmname = "GAMTranslations";
          edtavLngid_Enabled = 0;
-         AssignProp("", false, edtavLngid_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavLngid_Enabled), 5, 0), !bGXsfl_12_Refreshing);
          edtavLanguage_Enabled = 0;
-         AssignProp("", false, edtavLanguage_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavLanguage_Enabled), 5, 0), !bGXsfl_12_Refreshing);
          edtavName_Enabled = 0;
-         AssignProp("", false, edtavName_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavName_Enabled), 5, 0), !bGXsfl_12_Refreshing);
          edtavText_Enabled = 0;
-         AssignProp("", false, edtavText_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavText_Enabled), 5, 0), !bGXsfl_12_Refreshing);
          edtavDelete_Enabled = 0;
-         AssignProp("", false, edtavDelete_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavDelete_Enabled), 5, 0), !bGXsfl_12_Refreshing);
          fix_multi_value_controls( ) ;
       }
 
@@ -1196,7 +1188,7 @@ namespace GeneXus.Programs {
       {
          /* Start Routine */
          returnInSub = false;
-         subGrid_Rows = 20;
+         subGrid_Rows = 10;
          GxWebStd.gx_hidden_field( context, "GRID_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Rows), 6, 0, ".", "")));
          Grid_empowerer_Gridinternalname = subGrid_Internalname;
          ucGrid_empowerer.SendProperty(context, "", false, Grid_empowerer_Internalname, "GridInternalName", Grid_empowerer_Gridinternalname);
@@ -1913,7 +1905,7 @@ namespace GeneXus.Programs {
          PA3E2( ) ;
          WS3E2( ) ;
          WE3E2( ) ;
-         this.cleanup();
+         cleanup();
          context.SetWrapped(false);
          context.GX_msglist = BackMsgLst;
          return "";
@@ -1935,7 +1927,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20248121574977", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202491613192998", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1951,7 +1943,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("gamtranslations.js", "?20248121574978", false, true);
+         context.AddJavascriptSource("gamtranslations.js", "?202491613192999", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/DVPaginationBar/DVPaginationBarRender.js", "", false, true);
@@ -1980,6 +1972,7 @@ namespace GeneXus.Programs {
 
       protected void sendrow_122( )
       {
+         sGXsfl_12_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_12_idx), 4, 0), 4, "0");
          SubsflControlProps_122( ) ;
          WB3E0( ) ;
          if ( ( subGrid_Rows * 1 == 0 ) || ( nGXsfl_12_idx <= subGrid_fnc_Recordsperpage( ) * 1 ) )
@@ -2047,45 +2040,44 @@ namespace GeneXus.Programs {
                context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+"display:none;"+"\">") ;
             }
             /* Single line edit */
-            TempTags = " " + ((edtavLngid_Enabled!=0)&&(edtavLngid_Visible!=0) ? " onfocus=\"gx.evt.onfocus(this, 13,'',false,'"+sGXsfl_12_idx+"',12)\"" : " ");
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavLngid_Internalname,StringUtil.RTrim( AV16LngID),(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+((edtavLngid_Enabled!=0)&&(edtavLngid_Visible!=0) ? " onblur=\""+""+";gx.evt.onblur(this,13);\"" : " "),(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavLngid_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(int)edtavLngid_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)15,(short)0,(short)0,(short)12,(short)0,(short)-1,(short)0,(bool)true,(string)"GeneXusSecurityCommon\\GAMLanguageCulture",(string)"start",(bool)true,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavLngid_Internalname,StringUtil.RTrim( AV16LngID),(string)"",""+" onchange=\""+""+";gx.evt.onchange(this, event)\" ",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavLngid_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(int)edtavLngid_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)15,(short)0,(short)0,(short)12,(short)0,(short)-1,(short)0,(bool)true,(string)"GeneXusSecurityCommon\\GAMLanguageCulture",(string)"start",(bool)true,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
                context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+""+"\">") ;
             }
             /* Single line edit */
-            TempTags = " " + ((edtavLanguage_Enabled!=0)&&(edtavLanguage_Visible!=0) ? " onfocus=\"gx.evt.onfocus(this, 14,'',false,'"+sGXsfl_12_idx+"',12)\"" : " ");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 14,'',false,'" + sGXsfl_12_idx + "',12)\"";
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavLanguage_Internalname,(string)AV15Language,(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+((edtavLanguage_Enabled!=0)&&(edtavLanguage_Visible!=0) ? " onblur=\""+""+";gx.evt.onblur(this,14);\"" : " "),(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavLanguage_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)-1,(int)edtavLanguage_Enabled,(short)1,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)40,(short)0,(short)0,(short)12,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavLanguage_Internalname,(string)AV15Language,(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,14);\"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavLanguage_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)-1,(int)edtavLanguage_Enabled,(short)1,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)40,(short)0,(short)0,(short)12,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
                context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+""+"\">") ;
             }
             /* Single line edit */
-            TempTags = " " + ((edtavName_Enabled!=0)&&(edtavName_Visible!=0) ? " onfocus=\"gx.evt.onfocus(this, 15,'',false,'"+sGXsfl_12_idx+"',12)\"" : " ");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 15,'',false,'" + sGXsfl_12_idx + "',12)\"";
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavName_Internalname,StringUtil.RTrim( AV17Name),(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+((edtavName_Enabled!=0)&&(edtavName_Visible!=0) ? " onblur=\""+""+";gx.evt.onblur(this,15);\"" : " "),(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavName_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)-1,(int)edtavName_Enabled,(short)1,(string)"text",(string)"",(short)570,(string)"px",(short)17,(string)"px",(short)254,(short)0,(short)0,(short)12,(short)0,(short)-1,(short)-1,(bool)true,(string)"GeneXusSecurityCommon\\GAMDescriptionLong",(string)"start",(bool)true,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavName_Internalname,StringUtil.RTrim( AV17Name),(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,15);\"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavName_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)-1,(int)edtavName_Enabled,(short)1,(string)"text",(string)"",(short)570,(string)"px",(short)17,(string)"px",(short)254,(short)0,(short)0,(short)12,(short)0,(short)-1,(short)-1,(bool)true,(string)"GeneXusSecurityCommon\\GAMDescriptionLong",(string)"start",(bool)true,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
                context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+""+"\">") ;
             }
             /* Single line edit */
-            TempTags = " " + ((edtavText_Enabled!=0)&&(edtavText_Visible!=0) ? " onfocus=\"gx.evt.onfocus(this, 16,'',false,'"+sGXsfl_12_idx+"',12)\"" : " ");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 16,'',false,'" + sGXsfl_12_idx + "',12)\"";
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavText_Internalname,StringUtil.RTrim( AV22Text),(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+((edtavText_Enabled!=0)&&(edtavText_Visible!=0) ? " onblur=\""+""+";gx.evt.onblur(this,16);\"" : " "),(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavText_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)-1,(int)edtavText_Enabled,(short)1,(string)"text",(string)"",(short)570,(string)"px",(short)17,(string)"px",(short)254,(short)0,(short)0,(short)12,(short)0,(short)-1,(short)-1,(bool)true,(string)"GeneXusSecurityCommon\\GAMDescriptionLong",(string)"start",(bool)true,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavText_Internalname,StringUtil.RTrim( AV22Text),(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,16);\"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavText_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)-1,(int)edtavText_Enabled,(short)1,(string)"text",(string)"",(short)570,(string)"px",(short)17,(string)"px",(short)254,(short)0,(short)0,(short)12,(short)0,(short)-1,(short)-1,(bool)true,(string)"GeneXusSecurityCommon\\GAMDescriptionLong",(string)"start",(bool)true,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
                context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+((edtavDelete_Visible==0) ? "display:none;" : "")+"\">") ;
             }
             /* Single line edit */
-            TempTags = " " + ((edtavDelete_Enabled!=0)&&(edtavDelete_Visible!=0) ? " onfocus=\"gx.evt.onfocus(this, 17,'',false,'"+sGXsfl_12_idx+"',12)\"" : " ");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 17,'',false,'" + sGXsfl_12_idx + "',12)\"";
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavDelete_Internalname,StringUtil.RTrim( AV6Delete),(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+((edtavDelete_Enabled!=0)&&(edtavDelete_Visible!=0) ? " onblur=\""+""+";gx.evt.onblur(this,17);\"" : " "),(string)"'"+""+"'"+",false,"+"'"+"e173e2_client"+"'",(string)"",(string)"",(string)"Delete",(string)"",(string)edtavDelete_Jsonclick,(short)7,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWIconActionColumn",(string)"",(int)edtavDelete_Visible,(int)edtavDelete_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)1,(short)12,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavDelete_Internalname,StringUtil.RTrim( AV6Delete),(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,17);\"",(string)"'"+""+"'"+",false,"+"'"+"e173e2_client"+"'",(string)"",(string)"",(string)"Delete",(string)"",(string)edtavDelete_Jsonclick,(short)7,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWIconActionColumn",(string)"",(int)edtavDelete_Visible,(int)edtavDelete_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)1,(short)12,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
             send_integrity_lvl_hashes3E2( ) ;
             GridContainer.AddRow(GridRow);
             nGXsfl_12_idx = ((subGrid_Islastpage==1)&&(nGXsfl_12_idx+1>subGrid_fnc_Recordsperpage( )) ? 1 : nGXsfl_12_idx+1);
@@ -2229,13 +2221,9 @@ namespace GeneXus.Programs {
          edtavDelete_Jsonclick = "";
          edtavDelete_Enabled = 1;
          edtavText_Jsonclick = "";
-         edtavText_Visible = -1;
          edtavName_Jsonclick = "";
-         edtavName_Visible = -1;
          edtavLanguage_Jsonclick = "";
-         edtavLanguage_Visible = -1;
          edtavLngid_Jsonclick = "";
-         edtavLngid_Visible = 0;
          edtavLngid_Enabled = 1;
          subGrid_Class = "GridWithPaginationBar WorkWith";
          subGrid_Backcolorstyle = 0;
@@ -2279,35 +2267,27 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV43Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV24Type',fld:'vTYPE',pic:'',hsh:true},{av:'AV18PrimaryID',fld:'vPRIMARYID',pic:'ZZZZZZZZZZZ9',hsh:true},{av:'AV20SecondaryID',fld:'vSECONDARYID',pic:'ZZZZZZZZZZZ9',hsh:true},{av:'AV21TertiaryID',fld:'vTERTIARYID',pic:'ZZZZZZZZZZZ9',hsh:true},{av:'Gx_mode',fld:'vMODE',pic:'@!',hsh:true},{av:'AV23Title',fld:'vTITLE',pic:'',hsh:true}]");
-         setEventMetadata("REFRESH",",oparms:[{av:'AV38GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV40GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'AV39GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'}]}");
-         setEventMetadata("GRIDPAGINATIONBAR.CHANGEPAGE","{handler:'E113E2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV43Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV24Type',fld:'vTYPE',pic:'',hsh:true},{av:'AV18PrimaryID',fld:'vPRIMARYID',pic:'ZZZZZZZZZZZ9',hsh:true},{av:'AV20SecondaryID',fld:'vSECONDARYID',pic:'ZZZZZZZZZZZ9',hsh:true},{av:'AV21TertiaryID',fld:'vTERTIARYID',pic:'ZZZZZZZZZZZ9',hsh:true},{av:'Gx_mode',fld:'vMODE',pic:'@!',hsh:true},{av:'AV23Title',fld:'vTITLE',pic:'',hsh:true},{av:'Gridpaginationbar_Selectedpage',ctrl:'GRIDPAGINATIONBAR',prop:'SelectedPage'}]");
-         setEventMetadata("GRIDPAGINATIONBAR.CHANGEPAGE",",oparms:[]}");
-         setEventMetadata("GRIDPAGINATIONBAR.CHANGEROWSPERPAGE","{handler:'E123E2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV43Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV24Type',fld:'vTYPE',pic:'',hsh:true},{av:'AV18PrimaryID',fld:'vPRIMARYID',pic:'ZZZZZZZZZZZ9',hsh:true},{av:'AV20SecondaryID',fld:'vSECONDARYID',pic:'ZZZZZZZZZZZ9',hsh:true},{av:'AV21TertiaryID',fld:'vTERTIARYID',pic:'ZZZZZZZZZZZ9',hsh:true},{av:'Gx_mode',fld:'vMODE',pic:'@!',hsh:true},{av:'AV23Title',fld:'vTITLE',pic:'',hsh:true},{av:'Gridpaginationbar_Rowsperpageselectedvalue',ctrl:'GRIDPAGINATIONBAR',prop:'RowsPerPageSelectedValue'}]");
-         setEventMetadata("GRIDPAGINATIONBAR.CHANGEROWSPERPAGE",",oparms:[{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'}]}");
-         setEventMetadata("GRID.LOAD","{handler:'E153E2',iparms:[{av:'Gx_mode',fld:'vMODE',pic:'@!',hsh:true}]");
-         setEventMetadata("GRID.LOAD",",oparms:[{av:'AV6Delete',fld:'vDELETE',pic:''},{av:'AV16LngID',fld:'vLNGID',pic:'',hsh:true},{av:'AV15Language',fld:'vLANGUAGE',pic:''},{av:'AV17Name',fld:'vNAME',pic:''},{av:'AV22Text',fld:'vTEXT',pic:''},{av:'edtavLanguage_Enabled',ctrl:'vLANGUAGE',prop:'Enabled'},{av:'edtavDelete_Visible',ctrl:'vDELETE',prop:'Visible'},{av:'edtavName_Enabled',ctrl:'vNAME',prop:'Enabled'},{av:'edtavText_Enabled',ctrl:'vTEXT',prop:'Enabled'}]}");
-         setEventMetadata("'CONFIRM'","{handler:'E163E2',iparms:[{av:'AV24Type',fld:'vTYPE',pic:'',hsh:true},{av:'AV18PrimaryID',fld:'vPRIMARYID',pic:'ZZZZZZZZZZZ9',hsh:true},{av:'AV17Name',fld:'vNAME',grid:12,pic:''},{av:'GRID_nFirstRecordOnPage'},{av:'nRC_GXsfl_12',ctrl:'GRID',grid:12,prop:'GridRC',grid:12},{av:'AV22Text',fld:'vTEXT',grid:12,pic:''},{av:'AV16LngID',fld:'vLNGID',grid:12,pic:'',hsh:true},{av:'AV20SecondaryID',fld:'vSECONDARYID',pic:'ZZZZZZZZZZZ9',hsh:true},{av:'AV21TertiaryID',fld:'vTERTIARYID',pic:'ZZZZZZZZZZZ9',hsh:true}]");
-         setEventMetadata("'CONFIRM'",",oparms:[]}");
-         setEventMetadata("VDELETE.CLICK","{handler:'E173E2',iparms:[]");
-         setEventMetadata("VDELETE.CLICK",",oparms:[{av:'AV17Name',fld:'vNAME',pic:''},{av:'AV22Text',fld:'vTEXT',pic:''}]}");
-         setEventMetadata("NULL","{handler:'Validv_Delete',iparms:[]");
-         setEventMetadata("NULL",",oparms:[]}");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV43Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV24Type","fld":"vTYPE","hsh":true},{"av":"AV18PrimaryID","fld":"vPRIMARYID","pic":"ZZZZZZZZZZZ9","hsh":true},{"av":"AV20SecondaryID","fld":"vSECONDARYID","pic":"ZZZZZZZZZZZ9","hsh":true},{"av":"AV21TertiaryID","fld":"vTERTIARYID","pic":"ZZZZZZZZZZZ9","hsh":true},{"av":"Gx_mode","fld":"vMODE","pic":"@!","hsh":true},{"av":"AV23Title","fld":"vTITLE","hsh":true}]""");
+         setEventMetadata("REFRESH",""","oparms":[{"av":"AV38GridCurrentPage","fld":"vGRIDCURRENTPAGE","pic":"ZZZZZZZZZ9"},{"av":"AV40GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV39GridPageCount","fld":"vGRIDPAGECOUNT","pic":"ZZZZZZZZZ9"}]}""");
+         setEventMetadata("GRIDPAGINATIONBAR.CHANGEPAGE","""{"handler":"E113E2","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV43Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV24Type","fld":"vTYPE","hsh":true},{"av":"AV18PrimaryID","fld":"vPRIMARYID","pic":"ZZZZZZZZZZZ9","hsh":true},{"av":"AV20SecondaryID","fld":"vSECONDARYID","pic":"ZZZZZZZZZZZ9","hsh":true},{"av":"AV21TertiaryID","fld":"vTERTIARYID","pic":"ZZZZZZZZZZZ9","hsh":true},{"av":"Gx_mode","fld":"vMODE","pic":"@!","hsh":true},{"av":"AV23Title","fld":"vTITLE","hsh":true},{"av":"Gridpaginationbar_Selectedpage","ctrl":"GRIDPAGINATIONBAR","prop":"SelectedPage"}]}""");
+         setEventMetadata("GRIDPAGINATIONBAR.CHANGEROWSPERPAGE","""{"handler":"E123E2","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV43Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV24Type","fld":"vTYPE","hsh":true},{"av":"AV18PrimaryID","fld":"vPRIMARYID","pic":"ZZZZZZZZZZZ9","hsh":true},{"av":"AV20SecondaryID","fld":"vSECONDARYID","pic":"ZZZZZZZZZZZ9","hsh":true},{"av":"AV21TertiaryID","fld":"vTERTIARYID","pic":"ZZZZZZZZZZZ9","hsh":true},{"av":"Gx_mode","fld":"vMODE","pic":"@!","hsh":true},{"av":"AV23Title","fld":"vTITLE","hsh":true},{"av":"Gridpaginationbar_Rowsperpageselectedvalue","ctrl":"GRIDPAGINATIONBAR","prop":"RowsPerPageSelectedValue"}]""");
+         setEventMetadata("GRIDPAGINATIONBAR.CHANGEROWSPERPAGE",""","oparms":[{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"}]}""");
+         setEventMetadata("GRID.LOAD","""{"handler":"E153E2","iparms":[{"av":"Gx_mode","fld":"vMODE","pic":"@!","hsh":true}]""");
+         setEventMetadata("GRID.LOAD",""","oparms":[{"av":"AV6Delete","fld":"vDELETE"},{"av":"AV16LngID","fld":"vLNGID","hsh":true},{"av":"AV15Language","fld":"vLANGUAGE"},{"av":"AV17Name","fld":"vNAME"},{"av":"AV22Text","fld":"vTEXT"},{"av":"edtavLanguage_Enabled","ctrl":"vLANGUAGE","prop":"Enabled"},{"av":"edtavDelete_Visible","ctrl":"vDELETE","prop":"Visible"},{"av":"edtavName_Enabled","ctrl":"vNAME","prop":"Enabled"},{"av":"edtavText_Enabled","ctrl":"vTEXT","prop":"Enabled"}]}""");
+         setEventMetadata("'CONFIRM'","""{"handler":"E163E2","iparms":[{"av":"AV24Type","fld":"vTYPE","hsh":true},{"av":"AV18PrimaryID","fld":"vPRIMARYID","pic":"ZZZZZZZZZZZ9","hsh":true},{"av":"AV17Name","fld":"vNAME","grid":12},{"av":"GRID_nFirstRecordOnPage"},{"av":"nRC_GXsfl_12","ctrl":"GRID","grid":12,"prop":"GridRC","grid":12},{"av":"AV22Text","fld":"vTEXT","grid":12},{"av":"AV16LngID","fld":"vLNGID","grid":12,"hsh":true},{"av":"AV20SecondaryID","fld":"vSECONDARYID","pic":"ZZZZZZZZZZZ9","hsh":true},{"av":"AV21TertiaryID","fld":"vTERTIARYID","pic":"ZZZZZZZZZZZ9","hsh":true}]}""");
+         setEventMetadata("VDELETE.CLICK","""{"handler":"E173E2","iparms":[]""");
+         setEventMetadata("VDELETE.CLICK",""","oparms":[{"av":"AV17Name","fld":"vNAME"},{"av":"AV22Text","fld":"vTEXT"}]}""");
+         setEventMetadata("NULL","""{"handler":"Validv_Delete","iparms":[]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -2389,7 +2369,6 @@ namespace GeneXus.Programs {
       private short GRID_nEOF ;
       private short nGotPars ;
       private short GxWebError ;
-      private short initialized ;
       private short gxajaxcallmode ;
       private short wbEnd ;
       private short wbStart ;
@@ -2425,10 +2404,6 @@ namespace GeneXus.Programs {
       private int idxLst ;
       private int subGrid_Backcolor ;
       private int subGrid_Allbackcolor ;
-      private int edtavLngid_Visible ;
-      private int edtavLanguage_Visible ;
-      private int edtavName_Visible ;
-      private int edtavText_Visible ;
       private int subGrid_Titlebackcolor ;
       private int subGrid_Selectedindex ;
       private int subGrid_Selectioncolor ;
@@ -2532,27 +2507,27 @@ namespace GeneXus.Programs {
       private GXWebColumn GridColumn ;
       private GXUserControl ucGridpaginationbar ;
       private GXUserControl ucGrid_empowerer ;
+      private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
-      private IDataStoreProvider pr_default ;
-      private msglist BackMsgLst ;
-      private msglist LclMsgLst ;
-      private IDataStoreProvider pr_gam ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV5GAMErrorCollection ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV12GAMErrorColletion ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMDescription> AV11GAMDescriptions ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMApplicationLanguage> AV14GAMLanguages ;
-      private GXWebForm Form ;
-      private GeneXus.Programs.genexussecurity.SdtGAMError AV41Error ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV29WWPContext ;
       private GeneXus.Programs.genexussecurity.SdtGAMApplication AV7GAMApplication ;
-      private GeneXus.Programs.genexussecurity.SdtGAMDescription AV10GAMDescription ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMApplicationLanguage> AV14GAMLanguages ;
       private GeneXus.Programs.genexussecurity.SdtGAMApplicationLanguage AV13GAMLanguage ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMDescription> AV11GAMDescriptions ;
+      private GeneXus.Programs.genexussecurity.SdtGAMDescription AV10GAMDescription ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState AV34GridState ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV5GAMErrorCollection ;
+      private GeneXus.Programs.genexussecurity.SdtGAMError AV41Error ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV12GAMErrorColletion ;
       private GeneXus.Programs.genexussecurity.SdtGAMApplicationMenu AV8GAMApplicationMenu ;
       private GeneXus.Programs.genexussecurity.SdtGAMApplicationMenuOption AV9GAMApplicationMenuOption ;
       private GeneXus.Programs.genexussecurity.SdtGAMRole AV25GAMRole ;
       private GeneXus.Programs.genexussecurity.SdtGAMSecurityPolicy AV26GAMSecurityPolicy ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV29WWPContext ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState AV34GridState ;
+      private IDataStoreProvider pr_default ;
+      private msglist BackMsgLst ;
+      private msglist LclMsgLst ;
+      private IDataStoreProvider pr_gam ;
    }
 
    public class gamtranslations__gam : DataStoreHelperBase, IDataStoreHelper

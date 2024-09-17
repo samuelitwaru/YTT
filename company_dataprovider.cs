@@ -45,7 +45,7 @@ namespace GeneXus.Programs {
       {
          this.AV2ReturnValue = new GXBCCollection<SdtCompany>( context, "Company", "YTT_version4") ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_ReturnValue=this.AV2ReturnValue;
       }
 
@@ -57,29 +57,12 @@ namespace GeneXus.Programs {
 
       public void executeSubmit( out GXBCCollection<SdtCompany> aP0_ReturnValue )
       {
-         company_dataprovider objcompany_dataprovider;
-         objcompany_dataprovider = new company_dataprovider();
-         objcompany_dataprovider.AV2ReturnValue = new GXBCCollection<SdtCompany>( context, "Company", "YTT_version4") ;
-         objcompany_dataprovider.context.SetSubmitInitialConfig(context);
-         objcompany_dataprovider.initialize();
-         Submit( executePrivateCatch,objcompany_dataprovider);
+         this.AV2ReturnValue = new GXBCCollection<SdtCompany>( context, "Company", "YTT_version4") ;
+         SubmitImpl();
          aP0_ReturnValue=this.AV2ReturnValue;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((company_dataprovider)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -89,20 +72,16 @@ namespace GeneXus.Programs {
          {
             AV2ReturnValue = (GXBCCollection<SdtCompany>)(args[0]) ;
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -113,9 +92,9 @@ namespace GeneXus.Programs {
 
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GXBCCollection<SdtCompany> AV2ReturnValue ;
       private Object[] args ;
       private GXBCCollection<SdtCompany> aP0_ReturnValue ;
-      private GXBCCollection<SdtCompany> AV2ReturnValue ;
    }
 
 }

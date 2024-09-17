@@ -43,10 +43,10 @@ namespace GeneXus.Programs {
       public void execute( string aP0_ClientID )
       {
          this.AV5ClientID = aP0_ClientID;
-         executePrivate();
+         ExecuteImpl();
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -155,11 +155,8 @@ namespace GeneXus.Programs {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITWEB( ) ;
          if ( ! isAjaxCallMode( ) )
          {
@@ -190,7 +187,7 @@ namespace GeneXus.Programs {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override short ExecuteStartEvent( )
@@ -234,10 +231,10 @@ namespace GeneXus.Programs {
          CloseStyles();
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
@@ -406,7 +403,8 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
             /* Single line edit */
-            GxWebStd.gx_single_line_edit( context, edtavClientid_Internalname, StringUtil.RTrim( AV5ClientID), StringUtil.RTrim( context.localUtil.Format( AV5ClientID, "")), "", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavClientid_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavClientid_Enabled, 0, "text", "", 40, "chr", 1, "row", 40, 0, 0, 0, 0, -1, 0, true, "GeneXusSecurityCommon\\GAMClientApplicationId", "start", true, "", "HLP_GAMApplicationClientSecret.htm");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 17,'',false,'',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtavClientid_Internalname, StringUtil.RTrim( AV5ClientID), StringUtil.RTrim( context.localUtil.Format( AV5ClientID, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,17);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavClientid_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavClientid_Enabled, 0, "text", "", 40, "chr", 1, "row", 40, 0, 0, 0, 0, -1, 0, true, "GeneXusSecurityCommon\\GAMClientApplicationId", "start", true, "", "HLP_GAMApplicationClientSecret.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -489,7 +487,7 @@ namespace GeneXus.Programs {
          {
             if ( context.ExposeMetadata( ) )
             {
-               Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+               Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
             }
          }
          Form.Meta.addItem("description", "GAM_Application Client Secret", 0) ;
@@ -851,7 +849,7 @@ namespace GeneXus.Programs {
          PA3D2( ) ;
          WS3D2( ) ;
          WE3D2( ) ;
-         this.cleanup();
+         cleanup();
          context.SetWrapped(false);
          context.GX_msglist = BackMsgLst;
          return "";
@@ -872,7 +870,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024812158658", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20249161319959", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -888,7 +886,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("gamapplicationclientsecret.js", "?2024812158659", false, true);
+         context.AddJavascriptSource("gamapplicationclientsecret.js", "?20249161319959", false, true);
          /* End function include_jscripts */
       }
 
@@ -946,27 +944,21 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'AV5ClientID',fld:'vCLIENTID',pic:'',hsh:true}]");
-         setEventMetadata("REFRESH",",oparms:[]}");
-         setEventMetadata("'DOAUTOGENERATE'","{handler:'E123D2',iparms:[]");
-         setEventMetadata("'DOAUTOGENERATE'",",oparms:[{av:'AV6ClientSecret',fld:'vCLIENTSECRET',pic:''}]}");
-         setEventMetadata("ENTER","{handler:'E133D2',iparms:[{av:'AV5ClientID',fld:'vCLIENTID',pic:'',hsh:true},{av:'AV6ClientSecret',fld:'vCLIENTSECRET',pic:''}]");
-         setEventMetadata("ENTER",",oparms:[{av:'edtavClientsecret_Enabled',ctrl:'vCLIENTSECRET',prop:'Enabled'},{ctrl:'BTNAUTOGENERATE',prop:'Visible'},{ctrl:'BTNENTER',prop:'Visible'}]}");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"AV5ClientID","fld":"vCLIENTID","hsh":true}]}""");
+         setEventMetadata("'DOAUTOGENERATE'","""{"handler":"E123D2","iparms":[]""");
+         setEventMetadata("'DOAUTOGENERATE'",""","oparms":[{"av":"AV6ClientSecret","fld":"vCLIENTSECRET"}]}""");
+         setEventMetadata("ENTER","""{"handler":"E133D2","iparms":[{"av":"AV5ClientID","fld":"vCLIENTID","hsh":true},{"av":"AV6ClientSecret","fld":"vCLIENTSECRET"}]""");
+         setEventMetadata("ENTER",""","oparms":[{"av":"edtavClientsecret_Enabled","ctrl":"vCLIENTSECRET","prop":"Enabled"},{"ctrl":"BTNAUTOGENERATE","prop":"Visible"},{"ctrl":"BTNENTER","prop":"Visible"}]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -983,8 +975,8 @@ namespace GeneXus.Programs {
          sPrefix = "";
          ClassString = "";
          StyleString = "";
-         lblTextblockclientsecret_Jsonclick = "";
          TempTags = "";
+         lblTextblockclientsecret_Jsonclick = "";
          AV6ClientSecret = "";
          bttBtnautogenerate_Jsonclick = "";
          bttBtnenter_Jsonclick = "";
@@ -1011,7 +1003,6 @@ namespace GeneXus.Programs {
 
       private short nGotPars ;
       private short GxWebError ;
-      private short initialized ;
       private short gxajaxcallmode ;
       private short wbEnd ;
       private short wbStart ;
@@ -1041,13 +1032,13 @@ namespace GeneXus.Programs {
       private string StyleString ;
       private string divTableattributes_Internalname ;
       private string edtavClientid_Internalname ;
+      private string TempTags ;
       private string edtavClientid_Jsonclick ;
       private string divUnnamedtable1_Internalname ;
       private string divUnnamedtableclientsecret_Internalname ;
       private string lblTextblockclientsecret_Internalname ;
       private string lblTextblockclientsecret_Jsonclick ;
       private string edtavClientsecret_Internalname ;
-      private string TempTags ;
       private string AV6ClientSecret ;
       private string edtavClientsecret_Jsonclick ;
       private string bttBtnautogenerate_Internalname ;
@@ -1065,16 +1056,16 @@ namespace GeneXus.Programs {
       private bool wbErr ;
       private bool gxdyncontrolsrefreshing ;
       private bool returnInSub ;
+      private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GeneXus.Programs.genexussecurity.SdtGAMApplication AV7GAMApplication ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV8GAMErrorCollection ;
       private IDataStoreProvider pr_default ;
+      private GeneXus.Programs.genexussecurity.SdtGAMError AV11GAMError ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
       private IDataStoreProvider pr_gam ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV8GAMErrorCollection ;
-      private GXWebForm Form ;
-      private GeneXus.Programs.genexussecurity.SdtGAMApplication AV7GAMApplication ;
-      private GeneXus.Programs.genexussecurity.SdtGAMError AV11GAMError ;
    }
 
    public class gamapplicationclientsecret__gam : DataStoreHelperBase, IDataStoreHelper

@@ -70,7 +70,7 @@ namespace GeneXus.Programs {
          this.AV9ProjectIds = aP3_ProjectIds;
          this.Gxm2rootcol = new GXBaseCollection<SdtSDTWorkHourLog_SDTWorkHourLogItem>( context, "SDTWorkHourLogItem", "YTT_version4") ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP4_Gxm2rootcol=this.Gxm2rootcol;
       }
 
@@ -89,33 +89,16 @@ namespace GeneXus.Programs {
                                  GxSimpleCollection<long> aP3_ProjectIds ,
                                  out GXBaseCollection<SdtSDTWorkHourLog_SDTWorkHourLogItem> aP4_Gxm2rootcol )
       {
-         dpworkhourlog objdpworkhourlog;
-         objdpworkhourlog = new dpworkhourlog();
-         objdpworkhourlog.AV6EmployeeId = aP0_EmployeeId;
-         objdpworkhourlog.AV7FromDate = aP1_FromDate;
-         objdpworkhourlog.AV5ToDate = aP2_ToDate;
-         objdpworkhourlog.AV9ProjectIds = aP3_ProjectIds;
-         objdpworkhourlog.Gxm2rootcol = new GXBaseCollection<SdtSDTWorkHourLog_SDTWorkHourLogItem>( context, "SDTWorkHourLogItem", "YTT_version4") ;
-         objdpworkhourlog.context.SetSubmitInitialConfig(context);
-         objdpworkhourlog.initialize();
-         Submit( executePrivateCatch,objdpworkhourlog);
+         this.AV6EmployeeId = aP0_EmployeeId;
+         this.AV7FromDate = aP1_FromDate;
+         this.AV5ToDate = aP2_ToDate;
+         this.AV9ProjectIds = aP3_ProjectIds;
+         this.Gxm2rootcol = new GXBaseCollection<SdtSDTWorkHourLog_SDTWorkHourLogItem>( context, "SDTWorkHourLogItem", "YTT_version4") ;
+         SubmitImpl();
          aP4_Gxm2rootcol=this.Gxm2rootcol;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((dpworkhourlog)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -163,12 +146,12 @@ namespace GeneXus.Programs {
             pr_default.readNext(0);
          }
          pr_default.close(0);
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -176,13 +159,8 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
-         scmdbuf = "";
          A119WorkHourLogDate = DateTime.MinValue;
          P001P2_A106EmployeeId = new long[1] ;
          P001P2_A119WorkHourLogDate = new DateTime[] {DateTime.MinValue} ;
@@ -216,7 +194,6 @@ namespace GeneXus.Programs {
       private long A102ProjectId ;
       private long A106EmployeeId ;
       private long A118WorkHourLogId ;
-      private string scmdbuf ;
       private string A148EmployeeName ;
       private string A103ProjectName ;
       private DateTime AV7FromDate ;
@@ -224,9 +201,10 @@ namespace GeneXus.Programs {
       private DateTime A119WorkHourLogDate ;
       private string A123WorkHourLogDescription ;
       private string A120WorkHourLogDuration ;
-      private GxSimpleCollection<long> AV9ProjectIds ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GxSimpleCollection<long> AV9ProjectIds ;
+      private GXBaseCollection<SdtSDTWorkHourLog_SDTWorkHourLogItem> Gxm2rootcol ;
       private IDataStoreProvider pr_default ;
       private long[] P001P2_A106EmployeeId ;
       private DateTime[] P001P2_A119WorkHourLogDate ;
@@ -238,9 +216,8 @@ namespace GeneXus.Programs {
       private string[] P001P2_A123WorkHourLogDescription ;
       private string[] P001P2_A148EmployeeName ;
       private string[] P001P2_A103ProjectName ;
-      private GXBaseCollection<SdtSDTWorkHourLog_SDTWorkHourLogItem> aP4_Gxm2rootcol ;
-      private GXBaseCollection<SdtSDTWorkHourLog_SDTWorkHourLogItem> Gxm2rootcol ;
       private SdtSDTWorkHourLog_SDTWorkHourLogItem Gxm1sdtworkhourlog ;
+      private GXBaseCollection<SdtSDTWorkHourLog_SDTWorkHourLogItem> aP4_Gxm2rootcol ;
    }
 
    public class dpworkhourlog__default : DataStoreHelperBase, IDataStoreHelper

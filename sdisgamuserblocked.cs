@@ -48,7 +48,7 @@ namespace GeneXus.Programs {
          this.AV10UserEmail = aP0_UserEmail;
          this.AV14isInactive = false ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_isInactive=this.AV14isInactive;
       }
 
@@ -61,30 +61,13 @@ namespace GeneXus.Programs {
       public void executeSubmit( string aP0_UserEmail ,
                                  out bool aP1_isInactive )
       {
-         sdisgamuserblocked objsdisgamuserblocked;
-         objsdisgamuserblocked = new sdisgamuserblocked();
-         objsdisgamuserblocked.AV10UserEmail = aP0_UserEmail;
-         objsdisgamuserblocked.AV14isInactive = false ;
-         objsdisgamuserblocked.context.SetSubmitInitialConfig(context);
-         objsdisgamuserblocked.initialize();
-         Submit( executePrivateCatch,objsdisgamuserblocked);
+         this.AV10UserEmail = aP0_UserEmail;
+         this.AV14isInactive = false ;
+         SubmitImpl();
          aP1_isInactive=this.AV14isInactive;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((sdisgamuserblocked)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -100,12 +83,12 @@ namespace GeneXus.Programs {
             if (true) break;
          }
          pr_default.close(0);
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -113,13 +96,8 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
-         scmdbuf = "";
          P00AD2_A109EmployeeEmail = new string[] {""} ;
          P00AD2_A112EmployeeIsActive = new bool[] {false} ;
          P00AD2_A106EmployeeId = new long[1] ;
@@ -135,7 +113,6 @@ namespace GeneXus.Programs {
       }
 
       private long A106EmployeeId ;
-      private string scmdbuf ;
       private bool AV14isInactive ;
       private bool A112EmployeeIsActive ;
       private string AV10UserEmail ;

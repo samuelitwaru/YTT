@@ -46,7 +46,7 @@ namespace GeneXus.Programs.workwithplus.ai {
          this.AV13LinkedPages = aP2_LinkedPages;
          this.AV12SystemContent = aP3_SystemContent;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP2_LinkedPages=this.AV13LinkedPages;
          aP3_SystemContent=this.AV12SystemContent;
       }
@@ -64,33 +64,16 @@ namespace GeneXus.Programs.workwithplus.ai {
                                  ref GxSimpleCollection<string> aP2_LinkedPages ,
                                  ref string aP3_SystemContent )
       {
-         wwp_aigetqueryredirectionmenuoptions objwwp_aigetqueryredirectionmenuoptions;
-         objwwp_aigetqueryredirectionmenuoptions = new wwp_aigetqueryredirectionmenuoptions();
-         objwwp_aigetqueryredirectionmenuoptions.AV11MenuOptions = aP0_MenuOptions;
-         objwwp_aigetqueryredirectionmenuoptions.AV10MenuOptionPrefix = aP1_MenuOptionPrefix;
-         objwwp_aigetqueryredirectionmenuoptions.AV13LinkedPages = aP2_LinkedPages;
-         objwwp_aigetqueryredirectionmenuoptions.AV12SystemContent = aP3_SystemContent;
-         objwwp_aigetqueryredirectionmenuoptions.context.SetSubmitInitialConfig(context);
-         objwwp_aigetqueryredirectionmenuoptions.initialize();
-         Submit( executePrivateCatch,objwwp_aigetqueryredirectionmenuoptions);
+         this.AV11MenuOptions = aP0_MenuOptions;
+         this.AV10MenuOptionPrefix = aP1_MenuOptionPrefix;
+         this.AV13LinkedPages = aP2_LinkedPages;
+         this.AV12SystemContent = aP3_SystemContent;
+         SubmitImpl();
          aP2_LinkedPages=this.AV13LinkedPages;
          aP3_SystemContent=this.AV12SystemContent;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwp_aigetqueryredirectionmenuoptions)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -121,21 +104,17 @@ namespace GeneXus.Programs.workwithplus.ai {
             }
             AV14GXV1 = (int)(AV14GXV1+1);
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -149,10 +128,10 @@ namespace GeneXus.Programs.workwithplus.ai {
       private string AV10MenuOptionPrefix ;
       private string AV12SystemContent ;
       private string AV9MenuOptionCaption ;
+      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item> AV11MenuOptions ;
+      private GxSimpleCollection<string> AV13LinkedPages ;
       private GxSimpleCollection<string> aP2_LinkedPages ;
       private string aP3_SystemContent ;
-      private GxSimpleCollection<string> AV13LinkedPages ;
-      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item> AV11MenuOptions ;
       private GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item AV8MenuOption ;
    }
 

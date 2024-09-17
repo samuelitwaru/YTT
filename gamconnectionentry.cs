@@ -46,12 +46,12 @@ namespace GeneXus.Programs {
       {
          this.Gx_mode = aP0_Gx_mode;
          this.AV19pConnectionName = aP1_pConnectionName;
-         executePrivate();
+         ExecuteImpl();
          aP0_Gx_mode=this.Gx_mode;
          aP1_pConnectionName=this.AV19pConnectionName;
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -206,11 +206,8 @@ namespace GeneXus.Programs {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITWEB( ) ;
          if ( ! isAjaxCallMode( ) )
          {
@@ -241,7 +238,7 @@ namespace GeneXus.Programs {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override short ExecuteStartEvent( )
@@ -285,10 +282,10 @@ namespace GeneXus.Programs {
          CloseStyles();
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
@@ -891,7 +888,7 @@ namespace GeneXus.Programs {
          {
             if ( context.ExposeMetadata( ) )
             {
-               Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+               Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
             }
          }
          Form.Meta.addItem("description", "Connection", 0) ;
@@ -1048,6 +1045,7 @@ namespace GeneXus.Programs {
                                  {
                                     context.wbHandled = 1;
                                     dynload_actions( ) ;
+                                    /* Execute user event: Gridwwsysconns.Load */
                                     E191B2 ();
                                  }
                                  else if ( StringUtil.StrCmp(sEvt, "VDELETECONNECTION.CLICK") == 0 )
@@ -1197,13 +1195,9 @@ namespace GeneXus.Programs {
       {
          /* GeneXus formulas. */
          edtavConnectionkey_Enabled = 0;
-         AssignProp("", false, edtavConnectionkey_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavConnectionkey_Enabled), 5, 0), !bGXsfl_85_Refreshing);
          edtavIscurrentkey_Enabled = 0;
-         AssignProp("", false, edtavIscurrentkey_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavIscurrentkey_Enabled), 5, 0), !bGXsfl_85_Refreshing);
          edtavConnectionfile_Enabled = 0;
-         AssignProp("", false, edtavConnectionfile_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavConnectionfile_Enabled), 5, 0), !bGXsfl_85_Refreshing);
          edtavDeleteconnection_Enabled = 0;
-         AssignProp("", false, edtavDeleteconnection_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavDeleteconnection_Enabled), 5, 0), !bGXsfl_85_Refreshing);
       }
 
       protected void RF1B2( )
@@ -1241,12 +1235,14 @@ namespace GeneXus.Programs {
          if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
          {
             SubsflControlProps_852( ) ;
+            /* Execute user event: Gridwwsysconns.Load */
             E191B2 ();
             if ( ( subGridwwsysconns_Islastpage == 0 ) && ( GRIDWWSYSCONNS_nCurrentRecord > 0 ) && ( GRIDWWSYSCONNS_nGridOutOfScope == 0 ) && ( nGXsfl_85_idx == 1 ) )
             {
                GRIDWWSYSCONNS_nCurrentRecord = 0;
                GRIDWWSYSCONNS_nGridOutOfScope = 1;
                subgridwwsysconns_firstpage( ) ;
+               /* Execute user event: Gridwwsysconns.Load */
                E191B2 ();
             }
             wbEnd = 85;
@@ -1373,13 +1369,9 @@ namespace GeneXus.Programs {
       protected void before_start_formulas( )
       {
          edtavConnectionkey_Enabled = 0;
-         AssignProp("", false, edtavConnectionkey_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavConnectionkey_Enabled), 5, 0), !bGXsfl_85_Refreshing);
          edtavIscurrentkey_Enabled = 0;
-         AssignProp("", false, edtavIscurrentkey_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavIscurrentkey_Enabled), 5, 0), !bGXsfl_85_Refreshing);
          edtavConnectionfile_Enabled = 0;
-         AssignProp("", false, edtavConnectionfile_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavConnectionfile_Enabled), 5, 0), !bGXsfl_85_Refreshing);
          edtavDeleteconnection_Enabled = 0;
-         AssignProp("", false, edtavDeleteconnection_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavDeleteconnection_Enabled), 5, 0), !bGXsfl_85_Refreshing);
          fix_multi_value_controls( ) ;
       }
 
@@ -1540,7 +1532,7 @@ namespace GeneXus.Programs {
          AssignProp("", false, edtavPconnectionname_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtavPconnectionname_Visible), 5, 0), true);
          Gridwwsysconns_empowerer_Gridinternalname = subGridwwsysconns_Internalname;
          ucGridwwsysconns_empowerer.SendProperty(context, "", false, Gridwwsysconns_empowerer_Internalname, "GridInternalName", Gridwwsysconns_empowerer_Gridinternalname);
-         subGridwwsysconns_Rows = 20;
+         subGridwwsysconns_Rows = 10;
          GxWebStd.gx_hidden_field( context, "GRIDWWSYSCONNS_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGridwwsysconns_Rows), 6, 0, ".", "")));
       }
 
@@ -1899,7 +1891,7 @@ namespace GeneXus.Programs {
          PA1B2( ) ;
          WS1B2( ) ;
          WE1B2( ) ;
-         this.cleanup();
+         cleanup();
          context.SetWrapped(false);
          context.GX_msglist = BackMsgLst;
          return "";
@@ -1920,7 +1912,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20248121572028", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202491613162746", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1936,7 +1928,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("gamconnectionentry.js", "?20248121572031", false, true);
+         context.AddJavascriptSource("gamconnectionentry.js", "?202491613162750", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Panel/BootstrapPanelRender.js", "", false, true);
@@ -1969,6 +1961,7 @@ namespace GeneXus.Programs {
 
       protected void sendrow_852( )
       {
+         sGXsfl_85_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_85_idx), 4, 0), 4, "0");
          SubsflControlProps_852( ) ;
          WB1B0( ) ;
          if ( ( subGridwwsysconns_Rows * 1 == 0 ) || ( nGXsfl_85_idx <= subGridwwsysconns_fnc_Recordsperpage( ) * 1 ) )
@@ -2036,36 +2029,36 @@ namespace GeneXus.Programs {
                context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+""+"\">") ;
             }
             /* Single line edit */
-            TempTags = " " + ((edtavConnectionkey_Enabled!=0)&&(edtavConnectionkey_Visible!=0) ? " onfocus=\"gx.evt.onfocus(this, 86,'',false,'"+sGXsfl_85_idx+"',85)\"" : " ");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 86,'',false,'" + sGXsfl_85_idx + "',85)\"";
             ROClassString = "Attribute";
-            GridwwsysconnsRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavConnectionkey_Internalname,StringUtil.RTrim( AV7ConnectionKey),(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+((edtavConnectionkey_Enabled!=0)&&(edtavConnectionkey_Visible!=0) ? " onblur=\""+""+";gx.evt.onblur(this,86);\"" : " "),(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavConnectionkey_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)-1,(int)edtavConnectionkey_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)40,(short)0,(short)0,(short)85,(short)0,(short)-1,(short)0,(bool)true,(string)"GeneXusSecurityCommon\\GAMGUID",(string)"start",(bool)true,(string)""});
+            GridwwsysconnsRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavConnectionkey_Internalname,StringUtil.RTrim( AV7ConnectionKey),(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,86);\"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavConnectionkey_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)-1,(int)edtavConnectionkey_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)40,(short)0,(short)0,(short)85,(short)0,(short)-1,(short)0,(bool)true,(string)"GeneXusSecurityCommon\\GAMGUID",(string)"start",(bool)true,(string)""});
             /* Subfile cell */
             if ( GridwwsysconnsContainer.GetWrapped() == 1 )
             {
                context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+""+"\">") ;
             }
             /* Single line edit */
-            TempTags = " " + ((edtavIscurrentkey_Enabled!=0)&&(edtavIscurrentkey_Visible!=0) ? " onfocus=\"gx.evt.onfocus(this, 87,'',false,'"+sGXsfl_85_idx+"',85)\"" : " ");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 87,'',false,'" + sGXsfl_85_idx + "',85)\"";
             ROClassString = "Attribute";
-            GridwwsysconnsRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavIscurrentkey_Internalname,(string)AV24IsCurrentKey,(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+((edtavIscurrentkey_Enabled!=0)&&(edtavIscurrentkey_Visible!=0) ? " onblur=\""+""+";gx.evt.onblur(this,87);\"" : " "),(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavIscurrentkey_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)-1,(int)edtavIscurrentkey_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)40,(short)0,(short)0,(short)85,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
+            GridwwsysconnsRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavIscurrentkey_Internalname,(string)AV24IsCurrentKey,(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,87);\"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavIscurrentkey_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)-1,(int)edtavIscurrentkey_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)40,(short)0,(short)0,(short)85,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
             /* Subfile cell */
             if ( GridwwsysconnsContainer.GetWrapped() == 1 )
             {
                context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+""+"\">") ;
             }
             /* Single line edit */
-            TempTags = " " + ((edtavConnectionfile_Enabled!=0)&&(edtavConnectionfile_Visible!=0) ? " onfocus=\"gx.evt.onfocus(this, 88,'',false,'"+sGXsfl_85_idx+"',85)\"" : " ");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 88,'',false,'" + sGXsfl_85_idx + "',85)\"";
             ROClassString = "Attribute";
-            GridwwsysconnsRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavConnectionfile_Internalname,StringUtil.RTrim( AV32ConnectionFile),(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+((edtavConnectionfile_Enabled!=0)&&(edtavConnectionfile_Visible!=0) ? " onblur=\""+""+";gx.evt.onblur(this,88);\"" : " "),"'"+""+"'"+",false,"+"'"+"EVCONNECTIONFILE.CLICK."+sGXsfl_85_idx+"'",(string)"",(string)"",(string)"File",(string)"",(string)edtavConnectionfile_Jsonclick,(short)5,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWIconActionColumn",(string)"",(short)-1,(int)edtavConnectionfile_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)1,(short)85,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
+            GridwwsysconnsRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavConnectionfile_Internalname,StringUtil.RTrim( AV32ConnectionFile),(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,88);\"","'"+""+"'"+",false,"+"'"+"EVCONNECTIONFILE.CLICK."+sGXsfl_85_idx+"'",(string)"",(string)"",(string)"File",(string)"",(string)edtavConnectionfile_Jsonclick,(short)5,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWIconActionColumn",(string)"",(short)-1,(int)edtavConnectionfile_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)1,(short)85,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
             /* Subfile cell */
             if ( GridwwsysconnsContainer.GetWrapped() == 1 )
             {
                context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+""+"\">") ;
             }
             /* Single line edit */
-            TempTags = " " + ((edtavDeleteconnection_Enabled!=0)&&(edtavDeleteconnection_Visible!=0) ? " onfocus=\"gx.evt.onfocus(this, 89,'',false,'"+sGXsfl_85_idx+"',85)\"" : " ");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 89,'',false,'" + sGXsfl_85_idx + "',85)\"";
             ROClassString = "Attribute";
-            GridwwsysconnsRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavDeleteconnection_Internalname,StringUtil.RTrim( AV33DeleteConnection),(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+((edtavDeleteconnection_Enabled!=0)&&(edtavDeleteconnection_Visible!=0) ? " onblur=\""+""+";gx.evt.onblur(this,89);\"" : " "),"'"+""+"'"+",false,"+"'"+"EVDELETECONNECTION.CLICK."+sGXsfl_85_idx+"'",(string)"",(string)"",(string)"Delete",(string)"",(string)edtavDeleteconnection_Jsonclick,(short)5,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWIconActionColumn",(string)"",(short)-1,(int)edtavDeleteconnection_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)1,(short)85,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
+            GridwwsysconnsRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavDeleteconnection_Internalname,StringUtil.RTrim( AV33DeleteConnection),(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,89);\"","'"+""+"'"+",false,"+"'"+"EVDELETECONNECTION.CLICK."+sGXsfl_85_idx+"'",(string)"",(string)"",(string)"Delete",(string)"",(string)edtavDeleteconnection_Jsonclick,(short)5,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWIconActionColumn",(string)"",(short)-1,(int)edtavDeleteconnection_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)1,(short)85,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
             send_integrity_lvl_hashes1B2( ) ;
             GridwwsysconnsContainer.AddRow(GridwwsysconnsRow);
             nGXsfl_85_idx = ((subGridwwsysconns_Islastpage==1)&&(nGXsfl_85_idx+1>subGridwwsysconns_fnc_Recordsperpage( )) ? 1 : nGXsfl_85_idx+1);
@@ -2226,16 +2219,12 @@ namespace GeneXus.Programs {
          subGridwwsysconns_Allowselection = 0;
          subGridwwsysconns_Header = "";
          edtavDeleteconnection_Jsonclick = "";
-         edtavDeleteconnection_Visible = -1;
          edtavDeleteconnection_Enabled = 1;
          edtavConnectionfile_Jsonclick = "";
-         edtavConnectionfile_Visible = -1;
          edtavConnectionfile_Enabled = 1;
          edtavIscurrentkey_Jsonclick = "";
-         edtavIscurrentkey_Visible = -1;
          edtavIscurrentkey_Enabled = 1;
          edtavConnectionkey_Jsonclick = "";
-         edtavConnectionkey_Visible = -1;
          edtavConnectionkey_Enabled = 1;
          subGridwwsysconns_Class = "WorkWith";
          subGridwwsysconns_Backcolorstyle = 0;
@@ -2317,51 +2306,43 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'GRIDWWSYSCONNS_nFirstRecordOnPage'},{av:'GRIDWWSYSCONNS_nEOF'},{av:'subGridwwsysconns_Rows',ctrl:'GRIDWWSYSCONNS',prop:'Rows'},{av:'AV23CurrentConnectionKey',fld:'vCURRENTCONNECTIONKEY',pic:'',hsh:true},{av:'AV12FileXML',fld:'vFILEXML',pic:'',hsh:true},{av:'Gx_mode',fld:'vMODE',pic:'@!',hsh:true}]");
-         setEventMetadata("REFRESH",",oparms:[{ctrl:'BTNENTER',prop:'Visible'},{ctrl:'BTNGENKEY',prop:'Visible'}]}");
-         setEventMetadata("GRIDWWSYSCONNS.LOAD","{handler:'E191B2',iparms:[{av:'AV23CurrentConnectionKey',fld:'vCURRENTCONNECTIONKEY',pic:'',hsh:true}]");
-         setEventMetadata("GRIDWWSYSCONNS.LOAD",",oparms:[{av:'AV7ConnectionKey',fld:'vCONNECTIONKEY',pic:'',hsh:true},{av:'AV24IsCurrentKey',fld:'vISCURRENTKEY',pic:''},{av:'AV32ConnectionFile',fld:'vCONNECTIONFILE',pic:''},{av:'AV33DeleteConnection',fld:'vDELETECONNECTION',pic:''},{ctrl:'BTNUSECURRENTKEY',prop:'Visible'}]}");
-         setEventMetadata("'DOUACANCEL'","{handler:'E111B1',iparms:[]");
-         setEventMetadata("'DOUACANCEL'",",oparms:[]}");
-         setEventMetadata("'DOUSEAUTOMATICKEY'","{handler:'E121B2',iparms:[]");
-         setEventMetadata("'DOUSEAUTOMATICKEY'",",oparms:[{av:'AV18NewConnectionKey',fld:'vNEWCONNECTIONKEY',pic:''}]}");
-         setEventMetadata("'DOUSECURRENTKEY'","{handler:'E131B2',iparms:[{av:'AV23CurrentConnectionKey',fld:'vCURRENTCONNECTIONKEY',pic:'',hsh:true}]");
-         setEventMetadata("'DOUSECURRENTKEY'",",oparms:[{av:'AV18NewConnectionKey',fld:'vNEWCONNECTIONKEY',pic:''}]}");
-         setEventMetadata("'DOSAVEKEY'","{handler:'E141B2',iparms:[{av:'AV18NewConnectionKey',fld:'vNEWCONNECTIONKEY',pic:''},{av:'AV8ConnectionName',fld:'vCONNECTIONNAME',pic:''},{av:'AV19pConnectionName',fld:'vPCONNECTIONNAME',pic:''}]");
-         setEventMetadata("'DOSAVEKEY'",",oparms:[{av:'AV19pConnectionName',fld:'vPCONNECTIONNAME',pic:''}]}");
-         setEventMetadata("'DOGENKEY'","{handler:'E151B2',iparms:[]");
-         setEventMetadata("'DOGENKEY'",",oparms:[{av:'AV9EncryptionKey',fld:'vENCRYPTIONKEY',pic:''}]}");
-         setEventMetadata("ENTER","{handler:'E161B2',iparms:[{av:'AV8ConnectionName',fld:'vCONNECTIONNAME',pic:''},{av:'Gx_mode',fld:'vMODE',pic:'@!',hsh:true},{av:'AV20UserName',fld:'vUSERNAME',pic:''},{av:'AV21UserPassword',fld:'vUSERPASSWORD',pic:''},{av:'AV9EncryptionKey',fld:'vENCRYPTIONKEY',pic:''},{av:'AV19pConnectionName',fld:'vPCONNECTIONNAME',pic:''}]");
-         setEventMetadata("ENTER",",oparms:[]}");
-         setEventMetadata("VDELETECONNECTION.CLICK","{handler:'E201B2',iparms:[{av:'AV7ConnectionKey',fld:'vCONNECTIONKEY',pic:'',hsh:true},{av:'AV8ConnectionName',fld:'vCONNECTIONNAME',pic:''},{av:'AV19pConnectionName',fld:'vPCONNECTIONNAME',pic:''}]");
-         setEventMetadata("VDELETECONNECTION.CLICK",",oparms:[{av:'AV19pConnectionName',fld:'vPCONNECTIONNAME',pic:''}]}");
-         setEventMetadata("VCONNECTIONFILE.CLICK","{handler:'E211B2',iparms:[{av:'AV25FileConnectionKey',fld:'vFILECONNECTIONKEY',pic:''},{av:'AV7ConnectionKey',fld:'vCONNECTIONKEY',pic:'',hsh:true},{av:'AV8ConnectionName',fld:'vCONNECTIONNAME',pic:''},{av:'AV12FileXML',fld:'vFILEXML',pic:'',hsh:true}]");
-         setEventMetadata("VCONNECTIONFILE.CLICK",",oparms:[{av:'AV6ConnectionFileXML',fld:'vCONNECTIONFILEXML',pic:''},{av:'AV25FileConnectionKey',fld:'vFILECONNECTIONKEY',pic:''},{av:'edtavConnectionfilexml_Visible',ctrl:'vCONNECTIONFILEXML',prop:'Visible'}]}");
-         setEventMetadata("GRIDWWSYSCONNS_FIRSTPAGE","{handler:'subgridwwsysconns_firstpage',iparms:[{av:'GRIDWWSYSCONNS_nFirstRecordOnPage'},{av:'GRIDWWSYSCONNS_nEOF'},{av:'subGridwwsysconns_Rows',ctrl:'GRIDWWSYSCONNS',prop:'Rows'},{av:'AV23CurrentConnectionKey',fld:'vCURRENTCONNECTIONKEY',pic:'',hsh:true},{av:'AV12FileXML',fld:'vFILEXML',pic:'',hsh:true},{av:'Gx_mode',fld:'vMODE',pic:'@!',hsh:true}]");
-         setEventMetadata("GRIDWWSYSCONNS_FIRSTPAGE",",oparms:[{ctrl:'BTNENTER',prop:'Visible'},{ctrl:'BTNGENKEY',prop:'Visible'}]}");
-         setEventMetadata("GRIDWWSYSCONNS_PREVPAGE","{handler:'subgridwwsysconns_previouspage',iparms:[{av:'GRIDWWSYSCONNS_nFirstRecordOnPage'},{av:'GRIDWWSYSCONNS_nEOF'},{av:'subGridwwsysconns_Rows',ctrl:'GRIDWWSYSCONNS',prop:'Rows'},{av:'AV23CurrentConnectionKey',fld:'vCURRENTCONNECTIONKEY',pic:'',hsh:true},{av:'AV12FileXML',fld:'vFILEXML',pic:'',hsh:true},{av:'Gx_mode',fld:'vMODE',pic:'@!',hsh:true}]");
-         setEventMetadata("GRIDWWSYSCONNS_PREVPAGE",",oparms:[{ctrl:'BTNENTER',prop:'Visible'},{ctrl:'BTNGENKEY',prop:'Visible'}]}");
-         setEventMetadata("GRIDWWSYSCONNS_NEXTPAGE","{handler:'subgridwwsysconns_nextpage',iparms:[{av:'GRIDWWSYSCONNS_nFirstRecordOnPage'},{av:'GRIDWWSYSCONNS_nEOF'},{av:'subGridwwsysconns_Rows',ctrl:'GRIDWWSYSCONNS',prop:'Rows'},{av:'AV23CurrentConnectionKey',fld:'vCURRENTCONNECTIONKEY',pic:'',hsh:true},{av:'AV12FileXML',fld:'vFILEXML',pic:'',hsh:true},{av:'Gx_mode',fld:'vMODE',pic:'@!',hsh:true}]");
-         setEventMetadata("GRIDWWSYSCONNS_NEXTPAGE",",oparms:[{ctrl:'BTNENTER',prop:'Visible'},{ctrl:'BTNGENKEY',prop:'Visible'}]}");
-         setEventMetadata("GRIDWWSYSCONNS_LASTPAGE","{handler:'subgridwwsysconns_lastpage',iparms:[{av:'GRIDWWSYSCONNS_nFirstRecordOnPage'},{av:'GRIDWWSYSCONNS_nEOF'},{av:'subGridwwsysconns_Rows',ctrl:'GRIDWWSYSCONNS',prop:'Rows'},{av:'AV23CurrentConnectionKey',fld:'vCURRENTCONNECTIONKEY',pic:'',hsh:true},{av:'AV12FileXML',fld:'vFILEXML',pic:'',hsh:true},{av:'Gx_mode',fld:'vMODE',pic:'@!',hsh:true},{av:'subGridwwsysconns_Recordcount'}]");
-         setEventMetadata("GRIDWWSYSCONNS_LASTPAGE",",oparms:[{ctrl:'BTNENTER',prop:'Visible'},{ctrl:'BTNGENKEY',prop:'Visible'}]}");
-         setEventMetadata("NULL","{handler:'Validv_Deleteconnection',iparms:[]");
-         setEventMetadata("NULL",",oparms:[]}");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"GRIDWWSYSCONNS_nFirstRecordOnPage"},{"av":"GRIDWWSYSCONNS_nEOF"},{"av":"subGridwwsysconns_Rows","ctrl":"GRIDWWSYSCONNS","prop":"Rows"},{"av":"AV23CurrentConnectionKey","fld":"vCURRENTCONNECTIONKEY","hsh":true},{"av":"AV12FileXML","fld":"vFILEXML","hsh":true},{"av":"Gx_mode","fld":"vMODE","pic":"@!","hsh":true}]""");
+         setEventMetadata("REFRESH",""","oparms":[{"ctrl":"BTNENTER","prop":"Visible"},{"ctrl":"BTNGENKEY","prop":"Visible"}]}""");
+         setEventMetadata("GRIDWWSYSCONNS.LOAD","""{"handler":"E191B2","iparms":[{"av":"AV23CurrentConnectionKey","fld":"vCURRENTCONNECTIONKEY","hsh":true}]""");
+         setEventMetadata("GRIDWWSYSCONNS.LOAD",""","oparms":[{"av":"AV7ConnectionKey","fld":"vCONNECTIONKEY","hsh":true},{"av":"AV24IsCurrentKey","fld":"vISCURRENTKEY"},{"av":"AV32ConnectionFile","fld":"vCONNECTIONFILE"},{"av":"AV33DeleteConnection","fld":"vDELETECONNECTION"},{"ctrl":"BTNUSECURRENTKEY","prop":"Visible"}]}""");
+         setEventMetadata("'DOUACANCEL'","""{"handler":"E111B1","iparms":[]}""");
+         setEventMetadata("'DOUSEAUTOMATICKEY'","""{"handler":"E121B2","iparms":[]""");
+         setEventMetadata("'DOUSEAUTOMATICKEY'",""","oparms":[{"av":"AV18NewConnectionKey","fld":"vNEWCONNECTIONKEY"}]}""");
+         setEventMetadata("'DOUSECURRENTKEY'","""{"handler":"E131B2","iparms":[{"av":"AV23CurrentConnectionKey","fld":"vCURRENTCONNECTIONKEY","hsh":true}]""");
+         setEventMetadata("'DOUSECURRENTKEY'",""","oparms":[{"av":"AV18NewConnectionKey","fld":"vNEWCONNECTIONKEY"}]}""");
+         setEventMetadata("'DOSAVEKEY'","""{"handler":"E141B2","iparms":[{"av":"AV18NewConnectionKey","fld":"vNEWCONNECTIONKEY"},{"av":"AV8ConnectionName","fld":"vCONNECTIONNAME"},{"av":"AV19pConnectionName","fld":"vPCONNECTIONNAME"}]""");
+         setEventMetadata("'DOSAVEKEY'",""","oparms":[{"av":"AV19pConnectionName","fld":"vPCONNECTIONNAME"}]}""");
+         setEventMetadata("'DOGENKEY'","""{"handler":"E151B2","iparms":[]""");
+         setEventMetadata("'DOGENKEY'",""","oparms":[{"av":"AV9EncryptionKey","fld":"vENCRYPTIONKEY"}]}""");
+         setEventMetadata("ENTER","""{"handler":"E161B2","iparms":[{"av":"AV8ConnectionName","fld":"vCONNECTIONNAME"},{"av":"Gx_mode","fld":"vMODE","pic":"@!","hsh":true},{"av":"AV20UserName","fld":"vUSERNAME"},{"av":"AV21UserPassword","fld":"vUSERPASSWORD"},{"av":"AV9EncryptionKey","fld":"vENCRYPTIONKEY"},{"av":"AV19pConnectionName","fld":"vPCONNECTIONNAME"}]}""");
+         setEventMetadata("VDELETECONNECTION.CLICK","""{"handler":"E201B2","iparms":[{"av":"AV7ConnectionKey","fld":"vCONNECTIONKEY","hsh":true},{"av":"AV8ConnectionName","fld":"vCONNECTIONNAME"},{"av":"AV19pConnectionName","fld":"vPCONNECTIONNAME"}]""");
+         setEventMetadata("VDELETECONNECTION.CLICK",""","oparms":[{"av":"AV19pConnectionName","fld":"vPCONNECTIONNAME"}]}""");
+         setEventMetadata("VCONNECTIONFILE.CLICK","""{"handler":"E211B2","iparms":[{"av":"AV25FileConnectionKey","fld":"vFILECONNECTIONKEY"},{"av":"AV7ConnectionKey","fld":"vCONNECTIONKEY","hsh":true},{"av":"AV8ConnectionName","fld":"vCONNECTIONNAME"},{"av":"AV12FileXML","fld":"vFILEXML","hsh":true}]""");
+         setEventMetadata("VCONNECTIONFILE.CLICK",""","oparms":[{"av":"AV6ConnectionFileXML","fld":"vCONNECTIONFILEXML"},{"av":"AV25FileConnectionKey","fld":"vFILECONNECTIONKEY"},{"av":"edtavConnectionfilexml_Visible","ctrl":"vCONNECTIONFILEXML","prop":"Visible"}]}""");
+         setEventMetadata("GRIDWWSYSCONNS_FIRSTPAGE","""{"handler":"subgridwwsysconns_firstpage","iparms":[{"av":"GRIDWWSYSCONNS_nFirstRecordOnPage"},{"av":"GRIDWWSYSCONNS_nEOF"},{"av":"subGridwwsysconns_Rows","ctrl":"GRIDWWSYSCONNS","prop":"Rows"},{"av":"AV23CurrentConnectionKey","fld":"vCURRENTCONNECTIONKEY","hsh":true},{"av":"AV12FileXML","fld":"vFILEXML","hsh":true},{"av":"Gx_mode","fld":"vMODE","pic":"@!","hsh":true}]""");
+         setEventMetadata("GRIDWWSYSCONNS_FIRSTPAGE",""","oparms":[{"ctrl":"BTNENTER","prop":"Visible"},{"ctrl":"BTNGENKEY","prop":"Visible"}]}""");
+         setEventMetadata("GRIDWWSYSCONNS_PREVPAGE","""{"handler":"subgridwwsysconns_previouspage","iparms":[{"av":"GRIDWWSYSCONNS_nFirstRecordOnPage"},{"av":"GRIDWWSYSCONNS_nEOF"},{"av":"subGridwwsysconns_Rows","ctrl":"GRIDWWSYSCONNS","prop":"Rows"},{"av":"AV23CurrentConnectionKey","fld":"vCURRENTCONNECTIONKEY","hsh":true},{"av":"AV12FileXML","fld":"vFILEXML","hsh":true},{"av":"Gx_mode","fld":"vMODE","pic":"@!","hsh":true}]""");
+         setEventMetadata("GRIDWWSYSCONNS_PREVPAGE",""","oparms":[{"ctrl":"BTNENTER","prop":"Visible"},{"ctrl":"BTNGENKEY","prop":"Visible"}]}""");
+         setEventMetadata("GRIDWWSYSCONNS_NEXTPAGE","""{"handler":"subgridwwsysconns_nextpage","iparms":[{"av":"GRIDWWSYSCONNS_nFirstRecordOnPage"},{"av":"GRIDWWSYSCONNS_nEOF"},{"av":"subGridwwsysconns_Rows","ctrl":"GRIDWWSYSCONNS","prop":"Rows"},{"av":"AV23CurrentConnectionKey","fld":"vCURRENTCONNECTIONKEY","hsh":true},{"av":"AV12FileXML","fld":"vFILEXML","hsh":true},{"av":"Gx_mode","fld":"vMODE","pic":"@!","hsh":true}]""");
+         setEventMetadata("GRIDWWSYSCONNS_NEXTPAGE",""","oparms":[{"ctrl":"BTNENTER","prop":"Visible"},{"ctrl":"BTNGENKEY","prop":"Visible"}]}""");
+         setEventMetadata("GRIDWWSYSCONNS_LASTPAGE","""{"handler":"subgridwwsysconns_lastpage","iparms":[{"av":"GRIDWWSYSCONNS_nFirstRecordOnPage"},{"av":"GRIDWWSYSCONNS_nEOF"},{"av":"subGridwwsysconns_Rows","ctrl":"GRIDWWSYSCONNS","prop":"Rows"},{"av":"AV23CurrentConnectionKey","fld":"vCURRENTCONNECTIONKEY","hsh":true},{"av":"AV12FileXML","fld":"vFILEXML","hsh":true},{"av":"Gx_mode","fld":"vMODE","pic":"@!","hsh":true},{"av":"subGridwwsysconns_Recordcount"}]""");
+         setEventMetadata("GRIDWWSYSCONNS_LASTPAGE",""","oparms":[{"ctrl":"BTNENTER","prop":"Visible"},{"ctrl":"BTNGENKEY","prop":"Visible"}]}""");
+         setEventMetadata("NULL","""{"handler":"Validv_Deleteconnection","iparms":[]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -2442,7 +2423,6 @@ namespace GeneXus.Programs {
       private short GRIDWWSYSCONNS_nEOF ;
       private short nGotPars ;
       private short GxWebError ;
-      private short initialized ;
       private short gxajaxcallmode ;
       private short wbEnd ;
       private short wbStart ;
@@ -2487,10 +2467,6 @@ namespace GeneXus.Programs {
       private int idxLst ;
       private int subGridwwsysconns_Backcolor ;
       private int subGridwwsysconns_Allbackcolor ;
-      private int edtavConnectionkey_Visible ;
-      private int edtavIscurrentkey_Visible ;
-      private int edtavConnectionfile_Visible ;
-      private int edtavDeleteconnection_Visible ;
       private int subGridwwsysconns_Titlebackcolor ;
       private int subGridwwsysconns_Selectedindex ;
       private int subGridwwsysconns_Selectioncolor ;
@@ -2651,20 +2627,20 @@ namespace GeneXus.Programs {
       private GXUserControl ucDvpanel_tbladdconnkey ;
       private GXUserControl ucDvpanel_unnamedtable1 ;
       private GXUserControl ucGridwwsysconns_empowerer ;
+      private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private string aP0_Gx_mode ;
       private string aP1_pConnectionName ;
+      private GeneXus.Programs.genexussecurity.SdtGAMRepositoryConnection AV13GAMRepositoryConnection ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMSystemConnection> AV40GXV1 ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV11Errors ;
+      private GeneXus.Programs.genexussecurity.SdtGAMSystemConnection AV14GAMSystemConnection ;
       private IDataStoreProvider pr_default ;
+      private GeneXus.Programs.genexussecurity.SdtGAMError AV10Error ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
       private IDataStoreProvider pr_gam ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV11Errors ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMSystemConnection> AV40GXV1 ;
-      private GXWebForm Form ;
-      private GeneXus.Programs.genexussecurity.SdtGAMError AV10Error ;
-      private GeneXus.Programs.genexussecurity.SdtGAMRepositoryConnection AV13GAMRepositoryConnection ;
-      private GeneXus.Programs.genexussecurity.SdtGAMSystemConnection AV14GAMSystemConnection ;
    }
 
    public class gamconnectionentry__gam : DataStoreHelperBase, IDataStoreHelper

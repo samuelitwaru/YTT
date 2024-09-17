@@ -42,7 +42,7 @@ namespace GeneXus.Programs {
          }
          if ( GxWebError == 0 )
          {
-            executePrivate();
+            ExecutePrivate();
          }
          cleanup();
       }
@@ -68,32 +68,15 @@ namespace GeneXus.Programs {
       public void execute( )
       {
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
       public void executeSubmit( )
       {
-         adailyremindertomanagerlk objadailyremindertomanagerlk;
-         objadailyremindertomanagerlk = new adailyremindertomanagerlk();
-         objadailyremindertomanagerlk.context.SetSubmitInitialConfig(context);
-         objadailyremindertomanagerlk.initialize();
-         Submit( executePrivateCatch,objadailyremindertomanagerlk);
+         SubmitImpl();
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((adailyremindertomanagerlk)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -131,7 +114,7 @@ namespace GeneXus.Programs {
                context.wjLoc = "";
             }
             pr_default.close(0);
-            this.cleanup();
+            cleanup();
             if (true) return;
             pr_default.readNext(0);
          }
@@ -266,7 +249,7 @@ namespace GeneXus.Programs {
             context.Redirect( context.wjLoc );
             context.wjLoc = "";
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override int getOutputType( )
@@ -276,7 +259,7 @@ namespace GeneXus.Programs {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          base.cleanup();
          if ( IsMain )
          {
@@ -285,17 +268,12 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
          GXKey = "";
          gxfirstwebparm = "";
          Gx_date = DateTime.MinValue;
          AV23CheckDate = DateTime.MinValue;
-         scmdbuf = "";
          P00B72_A100CompanyId = new long[1] ;
          P00B72_A157CompanyLocationId = new long[1] ;
          P00B72_A159CompanyLocationCode = new string[] {""} ;
@@ -389,7 +367,6 @@ namespace GeneXus.Programs {
       private long A118WorkHourLogId ;
       private string GXKey ;
       private string gxfirstwebparm ;
-      private string scmdbuf ;
       private string A159CompanyLocationCode ;
       private string A107EmployeeFirstName ;
       private string A108EmployeeLastName ;
@@ -416,6 +393,7 @@ namespace GeneXus.Programs {
       private string A109EmployeeEmail ;
       private string AV10email ;
       private string AV17Subject ;
+      private GxHttpRequest AV22HttpRequest ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private IDataStoreProvider pr_default ;
@@ -424,6 +402,7 @@ namespace GeneXus.Programs {
       private string[] P00B72_A159CompanyLocationCode ;
       private DateTime[] P00B72_A115HolidayStartDate ;
       private long[] P00B72_A113HolidayId ;
+      private GXBaseCollection<SdtEmployeeListSDT_EmployeeListSDTItem> AV27AffectedEmployees ;
       private long[] P00B73_A100CompanyId ;
       private long[] P00B73_A157CompanyLocationId ;
       private long[] P00B73_A106EmployeeId ;
@@ -443,6 +422,7 @@ namespace GeneXus.Programs {
       private long[] P00B75_A106EmployeeId ;
       private DateTime[] P00B75_A119WorkHourLogDate ;
       private long[] P00B75_A118WorkHourLogId ;
+      private SdtEmployeeListSDT_EmployeeListSDTItem AV24AffectedEmployee ;
       private long[] P00B76_A100CompanyId ;
       private long[] P00B76_A157CompanyLocationId ;
       private bool[] P00B76_A110EmployeeIsManager ;
@@ -451,9 +431,6 @@ namespace GeneXus.Programs {
       private string[] P00B76_A107EmployeeFirstName ;
       private string[] P00B76_A109EmployeeEmail ;
       private long[] P00B76_A106EmployeeId ;
-      private GxHttpRequest AV22HttpRequest ;
-      private GXBaseCollection<SdtEmployeeListSDT_EmployeeListSDTItem> AV27AffectedEmployees ;
-      private SdtEmployeeListSDT_EmployeeListSDTItem AV24AffectedEmployee ;
       private SdtEmployeeListSDT_EmployeeListSDTItem AV32AffectedEmployeeItem ;
    }
 

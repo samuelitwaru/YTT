@@ -48,7 +48,7 @@ namespace GeneXus.Programs {
          }
          if ( GxWebError == 0 )
          {
-            executePrivate();
+            ExecutePrivate();
          }
          cleanup();
       }
@@ -77,35 +77,18 @@ namespace GeneXus.Programs {
          this.AV10FromDate = aP0_FromDate;
          this.AV9ToDate = aP1_ToDate;
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
       public void executeSubmit( DateTime aP0_FromDate ,
                                  DateTime aP1_ToDate )
       {
-         areloadleaverequests objareloadleaverequests;
-         objareloadleaverequests = new areloadleaverequests();
-         objareloadleaverequests.AV10FromDate = aP0_FromDate;
-         objareloadleaverequests.AV9ToDate = aP1_ToDate;
-         objareloadleaverequests.context.SetSubmitInitialConfig(context);
-         objareloadleaverequests.initialize();
-         Submit( executePrivateCatch,objareloadleaverequests);
+         this.AV10FromDate = aP0_FromDate;
+         this.AV9ToDate = aP1_ToDate;
+         SubmitImpl();
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((areloadleaverequests)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -151,12 +134,12 @@ namespace GeneXus.Programs {
             context.Redirect( context.wjLoc );
             context.wjLoc = "";
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          base.cleanup();
          if ( IsMain )
          {
@@ -165,15 +148,10 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
          GXKey = "";
          gxfirstwebparm = "";
-         scmdbuf = "";
          A129LeaveRequestStartDate = DateTime.MinValue;
          P00BA2_A124LeaveTypeId = new long[1] ;
          P00BA2_A129LeaveRequestStartDate = new DateTime[] {DateTime.MinValue} ;
@@ -210,7 +188,6 @@ namespace GeneXus.Programs {
       private decimal GXt_decimal1 ;
       private string GXKey ;
       private string gxfirstwebparm ;
-      private string scmdbuf ;
       private string A173LeaveRequestHalfDay ;
       private DateTime AV10FromDate ;
       private DateTime AV9ToDate ;
@@ -229,8 +206,8 @@ namespace GeneXus.Programs {
       private string[] P00BA2_A173LeaveRequestHalfDay ;
       private bool[] P00BA2_n173LeaveRequestHalfDay ;
       private long[] P00BA2_A106EmployeeId ;
-      private IDataStoreProvider pr_gam ;
       private SdtLeaveRequest AV8LeaveRequest ;
+      private IDataStoreProvider pr_gam ;
    }
 
    public class areloadleaverequests__gam : DataStoreHelperBase, IDataStoreHelper

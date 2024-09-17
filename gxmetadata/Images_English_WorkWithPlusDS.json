@@ -11,10 +11,10 @@
         "RenderingMode" : "automatic",
         "FlipsForRTL" : false
     }, { 
-        "Name" : "GAMButtonGAMRemoteSmall",
+        "Name" : "GAM.GAMButtonGAMRemoteSmall",
         "Type" : "I",
         "Guid" : "6cdd3e18-cc5b-44e0-bd22-3efaf48a6c40",
-        "Location" : "GAMButtonGAMRemoteSmall.png",
+        "Location" : "GAM.GAMButtonGAMRemoteSmall.png",
         "Density" : 1,
         "RenderingMode" : "automatic",
         "FlipsForRTL" : false
@@ -103,46 +103,6 @@
         "Type" : "I",
         "Guid" : "da69a816-fd11-445b-8aaf-1a2f7f1acc93",
         "Location" : "ActionExport.png",
-        "Density" : 1,
-        "RenderingMode" : "automatic",
-        "FlipsForRTL" : false
-    }, { 
-        "Name" : "MultimediaClear",
-        "Type" : "I",
-        "Guid" : "86847ae1-e723-4118-9074-4de2951704cd",
-        "Location" : "MultimediaClear.png",
-        "Density" : 1,
-        "RenderingMode" : "automatic",
-        "FlipsForRTL" : false
-    }, { 
-        "Name" : "MultimediaEdit",
-        "Type" : "I",
-        "Guid" : "089b589f-43ac-4175-a46d-144edf140711",
-        "Location" : "MultimediaEdit.png",
-        "Density" : 1,
-        "RenderingMode" : "automatic",
-        "FlipsForRTL" : false
-    }, { 
-        "Name" : "PlaceHolderVideo",
-        "Type" : "I",
-        "Guid" : "e7d5ac60-0bae-4e08-9aef-f334eecf2e0a",
-        "Location" : "PlaceHolderVideo.png",
-        "Density" : 1,
-        "RenderingMode" : "automatic",
-        "FlipsForRTL" : false
-    }, { 
-        "Name" : "PlaceHolderImage",
-        "Type" : "I",
-        "Guid" : "b7cc0db9-3d37-42c4-a79b-8635b1f2e135",
-        "Location" : "PlaceHolderImage.png",
-        "Density" : 1,
-        "RenderingMode" : "automatic",
-        "FlipsForRTL" : false
-    }, { 
-        "Name" : "PlaceHolderAudio",
-        "Type" : "I",
-        "Guid" : "d576314b-960b-4f9b-adf0-373a7f287291",
-        "Location" : "PlaceHolderAudio.png",
         "Density" : 1,
         "RenderingMode" : "automatic",
         "FlipsForRTL" : false
@@ -499,14 +459,6 @@
         "RenderingMode" : "automatic",
         "FlipsForRTL" : false
     }, { 
-        "Name" : "yukon_app_logo",
-        "Type" : "I",
-        "Guid" : "3b6682a4-794f-4e83-af42-03de378e152a",
-        "Location" : "yukon_app_logo.png",
-        "Density" : 1,
-        "RenderingMode" : "automatic",
-        "FlipsForRTL" : false
-    }, { 
         "Name" : "yukon_notification_icon",
         "Type" : "I",
         "Guid" : "f350e375-163b-472b-b88a-49cc641f05b9",
@@ -568,14 +520,6 @@
         "Type" : "I",
         "Guid" : "7b431b2f-c0fd-44dd-a3c5-2809844348e4",
         "Location" : "yukon_get_started_bg.png",
-        "Density" : 1,
-        "RenderingMode" : "automatic",
-        "FlipsForRTL" : false
-    }, { 
-        "Name" : "yukon_login_logo",
-        "Type" : "I",
-        "Guid" : "8043abc0-1e6e-4605-96a6-9babd495e72f",
-        "Location" : "yukon_login_logo.png",
         "Density" : 1,
         "RenderingMode" : "automatic",
         "FlipsForRTL" : false

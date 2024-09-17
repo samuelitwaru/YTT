@@ -42,7 +42,7 @@ namespace GeneXus.Programs.workwithplus.ai {
          this.AV10ListName = aP0_ListName;
          this.AV9Examples = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_Examples=this.AV9Examples;
       }
 
@@ -55,30 +55,13 @@ namespace GeneXus.Programs.workwithplus.ai {
       public void executeSubmit( string aP0_ListName ,
                                  out string aP1_Examples )
       {
-         wwp_aigetexamplequeries objwwp_aigetexamplequeries;
-         objwwp_aigetexamplequeries = new wwp_aigetexamplequeries();
-         objwwp_aigetexamplequeries.AV10ListName = aP0_ListName;
-         objwwp_aigetexamplequeries.AV9Examples = "" ;
-         objwwp_aigetexamplequeries.context.SetSubmitInitialConfig(context);
-         objwwp_aigetexamplequeries.initialize();
-         Submit( executePrivateCatch,objwwp_aigetexamplequeries);
+         this.AV10ListName = aP0_ListName;
+         this.AV9Examples = "" ;
+         SubmitImpl();
          aP1_Examples=this.AV9Examples;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwp_aigetexamplequeries)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -131,21 +114,17 @@ namespace GeneXus.Programs.workwithplus.ai {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -172,10 +151,10 @@ namespace GeneXus.Programs.workwithplus.ai {
       private string AV15Lang ;
       private string AV12UserQuery ;
       private string AV8ErrorMessage ;
-      private string aP1_Examples ;
       private GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData> AV13WWP_AIListDatas ;
       private GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData> GXt_objcol_SdtWWP_AIListData1 ;
       private GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData AV14WWP_AIListData ;
+      private string aP1_Examples ;
    }
 
 }

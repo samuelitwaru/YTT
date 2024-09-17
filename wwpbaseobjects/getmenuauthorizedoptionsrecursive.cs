@@ -42,7 +42,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          this.AV13ParentItemJson = aP0_ParentItemJson;
          this.AV16ResultJson = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_ResultJson=this.AV16ResultJson;
       }
 
@@ -55,30 +55,13 @@ namespace GeneXus.Programs.wwpbaseobjects {
       public void executeSubmit( string aP0_ParentItemJson ,
                                  out string aP1_ResultJson )
       {
-         getmenuauthorizedoptionsrecursive objgetmenuauthorizedoptionsrecursive;
-         objgetmenuauthorizedoptionsrecursive = new getmenuauthorizedoptionsrecursive();
-         objgetmenuauthorizedoptionsrecursive.AV13ParentItemJson = aP0_ParentItemJson;
-         objgetmenuauthorizedoptionsrecursive.AV16ResultJson = "" ;
-         objgetmenuauthorizedoptionsrecursive.context.SetSubmitInitialConfig(context);
-         objgetmenuauthorizedoptionsrecursive.initialize();
-         Submit( executePrivateCatch,objgetmenuauthorizedoptionsrecursive);
+         this.AV13ParentItemJson = aP0_ParentItemJson;
+         this.AV16ResultJson = "" ;
+         SubmitImpl();
          aP1_ResultJson=this.AV16ResultJson;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((getmenuauthorizedoptionsrecursive)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -128,21 +111,17 @@ namespace GeneXus.Programs.wwpbaseobjects {
             AV11i = (short)(AV11i+1);
          }
          AV16ResultJson = AV10DVelop_Menu_Item.ToJSonString(false, true);
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -164,10 +143,10 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private string AV13ParentItemJson ;
       private string AV16ResultJson ;
       private string AV15Result2Json ;
-      private string aP1_ResultJson ;
       private GxSimpleCollection<string> AV14RemoveIds ;
       private GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item AV10DVelop_Menu_Item ;
       private GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item AV9AuxDVelop_Menu_Item ;
+      private string aP1_ResultJson ;
    }
 
 }

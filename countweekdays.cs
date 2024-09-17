@@ -44,7 +44,7 @@ namespace GeneXus.Programs {
          this.AV9ToDate = aP1_ToDate;
          this.AV10DayCount = 0 ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_FromDate=this.AV8FromDate;
          aP1_ToDate=this.AV9ToDate;
          aP2_DayCount=this.AV10DayCount;
@@ -61,33 +61,16 @@ namespace GeneXus.Programs {
                                  ref DateTime aP1_ToDate ,
                                  out short aP2_DayCount )
       {
-         countweekdays objcountweekdays;
-         objcountweekdays = new countweekdays();
-         objcountweekdays.AV8FromDate = aP0_FromDate;
-         objcountweekdays.AV9ToDate = aP1_ToDate;
-         objcountweekdays.AV10DayCount = 0 ;
-         objcountweekdays.context.SetSubmitInitialConfig(context);
-         objcountweekdays.initialize();
-         Submit( executePrivateCatch,objcountweekdays);
+         this.AV8FromDate = aP0_FromDate;
+         this.AV9ToDate = aP1_ToDate;
+         this.AV10DayCount = 0 ;
+         SubmitImpl();
          aP0_FromDate=this.AV8FromDate;
          aP1_ToDate=this.AV9ToDate;
          aP2_DayCount=this.AV10DayCount;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((countweekdays)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -101,21 +84,17 @@ namespace GeneXus.Programs {
             }
             AV11StartDate = DateTimeUtil.DAdd( AV11StartDate, (1));
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )

@@ -111,7 +111,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
          }
          if ( AnyError == 0 )
          {
-            IsConfirmed = 1;
          }
       }
 
@@ -156,7 +155,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       protected void CheckExtendedTable0C13( )
       {
-         nIsDirty_13 = 0;
          standaloneModal( ) ;
       }
 
@@ -236,7 +234,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
       protected void insert_Check( )
       {
          CONFIRM_0C0( ) ;
-         IsConfirmed = 0;
       }
 
       protected void update_Check( )
@@ -453,7 +450,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
          else
          {
          }
-         IsModified = 0;
          if ( AnyError != 0 )
          {
             context.wjLoc = "";
@@ -683,7 +679,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       protected void SaveImpl( )
       {
-         nKeyPressed = 1;
          GetKey0C13( ) ;
          if ( IsIns( ) )
          {
@@ -762,7 +757,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars13( bcwwpbaseobjects_UserCustomizations, 1) ;
          SaveImpl( ) ;
          VarsToRow13( bcwwpbaseobjects_UserCustomizations) ;
@@ -776,7 +770,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars13( bcwwpbaseobjects_UserCustomizations, 1) ;
          Gx_mode = "INS";
          /* Insert record */
@@ -822,7 +815,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars13( bcwwpbaseobjects_UserCustomizations, 1) ;
          UpdateImpl( ) ;
          context.GX_msglist = BackMsgLst;
@@ -835,7 +827,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars13( bcwwpbaseobjects_UserCustomizations, 1) ;
          Gx_mode = "INS";
          /* Insert record */
@@ -869,8 +860,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
          AnyError = 0;
          context.GX_msglist.removeAllItems();
          RowToVars13( bcwwpbaseobjects_UserCustomizations, 0) ;
-         nKeyPressed = 3;
-         IsConfirmed = 0;
          GetKey0C13( ) ;
          if ( RcdFound13 == 1 )
          {
@@ -987,7 +976,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       public void ForceCommitOnExit( )
       {
-         mustCommit = true;
          return  ;
       }
 
@@ -1044,24 +1032,20 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
       }
 
-      protected void CloseOpenCursors( )
+      protected override void CloseCursors( )
       {
          pr_default.close(1);
       }
 
       public override void initialize( )
       {
-         scmdbuf = "";
-         PreviousTooltip = "";
-         PreviousCaption = "";
          Gx_mode = "";
          endTrnMsgTxt = "";
          endTrnMsgCod = "";
@@ -1122,29 +1106,19 @@ namespace GeneXus.Programs.wwpbaseobjects {
          standaloneNotModal( ) ;
       }
 
-      private short IsConfirmed ;
-      private short IsModified ;
       private short AnyError ;
-      private short nKeyPressed ;
-      private short GX_JID ;
       private short RcdFound13 ;
-      private short nIsDirty_13 ;
       private int trnEnded ;
-      private string scmdbuf ;
-      private string PreviousTooltip ;
-      private string PreviousCaption ;
       private string Gx_mode ;
       private string endTrnMsgTxt ;
       private string endTrnMsgCod ;
       private string Z94UserCustomizationsId ;
       private string A94UserCustomizationsId ;
       private string sMode13 ;
-      private bool mustCommit ;
       private string Z96UserCustomizationsValue ;
       private string A96UserCustomizationsValue ;
       private string Z95UserCustomizationsKey ;
       private string A95UserCustomizationsKey ;
-      private GeneXus.Programs.wwpbaseobjects.SdtUserCustomizations bcwwpbaseobjects_UserCustomizations ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private IDataStoreProvider pr_default ;
@@ -1162,6 +1136,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private string[] BC000C9_A94UserCustomizationsId ;
       private string[] BC000C9_A95UserCustomizationsKey ;
       private string[] BC000C9_A96UserCustomizationsValue ;
+      private GeneXus.Programs.wwpbaseobjects.SdtUserCustomizations bcwwpbaseobjects_UserCustomizations ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
       private IDataStoreProvider pr_gam ;
@@ -1221,13 +1196,8 @@ namespace GeneXus.Programs.wwpbaseobjects {
   {
      if ( def == null )
      {
-        Object[] prmBC000C4;
-        prmBC000C4 = new Object[] {
-        new ParDef("UserCustomizationsId",GXType.Char,40,0) ,
-        new ParDef("UserCustomizationsKey",GXType.VarChar,200,0)
-        };
-        Object[] prmBC000C5;
-        prmBC000C5 = new Object[] {
+        Object[] prmBC000C2;
+        prmBC000C2 = new Object[] {
         new ParDef("UserCustomizationsId",GXType.Char,40,0) ,
         new ParDef("UserCustomizationsKey",GXType.VarChar,200,0)
         };
@@ -1236,8 +1206,13 @@ namespace GeneXus.Programs.wwpbaseobjects {
         new ParDef("UserCustomizationsId",GXType.Char,40,0) ,
         new ParDef("UserCustomizationsKey",GXType.VarChar,200,0)
         };
-        Object[] prmBC000C2;
-        prmBC000C2 = new Object[] {
+        Object[] prmBC000C4;
+        prmBC000C4 = new Object[] {
+        new ParDef("UserCustomizationsId",GXType.Char,40,0) ,
+        new ParDef("UserCustomizationsKey",GXType.VarChar,200,0)
+        };
+        Object[] prmBC000C5;
+        prmBC000C5 = new Object[] {
         new ParDef("UserCustomizationsId",GXType.Char,40,0) ,
         new ParDef("UserCustomizationsKey",GXType.VarChar,200,0)
         };

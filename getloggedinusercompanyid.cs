@@ -40,7 +40,7 @@ namespace GeneXus.Programs {
       {
          this.AV10EmployeeCompanyId = 0 ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_EmployeeCompanyId=this.AV10EmployeeCompanyId;
       }
 
@@ -52,49 +52,28 @@ namespace GeneXus.Programs {
 
       public void executeSubmit( out long aP0_EmployeeCompanyId )
       {
-         getloggedinusercompanyid objgetloggedinusercompanyid;
-         objgetloggedinusercompanyid = new getloggedinusercompanyid();
-         objgetloggedinusercompanyid.AV10EmployeeCompanyId = 0 ;
-         objgetloggedinusercompanyid.context.SetSubmitInitialConfig(context);
-         objgetloggedinusercompanyid.initialize();
-         Submit( executePrivateCatch,objgetloggedinusercompanyid);
+         this.AV10EmployeeCompanyId = 0 ;
+         SubmitImpl();
          aP0_EmployeeCompanyId=this.AV10EmployeeCompanyId;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((getloggedinusercompanyid)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
          new getloggedinuser(context ).execute( out  AV8GAMUser, out  AV9Employee) ;
          AV10EmployeeCompanyId = AV9Employee.gxTpr_Companyid;
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -105,9 +84,9 @@ namespace GeneXus.Programs {
       }
 
       private long AV10EmployeeCompanyId ;
-      private long aP0_EmployeeCompanyId ;
       private GeneXus.Programs.genexussecurity.SdtGAMUser AV8GAMUser ;
       private SdtEmployee AV9Employee ;
+      private long aP0_EmployeeCompanyId ;
    }
 
 }

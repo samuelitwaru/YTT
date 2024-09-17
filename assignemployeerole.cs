@@ -46,33 +46,16 @@ namespace GeneXus.Programs {
       {
          this.A106EmployeeId = aP0_EmployeeId;
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
       public void executeSubmit( long aP0_EmployeeId )
       {
-         assignemployeerole objassignemployeerole;
-         objassignemployeerole = new assignemployeerole();
-         objassignemployeerole.A106EmployeeId = aP0_EmployeeId;
-         objassignemployeerole.context.SetSubmitInitialConfig(context);
-         objassignemployeerole.initialize();
-         Submit( executePrivateCatch,objassignemployeerole);
+         this.A106EmployeeId = aP0_EmployeeId;
+         SubmitImpl();
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((assignemployeerole)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -94,21 +77,17 @@ namespace GeneXus.Programs {
             AV9GAMUser.addrolebyid( AV13EmployeeGAMRole.gxTpr_Id, out  AV10GAMErrorCollection);
          }
          context.CommitDataStores("assignemployeerole",pr_default);
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -131,16 +110,16 @@ namespace GeneXus.Programs {
       }
 
       private long A106EmployeeId ;
-      private GeneXus.Programs.genexussecurity.SdtGAMRepository AV12GAMRepository ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
-      private IDataStoreProvider pr_default ;
-      private IDataStoreProvider pr_gam ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV10GAMErrorCollection ;
       private SdtEmployee AV8Employee ;
       private GeneXus.Programs.genexussecurity.SdtGAMUser AV9GAMUser ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV10GAMErrorCollection ;
       private GeneXus.Programs.genexussecurity.SdtGAMRole AV11GAMRole ;
+      private GeneXus.Programs.genexussecurity.SdtGAMRepository AV12GAMRepository ;
       private GeneXus.Programs.genexussecurity.SdtGAMRole AV13EmployeeGAMRole ;
+      private IDataStoreProvider pr_default ;
+      private IDataStoreProvider pr_gam ;
    }
 
    public class assignemployeerole__gam : DataStoreHelperBase, IDataStoreHelper

@@ -41,7 +41,7 @@ namespace GeneXus.Programs {
          this.AV11gxid = aP0_gxid;
          this.AV14GXM1GAMSDNotAuthorized_Level_DetailSdt = new SdtGAMSDNotAuthorized_Level_DetailSdt(context) ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_GXM1GAMSDNotAuthorized_Level_DetailSdt=this.AV14GXM1GAMSDNotAuthorized_Level_DetailSdt;
       }
 
@@ -54,30 +54,13 @@ namespace GeneXus.Programs {
       public void executeSubmit( int aP0_gxid ,
                                  out SdtGAMSDNotAuthorized_Level_DetailSdt aP1_GXM1GAMSDNotAuthorized_Level_DetailSdt )
       {
-         gamsdnotauthorized_level_detail objgamsdnotauthorized_level_detail;
-         objgamsdnotauthorized_level_detail = new gamsdnotauthorized_level_detail();
-         objgamsdnotauthorized_level_detail.AV11gxid = aP0_gxid;
-         objgamsdnotauthorized_level_detail.AV14GXM1GAMSDNotAuthorized_Level_DetailSdt = new SdtGAMSDNotAuthorized_Level_DetailSdt(context) ;
-         objgamsdnotauthorized_level_detail.context.SetSubmitInitialConfig(context);
-         objgamsdnotauthorized_level_detail.initialize();
-         Submit( executePrivateCatch,objgamsdnotauthorized_level_detail);
+         this.AV11gxid = aP0_gxid;
+         this.AV14GXM1GAMSDNotAuthorized_Level_DetailSdt = new SdtGAMSDNotAuthorized_Level_DetailSdt(context) ;
+         SubmitImpl();
          aP1_GXM1GAMSDNotAuthorized_Level_DetailSdt=this.AV14GXM1GAMSDNotAuthorized_Level_DetailSdt;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((gamsdnotauthorized_level_detail)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -88,21 +71,17 @@ namespace GeneXus.Programs {
          }
          AV14GXM1GAMSDNotAuthorized_Level_DetailSdt.gxTpr_User = AV10User;
          AV14GXM1GAMSDNotAuthorized_Level_DetailSdt.gxTpr_Password = AV9Password;
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -119,9 +98,9 @@ namespace GeneXus.Programs {
       private string Gxids ;
       private string AV9Password ;
       private string AV10User ;
-      private SdtGAMSDNotAuthorized_Level_DetailSdt aP1_GXM1GAMSDNotAuthorized_Level_DetailSdt ;
       private IGxSession Gxwebsession ;
       private SdtGAMSDNotAuthorized_Level_DetailSdt AV14GXM1GAMSDNotAuthorized_Level_DetailSdt ;
+      private SdtGAMSDNotAuthorized_Level_DetailSdt aP1_GXM1GAMSDNotAuthorized_Level_DetailSdt ;
    }
 
 }

@@ -40,7 +40,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       {
          this.AV12WWPSubscriptionRoleIdCollection = new GxSimpleCollection<string>() ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_WWPSubscriptionRoleIdCollection=this.AV12WWPSubscriptionRoleIdCollection;
       }
 
@@ -52,29 +52,12 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       public void executeSubmit( out GxSimpleCollection<string> aP0_WWPSubscriptionRoleIdCollection )
       {
-         wwp_getloggeduserroles objwwp_getloggeduserroles;
-         objwwp_getloggeduserroles = new wwp_getloggeduserroles();
-         objwwp_getloggeduserroles.AV12WWPSubscriptionRoleIdCollection = new GxSimpleCollection<string>() ;
-         objwwp_getloggeduserroles.context.SetSubmitInitialConfig(context);
-         objwwp_getloggeduserroles.initialize();
-         Submit( executePrivateCatch,objwwp_getloggeduserroles);
+         this.AV12WWPSubscriptionRoleIdCollection = new GxSimpleCollection<string>() ;
+         SubmitImpl();
          aP0_WWPSubscriptionRoleIdCollection=this.AV12WWPSubscriptionRoleIdCollection;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwp_getloggeduserroles)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -88,21 +71,17 @@ namespace GeneXus.Programs.wwpbaseobjects {
             AV12WWPSubscriptionRoleIdCollection.Add(AV10GAMRole.gxTpr_Guid, 0);
             AV13GXV1 = (int)(AV13GXV1+1);
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -116,12 +95,12 @@ namespace GeneXus.Programs.wwpbaseobjects {
       }
 
       private int AV13GXV1 ;
-      private GxSimpleCollection<string> aP0_WWPSubscriptionRoleIdCollection ;
       private GxSimpleCollection<string> AV12WWPSubscriptionRoleIdCollection ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV11GAMErrorCollection ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMRole> AV9GAMRoleCollection ;
       private GeneXus.Programs.genexussecurity.SdtGAMUser AV8GAMUser ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMRole> AV9GAMRoleCollection ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV11GAMErrorCollection ;
       private GeneXus.Programs.genexussecurity.SdtGAMRole AV10GAMRole ;
+      private GxSimpleCollection<string> aP0_WWPSubscriptionRoleIdCollection ;
    }
 
 }

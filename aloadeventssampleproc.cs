@@ -24,20 +24,15 @@ namespace GeneXus.Programs {
    {
       public static int Main( string[] args )
       {
-         try
-         {
-            GeneXus.Configuration.Config.ParseArgs(ref args);
-            return new aloadeventssampleproc().executeCmdLine(args); ;
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-            return 1 ;
-         }
+         return new aloadeventssampleproc().MainImpl(args); ;
       }
 
       public int executeCmdLine( string[] args )
+      {
+         return ExecuteCmdLine(args); ;
+      }
+
+      protected override int ExecuteCmdLine( string[] args )
       {
          context.StatusMessage( "Command line using complex types not supported." );
          return GX.GXRuntime.ExitCode ;
@@ -81,7 +76,7 @@ namespace GeneXus.Programs {
          this.AV11dateTo = aP1_dateTo;
          this.AV9events = new SdtSchedulerEvents(context) ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP2_events=this.AV9events;
       }
 
@@ -96,31 +91,14 @@ namespace GeneXus.Programs {
                                  DateTime aP1_dateTo ,
                                  out SdtSchedulerEvents aP2_events )
       {
-         aloadeventssampleproc objaloadeventssampleproc;
-         objaloadeventssampleproc = new aloadeventssampleproc();
-         objaloadeventssampleproc.AV10dateFrom = aP0_dateFrom;
-         objaloadeventssampleproc.AV11dateTo = aP1_dateTo;
-         objaloadeventssampleproc.AV9events = new SdtSchedulerEvents(context) ;
-         objaloadeventssampleproc.context.SetSubmitInitialConfig(context);
-         objaloadeventssampleproc.initialize();
-         Submit( executePrivateCatch,objaloadeventssampleproc);
+         this.AV10dateFrom = aP0_dateFrom;
+         this.AV11dateTo = aP1_dateTo;
+         this.AV9events = new SdtSchedulerEvents(context) ;
+         SubmitImpl();
          aP2_events=this.AV9events;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((aloadeventssampleproc)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -150,21 +128,17 @@ namespace GeneXus.Programs {
          AV8event.gxTpr_Endtime = context.localUtil.YMDHMSToT( (short)(DateTimeUtil.Year( Gx_date)), (short)(DateTimeUtil.Month( Gx_date)), (short)(DateTimeUtil.Day( Gx_date)+1), 11, 30, 0);
          AV8event.gxTpr_Additionalinformation = "";
          AV9events.gxTpr_Items.Add(AV8event, 0);
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -180,9 +154,9 @@ namespace GeneXus.Programs {
       private DateTime AV10dateFrom ;
       private DateTime AV11dateTo ;
       private DateTime Gx_date ;
-      private SdtSchedulerEvents aP2_events ;
       private SdtSchedulerEvents AV9events ;
       private SdtSchedulerEvents_event AV8event ;
+      private SdtSchedulerEvents aP2_events ;
    }
 
 }

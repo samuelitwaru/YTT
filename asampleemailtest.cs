@@ -40,7 +40,7 @@ namespace GeneXus.Programs {
          }
          if ( GxWebError == 0 )
          {
-            executePrivate();
+            ExecutePrivate();
          }
          cleanup();
       }
@@ -62,32 +62,15 @@ namespace GeneXus.Programs {
       public void execute( )
       {
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
       public void executeSubmit( )
       {
-         asampleemailtest objasampleemailtest;
-         objasampleemailtest = new asampleemailtest();
-         objasampleemailtest.context.SetSubmitInitialConfig(context);
-         objasampleemailtest.initialize();
-         Submit( executePrivateCatch,objasampleemailtest);
+         SubmitImpl();
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((asampleemailtest)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -171,7 +154,7 @@ namespace GeneXus.Programs {
             context.Redirect( context.wjLoc );
             context.wjLoc = "";
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void HAG0( bool bFoot ,
@@ -228,7 +211,7 @@ namespace GeneXus.Programs {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if (IsMain)	waitPrinterEnd();
          base.cleanup();
          if ( IsMain )
@@ -236,10 +219,6 @@ namespace GeneXus.Programs {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )

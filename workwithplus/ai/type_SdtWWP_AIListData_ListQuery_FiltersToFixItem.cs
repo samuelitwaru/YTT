@@ -1,7 +1,7 @@
 /*
 				   File: type_SdtWWP_AIListData_ListQuery_FiltersToFixItem
 			Description: FiltersToFix
-				 Author: Nemo 🐠 for C# (.NET) version 18.0.6.177934
+				 Author: Nemo 🐠 for C# (.NET) version 18.0.10.184260
 		   Program type: Callable routine
 			  Main DBMS: 
 */
@@ -170,6 +170,14 @@ namespace GeneXus.Programs.workwithplus.ai
 
 		#endregion
 
+		#region Static Type Properties
+
+		[XmlIgnore]
+		private static GXTypeInfo _typeProps;
+		protected override GXTypeInfo TypeInfo { get { return _typeProps; } set { _typeProps = value; } }
+
+		#endregion
+
 		#region Initialization
 
 		public void initialize( )
@@ -207,6 +215,7 @@ namespace GeneXus.Programs.workwithplus.ai
 		#endregion
 	}
 	#region Rest interface
+	[GxJsonSerialization("wrapped")]
 	[DataContract(Name=@"WWP_AIListData.ListQuery.FiltersToFixItem", Namespace="YTT_version4")]
 	public class SdtWWP_AIListData_ListQuery_FiltersToFixItem_RESTInterface : GxGenericCollectionItem<SdtWWP_AIListData_ListQuery_FiltersToFixItem>, System.Web.SessionState.IRequiresSessionState
 	{

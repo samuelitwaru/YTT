@@ -80,7 +80,7 @@ namespace GeneXus.Programs {
          this.AV53OptionsDescJson = "" ;
          this.AV54OptionIndexesJson = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP3_OptionsJson=this.AV52OptionsJson;
          aP4_OptionsDescJson=this.AV53OptionsDescJson;
          aP5_OptionIndexesJson=this.AV54OptionIndexesJson;
@@ -103,36 +103,19 @@ namespace GeneXus.Programs {
                                  out string aP4_OptionsDescJson ,
                                  out string aP5_OptionIndexesJson )
       {
-         employeelistgetfilterdata objemployeelistgetfilterdata;
-         objemployeelistgetfilterdata = new employeelistgetfilterdata();
-         objemployeelistgetfilterdata.AV49DDOName = aP0_DDOName;
-         objemployeelistgetfilterdata.AV50SearchTxtParms = aP1_SearchTxtParms;
-         objemployeelistgetfilterdata.AV51SearchTxtTo = aP2_SearchTxtTo;
-         objemployeelistgetfilterdata.AV52OptionsJson = "" ;
-         objemployeelistgetfilterdata.AV53OptionsDescJson = "" ;
-         objemployeelistgetfilterdata.AV54OptionIndexesJson = "" ;
-         objemployeelistgetfilterdata.context.SetSubmitInitialConfig(context);
-         objemployeelistgetfilterdata.initialize();
-         Submit( executePrivateCatch,objemployeelistgetfilterdata);
+         this.AV49DDOName = aP0_DDOName;
+         this.AV50SearchTxtParms = aP1_SearchTxtParms;
+         this.AV51SearchTxtTo = aP2_SearchTxtTo;
+         this.AV52OptionsJson = "" ;
+         this.AV53OptionsDescJson = "" ;
+         this.AV54OptionIndexesJson = "" ;
+         SubmitImpl();
          aP3_OptionsJson=this.AV52OptionsJson;
          aP4_OptionsDescJson=this.AV53OptionsDescJson;
          aP5_OptionIndexesJson=this.AV54OptionIndexesJson;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((employeelistgetfilterdata)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -148,7 +131,7 @@ namespace GeneXus.Programs {
          S111 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          if ( StringUtil.StrCmp(StringUtil.Upper( AV49DDOName), "DDO_EMPLOYEENAME") == 0 )
@@ -157,7 +140,7 @@ namespace GeneXus.Programs {
             S121 ();
             if ( returnInSub )
             {
-               this.cleanup();
+               cleanup();
                if (true) return;
             }
          }
@@ -167,7 +150,7 @@ namespace GeneXus.Programs {
             S131 ();
             if ( returnInSub )
             {
-               this.cleanup();
+               cleanup();
                if (true) return;
             }
          }
@@ -177,14 +160,14 @@ namespace GeneXus.Programs {
             S141 ();
             if ( returnInSub )
             {
-               this.cleanup();
+               cleanup();
                if (true) return;
             }
          }
          AV52OptionsJson = AV39Options.ToJSonString(false);
          AV53OptionsDescJson = AV41OptionsDesc.ToJSonString(false);
          AV54OptionIndexesJson = AV42OptionIndexes.ToJSonString(false);
-         this.cleanup();
+         cleanup();
       }
 
       protected void S111( )
@@ -533,16 +516,12 @@ namespace GeneXus.Programs {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -572,7 +551,6 @@ namespace GeneXus.Programs {
          AV62Employeelistds_5_tfemployeeemail_sel = "";
          AV63Employeelistds_6_tfcompanyname = "";
          AV64Employeelistds_7_tfcompanyname_sel = "";
-         scmdbuf = "";
          lV58Employeelistds_1_filterfulltext = "";
          lV59Employeelistds_2_tfemployeename = "";
          lV61Employeelistds_4_tfemployeeemail = "";
@@ -646,7 +624,6 @@ namespace GeneXus.Programs {
       private string AV60Employeelistds_3_tfemployeename_sel ;
       private string AV63Employeelistds_6_tfcompanyname ;
       private string AV64Employeelistds_7_tfcompanyname_sel ;
-      private string scmdbuf ;
       private string lV59Employeelistds_2_tfemployeename ;
       private string lV63Employeelistds_6_tfcompanyname ;
       private string A148EmployeeName ;
@@ -677,6 +654,12 @@ namespace GeneXus.Programs {
       private IGxSession AV44Session ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GxSimpleCollection<string> AV39Options ;
+      private GxSimpleCollection<string> AV41OptionsDesc ;
+      private GxSimpleCollection<string> AV42OptionIndexes ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV9WWPContext ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState AV46GridState ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue AV47GridStateFilterValue ;
       private IDataStoreProvider pr_default ;
       private long[] P007S2_A100CompanyId ;
       private string[] P007S2_A148EmployeeName ;
@@ -705,12 +688,6 @@ namespace GeneXus.Programs {
       private string aP3_OptionsJson ;
       private string aP4_OptionsDescJson ;
       private string aP5_OptionIndexesJson ;
-      private GxSimpleCollection<string> AV39Options ;
-      private GxSimpleCollection<string> AV41OptionsDesc ;
-      private GxSimpleCollection<string> AV42OptionIndexes ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV9WWPContext ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState AV46GridState ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue AV47GridStateFilterValue ;
    }
 
    public class employeelistgetfilterdata__default : DataStoreHelperBase, IDataStoreHelper

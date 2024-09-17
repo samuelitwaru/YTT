@@ -176,6 +176,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
                }
                if ( StringUtil.StringSearch( GXSoapXMLReader.Name, "Body", 1) > 0 )
                {
+                  this.SetPrefixesFromReader( GXSoapXMLReader);
                   if (true) break;
                }
                GXSoapError = GXSoapXMLReader.Read();
@@ -268,7 +269,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          }
          if ( currSoapErr == 0 )
          {
-            executePrivate();
+            ExecutePrivate();
          }
          context.CloseConnections();
          sIncludeState = true;
@@ -325,7 +326,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          this.AV9Value = aP0_Value;
          this.AV8HTML = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_HTML=this.AV8HTML;
       }
 
@@ -338,30 +339,13 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
       public void executeSubmit( short aP0_Value ,
                                  out string aP1_HTML )
       {
-         wwpgetradialgaugewhite objwwpgetradialgaugewhite;
-         objwwpgetradialgaugewhite = new wwpgetradialgaugewhite();
-         objwwpgetradialgaugewhite.AV9Value = aP0_Value;
-         objwwpgetradialgaugewhite.AV8HTML = "" ;
-         objwwpgetradialgaugewhite.context.SetSubmitInitialConfig(context);
-         objwwpgetradialgaugewhite.initialize();
-         Submit( executePrivateCatch,objwwpgetradialgaugewhite);
+         this.AV9Value = aP0_Value;
+         this.AV8HTML = "" ;
+         SubmitImpl();
          aP1_HTML=this.AV8HTML;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwpgetradialgaugewhite)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -373,22 +357,18 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
             context.Redirect( context.wjLoc );
             context.wjLoc = "";
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          base.cleanup();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )

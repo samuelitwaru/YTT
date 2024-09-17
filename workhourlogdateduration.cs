@@ -48,7 +48,7 @@ namespace GeneXus.Programs {
          this.AV13WorkHourLogDate = aP0_WorkHourLogDate;
          this.AV9TotalDuration = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_TotalDuration=this.AV9TotalDuration;
       }
 
@@ -61,30 +61,13 @@ namespace GeneXus.Programs {
       public void executeSubmit( DateTime aP0_WorkHourLogDate ,
                                  out string aP1_TotalDuration )
       {
-         workhourlogdateduration objworkhourlogdateduration;
-         objworkhourlogdateduration = new workhourlogdateduration();
-         objworkhourlogdateduration.AV13WorkHourLogDate = aP0_WorkHourLogDate;
-         objworkhourlogdateduration.AV9TotalDuration = "" ;
-         objworkhourlogdateduration.context.SetSubmitInitialConfig(context);
-         objworkhourlogdateduration.initialize();
-         Submit( executePrivateCatch,objworkhourlogdateduration);
+         this.AV13WorkHourLogDate = aP0_WorkHourLogDate;
+         this.AV9TotalDuration = "" ;
+         SubmitImpl();
          aP1_TotalDuration=this.AV9TotalDuration;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((workhourlogdateduration)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -115,12 +98,12 @@ namespace GeneXus.Programs {
          {
             AV9TotalDuration = StringUtil.Str( (decimal)(AV11TotalHoursAndMinutes), 4, 0) + ":" + StringUtil.Trim( StringUtil.Str( (decimal)(AV8ModTotalMinute), 4, 0));
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -128,14 +111,9 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
          AV9TotalDuration = "";
-         scmdbuf = "";
          P008A2_A106EmployeeId = new long[1] ;
          P008A2_A119WorkHourLogDate = new DateTime[] {DateTime.MinValue} ;
          P008A2_A122WorkHourLogMinute = new short[1] ;
@@ -161,7 +139,6 @@ namespace GeneXus.Programs {
       private long AV15Udparg1 ;
       private long A106EmployeeId ;
       private long A118WorkHourLogId ;
-      private string scmdbuf ;
       private DateTime AV13WorkHourLogDate ;
       private DateTime A119WorkHourLogDate ;
       private string AV9TotalDuration ;

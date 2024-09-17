@@ -62,7 +62,7 @@ namespace GeneXus.Programs {
       {
          this.AV11dailyLogs = new GxSimpleCollection<decimal>() ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_dailyLogs=this.AV11dailyLogs;
       }
 
@@ -74,29 +74,12 @@ namespace GeneXus.Programs {
 
       public void executeSubmit( out GxSimpleCollection<decimal> aP0_dailyLogs )
       {
-         sdgetdailyloghours objsdgetdailyloghours;
-         objsdgetdailyloghours = new sdgetdailyloghours();
-         objsdgetdailyloghours.AV11dailyLogs = new GxSimpleCollection<decimal>() ;
-         objsdgetdailyloghours.context.SetSubmitInitialConfig(context);
-         objsdgetdailyloghours.initialize();
-         Submit( executePrivateCatch,objsdgetdailyloghours);
+         this.AV11dailyLogs = new GxSimpleCollection<decimal>() ;
+         SubmitImpl();
          aP0_dailyLogs=this.AV11dailyLogs;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((sdgetdailyloghours)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -153,21 +136,17 @@ namespace GeneXus.Programs {
             AV11dailyLogs.Add(AV22TotalDuration, 0);
             AV10count = (short)(AV10count+1);
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -176,7 +155,6 @@ namespace GeneXus.Programs {
          Gx_date = DateTime.MinValue;
          AV21StartDate = DateTime.MinValue;
          AV20searchDate = DateTime.MinValue;
-         scmdbuf = "";
          P005Z2_A119WorkHourLogDate = new DateTime[] {DateTime.MinValue} ;
          P005Z2_A106EmployeeId = new long[1] ;
          P005Z2_A121WorkHourLogHour = new short[1] ;
@@ -210,14 +188,13 @@ namespace GeneXus.Programs {
       private long A106EmployeeId ;
       private long A118WorkHourLogId ;
       private decimal AV22TotalDuration ;
-      private string scmdbuf ;
       private DateTime Gx_date ;
       private DateTime AV21StartDate ;
       private DateTime AV20searchDate ;
       private DateTime A119WorkHourLogDate ;
-      private GxSimpleCollection<decimal> AV11dailyLogs ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GxSimpleCollection<decimal> AV11dailyLogs ;
       private IDataStoreProvider pr_default ;
       private DateTime[] P005Z2_A119WorkHourLogDate ;
       private long[] P005Z2_A106EmployeeId ;

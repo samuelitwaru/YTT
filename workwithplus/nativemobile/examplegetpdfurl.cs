@@ -181,6 +181,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
                }
                if ( StringUtil.StringSearch( GXSoapXMLReader.Name, "Body", 1) > 0 )
                {
+                  this.SetPrefixesFromReader( GXSoapXMLReader);
                   if (true) break;
                }
                GXSoapError = GXSoapXMLReader.Read();
@@ -283,7 +284,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          }
          if ( currSoapErr == 0 )
          {
-            executePrivate();
+            ExecutePrivate();
          }
          context.CloseConnections();
          sIncludeState = true;
@@ -342,7 +343,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          this.AV14TransactionWithBlobId = aP1_TransactionWithBlobId;
          this.AV12PDFUrl = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP2_PDFUrl=this.AV12PDFUrl;
       }
 
@@ -357,31 +358,14 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
                                  short aP1_TransactionWithBlobId ,
                                  out string aP2_PDFUrl )
       {
-         examplegetpdfurl objexamplegetpdfurl;
-         objexamplegetpdfurl = new examplegetpdfurl();
-         objexamplegetpdfurl.AV9ServerUrl = aP0_ServerUrl;
-         objexamplegetpdfurl.AV14TransactionWithBlobId = aP1_TransactionWithBlobId;
-         objexamplegetpdfurl.AV12PDFUrl = "" ;
-         objexamplegetpdfurl.context.SetSubmitInitialConfig(context);
-         objexamplegetpdfurl.initialize();
-         Submit( executePrivateCatch,objexamplegetpdfurl);
+         this.AV9ServerUrl = aP0_ServerUrl;
+         this.AV14TransactionWithBlobId = aP1_TransactionWithBlobId;
+         this.AV12PDFUrl = "" ;
+         SubmitImpl();
          aP2_PDFUrl=this.AV12PDFUrl;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((examplegetpdfurl)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -398,22 +382,18 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
             context.Redirect( context.wjLoc );
             context.wjLoc = "";
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          base.cleanup();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -452,8 +432,8 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
       private GXXMLWriter GXSoapXMLWriter ;
       private GxSoapRequest GXSoapHTTPRequest ;
       private GxHttpResponse GXSoapHTTPResponse ;
-      private string aP2_PDFUrl ;
       private GxFile AV8file ;
+      private string aP2_PDFUrl ;
    }
 
 }

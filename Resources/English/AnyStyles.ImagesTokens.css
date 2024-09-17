@@ -3,13 +3,13 @@
 {
 	--GX-Image_SelectRow : url(../SelectRow.png);
 	--GX-Image_logo : url(../logo.png);
-	--GX-Image_GAMButtonFacebook : url(../GAMButtonFacebook.png);
-	--GX-Image_GAMButtonTwitterSmall : url(../GAMButtonTwitterSmall.png);
-	--GX-Image_GAMButtonTwitter : url(../GAMButtonTwitter.png);
-	--GX-Image_GAMButtonGoogle : url(../GAMButtonGoogle.png);
-	--GX-Image_GAMButtonGoogleSmall : url(../GAMButtonGoogleSmall.png);
-	--GX-Image_GAMButtonGAMRemoteSmall : url(../GAMButtonGAMRemoteSmall.png);
-	--GX-Image_GAMButtonGAMRemote : url(../GAMButtonGAMRemote.JPG);
+	--GX-Image_GAM_GAMButtonFacebook : url(../GAM.GAMButtonFacebook.png);
+	--GX-Image_GAM_GAMButtonTwitterSmall : url(../GAM.GAMButtonTwitterSmall.png);
+	--GX-Image_GAM_GAMButtonTwitter : url(../GAM.GAMButtonTwitter.png);
+	--GX-Image_GAM_GAMButtonGoogle : url(../GAM.GAMButtonGoogle.png);
+	--GX-Image_GAM_GAMButtonGoogleSmall : url(../GAM.GAMButtonGoogleSmall.png);
+	--GX-Image_GAM_GAMButtonGAMRemoteSmall : url(../GAM.GAMButtonGAMRemoteSmall.png);
+	--GX-Image_GAM_GAMButtonGAMRemote : url(../GAM.GAMButtonGAMRemote.png);
 	--GX-Image_ActionNewDynamicFilter : url(../ActionNewDynamicFilter.png);
 	--GX-Image_ActionRemoveDynamicFilter : url(../ActionRemoveDynamicFilter.png);
 	--GX-Image_LogoLogin : url(../LogoLogin.png);
@@ -254,13 +254,13 @@
 
 .GX_Image_SelectRow_Class{content: var(--GX-Image_SelectRow);}
 .GX_Image_logo_Class{content: var(--GX-Image_logo);}
-.GX_Image_GAMButtonFacebook_Class{content: var(--GX-Image_GAMButtonFacebook);}
-.GX_Image_GAMButtonTwitterSmall_Class{content: var(--GX-Image_GAMButtonTwitterSmall);}
-.GX_Image_GAMButtonTwitter_Class{content: var(--GX-Image_GAMButtonTwitter);}
-.GX_Image_GAMButtonGoogle_Class{content: var(--GX-Image_GAMButtonGoogle);}
-.GX_Image_GAMButtonGoogleSmall_Class{content: var(--GX-Image_GAMButtonGoogleSmall);}
-.GX_Image_GAMButtonGAMRemoteSmall_Class{content: var(--GX-Image_GAMButtonGAMRemoteSmall);}
-.GX_Image_GAMButtonGAMRemote_Class{content: var(--GX-Image_GAMButtonGAMRemote);}
+.GX_Image_GAM_GAMButtonFacebook_Class{content: var(--GX-Image_GAM_GAMButtonFacebook);}
+.GX_Image_GAM_GAMButtonTwitterSmall_Class{content: var(--GX-Image_GAM_GAMButtonTwitterSmall);}
+.GX_Image_GAM_GAMButtonTwitter_Class{content: var(--GX-Image_GAM_GAMButtonTwitter);}
+.GX_Image_GAM_GAMButtonGoogle_Class{content: var(--GX-Image_GAM_GAMButtonGoogle);}
+.GX_Image_GAM_GAMButtonGoogleSmall_Class{content: var(--GX-Image_GAM_GAMButtonGoogleSmall);}
+.GX_Image_GAM_GAMButtonGAMRemoteSmall_Class{content: var(--GX-Image_GAM_GAMButtonGAMRemoteSmall);}
+.GX_Image_GAM_GAMButtonGAMRemote_Class{content: var(--GX-Image_GAM_GAMButtonGAMRemote);}
 .GX_Image_ActionNewDynamicFilter_Class{content: var(--GX-Image_ActionNewDynamicFilter);}
 .GX_Image_ActionRemoveDynamicFilter_Class{content: var(--GX-Image_ActionRemoveDynamicFilter);}
 .GX_Image_LogoLogin_Class{content: var(--GX-Image_LogoLogin);}

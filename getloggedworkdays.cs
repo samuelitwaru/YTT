@@ -70,7 +70,7 @@ namespace GeneXus.Programs {
       {
          this.AV8CalendarInfo = new GeneXus.Programs.workwithplus.nativemobile.SdtWWPCalendarInfo(context) ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_CalendarInfo=this.AV8CalendarInfo;
       }
 
@@ -82,29 +82,12 @@ namespace GeneXus.Programs {
 
       public void executeSubmit( out GeneXus.Programs.workwithplus.nativemobile.SdtWWPCalendarInfo aP0_CalendarInfo )
       {
-         getloggedworkdays objgetloggedworkdays;
-         objgetloggedworkdays = new getloggedworkdays();
-         objgetloggedworkdays.AV8CalendarInfo = new GeneXus.Programs.workwithplus.nativemobile.SdtWWPCalendarInfo(context) ;
-         objgetloggedworkdays.context.SetSubmitInitialConfig(context);
-         objgetloggedworkdays.initialize();
-         Submit( executePrivateCatch,objgetloggedworkdays);
+         this.AV8CalendarInfo = new GeneXus.Programs.workwithplus.nativemobile.SdtWWPCalendarInfo(context) ;
+         SubmitImpl();
          aP0_CalendarInfo=this.AV8CalendarInfo;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((getloggedworkdays)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -182,12 +165,12 @@ namespace GeneXus.Programs {
             pr_default.readNext(2);
          }
          pr_default.close(2);
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -195,14 +178,9 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
          AV8CalendarInfo = new GeneXus.Programs.workwithplus.nativemobile.SdtWWPCalendarInfo(context);
-         scmdbuf = "";
          P005I2_A106EmployeeId = new long[1] ;
          P005I2_A123WorkHourLogDescription = new string[] {""} ;
          P005I2_A119WorkHourLogDate = new DateTime[] {DateTime.MinValue} ;
@@ -259,7 +237,6 @@ namespace GeneXus.Programs {
       private long A113HolidayId ;
       private long A124LeaveTypeId ;
       private long A127LeaveRequestId ;
-      private string scmdbuf ;
       private string A114HolidayName ;
       private string A132LeaveRequestStatus ;
       private string A125LeaveTypeName ;
@@ -275,11 +252,13 @@ namespace GeneXus.Programs {
       private string A123WorkHourLogDescription ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GeneXus.Programs.workwithplus.nativemobile.SdtWWPCalendarInfo AV8CalendarInfo ;
       private IDataStoreProvider pr_default ;
       private long[] P005I2_A106EmployeeId ;
       private string[] P005I2_A123WorkHourLogDescription ;
       private DateTime[] P005I2_A119WorkHourLogDate ;
       private long[] P005I2_A118WorkHourLogId ;
+      private GeneXus.Programs.workwithplus.nativemobile.SdtWWPCalendarEntry AV9CurrentDate ;
       private bool[] P005I3_A139HolidayIsActive ;
       private long[] P005I3_A100CompanyId ;
       private DateTime[] P005I3_A115HolidayStartDate ;
@@ -294,8 +273,6 @@ namespace GeneXus.Programs {
       private DateTime[] P005I4_A128LeaveRequestDate ;
       private long[] P005I4_A127LeaveRequestId ;
       private GeneXus.Programs.workwithplus.nativemobile.SdtWWPCalendarInfo aP0_CalendarInfo ;
-      private GeneXus.Programs.workwithplus.nativemobile.SdtWWPCalendarInfo AV8CalendarInfo ;
-      private GeneXus.Programs.workwithplus.nativemobile.SdtWWPCalendarEntry AV9CurrentDate ;
    }
 
    public class getloggedworkdays__default : DataStoreHelperBase, IDataStoreHelper

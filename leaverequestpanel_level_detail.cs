@@ -63,7 +63,7 @@ namespace GeneXus.Programs {
          this.AV41gxid = aP0_gxid;
          this.AV50GXM3LeaveRequestPanel_Level_DetailSdt = new SdtLeaveRequestPanel_Level_DetailSdt(context) ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_GXM3LeaveRequestPanel_Level_DetailSdt=this.AV50GXM3LeaveRequestPanel_Level_DetailSdt;
       }
 
@@ -76,30 +76,13 @@ namespace GeneXus.Programs {
       public void executeSubmit( int aP0_gxid ,
                                  out SdtLeaveRequestPanel_Level_DetailSdt aP1_GXM3LeaveRequestPanel_Level_DetailSdt )
       {
-         leaverequestpanel_level_detail objleaverequestpanel_level_detail;
-         objleaverequestpanel_level_detail = new leaverequestpanel_level_detail();
-         objleaverequestpanel_level_detail.AV41gxid = aP0_gxid;
-         objleaverequestpanel_level_detail.AV50GXM3LeaveRequestPanel_Level_DetailSdt = new SdtLeaveRequestPanel_Level_DetailSdt(context) ;
-         objleaverequestpanel_level_detail.context.SetSubmitInitialConfig(context);
-         objleaverequestpanel_level_detail.initialize();
-         Submit( executePrivateCatch,objleaverequestpanel_level_detail);
+         this.AV41gxid = aP0_gxid;
+         this.AV50GXM3LeaveRequestPanel_Level_DetailSdt = new SdtLeaveRequestPanel_Level_DetailSdt(context) ;
+         SubmitImpl();
          aP1_GXM3LeaveRequestPanel_Level_DetailSdt=this.AV50GXM3LeaveRequestPanel_Level_DetailSdt;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((leaverequestpanel_level_detail)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -151,11 +134,11 @@ namespace GeneXus.Programs {
          S111 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          AV50GXM3LeaveRequestPanel_Level_DetailSdt.gxTpr_Gxdesc_leavetypeid = Gxdesc_leavetypeid;
-         this.cleanup();
+         cleanup();
       }
 
       protected void S111( )
@@ -182,16 +165,12 @@ namespace GeneXus.Programs {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -209,7 +188,6 @@ namespace GeneXus.Programs {
          AV40LeaveRequestHalfDay = "";
          AV34LeaveRequestDescription = "";
          Gxdesc_leavetypeid = "";
-         scmdbuf = "";
          P00002_A100CompanyId = new long[1] ;
          P00002_A124LeaveTypeId = new long[1] ;
          P00002_A125LeaveTypeName = new string[] {""} ;
@@ -242,7 +220,6 @@ namespace GeneXus.Programs {
       private string Gxdynprop1 ;
       private string Gxdynprop2 ;
       private string AV40LeaveRequestHalfDay ;
-      private string scmdbuf ;
       private string A125LeaveTypeName ;
       private DateTime AV31LeaveRequestStartDate ;
       private DateTime Gx_date ;
@@ -252,15 +229,15 @@ namespace GeneXus.Programs {
       private string AV34LeaveRequestDescription ;
       private string Gxdynprop ;
       private string Gxdesc_leavetypeid ;
+      private IGxSession Gxwebsession ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private SdtLeaveRequestPanel_Level_DetailSdt AV50GXM3LeaveRequestPanel_Level_DetailSdt ;
       private IDataStoreProvider pr_default ;
       private long[] P00002_A100CompanyId ;
       private long[] P00002_A124LeaveTypeId ;
       private string[] P00002_A125LeaveTypeName ;
       private SdtLeaveRequestPanel_Level_DetailSdt aP1_GXM3LeaveRequestPanel_Level_DetailSdt ;
-      private IGxSession Gxwebsession ;
-      private SdtLeaveRequestPanel_Level_DetailSdt AV50GXM3LeaveRequestPanel_Level_DetailSdt ;
    }
 
    public class leaverequestpanel_level_detail__default : DataStoreHelperBase, IDataStoreHelper

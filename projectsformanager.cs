@@ -48,7 +48,7 @@ namespace GeneXus.Programs {
          this.AV8EmployeeId = aP0_EmployeeId;
          this.AV9projectIds = new GxSimpleCollection<long>() ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_projectIds=this.AV9projectIds;
       }
 
@@ -61,30 +61,13 @@ namespace GeneXus.Programs {
       public void executeSubmit( long aP0_EmployeeId ,
                                  out GxSimpleCollection<long> aP1_projectIds )
       {
-         projectsformanager objprojectsformanager;
-         objprojectsformanager = new projectsformanager();
-         objprojectsformanager.AV8EmployeeId = aP0_EmployeeId;
-         objprojectsformanager.AV9projectIds = new GxSimpleCollection<long>() ;
-         objprojectsformanager.context.SetSubmitInitialConfig(context);
-         objprojectsformanager.initialize();
-         Submit( executePrivateCatch,objprojectsformanager);
+         this.AV8EmployeeId = aP0_EmployeeId;
+         this.AV9projectIds = new GxSimpleCollection<long>() ;
+         SubmitImpl();
          aP1_projectIds=this.AV9projectIds;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((projectsformanager)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -99,12 +82,12 @@ namespace GeneXus.Programs {
             pr_default.readNext(0);
          }
          pr_default.close(0);
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -112,14 +95,9 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
          AV9projectIds = new GxSimpleCollection<long>();
-         scmdbuf = "";
          P00BJ2_A166ProjectManagerId = new long[1] ;
          P00BJ2_n166ProjectManagerId = new bool[] {false} ;
          P00BJ2_A102ProjectId = new long[1] ;
@@ -136,11 +114,10 @@ namespace GeneXus.Programs {
       private long AV8EmployeeId ;
       private long A166ProjectManagerId ;
       private long A102ProjectId ;
-      private string scmdbuf ;
       private bool n166ProjectManagerId ;
-      private GxSimpleCollection<long> AV9projectIds ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GxSimpleCollection<long> AV9projectIds ;
       private IDataStoreProvider pr_default ;
       private long[] P00BJ2_A166ProjectManagerId ;
       private bool[] P00BJ2_n166ProjectManagerId ;

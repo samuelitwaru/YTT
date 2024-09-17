@@ -112,7 +112,6 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
          }
          if ( AnyError == 0 )
          {
-            IsConfirmed = 1;
          }
       }
 
@@ -178,7 +177,6 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
 
       protected void CheckExtendedTable0A10( )
       {
-         nIsDirty_10 = 0;
          standaloneModal( ) ;
       }
 
@@ -260,7 +258,6 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
       protected void insert_Check( )
       {
          CONFIRM_0A0( ) ;
-         IsConfirmed = 0;
       }
 
       protected void update_Check( )
@@ -477,7 +474,6 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
          else
          {
          }
-         IsModified = 0;
          if ( AnyError != 0 )
          {
             context.wjLoc = "";
@@ -722,7 +718,6 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
 
       protected void SaveImpl( )
       {
-         nKeyPressed = 1;
          GetKey0A10( ) ;
          if ( IsIns( ) )
          {
@@ -800,7 +795,6 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars10( bcwwpbaseobjects_mail_WWP_MailTemplate, 1) ;
          SaveImpl( ) ;
          VarsToRow10( bcwwpbaseobjects_mail_WWP_MailTemplate) ;
@@ -814,7 +808,6 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars10( bcwwpbaseobjects_mail_WWP_MailTemplate, 1) ;
          Gx_mode = "INS";
          /* Insert record */
@@ -860,7 +853,6 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars10( bcwwpbaseobjects_mail_WWP_MailTemplate, 1) ;
          UpdateImpl( ) ;
          context.GX_msglist = BackMsgLst;
@@ -873,7 +865,6 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars10( bcwwpbaseobjects_mail_WWP_MailTemplate, 1) ;
          Gx_mode = "INS";
          /* Insert record */
@@ -907,8 +898,6 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
          AnyError = 0;
          context.GX_msglist.removeAllItems();
          RowToVars10( bcwwpbaseobjects_mail_WWP_MailTemplate, 0) ;
-         nKeyPressed = 3;
-         IsConfirmed = 0;
          GetKey0A10( ) ;
          if ( RcdFound10 == 1 )
          {
@@ -1024,7 +1013,6 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
 
       public void ForceCommitOnExit( )
       {
-         mustCommit = true;
          return  ;
       }
 
@@ -1081,24 +1069,20 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
       }
 
-      protected void CloseOpenCursors( )
+      protected override void CloseCursors( )
       {
          pr_default.close(1);
       }
 
       public override void initialize( )
       {
-         scmdbuf = "";
-         PreviousTooltip = "";
-         PreviousCaption = "";
          Gx_mode = "";
          endTrnMsgTxt = "";
          endTrnMsgCod = "";
@@ -1178,23 +1162,14 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
          standaloneNotModal( ) ;
       }
 
-      private short IsConfirmed ;
-      private short IsModified ;
       private short AnyError ;
-      private short nKeyPressed ;
-      private short GX_JID ;
       private short RcdFound10 ;
-      private short nIsDirty_10 ;
       private int trnEnded ;
-      private string scmdbuf ;
-      private string PreviousTooltip ;
-      private string PreviousCaption ;
       private string Gx_mode ;
       private string endTrnMsgTxt ;
       private string endTrnMsgCod ;
       private string sMode10 ;
       private bool returnInSub ;
-      private bool mustCommit ;
       private string Z73WWPMailTemplateBody ;
       private string A73WWPMailTemplateBody ;
       private string Z74WWPMailTemplateSenderAddress ;
@@ -1207,7 +1182,6 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
       private string A89WWPMailTemplateDescription ;
       private string Z90WWPMailTemplateSubject ;
       private string A90WWPMailTemplateSubject ;
-      private GeneXus.Programs.wwpbaseobjects.mail.SdtWWP_MailTemplate bcwwpbaseobjects_mail_WWP_MailTemplate ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private IDataStoreProvider pr_default ;
@@ -1236,6 +1210,7 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
       private string[] BC000A9_A73WWPMailTemplateBody ;
       private string[] BC000A9_A74WWPMailTemplateSenderAddress ;
       private string[] BC000A9_A75WWPMailTemplateSenderName ;
+      private GeneXus.Programs.wwpbaseobjects.mail.SdtWWP_MailTemplate bcwwpbaseobjects_mail_WWP_MailTemplate ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
       private IDataStoreProvider pr_gam ;
@@ -1295,20 +1270,20 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
   {
      if ( def == null )
      {
-        Object[] prmBC000A4;
-        prmBC000A4 = new Object[] {
-        new ParDef("WWPMailTemplateName",GXType.VarChar,40,0)
-        };
-        Object[] prmBC000A5;
-        prmBC000A5 = new Object[] {
+        Object[] prmBC000A2;
+        prmBC000A2 = new Object[] {
         new ParDef("WWPMailTemplateName",GXType.VarChar,40,0)
         };
         Object[] prmBC000A3;
         prmBC000A3 = new Object[] {
         new ParDef("WWPMailTemplateName",GXType.VarChar,40,0)
         };
-        Object[] prmBC000A2;
-        prmBC000A2 = new Object[] {
+        Object[] prmBC000A4;
+        prmBC000A4 = new Object[] {
+        new ParDef("WWPMailTemplateName",GXType.VarChar,40,0)
+        };
+        Object[] prmBC000A5;
+        prmBC000A5 = new Object[] {
         new ParDef("WWPMailTemplateName",GXType.VarChar,40,0)
         };
         Object[] prmBC000A6;

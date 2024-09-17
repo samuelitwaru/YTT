@@ -162,6 +162,20 @@ namespace GeneXus.Programs {
 
       }
 
+      [XmlIgnore]
+      private static GXTypeInfo _typeProps;
+      protected override GXTypeInfo TypeInfo
+      {
+         get {
+            return _typeProps ;
+         }
+
+         set {
+            _typeProps = value ;
+         }
+
+      }
+
       public void initialize( )
       {
          gxTv_SdtLeaveRequestsGridPanel_Level_Detail_GridSdt_Item_Leaverequestdescription = "";
@@ -188,6 +202,7 @@ namespace GeneXus.Programs {
    }
 
    [DataContract(Name = @"LeaveRequestsGridPanel_Level_Detail_GridSdt.Item", Namespace = "http://tempuri.org/")]
+   [GxJsonSerialization("unwrapped")]
    public class SdtLeaveRequestsGridPanel_Level_Detail_GridSdt_Item_RESTInterface : GxGenericCollectionItem<SdtLeaveRequestsGridPanel_Level_Detail_GridSdt_Item>
    {
       public SdtLeaveRequestsGridPanel_Level_Detail_GridSdt_Item_RESTInterface( ) : base()

@@ -43,10 +43,10 @@ namespace GeneXus.Programs {
 
       public void execute( )
       {
-         executePrivate();
+         ExecuteImpl();
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -218,11 +218,8 @@ namespace GeneXus.Programs {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITWEB( ) ;
          if ( ! isAjaxCallMode( ) )
          {
@@ -253,7 +250,7 @@ namespace GeneXus.Programs {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override short ExecuteStartEvent( )
@@ -297,10 +294,10 @@ namespace GeneXus.Programs {
          CloseStyles();
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
@@ -818,7 +815,7 @@ namespace GeneXus.Programs {
          {
             if ( context.ExposeMetadata( ) )
             {
-               Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+               Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
             }
          }
          Form.Meta.addItem("description", "Users", 0) ;
@@ -869,24 +866,28 @@ namespace GeneXus.Programs {
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
+                              /* Execute user event: Ddo_managefilters.Onoptionclicked */
                               E111N2 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "GRIDPAGINATIONBAR.CHANGEPAGE") == 0 )
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
+                              /* Execute user event: Gridpaginationbar.Changepage */
                               E121N2 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "GRIDPAGINATIONBAR.CHANGEROWSPERPAGE") == 0 )
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
+                              /* Execute user event: Gridpaginationbar.Changerowsperpage */
                               E131N2 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED") == 0 )
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
+                              /* Execute user event: Ddo_gridcolumnsselector.Oncolumnschanged */
                               E141N2 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "'DOINSERT'") == 0 )
@@ -958,6 +959,7 @@ namespace GeneXus.Programs {
                                  {
                                     context.wbHandled = 1;
                                     dynload_actions( ) ;
+                                    /* Execute user event: Grid.Load */
                                     E181N2 ();
                                  }
                                  else if ( StringUtil.StrCmp(sEvt, "VGRIDACTIONGROUP1.CLICK") == 0 )
@@ -1158,25 +1160,15 @@ namespace GeneXus.Programs {
          /* GeneXus formulas. */
          AV114Pgmname = "GAMWWUsers";
          edtavDisplay_Enabled = 0;
-         AssignProp("", false, edtavDisplay_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavDisplay_Enabled), 5, 0), !bGXsfl_55_Refreshing);
          edtavUpdate_Enabled = 0;
-         AssignProp("", false, edtavUpdate_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavUpdate_Enabled), 5, 0), !bGXsfl_55_Refreshing);
          edtavBtnrole_Enabled = 0;
-         AssignProp("", false, edtavBtnrole_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavBtnrole_Enabled), 5, 0), !bGXsfl_55_Refreshing);
          edtavName_Enabled = 0;
-         AssignProp("", false, edtavName_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavName_Enabled), 5, 0), !bGXsfl_55_Refreshing);
          edtavEmail_Enabled = 0;
-         AssignProp("", false, edtavEmail_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavEmail_Enabled), 5, 0), !bGXsfl_55_Refreshing);
          edtavFirstname_Enabled = 0;
-         AssignProp("", false, edtavFirstname_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavFirstname_Enabled), 5, 0), !bGXsfl_55_Refreshing);
          edtavLastname_Enabled = 0;
-         AssignProp("", false, edtavLastname_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavLastname_Enabled), 5, 0), !bGXsfl_55_Refreshing);
          edtavAuthenticationtypename_Enabled = 0;
-         AssignProp("", false, edtavAuthenticationtypename_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavAuthenticationtypename_Enabled), 5, 0), !bGXsfl_55_Refreshing);
          edtavGuid_Enabled = 0;
-         AssignProp("", false, edtavGuid_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavGuid_Enabled), 5, 0), !bGXsfl_55_Refreshing);
          edtavStatus_Enabled = 0;
-         AssignProp("", false, edtavStatus_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavStatus_Enabled), 5, 0), !bGXsfl_55_Refreshing);
       }
 
       protected void RF1N2( )
@@ -1215,12 +1207,14 @@ namespace GeneXus.Programs {
          if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
          {
             SubsflControlProps_552( ) ;
+            /* Execute user event: Grid.Load */
             E181N2 ();
             if ( ( subGrid_Islastpage == 0 ) && ( GRID_nCurrentRecord > 0 ) && ( GRID_nGridOutOfScope == 0 ) && ( nGXsfl_55_idx == 1 ) )
             {
                GRID_nCurrentRecord = 0;
                GRID_nGridOutOfScope = 1;
                subgrid_firstpage( ) ;
+               /* Execute user event: Grid.Load */
                E181N2 ();
             }
             wbEnd = 55;
@@ -1367,25 +1361,15 @@ namespace GeneXus.Programs {
       {
          AV114Pgmname = "GAMWWUsers";
          edtavDisplay_Enabled = 0;
-         AssignProp("", false, edtavDisplay_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavDisplay_Enabled), 5, 0), !bGXsfl_55_Refreshing);
          edtavUpdate_Enabled = 0;
-         AssignProp("", false, edtavUpdate_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavUpdate_Enabled), 5, 0), !bGXsfl_55_Refreshing);
          edtavBtnrole_Enabled = 0;
-         AssignProp("", false, edtavBtnrole_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavBtnrole_Enabled), 5, 0), !bGXsfl_55_Refreshing);
          edtavName_Enabled = 0;
-         AssignProp("", false, edtavName_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavName_Enabled), 5, 0), !bGXsfl_55_Refreshing);
          edtavEmail_Enabled = 0;
-         AssignProp("", false, edtavEmail_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavEmail_Enabled), 5, 0), !bGXsfl_55_Refreshing);
          edtavFirstname_Enabled = 0;
-         AssignProp("", false, edtavFirstname_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavFirstname_Enabled), 5, 0), !bGXsfl_55_Refreshing);
          edtavLastname_Enabled = 0;
-         AssignProp("", false, edtavLastname_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavLastname_Enabled), 5, 0), !bGXsfl_55_Refreshing);
          edtavAuthenticationtypename_Enabled = 0;
-         AssignProp("", false, edtavAuthenticationtypename_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavAuthenticationtypename_Enabled), 5, 0), !bGXsfl_55_Refreshing);
          edtavGuid_Enabled = 0;
-         AssignProp("", false, edtavGuid_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavGuid_Enabled), 5, 0), !bGXsfl_55_Refreshing);
          edtavStatus_Enabled = 0;
-         AssignProp("", false, edtavStatus_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavStatus_Enabled), 5, 0), !bGXsfl_55_Refreshing);
          fix_multi_value_controls( ) ;
       }
 
@@ -1519,7 +1503,7 @@ namespace GeneXus.Programs {
          ucGridpaginationbar.SendProperty(context, "", false, Gridpaginationbar_Internalname, "ShowLast", StringUtil.BoolToStr( Gridpaginationbar_Showlast));
          edtavGamuserscount_Visible = 0;
          AssignProp("", false, edtavGamuserscount_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtavGamuserscount_Visible), 5, 0), true);
-         subGrid_Rows = 20;
+         subGrid_Rows = 10;
          GxWebStd.gx_hidden_field( context, "GRID_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Rows), 6, 0, ".", "")));
          Grid_empowerer_Gridinternalname = subGrid_Internalname;
          ucGrid_empowerer.SendProperty(context, "", false, Grid_empowerer_Internalname, "GridInternalName", Grid_empowerer_Gridinternalname);
@@ -2601,7 +2585,7 @@ namespace GeneXus.Programs {
          PA1N2( ) ;
          WS1N2( ) ;
          WE1N2( ) ;
-         this.cleanup();
+         cleanup();
          context.SetWrapped(false);
          context.GX_msglist = BackMsgLst;
          return "";
@@ -2623,7 +2607,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024812157678", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202491613184076", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2639,7 +2623,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("gamwwusers.js", "?2024812157681", false, true);
+         context.AddJavascriptSource("gamwwusers.js", "?202491613184081", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -2689,6 +2673,7 @@ namespace GeneXus.Programs {
 
       protected void sendrow_552( )
       {
+         sGXsfl_55_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_55_idx), 4, 0), 4, "0");
          SubsflControlProps_552( ) ;
          WB1N0( ) ;
          if ( ( subGrid_Rows * 1 == 0 ) || ( nGXsfl_55_idx <= subGrid_fnc_Recordsperpage( ) * 1 ) )
@@ -2756,33 +2741,33 @@ namespace GeneXus.Programs {
                context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+((edtavDisplay_Visible==0) ? "display:none;" : "")+"\">") ;
             }
             /* Single line edit */
-            TempTags = " " + ((edtavDisplay_Enabled!=0)&&(edtavDisplay_Visible!=0) ? " onfocus=\"gx.evt.onfocus(this, 56,'',false,'"+sGXsfl_55_idx+"',55)\"" : " ");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 56,'',false,'" + sGXsfl_55_idx + "',55)\"";
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavDisplay_Internalname,StringUtil.RTrim( AV30Display),(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+((edtavDisplay_Enabled!=0)&&(edtavDisplay_Visible!=0) ? " onblur=\""+""+";gx.evt.onblur(this,56);\"" : " "),(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)edtavDisplay_Link,(string)"",(string)"Display",(string)"",(string)edtavDisplay_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWIconActionColumn",(string)"",(int)edtavDisplay_Visible,(int)edtavDisplay_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)1,(short)55,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavDisplay_Internalname,StringUtil.RTrim( AV30Display),(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,56);\"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)edtavDisplay_Link,(string)"",(string)"Display",(string)"",(string)edtavDisplay_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWIconActionColumn",(string)"",(int)edtavDisplay_Visible,(int)edtavDisplay_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)1,(short)55,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
                context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+((edtavUpdate_Visible==0) ? "display:none;" : "")+"\">") ;
             }
             /* Single line edit */
-            TempTags = " " + ((edtavUpdate_Enabled!=0)&&(edtavUpdate_Visible!=0) ? " onfocus=\"gx.evt.onfocus(this, 57,'',false,'"+sGXsfl_55_idx+"',55)\"" : " ");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 57,'',false,'" + sGXsfl_55_idx + "',55)\"";
             ROClassString = edtavUpdate_Class;
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavUpdate_Internalname,StringUtil.RTrim( AV100Update),(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+((edtavUpdate_Enabled!=0)&&(edtavUpdate_Visible!=0) ? " onblur=\""+""+";gx.evt.onblur(this,57);\"" : " "),(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)edtavUpdate_Link,(string)"",(string)"Update",(string)"",(string)edtavUpdate_Jsonclick,(short)0,(string)edtavUpdate_Class,(string)"",(string)ROClassString,(string)"WWIconActionColumn",(string)"",(int)edtavUpdate_Visible,(int)edtavUpdate_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)1,(short)55,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavUpdate_Internalname,StringUtil.RTrim( AV100Update),(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,57);\"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)edtavUpdate_Link,(string)"",(string)"Update",(string)"",(string)edtavUpdate_Jsonclick,(short)0,(string)edtavUpdate_Class,(string)"",(string)ROClassString,(string)"WWIconActionColumn",(string)"",(int)edtavUpdate_Visible,(int)edtavUpdate_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)1,(short)55,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
                context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+((edtavBtnrole_Visible==0) ? "display:none;" : "")+"\">") ;
             }
             /* Single line edit */
-            TempTags = " " + ((edtavBtnrole_Enabled!=0)&&(edtavBtnrole_Visible!=0) ? " onfocus=\"gx.evt.onfocus(this, 58,'',false,'"+sGXsfl_55_idx+"',55)\"" : " ");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 58,'',false,'" + sGXsfl_55_idx + "',55)\"";
             ROClassString = edtavBtnrole_Class;
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavBtnrole_Internalname,StringUtil.RTrim( AV13BtnRole),(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+((edtavBtnrole_Enabled!=0)&&(edtavBtnrole_Visible!=0) ? " onblur=\""+""+";gx.evt.onblur(this,58);\"" : " "),(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)edtavBtnrole_Link,(string)"",(string)"Roles",(string)"",(string)edtavBtnrole_Jsonclick,(short)0,(string)edtavBtnrole_Class,(string)"",(string)ROClassString,(string)"WWIconActionColumn hidden-xs",(string)"",(int)edtavBtnrole_Visible,(int)edtavBtnrole_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)1,(short)55,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavBtnrole_Internalname,StringUtil.RTrim( AV13BtnRole),(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,58);\"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)edtavBtnrole_Link,(string)"",(string)"Roles",(string)"",(string)edtavBtnrole_Jsonclick,(short)0,(string)edtavBtnrole_Class,(string)"",(string)ROClassString,(string)"WWIconActionColumn hidden-xs",(string)"",(int)edtavBtnrole_Visible,(int)edtavBtnrole_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)1,(short)55,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
                context.WriteHtmlText( "<td valign=\"middle\" align=\""+"end"+"\""+" style=\""+""+"\">") ;
             }
-            TempTags = " " + ((cmbavGridactiongroup1.Enabled!=0)&&(cmbavGridactiongroup1.Visible!=0) ? " onfocus=\"gx.evt.onfocus(this, 59,'',false,'"+sGXsfl_55_idx+"',55)\"" : " ");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 59,'',false,'" + sGXsfl_55_idx + "',55)\"";
             if ( ( cmbavGridactiongroup1.ItemCount == 0 ) && isAjaxCallMode( ) )
             {
                GXCCtl = "vGRIDACTIONGROUP1_" + sGXsfl_55_idx;
@@ -2795,7 +2780,7 @@ namespace GeneXus.Programs {
                }
             }
             /* ComboBox */
-            GridRow.AddColumnProperties("combobox", 2, isAjaxCallMode( ), new Object[] {(GXCombobox)cmbavGridactiongroup1,(string)cmbavGridactiongroup1_Internalname,StringUtil.Trim( StringUtil.Str( (decimal)(AV49GridActionGroup1), 4, 0)),(short)1,(string)cmbavGridactiongroup1_Jsonclick,(short)5,"'"+""+"'"+",false,"+"'"+"EVGRIDACTIONGROUP1.CLICK."+sGXsfl_55_idx+"'",(string)"int",(string)"",(short)-1,(short)1,(short)0,(short)0,(short)0,(string)"px",(short)0,(string)"px",(string)"",(string)"ConvertToDDO",(string)"WWActionGroupColumn",(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+((cmbavGridactiongroup1.Enabled!=0)&&(cmbavGridactiongroup1.Visible!=0) ? " onblur=\""+""+";gx.evt.onblur(this,59);\"" : " "),(string)"",(bool)true,(short)0});
+            GridRow.AddColumnProperties("combobox", 2, isAjaxCallMode( ), new Object[] {(GXCombobox)cmbavGridactiongroup1,(string)cmbavGridactiongroup1_Internalname,StringUtil.Trim( StringUtil.Str( (decimal)(AV49GridActionGroup1), 4, 0)),(short)1,(string)cmbavGridactiongroup1_Jsonclick,(short)5,"'"+""+"'"+",false,"+"'"+"EVGRIDACTIONGROUP1.CLICK."+sGXsfl_55_idx+"'",(string)"int",(string)"",(short)-1,(short)1,(short)0,(short)0,(short)0,(string)"px",(short)0,(string)"px",(string)"",(string)"ConvertToDDO",(string)"WWActionGroupColumn",(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,59);\"",(string)"",(bool)true,(short)0});
             cmbavGridactiongroup1.CurrentValue = StringUtil.Trim( StringUtil.Str( (decimal)(AV49GridActionGroup1), 4, 0));
             AssignProp("", false, cmbavGridactiongroup1_Internalname, "Values", (string)(cmbavGridactiongroup1.ToJavascriptSource()), !bGXsfl_55_Refreshing);
             /* Subfile cell */
@@ -2804,63 +2789,62 @@ namespace GeneXus.Programs {
                context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+((edtavName_Visible==0) ? "display:none;" : "")+"\">") ;
             }
             /* Single line edit */
-            TempTags = " " + ((edtavName_Enabled!=0)&&(edtavName_Visible!=0) ? " onfocus=\"gx.evt.onfocus(this, 60,'',false,'"+sGXsfl_55_idx+"',55)\"" : " ");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 60,'',false,'" + sGXsfl_55_idx + "',55)\"";
             ROClassString = edtavName_Class;
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavName_Internalname,(string)AV84Name,(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+((edtavName_Enabled!=0)&&(edtavName_Visible!=0) ? " onblur=\""+""+";gx.evt.onblur(this,60);\"" : " "),(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)edtavName_Link,(string)"",(string)"",(string)"",(string)edtavName_Jsonclick,(short)0,(string)edtavName_Class,(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtavName_Visible,(int)edtavName_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)100,(short)0,(short)0,(short)55,(short)0,(short)0,(short)0,(bool)true,(string)"GeneXusSecurityCommon\\GAMUserIdentification",(string)"start",(bool)true,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavName_Internalname,(string)AV84Name,(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,60);\"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)edtavName_Link,(string)"",(string)"",(string)"",(string)edtavName_Jsonclick,(short)0,(string)edtavName_Class,(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtavName_Visible,(int)edtavName_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)100,(short)0,(short)0,(short)55,(short)0,(short)0,(short)0,(bool)true,(string)"GeneXusSecurityCommon\\GAMUserIdentification",(string)"start",(bool)true,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
                context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+((edtavEmail_Visible==0) ? "display:none;" : "")+"\">") ;
             }
             /* Single line edit */
-            TempTags = " " + ((edtavEmail_Enabled!=0)&&(edtavEmail_Visible!=0) ? " onfocus=\"gx.evt.onfocus(this, 61,'',false,'"+sGXsfl_55_idx+"',55)\"" : " ");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 61,'',false,'" + sGXsfl_55_idx + "',55)\"";
             ROClassString = edtavEmail_Class;
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavEmail_Internalname,(string)AV31Email,(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+((edtavEmail_Enabled!=0)&&(edtavEmail_Visible!=0) ? " onblur=\""+""+";gx.evt.onblur(this,61);\"" : " "),(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)edtavEmail_Link,(string)"",(string)"",(string)"",(string)edtavEmail_Jsonclick,(short)0,(string)edtavEmail_Class,(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtavEmail_Visible,(int)edtavEmail_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)100,(short)0,(short)0,(short)55,(short)0,(short)-1,(short)0,(bool)true,(string)"GeneXusSecurityCommon\\GAMEMail",(string)"start",(bool)true,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavEmail_Internalname,(string)AV31Email,(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,61);\"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)edtavEmail_Link,(string)"",(string)"",(string)"",(string)edtavEmail_Jsonclick,(short)0,(string)edtavEmail_Class,(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtavEmail_Visible,(int)edtavEmail_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)100,(short)0,(short)0,(short)55,(short)0,(short)-1,(short)0,(bool)true,(string)"GeneXusSecurityCommon\\GAMEMail",(string)"start",(bool)true,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
                context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+((edtavFirstname_Visible==0) ? "display:none;" : "")+"\">") ;
             }
             /* Single line edit */
-            TempTags = " " + ((edtavFirstname_Enabled!=0)&&(edtavFirstname_Visible!=0) ? " onfocus=\"gx.evt.onfocus(this, 62,'',false,'"+sGXsfl_55_idx+"',55)\"" : " ");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 62,'',false,'" + sGXsfl_55_idx + "',55)\"";
             ROClassString = edtavFirstname_Class;
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavFirstname_Internalname,StringUtil.RTrim( AV43FirstName),(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+((edtavFirstname_Enabled!=0)&&(edtavFirstname_Visible!=0) ? " onblur=\""+""+";gx.evt.onblur(this,62);\"" : " "),(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavFirstname_Jsonclick,(short)0,(string)edtavFirstname_Class,(string)"",(string)ROClassString,(string)"WWColumn hidden-xs",(string)"",(int)edtavFirstname_Visible,(int)edtavFirstname_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)60,(short)0,(short)0,(short)55,(short)0,(short)-1,(short)-1,(bool)true,(string)"GeneXusSecurityCommon\\GAMDescriptionShort",(string)"start",(bool)true,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavFirstname_Internalname,StringUtil.RTrim( AV43FirstName),(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,62);\"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavFirstname_Jsonclick,(short)0,(string)edtavFirstname_Class,(string)"",(string)ROClassString,(string)"WWColumn hidden-xs",(string)"",(int)edtavFirstname_Visible,(int)edtavFirstname_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)60,(short)0,(short)0,(short)55,(short)0,(short)-1,(short)-1,(bool)true,(string)"GeneXusSecurityCommon\\GAMDescriptionShort",(string)"start",(bool)true,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
                context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+((edtavLastname_Visible==0) ? "display:none;" : "")+"\">") ;
             }
             /* Single line edit */
-            TempTags = " " + ((edtavLastname_Enabled!=0)&&(edtavLastname_Visible!=0) ? " onfocus=\"gx.evt.onfocus(this, 63,'',false,'"+sGXsfl_55_idx+"',55)\"" : " ");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 63,'',false,'" + sGXsfl_55_idx + "',55)\"";
             ROClassString = edtavLastname_Class;
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavLastname_Internalname,StringUtil.RTrim( AV76LastName),(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+((edtavLastname_Enabled!=0)&&(edtavLastname_Visible!=0) ? " onblur=\""+""+";gx.evt.onblur(this,63);\"" : " "),(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavLastname_Jsonclick,(short)0,(string)edtavLastname_Class,(string)"",(string)ROClassString,(string)"WWColumn hidden-xs",(string)"",(int)edtavLastname_Visible,(int)edtavLastname_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)60,(short)0,(short)0,(short)55,(short)0,(short)-1,(short)-1,(bool)true,(string)"GeneXusSecurityCommon\\GAMDescriptionShort",(string)"start",(bool)true,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavLastname_Internalname,StringUtil.RTrim( AV76LastName),(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,63);\"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavLastname_Jsonclick,(short)0,(string)edtavLastname_Class,(string)"",(string)ROClassString,(string)"WWColumn hidden-xs",(string)"",(int)edtavLastname_Visible,(int)edtavLastname_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)60,(short)0,(short)0,(short)55,(short)0,(short)-1,(short)-1,(bool)true,(string)"GeneXusSecurityCommon\\GAMDescriptionShort",(string)"start",(bool)true,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
                context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+((edtavAuthenticationtypename_Visible==0) ? "display:none;" : "")+"\">") ;
             }
             /* Single line edit */
-            TempTags = " " + ((edtavAuthenticationtypename_Enabled!=0)&&(edtavAuthenticationtypename_Visible!=0) ? " onfocus=\"gx.evt.onfocus(this, 64,'',false,'"+sGXsfl_55_idx+"',55)\"" : " ");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 64,'',false,'" + sGXsfl_55_idx + "',55)\"";
             ROClassString = edtavAuthenticationtypename_Class;
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavAuthenticationtypename_Internalname,StringUtil.RTrim( AV9AuthenticationTypeName),(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+((edtavAuthenticationtypename_Enabled!=0)&&(edtavAuthenticationtypename_Visible!=0) ? " onblur=\""+""+";gx.evt.onblur(this,64);\"" : " "),(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavAuthenticationtypename_Jsonclick,(short)0,(string)edtavAuthenticationtypename_Class,(string)"",(string)ROClassString,(string)"WWColumn hidden-xs",(string)"",(int)edtavAuthenticationtypename_Visible,(int)edtavAuthenticationtypename_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)60,(short)0,(short)0,(short)55,(short)0,(short)-1,(short)-1,(bool)true,(string)"GeneXusSecurityCommon\\GAMAuthenticationTypeName",(string)"start",(bool)true,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavAuthenticationtypename_Internalname,StringUtil.RTrim( AV9AuthenticationTypeName),(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,64);\"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavAuthenticationtypename_Jsonclick,(short)0,(string)edtavAuthenticationtypename_Class,(string)"",(string)ROClassString,(string)"WWColumn hidden-xs",(string)"",(int)edtavAuthenticationtypename_Visible,(int)edtavAuthenticationtypename_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)60,(short)0,(short)0,(short)55,(short)0,(short)-1,(short)-1,(bool)true,(string)"GeneXusSecurityCommon\\GAMAuthenticationTypeName",(string)"start",(bool)true,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
                context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+"display:none;"+"\">") ;
             }
             /* Single line edit */
-            TempTags = " " + ((edtavGuid_Enabled!=0)&&(edtavGuid_Visible!=0) ? " onfocus=\"gx.evt.onfocus(this, 65,'',false,'"+sGXsfl_55_idx+"',55)\"" : " ");
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavGuid_Internalname,StringUtil.RTrim( AV59GUID),(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+((edtavGuid_Enabled!=0)&&(edtavGuid_Visible!=0) ? " onblur=\""+""+";gx.evt.onblur(this,65);\"" : " "),(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavGuid_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(int)edtavGuid_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)40,(short)0,(short)0,(short)55,(short)0,(short)-1,(short)0,(bool)true,(string)"GeneXusSecurityCommon\\GAMGUID",(string)"start",(bool)true,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavGuid_Internalname,StringUtil.RTrim( AV59GUID),(string)"",""+" onchange=\""+""+";gx.evt.onchange(this, event)\" ",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavGuid_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(int)edtavGuid_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)40,(short)0,(short)0,(short)55,(short)0,(short)-1,(short)0,(bool)true,(string)"GeneXusSecurityCommon\\GAMGUID",(string)"start",(bool)true,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
                context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+((edtavStatus_Visible==0) ? "display:none;" : "")+"\">") ;
             }
             /* Single line edit */
-            TempTags = " " + ((edtavStatus_Enabled!=0)&&(edtavStatus_Visible!=0) ? " onfocus=\"gx.evt.onfocus(this, 66,'',false,'"+sGXsfl_55_idx+"',55)\"" : " ");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 66,'',false,'" + sGXsfl_55_idx + "',55)\"";
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavStatus_Internalname,(string)AV95Status,(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+((edtavStatus_Enabled!=0)&&(edtavStatus_Visible!=0) ? " onblur=\""+""+";gx.evt.onblur(this,66);\"" : " "),(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavStatus_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)edtavStatus_Columnclass,(string)edtavStatus_Columnheaderclass,(int)edtavStatus_Visible,(int)edtavStatus_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)40,(short)0,(short)0,(short)55,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavStatus_Internalname,(string)AV95Status,(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,66);\"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavStatus_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)edtavStatus_Columnclass,(string)edtavStatus_Columnheaderclass,(int)edtavStatus_Visible,(int)edtavStatus_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)40,(short)0,(short)0,(short)55,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
             send_integrity_lvl_hashes1N2( ) ;
             GridContainer.AddRow(GridRow);
             nGXsfl_55_idx = ((subGrid_Islastpage==1)&&(nGXsfl_55_idx+1>subGrid_fnc_Recordsperpage( )) ? 1 : nGXsfl_55_idx+1);
@@ -3121,7 +3105,6 @@ namespace GeneXus.Programs {
          edtavStatus_Columnclass = "WWColumn";
          edtavStatus_Enabled = 1;
          edtavGuid_Jsonclick = "";
-         edtavGuid_Visible = 0;
          edtavGuid_Enabled = 1;
          edtavAuthenticationtypename_Jsonclick = "";
          edtavAuthenticationtypename_Class = "Attribute";
@@ -3141,8 +3124,6 @@ namespace GeneXus.Programs {
          edtavName_Link = "";
          edtavName_Enabled = 1;
          cmbavGridactiongroup1_Jsonclick = "";
-         cmbavGridactiongroup1.Visible = -1;
-         cmbavGridactiongroup1.Enabled = 1;
          edtavBtnrole_Jsonclick = "";
          edtavBtnrole_Class = "Attribute";
          edtavBtnrole_Link = "";
@@ -3233,41 +3214,33 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'edtavBtnrole_Title',ctrl:'vBTNROLE',prop:'Title'},{av:'AV80ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV18ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV114Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'cmbavFilusergender'},{av:'AV41FilUserGender',fld:'vFILUSERGENDER',pic:''},{av:'cmbavFilauttype'},{av:'AV36FilAutType',fld:'vFILAUTTYPE',pic:''},{av:'AV92Search',fld:'vSEARCH',pic:''},{av:'cmbavFilrol'},{av:'AV37FilRol',fld:'vFILROL',pic:'ZZZZZZZZZZZ9'},{av:'AV42FirstIndex',fld:'vFIRSTINDEX',pic:'ZZZ9',hsh:true},{av:'AV70IsAuthorized_Display',fld:'vISAUTHORIZED_DISPLAY',pic:'',hsh:true},{av:'AV75IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV66IsAuthorized_BtnRole',fld:'vISAUTHORIZED_BTNROLE',pic:'',hsh:true},{av:'AV65IsAuthorized_BtnPermissions',fld:'vISAUTHORIZED_BTNPERMISSIONS',pic:'',hsh:true},{av:'AV67IsAuthorized_BtnSetPwd',fld:'vISAUTHORIZED_BTNSETPWD',pic:'',hsh:true},{av:'AV63IsAuthorized_Authenticator',fld:'vISAUTHORIZED_AUTHENTICATOR',pic:'',hsh:true},{av:'AV74IsAuthorized_UDelete',fld:'vISAUTHORIZED_UDELETE',pic:'',hsh:true},{av:'AV111IsAuthorized_ApplicationAPIKeys',fld:'vISAUTHORIZED_APPLICATIONAPIKEYS',pic:'',hsh:true},{av:'AV73IsAuthorized_Name',fld:'vISAUTHORIZED_NAME',pic:'',hsh:true},{av:'AV71IsAuthorized_Email',fld:'vISAUTHORIZED_EMAIL',pic:'',hsh:true},{av:'AV72IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true}]");
-         setEventMetadata("REFRESH",",oparms:[{av:'AV80ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV18ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'edtavName_Visible',ctrl:'vNAME',prop:'Visible'},{av:'edtavEmail_Visible',ctrl:'vEMAIL',prop:'Visible'},{av:'edtavFirstname_Visible',ctrl:'vFIRSTNAME',prop:'Visible'},{av:'edtavLastname_Visible',ctrl:'vLASTNAME',prop:'Visible'},{av:'edtavAuthenticationtypename_Visible',ctrl:'vAUTHENTICATIONTYPENAME',prop:'Visible'},{av:'edtavStatus_Visible',ctrl:'vSTATUS',prop:'Visible'},{av:'AV52GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV51GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'edtavStatus_Columnheaderclass',ctrl:'vSTATUS',prop:'Columnheaderclass'},{av:'AV42FirstIndex',fld:'vFIRSTINDEX',pic:'ZZZ9',hsh:true},{av:'AV54GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV70IsAuthorized_Display',fld:'vISAUTHORIZED_DISPLAY',pic:'',hsh:true},{av:'edtavDisplay_Visible',ctrl:'vDISPLAY',prop:'Visible'},{av:'AV75IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'edtavUpdate_Visible',ctrl:'vUPDATE',prop:'Visible'},{av:'AV66IsAuthorized_BtnRole',fld:'vISAUTHORIZED_BTNROLE',pic:'',hsh:true},{av:'edtavBtnrole_Visible',ctrl:'vBTNROLE',prop:'Visible'},{av:'AV65IsAuthorized_BtnPermissions',fld:'vISAUTHORIZED_BTNPERMISSIONS',pic:'',hsh:true},{av:'AV67IsAuthorized_BtnSetPwd',fld:'vISAUTHORIZED_BTNSETPWD',pic:'',hsh:true},{av:'AV63IsAuthorized_Authenticator',fld:'vISAUTHORIZED_AUTHENTICATOR',pic:'',hsh:true},{av:'AV74IsAuthorized_UDelete',fld:'vISAUTHORIZED_UDELETE',pic:'',hsh:true},{av:'AV111IsAuthorized_ApplicationAPIKeys',fld:'vISAUTHORIZED_APPLICATIONAPIKEYS',pic:'',hsh:true},{av:'AV72IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{ctrl:'BTNINSERT',prop:'Visible'},{av:'AV78ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''},{av:'AV57GridState',fld:'vGRIDSTATE',pic:''}]}");
-         setEventMetadata("GRIDPAGINATIONBAR.CHANGEPAGE","{handler:'E121N2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV80ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV18ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV114Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'cmbavFilusergender'},{av:'AV41FilUserGender',fld:'vFILUSERGENDER',pic:''},{av:'cmbavFilauttype'},{av:'AV36FilAutType',fld:'vFILAUTTYPE',pic:''},{av:'AV92Search',fld:'vSEARCH',pic:''},{av:'cmbavFilrol'},{av:'AV37FilRol',fld:'vFILROL',pic:'ZZZZZZZZZZZ9'},{av:'edtavBtnrole_Title',ctrl:'vBTNROLE',prop:'Title'},{av:'AV42FirstIndex',fld:'vFIRSTINDEX',pic:'ZZZ9',hsh:true},{av:'AV70IsAuthorized_Display',fld:'vISAUTHORIZED_DISPLAY',pic:'',hsh:true},{av:'AV75IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV66IsAuthorized_BtnRole',fld:'vISAUTHORIZED_BTNROLE',pic:'',hsh:true},{av:'AV65IsAuthorized_BtnPermissions',fld:'vISAUTHORIZED_BTNPERMISSIONS',pic:'',hsh:true},{av:'AV67IsAuthorized_BtnSetPwd',fld:'vISAUTHORIZED_BTNSETPWD',pic:'',hsh:true},{av:'AV63IsAuthorized_Authenticator',fld:'vISAUTHORIZED_AUTHENTICATOR',pic:'',hsh:true},{av:'AV74IsAuthorized_UDelete',fld:'vISAUTHORIZED_UDELETE',pic:'',hsh:true},{av:'AV111IsAuthorized_ApplicationAPIKeys',fld:'vISAUTHORIZED_APPLICATIONAPIKEYS',pic:'',hsh:true},{av:'AV73IsAuthorized_Name',fld:'vISAUTHORIZED_NAME',pic:'',hsh:true},{av:'AV71IsAuthorized_Email',fld:'vISAUTHORIZED_EMAIL',pic:'',hsh:true},{av:'AV72IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'Gridpaginationbar_Selectedpage',ctrl:'GRIDPAGINATIONBAR',prop:'SelectedPage'}]");
-         setEventMetadata("GRIDPAGINATIONBAR.CHANGEPAGE",",oparms:[]}");
-         setEventMetadata("GRIDPAGINATIONBAR.CHANGEROWSPERPAGE","{handler:'E131N2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV80ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV18ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV114Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'cmbavFilusergender'},{av:'AV41FilUserGender',fld:'vFILUSERGENDER',pic:''},{av:'cmbavFilauttype'},{av:'AV36FilAutType',fld:'vFILAUTTYPE',pic:''},{av:'AV92Search',fld:'vSEARCH',pic:''},{av:'cmbavFilrol'},{av:'AV37FilRol',fld:'vFILROL',pic:'ZZZZZZZZZZZ9'},{av:'edtavBtnrole_Title',ctrl:'vBTNROLE',prop:'Title'},{av:'AV42FirstIndex',fld:'vFIRSTINDEX',pic:'ZZZ9',hsh:true},{av:'AV70IsAuthorized_Display',fld:'vISAUTHORIZED_DISPLAY',pic:'',hsh:true},{av:'AV75IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV66IsAuthorized_BtnRole',fld:'vISAUTHORIZED_BTNROLE',pic:'',hsh:true},{av:'AV65IsAuthorized_BtnPermissions',fld:'vISAUTHORIZED_BTNPERMISSIONS',pic:'',hsh:true},{av:'AV67IsAuthorized_BtnSetPwd',fld:'vISAUTHORIZED_BTNSETPWD',pic:'',hsh:true},{av:'AV63IsAuthorized_Authenticator',fld:'vISAUTHORIZED_AUTHENTICATOR',pic:'',hsh:true},{av:'AV74IsAuthorized_UDelete',fld:'vISAUTHORIZED_UDELETE',pic:'',hsh:true},{av:'AV111IsAuthorized_ApplicationAPIKeys',fld:'vISAUTHORIZED_APPLICATIONAPIKEYS',pic:'',hsh:true},{av:'AV73IsAuthorized_Name',fld:'vISAUTHORIZED_NAME',pic:'',hsh:true},{av:'AV71IsAuthorized_Email',fld:'vISAUTHORIZED_EMAIL',pic:'',hsh:true},{av:'AV72IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'Gridpaginationbar_Rowsperpageselectedvalue',ctrl:'GRIDPAGINATIONBAR',prop:'RowsPerPageSelectedValue'}]");
-         setEventMetadata("GRIDPAGINATIONBAR.CHANGEROWSPERPAGE",",oparms:[{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'}]}");
-         setEventMetadata("GRID.LOAD","{handler:'E181N2',iparms:[{av:'AV42FirstIndex',fld:'vFIRSTINDEX',pic:'ZZZ9',hsh:true},{av:'AV70IsAuthorized_Display',fld:'vISAUTHORIZED_DISPLAY',pic:'',hsh:true},{av:'AV75IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV66IsAuthorized_BtnRole',fld:'vISAUTHORIZED_BTNROLE',pic:'',hsh:true},{av:'AV65IsAuthorized_BtnPermissions',fld:'vISAUTHORIZED_BTNPERMISSIONS',pic:'',hsh:true},{av:'AV67IsAuthorized_BtnSetPwd',fld:'vISAUTHORIZED_BTNSETPWD',pic:'',hsh:true},{av:'AV63IsAuthorized_Authenticator',fld:'vISAUTHORIZED_AUTHENTICATOR',pic:'',hsh:true},{av:'AV74IsAuthorized_UDelete',fld:'vISAUTHORIZED_UDELETE',pic:'',hsh:true},{av:'AV111IsAuthorized_ApplicationAPIKeys',fld:'vISAUTHORIZED_APPLICATIONAPIKEYS',pic:'',hsh:true},{av:'AV73IsAuthorized_Name',fld:'vISAUTHORIZED_NAME',pic:'',hsh:true},{av:'AV71IsAuthorized_Email',fld:'vISAUTHORIZED_EMAIL',pic:'',hsh:true}]");
-         setEventMetadata("GRID.LOAD",",oparms:[{av:'AV9AuthenticationTypeName',fld:'vAUTHENTICATIONTYPENAME',pic:''},{av:'AV59GUID',fld:'vGUID',pic:''},{av:'AV84Name',fld:'vNAME',pic:''},{av:'AV43FirstName',fld:'vFIRSTNAME',pic:''},{av:'AV76LastName',fld:'vLASTNAME',pic:''},{av:'AV95Status',fld:'vSTATUS',pic:''},{av:'AV31Email',fld:'vEMAIL',pic:''},{av:'edtavName_Class',ctrl:'vNAME',prop:'Class'},{av:'edtavFirstname_Class',ctrl:'vFIRSTNAME',prop:'Class'},{av:'edtavLastname_Class',ctrl:'vLASTNAME',prop:'Class'},{av:'edtavAuthenticationtypename_Class',ctrl:'vAUTHENTICATIONTYPENAME',prop:'Class'},{av:'edtavEmail_Class',ctrl:'vEMAIL',prop:'Class'},{av:'AV30Display',fld:'vDISPLAY',pic:''},{av:'edtavDisplay_Link',ctrl:'vDISPLAY',prop:'Link'},{av:'AV100Update',fld:'vUPDATE',pic:''},{av:'edtavUpdate_Link',ctrl:'vUPDATE',prop:'Link'},{av:'edtavUpdate_Class',ctrl:'vUPDATE',prop:'Class'},{av:'AV13BtnRole',fld:'vBTNROLE',pic:''},{av:'edtavBtnrole_Link',ctrl:'vBTNROLE',prop:'Link'},{av:'edtavBtnrole_Class',ctrl:'vBTNROLE',prop:'Class'},{av:'cmbavGridactiongroup1'},{av:'AV49GridActionGroup1',fld:'vGRIDACTIONGROUP1',pic:'ZZZ9'},{av:'edtavName_Link',ctrl:'vNAME',prop:'Link'},{av:'edtavEmail_Link',ctrl:'vEMAIL',prop:'Link'},{av:'edtavStatus_Columnclass',ctrl:'vSTATUS',prop:'Columnclass'}]}");
-         setEventMetadata("DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED","{handler:'E141N2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV80ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV18ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV114Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'cmbavFilusergender'},{av:'AV41FilUserGender',fld:'vFILUSERGENDER',pic:''},{av:'cmbavFilauttype'},{av:'AV36FilAutType',fld:'vFILAUTTYPE',pic:''},{av:'AV92Search',fld:'vSEARCH',pic:''},{av:'cmbavFilrol'},{av:'AV37FilRol',fld:'vFILROL',pic:'ZZZZZZZZZZZ9'},{av:'edtavBtnrole_Title',ctrl:'vBTNROLE',prop:'Title'},{av:'AV42FirstIndex',fld:'vFIRSTINDEX',pic:'ZZZ9',hsh:true},{av:'AV70IsAuthorized_Display',fld:'vISAUTHORIZED_DISPLAY',pic:'',hsh:true},{av:'AV75IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV66IsAuthorized_BtnRole',fld:'vISAUTHORIZED_BTNROLE',pic:'',hsh:true},{av:'AV65IsAuthorized_BtnPermissions',fld:'vISAUTHORIZED_BTNPERMISSIONS',pic:'',hsh:true},{av:'AV67IsAuthorized_BtnSetPwd',fld:'vISAUTHORIZED_BTNSETPWD',pic:'',hsh:true},{av:'AV63IsAuthorized_Authenticator',fld:'vISAUTHORIZED_AUTHENTICATOR',pic:'',hsh:true},{av:'AV74IsAuthorized_UDelete',fld:'vISAUTHORIZED_UDELETE',pic:'',hsh:true},{av:'AV111IsAuthorized_ApplicationAPIKeys',fld:'vISAUTHORIZED_APPLICATIONAPIKEYS',pic:'',hsh:true},{av:'AV73IsAuthorized_Name',fld:'vISAUTHORIZED_NAME',pic:'',hsh:true},{av:'AV71IsAuthorized_Email',fld:'vISAUTHORIZED_EMAIL',pic:'',hsh:true},{av:'AV72IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'Ddo_gridcolumnsselector_Columnsselectorvalues',ctrl:'DDO_GRIDCOLUMNSSELECTOR',prop:'ColumnsSelectorValues'}]");
-         setEventMetadata("DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED",",oparms:[{av:'AV18ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV80ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'edtavName_Visible',ctrl:'vNAME',prop:'Visible'},{av:'edtavEmail_Visible',ctrl:'vEMAIL',prop:'Visible'},{av:'edtavFirstname_Visible',ctrl:'vFIRSTNAME',prop:'Visible'},{av:'edtavLastname_Visible',ctrl:'vLASTNAME',prop:'Visible'},{av:'edtavAuthenticationtypename_Visible',ctrl:'vAUTHENTICATIONTYPENAME',prop:'Visible'},{av:'edtavStatus_Visible',ctrl:'vSTATUS',prop:'Visible'},{av:'AV52GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV51GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'edtavStatus_Columnheaderclass',ctrl:'vSTATUS',prop:'Columnheaderclass'},{av:'AV42FirstIndex',fld:'vFIRSTINDEX',pic:'ZZZ9',hsh:true},{av:'AV54GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV70IsAuthorized_Display',fld:'vISAUTHORIZED_DISPLAY',pic:'',hsh:true},{av:'edtavDisplay_Visible',ctrl:'vDISPLAY',prop:'Visible'},{av:'AV75IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'edtavUpdate_Visible',ctrl:'vUPDATE',prop:'Visible'},{av:'AV66IsAuthorized_BtnRole',fld:'vISAUTHORIZED_BTNROLE',pic:'',hsh:true},{av:'edtavBtnrole_Visible',ctrl:'vBTNROLE',prop:'Visible'},{av:'AV65IsAuthorized_BtnPermissions',fld:'vISAUTHORIZED_BTNPERMISSIONS',pic:'',hsh:true},{av:'AV67IsAuthorized_BtnSetPwd',fld:'vISAUTHORIZED_BTNSETPWD',pic:'',hsh:true},{av:'AV63IsAuthorized_Authenticator',fld:'vISAUTHORIZED_AUTHENTICATOR',pic:'',hsh:true},{av:'AV74IsAuthorized_UDelete',fld:'vISAUTHORIZED_UDELETE',pic:'',hsh:true},{av:'AV111IsAuthorized_ApplicationAPIKeys',fld:'vISAUTHORIZED_APPLICATIONAPIKEYS',pic:'',hsh:true},{av:'AV72IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{ctrl:'BTNINSERT',prop:'Visible'},{av:'AV78ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''},{av:'AV57GridState',fld:'vGRIDSTATE',pic:''}]}");
-         setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED","{handler:'E111N2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV80ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV18ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV114Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'cmbavFilusergender'},{av:'AV41FilUserGender',fld:'vFILUSERGENDER',pic:''},{av:'cmbavFilauttype'},{av:'AV36FilAutType',fld:'vFILAUTTYPE',pic:''},{av:'AV92Search',fld:'vSEARCH',pic:''},{av:'cmbavFilrol'},{av:'AV37FilRol',fld:'vFILROL',pic:'ZZZZZZZZZZZ9'},{av:'edtavBtnrole_Title',ctrl:'vBTNROLE',prop:'Title'},{av:'AV42FirstIndex',fld:'vFIRSTINDEX',pic:'ZZZ9',hsh:true},{av:'AV70IsAuthorized_Display',fld:'vISAUTHORIZED_DISPLAY',pic:'',hsh:true},{av:'AV75IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV66IsAuthorized_BtnRole',fld:'vISAUTHORIZED_BTNROLE',pic:'',hsh:true},{av:'AV65IsAuthorized_BtnPermissions',fld:'vISAUTHORIZED_BTNPERMISSIONS',pic:'',hsh:true},{av:'AV67IsAuthorized_BtnSetPwd',fld:'vISAUTHORIZED_BTNSETPWD',pic:'',hsh:true},{av:'AV63IsAuthorized_Authenticator',fld:'vISAUTHORIZED_AUTHENTICATOR',pic:'',hsh:true},{av:'AV74IsAuthorized_UDelete',fld:'vISAUTHORIZED_UDELETE',pic:'',hsh:true},{av:'AV111IsAuthorized_ApplicationAPIKeys',fld:'vISAUTHORIZED_APPLICATIONAPIKEYS',pic:'',hsh:true},{av:'AV73IsAuthorized_Name',fld:'vISAUTHORIZED_NAME',pic:'',hsh:true},{av:'AV71IsAuthorized_Email',fld:'vISAUTHORIZED_EMAIL',pic:'',hsh:true},{av:'AV72IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'Ddo_managefilters_Activeeventkey',ctrl:'DDO_MANAGEFILTERS',prop:'ActiveEventKey'},{av:'AV57GridState',fld:'vGRIDSTATE',pic:''}]");
-         setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED",",oparms:[{av:'AV80ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV57GridState',fld:'vGRIDSTATE',pic:''},{av:'AV92Search',fld:'vSEARCH',pic:''},{av:'cmbavFilusergender'},{av:'AV41FilUserGender',fld:'vFILUSERGENDER',pic:''},{av:'cmbavFilauttype'},{av:'AV36FilAutType',fld:'vFILAUTTYPE',pic:''},{av:'cmbavFilrol'},{av:'AV37FilRol',fld:'vFILROL',pic:'ZZZZZZZZZZZ9'},{av:'AV18ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'edtavName_Visible',ctrl:'vNAME',prop:'Visible'},{av:'edtavEmail_Visible',ctrl:'vEMAIL',prop:'Visible'},{av:'edtavFirstname_Visible',ctrl:'vFIRSTNAME',prop:'Visible'},{av:'edtavLastname_Visible',ctrl:'vLASTNAME',prop:'Visible'},{av:'edtavAuthenticationtypename_Visible',ctrl:'vAUTHENTICATIONTYPENAME',prop:'Visible'},{av:'edtavStatus_Visible',ctrl:'vSTATUS',prop:'Visible'},{av:'AV52GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV51GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'edtavStatus_Columnheaderclass',ctrl:'vSTATUS',prop:'Columnheaderclass'},{av:'AV42FirstIndex',fld:'vFIRSTINDEX',pic:'ZZZ9',hsh:true},{av:'AV54GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV70IsAuthorized_Display',fld:'vISAUTHORIZED_DISPLAY',pic:'',hsh:true},{av:'edtavDisplay_Visible',ctrl:'vDISPLAY',prop:'Visible'},{av:'AV75IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'edtavUpdate_Visible',ctrl:'vUPDATE',prop:'Visible'},{av:'AV66IsAuthorized_BtnRole',fld:'vISAUTHORIZED_BTNROLE',pic:'',hsh:true},{av:'edtavBtnrole_Visible',ctrl:'vBTNROLE',prop:'Visible'},{av:'AV65IsAuthorized_BtnPermissions',fld:'vISAUTHORIZED_BTNPERMISSIONS',pic:'',hsh:true},{av:'AV67IsAuthorized_BtnSetPwd',fld:'vISAUTHORIZED_BTNSETPWD',pic:'',hsh:true},{av:'AV63IsAuthorized_Authenticator',fld:'vISAUTHORIZED_AUTHENTICATOR',pic:'',hsh:true},{av:'AV74IsAuthorized_UDelete',fld:'vISAUTHORIZED_UDELETE',pic:'',hsh:true},{av:'AV111IsAuthorized_ApplicationAPIKeys',fld:'vISAUTHORIZED_APPLICATIONAPIKEYS',pic:'',hsh:true},{av:'AV72IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{ctrl:'BTNINSERT',prop:'Visible'},{av:'AV78ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''}]}");
-         setEventMetadata("VGRIDACTIONGROUP1.CLICK","{handler:'E191N2',iparms:[{av:'cmbavGridactiongroup1'},{av:'AV49GridActionGroup1',fld:'vGRIDACTIONGROUP1',pic:'ZZZ9'},{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV80ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV18ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV114Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'cmbavFilusergender'},{av:'AV41FilUserGender',fld:'vFILUSERGENDER',pic:''},{av:'cmbavFilauttype'},{av:'AV36FilAutType',fld:'vFILAUTTYPE',pic:''},{av:'AV92Search',fld:'vSEARCH',pic:''},{av:'cmbavFilrol'},{av:'AV37FilRol',fld:'vFILROL',pic:'ZZZZZZZZZZZ9'},{av:'edtavBtnrole_Title',ctrl:'vBTNROLE',prop:'Title'},{av:'AV42FirstIndex',fld:'vFIRSTINDEX',pic:'ZZZ9',hsh:true},{av:'AV70IsAuthorized_Display',fld:'vISAUTHORIZED_DISPLAY',pic:'',hsh:true},{av:'AV75IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV66IsAuthorized_BtnRole',fld:'vISAUTHORIZED_BTNROLE',pic:'',hsh:true},{av:'AV65IsAuthorized_BtnPermissions',fld:'vISAUTHORIZED_BTNPERMISSIONS',pic:'',hsh:true},{av:'AV67IsAuthorized_BtnSetPwd',fld:'vISAUTHORIZED_BTNSETPWD',pic:'',hsh:true},{av:'AV63IsAuthorized_Authenticator',fld:'vISAUTHORIZED_AUTHENTICATOR',pic:'',hsh:true},{av:'AV74IsAuthorized_UDelete',fld:'vISAUTHORIZED_UDELETE',pic:'',hsh:true},{av:'AV111IsAuthorized_ApplicationAPIKeys',fld:'vISAUTHORIZED_APPLICATIONAPIKEYS',pic:'',hsh:true},{av:'AV73IsAuthorized_Name',fld:'vISAUTHORIZED_NAME',pic:'',hsh:true},{av:'AV71IsAuthorized_Email',fld:'vISAUTHORIZED_EMAIL',pic:'',hsh:true},{av:'AV72IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'AV59GUID',fld:'vGUID',pic:''}]");
-         setEventMetadata("VGRIDACTIONGROUP1.CLICK",",oparms:[{av:'cmbavGridactiongroup1'},{av:'AV49GridActionGroup1',fld:'vGRIDACTIONGROUP1',pic:'ZZZ9'},{av:'AV59GUID',fld:'vGUID',pic:''},{av:'AV80ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV18ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'edtavName_Visible',ctrl:'vNAME',prop:'Visible'},{av:'edtavEmail_Visible',ctrl:'vEMAIL',prop:'Visible'},{av:'edtavFirstname_Visible',ctrl:'vFIRSTNAME',prop:'Visible'},{av:'edtavLastname_Visible',ctrl:'vLASTNAME',prop:'Visible'},{av:'edtavAuthenticationtypename_Visible',ctrl:'vAUTHENTICATIONTYPENAME',prop:'Visible'},{av:'edtavStatus_Visible',ctrl:'vSTATUS',prop:'Visible'},{av:'AV52GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV51GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'edtavStatus_Columnheaderclass',ctrl:'vSTATUS',prop:'Columnheaderclass'},{av:'AV42FirstIndex',fld:'vFIRSTINDEX',pic:'ZZZ9',hsh:true},{av:'AV54GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV70IsAuthorized_Display',fld:'vISAUTHORIZED_DISPLAY',pic:'',hsh:true},{av:'edtavDisplay_Visible',ctrl:'vDISPLAY',prop:'Visible'},{av:'AV75IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'edtavUpdate_Visible',ctrl:'vUPDATE',prop:'Visible'},{av:'AV66IsAuthorized_BtnRole',fld:'vISAUTHORIZED_BTNROLE',pic:'',hsh:true},{av:'edtavBtnrole_Visible',ctrl:'vBTNROLE',prop:'Visible'},{av:'AV65IsAuthorized_BtnPermissions',fld:'vISAUTHORIZED_BTNPERMISSIONS',pic:'',hsh:true},{av:'AV67IsAuthorized_BtnSetPwd',fld:'vISAUTHORIZED_BTNSETPWD',pic:'',hsh:true},{av:'AV63IsAuthorized_Authenticator',fld:'vISAUTHORIZED_AUTHENTICATOR',pic:'',hsh:true},{av:'AV74IsAuthorized_UDelete',fld:'vISAUTHORIZED_UDELETE',pic:'',hsh:true},{av:'AV111IsAuthorized_ApplicationAPIKeys',fld:'vISAUTHORIZED_APPLICATIONAPIKEYS',pic:'',hsh:true},{av:'AV72IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{ctrl:'BTNINSERT',prop:'Visible'},{av:'AV78ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''},{av:'AV57GridState',fld:'vGRIDSTATE',pic:''}]}");
-         setEventMetadata("'DOINSERT'","{handler:'E151N2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV80ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV18ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV114Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'cmbavFilusergender'},{av:'AV41FilUserGender',fld:'vFILUSERGENDER',pic:''},{av:'cmbavFilauttype'},{av:'AV36FilAutType',fld:'vFILAUTTYPE',pic:''},{av:'AV92Search',fld:'vSEARCH',pic:''},{av:'cmbavFilrol'},{av:'AV37FilRol',fld:'vFILROL',pic:'ZZZZZZZZZZZ9'},{av:'edtavBtnrole_Title',ctrl:'vBTNROLE',prop:'Title'},{av:'AV42FirstIndex',fld:'vFIRSTINDEX',pic:'ZZZ9',hsh:true},{av:'AV70IsAuthorized_Display',fld:'vISAUTHORIZED_DISPLAY',pic:'',hsh:true},{av:'AV75IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV66IsAuthorized_BtnRole',fld:'vISAUTHORIZED_BTNROLE',pic:'',hsh:true},{av:'AV65IsAuthorized_BtnPermissions',fld:'vISAUTHORIZED_BTNPERMISSIONS',pic:'',hsh:true},{av:'AV67IsAuthorized_BtnSetPwd',fld:'vISAUTHORIZED_BTNSETPWD',pic:'',hsh:true},{av:'AV63IsAuthorized_Authenticator',fld:'vISAUTHORIZED_AUTHENTICATOR',pic:'',hsh:true},{av:'AV74IsAuthorized_UDelete',fld:'vISAUTHORIZED_UDELETE',pic:'',hsh:true},{av:'AV111IsAuthorized_ApplicationAPIKeys',fld:'vISAUTHORIZED_APPLICATIONAPIKEYS',pic:'',hsh:true},{av:'AV73IsAuthorized_Name',fld:'vISAUTHORIZED_NAME',pic:'',hsh:true},{av:'AV71IsAuthorized_Email',fld:'vISAUTHORIZED_EMAIL',pic:'',hsh:true},{av:'AV72IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true}]");
-         setEventMetadata("'DOINSERT'",",oparms:[{av:'AV80ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV18ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'edtavName_Visible',ctrl:'vNAME',prop:'Visible'},{av:'edtavEmail_Visible',ctrl:'vEMAIL',prop:'Visible'},{av:'edtavFirstname_Visible',ctrl:'vFIRSTNAME',prop:'Visible'},{av:'edtavLastname_Visible',ctrl:'vLASTNAME',prop:'Visible'},{av:'edtavAuthenticationtypename_Visible',ctrl:'vAUTHENTICATIONTYPENAME',prop:'Visible'},{av:'edtavStatus_Visible',ctrl:'vSTATUS',prop:'Visible'},{av:'AV52GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV51GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'edtavStatus_Columnheaderclass',ctrl:'vSTATUS',prop:'Columnheaderclass'},{av:'AV42FirstIndex',fld:'vFIRSTINDEX',pic:'ZZZ9',hsh:true},{av:'AV54GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV70IsAuthorized_Display',fld:'vISAUTHORIZED_DISPLAY',pic:'',hsh:true},{av:'edtavDisplay_Visible',ctrl:'vDISPLAY',prop:'Visible'},{av:'AV75IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'edtavUpdate_Visible',ctrl:'vUPDATE',prop:'Visible'},{av:'AV66IsAuthorized_BtnRole',fld:'vISAUTHORIZED_BTNROLE',pic:'',hsh:true},{av:'edtavBtnrole_Visible',ctrl:'vBTNROLE',prop:'Visible'},{av:'AV65IsAuthorized_BtnPermissions',fld:'vISAUTHORIZED_BTNPERMISSIONS',pic:'',hsh:true},{av:'AV67IsAuthorized_BtnSetPwd',fld:'vISAUTHORIZED_BTNSETPWD',pic:'',hsh:true},{av:'AV63IsAuthorized_Authenticator',fld:'vISAUTHORIZED_AUTHENTICATOR',pic:'',hsh:true},{av:'AV74IsAuthorized_UDelete',fld:'vISAUTHORIZED_UDELETE',pic:'',hsh:true},{av:'AV111IsAuthorized_ApplicationAPIKeys',fld:'vISAUTHORIZED_APPLICATIONAPIKEYS',pic:'',hsh:true},{av:'AV72IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{ctrl:'BTNINSERT',prop:'Visible'},{av:'AV78ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''},{av:'AV57GridState',fld:'vGRIDSTATE',pic:''}]}");
-         setEventMetadata("VALIDV_FILUSERGENDER","{handler:'Validv_Filusergender',iparms:[]");
-         setEventMetadata("VALIDV_FILUSERGENDER",",oparms:[]}");
-         setEventMetadata("NULL","{handler:'Validv_Status',iparms:[]");
-         setEventMetadata("NULL",",oparms:[]}");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"edtavBtnrole_Title","ctrl":"vBTNROLE","prop":"Title"},{"av":"AV80ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV18ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV114Pgmname","fld":"vPGMNAME","hsh":true},{"av":"cmbavFilusergender"},{"av":"AV41FilUserGender","fld":"vFILUSERGENDER"},{"av":"cmbavFilauttype"},{"av":"AV36FilAutType","fld":"vFILAUTTYPE"},{"av":"AV92Search","fld":"vSEARCH"},{"av":"cmbavFilrol"},{"av":"AV37FilRol","fld":"vFILROL","pic":"ZZZZZZZZZZZ9"},{"av":"AV42FirstIndex","fld":"vFIRSTINDEX","pic":"ZZZ9","hsh":true},{"av":"AV70IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV75IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV66IsAuthorized_BtnRole","fld":"vISAUTHORIZED_BTNROLE","hsh":true},{"av":"AV65IsAuthorized_BtnPermissions","fld":"vISAUTHORIZED_BTNPERMISSIONS","hsh":true},{"av":"AV67IsAuthorized_BtnSetPwd","fld":"vISAUTHORIZED_BTNSETPWD","hsh":true},{"av":"AV63IsAuthorized_Authenticator","fld":"vISAUTHORIZED_AUTHENTICATOR","hsh":true},{"av":"AV74IsAuthorized_UDelete","fld":"vISAUTHORIZED_UDELETE","hsh":true},{"av":"AV111IsAuthorized_ApplicationAPIKeys","fld":"vISAUTHORIZED_APPLICATIONAPIKEYS","hsh":true},{"av":"AV73IsAuthorized_Name","fld":"vISAUTHORIZED_NAME","hsh":true},{"av":"AV71IsAuthorized_Email","fld":"vISAUTHORIZED_EMAIL","hsh":true},{"av":"AV72IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true}]""");
+         setEventMetadata("REFRESH",""","oparms":[{"av":"AV80ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV18ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"edtavName_Visible","ctrl":"vNAME","prop":"Visible"},{"av":"edtavEmail_Visible","ctrl":"vEMAIL","prop":"Visible"},{"av":"edtavFirstname_Visible","ctrl":"vFIRSTNAME","prop":"Visible"},{"av":"edtavLastname_Visible","ctrl":"vLASTNAME","prop":"Visible"},{"av":"edtavAuthenticationtypename_Visible","ctrl":"vAUTHENTICATIONTYPENAME","prop":"Visible"},{"av":"edtavStatus_Visible","ctrl":"vSTATUS","prop":"Visible"},{"av":"AV52GridCurrentPage","fld":"vGRIDCURRENTPAGE","pic":"ZZZZZZZZZ9"},{"av":"AV51GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"edtavStatus_Columnheaderclass","ctrl":"vSTATUS","prop":"Columnheaderclass"},{"av":"AV42FirstIndex","fld":"vFIRSTINDEX","pic":"ZZZ9","hsh":true},{"av":"AV54GridPageCount","fld":"vGRIDPAGECOUNT","pic":"ZZZZZZZZZ9"},{"av":"AV70IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"edtavDisplay_Visible","ctrl":"vDISPLAY","prop":"Visible"},{"av":"AV75IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"edtavUpdate_Visible","ctrl":"vUPDATE","prop":"Visible"},{"av":"AV66IsAuthorized_BtnRole","fld":"vISAUTHORIZED_BTNROLE","hsh":true},{"av":"edtavBtnrole_Visible","ctrl":"vBTNROLE","prop":"Visible"},{"av":"AV65IsAuthorized_BtnPermissions","fld":"vISAUTHORIZED_BTNPERMISSIONS","hsh":true},{"av":"AV67IsAuthorized_BtnSetPwd","fld":"vISAUTHORIZED_BTNSETPWD","hsh":true},{"av":"AV63IsAuthorized_Authenticator","fld":"vISAUTHORIZED_AUTHENTICATOR","hsh":true},{"av":"AV74IsAuthorized_UDelete","fld":"vISAUTHORIZED_UDELETE","hsh":true},{"av":"AV111IsAuthorized_ApplicationAPIKeys","fld":"vISAUTHORIZED_APPLICATIONAPIKEYS","hsh":true},{"av":"AV72IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"ctrl":"BTNINSERT","prop":"Visible"},{"av":"AV78ManageFiltersData","fld":"vMANAGEFILTERSDATA"},{"av":"AV57GridState","fld":"vGRIDSTATE"}]}""");
+         setEventMetadata("GRIDPAGINATIONBAR.CHANGEPAGE","""{"handler":"E121N2","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV80ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV18ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV114Pgmname","fld":"vPGMNAME","hsh":true},{"av":"cmbavFilusergender"},{"av":"AV41FilUserGender","fld":"vFILUSERGENDER"},{"av":"cmbavFilauttype"},{"av":"AV36FilAutType","fld":"vFILAUTTYPE"},{"av":"AV92Search","fld":"vSEARCH"},{"av":"cmbavFilrol"},{"av":"AV37FilRol","fld":"vFILROL","pic":"ZZZZZZZZZZZ9"},{"av":"edtavBtnrole_Title","ctrl":"vBTNROLE","prop":"Title"},{"av":"AV42FirstIndex","fld":"vFIRSTINDEX","pic":"ZZZ9","hsh":true},{"av":"AV70IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV75IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV66IsAuthorized_BtnRole","fld":"vISAUTHORIZED_BTNROLE","hsh":true},{"av":"AV65IsAuthorized_BtnPermissions","fld":"vISAUTHORIZED_BTNPERMISSIONS","hsh":true},{"av":"AV67IsAuthorized_BtnSetPwd","fld":"vISAUTHORIZED_BTNSETPWD","hsh":true},{"av":"AV63IsAuthorized_Authenticator","fld":"vISAUTHORIZED_AUTHENTICATOR","hsh":true},{"av":"AV74IsAuthorized_UDelete","fld":"vISAUTHORIZED_UDELETE","hsh":true},{"av":"AV111IsAuthorized_ApplicationAPIKeys","fld":"vISAUTHORIZED_APPLICATIONAPIKEYS","hsh":true},{"av":"AV73IsAuthorized_Name","fld":"vISAUTHORIZED_NAME","hsh":true},{"av":"AV71IsAuthorized_Email","fld":"vISAUTHORIZED_EMAIL","hsh":true},{"av":"AV72IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"av":"Gridpaginationbar_Selectedpage","ctrl":"GRIDPAGINATIONBAR","prop":"SelectedPage"}]}""");
+         setEventMetadata("GRIDPAGINATIONBAR.CHANGEROWSPERPAGE","""{"handler":"E131N2","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV80ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV18ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV114Pgmname","fld":"vPGMNAME","hsh":true},{"av":"cmbavFilusergender"},{"av":"AV41FilUserGender","fld":"vFILUSERGENDER"},{"av":"cmbavFilauttype"},{"av":"AV36FilAutType","fld":"vFILAUTTYPE"},{"av":"AV92Search","fld":"vSEARCH"},{"av":"cmbavFilrol"},{"av":"AV37FilRol","fld":"vFILROL","pic":"ZZZZZZZZZZZ9"},{"av":"edtavBtnrole_Title","ctrl":"vBTNROLE","prop":"Title"},{"av":"AV42FirstIndex","fld":"vFIRSTINDEX","pic":"ZZZ9","hsh":true},{"av":"AV70IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV75IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV66IsAuthorized_BtnRole","fld":"vISAUTHORIZED_BTNROLE","hsh":true},{"av":"AV65IsAuthorized_BtnPermissions","fld":"vISAUTHORIZED_BTNPERMISSIONS","hsh":true},{"av":"AV67IsAuthorized_BtnSetPwd","fld":"vISAUTHORIZED_BTNSETPWD","hsh":true},{"av":"AV63IsAuthorized_Authenticator","fld":"vISAUTHORIZED_AUTHENTICATOR","hsh":true},{"av":"AV74IsAuthorized_UDelete","fld":"vISAUTHORIZED_UDELETE","hsh":true},{"av":"AV111IsAuthorized_ApplicationAPIKeys","fld":"vISAUTHORIZED_APPLICATIONAPIKEYS","hsh":true},{"av":"AV73IsAuthorized_Name","fld":"vISAUTHORIZED_NAME","hsh":true},{"av":"AV71IsAuthorized_Email","fld":"vISAUTHORIZED_EMAIL","hsh":true},{"av":"AV72IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"av":"Gridpaginationbar_Rowsperpageselectedvalue","ctrl":"GRIDPAGINATIONBAR","prop":"RowsPerPageSelectedValue"}]""");
+         setEventMetadata("GRIDPAGINATIONBAR.CHANGEROWSPERPAGE",""","oparms":[{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"}]}""");
+         setEventMetadata("GRID.LOAD","""{"handler":"E181N2","iparms":[{"av":"AV42FirstIndex","fld":"vFIRSTINDEX","pic":"ZZZ9","hsh":true},{"av":"AV70IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV75IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV66IsAuthorized_BtnRole","fld":"vISAUTHORIZED_BTNROLE","hsh":true},{"av":"AV65IsAuthorized_BtnPermissions","fld":"vISAUTHORIZED_BTNPERMISSIONS","hsh":true},{"av":"AV67IsAuthorized_BtnSetPwd","fld":"vISAUTHORIZED_BTNSETPWD","hsh":true},{"av":"AV63IsAuthorized_Authenticator","fld":"vISAUTHORIZED_AUTHENTICATOR","hsh":true},{"av":"AV74IsAuthorized_UDelete","fld":"vISAUTHORIZED_UDELETE","hsh":true},{"av":"AV111IsAuthorized_ApplicationAPIKeys","fld":"vISAUTHORIZED_APPLICATIONAPIKEYS","hsh":true},{"av":"AV73IsAuthorized_Name","fld":"vISAUTHORIZED_NAME","hsh":true},{"av":"AV71IsAuthorized_Email","fld":"vISAUTHORIZED_EMAIL","hsh":true}]""");
+         setEventMetadata("GRID.LOAD",""","oparms":[{"av":"AV9AuthenticationTypeName","fld":"vAUTHENTICATIONTYPENAME"},{"av":"AV59GUID","fld":"vGUID"},{"av":"AV84Name","fld":"vNAME"},{"av":"AV43FirstName","fld":"vFIRSTNAME"},{"av":"AV76LastName","fld":"vLASTNAME"},{"av":"AV95Status","fld":"vSTATUS"},{"av":"AV31Email","fld":"vEMAIL"},{"av":"edtavName_Class","ctrl":"vNAME","prop":"Class"},{"av":"edtavFirstname_Class","ctrl":"vFIRSTNAME","prop":"Class"},{"av":"edtavLastname_Class","ctrl":"vLASTNAME","prop":"Class"},{"av":"edtavAuthenticationtypename_Class","ctrl":"vAUTHENTICATIONTYPENAME","prop":"Class"},{"av":"edtavEmail_Class","ctrl":"vEMAIL","prop":"Class"},{"av":"AV30Display","fld":"vDISPLAY"},{"av":"edtavDisplay_Link","ctrl":"vDISPLAY","prop":"Link"},{"av":"AV100Update","fld":"vUPDATE"},{"av":"edtavUpdate_Link","ctrl":"vUPDATE","prop":"Link"},{"av":"edtavUpdate_Class","ctrl":"vUPDATE","prop":"Class"},{"av":"AV13BtnRole","fld":"vBTNROLE"},{"av":"edtavBtnrole_Link","ctrl":"vBTNROLE","prop":"Link"},{"av":"edtavBtnrole_Class","ctrl":"vBTNROLE","prop":"Class"},{"av":"cmbavGridactiongroup1"},{"av":"AV49GridActionGroup1","fld":"vGRIDACTIONGROUP1","pic":"ZZZ9"},{"av":"edtavName_Link","ctrl":"vNAME","prop":"Link"},{"av":"edtavEmail_Link","ctrl":"vEMAIL","prop":"Link"},{"av":"edtavStatus_Columnclass","ctrl":"vSTATUS","prop":"Columnclass"}]}""");
+         setEventMetadata("DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED","""{"handler":"E141N2","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV80ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV18ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV114Pgmname","fld":"vPGMNAME","hsh":true},{"av":"cmbavFilusergender"},{"av":"AV41FilUserGender","fld":"vFILUSERGENDER"},{"av":"cmbavFilauttype"},{"av":"AV36FilAutType","fld":"vFILAUTTYPE"},{"av":"AV92Search","fld":"vSEARCH"},{"av":"cmbavFilrol"},{"av":"AV37FilRol","fld":"vFILROL","pic":"ZZZZZZZZZZZ9"},{"av":"edtavBtnrole_Title","ctrl":"vBTNROLE","prop":"Title"},{"av":"AV42FirstIndex","fld":"vFIRSTINDEX","pic":"ZZZ9","hsh":true},{"av":"AV70IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV75IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV66IsAuthorized_BtnRole","fld":"vISAUTHORIZED_BTNROLE","hsh":true},{"av":"AV65IsAuthorized_BtnPermissions","fld":"vISAUTHORIZED_BTNPERMISSIONS","hsh":true},{"av":"AV67IsAuthorized_BtnSetPwd","fld":"vISAUTHORIZED_BTNSETPWD","hsh":true},{"av":"AV63IsAuthorized_Authenticator","fld":"vISAUTHORIZED_AUTHENTICATOR","hsh":true},{"av":"AV74IsAuthorized_UDelete","fld":"vISAUTHORIZED_UDELETE","hsh":true},{"av":"AV111IsAuthorized_ApplicationAPIKeys","fld":"vISAUTHORIZED_APPLICATIONAPIKEYS","hsh":true},{"av":"AV73IsAuthorized_Name","fld":"vISAUTHORIZED_NAME","hsh":true},{"av":"AV71IsAuthorized_Email","fld":"vISAUTHORIZED_EMAIL","hsh":true},{"av":"AV72IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"av":"Ddo_gridcolumnsselector_Columnsselectorvalues","ctrl":"DDO_GRIDCOLUMNSSELECTOR","prop":"ColumnsSelectorValues"}]""");
+         setEventMetadata("DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED",""","oparms":[{"av":"AV18ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV80ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"edtavName_Visible","ctrl":"vNAME","prop":"Visible"},{"av":"edtavEmail_Visible","ctrl":"vEMAIL","prop":"Visible"},{"av":"edtavFirstname_Visible","ctrl":"vFIRSTNAME","prop":"Visible"},{"av":"edtavLastname_Visible","ctrl":"vLASTNAME","prop":"Visible"},{"av":"edtavAuthenticationtypename_Visible","ctrl":"vAUTHENTICATIONTYPENAME","prop":"Visible"},{"av":"edtavStatus_Visible","ctrl":"vSTATUS","prop":"Visible"},{"av":"AV52GridCurrentPage","fld":"vGRIDCURRENTPAGE","pic":"ZZZZZZZZZ9"},{"av":"AV51GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"edtavStatus_Columnheaderclass","ctrl":"vSTATUS","prop":"Columnheaderclass"},{"av":"AV42FirstIndex","fld":"vFIRSTINDEX","pic":"ZZZ9","hsh":true},{"av":"AV54GridPageCount","fld":"vGRIDPAGECOUNT","pic":"ZZZZZZZZZ9"},{"av":"AV70IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"edtavDisplay_Visible","ctrl":"vDISPLAY","prop":"Visible"},{"av":"AV75IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"edtavUpdate_Visible","ctrl":"vUPDATE","prop":"Visible"},{"av":"AV66IsAuthorized_BtnRole","fld":"vISAUTHORIZED_BTNROLE","hsh":true},{"av":"edtavBtnrole_Visible","ctrl":"vBTNROLE","prop":"Visible"},{"av":"AV65IsAuthorized_BtnPermissions","fld":"vISAUTHORIZED_BTNPERMISSIONS","hsh":true},{"av":"AV67IsAuthorized_BtnSetPwd","fld":"vISAUTHORIZED_BTNSETPWD","hsh":true},{"av":"AV63IsAuthorized_Authenticator","fld":"vISAUTHORIZED_AUTHENTICATOR","hsh":true},{"av":"AV74IsAuthorized_UDelete","fld":"vISAUTHORIZED_UDELETE","hsh":true},{"av":"AV111IsAuthorized_ApplicationAPIKeys","fld":"vISAUTHORIZED_APPLICATIONAPIKEYS","hsh":true},{"av":"AV72IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"ctrl":"BTNINSERT","prop":"Visible"},{"av":"AV78ManageFiltersData","fld":"vMANAGEFILTERSDATA"},{"av":"AV57GridState","fld":"vGRIDSTATE"}]}""");
+         setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED","""{"handler":"E111N2","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV80ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV18ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV114Pgmname","fld":"vPGMNAME","hsh":true},{"av":"cmbavFilusergender"},{"av":"AV41FilUserGender","fld":"vFILUSERGENDER"},{"av":"cmbavFilauttype"},{"av":"AV36FilAutType","fld":"vFILAUTTYPE"},{"av":"AV92Search","fld":"vSEARCH"},{"av":"cmbavFilrol"},{"av":"AV37FilRol","fld":"vFILROL","pic":"ZZZZZZZZZZZ9"},{"av":"edtavBtnrole_Title","ctrl":"vBTNROLE","prop":"Title"},{"av":"AV42FirstIndex","fld":"vFIRSTINDEX","pic":"ZZZ9","hsh":true},{"av":"AV70IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV75IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV66IsAuthorized_BtnRole","fld":"vISAUTHORIZED_BTNROLE","hsh":true},{"av":"AV65IsAuthorized_BtnPermissions","fld":"vISAUTHORIZED_BTNPERMISSIONS","hsh":true},{"av":"AV67IsAuthorized_BtnSetPwd","fld":"vISAUTHORIZED_BTNSETPWD","hsh":true},{"av":"AV63IsAuthorized_Authenticator","fld":"vISAUTHORIZED_AUTHENTICATOR","hsh":true},{"av":"AV74IsAuthorized_UDelete","fld":"vISAUTHORIZED_UDELETE","hsh":true},{"av":"AV111IsAuthorized_ApplicationAPIKeys","fld":"vISAUTHORIZED_APPLICATIONAPIKEYS","hsh":true},{"av":"AV73IsAuthorized_Name","fld":"vISAUTHORIZED_NAME","hsh":true},{"av":"AV71IsAuthorized_Email","fld":"vISAUTHORIZED_EMAIL","hsh":true},{"av":"AV72IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"av":"Ddo_managefilters_Activeeventkey","ctrl":"DDO_MANAGEFILTERS","prop":"ActiveEventKey"},{"av":"AV57GridState","fld":"vGRIDSTATE"}]""");
+         setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED",""","oparms":[{"av":"AV80ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV57GridState","fld":"vGRIDSTATE"},{"av":"AV92Search","fld":"vSEARCH"},{"av":"cmbavFilusergender"},{"av":"AV41FilUserGender","fld":"vFILUSERGENDER"},{"av":"cmbavFilauttype"},{"av":"AV36FilAutType","fld":"vFILAUTTYPE"},{"av":"cmbavFilrol"},{"av":"AV37FilRol","fld":"vFILROL","pic":"ZZZZZZZZZZZ9"},{"av":"AV18ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"edtavName_Visible","ctrl":"vNAME","prop":"Visible"},{"av":"edtavEmail_Visible","ctrl":"vEMAIL","prop":"Visible"},{"av":"edtavFirstname_Visible","ctrl":"vFIRSTNAME","prop":"Visible"},{"av":"edtavLastname_Visible","ctrl":"vLASTNAME","prop":"Visible"},{"av":"edtavAuthenticationtypename_Visible","ctrl":"vAUTHENTICATIONTYPENAME","prop":"Visible"},{"av":"edtavStatus_Visible","ctrl":"vSTATUS","prop":"Visible"},{"av":"AV52GridCurrentPage","fld":"vGRIDCURRENTPAGE","pic":"ZZZZZZZZZ9"},{"av":"AV51GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"edtavStatus_Columnheaderclass","ctrl":"vSTATUS","prop":"Columnheaderclass"},{"av":"AV42FirstIndex","fld":"vFIRSTINDEX","pic":"ZZZ9","hsh":true},{"av":"AV54GridPageCount","fld":"vGRIDPAGECOUNT","pic":"ZZZZZZZZZ9"},{"av":"AV70IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"edtavDisplay_Visible","ctrl":"vDISPLAY","prop":"Visible"},{"av":"AV75IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"edtavUpdate_Visible","ctrl":"vUPDATE","prop":"Visible"},{"av":"AV66IsAuthorized_BtnRole","fld":"vISAUTHORIZED_BTNROLE","hsh":true},{"av":"edtavBtnrole_Visible","ctrl":"vBTNROLE","prop":"Visible"},{"av":"AV65IsAuthorized_BtnPermissions","fld":"vISAUTHORIZED_BTNPERMISSIONS","hsh":true},{"av":"AV67IsAuthorized_BtnSetPwd","fld":"vISAUTHORIZED_BTNSETPWD","hsh":true},{"av":"AV63IsAuthorized_Authenticator","fld":"vISAUTHORIZED_AUTHENTICATOR","hsh":true},{"av":"AV74IsAuthorized_UDelete","fld":"vISAUTHORIZED_UDELETE","hsh":true},{"av":"AV111IsAuthorized_ApplicationAPIKeys","fld":"vISAUTHORIZED_APPLICATIONAPIKEYS","hsh":true},{"av":"AV72IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"ctrl":"BTNINSERT","prop":"Visible"},{"av":"AV78ManageFiltersData","fld":"vMANAGEFILTERSDATA"}]}""");
+         setEventMetadata("VGRIDACTIONGROUP1.CLICK","""{"handler":"E191N2","iparms":[{"av":"cmbavGridactiongroup1"},{"av":"AV49GridActionGroup1","fld":"vGRIDACTIONGROUP1","pic":"ZZZ9"},{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV80ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV18ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV114Pgmname","fld":"vPGMNAME","hsh":true},{"av":"cmbavFilusergender"},{"av":"AV41FilUserGender","fld":"vFILUSERGENDER"},{"av":"cmbavFilauttype"},{"av":"AV36FilAutType","fld":"vFILAUTTYPE"},{"av":"AV92Search","fld":"vSEARCH"},{"av":"cmbavFilrol"},{"av":"AV37FilRol","fld":"vFILROL","pic":"ZZZZZZZZZZZ9"},{"av":"edtavBtnrole_Title","ctrl":"vBTNROLE","prop":"Title"},{"av":"AV42FirstIndex","fld":"vFIRSTINDEX","pic":"ZZZ9","hsh":true},{"av":"AV70IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV75IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV66IsAuthorized_BtnRole","fld":"vISAUTHORIZED_BTNROLE","hsh":true},{"av":"AV65IsAuthorized_BtnPermissions","fld":"vISAUTHORIZED_BTNPERMISSIONS","hsh":true},{"av":"AV67IsAuthorized_BtnSetPwd","fld":"vISAUTHORIZED_BTNSETPWD","hsh":true},{"av":"AV63IsAuthorized_Authenticator","fld":"vISAUTHORIZED_AUTHENTICATOR","hsh":true},{"av":"AV74IsAuthorized_UDelete","fld":"vISAUTHORIZED_UDELETE","hsh":true},{"av":"AV111IsAuthorized_ApplicationAPIKeys","fld":"vISAUTHORIZED_APPLICATIONAPIKEYS","hsh":true},{"av":"AV73IsAuthorized_Name","fld":"vISAUTHORIZED_NAME","hsh":true},{"av":"AV71IsAuthorized_Email","fld":"vISAUTHORIZED_EMAIL","hsh":true},{"av":"AV72IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"av":"AV59GUID","fld":"vGUID"}]""");
+         setEventMetadata("VGRIDACTIONGROUP1.CLICK",""","oparms":[{"av":"cmbavGridactiongroup1"},{"av":"AV49GridActionGroup1","fld":"vGRIDACTIONGROUP1","pic":"ZZZ9"},{"av":"AV59GUID","fld":"vGUID"},{"av":"AV80ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV18ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"edtavName_Visible","ctrl":"vNAME","prop":"Visible"},{"av":"edtavEmail_Visible","ctrl":"vEMAIL","prop":"Visible"},{"av":"edtavFirstname_Visible","ctrl":"vFIRSTNAME","prop":"Visible"},{"av":"edtavLastname_Visible","ctrl":"vLASTNAME","prop":"Visible"},{"av":"edtavAuthenticationtypename_Visible","ctrl":"vAUTHENTICATIONTYPENAME","prop":"Visible"},{"av":"edtavStatus_Visible","ctrl":"vSTATUS","prop":"Visible"},{"av":"AV52GridCurrentPage","fld":"vGRIDCURRENTPAGE","pic":"ZZZZZZZZZ9"},{"av":"AV51GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"edtavStatus_Columnheaderclass","ctrl":"vSTATUS","prop":"Columnheaderclass"},{"av":"AV42FirstIndex","fld":"vFIRSTINDEX","pic":"ZZZ9","hsh":true},{"av":"AV54GridPageCount","fld":"vGRIDPAGECOUNT","pic":"ZZZZZZZZZ9"},{"av":"AV70IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"edtavDisplay_Visible","ctrl":"vDISPLAY","prop":"Visible"},{"av":"AV75IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"edtavUpdate_Visible","ctrl":"vUPDATE","prop":"Visible"},{"av":"AV66IsAuthorized_BtnRole","fld":"vISAUTHORIZED_BTNROLE","hsh":true},{"av":"edtavBtnrole_Visible","ctrl":"vBTNROLE","prop":"Visible"},{"av":"AV65IsAuthorized_BtnPermissions","fld":"vISAUTHORIZED_BTNPERMISSIONS","hsh":true},{"av":"AV67IsAuthorized_BtnSetPwd","fld":"vISAUTHORIZED_BTNSETPWD","hsh":true},{"av":"AV63IsAuthorized_Authenticator","fld":"vISAUTHORIZED_AUTHENTICATOR","hsh":true},{"av":"AV74IsAuthorized_UDelete","fld":"vISAUTHORIZED_UDELETE","hsh":true},{"av":"AV111IsAuthorized_ApplicationAPIKeys","fld":"vISAUTHORIZED_APPLICATIONAPIKEYS","hsh":true},{"av":"AV72IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"ctrl":"BTNINSERT","prop":"Visible"},{"av":"AV78ManageFiltersData","fld":"vMANAGEFILTERSDATA"},{"av":"AV57GridState","fld":"vGRIDSTATE"}]}""");
+         setEventMetadata("'DOINSERT'","""{"handler":"E151N2","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV80ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV18ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV114Pgmname","fld":"vPGMNAME","hsh":true},{"av":"cmbavFilusergender"},{"av":"AV41FilUserGender","fld":"vFILUSERGENDER"},{"av":"cmbavFilauttype"},{"av":"AV36FilAutType","fld":"vFILAUTTYPE"},{"av":"AV92Search","fld":"vSEARCH"},{"av":"cmbavFilrol"},{"av":"AV37FilRol","fld":"vFILROL","pic":"ZZZZZZZZZZZ9"},{"av":"edtavBtnrole_Title","ctrl":"vBTNROLE","prop":"Title"},{"av":"AV42FirstIndex","fld":"vFIRSTINDEX","pic":"ZZZ9","hsh":true},{"av":"AV70IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"AV75IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV66IsAuthorized_BtnRole","fld":"vISAUTHORIZED_BTNROLE","hsh":true},{"av":"AV65IsAuthorized_BtnPermissions","fld":"vISAUTHORIZED_BTNPERMISSIONS","hsh":true},{"av":"AV67IsAuthorized_BtnSetPwd","fld":"vISAUTHORIZED_BTNSETPWD","hsh":true},{"av":"AV63IsAuthorized_Authenticator","fld":"vISAUTHORIZED_AUTHENTICATOR","hsh":true},{"av":"AV74IsAuthorized_UDelete","fld":"vISAUTHORIZED_UDELETE","hsh":true},{"av":"AV111IsAuthorized_ApplicationAPIKeys","fld":"vISAUTHORIZED_APPLICATIONAPIKEYS","hsh":true},{"av":"AV73IsAuthorized_Name","fld":"vISAUTHORIZED_NAME","hsh":true},{"av":"AV71IsAuthorized_Email","fld":"vISAUTHORIZED_EMAIL","hsh":true},{"av":"AV72IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true}]""");
+         setEventMetadata("'DOINSERT'",""","oparms":[{"av":"AV80ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV18ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"edtavName_Visible","ctrl":"vNAME","prop":"Visible"},{"av":"edtavEmail_Visible","ctrl":"vEMAIL","prop":"Visible"},{"av":"edtavFirstname_Visible","ctrl":"vFIRSTNAME","prop":"Visible"},{"av":"edtavLastname_Visible","ctrl":"vLASTNAME","prop":"Visible"},{"av":"edtavAuthenticationtypename_Visible","ctrl":"vAUTHENTICATIONTYPENAME","prop":"Visible"},{"av":"edtavStatus_Visible","ctrl":"vSTATUS","prop":"Visible"},{"av":"AV52GridCurrentPage","fld":"vGRIDCURRENTPAGE","pic":"ZZZZZZZZZ9"},{"av":"AV51GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"edtavStatus_Columnheaderclass","ctrl":"vSTATUS","prop":"Columnheaderclass"},{"av":"AV42FirstIndex","fld":"vFIRSTINDEX","pic":"ZZZ9","hsh":true},{"av":"AV54GridPageCount","fld":"vGRIDPAGECOUNT","pic":"ZZZZZZZZZ9"},{"av":"AV70IsAuthorized_Display","fld":"vISAUTHORIZED_DISPLAY","hsh":true},{"av":"edtavDisplay_Visible","ctrl":"vDISPLAY","prop":"Visible"},{"av":"AV75IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"edtavUpdate_Visible","ctrl":"vUPDATE","prop":"Visible"},{"av":"AV66IsAuthorized_BtnRole","fld":"vISAUTHORIZED_BTNROLE","hsh":true},{"av":"edtavBtnrole_Visible","ctrl":"vBTNROLE","prop":"Visible"},{"av":"AV65IsAuthorized_BtnPermissions","fld":"vISAUTHORIZED_BTNPERMISSIONS","hsh":true},{"av":"AV67IsAuthorized_BtnSetPwd","fld":"vISAUTHORIZED_BTNSETPWD","hsh":true},{"av":"AV63IsAuthorized_Authenticator","fld":"vISAUTHORIZED_AUTHENTICATOR","hsh":true},{"av":"AV74IsAuthorized_UDelete","fld":"vISAUTHORIZED_UDELETE","hsh":true},{"av":"AV111IsAuthorized_ApplicationAPIKeys","fld":"vISAUTHORIZED_APPLICATIONAPIKEYS","hsh":true},{"av":"AV72IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"ctrl":"BTNINSERT","prop":"Visible"},{"av":"AV78ManageFiltersData","fld":"vMANAGEFILTERSDATA"},{"av":"AV57GridState","fld":"vGRIDSTATE"}]}""");
+         setEventMetadata("VALIDV_FILUSERGENDER","""{"handler":"Validv_Filusergender","iparms":[]}""");
+         setEventMetadata("NULL","""{"handler":"Validv_Status","iparms":[]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -3384,7 +3357,6 @@ namespace GeneXus.Programs {
       private short GxWebError ;
       private short AV80ManageFiltersExecutionStep ;
       private short AV42FirstIndex ;
-      private short initialized ;
       private short gxajaxcallmode ;
       private short wbEnd ;
       private short wbStart ;
@@ -3440,7 +3412,6 @@ namespace GeneXus.Programs {
       private int idxLst ;
       private int subGrid_Backcolor ;
       private int subGrid_Allbackcolor ;
-      private int edtavGuid_Visible ;
       private int subGrid_Titlebackcolor ;
       private int subGrid_Selectedindex ;
       private int subGrid_Selectioncolor ;
@@ -3631,41 +3602,41 @@ namespace GeneXus.Programs {
       private GXUserControl ucDdo_gridcolumnsselector ;
       private GXUserControl ucGrid_empowerer ;
       private GXUserControl ucDdo_managefilters ;
-      private GeneXus.Programs.genexussecurity.SdtGAMRepository AV89Repository ;
+      private GxHttpRequest AV60HTTPRequest ;
+      private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private GXCombobox cmbavFilusergender ;
       private GXCombobox cmbavFilauttype ;
       private GXCombobox cmbavFilrol ;
       private GXCombobox cmbavGridactiongroup1 ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector AV18ColumnsSelector ;
+      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsData_Item> AV78ManageFiltersData ;
+      private GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsTitleSettingsIcons AV28DDO_TitleSettingsIcons ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState AV57GridState ;
+      private GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsTitleSettingsIcons GXt_SdtDVB_SDTDropDownOptionsTitleSettingsIcons2 ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMAuthenticationType> AV10AuthenticationTypes ;
+      private GeneXus.Programs.genexussecurity.SdtGAMAuthenticationTypeFilter AV39FilterAutType ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV34Errors ;
+      private GeneXus.Programs.genexussecurity.SdtGAMAuthenticationType AV8AuthenticationType ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMRole> AV91Roles ;
+      private GeneXus.Programs.genexussecurity.SdtGAMRoleFilter AV40FilterRoles ;
+      private GeneXus.Programs.genexussecurity.SdtGAMRepository AV89Repository ;
+      private GeneXus.Programs.genexussecurity.SdtGAMRole AV90Role ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV104WWPContext ;
+      private GeneXus.Programs.genexussecurity.SdtGAMUserFilter AV38Filter ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMUser> AV47GAMUsers ;
+      private GeneXus.Programs.genexussecurity.SdtGAMUser AV101User ;
+      private GeneXus.Programs.genexussecurity.SdtGAMUser AV105GAMUser ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV5GAMErrorCollection ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector AV19ColumnsSelectorAux ;
+      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsData_Item> GXt_objcol_SdtDVB_SDTDropDownOptionsData_Item4 ;
       private IDataStoreProvider pr_default ;
+      private GeneXus.Programs.genexussecurity.SdtGAMError AV32Error ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue AV58GridStateFilterValue ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
       private IDataStoreProvider pr_gam ;
-      private GxHttpRequest AV60HTTPRequest ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV34Errors ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV5GAMErrorCollection ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMAuthenticationType> AV10AuthenticationTypes ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMUser> AV47GAMUsers ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMRole> AV91Roles ;
-      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsData_Item> AV78ManageFiltersData ;
-      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsData_Item> GXt_objcol_SdtDVB_SDTDropDownOptionsData_Item4 ;
-      private GXWebForm Form ;
-      private GeneXus.Programs.genexussecurity.SdtGAMError AV32Error ;
-      private GeneXus.Programs.genexussecurity.SdtGAMAuthenticationType AV8AuthenticationType ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector AV18ColumnsSelector ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector AV19ColumnsSelectorAux ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV104WWPContext ;
-      private GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsTitleSettingsIcons AV28DDO_TitleSettingsIcons ;
-      private GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsTitleSettingsIcons GXt_SdtDVB_SDTDropDownOptionsTitleSettingsIcons2 ;
-      private GeneXus.Programs.genexussecurity.SdtGAMUserFilter AV38Filter ;
-      private GeneXus.Programs.genexussecurity.SdtGAMAuthenticationTypeFilter AV39FilterAutType ;
-      private GeneXus.Programs.genexussecurity.SdtGAMRoleFilter AV40FilterRoles ;
-      private GeneXus.Programs.genexussecurity.SdtGAMUser AV101User ;
-      private GeneXus.Programs.genexussecurity.SdtGAMUser AV105GAMUser ;
-      private GeneXus.Programs.genexussecurity.SdtGAMRole AV90Role ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState AV57GridState ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue AV58GridStateFilterValue ;
    }
 
    public class gamwwusers__gam : DataStoreHelperBase, IDataStoreHelper

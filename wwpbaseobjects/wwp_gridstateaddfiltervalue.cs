@@ -58,7 +58,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          this.AV10FilterValueTo = aP8_FilterValueTo;
          this.AV17FilterValueToDsc = aP9_FilterValueToDsc;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_GridState=this.AV13GridState;
       }
 
@@ -73,38 +73,21 @@ namespace GeneXus.Programs.wwpbaseobjects {
                                  string aP8_FilterValueTo ,
                                  string aP9_FilterValueToDsc )
       {
-         wwp_gridstateaddfiltervalue objwwp_gridstateaddfiltervalue;
-         objwwp_gridstateaddfiltervalue = new wwp_gridstateaddfiltervalue();
-         objwwp_gridstateaddfiltervalue.AV13GridState = aP0_GridState;
-         objwwp_gridstateaddfiltervalue.AV8FilterName = aP1_FilterName;
-         objwwp_gridstateaddfiltervalue.AV9FilterDsc = aP2_FilterDsc;
-         objwwp_gridstateaddfiltervalue.AV12AddFitler = aP3_AddFitler;
-         objwwp_gridstateaddfiltervalue.AV15FilterOperator = aP4_FilterOperator;
-         objwwp_gridstateaddfiltervalue.AV11FilterValue = aP5_FilterValue;
-         objwwp_gridstateaddfiltervalue.AV16FilterValueDsc = aP6_FilterValueDsc;
-         objwwp_gridstateaddfiltervalue.AV18IsRange = aP7_IsRange;
-         objwwp_gridstateaddfiltervalue.AV10FilterValueTo = aP8_FilterValueTo;
-         objwwp_gridstateaddfiltervalue.AV17FilterValueToDsc = aP9_FilterValueToDsc;
-         objwwp_gridstateaddfiltervalue.context.SetSubmitInitialConfig(context);
-         objwwp_gridstateaddfiltervalue.initialize();
-         Submit( executePrivateCatch,objwwp_gridstateaddfiltervalue);
+         this.AV13GridState = aP0_GridState;
+         this.AV8FilterName = aP1_FilterName;
+         this.AV9FilterDsc = aP2_FilterDsc;
+         this.AV12AddFitler = aP3_AddFitler;
+         this.AV15FilterOperator = aP4_FilterOperator;
+         this.AV11FilterValue = aP5_FilterValue;
+         this.AV16FilterValueDsc = aP6_FilterValueDsc;
+         this.AV18IsRange = aP7_IsRange;
+         this.AV10FilterValueTo = aP8_FilterValueTo;
+         this.AV17FilterValueToDsc = aP9_FilterValueToDsc;
+         SubmitImpl();
          aP0_GridState=this.AV13GridState;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwp_gridstateaddfiltervalue)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -134,21 +117,17 @@ namespace GeneXus.Programs.wwpbaseobjects {
             }
             AV13GridState.gxTpr_Filtervalues.Add(AV14GridStateFilterValue, 0);
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -166,8 +145,8 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private string AV16FilterValueDsc ;
       private string AV10FilterValueTo ;
       private string AV17FilterValueToDsc ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState aP0_GridState ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState AV13GridState ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState aP0_GridState ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue AV14GridStateFilterValue ;
    }
 

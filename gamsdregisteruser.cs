@@ -58,7 +58,7 @@ namespace GeneXus.Programs {
          this.AV8ConfirmPassword = aP5_ConfirmPassword;
          this.AV15Messages = new GXBaseCollection<GeneXus.Utils.SdtMessages_Message>( context, "Message", "GeneXus") ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP6_Messages=this.AV15Messages;
       }
 
@@ -81,35 +81,18 @@ namespace GeneXus.Programs {
                                  string aP5_ConfirmPassword ,
                                  out GXBaseCollection<GeneXus.Utils.SdtMessages_Message> aP6_Messages )
       {
-         gamsdregisteruser objgamsdregisteruser;
-         objgamsdregisteruser = new gamsdregisteruser();
-         objgamsdregisteruser.AV18UserName = aP0_UserName;
-         objgamsdregisteruser.AV9Email = aP1_Email;
-         objgamsdregisteruser.AV11FirstName = aP2_FirstName;
-         objgamsdregisteruser.AV12LastName = aP3_LastName;
-         objgamsdregisteruser.AV16Password = aP4_Password;
-         objgamsdregisteruser.AV8ConfirmPassword = aP5_ConfirmPassword;
-         objgamsdregisteruser.AV15Messages = new GXBaseCollection<GeneXus.Utils.SdtMessages_Message>( context, "Message", "GeneXus") ;
-         objgamsdregisteruser.context.SetSubmitInitialConfig(context);
-         objgamsdregisteruser.initialize();
-         Submit( executePrivateCatch,objgamsdregisteruser);
+         this.AV18UserName = aP0_UserName;
+         this.AV9Email = aP1_Email;
+         this.AV11FirstName = aP2_FirstName;
+         this.AV12LastName = aP3_LastName;
+         this.AV16Password = aP4_Password;
+         this.AV8ConfirmPassword = aP5_ConfirmPassword;
+         this.AV15Messages = new GXBaseCollection<GeneXus.Utils.SdtMessages_Message>( context, "Message", "GeneXus") ;
+         SubmitImpl();
          aP6_Messages=this.AV15Messages;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((gamsdregisteruser)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -118,7 +101,7 @@ namespace GeneXus.Programs {
             AV14Message.gxTpr_Type = 1;
             AV14Message.gxTpr_Description = "User name must be entered.";
             AV15Messages.Add(AV14Message, 0);
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          if ( StringUtil.StrCmp(AV16Password, AV8ConfirmPassword) != 0 )
@@ -126,7 +109,7 @@ namespace GeneXus.Programs {
             AV14Message.gxTpr_Type = 1;
             AV14Message.gxTpr_Description = "Passwords don't match.";
             AV15Messages.Add(AV14Message, 0);
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          AV17User.gxTpr_Name = AV18UserName;
@@ -148,21 +131,17 @@ namespace GeneXus.Programs {
             new gam_converterrorstomessages(context ).execute(  AV10Errors, out  GXt_objcol_SdtMessages_Message1) ;
             AV15Messages = GXt_objcol_SdtMessages_Message1;
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -193,14 +172,14 @@ namespace GeneXus.Programs {
       private string AV13LinkURL ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
-      private IDataStoreProvider pr_default ;
-      private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> aP6_Messages ;
-      private IDataStoreProvider pr_gam ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV10Errors ;
       private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> AV15Messages ;
-      private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> GXt_objcol_SdtMessages_Message1 ;
       private GeneXus.Utils.SdtMessages_Message AV14Message ;
       private GeneXus.Programs.genexussecurity.SdtGAMUser AV17User ;
+      private IDataStoreProvider pr_default ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV10Errors ;
+      private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> GXt_objcol_SdtMessages_Message1 ;
+      private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> aP6_Messages ;
+      private IDataStoreProvider pr_gam ;
    }
 
    public class gamsdregisteruser__gam : DataStoreHelperBase, IDataStoreHelper

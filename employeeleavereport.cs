@@ -53,7 +53,7 @@ namespace GeneXus.Programs {
          this.AV5Filename = "" ;
          this.AV6ErrorMessage = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_EmployeeIds=this.AV3EmployeeIds;
          aP2_Date=this.AV4Date;
          aP3_Filename=this.AV5Filename;
@@ -75,36 +75,19 @@ namespace GeneXus.Programs {
                                  out string aP3_Filename ,
                                  out string aP4_ErrorMessage )
       {
-         employeeleavereport objemployeeleavereport;
-         objemployeeleavereport = new employeeleavereport();
-         objemployeeleavereport.AV2CompanyLocationId = aP0_CompanyLocationId;
-         objemployeeleavereport.AV3EmployeeIds = aP1_EmployeeIds;
-         objemployeeleavereport.AV4Date = aP2_Date;
-         objemployeeleavereport.AV5Filename = "" ;
-         objemployeeleavereport.AV6ErrorMessage = "" ;
-         objemployeeleavereport.context.SetSubmitInitialConfig(context);
-         objemployeeleavereport.initialize();
-         Submit( executePrivateCatch,objemployeeleavereport);
+         this.AV2CompanyLocationId = aP0_CompanyLocationId;
+         this.AV3EmployeeIds = aP1_EmployeeIds;
+         this.AV4Date = aP2_Date;
+         this.AV5Filename = "" ;
+         this.AV6ErrorMessage = "" ;
+         SubmitImpl();
          aP1_EmployeeIds=this.AV3EmployeeIds;
          aP2_Date=this.AV4Date;
          aP3_Filename=this.AV5Filename;
          aP4_ErrorMessage=this.AV6ErrorMessage;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((employeeleavereport)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -117,20 +100,16 @@ namespace GeneXus.Programs {
             AV5Filename = (string)(args[3]) ;
             AV6ErrorMessage = (string)(args[4]) ;
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -144,9 +123,9 @@ namespace GeneXus.Programs {
       private string AV5Filename ;
       private DateTime AV4Date ;
       private string AV6ErrorMessage ;
-      private GxSimpleCollection<long> AV3EmployeeIds ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GxSimpleCollection<long> AV3EmployeeIds ;
       private GxSimpleCollection<long> aP1_EmployeeIds ;
       private DateTime aP2_Date ;
       private Object[] args ;

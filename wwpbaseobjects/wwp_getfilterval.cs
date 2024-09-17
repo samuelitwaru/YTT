@@ -44,7 +44,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          this.AV9FilterValue = aP1_FilterValue;
          this.AV8FilterResult = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP2_FilterResult=this.AV8FilterResult;
       }
 
@@ -59,31 +59,14 @@ namespace GeneXus.Programs.wwpbaseobjects {
                                  string aP1_FilterValue ,
                                  out string aP2_FilterResult )
       {
-         wwp_getfilterval objwwp_getfilterval;
-         objwwp_getfilterval = new wwp_getfilterval();
-         objwwp_getfilterval.AV10IsEmpty = aP0_IsEmpty;
-         objwwp_getfilterval.AV9FilterValue = aP1_FilterValue;
-         objwwp_getfilterval.AV8FilterResult = "" ;
-         objwwp_getfilterval.context.SetSubmitInitialConfig(context);
-         objwwp_getfilterval.initialize();
-         Submit( executePrivateCatch,objwwp_getfilterval);
+         this.AV10IsEmpty = aP0_IsEmpty;
+         this.AV9FilterValue = aP1_FilterValue;
+         this.AV8FilterResult = "" ;
+         SubmitImpl();
          aP2_FilterResult=this.AV8FilterResult;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwp_getfilterval)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -91,21 +74,17 @@ namespace GeneXus.Programs.wwpbaseobjects {
          {
             AV8FilterResult = StringUtil.StringReplace( StringUtil.StringReplace( AV9FilterValue, "\\", "\\\\"), "|", "\\|");
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )

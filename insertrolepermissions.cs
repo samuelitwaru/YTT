@@ -44,51 +44,30 @@ namespace GeneXus.Programs {
       public void execute( )
       {
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
       public void executeSubmit( )
       {
-         insertrolepermissions objinsertrolepermissions;
-         objinsertrolepermissions = new insertrolepermissions();
-         objinsertrolepermissions.context.SetSubmitInitialConfig(context);
-         objinsertrolepermissions.initialize();
-         Submit( executePrivateCatch,objinsertrolepermissions);
+         SubmitImpl();
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((insertrolepermissions)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
          args = new Object[] {} ;
          ClassLoader.Execute("ainsertrolepermissions","GeneXus.Programs","ainsertrolepermissions", new Object[] {context }, "execute", args);
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )

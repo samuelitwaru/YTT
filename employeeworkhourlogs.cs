@@ -72,7 +72,7 @@ namespace GeneXus.Programs {
          this.AV11DateTo = aP4_DateTo;
          this.Gxm2rootcol = new GXBaseCollection<SdtSDTEmployeeWorkHourLogs>( context, "SDTEmployeeWorkHourLogs", "YTT_version4") ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP5_Gxm2rootcol=this.Gxm2rootcol;
       }
 
@@ -93,34 +93,17 @@ namespace GeneXus.Programs {
                                  DateTime aP4_DateTo ,
                                  out GXBaseCollection<SdtSDTEmployeeWorkHourLogs> aP5_Gxm2rootcol )
       {
-         employeeworkhourlogs objemployeeworkhourlogs;
-         objemployeeworkhourlogs = new employeeworkhourlogs();
-         objemployeeworkhourlogs.AV5CompanyLocationId = aP0_CompanyLocationId;
-         objemployeeworkhourlogs.AV7ProjectId = aP1_ProjectId;
-         objemployeeworkhourlogs.AV6EmployeeId = aP2_EmployeeId;
-         objemployeeworkhourlogs.AV10DateFrom = aP3_DateFrom;
-         objemployeeworkhourlogs.AV11DateTo = aP4_DateTo;
-         objemployeeworkhourlogs.Gxm2rootcol = new GXBaseCollection<SdtSDTEmployeeWorkHourLogs>( context, "SDTEmployeeWorkHourLogs", "YTT_version4") ;
-         objemployeeworkhourlogs.context.SetSubmitInitialConfig(context);
-         objemployeeworkhourlogs.initialize();
-         Submit( executePrivateCatch,objemployeeworkhourlogs);
+         this.AV5CompanyLocationId = aP0_CompanyLocationId;
+         this.AV7ProjectId = aP1_ProjectId;
+         this.AV6EmployeeId = aP2_EmployeeId;
+         this.AV10DateFrom = aP3_DateFrom;
+         this.AV11DateTo = aP4_DateTo;
+         this.Gxm2rootcol = new GXBaseCollection<SdtSDTEmployeeWorkHourLogs>( context, "SDTEmployeeWorkHourLogs", "YTT_version4") ;
+         SubmitImpl();
          aP5_Gxm2rootcol=this.Gxm2rootcol;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((employeeworkhourlogs)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -204,12 +187,12 @@ namespace GeneXus.Programs {
                pr_default.readNext(0);
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -217,14 +200,13 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
+      protected override void CloseCursors( )
       {
          pr_default.close(0);
       }
 
       public override void initialize( )
       {
-         scmdbuf = "";
          A119WorkHourLogDate = DateTime.MinValue;
          P001A2_A100CompanyId = new long[1] ;
          P001A2_A148EmployeeName = new string[] {""} ;
@@ -267,7 +249,6 @@ namespace GeneXus.Programs {
       private long A106EmployeeId ;
       private long A100CompanyId ;
       private long A118WorkHourLogId ;
-      private string scmdbuf ;
       private string A148EmployeeName ;
       private string A107EmployeeFirstName ;
       private string A103ProjectName ;
@@ -277,11 +258,12 @@ namespace GeneXus.Programs {
       private bool BRK1A2 ;
       private string A123WorkHourLogDescription ;
       private string A120WorkHourLogDuration ;
+      private IGxDataStore dsGAM ;
+      private IGxDataStore dsDefault ;
       private GxSimpleCollection<long> AV5CompanyLocationId ;
       private GxSimpleCollection<long> AV7ProjectId ;
       private GxSimpleCollection<long> AV6EmployeeId ;
-      private IGxDataStore dsGAM ;
-      private IGxDataStore dsDefault ;
+      private GXBaseCollection<SdtSDTEmployeeWorkHourLogs> Gxm2rootcol ;
       private IDataStoreProvider pr_default ;
       private long[] P001A2_A100CompanyId ;
       private string[] P001A2_A148EmployeeName ;
@@ -296,10 +278,9 @@ namespace GeneXus.Programs {
       private long[] P001A2_A102ProjectId ;
       private string[] P001A2_A103ProjectName ;
       private long[] P001A2_A157CompanyLocationId ;
-      private GXBaseCollection<SdtSDTEmployeeWorkHourLogs> aP5_Gxm2rootcol ;
-      private GXBaseCollection<SdtSDTEmployeeWorkHourLogs> Gxm2rootcol ;
       private SdtSDTEmployeeWorkHourLogs Gxm1sdtemployeeworkhourlogs ;
       private SdtSDTEmployeeWorkHourLogs_WorkHourLogItem Gxm3sdtemployeeworkhourlogs_workhourlog ;
+      private GXBaseCollection<SdtSDTEmployeeWorkHourLogs> aP5_Gxm2rootcol ;
    }
 
    public class employeeworkhourlogs__default : DataStoreHelperBase, IDataStoreHelper

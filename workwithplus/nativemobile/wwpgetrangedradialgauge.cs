@@ -181,6 +181,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
                }
                if ( StringUtil.StringSearch( GXSoapXMLReader.Name, "Body", 1) > 0 )
                {
+                  this.SetPrefixesFromReader( GXSoapXMLReader);
                   if (true) break;
                }
                GXSoapError = GXSoapXMLReader.Read();
@@ -283,7 +284,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          }
          if ( currSoapErr == 0 )
          {
-            executePrivate();
+            ExecutePrivate();
          }
          context.CloseConnections();
          sIncludeState = true;
@@ -342,7 +343,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          this.AV10Text = aP1_Text;
          this.AV8GaugeRegions = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP2_GaugeRegions=this.AV8GaugeRegions;
       }
 
@@ -357,31 +358,14 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
                                  string aP1_Text ,
                                  out string aP2_GaugeRegions )
       {
-         wwpgetrangedradialgauge objwwpgetrangedradialgauge;
-         objwwpgetrangedradialgauge = new wwpgetrangedradialgauge();
-         objwwpgetrangedradialgauge.AV11Value = aP0_Value;
-         objwwpgetrangedradialgauge.AV10Text = aP1_Text;
-         objwwpgetrangedradialgauge.AV8GaugeRegions = "" ;
-         objwwpgetrangedradialgauge.context.SetSubmitInitialConfig(context);
-         objwwpgetrangedradialgauge.initialize();
-         Submit( executePrivateCatch,objwwpgetrangedradialgauge);
+         this.AV11Value = aP0_Value;
+         this.AV10Text = aP1_Text;
+         this.AV8GaugeRegions = "" ;
+         SubmitImpl();
          aP2_GaugeRegions=this.AV8GaugeRegions;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwpgetrangedradialgauge)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -415,22 +399,18 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
             context.Redirect( context.wjLoc );
             context.wjLoc = "";
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          base.cleanup();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -465,8 +445,8 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
       private GXXMLWriter GXSoapXMLWriter ;
       private GxSoapRequest GXSoapHTTPRequest ;
       private GxHttpResponse GXSoapHTTPResponse ;
-      private string aP2_GaugeRegions ;
       private GeneXus.Programs.workwithplus.nativemobile.SdtRangedRadialGaugeConfig AV9GaugeConfig ;
+      private string aP2_GaugeRegions ;
    }
 
 }

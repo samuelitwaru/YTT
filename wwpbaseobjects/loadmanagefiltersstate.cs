@@ -42,7 +42,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          this.AV8UserCustomKey = aP0_UserCustomKey;
          this.AV9UserCustomValue = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_UserCustomValue=this.AV9UserCustomValue;
       }
 
@@ -55,49 +55,28 @@ namespace GeneXus.Programs.wwpbaseobjects {
       public void executeSubmit( string aP0_UserCustomKey ,
                                  out string aP1_UserCustomValue )
       {
-         loadmanagefiltersstate objloadmanagefiltersstate;
-         objloadmanagefiltersstate = new loadmanagefiltersstate();
-         objloadmanagefiltersstate.AV8UserCustomKey = aP0_UserCustomKey;
-         objloadmanagefiltersstate.AV9UserCustomValue = "" ;
-         objloadmanagefiltersstate.context.SetSubmitInitialConfig(context);
-         objloadmanagefiltersstate.initialize();
-         Submit( executePrivateCatch,objloadmanagefiltersstate);
+         this.AV8UserCustomKey = aP0_UserCustomKey;
+         this.AV9UserCustomValue = "" ;
+         SubmitImpl();
          aP1_UserCustomValue=this.AV9UserCustomValue;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((loadmanagefiltersstate)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
          new GeneXus.Programs.wwpbaseobjects.loaduserkeyvalue(context ).execute(  AV8UserCustomKey, out  AV9UserCustomValue) ;
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )

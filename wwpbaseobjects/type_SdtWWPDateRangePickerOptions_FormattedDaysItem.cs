@@ -1,7 +1,7 @@
 /*
 				   File: type_SdtWWPDateRangePickerOptions_FormattedDaysItem
 			Description: FormattedDays
-				 Author: Nemo 🐠 for C# (.NET) version 18.0.6.177934
+				 Author: Nemo 🐠 for C# (.NET) version 18.0.10.184260
 		   Program type: Callable routine
 			  Main DBMS: 
 */
@@ -184,6 +184,14 @@ namespace GeneXus.Programs.wwpbaseobjects
 
 		#endregion
 
+		#region Static Type Properties
+
+		[XmlIgnore]
+		private static GXTypeInfo _typeProps;
+		protected override GXTypeInfo TypeInfo { get { return _typeProps; } set { _typeProps = value; } }
+
+		#endregion
+
 		#region Initialization
 
 		public void initialize( )
@@ -224,6 +232,7 @@ namespace GeneXus.Programs.wwpbaseobjects
 		#endregion
 	}
 	#region Rest interface
+	[GxJsonSerialization("wrapped")]
 	[DataContract(Name=@"WWPDateRangePickerOptions.FormattedDaysItem", Namespace="YTT_version4")]
 	public class SdtWWPDateRangePickerOptions_FormattedDaysItem_RESTInterface : GxGenericCollectionItem<SdtWWPDateRangePickerOptions_FormattedDaysItem>, System.Web.SessionState.IRequiresSessionState
 	{
@@ -240,11 +249,11 @@ namespace GeneXus.Programs.wwpbaseobjects
 		public  string gxTpr_Date
 		{
 			get { 
-				return DateTimeUtil.TToC2( sdt.gxTpr_Date);
+				return DateTimeUtil.TToC2( sdt.gxTpr_Date,context);
 
 			}
 			set { 
-				sdt.gxTpr_Date = DateTimeUtil.CToT2(value);
+				sdt.gxTpr_Date = DateTimeUtil.CToT2(value,context);
 			}
 		}
 

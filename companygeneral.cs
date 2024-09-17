@@ -47,10 +47,10 @@ namespace GeneXus.Programs {
       public void execute( long aP0_CompanyId )
       {
          this.A100CompanyId = aP0_CompanyId;
-         executePrivate();
+         ExecuteImpl();
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -162,11 +162,8 @@ namespace GeneXus.Programs {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITWEB( ) ;
          if ( ! isAjaxCallMode( ) )
          {
@@ -211,7 +208,7 @@ namespace GeneXus.Programs {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void RenderHtmlHeaders( )
@@ -242,10 +239,10 @@ namespace GeneXus.Programs {
          }
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
@@ -440,7 +437,8 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
             /* Single line edit */
-            GxWebStd.gx_single_line_edit( context, edtCompanyName_Internalname, StringUtil.RTrim( A101CompanyName), StringUtil.RTrim( context.localUtil.Format( A101CompanyName, "")), "", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtCompanyName_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtCompanyName_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "Name", "start", true, "", "HLP_CompanyGeneral.htm");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 14,'" + sPrefix + "',false,'',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtCompanyName_Internalname, StringUtil.RTrim( A101CompanyName), StringUtil.RTrim( context.localUtil.Format( A101CompanyName, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,14);\"", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtCompanyName_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtCompanyName_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "Name", "start", true, "", "HLP_CompanyGeneral.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -452,8 +450,9 @@ namespace GeneXus.Programs {
             GxWebStd.gx_label_element( context, dynCompanyLocationId_Internalname, "Location Country", " AttributeLabel", 1, true, "");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 18,'" + sPrefix + "',false,'',0)\"";
             /* ComboBox */
-            GxWebStd.gx_combobox_ctrl1( context, dynCompanyLocationId, dynCompanyLocationId_Internalname, StringUtil.Trim( StringUtil.Str( (decimal)(A157CompanyLocationId), 10, 0)), 1, dynCompanyLocationId_Jsonclick, 0, "'"+sPrefix+"'"+",false,"+"'"+""+"'", "int", "", 1, dynCompanyLocationId.Enabled, 0, 0, 0, "em", 0, "", "", "Attribute", "", "", "", "", true, 0, "HLP_CompanyGeneral.htm");
+            GxWebStd.gx_combobox_ctrl1( context, dynCompanyLocationId, dynCompanyLocationId_Internalname, StringUtil.Trim( StringUtil.Str( (decimal)(A157CompanyLocationId), 10, 0)), 1, dynCompanyLocationId_Jsonclick, 0, "'"+sPrefix+"'"+",false,"+"'"+""+"'", "int", "", 1, dynCompanyLocationId.Enabled, 0, 0, 0, "em", 0, "", "", "Attribute", "", "", TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,18);\"", "", true, 0, "HLP_CompanyGeneral.htm");
             dynCompanyLocationId.CurrentValue = StringUtil.Trim( StringUtil.Str( (decimal)(A157CompanyLocationId), 10, 0));
             AssignProp(sPrefix, false, dynCompanyLocationId_Internalname, "Values", (string)(dynCompanyLocationId.ToJavascriptSource()), true);
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -472,14 +471,14 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-button", "start", "top", "", "", "div");
             TempTags = "  onfocus=\"gx.evt.onfocus(this, 23,'" + sPrefix + "',false,'',0)\"";
-            ClassString = "ButtonMaterial";
+            ClassString = "Button";
             StyleString = "";
             GxWebStd.gx_button_ctrl( context, bttBtnupdate_Internalname, "", "Update", bttBtnupdate_Jsonclick, 7, "Update", "", StyleString, ClassString, bttBtnupdate_Visible, 1, "standard", "'"+sPrefix+"'"+",false,"+"'"+"e11301_client"+"'", TempTags, "", 2, "HLP_CompanyGeneral.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-button", "start", "top", "", "", "div");
             TempTags = "  onfocus=\"gx.evt.onfocus(this, 25,'" + sPrefix + "',false,'',0)\"";
-            ClassString = "ButtonMaterialDefault";
+            ClassString = "BtnDefault";
             StyleString = "";
             GxWebStd.gx_button_ctrl( context, bttBtndelete_Internalname, "", "Delete", bttBtndelete_Jsonclick, 7, "Delete", "", StyleString, ClassString, bttBtndelete_Visible, 1, "standard", "'"+sPrefix+"'"+",false,"+"'"+"e12301_client"+"'", TempTags, "", 2, "HLP_CompanyGeneral.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -517,7 +516,7 @@ namespace GeneXus.Programs {
             {
                if ( context.ExposeMetadata( ) )
                {
-                  Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+                  Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
                }
             }
             Form.Meta.addItem("description", "Company General", 0) ;
@@ -1024,7 +1023,7 @@ namespace GeneXus.Programs {
          PA302( ) ;
          WS302( ) ;
          WE302( ) ;
-         this.cleanup();
+         cleanup();
          context.SetWrapped(false);
          SaveComponentMsgList(sPrefix);
          context.GX_msglist = BackMsgLst;
@@ -1200,7 +1199,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20248121535556", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202491716165718", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1216,7 +1215,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("companygeneral.js", "?20248121535556", false, true);
+         context.AddJavascriptSource("companygeneral.js", "?202491716165718", false, true);
          /* End function include_jscripts */
       }
 
@@ -1292,29 +1291,22 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'A100CompanyId',fld:'COMPANYID',pic:'ZZZZZZZZZ9'},{av:'dynCompanyLocationId'},{av:'A157CompanyLocationId',fld:'COMPANYLOCATIONID',pic:'ZZZZZZZZZ9'},{av:'AV12IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV13IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true}]");
-         setEventMetadata("REFRESH",",oparms:[]}");
-         setEventMetadata("'DOUPDATE'","{handler:'E11301',iparms:[{av:'AV12IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'A100CompanyId',fld:'COMPANYID',pic:'ZZZZZZZZZ9'}]");
-         setEventMetadata("'DOUPDATE'",",oparms:[{ctrl:'BTNUPDATE',prop:'Visible'}]}");
-         setEventMetadata("'DODELETE'","{handler:'E12301',iparms:[{av:'AV13IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'A100CompanyId',fld:'COMPANYID',pic:'ZZZZZZZZZ9'}]");
-         setEventMetadata("'DODELETE'",",oparms:[{ctrl:'BTNDELETE',prop:'Visible'}]}");
-         setEventMetadata("VALID_COMPANYID","{handler:'Valid_Companyid',iparms:[]");
-         setEventMetadata("VALID_COMPANYID",",oparms:[]}");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"A100CompanyId","fld":"COMPANYID","pic":"ZZZZZZZZZ9"},{"av":"dynCompanyLocationId"},{"av":"A157CompanyLocationId","fld":"COMPANYLOCATIONID","pic":"ZZZZZZZZZ9"},{"av":"AV12IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV13IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true}]}""");
+         setEventMetadata("'DOUPDATE'","""{"handler":"E11301","iparms":[{"av":"AV12IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"A100CompanyId","fld":"COMPANYID","pic":"ZZZZZZZZZ9"}]""");
+         setEventMetadata("'DOUPDATE'",""","oparms":[{"ctrl":"BTNUPDATE","prop":"Visible"}]}""");
+         setEventMetadata("'DODELETE'","""{"handler":"E12301","iparms":[{"av":"AV13IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"A100CompanyId","fld":"COMPANYID","pic":"ZZZZZZZZZ9"}]""");
+         setEventMetadata("'DODELETE'",""","oparms":[{"ctrl":"BTNDELETE","prop":"Visible"}]}""");
+         setEventMetadata("VALID_COMPANYID","""{"handler":"Valid_Companyid","iparms":[]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -1328,8 +1320,8 @@ namespace GeneXus.Programs {
          bodyStyle = "";
          GXKey = "";
          GX_FocusControl = "";
-         A101CompanyName = "";
          TempTags = "";
+         A101CompanyName = "";
          ClassString = "";
          StyleString = "";
          bttBtnupdate_Jsonclick = "";
@@ -1343,7 +1335,6 @@ namespace GeneXus.Programs {
          gxdynajaxctrlcodr = new GeneXus.Utils.GxStringCollection();
          gxdynajaxctrldescr = new GeneXus.Utils.GxStringCollection();
          gxwrpcisep = "";
-         scmdbuf = "";
          H00302_A157CompanyLocationId = new long[1] ;
          H00302_A158CompanyLocationName = new string[] {""} ;
          H00303_A157CompanyLocationId = new long[1] ;
@@ -1384,7 +1375,6 @@ namespace GeneXus.Programs {
       private short nGotPars ;
       private short GxWebError ;
       private short nDynComponent ;
-      private short initialized ;
       private short wbEnd ;
       private short wbStart ;
       private short nDraw ;
@@ -1417,11 +1407,11 @@ namespace GeneXus.Programs {
       private string divTable_Internalname ;
       private string divTransactiondetail_tableattributes_Internalname ;
       private string edtCompanyName_Internalname ;
+      private string TempTags ;
       private string A101CompanyName ;
       private string edtCompanyName_Jsonclick ;
       private string dynCompanyLocationId_Internalname ;
       private string dynCompanyLocationId_Jsonclick ;
-      private string TempTags ;
       private string ClassString ;
       private string StyleString ;
       private string bttBtnupdate_Internalname ;
@@ -1437,7 +1427,6 @@ namespace GeneXus.Programs {
       private string EvtRowId ;
       private string sEvtType ;
       private string gxwrpcisep ;
-      private string scmdbuf ;
       private string sCtrlA100CompanyId ;
       private bool entryPointCalled ;
       private bool toggleJsOutput ;
@@ -1452,6 +1441,8 @@ namespace GeneXus.Programs {
       private GeneXus.Utils.GxStringCollection gxdynajaxctrlcodr ;
       private GeneXus.Utils.GxStringCollection gxdynajaxctrldescr ;
       private GXWebForm Form ;
+      private GxHttpRequest AV11HTTPRequest ;
+      private IGxSession AV10Session ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private GXCombobox dynCompanyLocationId ;
@@ -1463,14 +1454,12 @@ namespace GeneXus.Programs {
       private long[] H00304_A100CompanyId ;
       private long[] H00304_A157CompanyLocationId ;
       private string[] H00304_A101CompanyName ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV6WWPContext ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext AV8TrnContext ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
       private long[] H00305_A157CompanyLocationId ;
       private string[] H00305_A158CompanyLocationName ;
-      private GxHttpRequest AV11HTTPRequest ;
-      private IGxSession AV10Session ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV6WWPContext ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext AV8TrnContext ;
    }
 
    public class companygeneral__default : DataStoreHelperBase, IDataStoreHelper

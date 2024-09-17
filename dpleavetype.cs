@@ -66,7 +66,7 @@ namespace GeneXus.Programs {
          this.AV7IsColored = aP1_IsColored;
          this.Gxm2rootcol = new GXBaseCollection<SdtSDTLeaveType>( context, "SDTLeaveType", "YTT_version4") ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP2_Gxm2rootcol=this.Gxm2rootcol;
       }
 
@@ -81,31 +81,14 @@ namespace GeneXus.Programs {
                                  bool aP1_IsColored ,
                                  out GXBaseCollection<SdtSDTLeaveType> aP2_Gxm2rootcol )
       {
-         dpleavetype objdpleavetype;
-         objdpleavetype = new dpleavetype();
-         objdpleavetype.AV6CompanyLocationId = aP0_CompanyLocationId;
-         objdpleavetype.AV7IsColored = aP1_IsColored;
-         objdpleavetype.Gxm2rootcol = new GXBaseCollection<SdtSDTLeaveType>( context, "SDTLeaveType", "YTT_version4") ;
-         objdpleavetype.context.SetSubmitInitialConfig(context);
-         objdpleavetype.initialize();
-         Submit( executePrivateCatch,objdpleavetype);
+         this.AV6CompanyLocationId = aP0_CompanyLocationId;
+         this.AV7IsColored = aP1_IsColored;
+         this.Gxm2rootcol = new GXBaseCollection<SdtSDTLeaveType>( context, "SDTLeaveType", "YTT_version4") ;
+         SubmitImpl();
          aP2_Gxm2rootcol=this.Gxm2rootcol;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((dpleavetype)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -143,12 +126,12 @@ namespace GeneXus.Programs {
             pr_default.readNext(0);
          }
          pr_default.close(0);
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -156,13 +139,8 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
-         scmdbuf = "";
          A175LeaveTypeColorApproved = "";
          P001V2_A175LeaveTypeColorApproved = new string[] {""} ;
          P001V2_n175LeaveTypeColorApproved = new bool[] {false} ;
@@ -191,7 +169,6 @@ namespace GeneXus.Programs {
       private long AV6CompanyLocationId ;
       private long A100CompanyId ;
       private long A124LeaveTypeId ;
-      private string scmdbuf ;
       private string A175LeaveTypeColorApproved ;
       private string A125LeaveTypeName ;
       private string A144LeaveTypeVacationLeave ;
@@ -202,6 +179,7 @@ namespace GeneXus.Programs {
       private bool n174LeaveTypeColorPending ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GXBaseCollection<SdtSDTLeaveType> Gxm2rootcol ;
       private IDataStoreProvider pr_default ;
       private string[] P001V2_A175LeaveTypeColorApproved ;
       private bool[] P001V2_n175LeaveTypeColorApproved ;
@@ -212,9 +190,8 @@ namespace GeneXus.Programs {
       private string[] P001V2_A145LeaveTypeLoggingWorkHours ;
       private string[] P001V2_A174LeaveTypeColorPending ;
       private bool[] P001V2_n174LeaveTypeColorPending ;
-      private GXBaseCollection<SdtSDTLeaveType> aP2_Gxm2rootcol ;
-      private GXBaseCollection<SdtSDTLeaveType> Gxm2rootcol ;
       private SdtSDTLeaveType Gxm1sdtleavetype ;
+      private GXBaseCollection<SdtSDTLeaveType> aP2_Gxm2rootcol ;
    }
 
    public class dpleavetype__default : DataStoreHelperBase, IDataStoreHelper

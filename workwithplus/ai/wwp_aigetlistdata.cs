@@ -38,52 +38,40 @@ namespace GeneXus.Programs.workwithplus.ai {
 
       public void execute( string aP0_Info ,
                            string aP1_ListName ,
-                           out GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData> aP2_WWP_AIListDatas )
+                           GXProperties aP2_ExtraParameters ,
+                           out GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData> aP3_WWP_AIListDatas )
       {
          this.AV8Info = aP0_Info;
          this.AV9ListName = aP1_ListName;
+         this.AV15ExtraParameters = aP2_ExtraParameters;
          this.AV12WWP_AIListDatas = new GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData>( context, "WWP_AIListData", "YTT_version4") ;
          initialize();
-         executePrivate();
-         aP2_WWP_AIListDatas=this.AV12WWP_AIListDatas;
+         ExecuteImpl();
+         aP3_WWP_AIListDatas=this.AV12WWP_AIListDatas;
       }
 
       public GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData> executeUdp( string aP0_Info ,
-                                                                                              string aP1_ListName )
+                                                                                              string aP1_ListName ,
+                                                                                              GXProperties aP2_ExtraParameters )
       {
-         execute(aP0_Info, aP1_ListName, out aP2_WWP_AIListDatas);
+         execute(aP0_Info, aP1_ListName, aP2_ExtraParameters, out aP3_WWP_AIListDatas);
          return AV12WWP_AIListDatas ;
       }
 
       public void executeSubmit( string aP0_Info ,
                                  string aP1_ListName ,
-                                 out GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData> aP2_WWP_AIListDatas )
+                                 GXProperties aP2_ExtraParameters ,
+                                 out GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData> aP3_WWP_AIListDatas )
       {
-         wwp_aigetlistdata objwwp_aigetlistdata;
-         objwwp_aigetlistdata = new wwp_aigetlistdata();
-         objwwp_aigetlistdata.AV8Info = aP0_Info;
-         objwwp_aigetlistdata.AV9ListName = aP1_ListName;
-         objwwp_aigetlistdata.AV12WWP_AIListDatas = new GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData>( context, "WWP_AIListData", "YTT_version4") ;
-         objwwp_aigetlistdata.context.SetSubmitInitialConfig(context);
-         objwwp_aigetlistdata.initialize();
-         Submit( executePrivateCatch,objwwp_aigetlistdata);
-         aP2_WWP_AIListDatas=this.AV12WWP_AIListDatas;
+         this.AV8Info = aP0_Info;
+         this.AV9ListName = aP1_ListName;
+         this.AV15ExtraParameters = aP2_ExtraParameters;
+         this.AV12WWP_AIListDatas = new GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData>( context, "WWP_AIListData", "YTT_version4") ;
+         SubmitImpl();
+         aP3_WWP_AIListDatas=this.AV12WWP_AIListDatas;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwp_aigetlistdata)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -93,7 +81,7 @@ namespace GeneXus.Programs.workwithplus.ai {
             S111 ();
             if ( returnInSub )
             {
-               this.cleanup();
+               cleanup();
                if (true) return;
             }
          }
@@ -103,11 +91,11 @@ namespace GeneXus.Programs.workwithplus.ai {
             S121 ();
             if ( returnInSub )
             {
-               this.cleanup();
+               cleanup();
                if (true) return;
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void S111( )
@@ -124,16 +112,12 @@ namespace GeneXus.Programs.workwithplus.ai {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -145,8 +129,9 @@ namespace GeneXus.Programs.workwithplus.ai {
       private bool returnInSub ;
       private string AV8Info ;
       private string AV9ListName ;
-      private GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData> aP2_WWP_AIListDatas ;
+      private GXProperties AV15ExtraParameters ;
       private GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData> AV12WWP_AIListDatas ;
+      private GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData> aP3_WWP_AIListDatas ;
    }
 
 }

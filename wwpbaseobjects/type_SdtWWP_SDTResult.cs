@@ -1,7 +1,7 @@
 /*
 				   File: type_SdtWWP_SDTResult
 			Description: WWP_SDTResult
-				 Author: Nemo 🐠 for C# (.NET) version 18.0.6.177934
+				 Author: Nemo 🐠 for C# (.NET) version 18.0.10.184260
 		   Program type: Callable routine
 			  Main DBMS: 
 */
@@ -91,6 +91,14 @@ namespace GeneXus.Programs.wwpbaseobjects
 
 		#endregion
 
+		#region Static Type Properties
+
+		[XmlIgnore]
+		private static GXTypeInfo _typeProps;
+		protected override GXTypeInfo TypeInfo { get { return _typeProps; } set { _typeProps = value; } }
+
+		#endregion
+
 		#region Initialization
 
 		public void initialize( )
@@ -112,7 +120,7 @@ namespace GeneXus.Programs.wwpbaseobjects
 		#endregion
 	}
 	#region Rest interface
-	[GxUnWrappedJson()]
+	[GxJsonSerialization("default")]
 	[DataContract(Name=@"WWP_SDTResult", Namespace="YTT_version4")]
 	public class SdtWWP_SDTResult_RESTInterface : GxGenericCollectionItem<SdtWWP_SDTResult>, System.Web.SessionState.IRequiresSessionState
 	{

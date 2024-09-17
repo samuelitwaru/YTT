@@ -56,7 +56,7 @@ namespace GeneXus.Programs {
          this.AV12TotalHourLogs = 0 ;
          this.AV16FormattedHours = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP4_TotalHourLogs=this.AV12TotalHourLogs;
          aP5_FormattedHours=this.AV16FormattedHours;
       }
@@ -78,35 +78,18 @@ namespace GeneXus.Programs {
                                  out long aP4_TotalHourLogs ,
                                  out string aP5_FormattedHours )
       {
-         getemployeehourlogtotal objgetemployeehourlogtotal;
-         objgetemployeehourlogtotal = new getemployeehourlogtotal();
-         objgetemployeehourlogtotal.AV8EmployeeId = aP0_EmployeeId;
-         objgetemployeehourlogtotal.AV9ProjectId = aP1_ProjectId;
-         objgetemployeehourlogtotal.AV10DateFrom = aP2_DateFrom;
-         objgetemployeehourlogtotal.AV11DateTo = aP3_DateTo;
-         objgetemployeehourlogtotal.AV12TotalHourLogs = 0 ;
-         objgetemployeehourlogtotal.AV16FormattedHours = "" ;
-         objgetemployeehourlogtotal.context.SetSubmitInitialConfig(context);
-         objgetemployeehourlogtotal.initialize();
-         Submit( executePrivateCatch,objgetemployeehourlogtotal);
+         this.AV8EmployeeId = aP0_EmployeeId;
+         this.AV9ProjectId = aP1_ProjectId;
+         this.AV10DateFrom = aP2_DateFrom;
+         this.AV11DateTo = aP3_DateTo;
+         this.AV12TotalHourLogs = 0 ;
+         this.AV16FormattedHours = "" ;
+         SubmitImpl();
          aP4_TotalHourLogs=this.AV12TotalHourLogs;
          aP5_FormattedHours=this.AV16FormattedHours;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((getemployeehourlogtotal)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -148,7 +131,7 @@ namespace GeneXus.Programs {
          GXt_char1 = AV16FormattedHours;
          new procformattime(context ).execute(  AV12TotalHourLogs, out  GXt_char1) ;
          AV16FormattedHours = GXt_char1;
-         this.cleanup();
+         cleanup();
          if (true) return;
          pr_default.dynParam(1, new Object[]{ new Object[]{
                                               AV9ProjectId ,
@@ -188,12 +171,12 @@ namespace GeneXus.Programs {
             pr_default.readNext(1);
          }
          pr_default.close(1);
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -201,14 +184,9 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
          AV16FormattedHours = "";
-         scmdbuf = "";
          A119WorkHourLogDate = DateTime.MinValue;
          P00613_A118WorkHourLogId = new long[1] ;
          P00613_A119WorkHourLogDate = new DateTime[] {DateTime.MinValue} ;
@@ -255,7 +233,6 @@ namespace GeneXus.Programs {
       private long A102ProjectId ;
       private long A118WorkHourLogId ;
       private string AV16FormattedHours ;
-      private string scmdbuf ;
       private string GXt_char1 ;
       private DateTime AV10DateFrom ;
       private DateTime AV11DateTo ;

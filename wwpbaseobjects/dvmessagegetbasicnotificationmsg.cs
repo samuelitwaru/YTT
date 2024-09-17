@@ -52,7 +52,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          this.AV9ClickRedirectURL = aP5_ClickRedirectURL;
          this.AV12Parms = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP6_Parms=this.AV12Parms;
       }
 
@@ -75,56 +75,35 @@ namespace GeneXus.Programs.wwpbaseobjects {
                                  string aP5_ClickRedirectURL ,
                                  out string aP6_Parms )
       {
-         dvmessagegetbasicnotificationmsg objdvmessagegetbasicnotificationmsg;
-         objdvmessagegetbasicnotificationmsg = new dvmessagegetbasicnotificationmsg();
-         objdvmessagegetbasicnotificationmsg.AV14Title = aP0_Title;
-         objdvmessagegetbasicnotificationmsg.AV13Text = aP1_Text;
-         objdvmessagegetbasicnotificationmsg.AV15Type = aP2_Type;
-         objdvmessagegetbasicnotificationmsg.AV10ControlSelector = aP3_ControlSelector;
-         objdvmessagegetbasicnotificationmsg.AV11Hide = aP4_Hide;
-         objdvmessagegetbasicnotificationmsg.AV9ClickRedirectURL = aP5_ClickRedirectURL;
-         objdvmessagegetbasicnotificationmsg.AV12Parms = "" ;
-         objdvmessagegetbasicnotificationmsg.context.SetSubmitInitialConfig(context);
-         objdvmessagegetbasicnotificationmsg.initialize();
-         Submit( executePrivateCatch,objdvmessagegetbasicnotificationmsg);
+         this.AV14Title = aP0_Title;
+         this.AV13Text = aP1_Text;
+         this.AV15Type = aP2_Type;
+         this.AV10ControlSelector = aP3_ControlSelector;
+         this.AV11Hide = aP4_Hide;
+         this.AV9ClickRedirectURL = aP5_ClickRedirectURL;
+         this.AV12Parms = "" ;
+         SubmitImpl();
          aP6_Parms=this.AV12Parms;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((dvmessagegetbasicnotificationmsg)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
          GXt_char1 = AV12Parms;
          new GeneXus.Programs.wwpbaseobjects.dvmessagegetadvancednotificationmsg(context ).execute(  AV14Title,  AV13Text,  AV15Type,  AV10ControlSelector,  AV11Hide,  "false",  "",  AV9ClickRedirectURL, out  GXt_char1) ;
          AV12Parms = GXt_char1;
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )

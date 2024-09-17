@@ -186,7 +186,6 @@ namespace GeneXus.Programs {
          }
          if ( AnyError == 0 )
          {
-            IsConfirmed = 1;
          }
       }
 
@@ -433,7 +432,6 @@ namespace GeneXus.Programs {
 
       protected void CheckExtendedTable0J21( )
       {
-         nIsDirty_21 = 0;
          standaloneModal( ) ;
          /* Using cursor BC000J4 */
          pr_default.execute(2, new Object[] {A124LeaveTypeId});
@@ -447,10 +445,8 @@ namespace GeneXus.Programs {
          pr_default.close(2);
          if ( StringUtil.StrCmp(A173LeaveRequestHalfDay, "") != 0 )
          {
-            nIsDirty_21 = 1;
             A130LeaveRequestEndDate = A129LeaveRequestStartDate;
          }
-         nIsDirty_21 = 1;
          GXt_decimal1 = A131LeaveRequestDuration;
          new getleaverequestdays(context ).execute(  A129LeaveRequestStartDate,  A130LeaveRequestEndDate,  A173LeaveRequestHalfDay,  AV18EmployeeId, out  GXt_decimal1) ;
          A131LeaveRequestDuration = GXt_decimal1;
@@ -587,7 +583,6 @@ namespace GeneXus.Programs {
       protected void insert_Check( )
       {
          CONFIRM_0J0( ) ;
-         IsConfirmed = 0;
       }
 
       protected void update_Check( )
@@ -822,7 +817,6 @@ namespace GeneXus.Programs {
          else
          {
          }
-         IsModified = 0;
          if ( AnyError != 0 )
          {
             context.wjLoc = "";
@@ -1159,7 +1153,6 @@ namespace GeneXus.Programs {
 
       protected void SaveImpl( )
       {
-         nKeyPressed = 1;
          GetKey0J21( ) ;
          if ( IsIns( ) )
          {
@@ -1237,7 +1230,6 @@ namespace GeneXus.Programs {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars21( bcLeaveRequest, 1) ;
          SaveImpl( ) ;
          VarsToRow21( bcLeaveRequest) ;
@@ -1251,7 +1243,6 @@ namespace GeneXus.Programs {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars21( bcLeaveRequest, 1) ;
          Gx_mode = "INS";
          /* Insert record */
@@ -1297,7 +1288,6 @@ namespace GeneXus.Programs {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars21( bcLeaveRequest, 1) ;
          UpdateImpl( ) ;
          context.GX_msglist = BackMsgLst;
@@ -1310,7 +1300,6 @@ namespace GeneXus.Programs {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars21( bcLeaveRequest, 1) ;
          Gx_mode = "INS";
          /* Insert record */
@@ -1344,8 +1333,6 @@ namespace GeneXus.Programs {
          AnyError = 0;
          context.GX_msglist.removeAllItems();
          RowToVars21( bcLeaveRequest, 0) ;
-         nKeyPressed = 3;
-         IsConfirmed = 0;
          GetKey0J21( ) ;
          if ( RcdFound21 == 1 )
          {
@@ -1461,7 +1448,6 @@ namespace GeneXus.Programs {
 
       public void ForceCommitOnExit( )
       {
-         mustCommit = true;
          return  ;
       }
 
@@ -1550,15 +1536,14 @@ namespace GeneXus.Programs {
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
       }
 
-      protected void CloseOpenCursors( )
+      protected override void CloseCursors( )
       {
          pr_default.close(1);
          pr_default.close(11);
@@ -1567,9 +1552,6 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
-         scmdbuf = "";
-         PreviousTooltip = "";
-         PreviousCaption = "";
          BC000J6_A127LeaveRequestId = new long[1] ;
          BC000J6_A131LeaveRequestDuration = new decimal[1] ;
          BC000J6_A130LeaveRequestEndDate = new DateTime[] {DateTime.MinValue} ;
@@ -1760,16 +1742,11 @@ namespace GeneXus.Programs {
          standaloneNotModal( ) ;
       }
 
-      private short IsConfirmed ;
-      private short IsModified ;
       private short AnyError ;
-      private short nKeyPressed ;
       private short RcdFound21 ;
       private short AV17EmployeeCompany ;
       private short GXt_int4 ;
-      private short GX_JID ;
       private short Gx_BScreen ;
-      private short nIsDirty_21 ;
       private int trnEnded ;
       private int Start ;
       private int Count ;
@@ -1797,9 +1774,6 @@ namespace GeneXus.Programs {
       private decimal Z131LeaveRequestDuration ;
       private decimal Z147EmployeeBalance ;
       private decimal GXt_decimal1 ;
-      private string scmdbuf ;
-      private string PreviousTooltip ;
-      private string PreviousCaption ;
       private string A125LeaveTypeName ;
       private string A173LeaveRequestHalfDay ;
       private string A132LeaveRequestStatus ;
@@ -1830,21 +1804,14 @@ namespace GeneXus.Programs {
       private bool AV36ISManager ;
       private bool AV40IsProjectManager ;
       private bool Gx_longc ;
-      private bool mustCommit ;
       private string A133LeaveRequestDescription ;
       private string A134LeaveRequestRejectionReason ;
       private string Z133LeaveRequestDescription ;
       private string Z134LeaveRequestRejectionReason ;
-      private GxSimpleCollection<long> AV42projectIds ;
-      private GxSimpleCollection<long> AV45Employees ;
-      private GxSimpleCollection<long> GXt_objcol_int3 ;
       private IGxSession AV31WebSession ;
-      private GXBCCollection<SdtLeaveRequest> gx_restcollection ;
-      private GeneXus.Programs.genexussecurity.SdtGAMUser AV9GAMUser ;
-      private SdtLeaveRequest bcLeaveRequest ;
-      private SdtLeaveRequest gx_sdt_item ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private SdtLeaveRequest bcLeaveRequest ;
       private IDataStoreProvider pr_default ;
       private long[] BC000J6_A127LeaveRequestId ;
       private decimal[] BC000J6_A131LeaveRequestDuration ;
@@ -1862,6 +1829,16 @@ namespace GeneXus.Programs {
       private string[] BC000J6_A144LeaveTypeVacationLeave ;
       private long[] BC000J6_A124LeaveTypeId ;
       private long[] BC000J6_A106EmployeeId ;
+      private SdtLeaveRequest gx_sdt_item ;
+      private GXBCCollection<SdtLeaveRequest> gx_restcollection ;
+      private GeneXus.Programs.genexussecurity.SdtGAMUser AV9GAMUser ;
+      private GxSimpleCollection<long> AV42projectIds ;
+      private GxSimpleCollection<long> AV45Employees ;
+      private GxSimpleCollection<long> GXt_objcol_int3 ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV32WWPContext ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext AV29TrnContext ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext_Attribute AV30TrnContextAtt ;
+      private SdtEmployee AV7Employee ;
       private string[] BC000J5_A148EmployeeName ;
       private decimal[] BC000J5_A147EmployeeBalance ;
       private long[] BC000J7_A127LeaveRequestId ;
@@ -1931,10 +1908,6 @@ namespace GeneXus.Programs {
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
       private IDataStoreProvider pr_gam ;
-      private SdtEmployee AV7Employee ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext AV29TrnContext ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext_Attribute AV30TrnContextAtt ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV32WWPContext ;
    }
 
    public class leaverequest_bc__gam : DataStoreHelperBase, IDataStoreHelper
@@ -1997,13 +1970,12 @@ namespace GeneXus.Programs {
   {
      if ( def == null )
      {
-        Object[] prmBC000J6;
-        prmBC000J6 = new Object[] {
-        new ParDef("GXPagingFrom21",GXType.Int32,9,0) ,
-        new ParDef("GXPagingTo21",GXType.Int32,9,0)
+        Object[] prmBC000J2;
+        prmBC000J2 = new Object[] {
+        new ParDef("LeaveRequestId",GXType.Int64,10,0)
         };
-        Object[] prmBC000J7;
-        prmBC000J7 = new Object[] {
+        Object[] prmBC000J3;
+        prmBC000J3 = new Object[] {
         new ParDef("LeaveRequestId",GXType.Int64,10,0)
         };
         Object[] prmBC000J4;
@@ -2014,16 +1986,17 @@ namespace GeneXus.Programs {
         prmBC000J5 = new Object[] {
         new ParDef("EmployeeId",GXType.Int64,10,0)
         };
+        Object[] prmBC000J6;
+        prmBC000J6 = new Object[] {
+        new ParDef("GXPagingFrom21",GXType.Int32,9,0) ,
+        new ParDef("GXPagingTo21",GXType.Int32,9,0)
+        };
+        Object[] prmBC000J7;
+        prmBC000J7 = new Object[] {
+        new ParDef("LeaveRequestId",GXType.Int64,10,0)
+        };
         Object[] prmBC000J8;
         prmBC000J8 = new Object[] {
-        new ParDef("LeaveRequestId",GXType.Int64,10,0)
-        };
-        Object[] prmBC000J3;
-        prmBC000J3 = new Object[] {
-        new ParDef("LeaveRequestId",GXType.Int64,10,0)
-        };
-        Object[] prmBC000J2;
-        prmBC000J2 = new Object[] {
         new ParDef("LeaveRequestId",GXType.Int64,10,0)
         };
         Object[] prmBC000J9;

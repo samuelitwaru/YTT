@@ -1,7 +1,7 @@
 /*
 				   File: type_SdtWWPDateRangePickerOptions_RangesItem
 			Description: Ranges
-				 Author: Nemo 🐠 for C# (.NET) version 18.0.6.177934
+				 Author: Nemo 🐠 for C# (.NET) version 18.0.10.184260
 		   Program type: Callable routine
 			  Main DBMS: 
 */
@@ -195,6 +195,14 @@ namespace GeneXus.Programs.wwpbaseobjects
 
 		#endregion
 
+		#region Static Type Properties
+
+		[XmlIgnore]
+		private static GXTypeInfo _typeProps;
+		protected override GXTypeInfo TypeInfo { get { return _typeProps; } set { _typeProps = value; } }
+
+		#endregion
+
 		#region Initialization
 
 		public void initialize( )
@@ -231,6 +239,7 @@ namespace GeneXus.Programs.wwpbaseobjects
 		#endregion
 	}
 	#region Rest interface
+	[GxJsonSerialization("wrapped")]
 	[DataContract(Name=@"WWPDateRangePickerOptions.RangesItem", Namespace="YTT_version4")]
 	public class SdtWWPDateRangePickerOptions_RangesItem_RESTInterface : GxGenericCollectionItem<SdtWWPDateRangePickerOptions_RangesItem>, System.Web.SessionState.IRequiresSessionState
 	{
@@ -259,11 +268,11 @@ namespace GeneXus.Programs.wwpbaseobjects
 		public  string gxTpr_Startdate
 		{
 			get { 
-				return DateTimeUtil.TToC2( sdt.gxTpr_Startdate);
+				return DateTimeUtil.TToC2( sdt.gxTpr_Startdate,context);
 
 			}
 			set { 
-				sdt.gxTpr_Startdate = DateTimeUtil.CToT2(value);
+				sdt.gxTpr_Startdate = DateTimeUtil.CToT2(value,context);
 			}
 		}
 
@@ -271,11 +280,11 @@ namespace GeneXus.Programs.wwpbaseobjects
 		public  string gxTpr_Enddate
 		{
 			get { 
-				return DateTimeUtil.TToC2( sdt.gxTpr_Enddate);
+				return DateTimeUtil.TToC2( sdt.gxTpr_Enddate,context);
 
 			}
 			set { 
-				sdt.gxTpr_Enddate = DateTimeUtil.CToT2(value);
+				sdt.gxTpr_Enddate = DateTimeUtil.CToT2(value,context);
 			}
 		}
 

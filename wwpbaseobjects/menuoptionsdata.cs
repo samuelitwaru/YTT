@@ -56,7 +56,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       {
          this.Gxm2rootcol = new GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item>( context, "Item", "YTT_version4") ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_Gxm2rootcol=this.Gxm2rootcol;
       }
 
@@ -68,29 +68,12 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       public void executeSubmit( out GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item> aP0_Gxm2rootcol )
       {
-         menuoptionsdata objmenuoptionsdata;
-         objmenuoptionsdata = new menuoptionsdata();
-         objmenuoptionsdata.Gxm2rootcol = new GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item>( context, "Item", "YTT_version4") ;
-         objmenuoptionsdata.context.SetSubmitInitialConfig(context);
-         objmenuoptionsdata.initialize();
-         Submit( executePrivateCatch,objmenuoptionsdata);
+         this.Gxm2rootcol = new GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item>( context, "Item", "YTT_version4") ;
+         SubmitImpl();
          aP0_Gxm2rootcol=this.Gxm2rootcol;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((menuoptionsdata)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -148,6 +131,15 @@ namespace GeneXus.Programs.wwpbaseobjects {
          Gxm3dvelop_menu_subitems.gxTpr_Linktarget = "";
          Gxm3dvelop_menu_subitems.gxTpr_Iconclass = "";
          Gxm3dvelop_menu_subitems.gxTpr_Caption = "Project Overview";
+         Gxm3dvelop_menu_subitems = new GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item(context);
+         Gxm1dvelop_menu.gxTpr_Subitems.Add(Gxm3dvelop_menu_subitems, 0);
+         AV5id = (short)(AV5id+1);
+         Gxm3dvelop_menu_subitems.gxTpr_Id = StringUtil.Str( (decimal)(AV5id), 4, 0);
+         Gxm3dvelop_menu_subitems.gxTpr_Tooltip = "";
+         Gxm3dvelop_menu_subitems.gxTpr_Link = formatLink("wpemployeeleavedetails.aspx") ;
+         Gxm3dvelop_menu_subitems.gxTpr_Linktarget = "";
+         Gxm3dvelop_menu_subitems.gxTpr_Iconclass = "";
+         Gxm3dvelop_menu_subitems.gxTpr_Caption = "Leave Overview";
          Gxm3dvelop_menu_subitems = new GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item(context);
          Gxm1dvelop_menu.gxTpr_Subitems.Add(Gxm3dvelop_menu_subitems, 0);
          AV5id = (short)(AV5id+1);
@@ -354,21 +346,17 @@ namespace GeneXus.Programs.wwpbaseobjects {
          Gxm3dvelop_menu_subitems.gxTpr_Iconclass = "";
          Gxm3dvelop_menu_subitems.gxTpr_Caption = "Applications";
          Gxm3dvelop_menu_subitems.gxTpr_Authorizationkey = "";
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -383,13 +371,13 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       private short AV5id ;
       private bool AV9IsRepoAdministrator ;
-      private GeneXus.Programs.genexussecurity.SdtGAMRepository AV7Repository ;
-      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item> aP0_Gxm2rootcol ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV8Errors ;
       private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item> Gxm2rootcol ;
       private GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item Gxm1dvelop_menu ;
       private GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item Gxm3dvelop_menu_subitems ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV8Errors ;
+      private GeneXus.Programs.genexussecurity.SdtGAMRepository AV7Repository ;
       private GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item Gxm4dvelop_menu_subitems_subitems ;
+      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item> aP0_Gxm2rootcol ;
    }
 
 }

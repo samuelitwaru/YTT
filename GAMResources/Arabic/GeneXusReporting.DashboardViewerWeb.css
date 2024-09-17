@@ -36,7 +36,6 @@
 }
 .gx-db-title 
 {
-	display : inline-block;
 	font-family : var(--fonts_primary-bold);
 	font-size : var(--fontsizes_xl);
 	letter-spacing : 0.25px;
@@ -45,7 +44,6 @@
 }
 .gx-db-title > div 
 {
-	display : inline-block;
 	font-family : var(--fonts_primary-bold);
 	font-size : var(--fontsizes_xl);
 	color : var(--colors_on-background);
@@ -206,8 +204,7 @@ input.gx-db-filter-value.form-control.gx-db-value-filter.gx-db-numeric-filter
 }
 .gx-db-filter-caption 
 {
-	text-align : start;
-	padding-top : 4px;
+	padding-block-start : 4px;
 	color : var(--colors_on-background);
 	font-family : var(--fonts_primary-semibold);
 	font-size : var(--fontsizes_s);

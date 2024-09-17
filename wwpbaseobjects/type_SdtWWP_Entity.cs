@@ -278,6 +278,20 @@ namespace GeneXus.Programs.wwpbaseobjects {
          return false ;
       }
 
+      [XmlIgnore]
+      private static GXTypeInfo _typeProps;
+      protected override GXTypeInfo TypeInfo
+      {
+         get {
+            return _typeProps ;
+         }
+
+         set {
+            _typeProps = value ;
+         }
+
+      }
+
       public void initialize( )
       {
          sdtIsNull = 1;
@@ -308,6 +322,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
    }
 
    [DataContract(Name = @"WWPBaseObjects\WWP_Entity", Namespace = "YTT_version4")]
+   [GxJsonSerialization("default")]
    public class SdtWWP_Entity_RESTInterface : GxGenericCollectionItem<GeneXus.Programs.wwpbaseobjects.SdtWWP_Entity>
    {
       public SdtWWP_Entity_RESTInterface( ) : base()
@@ -388,6 +403,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
    }
 
    [DataContract(Name = @"WWPBaseObjects\WWP_Entity", Namespace = "YTT_version4")]
+   [GxJsonSerialization("default")]
    public class SdtWWP_Entity_RESTLInterface : GxGenericCollectionItem<GeneXus.Programs.wwpbaseobjects.SdtWWP_Entity>
    {
       public SdtWWP_Entity_RESTLInterface( ) : base()

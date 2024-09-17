@@ -1,6 +1,6 @@
 ﻿/* START OF FILE - ..\js\gxdbg_dev.js - */
 /*global alert $ document window*/
-gxdbg = {
+var gxdbg = {
 	logDebug: function (msg) {
 		if (this.enabled) {
 			this.write(msg);
@@ -107,7 +107,7 @@ gxdbg = {
 
 /* END OF FILE - ..\js\gxdbg_dev.js - */
 /* START OF FILE - ..\GenCommon\js\version.js - */
-/**@preserve GeneXus 18.0.6.177641*/
+/**@preserve GeneXus 18.0.10.183955*/
 /* END OF FILE - ..\GenCommon\js\version.js - */
 /* START OF FILE - ..\GenCommon\js\mustache.js - */
 /*!
@@ -845,12 +845,16 @@ var gx = (function ($) {
 		emptyFn: function () { },
 		falseFn: falseFn,
 		trueFn: trueFn,
+		getNotificationDelay: function () {
+			return gx.NotificationDelay === undefined ? 400 : gx.NotificationDelay;
+		},
+		
 		numericLenDec:function( picture) {
 			var decPicturePart = picture.split('.'),
-				integerPicturePart = decPicturePart.length === 2 ? decPicturePart[0] : picture,
-				decPicturePart = decPicturePart.length === 2 ?decPicturePart[1] : "",
-				integers = (integerPicturePart.match(/9|Z/g) || []).length,
-				decimals = (decPicturePart.match(/9|Z/g) || []).length;
+				integerPicturePart = decPicturePart.length === 2 ? decPicturePart[0] : picture;
+			decPicturePart = decPicturePart.length === 2 ?decPicturePart[1] : "";
+			let integers = (integerPicturePart.match(/9|Z|#|\?|\\/g) || []).length,
+				decimals = (decPicturePart.match(/9|Z|#|\?|\\/g) || []).length;
 			return(	{
 						Integers:integers, 
 						Decimals:decimals
@@ -1033,7 +1037,6 @@ var gx = (function ($) {
 			_userReady: false,
 			userReadyThreshold: 2000,
 			userReadyThresholdFast: 400,
-			oldDoPostDelay:100,
 			hooks: [],
 			
 			types: {
@@ -1046,7 +1049,7 @@ var gx = (function ($) {
 					var target = gx.evt.source(evt),
 					promptEl = $('[data-gx-attached-ctrl]', target)[0];
 					if (promptEl) {
-						lastTargetElid = (promptEl.getAttribute('data-gx-attached-ctrl').split(' ') || []).pop();
+						let lastTargetElid = (promptEl.getAttribute('data-gx-attached-ctrl').split(' ') || []).pop();
 						var vStructId = gx.O.getValidStructId(lastTargetElid);
 						if (vStructId >= gx.csv.lastId) {
 							gx.csv.lastId = vStructId;
@@ -1078,7 +1081,7 @@ var gx = (function ($) {
 							pendingRun[0]();
 						}
 					}
-				}
+				};
 			},
 
 			addHook: function (obj, evt, handler, options) {
@@ -1230,6 +1233,7 @@ var gx = (function ($) {
 			},
 
 			_init: function () {
+				gx.evt.oldDoPostDelay = gx.getNotificationDelay() + 100;
 				gx.evt.userReadyThresholdFast = gx.util.browser.isIE() ? 2000 : gx.evt.userReadyThresholdFast;
 				document.gxReadyState = 'loading';
 				gx.lang.doCallTimeout( function() {gx.evt.userReadyThreshold = gx.evt.userReadyThresholdFast}, gx.evt, [], gx.evt.userReadyThreshold);				
@@ -1284,6 +1288,7 @@ var gx = (function ($) {
 
 		createParentObj: function (GxObjClass) {
 			if (!gx.spa || !gx.spa.started) {
+				let GxObj;
 				if (!(GxObjClass instanceof gx.GxObject)) {
 					GxObj = new GxObjClass();
 				}
@@ -1629,7 +1634,7 @@ var gx = (function ($) {
 
 			compare: function (operand1, op, operand2) {
 				if(typeof operand1 != typeof operand2)
-				  return false;
+					return false;
 				if(typeof operand1 == "string" && op == 'like')
 				{
 					var cleansedOperand2 = operand2.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, "\\$&");
@@ -2269,11 +2274,11 @@ var gx = (function ($) {
 					return true;
 				if ((objClass == Number) && (typeof (obj) == 'number' || (typeof (gx.num.dec) != "undefined" && obj instanceof gx.num.dec.bigDecimal)))
 					return true;
-				if ((objClass == Array) && (typeof (obj) == 'array'))
+				if ((objClass == Array) && gx.lang.isArray(obj))
 					return true;
 				if ((objClass == Function) && (typeof (obj) == 'function'))
 					return true;
-				if ((typeof (obj) == 'string') || (typeof (obj) == 'number') || (typeof (obj) == 'array'))
+				if ((typeof (obj) == 'string') || (typeof (obj) == 'number') || gx.lang.isArray(obj))
 					return false;
 				var base = obj.base;
 				while (typeof (base) != 'undefined') {
@@ -2405,6 +2410,7 @@ var gx = (function ($) {
 								
 			getTypeImpl: function(fn, arr, initialPosition, len) {
 				var typeObj = null;
+				let i;
 				for (i = initialPosition; i < len; i++) {
 					if (fn[arr[i]]) {
 						fn = fn[arr[i]];
@@ -2572,8 +2578,8 @@ var gx = (function ($) {
 				updateStyles: function (olds, news) {
 					var deleted = [];
 					var len = olds.length;
-					for (var i = 0; i < len; i++) {
-						var sheet = olds[i];
+					for (let i = 0; i < len; i++) {
+						let sheet = olds[i];
 						if (!gx.lang.emptyObject(sheet)) {
 							var found = false;
 							var len1 = news.length;
@@ -2591,8 +2597,8 @@ var gx = (function ($) {
 					if (imgsDir.charAt(0) == '/')
 						imgsDir = imgsDir.substring(1);
 					len = deleted.length;
-					for (var i = 0; i < len; i++) {
-						var sheet = deleted[i];
+					for (let i = 0; i < len; i++) {
+						let sheet = deleted[i];
 						if (sheet.charAt(0) != '/')
 							sheet = imgsDir + sheet;
 						this.removeRemoteFile(sheet);
@@ -2621,7 +2627,7 @@ var gx = (function ($) {
 							imgsDir = imgsDir.substring(1);
 						var scripts = gx.dom.scripts(true);
 						var len = scripts.length;
-						for (var i = 0; i < len; i++) {
+						for (let i = 0; i < len; i++) {
 							var docScript = scripts[i];
 							if (!gx.lang.emptyObject(docScript)) {
 								if (docScript.charAt(0) != '/' && !gx.isabsoluteurl(docScript))
@@ -2630,8 +2636,8 @@ var gx = (function ($) {
 							}
 						}
 						var styles = gx.dom.styles();
-						var len = styles.length;
-						for (var i = 0; i < len; i++) {
+						len = styles.length;
+						for (let i = 0; i < len; i++) {
 							var sheet = styles[i];
 							if (!gx.lang.emptyObject(sheet)) {
 								if (sheet.charAt(0) != '/' && !gx.isabsoluteurl(sheet))
@@ -2732,7 +2738,7 @@ var gx = (function ($) {
 				}
 				else {
 					if (type == 'undefined')
-						return type;
+						return 'null';
 					else if (type == 'string')
 						return gx.text.escapeString(obj);
 					else if ((type == 'number') || (type == 'boolean'))
@@ -2781,13 +2787,13 @@ var gx = (function ($) {
 						while (obj.length > jObj.length) obj.shift();
 					}
 					else {
-						for (var prop in obj) {
+						for (let prop in obj) {
 							if (typeof (obj[prop]) != 'function') {
 								delete obj[prop];
 							}
 						}
 					}
-					for (var prop in jObj) {
+					for (let prop in jObj) {
 						obj[prop] = jObj[prop];
 					}
 					return true;
@@ -2828,7 +2834,7 @@ var gx = (function ($) {
 		
 		http: {
 			currentUrl: function() {
-				return location.href.replace(location.hash,'');				
+				return `${location.origin}${location.pathname}`;				
 			},
 			
 			loadScript: function (url, callback, ignoreExisting) {
@@ -2969,7 +2975,7 @@ var gx = (function ($) {
 			var scripts = gx.dom.scripts(),
 				gxgral = null;
 
-			for (var i = 0, len = scripts.length; i < len; i++) {
+			for (let i = 0, len = scripts.length; i < len; i++) {
 				if (scripts[i].indexOf("gxgral.js") >= 0 || scripts[i].indexOf("gxcore.js") >= 0 || scripts[i].indexOf("gxapiSD.js") >= 0) {
 					gxgral = scripts[i];
 					break;
@@ -2990,7 +2996,7 @@ var gx = (function ($) {
 				gxgralParts.splice(gxgralParts.length - 1, 1);
 				locationParts.splice(locationParts.length - 1, 1);
 
-				for (var i = 0, len = locationParts.length; i < len; i++) {
+				for (let i = 0, len = locationParts.length; i < len; i++) {
 					if (locationParts[i] == gxgralParts[i])
 						path = path + ((path == '') ? '' : '/') + locationParts[i];
 					else if (gx.gen.isJava() && locationParts[i] == "servlet")
@@ -3005,8 +3011,7 @@ var gx = (function ($) {
 		},
 
 		objectLoad: function (gxGrids, gxHiddens) {
-			var deferred = $.Deferred(),
-				domFixes = gx.dom.fixes;
+			var deferred = $.Deferred();
 			
 			if (!gx.evt.execLoad) {	
 				deferred.resolve();
@@ -3051,7 +3056,7 @@ var gx = (function ($) {
 				delete gx.evt.redirecting;
 				gx.ajax._init();
 				gx.grid._init();
-				gx.evt.attach(window, 'unload', gx.evt.onunload);
+				gx.evt.attach(window, 'pagehide', gx.evt.onunload);
 				gx.fn.setFocusInit();
 				gx.dom.fixes.createLegacyNotification();
 				gx.cache._init();
@@ -3157,13 +3162,13 @@ var gx = (function ($) {
 				gx.dom.purgeElement(gx.dom.form());
 				var events = ['onblur', 'onclick', 'onfocus', 'onchange'];
 				var formEls = gx.fn.getFormElements();
-				for (var i = 0, len = formEls.length; i < len; i++)
+				for (let i = 0, len = formEls.length; i < len; i++)
 					gx.dom.purgeElement(formEls[i], events);
 				var spans = gx.dom.byTag('span');
-				for (var i = 0, len = spans.length; i < len; i++)
+				for (let i = 0, len = spans.length; i < len; i++)
 					gx.dom.purgeElement(spans[i], events);
 				var imgs = gx.dom.byTag('img');
-				for (var i = 0, len = imgs.length; i < len; i++)
+				for (let i = 0, len = imgs.length; i < len; i++)
 					gx.dom.purgeElement(imgs[i], events);
 			}
 			gx.dom._deinit();
@@ -3337,10 +3342,19 @@ gx.plugdesign = (function($) {
 			deferCallback((function () {
 				if (typeof t == "string") {
 					t = registeredTemplates[t];
-					if (!t)
+					if (!t) {
+						deferred.resolve();
 						return;
+					}
 				}
+
+				if (!el.parentNode) {
+					deferred.resolve();
+					return false;
+				}
+
 				if ((opts.checkInclusion === true) && !this.shouldApplyOnElement(el, t)) {
+					deferred.resolve();
 					return;
 				}
 				var context = gx.plugdesign.getDOMContext(el, context, t.outerHTML, t.innerHTML, t.setContext);
@@ -3846,12 +3860,7 @@ gx.plugdesign.definition = {
 		},
 		// Attributes and variables
 		{
-			selector:'.gx-attribute > input:not(.GeoLocOption):not([type="image"]):not([type="checkbox"]), .gx-attribute > select, .gx-attribute > textarea',
-			cssClass:'form-control'
-		},
-		// Attributes and variables with prompt
-		{
-			selector:'.gx-attribute > .input-group > input, .gx-attribute > .input-group > select, .gx-attribute > .input-group > textarea, .gx-attribute > .dp_container input',
+			selector:'.gx-attribute > input:not(.GeoLocOption):not([type="image"]):not([type="checkbox"]), .gx-attribute > select, .gx-attribute > textarea,.gx-attribute > .input-group > input, .gx-attribute > .input-group > select, .gx-attribute > .input-group > textarea, .gx-attribute > .dp_container input',
 			cssClass:'form-control'
 		},
 		// Form
@@ -3939,7 +3948,7 @@ gx.html = (function ($) {
 		SCRIPT_COMMENT_REGEX = /(<script[^>]*>\s*)\r?\n?<!--\s*\r?\n?(.*)\r?\n?\s*\/\/-->\s*\r?\n?(<.?\/script>)/ig,
 
 		SCRIPT_ELEMENT_REGEX = new RegExp(SCRIPT_ELEMENT_PATTERN, "i"),
-		SCRIPT_ELEMENT_IS_EXTERNAL_REGEX = /data-gx-external-script/;
+		SCRIPT_ELEMENT_IS_EXTERNAL_REGEX = /data-gx-external-script/,
 		HREF_ELEMENT_ATT_REGEX = /href=(['"]?)([^'">]*)\1/i,
 		ID_ELEMENT_ATT_REGEX = /id=(['"]?)([^'">]*)\1/i,
 		SRC_ELEMENT_ATT_REGEX_1 = /src=(['"]?)([\s\S]*)\?([^"']*)\1/i,
@@ -3951,6 +3960,7 @@ gx.html = (function ($) {
 		IMAGE_URI_ATT = "data-gx-image-uri";
 
 	return {
+		STYLE_ELEMENT_HREF,
 		encodeCaseFormat: function (Value, nFormat, multiline) {
 			if ((nFormat == gx.html.controls.formats.TEXT))
 				Value = gx.html.encode(Value, false, multiline);
@@ -3961,12 +3971,13 @@ gx.html = (function ($) {
 		
 		setGXImageCSSClass: function( el, cssClassname) {
 			var $el = el.jquery ? el : $(el),
-				el = $(el)[0];
 				prevImageClass = $el.attr(IMAGE_CLASS_APPLIED_ATT);
+			el = $(el)[0];
+				
 			if (prevImageClass) {
 				$el.removeClass(prevImageClass);
 			}
-			 [...el.classList].forEach(v => 
+			[...el.classList].forEach(v => 
 				{
 					if (v.startsWith('GX_Image_')) {
 						el.classList.remove(v);
@@ -4074,7 +4085,7 @@ gx.html = (function ($) {
 				gx.dom.addClass(bodyEl, "Form-fx");
 				control.appendChild(bodyEl);
 			}
-			if (transition && gx.pO.fullAjax && bodyEl && gx.dom.hasClass(bodyEl, bodyClassName) && !gx.dom.hasClass(control, 'transitioning')) {
+			if (transition && !gx.O.DSO && gx.pO.fullAjax && bodyEl && gx.dom.hasClass(bodyEl, bodyClassName) && !gx.dom.hasClass(control, 'transitioning')) {
 				var tempDiv = document.createElement('div');
 				tempDiv.innerHTML = this.cleanHtmlRefs(html, removeStyles);
 				gx.dom.replaceWithFx(bodyEl, tempDiv.children[0]);
@@ -4121,6 +4132,7 @@ gx.html = (function ($) {
 
 		onTypeAvailable: function (cName, callback, callbackParms, retry) {
 			try {
+				var maxRetry = 500;
 				var rCName = gx.gen.resolveObjClass(cName);
 				var typeObj;
 				try {
@@ -4137,13 +4149,13 @@ gx.html = (function ($) {
 						callback();
 				} 
 				else {
-					if (retry < 10) {
+					if (retry < maxRetry) {
 						setTimeout(function () { gx.html.onTypeAvailable(cName, callback, callbackParms, retry + 1); }, 0);
 					}
 				}
 			}
 			catch (e) {
-				if (retry < 10) {
+				if (retry < maxRetry) {
 					setTimeout(function () { gx.html.onTypeAvailable(cName, callback, callbackParms, retry + 1); }, 150);
 				}
 			}
@@ -4365,7 +4377,7 @@ gx.html = (function ($) {
 				gx.lang.doEval(evalStr); // Evaluate scripts code
 
 			var styleCtrls = document.getElementsByTagName("style");
-			scrQty = remoteStyles.length;
+			let scrQty = remoteStyles.length;
 			for (var i = 0; i < scrQty; i++) {
 				var exists = false;
 				var stQty = styleCtrls.length;
@@ -4404,6 +4416,7 @@ gx.html = (function ($) {
 		getFieldLabel: function (field, scope) {
 			var label,
 				labelFor,
+				labelEl,
 				id = field.id,
 				previousSibling = field.previousSibling;
 
@@ -4442,14 +4455,14 @@ gx.html = (function ($) {
 			gxCssClass:'gx-multimedia-upload',
 
 			setPreviewAtt: function( target, value) {
-				var ctrl = (typeof( target ) === 'Object') ? target : gx.dom.el(target) ;
+				var ctrl = (typeof( target ) === 'object') ? target : gx.dom.el(target) ;
 				if (ctrl) {
 					ctrl.setAttribute(gx.html.multimediaUpload.gxPreviewHTMLAtt, value);
 				}
 			},
- 			
+		
 			getPreviewAtt: function( target) {
-				var ctrl = (typeof( target ) === 'Object') ? target : gx.dom.el( target);
+				var ctrl = (typeof( target ) === 'object') ? target : gx.dom.el( target);
 				return (ctrl) ? ctrl.getAttribute(gx.html.multimediaUpload.gxPreviewHTMLAtt) : '';
 			},
 
@@ -4913,7 +4926,7 @@ gx.html = (function ($) {
 
 				onJsEventAttributes: function (nJScriptCode, sGXOnClickCode, sUserOnClickCode) {
 					var gxObject = gx.GxObject,
-						eventAttribute = ' ' + gxObject.GX_EVENT_DATA_ATTR + '="' + nJScriptCode + '"';
+						eventAttribute = ' ' + gxObject.GX_EVENT_DATA_ATTR + '="' + nJScriptCode + '"',
 						scriptAttribute = "";
 					if (nJScriptCode === 4) {
 						scriptAttribute = ' ' + gxObject.GX_EVENT_CODE_DATA_ATTR + '="' + nJScriptCode + '"';
@@ -5074,7 +5087,7 @@ gx.html = (function ($) {
 					this.isPassword = false;
 					//this.valueIndex = 1;
 					this.setProperties = function (sCtrlName, sFormatedValue, sTags, sEventName, sLinkURL, sLinkTarget, sTooltipText, sPlaceholder, sUserOnClickCode, nJScriptCode, sClassString, sStyleString, sROClassString, sColumnClass, sColumnHeaderClass, nVisible, nEnabled, nRTEnabled, sType, sStep, nWidth, nWidthUnit, nHeight, nHeightUnit, nLength, nIsPassword, nFormat, nParentId, bHasTheme,
-									 nAutoComplete, nAutoCorrection, bSendHidden, sDomType, sAlign, bIsTextEdit, rtPicture, sValue) {
+									nAutoComplete, nAutoCorrection, bSendHidden, sDomType, sAlign, bIsTextEdit, rtPicture, sValue) {
 						this.id = sCtrlName;
 						this.inputType = sType;
 						this.step = sStep;
@@ -5407,8 +5420,8 @@ gx.html = (function ($) {
 					this.parameters = '';
 
 					this.setProperties = function (sInternalName, sValue, sContenttype, bHasFiletypeatt, sLinkTarget, sObjecttagparameters, nDisplay, nEnabled, nVisible, sAlternateText, sTooltipText, nBorderWidth,
-										   nAutoresize, nWidth, nWidthUnit, nHeight, nHeightUnit, nVerticalSpace, nHorizontalSpace, nJScriptCode, sUserOnClickCode, sEventName, sStyleString, sClassString, sColumnClass, sColumnHeaderClass,
-										   sInputTags, sDisplayTags, sJsDynCode, sURL) {
+										nAutoresize, nWidth, nWidthUnit, nHeight, nHeightUnit, nVerticalSpace, nHorizontalSpace, nJScriptCode, sUserOnClickCode, sEventName, sStyleString, sClassString, sColumnClass, sColumnHeaderClass,
+										sInputTags, sDisplayTags, sJsDynCode, sURL) {
 						this.id = sInternalName;
 						this.value = sValue;
 						this.contentType = sContenttype || 'text/html';
@@ -5840,7 +5853,6 @@ gx.html = (function ($) {
 					this._getHtml = function () {
 						var attachedControls = gx.TabFocusOnPrompt ? gx.fn.attachedControls() : [],
 							vStruct = this.getVStruct(),
-							attachedControls,
 							attachElement = attachedControls.find( attach => attach.id === vStruct.fld && attach.info.isPrompt === true);
 
 						if (attachElement) {
@@ -6279,7 +6291,7 @@ gx.html = (function ($) {
 					this.buttonStyle = buttonStyle || 'rounded';
 
 					this.setProperties = function (sCtrlName, sJsCode, sUserOnClickCode, nJScriptCode, sTooltipText, sAccesskey, sStyleString, sClassString, nVisible, nEnabled, sBorderStyle, sEventName,
-										   sTags, sJsDynCode, nReset, sCaption) {
+										sTags, sJsDynCode, nReset, sCaption) {
 						this.reset = nReset;
 						this.id = sCtrlName;
 						this.title = sTooltipText;
@@ -6829,17 +6841,17 @@ gx.html = (function ($) {
 							sVAlign = this.vAlign.toLowerCase(),
 							FlexAlign = sAlign,
 							FlexVAlign = sVAlign;
-						 
-						 if ( FlexAlign === "justify") {
+						
+						if ( FlexAlign === "justify") {
 							FlexAlign = "space-evenly";
-						 }
-						 if ( FlexVAlign === "middle") {
+						}
+						if ( FlexVAlign === "middle") {
 							FlexVAlign = "center";
-						 }
-						 else
-						 {
+						}
+						else
+						{
 							if ( FlexVAlign === "bottom") {
-							   FlexVAlign = "end";
+								FlexVAlign = "end";
 							}
 						}
 						if (this.height != '')
@@ -7042,7 +7054,7 @@ gx.util.Observable = function(){
 		
 		deleteObserverByKey: function (key) {
 			if (!observerKeys[key]) return;
-			$.each(observerKeys[key], function (i, notifyObj) {
+			gx.$.each(observerKeys[key], function (i, notifyObj) {
 				gx.fx.obs.deleteObserver(notifyObj.e, notifyObj.o, notifyObj.f);
 			});
 			observerKeys[key] = [];
@@ -7309,6 +7321,10 @@ gx.fx = {
 		}
 
 		this.showSuggestions = function (aSuggestions) {
+			if (document.activeElement && (this.textbox != document.activeElement)) {
+				return;
+			}
+			
 			this.cur = -1;
 			var oDiv = null;
 
@@ -8051,6 +8067,7 @@ gx.fx = {
 	},
 
 	notifications: {
+		serialRunner: gx.evt.serialRunner(),
 		queuedEvents: [],
 		initialize: function (gxObj) {
 			if (!gxObj.notifications) {
@@ -8089,7 +8106,7 @@ gx.fx = {
 			var groupName = data.GroupName || "";
 			var obj = this.notifications[groupName];
 			if (obj){
-				gx.fx.notifications.queuedEvents.push({notifObj:obj, data:data});
+				gx.fx.notifications.queuedEvents.push({notifObj:obj, data:data, executed: false});
 				if (!obj.noWait && !gx.isInputEnabled()) {
 					//'gx.onafterevent' will be called when postHandlerFullAjax is completed.
 				} else {
@@ -8099,30 +8116,41 @@ gx.fx = {
 		},
 		
 		fireQueuedEvents: function() {
-			for (var i = 0; i <gx.fx.notifications.queuedEvents.length; i++) {
-				var obj = gx.fx.notifications.queuedEvents[i];
-				if (!obj.executed) {
-					gx.fx.notifications.queuedEvents.splice(i--, 1);
-					var gxO = obj.notifObj.gxO;	
-					obj.executed = true;
-					if (!gx.lang.emptyObject(obj.data.Object) && obj.data.Object.toUpperCase() != gxO.ServerClass.toUpperCase()) {
-						//Ignore notification for current object
-						continue;
-					}					
-					var type = obj.notifObj.type;
-					var evtName = obj.notifObj.eventName;
-					if (evtName) {
-						var isServerEvent = gxO.isServerEvent(evtName);
-						var parm = {}; parm[type[0][0]] = obj.data;
-						gxO.setEventParameters(obj.notifObj.type, parm);						
-						gx.evt.dispatcher.dispatch(gxO.getServerEventName(evtName), gxO, 0, 0, isServerEvent, undefined, undefined, true);
-					}
-					else {
-						obj.notifObj.handler(obj.data);
-					}
+			var currentQueue = gx.fx.notifications.queuedEvents.slice();
+			gx.fx.notifications.queuedEvents = []; // Clear the original array to accept new events
+			var serialRunner = gx.fx.notifications.serialRunner;
+			currentQueue.forEach( obj => {
+				if (obj.executed) {
+					return;
 				}
-			}			
-		}				
+				var gxO = obj.notifObj.gxO;
+				obj.executed = true; // Mark as executed to prevent re-execution
+				if (!gx.lang.emptyObject(obj.data.Object) && obj.data.Object.toUpperCase() != gxO.ServerClass.toUpperCase()) {
+					// Ignore notification for current object
+					return;
+				}
+
+				task = () => {
+				var evtName = obj.notifObj.eventName;
+				if (evtName) {
+					var isServerEvent = gxO.isServerEvent(evtName);
+					var parm = {}; parm[obj.notifObj.type[0][0]] = obj.data;
+					gxO.setEventParameters(obj.notifObj.type, parm);
+					var $deferred = gx.evt.dispatcher.dispatch(gxO.getServerEventName(evtName), gxO, 0, 0, isServerEvent, undefined, undefined, true);
+
+						$deferred.done(function() {
+								// Process the next event after the current deferred is resolved
+								serialRunner.signalEndTask();
+						});
+					} else {
+						obj.notifObj.handler(obj.data);
+						// Immediate processing of the next event since no asynchronous operation is involved
+						serialRunner.signalEndTask();
+					}
+				};
+				serialRunner.addTask(task);
+			});
+		}
 	},
 
 	ctx: {
@@ -8893,7 +8921,7 @@ gx.date = (function () {
 				value = Control.value;
 			else
 				value = gx.dom.spanValue(Control) || Control;
-			var date = new this.gxdate(value, sFmt);
+			var date = (value instanceof this.gxdate) ? value : new this.gxdate(value, sFmt);
 			if (!date.HasDatePart)
 			{
 				return '00010101' +
@@ -9708,13 +9736,38 @@ gx.num = function () {
 			strnum = gx.num.replaceFullWidthNumerals(strnum);
 			if (gx.lang.instanceOf(strnum, Number) || this.overflowNumber(strnum))
 				return strnum;
-			var pchars,
+			var pchars = '',
 				value = (strnum === undefined ? '' : strnum);
+			var checkParentheses = function (valueToAnalyze) {
+				return (valueToAnalyze.charAt(0) === '(' && valueToAnalyze.charAt(valueToAnalyze.length -1) === ')');
+			}
 			if (picture) {
+				var altNegativeDisplay = checkParentheses(picture);
+				var negativeValue = checkParentheses(value);
+				if (altNegativeDisplay){
+					picture = picture.substring(1,picture.length-1);
+					if(negativeValue) {
+						value = value.substring(1,value.length-1);
+					}
+				}
+				var escaping = false;
+				for (var i = 0; i < picture.length; i++){
+					var currentChar = picture.charAt(i);
+					if (currentChar === '\\' && !escaping) {
+						escaping = true;
+					} else {
+						if (((currentChar === '#' || currentChar === '?' || currentChar === '\\') && escaping) || 
+						!(currentChar === '#' || currentChar === '?' || currentChar === '\\'))
+						{
+							pchars += currentChar;
+						}
+						escaping = false;
+					}
+				}
 				if (picture.charAt(0) == '+' || picture.charAt(0) == '-')
-					pchars = picture.replace(/[\+\-\d,*\.*Z*\s]+/, '');
+					pchars = pchars.replace(/[\+\-\d,*\.*Z*\s]+/, '');
 				else
-					pchars = picture.replace(/[\d,*\.*Z*\s]+/g, '');
+					pchars = pchars.replace(/[\d,*\.*Z*\s]+/g, '');
 
 				if (picture.lastIndexOf('.') != picture.indexOf('.'))
 					value = gx.text.replaceAll(value, '.', '');
@@ -9722,8 +9775,9 @@ gx.num = function () {
 				for (var i = 0; i < pchars.length; i++)
 					value = value.replace(pchars.charAt(i), '');
 				value = !gx.config.number.validation.strict && ThSep? gx.text.replaceAll(value, ThSep, ''): value;
+				value = (negativeValue ? '-' : '') + value
 			}
-			return gx.text.trim(value);
+			return gx.text.replaceAll(value,' ', '');
 		},
 
 		formatNumber: function (number, decimals, picture, digits, sign, errorOnBadNumber, emptyAsNull) {
@@ -9779,8 +9833,11 @@ gx.num = function () {
 			}
 			
 			var signChar = '';
+			var preSignChar = '';
+			var postSignChar = '';
+			var hasNegativeParentheses = picture.charAt(0) === '(' && picture.charAt(picture.length-1) === ')'
 			if (sign) {
-				if (integerInput.charAt(0) == '-') {
+				if (integerInput.charAt(0) == '-' && !hasNegativeParentheses) {
 					signChar = '-';
 					integerInput = integerInput.substring(1);
 				}
@@ -9791,6 +9848,14 @@ gx.num = function () {
 						}
 						if (integerInput.charAt(0) == '+') {
 							integerInput = integerInput.substring(1);							
+						}
+					}
+					if (hasNegativeParentheses) {
+						picture = picture.substring(1, picture.length-1);
+						if ((Number(number) < 0)){
+							integerInput = (Number(integerInput)*-1).toString();
+							preSignChar = '(';
+							postSignChar = ')';
 						}
 					}
 				}
@@ -9821,19 +9886,32 @@ gx.num = function () {
 			//parte decimal
 			var nidx = 0;
 			var decPart = '';
+			var decValue = f[1].replace(/0*$/,'');
 			if (psplit.length > 1) {
 				var dpic = psplit[1];
+				var isEscapedCharacter = false;
 				for (i = 0; i < dpic.length; i++) {
 					var chd = dpic.charAt(i);
-					if (chd == '9' || chd == 'Z')
-						if (f[1].length > nidx) {
-							decPart = decPart + f[1].charAt(nidx);
+					if (isEscapedCharacter){
+						decPart = decPart + dpic.charAt(i);
+					}		
+					else if ((chd == '9' || chd == 'Z' || chd == '#' || chd == '?') && !isEscapedCharacter){
+						if (decValue.length > nidx) {
+							decPart = decPart + decValue.charAt(nidx);
 							nidx++;
 						}
-						else
-							decPart = decPart + '0';
-					else if (chd != '.' && chd != ',')
+						else {
+							decPart = decPart + this.checkPictureCharacter(chd, true);
+						}
+					}
+					else if (chd === '\\' && isEscapedCharacter){
 						decPart = decPart + chd;
+						isEscapedCharacter = false;
+						continue;
+					}
+					else if (chd != '.' && chd != ',' && !isEscapedCharacter)
+						decPart = decPart + chd;
+					isEscapedCharacter = dpic.charAt(i) == '\\';
 				}
 			}
 
@@ -9842,16 +9920,32 @@ gx.num = function () {
 			var epic = psplit[0];
 			nidx = integerInput.length - 1;
 			for (i = epic.length - 1; i >= 0; i--) {
-				var ch = epic.charAt(i);
-				if (ch == '9' || ch == 'Z')
+				var ch = epic.charAt(i),
+				isEscapedCharacter = false
+				if(i>1){
+					isEscapedCharacter = (epic.charAt(i-1) == '\\' && epic.charAt(i-2) != '\\')
+				} else if (i > 0){
+					isEscapedCharacter = epic.charAt(i-1) == '\\'
+				}
+				if (isEscapedCharacter) {
+					intPart = ch + intPart;
+					i--;
+				}
+				else if ((ch == '9' || ch == 'Z' || ch == '#' || ch == '?') && !isEscapedCharacter){
 					if (nidx >= 0) {
-						if (!(ch == 'Z' && Number(integerInput.substring(0,nidx+1)) === 0))
+						if (!((ch == 'Z' || ch == '#' || ch == '?') && Number(integerInput.substring(0,nidx+1)) === 0))
 							intPart = integerInput.charAt(nidx) + intPart;
 						nidx--;
 					}
-					else
-						intPart = (ch == '9' ? '0' : '') + intPart;
-				else if (ch != 'Z' && ch != ',' && ch != '+')
+					else {
+						intPart = this.checkPictureCharacter(ch) + intPart;
+					}
+				}
+				else if (ch === '\\' && isEscapedCharacter) {
+					intPart = ch + intPart;
+					continue;
+				}
+				else if ((ch != ',' && ch != '+'))
 					intPart = ch + intPart;
 				else if (ch == ',' && integerInput.charAt(nidx) == thSep) {
 					intPart = integerInput.charAt(nidx) + intPart;
@@ -9861,7 +9955,20 @@ gx.num = function () {
 			if (blankWhenZero && (intPart == '0' || intPart === '') && decPart.replace(/0+$/, '').length === 0)
 				return '';
 			else
-				return signChar + intPart + (!decPart ? '' : (decSep + decPart));
+				return preSignChar + signChar + intPart + (!decPart ? '' : (decSep + decPart)) + postSignChar;
+		},
+
+		checkPictureCharacter: function (chd, isDecimal = false) {
+			switch (chd) {
+				case '9':
+					return '0';
+				case 'Z':
+					return isDecimal ? '0' : '';
+				case '#':
+					return '';
+				case '?':
+					return ' ';
+			}
 		},
 
 		add: function (a, b) {
@@ -9969,6 +10076,9 @@ gx.num = function () {
 
 		random: function () {
 			return Math.random();
+		},
+		abs: function (num) {
+			return Math.abs(num);
 		},
 
 		intval: function (num) {
@@ -10580,7 +10690,8 @@ gx.grid = (function ($) {
 					}
 				}
 				if (baseGridImpl.DynProperties) {
-					for (i=0, len=baseGridImpl.DynProperties.length; i<len; i++) {
+					let len = baseGridImpl.DynProperties.length;
+					for (i=0; i<len; i++) {
 						prop = baseGridImpl.DynProperties[i];
 						newGridImpl.setDynProp(prop, baseGridImpl.Properties[prop], baseGridImpl[prop], baseGridImpl.PropTypes[prop], true);
 					}
@@ -11268,9 +11379,9 @@ gx.grid = (function ($) {
 			}
 
 			this.lastRowId = 0;
-			this.addRow = function (rowProps) {
-				var z, length, lenAux, commonProps;
-				var rowId = this.lastRowId++;
+			this.addRow = function (rowProps, atRow) {
+				var z, length, lenAux, commonProps, atRow = atRow === undefined ? -1 : atRow;
+				var rowId = atRow == -1 ? this.lastRowId++ : atRow;
 				var gxRowIdx = gx.grid.rowId(rowId + 1);
 				var row = new gx.grid.row(rowId, rowProps, gxRowIdx, this.grid.gxParentRowId);
 				row.gxCmpContext = this.gxComponentContext;
@@ -11313,7 +11424,7 @@ gx.grid = (function ($) {
 					row.IsNew = true;
 					this.installChildGrids(row);
 				}
-				this.grid.addRow(row);
+				this.grid.addRow(row, false, atRow);
 				return row;
 			}
 
@@ -11402,7 +11513,7 @@ gx.grid = (function ($) {
 				var len = 0;
 				if (this.defaultDragable || this.defaultSetsContext) {
 					len = this.grid.rows.length;
-					for (var i = 0; i < len; i++) {
+					for (let i = 0; i < len; i++) {
 						var trId = this.containerName + 'Row_' + this.grid.rows[i].gxId;
 						if (this.defaultDragable)
 							gx.fx.dnd.deleteSource(trId);
@@ -11411,7 +11522,7 @@ gx.grid = (function ($) {
 					}
 				}
 				len = this.grid.columns.length;
-				for (var i = 0; i < len; i++) {
+				for (let i = 0; i < len; i++) {
 					var currCol = this.grid.columns[i];
 					if (currCol.gxSetsContext == true) {
 						var len1 = this.grid.rows.length;
@@ -11461,7 +11572,7 @@ gx.grid = (function ($) {
 				if (this.parentGrid) {
 					var ctx = gx.fx.ctx.setters[this.gxComponentContext + this.realGridName + "ContainerTbl"];
 					len = this.grid.rows.length;
-					for (var i = firstNewRow; i < len; i++) {
+					for (let i = firstNewRow; i < len; i++) {
 						var trId = this.containerName + 'Row_' + this.grid.rows[i].gxId;
 						if (ctx && ctx.hdl)
 							gx.fx.ctx.addSetter(this.parentObject, trId, this.cssClass, evtTypes, ctx.hdl);
@@ -11470,7 +11581,7 @@ gx.grid = (function ($) {
 				if (!this.additiveResponse)
 				{
 					len = this.grid.columns.length;
-					for (var i = 0; i < len; i++) {
+					for (let i = 0; i < len; i++) {
 						var currCol = this.grid.columns[i];
 						if (currCol.gxSetsContext == true) {
 							var len1 = this.grid.rows.length;
@@ -11529,7 +11640,7 @@ gx.grid = (function ($) {
 				if (this.isFreestyle)
 					return;
 				var gridTblid = this.getGridInnerTableId(),
-					$table = $('#' + gridTblid);
+					$table = $('#' + gridTblid),
 					rows = $table.find('tbody tr[data-gxrendering_row]'); 
 				$.each( rows, 
 					function ( i, r) {
@@ -11669,7 +11780,7 @@ gx.grid = (function ($) {
 						}
 						
 						if (this.fixedColumnsWidth.length > 0) {
-							$table.find('thead tr').children().each(function(i, v) { $(v)[0].style.width = _this.fixedColumnsWidth[i] + 'px'});
+							$table.find('thead tr').children().each(function(i, v) { $(v)[0].style.visibility = _this.fixedColumnsWidth[i] > 0 ? '':'hidden'; $(v)[0].style.width = _this.fixedColumnsWidth[i] + 'px'});
 							this.fixColumnsWidth( this.fixedColumnsWidth);
 						}
 						
@@ -11716,7 +11827,13 @@ gx.grid = (function ($) {
 								if (this.fixedColVisibleCount != fixedColVisibleCount) {
 									this.fixedColVisibleCount = fixedColVisibleCount;
 									if (!this.isFreestyle) {
-										this.fixedColntainerWidth = $table.width();
+										if (this.ScrollingElement) {
+											$(this.ScrollingElement).removeClass(GRID_INFINITE_SCROLLING_ELEMENT_CLASS);
+										}
+										$table.find('thead tr').children().each(function(i, v) { $(v)[0].style.visibility = ''; $(v)[0].style.width = ''; });
+										if (!this.fixedColntainerWidth) {
+											this.fixedColntainerWidth = $table.width();
+										}
 										this.fixedColumnsWidth = $bodyCells.map(function() { return this.offsetWidth; }).get();
 									}
 								}
@@ -11725,7 +11842,7 @@ gx.grid = (function ($) {
 									$table.width(this.fixedColntainerWidth + $.position.scrollbarWidth() + 2);
 								}
 								if (!this.isFreestyle && this.fixedColumnsWidth.length > 0) {
-									$table.find('thead tr').children().each(function(i, v) { $(v)[0].style.width = _this.fixedColumnsWidth[i] + 'px'; });
+									$table.find('thead tr').children().each(function(i, v) { $(v)[0].style.visibility = _this.fixedColumnsWidth[i] > 0 ? '':'hidden'; $(v)[0].style.width = _this.fixedColumnsWidth[i] + 'px'; });
 									this.fixColumnsWidth( this.fixedColumnsWidth); 
 								}
 								ScrollingElement = $body.length > 0 ? $body[0] : containerControl;
@@ -11843,7 +11960,7 @@ gx.grid = (function ($) {
 			}
 
 			this.doDrop = function (dropObj) {
-				var rowsQty = (dropObj.length != undefined) ? ropObj.length : 1;
+				var rowsQty = (dropObj.length != undefined) ? dropObj.length : 1;
 				this.getNewRows(rowsQty, null, function (rows) { this.addDropedRows(rows, dropObj); });
 			}
 
@@ -11886,12 +12003,16 @@ gx.grid = (function ($) {
 				return types;
 			}
 
-			this.addRows = function (rowsProps) {
+			this.addRows = function (rowsProps, atRow) {
 				var len = rowsProps.Count;
+				var atRow = atRow === undefined ? -1 : atRow;
 				this.grid.rowsValues = rowsProps.values;
 				for (var i = 0; i < len; i++) {
 					var rowProps = rowsProps[i];
-					this.addRow(rowProps);
+					this.addRow(rowProps, atRow === -1 ? -1 : atRow + i);
+				}
+				if (atRow === 0) {
+					this.grid.rows = this.grid.rows.slice(0, Number(gx.fn.getHidden(this.getHiddenName("Rows"))));
 				}
 			}
 
@@ -12021,8 +12142,12 @@ gx.grid = (function ($) {
 					return;
 				var eventName = "";
 				var filterVarChangedFn = function () {
-					this.filterVarChanged();
+					this.filterVarChanged()
+
 				};
+				var filterVarChangedFnWithTimeout = function (timeout,func, context){
+					gx.lang.doCallTimeout(func, context, [], timeout);
+				}
 
 				this.refreshVars[this.refreshVars.length] = validStruct;
 				if (validStruct.fld) {
@@ -12030,7 +12155,7 @@ gx.grid = (function ($) {
 					if (varCtrl != undefined) {
 						if (gx.lang.emptyObject(validStruct.hc)) {
 							if (varCtrl.type == "radio" || varCtrl.type == "checkbox")
-								eventName = "click";
+								eventName = ["click"];
 							else if (varCtrl.tagName == "SELECT")
 								eventName = "change";
 							else if (gx.evt.eachKeyAutorefreshType(validStruct.type))
@@ -12044,6 +12169,12 @@ gx.grid = (function ($) {
 									var len = radioGroup.length;
 									for (var i = 0; i < len; i++) {
 										gx.evt.attach(radioGroup[i], eventName, filterVarChangedFn, this);
+										var label = radioGroup[i].labels && radioGroup[i].labels[0];
+										if(label){
+											gx.evt.attach(label, eventName, function() {
+												filterVarChangedFnWithTimeout(0, filterVarChangedFn, this);
+											}, this);
+										}
 									}
 								}
 								else {
@@ -12162,7 +12293,10 @@ gx.grid = (function ($) {
 						}
 					}
 					if (typeof (vStruct.rfrVar) != 'undefined') {
-						var filterValue = ctrlName = colVStruct = undefined;
+						var filterValue, 
+							ctrlName,
+							colVStruct;
+						filterValue = ctrlName = colVStruct = undefined;
 						if (typeof (vStruct.rfrProp) != 'undefined') {
 							var col;
 							if (typeof (vStruct.gxAttId) != 'undefined')
@@ -12180,8 +12314,18 @@ gx.grid = (function ($) {
 								if (this.isValueProperty(propName) && col.gxControl.type == gx.html.controls.types.image)
 									filterValue = gx.util.removeBaseUrl(filterValue);
 								colVStruct = this.parentObject.getValidStruct(col.gxId);
-								if (colVStruct && this.isValueProperty(propName))
-									colType = colVStruct.type;
+								if (colVStruct) {
+									if (this.isValueProperty(propName)) {
+										colType = colVStruct.type;
+									}
+									else if (propName === "enabled" || propName === "visible") {
+										colType = "int";
+										filterValue = gx.lang.gxBoolean(filterValue) ? 1 : 0;
+									}
+									else {
+										colType = "";
+									}
+								}
 							}
 							else {
 								filterValue = "";
@@ -12413,7 +12557,7 @@ gx.grid = (function ($) {
 				this.grid.renderRow(row, firstTime, row.id, firstRow, lastRow,  hasRowBreaks, buffer, 
 					vAlign, colHtmlCode, colsLen, column, columnDefaultVisible, columnProps, gxCtrl, fromCollection, visibleColumnsArray)
 				var updatedRowHtml = buffer.toString();
-				var idToCompare = updatedRowHtml.match(/id=\'(\S+)\'/)
+				var idToCompare = updatedRowHtml.match(/id=.(\w*)./)
 				var elementToUpdate = idToCompare && gx.dom.el(idToCompare[1])
 				elementToUpdate.outerHTML = updatedRowHtml
 				gx.plugdesign.applyTemplateObject(elementToUpdate);				
@@ -12556,13 +12700,15 @@ gx.grid = (function ($) {
 					var GRID_nEOF = postProps.GridName ? postProps[postProps.GridName.toUpperCase() + '_nEOF'] : undefined;
 					var GRID_nFirstRecordOnPage = postProps.GridName ? postProps[postProps.GridName.toUpperCase() + '_nFirstRecordOnPage'] : undefined;
 					var divCtrl = this.getContainerControl();
+					var atRow = -1;
 					if (divCtrl != null) {
 						if (this.autoRefreshing)
 							this.updatePagingVarsAfterRefresh(postProps);
 						else
 							this.updatePagingVars(GRID_nEOF, GRID_nFirstRecordOnPage);
 						if (this.InfiniteScrolling) {
-							this.additiveResponse = (this.grid.firstRecordOnPage != 0)
+							this.additiveResponse = this.grid.firstRecordOnPage === this.grid.rows.length;
+							atRow = this.additiveResponse ? -1 : this.grid.firstRecordOnPage;
 						}
 						if (isPostback) {
 							if (!addRows) {
@@ -12583,7 +12729,7 @@ gx.grid = (function ($) {
 							this.updatePagingVarsAfterRefresh(postProps);
 						else
 							this.updatePagingVars(GRID_nEOF, GRID_nFirstRecordOnPage);
-						if (!addRows)
+						if (!addRows && atRow === -1)
 							this.blankGridRows();
 						this.setHtmlTags(postProps);
 						this.setGridStyles(postProps);
@@ -12593,13 +12739,14 @@ gx.grid = (function ($) {
 						this.setSflColumns(postProps.SflColumns);
 						this.setColumnsProperties(postProps.Columns);
 						if (!addRows)
-							this.addRows(postProps);
+							this.addRows(postProps, atRow);
 						this.updateOldComponents();
 						this.initRefreshParms();
 						var gridTblid = this.getGridInnerTableId();
 						var isEmpty = $("#" + gridTblid).attr("data-gx-grid-nodata") !== undefined;
 						deferred = this.refreshGrid({
 								addRows: addRows && !isEmpty,
+								atRow,
 								loadChildGrids:null, 
 								fromAutoRefresh:this.autoRefreshing
 							});
@@ -12984,6 +13131,7 @@ gx.grid = (function ($) {
 					}
 				}
 				var firstTime = false;
+				var doneRender = function() { deferred.resolve();}
 				var afterRender = function () {
 					gx.fn.setPromptlisteners(this.getContainerControl());
 					this.setupGridControls(this.GridControls);
@@ -12994,9 +13142,11 @@ gx.grid = (function ($) {
 					var _this = this;
 					var gridTblid = this.getGridInnerTableId(),
 						last_selector = this.grid.scroll_last_row_selector( this.gridRows),
+						nth_selector = this.grid.scroll_nth_row_selector(),
 						first_selector = this.grid.scroll_first_row_selector( this.gridRows)
 					this.grid.firstItemSelector = '#' + gridTblid + first_selector;
 					this.grid.lastItemSelector = '#' + gridTblid + last_selector;
+					this.grid.nthItemSelector = (n, s) => '#' + gridTblid + nth_selector(n, s);
 					var applyInfiniteScrolling = function(arrCmpObj) {
 						var fnc = function() {
 							if (!_this.InfiniteScrolling) {
@@ -13076,12 +13226,13 @@ gx.grid = (function ($) {
 				};
 				afterRender = afterRender.closure(this);
 				this.grid.doSort();
+				ops.ScrollingElement = this.ScrollingElement;
 				if (loadChildGrids == false) {
-					this.grid.render(firstTime, false, fromCollection, afterRender, ops);
+					this.grid.render(firstTime, false, fromCollection, afterRender, doneRender, ops);
 				}
 				else {
-					firstTime = true;
-					this.grid.render(firstTime, fromAutoRefresh, fromCollection, afterRender, ops);
+					firstTime = !ops.onSetSort;
+					this.grid.render(firstTime, fromAutoRefresh, fromCollection, afterRender, doneRender, ops);
 				}
 				var retDeferred = $.Deferred();
 				$.when.apply($, arrDeferreds).done(function() {retDeferred.resolve()});
@@ -13175,12 +13326,12 @@ gx.grid = (function ($) {
 				} else {
 					var candidateCells = gx.dom.byTag('TD', r),
 						candidateHeaders = gx.dom.byTag('TH', r);
-					for (var i=0, len=candidateCells.length; i<len; i++) {
+					for (let i=0, len=candidateCells.length; i<len; i++) {
 						if (candidateCells[i].getAttribute('data-colindex') == colIndex) {
 							cells.push(candidateCells[i]);
 						}
 					}
-					for (var i=0, len=candidateHeaders.length; i<len; i++) {
+					for (let i=0, len=candidateHeaders.length; i<len; i++) {
 						if (candidateHeaders[i].getAttribute('data-colindex') == colIndex) {
 							cells.push(candidateHeaders[i]);
 						}
@@ -13310,13 +13461,13 @@ gx.grid = (function ($) {
 					userControl.DesignContainerName = col.gxUCContainerName;
 					userControl.setC2ShowFunction(col.gxShowFunc);
 					var len1 = col.gxC2VFuncs.length;
-					for (var j = 0; j < len1; j++) {
+					for (let j = 0; j < len1; j++) {
 						userControl.addC2VFunction(col.gxC2VFuncs[j]);
-					};
+					}
 					var len2 = col.gxV2CFuncs.length;
-					for (var j = 0; j < len2; j++) {
+					for (let j = 0; j < len2; j++) {
 						userControl.addV2CFunction(col.gxV2CFuncs[j], col.gxUCFieldName);
-					};
+					}
 					userControl.setGridProperties();
 					userControl.setGridEventHandlers();
 					this.parentObject.setUserControl(userControl);
@@ -13623,8 +13774,8 @@ gx.grid = (function ($) {
 				var ContextControl = gx.dom.byId(this.controlName);
 				if (ContextControl == null) {
 					ContextControl = document.createElement("SPAN");
-					ContextControlShadow = document.createElement("SPAN");
-					ContextControlShadow2 = document.createElement("SPAN");
+					var ContextControlShadow = document.createElement("SPAN"),
+					ContextControlShadow2 = document.createElement("SPAN"),
 					IFrameControl = document.createElement("IFRAME");
 					ContextControl.id = this.controlName;
 					ContextControlShadow.id = this.controlName + "Shadow";
@@ -13863,13 +14014,14 @@ gx.grid.impl = (function ($) {
 			});
 		}
 
-		this.addRow = function (row, refresh) {
+		this.addRow = function (row, refresh, atRow) {
+			var atRow = atRow === -1 || atRow === undefined ? this.rows.length : atRow;
 			row.table = this;
 			if (row == null) {
 				return;
 			}
 
-			this.rows[this.rows.length] = row;
+			this.rows[atRow] = row;
 			if (typeof (row.id) != 'undefined')
 				this.rowsById[row.id] = row;
 			if (typeof (row.gxId) != 'undefined')
@@ -13932,7 +14084,7 @@ gx.grid.impl = (function ($) {
 				this.ascSort = (asc == null ? true : gx.lang.booleanValue(asc));
 			}
 			this.doSort();
-			this.ownerGrid.refreshGrid({ immediateApplyInfiniteScroll: true });
+			this.ownerGrid.refreshGrid({ immediateApplyInfiniteScroll: true , onSetSort:true});
 		}
 
 		this.doSort = function () {
@@ -14149,6 +14301,10 @@ gx.grid.impl = (function ($) {
 		
 		this.scroll_first_row_selector = function() {
 			return ' tbody tr:first-child';
+		}
+
+		this.scroll_nth_row_selector = function() {
+			return (n,s) => s ? ` tbody tr:nth-child(n+${n}):nth-child(-n+${n+s})`:` tbody tr:nth-child(n+${n})`;
 		}
 		this.ROW_TAG = "tr";
 		this.CELL_TAG = "td";
@@ -14459,11 +14615,12 @@ gx.grid.impl = (function ($) {
 				gx.dom.purgeElement(imgs[i], events);
 		};
 
-		this.render = function (firstTime, fromAutoRefresh, fromCollection, afterRenderCallback, ops) {
+		this.render = function (firstTime, fromAutoRefresh, fromCollection, afterRenderCallback, doneRender, ops) {
 			firstTime = !!firstTime;
 
 			var tableId = this.ownerGrid.getGridInnerTableId(),
-				container = this.container;
+				container = this.container,
+				oldScrollTop;
 
 			this.ownerGrid.disposeTemplateObject();
 			this.beforeRender();
@@ -14472,6 +14629,9 @@ gx.grid.impl = (function ($) {
 				this.doSort();
 			}
 
+			if (ops.ScrollingElement) {
+				oldScrollTop = ops.ScrollingElement.scrollTop;
+			}
 			var gridHtml = this.drawGrid(tableId, firstTime, fromAutoRefresh, fromCollection, ops);
 
 			if (gx.dom.shouldPurge()) {
@@ -14501,17 +14661,23 @@ gx.grid.impl = (function ($) {
 				}
 			}
 			if (restoreActiveEl) {
-				setTimeout(function () {
-					var newActiveEl = gx.dom.el(activeEl.id || activeEl.name, false, true);
+				let nTimeout = oldScrollTop ? 0 : 1;
+				let fnc = function () {
+					let newActiveEl = gx.dom.el(activeEl.id || activeEl.name, false, true);
 					if (newActiveEl) {
 						gx.csv.disableFocus = true;
 						if (newActiveEl.offsetWidth > 0 && newActiveEl.offsetHeight > 0) {
+							if (oldScrollTop) {
+								ops.ScrollingElement.scrollTop = oldScrollTop;
+							}
+							gx.fn.scrollIntoViewIfNeeded(newActiveEl, container, {block:"end"});
 							gx.fn.setFocus(newActiveEl, function() {
 								gx.dom.setCaretOffset( newActiveEl, caretOffset);
 							});
 						}
 					}
-				}, 10);
+				};
+				(nTimeout) ? gx.lang.doCallTimeout(fnc, this, [], nTimeout) : fnc();
 			}
 
 			this.drawEmptyContent();
@@ -14531,7 +14697,8 @@ gx.grid.impl = (function ($) {
 			var inverseLoading = this.ownerGrid.InverseLoading;
 			var hook;
 			var $children;
-			var addRowsOnly = this.ownerGrid.additiveResponse || opts.addRows;
+			var atRowCond = opts.atRow != undefined && opts.atRow != -1;
+			var addRowsOnly = this.sortColumn === -1 && (this.ownerGrid.additiveResponse || opts.addRows || atRowCond);
 			if (addRowsOnly) {
 				if ( this.sortColumn !== -1) {
 					container.innerHTML = gridHtml;					
@@ -14564,10 +14731,33 @@ gx.grid.impl = (function ($) {
 							$newRows = $(gridHtml).insertBefore(this.firstItemSelector);
 						}
 						else {
-							newRows = $(gridHtml).insertAfter(this.lastItemSelector);
+							if (atRowCond) {
+								const rowPrefix = '<tr';
+								const rowPrefixReg = /<tr/;								
+								let preCount = opts.ScrollingElement.childNodes.length;
+								let arrRows = gridHtml.split(rowPrefixReg);
+								let arrOldRows = arrRows.slice(1, preCount + 1 - opts.atRow);
+								let arrNewRows = arrRows.slice(preCount + 1 - opts.atRow);
+								let toRemove = preCount - this.rows.length;
+								Array.from(opts.ScrollingElement.childNodes).slice(0,arrOldRows.length).forEach((el, index) => {
+										let newRow = document.createElement("tr");
+										el.replaceWith(newRow);
+										newRow.outerHTML = `${rowPrefix}${arrOldRows[index]}`
+								});
+								if (arrNewRows.length > 0) {
+									$(rowPrefix + arrNewRows.join(rowPrefix)).insertAfter(this.lastItemSelector);
+								}
+								while (toRemove-- > 0) {
+									opts.ScrollingElement.removeChild(opts.ScrollingElement.lastChild);
+								}								
+								newRows = $(this.nthItemSelector(opts.atRow + 1, arrRows.length - 1));
+							}
+							else {
+								newRows = $(gridHtml).insertAfter(this.lastItemSelector);
+							}
 						}
 					}
-					this.newAdditiveRows = $newRows;
+					this.newAdditiveRows = atRowCond ? null : $newRows;
 					gx.plugdesign.applyTemplateObject({
 						selector: $newRows, 
 						deferred:true
@@ -14812,19 +15002,17 @@ gx.grid.impl = (function ($) {
 			var visibleColumnsArray = this.columns;
 			var renderedColumnCount = visibleColumnsArray.length;
 			var i, row, column, colHtmlCode, vAlign, columnDefaultVisible, columnProps, gxCtrl;
+			var atRowDefined = opts.atRow != undefined && opts.atRow != -1;
 
-			var addRowsOnly = this.ownerGrid.additiveResponse || opts.addRows;
+			var addRowsOnly = this.sortColumn === -1 && (this.ownerGrid.additiveResponse || opts.addRows);
 
 			if (!this.gxIsFreestyle && isGxTrn) {
 				renderedColumnCount++;
 			}
-			var firstRow, lastRow, maxPage;
-			if (addRowsOnly || opts.immediateApplyInfiniteScroll) {
-				firstRow = (!addRowsOnly && (this.firstRecordOnPage == '0' || this.sortColumn != -1)) ? 0 : this.lastRenderedRow;
-				lastRow = this.rows.length;
-				this.ownerGrid.firstAdditiveRow = firstRow;
-			}
-			else {	
+			
+			var first_last_row = function() {
+				var firstRow,
+					lastRow;
 				if (Number(this.pageSize) !== 0) { //pageSize != 0
 					maxPage = this.getMaxPage();
 					if (this.currentPage <= 0) {
@@ -14833,13 +15021,31 @@ gx.grid.impl = (function ($) {
 					else if (this.currentPage > maxPage) {
 						this.currentPage = maxPage;
 					}
-					firstRow = Math.max(this.pageSize * (this.currentPage - 1), 0);
+					if (atRowDefined) {
+						firstRow = opts.atRow;
+					}
+					else {						
+						firstRow = Math.max(this.pageSize * (this.currentPage - 1), 0);
+					}
 					lastRow = Math.min(firstRow + this.pageSize, this.rows.length);
 				}
 				else {
 					firstRow = 0;
 					lastRow = this.rows.length;
 				}
+				return {firstRow,lastRow};
+			}
+
+			var maxPage, firstRenderedRow;
+			var {firstRow,lastRow} = first_last_row.bind(this)();
+			if (addRowsOnly || opts.immediateApplyInfiniteScroll) {
+				firstRenderedRow = firstRow;
+				firstRow = (!addRowsOnly && (this.firstRecordOnPage == '0' || this.sortColumn != -1)) ? 0 : this.lastRenderedRow;
+				lastRow = this.rows.length;
+				this.ownerGrid.firstAdditiveRow = firstRow;
+			}
+			else {	
+				firstRenderedRow = firstRow;
 			}
 
 			if (this.gxAllowCollapsing) {
@@ -14847,29 +15053,39 @@ gx.grid.impl = (function ($) {
 			}
 
 			var colsLen = visibleColumnsArray.length;
-			if (!this.gxIsFreestyle && (lastRow > firstRow) && firstRow == 0) {
+			if (!this.gxIsFreestyle && (lastRow > firstRow)) {
 				for (var j = 0; j < colsLen; j++) {
 					column = visibleColumnsArray[j];
+					gxCtrl = column.gxControl;
+					var rtVisible = false;
 					columnDefaultVisible = gx.lang.gxBoolean(column.visible);
-					if (columnDefaultVisible) {
-						var rtVisible = false;
-						for (i = firstRow; i < lastRow && !rtVisible; i++) {
-							row = this.rows[i];
-							gxCtrl = column.gxControl;
-							columnProps = row.gxProps[column.index];
-							if (!fromCollection) {
-								gxCtrl.setProperties.apply(gxCtrl, columnProps);
-							}
-							if (gxCtrl.visible) {
-								rtVisible = true;
-							}
+					column.visible = columnDefaultVisible;
+							for (i = firstRenderedRow; i < lastRow && !rtVisible; i++) {
+								row = this.rows[i];
+								columnProps = row.gxProps[column.index];
+								if (!fromCollection) {
+							gxCtrl.setProperties.apply(gxCtrl, columnProps);
 						}
-						if (!rtVisible) 
+						if (gxCtrl.visible) {
+							rtVisible = true;
+						}
+					}
+					var disableAdditiveDraw = visible => {
+							//When added row reconfigure visibility for previous renderred rows
 							column.visible = false;
+							addRowsOnly = false;
+							firstRow = firstRenderedRow;
+							this.ownerGrid.firstAdditiveRow = 0;
+							opts.addRows = false;
+					};
+					if (!this.ownerGrid.additiveResponse) {
+						column.visible && !rtVisible && disableAdditiveDraw( false);
+						!column.visible && rtVisible && disableAdditiveDraw( true);
 					}
 				}
 			}
-			if (!addRowsOnly || this.sortColumn != -1) {
+			var includeWrapper = !atRowDefined && (!addRowsOnly || this.sortColumn != -1);
+			if (includeWrapper) {
 				this.appendContainerStart(tableId, buffer);
 				this.appendHeaderText(renderedColumnCount, buffer);
 				if (!this.gxIsFreestyle) {
@@ -14891,7 +15107,7 @@ gx.grid.impl = (function ($) {
 				this.appendRowEnd(buffer);
 			}
 			this.lastRenderedRow = lastRow;
-			if (!addRowsOnly) {
+			if (includeWrapper) {
 				this.appendBodyWrapperEnd(buffer);
 
 				this.appendFooterWrapperStart(buffer);
@@ -15048,7 +15264,7 @@ gx.grid.impl = (function ($) {
 					this.unmask();
 					deferred.resolve();
 				}
-				gx.evt.execEvt( undefined, undefined, eventName, gx.evt.dummyCtrl, gridId, undefined, undefined, false, afterFnc.closure(this), force);
+				gx.evt.execEvt( this.gxCmpContext, this.parentGxObject.IsMasterPage, eventName, gx.evt.dummyCtrl, gridId, undefined, undefined, false, afterFnc.closure(this), force);
 				return deferred.promise();
 			}
 		}
@@ -15750,8 +15966,12 @@ gx.grid.flexGrid = function ($) {
 		var gridHtml;
 
 		$container = $('#'+this.getContainerControl().id);
-
-		gridHtml = this.drawGrid(this.gxGridObject + "Tbl", !this.IsPostBack);
+		
+		var gridObjectName;
+		
+		gridObjectName = (this.gxCmpContext || "") + this.gxGridObject + "Tbl";
+		
+		gridHtml = this.drawGrid(gridObjectName, !this.IsPostBack);
 
 		this.setGridHtml($container.get(0), gridHtml);
 		
@@ -16535,13 +16755,13 @@ gx.fn = (function($) {
 			return null;
 		},
 
-		getControlRef: function (ControlId, avoidPref) {
+		getControlRef: function (ControlId, avoidPref, selectActive) {
 			//Critical function, changes here impact performance
 			if (!avoidPref)
 				ControlId = gx.csv.ctxControlId(ControlId);
 			if (ControlId == 'FORM')
 				return document;
-			var Control = gx.dom.el(ControlId);
+			var Control = gx.dom.el(ControlId, null, null, null, selectActive);
 			if (Control != null)
 				return Control;
 			return null;
@@ -16667,7 +16887,7 @@ gx.fn = (function($) {
 		firstGridControl: function (GridId, gxO) {
 			var ctrlIds = gx.fn.controlIds();
 			var len = ctrlIds.length;
-			for (i = 0; i < len; i++) {
+			for (let i = 0; i < len; i++) {
 				var _GXValidStruct = gx.fn.validStruct(ctrlIds[i], gxO);
 				if (_GXValidStruct != undefined && _GXValidStruct.grid == GridId)
 					return ctrlIds[i];
@@ -16677,7 +16897,7 @@ gx.fn = (function($) {
 
 		lastGridControl: function (GridId, gxO) {
 			var ctrlIds = gx.fn.controlIds();
-			for (i = ctrlIds.length - 1; i >= 0; i--) {
+			for (let i = ctrlIds.length - 1; i >= 0; i--) {
 				var _GXValidStruct = gx.fn.validStruct(ctrlIds[i], gxO);
 				if (_GXValidStruct != undefined && _GXValidStruct.grid == GridId)
 					return ctrlIds[i];
@@ -16784,7 +17004,7 @@ gx.fn = (function($) {
 						}
 						return this.getControlValueInt(Control);
 					}
-					ControlList = gx.dom.byName(ControlId);
+					let ControlList = gx.dom.byName(ControlId);
 					if (ControlList != null) {
 						var len = ControlList.length;
 						for (var i = 0; i < len; i++) {
@@ -17040,12 +17260,14 @@ gx.fn = (function($) {
 			}
 		},
 
-		verticalFormula: function (VarName, Default, GridId, Row, CondsFunc, RowFunc, Deps) {
+		verticalFormula: function (VarName, Default, GridId, Row, CondsFunc, RefreshVars, RowFunc, Deps) {
 			var validStruct = gx.fn.vStructForVar(VarName);
+			if (RefreshVars) {
 			if (!gx.lang.emptyObject(validStruct))
 				validStruct.v2c(Row);
 			else
 				this.v2cMap(VarName);
+			}
 			var oldRow = gx.fn.currentGridRowImpl(GridId);
 			var gridObj = gx.fn.getGridObj(GridId, Row);
 			var retVal = 0;
@@ -17058,6 +17280,7 @@ gx.fn = (function($) {
 					var RecordExists = rowObj.gxExists();
 					var RecordIsMod = rowObj.gxIsMod();
 					if (!IsRemoved && (RecordExists || RecordIsMod)) {
+						if (RefreshVars) {
 						gx.fn.setCurrentGridRow(GridId, rowObj.gxId);
 						if (Deps && Deps.length > 0)
 							this.depsToVars(Deps);
@@ -17065,13 +17288,16 @@ gx.fn = (function($) {
 							validStruct.c2v();
 						else
 							this.c2vMap(VarName);
+						}
 						if (CondsFunc.call(gx.O)) {
 							anyWithCond = true;
 							retVal = RowFunc(i, retVal);
 						}
 					}
 				}
-				gx.fn.setCurrentGridRow(GridId, oldRow);
+				if (RefreshVars) {
+  				gx.fn.setCurrentGridRow(GridId, oldRow);
+				}
 				if (Deps && Deps.length > 0)
 					this.depsToVars(Deps);
 				else if (!gx.lang.emptyObject(validStruct) && typeof (validStruct.c2v) == 'function')
@@ -17123,7 +17349,7 @@ gx.fn = (function($) {
 			var floatHandler = function (VarName, Row, LastValue, NewValue) {
 				return (NewValue > LastValue) ? NewValue : LastValue;
 			}
-	        return gx.fn.verticalFormula(VarName, Default, GridId, Row, CondsFunc, function(row, val)
+	        return gx.fn.verticalFormula(VarName, Default, GridId, Row, CondsFunc, true, function(row, val)
 	        {				
 				return gx.fn.rowValueHandler(VarName, row, val,boolHandler, floatHandler, ThSep, DecPoint);				
 	        }, Deps);
@@ -17137,7 +17363,7 @@ gx.fn = (function($) {
 			var floatHandler = function (VarName, Row, LastValue, NewValue) {
 				return NewValue + LastValue;
 			}
-	        return gx.fn.verticalFormula(VarName, Default, GridId, Row, CondsFunc, function(row, val)
+	        return gx.fn.verticalFormula(VarName, Default, GridId, Row, CondsFunc, true, function(row, val)
 	        {
 				return gx.fn.rowValueHandler(VarName, row, val,boolHandler, floatHandler, ThSep, DecPoint);							           
 	        }, Deps);
@@ -17151,7 +17377,7 @@ gx.fn = (function($) {
 			var floatHandler = function (VarName, Row, LastValue, NewValue) {
 				return (NewValue < LastValue) ? NewValue : LastValue;
 			}
-	        return gx.fn.verticalFormula(VarName, Default, GridId, Row, CondsFunc, function(row, val)
+	        return gx.fn.verticalFormula(VarName, Default, GridId, Row, CondsFunc, true, function(row, val)
 	        {
 				return gx.fn.rowValueHandler(VarName, row, val,boolHandler, floatHandler, ThSep, DecPoint);			    
 	        }, Deps);
@@ -17159,7 +17385,7 @@ gx.fn = (function($) {
 
 	    averageFrm: function(VarName, Default, ThSep, DecPoint, GridId, Row, CondsFunc, Deps)
 	    {
-	        return gx.fn.verticalFormula(VarName, Default, GridId, Row, CondsFunc, function(row, val)
+	        return gx.fn.verticalFormula(VarName, Default, GridId, Row, CondsFunc, true, function(row, val)
 	        {
 	            var v = gx.num.parseFloat(gx.O[VarName], ThSep, DecPoint);
 	            if (row == 0) return v;
@@ -17169,7 +17395,7 @@ gx.fn = (function($) {
 
 	    countFrm: function(VarName, Default, GridId, Row, CondsFunc, Deps)
 	    {
-	        return gx.fn.verticalFormula(VarName, Default, GridId, Row, CondsFunc, function(row, val)
+	        return gx.fn.verticalFormula(VarName, Default, GridId, Row, CondsFunc, false, function(row, val)
 	        {	            
 	            return (row == 0)? 1: val + 1;
 	        }, Deps);
@@ -17287,20 +17513,29 @@ gx.fn = (function($) {
 			gx.usrPtys[Id][Property.toLowerCase()] = PValue;
 		},
 
-		setCtrlProperty: function (ControlId, Property, PValue) {
+		setCtrlProperty: function (ControlRef, Property, PValue, vStruct) {
 			if (!gx.O) {
 				gx.fx.obs.addObserver('gx.onready', this, gx.fn.setCtrlProperty.closure(this, arguments), { single: true });
 				return;
 			}
-			var Control = null;
+			var Control;
+			if (typeof(ControlRef) === 'string') {
+				ControlId = ControlRef;				
 			if (ControlId == 'FORM')
 				Control = document;
 			else
 				Control = gx.fn.screen_CtrlRef(gx.csv.ctxControlId(ControlId));
-			if (Control == null)
+			}
+			else {
+				Control = ControlRef;
+				ControlId = Control.id;
+			}			
+			if (!Control)
 				return;
-			this.persistControlProperty(ControlId, Property, PValue);
-					var vStruct = gx.O.getValidStructFld(ControlId);
+			var vStruct = vStruct || gx.O.getValidStructFld(ControlId);
+			if (vStruct && vStruct.grid) {
+				gx.fn.persistControlProperty(ControlId, Property, PValue);
+			}
 			this.setCtrlPropertyImpl(Control, Property, PValue, vStruct);
 		},
 
@@ -17433,7 +17668,7 @@ gx.fn = (function($) {
 						}						
 					} else {
 						if ((gx.dom.isEditControl(Control) || Control.type === "textarea" || Control.type === "file" || Control.tagName === "SELECT") && Control.type !== "password") {
-							var spanVal = this.getRONode(Control.id, pValueFalse, vStruct.fmt);
+							var spanVal = this.getRONode(Control.id, pValueFalse, vStruct.fmt, vStruct.multiline);
 							if (gx.fn.isVisible(Control, 0) || (spanVal && gx.fn.isVisible(spanVal, 0))) {
 								if (spanVal) this.setVisible(spanVal, pValueFalse);
 								this.setEnabledProperty(Control, !pValueFalse);//1.SetEnabled. Debe ejecutarse antes de la setVisible(Control, !pValueFalse), caso textarea multiline que pasa a disabled en el cliente.
@@ -17560,7 +17795,7 @@ gx.fn = (function($) {
 					this.setMultimediaType(Control, PValue);
 					break;
 				case "Bitmap":
-					gxImage = gx.util.imageName(PValue);
+					var gxImage = gx.util.imageName(PValue);
 					if (gxImage) {
 						gx.html.setGXImageCSSClass(Control, `GX_Image_${gxImage}_Class`); 
 					}
@@ -17790,7 +18025,7 @@ gx.fn = (function($) {
 			return (gx.O.DSO || cssClass === '' || cssClass.indexOf('Readonly') === 0) ? cssClass : 'Readonly' + cssClass;
 		},
 		
-		getRONode: function (id, create, fmt) {
+		getRONode: function (id, create, fmt, Multiline) {
 			var fmt = fmt === undefined ? gx.html.controls.formats.TEXT : fmt;			
 			if (fmt === gx.html.controls.formats.RAW_HTML || fmt === gx.html.controls.formats.HTML)			
 			{
@@ -17815,8 +18050,8 @@ gx.fn = (function($) {
 				controlValue = el.value;
 			else
 				controlValue = gx.fn.getControlValue(gx.dom.id(el), 'screen');
-			span.appendChild(document.createTextNode(controlValue || ''));
 			el.parentNode.insertBefore(span, el);
+			gx.html.setInnerText( span, controlValue || '', fmt, Multiline);
 			return span;
 		},
 
@@ -18217,7 +18452,7 @@ gx.fn = (function($) {
 					if (pN) {
 						var sibling = null;
 						var childs = pN.childNodes.length;
-						for (i = 0; i < childs; i++) {
+						for (let i = 0; i < childs; i++) {
 							if (pN.childNodes[i] == objCtrl) {
 								if (i < childs - 1)
 									sibling = pN.childNodes[i + 1];
@@ -18358,7 +18593,7 @@ gx.fn = (function($) {
 			var ParentTag = Control.parentNode;
 			if (ParentTag.tagName == "A") {
 				var ChildNode = ParentTag.firstChild;
-				ParentTag2 = ParentTag.parentNode;
+				let ParentTag2 = ParentTag.parentNode;
 				if (ParentTag2 != null) {
 					while (ChildNode != null) {
 						ParentTag2.insertBefore(ChildNode, ParentTag);
@@ -18381,7 +18616,22 @@ gx.fn = (function($) {
 			}
 			$(Control).attr('data-gx-link-target', target);
 		},
+		
 
+		scrollIntoViewIfNeeded: function( el, container, options) {
+			if (gx.fn.isVisibleAtScroll( el, container)) {
+				return;
+			}
+			el.scrollIntoView( options);			
+		},
+		
+		isVisibleAtScroll: function( el, container) {
+			const { bottom, height, top } = el.getBoundingClientRect();
+			const containerRect = container.getBoundingClientRect();
+
+			return top <= containerRect.top ? containerRect.top - top <= height : bottom - containerRect.bottom <= height;
+		},
+		
 		isVisible: function (Control, searchUpLevels) {
 			if (!Control) {
 				return false;
@@ -18678,7 +18928,7 @@ gx.fn = (function($) {
 						return;
 					}
 					else {
-						gx.csv.userFocus = gx.fn.getControlRef(usrFocusId);
+						gx.csv.userFocus = gx.fn.getControlRef(usrFocusId,null,true);
 					}
 				}
 				if (gx.csv.userFocus == 'notset') {
@@ -18838,7 +19088,7 @@ gx.fn = (function($) {
 		getControlIndex: function (Ctrl) {
 			var i_max = gx.fn.getFormElements().length - 1;
 			var i_min = 0;
-			el = this.controlIndex(Ctrl, i_min, i_max);
+			let el = this.controlIndex(Ctrl, i_min, i_max);
 			return el;
 		},
 
@@ -18932,6 +19182,7 @@ gx.fn = (function($) {
 			try {
 				var ctrlIds,
 					i,
+					len,
 					grids = gx.O.Grids;
 
 				if (grids) {
@@ -18964,7 +19215,7 @@ gx.fn = (function($) {
 			try {
 				var ctrlIds = gx.fn.controlIds();
 				var len = ctrlIds.length;
-				for (i = 0; i < len; i++) {
+				for (let i = 0; i < len; i++) {
 					var _GXValidStruct = gx.fn.validStruct(ctrlIds[i]);
 					if (_GXValidStruct != undefined && _GXValidStruct.gxold == Name)
 						return _GXValidStruct.grid;
@@ -19016,7 +19267,7 @@ gx.fn = (function($) {
 			try {
 				var ctrlIds = gx.fn.controlIds();
 				var len = ctrlIds.length;
-				for (i = 0; i < len; i++) {
+				for (let i = 0; i < len; i++) {
 					var _GXValidStruct = gx.fn.validStruct(ctrlIds[i]);
 					if (_GXValidStruct != undefined && _GXValidStruct.lvl != undefined && _GXValidStruct.grid == GridId)
 						return _GXValidStruct.lvl;
@@ -19032,7 +19283,7 @@ gx.fn = (function($) {
 			try {
 				var ctrlIds = gx.fn.controlIds();
 				var len = ctrlIds.length;
-				for (i = 0; i < len; i++) {
+				for (let i = 0; i < len; i++) {
 					var _GXValidStruct = gx.fn.validStruct(ctrlIds[i]);
 					if (_GXValidStruct != undefined && _GXValidStruct.lvl == Lvl)
 						return _GXValidStruct.grid;
@@ -19047,7 +19298,7 @@ gx.fn = (function($) {
 		vStructId: function (CtrlId) {
 			try {
 				var ctrlIds = gx.fn.controlIds();
-				for (i = 0; i < ctrlIds.length; i++) {
+				for (let i = 0; i < ctrlIds.length; i++) {
 					var validStruct = gx.fn.validStruct(ctrlIds[i]);
 					if (validStruct != undefined && validStruct.fld == CtrlId)
 						return ctrlIds[i];
@@ -19067,7 +19318,7 @@ gx.fn = (function($) {
 				}
 				var ctrlIds = gx.fn.controlIds();
 				var len = ctrlIds.length;
-				for (i = 0; i < len; i++) {
+				for (let i = 0; i < len; i++) {
 					var vStruct = gx.fn.validStruct(ctrlIds[i]);
 					if (vStruct != undefined && condFunc(vStruct)) {
 						vStruct.id = ctrlIds[i];
@@ -19184,7 +19435,7 @@ gx.fn = (function($) {
 			try {
 				var ctrlIds = gx.fn.controlIds();
 				var len = ctrlIds.length;
-				for (i = 0; i < len; i++) {
+				for (let i = 0; i < len; i++) {
 					var _GXValidStruct = gx.fn.validStruct(ctrlIds[i]);
 					if (_GXValidStruct != undefined && _GXValidStruct.grid == GridId) {
 						var Ctrl = gx.dom.el(_GXValidStruct.fld + "_" + CurrentRow);
@@ -19474,7 +19725,7 @@ gx.fn = (function($) {
 							if (validStruct) {
 								if (validStruct.v2v && !gx.fn.autoRefreshingControl(validStruct.fld, cmpCtx)) {
 									var grid = gx.O.getGridById(validStruct.grid);
-									var additiveResponse = (grid && grid.InfiniteScrolling);
+									var additiveResponse = (grid && grid.additiveResponse);
 									if (validStruct.grid != 0 ) {
 										control = gx.dom.el(Property, false, false);
 										cRow = gx.fn.controlRowId(control) || getRow(validStruct, gridId, row);
@@ -19580,11 +19831,12 @@ gx.fn = (function($) {
 							}
 							if ( !ptyHandled)
 							{
-								GridColumn = gxO.getGridColumn(Control, rowId);
+								var ctrlRowId = rowId || ((vStruct && vStruct.grid) ? gx.fn.currentGridRow(vStruct.grid) : '');
+								GridColumn = gxO.getGridColumn(Control, ctrlRowId);
 								if (((domCtrl == null || Grid) && gx.uc.isUserControl(Control, gxO)) || (GridColumn && GridColumn.isUserControl)) {
 									ControlInGrid = Control;
 									if (GridColumn && GridColumn.isUserControl) {
-										ControlInGrid = Control + "_" + rowId;
+										ControlInGrid = Control + "_" + ctrlRowId;
 									}
 									gx.uc.setProperties(ControlInGrid, gxPropValue);
 									updatedUCs.push(gx.uc.getUserControlObj(gx.uc.userControlContainerId(ControlInGrid)));
@@ -19595,15 +19847,15 @@ gx.fn = (function($) {
 									for (var Property in gxPropValue) {
 										if (domCtrl) {
 											if (!domCtrl.parentElement)
-												domCtrl = gx.fn.getPropertyControlRef(Control, rowId);	
+												domCtrl = gx.fn.getPropertyControlRef(Control, ctrlRowId);	
 											var isObjValue = typeof (gxPropValue[Property]) === "object";
 											if (isObjValue) {
 												for (var InProperty in gxPropValue[Property]) {
-													gx.fn.setCtrlPropertyImpl(domCtrl, InProperty, gxPropValue[Property][InProperty], vStruct);
+													gx.fn.setCtrlProperty(domCtrl, InProperty, gxPropValue[Property][InProperty], vStruct);
 												}
 											}
 											else {
-												gx.fn.setCtrlPropertyImpl(domCtrl, Property, gxPropValue[Property], vStruct);
+												gx.fn.setCtrlProperty(domCtrl, Property, gxPropValue[Property], vStruct);
 											}
 											
 										}
@@ -19700,7 +19952,10 @@ gx.fn = (function($) {
 					}
 				}
 			}
-
+			updatedUCs = updatedUCs.filter( (UC) => { 
+				let grid = gx.fn.gridObj(UC.cmpCtx, UC.gridName, UC.inMasterPage);
+				return grid && grid.isUsercontrol;
+			})
 			updatedUCs = gx.lang.arrayUnique(updatedUCs, function (G1, G2) { return G1.gridName === G2.gridName});
 			var nestedGridUCs = [];
 			for (var i = 0; i < updatedUCs.length; i++) {				
@@ -19893,7 +20148,6 @@ gx.fn = (function($) {
 				gx.O.deleteComponentHiddens(cmpsCtx);
 			}
 			catch (e) {
-				except = true;
 				gx.dbg.logEx(e, 'gxfrmutl.js', 'clearCompontHiddens');
 			}
 		},
@@ -20205,11 +20459,15 @@ gx.fn = (function($) {
 			});
 			var controlSelector = 'input[type="text"], input[type="password"], input[type="email"], input[type="number"], input[type="search"], input[type="url"], textarea';
 			$(document).on('keyup', controlSelector, function (event) {
-				gx.evt.oncontrolvaluechanging(event);
+				var currentValue = `${event.target.id} + ${event.target.value}`
+				if(gx.evt.cvcingContext !== currentValue){
+					gx.evt.cvcingContext = currentValue
+					gx.evt.oncontrolvaluechanging(event);
+				}
 			});
 			$(document).on('paste', controlSelector, function (event) {
 				gx.evt.oncontrolpasting(event);
-			});			
+			});		
 			if (gx.pO != null) {
 				gx.pO.onload(loadGrids, forceAfterLoad);
 				gx.setGxO(gx.pO);
@@ -20351,7 +20609,7 @@ gx.fn = (function($) {
 				if (typeof(validStruct) === 'undefined') {
 					var ctrlIds = gx.fn.controlIds();
 					var len = ctrlIds.length;
-					for (i = 0; i < len; i++) {
+					for (let i = 0; i < len; i++) {
 						validStruct = gx.fn.validStruct(ctrlIds[i]);
 						var sRow = (validStruct.grid != 0) ? '_' + gx.fn.currentGridRow(validStruct.grid) : '';
 						var controlId = currentObject.CmpContext + validStruct.fld + sRow;
@@ -20488,7 +20746,7 @@ gx.thread = {
 		}
 
 		this.nextKey = function (k) {
-			for (i in this.map) {
+			for (var i in this.map) {
 				if (!k) {
 					return i;
 				}
@@ -20526,6 +20784,7 @@ gx.thread = {
 		}
 
 		this.attempt = function (start) {
+			let retVal;
 			for (var j = start; j; j = gx.thread.Mutex.Wait.next(j.c.id)) {
 				if (j.enter || (j.number && (j.number < this.number || (j.number == this.number && j.c.id < this.c.id))))
 					return setTimeout('gx.thread.Mutex.SLICE(' + this.c.id + ',' + j.c.id + ')', 10);
@@ -20670,8 +20929,9 @@ gx.uc = (function ($) {
 				}	
 				return value;
 			};
+	let PostRenderScripts = {};
 	return {
-		PostRenderScripts: {},
+		PostRenderScripts,
 		gxCssClass: 'gx_usercontrol',
 		getNew: function (ParentObject, ControlId, LastId, ClassName, ContainerName, ControlName, FieldName, GridLvl, GridId, GridRow) {
 			var userCtrl;
@@ -20738,8 +20998,12 @@ gx.uc = (function ($) {
 				return ControlId;
 			
 			var vStruct = gx.O.getValidStructFld(ControlId);
-			if(vStruct && vStruct.uc) {
-				var containerName = vStruct.uc.ContainerName;
+			if(vStruct) {
+				var gRow = gx.O.rowPatternRegex.exec(ControlId);
+				gRow = gRow ? gRow[1] : null;
+				var uc = (typeof vStruct.getUCInstance === 'function') ? vStruct.getUCInstance(gRow) : vStruct.uc;
+				if (uc)
+					containerName = uc.ContainerName;
 			}
 			
 			if (containerName) {
@@ -21044,16 +21308,19 @@ gx.uc = (function ($) {
 					this.ParentObject.addUsercontrolBinding(varName, ctrlName, this);
 					this.V2CFunctions.push(function(UC, gRow, readControlValue){
 						var control = ctrlName;
+						var setParentObject = function(varName, member, value) {
+							if (member) {
+								UC.ParentObject[varName][member] = value;
+							}
+							else {
+								UC.ParentObject[varName] = value;
+							}
+						};
 						if (readControlValue) {
 							if (gRow) {
 								control = ctrlName + "_" + gRow;
 							}
-							if (member) {
-								UC.ParentObject[varName][member] = gx.fn.getControlValue(control)[member];
-							}
-							else {
-								UC.ParentObject[varName] = gx.fn.getControlValue(control);
-							}
+							setParentObject(varName,member, member ? gx.fn.getControlValue(control)[member] : gx.fn.getControlValue(control))
 						}
 						var value = (member) ? UC.ParentObject[varName][member]: UC.ParentObject[varName];
 						if (UC.useGxDateForBindings) {
@@ -21066,6 +21333,7 @@ gx.uc = (function ($) {
 									else {
 										value = (new gx.date.gxdate(value, "Y4MD"));
 									}
+									setParentObject(varName,member,value)
 								}
 							}
 						}
@@ -23852,7 +24120,9 @@ gx.core.clientSocket = (function ($) {
 			if (!radioInitialized(rootCtrl)) {
 				rootCtrl.children('label').addClass('gx-radio-label btn btn-default');
 				var disabled = $(el).children().prop('disabled');
-				radioCheckedHelper(rootCtrl);
+				if (rootCtrl.children('[class*="active"]').length === 0) {
+					radioCheckedHelper(rootCtrl);
+				}
 				radioSetEnabled(rootCtrl, !(disabled === true || disabled === 'disabled'));
 				rootCtrl.find('script').remove();
 				rootCtrl.attr('data-toggle', 'buttons');
@@ -24314,7 +24584,7 @@ gx.ui = (function ($) {
 				return this.gridObject() + '.grid';
 			};
 
-			this.render = function (firstTime, fromAutoRefresh, fromCollection, afterRenderCallback) {
+			this.render = function (firstTime, fromAutoRefresh, fromCollection, afterRenderCallback, doneRender) {
 				this.refreshDynProperties();
 				this.properties = [];
 				for (var i = 0; i < this.rows.length; i++) {
@@ -24356,6 +24626,7 @@ gx.ui = (function ($) {
 						afterRenderCallback();
 					}
 				}
+				doneRender();
 				this.autoRefreshing = false;
 			};
 
@@ -25121,7 +25392,7 @@ gx.OldDateTime = function (Fld, Var) {
 gx.dom_i =(function($){
 	return {
 
-	el: function (id, avoidName, avoidSpan, noCaching) {
+	el: function (id, avoidName, avoidSpan, noCaching, selectActive) {
 		//Critical function, changes here impact performance
 		if (!id) {
 			return null;
@@ -25145,7 +25416,8 @@ gx.dom_i =(function($){
 				if (!ctrl[0].id) {
 					ctrl[0].id = id;
 				}
-				return ctrl[0];
+				var checkedControl = Array.from(ctrl).filter(e => e.checked);
+				return checkedControl.length === 0 ? ctrl[0] : checkedControl[0];
 			}	
 			return null;
 		}
@@ -25304,7 +25576,7 @@ gx.dom_i =(function($){
 		var a = atts || d.attributes, i, l, n;
 		if (a) {
 			l = a.length;
-			for (i = 0; i < l; i += 1) {
+			for (let i = 0; i < l; i += 1) {
 				n = a[i].name || a[i];
 				if (typeof d[n] === 'function') {
 					d[n] = null;
@@ -25417,7 +25689,7 @@ gx.dom_i =(function($){
 
 	styles: function () {
 		var sheets = [...document.styleSheets].map(s=>s.href).filter(s=>!gx.lang.emptyObject(s)),
-			sheets2 = [...document.querySelectorAll('style[' + STYLE_ELEMENT_HREF + ']')].map(s=>s.getAttribute(STYLE_ELEMENT_HREF));
+			sheets2 = [...document.querySelectorAll('style[' + gx.html.STYLE_ELEMENT_HREF + ']')].map(s=>s.getAttribute(gx.html.STYLE_ELEMENT_HREF));
 		return [...sheets,...sheets2];
 	},
 
@@ -25638,8 +25910,8 @@ gx.dom_i =(function($){
 	},
 
 	findParentByTagName: function (el, tagName, max) {
-		var parent = el.parentNode;
-		tagName = tagName.toUpperCase();
+		var parent = el.parentNode,
+		tagName = tagName.toUpperCase(),
 		i = 0;
 		while (parent) {
 			if (max && i == max)
@@ -25981,7 +26253,8 @@ gx.dom_i =(function($){
 	isMaskElement: function(el) {
 		return this.hasClass(el, this.MASK_CLASS);
 	},
-	mask: function (el) {
+	mask: function (el, NotificationDelay) {
+		var NotificationDelay = NotificationDelay || 0;
 		el = this.el(el);
 
 		if (el && !this.hasClass(el, this.MASK_RELATIVE_CLASS)) {
@@ -25993,12 +26266,10 @@ gx.dom_i =(function($){
 				$el = $(el);
 
 			$el.css('caret-color', 'transparent');
-		/* 	$el.css('z-index', this.MASK_ZINDEX); */
+		/*$el.css('z-index', this.MASK_ZINDEX); */
 			if (!($el.is("body")) || this.getComputedStyle(el)['position'] != 'static') {
 				this.addClass(el, this.MASK_RELATIVE_CLASS);
 			}
-			
-			
 
 			maskEl = document.createElement("div");
 			maskEl.className = this.MASK_CLASS;
@@ -26013,6 +26284,10 @@ gx.dom_i =(function($){
 			else {
 				el.appendChild(maskEl);
 			}
+			try {
+				maskEl.style.animationDelay = `${NotificationDelay / 2}ms`;
+				maskEl.style.webkitAnimation = `${NotificationDelay / 2}ms`;
+			} catch (e) { }
 			this.addClass(el, this.MASKED_CLASS);
 			
 			if (fixHeight && setExpressionSupported) {
@@ -26554,12 +26829,7 @@ gx.dom_i =(function($){
 			getPopupMinWidth: function () {
 				var currentPopup = gx.popup.getPopup(),
 					minWidth = SMALL_MIN_SIZE;
-				if (!currentPopup) {							
-					return minWidth;
-				}
 
-				minWidth = currentPopup.width;
-				if (currentPopup.autoresize || currentPopup.autoresize === undefined) {
 					var SMALL_MIN_SIZE = 600,
 						MEDIUM_MIN_SIZE = 800,
 						LARGE_MIN_SIZE = 900,
@@ -26568,7 +26838,7 @@ gx.dom_i =(function($){
 						SMALL_BREAK_SIZE = 992,
 						MEDIUM_BREAK_SIZE = 1200;
 
-					var windowWidth = $(currentPopup.window).width();
+					var windowWidth = $(currentPopup ? currentPopup.window:window).width();
 					minWidth = MEDIUM_MIN_SIZE;
 
 					if (windowWidth >= MEDIUM_BREAK_SIZE) {
@@ -26580,7 +26850,7 @@ gx.dom_i =(function($){
 					if (windowWidth < EXTRA_SMALL_BREAK_SIZE) {
 						minWidth = windowWidth - EXTRA_SMALL_SIZE_DELTA;
 					}								
-				}
+
 				return minWidth;
 			},
 
@@ -27316,7 +27586,7 @@ gx.evt_i = (function($) {
 		var vStruct = gxO.getValidStructFld(Ctrl),
 		gxCurrentRow;
 		if (vStruct && vStruct.evt_cvc) {
-			gx.evt.startValidation(vStruct.gxgrid);
+			var context = gx.evt.startValidation(vStruct.gxgrid);
 			gx.evt.stopPropagation(evt);
 			if (vStruct.grid) {
 				gx.evt.setEventRow(gxO, Ctrl);
@@ -27324,7 +27594,7 @@ gx.evt_i = (function($) {
 			}
 			gx.fn.disableKeys();
 			return gxO[vStruct.evt_cvc].call(gxO, gxCurrentRow).always( function () {
-				gx.evt.endValidation(vStruct.gxGrid, gx.evt.types.VALUECHANGED);
+				gx.evt.endValidation(context, gx.evt.types.VALUECHANGED);
 				gx.fn.enableKeys();
 			});
 		}
@@ -27343,7 +27613,7 @@ gx.evt_i = (function($) {
 			var isFreestyleCtrl = vStruct.gxgrid && vStruct.gxgrid.isFreestyle;
 			var evt_cvcing = vStruct.evt_cvcing && !vStruct.gxsgprm;  //Not supported when Suggest is ON.
 			if (evt_cvcing) 
-				gx.evt.startValidation(vStruct.gxgrid);	
+				var context = gx.evt.startValidation(vStruct.gxgrid);	
 			if (evt_cvcing || isFreestyleCtrl) {
 				var gxOld = gx.O;
 				gx.setGxO(gxO);
@@ -27357,7 +27627,7 @@ gx.evt_i = (function($) {
 					gx.evt.setEventRow(gxO, Ctrl);
 				}
 				return gxO[vStruct.evt_cvcing].call(gxO).always(function () {
-					gx.evt.endValidation(vStruct.gxGrid, gx.evt.types.VALUECHANGING);
+					gx.evt.endValidation(context, gx.evt.types.VALUECHANGING);
 				});
 			}
 		}
@@ -27612,9 +27882,9 @@ gx.evt_i = (function($) {
 						if (/[\+\-]/.test(event.key)) {
 							return !gx.text.contains( value, event.key) || gx.text.contains(selectedText, event.key)
 						}
-						digits = value.split("").filter(function(c){ return c>='0' && c<='9'}).length;							
+						let digits = value.split("").filter(function(c){ return c>='0' && c<='9'}).length;							
 						value = gx.num.normalize_decimal_sep(pic, gx.thousandSeparator, gx.decimalPoint, value);
-						picinputs = integers + (value.indexOf(gx.decimalPoint) == -1 ? 0 : decimals);
+						let picinputs = integers + (value.indexOf(gx.decimalPoint) == -1 ? 0 : decimals);
 						return ((digits - selLen) < picinputs);
 					}	
 				}	
@@ -27815,6 +28085,8 @@ gx.evt_i = (function($) {
 
 	execUsrOnchange: function (Ctrl) {
 		var jsCode = '';
+		if (!gx.dom.hasAttribute(Ctrl, "data-gxoch0"))
+			return true;
 		try { jsCode = Ctrl.attributes["data-gxoch0"].value; }
 		catch (e) {
 			return true;
@@ -27941,14 +28213,15 @@ gx.evt_i = (function($) {
 		return changed;
 	},
 
-	setGridEvt: function (gridId, rowId) {
+	setGridEvt: function (gridId, rowId, gxO) {
+		var gxO = gxO || gx.O;
 		if (!gx.isInputEnabled())
 			return;
 		if (!gx.lang.emptyObject(gridId)) {
 			if (gx.lang.emptyObject(rowId)) {
 				var gridObj = gx.fn.getGridObj(gridId);
 				if (gridObj) {
-					rowId = gx.fn.getHidden(gx.O.CmpContext + gridObj.gridName.toUpperCase() + "_ROW");
+					rowId = gx.fn.getHidden(gxO.CmpContext + gridObj.gridName.toUpperCase() + "_ROW");
 				}
 			}
 			gx.fn.setHidden("_EventGridId", gridId);
@@ -28094,10 +28367,11 @@ gx.evt_i = (function($) {
 			gx.csv.validatingGrid = gxgrid;
 			gx.csv.validating += 1;
 		}
+		return {gxgrid,force}
 	},
 
-	endValidation: function (gxgrid, validKind) {
-		if (!gxgrid || gxgrid === gx.csv.validatingGrid){
+	endValidation: function (context, validKind) {
+		if (context.gxgrid || context.force){
 			gx.csv.validating -= 1;
 			if (gx.csv.validating === 0) {
 				gx.csv.validatingGrid = null;
@@ -28172,7 +28446,7 @@ gx.evt_i = (function($) {
 			return;
 		}
 
-		var gxObj = gx.setGxObyCtx(cmpCtx, inMaster);
+		var gxObj = gx.getObj(cmpCtx, inMaster);
 		var rowGridId = gridId;
 		var rowId_res = this.EVT_ROW_ID_REGEXP.exec(evt);
 		var rowId = (rowId_res && rowId_res.length > 1) ? rowId_res[1] : null;
@@ -28190,7 +28464,6 @@ gx.evt_i = (function($) {
 					callFailCallback();
 					return;
 				}
-				gx.setGxObyCtx(cmpCtx, inMaster);
 				if (srvCommand) {
 					gx.evt.srvCommand = true;
 					if (ctrl) {
@@ -28204,14 +28477,14 @@ gx.evt_i = (function($) {
 				}
 				if (gx.csv.lastId > 0 && !gx.csv.validatingAll) {
 					
-					var vStruct = gx.O.getValidStruct(gx.csv.lastId);
-					var CtrlId = (gx.evt.isEnterEvtCtrl(ctrl) && ctrl.id > 0) ? gx.O.getValidStructId(ctrl.id) : gx.O.focusControl;
+					var vStruct = gxObj.getValidStruct(gx.csv.lastId);
+					var CtrlId = (gx.evt.isEnterEvtCtrl(ctrl) && ctrl.id > 0) ? gxObj.getValidStructId(ctrl.id) : gxObj.focusControl;
 					var goForward = CtrlId < gx.csv.lastId; 
 					if ((goForward && (gx.evt.isEnterEvtCtrl(ctrl) || (vStruct && vStruct.isuc)))  || enterKeyPressed)
 					{
 						gx.csv.validatingAll = true;
-						gx.O.fromValid = gx.csv.lastId;
-						gx.O.toValid = gx.csv.lastId + 1;
+						gxObj.fromValid = gx.csv.lastId;
+						gxObj.toValid = gx.csv.lastId + 1;
 						gx.csv.validateAll();		
 						gx.csv.validatingAll = false;
 					}
@@ -28225,11 +28498,11 @@ gx.evt_i = (function($) {
 					gx.evt.setProcessing({status:true, ctx:"notifyValidation"});
 					var fnc_always = function() {gx.evt.setProcessing({status:false, ctx:"notifyValidation"})};
 					var oldDoPost = function() {
-							gx.ajax.doPost((gx.http.useNamedParameters(gx.ajax.selfUrl())? 'gxevent=' : '') + gx.ajax.encryptParms(gx.pO, 'gxajaxEvt'), sync, true, gridId, rowId, callback);
+							gx.ajax.doPost((gx.http.useNamedParameters(gx.ajax.selfUrl())? 'gxevent=' : '') + gx.ajax.encryptParms(gx.pO, 'gxajaxEvt'), sync, true, gridId, rowId, callback, gxObj, evt);
 						fnc_always();
 					};
 					if (gx.pO.supportAjaxEvents) {
-						gx.evt.dispatcher.dispatch(evt, gx.O, rowGridId, rowId, true, undefined, disableForm)
+						gx.evt.dispatcher.dispatch(evt, gxObj, rowGridId, rowId, true, undefined, disableForm)
 							.done(function(success) {  
 								(!success && callFailCallback());
 								(callback && callback(success)); 
@@ -28583,7 +28856,7 @@ gx.evt_i = (function($) {
 				};
 
 				// Run each block after the previous has finished
-				runCount = 0;
+				var runCount = 0;
 				var serialRunner = this.serialRunner;
 				var runner = function () {
 					if (runCount < messages.length) {
@@ -28986,7 +29259,7 @@ gx.csv_i =  (function($) {
 					var jsCode = '';
 					if (i != -1 && (bForceCheck || (Ctrl.getAttribute(gx.csv.GX_VALID_ATTRIBUTE) != "1"))) {
 						gx.csv.currentId = i;
-						gx.evt.startValidation(validStruct.gxgrid, true);
+						var context = gx.evt.startValidation(validStruct.gxgrid, true);
 						gx.csv.refreshVars(validStruct);
 						
 						var vStructValidCallback = function (validRet) {
@@ -29000,7 +29273,7 @@ gx.csv_i =  (function($) {
 							if (gx.csv.anyError)
 								validRet = !gx.csv.anyError;
 							if (!validRet) {
-								gx.evt.endValidation();
+								gx.evt.endValidation(context);
 								deferred.resolve(false);
 								return deferred.promise();
 							}
@@ -29027,7 +29300,7 @@ gx.csv_i =  (function($) {
 											gx.fn.setControlGxValid(DomCtrl, "0");
 										}
 									}
-									gx.evt.endValidation();
+									gx.evt.endValidation(context);
 								}
 								catch (e) {
 									gx.dbg.logEx(e, 'gxapi.js', 'validate');
@@ -29379,7 +29652,7 @@ gx.csv_i =  (function($) {
 				if (gx.O.fromValid > firstGridCtrl)
 					gx.O.fromValid = firstGridCtrl;
 				gx.csv.lastRow[GridId] = GXValidRow;
-				Gx_BScreen = 1;
+				gx.O.Gx_BScreen = 1;
 			},
 
 			targetRowIsMod: function (vStructId) {
@@ -29571,6 +29844,8 @@ gx.http_i = (function ($) {
 		var GX_STATE_ELEMENT_ID = "GXState";
 		var GX_AJAX_MULTIPART_ELEMENT_ID = "GXAjaxMultipart";
 		var GX_AJAX_AUTH_TOKEN = "X-GXAUTH-TOKEN";
+		var X_CSRF_TOKEN_HEADER = 'X-XSRF-TOKEN';
+		var X_CSRF_TOKEN_COOKIE = 'XSRF-TOKEN';
 		
 		return {
 			STATE_UNSENT: 0,
@@ -29847,9 +30122,6 @@ gx.http_i = (function ($) {
 				}
 				else {
 					setTimeout(function () {
-						if (gx.pO != gxO)
-							gxO.endFeedback();
-						else
 							gx.ajax.enableForm();
 					}, 200);
 				}
@@ -30103,6 +30375,10 @@ gx.http_i = (function ($) {
 					else
 						req.setRequestHeader(GX_AJAX_AUTH_TOKEN, token.value);	
 				}					
+				var csrfToken = gx.http.getCookie(X_CSRF_TOKEN_COOKIE);
+				if (csrfToken) {
+					req.setRequestHeader(X_CSRF_TOKEN_HEADER, csrfToken);
+				}
 			},
 			
 			useReadyStateEvent: function () {
@@ -31569,6 +31845,9 @@ gx.fx.obs.addObserver('gx.onload', gx, function () {
 				}
 				obj = grid2obj(obj);
 				for (; obj && pty < len - 1; pty ++) {
+					if (!obj[bcProp[pty]]) {
+						obj[bcProp[pty]] = {};
+					}
 					obj = grid2obj(obj[bcProp[pty]]);
 				}
 				if (obj) {
@@ -31966,9 +32245,14 @@ gx.fx.obs.addObserver('gx.onload', gx, function () {
 	};
 
 
+	prot.executeClientEvent = function (taskFnc, parameters) {
+		var deferred = gx.$.Deferred();
+		Promise.resolve(taskFnc.apply(this, parameters)).then ((result)=> { deferred.resolve() });
+		return deferred.promise();
+	};
+	
 	prot.executeServerEvent = function (EvtName, Synch, EvtRow, Force, GlobalContextEvent) {
 		var deferred = $.Deferred();
-		gx.O = this;
 		gx.csv.cmpCtx = this.CmpContext;
 		var synchReq = true;
 		if ((Synch != undefined) && (Synch == false))
@@ -32440,7 +32724,9 @@ gx.fx.obs.addObserver('gx.onload', gx, function () {
 						gx.evt.onchange(el);
 					}
 				}
-				cancelEvent(domEvt, true, preventDefault);
+				if (!gx.dom.isRadio(el)) {
+					cancelEvent(domEvt, true, preventDefault);
+				}
 				break;
 		}
 	};
@@ -32484,7 +32770,7 @@ gx.fx.obs.addObserver('gx.onload', gx, function () {
 					if (vStruct.fld) {
 						selectorBase = cmpContext + vStruct.fld + (vStruct.gxvar ? "" : mpSufix);
 						selectorReadOnly = "#span_" + selectorBase;
-						selector = "#" + selectorBase;
+						selector = vStruct.ctrltype === 'radio' ? `[name=${selectorBase}]` : `#${selectorBase}`;
 						try {
 							if (vStruct.gxvar && $(selectorReadOnly).length > 0) {
 								$controlElement = $(selectorReadOnly);
@@ -32860,12 +33146,8 @@ gx.fx.obs.addObserver('gx.onload', gx, function () {
 			this[uriProperty] = value;
 	};
 
-	var getNotificationDelay = function () {
-		return gx.NotificationDelay === undefined ? 1000 : gx.NotificationDelay;
-	};
-	
 	prot.getFeedbackContainer = function() {
-		return (this == gx.pO) ? document.body : this.getContainer();
+		return (this == gx.pO || (gx.pO.MasterPage && this == gx.pO.MasterPage)) ? document.body : this.getContainer();
 	};
  
 	prot.startFeedback = function(immediately, swallowKeys) {
@@ -32875,13 +33157,13 @@ gx.fx.obs.addObserver('gx.onload', gx, function () {
 			gx.fn.disableKeys();
 		}
 
-		var feedbackDelay = (immediately === true)? 0: getNotificationDelay(),
+		var feedbackDelay = (immediately === true)? 0: gx.getNotificationDelay(),
 			timeoutObj;
 
 		var fn = function() {
 			var container = this.getFeedbackContainer();
 			if (container) {
-				gx.dom.mask(container);
+				gx.dom.mask(container, feedbackDelay);
 			}
 		};
 
@@ -33015,7 +33297,7 @@ gx.fx.obs.addObserver('gx.onload', gx, function () {
 		var target;
 		this.targetComponents = this.targetComponents || {};
 		for (target in this.targetComponents) {
-			if (targetComponents.hasOwnProperty(target)) {
+			if (this.targetComponents.hasOwnProperty(target)) {
 				gx.pO.registerComponent(this.targetComponents[target]);
 			}
 		}
@@ -33136,7 +33418,7 @@ gx.printing = (function($) {
     printDirect: function(printInfo) {		
     	if (printInfo) {
 			gx.printing._deinit();		
-			$iframe = $('<iframe>');
+			let $iframe = $('<iframe>');
 			$iframe.attr('id', gx.printing.IFrameId)
 			.css({'visibility':'hidden', 'position': 'absolute', 'top': '-1000px', 'left': '-1000px'});			
 			$(document.body).append($iframe)
@@ -33178,7 +33460,7 @@ gx.thread = {
 		}
 
 		this.nextKey = function (k) {
-			for (i in this.map) {
+			for (var i in this.map) {
 				if (!k) {
 					return i;
 				}
@@ -33216,6 +33498,7 @@ gx.thread = {
 		}
 
 		this.attempt = function (start) {
+			let retVal;
 			for (var j = start; j; j = gx.thread.Mutex.Wait.next(j.c.id)) {
 				if (j.enter || (j.number && (j.number < this.number || (j.number == this.number && j.c.id < this.c.id))))
 					return setTimeout('gx.thread.Mutex.SLICE(' + this.c.id + ',' + j.c.id + ')', 10);
@@ -33549,7 +33832,8 @@ gx.base64 = {
 	bytesFromUTF8Bytes: function (Arr) {
 		var outArr = [];
 		var i = 0;
-		var c = c1 = c2 = 0;
+		var c, c1, c2;
+		c = c1 = c2 = 0;
 		var len = Arr.length;
 		while (i < len) {
 			c = Arr[i];
@@ -33564,7 +33848,7 @@ gx.base64 = {
 			}
 			else {
 				c2 = Arr[i + 1];
-				c3 = Arr[i + 2];
+				let c3 = Arr[i + 2];
 				outArr.push(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
 				i += 3;
 			}
@@ -33846,8 +34130,9 @@ gx.util.alert = (function ($) {
 })(gx.$);
 
 gx.geolocation = (function ($) {
+	var attachedCtrls;
 	return {
-		attachedCtrls: null,
+		attachedCtrls,
 
 		_init: function () {
 			attachedCtrls = [];
@@ -33859,7 +34144,7 @@ gx.geolocation = (function ($) {
 			if (navigator.geolocation)
 				navigator.geolocation.getCurrentPosition(this.positionHandler, this.handle_errors);
 			else {
-				msg = "Your browser does not support HTML5 Geolocalization";
+				let msg = "Your browser does not support HTML5 Geolocalization";
 				gx.pO.clearMessages();
 				gx.pO.addMessage(msg);
 				gx.pO.refreshOutputs([]);
@@ -34959,14 +35244,15 @@ gx.popup = (function ($) {
 
 		openPopup: function (popupData, gxO) {
 			var currentPopup = this.getPopup();
+			var gxO = gxO || gx.O;
 			var grid, i, len, vStruct;
-			if (!currentPopup || currentPopup.Opener !== gx.O || !gx.lang.isArray(popupData)) {
+			if (!currentPopup || (currentPopup.Opener !== gxO && (!currentPopup.Opener.MasterPage || currentPopup.Opener.MasterPage !== gxO )) || !gx.lang.isArray(popupData)) {
 				var popup = new this.Popup(popupData, false);
-				popup.Opener = gxO || gx.O;
+				popup.Opener = gxO;
 				for (i=0, len=popup.ReturnParms.length; i<len; i++) {
 					vStruct = gx.fn.vStructForVar(popup.ReturnParms[i]);
 					if (vStruct && vStruct.grid) {
-						grid = gx.O.getGridById(vStruct.grid);
+						grid = gxO.getGridById(vStruct.grid);
 						if (grid) {
 							break;
 						}
@@ -34996,17 +35282,24 @@ gx.popup = (function ($) {
 				if (CmpCtx) {
 					gx.setGxO(CmpCtx, InMasterPage);
 				}
-				var Ctrl = PgmParms[0].Ctrl;
+				var Ctrl = document.activeElement;
 				var isUserControl = false;
 				var rowGridId;
 				var rowId;
 				var grid;
 				if (Ctrl) {
 					rowGridId = gx.fn.rowGridId(Ctrl);
-					rowId = gx.fn.controlRowId(Ctrl);
+					rowId = gx.fn.controlRowIndex(Ctrl);
 					if (!gx.lang.emptyObject(rowGridId) && !gx.lang.emptyObject(rowId)) {
 						gx.csv.lastGrid = rowGridId;
 						gx.fn.setCurrentGridRow(rowGridId, rowId);
+						var gxO = gx.O,
+						lastId = gx.csv.lastId;
+						var vStruct = gx.fn.validStruct(lastId, gxO);
+						if (vStruct) {
+							var lastRow = gx.csv.lastRow[vStruct.grid];
+						}
+						gx.csv.checkRowChange( lastId, false, gxO, lastRow);
 					}
 				}
 				else {
@@ -36050,14 +36343,16 @@ gx.popup = (function ($) {
 
 				if (insideiFrame) {
 					var docInfo = this.getiFrameSizeInfo(pDoc);
+					var windowTopScroll = 0;
 					if (docInfo.accessParentFrame) {						
-						scrollTop = docInfo.scrollTop;
-						vMaxHeight = docInfo.maxHeight + Math.min(window.top.document.body.scrollTop - docInfo.y, 0) - 50;  //50 = Estimated PopupHeader Height
-						$cEl.css('max-height', vMaxHeight).parent().css('margin-top', '0px');
-						var minY = Math.max(window.top.document.body.scrollTop - docInfo.y, 0);
-						var realheight = Math.min(frameDoc.body.offsetHeight, vMaxHeight);						
-						this.move(id, scrollLeft, minY + scrollTop + ((vMaxHeight - realheight) / 2));						
+						windowTopScroll = window.top.document.body.scrollTop;
 					}
+					scrollTop = docInfo.scrollTop;
+					vMaxHeight = docInfo.maxHeight + Math.min(windowTopScroll - docInfo.y, 0) - 50;  //50 = Estimated PopupHeader Height
+					$cEl.css('max-height', vMaxHeight).parent().css('margin-top', '0px');
+					var minY = Math.max(windowTopScroll - docInfo.y, 0);
+					var realheight = Math.min(frameDoc.body.offsetHeight, vMaxHeight);						
+					this.move(id, scrollLeft, minY + scrollTop + ((vMaxHeight - realheight) / 2));						
 				}
 
 				var width, height;
@@ -36607,8 +36902,7 @@ gx.ajax = (function ($) {
 							inputParms.push((value !== undefined)? value: null);
 						}
 						else {
-							var vStruct_arr = this.getParmVarVStruct(parm);
-							vStruct = vStruct_arr[0];
+							var call_c2v_arr = vStruct_arr => {
 							vStruct_arr.forEach( (vStruct) => {
 							if (vStruct && typeof (vStruct.c2v) == 'function' && typeof (vStruct.val) == 'function') {
 								var vRow = (vStruct.grid === this.grid)? this.row: gx.fn.currentGridRowImpl(vStruct.grid);
@@ -36623,6 +36917,14 @@ gx.ajax = (function ($) {
 									uc.execC2VFunctions();
 								}
 							});
+							}
+							var vStruct_arr = this.getParmVarVStruct(parm);
+							vStruct = vStruct_arr[0];
+							call_c2v_arr( vStruct_arr);
+							if (!vStruct) {
+								vStruct_arr = this.getParmVarVStructGrid(parm, gx.O);
+								call_c2v_arr( vStruct_arr);
+							}
 							if (typeof (this.gxO[parm.av]) == 'function') {
 								value = this.gxO[parm.av](this.row);
 							}
@@ -36730,6 +37032,22 @@ gx.ajax = (function ($) {
 						}
 					}
 				},
+				
+				getParmVarVStructGrid:function(parm, gxO) {
+					var vStruct_arr = [],
+						grids = gxO.getAllGridsForColl(parm.av);
+					if (grids) {
+						grids.forEach(grid => {
+								var GXValidFnc = gxO.GXValidFnc,
+									gridId = grid.gridId;
+								GXValidFnc.filter(fnc => fnc.grid === gridId).forEach(field => {
+									vStruct = gxO.getValidStructFld(field.fld);
+									vStruct && vStruct.gxvar && vStruct_arr.push( vStruct);
+							});
+						});
+					}
+					return vStruct_arr;
+				},
 
 				getParmVarVStruct: function (parm) {
 					var gridObject, 
@@ -36745,7 +37063,7 @@ gx.ajax = (function ($) {
 					}
 					else {
 						if (parm.fld !== undefined) {
-							validStruct_arr.push(parm.fld ? this.gxO.getValidStructFld(parm.fld) : null);
+								validStruct_arr.push( parm.fld ? this.gxO.getValidStructFld(parm.fld) : null);
 						}
 						else {
 							if (this.grid && this.row) {
@@ -36937,28 +37255,40 @@ gx.ajax = (function ($) {
 			return (gxObj.AjaxSecurity) ? gx.sec.encrypt(parms) : parms;
 		},
 
-		doPost: function (ParmString, Synch, disableForm, gridId, rowId, callback) {
+		doPost: function (ParmString, Synch, disableForm, gridId, rowId, callback, gxO, evt) {
 			if (disableForm !== false) {
-				gx.O.startFeedback();
+				gxO.startFeedback();
 			}
 			gx.fx.obs.notify('gx.onbeforeevent', [ParmString, Synch]);
 			gx.fn.objectOnpost();
-			gx.http.saveState();
 			gx.fn.forceEnableControls(false);
-			var postInfo = this.getPostInfo(gx.O, ParmString, Synch);
+			var postInfo = this.getPostInfo(gxO, ParmString, Synch);
 			postInfo.rowId = rowId;
 			postInfo.gridId = gridId;
 			postInfo.url = gx.ajax.serviceUrl(ParmString);
-			var gxo = gx.O;
+			postInfo.evt = evt;
 			postInfo.always = function () { 
 				if (disableForm !== false) {
-					gxo.endFeedback();
+					gxO.endFeedback();
 				}
 				if (callback) {
 					callback();
 				}
 			};
+			fnc = function() {
+				if (evt) {
+					gx.fn.setHidden("_EventName", evt);
+				}
+				gx.evt.setGridEvt(gridId, rowId, gxO);
+				gx.http.saveState();
 			gx.http.doCall(postInfo);
+			};
+			if (Synch) {
+				gx.lang.doCallTimeout(fnc, this, [], gx.evt.oldDoPostDelay); 
+			}
+			else {
+				fnc.bind(this)();
+			}
 		},
 
 		getPostInfo: function (gxO, ParmString, Synch) {
@@ -38395,18 +38725,18 @@ gx.util.balloon = {
 
  Copyright (c) Jon Nylander
 */
-(function(r){var l=function(){var t={"America/Denver":["America/Mazatlan"],"Europe/London":["Africa/Casablanca"],"America/Chicago":["America/Mexico_City"],"America/Asuncion":["America/Campo_Grande","America/Santiago"],"America/Montevideo":["America/Sao_Paulo","America/Santiago"],"Asia/Beirut":"Asia/Amman Asia/Jerusalem Europe/Helsinki Asia/Damascus Africa/Cairo Asia/Gaza Europe/Minsk".split(" "),"Pacific/Auckland":["Pacific/Fiji"],"America/Los_Angeles":["America/Santa_Isabel"],"America/New_York":["America/Havana"],
+(function(n){var i=function(){var n={"America/Denver":["America/Mazatlan"],"Europe/London":["Africa/Casablanca"],"America/Chicago":["America/Mexico_City"],"America/Asuncion":["America/Campo_Grande","America/Santiago"],"America/Montevideo":["America/Sao_Paulo","America/Santiago"],"Asia/Beirut":"Asia/Amman Asia/Jerusalem Europe/Helsinki Asia/Damascus Africa/Cairo Asia/Gaza Europe/Minsk".split(" "),"Pacific/Auckland":["Pacific/Fiji"],"America/Los_Angeles":["America/Santa_Isabel"],"America/New_York":["America/Havana"],
 "America/Halifax":["America/Goose_Bay"],"America/Godthab":["America/Miquelon"],"Asia/Dubai":["Asia/Yerevan"],"Asia/Jakarta":["Asia/Krasnoyarsk"],"Asia/Shanghai":["Asia/Irkutsk","Australia/Perth"],"Australia/Sydney":["Australia/Lord_Howe"],"Asia/Tokyo":["Asia/Yakutsk"],"Asia/Dhaka":["Asia/Omsk"],"Asia/Baku":["Asia/Yerevan"],"Australia/Brisbane":["Asia/Vladivostok"],"Pacific/Noumea":["Asia/Vladivostok"],"Pacific/Majuro":["Asia/Kamchatka","Pacific/Fiji"],"Pacific/Tongatapu":["Pacific/Apia"],"Asia/Baghdad":["Europe/Minsk",
-"Europe/Moscow"],"Asia/Karachi":["Asia/Yekaterinburg"],"Africa/Johannesburg":["Asia/Gaza","Africa/Cairo"]},u=function(f){f=-f.getTimezoneOffset();return null!==f?f:0},w=function(){var f=u(new Date(2014,0,2)),a=u(new Date(2014,5,2)),b=f-a;return 0>b?f+",1":0<b?a+",1,s":f+",0"},x=function(){if("undefined"!==typeof Intl&&"undefined"!==typeof Intl.DateTimeFormat){var f=Intl.DateTimeFormat();if("undefined"!==typeof f&&"undefined"!==typeof f.resolvedOptions&&(f=f.resolvedOptions().timeZone)&&(-1<f.indexOf("/")||
-"UTC"===f))return f}},v=function c(a,b,d){"undefined"===typeof b&&(b=864E5,d=36E5);var h=(new Date(a.getTime()-b)).getTime();a=a.getTime()+b;for(var n=(new Date(h)).getTimezoneOffset(),g=null;h<a-d;){var p=new Date(h);if(p.getTimezoneOffset()!==n){g=p;break}h+=d}return 864E5===b?c(g,36E5,6E4):36E5===b?c(g,6E4,1E3):g},y=function(a,b,d,c){if("N/A"!==d)return d;if("Asia/Beirut"===b){if("Africa/Cairo"===c.name&&13983768E5===a[6].s&&14116788E5===a[6].e||"Asia/Jerusalem"===c.name&&13959648E5===a[6].s&&
-14118588E5===a[6].e)return 0}else if("America/Santiago"===b){if("America/Asuncion"===c.name&&14124816E5===a[6].s&&1397358E6===a[6].e||"America/Campo_Grande"===c.name&&14136912E5===a[6].s&&13925196E5===a[6].e)return 0}else if("America/Montevideo"===b){if("America/Sao_Paulo"===c.name&&14136876E5===a[6].s&&1392516E6===a[6].e)return 0}else if("Pacific/Auckland"===b&&"Pacific/Fiji"===c.name&&14142456E5===a[6].s&&13961016E5===a[6].e)return 0;return d},z=function(a,b){for(var d={},c=l.olson.dst_rules.zones,
-h=c.length,n=t[b],g=0;g<h;g++){var p=c[g];var k=c[g];for(var m=0,e=0;e<a.length;e++)if(k.rules[e]&&a[e]){if(a[e].s>=k.rules[e].s&&a[e].e<=k.rules[e].e)m=0,m+=Math.abs(a[e].s-k.rules[e].s),m+=Math.abs(k.rules[e].e-a[e].e);else{m="N/A";break}if(864E6<m){m="N/A";break}}k=m=y(a,b,m,k);"N/A"!==k&&(d[p.name]=k)}for(var q in d)if(d.hasOwnProperty(q))for(a=0;a<n.length;a++)if(n[a]===q)return q;return b},A=function(a){var b=function(){for(var d=[],c=0;c<l.olson.dst_rules.years.length;c++){var h=l.olson.dst_rules.years[c];
-var n=(new Date(h,0,1,0,0,1,0)).getTime();h=(new Date(h,12,31,23,59,59)).getTime();for(var g=(new Date(n)).getTimezoneOffset(),p=null,k=null;n<h-864E5;){var m=new Date(n),e=m.getTimezoneOffset();e!==g&&(e<g&&(p=m),e>g&&(k=m),g=e);n+=864E5}h=p&&k?{s:v(p).getTime(),e:v(k).getTime()}:!1;d.push(h)}return d}();return function(d){for(var c=0;c<d.length;c++)if(!1!==d[c])return!0;return!1}(b)?z(b,a):a};return{determine:function(){var a=navigator.userAgent.toLowerCase(),b=x();b||(-1!=a.indexOf("firefox")&&
-"undefined"!==typeof Intl&&"undefined"!==typeof Intl.DateTimeFormat&&(a=Intl.DateTimeFormat(void 0,{timeZoneName:"long"}).format(new Date).toLowerCase(),-1!=a.indexOf("montevideo")||-1!=a.indexOf("uruguay"))&&(b="America/Montevideo"),b||(b=l.olson.timezones[w()]),"undefined"!==typeof t[b]&&(b=A(b)));return{name:function(){return b}}}}}();l.olson=l.olson||{};l.olson.timezones={"-720,0":"Etc/GMT+12","-660,0":"Pacific/Pago_Pago","-660,1,s":"Pacific/Apia","-600,1":"America/Adak","-600,0":"Pacific/Honolulu",
+"Europe/Moscow"],"Asia/Karachi":["Asia/Yekaterinburg"],"Africa/Johannesburg":["Asia/Gaza","Africa/Cairo"]},p=function(d){d=-d.getTimezoneOffset();return null!==d?d:0},r=function(){var d=p(new Date(2014,0,2)),a=p(new Date(2014,5,2)),b=d-a;return 0>b?d+",1":0<b?a+",1,s":d+",0"},s=function(){var d;if(!("undefined"===typeof Intl||"undefined"===typeof Intl.DateTimeFormat))if(d=Intl.DateTimeFormat(),!("undefined"===typeof d||"undefined"===typeof d.resolvedOptions))if((d=d.resolvedOptions().timeZone)&&(-1<
+d.indexOf("/")||"UTC"===d))return d},q=function a(b,g,c){"undefined"===typeof g&&(g=864E5,c=36E5);for(var f=(new Date(b.getTime()-g)).getTime(),b=b.getTime()+g,i=(new Date(f)).getTimezoneOffset(),h=null;f<b-c;){var m=new Date(f);if(m.getTimezoneOffset()!==i){h=m;break}f+=c}return 864E5===g?a(h,36E5,6E4):36E5===g?a(h,6E4,1E3):h},t=function(a,b,g,c){if("N/A"!==g)return g;if("Asia/Beirut"===b){if("Africa/Cairo"===c.name&&13983768E5===a[6].s&&14116788E5===a[6].e||"Asia/Jerusalem"===c.name&&13959648E5===
+a[6].s&&14118588E5===a[6].e)return 0}else if("America/Santiago"===b){if("America/Asuncion"===c.name&&14124816E5===a[6].s&&1397358E6===a[6].e||"America/Campo_Grande"===c.name&&14136912E5===a[6].s&&13925196E5===a[6].e)return 0}else if("America/Montevideo"===b){if("America/Sao_Paulo"===c.name&&14136876E5===a[6].s&&1392516E6===a[6].e)return 0}else if("Pacific/Auckland"===b&&"Pacific/Fiji"===c.name&&14142456E5===a[6].s&&13961016E5===a[6].e)return 0;return g},u=function(a,b){for(var g={},c=i.olson.dst_rules.zones,
+f=c.length,l=n[b],h=0;h<f;h++){var m=c[h],j;j=c[h];for(var k=0,e=0;e<a.length;e++)if(j.rules[e]&&a[e]){if(a[e].s>=j.rules[e].s&&a[e].e<=j.rules[e].e)k=0,k+=Math.abs(a[e].s-j.rules[e].s),k+=Math.abs(j.rules[e].e-a[e].e);else{k="N/A";break}if(864E6<k){k="N/A";break}}j=k=t(a,b,k,j);"N/A"!==j&&(g[m.name]=j)}for(var o in g)if(g.hasOwnProperty(o))for(c=0;c<l.length;c++)if(l[c]===o)return o;return b},v=function(a){var b=function(){for(var a=[],b=0;b<i.olson.dst_rules.years.length;b++){var f;f=i.olson.dst_rules.years[b];
+var l=(new Date(f,0,1,0,0,1,0)).getTime();f=(new Date(f,12,31,23,59,59)).getTime();for(var h=(new Date(l)).getTimezoneOffset(),m=null,j=null;l<f-864E5;){var k=new Date(l),e=k.getTimezoneOffset();e!==h&&(e<h&&(m=k),e>h&&(j=k),h=e);l+=864E5}f=m&&j?{s:q(m).getTime(),e:q(j).getTime()}:!1;a.push(f)}return a}();return function(a){for(var b=0;b<a.length;b++)if(!1!==a[b])return!0;return!1}(b)?u(b,a):a};return{determine:function(){var a=navigator.userAgent.toLowerCase(),b=s();if(!b){if(-1!=a.indexOf("firefox")&&
+("undefined"!==typeof Intl&&"undefined"!==typeof Intl.DateTimeFormat)&&(a=Intl.DateTimeFormat(void 0,{timeZoneName:"long"}).format(new Date).toLowerCase(),-1!=a.indexOf("montevideo")||-1!=a.indexOf("uruguay")))b="America/Montevideo";b||(b=i.olson.timezones[r()]);"undefined"!==typeof n[b]&&(b=v(b))}return{name:function(){return b}}}}}();i.olson=i.olson||{};i.olson.timezones={"-720,0":"Etc/GMT+12","-660,0":"Pacific/Pago_Pago","-660,1,s":"Pacific/Apia","-600,1":"America/Adak","-600,0":"Pacific/Honolulu",
 "-570,0":"Pacific/Marquesas","-540,0":"Pacific/Gambier","-540,1":"America/Anchorage","-480,1":"America/Los_Angeles","-480,0":"Pacific/Pitcairn","-420,0":"America/Phoenix","-420,1":"America/Denver","-360,0":"America/Guatemala","-360,1":"America/Chicago","-360,1,s":"Pacific/Easter","-300,0":"America/Bogota","-300,1":"America/New_York","-270,0":"America/Caracas","-240,1":"America/Halifax","-240,0":"America/Santo_Domingo","-240,1,s":"America/Asuncion","-210,1":"America/St_Johns","-180,1":"America/Godthab",
 "-180,0":"America/Argentina/Buenos_Aires","-180,1,s":"America/Montevideo","-120,0":"America/Noronha","-120,1":"America/Noronha","-60,1":"Atlantic/Azores","-60,0":"Atlantic/Cape_Verde","0,0":"UTC","0,1":"Europe/London","60,1":"Europe/Berlin","60,0":"Africa/Lagos","60,1,s":"Africa/Windhoek","120,1":"Asia/Beirut","120,0":"Africa/Johannesburg","180,0":"Asia/Baghdad","180,1":"Europe/Moscow","210,1":"Asia/Tehran","240,0":"Asia/Dubai","240,1":"Asia/Baku","270,0":"Asia/Kabul","300,1":"Asia/Yekaterinburg",
 "300,0":"Asia/Karachi","330,0":"Asia/Kolkata","345,0":"Asia/Kathmandu","360,0":"Asia/Dhaka","360,1":"Asia/Omsk","390,0":"Asia/Rangoon","420,1":"Asia/Krasnoyarsk","420,0":"Asia/Jakarta","480,0":"Asia/Shanghai","480,1":"Asia/Irkutsk","525,0":"Australia/Eucla","525,1,s":"Australia/Eucla","540,1":"Asia/Yakutsk","540,0":"Asia/Tokyo","570,0":"Australia/Darwin","570,1,s":"Australia/Adelaide","600,0":"Australia/Brisbane","600,1":"Asia/Vladivostok","600,1,s":"Australia/Sydney","630,1,s":"Australia/Lord_Howe",
-"660,1":"Asia/Kamchatka","660,0":"Pacific/Noumea","690,0":"Pacific/Norfolk","720,1,s":"Pacific/Auckland","720,0":"Pacific/Majuro","765,1,s":"Pacific/Chatham","780,0":"Pacific/Tongatapu","780,1,s":"Pacific/Apia","840,0":"Pacific/Kiritimati"};l.olson.dst_rules={years:[2008,2009,2010,2011,2012,2013,2014],zones:[{name:"Africa/Cairo",rules:[{e:12199572E5,s:12090744E5},{e:1250802E6,s:1240524E6},{e:12858804E5,s:12840696E5},!1,!1,!1,{e:14116788E5,s:1406844E6}]},{name:"Africa/Casablanca",rules:[{e:12202236E5,
+"660,1":"Asia/Kamchatka","660,0":"Pacific/Noumea","690,0":"Pacific/Norfolk","720,1,s":"Pacific/Auckland","720,0":"Pacific/Majuro","765,1,s":"Pacific/Chatham","780,0":"Pacific/Tongatapu","780,1,s":"Pacific/Apia","840,0":"Pacific/Kiritimati"};i.olson.dst_rules={years:[2008,2009,2010,2011,2012,2013,2014],zones:[{name:"Africa/Cairo",rules:[{e:12199572E5,s:12090744E5},{e:1250802E6,s:1240524E6},{e:12858804E5,s:12840696E5},!1,!1,!1,{e:14116788E5,s:1406844E6}]},{name:"Africa/Casablanca",rules:[{e:12202236E5,
 s:12122784E5},{e:12508092E5,s:12438144E5},{e:1281222E6,s:12727584E5},{e:13120668E5,s:13017888E5},{e:13489704E5,s:1345428E6},{e:13828392E5,s:13761E8},{e:14142888E5,s:14069448E5}]},{name:"America/Asuncion",rules:[{e:12050316E5,s:12243888E5},{e:12364812E5,s:12558384E5},{e:12709548E5,s:12860784E5},{e:13024044E5,s:1317528E6},{e:1333854E6,s:13495824E5},{e:1364094E6,s:1381032E6},{e:13955436E5,s:14124816E5}]},{name:"America/Campo_Grande",rules:[{e:12032172E5,s:12243888E5},{e:12346668E5,s:12558384E5},{e:12667212E5,
 s:1287288E6},{e:12981708E5,s:13187376E5},{e:13302252E5,s:1350792E6},{e:136107E7,s:13822416E5},{e:13925196E5,s:14136912E5}]},{name:"America/Goose_Bay",rules:[{e:122559486E4,s:120503526E4},{e:125704446E4,s:123648486E4},{e:128909886E4,s:126853926E4},{e:13205556E5,s:129998886E4},{e:13520052E5,s:13314456E5},{e:13834548E5,s:13628952E5},{e:14149044E5,s:13943448E5}]},{name:"America/Havana",rules:[{e:12249972E5,s:12056436E5},{e:12564468E5,s:12364884E5},{e:12885012E5,s:12685428E5},{e:13211604E5,s:13005972E5},
 {e:13520052E5,s:13332564E5},{e:13834548E5,s:13628916E5},{e:14149044E5,s:13943412E5}]},{name:"America/Mazatlan",rules:[{e:1225008E6,s:12074724E5},{e:12564576E5,s:1238922E6},{e:1288512E6,s:12703716E5},{e:13199616E5,s:13018212E5},{e:13514112E5,s:13332708E5},{e:13828608E5,s:13653252E5},{e:14143104E5,s:13967748E5}]},{name:"America/Mexico_City",rules:[{e:12250044E5,s:12074688E5},{e:1256454E6,s:12389184E5},{e:12885084E5,s:1270368E6},{e:1319958E6,s:13018176E5},{e:13514076E5,s:13332672E5},{e:13828572E5,s:13653216E5},
@@ -38418,7 +38748,7 @@ s:13330584E5},{e:13802292E5,s:1364508E6},{e:1414098E6,s:13959576E5}]},{name:"Asi
 s:12697092E5},!1,!1,!1,!1]},{name:"Asia/Yekaterinburg",rules:[{e:12249684E5,s:12068244E5},{e:1256418E6,s:1238274E6},{e:12884724E5,s:12697236E5},!1,!1,!1,!1]},{name:"Asia/Yerevan",rules:[{e:1224972E6,s:1206828E6},{e:12564216E5,s:12382776E5},{e:1288476E6,s:12697272E5},{e:13199256E5,s:13011768E5},!1,!1,!1]},{name:"Australia/Lord_Howe",rules:[{e:12074076E5,s:12231342E5},{e:12388572E5,s:12545838E5},{e:12703068E5,s:12860334E5},{e:13017564E5,s:1317483E6},{e:1333206E6,s:13495374E5},{e:13652604E5,s:1380987E6},
 {e:139671E7,s:14124366E5}]},{name:"Australia/Perth",rules:[{e:12068136E5,s:12249576E5},!1,!1,!1,!1,!1,!1]},{name:"Europe/Helsinki",rules:[{e:12249828E5,s:12068388E5},{e:12564324E5,s:12382884E5},{e:12884868E5,s:1269738E6},{e:13199364E5,s:13011876E5},{e:1351386E6,s:13326372E5},{e:13828356E5,s:13646916E5},{e:14142852E5,s:13961412E5}]},{name:"Europe/Minsk",rules:[{e:12249792E5,s:12068352E5},{e:12564288E5,s:12382848E5},{e:12884832E5,s:12697344E5},!1,!1,!1,!1]},{name:"Europe/Moscow",rules:[{e:12249756E5,
 s:12068316E5},{e:12564252E5,s:12382812E5},{e:12884796E5,s:12697308E5},!1,!1,!1,!1]},{name:"Pacific/Apia",rules:[!1,!1,!1,{e:13017528E5,s:13168728E5},{e:13332024E5,s:13489272E5},{e:13652568E5,s:13803768E5},{e:13967064E5,s:14118264E5}]},{name:"Pacific/Fiji",rules:[!1,!1,{e:12696984E5,s:12878424E5},{e:13271544E5,s:1319292E6},{e:1358604E6,s:13507416E5},{e:139005E7,s:1382796E6},{e:14215032E5,s:14148504E5}]},{name:"Europe/London",rules:[{e:12249828E5,s:12068388E5},{e:12564324E5,s:12382884E5},{e:12884868E5,
-s:1269738E6},{e:13199364E5,s:13011876E5},{e:1351386E6,s:13326372E5},{e:13828356E5,s:13646916E5},{e:14142852E5,s:13961412E5}]}]};"undefined"!==typeof module&&"undefined"!==typeof module.exports?module.exports=l:"undefined"!==typeof define&&null!==define&&null!=define.amd?define([],function(){return l}):"undefined"===typeof r?window.jstz=l:r.jstz=l})();
+s:1269738E6},{e:13199364E5,s:13011876E5},{e:1351386E6,s:13326372E5},{e:13828356E5,s:13646916E5},{e:14142852E5,s:13961412E5}]}]};"undefined"!==typeof module&&"undefined"!==typeof module.exports?module.exports=i:"undefined"!==typeof define&&null!==define&&null!=define.amd?define([],function(){return i}):"undefined"===typeof n?window.jstz=i:n.jstz=i})();
 /* END OF FILE - ..\js\gxtimezone.js - */
 /* START OF FILE - ..\GenCommon\js\livepreview.js - */
 // jshint options
@@ -38426,7 +38756,7 @@ s:1269738E6},{e:13199364E5,s:13011876E5},{e:1351386E6,s:13326372E5},{e:13828356E
 gx.livePrev = (function ($) {
 	var SERVER_REQUEST_RETRY_TIMEOUT = 100,
 		GXLIVEPREVIEW_HIDESUBEL_CSSCLASS = 'gxlivepreview-hidesubelements',
-		getInfo = gx.ajax.getPostInfo("", false);
+		getInfo = gx.ajax.getPostInfo("", false),
 		postInfo = gx.ajax.getPostInfo("", false);
 	
 	var url2Base64Content= function( url) {
@@ -38777,24 +39107,33 @@ gx.nav = (function () {
 })(gx.$);
 /* END OF FILE - ..\GenCommon\js\nav.js - */
 /* START OF FILE - ..\GenCommon\js\jquery-ui.js - */
-/*! jQuery UI - v1.11.4 - 2016-07-07
+/*! jQuery UI - v1.13.2 - 2022-09-06
 * http://jqueryui.com
 * Includes: position.js
 * Copyright jQuery Foundation and other contributors; Licensed MIT */
 
-(function( factory ) {
+( function( factory ) {
+	"use strict";
+	
 	if ( typeof define === "function" && define.amd ) {
 
 		// AMD. Register as an anonymous module.
-		define([ "jquery" ], factory );
+		define( [ "jquery" ], factory );
 	} else {
 
 		// Browser globals
 		factory( jQuery );
 	}
-}(function( $ ) {
+} )( function( $ ) {
+"use strict";
+
+$.ui = $.ui || {};
+
+var version = $.ui.version = "1.13.2";
+
+
 /*!
- * jQuery UI Position 1.11.4
+ * jQuery UI Position 1.13.2
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors
@@ -38804,14 +39143,17 @@ gx.nav = (function () {
  * http://api.jqueryui.com/position/
  */
 
-(function() {
+//>>label: Position
+//>>group: Core
+//>>description: Positions elements relative to other elements.
+//>>docs: http://api.jqueryui.com/position/
+//>>demos: http://jqueryui.com/position/
 
-$.ui = $.ui || {};
 
-var cachedScrollbarWidth, supportsOffsetFractions,
+( function() {
+var cachedScrollbarWidth,
 	max = Math.max,
 	abs = Math.abs,
-	round = Math.round,
 	rhorizontal = /left|center|right/,
 	rvertical = /top|center|bottom/,
 	roffset = /[\+\-]\d+(\.[\d]+)?%?/,
@@ -38835,7 +39177,7 @@ function isWindow( obj ) {
 }
 
 function getDimensions( elem ) {
-	var raw = elem[0];
+	var raw = elem[ 0 ];
 	if ( raw.nodeType === 9 ) {
 		return {
 			width: elem.width(),
@@ -38870,8 +39212,10 @@ $.position = {
 			return cachedScrollbarWidth;
 		}
 		var w1, w2,
-			div = $( "<div style='display:block;position:absolute;width:50px;height:50px;overflow:hidden;'><div style='height:100px;width:auto;'></div></div>" ),
-			innerDiv = div.children()[0];
+			div = $( "<div style=" +
+				"'display:block;position:absolute;width:200px;height:200px;overflow:hidden;'>" +
+				"<div style='height:300px;width:auto;'></div></div>" ),
+			innerDiv = div.children()[ 0 ];
 
 		$( "body" ).append( div );
 		w1 = innerDiv.offsetWidth;
@@ -38880,12 +39224,12 @@ $.position = {
 		w2 = innerDiv.offsetWidth;
 
 		if ( w1 === w2 ) {
-			w2 = div[0].clientWidth;
+			w2 = div[ 0 ].clientWidth;
 		}
 
 		div.remove();
 
-		return (cachedScrollbarWidth = w1 - w2);
+		return ( cachedScrollbarWidth = w1 - w2 );
 	},
 	getScrollInfo: function( within ) {
 		var overflowX = within.isWindow || within.isDocument ? "" :
@@ -38893,9 +39237,9 @@ $.position = {
 			overflowY = within.isWindow || within.isDocument ? "" :
 				within.element.css( "overflow-y" ),
 			hasOverflowX = overflowX === "scroll" ||
-				( overflowX === "auto" && within.width < within.element[0].scrollWidth ),
+				( overflowX === "auto" && within.width < within.element[ 0 ].scrollWidth ),
 			hasOverflowY = overflowY === "scroll" ||
-				( overflowY === "auto" && within.height < within.element[0].scrollHeight );
+				( overflowY === "auto" && within.height < within.element[ 0 ].scrollHeight );
 		return {
 			width: hasOverflowY ? $.position.scrollbarWidth() : 0,
 			height: hasOverflowX ? $.position.scrollbarWidth() : 0
@@ -38903,7 +39247,7 @@ $.position = {
 	},
 	getWithinInfo: function( element ) {
 		var withinElement = $( element || window ),
-			isElemWindow = isWindow( withinElement[0] ),
+			isElemWindow = isWindow( withinElement[ 0 ] ),
 			isDocument = !!withinElement[ 0 ] && withinElement[ 0 ].nodeType === 9,
 			hasOffset = !isElemWindow && !isDocument;
 		return {
@@ -38913,11 +39257,8 @@ $.position = {
 			offset: hasOffset ? $( element ).offset() : { left: 0, top: 0 },
 			scrollLeft: withinElement.scrollLeft(),
 			scrollTop: withinElement.scrollTop(),
-
-			// support: jQuery 1.6.x
-			// jQuery 1.6 doesn't support .outerWidth/Height() on documents or windows
-			width: isElemWindow || isDocument ? withinElement.width() : withinElement.outerWidth(),
-			height: isElemWindow || isDocument ? withinElement.height() : withinElement.outerHeight()
+			width: withinElement.outerWidth(),
+			height: withinElement.outerHeight()
 		};
 	}
 };
@@ -38927,41 +39268,42 @@ $.fn.position = function( options ) {
 		return _position.apply( this, arguments );
 	}
 
-	// make a copy, we don't want to modify arguments
+	// Make a copy, we don't want to modify arguments
 	options = $.extend( {}, options );
 
 	var atOffset, targetWidth, targetHeight, targetOffset, basePosition, dimensions,
-		target = $( options.of ),
+
+		// Make sure string options are treated as CSS selectors
+		target = typeof options.of === "string" ?
+			$( document ).find( options.of ) :
+			$( options.of ),
+
 		within = $.position.getWithinInfo( options.within ),
 		scrollInfo = $.position.getScrollInfo( within ),
 		collision = ( options.collision || "flip" ).split( " " ),
-		offsets = {},
-		raw = target[0];
+		offsets = {};
 
 	dimensions = getDimensions( target );
-	if ( target[0].preventDefault ) {
-		// force left top to allow flipping
+	if ( target[ 0 ].preventDefault ) {
+
+		// Force left top to allow flipping
 		options.at = "left top";
 	}
 	targetWidth = dimensions.width;
 	targetHeight = dimensions.height;
 	targetOffset = dimensions.offset;
-	if (targetOffset.top + targetOffset.left === 0 && !target.is(":visible")) {
-		targetOffset = $(raw.parentElement).offset();
-		targetWidth = $(raw.parentElement).width();
-	}
 
-	// clone to reuse original targetOffset later
+	// Clone to reuse original targetOffset later
 	basePosition = $.extend( {}, targetOffset );
 
-	// force my and at to have valid horizontal and vertical positions
+	// Force my and at to have valid horizontal and vertical positions
 	// if a value is missing or invalid, it will be converted to center
 	$.each( [ "my", "at" ], function() {
 		var pos = ( options[ this ] || "" ).split( " " ),
 			horizontalOffset,
 			verticalOffset;
 
-		if ( pos.length === 1) {
+		if ( pos.length === 1 ) {
 			pos = rhorizontal.test( pos[ 0 ] ) ?
 				pos.concat( [ "center" ] ) :
 				rvertical.test( pos[ 0 ] ) ?
@@ -38971,7 +39313,7 @@ $.fn.position = function( options ) {
 		pos[ 0 ] = rhorizontal.test( pos[ 0 ] ) ? pos[ 0 ] : "center";
 		pos[ 1 ] = rvertical.test( pos[ 1 ] ) ? pos[ 1 ] : "center";
 
-		// calculate offsets
+		// Calculate offsets
 		horizontalOffset = roffset.exec( pos[ 0 ] );
 		verticalOffset = roffset.exec( pos[ 1 ] );
 		offsets[ this ] = [
@@ -38979,14 +39321,14 @@ $.fn.position = function( options ) {
 			verticalOffset ? verticalOffset[ 0 ] : 0
 		];
 
-		// reduce to just the positions without the offsets
+		// Reduce to just the positions without the offsets
 		options[ this ] = [
 			rposition.exec( pos[ 0 ] )[ 0 ],
 			rposition.exec( pos[ 1 ] )[ 0 ]
 		];
-	});
+	} );
 
-	// normalize collision option
+	// Normalize collision option
 	if ( collision.length === 1 ) {
 		collision[ 1 ] = collision[ 0 ];
 	}
@@ -39007,15 +39349,17 @@ $.fn.position = function( options ) {
 	basePosition.left += atOffset[ 0 ];
 	basePosition.top += atOffset[ 1 ];
 
-	return this.each(function() {
+	return this.each( function() {
 		var collisionPosition, using,
 			elem = $( this ),
 			elemWidth = elem.outerWidth(),
 			elemHeight = elem.outerHeight(),
 			marginLeft = parseCss( this, "marginLeft" ),
 			marginTop = parseCss( this, "marginTop" ),
-			collisionWidth = elemWidth + marginLeft + parseCss( this, "marginRight" ) + scrollInfo.width,
-			collisionHeight = elemHeight + marginTop + parseCss( this, "marginBottom" ) + scrollInfo.height,
+			collisionWidth = elemWidth + marginLeft + parseCss( this, "marginRight" ) +
+				scrollInfo.width,
+			collisionHeight = elemHeight + marginTop + parseCss( this, "marginBottom" ) +
+				scrollInfo.height,
 			position = $.extend( {}, basePosition ),
 			myOffset = getOffsets( offsets.my, elem.outerWidth(), elem.outerHeight() );
 
@@ -39033,12 +39377,6 @@ $.fn.position = function( options ) {
 
 		position.left += myOffset[ 0 ];
 		position.top += myOffset[ 1 ];
-
-		// if the browser doesn't support fractions, then round for consistent results
-		if ( !supportsOffsetFractions ) {
-			position.left = round( position.left );
-			position.top = round( position.top );
-		}
 
 		collisionPosition = {
 			marginLeft: marginLeft,
@@ -39060,12 +39398,13 @@ $.fn.position = function( options ) {
 					at: options.at,
 					within: within,
 					elem: elem
-				});
+				} );
 			}
-		});
+		} );
 
 		if ( options.using ) {
-			// adds feedback as second argument to using callback, if present
+
+			// Adds feedback as second argument to using callback, if present
 			using = function( props ) {
 				var left = targetOffset.left - position.left,
 					right = left + targetWidth - elemWidth,
@@ -39105,7 +39444,7 @@ $.fn.position = function( options ) {
 		}
 
 		elem.offset( $.extend( position, { using: using } ) );
-	});
+	} );
 };
 
 $.ui.position = {
@@ -39119,16 +39458,20 @@ $.ui.position = {
 				overRight = collisionPosLeft + data.collisionWidth - outerWidth - withinOffset,
 				newOverRight;
 
-			// element is wider than within
+			// Element is wider than within
 			if ( data.collisionWidth > outerWidth ) {
-				// element is initially over the left side of within
+
+				// Element is initially over the left side of within
 				if ( overLeft > 0 && overRight <= 0 ) {
-					newOverRight = position.left + overLeft + data.collisionWidth - outerWidth - withinOffset;
+					newOverRight = position.left + overLeft + data.collisionWidth - outerWidth -
+						withinOffset;
 					position.left += overLeft - newOverRight;
-				// element is initially over right side of within
+
+				// Element is initially over right side of within
 				} else if ( overRight > 0 && overLeft <= 0 ) {
 					position.left = withinOffset;
-				// element is initially over both left and right sides of within
+
+				// Element is initially over both left and right sides of within
 				} else {
 					if ( overLeft > overRight ) {
 						position.left = withinOffset + outerWidth - data.collisionWidth;
@@ -39136,13 +39479,16 @@ $.ui.position = {
 						position.left = withinOffset;
 					}
 				}
-			// too far left -> align with left edge
+
+			// Too far left -> align with left edge
 			} else if ( overLeft > 0 ) {
 				position.left += overLeft;
-			// too far right -> align with right edge
+
+			// Too far right -> align with right edge
 			} else if ( overRight > 0 ) {
 				position.left -= overRight;
-			// adjust based on position and margin
+
+			// Adjust based on position and margin
 			} else {
 				position.left = max( position.left - collisionPosLeft, position.left );
 			}
@@ -39156,16 +39502,20 @@ $.ui.position = {
 				overBottom = collisionPosTop + data.collisionHeight - outerHeight - withinOffset,
 				newOverBottom;
 
-			// element is taller than within
+			// Element is taller than within
 			if ( data.collisionHeight > outerHeight ) {
-				// element is initially over the top of within
+
+				// Element is initially over the top of within
 				if ( overTop > 0 && overBottom <= 0 ) {
-					newOverBottom = position.top + overTop + data.collisionHeight - outerHeight - withinOffset;
+					newOverBottom = position.top + overTop + data.collisionHeight - outerHeight -
+						withinOffset;
 					position.top += overTop - newOverBottom;
-				// element is initially over bottom of within
+
+				// Element is initially over bottom of within
 				} else if ( overBottom > 0 && overTop <= 0 ) {
 					position.top = withinOffset;
-				// element is initially over both top and bottom of within
+
+				// Element is initially over both top and bottom of within
 				} else {
 					if ( overTop > overBottom ) {
 						position.top = withinOffset + outerHeight - data.collisionHeight;
@@ -39173,13 +39523,16 @@ $.ui.position = {
 						position.top = withinOffset;
 					}
 				}
-			// too far up -> align with top
+
+			// Too far up -> align with top
 			} else if ( overTop > 0 ) {
 				position.top += overTop;
-			// too far down -> align with bottom edge
+
+			// Too far down -> align with bottom edge
 			} else if ( overBottom > 0 ) {
 				position.top -= overBottom;
-			// adjust based on position and margin
+
+			// Adjust based on position and margin
 			} else {
 				position.top = max( position.top - collisionPosTop, position.top );
 			}
@@ -39209,12 +39562,14 @@ $.ui.position = {
 				newOverLeft;
 
 			if ( overLeft < 0 ) {
-				newOverRight = position.left + myOffset + atOffset + offset + data.collisionWidth - outerWidth - withinOffset;
+				newOverRight = position.left + myOffset + atOffset + offset + data.collisionWidth -
+					outerWidth - withinOffset;
 				if ( newOverRight < 0 || newOverRight < abs( overLeft ) ) {
 					position.left += myOffset + atOffset + offset;
 				}
 			} else if ( overRight > 0 ) {
-				newOverLeft = position.left - data.collisionPosition.marginLeft + myOffset + atOffset + offset - offsetLeft;
+				newOverLeft = position.left - data.collisionPosition.marginLeft + myOffset +
+					atOffset + offset - offsetLeft;
 				if ( newOverLeft > 0 || abs( newOverLeft ) < overRight ) {
 					position.left += myOffset + atOffset + offset;
 				}
@@ -39243,12 +39598,14 @@ $.ui.position = {
 				newOverTop,
 				newOverBottom;
 			if ( overTop < 0 ) {
-				newOverBottom = position.top + myOffset + atOffset + offset + data.collisionHeight - outerHeight - withinOffset;
+				newOverBottom = position.top + myOffset + atOffset + offset + data.collisionHeight -
+					outerHeight - withinOffset;
 				if ( newOverBottom < 0 || newOverBottom < abs( overTop ) ) {
 					position.top += myOffset + atOffset + offset;
 				}
 			} else if ( overBottom > 0 ) {
-				newOverTop = position.top - data.collisionPosition.marginTop + myOffset + atOffset + offset - offsetTop;
+				newOverTop = position.top - data.collisionPosition.marginTop + myOffset + atOffset +
+					offset - offsetTop;
 				if ( newOverTop > 0 || abs( newOverTop ) < overBottom ) {
 					position.top += myOffset + atOffset + offset;
 				}
@@ -39267,50 +39624,12 @@ $.ui.position = {
 	}
 };
 
-// fraction support test
-(function() {
-	var testElement, testElementParent, testElementStyle, offsetLeft, i,
-		body = document.getElementsByTagName( "body" )[ 0 ],
-		div = document.createElement( "div" );
-
-	//Create a "fake body" for testing based on method used in jQuery.support
-	testElement = document.createElement( body ? "div" : "body" );
-	testElementStyle = {
-		visibility: "hidden",
-		width: 0,
-		height: 0,
-		border: 0,
-		margin: 0,
-		background: "none"
-	};
-	if ( body ) {
-		$.extend( testElementStyle, {
-			position: "absolute",
-			left: "-1000px",
-			top: "-1000px"
-		});
-	}
-	for ( i in testElementStyle ) {
-		testElement.style[ i ] = testElementStyle[ i ];
-	}
-	testElement.appendChild( div );
-	testElementParent = body || document.documentElement;
-	testElementParent.insertBefore( testElement, testElementParent.firstChild );
-
-	div.style.cssText = "position: absolute; left: 10.7432222px;";
-
-	offsetLeft = $( div ).offset().left;
-	supportsOffsetFractions = offsetLeft > 10 && offsetLeft < 11;
-
-	testElement.innerHTML = "";
-	testElementParent.removeChild( testElement );
-})();
-
-})();
+} )();
 
 var position = $.ui.position;
 
 
 
-}));
+
+} );
 /* END OF FILE - ..\GenCommon\js\jquery-ui.js - */

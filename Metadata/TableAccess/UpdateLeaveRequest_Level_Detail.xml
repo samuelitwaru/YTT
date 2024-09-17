@@ -8,5 +8,4 @@
   <Table name="LeaveRequest" />
   <Table name="EmployeeProject" />
   <Table name="SupportRequest" />
-  <Table name="Holiday" />
 </Dependencies>

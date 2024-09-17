@@ -56,7 +56,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
       {
          this.Gxm2rootcol = new GXBaseCollection<GeneXus.Programs.workwithplus.nativemobile.SdtMenuOptions_MenuOptionsItem>( context, "MenuOptionsItem", "YTT_version4") ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_Gxm2rootcol=this.Gxm2rootcol;
       }
 
@@ -68,29 +68,12 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
 
       public void executeSubmit( out GXBaseCollection<GeneXus.Programs.workwithplus.nativemobile.SdtMenuOptions_MenuOptionsItem> aP0_Gxm2rootcol )
       {
-         templateusersettingsdp objtemplateusersettingsdp;
-         objtemplateusersettingsdp = new templateusersettingsdp();
-         objtemplateusersettingsdp.Gxm2rootcol = new GXBaseCollection<GeneXus.Programs.workwithplus.nativemobile.SdtMenuOptions_MenuOptionsItem>( context, "MenuOptionsItem", "YTT_version4") ;
-         objtemplateusersettingsdp.context.SetSubmitInitialConfig(context);
-         objtemplateusersettingsdp.initialize();
-         Submit( executePrivateCatch,objtemplateusersettingsdp);
+         this.Gxm2rootcol = new GXBaseCollection<GeneXus.Programs.workwithplus.nativemobile.SdtMenuOptions_MenuOptionsItem>( context, "MenuOptionsItem", "YTT_version4") ;
+         SubmitImpl();
          aP0_Gxm2rootcol=this.Gxm2rootcol;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((templateusersettingsdp)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -113,21 +96,17 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          Gxm1menuoptions.gxTpr_Fonticon = GXt_char1;
          Gxm1menuoptions.gxTpr_Componenttocall = "sub:logout";
          Gxm1menuoptions.gxTpr_Type = 0;
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -138,9 +117,9 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
       }
 
       private string GXt_char1 ;
-      private GXBaseCollection<GeneXus.Programs.workwithplus.nativemobile.SdtMenuOptions_MenuOptionsItem> aP0_Gxm2rootcol ;
       private GXBaseCollection<GeneXus.Programs.workwithplus.nativemobile.SdtMenuOptions_MenuOptionsItem> Gxm2rootcol ;
       private GeneXus.Programs.workwithplus.nativemobile.SdtMenuOptions_MenuOptionsItem Gxm1menuoptions ;
+      private GXBaseCollection<GeneXus.Programs.workwithplus.nativemobile.SdtMenuOptions_MenuOptionsItem> aP0_Gxm2rootcol ;
    }
 
 }

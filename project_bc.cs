@@ -114,7 +114,6 @@ namespace GeneXus.Programs {
          }
          if ( AnyError == 0 )
          {
-            IsConfirmed = 1;
          }
       }
 
@@ -221,7 +220,6 @@ namespace GeneXus.Programs {
 
       protected void CheckExtendedTable0E15( )
       {
-         nIsDirty_15 = 0;
          standaloneModal( ) ;
          /* Using cursor BC000E5 */
          pr_default.execute(3, new Object[] {n166ProjectManagerId, A166ProjectManagerId, A102ProjectId});
@@ -348,7 +346,6 @@ namespace GeneXus.Programs {
       protected void insert_Check( )
       {
          CONFIRM_0E0( ) ;
-         IsConfirmed = 0;
       }
 
       protected void update_Check( )
@@ -585,7 +582,6 @@ namespace GeneXus.Programs {
          else
          {
          }
-         IsModified = 0;
          if ( AnyError != 0 )
          {
             context.wjLoc = "";
@@ -866,7 +862,6 @@ namespace GeneXus.Programs {
 
       protected void SaveImpl( )
       {
-         nKeyPressed = 1;
          GetKey0E15( ) ;
          if ( IsIns( ) )
          {
@@ -944,7 +939,6 @@ namespace GeneXus.Programs {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars15( bcProject, 1) ;
          SaveImpl( ) ;
          VarsToRow15( bcProject) ;
@@ -958,7 +952,6 @@ namespace GeneXus.Programs {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars15( bcProject, 1) ;
          Gx_mode = "INS";
          /* Insert record */
@@ -1004,7 +997,6 @@ namespace GeneXus.Programs {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars15( bcProject, 1) ;
          UpdateImpl( ) ;
          context.GX_msglist = BackMsgLst;
@@ -1017,7 +1009,6 @@ namespace GeneXus.Programs {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars15( bcProject, 1) ;
          Gx_mode = "INS";
          /* Insert record */
@@ -1051,8 +1042,6 @@ namespace GeneXus.Programs {
          AnyError = 0;
          context.GX_msglist.removeAllItems();
          RowToVars15( bcProject, 0) ;
-         nKeyPressed = 3;
-         IsConfirmed = 0;
          GetKey0E15( ) ;
          if ( RcdFound15 == 1 )
          {
@@ -1168,7 +1157,6 @@ namespace GeneXus.Programs {
 
       public void ForceCommitOnExit( )
       {
-         mustCommit = true;
          return  ;
       }
 
@@ -1225,15 +1213,14 @@ namespace GeneXus.Programs {
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
       }
 
-      protected void CloseOpenCursors( )
+      protected override void CloseCursors( )
       {
          pr_default.close(1);
          pr_default.close(11);
@@ -1241,9 +1228,6 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
-         scmdbuf = "";
-         PreviousTooltip = "";
-         PreviousCaption = "";
          Gx_mode = "";
          endTrnMsgTxt = "";
          endTrnMsgCod = "";
@@ -1366,14 +1350,9 @@ namespace GeneXus.Programs {
          standaloneNotModal( ) ;
       }
 
-      private short IsConfirmed ;
-      private short IsModified ;
       private short AnyError ;
-      private short nKeyPressed ;
-      private short GX_JID ;
       private short Gx_BScreen ;
       private short RcdFound15 ;
-      private short nIsDirty_15 ;
       private int trnEnded ;
       private int AV33GXV1 ;
       private long Z102ProjectId ;
@@ -1383,9 +1362,6 @@ namespace GeneXus.Programs {
       private long Z166ProjectManagerId ;
       private long A166ProjectManagerId ;
       private long A106EmployeeId ;
-      private string scmdbuf ;
-      private string PreviousTooltip ;
-      private string PreviousCaption ;
       private string Gx_mode ;
       private string endTrnMsgTxt ;
       private string endTrnMsgCod ;
@@ -1402,15 +1378,16 @@ namespace GeneXus.Programs {
       private bool Z177ProjectManagerIsActive ;
       private bool A177ProjectManagerIsActive ;
       private bool n166ProjectManagerId ;
-      private bool mustCommit ;
       private string Z104ProjectDescription ;
       private string A104ProjectDescription ;
       private string Z176ProjectManagerEmail ;
       private string A176ProjectManagerEmail ;
       private IGxSession AV12WebSession ;
-      private SdtProject bcProject ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV8WWPContext ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext AV11TrnContext ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext_Attribute AV14TrnContextAtt ;
       private IDataStoreProvider pr_default ;
       private string[] BC000E6_A103ProjectName ;
       private string[] BC000E6_A104ProjectDescription ;
@@ -1454,12 +1431,10 @@ namespace GeneXus.Programs {
       private long[] BC000E15_A166ProjectManagerId ;
       private bool[] BC000E15_n166ProjectManagerId ;
       private long[] BC000E15_A102ProjectId ;
+      private SdtProject bcProject ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
       private IDataStoreProvider pr_gam ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext AV11TrnContext ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext_Attribute AV14TrnContextAtt ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV8WWPContext ;
    }
 
    public class project_bc__gam : DataStoreHelperBase, IDataStoreHelper
@@ -1522,13 +1497,25 @@ namespace GeneXus.Programs {
   {
      if ( def == null )
      {
-        Object[] prmBC000E6;
-        prmBC000E6 = new Object[] {
+        Object[] prmBC000E2;
+        prmBC000E2 = new Object[] {
         new ParDef("ProjectId",GXType.Int64,10,0)
+        };
+        Object[] prmBC000E3;
+        prmBC000E3 = new Object[] {
+        new ParDef("ProjectId",GXType.Int64,10,0)
+        };
+        Object[] prmBC000E4;
+        prmBC000E4 = new Object[] {
+        new ParDef("ProjectManagerId",GXType.Int64,10,0){Nullable=true}
         };
         Object[] prmBC000E5;
         prmBC000E5 = new Object[] {
         new ParDef("ProjectManagerId",GXType.Int64,10,0){Nullable=true} ,
+        new ParDef("ProjectId",GXType.Int64,10,0)
+        };
+        Object[] prmBC000E6;
+        prmBC000E6 = new Object[] {
         new ParDef("ProjectId",GXType.Int64,10,0)
         };
         Object[] prmBC000E7;
@@ -1536,20 +1523,8 @@ namespace GeneXus.Programs {
         new ParDef("ProjectName",GXType.Char,100,0) ,
         new ParDef("ProjectId",GXType.Int64,10,0)
         };
-        Object[] prmBC000E4;
-        prmBC000E4 = new Object[] {
-        new ParDef("ProjectManagerId",GXType.Int64,10,0){Nullable=true}
-        };
         Object[] prmBC000E8;
         prmBC000E8 = new Object[] {
-        new ParDef("ProjectId",GXType.Int64,10,0)
-        };
-        Object[] prmBC000E3;
-        prmBC000E3 = new Object[] {
-        new ParDef("ProjectId",GXType.Int64,10,0)
-        };
-        Object[] prmBC000E2;
-        prmBC000E2 = new Object[] {
         new ParDef("ProjectId",GXType.Int64,10,0)
         };
         Object[] prmBC000E9;

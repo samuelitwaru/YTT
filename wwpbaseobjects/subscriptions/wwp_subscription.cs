@@ -150,7 +150,7 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
          {
             if ( context.ExposeMetadata( ) )
             {
-               Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+               Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
             }
          }
          Form.Meta.addItem("description", "WWP_Subscription", 0) ;
@@ -193,10 +193,10 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
 
       public void execute( )
       {
-         executePrivate();
+         ExecuteImpl();
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -233,11 +233,8 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITENV( ) ;
          INITTRN( ) ;
          if ( ( GxWebError == 0 ) && ! isAjaxCallMode( ) )
@@ -269,7 +266,7 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void fix_multi_value_controls( )
@@ -426,11 +423,12 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
          /* Div Control */
          GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-sm-9 gx-attribute", "start", "top", "", "", "div");
          /* Multiple line edit */
+         TempTags = "  onfocus=\"gx.evt.onfocus(this, 44,'',false,'',0)\"";
          ClassString = "Attribute";
          StyleString = "";
          ClassString = "Attribute";
          StyleString = "";
-         GxWebStd.gx_html_textarea( context, edtWWPNotificationDefinitionDescr_Internalname, A29WWPNotificationDefinitionDescr, "", "", 0, 1, edtWWPNotificationDefinitionDescr_Enabled, 0, 80, "chr", 3, "row", 0, StyleString, ClassString, "", "", "200", -1, 0, "", "", -1, true, "", "'"+""+"'"+",false,"+"'"+""+"'", 0, "", "HLP_WWPBaseObjects/Subscriptions/WWP_Subscription.htm");
+         GxWebStd.gx_html_textarea( context, edtWWPNotificationDefinitionDescr_Internalname, A29WWPNotificationDefinitionDescr, "", TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,44);\"", 0, 1, edtWWPNotificationDefinitionDescr_Enabled, 0, 80, "chr", 3, "row", 0, StyleString, ClassString, "", "", "200", -1, 0, "", "", -1, true, "", "'"+""+"'"+",false,"+"'"+""+"'", 0, "", "HLP_WWPBaseObjects/Subscriptions/WWP_Subscription.htm");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -446,7 +444,8 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
          /* Div Control */
          GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-sm-9 gx-attribute", "start", "top", "", "", "div");
          /* Single line edit */
-         GxWebStd.gx_single_line_edit( context, edtWWPEntityName_Internalname, A21WWPEntityName, StringUtil.RTrim( context.localUtil.Format( A21WWPEntityName, "")), "", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtWWPEntityName_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtWWPEntityName_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "WWPBaseObjects\\WWP_Description", "start", true, "", "HLP_WWPBaseObjects/Subscriptions/WWP_Subscription.htm");
+         TempTags = "  onfocus=\"gx.evt.onfocus(this, 49,'',false,'',0)\"";
+         GxWebStd.gx_single_line_edit( context, edtWWPEntityName_Internalname, A21WWPEntityName, StringUtil.RTrim( context.localUtil.Format( A21WWPEntityName, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,49);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtWWPEntityName_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtWWPEntityName_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "WWPBaseObjects\\WWP_Description", "start", true, "", "HLP_WWPBaseObjects/Subscriptions/WWP_Subscription.htm");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -479,7 +478,8 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
          /* Div Control */
          GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-sm-9 gx-attribute", "start", "top", "", "", "div");
          /* Single line edit */
-         GxWebStd.gx_single_line_edit( context, edtWWPUserExtendedFullName_Internalname, A8WWPUserExtendedFullName, StringUtil.RTrim( context.localUtil.Format( A8WWPUserExtendedFullName, "")), "", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtWWPUserExtendedFullName_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtWWPUserExtendedFullName_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "WWPBaseObjects\\WWP_Description", "start", true, "", "HLP_WWPBaseObjects/Subscriptions/WWP_Subscription.htm");
+         TempTags = "  onfocus=\"gx.evt.onfocus(this, 59,'',false,'',0)\"";
+         GxWebStd.gx_single_line_edit( context, edtWWPUserExtendedFullName_Internalname, A8WWPUserExtendedFullName, StringUtil.RTrim( context.localUtil.Format( A8WWPUserExtendedFullName, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,59);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtWWPUserExtendedFullName_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtWWPUserExtendedFullName_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "WWPBaseObjects\\WWP_Description", "start", true, "", "HLP_WWPBaseObjects/Subscriptions/WWP_Subscription.htm");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -985,7 +985,6 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
 
       protected void CheckExtendedTable044( )
       {
-         nIsDirty_4 = 0;
          Gx_BScreen = 1;
          standaloneModal( ) ;
          /* Using cursor T00044 */
@@ -1362,7 +1361,7 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
          {
             getByPrimaryKey( ) ;
          }
-         CloseOpenCursors();
+         CloseCursors();
       }
 
       protected void btn_get( )
@@ -1932,10 +1931,10 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
          CloseStyles();
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
@@ -2121,7 +2120,7 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202481416561858", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202491613124760", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2137,7 +2136,7 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wwpbaseobjects/subscriptions/wwp_subscription.js", "?202481416561859", false, true);
+         context.AddJavascriptSource("wwpbaseobjects/subscriptions/wwp_subscription.js", "?202491613124760", false, true);
          /* End function include_jscripts */
       }
 
@@ -2224,7 +2223,7 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
       {
          chkWWPSubscriptionSubscribed.Name = "WWPSUBSCRIPTIONSUBSCRIBED";
          chkWWPSubscriptionSubscribed.WebTags = "";
-         chkWWPSubscriptionSubscribed.Caption = "";
+         chkWWPSubscriptionSubscribed.Caption = "Subscribed";
          AssignProp("", false, chkWWPSubscriptionSubscribed_Internalname, "TitleCaption", chkWWPSubscriptionSubscribed.Caption, true);
          chkWWPSubscriptionSubscribed.CheckedValue = "false";
          A27WWPSubscriptionSubscribed = StringUtil.StrToBool( StringUtil.BoolToStr( A27WWPSubscriptionSubscribed));
@@ -2357,30 +2356,29 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("ENTER","{handler:'UserMainFullajax',iparms:[{postForm:true},{av:'A27WWPSubscriptionSubscribed',fld:'WWPSUBSCRIPTIONSUBSCRIBED',pic:''}]");
-         setEventMetadata("ENTER",",oparms:[{av:'A27WWPSubscriptionSubscribed',fld:'WWPSUBSCRIPTIONSUBSCRIBED',pic:''}]}");
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'A27WWPSubscriptionSubscribed',fld:'WWPSUBSCRIPTIONSUBSCRIBED',pic:''}]");
-         setEventMetadata("REFRESH",",oparms:[{av:'A27WWPSubscriptionSubscribed',fld:'WWPSUBSCRIPTIONSUBSCRIBED',pic:''}]}");
-         setEventMetadata("VALID_WWPSUBSCRIPTIONID","{handler:'Valid_Wwpsubscriptionid',iparms:[{av:'A25WWPSubscriptionId',fld:'WWPSUBSCRIPTIONID',pic:'ZZZZZZZZZ9'},{av:'Gx_mode',fld:'vMODE',pic:'@!'},{av:'A27WWPSubscriptionSubscribed',fld:'WWPSUBSCRIPTIONSUBSCRIBED',pic:''}]");
-         setEventMetadata("VALID_WWPSUBSCRIPTIONID",",oparms:[{av:'A23WWPNotificationDefinitionId',fld:'WWPNOTIFICATIONDEFINITIONID',pic:'ZZZZZZZZZ9'},{av:'A7WWPUserExtendedId',fld:'WWPUSEREXTENDEDID',pic:''},{av:'A26WWPSubscriptionEntityRecordId',fld:'WWPSUBSCRIPTIONENTITYRECORDID',pic:''},{av:'A28WWPSubscriptionEntityRecordDes',fld:'WWPSUBSCRIPTIONENTITYRECORDDES',pic:''},{av:'A19WWPSubscriptionRoleId',fld:'WWPSUBSCRIPTIONROLEID',pic:''},{av:'A20WWPEntityId',fld:'WWPENTITYID',pic:'ZZZZZZZZZ9'},{av:'A29WWPNotificationDefinitionDescr',fld:'WWPNOTIFICATIONDEFINITIONDESCR',pic:''},{av:'A21WWPEntityName',fld:'WWPENTITYNAME',pic:''},{av:'A8WWPUserExtendedFullName',fld:'WWPUSEREXTENDEDFULLNAME',pic:''},{av:'Gx_mode',fld:'vMODE',pic:'@!'},{av:'Z25WWPSubscriptionId'},{av:'Z23WWPNotificationDefinitionId'},{av:'Z7WWPUserExtendedId'},{av:'Z26WWPSubscriptionEntityRecordId'},{av:'Z28WWPSubscriptionEntityRecordDes'},{av:'Z19WWPSubscriptionRoleId'},{av:'Z27WWPSubscriptionSubscribed'},{av:'Z20WWPEntityId'},{av:'Z29WWPNotificationDefinitionDescr'},{av:'Z21WWPEntityName'},{av:'Z8WWPUserExtendedFullName'},{ctrl:'BTN_DELETE',prop:'Enabled'},{ctrl:'BTN_ENTER',prop:'Enabled'},{av:'A27WWPSubscriptionSubscribed',fld:'WWPSUBSCRIPTIONSUBSCRIBED',pic:''}]}");
-         setEventMetadata("VALID_WWPNOTIFICATIONDEFINITIONID","{handler:'Valid_Wwpnotificationdefinitionid',iparms:[{av:'A23WWPNotificationDefinitionId',fld:'WWPNOTIFICATIONDEFINITIONID',pic:'ZZZZZZZZZ9'},{av:'A20WWPEntityId',fld:'WWPENTITYID',pic:'ZZZZZZZZZ9'},{av:'A29WWPNotificationDefinitionDescr',fld:'WWPNOTIFICATIONDEFINITIONDESCR',pic:''},{av:'A21WWPEntityName',fld:'WWPENTITYNAME',pic:''},{av:'A27WWPSubscriptionSubscribed',fld:'WWPSUBSCRIPTIONSUBSCRIBED',pic:''}]");
-         setEventMetadata("VALID_WWPNOTIFICATIONDEFINITIONID",",oparms:[{av:'A20WWPEntityId',fld:'WWPENTITYID',pic:'ZZZZZZZZZ9'},{av:'A29WWPNotificationDefinitionDescr',fld:'WWPNOTIFICATIONDEFINITIONDESCR',pic:''},{av:'A21WWPEntityName',fld:'WWPENTITYNAME',pic:''},{av:'A27WWPSubscriptionSubscribed',fld:'WWPSUBSCRIPTIONSUBSCRIBED',pic:''}]}");
-         setEventMetadata("VALID_WWPUSEREXTENDEDID","{handler:'Valid_Wwpuserextendedid',iparms:[{av:'A7WWPUserExtendedId',fld:'WWPUSEREXTENDEDID',pic:''},{av:'A8WWPUserExtendedFullName',fld:'WWPUSEREXTENDEDFULLNAME',pic:''},{av:'A27WWPSubscriptionSubscribed',fld:'WWPSUBSCRIPTIONSUBSCRIBED',pic:''}]");
-         setEventMetadata("VALID_WWPUSEREXTENDEDID",",oparms:[{av:'A8WWPUserExtendedFullName',fld:'WWPUSEREXTENDEDFULLNAME',pic:''},{av:'A27WWPSubscriptionSubscribed',fld:'WWPSUBSCRIPTIONSUBSCRIBED',pic:''}]}");
+         setEventMetadata("ENTER","""{"handler":"UserMainFullajax","iparms":[{"postForm":true},{"av":"A27WWPSubscriptionSubscribed","fld":"WWPSUBSCRIPTIONSUBSCRIBED"}]""");
+         setEventMetadata("ENTER",""","oparms":[{"av":"A27WWPSubscriptionSubscribed","fld":"WWPSUBSCRIPTIONSUBSCRIBED"}]}""");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"A27WWPSubscriptionSubscribed","fld":"WWPSUBSCRIPTIONSUBSCRIBED"}]""");
+         setEventMetadata("REFRESH",""","oparms":[{"av":"A27WWPSubscriptionSubscribed","fld":"WWPSUBSCRIPTIONSUBSCRIBED"}]}""");
+         setEventMetadata("VALID_WWPSUBSCRIPTIONID","""{"handler":"Valid_Wwpsubscriptionid","iparms":[{"av":"A25WWPSubscriptionId","fld":"WWPSUBSCRIPTIONID","pic":"ZZZZZZZZZ9"},{"av":"Gx_mode","fld":"vMODE","pic":"@!"},{"av":"A27WWPSubscriptionSubscribed","fld":"WWPSUBSCRIPTIONSUBSCRIBED"}]""");
+         setEventMetadata("VALID_WWPSUBSCRIPTIONID",""","oparms":[{"av":"A23WWPNotificationDefinitionId","fld":"WWPNOTIFICATIONDEFINITIONID","pic":"ZZZZZZZZZ9"},{"av":"A7WWPUserExtendedId","fld":"WWPUSEREXTENDEDID"},{"av":"A26WWPSubscriptionEntityRecordId","fld":"WWPSUBSCRIPTIONENTITYRECORDID"},{"av":"A28WWPSubscriptionEntityRecordDes","fld":"WWPSUBSCRIPTIONENTITYRECORDDES"},{"av":"A19WWPSubscriptionRoleId","fld":"WWPSUBSCRIPTIONROLEID"},{"av":"A20WWPEntityId","fld":"WWPENTITYID","pic":"ZZZZZZZZZ9"},{"av":"A29WWPNotificationDefinitionDescr","fld":"WWPNOTIFICATIONDEFINITIONDESCR"},{"av":"A21WWPEntityName","fld":"WWPENTITYNAME"},{"av":"A8WWPUserExtendedFullName","fld":"WWPUSEREXTENDEDFULLNAME"},{"av":"Gx_mode","fld":"vMODE","pic":"@!"},{"av":"Z25WWPSubscriptionId"},{"av":"Z23WWPNotificationDefinitionId"},{"av":"Z7WWPUserExtendedId"},{"av":"Z26WWPSubscriptionEntityRecordId"},{"av":"Z28WWPSubscriptionEntityRecordDes"},{"av":"Z19WWPSubscriptionRoleId"},{"av":"Z27WWPSubscriptionSubscribed"},{"av":"Z20WWPEntityId"},{"av":"Z29WWPNotificationDefinitionDescr"},{"av":"Z21WWPEntityName"},{"av":"Z8WWPUserExtendedFullName"},{"ctrl":"BTN_DELETE","prop":"Enabled"},{"ctrl":"BTN_ENTER","prop":"Enabled"},{"av":"A27WWPSubscriptionSubscribed","fld":"WWPSUBSCRIPTIONSUBSCRIBED"}]}""");
+         setEventMetadata("VALID_WWPNOTIFICATIONDEFINITIONID","""{"handler":"Valid_Wwpnotificationdefinitionid","iparms":[{"av":"A23WWPNotificationDefinitionId","fld":"WWPNOTIFICATIONDEFINITIONID","pic":"ZZZZZZZZZ9"},{"av":"A20WWPEntityId","fld":"WWPENTITYID","pic":"ZZZZZZZZZ9"},{"av":"A29WWPNotificationDefinitionDescr","fld":"WWPNOTIFICATIONDEFINITIONDESCR"},{"av":"A21WWPEntityName","fld":"WWPENTITYNAME"},{"av":"A27WWPSubscriptionSubscribed","fld":"WWPSUBSCRIPTIONSUBSCRIBED"}]""");
+         setEventMetadata("VALID_WWPNOTIFICATIONDEFINITIONID",""","oparms":[{"av":"A20WWPEntityId","fld":"WWPENTITYID","pic":"ZZZZZZZZZ9"},{"av":"A29WWPNotificationDefinitionDescr","fld":"WWPNOTIFICATIONDEFINITIONDESCR"},{"av":"A21WWPEntityName","fld":"WWPENTITYNAME"},{"av":"A27WWPSubscriptionSubscribed","fld":"WWPSUBSCRIPTIONSUBSCRIBED"}]}""");
+         setEventMetadata("VALID_WWPUSEREXTENDEDID","""{"handler":"Valid_Wwpuserextendedid","iparms":[{"av":"A7WWPUserExtendedId","fld":"WWPUSEREXTENDEDID"},{"av":"A8WWPUserExtendedFullName","fld":"WWPUSEREXTENDEDFULLNAME"},{"av":"A27WWPSubscriptionSubscribed","fld":"WWPSUBSCRIPTIONSUBSCRIBED"}]""");
+         setEventMetadata("VALID_WWPUSEREXTENDEDID",""","oparms":[{"av":"A8WWPUserExtendedFullName","fld":"WWPUSEREXTENDEDFULLNAME"},{"av":"A27WWPSubscriptionSubscribed","fld":"WWPSUBSCRIPTIONSUBSCRIBED"}]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
       }
 
-      protected void CloseOpenCursors( )
+      protected override void CloseCursors( )
       {
          pr_default.close(1);
          pr_default.close(16);
@@ -2395,7 +2393,6 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
          Z28WWPSubscriptionEntityRecordDes = "";
          Z19WWPSubscriptionRoleId = "";
          Z7WWPUserExtendedId = "";
-         scmdbuf = "";
          gxfirstwebparm = "";
          gxfirstwebparm_bkp = "";
          A7WWPUserExtendedId = "";
@@ -2561,14 +2558,11 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
 
       private short GxWebError ;
       private short gxcookieaux ;
-      private short IsConfirmed ;
-      private short IsModified ;
       private short AnyError ;
+      private short IsModified ;
+      private short IsConfirmed ;
       private short nKeyPressed ;
-      private short initialized ;
-      private short GX_JID ;
       private short RcdFound4 ;
-      private short nIsDirty_4 ;
       private short Gx_BScreen ;
       private short gxajaxcallmode ;
       private int trnEnded ;
@@ -2604,7 +2598,6 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
       private string sPrefix ;
       private string Z19WWPSubscriptionRoleId ;
       private string Z7WWPUserExtendedId ;
-      private string scmdbuf ;
       private string gxfirstwebparm ;
       private string gxfirstwebparm_bkp ;
       private string A7WWPUserExtendedId ;
@@ -2691,6 +2684,7 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
       private string ZZ29WWPNotificationDefinitionDescr ;
       private string ZZ21WWPEntityName ;
       private string ZZ8WWPUserExtendedFullName ;
+      private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private GXCheckbox chkWWPSubscriptionSubscribed ;
@@ -2744,7 +2738,6 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
       private string[] T000420_A8WWPUserExtendedFullName ;
       private long[] T000421_A25WWPSubscriptionId ;
       private IDataStoreProvider pr_gam ;
-      private GXWebForm Form ;
    }
 
    public class wwp_subscription__gam : DataStoreHelperBase, IDataStoreHelper
@@ -2813,21 +2806,29 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
   {
      if ( def == null )
      {
-        Object[] prmT00047;
-        prmT00047 = new Object[] {
+        Object[] prmT00042;
+        prmT00042 = new Object[] {
+        new ParDef("WWPSubscriptionId",GXType.Int64,10,0)
+        };
+        Object[] prmT00043;
+        prmT00043 = new Object[] {
         new ParDef("WWPSubscriptionId",GXType.Int64,10,0)
         };
         Object[] prmT00044;
         prmT00044 = new Object[] {
         new ParDef("WWPNotificationDefinitionId",GXType.Int64,10,0)
         };
+        Object[] prmT00045;
+        prmT00045 = new Object[] {
+        new ParDef("WWPUserExtendedId",GXType.Char,40,0){Nullable=true}
+        };
         Object[] prmT00046;
         prmT00046 = new Object[] {
         new ParDef("WWPEntityId",GXType.Int64,10,0)
         };
-        Object[] prmT00045;
-        prmT00045 = new Object[] {
-        new ParDef("WWPUserExtendedId",GXType.Char,40,0){Nullable=true}
+        Object[] prmT00047;
+        prmT00047 = new Object[] {
+        new ParDef("WWPSubscriptionId",GXType.Int64,10,0)
         };
         Object[] prmT00048;
         prmT00048 = new Object[] {
@@ -2845,20 +2846,12 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
         prmT000411 = new Object[] {
         new ParDef("WWPSubscriptionId",GXType.Int64,10,0)
         };
-        Object[] prmT00043;
-        prmT00043 = new Object[] {
-        new ParDef("WWPSubscriptionId",GXType.Int64,10,0)
-        };
         Object[] prmT000412;
         prmT000412 = new Object[] {
         new ParDef("WWPSubscriptionId",GXType.Int64,10,0)
         };
         Object[] prmT000413;
         prmT000413 = new Object[] {
-        new ParDef("WWPSubscriptionId",GXType.Int64,10,0)
-        };
-        Object[] prmT00042;
-        prmT00042 = new Object[] {
         new ParDef("WWPSubscriptionId",GXType.Int64,10,0)
         };
         Object[] prmT000414;
@@ -2887,9 +2880,6 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
         prmT000417 = new Object[] {
         new ParDef("WWPSubscriptionId",GXType.Int64,10,0)
         };
-        Object[] prmT000421;
-        prmT000421 = new Object[] {
-        };
         Object[] prmT000418;
         prmT000418 = new Object[] {
         new ParDef("WWPNotificationDefinitionId",GXType.Int64,10,0)
@@ -2901,6 +2891,9 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
         Object[] prmT000420;
         prmT000420 = new Object[] {
         new ParDef("WWPUserExtendedId",GXType.Char,40,0){Nullable=true}
+        };
+        Object[] prmT000421;
+        prmT000421 = new Object[] {
         };
         def= new CursorDef[] {
             new CursorDef("T00042", "SELECT WWPSubscriptionId, WWPSubscriptionEntityRecordId, WWPSubscriptionEntityRecordDes, WWPSubscriptionRoleId, WWPSubscriptionSubscribed, WWPNotificationDefinitionId, WWPUserExtendedId FROM WWP_Subscription WHERE WWPSubscriptionId = :WWPSubscriptionId  FOR UPDATE OF WWP_Subscription NOWAIT",true, GxErrorMask.GX_NOMASK, false, this,prmT00042,1, GxCacheFrequency.OFF ,true,false )

@@ -45,10 +45,10 @@ namespace GeneXus.Programs {
       {
          this.AV10CompanyLocationId = aP0_CompanyLocationId;
          this.AV8TabCode = aP1_TabCode;
-         executePrivate();
+         ExecuteImpl();
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -163,11 +163,8 @@ namespace GeneXus.Programs {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITWEB( ) ;
          if ( ! isAjaxCallMode( ) )
          {
@@ -198,7 +195,7 @@ namespace GeneXus.Programs {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override short ExecuteStartEvent( )
@@ -242,10 +239,10 @@ namespace GeneXus.Programs {
          CloseStyles();
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
@@ -550,7 +547,7 @@ namespace GeneXus.Programs {
          {
             if ( context.ExposeMetadata( ) )
             {
-               Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+               Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
             }
          }
          Form.Meta.addItem("description", "Company Location View", 0) ;
@@ -852,14 +849,14 @@ namespace GeneXus.Programs {
          new GeneXus.Programs.wwpbaseobjects.loadwwpcontext(context ).execute( out  AV6WWPContext) ;
          lblWorkwithlink_Link = formatLink("companylocationww.aspx") ;
          AssignProp("", false, lblWorkwithlink_Internalname, "Link", lblWorkwithlink_Link, true);
-         AV14GXLvl9 = 0;
+         AV16GXLvl9 = 0;
          /* Using cursor H004G2 */
          pr_default.execute(0, new Object[] {AV10CompanyLocationId});
          while ( (pr_default.getStatus(0) != 101) )
          {
             A157CompanyLocationId = H004G2_A157CompanyLocationId[0];
             A158CompanyLocationName = H004G2_A158CompanyLocationName[0];
-            AV14GXLvl9 = 1;
+            AV16GXLvl9 = 1;
             Form.Caption = A158CompanyLocationName;
             AssignProp("", false, "FORM", "Caption", Form.Caption, true);
             AV9Exists = true;
@@ -867,7 +864,7 @@ namespace GeneXus.Programs {
             if (true) break;
          }
          pr_default.close(0);
-         if ( AV14GXLvl9 == 0 )
+         if ( AV16GXLvl9 == 0 )
          {
             Form.Caption = "Record not found";
             AssignProp("", false, "FORM", "Caption", Form.Caption, true);
@@ -882,6 +879,12 @@ namespace GeneXus.Programs {
             /* Execute user subroutine: 'LOADTABS' */
             S112 ();
             if (returnInSub) return;
+         }
+         AV15AIAppliedFilters = AV14Session.Get("CompanyLocationViewQueryAppliedFilters");
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( StringUtil.Trim( AV15AIAppliedFilters))) )
+         {
+            GX_msglist.addItem(AV15AIAppliedFilters);
+            AV14Session.Remove("CompanyLocationViewQueryAppliedFilters");
          }
       }
 
@@ -979,7 +982,7 @@ namespace GeneXus.Programs {
          PA4G2( ) ;
          WS4G2( ) ;
          WE4G2( ) ;
-         this.cleanup();
+         cleanup();
          context.SetWrapped(false);
          context.GX_msglist = BackMsgLst;
          return "";
@@ -1014,7 +1017,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20248121553169", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202491716173692", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1030,7 +1033,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("companylocationview.js", "?20248121553169", false, true);
+         context.AddJavascriptSource("companylocationview.js", "?202491716173692", false, true);
          context.AddJavascriptSource("shared/HistoryManager/HistoryManager.js", "", false, true);
          context.AddJavascriptSource("shared/HistoryManager/rsh/json2005.js", "", false, true);
          context.AddJavascriptSource("shared/HistoryManager/rsh/rsh.js", "", false, true);
@@ -1089,23 +1092,17 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'AV10CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9',hsh:true},{av:'AV8TabCode',fld:'vTABCODE',pic:'',hsh:true}]");
-         setEventMetadata("REFRESH",",oparms:[]}");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"AV10CompanyLocationId","fld":"vCOMPANYLOCATIONID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"AV8TabCode","fld":"vTABCODE","hsh":true}]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -1135,10 +1132,11 @@ namespace GeneXus.Programs {
          EvtRowId = "";
          sEvtType = "";
          AV6WWPContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPContext(context);
-         scmdbuf = "";
          H004G2_A157CompanyLocationId = new long[1] ;
          H004G2_A158CompanyLocationName = new string[] {""} ;
          A158CompanyLocationName = "";
+         AV15AIAppliedFilters = "";
+         AV14Session = context.GetSession();
          BackMsgLst = new msglist();
          LclMsgLst = new msglist();
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.companylocationview__default(),
@@ -1157,14 +1155,13 @@ namespace GeneXus.Programs {
       private short nIsMod_3 ;
       private short nGotPars ;
       private short GxWebError ;
-      private short initialized ;
       private short gxajaxcallmode ;
       private short wbEnd ;
       private short wbStart ;
       private short nCmpId ;
       private short nDonePA ;
       private short gxcookieaux ;
-      private short AV14GXLvl9 ;
+      private short AV16GXLvl9 ;
       private short nGXWrapped ;
       private int Tabs_Pagecount ;
       private int idxLst ;
@@ -1206,7 +1203,6 @@ namespace GeneXus.Programs {
       private string EvtGridId ;
       private string EvtRowId ;
       private string sEvtType ;
-      private string scmdbuf ;
       private string A158CompanyLocationName ;
       private bool entryPointCalled ;
       private bool toggleJsOutput ;
@@ -1220,18 +1216,20 @@ namespace GeneXus.Programs {
       private bool AV9Exists ;
       private bool bDynCreated_Generalwc ;
       private bool bDynCreated_Companywc ;
+      private string AV15AIAppliedFilters ;
+      private IGxSession AV14Session ;
       private GXWebComponent WebComp_Generalwc ;
       private GXWebComponent WebComp_Companywc ;
       private GXUserControl ucTabs ;
+      private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV6WWPContext ;
       private IDataStoreProvider pr_default ;
       private long[] H004G2_A157CompanyLocationId ;
       private string[] H004G2_A158CompanyLocationName ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
-      private GXWebForm Form ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV6WWPContext ;
    }
 
    public class companylocationview__default : DataStoreHelperBase, IDataStoreHelper

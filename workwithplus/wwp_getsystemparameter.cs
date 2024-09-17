@@ -48,7 +48,7 @@ namespace GeneXus.Programs.workwithplus {
          this.AV8WWPParameterKey = aP0_WWPParameterKey;
          this.AV9WWPParameterValue = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_WWPParameterValue=this.AV9WWPParameterValue;
       }
 
@@ -61,30 +61,13 @@ namespace GeneXus.Programs.workwithplus {
       public void executeSubmit( string aP0_WWPParameterKey ,
                                  out string aP1_WWPParameterValue )
       {
-         wwp_getsystemparameter objwwp_getsystemparameter;
-         objwwp_getsystemparameter = new wwp_getsystemparameter();
-         objwwp_getsystemparameter.AV8WWPParameterKey = aP0_WWPParameterKey;
-         objwwp_getsystemparameter.AV9WWPParameterValue = "" ;
-         objwwp_getsystemparameter.context.SetSubmitInitialConfig(context);
-         objwwp_getsystemparameter.initialize();
-         Submit( executePrivateCatch,objwwp_getsystemparameter);
+         this.AV8WWPParameterKey = aP0_WWPParameterKey;
+         this.AV9WWPParameterValue = "" ;
+         SubmitImpl();
          aP1_WWPParameterValue=this.AV9WWPParameterValue;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwp_getsystemparameter)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -99,12 +82,12 @@ namespace GeneXus.Programs.workwithplus {
             if (true) break;
          }
          pr_default.close(0);
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -112,14 +95,9 @@ namespace GeneXus.Programs.workwithplus {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
          AV9WWPParameterValue = "";
-         scmdbuf = "";
          P00282_A1WWPParameterKey = new string[] {""} ;
          P00282_A2WWPParameterValue = new string[] {""} ;
          A1WWPParameterKey = "";
@@ -134,7 +112,6 @@ namespace GeneXus.Programs.workwithplus {
          /* GeneXus formulas. */
       }
 
-      private string scmdbuf ;
       private string AV9WWPParameterValue ;
       private string A2WWPParameterValue ;
       private string AV8WWPParameterKey ;

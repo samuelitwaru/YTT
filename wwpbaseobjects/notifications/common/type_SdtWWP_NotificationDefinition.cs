@@ -951,6 +951,20 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
          return false ;
       }
 
+      [XmlIgnore]
+      private static GXTypeInfo _typeProps;
+      protected override GXTypeInfo TypeInfo
+      {
+         get {
+            return _typeProps ;
+         }
+
+         set {
+            _typeProps = value ;
+         }
+
+      }
+
       public void initialize( )
       {
          sdtIsNull = 1;
@@ -1021,6 +1035,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
    }
 
    [DataContract(Name = @"WWPBaseObjects\Notifications\Common\WWP_NotificationDefinition", Namespace = "YTT_version4")]
+   [GxJsonSerialization("default")]
    public class SdtWWP_NotificationDefinition_RESTInterface : GxGenericCollectionItem<GeneXus.Programs.wwpbaseobjects.notifications.common.SdtWWP_NotificationDefinition>
    {
       public SdtWWP_NotificationDefinition_RESTInterface( ) : base()
@@ -1269,6 +1284,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
    }
 
    [DataContract(Name = @"WWPBaseObjects\Notifications\Common\WWP_NotificationDefinition", Namespace = "YTT_version4")]
+   [GxJsonSerialization("default")]
    public class SdtWWP_NotificationDefinition_RESTLInterface : GxGenericCollectionItem<GeneXus.Programs.wwpbaseobjects.notifications.common.SdtWWP_NotificationDefinition>
    {
       public SdtWWP_NotificationDefinition_RESTLInterface( ) : base()

@@ -46,7 +46,7 @@ namespace GeneXus.Programs {
       {
          this.AV15totalDaysMissed = 0 ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_totalDaysMissed=this.AV15totalDaysMissed;
       }
 
@@ -58,29 +58,12 @@ namespace GeneXus.Programs {
 
       public void executeSubmit( out short aP0_totalDaysMissed )
       {
-         sdgetlogdaysmissed objsdgetlogdaysmissed;
-         objsdgetlogdaysmissed = new sdgetlogdaysmissed();
-         objsdgetlogdaysmissed.AV15totalDaysMissed = 0 ;
-         objsdgetlogdaysmissed.context.SetSubmitInitialConfig(context);
-         objsdgetlogdaysmissed.initialize();
-         Submit( executePrivateCatch,objsdgetlogdaysmissed);
+         this.AV15totalDaysMissed = 0 ;
+         SubmitImpl();
          aP0_totalDaysMissed=this.AV15totalDaysMissed;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((sdgetlogdaysmissed)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -118,21 +101,17 @@ namespace GeneXus.Programs {
             }
             AV14StartMonthDate = DateTimeUtil.DAdd( AV14StartMonthDate, (1));
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -144,7 +123,6 @@ namespace GeneXus.Programs {
          AV12StartDate = DateTime.MinValue;
          AV14StartMonthDate = DateTime.MinValue;
          AV8CurrentDate = DateTime.MinValue;
-         scmdbuf = "";
          P005R2_A119WorkHourLogDate = new DateTime[] {DateTime.MinValue} ;
          P005R2_A106EmployeeId = new long[1] ;
          P005R2_A118WorkHourLogId = new long[1] ;
@@ -166,7 +144,6 @@ namespace GeneXus.Programs {
       private long AV18Udparg1 ;
       private long A106EmployeeId ;
       private long A118WorkHourLogId ;
-      private string scmdbuf ;
       private DateTime AV9EndDate ;
       private DateTime Gx_date ;
       private DateTime AV11lastMonthTodayDate ;

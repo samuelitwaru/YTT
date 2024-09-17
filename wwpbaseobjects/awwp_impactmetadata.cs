@@ -24,20 +24,15 @@ namespace GeneXus.Programs.wwpbaseobjects {
    {
       public static int Main( string[] args )
       {
-         try
-         {
-            GeneXus.Configuration.Config.ParseArgs(ref args);
-            return new wwpbaseobjects.awwp_impactmetadata().executeCmdLine(args); ;
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            Console.WriteLine( e.ToString() );
-            return 1 ;
-         }
+         return new wwpbaseobjects.awwp_impactmetadata().MainImpl(args); ;
       }
 
       public int executeCmdLine( string[] args )
+      {
+         return ExecuteCmdLine(args); ;
+      }
+
+      protected override int ExecuteCmdLine( string[] args )
       {
          execute();
          return GX.GXRuntime.ExitCode ;
@@ -76,50 +71,29 @@ namespace GeneXus.Programs.wwpbaseobjects {
       public void execute( )
       {
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
       public void executeSubmit( )
       {
-         awwp_impactmetadata objawwp_impactmetadata;
-         objawwp_impactmetadata = new awwp_impactmetadata();
-         objawwp_impactmetadata.context.SetSubmitInitialConfig(context);
-         objawwp_impactmetadata.initialize();
-         Submit( executePrivateCatch,objawwp_impactmetadata);
+         SubmitImpl();
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((awwp_impactmetadata)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            Console.WriteLine( e.ToString() );
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )

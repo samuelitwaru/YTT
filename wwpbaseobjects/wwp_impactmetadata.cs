@@ -44,51 +44,30 @@ namespace GeneXus.Programs.wwpbaseobjects {
       public void execute( )
       {
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
       public void executeSubmit( )
       {
-         wwp_impactmetadata objwwp_impactmetadata;
-         objwwp_impactmetadata = new wwp_impactmetadata();
-         objwwp_impactmetadata.context.SetSubmitInitialConfig(context);
-         objwwp_impactmetadata.initialize();
-         Submit( executePrivateCatch,objwwp_impactmetadata);
+         SubmitImpl();
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwp_impactmetadata)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            Console.WriteLine( e.ToString() );
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
          args = new Object[] {} ;
-         ClassLoader.Execute("wwpbaseobjects-awwp_impactmetadata","GeneXus.Programs","wwpbaseobjects.awwp_impactmetadata", new Object[] {context }, "execute", args);
-         this.cleanup();
+         ClassLoader.Execute("wwpbaseobjects.awwp_impactmetadata","GeneXus.Programs","wwpbaseobjects.awwp_impactmetadata", new Object[] {context }, "execute", args);
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )

@@ -48,7 +48,7 @@ namespace GeneXus.Programs {
          this.AV9EmployeeId = aP0_EmployeeId;
          this.AV10EmployeeLeaveDays = new GXBaseCollection<SdtSDTEmployeeLeaveDay>( context, "SDTEmployeeLeaveDay", "YTT_version4") ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_EmployeeLeaveDays=this.AV10EmployeeLeaveDays;
       }
 
@@ -61,30 +61,13 @@ namespace GeneXus.Programs {
       public void executeSubmit( long aP0_EmployeeId ,
                                  out GXBaseCollection<SdtSDTEmployeeLeaveDay> aP1_EmployeeLeaveDays )
       {
-         getleavedays objgetleavedays;
-         objgetleavedays = new getleavedays();
-         objgetleavedays.AV9EmployeeId = aP0_EmployeeId;
-         objgetleavedays.AV10EmployeeLeaveDays = new GXBaseCollection<SdtSDTEmployeeLeaveDay>( context, "SDTEmployeeLeaveDay", "YTT_version4") ;
-         objgetleavedays.context.SetSubmitInitialConfig(context);
-         objgetleavedays.initialize();
-         Submit( executePrivateCatch,objgetleavedays);
+         this.AV9EmployeeId = aP0_EmployeeId;
+         this.AV10EmployeeLeaveDays = new GXBaseCollection<SdtSDTEmployeeLeaveDay>( context, "SDTEmployeeLeaveDay", "YTT_version4") ;
+         SubmitImpl();
          aP1_EmployeeLeaveDays=this.AV10EmployeeLeaveDays;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((getleavedays)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -112,12 +95,12 @@ namespace GeneXus.Programs {
             pr_default.readNext(0);
          }
          pr_default.close(0);
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -125,14 +108,9 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
          AV10EmployeeLeaveDays = new GXBaseCollection<SdtSDTEmployeeLeaveDay>( context, "SDTEmployeeLeaveDay", "YTT_version4");
-         scmdbuf = "";
          P00B32_A124LeaveTypeId = new long[1] ;
          P00B32_A132LeaveRequestStatus = new string[] {""} ;
          P00B32_A106EmployeeId = new long[1] ;
@@ -160,7 +138,6 @@ namespace GeneXus.Programs {
       private long A124LeaveTypeId ;
       private long A106EmployeeId ;
       private long A127LeaveRequestId ;
-      private string scmdbuf ;
       private string A132LeaveRequestStatus ;
       private string A125LeaveTypeName ;
       private DateTime A129LeaveRequestStartDate ;
@@ -168,6 +145,7 @@ namespace GeneXus.Programs {
       private DateTime AV8CurrentDAte ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GXBaseCollection<SdtSDTEmployeeLeaveDay> AV10EmployeeLeaveDays ;
       private IDataStoreProvider pr_default ;
       private long[] P00B32_A124LeaveTypeId ;
       private string[] P00B32_A132LeaveRequestStatus ;
@@ -176,9 +154,8 @@ namespace GeneXus.Programs {
       private DateTime[] P00B32_A130LeaveRequestEndDate ;
       private string[] P00B32_A125LeaveTypeName ;
       private long[] P00B32_A127LeaveRequestId ;
-      private GXBaseCollection<SdtSDTEmployeeLeaveDay> aP1_EmployeeLeaveDays ;
-      private GXBaseCollection<SdtSDTEmployeeLeaveDay> AV10EmployeeLeaveDays ;
       private SdtSDTEmployeeLeaveDay AV11day ;
+      private GXBaseCollection<SdtSDTEmployeeLeaveDay> aP1_EmployeeLeaveDays ;
    }
 
    public class getleavedays__default : DataStoreHelperBase, IDataStoreHelper

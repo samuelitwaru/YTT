@@ -51,7 +51,7 @@ namespace GeneXus.Programs {
          this.AV4DateTo = aP2_DateTo;
          this.AV5Days = 0 ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP3_Days=this.AV5Days;
       }
 
@@ -68,32 +68,15 @@ namespace GeneXus.Programs {
                                  DateTime aP2_DateTo ,
                                  out decimal aP3_Days )
       {
-         getemployeeapprovedvacationdays2 objgetemployeeapprovedvacationdays2;
-         objgetemployeeapprovedvacationdays2 = new getemployeeapprovedvacationdays2();
-         objgetemployeeapprovedvacationdays2.AV2EmployeeId = aP0_EmployeeId;
-         objgetemployeeapprovedvacationdays2.AV3DateFrom = aP1_DateFrom;
-         objgetemployeeapprovedvacationdays2.AV4DateTo = aP2_DateTo;
-         objgetemployeeapprovedvacationdays2.AV5Days = 0 ;
-         objgetemployeeapprovedvacationdays2.context.SetSubmitInitialConfig(context);
-         objgetemployeeapprovedvacationdays2.initialize();
-         Submit( executePrivateCatch,objgetemployeeapprovedvacationdays2);
+         this.AV2EmployeeId = aP0_EmployeeId;
+         this.AV3DateFrom = aP1_DateFrom;
+         this.AV4DateTo = aP2_DateTo;
+         this.AV5Days = 0 ;
+         SubmitImpl();
          aP3_Days=this.AV5Days;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((getemployeeapprovedvacationdays2)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -103,20 +86,16 @@ namespace GeneXus.Programs {
          {
             AV5Days = (decimal)(args[3]) ;
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )

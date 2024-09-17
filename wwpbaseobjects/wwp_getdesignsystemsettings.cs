@@ -40,7 +40,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       {
          this.AV8WWP_DesignSystemSettings = new GeneXus.Programs.wwpbaseobjects.SdtWWP_DesignSystemSettings(context) ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_WWP_DesignSystemSettings=this.AV8WWP_DesignSystemSettings;
       }
 
@@ -52,29 +52,12 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       public void executeSubmit( out GeneXus.Programs.wwpbaseobjects.SdtWWP_DesignSystemSettings aP0_WWP_DesignSystemSettings )
       {
-         wwp_getdesignsystemsettings objwwp_getdesignsystemsettings;
-         objwwp_getdesignsystemsettings = new wwp_getdesignsystemsettings();
-         objwwp_getdesignsystemsettings.AV8WWP_DesignSystemSettings = new GeneXus.Programs.wwpbaseobjects.SdtWWP_DesignSystemSettings(context) ;
-         objwwp_getdesignsystemsettings.context.SetSubmitInitialConfig(context);
-         objwwp_getdesignsystemsettings.initialize();
-         Submit( executePrivateCatch,objwwp_getdesignsystemsettings);
+         this.AV8WWP_DesignSystemSettings = new GeneXus.Programs.wwpbaseobjects.SdtWWP_DesignSystemSettings(context) ;
+         SubmitImpl();
          aP0_WWP_DesignSystemSettings=this.AV8WWP_DesignSystemSettings;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwp_getdesignsystemsettings)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -92,21 +75,17 @@ namespace GeneXus.Programs.wwpbaseobjects {
             AV8WWP_DesignSystemSettings.gxTpr_Backgroundstyle = "Light";
             new GeneXus.Programs.wwpbaseobjects.saveuserkeyvalue(context ).execute(  "DesignSystemSettings",  AV8WWP_DesignSystemSettings.ToJSonString(false, true)) ;
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -119,8 +98,8 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       private string GXt_char1 ;
       private string AV9WWP_DesignSystemSettingsJSON ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWP_DesignSystemSettings aP0_WWP_DesignSystemSettings ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWP_DesignSystemSettings AV8WWP_DesignSystemSettings ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWP_DesignSystemSettings aP0_WWP_DesignSystemSettings ;
    }
 
 }

@@ -49,7 +49,7 @@ namespace GeneXus.Programs {
          this.AV12Filename = "" ;
          this.AV13ErrorMessage = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_Filename=this.AV12Filename;
          aP1_ErrorMessage=this.AV13ErrorMessage;
       }
@@ -63,31 +63,14 @@ namespace GeneXus.Programs {
       public void executeSubmit( out string aP0_Filename ,
                                  out string aP1_ErrorMessage )
       {
-         employeelistexport objemployeelistexport;
-         objemployeelistexport = new employeelistexport();
-         objemployeelistexport.AV12Filename = "" ;
-         objemployeelistexport.AV13ErrorMessage = "" ;
-         objemployeelistexport.context.SetSubmitInitialConfig(context);
-         objemployeelistexport.initialize();
-         Submit( executePrivateCatch,objemployeelistexport);
+         this.AV12Filename = "" ;
+         this.AV13ErrorMessage = "" ;
+         SubmitImpl();
          aP0_Filename=this.AV12Filename;
          aP1_ErrorMessage=this.AV13ErrorMessage;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((employeelistexport)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -96,7 +79,7 @@ namespace GeneXus.Programs {
          S111 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          AV14CellRow = 1;
@@ -105,38 +88,38 @@ namespace GeneXus.Programs {
          S201 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          /* Execute user subroutine: 'WRITEFILTERS' */
          S131 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          /* Execute user subroutine: 'WRITECOLUMNTITLES' */
          S141 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          /* Execute user subroutine: 'WRITEDATA' */
          S161 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          /* Execute user subroutine: 'CLOSEDOCUMENT' */
          S191 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void S111( )
@@ -553,16 +536,12 @@ namespace GeneXus.Programs {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -589,7 +568,6 @@ namespace GeneXus.Programs {
          AV64Employeelistds_5_tfemployeeemail_sel = "";
          AV65Employeelistds_6_tfcompanyname = "";
          AV66Employeelistds_7_tfcompanyname_sel = "";
-         scmdbuf = "";
          lV60Employeelistds_1_filterfulltext = "";
          lV61Employeelistds_2_tfemployeename = "";
          lV63Employeelistds_4_tfemployeeemail = "";
@@ -650,7 +628,6 @@ namespace GeneXus.Programs {
       private string AV62Employeelistds_3_tfemployeename_sel ;
       private string AV65Employeelistds_6_tfcompanyname ;
       private string AV66Employeelistds_7_tfcompanyname_sel ;
-      private string scmdbuf ;
       private string lV61Employeelistds_2_tfemployeename ;
       private string lV65Employeelistds_6_tfcompanyname ;
       private string A148EmployeeName ;
@@ -675,8 +652,12 @@ namespace GeneXus.Programs {
       private string lV63Employeelistds_4_tfemployeeemail ;
       private string A109EmployeeEmail ;
       private IGxSession AV20Session ;
+      private ExcelDocumentI AV11ExcelDocument ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV9WWPContext ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector AV24ColumnsSelector ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector_Column AV26ColumnsSelector_Column ;
       private IDataStoreProvider pr_default ;
       private long[] P007T2_A100CompanyId ;
       private decimal[] P007T2_A146EmployeeVactionDays ;
@@ -687,15 +668,11 @@ namespace GeneXus.Programs {
       private string[] P007T2_A148EmployeeName ;
       private string[] P007T2_A107EmployeeFirstName ;
       private long[] P007T2_A106EmployeeId ;
-      private string aP0_Filename ;
-      private string aP1_ErrorMessage ;
-      private ExcelDocumentI AV11ExcelDocument ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV9WWPContext ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector AV25ColumnsSelectorAux ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState AV22GridState ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue AV23GridStateFilterValue ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector AV24ColumnsSelector ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector AV25ColumnsSelectorAux ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector_Column AV26ColumnsSelector_Column ;
+      private string aP0_Filename ;
+      private string aP1_ErrorMessage ;
    }
 
    public class employeelistexport__default : DataStoreHelperBase, IDataStoreHelper

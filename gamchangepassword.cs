@@ -44,11 +44,11 @@ namespace GeneXus.Programs {
       public void execute( ref string aP0_IDP_State )
       {
          this.AV6IDP_State = aP0_IDP_State;
-         executePrivate();
+         ExecuteImpl();
          aP0_IDP_State=this.AV6IDP_State;
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -133,11 +133,8 @@ namespace GeneXus.Programs {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITWEB( ) ;
          if ( ! isAjaxCallMode( ) )
          {
@@ -177,7 +174,7 @@ namespace GeneXus.Programs {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void RenderHtmlHeaders( )
@@ -206,10 +203,10 @@ namespace GeneXus.Programs {
          CloseStyles();
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
@@ -351,9 +348,9 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "Center", "top", "", "", "div");
             /* Static images/pictures */
-            ClassString = "Image" + " " + ((StringUtil.StrCmp(imgHeaderoriginal_gximage, "")==0) ? "GX_Image_yukon_app_logo_Class" : "GX_Image_"+imgHeaderoriginal_gximage+"_Class");
+            ClassString = "Image" + " " + ((StringUtil.StrCmp(imgHeaderoriginal_gximage, "")==0) ? "GX_Image_LogoLogin_Class" : "GX_Image_"+imgHeaderoriginal_gximage+"_Class");
             StyleString = "";
-            sImgUrl = (string)(context.GetImagePath( "3b6682a4-794f-4e83-af42-03de378e152a", "", context.GetTheme( )));
+            sImgUrl = (string)(context.GetImagePath( "e9edf59f-db45-4e16-b6a6-2c2b6611a4a3", "", context.GetTheme( )));
             GxWebStd.gx_bitmap( context, imgHeaderoriginal_Internalname, sImgUrl, "", "", "", context.GetTheme( ), 1, 1, "", "", 0, 0, 0, "px", 0, "px", 0, 0, 0, "", "", StyleString, ClassString, "", "", "", "", " "+"data-gx-image"+" ", "", "", 1, false, false, context.GetImageSrcSet( sImgUrl), "HLP_GAMChangePassword.htm");
             GxWebStd.gx_div_end( context, "Center", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -441,7 +438,7 @@ namespace GeneXus.Programs {
          {
             if ( context.ExposeMetadata( ) )
             {
-               Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+               Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
             }
          }
          Form.Meta.addItem("description", "Change password", 0) ;
@@ -511,6 +508,7 @@ namespace GeneXus.Programs {
                         {
                            context.wbHandled = 1;
                            dynload_actions( ) ;
+                           /* Execute user event: Backtologin.Click */
                            E13062 ();
                         }
                         else if ( StringUtil.StrCmp(sEvt, "LOAD") == 0 )
@@ -705,20 +703,20 @@ namespace GeneXus.Programs {
          /* Start Routine */
          returnInSub = false;
          Form.Headerrawhtml = "<link rel=\"shortcut icon\" type=\"image/x-icon\" href=\""+context.convertURL( (string)(context.GetImagePath( "fac54406-4978-42bf-9e0f-abe1151bba87", "", context.GetTheme( ))))+"\">";
-         if ( StringUtil.StrCmp(AV15HTTPRequest.Method, "GET") == 0 )
+         if ( StringUtil.StrCmp(AV30HTTPRequest.Method, "GET") == 0 )
          {
             this.executeExternalObjectMethod("", false, "gx.core.ds", "setOption", new Object[] {(string)"base-color",(string)"SkyBlue"}, false);
             this.executeExternalObjectMethod("", false, "gx.core.ds", "setOption", new Object[] {(string)"background-color",(string)"Light"}, false);
          }
-         AV18User = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).getusertochangepassword();
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV18User.gxTpr_Name)) )
+         AV33User = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).getusertochangepassword();
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV33User.gxTpr_Name)) )
          {
-            AV10UserName = AV18User.gxTpr_Name;
+            AV10UserName = AV33User.gxTpr_Name;
             AssignAttri("", false, "AV10UserName", AV10UserName);
          }
          else
          {
-            AV17Errors = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).getlasterrors();
+            AV32Errors = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).getlasterrors();
             /* Execute user subroutine: 'DISPLAYMESSAGES' */
             S112 ();
             if (returnInSub) return;
@@ -738,10 +736,10 @@ namespace GeneXus.Programs {
          returnInSub = false;
          if ( StringUtil.StrCmp(AV12UserPasswordNew, AV13UserPasswordNewConf) == 0 )
          {
-            AV7isOK = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).updateusertochangepassword(AV11UserPassword, AV12UserPasswordNew, out  AV17Errors);
+            AV7isOK = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).updateusertochangepassword(AV11UserPassword, AV12UserPasswordNew, out  AV32Errors);
             if ( AV7isOK )
             {
-               if ( AV17Errors.Count > 0 )
+               if ( AV32Errors.Count > 0 )
                {
                   GX_msglist.addItem("Your new password has been saved successfully!.");
                   /* Execute user subroutine: 'DISPLAYMESSAGES' */
@@ -787,8 +785,8 @@ namespace GeneXus.Programs {
       {
          /* Backtologin_Click Routine */
          returnInSub = false;
-         AV7isOK = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).logout(out  AV17Errors);
-         CallWebObject(formatLink("login.aspx") );
+         AV7isOK = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).logout(out  AV32Errors);
+         CallWebObject(formatLink("gamexamplelogin.aspx") );
          context.wjLocDisableFrm = 1;
       }
 
@@ -796,12 +794,12 @@ namespace GeneXus.Programs {
       {
          /* 'DISPLAYMESSAGES' Routine */
          returnInSub = false;
-         AV25GXV1 = 1;
-         while ( AV25GXV1 <= AV17Errors.Count )
+         AV38GXV1 = 1;
+         while ( AV38GXV1 <= AV32Errors.Count )
          {
-            AV16Error = ((GeneXus.Programs.genexussecurity.SdtGAMError)AV17Errors.Item(AV25GXV1));
-            GX_msglist.addItem(StringUtil.Format( "%1 (GAM%2)", AV16Error.gxTpr_Message, StringUtil.LTrimStr( (decimal)(AV16Error.gxTpr_Code), 12, 0), "", "", "", "", "", "", ""));
-            AV25GXV1 = (int)(AV25GXV1+1);
+            AV31Error = ((GeneXus.Programs.genexussecurity.SdtGAMError)AV32Errors.Item(AV38GXV1));
+            GX_msglist.addItem(StringUtil.Format( "%1 (GAM%2)", AV31Error.gxTpr_Message, StringUtil.LTrimStr( (decimal)(AV31Error.gxTpr_Code), 12, 0), "", "", "", "", "", "", ""));
+            AV38GXV1 = (int)(AV38GXV1+1);
          }
       }
 
@@ -976,7 +974,7 @@ namespace GeneXus.Programs {
          PA062( ) ;
          WS062( ) ;
          WE062( ) ;
-         this.cleanup();
+         cleanup();
          context.SetWrapped(false);
          context.GX_msglist = BackMsgLst;
          return "";
@@ -1000,7 +998,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20248121534589", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202491613144524", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1016,7 +1014,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("gamchangepassword.js", "?20248121534592", false, true);
+         context.AddJavascriptSource("gamchangepassword.js", "?202491613144528", false, true);
          context.AddJavascriptSource("DVelop/DVMessage/pnotify.custom.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/DVMessage/DVMessageRender.js", "", false, true);
@@ -1102,27 +1100,19 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'AV6IDP_State',fld:'vIDP_STATE',pic:'',hsh:true}]");
-         setEventMetadata("REFRESH",",oparms:[]}");
-         setEventMetadata("ENTER","{handler:'E12062',iparms:[{av:'AV12UserPasswordNew',fld:'vUSERPASSWORDNEW',pic:''},{av:'AV13UserPasswordNewConf',fld:'vUSERPASSWORDNEWCONF',pic:''},{av:'AV11UserPassword',fld:'vUSERPASSWORD',pic:''},{av:'AV6IDP_State',fld:'vIDP_STATE',pic:'',hsh:true}]");
-         setEventMetadata("ENTER",",oparms:[]}");
-         setEventMetadata("BACKTOLOGIN.CLICK","{handler:'E13062',iparms:[]");
-         setEventMetadata("BACKTOLOGIN.CLICK",",oparms:[]}");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"AV6IDP_State","fld":"vIDP_STATE","hsh":true}]}""");
+         setEventMetadata("ENTER","""{"handler":"E12062","iparms":[{"av":"AV12UserPasswordNew","fld":"vUSERPASSWORDNEW"},{"av":"AV13UserPasswordNewConf","fld":"vUSERPASSWORDNEWCONF"},{"av":"AV11UserPassword","fld":"vUSERPASSWORD"},{"av":"AV6IDP_State","fld":"vIDP_STATE","hsh":true}]}""");
+         setEventMetadata("BACKTOLOGIN.CLICK","""{"handler":"E13062","iparms":[]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -1152,11 +1142,11 @@ namespace GeneXus.Programs {
          AV11UserPassword = "";
          AV12UserPasswordNew = "";
          AV13UserPasswordNewConf = "";
-         AV15HTTPRequest = new GxHttpRequest( context);
-         AV18User = new GeneXus.Programs.genexussecurity.SdtGAMUser(context);
-         AV17Errors = new GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError>( context, "GeneXus.Programs.genexussecurity.SdtGAMError", "GeneXus.Programs");
+         AV30HTTPRequest = new GxHttpRequest( context);
+         AV33User = new GeneXus.Programs.genexussecurity.SdtGAMUser(context);
+         AV32Errors = new GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError>( context, "GeneXus.Programs.genexussecurity.SdtGAMError", "GeneXus.Programs");
          AV8URL = "";
-         AV16Error = new GeneXus.Programs.genexussecurity.SdtGAMError(context);
+         AV31Error = new GeneXus.Programs.genexussecurity.SdtGAMError(context);
          sStyleString = "";
          lblTextblockusername_Jsonclick = "";
          TempTags = "";
@@ -1173,14 +1163,13 @@ namespace GeneXus.Programs {
 
       private short nGotPars ;
       private short GxWebError ;
-      private short initialized ;
       private short wbEnd ;
       private short wbStart ;
       private short nDonePA ;
       private short gxcookieaux ;
       private short nGXWrapped ;
       private int edtavUsername_Enabled ;
-      private int AV25GXV1 ;
+      private int AV38GXV1 ;
       private int edtavUserpassword_Enabled ;
       private int edtavUserpasswordnew_Enabled ;
       private int edtavUserpasswordnewconf_Enabled ;
@@ -1267,15 +1256,15 @@ namespace GeneXus.Programs {
       private GXUserControl ucUcmessage ;
       private GXUserControl ucWwputilities ;
       private GXWebForm Form ;
+      private GxHttpRequest AV30HTTPRequest ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private string aP0_IDP_State ;
+      private GeneXus.Programs.genexussecurity.SdtGAMUser AV33User ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV32Errors ;
+      private GeneXus.Programs.genexussecurity.SdtGAMError AV31Error ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
-      private GxHttpRequest AV15HTTPRequest ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV17Errors ;
-      private GeneXus.Programs.genexussecurity.SdtGAMError AV16Error ;
-      private GeneXus.Programs.genexussecurity.SdtGAMUser AV18User ;
    }
 
 }

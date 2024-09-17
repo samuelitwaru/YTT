@@ -56,7 +56,7 @@ namespace GeneXus.Programs {
       {
          this.AV12EmployeeId = 0 ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_EmployeeId=this.AV12EmployeeId;
       }
 
@@ -68,49 +68,28 @@ namespace GeneXus.Programs {
 
       public void executeSubmit( out long aP0_EmployeeId )
       {
-         getloggedinemployeeid objgetloggedinemployeeid;
-         objgetloggedinemployeeid = new getloggedinemployeeid();
-         objgetloggedinemployeeid.AV12EmployeeId = 0 ;
-         objgetloggedinemployeeid.context.SetSubmitInitialConfig(context);
-         objgetloggedinemployeeid.initialize();
-         Submit( executePrivateCatch,objgetloggedinemployeeid);
+         this.AV12EmployeeId = 0 ;
+         SubmitImpl();
          aP0_EmployeeId=this.AV12EmployeeId;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((getloggedinemployeeid)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
          new getloggedinuser(context ).execute( out  AV11GAMUser, out  AV8Employee) ;
          AV12EmployeeId = AV8Employee.gxTpr_Employeeid;
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -121,9 +100,9 @@ namespace GeneXus.Programs {
       }
 
       private long AV12EmployeeId ;
-      private long aP0_EmployeeId ;
-      private SdtEmployee AV8Employee ;
       private GeneXus.Programs.genexussecurity.SdtGAMUser AV11GAMUser ;
+      private SdtEmployee AV8Employee ;
+      private long aP0_EmployeeId ;
    }
 
 }

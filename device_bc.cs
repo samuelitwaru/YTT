@@ -162,7 +162,6 @@ namespace GeneXus.Programs {
          }
          if ( AnyError == 0 )
          {
-            IsConfirmed = 1;
          }
       }
 
@@ -217,7 +216,6 @@ namespace GeneXus.Programs {
 
       protected void CheckExtendedTable0L23( )
       {
-         nIsDirty_23 = 0;
          standaloneModal( ) ;
          if ( ! ( ( A152DeviceType == 0 ) || ( A152DeviceType == 1 ) || ( A152DeviceType == 2 ) || ( A152DeviceType == 3 ) ) )
          {
@@ -304,7 +302,6 @@ namespace GeneXus.Programs {
       protected void insert_Check( )
       {
          CONFIRM_0L0( ) ;
-         IsConfirmed = 0;
       }
 
       protected void update_Check( )
@@ -521,7 +518,6 @@ namespace GeneXus.Programs {
          else
          {
          }
-         IsModified = 0;
          if ( AnyError != 0 )
          {
             context.wjLoc = "";
@@ -773,7 +769,6 @@ namespace GeneXus.Programs {
 
       protected void SaveImpl( )
       {
-         nKeyPressed = 1;
          GetKey0L23( ) ;
          if ( IsIns( ) )
          {
@@ -851,7 +846,6 @@ namespace GeneXus.Programs {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars23( bcDevice, 1) ;
          SaveImpl( ) ;
          VarsToRow23( bcDevice) ;
@@ -865,7 +859,6 @@ namespace GeneXus.Programs {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars23( bcDevice, 1) ;
          Gx_mode = "INS";
          /* Insert record */
@@ -911,7 +904,6 @@ namespace GeneXus.Programs {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars23( bcDevice, 1) ;
          UpdateImpl( ) ;
          context.GX_msglist = BackMsgLst;
@@ -924,7 +916,6 @@ namespace GeneXus.Programs {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars23( bcDevice, 1) ;
          Gx_mode = "INS";
          /* Insert record */
@@ -958,8 +949,6 @@ namespace GeneXus.Programs {
          AnyError = 0;
          context.GX_msglist.removeAllItems();
          RowToVars23( bcDevice, 0) ;
-         nKeyPressed = 3;
-         IsConfirmed = 0;
          GetKey0L23( ) ;
          if ( RcdFound23 == 1 )
          {
@@ -1075,7 +1064,6 @@ namespace GeneXus.Programs {
 
       public void ForceCommitOnExit( )
       {
-         mustCommit = true;
          return  ;
       }
 
@@ -1164,24 +1152,20 @@ namespace GeneXus.Programs {
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
       }
 
-      protected void CloseOpenCursors( )
+      protected override void CloseCursors( )
       {
          pr_default.close(1);
       }
 
       public override void initialize( )
       {
-         scmdbuf = "";
-         PreviousTooltip = "";
-         PreviousCaption = "";
          BC000L4_A151DeviceId = new string[] {""} ;
          BC000L4_A152DeviceType = new short[1] ;
          BC000L4_A149DeviceToken = new string[] {""} ;
@@ -1265,23 +1249,15 @@ namespace GeneXus.Programs {
          standaloneNotModal( ) ;
       }
 
-      private short IsConfirmed ;
-      private short IsModified ;
       private short AnyError ;
-      private short nKeyPressed ;
       private short RcdFound23 ;
       private short A152DeviceType ;
-      private short GX_JID ;
       private short Z152DeviceType ;
-      private short nIsDirty_23 ;
       private int trnEnded ;
       private int Start ;
       private int Count ;
       private int GXPagingFrom23 ;
       private int GXPagingTo23 ;
-      private string scmdbuf ;
-      private string PreviousTooltip ;
-      private string PreviousCaption ;
       private string A151DeviceId ;
       private string A149DeviceToken ;
       private string A153DeviceName ;
@@ -1293,14 +1269,11 @@ namespace GeneXus.Programs {
       private string Z149DeviceToken ;
       private string Z153DeviceName ;
       private bool n150DeviceUser ;
-      private bool mustCommit ;
       private string A150DeviceUser ;
       private string Z150DeviceUser ;
-      private GXBCCollection<SdtDevice> gx_restcollection ;
-      private SdtDevice bcDevice ;
-      private SdtDevice gx_sdt_item ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private SdtDevice bcDevice ;
       private IDataStoreProvider pr_default ;
       private string[] BC000L4_A151DeviceId ;
       private short[] BC000L4_A152DeviceType ;
@@ -1308,6 +1281,8 @@ namespace GeneXus.Programs {
       private string[] BC000L4_A153DeviceName ;
       private string[] BC000L4_A150DeviceUser ;
       private bool[] BC000L4_n150DeviceUser ;
+      private SdtDevice gx_sdt_item ;
+      private GXBCCollection<SdtDevice> gx_restcollection ;
       private string[] BC000L5_A151DeviceId ;
       private short[] BC000L5_A152DeviceType ;
       private string[] BC000L5_A149DeviceToken ;
@@ -1393,6 +1368,14 @@ namespace GeneXus.Programs {
   {
      if ( def == null )
      {
+        Object[] prmBC000L2;
+        prmBC000L2 = new Object[] {
+        new ParDef("DeviceId",GXType.Char,128,0)
+        };
+        Object[] prmBC000L3;
+        prmBC000L3 = new Object[] {
+        new ParDef("DeviceId",GXType.Char,128,0)
+        };
         Object[] prmBC000L4;
         prmBC000L4 = new Object[] {
         new ParDef("GXPagingFrom23",GXType.Int32,9,0) ,
@@ -1404,14 +1387,6 @@ namespace GeneXus.Programs {
         };
         Object[] prmBC000L6;
         prmBC000L6 = new Object[] {
-        new ParDef("DeviceId",GXType.Char,128,0)
-        };
-        Object[] prmBC000L3;
-        prmBC000L3 = new Object[] {
-        new ParDef("DeviceId",GXType.Char,128,0)
-        };
-        Object[] prmBC000L2;
-        prmBC000L2 = new Object[] {
         new ParDef("DeviceId",GXType.Char,128,0)
         };
         Object[] prmBC000L7;

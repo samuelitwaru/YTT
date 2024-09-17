@@ -212,6 +212,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
                }
                if ( StringUtil.StringSearch( GXSoapXMLReader.Name, "Body", 1) > 0 )
                {
+                  this.SetPrefixesFromReader( GXSoapXMLReader);
                   if (true) break;
                }
                GXSoapError = GXSoapXMLReader.Read();
@@ -270,7 +271,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          }
          if ( currSoapErr == 0 )
          {
-            executePrivate();
+            ExecutePrivate();
          }
          context.CloseConnections();
          sIncludeState = true;
@@ -327,7 +328,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       {
          this.Gxm2rootcol = new GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtHomeSampleData_HomeSampleDataItem>( context, "HomeSampleDataItem", "YTT_version4") ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_Gxm2rootcol=this.Gxm2rootcol;
       }
 
@@ -339,29 +340,12 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       public void executeSubmit( out GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtHomeSampleData_HomeSampleDataItem> aP0_Gxm2rootcol )
       {
-         gethomesampledataservice objgethomesampledataservice;
-         objgethomesampledataservice = new gethomesampledataservice();
-         objgethomesampledataservice.Gxm2rootcol = new GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtHomeSampleData_HomeSampleDataItem>( context, "HomeSampleDataItem", "YTT_version4") ;
-         objgethomesampledataservice.context.SetSubmitInitialConfig(context);
-         objgethomesampledataservice.initialize();
-         Submit( executePrivateCatch,objgethomesampledataservice);
+         this.Gxm2rootcol = new GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtHomeSampleData_HomeSampleDataItem>( context, "HomeSampleDataItem", "YTT_version4") ;
+         SubmitImpl();
          aP0_Gxm2rootcol=this.Gxm2rootcol;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((gethomesampledataservice)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -387,22 +371,18 @@ namespace GeneXus.Programs.wwpbaseobjects {
             context.Redirect( context.wjLoc );
             context.wjLoc = "";
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          base.cleanup();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -430,12 +410,12 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private GXXMLWriter GXSoapXMLWriter ;
       private GxSoapRequest GXSoapHTTPRequest ;
       private GxHttpResponse GXSoapHTTPResponse ;
-      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtHomeSampleData_HomeSampleDataItem> aP0_Gxm2rootcol ;
       private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtHomeSampleData_HomeSampleDataItem> Gxm2rootcol ;
       private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtHomeSampleData_HomeSampleDataItem> AV5HomeSampleData ;
       private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtHomeSampleData_HomeSampleDataItem> GXt_objcol_SdtHomeSampleData_HomeSampleDataItem1 ;
       private GeneXus.Programs.wwpbaseobjects.SdtHomeSampleData_HomeSampleDataItem AV6HomeSampleDataItem ;
       private GeneXus.Programs.wwpbaseobjects.SdtHomeSampleData_HomeSampleDataItem Gxm1homesampledata ;
+      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtHomeSampleData_HomeSampleDataItem> aP0_Gxm2rootcol ;
    }
 
 }

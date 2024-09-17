@@ -51,13 +51,13 @@ namespace GeneXus.Programs {
          this.Gx_mode = aP0_Gx_mode;
          this.AV32Name = aP1_Name;
          this.AV41TypeId = aP2_TypeId;
-         executePrivate();
+         ExecuteImpl();
          aP0_Gx_mode=this.Gx_mode;
          aP1_Name=this.AV32Name;
          aP2_TypeId=this.AV41TypeId;
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -228,11 +228,8 @@ namespace GeneXus.Programs {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITWEB( ) ;
          if ( ! isAjaxCallMode( ) )
          {
@@ -276,7 +273,7 @@ namespace GeneXus.Programs {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void RenderHtmlHeaders( )
@@ -307,10 +304,10 @@ namespace GeneXus.Programs {
          }
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
@@ -1532,7 +1529,7 @@ namespace GeneXus.Programs {
             {
                if ( context.ExposeMetadata( ) )
                {
-                  Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+                  Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
                }
             }
             Form.Meta.addItem("description", "GAMWCAuthentication Type Entry Saml20", 0) ;
@@ -1739,6 +1736,7 @@ namespace GeneXus.Programs {
                                           dynload_actions( ) ;
                                           GX_FocusControl = edtavDynamicpropname_Internalname;
                                           AssignAttri(sPrefix, false, "GX_FocusControl", GX_FocusControl);
+                                          /* Execute user event: Grid.Load */
                                           E14182 ();
                                        }
                                     }
@@ -1997,12 +1995,14 @@ namespace GeneXus.Programs {
          if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
          {
             SubsflControlProps_2352( ) ;
+            /* Execute user event: Grid.Load */
             E14182 ();
             if ( ( subGrid_Islastpage == 0 ) && ( GRID_nCurrentRecord > 0 ) && ( GRID_nGridOutOfScope == 0 ) && ( nGXsfl_235_idx == 1 ) )
             {
                GRID_nCurrentRecord = 0;
                GRID_nGridOutOfScope = 1;
                subgrid_firstpage( ) ;
+               /* Execute user event: Grid.Load */
                E14182 ();
             }
             wbEnd = 235;
@@ -2428,7 +2428,7 @@ namespace GeneXus.Programs {
          if (returnInSub) return;
          Grid_empowerer_Gridinternalname = subGrid_Internalname;
          ucGrid_empowerer.SendProperty(context, sPrefix, false, Grid_empowerer_Internalname, "GridInternalName", Grid_empowerer_Gridinternalname);
-         subGrid_Rows = 20;
+         subGrid_Rows = 10;
          GxWebStd.gx_hidden_field( context, sPrefix+"GRID_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Rows), 6, 0, ".", "")));
       }
 
@@ -2443,7 +2443,7 @@ namespace GeneXus.Programs {
             edtavDeleteproperty_gximage = "ActionDelete";
             AV65DeleteProperty = context.GetImagePath( "7695fe89-52c9-4b7e-871e-0e11548f823e", "", context.GetTheme( ));
             AssignAttri(sPrefix, false, edtavDeleteproperty_Internalname, AV65DeleteProperty);
-            AV73Deleteproperty_GXI = GXDbFile.PathToUrl( context.GetImagePath( "7695fe89-52c9-4b7e-871e-0e11548f823e", "", context.GetTheme( )));
+            AV73Deleteproperty_GXI = GXDbFile.PathToUrl( context.GetImagePath( "7695fe89-52c9-4b7e-871e-0e11548f823e", "", context.GetTheme( )), context);
             edtavDeleteproperty_Tooltiptext = "";
             AV11DynamicPropName = AV17GAMPropertySimple.gxTpr_Id;
             AssignAttri(sPrefix, false, edtavDynamicpropname_Internalname, AV11DynamicPropName);
@@ -2486,7 +2486,7 @@ namespace GeneXus.Programs {
          AV65DeleteProperty = context.GetImagePath( "7695fe89-52c9-4b7e-871e-0e11548f823e", "", context.GetTheme( ));
          AssignProp(sPrefix, false, edtavDeleteproperty_Internalname, "Bitmap", (String.IsNullOrEmpty(StringUtil.RTrim( AV65DeleteProperty)) ? AV73Deleteproperty_GXI : context.convertURL( context.PathToRelativeUrl( AV65DeleteProperty))), !bGXsfl_235_Refreshing);
          AssignProp(sPrefix, false, edtavDeleteproperty_Internalname, "SrcSet", context.GetImageSrcSet( AV65DeleteProperty), true);
-         AV73Deleteproperty_GXI = GXDbFile.PathToUrl( context.GetImagePath( "7695fe89-52c9-4b7e-871e-0e11548f823e", "", context.GetTheme( )));
+         AV73Deleteproperty_GXI = GXDbFile.PathToUrl( context.GetImagePath( "7695fe89-52c9-4b7e-871e-0e11548f823e", "", context.GetTheme( )), context);
          AssignProp(sPrefix, false, edtavDeleteproperty_Internalname, "Bitmap", (String.IsNullOrEmpty(StringUtil.RTrim( AV65DeleteProperty)) ? AV73Deleteproperty_GXI : context.convertURL( context.PathToRelativeUrl( AV65DeleteProperty))), !bGXsfl_235_Refreshing);
          AssignProp(sPrefix, false, edtavDeleteproperty_Internalname, "SrcSet", context.GetImageSrcSet( AV65DeleteProperty), true);
          edtavDeleteproperty_Visible = 1;
@@ -2644,7 +2644,7 @@ namespace GeneXus.Programs {
          AV65DeleteProperty = context.GetImagePath( "7695fe89-52c9-4b7e-871e-0e11548f823e", "", context.GetTheme( ));
          AssignProp(sPrefix, false, edtavDeleteproperty_Internalname, "Bitmap", (String.IsNullOrEmpty(StringUtil.RTrim( AV65DeleteProperty)) ? AV73Deleteproperty_GXI : context.convertURL( context.PathToRelativeUrl( AV65DeleteProperty))), !bGXsfl_235_Refreshing);
          AssignProp(sPrefix, false, edtavDeleteproperty_Internalname, "SrcSet", context.GetImageSrcSet( AV65DeleteProperty), true);
-         AV73Deleteproperty_GXI = GXDbFile.PathToUrl( context.GetImagePath( "7695fe89-52c9-4b7e-871e-0e11548f823e", "", context.GetTheme( )));
+         AV73Deleteproperty_GXI = GXDbFile.PathToUrl( context.GetImagePath( "7695fe89-52c9-4b7e-871e-0e11548f823e", "", context.GetTheme( )), context);
          AssignProp(sPrefix, false, edtavDeleteproperty_Internalname, "Bitmap", (String.IsNullOrEmpty(StringUtil.RTrim( AV65DeleteProperty)) ? AV73Deleteproperty_GXI : context.convertURL( context.PathToRelativeUrl( AV65DeleteProperty))), !bGXsfl_235_Refreshing);
          AssignProp(sPrefix, false, edtavDeleteproperty_Internalname, "SrcSet", context.GetImageSrcSet( AV65DeleteProperty), true);
          edtavDeleteproperty_Visible = 0;
@@ -2853,7 +2853,7 @@ namespace GeneXus.Programs {
          PA182( ) ;
          WS182( ) ;
          WE182( ) ;
-         this.cleanup();
+         cleanup();
          context.SetWrapped(false);
          SaveComponentMsgList(sPrefix);
          context.GX_msglist = BackMsgLst;
@@ -3069,7 +3069,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20248121531490", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202491613111369", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -3085,7 +3085,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("gamwcauthenticationtypeentrysaml20.js", "?20248121531491", false, true);
+         context.AddJavascriptSource("gamwcauthenticationtypeentrysaml20.js", "?202491613111370", false, true);
          context.AddJavascriptSource("shared/HistoryManager/HistoryManager.js", "", false, true);
          context.AddJavascriptSource("shared/HistoryManager/rsh/json2005.js", "", false, true);
          context.AddJavascriptSource("shared/HistoryManager/rsh/rsh.js", "", false, true);
@@ -3127,6 +3127,7 @@ namespace GeneXus.Programs {
 
       protected void sendrow_2352( )
       {
+         sGXsfl_235_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_235_idx), 4, 0), 4, "0");
          SubsflControlProps_2352( ) ;
          WB180( ) ;
          if ( ( subGrid_Rows * 1 == 0 ) || ( nGXsfl_235_idx <= subGrid_fnc_Recordsperpage( ) * 1 ) )
@@ -3194,25 +3195,25 @@ namespace GeneXus.Programs {
                context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+((edtavDynamicpropname_Visible==0) ? "display:none;" : "")+"\">") ;
             }
             /* Single line edit */
-            TempTags = " " + ((edtavDynamicpropname_Enabled!=0)&&(edtavDynamicpropname_Visible!=0) ? " onfocus=\"gx.evt.onfocus(this, 236,'"+sPrefix+"',false,'"+sGXsfl_235_idx+"',235)\"" : " ");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 236,'" + sPrefix + "',false,'" + sGXsfl_235_idx + "',235)\"";
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavDynamicpropname_Internalname,StringUtil.RTrim( AV11DynamicPropName),(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+((edtavDynamicpropname_Enabled!=0)&&(edtavDynamicpropname_Visible!=0) ? " onblur=\""+""+";gx.evt.onblur(this,236);\"" : " "),(string)"'"+sPrefix+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavDynamicpropname_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtavDynamicpropname_Visible,(int)edtavDynamicpropname_Enabled,(short)1,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)60,(short)0,(short)0,(short)235,(short)0,(short)-1,(short)0,(bool)true,(string)"GeneXusSecurityCommon\\GAMPropertyId",(string)"start",(bool)true,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavDynamicpropname_Internalname,StringUtil.RTrim( AV11DynamicPropName),(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,236);\"",(string)"'"+sPrefix+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavDynamicpropname_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtavDynamicpropname_Visible,(int)edtavDynamicpropname_Enabled,(short)1,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)60,(short)0,(short)0,(short)235,(short)0,(short)-1,(short)0,(bool)true,(string)"GeneXusSecurityCommon\\GAMPropertyId",(string)"start",(bool)true,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
                context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+((edtavDynamicproptag_Visible==0) ? "display:none;" : "")+"\">") ;
             }
             /* Single line edit */
-            TempTags = " " + ((edtavDynamicproptag_Enabled!=0)&&(edtavDynamicproptag_Visible!=0) ? " onfocus=\"gx.evt.onfocus(this, 237,'"+sPrefix+"',false,'"+sGXsfl_235_idx+"',235)\"" : " ");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 237,'" + sPrefix + "',false,'" + sGXsfl_235_idx + "',235)\"";
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavDynamicproptag_Internalname,StringUtil.RTrim( AV12DynamicPropTag),(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+((edtavDynamicproptag_Enabled!=0)&&(edtavDynamicproptag_Visible!=0) ? " onblur=\""+""+";gx.evt.onblur(this,237);\"" : " "),(string)"'"+sPrefix+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavDynamicproptag_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtavDynamicproptag_Visible,(int)edtavDynamicproptag_Enabled,(short)1,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)0,(short)235,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavDynamicproptag_Internalname,StringUtil.RTrim( AV12DynamicPropTag),(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,237);\"",(string)"'"+sPrefix+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavDynamicproptag_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtavDynamicproptag_Visible,(int)edtavDynamicproptag_Enabled,(short)1,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)0,(short)235,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
                context.WriteHtmlText( "<td valign=\"middle\" align=\""+""+"\""+" style=\""+((edtavDeleteproperty_Visible==0) ? "display:none;" : "")+"\">") ;
             }
             /* Active Bitmap Variable */
-            TempTags = " " + ((edtavDeleteproperty_Enabled!=0)&&(edtavDeleteproperty_Visible!=0) ? " onfocus=\"gx.evt.onfocus(this, 238,'"+sPrefix+"',false,'',235)\"" : " ");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 238,'" + sPrefix + "',false,'',235)\"";
             ClassString = "ActionBaseColorAttribute" + " " + ((StringUtil.StrCmp(edtavDeleteproperty_gximage, "")==0) ? "" : "GX_Image_"+edtavDeleteproperty_gximage+"_Class");
             StyleString = "";
             AV65DeleteProperty_IsBlob = (bool)((String.IsNullOrEmpty(StringUtil.RTrim( AV65DeleteProperty))&&String.IsNullOrEmpty(StringUtil.RTrim( AV73Deleteproperty_GXI)))||!String.IsNullOrEmpty(StringUtil.RTrim( AV65DeleteProperty)));
@@ -3238,12 +3239,12 @@ namespace GeneXus.Programs {
          }
          chkavIsenable.Name = "vISENABLE";
          chkavIsenable.WebTags = "";
-         chkavIsenable.Caption = "";
+         chkavIsenable.Caption = "Enabled?";
          AssignProp(sPrefix, false, chkavIsenable_Internalname, "TitleCaption", chkavIsenable.Caption, true);
          chkavIsenable.CheckedValue = "false";
          chkavIsredirectbinding.Name = "vISREDIRECTBINDING";
          chkavIsredirectbinding.WebTags = "";
-         chkavIsredirectbinding.Caption = "Execute SAML requests using GET";
+         chkavIsredirectbinding.Caption = " ";
          AssignProp(sPrefix, false, chkavIsredirectbinding_Internalname, "TitleCaption", chkavIsredirectbinding.Caption, true);
          chkavIsredirectbinding.CheckedValue = "false";
          cmbavNameidpolicyformat.Name = "vNAMEIDPOLICYFORMAT";
@@ -3262,17 +3263,17 @@ namespace GeneXus.Programs {
          }
          chkavForceauthn.Name = "vFORCEAUTHN";
          chkavForceauthn.WebTags = "";
-         chkavForceauthn.Caption = "Force Authentication";
+         chkavForceauthn.Caption = " ";
          AssignProp(sPrefix, false, chkavForceauthn_Internalname, "TitleCaption", chkavForceauthn.Caption, true);
          chkavForceauthn.CheckedValue = "false";
          chkavDisablesinglelogout.Name = "vDISABLESINGLELOGOUT";
          chkavDisablesinglelogout.WebTags = "";
-         chkavDisablesinglelogout.Caption = "Disable Single Logout";
+         chkavDisablesinglelogout.Caption = " ";
          AssignProp(sPrefix, false, chkavDisablesinglelogout_Internalname, "TitleCaption", chkavDisablesinglelogout.Caption, true);
          chkavDisablesinglelogout.CheckedValue = "false";
          chkavUserinforesponseuserlastnamegenauto.Name = "vUSERINFORESPONSEUSERLASTNAMEGENAUTO";
          chkavUserinforesponseuserlastnamegenauto.WebTags = "";
-         chkavUserinforesponseuserlastnamegenauto.Caption = "Generate automatic Last Name";
+         chkavUserinforesponseuserlastnamegenauto.Caption = " ";
          AssignProp(sPrefix, false, chkavUserinforesponseuserlastnamegenauto_Internalname, "TitleCaption", chkavUserinforesponseuserlastnamegenauto.Caption, true);
          chkavUserinforesponseuserlastnamegenauto.CheckedValue = "false";
          /* End function init_web_controls */
@@ -3623,45 +3624,37 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'Gx_mode',fld:'vMODE',pic:'@!'},{av:'sPrefix'},{av:'AV19IsEnable',fld:'vISENABLE',pic:''},{av:'AV20IsRedirectBinding',fld:'vISREDIRECTBINDING',pic:''},{av:'AV15ForceAuthn',fld:'vFORCEAUTHN',pic:''},{av:'AV67DisableSingleLogout',fld:'vDISABLESINGLELOGOUT',pic:''},{av:'AV51UserInfoResponseUserLastNameGenAuto',fld:'vUSERINFORESPONSEUSERLASTNAMEGENAUTO',pic:''},{av:'AV45UserInfoResponseUserErrorDescriptionTag',fld:'vUSERINFORESPONSEUSERERRORDESCRIPTIONTAG',pic:'',hsh:true}]");
-         setEventMetadata("REFRESH",",oparms:[{av:'edtavDeleteproperty_Enabled',ctrl:'vDELETEPROPERTY',prop:'Enabled'}]}");
-         setEventMetadata("GRID.LOAD","{handler:'E14182',iparms:[{av:'Gx_mode',fld:'vMODE',pic:'@!'}]");
-         setEventMetadata("GRID.LOAD",",oparms:[{av:'AV65DeleteProperty',fld:'vDELETEPROPERTY',pic:''},{av:'edtavDeleteproperty_Tooltiptext',ctrl:'vDELETEPROPERTY',prop:'Tooltiptext'},{av:'AV11DynamicPropName',fld:'vDYNAMICPROPNAME',pic:''},{av:'AV12DynamicPropTag',fld:'vDYNAMICPROPTAG',pic:''},{av:'edtavDeleteproperty_Visible',ctrl:'vDELETEPROPERTY',prop:'Visible'},{av:'edtavDynamicpropname_Enabled',ctrl:'vDYNAMICPROPNAME',prop:'Enabled'},{av:'edtavDynamicproptag_Enabled',ctrl:'vDYNAMICPROPTAG',prop:'Enabled'}]}");
-         setEventMetadata("'DOADD'","{handler:'E11182',iparms:[]");
-         setEventMetadata("'DOADD'",",oparms:[{av:'AV65DeleteProperty',fld:'vDELETEPROPERTY',pic:''},{av:'edtavDeleteproperty_Visible',ctrl:'vDELETEPROPERTY',prop:'Visible'},{av:'edtavDynamicpropname_Enabled',ctrl:'vDYNAMICPROPNAME',prop:'Enabled'},{av:'edtavDynamicpropname_Visible',ctrl:'vDYNAMICPROPNAME',prop:'Visible'},{av:'edtavDynamicproptag_Enabled',ctrl:'vDYNAMICPROPTAG',prop:'Enabled'},{av:'edtavDynamicproptag_Visible',ctrl:'vDYNAMICPROPTAG',prop:'Visible'}]}");
-         setEventMetadata("ENTER","{handler:'E12182',iparms:[{av:'AV70CheckRequiredFieldsResult',fld:'vCHECKREQUIREDFIELDSRESULT',pic:''},{av:'Gx_mode',fld:'vMODE',pic:'@!'},{av:'AV32Name',fld:'vNAME',pic:''},{av:'AV30LocalSiteURL',fld:'vLOCALSITEURL',pic:''},{av:'AV37ServiceProviderEntityId',fld:'vSERVICEPROVIDERENTITYID',pic:''},{av:'AV36SamlEndpointLocation',fld:'vSAMLENDPOINTLOCATION',pic:''},{av:'AV39SingleLogoutendpoint',fld:'vSINGLELOGOUTENDPOINT',pic:''},{av:'AV19IsEnable',fld:'vISENABLE',pic:''},{av:'AV10Dsc',fld:'vDSC',pic:''},{av:'AV40SmallImageName',fld:'vSMALLIMAGENAME',pic:''},{av:'AV7BigImageName',fld:'vBIGIMAGENAME',pic:''},{av:'AV18Impersonate',fld:'vIMPERSONATE',pic:''},{av:'AV38IdentityProviderEntityID',fld:'vIDENTITYPROVIDERENTITYID',pic:''},{av:'AV6AuthnContext',fld:'vAUTHNCONTEXT',pic:''},{av:'cmbavNameidpolicyformat'},{av:'AV69NameIdPolicyFormat',fld:'vNAMEIDPOLICYFORMAT',pic:''},{av:'AV20IsRedirectBinding',fld:'vISREDIRECTBINDING',pic:''},{av:'AV15ForceAuthn',fld:'vFORCEAUTHN',pic:''},{av:'AV21KeyAliasCredential',fld:'vKEYALIASCREDENTIAL',pic:''},{av:'AV22KeyAliasTrustCred',fld:'vKEYALIASTRUSTCRED',pic:''},{av:'AV24KeyStoreCredential',fld:'vKEYSTORECREDENTIAL',pic:''},{av:'AV25KeyStoreFilePathTrustCred',fld:'vKEYSTOREFILEPATHTRUSTCRED',pic:''},{av:'AV26KeyStorePwdTrustCred',fld:'vKEYSTOREPWDTRUSTCRED',pic:''},{av:'AV27KeyStoreTrustCred',fld:'vKEYSTORETRUSTCRED',pic:''},{av:'AV28KeyStPathCredential',fld:'vKEYSTPATHCREDENTIAL',pic:''},{av:'AV29KeyStPwdCredential',fld:'vKEYSTPWDCREDENTIAL',pic:''},{av:'AV67DisableSingleLogout',fld:'vDISABLESINGLELOGOUT',pic:''},{av:'AV45UserInfoResponseUserErrorDescriptionTag',fld:'vUSERINFORESPONSEUSERERRORDESCRIPTIONTAG',pic:'',hsh:true},{av:'AV43UserInfoResponseUserBirthdayTag',fld:'vUSERINFORESPONSEUSERBIRTHDAYTAG',pic:''},{av:'AV44UserInfoResponseUserEmailTag',fld:'vUSERINFORESPONSEUSEREMAILTAG',pic:''},{av:'AV46UserInfoResponseUserExternalIdTag',fld:'vUSERINFORESPONSEUSEREXTERNALIDTAG',pic:''},{av:'AV47UserInfoResponseUserFirstNameTag',fld:'vUSERINFORESPONSEUSERFIRSTNAMETAG',pic:''},{av:'AV48UserInfoResponseUserGenderTag',fld:'vUSERINFORESPONSEUSERGENDERTAG',pic:''},{av:'AV49UserInfoResponseUserGenderValues',fld:'vUSERINFORESPONSEUSERGENDERVALUES',pic:''},{av:'AV50UserInfoResponseUserLanguageTag',fld:'vUSERINFORESPONSEUSERLANGUAGETAG',pic:''},{av:'AV51UserInfoResponseUserLastNameGenAuto',fld:'vUSERINFORESPONSEUSERLASTNAMEGENAUTO',pic:''},{av:'AV52UserInfoResponseUserLastNameTag',fld:'vUSERINFORESPONSEUSERLASTNAMETAG',pic:''},{av:'AV53UserInfoResponseUserNameTag',fld:'vUSERINFORESPONSEUSERNAMETAG',pic:''},{av:'AV54UserInfoResponseUserTimeZoneTag',fld:'vUSERINFORESPONSEUSERTIMEZONETAG',pic:''},{av:'AV55UserInfoResponseUserURLImageTag',fld:'vUSERINFORESPONSEUSERURLIMAGETAG',pic:''},{av:'AV56UserInfoResponseUserURLProfileTag',fld:'vUSERINFORESPONSEUSERURLPROFILETAG',pic:''},{av:'AV11DynamicPropName',fld:'vDYNAMICPROPNAME',grid:235,pic:''},{av:'GRID_nFirstRecordOnPage'},{av:'nRC_GXsfl_235',ctrl:'GRID',grid:235,prop:'GridRC',grid:235},{av:'AV12DynamicPropTag',fld:'vDYNAMICPROPTAG',grid:235,pic:''}]");
-         setEventMetadata("ENTER",",oparms:[{av:'AV70CheckRequiredFieldsResult',fld:'vCHECKREQUIREDFIELDSRESULT',pic:''}]}");
-         setEventMetadata("VDELETEPROPERTY.CLICK","{handler:'E16182',iparms:[{av:'AV32Name',fld:'vNAME',pic:''}]");
-         setEventMetadata("VDELETEPROPERTY.CLICK",",oparms:[{av:'AV65DeleteProperty',fld:'vDELETEPROPERTY',pic:''},{av:'edtavDeleteproperty_Visible',ctrl:'vDELETEPROPERTY',prop:'Visible'},{av:'edtavDynamicpropname_Visible',ctrl:'vDYNAMICPROPNAME',prop:'Visible'},{av:'edtavDynamicproptag_Visible',ctrl:'vDYNAMICPROPTAG',prop:'Visible'},{av:'AV11DynamicPropName',fld:'vDYNAMICPROPNAME',pic:''},{av:'AV12DynamicPropTag',fld:'vDYNAMICPROPTAG',pic:''}]}");
-         setEventMetadata("GRID_FIRSTPAGE","{handler:'subgrid_firstpage',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'Gx_mode',fld:'vMODE',pic:'@!'},{av:'AV45UserInfoResponseUserErrorDescriptionTag',fld:'vUSERINFORESPONSEUSERERRORDESCRIPTIONTAG',pic:'',hsh:true},{av:'sPrefix'},{av:'AV19IsEnable',fld:'vISENABLE',pic:''},{av:'AV20IsRedirectBinding',fld:'vISREDIRECTBINDING',pic:''},{av:'AV15ForceAuthn',fld:'vFORCEAUTHN',pic:''},{av:'AV67DisableSingleLogout',fld:'vDISABLESINGLELOGOUT',pic:''},{av:'AV51UserInfoResponseUserLastNameGenAuto',fld:'vUSERINFORESPONSEUSERLASTNAMEGENAUTO',pic:''}]");
-         setEventMetadata("GRID_FIRSTPAGE",",oparms:[{av:'edtavDeleteproperty_Enabled',ctrl:'vDELETEPROPERTY',prop:'Enabled'}]}");
-         setEventMetadata("GRID_PREVPAGE","{handler:'subgrid_previouspage',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'Gx_mode',fld:'vMODE',pic:'@!'},{av:'AV45UserInfoResponseUserErrorDescriptionTag',fld:'vUSERINFORESPONSEUSERERRORDESCRIPTIONTAG',pic:'',hsh:true},{av:'sPrefix'},{av:'AV19IsEnable',fld:'vISENABLE',pic:''},{av:'AV20IsRedirectBinding',fld:'vISREDIRECTBINDING',pic:''},{av:'AV15ForceAuthn',fld:'vFORCEAUTHN',pic:''},{av:'AV67DisableSingleLogout',fld:'vDISABLESINGLELOGOUT',pic:''},{av:'AV51UserInfoResponseUserLastNameGenAuto',fld:'vUSERINFORESPONSEUSERLASTNAMEGENAUTO',pic:''}]");
-         setEventMetadata("GRID_PREVPAGE",",oparms:[{av:'edtavDeleteproperty_Enabled',ctrl:'vDELETEPROPERTY',prop:'Enabled'}]}");
-         setEventMetadata("GRID_NEXTPAGE","{handler:'subgrid_nextpage',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'Gx_mode',fld:'vMODE',pic:'@!'},{av:'AV45UserInfoResponseUserErrorDescriptionTag',fld:'vUSERINFORESPONSEUSERERRORDESCRIPTIONTAG',pic:'',hsh:true},{av:'sPrefix'},{av:'AV19IsEnable',fld:'vISENABLE',pic:''},{av:'AV20IsRedirectBinding',fld:'vISREDIRECTBINDING',pic:''},{av:'AV15ForceAuthn',fld:'vFORCEAUTHN',pic:''},{av:'AV67DisableSingleLogout',fld:'vDISABLESINGLELOGOUT',pic:''},{av:'AV51UserInfoResponseUserLastNameGenAuto',fld:'vUSERINFORESPONSEUSERLASTNAMEGENAUTO',pic:''}]");
-         setEventMetadata("GRID_NEXTPAGE",",oparms:[{av:'edtavDeleteproperty_Enabled',ctrl:'vDELETEPROPERTY',prop:'Enabled'}]}");
-         setEventMetadata("GRID_LASTPAGE","{handler:'subgrid_lastpage',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'Gx_mode',fld:'vMODE',pic:'@!'},{av:'AV45UserInfoResponseUserErrorDescriptionTag',fld:'vUSERINFORESPONSEUSERERRORDESCRIPTIONTAG',pic:'',hsh:true},{av:'sPrefix'},{av:'AV19IsEnable',fld:'vISENABLE',pic:''},{av:'AV20IsRedirectBinding',fld:'vISREDIRECTBINDING',pic:''},{av:'AV15ForceAuthn',fld:'vFORCEAUTHN',pic:''},{av:'AV67DisableSingleLogout',fld:'vDISABLESINGLELOGOUT',pic:''},{av:'AV51UserInfoResponseUserLastNameGenAuto',fld:'vUSERINFORESPONSEUSERLASTNAMEGENAUTO',pic:''},{av:'subGrid_Recordcount'}]");
-         setEventMetadata("GRID_LASTPAGE",",oparms:[{av:'edtavDeleteproperty_Enabled',ctrl:'vDELETEPROPERTY',prop:'Enabled'}]}");
-         setEventMetadata("VALIDV_FUNCTIONID","{handler:'Validv_Functionid',iparms:[]");
-         setEventMetadata("VALIDV_FUNCTIONID",",oparms:[]}");
-         setEventMetadata("VALIDV_NAMEIDPOLICYFORMAT","{handler:'Validv_Nameidpolicyformat',iparms:[]");
-         setEventMetadata("VALIDV_NAMEIDPOLICYFORMAT",",oparms:[]}");
-         setEventMetadata("NULL","{handler:'Validv_Deleteproperty',iparms:[]");
-         setEventMetadata("NULL",",oparms:[]}");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"Gx_mode","fld":"vMODE","pic":"@!"},{"av":"sPrefix"},{"av":"AV19IsEnable","fld":"vISENABLE"},{"av":"AV20IsRedirectBinding","fld":"vISREDIRECTBINDING"},{"av":"AV15ForceAuthn","fld":"vFORCEAUTHN"},{"av":"AV67DisableSingleLogout","fld":"vDISABLESINGLELOGOUT"},{"av":"AV51UserInfoResponseUserLastNameGenAuto","fld":"vUSERINFORESPONSEUSERLASTNAMEGENAUTO"},{"av":"AV45UserInfoResponseUserErrorDescriptionTag","fld":"vUSERINFORESPONSEUSERERRORDESCRIPTIONTAG","hsh":true}]""");
+         setEventMetadata("REFRESH",""","oparms":[{"av":"edtavDeleteproperty_Enabled","ctrl":"vDELETEPROPERTY","prop":"Enabled"}]}""");
+         setEventMetadata("GRID.LOAD","""{"handler":"E14182","iparms":[{"av":"Gx_mode","fld":"vMODE","pic":"@!"}]""");
+         setEventMetadata("GRID.LOAD",""","oparms":[{"av":"AV65DeleteProperty","fld":"vDELETEPROPERTY"},{"av":"edtavDeleteproperty_Tooltiptext","ctrl":"vDELETEPROPERTY","prop":"Tooltiptext"},{"av":"AV11DynamicPropName","fld":"vDYNAMICPROPNAME"},{"av":"AV12DynamicPropTag","fld":"vDYNAMICPROPTAG"},{"av":"edtavDeleteproperty_Visible","ctrl":"vDELETEPROPERTY","prop":"Visible"},{"av":"edtavDynamicpropname_Enabled","ctrl":"vDYNAMICPROPNAME","prop":"Enabled"},{"av":"edtavDynamicproptag_Enabled","ctrl":"vDYNAMICPROPTAG","prop":"Enabled"}]}""");
+         setEventMetadata("'DOADD'","""{"handler":"E11182","iparms":[]""");
+         setEventMetadata("'DOADD'",""","oparms":[{"av":"AV65DeleteProperty","fld":"vDELETEPROPERTY"},{"av":"edtavDeleteproperty_Visible","ctrl":"vDELETEPROPERTY","prop":"Visible"},{"av":"edtavDynamicpropname_Enabled","ctrl":"vDYNAMICPROPNAME","prop":"Enabled"},{"av":"edtavDynamicpropname_Visible","ctrl":"vDYNAMICPROPNAME","prop":"Visible"},{"av":"edtavDynamicproptag_Enabled","ctrl":"vDYNAMICPROPTAG","prop":"Enabled"},{"av":"edtavDynamicproptag_Visible","ctrl":"vDYNAMICPROPTAG","prop":"Visible"}]}""");
+         setEventMetadata("ENTER","""{"handler":"E12182","iparms":[{"av":"AV70CheckRequiredFieldsResult","fld":"vCHECKREQUIREDFIELDSRESULT"},{"av":"Gx_mode","fld":"vMODE","pic":"@!"},{"av":"AV32Name","fld":"vNAME"},{"av":"AV30LocalSiteURL","fld":"vLOCALSITEURL"},{"av":"AV37ServiceProviderEntityId","fld":"vSERVICEPROVIDERENTITYID"},{"av":"AV36SamlEndpointLocation","fld":"vSAMLENDPOINTLOCATION"},{"av":"AV39SingleLogoutendpoint","fld":"vSINGLELOGOUTENDPOINT"},{"av":"AV19IsEnable","fld":"vISENABLE"},{"av":"AV10Dsc","fld":"vDSC"},{"av":"AV40SmallImageName","fld":"vSMALLIMAGENAME"},{"av":"AV7BigImageName","fld":"vBIGIMAGENAME"},{"av":"AV18Impersonate","fld":"vIMPERSONATE"},{"av":"AV38IdentityProviderEntityID","fld":"vIDENTITYPROVIDERENTITYID"},{"av":"AV6AuthnContext","fld":"vAUTHNCONTEXT"},{"av":"cmbavNameidpolicyformat"},{"av":"AV69NameIdPolicyFormat","fld":"vNAMEIDPOLICYFORMAT"},{"av":"AV20IsRedirectBinding","fld":"vISREDIRECTBINDING"},{"av":"AV15ForceAuthn","fld":"vFORCEAUTHN"},{"av":"AV21KeyAliasCredential","fld":"vKEYALIASCREDENTIAL"},{"av":"AV22KeyAliasTrustCred","fld":"vKEYALIASTRUSTCRED"},{"av":"AV24KeyStoreCredential","fld":"vKEYSTORECREDENTIAL"},{"av":"AV25KeyStoreFilePathTrustCred","fld":"vKEYSTOREFILEPATHTRUSTCRED"},{"av":"AV26KeyStorePwdTrustCred","fld":"vKEYSTOREPWDTRUSTCRED"},{"av":"AV27KeyStoreTrustCred","fld":"vKEYSTORETRUSTCRED"},{"av":"AV28KeyStPathCredential","fld":"vKEYSTPATHCREDENTIAL"},{"av":"AV29KeyStPwdCredential","fld":"vKEYSTPWDCREDENTIAL"},{"av":"AV67DisableSingleLogout","fld":"vDISABLESINGLELOGOUT"},{"av":"AV45UserInfoResponseUserErrorDescriptionTag","fld":"vUSERINFORESPONSEUSERERRORDESCRIPTIONTAG","hsh":true},{"av":"AV43UserInfoResponseUserBirthdayTag","fld":"vUSERINFORESPONSEUSERBIRTHDAYTAG"},{"av":"AV44UserInfoResponseUserEmailTag","fld":"vUSERINFORESPONSEUSEREMAILTAG"},{"av":"AV46UserInfoResponseUserExternalIdTag","fld":"vUSERINFORESPONSEUSEREXTERNALIDTAG"},{"av":"AV47UserInfoResponseUserFirstNameTag","fld":"vUSERINFORESPONSEUSERFIRSTNAMETAG"},{"av":"AV48UserInfoResponseUserGenderTag","fld":"vUSERINFORESPONSEUSERGENDERTAG"},{"av":"AV49UserInfoResponseUserGenderValues","fld":"vUSERINFORESPONSEUSERGENDERVALUES"},{"av":"AV50UserInfoResponseUserLanguageTag","fld":"vUSERINFORESPONSEUSERLANGUAGETAG"},{"av":"AV51UserInfoResponseUserLastNameGenAuto","fld":"vUSERINFORESPONSEUSERLASTNAMEGENAUTO"},{"av":"AV52UserInfoResponseUserLastNameTag","fld":"vUSERINFORESPONSEUSERLASTNAMETAG"},{"av":"AV53UserInfoResponseUserNameTag","fld":"vUSERINFORESPONSEUSERNAMETAG"},{"av":"AV54UserInfoResponseUserTimeZoneTag","fld":"vUSERINFORESPONSEUSERTIMEZONETAG"},{"av":"AV55UserInfoResponseUserURLImageTag","fld":"vUSERINFORESPONSEUSERURLIMAGETAG"},{"av":"AV56UserInfoResponseUserURLProfileTag","fld":"vUSERINFORESPONSEUSERURLPROFILETAG"},{"av":"AV11DynamicPropName","fld":"vDYNAMICPROPNAME","grid":235},{"av":"GRID_nFirstRecordOnPage"},{"av":"nRC_GXsfl_235","ctrl":"GRID","grid":235,"prop":"GridRC","grid":235},{"av":"AV12DynamicPropTag","fld":"vDYNAMICPROPTAG","grid":235}]""");
+         setEventMetadata("ENTER",""","oparms":[{"av":"AV70CheckRequiredFieldsResult","fld":"vCHECKREQUIREDFIELDSRESULT"}]}""");
+         setEventMetadata("VDELETEPROPERTY.CLICK","""{"handler":"E16182","iparms":[{"av":"AV32Name","fld":"vNAME"}]""");
+         setEventMetadata("VDELETEPROPERTY.CLICK",""","oparms":[{"av":"AV65DeleteProperty","fld":"vDELETEPROPERTY"},{"av":"edtavDeleteproperty_Visible","ctrl":"vDELETEPROPERTY","prop":"Visible"},{"av":"edtavDynamicpropname_Visible","ctrl":"vDYNAMICPROPNAME","prop":"Visible"},{"av":"edtavDynamicproptag_Visible","ctrl":"vDYNAMICPROPTAG","prop":"Visible"},{"av":"AV11DynamicPropName","fld":"vDYNAMICPROPNAME"},{"av":"AV12DynamicPropTag","fld":"vDYNAMICPROPTAG"}]}""");
+         setEventMetadata("GRID_FIRSTPAGE","""{"handler":"subgrid_firstpage","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"Gx_mode","fld":"vMODE","pic":"@!"},{"av":"AV45UserInfoResponseUserErrorDescriptionTag","fld":"vUSERINFORESPONSEUSERERRORDESCRIPTIONTAG","hsh":true},{"av":"sPrefix"},{"av":"AV19IsEnable","fld":"vISENABLE"},{"av":"AV20IsRedirectBinding","fld":"vISREDIRECTBINDING"},{"av":"AV15ForceAuthn","fld":"vFORCEAUTHN"},{"av":"AV67DisableSingleLogout","fld":"vDISABLESINGLELOGOUT"},{"av":"AV51UserInfoResponseUserLastNameGenAuto","fld":"vUSERINFORESPONSEUSERLASTNAMEGENAUTO"}]""");
+         setEventMetadata("GRID_FIRSTPAGE",""","oparms":[{"av":"edtavDeleteproperty_Enabled","ctrl":"vDELETEPROPERTY","prop":"Enabled"}]}""");
+         setEventMetadata("GRID_PREVPAGE","""{"handler":"subgrid_previouspage","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"Gx_mode","fld":"vMODE","pic":"@!"},{"av":"AV45UserInfoResponseUserErrorDescriptionTag","fld":"vUSERINFORESPONSEUSERERRORDESCRIPTIONTAG","hsh":true},{"av":"sPrefix"},{"av":"AV19IsEnable","fld":"vISENABLE"},{"av":"AV20IsRedirectBinding","fld":"vISREDIRECTBINDING"},{"av":"AV15ForceAuthn","fld":"vFORCEAUTHN"},{"av":"AV67DisableSingleLogout","fld":"vDISABLESINGLELOGOUT"},{"av":"AV51UserInfoResponseUserLastNameGenAuto","fld":"vUSERINFORESPONSEUSERLASTNAMEGENAUTO"}]""");
+         setEventMetadata("GRID_PREVPAGE",""","oparms":[{"av":"edtavDeleteproperty_Enabled","ctrl":"vDELETEPROPERTY","prop":"Enabled"}]}""");
+         setEventMetadata("GRID_NEXTPAGE","""{"handler":"subgrid_nextpage","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"Gx_mode","fld":"vMODE","pic":"@!"},{"av":"AV45UserInfoResponseUserErrorDescriptionTag","fld":"vUSERINFORESPONSEUSERERRORDESCRIPTIONTAG","hsh":true},{"av":"sPrefix"},{"av":"AV19IsEnable","fld":"vISENABLE"},{"av":"AV20IsRedirectBinding","fld":"vISREDIRECTBINDING"},{"av":"AV15ForceAuthn","fld":"vFORCEAUTHN"},{"av":"AV67DisableSingleLogout","fld":"vDISABLESINGLELOGOUT"},{"av":"AV51UserInfoResponseUserLastNameGenAuto","fld":"vUSERINFORESPONSEUSERLASTNAMEGENAUTO"}]""");
+         setEventMetadata("GRID_NEXTPAGE",""","oparms":[{"av":"edtavDeleteproperty_Enabled","ctrl":"vDELETEPROPERTY","prop":"Enabled"}]}""");
+         setEventMetadata("GRID_LASTPAGE","""{"handler":"subgrid_lastpage","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"Gx_mode","fld":"vMODE","pic":"@!"},{"av":"AV45UserInfoResponseUserErrorDescriptionTag","fld":"vUSERINFORESPONSEUSERERRORDESCRIPTIONTAG","hsh":true},{"av":"sPrefix"},{"av":"AV19IsEnable","fld":"vISENABLE"},{"av":"AV20IsRedirectBinding","fld":"vISREDIRECTBINDING"},{"av":"AV15ForceAuthn","fld":"vFORCEAUTHN"},{"av":"AV67DisableSingleLogout","fld":"vDISABLESINGLELOGOUT"},{"av":"AV51UserInfoResponseUserLastNameGenAuto","fld":"vUSERINFORESPONSEUSERLASTNAMEGENAUTO"},{"av":"subGrid_Recordcount"}]""");
+         setEventMetadata("GRID_LASTPAGE",""","oparms":[{"av":"edtavDeleteproperty_Enabled","ctrl":"vDELETEPROPERTY","prop":"Enabled"}]}""");
+         setEventMetadata("VALIDV_FUNCTIONID","""{"handler":"Validv_Functionid","iparms":[]}""");
+         setEventMetadata("VALIDV_NAMEIDPOLICYFORMAT","""{"handler":"Validv_Nameidpolicyformat","iparms":[]}""");
+         setEventMetadata("NULL","""{"handler":"Validv_Deleteproperty","iparms":[]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -3769,7 +3762,6 @@ namespace GeneXus.Programs {
       private short nGotPars ;
       private short GxWebError ;
       private short nDynComponent ;
-      private short initialized ;
       private short wbEnd ;
       private short wbStart ;
       private short nDraw ;
@@ -4128,14 +4120,14 @@ namespace GeneXus.Programs {
       private GXCheckbox chkavForceauthn ;
       private GXCheckbox chkavDisablesinglelogout ;
       private GXCheckbox chkavUserinforesponseuserlastnamegenauto ;
+      private GeneXus.Programs.genexussecurity.SdtGAMAuthenticationTypeSaml20 AV5AuthenticationTypeSaml20 ;
+      private GeneXus.Programs.genexussecurity.SdtGAMPropertySimple AV17GAMPropertySimple ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV14Errors ;
       private IDataStoreProvider pr_default ;
+      private GeneXus.Programs.genexussecurity.SdtGAMError AV13Error ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
       private IDataStoreProvider pr_gam ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV14Errors ;
-      private GeneXus.Programs.genexussecurity.SdtGAMAuthenticationTypeSaml20 AV5AuthenticationTypeSaml20 ;
-      private GeneXus.Programs.genexussecurity.SdtGAMPropertySimple AV17GAMPropertySimple ;
-      private GeneXus.Programs.genexussecurity.SdtGAMError AV13Error ;
    }
 
    public class gamwcauthenticationtypeentrysaml20__gam : DataStoreHelperBase, IDataStoreHelper

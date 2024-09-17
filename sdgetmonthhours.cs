@@ -46,7 +46,7 @@ namespace GeneXus.Programs {
       {
          this.AV15TotalDuration = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_TotalDuration=this.AV15TotalDuration;
       }
 
@@ -58,29 +58,12 @@ namespace GeneXus.Programs {
 
       public void executeSubmit( out string aP0_TotalDuration )
       {
-         sdgetmonthhours objsdgetmonthhours;
-         objsdgetmonthhours = new sdgetmonthhours();
-         objsdgetmonthhours.AV15TotalDuration = "" ;
-         objsdgetmonthhours.context.SetSubmitInitialConfig(context);
-         objsdgetmonthhours.initialize();
-         Submit( executePrivateCatch,objsdgetmonthhours);
+         this.AV15TotalDuration = "" ;
+         SubmitImpl();
          aP0_TotalDuration=this.AV15TotalDuration;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((sdgetmonthhours)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -110,21 +93,17 @@ namespace GeneXus.Programs {
          {
             AV15TotalDuration = StringUtil.Str( (decimal)(AV16TotalHoursAndMinutes), 4, 0) + "h:" + StringUtil.Trim( StringUtil.Str( (decimal)(AV10ModTotalMinute), 4, 0)) + "m";
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -135,7 +114,6 @@ namespace GeneXus.Programs {
          AV17lastMonthTodayDate = DateTime.MinValue;
          AV18endOfLastMonthDate = DateTime.MinValue;
          AV12StartDate = DateTime.MinValue;
-         scmdbuf = "";
          P005S2_A121WorkHourLogHour = new short[1] ;
          P005S2_A122WorkHourLogMinute = new short[1] ;
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.sdgetmonthhours__default(),
@@ -158,7 +136,6 @@ namespace GeneXus.Programs {
       private short AV16TotalHoursAndMinutes ;
       private long AV21Udparg1 ;
       private string AV15TotalDuration ;
-      private string scmdbuf ;
       private DateTime AV9EndDate ;
       private DateTime Gx_date ;
       private DateTime AV17lastMonthTodayDate ;

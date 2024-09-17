@@ -42,7 +42,7 @@ namespace GeneXus.Programs {
          }
          if ( GxWebError == 0 )
          {
-            executePrivate();
+            ExecutePrivate();
          }
          cleanup();
       }
@@ -68,32 +68,15 @@ namespace GeneXus.Programs {
       public void execute( )
       {
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
       public void executeSubmit( )
       {
-         aweeklyremindertomanagerug objaweeklyremindertomanagerug;
-         objaweeklyremindertomanagerug = new aweeklyremindertomanagerug();
-         objaweeklyremindertomanagerug.context.SetSubmitInitialConfig(context);
-         objaweeklyremindertomanagerug.initialize();
-         Submit( executePrivateCatch,objaweeklyremindertomanagerug);
+         SubmitImpl();
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((aweeklyremindertomanagerug)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -157,7 +140,7 @@ namespace GeneXus.Programs {
             context.Redirect( context.wjLoc );
             context.wjLoc = "";
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override int getOutputType( )
@@ -167,7 +150,7 @@ namespace GeneXus.Programs {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          base.cleanup();
          if ( IsMain )
          {
@@ -176,15 +159,10 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
          GXKey = "";
          gxfirstwebparm = "";
-         scmdbuf = "";
          P00AM3_A157CompanyLocationId = new long[1] ;
          P00AM3_A100CompanyId = new long[1] ;
          P00AM3_A159CompanyLocationCode = new string[] {""} ;
@@ -241,7 +219,6 @@ namespace GeneXus.Programs {
       private long A106EmployeeId ;
       private string GXKey ;
       private string gxfirstwebparm ;
-      private string scmdbuf ;
       private string A159CompanyLocationCode ;
       private string A107EmployeeFirstName ;
       private string AV14name ;
@@ -254,6 +231,7 @@ namespace GeneXus.Programs {
       private string A109EmployeeEmail ;
       private string AV10email ;
       private string AV17Subject ;
+      private GxHttpRequest AV22HttpRequest ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private IDataStoreProvider pr_default ;
@@ -270,7 +248,6 @@ namespace GeneXus.Programs {
       private string[] P00AM4_A109EmployeeEmail ;
       private short[] P00AM5_A121WorkHourLogHour ;
       private short[] P00AM5_A122WorkHourLogMinute ;
-      private GxHttpRequest AV22HttpRequest ;
    }
 
    public class aweeklyremindertomanagerug__default : DataStoreHelperBase, IDataStoreHelper

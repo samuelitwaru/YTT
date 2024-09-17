@@ -112,7 +112,6 @@ namespace GeneXus.Programs.workwithplus {
          }
          if ( AnyError == 0 )
          {
-            IsConfirmed = 1;
          }
       }
 
@@ -188,7 +187,6 @@ namespace GeneXus.Programs.workwithplus {
 
       protected void CheckExtendedTable022( )
       {
-         nIsDirty_2 = 0;
          standaloneModal( ) ;
          if ( String.IsNullOrEmpty(StringUtil.RTrim( A1WWPParameterKey)) )
          {
@@ -197,12 +195,10 @@ namespace GeneXus.Programs.workwithplus {
          }
          if ( StringUtil.Len( A2WWPParameterValue) <= 30 )
          {
-            nIsDirty_2 = 1;
             A6WWPParameterValueTrimmed = A2WWPParameterValue;
          }
          else
          {
-            nIsDirty_2 = 1;
             A6WWPParameterValueTrimmed = StringUtil.Trim( StringUtil.Substring( A2WWPParameterValue, 1, 27)) + "...";
          }
       }
@@ -284,7 +280,6 @@ namespace GeneXus.Programs.workwithplus {
       protected void insert_Check( )
       {
          CONFIRM_020( ) ;
-         IsConfirmed = 0;
       }
 
       protected void update_Check( )
@@ -512,7 +507,6 @@ namespace GeneXus.Programs.workwithplus {
          else
          {
          }
-         IsModified = 0;
          if ( AnyError != 0 )
          {
             context.wjLoc = "";
@@ -761,7 +755,6 @@ namespace GeneXus.Programs.workwithplus {
 
       protected void SaveImpl( )
       {
-         nKeyPressed = 1;
          GetKey022( ) ;
          if ( IsIns( ) )
          {
@@ -839,7 +832,6 @@ namespace GeneXus.Programs.workwithplus {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars2( bcworkwithplus_WWP_Parameter, 1) ;
          SaveImpl( ) ;
          VarsToRow2( bcworkwithplus_WWP_Parameter) ;
@@ -853,7 +845,6 @@ namespace GeneXus.Programs.workwithplus {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars2( bcworkwithplus_WWP_Parameter, 1) ;
          Gx_mode = "INS";
          /* Insert record */
@@ -899,7 +890,6 @@ namespace GeneXus.Programs.workwithplus {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars2( bcworkwithplus_WWP_Parameter, 1) ;
          UpdateImpl( ) ;
          context.GX_msglist = BackMsgLst;
@@ -912,7 +902,6 @@ namespace GeneXus.Programs.workwithplus {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars2( bcworkwithplus_WWP_Parameter, 1) ;
          Gx_mode = "INS";
          /* Insert record */
@@ -946,8 +935,6 @@ namespace GeneXus.Programs.workwithplus {
          AnyError = 0;
          context.GX_msglist.removeAllItems();
          RowToVars2( bcworkwithplus_WWP_Parameter, 0) ;
-         nKeyPressed = 3;
-         IsConfirmed = 0;
          GetKey022( ) ;
          if ( RcdFound2 == 1 )
          {
@@ -1063,7 +1050,6 @@ namespace GeneXus.Programs.workwithplus {
 
       public void ForceCommitOnExit( )
       {
-         mustCommit = true;
          return  ;
       }
 
@@ -1120,24 +1106,20 @@ namespace GeneXus.Programs.workwithplus {
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
       }
 
-      protected void CloseOpenCursors( )
+      protected override void CloseCursors( )
       {
          pr_default.close(1);
       }
 
       public override void initialize( )
       {
-         scmdbuf = "";
-         PreviousTooltip = "";
-         PreviousCaption = "";
          Gx_mode = "";
          endTrnMsgTxt = "";
          endTrnMsgCod = "";
@@ -1214,17 +1196,9 @@ namespace GeneXus.Programs.workwithplus {
          standaloneNotModal( ) ;
       }
 
-      private short IsConfirmed ;
-      private short IsModified ;
       private short AnyError ;
-      private short nKeyPressed ;
-      private short GX_JID ;
       private short RcdFound2 ;
-      private short nIsDirty_2 ;
       private int trnEnded ;
-      private string scmdbuf ;
-      private string PreviousTooltip ;
-      private string PreviousCaption ;
       private string Gx_mode ;
       private string endTrnMsgTxt ;
       private string endTrnMsgCod ;
@@ -1232,7 +1206,6 @@ namespace GeneXus.Programs.workwithplus {
       private bool returnInSub ;
       private bool Z5WWPParameterDisableDelete ;
       private bool A5WWPParameterDisableDelete ;
-      private bool mustCommit ;
       private string Z2WWPParameterValue ;
       private string A2WWPParameterValue ;
       private string Z1WWPParameterKey ;
@@ -1244,9 +1217,10 @@ namespace GeneXus.Programs.workwithplus {
       private string Z6WWPParameterValueTrimmed ;
       private string A6WWPParameterValueTrimmed ;
       private IGxSession AV10WebSession ;
-      private GeneXus.Programs.workwithplus.SdtWWP_Parameter bcworkwithplus_WWP_Parameter ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV8WWPContext ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext AV9TrnContext ;
       private IDataStoreProvider pr_default ;
       private string[] BC00024_A1WWPParameterKey ;
       private string[] BC00024_A3WWPParameterCategory ;
@@ -1269,11 +1243,10 @@ namespace GeneXus.Programs.workwithplus {
       private string[] BC00029_A4WWPParameterDescription ;
       private string[] BC00029_A2WWPParameterValue ;
       private bool[] BC00029_A5WWPParameterDisableDelete ;
+      private GeneXus.Programs.workwithplus.SdtWWP_Parameter bcworkwithplus_WWP_Parameter ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
       private IDataStoreProvider pr_gam ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV8WWPContext ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext AV9TrnContext ;
    }
 
    public class wwp_parameter_bc__gam : DataStoreHelperBase, IDataStoreHelper
@@ -1330,20 +1303,20 @@ namespace GeneXus.Programs.workwithplus {
   {
      if ( def == null )
      {
-        Object[] prmBC00024;
-        prmBC00024 = new Object[] {
-        new ParDef("WWPParameterKey",GXType.VarChar,300,0)
-        };
-        Object[] prmBC00025;
-        prmBC00025 = new Object[] {
+        Object[] prmBC00022;
+        prmBC00022 = new Object[] {
         new ParDef("WWPParameterKey",GXType.VarChar,300,0)
         };
         Object[] prmBC00023;
         prmBC00023 = new Object[] {
         new ParDef("WWPParameterKey",GXType.VarChar,300,0)
         };
-        Object[] prmBC00022;
-        prmBC00022 = new Object[] {
+        Object[] prmBC00024;
+        prmBC00024 = new Object[] {
+        new ParDef("WWPParameterKey",GXType.VarChar,300,0)
+        };
+        Object[] prmBC00025;
+        prmBC00025 = new Object[] {
         new ParDef("WWPParameterKey",GXType.VarChar,300,0)
         };
         Object[] prmBC00026;

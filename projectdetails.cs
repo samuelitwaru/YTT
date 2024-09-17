@@ -44,10 +44,10 @@ namespace GeneXus.Programs {
       public void execute( short aP0_OneProjectId )
       {
          this.AV22OneProjectId = aP0_OneProjectId;
-         executePrivate();
+         ExecuteImpl();
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -198,11 +198,8 @@ namespace GeneXus.Programs {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITWEB( ) ;
          if ( ! isAjaxCallMode( ) )
          {
@@ -233,7 +230,7 @@ namespace GeneXus.Programs {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override short ExecuteStartEvent( )
@@ -277,10 +274,10 @@ namespace GeneXus.Programs {
          CloseStyles();
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
@@ -693,7 +690,7 @@ namespace GeneXus.Programs {
          {
             if ( context.ExposeMetadata( ) )
             {
-               Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+               Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
             }
          }
          Form.Meta.addItem("description", "Project Details", 0) ;
@@ -744,12 +741,14 @@ namespace GeneXus.Programs {
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
+                              /* Execute user event: Freestylegrid1paginationbar.Changepage */
                               E114Y2 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "FREESTYLEGRID1PAGINATIONBAR.CHANGEROWSPERPAGE") == 0 )
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
+                              /* Execute user event: Freestylegrid1paginationbar.Changerowsperpage */
                               E124Y2 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "'DOEXPORTEXCEL'") == 0 )
@@ -805,12 +804,14 @@ namespace GeneXus.Programs {
                                  {
                                     context.wbHandled = 1;
                                     dynload_actions( ) ;
+                                    /* Execute user event: Freestylegrid1.Load */
                                     E174Y2 ();
                                  }
                                  else if ( StringUtil.StrCmp(sEvt, "FREESTYLEGRID1.REFRESH") == 0 )
                                  {
                                     context.wbHandled = 1;
                                     dynload_actions( ) ;
+                                    /* Execute user event: Freestylegrid1.Refresh */
                                     E184Y2 ();
                                  }
                                  else if ( StringUtil.StrCmp(sEvt, "ENTER") == 0 )
@@ -999,6 +1000,7 @@ namespace GeneXus.Programs {
          wbStart = 23;
          /* Execute user event: Refresh */
          E164Y2 ();
+         /* Execute user event: Freestylegrid1.Refresh */
          E184Y2 ();
          nGXsfl_23_idx = 1;
          sGXsfl_23_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_23_idx), 4, 0), 4, "0");
@@ -1074,6 +1076,7 @@ namespace GeneXus.Programs {
                A100CompanyId = H004Y2_A100CompanyId[0];
                A148EmployeeName = H004Y2_A148EmployeeName[0];
                A157CompanyLocationId = H004Y2_A157CompanyLocationId[0];
+               /* Execute user event: Freestylegrid1.Load */
                E174Y2 ();
                pr_default.readNext(0);
             }
@@ -1243,9 +1246,7 @@ namespace GeneXus.Programs {
       protected void before_start_formulas( )
       {
          edtEmployeeName_Enabled = 0;
-         AssignProp("", false, edtEmployeeName_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtEmployeeName_Enabled), 5, 0), !bGXsfl_23_Refreshing);
          edtEmployeeId_Enabled = 0;
-         AssignProp("", false, edtEmployeeId_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtEmployeeId_Enabled), 5, 0), !bGXsfl_23_Refreshing);
          fix_multi_value_controls( ) ;
       }
 
@@ -1554,7 +1555,7 @@ namespace GeneXus.Programs {
          PA4Y2( ) ;
          WS4Y2( ) ;
          WE4Y2( ) ;
-         this.cleanup();
+         cleanup();
          context.SetWrapped(false);
          context.GX_msglist = BackMsgLst;
          return "";
@@ -1583,7 +1584,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20248199512167", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202491613195394", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1599,7 +1600,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("projectdetails.js", "?20248199512167", false, true);
+         context.AddJavascriptSource("projectdetails.js", "?202491613195395", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/DVPaginationBar/DVPaginationBarRender.js", "", false, true);
@@ -1621,6 +1622,7 @@ namespace GeneXus.Programs {
 
       protected void sendrow_232( )
       {
+         sGXsfl_23_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_23_idx), 4, 0), 4, "0");
          SubsflControlProps_232( ) ;
          WB4Y0( ) ;
          if ( ( subFreestylegrid1_Rows * 1 == 0 ) || ( nGXsfl_23_idx <= subFreestylegrid1_fnc_Recordsperpage( ) * 1 ) )
@@ -1835,6 +1837,12 @@ namespace GeneXus.Programs {
             Freestylegrid1Column = GXWebColumn.GetNew(isAjaxCallMode( ));
             Freestylegrid1Container.AddColumnProperties(Freestylegrid1Column);
             Freestylegrid1Column = GXWebColumn.GetNew(isAjaxCallMode( ));
+            Freestylegrid1Container.AddColumnProperties(Freestylegrid1Column);
+            Freestylegrid1Column = GXWebColumn.GetNew(isAjaxCallMode( ));
+            Freestylegrid1Container.AddColumnProperties(Freestylegrid1Column);
+            Freestylegrid1Column = GXWebColumn.GetNew(isAjaxCallMode( ));
+            Freestylegrid1Container.AddColumnProperties(Freestylegrid1Column);
+            Freestylegrid1Column = GXWebColumn.GetNew(isAjaxCallMode( ));
             Freestylegrid1Column.AddObjectProperty("Value", GXUtil.ValueEncode( StringUtil.RTrim( A148EmployeeName)));
             Freestylegrid1Column.AddObjectProperty("Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtEmployeeName_Visible), 5, 0, ".", "")));
             Freestylegrid1Container.AddColumnProperties(Freestylegrid1Column);
@@ -1843,8 +1851,20 @@ namespace GeneXus.Programs {
             Freestylegrid1Column = GXWebColumn.GetNew(isAjaxCallMode( ));
             Freestylegrid1Container.AddColumnProperties(Freestylegrid1Column);
             Freestylegrid1Column = GXWebColumn.GetNew(isAjaxCallMode( ));
+            Freestylegrid1Container.AddColumnProperties(Freestylegrid1Column);
+            Freestylegrid1Column = GXWebColumn.GetNew(isAjaxCallMode( ));
+            Freestylegrid1Container.AddColumnProperties(Freestylegrid1Column);
+            Freestylegrid1Column = GXWebColumn.GetNew(isAjaxCallMode( ));
             Freestylegrid1Column.AddObjectProperty("Value", GXUtil.ValueEncode( StringUtil.LTrim( StringUtil.NToC( (decimal)(A106EmployeeId), 10, 0, ".", ""))));
             Freestylegrid1Column.AddObjectProperty("Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtEmployeeId_Visible), 5, 0, ".", "")));
+            Freestylegrid1Container.AddColumnProperties(Freestylegrid1Column);
+            Freestylegrid1Column = GXWebColumn.GetNew(isAjaxCallMode( ));
+            Freestylegrid1Container.AddColumnProperties(Freestylegrid1Column);
+            Freestylegrid1Column = GXWebColumn.GetNew(isAjaxCallMode( ));
+            Freestylegrid1Container.AddColumnProperties(Freestylegrid1Column);
+            Freestylegrid1Column = GXWebColumn.GetNew(isAjaxCallMode( ));
+            Freestylegrid1Container.AddColumnProperties(Freestylegrid1Column);
+            Freestylegrid1Column = GXWebColumn.GetNew(isAjaxCallMode( ));
             Freestylegrid1Container.AddColumnProperties(Freestylegrid1Column);
             Freestylegrid1Container.AddObjectProperty("Selectedindex", StringUtil.LTrim( StringUtil.NToC( (decimal)(subFreestylegrid1_Selectedindex), 4, 0, ".", "")));
             Freestylegrid1Container.AddObjectProperty("Allowselection", StringUtil.LTrim( StringUtil.NToC( (decimal)(subFreestylegrid1_Allowselection), 1, 0, ".", "")));
@@ -1934,37 +1954,30 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'FREESTYLEGRID1_nFirstRecordOnPage'},{av:'FREESTYLEGRID1_nEOF'},{av:'subFreestylegrid1_Rows',ctrl:'FREESTYLEGRID1',prop:'Rows'},{av:'edtEmployeeName_Visible',ctrl:'EMPLOYEENAME',prop:'Visible'},{av:'edtEmployeeId_Visible',ctrl:'EMPLOYEEID',prop:'Visible'},{av:'AV15FromDate',fld:'vFROMDATE',pic:''},{av:'AV16ToDate',fld:'vTODATE',pic:''},{av:'AV22OneProjectId',fld:'vONEPROJECTID',pic:'ZZZ9',hsh:true}]");
-         setEventMetadata("REFRESH",",oparms:[]}");
-         setEventMetadata("FREESTYLEGRID1.LOAD","{handler:'E174Y2',iparms:[{av:'A106EmployeeId',fld:'EMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'A148EmployeeName',fld:'EMPLOYEENAME',pic:''},{av:'AV15FromDate',fld:'vFROMDATE',pic:''},{av:'AV16ToDate',fld:'vTODATE',pic:''},{av:'AV22OneProjectId',fld:'vONEPROJECTID',pic:'ZZZ9',hsh:true}]");
-         setEventMetadata("FREESTYLEGRID1.LOAD",",oparms:[{ctrl:'WCREPORTSWORKHOURLOGDETAILS'}]}");
-         setEventMetadata("FREESTYLEGRID1PAGINATIONBAR.CHANGEPAGE","{handler:'E114Y2',iparms:[{av:'FREESTYLEGRID1_nFirstRecordOnPage'},{av:'FREESTYLEGRID1_nEOF'},{av:'subFreestylegrid1_Rows',ctrl:'FREESTYLEGRID1',prop:'Rows'},{av:'AV22OneProjectId',fld:'vONEPROJECTID',pic:'ZZZ9',hsh:true},{av:'edtEmployeeName_Visible',ctrl:'EMPLOYEENAME',prop:'Visible'},{av:'edtEmployeeId_Visible',ctrl:'EMPLOYEEID',prop:'Visible'},{av:'AV15FromDate',fld:'vFROMDATE',pic:''},{av:'AV16ToDate',fld:'vTODATE',pic:''},{av:'Freestylegrid1paginationbar_Selectedpage',ctrl:'FREESTYLEGRID1PAGINATIONBAR',prop:'SelectedPage'},{av:'AV9FreeStyleGrid1CurrentPage',fld:'vFREESTYLEGRID1CURRENTPAGE',pic:'ZZZZZZZZZ9'}]");
-         setEventMetadata("FREESTYLEGRID1PAGINATIONBAR.CHANGEPAGE",",oparms:[{av:'AV9FreeStyleGrid1CurrentPage',fld:'vFREESTYLEGRID1CURRENTPAGE',pic:'ZZZZZZZZZ9'}]}");
-         setEventMetadata("FREESTYLEGRID1PAGINATIONBAR.CHANGEROWSPERPAGE","{handler:'E124Y2',iparms:[{av:'FREESTYLEGRID1_nFirstRecordOnPage'},{av:'FREESTYLEGRID1_nEOF'},{av:'subFreestylegrid1_Rows',ctrl:'FREESTYLEGRID1',prop:'Rows'},{av:'AV22OneProjectId',fld:'vONEPROJECTID',pic:'ZZZ9',hsh:true},{av:'edtEmployeeName_Visible',ctrl:'EMPLOYEENAME',prop:'Visible'},{av:'edtEmployeeId_Visible',ctrl:'EMPLOYEEID',prop:'Visible'},{av:'AV15FromDate',fld:'vFROMDATE',pic:''},{av:'AV16ToDate',fld:'vTODATE',pic:''},{av:'Freestylegrid1paginationbar_Rowsperpageselectedvalue',ctrl:'FREESTYLEGRID1PAGINATIONBAR',prop:'RowsPerPageSelectedValue'}]");
-         setEventMetadata("FREESTYLEGRID1PAGINATIONBAR.CHANGEROWSPERPAGE",",oparms:[{av:'subFreestylegrid1_Rows',ctrl:'FREESTYLEGRID1',prop:'Rows'},{av:'AV9FreeStyleGrid1CurrentPage',fld:'vFREESTYLEGRID1CURRENTPAGE',pic:'ZZZZZZZZZ9'}]}");
-         setEventMetadata("'DOEXPORTEXCEL'","{handler:'E134Y2',iparms:[{av:'AV21DateRange',fld:'vDATERANGE',pic:''},{av:'AV26DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV14ProjectId',fld:'vPROJECTID',pic:''},{av:'AV12CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:''},{av:'AV13EmployeeId',fld:'vEMPLOYEEID',pic:''}]");
-         setEventMetadata("'DOEXPORTEXCEL'",",oparms:[{av:'AV13EmployeeId',fld:'vEMPLOYEEID',pic:''},{av:'AV12CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:''},{av:'AV14ProjectId',fld:'vPROJECTID',pic:''},{av:'AV26DateRange_To',fld:'vDATERANGE_TO',pic:''},{av:'AV21DateRange',fld:'vDATERANGE',pic:''},{av:'Innewwindow1_Target',ctrl:'INNEWWINDOW1',prop:'Target'},{av:'Innewwindow1_Name',ctrl:'INNEWWINDOW1',prop:'Name'}]}");
-         setEventMetadata("FREESTYLEGRID1.REFRESH","{handler:'E184Y2',iparms:[]");
-         setEventMetadata("FREESTYLEGRID1.REFRESH",",oparms:[{av:'AV10FreeStyleGrid1PageCount',fld:'vFREESTYLEGRID1PAGECOUNT',pic:'ZZZZZZZZZ9'}]}");
-         setEventMetadata("GLOBALEVENTS.REPORTSFILTERCHANAGED","{handler:'E144Y2',iparms:[{av:'FREESTYLEGRID1_nFirstRecordOnPage'},{av:'FREESTYLEGRID1_nEOF'},{av:'subFreestylegrid1_Rows',ctrl:'FREESTYLEGRID1',prop:'Rows'},{av:'AV22OneProjectId',fld:'vONEPROJECTID',pic:'ZZZ9',hsh:true},{av:'edtEmployeeName_Visible',ctrl:'EMPLOYEENAME',prop:'Visible'},{av:'edtEmployeeId_Visible',ctrl:'EMPLOYEEID',prop:'Visible'},{av:'AV15FromDate',fld:'vFROMDATE',pic:''},{av:'AV16ToDate',fld:'vTODATE',pic:''},{av:'AV32InProjectId',fld:'vINPROJECTID',pic:''},{av:'AV31InEmployeeId',fld:'vINEMPLOYEEID',pic:''},{av:'AV30InCompanyLocationId',fld:'vINCOMPANYLOCATIONID',pic:''},{av:'AV12CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:''},{av:'AV13EmployeeId',fld:'vEMPLOYEEID',pic:''}]");
-         setEventMetadata("GLOBALEVENTS.REPORTSFILTERCHANAGED",",oparms:[{av:'AV21DateRange',fld:'vDATERANGE',pic:''},{av:'AV26DateRange_To',fld:'vDATERANGE_TO',pic:''}]}");
-         setEventMetadata("VALID_EMPLOYEEID","{handler:'Valid_Employeeid',iparms:[]");
-         setEventMetadata("VALID_EMPLOYEEID",",oparms:[]}");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"FREESTYLEGRID1_nFirstRecordOnPage"},{"av":"FREESTYLEGRID1_nEOF"},{"av":"subFreestylegrid1_Rows","ctrl":"FREESTYLEGRID1","prop":"Rows"},{"av":"edtEmployeeName_Visible","ctrl":"EMPLOYEENAME","prop":"Visible"},{"av":"edtEmployeeId_Visible","ctrl":"EMPLOYEEID","prop":"Visible"},{"av":"AV15FromDate","fld":"vFROMDATE"},{"av":"AV16ToDate","fld":"vTODATE"},{"av":"AV22OneProjectId","fld":"vONEPROJECTID","pic":"ZZZ9","hsh":true}]}""");
+         setEventMetadata("FREESTYLEGRID1.LOAD","""{"handler":"E174Y2","iparms":[{"av":"A106EmployeeId","fld":"EMPLOYEEID","pic":"ZZZZZZZZZ9"},{"av":"A148EmployeeName","fld":"EMPLOYEENAME"},{"av":"AV15FromDate","fld":"vFROMDATE"},{"av":"AV16ToDate","fld":"vTODATE"},{"av":"AV22OneProjectId","fld":"vONEPROJECTID","pic":"ZZZ9","hsh":true}]""");
+         setEventMetadata("FREESTYLEGRID1.LOAD",""","oparms":[{"ctrl":"WCREPORTSWORKHOURLOGDETAILS"}]}""");
+         setEventMetadata("FREESTYLEGRID1PAGINATIONBAR.CHANGEPAGE","""{"handler":"E114Y2","iparms":[{"av":"FREESTYLEGRID1_nFirstRecordOnPage"},{"av":"FREESTYLEGRID1_nEOF"},{"av":"subFreestylegrid1_Rows","ctrl":"FREESTYLEGRID1","prop":"Rows"},{"av":"AV22OneProjectId","fld":"vONEPROJECTID","pic":"ZZZ9","hsh":true},{"av":"edtEmployeeName_Visible","ctrl":"EMPLOYEENAME","prop":"Visible"},{"av":"edtEmployeeId_Visible","ctrl":"EMPLOYEEID","prop":"Visible"},{"av":"AV15FromDate","fld":"vFROMDATE"},{"av":"AV16ToDate","fld":"vTODATE"},{"av":"Freestylegrid1paginationbar_Selectedpage","ctrl":"FREESTYLEGRID1PAGINATIONBAR","prop":"SelectedPage"},{"av":"AV9FreeStyleGrid1CurrentPage","fld":"vFREESTYLEGRID1CURRENTPAGE","pic":"ZZZZZZZZZ9"}]""");
+         setEventMetadata("FREESTYLEGRID1PAGINATIONBAR.CHANGEPAGE",""","oparms":[{"av":"AV9FreeStyleGrid1CurrentPage","fld":"vFREESTYLEGRID1CURRENTPAGE","pic":"ZZZZZZZZZ9"}]}""");
+         setEventMetadata("FREESTYLEGRID1PAGINATIONBAR.CHANGEROWSPERPAGE","""{"handler":"E124Y2","iparms":[{"av":"FREESTYLEGRID1_nFirstRecordOnPage"},{"av":"FREESTYLEGRID1_nEOF"},{"av":"subFreestylegrid1_Rows","ctrl":"FREESTYLEGRID1","prop":"Rows"},{"av":"AV22OneProjectId","fld":"vONEPROJECTID","pic":"ZZZ9","hsh":true},{"av":"edtEmployeeName_Visible","ctrl":"EMPLOYEENAME","prop":"Visible"},{"av":"edtEmployeeId_Visible","ctrl":"EMPLOYEEID","prop":"Visible"},{"av":"AV15FromDate","fld":"vFROMDATE"},{"av":"AV16ToDate","fld":"vTODATE"},{"av":"Freestylegrid1paginationbar_Rowsperpageselectedvalue","ctrl":"FREESTYLEGRID1PAGINATIONBAR","prop":"RowsPerPageSelectedValue"}]""");
+         setEventMetadata("FREESTYLEGRID1PAGINATIONBAR.CHANGEROWSPERPAGE",""","oparms":[{"av":"subFreestylegrid1_Rows","ctrl":"FREESTYLEGRID1","prop":"Rows"},{"av":"AV9FreeStyleGrid1CurrentPage","fld":"vFREESTYLEGRID1CURRENTPAGE","pic":"ZZZZZZZZZ9"}]}""");
+         setEventMetadata("'DOEXPORTEXCEL'","""{"handler":"E134Y2","iparms":[{"av":"AV21DateRange","fld":"vDATERANGE"},{"av":"AV26DateRange_To","fld":"vDATERANGE_TO"},{"av":"AV14ProjectId","fld":"vPROJECTID"},{"av":"AV12CompanyLocationId","fld":"vCOMPANYLOCATIONID"},{"av":"AV13EmployeeId","fld":"vEMPLOYEEID"}]""");
+         setEventMetadata("'DOEXPORTEXCEL'",""","oparms":[{"av":"AV13EmployeeId","fld":"vEMPLOYEEID"},{"av":"AV12CompanyLocationId","fld":"vCOMPANYLOCATIONID"},{"av":"AV14ProjectId","fld":"vPROJECTID"},{"av":"AV26DateRange_To","fld":"vDATERANGE_TO"},{"av":"AV21DateRange","fld":"vDATERANGE"},{"av":"Innewwindow1_Target","ctrl":"INNEWWINDOW1","prop":"Target"},{"av":"Innewwindow1_Name","ctrl":"INNEWWINDOW1","prop":"Name"}]}""");
+         setEventMetadata("FREESTYLEGRID1.REFRESH","""{"handler":"E184Y2","iparms":[]""");
+         setEventMetadata("FREESTYLEGRID1.REFRESH",""","oparms":[{"av":"AV10FreeStyleGrid1PageCount","fld":"vFREESTYLEGRID1PAGECOUNT","pic":"ZZZZZZZZZ9"}]}""");
+         setEventMetadata("GLOBALEVENTS.REPORTSFILTERCHANAGED","""{"handler":"E144Y2","iparms":[{"av":"FREESTYLEGRID1_nFirstRecordOnPage"},{"av":"FREESTYLEGRID1_nEOF"},{"av":"subFreestylegrid1_Rows","ctrl":"FREESTYLEGRID1","prop":"Rows"},{"av":"AV22OneProjectId","fld":"vONEPROJECTID","pic":"ZZZ9","hsh":true},{"av":"edtEmployeeName_Visible","ctrl":"EMPLOYEENAME","prop":"Visible"},{"av":"edtEmployeeId_Visible","ctrl":"EMPLOYEEID","prop":"Visible"},{"av":"AV15FromDate","fld":"vFROMDATE"},{"av":"AV16ToDate","fld":"vTODATE"},{"av":"AV32InProjectId","fld":"vINPROJECTID"},{"av":"AV31InEmployeeId","fld":"vINEMPLOYEEID"},{"av":"AV30InCompanyLocationId","fld":"vINCOMPANYLOCATIONID"},{"av":"AV12CompanyLocationId","fld":"vCOMPANYLOCATIONID"},{"av":"AV13EmployeeId","fld":"vEMPLOYEEID"}]""");
+         setEventMetadata("GLOBALEVENTS.REPORTSFILTERCHANAGED",""","oparms":[{"av":"AV21DateRange","fld":"vDATERANGE"},{"av":"AV26DateRange_To","fld":"vDATERANGE_TO"}]}""");
+         setEventMetadata("VALID_EMPLOYEEID","""{"handler":"Valid_Employeeid","iparms":[]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -2007,7 +2020,6 @@ namespace GeneXus.Programs {
          sCmpCtrl = "";
          WebComp_GX_Process_Component = "";
          WebComp_Wcreportsworkhourlogdetails_Component = "";
-         scmdbuf = "";
          A119WorkHourLogDate = DateTime.MinValue;
          H004Y2_A100CompanyId = new long[1] ;
          H004Y2_A102ProjectId = new long[1] ;
@@ -2047,7 +2059,6 @@ namespace GeneXus.Programs {
       private short FREESTYLEGRID1_nEOF ;
       private short nGotPars ;
       private short GxWebError ;
-      private short initialized ;
       private short gxajaxcallmode ;
       private short wbEnd ;
       private short wbStart ;
@@ -2148,7 +2159,6 @@ namespace GeneXus.Programs {
       private string WebComp_GX_Process_Component ;
       private string WebCompHandler="" ;
       private string WebComp_Wcreportsworkhourlogdetails_Component ;
-      private string scmdbuf ;
       private string sGXsfl_23_fel_idx="0001" ;
       private string subFreestylegrid1_Class ;
       private string subFreestylegrid1_Linesclass ;
@@ -2183,20 +2193,22 @@ namespace GeneXus.Programs {
       private string AV11FreeStyleGrid1AppliedFilters ;
       private string AV35ExcelFilename ;
       private string AV36ErrorMessage ;
-      private GxSimpleCollection<long> AV14ProjectId ;
-      private GxSimpleCollection<long> AV12CompanyLocationId ;
-      private GxSimpleCollection<long> AV13EmployeeId ;
-      private GxSimpleCollection<long> AV32InProjectId ;
-      private GxSimpleCollection<long> AV31InEmployeeId ;
-      private GxSimpleCollection<long> AV30InCompanyLocationId ;
       private GXWebComponent WebComp_Wcreportsworkhourlogdetails ;
       private GXWebGrid Freestylegrid1Container ;
       private GXWebRow Freestylegrid1Row ;
       private GXWebColumn Freestylegrid1Column ;
       private GXUserControl ucFreestylegrid1paginationbar ;
       private GXUserControl ucInnewwindow1 ;
+      private IGxSession AV34WebSession ;
+      private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GxSimpleCollection<long> AV14ProjectId ;
+      private GxSimpleCollection<long> AV12CompanyLocationId ;
+      private GxSimpleCollection<long> AV13EmployeeId ;
+      private GxSimpleCollection<long> AV32InProjectId ;
+      private GxSimpleCollection<long> AV31InEmployeeId ;
+      private GxSimpleCollection<long> AV30InCompanyLocationId ;
       private GXWebComponent WebComp_GX_Process ;
       private IDataStoreProvider pr_default ;
       private long[] H004Y2_A100CompanyId ;
@@ -2209,8 +2221,6 @@ namespace GeneXus.Programs {
       private long[] H004Y3_AFREESTYLEGRID1_nRecordCount ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
-      private IGxSession AV34WebSession ;
-      private GXWebForm Form ;
    }
 
    public class projectdetails__default : DataStoreHelperBase, IDataStoreHelper

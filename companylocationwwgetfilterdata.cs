@@ -80,7 +80,7 @@ namespace GeneXus.Programs {
          this.AV37OptionsDescJson = "" ;
          this.AV38OptionIndexesJson = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP3_OptionsJson=this.AV36OptionsJson;
          aP4_OptionsDescJson=this.AV37OptionsDescJson;
          aP5_OptionIndexesJson=this.AV38OptionIndexesJson;
@@ -103,36 +103,19 @@ namespace GeneXus.Programs {
                                  out string aP4_OptionsDescJson ,
                                  out string aP5_OptionIndexesJson )
       {
-         companylocationwwgetfilterdata objcompanylocationwwgetfilterdata;
-         objcompanylocationwwgetfilterdata = new companylocationwwgetfilterdata();
-         objcompanylocationwwgetfilterdata.AV33DDOName = aP0_DDOName;
-         objcompanylocationwwgetfilterdata.AV34SearchTxtParms = aP1_SearchTxtParms;
-         objcompanylocationwwgetfilterdata.AV35SearchTxtTo = aP2_SearchTxtTo;
-         objcompanylocationwwgetfilterdata.AV36OptionsJson = "" ;
-         objcompanylocationwwgetfilterdata.AV37OptionsDescJson = "" ;
-         objcompanylocationwwgetfilterdata.AV38OptionIndexesJson = "" ;
-         objcompanylocationwwgetfilterdata.context.SetSubmitInitialConfig(context);
-         objcompanylocationwwgetfilterdata.initialize();
-         Submit( executePrivateCatch,objcompanylocationwwgetfilterdata);
+         this.AV33DDOName = aP0_DDOName;
+         this.AV34SearchTxtParms = aP1_SearchTxtParms;
+         this.AV35SearchTxtTo = aP2_SearchTxtTo;
+         this.AV36OptionsJson = "" ;
+         this.AV37OptionsDescJson = "" ;
+         this.AV38OptionIndexesJson = "" ;
+         SubmitImpl();
          aP3_OptionsJson=this.AV36OptionsJson;
          aP4_OptionsDescJson=this.AV37OptionsDescJson;
          aP5_OptionIndexesJson=this.AV38OptionIndexesJson;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((companylocationwwgetfilterdata)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -148,7 +131,7 @@ namespace GeneXus.Programs {
          S111 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          if ( StringUtil.StrCmp(StringUtil.Upper( AV33DDOName), "DDO_COMPANYLOCATIONNAME") == 0 )
@@ -157,7 +140,7 @@ namespace GeneXus.Programs {
             S121 ();
             if ( returnInSub )
             {
-               this.cleanup();
+               cleanup();
                if (true) return;
             }
          }
@@ -167,14 +150,14 @@ namespace GeneXus.Programs {
             S131 ();
             if ( returnInSub )
             {
-               this.cleanup();
+               cleanup();
                if (true) return;
             }
          }
          AV36OptionsJson = AV23Options.ToJSonString(false);
          AV37OptionsDescJson = AV25OptionsDesc.ToJSonString(false);
          AV38OptionIndexesJson = AV26OptionIndexes.ToJSonString(false);
-         this.cleanup();
+         cleanup();
       }
 
       protected void S111( )
@@ -228,9 +211,6 @@ namespace GeneXus.Programs {
          AV44Companylocationwwds_3_tfcompanylocationname_sel = AV14TFCompanyLocationName_Sel;
          AV45Companylocationwwds_4_tfcompanylocationcode = AV15TFCompanyLocationCode;
          AV46Companylocationwwds_5_tfcompanylocationcode_sel = AV16TFCompanyLocationCode_Sel;
-         AV47Udparg6 = new getloggedinusercompanyid(context).executeUdp( );
-         AV47Udparg6 = new getloggedinusercompanyid(context).executeUdp( );
-         AV47Udparg6 = new getloggedinusercompanyid(context).executeUdp( );
          pr_default.dynParam(0, new Object[]{ new Object[]{
                                               AV42Companylocationwwds_1_filterfulltext ,
                                               AV44Companylocationwwds_3_tfcompanylocationname_sel ,
@@ -238,10 +218,8 @@ namespace GeneXus.Programs {
                                               AV46Companylocationwwds_5_tfcompanylocationcode_sel ,
                                               AV45Companylocationwwds_4_tfcompanylocationcode ,
                                               A158CompanyLocationName ,
-                                              A159CompanyLocationCode ,
-                                              AV47Udparg6 } ,
+                                              A159CompanyLocationCode } ,
                                               new int[]{
-                                              TypeConstants.LONG
                                               }
          });
          lV42Companylocationwwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV42Companylocationwwds_1_filterfulltext), "%", "");
@@ -300,9 +278,6 @@ namespace GeneXus.Programs {
          AV44Companylocationwwds_3_tfcompanylocationname_sel = AV14TFCompanyLocationName_Sel;
          AV45Companylocationwwds_4_tfcompanylocationcode = AV15TFCompanyLocationCode;
          AV46Companylocationwwds_5_tfcompanylocationcode_sel = AV16TFCompanyLocationCode_Sel;
-         AV50Udparg7 = new getloggedinusercompanyid(context).executeUdp( );
-         AV50Udparg7 = new getloggedinusercompanyid(context).executeUdp( );
-         AV50Udparg7 = new getloggedinusercompanyid(context).executeUdp( );
          pr_default.dynParam(1, new Object[]{ new Object[]{
                                               AV42Companylocationwwds_1_filterfulltext ,
                                               AV44Companylocationwwds_3_tfcompanylocationname_sel ,
@@ -310,10 +285,8 @@ namespace GeneXus.Programs {
                                               AV46Companylocationwwds_5_tfcompanylocationcode_sel ,
                                               AV45Companylocationwwds_4_tfcompanylocationcode ,
                                               A158CompanyLocationName ,
-                                              A159CompanyLocationCode ,
-                                              AV50Udparg7 } ,
+                                              A159CompanyLocationCode } ,
                                               new int[]{
-                                              TypeConstants.LONG
                                               }
          });
          lV42Companylocationwwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV42Companylocationwwds_1_filterfulltext), "%", "");
@@ -363,16 +336,12 @@ namespace GeneXus.Programs {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -398,7 +367,6 @@ namespace GeneXus.Programs {
          AV44Companylocationwwds_3_tfcompanylocationname_sel = "";
          AV45Companylocationwwds_4_tfcompanylocationcode = "";
          AV46Companylocationwwds_5_tfcompanylocationcode_sel = "";
-         scmdbuf = "";
          lV42Companylocationwwds_1_filterfulltext = "";
          lV43Companylocationwwds_2_tfcompanylocationname = "";
          lV45Companylocationwwds_4_tfcompanylocationcode = "";
@@ -428,10 +396,8 @@ namespace GeneXus.Programs {
       private short AV19PageIndex ;
       private short AV18SkipItems ;
       private int AV40GXV1 ;
-      private long AV47Udparg6 ;
       private long A157CompanyLocationId ;
       private long AV27count ;
-      private long AV50Udparg7 ;
       private string AV13TFCompanyLocationName ;
       private string AV14TFCompanyLocationName_Sel ;
       private string AV15TFCompanyLocationCode ;
@@ -440,7 +406,6 @@ namespace GeneXus.Programs {
       private string AV44Companylocationwwds_3_tfcompanylocationname_sel ;
       private string AV45Companylocationwwds_4_tfcompanylocationcode ;
       private string AV46Companylocationwwds_5_tfcompanylocationcode_sel ;
-      private string scmdbuf ;
       private string lV43Companylocationwwds_2_tfcompanylocationname ;
       private string lV45Companylocationwwds_4_tfcompanylocationcode ;
       private string A158CompanyLocationName ;
@@ -462,6 +427,12 @@ namespace GeneXus.Programs {
       private IGxSession AV28Session ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GxSimpleCollection<string> AV23Options ;
+      private GxSimpleCollection<string> AV25OptionsDesc ;
+      private GxSimpleCollection<string> AV26OptionIndexes ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV9WWPContext ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState AV30GridState ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue AV31GridStateFilterValue ;
       private IDataStoreProvider pr_default ;
       private string[] P00912_A158CompanyLocationName ;
       private string[] P00912_A159CompanyLocationCode ;
@@ -472,12 +443,6 @@ namespace GeneXus.Programs {
       private string aP3_OptionsJson ;
       private string aP4_OptionsDescJson ;
       private string aP5_OptionIndexesJson ;
-      private GxSimpleCollection<string> AV23Options ;
-      private GxSimpleCollection<string> AV25OptionsDesc ;
-      private GxSimpleCollection<string> AV26OptionIndexes ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV9WWPContext ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState AV30GridState ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue AV31GridStateFilterValue ;
    }
 
    public class companylocationwwgetfilterdata__default : DataStoreHelperBase, IDataStoreHelper
@@ -489,8 +454,7 @@ namespace GeneXus.Programs {
                                              string AV46Companylocationwwds_5_tfcompanylocationcode_sel ,
                                              string AV45Companylocationwwds_4_tfcompanylocationcode ,
                                              string A158CompanyLocationName ,
-                                             string A159CompanyLocationCode ,
-                                             long AV47Udparg6 )
+                                             string A159CompanyLocationCode )
       {
          System.Text.StringBuilder sWhereString = new System.Text.StringBuilder();
          string scmdbuf;
@@ -499,7 +463,7 @@ namespace GeneXus.Programs {
          scmdbuf = "SELECT CompanyLocationName, CompanyLocationCode, CompanyLocationId FROM CompanyLocation";
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV42Companylocationwwds_1_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( LOWER(CompanyLocationName) like '%' || LOWER(:lV42Companylocationwwds_1_filterfulltext)) or ( LOWER(CompanyLocationCode) like '%' || LOWER(:lV42Companylocationwwds_1_filterfulltext)))");
+            AddWhere(sWhereString, "(( CompanyLocationName like '%' || :lV42Companylocationwwds_1_filterfulltext) or ( CompanyLocationCode like '%' || :lV42Companylocationwwds_1_filterfulltext))");
          }
          else
          {
@@ -508,7 +472,7 @@ namespace GeneXus.Programs {
          }
          if ( String.IsNullOrEmpty(StringUtil.RTrim( AV44Companylocationwwds_3_tfcompanylocationname_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV43Companylocationwwds_2_tfcompanylocationname)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(CompanyLocationName) like LOWER(:lV43Companylocationwwds_2_tfcompanylocationname))");
+            AddWhere(sWhereString, "(CompanyLocationName like :lV43Companylocationwwds_2_tfcompanylocationname)");
          }
          else
          {
@@ -528,7 +492,7 @@ namespace GeneXus.Programs {
          }
          if ( String.IsNullOrEmpty(StringUtil.RTrim( AV46Companylocationwwds_5_tfcompanylocationcode_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV45Companylocationwwds_4_tfcompanylocationcode)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(CompanyLocationCode) like LOWER(:lV45Companylocationwwds_4_tfcompanylocationcode))");
+            AddWhere(sWhereString, "(CompanyLocationCode like :lV45Companylocationwwds_4_tfcompanylocationcode)");
          }
          else
          {
@@ -560,8 +524,7 @@ namespace GeneXus.Programs {
                                              string AV46Companylocationwwds_5_tfcompanylocationcode_sel ,
                                              string AV45Companylocationwwds_4_tfcompanylocationcode ,
                                              string A158CompanyLocationName ,
-                                             string A159CompanyLocationCode ,
-                                             long AV50Udparg7 )
+                                             string A159CompanyLocationCode )
       {
          System.Text.StringBuilder sWhereString = new System.Text.StringBuilder();
          string scmdbuf;
@@ -570,7 +533,7 @@ namespace GeneXus.Programs {
          scmdbuf = "SELECT CompanyLocationCode, CompanyLocationName, CompanyLocationId FROM CompanyLocation";
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV42Companylocationwwds_1_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( LOWER(CompanyLocationName) like '%' || LOWER(:lV42Companylocationwwds_1_filterfulltext)) or ( LOWER(CompanyLocationCode) like '%' || LOWER(:lV42Companylocationwwds_1_filterfulltext)))");
+            AddWhere(sWhereString, "(( CompanyLocationName like '%' || :lV42Companylocationwwds_1_filterfulltext) or ( CompanyLocationCode like '%' || :lV42Companylocationwwds_1_filterfulltext))");
          }
          else
          {
@@ -579,7 +542,7 @@ namespace GeneXus.Programs {
          }
          if ( String.IsNullOrEmpty(StringUtil.RTrim( AV44Companylocationwwds_3_tfcompanylocationname_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV43Companylocationwwds_2_tfcompanylocationname)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(CompanyLocationName) like LOWER(:lV43Companylocationwwds_2_tfcompanylocationname))");
+            AddWhere(sWhereString, "(CompanyLocationName like :lV43Companylocationwwds_2_tfcompanylocationname)");
          }
          else
          {
@@ -599,7 +562,7 @@ namespace GeneXus.Programs {
          }
          if ( String.IsNullOrEmpty(StringUtil.RTrim( AV46Companylocationwwds_5_tfcompanylocationcode_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV45Companylocationwwds_4_tfcompanylocationcode)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(CompanyLocationCode) like LOWER(:lV45Companylocationwwds_4_tfcompanylocationcode))");
+            AddWhere(sWhereString, "(CompanyLocationCode like :lV45Companylocationwwds_4_tfcompanylocationcode)");
          }
          else
          {
@@ -631,9 +594,9 @@ namespace GeneXus.Programs {
          switch ( cursor )
          {
                case 0 :
-                     return conditional_P00912(context, (string)dynConstraints[0] , (string)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (long)dynConstraints[8] );
+                     return conditional_P00912(context, (string)dynConstraints[0] , (string)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] );
                case 1 :
-                     return conditional_P00913(context, (string)dynConstraints[0] , (string)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (long)dynConstraints[8] );
+                     return conditional_P00913(context, (string)dynConstraints[0] , (string)dynConstraints[1] , (string)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] );
          }
          return base.getDynamicStatement(cursor, context, dynConstraints);
       }

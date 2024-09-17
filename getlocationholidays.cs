@@ -44,51 +44,30 @@ namespace GeneXus.Programs {
       public void execute( )
       {
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
       public void executeSubmit( )
       {
-         getlocationholidays objgetlocationholidays;
-         objgetlocationholidays = new getlocationholidays();
-         objgetlocationholidays.context.SetSubmitInitialConfig(context);
-         objgetlocationholidays.initialize();
-         Submit( executePrivateCatch,objgetlocationholidays);
+         SubmitImpl();
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((getlocationholidays)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
          args = new Object[] {} ;
          ClassLoader.Execute("agetlocationholidays","GeneXus.Programs","agetlocationholidays", new Object[] {context }, "execute", args);
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )

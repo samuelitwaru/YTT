@@ -44,7 +44,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          this.AV8HasMultipleDscs = aP1_HasMultipleDscs;
          this.AV9ListString = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_SelectedTextCol=this.AV10SelectedTextCol;
          aP2_ListString=this.AV9ListString;
       }
@@ -60,32 +60,15 @@ namespace GeneXus.Programs.wwpbaseobjects {
                                  bool aP1_HasMultipleDscs ,
                                  out string aP2_ListString )
       {
-         wwp_textlisttostring objwwp_textlisttostring;
-         objwwp_textlisttostring = new wwp_textlisttostring();
-         objwwp_textlisttostring.AV10SelectedTextCol = aP0_SelectedTextCol;
-         objwwp_textlisttostring.AV8HasMultipleDscs = aP1_HasMultipleDscs;
-         objwwp_textlisttostring.AV9ListString = "" ;
-         objwwp_textlisttostring.context.SetSubmitInitialConfig(context);
-         objwwp_textlisttostring.initialize();
-         Submit( executePrivateCatch,objwwp_textlisttostring);
+         this.AV10SelectedTextCol = aP0_SelectedTextCol;
+         this.AV8HasMultipleDscs = aP1_HasMultipleDscs;
+         this.AV9ListString = "" ;
+         SubmitImpl();
          aP0_SelectedTextCol=this.AV10SelectedTextCol;
          aP2_ListString=this.AV9ListString;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwp_textlisttostring)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -108,21 +91,17 @@ namespace GeneXus.Programs.wwpbaseobjects {
             }
             AV13GXV1 = (int)(AV13GXV1+1);
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -137,10 +116,10 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private bool AV8HasMultipleDscs ;
       private string AV9ListString ;
       private string AV12SelectedText ;
-      private GxSimpleCollection<string> aP0_SelectedTextCol ;
-      private string aP2_ListString ;
       private GxSimpleCollection<string> AV10SelectedTextCol ;
+      private GxSimpleCollection<string> aP0_SelectedTextCol ;
       private GxSimpleCollection<string> AV11MultipleStr ;
+      private string aP2_ListString ;
    }
 
 }

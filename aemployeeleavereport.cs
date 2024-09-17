@@ -27,20 +27,15 @@ namespace GeneXus.Programs {
    {
       public static int Main( string[] args )
       {
-         try
-         {
-            GeneXus.Configuration.Config.ParseArgs(ref args);
-            return new aemployeeleavereport().executeCmdLine(args); ;
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-            return 1 ;
-         }
+         return new aemployeeleavereport().MainImpl(args); ;
       }
 
       public int executeCmdLine( string[] args )
+      {
+         return ExecuteCmdLine(args); ;
+      }
+
+      protected override int ExecuteCmdLine( string[] args )
       {
          context.StatusMessage( "Command line using complex types not supported." );
          return GX.GXRuntime.ExitCode ;
@@ -92,7 +87,7 @@ namespace GeneXus.Programs {
          this.AV10Filename = "" ;
          this.AV23ErrorMessage = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_EmployeeIds=this.AV30EmployeeIds;
          aP2_Date=this.AV28Date;
          aP3_Filename=this.AV10Filename;
@@ -114,36 +109,19 @@ namespace GeneXus.Programs {
                                  out string aP3_Filename ,
                                  out string aP4_ErrorMessage )
       {
-         aemployeeleavereport objaemployeeleavereport;
-         objaemployeeleavereport = new aemployeeleavereport();
-         objaemployeeleavereport.AV22CompanyLocationId = aP0_CompanyLocationId;
-         objaemployeeleavereport.AV30EmployeeIds = aP1_EmployeeIds;
-         objaemployeeleavereport.AV28Date = aP2_Date;
-         objaemployeeleavereport.AV10Filename = "" ;
-         objaemployeeleavereport.AV23ErrorMessage = "" ;
-         objaemployeeleavereport.context.SetSubmitInitialConfig(context);
-         objaemployeeleavereport.initialize();
-         Submit( executePrivateCatch,objaemployeeleavereport);
+         this.AV22CompanyLocationId = aP0_CompanyLocationId;
+         this.AV30EmployeeIds = aP1_EmployeeIds;
+         this.AV28Date = aP2_Date;
+         this.AV10Filename = "" ;
+         this.AV23ErrorMessage = "" ;
+         SubmitImpl();
          aP1_EmployeeIds=this.AV30EmployeeIds;
          aP2_Date=this.AV28Date;
          aP3_Filename=this.AV10Filename;
          aP4_ErrorMessage=this.AV23ErrorMessage;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((aemployeeleavereport)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -151,7 +129,7 @@ namespace GeneXus.Programs {
          S111 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          AV8LeaveTypeNames.Add("Employee Name", 0);
@@ -242,13 +220,13 @@ namespace GeneXus.Programs {
          }
          pr_default.close(1);
          /* Execute user subroutine: 'CLOSEDOCUMENT' */
-         S131 ();
+         S121 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void S111( )
@@ -264,20 +242,6 @@ namespace GeneXus.Programs {
 
       protected void S121( )
       {
-         /* 'CHECKSTATUS' Routine */
-         returnInSub = false;
-         if ( AV9ExcelDocument.ErrCode != 0 )
-         {
-            AV10Filename = "";
-            AV23ErrorMessage = AV9ExcelDocument.ErrDescription;
-            AV9ExcelDocument.Close();
-            returnInSub = true;
-            if (true) return;
-         }
-      }
-
-      protected void S131( )
-      {
          /* 'CLOSEDOCUMENT' Routine */
          returnInSub = false;
          AV21excelSpreadsheet.gxTpr_Autofit = true;
@@ -291,6 +255,7 @@ namespace GeneXus.Programs {
             GX_msglist.addItem("Error code:"+StringUtil.Str( (decimal)(AV21excelSpreadsheet.gxTpr_Errcode), 8, 0));
             GX_msglist.addItem("Error description:"+AV21excelSpreadsheet.gxTpr_Errdescription);
          }
+         new logtofile(context ).execute(  AV10Filename) ;
          AV11Session.Set("WWPExportFilePath", AV10Filename);
          AV11Session.Set("WWPExportFileName", AV10Filename);
          AV10Filename = formatLink("wwpbaseobjects.wwp_downloadreport.aspx") ;
@@ -298,7 +263,7 @@ namespace GeneXus.Programs {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -306,16 +271,11 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
          AV10Filename = "";
          AV23ErrorMessage = "";
          AV8LeaveTypeNames = new GxSimpleCollection<string>();
-         scmdbuf = "";
          P00AT2_A100CompanyId = new long[1] ;
          P00AT2_A157CompanyLocationId = new long[1] ;
          P00AT2_A101CompanyName = new string[] {""} ;
@@ -342,7 +302,6 @@ namespace GeneXus.Programs {
          P00AT5_n40000GXC1 = new bool[] {false} ;
          Gx_date = DateTime.MinValue;
          AV29File = new GxFile(context.GetPhysicalPath());
-         AV9ExcelDocument = new ExcelDocumentI();
          AV11Session = context.GetSession();
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.aemployeeleavereport__default(),
             new Object[][] {
@@ -376,7 +335,6 @@ namespace GeneXus.Programs {
       private decimal A147EmployeeBalance ;
       private decimal A40000GXC1 ;
       private string AV10Filename ;
-      private string scmdbuf ;
       private string A101CompanyName ;
       private string A125LeaveTypeName ;
       private string AV24CompanyName ;
@@ -389,18 +347,23 @@ namespace GeneXus.Programs {
       private bool n40000GXC1 ;
       private bool AV26boolean ;
       private string AV23ErrorMessage ;
-      private GxSimpleCollection<long> AV30EmployeeIds ;
-      private GeneXus.Programs.genexusoffice.office.excel.SdtExcelSpreadsheet AV21excelSpreadsheet ;
+      private IGxSession AV11Session ;
+      private GxFile AV29File ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GxSimpleCollection<long> AV30EmployeeIds ;
       private GxSimpleCollection<long> aP1_EmployeeIds ;
       private DateTime aP2_Date ;
+      private GxSimpleCollection<string> AV8LeaveTypeNames ;
       private IDataStoreProvider pr_default ;
       private long[] P00AT2_A100CompanyId ;
       private long[] P00AT2_A157CompanyLocationId ;
       private string[] P00AT2_A101CompanyName ;
       private string[] P00AT2_A125LeaveTypeName ;
       private long[] P00AT2_A124LeaveTypeId ;
+      private GeneXus.Programs.genexusoffice.office.excel.style.SdtExcelCellStyle AV27excelCellStyle ;
+      private GeneXus.Programs.genexusoffice.office.excel.cells.SdtExcelCellRange AV20ExcelCellRange ;
+      private GeneXus.Programs.genexusoffice.office.excel.SdtExcelSpreadsheet AV21excelSpreadsheet ;
       private long[] P00AT3_A100CompanyId ;
       private long[] P00AT3_A157CompanyLocationId ;
       private long[] P00AT3_A106EmployeeId ;
@@ -413,12 +376,6 @@ namespace GeneXus.Programs {
       private bool[] P00AT5_n40000GXC1 ;
       private string aP3_Filename ;
       private string aP4_ErrorMessage ;
-      private IGxSession AV11Session ;
-      private ExcelDocumentI AV9ExcelDocument ;
-      private GxSimpleCollection<string> AV8LeaveTypeNames ;
-      private GxFile AV29File ;
-      private GeneXus.Programs.genexusoffice.office.excel.cells.SdtExcelCellRange AV20ExcelCellRange ;
-      private GeneXus.Programs.genexusoffice.office.excel.style.SdtExcelCellStyle AV27excelCellStyle ;
    }
 
    public class aemployeeleavereport__default : DataStoreHelperBase, IDataStoreHelper

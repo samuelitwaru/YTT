@@ -66,7 +66,7 @@ namespace GeneXus.Programs {
          this.AV26WeeklyTotal = "" ;
          this.AV8DailyTotal = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_WeeklyTotal=this.AV26WeeklyTotal;
          aP2_DailyTotal=this.AV8DailyTotal;
       }
@@ -82,32 +82,15 @@ namespace GeneXus.Programs {
                                  out string aP1_WeeklyTotal ,
                                  out string aP2_DailyTotal )
       {
-         getweeklyhours objgetweeklyhours;
-         objgetweeklyhours = new getweeklyhours();
-         objgetweeklyhours.AV25WeekDate = aP0_WeekDate;
-         objgetweeklyhours.AV26WeeklyTotal = "" ;
-         objgetweeklyhours.AV8DailyTotal = "" ;
-         objgetweeklyhours.context.SetSubmitInitialConfig(context);
-         objgetweeklyhours.initialize();
-         Submit( executePrivateCatch,objgetweeklyhours);
+         this.AV25WeekDate = aP0_WeekDate;
+         this.AV26WeeklyTotal = "" ;
+         this.AV8DailyTotal = "" ;
+         SubmitImpl();
          aP1_WeeklyTotal=this.AV26WeeklyTotal;
          aP2_DailyTotal=this.AV8DailyTotal;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((getweeklyhours)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -172,21 +155,17 @@ namespace GeneXus.Programs {
          {
             AV8DailyTotal = StringUtil.Str( (decimal)(AV30TotalDailyHoursAndMinutes), 4, 0) + ":" + StringUtil.Trim( StringUtil.Str( (decimal)(AV29ModTotalDailyMinute), 4, 0)) + "hrs";
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -195,7 +174,6 @@ namespace GeneXus.Programs {
          AV8DailyTotal = "";
          AV17StartDate = DateTime.MinValue;
          AV11EndDate = DateTime.MinValue;
-         scmdbuf = "";
          P008B2_A121WorkHourLogHour = new short[1] ;
          P008B2_A122WorkHourLogMinute = new short[1] ;
          P008B3_A121WorkHourLogHour = new short[1] ;
@@ -227,7 +205,6 @@ namespace GeneXus.Programs {
       private long AV32Udparg1 ;
       private string AV26WeeklyTotal ;
       private string AV8DailyTotal ;
-      private string scmdbuf ;
       private DateTime AV25WeekDate ;
       private DateTime AV17StartDate ;
       private DateTime AV11EndDate ;

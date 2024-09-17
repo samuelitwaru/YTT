@@ -46,12 +46,12 @@ namespace GeneXus.Programs {
       {
          this.Gx_mode = aP0_Gx_mode;
          this.AV43Id = aP1_Id;
-         executePrivate();
+         ExecuteImpl();
          aP0_Gx_mode=this.Gx_mode;
          aP1_Id=this.AV43Id;
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -277,11 +277,8 @@ namespace GeneXus.Programs {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITWEB( ) ;
          if ( ! isAjaxCallMode( ) )
          {
@@ -312,7 +309,7 @@ namespace GeneXus.Programs {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override short ExecuteStartEvent( )
@@ -356,18 +353,18 @@ namespace GeneXus.Programs {
          CloseStyles();
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
             enableOutput();
          }
-         context.AddJavascriptSource("calendar.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("calendar-setup.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("calendar-en.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("calendar.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("calendar-setup.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("calendar-en.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("shared/HistoryManager/HistoryManager.js", "", false, true);
          context.AddJavascriptSource("shared/HistoryManager/rsh/json2005.js", "", false, true);
          context.AddJavascriptSource("shared/HistoryManager/rsh/rsh.js", "", false, true);
@@ -636,7 +633,8 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
             /* Single line edit */
-            GxWebStd.gx_single_line_edit( context, edtavId_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(AV43Id), 12, 0, ".", "")), StringUtil.LTrim( ((edtavId_Enabled!=0) ? context.localUtil.Format( (decimal)(AV43Id), "ZZZZZZZZZZZ9") : context.localUtil.Format( (decimal)(AV43Id), "ZZZZZZZZZZZ9"))), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavId_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavId_Enabled, 0, "text", "1", 12, "chr", 1, "row", 12, 0, 0, 0, 0, -1, 0, true, "GeneXusSecurityCommon\\GAMKeyNumLong", "end", false, "", "HLP_GAMApplicationEntry.htm");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 25,'',false,'" + sGXsfl_563_idx + "',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtavId_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(AV43Id), 12, 0, ".", "")), StringUtil.LTrim( ((edtavId_Enabled!=0) ? context.localUtil.Format( (decimal)(AV43Id), "ZZZZZZZZZZZ9") : context.localUtil.Format( (decimal)(AV43Id), "ZZZZZZZZZZZ9"))), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+TempTags+" onchange=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onblur(this,25);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavId_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavId_Enabled, 0, "text", "1", 12, "chr", 1, "row", 12, 0, 0, 0, 0, -1, 0, true, "GeneXusSecurityCommon\\GAMKeyNumLong", "end", false, "", "HLP_GAMApplicationEntry.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -2624,7 +2622,7 @@ namespace GeneXus.Programs {
          {
             if ( context.ExposeMetadata( ) )
             {
-               Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+               Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
             }
          }
          Form.Meta.addItem("description", "Application", 0) ;
@@ -2675,12 +2673,14 @@ namespace GeneXus.Programs {
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
+                              /* Execute user event: Gridlanguagespaginationbar.Changepage */
                               E120Y2 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "GRIDLANGUAGESPAGINATIONBAR.CHANGEROWSPERPAGE") == 0 )
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
+                              /* Execute user event: Gridlanguagespaginationbar.Changerowsperpage */
                               E130Y2 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "'DOGENERATEKEYGAMREMOTE'") == 0 )
@@ -2797,6 +2797,7 @@ namespace GeneXus.Programs {
                                  {
                                     context.wbHandled = 1;
                                     dynload_actions( ) ;
+                                    /* Execute user event: Gridlanguages.Load */
                                     E260Y2 ();
                                  }
                                  else if ( StringUtil.StrCmp(sEvt, "'GENERATEKEYGAMREMOTE'") == 0 )
@@ -3128,9 +3129,7 @@ namespace GeneXus.Programs {
          edtavClientrevoked_Enabled = 0;
          AssignProp("", false, edtavClientrevoked_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavClientrevoked_Enabled), 5, 0), true);
          chkavOnline.Enabled = 0;
-         AssignProp("", false, chkavOnline_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(chkavOnline.Enabled), 5, 0), !bGXsfl_563_Refreshing);
          edtavLanguage_Enabled = 0;
-         AssignProp("", false, edtavLanguage_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavLanguage_Enabled), 5, 0), !bGXsfl_563_Refreshing);
       }
 
       protected void RF0Y2( )
@@ -3168,12 +3167,14 @@ namespace GeneXus.Programs {
          if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
          {
             SubsflControlProps_5632( ) ;
+            /* Execute user event: Gridlanguages.Load */
             E260Y2 ();
             if ( ( subGridlanguages_Islastpage == 0 ) && ( GRIDLANGUAGES_nCurrentRecord > 0 ) && ( GRIDLANGUAGES_nGridOutOfScope == 0 ) && ( nGXsfl_563_idx == 1 ) )
             {
                GRIDLANGUAGES_nCurrentRecord = 0;
                GRIDLANGUAGES_nGridOutOfScope = 1;
                subgridlanguages_firstpage( ) ;
+               /* Execute user event: Gridlanguages.Load */
                E260Y2 ();
             }
             wbEnd = 563;
@@ -3302,9 +3303,7 @@ namespace GeneXus.Programs {
          edtavClientrevoked_Enabled = 0;
          AssignProp("", false, edtavClientrevoked_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavClientrevoked_Enabled), 5, 0), true);
          chkavOnline.Enabled = 0;
-         AssignProp("", false, chkavOnline_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(chkavOnline.Enabled), 5, 0), !bGXsfl_563_Refreshing);
          edtavLanguage_Enabled = 0;
-         AssignProp("", false, edtavLanguage_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavLanguage_Enabled), 5, 0), !bGXsfl_563_Refreshing);
          fix_multi_value_controls( ) ;
       }
 
@@ -4056,7 +4055,7 @@ namespace GeneXus.Programs {
          AssignProp("", false, edtavStsauthorizationuserguid_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtavStsauthorizationuserguid_Visible), 5, 0), true);
          Gridlanguages_empowerer_Gridinternalname = subGridlanguages_Internalname;
          ucGridlanguages_empowerer.SendProperty(context, "", false, Gridlanguages_empowerer_Internalname, "GridInternalName", Gridlanguages_empowerer_Gridinternalname);
-         subGridlanguages_Rows = 20;
+         subGridlanguages_Rows = 10;
          GxWebStd.gx_hidden_field( context, "GRIDLANGUAGES_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGridlanguages_Rows), 6, 0, ".", "")));
          AV140GridLanguagesCurrentPage = 1;
          AssignAttri("", false, "AV140GridLanguagesCurrentPage", StringUtil.LTrimStr( (decimal)(AV140GridLanguagesCurrentPage), 10, 0));
@@ -4988,7 +4987,7 @@ namespace GeneXus.Programs {
          PA0Y2( ) ;
          WS0Y2( ) ;
          WE0Y2( ) ;
-         this.cleanup();
+         cleanup();
          context.SetWrapped(false);
          context.GX_msglist = BackMsgLst;
          return "";
@@ -5011,7 +5010,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20248121592374", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202491613181644", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -5027,7 +5026,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("gamapplicationentry.js", "?20248121592377", false, true);
+         context.AddJavascriptSource("gamapplicationentry.js", "?202491613181647", false, true);
          context.AddJavascriptSource("shared/HistoryManager/HistoryManager.js", "", false, true);
          context.AddJavascriptSource("shared/HistoryManager/rsh/json2005.js", "", false, true);
          context.AddJavascriptSource("shared/HistoryManager/rsh/rsh.js", "", false, true);
@@ -5064,6 +5063,7 @@ namespace GeneXus.Programs {
 
       protected void sendrow_5632( )
       {
+         sGXsfl_563_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_563_idx), 4, 0), 4, "0");
          SubsflControlProps_5632( ) ;
          WB0Y0( ) ;
          if ( ( subGridlanguages_Rows * 1 == 0 ) || ( nGXsfl_563_idx <= subGridlanguages_fnc_Recordsperpage( ) * 1 ) )
@@ -5131,7 +5131,7 @@ namespace GeneXus.Programs {
                context.WriteHtmlText( "<td valign=\"middle\" align=\""+""+"\""+" style=\""+""+"\">") ;
             }
             /* Check box */
-            TempTags = " " + ((chkavOnline.Enabled!=0)&&(chkavOnline.Visible!=0) ? " onfocus=\"gx.evt.onfocus(this, 564,'',false,'"+sGXsfl_563_idx+"',563)\"" : " ");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 564,'',false,'" + sGXsfl_563_idx + "',563)\"";
             ClassString = "AttributeCheckBox";
             StyleString = "";
             GXCCtl = "vONLINE_" + sGXsfl_563_idx;
@@ -5142,16 +5142,16 @@ namespace GeneXus.Programs {
             chkavOnline.CheckedValue = "false";
             AV154Online = StringUtil.StrToBool( StringUtil.BoolToStr( AV154Online));
             AssignAttri("", false, chkavOnline_Internalname, AV154Online);
-            GridlanguagesRow.AddColumnProperties("checkbox", 1, isAjaxCallMode( ), new Object[] {(string)chkavOnline_Internalname,StringUtil.BoolToStr( AV154Online),(string)"",(string)"",(short)-1,chkavOnline.Enabled,(string)"true",(string)"",(string)StyleString,(string)ClassString,(string)"WWColumn",(string)"",TempTags+" onclick="+"\"gx.fn.checkboxClick(564, this, 'true', 'false',"+"''"+");"+"gx.evt.onchange(this, event);\""+((chkavOnline.Enabled!=0)&&(chkavOnline.Visible!=0) ? " onblur=\""+""+";gx.evt.onblur(this,564);\"" : " ")});
+            GridlanguagesRow.AddColumnProperties("checkbox", 1, isAjaxCallMode( ), new Object[] {(string)chkavOnline_Internalname,StringUtil.BoolToStr( AV154Online),(string)"",(string)"",(short)-1,chkavOnline.Enabled,(string)"true",(string)"",(string)StyleString,(string)ClassString,(string)"WWColumn",(string)"",TempTags+" onclick="+"\"gx.fn.checkboxClick(564, this, 'true', 'false',"+"''"+");"+"gx.evt.onchange(this, event);\""+" onblur=\""+""+";gx.evt.onblur(this,564);\""});
             /* Subfile cell */
             if ( GridlanguagesContainer.GetWrapped() == 1 )
             {
                context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+""+"\">") ;
             }
             /* Single line edit */
-            TempTags = " " + ((edtavLanguage_Enabled!=0)&&(edtavLanguage_Visible!=0) ? " onfocus=\"gx.evt.onfocus(this, 565,'',false,'"+sGXsfl_563_idx+"',563)\"" : " ");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 565,'',false,'" + sGXsfl_563_idx + "',563)\"";
             ROClassString = "Attribute";
-            GridlanguagesRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavLanguage_Internalname,(string)AV144Language,(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+((edtavLanguage_Enabled!=0)&&(edtavLanguage_Visible!=0) ? " onblur=\""+""+";gx.evt.onblur(this,565);\"" : " "),(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavLanguage_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)-1,(int)edtavLanguage_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)40,(short)0,(short)0,(short)563,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
+            GridlanguagesRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavLanguage_Internalname,(string)AV144Language,(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,565);\"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavLanguage_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)-1,(int)edtavLanguage_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)40,(short)0,(short)0,(short)563,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
             send_integrity_lvl_hashes0Y2( ) ;
             GridlanguagesContainer.AddRow(GridlanguagesRow);
             nGXsfl_563_idx = ((subGridlanguages_Islastpage==1)&&(nGXsfl_563_idx+1>subGridlanguages_fnc_Recordsperpage( )) ? 1 : nGXsfl_563_idx+1);
@@ -5165,7 +5165,7 @@ namespace GeneXus.Programs {
       {
          chkavReturnmenuoptionswithoutpermission.Name = "vRETURNMENUOPTIONSWITHOUTPERMISSION";
          chkavReturnmenuoptionswithoutpermission.WebTags = "";
-         chkavReturnmenuoptionswithoutpermission.Caption = "Return menu options without permission?";
+         chkavReturnmenuoptionswithoutpermission.Caption = " ";
          AssignProp("", false, chkavReturnmenuoptionswithoutpermission_Internalname, "TitleCaption", chkavReturnmenuoptionswithoutpermission.Caption, true);
          chkavReturnmenuoptionswithoutpermission.CheckedValue = "false";
          AV156ReturnMenuOptionsWithoutPermission = StringUtil.StrToBool( StringUtil.BoolToStr( AV156ReturnMenuOptionsWithoutPermission));
@@ -5179,7 +5179,7 @@ namespace GeneXus.Programs {
          }
          chkavUseabsoluteurlbyenvironment.Name = "vUSEABSOLUTEURLBYENVIRONMENT";
          chkavUseabsoluteurlbyenvironment.WebTags = "";
-         chkavUseabsoluteurlbyenvironment.Caption = "Use absolute URL by Environment";
+         chkavUseabsoluteurlbyenvironment.Caption = " ";
          AssignProp("", false, chkavUseabsoluteurlbyenvironment_Internalname, "TitleCaption", chkavUseabsoluteurlbyenvironment.Caption, true);
          chkavUseabsoluteurlbyenvironment.CheckedValue = "false";
          AV61UseAbsoluteUrlByEnvironment = StringUtil.StrToBool( StringUtil.BoolToStr( AV61UseAbsoluteUrlByEnvironment));
@@ -5195,126 +5195,126 @@ namespace GeneXus.Programs {
          }
          chkavClientauthrequestmustincludeuserscopes.Name = "vCLIENTAUTHREQUESTMUSTINCLUDEUSERSCOPES";
          chkavClientauthrequestmustincludeuserscopes.WebTags = "";
-         chkavClientauthrequestmustincludeuserscopes.Caption = "Authentication request must include user scopes?";
+         chkavClientauthrequestmustincludeuserscopes.Caption = " ";
          AssignProp("", false, chkavClientauthrequestmustincludeuserscopes_Internalname, "TitleCaption", chkavClientauthrequestmustincludeuserscopes.Caption, true);
          chkavClientauthrequestmustincludeuserscopes.CheckedValue = "false";
          AV128ClientAuthRequestMustIncludeUserScopes = StringUtil.StrToBool( StringUtil.BoolToStr( AV128ClientAuthRequestMustIncludeUserScopes));
          AssignAttri("", false, "AV128ClientAuthRequestMustIncludeUserScopes", AV128ClientAuthRequestMustIncludeUserScopes);
          chkavClientdonotshareuserids.Name = "vCLIENTDONOTSHAREUSERIDS";
          chkavClientdonotshareuserids.WebTags = "";
-         chkavClientdonotshareuserids.Caption = "Do not share user IDs";
+         chkavClientdonotshareuserids.Caption = " ";
          AssignProp("", false, chkavClientdonotshareuserids_Internalname, "TitleCaption", chkavClientdonotshareuserids.Caption, true);
          chkavClientdonotshareuserids.CheckedValue = "false";
          AV129ClientDoNotShareUserIDs = StringUtil.StrToBool( StringUtil.BoolToStr( AV129ClientDoNotShareUserIDs));
          AssignAttri("", false, "AV129ClientDoNotShareUserIDs", AV129ClientDoNotShareUserIDs);
          chkavClientallowremoteauth.Name = "vCLIENTALLOWREMOTEAUTH";
          chkavClientallowremoteauth.WebTags = "";
-         chkavClientallowremoteauth.Caption = "Allow remote authentication?";
+         chkavClientallowremoteauth.Caption = " ";
          AssignProp("", false, chkavClientallowremoteauth_Internalname, "TitleCaption", chkavClientallowremoteauth.Caption, true);
          chkavClientallowremoteauth.CheckedValue = "false";
          AV17ClientAllowRemoteAuth = StringUtil.StrToBool( StringUtil.BoolToStr( AV17ClientAllowRemoteAuth));
          AssignAttri("", false, "AV17ClientAllowRemoteAuth", AV17ClientAllowRemoteAuth);
          chkavClientallowgetuserdata.Name = "vCLIENTALLOWGETUSERDATA";
          chkavClientallowgetuserdata.WebTags = "";
-         chkavClientallowgetuserdata.Caption = "User data";
+         chkavClientallowgetuserdata.Caption = " ";
          AssignProp("", false, chkavClientallowgetuserdata_Internalname, "TitleCaption", chkavClientallowgetuserdata.Caption, true);
          chkavClientallowgetuserdata.CheckedValue = "false";
          AV126ClientAllowGetUserData = StringUtil.StrToBool( StringUtil.BoolToStr( AV126ClientAllowGetUserData));
          AssignAttri("", false, "AV126ClientAllowGetUserData", AV126ClientAllowGetUserData);
          chkavClientallowgetuseradddata.Name = "vCLIENTALLOWGETUSERADDDATA";
          chkavClientallowgetuseradddata.WebTags = "";
-         chkavClientallowgetuseradddata.Caption = "Can get user additional data?";
+         chkavClientallowgetuseradddata.Caption = " ";
          AssignProp("", false, chkavClientallowgetuseradddata_Internalname, "TitleCaption", chkavClientallowgetuseradddata.Caption, true);
          chkavClientallowgetuseradddata.CheckedValue = "false";
          AV13ClientAllowGetUserAddData = StringUtil.StrToBool( StringUtil.BoolToStr( AV13ClientAllowGetUserAddData));
          AssignAttri("", false, "AV13ClientAllowGetUserAddData", AV13ClientAllowGetUserAddData);
          chkavClientallowgetuserroles.Name = "vCLIENTALLOWGETUSERROLES";
          chkavClientallowgetuserroles.WebTags = "";
-         chkavClientallowgetuserroles.Caption = "Can get user roles?";
+         chkavClientallowgetuserroles.Caption = " ";
          AssignProp("", false, chkavClientallowgetuserroles_Internalname, "TitleCaption", chkavClientallowgetuserroles.Caption, true);
          chkavClientallowgetuserroles.CheckedValue = "false";
          AV15ClientAllowGetUserRoles = StringUtil.StrToBool( StringUtil.BoolToStr( AV15ClientAllowGetUserRoles));
          AssignAttri("", false, "AV15ClientAllowGetUserRoles", AV15ClientAllowGetUserRoles);
          chkavClientallowgetsessioniniprop.Name = "vCLIENTALLOWGETSESSIONINIPROP";
          chkavClientallowgetsessioniniprop.WebTags = "";
-         chkavClientallowgetsessioniniprop.Caption = "Can get session initial properties?";
+         chkavClientallowgetsessioniniprop.Caption = " ";
          AssignProp("", false, chkavClientallowgetsessioniniprop_Internalname, "TitleCaption", chkavClientallowgetsessioniniprop.Caption, true);
          chkavClientallowgetsessioniniprop.CheckedValue = "false";
          AV11ClientAllowGetSessionIniProp = StringUtil.StrToBool( StringUtil.BoolToStr( AV11ClientAllowGetSessionIniProp));
          AssignAttri("", false, "AV11ClientAllowGetSessionIniProp", AV11ClientAllowGetSessionIniProp);
          chkavClientallowgetsessionappdata.Name = "vCLIENTALLOWGETSESSIONAPPDATA";
          chkavClientallowgetsessionappdata.WebTags = "";
-         chkavClientallowgetsessionappdata.Caption = "Session application data";
+         chkavClientallowgetsessionappdata.Caption = " ";
          AssignProp("", false, chkavClientallowgetsessionappdata_Internalname, "TitleCaption", chkavClientallowgetsessionappdata.Caption, true);
          chkavClientallowgetsessionappdata.CheckedValue = "false";
          AV9ClientAllowGetSessionAppData = StringUtil.StrToBool( StringUtil.BoolToStr( AV9ClientAllowGetSessionAppData));
          AssignAttri("", false, "AV9ClientAllowGetSessionAppData", AV9ClientAllowGetSessionAppData);
          chkavClientcallbackurliscustom.Name = "vCLIENTCALLBACKURLISCUSTOM";
          chkavClientcallbackurliscustom.WebTags = "";
-         chkavClientcallbackurliscustom.Caption = "Custom callback URL?";
+         chkavClientcallbackurliscustom.Caption = " ";
          AssignProp("", false, chkavClientcallbackurliscustom_Internalname, "TitleCaption", chkavClientcallbackurliscustom.Caption, true);
          chkavClientcallbackurliscustom.CheckedValue = "false";
          AV20ClientCallbackURLisCustom = StringUtil.StrToBool( StringUtil.BoolToStr( AV20ClientCallbackURLisCustom));
          AssignAttri("", false, "AV20ClientCallbackURLisCustom", AV20ClientCallbackURLisCustom);
          chkavClientallowremoterestauth.Name = "vCLIENTALLOWREMOTERESTAUTH";
          chkavClientallowremoterestauth.WebTags = "";
-         chkavClientallowremoterestauth.Caption = "Allow authentication v.2.0 ?";
+         chkavClientallowremoterestauth.Caption = " ";
          AssignProp("", false, chkavClientallowremoterestauth_Internalname, "TitleCaption", chkavClientallowremoterestauth.Caption, true);
          chkavClientallowremoterestauth.CheckedValue = "false";
          AV18ClientAllowRemoteRestAuth = StringUtil.StrToBool( StringUtil.BoolToStr( AV18ClientAllowRemoteRestAuth));
          AssignAttri("", false, "AV18ClientAllowRemoteRestAuth", AV18ClientAllowRemoteRestAuth);
          chkavClientallowgetuserdatarest.Name = "vCLIENTALLOWGETUSERDATAREST";
          chkavClientallowgetuserdatarest.WebTags = "";
-         chkavClientallowgetuserdatarest.Caption = "User data";
+         chkavClientallowgetuserdatarest.Caption = " ";
          AssignProp("", false, chkavClientallowgetuserdatarest_Internalname, "TitleCaption", chkavClientallowgetuserdatarest.Caption, true);
          chkavClientallowgetuserdatarest.CheckedValue = "false";
          AV127ClientAllowGetUserDataREST = StringUtil.StrToBool( StringUtil.BoolToStr( AV127ClientAllowGetUserDataREST));
          AssignAttri("", false, "AV127ClientAllowGetUserDataREST", AV127ClientAllowGetUserDataREST);
          chkavClientallowgetuseradddatarest.Name = "vCLIENTALLOWGETUSERADDDATAREST";
          chkavClientallowgetuseradddatarest.WebTags = "";
-         chkavClientallowgetuseradddatarest.Caption = "Can get user additional data?";
+         chkavClientallowgetuseradddatarest.Caption = " ";
          AssignProp("", false, chkavClientallowgetuseradddatarest_Internalname, "TitleCaption", chkavClientallowgetuseradddatarest.Caption, true);
          chkavClientallowgetuseradddatarest.CheckedValue = "false";
          AV14ClientAllowGetUserAddDataRest = StringUtil.StrToBool( StringUtil.BoolToStr( AV14ClientAllowGetUserAddDataRest));
          AssignAttri("", false, "AV14ClientAllowGetUserAddDataRest", AV14ClientAllowGetUserAddDataRest);
          chkavClientallowgetuserrolesrest.Name = "vCLIENTALLOWGETUSERROLESREST";
          chkavClientallowgetuserrolesrest.WebTags = "";
-         chkavClientallowgetuserrolesrest.Caption = "Can get user roles?";
+         chkavClientallowgetuserrolesrest.Caption = " ";
          AssignProp("", false, chkavClientallowgetuserrolesrest_Internalname, "TitleCaption", chkavClientallowgetuserrolesrest.Caption, true);
          chkavClientallowgetuserrolesrest.CheckedValue = "false";
          AV16ClientAllowGetUserRolesRest = StringUtil.StrToBool( StringUtil.BoolToStr( AV16ClientAllowGetUserRolesRest));
          AssignAttri("", false, "AV16ClientAllowGetUserRolesRest", AV16ClientAllowGetUserRolesRest);
          chkavClientallowgetsessioniniproprest.Name = "vCLIENTALLOWGETSESSIONINIPROPREST";
          chkavClientallowgetsessioniniproprest.WebTags = "";
-         chkavClientallowgetsessioniniproprest.Caption = "Can get session initial properties?";
+         chkavClientallowgetsessioniniproprest.Caption = " ";
          AssignProp("", false, chkavClientallowgetsessioniniproprest_Internalname, "TitleCaption", chkavClientallowgetsessioniniproprest.Caption, true);
          chkavClientallowgetsessioniniproprest.CheckedValue = "false";
          AV12ClientAllowGetSessionIniPropRest = StringUtil.StrToBool( StringUtil.BoolToStr( AV12ClientAllowGetSessionIniPropRest));
          AssignAttri("", false, "AV12ClientAllowGetSessionIniPropRest", AV12ClientAllowGetSessionIniPropRest);
          chkavClientallowgetsessionappdatarest.Name = "vCLIENTALLOWGETSESSIONAPPDATAREST";
          chkavClientallowgetsessionappdatarest.WebTags = "";
-         chkavClientallowgetsessionappdatarest.Caption = "Session application data";
+         chkavClientallowgetsessionappdatarest.Caption = " ";
          AssignProp("", false, chkavClientallowgetsessionappdatarest_Internalname, "TitleCaption", chkavClientallowgetsessionappdatarest.Caption, true);
          chkavClientallowgetsessionappdatarest.CheckedValue = "false";
          AV10ClientAllowGetSessionAppDataREST = StringUtil.StrToBool( StringUtil.BoolToStr( AV10ClientAllowGetSessionAppDataREST));
          AssignAttri("", false, "AV10ClientAllowGetSessionAppDataREST", AV10ClientAllowGetSessionAppDataREST);
          chkavClientaccessuniquebyuser.Name = "vCLIENTACCESSUNIQUEBYUSER";
          chkavClientaccessuniquebyuser.WebTags = "";
-         chkavClientaccessuniquebyuser.Caption = "Single user access?";
+         chkavClientaccessuniquebyuser.Caption = " ";
          AssignProp("", false, chkavClientaccessuniquebyuser_Internalname, "TitleCaption", chkavClientaccessuniquebyuser.Caption, true);
          chkavClientaccessuniquebyuser.CheckedValue = "false";
          AV8ClientAccessUniqueByUser = StringUtil.StrToBool( StringUtil.BoolToStr( AV8ClientAccessUniqueByUser));
          AssignAttri("", false, "AV8ClientAccessUniqueByUser", AV8ClientAccessUniqueByUser);
          chkavAccessrequirespermission.Name = "vACCESSREQUIRESPERMISSION";
          chkavAccessrequirespermission.WebTags = "";
-         chkavAccessrequirespermission.Caption = "";
+         chkavAccessrequirespermission.Caption = "Enable Authorization?";
          AssignProp("", false, chkavAccessrequirespermission_Internalname, "TitleCaption", chkavAccessrequirespermission.Caption, true);
          chkavAccessrequirespermission.CheckedValue = "false";
          AV5AccessRequiresPermission = StringUtil.StrToBool( StringUtil.BoolToStr( AV5AccessRequiresPermission));
          AssignAttri("", false, "AV5AccessRequiresPermission", AV5AccessRequiresPermission);
          chkavIsauthorizationdelegated.Name = "vISAUTHORIZATIONDELEGATED";
          chkavIsauthorizationdelegated.WebTags = "";
-         chkavIsauthorizationdelegated.Caption = "";
+         chkavIsauthorizationdelegated.Caption = "Delegate authorization checking to an external program?";
          AssignProp("", false, chkavIsauthorizationdelegated_Internalname, "TitleCaption", chkavIsauthorizationdelegated.Caption, true);
          chkavIsauthorizationdelegated.CheckedValue = "false";
          AV143IsAuthorizationDelegated = StringUtil.StrToBool( StringUtil.BoolToStr( AV143IsAuthorizationDelegated));
@@ -5329,7 +5329,7 @@ namespace GeneXus.Programs {
          }
          chkavSsorestenable.Name = "vSSORESTENABLE";
          chkavSsorestenable.WebTags = "";
-         chkavSsorestenable.Caption = "Enable SSO Rest services?";
+         chkavSsorestenable.Caption = " ";
          AssignProp("", false, chkavSsorestenable_Internalname, "TitleCaption", chkavSsorestenable.Caption, true);
          chkavSsorestenable.CheckedValue = "false";
          AV50SSORestEnable = StringUtil.StrToBool( StringUtil.BoolToStr( AV50SSORestEnable));
@@ -5345,14 +5345,14 @@ namespace GeneXus.Programs {
          }
          chkavSsorestserverurl_iscustom.Name = "vSSORESTSERVERURL_ISCUSTOM";
          chkavSsorestserverurl_iscustom.WebTags = "";
-         chkavSsorestserverurl_iscustom.Caption = "";
+         chkavSsorestserverurl_iscustom.Caption = "Custom server URL SSO";
          AssignProp("", false, chkavSsorestserverurl_iscustom_Internalname, "TitleCaption", chkavSsorestserverurl_iscustom.Caption, true);
          chkavSsorestserverurl_iscustom.CheckedValue = "false";
          AV159SSORestServerURL_isCustom = StringUtil.StrToBool( StringUtil.BoolToStr( AV159SSORestServerURL_isCustom));
          AssignAttri("", false, "AV159SSORestServerURL_isCustom", AV159SSORestServerURL_isCustom);
          chkavStsprotocolenable.Name = "vSTSPROTOCOLENABLE";
          chkavStsprotocolenable.WebTags = "";
-         chkavStsprotocolenable.Caption = "Enable STS protocol?";
+         chkavStsprotocolenable.Caption = " ";
          AssignProp("", false, chkavStsprotocolenable_Internalname, "TitleCaption", chkavStsprotocolenable.Caption, true);
          chkavStsprotocolenable.CheckedValue = "false";
          AV57STSProtocolEnable = StringUtil.StrToBool( StringUtil.BoolToStr( AV57STSProtocolEnable));
@@ -5370,7 +5370,7 @@ namespace GeneXus.Programs {
          }
          chkavMiniappenable.Name = "vMINIAPPENABLE";
          chkavMiniappenable.WebTags = "";
-         chkavMiniappenable.Caption = "";
+         chkavMiniappenable.Caption = "Enable work as MiniApp?";
          AssignProp("", false, chkavMiniappenable_Internalname, "TitleCaption", chkavMiniappenable.Caption, true);
          chkavMiniappenable.CheckedValue = "false";
          AV148MiniAppEnable = StringUtil.StrToBool( StringUtil.BoolToStr( AV148MiniAppEnable));
@@ -5386,7 +5386,7 @@ namespace GeneXus.Programs {
          }
          chkavMiniappclienturl_iscustom.Name = "vMINIAPPCLIENTURL_ISCUSTOM";
          chkavMiniappclienturl_iscustom.WebTags = "";
-         chkavMiniappclienturl_iscustom.Caption = "";
+         chkavMiniappclienturl_iscustom.Caption = "Custom MiniApp client URL";
          AssignProp("", false, chkavMiniappclienturl_iscustom_Internalname, "TitleCaption", chkavMiniappclienturl_iscustom.Caption, true);
          chkavMiniappclienturl_iscustom.CheckedValue = "false";
          AV147MiniAppClientURL_isCustom = StringUtil.StrToBool( StringUtil.BoolToStr( AV147MiniAppClientURL_isCustom));
@@ -5401,14 +5401,14 @@ namespace GeneXus.Programs {
          }
          chkavMiniappserverurl_iscustom.Name = "vMINIAPPSERVERURL_ISCUSTOM";
          chkavMiniappserverurl_iscustom.WebTags = "";
-         chkavMiniappserverurl_iscustom.Caption = "";
+         chkavMiniappserverurl_iscustom.Caption = "Custom SuperApp server URL";
          AssignProp("", false, chkavMiniappserverurl_iscustom_Internalname, "TitleCaption", chkavMiniappserverurl_iscustom.Caption, true);
          chkavMiniappserverurl_iscustom.CheckedValue = "false";
          AV152MiniAppServerURL_isCustom = StringUtil.StrToBool( StringUtil.BoolToStr( AV152MiniAppServerURL_isCustom));
          AssignAttri("", false, "AV152MiniAppServerURL_isCustom", AV152MiniAppServerURL_isCustom);
          chkavApikeyenable.Name = "vAPIKEYENABLE";
          chkavApikeyenable.WebTags = "";
-         chkavApikeyenable.Caption = "";
+         chkavApikeyenable.Caption = "Enable work with API keys";
          AssignProp("", false, chkavApikeyenable_Internalname, "TitleCaption", chkavApikeyenable.Caption, true);
          chkavApikeyenable.CheckedValue = "false";
          AV120APIKeyEnable = StringUtil.StrToBool( StringUtil.BoolToStr( AV120APIKeyEnable));
@@ -5423,14 +5423,14 @@ namespace GeneXus.Programs {
          }
          chkavApikeyallowscopecustomization.Name = "vAPIKEYALLOWSCOPECUSTOMIZATION";
          chkavApikeyallowscopecustomization.WebTags = "";
-         chkavApikeyallowscopecustomization.Caption = "";
+         chkavApikeyallowscopecustomization.Caption = "API Key Allow Scope Customization";
          AssignProp("", false, chkavApikeyallowscopecustomization_Internalname, "TitleCaption", chkavApikeyallowscopecustomization.Caption, true);
          chkavApikeyallowscopecustomization.CheckedValue = "false";
          AV119APIKeyAllowScopeCustomization = StringUtil.StrToBool( StringUtil.BoolToStr( AV119APIKeyAllowScopeCustomization));
          AssignAttri("", false, "AV119APIKeyAllowScopeCustomization", AV119APIKeyAllowScopeCustomization);
          chkavEnvironmentsecureprotocol.Name = "vENVIRONMENTSECUREPROTOCOL";
          chkavEnvironmentsecureprotocol.WebTags = "";
-         chkavEnvironmentsecureprotocol.Caption = "Is HTTPS?";
+         chkavEnvironmentsecureprotocol.Caption = " ";
          AssignProp("", false, chkavEnvironmentsecureprotocol_Internalname, "TitleCaption", chkavEnvironmentsecureprotocol.Caption, true);
          chkavEnvironmentsecureprotocol.CheckedValue = "false";
          AV36EnvironmentSecureProtocol = StringUtil.StrToBool( StringUtil.BoolToStr( AV36EnvironmentSecureProtocol));
@@ -5724,10 +5724,8 @@ namespace GeneXus.Programs {
          chkavUseabsoluteurlbyenvironment.Caption = " ";
          chkavReturnmenuoptionswithoutpermission.Caption = " ";
          edtavLanguage_Jsonclick = "";
-         edtavLanguage_Visible = -1;
          edtavLanguage_Enabled = 1;
          chkavOnline.Caption = "";
-         chkavOnline.Visible = -1;
          subGridlanguages_Class = "GridWithPaginationBar WorkWith";
          subGridlanguages_Backcolorstyle = 0;
          edtavLogoutobject_Jsonclick = "";
@@ -5965,71 +5963,58 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'GRIDLANGUAGES_nFirstRecordOnPage'},{av:'GRIDLANGUAGES_nEOF'},{av:'subGridlanguages_Rows',ctrl:'GRIDLANGUAGES',prop:'Rows'},{av:'chkavOnline.Enabled',ctrl:'vONLINE',prop:'Enabled'},{av:'AV156ReturnMenuOptionsWithoutPermission',fld:'vRETURNMENUOPTIONSWITHOUTPERMISSION',pic:''},{av:'AV61UseAbsoluteUrlByEnvironment',fld:'vUSEABSOLUTEURLBYENVIRONMENT',pic:''},{av:'AV128ClientAuthRequestMustIncludeUserScopes',fld:'vCLIENTAUTHREQUESTMUSTINCLUDEUSERSCOPES',pic:''},{av:'AV129ClientDoNotShareUserIDs',fld:'vCLIENTDONOTSHAREUSERIDS',pic:''},{av:'AV17ClientAllowRemoteAuth',fld:'vCLIENTALLOWREMOTEAUTH',pic:''},{av:'AV126ClientAllowGetUserData',fld:'vCLIENTALLOWGETUSERDATA',pic:''},{av:'AV13ClientAllowGetUserAddData',fld:'vCLIENTALLOWGETUSERADDDATA',pic:''},{av:'AV15ClientAllowGetUserRoles',fld:'vCLIENTALLOWGETUSERROLES',pic:''},{av:'AV11ClientAllowGetSessionIniProp',fld:'vCLIENTALLOWGETSESSIONINIPROP',pic:''},{av:'AV9ClientAllowGetSessionAppData',fld:'vCLIENTALLOWGETSESSIONAPPDATA',pic:''},{av:'AV20ClientCallbackURLisCustom',fld:'vCLIENTCALLBACKURLISCUSTOM',pic:''},{av:'AV18ClientAllowRemoteRestAuth',fld:'vCLIENTALLOWREMOTERESTAUTH',pic:''},{av:'AV127ClientAllowGetUserDataREST',fld:'vCLIENTALLOWGETUSERDATAREST',pic:''},{av:'AV14ClientAllowGetUserAddDataRest',fld:'vCLIENTALLOWGETUSERADDDATAREST',pic:''},{av:'AV16ClientAllowGetUserRolesRest',fld:'vCLIENTALLOWGETUSERROLESREST',pic:''},{av:'AV12ClientAllowGetSessionIniPropRest',fld:'vCLIENTALLOWGETSESSIONINIPROPREST',pic:''},{av:'AV10ClientAllowGetSessionAppDataREST',fld:'vCLIENTALLOWGETSESSIONAPPDATAREST',pic:''},{av:'AV8ClientAccessUniqueByUser',fld:'vCLIENTACCESSUNIQUEBYUSER',pic:''},{av:'AV5AccessRequiresPermission',fld:'vACCESSREQUIRESPERMISSION',pic:''},{av:'AV143IsAuthorizationDelegated',fld:'vISAUTHORIZATIONDELEGATED',pic:''},{av:'AV50SSORestEnable',fld:'vSSORESTENABLE',pic:''},{av:'AV159SSORestServerURL_isCustom',fld:'vSSORESTSERVERURL_ISCUSTOM',pic:''},{av:'AV57STSProtocolEnable',fld:'vSTSPROTOCOLENABLE',pic:''},{av:'AV148MiniAppEnable',fld:'vMINIAPPENABLE',pic:''},{av:'AV147MiniAppClientURL_isCustom',fld:'vMINIAPPCLIENTURL_ISCUSTOM',pic:''},{av:'AV152MiniAppServerURL_isCustom',fld:'vMINIAPPSERVERURL_ISCUSTOM',pic:''},{av:'AV120APIKeyEnable',fld:'vAPIKEYENABLE',pic:''},{av:'AV119APIKeyAllowScopeCustomization',fld:'vAPIKEYALLOWSCOPECUSTOMIZATION',pic:''},{av:'AV36EnvironmentSecureProtocol',fld:'vENVIRONMENTSECUREPROTOCOL',pic:''},{av:'AV7AutoRegisterAnomymousUser',fld:'vAUTOREGISTERANOMYMOUSUSER',pic:''},{av:'Gx_mode',fld:'vMODE',pic:'@!',hsh:true}]");
-         setEventMetadata("REFRESH",",oparms:[]}");
-         setEventMetadata("GRIDLANGUAGES.LOAD","{handler:'E260Y2',iparms:[{av:'Gx_mode',fld:'vMODE',pic:'@!',hsh:true}]");
-         setEventMetadata("GRIDLANGUAGES.LOAD",",oparms:[{av:'AV154Online',fld:'vONLINE',pic:''},{av:'AV144Language',fld:'vLANGUAGE',pic:'',hsh:true}]}");
-         setEventMetadata("GRIDLANGUAGESPAGINATIONBAR.CHANGEPAGE","{handler:'E120Y2',iparms:[{av:'GRIDLANGUAGES_nFirstRecordOnPage'},{av:'GRIDLANGUAGES_nEOF'},{av:'subGridlanguages_Rows',ctrl:'GRIDLANGUAGES',prop:'Rows'},{av:'chkavOnline.Enabled',ctrl:'vONLINE',prop:'Enabled'},{av:'Gx_mode',fld:'vMODE',pic:'@!',hsh:true},{av:'AV156ReturnMenuOptionsWithoutPermission',fld:'vRETURNMENUOPTIONSWITHOUTPERMISSION',pic:''},{av:'AV61UseAbsoluteUrlByEnvironment',fld:'vUSEABSOLUTEURLBYENVIRONMENT',pic:''},{av:'AV128ClientAuthRequestMustIncludeUserScopes',fld:'vCLIENTAUTHREQUESTMUSTINCLUDEUSERSCOPES',pic:''},{av:'AV129ClientDoNotShareUserIDs',fld:'vCLIENTDONOTSHAREUSERIDS',pic:''},{av:'AV17ClientAllowRemoteAuth',fld:'vCLIENTALLOWREMOTEAUTH',pic:''},{av:'AV126ClientAllowGetUserData',fld:'vCLIENTALLOWGETUSERDATA',pic:''},{av:'AV13ClientAllowGetUserAddData',fld:'vCLIENTALLOWGETUSERADDDATA',pic:''},{av:'AV15ClientAllowGetUserRoles',fld:'vCLIENTALLOWGETUSERROLES',pic:''},{av:'AV11ClientAllowGetSessionIniProp',fld:'vCLIENTALLOWGETSESSIONINIPROP',pic:''},{av:'AV9ClientAllowGetSessionAppData',fld:'vCLIENTALLOWGETSESSIONAPPDATA',pic:''},{av:'AV20ClientCallbackURLisCustom',fld:'vCLIENTCALLBACKURLISCUSTOM',pic:''},{av:'AV18ClientAllowRemoteRestAuth',fld:'vCLIENTALLOWREMOTERESTAUTH',pic:''},{av:'AV127ClientAllowGetUserDataREST',fld:'vCLIENTALLOWGETUSERDATAREST',pic:''},{av:'AV14ClientAllowGetUserAddDataRest',fld:'vCLIENTALLOWGETUSERADDDATAREST',pic:''},{av:'AV16ClientAllowGetUserRolesRest',fld:'vCLIENTALLOWGETUSERROLESREST',pic:''},{av:'AV12ClientAllowGetSessionIniPropRest',fld:'vCLIENTALLOWGETSESSIONINIPROPREST',pic:''},{av:'AV10ClientAllowGetSessionAppDataREST',fld:'vCLIENTALLOWGETSESSIONAPPDATAREST',pic:''},{av:'AV8ClientAccessUniqueByUser',fld:'vCLIENTACCESSUNIQUEBYUSER',pic:''},{av:'AV5AccessRequiresPermission',fld:'vACCESSREQUIRESPERMISSION',pic:''},{av:'AV143IsAuthorizationDelegated',fld:'vISAUTHORIZATIONDELEGATED',pic:''},{av:'AV50SSORestEnable',fld:'vSSORESTENABLE',pic:''},{av:'AV159SSORestServerURL_isCustom',fld:'vSSORESTSERVERURL_ISCUSTOM',pic:''},{av:'AV57STSProtocolEnable',fld:'vSTSPROTOCOLENABLE',pic:''},{av:'AV148MiniAppEnable',fld:'vMINIAPPENABLE',pic:''},{av:'AV147MiniAppClientURL_isCustom',fld:'vMINIAPPCLIENTURL_ISCUSTOM',pic:''},{av:'AV152MiniAppServerURL_isCustom',fld:'vMINIAPPSERVERURL_ISCUSTOM',pic:''},{av:'AV120APIKeyEnable',fld:'vAPIKEYENABLE',pic:''},{av:'AV119APIKeyAllowScopeCustomization',fld:'vAPIKEYALLOWSCOPECUSTOMIZATION',pic:''},{av:'AV36EnvironmentSecureProtocol',fld:'vENVIRONMENTSECUREPROTOCOL',pic:''},{av:'AV7AutoRegisterAnomymousUser',fld:'vAUTOREGISTERANOMYMOUSUSER',pic:''},{av:'Gridlanguagespaginationbar_Selectedpage',ctrl:'GRIDLANGUAGESPAGINATIONBAR',prop:'SelectedPage'},{av:'AV140GridLanguagesCurrentPage',fld:'vGRIDLANGUAGESCURRENTPAGE',pic:'ZZZZZZZZZ9'}]");
-         setEventMetadata("GRIDLANGUAGESPAGINATIONBAR.CHANGEPAGE",",oparms:[{av:'AV140GridLanguagesCurrentPage',fld:'vGRIDLANGUAGESCURRENTPAGE',pic:'ZZZZZZZZZ9'}]}");
-         setEventMetadata("GRIDLANGUAGESPAGINATIONBAR.CHANGEROWSPERPAGE","{handler:'E130Y2',iparms:[{av:'GRIDLANGUAGES_nFirstRecordOnPage'},{av:'GRIDLANGUAGES_nEOF'},{av:'subGridlanguages_Rows',ctrl:'GRIDLANGUAGES',prop:'Rows'},{av:'chkavOnline.Enabled',ctrl:'vONLINE',prop:'Enabled'},{av:'Gx_mode',fld:'vMODE',pic:'@!',hsh:true},{av:'AV156ReturnMenuOptionsWithoutPermission',fld:'vRETURNMENUOPTIONSWITHOUTPERMISSION',pic:''},{av:'AV61UseAbsoluteUrlByEnvironment',fld:'vUSEABSOLUTEURLBYENVIRONMENT',pic:''},{av:'AV128ClientAuthRequestMustIncludeUserScopes',fld:'vCLIENTAUTHREQUESTMUSTINCLUDEUSERSCOPES',pic:''},{av:'AV129ClientDoNotShareUserIDs',fld:'vCLIENTDONOTSHAREUSERIDS',pic:''},{av:'AV17ClientAllowRemoteAuth',fld:'vCLIENTALLOWREMOTEAUTH',pic:''},{av:'AV126ClientAllowGetUserData',fld:'vCLIENTALLOWGETUSERDATA',pic:''},{av:'AV13ClientAllowGetUserAddData',fld:'vCLIENTALLOWGETUSERADDDATA',pic:''},{av:'AV15ClientAllowGetUserRoles',fld:'vCLIENTALLOWGETUSERROLES',pic:''},{av:'AV11ClientAllowGetSessionIniProp',fld:'vCLIENTALLOWGETSESSIONINIPROP',pic:''},{av:'AV9ClientAllowGetSessionAppData',fld:'vCLIENTALLOWGETSESSIONAPPDATA',pic:''},{av:'AV20ClientCallbackURLisCustom',fld:'vCLIENTCALLBACKURLISCUSTOM',pic:''},{av:'AV18ClientAllowRemoteRestAuth',fld:'vCLIENTALLOWREMOTERESTAUTH',pic:''},{av:'AV127ClientAllowGetUserDataREST',fld:'vCLIENTALLOWGETUSERDATAREST',pic:''},{av:'AV14ClientAllowGetUserAddDataRest',fld:'vCLIENTALLOWGETUSERADDDATAREST',pic:''},{av:'AV16ClientAllowGetUserRolesRest',fld:'vCLIENTALLOWGETUSERROLESREST',pic:''},{av:'AV12ClientAllowGetSessionIniPropRest',fld:'vCLIENTALLOWGETSESSIONINIPROPREST',pic:''},{av:'AV10ClientAllowGetSessionAppDataREST',fld:'vCLIENTALLOWGETSESSIONAPPDATAREST',pic:''},{av:'AV8ClientAccessUniqueByUser',fld:'vCLIENTACCESSUNIQUEBYUSER',pic:''},{av:'AV5AccessRequiresPermission',fld:'vACCESSREQUIRESPERMISSION',pic:''},{av:'AV143IsAuthorizationDelegated',fld:'vISAUTHORIZATIONDELEGATED',pic:''},{av:'AV50SSORestEnable',fld:'vSSORESTENABLE',pic:''},{av:'AV159SSORestServerURL_isCustom',fld:'vSSORESTSERVERURL_ISCUSTOM',pic:''},{av:'AV57STSProtocolEnable',fld:'vSTSPROTOCOLENABLE',pic:''},{av:'AV148MiniAppEnable',fld:'vMINIAPPENABLE',pic:''},{av:'AV147MiniAppClientURL_isCustom',fld:'vMINIAPPCLIENTURL_ISCUSTOM',pic:''},{av:'AV152MiniAppServerURL_isCustom',fld:'vMINIAPPSERVERURL_ISCUSTOM',pic:''},{av:'AV120APIKeyEnable',fld:'vAPIKEYENABLE',pic:''},{av:'AV119APIKeyAllowScopeCustomization',fld:'vAPIKEYALLOWSCOPECUSTOMIZATION',pic:''},{av:'AV36EnvironmentSecureProtocol',fld:'vENVIRONMENTSECUREPROTOCOL',pic:''},{av:'AV7AutoRegisterAnomymousUser',fld:'vAUTOREGISTERANOMYMOUSUSER',pic:''},{av:'Gridlanguagespaginationbar_Rowsperpageselectedvalue',ctrl:'GRIDLANGUAGESPAGINATIONBAR',prop:'RowsPerPageSelectedValue'}]");
-         setEventMetadata("GRIDLANGUAGESPAGINATIONBAR.CHANGEROWSPERPAGE",",oparms:[{av:'subGridlanguages_Rows',ctrl:'GRIDLANGUAGES',prop:'Rows'},{av:'AV140GridLanguagesCurrentPage',fld:'vGRIDLANGUAGESCURRENTPAGE',pic:'ZZZZZZZZZ9'}]}");
-         setEventMetadata("'DOCHANGECLIENTSECRET'","{handler:'E300Y1',iparms:[{av:'AV22ClientId',fld:'vCLIENTID',pic:''},{av:'AV43Id',fld:'vID',pic:'ZZZZZZZZZZZ9'}]");
-         setEventMetadata("'DOCHANGECLIENTSECRET'",",oparms:[{av:'AV43Id',fld:'vID',pic:'ZZZZZZZZZZZ9'}]}");
-         setEventMetadata("'DOGENERATEKEYGAMREMOTE'","{handler:'E140Y2',iparms:[]");
-         setEventMetadata("'DOGENERATEKEYGAMREMOTE'",",oparms:[{av:'AV21ClientEncryptionKey',fld:'vCLIENTENCRYPTIONKEY',pic:''}]}");
-         setEventMetadata("'DOREVOKEALLOW'","{handler:'E150Y2',iparms:[{av:'GRIDLANGUAGES_nFirstRecordOnPage'},{av:'GRIDLANGUAGES_nEOF'},{av:'subGridlanguages_Rows',ctrl:'GRIDLANGUAGES',prop:'Rows'},{av:'chkavOnline.Enabled',ctrl:'vONLINE',prop:'Enabled'},{av:'Gx_mode',fld:'vMODE',pic:'@!',hsh:true},{av:'AV156ReturnMenuOptionsWithoutPermission',fld:'vRETURNMENUOPTIONSWITHOUTPERMISSION',pic:''},{av:'AV61UseAbsoluteUrlByEnvironment',fld:'vUSEABSOLUTEURLBYENVIRONMENT',pic:''},{av:'AV128ClientAuthRequestMustIncludeUserScopes',fld:'vCLIENTAUTHREQUESTMUSTINCLUDEUSERSCOPES',pic:''},{av:'AV129ClientDoNotShareUserIDs',fld:'vCLIENTDONOTSHAREUSERIDS',pic:''},{av:'AV17ClientAllowRemoteAuth',fld:'vCLIENTALLOWREMOTEAUTH',pic:''},{av:'AV126ClientAllowGetUserData',fld:'vCLIENTALLOWGETUSERDATA',pic:''},{av:'AV13ClientAllowGetUserAddData',fld:'vCLIENTALLOWGETUSERADDDATA',pic:''},{av:'AV15ClientAllowGetUserRoles',fld:'vCLIENTALLOWGETUSERROLES',pic:''},{av:'AV11ClientAllowGetSessionIniProp',fld:'vCLIENTALLOWGETSESSIONINIPROP',pic:''},{av:'AV9ClientAllowGetSessionAppData',fld:'vCLIENTALLOWGETSESSIONAPPDATA',pic:''},{av:'AV20ClientCallbackURLisCustom',fld:'vCLIENTCALLBACKURLISCUSTOM',pic:''},{av:'AV18ClientAllowRemoteRestAuth',fld:'vCLIENTALLOWREMOTERESTAUTH',pic:''},{av:'AV127ClientAllowGetUserDataREST',fld:'vCLIENTALLOWGETUSERDATAREST',pic:''},{av:'AV14ClientAllowGetUserAddDataRest',fld:'vCLIENTALLOWGETUSERADDDATAREST',pic:''},{av:'AV16ClientAllowGetUserRolesRest',fld:'vCLIENTALLOWGETUSERROLESREST',pic:''},{av:'AV12ClientAllowGetSessionIniPropRest',fld:'vCLIENTALLOWGETSESSIONINIPROPREST',pic:''},{av:'AV10ClientAllowGetSessionAppDataREST',fld:'vCLIENTALLOWGETSESSIONAPPDATAREST',pic:''},{av:'AV8ClientAccessUniqueByUser',fld:'vCLIENTACCESSUNIQUEBYUSER',pic:''},{av:'AV5AccessRequiresPermission',fld:'vACCESSREQUIRESPERMISSION',pic:''},{av:'AV143IsAuthorizationDelegated',fld:'vISAUTHORIZATIONDELEGATED',pic:''},{av:'AV50SSORestEnable',fld:'vSSORESTENABLE',pic:''},{av:'AV159SSORestServerURL_isCustom',fld:'vSSORESTSERVERURL_ISCUSTOM',pic:''},{av:'AV57STSProtocolEnable',fld:'vSTSPROTOCOLENABLE',pic:''},{av:'AV148MiniAppEnable',fld:'vMINIAPPENABLE',pic:''},{av:'AV147MiniAppClientURL_isCustom',fld:'vMINIAPPCLIENTURL_ISCUSTOM',pic:''},{av:'AV152MiniAppServerURL_isCustom',fld:'vMINIAPPSERVERURL_ISCUSTOM',pic:''},{av:'AV120APIKeyEnable',fld:'vAPIKEYENABLE',pic:''},{av:'AV119APIKeyAllowScopeCustomization',fld:'vAPIKEYALLOWSCOPECUSTOMIZATION',pic:''},{av:'AV36EnvironmentSecureProtocol',fld:'vENVIRONMENTSECUREPROTOCOL',pic:''},{av:'AV7AutoRegisterAnomymousUser',fld:'vAUTOREGISTERANOMYMOUSUSER',pic:''},{av:'AV43Id',fld:'vID',pic:'ZZZZZZZZZZZ9'}]");
-         setEventMetadata("'DOREVOKEALLOW'",",oparms:[{ctrl:'BTNREVOKEALLOW',prop:'Caption'}]}");
-         setEventMetadata("ENTER","{handler:'E160Y2',iparms:[{av:'Gx_mode',fld:'vMODE',pic:'@!',hsh:true},{av:'AV43Id',fld:'vID',pic:'ZZZZZZZZZZZ9'},{av:'AV49Name',fld:'vNAME',pic:''},{av:'AV30Dsc',fld:'vDSC',pic:''},{av:'AV64Version',fld:'vVERSION',pic:''},{av:'AV29Copyright',fld:'vCOPYRIGHT',pic:''},{av:'AV28Company',fld:'vCOMPANY',pic:''},{av:'AV156ReturnMenuOptionsWithoutPermission',fld:'vRETURNMENUOPTIONSWITHOUTPERMISSION',pic:''},{av:'cmbavMainmenu'},{av:'AV46MainMenu',fld:'vMAINMENU',pic:'ZZZZZZZZZZZ9'},{av:'AV61UseAbsoluteUrlByEnvironment',fld:'vUSEABSOLUTEURLBYENVIRONMENT',pic:''},{av:'AV42HomeObject',fld:'vHOMEOBJECT',pic:''},{av:'AV66AccountActivationObject',fld:'vACCOUNTACTIVATIONOBJECT',pic:''},{av:'AV45LogoutObject',fld:'vLOGOUTOBJECT',pic:''},{av:'AV22ClientId',fld:'vCLIENTID',pic:''},{av:'AV27ClientSecret',fld:'vCLIENTSECRET',pic:''},{av:'AV128ClientAuthRequestMustIncludeUserScopes',fld:'vCLIENTAUTHREQUESTMUSTINCLUDEUSERSCOPES',pic:''},{av:'AV129ClientDoNotShareUserIDs',fld:'vCLIENTDONOTSHAREUSERIDS',pic:''},{av:'AV8ClientAccessUniqueByUser',fld:'vCLIENTACCESSUNIQUEBYUSER',pic:''},{av:'AV17ClientAllowRemoteAuth',fld:'vCLIENTALLOWREMOTEAUTH',pic:''},{av:'AV126ClientAllowGetUserData',fld:'vCLIENTALLOWGETUSERDATA',pic:''},{av:'AV13ClientAllowGetUserAddData',fld:'vCLIENTALLOWGETUSERADDDATA',pic:''},{av:'AV15ClientAllowGetUserRoles',fld:'vCLIENTALLOWGETUSERROLES',pic:''},{av:'AV11ClientAllowGetSessionIniProp',fld:'vCLIENTALLOWGETSESSIONINIPROP',pic:''},{av:'AV9ClientAllowGetSessionAppData',fld:'vCLIENTALLOWGETSESSIONAPPDATA',pic:''},{av:'AV124ClientAllowAdditionalScope',fld:'vCLIENTALLOWADDITIONALSCOPE',pic:''},{av:'AV24ClientLocalLoginURL',fld:'vCLIENTLOCALLOGINURL',pic:''},{av:'AV19ClientCallbackURL',fld:'vCLIENTCALLBACKURL',pic:''},{av:'AV20ClientCallbackURLisCustom',fld:'vCLIENTCALLBACKURLISCUSTOM',pic:''},{av:'AV65ClientCallbackURLStateName',fld:'vCLIENTCALLBACKURLSTATENAME',pic:''},{av:'AV23ClientImageURL',fld:'vCLIENTIMAGEURL',pic:''},{av:'AV18ClientAllowRemoteRestAuth',fld:'vCLIENTALLOWREMOTERESTAUTH',pic:''},{av:'AV127ClientAllowGetUserDataREST',fld:'vCLIENTALLOWGETUSERDATAREST',pic:''},{av:'AV14ClientAllowGetUserAddDataRest',fld:'vCLIENTALLOWGETUSERADDDATAREST',pic:''},{av:'AV16ClientAllowGetUserRolesRest',fld:'vCLIENTALLOWGETUSERROLESREST',pic:''},{av:'AV12ClientAllowGetSessionIniPropRest',fld:'vCLIENTALLOWGETSESSIONINIPROPREST',pic:''},{av:'AV10ClientAllowGetSessionAppDataREST',fld:'vCLIENTALLOWGETSESSIONAPPDATAREST',pic:''},{av:'AV125ClientAllowAdditionalScopeREST',fld:'vCLIENTALLOWADDITIONALSCOPEREST',pic:''},{av:'AV21ClientEncryptionKey',fld:'vCLIENTENCRYPTIONKEY',pic:''},{av:'AV25ClientRepositoryGUID',fld:'vCLIENTREPOSITORYGUID',pic:''},{av:'AV5AccessRequiresPermission',fld:'vACCESSREQUIRESPERMISSION',pic:''},{av:'AV143IsAuthorizationDelegated',fld:'vISAUTHORIZATIONDELEGATED',pic:''},{av:'cmbavDelegateauthorizationversion'},{av:'AV134DelegateAuthorizationVersion',fld:'vDELEGATEAUTHORIZATIONVERSION',pic:''},{av:'AV131DelegateAuthorizationFileName',fld:'vDELEGATEAUTHORIZATIONFILENAME',pic:''},{av:'AV133DelegateAuthorizationPackage',fld:'vDELEGATEAUTHORIZATIONPACKAGE',pic:''},{av:'AV130DelegateAuthorizationClassName',fld:'vDELEGATEAUTHORIZATIONCLASSNAME',pic:''},{av:'AV132DelegateAuthorizationMethod',fld:'vDELEGATEAUTHORIZATIONMETHOD',pic:''},{av:'AV50SSORestEnable',fld:'vSSORESTENABLE',pic:''},{av:'cmbavSsorestmode'},{av:'AV51SSORestMode',fld:'vSSORESTMODE',pic:''},{av:'AV53SSORestUserAuthTypeName',fld:'vSSORESTUSERAUTHTYPENAME',pic:''},{av:'AV52SSORestServerURL',fld:'vSSORESTSERVERURL',pic:''},{av:'AV159SSORestServerURL_isCustom',fld:'vSSORESTSERVERURL_ISCUSTOM',pic:''},{av:'AV160SSORestServerURL_SLO',fld:'vSSORESTSERVERURL_SLO',pic:''},{av:'AV158SSORestServerRepositoryGUID',fld:'vSSORESTSERVERREPOSITORYGUID',pic:''},{av:'AV157SSORestServerKey',fld:'vSSORESTSERVERKEY',pic:''},{av:'AV57STSProtocolEnable',fld:'vSTSPROTOCOLENABLE',pic:''},{av:'AV55STSAuthorizationUserName',fld:'vSTSAUTHORIZATIONUSERNAME',pic:''},{av:'AV54STSAuthorizationUserGUID',fld:'vSTSAUTHORIZATIONUSERGUID',pic:''},{av:'cmbavStsmode'},{av:'AV56STSMode',fld:'vSTSMODE',pic:''},{av:'AV60STSServerURL',fld:'vSTSSERVERURL',pic:''},{av:'AV58STSServerClientPassword',fld:'vSTSSERVERCLIENTPASSWORD',pic:''},{av:'AV59STSServerRepositoryGUID',fld:'vSTSSERVERREPOSITORYGUID',pic:''},{av:'AV148MiniAppEnable',fld:'vMINIAPPENABLE',pic:''},{av:'cmbavMiniappmode'},{av:'AV149MiniAppMode',fld:'vMINIAPPMODE',pic:''},{av:'AV146MiniAppClientURL',fld:'vMINIAPPCLIENTURL',pic:''},{av:'AV147MiniAppClientURL_isCustom',fld:'vMINIAPPCLIENTURL_ISCUSTOM',pic:''},{av:'AV145MiniAppClientRepositoryGUID',fld:'vMINIAPPCLIENTREPOSITORYGUID',pic:''},{av:'cmbavMiniappuserauthenticationtypename'},{av:'AV153MiniAppUserAuthenticationTypeName',fld:'vMINIAPPUSERAUTHENTICATIONTYPENAME',pic:''},{av:'AV151MiniAppServerURL',fld:'vMINIAPPSERVERURL',pic:''},{av:'AV152MiniAppServerURL_isCustom',fld:'vMINIAPPSERVERURL_ISCUSTOM',pic:''},{av:'AV150MiniAppServerRepositoryGUID',fld:'vMINIAPPSERVERREPOSITORYGUID',pic:''},{av:'AV120APIKeyEnable',fld:'vAPIKEYENABLE',pic:''},{av:'AV121APIKeyTimeout',fld:'vAPIKEYTIMEOUT',pic:'ZZZZZZZZ9'},{av:'cmbavApikeyallowonlyauthenticationtypename'},{av:'AV118APIKeyAllowOnlyAuthenticationTypeName',fld:'vAPIKEYALLOWONLYAUTHENTICATIONTYPENAME',pic:''},{av:'AV119APIKeyAllowScopeCustomization',fld:'vAPIKEYALLOWSCOPECUSTOMIZATION',pic:''},{av:'AV32EnvironmentName',fld:'vENVIRONMENTNAME',pic:''},{av:'AV36EnvironmentSecureProtocol',fld:'vENVIRONMENTSECUREPROTOCOL',pic:''},{av:'AV31EnvironmentHost',fld:'vENVIRONMENTHOST',pic:''},{av:'AV33EnvironmentPort',fld:'vENVIRONMENTPORT',pic:'ZZZZ9'},{av:'AV37EnvironmentVirtualDirectory',fld:'vENVIRONMENTVIRTUALDIRECTORY',pic:''},{av:'AV35EnvironmentProgramPackage',fld:'vENVIRONMENTPROGRAMPACKAGE',pic:''},{av:'AV34EnvironmentProgramExtension',fld:'vENVIRONMENTPROGRAMEXTENSION',pic:''},{av:'AV144Language',fld:'vLANGUAGE',grid:563,pic:'',hsh:true},{av:'GRIDLANGUAGES_nFirstRecordOnPage'},{av:'nRC_GXsfl_563',ctrl:'GRIDLANGUAGES',grid:563,prop:'GridRC',grid:563},{av:'AV154Online',fld:'vONLINE',grid:563,pic:''}]");
-         setEventMetadata("ENTER",",oparms:[{av:'AV54STSAuthorizationUserGUID',fld:'vSTSAUTHORIZATIONUSERGUID',pic:''}]}");
-         setEventMetadata("'GENERATEKEYGAMREMOTE'","{handler:'E270Y2',iparms:[]");
-         setEventMetadata("'GENERATEKEYGAMREMOTE'",",oparms:[{av:'AV21ClientEncryptionKey',fld:'vCLIENTENCRYPTIONKEY',pic:''}]}");
-         setEventMetadata("'REVOKE-AUTHORIZE'","{handler:'E280Y2',iparms:[{av:'AV43Id',fld:'vID',pic:'ZZZZZZZZZZZ9'}]");
-         setEventMetadata("'REVOKE-AUTHORIZE'",",oparms:[{av:'AV26ClientRevoked',fld:'vCLIENTREVOKED',pic:'99/99/9999 99:99'},{ctrl:'BTNREVOKEALLOW',prop:'Caption'},{av:'cmbavClientaccessstatus'},{av:'AV123ClientAccessStatus',fld:'vCLIENTACCESSSTATUS',pic:''},{av:'edtavClientrevoked_Visible',ctrl:'vCLIENTREVOKED',prop:'Visible'}]}");
-         setEventMetadata("'TRANSLATIONS'","{handler:'E290Y2',iparms:[{av:'GRIDLANGUAGES_nFirstRecordOnPage'},{av:'GRIDLANGUAGES_nEOF'},{av:'subGridlanguages_Rows',ctrl:'GRIDLANGUAGES',prop:'Rows'},{av:'chkavOnline.Enabled',ctrl:'vONLINE',prop:'Enabled'},{av:'Gx_mode',fld:'vMODE',pic:'@!',hsh:true},{av:'AV156ReturnMenuOptionsWithoutPermission',fld:'vRETURNMENUOPTIONSWITHOUTPERMISSION',pic:''},{av:'AV61UseAbsoluteUrlByEnvironment',fld:'vUSEABSOLUTEURLBYENVIRONMENT',pic:''},{av:'AV128ClientAuthRequestMustIncludeUserScopes',fld:'vCLIENTAUTHREQUESTMUSTINCLUDEUSERSCOPES',pic:''},{av:'AV129ClientDoNotShareUserIDs',fld:'vCLIENTDONOTSHAREUSERIDS',pic:''},{av:'AV17ClientAllowRemoteAuth',fld:'vCLIENTALLOWREMOTEAUTH',pic:''},{av:'AV126ClientAllowGetUserData',fld:'vCLIENTALLOWGETUSERDATA',pic:''},{av:'AV13ClientAllowGetUserAddData',fld:'vCLIENTALLOWGETUSERADDDATA',pic:''},{av:'AV15ClientAllowGetUserRoles',fld:'vCLIENTALLOWGETUSERROLES',pic:''},{av:'AV11ClientAllowGetSessionIniProp',fld:'vCLIENTALLOWGETSESSIONINIPROP',pic:''},{av:'AV9ClientAllowGetSessionAppData',fld:'vCLIENTALLOWGETSESSIONAPPDATA',pic:''},{av:'AV20ClientCallbackURLisCustom',fld:'vCLIENTCALLBACKURLISCUSTOM',pic:''},{av:'AV18ClientAllowRemoteRestAuth',fld:'vCLIENTALLOWREMOTERESTAUTH',pic:''},{av:'AV127ClientAllowGetUserDataREST',fld:'vCLIENTALLOWGETUSERDATAREST',pic:''},{av:'AV14ClientAllowGetUserAddDataRest',fld:'vCLIENTALLOWGETUSERADDDATAREST',pic:''},{av:'AV16ClientAllowGetUserRolesRest',fld:'vCLIENTALLOWGETUSERROLESREST',pic:''},{av:'AV12ClientAllowGetSessionIniPropRest',fld:'vCLIENTALLOWGETSESSIONINIPROPREST',pic:''},{av:'AV10ClientAllowGetSessionAppDataREST',fld:'vCLIENTALLOWGETSESSIONAPPDATAREST',pic:''},{av:'AV8ClientAccessUniqueByUser',fld:'vCLIENTACCESSUNIQUEBYUSER',pic:''},{av:'AV5AccessRequiresPermission',fld:'vACCESSREQUIRESPERMISSION',pic:''},{av:'AV143IsAuthorizationDelegated',fld:'vISAUTHORIZATIONDELEGATED',pic:''},{av:'AV50SSORestEnable',fld:'vSSORESTENABLE',pic:''},{av:'AV159SSORestServerURL_isCustom',fld:'vSSORESTSERVERURL_ISCUSTOM',pic:''},{av:'AV57STSProtocolEnable',fld:'vSTSPROTOCOLENABLE',pic:''},{av:'AV148MiniAppEnable',fld:'vMINIAPPENABLE',pic:''},{av:'AV147MiniAppClientURL_isCustom',fld:'vMINIAPPCLIENTURL_ISCUSTOM',pic:''},{av:'AV152MiniAppServerURL_isCustom',fld:'vMINIAPPSERVERURL_ISCUSTOM',pic:''},{av:'AV120APIKeyEnable',fld:'vAPIKEYENABLE',pic:''},{av:'AV119APIKeyAllowScopeCustomization',fld:'vAPIKEYALLOWSCOPECUSTOMIZATION',pic:''},{av:'AV36EnvironmentSecureProtocol',fld:'vENVIRONMENTSECUREPROTOCOL',pic:''},{av:'AV7AutoRegisterAnomymousUser',fld:'vAUTOREGISTERANOMYMOUSUSER',pic:''},{av:'AV49Name',fld:'vNAME',pic:''},{av:'AV43Id',fld:'vID',pic:'ZZZZZZZZZZZ9'}]");
-         setEventMetadata("'TRANSLATIONS'",",oparms:[]}");
-         setEventMetadata("VSSORESTENABLE.CONTROLVALUECHANGED","{handler:'E170Y2',iparms:[{av:'AV50SSORestEnable',fld:'vSSORESTENABLE',pic:''},{av:'cmbavSsorestmode'},{av:'AV51SSORestMode',fld:'vSSORESTMODE',pic:''}]");
-         setEventMetadata("VSSORESTENABLE.CONTROLVALUECHANGED",",oparms:[{av:'divTblssorestmodeclient_Visible',ctrl:'TBLSSORESTMODECLIENT',prop:'Visible'},{av:'divTablessorest_Visible',ctrl:'TABLESSOREST',prop:'Visible'}]}");
-         setEventMetadata("VSSORESTMODE.CONTROLVALUECHANGED","{handler:'E180Y2',iparms:[{av:'AV50SSORestEnable',fld:'vSSORESTENABLE',pic:''},{av:'cmbavSsorestmode'},{av:'AV51SSORestMode',fld:'vSSORESTMODE',pic:''}]");
-         setEventMetadata("VSSORESTMODE.CONTROLVALUECHANGED",",oparms:[{av:'divTblssorestmodeclient_Visible',ctrl:'TBLSSORESTMODECLIENT',prop:'Visible'},{av:'divTablessorest_Visible',ctrl:'TABLESSOREST',prop:'Visible'}]}");
-         setEventMetadata("VMINIAPPENABLE.CONTROLVALUECHANGED","{handler:'E190Y2',iparms:[{av:'AV148MiniAppEnable',fld:'vMINIAPPENABLE',pic:''},{av:'cmbavMiniappmode'},{av:'AV149MiniAppMode',fld:'vMINIAPPMODE',pic:''},{av:'cmbavMiniappuserauthenticationtypename'},{av:'AV153MiniAppUserAuthenticationTypeName',fld:'vMINIAPPUSERAUTHENTICATIONTYPENAME',pic:''}]");
-         setEventMetadata("VMINIAPPENABLE.CONTROLVALUECHANGED",",oparms:[{av:'divTblminiappserver_Visible',ctrl:'TBLMINIAPPSERVER',prop:'Visible'},{av:'divTblminiappclient_Visible',ctrl:'TBLMINIAPPCLIENT',prop:'Visible'},{av:'divTblminiapp_Visible',ctrl:'TBLMINIAPP',prop:'Visible'},{av:'cmbavMiniappuserauthenticationtypename'},{av:'AV153MiniAppUserAuthenticationTypeName',fld:'vMINIAPPUSERAUTHENTICATIONTYPENAME',pic:''}]}");
-         setEventMetadata("VMINIAPPMODE.CONTROLVALUECHANGED","{handler:'E200Y2',iparms:[{av:'AV148MiniAppEnable',fld:'vMINIAPPENABLE',pic:''},{av:'cmbavMiniappmode'},{av:'AV149MiniAppMode',fld:'vMINIAPPMODE',pic:''},{av:'cmbavMiniappuserauthenticationtypename'},{av:'AV153MiniAppUserAuthenticationTypeName',fld:'vMINIAPPUSERAUTHENTICATIONTYPENAME',pic:''}]");
-         setEventMetadata("VMINIAPPMODE.CONTROLVALUECHANGED",",oparms:[{av:'divTblminiappserver_Visible',ctrl:'TBLMINIAPPSERVER',prop:'Visible'},{av:'divTblminiappclient_Visible',ctrl:'TBLMINIAPPCLIENT',prop:'Visible'},{av:'divTblminiapp_Visible',ctrl:'TBLMINIAPP',prop:'Visible'},{av:'cmbavMiniappuserauthenticationtypename'},{av:'AV153MiniAppUserAuthenticationTypeName',fld:'vMINIAPPUSERAUTHENTICATIONTYPENAME',pic:''}]}");
-         setEventMetadata("VAPIKEYENABLE.CONTROLVALUECHANGED","{handler:'E210Y2',iparms:[{av:'AV120APIKeyEnable',fld:'vAPIKEYENABLE',pic:''},{av:'cmbavApikeyallowonlyauthenticationtypename'},{av:'AV118APIKeyAllowOnlyAuthenticationTypeName',fld:'vAPIKEYALLOWONLYAUTHENTICATIONTYPENAME',pic:''}]");
-         setEventMetadata("VAPIKEYENABLE.CONTROLVALUECHANGED",",oparms:[{av:'divTblapikey_Visible',ctrl:'TBLAPIKEY',prop:'Visible'},{av:'cmbavApikeyallowonlyauthenticationtypename'},{av:'AV118APIKeyAllowOnlyAuthenticationTypeName',fld:'vAPIKEYALLOWONLYAUTHENTICATIONTYPENAME',pic:''}]}");
-         setEventMetadata("VSSORESTMODE.CLICK","{handler:'E220Y2',iparms:[{av:'AV50SSORestEnable',fld:'vSSORESTENABLE',pic:''},{av:'cmbavSsorestmode'},{av:'AV51SSORestMode',fld:'vSSORESTMODE',pic:''}]");
-         setEventMetadata("VSSORESTMODE.CLICK",",oparms:[{av:'divTblssorestmodeclient_Visible',ctrl:'TBLSSORESTMODECLIENT',prop:'Visible'},{av:'divTablessorest_Visible',ctrl:'TABLESSOREST',prop:'Visible'}]}");
-         setEventMetadata("VSTSMODE.CLICK","{handler:'E110Y1',iparms:[{av:'cmbavStsmode'},{av:'AV56STSMode',fld:'vSTSMODE',pic:''}]");
-         setEventMetadata("VSTSMODE.CLICK",",oparms:[{av:'divTablestsserverchecktoken_Visible',ctrl:'TABLESTSSERVERCHECKTOKEN',prop:'Visible'},{av:'divTablestsclient_Visible',ctrl:'TABLESTSCLIENT',prop:'Visible'},{av:'edtavStsserverclientpassword_Visible',ctrl:'vSTSSERVERCLIENTPASSWORD',prop:'Visible'},{av:'divStsserverclientpassword_cell_Class',ctrl:'STSSERVERCLIENTPASSWORD_CELL',prop:'Class'},{av:'divTablestsclientgettoken_Visible',ctrl:'TABLESTSCLIENTGETTOKEN',prop:'Visible'}]}");
-         setEventMetadata("VSSORESTENABLE.CLICK","{handler:'E230Y2',iparms:[{av:'AV50SSORestEnable',fld:'vSSORESTENABLE',pic:''},{av:'cmbavSsorestmode'},{av:'AV51SSORestMode',fld:'vSSORESTMODE',pic:''}]");
-         setEventMetadata("VSSORESTENABLE.CLICK",",oparms:[{av:'divTblssorestmodeclient_Visible',ctrl:'TBLSSORESTMODECLIENT',prop:'Visible'},{av:'divTablessorest_Visible',ctrl:'TABLESSOREST',prop:'Visible'}]}");
-         setEventMetadata("VALIDV_CLIENTACCESSSTATUS","{handler:'Validv_Clientaccessstatus',iparms:[]");
-         setEventMetadata("VALIDV_CLIENTACCESSSTATUS",",oparms:[]}");
-         setEventMetadata("VALIDV_DELEGATEAUTHORIZATIONVERSION","{handler:'Validv_Delegateauthorizationversion',iparms:[]");
-         setEventMetadata("VALIDV_DELEGATEAUTHORIZATIONVERSION",",oparms:[]}");
-         setEventMetadata("VALIDV_SSORESTMODE","{handler:'Validv_Ssorestmode',iparms:[]");
-         setEventMetadata("VALIDV_SSORESTMODE",",oparms:[]}");
-         setEventMetadata("VALIDV_STSMODE","{handler:'Validv_Stsmode',iparms:[]");
-         setEventMetadata("VALIDV_STSMODE",",oparms:[]}");
-         setEventMetadata("VALIDV_MINIAPPMODE","{handler:'Validv_Miniappmode',iparms:[]");
-         setEventMetadata("VALIDV_MINIAPPMODE",",oparms:[]}");
-         setEventMetadata("NULL","{handler:'Validv_Language',iparms:[]");
-         setEventMetadata("NULL",",oparms:[]}");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"GRIDLANGUAGES_nFirstRecordOnPage"},{"av":"GRIDLANGUAGES_nEOF"},{"av":"subGridlanguages_Rows","ctrl":"GRIDLANGUAGES","prop":"Rows"},{"av":"chkavOnline.Enabled","ctrl":"vONLINE","prop":"Enabled"},{"av":"AV156ReturnMenuOptionsWithoutPermission","fld":"vRETURNMENUOPTIONSWITHOUTPERMISSION"},{"av":"AV61UseAbsoluteUrlByEnvironment","fld":"vUSEABSOLUTEURLBYENVIRONMENT"},{"av":"AV128ClientAuthRequestMustIncludeUserScopes","fld":"vCLIENTAUTHREQUESTMUSTINCLUDEUSERSCOPES"},{"av":"AV129ClientDoNotShareUserIDs","fld":"vCLIENTDONOTSHAREUSERIDS"},{"av":"AV17ClientAllowRemoteAuth","fld":"vCLIENTALLOWREMOTEAUTH"},{"av":"AV126ClientAllowGetUserData","fld":"vCLIENTALLOWGETUSERDATA"},{"av":"AV13ClientAllowGetUserAddData","fld":"vCLIENTALLOWGETUSERADDDATA"},{"av":"AV15ClientAllowGetUserRoles","fld":"vCLIENTALLOWGETUSERROLES"},{"av":"AV11ClientAllowGetSessionIniProp","fld":"vCLIENTALLOWGETSESSIONINIPROP"},{"av":"AV9ClientAllowGetSessionAppData","fld":"vCLIENTALLOWGETSESSIONAPPDATA"},{"av":"AV20ClientCallbackURLisCustom","fld":"vCLIENTCALLBACKURLISCUSTOM"},{"av":"AV18ClientAllowRemoteRestAuth","fld":"vCLIENTALLOWREMOTERESTAUTH"},{"av":"AV127ClientAllowGetUserDataREST","fld":"vCLIENTALLOWGETUSERDATAREST"},{"av":"AV14ClientAllowGetUserAddDataRest","fld":"vCLIENTALLOWGETUSERADDDATAREST"},{"av":"AV16ClientAllowGetUserRolesRest","fld":"vCLIENTALLOWGETUSERROLESREST"},{"av":"AV12ClientAllowGetSessionIniPropRest","fld":"vCLIENTALLOWGETSESSIONINIPROPREST"},{"av":"AV10ClientAllowGetSessionAppDataREST","fld":"vCLIENTALLOWGETSESSIONAPPDATAREST"},{"av":"AV8ClientAccessUniqueByUser","fld":"vCLIENTACCESSUNIQUEBYUSER"},{"av":"AV5AccessRequiresPermission","fld":"vACCESSREQUIRESPERMISSION"},{"av":"AV143IsAuthorizationDelegated","fld":"vISAUTHORIZATIONDELEGATED"},{"av":"AV50SSORestEnable","fld":"vSSORESTENABLE"},{"av":"AV159SSORestServerURL_isCustom","fld":"vSSORESTSERVERURL_ISCUSTOM"},{"av":"AV57STSProtocolEnable","fld":"vSTSPROTOCOLENABLE"},{"av":"AV148MiniAppEnable","fld":"vMINIAPPENABLE"},{"av":"AV147MiniAppClientURL_isCustom","fld":"vMINIAPPCLIENTURL_ISCUSTOM"},{"av":"AV152MiniAppServerURL_isCustom","fld":"vMINIAPPSERVERURL_ISCUSTOM"},{"av":"AV120APIKeyEnable","fld":"vAPIKEYENABLE"},{"av":"AV119APIKeyAllowScopeCustomization","fld":"vAPIKEYALLOWSCOPECUSTOMIZATION"},{"av":"AV36EnvironmentSecureProtocol","fld":"vENVIRONMENTSECUREPROTOCOL"},{"av":"AV7AutoRegisterAnomymousUser","fld":"vAUTOREGISTERANOMYMOUSUSER"},{"av":"Gx_mode","fld":"vMODE","pic":"@!","hsh":true}]}""");
+         setEventMetadata("GRIDLANGUAGES.LOAD","""{"handler":"E260Y2","iparms":[{"av":"Gx_mode","fld":"vMODE","pic":"@!","hsh":true}]""");
+         setEventMetadata("GRIDLANGUAGES.LOAD",""","oparms":[{"av":"AV154Online","fld":"vONLINE"},{"av":"AV144Language","fld":"vLANGUAGE","hsh":true}]}""");
+         setEventMetadata("GRIDLANGUAGESPAGINATIONBAR.CHANGEPAGE","""{"handler":"E120Y2","iparms":[{"av":"GRIDLANGUAGES_nFirstRecordOnPage"},{"av":"GRIDLANGUAGES_nEOF"},{"av":"subGridlanguages_Rows","ctrl":"GRIDLANGUAGES","prop":"Rows"},{"av":"chkavOnline.Enabled","ctrl":"vONLINE","prop":"Enabled"},{"av":"Gx_mode","fld":"vMODE","pic":"@!","hsh":true},{"av":"AV156ReturnMenuOptionsWithoutPermission","fld":"vRETURNMENUOPTIONSWITHOUTPERMISSION"},{"av":"AV61UseAbsoluteUrlByEnvironment","fld":"vUSEABSOLUTEURLBYENVIRONMENT"},{"av":"AV128ClientAuthRequestMustIncludeUserScopes","fld":"vCLIENTAUTHREQUESTMUSTINCLUDEUSERSCOPES"},{"av":"AV129ClientDoNotShareUserIDs","fld":"vCLIENTDONOTSHAREUSERIDS"},{"av":"AV17ClientAllowRemoteAuth","fld":"vCLIENTALLOWREMOTEAUTH"},{"av":"AV126ClientAllowGetUserData","fld":"vCLIENTALLOWGETUSERDATA"},{"av":"AV13ClientAllowGetUserAddData","fld":"vCLIENTALLOWGETUSERADDDATA"},{"av":"AV15ClientAllowGetUserRoles","fld":"vCLIENTALLOWGETUSERROLES"},{"av":"AV11ClientAllowGetSessionIniProp","fld":"vCLIENTALLOWGETSESSIONINIPROP"},{"av":"AV9ClientAllowGetSessionAppData","fld":"vCLIENTALLOWGETSESSIONAPPDATA"},{"av":"AV20ClientCallbackURLisCustom","fld":"vCLIENTCALLBACKURLISCUSTOM"},{"av":"AV18ClientAllowRemoteRestAuth","fld":"vCLIENTALLOWREMOTERESTAUTH"},{"av":"AV127ClientAllowGetUserDataREST","fld":"vCLIENTALLOWGETUSERDATAREST"},{"av":"AV14ClientAllowGetUserAddDataRest","fld":"vCLIENTALLOWGETUSERADDDATAREST"},{"av":"AV16ClientAllowGetUserRolesRest","fld":"vCLIENTALLOWGETUSERROLESREST"},{"av":"AV12ClientAllowGetSessionIniPropRest","fld":"vCLIENTALLOWGETSESSIONINIPROPREST"},{"av":"AV10ClientAllowGetSessionAppDataREST","fld":"vCLIENTALLOWGETSESSIONAPPDATAREST"},{"av":"AV8ClientAccessUniqueByUser","fld":"vCLIENTACCESSUNIQUEBYUSER"},{"av":"AV5AccessRequiresPermission","fld":"vACCESSREQUIRESPERMISSION"},{"av":"AV143IsAuthorizationDelegated","fld":"vISAUTHORIZATIONDELEGATED"},{"av":"AV50SSORestEnable","fld":"vSSORESTENABLE"},{"av":"AV159SSORestServerURL_isCustom","fld":"vSSORESTSERVERURL_ISCUSTOM"},{"av":"AV57STSProtocolEnable","fld":"vSTSPROTOCOLENABLE"},{"av":"AV148MiniAppEnable","fld":"vMINIAPPENABLE"},{"av":"AV147MiniAppClientURL_isCustom","fld":"vMINIAPPCLIENTURL_ISCUSTOM"},{"av":"AV152MiniAppServerURL_isCustom","fld":"vMINIAPPSERVERURL_ISCUSTOM"},{"av":"AV120APIKeyEnable","fld":"vAPIKEYENABLE"},{"av":"AV119APIKeyAllowScopeCustomization","fld":"vAPIKEYALLOWSCOPECUSTOMIZATION"},{"av":"AV36EnvironmentSecureProtocol","fld":"vENVIRONMENTSECUREPROTOCOL"},{"av":"AV7AutoRegisterAnomymousUser","fld":"vAUTOREGISTERANOMYMOUSUSER"},{"av":"Gridlanguagespaginationbar_Selectedpage","ctrl":"GRIDLANGUAGESPAGINATIONBAR","prop":"SelectedPage"},{"av":"AV140GridLanguagesCurrentPage","fld":"vGRIDLANGUAGESCURRENTPAGE","pic":"ZZZZZZZZZ9"}]""");
+         setEventMetadata("GRIDLANGUAGESPAGINATIONBAR.CHANGEPAGE",""","oparms":[{"av":"AV140GridLanguagesCurrentPage","fld":"vGRIDLANGUAGESCURRENTPAGE","pic":"ZZZZZZZZZ9"}]}""");
+         setEventMetadata("GRIDLANGUAGESPAGINATIONBAR.CHANGEROWSPERPAGE","""{"handler":"E130Y2","iparms":[{"av":"GRIDLANGUAGES_nFirstRecordOnPage"},{"av":"GRIDLANGUAGES_nEOF"},{"av":"subGridlanguages_Rows","ctrl":"GRIDLANGUAGES","prop":"Rows"},{"av":"chkavOnline.Enabled","ctrl":"vONLINE","prop":"Enabled"},{"av":"Gx_mode","fld":"vMODE","pic":"@!","hsh":true},{"av":"AV156ReturnMenuOptionsWithoutPermission","fld":"vRETURNMENUOPTIONSWITHOUTPERMISSION"},{"av":"AV61UseAbsoluteUrlByEnvironment","fld":"vUSEABSOLUTEURLBYENVIRONMENT"},{"av":"AV128ClientAuthRequestMustIncludeUserScopes","fld":"vCLIENTAUTHREQUESTMUSTINCLUDEUSERSCOPES"},{"av":"AV129ClientDoNotShareUserIDs","fld":"vCLIENTDONOTSHAREUSERIDS"},{"av":"AV17ClientAllowRemoteAuth","fld":"vCLIENTALLOWREMOTEAUTH"},{"av":"AV126ClientAllowGetUserData","fld":"vCLIENTALLOWGETUSERDATA"},{"av":"AV13ClientAllowGetUserAddData","fld":"vCLIENTALLOWGETUSERADDDATA"},{"av":"AV15ClientAllowGetUserRoles","fld":"vCLIENTALLOWGETUSERROLES"},{"av":"AV11ClientAllowGetSessionIniProp","fld":"vCLIENTALLOWGETSESSIONINIPROP"},{"av":"AV9ClientAllowGetSessionAppData","fld":"vCLIENTALLOWGETSESSIONAPPDATA"},{"av":"AV20ClientCallbackURLisCustom","fld":"vCLIENTCALLBACKURLISCUSTOM"},{"av":"AV18ClientAllowRemoteRestAuth","fld":"vCLIENTALLOWREMOTERESTAUTH"},{"av":"AV127ClientAllowGetUserDataREST","fld":"vCLIENTALLOWGETUSERDATAREST"},{"av":"AV14ClientAllowGetUserAddDataRest","fld":"vCLIENTALLOWGETUSERADDDATAREST"},{"av":"AV16ClientAllowGetUserRolesRest","fld":"vCLIENTALLOWGETUSERROLESREST"},{"av":"AV12ClientAllowGetSessionIniPropRest","fld":"vCLIENTALLOWGETSESSIONINIPROPREST"},{"av":"AV10ClientAllowGetSessionAppDataREST","fld":"vCLIENTALLOWGETSESSIONAPPDATAREST"},{"av":"AV8ClientAccessUniqueByUser","fld":"vCLIENTACCESSUNIQUEBYUSER"},{"av":"AV5AccessRequiresPermission","fld":"vACCESSREQUIRESPERMISSION"},{"av":"AV143IsAuthorizationDelegated","fld":"vISAUTHORIZATIONDELEGATED"},{"av":"AV50SSORestEnable","fld":"vSSORESTENABLE"},{"av":"AV159SSORestServerURL_isCustom","fld":"vSSORESTSERVERURL_ISCUSTOM"},{"av":"AV57STSProtocolEnable","fld":"vSTSPROTOCOLENABLE"},{"av":"AV148MiniAppEnable","fld":"vMINIAPPENABLE"},{"av":"AV147MiniAppClientURL_isCustom","fld":"vMINIAPPCLIENTURL_ISCUSTOM"},{"av":"AV152MiniAppServerURL_isCustom","fld":"vMINIAPPSERVERURL_ISCUSTOM"},{"av":"AV120APIKeyEnable","fld":"vAPIKEYENABLE"},{"av":"AV119APIKeyAllowScopeCustomization","fld":"vAPIKEYALLOWSCOPECUSTOMIZATION"},{"av":"AV36EnvironmentSecureProtocol","fld":"vENVIRONMENTSECUREPROTOCOL"},{"av":"AV7AutoRegisterAnomymousUser","fld":"vAUTOREGISTERANOMYMOUSUSER"},{"av":"Gridlanguagespaginationbar_Rowsperpageselectedvalue","ctrl":"GRIDLANGUAGESPAGINATIONBAR","prop":"RowsPerPageSelectedValue"}]""");
+         setEventMetadata("GRIDLANGUAGESPAGINATIONBAR.CHANGEROWSPERPAGE",""","oparms":[{"av":"subGridlanguages_Rows","ctrl":"GRIDLANGUAGES","prop":"Rows"},{"av":"AV140GridLanguagesCurrentPage","fld":"vGRIDLANGUAGESCURRENTPAGE","pic":"ZZZZZZZZZ9"}]}""");
+         setEventMetadata("'DOCHANGECLIENTSECRET'","""{"handler":"E300Y1","iparms":[{"av":"AV22ClientId","fld":"vCLIENTID"},{"av":"AV43Id","fld":"vID","pic":"ZZZZZZZZZZZ9"}]""");
+         setEventMetadata("'DOCHANGECLIENTSECRET'",""","oparms":[{"av":"AV43Id","fld":"vID","pic":"ZZZZZZZZZZZ9"}]}""");
+         setEventMetadata("'DOGENERATEKEYGAMREMOTE'","""{"handler":"E140Y2","iparms":[]""");
+         setEventMetadata("'DOGENERATEKEYGAMREMOTE'",""","oparms":[{"av":"AV21ClientEncryptionKey","fld":"vCLIENTENCRYPTIONKEY"}]}""");
+         setEventMetadata("'DOREVOKEALLOW'","""{"handler":"E150Y2","iparms":[{"av":"GRIDLANGUAGES_nFirstRecordOnPage"},{"av":"GRIDLANGUAGES_nEOF"},{"av":"subGridlanguages_Rows","ctrl":"GRIDLANGUAGES","prop":"Rows"},{"av":"chkavOnline.Enabled","ctrl":"vONLINE","prop":"Enabled"},{"av":"Gx_mode","fld":"vMODE","pic":"@!","hsh":true},{"av":"AV156ReturnMenuOptionsWithoutPermission","fld":"vRETURNMENUOPTIONSWITHOUTPERMISSION"},{"av":"AV61UseAbsoluteUrlByEnvironment","fld":"vUSEABSOLUTEURLBYENVIRONMENT"},{"av":"AV128ClientAuthRequestMustIncludeUserScopes","fld":"vCLIENTAUTHREQUESTMUSTINCLUDEUSERSCOPES"},{"av":"AV129ClientDoNotShareUserIDs","fld":"vCLIENTDONOTSHAREUSERIDS"},{"av":"AV17ClientAllowRemoteAuth","fld":"vCLIENTALLOWREMOTEAUTH"},{"av":"AV126ClientAllowGetUserData","fld":"vCLIENTALLOWGETUSERDATA"},{"av":"AV13ClientAllowGetUserAddData","fld":"vCLIENTALLOWGETUSERADDDATA"},{"av":"AV15ClientAllowGetUserRoles","fld":"vCLIENTALLOWGETUSERROLES"},{"av":"AV11ClientAllowGetSessionIniProp","fld":"vCLIENTALLOWGETSESSIONINIPROP"},{"av":"AV9ClientAllowGetSessionAppData","fld":"vCLIENTALLOWGETSESSIONAPPDATA"},{"av":"AV20ClientCallbackURLisCustom","fld":"vCLIENTCALLBACKURLISCUSTOM"},{"av":"AV18ClientAllowRemoteRestAuth","fld":"vCLIENTALLOWREMOTERESTAUTH"},{"av":"AV127ClientAllowGetUserDataREST","fld":"vCLIENTALLOWGETUSERDATAREST"},{"av":"AV14ClientAllowGetUserAddDataRest","fld":"vCLIENTALLOWGETUSERADDDATAREST"},{"av":"AV16ClientAllowGetUserRolesRest","fld":"vCLIENTALLOWGETUSERROLESREST"},{"av":"AV12ClientAllowGetSessionIniPropRest","fld":"vCLIENTALLOWGETSESSIONINIPROPREST"},{"av":"AV10ClientAllowGetSessionAppDataREST","fld":"vCLIENTALLOWGETSESSIONAPPDATAREST"},{"av":"AV8ClientAccessUniqueByUser","fld":"vCLIENTACCESSUNIQUEBYUSER"},{"av":"AV5AccessRequiresPermission","fld":"vACCESSREQUIRESPERMISSION"},{"av":"AV143IsAuthorizationDelegated","fld":"vISAUTHORIZATIONDELEGATED"},{"av":"AV50SSORestEnable","fld":"vSSORESTENABLE"},{"av":"AV159SSORestServerURL_isCustom","fld":"vSSORESTSERVERURL_ISCUSTOM"},{"av":"AV57STSProtocolEnable","fld":"vSTSPROTOCOLENABLE"},{"av":"AV148MiniAppEnable","fld":"vMINIAPPENABLE"},{"av":"AV147MiniAppClientURL_isCustom","fld":"vMINIAPPCLIENTURL_ISCUSTOM"},{"av":"AV152MiniAppServerURL_isCustom","fld":"vMINIAPPSERVERURL_ISCUSTOM"},{"av":"AV120APIKeyEnable","fld":"vAPIKEYENABLE"},{"av":"AV119APIKeyAllowScopeCustomization","fld":"vAPIKEYALLOWSCOPECUSTOMIZATION"},{"av":"AV36EnvironmentSecureProtocol","fld":"vENVIRONMENTSECUREPROTOCOL"},{"av":"AV7AutoRegisterAnomymousUser","fld":"vAUTOREGISTERANOMYMOUSUSER"},{"av":"AV43Id","fld":"vID","pic":"ZZZZZZZZZZZ9"}]""");
+         setEventMetadata("'DOREVOKEALLOW'",""","oparms":[{"ctrl":"BTNREVOKEALLOW","prop":"Caption"}]}""");
+         setEventMetadata("ENTER","""{"handler":"E160Y2","iparms":[{"av":"Gx_mode","fld":"vMODE","pic":"@!","hsh":true},{"av":"AV43Id","fld":"vID","pic":"ZZZZZZZZZZZ9"},{"av":"AV49Name","fld":"vNAME"},{"av":"AV30Dsc","fld":"vDSC"},{"av":"AV64Version","fld":"vVERSION"},{"av":"AV29Copyright","fld":"vCOPYRIGHT"},{"av":"AV28Company","fld":"vCOMPANY"},{"av":"AV156ReturnMenuOptionsWithoutPermission","fld":"vRETURNMENUOPTIONSWITHOUTPERMISSION"},{"av":"cmbavMainmenu"},{"av":"AV46MainMenu","fld":"vMAINMENU","pic":"ZZZZZZZZZZZ9"},{"av":"AV61UseAbsoluteUrlByEnvironment","fld":"vUSEABSOLUTEURLBYENVIRONMENT"},{"av":"AV42HomeObject","fld":"vHOMEOBJECT"},{"av":"AV66AccountActivationObject","fld":"vACCOUNTACTIVATIONOBJECT"},{"av":"AV45LogoutObject","fld":"vLOGOUTOBJECT"},{"av":"AV22ClientId","fld":"vCLIENTID"},{"av":"AV27ClientSecret","fld":"vCLIENTSECRET"},{"av":"AV128ClientAuthRequestMustIncludeUserScopes","fld":"vCLIENTAUTHREQUESTMUSTINCLUDEUSERSCOPES"},{"av":"AV129ClientDoNotShareUserIDs","fld":"vCLIENTDONOTSHAREUSERIDS"},{"av":"AV8ClientAccessUniqueByUser","fld":"vCLIENTACCESSUNIQUEBYUSER"},{"av":"AV17ClientAllowRemoteAuth","fld":"vCLIENTALLOWREMOTEAUTH"},{"av":"AV126ClientAllowGetUserData","fld":"vCLIENTALLOWGETUSERDATA"},{"av":"AV13ClientAllowGetUserAddData","fld":"vCLIENTALLOWGETUSERADDDATA"},{"av":"AV15ClientAllowGetUserRoles","fld":"vCLIENTALLOWGETUSERROLES"},{"av":"AV11ClientAllowGetSessionIniProp","fld":"vCLIENTALLOWGETSESSIONINIPROP"},{"av":"AV9ClientAllowGetSessionAppData","fld":"vCLIENTALLOWGETSESSIONAPPDATA"},{"av":"AV124ClientAllowAdditionalScope","fld":"vCLIENTALLOWADDITIONALSCOPE"},{"av":"AV24ClientLocalLoginURL","fld":"vCLIENTLOCALLOGINURL"},{"av":"AV19ClientCallbackURL","fld":"vCLIENTCALLBACKURL"},{"av":"AV20ClientCallbackURLisCustom","fld":"vCLIENTCALLBACKURLISCUSTOM"},{"av":"AV65ClientCallbackURLStateName","fld":"vCLIENTCALLBACKURLSTATENAME"},{"av":"AV23ClientImageURL","fld":"vCLIENTIMAGEURL"},{"av":"AV18ClientAllowRemoteRestAuth","fld":"vCLIENTALLOWREMOTERESTAUTH"},{"av":"AV127ClientAllowGetUserDataREST","fld":"vCLIENTALLOWGETUSERDATAREST"},{"av":"AV14ClientAllowGetUserAddDataRest","fld":"vCLIENTALLOWGETUSERADDDATAREST"},{"av":"AV16ClientAllowGetUserRolesRest","fld":"vCLIENTALLOWGETUSERROLESREST"},{"av":"AV12ClientAllowGetSessionIniPropRest","fld":"vCLIENTALLOWGETSESSIONINIPROPREST"},{"av":"AV10ClientAllowGetSessionAppDataREST","fld":"vCLIENTALLOWGETSESSIONAPPDATAREST"},{"av":"AV125ClientAllowAdditionalScopeREST","fld":"vCLIENTALLOWADDITIONALSCOPEREST"},{"av":"AV21ClientEncryptionKey","fld":"vCLIENTENCRYPTIONKEY"},{"av":"AV25ClientRepositoryGUID","fld":"vCLIENTREPOSITORYGUID"},{"av":"AV5AccessRequiresPermission","fld":"vACCESSREQUIRESPERMISSION"},{"av":"AV143IsAuthorizationDelegated","fld":"vISAUTHORIZATIONDELEGATED"},{"av":"cmbavDelegateauthorizationversion"},{"av":"AV134DelegateAuthorizationVersion","fld":"vDELEGATEAUTHORIZATIONVERSION"},{"av":"AV131DelegateAuthorizationFileName","fld":"vDELEGATEAUTHORIZATIONFILENAME"},{"av":"AV133DelegateAuthorizationPackage","fld":"vDELEGATEAUTHORIZATIONPACKAGE"},{"av":"AV130DelegateAuthorizationClassName","fld":"vDELEGATEAUTHORIZATIONCLASSNAME"},{"av":"AV132DelegateAuthorizationMethod","fld":"vDELEGATEAUTHORIZATIONMETHOD"},{"av":"AV50SSORestEnable","fld":"vSSORESTENABLE"},{"av":"cmbavSsorestmode"},{"av":"AV51SSORestMode","fld":"vSSORESTMODE"},{"av":"AV53SSORestUserAuthTypeName","fld":"vSSORESTUSERAUTHTYPENAME"},{"av":"AV52SSORestServerURL","fld":"vSSORESTSERVERURL"},{"av":"AV159SSORestServerURL_isCustom","fld":"vSSORESTSERVERURL_ISCUSTOM"},{"av":"AV160SSORestServerURL_SLO","fld":"vSSORESTSERVERURL_SLO"},{"av":"AV158SSORestServerRepositoryGUID","fld":"vSSORESTSERVERREPOSITORYGUID"},{"av":"AV157SSORestServerKey","fld":"vSSORESTSERVERKEY"},{"av":"AV57STSProtocolEnable","fld":"vSTSPROTOCOLENABLE"},{"av":"AV55STSAuthorizationUserName","fld":"vSTSAUTHORIZATIONUSERNAME"},{"av":"AV54STSAuthorizationUserGUID","fld":"vSTSAUTHORIZATIONUSERGUID"},{"av":"cmbavStsmode"},{"av":"AV56STSMode","fld":"vSTSMODE"},{"av":"AV60STSServerURL","fld":"vSTSSERVERURL"},{"av":"AV58STSServerClientPassword","fld":"vSTSSERVERCLIENTPASSWORD"},{"av":"AV59STSServerRepositoryGUID","fld":"vSTSSERVERREPOSITORYGUID"},{"av":"AV148MiniAppEnable","fld":"vMINIAPPENABLE"},{"av":"cmbavMiniappmode"},{"av":"AV149MiniAppMode","fld":"vMINIAPPMODE"},{"av":"AV146MiniAppClientURL","fld":"vMINIAPPCLIENTURL"},{"av":"AV147MiniAppClientURL_isCustom","fld":"vMINIAPPCLIENTURL_ISCUSTOM"},{"av":"AV145MiniAppClientRepositoryGUID","fld":"vMINIAPPCLIENTREPOSITORYGUID"},{"av":"cmbavMiniappuserauthenticationtypename"},{"av":"AV153MiniAppUserAuthenticationTypeName","fld":"vMINIAPPUSERAUTHENTICATIONTYPENAME"},{"av":"AV151MiniAppServerURL","fld":"vMINIAPPSERVERURL"},{"av":"AV152MiniAppServerURL_isCustom","fld":"vMINIAPPSERVERURL_ISCUSTOM"},{"av":"AV150MiniAppServerRepositoryGUID","fld":"vMINIAPPSERVERREPOSITORYGUID"},{"av":"AV120APIKeyEnable","fld":"vAPIKEYENABLE"},{"av":"AV121APIKeyTimeout","fld":"vAPIKEYTIMEOUT","pic":"ZZZZZZZZ9"},{"av":"cmbavApikeyallowonlyauthenticationtypename"},{"av":"AV118APIKeyAllowOnlyAuthenticationTypeName","fld":"vAPIKEYALLOWONLYAUTHENTICATIONTYPENAME"},{"av":"AV119APIKeyAllowScopeCustomization","fld":"vAPIKEYALLOWSCOPECUSTOMIZATION"},{"av":"AV32EnvironmentName","fld":"vENVIRONMENTNAME"},{"av":"AV36EnvironmentSecureProtocol","fld":"vENVIRONMENTSECUREPROTOCOL"},{"av":"AV31EnvironmentHost","fld":"vENVIRONMENTHOST"},{"av":"AV33EnvironmentPort","fld":"vENVIRONMENTPORT","pic":"ZZZZ9"},{"av":"AV37EnvironmentVirtualDirectory","fld":"vENVIRONMENTVIRTUALDIRECTORY"},{"av":"AV35EnvironmentProgramPackage","fld":"vENVIRONMENTPROGRAMPACKAGE"},{"av":"AV34EnvironmentProgramExtension","fld":"vENVIRONMENTPROGRAMEXTENSION"},{"av":"AV144Language","fld":"vLANGUAGE","grid":563,"hsh":true},{"av":"GRIDLANGUAGES_nFirstRecordOnPage"},{"av":"nRC_GXsfl_563","ctrl":"GRIDLANGUAGES","grid":563,"prop":"GridRC","grid":563},{"av":"AV154Online","fld":"vONLINE","grid":563}]""");
+         setEventMetadata("ENTER",""","oparms":[{"av":"AV54STSAuthorizationUserGUID","fld":"vSTSAUTHORIZATIONUSERGUID"}]}""");
+         setEventMetadata("'GENERATEKEYGAMREMOTE'","""{"handler":"E270Y2","iparms":[]""");
+         setEventMetadata("'GENERATEKEYGAMREMOTE'",""","oparms":[{"av":"AV21ClientEncryptionKey","fld":"vCLIENTENCRYPTIONKEY"}]}""");
+         setEventMetadata("'REVOKE-AUTHORIZE'","""{"handler":"E280Y2","iparms":[{"av":"AV43Id","fld":"vID","pic":"ZZZZZZZZZZZ9"}]""");
+         setEventMetadata("'REVOKE-AUTHORIZE'",""","oparms":[{"av":"AV26ClientRevoked","fld":"vCLIENTREVOKED","pic":"99/99/9999 99:99"},{"ctrl":"BTNREVOKEALLOW","prop":"Caption"},{"av":"cmbavClientaccessstatus"},{"av":"AV123ClientAccessStatus","fld":"vCLIENTACCESSSTATUS"},{"av":"edtavClientrevoked_Visible","ctrl":"vCLIENTREVOKED","prop":"Visible"}]}""");
+         setEventMetadata("'TRANSLATIONS'","""{"handler":"E290Y2","iparms":[{"av":"GRIDLANGUAGES_nFirstRecordOnPage"},{"av":"GRIDLANGUAGES_nEOF"},{"av":"subGridlanguages_Rows","ctrl":"GRIDLANGUAGES","prop":"Rows"},{"av":"chkavOnline.Enabled","ctrl":"vONLINE","prop":"Enabled"},{"av":"Gx_mode","fld":"vMODE","pic":"@!","hsh":true},{"av":"AV156ReturnMenuOptionsWithoutPermission","fld":"vRETURNMENUOPTIONSWITHOUTPERMISSION"},{"av":"AV61UseAbsoluteUrlByEnvironment","fld":"vUSEABSOLUTEURLBYENVIRONMENT"},{"av":"AV128ClientAuthRequestMustIncludeUserScopes","fld":"vCLIENTAUTHREQUESTMUSTINCLUDEUSERSCOPES"},{"av":"AV129ClientDoNotShareUserIDs","fld":"vCLIENTDONOTSHAREUSERIDS"},{"av":"AV17ClientAllowRemoteAuth","fld":"vCLIENTALLOWREMOTEAUTH"},{"av":"AV126ClientAllowGetUserData","fld":"vCLIENTALLOWGETUSERDATA"},{"av":"AV13ClientAllowGetUserAddData","fld":"vCLIENTALLOWGETUSERADDDATA"},{"av":"AV15ClientAllowGetUserRoles","fld":"vCLIENTALLOWGETUSERROLES"},{"av":"AV11ClientAllowGetSessionIniProp","fld":"vCLIENTALLOWGETSESSIONINIPROP"},{"av":"AV9ClientAllowGetSessionAppData","fld":"vCLIENTALLOWGETSESSIONAPPDATA"},{"av":"AV20ClientCallbackURLisCustom","fld":"vCLIENTCALLBACKURLISCUSTOM"},{"av":"AV18ClientAllowRemoteRestAuth","fld":"vCLIENTALLOWREMOTERESTAUTH"},{"av":"AV127ClientAllowGetUserDataREST","fld":"vCLIENTALLOWGETUSERDATAREST"},{"av":"AV14ClientAllowGetUserAddDataRest","fld":"vCLIENTALLOWGETUSERADDDATAREST"},{"av":"AV16ClientAllowGetUserRolesRest","fld":"vCLIENTALLOWGETUSERROLESREST"},{"av":"AV12ClientAllowGetSessionIniPropRest","fld":"vCLIENTALLOWGETSESSIONINIPROPREST"},{"av":"AV10ClientAllowGetSessionAppDataREST","fld":"vCLIENTALLOWGETSESSIONAPPDATAREST"},{"av":"AV8ClientAccessUniqueByUser","fld":"vCLIENTACCESSUNIQUEBYUSER"},{"av":"AV5AccessRequiresPermission","fld":"vACCESSREQUIRESPERMISSION"},{"av":"AV143IsAuthorizationDelegated","fld":"vISAUTHORIZATIONDELEGATED"},{"av":"AV50SSORestEnable","fld":"vSSORESTENABLE"},{"av":"AV159SSORestServerURL_isCustom","fld":"vSSORESTSERVERURL_ISCUSTOM"},{"av":"AV57STSProtocolEnable","fld":"vSTSPROTOCOLENABLE"},{"av":"AV148MiniAppEnable","fld":"vMINIAPPENABLE"},{"av":"AV147MiniAppClientURL_isCustom","fld":"vMINIAPPCLIENTURL_ISCUSTOM"},{"av":"AV152MiniAppServerURL_isCustom","fld":"vMINIAPPSERVERURL_ISCUSTOM"},{"av":"AV120APIKeyEnable","fld":"vAPIKEYENABLE"},{"av":"AV119APIKeyAllowScopeCustomization","fld":"vAPIKEYALLOWSCOPECUSTOMIZATION"},{"av":"AV36EnvironmentSecureProtocol","fld":"vENVIRONMENTSECUREPROTOCOL"},{"av":"AV7AutoRegisterAnomymousUser","fld":"vAUTOREGISTERANOMYMOUSUSER"},{"av":"AV49Name","fld":"vNAME"},{"av":"AV43Id","fld":"vID","pic":"ZZZZZZZZZZZ9"}]}""");
+         setEventMetadata("VSSORESTENABLE.CONTROLVALUECHANGED","""{"handler":"E170Y2","iparms":[{"av":"AV50SSORestEnable","fld":"vSSORESTENABLE"},{"av":"cmbavSsorestmode"},{"av":"AV51SSORestMode","fld":"vSSORESTMODE"}]""");
+         setEventMetadata("VSSORESTENABLE.CONTROLVALUECHANGED",""","oparms":[{"av":"divTblssorestmodeclient_Visible","ctrl":"TBLSSORESTMODECLIENT","prop":"Visible"},{"av":"divTablessorest_Visible","ctrl":"TABLESSOREST","prop":"Visible"}]}""");
+         setEventMetadata("VSSORESTMODE.CONTROLVALUECHANGED","""{"handler":"E180Y2","iparms":[{"av":"AV50SSORestEnable","fld":"vSSORESTENABLE"},{"av":"cmbavSsorestmode"},{"av":"AV51SSORestMode","fld":"vSSORESTMODE"}]""");
+         setEventMetadata("VSSORESTMODE.CONTROLVALUECHANGED",""","oparms":[{"av":"divTblssorestmodeclient_Visible","ctrl":"TBLSSORESTMODECLIENT","prop":"Visible"},{"av":"divTablessorest_Visible","ctrl":"TABLESSOREST","prop":"Visible"}]}""");
+         setEventMetadata("VMINIAPPENABLE.CONTROLVALUECHANGED","""{"handler":"E190Y2","iparms":[{"av":"AV148MiniAppEnable","fld":"vMINIAPPENABLE"},{"av":"cmbavMiniappmode"},{"av":"AV149MiniAppMode","fld":"vMINIAPPMODE"},{"av":"cmbavMiniappuserauthenticationtypename"},{"av":"AV153MiniAppUserAuthenticationTypeName","fld":"vMINIAPPUSERAUTHENTICATIONTYPENAME"}]""");
+         setEventMetadata("VMINIAPPENABLE.CONTROLVALUECHANGED",""","oparms":[{"av":"divTblminiappserver_Visible","ctrl":"TBLMINIAPPSERVER","prop":"Visible"},{"av":"divTblminiappclient_Visible","ctrl":"TBLMINIAPPCLIENT","prop":"Visible"},{"av":"divTblminiapp_Visible","ctrl":"TBLMINIAPP","prop":"Visible"},{"av":"cmbavMiniappuserauthenticationtypename"},{"av":"AV153MiniAppUserAuthenticationTypeName","fld":"vMINIAPPUSERAUTHENTICATIONTYPENAME"}]}""");
+         setEventMetadata("VMINIAPPMODE.CONTROLVALUECHANGED","""{"handler":"E200Y2","iparms":[{"av":"AV148MiniAppEnable","fld":"vMINIAPPENABLE"},{"av":"cmbavMiniappmode"},{"av":"AV149MiniAppMode","fld":"vMINIAPPMODE"},{"av":"cmbavMiniappuserauthenticationtypename"},{"av":"AV153MiniAppUserAuthenticationTypeName","fld":"vMINIAPPUSERAUTHENTICATIONTYPENAME"}]""");
+         setEventMetadata("VMINIAPPMODE.CONTROLVALUECHANGED",""","oparms":[{"av":"divTblminiappserver_Visible","ctrl":"TBLMINIAPPSERVER","prop":"Visible"},{"av":"divTblminiappclient_Visible","ctrl":"TBLMINIAPPCLIENT","prop":"Visible"},{"av":"divTblminiapp_Visible","ctrl":"TBLMINIAPP","prop":"Visible"},{"av":"cmbavMiniappuserauthenticationtypename"},{"av":"AV153MiniAppUserAuthenticationTypeName","fld":"vMINIAPPUSERAUTHENTICATIONTYPENAME"}]}""");
+         setEventMetadata("VAPIKEYENABLE.CONTROLVALUECHANGED","""{"handler":"E210Y2","iparms":[{"av":"AV120APIKeyEnable","fld":"vAPIKEYENABLE"},{"av":"cmbavApikeyallowonlyauthenticationtypename"},{"av":"AV118APIKeyAllowOnlyAuthenticationTypeName","fld":"vAPIKEYALLOWONLYAUTHENTICATIONTYPENAME"}]""");
+         setEventMetadata("VAPIKEYENABLE.CONTROLVALUECHANGED",""","oparms":[{"av":"divTblapikey_Visible","ctrl":"TBLAPIKEY","prop":"Visible"},{"av":"cmbavApikeyallowonlyauthenticationtypename"},{"av":"AV118APIKeyAllowOnlyAuthenticationTypeName","fld":"vAPIKEYALLOWONLYAUTHENTICATIONTYPENAME"}]}""");
+         setEventMetadata("VSSORESTMODE.CLICK","""{"handler":"E220Y2","iparms":[{"av":"AV50SSORestEnable","fld":"vSSORESTENABLE"},{"av":"cmbavSsorestmode"},{"av":"AV51SSORestMode","fld":"vSSORESTMODE"}]""");
+         setEventMetadata("VSSORESTMODE.CLICK",""","oparms":[{"av":"divTblssorestmodeclient_Visible","ctrl":"TBLSSORESTMODECLIENT","prop":"Visible"},{"av":"divTablessorest_Visible","ctrl":"TABLESSOREST","prop":"Visible"}]}""");
+         setEventMetadata("VSTSMODE.CLICK","""{"handler":"E110Y1","iparms":[{"av":"cmbavStsmode"},{"av":"AV56STSMode","fld":"vSTSMODE"}]""");
+         setEventMetadata("VSTSMODE.CLICK",""","oparms":[{"av":"divTablestsserverchecktoken_Visible","ctrl":"TABLESTSSERVERCHECKTOKEN","prop":"Visible"},{"av":"divTablestsclient_Visible","ctrl":"TABLESTSCLIENT","prop":"Visible"},{"av":"edtavStsserverclientpassword_Visible","ctrl":"vSTSSERVERCLIENTPASSWORD","prop":"Visible"},{"av":"divStsserverclientpassword_cell_Class","ctrl":"STSSERVERCLIENTPASSWORD_CELL","prop":"Class"},{"av":"divTablestsclientgettoken_Visible","ctrl":"TABLESTSCLIENTGETTOKEN","prop":"Visible"}]}""");
+         setEventMetadata("VSSORESTENABLE.CLICK","""{"handler":"E230Y2","iparms":[{"av":"AV50SSORestEnable","fld":"vSSORESTENABLE"},{"av":"cmbavSsorestmode"},{"av":"AV51SSORestMode","fld":"vSSORESTMODE"}]""");
+         setEventMetadata("VSSORESTENABLE.CLICK",""","oparms":[{"av":"divTblssorestmodeclient_Visible","ctrl":"TBLSSORESTMODECLIENT","prop":"Visible"},{"av":"divTablessorest_Visible","ctrl":"TABLESSOREST","prop":"Visible"}]}""");
+         setEventMetadata("VALIDV_CLIENTACCESSSTATUS","""{"handler":"Validv_Clientaccessstatus","iparms":[]}""");
+         setEventMetadata("VALIDV_DELEGATEAUTHORIZATIONVERSION","""{"handler":"Validv_Delegateauthorizationversion","iparms":[]}""");
+         setEventMetadata("VALIDV_SSORESTMODE","""{"handler":"Validv_Ssorestmode","iparms":[]}""");
+         setEventMetadata("VALIDV_STSMODE","""{"handler":"Validv_Stsmode","iparms":[]}""");
+         setEventMetadata("VALIDV_MINIAPPMODE","""{"handler":"Validv_Miniappmode","iparms":[]}""");
+         setEventMetadata("NULL","""{"handler":"Validv_Language","iparms":[]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -6173,7 +6158,6 @@ namespace GeneXus.Programs {
       private short GRIDLANGUAGES_nEOF ;
       private short nGotPars ;
       private short GxWebError ;
-      private short initialized ;
       private short gxajaxcallmode ;
       private short wbEnd ;
       private short wbStart ;
@@ -6279,7 +6263,6 @@ namespace GeneXus.Programs {
       private int idxLst ;
       private int subGridlanguages_Backcolor ;
       private int subGridlanguages_Allbackcolor ;
-      private int edtavLanguage_Visible ;
       private int subGridlanguages_Titlebackcolor ;
       private int subGridlanguages_Selectedindex ;
       private int subGridlanguages_Selectioncolor ;
@@ -6339,9 +6322,9 @@ namespace GeneXus.Programs {
       private string lblGeneral_title_Jsonclick ;
       private string divUnnamedtable9_Internalname ;
       private string edtavId_Internalname ;
+      private string TempTags ;
       private string edtavId_Jsonclick ;
       private string edtavGuid_Internalname ;
-      private string TempTags ;
       private string AV41GUID ;
       private string edtavGuid_Jsonclick ;
       private string edtavName_Internalname ;
@@ -6694,6 +6677,8 @@ namespace GeneXus.Programs {
       private GXUserControl ucDvpanel_unnamedtable8 ;
       private GXUserControl ucGridlanguagespaginationbar ;
       private GXUserControl ucGridlanguages_empowerer ;
+      private GXWebForm Form ;
+      private GXWindow AV117Window ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private string aP0_Gx_mode ;
@@ -6737,28 +6722,26 @@ namespace GeneXus.Programs {
       private GXCheckbox chkavEnvironmentsecureprotocol ;
       private GXCheckbox chkavOnline ;
       private GXCheckbox chkavAutoregisteranomymoususer ;
-      private IDataStoreProvider pr_default ;
-      private msglist BackMsgLst ;
-      private msglist LclMsgLst ;
-      private IDataStoreProvider pr_gam ;
+      private GeneXus.Programs.genexussecurity.SdtGAMApplication AV135GAMApplication ;
+      private GeneXus.Programs.genexussecurity.SdtGAMUser AV40GAMUser ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMApplicationMenu> AV162GXV1 ;
+      private GeneXus.Programs.genexussecurity.SdtGAMApplicationMenuFilter AV48MenuFilter ;
       private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV116GAMErrorCollection ;
+      private GeneXus.Programs.genexussecurity.SdtGAMApplicationMenu AV47Menu ;
       private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV39Errors ;
+      private IDataStoreProvider pr_default ;
       private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV63UserErrors ;
+      private GeneXus.Programs.genexussecurity.SdtGAMError AV38Error ;
+      private GeneXus.Programs.genexussecurity.SdtGAMAuthenticationTypeFilter AV136GAMAuthenticationTypeFilter ;
       private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMAuthenticationType> AV166GXV5 ;
+      private GeneXus.Programs.genexussecurity.SdtGAMAuthenticationType AV122AuthenticationType ;
       private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMAuthenticationType> AV168GXV7 ;
       private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMAuthenticationType> AV170GXV9 ;
       private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMApplicationLanguage> AV138GAMLanguages ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMApplicationMenu> AV162GXV1 ;
-      private GXWebForm Form ;
-      private GXWindow AV117Window ;
-      private GeneXus.Programs.genexussecurity.SdtGAMError AV38Error ;
-      private GeneXus.Programs.genexussecurity.SdtGAMAuthenticationType AV122AuthenticationType ;
-      private GeneXus.Programs.genexussecurity.SdtGAMApplication AV135GAMApplication ;
       private GeneXus.Programs.genexussecurity.SdtGAMApplicationLanguage AV137GAMLanguage ;
-      private GeneXus.Programs.genexussecurity.SdtGAMApplicationMenu AV47Menu ;
-      private GeneXus.Programs.genexussecurity.SdtGAMApplicationMenuFilter AV48MenuFilter ;
-      private GeneXus.Programs.genexussecurity.SdtGAMUser AV40GAMUser ;
-      private GeneXus.Programs.genexussecurity.SdtGAMAuthenticationTypeFilter AV136GAMAuthenticationTypeFilter ;
+      private msglist BackMsgLst ;
+      private msglist LclMsgLst ;
+      private IDataStoreProvider pr_gam ;
    }
 
    public class gamapplicationentry__gam : DataStoreHelperBase, IDataStoreHelper

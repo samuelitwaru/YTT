@@ -41,7 +41,7 @@ namespace GeneXus.Programs {
          this.AV16gxid = aP0_gxid;
          this.AV19GXM1GAMSDUpdateUser_Level_DetailSdt = new SdtGAMSDUpdateUser_Level_DetailSdt(context) ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_GXM1GAMSDUpdateUser_Level_DetailSdt=this.AV19GXM1GAMSDUpdateUser_Level_DetailSdt;
       }
 
@@ -54,30 +54,13 @@ namespace GeneXus.Programs {
       public void executeSubmit( int aP0_gxid ,
                                  out SdtGAMSDUpdateUser_Level_DetailSdt aP1_GXM1GAMSDUpdateUser_Level_DetailSdt )
       {
-         gamsdupdateuser_level_detail objgamsdupdateuser_level_detail;
-         objgamsdupdateuser_level_detail = new gamsdupdateuser_level_detail();
-         objgamsdupdateuser_level_detail.AV16gxid = aP0_gxid;
-         objgamsdupdateuser_level_detail.AV19GXM1GAMSDUpdateUser_Level_DetailSdt = new SdtGAMSDUpdateUser_Level_DetailSdt(context) ;
-         objgamsdupdateuser_level_detail.context.SetSubmitInitialConfig(context);
-         objgamsdupdateuser_level_detail.initialize();
-         Submit( executePrivateCatch,objgamsdupdateuser_level_detail);
+         this.AV16gxid = aP0_gxid;
+         this.AV19GXM1GAMSDUpdateUser_Level_DetailSdt = new SdtGAMSDUpdateUser_Level_DetailSdt(context) ;
+         SubmitImpl();
          aP1_GXM1GAMSDUpdateUser_Level_DetailSdt=this.AV19GXM1GAMSDUpdateUser_Level_DetailSdt;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((gamsdupdateuser_level_detail)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -110,21 +93,17 @@ namespace GeneXus.Programs {
          AV19GXM1GAMSDUpdateUser_Level_DetailSdt.gxTpr_Firstname = AV8FirstName;
          AV19GXM1GAMSDUpdateUser_Level_DetailSdt.gxTpr_Lastname = AV9LastName;
          AV19GXM1GAMSDUpdateUser_Level_DetailSdt.gxTpr_Userguid = AV15UserGUID;
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -149,11 +128,11 @@ namespace GeneXus.Programs {
       private string AV9LastName ;
       private string AV12UserName ;
       private string AV6Email ;
-      private SdtGAMSDUpdateUser_Level_DetailSdt aP1_GXM1GAMSDUpdateUser_Level_DetailSdt ;
       private IGxSession Gxwebsession ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV7Errors ;
-      private GeneXus.Programs.genexussecurity.SdtGAMUser AV13User ;
       private SdtGAMSDUpdateUser_Level_DetailSdt AV19GXM1GAMSDUpdateUser_Level_DetailSdt ;
+      private GeneXus.Programs.genexussecurity.SdtGAMUser AV13User ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV7Errors ;
+      private SdtGAMSDUpdateUser_Level_DetailSdt aP1_GXM1GAMSDUpdateUser_Level_DetailSdt ;
    }
 
 }

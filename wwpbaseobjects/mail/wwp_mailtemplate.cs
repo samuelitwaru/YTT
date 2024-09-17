@@ -110,7 +110,7 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
          {
             if ( context.ExposeMetadata( ) )
             {
-               Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+               Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
             }
          }
          Form.Meta.addItem("description", "Mail Template", 0) ;
@@ -153,10 +153,10 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
 
       public void execute( )
       {
-         executePrivate();
+         ExecuteImpl();
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -192,11 +192,8 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITENV( ) ;
          INITTRN( ) ;
          if ( ( GxWebError == 0 ) && ! isAjaxCallMode( ) )
@@ -228,7 +225,7 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void fix_multi_value_controls( )
@@ -841,7 +838,6 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
 
       protected void CheckExtendedTable0A10( )
       {
-         nIsDirty_10 = 0;
          Gx_BScreen = 1;
          standaloneModal( ) ;
       }
@@ -1093,7 +1089,7 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
          {
             getByPrimaryKey( ) ;
          }
-         CloseOpenCursors();
+         CloseCursors();
       }
 
       protected void btn_get( )
@@ -1598,10 +1594,10 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
          CloseStyles();
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
@@ -1764,7 +1760,7 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202481416561690", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202491613125349", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1780,7 +1776,7 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wwpbaseobjects/mail/wwp_mailtemplate.js", "?202481416561690", false, true);
+         context.AddJavascriptSource("wwpbaseobjects/mail/wwp_mailtemplate.js", "?202491613125349", false, true);
          /* End function include_jscripts */
       }
 
@@ -1921,28 +1917,24 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("ENTER","{handler:'UserMainFullajax',iparms:[{postForm:true}]");
-         setEventMetadata("ENTER",",oparms:[]}");
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[]");
-         setEventMetadata("REFRESH",",oparms:[]}");
-         setEventMetadata("AFTER TRN","{handler:'E120A2',iparms:[]");
-         setEventMetadata("AFTER TRN",",oparms:[]}");
-         setEventMetadata("VALID_WWPMAILTEMPLATENAME","{handler:'Valid_Wwpmailtemplatename',iparms:[{av:'A88WWPMailTemplateName',fld:'WWPMAILTEMPLATENAME',pic:''},{av:'Gx_mode',fld:'vMODE',pic:'@!'}]");
-         setEventMetadata("VALID_WWPMAILTEMPLATENAME",",oparms:[{av:'A89WWPMailTemplateDescription',fld:'WWPMAILTEMPLATEDESCRIPTION',pic:''},{av:'A90WWPMailTemplateSubject',fld:'WWPMAILTEMPLATESUBJECT',pic:''},{av:'A73WWPMailTemplateBody',fld:'WWPMAILTEMPLATEBODY',pic:''},{av:'A74WWPMailTemplateSenderAddress',fld:'WWPMAILTEMPLATESENDERADDRESS',pic:''},{av:'A75WWPMailTemplateSenderName',fld:'WWPMAILTEMPLATESENDERNAME',pic:''},{av:'Gx_mode',fld:'vMODE',pic:'@!'},{av:'Z88WWPMailTemplateName'},{av:'Z89WWPMailTemplateDescription'},{av:'Z90WWPMailTemplateSubject'},{av:'Z73WWPMailTemplateBody'},{av:'Z74WWPMailTemplateSenderAddress'},{av:'Z75WWPMailTemplateSenderName'},{ctrl:'BTN_DELETE',prop:'Enabled'},{ctrl:'BTN_ENTER',prop:'Enabled'}]}");
+         setEventMetadata("ENTER","""{"handler":"UserMainFullajax","iparms":[{"postForm":true}]}""");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[]}""");
+         setEventMetadata("AFTER TRN","""{"handler":"E120A2","iparms":[]}""");
+         setEventMetadata("VALID_WWPMAILTEMPLATENAME","""{"handler":"Valid_Wwpmailtemplatename","iparms":[{"av":"A88WWPMailTemplateName","fld":"WWPMAILTEMPLATENAME"},{"av":"Gx_mode","fld":"vMODE","pic":"@!"}]""");
+         setEventMetadata("VALID_WWPMAILTEMPLATENAME",""","oparms":[{"av":"A89WWPMailTemplateDescription","fld":"WWPMAILTEMPLATEDESCRIPTION"},{"av":"A90WWPMailTemplateSubject","fld":"WWPMAILTEMPLATESUBJECT"},{"av":"A73WWPMailTemplateBody","fld":"WWPMAILTEMPLATEBODY"},{"av":"A74WWPMailTemplateSenderAddress","fld":"WWPMAILTEMPLATESENDERADDRESS"},{"av":"A75WWPMailTemplateSenderName","fld":"WWPMAILTEMPLATESENDERNAME"},{"av":"Gx_mode","fld":"vMODE","pic":"@!"},{"av":"Z88WWPMailTemplateName"},{"av":"Z89WWPMailTemplateDescription"},{"av":"Z90WWPMailTemplateSubject"},{"av":"Z73WWPMailTemplateBody"},{"av":"Z74WWPMailTemplateSenderAddress"},{"av":"Z75WWPMailTemplateSenderName"},{"ctrl":"BTN_DELETE","prop":"Enabled"},{"ctrl":"BTN_ENTER","prop":"Enabled"}]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
       }
 
-      protected void CloseOpenCursors( )
+      protected override void CloseCursors( )
       {
          pr_default.close(1);
       }
@@ -1953,7 +1945,6 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
          Z88WWPMailTemplateName = "";
          Z89WWPMailTemplateDescription = "";
          Z90WWPMailTemplateSubject = "";
-         scmdbuf = "";
          gxfirstwebparm = "";
          gxfirstwebparm_bkp = "";
          GXKey = "";
@@ -2060,14 +2051,11 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
 
       private short GxWebError ;
       private short gxcookieaux ;
-      private short IsConfirmed ;
-      private short IsModified ;
       private short AnyError ;
+      private short IsModified ;
+      private short IsConfirmed ;
       private short nKeyPressed ;
-      private short initialized ;
-      private short GX_JID ;
       private short RcdFound10 ;
-      private short nIsDirty_10 ;
       private short Gx_BScreen ;
       private short gxajaxcallmode ;
       private int trnEnded ;
@@ -2089,7 +2077,6 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
       private int bttBtn_delete_Enabled ;
       private int idxLst ;
       private string sPrefix ;
-      private string scmdbuf ;
       private string gxfirstwebparm ;
       private string gxfirstwebparm_bkp ;
       private string GXKey ;
@@ -2163,6 +2150,7 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
       private string ZZ88WWPMailTemplateName ;
       private string ZZ89WWPMailTemplateDescription ;
       private string ZZ90WWPMailTemplateSubject ;
+      private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private IDataStoreProvider pr_default ;
@@ -2189,7 +2177,6 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
       private string[] T000A2_A75WWPMailTemplateSenderName ;
       private string[] T000A11_A88WWPMailTemplateName ;
       private IDataStoreProvider pr_gam ;
-      private GXWebForm Form ;
    }
 
    public class wwp_mailtemplate__gam : DataStoreHelperBase, IDataStoreHelper
@@ -2248,6 +2235,14 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
   {
      if ( def == null )
      {
+        Object[] prmT000A2;
+        prmT000A2 = new Object[] {
+        new ParDef("WWPMailTemplateName",GXType.VarChar,40,0)
+        };
+        Object[] prmT000A3;
+        prmT000A3 = new Object[] {
+        new ParDef("WWPMailTemplateName",GXType.VarChar,40,0)
+        };
         Object[] prmT000A4;
         prmT000A4 = new Object[] {
         new ParDef("WWPMailTemplateName",GXType.VarChar,40,0)
@@ -2256,20 +2251,12 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
         prmT000A5 = new Object[] {
         new ParDef("WWPMailTemplateName",GXType.VarChar,40,0)
         };
-        Object[] prmT000A3;
-        prmT000A3 = new Object[] {
-        new ParDef("WWPMailTemplateName",GXType.VarChar,40,0)
-        };
         Object[] prmT000A6;
         prmT000A6 = new Object[] {
         new ParDef("WWPMailTemplateName",GXType.VarChar,40,0)
         };
         Object[] prmT000A7;
         prmT000A7 = new Object[] {
-        new ParDef("WWPMailTemplateName",GXType.VarChar,40,0)
-        };
-        Object[] prmT000A2;
-        prmT000A2 = new Object[] {
         new ParDef("WWPMailTemplateName",GXType.VarChar,40,0)
         };
         Object[] prmT000A8;

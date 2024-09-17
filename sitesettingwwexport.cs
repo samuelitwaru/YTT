@@ -49,7 +49,7 @@ namespace GeneXus.Programs {
          this.AV12Filename = "" ;
          this.AV13ErrorMessage = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_Filename=this.AV12Filename;
          aP1_ErrorMessage=this.AV13ErrorMessage;
       }
@@ -63,31 +63,14 @@ namespace GeneXus.Programs {
       public void executeSubmit( out string aP0_Filename ,
                                  out string aP1_ErrorMessage )
       {
-         sitesettingwwexport objsitesettingwwexport;
-         objsitesettingwwexport = new sitesettingwwexport();
-         objsitesettingwwexport.AV12Filename = "" ;
-         objsitesettingwwexport.AV13ErrorMessage = "" ;
-         objsitesettingwwexport.context.SetSubmitInitialConfig(context);
-         objsitesettingwwexport.initialize();
-         Submit( executePrivateCatch,objsitesettingwwexport);
+         this.AV12Filename = "" ;
+         this.AV13ErrorMessage = "" ;
+         SubmitImpl();
          aP0_Filename=this.AV12Filename;
          aP1_ErrorMessage=this.AV13ErrorMessage;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((sitesettingwwexport)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -96,7 +79,7 @@ namespace GeneXus.Programs {
          S111 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          AV14CellRow = 1;
@@ -105,38 +88,38 @@ namespace GeneXus.Programs {
          S201 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          /* Execute user subroutine: 'WRITEFILTERS' */
          S131 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          /* Execute user subroutine: 'WRITECOLUMNTITLES' */
          S141 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          /* Execute user subroutine: 'WRITEDATA' */
          S161 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          /* Execute user subroutine: 'CLOSEDOCUMENT' */
          S191 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void S111( )
@@ -423,16 +406,12 @@ namespace GeneXus.Programs {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -447,7 +426,6 @@ namespace GeneXus.Programs {
          AV24ColumnsSelector = new GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector(context);
          AV26ColumnsSelector_Column = new GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector_Column(context);
          AV43Sitesettingwwds_1_filterfulltext = "";
-         scmdbuf = "";
          lV43Sitesettingwwds_1_filterfulltext = "";
          P00BC2_A161IsLogHourOpen = new bool[] {false} ;
          P00BC2_A100CompanyId = new long[1] ;
@@ -489,7 +467,6 @@ namespace GeneXus.Programs {
       private long AV49Udparg7 ;
       private long A160SiteSettingId ;
       private long A100CompanyId ;
-      private string scmdbuf ;
       private string GXt_char1 ;
       private bool returnInSub ;
       private bool A161IsLogHourOpen ;
@@ -502,21 +479,21 @@ namespace GeneXus.Programs {
       private string AV43Sitesettingwwds_1_filterfulltext ;
       private string lV43Sitesettingwwds_1_filterfulltext ;
       private IGxSession AV20Session ;
+      private ExcelDocumentI AV11ExcelDocument ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV9WWPContext ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector AV24ColumnsSelector ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector_Column AV26ColumnsSelector_Column ;
       private IDataStoreProvider pr_default ;
       private bool[] P00BC2_A161IsLogHourOpen ;
       private long[] P00BC2_A100CompanyId ;
       private long[] P00BC2_A160SiteSettingId ;
-      private string aP0_Filename ;
-      private string aP1_ErrorMessage ;
-      private ExcelDocumentI AV11ExcelDocument ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV9WWPContext ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector AV25ColumnsSelectorAux ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState AV22GridState ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue AV23GridStateFilterValue ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector AV24ColumnsSelector ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector AV25ColumnsSelectorAux ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector_Column AV26ColumnsSelector_Column ;
+      private string aP0_Filename ;
+      private string aP1_ErrorMessage ;
    }
 
    public class sitesettingwwexport__default : DataStoreHelperBase, IDataStoreHelper

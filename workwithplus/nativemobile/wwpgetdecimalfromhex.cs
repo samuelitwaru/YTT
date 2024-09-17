@@ -176,6 +176,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
                }
                if ( StringUtil.StringSearch( GXSoapXMLReader.Name, "Body", 1) > 0 )
                {
+                  this.SetPrefixesFromReader( GXSoapXMLReader);
                   if (true) break;
                }
                GXSoapError = GXSoapXMLReader.Read();
@@ -268,7 +269,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          }
          if ( currSoapErr == 0 )
          {
-            executePrivate();
+            ExecutePrivate();
          }
          context.CloseConnections();
          sIncludeState = true;
@@ -325,7 +326,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          this.AV12HexadecimalValueIn = aP0_HexadecimalValueIn;
          this.AV9DecimalValue = 0 ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_DecimalValue=this.AV9DecimalValue;
       }
 
@@ -338,30 +339,13 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
       public void executeSubmit( string aP0_HexadecimalValueIn ,
                                  out int aP1_DecimalValue )
       {
-         wwpgetdecimalfromhex objwwpgetdecimalfromhex;
-         objwwpgetdecimalfromhex = new wwpgetdecimalfromhex();
-         objwwpgetdecimalfromhex.AV12HexadecimalValueIn = aP0_HexadecimalValueIn;
-         objwwpgetdecimalfromhex.AV9DecimalValue = 0 ;
-         objwwpgetdecimalfromhex.context.SetSubmitInitialConfig(context);
-         objwwpgetdecimalfromhex.initialize();
-         Submit( executePrivateCatch,objwwpgetdecimalfromhex);
+         this.AV12HexadecimalValueIn = aP0_HexadecimalValueIn;
+         this.AV9DecimalValue = 0 ;
+         SubmitImpl();
          aP1_DecimalValue=this.AV9DecimalValue;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwpgetdecimalfromhex)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -386,22 +370,18 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
             context.Redirect( context.wjLoc );
             context.wjLoc = "";
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          base.cleanup();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )

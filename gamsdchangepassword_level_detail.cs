@@ -41,7 +41,7 @@ namespace GeneXus.Programs {
          this.AV15gxid = aP0_gxid;
          this.AV18GXM1GAMSDChangePassword_Level_DetailSdt = new SdtGAMSDChangePassword_Level_DetailSdt(context) ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_GXM1GAMSDChangePassword_Level_DetailSdt=this.AV18GXM1GAMSDChangePassword_Level_DetailSdt;
       }
 
@@ -54,30 +54,13 @@ namespace GeneXus.Programs {
       public void executeSubmit( int aP0_gxid ,
                                  out SdtGAMSDChangePassword_Level_DetailSdt aP1_GXM1GAMSDChangePassword_Level_DetailSdt )
       {
-         gamsdchangepassword_level_detail objgamsdchangepassword_level_detail;
-         objgamsdchangepassword_level_detail = new gamsdchangepassword_level_detail();
-         objgamsdchangepassword_level_detail.AV15gxid = aP0_gxid;
-         objgamsdchangepassword_level_detail.AV18GXM1GAMSDChangePassword_Level_DetailSdt = new SdtGAMSDChangePassword_Level_DetailSdt(context) ;
-         objgamsdchangepassword_level_detail.context.SetSubmitInitialConfig(context);
-         objgamsdchangepassword_level_detail.initialize();
-         Submit( executePrivateCatch,objgamsdchangepassword_level_detail);
+         this.AV15gxid = aP0_gxid;
+         this.AV18GXM1GAMSDChangePassword_Level_DetailSdt = new SdtGAMSDChangePassword_Level_DetailSdt(context) ;
+         SubmitImpl();
          aP1_GXM1GAMSDChangePassword_Level_DetailSdt=this.AV18GXM1GAMSDChangePassword_Level_DetailSdt;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((gamsdchangepassword_level_detail)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -100,7 +83,7 @@ namespace GeneXus.Programs {
                }
                else
                {
-                  this.cleanup();
+                  cleanup();
                   if (true) return;
                }
             }
@@ -118,21 +101,17 @@ namespace GeneXus.Programs {
          AV18GXM1GAMSDChangePassword_Level_DetailSdt.gxTpr_Userpasswordnew = AV7UserPasswordNew;
          AV18GXM1GAMSDChangePassword_Level_DetailSdt.gxTpr_Userpasswordnewconf = AV8UserPasswordNewConf;
          AV18GXM1GAMSDChangePassword_Level_DetailSdt.gxTpr_Ispasswordexpires = AV14isPasswordExpires;
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -155,10 +134,10 @@ namespace GeneXus.Programs {
       private string AV8UserPasswordNewConf ;
       private bool AV14isPasswordExpires ;
       private string AV5UserName ;
-      private SdtGAMSDChangePassword_Level_DetailSdt aP1_GXM1GAMSDChangePassword_Level_DetailSdt ;
       private IGxSession Gxwebsession ;
-      private GeneXus.Programs.genexussecurity.SdtGAMUser AV10User ;
       private SdtGAMSDChangePassword_Level_DetailSdt AV18GXM1GAMSDChangePassword_Level_DetailSdt ;
+      private GeneXus.Programs.genexussecurity.SdtGAMUser AV10User ;
+      private SdtGAMSDChangePassword_Level_DetailSdt aP1_GXM1GAMSDChangePassword_Level_DetailSdt ;
    }
 
 }

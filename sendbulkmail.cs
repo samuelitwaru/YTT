@@ -51,7 +51,7 @@ namespace GeneXus.Programs {
          this.AV12Subject = aP1_Subject;
          this.AV8Body = aP2_Body;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_Subject=this.AV12Subject;
          aP2_Body=this.AV8Body;
       }
@@ -67,32 +67,15 @@ namespace GeneXus.Programs {
                                  ref string aP1_Subject ,
                                  ref string aP2_Body )
       {
-         sendbulkmail objsendbulkmail;
-         objsendbulkmail = new sendbulkmail();
-         objsendbulkmail.AV17emails = aP0_emails;
-         objsendbulkmail.AV12Subject = aP1_Subject;
-         objsendbulkmail.AV8Body = aP2_Body;
-         objsendbulkmail.context.SetSubmitInitialConfig(context);
-         objsendbulkmail.initialize();
-         Submit( executePrivateCatch,objsendbulkmail);
+         this.AV17emails = aP0_emails;
+         this.AV12Subject = aP1_Subject;
+         this.AV8Body = aP2_Body;
+         SubmitImpl();
          aP1_Subject=this.AV12Subject;
          aP2_Body=this.AV8Body;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((sendbulkmail)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -159,21 +142,17 @@ namespace GeneXus.Programs {
          {
             GX_msglist.addItem(AV11SMTPSession.ErrDescription);
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -183,7 +162,6 @@ namespace GeneXus.Programs {
          AV13email = "";
          AV14name = "";
          AV9MailMessage = new GeneXus.Mail.GXMailMessage();
-         scmdbuf = "";
          P00AW2_A109EmployeeEmail = new string[] {""} ;
          P00AW2_A100CompanyId = new long[1] ;
          P00AW2_A106EmployeeId = new long[1] ;
@@ -215,15 +193,19 @@ namespace GeneXus.Programs {
       private long AV16EmployeeCompanyId ;
       private string AV12Subject ;
       private string AV14name ;
-      private string scmdbuf ;
       private string A148EmployeeName ;
       private bool A112EmployeeIsActive ;
       private bool A110EmployeeIsManager ;
       private string AV8Body ;
       private string AV13email ;
       private string A109EmployeeEmail ;
+      private GeneXus.Mail.GXMailMessage AV9MailMessage ;
+      private GeneXus.Mail.GXMailRecipient AV10MailRecipient ;
+      private GeneXus.Mail.GXMailRecipient AV15ReplyMailRecipient ;
+      private GeneXus.Mail.GXSMTPSession AV11SMTPSession ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GxSimpleCollection<string> AV17emails ;
       private string aP1_Subject ;
       private string aP2_Body ;
       private IDataStoreProvider pr_default ;
@@ -236,11 +218,6 @@ namespace GeneXus.Programs {
       private string[] P00AW3_A109EmployeeEmail ;
       private string[] P00AW3_A148EmployeeName ;
       private long[] P00AW3_A106EmployeeId ;
-      private GeneXus.Mail.GXMailMessage AV9MailMessage ;
-      private GeneXus.Mail.GXMailRecipient AV10MailRecipient ;
-      private GeneXus.Mail.GXMailRecipient AV15ReplyMailRecipient ;
-      private GeneXus.Mail.GXSMTPSession AV11SMTPSession ;
-      private GxSimpleCollection<string> AV17emails ;
    }
 
    public class sendbulkmail__default : DataStoreHelperBase, IDataStoreHelper

@@ -44,7 +44,7 @@ namespace GeneXus.Programs {
          this.AV10LinkURL = aP1_LinkURL;
          this.AV12Messages = new GXBaseCollection<GeneXus.Utils.SdtMessages_Message>( context, "Message", "GeneXus") ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP2_Messages=this.AV12Messages;
       }
 
@@ -59,31 +59,14 @@ namespace GeneXus.Programs {
                                  string aP1_LinkURL ,
                                  out GXBaseCollection<GeneXus.Utils.SdtMessages_Message> aP2_Messages )
       {
-         gam_checkuseractivationmethod objgam_checkuseractivationmethod;
-         objgam_checkuseractivationmethod = new gam_checkuseractivationmethod();
-         objgam_checkuseractivationmethod.AV15UserGUID = aP0_UserGUID;
-         objgam_checkuseractivationmethod.AV10LinkURL = aP1_LinkURL;
-         objgam_checkuseractivationmethod.AV12Messages = new GXBaseCollection<GeneXus.Utils.SdtMessages_Message>( context, "Message", "GeneXus") ;
-         objgam_checkuseractivationmethod.context.SetSubmitInitialConfig(context);
-         objgam_checkuseractivationmethod.initialize();
-         Submit( executePrivateCatch,objgam_checkuseractivationmethod);
+         this.AV15UserGUID = aP0_UserGUID;
+         this.AV10LinkURL = aP1_LinkURL;
+         this.AV12Messages = new GXBaseCollection<GeneXus.Utils.SdtMessages_Message>( context, "Message", "GeneXus") ;
+         SubmitImpl();
          aP2_Messages=this.AV12Messages;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((gam_checkuseractivationmethod)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -91,8 +74,8 @@ namespace GeneXus.Programs {
          if ( StringUtil.StrCmp(AV13Repository.gxTpr_Useractivationmethod, "U") == 0 )
          {
             AV14User.load( AV15UserGUID);
-            AV14User.sendemailtoactivateaccount( AV8Application,  AV10LinkURL, out  AV16Errors);
-            if ( AV16Errors.Count == 0 )
+            AV14User.sendemailtoactivateaccount( AV8Application,  AV10LinkURL, out  AV18Errors);
+            if ( AV18Errors.Count == 0 )
             {
                AV11Message = new GeneXus.Utils.SdtMessages_Message(context);
                AV11Message.gxTpr_Type = 0;
@@ -101,7 +84,7 @@ namespace GeneXus.Programs {
             }
             else
             {
-               new gam_converterrorstomessages(context ).execute(  AV16Errors, out  AV12Messages) ;
+               new gam_converterrorstomessages(context ).execute(  AV18Errors, out  AV12Messages) ;
             }
          }
          else if ( StringUtil.StrCmp(AV13Repository.gxTpr_Useractivationmethod, "D") == 0 )
@@ -111,21 +94,17 @@ namespace GeneXus.Programs {
             AV11Message.gxTpr_Description = "The user was created successfully!!, you must wait for confirmation from the administrator.";
             AV12Messages.Add(AV11Message, 0);
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -134,20 +113,20 @@ namespace GeneXus.Programs {
          AV13Repository = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context);
          AV14User = new GeneXus.Programs.genexussecurity.SdtGAMUser(context);
          AV8Application = new GeneXus.Programs.genexussecurity.SdtGAMApplication(context);
-         AV16Errors = new GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError>( context, "GeneXus.Programs.genexussecurity.SdtGAMError", "GeneXus.Programs");
+         AV18Errors = new GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError>( context, "GeneXus.Programs.genexussecurity.SdtGAMError", "GeneXus.Programs");
          AV11Message = new GeneXus.Utils.SdtMessages_Message(context);
          /* GeneXus formulas. */
       }
 
       private string AV15UserGUID ;
       private string AV10LinkURL ;
-      private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> aP2_Messages ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV16Errors ;
       private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> AV12Messages ;
-      private GeneXus.Programs.genexussecurity.SdtGAMApplication AV8Application ;
-      private GeneXus.Programs.genexussecurity.SdtGAMUser AV14User ;
-      private GeneXus.Utils.SdtMessages_Message AV11Message ;
       private GeneXus.Programs.genexussecurity.SdtGAMRepository AV13Repository ;
+      private GeneXus.Programs.genexussecurity.SdtGAMUser AV14User ;
+      private GeneXus.Programs.genexussecurity.SdtGAMApplication AV8Application ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV18Errors ;
+      private GeneXus.Utils.SdtMessages_Message AV11Message ;
+      private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> aP2_Messages ;
    }
 
 }

@@ -48,7 +48,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          this.AV9HasAdvancedFilters = aP3_HasAdvancedFilters;
          this.AV10ManageFiltersData = new GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsData_Item>( context, "Item", "") ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP4_ManageFiltersData=this.AV10ManageFiltersData;
       }
 
@@ -67,33 +67,16 @@ namespace GeneXus.Programs.wwpbaseobjects {
                                  bool aP3_HasAdvancedFilters ,
                                  out GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsData_Item> aP4_ManageFiltersData )
       {
-         wwp_managefiltersloadsavedfilters objwwp_managefiltersloadsavedfilters;
-         objwwp_managefiltersloadsavedfilters = new wwp_managefiltersloadsavedfilters();
-         objwwp_managefiltersloadsavedfilters.AV8Key = aP0_Key;
-         objwwp_managefiltersloadsavedfilters.AV14CleanJSFormat = aP1_CleanJSFormat;
-         objwwp_managefiltersloadsavedfilters.AV15TableInternalName = aP2_TableInternalName;
-         objwwp_managefiltersloadsavedfilters.AV9HasAdvancedFilters = aP3_HasAdvancedFilters;
-         objwwp_managefiltersloadsavedfilters.AV10ManageFiltersData = new GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsData_Item>( context, "Item", "") ;
-         objwwp_managefiltersloadsavedfilters.context.SetSubmitInitialConfig(context);
-         objwwp_managefiltersloadsavedfilters.initialize();
-         Submit( executePrivateCatch,objwwp_managefiltersloadsavedfilters);
+         this.AV8Key = aP0_Key;
+         this.AV14CleanJSFormat = aP1_CleanJSFormat;
+         this.AV15TableInternalName = aP2_TableInternalName;
+         this.AV9HasAdvancedFilters = aP3_HasAdvancedFilters;
+         this.AV10ManageFiltersData = new GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsData_Item>( context, "Item", "") ;
+         SubmitImpl();
          aP4_ManageFiltersData=this.AV10ManageFiltersData;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwp_managefiltersloadsavedfilters)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -159,21 +142,17 @@ namespace GeneXus.Programs.wwpbaseobjects {
             AV11ManageFiltersDataItem.gxTpr_Jsonclickevent = "";
             AV10ManageFiltersData.Add(AV11ManageFiltersDataItem, 0);
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -190,11 +169,11 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private string AV8Key ;
       private string AV14CleanJSFormat ;
       private string AV15TableInternalName ;
-      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsData_Item> aP4_ManageFiltersData ;
       private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsData_Item> AV10ManageFiltersData ;
-      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtGridStateCollection_Item> AV13ManageFiltersItems ;
       private GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsData_Item AV11ManageFiltersDataItem ;
+      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtGridStateCollection_Item> AV13ManageFiltersItems ;
       private GeneXus.Programs.wwpbaseobjects.SdtGridStateCollection_Item AV12ManageFiltersItem ;
+      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsData_Item> aP4_ManageFiltersData ;
    }
 
 }

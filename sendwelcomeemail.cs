@@ -52,7 +52,7 @@ namespace GeneXus.Programs {
          this.AV12Password = aP1_Password;
          this.AV20successMessage = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP2_successMessage=this.AV20successMessage;
       }
 
@@ -67,31 +67,14 @@ namespace GeneXus.Programs {
                                  string aP1_Password ,
                                  out string aP2_successMessage )
       {
-         sendwelcomeemail objsendwelcomeemail;
-         objsendwelcomeemail = new sendwelcomeemail();
-         objsendwelcomeemail.A106EmployeeId = aP0_EmployeeId;
-         objsendwelcomeemail.AV12Password = aP1_Password;
-         objsendwelcomeemail.AV20successMessage = "" ;
-         objsendwelcomeemail.context.SetSubmitInitialConfig(context);
-         objsendwelcomeemail.initialize();
-         Submit( executePrivateCatch,objsendwelcomeemail);
+         this.A106EmployeeId = aP0_EmployeeId;
+         this.AV12Password = aP1_Password;
+         this.AV20successMessage = "" ;
+         SubmitImpl();
          aP2_successMessage=this.AV20successMessage;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((sendwelcomeemail)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -129,21 +112,17 @@ namespace GeneXus.Programs {
                GX_msglist.addItem(AV13SMTPSession.ErrDescription);
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -173,19 +152,19 @@ namespace GeneXus.Programs {
       private string AV12Password ;
       private string AV17ActivactionKey ;
       private string AV20successMessage ;
-      private IGxDataStore dsGAM ;
-      private IGxDataStore dsDefault ;
-      private IDataStoreProvider pr_default ;
-      private string aP2_successMessage ;
-      private IDataStoreProvider pr_gam ;
       private GxHttpRequest AV21HttpRequest ;
       private GeneXus.Mail.GXMailMessage AV9MailMessage ;
       private GeneXus.Mail.GXMailRecipient AV10MailRecipient ;
       private GeneXus.Mail.GXSMTPSession AV13SMTPSession ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV16Errors ;
+      private IGxDataStore dsGAM ;
+      private IGxDataStore dsDefault ;
+      private GeneXus.Programs.genexussecurity.SdtGAMRepository AV18Repository ;
       private SdtEmployee AV8Employee ;
       private GeneXus.Programs.genexussecurity.SdtGAMUser AV19User ;
-      private GeneXus.Programs.genexussecurity.SdtGAMRepository AV18Repository ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV16Errors ;
+      private IDataStoreProvider pr_default ;
+      private string aP2_successMessage ;
+      private IDataStoreProvider pr_gam ;
    }
 
    public class sendwelcomeemail__gam : DataStoreHelperBase, IDataStoreHelper

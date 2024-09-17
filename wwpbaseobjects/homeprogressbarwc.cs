@@ -50,10 +50,10 @@ namespace GeneXus.Programs.wwpbaseobjects {
          this.AV5OptionTitle = aP0_OptionTitle;
          this.AV9BarDescription = aP1_BarDescription;
          this.AV6Percentage = aP2_Percentage;
-         executePrivate();
+         ExecuteImpl();
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -168,11 +168,8 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITWEB( ) ;
          if ( ! isAjaxCallMode( ) )
          {
@@ -218,7 +215,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void RenderHtmlHeaders( )
@@ -249,10 +246,10 @@ namespace GeneXus.Programs.wwpbaseobjects {
          }
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
@@ -466,7 +463,8 @@ namespace GeneXus.Programs.wwpbaseobjects {
             /* Attribute/Variable Label */
             GxWebStd.gx_label_element( context, edtavOptiontitle_Internalname, "Option Title", "col-sm-3 AttributeCardsMenuTitleLabel", 0, true, "");
             /* Single line edit */
-            GxWebStd.gx_single_line_edit( context, edtavOptiontitle_Internalname, AV5OptionTitle, StringUtil.RTrim( context.localUtil.Format( AV5OptionTitle, "")), "", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavOptiontitle_Jsonclick, 0, "AttributeCardsMenuTitle", "", "", "", "", 1, edtavOptiontitle_Enabled, 0, "text", "", 40, "chr", 1, "row", 40, 0, 0, 0, 0, -1, -1, false, "", "start", true, "", "HLP_WWPBaseObjects/HomeProgressBarWC.htm");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 16,'" + sPrefix + "',false,'',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtavOptiontitle_Internalname, AV5OptionTitle, StringUtil.RTrim( context.localUtil.Format( AV5OptionTitle, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,16);\"", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavOptiontitle_Jsonclick, 0, "AttributeCardsMenuTitle", "", "", "", "", 1, edtavOptiontitle_Enabled, 0, "text", "", 40, "chr", 1, "row", 40, 0, 0, 0, 0, -1, -1, false, "", "start", true, "", "HLP_WWPBaseObjects/HomeProgressBarWC.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "Center", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -490,7 +488,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
             {
                if ( context.ExposeMetadata( ) )
                {
-                  Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+                  Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
                }
             }
             Form.Meta.addItem("description", "Home Progress Bar WC", 0) ;
@@ -850,7 +848,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          PA0R2( ) ;
          WS0R2( ) ;
          WE0R2( ) ;
-         this.cleanup();
+         cleanup();
          context.SetWrapped(false);
          SaveComponentMsgList(sPrefix);
          context.GX_msglist = BackMsgLst;
@@ -1067,7 +1065,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202481416555814", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024916131159", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1085,7 +1083,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       {
          if ( nGXWrapped != 1 )
          {
-            context.AddJavascriptSource("wwpbaseobjects/homeprogressbarwc.js", "?202481416555815", false, true);
+            context.AddJavascriptSource("wwpbaseobjects/homeprogressbarwc.js", "?2024916131159", false, true);
             context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
             context.AddJavascriptSource("DVelop/Bootstrap/DVProgressIndicator/DVProgressIndicatorRender.js", "", false, true);
          }
@@ -1143,23 +1141,17 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[]");
-         setEventMetadata("REFRESH",",oparms:[]}");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -1176,6 +1168,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          GX_FocusControl = "";
          lblDescriptionprogressbar1_Jsonclick = "";
          ucProgressbar1 = new GXUserControl();
+         TempTags = "";
          Form = new GXWebForm();
          sXEvt = "";
          sEvt = "";
@@ -1196,7 +1189,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private short nGotPars ;
       private short GxWebError ;
       private short nDynComponent ;
-      private short initialized ;
       private short nGXWrapped ;
       private short wbEnd ;
       private short wbStart ;
@@ -1226,6 +1218,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private string lblDescriptionprogressbar1_Jsonclick ;
       private string Progressbar1_Caption ;
       private string Progressbar1_Internalname ;
+      private string TempTags ;
       private string edtavOptiontitle_Jsonclick ;
       private string sXEvt ;
       private string sEvt ;

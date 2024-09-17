@@ -49,7 +49,7 @@ namespace GeneXus.Programs {
          this.AV3DateTimeFormat = aP1_DateTimeFormat;
          this.AV4FinalDateString = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP2_FinalDateString=this.AV4FinalDateString;
       }
 
@@ -64,31 +64,14 @@ namespace GeneXus.Programs {
                                  string aP1_DateTimeFormat ,
                                  out string aP2_FinalDateString )
       {
-         formatdatetime objformatdatetime;
-         objformatdatetime = new formatdatetime();
-         objformatdatetime.AV2Date = aP0_Date;
-         objformatdatetime.AV3DateTimeFormat = aP1_DateTimeFormat;
-         objformatdatetime.AV4FinalDateString = "" ;
-         objformatdatetime.context.SetSubmitInitialConfig(context);
-         objformatdatetime.initialize();
-         Submit( executePrivateCatch,objformatdatetime);
+         this.AV2Date = aP0_Date;
+         this.AV3DateTimeFormat = aP1_DateTimeFormat;
+         this.AV4FinalDateString = "" ;
+         SubmitImpl();
          aP2_FinalDateString=this.AV4FinalDateString;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((formatdatetime)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -98,20 +81,16 @@ namespace GeneXus.Programs {
          {
             AV4FinalDateString = (string)(args[2]) ;
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )

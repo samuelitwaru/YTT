@@ -54,7 +54,7 @@ namespace GeneXus.Programs {
          this.AV11GAMUserGUID = "" ;
          this.AV12Password = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP3_GAMUserGUID=this.AV11GAMUserGUID;
          aP4_Password=this.AV12Password;
       }
@@ -74,34 +74,17 @@ namespace GeneXus.Programs {
                                  out string aP3_GAMUserGUID ,
                                  out string aP4_Password )
       {
-         createemployeeaccount objcreateemployeeaccount;
-         objcreateemployeeaccount = new createemployeeaccount();
-         objcreateemployeeaccount.A109EmployeeEmail = aP0_EmployeeEmail;
-         objcreateemployeeaccount.A107EmployeeFirstName = aP1_EmployeeFirstName;
-         objcreateemployeeaccount.A108EmployeeLastName = aP2_EmployeeLastName;
-         objcreateemployeeaccount.AV11GAMUserGUID = "" ;
-         objcreateemployeeaccount.AV12Password = "" ;
-         objcreateemployeeaccount.context.SetSubmitInitialConfig(context);
-         objcreateemployeeaccount.initialize();
-         Submit( executePrivateCatch,objcreateemployeeaccount);
+         this.A109EmployeeEmail = aP0_EmployeeEmail;
+         this.A107EmployeeFirstName = aP1_EmployeeFirstName;
+         this.A108EmployeeLastName = aP2_EmployeeLastName;
+         this.AV11GAMUserGUID = "" ;
+         this.AV12Password = "" ;
+         SubmitImpl();
          aP3_GAMUserGUID=this.AV11GAMUserGUID;
          aP4_Password=this.AV12Password;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((createemployeeaccount)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -131,21 +114,17 @@ namespace GeneXus.Programs {
          {
             AV8GAMErrorCollection = AV10GAMUser.geterrors();
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -175,13 +154,13 @@ namespace GeneXus.Programs {
       private string AV11GAMUserGUID ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GeneXus.Programs.genexussecurity.SdtGAMUser AV10GAMUser ;
+      private SdtEmployee AV9Employee ;
       private IDataStoreProvider pr_default ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV8GAMErrorCollection ;
       private string aP3_GAMUserGUID ;
       private string aP4_Password ;
       private IDataStoreProvider pr_gam ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV8GAMErrorCollection ;
-      private SdtEmployee AV9Employee ;
-      private GeneXus.Programs.genexussecurity.SdtGAMUser AV10GAMUser ;
    }
 
    public class createemployeeaccount__gam : DataStoreHelperBase, IDataStoreHelper

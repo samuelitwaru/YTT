@@ -59,7 +59,7 @@ namespace GeneXus.Programs {
          this.AV29gxid = aP1_gxid;
          this.AV35GXM1WorkLogsGridCollectionPanel_Level_DetailSdt = new SdtWorkLogsGridCollectionPanel_Level_DetailSdt(context) ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP2_GXM1WorkLogsGridCollectionPanel_Level_DetailSdt=this.AV35GXM1WorkLogsGridCollectionPanel_Level_DetailSdt;
       }
 
@@ -74,31 +74,14 @@ namespace GeneXus.Programs {
                                  int aP1_gxid ,
                                  out SdtWorkLogsGridCollectionPanel_Level_DetailSdt aP2_GXM1WorkLogsGridCollectionPanel_Level_DetailSdt )
       {
-         worklogsgridcollectionpanel_level_detail objworklogsgridcollectionpanel_level_detail;
-         objworklogsgridcollectionpanel_level_detail = new worklogsgridcollectionpanel_level_detail();
-         objworklogsgridcollectionpanel_level_detail.AV10LogDate = aP0_LogDate;
-         objworklogsgridcollectionpanel_level_detail.AV29gxid = aP1_gxid;
-         objworklogsgridcollectionpanel_level_detail.AV35GXM1WorkLogsGridCollectionPanel_Level_DetailSdt = new SdtWorkLogsGridCollectionPanel_Level_DetailSdt(context) ;
-         objworklogsgridcollectionpanel_level_detail.context.SetSubmitInitialConfig(context);
-         objworklogsgridcollectionpanel_level_detail.initialize();
-         Submit( executePrivateCatch,objworklogsgridcollectionpanel_level_detail);
+         this.AV10LogDate = aP0_LogDate;
+         this.AV29gxid = aP1_gxid;
+         this.AV35GXM1WorkLogsGridCollectionPanel_Level_DetailSdt = new SdtWorkLogsGridCollectionPanel_Level_DetailSdt(context) ;
+         SubmitImpl();
          aP2_GXM1WorkLogsGridCollectionPanel_Level_DetailSdt=this.AV35GXM1WorkLogsGridCollectionPanel_Level_DetailSdt;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((worklogsgridcollectionpanel_level_detail)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -114,7 +97,7 @@ namespace GeneXus.Programs {
             S121 ();
             if ( returnInSub )
             {
-               this.cleanup();
+               cleanup();
                if (true) return;
             }
             Gxwebsession.Set(Gxids+"gxvar_Worklogssdts", AV16WorkLogsSDTs.ToJSonString(false));
@@ -137,7 +120,7 @@ namespace GeneXus.Programs {
          S111 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          Gxdynpropparms = (GxSimpleCollection<string>)(new GxSimpleCollection<string>());
@@ -146,7 +129,7 @@ namespace GeneXus.Programs {
          S121 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          AV37GXV1 = 1;
@@ -166,7 +149,7 @@ namespace GeneXus.Programs {
          AV35GXM1WorkLogsGridCollectionPanel_Level_DetailSdt.gxTpr_Gxdyncall = "[ "+Gxdyncall+" ]";
          Gxdyncall = "";
          Gxwebsession.Set(Gxids+"gxvar_Worklogssdts", AV16WorkLogsSDTs.ToJSonString(false));
-         this.cleanup();
+         cleanup();
       }
 
       protected void S111( )
@@ -191,16 +174,12 @@ namespace GeneXus.Programs {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -239,14 +218,14 @@ namespace GeneXus.Programs {
       private bool returnInSub ;
       private string Gxdynprop ;
       private string Gxdyncall ;
-      private GXBaseCollection<SdtWorkLogsSDT> AV16WorkLogsSDTs ;
-      private SdtWorkLogsGridCollectionPanel_Level_DetailSdt aP2_GXM1WorkLogsGridCollectionPanel_Level_DetailSdt ;
       private IGxSession Gxwebsession ;
+      private SdtWorkLogsGridCollectionPanel_Level_DetailSdt AV35GXM1WorkLogsGridCollectionPanel_Level_DetailSdt ;
+      private GXBaseCollection<SdtWorkLogsSDT> AV16WorkLogsSDTs ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV7WWPContext ;
       private GxSimpleCollection<string> Gxdynpropparms ;
       private GXBaseCollection<SdtWorkLogsSDT> GXt_objcol_SdtWorkLogsSDT1 ;
       private GeneXus.Programs.workwithplus.nativemobile.SdtWWPCalendarInfo AV19WWPCalendarInfo ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV7WWPContext ;
-      private SdtWorkLogsGridCollectionPanel_Level_DetailSdt AV35GXM1WorkLogsGridCollectionPanel_Level_DetailSdt ;
+      private SdtWorkLogsGridCollectionPanel_Level_DetailSdt aP2_GXM1WorkLogsGridCollectionPanel_Level_DetailSdt ;
    }
 
 }

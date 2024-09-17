@@ -40,7 +40,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       {
          this.AV8PickerOptions = new GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions(context) ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_PickerOptions=this.AV8PickerOptions;
       }
 
@@ -52,29 +52,12 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       public void executeSubmit( out GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions aP0_PickerOptions )
       {
-         wwp_rangepicker_getoptionsreports objwwp_rangepicker_getoptionsreports;
-         objwwp_rangepicker_getoptionsreports = new wwp_rangepicker_getoptionsreports();
-         objwwp_rangepicker_getoptionsreports.AV8PickerOptions = new GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions(context) ;
-         objwwp_rangepicker_getoptionsreports.context.SetSubmitInitialConfig(context);
-         objwwp_rangepicker_getoptionsreports.initialize();
-         Submit( executePrivateCatch,objwwp_rangepicker_getoptionsreports);
+         this.AV8PickerOptions = new GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions(context) ;
+         SubmitImpl();
          aP0_PickerOptions=this.AV8PickerOptions;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwp_rangepicker_getoptionsreports)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -86,21 +69,17 @@ namespace GeneXus.Programs.wwpbaseobjects {
          new GeneXus.Programs.wwpbaseobjects.wwp_rangepicker_addpredefinedrange(context ).gxep_lastmonth( ref  AV8PickerOptions) ;
          new GeneXus.Programs.wwpbaseobjects.wwp_rangepicker_addpredefinedrange(context ).gxep_thisweek( ref  AV8PickerOptions) ;
          new GeneXus.Programs.wwpbaseobjects.wwp_rangepicker_addpredefinedrange(context ).gxep_thismonth( ref  AV8PickerOptions) ;
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -109,8 +88,8 @@ namespace GeneXus.Programs.wwpbaseobjects {
          /* GeneXus formulas. */
       }
 
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions aP0_PickerOptions ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions AV8PickerOptions ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions aP0_PickerOptions ;
    }
 
 }

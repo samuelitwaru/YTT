@@ -39,36 +39,19 @@ namespace GeneXus.Programs.wwpbaseobjects {
       public void execute( )
       {
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
       public void executeSubmit( )
       {
-         wwp_rangepicker_addpredefinedrange objwwp_rangepicker_addpredefinedrange;
-         objwwp_rangepicker_addpredefinedrange = new wwp_rangepicker_addpredefinedrange();
-         objwwp_rangepicker_addpredefinedrange.context.SetSubmitInitialConfig(context);
-         objwwp_rangepicker_addpredefinedrange.initialize();
-         Submit( executePrivateCatch,objwwp_rangepicker_addpredefinedrange);
+         SubmitImpl();
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwp_rangepicker_addpredefinedrange)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
-         this.cleanup();
+         cleanup();
       }
 
       public void gxep_past( ref GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions aP0_PickerOptions )
@@ -83,9 +66,9 @@ namespace GeneXus.Programs.wwpbaseobjects {
          GXt_dtime1 = DateTimeUtil.ResetTime( DateTimeUtil.DAdd( Gx_date, (-1)) ) ;
          AV9PickerOption.gxTpr_Enddate = GXt_dtime1;
          AV8PickerOptions.gxTpr_Ranges.Add(AV9PickerOption, 0);
-         executePrivate();
+         ExecuteImpl();
          aP0_PickerOptions=this.AV8PickerOptions;
-         this.cleanup();
+         cleanup();
       }
 
       public void gxep_yesterday( ref GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions aP0_PickerOptions )
@@ -100,9 +83,9 @@ namespace GeneXus.Programs.wwpbaseobjects {
          GXt_dtime1 = DateTimeUtil.ResetTime( DateTimeUtil.DAdd( Gx_date, (-1)) ) ;
          AV9PickerOption.gxTpr_Enddate = GXt_dtime1;
          AV8PickerOptions.gxTpr_Ranges.Add(AV9PickerOption, 0);
-         executePrivate();
+         ExecuteImpl();
          aP0_PickerOptions=this.AV8PickerOptions;
-         this.cleanup();
+         cleanup();
       }
 
       public void gxep_today( ref GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions aP0_PickerOptions )
@@ -117,9 +100,9 @@ namespace GeneXus.Programs.wwpbaseobjects {
          GXt_dtime1 = DateTimeUtil.ResetTime( Gx_date ) ;
          AV9PickerOption.gxTpr_Enddate = GXt_dtime1;
          AV8PickerOptions.gxTpr_Ranges.Add(AV9PickerOption, 0);
-         executePrivate();
+         ExecuteImpl();
          aP0_PickerOptions=this.AV8PickerOptions;
-         this.cleanup();
+         cleanup();
       }
 
       public void gxep_tomorrow( ref GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions aP0_PickerOptions )
@@ -134,9 +117,9 @@ namespace GeneXus.Programs.wwpbaseobjects {
          GXt_dtime1 = DateTimeUtil.ResetTime( DateTimeUtil.DAdd( Gx_date, (1)) ) ;
          AV9PickerOption.gxTpr_Enddate = GXt_dtime1;
          AV8PickerOptions.gxTpr_Ranges.Add(AV9PickerOption, 0);
-         executePrivate();
+         ExecuteImpl();
          aP0_PickerOptions=this.AV8PickerOptions;
-         this.cleanup();
+         cleanup();
       }
 
       public void gxep_inthefuture( ref GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions aP0_PickerOptions )
@@ -151,9 +134,9 @@ namespace GeneXus.Programs.wwpbaseobjects {
          GXt_dtime1 = DateTimeUtil.ResetTime( context.localUtil.YMDToD( 2039, 12, 31) ) ;
          AV9PickerOption.gxTpr_Enddate = GXt_dtime1;
          AV8PickerOptions.gxTpr_Ranges.Add(AV9PickerOption, 0);
-         executePrivate();
+         ExecuteImpl();
          aP0_PickerOptions=this.AV8PickerOptions;
-         this.cleanup();
+         cleanup();
       }
 
       public void gxep_lastweek( ref GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions aP0_PickerOptions )
@@ -168,9 +151,9 @@ namespace GeneXus.Programs.wwpbaseobjects {
          GXt_dtime1 = DateTimeUtil.ResetTime( DateTimeUtil.DAdd( Gx_date , - ( (int)(DateTimeUtil.Dow( Gx_date)) )) ) ;
          AV9PickerOption.gxTpr_Enddate = GXt_dtime1;
          AV8PickerOptions.gxTpr_Ranges.Add(AV9PickerOption, 0);
-         executePrivate();
+         ExecuteImpl();
          aP0_PickerOptions=this.AV8PickerOptions;
-         this.cleanup();
+         cleanup();
       }
 
       public void gxep_lastmonth( ref GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions aP0_PickerOptions )
@@ -185,9 +168,9 @@ namespace GeneXus.Programs.wwpbaseobjects {
          GXt_dtime1 = DateTimeUtil.ResetTime( DateTimeUtil.DateEndOfMonth( DateTimeUtil.AddMth( Gx_date, -1)) ) ;
          AV9PickerOption.gxTpr_Enddate = GXt_dtime1;
          AV8PickerOptions.gxTpr_Ranges.Add(AV9PickerOption, 0);
-         executePrivate();
+         ExecuteImpl();
          aP0_PickerOptions=this.AV8PickerOptions;
-         this.cleanup();
+         cleanup();
       }
 
       public void gxep_lastyear( ref GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions aP0_PickerOptions )
@@ -202,9 +185,9 @@ namespace GeneXus.Programs.wwpbaseobjects {
          GXt_dtime1 = DateTimeUtil.ResetTime( context.localUtil.YMDToD( DateTimeUtil.Year( Gx_date)-1, 12, 31) ) ;
          AV9PickerOption.gxTpr_Enddate = GXt_dtime1;
          AV8PickerOptions.gxTpr_Ranges.Add(AV9PickerOption, 0);
-         executePrivate();
+         ExecuteImpl();
          aP0_PickerOptions=this.AV8PickerOptions;
-         this.cleanup();
+         cleanup();
       }
 
       public void gxep_thisweek( ref GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions aP0_PickerOptions )
@@ -219,9 +202,9 @@ namespace GeneXus.Programs.wwpbaseobjects {
          GXt_dtime1 = DateTimeUtil.ResetTime( DateTimeUtil.DAdd( DateTimeUtil.DAdd( Gx_date , - ( (int)(DateTimeUtil.Dow( Gx_date)) )) , + ( (int)(7) )) ) ;
          AV9PickerOption.gxTpr_Enddate = GXt_dtime1;
          AV8PickerOptions.gxTpr_Ranges.Add(AV9PickerOption, 0);
-         executePrivate();
+         ExecuteImpl();
          aP0_PickerOptions=this.AV8PickerOptions;
-         this.cleanup();
+         cleanup();
       }
 
       public void gxep_thismonth( ref GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions aP0_PickerOptions )
@@ -236,9 +219,9 @@ namespace GeneXus.Programs.wwpbaseobjects {
          GXt_dtime1 = DateTimeUtil.ResetTime( DateTimeUtil.DateEndOfMonth( Gx_date) ) ;
          AV9PickerOption.gxTpr_Enddate = GXt_dtime1;
          AV8PickerOptions.gxTpr_Ranges.Add(AV9PickerOption, 0);
-         executePrivate();
+         ExecuteImpl();
          aP0_PickerOptions=this.AV8PickerOptions;
-         this.cleanup();
+         cleanup();
       }
 
       public void gxep_thisyear( ref GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions aP0_PickerOptions )
@@ -253,9 +236,9 @@ namespace GeneXus.Programs.wwpbaseobjects {
          GXt_dtime1 = DateTimeUtil.ResetTime( context.localUtil.YMDToD( DateTimeUtil.Year( Gx_date), 12, 31) ) ;
          AV9PickerOption.gxTpr_Enddate = GXt_dtime1;
          AV8PickerOptions.gxTpr_Ranges.Add(AV9PickerOption, 0);
-         executePrivate();
+         ExecuteImpl();
          aP0_PickerOptions=this.AV8PickerOptions;
-         this.cleanup();
+         cleanup();
       }
 
       public void gxep_nextweek( ref GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions aP0_PickerOptions )
@@ -270,9 +253,9 @@ namespace GeneXus.Programs.wwpbaseobjects {
          GXt_dtime1 = DateTimeUtil.ResetTime( DateTimeUtil.DAdd( DateTimeUtil.DAdd( Gx_date , + ( (int)(14) )) , - ( (int)(DateTimeUtil.Dow( Gx_date)) )) ) ;
          AV9PickerOption.gxTpr_Enddate = GXt_dtime1;
          AV8PickerOptions.gxTpr_Ranges.Add(AV9PickerOption, 0);
-         executePrivate();
+         ExecuteImpl();
          aP0_PickerOptions=this.AV8PickerOptions;
-         this.cleanup();
+         cleanup();
       }
 
       public void gxep_nextmonth( ref GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions aP0_PickerOptions )
@@ -287,9 +270,9 @@ namespace GeneXus.Programs.wwpbaseobjects {
          GXt_dtime1 = DateTimeUtil.ResetTime( DateTimeUtil.DateEndOfMonth( DateTimeUtil.AddMth( Gx_date, 1)) ) ;
          AV9PickerOption.gxTpr_Enddate = GXt_dtime1;
          AV8PickerOptions.gxTpr_Ranges.Add(AV9PickerOption, 0);
-         executePrivate();
+         ExecuteImpl();
          aP0_PickerOptions=this.AV8PickerOptions;
-         this.cleanup();
+         cleanup();
       }
 
       public void gxep_nextyear( ref GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions aP0_PickerOptions )
@@ -304,23 +287,19 @@ namespace GeneXus.Programs.wwpbaseobjects {
          GXt_dtime1 = DateTimeUtil.ResetTime( context.localUtil.YMDToD( DateTimeUtil.Year( Gx_date)+1, 12, 31) ) ;
          AV9PickerOption.gxTpr_Enddate = GXt_dtime1;
          AV8PickerOptions.gxTpr_Ranges.Add(AV9PickerOption, 0);
-         executePrivate();
+         ExecuteImpl();
          aP0_PickerOptions=this.AV8PickerOptions;
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -335,8 +314,8 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       private DateTime GXt_dtime1 ;
       private DateTime Gx_date ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions aP0_PickerOptions ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions AV8PickerOptions ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions aP0_PickerOptions ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions_RangesItem AV9PickerOption ;
    }
 

@@ -26,20 +26,15 @@ namespace GeneXus.Programs {
    {
       public static int Main( string[] args )
       {
-         try
-         {
-            GeneXus.Configuration.Config.ParseArgs(ref args);
-            return new acreategamroles().executeCmdLine(args); ;
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-            return 1 ;
-         }
+         return new acreategamroles().MainImpl(args); ;
       }
 
       public int executeCmdLine( string[] args )
+      {
+         return ExecuteCmdLine(args); ;
+      }
+
+      protected override int ExecuteCmdLine( string[] args )
       {
          execute();
          return GX.GXRuntime.ExitCode ;
@@ -82,32 +77,15 @@ namespace GeneXus.Programs {
       public void execute( )
       {
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
       public void executeSubmit( )
       {
-         acreategamroles objacreategamroles;
-         objacreategamroles = new acreategamroles();
-         objacreategamroles.context.SetSubmitInitialConfig(context);
-         objacreategamroles.initialize();
-         Submit( executePrivateCatch,objacreategamroles);
+         SubmitImpl();
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((acreategamroles)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -133,21 +111,17 @@ namespace GeneXus.Programs {
          AV15GAMRepository.save();
          AV16GAMErrorCollection = AV15GAMRepository.geterrors();
          context.CommitDataStores("creategamroles",pr_default);
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -174,12 +148,12 @@ namespace GeneXus.Programs {
       private string AV9RolesString ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
-      private IDataStoreProvider pr_default ;
-      private IDataStoreProvider pr_gam ;
       private GxSimpleCollection<string> AV8RoleNames ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV16GAMErrorCollection ;
       private GeneXus.Programs.genexussecurity.SdtGAMRole AV10GAMRole ;
+      private IDataStoreProvider pr_default ;
       private GeneXus.Programs.genexussecurity.SdtGAMRepository AV15GAMRepository ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV16GAMErrorCollection ;
+      private IDataStoreProvider pr_gam ;
    }
 
    public class acreategamroles__gam : DataStoreHelperBase, IDataStoreHelper

@@ -70,7 +70,7 @@ namespace GeneXus.Programs {
          this.AV8EmployeeIds = aP3_EmployeeIds;
          this.Gxm2rootcol = new GXBaseCollection<SdtSDTLeaveEventGroup>( context, "SDTLeaveEventGroup", "YTT_version4") ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP4_Gxm2rootcol=this.Gxm2rootcol;
       }
 
@@ -89,33 +89,16 @@ namespace GeneXus.Programs {
                                  GxSimpleCollection<long> aP3_EmployeeIds ,
                                  out GXBaseCollection<SdtSDTLeaveEventGroup> aP4_Gxm2rootcol )
       {
-         dpleaveeventgroup objdpleaveeventgroup;
-         objdpleaveeventgroup = new dpleaveeventgroup();
-         objdpleaveeventgroup.AV5FromDate = aP0_FromDate;
-         objdpleaveeventgroup.AV6ToDate = aP1_ToDate;
-         objdpleaveeventgroup.AV7CompanyLocationId = aP2_CompanyLocationId;
-         objdpleaveeventgroup.AV8EmployeeIds = aP3_EmployeeIds;
-         objdpleaveeventgroup.Gxm2rootcol = new GXBaseCollection<SdtSDTLeaveEventGroup>( context, "SDTLeaveEventGroup", "YTT_version4") ;
-         objdpleaveeventgroup.context.SetSubmitInitialConfig(context);
-         objdpleaveeventgroup.initialize();
-         Submit( executePrivateCatch,objdpleaveeventgroup);
+         this.AV5FromDate = aP0_FromDate;
+         this.AV6ToDate = aP1_ToDate;
+         this.AV7CompanyLocationId = aP2_CompanyLocationId;
+         this.AV8EmployeeIds = aP3_EmployeeIds;
+         this.Gxm2rootcol = new GXBaseCollection<SdtSDTLeaveEventGroup>( context, "SDTLeaveEventGroup", "YTT_version4") ;
+         SubmitImpl();
          aP4_Gxm2rootcol=this.Gxm2rootcol;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((dpleaveeventgroup)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -150,12 +133,12 @@ namespace GeneXus.Programs {
             pr_default.readNext(0);
          }
          pr_default.close(0);
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -163,13 +146,8 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
-         scmdbuf = "";
          A132LeaveRequestStatus = "";
          P001T2_A124LeaveTypeId = new long[1] ;
          P001T2_A100CompanyId = new long[1] ;
@@ -195,14 +173,14 @@ namespace GeneXus.Programs {
       private long A157CompanyLocationId ;
       private long A124LeaveTypeId ;
       private long A100CompanyId ;
-      private string scmdbuf ;
       private string A132LeaveRequestStatus ;
       private string A148EmployeeName ;
       private DateTime AV5FromDate ;
       private DateTime AV6ToDate ;
-      private GxSimpleCollection<long> AV8EmployeeIds ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GxSimpleCollection<long> AV8EmployeeIds ;
+      private GXBaseCollection<SdtSDTLeaveEventGroup> Gxm2rootcol ;
       private IDataStoreProvider pr_default ;
       private long[] P001T2_A124LeaveTypeId ;
       private long[] P001T2_A100CompanyId ;
@@ -210,9 +188,8 @@ namespace GeneXus.Programs {
       private long[] P001T2_A157CompanyLocationId ;
       private string[] P001T2_A132LeaveRequestStatus ;
       private string[] P001T2_A148EmployeeName ;
-      private GXBaseCollection<SdtSDTLeaveEventGroup> aP4_Gxm2rootcol ;
-      private GXBaseCollection<SdtSDTLeaveEventGroup> Gxm2rootcol ;
       private SdtSDTLeaveEventGroup Gxm1sdtleaveeventgroup ;
+      private GXBaseCollection<SdtSDTLeaveEventGroup> aP4_Gxm2rootcol ;
    }
 
    public class dpleaveeventgroup__default : DataStoreHelperBase, IDataStoreHelper

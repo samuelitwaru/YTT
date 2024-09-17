@@ -66,53 +66,32 @@ namespace GeneXus.Programs.general.services {
          this.AV8EventResults = aP0_EventResults;
          this.GxSynchroInfo = aP1_GxSynchroInfo;
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
       public void executeSubmit( GXBaseCollection<GeneXus.Core.genexus.sd.synchronization.SdtSynchronizationEventResultList_SynchronizationEventResultListItem> aP0_EventResults ,
                                  GeneXus.Core.genexus.sd.synchronization.SdtSynchronizationInfo aP1_GxSynchroInfo )
       {
-         gxaftereventreplicator objgxaftereventreplicator;
-         objgxaftereventreplicator = new gxaftereventreplicator();
-         objgxaftereventreplicator.AV8EventResults = aP0_EventResults;
-         objgxaftereventreplicator.GxSynchroInfo = aP1_GxSynchroInfo;
-         objgxaftereventreplicator.context.SetSubmitInitialConfig(context);
-         objgxaftereventreplicator.initialize();
-         Submit( executePrivateCatch,objgxaftereventreplicator);
+         this.AV8EventResults = aP0_EventResults;
+         this.GxSynchroInfo = aP1_GxSynchroInfo;
+         SubmitImpl();
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((gxaftereventreplicator)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )

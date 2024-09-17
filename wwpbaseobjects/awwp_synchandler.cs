@@ -24,20 +24,15 @@ namespace GeneXus.Programs.wwpbaseobjects {
    {
       public static int Main( string[] args )
       {
-         try
-         {
-            GeneXus.Configuration.Config.ParseArgs(ref args);
-            return new wwpbaseobjects.awwp_synchandler().executeCmdLine(args); ;
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-            return 1 ;
-         }
+         return new wwpbaseobjects.awwp_synchandler().MainImpl(args); ;
       }
 
       public int executeCmdLine( string[] args )
+      {
+         return ExecuteCmdLine(args); ;
+      }
+
+      protected override int ExecuteCmdLine( string[] args )
       {
          string aP0_GAMEvents = new string(' ',0)  ;
          string aP1_inJson = new string(' ',0)  ;
@@ -108,7 +103,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          this.AV13inJson = aP1_inJson;
          this.AV15outJson = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP2_outJson=this.AV15outJson;
       }
 
@@ -123,31 +118,14 @@ namespace GeneXus.Programs.wwpbaseobjects {
                                  string aP1_inJson ,
                                  out string aP2_outJson )
       {
-         awwp_synchandler objawwp_synchandler;
-         objawwp_synchandler = new awwp_synchandler();
-         objawwp_synchandler.AV8GAMEvents = aP0_GAMEvents;
-         objawwp_synchandler.AV13inJson = aP1_inJson;
-         objawwp_synchandler.AV15outJson = "" ;
-         objawwp_synchandler.context.SetSubmitInitialConfig(context);
-         objawwp_synchandler.initialize();
-         Submit( executePrivateCatch,objawwp_synchandler);
+         this.AV8GAMEvents = aP0_GAMEvents;
+         this.AV13inJson = aP1_inJson;
+         this.AV15outJson = "" ;
+         SubmitImpl();
          aP2_outJson=this.AV15outJson;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((awwp_synchandler)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -179,21 +157,17 @@ namespace GeneXus.Programs.wwpbaseobjects {
          }
          AV15outJson = AV14Messages.ToJSonString(false);
          new GeneXus.Programs.wwpbaseobjects.wwp_logger(context ).gxep_debug(  StringUtil.Format( "GAMEvents: %1 - %2, outJson: %3", AV8GAMEvents, GeneXus.Programs.genexussecuritycommon.gxdomaingamevents.getDescription(context,AV8GAMEvents), AV15outJson, "", "", "", "", "", ""),  AV16Pgmname) ;
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -212,10 +186,10 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private string AV16Pgmname ;
       private string AV13inJson ;
       private string AV15outJson ;
-      private string aP2_outJson ;
+      private GeneXus.Programs.genexussecurity.SdtGAMUser AV10GAMUser ;
       private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> AV14Messages ;
       private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> GXt_objcol_SdtMessages_Message1 ;
-      private GeneXus.Programs.genexussecurity.SdtGAMUser AV10GAMUser ;
+      private string aP2_outJson ;
    }
 
 }

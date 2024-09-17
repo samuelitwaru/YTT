@@ -26,20 +26,15 @@ namespace GeneXus.Programs {
    {
       public static int Main( string[] args )
       {
-         try
-         {
-            GeneXus.Configuration.Config.ParseArgs(ref args);
-            return new agetemployeeapprovedvacationdays2().executeCmdLine(args); ;
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-            return 1 ;
-         }
+         return new agetemployeeapprovedvacationdays2().MainImpl(args); ;
       }
 
       public int executeCmdLine( string[] args )
+      {
+         return ExecuteCmdLine(args); ;
+      }
+
+      protected override int ExecuteCmdLine( string[] args )
       {
           long aP0_EmployeeId ;
          DateTime aP1_DateFrom = new DateTime()  ;
@@ -125,7 +120,7 @@ namespace GeneXus.Programs {
          this.AV9DateTo = aP2_DateTo;
          this.AV17Days = 0 ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP3_Days=this.AV17Days;
       }
 
@@ -142,32 +137,15 @@ namespace GeneXus.Programs {
                                  DateTime aP2_DateTo ,
                                  out decimal aP3_Days )
       {
-         agetemployeeapprovedvacationdays2 objagetemployeeapprovedvacationdays2;
-         objagetemployeeapprovedvacationdays2 = new agetemployeeapprovedvacationdays2();
-         objagetemployeeapprovedvacationdays2.AV11EmployeeId = aP0_EmployeeId;
-         objagetemployeeapprovedvacationdays2.AV10DateFrom = aP1_DateFrom;
-         objagetemployeeapprovedvacationdays2.AV9DateTo = aP2_DateTo;
-         objagetemployeeapprovedvacationdays2.AV17Days = 0 ;
-         objagetemployeeapprovedvacationdays2.context.SetSubmitInitialConfig(context);
-         objagetemployeeapprovedvacationdays2.initialize();
-         Submit( executePrivateCatch,objagetemployeeapprovedvacationdays2);
+         this.AV11EmployeeId = aP0_EmployeeId;
+         this.AV10DateFrom = aP1_DateFrom;
+         this.AV9DateTo = aP2_DateTo;
+         this.AV17Days = 0 ;
+         SubmitImpl();
          aP3_Days=this.AV17Days;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((agetemployeeapprovedvacationdays2)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -278,12 +256,12 @@ namespace GeneXus.Programs {
          }
          pr_default.close(1);
          new logtofile(context ).execute(  ">>>>>>>"+StringUtil.Str( AV17Days, 4, 1)) ;
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -291,13 +269,8 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
-         scmdbuf = "";
          A173LeaveRequestHalfDay = "";
          A129LeaveRequestStartDate = DateTime.MinValue;
          A132LeaveRequestStatus = "";
@@ -354,7 +327,6 @@ namespace GeneXus.Programs {
       private decimal AV17Days ;
       private decimal A131LeaveRequestDuration ;
       private decimal cV17Days ;
-      private string scmdbuf ;
       private string A173LeaveRequestHalfDay ;
       private string A132LeaveRequestStatus ;
       private string A144LeaveTypeVacationLeave ;

@@ -1599,6 +1599,20 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
          return false ;
       }
 
+      [XmlIgnore]
+      private static GXTypeInfo _typeProps;
+      protected override GXTypeInfo TypeInfo
+      {
+         get {
+            return _typeProps ;
+         }
+
+         set {
+            _typeProps = value ;
+         }
+
+      }
+
       public void initialize( )
       {
          sdtIsNull = 1;
@@ -1684,6 +1698,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
    }
 
    [DataContract(Name = @"WWPBaseObjects\Notifications\Web\WWP_WebNotification", Namespace = "YTT_version4")]
+   [GxJsonSerialization("default")]
    public class SdtWWP_WebNotification_RESTInterface : GxGenericCollectionItem<GeneXus.Programs.wwpbaseobjects.notifications.web.SdtWWP_WebNotification>
    {
       public SdtWWP_WebNotification_RESTInterface( ) : base()
@@ -1741,11 +1756,11 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
       public string gxTpr_Wwpnotificationcreated
       {
          get {
-            return DateTimeUtil.TToC3( sdt.gxTpr_Wwpnotificationcreated) ;
+            return DateTimeUtil.TToC3( sdt.gxTpr_Wwpnotificationcreated, (IGxContext)(context)) ;
          }
 
          set {
-            sdt.gxTpr_Wwpnotificationcreated = DateTimeUtil.CToT2( value);
+            sdt.gxTpr_Wwpnotificationcreated = DateTimeUtil.CToT2( value, (IGxContext)(context));
          }
 
       }
@@ -1837,11 +1852,11 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
       public string gxTpr_Wwpwebnotificationcreated
       {
          get {
-            return DateTimeUtil.TToC3( sdt.gxTpr_Wwpwebnotificationcreated) ;
+            return DateTimeUtil.TToC3( sdt.gxTpr_Wwpwebnotificationcreated, (IGxContext)(context)) ;
          }
 
          set {
-            sdt.gxTpr_Wwpwebnotificationcreated = DateTimeUtil.CToT2( value);
+            sdt.gxTpr_Wwpwebnotificationcreated = DateTimeUtil.CToT2( value, (IGxContext)(context));
          }
 
       }
@@ -1851,11 +1866,11 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
       public string gxTpr_Wwpwebnotificationscheduled
       {
          get {
-            return DateTimeUtil.TToC3( sdt.gxTpr_Wwpwebnotificationscheduled) ;
+            return DateTimeUtil.TToC3( sdt.gxTpr_Wwpwebnotificationscheduled, (IGxContext)(context)) ;
          }
 
          set {
-            sdt.gxTpr_Wwpwebnotificationscheduled = DateTimeUtil.CToT2( value);
+            sdt.gxTpr_Wwpwebnotificationscheduled = DateTimeUtil.CToT2( value, (IGxContext)(context));
          }
 
       }
@@ -1865,11 +1880,11 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
       public string gxTpr_Wwpwebnotificationprocessed
       {
          get {
-            return DateTimeUtil.TToC3( sdt.gxTpr_Wwpwebnotificationprocessed) ;
+            return DateTimeUtil.TToC3( sdt.gxTpr_Wwpwebnotificationprocessed, (IGxContext)(context)) ;
          }
 
          set {
-            sdt.gxTpr_Wwpwebnotificationprocessed = DateTimeUtil.CToT2( value);
+            sdt.gxTpr_Wwpwebnotificationprocessed = DateTimeUtil.CToT2( value, (IGxContext)(context));
          }
 
       }
@@ -1879,11 +1894,11 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
       public string gxTpr_Wwpwebnotificationread
       {
          get {
-            return DateTimeUtil.TToC3( sdt.gxTpr_Wwpwebnotificationread) ;
+            return DateTimeUtil.TToC3( sdt.gxTpr_Wwpwebnotificationread, (IGxContext)(context)) ;
          }
 
          set {
-            sdt.gxTpr_Wwpwebnotificationread = DateTimeUtil.CToT2( value);
+            sdt.gxTpr_Wwpwebnotificationread = DateTimeUtil.CToT2( value, (IGxContext)(context));
          }
 
       }
@@ -1957,6 +1972,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
    }
 
    [DataContract(Name = @"WWPBaseObjects\Notifications\Web\WWP_WebNotification", Namespace = "YTT_version4")]
+   [GxJsonSerialization("default")]
    public class SdtWWP_WebNotification_RESTLInterface : GxGenericCollectionItem<GeneXus.Programs.wwpbaseobjects.notifications.web.SdtWWP_WebNotification>
    {
       public SdtWWP_WebNotification_RESTLInterface( ) : base()

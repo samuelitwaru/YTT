@@ -136,7 +136,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
          {
             if ( context.ExposeMetadata( ) )
             {
-               Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+               Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
             }
          }
          Form.Meta.addItem("description", "Notification Definition", 0) ;
@@ -179,10 +179,10 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
 
       public void execute( )
       {
-         executePrivate();
+         ExecuteImpl();
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -221,11 +221,8 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITENV( ) ;
          INITTRN( ) ;
          if ( ( GxWebError == 0 ) && ! isAjaxCallMode( ) )
@@ -257,7 +254,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void fix_multi_value_controls( )
@@ -599,7 +596,8 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
          /* Div Control */
          GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-sm-9 gx-attribute", "start", "top", "", "", "div");
          /* Single line edit */
-         GxWebStd.gx_single_line_edit( context, edtWWPEntityName_Internalname, A21WWPEntityName, StringUtil.RTrim( context.localUtil.Format( A21WWPEntityName, "")), "", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtWWPEntityName_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtWWPEntityName_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "WWPBaseObjects\\WWP_Description", "start", true, "", "HLP_WWPBaseObjects/Notifications/Common/WWP_NotificationDefinition.htm");
+         TempTags = "  onfocus=\"gx.evt.onfocus(this, 89,'',false,'',0)\"";
+         GxWebStd.gx_single_line_edit( context, edtWWPEntityName_Internalname, A21WWPEntityName, StringUtil.RTrim( context.localUtil.Format( A21WWPEntityName, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,89);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtWWPEntityName_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtWWPEntityName_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "WWPBaseObjects\\WWP_Description", "start", true, "", "HLP_WWPBaseObjects/Notifications/Common/WWP_NotificationDefinition.htm");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -636,9 +634,10 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
          /* Div Control */
          GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-sm-9 gx-attribute", "start", "top", "", "", "div");
          /* Check box */
+         TempTags = "  onfocus=\"gx.evt.onfocus(this, 99,'',false,'',0)\"";
          ClassString = "Attribute";
          StyleString = "";
-         GxWebStd.gx_checkbox_ctrl( context, chkWWPNotificationDefinitionIsAut_Internalname, StringUtil.BoolToStr( A68WWPNotificationDefinitionIsAut), "", "User Authorized", 1, chkWWPNotificationDefinitionIsAut.Enabled, "true", "", StyleString, ClassString, "", "", "");
+         GxWebStd.gx_checkbox_ctrl( context, chkWWPNotificationDefinitionIsAut_Internalname, StringUtil.BoolToStr( A68WWPNotificationDefinitionIsAut), "", "User Authorized", 1, chkWWPNotificationDefinitionIsAut.Enabled, "true", "", StyleString, ClassString, "", "", TempTags+" onclick="+"\"gx.fn.checkboxClick(99, this, 'true', 'false',"+"''"+");"+"gx.evt.onchange(this, event);\""+" onblur=\""+""+";gx.evt.onblur(this,99);\"");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -1100,7 +1099,6 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
 
       protected void CheckExtendedTable088( )
       {
-         nIsDirty_8 = 0;
          Gx_BScreen = 1;
          standaloneModal( ) ;
          if ( ! ( ( A30WWPNotificationDefinitionAppli == 1 ) || ( A30WWPNotificationDefinitionAppli == 2 ) ) )
@@ -1131,13 +1129,11 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
          pr_default.close(2);
          if ( String.IsNullOrEmpty(StringUtil.RTrim( A67WWPNotificationDefinitionSecFu)) )
          {
-            nIsDirty_8 = 1;
             A68WWPNotificationDefinitionIsAut = true;
             AssignAttri("", false, "A68WWPNotificationDefinitionIsAut", A68WWPNotificationDefinitionIsAut);
          }
          else
          {
-            nIsDirty_8 = 1;
             GXt_boolean1 = A68WWPNotificationDefinitionIsAut;
             new GeneXus.Programs.wwpbaseobjects.secgamisauthbyfunctionalitykey(context ).execute(  A67WWPNotificationDefinitionSecFu, out  GXt_boolean1) ;
             A68WWPNotificationDefinitionIsAut = GXt_boolean1;
@@ -1431,7 +1427,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
          {
             getByPrimaryKey( ) ;
          }
-         CloseOpenCursors();
+         CloseCursors();
       }
 
       protected void btn_get( )
@@ -2055,10 +2051,10 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
          CloseStyles();
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
@@ -2255,7 +2251,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202481416561755", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202491613125060", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2271,7 +2267,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wwpbaseobjects/notifications/common/wwp_notificationdefinition.js", "?202481416561756", false, true);
+         context.AddJavascriptSource("wwpbaseobjects/notifications/common/wwp_notificationdefinition.js", "?202491613125060", false, true);
          /* End function include_jscripts */
       }
 
@@ -2402,14 +2398,14 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
          }
          chkWWPNotificationDefinitionAllow.Name = "WWPNOTIFICATIONDEFINITIONALLOW";
          chkWWPNotificationDefinitionAllow.WebTags = "";
-         chkWWPNotificationDefinitionAllow.Caption = "";
+         chkWWPNotificationDefinitionAllow.Caption = "Allow User Subscription";
          AssignProp("", false, chkWWPNotificationDefinitionAllow_Internalname, "TitleCaption", chkWWPNotificationDefinitionAllow.Caption, true);
          chkWWPNotificationDefinitionAllow.CheckedValue = "false";
          A31WWPNotificationDefinitionAllow = StringUtil.StrToBool( StringUtil.BoolToStr( A31WWPNotificationDefinitionAllow));
          AssignAttri("", false, "A31WWPNotificationDefinitionAllow", A31WWPNotificationDefinitionAllow);
          chkWWPNotificationDefinitionIsAut.Name = "WWPNOTIFICATIONDEFINITIONISAUT";
          chkWWPNotificationDefinitionIsAut.WebTags = "";
-         chkWWPNotificationDefinitionIsAut.Caption = "";
+         chkWWPNotificationDefinitionIsAut.Caption = "User Authorized";
          AssignProp("", false, chkWWPNotificationDefinitionIsAut_Internalname, "TitleCaption", chkWWPNotificationDefinitionIsAut.Caption, true);
          chkWWPNotificationDefinitionIsAut.CheckedValue = "false";
          A68WWPNotificationDefinitionIsAut = StringUtil.StrToBool( StringUtil.BoolToStr( A68WWPNotificationDefinitionIsAut));
@@ -2547,34 +2543,33 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("ENTER","{handler:'UserMainFullajax',iparms:[{postForm:true},{av:'A31WWPNotificationDefinitionAllow',fld:'WWPNOTIFICATIONDEFINITIONALLOW',pic:''},{av:'A68WWPNotificationDefinitionIsAut',fld:'WWPNOTIFICATIONDEFINITIONISAUT',pic:''}]");
-         setEventMetadata("ENTER",",oparms:[{av:'A31WWPNotificationDefinitionAllow',fld:'WWPNOTIFICATIONDEFINITIONALLOW',pic:''},{av:'A68WWPNotificationDefinitionIsAut',fld:'WWPNOTIFICATIONDEFINITIONISAUT',pic:''}]}");
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'A31WWPNotificationDefinitionAllow',fld:'WWPNOTIFICATIONDEFINITIONALLOW',pic:''},{av:'A68WWPNotificationDefinitionIsAut',fld:'WWPNOTIFICATIONDEFINITIONISAUT',pic:''}]");
-         setEventMetadata("REFRESH",",oparms:[{av:'A31WWPNotificationDefinitionAllow',fld:'WWPNOTIFICATIONDEFINITIONALLOW',pic:''},{av:'A68WWPNotificationDefinitionIsAut',fld:'WWPNOTIFICATIONDEFINITIONISAUT',pic:''}]}");
-         setEventMetadata("VALID_WWPNOTIFICATIONDEFINITIONID","{handler:'Valid_Wwpnotificationdefinitionid',iparms:[{av:'cmbWWPNotificationDefinitionAppli'},{av:'A30WWPNotificationDefinitionAppli',fld:'WWPNOTIFICATIONDEFINITIONAPPLI',pic:'9'},{av:'A23WWPNotificationDefinitionId',fld:'WWPNOTIFICATIONDEFINITIONID',pic:'ZZZZZZZZZ9'},{av:'Gx_mode',fld:'vMODE',pic:'@!'},{av:'A31WWPNotificationDefinitionAllow',fld:'WWPNOTIFICATIONDEFINITIONALLOW',pic:''},{av:'A68WWPNotificationDefinitionIsAut',fld:'WWPNOTIFICATIONDEFINITIONISAUT',pic:''}]");
-         setEventMetadata("VALID_WWPNOTIFICATIONDEFINITIONID",",oparms:[{av:'A59WWPNotificationDefinitionName',fld:'WWPNOTIFICATIONDEFINITIONNAME',pic:''},{av:'cmbWWPNotificationDefinitionAppli'},{av:'A30WWPNotificationDefinitionAppli',fld:'WWPNOTIFICATIONDEFINITIONAPPLI',pic:'9'},{av:'A29WWPNotificationDefinitionDescr',fld:'WWPNOTIFICATIONDEFINITIONDESCR',pic:''},{av:'A62WWPNotificationDefinitionIcon',fld:'WWPNOTIFICATIONDEFINITIONICON',pic:''},{av:'A63WWPNotificationDefinitionTitle',fld:'WWPNOTIFICATIONDEFINITIONTITLE',pic:''},{av:'A64WWPNotificationDefinitionShort',fld:'WWPNOTIFICATIONDEFINITIONSHORT',pic:''},{av:'A65WWPNotificationDefinitionLongD',fld:'WWPNOTIFICATIONDEFINITIONLONGD',pic:''},{av:'A66WWPNotificationDefinitionLink',fld:'WWPNOTIFICATIONDEFINITIONLINK',pic:''},{av:'A20WWPEntityId',fld:'WWPENTITYID',pic:'ZZZZZZZZZ9'},{av:'A67WWPNotificationDefinitionSecFu',fld:'WWPNOTIFICATIONDEFINITIONSECFU',pic:''},{av:'A21WWPEntityName',fld:'WWPENTITYNAME',pic:''},{av:'Gx_mode',fld:'vMODE',pic:'@!'},{av:'Z23WWPNotificationDefinitionId'},{av:'Z59WWPNotificationDefinitionName'},{av:'Z30WWPNotificationDefinitionAppli'},{av:'Z31WWPNotificationDefinitionAllow'},{av:'Z29WWPNotificationDefinitionDescr'},{av:'Z62WWPNotificationDefinitionIcon'},{av:'Z63WWPNotificationDefinitionTitle'},{av:'Z64WWPNotificationDefinitionShort'},{av:'Z65WWPNotificationDefinitionLongD'},{av:'Z66WWPNotificationDefinitionLink'},{av:'Z20WWPEntityId'},{av:'Z67WWPNotificationDefinitionSecFu'},{av:'Z21WWPEntityName'},{av:'Z68WWPNotificationDefinitionIsAut'},{ctrl:'BTN_DELETE',prop:'Enabled'},{ctrl:'BTN_ENTER',prop:'Enabled'},{av:'A31WWPNotificationDefinitionAllow',fld:'WWPNOTIFICATIONDEFINITIONALLOW',pic:''},{av:'A68WWPNotificationDefinitionIsAut',fld:'WWPNOTIFICATIONDEFINITIONISAUT',pic:''}]}");
-         setEventMetadata("VALID_WWPNOTIFICATIONDEFINITIONAPPLI","{handler:'Valid_Wwpnotificationdefinitionappli',iparms:[{av:'A31WWPNotificationDefinitionAllow',fld:'WWPNOTIFICATIONDEFINITIONALLOW',pic:''},{av:'A68WWPNotificationDefinitionIsAut',fld:'WWPNOTIFICATIONDEFINITIONISAUT',pic:''}]");
-         setEventMetadata("VALID_WWPNOTIFICATIONDEFINITIONAPPLI",",oparms:[{av:'A31WWPNotificationDefinitionAllow',fld:'WWPNOTIFICATIONDEFINITIONALLOW',pic:''},{av:'A68WWPNotificationDefinitionIsAut',fld:'WWPNOTIFICATIONDEFINITIONISAUT',pic:''}]}");
-         setEventMetadata("VALID_WWPNOTIFICATIONDEFINITIONLINK","{handler:'Valid_Wwpnotificationdefinitionlink',iparms:[{av:'A31WWPNotificationDefinitionAllow',fld:'WWPNOTIFICATIONDEFINITIONALLOW',pic:''},{av:'A68WWPNotificationDefinitionIsAut',fld:'WWPNOTIFICATIONDEFINITIONISAUT',pic:''}]");
-         setEventMetadata("VALID_WWPNOTIFICATIONDEFINITIONLINK",",oparms:[{av:'A31WWPNotificationDefinitionAllow',fld:'WWPNOTIFICATIONDEFINITIONALLOW',pic:''},{av:'A68WWPNotificationDefinitionIsAut',fld:'WWPNOTIFICATIONDEFINITIONISAUT',pic:''}]}");
-         setEventMetadata("VALID_WWPENTITYID","{handler:'Valid_Wwpentityid',iparms:[{av:'A20WWPEntityId',fld:'WWPENTITYID',pic:'ZZZZZZZZZ9'},{av:'A21WWPEntityName',fld:'WWPENTITYNAME',pic:''},{av:'A31WWPNotificationDefinitionAllow',fld:'WWPNOTIFICATIONDEFINITIONALLOW',pic:''},{av:'A68WWPNotificationDefinitionIsAut',fld:'WWPNOTIFICATIONDEFINITIONISAUT',pic:''}]");
-         setEventMetadata("VALID_WWPENTITYID",",oparms:[{av:'A21WWPEntityName',fld:'WWPENTITYNAME',pic:''},{av:'A31WWPNotificationDefinitionAllow',fld:'WWPNOTIFICATIONDEFINITIONALLOW',pic:''},{av:'A68WWPNotificationDefinitionIsAut',fld:'WWPNOTIFICATIONDEFINITIONISAUT',pic:''}]}");
-         setEventMetadata("VALID_WWPNOTIFICATIONDEFINITIONSECFU","{handler:'Valid_Wwpnotificationdefinitionsecfu',iparms:[{av:'A67WWPNotificationDefinitionSecFu',fld:'WWPNOTIFICATIONDEFINITIONSECFU',pic:''},{av:'A31WWPNotificationDefinitionAllow',fld:'WWPNOTIFICATIONDEFINITIONALLOW',pic:''},{av:'A68WWPNotificationDefinitionIsAut',fld:'WWPNOTIFICATIONDEFINITIONISAUT',pic:''}]");
-         setEventMetadata("VALID_WWPNOTIFICATIONDEFINITIONSECFU",",oparms:[{av:'A31WWPNotificationDefinitionAllow',fld:'WWPNOTIFICATIONDEFINITIONALLOW',pic:''},{av:'A68WWPNotificationDefinitionIsAut',fld:'WWPNOTIFICATIONDEFINITIONISAUT',pic:''}]}");
+         setEventMetadata("ENTER","""{"handler":"UserMainFullajax","iparms":[{"postForm":true},{"av":"A31WWPNotificationDefinitionAllow","fld":"WWPNOTIFICATIONDEFINITIONALLOW"},{"av":"A68WWPNotificationDefinitionIsAut","fld":"WWPNOTIFICATIONDEFINITIONISAUT"}]""");
+         setEventMetadata("ENTER",""","oparms":[{"av":"A31WWPNotificationDefinitionAllow","fld":"WWPNOTIFICATIONDEFINITIONALLOW"},{"av":"A68WWPNotificationDefinitionIsAut","fld":"WWPNOTIFICATIONDEFINITIONISAUT"}]}""");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"A31WWPNotificationDefinitionAllow","fld":"WWPNOTIFICATIONDEFINITIONALLOW"},{"av":"A68WWPNotificationDefinitionIsAut","fld":"WWPNOTIFICATIONDEFINITIONISAUT"}]""");
+         setEventMetadata("REFRESH",""","oparms":[{"av":"A31WWPNotificationDefinitionAllow","fld":"WWPNOTIFICATIONDEFINITIONALLOW"},{"av":"A68WWPNotificationDefinitionIsAut","fld":"WWPNOTIFICATIONDEFINITIONISAUT"}]}""");
+         setEventMetadata("VALID_WWPNOTIFICATIONDEFINITIONID","""{"handler":"Valid_Wwpnotificationdefinitionid","iparms":[{"av":"cmbWWPNotificationDefinitionAppli"},{"av":"A30WWPNotificationDefinitionAppli","fld":"WWPNOTIFICATIONDEFINITIONAPPLI","pic":"9"},{"av":"A23WWPNotificationDefinitionId","fld":"WWPNOTIFICATIONDEFINITIONID","pic":"ZZZZZZZZZ9"},{"av":"Gx_mode","fld":"vMODE","pic":"@!"},{"av":"A31WWPNotificationDefinitionAllow","fld":"WWPNOTIFICATIONDEFINITIONALLOW"},{"av":"A68WWPNotificationDefinitionIsAut","fld":"WWPNOTIFICATIONDEFINITIONISAUT"}]""");
+         setEventMetadata("VALID_WWPNOTIFICATIONDEFINITIONID",""","oparms":[{"av":"A59WWPNotificationDefinitionName","fld":"WWPNOTIFICATIONDEFINITIONNAME"},{"av":"cmbWWPNotificationDefinitionAppli"},{"av":"A30WWPNotificationDefinitionAppli","fld":"WWPNOTIFICATIONDEFINITIONAPPLI","pic":"9"},{"av":"A29WWPNotificationDefinitionDescr","fld":"WWPNOTIFICATIONDEFINITIONDESCR"},{"av":"A62WWPNotificationDefinitionIcon","fld":"WWPNOTIFICATIONDEFINITIONICON"},{"av":"A63WWPNotificationDefinitionTitle","fld":"WWPNOTIFICATIONDEFINITIONTITLE"},{"av":"A64WWPNotificationDefinitionShort","fld":"WWPNOTIFICATIONDEFINITIONSHORT"},{"av":"A65WWPNotificationDefinitionLongD","fld":"WWPNOTIFICATIONDEFINITIONLONGD"},{"av":"A66WWPNotificationDefinitionLink","fld":"WWPNOTIFICATIONDEFINITIONLINK"},{"av":"A20WWPEntityId","fld":"WWPENTITYID","pic":"ZZZZZZZZZ9"},{"av":"A67WWPNotificationDefinitionSecFu","fld":"WWPNOTIFICATIONDEFINITIONSECFU"},{"av":"A21WWPEntityName","fld":"WWPENTITYNAME"},{"av":"Gx_mode","fld":"vMODE","pic":"@!"},{"av":"Z23WWPNotificationDefinitionId"},{"av":"Z59WWPNotificationDefinitionName"},{"av":"Z30WWPNotificationDefinitionAppli"},{"av":"Z31WWPNotificationDefinitionAllow"},{"av":"Z29WWPNotificationDefinitionDescr"},{"av":"Z62WWPNotificationDefinitionIcon"},{"av":"Z63WWPNotificationDefinitionTitle"},{"av":"Z64WWPNotificationDefinitionShort"},{"av":"Z65WWPNotificationDefinitionLongD"},{"av":"Z66WWPNotificationDefinitionLink"},{"av":"Z20WWPEntityId"},{"av":"Z67WWPNotificationDefinitionSecFu"},{"av":"Z21WWPEntityName"},{"av":"Z68WWPNotificationDefinitionIsAut"},{"ctrl":"BTN_DELETE","prop":"Enabled"},{"ctrl":"BTN_ENTER","prop":"Enabled"},{"av":"A31WWPNotificationDefinitionAllow","fld":"WWPNOTIFICATIONDEFINITIONALLOW"},{"av":"A68WWPNotificationDefinitionIsAut","fld":"WWPNOTIFICATIONDEFINITIONISAUT"}]}""");
+         setEventMetadata("VALID_WWPNOTIFICATIONDEFINITIONAPPLI","""{"handler":"Valid_Wwpnotificationdefinitionappli","iparms":[{"av":"A31WWPNotificationDefinitionAllow","fld":"WWPNOTIFICATIONDEFINITIONALLOW"},{"av":"A68WWPNotificationDefinitionIsAut","fld":"WWPNOTIFICATIONDEFINITIONISAUT"}]""");
+         setEventMetadata("VALID_WWPNOTIFICATIONDEFINITIONAPPLI",""","oparms":[{"av":"A31WWPNotificationDefinitionAllow","fld":"WWPNOTIFICATIONDEFINITIONALLOW"},{"av":"A68WWPNotificationDefinitionIsAut","fld":"WWPNOTIFICATIONDEFINITIONISAUT"}]}""");
+         setEventMetadata("VALID_WWPNOTIFICATIONDEFINITIONLINK","""{"handler":"Valid_Wwpnotificationdefinitionlink","iparms":[{"av":"A31WWPNotificationDefinitionAllow","fld":"WWPNOTIFICATIONDEFINITIONALLOW"},{"av":"A68WWPNotificationDefinitionIsAut","fld":"WWPNOTIFICATIONDEFINITIONISAUT"}]""");
+         setEventMetadata("VALID_WWPNOTIFICATIONDEFINITIONLINK",""","oparms":[{"av":"A31WWPNotificationDefinitionAllow","fld":"WWPNOTIFICATIONDEFINITIONALLOW"},{"av":"A68WWPNotificationDefinitionIsAut","fld":"WWPNOTIFICATIONDEFINITIONISAUT"}]}""");
+         setEventMetadata("VALID_WWPENTITYID","""{"handler":"Valid_Wwpentityid","iparms":[{"av":"A20WWPEntityId","fld":"WWPENTITYID","pic":"ZZZZZZZZZ9"},{"av":"A21WWPEntityName","fld":"WWPENTITYNAME"},{"av":"A31WWPNotificationDefinitionAllow","fld":"WWPNOTIFICATIONDEFINITIONALLOW"},{"av":"A68WWPNotificationDefinitionIsAut","fld":"WWPNOTIFICATIONDEFINITIONISAUT"}]""");
+         setEventMetadata("VALID_WWPENTITYID",""","oparms":[{"av":"A21WWPEntityName","fld":"WWPENTITYNAME"},{"av":"A31WWPNotificationDefinitionAllow","fld":"WWPNOTIFICATIONDEFINITIONALLOW"},{"av":"A68WWPNotificationDefinitionIsAut","fld":"WWPNOTIFICATIONDEFINITIONISAUT"}]}""");
+         setEventMetadata("VALID_WWPNOTIFICATIONDEFINITIONSECFU","""{"handler":"Valid_Wwpnotificationdefinitionsecfu","iparms":[{"av":"A67WWPNotificationDefinitionSecFu","fld":"WWPNOTIFICATIONDEFINITIONSECFU"},{"av":"A31WWPNotificationDefinitionAllow","fld":"WWPNOTIFICATIONDEFINITIONALLOW"},{"av":"A68WWPNotificationDefinitionIsAut","fld":"WWPNOTIFICATIONDEFINITIONISAUT"}]""");
+         setEventMetadata("VALID_WWPNOTIFICATIONDEFINITIONSECFU",""","oparms":[{"av":"A31WWPNotificationDefinitionAllow","fld":"WWPNOTIFICATIONDEFINITIONALLOW"},{"av":"A68WWPNotificationDefinitionIsAut","fld":"WWPNOTIFICATIONDEFINITIONISAUT"}]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
       }
 
-      protected void CloseOpenCursors( )
+      protected override void CloseCursors( )
       {
          pr_default.close(1);
          pr_default.close(12);
@@ -2591,7 +2586,6 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
          Z65WWPNotificationDefinitionLongD = "";
          Z66WWPNotificationDefinitionLink = "";
          Z67WWPNotificationDefinitionSecFu = "";
-         scmdbuf = "";
          gxfirstwebparm = "";
          gxfirstwebparm_bkp = "";
          A67WWPNotificationDefinitionSecFu = "";
@@ -2749,15 +2743,12 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
       private short Z30WWPNotificationDefinitionAppli ;
       private short GxWebError ;
       private short gxcookieaux ;
-      private short IsConfirmed ;
-      private short IsModified ;
       private short AnyError ;
+      private short IsModified ;
+      private short IsConfirmed ;
       private short nKeyPressed ;
-      private short initialized ;
       private short A30WWPNotificationDefinitionAppli ;
-      private short GX_JID ;
       private short RcdFound8 ;
-      private short nIsDirty_8 ;
       private short Gx_BScreen ;
       private short gxajaxcallmode ;
       private short ZZ30WWPNotificationDefinitionAppli ;
@@ -2791,7 +2782,6 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
       private long ZZ23WWPNotificationDefinitionId ;
       private long ZZ20WWPEntityId ;
       private string sPrefix ;
-      private string scmdbuf ;
       private string gxfirstwebparm ;
       private string gxfirstwebparm_bkp ;
       private string GXKey ;
@@ -2893,6 +2883,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
       private string ZZ66WWPNotificationDefinitionLink ;
       private string ZZ67WWPNotificationDefinitionSecFu ;
       private string ZZ21WWPEntityName ;
+      private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private GXCombobox cmbWWPNotificationDefinitionAppli ;
@@ -2947,7 +2938,6 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
       private long[] T000816_A25WWPSubscriptionId ;
       private long[] T000817_A23WWPNotificationDefinitionId ;
       private IDataStoreProvider pr_gam ;
-      private GXWebForm Form ;
    }
 
    public class wwp_notificationdefinition__gam : DataStoreHelperBase, IDataStoreHelper
@@ -3012,13 +3002,21 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
   {
      if ( def == null )
      {
-        Object[] prmT00085;
-        prmT00085 = new Object[] {
+        Object[] prmT00082;
+        prmT00082 = new Object[] {
+        new ParDef("WWPNotificationDefinitionId",GXType.Int64,10,0)
+        };
+        Object[] prmT00083;
+        prmT00083 = new Object[] {
         new ParDef("WWPNotificationDefinitionId",GXType.Int64,10,0)
         };
         Object[] prmT00084;
         prmT00084 = new Object[] {
         new ParDef("WWPEntityId",GXType.Int64,10,0)
+        };
+        Object[] prmT00085;
+        prmT00085 = new Object[] {
+        new ParDef("WWPNotificationDefinitionId",GXType.Int64,10,0)
         };
         Object[] prmT00086;
         prmT00086 = new Object[] {
@@ -3028,20 +3026,12 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
         prmT00087 = new Object[] {
         new ParDef("WWPNotificationDefinitionId",GXType.Int64,10,0)
         };
-        Object[] prmT00083;
-        prmT00083 = new Object[] {
-        new ParDef("WWPNotificationDefinitionId",GXType.Int64,10,0)
-        };
         Object[] prmT00088;
         prmT00088 = new Object[] {
         new ParDef("WWPNotificationDefinitionId",GXType.Int64,10,0)
         };
         Object[] prmT00089;
         prmT00089 = new Object[] {
-        new ParDef("WWPNotificationDefinitionId",GXType.Int64,10,0)
-        };
-        Object[] prmT00082;
-        prmT00082 = new Object[] {
         new ParDef("WWPNotificationDefinitionId",GXType.Int64,10,0)
         };
         Object[] prmT000810;
@@ -3080,6 +3070,10 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
         prmT000813 = new Object[] {
         new ParDef("WWPNotificationDefinitionId",GXType.Int64,10,0)
         };
+        Object[] prmT000814;
+        prmT000814 = new Object[] {
+        new ParDef("WWPEntityId",GXType.Int64,10,0)
+        };
         Object[] prmT000815;
         prmT000815 = new Object[] {
         new ParDef("WWPNotificationDefinitionId",GXType.Int64,10,0)
@@ -3090,10 +3084,6 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
         };
         Object[] prmT000817;
         prmT000817 = new Object[] {
-        };
-        Object[] prmT000814;
-        prmT000814 = new Object[] {
-        new ParDef("WWPEntityId",GXType.Int64,10,0)
         };
         def= new CursorDef[] {
             new CursorDef("T00082", "SELECT WWPNotificationDefinitionId, WWPNotificationDefinitionName, WWPNotificationDefinitionAppli, WWPNotificationDefinitionAllow, WWPNotificationDefinitionDescr, WWPNotificationDefinitionIcon, WWPNotificationDefinitionTitle, WWPNotificationDefinitionShort, WWPNotificationDefinitionLongD, WWPNotificationDefinitionLink, WWPNotificationDefinitionSecFu, WWPEntityId FROM WWP_NotificationDefinition WHERE WWPNotificationDefinitionId = :WWPNotificationDefinitionId  FOR UPDATE OF WWP_NotificationDefinition NOWAIT",true, GxErrorMask.GX_NOMASK, false, this,prmT00082,1, GxCacheFrequency.OFF ,true,false )

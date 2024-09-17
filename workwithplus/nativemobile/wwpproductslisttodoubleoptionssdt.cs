@@ -317,6 +317,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
                }
                if ( StringUtil.StringSearch( GXSoapXMLReader.Name, "Body", 1) > 0 )
                {
+                  this.SetPrefixesFromReader( GXSoapXMLReader);
                   if (true) break;
                }
                GXSoapError = GXSoapXMLReader.Read();
@@ -422,7 +423,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          }
          if ( currSoapErr == 0 )
          {
-            executePrivate();
+            ExecutePrivate();
          }
          context.CloseConnections();
          sIncludeState = true;
@@ -481,7 +482,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          this.AV14ProductDataList = aP0_ProductDataList;
          this.AV11DoubleMenuOptions = new GXBaseCollection<GeneXus.Programs.workwithplus.nativemobile.SdtDoubleItemListData_DoubleItemListDataItem>( context, "DoubleItemListDataItem", "YTT_version4") ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_DoubleMenuOptions=this.AV11DoubleMenuOptions;
       }
 
@@ -494,30 +495,13 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
       public void executeSubmit( GXBaseCollection<GeneXus.Programs.workwithplus.nativemobile.SdtWWPProductData> aP0_ProductDataList ,
                                  out GXBaseCollection<GeneXus.Programs.workwithplus.nativemobile.SdtDoubleItemListData_DoubleItemListDataItem> aP1_DoubleMenuOptions )
       {
-         wwpproductslisttodoubleoptionssdt objwwpproductslisttodoubleoptionssdt;
-         objwwpproductslisttodoubleoptionssdt = new wwpproductslisttodoubleoptionssdt();
-         objwwpproductslisttodoubleoptionssdt.AV14ProductDataList = aP0_ProductDataList;
-         objwwpproductslisttodoubleoptionssdt.AV11DoubleMenuOptions = new GXBaseCollection<GeneXus.Programs.workwithplus.nativemobile.SdtDoubleItemListData_DoubleItemListDataItem>( context, "DoubleItemListDataItem", "YTT_version4") ;
-         objwwpproductslisttodoubleoptionssdt.context.SetSubmitInitialConfig(context);
-         objwwpproductslisttodoubleoptionssdt.initialize();
-         Submit( executePrivateCatch,objwwpproductslisttodoubleoptionssdt);
+         this.AV14ProductDataList = aP0_ProductDataList;
+         this.AV11DoubleMenuOptions = new GXBaseCollection<GeneXus.Programs.workwithplus.nativemobile.SdtDoubleItemListData_DoubleItemListDataItem>( context, "DoubleItemListDataItem", "YTT_version4") ;
+         SubmitImpl();
          aP1_DoubleMenuOptions=this.AV11DoubleMenuOptions;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwpproductslisttodoubleoptionssdt)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -559,22 +543,18 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
             context.Redirect( context.wjLoc );
             context.wjLoc = "";
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          base.cleanup();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override bool UploadEnabled( )
@@ -613,12 +593,12 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
       private GXXMLWriter GXSoapXMLWriter ;
       private GxSoapRequest GXSoapHTTPRequest ;
       private GxHttpResponse GXSoapHTTPResponse ;
-      private GXBaseCollection<GeneXus.Programs.workwithplus.nativemobile.SdtDoubleItemListData_DoubleItemListDataItem> aP1_DoubleMenuOptions ;
       private GXBaseCollection<GeneXus.Programs.workwithplus.nativemobile.SdtWWPProductData> AV14ProductDataList ;
       private GXBaseCollection<GeneXus.Programs.workwithplus.nativemobile.SdtDoubleItemListData_DoubleItemListDataItem> AV11DoubleMenuOptions ;
       private GeneXus.Programs.workwithplus.nativemobile.SdtWWPProductData AV8ProductData ;
-      private GeneXus.Programs.workwithplus.nativemobile.SdtWWPProductData AV13ProductDataItem ;
       private GeneXus.Programs.workwithplus.nativemobile.SdtDoubleItemListData_DoubleItemListDataItem AV12DoubleMenuOptionsItem ;
+      private GeneXus.Programs.workwithplus.nativemobile.SdtWWPProductData AV13ProductDataItem ;
+      private GXBaseCollection<GeneXus.Programs.workwithplus.nativemobile.SdtDoubleItemListData_DoubleItemListDataItem> aP1_DoubleMenuOptions ;
    }
 
 }

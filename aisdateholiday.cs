@@ -26,20 +26,15 @@ namespace GeneXus.Programs {
    {
       public static int Main( string[] args )
       {
-         try
-         {
-            GeneXus.Configuration.Config.ParseArgs(ref args);
-            return new aisdateholiday().executeCmdLine(args); ;
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-            return 1 ;
-         }
+         return new aisdateholiday().MainImpl(args); ;
       }
 
       public int executeCmdLine( string[] args )
+      {
+         return ExecuteCmdLine(args); ;
+      }
+
+      protected override int ExecuteCmdLine( string[] args )
       {
          DateTime aP0_Date = new DateTime()  ;
           long aP1_EmployeeId ;
@@ -114,7 +109,7 @@ namespace GeneXus.Programs {
          this.AV9EmployeeId = aP1_EmployeeId;
          this.AV11IsHoliday = false ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP2_IsHoliday=this.AV11IsHoliday;
       }
 
@@ -129,31 +124,14 @@ namespace GeneXus.Programs {
                                  long aP1_EmployeeId ,
                                  out bool aP2_IsHoliday )
       {
-         aisdateholiday objaisdateholiday;
-         objaisdateholiday = new aisdateholiday();
-         objaisdateholiday.AV8Date = aP0_Date;
-         objaisdateholiday.AV9EmployeeId = aP1_EmployeeId;
-         objaisdateholiday.AV11IsHoliday = false ;
-         objaisdateholiday.context.SetSubmitInitialConfig(context);
-         objaisdateholiday.initialize();
-         Submit( executePrivateCatch,objaisdateholiday);
+         this.AV8Date = aP0_Date;
+         this.AV9EmployeeId = aP1_EmployeeId;
+         this.AV11IsHoliday = false ;
+         SubmitImpl();
          aP2_IsHoliday=this.AV11IsHoliday;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((aisdateholiday)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -184,7 +162,7 @@ namespace GeneXus.Programs {
             A157CompanyLocationId = P00AY3_A157CompanyLocationId[0];
             AV11IsHoliday = true;
             pr_default.close(1);
-            this.cleanup();
+            cleanup();
             if (true) return;
             pr_default.readNext(1);
          }
@@ -203,17 +181,17 @@ namespace GeneXus.Programs {
             A145LeaveTypeLoggingWorkHours = P00AY4_A145LeaveTypeLoggingWorkHours[0];
             AV11IsHoliday = true;
             pr_default.close(2);
-            this.cleanup();
+            cleanup();
             if (true) return;
             pr_default.readNext(2);
          }
          pr_default.close(2);
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -221,13 +199,8 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
-         scmdbuf = "";
          P00AY2_A100CompanyId = new long[1] ;
          P00AY2_A106EmployeeId = new long[1] ;
          P00AY2_A157CompanyLocationId = new long[1] ;
@@ -271,7 +244,6 @@ namespace GeneXus.Programs {
       private long A113HolidayId ;
       private long A124LeaveTypeId ;
       private long A127LeaveRequestId ;
-      private string scmdbuf ;
       private string A145LeaveTypeLoggingWorkHours ;
       private string A132LeaveRequestStatus ;
       private DateTime AV8Date ;

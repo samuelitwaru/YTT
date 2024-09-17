@@ -65,7 +65,7 @@ namespace GeneXus.Programs {
          }
          if ( GxWebError == 0 )
          {
-            executePrivate();
+            ExecutePrivate();
          }
          cleanup();
       }
@@ -91,32 +91,15 @@ namespace GeneXus.Programs {
       public void execute( )
       {
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
       public void executeSubmit( )
       {
-         aprocedure1 objaprocedure1;
-         objaprocedure1 = new aprocedure1();
-         objaprocedure1.context.SetSubmitInitialConfig(context);
-         objaprocedure1.initialize();
-         Submit( executePrivateCatch,objaprocedure1);
+         SubmitImpl();
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((aprocedure1)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -192,7 +175,7 @@ namespace GeneXus.Programs {
             context.Redirect( context.wjLoc );
             context.wjLoc = "";
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void HAF0( bool bFoot ,
@@ -249,7 +232,7 @@ namespace GeneXus.Programs {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if (IsMain)	waitPrinterEnd();
          base.cleanup();
          if ( IsMain )
@@ -259,15 +242,10 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
          GXKey = "";
          gxfirstwebparm = "";
-         scmdbuf = "";
          P00AF2_A106EmployeeId = new long[1] ;
          P00AF2_A109EmployeeEmail = new string[] {""} ;
          A109EmployeeEmail = "";
@@ -301,7 +279,6 @@ namespace GeneXus.Programs {
       private long A106EmployeeId ;
       private string GXKey ;
       private string gxfirstwebparm ;
-      private string scmdbuf ;
       private bool entryPointCalled ;
       private string A109EmployeeEmail ;
       private IGxDataStore dsGAM ;
@@ -309,10 +286,10 @@ namespace GeneXus.Programs {
       private IDataStoreProvider pr_default ;
       private long[] P00AF2_A106EmployeeId ;
       private string[] P00AF2_A109EmployeeEmail ;
-      private IDataStoreProvider pr_gam ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV10GAMErrorCollection ;
-      private GeneXus.Programs.genexussecurity.SdtGAMUser AV8GAMUser ;
       private SdtEmployee AV9Employee ;
+      private GeneXus.Programs.genexussecurity.SdtGAMUser AV8GAMUser ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV10GAMErrorCollection ;
+      private IDataStoreProvider pr_gam ;
    }
 
    public class aprocedure1__gam : DataStoreHelperBase, IDataStoreHelper

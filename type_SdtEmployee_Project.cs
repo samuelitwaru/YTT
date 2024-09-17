@@ -300,6 +300,20 @@ namespace GeneXus.Programs {
          return false ;
       }
 
+      [XmlIgnore]
+      private static GXTypeInfo _typeProps;
+      protected override GXTypeInfo TypeInfo
+      {
+         get {
+            return _typeProps ;
+         }
+
+         set {
+            _typeProps = value ;
+         }
+
+      }
+
       public void initialize( )
       {
          sdtIsNull = 1;
@@ -325,6 +339,7 @@ namespace GeneXus.Programs {
    }
 
    [DataContract(Name = @"Employee.Project", Namespace = "YTT_version4")]
+   [GxJsonSerialization("default")]
    public class SdtEmployee_Project_RESTInterface : GxGenericCollectionItem<SdtEmployee_Project>
    {
       public SdtEmployee_Project_RESTInterface( ) : base()
@@ -387,6 +402,7 @@ namespace GeneXus.Programs {
    }
 
    [DataContract(Name = @"Employee.Project", Namespace = "YTT_version4")]
+   [GxJsonSerialization("default")]
    public class SdtEmployee_Project_RESTLInterface : GxGenericCollectionItem<SdtEmployee_Project>
    {
       public SdtEmployee_Project_RESTLInterface( ) : base()

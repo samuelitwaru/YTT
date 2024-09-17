@@ -46,7 +46,7 @@ namespace GeneXus.Programs.workwithplus.ai {
          this.AV18Link = "" ;
          this.AV9ErrorMessage = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP2_Link=this.AV18Link;
          aP3_ErrorMessage=this.AV9ErrorMessage;
       }
@@ -64,33 +64,16 @@ namespace GeneXus.Programs.workwithplus.ai {
                                  out string aP2_Link ,
                                  out string aP3_ErrorMessage )
       {
-         wwp_aigetnlfilterfromai objwwp_aigetnlfilterfromai;
-         objwwp_aigetnlfilterfromai = new wwp_aigetnlfilterfromai();
-         objwwp_aigetnlfilterfromai.AV19ListName = aP0_ListName;
-         objwwp_aigetnlfilterfromai.AV25UserQuery = aP1_UserQuery;
-         objwwp_aigetnlfilterfromai.AV18Link = "" ;
-         objwwp_aigetnlfilterfromai.AV9ErrorMessage = "" ;
-         objwwp_aigetnlfilterfromai.context.SetSubmitInitialConfig(context);
-         objwwp_aigetnlfilterfromai.initialize();
-         Submit( executePrivateCatch,objwwp_aigetnlfilterfromai);
+         this.AV19ListName = aP0_ListName;
+         this.AV25UserQuery = aP1_UserQuery;
+         this.AV18Link = "" ;
+         this.AV9ErrorMessage = "" ;
+         SubmitImpl();
          aP2_Link=this.AV18Link;
          aP3_ErrorMessage=this.AV9ErrorMessage;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwp_aigetnlfilterfromai)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -98,7 +81,7 @@ namespace GeneXus.Programs.workwithplus.ai {
          S121 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          if ( String.IsNullOrEmpty(StringUtil.RTrim( AV9ErrorMessage)) )
@@ -159,7 +142,7 @@ namespace GeneXus.Programs.workwithplus.ai {
                   S111 ();
                   if ( returnInSub )
                   {
-                     this.cleanup();
+                     cleanup();
                      if (true) return;
                   }
                   new GeneXus.Programs.wwpbaseobjects.savegridstate(context ).execute(  AV19ListName+"GridState",  AV16GridState.ToXml(false, true, "", "")) ;
@@ -167,7 +150,7 @@ namespace GeneXus.Programs.workwithplus.ai {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void S111( )
@@ -409,16 +392,12 @@ namespace GeneXus.Programs.workwithplus.ai {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -480,23 +459,23 @@ namespace GeneXus.Programs.workwithplus.ai {
       private string AV31AuxText ;
       private string AV33FullTextFilter ;
       private string AV35DateStr ;
-      private GxSimpleCollection<short> AV20OptionsToRemove ;
-      private GeneXus.Programs.workwithplus.ai.SdtWWP_AINLQueryResponse AV29WWPNLQueryResponse ;
-      private string aP2_Link ;
-      private string aP3_ErrorMessage ;
       private IGxSession AV23Session ;
-      private GxSimpleCollection<string> AV40GXV4 ;
+      private GeneXus.Programs.workwithplus.ai.SdtWWP_AINLQueryResponse AV29WWPNLQueryResponse ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState AV16GridState ;
+      private GeneXus.Programs.workwithplus.ai.SdtWWP_AINLQueryResponse_FilterValue AV13FilterValue ;
+      private GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData_ListQuery_FiltersToFixItem> AV12FiltersFixes ;
+      private GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData_ListQuery_FiltersToFixItem AV10FilterFix ;
+      private GxSimpleCollection<short> AV20OptionsToRemove ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue AV17GridStateFilterValue ;
       private GxSimpleCollection<string> AV26VarCharList ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue AV15FoundGridStateFilterValue ;
+      private GxSimpleCollection<string> AV40GXV4 ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_DynamicFilter AV34DynFilter ;
       private GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData> AV28WWP_AIListDatas ;
       private GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData> GXt_objcol_SdtWWP_AIListData2 ;
-      private GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData_ListQuery_FiltersToFixItem> AV12FiltersFixes ;
       private GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData AV27WWP_AIListData ;
-      private GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData_ListQuery_FiltersToFixItem AV10FilterFix ;
-      private GeneXus.Programs.workwithplus.ai.SdtWWP_AINLQueryResponse_FilterValue AV13FilterValue ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState AV16GridState ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue AV17GridStateFilterValue ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue AV15FoundGridStateFilterValue ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_DynamicFilter AV34DynFilter ;
+      private string aP2_Link ;
+      private string aP3_ErrorMessage ;
    }
 
 }

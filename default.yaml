@@ -1,16 +1,16 @@
 openapi: 3.0.0
 info:
   title: "YTT_version4"
-  version: "20240824102150"
+  version: "20240917131908"
 servers:
-  - url: http://localhost:8082/YTT_version4NETPostgreSQL14/rest
+  - url: http://localhost:8083/YTT_version4NETPostgreSQL14/rest
 paths:
   /Device/{DeviceId}:
     get:
       tags:
         - Device
       operationId: "GetDevice"
-      summary: "Gets a Device"
+      summary: "Find an existing Device"
       security: 
         - oAuthGXGAM: []
       parameters:
@@ -20,7 +20,6 @@ paths:
           required: true
           schema:
             type: "string"
-            
       responses:
         200:
           description: "Successful operation"
@@ -50,7 +49,7 @@ paths:
       tags:
         - Device
       operationId: "InsertDevice"
-      summary: "Inserts a Device"
+      summary: "Add a new Device"
       security: 
         - oAuthGXGAM: []
       parameters:
@@ -60,9 +59,8 @@ paths:
           required: true
           schema:
             type: "string"
-            
       requestBody:
-        description: "SDT of Device"
+        description: "Device properties"
         required: true
         content:
           application/json:
@@ -103,7 +101,7 @@ paths:
       tags:
         - Device
       operationId: "UpdateDevice"
-      summary: "Updates a Device"
+      summary: "Update an existing Device"
       security: 
         - oAuthGXGAM: []
       parameters:
@@ -113,9 +111,8 @@ paths:
           required: true
           schema:
             type: "string"
-            
       requestBody:
-        description: "SDT of Device"
+        description: "Device properties"
         required: true
         content:
           application/json:
@@ -152,7 +149,7 @@ paths:
       tags:
         - Device
       operationId: "DeleteDevice"
-      summary: "Deletes a Device"
+      summary: "Delete an existing Device"
       security: 
         - oAuthGXGAM: []
       parameters:
@@ -162,7 +159,6 @@ paths:
           required: true
           schema:
             type: "string"
-            
       responses:
         200:
           description: "Successful operation"
@@ -199,7 +195,7 @@ paths:
       tags:
         - LeaveRequest
       operationId: "GetLeaveRequest"
-      summary: "Gets a LeaveRequest"
+      summary: "Find an existing LeaveRequest"
       security: 
         - oAuthGXGAM: []
       parameters:
@@ -239,7 +235,7 @@ paths:
       tags:
         - LeaveRequest
       operationId: "InsertLeaveRequest"
-      summary: "Inserts a LeaveRequest"
+      summary: "Add a new LeaveRequest"
       security: 
         - oAuthGXGAM: []
       parameters:
@@ -251,7 +247,7 @@ paths:
             type: "integer"
             format: "int64"
       requestBody:
-        description: "SDT of LeaveRequest"
+        description: "LeaveRequest properties"
         required: true
         content:
           application/json:
@@ -292,7 +288,7 @@ paths:
       tags:
         - LeaveRequest
       operationId: "UpdateLeaveRequest"
-      summary: "Updates a LeaveRequest"
+      summary: "Update an existing LeaveRequest"
       security: 
         - oAuthGXGAM: []
       parameters:
@@ -304,7 +300,7 @@ paths:
             type: "integer"
             format: "int64"
       requestBody:
-        description: "SDT of LeaveRequest"
+        description: "LeaveRequest properties"
         required: true
         content:
           application/json:
@@ -341,7 +337,7 @@ paths:
       tags:
         - LeaveRequest
       operationId: "DeleteLeaveRequest"
-      summary: "Deletes a LeaveRequest"
+      summary: "Delete an existing LeaveRequest"
       security: 
         - oAuthGXGAM: []
       parameters:
@@ -388,7 +384,7 @@ paths:
       tags:
         - LeaveType
       operationId: "GetLeaveType"
-      summary: "Gets a LeaveType"
+      summary: "Find an existing LeaveType"
       security: 
         - oAuthGXGAM: []
       parameters:
@@ -428,7 +424,7 @@ paths:
       tags:
         - LeaveType
       operationId: "InsertLeaveType"
-      summary: "Inserts a LeaveType"
+      summary: "Add a new LeaveType"
       security: 
         - oAuthGXGAM: []
       parameters:
@@ -440,7 +436,7 @@ paths:
             type: "integer"
             format: "int64"
       requestBody:
-        description: "SDT of LeaveType"
+        description: "LeaveType properties"
         required: true
         content:
           application/json:
@@ -481,7 +477,7 @@ paths:
       tags:
         - LeaveType
       operationId: "UpdateLeaveType"
-      summary: "Updates a LeaveType"
+      summary: "Update an existing LeaveType"
       security: 
         - oAuthGXGAM: []
       parameters:
@@ -493,7 +489,7 @@ paths:
             type: "integer"
             format: "int64"
       requestBody:
-        description: "SDT of LeaveType"
+        description: "LeaveType properties"
         required: true
         content:
           application/json:
@@ -530,7 +526,7 @@ paths:
       tags:
         - LeaveType
       operationId: "DeleteLeaveType"
-      summary: "Deletes a LeaveType"
+      summary: "Delete an existing LeaveType"
       security: 
         - oAuthGXGAM: []
       parameters:
@@ -577,7 +573,7 @@ paths:
       tags:
         - WorkHourLog
       operationId: "GetWorkHourLog"
-      summary: "Gets a WorkHourLog"
+      summary: "Find an existing WorkHourLog"
       security: 
         - oAuthGXGAM: []
       parameters:
@@ -617,7 +613,7 @@ paths:
       tags:
         - WorkHourLog
       operationId: "InsertWorkHourLog"
-      summary: "Inserts a WorkHourLog"
+      summary: "Add a new WorkHourLog"
       security: 
         - oAuthGXGAM: []
       parameters:
@@ -629,7 +625,7 @@ paths:
             type: "integer"
             format: "int64"
       requestBody:
-        description: "SDT of WorkHourLog"
+        description: "WorkHourLog properties"
         required: true
         content:
           application/json:
@@ -670,7 +666,7 @@ paths:
       tags:
         - WorkHourLog
       operationId: "UpdateWorkHourLog"
-      summary: "Updates a WorkHourLog"
+      summary: "Update an existing WorkHourLog"
       security: 
         - oAuthGXGAM: []
       parameters:
@@ -682,7 +678,7 @@ paths:
             type: "integer"
             format: "int64"
       requestBody:
-        description: "SDT of WorkHourLog"
+        description: "WorkHourLog properties"
         required: true
         content:
           application/json:
@@ -719,7 +715,7 @@ paths:
       tags:
         - WorkHourLog
       operationId: "DeleteWorkHourLog"
-      summary: "Deletes a WorkHourLog"
+      summary: "Delete an existing WorkHourLog"
       security: 
         - oAuthGXGAM: []
       parameters:
@@ -775,8 +771,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/CompanyLocationWWGetFilterDataInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -800,8 +794,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/CompanyWWGetFilterDataInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -825,8 +817,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/EmployeeListGetFilterDataInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -850,8 +840,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/EmployeeLoadDVComboInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -875,8 +863,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/EmployeeWWGetFilterDataInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -898,8 +884,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/GAMSDChangePasswordUserInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -921,8 +905,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/GAMSDRegisterUserInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -944,8 +926,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/GAMSDUpdateRegisterUserInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -969,8 +949,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/General.Services.DirectionsServiceRequestInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -994,8 +972,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/General.Services.GxAfterEventReplicatorInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -1015,8 +991,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/General.Services.GxBeforeEventReplicatorInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -1040,8 +1014,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/General.Services.GxOnPendingEventFailedInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -1063,8 +1035,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/General.Services.NotificationsRegistrationHandlerInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -1084,8 +1054,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/GetLeaveRequestDaysInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -1103,7 +1071,6 @@ paths:
       summary: "Get Logged In Employee Id"
       security: 
         - oAuthGXGAM: []
-
       responses:
         200:
           description: "Successful operation"
@@ -1121,7 +1088,6 @@ paths:
       summary: "Get Logged Work Days"
       security: 
         - oAuthGXGAM: []
-
       responses:
         200:
           description: "Successful operation"
@@ -1145,8 +1111,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/GetWeeklyHoursInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -1170,8 +1134,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/HolidayWWGetFilterDataInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -1189,7 +1151,6 @@ paths:
       summary: "Is Time Tracker Open"
       security: 
         - oAuthGXGAM: []
-
       responses:
         200:
           description: "Successful operation"
@@ -1211,8 +1172,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/LeaveRequestApprovedGetFilterDataInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -1234,8 +1193,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/LeaveRequestPendingGetFilterDataInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -1257,8 +1214,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/LeaveRequestRejectedGetFilterDataInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -1282,8 +1237,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/LeaveRequestsGetFilterDataInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -1307,8 +1260,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/LeaveRequestWWGetFilterDataInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -1332,8 +1283,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/LeaveTypeWWGetFilterDataInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -1357,8 +1306,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/ProjectWWGetFilterDataInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -1380,8 +1327,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/ReportsWorkHourLogDetailsGetFilterDataInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -1399,7 +1344,6 @@ paths:
       summary: "SDAssign User Device"
       security: 
         - oAuthGXGAM: []
-
       responses:
         200:
           description: "Successful operation"
@@ -1413,7 +1357,6 @@ paths:
       summary: "SDGet Daily Log Hours"
       security: 
         - oAuthGXGAM: []
-
       responses:
         200:
           description: "Successful operation"
@@ -1429,7 +1372,6 @@ paths:
         - SDGetLogDaysMissed
       operationId: "SDGetLogDaysMissed"
       summary: "SDGet Log Days Missed"
-
       responses:
         200:
           description: "Successful operation"
@@ -1453,8 +1395,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/SDGetLoggedWorkDaysInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -1470,7 +1410,6 @@ paths:
         - SDGetMonthHours
       operationId: "SDGetMonthHours"
       summary: "Get Month Hours Procedure"
-
       responses:
         200:
           description: "Successful operation"
@@ -1488,7 +1427,6 @@ paths:
       summary: "SDGet Week Hours"
       security: 
         - oAuthGXGAM: []
-
       responses:
         200:
           description: "Successful operation"
@@ -1510,8 +1448,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/SDisGAMUserBlockedInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -1535,8 +1471,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/SDSendLeaveRequestMailInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -1556,8 +1490,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/SendLeaveRequestDeletionMailInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -1577,8 +1509,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/SendLeaveUpdatetMailInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -1598,8 +1528,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/SiteSettingLoadDVComboInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -1623,8 +1551,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/TestProjectLogsByEmployeeGetFilterDataInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -1632,6 +1558,29 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/TestProjectLogsByEmployeeGetFilterDataOutput"
+        404:
+          description: "Not found"
+  /TrnNewWWGetFilterData:
+    post:
+      tags:
+        - TrnNewWWGetFilterData
+      operationId: "TrnNewWWGetFilterData"
+      summary: "Trn New WWGet Filter Data"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TrnNewWWGetFilterDataInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TrnNewWWGetFilterDataOutput"
         404:
           description: "Not found"
   /WebPanel1LoadDVCombo:
@@ -1648,8 +1597,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/WebPanel1LoadDVComboInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -1671,8 +1618,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/WorkHourLogByEmployeeGetFilterDataInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -1696,8 +1641,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/WorkHourLogListGetFilterDataInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -1721,8 +1664,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/WorkHourLogLoadDVComboInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -1746,8 +1687,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/WorkHourLogWWGetFilterDataInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -1771,8 +1710,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/WorkWithPlus.NativeMobile.ExampleGetImageFromBase64Input"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -1792,8 +1729,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/WorkWithPlus.NativeMobile.ExampleGetPDFUrlInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -1817,8 +1752,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/WorkWithPlus.NativeMobile.WWPCreateLocationsListInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -1833,7 +1766,7 @@ paths:
       tags:
         - WorkWithPlus.NativeMobile
       operationId: "UploadWorkWithPlus.NativeMobile.WWPDoubleMenuFromLaunchpad"
-      summary: "Upload a binary for a WWPDoubleMenuFromLaunchpad"
+      summary: "Upload a binary for WWPDoubleMenuFromLaunchpad"
       responses:
         200:
           description: "Successful operation"
@@ -1841,7 +1774,6 @@ paths:
           description: "Bad request"
         500:
           description: "Internal Server Error"
-
   /WorkWithPlus/NativeMobile/WWPDoubleMenuFromLaunchpad:
     post:
       tags:
@@ -1856,8 +1788,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/WorkWithPlus.NativeMobile.WWPDoubleMenuFromLaunchpadInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -1881,8 +1811,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/WorkWithPlus.NativeMobile.WWPGetCalendarDateInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -1906,8 +1834,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/WorkWithPlus.NativeMobile.WWPGetCalendarDateFromNrInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -1931,8 +1857,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/WorkWithPlus.NativeMobile.WWPGetDecimalFromHexInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -1956,8 +1880,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/WorkWithPlus.NativeMobile.WWPGetLinearGaugeConfigFromPercentageInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -1981,8 +1903,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/WorkWithPlus.NativeMobile.WWPGetRadialGaugeInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -2006,8 +1926,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/WorkWithPlus.NativeMobile.WWPGetRadialGaugeDarkInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -2031,8 +1949,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/WorkWithPlus.NativeMobile.WWPGetRadialGaugeLightInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -2056,8 +1972,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/WorkWithPlus.NativeMobile.WWPGetRadialGaugeWhiteInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -2081,8 +1995,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/WorkWithPlus.NativeMobile.WWPGetRangedRadialGaugeInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -2106,8 +2018,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/WorkWithPlus.NativeMobile.WWPGetRangedRadialGaugeFromConfigInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -2131,8 +2041,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/WorkWithPlus.NativeMobile.WWPGetUnicodeFromHexInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -2156,8 +2064,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/WorkWithPlus.NativeMobile.WWPMapPointFromStringInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -2181,8 +2087,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/WorkWithPlus.NativeMobile.WWPParseHexColorInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -2197,7 +2101,7 @@ paths:
       tags:
         - WorkWithPlus.NativeMobile
       operationId: "UploadWorkWithPlus.NativeMobile.WWPProductsListToDoubleOptionsSDT"
-      summary: "Upload a binary for a WWPProductsListToDoubleOptionsSDT"
+      summary: "Upload a binary for WWPProductsListToDoubleOptionsSDT"
       responses:
         200:
           description: "Successful operation"
@@ -2205,7 +2109,6 @@ paths:
           description: "Bad request"
         500:
           description: "Internal Server Error"
-
   /WorkWithPlus/NativeMobile/WWPProductsListToDoubleOptionsSDT:
     post:
       tags:
@@ -2220,8 +2123,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/WorkWithPlus.NativeMobile.WWPProductsListToDoubleOptionsSDTInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -2245,8 +2146,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/WorkWithPlus.NativeMobile.WWPWebServerSessionGetInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -2270,8 +2169,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/WorkWithPlus.NativeMobile.WWPWebServerSessionGetNumInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -2295,8 +2192,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/WorkWithPlus.NativeMobile.WWPWebServerSessionSetInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -2316,8 +2211,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/WorkWithPlus.NativeMobile.WWPWebServerSessionSetNumInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -2337,8 +2230,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/WorkWithPlus.WWP_ParameterWWGetFilterDataInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -2362,8 +2253,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/WPLeaveReportLoadDVComboInput"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -2386,8 +2275,6 @@ paths:
           schema:
             type: "integer"
             format: "int64"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -2406,8 +2293,6 @@ paths:
           schema:
             type: "integer"
             format: "int64"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -2415,7 +2300,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GAMSDChangePassword_Level_DetailSdt"  
-
         404:
           description: "Not found"
   /GAMSDNotAuthorized_Level_Detail:
@@ -2431,8 +2315,6 @@ paths:
           schema:
             type: "integer"
             format: "int64"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -2440,7 +2322,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GAMSDNotAuthorized_Level_DetailSdt"  
-
         404:
           description: "Not found"
   /GAMSDUpdateUser_Level_Detail:
@@ -2456,8 +2337,6 @@ paths:
           schema:
             type: "integer"
             format: "int64"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -2465,7 +2344,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GAMSDUpdateUser_Level_DetailSdt"  
-
         404:
           description: "Not found"
   /LandingPanel_Level_Detail:
@@ -2481,8 +2359,6 @@ paths:
           schema:
             type: "integer"
             format: "int64"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -2501,8 +2377,6 @@ paths:
           schema:
             type: "integer"
             format: "int64"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -2510,7 +2384,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/LeaveRequestPanel_Level_DetailSdt"  
-
         404:
           description: "Not found"
   /LeaveRequestsGridPanel_Level_Detail_Grid:
@@ -2525,7 +2398,6 @@ paths:
           required: false
           schema:
             type: "string"
-            
         - name: "Start"
           in: "query"
           required: false
@@ -2544,8 +2416,6 @@ paths:
           schema:
             type: "integer"
             format: "int64"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -2555,7 +2425,6 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/LeaveRequestsGridPanel_Level_Detail_GridSdt_Item"  
-
         404:
           description: "Not found"
   /LeaveRequestsGridPanel_Level_Detail:
@@ -2571,8 +2440,6 @@ paths:
           schema:
             type: "integer"
             format: "int64"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -2580,7 +2447,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/LeaveRequestsGridPanel_Level_DetailSdt"  
-
         404:
           description: "Not found"
   /LoggedOutPanel_Level_Detail:
@@ -2596,8 +2462,6 @@ paths:
           schema:
             type: "integer"
             format: "int64"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -2616,8 +2480,6 @@ paths:
           schema:
             type: "integer"
             format: "int64"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -2625,7 +2487,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/LogHoursPanel_Level_DetailSdt"  
-
         404:
           description: "Not found"
   /LoginPanel_Level_Detail:
@@ -2641,8 +2502,6 @@ paths:
           schema:
             type: "integer"
             format: "int64"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -2650,7 +2509,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/LoginPanel_Level_DetailSdt"  
-
         404:
           description: "Not found"
   /PasswordChangePanel_Level_Detail:
@@ -2666,8 +2524,6 @@ paths:
           schema:
             type: "integer"
             format: "int64"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -2675,7 +2531,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/PasswordChangePanel_Level_DetailSdt"  
-
         404:
           description: "Not found"
   /ProfilePanel_Level_Detail:
@@ -2691,8 +2546,6 @@ paths:
           schema:
             type: "integer"
             format: "int64"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -2700,7 +2553,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ProfilePanel_Level_DetailSdt"  
-
         404:
           description: "Not found"
   /UpdateLeaveRequest_Level_Detail:
@@ -2716,8 +2568,6 @@ paths:
           schema:
             type: "integer"
             format: "int64"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -2725,7 +2575,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UpdateLeaveRequest_Level_DetailSdt"  
-
         404:
           description: "Not found"
   /UpdateWorkHourLog_Level_Detail:
@@ -2741,8 +2590,6 @@ paths:
           schema:
             type: "integer"
             format: "int64"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -2750,7 +2597,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UpdateWorkHourLog_Level_DetailSdt"  
-
         404:
           description: "Not found"
   /ViewLeaveRequest_Level_Detail:
@@ -2766,8 +2612,6 @@ paths:
           schema:
             type: "integer"
             format: "int64"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -2775,7 +2619,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ViewLeaveRequest_Level_DetailSdt"  
-
         404:
           description: "Not found"
   /WorkHoursPanel_Level_Detail:
@@ -2791,8 +2634,6 @@ paths:
           schema:
             type: "integer"
             format: "int64"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -2800,7 +2641,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/WorkHoursPanel_Level_DetailSdt"  
-
         404:
           description: "Not found"
   /WorkLogsGridCollectionPanel_Level_Detail:
@@ -2822,8 +2662,6 @@ paths:
           schema:
             type: "integer"
             format: "int64"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -2831,7 +2669,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/WorkLogsGridCollectionPanel_Level_DetailSdt"  
-
         404:
           description: "Not found"
   /WorkLogsGridPanel_Level_Detail_Grid:
@@ -2864,7 +2701,6 @@ paths:
           required: false
           schema:
             type: "string"
-            
         - name: "Start"
           in: "query"
           required: false
@@ -2883,8 +2719,6 @@ paths:
           schema:
             type: "integer"
             format: "int64"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -2894,7 +2728,6 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/WorkLogsGridPanel_Level_Detail_GridSdt_Item"  
-
         404:
           description: "Not found"
   /WorkLogsGridPanel_Level_Detail:
@@ -2928,8 +2761,6 @@ paths:
           schema:
             type: "integer"
             format: "int64"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -2937,7 +2768,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/WorkLogsGridPanel_Level_DetailSdt"  
-
         404:
           description: "Not found"
   /YTTV3SD_Level_Detail:
@@ -2953,8 +2783,6 @@ paths:
           schema:
             type: "integer"
             format: "int64"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -2962,7 +2790,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/YTTV3SD_Level_DetailSdt"  
-
         404:
           description: "Not found"
   /YTTV3SDLogin_Level_Detail:
@@ -2978,8 +2805,6 @@ paths:
           schema:
             type: "integer"
             format: "int64"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -2987,7 +2812,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/YTTV3SDLogin_Level_DetailSdt"  
-
         404:
           description: "Not found"
   /YTTV3SDNotAuthorized_Level_Detail:
@@ -3003,8 +2827,6 @@ paths:
           schema:
             type: "integer"
             format: "int64"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -3023,8 +2845,6 @@ paths:
           schema:
             type: "integer"
             format: "int64"
-
-
       responses:
         200:
           description: "Successful operation"
@@ -3036,7 +2856,6 @@ paths:
         - oauth
       operationId: "oauth.access_token"
       summary: "GeneXus GAM Services"
-
       responses:
         200:
           description: "Successful operation"
@@ -3048,7 +2867,6 @@ paths:
         - oauth
       operationId: "oauth.logout"
       summary: "GeneXus GAM Services"
-
       responses:
         200:
           description: "Successful operation"
@@ -3060,7 +2878,6 @@ paths:
         - oauth
       operationId: "oauth.userinfo"
       summary: "GeneXus GAM Services"
-
       responses:
         200:
           description: "Successful operation"
@@ -3072,7 +2889,6 @@ paths:
         - GXValidService
       operationId: "gx_valid_service"
       summary: "GeneXus GAM Services"
-
       responses:
         200:
           description: "Successful operation"
@@ -3084,7 +2900,6 @@ paths:
         - oauth.gam
       operationId: "oauth.gam.signin"
       summary: "GeneXus GAM Services"
-
       responses:
         200:
           description: "Successful operation"
@@ -3096,7 +2911,6 @@ paths:
         - oauth.gam
       operationId: "oauth.gam.callback"
       summary: "GeneXus GAM Services"
-
       responses:
         200:
           description: "Successful operation"
@@ -3108,7 +2922,6 @@ paths:
         - oauth.gam
       operationId: "oauth.gam.access_token"
       summary: "GeneXus GAM Services"
-
       responses:
         200:
           description: "Successful operation"
@@ -3120,7 +2933,6 @@ paths:
         - oauth.gam
       operationId: "oauth.gam.userinfo"
       summary: "GeneXus GAM Services"
-
       responses:
         200:
           description: "Successful operation"
@@ -3132,7 +2944,6 @@ paths:
         - oauth.gam
       operationId: "oauth.gam.signout"
       summary: "GeneXus GAM Services"
-
       responses:
         200:
           description: "Successful operation"
@@ -3144,7 +2955,6 @@ paths:
         - oauth
       operationId: "oauth.RequestTokenService"
       summary: "GeneXus GAM Services"
-
       responses:
         200:
           description: "Successful operation"
@@ -3156,7 +2966,6 @@ paths:
         - oauth
       operationId: "oauth.QueryAccessToken"
       summary: "GeneXus GAM Services"
-
       responses:
         200:
           description: "Successful operation"
@@ -3168,7 +2977,6 @@ paths:
         - saml.gam
       operationId: "saml.gam.signout"
       summary: "GeneXus GAM Services"
-
       responses:
         200:
           description: "Successful operation"
@@ -3180,7 +2988,6 @@ paths:
         - saml.gam
       operationId: "saml.gam.signin"
       summary: "GeneXus GAM Services"
-
       responses:
         200:
           description: "Successful operation"
@@ -3192,7 +2999,6 @@ paths:
         - GeneXusSDMulticall
       operationId: "gxmulticall"
       summary: "GeneXus Multicall Service for Smart Devices Application"
-
       responses:
         200:
           description: "Successful operation"
@@ -3204,7 +3010,6 @@ paths:
         - sdsvc_LeaveRequestPanel_Level_Detail  
       operationId: "sdsvc_LeaveRequestPanel_Level_Detail.Leavetypeid"
       summary: "Leavetypeid"
-      
       responses:
         200:
           description: "Successful operation"
@@ -3212,18 +3017,14 @@ paths:
             application/json:
               schema:
                 type: "string"
-
-
         404:
           description: "Not found"
-
   /sdsvc_LogHoursPanel_Level_Detail/Projectid:
     get:
       tags:
         - sdsvc_LogHoursPanel_Level_Detail  
       operationId: "sdsvc_LogHoursPanel_Level_Detail.Projectid"
       summary: "Projectid"
-      
       responses:
         200:
           description: "Successful operation"
@@ -3231,18 +3032,14 @@ paths:
             application/json:
               schema:
                 type: "string"
-
-
         404:
           description: "Not found"
-
   /sdsvc_UpdateLeaveRequest_Level_Detail/Leavetypeid:
     get:
       tags:
         - sdsvc_UpdateLeaveRequest_Level_Detail  
       operationId: "sdsvc_UpdateLeaveRequest_Level_Detail.Leavetypeid"
       summary: "Leavetypeid"
-      
       responses:
         200:
           description: "Successful operation"
@@ -3250,18 +3047,14 @@ paths:
             application/json:
               schema:
                 type: "string"
-
-
         404:
           description: "Not found"
-
   /sdsvc_UpdateWorkHourLog_Level_Detail/Worklogproject:
     get:
       tags:
         - sdsvc_UpdateWorkHourLog_Level_Detail  
       operationId: "sdsvc_UpdateWorkHourLog_Level_Detail.Worklogproject"
       summary: "Worklogproject"
-      
       responses:
         200:
           description: "Successful operation"
@@ -3269,18 +3062,14 @@ paths:
             application/json:
               schema:
                 type: "string"
-
-
         404:
           description: "Not found"
-
   /sdsvc_ViewLeaveRequest_Level_Detail/Leavetypeid:
     get:
       tags:
         - sdsvc_ViewLeaveRequest_Level_Detail  
       operationId: "sdsvc_ViewLeaveRequest_Level_Detail.Leavetypeid"
       summary: "Leavetypeid"
-      
       responses:
         200:
           description: "Successful operation"
@@ -3288,12 +3077,8 @@ paths:
             application/json:
               schema:
                 type: "string"
-
-
         404:
           description: "Not found"
-
-
 components:
   securitySchemes:
     oAuthGXGAM:
@@ -3301,10 +3086,9 @@ components:
       description: GAM OAuth 2
       flows:
         password:          
-          tokenUrl: http://localhost:8082/YTT_version4NETPostgreSQL14/oauth/gam/v2.0/access_token
+          tokenUrl: http://localhost:8083/YTT_version4NETPostgreSQL14/oauth/gam/v2.0/access_token
           scopes: 
             fullcontrol: Full access
-
   schemas:
     Device:
       properties:
@@ -3327,12 +3111,8 @@ components:
         gx_md5_hash:
           description: "gx_md5_hash is an identifier for a specific version of a resource, it is used for optimistic concurrency check. It is required for update and delete operations and  ignored on insert."
           type: "string"
-
-
       required:
-        - DeviceId
-
-
+        - gx_md5_hash
     LeaveRequest:
       properties:
         LeaveRequestId:
@@ -3391,12 +3171,8 @@ components:
         gx_md5_hash:
           description: "gx_md5_hash is an identifier for a specific version of a resource, it is used for optimistic concurrency check. It is required for update and delete operations and  ignored on insert."
           type: "string"
-
-
       required:
-        - LeaveRequestId
-
-
+        - gx_md5_hash
     LeaveType:
       properties:
         LeaveTypeId:
@@ -3425,12 +3201,8 @@ components:
         gx_md5_hash:
           description: "gx_md5_hash is an identifier for a specific version of a resource, it is used for optimistic concurrency check. It is required for update and delete operations and  ignored on insert."
           type: "string"
-
-
       required:
-        - LeaveTypeId
-
-
+        - gx_md5_hash
     WorkHourLog:
       properties:
         WorkHourLogId:
@@ -3472,13 +3244,8 @@ components:
         gx_md5_hash:
           description: "gx_md5_hash is an identifier for a specific version of a resource, it is used for optimistic concurrency check. It is required for update and delete operations and  ignored on insert."
           type: "string"
-
-
       required:
-        - WorkHourLogId
-
-
-
+        - gx_md5_hash
     CompanyLocationWWGetFilterDataOutput:
       properties:
         OptionsJson:
@@ -3669,8 +3436,10 @@ components:
     SDGetDailyLogHoursOutput:
       properties:
         dailyLogs:
-          type: "number"
-          format: "double"
+          type: array
+          items:
+            type: "number"
+            format: "double"
     SDGetLogDaysMissedOutput:
       properties:
         totalDaysMissed:
@@ -3707,6 +3476,14 @@ components:
         Combo_DataJson:
           type: "string"
     TestProjectLogsByEmployeeGetFilterDataOutput:
+      properties:
+        OptionsJson:
+          type: "string"
+        OptionsDescJson:
+          type: "string"
+        OptionIndexesJson:
+          type: "string"
+    TrnNewWWGetFilterDataOutput:
       properties:
         OptionsJson:
           type: "string"
@@ -3867,8 +3644,7 @@ components:
       properties:
         Combo_DataJson:
           type: "string"
-
-    CompanyLocationWWGetFilterDataInput:
+    CompanyLocationWWGetFilterDataInput:  
       properties:
         DDOName:
           type: "string"
@@ -3876,7 +3652,7 @@ components:
           type: "string"
         SearchTxtTo:
           type: "string"
-    CompanyWWGetFilterDataInput:
+    CompanyWWGetFilterDataInput:  
       properties:
         DDOName:
           type: "string"
@@ -3884,7 +3660,7 @@ components:
           type: "string"
         SearchTxtTo:
           type: "string"
-    EmployeeListGetFilterDataInput:
+    EmployeeListGetFilterDataInput:  
       properties:
         DDOName:
           type: "string"
@@ -3892,7 +3668,7 @@ components:
           type: "string"
         SearchTxtTo:
           type: "string"
-    EmployeeLoadDVComboInput:
+    EmployeeLoadDVComboInput:  
       properties:
         ComboName:
           type: "string"
@@ -3901,7 +3677,7 @@ components:
         EmployeeId:
           type: "integer"
           format: "int64"
-    EmployeeWWGetFilterDataInput:
+    EmployeeWWGetFilterDataInput:  
       properties:
         DDOName:
           type: "string"
@@ -3909,7 +3685,7 @@ components:
           type: "string"
         SearchTxtTo:
           type: "string"
-    GAMSDChangePasswordUserInput:
+    GAMSDChangePasswordUserInput:  
       properties:
         isPasswordExpires:
           type: "boolean"
@@ -3921,7 +3697,7 @@ components:
           type: "string"
         UserPasswordNewConf:
           type: "string"
-    GAMSDRegisterUserInput:
+    GAMSDRegisterUserInput:  
       properties:
         UserName:
           type: "string"
@@ -3935,7 +3711,7 @@ components:
           type: "string"
         ConfirmPassword:
           type: "string"
-    GAMSDUpdateRegisterUserInput:
+    GAMSDUpdateRegisterUserInput:  
       properties:
         UserGUID:
           type: "string"
@@ -3947,14 +3723,14 @@ components:
           type: "string"
         LastName:
           type: "string"
-    General.Services.DirectionsServiceRequestInput:
+    General.Services.DirectionsServiceRequestInput:  
       properties:
         DirectionsServiceProvider:
           type: "string"
         DirectionsRequestParameters:
           description: "Directions Request Parameters"
           $ref: "#/components/schemas/GeneXus.Common.DirectionsRequestParameters"
-    General.Services.GxAfterEventReplicatorInput:
+    General.Services.GxAfterEventReplicatorInput:  
       properties:
         EventResults:
           description: "Synchronization Event Result List"
@@ -3964,7 +3740,7 @@ components:
         GxSynchroInfo:
           description: "Synchronization Info"
           $ref: "#/components/schemas/GeneXus.SD.Synchronization.SynchronizationInfo"
-    General.Services.GxBeforeEventReplicatorInput:
+    General.Services.GxBeforeEventReplicatorInput:  
       properties:
         GxPendingEvents:
           description: "Synchronization Event List"
@@ -3979,7 +3755,7 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/GeneXus.SD.Synchronization.SynchronizationEventResultList_SynchronizationEventResultListItem"
-    General.Services.GxOnPendingEventFailedInput:
+    General.Services.GxOnPendingEventFailedInput:  
       properties:
         PendingEvent:
           description: "Synchronization Event List"
@@ -3998,7 +3774,7 @@ components:
         GxSyncroInfo:
           description: "Synchronization Info"
           $ref: "#/components/schemas/GeneXus.SD.Synchronization.SynchronizationInfo"
-    General.Services.NotificationsRegistrationHandlerInput:
+    General.Services.NotificationsRegistrationHandlerInput:  
       properties:
         DeviceType:
           type: "integer"
@@ -4009,7 +3785,7 @@ components:
           type: "string"
         DeviceName:
           type: "string"
-    GetLeaveRequestDaysInput:
+    GetLeaveRequestDaysInput:  
       properties:
         StartDate:
           type: "string"
@@ -4022,12 +3798,12 @@ components:
         EmployeeId:
           type: "integer"
           format: "int64"
-    GetWeeklyHoursInput:
+    GetWeeklyHoursInput:  
       properties:
         WeekDate:
           type: "string"
           format: "date"
-    HolidayWWGetFilterDataInput:
+    HolidayWWGetFilterDataInput:  
       properties:
         DDOName:
           type: "string"
@@ -4035,7 +3811,7 @@ components:
           type: "string"
         SearchTxtTo:
           type: "string"
-    LeaveRequestApprovedGetFilterDataInput:
+    LeaveRequestApprovedGetFilterDataInput:  
       properties:
         DDOName:
           type: "string"
@@ -4043,7 +3819,7 @@ components:
           type: "string"
         SearchTxtTo:
           type: "string"
-    LeaveRequestPendingGetFilterDataInput:
+    LeaveRequestPendingGetFilterDataInput:  
       properties:
         DDOName:
           type: "string"
@@ -4051,7 +3827,7 @@ components:
           type: "string"
         SearchTxtTo:
           type: "string"
-    LeaveRequestRejectedGetFilterDataInput:
+    LeaveRequestRejectedGetFilterDataInput:  
       properties:
         DDOName:
           type: "string"
@@ -4059,7 +3835,7 @@ components:
           type: "string"
         SearchTxtTo:
           type: "string"
-    LeaveRequestsGetFilterDataInput:
+    LeaveRequestsGetFilterDataInput:  
       properties:
         DDOName:
           type: "string"
@@ -4067,7 +3843,7 @@ components:
           type: "string"
         SearchTxtTo:
           type: "string"
-    LeaveRequestWWGetFilterDataInput:
+    LeaveRequestWWGetFilterDataInput:  
       properties:
         DDOName:
           type: "string"
@@ -4075,7 +3851,7 @@ components:
           type: "string"
         SearchTxtTo:
           type: "string"
-    LeaveTypeWWGetFilterDataInput:
+    LeaveTypeWWGetFilterDataInput:  
       properties:
         DDOName:
           type: "string"
@@ -4083,7 +3859,7 @@ components:
           type: "string"
         SearchTxtTo:
           type: "string"
-    ProjectWWGetFilterDataInput:
+    ProjectWWGetFilterDataInput:  
       properties:
         DDOName:
           type: "string"
@@ -4091,7 +3867,7 @@ components:
           type: "string"
         SearchTxtTo:
           type: "string"
-    ReportsWorkHourLogDetailsGetFilterDataInput:
+    ReportsWorkHourLogDetailsGetFilterDataInput:  
       properties:
         DDOName:
           type: "string"
@@ -4099,16 +3875,16 @@ components:
           type: "string"
         SearchTxtTo:
           type: "string"
-    SDGetLoggedWorkDaysInput:
+    SDGetLoggedWorkDaysInput:  
       properties:
         LogDate:
           type: "string"
           format: "date"
-    SDisGAMUserBlockedInput:
+    SDisGAMUserBlockedInput:  
       properties:
         UserEmail:
           type: "string"
-    SDSendLeaveRequestMailInput:
+    SDSendLeaveRequestMailInput:  
       properties:
         LeaveRequestStartDate:
           type: "string"
@@ -4127,17 +3903,17 @@ components:
         EmployeeId:
           type: "integer"
           format: "int64"
-    SendLeaveRequestDeletionMailInput:
+    SendLeaveRequestDeletionMailInput:  
       properties:
         LeaveRequestId:
           type: "integer"
           format: "int64"
-    SendLeaveUpdatetMailInput:
+    SendLeaveUpdatetMailInput:  
       properties:
         LeaveRequestId:
           type: "integer"
           format: "int64"
-    SiteSettingLoadDVComboInput:
+    SiteSettingLoadDVComboInput:  
       properties:
         ComboName:
           type: "string"
@@ -4150,7 +3926,7 @@ components:
           format: "int64"
         SearchTxtParms:
           type: "string"
-    TestProjectLogsByEmployeeGetFilterDataInput:
+    TestProjectLogsByEmployeeGetFilterDataInput:  
       properties:
         DDOName:
           type: "string"
@@ -4158,7 +3934,15 @@ components:
           type: "string"
         SearchTxtTo:
           type: "string"
-    WebPanel1LoadDVComboInput:
+    TrnNewWWGetFilterDataInput:  
+      properties:
+        DDOName:
+          type: "string"
+        SearchTxtParms:
+          type: "string"
+        SearchTxtTo:
+          type: "string"
+    WebPanel1LoadDVComboInput:  
       properties:
         ComboName:
           type: "string"
@@ -4166,7 +3950,7 @@ components:
           type: "string"
         SearchTxtParms:
           type: "string"
-    WorkHourLogByEmployeeGetFilterDataInput:
+    WorkHourLogByEmployeeGetFilterDataInput:  
       properties:
         DDOName:
           type: "string"
@@ -4174,7 +3958,7 @@ components:
           type: "string"
         SearchTxtTo:
           type: "string"
-    WorkHourLogListGetFilterDataInput:
+    WorkHourLogListGetFilterDataInput:  
       properties:
         DDOName:
           type: "string"
@@ -4182,7 +3966,7 @@ components:
           type: "string"
         SearchTxtTo:
           type: "string"
-    WorkHourLogLoadDVComboInput:
+    WorkHourLogLoadDVComboInput:  
       properties:
         ComboName:
           type: "string"
@@ -4198,7 +3982,7 @@ components:
           format: "int64"
         SearchTxtParms:
           type: "string"
-    WorkHourLogWWGetFilterDataInput:
+    WorkHourLogWWGetFilterDataInput:  
       properties:
         DDOName:
           type: "string"
@@ -4206,36 +3990,36 @@ components:
           type: "string"
         SearchTxtTo:
           type: "string"
-    WorkWithPlus.NativeMobile.ExampleGetImageFromBase64Input:
+    WorkWithPlus.NativeMobile.ExampleGetImageFromBase64Input:  
       properties:
         ImageBase64:
           type: "string"
-    WorkWithPlus.NativeMobile.ExampleGetPDFUrlInput:
+    WorkWithPlus.NativeMobile.ExampleGetPDFUrlInput:  
       properties:
         ServerUrl:
           type: "string"
         TransactionWithBlobId:
           type: "integer"
           format: "int32"
-    WorkWithPlus.NativeMobile.WWPCreateLocationsListInput:
+    WorkWithPlus.NativeMobile.WWPCreateLocationsListInput:  
       properties:
         SelectedItem:
           type: "string"
         SelectedItemText:
           type: "string"
-    WorkWithPlus.NativeMobile.WWPDoubleMenuFromLaunchpadInput:
+    WorkWithPlus.NativeMobile.WWPDoubleMenuFromLaunchpadInput:  
       properties:
         SDPLaunchpadOptions:
           description: "Launchpad Options"
           type: array
           items:
             $ref: "#/components/schemas/WorkWithPlus.NativeMobile.LaunchpadOptions_Option"
-    WorkWithPlus.NativeMobile.WWPGetCalendarDateInput:
+    WorkWithPlus.NativeMobile.WWPGetCalendarDateInput:  
       properties:
         Date:
           type: "string"
           format: "date"
-    WorkWithPlus.NativeMobile.WWPGetCalendarDateFromNrInput:
+    WorkWithPlus.NativeMobile.WWPGetCalendarDateFromNrInput:  
       properties:
         Year:
           type: "integer"
@@ -4246,16 +4030,16 @@ components:
         Day:
           type: "integer"
           format: "int32"
-    WorkWithPlus.NativeMobile.WWPGetDecimalFromHexInput:
+    WorkWithPlus.NativeMobile.WWPGetDecimalFromHexInput:  
       properties:
         HexadecimalValueIn:
           type: "string"
-    WorkWithPlus.NativeMobile.WWPGetLinearGaugeConfigFromPercentageInput:
+    WorkWithPlus.NativeMobile.WWPGetLinearGaugeConfigFromPercentageInput:  
       properties:
         Percentage:
           type: "integer"
           format: "int32"
-    WorkWithPlus.NativeMobile.WWPGetRadialGaugeInput:
+    WorkWithPlus.NativeMobile.WWPGetRadialGaugeInput:  
       properties:
         Value:
           type: "integer"
@@ -4270,78 +4054,78 @@ components:
           type: "string"
         AllowAnimation:
           type: "boolean"
-    WorkWithPlus.NativeMobile.WWPGetRadialGaugeDarkInput:
+    WorkWithPlus.NativeMobile.WWPGetRadialGaugeDarkInput:  
       properties:
         Value:
           type: "integer"
           format: "int32"
         ProgressColor:
           type: "string"
-    WorkWithPlus.NativeMobile.WWPGetRadialGaugeLightInput:
+    WorkWithPlus.NativeMobile.WWPGetRadialGaugeLightInput:  
       properties:
         Value:
           type: "integer"
           format: "int32"
         ProgressColor:
           type: "string"
-    WorkWithPlus.NativeMobile.WWPGetRadialGaugeWhiteInput:
+    WorkWithPlus.NativeMobile.WWPGetRadialGaugeWhiteInput:  
       properties:
         Value:
           type: "integer"
           format: "int32"
-    WorkWithPlus.NativeMobile.WWPGetRangedRadialGaugeInput:
+    WorkWithPlus.NativeMobile.WWPGetRangedRadialGaugeInput:  
       properties:
         Value:
           type: "integer"
           format: "int32"
         Text:
           type: "string"
-    WorkWithPlus.NativeMobile.WWPGetRangedRadialGaugeFromConfigInput:
+    WorkWithPlus.NativeMobile.WWPGetRangedRadialGaugeFromConfigInput:  
       properties:
         GaugeConfig:
           description: "Ranged Radial Gauge Config"
           $ref: "#/components/schemas/WorkWithPlus.NativeMobile.RangedRadialGaugeConfig"
-    WorkWithPlus.NativeMobile.WWPGetUnicodeFromHexInput:
+    WorkWithPlus.NativeMobile.WWPGetUnicodeFromHexInput:  
       properties:
         HexaUnicode:
           type: "string"
-    WorkWithPlus.NativeMobile.WWPMapPointFromStringInput:
+    WorkWithPlus.NativeMobile.WWPMapPointFromStringInput:  
       properties:
         SelectedItem:
           type: "string"
-    WorkWithPlus.NativeMobile.WWPParseHexColorInput:
+    WorkWithPlus.NativeMobile.WWPParseHexColorInput:  
       properties:
         ColorStringIn:
           type: "string"
-    WorkWithPlus.NativeMobile.WWPProductsListToDoubleOptionsSDTInput:
+    WorkWithPlus.NativeMobile.WWPProductsListToDoubleOptionsSDTInput:  
       properties:
         ProductDataList:
           description: "WWPProduct Data"
           type: array
           items:
             $ref: "#/components/schemas/WorkWithPlus.NativeMobile.WWPProductData"
-    WorkWithPlus.NativeMobile.WWPWebServerSessionGetInput:
+    WorkWithPlus.NativeMobile.WWPWebServerSessionGetInput:  
       properties:
         ParameterKey:
           type: "string"
-    WorkWithPlus.NativeMobile.WWPWebServerSessionGetNumInput:
+    WorkWithPlus.NativeMobile.WWPWebServerSessionGetNumInput:  
       properties:
         ParameterKey:
           type: "string"
-    WorkWithPlus.NativeMobile.WWPWebServerSessionSetInput:
+    WorkWithPlus.NativeMobile.WWPWebServerSessionSetInput:  
       properties:
         ParameterKey:
           type: "string"
         ParameterValue:
           type: "string"
-    WorkWithPlus.NativeMobile.WWPWebServerSessionSetNumInput:
+    WorkWithPlus.NativeMobile.WWPWebServerSessionSetNumInput:  
       properties:
         ParameterKey:
           type: "string"
         ParameterValue:
           type: "number"
           format: "double"
-    WorkWithPlus.WWP_ParameterWWGetFilterDataInput:
+    WorkWithPlus.WWP_ParameterWWGetFilterDataInput:  
       properties:
         DDOName:
           type: "string"
@@ -4349,7 +4133,7 @@ components:
           type: "string"
         SearchTxtTo:
           type: "string"
-    WPLeaveReportLoadDVComboInput:
+    WPLeaveReportLoadDVComboInput:  
       properties:
         ComboName:
           type: "string"
@@ -4357,8 +4141,6 @@ components:
           type: "string"
         SearchTxtParms:
           type: "string"
-
-  
     GeneXus.Common.DirectionsRequestParameters:
       properties:
         sourceLocation:
@@ -4386,9 +4168,6 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/GeneXus.Common.Notifications.ConfigurationProperty"
-
-
-
     GeneXus.Common.GeolocationInfo:
       properties:
         Location:
@@ -4416,9 +4195,6 @@ components:
           description: "Speed"
           type: "number"
           format: "double"
-
-
-
     GeneXus.Common.Messages_Message:
       properties:
         Id:
@@ -4431,9 +4207,6 @@ components:
         Description:
           description: "Description"
           type: "string"
-
-
-
     GeneXus.Common.Notifications.ConfigurationProperty:
       properties:
         PropertyName:
@@ -4442,9 +4215,6 @@ components:
         PropertyValue:
           description: "Property Value"
           type: "string"
-
-
-
     GeneXus.Common.Route:
       properties:
         name:
@@ -4469,9 +4239,6 @@ components:
         geoline:
           description: "The route geometry"
           type: "string"
-
-
-
     GeneXus.SD.Synchronization.SynchronizationEventList_SynchronizationEventListItem:
       properties:
         EventId:
@@ -4499,9 +4266,6 @@ components:
         EventErrors:
           description: "Pending Event Extras"
           type: "string"
-
-
-
     GeneXus.SD.Synchronization.SynchronizationEventResultList_SynchronizationEventResultListItem:
       properties:
         EventId:
@@ -4519,14 +4283,11 @@ components:
         EventErrors:
           description: "Pending Event Errors"
           type: "string"
-
         Mappings:
           type: array
           items:
             description: MappingsItem
             $ref: "#/components/schemas/GeneXus.SD.Synchronization.SynchronizationEventResultList.Mappings_MappingsItem"
-
-
     GeneXus.SD.Synchronization.SynchronizationEventResultList.Mappings_MappingsItem:
       properties:
         Table:
@@ -4538,10 +4299,7 @@ components:
         Conditions:
           description: "Conditions"
           type: "string"
-
-
       x-gx-level: "SynchronizationEventResultList"
-
     GeneXus.SD.Synchronization.SynchronizationInfo:
       properties:
         GxAppVersion:
@@ -4550,9 +4308,6 @@ components:
         Synchronizer:
           description: "Synchronizer"
           type: "string"
-
-
-
     WorkLogsSDT:
       properties:
         WorkHourLogId:
@@ -4594,9 +4349,6 @@ components:
         LogDetails:
           description: "Log Details"
           type: "string"
-
-
-
     WorkWithPlus.NativeMobile.DoubleItemListData_DoubleItemListDataItem:
       properties:
         Type:
@@ -4645,9 +4397,6 @@ components:
         Option2Information2:
           description: "Option2 Information2"
           type: "string"
-
-
-
     WorkWithPlus.NativeMobile.LaunchpadOptions_Option:
       properties:
         Name:
@@ -4677,9 +4426,6 @@ components:
           description: "Tile Type"
           type: "integer"
           format: "int32"
-
-
-
     WorkWithPlus.NativeMobile.RangedRadialGaugeConfig:
       properties:
         Value:
@@ -4730,9 +4476,6 @@ components:
         ValueMarkerColor:
           description: "Value Marker Color"
           type: "string"
-
-
-
     WorkWithPlus.NativeMobile.WWPCalendarEntry:
       properties:
         Year:
@@ -4764,9 +4507,6 @@ components:
           description: "Time"
           type: "string"
           format: "date-time"
-
-
-
     WorkWithPlus.NativeMobile.WWPCalendarInfo:
       properties:
         Events:
@@ -4779,9 +4519,6 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/WorkWithPlus.NativeMobile.WWPCalendarEntry"
-
-
-
     WorkWithPlus.NativeMobile.WWPProductData:
       properties:
         Id:
@@ -4812,15 +4549,12 @@ components:
         ComponentToCall:
           description: "Component To Call"
           type: "string"
-
-
-
     WWPBaseObjects.DVB_SDTComboData_Item:
       properties:
         ID:
           description: "ID"
           type: "string"
-        Title:
+        T:
           description: "Title"
           type: "string"
         Children:
@@ -4828,9 +4562,6 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/WWPBaseObjects.DVB_SDTComboData_Item"
-
-
-
     GAMSDChangePassword_Level_DetailSdt:
       properties:
         Username:
@@ -4848,9 +4579,6 @@ components:
         Ispasswordexpires:
           description: "Ispasswordexpires"
           type: "boolean"
-
-
-
     GAMSDNotAuthorized_Level_DetailSdt:
       properties:
         User:
@@ -4859,9 +4587,6 @@ components:
         Password:
           description: "Password"
           type: "string"
-
-
-
     GAMSDUpdateUser_Level_DetailSdt:
       properties:
         Username:
@@ -4879,9 +4604,6 @@ components:
         Userguid:
           description: "Userguid"
           type: "string"
-
-
-
     LeaveRequestPanel_Level_DetailSdt:
       properties:
         Leavetypeid:
@@ -4927,9 +4649,6 @@ components:
         Gxdesc_leavetypeid:
           description: "Gxdesc_leavetypeid"
           type: "string"
-
-
-
     LeaveRequestsGridPanel_Level_Detail_GridSdt_Item:
       properties:
         LeaveRequestId:
@@ -4951,9 +4670,6 @@ components:
         Gxdynprop:
           description: "Gxdynprop"
           type: "string"
-
-
-
     LeaveRequestsGridPanel_Level_DetailSdt:
       properties:
         Msgvar:
@@ -4962,9 +4678,6 @@ components:
         Gxdynprop:
           description: "Gxdynprop"
           type: "string"
-
-
-
     LogHoursPanel_Level_DetailSdt:
       properties:
         Workhourlogdate:
@@ -5000,9 +4713,6 @@ components:
         Gxdynprop:
           description: "Gxdynprop"
           type: "string"
-
-
-
     LoginPanel_Level_DetailSdt:
       properties:
         User:
@@ -5011,9 +4721,6 @@ components:
         Password:
           description: "Password"
           type: "string"
-
-
-
     PasswordChangePanel_Level_DetailSdt:
       properties:
         Oldpassword:
@@ -5034,9 +4741,6 @@ components:
         Gxdynprop:
           description: "Gxdynprop"
           type: "string"
-
-
-
     ProfilePanel_Level_DetailSdt:
       properties:
         Gxprops_menuoptions:
@@ -5059,9 +4763,6 @@ components:
         Role:
           description: "Role"
           type: "string"
-
-
-
     MenuOptions_MenuOptionsItem:
       properties:
         Title:
@@ -5101,9 +4802,6 @@ components:
         FontIconClass:
           description: "Font Icon Class"
           type: "string"
-
-
-
     UpdateLeaveRequest_Level_DetailSdt:
       properties:
         Leaverequestdate:
@@ -5149,9 +4847,6 @@ components:
         Gxdesc_leavetypeid:
           description: "Gxdesc_leavetypeid"
           type: "string"
-
-
-
     UpdateWorkHourLog_Level_DetailSdt:
       properties:
         Worklogdate:
@@ -5184,9 +4879,6 @@ components:
         Msgvar:
           description: "Msgvar"
           type: "string"
-
-
-
     ViewLeaveRequest_Level_DetailSdt:
       properties:
         Leaverequestdate:
@@ -5218,9 +4910,6 @@ components:
         Gxdesc_leavetypeid:
           description: "Gxdesc_leavetypeid"
           type: "string"
-
-
-
     WorkHoursPanel_Level_DetailSdt:
       properties:
         Gxdynprop:
@@ -5229,9 +4918,6 @@ components:
         Gxdyncall:
           description: "Gxdyncall"
           type: "string"
-
-
-
     WorkLogsGridCollectionPanel_Level_DetailSdt:
       properties:
         Worklogssdts:
@@ -5260,9 +4946,6 @@ components:
         Gxdyncall:
           description: "Gxdyncall"
           type: "string"
-
-
-
     WorkLogsGridPanel_Level_Detail_GridSdt_Item:
       properties:
         WorkHourLogId:
@@ -5282,9 +4965,6 @@ components:
         Gxdynprop:
           description: "Gxdynprop"
           type: "string"
-
-
-
     WorkLogsGridPanel_Level_DetailSdt:
       properties:
         Today:
@@ -5297,17 +4977,11 @@ components:
         Gxdynprop:
           description: "Gxdynprop"
           type: "string"
-
-
-
     YTTV3SD_Level_DetailSdt:
       properties:
         Pagetitle:
           description: "Pagetitle"
           type: "string"
-
-
-
     YTTV3SDLogin_Level_DetailSdt:
       properties:
         User:
@@ -5316,23 +4990,14 @@ components:
         Password:
           description: "Password"
           type: "string"
-
-
-
     GxJsonError:
       properties:
         error:
           $ref: "#/components/schemas/GxJsonError.error"
-
-
     GxJsonError.error:
       properties:
         code:
           type: "string"
         message:
           type: "string"
-
-
       x-gx-level: "GxJsonError"
-
- 

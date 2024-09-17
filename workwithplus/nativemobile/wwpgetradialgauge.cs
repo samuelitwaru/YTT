@@ -201,6 +201,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
                }
                if ( StringUtil.StringSearch( GXSoapXMLReader.Name, "Body", 1) > 0 )
                {
+                  this.SetPrefixesFromReader( GXSoapXMLReader);
                   if (true) break;
                }
                GXSoapError = GXSoapXMLReader.Read();
@@ -343,7 +344,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          }
          if ( currSoapErr == 0 )
          {
-            executePrivate();
+            ExecutePrivate();
          }
          context.CloseConnections();
          sIncludeState = true;
@@ -410,7 +411,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          this.AV9AllowAnimation = aP5_AllowAnimation;
          this.AV8HTML = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP6_HTML=this.AV8HTML;
       }
 
@@ -433,35 +434,18 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
                                  bool aP5_AllowAnimation ,
                                  out string aP6_HTML )
       {
-         wwpgetradialgauge objwwpgetradialgauge;
-         objwwpgetradialgauge = new wwpgetradialgauge();
-         objwwpgetradialgauge.AV16Value = aP0_Value;
-         objwwpgetradialgauge.AV10InnerText = aP1_InnerText;
-         objwwpgetradialgauge.AV11ProgressColor = aP2_ProgressColor;
-         objwwpgetradialgauge.AV15TextColor = aP3_TextColor;
-         objwwpgetradialgauge.AV14ShadowColor = aP4_ShadowColor;
-         objwwpgetradialgauge.AV9AllowAnimation = aP5_AllowAnimation;
-         objwwpgetradialgauge.AV8HTML = "" ;
-         objwwpgetradialgauge.context.SetSubmitInitialConfig(context);
-         objwwpgetradialgauge.initialize();
-         Submit( executePrivateCatch,objwwpgetradialgauge);
+         this.AV16Value = aP0_Value;
+         this.AV10InnerText = aP1_InnerText;
+         this.AV11ProgressColor = aP2_ProgressColor;
+         this.AV15TextColor = aP3_TextColor;
+         this.AV14ShadowColor = aP4_ShadowColor;
+         this.AV9AllowAnimation = aP5_AllowAnimation;
+         this.AV8HTML = "" ;
+         SubmitImpl();
          aP6_HTML=this.AV8HTML;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwpgetradialgauge)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -478,7 +462,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          S111 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          AV12propertyName = "value";
@@ -491,7 +475,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          S111 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          AV12propertyName = "text";
@@ -504,7 +488,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          S111 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          AV12propertyName = "animation";
@@ -517,7 +501,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          S111 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          AV12propertyName = "textcolor";
@@ -530,7 +514,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          S111 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          AV12propertyName = "shadowcolor";
@@ -543,7 +527,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          S111 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          if ( context.WillRedirect( ) )
@@ -551,7 +535,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
             context.Redirect( context.wjLoc );
             context.wjLoc = "";
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void S111( )
@@ -563,17 +547,13 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          base.cleanup();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )

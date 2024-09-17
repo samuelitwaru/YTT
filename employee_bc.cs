@@ -120,7 +120,6 @@ namespace GeneXus.Programs {
             {
                /* Restore parent mode. */
                Gx_mode = sMode16;
-               IsConfirmed = 1;
             }
             /* Restore parent mode. */
             Gx_mode = sMode16;
@@ -163,7 +162,6 @@ namespace GeneXus.Programs {
                         CloseExtendedTableCursors0F28( ) ;
                         if ( AnyError == 0 )
                         {
-                           IsConfirmed = 1;
                         }
                      }
                   }
@@ -204,7 +202,6 @@ namespace GeneXus.Programs {
                               CloseExtendedTableCursors0F28( ) ;
                               if ( AnyError == 0 )
                               {
-                                 IsConfirmed = 1;
                               }
                            }
                         }
@@ -377,7 +374,6 @@ namespace GeneXus.Programs {
 
       protected void CheckExtendedTable0F16( )
       {
-         nIsDirty_16 = 0;
          standaloneModal( ) ;
          /* Using cursor BC000F9 */
          pr_default.execute(7, new Object[] {A109EmployeeEmail, A106EmployeeId});
@@ -387,7 +383,6 @@ namespace GeneXus.Programs {
             AnyError = 1;
          }
          pr_default.close(7);
-         nIsDirty_16 = 1;
          A148EmployeeName = StringUtil.Trim( A107EmployeeFirstName) + " " + StringUtil.Trim( A108EmployeeLastName);
          if ( String.IsNullOrEmpty(StringUtil.RTrim( A107EmployeeFirstName)) )
          {
@@ -429,21 +424,18 @@ namespace GeneXus.Programs {
          }
          if ( IsIns( )  && (Convert.ToDecimal(0)==A147EmployeeBalance) && ( Gx_BScreen == 0 ) )
          {
-            nIsDirty_16 = 1;
             A147EmployeeBalance = A146EmployeeVactionDays;
          }
          else
          {
             if ( ( DateTimeUtil.Month( DateTimeUtil.Now( context)) == 1 ) && ( DateTimeUtil.Day( DateTimeUtil.Now( context)) == 1 ) && IsIns( )  )
             {
-               nIsDirty_16 = 1;
                A147EmployeeBalance = A146EmployeeVactionDays;
             }
             else
             {
                if ( IsUpd( )  )
                {
-                  nIsDirty_16 = 1;
                   GXt_decimal3 = A147EmployeeBalance;
                   new getemployeeapprovedvacationdays(context ).execute(  A106EmployeeId,  A178EmployeeVacationDaysSetDate,  context.localUtil.YMDToD( DateTimeUtil.Year( Gx_date), 12, 31), out  GXt_decimal3) ;
                   A147EmployeeBalance = (decimal)(A146EmployeeVactionDays-GXt_decimal3);
@@ -537,7 +529,6 @@ namespace GeneXus.Programs {
       protected void insert_Check( )
       {
          CONFIRM_0F0( ) ;
-         IsConfirmed = 0;
       }
 
       protected void update_Check( )
@@ -889,7 +880,6 @@ namespace GeneXus.Programs {
          }
          nRcdExists_28 = 0;
          nIsMod_28 = 0;
-         Gxremove28 = 0;
       }
 
       protected void ProcessLevel0F16( )
@@ -924,7 +914,6 @@ namespace GeneXus.Programs {
          else
          {
          }
-         IsModified = 0;
          if ( AnyError != 0 )
          {
             context.wjLoc = "";
@@ -1075,7 +1064,6 @@ namespace GeneXus.Programs {
 
       protected void CheckExtendedTable0F28( )
       {
-         nIsDirty_28 = 0;
          Gx_BScreen = 1;
          standaloneModal0F28( ) ;
          Gx_BScreen = 0;
@@ -1750,7 +1738,6 @@ namespace GeneXus.Programs {
 
       protected void SaveImpl( )
       {
-         nKeyPressed = 1;
          GetKey0F16( ) ;
          if ( IsIns( ) )
          {
@@ -1828,7 +1815,6 @@ namespace GeneXus.Programs {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars16( bcEmployee, 1) ;
          SaveImpl( ) ;
          VarsToRow16( bcEmployee) ;
@@ -1842,7 +1828,6 @@ namespace GeneXus.Programs {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars16( bcEmployee, 1) ;
          Gx_mode = "INS";
          /* Insert record */
@@ -1888,7 +1873,6 @@ namespace GeneXus.Programs {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars16( bcEmployee, 1) ;
          UpdateImpl( ) ;
          context.GX_msglist = BackMsgLst;
@@ -1901,7 +1885,6 @@ namespace GeneXus.Programs {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars16( bcEmployee, 1) ;
          Gx_mode = "INS";
          /* Insert record */
@@ -1935,8 +1918,6 @@ namespace GeneXus.Programs {
          AnyError = 0;
          context.GX_msglist.removeAllItems();
          RowToVars16( bcEmployee, 0) ;
-         nKeyPressed = 3;
-         IsConfirmed = 0;
          GetKey0F16( ) ;
          if ( RcdFound16 == 1 )
          {
@@ -2052,7 +2033,6 @@ namespace GeneXus.Programs {
 
       public void ForceCommitOnExit( )
       {
-         mustCommit = true;
          return  ;
       }
 
@@ -2109,15 +2089,14 @@ namespace GeneXus.Programs {
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
       }
 
-      protected void CloseOpenCursors( )
+      protected override void CloseCursors( )
       {
          pr_default.close(1);
          pr_default.close(23);
@@ -2127,9 +2106,6 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
-         scmdbuf = "";
-         PreviousTooltip = "";
-         PreviousCaption = "";
          Gx_mode = "";
          endTrnMsgTxt = "";
          endTrnMsgCod = "";
@@ -2345,19 +2321,13 @@ namespace GeneXus.Programs {
          standaloneNotModal( ) ;
       }
 
-      private short IsConfirmed ;
-      private short IsModified ;
       private short AnyError ;
-      private short nKeyPressed ;
       private short nIsMod_28 ;
       private short RcdFound28 ;
-      private short GX_JID ;
       private short Gx_BScreen ;
       private short RcdFound16 ;
-      private short nIsDirty_16 ;
       private short nRcdExists_28 ;
       private short Gxremove28 ;
-      private short nIsDirty_28 ;
       private int trnEnded ;
       private int nGXsfl_28_idx=1 ;
       private int AV33GXV1 ;
@@ -2376,9 +2346,6 @@ namespace GeneXus.Programs {
       private decimal A146EmployeeVactionDays ;
       private decimal GXt_decimal3 ;
       private decimal i146EmployeeVactionDays ;
-      private string scmdbuf ;
-      private string PreviousTooltip ;
-      private string PreviousCaption ;
       private string Gx_mode ;
       private string endTrnMsgTxt ;
       private string endTrnMsgCod ;
@@ -2408,16 +2375,18 @@ namespace GeneXus.Programs {
       private bool GXt_boolean1 ;
       private bool Gx_longc ;
       private bool i112EmployeeIsActive ;
-      private bool mustCommit ;
       private string Z111GAMUserGUID ;
       private string A111GAMUserGUID ;
       private string Z109EmployeeEmail ;
       private string A109EmployeeEmail ;
       private string N109EmployeeEmail ;
       private IGxSession AV12WebSession ;
-      private SdtEmployee bcEmployee ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private SdtEmployee bcEmployee ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV8WWPContext ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext AV11TrnContext ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext_Attribute AV14TrnContextAtt ;
       private IDataStoreProvider pr_default ;
       private string[] BC000F7_A101CompanyName ;
       private long[] BC000F8_A106EmployeeId ;
@@ -2497,9 +2466,6 @@ namespace GeneXus.Programs {
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
       private IDataStoreProvider pr_gam ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext AV11TrnContext ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext_Attribute AV14TrnContextAtt ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV8WWPContext ;
    }
 
    public class employee_bc__gam : DataStoreHelperBase, IDataStoreHelper
@@ -2575,6 +2541,32 @@ namespace GeneXus.Programs {
   {
      if ( def == null )
      {
+        Object[] prmBC000F2;
+        prmBC000F2 = new Object[] {
+        new ParDef("EmployeeId",GXType.Int64,10,0) ,
+        new ParDef("ProjectId",GXType.Int64,10,0)
+        };
+        Object[] prmBC000F3;
+        prmBC000F3 = new Object[] {
+        new ParDef("EmployeeId",GXType.Int64,10,0) ,
+        new ParDef("ProjectId",GXType.Int64,10,0)
+        };
+        Object[] prmBC000F4;
+        prmBC000F4 = new Object[] {
+        new ParDef("ProjectId",GXType.Int64,10,0)
+        };
+        Object[] prmBC000F5;
+        prmBC000F5 = new Object[] {
+        new ParDef("EmployeeId",GXType.Int64,10,0)
+        };
+        Object[] prmBC000F6;
+        prmBC000F6 = new Object[] {
+        new ParDef("EmployeeId",GXType.Int64,10,0)
+        };
+        Object[] prmBC000F7;
+        prmBC000F7 = new Object[] {
+        new ParDef("CompanyId",GXType.Int64,10,0)
+        };
         Object[] prmBC000F8;
         prmBC000F8 = new Object[] {
         new ParDef("EmployeeId",GXType.Int64,10,0)
@@ -2584,20 +2576,8 @@ namespace GeneXus.Programs {
         new ParDef("EmployeeEmail",GXType.VarChar,100,0) ,
         new ParDef("EmployeeId",GXType.Int64,10,0)
         };
-        Object[] prmBC000F7;
-        prmBC000F7 = new Object[] {
-        new ParDef("CompanyId",GXType.Int64,10,0)
-        };
         Object[] prmBC000F10;
         prmBC000F10 = new Object[] {
-        new ParDef("EmployeeId",GXType.Int64,10,0)
-        };
-        Object[] prmBC000F6;
-        prmBC000F6 = new Object[] {
-        new ParDef("EmployeeId",GXType.Int64,10,0)
-        };
-        Object[] prmBC000F5;
-        prmBC000F5 = new Object[] {
         new ParDef("EmployeeId",GXType.Int64,10,0)
         };
         Object[] prmBC000F11;
@@ -2665,22 +2645,8 @@ namespace GeneXus.Programs {
         new ParDef("EmployeeId",GXType.Int64,10,0) ,
         new ParDef("ProjectId",GXType.Int64,10,0)
         };
-        Object[] prmBC000F4;
-        prmBC000F4 = new Object[] {
-        new ParDef("ProjectId",GXType.Int64,10,0)
-        };
         Object[] prmBC000F22;
         prmBC000F22 = new Object[] {
-        new ParDef("EmployeeId",GXType.Int64,10,0) ,
-        new ParDef("ProjectId",GXType.Int64,10,0)
-        };
-        Object[] prmBC000F3;
-        prmBC000F3 = new Object[] {
-        new ParDef("EmployeeId",GXType.Int64,10,0) ,
-        new ParDef("ProjectId",GXType.Int64,10,0)
-        };
-        Object[] prmBC000F2;
-        prmBC000F2 = new Object[] {
         new ParDef("EmployeeId",GXType.Int64,10,0) ,
         new ParDef("ProjectId",GXType.Int64,10,0)
         };

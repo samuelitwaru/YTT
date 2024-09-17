@@ -50,7 +50,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          this.AV11Messages = new GXBaseCollection<GeneXus.Utils.SdtMessages_Message>( context, "Message", "GeneXus") ;
          this.AV10IsOk = false ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP4_Messages=this.AV11Messages;
          aP5_IsOk=this.AV10IsOk;
       }
@@ -72,53 +72,32 @@ namespace GeneXus.Programs.wwpbaseobjects {
                                  out GXBaseCollection<GeneXus.Utils.SdtMessages_Message> aP4_Messages ,
                                  out bool aP5_IsOk )
       {
-         wwp_importdata objwwp_importdata;
-         objwwp_importdata = new wwp_importdata();
-         objwwp_importdata.AV12SelctionName = aP0_SelctionName;
-         objwwp_importdata.AV9ImportType = aP1_ImportType;
-         objwwp_importdata.AV8FilePath = aP2_FilePath;
-         objwwp_importdata.AV14ExtraParmsJson = aP3_ExtraParmsJson;
-         objwwp_importdata.AV11Messages = new GXBaseCollection<GeneXus.Utils.SdtMessages_Message>( context, "Message", "GeneXus") ;
-         objwwp_importdata.AV10IsOk = false ;
-         objwwp_importdata.context.SetSubmitInitialConfig(context);
-         objwwp_importdata.initialize();
-         Submit( executePrivateCatch,objwwp_importdata);
+         this.AV12SelctionName = aP0_SelctionName;
+         this.AV9ImportType = aP1_ImportType;
+         this.AV8FilePath = aP2_FilePath;
+         this.AV14ExtraParmsJson = aP3_ExtraParmsJson;
+         this.AV11Messages = new GXBaseCollection<GeneXus.Utils.SdtMessages_Message>( context, "Message", "GeneXus") ;
+         this.AV10IsOk = false ;
+         SubmitImpl();
          aP4_Messages=this.AV11Messages;
          aP5_IsOk=this.AV10IsOk;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwp_importdata)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -132,9 +111,9 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private string AV9ImportType ;
       private string AV8FilePath ;
       private string AV14ExtraParmsJson ;
+      private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> AV11Messages ;
       private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> aP4_Messages ;
       private bool aP5_IsOk ;
-      private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> AV11Messages ;
    }
 
 }

@@ -24,20 +24,15 @@ namespace GeneXus.Programs {
    {
       public static int Main( string[] args )
       {
-         try
-         {
-            GeneXus.Configuration.Config.ParseArgs(ref args);
-            return new aformatdatetime().executeCmdLine(args); ;
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-            return 1 ;
-         }
+         return new aformatdatetime().MainImpl(args); ;
       }
 
       public int executeCmdLine( string[] args )
+      {
+         return ExecuteCmdLine(args); ;
+      }
+
+      protected override int ExecuteCmdLine( string[] args )
       {
          DateTime aP0_Date = new DateTime()  ;
          string aP1_DateTimeFormat = new string(' ',0)  ;
@@ -108,7 +103,7 @@ namespace GeneXus.Programs {
          this.AV9DateTimeFormat = aP1_DateTimeFormat;
          this.AV21FinalDateString = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP2_FinalDateString=this.AV21FinalDateString;
       }
 
@@ -123,31 +118,14 @@ namespace GeneXus.Programs {
                                  string aP1_DateTimeFormat ,
                                  out string aP2_FinalDateString )
       {
-         aformatdatetime objaformatdatetime;
-         objaformatdatetime = new aformatdatetime();
-         objaformatdatetime.AV8Date = aP0_Date;
-         objaformatdatetime.AV9DateTimeFormat = aP1_DateTimeFormat;
-         objaformatdatetime.AV21FinalDateString = "" ;
-         objaformatdatetime.context.SetSubmitInitialConfig(context);
-         objaformatdatetime.initialize();
-         Submit( executePrivateCatch,objaformatdatetime);
+         this.AV8Date = aP0_Date;
+         this.AV9DateTimeFormat = aP1_DateTimeFormat;
+         this.AV21FinalDateString = "" ;
+         SubmitImpl();
          aP2_FinalDateString=this.AV21FinalDateString;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((aformatdatetime)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -189,21 +167,17 @@ namespace GeneXus.Programs {
             AV19Message = "No day format found";
          }
          AV21FinalDateString = AV9DateTimeFormat;
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )

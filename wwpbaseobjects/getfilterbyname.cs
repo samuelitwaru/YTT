@@ -44,7 +44,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          this.AV8FilterName = aP1_FilterName;
          this.AV9FilterXML = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP2_FilterXML=this.AV9FilterXML;
       }
 
@@ -59,31 +59,14 @@ namespace GeneXus.Programs.wwpbaseobjects {
                                  string aP1_FilterName ,
                                  out string aP2_FilterXML )
       {
-         getfilterbyname objgetfilterbyname;
-         objgetfilterbyname = new getfilterbyname();
-         objgetfilterbyname.AV12UserCustomKey = aP0_UserCustomKey;
-         objgetfilterbyname.AV8FilterName = aP1_FilterName;
-         objgetfilterbyname.AV9FilterXML = "" ;
-         objgetfilterbyname.context.SetSubmitInitialConfig(context);
-         objgetfilterbyname.initialize();
-         Submit( executePrivateCatch,objgetfilterbyname);
+         this.AV12UserCustomKey = aP0_UserCustomKey;
+         this.AV8FilterName = aP1_FilterName;
+         this.AV9FilterXML = "" ;
+         SubmitImpl();
          aP2_FilterXML=this.AV9FilterXML;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((getfilterbyname)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -99,21 +82,17 @@ namespace GeneXus.Programs.wwpbaseobjects {
             }
             AV13GXV1 = (int)(AV13GXV1+1);
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -128,9 +107,9 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private string AV9FilterXML ;
       private string AV12UserCustomKey ;
       private string AV8FilterName ;
-      private string aP2_FilterXML ;
       private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtGridStateCollection_Item> AV10GridStateCollection ;
       private GeneXus.Programs.wwpbaseobjects.SdtGridStateCollection_Item AV11GridStateCollectionItem ;
+      private string aP2_FilterXML ;
    }
 
 }

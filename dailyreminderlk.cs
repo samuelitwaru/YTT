@@ -44,51 +44,30 @@ namespace GeneXus.Programs {
       public void execute( )
       {
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
       public void executeSubmit( )
       {
-         dailyreminderlk objdailyreminderlk;
-         objdailyreminderlk = new dailyreminderlk();
-         objdailyreminderlk.context.SetSubmitInitialConfig(context);
-         objdailyreminderlk.initialize();
-         Submit( executePrivateCatch,objdailyreminderlk);
+         SubmitImpl();
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((dailyreminderlk)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
          args = new Object[] {} ;
          ClassLoader.Execute("adailyreminderlk","GeneXus.Programs","adailyreminderlk", new Object[] {context }, "execute", args);
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )

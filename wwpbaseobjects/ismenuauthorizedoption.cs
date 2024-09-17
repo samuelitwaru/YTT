@@ -42,7 +42,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          this.AV9DVelop_Menu_Item = aP0_DVelop_Menu_Item;
          this.AV11IsAuthorized = false ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_IsAuthorized=this.AV11IsAuthorized;
       }
 
@@ -55,30 +55,13 @@ namespace GeneXus.Programs.wwpbaseobjects {
       public void executeSubmit( GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item aP0_DVelop_Menu_Item ,
                                  out bool aP1_IsAuthorized )
       {
-         ismenuauthorizedoption objismenuauthorizedoption;
-         objismenuauthorizedoption = new ismenuauthorizedoption();
-         objismenuauthorizedoption.AV9DVelop_Menu_Item = aP0_DVelop_Menu_Item;
-         objismenuauthorizedoption.AV11IsAuthorized = false ;
-         objismenuauthorizedoption.context.SetSubmitInitialConfig(context);
-         objismenuauthorizedoption.initialize();
-         Submit( executePrivateCatch,objismenuauthorizedoption);
+         this.AV9DVelop_Menu_Item = aP0_DVelop_Menu_Item;
+         this.AV11IsAuthorized = false ;
+         SubmitImpl();
          aP1_IsAuthorized=this.AV11IsAuthorized;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((ismenuauthorizedoption)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -104,30 +87,23 @@ namespace GeneXus.Programs.wwpbaseobjects {
             AV13Url = AV9DVelop_Menu_Item.gxTpr_Link;
             if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV13Url)) )
             {
-               if ( StringUtil.EndsWith( AV13Url, ".apk") )
+               /* Execute user subroutine: 'GET AUTHORIZATION KEY FROM URL' */
+               S111 ();
+               if ( returnInSub )
                {
-                  AV11IsAuthorized = true;
+                  cleanup();
+                  if (true) return;
                }
-               else
-               {
-                  /* Execute user subroutine: 'GET AUTHORIZATION KEY FROM URL' */
-                  S111 ();
-                  if ( returnInSub )
-                  {
-                     this.cleanup();
-                     if (true) return;
-                  }
-                  GXt_boolean1 = AV11IsAuthorized;
-                  new GeneXus.Programs.wwpbaseobjects.secgamisauthbyfunctionalitykey(context ).execute(  AV8AuthorizationKey, out  GXt_boolean1) ;
-                  AV11IsAuthorized = GXt_boolean1;
-               }
+               GXt_boolean1 = AV11IsAuthorized;
+               new GeneXus.Programs.wwpbaseobjects.secgamisauthbyfunctionalitykey(context ).execute(  AV8AuthorizationKey, out  GXt_boolean1) ;
+               AV11IsAuthorized = GXt_boolean1;
             }
             else
             {
                AV11IsAuthorized = true;
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void S111( )
@@ -157,16 +133,12 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -184,8 +156,8 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private bool GXt_boolean1 ;
       private string AV13Url ;
       private string AV8AuthorizationKey ;
-      private bool aP1_IsAuthorized ;
       private GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item AV9DVelop_Menu_Item ;
+      private bool aP1_IsAuthorized ;
    }
 
 }

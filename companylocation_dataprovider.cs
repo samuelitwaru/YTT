@@ -45,7 +45,7 @@ namespace GeneXus.Programs {
       {
          this.AV2ReturnValue = new GXBCCollection<SdtCompanyLocation>( context, "CompanyLocation", "YTT_version4") ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_ReturnValue=this.AV2ReturnValue;
       }
 
@@ -57,29 +57,12 @@ namespace GeneXus.Programs {
 
       public void executeSubmit( out GXBCCollection<SdtCompanyLocation> aP0_ReturnValue )
       {
-         companylocation_dataprovider objcompanylocation_dataprovider;
-         objcompanylocation_dataprovider = new companylocation_dataprovider();
-         objcompanylocation_dataprovider.AV2ReturnValue = new GXBCCollection<SdtCompanyLocation>( context, "CompanyLocation", "YTT_version4") ;
-         objcompanylocation_dataprovider.context.SetSubmitInitialConfig(context);
-         objcompanylocation_dataprovider.initialize();
-         Submit( executePrivateCatch,objcompanylocation_dataprovider);
+         this.AV2ReturnValue = new GXBCCollection<SdtCompanyLocation>( context, "CompanyLocation", "YTT_version4") ;
+         SubmitImpl();
          aP0_ReturnValue=this.AV2ReturnValue;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((companylocation_dataprovider)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -89,20 +72,16 @@ namespace GeneXus.Programs {
          {
             AV2ReturnValue = (GXBCCollection<SdtCompanyLocation>)(args[0]) ;
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -113,9 +92,9 @@ namespace GeneXus.Programs {
 
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GXBCCollection<SdtCompanyLocation> AV2ReturnValue ;
       private Object[] args ;
       private GXBCCollection<SdtCompanyLocation> aP0_ReturnValue ;
-      private GXBCCollection<SdtCompanyLocation> AV2ReturnValue ;
    }
 
 }

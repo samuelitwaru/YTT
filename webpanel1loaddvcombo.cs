@@ -76,7 +76,7 @@ namespace GeneXus.Programs {
          this.AV19SearchTxtParms = aP2_SearchTxtParms;
          this.AV20Combo_DataJson = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP3_Combo_DataJson=this.AV20Combo_DataJson;
       }
 
@@ -93,32 +93,15 @@ namespace GeneXus.Programs {
                                  string aP2_SearchTxtParms ,
                                  out string aP3_Combo_DataJson )
       {
-         webpanel1loaddvcombo objwebpanel1loaddvcombo;
-         objwebpanel1loaddvcombo = new webpanel1loaddvcombo();
-         objwebpanel1loaddvcombo.AV17ComboName = aP0_ComboName;
-         objwebpanel1loaddvcombo.AV18TrnMode = aP1_TrnMode;
-         objwebpanel1loaddvcombo.AV19SearchTxtParms = aP2_SearchTxtParms;
-         objwebpanel1loaddvcombo.AV20Combo_DataJson = "" ;
-         objwebpanel1loaddvcombo.context.SetSubmitInitialConfig(context);
-         objwebpanel1loaddvcombo.initialize();
-         Submit( executePrivateCatch,objwebpanel1loaddvcombo);
+         this.AV17ComboName = aP0_ComboName;
+         this.AV18TrnMode = aP1_TrnMode;
+         this.AV19SearchTxtParms = aP2_SearchTxtParms;
+         this.AV20Combo_DataJson = "" ;
+         SubmitImpl();
          aP3_Combo_DataJson=this.AV20Combo_DataJson;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((webpanel1loaddvcombo)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -133,7 +116,7 @@ namespace GeneXus.Programs {
             S111 ();
             if ( returnInSub )
             {
-               this.cleanup();
+               cleanup();
                if (true) return;
             }
          }
@@ -143,11 +126,11 @@ namespace GeneXus.Programs {
             S121 ();
             if ( returnInSub )
             {
-               this.cleanup();
+               cleanup();
                if (true) return;
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void S111( )
@@ -260,7 +243,7 @@ namespace GeneXus.Programs {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -268,16 +251,11 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
          AV20Combo_DataJson = "";
          AV9WWPContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPContext(context);
          AV14SearchTxt = "";
-         scmdbuf = "";
          lV14SearchTxt = "";
          A103ProjectName = "";
          P006E2_A103ProjectName = new string[] {""} ;
@@ -322,7 +300,6 @@ namespace GeneXus.Programs {
       private long A106EmployeeId ;
       private long AV24EmployeeIdKey ;
       private string AV18TrnMode ;
-      private string scmdbuf ;
       private string A103ProjectName ;
       private string A107EmployeeFirstName ;
       private bool returnInSub ;
@@ -333,9 +310,12 @@ namespace GeneXus.Programs {
       private string lV14SearchTxt ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV9WWPContext ;
       private IDataStoreProvider pr_default ;
       private string[] P006E2_A103ProjectName ;
       private long[] P006E2_A102ProjectId ;
+      private GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item AV16Combo_DataItem ;
+      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item> AV15Combo_Data ;
       private long[] P006E3_A102ProjectId ;
       private string[] P006E3_A103ProjectName ;
       private string[] P006E4_A107EmployeeFirstName ;
@@ -343,9 +323,6 @@ namespace GeneXus.Programs {
       private long[] P006E5_A106EmployeeId ;
       private string[] P006E5_A107EmployeeFirstName ;
       private string aP3_Combo_DataJson ;
-      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item> AV15Combo_Data ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV9WWPContext ;
-      private GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item AV16Combo_DataItem ;
    }
 
    public class webpanel1loaddvcombo__default : DataStoreHelperBase, IDataStoreHelper

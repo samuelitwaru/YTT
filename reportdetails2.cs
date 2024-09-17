@@ -45,10 +45,10 @@ namespace GeneXus.Programs {
 
       public void execute( )
       {
-         executePrivate();
+         ExecuteImpl();
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -198,11 +198,8 @@ namespace GeneXus.Programs {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITWEB( ) ;
          if ( ! isAjaxCallMode( ) )
          {
@@ -246,7 +243,7 @@ namespace GeneXus.Programs {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void RenderHtmlHeaders( )
@@ -277,10 +274,10 @@ namespace GeneXus.Programs {
          }
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
@@ -559,7 +556,7 @@ namespace GeneXus.Programs {
             {
                if ( context.ExposeMetadata( ) )
                {
-                  Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+                  Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
                }
             }
             Form.Meta.addItem("description", "Report Details2", 0) ;
@@ -693,6 +690,7 @@ namespace GeneXus.Programs {
                                        if ( ! wbErr )
                                        {
                                           dynload_actions( ) ;
+                                          /* Execute user event: Grid1.Load */
                                           E124W2 ();
                                        }
                                     }
@@ -975,6 +973,7 @@ namespace GeneXus.Programs {
                A100CompanyId = H004W2_A100CompanyId[0];
                A148EmployeeName = H004W2_A148EmployeeName[0];
                A157CompanyLocationId = H004W2_A157CompanyLocationId[0];
+               /* Execute user event: Grid1.Load */
                E124W2 ();
                pr_default.readNext(0);
             }
@@ -1012,13 +1011,9 @@ namespace GeneXus.Programs {
       protected void before_start_formulas( )
       {
          edtEmployeeId_Enabled = 0;
-         AssignProp(sPrefix, false, edtEmployeeId_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtEmployeeId_Enabled), 5, 0), !bGXsfl_6_Refreshing);
          edtEmployeeName_Enabled = 0;
-         AssignProp(sPrefix, false, edtEmployeeName_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtEmployeeName_Enabled), 5, 0), !bGXsfl_6_Refreshing);
          edtCompanyLocationId_Enabled = 0;
-         AssignProp(sPrefix, false, edtCompanyLocationId_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtCompanyLocationId_Enabled), 5, 0), !bGXsfl_6_Refreshing);
          edtProjectId_Enabled = 0;
-         AssignProp(sPrefix, false, edtProjectId_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtProjectId_Enabled), 5, 0), !bGXsfl_6_Refreshing);
          fix_multi_value_controls( ) ;
       }
 
@@ -1094,7 +1089,7 @@ namespace GeneXus.Programs {
          PA4W2( ) ;
          WS4W2( ) ;
          WE4W2( ) ;
-         this.cleanup();
+         cleanup();
          context.SetWrapped(false);
          SaveComponentMsgList(sPrefix);
          context.GX_msglist = BackMsgLst;
@@ -1265,7 +1260,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202471712101661", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202491613133577", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1281,7 +1276,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("reportdetails2.js", "?202471712101661", false, true);
+         context.AddJavascriptSource("reportdetails2.js", "?202491613133577", false, true);
          /* End function include_jscripts */
       }
 
@@ -1303,6 +1298,7 @@ namespace GeneXus.Programs {
 
       protected void sendrow_62( )
       {
+         sGXsfl_6_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_6_idx), 4, 0), 4, "0");
          SubsflControlProps_62( ) ;
          WB4W0( ) ;
          Grid1Row = GXWebRow.GetNew(context,Grid1Container);
@@ -1544,8 +1540,24 @@ namespace GeneXus.Programs {
             Grid1Column = GXWebColumn.GetNew(isAjaxCallMode( ));
             Grid1Container.AddColumnProperties(Grid1Column);
             Grid1Column = GXWebColumn.GetNew(isAjaxCallMode( ));
+            Grid1Container.AddColumnProperties(Grid1Column);
+            Grid1Column = GXWebColumn.GetNew(isAjaxCallMode( ));
+            Grid1Container.AddColumnProperties(Grid1Column);
+            Grid1Column = GXWebColumn.GetNew(isAjaxCallMode( ));
+            Grid1Container.AddColumnProperties(Grid1Column);
+            Grid1Column = GXWebColumn.GetNew(isAjaxCallMode( ));
+            Grid1Container.AddColumnProperties(Grid1Column);
+            Grid1Column = GXWebColumn.GetNew(isAjaxCallMode( ));
             Grid1Column.AddObjectProperty("Value", GXUtil.ValueEncode( StringUtil.RTrim( A148EmployeeName)));
             Grid1Column.AddObjectProperty("Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtEmployeeName_Visible), 5, 0, ".", "")));
+            Grid1Container.AddColumnProperties(Grid1Column);
+            Grid1Column = GXWebColumn.GetNew(isAjaxCallMode( ));
+            Grid1Container.AddColumnProperties(Grid1Column);
+            Grid1Column = GXWebColumn.GetNew(isAjaxCallMode( ));
+            Grid1Container.AddColumnProperties(Grid1Column);
+            Grid1Column = GXWebColumn.GetNew(isAjaxCallMode( ));
+            Grid1Container.AddColumnProperties(Grid1Column);
+            Grid1Column = GXWebColumn.GetNew(isAjaxCallMode( ));
             Grid1Container.AddColumnProperties(Grid1Column);
             Grid1Column = GXWebColumn.GetNew(isAjaxCallMode( ));
             Grid1Container.AddColumnProperties(Grid1Column);
@@ -1568,8 +1580,30 @@ namespace GeneXus.Programs {
             Grid1Column = GXWebColumn.GetNew(isAjaxCallMode( ));
             Grid1Container.AddColumnProperties(Grid1Column);
             Grid1Column = GXWebColumn.GetNew(isAjaxCallMode( ));
+            Grid1Container.AddColumnProperties(Grid1Column);
+            Grid1Column = GXWebColumn.GetNew(isAjaxCallMode( ));
+            Grid1Container.AddColumnProperties(Grid1Column);
+            Grid1Column = GXWebColumn.GetNew(isAjaxCallMode( ));
+            Grid1Container.AddColumnProperties(Grid1Column);
+            Grid1Column = GXWebColumn.GetNew(isAjaxCallMode( ));
+            Grid1Container.AddColumnProperties(Grid1Column);
+            Grid1Column = GXWebColumn.GetNew(isAjaxCallMode( ));
             Grid1Column.AddObjectProperty("Value", GXUtil.ValueEncode( StringUtil.LTrim( StringUtil.NToC( (decimal)(A102ProjectId), 10, 0, ".", ""))));
             Grid1Column.AddObjectProperty("Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtProjectId_Visible), 5, 0, ".", "")));
+            Grid1Container.AddColumnProperties(Grid1Column);
+            Grid1Column = GXWebColumn.GetNew(isAjaxCallMode( ));
+            Grid1Container.AddColumnProperties(Grid1Column);
+            Grid1Column = GXWebColumn.GetNew(isAjaxCallMode( ));
+            Grid1Container.AddColumnProperties(Grid1Column);
+            Grid1Column = GXWebColumn.GetNew(isAjaxCallMode( ));
+            Grid1Container.AddColumnProperties(Grid1Column);
+            Grid1Column = GXWebColumn.GetNew(isAjaxCallMode( ));
+            Grid1Container.AddColumnProperties(Grid1Column);
+            Grid1Column = GXWebColumn.GetNew(isAjaxCallMode( ));
+            Grid1Container.AddColumnProperties(Grid1Column);
+            Grid1Column = GXWebColumn.GetNew(isAjaxCallMode( ));
+            Grid1Container.AddColumnProperties(Grid1Column);
+            Grid1Column = GXWebColumn.GetNew(isAjaxCallMode( ));
             Grid1Container.AddColumnProperties(Grid1Column);
             Grid1Column = GXWebColumn.GetNew(isAjaxCallMode( ));
             Grid1Container.AddColumnProperties(Grid1Column);
@@ -1644,31 +1678,23 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'GRID1_nFirstRecordOnPage'},{av:'GRID1_nEOF'},{av:'sPrefix'}]");
-         setEventMetadata("REFRESH",",oparms:[]}");
-         setEventMetadata("GRID1.LOAD","{handler:'E124W2',iparms:[]");
-         setEventMetadata("GRID1.LOAD",",oparms:[{av:'edtEmployeeId_Visible',ctrl:'EMPLOYEEID',prop:'Visible'},{av:'edtEmployeeName_Visible',ctrl:'EMPLOYEENAME',prop:'Visible'},{av:'edtCompanyLocationId_Visible',ctrl:'COMPANYLOCATIONID',prop:'Visible'},{av:'edtProjectId_Visible',ctrl:'PROJECTID',prop:'Visible'}]}");
-         setEventMetadata("GLOBALEVENTS.REPORTSFILTERCHANAGED","{handler:'E114W2',iparms:[{av:'GRID1_nFirstRecordOnPage'},{av:'GRID1_nEOF'},{av:'sPrefix'},{av:'AV9ToDate',fld:'vTODATE',pic:''},{av:'AV8FromDate',fld:'vFROMDATE',pic:''},{av:'AV7ProjectId',fld:'vPROJECTID',pic:''},{av:'AV5EmployeeId',fld:'vEMPLOYEEID',pic:''},{av:'AV6CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:''}]");
-         setEventMetadata("GLOBALEVENTS.REPORTSFILTERCHANAGED",",oparms:[{av:'AV6CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:''}]}");
-         setEventMetadata("VALID_EMPLOYEEID","{handler:'Valid_Employeeid',iparms:[]");
-         setEventMetadata("VALID_EMPLOYEEID",",oparms:[]}");
-         setEventMetadata("NULL","{handler:'Valid_Projectid',iparms:[]");
-         setEventMetadata("NULL",",oparms:[]}");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"GRID1_nFirstRecordOnPage"},{"av":"GRID1_nEOF"},{"av":"sPrefix"}]}""");
+         setEventMetadata("GRID1.LOAD","""{"handler":"E124W2","iparms":[]""");
+         setEventMetadata("GRID1.LOAD",""","oparms":[{"av":"edtEmployeeId_Visible","ctrl":"EMPLOYEEID","prop":"Visible"},{"av":"edtEmployeeName_Visible","ctrl":"EMPLOYEENAME","prop":"Visible"},{"av":"edtCompanyLocationId_Visible","ctrl":"COMPANYLOCATIONID","prop":"Visible"},{"av":"edtProjectId_Visible","ctrl":"PROJECTID","prop":"Visible"}]}""");
+         setEventMetadata("GLOBALEVENTS.REPORTSFILTERCHANAGED","""{"handler":"E114W2","iparms":[{"av":"GRID1_nFirstRecordOnPage"},{"av":"GRID1_nEOF"},{"av":"sPrefix"},{"av":"AV9ToDate","fld":"vTODATE"},{"av":"AV8FromDate","fld":"vFROMDATE"},{"av":"AV7ProjectId","fld":"vPROJECTID"},{"av":"AV5EmployeeId","fld":"vEMPLOYEEID"},{"av":"AV6CompanyLocationId","fld":"vCOMPANYLOCATIONID"}]""");
+         setEventMetadata("GLOBALEVENTS.REPORTSFILTERCHANAGED",""","oparms":[{"av":"AV6CompanyLocationId","fld":"vCOMPANYLOCATIONID"}]}""");
+         setEventMetadata("VALID_EMPLOYEEID","""{"handler":"Valid_Employeeid","iparms":[]}""");
+         setEventMetadata("NULL","""{"handler":"Valid_Projectid","iparms":[]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -1699,7 +1725,6 @@ namespace GeneXus.Programs {
          sCmpCtrl = "";
          WebComp_GX_Process_Component = "";
          WebComp_Component1_Component = "";
-         scmdbuf = "";
          A119WorkHourLogDate = DateTime.MinValue;
          H004W2_A100CompanyId = new long[1] ;
          H004W2_A119WorkHourLogDate = new DateTime[] {DateTime.MinValue} ;
@@ -1729,7 +1754,6 @@ namespace GeneXus.Programs {
       private short nGotPars ;
       private short GxWebError ;
       private short nDynComponent ;
-      private short initialized ;
       private short wbEnd ;
       private short wbStart ;
       private short nDraw ;
@@ -1800,7 +1824,6 @@ namespace GeneXus.Programs {
       private string WebComp_GX_Process_Component ;
       private string WebCompHandler="" ;
       private string WebComp_Component1_Component ;
-      private string scmdbuf ;
       private string sGXsfl_6_fel_idx="0001" ;
       private string subGrid1_Class ;
       private string subGrid1_Linesclass ;
@@ -1822,9 +1845,6 @@ namespace GeneXus.Programs {
       private bool bGXsfl_6_Refreshing=false ;
       private bool gxdyncontrolsrefreshing ;
       private bool returnInSub ;
-      private GxSimpleCollection<long> AV7ProjectId ;
-      private GxSimpleCollection<long> AV5EmployeeId ;
-      private GxSimpleCollection<long> AV6CompanyLocationId ;
       private GXWebComponent WebComp_Component1 ;
       private GXWebGrid Grid1Container ;
       private GXWebRow Grid1Row ;
@@ -1832,6 +1852,9 @@ namespace GeneXus.Programs {
       private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GxSimpleCollection<long> AV7ProjectId ;
+      private GxSimpleCollection<long> AV5EmployeeId ;
+      private GxSimpleCollection<long> AV6CompanyLocationId ;
       private GXWebComponent WebComp_GX_Process ;
       private IDataStoreProvider pr_default ;
       private long[] H004W2_A100CompanyId ;

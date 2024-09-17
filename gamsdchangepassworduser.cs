@@ -56,7 +56,7 @@ namespace GeneXus.Programs {
          this.AV16UserPasswordNewConf = aP4_UserPasswordNewConf;
          this.AV12Messages = new GXBaseCollection<GeneXus.Utils.SdtMessages_Message>( context, "Message", "GeneXus") ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP5_Messages=this.AV12Messages;
       }
 
@@ -77,34 +77,17 @@ namespace GeneXus.Programs {
                                  string aP4_UserPasswordNewConf ,
                                  out GXBaseCollection<GeneXus.Utils.SdtMessages_Message> aP5_Messages )
       {
-         gamsdchangepassworduser objgamsdchangepassworduser;
-         objgamsdchangepassworduser = new gamsdchangepassworduser();
-         objgamsdchangepassworduser.AV10isPasswordExpires = aP0_isPasswordExpires;
-         objgamsdchangepassworduser.AV13UserName = aP1_UserName;
-         objgamsdchangepassworduser.AV14UserPassword = aP2_UserPassword;
-         objgamsdchangepassworduser.AV15UserPasswordNew = aP3_UserPasswordNew;
-         objgamsdchangepassworduser.AV16UserPasswordNewConf = aP4_UserPasswordNewConf;
-         objgamsdchangepassworduser.AV12Messages = new GXBaseCollection<GeneXus.Utils.SdtMessages_Message>( context, "Message", "GeneXus") ;
-         objgamsdchangepassworduser.context.SetSubmitInitialConfig(context);
-         objgamsdchangepassworduser.initialize();
-         Submit( executePrivateCatch,objgamsdchangepassworduser);
+         this.AV10isPasswordExpires = aP0_isPasswordExpires;
+         this.AV13UserName = aP1_UserName;
+         this.AV14UserPassword = aP2_UserPassword;
+         this.AV15UserPasswordNew = aP3_UserPasswordNew;
+         this.AV16UserPasswordNewConf = aP4_UserPasswordNewConf;
+         this.AV12Messages = new GXBaseCollection<GeneXus.Utils.SdtMessages_Message>( context, "Message", "GeneXus") ;
+         SubmitImpl();
          aP5_Messages=this.AV12Messages;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((gamsdchangepassworduser)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -135,21 +118,17 @@ namespace GeneXus.Programs {
             AV11Message.gxTpr_Description = "The new password and confirmation do not match.";
             AV12Messages.Add(AV11Message, 0);
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -177,13 +156,13 @@ namespace GeneXus.Programs {
       private string AV13UserName ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
-      private IDataStoreProvider pr_default ;
-      private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> aP5_Messages ;
-      private IDataStoreProvider pr_gam ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV8Errors ;
       private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> AV12Messages ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV8Errors ;
+      private IDataStoreProvider pr_default ;
       private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> GXt_objcol_SdtMessages_Message1 ;
       private GeneXus.Utils.SdtMessages_Message AV11Message ;
+      private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> aP5_Messages ;
+      private IDataStoreProvider pr_gam ;
    }
 
    public class gamsdchangepassworduser__gam : DataStoreHelperBase, IDataStoreHelper

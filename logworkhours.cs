@@ -43,10 +43,10 @@ namespace GeneXus.Programs {
 
       public void execute( )
       {
-         executePrivate();
+         ExecuteImpl();
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -204,11 +204,8 @@ namespace GeneXus.Programs {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITWEB( ) ;
          if ( ! isAjaxCallMode( ) )
          {
@@ -239,7 +236,7 @@ namespace GeneXus.Programs {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override short ExecuteStartEvent( )
@@ -283,18 +280,18 @@ namespace GeneXus.Programs {
          CloseStyles();
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
             enableOutput();
          }
-         context.AddJavascriptSource("calendar.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("calendar-setup.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("calendar-en.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("calendar.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("calendar-setup.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("calendar-en.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("Switch/switch.min.js", "", false, true);
          context.AddJavascriptSource("Switch/switch.min.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
@@ -872,7 +869,7 @@ namespace GeneXus.Programs {
          {
             if ( context.ExposeMetadata( ) )
             {
-               Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+               Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
             }
          }
          Form.Meta.addItem("description", "Log Hours", 0) ;
@@ -1003,6 +1000,7 @@ namespace GeneXus.Programs {
                                  {
                                     context.wbHandled = 1;
                                     dynload_actions( ) ;
+                                    /* Execute user event: Grid1.Load */
                                     E164A2 ();
                                  }
                                  else if ( StringUtil.StrCmp(sEvt, "VDELETE.CLICK") == 0 )
@@ -1259,9 +1257,7 @@ namespace GeneXus.Programs {
          edtavFormworkhourlogdate_Enabled = 0;
          AssignProp("", false, edtavFormworkhourlogdate_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavFormworkhourlogdate_Enabled), 5, 0), true);
          edtavUpdate_Enabled = 0;
-         AssignProp("", false, edtavUpdate_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavUpdate_Enabled), 5, 0), !bGXsfl_98_Refreshing);
          edtavDelete_Enabled = 0;
-         AssignProp("", false, edtavDelete_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavDelete_Enabled), 5, 0), !bGXsfl_98_Refreshing);
       }
 
       protected void RF4A2( )
@@ -1312,6 +1308,7 @@ namespace GeneXus.Programs {
                A119WorkHourLogDate = H004A2_A119WorkHourLogDate[0];
                A102ProjectId = H004A2_A102ProjectId[0];
                A103ProjectName = H004A2_A103ProjectName[0];
+               /* Execute user event: Grid1.Load */
                E164A2 ();
                pr_default.readNext(0);
             }
@@ -1478,28 +1475,17 @@ namespace GeneXus.Programs {
          edtavFormworkhourlogdate_Enabled = 0;
          AssignProp("", false, edtavFormworkhourlogdate_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavFormworkhourlogdate_Enabled), 5, 0), true);
          edtavUpdate_Enabled = 0;
-         AssignProp("", false, edtavUpdate_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavUpdate_Enabled), 5, 0), !bGXsfl_98_Refreshing);
          edtavDelete_Enabled = 0;
-         AssignProp("", false, edtavDelete_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavDelete_Enabled), 5, 0), !bGXsfl_98_Refreshing);
          GXVvFORMWORKHOURLOGPROJECTID_html4A2( ) ;
          edtProjectId_Enabled = 0;
-         AssignProp("", false, edtProjectId_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtProjectId_Enabled), 5, 0), !bGXsfl_98_Refreshing);
          edtWorkHourLogDate_Enabled = 0;
-         AssignProp("", false, edtWorkHourLogDate_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtWorkHourLogDate_Enabled), 5, 0), !bGXsfl_98_Refreshing);
          edtProjectName_Enabled = 0;
-         AssignProp("", false, edtProjectName_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtProjectName_Enabled), 5, 0), !bGXsfl_98_Refreshing);
          edtEmployeeId_Enabled = 0;
-         AssignProp("", false, edtEmployeeId_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtEmployeeId_Enabled), 5, 0), !bGXsfl_98_Refreshing);
          edtWorkHourLogDuration_Enabled = 0;
-         AssignProp("", false, edtWorkHourLogDuration_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtWorkHourLogDuration_Enabled), 5, 0), !bGXsfl_98_Refreshing);
          edtWorkHourLogDescription_Enabled = 0;
-         AssignProp("", false, edtWorkHourLogDescription_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtWorkHourLogDescription_Enabled), 5, 0), !bGXsfl_98_Refreshing);
          edtWorkHourLogHour_Enabled = 0;
-         AssignProp("", false, edtWorkHourLogHour_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtWorkHourLogHour_Enabled), 5, 0), !bGXsfl_98_Refreshing);
          edtWorkHourLogId_Enabled = 0;
-         AssignProp("", false, edtWorkHourLogId_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtWorkHourLogId_Enabled), 5, 0), !bGXsfl_98_Refreshing);
          edtWorkHourLogMinute_Enabled = 0;
-         AssignProp("", false, edtWorkHourLogMinute_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtWorkHourLogMinute_Enabled), 5, 0), !bGXsfl_98_Refreshing);
          fix_multi_value_controls( ) ;
       }
 
@@ -2077,7 +2063,7 @@ namespace GeneXus.Programs {
          PA4A2( ) ;
          WS4A2( ) ;
          WE4A2( ) ;
-         this.cleanup();
+         cleanup();
          context.SetWrapped(false);
          context.GX_msglist = BackMsgLst;
          return "";
@@ -2100,7 +2086,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20248121532828", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024916132005", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2118,7 +2104,7 @@ namespace GeneXus.Programs {
          if ( nGXWrapped != 1 )
          {
             context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-            context.AddJavascriptSource("logworkhours.js", "?20248121532828", false, true);
+            context.AddJavascriptSource("logworkhours.js", "?2024916132005", false, true);
             context.AddJavascriptSource("Switch/switch.min.js", "", false, true);
             context.AddJavascriptSource("Switch/switch.min.js", "", false, true);
             context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
@@ -2159,6 +2145,7 @@ namespace GeneXus.Programs {
 
       protected void sendrow_982( )
       {
+         sGXsfl_98_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_98_idx), 4, 0), 4, "0");
          SubsflControlProps_982( ) ;
          WB4A0( ) ;
          if ( ( subGrid1_Rows * 1 == 0 ) || ( nGXsfl_98_idx <= subGrid1_fnc_Recordsperpage( ) * 1 ) )
@@ -2298,18 +2285,18 @@ namespace GeneXus.Programs {
                context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+((edtavUpdate_Visible==0) ? "display:none;" : "")+"\">") ;
             }
             /* Single line edit */
-            TempTags = " " + ((edtavUpdate_Enabled!=0)&&(edtavUpdate_Visible!=0) ? " onfocus=\"gx.evt.onfocus(this, 108,'',false,'"+sGXsfl_98_idx+"',98)\"" : " ");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 108,'',false,'" + sGXsfl_98_idx + "',98)\"";
             ROClassString = "Attribute";
-            Grid1Row.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavUpdate_Internalname,StringUtil.RTrim( AV56update),(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+((edtavUpdate_Enabled!=0)&&(edtavUpdate_Visible!=0) ? " onblur=\""+""+";gx.evt.onblur(this,108);\"" : " "),(string)"'"+""+"'"+",false,"+"'"+"e194a2_client"+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavUpdate_Jsonclick,(short)7,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWIconActionColumn",(string)"",(int)edtavUpdate_Visible,(int)edtavUpdate_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)1,(short)98,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
+            Grid1Row.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavUpdate_Internalname,StringUtil.RTrim( AV56update),(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,108);\"",(string)"'"+""+"'"+",false,"+"'"+"e194a2_client"+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavUpdate_Jsonclick,(short)7,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWIconActionColumn",(string)"",(int)edtavUpdate_Visible,(int)edtavUpdate_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)1,(short)98,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
             /* Subfile cell */
             if ( Grid1Container.GetWrapped() == 1 )
             {
                context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+((edtavDelete_Visible==0) ? "display:none;" : "")+"\">") ;
             }
             /* Single line edit */
-            TempTags = " " + ((edtavDelete_Enabled!=0)&&(edtavDelete_Visible!=0) ? " onfocus=\"gx.evt.onfocus(this, 109,'',false,'"+sGXsfl_98_idx+"',98)\"" : " ");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 109,'',false,'" + sGXsfl_98_idx + "',98)\"";
             ROClassString = "Attribute";
-            Grid1Row.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavDelete_Internalname,StringUtil.RTrim( AV11delete),(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+((edtavDelete_Enabled!=0)&&(edtavDelete_Visible!=0) ? " onblur=\""+""+";gx.evt.onblur(this,109);\"" : " "),"'"+""+"'"+",false,"+"'"+"EVDELETE.CLICK."+sGXsfl_98_idx+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavDelete_Jsonclick,(short)5,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWIconActionColumn",(string)"",(int)edtavDelete_Visible,(int)edtavDelete_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)1,(short)98,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
+            Grid1Row.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavDelete_Internalname,StringUtil.RTrim( AV11delete),(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,109);\"","'"+""+"'"+",false,"+"'"+"EVDELETE.CLICK."+sGXsfl_98_idx+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavDelete_Jsonclick,(short)5,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWIconActionColumn",(string)"",(int)edtavDelete_Visible,(int)edtavDelete_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)1,(short)98,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
             send_integrity_lvl_hashes4A2( ) ;
             Grid1Container.AddRow(Grid1Row);
             nGXsfl_98_idx = ((subGrid1_Islastpage==1)&&(nGXsfl_98_idx+1>subGrid1_fnc_Recordsperpage( )) ? 1 : nGXsfl_98_idx+1);
@@ -2609,49 +2596,42 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'GRID1_nFirstRecordOnPage'},{av:'GRID1_nEOF'},{av:'subGrid1_Rows',ctrl:'GRID1',prop:'Rows'},{av:'AV10date',fld:'vDATE',pic:''},{av:'dynavFormworkhourlogprojectid'},{av:'AV29FormWorkHourLogProjectId',fld:'vFORMWORKHOURLOGPROJECTID',pic:'ZZZZZZZZZ9'},{av:'Gx_date',fld:'vTODAY',pic:'',hsh:true}]");
-         setEventMetadata("REFRESH",",oparms:[{av:'AV72IsLogHourOpen',fld:'vISLOGHOUROPEN',pic:''},{av:'lblTtopentext_Visible',ctrl:'TTOPENTEXT',prop:'Visible'}]}");
-         setEventMetadata("GRID1.LOAD","{handler:'E164A2',iparms:[{av:'A119WorkHourLogDate',fld:'WORKHOURLOGDATE',pic:'',hsh:true},{av:'Gx_date',fld:'vTODAY',pic:'',hsh:true}]");
-         setEventMetadata("GRID1.LOAD",",oparms:[{av:'edtavUpdate_Visible',ctrl:'vUPDATE',prop:'Visible'},{av:'edtavDelete_Visible',ctrl:'vDELETE',prop:'Visible'},{av:'AV56update',fld:'vUPDATE',pic:''},{av:'AV11delete',fld:'vDELETE',pic:''}]}");
-         setEventMetadata("'DOSAVE'","{handler:'E134A2',iparms:[{av:'AV26FormWorkHourLogHours',fld:'vFORMWORKHOURLOGHOURS',pic:'ZZZ9'},{av:'AV28FormWorkHourLogMinutes',fld:'vFORMWORKHOURLOGMINUTES',pic:'ZZZ9'},{av:'AV23FormWorkHourLogDescription',fld:'vFORMWORKHOURLOGDESCRIPTION',pic:''},{av:'AV27FormWorkHourLogId',fld:'vFORMWORKHOURLOGID',pic:'ZZZZZZZZZ9'},{av:'AV60WorkHourLog',fld:'vWORKHOURLOG',pic:''},{av:'AV22FormWorkHourLogDate',fld:'vFORMWORKHOURLOGDATE',pic:''},{av:'dynavFormworkhourlogprojectid'},{av:'AV29FormWorkHourLogProjectId',fld:'vFORMWORKHOURLOGPROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV25FormWorkHourLogEmployeeId',fld:'vFORMWORKHOURLOGEMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'Gx_date',fld:'vTODAY',pic:'',hsh:true},{av:'GRID1_nFirstRecordOnPage'},{av:'GRID1_nEOF'},{av:'subGrid1_Rows',ctrl:'GRID1',prop:'Rows'},{av:'AV10date',fld:'vDATE',pic:''}]");
-         setEventMetadata("'DOSAVE'",",oparms:[{av:'AV60WorkHourLog',fld:'vWORKHOURLOG',pic:''},{av:'AV27FormWorkHourLogId',fld:'vFORMWORKHOURLOGID',pic:'ZZZZZZZZZ9'},{av:'AV22FormWorkHourLogDate',fld:'vFORMWORKHOURLOGDATE',pic:''},{av:'AV26FormWorkHourLogHours',fld:'vFORMWORKHOURLOGHOURS',pic:'ZZZ9'},{av:'AV28FormWorkHourLogMinutes',fld:'vFORMWORKHOURLOGMINUTES',pic:'ZZZ9'},{av:'AV23FormWorkHourLogDescription',fld:'vFORMWORKHOURLOGDESCRIPTION',pic:''},{av:'AV24FormWorkHourLogDuration',fld:'vFORMWORKHOURLOGDURATION',pic:''},{av:'lblWeeklytotal_Caption',ctrl:'WEEKLYTOTAL',prop:'Caption'},{av:'lblDailytotal_Caption',ctrl:'DAILYTOTAL',prop:'Caption'},{av:'AV72IsLogHourOpen',fld:'vISLOGHOUROPEN',pic:''},{av:'lblTtopentext_Visible',ctrl:'TTOPENTEXT',prop:'Visible'}]}");
-         setEventMetadata("'DOUSERACTION1'","{handler:'E114A1',iparms:[{av:'AV10date',fld:'vDATE',pic:''}]");
-         setEventMetadata("'DOUSERACTION1'",",oparms:[{av:'AV27FormWorkHourLogId',fld:'vFORMWORKHOURLOGID',pic:'ZZZZZZZZZ9'},{av:'AV22FormWorkHourLogDate',fld:'vFORMWORKHOURLOGDATE',pic:''},{av:'AV26FormWorkHourLogHours',fld:'vFORMWORKHOURLOGHOURS',pic:'ZZZ9'},{av:'AV28FormWorkHourLogMinutes',fld:'vFORMWORKHOURLOGMINUTES',pic:'ZZZ9'},{av:'AV23FormWorkHourLogDescription',fld:'vFORMWORKHOURLOGDESCRIPTION',pic:''},{av:'AV24FormWorkHourLogDuration',fld:'vFORMWORKHOURLOGDURATION',pic:''}]}");
-         setEventMetadata("VDATE.CONTROLVALUECHANGED","{handler:'E144A2',iparms:[{av:'AV10date',fld:'vDATE',pic:''},{av:'AV73OldDate',fld:'vOLDDATE',pic:''}]");
-         setEventMetadata("VDATE.CONTROLVALUECHANGED",",oparms:[{av:'AV10date',fld:'vDATE',pic:''},{av:'AV22FormWorkHourLogDate',fld:'vFORMWORKHOURLOGDATE',pic:''},{av:'AV73OldDate',fld:'vOLDDATE',pic:''},{av:'lblWeeklytotal_Caption',ctrl:'WEEKLYTOTAL',prop:'Caption'},{av:'lblDailytotal_Caption',ctrl:'DAILYTOTAL',prop:'Caption'},{av:'AV27FormWorkHourLogId',fld:'vFORMWORKHOURLOGID',pic:'ZZZZZZZZZ9'},{av:'AV26FormWorkHourLogHours',fld:'vFORMWORKHOURLOGHOURS',pic:'ZZZ9'},{av:'AV28FormWorkHourLogMinutes',fld:'vFORMWORKHOURLOGMINUTES',pic:'ZZZ9'},{av:'AV23FormWorkHourLogDescription',fld:'vFORMWORKHOURLOGDESCRIPTION',pic:''},{av:'AV24FormWorkHourLogDuration',fld:'vFORMWORKHOURLOGDURATION',pic:''}]}");
-         setEventMetadata("VUPDATE.CLICK","{handler:'E194A2',iparms:[{av:'A118WorkHourLogId',fld:'WORKHOURLOGID',pic:'ZZZZZZZZZ9',hsh:true},{av:'A106EmployeeId',fld:'EMPLOYEEID',pic:'ZZZZZZZZZ9',hsh:true},{av:'A119WorkHourLogDate',fld:'WORKHOURLOGDATE',pic:'',hsh:true},{av:'A121WorkHourLogHour',fld:'WORKHOURLOGHOUR',pic:'ZZZ9',hsh:true},{av:'A122WorkHourLogMinute',fld:'WORKHOURLOGMINUTE',pic:'ZZZ9',hsh:true},{av:'A123WorkHourLogDescription',fld:'WORKHOURLOGDESCRIPTION',pic:'',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9',hsh:true}]");
-         setEventMetadata("VUPDATE.CLICK",",oparms:[{av:'AV27FormWorkHourLogId',fld:'vFORMWORKHOURLOGID',pic:'ZZZZZZZZZ9'},{av:'AV25FormWorkHourLogEmployeeId',fld:'vFORMWORKHOURLOGEMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'AV22FormWorkHourLogDate',fld:'vFORMWORKHOURLOGDATE',pic:''},{av:'AV26FormWorkHourLogHours',fld:'vFORMWORKHOURLOGHOURS',pic:'ZZZ9'},{av:'AV28FormWorkHourLogMinutes',fld:'vFORMWORKHOURLOGMINUTES',pic:'ZZZ9'},{av:'AV23FormWorkHourLogDescription',fld:'vFORMWORKHOURLOGDESCRIPTION',pic:''},{av:'dynavFormworkhourlogprojectid'},{av:'AV29FormWorkHourLogProjectId',fld:'vFORMWORKHOURLOGPROJECTID',pic:'ZZZZZZZZZ9'}]}");
-         setEventMetadata("VDELETE.CLICK","{handler:'E174A2',iparms:[{av:'GRID1_nFirstRecordOnPage'},{av:'GRID1_nEOF'},{av:'subGrid1_Rows',ctrl:'GRID1',prop:'Rows'},{av:'AV10date',fld:'vDATE',pic:''},{av:'Gx_date',fld:'vTODAY',pic:'',hsh:true},{av:'dynavFormworkhourlogprojectid'},{av:'AV29FormWorkHourLogProjectId',fld:'vFORMWORKHOURLOGPROJECTID',pic:'ZZZZZZZZZ9'},{av:'A118WorkHourLogId',fld:'WORKHOURLOGID',pic:'ZZZZZZZZZ9',hsh:true},{av:'AV27FormWorkHourLogId',fld:'vFORMWORKHOURLOGID',pic:'ZZZZZZZZZ9'}]");
-         setEventMetadata("VDELETE.CLICK",",oparms:[{av:'AV60WorkHourLog',fld:'vWORKHOURLOG',pic:''},{av:'AV27FormWorkHourLogId',fld:'vFORMWORKHOURLOGID',pic:'ZZZZZZZZZ9'},{av:'AV22FormWorkHourLogDate',fld:'vFORMWORKHOURLOGDATE',pic:''},{av:'AV26FormWorkHourLogHours',fld:'vFORMWORKHOURLOGHOURS',pic:'ZZZ9'},{av:'AV28FormWorkHourLogMinutes',fld:'vFORMWORKHOURLOGMINUTES',pic:'ZZZ9'},{av:'AV23FormWorkHourLogDescription',fld:'vFORMWORKHOURLOGDESCRIPTION',pic:''},{av:'AV24FormWorkHourLogDuration',fld:'vFORMWORKHOURLOGDURATION',pic:''},{av:'lblWeeklytotal_Caption',ctrl:'WEEKLYTOTAL',prop:'Caption'},{av:'lblDailytotal_Caption',ctrl:'DAILYTOTAL',prop:'Caption'},{av:'AV72IsLogHourOpen',fld:'vISLOGHOUROPEN',pic:''},{av:'lblTtopentext_Visible',ctrl:'TTOPENTEXT',prop:'Visible'}]}");
-         setEventMetadata("VISLOGHOUROPEN.CONTROLVALUECHANGED","{handler:'E124A2',iparms:[{av:'GRID1_nFirstRecordOnPage'},{av:'GRID1_nEOF'},{av:'subGrid1_Rows',ctrl:'GRID1',prop:'Rows'},{av:'AV10date',fld:'vDATE',pic:''},{av:'Gx_date',fld:'vTODAY',pic:'',hsh:true},{av:'dynavFormworkhourlogprojectid'},{av:'AV29FormWorkHourLogProjectId',fld:'vFORMWORKHOURLOGPROJECTID',pic:'ZZZZZZZZZ9'},{av:'AV72IsLogHourOpen',fld:'vISLOGHOUROPEN',pic:''}]");
-         setEventMetadata("VISLOGHOUROPEN.CONTROLVALUECHANGED",",oparms:[{av:'lblTtopentext_Visible',ctrl:'TTOPENTEXT',prop:'Visible'},{av:'AV72IsLogHourOpen',fld:'vISLOGHOUROPEN',pic:''}]}");
-         setEventMetadata("GRID1_FIRSTPAGE","{handler:'subgrid1_firstpage',iparms:[{av:'GRID1_nFirstRecordOnPage'},{av:'GRID1_nEOF'},{av:'subGrid1_Rows',ctrl:'GRID1',prop:'Rows'},{av:'AV10date',fld:'vDATE',pic:''},{av:'Gx_date',fld:'vTODAY',pic:'',hsh:true},{av:'dynavFormworkhourlogprojectid'},{av:'AV29FormWorkHourLogProjectId',fld:'vFORMWORKHOURLOGPROJECTID',pic:'ZZZZZZZZZ9'}]");
-         setEventMetadata("GRID1_FIRSTPAGE",",oparms:[{av:'AV72IsLogHourOpen',fld:'vISLOGHOUROPEN',pic:''},{av:'lblTtopentext_Visible',ctrl:'TTOPENTEXT',prop:'Visible'}]}");
-         setEventMetadata("GRID1_PREVPAGE","{handler:'subgrid1_previouspage',iparms:[{av:'GRID1_nFirstRecordOnPage'},{av:'GRID1_nEOF'},{av:'subGrid1_Rows',ctrl:'GRID1',prop:'Rows'},{av:'AV10date',fld:'vDATE',pic:''},{av:'Gx_date',fld:'vTODAY',pic:'',hsh:true},{av:'dynavFormworkhourlogprojectid'},{av:'AV29FormWorkHourLogProjectId',fld:'vFORMWORKHOURLOGPROJECTID',pic:'ZZZZZZZZZ9'}]");
-         setEventMetadata("GRID1_PREVPAGE",",oparms:[{av:'AV72IsLogHourOpen',fld:'vISLOGHOUROPEN',pic:''},{av:'lblTtopentext_Visible',ctrl:'TTOPENTEXT',prop:'Visible'}]}");
-         setEventMetadata("GRID1_NEXTPAGE","{handler:'subgrid1_nextpage',iparms:[{av:'GRID1_nFirstRecordOnPage'},{av:'GRID1_nEOF'},{av:'subGrid1_Rows',ctrl:'GRID1',prop:'Rows'},{av:'AV10date',fld:'vDATE',pic:''},{av:'Gx_date',fld:'vTODAY',pic:'',hsh:true},{av:'dynavFormworkhourlogprojectid'},{av:'AV29FormWorkHourLogProjectId',fld:'vFORMWORKHOURLOGPROJECTID',pic:'ZZZZZZZZZ9'}]");
-         setEventMetadata("GRID1_NEXTPAGE",",oparms:[{av:'AV72IsLogHourOpen',fld:'vISLOGHOUROPEN',pic:''},{av:'lblTtopentext_Visible',ctrl:'TTOPENTEXT',prop:'Visible'}]}");
-         setEventMetadata("GRID1_LASTPAGE","{handler:'subgrid1_lastpage',iparms:[{av:'GRID1_nFirstRecordOnPage'},{av:'GRID1_nEOF'},{av:'subGrid1_Rows',ctrl:'GRID1',prop:'Rows'},{av:'AV10date',fld:'vDATE',pic:''},{av:'Gx_date',fld:'vTODAY',pic:'',hsh:true},{av:'dynavFormworkhourlogprojectid'},{av:'AV29FormWorkHourLogProjectId',fld:'vFORMWORKHOURLOGPROJECTID',pic:'ZZZZZZZZZ9'}]");
-         setEventMetadata("GRID1_LASTPAGE",",oparms:[{av:'AV72IsLogHourOpen',fld:'vISLOGHOUROPEN',pic:''},{av:'lblTtopentext_Visible',ctrl:'TTOPENTEXT',prop:'Visible'}]}");
-         setEventMetadata("VALID_PROJECTID","{handler:'Valid_Projectid',iparms:[]");
-         setEventMetadata("VALID_PROJECTID",",oparms:[]}");
-         setEventMetadata("NULL","{handler:'Validv_Delete',iparms:[]");
-         setEventMetadata("NULL",",oparms:[]}");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"GRID1_nFirstRecordOnPage"},{"av":"GRID1_nEOF"},{"av":"subGrid1_Rows","ctrl":"GRID1","prop":"Rows"},{"av":"AV10date","fld":"vDATE"},{"av":"dynavFormworkhourlogprojectid"},{"av":"AV29FormWorkHourLogProjectId","fld":"vFORMWORKHOURLOGPROJECTID","pic":"ZZZZZZZZZ9"},{"av":"Gx_date","fld":"vTODAY","hsh":true}]""");
+         setEventMetadata("REFRESH",""","oparms":[{"av":"AV72IsLogHourOpen","fld":"vISLOGHOUROPEN"},{"av":"lblTtopentext_Visible","ctrl":"TTOPENTEXT","prop":"Visible"}]}""");
+         setEventMetadata("GRID1.LOAD","""{"handler":"E164A2","iparms":[{"av":"A119WorkHourLogDate","fld":"WORKHOURLOGDATE","hsh":true},{"av":"Gx_date","fld":"vTODAY","hsh":true}]""");
+         setEventMetadata("GRID1.LOAD",""","oparms":[{"av":"edtavUpdate_Visible","ctrl":"vUPDATE","prop":"Visible"},{"av":"edtavDelete_Visible","ctrl":"vDELETE","prop":"Visible"},{"av":"AV56update","fld":"vUPDATE"},{"av":"AV11delete","fld":"vDELETE"}]}""");
+         setEventMetadata("'DOSAVE'","""{"handler":"E134A2","iparms":[{"av":"AV26FormWorkHourLogHours","fld":"vFORMWORKHOURLOGHOURS","pic":"ZZZ9"},{"av":"AV28FormWorkHourLogMinutes","fld":"vFORMWORKHOURLOGMINUTES","pic":"ZZZ9"},{"av":"AV23FormWorkHourLogDescription","fld":"vFORMWORKHOURLOGDESCRIPTION"},{"av":"AV27FormWorkHourLogId","fld":"vFORMWORKHOURLOGID","pic":"ZZZZZZZZZ9"},{"av":"AV60WorkHourLog","fld":"vWORKHOURLOG"},{"av":"AV22FormWorkHourLogDate","fld":"vFORMWORKHOURLOGDATE"},{"av":"dynavFormworkhourlogprojectid"},{"av":"AV29FormWorkHourLogProjectId","fld":"vFORMWORKHOURLOGPROJECTID","pic":"ZZZZZZZZZ9"},{"av":"AV25FormWorkHourLogEmployeeId","fld":"vFORMWORKHOURLOGEMPLOYEEID","pic":"ZZZZZZZZZ9"},{"av":"Gx_date","fld":"vTODAY","hsh":true},{"av":"GRID1_nFirstRecordOnPage"},{"av":"GRID1_nEOF"},{"av":"subGrid1_Rows","ctrl":"GRID1","prop":"Rows"},{"av":"AV10date","fld":"vDATE"}]""");
+         setEventMetadata("'DOSAVE'",""","oparms":[{"av":"AV60WorkHourLog","fld":"vWORKHOURLOG"},{"av":"AV27FormWorkHourLogId","fld":"vFORMWORKHOURLOGID","pic":"ZZZZZZZZZ9"},{"av":"AV22FormWorkHourLogDate","fld":"vFORMWORKHOURLOGDATE"},{"av":"AV26FormWorkHourLogHours","fld":"vFORMWORKHOURLOGHOURS","pic":"ZZZ9"},{"av":"AV28FormWorkHourLogMinutes","fld":"vFORMWORKHOURLOGMINUTES","pic":"ZZZ9"},{"av":"AV23FormWorkHourLogDescription","fld":"vFORMWORKHOURLOGDESCRIPTION"},{"av":"AV24FormWorkHourLogDuration","fld":"vFORMWORKHOURLOGDURATION"},{"av":"lblWeeklytotal_Caption","ctrl":"WEEKLYTOTAL","prop":"Caption"},{"av":"lblDailytotal_Caption","ctrl":"DAILYTOTAL","prop":"Caption"},{"av":"AV72IsLogHourOpen","fld":"vISLOGHOUROPEN"},{"av":"lblTtopentext_Visible","ctrl":"TTOPENTEXT","prop":"Visible"}]}""");
+         setEventMetadata("'DOUSERACTION1'","""{"handler":"E114A1","iparms":[{"av":"AV10date","fld":"vDATE"}]""");
+         setEventMetadata("'DOUSERACTION1'",""","oparms":[{"av":"AV27FormWorkHourLogId","fld":"vFORMWORKHOURLOGID","pic":"ZZZZZZZZZ9"},{"av":"AV22FormWorkHourLogDate","fld":"vFORMWORKHOURLOGDATE"},{"av":"AV26FormWorkHourLogHours","fld":"vFORMWORKHOURLOGHOURS","pic":"ZZZ9"},{"av":"AV28FormWorkHourLogMinutes","fld":"vFORMWORKHOURLOGMINUTES","pic":"ZZZ9"},{"av":"AV23FormWorkHourLogDescription","fld":"vFORMWORKHOURLOGDESCRIPTION"},{"av":"AV24FormWorkHourLogDuration","fld":"vFORMWORKHOURLOGDURATION"}]}""");
+         setEventMetadata("VDATE.CONTROLVALUECHANGED","""{"handler":"E144A2","iparms":[{"av":"AV10date","fld":"vDATE"},{"av":"AV73OldDate","fld":"vOLDDATE"}]""");
+         setEventMetadata("VDATE.CONTROLVALUECHANGED",""","oparms":[{"av":"AV10date","fld":"vDATE"},{"av":"AV22FormWorkHourLogDate","fld":"vFORMWORKHOURLOGDATE"},{"av":"AV73OldDate","fld":"vOLDDATE"},{"av":"lblWeeklytotal_Caption","ctrl":"WEEKLYTOTAL","prop":"Caption"},{"av":"lblDailytotal_Caption","ctrl":"DAILYTOTAL","prop":"Caption"},{"av":"AV27FormWorkHourLogId","fld":"vFORMWORKHOURLOGID","pic":"ZZZZZZZZZ9"},{"av":"AV26FormWorkHourLogHours","fld":"vFORMWORKHOURLOGHOURS","pic":"ZZZ9"},{"av":"AV28FormWorkHourLogMinutes","fld":"vFORMWORKHOURLOGMINUTES","pic":"ZZZ9"},{"av":"AV23FormWorkHourLogDescription","fld":"vFORMWORKHOURLOGDESCRIPTION"},{"av":"AV24FormWorkHourLogDuration","fld":"vFORMWORKHOURLOGDURATION"}]}""");
+         setEventMetadata("VUPDATE.CLICK","""{"handler":"E194A2","iparms":[{"av":"A118WorkHourLogId","fld":"WORKHOURLOGID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"A106EmployeeId","fld":"EMPLOYEEID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"A119WorkHourLogDate","fld":"WORKHOURLOGDATE","hsh":true},{"av":"A121WorkHourLogHour","fld":"WORKHOURLOGHOUR","pic":"ZZZ9","hsh":true},{"av":"A122WorkHourLogMinute","fld":"WORKHOURLOGMINUTE","pic":"ZZZ9","hsh":true},{"av":"A123WorkHourLogDescription","fld":"WORKHOURLOGDESCRIPTION","hsh":true},{"av":"A102ProjectId","fld":"PROJECTID","pic":"ZZZZZZZZZ9","hsh":true}]""");
+         setEventMetadata("VUPDATE.CLICK",""","oparms":[{"av":"AV27FormWorkHourLogId","fld":"vFORMWORKHOURLOGID","pic":"ZZZZZZZZZ9"},{"av":"AV25FormWorkHourLogEmployeeId","fld":"vFORMWORKHOURLOGEMPLOYEEID","pic":"ZZZZZZZZZ9"},{"av":"AV22FormWorkHourLogDate","fld":"vFORMWORKHOURLOGDATE"},{"av":"AV26FormWorkHourLogHours","fld":"vFORMWORKHOURLOGHOURS","pic":"ZZZ9"},{"av":"AV28FormWorkHourLogMinutes","fld":"vFORMWORKHOURLOGMINUTES","pic":"ZZZ9"},{"av":"AV23FormWorkHourLogDescription","fld":"vFORMWORKHOURLOGDESCRIPTION"},{"av":"dynavFormworkhourlogprojectid"},{"av":"AV29FormWorkHourLogProjectId","fld":"vFORMWORKHOURLOGPROJECTID","pic":"ZZZZZZZZZ9"}]}""");
+         setEventMetadata("VDELETE.CLICK","""{"handler":"E174A2","iparms":[{"av":"GRID1_nFirstRecordOnPage"},{"av":"GRID1_nEOF"},{"av":"subGrid1_Rows","ctrl":"GRID1","prop":"Rows"},{"av":"AV10date","fld":"vDATE"},{"av":"Gx_date","fld":"vTODAY","hsh":true},{"av":"dynavFormworkhourlogprojectid"},{"av":"AV29FormWorkHourLogProjectId","fld":"vFORMWORKHOURLOGPROJECTID","pic":"ZZZZZZZZZ9"},{"av":"A118WorkHourLogId","fld":"WORKHOURLOGID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"AV27FormWorkHourLogId","fld":"vFORMWORKHOURLOGID","pic":"ZZZZZZZZZ9"}]""");
+         setEventMetadata("VDELETE.CLICK",""","oparms":[{"av":"AV60WorkHourLog","fld":"vWORKHOURLOG"},{"av":"AV27FormWorkHourLogId","fld":"vFORMWORKHOURLOGID","pic":"ZZZZZZZZZ9"},{"av":"AV22FormWorkHourLogDate","fld":"vFORMWORKHOURLOGDATE"},{"av":"AV26FormWorkHourLogHours","fld":"vFORMWORKHOURLOGHOURS","pic":"ZZZ9"},{"av":"AV28FormWorkHourLogMinutes","fld":"vFORMWORKHOURLOGMINUTES","pic":"ZZZ9"},{"av":"AV23FormWorkHourLogDescription","fld":"vFORMWORKHOURLOGDESCRIPTION"},{"av":"AV24FormWorkHourLogDuration","fld":"vFORMWORKHOURLOGDURATION"},{"av":"lblWeeklytotal_Caption","ctrl":"WEEKLYTOTAL","prop":"Caption"},{"av":"lblDailytotal_Caption","ctrl":"DAILYTOTAL","prop":"Caption"},{"av":"AV72IsLogHourOpen","fld":"vISLOGHOUROPEN"},{"av":"lblTtopentext_Visible","ctrl":"TTOPENTEXT","prop":"Visible"}]}""");
+         setEventMetadata("VISLOGHOUROPEN.CONTROLVALUECHANGED","""{"handler":"E124A2","iparms":[{"av":"GRID1_nFirstRecordOnPage"},{"av":"GRID1_nEOF"},{"av":"subGrid1_Rows","ctrl":"GRID1","prop":"Rows"},{"av":"AV10date","fld":"vDATE"},{"av":"Gx_date","fld":"vTODAY","hsh":true},{"av":"dynavFormworkhourlogprojectid"},{"av":"AV29FormWorkHourLogProjectId","fld":"vFORMWORKHOURLOGPROJECTID","pic":"ZZZZZZZZZ9"},{"av":"AV72IsLogHourOpen","fld":"vISLOGHOUROPEN"}]""");
+         setEventMetadata("VISLOGHOUROPEN.CONTROLVALUECHANGED",""","oparms":[{"av":"lblTtopentext_Visible","ctrl":"TTOPENTEXT","prop":"Visible"},{"av":"AV72IsLogHourOpen","fld":"vISLOGHOUROPEN"}]}""");
+         setEventMetadata("GRID1_FIRSTPAGE","""{"handler":"subgrid1_firstpage","iparms":[{"av":"GRID1_nFirstRecordOnPage"},{"av":"GRID1_nEOF"},{"av":"subGrid1_Rows","ctrl":"GRID1","prop":"Rows"},{"av":"AV10date","fld":"vDATE"},{"av":"Gx_date","fld":"vTODAY","hsh":true},{"av":"dynavFormworkhourlogprojectid"},{"av":"AV29FormWorkHourLogProjectId","fld":"vFORMWORKHOURLOGPROJECTID","pic":"ZZZZZZZZZ9"}]""");
+         setEventMetadata("GRID1_FIRSTPAGE",""","oparms":[{"av":"AV72IsLogHourOpen","fld":"vISLOGHOUROPEN"},{"av":"lblTtopentext_Visible","ctrl":"TTOPENTEXT","prop":"Visible"}]}""");
+         setEventMetadata("GRID1_PREVPAGE","""{"handler":"subgrid1_previouspage","iparms":[{"av":"GRID1_nFirstRecordOnPage"},{"av":"GRID1_nEOF"},{"av":"subGrid1_Rows","ctrl":"GRID1","prop":"Rows"},{"av":"AV10date","fld":"vDATE"},{"av":"Gx_date","fld":"vTODAY","hsh":true},{"av":"dynavFormworkhourlogprojectid"},{"av":"AV29FormWorkHourLogProjectId","fld":"vFORMWORKHOURLOGPROJECTID","pic":"ZZZZZZZZZ9"}]""");
+         setEventMetadata("GRID1_PREVPAGE",""","oparms":[{"av":"AV72IsLogHourOpen","fld":"vISLOGHOUROPEN"},{"av":"lblTtopentext_Visible","ctrl":"TTOPENTEXT","prop":"Visible"}]}""");
+         setEventMetadata("GRID1_NEXTPAGE","""{"handler":"subgrid1_nextpage","iparms":[{"av":"GRID1_nFirstRecordOnPage"},{"av":"GRID1_nEOF"},{"av":"subGrid1_Rows","ctrl":"GRID1","prop":"Rows"},{"av":"AV10date","fld":"vDATE"},{"av":"Gx_date","fld":"vTODAY","hsh":true},{"av":"dynavFormworkhourlogprojectid"},{"av":"AV29FormWorkHourLogProjectId","fld":"vFORMWORKHOURLOGPROJECTID","pic":"ZZZZZZZZZ9"}]""");
+         setEventMetadata("GRID1_NEXTPAGE",""","oparms":[{"av":"AV72IsLogHourOpen","fld":"vISLOGHOUROPEN"},{"av":"lblTtopentext_Visible","ctrl":"TTOPENTEXT","prop":"Visible"}]}""");
+         setEventMetadata("GRID1_LASTPAGE","""{"handler":"subgrid1_lastpage","iparms":[{"av":"GRID1_nFirstRecordOnPage"},{"av":"GRID1_nEOF"},{"av":"subGrid1_Rows","ctrl":"GRID1","prop":"Rows"},{"av":"AV10date","fld":"vDATE"},{"av":"Gx_date","fld":"vTODAY","hsh":true},{"av":"dynavFormworkhourlogprojectid"},{"av":"AV29FormWorkHourLogProjectId","fld":"vFORMWORKHOURLOGPROJECTID","pic":"ZZZZZZZZZ9"}]""");
+         setEventMetadata("GRID1_LASTPAGE",""","oparms":[{"av":"AV72IsLogHourOpen","fld":"vISLOGHOUROPEN"},{"av":"lblTtopentext_Visible","ctrl":"TTOPENTEXT","prop":"Visible"}]}""");
+         setEventMetadata("VALID_PROJECTID","""{"handler":"Valid_Projectid","iparms":[]}""");
+         setEventMetadata("NULL","""{"handler":"Validv_Delete","iparms":[]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -2701,7 +2681,6 @@ namespace GeneXus.Programs {
          gxdynajaxctrlcodr = new GeneXus.Utils.GxStringCollection();
          gxdynajaxctrldescr = new GeneXus.Utils.GxStringCollection();
          gxwrpcisep = "";
-         scmdbuf = "";
          H004A2_A122WorkHourLogMinute = new short[1] ;
          H004A2_A118WorkHourLogId = new long[1] ;
          H004A2_A121WorkHourLogHour = new short[1] ;
@@ -2751,7 +2730,6 @@ namespace GeneXus.Programs {
       private short GRID1_nEOF ;
       private short nGotPars ;
       private short GxWebError ;
-      private short initialized ;
       private short gxajaxcallmode ;
       private short nGXWrapped ;
       private short wbEnd ;
@@ -2919,7 +2897,6 @@ namespace GeneXus.Programs {
       private string AV11delete ;
       private string edtavDelete_Internalname ;
       private string gxwrpcisep ;
-      private string scmdbuf ;
       private string AV57weeklyTotal ;
       private string sGXsfl_98_fel_idx="0001" ;
       private string subGrid1_Class ;
@@ -2971,9 +2948,11 @@ namespace GeneXus.Programs {
       private GXWebColumn Grid1Column ;
       private GXUserControl ucIsloghouropen ;
       private GXUserControl ucGrid1_empowerer ;
+      private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private GXCombobox dynavFormworkhourlogprojectid ;
+      private SdtWorkHourLog AV60WorkHourLog ;
       private IDataStoreProvider pr_default ;
       private short[] H004A2_A122WorkHourLogMinute ;
       private long[] H004A2_A118WorkHourLogId ;
@@ -2985,15 +2964,13 @@ namespace GeneXus.Programs {
       private DateTime[] H004A2_A119WorkHourLogDate ;
       private long[] H004A2_A102ProjectId ;
       private long[] H004A3_AGRID1_nRecordCount ;
+      private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> AV5Messages ;
+      private GeneXus.Utils.SdtMessages_Message AV47message ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions AV69WWPDateRangePickerOptions ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions GXt_SdtWWPDateRangePickerOptions4 ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
       private IDataStoreProvider pr_gam ;
-      private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> AV5Messages ;
-      private GXWebForm Form ;
-      private GeneXus.Utils.SdtMessages_Message AV47message ;
-      private SdtWorkHourLog AV60WorkHourLog ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions AV69WWPDateRangePickerOptions ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions GXt_SdtWWPDateRangePickerOptions4 ;
    }
 
    public class logworkhours__gam : DataStoreHelperBase, IDataStoreHelper

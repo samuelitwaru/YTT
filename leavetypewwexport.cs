@@ -49,7 +49,7 @@ namespace GeneXus.Programs {
          this.AV12Filename = "" ;
          this.AV13ErrorMessage = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_Filename=this.AV12Filename;
          aP1_ErrorMessage=this.AV13ErrorMessage;
       }
@@ -63,31 +63,14 @@ namespace GeneXus.Programs {
       public void executeSubmit( out string aP0_Filename ,
                                  out string aP1_ErrorMessage )
       {
-         leavetypewwexport objleavetypewwexport;
-         objleavetypewwexport = new leavetypewwexport();
-         objleavetypewwexport.AV12Filename = "" ;
-         objleavetypewwexport.AV13ErrorMessage = "" ;
-         objleavetypewwexport.context.SetSubmitInitialConfig(context);
-         objleavetypewwexport.initialize();
-         Submit( executePrivateCatch,objleavetypewwexport);
+         this.AV12Filename = "" ;
+         this.AV13ErrorMessage = "" ;
+         SubmitImpl();
          aP0_Filename=this.AV12Filename;
          aP1_ErrorMessage=this.AV13ErrorMessage;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((leavetypewwexport)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -96,7 +79,7 @@ namespace GeneXus.Programs {
          S111 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          AV14CellRow = 1;
@@ -105,38 +88,38 @@ namespace GeneXus.Programs {
          S201 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          /* Execute user subroutine: 'WRITEFILTERS' */
          S131 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          /* Execute user subroutine: 'WRITECOLUMNTITLES' */
          S141 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          /* Execute user subroutine: 'WRITEDATA' */
          S161 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          /* Execute user subroutine: 'CLOSEDOCUMENT' */
          S191 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void S111( )
@@ -500,16 +483,12 @@ namespace GeneXus.Programs {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -534,7 +513,6 @@ namespace GeneXus.Programs {
          AV58Leavetypewwds_3_tfleavetypename_sel = "";
          AV59Leavetypewwds_4_tfleavetypevacationleave_sels = new GxSimpleCollection<string>();
          AV60Leavetypewwds_5_tfleavetypeloggingworkhours_sels = new GxSimpleCollection<string>();
-         scmdbuf = "";
          lV56Leavetypewwds_1_filterfulltext = "";
          lV57Leavetypewwds_2_tfleavetypename = "";
          A144LeaveTypeVacationLeave = "";
@@ -585,7 +563,6 @@ namespace GeneXus.Programs {
       private string AV46TFLeaveTypeLoggingWorkHours_Sel ;
       private string AV57Leavetypewwds_2_tfleavetypename ;
       private string AV58Leavetypewwds_3_tfleavetypename_sel ;
-      private string scmdbuf ;
       private string lV57Leavetypewwds_2_tfleavetypename ;
       private string A144LeaveTypeVacationLeave ;
       private string A145LeaveTypeLoggingWorkHours ;
@@ -603,27 +580,27 @@ namespace GeneXus.Programs {
       private string AV56Leavetypewwds_1_filterfulltext ;
       private string lV56Leavetypewwds_1_filterfulltext ;
       private IGxSession AV20Session ;
+      private ExcelDocumentI AV11ExcelDocument ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV9WWPContext ;
+      private GxSimpleCollection<string> AV44TFLeaveTypeVacationLeave_Sels ;
+      private GxSimpleCollection<string> AV47TFLeaveTypeLoggingWorkHours_Sels ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector AV24ColumnsSelector ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector_Column AV26ColumnsSelector_Column ;
+      private GxSimpleCollection<string> AV59Leavetypewwds_4_tfleavetypevacationleave_sels ;
+      private GxSimpleCollection<string> AV60Leavetypewwds_5_tfleavetypeloggingworkhours_sels ;
       private IDataStoreProvider pr_default ;
       private long[] P005E2_A100CompanyId ;
       private string[] P005E2_A125LeaveTypeName ;
       private string[] P005E2_A145LeaveTypeLoggingWorkHours ;
       private string[] P005E2_A144LeaveTypeVacationLeave ;
       private long[] P005E2_A124LeaveTypeId ;
-      private string aP0_Filename ;
-      private string aP1_ErrorMessage ;
-      private ExcelDocumentI AV11ExcelDocument ;
-      private GxSimpleCollection<string> AV44TFLeaveTypeVacationLeave_Sels ;
-      private GxSimpleCollection<string> AV47TFLeaveTypeLoggingWorkHours_Sels ;
-      private GxSimpleCollection<string> AV59Leavetypewwds_4_tfleavetypevacationleave_sels ;
-      private GxSimpleCollection<string> AV60Leavetypewwds_5_tfleavetypeloggingworkhours_sels ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV9WWPContext ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector AV25ColumnsSelectorAux ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState AV22GridState ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue AV23GridStateFilterValue ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector AV24ColumnsSelector ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector AV25ColumnsSelectorAux ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector_Column AV26ColumnsSelector_Column ;
+      private string aP0_Filename ;
+      private string aP1_ErrorMessage ;
    }
 
    public class leavetypewwexport__default : DataStoreHelperBase, IDataStoreHelper

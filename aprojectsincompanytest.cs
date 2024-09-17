@@ -65,7 +65,7 @@ namespace GeneXus.Programs {
          }
          if ( GxWebError == 0 )
          {
-            executePrivate();
+            ExecutePrivate();
          }
          cleanup();
       }
@@ -91,32 +91,15 @@ namespace GeneXus.Programs {
       public void execute( )
       {
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
       public void executeSubmit( )
       {
-         aprojectsincompanytest objaprojectsincompanytest;
-         objaprojectsincompanytest = new aprojectsincompanytest();
-         objaprojectsincompanytest.context.SetSubmitInitialConfig(context);
-         objaprojectsincompanytest.initialize();
-         Submit( executePrivateCatch,objaprojectsincompanytest);
+         SubmitImpl();
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((aprojectsincompanytest)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -230,7 +213,7 @@ namespace GeneXus.Programs {
             context.Redirect( context.wjLoc );
             context.wjLoc = "";
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void H880( bool bFoot ,
@@ -287,7 +270,7 @@ namespace GeneXus.Programs {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if (IsMain)	waitPrinterEnd();
          base.cleanup();
          if ( IsMain )
@@ -297,16 +280,11 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
          GXKey = "";
          gxfirstwebparm = "";
          AV12ProjectId = new GxSimpleCollection<long>();
-         scmdbuf = "";
          P00882_A106EmployeeId = new long[1] ;
          P00882_A102ProjectId = new long[1] ;
          P00882_A103ProjectName = new string[] {""} ;
@@ -356,7 +334,6 @@ namespace GeneXus.Programs {
       private long A166ProjectManagerId ;
       private string GXKey ;
       private string gxfirstwebparm ;
-      private string scmdbuf ;
       private string A103ProjectName ;
       private string A148EmployeeName ;
       private string AV9Name ;
@@ -365,9 +342,9 @@ namespace GeneXus.Programs {
       private bool n166ProjectManagerId ;
       private bool n40000GXC1 ;
       private bool n40001GXC2 ;
-      private GxSimpleCollection<long> AV12ProjectId ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GxSimpleCollection<long> AV12ProjectId ;
       private IDataStoreProvider pr_default ;
       private long[] P00882_A106EmployeeId ;
       private long[] P00882_A102ProjectId ;

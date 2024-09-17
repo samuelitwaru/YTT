@@ -48,7 +48,7 @@ namespace GeneXus.Programs {
          this.AV11GAMUser = new GeneXus.Programs.genexussecurity.SdtGAMUser(context) ;
          this.AV8Employee = new SdtEmployee(context) ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_GAMUser=this.AV11GAMUser;
          aP1_Employee=this.AV8Employee;
       }
@@ -62,31 +62,14 @@ namespace GeneXus.Programs {
       public void executeSubmit( out GeneXus.Programs.genexussecurity.SdtGAMUser aP0_GAMUser ,
                                  out SdtEmployee aP1_Employee )
       {
-         getloggedinuser objgetloggedinuser;
-         objgetloggedinuser = new getloggedinuser();
-         objgetloggedinuser.AV11GAMUser = new GeneXus.Programs.genexussecurity.SdtGAMUser(context) ;
-         objgetloggedinuser.AV8Employee = new SdtEmployee(context) ;
-         objgetloggedinuser.context.SetSubmitInitialConfig(context);
-         objgetloggedinuser.initialize();
-         Submit( executePrivateCatch,objgetloggedinuser);
+         this.AV11GAMUser = new GeneXus.Programs.genexussecurity.SdtGAMUser(context) ;
+         this.AV8Employee = new SdtEmployee(context) ;
+         SubmitImpl();
          aP0_GAMUser=this.AV11GAMUser;
          aP1_Employee=this.AV8Employee;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((getloggedinuser)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -104,21 +87,17 @@ namespace GeneXus.Programs {
             if (true) break;
          }
          pr_default.close(0);
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -127,7 +106,6 @@ namespace GeneXus.Programs {
          AV8Employee = new SdtEmployee(context);
          AV10GAMSession = new GeneXus.Programs.genexussecurity.SdtGAMSession(context);
          AV9GAMErrors = new GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError>( context, "GeneXus.Programs.genexussecurity.SdtGAMError", "GeneXus.Programs");
-         scmdbuf = "";
          P005F2_A109EmployeeEmail = new string[] {""} ;
          P005F2_A111GAMUserGUID = new string[] {""} ;
          P005F2_A106EmployeeId = new long[1] ;
@@ -144,21 +122,20 @@ namespace GeneXus.Programs {
       }
 
       private long A106EmployeeId ;
-      private string scmdbuf ;
       private string A109EmployeeEmail ;
       private string A111GAMUserGUID ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GeneXus.Programs.genexussecurity.SdtGAMUser AV11GAMUser ;
+      private SdtEmployee AV8Employee ;
+      private GeneXus.Programs.genexussecurity.SdtGAMSession AV10GAMSession ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV9GAMErrors ;
       private IDataStoreProvider pr_default ;
       private string[] P005F2_A109EmployeeEmail ;
       private string[] P005F2_A111GAMUserGUID ;
       private long[] P005F2_A106EmployeeId ;
       private GeneXus.Programs.genexussecurity.SdtGAMUser aP0_GAMUser ;
       private SdtEmployee aP1_Employee ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV9GAMErrors ;
-      private SdtEmployee AV8Employee ;
-      private GeneXus.Programs.genexussecurity.SdtGAMSession AV10GAMSession ;
-      private GeneXus.Programs.genexussecurity.SdtGAMUser AV11GAMUser ;
    }
 
    public class getloggedinuser__default : DataStoreHelperBase, IDataStoreHelper

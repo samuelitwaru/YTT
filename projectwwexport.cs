@@ -49,7 +49,7 @@ namespace GeneXus.Programs {
          this.AV12Filename = "" ;
          this.AV13ErrorMessage = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_Filename=this.AV12Filename;
          aP1_ErrorMessage=this.AV13ErrorMessage;
       }
@@ -63,31 +63,14 @@ namespace GeneXus.Programs {
       public void executeSubmit( out string aP0_Filename ,
                                  out string aP1_ErrorMessage )
       {
-         projectwwexport objprojectwwexport;
-         objprojectwwexport = new projectwwexport();
-         objprojectwwexport.AV12Filename = "" ;
-         objprojectwwexport.AV13ErrorMessage = "" ;
-         objprojectwwexport.context.SetSubmitInitialConfig(context);
-         objprojectwwexport.initialize();
-         Submit( executePrivateCatch,objprojectwwexport);
+         this.AV12Filename = "" ;
+         this.AV13ErrorMessage = "" ;
+         SubmitImpl();
          aP0_Filename=this.AV12Filename;
          aP1_ErrorMessage=this.AV13ErrorMessage;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((projectwwexport)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -96,7 +79,7 @@ namespace GeneXus.Programs {
          S111 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          AV14CellRow = 1;
@@ -105,38 +88,38 @@ namespace GeneXus.Programs {
          S201 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          /* Execute user subroutine: 'WRITEFILTERS' */
          S131 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          /* Execute user subroutine: 'WRITECOLUMNTITLES' */
          S141 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          /* Execute user subroutine: 'WRITEDATA' */
          S161 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          /* Execute user subroutine: 'CLOSEDOCUMENT' */
          S191 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void S111( )
@@ -511,16 +494,12 @@ namespace GeneXus.Programs {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -550,7 +529,6 @@ namespace GeneXus.Programs {
          AV57Projectwwds_6_tfprojectstatus_sels = new GxSimpleCollection<string>();
          AV58Projectwwds_7_tfprojectmanagername = "";
          AV59Projectwwds_8_tfprojectmanagername_sel = "";
-         scmdbuf = "";
          lV52Projectwwds_1_filterfulltext = "";
          lV53Projectwwds_2_tfprojectname = "";
          lV55Projectwwds_4_tfprojectdescription = "";
@@ -605,7 +583,6 @@ namespace GeneXus.Programs {
       private string AV54Projectwwds_3_tfprojectname_sel ;
       private string AV58Projectwwds_7_tfprojectmanagername ;
       private string AV59Projectwwds_8_tfprojectmanagername_sel ;
-      private string scmdbuf ;
       private string lV53Projectwwds_2_tfprojectname ;
       private string lV58Projectwwds_7_tfprojectmanagername ;
       private string A105ProjectStatus ;
@@ -630,8 +607,14 @@ namespace GeneXus.Programs {
       private string lV55Projectwwds_4_tfprojectdescription ;
       private string A104ProjectDescription ;
       private IGxSession AV20Session ;
+      private ExcelDocumentI AV11ExcelDocument ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV9WWPContext ;
+      private GxSimpleCollection<string> AV43TFProjectStatus_Sels ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector AV24ColumnsSelector ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector_Column AV26ColumnsSelector_Column ;
+      private GxSimpleCollection<string> AV57Projectwwds_6_tfprojectstatus_sels ;
       private IDataStoreProvider pr_default ;
       private long[] P00B42_A166ProjectManagerId ;
       private bool[] P00B42_n166ProjectManagerId ;
@@ -640,17 +623,11 @@ namespace GeneXus.Programs {
       private string[] P00B42_A103ProjectName ;
       private string[] P00B42_A105ProjectStatus ;
       private long[] P00B42_A102ProjectId ;
-      private string aP0_Filename ;
-      private string aP1_ErrorMessage ;
-      private ExcelDocumentI AV11ExcelDocument ;
-      private GxSimpleCollection<string> AV43TFProjectStatus_Sels ;
-      private GxSimpleCollection<string> AV57Projectwwds_6_tfprojectstatus_sels ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV9WWPContext ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector AV25ColumnsSelectorAux ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState AV22GridState ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue AV23GridStateFilterValue ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector AV24ColumnsSelector ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector AV25ColumnsSelectorAux ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector_Column AV26ColumnsSelector_Column ;
+      private string aP0_Filename ;
+      private string aP1_ErrorMessage ;
    }
 
    public class projectwwexport__default : DataStoreHelperBase, IDataStoreHelper

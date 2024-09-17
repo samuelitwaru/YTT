@@ -76,7 +76,7 @@ namespace GeneXus.Programs {
          this.AV19SearchTxtParms = aP2_SearchTxtParms;
          this.AV20Combo_DataJson = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP3_Combo_DataJson=this.AV20Combo_DataJson;
       }
 
@@ -93,32 +93,15 @@ namespace GeneXus.Programs {
                                  string aP2_SearchTxtParms ,
                                  out string aP3_Combo_DataJson )
       {
-         wpleavereportloaddvcombo objwpleavereportloaddvcombo;
-         objwpleavereportloaddvcombo = new wpleavereportloaddvcombo();
-         objwpleavereportloaddvcombo.AV17ComboName = aP0_ComboName;
-         objwpleavereportloaddvcombo.AV18TrnMode = aP1_TrnMode;
-         objwpleavereportloaddvcombo.AV19SearchTxtParms = aP2_SearchTxtParms;
-         objwpleavereportloaddvcombo.AV20Combo_DataJson = "" ;
-         objwpleavereportloaddvcombo.context.SetSubmitInitialConfig(context);
-         objwpleavereportloaddvcombo.initialize();
-         Submit( executePrivateCatch,objwpleavereportloaddvcombo);
+         this.AV17ComboName = aP0_ComboName;
+         this.AV18TrnMode = aP1_TrnMode;
+         this.AV19SearchTxtParms = aP2_SearchTxtParms;
+         this.AV20Combo_DataJson = "" ;
+         SubmitImpl();
          aP3_Combo_DataJson=this.AV20Combo_DataJson;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wpleavereportloaddvcombo)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -133,7 +116,7 @@ namespace GeneXus.Programs {
             S111 ();
             if ( returnInSub )
             {
-               this.cleanup();
+               cleanup();
                if (true) return;
             }
          }
@@ -143,7 +126,7 @@ namespace GeneXus.Programs {
             S121 ();
             if ( returnInSub )
             {
-               this.cleanup();
+               cleanup();
                if (true) return;
             }
          }
@@ -153,11 +136,11 @@ namespace GeneXus.Programs {
             S131 ();
             if ( returnInSub )
             {
-               this.cleanup();
+               cleanup();
                if (true) return;
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void S111( )
@@ -346,7 +329,7 @@ namespace GeneXus.Programs {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -354,16 +337,11 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
          AV20Combo_DataJson = "";
          AV9WWPContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPContext(context);
          AV14SearchTxt = "";
-         scmdbuf = "";
          lV14SearchTxt = "";
          A107EmployeeFirstName = "";
          P006F2_A107EmployeeFirstName = new string[] {""} ;
@@ -428,7 +406,6 @@ namespace GeneXus.Programs {
       private long A157CompanyLocationId ;
       private long AV29CompanyLocationIdKey ;
       private string AV18TrnMode ;
-      private string scmdbuf ;
       private string A107EmployeeFirstName ;
       private string A103ProjectName ;
       private string GXt_char1 ;
@@ -439,27 +416,27 @@ namespace GeneXus.Programs {
       private string AV19SearchTxtParms ;
       private string AV14SearchTxt ;
       private string lV14SearchTxt ;
-      private GxSimpleCollection<long> AV27ProjectId ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV9WWPContext ;
       private IDataStoreProvider pr_default ;
       private string[] P006F2_A107EmployeeFirstName ;
       private long[] P006F2_A106EmployeeId ;
+      private GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item AV16Combo_DataItem ;
+      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item> AV15Combo_Data ;
       private long[] P006F3_A106EmployeeId ;
       private string[] P006F3_A107EmployeeFirstName ;
       private string[] P006F4_A103ProjectName ;
       private long[] P006F4_A102ProjectId ;
+      private GxSimpleCollection<long> AV27ProjectId ;
       private long[] P006F5_A102ProjectId ;
       private string[] P006F5_A103ProjectName ;
+      private GxSimpleCollection<string> AV28SelectedTextCol ;
       private string[] P006F6_A158CompanyLocationName ;
       private long[] P006F6_A157CompanyLocationId ;
       private long[] P006F7_A157CompanyLocationId ;
       private string[] P006F7_A158CompanyLocationName ;
       private string aP3_Combo_DataJson ;
-      private GxSimpleCollection<string> AV28SelectedTextCol ;
-      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item> AV15Combo_Data ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV9WWPContext ;
-      private GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item AV16Combo_DataItem ;
    }
 
    public class wpleavereportloaddvcombo__default : DataStoreHelperBase, IDataStoreHelper

@@ -186,6 +186,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
                }
                if ( StringUtil.StringSearch( GXSoapXMLReader.Name, "Body", 1) > 0 )
                {
+                  this.SetPrefixesFromReader( GXSoapXMLReader);
                   if (true) break;
                }
                GXSoapError = GXSoapXMLReader.Read();
@@ -298,7 +299,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          }
          if ( currSoapErr == 0 )
          {
-            executePrivate();
+            ExecutePrivate();
          }
          context.CloseConnections();
          sIncludeState = true;
@@ -359,7 +360,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          this.AV10Day = aP2_Day;
          this.AV9DateJson = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP3_DateJson=this.AV9DateJson;
       }
 
@@ -376,32 +377,15 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
                                  short aP2_Day ,
                                  out string aP3_DateJson )
       {
-         wwpgetcalendardatefromnr objwwpgetcalendardatefromnr;
-         objwwpgetcalendardatefromnr = new wwpgetcalendardatefromnr();
-         objwwpgetcalendardatefromnr.AV12Year = aP0_Year;
-         objwwpgetcalendardatefromnr.AV11Month = aP1_Month;
-         objwwpgetcalendardatefromnr.AV10Day = aP2_Day;
-         objwwpgetcalendardatefromnr.AV9DateJson = "" ;
-         objwwpgetcalendardatefromnr.context.SetSubmitInitialConfig(context);
-         objwwpgetcalendardatefromnr.initialize();
-         Submit( executePrivateCatch,objwwpgetcalendardatefromnr);
+         this.AV12Year = aP0_Year;
+         this.AV11Month = aP1_Month;
+         this.AV10Day = aP2_Day;
+         this.AV9DateJson = "" ;
+         SubmitImpl();
          aP3_DateJson=this.AV9DateJson;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwpgetcalendardatefromnr)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -415,22 +399,18 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
             context.Redirect( context.wjLoc );
             context.wjLoc = "";
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          base.cleanup();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -464,8 +444,8 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
       private GXXMLWriter GXSoapXMLWriter ;
       private GxSoapRequest GXSoapHTTPRequest ;
       private GxHttpResponse GXSoapHTTPResponse ;
-      private string aP3_DateJson ;
       private GeneXus.Programs.workwithplus.nativemobile.SdtWWPCalendarEntry AV8CurrentDate ;
+      private string aP3_DateJson ;
    }
 
 }

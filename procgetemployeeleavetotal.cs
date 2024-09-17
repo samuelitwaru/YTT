@@ -52,7 +52,7 @@ namespace GeneXus.Programs {
          this.AV9DateTo = aP2_DateTo;
          this.AV8TotalLeaveHours = 0 ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP3_TotalLeaveHours=this.AV8TotalLeaveHours;
       }
 
@@ -69,32 +69,15 @@ namespace GeneXus.Programs {
                                  DateTime aP2_DateTo ,
                                  out long aP3_TotalLeaveHours )
       {
-         procgetemployeeleavetotal objprocgetemployeeleavetotal;
-         objprocgetemployeeleavetotal = new procgetemployeeleavetotal();
-         objprocgetemployeeleavetotal.AV11EmployeeId = aP0_EmployeeId;
-         objprocgetemployeeleavetotal.AV10DateFrom = aP1_DateFrom;
-         objprocgetemployeeleavetotal.AV9DateTo = aP2_DateTo;
-         objprocgetemployeeleavetotal.AV8TotalLeaveHours = 0 ;
-         objprocgetemployeeleavetotal.context.SetSubmitInitialConfig(context);
-         objprocgetemployeeleavetotal.initialize();
-         Submit( executePrivateCatch,objprocgetemployeeleavetotal);
+         this.AV11EmployeeId = aP0_EmployeeId;
+         this.AV10DateFrom = aP1_DateFrom;
+         this.AV9DateTo = aP2_DateTo;
+         this.AV8TotalLeaveHours = 0 ;
+         SubmitImpl();
          aP3_TotalLeaveHours=this.AV8TotalLeaveHours;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((procgetemployeeleavetotal)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -122,12 +105,12 @@ namespace GeneXus.Programs {
             pr_default.readNext(0);
          }
          pr_default.close(0);
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -135,13 +118,8 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
-         scmdbuf = "";
          P00642_A124LeaveTypeId = new long[1] ;
          P00642_A145LeaveTypeLoggingWorkHours = new string[] {""} ;
          P00642_A130LeaveRequestEndDate = new DateTime[] {DateTime.MinValue} ;
@@ -173,7 +151,6 @@ namespace GeneXus.Programs {
       private long A106EmployeeId ;
       private long A127LeaveRequestId ;
       private decimal GXt_decimal1 ;
-      private string scmdbuf ;
       private string A145LeaveTypeLoggingWorkHours ;
       private string A132LeaveRequestStatus ;
       private string A173LeaveRequestHalfDay ;

@@ -46,7 +46,7 @@ namespace GeneXus.Programs.workwithplus.ai {
          this.AV11ErrorMessage = "" ;
          this.AV14ResponseText = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP2_ErrorMessage=this.AV11ErrorMessage;
          aP3_ResponseText=this.AV14ResponseText;
       }
@@ -64,33 +64,16 @@ namespace GeneXus.Programs.workwithplus.ai {
                                  out string aP2_ErrorMessage ,
                                  out string aP3_ResponseText )
       {
-         wwp_aigetairesponse objwwp_aigetairesponse;
-         objwwp_aigetairesponse = new wwp_aigetairesponse();
-         objwwp_aigetairesponse.AV15SystemContent = aP0_SystemContent;
-         objwwp_aigetairesponse.AV16UserContent = aP1_UserContent;
-         objwwp_aigetairesponse.AV11ErrorMessage = "" ;
-         objwwp_aigetairesponse.AV14ResponseText = "" ;
-         objwwp_aigetairesponse.context.SetSubmitInitialConfig(context);
-         objwwp_aigetairesponse.initialize();
-         Submit( executePrivateCatch,objwwp_aigetairesponse);
+         this.AV15SystemContent = aP0_SystemContent;
+         this.AV16UserContent = aP1_UserContent;
+         this.AV11ErrorMessage = "" ;
+         this.AV14ResponseText = "" ;
+         SubmitImpl();
          aP2_ErrorMessage=this.AV11ErrorMessage;
          aP3_ResponseText=this.AV14ResponseText;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwp_aigetairesponse)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -111,7 +94,7 @@ namespace GeneXus.Programs.workwithplus.ai {
             S111 ();
             if ( returnInSub )
             {
-               this.cleanup();
+               cleanup();
                if (true) return;
             }
             AV12HttpClient.AddString(AV8ChatCompletionRequestSDT.ToJSonString(false, true));
@@ -150,7 +133,7 @@ namespace GeneXus.Programs.workwithplus.ai {
          {
             AV14ResponseText = "";
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void S111( )
@@ -168,16 +151,12 @@ namespace GeneXus.Programs.workwithplus.ai {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -202,12 +181,12 @@ namespace GeneXus.Programs.workwithplus.ai {
       private string AV16UserContent ;
       private string AV11ErrorMessage ;
       private string AV14ResponseText ;
-      private GeneXus.Programs.workwithplus.ai.SdtWWP_AIChatCompletionResponse AV10ChatCompletionResponseSDT ;
-      private string aP2_ErrorMessage ;
-      private string aP3_ResponseText ;
       private GxHttpClient AV12HttpClient ;
       private GeneXus.Programs.workwithplus.ai.SdtWWP_AIChatCompletionRequest AV8ChatCompletionRequestSDT ;
       private GeneXus.Programs.workwithplus.ai.SdtWWP_AIChatCompletionRequest_messagesItem AV9ChatCompletionRequestSDTMessage ;
+      private GeneXus.Programs.workwithplus.ai.SdtWWP_AIChatCompletionResponse AV10ChatCompletionResponseSDT ;
+      private string aP2_ErrorMessage ;
+      private string aP3_ResponseText ;
    }
 
 }

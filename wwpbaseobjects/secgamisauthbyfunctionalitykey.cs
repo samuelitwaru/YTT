@@ -42,7 +42,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          this.AV10SecGAMFunctionalityKey = aP0_SecGAMFunctionalityKey;
          this.AV9IsAuthorized = false ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_IsAuthorized=this.AV9IsAuthorized;
       }
 
@@ -55,30 +55,13 @@ namespace GeneXus.Programs.wwpbaseobjects {
       public void executeSubmit( string aP0_SecGAMFunctionalityKey ,
                                  out bool aP1_IsAuthorized )
       {
-         secgamisauthbyfunctionalitykey objsecgamisauthbyfunctionalitykey;
-         objsecgamisauthbyfunctionalitykey = new secgamisauthbyfunctionalitykey();
-         objsecgamisauthbyfunctionalitykey.AV10SecGAMFunctionalityKey = aP0_SecGAMFunctionalityKey;
-         objsecgamisauthbyfunctionalitykey.AV9IsAuthorized = false ;
-         objsecgamisauthbyfunctionalitykey.context.SetSubmitInitialConfig(context);
-         objsecgamisauthbyfunctionalitykey.initialize();
-         Submit( executePrivateCatch,objsecgamisauthbyfunctionalitykey);
+         this.AV10SecGAMFunctionalityKey = aP0_SecGAMFunctionalityKey;
+         this.AV9IsAuthorized = false ;
+         SubmitImpl();
          aP1_IsAuthorized=this.AV9IsAuthorized;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((secgamisauthbyfunctionalitykey)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -90,21 +73,17 @@ namespace GeneXus.Programs.wwpbaseobjects {
          {
             AV9IsAuthorized = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).checkpermission(AV10SecGAMFunctionalityKey);
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -115,8 +94,8 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       private bool AV9IsAuthorized ;
       private string AV10SecGAMFunctionalityKey ;
-      private bool aP1_IsAuthorized ;
       private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV8GAMErrors ;
+      private bool aP1_IsAuthorized ;
    }
 
 }

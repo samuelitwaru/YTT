@@ -57,7 +57,7 @@ namespace GeneXus.Programs {
          this.AV36gxid = aP0_gxid;
          this.AV43GXM3LogHoursPanel_Level_DetailSdt = new SdtLogHoursPanel_Level_DetailSdt(context) ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_GXM3LogHoursPanel_Level_DetailSdt=this.AV43GXM3LogHoursPanel_Level_DetailSdt;
       }
 
@@ -70,30 +70,13 @@ namespace GeneXus.Programs {
       public void executeSubmit( int aP0_gxid ,
                                  out SdtLogHoursPanel_Level_DetailSdt aP1_GXM3LogHoursPanel_Level_DetailSdt )
       {
-         loghourspanel_level_detail objloghourspanel_level_detail;
-         objloghourspanel_level_detail = new loghourspanel_level_detail();
-         objloghourspanel_level_detail.AV36gxid = aP0_gxid;
-         objloghourspanel_level_detail.AV43GXM3LogHoursPanel_Level_DetailSdt = new SdtLogHoursPanel_Level_DetailSdt(context) ;
-         objloghourspanel_level_detail.context.SetSubmitInitialConfig(context);
-         objloghourspanel_level_detail.initialize();
-         Submit( executePrivateCatch,objloghourspanel_level_detail);
+         this.AV36gxid = aP0_gxid;
+         this.AV43GXM3LogHoursPanel_Level_DetailSdt = new SdtLogHoursPanel_Level_DetailSdt(context) ;
+         SubmitImpl();
          aP1_GXM3LogHoursPanel_Level_DetailSdt=this.AV43GXM3LogHoursPanel_Level_DetailSdt;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((loghourspanel_level_detail)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -149,21 +132,17 @@ namespace GeneXus.Programs {
          AV43GXM3LogHoursPanel_Level_DetailSdt.gxTpr_Gxdynprop = "[ "+Gxdynprop+" ]";
          Gxdynprop = "";
          Gxwebsession.Set(Gxids+"gxvar_Workhourlogdate", context.localUtil.DToC( AV7WorkHourLogDate, 2, "/"));
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -203,9 +182,9 @@ namespace GeneXus.Programs {
       private bool AV17CheckRequiredFieldsResult ;
       private string AV13WorkHourLogDescription ;
       private string Gxdynprop ;
-      private SdtLogHoursPanel_Level_DetailSdt aP1_GXM3LogHoursPanel_Level_DetailSdt ;
       private IGxSession Gxwebsession ;
       private SdtLogHoursPanel_Level_DetailSdt AV43GXM3LogHoursPanel_Level_DetailSdt ;
+      private SdtLogHoursPanel_Level_DetailSdt aP1_GXM3LogHoursPanel_Level_DetailSdt ;
    }
 
 }

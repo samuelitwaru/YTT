@@ -47,35 +47,18 @@ namespace GeneXus.Programs {
          this.AV2FromDate = aP0_FromDate;
          this.AV3ToDate = aP1_ToDate;
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
       public void executeSubmit( DateTime aP0_FromDate ,
                                  DateTime aP1_ToDate )
       {
-         reloadleaverequests objreloadleaverequests;
-         objreloadleaverequests = new reloadleaverequests();
-         objreloadleaverequests.AV2FromDate = aP0_FromDate;
-         objreloadleaverequests.AV3ToDate = aP1_ToDate;
-         objreloadleaverequests.context.SetSubmitInitialConfig(context);
-         objreloadleaverequests.initialize();
-         Submit( executePrivateCatch,objreloadleaverequests);
+         this.AV2FromDate = aP0_FromDate;
+         this.AV3ToDate = aP1_ToDate;
+         SubmitImpl();
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((reloadleaverequests)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -84,20 +67,16 @@ namespace GeneXus.Programs {
          if ( ( args != null ) && ( args.Length == 2 ) )
          {
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )

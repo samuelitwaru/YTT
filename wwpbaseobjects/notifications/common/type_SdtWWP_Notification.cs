@@ -1005,6 +1005,20 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
          return false ;
       }
 
+      [XmlIgnore]
+      private static GXTypeInfo _typeProps;
+      protected override GXTypeInfo TypeInfo
+      {
+         get {
+            return _typeProps ;
+         }
+
+         set {
+            _typeProps = value ;
+         }
+
+      }
+
       public void initialize( )
       {
          sdtIsNull = 1;
@@ -1078,6 +1092,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
    }
 
    [DataContract(Name = @"WWPBaseObjects\Notifications\Common\WWP_Notification", Namespace = "YTT_version4")]
+   [GxJsonSerialization("default")]
    public class SdtWWP_Notification_RESTInterface : GxGenericCollectionItem<GeneXus.Programs.wwpbaseobjects.notifications.common.SdtWWP_Notification>
    {
       public SdtWWP_Notification_RESTInterface( ) : base()
@@ -1135,11 +1150,11 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
       public string gxTpr_Wwpnotificationcreated
       {
          get {
-            return DateTimeUtil.TToC3( sdt.gxTpr_Wwpnotificationcreated) ;
+            return DateTimeUtil.TToC3( sdt.gxTpr_Wwpnotificationcreated, (IGxContext)(context)) ;
          }
 
          set {
-            sdt.gxTpr_Wwpnotificationcreated = DateTimeUtil.CToT2( value);
+            sdt.gxTpr_Wwpnotificationcreated = DateTimeUtil.CToT2( value, (IGxContext)(context));
          }
 
       }
@@ -1297,6 +1312,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
    }
 
    [DataContract(Name = @"WWPBaseObjects\Notifications\Common\WWP_Notification", Namespace = "YTT_version4")]
+   [GxJsonSerialization("default")]
    public class SdtWWP_Notification_RESTLInterface : GxGenericCollectionItem<GeneXus.Programs.wwpbaseobjects.notifications.common.SdtWWP_Notification>
    {
       public SdtWWP_Notification_RESTLInterface( ) : base()
@@ -1312,11 +1328,11 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
       public string gxTpr_Wwpnotificationcreated
       {
          get {
-            return DateTimeUtil.TToC3( sdt.gxTpr_Wwpnotificationcreated) ;
+            return DateTimeUtil.TToC3( sdt.gxTpr_Wwpnotificationcreated, (IGxContext)(context)) ;
          }
 
          set {
-            sdt.gxTpr_Wwpnotificationcreated = DateTimeUtil.CToT2( value);
+            sdt.gxTpr_Wwpnotificationcreated = DateTimeUtil.CToT2( value, (IGxContext)(context));
          }
 
       }

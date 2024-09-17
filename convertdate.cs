@@ -42,7 +42,7 @@ namespace GeneXus.Programs {
          this.AV10DateCharacter = aP0_DateCharacter;
          this.AV11FinalDate = DateTime.MinValue ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_FinalDate=this.AV11FinalDate;
       }
 
@@ -55,50 +55,29 @@ namespace GeneXus.Programs {
       public void executeSubmit( string aP0_DateCharacter ,
                                  out DateTime aP1_FinalDate )
       {
-         convertdate objconvertdate;
-         objconvertdate = new convertdate();
-         objconvertdate.AV10DateCharacter = aP0_DateCharacter;
-         objconvertdate.AV11FinalDate = DateTime.MinValue ;
-         objconvertdate.context.SetSubmitInitialConfig(context);
-         objconvertdate.initialize();
-         Submit( executePrivateCatch,objconvertdate);
+         this.AV10DateCharacter = aP0_DateCharacter;
+         this.AV11FinalDate = DateTime.MinValue ;
+         SubmitImpl();
          aP1_FinalDate=this.AV11FinalDate;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((convertdate)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
          AV12FinalDateCharacter = StringUtil.Substring( AV10DateCharacter, 6, 2) + "/" + StringUtil.Substring( AV10DateCharacter, 9, 2) + "/" + StringUtil.Substring( AV10DateCharacter, 1, 4);
          AV11FinalDate = context.localUtil.CToD( AV12FinalDateCharacter, 2);
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )

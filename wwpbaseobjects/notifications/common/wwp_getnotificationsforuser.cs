@@ -62,7 +62,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
       {
          this.Gxm2rootcol = new GXBaseCollection<GeneXus.Programs.wwpbaseobjects.notifications.common.SdtWWP_SDTNotificationsData_WWP_SDTNotificationsDataItem>( context, "WWP_SDTNotificationsDataItem", "YTT_version4") ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_Gxm2rootcol=this.Gxm2rootcol;
       }
 
@@ -74,29 +74,12 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
 
       public void executeSubmit( out GXBaseCollection<GeneXus.Programs.wwpbaseobjects.notifications.common.SdtWWP_SDTNotificationsData_WWP_SDTNotificationsDataItem> aP0_Gxm2rootcol )
       {
-         wwp_getnotificationsforuser objwwp_getnotificationsforuser;
-         objwwp_getnotificationsforuser = new wwp_getnotificationsforuser();
-         objwwp_getnotificationsforuser.Gxm2rootcol = new GXBaseCollection<GeneXus.Programs.wwpbaseobjects.notifications.common.SdtWWP_SDTNotificationsData_WWP_SDTNotificationsDataItem>( context, "WWP_SDTNotificationsDataItem", "YTT_version4") ;
-         objwwp_getnotificationsforuser.context.SetSubmitInitialConfig(context);
-         objwwp_getnotificationsforuser.initialize();
-         Submit( executePrivateCatch,objwwp_getnotificationsforuser);
+         this.Gxm2rootcol = new GXBaseCollection<GeneXus.Programs.wwpbaseobjects.notifications.common.SdtWWP_SDTNotificationsData_WWP_SDTNotificationsDataItem>( context, "WWP_SDTNotificationsDataItem", "YTT_version4") ;
+         SubmitImpl();
          aP0_Gxm2rootcol=this.Gxm2rootcol;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwp_getnotificationsforuser)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -125,12 +108,12 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
             pr_default.readNext(0);
          }
          pr_default.close(0);
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -138,14 +121,9 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
          AV9Udparg3 = "";
-         scmdbuf = "";
          P000C2_A82WWPNotificationIsRead = new bool[] {false} ;
          P000C2_A7WWPUserExtendedId = new string[] {""} ;
          P000C2_n7WWPUserExtendedId = new bool[] {false} ;
@@ -174,7 +152,6 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
 
       private long A22WWPNotificationId ;
       private string AV9Udparg3 ;
-      private string scmdbuf ;
       private string A7WWPUserExtendedId ;
       private DateTime A24WWPNotificationCreated ;
       private bool A82WWPNotificationIsRead ;
@@ -185,6 +162,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
       private string A79WWPNotificationLink ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.notifications.common.SdtWWP_SDTNotificationsData_WWP_SDTNotificationsDataItem> Gxm2rootcol ;
       private IDataStoreProvider pr_default ;
       private bool[] P000C2_A82WWPNotificationIsRead ;
       private string[] P000C2_A7WWPUserExtendedId ;
@@ -195,9 +173,8 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
       private string[] P000C2_A78WWPNotificationShortDescriptio ;
       private string[] P000C2_A79WWPNotificationLink ;
       private DateTime[] P000C2_A24WWPNotificationCreated ;
-      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.notifications.common.SdtWWP_SDTNotificationsData_WWP_SDTNotificationsDataItem> aP0_Gxm2rootcol ;
-      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.notifications.common.SdtWWP_SDTNotificationsData_WWP_SDTNotificationsDataItem> Gxm2rootcol ;
       private GeneXus.Programs.wwpbaseobjects.notifications.common.SdtWWP_SDTNotificationsData_WWP_SDTNotificationsDataItem Gxm1wwp_sdtnotificationsdata ;
+      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.notifications.common.SdtWWP_SDTNotificationsData_WWP_SDTNotificationsDataItem> aP0_Gxm2rootcol ;
    }
 
    public class wwp_getnotificationsforuser__default : DataStoreHelperBase, IDataStoreHelper

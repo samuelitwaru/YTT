@@ -118,7 +118,6 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
             {
                /* Restore parent mode. */
                Gx_mode = sMode11;
-               IsConfirmed = 1;
             }
             /* Restore parent mode. */
             Gx_mode = sMode11;
@@ -160,7 +159,6 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
                         CloseExtendedTableCursors0B12( ) ;
                         if ( AnyError == 0 )
                         {
-                           IsConfirmed = 1;
                         }
                      }
                   }
@@ -200,7 +198,6 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
                               CloseExtendedTableCursors0B12( ) ;
                               if ( AnyError == 0 )
                               {
-                                 IsConfirmed = 1;
                               }
                            }
                         }
@@ -320,7 +317,6 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
 
       protected void CheckExtendedTable0B11( )
       {
-         nIsDirty_11 = 0;
          standaloneModal( ) ;
          if ( ! ( ( A81WWPMailStatus == 1 ) || ( A81WWPMailStatus == 2 ) || ( A81WWPMailStatus == 3 ) ) )
          {
@@ -434,7 +430,6 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
       protected void insert_Check( )
       {
          CONFIRM_0B0( ) ;
-         IsConfirmed = 0;
       }
 
       protected void update_Check( )
@@ -743,7 +738,6 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
          }
          nRcdExists_12 = 0;
          nIsMod_12 = 0;
-         Gxremove12 = 0;
       }
 
       protected void ProcessLevel0B11( )
@@ -778,7 +772,6 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
          else
          {
          }
-         IsModified = 0;
          if ( AnyError != 0 )
          {
             context.wjLoc = "";
@@ -939,7 +932,6 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
 
       protected void CheckExtendedTable0B12( )
       {
-         nIsDirty_12 = 0;
          Gx_BScreen = 1;
          standaloneModal0B12( ) ;
          Gx_BScreen = 0;
@@ -1590,7 +1582,6 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
 
       protected void SaveImpl( )
       {
-         nKeyPressed = 1;
          GetKey0B11( ) ;
          if ( IsIns( ) )
          {
@@ -1668,7 +1659,6 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars11( bcwwpbaseobjects_mail_WWP_Mail, 1) ;
          SaveImpl( ) ;
          VarsToRow11( bcwwpbaseobjects_mail_WWP_Mail) ;
@@ -1682,7 +1672,6 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars11( bcwwpbaseobjects_mail_WWP_Mail, 1) ;
          Gx_mode = "INS";
          /* Insert record */
@@ -1728,7 +1717,6 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars11( bcwwpbaseobjects_mail_WWP_Mail, 1) ;
          UpdateImpl( ) ;
          context.GX_msglist = BackMsgLst;
@@ -1741,7 +1729,6 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars11( bcwwpbaseobjects_mail_WWP_Mail, 1) ;
          Gx_mode = "INS";
          /* Insert record */
@@ -1775,8 +1762,6 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
          AnyError = 0;
          context.GX_msglist.removeAllItems();
          RowToVars11( bcwwpbaseobjects_mail_WWP_Mail, 0) ;
-         nKeyPressed = 3;
-         IsConfirmed = 0;
          GetKey0B11( ) ;
          if ( RcdFound11 == 1 )
          {
@@ -1892,7 +1877,6 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
 
       public void ForceCommitOnExit( )
       {
-         mustCommit = true;
          return  ;
       }
 
@@ -1949,15 +1933,14 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
       }
 
-      protected void CloseOpenCursors( )
+      protected override void CloseCursors( )
       {
          pr_default.close(1);
          pr_default.close(3);
@@ -1966,9 +1949,6 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
 
       public override void initialize( )
       {
-         scmdbuf = "";
-         PreviousTooltip = "";
-         PreviousCaption = "";
          Gx_mode = "";
          endTrnMsgTxt = "";
          endTrnMsgCod = "";
@@ -2185,21 +2165,15 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
          standaloneNotModal( ) ;
       }
 
-      private short IsConfirmed ;
-      private short IsModified ;
       private short AnyError ;
-      private short nKeyPressed ;
       private short nIsMod_12 ;
       private short RcdFound12 ;
-      private short GX_JID ;
       private short Z81WWPMailStatus ;
       private short A81WWPMailStatus ;
       private short Gx_BScreen ;
       private short RcdFound11 ;
-      private short nIsDirty_11 ;
       private short nRcdExists_12 ;
       private short Gxremove12 ;
-      private short nIsDirty_12 ;
       private short i81WWPMailStatus ;
       private int trnEnded ;
       private int nGXsfl_12_idx=1 ;
@@ -2207,9 +2181,6 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
       private long A80WWPMailId ;
       private long Z22WWPNotificationId ;
       private long A22WWPNotificationId ;
-      private string scmdbuf ;
-      private string PreviousTooltip ;
-      private string PreviousCaption ;
       private string Gx_mode ;
       private string endTrnMsgTxt ;
       private string endTrnMsgCod ;
@@ -2232,7 +2203,6 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
       private bool n87WWPMailDetail ;
       private bool n22WWPNotificationId ;
       private bool Gx_longc ;
-      private bool mustCommit ;
       private string Z61WWPMailBody ;
       private string A61WWPMailBody ;
       private string Z70WWPMailTo ;
@@ -2253,9 +2223,9 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
       private string A69WWPMailSubject ;
       private string Z93WWPMailAttachmentName ;
       private string A93WWPMailAttachmentName ;
-      private GeneXus.Programs.wwpbaseobjects.mail.SdtWWP_Mail bcwwpbaseobjects_mail_WWP_Mail ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GeneXus.Programs.wwpbaseobjects.mail.SdtWWP_Mail bcwwpbaseobjects_mail_WWP_Mail ;
       private IDataStoreProvider pr_default ;
       private long[] BC000B7_A80WWPMailId ;
       private string[] BC000B7_A69WWPMailSubject ;
@@ -2427,24 +2397,34 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
   {
      if ( def == null )
      {
-        Object[] prmBC000B7;
-        prmBC000B7 = new Object[] {
-        new ParDef("WWPMailId",GXType.Int64,10,0)
+        Object[] prmBC000B2;
+        prmBC000B2 = new Object[] {
+        new ParDef("WWPMailId",GXType.Int64,10,0) ,
+        new ParDef("WWPMailAttachmentName",GXType.VarChar,40,0)
         };
-        Object[] prmBC000B6;
-        prmBC000B6 = new Object[] {
-        new ParDef("WWPNotificationId",GXType.Int64,10,0){Nullable=true}
+        Object[] prmBC000B3;
+        prmBC000B3 = new Object[] {
+        new ParDef("WWPMailId",GXType.Int64,10,0) ,
+        new ParDef("WWPMailAttachmentName",GXType.VarChar,40,0)
         };
-        Object[] prmBC000B8;
-        prmBC000B8 = new Object[] {
+        Object[] prmBC000B4;
+        prmBC000B4 = new Object[] {
         new ParDef("WWPMailId",GXType.Int64,10,0)
         };
         Object[] prmBC000B5;
         prmBC000B5 = new Object[] {
         new ParDef("WWPMailId",GXType.Int64,10,0)
         };
-        Object[] prmBC000B4;
-        prmBC000B4 = new Object[] {
+        Object[] prmBC000B6;
+        prmBC000B6 = new Object[] {
+        new ParDef("WWPNotificationId",GXType.Int64,10,0){Nullable=true}
+        };
+        Object[] prmBC000B7;
+        prmBC000B7 = new Object[] {
+        new ParDef("WWPMailId",GXType.Int64,10,0)
+        };
+        Object[] prmBC000B8;
+        prmBC000B8 = new Object[] {
         new ParDef("WWPMailId",GXType.Int64,10,0)
         };
         Object[] prmBC000B9;
@@ -2502,16 +2482,6 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
         };
         Object[] prmBC000B16;
         prmBC000B16 = new Object[] {
-        new ParDef("WWPMailId",GXType.Int64,10,0) ,
-        new ParDef("WWPMailAttachmentName",GXType.VarChar,40,0)
-        };
-        Object[] prmBC000B3;
-        prmBC000B3 = new Object[] {
-        new ParDef("WWPMailId",GXType.Int64,10,0) ,
-        new ParDef("WWPMailAttachmentName",GXType.VarChar,40,0)
-        };
-        Object[] prmBC000B2;
-        prmBC000B2 = new Object[] {
         new ParDef("WWPMailId",GXType.Int64,10,0) ,
         new ParDef("WWPMailAttachmentName",GXType.VarChar,40,0)
         };

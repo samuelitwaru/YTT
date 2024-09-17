@@ -41,7 +41,7 @@ namespace GeneXus.Programs {
          this.AV7gxid = aP0_gxid;
          this.AV10GXM1YTTV3SDNotAuthorized_Level_DetailSdt = new SdtYTTV3SDNotAuthorized_Level_DetailSdt(context) ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_GXM1YTTV3SDNotAuthorized_Level_DetailSdt=this.AV10GXM1YTTV3SDNotAuthorized_Level_DetailSdt;
       }
 
@@ -54,30 +54,13 @@ namespace GeneXus.Programs {
       public void executeSubmit( int aP0_gxid ,
                                  out SdtYTTV3SDNotAuthorized_Level_DetailSdt aP1_GXM1YTTV3SDNotAuthorized_Level_DetailSdt )
       {
-         yttv3sdnotauthorized_level_detail objyttv3sdnotauthorized_level_detail;
-         objyttv3sdnotauthorized_level_detail = new yttv3sdnotauthorized_level_detail();
-         objyttv3sdnotauthorized_level_detail.AV7gxid = aP0_gxid;
-         objyttv3sdnotauthorized_level_detail.AV10GXM1YTTV3SDNotAuthorized_Level_DetailSdt = new SdtYTTV3SDNotAuthorized_Level_DetailSdt(context) ;
-         objyttv3sdnotauthorized_level_detail.context.SetSubmitInitialConfig(context);
-         objyttv3sdnotauthorized_level_detail.initialize();
-         Submit( executePrivateCatch,objyttv3sdnotauthorized_level_detail);
+         this.AV7gxid = aP0_gxid;
+         this.AV10GXM1YTTV3SDNotAuthorized_Level_DetailSdt = new SdtYTTV3SDNotAuthorized_Level_DetailSdt(context) ;
+         SubmitImpl();
          aP1_GXM1YTTV3SDNotAuthorized_Level_DetailSdt=this.AV10GXM1YTTV3SDNotAuthorized_Level_DetailSdt;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((yttv3sdnotauthorized_level_detail)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -86,21 +69,17 @@ namespace GeneXus.Programs {
          {
             Gxwebsession.Set(Gxids, "true");
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -113,9 +92,9 @@ namespace GeneXus.Programs {
 
       private int AV7gxid ;
       private string Gxids ;
-      private SdtYTTV3SDNotAuthorized_Level_DetailSdt aP1_GXM1YTTV3SDNotAuthorized_Level_DetailSdt ;
       private IGxSession Gxwebsession ;
       private SdtYTTV3SDNotAuthorized_Level_DetailSdt AV10GXM1YTTV3SDNotAuthorized_Level_DetailSdt ;
+      private SdtYTTV3SDNotAuthorized_Level_DetailSdt aP1_GXM1YTTV3SDNotAuthorized_Level_DetailSdt ;
    }
 
 }

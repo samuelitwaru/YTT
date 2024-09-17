@@ -1008,6 +1008,20 @@ namespace GeneXus.Programs.wwpbaseobjects {
          return false ;
       }
 
+      [XmlIgnore]
+      private static GXTypeInfo _typeProps;
+      protected override GXTypeInfo TypeInfo
+      {
+         get {
+            return _typeProps ;
+         }
+
+         set {
+            _typeProps = value ;
+         }
+
+      }
+
       public void initialize( )
       {
          gxTv_SdtWWP_UserExtended_Wwpuserextendedid = "";
@@ -1080,6 +1094,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
    }
 
    [DataContract(Name = @"WWPBaseObjects\WWP_UserExtended", Namespace = "YTT_version4")]
+   [GxJsonSerialization("default")]
    public class SdtWWP_UserExtended_RESTInterface : GxGenericCollectionItem<GeneXus.Programs.wwpbaseobjects.SdtWWP_UserExtended>
    {
       public SdtWWP_UserExtended_RESTInterface( ) : base()
@@ -1249,11 +1264,11 @@ namespace GeneXus.Programs.wwpbaseobjects {
       public string gxTpr_Wwpuserextendeddeletedin
       {
          get {
-            return DateTimeUtil.TToC2( sdt.gxTpr_Wwpuserextendeddeletedin) ;
+            return DateTimeUtil.TToC2( sdt.gxTpr_Wwpuserextendeddeletedin, (IGxContext)(context)) ;
          }
 
          set {
-            sdt.gxTpr_Wwpuserextendeddeletedin = DateTimeUtil.CToT2( value);
+            sdt.gxTpr_Wwpuserextendeddeletedin = DateTimeUtil.CToT2( value, (IGxContext)(context));
          }
 
       }
@@ -1300,6 +1315,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
    }
 
    [DataContract(Name = @"WWPBaseObjects\WWP_UserExtended", Namespace = "YTT_version4")]
+   [GxJsonSerialization("default")]
    public class SdtWWP_UserExtended_RESTLInterface : GxGenericCollectionItem<GeneXus.Programs.wwpbaseobjects.SdtWWP_UserExtended>
    {
       public SdtWWP_UserExtended_RESTLInterface( ) : base()

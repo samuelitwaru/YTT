@@ -265,7 +265,7 @@ namespace GeneXus.Programs {
          {
             if ( context.ExposeMetadata( ) )
             {
-               Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+               Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
             }
          }
          Form.Meta.addItem("description", "Employees", 0) ;
@@ -290,11 +290,11 @@ namespace GeneXus.Programs {
 
       protected void gxnrGridlevel_project_newrow_invoke( )
       {
-         nRC_GXsfl_58 = (int)(Math.Round(NumberUtil.Val( GetPar( "nRC_GXsfl_58"), "."), 18, MidpointRounding.ToEven));
-         nGXsfl_58_idx = (int)(Math.Round(NumberUtil.Val( GetPar( "nGXsfl_58_idx"), "."), 18, MidpointRounding.ToEven));
-         sGXsfl_58_idx = GetPar( "sGXsfl_58_idx");
+         nRC_GXsfl_55 = (int)(Math.Round(NumberUtil.Val( GetPar( "nRC_GXsfl_55"), "."), 18, MidpointRounding.ToEven));
+         nGXsfl_55_idx = (int)(Math.Round(NumberUtil.Val( GetPar( "nGXsfl_55_idx"), "."), 18, MidpointRounding.ToEven));
+         sGXsfl_55_idx = GetPar( "sGXsfl_55_idx");
          edtProjectId_Horizontalalignment = GetNextPar( );
-         AssignProp("", false, edtProjectId_Internalname, "Horizontalalignment", edtProjectId_Horizontalalignment, !bGXsfl_58_Refreshing);
+         AssignProp("", false, edtProjectId_Internalname, "Horizontalalignment", edtProjectId_Horizontalalignment, !bGXsfl_55_Refreshing);
          Gx_mode = GetPar( "Mode");
          setAjaxCallMode();
          if ( ! IsValidAjaxCall( true) )
@@ -329,10 +329,10 @@ namespace GeneXus.Programs {
       {
          this.Gx_mode = aP0_Gx_mode;
          this.AV7EmployeeId = aP1_EmployeeId;
-         executePrivate();
+         ExecuteImpl();
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -371,11 +371,8 @@ namespace GeneXus.Programs {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITENV( ) ;
          INITTRN( ) ;
          if ( ( GxWebError == 0 ) && ! isAjaxCallMode( ) )
@@ -407,7 +404,7 @@ namespace GeneXus.Programs {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void fix_multi_value_controls( )
@@ -472,23 +469,24 @@ namespace GeneXus.Programs {
          /* Div Control */
          GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
          /* Div Control */
-         GxWebStd.gx_div_start( context, divMaintable_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
+         GxWebStd.gx_div_start( context, divTablecontent_Internalname, 1, 0, "px", 0, "px", "CellMarginTop10", "start", "top", "", "", "div");
          /* Div Control */
          GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
          /* Div Control */
-         GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-3 hidden-xs hidden-sm", "start", "top", "", "", "div");
-         /* Div Control */
-         GxWebStd.gx_div_start( context, divLefttable_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
-         GxWebStd.gx_div_end( context, "start", "top", "div");
-         GxWebStd.gx_div_end( context, "start", "top", "div");
-         /* Div Control */
-         GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-md-6", "Center", "top", "", "", "div");
-         /* Div Control */
-         GxWebStd.gx_div_start( context, divTablecontent_Internalname, 1, divTablecontent_Width, "px", 0, "px", "CellMarginTop10", "start", "top", "", "", "div");
-         /* Div Control */
-         GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
-         /* Div Control */
-         GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
+         GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-lg-9", "start", "top", "", "", "div");
+         /* User Defined Control */
+         ucDvpanel_tableattributes.SetProperty("Width", Dvpanel_tableattributes_Width);
+         ucDvpanel_tableattributes.SetProperty("AutoWidth", Dvpanel_tableattributes_Autowidth);
+         ucDvpanel_tableattributes.SetProperty("AutoHeight", Dvpanel_tableattributes_Autoheight);
+         ucDvpanel_tableattributes.SetProperty("Cls", Dvpanel_tableattributes_Cls);
+         ucDvpanel_tableattributes.SetProperty("Title", Dvpanel_tableattributes_Title);
+         ucDvpanel_tableattributes.SetProperty("Collapsible", Dvpanel_tableattributes_Collapsible);
+         ucDvpanel_tableattributes.SetProperty("Collapsed", Dvpanel_tableattributes_Collapsed);
+         ucDvpanel_tableattributes.SetProperty("ShowCollapseIcon", Dvpanel_tableattributes_Showcollapseicon);
+         ucDvpanel_tableattributes.SetProperty("IconPosition", Dvpanel_tableattributes_Iconposition);
+         ucDvpanel_tableattributes.SetProperty("AutoScroll", Dvpanel_tableattributes_Autoscroll);
+         ucDvpanel_tableattributes.Render(context, "dvelop.gxbootstrap.panel_al", Dvpanel_tableattributes_Internalname, "DVPANEL_TABLEATTRIBUTESContainer");
+         context.WriteHtmlText( "<div class=\"gx_usercontrol_child\" id=\""+"DVPANEL_TABLEATTRIBUTESContainer"+"TableAttributes"+"\" style=\"display:none;\">") ;
          /* Div Control */
          GxWebStd.gx_div_start( context, divTableattributes_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
          /* Div Control */
@@ -502,8 +500,8 @@ namespace GeneXus.Programs {
          /* Div Control */
          GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
          /* Single line edit */
-         TempTags = "  onfocus=\"gx.evt.onfocus(this, 25,'',false,'',0)\"";
-         GxWebStd.gx_single_line_edit( context, edtEmployeeFirstName_Internalname, StringUtil.RTrim( A107EmployeeFirstName), StringUtil.RTrim( context.localUtil.Format( A107EmployeeFirstName, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,25);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtEmployeeFirstName_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtEmployeeFirstName_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "Name", "start", true, "", "HLP_Employee.htm");
+         TempTags = "  onfocus=\"gx.evt.onfocus(this, 22,'',false,'',0)\"";
+         GxWebStd.gx_single_line_edit( context, edtEmployeeFirstName_Internalname, StringUtil.RTrim( A107EmployeeFirstName), StringUtil.RTrim( context.localUtil.Format( A107EmployeeFirstName, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,22);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtEmployeeFirstName_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtEmployeeFirstName_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "Name", "start", true, "", "HLP_Employee.htm");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -516,8 +514,8 @@ namespace GeneXus.Programs {
          /* Div Control */
          GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
          /* Single line edit */
-         TempTags = "  onfocus=\"gx.evt.onfocus(this, 29,'',false,'',0)\"";
-         GxWebStd.gx_single_line_edit( context, edtEmployeeLastName_Internalname, StringUtil.RTrim( A108EmployeeLastName), StringUtil.RTrim( context.localUtil.Format( A108EmployeeLastName, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,29);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtEmployeeLastName_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtEmployeeLastName_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "Name", "start", true, "", "HLP_Employee.htm");
+         TempTags = "  onfocus=\"gx.evt.onfocus(this, 26,'',false,'',0)\"";
+         GxWebStd.gx_single_line_edit( context, edtEmployeeLastName_Internalname, StringUtil.RTrim( A108EmployeeLastName), StringUtil.RTrim( context.localUtil.Format( A108EmployeeLastName, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,26);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtEmployeeLastName_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtEmployeeLastName_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "Name", "start", true, "", "HLP_Employee.htm");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -533,8 +531,8 @@ namespace GeneXus.Programs {
          /* Div Control */
          GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
          /* Single line edit */
-         TempTags = "  onfocus=\"gx.evt.onfocus(this, 34,'',false,'',0)\"";
-         GxWebStd.gx_single_line_edit( context, edtEmployeeEmail_Internalname, A109EmployeeEmail, StringUtil.RTrim( context.localUtil.Format( A109EmployeeEmail, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,34);\"", "'"+""+"'"+",false,"+"'"+""+"'", "mailto:"+A109EmployeeEmail, "", "", "", edtEmployeeEmail_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtEmployeeEmail_Enabled, 1, "email", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, 0, true, "GeneXus\\Email", "start", true, "", "HLP_Employee.htm");
+         TempTags = "  onfocus=\"gx.evt.onfocus(this, 31,'',false,'',0)\"";
+         GxWebStd.gx_single_line_edit( context, edtEmployeeEmail_Internalname, A109EmployeeEmail, StringUtil.RTrim( context.localUtil.Format( A109EmployeeEmail, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,31);\"", "'"+""+"'"+",false,"+"'"+""+"'", "mailto:"+A109EmployeeEmail, "", "", "", edtEmployeeEmail_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtEmployeeEmail_Enabled, 1, "email", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, 0, true, "GeneXus\\Email", "start", true, "", "HLP_Employee.htm");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -547,8 +545,8 @@ namespace GeneXus.Programs {
          /* Div Control */
          GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
          /* Single line edit */
-         TempTags = "  onfocus=\"gx.evt.onfocus(this, 38,'',false,'',0)\"";
-         GxWebStd.gx_single_line_edit( context, edtEmployeeVactionDays_Internalname, StringUtil.LTrim( StringUtil.NToC( A146EmployeeVactionDays, 4, 1, ".", "")), StringUtil.LTrim( ((edtEmployeeVactionDays_Enabled!=0) ? context.localUtil.Format( A146EmployeeVactionDays, "Z9.9") : context.localUtil.Format( A146EmployeeVactionDays, "Z9.9"))), TempTags+" onchange=\""+"gx.num.valid_decimal( this, ',','.','1');"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.num.valid_decimal( this, ',','.','1');"+";gx.evt.onblur(this,38);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtEmployeeVactionDays_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtEmployeeVactionDays_Enabled, 0, "text", "", 4, "chr", 1, "row", 4, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_Employee.htm");
+         TempTags = "  onfocus=\"gx.evt.onfocus(this, 35,'',false,'',0)\"";
+         GxWebStd.gx_single_line_edit( context, edtEmployeeVactionDays_Internalname, StringUtil.LTrim( StringUtil.NToC( A146EmployeeVactionDays, 4, 1, ".", "")), StringUtil.LTrim( ((edtEmployeeVactionDays_Enabled!=0) ? context.localUtil.Format( A146EmployeeVactionDays, "Z9.9") : context.localUtil.Format( A146EmployeeVactionDays, "Z9.9"))), TempTags+" onchange=\""+"gx.num.valid_decimal( this, ',','.','1');"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.num.valid_decimal( this, ',','.','1');"+";gx.evt.onblur(this,35);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtEmployeeVactionDays_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtEmployeeVactionDays_Enabled, 0, "text", "", 4, "chr", 1, "row", 4, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_Employee.htm");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -563,9 +561,9 @@ namespace GeneXus.Programs {
          GxWebStd.gx_label_element( context, dynCompanyId_Internalname, "Location", " AttributeLabel", 1, true, "");
          /* Div Control */
          GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
-         TempTags = "  onfocus=\"gx.evt.onfocus(this, 43,'',false,'',0)\"";
+         TempTags = "  onfocus=\"gx.evt.onfocus(this, 40,'',false,'',0)\"";
          /* ComboBox */
-         GxWebStd.gx_combobox_ctrl1( context, dynCompanyId, dynCompanyId_Internalname, StringUtil.Trim( StringUtil.Str( (decimal)(A100CompanyId), 10, 0)), 1, dynCompanyId_Jsonclick, 0, "'"+""+"'"+",false,"+"'"+""+"'", "int", "", 1, dynCompanyId.Enabled, 1, 0, 0, "em", 0, "", "", "Attribute", "", "", TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,43);\"", "", true, 0, "HLP_Employee.htm");
+         GxWebStd.gx_combobox_ctrl1( context, dynCompanyId, dynCompanyId_Internalname, StringUtil.Trim( StringUtil.Str( (decimal)(A100CompanyId), 10, 0)), 1, dynCompanyId_Jsonclick, 0, "'"+""+"'"+",false,"+"'"+""+"'", "int", "", 1, dynCompanyId.Enabled, 1, 0, 0, "em", 0, "", "", "Attribute", "", "", TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,40);\"", "", true, 0, "HLP_Employee.htm");
          dynCompanyId.CurrentValue = StringUtil.Trim( StringUtil.Str( (decimal)(A100CompanyId), 10, 0));
          AssignProp("", false, dynCompanyId_Internalname, "Values", (string)(dynCompanyId.ToJavascriptSource()), true);
          GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -580,10 +578,10 @@ namespace GeneXus.Programs {
          /* Div Control */
          GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
          /* Check box */
-         TempTags = "  onfocus=\"gx.evt.onfocus(this, 47,'',false,'',0)\"";
+         TempTags = "  onfocus=\"gx.evt.onfocus(this, 44,'',false,'',0)\"";
          ClassString = "AttributeCheckBox";
          StyleString = "";
-         GxWebStd.gx_checkbox_ctrl( context, chkEmployeeIsManager_Internalname, StringUtil.BoolToStr( A110EmployeeIsManager), "", "Is HR Manager", 1, chkEmployeeIsManager.Enabled, "true", "", StyleString, ClassString, "", "", TempTags+" onclick="+"\"gx.fn.checkboxClick(47, this, 'true', 'false',"+"''"+");"+"gx.evt.onchange(this, event);\""+" onblur=\""+""+";gx.evt.onblur(this,47);\"");
+         GxWebStd.gx_checkbox_ctrl( context, chkEmployeeIsManager_Internalname, StringUtil.BoolToStr( A110EmployeeIsManager), "", "Is HR Manager", 1, chkEmployeeIsManager.Enabled, "true", "", StyleString, ClassString, "", "", TempTags+" onclick="+"\"gx.fn.checkboxClick(44, this, 'true', 'false',"+"''"+");"+"gx.evt.onchange(this, event);\""+" onblur=\""+""+";gx.evt.onblur(this,44);\"");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -599,12 +597,16 @@ namespace GeneXus.Programs {
          /* Div Control */
          GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
          /* Check box */
-         TempTags = "  onfocus=\"gx.evt.onfocus(this, 52,'',false,'',0)\"";
+         TempTags = "  onfocus=\"gx.evt.onfocus(this, 49,'',false,'',0)\"";
          ClassString = "AttributeCheckBox";
          StyleString = "";
-         GxWebStd.gx_checkbox_ctrl( context, chkEmployeeIsActive_Internalname, StringUtil.BoolToStr( A112EmployeeIsActive), "", "Is Active", 1, chkEmployeeIsActive.Enabled, "true", "", StyleString, ClassString, "", "", TempTags+" onclick="+"\"gx.fn.checkboxClick(52, this, 'true', 'false',"+"''"+");"+"gx.evt.onchange(this, event);\""+" onblur=\""+""+";gx.evt.onblur(this,52);\"");
+         GxWebStd.gx_checkbox_ctrl( context, chkEmployeeIsActive_Internalname, StringUtil.BoolToStr( A112EmployeeIsActive), "", "Is Active", 1, chkEmployeeIsActive.Enabled, "true", "", StyleString, ClassString, "", "", TempTags+" onclick="+"\"gx.fn.checkboxClick(49, this, 'true', 'false',"+"''"+");"+"gx.evt.onchange(this, event);\""+" onblur=\""+""+";gx.evt.onblur(this,49);\"");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
+         GxWebStd.gx_div_end( context, "start", "top", "div");
+         GxWebStd.gx_div_end( context, "start", "top", "div");
+         GxWebStd.gx_div_end( context, "start", "top", "div");
+         context.WriteHtmlText( "</div>") ;
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -613,7 +615,7 @@ namespace GeneXus.Programs {
          /* Div Control */
          GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
          /* Div Control */
-         GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 CellMarginTop", "start", "top", "", "", "div");
+         GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-lg-9 CellMarginTop", "start", "top", "", "", "div");
          /* Div Control */
          GxWebStd.gx_div_start( context, divTableleaflevel_project_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
          /* Div Control */
@@ -634,36 +636,24 @@ namespace GeneXus.Programs {
          GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-action-group CellMarginTop10", "start", "top", " "+"data-gx-actiongroup-type=\"toolbar\""+" ", "", "div");
          /* Div Control */
          GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-button", "start", "top", "", "", "div");
-         TempTags = "  onfocus=\"gx.evt.onfocus(this, 64,'',false,'',0)\"";
+         TempTags = "  onfocus=\"gx.evt.onfocus(this, 61,'',false,'',0)\"";
          ClassString = "Button";
          StyleString = "";
          GxWebStd.gx_button_ctrl( context, bttBtntrn_enter_Internalname, "", "Confirm", bttBtntrn_enter_Jsonclick, 5, "Confirm", "", StyleString, ClassString, bttBtntrn_enter_Visible, bttBtntrn_enter_Enabled, "standard", "'"+""+"'"+",false,"+"'"+"EENTER."+"'", TempTags, "", context.GetButtonType( ), "HLP_Employee.htm");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          /* Div Control */
          GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-button", "start", "top", "", "", "div");
-         TempTags = "  onfocus=\"gx.evt.onfocus(this, 66,'',false,'',0)\"";
+         TempTags = "  onfocus=\"gx.evt.onfocus(this, 63,'',false,'',0)\"";
          ClassString = "BtnDefault";
          StyleString = "";
          GxWebStd.gx_button_ctrl( context, bttBtntrn_cancel_Internalname, "", "Cancel", bttBtntrn_cancel_Jsonclick, 1, "Cancel", "", StyleString, ClassString, bttBtntrn_cancel_Visible, 1, "standard", "'"+""+"'"+",false,"+"'"+"ECANCEL."+"'", TempTags, "", context.GetButtonType( ), "HLP_Employee.htm");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          /* Div Control */
          GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-button", "start", "top", "", "", "div");
-         TempTags = "  onfocus=\"gx.evt.onfocus(this, 68,'',false,'',0)\"";
+         TempTags = "  onfocus=\"gx.evt.onfocus(this, 65,'',false,'',0)\"";
          ClassString = "BtnDefault";
          StyleString = "";
          GxWebStd.gx_button_ctrl( context, bttBtntrn_delete_Internalname, "", "Delete", bttBtntrn_delete_Jsonclick, 5, "Delete", "", StyleString, ClassString, bttBtntrn_delete_Visible, bttBtntrn_delete_Enabled, "standard", "'"+""+"'"+",false,"+"'"+"EDELETE."+"'", TempTags, "", context.GetButtonType( ), "HLP_Employee.htm");
-         GxWebStd.gx_div_end( context, "start", "top", "div");
-         GxWebStd.gx_div_end( context, "start", "top", "div");
-         GxWebStd.gx_div_end( context, "start", "top", "div");
-         GxWebStd.gx_div_end( context, "start", "top", "div");
-         GxWebStd.gx_div_end( context, "start", "top", "div");
-         GxWebStd.gx_div_end( context, "Center", "top", "div");
-         /* Div Control */
-         GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-3 hidden-xs hidden-sm", "start", "top", "", "", "div");
-         /* Div Control */
-         GxWebStd.gx_div_start( context, divRighttable_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
-         GxWebStd.gx_div_end( context, "start", "top", "div");
-         GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -685,16 +675,17 @@ namespace GeneXus.Programs {
          ucCombo_projectid.SetProperty("DropDownOptionsData", AV15ProjectId_Data);
          ucCombo_projectid.Render(context, "dvelop.gxbootstrap.ddoextendedcombo", Combo_projectid_Internalname, "COMBO_PROJECTIDContainer");
          /* Single line edit */
-         GxWebStd.gx_single_line_edit( context, edtEmployeeId_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(A106EmployeeId), 10, 0, ".", "")), StringUtil.LTrim( ((edtEmployeeId_Enabled!=0) ? context.localUtil.Format( (decimal)(A106EmployeeId), "ZZZZZZZZZ9") : context.localUtil.Format( (decimal)(A106EmployeeId), "ZZZZZZZZZ9"))), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtEmployeeId_Jsonclick, 0, "Attribute", "", "", "", "", edtEmployeeId_Visible, edtEmployeeId_Enabled, 0, "text", "1", 10, "chr", 1, "row", 10, 0, 0, 0, 0, -1, 0, true, "Id", "end", false, "", "HLP_Employee.htm");
+         TempTags = "  onfocus=\"gx.evt.onfocus(this, 70,'',false,'',0)\"";
+         GxWebStd.gx_single_line_edit( context, edtEmployeeId_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(A106EmployeeId), 10, 0, ".", "")), StringUtil.LTrim( ((edtEmployeeId_Enabled!=0) ? context.localUtil.Format( (decimal)(A106EmployeeId), "ZZZZZZZZZ9") : context.localUtil.Format( (decimal)(A106EmployeeId), "ZZZZZZZZZ9"))), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+TempTags+" onchange=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onblur(this,70);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtEmployeeId_Jsonclick, 0, "Attribute", "", "", "", "", edtEmployeeId_Visible, edtEmployeeId_Enabled, 0, "text", "1", 10, "chr", 1, "row", 10, 0, 0, 0, 0, -1, 0, true, "Id", "end", false, "", "HLP_Employee.htm");
          /* Single line edit */
-         TempTags = "  onfocus=\"gx.evt.onfocus(this, 76,'',false,'',0)\"";
-         GxWebStd.gx_single_line_edit( context, edtEmployeeName_Internalname, StringUtil.RTrim( A148EmployeeName), StringUtil.RTrim( context.localUtil.Format( A148EmployeeName, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,76);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtEmployeeName_Jsonclick, 0, "Attribute", "", "", "", "", edtEmployeeName_Visible, edtEmployeeName_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "Name", "start", true, "", "HLP_Employee.htm");
+         TempTags = "  onfocus=\"gx.evt.onfocus(this, 71,'',false,'',0)\"";
+         GxWebStd.gx_single_line_edit( context, edtEmployeeName_Internalname, StringUtil.RTrim( A148EmployeeName), StringUtil.RTrim( context.localUtil.Format( A148EmployeeName, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,71);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtEmployeeName_Jsonclick, 0, "Attribute", "", "", "", "", edtEmployeeName_Visible, edtEmployeeName_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "Name", "start", true, "", "HLP_Employee.htm");
          /* Single line edit */
-         TempTags = "  onfocus=\"gx.evt.onfocus(this, 77,'',false,'',0)\"";
-         GxWebStd.gx_single_line_edit( context, edtGAMUserGUID_Internalname, A111GAMUserGUID, StringUtil.RTrim( context.localUtil.Format( A111GAMUserGUID, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,77);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtGAMUserGUID_Jsonclick, 0, "Attribute", "", "", "", "", edtGAMUserGUID_Visible, edtGAMUserGUID_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, 0, 0, true, "GeneXusSecurityCommon\\GAMUserIdentification", "start", true, "", "HLP_Employee.htm");
+         TempTags = "  onfocus=\"gx.evt.onfocus(this, 72,'',false,'',0)\"";
+         GxWebStd.gx_single_line_edit( context, edtGAMUserGUID_Internalname, A111GAMUserGUID, StringUtil.RTrim( context.localUtil.Format( A111GAMUserGUID, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,72);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtGAMUserGUID_Jsonclick, 0, "Attribute", "", "", "", "", edtGAMUserGUID_Visible, edtGAMUserGUID_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, 0, 0, true, "GeneXusSecurityCommon\\GAMUserIdentification", "start", true, "", "HLP_Employee.htm");
          /* Single line edit */
-         TempTags = "  onfocus=\"gx.evt.onfocus(this, 78,'',false,'',0)\"";
-         GxWebStd.gx_single_line_edit( context, edtEmployeeBalance_Internalname, StringUtil.LTrim( StringUtil.NToC( A147EmployeeBalance, 4, 1, ".", "")), StringUtil.LTrim( ((edtEmployeeBalance_Enabled!=0) ? context.localUtil.Format( A147EmployeeBalance, "Z9.9") : context.localUtil.Format( A147EmployeeBalance, "Z9.9"))), TempTags+" onchange=\""+"gx.num.valid_decimal( this, ',','.','1');"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.num.valid_decimal( this, ',','.','1');"+";gx.evt.onblur(this,78);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtEmployeeBalance_Jsonclick, 0, "Attribute", "", "", "", "", edtEmployeeBalance_Visible, edtEmployeeBalance_Enabled, 0, "text", "", 4, "chr", 1, "row", 4, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_Employee.htm");
+         TempTags = "  onfocus=\"gx.evt.onfocus(this, 73,'',false,'',0)\"";
+         GxWebStd.gx_single_line_edit( context, edtEmployeeBalance_Internalname, StringUtil.LTrim( StringUtil.NToC( A147EmployeeBalance, 4, 1, ".", "")), StringUtil.LTrim( ((edtEmployeeBalance_Enabled!=0) ? context.localUtil.Format( A147EmployeeBalance, "Z9.9") : context.localUtil.Format( A147EmployeeBalance, "Z9.9"))), TempTags+" onchange=\""+"gx.num.valid_decimal( this, ',','.','1');"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.num.valid_decimal( this, ',','.','1');"+";gx.evt.onblur(this,73);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtEmployeeBalance_Jsonclick, 0, "Attribute", "", "", "", "", edtEmployeeBalance_Visible, edtEmployeeBalance_Enabled, 0, "text", "", 4, "chr", 1, "row", 4, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_Employee.htm");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -705,8 +696,8 @@ namespace GeneXus.Programs {
       protected void gxdraw_Gridlevel_project( )
       {
          /*  Grid Control  */
-         StartGridControl58( ) ;
-         nGXsfl_58_idx = 0;
+         StartGridControl55( ) ;
+         nGXsfl_55_idx = 0;
          if ( ( nKeyPressed == 1 ) && ( AnyError == 0 ) )
          {
             /* Enter key processing. */
@@ -733,14 +724,14 @@ namespace GeneXus.Programs {
             standaloneNotModal0F28( ) ;
             standaloneModal0F28( ) ;
             sMode28 = Gx_mode;
-            while ( nGXsfl_58_idx < nRC_GXsfl_58 )
+            while ( nGXsfl_55_idx < nRC_GXsfl_55 )
             {
-               bGXsfl_58_Refreshing = true;
+               bGXsfl_55_Refreshing = true;
                ReadRow0F28( ) ;
-               edtProjectId_Enabled = (int)(Math.Round(context.localUtil.CToN( cgiGet( "PROJECTID_"+sGXsfl_58_idx+"Enabled"), ".", ","), 18, MidpointRounding.ToEven));
-               AssignProp("", false, edtProjectId_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtProjectId_Enabled), 5, 0), !bGXsfl_58_Refreshing);
-               edtProjectId_Horizontalalignment = cgiGet( "PROJECTID_"+sGXsfl_58_idx+"Horizontalalignment");
-               AssignProp("", false, edtProjectId_Internalname, "Horizontalalignment", edtProjectId_Horizontalalignment, !bGXsfl_58_Refreshing);
+               edtProjectId_Enabled = (int)(Math.Round(context.localUtil.CToN( cgiGet( "PROJECTID_"+sGXsfl_55_idx+"Enabled"), ".", ","), 18, MidpointRounding.ToEven));
+               AssignProp("", false, edtProjectId_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtProjectId_Enabled), 5, 0), !bGXsfl_55_Refreshing);
+               edtProjectId_Horizontalalignment = cgiGet( "PROJECTID_"+sGXsfl_55_idx+"Horizontalalignment");
+               AssignProp("", false, edtProjectId_Internalname, "Horizontalalignment", edtProjectId_Horizontalalignment, !bGXsfl_55_Refreshing);
                if ( ( nRcdExists_28 == 0 ) && ! IsIns( ) )
                {
                   Gx_mode = "INS";
@@ -748,7 +739,7 @@ namespace GeneXus.Programs {
                   standaloneModal0F28( ) ;
                }
                SendRow0F28( ) ;
-               bGXsfl_58_Refreshing = false;
+               bGXsfl_55_Refreshing = false;
             }
             Gx_mode = sMode28;
             AssignAttri("", false, "Gx_mode", Gx_mode);
@@ -763,8 +754,8 @@ namespace GeneXus.Programs {
                ScanStart0F28( ) ;
                while ( RcdFound28 != 0 )
                {
-                  sGXsfl_58_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_58_idx+1), 4, 0), 4, "0");
-                  SubsflControlProps_5828( ) ;
+                  sGXsfl_55_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_55_idx+1), 4, 0), 4, "0");
+                  SubsflControlProps_5528( ) ;
                   init_level_properties28( ) ;
                   standaloneNotModal0F28( ) ;
                   getByPrimaryKey0F28( ) ;
@@ -781,8 +772,8 @@ namespace GeneXus.Programs {
             sMode28 = Gx_mode;
             Gx_mode = "INS";
             AssignAttri("", false, "Gx_mode", Gx_mode);
-            sGXsfl_58_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_58_idx+1), 4, 0), 4, "0");
-            SubsflControlProps_5828( ) ;
+            sGXsfl_55_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_55_idx+1), 4, 0), 4, "0");
+            SubsflControlProps_5528( ) ;
             InitAll0F28( ) ;
             init_level_properties28( ) ;
             nRcdExists_28 = 0;
@@ -876,7 +867,7 @@ namespace GeneXus.Programs {
                IsConfirmed = (short)(Math.Round(context.localUtil.CToN( cgiGet( "IsConfirmed"), ".", ","), 18, MidpointRounding.ToEven));
                IsModified = (short)(Math.Round(context.localUtil.CToN( cgiGet( "IsModified"), ".", ","), 18, MidpointRounding.ToEven));
                Gx_mode = cgiGet( "Mode");
-               nRC_GXsfl_58 = (int)(Math.Round(context.localUtil.CToN( cgiGet( "nRC_GXsfl_58"), ".", ","), 18, MidpointRounding.ToEven));
+               nRC_GXsfl_55 = (int)(Math.Round(context.localUtil.CToN( cgiGet( "nRC_GXsfl_55"), ".", ","), 18, MidpointRounding.ToEven));
                N100CompanyId = (long)(Math.Round(context.localUtil.CToN( cgiGet( "N100CompanyId"), ".", ","), 18, MidpointRounding.ToEven));
                AV7EmployeeId = (long)(Math.Round(context.localUtil.CToN( cgiGet( "vEMPLOYEEID"), ".", ","), 18, MidpointRounding.ToEven));
                AV13Insert_CompanyId = (long)(Math.Round(context.localUtil.CToN( cgiGet( "vINSERT_COMPANYID"), ".", ","), 18, MidpointRounding.ToEven));
@@ -887,6 +878,23 @@ namespace GeneXus.Programs {
                A101CompanyName = cgiGet( "COMPANYNAME");
                AV32Pgmname = cgiGet( "vPGMNAME");
                A103ProjectName = cgiGet( "PROJECTNAME");
+               Dvpanel_tableattributes_Objectcall = cgiGet( "DVPANEL_TABLEATTRIBUTES_Objectcall");
+               Dvpanel_tableattributes_Class = cgiGet( "DVPANEL_TABLEATTRIBUTES_Class");
+               Dvpanel_tableattributes_Enabled = StringUtil.StrToBool( cgiGet( "DVPANEL_TABLEATTRIBUTES_Enabled"));
+               Dvpanel_tableattributes_Width = cgiGet( "DVPANEL_TABLEATTRIBUTES_Width");
+               Dvpanel_tableattributes_Height = cgiGet( "DVPANEL_TABLEATTRIBUTES_Height");
+               Dvpanel_tableattributes_Autowidth = StringUtil.StrToBool( cgiGet( "DVPANEL_TABLEATTRIBUTES_Autowidth"));
+               Dvpanel_tableattributes_Autoheight = StringUtil.StrToBool( cgiGet( "DVPANEL_TABLEATTRIBUTES_Autoheight"));
+               Dvpanel_tableattributes_Cls = cgiGet( "DVPANEL_TABLEATTRIBUTES_Cls");
+               Dvpanel_tableattributes_Showheader = StringUtil.StrToBool( cgiGet( "DVPANEL_TABLEATTRIBUTES_Showheader"));
+               Dvpanel_tableattributes_Title = cgiGet( "DVPANEL_TABLEATTRIBUTES_Title");
+               Dvpanel_tableattributes_Collapsible = StringUtil.StrToBool( cgiGet( "DVPANEL_TABLEATTRIBUTES_Collapsible"));
+               Dvpanel_tableattributes_Collapsed = StringUtil.StrToBool( cgiGet( "DVPANEL_TABLEATTRIBUTES_Collapsed"));
+               Dvpanel_tableattributes_Showcollapseicon = StringUtil.StrToBool( cgiGet( "DVPANEL_TABLEATTRIBUTES_Showcollapseicon"));
+               Dvpanel_tableattributes_Iconposition = cgiGet( "DVPANEL_TABLEATTRIBUTES_Iconposition");
+               Dvpanel_tableattributes_Autoscroll = StringUtil.StrToBool( cgiGet( "DVPANEL_TABLEATTRIBUTES_Autoscroll"));
+               Dvpanel_tableattributes_Visible = StringUtil.StrToBool( cgiGet( "DVPANEL_TABLEATTRIBUTES_Visible"));
+               Dvpanel_tableattributes_Gxcontroltype = (int)(Math.Round(context.localUtil.CToN( cgiGet( "DVPANEL_TABLEATTRIBUTES_Gxcontroltype"), ".", ","), 18, MidpointRounding.ToEven));
                Combo_projectid_Objectcall = cgiGet( "COMBO_PROJECTID_Objectcall");
                Combo_projectid_Class = cgiGet( "COMBO_PROJECTID_Class");
                Combo_projectid_Icontype = cgiGet( "COMBO_PROJECTID_Icontype");
@@ -1084,6 +1092,7 @@ namespace GeneXus.Programs {
                         {
                            context.wbHandled = 1;
                            dynload_actions( ) ;
+                           /* Execute user event: Combo_projectid.Onoptionclicked */
                            E120F2 ();
                         }
                         else if ( StringUtil.StrCmp(sEvt, "START") == 0 )
@@ -1224,8 +1233,8 @@ namespace GeneXus.Programs {
 
       protected void CONFIRM_0F28( )
       {
-         nGXsfl_58_idx = 0;
-         while ( nGXsfl_58_idx < nRC_GXsfl_58 )
+         nGXsfl_55_idx = 0;
+         while ( nGXsfl_55_idx < nRC_GXsfl_55 )
          {
             ReadRow0F28( ) ;
             if ( ( nRcdExists_28 != 0 ) || ( nIsMod_28 != 0 ) )
@@ -1251,7 +1260,7 @@ namespace GeneXus.Programs {
                   }
                   else
                   {
-                     GXCCtl = "PROJECTID_" + sGXsfl_58_idx;
+                     GXCCtl = "PROJECTID_" + sGXsfl_55_idx;
                      GX_msglist.addItem(context.GetMessage( "GXM_noupdate", ""), "DuplicatePrimaryKey", 1, GXCCtl);
                      AnyError = 1;
                      GX_FocusControl = edtProjectId_Internalname;
@@ -1298,7 +1307,7 @@ namespace GeneXus.Programs {
                   {
                      if ( nRcdDeleted_28 == 0 )
                      {
-                        GXCCtl = "PROJECTID_" + sGXsfl_58_idx;
+                        GXCCtl = "PROJECTID_" + sGXsfl_55_idx;
                         GX_msglist.addItem(context.GetMessage( "GXM_recdeleted", ""), 1, GXCCtl);
                         AnyError = 1;
                         GX_FocusControl = edtProjectId_Internalname;
@@ -1308,14 +1317,14 @@ namespace GeneXus.Programs {
                }
             }
             ChangePostValue( edtProjectId_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(A102ProjectId), 10, 0, ".", ""))) ;
-            ChangePostValue( "ZT_"+"Z102ProjectId_"+sGXsfl_58_idx, StringUtil.LTrim( StringUtil.NToC( (decimal)(Z102ProjectId), 10, 0, ".", ""))) ;
-            ChangePostValue( "nRcdDeleted_28_"+sGXsfl_58_idx, StringUtil.LTrim( StringUtil.NToC( (decimal)(nRcdDeleted_28), 4, 0, ".", ""))) ;
-            ChangePostValue( "nRcdExists_28_"+sGXsfl_58_idx, StringUtil.LTrim( StringUtil.NToC( (decimal)(nRcdExists_28), 4, 0, ".", ""))) ;
-            ChangePostValue( "nIsMod_28_"+sGXsfl_58_idx, StringUtil.LTrim( StringUtil.NToC( (decimal)(nIsMod_28), 4, 0, ".", ""))) ;
+            ChangePostValue( "ZT_"+"Z102ProjectId_"+sGXsfl_55_idx, StringUtil.LTrim( StringUtil.NToC( (decimal)(Z102ProjectId), 10, 0, ".", ""))) ;
+            ChangePostValue( "nRcdDeleted_28_"+sGXsfl_55_idx, StringUtil.LTrim( StringUtil.NToC( (decimal)(nRcdDeleted_28), 4, 0, ".", ""))) ;
+            ChangePostValue( "nRcdExists_28_"+sGXsfl_55_idx, StringUtil.LTrim( StringUtil.NToC( (decimal)(nRcdExists_28), 4, 0, ".", ""))) ;
+            ChangePostValue( "nIsMod_28_"+sGXsfl_55_idx, StringUtil.LTrim( StringUtil.NToC( (decimal)(nIsMod_28), 4, 0, ".", ""))) ;
             if ( nIsMod_28 != 0 )
             {
-               ChangePostValue( "PROJECTID_"+sGXsfl_58_idx+"Enabled", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtProjectId_Enabled), 5, 0, ".", ""))) ;
-               ChangePostValue( "PROJECTID_"+sGXsfl_58_idx+"Horizontalalignment", StringUtil.RTrim( edtProjectId_Horizontalalignment)) ;
+               ChangePostValue( "PROJECTID_"+sGXsfl_55_idx+"Enabled", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtProjectId_Enabled), 5, 0, ".", ""))) ;
+               ChangePostValue( "PROJECTID_"+sGXsfl_55_idx+"Horizontalalignment", StringUtil.RTrim( edtProjectId_Horizontalalignment)) ;
             }
          }
          /* Start of After( level) rules */
@@ -1333,12 +1342,10 @@ namespace GeneXus.Programs {
          divLayoutmaintable_Class = divLayoutmaintable_Class+" "+"EditForm";
          AssignProp("", false, divLayoutmaintable_Internalname, "Class", divLayoutmaintable_Class, true);
          new GeneXus.Programs.wwpbaseobjects.loadwwpcontext(context ).execute( out  AV8WWPContext) ;
-         divTablecontent_Width = 500;
-         AssignProp("", false, divTablecontent_Internalname, "Width", StringUtil.LTrimStr( (decimal)(divTablecontent_Width), 9, 0), true);
          Combo_projectid_Titlecontrolidtoreplace = edtProjectId_Internalname;
          ucCombo_projectid.SendProperty(context, "", false, Combo_projectid_Internalname, "TitleControlIdToReplace", Combo_projectid_Titlecontrolidtoreplace);
          edtProjectId_Horizontalalignment = "Left";
-         AssignProp("", false, edtProjectId_Internalname, "Horizontalalignment", edtProjectId_Horizontalalignment, !bGXsfl_58_Refreshing);
+         AssignProp("", false, edtProjectId_Internalname, "Horizontalalignment", edtProjectId_Horizontalalignment, !bGXsfl_55_Refreshing);
          /* Execute user subroutine: 'LOADCOMBOPROJECTID' */
          S112 ();
          if ( returnInSub )
@@ -1651,7 +1658,6 @@ namespace GeneXus.Programs {
 
       protected void CheckExtendedTable0F16( )
       {
-         nIsDirty_16 = 0;
          Gx_BScreen = 1;
          AssignAttri("", false, "Gx_BScreen", StringUtil.Str( (decimal)(Gx_BScreen), 1, 0));
          standaloneModal( ) ;
@@ -1665,7 +1671,6 @@ namespace GeneXus.Programs {
             AssignAttri("", false, "GX_FocusControl", GX_FocusControl);
          }
          pr_default.close(7);
-         nIsDirty_16 = 1;
          A148EmployeeName = StringUtil.Trim( A107EmployeeFirstName) + " " + StringUtil.Trim( A108EmployeeLastName);
          AssignAttri("", false, "A148EmployeeName", A148EmployeeName);
          if ( String.IsNullOrEmpty(StringUtil.RTrim( A107EmployeeFirstName)) )
@@ -1720,7 +1725,6 @@ namespace GeneXus.Programs {
          }
          if ( IsIns( )  && (Convert.ToDecimal(0)==A147EmployeeBalance) && ( Gx_BScreen == 0 ) )
          {
-            nIsDirty_16 = 1;
             A147EmployeeBalance = A146EmployeeVactionDays;
             AssignAttri("", false, "A147EmployeeBalance", StringUtil.LTrimStr( A147EmployeeBalance, 4, 1));
          }
@@ -1728,7 +1732,6 @@ namespace GeneXus.Programs {
          {
             if ( ( DateTimeUtil.Month( DateTimeUtil.Now( context)) == 1 ) && ( DateTimeUtil.Day( DateTimeUtil.Now( context)) == 1 ) && IsIns( )  )
             {
-               nIsDirty_16 = 1;
                A147EmployeeBalance = A146EmployeeVactionDays;
                AssignAttri("", false, "A147EmployeeBalance", StringUtil.LTrimStr( A147EmployeeBalance, 4, 1));
             }
@@ -1736,7 +1739,6 @@ namespace GeneXus.Programs {
             {
                if ( IsUpd( )  )
                {
-                  nIsDirty_16 = 1;
                   GXt_decimal4 = A147EmployeeBalance;
                   new getemployeeapprovedvacationdays(context ).execute(  A106EmployeeId,  A178EmployeeVacationDaysSetDate,  context.localUtil.YMDToD( DateTimeUtil.Year( Gx_date), 12, 31), out  GXt_decimal4) ;
                   A147EmployeeBalance = (decimal)(A146EmployeeVactionDays-GXt_decimal4);
@@ -2026,9 +2028,9 @@ namespace GeneXus.Programs {
       {
          nKeyPressed = 4;
          nBlankRcdUsr28 = (short)(nBlankRcdUsr28+nLines);
-         if ( isFullAjaxMode( ) && ! bGXsfl_58_Refreshing )
+         if ( isFullAjaxMode( ) && ! bGXsfl_55_Refreshing )
          {
-            context.DoAjaxAddLines(58, nLines);
+            context.DoAjaxAddLines(55, nLines);
          }
       }
 
@@ -2388,8 +2390,8 @@ namespace GeneXus.Programs {
 
       protected void ProcessNestedLevel0F28( )
       {
-         nGXsfl_58_idx = 0;
-         while ( nGXsfl_58_idx < nRC_GXsfl_58 )
+         nGXsfl_55_idx = 0;
+         while ( nGXsfl_55_idx < nRC_GXsfl_55 )
          {
             ReadRow0F28( ) ;
             if ( ( nRcdExists_28 != 0 ) || ( nIsMod_28 != 0 ) )
@@ -2426,7 +2428,7 @@ namespace GeneXus.Programs {
                   {
                      if ( nRcdDeleted_28 == 0 )
                      {
-                        GXCCtl = "PROJECTID_" + sGXsfl_58_idx;
+                        GXCCtl = "PROJECTID_" + sGXsfl_55_idx;
                         GX_msglist.addItem(context.GetMessage( "GXM_recdeleted", ""), 1, GXCCtl);
                         AnyError = 1;
                         GX_FocusControl = edtProjectId_Internalname;
@@ -2436,14 +2438,14 @@ namespace GeneXus.Programs {
                }
             }
             ChangePostValue( edtProjectId_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(A102ProjectId), 10, 0, ".", ""))) ;
-            ChangePostValue( "ZT_"+"Z102ProjectId_"+sGXsfl_58_idx, StringUtil.LTrim( StringUtil.NToC( (decimal)(Z102ProjectId), 10, 0, ".", ""))) ;
-            ChangePostValue( "nRcdDeleted_28_"+sGXsfl_58_idx, StringUtil.LTrim( StringUtil.NToC( (decimal)(nRcdDeleted_28), 4, 0, ".", ""))) ;
-            ChangePostValue( "nRcdExists_28_"+sGXsfl_58_idx, StringUtil.LTrim( StringUtil.NToC( (decimal)(nRcdExists_28), 4, 0, ".", ""))) ;
-            ChangePostValue( "nIsMod_28_"+sGXsfl_58_idx, StringUtil.LTrim( StringUtil.NToC( (decimal)(nIsMod_28), 4, 0, ".", ""))) ;
+            ChangePostValue( "ZT_"+"Z102ProjectId_"+sGXsfl_55_idx, StringUtil.LTrim( StringUtil.NToC( (decimal)(Z102ProjectId), 10, 0, ".", ""))) ;
+            ChangePostValue( "nRcdDeleted_28_"+sGXsfl_55_idx, StringUtil.LTrim( StringUtil.NToC( (decimal)(nRcdDeleted_28), 4, 0, ".", ""))) ;
+            ChangePostValue( "nRcdExists_28_"+sGXsfl_55_idx, StringUtil.LTrim( StringUtil.NToC( (decimal)(nRcdExists_28), 4, 0, ".", ""))) ;
+            ChangePostValue( "nIsMod_28_"+sGXsfl_55_idx, StringUtil.LTrim( StringUtil.NToC( (decimal)(nIsMod_28), 4, 0, ".", ""))) ;
             if ( nIsMod_28 != 0 )
             {
-               ChangePostValue( "PROJECTID_"+sGXsfl_58_idx+"Enabled", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtProjectId_Enabled), 5, 0, ".", ""))) ;
-               ChangePostValue( "PROJECTID_"+sGXsfl_58_idx+"Horizontalalignment", StringUtil.RTrim( edtProjectId_Horizontalalignment)) ;
+               ChangePostValue( "PROJECTID_"+sGXsfl_55_idx+"Enabled", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtProjectId_Enabled), 5, 0, ".", ""))) ;
+               ChangePostValue( "PROJECTID_"+sGXsfl_55_idx+"Horizontalalignment", StringUtil.RTrim( edtProjectId_Horizontalalignment)) ;
             }
          }
          /* Start of After( level) rules */
@@ -2624,12 +2626,12 @@ namespace GeneXus.Programs {
          if ( StringUtil.StrCmp(Gx_mode, "INS") != 0 )
          {
             edtProjectId_Enabled = 0;
-            AssignProp("", false, edtProjectId_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtProjectId_Enabled), 5, 0), !bGXsfl_58_Refreshing);
+            AssignProp("", false, edtProjectId_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtProjectId_Enabled), 5, 0), !bGXsfl_55_Refreshing);
          }
          else
          {
             edtProjectId_Enabled = 1;
-            AssignProp("", false, edtProjectId_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtProjectId_Enabled), 5, 0), !bGXsfl_58_Refreshing);
+            AssignProp("", false, edtProjectId_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtProjectId_Enabled), 5, 0), !bGXsfl_55_Refreshing);
          }
       }
 
@@ -2661,7 +2663,7 @@ namespace GeneXus.Programs {
          pr_default.execute(2, new Object[] {A102ProjectId});
          if ( (pr_default.getStatus(2) == 101) )
          {
-            GXCCtl = "PROJECTID_" + sGXsfl_58_idx;
+            GXCCtl = "PROJECTID_" + sGXsfl_55_idx;
             GX_msglist.addItem("No matching 'Project'.", "ForeignKeyNotFound", 1, GXCCtl);
             AnyError = 1;
             GX_FocusControl = edtProjectId_Internalname;
@@ -2686,7 +2688,7 @@ namespace GeneXus.Programs {
          pr_default.execute(23, new Object[] {A102ProjectId});
          if ( (pr_default.getStatus(23) == 101) )
          {
-            GXCCtl = "PROJECTID_" + sGXsfl_58_idx;
+            GXCCtl = "PROJECTID_" + sGXsfl_55_idx;
             GX_msglist.addItem("No matching 'Project'.", "ForeignKeyNotFound", 1, GXCCtl);
             AnyError = 1;
             GX_FocusControl = edtProjectId_Internalname;
@@ -3053,7 +3055,7 @@ namespace GeneXus.Programs {
       protected void DisableAttributes0F28( )
       {
          edtProjectId_Enabled = 0;
-         AssignProp("", false, edtProjectId_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtProjectId_Enabled), 5, 0), !bGXsfl_58_Refreshing);
+         AssignProp("", false, edtProjectId_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtProjectId_Enabled), 5, 0), !bGXsfl_55_Refreshing);
       }
 
       protected void send_integrity_lvl_hashes0F28( )
@@ -3064,21 +3066,21 @@ namespace GeneXus.Programs {
       {
       }
 
-      protected void SubsflControlProps_5828( )
+      protected void SubsflControlProps_5528( )
       {
-         edtProjectId_Internalname = "PROJECTID_"+sGXsfl_58_idx;
+         edtProjectId_Internalname = "PROJECTID_"+sGXsfl_55_idx;
       }
 
-      protected void SubsflControlProps_fel_5828( )
+      protected void SubsflControlProps_fel_5528( )
       {
-         edtProjectId_Internalname = "PROJECTID_"+sGXsfl_58_fel_idx;
+         edtProjectId_Internalname = "PROJECTID_"+sGXsfl_55_fel_idx;
       }
 
       protected void AddRow0F28( )
       {
-         nGXsfl_58_idx = (int)(nGXsfl_58_idx+1);
-         sGXsfl_58_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_58_idx), 4, 0), 4, "0");
-         SubsflControlProps_5828( ) ;
+         nGXsfl_55_idx = (int)(nGXsfl_55_idx+1);
+         sGXsfl_55_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_55_idx), 4, 0), 4, "0");
+         SubsflControlProps_5528( ) ;
          SendRow0F28( ) ;
       }
 
@@ -3118,7 +3120,7 @@ namespace GeneXus.Programs {
          {
             /* Report style subfile background logic. */
             subGridlevel_project_Backstyle = 1;
-            if ( ((int)((nGXsfl_58_idx) % (2))) == 0 )
+            if ( ((int)((nGXsfl_55_idx) % (2))) == 0 )
             {
                subGridlevel_project_Backcolor = (int)(0x0);
                if ( StringUtil.StrCmp(subGridlevel_project_Class, "") != 0 )
@@ -3137,22 +3139,22 @@ namespace GeneXus.Programs {
          }
          /* Subfile cell */
          /* Single line edit */
-         TempTags = " data-gxoch1=\"gx.fn.setControlValue('nIsMod_28_" + sGXsfl_58_idx + "',1);\"  onfocus=\"gx.evt.onfocus(this, 59,'',false,'" + sGXsfl_58_idx + "',58)\"";
+         TempTags = " data-gxoch1=\"gx.fn.setControlValue('nIsMod_28_" + sGXsfl_55_idx + "',1);\"  onfocus=\"gx.evt.onfocus(this, 56,'',false,'" + sGXsfl_55_idx + "',55)\"";
          ROClassString = "Attribute";
-         Gridlevel_projectRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtProjectId_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(A102ProjectId), 10, 0, ".", "")),StringUtil.LTrim( context.localUtil.Format( (decimal)(A102ProjectId), "ZZZZZZZZZ9"))," dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+TempTags+" onchange=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onblur(this,59);\"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtProjectId_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"TrnColumn",(string)"",(short)-1,(int)edtProjectId_Enabled,(short)1,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)10,(short)0,(short)0,(short)58,(short)0,(short)-1,(short)0,(bool)true,(string)"Id",(string)edtProjectId_Horizontalalignment,(bool)false,(string)""});
+         Gridlevel_projectRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtProjectId_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(A102ProjectId), 10, 0, ".", "")),StringUtil.LTrim( context.localUtil.Format( (decimal)(A102ProjectId), "ZZZZZZZZZ9"))," dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+TempTags+" onchange=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onblur(this,56);\"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtProjectId_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"TrnColumn",(string)"",(short)-1,(int)edtProjectId_Enabled,(short)1,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)10,(short)0,(short)0,(short)55,(short)0,(short)-1,(short)0,(bool)true,(string)"Id",(string)edtProjectId_Horizontalalignment,(bool)false,(string)""});
          ajax_sending_grid_row(Gridlevel_projectRow);
          send_integrity_lvl_hashes0F28( ) ;
-         GXCCtl = "Z102ProjectId_" + sGXsfl_58_idx;
+         GXCCtl = "Z102ProjectId_" + sGXsfl_55_idx;
          GxWebStd.gx_hidden_field( context, GXCCtl, StringUtil.LTrim( StringUtil.NToC( (decimal)(Z102ProjectId), 10, 0, ".", "")));
-         GXCCtl = "nRcdDeleted_28_" + sGXsfl_58_idx;
+         GXCCtl = "nRcdDeleted_28_" + sGXsfl_55_idx;
          GxWebStd.gx_hidden_field( context, GXCCtl, StringUtil.LTrim( StringUtil.NToC( (decimal)(nRcdDeleted_28), 4, 0, ".", "")));
-         GXCCtl = "nRcdExists_28_" + sGXsfl_58_idx;
+         GXCCtl = "nRcdExists_28_" + sGXsfl_55_idx;
          GxWebStd.gx_hidden_field( context, GXCCtl, StringUtil.LTrim( StringUtil.NToC( (decimal)(nRcdExists_28), 4, 0, ".", "")));
-         GXCCtl = "nIsMod_28_" + sGXsfl_58_idx;
+         GXCCtl = "nIsMod_28_" + sGXsfl_55_idx;
          GxWebStd.gx_hidden_field( context, GXCCtl, StringUtil.LTrim( StringUtil.NToC( (decimal)(nIsMod_28), 4, 0, ".", "")));
-         GXCCtl = "vMODE_" + sGXsfl_58_idx;
+         GXCCtl = "vMODE_" + sGXsfl_55_idx;
          GxWebStd.gx_hidden_field( context, GXCCtl, StringUtil.RTrim( Gx_mode));
-         GXCCtl = "vTRNCONTEXT_" + sGXsfl_58_idx;
+         GXCCtl = "vTRNCONTEXT_" + sGXsfl_55_idx;
          if ( context.isAjaxRequest( ) )
          {
             context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, GXCCtl, AV11TrnContext);
@@ -3161,24 +3163,24 @@ namespace GeneXus.Programs {
          {
             context.httpAjaxContext.ajax_rsp_assign_hidden_sdt(GXCCtl, AV11TrnContext);
          }
-         GXCCtl = "vEMPLOYEEID_" + sGXsfl_58_idx;
+         GXCCtl = "vEMPLOYEEID_" + sGXsfl_55_idx;
          GxWebStd.gx_hidden_field( context, GXCCtl, StringUtil.LTrim( StringUtil.NToC( (decimal)(AV7EmployeeId), 10, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "PROJECTID_"+sGXsfl_58_idx+"Enabled", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtProjectId_Enabled), 5, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "PROJECTID_"+sGXsfl_58_idx+"Horizontalalignment", StringUtil.RTrim( edtProjectId_Horizontalalignment));
+         GxWebStd.gx_hidden_field( context, "PROJECTID_"+sGXsfl_55_idx+"Enabled", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtProjectId_Enabled), 5, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, "PROJECTID_"+sGXsfl_55_idx+"Horizontalalignment", StringUtil.RTrim( edtProjectId_Horizontalalignment));
          ajax_sending_grid_row(null);
          Gridlevel_projectContainer.AddRow(Gridlevel_projectRow);
       }
 
       protected void ReadRow0F28( )
       {
-         nGXsfl_58_idx = (int)(nGXsfl_58_idx+1);
-         sGXsfl_58_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_58_idx), 4, 0), 4, "0");
-         SubsflControlProps_5828( ) ;
-         edtProjectId_Enabled = (int)(Math.Round(context.localUtil.CToN( cgiGet( "PROJECTID_"+sGXsfl_58_idx+"Enabled"), ".", ","), 18, MidpointRounding.ToEven));
-         edtProjectId_Horizontalalignment = cgiGet( "PROJECTID_"+sGXsfl_58_idx+"Horizontalalignment");
+         nGXsfl_55_idx = (int)(nGXsfl_55_idx+1);
+         sGXsfl_55_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_55_idx), 4, 0), 4, "0");
+         SubsflControlProps_5528( ) ;
+         edtProjectId_Enabled = (int)(Math.Round(context.localUtil.CToN( cgiGet( "PROJECTID_"+sGXsfl_55_idx+"Enabled"), ".", ","), 18, MidpointRounding.ToEven));
+         edtProjectId_Horizontalalignment = cgiGet( "PROJECTID_"+sGXsfl_55_idx+"Horizontalalignment");
          if ( ( ( context.localUtil.CToN( cgiGet( edtProjectId_Internalname), ".", ",") < Convert.ToDecimal( 0 )) ) || ( ( context.localUtil.CToN( cgiGet( edtProjectId_Internalname), ".", ",") > Convert.ToDecimal( 9999999999L )) ) )
          {
-            GXCCtl = "PROJECTID_" + sGXsfl_58_idx;
+            GXCCtl = "PROJECTID_" + sGXsfl_55_idx;
             GX_msglist.addItem(context.GetMessage( "GXM_badnum", ""), 1, GXCCtl);
             AnyError = 1;
             GX_FocusControl = edtProjectId_Internalname;
@@ -3189,13 +3191,13 @@ namespace GeneXus.Programs {
          {
             A102ProjectId = (long)(Math.Round(context.localUtil.CToN( cgiGet( edtProjectId_Internalname), ".", ","), 18, MidpointRounding.ToEven));
          }
-         GXCCtl = "Z102ProjectId_" + sGXsfl_58_idx;
+         GXCCtl = "Z102ProjectId_" + sGXsfl_55_idx;
          Z102ProjectId = (long)(Math.Round(context.localUtil.CToN( cgiGet( GXCCtl), ".", ","), 18, MidpointRounding.ToEven));
-         GXCCtl = "nRcdDeleted_28_" + sGXsfl_58_idx;
+         GXCCtl = "nRcdDeleted_28_" + sGXsfl_55_idx;
          nRcdDeleted_28 = (short)(Math.Round(context.localUtil.CToN( cgiGet( GXCCtl), ".", ","), 18, MidpointRounding.ToEven));
-         GXCCtl = "nRcdExists_28_" + sGXsfl_58_idx;
+         GXCCtl = "nRcdExists_28_" + sGXsfl_55_idx;
          nRcdExists_28 = (short)(Math.Round(context.localUtil.CToN( cgiGet( GXCCtl), ".", ","), 18, MidpointRounding.ToEven));
-         GXCCtl = "nIsMod_28_" + sGXsfl_58_idx;
+         GXCCtl = "nIsMod_28_" + sGXsfl_55_idx;
          nIsMod_28 = (short)(Math.Round(context.localUtil.CToN( cgiGet( GXCCtl), ".", ","), 18, MidpointRounding.ToEven));
       }
 
@@ -3206,16 +3208,16 @@ namespace GeneXus.Programs {
 
       protected void ConfirmValues0F0( )
       {
-         nGXsfl_58_idx = 0;
-         sGXsfl_58_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_58_idx), 4, 0), 4, "0");
-         SubsflControlProps_5828( ) ;
-         while ( nGXsfl_58_idx < nRC_GXsfl_58 )
+         nGXsfl_55_idx = 0;
+         sGXsfl_55_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_55_idx), 4, 0), 4, "0");
+         SubsflControlProps_5528( ) ;
+         while ( nGXsfl_55_idx < nRC_GXsfl_55 )
          {
-            nGXsfl_58_idx = (int)(nGXsfl_58_idx+1);
-            sGXsfl_58_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_58_idx), 4, 0), 4, "0");
-            SubsflControlProps_5828( ) ;
-            ChangePostValue( "Z102ProjectId_"+sGXsfl_58_idx, cgiGet( "ZT_"+"Z102ProjectId_"+sGXsfl_58_idx)) ;
-            DeletePostValue( "ZT_"+"Z102ProjectId_"+sGXsfl_58_idx) ;
+            nGXsfl_55_idx = (int)(nGXsfl_55_idx+1);
+            sGXsfl_55_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_55_idx), 4, 0), 4, "0");
+            SubsflControlProps_5528( ) ;
+            ChangePostValue( "Z102ProjectId_"+sGXsfl_55_idx, cgiGet( "ZT_"+"Z102ProjectId_"+sGXsfl_55_idx)) ;
+            DeletePostValue( "ZT_"+"Z102ProjectId_"+sGXsfl_55_idx) ;
          }
       }
 
@@ -3246,15 +3248,18 @@ namespace GeneXus.Programs {
          CloseStyles();
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
             enableOutput();
          }
+         context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
+         context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
+         context.AddJavascriptSource("DVelop/Bootstrap/Panel/BootstrapPanelRender.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -3325,7 +3330,7 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "IsModified", StringUtil.LTrim( StringUtil.NToC( (decimal)(IsModified), 4, 0, ".", "")));
          GxWebStd.gx_hidden_field( context, "Mode", StringUtil.RTrim( Gx_mode));
          GxWebStd.gx_hidden_field( context, "gxhash_Mode", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( Gx_mode, "@!")), context));
-         GxWebStd.gx_hidden_field( context, "nRC_GXsfl_58", StringUtil.LTrim( StringUtil.NToC( (decimal)(nGXsfl_58_idx), 8, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, "nRC_GXsfl_55", StringUtil.LTrim( StringUtil.NToC( (decimal)(nGXsfl_55_idx), 8, 0, ".", "")));
          GxWebStd.gx_hidden_field( context, "N100CompanyId", StringUtil.LTrim( StringUtil.NToC( (decimal)(A100CompanyId), 10, 0, ".", "")));
          if ( context.isAjaxRequest( ) )
          {
@@ -3356,6 +3361,18 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "COMPANYNAME", StringUtil.RTrim( A101CompanyName));
          GxWebStd.gx_hidden_field( context, "vPGMNAME", StringUtil.RTrim( AV32Pgmname));
          GxWebStd.gx_hidden_field( context, "PROJECTNAME", StringUtil.RTrim( A103ProjectName));
+         GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEATTRIBUTES_Objectcall", StringUtil.RTrim( Dvpanel_tableattributes_Objectcall));
+         GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEATTRIBUTES_Enabled", StringUtil.BoolToStr( Dvpanel_tableattributes_Enabled));
+         GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEATTRIBUTES_Width", StringUtil.RTrim( Dvpanel_tableattributes_Width));
+         GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEATTRIBUTES_Autowidth", StringUtil.BoolToStr( Dvpanel_tableattributes_Autowidth));
+         GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEATTRIBUTES_Autoheight", StringUtil.BoolToStr( Dvpanel_tableattributes_Autoheight));
+         GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEATTRIBUTES_Cls", StringUtil.RTrim( Dvpanel_tableattributes_Cls));
+         GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEATTRIBUTES_Title", StringUtil.RTrim( Dvpanel_tableattributes_Title));
+         GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEATTRIBUTES_Collapsible", StringUtil.BoolToStr( Dvpanel_tableattributes_Collapsible));
+         GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEATTRIBUTES_Collapsed", StringUtil.BoolToStr( Dvpanel_tableattributes_Collapsed));
+         GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEATTRIBUTES_Showcollapseicon", StringUtil.BoolToStr( Dvpanel_tableattributes_Showcollapseicon));
+         GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEATTRIBUTES_Iconposition", StringUtil.RTrim( Dvpanel_tableattributes_Iconposition));
+         GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEATTRIBUTES_Autoscroll", StringUtil.BoolToStr( Dvpanel_tableattributes_Autoscroll));
          GxWebStd.gx_hidden_field( context, "COMBO_PROJECTID_Objectcall", StringUtil.RTrim( Combo_projectid_Objectcall));
          GxWebStd.gx_hidden_field( context, "COMBO_PROJECTID_Cls", StringUtil.RTrim( Combo_projectid_Cls));
          GxWebStd.gx_hidden_field( context, "COMBO_PROJECTID_Enabled", StringUtil.BoolToStr( Combo_projectid_Enabled));
@@ -3514,7 +3531,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202481416103346", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202491716171365", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -3530,7 +3547,10 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("employee.js", "?202481416103349", false, true);
+         context.AddJavascriptSource("employee.js", "?202491716171367", false, true);
+         context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
+         context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
+         context.AddJavascriptSource("DVelop/Bootstrap/Panel/BootstrapPanelRender.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -3540,10 +3560,10 @@ namespace GeneXus.Programs {
       protected void init_level_properties28( )
       {
          edtProjectId_Enabled = defedtProjectId_Enabled;
-         AssignProp("", false, edtProjectId_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtProjectId_Enabled), 5, 0), !bGXsfl_58_Refreshing);
+         AssignProp("", false, edtProjectId_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtProjectId_Enabled), 5, 0), !bGXsfl_55_Refreshing);
       }
 
-      protected void StartGridControl58( )
+      protected void StartGridControl55( )
       {
          Gridlevel_projectContainer.AddObjectProperty("GridName", "Gridlevel_project");
          Gridlevel_projectContainer.AddObjectProperty("Header", subGridlevel_project_Header);
@@ -3569,7 +3589,6 @@ namespace GeneXus.Programs {
 
       protected void init_default_properties( )
       {
-         divLefttable_Internalname = "LEFTTABLE";
          edtEmployeeFirstName_Internalname = "EMPLOYEEFIRSTNAME";
          edtEmployeeLastName_Internalname = "EMPLOYEELASTNAME";
          edtEmployeeEmail_Internalname = "EMPLOYEEEMAIL";
@@ -3578,14 +3597,13 @@ namespace GeneXus.Programs {
          chkEmployeeIsManager_Internalname = "EMPLOYEEISMANAGER";
          chkEmployeeIsActive_Internalname = "EMPLOYEEISACTIVE";
          divTableattributes_Internalname = "TABLEATTRIBUTES";
+         Dvpanel_tableattributes_Internalname = "DVPANEL_TABLEATTRIBUTES";
+         divTablecontent_Internalname = "TABLECONTENT";
          edtProjectId_Internalname = "PROJECTID";
          divTableleaflevel_project_Internalname = "TABLELEAFLEVEL_PROJECT";
          bttBtntrn_enter_Internalname = "BTNTRN_ENTER";
          bttBtntrn_cancel_Internalname = "BTNTRN_CANCEL";
          bttBtntrn_delete_Internalname = "BTNTRN_DELETE";
-         divTablecontent_Internalname = "TABLECONTENT";
-         divRighttable_Internalname = "RIGHTTABLE";
-         divMaintable_Internalname = "MAINTABLE";
          divTablemain_Internalname = "TABLEMAIN";
          Combo_projectid_Internalname = "COMBO_PROJECTID";
          edtEmployeeId_Internalname = "EMPLOYEEID";
@@ -3652,7 +3670,16 @@ namespace GeneXus.Programs {
          edtEmployeeLastName_Enabled = 1;
          edtEmployeeFirstName_Jsonclick = "";
          edtEmployeeFirstName_Enabled = 1;
-         divTablecontent_Width = 0;
+         Dvpanel_tableattributes_Autoscroll = Convert.ToBoolean( 0);
+         Dvpanel_tableattributes_Iconposition = "Right";
+         Dvpanel_tableattributes_Showcollapseicon = Convert.ToBoolean( 0);
+         Dvpanel_tableattributes_Collapsed = Convert.ToBoolean( 0);
+         Dvpanel_tableattributes_Collapsible = Convert.ToBoolean( 0);
+         Dvpanel_tableattributes_Title = "Employee Information";
+         Dvpanel_tableattributes_Cls = "PanelCard_GrayTitle";
+         Dvpanel_tableattributes_Autoheight = Convert.ToBoolean( -1);
+         Dvpanel_tableattributes_Autowidth = Convert.ToBoolean( 0);
+         Dvpanel_tableattributes_Width = "100%";
          divLayoutmaintable_Class = "Table";
          edtProjectId_Horizontalalignment = "end";
          context.GX_msglist.DisplayMode = 1;
@@ -3911,8 +3938,8 @@ namespace GeneXus.Programs {
          GxWebStd.set_html_headers( context, 0, "", "");
          Gx_mode = "INS";
          AssignAttri("", false, "Gx_mode", Gx_mode);
-         SubsflControlProps_5828( ) ;
-         while ( nGXsfl_58_idx <= nRC_GXsfl_58 )
+         SubsflControlProps_5528( ) ;
+         while ( nGXsfl_55_idx <= nRC_GXsfl_55 )
          {
             standaloneNotModal( ) ;
             standaloneModal( ) ;
@@ -3921,9 +3948,9 @@ namespace GeneXus.Programs {
             init_web_controls( ) ;
             dynload_actions( ) ;
             SendRow0F28( ) ;
-            nGXsfl_58_idx = (int)(nGXsfl_58_idx+1);
-            sGXsfl_58_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_58_idx), 4, 0), 4, "0");
-            SubsflControlProps_5828( ) ;
+            nGXsfl_55_idx = (int)(nGXsfl_55_idx+1);
+            sGXsfl_55_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_55_idx), 4, 0), 4, "0");
+            SubsflControlProps_5528( ) ;
          }
          AddString( context.httpAjaxContext.getJSONContainerResponse( Gridlevel_projectContainer)) ;
          /* End function gxnrGridlevel_project_newrow */
@@ -3949,14 +3976,14 @@ namespace GeneXus.Programs {
          }
          chkEmployeeIsManager.Name = "EMPLOYEEISMANAGER";
          chkEmployeeIsManager.WebTags = "";
-         chkEmployeeIsManager.Caption = "";
+         chkEmployeeIsManager.Caption = "Is HR Manager";
          AssignProp("", false, chkEmployeeIsManager_Internalname, "TitleCaption", chkEmployeeIsManager.Caption, true);
          chkEmployeeIsManager.CheckedValue = "false";
          A110EmployeeIsManager = StringUtil.StrToBool( StringUtil.BoolToStr( A110EmployeeIsManager));
          AssignAttri("", false, "A110EmployeeIsManager", A110EmployeeIsManager);
          chkEmployeeIsActive.Name = "EMPLOYEEISACTIVE";
          chkEmployeeIsActive.WebTags = "";
-         chkEmployeeIsActive.Caption = "";
+         chkEmployeeIsActive.Caption = "Is Active";
          AssignProp("", false, chkEmployeeIsActive_Internalname, "TitleCaption", chkEmployeeIsActive.Caption, true);
          chkEmployeeIsActive.CheckedValue = "false";
          if ( IsIns( ) && (false==A112EmployeeIsActive) )
@@ -4096,42 +4123,41 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("ENTER","{handler:'UserMainFullajax',iparms:[{postForm:true},{av:'Gx_mode',fld:'vMODE',pic:'@!',hsh:true},{av:'AV7EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9',hsh:true},{av:'dynCompanyId'},{av:'A100CompanyId',fld:'COMPANYID',pic:'ZZZZZZZZZ9'},{av:'A110EmployeeIsManager',fld:'EMPLOYEEISMANAGER',pic:''},{av:'A112EmployeeIsActive',fld:'EMPLOYEEISACTIVE',pic:''}]");
-         setEventMetadata("ENTER",",oparms:[{av:'dynCompanyId'},{av:'A100CompanyId',fld:'COMPANYID',pic:'ZZZZZZZZZ9'},{av:'A110EmployeeIsManager',fld:'EMPLOYEEISMANAGER',pic:''},{av:'A112EmployeeIsActive',fld:'EMPLOYEEISACTIVE',pic:''}]}");
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'Gx_mode',fld:'vMODE',pic:'@!',hsh:true},{av:'AV11TrnContext',fld:'vTRNCONTEXT',pic:'',hsh:true},{av:'AV7EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9',hsh:true},{av:'A106EmployeeId',fld:'EMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'A178EmployeeVacationDaysSetDate',fld:'EMPLOYEEVACATIONDAYSSETDATE',pic:''},{av:'dynCompanyId'},{av:'A100CompanyId',fld:'COMPANYID',pic:'ZZZZZZZZZ9'},{av:'A110EmployeeIsManager',fld:'EMPLOYEEISMANAGER',pic:''},{av:'A112EmployeeIsActive',fld:'EMPLOYEEISACTIVE',pic:''}]");
-         setEventMetadata("REFRESH",",oparms:[{av:'dynCompanyId'},{av:'A100CompanyId',fld:'COMPANYID',pic:'ZZZZZZZZZ9'},{av:'A110EmployeeIsManager',fld:'EMPLOYEEISMANAGER',pic:''},{av:'A112EmployeeIsActive',fld:'EMPLOYEEISACTIVE',pic:''}]}");
-         setEventMetadata("AFTER TRN","{handler:'E130F2',iparms:[{av:'Gx_mode',fld:'vMODE',pic:'@!',hsh:true},{av:'AV11TrnContext',fld:'vTRNCONTEXT',pic:'',hsh:true},{av:'dynCompanyId'},{av:'A100CompanyId',fld:'COMPANYID',pic:'ZZZZZZZZZ9'},{av:'A110EmployeeIsManager',fld:'EMPLOYEEISMANAGER',pic:''},{av:'A112EmployeeIsActive',fld:'EMPLOYEEISACTIVE',pic:''}]");
-         setEventMetadata("AFTER TRN",",oparms:[{av:'dynCompanyId'},{av:'A100CompanyId',fld:'COMPANYID',pic:'ZZZZZZZZZ9'},{av:'A110EmployeeIsManager',fld:'EMPLOYEEISMANAGER',pic:''},{av:'A112EmployeeIsActive',fld:'EMPLOYEEISACTIVE',pic:''}]}");
-         setEventMetadata("COMBO_PROJECTID.ONOPTIONCLICKED","{handler:'E120F2',iparms:[{av:'Combo_projectid_Caption',ctrl:'COMBO_PROJECTID',prop:'Caption'},{av:'dynCompanyId'},{av:'A100CompanyId',fld:'COMPANYID',pic:'ZZZZZZZZZ9'},{av:'A110EmployeeIsManager',fld:'EMPLOYEEISMANAGER',pic:''},{av:'A112EmployeeIsActive',fld:'EMPLOYEEISACTIVE',pic:''}]");
-         setEventMetadata("COMBO_PROJECTID.ONOPTIONCLICKED",",oparms:[{av:'dynCompanyId'},{av:'A100CompanyId',fld:'COMPANYID',pic:'ZZZZZZZZZ9'},{av:'A110EmployeeIsManager',fld:'EMPLOYEEISMANAGER',pic:''},{av:'A112EmployeeIsActive',fld:'EMPLOYEEISACTIVE',pic:''}]}");
-         setEventMetadata("VALID_EMPLOYEEFIRSTNAME","{handler:'Valid_Employeefirstname',iparms:[{av:'dynCompanyId'},{av:'A100CompanyId',fld:'COMPANYID',pic:'ZZZZZZZZZ9'},{av:'A110EmployeeIsManager',fld:'EMPLOYEEISMANAGER',pic:''},{av:'A112EmployeeIsActive',fld:'EMPLOYEEISACTIVE',pic:''}]");
-         setEventMetadata("VALID_EMPLOYEEFIRSTNAME",",oparms:[{av:'dynCompanyId'},{av:'A100CompanyId',fld:'COMPANYID',pic:'ZZZZZZZZZ9'},{av:'A110EmployeeIsManager',fld:'EMPLOYEEISMANAGER',pic:''},{av:'A112EmployeeIsActive',fld:'EMPLOYEEISACTIVE',pic:''}]}");
-         setEventMetadata("VALID_EMPLOYEELASTNAME","{handler:'Valid_Employeelastname',iparms:[{av:'dynCompanyId'},{av:'A100CompanyId',fld:'COMPANYID',pic:'ZZZZZZZZZ9'},{av:'A110EmployeeIsManager',fld:'EMPLOYEEISMANAGER',pic:''},{av:'A112EmployeeIsActive',fld:'EMPLOYEEISACTIVE',pic:''}]");
-         setEventMetadata("VALID_EMPLOYEELASTNAME",",oparms:[{av:'dynCompanyId'},{av:'A100CompanyId',fld:'COMPANYID',pic:'ZZZZZZZZZ9'},{av:'A110EmployeeIsManager',fld:'EMPLOYEEISMANAGER',pic:''},{av:'A112EmployeeIsActive',fld:'EMPLOYEEISACTIVE',pic:''}]}");
-         setEventMetadata("VALID_EMPLOYEEEMAIL","{handler:'Valid_Employeeemail',iparms:[{av:'A109EmployeeEmail',fld:'EMPLOYEEEMAIL',pic:''},{av:'A106EmployeeId',fld:'EMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'dynCompanyId'},{av:'A100CompanyId',fld:'COMPANYID',pic:'ZZZZZZZZZ9'},{av:'A110EmployeeIsManager',fld:'EMPLOYEEISMANAGER',pic:''},{av:'A112EmployeeIsActive',fld:'EMPLOYEEISACTIVE',pic:''}]");
-         setEventMetadata("VALID_EMPLOYEEEMAIL",",oparms:[{av:'dynCompanyId'},{av:'A100CompanyId',fld:'COMPANYID',pic:'ZZZZZZZZZ9'},{av:'A110EmployeeIsManager',fld:'EMPLOYEEISMANAGER',pic:''},{av:'A112EmployeeIsActive',fld:'EMPLOYEEISACTIVE',pic:''}]}");
-         setEventMetadata("VALID_EMPLOYEEVACTIONDAYS","{handler:'Valid_Employeevactiondays',iparms:[{av:'Gx_mode',fld:'vMODE',pic:'@!',hsh:true},{av:'A146EmployeeVactionDays',fld:'EMPLOYEEVACTIONDAYS',pic:'Z9.9'},{av:'Gx_BScreen',fld:'vGXBSCREEN',pic:'9'},{av:'A106EmployeeId',fld:'EMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'A178EmployeeVacationDaysSetDate',fld:'EMPLOYEEVACATIONDAYSSETDATE',pic:''},{av:'Gx_date',fld:'vTODAY',pic:''},{av:'A147EmployeeBalance',fld:'EMPLOYEEBALANCE',pic:'Z9.9'},{av:'dynCompanyId'},{av:'A100CompanyId',fld:'COMPANYID',pic:'ZZZZZZZZZ9'},{av:'A110EmployeeIsManager',fld:'EMPLOYEEISMANAGER',pic:''},{av:'A112EmployeeIsActive',fld:'EMPLOYEEISACTIVE',pic:''}]");
-         setEventMetadata("VALID_EMPLOYEEVACTIONDAYS",",oparms:[{av:'A147EmployeeBalance',fld:'EMPLOYEEBALANCE',pic:'Z9.9'},{av:'dynCompanyId'},{av:'A100CompanyId',fld:'COMPANYID',pic:'ZZZZZZZZZ9'},{av:'A110EmployeeIsManager',fld:'EMPLOYEEISMANAGER',pic:''},{av:'A112EmployeeIsActive',fld:'EMPLOYEEISACTIVE',pic:''}]}");
-         setEventMetadata("VALID_COMPANYID","{handler:'Valid_Companyid',iparms:[{av:'A101CompanyName',fld:'COMPANYNAME',pic:''},{av:'dynCompanyId'},{av:'A100CompanyId',fld:'COMPANYID',pic:'ZZZZZZZZZ9'},{av:'A110EmployeeIsManager',fld:'EMPLOYEEISMANAGER',pic:''},{av:'A112EmployeeIsActive',fld:'EMPLOYEEISACTIVE',pic:''}]");
-         setEventMetadata("VALID_COMPANYID",",oparms:[{av:'A101CompanyName',fld:'COMPANYNAME',pic:''},{av:'dynCompanyId'},{av:'A100CompanyId',fld:'COMPANYID',pic:'ZZZZZZZZZ9'},{av:'A110EmployeeIsManager',fld:'EMPLOYEEISMANAGER',pic:''},{av:'A112EmployeeIsActive',fld:'EMPLOYEEISACTIVE',pic:''}]}");
-         setEventMetadata("VALID_EMPLOYEEID","{handler:'Valid_Employeeid',iparms:[{av:'dynCompanyId'},{av:'A100CompanyId',fld:'COMPANYID',pic:'ZZZZZZZZZ9'},{av:'A110EmployeeIsManager',fld:'EMPLOYEEISMANAGER',pic:''},{av:'A112EmployeeIsActive',fld:'EMPLOYEEISACTIVE',pic:''}]");
-         setEventMetadata("VALID_EMPLOYEEID",",oparms:[{av:'dynCompanyId'},{av:'A100CompanyId',fld:'COMPANYID',pic:'ZZZZZZZZZ9'},{av:'A110EmployeeIsManager',fld:'EMPLOYEEISMANAGER',pic:''},{av:'A112EmployeeIsActive',fld:'EMPLOYEEISACTIVE',pic:''}]}");
-         setEventMetadata("VALID_PROJECTID","{handler:'Valid_Projectid',iparms:[{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'A103ProjectName',fld:'PROJECTNAME',pic:''},{av:'dynCompanyId'},{av:'A100CompanyId',fld:'COMPANYID',pic:'ZZZZZZZZZ9'},{av:'A110EmployeeIsManager',fld:'EMPLOYEEISMANAGER',pic:''},{av:'A112EmployeeIsActive',fld:'EMPLOYEEISACTIVE',pic:''}]");
-         setEventMetadata("VALID_PROJECTID",",oparms:[{av:'A103ProjectName',fld:'PROJECTNAME',pic:''},{av:'dynCompanyId'},{av:'A100CompanyId',fld:'COMPANYID',pic:'ZZZZZZZZZ9'},{av:'A110EmployeeIsManager',fld:'EMPLOYEEISMANAGER',pic:''},{av:'A112EmployeeIsActive',fld:'EMPLOYEEISACTIVE',pic:''}]}");
+         setEventMetadata("ENTER","""{"handler":"UserMainFullajax","iparms":[{"postForm":true},{"av":"Gx_mode","fld":"vMODE","pic":"@!","hsh":true},{"av":"AV7EmployeeId","fld":"vEMPLOYEEID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"dynCompanyId"},{"av":"A100CompanyId","fld":"COMPANYID","pic":"ZZZZZZZZZ9"},{"av":"A110EmployeeIsManager","fld":"EMPLOYEEISMANAGER"},{"av":"A112EmployeeIsActive","fld":"EMPLOYEEISACTIVE"}]""");
+         setEventMetadata("ENTER",""","oparms":[{"av":"dynCompanyId"},{"av":"A100CompanyId","fld":"COMPANYID","pic":"ZZZZZZZZZ9"},{"av":"A110EmployeeIsManager","fld":"EMPLOYEEISMANAGER"},{"av":"A112EmployeeIsActive","fld":"EMPLOYEEISACTIVE"}]}""");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"Gx_mode","fld":"vMODE","pic":"@!","hsh":true},{"av":"AV11TrnContext","fld":"vTRNCONTEXT","hsh":true},{"av":"AV7EmployeeId","fld":"vEMPLOYEEID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"A106EmployeeId","fld":"EMPLOYEEID","pic":"ZZZZZZZZZ9"},{"av":"A178EmployeeVacationDaysSetDate","fld":"EMPLOYEEVACATIONDAYSSETDATE"},{"av":"dynCompanyId"},{"av":"A100CompanyId","fld":"COMPANYID","pic":"ZZZZZZZZZ9"},{"av":"A110EmployeeIsManager","fld":"EMPLOYEEISMANAGER"},{"av":"A112EmployeeIsActive","fld":"EMPLOYEEISACTIVE"}]""");
+         setEventMetadata("REFRESH",""","oparms":[{"av":"dynCompanyId"},{"av":"A100CompanyId","fld":"COMPANYID","pic":"ZZZZZZZZZ9"},{"av":"A110EmployeeIsManager","fld":"EMPLOYEEISMANAGER"},{"av":"A112EmployeeIsActive","fld":"EMPLOYEEISACTIVE"}]}""");
+         setEventMetadata("AFTER TRN","""{"handler":"E130F2","iparms":[{"av":"Gx_mode","fld":"vMODE","pic":"@!","hsh":true},{"av":"AV11TrnContext","fld":"vTRNCONTEXT","hsh":true},{"av":"dynCompanyId"},{"av":"A100CompanyId","fld":"COMPANYID","pic":"ZZZZZZZZZ9"},{"av":"A110EmployeeIsManager","fld":"EMPLOYEEISMANAGER"},{"av":"A112EmployeeIsActive","fld":"EMPLOYEEISACTIVE"}]""");
+         setEventMetadata("AFTER TRN",""","oparms":[{"av":"dynCompanyId"},{"av":"A100CompanyId","fld":"COMPANYID","pic":"ZZZZZZZZZ9"},{"av":"A110EmployeeIsManager","fld":"EMPLOYEEISMANAGER"},{"av":"A112EmployeeIsActive","fld":"EMPLOYEEISACTIVE"}]}""");
+         setEventMetadata("COMBO_PROJECTID.ONOPTIONCLICKED","""{"handler":"E120F2","iparms":[{"av":"Combo_projectid_Caption","ctrl":"COMBO_PROJECTID","prop":"Caption"},{"av":"dynCompanyId"},{"av":"A100CompanyId","fld":"COMPANYID","pic":"ZZZZZZZZZ9"},{"av":"A110EmployeeIsManager","fld":"EMPLOYEEISMANAGER"},{"av":"A112EmployeeIsActive","fld":"EMPLOYEEISACTIVE"}]""");
+         setEventMetadata("COMBO_PROJECTID.ONOPTIONCLICKED",""","oparms":[{"av":"dynCompanyId"},{"av":"A100CompanyId","fld":"COMPANYID","pic":"ZZZZZZZZZ9"},{"av":"A110EmployeeIsManager","fld":"EMPLOYEEISMANAGER"},{"av":"A112EmployeeIsActive","fld":"EMPLOYEEISACTIVE"}]}""");
+         setEventMetadata("VALID_EMPLOYEEFIRSTNAME","""{"handler":"Valid_Employeefirstname","iparms":[{"av":"dynCompanyId"},{"av":"A100CompanyId","fld":"COMPANYID","pic":"ZZZZZZZZZ9"},{"av":"A110EmployeeIsManager","fld":"EMPLOYEEISMANAGER"},{"av":"A112EmployeeIsActive","fld":"EMPLOYEEISACTIVE"}]""");
+         setEventMetadata("VALID_EMPLOYEEFIRSTNAME",""","oparms":[{"av":"dynCompanyId"},{"av":"A100CompanyId","fld":"COMPANYID","pic":"ZZZZZZZZZ9"},{"av":"A110EmployeeIsManager","fld":"EMPLOYEEISMANAGER"},{"av":"A112EmployeeIsActive","fld":"EMPLOYEEISACTIVE"}]}""");
+         setEventMetadata("VALID_EMPLOYEELASTNAME","""{"handler":"Valid_Employeelastname","iparms":[{"av":"dynCompanyId"},{"av":"A100CompanyId","fld":"COMPANYID","pic":"ZZZZZZZZZ9"},{"av":"A110EmployeeIsManager","fld":"EMPLOYEEISMANAGER"},{"av":"A112EmployeeIsActive","fld":"EMPLOYEEISACTIVE"}]""");
+         setEventMetadata("VALID_EMPLOYEELASTNAME",""","oparms":[{"av":"dynCompanyId"},{"av":"A100CompanyId","fld":"COMPANYID","pic":"ZZZZZZZZZ9"},{"av":"A110EmployeeIsManager","fld":"EMPLOYEEISMANAGER"},{"av":"A112EmployeeIsActive","fld":"EMPLOYEEISACTIVE"}]}""");
+         setEventMetadata("VALID_EMPLOYEEEMAIL","""{"handler":"Valid_Employeeemail","iparms":[{"av":"A109EmployeeEmail","fld":"EMPLOYEEEMAIL"},{"av":"A106EmployeeId","fld":"EMPLOYEEID","pic":"ZZZZZZZZZ9"},{"av":"dynCompanyId"},{"av":"A100CompanyId","fld":"COMPANYID","pic":"ZZZZZZZZZ9"},{"av":"A110EmployeeIsManager","fld":"EMPLOYEEISMANAGER"},{"av":"A112EmployeeIsActive","fld":"EMPLOYEEISACTIVE"}]""");
+         setEventMetadata("VALID_EMPLOYEEEMAIL",""","oparms":[{"av":"dynCompanyId"},{"av":"A100CompanyId","fld":"COMPANYID","pic":"ZZZZZZZZZ9"},{"av":"A110EmployeeIsManager","fld":"EMPLOYEEISMANAGER"},{"av":"A112EmployeeIsActive","fld":"EMPLOYEEISACTIVE"}]}""");
+         setEventMetadata("VALID_EMPLOYEEVACTIONDAYS","""{"handler":"Valid_Employeevactiondays","iparms":[{"av":"Gx_mode","fld":"vMODE","pic":"@!","hsh":true},{"av":"A146EmployeeVactionDays","fld":"EMPLOYEEVACTIONDAYS","pic":"Z9.9"},{"av":"Gx_BScreen","fld":"vGXBSCREEN","pic":"9"},{"av":"A106EmployeeId","fld":"EMPLOYEEID","pic":"ZZZZZZZZZ9"},{"av":"A178EmployeeVacationDaysSetDate","fld":"EMPLOYEEVACATIONDAYSSETDATE"},{"av":"Gx_date","fld":"vTODAY"},{"av":"A147EmployeeBalance","fld":"EMPLOYEEBALANCE","pic":"Z9.9"},{"av":"dynCompanyId"},{"av":"A100CompanyId","fld":"COMPANYID","pic":"ZZZZZZZZZ9"},{"av":"A110EmployeeIsManager","fld":"EMPLOYEEISMANAGER"},{"av":"A112EmployeeIsActive","fld":"EMPLOYEEISACTIVE"}]""");
+         setEventMetadata("VALID_EMPLOYEEVACTIONDAYS",""","oparms":[{"av":"A147EmployeeBalance","fld":"EMPLOYEEBALANCE","pic":"Z9.9"},{"av":"dynCompanyId"},{"av":"A100CompanyId","fld":"COMPANYID","pic":"ZZZZZZZZZ9"},{"av":"A110EmployeeIsManager","fld":"EMPLOYEEISMANAGER"},{"av":"A112EmployeeIsActive","fld":"EMPLOYEEISACTIVE"}]}""");
+         setEventMetadata("VALID_COMPANYID","""{"handler":"Valid_Companyid","iparms":[{"av":"A101CompanyName","fld":"COMPANYNAME"},{"av":"dynCompanyId"},{"av":"A100CompanyId","fld":"COMPANYID","pic":"ZZZZZZZZZ9"},{"av":"A110EmployeeIsManager","fld":"EMPLOYEEISMANAGER"},{"av":"A112EmployeeIsActive","fld":"EMPLOYEEISACTIVE"}]""");
+         setEventMetadata("VALID_COMPANYID",""","oparms":[{"av":"A101CompanyName","fld":"COMPANYNAME"},{"av":"dynCompanyId"},{"av":"A100CompanyId","fld":"COMPANYID","pic":"ZZZZZZZZZ9"},{"av":"A110EmployeeIsManager","fld":"EMPLOYEEISMANAGER"},{"av":"A112EmployeeIsActive","fld":"EMPLOYEEISACTIVE"}]}""");
+         setEventMetadata("VALID_EMPLOYEEID","""{"handler":"Valid_Employeeid","iparms":[{"av":"dynCompanyId"},{"av":"A100CompanyId","fld":"COMPANYID","pic":"ZZZZZZZZZ9"},{"av":"A110EmployeeIsManager","fld":"EMPLOYEEISMANAGER"},{"av":"A112EmployeeIsActive","fld":"EMPLOYEEISACTIVE"}]""");
+         setEventMetadata("VALID_EMPLOYEEID",""","oparms":[{"av":"dynCompanyId"},{"av":"A100CompanyId","fld":"COMPANYID","pic":"ZZZZZZZZZ9"},{"av":"A110EmployeeIsManager","fld":"EMPLOYEEISMANAGER"},{"av":"A112EmployeeIsActive","fld":"EMPLOYEEISACTIVE"}]}""");
+         setEventMetadata("VALID_PROJECTID","""{"handler":"Valid_Projectid","iparms":[{"av":"A102ProjectId","fld":"PROJECTID","pic":"ZZZZZZZZZ9"},{"av":"A103ProjectName","fld":"PROJECTNAME"},{"av":"dynCompanyId"},{"av":"A100CompanyId","fld":"COMPANYID","pic":"ZZZZZZZZZ9"},{"av":"A110EmployeeIsManager","fld":"EMPLOYEEISMANAGER"},{"av":"A112EmployeeIsActive","fld":"EMPLOYEEISACTIVE"}]""");
+         setEventMetadata("VALID_PROJECTID",""","oparms":[{"av":"A103ProjectName","fld":"PROJECTNAME"},{"av":"dynCompanyId"},{"av":"A100CompanyId","fld":"COMPANYID","pic":"ZZZZZZZZZ9"},{"av":"A110EmployeeIsManager","fld":"EMPLOYEEISMANAGER"},{"av":"A112EmployeeIsActive","fld":"EMPLOYEEISACTIVE"}]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
       }
 
-      protected void CloseOpenCursors( )
+      protected override void CloseCursors( )
       {
          pr_default.close(1);
          pr_default.close(27);
@@ -4150,7 +4176,6 @@ namespace GeneXus.Programs {
          Z109EmployeeEmail = "";
          Z178EmployeeVacationDaysSetDate = DateTime.MinValue;
          Combo_projectid_Caption = "";
-         scmdbuf = "";
          gxfirstwebparm = "";
          gxfirstwebparm_bkp = "";
          A109EmployeeEmail = "";
@@ -4165,6 +4190,7 @@ namespace GeneXus.Programs {
          GX_FocusControl = "";
          ClassString = "";
          StyleString = "";
+         ucDvpanel_tableattributes = new GXUserControl();
          TempTags = "";
          bttBtntrn_enter_Jsonclick = "";
          bttBtntrn_cancel_Jsonclick = "";
@@ -4180,6 +4206,9 @@ namespace GeneXus.Programs {
          A101CompanyName = "";
          AV32Pgmname = "";
          A103ProjectName = "";
+         Dvpanel_tableattributes_Objectcall = "";
+         Dvpanel_tableattributes_Class = "";
+         Dvpanel_tableattributes_Height = "";
          Combo_projectid_Objectcall = "";
          Combo_projectid_Class = "";
          Combo_projectid_Icontype = "";
@@ -4436,17 +4465,14 @@ namespace GeneXus.Programs {
       private short GxWebError ;
       private short Gx_BScreen ;
       private short gxcookieaux ;
-      private short IsConfirmed ;
-      private short IsModified ;
       private short AnyError ;
+      private short IsModified ;
+      private short IsConfirmed ;
       private short nKeyPressed ;
-      private short initialized ;
       private short nBlankRcdCount28 ;
       private short RcdFound28 ;
       private short nBlankRcdUsr28 ;
       private short RcdFound16 ;
-      private short GX_JID ;
-      private short nIsDirty_16 ;
       private short nIsDirty_28 ;
       private short subGridlevel_project_Backcolorstyle ;
       private short subGridlevel_project_Backstyle ;
@@ -4455,10 +4481,9 @@ namespace GeneXus.Programs {
       private short subGridlevel_project_Allowhovering ;
       private short subGridlevel_project_Allowcollapsing ;
       private short subGridlevel_project_Collapsed ;
-      private int nRC_GXsfl_58 ;
-      private int nGXsfl_58_idx=1 ;
+      private int nRC_GXsfl_55 ;
+      private int nGXsfl_55_idx=1 ;
       private int trnEnded ;
-      private int divTablecontent_Width ;
       private int edtEmployeeFirstName_Enabled ;
       private int edtEmployeeLastName_Enabled ;
       private int edtEmployeeEmail_Enabled ;
@@ -4478,6 +4503,7 @@ namespace GeneXus.Programs {
       private int edtEmployeeBalance_Visible ;
       private int edtProjectId_Enabled ;
       private int fRowAdded ;
+      private int Dvpanel_tableattributes_Gxcontroltype ;
       private int Combo_projectid_Datalistupdateminimumcharacters ;
       private int Combo_projectid_Gxcontroltype ;
       private int AV33GXV1 ;
@@ -4513,7 +4539,6 @@ namespace GeneXus.Programs {
       private string Z107EmployeeFirstName ;
       private string Z108EmployeeLastName ;
       private string Combo_projectid_Caption ;
-      private string scmdbuf ;
       private string gxfirstwebparm ;
       private string gxfirstwebparm_bkp ;
       private string A107EmployeeFirstName ;
@@ -4524,7 +4549,7 @@ namespace GeneXus.Programs {
       private string PreviousCaption ;
       private string GX_FocusControl ;
       private string edtEmployeeFirstName_Internalname ;
-      private string sGXsfl_58_idx="0001" ;
+      private string sGXsfl_55_idx="0001" ;
       private string edtProjectId_Horizontalalignment ;
       private string edtProjectId_Internalname ;
       private string dynCompanyId_Internalname ;
@@ -4533,9 +4558,12 @@ namespace GeneXus.Programs {
       private string divTablemain_Internalname ;
       private string ClassString ;
       private string StyleString ;
-      private string divMaintable_Internalname ;
-      private string divLefttable_Internalname ;
       private string divTablecontent_Internalname ;
+      private string Dvpanel_tableattributes_Width ;
+      private string Dvpanel_tableattributes_Cls ;
+      private string Dvpanel_tableattributes_Title ;
+      private string Dvpanel_tableattributes_Iconposition ;
+      private string Dvpanel_tableattributes_Internalname ;
       private string divTableattributes_Internalname ;
       private string TempTags ;
       private string edtEmployeeFirstName_Jsonclick ;
@@ -4555,7 +4583,6 @@ namespace GeneXus.Programs {
       private string bttBtntrn_cancel_Jsonclick ;
       private string bttBtntrn_delete_Internalname ;
       private string bttBtntrn_delete_Jsonclick ;
-      private string divRighttable_Internalname ;
       private string divHtml_bottomauxiliarcontrols_Internalname ;
       private string Combo_projectid_Cls ;
       private string Combo_projectid_Internalname ;
@@ -4575,6 +4602,9 @@ namespace GeneXus.Programs {
       private string A101CompanyName ;
       private string AV32Pgmname ;
       private string A103ProjectName ;
+      private string Dvpanel_tableattributes_Objectcall ;
+      private string Dvpanel_tableattributes_Class ;
+      private string Dvpanel_tableattributes_Height ;
       private string Combo_projectid_Objectcall ;
       private string Combo_projectid_Class ;
       private string Combo_projectid_Icontype ;
@@ -4615,7 +4645,7 @@ namespace GeneXus.Programs {
       private string AV28Value ;
       private string Z101CompanyName ;
       private string Z103ProjectName ;
-      private string sGXsfl_58_fel_idx="0001" ;
+      private string sGXsfl_55_fel_idx="0001" ;
       private string subGridlevel_project_Class ;
       private string subGridlevel_project_Linesclass ;
       private string ROClassString ;
@@ -4633,11 +4663,20 @@ namespace GeneXus.Programs {
       private bool entryPointCalled ;
       private bool toggleJsOutput ;
       private bool wbErr ;
-      private bool bGXsfl_58_Refreshing=false ;
+      private bool bGXsfl_55_Refreshing=false ;
       private bool A110EmployeeIsManager ;
       private bool A112EmployeeIsActive ;
+      private bool Dvpanel_tableattributes_Autowidth ;
+      private bool Dvpanel_tableattributes_Autoheight ;
+      private bool Dvpanel_tableattributes_Collapsible ;
+      private bool Dvpanel_tableattributes_Collapsed ;
+      private bool Dvpanel_tableattributes_Showcollapseicon ;
+      private bool Dvpanel_tableattributes_Autoscroll ;
       private bool Combo_projectid_Isgriditem ;
       private bool Combo_projectid_Emptyitem ;
+      private bool Dvpanel_tableattributes_Enabled ;
+      private bool Dvpanel_tableattributes_Showheader ;
+      private bool Dvpanel_tableattributes_Visible ;
       private bool Combo_projectid_Enabled ;
       private bool Combo_projectid_Visible ;
       private bool Combo_projectid_Allowmultipleselection ;
@@ -4662,12 +4701,19 @@ namespace GeneXus.Programs {
       private GXWebGrid Gridlevel_projectContainer ;
       private GXWebRow Gridlevel_projectRow ;
       private GXWebColumn Gridlevel_projectColumn ;
+      private GXUserControl ucDvpanel_tableattributes ;
       private GXUserControl ucCombo_projectid ;
+      private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private GXCombobox dynCompanyId ;
       private GXCheckbox chkEmployeeIsManager ;
       private GXCheckbox chkEmployeeIsActive ;
+      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item> AV15ProjectId_Data ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV8WWPContext ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext AV11TrnContext ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext_Attribute AV14TrnContextAtt ;
+      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item> GXt_objcol_SdtDVB_SDTComboData_Item1 ;
       private IDataStoreProvider pr_default ;
       private string[] T000F7_A101CompanyName ;
       private long[] T000F8_A106EmployeeId ;
@@ -4741,12 +4787,6 @@ namespace GeneXus.Programs {
       private string[] T000F34_A101CompanyName ;
       private string[] T000F35_A109EmployeeEmail ;
       private IDataStoreProvider pr_gam ;
-      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item> AV15ProjectId_Data ;
-      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item> GXt_objcol_SdtDVB_SDTComboData_Item1 ;
-      private GXWebForm Form ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext AV11TrnContext ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext_Attribute AV14TrnContextAtt ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV8WWPContext ;
    }
 
    public class employee__gam : DataStoreHelperBase, IDataStoreHelper
@@ -4829,6 +4869,32 @@ namespace GeneXus.Programs {
   {
      if ( def == null )
      {
+        Object[] prmT000F2;
+        prmT000F2 = new Object[] {
+        new ParDef("EmployeeId",GXType.Int64,10,0) ,
+        new ParDef("ProjectId",GXType.Int64,10,0)
+        };
+        Object[] prmT000F3;
+        prmT000F3 = new Object[] {
+        new ParDef("EmployeeId",GXType.Int64,10,0) ,
+        new ParDef("ProjectId",GXType.Int64,10,0)
+        };
+        Object[] prmT000F4;
+        prmT000F4 = new Object[] {
+        new ParDef("ProjectId",GXType.Int64,10,0)
+        };
+        Object[] prmT000F5;
+        prmT000F5 = new Object[] {
+        new ParDef("EmployeeId",GXType.Int64,10,0)
+        };
+        Object[] prmT000F6;
+        prmT000F6 = new Object[] {
+        new ParDef("EmployeeId",GXType.Int64,10,0)
+        };
+        Object[] prmT000F7;
+        prmT000F7 = new Object[] {
+        new ParDef("CompanyId",GXType.Int64,10,0)
+        };
         Object[] prmT000F8;
         prmT000F8 = new Object[] {
         new ParDef("EmployeeId",GXType.Int64,10,0)
@@ -4838,10 +4904,6 @@ namespace GeneXus.Programs {
         new ParDef("EmployeeEmail",GXType.VarChar,100,0) ,
         new ParDef("EmployeeId",GXType.Int64,10,0)
         };
-        Object[] prmT000F7;
-        prmT000F7 = new Object[] {
-        new ParDef("CompanyId",GXType.Int64,10,0)
-        };
         Object[] prmT000F10;
         prmT000F10 = new Object[] {
         new ParDef("CompanyId",GXType.Int64,10,0)
@@ -4850,20 +4912,12 @@ namespace GeneXus.Programs {
         prmT000F11 = new Object[] {
         new ParDef("EmployeeId",GXType.Int64,10,0)
         };
-        Object[] prmT000F6;
-        prmT000F6 = new Object[] {
-        new ParDef("EmployeeId",GXType.Int64,10,0)
-        };
         Object[] prmT000F12;
         prmT000F12 = new Object[] {
         new ParDef("EmployeeId",GXType.Int64,10,0)
         };
         Object[] prmT000F13;
         prmT000F13 = new Object[] {
-        new ParDef("EmployeeId",GXType.Int64,10,0)
-        };
-        Object[] prmT000F5;
-        prmT000F5 = new Object[] {
         new ParDef("EmployeeId",GXType.Int64,10,0)
         };
         Object[] prmT000F14;
@@ -4902,6 +4956,10 @@ namespace GeneXus.Programs {
         prmT000F17 = new Object[] {
         new ParDef("EmployeeId",GXType.Int64,10,0)
         };
+        Object[] prmT000F18;
+        prmT000F18 = new Object[] {
+        new ParDef("CompanyId",GXType.Int64,10,0)
+        };
         Object[] prmT000F19;
         prmT000F19 = new Object[] {
         new ParDef("EmployeeId",GXType.Int64,10,0)
@@ -4926,26 +4984,12 @@ namespace GeneXus.Programs {
         new ParDef("EmployeeId",GXType.Int64,10,0) ,
         new ParDef("ProjectId",GXType.Int64,10,0)
         };
-        Object[] prmT000F4;
-        prmT000F4 = new Object[] {
-        new ParDef("ProjectId",GXType.Int64,10,0)
-        };
         Object[] prmT000F25;
         prmT000F25 = new Object[] {
         new ParDef("ProjectId",GXType.Int64,10,0)
         };
         Object[] prmT000F26;
         prmT000F26 = new Object[] {
-        new ParDef("EmployeeId",GXType.Int64,10,0) ,
-        new ParDef("ProjectId",GXType.Int64,10,0)
-        };
-        Object[] prmT000F3;
-        prmT000F3 = new Object[] {
-        new ParDef("EmployeeId",GXType.Int64,10,0) ,
-        new ParDef("ProjectId",GXType.Int64,10,0)
-        };
-        Object[] prmT000F2;
-        prmT000F2 = new Object[] {
         new ParDef("EmployeeId",GXType.Int64,10,0) ,
         new ParDef("ProjectId",GXType.Int64,10,0)
         };
@@ -4957,6 +5001,10 @@ namespace GeneXus.Programs {
         Object[] prmT000F28;
         prmT000F28 = new Object[] {
         new ParDef("EmployeeId",GXType.Int64,10,0) ,
+        new ParDef("ProjectId",GXType.Int64,10,0)
+        };
+        Object[] prmT000F29;
+        prmT000F29 = new Object[] {
         new ParDef("ProjectId",GXType.Int64,10,0)
         };
         Object[] prmT000F30;
@@ -4983,14 +5031,6 @@ namespace GeneXus.Programs {
         prmT000F35 = new Object[] {
         new ParDef("EmployeeEmail",GXType.VarChar,100,0) ,
         new ParDef("EmployeeId",GXType.Int64,10,0)
-        };
-        Object[] prmT000F18;
-        prmT000F18 = new Object[] {
-        new ParDef("CompanyId",GXType.Int64,10,0)
-        };
-        Object[] prmT000F29;
-        prmT000F29 = new Object[] {
-        new ParDef("ProjectId",GXType.Int64,10,0)
         };
         def= new CursorDef[] {
             new CursorDef("T000F2", "SELECT EmployeeId, ProjectId FROM EmployeeProject WHERE EmployeeId = :EmployeeId AND ProjectId = :ProjectId  FOR UPDATE OF EmployeeProject NOWAIT",true, GxErrorMask.GX_NOMASK, false, this,prmT000F2,1, GxCacheFrequency.OFF ,true,false )

@@ -1,7 +1,7 @@
 /*
 				   File: type_SdtWWP_SDTNotificationsDataSample_WWP_SDTNotificationsDataSampleItem
 			Description: WWP_SDTNotificationsDataSample
-				 Author: Nemo 🐠 for C# (.NET) version 18.0.6.177934
+				 Author: Nemo 🐠 for C# (.NET) version 18.0.10.184260
 		   Program type: Callable routine
 			  Main DBMS: 
 */
@@ -225,6 +225,14 @@ namespace GeneXus.Programs.wwpbaseobjects
 
 		#endregion
 
+		#region Static Type Properties
+
+		[XmlIgnore]
+		private static GXTypeInfo _typeProps;
+		protected override GXTypeInfo TypeInfo { get { return _typeProps; } set { _typeProps = value; } }
+
+		#endregion
+
 		#region Initialization
 
 		public void initialize( )
@@ -272,6 +280,7 @@ namespace GeneXus.Programs.wwpbaseobjects
 		#endregion
 	}
 	#region Rest interface
+	[GxJsonSerialization("wrapped")]
 	[DataContract(Name=@"WWP_SDTNotificationsDataSampleItem", Namespace="YTT_version4")]
 	public class SdtWWP_SDTNotificationsDataSample_WWP_SDTNotificationsDataSampleItem_RESTInterface : GxGenericCollectionItem<SdtWWP_SDTNotificationsDataSample_WWP_SDTNotificationsDataSampleItem>, System.Web.SessionState.IRequiresSessionState
 	{
@@ -336,11 +345,11 @@ namespace GeneXus.Programs.wwpbaseobjects
 		public  string gxTpr_Notificationdatetime
 		{
 			get { 
-				return DateTimeUtil.TToC2( sdt.gxTpr_Notificationdatetime);
+				return DateTimeUtil.TToC2( sdt.gxTpr_Notificationdatetime,context);
 
 			}
 			set { 
-				sdt.gxTpr_Notificationdatetime = DateTimeUtil.CToT2(value);
+				sdt.gxTpr_Notificationdatetime = DateTimeUtil.CToT2(value,context);
 			}
 		}
 

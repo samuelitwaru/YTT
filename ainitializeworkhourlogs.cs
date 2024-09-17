@@ -64,7 +64,7 @@ namespace GeneXus.Programs {
          }
          if ( GxWebError == 0 )
          {
-            executePrivate();
+            ExecutePrivate();
          }
          cleanup();
       }
@@ -90,32 +90,15 @@ namespace GeneXus.Programs {
       public void execute( )
       {
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
       public void executeSubmit( )
       {
-         ainitializeworkhourlogs objainitializeworkhourlogs;
-         objainitializeworkhourlogs = new ainitializeworkhourlogs();
-         objainitializeworkhourlogs.context.SetSubmitInitialConfig(context);
-         objainitializeworkhourlogs.initialize();
-         Submit( executePrivateCatch,objainitializeworkhourlogs);
+         SubmitImpl();
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((ainitializeworkhourlogs)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -124,7 +107,7 @@ namespace GeneXus.Programs {
          S111 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          AV12DescriptionSet = (GxSimpleCollection<string>)(GxRegex.Split(AV11Descriptions,","));
@@ -189,7 +172,7 @@ namespace GeneXus.Programs {
             context.Redirect( context.wjLoc );
             context.wjLoc = "";
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void S111( )
@@ -215,7 +198,7 @@ namespace GeneXus.Programs {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          base.cleanup();
          if ( IsMain )
          {
@@ -224,17 +207,12 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
          GXKey = "";
          gxfirstwebparm = "";
          AV11Descriptions = "";
          AV12DescriptionSet = new GxSimpleCollection<string>();
-         scmdbuf = "";
          P005B2_A106EmployeeId = new long[1] ;
          AV8Date = DateTime.MinValue;
          Gx_date = DateTime.MinValue;
@@ -280,7 +258,6 @@ namespace GeneXus.Programs {
       private long A113HolidayId ;
       private string GXKey ;
       private string gxfirstwebparm ;
-      private string scmdbuf ;
       private DateTime AV8Date ;
       private DateTime Gx_date ;
       private DateTime A115HolidayStartDate ;
@@ -289,18 +266,18 @@ namespace GeneXus.Programs {
       private string AV11Descriptions ;
       private string AV18SDate ;
       private string AV10Description ;
-      private GxSimpleCollection<DateTime> AV21HolidayDates ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GxSimpleCollection<string> AV12DescriptionSet ;
       private IDataStoreProvider pr_default ;
       private long[] P005B2_A106EmployeeId ;
+      private GxSimpleCollection<DateTime> AV21HolidayDates ;
+      private SdtWorkHourLog AV22WorkHourLog ;
+      private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> AV23Messages ;
+      private GeneXus.Utils.SdtMessages_Message AV24Message ;
       private DateTime[] P005B3_A115HolidayStartDate ;
       private long[] P005B3_A113HolidayId ;
       private IDataStoreProvider pr_gam ;
-      private GxSimpleCollection<string> AV12DescriptionSet ;
-      private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> AV23Messages ;
-      private GeneXus.Utils.SdtMessages_Message AV24Message ;
-      private SdtWorkHourLog AV22WorkHourLog ;
    }
 
    public class ainitializeworkhourlogs__gam : DataStoreHelperBase, IDataStoreHelper

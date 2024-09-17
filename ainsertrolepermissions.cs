@@ -26,20 +26,15 @@ namespace GeneXus.Programs {
    {
       public static int Main( string[] args )
       {
-         try
-         {
-            GeneXus.Configuration.Config.ParseArgs(ref args);
-            return new ainsertrolepermissions().executeCmdLine(args); ;
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-            return 1 ;
-         }
+         return new ainsertrolepermissions().MainImpl(args); ;
       }
 
       public int executeCmdLine( string[] args )
+      {
+         return ExecuteCmdLine(args); ;
+      }
+
+      protected override int ExecuteCmdLine( string[] args )
       {
          execute();
          return GX.GXRuntime.ExitCode ;
@@ -82,32 +77,15 @@ namespace GeneXus.Programs {
       public void execute( )
       {
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
       public void executeSubmit( )
       {
-         ainsertrolepermissions objainsertrolepermissions;
-         objainsertrolepermissions = new ainsertrolepermissions();
-         objainsertrolepermissions.context.SetSubmitInitialConfig(context);
-         objainsertrolepermissions.initialize();
-         Submit( executePrivateCatch,objainsertrolepermissions);
+         SubmitImpl();
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((ainsertrolepermissions)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -139,7 +117,7 @@ namespace GeneXus.Programs {
          }
          AV9PermString = AV12Perms.ToJSonString(false);
          AV20Count = (short)(AV16GAMPermissions.Count);
-         this.cleanup();
+         cleanup();
       }
 
       public override int getOutputType( )
@@ -149,16 +127,12 @@ namespace GeneXus.Programs {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -197,18 +171,18 @@ namespace GeneXus.Programs {
       private string AV26EmployeePerms ;
       private string AV27PManagerPerms ;
       private string AV9PermString ;
-      private GeneXus.Programs.genexussecurity.SdtGAMRepository AV18GAMRepository ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GxSimpleCollection<string> AV12Perms ;
+      private GeneXus.Programs.genexussecurity.SdtGAMRole AV8GAMRole ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV10GAMErrorCollection ;
+      private GeneXus.Programs.genexussecurity.SdtGAMRepository AV18GAMRepository ;
+      private GeneXus.Programs.genexussecurity.SdtGAMUser AV14GAMUser ;
+      private GeneXus.Programs.genexussecurity.SdtGAMPermissionFilter AV15GAMPermissionFilter ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMPermission> AV16GAMPermissions ;
+      private GeneXus.Programs.genexussecurity.SdtGAMPermission AV13GAMPermission ;
       private IDataStoreProvider pr_default ;
       private IDataStoreProvider pr_gam ;
-      private GxSimpleCollection<string> AV12Perms ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV10GAMErrorCollection ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMPermission> AV16GAMPermissions ;
-      private GeneXus.Programs.genexussecurity.SdtGAMRole AV8GAMRole ;
-      private GeneXus.Programs.genexussecurity.SdtGAMUser AV14GAMUser ;
-      private GeneXus.Programs.genexussecurity.SdtGAMPermission AV13GAMPermission ;
-      private GeneXus.Programs.genexussecurity.SdtGAMPermissionFilter AV15GAMPermissionFilter ;
    }
 
    public class ainsertrolepermissions__gam : DataStoreHelperBase, IDataStoreHelper

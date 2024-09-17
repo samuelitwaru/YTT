@@ -41,7 +41,7 @@ namespace GeneXus.Programs {
          this.AV18gxid = aP0_gxid;
          this.AV22GXM1PasswordChangePanel_Level_DetailSdt = new SdtPasswordChangePanel_Level_DetailSdt(context) ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_GXM1PasswordChangePanel_Level_DetailSdt=this.AV22GXM1PasswordChangePanel_Level_DetailSdt;
       }
 
@@ -54,30 +54,13 @@ namespace GeneXus.Programs {
       public void executeSubmit( int aP0_gxid ,
                                  out SdtPasswordChangePanel_Level_DetailSdt aP1_GXM1PasswordChangePanel_Level_DetailSdt )
       {
-         passwordchangepanel_level_detail objpasswordchangepanel_level_detail;
-         objpasswordchangepanel_level_detail = new passwordchangepanel_level_detail();
-         objpasswordchangepanel_level_detail.AV18gxid = aP0_gxid;
-         objpasswordchangepanel_level_detail.AV22GXM1PasswordChangePanel_Level_DetailSdt = new SdtPasswordChangePanel_Level_DetailSdt(context) ;
-         objpasswordchangepanel_level_detail.context.SetSubmitInitialConfig(context);
-         objpasswordchangepanel_level_detail.initialize();
-         Submit( executePrivateCatch,objpasswordchangepanel_level_detail);
+         this.AV18gxid = aP0_gxid;
+         this.AV22GXM1PasswordChangePanel_Level_DetailSdt = new SdtPasswordChangePanel_Level_DetailSdt(context) ;
+         SubmitImpl();
          aP1_GXM1PasswordChangePanel_Level_DetailSdt=this.AV22GXM1PasswordChangePanel_Level_DetailSdt;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((passwordchangepanel_level_detail)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -100,7 +83,7 @@ namespace GeneXus.Programs {
                }
                else
                {
-                  this.cleanup();
+                  cleanup();
                   if (true) return;
                }
             }
@@ -124,21 +107,17 @@ namespace GeneXus.Programs {
          AV22GXM1PasswordChangePanel_Level_DetailSdt.gxTpr_Username = AV17UserName;
          AV22GXM1PasswordChangePanel_Level_DetailSdt.gxTpr_Gxdynprop = "[ "+Gxdynprop+" ]";
          Gxdynprop = "";
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -163,10 +142,10 @@ namespace GeneXus.Programs {
       private string AV8NewPassword ;
       private string AV9ConfirmPassword ;
       private string Gxdynprop ;
-      private SdtPasswordChangePanel_Level_DetailSdt aP1_GXM1PasswordChangePanel_Level_DetailSdt ;
       private IGxSession Gxwebsession ;
-      private GeneXus.Programs.genexussecurity.SdtGAMUser AV10User ;
       private SdtPasswordChangePanel_Level_DetailSdt AV22GXM1PasswordChangePanel_Level_DetailSdt ;
+      private GeneXus.Programs.genexussecurity.SdtGAMUser AV10User ;
+      private SdtPasswordChangePanel_Level_DetailSdt aP1_GXM1PasswordChangePanel_Level_DetailSdt ;
    }
 
 }

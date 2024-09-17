@@ -307,6 +307,20 @@ namespace GeneXus.Programs.wwpbaseobjects {
          return false ;
       }
 
+      [XmlIgnore]
+      private static GXTypeInfo _typeProps;
+      protected override GXTypeInfo TypeInfo
+      {
+         get {
+            return _typeProps ;
+         }
+
+         set {
+            _typeProps = value ;
+         }
+
+      }
+
       public void initialize( )
       {
          gxTv_SdtUserCustomizations_Usercustomizationsid = "";
@@ -341,6 +355,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
    }
 
    [DataContract(Name = @"WWPBaseObjects\UserCustomizations", Namespace = "YTT_version4")]
+   [GxJsonSerialization("default")]
    public class SdtUserCustomizations_RESTInterface : GxGenericCollectionItem<GeneXus.Programs.wwpbaseobjects.SdtUserCustomizations>
    {
       public SdtUserCustomizations_RESTInterface( ) : base()
@@ -434,6 +449,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
    }
 
    [DataContract(Name = @"WWPBaseObjects\UserCustomizations", Namespace = "YTT_version4")]
+   [GxJsonSerialization("default")]
    public class SdtUserCustomizations_RESTLInterface : GxGenericCollectionItem<GeneXus.Programs.wwpbaseobjects.SdtUserCustomizations>
    {
       public SdtUserCustomizations_RESTLInterface( ) : base()

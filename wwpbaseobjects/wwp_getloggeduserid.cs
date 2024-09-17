@@ -40,7 +40,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       {
          this.AV8WWPUserExtendedId = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_WWPUserExtendedId=this.AV8WWPUserExtendedId;
       }
 
@@ -52,48 +52,27 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       public void executeSubmit( out string aP0_WWPUserExtendedId )
       {
-         wwp_getloggeduserid objwwp_getloggeduserid;
-         objwwp_getloggeduserid = new wwp_getloggeduserid();
-         objwwp_getloggeduserid.AV8WWPUserExtendedId = "" ;
-         objwwp_getloggeduserid.context.SetSubmitInitialConfig(context);
-         objwwp_getloggeduserid.initialize();
-         Submit( executePrivateCatch,objwwp_getloggeduserid);
+         this.AV8WWPUserExtendedId = "" ;
+         SubmitImpl();
          aP0_WWPUserExtendedId=this.AV8WWPUserExtendedId;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwp_getloggeduserid)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
          AV8WWPUserExtendedId = new GeneXus.Programs.genexussecurity.SdtGAMUser(context).getid();
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )

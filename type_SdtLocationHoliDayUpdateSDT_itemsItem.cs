@@ -1,7 +1,7 @@
 /*
 				   File: type_SdtLocationHoliDayUpdateSDT_itemsItem
 			Description: items
-				 Author: Nemo 🐠 for C# (.NET) version 18.0.6.177934
+				 Author: Nemo 🐠 for C# (.NET) version 18.0.10.184260
 		   Program type: Callable routine
 			  Main DBMS: 
 */
@@ -638,6 +638,14 @@ namespace GeneXus.Programs
 
 		#endregion
 
+		#region Static Type Properties
+
+		[XmlIgnore]
+		private static GXTypeInfo _typeProps;
+		protected override GXTypeInfo TypeInfo { get { return _typeProps; } set { _typeProps = value; } }
+
+		#endregion
+
 		#region Initialization
 
 		public void initialize( )
@@ -748,6 +756,7 @@ namespace GeneXus.Programs
 		#endregion
 	}
 	#region Rest interface
+	[GxJsonSerialization("wrapped")]
 	[DataContract(Name=@"LocationHoliDayUpdateSDT.itemsItem", Namespace="YTT_version4")]
 	public class SdtLocationHoliDayUpdateSDT_itemsItem_RESTInterface : GxGenericCollectionItem<SdtLocationHoliDayUpdateSDT_itemsItem>, System.Web.SessionState.IRequiresSessionState
 	{
@@ -824,11 +833,11 @@ namespace GeneXus.Programs
 		public  string gxTpr_Created
 		{
 			get { 
-				return DateTimeUtil.TToC2( sdt.gxTpr_Created);
+				return DateTimeUtil.TToC2( sdt.gxTpr_Created,context);
 
 			}
 			set { 
-				sdt.gxTpr_Created = DateTimeUtil.CToT2(value);
+				sdt.gxTpr_Created = DateTimeUtil.CToT2(value,context);
 			}
 		}
 
@@ -836,11 +845,11 @@ namespace GeneXus.Programs
 		public  string gxTpr_Updated
 		{
 			get { 
-				return DateTimeUtil.TToC2( sdt.gxTpr_Updated);
+				return DateTimeUtil.TToC2( sdt.gxTpr_Updated,context);
 
 			}
 			set { 
-				sdt.gxTpr_Updated = DateTimeUtil.CToT2(value);
+				sdt.gxTpr_Updated = DateTimeUtil.CToT2(value,context);
 			}
 		}
 

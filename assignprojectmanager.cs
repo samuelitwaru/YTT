@@ -48,35 +48,18 @@ namespace GeneXus.Programs {
          this.AV14ProjectManagerIdVariable = aP0_ProjectManagerIdVariable;
          this.AV11ProjectId = aP1_ProjectId;
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
       public void executeSubmit( long aP0_ProjectManagerIdVariable ,
                                  long aP1_ProjectId )
       {
-         assignprojectmanager objassignprojectmanager;
-         objassignprojectmanager = new assignprojectmanager();
-         objassignprojectmanager.AV14ProjectManagerIdVariable = aP0_ProjectManagerIdVariable;
-         objassignprojectmanager.AV11ProjectId = aP1_ProjectId;
-         objassignprojectmanager.context.SetSubmitInitialConfig(context);
-         objassignprojectmanager.initialize();
-         Submit( executePrivateCatch,objassignprojectmanager);
+         this.AV14ProjectManagerIdVariable = aP0_ProjectManagerIdVariable;
+         this.AV11ProjectId = aP1_ProjectId;
+         SubmitImpl();
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((assignprojectmanager)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -93,21 +76,17 @@ namespace GeneXus.Programs {
                context.CommitDataStores("assignprojectmanager",pr_default);
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -130,11 +109,11 @@ namespace GeneXus.Programs {
       private long AV11ProjectId ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
-      private IDataStoreProvider pr_default ;
-      private IDataStoreProvider pr_gam ;
       private SdtEmployee AV8Employee ;
       private SdtEmployee_Project AV13EmployeeProject ;
       private SdtProject AV10Project ;
+      private IDataStoreProvider pr_default ;
+      private IDataStoreProvider pr_gam ;
    }
 
    public class assignprojectmanager__gam : DataStoreHelperBase, IDataStoreHelper

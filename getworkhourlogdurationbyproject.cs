@@ -58,7 +58,7 @@ namespace GeneXus.Programs {
          this.AV23ProjectIds = aP5_ProjectIds;
          this.AV21SDTProjects = new GXBaseCollection<SdtSDTProject>( context, "SDTProject", "YTT_version4") ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_FromDate=this.AV12FromDate;
          aP1_ToDate=this.AV11ToDate;
          aP2_ProjectId=this.AV13ProjectId;
@@ -87,18 +87,14 @@ namespace GeneXus.Programs {
                                  ref GxSimpleCollection<long> aP5_ProjectIds ,
                                  out GXBaseCollection<SdtSDTProject> aP6_SDTProjects )
       {
-         getworkhourlogdurationbyproject objgetworkhourlogdurationbyproject;
-         objgetworkhourlogdurationbyproject = new getworkhourlogdurationbyproject();
-         objgetworkhourlogdurationbyproject.AV12FromDate = aP0_FromDate;
-         objgetworkhourlogdurationbyproject.AV11ToDate = aP1_ToDate;
-         objgetworkhourlogdurationbyproject.AV13ProjectId = aP2_ProjectId;
-         objgetworkhourlogdurationbyproject.AV8CompanyLocationId = aP3_CompanyLocationId;
-         objgetworkhourlogdurationbyproject.AV15EmployeeId = aP4_EmployeeId;
-         objgetworkhourlogdurationbyproject.AV23ProjectIds = aP5_ProjectIds;
-         objgetworkhourlogdurationbyproject.AV21SDTProjects = new GXBaseCollection<SdtSDTProject>( context, "SDTProject", "YTT_version4") ;
-         objgetworkhourlogdurationbyproject.context.SetSubmitInitialConfig(context);
-         objgetworkhourlogdurationbyproject.initialize();
-         Submit( executePrivateCatch,objgetworkhourlogdurationbyproject);
+         this.AV12FromDate = aP0_FromDate;
+         this.AV11ToDate = aP1_ToDate;
+         this.AV13ProjectId = aP2_ProjectId;
+         this.AV8CompanyLocationId = aP3_CompanyLocationId;
+         this.AV15EmployeeId = aP4_EmployeeId;
+         this.AV23ProjectIds = aP5_ProjectIds;
+         this.AV21SDTProjects = new GXBaseCollection<SdtSDTProject>( context, "SDTProject", "YTT_version4") ;
+         SubmitImpl();
          aP0_FromDate=this.AV12FromDate;
          aP1_ToDate=this.AV11ToDate;
          aP2_ProjectId=this.AV13ProjectId;
@@ -108,20 +104,7 @@ namespace GeneXus.Programs {
          aP6_SDTProjects=this.AV21SDTProjects;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((getworkhourlogdurationbyproject)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -220,12 +203,12 @@ namespace GeneXus.Programs {
             pr_default.readNext(3);
          }
          pr_default.close(3);
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -233,14 +216,9 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
          AV21SDTProjects = new GXBaseCollection<SdtSDTProject>( context, "SDTProject", "YTT_version4");
-         scmdbuf = "";
          P008V2_A157CompanyLocationId = new long[1] ;
          P008V3_A157CompanyLocationId = new long[1] ;
          P008V3_A100CompanyId = new long[1] ;
@@ -295,7 +273,6 @@ namespace GeneXus.Programs {
       private long A100CompanyId ;
       private long A106EmployeeId ;
       private long A102ProjectId ;
-      private string scmdbuf ;
       private string A103ProjectName ;
       private string GXt_char1 ;
       private DateTime AV12FromDate ;
@@ -307,26 +284,27 @@ namespace GeneXus.Programs {
       private bool n40000GXC1 ;
       private bool n40001GXC2 ;
       private string AV16StringEmployeeId ;
-      private GxSimpleCollection<long> AV13ProjectId ;
-      private GxSimpleCollection<long> AV8CompanyLocationId ;
-      private GxSimpleCollection<long> AV15EmployeeId ;
-      private GxSimpleCollection<long> AV23ProjectIds ;
-      private GxSimpleCollection<long> AV28Dsworkhourlogs_1_companylocationid ;
-      private GxSimpleCollection<long> AV29Dsworkhourlogs_2_employeeid ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private DateTime aP0_FromDate ;
       private DateTime aP1_ToDate ;
+      private GxSimpleCollection<long> AV13ProjectId ;
       private GxSimpleCollection<long> aP2_ProjectId ;
+      private GxSimpleCollection<long> AV8CompanyLocationId ;
       private GxSimpleCollection<long> aP3_CompanyLocationId ;
+      private GxSimpleCollection<long> AV15EmployeeId ;
       private GxSimpleCollection<long> aP4_EmployeeId ;
+      private GxSimpleCollection<long> AV23ProjectIds ;
       private GxSimpleCollection<long> aP5_ProjectIds ;
+      private GXBaseCollection<SdtSDTProject> AV21SDTProjects ;
       private IDataStoreProvider pr_default ;
       private long[] P008V2_A157CompanyLocationId ;
       private long[] P008V3_A157CompanyLocationId ;
       private long[] P008V3_A100CompanyId ;
       private long[] P008V4_A100CompanyId ;
       private long[] P008V4_A106EmployeeId ;
+      private GxSimpleCollection<long> AV28Dsworkhourlogs_1_companylocationid ;
+      private GxSimpleCollection<long> AV29Dsworkhourlogs_2_employeeid ;
       private long[] P008V6_A100CompanyId ;
       private DateTime[] P008V6_A119WorkHourLogDate ;
       private long[] P008V6_A102ProjectId ;
@@ -338,9 +316,8 @@ namespace GeneXus.Programs {
       private bool[] P008V6_n40000GXC1 ;
       private short[] P008V6_A40001GXC2 ;
       private bool[] P008V6_n40001GXC2 ;
-      private GXBaseCollection<SdtSDTProject> aP6_SDTProjects ;
-      private GXBaseCollection<SdtSDTProject> AV21SDTProjects ;
       private SdtSDTProject AV22SDTProject ;
+      private GXBaseCollection<SdtSDTProject> aP6_SDTProjects ;
    }
 
    public class getworkhourlogdurationbyproject__default : DataStoreHelperBase, IDataStoreHelper

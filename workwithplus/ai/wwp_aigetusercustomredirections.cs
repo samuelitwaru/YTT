@@ -40,7 +40,7 @@ namespace GeneXus.Programs.workwithplus.ai {
       {
          this.AV9AICustomRedirections = new GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData>( context, "WWP_AIListData", "YTT_version4") ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_AICustomRedirections=this.AV9AICustomRedirections;
       }
 
@@ -52,47 +52,26 @@ namespace GeneXus.Programs.workwithplus.ai {
 
       public void executeSubmit( out GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData> aP0_AICustomRedirections )
       {
-         wwp_aigetusercustomredirections objwwp_aigetusercustomredirections;
-         objwwp_aigetusercustomredirections = new wwp_aigetusercustomredirections();
-         objwwp_aigetusercustomredirections.AV9AICustomRedirections = new GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData>( context, "WWP_AIListData", "YTT_version4") ;
-         objwwp_aigetusercustomredirections.context.SetSubmitInitialConfig(context);
-         objwwp_aigetusercustomredirections.initialize();
-         Submit( executePrivateCatch,objwwp_aigetusercustomredirections);
+         this.AV9AICustomRedirections = new GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData>( context, "WWP_AIListData", "YTT_version4") ;
+         SubmitImpl();
          aP0_AICustomRedirections=this.AV9AICustomRedirections;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwp_aigetusercustomredirections)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -101,8 +80,8 @@ namespace GeneXus.Programs.workwithplus.ai {
          /* GeneXus formulas. */
       }
 
-      private GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData> aP0_AICustomRedirections ;
       private GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData> AV9AICustomRedirections ;
+      private GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData> aP0_AICustomRedirections ;
    }
 
 }

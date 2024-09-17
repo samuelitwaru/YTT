@@ -45,10 +45,10 @@ namespace GeneXus.Programs {
       {
          this.AV48ActivationKey = aP0_ActivationKey;
          this.AV45GamGuid = aP1_GamGuid;
-         executePrivate();
+         ExecuteImpl();
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -139,11 +139,8 @@ namespace GeneXus.Programs {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITWEB( ) ;
          if ( ! isAjaxCallMode( ) )
          {
@@ -174,7 +171,7 @@ namespace GeneXus.Programs {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override short ExecuteStartEvent( )
@@ -218,10 +215,10 @@ namespace GeneXus.Programs {
          CloseStyles();
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
@@ -531,7 +528,7 @@ namespace GeneXus.Programs {
          {
             if ( context.ExposeMetadata( ) )
             {
-               Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+               Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
             }
          }
          Form.Meta.addItem("description", "Email Verify", 0) ;
@@ -970,7 +967,7 @@ namespace GeneXus.Programs {
          }
          else
          {
-            CallWebObject(formatLink("login.aspx") );
+            CallWebObject(formatLink("gamexamplelogin.aspx") );
             context.wjLocDisableFrm = 1;
          }
       }
@@ -1009,7 +1006,7 @@ namespace GeneXus.Programs {
          PA502( ) ;
          WS502( ) ;
          WE502( ) ;
-         this.cleanup();
+         cleanup();
          context.SetWrapped(false);
          context.GX_msglist = BackMsgLst;
          return "";
@@ -1030,7 +1027,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202481416571515", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202491613202955", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1046,7 +1043,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("emailverify.js", "?202481416571520", false, true);
+         context.AddJavascriptSource("emailverify.js", "?202491613202958", false, true);
          /* End function include_jscripts */
       }
 
@@ -1108,27 +1105,19 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'AV45GamGuid',fld:'vGAMGUID',pic:'',hsh:true},{av:'AV48ActivationKey',fld:'vACTIVATIONKEY',pic:'',hsh:true}]");
-         setEventMetadata("REFRESH",",oparms:[]}");
-         setEventMetadata("ENTER","{handler:'E12502',iparms:[{av:'AV49NewPassword',fld:'vNEWPASSWORD',pic:''},{av:'AV50ConfirmPassword',fld:'vCONFIRMPASSWORD',pic:''},{av:'AV45GamGuid',fld:'vGAMGUID',pic:'',hsh:true},{av:'AV48ActivationKey',fld:'vACTIVATIONKEY',pic:'',hsh:true}]");
-         setEventMetadata("ENTER",",oparms:[]}");
-         setEventMetadata("'DO SETPASSWORD'","{handler:'E13502',iparms:[{av:'AV49NewPassword',fld:'vNEWPASSWORD',pic:''},{av:'AV50ConfirmPassword',fld:'vCONFIRMPASSWORD',pic:''},{av:'AV45GamGuid',fld:'vGAMGUID',pic:'',hsh:true},{av:'AV48ActivationKey',fld:'vACTIVATIONKEY',pic:'',hsh:true}]");
-         setEventMetadata("'DO SETPASSWORD'",",oparms:[]}");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"AV45GamGuid","fld":"vGAMGUID","hsh":true},{"av":"AV48ActivationKey","fld":"vACTIVATIONKEY","hsh":true}]}""");
+         setEventMetadata("ENTER","""{"handler":"E12502","iparms":[{"av":"AV49NewPassword","fld":"vNEWPASSWORD"},{"av":"AV50ConfirmPassword","fld":"vCONFIRMPASSWORD"},{"av":"AV45GamGuid","fld":"vGAMGUID","hsh":true},{"av":"AV48ActivationKey","fld":"vACTIVATIONKEY","hsh":true}]}""");
+         setEventMetadata("'DO SETPASSWORD'","""{"handler":"E13502","iparms":[{"av":"AV49NewPassword","fld":"vNEWPASSWORD"},{"av":"AV50ConfirmPassword","fld":"vCONFIRMPASSWORD"},{"av":"AV45GamGuid","fld":"vGAMGUID","hsh":true},{"av":"AV48ActivationKey","fld":"vACTIVATIONKEY","hsh":true}]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -1160,7 +1149,6 @@ namespace GeneXus.Programs {
          EvtGridId = "";
          EvtRowId = "";
          sEvtType = "";
-         scmdbuf = "";
          H00503_A40000EmployeeId = new long[1] ;
          H00503_n40000EmployeeId = new bool[] {false} ;
          AV44GAMUser = new GeneXus.Programs.genexussecurity.SdtGAMUser(context);
@@ -1191,7 +1179,6 @@ namespace GeneXus.Programs {
 
       private short nGotPars ;
       private short GxWebError ;
-      private short initialized ;
       private short gxajaxcallmode ;
       private short wbEnd ;
       private short wbStart ;
@@ -1250,7 +1237,6 @@ namespace GeneXus.Programs {
       private string EvtGridId ;
       private string EvtRowId ;
       private string sEvtType ;
-      private string scmdbuf ;
       private bool entryPointCalled ;
       private bool toggleJsOutput ;
       private bool wbLoad ;
@@ -1263,22 +1249,22 @@ namespace GeneXus.Programs {
       private bool AV51ChangePwdOK ;
       private bool AV23LoginOK ;
       private string AV50ConfirmPassword ;
+      private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private IDataStoreProvider pr_default ;
       private long[] H00503_A40000EmployeeId ;
       private bool[] H00503_n40000EmployeeId ;
+      private GeneXus.Programs.genexussecurity.SdtGAMUser AV44GAMUser ;
+      private GeneXus.Programs.genexussecurity.SdtGAMLoginAdditionalParameters AV5AdditionalParameter ;
       private long[] H00505_A40000EmployeeId ;
       private bool[] H00505_n40000EmployeeId ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV11Errors ;
+      private SdtEmployee AV52Employee ;
+      private GeneXus.Programs.genexussecurity.SdtGAMError AV10Error ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
       private IDataStoreProvider pr_gam ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV11Errors ;
-      private GXWebForm Form ;
-      private GeneXus.Programs.genexussecurity.SdtGAMLoginAdditionalParameters AV5AdditionalParameter ;
-      private GeneXus.Programs.genexussecurity.SdtGAMError AV10Error ;
-      private GeneXus.Programs.genexussecurity.SdtGAMUser AV44GAMUser ;
-      private SdtEmployee AV52Employee ;
    }
 
    public class emailverify__gam : DataStoreHelperBase, IDataStoreHelper

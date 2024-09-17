@@ -48,10 +48,10 @@ namespace GeneXus.Programs.wwpbaseobjects {
       {
          this.AV9WizardSteps = aP0_WizardSteps;
          this.AV6CurrentStep = aP1_CurrentStep;
-         executePrivate();
+         ExecuteImpl();
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -206,11 +206,8 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITWEB( ) ;
          if ( ! isAjaxCallMode( ) )
          {
@@ -254,7 +251,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void RenderHtmlHeaders( )
@@ -285,10 +282,10 @@ namespace GeneXus.Programs.wwpbaseobjects {
          }
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
@@ -590,7 +587,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
             {
                if ( context.ExposeMetadata( ) )
                {
-                  Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+                  Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
                }
             }
             Form.Meta.addItem("description", "Wizard Steps Bullet WC.", 0) ;
@@ -717,6 +714,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
                                        if ( ! wbErr )
                                        {
                                           dynload_actions( ) ;
+                                          /* Execute user event: Gridwizardsteps.Load */
                                           E120U2 ();
                                        }
                                     }
@@ -924,6 +922,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
          {
             SubsflControlProps_152( ) ;
+            /* Execute user event: Gridwizardsteps.Load */
             E120U2 ();
             wbEnd = 15;
             WB0U0( ) ;
@@ -1104,7 +1103,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          PA0U2( ) ;
          WS0U2( ) ;
          WE0U2( ) ;
-         this.cleanup();
+         cleanup();
          context.SetWrapped(false);
          SaveComponentMsgList(sPrefix);
          context.GX_msglist = BackMsgLst;
@@ -1303,7 +1302,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202481416555940", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20249161311451", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1321,7 +1320,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       {
          if ( nGXWrapped != 1 )
          {
-            context.AddJavascriptSource("wwpbaseobjects/wizardstepslinewc.js", "?202481416555941", false, true);
+            context.AddJavascriptSource("wwpbaseobjects/wizardstepslinewc.js", "?20249161311451", false, true);
          }
          /* End function include_jscripts */
       }
@@ -1336,6 +1335,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       protected void sendrow_152( )
       {
+         sGXsfl_15_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_15_idx), 4, 0), 4, "0");
          SubsflControlProps_152( ) ;
          WB0U0( ) ;
          GridwizardstepsRow = GXWebRow.GetNew(context,GridwizardstepsContainer);
@@ -1422,6 +1422,8 @@ namespace GeneXus.Programs.wwpbaseobjects {
             GridwizardstepsContainer.AddObjectProperty("InMasterPage", "false");
             GridwizardstepsColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
             GridwizardstepsContainer.AddColumnProperties(GridwizardstepsColumn);
+            GridwizardstepsColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+            GridwizardstepsContainer.AddColumnProperties(GridwizardstepsColumn);
             GridwizardstepsContainer.AddObjectProperty("Selectedindex", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGridwizardsteps_Selectedindex), 4, 0, ".", "")));
             GridwizardstepsContainer.AddObjectProperty("Allowselection", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGridwizardsteps_Allowselection), 1, 0, ".", "")));
             GridwizardstepsContainer.AddObjectProperty("Selectioncolor", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGridwizardsteps_Selectioncolor), 9, 0, ".", "")));
@@ -1481,25 +1483,19 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'GRIDWIZARDSTEPS_nFirstRecordOnPage'},{av:'GRIDWIZARDSTEPS_nEOF'},{av:'sPrefix'},{av:'AV8StepNumber',fld:'vSTEPNUMBER',pic:'ZZZ9',hsh:true},{av:'AV7SelectedStepNumber',fld:'vSELECTEDSTEPNUMBER',pic:'ZZZ9',hsh:true}]");
-         setEventMetadata("REFRESH",",oparms:[]}");
-         setEventMetadata("GRIDWIZARDSTEPS.LOAD","{handler:'E120U2',iparms:[{av:'AV8StepNumber',fld:'vSTEPNUMBER',pic:'ZZZ9',hsh:true},{av:'AV7SelectedStepNumber',fld:'vSELECTEDSTEPNUMBER',pic:'ZZZ9',hsh:true}]");
-         setEventMetadata("GRIDWIZARDSTEPS.LOAD",",oparms:[{av:'divUnnamedtablefsgridwizardsteps_Class',ctrl:'UNNAMEDTABLEFSGRIDWIZARDSTEPS',prop:'Class'},{av:'AV8StepNumber',fld:'vSTEPNUMBER',pic:'ZZZ9',hsh:true}]}");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"GRIDWIZARDSTEPS_nFirstRecordOnPage"},{"av":"GRIDWIZARDSTEPS_nEOF"},{"av":"sPrefix"},{"av":"AV8StepNumber","fld":"vSTEPNUMBER","pic":"ZZZ9","hsh":true},{"av":"AV7SelectedStepNumber","fld":"vSELECTEDSTEPNUMBER","pic":"ZZZ9","hsh":true}]}""");
+         setEventMetadata("GRIDWIZARDSTEPS.LOAD","""{"handler":"E120U2","iparms":[{"av":"AV8StepNumber","fld":"vSTEPNUMBER","pic":"ZZZ9","hsh":true},{"av":"AV7SelectedStepNumber","fld":"vSELECTEDSTEPNUMBER","pic":"ZZZ9","hsh":true}]""");
+         setEventMetadata("GRIDWIZARDSTEPS.LOAD",""","oparms":[{"av":"divUnnamedtablefsgridwizardsteps_Class","ctrl":"UNNAMEDTABLEFSGRIDWIZARDSTEPS","prop":"Class"},{"av":"AV8StepNumber","fld":"vSTEPNUMBER","pic":"ZZZ9","hsh":true}]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -1541,7 +1537,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private short nDynComponent ;
       private short AV8StepNumber ;
       private short AV7SelectedStepNumber ;
-      private short initialized ;
       private short nGXWrapped ;
       private short wbEnd ;
       private short wbStart ;
@@ -1621,10 +1616,10 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
-      private msglist BackMsgLst ;
-      private msglist LclMsgLst ;
       private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtWizardSteps_WizardStepsItem> AV9WizardSteps ;
       private GeneXus.Programs.wwpbaseobjects.SdtWizardSteps_WizardStepsItem AV5WizardStep ;
+      private msglist BackMsgLst ;
+      private msglist LclMsgLst ;
    }
 
 }

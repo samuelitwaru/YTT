@@ -44,51 +44,30 @@ namespace GeneXus.Programs {
       public void execute( )
       {
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
       public void executeSubmit( )
       {
-         createemployeeaccounts objcreateemployeeaccounts;
-         objcreateemployeeaccounts = new createemployeeaccounts();
-         objcreateemployeeaccounts.context.SetSubmitInitialConfig(context);
-         objcreateemployeeaccounts.initialize();
-         Submit( executePrivateCatch,objcreateemployeeaccounts);
+         SubmitImpl();
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((createemployeeaccounts)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
          args = new Object[] {} ;
          ClassLoader.Execute("acreateemployeeaccounts","GeneXus.Programs","acreateemployeeaccounts", new Object[] {context }, "execute", args);
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )

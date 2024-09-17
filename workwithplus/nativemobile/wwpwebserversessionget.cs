@@ -176,6 +176,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
                }
                if ( StringUtil.StringSearch( GXSoapXMLReader.Name, "Body", 1) > 0 )
                {
+                  this.SetPrefixesFromReader( GXSoapXMLReader);
                   if (true) break;
                }
                GXSoapError = GXSoapXMLReader.Read();
@@ -268,7 +269,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          }
          if ( currSoapErr == 0 )
          {
-            executePrivate();
+            ExecutePrivate();
          }
          context.CloseConnections();
          sIncludeState = true;
@@ -325,7 +326,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          this.AV8ParameterKey = aP0_ParameterKey;
          this.AV9ParameterValue = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_ParameterValue=this.AV9ParameterValue;
       }
 
@@ -338,30 +339,13 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
       public void executeSubmit( string aP0_ParameterKey ,
                                  out string aP1_ParameterValue )
       {
-         wwpwebserversessionget objwwpwebserversessionget;
-         objwwpwebserversessionget = new wwpwebserversessionget();
-         objwwpwebserversessionget.AV8ParameterKey = aP0_ParameterKey;
-         objwwpwebserversessionget.AV9ParameterValue = "" ;
-         objwwpwebserversessionget.context.SetSubmitInitialConfig(context);
-         objwwpwebserversessionget.initialize();
-         Submit( executePrivateCatch,objwwpwebserversessionget);
+         this.AV8ParameterKey = aP0_ParameterKey;
+         this.AV9ParameterValue = "" ;
+         SubmitImpl();
          aP1_ParameterValue=this.AV9ParameterValue;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwpwebserversessionget)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -371,22 +355,18 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
             context.Redirect( context.wjLoc );
             context.wjLoc = "";
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          base.cleanup();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )

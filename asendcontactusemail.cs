@@ -25,20 +25,15 @@ namespace GeneXus.Programs {
    {
       public static int Main( string[] args )
       {
-         try
-         {
-            GeneXus.Configuration.Config.ParseArgs(ref args);
-            return new asendcontactusemail().executeCmdLine(args); ;
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-            return 1 ;
-         }
+         return new asendcontactusemail().MainImpl(args); ;
       }
 
       public int executeCmdLine( string[] args )
+      {
+         return ExecuteCmdLine(args); ;
+      }
+
+      protected override int ExecuteCmdLine( string[] args )
       {
          string aP0_supportsubject = new string(' ',0)  ;
          string aP1_supportdescription = new string(' ',0)  ;
@@ -98,35 +93,18 @@ namespace GeneXus.Programs {
          this.AV11supportsubject = aP0_supportsubject;
          this.AV12supportdescription = aP1_supportdescription;
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
       public void executeSubmit( string aP0_supportsubject ,
                                  string aP1_supportdescription )
       {
-         asendcontactusemail objasendcontactusemail;
-         objasendcontactusemail = new asendcontactusemail();
-         objasendcontactusemail.AV11supportsubject = aP0_supportsubject;
-         objasendcontactusemail.AV12supportdescription = aP1_supportdescription;
-         objasendcontactusemail.context.SetSubmitInitialConfig(context);
-         objasendcontactusemail.initialize();
-         Submit( executePrivateCatch,objasendcontactusemail);
+         this.AV11supportsubject = aP0_supportsubject;
+         this.AV12supportdescription = aP1_supportdescription;
+         SubmitImpl();
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((asendcontactusemail)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -154,21 +132,17 @@ namespace GeneXus.Programs {
          {
             GX_msglist.addItem(AV8SMTPSession.ErrDescription);
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )

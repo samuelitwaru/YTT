@@ -26,20 +26,15 @@ namespace GeneXus.Programs {
    {
       public static int Main( string[] args )
       {
-         try
-         {
-            GeneXus.Configuration.Config.ParseArgs(ref args);
-            return new aemployeeleavetotal().executeCmdLine(args); ;
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-            return 1 ;
-         }
+         return new aemployeeleavetotal().MainImpl(args); ;
       }
 
       public int executeCmdLine( string[] args )
+      {
+         return ExecuteCmdLine(args); ;
+      }
+
+      protected override int ExecuteCmdLine( string[] args )
       {
           long aP0_EmployeeId ;
          DateTime aP1_FromDate = new DateTime()  ;
@@ -125,7 +120,7 @@ namespace GeneXus.Programs {
          this.AV11ToDate = aP2_ToDate;
          this.AV14Duration = 0 ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP3_Duration=this.AV14Duration;
       }
 
@@ -142,32 +137,15 @@ namespace GeneXus.Programs {
                                  DateTime aP2_ToDate ,
                                  out short aP3_Duration )
       {
-         aemployeeleavetotal objaemployeeleavetotal;
-         objaemployeeleavetotal = new aemployeeleavetotal();
-         objaemployeeleavetotal.AV8EmployeeId = aP0_EmployeeId;
-         objaemployeeleavetotal.AV10FromDate = aP1_FromDate;
-         objaemployeeleavetotal.AV11ToDate = aP2_ToDate;
-         objaemployeeleavetotal.AV14Duration = 0 ;
-         objaemployeeleavetotal.context.SetSubmitInitialConfig(context);
-         objaemployeeleavetotal.initialize();
-         Submit( executePrivateCatch,objaemployeeleavetotal);
+         this.AV8EmployeeId = aP0_EmployeeId;
+         this.AV10FromDate = aP1_FromDate;
+         this.AV11ToDate = aP2_ToDate;
+         this.AV14Duration = 0 ;
+         SubmitImpl();
          aP3_Duration=this.AV14Duration;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((aemployeeleavetotal)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -290,12 +268,12 @@ namespace GeneXus.Programs {
             AV14Duration = (short)(AV14Duration+AV15HolidayCount);
          }
          AV14Duration = (short)(AV14Duration*8*60);
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -303,13 +281,12 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
+      protected override void CloseCursors( )
       {
       }
 
       public override void initialize( )
       {
-         scmdbuf = "";
          P00AU2_A100CompanyId = new long[1] ;
          P00AU2_A106EmployeeId = new long[1] ;
          P00AU2_A148EmployeeName = new string[] {""} ;
@@ -372,7 +349,6 @@ namespace GeneXus.Programs {
       private long A113HolidayId ;
       private long A124LeaveTypeId ;
       private long A127LeaveRequestId ;
-      private string scmdbuf ;
       private string A148EmployeeName ;
       private string AV22EmployeeName ;
       private DateTime AV10FromDate ;
@@ -395,6 +371,7 @@ namespace GeneXus.Programs {
       private long[] P00AU3_A157CompanyLocationId ;
       private DateTime[] P00AU3_A115HolidayStartDate ;
       private long[] P00AU3_A113HolidayId ;
+      private GxSimpleCollection<DateTime> AV20HolidayDates ;
       private long[] P00AU4_A124LeaveTypeId ;
       private long[] P00AU4_A100CompanyId ;
       private DateTime[] P00AU4_A130LeaveRequestEndDate ;
@@ -405,7 +382,6 @@ namespace GeneXus.Programs {
       private int[] P00AU7_A40000GXC1 ;
       private bool[] P00AU7_n40000GXC1 ;
       private short aP3_Duration ;
-      private GxSimpleCollection<DateTime> AV20HolidayDates ;
    }
 
    public class aemployeeleavetotal__default : DataStoreHelperBase, IDataStoreHelper

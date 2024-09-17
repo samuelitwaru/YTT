@@ -112,7 +112,6 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
          }
          if ( AnyError == 0 )
          {
-            IsConfirmed = 1;
          }
       }
 
@@ -199,7 +198,6 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
 
       protected void CheckExtendedTable099( )
       {
-         nIsDirty_9 = 0;
          standaloneModal( ) ;
          /* Using cursor BC00094 */
          pr_default.execute(2, new Object[] {A23WWPNotificationDefinitionId});
@@ -316,7 +314,6 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
       protected void insert_Check( )
       {
          CONFIRM_090( ) ;
-         IsConfirmed = 0;
       }
 
       protected void update_Check( )
@@ -577,7 +574,6 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
          else
          {
          }
-         IsModified = 0;
          if ( AnyError != 0 )
          {
             context.wjLoc = "";
@@ -900,7 +896,6 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
 
       protected void SaveImpl( )
       {
-         nKeyPressed = 1;
          GetKey099( ) ;
          if ( IsIns( ) )
          {
@@ -979,7 +974,6 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars9( bcwwpbaseobjects_notifications_common_WWP_Notification, 1) ;
          SaveImpl( ) ;
          VarsToRow9( bcwwpbaseobjects_notifications_common_WWP_Notification) ;
@@ -993,7 +987,6 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars9( bcwwpbaseobjects_notifications_common_WWP_Notification, 1) ;
          Gx_mode = "INS";
          /* Insert record */
@@ -1039,7 +1032,6 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars9( bcwwpbaseobjects_notifications_common_WWP_Notification, 1) ;
          UpdateImpl( ) ;
          context.GX_msglist = BackMsgLst;
@@ -1052,7 +1044,6 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars9( bcwwpbaseobjects_notifications_common_WWP_Notification, 1) ;
          Gx_mode = "INS";
          /* Insert record */
@@ -1086,8 +1077,6 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
          AnyError = 0;
          context.GX_msglist.removeAllItems();
          RowToVars9( bcwwpbaseobjects_notifications_common_WWP_Notification, 0) ;
-         nKeyPressed = 3;
-         IsConfirmed = 0;
          GetKey099( ) ;
          if ( RcdFound9 == 1 )
          {
@@ -1204,7 +1193,6 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
 
       public void ForceCommitOnExit( )
       {
-         mustCommit = true;
          return  ;
       }
 
@@ -1261,15 +1249,14 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
       }
 
-      protected void CloseOpenCursors( )
+      protected override void CloseCursors( )
       {
          pr_default.close(1);
          pr_default.close(10);
@@ -1278,9 +1265,6 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
 
       public override void initialize( )
       {
-         scmdbuf = "";
-         PreviousTooltip = "";
-         PreviousCaption = "";
          Gx_mode = "";
          endTrnMsgTxt = "";
          endTrnMsgCod = "";
@@ -1438,22 +1422,14 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
          standaloneNotModal( ) ;
       }
 
-      private short IsConfirmed ;
-      private short IsModified ;
       private short AnyError ;
-      private short nKeyPressed ;
-      private short GX_JID ;
       private short Gx_BScreen ;
       private short RcdFound9 ;
-      private short nIsDirty_9 ;
       private int trnEnded ;
       private long Z22WWPNotificationId ;
       private long A22WWPNotificationId ;
       private long Z23WWPNotificationDefinitionId ;
       private long A23WWPNotificationDefinitionId ;
-      private string scmdbuf ;
-      private string PreviousTooltip ;
-      private string PreviousCaption ;
       private string Gx_mode ;
       private string endTrnMsgTxt ;
       private string endTrnMsgCod ;
@@ -1469,7 +1445,6 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
       private bool n60WWPNotificationMetadata ;
       private bool n7WWPUserExtendedId ;
       private bool Gx_longc ;
-      private bool mustCommit ;
       private string Z60WWPNotificationMetadata ;
       private string A60WWPNotificationMetadata ;
       private string Z76WWPNotificationIcon ;
@@ -1484,7 +1459,6 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
       private string A59WWPNotificationDefinitionName ;
       private string Z8WWPUserExtendedFullName ;
       private string A8WWPUserExtendedFullName ;
-      private GeneXus.Programs.wwpbaseobjects.notifications.common.SdtWWP_Notification bcwwpbaseobjects_notifications_common_WWP_Notification ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private IDataStoreProvider pr_default ;
@@ -1555,6 +1529,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
       private long[] BC000917_A23WWPNotificationDefinitionId ;
       private string[] BC000917_A7WWPUserExtendedId ;
       private bool[] BC000917_n7WWPUserExtendedId ;
+      private GeneXus.Programs.wwpbaseobjects.notifications.common.SdtWWP_Notification bcwwpbaseobjects_notifications_common_WWP_Notification ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
       private IDataStoreProvider pr_gam ;
@@ -1622,8 +1597,12 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
   {
      if ( def == null )
      {
-        Object[] prmBC00096;
-        prmBC00096 = new Object[] {
+        Object[] prmBC00092;
+        prmBC00092 = new Object[] {
+        new ParDef("WWPNotificationId",GXType.Int64,10,0){Nullable=true}
+        };
+        Object[] prmBC00093;
+        prmBC00093 = new Object[] {
         new ParDef("WWPNotificationId",GXType.Int64,10,0){Nullable=true}
         };
         Object[] prmBC00094;
@@ -1634,16 +1613,12 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
         prmBC00095 = new Object[] {
         new ParDef("WWPUserExtendedId",GXType.Char,40,0){Nullable=true}
         };
+        Object[] prmBC00096;
+        prmBC00096 = new Object[] {
+        new ParDef("WWPNotificationId",GXType.Int64,10,0){Nullable=true}
+        };
         Object[] prmBC00097;
         prmBC00097 = new Object[] {
-        new ParDef("WWPNotificationId",GXType.Int64,10,0){Nullable=true}
-        };
-        Object[] prmBC00093;
-        prmBC00093 = new Object[] {
-        new ParDef("WWPNotificationId",GXType.Int64,10,0){Nullable=true}
-        };
-        Object[] prmBC00092;
-        prmBC00092 = new Object[] {
         new ParDef("WWPNotificationId",GXType.Int64,10,0){Nullable=true}
         };
         Object[] prmBC00098;

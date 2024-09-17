@@ -1,5 +1,5 @@
 ﻿/* START OF FILE - ..\GenCommon\js\version.js - */
-/**@preserve GeneXus 18.0.6.177641*/
+/**@preserve GeneXus 18.0.10.183955*/
 /* END OF FILE - ..\GenCommon\js\version.js - */
 /* START OF FILE - ..\GenCommon\js\mustache.js - */
 /*!
@@ -737,12 +737,16 @@ var gx = (function ($) {
 		emptyFn: function () { },
 		falseFn: falseFn,
 		trueFn: trueFn,
+		getNotificationDelay: function () {
+			return gx.NotificationDelay === undefined ? 400 : gx.NotificationDelay;
+		},
+		
 		numericLenDec:function( picture) {
 			var decPicturePart = picture.split('.'),
-				integerPicturePart = decPicturePart.length === 2 ? decPicturePart[0] : picture,
-				decPicturePart = decPicturePart.length === 2 ?decPicturePart[1] : "",
-				integers = (integerPicturePart.match(/9|Z/g) || []).length,
-				decimals = (decPicturePart.match(/9|Z/g) || []).length;
+				integerPicturePart = decPicturePart.length === 2 ? decPicturePart[0] : picture;
+			decPicturePart = decPicturePart.length === 2 ?decPicturePart[1] : "";
+			let integers = (integerPicturePart.match(/9|Z|#|\?|\\/g) || []).length,
+				decimals = (decPicturePart.match(/9|Z|#|\?|\\/g) || []).length;
 			return(	{
 						Integers:integers, 
 						Decimals:decimals
@@ -925,7 +929,6 @@ var gx = (function ($) {
 			_userReady: false,
 			userReadyThreshold: 2000,
 			userReadyThresholdFast: 400,
-			oldDoPostDelay:100,
 			hooks: [],
 			
 			types: {
@@ -938,7 +941,7 @@ var gx = (function ($) {
 					var target = gx.evt.source(evt),
 					promptEl = $('[data-gx-attached-ctrl]', target)[0];
 					if (promptEl) {
-						lastTargetElid = (promptEl.getAttribute('data-gx-attached-ctrl').split(' ') || []).pop();
+						let lastTargetElid = (promptEl.getAttribute('data-gx-attached-ctrl').split(' ') || []).pop();
 						var vStructId = gx.O.getValidStructId(lastTargetElid);
 						if (vStructId >= gx.csv.lastId) {
 							gx.csv.lastId = vStructId;
@@ -970,7 +973,7 @@ var gx = (function ($) {
 							pendingRun[0]();
 						}
 					}
-				}
+				};
 			},
 
 			addHook: function (obj, evt, handler, options) {
@@ -1122,6 +1125,7 @@ var gx = (function ($) {
 			},
 
 			_init: function () {
+				gx.evt.oldDoPostDelay = gx.getNotificationDelay() + 100;
 				gx.evt.userReadyThresholdFast = gx.util.browser.isIE() ? 2000 : gx.evt.userReadyThresholdFast;
 				document.gxReadyState = 'loading';
 				gx.lang.doCallTimeout( function() {gx.evt.userReadyThreshold = gx.evt.userReadyThresholdFast}, gx.evt, [], gx.evt.userReadyThreshold);				
@@ -1176,6 +1180,7 @@ var gx = (function ($) {
 
 		createParentObj: function (GxObjClass) {
 			if (!gx.spa || !gx.spa.started) {
+				let GxObj;
 				if (!(GxObjClass instanceof gx.GxObject)) {
 					GxObj = new GxObjClass();
 				}
@@ -1521,7 +1526,7 @@ var gx = (function ($) {
 
 			compare: function (operand1, op, operand2) {
 				if(typeof operand1 != typeof operand2)
-				  return false;
+					return false;
 				if(typeof operand1 == "string" && op == 'like')
 				{
 					var cleansedOperand2 = operand2.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, "\\$&");
@@ -2161,11 +2166,11 @@ var gx = (function ($) {
 					return true;
 				if ((objClass == Number) && (typeof (obj) == 'number' || (typeof (gx.num.dec) != "undefined" && obj instanceof gx.num.dec.bigDecimal)))
 					return true;
-				if ((objClass == Array) && (typeof (obj) == 'array'))
+				if ((objClass == Array) && gx.lang.isArray(obj))
 					return true;
 				if ((objClass == Function) && (typeof (obj) == 'function'))
 					return true;
-				if ((typeof (obj) == 'string') || (typeof (obj) == 'number') || (typeof (obj) == 'array'))
+				if ((typeof (obj) == 'string') || (typeof (obj) == 'number') || gx.lang.isArray(obj))
 					return false;
 				var base = obj.base;
 				while (typeof (base) != 'undefined') {
@@ -2297,6 +2302,7 @@ var gx = (function ($) {
 								
 			getTypeImpl: function(fn, arr, initialPosition, len) {
 				var typeObj = null;
+				let i;
 				for (i = initialPosition; i < len; i++) {
 					if (fn[arr[i]]) {
 						fn = fn[arr[i]];
@@ -2464,8 +2470,8 @@ var gx = (function ($) {
 				updateStyles: function (olds, news) {
 					var deleted = [];
 					var len = olds.length;
-					for (var i = 0; i < len; i++) {
-						var sheet = olds[i];
+					for (let i = 0; i < len; i++) {
+						let sheet = olds[i];
 						if (!gx.lang.emptyObject(sheet)) {
 							var found = false;
 							var len1 = news.length;
@@ -2483,8 +2489,8 @@ var gx = (function ($) {
 					if (imgsDir.charAt(0) == '/')
 						imgsDir = imgsDir.substring(1);
 					len = deleted.length;
-					for (var i = 0; i < len; i++) {
-						var sheet = deleted[i];
+					for (let i = 0; i < len; i++) {
+						let sheet = deleted[i];
 						if (sheet.charAt(0) != '/')
 							sheet = imgsDir + sheet;
 						this.removeRemoteFile(sheet);
@@ -2513,7 +2519,7 @@ var gx = (function ($) {
 							imgsDir = imgsDir.substring(1);
 						var scripts = gx.dom.scripts(true);
 						var len = scripts.length;
-						for (var i = 0; i < len; i++) {
+						for (let i = 0; i < len; i++) {
 							var docScript = scripts[i];
 							if (!gx.lang.emptyObject(docScript)) {
 								if (docScript.charAt(0) != '/' && !gx.isabsoluteurl(docScript))
@@ -2522,8 +2528,8 @@ var gx = (function ($) {
 							}
 						}
 						var styles = gx.dom.styles();
-						var len = styles.length;
-						for (var i = 0; i < len; i++) {
+						len = styles.length;
+						for (let i = 0; i < len; i++) {
 							var sheet = styles[i];
 							if (!gx.lang.emptyObject(sheet)) {
 								if (sheet.charAt(0) != '/' && !gx.isabsoluteurl(sheet))
@@ -2624,7 +2630,7 @@ var gx = (function ($) {
 				}
 				else {
 					if (type == 'undefined')
-						return type;
+						return 'null';
 					else if (type == 'string')
 						return gx.text.escapeString(obj);
 					else if ((type == 'number') || (type == 'boolean'))
@@ -2673,13 +2679,13 @@ var gx = (function ($) {
 						while (obj.length > jObj.length) obj.shift();
 					}
 					else {
-						for (var prop in obj) {
+						for (let prop in obj) {
 							if (typeof (obj[prop]) != 'function') {
 								delete obj[prop];
 							}
 						}
 					}
-					for (var prop in jObj) {
+					for (let prop in jObj) {
 						obj[prop] = jObj[prop];
 					}
 					return true;
@@ -2720,7 +2726,7 @@ var gx = (function ($) {
 		
 		http: {
 			currentUrl: function() {
-				return location.href.replace(location.hash,'');				
+				return `${location.origin}${location.pathname}`;				
 			},
 			
 			loadScript: function (url, callback, ignoreExisting) {
@@ -2861,7 +2867,7 @@ var gx = (function ($) {
 			var scripts = gx.dom.scripts(),
 				gxgral = null;
 
-			for (var i = 0, len = scripts.length; i < len; i++) {
+			for (let i = 0, len = scripts.length; i < len; i++) {
 				if (scripts[i].indexOf("gxgral.js") >= 0 || scripts[i].indexOf("gxcore.js") >= 0 || scripts[i].indexOf("gxapiSD.js") >= 0) {
 					gxgral = scripts[i];
 					break;
@@ -2882,7 +2888,7 @@ var gx = (function ($) {
 				gxgralParts.splice(gxgralParts.length - 1, 1);
 				locationParts.splice(locationParts.length - 1, 1);
 
-				for (var i = 0, len = locationParts.length; i < len; i++) {
+				for (let i = 0, len = locationParts.length; i < len; i++) {
 					if (locationParts[i] == gxgralParts[i])
 						path = path + ((path == '') ? '' : '/') + locationParts[i];
 					else if (gx.gen.isJava() && locationParts[i] == "servlet")
@@ -2897,8 +2903,7 @@ var gx = (function ($) {
 		},
 
 		objectLoad: function (gxGrids, gxHiddens) {
-			var deferred = $.Deferred(),
-				domFixes = gx.dom.fixes;
+			var deferred = $.Deferred();
 			
 			if (!gx.evt.execLoad) {	
 				deferred.resolve();
@@ -2943,7 +2948,7 @@ var gx = (function ($) {
 				delete gx.evt.redirecting;
 				gx.ajax._init();
 				gx.grid._init();
-				gx.evt.attach(window, 'unload', gx.evt.onunload);
+				gx.evt.attach(window, 'pagehide', gx.evt.onunload);
 				gx.fn.setFocusInit();
 				gx.dom.fixes.createLegacyNotification();
 				gx.cache._init();
@@ -3049,13 +3054,13 @@ var gx = (function ($) {
 				gx.dom.purgeElement(gx.dom.form());
 				var events = ['onblur', 'onclick', 'onfocus', 'onchange'];
 				var formEls = gx.fn.getFormElements();
-				for (var i = 0, len = formEls.length; i < len; i++)
+				for (let i = 0, len = formEls.length; i < len; i++)
 					gx.dom.purgeElement(formEls[i], events);
 				var spans = gx.dom.byTag('span');
-				for (var i = 0, len = spans.length; i < len; i++)
+				for (let i = 0, len = spans.length; i < len; i++)
 					gx.dom.purgeElement(spans[i], events);
 				var imgs = gx.dom.byTag('img');
-				for (var i = 0, len = imgs.length; i < len; i++)
+				for (let i = 0, len = imgs.length; i < len; i++)
 					gx.dom.purgeElement(imgs[i], events);
 			}
 			gx.dom._deinit();
@@ -3229,10 +3234,19 @@ gx.plugdesign = (function($) {
 			deferCallback((function () {
 				if (typeof t == "string") {
 					t = registeredTemplates[t];
-					if (!t)
+					if (!t) {
+						deferred.resolve();
 						return;
+					}
 				}
+
+				if (!el.parentNode) {
+					deferred.resolve();
+					return false;
+				}
+
 				if ((opts.checkInclusion === true) && !this.shouldApplyOnElement(el, t)) {
+					deferred.resolve();
 					return;
 				}
 				var context = gx.plugdesign.getDOMContext(el, context, t.outerHTML, t.innerHTML, t.setContext);
@@ -3738,12 +3752,7 @@ gx.plugdesign.definition = {
 		},
 		// Attributes and variables
 		{
-			selector:'.gx-attribute > input:not(.GeoLocOption):not([type="image"]):not([type="checkbox"]), .gx-attribute > select, .gx-attribute > textarea',
-			cssClass:'form-control'
-		},
-		// Attributes and variables with prompt
-		{
-			selector:'.gx-attribute > .input-group > input, .gx-attribute > .input-group > select, .gx-attribute > .input-group > textarea, .gx-attribute > .dp_container input',
+			selector:'.gx-attribute > input:not(.GeoLocOption):not([type="image"]):not([type="checkbox"]), .gx-attribute > select, .gx-attribute > textarea,.gx-attribute > .input-group > input, .gx-attribute > .input-group > select, .gx-attribute > .input-group > textarea, .gx-attribute > .dp_container input',
 			cssClass:'form-control'
 		},
 		// Form
@@ -3831,7 +3840,7 @@ gx.html = (function ($) {
 		SCRIPT_COMMENT_REGEX = /(<script[^>]*>\s*)\r?\n?<!--\s*\r?\n?(.*)\r?\n?\s*\/\/-->\s*\r?\n?(<.?\/script>)/ig,
 
 		SCRIPT_ELEMENT_REGEX = new RegExp(SCRIPT_ELEMENT_PATTERN, "i"),
-		SCRIPT_ELEMENT_IS_EXTERNAL_REGEX = /data-gx-external-script/;
+		SCRIPT_ELEMENT_IS_EXTERNAL_REGEX = /data-gx-external-script/,
 		HREF_ELEMENT_ATT_REGEX = /href=(['"]?)([^'">]*)\1/i,
 		ID_ELEMENT_ATT_REGEX = /id=(['"]?)([^'">]*)\1/i,
 		SRC_ELEMENT_ATT_REGEX_1 = /src=(['"]?)([\s\S]*)\?([^"']*)\1/i,
@@ -3843,6 +3852,7 @@ gx.html = (function ($) {
 		IMAGE_URI_ATT = "data-gx-image-uri";
 
 	return {
+		STYLE_ELEMENT_HREF,
 		encodeCaseFormat: function (Value, nFormat, multiline) {
 			if ((nFormat == gx.html.controls.formats.TEXT))
 				Value = gx.html.encode(Value, false, multiline);
@@ -3853,12 +3863,13 @@ gx.html = (function ($) {
 		
 		setGXImageCSSClass: function( el, cssClassname) {
 			var $el = el.jquery ? el : $(el),
-				el = $(el)[0];
 				prevImageClass = $el.attr(IMAGE_CLASS_APPLIED_ATT);
+			el = $(el)[0];
+				
 			if (prevImageClass) {
 				$el.removeClass(prevImageClass);
 			}
-			 [...el.classList].forEach(v => 
+			[...el.classList].forEach(v => 
 				{
 					if (v.startsWith('GX_Image_')) {
 						el.classList.remove(v);
@@ -3966,7 +3977,7 @@ gx.html = (function ($) {
 				gx.dom.addClass(bodyEl, "Form-fx");
 				control.appendChild(bodyEl);
 			}
-			if (transition && gx.pO.fullAjax && bodyEl && gx.dom.hasClass(bodyEl, bodyClassName) && !gx.dom.hasClass(control, 'transitioning')) {
+			if (transition && !gx.O.DSO && gx.pO.fullAjax && bodyEl && gx.dom.hasClass(bodyEl, bodyClassName) && !gx.dom.hasClass(control, 'transitioning')) {
 				var tempDiv = document.createElement('div');
 				tempDiv.innerHTML = this.cleanHtmlRefs(html, removeStyles);
 				gx.dom.replaceWithFx(bodyEl, tempDiv.children[0]);
@@ -4013,6 +4024,7 @@ gx.html = (function ($) {
 
 		onTypeAvailable: function (cName, callback, callbackParms, retry) {
 			try {
+				var maxRetry = 500;
 				var rCName = gx.gen.resolveObjClass(cName);
 				var typeObj;
 				try {
@@ -4029,13 +4041,13 @@ gx.html = (function ($) {
 						callback();
 				} 
 				else {
-					if (retry < 10) {
+					if (retry < maxRetry) {
 						setTimeout(function () { gx.html.onTypeAvailable(cName, callback, callbackParms, retry + 1); }, 0);
 					}
 				}
 			}
 			catch (e) {
-				if (retry < 10) {
+				if (retry < maxRetry) {
 					setTimeout(function () { gx.html.onTypeAvailable(cName, callback, callbackParms, retry + 1); }, 150);
 				}
 			}
@@ -4257,7 +4269,7 @@ gx.html = (function ($) {
 				gx.lang.doEval(evalStr); // Evaluate scripts code
 
 			var styleCtrls = document.getElementsByTagName("style");
-			scrQty = remoteStyles.length;
+			let scrQty = remoteStyles.length;
 			for (var i = 0; i < scrQty; i++) {
 				var exists = false;
 				var stQty = styleCtrls.length;
@@ -4296,6 +4308,7 @@ gx.html = (function ($) {
 		getFieldLabel: function (field, scope) {
 			var label,
 				labelFor,
+				labelEl,
 				id = field.id,
 				previousSibling = field.previousSibling;
 
@@ -4334,14 +4347,14 @@ gx.html = (function ($) {
 			gxCssClass:'gx-multimedia-upload',
 
 			setPreviewAtt: function( target, value) {
-				var ctrl = (typeof( target ) === 'Object') ? target : gx.dom.el(target) ;
+				var ctrl = (typeof( target ) === 'object') ? target : gx.dom.el(target) ;
 				if (ctrl) {
 					ctrl.setAttribute(gx.html.multimediaUpload.gxPreviewHTMLAtt, value);
 				}
 			},
- 			
+		
 			getPreviewAtt: function( target) {
-				var ctrl = (typeof( target ) === 'Object') ? target : gx.dom.el( target);
+				var ctrl = (typeof( target ) === 'object') ? target : gx.dom.el( target);
 				return (ctrl) ? ctrl.getAttribute(gx.html.multimediaUpload.gxPreviewHTMLAtt) : '';
 			},
 
@@ -4805,7 +4818,7 @@ gx.html = (function ($) {
 
 				onJsEventAttributes: function (nJScriptCode, sGXOnClickCode, sUserOnClickCode) {
 					var gxObject = gx.GxObject,
-						eventAttribute = ' ' + gxObject.GX_EVENT_DATA_ATTR + '="' + nJScriptCode + '"';
+						eventAttribute = ' ' + gxObject.GX_EVENT_DATA_ATTR + '="' + nJScriptCode + '"',
 						scriptAttribute = "";
 					if (nJScriptCode === 4) {
 						scriptAttribute = ' ' + gxObject.GX_EVENT_CODE_DATA_ATTR + '="' + nJScriptCode + '"';
@@ -4966,7 +4979,7 @@ gx.html = (function ($) {
 					this.isPassword = false;
 					//this.valueIndex = 1;
 					this.setProperties = function (sCtrlName, sFormatedValue, sTags, sEventName, sLinkURL, sLinkTarget, sTooltipText, sPlaceholder, sUserOnClickCode, nJScriptCode, sClassString, sStyleString, sROClassString, sColumnClass, sColumnHeaderClass, nVisible, nEnabled, nRTEnabled, sType, sStep, nWidth, nWidthUnit, nHeight, nHeightUnit, nLength, nIsPassword, nFormat, nParentId, bHasTheme,
-									 nAutoComplete, nAutoCorrection, bSendHidden, sDomType, sAlign, bIsTextEdit, rtPicture, sValue) {
+									nAutoComplete, nAutoCorrection, bSendHidden, sDomType, sAlign, bIsTextEdit, rtPicture, sValue) {
 						this.id = sCtrlName;
 						this.inputType = sType;
 						this.step = sStep;
@@ -5299,8 +5312,8 @@ gx.html = (function ($) {
 					this.parameters = '';
 
 					this.setProperties = function (sInternalName, sValue, sContenttype, bHasFiletypeatt, sLinkTarget, sObjecttagparameters, nDisplay, nEnabled, nVisible, sAlternateText, sTooltipText, nBorderWidth,
-										   nAutoresize, nWidth, nWidthUnit, nHeight, nHeightUnit, nVerticalSpace, nHorizontalSpace, nJScriptCode, sUserOnClickCode, sEventName, sStyleString, sClassString, sColumnClass, sColumnHeaderClass,
-										   sInputTags, sDisplayTags, sJsDynCode, sURL) {
+										nAutoresize, nWidth, nWidthUnit, nHeight, nHeightUnit, nVerticalSpace, nHorizontalSpace, nJScriptCode, sUserOnClickCode, sEventName, sStyleString, sClassString, sColumnClass, sColumnHeaderClass,
+										sInputTags, sDisplayTags, sJsDynCode, sURL) {
 						this.id = sInternalName;
 						this.value = sValue;
 						this.contentType = sContenttype || 'text/html';
@@ -5732,7 +5745,6 @@ gx.html = (function ($) {
 					this._getHtml = function () {
 						var attachedControls = gx.TabFocusOnPrompt ? gx.fn.attachedControls() : [],
 							vStruct = this.getVStruct(),
-							attachedControls,
 							attachElement = attachedControls.find( attach => attach.id === vStruct.fld && attach.info.isPrompt === true);
 
 						if (attachElement) {
@@ -6171,7 +6183,7 @@ gx.html = (function ($) {
 					this.buttonStyle = buttonStyle || 'rounded';
 
 					this.setProperties = function (sCtrlName, sJsCode, sUserOnClickCode, nJScriptCode, sTooltipText, sAccesskey, sStyleString, sClassString, nVisible, nEnabled, sBorderStyle, sEventName,
-										   sTags, sJsDynCode, nReset, sCaption) {
+										sTags, sJsDynCode, nReset, sCaption) {
 						this.reset = nReset;
 						this.id = sCtrlName;
 						this.title = sTooltipText;
@@ -6721,17 +6733,17 @@ gx.html = (function ($) {
 							sVAlign = this.vAlign.toLowerCase(),
 							FlexAlign = sAlign,
 							FlexVAlign = sVAlign;
-						 
-						 if ( FlexAlign === "justify") {
+						
+						if ( FlexAlign === "justify") {
 							FlexAlign = "space-evenly";
-						 }
-						 if ( FlexVAlign === "middle") {
+						}
+						if ( FlexVAlign === "middle") {
 							FlexVAlign = "center";
-						 }
-						 else
-						 {
+						}
+						else
+						{
 							if ( FlexVAlign === "bottom") {
-							   FlexVAlign = "end";
+								FlexVAlign = "end";
 							}
 						}
 						if (this.height != '')
@@ -6934,7 +6946,7 @@ gx.util.Observable = function(){
 		
 		deleteObserverByKey: function (key) {
 			if (!observerKeys[key]) return;
-			$.each(observerKeys[key], function (i, notifyObj) {
+			gx.$.each(observerKeys[key], function (i, notifyObj) {
 				gx.fx.obs.deleteObserver(notifyObj.e, notifyObj.o, notifyObj.f);
 			});
 			observerKeys[key] = [];
@@ -7201,6 +7213,10 @@ gx.fx = {
 		}
 
 		this.showSuggestions = function (aSuggestions) {
+			if (document.activeElement && (this.textbox != document.activeElement)) {
+				return;
+			}
+			
 			this.cur = -1;
 			var oDiv = null;
 
@@ -7943,6 +7959,7 @@ gx.fx = {
 	},
 
 	notifications: {
+		serialRunner: gx.evt.serialRunner(),
 		queuedEvents: [],
 		initialize: function (gxObj) {
 			if (!gxObj.notifications) {
@@ -7981,7 +7998,7 @@ gx.fx = {
 			var groupName = data.GroupName || "";
 			var obj = this.notifications[groupName];
 			if (obj){
-				gx.fx.notifications.queuedEvents.push({notifObj:obj, data:data});
+				gx.fx.notifications.queuedEvents.push({notifObj:obj, data:data, executed: false});
 				if (!obj.noWait && !gx.isInputEnabled()) {
 					//'gx.onafterevent' will be called when postHandlerFullAjax is completed.
 				} else {
@@ -7991,30 +8008,41 @@ gx.fx = {
 		},
 		
 		fireQueuedEvents: function() {
-			for (var i = 0; i <gx.fx.notifications.queuedEvents.length; i++) {
-				var obj = gx.fx.notifications.queuedEvents[i];
-				if (!obj.executed) {
-					gx.fx.notifications.queuedEvents.splice(i--, 1);
-					var gxO = obj.notifObj.gxO;	
-					obj.executed = true;
-					if (!gx.lang.emptyObject(obj.data.Object) && obj.data.Object.toUpperCase() != gxO.ServerClass.toUpperCase()) {
-						//Ignore notification for current object
-						continue;
-					}					
-					var type = obj.notifObj.type;
-					var evtName = obj.notifObj.eventName;
-					if (evtName) {
-						var isServerEvent = gxO.isServerEvent(evtName);
-						var parm = {}; parm[type[0][0]] = obj.data;
-						gxO.setEventParameters(obj.notifObj.type, parm);						
-						gx.evt.dispatcher.dispatch(gxO.getServerEventName(evtName), gxO, 0, 0, isServerEvent, undefined, undefined, true);
-					}
-					else {
-						obj.notifObj.handler(obj.data);
-					}
+			var currentQueue = gx.fx.notifications.queuedEvents.slice();
+			gx.fx.notifications.queuedEvents = []; // Clear the original array to accept new events
+			var serialRunner = gx.fx.notifications.serialRunner;
+			currentQueue.forEach( obj => {
+				if (obj.executed) {
+					return;
 				}
-			}			
-		}				
+				var gxO = obj.notifObj.gxO;
+				obj.executed = true; // Mark as executed to prevent re-execution
+				if (!gx.lang.emptyObject(obj.data.Object) && obj.data.Object.toUpperCase() != gxO.ServerClass.toUpperCase()) {
+					// Ignore notification for current object
+					return;
+				}
+
+				task = () => {
+				var evtName = obj.notifObj.eventName;
+				if (evtName) {
+					var isServerEvent = gxO.isServerEvent(evtName);
+					var parm = {}; parm[obj.notifObj.type[0][0]] = obj.data;
+					gxO.setEventParameters(obj.notifObj.type, parm);
+					var $deferred = gx.evt.dispatcher.dispatch(gxO.getServerEventName(evtName), gxO, 0, 0, isServerEvent, undefined, undefined, true);
+
+						$deferred.done(function() {
+								// Process the next event after the current deferred is resolved
+								serialRunner.signalEndTask();
+						});
+					} else {
+						obj.notifObj.handler(obj.data);
+						// Immediate processing of the next event since no asynchronous operation is involved
+						serialRunner.signalEndTask();
+					}
+				};
+				serialRunner.addTask(task);
+			});
+		}
 	},
 
 	ctx: {
@@ -8785,7 +8813,7 @@ gx.date = (function () {
 				value = Control.value;
 			else
 				value = gx.dom.spanValue(Control) || Control;
-			var date = new this.gxdate(value, sFmt);
+			var date = (value instanceof this.gxdate) ? value : new this.gxdate(value, sFmt);
 			if (!date.HasDatePart)
 			{
 				return '00010101' +
@@ -9600,13 +9628,38 @@ gx.num = function () {
 			strnum = gx.num.replaceFullWidthNumerals(strnum);
 			if (gx.lang.instanceOf(strnum, Number) || this.overflowNumber(strnum))
 				return strnum;
-			var pchars,
+			var pchars = '',
 				value = (strnum === undefined ? '' : strnum);
+			var checkParentheses = function (valueToAnalyze) {
+				return (valueToAnalyze.charAt(0) === '(' && valueToAnalyze.charAt(valueToAnalyze.length -1) === ')');
+			}
 			if (picture) {
+				var altNegativeDisplay = checkParentheses(picture);
+				var negativeValue = checkParentheses(value);
+				if (altNegativeDisplay){
+					picture = picture.substring(1,picture.length-1);
+					if(negativeValue) {
+						value = value.substring(1,value.length-1);
+					}
+				}
+				var escaping = false;
+				for (var i = 0; i < picture.length; i++){
+					var currentChar = picture.charAt(i);
+					if (currentChar === '\\' && !escaping) {
+						escaping = true;
+					} else {
+						if (((currentChar === '#' || currentChar === '?' || currentChar === '\\') && escaping) || 
+						!(currentChar === '#' || currentChar === '?' || currentChar === '\\'))
+						{
+							pchars += currentChar;
+						}
+						escaping = false;
+					}
+				}
 				if (picture.charAt(0) == '+' || picture.charAt(0) == '-')
-					pchars = picture.replace(/[\+\-\d,*\.*Z*\s]+/, '');
+					pchars = pchars.replace(/[\+\-\d,*\.*Z*\s]+/, '');
 				else
-					pchars = picture.replace(/[\d,*\.*Z*\s]+/g, '');
+					pchars = pchars.replace(/[\d,*\.*Z*\s]+/g, '');
 
 				if (picture.lastIndexOf('.') != picture.indexOf('.'))
 					value = gx.text.replaceAll(value, '.', '');
@@ -9614,8 +9667,9 @@ gx.num = function () {
 				for (var i = 0; i < pchars.length; i++)
 					value = value.replace(pchars.charAt(i), '');
 				value = !gx.config.number.validation.strict && ThSep? gx.text.replaceAll(value, ThSep, ''): value;
+				value = (negativeValue ? '-' : '') + value
 			}
-			return gx.text.trim(value);
+			return gx.text.replaceAll(value,' ', '');
 		},
 
 		formatNumber: function (number, decimals, picture, digits, sign, errorOnBadNumber, emptyAsNull) {
@@ -9671,8 +9725,11 @@ gx.num = function () {
 			}
 			
 			var signChar = '';
+			var preSignChar = '';
+			var postSignChar = '';
+			var hasNegativeParentheses = picture.charAt(0) === '(' && picture.charAt(picture.length-1) === ')'
 			if (sign) {
-				if (integerInput.charAt(0) == '-') {
+				if (integerInput.charAt(0) == '-' && !hasNegativeParentheses) {
 					signChar = '-';
 					integerInput = integerInput.substring(1);
 				}
@@ -9683,6 +9740,14 @@ gx.num = function () {
 						}
 						if (integerInput.charAt(0) == '+') {
 							integerInput = integerInput.substring(1);							
+						}
+					}
+					if (hasNegativeParentheses) {
+						picture = picture.substring(1, picture.length-1);
+						if ((Number(number) < 0)){
+							integerInput = (Number(integerInput)*-1).toString();
+							preSignChar = '(';
+							postSignChar = ')';
 						}
 					}
 				}
@@ -9713,19 +9778,32 @@ gx.num = function () {
 			//parte decimal
 			var nidx = 0;
 			var decPart = '';
+			var decValue = f[1].replace(/0*$/,'');
 			if (psplit.length > 1) {
 				var dpic = psplit[1];
+				var isEscapedCharacter = false;
 				for (i = 0; i < dpic.length; i++) {
 					var chd = dpic.charAt(i);
-					if (chd == '9' || chd == 'Z')
-						if (f[1].length > nidx) {
-							decPart = decPart + f[1].charAt(nidx);
+					if (isEscapedCharacter){
+						decPart = decPart + dpic.charAt(i);
+					}		
+					else if ((chd == '9' || chd == 'Z' || chd == '#' || chd == '?') && !isEscapedCharacter){
+						if (decValue.length > nidx) {
+							decPart = decPart + decValue.charAt(nidx);
 							nidx++;
 						}
-						else
-							decPart = decPart + '0';
-					else if (chd != '.' && chd != ',')
+						else {
+							decPart = decPart + this.checkPictureCharacter(chd, true);
+						}
+					}
+					else if (chd === '\\' && isEscapedCharacter){
 						decPart = decPart + chd;
+						isEscapedCharacter = false;
+						continue;
+					}
+					else if (chd != '.' && chd != ',' && !isEscapedCharacter)
+						decPart = decPart + chd;
+					isEscapedCharacter = dpic.charAt(i) == '\\';
 				}
 			}
 
@@ -9734,16 +9812,32 @@ gx.num = function () {
 			var epic = psplit[0];
 			nidx = integerInput.length - 1;
 			for (i = epic.length - 1; i >= 0; i--) {
-				var ch = epic.charAt(i);
-				if (ch == '9' || ch == 'Z')
+				var ch = epic.charAt(i),
+				isEscapedCharacter = false
+				if(i>1){
+					isEscapedCharacter = (epic.charAt(i-1) == '\\' && epic.charAt(i-2) != '\\')
+				} else if (i > 0){
+					isEscapedCharacter = epic.charAt(i-1) == '\\'
+				}
+				if (isEscapedCharacter) {
+					intPart = ch + intPart;
+					i--;
+				}
+				else if ((ch == '9' || ch == 'Z' || ch == '#' || ch == '?') && !isEscapedCharacter){
 					if (nidx >= 0) {
-						if (!(ch == 'Z' && Number(integerInput.substring(0,nidx+1)) === 0))
+						if (!((ch == 'Z' || ch == '#' || ch == '?') && Number(integerInput.substring(0,nidx+1)) === 0))
 							intPart = integerInput.charAt(nidx) + intPart;
 						nidx--;
 					}
-					else
-						intPart = (ch == '9' ? '0' : '') + intPart;
-				else if (ch != 'Z' && ch != ',' && ch != '+')
+					else {
+						intPart = this.checkPictureCharacter(ch) + intPart;
+					}
+				}
+				else if (ch === '\\' && isEscapedCharacter) {
+					intPart = ch + intPart;
+					continue;
+				}
+				else if ((ch != ',' && ch != '+'))
 					intPart = ch + intPart;
 				else if (ch == ',' && integerInput.charAt(nidx) == thSep) {
 					intPart = integerInput.charAt(nidx) + intPart;
@@ -9753,7 +9847,20 @@ gx.num = function () {
 			if (blankWhenZero && (intPart == '0' || intPart === '') && decPart.replace(/0+$/, '').length === 0)
 				return '';
 			else
-				return signChar + intPart + (!decPart ? '' : (decSep + decPart));
+				return preSignChar + signChar + intPart + (!decPart ? '' : (decSep + decPart)) + postSignChar;
+		},
+
+		checkPictureCharacter: function (chd, isDecimal = false) {
+			switch (chd) {
+				case '9':
+					return '0';
+				case 'Z':
+					return isDecimal ? '0' : '';
+				case '#':
+					return '';
+				case '?':
+					return ' ';
+			}
 		},
 
 		add: function (a, b) {
@@ -9861,6 +9968,9 @@ gx.num = function () {
 
 		random: function () {
 			return Math.random();
+		},
+		abs: function (num) {
+			return Math.abs(num);
 		},
 
 		intval: function (num) {
@@ -10472,7 +10582,8 @@ gx.grid = (function ($) {
 					}
 				}
 				if (baseGridImpl.DynProperties) {
-					for (i=0, len=baseGridImpl.DynProperties.length; i<len; i++) {
+					let len = baseGridImpl.DynProperties.length;
+					for (i=0; i<len; i++) {
 						prop = baseGridImpl.DynProperties[i];
 						newGridImpl.setDynProp(prop, baseGridImpl.Properties[prop], baseGridImpl[prop], baseGridImpl.PropTypes[prop], true);
 					}
@@ -11160,9 +11271,9 @@ gx.grid = (function ($) {
 			}
 
 			this.lastRowId = 0;
-			this.addRow = function (rowProps) {
-				var z, length, lenAux, commonProps;
-				var rowId = this.lastRowId++;
+			this.addRow = function (rowProps, atRow) {
+				var z, length, lenAux, commonProps, atRow = atRow === undefined ? -1 : atRow;
+				var rowId = atRow == -1 ? this.lastRowId++ : atRow;
 				var gxRowIdx = gx.grid.rowId(rowId + 1);
 				var row = new gx.grid.row(rowId, rowProps, gxRowIdx, this.grid.gxParentRowId);
 				row.gxCmpContext = this.gxComponentContext;
@@ -11205,7 +11316,7 @@ gx.grid = (function ($) {
 					row.IsNew = true;
 					this.installChildGrids(row);
 				}
-				this.grid.addRow(row);
+				this.grid.addRow(row, false, atRow);
 				return row;
 			}
 
@@ -11294,7 +11405,7 @@ gx.grid = (function ($) {
 				var len = 0;
 				if (this.defaultDragable || this.defaultSetsContext) {
 					len = this.grid.rows.length;
-					for (var i = 0; i < len; i++) {
+					for (let i = 0; i < len; i++) {
 						var trId = this.containerName + 'Row_' + this.grid.rows[i].gxId;
 						if (this.defaultDragable)
 							gx.fx.dnd.deleteSource(trId);
@@ -11303,7 +11414,7 @@ gx.grid = (function ($) {
 					}
 				}
 				len = this.grid.columns.length;
-				for (var i = 0; i < len; i++) {
+				for (let i = 0; i < len; i++) {
 					var currCol = this.grid.columns[i];
 					if (currCol.gxSetsContext == true) {
 						var len1 = this.grid.rows.length;
@@ -11353,7 +11464,7 @@ gx.grid = (function ($) {
 				if (this.parentGrid) {
 					var ctx = gx.fx.ctx.setters[this.gxComponentContext + this.realGridName + "ContainerTbl"];
 					len = this.grid.rows.length;
-					for (var i = firstNewRow; i < len; i++) {
+					for (let i = firstNewRow; i < len; i++) {
 						var trId = this.containerName + 'Row_' + this.grid.rows[i].gxId;
 						if (ctx && ctx.hdl)
 							gx.fx.ctx.addSetter(this.parentObject, trId, this.cssClass, evtTypes, ctx.hdl);
@@ -11362,7 +11473,7 @@ gx.grid = (function ($) {
 				if (!this.additiveResponse)
 				{
 					len = this.grid.columns.length;
-					for (var i = 0; i < len; i++) {
+					for (let i = 0; i < len; i++) {
 						var currCol = this.grid.columns[i];
 						if (currCol.gxSetsContext == true) {
 							var len1 = this.grid.rows.length;
@@ -11421,7 +11532,7 @@ gx.grid = (function ($) {
 				if (this.isFreestyle)
 					return;
 				var gridTblid = this.getGridInnerTableId(),
-					$table = $('#' + gridTblid);
+					$table = $('#' + gridTblid),
 					rows = $table.find('tbody tr[data-gxrendering_row]'); 
 				$.each( rows, 
 					function ( i, r) {
@@ -11561,7 +11672,7 @@ gx.grid = (function ($) {
 						}
 						
 						if (this.fixedColumnsWidth.length > 0) {
-							$table.find('thead tr').children().each(function(i, v) { $(v)[0].style.width = _this.fixedColumnsWidth[i] + 'px'});
+							$table.find('thead tr').children().each(function(i, v) { $(v)[0].style.visibility = _this.fixedColumnsWidth[i] > 0 ? '':'hidden'; $(v)[0].style.width = _this.fixedColumnsWidth[i] + 'px'});
 							this.fixColumnsWidth( this.fixedColumnsWidth);
 						}
 						
@@ -11608,7 +11719,13 @@ gx.grid = (function ($) {
 								if (this.fixedColVisibleCount != fixedColVisibleCount) {
 									this.fixedColVisibleCount = fixedColVisibleCount;
 									if (!this.isFreestyle) {
-										this.fixedColntainerWidth = $table.width();
+										if (this.ScrollingElement) {
+											$(this.ScrollingElement).removeClass(GRID_INFINITE_SCROLLING_ELEMENT_CLASS);
+										}
+										$table.find('thead tr').children().each(function(i, v) { $(v)[0].style.visibility = ''; $(v)[0].style.width = ''; });
+										if (!this.fixedColntainerWidth) {
+											this.fixedColntainerWidth = $table.width();
+										}
 										this.fixedColumnsWidth = $bodyCells.map(function() { return this.offsetWidth; }).get();
 									}
 								}
@@ -11617,7 +11734,7 @@ gx.grid = (function ($) {
 									$table.width(this.fixedColntainerWidth + $.position.scrollbarWidth() + 2);
 								}
 								if (!this.isFreestyle && this.fixedColumnsWidth.length > 0) {
-									$table.find('thead tr').children().each(function(i, v) { $(v)[0].style.width = _this.fixedColumnsWidth[i] + 'px'; });
+									$table.find('thead tr').children().each(function(i, v) { $(v)[0].style.visibility = _this.fixedColumnsWidth[i] > 0 ? '':'hidden'; $(v)[0].style.width = _this.fixedColumnsWidth[i] + 'px'; });
 									this.fixColumnsWidth( this.fixedColumnsWidth); 
 								}
 								ScrollingElement = $body.length > 0 ? $body[0] : containerControl;
@@ -11735,7 +11852,7 @@ gx.grid = (function ($) {
 			}
 
 			this.doDrop = function (dropObj) {
-				var rowsQty = (dropObj.length != undefined) ? ropObj.length : 1;
+				var rowsQty = (dropObj.length != undefined) ? dropObj.length : 1;
 				this.getNewRows(rowsQty, null, function (rows) { this.addDropedRows(rows, dropObj); });
 			}
 
@@ -11778,12 +11895,16 @@ gx.grid = (function ($) {
 				return types;
 			}
 
-			this.addRows = function (rowsProps) {
+			this.addRows = function (rowsProps, atRow) {
 				var len = rowsProps.Count;
+				var atRow = atRow === undefined ? -1 : atRow;
 				this.grid.rowsValues = rowsProps.values;
 				for (var i = 0; i < len; i++) {
 					var rowProps = rowsProps[i];
-					this.addRow(rowProps);
+					this.addRow(rowProps, atRow === -1 ? -1 : atRow + i);
+				}
+				if (atRow === 0) {
+					this.grid.rows = this.grid.rows.slice(0, Number(gx.fn.getHidden(this.getHiddenName("Rows"))));
 				}
 			}
 
@@ -11913,8 +12034,12 @@ gx.grid = (function ($) {
 					return;
 				var eventName = "";
 				var filterVarChangedFn = function () {
-					this.filterVarChanged();
+					this.filterVarChanged()
+
 				};
+				var filterVarChangedFnWithTimeout = function (timeout,func, context){
+					gx.lang.doCallTimeout(func, context, [], timeout);
+				}
 
 				this.refreshVars[this.refreshVars.length] = validStruct;
 				if (validStruct.fld) {
@@ -11922,7 +12047,7 @@ gx.grid = (function ($) {
 					if (varCtrl != undefined) {
 						if (gx.lang.emptyObject(validStruct.hc)) {
 							if (varCtrl.type == "radio" || varCtrl.type == "checkbox")
-								eventName = "click";
+								eventName = ["click"];
 							else if (varCtrl.tagName == "SELECT")
 								eventName = "change";
 							else if (gx.evt.eachKeyAutorefreshType(validStruct.type))
@@ -11936,6 +12061,12 @@ gx.grid = (function ($) {
 									var len = radioGroup.length;
 									for (var i = 0; i < len; i++) {
 										gx.evt.attach(radioGroup[i], eventName, filterVarChangedFn, this);
+										var label = radioGroup[i].labels && radioGroup[i].labels[0];
+										if(label){
+											gx.evt.attach(label, eventName, function() {
+												filterVarChangedFnWithTimeout(0, filterVarChangedFn, this);
+											}, this);
+										}
 									}
 								}
 								else {
@@ -12054,7 +12185,10 @@ gx.grid = (function ($) {
 						}
 					}
 					if (typeof (vStruct.rfrVar) != 'undefined') {
-						var filterValue = ctrlName = colVStruct = undefined;
+						var filterValue, 
+							ctrlName,
+							colVStruct;
+						filterValue = ctrlName = colVStruct = undefined;
 						if (typeof (vStruct.rfrProp) != 'undefined') {
 							var col;
 							if (typeof (vStruct.gxAttId) != 'undefined')
@@ -12072,8 +12206,18 @@ gx.grid = (function ($) {
 								if (this.isValueProperty(propName) && col.gxControl.type == gx.html.controls.types.image)
 									filterValue = gx.util.removeBaseUrl(filterValue);
 								colVStruct = this.parentObject.getValidStruct(col.gxId);
-								if (colVStruct && this.isValueProperty(propName))
-									colType = colVStruct.type;
+								if (colVStruct) {
+									if (this.isValueProperty(propName)) {
+										colType = colVStruct.type;
+									}
+									else if (propName === "enabled" || propName === "visible") {
+										colType = "int";
+										filterValue = gx.lang.gxBoolean(filterValue) ? 1 : 0;
+									}
+									else {
+										colType = "";
+									}
+								}
 							}
 							else {
 								filterValue = "";
@@ -12305,7 +12449,7 @@ gx.grid = (function ($) {
 				this.grid.renderRow(row, firstTime, row.id, firstRow, lastRow,  hasRowBreaks, buffer, 
 					vAlign, colHtmlCode, colsLen, column, columnDefaultVisible, columnProps, gxCtrl, fromCollection, visibleColumnsArray)
 				var updatedRowHtml = buffer.toString();
-				var idToCompare = updatedRowHtml.match(/id=\'(\S+)\'/)
+				var idToCompare = updatedRowHtml.match(/id=.(\w*)./)
 				var elementToUpdate = idToCompare && gx.dom.el(idToCompare[1])
 				elementToUpdate.outerHTML = updatedRowHtml
 				gx.plugdesign.applyTemplateObject(elementToUpdate);				
@@ -12448,13 +12592,15 @@ gx.grid = (function ($) {
 					var GRID_nEOF = postProps.GridName ? postProps[postProps.GridName.toUpperCase() + '_nEOF'] : undefined;
 					var GRID_nFirstRecordOnPage = postProps.GridName ? postProps[postProps.GridName.toUpperCase() + '_nFirstRecordOnPage'] : undefined;
 					var divCtrl = this.getContainerControl();
+					var atRow = -1;
 					if (divCtrl != null) {
 						if (this.autoRefreshing)
 							this.updatePagingVarsAfterRefresh(postProps);
 						else
 							this.updatePagingVars(GRID_nEOF, GRID_nFirstRecordOnPage);
 						if (this.InfiniteScrolling) {
-							this.additiveResponse = (this.grid.firstRecordOnPage != 0)
+							this.additiveResponse = this.grid.firstRecordOnPage === this.grid.rows.length;
+							atRow = this.additiveResponse ? -1 : this.grid.firstRecordOnPage;
 						}
 						if (isPostback) {
 							if (!addRows) {
@@ -12475,7 +12621,7 @@ gx.grid = (function ($) {
 							this.updatePagingVarsAfterRefresh(postProps);
 						else
 							this.updatePagingVars(GRID_nEOF, GRID_nFirstRecordOnPage);
-						if (!addRows)
+						if (!addRows && atRow === -1)
 							this.blankGridRows();
 						this.setHtmlTags(postProps);
 						this.setGridStyles(postProps);
@@ -12485,13 +12631,14 @@ gx.grid = (function ($) {
 						this.setSflColumns(postProps.SflColumns);
 						this.setColumnsProperties(postProps.Columns);
 						if (!addRows)
-							this.addRows(postProps);
+							this.addRows(postProps, atRow);
 						this.updateOldComponents();
 						this.initRefreshParms();
 						var gridTblid = this.getGridInnerTableId();
 						var isEmpty = $("#" + gridTblid).attr("data-gx-grid-nodata") !== undefined;
 						deferred = this.refreshGrid({
 								addRows: addRows && !isEmpty,
+								atRow,
 								loadChildGrids:null, 
 								fromAutoRefresh:this.autoRefreshing
 							});
@@ -12876,6 +13023,7 @@ gx.grid = (function ($) {
 					}
 				}
 				var firstTime = false;
+				var doneRender = function() { deferred.resolve();}
 				var afterRender = function () {
 					gx.fn.setPromptlisteners(this.getContainerControl());
 					this.setupGridControls(this.GridControls);
@@ -12886,9 +13034,11 @@ gx.grid = (function ($) {
 					var _this = this;
 					var gridTblid = this.getGridInnerTableId(),
 						last_selector = this.grid.scroll_last_row_selector( this.gridRows),
+						nth_selector = this.grid.scroll_nth_row_selector(),
 						first_selector = this.grid.scroll_first_row_selector( this.gridRows)
 					this.grid.firstItemSelector = '#' + gridTblid + first_selector;
 					this.grid.lastItemSelector = '#' + gridTblid + last_selector;
+					this.grid.nthItemSelector = (n, s) => '#' + gridTblid + nth_selector(n, s);
 					var applyInfiniteScrolling = function(arrCmpObj) {
 						var fnc = function() {
 							if (!_this.InfiniteScrolling) {
@@ -12968,12 +13118,13 @@ gx.grid = (function ($) {
 				};
 				afterRender = afterRender.closure(this);
 				this.grid.doSort();
+				ops.ScrollingElement = this.ScrollingElement;
 				if (loadChildGrids == false) {
-					this.grid.render(firstTime, false, fromCollection, afterRender, ops);
+					this.grid.render(firstTime, false, fromCollection, afterRender, doneRender, ops);
 				}
 				else {
-					firstTime = true;
-					this.grid.render(firstTime, fromAutoRefresh, fromCollection, afterRender, ops);
+					firstTime = !ops.onSetSort;
+					this.grid.render(firstTime, fromAutoRefresh, fromCollection, afterRender, doneRender, ops);
 				}
 				var retDeferred = $.Deferred();
 				$.when.apply($, arrDeferreds).done(function() {retDeferred.resolve()});
@@ -13067,12 +13218,12 @@ gx.grid = (function ($) {
 				} else {
 					var candidateCells = gx.dom.byTag('TD', r),
 						candidateHeaders = gx.dom.byTag('TH', r);
-					for (var i=0, len=candidateCells.length; i<len; i++) {
+					for (let i=0, len=candidateCells.length; i<len; i++) {
 						if (candidateCells[i].getAttribute('data-colindex') == colIndex) {
 							cells.push(candidateCells[i]);
 						}
 					}
-					for (var i=0, len=candidateHeaders.length; i<len; i++) {
+					for (let i=0, len=candidateHeaders.length; i<len; i++) {
 						if (candidateHeaders[i].getAttribute('data-colindex') == colIndex) {
 							cells.push(candidateHeaders[i]);
 						}
@@ -13202,13 +13353,13 @@ gx.grid = (function ($) {
 					userControl.DesignContainerName = col.gxUCContainerName;
 					userControl.setC2ShowFunction(col.gxShowFunc);
 					var len1 = col.gxC2VFuncs.length;
-					for (var j = 0; j < len1; j++) {
+					for (let j = 0; j < len1; j++) {
 						userControl.addC2VFunction(col.gxC2VFuncs[j]);
-					};
+					}
 					var len2 = col.gxV2CFuncs.length;
-					for (var j = 0; j < len2; j++) {
+					for (let j = 0; j < len2; j++) {
 						userControl.addV2CFunction(col.gxV2CFuncs[j], col.gxUCFieldName);
-					};
+					}
 					userControl.setGridProperties();
 					userControl.setGridEventHandlers();
 					this.parentObject.setUserControl(userControl);
@@ -13515,8 +13666,8 @@ gx.grid = (function ($) {
 				var ContextControl = gx.dom.byId(this.controlName);
 				if (ContextControl == null) {
 					ContextControl = document.createElement("SPAN");
-					ContextControlShadow = document.createElement("SPAN");
-					ContextControlShadow2 = document.createElement("SPAN");
+					var ContextControlShadow = document.createElement("SPAN"),
+					ContextControlShadow2 = document.createElement("SPAN"),
 					IFrameControl = document.createElement("IFRAME");
 					ContextControl.id = this.controlName;
 					ContextControlShadow.id = this.controlName + "Shadow";
@@ -13755,13 +13906,14 @@ gx.grid.impl = (function ($) {
 			});
 		}
 
-		this.addRow = function (row, refresh) {
+		this.addRow = function (row, refresh, atRow) {
+			var atRow = atRow === -1 || atRow === undefined ? this.rows.length : atRow;
 			row.table = this;
 			if (row == null) {
 				return;
 			}
 
-			this.rows[this.rows.length] = row;
+			this.rows[atRow] = row;
 			if (typeof (row.id) != 'undefined')
 				this.rowsById[row.id] = row;
 			if (typeof (row.gxId) != 'undefined')
@@ -13824,7 +13976,7 @@ gx.grid.impl = (function ($) {
 				this.ascSort = (asc == null ? true : gx.lang.booleanValue(asc));
 			}
 			this.doSort();
-			this.ownerGrid.refreshGrid({ immediateApplyInfiniteScroll: true });
+			this.ownerGrid.refreshGrid({ immediateApplyInfiniteScroll: true , onSetSort:true});
 		}
 
 		this.doSort = function () {
@@ -14041,6 +14193,10 @@ gx.grid.impl = (function ($) {
 		
 		this.scroll_first_row_selector = function() {
 			return ' tbody tr:first-child';
+		}
+
+		this.scroll_nth_row_selector = function() {
+			return (n,s) => s ? ` tbody tr:nth-child(n+${n}):nth-child(-n+${n+s})`:` tbody tr:nth-child(n+${n})`;
 		}
 		this.ROW_TAG = "tr";
 		this.CELL_TAG = "td";
@@ -14351,11 +14507,12 @@ gx.grid.impl = (function ($) {
 				gx.dom.purgeElement(imgs[i], events);
 		};
 
-		this.render = function (firstTime, fromAutoRefresh, fromCollection, afterRenderCallback, ops) {
+		this.render = function (firstTime, fromAutoRefresh, fromCollection, afterRenderCallback, doneRender, ops) {
 			firstTime = !!firstTime;
 
 			var tableId = this.ownerGrid.getGridInnerTableId(),
-				container = this.container;
+				container = this.container,
+				oldScrollTop;
 
 			this.ownerGrid.disposeTemplateObject();
 			this.beforeRender();
@@ -14364,6 +14521,9 @@ gx.grid.impl = (function ($) {
 				this.doSort();
 			}
 
+			if (ops.ScrollingElement) {
+				oldScrollTop = ops.ScrollingElement.scrollTop;
+			}
 			var gridHtml = this.drawGrid(tableId, firstTime, fromAutoRefresh, fromCollection, ops);
 
 			if (gx.dom.shouldPurge()) {
@@ -14393,17 +14553,23 @@ gx.grid.impl = (function ($) {
 				}
 			}
 			if (restoreActiveEl) {
-				setTimeout(function () {
-					var newActiveEl = gx.dom.el(activeEl.id || activeEl.name, false, true);
+				let nTimeout = oldScrollTop ? 0 : 1;
+				let fnc = function () {
+					let newActiveEl = gx.dom.el(activeEl.id || activeEl.name, false, true);
 					if (newActiveEl) {
 						gx.csv.disableFocus = true;
 						if (newActiveEl.offsetWidth > 0 && newActiveEl.offsetHeight > 0) {
+							if (oldScrollTop) {
+								ops.ScrollingElement.scrollTop = oldScrollTop;
+							}
+							gx.fn.scrollIntoViewIfNeeded(newActiveEl, container, {block:"end"});
 							gx.fn.setFocus(newActiveEl, function() {
 								gx.dom.setCaretOffset( newActiveEl, caretOffset);
 							});
 						}
 					}
-				}, 10);
+				};
+				(nTimeout) ? gx.lang.doCallTimeout(fnc, this, [], nTimeout) : fnc();
 			}
 
 			this.drawEmptyContent();
@@ -14423,7 +14589,8 @@ gx.grid.impl = (function ($) {
 			var inverseLoading = this.ownerGrid.InverseLoading;
 			var hook;
 			var $children;
-			var addRowsOnly = this.ownerGrid.additiveResponse || opts.addRows;
+			var atRowCond = opts.atRow != undefined && opts.atRow != -1;
+			var addRowsOnly = this.sortColumn === -1 && (this.ownerGrid.additiveResponse || opts.addRows || atRowCond);
 			if (addRowsOnly) {
 				if ( this.sortColumn !== -1) {
 					container.innerHTML = gridHtml;					
@@ -14456,10 +14623,33 @@ gx.grid.impl = (function ($) {
 							$newRows = $(gridHtml).insertBefore(this.firstItemSelector);
 						}
 						else {
-							newRows = $(gridHtml).insertAfter(this.lastItemSelector);
+							if (atRowCond) {
+								const rowPrefix = '<tr';
+								const rowPrefixReg = /<tr/;								
+								let preCount = opts.ScrollingElement.childNodes.length;
+								let arrRows = gridHtml.split(rowPrefixReg);
+								let arrOldRows = arrRows.slice(1, preCount + 1 - opts.atRow);
+								let arrNewRows = arrRows.slice(preCount + 1 - opts.atRow);
+								let toRemove = preCount - this.rows.length;
+								Array.from(opts.ScrollingElement.childNodes).slice(0,arrOldRows.length).forEach((el, index) => {
+										let newRow = document.createElement("tr");
+										el.replaceWith(newRow);
+										newRow.outerHTML = `${rowPrefix}${arrOldRows[index]}`
+								});
+								if (arrNewRows.length > 0) {
+									$(rowPrefix + arrNewRows.join(rowPrefix)).insertAfter(this.lastItemSelector);
+								}
+								while (toRemove-- > 0) {
+									opts.ScrollingElement.removeChild(opts.ScrollingElement.lastChild);
+								}								
+								newRows = $(this.nthItemSelector(opts.atRow + 1, arrRows.length - 1));
+							}
+							else {
+								newRows = $(gridHtml).insertAfter(this.lastItemSelector);
+							}
 						}
 					}
-					this.newAdditiveRows = $newRows;
+					this.newAdditiveRows = atRowCond ? null : $newRows;
 					gx.plugdesign.applyTemplateObject({
 						selector: $newRows, 
 						deferred:true
@@ -14704,19 +14894,17 @@ gx.grid.impl = (function ($) {
 			var visibleColumnsArray = this.columns;
 			var renderedColumnCount = visibleColumnsArray.length;
 			var i, row, column, colHtmlCode, vAlign, columnDefaultVisible, columnProps, gxCtrl;
+			var atRowDefined = opts.atRow != undefined && opts.atRow != -1;
 
-			var addRowsOnly = this.ownerGrid.additiveResponse || opts.addRows;
+			var addRowsOnly = this.sortColumn === -1 && (this.ownerGrid.additiveResponse || opts.addRows);
 
 			if (!this.gxIsFreestyle && isGxTrn) {
 				renderedColumnCount++;
 			}
-			var firstRow, lastRow, maxPage;
-			if (addRowsOnly || opts.immediateApplyInfiniteScroll) {
-				firstRow = (!addRowsOnly && (this.firstRecordOnPage == '0' || this.sortColumn != -1)) ? 0 : this.lastRenderedRow;
-				lastRow = this.rows.length;
-				this.ownerGrid.firstAdditiveRow = firstRow;
-			}
-			else {	
+			
+			var first_last_row = function() {
+				var firstRow,
+					lastRow;
 				if (Number(this.pageSize) !== 0) { //pageSize != 0
 					maxPage = this.getMaxPage();
 					if (this.currentPage <= 0) {
@@ -14725,13 +14913,31 @@ gx.grid.impl = (function ($) {
 					else if (this.currentPage > maxPage) {
 						this.currentPage = maxPage;
 					}
-					firstRow = Math.max(this.pageSize * (this.currentPage - 1), 0);
+					if (atRowDefined) {
+						firstRow = opts.atRow;
+					}
+					else {						
+						firstRow = Math.max(this.pageSize * (this.currentPage - 1), 0);
+					}
 					lastRow = Math.min(firstRow + this.pageSize, this.rows.length);
 				}
 				else {
 					firstRow = 0;
 					lastRow = this.rows.length;
 				}
+				return {firstRow,lastRow};
+			}
+
+			var maxPage, firstRenderedRow;
+			var {firstRow,lastRow} = first_last_row.bind(this)();
+			if (addRowsOnly || opts.immediateApplyInfiniteScroll) {
+				firstRenderedRow = firstRow;
+				firstRow = (!addRowsOnly && (this.firstRecordOnPage == '0' || this.sortColumn != -1)) ? 0 : this.lastRenderedRow;
+				lastRow = this.rows.length;
+				this.ownerGrid.firstAdditiveRow = firstRow;
+			}
+			else {	
+				firstRenderedRow = firstRow;
 			}
 
 			if (this.gxAllowCollapsing) {
@@ -14739,29 +14945,39 @@ gx.grid.impl = (function ($) {
 			}
 
 			var colsLen = visibleColumnsArray.length;
-			if (!this.gxIsFreestyle && (lastRow > firstRow) && firstRow == 0) {
+			if (!this.gxIsFreestyle && (lastRow > firstRow)) {
 				for (var j = 0; j < colsLen; j++) {
 					column = visibleColumnsArray[j];
+					gxCtrl = column.gxControl;
+					var rtVisible = false;
 					columnDefaultVisible = gx.lang.gxBoolean(column.visible);
-					if (columnDefaultVisible) {
-						var rtVisible = false;
-						for (i = firstRow; i < lastRow && !rtVisible; i++) {
-							row = this.rows[i];
-							gxCtrl = column.gxControl;
-							columnProps = row.gxProps[column.index];
-							if (!fromCollection) {
-								gxCtrl.setProperties.apply(gxCtrl, columnProps);
-							}
-							if (gxCtrl.visible) {
-								rtVisible = true;
-							}
+					column.visible = columnDefaultVisible;
+							for (i = firstRenderedRow; i < lastRow && !rtVisible; i++) {
+								row = this.rows[i];
+								columnProps = row.gxProps[column.index];
+								if (!fromCollection) {
+							gxCtrl.setProperties.apply(gxCtrl, columnProps);
 						}
-						if (!rtVisible) 
+						if (gxCtrl.visible) {
+							rtVisible = true;
+						}
+					}
+					var disableAdditiveDraw = visible => {
+							//When added row reconfigure visibility for previous renderred rows
 							column.visible = false;
+							addRowsOnly = false;
+							firstRow = firstRenderedRow;
+							this.ownerGrid.firstAdditiveRow = 0;
+							opts.addRows = false;
+					};
+					if (!this.ownerGrid.additiveResponse) {
+						column.visible && !rtVisible && disableAdditiveDraw( false);
+						!column.visible && rtVisible && disableAdditiveDraw( true);
 					}
 				}
 			}
-			if (!addRowsOnly || this.sortColumn != -1) {
+			var includeWrapper = !atRowDefined && (!addRowsOnly || this.sortColumn != -1);
+			if (includeWrapper) {
 				this.appendContainerStart(tableId, buffer);
 				this.appendHeaderText(renderedColumnCount, buffer);
 				if (!this.gxIsFreestyle) {
@@ -14783,7 +14999,7 @@ gx.grid.impl = (function ($) {
 				this.appendRowEnd(buffer);
 			}
 			this.lastRenderedRow = lastRow;
-			if (!addRowsOnly) {
+			if (includeWrapper) {
 				this.appendBodyWrapperEnd(buffer);
 
 				this.appendFooterWrapperStart(buffer);
@@ -14940,7 +15156,7 @@ gx.grid.impl = (function ($) {
 					this.unmask();
 					deferred.resolve();
 				}
-				gx.evt.execEvt( undefined, undefined, eventName, gx.evt.dummyCtrl, gridId, undefined, undefined, false, afterFnc.closure(this), force);
+				gx.evt.execEvt( this.gxCmpContext, this.parentGxObject.IsMasterPage, eventName, gx.evt.dummyCtrl, gridId, undefined, undefined, false, afterFnc.closure(this), force);
 				return deferred.promise();
 			}
 		}
@@ -15642,8 +15858,12 @@ gx.grid.flexGrid = function ($) {
 		var gridHtml;
 
 		$container = $('#'+this.getContainerControl().id);
-
-		gridHtml = this.drawGrid(this.gxGridObject + "Tbl", !this.IsPostBack);
+		
+		var gridObjectName;
+		
+		gridObjectName = (this.gxCmpContext || "") + this.gxGridObject + "Tbl";
+		
+		gridHtml = this.drawGrid(gridObjectName, !this.IsPostBack);
 
 		this.setGridHtml($container.get(0), gridHtml);
 		
@@ -16427,13 +16647,13 @@ gx.fn = (function($) {
 			return null;
 		},
 
-		getControlRef: function (ControlId, avoidPref) {
+		getControlRef: function (ControlId, avoidPref, selectActive) {
 			//Critical function, changes here impact performance
 			if (!avoidPref)
 				ControlId = gx.csv.ctxControlId(ControlId);
 			if (ControlId == 'FORM')
 				return document;
-			var Control = gx.dom.el(ControlId);
+			var Control = gx.dom.el(ControlId, null, null, null, selectActive);
 			if (Control != null)
 				return Control;
 			return null;
@@ -16559,7 +16779,7 @@ gx.fn = (function($) {
 		firstGridControl: function (GridId, gxO) {
 			var ctrlIds = gx.fn.controlIds();
 			var len = ctrlIds.length;
-			for (i = 0; i < len; i++) {
+			for (let i = 0; i < len; i++) {
 				var _GXValidStruct = gx.fn.validStruct(ctrlIds[i], gxO);
 				if (_GXValidStruct != undefined && _GXValidStruct.grid == GridId)
 					return ctrlIds[i];
@@ -16569,7 +16789,7 @@ gx.fn = (function($) {
 
 		lastGridControl: function (GridId, gxO) {
 			var ctrlIds = gx.fn.controlIds();
-			for (i = ctrlIds.length - 1; i >= 0; i--) {
+			for (let i = ctrlIds.length - 1; i >= 0; i--) {
 				var _GXValidStruct = gx.fn.validStruct(ctrlIds[i], gxO);
 				if (_GXValidStruct != undefined && _GXValidStruct.grid == GridId)
 					return ctrlIds[i];
@@ -16676,7 +16896,7 @@ gx.fn = (function($) {
 						}
 						return this.getControlValueInt(Control);
 					}
-					ControlList = gx.dom.byName(ControlId);
+					let ControlList = gx.dom.byName(ControlId);
 					if (ControlList != null) {
 						var len = ControlList.length;
 						for (var i = 0; i < len; i++) {
@@ -16932,12 +17152,14 @@ gx.fn = (function($) {
 			}
 		},
 
-		verticalFormula: function (VarName, Default, GridId, Row, CondsFunc, RowFunc, Deps) {
+		verticalFormula: function (VarName, Default, GridId, Row, CondsFunc, RefreshVars, RowFunc, Deps) {
 			var validStruct = gx.fn.vStructForVar(VarName);
+			if (RefreshVars) {
 			if (!gx.lang.emptyObject(validStruct))
 				validStruct.v2c(Row);
 			else
 				this.v2cMap(VarName);
+			}
 			var oldRow = gx.fn.currentGridRowImpl(GridId);
 			var gridObj = gx.fn.getGridObj(GridId, Row);
 			var retVal = 0;
@@ -16950,6 +17172,7 @@ gx.fn = (function($) {
 					var RecordExists = rowObj.gxExists();
 					var RecordIsMod = rowObj.gxIsMod();
 					if (!IsRemoved && (RecordExists || RecordIsMod)) {
+						if (RefreshVars) {
 						gx.fn.setCurrentGridRow(GridId, rowObj.gxId);
 						if (Deps && Deps.length > 0)
 							this.depsToVars(Deps);
@@ -16957,13 +17180,16 @@ gx.fn = (function($) {
 							validStruct.c2v();
 						else
 							this.c2vMap(VarName);
+						}
 						if (CondsFunc.call(gx.O)) {
 							anyWithCond = true;
 							retVal = RowFunc(i, retVal);
 						}
 					}
 				}
-				gx.fn.setCurrentGridRow(GridId, oldRow);
+				if (RefreshVars) {
+  				gx.fn.setCurrentGridRow(GridId, oldRow);
+				}
 				if (Deps && Deps.length > 0)
 					this.depsToVars(Deps);
 				else if (!gx.lang.emptyObject(validStruct) && typeof (validStruct.c2v) == 'function')
@@ -17015,7 +17241,7 @@ gx.fn = (function($) {
 			var floatHandler = function (VarName, Row, LastValue, NewValue) {
 				return (NewValue > LastValue) ? NewValue : LastValue;
 			}
-	        return gx.fn.verticalFormula(VarName, Default, GridId, Row, CondsFunc, function(row, val)
+	        return gx.fn.verticalFormula(VarName, Default, GridId, Row, CondsFunc, true, function(row, val)
 	        {				
 				return gx.fn.rowValueHandler(VarName, row, val,boolHandler, floatHandler, ThSep, DecPoint);				
 	        }, Deps);
@@ -17029,7 +17255,7 @@ gx.fn = (function($) {
 			var floatHandler = function (VarName, Row, LastValue, NewValue) {
 				return NewValue + LastValue;
 			}
-	        return gx.fn.verticalFormula(VarName, Default, GridId, Row, CondsFunc, function(row, val)
+	        return gx.fn.verticalFormula(VarName, Default, GridId, Row, CondsFunc, true, function(row, val)
 	        {
 				return gx.fn.rowValueHandler(VarName, row, val,boolHandler, floatHandler, ThSep, DecPoint);							           
 	        }, Deps);
@@ -17043,7 +17269,7 @@ gx.fn = (function($) {
 			var floatHandler = function (VarName, Row, LastValue, NewValue) {
 				return (NewValue < LastValue) ? NewValue : LastValue;
 			}
-	        return gx.fn.verticalFormula(VarName, Default, GridId, Row, CondsFunc, function(row, val)
+	        return gx.fn.verticalFormula(VarName, Default, GridId, Row, CondsFunc, true, function(row, val)
 	        {
 				return gx.fn.rowValueHandler(VarName, row, val,boolHandler, floatHandler, ThSep, DecPoint);			    
 	        }, Deps);
@@ -17051,7 +17277,7 @@ gx.fn = (function($) {
 
 	    averageFrm: function(VarName, Default, ThSep, DecPoint, GridId, Row, CondsFunc, Deps)
 	    {
-	        return gx.fn.verticalFormula(VarName, Default, GridId, Row, CondsFunc, function(row, val)
+	        return gx.fn.verticalFormula(VarName, Default, GridId, Row, CondsFunc, true, function(row, val)
 	        {
 	            var v = gx.num.parseFloat(gx.O[VarName], ThSep, DecPoint);
 	            if (row == 0) return v;
@@ -17061,7 +17287,7 @@ gx.fn = (function($) {
 
 	    countFrm: function(VarName, Default, GridId, Row, CondsFunc, Deps)
 	    {
-	        return gx.fn.verticalFormula(VarName, Default, GridId, Row, CondsFunc, function(row, val)
+	        return gx.fn.verticalFormula(VarName, Default, GridId, Row, CondsFunc, false, function(row, val)
 	        {	            
 	            return (row == 0)? 1: val + 1;
 	        }, Deps);
@@ -17179,20 +17405,29 @@ gx.fn = (function($) {
 			gx.usrPtys[Id][Property.toLowerCase()] = PValue;
 		},
 
-		setCtrlProperty: function (ControlId, Property, PValue) {
+		setCtrlProperty: function (ControlRef, Property, PValue, vStruct) {
 			if (!gx.O) {
 				gx.fx.obs.addObserver('gx.onready', this, gx.fn.setCtrlProperty.closure(this, arguments), { single: true });
 				return;
 			}
-			var Control = null;
+			var Control;
+			if (typeof(ControlRef) === 'string') {
+				ControlId = ControlRef;				
 			if (ControlId == 'FORM')
 				Control = document;
 			else
 				Control = gx.fn.screen_CtrlRef(gx.csv.ctxControlId(ControlId));
-			if (Control == null)
+			}
+			else {
+				Control = ControlRef;
+				ControlId = Control.id;
+			}			
+			if (!Control)
 				return;
-			this.persistControlProperty(ControlId, Property, PValue);
-					var vStruct = gx.O.getValidStructFld(ControlId);
+			var vStruct = vStruct || gx.O.getValidStructFld(ControlId);
+			if (vStruct && vStruct.grid) {
+				gx.fn.persistControlProperty(ControlId, Property, PValue);
+			}
 			this.setCtrlPropertyImpl(Control, Property, PValue, vStruct);
 		},
 
@@ -17325,7 +17560,7 @@ gx.fn = (function($) {
 						}						
 					} else {
 						if ((gx.dom.isEditControl(Control) || Control.type === "textarea" || Control.type === "file" || Control.tagName === "SELECT") && Control.type !== "password") {
-							var spanVal = this.getRONode(Control.id, pValueFalse, vStruct.fmt);
+							var spanVal = this.getRONode(Control.id, pValueFalse, vStruct.fmt, vStruct.multiline);
 							if (gx.fn.isVisible(Control, 0) || (spanVal && gx.fn.isVisible(spanVal, 0))) {
 								if (spanVal) this.setVisible(spanVal, pValueFalse);
 								this.setEnabledProperty(Control, !pValueFalse);//1.SetEnabled. Debe ejecutarse antes de la setVisible(Control, !pValueFalse), caso textarea multiline que pasa a disabled en el cliente.
@@ -17452,7 +17687,7 @@ gx.fn = (function($) {
 					this.setMultimediaType(Control, PValue);
 					break;
 				case "Bitmap":
-					gxImage = gx.util.imageName(PValue);
+					var gxImage = gx.util.imageName(PValue);
 					if (gxImage) {
 						gx.html.setGXImageCSSClass(Control, `GX_Image_${gxImage}_Class`); 
 					}
@@ -17682,7 +17917,7 @@ gx.fn = (function($) {
 			return (gx.O.DSO || cssClass === '' || cssClass.indexOf('Readonly') === 0) ? cssClass : 'Readonly' + cssClass;
 		},
 		
-		getRONode: function (id, create, fmt) {
+		getRONode: function (id, create, fmt, Multiline) {
 			var fmt = fmt === undefined ? gx.html.controls.formats.TEXT : fmt;			
 			if (fmt === gx.html.controls.formats.RAW_HTML || fmt === gx.html.controls.formats.HTML)			
 			{
@@ -17707,8 +17942,8 @@ gx.fn = (function($) {
 				controlValue = el.value;
 			else
 				controlValue = gx.fn.getControlValue(gx.dom.id(el), 'screen');
-			span.appendChild(document.createTextNode(controlValue || ''));
 			el.parentNode.insertBefore(span, el);
+			gx.html.setInnerText( span, controlValue || '', fmt, Multiline);
 			return span;
 		},
 
@@ -18109,7 +18344,7 @@ gx.fn = (function($) {
 					if (pN) {
 						var sibling = null;
 						var childs = pN.childNodes.length;
-						for (i = 0; i < childs; i++) {
+						for (let i = 0; i < childs; i++) {
 							if (pN.childNodes[i] == objCtrl) {
 								if (i < childs - 1)
 									sibling = pN.childNodes[i + 1];
@@ -18250,7 +18485,7 @@ gx.fn = (function($) {
 			var ParentTag = Control.parentNode;
 			if (ParentTag.tagName == "A") {
 				var ChildNode = ParentTag.firstChild;
-				ParentTag2 = ParentTag.parentNode;
+				let ParentTag2 = ParentTag.parentNode;
 				if (ParentTag2 != null) {
 					while (ChildNode != null) {
 						ParentTag2.insertBefore(ChildNode, ParentTag);
@@ -18273,7 +18508,22 @@ gx.fn = (function($) {
 			}
 			$(Control).attr('data-gx-link-target', target);
 		},
+		
 
+		scrollIntoViewIfNeeded: function( el, container, options) {
+			if (gx.fn.isVisibleAtScroll( el, container)) {
+				return;
+			}
+			el.scrollIntoView( options);			
+		},
+		
+		isVisibleAtScroll: function( el, container) {
+			const { bottom, height, top } = el.getBoundingClientRect();
+			const containerRect = container.getBoundingClientRect();
+
+			return top <= containerRect.top ? containerRect.top - top <= height : bottom - containerRect.bottom <= height;
+		},
+		
 		isVisible: function (Control, searchUpLevels) {
 			if (!Control) {
 				return false;
@@ -18570,7 +18820,7 @@ gx.fn = (function($) {
 						return;
 					}
 					else {
-						gx.csv.userFocus = gx.fn.getControlRef(usrFocusId);
+						gx.csv.userFocus = gx.fn.getControlRef(usrFocusId,null,true);
 					}
 				}
 				if (gx.csv.userFocus == 'notset') {
@@ -18730,7 +18980,7 @@ gx.fn = (function($) {
 		getControlIndex: function (Ctrl) {
 			var i_max = gx.fn.getFormElements().length - 1;
 			var i_min = 0;
-			el = this.controlIndex(Ctrl, i_min, i_max);
+			let el = this.controlIndex(Ctrl, i_min, i_max);
 			return el;
 		},
 
@@ -18824,6 +19074,7 @@ gx.fn = (function($) {
 			try {
 				var ctrlIds,
 					i,
+					len,
 					grids = gx.O.Grids;
 
 				if (grids) {
@@ -18856,7 +19107,7 @@ gx.fn = (function($) {
 			try {
 				var ctrlIds = gx.fn.controlIds();
 				var len = ctrlIds.length;
-				for (i = 0; i < len; i++) {
+				for (let i = 0; i < len; i++) {
 					var _GXValidStruct = gx.fn.validStruct(ctrlIds[i]);
 					if (_GXValidStruct != undefined && _GXValidStruct.gxold == Name)
 						return _GXValidStruct.grid;
@@ -18908,7 +19159,7 @@ gx.fn = (function($) {
 			try {
 				var ctrlIds = gx.fn.controlIds();
 				var len = ctrlIds.length;
-				for (i = 0; i < len; i++) {
+				for (let i = 0; i < len; i++) {
 					var _GXValidStruct = gx.fn.validStruct(ctrlIds[i]);
 					if (_GXValidStruct != undefined && _GXValidStruct.lvl != undefined && _GXValidStruct.grid == GridId)
 						return _GXValidStruct.lvl;
@@ -18924,7 +19175,7 @@ gx.fn = (function($) {
 			try {
 				var ctrlIds = gx.fn.controlIds();
 				var len = ctrlIds.length;
-				for (i = 0; i < len; i++) {
+				for (let i = 0; i < len; i++) {
 					var _GXValidStruct = gx.fn.validStruct(ctrlIds[i]);
 					if (_GXValidStruct != undefined && _GXValidStruct.lvl == Lvl)
 						return _GXValidStruct.grid;
@@ -18939,7 +19190,7 @@ gx.fn = (function($) {
 		vStructId: function (CtrlId) {
 			try {
 				var ctrlIds = gx.fn.controlIds();
-				for (i = 0; i < ctrlIds.length; i++) {
+				for (let i = 0; i < ctrlIds.length; i++) {
 					var validStruct = gx.fn.validStruct(ctrlIds[i]);
 					if (validStruct != undefined && validStruct.fld == CtrlId)
 						return ctrlIds[i];
@@ -18959,7 +19210,7 @@ gx.fn = (function($) {
 				}
 				var ctrlIds = gx.fn.controlIds();
 				var len = ctrlIds.length;
-				for (i = 0; i < len; i++) {
+				for (let i = 0; i < len; i++) {
 					var vStruct = gx.fn.validStruct(ctrlIds[i]);
 					if (vStruct != undefined && condFunc(vStruct)) {
 						vStruct.id = ctrlIds[i];
@@ -19076,7 +19327,7 @@ gx.fn = (function($) {
 			try {
 				var ctrlIds = gx.fn.controlIds();
 				var len = ctrlIds.length;
-				for (i = 0; i < len; i++) {
+				for (let i = 0; i < len; i++) {
 					var _GXValidStruct = gx.fn.validStruct(ctrlIds[i]);
 					if (_GXValidStruct != undefined && _GXValidStruct.grid == GridId) {
 						var Ctrl = gx.dom.el(_GXValidStruct.fld + "_" + CurrentRow);
@@ -19366,7 +19617,7 @@ gx.fn = (function($) {
 							if (validStruct) {
 								if (validStruct.v2v && !gx.fn.autoRefreshingControl(validStruct.fld, cmpCtx)) {
 									var grid = gx.O.getGridById(validStruct.grid);
-									var additiveResponse = (grid && grid.InfiniteScrolling);
+									var additiveResponse = (grid && grid.additiveResponse);
 									if (validStruct.grid != 0 ) {
 										control = gx.dom.el(Property, false, false);
 										cRow = gx.fn.controlRowId(control) || getRow(validStruct, gridId, row);
@@ -19472,11 +19723,12 @@ gx.fn = (function($) {
 							}
 							if ( !ptyHandled)
 							{
-								GridColumn = gxO.getGridColumn(Control, rowId);
+								var ctrlRowId = rowId || ((vStruct && vStruct.grid) ? gx.fn.currentGridRow(vStruct.grid) : '');
+								GridColumn = gxO.getGridColumn(Control, ctrlRowId);
 								if (((domCtrl == null || Grid) && gx.uc.isUserControl(Control, gxO)) || (GridColumn && GridColumn.isUserControl)) {
 									ControlInGrid = Control;
 									if (GridColumn && GridColumn.isUserControl) {
-										ControlInGrid = Control + "_" + rowId;
+										ControlInGrid = Control + "_" + ctrlRowId;
 									}
 									gx.uc.setProperties(ControlInGrid, gxPropValue);
 									updatedUCs.push(gx.uc.getUserControlObj(gx.uc.userControlContainerId(ControlInGrid)));
@@ -19487,15 +19739,15 @@ gx.fn = (function($) {
 									for (var Property in gxPropValue) {
 										if (domCtrl) {
 											if (!domCtrl.parentElement)
-												domCtrl = gx.fn.getPropertyControlRef(Control, rowId);	
+												domCtrl = gx.fn.getPropertyControlRef(Control, ctrlRowId);	
 											var isObjValue = typeof (gxPropValue[Property]) === "object";
 											if (isObjValue) {
 												for (var InProperty in gxPropValue[Property]) {
-													gx.fn.setCtrlPropertyImpl(domCtrl, InProperty, gxPropValue[Property][InProperty], vStruct);
+													gx.fn.setCtrlProperty(domCtrl, InProperty, gxPropValue[Property][InProperty], vStruct);
 												}
 											}
 											else {
-												gx.fn.setCtrlPropertyImpl(domCtrl, Property, gxPropValue[Property], vStruct);
+												gx.fn.setCtrlProperty(domCtrl, Property, gxPropValue[Property], vStruct);
 											}
 											
 										}
@@ -19592,7 +19844,10 @@ gx.fn = (function($) {
 					}
 				}
 			}
-
+			updatedUCs = updatedUCs.filter( (UC) => { 
+				let grid = gx.fn.gridObj(UC.cmpCtx, UC.gridName, UC.inMasterPage);
+				return grid && grid.isUsercontrol;
+			})
 			updatedUCs = gx.lang.arrayUnique(updatedUCs, function (G1, G2) { return G1.gridName === G2.gridName});
 			var nestedGridUCs = [];
 			for (var i = 0; i < updatedUCs.length; i++) {				
@@ -19785,7 +20040,6 @@ gx.fn = (function($) {
 				gx.O.deleteComponentHiddens(cmpsCtx);
 			}
 			catch (e) {
-				except = true;
 				gx.dbg.logEx(e, 'gxfrmutl.js', 'clearCompontHiddens');
 			}
 		},
@@ -20097,11 +20351,15 @@ gx.fn = (function($) {
 			});
 			var controlSelector = 'input[type="text"], input[type="password"], input[type="email"], input[type="number"], input[type="search"], input[type="url"], textarea';
 			$(document).on('keyup', controlSelector, function (event) {
-				gx.evt.oncontrolvaluechanging(event);
+				var currentValue = `${event.target.id} + ${event.target.value}`
+				if(gx.evt.cvcingContext !== currentValue){
+					gx.evt.cvcingContext = currentValue
+					gx.evt.oncontrolvaluechanging(event);
+				}
 			});
 			$(document).on('paste', controlSelector, function (event) {
 				gx.evt.oncontrolpasting(event);
-			});			
+			});		
 			if (gx.pO != null) {
 				gx.pO.onload(loadGrids, forceAfterLoad);
 				gx.setGxO(gx.pO);
@@ -20243,7 +20501,7 @@ gx.fn = (function($) {
 				if (typeof(validStruct) === 'undefined') {
 					var ctrlIds = gx.fn.controlIds();
 					var len = ctrlIds.length;
-					for (i = 0; i < len; i++) {
+					for (let i = 0; i < len; i++) {
 						validStruct = gx.fn.validStruct(ctrlIds[i]);
 						var sRow = (validStruct.grid != 0) ? '_' + gx.fn.currentGridRow(validStruct.grid) : '';
 						var controlId = currentObject.CmpContext + validStruct.fld + sRow;
@@ -20380,7 +20638,7 @@ gx.thread = {
 		}
 
 		this.nextKey = function (k) {
-			for (i in this.map) {
+			for (var i in this.map) {
 				if (!k) {
 					return i;
 				}
@@ -20418,6 +20676,7 @@ gx.thread = {
 		}
 
 		this.attempt = function (start) {
+			let retVal;
 			for (var j = start; j; j = gx.thread.Mutex.Wait.next(j.c.id)) {
 				if (j.enter || (j.number && (j.number < this.number || (j.number == this.number && j.c.id < this.c.id))))
 					return setTimeout('gx.thread.Mutex.SLICE(' + this.c.id + ',' + j.c.id + ')', 10);
@@ -20562,8 +20821,9 @@ gx.uc = (function ($) {
 				}	
 				return value;
 			};
+	let PostRenderScripts = {};
 	return {
-		PostRenderScripts: {},
+		PostRenderScripts,
 		gxCssClass: 'gx_usercontrol',
 		getNew: function (ParentObject, ControlId, LastId, ClassName, ContainerName, ControlName, FieldName, GridLvl, GridId, GridRow) {
 			var userCtrl;
@@ -20630,8 +20890,12 @@ gx.uc = (function ($) {
 				return ControlId;
 			
 			var vStruct = gx.O.getValidStructFld(ControlId);
-			if(vStruct && vStruct.uc) {
-				var containerName = vStruct.uc.ContainerName;
+			if(vStruct) {
+				var gRow = gx.O.rowPatternRegex.exec(ControlId);
+				gRow = gRow ? gRow[1] : null;
+				var uc = (typeof vStruct.getUCInstance === 'function') ? vStruct.getUCInstance(gRow) : vStruct.uc;
+				if (uc)
+					containerName = uc.ContainerName;
 			}
 			
 			if (containerName) {
@@ -20936,16 +21200,19 @@ gx.uc = (function ($) {
 					this.ParentObject.addUsercontrolBinding(varName, ctrlName, this);
 					this.V2CFunctions.push(function(UC, gRow, readControlValue){
 						var control = ctrlName;
+						var setParentObject = function(varName, member, value) {
+							if (member) {
+								UC.ParentObject[varName][member] = value;
+							}
+							else {
+								UC.ParentObject[varName] = value;
+							}
+						};
 						if (readControlValue) {
 							if (gRow) {
 								control = ctrlName + "_" + gRow;
 							}
-							if (member) {
-								UC.ParentObject[varName][member] = gx.fn.getControlValue(control)[member];
-							}
-							else {
-								UC.ParentObject[varName] = gx.fn.getControlValue(control);
-							}
+							setParentObject(varName,member, member ? gx.fn.getControlValue(control)[member] : gx.fn.getControlValue(control))
 						}
 						var value = (member) ? UC.ParentObject[varName][member]: UC.ParentObject[varName];
 						if (UC.useGxDateForBindings) {
@@ -20958,6 +21225,7 @@ gx.uc = (function ($) {
 									else {
 										value = (new gx.date.gxdate(value, "Y4MD"));
 									}
+									setParentObject(varName,member,value)
 								}
 							}
 						}
@@ -23744,7 +24012,9 @@ gx.core.clientSocket = (function ($) {
 			if (!radioInitialized(rootCtrl)) {
 				rootCtrl.children('label').addClass('gx-radio-label btn btn-default');
 				var disabled = $(el).children().prop('disabled');
-				radioCheckedHelper(rootCtrl);
+				if (rootCtrl.children('[class*="active"]').length === 0) {
+					radioCheckedHelper(rootCtrl);
+				}
 				radioSetEnabled(rootCtrl, !(disabled === true || disabled === 'disabled'));
 				rootCtrl.find('script').remove();
 				rootCtrl.attr('data-toggle', 'buttons');
@@ -24206,7 +24476,7 @@ gx.ui = (function ($) {
 				return this.gridObject() + '.grid';
 			};
 
-			this.render = function (firstTime, fromAutoRefresh, fromCollection, afterRenderCallback) {
+			this.render = function (firstTime, fromAutoRefresh, fromCollection, afterRenderCallback, doneRender) {
 				this.refreshDynProperties();
 				this.properties = [];
 				for (var i = 0; i < this.rows.length; i++) {
@@ -24248,6 +24518,7 @@ gx.ui = (function ($) {
 						afterRenderCallback();
 					}
 				}
+				doneRender();
 				this.autoRefreshing = false;
 			};
 

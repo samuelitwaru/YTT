@@ -39,7 +39,7 @@ namespace GeneXus.Programs {
          }
          if ( GxWebError == 0 )
          {
-            executePrivate();
+            ExecutePrivate();
          }
          cleanup();
       }
@@ -61,32 +61,15 @@ namespace GeneXus.Programs {
       public void execute( )
       {
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
       public void executeSubmit( )
       {
-         aschedulerrequesthandler objaschedulerrequesthandler;
-         objaschedulerrequesthandler = new aschedulerrequesthandler();
-         objaschedulerrequesthandler.context.SetSubmitInitialConfig(context);
-         objaschedulerrequesthandler.initialize();
-         Submit( executePrivateCatch,objaschedulerrequesthandler);
+         SubmitImpl();
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((aschedulerrequesthandler)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -136,22 +119,18 @@ namespace GeneXus.Programs {
             context.Redirect( context.wjLoc );
             context.wjLoc = "";
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          base.cleanup();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -188,12 +167,12 @@ namespace GeneXus.Programs {
       private DateTime AV16dateFrom ;
       private DateTime AV17dateTo ;
       private bool entryPointCalled ;
-      private Object[] args ;
       private GxHttpRequest AV20httpRequest ;
       private GxHttpResponse AV13httpResponse ;
       private GxSimpleCollection<string> AV19fromCollection ;
       private GxSimpleCollection<string> AV22toCollection ;
       private SdtSchedulerEvents AV18events ;
+      private Object[] args ;
    }
 
 }

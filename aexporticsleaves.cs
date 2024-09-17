@@ -26,20 +26,15 @@ namespace GeneXus.Programs {
    {
       public static int Main( string[] args )
       {
-         try
-         {
-            GeneXus.Configuration.Config.ParseArgs(ref args);
-            return new aexporticsleaves().executeCmdLine(args); ;
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-            return 1 ;
-         }
+         return new aexporticsleaves().MainImpl(args); ;
       }
 
       public int executeCmdLine( string[] args )
+      {
+         return ExecuteCmdLine(args); ;
+      }
+
+      protected override int ExecuteCmdLine( string[] args )
       {
          context.StatusMessage( "Command line using complex types not supported." );
          return GX.GXRuntime.ExitCode ;
@@ -93,7 +88,7 @@ namespace GeneXus.Programs {
          this.AV12Filename = "" ;
          this.AV13ErrorMessage = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP4_Filename=this.AV12Filename;
          aP5_ErrorMessage=this.AV13ErrorMessage;
       }
@@ -115,35 +110,18 @@ namespace GeneXus.Programs {
                                  out string aP4_Filename ,
                                  out string aP5_ErrorMessage )
       {
-         aexporticsleaves objaexporticsleaves;
-         objaexporticsleaves = new aexporticsleaves();
-         objaexporticsleaves.AV16FromDate = aP0_FromDate;
-         objaexporticsleaves.AV15ToDate = aP1_ToDate;
-         objaexporticsleaves.AV17CompanyLocationId = aP2_CompanyLocationId;
-         objaexporticsleaves.AV11EmployeeIds = aP3_EmployeeIds;
-         objaexporticsleaves.AV12Filename = "" ;
-         objaexporticsleaves.AV13ErrorMessage = "" ;
-         objaexporticsleaves.context.SetSubmitInitialConfig(context);
-         objaexporticsleaves.initialize();
-         Submit( executePrivateCatch,objaexporticsleaves);
+         this.AV16FromDate = aP0_FromDate;
+         this.AV15ToDate = aP1_ToDate;
+         this.AV17CompanyLocationId = aP2_CompanyLocationId;
+         this.AV11EmployeeIds = aP3_EmployeeIds;
+         this.AV12Filename = "" ;
+         this.AV13ErrorMessage = "" ;
+         SubmitImpl();
          aP4_Filename=this.AV12Filename;
          aP5_ErrorMessage=this.AV13ErrorMessage;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((aexporticsleaves)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -220,21 +198,17 @@ namespace GeneXus.Programs {
          AV14Session.Set("WWPExportFilePath", AV12Filename);
          AV14Session.Set("WWPExportFileName", AV12Filename);
          AV12Filename = formatLink("wwpbaseobjects.wwp_downloadreport.aspx") ;
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -243,7 +217,6 @@ namespace GeneXus.Programs {
          AV13ErrorMessage = "";
          AV8File = new GxFile(context.GetPhysicalPath());
          AV9Lines = new GxSimpleCollection<string>();
-         scmdbuf = "";
          A129LeaveRequestStartDate = DateTime.MinValue;
          A130LeaveRequestEndDate = DateTime.MinValue;
          P00BI2_A124LeaveTypeId = new long[1] ;
@@ -282,7 +255,6 @@ namespace GeneXus.Programs {
       private long A124LeaveTypeId ;
       private long A100CompanyId ;
       private long A127LeaveRequestId ;
-      private string scmdbuf ;
       private string A125LeaveTypeName ;
       private string A148EmployeeName ;
       private DateTime AV16FromDate ;
@@ -294,9 +266,12 @@ namespace GeneXus.Programs {
       private string AV13ErrorMessage ;
       private string A109EmployeeEmail ;
       private string AV10OneLine ;
-      private GxSimpleCollection<long> AV11EmployeeIds ;
+      private IGxSession AV14Session ;
+      private GxFile AV8File ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GxSimpleCollection<long> AV11EmployeeIds ;
+      private GxSimpleCollection<string> AV9Lines ;
       private IDataStoreProvider pr_default ;
       private long[] P00BI2_A124LeaveTypeId ;
       private long[] P00BI2_A100CompanyId ;
@@ -311,9 +286,6 @@ namespace GeneXus.Programs {
       private long[] P00BI2_A127LeaveRequestId ;
       private string aP4_Filename ;
       private string aP5_ErrorMessage ;
-      private IGxSession AV14Session ;
-      private GxSimpleCollection<string> AV9Lines ;
-      private GxFile AV8File ;
    }
 
    public class aexporticsleaves__default : DataStoreHelperBase, IDataStoreHelper

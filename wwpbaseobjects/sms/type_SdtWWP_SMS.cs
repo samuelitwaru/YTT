@@ -1116,6 +1116,20 @@ namespace GeneXus.Programs.wwpbaseobjects.sms {
          return false ;
       }
 
+      [XmlIgnore]
+      private static GXTypeInfo _typeProps;
+      protected override GXTypeInfo TypeInfo
+      {
+         get {
+            return _typeProps ;
+         }
+
+         set {
+            _typeProps = value ;
+         }
+
+      }
+
       public void initialize( )
       {
          sdtIsNull = 1;
@@ -1179,6 +1193,7 @@ namespace GeneXus.Programs.wwpbaseobjects.sms {
    }
 
    [DataContract(Name = @"WWPBaseObjects\SMS\WWP_SMS", Namespace = "YTT_version4")]
+   [GxJsonSerialization("default")]
    public class SdtWWP_SMS_RESTInterface : GxGenericCollectionItem<GeneXus.Programs.wwpbaseobjects.sms.SdtWWP_SMS>
    {
       public SdtWWP_SMS_RESTInterface( ) : base()
@@ -1261,11 +1276,11 @@ namespace GeneXus.Programs.wwpbaseobjects.sms {
       public string gxTpr_Wwpsmscreated
       {
          get {
-            return DateTimeUtil.TToC3( sdt.gxTpr_Wwpsmscreated) ;
+            return DateTimeUtil.TToC3( sdt.gxTpr_Wwpsmscreated, (IGxContext)(context)) ;
          }
 
          set {
-            sdt.gxTpr_Wwpsmscreated = DateTimeUtil.CToT2( value);
+            sdt.gxTpr_Wwpsmscreated = DateTimeUtil.CToT2( value, (IGxContext)(context));
          }
 
       }
@@ -1275,11 +1290,11 @@ namespace GeneXus.Programs.wwpbaseobjects.sms {
       public string gxTpr_Wwpsmsscheduled
       {
          get {
-            return DateTimeUtil.TToC3( sdt.gxTpr_Wwpsmsscheduled) ;
+            return DateTimeUtil.TToC3( sdt.gxTpr_Wwpsmsscheduled, (IGxContext)(context)) ;
          }
 
          set {
-            sdt.gxTpr_Wwpsmsscheduled = DateTimeUtil.CToT2( value);
+            sdt.gxTpr_Wwpsmsscheduled = DateTimeUtil.CToT2( value, (IGxContext)(context));
          }
 
       }
@@ -1289,11 +1304,11 @@ namespace GeneXus.Programs.wwpbaseobjects.sms {
       public string gxTpr_Wwpsmsprocessed
       {
          get {
-            return DateTimeUtil.TToC3( sdt.gxTpr_Wwpsmsprocessed) ;
+            return DateTimeUtil.TToC3( sdt.gxTpr_Wwpsmsprocessed, (IGxContext)(context)) ;
          }
 
          set {
-            sdt.gxTpr_Wwpsmsprocessed = DateTimeUtil.CToT2( value);
+            sdt.gxTpr_Wwpsmsprocessed = DateTimeUtil.CToT2( value, (IGxContext)(context));
          }
 
       }
@@ -1330,11 +1345,11 @@ namespace GeneXus.Programs.wwpbaseobjects.sms {
       public string gxTpr_Wwpnotificationcreated
       {
          get {
-            return DateTimeUtil.TToC3( sdt.gxTpr_Wwpnotificationcreated) ;
+            return DateTimeUtil.TToC3( sdt.gxTpr_Wwpnotificationcreated, (IGxContext)(context)) ;
          }
 
          set {
-            sdt.gxTpr_Wwpnotificationcreated = DateTimeUtil.CToT2( value);
+            sdt.gxTpr_Wwpnotificationcreated = DateTimeUtil.CToT2( value, (IGxContext)(context));
          }
 
       }
@@ -1381,6 +1396,7 @@ namespace GeneXus.Programs.wwpbaseobjects.sms {
    }
 
    [DataContract(Name = @"WWPBaseObjects\SMS\WWP_SMS", Namespace = "YTT_version4")]
+   [GxJsonSerialization("default")]
    public class SdtWWP_SMS_RESTLInterface : GxGenericCollectionItem<GeneXus.Programs.wwpbaseobjects.sms.SdtWWP_SMS>
    {
       public SdtWWP_SMS_RESTLInterface( ) : base()

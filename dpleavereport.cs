@@ -68,7 +68,7 @@ namespace GeneXus.Programs {
          this.AV6PeriodicCategory = aP5_PeriodicCategory;
          this.Gxm1sdtleavereport = new SdtSDTLeaveReport(context) ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP6_Gxm1sdtleavereport=this.Gxm1sdtleavereport;
       }
 
@@ -91,35 +91,18 @@ namespace GeneXus.Programs {
                                  short aP5_PeriodicCategory ,
                                  out SdtSDTLeaveReport aP6_Gxm1sdtleavereport )
       {
-         dpleavereport objdpleavereport;
-         objdpleavereport = new dpleavereport();
-         objdpleavereport.AV5StartDate = aP0_StartDate;
-         objdpleavereport.AV11EndDate = aP1_EndDate;
-         objdpleavereport.AV7EmployeeId = aP2_EmployeeId;
-         objdpleavereport.AV8LocationId = aP3_LocationId;
-         objdpleavereport.AV12ProjectId = aP4_ProjectId;
-         objdpleavereport.AV6PeriodicCategory = aP5_PeriodicCategory;
-         objdpleavereport.Gxm1sdtleavereport = new SdtSDTLeaveReport(context) ;
-         objdpleavereport.context.SetSubmitInitialConfig(context);
-         objdpleavereport.initialize();
-         Submit( executePrivateCatch,objdpleavereport);
+         this.AV5StartDate = aP0_StartDate;
+         this.AV11EndDate = aP1_EndDate;
+         this.AV7EmployeeId = aP2_EmployeeId;
+         this.AV8LocationId = aP3_LocationId;
+         this.AV12ProjectId = aP4_ProjectId;
+         this.AV6PeriodicCategory = aP5_PeriodicCategory;
+         this.Gxm1sdtleavereport = new SdtSDTLeaveReport(context) ;
+         SubmitImpl();
          aP6_Gxm1sdtleavereport=this.Gxm1sdtleavereport;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((dpleavereport)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -149,21 +132,17 @@ namespace GeneXus.Programs {
             Gxm2sdtleavereport_periodcollection.gxTpr_Formattedtotalwork = GXt_char2;
             AV15GXV1 = (int)(AV15GXV1+1);
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -184,12 +163,12 @@ namespace GeneXus.Programs {
       private DateTime AV5StartDate ;
       private DateTime AV11EndDate ;
       private GxSimpleCollection<long> AV12ProjectId ;
-      private SdtSDTLeaveReport aP6_Gxm1sdtleavereport ;
+      private SdtSDTLeaveReport Gxm1sdtleavereport ;
       private GXBaseCollection<SdtSDTLeaveReport_PeriodCollectionItem> AV9Periods ;
       private GXBaseCollection<SdtSDTLeaveReport_PeriodCollectionItem> GXt_objcol_SdtSDTLeaveReport_PeriodCollectionItem1 ;
-      private SdtSDTLeaveReport Gxm1sdtleavereport ;
       private SdtSDTLeaveReport_PeriodCollectionItem AV10Period ;
       private SdtSDTLeaveReport_PeriodCollectionItem Gxm2sdtleavereport_periodcollection ;
+      private SdtSDTLeaveReport aP6_Gxm1sdtleavereport ;
    }
 
 }

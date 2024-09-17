@@ -65,7 +65,7 @@ namespace GeneXus.Programs {
          }
          if ( GxWebError == 0 )
          {
-            executePrivate();
+            ExecutePrivate();
          }
          cleanup();
       }
@@ -91,32 +91,15 @@ namespace GeneXus.Programs {
       public void execute( )
       {
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
       public void executeSubmit( )
       {
-         acalculateworkhourlogduration objacalculateworkhourlogduration;
-         objacalculateworkhourlogduration = new acalculateworkhourlogduration();
-         objacalculateworkhourlogduration.context.SetSubmitInitialConfig(context);
-         objacalculateworkhourlogduration.initialize();
-         Submit( executePrivateCatch,objacalculateworkhourlogduration);
+         SubmitImpl();
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((acalculateworkhourlogduration)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -272,7 +255,7 @@ namespace GeneXus.Programs {
             context.Redirect( context.wjLoc );
             context.wjLoc = "";
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void H8U0( bool bFoot ,
@@ -329,7 +312,7 @@ namespace GeneXus.Programs {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if (IsMain)	waitPrinterEnd();
          base.cleanup();
          if ( IsMain )
@@ -337,10 +320,6 @@ namespace GeneXus.Programs {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -352,7 +331,6 @@ namespace GeneXus.Programs {
          AV13FromDate = DateTime.MinValue;
          Gx_date = DateTime.MinValue;
          AV12ToDate = DateTime.MinValue;
-         scmdbuf = "";
          P008U2_A157CompanyLocationId = new long[1] ;
          P008U3_A157CompanyLocationId = new long[1] ;
          P008U3_A100CompanyId = new long[1] ;
@@ -419,7 +397,6 @@ namespace GeneXus.Programs {
       private long A102ProjectId ;
       private string GXKey ;
       private string gxfirstwebparm ;
-      private string scmdbuf ;
       private string A103ProjectName ;
       private string AV10formattedTotal ;
       private string GXt_char1 ;
@@ -434,19 +411,19 @@ namespace GeneXus.Programs {
       private bool n40000GXC1 ;
       private bool n40001GXC2 ;
       private string AV17StringEmployeeId ;
-      private GxSimpleCollection<long> AV9CompanyLocationId ;
-      private GxSimpleCollection<long> AV14ProjectId ;
-      private GxSimpleCollection<long> AV16EmployeeId ;
-      private GxSimpleCollection<long> AV27Dsworkhourlogs_1_companylocationid ;
-      private GxSimpleCollection<long> AV28Dsworkhourlogs_2_employeeid ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GxSimpleCollection<long> AV9CompanyLocationId ;
+      private GxSimpleCollection<long> AV14ProjectId ;
       private IDataStoreProvider pr_default ;
       private long[] P008U2_A157CompanyLocationId ;
       private long[] P008U3_A157CompanyLocationId ;
       private long[] P008U3_A100CompanyId ;
       private long[] P008U4_A100CompanyId ;
       private long[] P008U4_A106EmployeeId ;
+      private GxSimpleCollection<long> AV16EmployeeId ;
+      private GxSimpleCollection<long> AV27Dsworkhourlogs_1_companylocationid ;
+      private GxSimpleCollection<long> AV28Dsworkhourlogs_2_employeeid ;
       private long[] P008U6_A106EmployeeId ;
       private long[] P008U6_A100CompanyId ;
       private DateTime[] P008U6_A119WorkHourLogDate ;

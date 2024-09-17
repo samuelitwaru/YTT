@@ -51,7 +51,7 @@ namespace GeneXus.Programs.general.services {
          this.AV4DeviceToken = aP2_DeviceToken;
          this.AV5DeviceName = aP3_DeviceName;
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
       public void executeSubmit( short aP0_DeviceType ,
@@ -59,53 +59,32 @@ namespace GeneXus.Programs.general.services {
                                  string aP2_DeviceToken ,
                                  string aP3_DeviceName )
       {
-         notificationsregistrationhandler objnotificationsregistrationhandler;
-         objnotificationsregistrationhandler = new notificationsregistrationhandler();
-         objnotificationsregistrationhandler.AV2DeviceType = aP0_DeviceType;
-         objnotificationsregistrationhandler.AV3DeviceId = aP1_DeviceId;
-         objnotificationsregistrationhandler.AV4DeviceToken = aP2_DeviceToken;
-         objnotificationsregistrationhandler.AV5DeviceName = aP3_DeviceName;
-         objnotificationsregistrationhandler.context.SetSubmitInitialConfig(context);
-         objnotificationsregistrationhandler.initialize();
-         Submit( executePrivateCatch,objnotificationsregistrationhandler);
+         this.AV2DeviceType = aP0_DeviceType;
+         this.AV3DeviceId = aP1_DeviceId;
+         this.AV4DeviceToken = aP2_DeviceToken;
+         this.AV5DeviceName = aP3_DeviceName;
+         SubmitImpl();
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((notificationsregistrationhandler)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
          args = new Object[] {(short)AV2DeviceType,(string)AV3DeviceId,(string)AV4DeviceToken,(string)AV5DeviceName} ;
-         ClassLoader.Execute("general-services-anotificationsregistrationhandler","GeneXus.Programs","general.services.anotificationsregistrationhandler", new Object[] {context }, "execute", args);
+         ClassLoader.Execute("general.services.anotificationsregistrationhandler","GeneXus.Programs","general.services.anotificationsregistrationhandler", new Object[] {context }, "execute", args);
          if ( ( args != null ) && ( args.Length == 4 ) )
          {
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )

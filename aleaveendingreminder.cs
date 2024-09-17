@@ -41,7 +41,7 @@ namespace GeneXus.Programs {
          }
          if ( GxWebError == 0 )
          {
-            executePrivate();
+            ExecutePrivate();
          }
          cleanup();
       }
@@ -67,32 +67,15 @@ namespace GeneXus.Programs {
       public void execute( )
       {
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
       public void executeSubmit( )
       {
-         aleaveendingreminder objaleaveendingreminder;
-         objaleaveendingreminder = new aleaveendingreminder();
-         objaleaveendingreminder.context.SetSubmitInitialConfig(context);
-         objaleaveendingreminder.initialize();
-         Submit( executePrivateCatch,objaleaveendingreminder);
+         SubmitImpl();
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((aleaveendingreminder)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -126,12 +109,12 @@ namespace GeneXus.Programs {
             context.Redirect( context.wjLoc );
             context.wjLoc = "";
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          base.cleanup();
          if ( IsMain )
          {
@@ -140,16 +123,11 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
          GXKey = "";
          gxfirstwebparm = "";
          AV15Subject = "";
-         scmdbuf = "";
          Gx_date = DateTime.MinValue;
          P005X2_A124LeaveTypeId = new long[1] ;
          P005X2_A132LeaveRequestStatus = new string[] {""} ;
@@ -189,7 +167,6 @@ namespace GeneXus.Programs {
       private string GXKey ;
       private string gxfirstwebparm ;
       private string AV15Subject ;
-      private string scmdbuf ;
       private string A132LeaveRequestStatus ;
       private string A125LeaveTypeName ;
       private string A107EmployeeFirstName ;

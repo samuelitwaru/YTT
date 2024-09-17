@@ -52,7 +52,7 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
          this.AV9WWPNotificationDefinitionId = aP2_WWPNotificationDefinitionId;
          this.AV12WWPSubscriptionRoleId = aP3_WWPSubscriptionRoleId;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_WWPSubscriptionId=this.AV11WWPSubscriptionId;
       }
 
@@ -61,32 +61,15 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
                                  long aP2_WWPNotificationDefinitionId ,
                                  string aP3_WWPSubscriptionRoleId )
       {
-         wwp_roleupdatesubscription objwwp_roleupdatesubscription;
-         objwwp_roleupdatesubscription = new wwp_roleupdatesubscription();
-         objwwp_roleupdatesubscription.AV8Subscribe = aP0_Subscribe;
-         objwwp_roleupdatesubscription.AV11WWPSubscriptionId = aP1_WWPSubscriptionId;
-         objwwp_roleupdatesubscription.AV9WWPNotificationDefinitionId = aP2_WWPNotificationDefinitionId;
-         objwwp_roleupdatesubscription.AV12WWPSubscriptionRoleId = aP3_WWPSubscriptionRoleId;
-         objwwp_roleupdatesubscription.context.SetSubmitInitialConfig(context);
-         objwwp_roleupdatesubscription.initialize();
-         Submit( executePrivateCatch,objwwp_roleupdatesubscription);
+         this.AV8Subscribe = aP0_Subscribe;
+         this.AV11WWPSubscriptionId = aP1_WWPSubscriptionId;
+         this.AV9WWPNotificationDefinitionId = aP2_WWPNotificationDefinitionId;
+         this.AV12WWPSubscriptionRoleId = aP3_WWPSubscriptionRoleId;
+         SubmitImpl();
          aP1_WWPSubscriptionId=this.AV11WWPSubscriptionId;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwp_roleupdatesubscription)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -135,13 +118,13 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
          {
             context.CommitDataStores("wwpbaseobjects.subscriptions.wwp_roleupdatesubscription",pr_default);
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
          context.CommitDataStores("wwpbaseobjects.subscriptions.wwp_roleupdatesubscription",pr_default);
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -149,16 +132,11 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
          AV10WWPSubscription = new GeneXus.Programs.wwpbaseobjects.subscriptions.SdtWWP_Subscription(context);
          AV13WWPUserExtendedIdCollection = new GxSimpleCollection<string>();
          GXt_objcol_char1 = new GxSimpleCollection<string>();
-         scmdbuf = "";
          A7WWPUserExtendedId = "";
          P002N2_A7WWPUserExtendedId = new string[] {""} ;
          P002N2_n7WWPUserExtendedId = new bool[] {false} ;
@@ -185,22 +163,21 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
       private long A23WWPNotificationDefinitionId ;
       private long A25WWPSubscriptionId ;
       private string AV12WWPSubscriptionRoleId ;
-      private string scmdbuf ;
       private string A7WWPUserExtendedId ;
       private bool AV8Subscribe ;
       private bool n7WWPUserExtendedId ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private long aP1_WWPSubscriptionId ;
+      private GeneXus.Programs.wwpbaseobjects.subscriptions.SdtWWP_Subscription AV10WWPSubscription ;
+      private GxSimpleCollection<string> AV13WWPUserExtendedIdCollection ;
+      private GxSimpleCollection<string> GXt_objcol_char1 ;
       private IDataStoreProvider pr_default ;
       private string[] P002N2_A7WWPUserExtendedId ;
       private bool[] P002N2_n7WWPUserExtendedId ;
       private long[] P002N2_A23WWPNotificationDefinitionId ;
       private long[] P002N2_A25WWPSubscriptionId ;
       private IDataStoreProvider pr_gam ;
-      private GxSimpleCollection<string> AV13WWPUserExtendedIdCollection ;
-      private GxSimpleCollection<string> GXt_objcol_char1 ;
-      private GeneXus.Programs.wwpbaseobjects.subscriptions.SdtWWP_Subscription AV10WWPSubscription ;
    }
 
    public class wwp_roleupdatesubscription__gam : DataStoreHelperBase, IDataStoreHelper

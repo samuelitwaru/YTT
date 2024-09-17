@@ -84,7 +84,7 @@ namespace GeneXus.Programs {
          this.AV23SelectedText = "" ;
          this.AV24Combo_DataJson = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP5_SelectedValue=this.AV22SelectedValue;
          aP6_SelectedText=this.AV23SelectedText;
          aP7_Combo_DataJson=this.AV24Combo_DataJson;
@@ -111,38 +111,21 @@ namespace GeneXus.Programs {
                                  out string aP6_SelectedText ,
                                  out string aP7_Combo_DataJson )
       {
-         sitesettingloaddvcombo objsitesettingloaddvcombo;
-         objsitesettingloaddvcombo = new sitesettingloaddvcombo();
-         objsitesettingloaddvcombo.AV17ComboName = aP0_ComboName;
-         objsitesettingloaddvcombo.AV18TrnMode = aP1_TrnMode;
-         objsitesettingloaddvcombo.AV19IsDynamicCall = aP2_IsDynamicCall;
-         objsitesettingloaddvcombo.AV20SiteSettingId = aP3_SiteSettingId;
-         objsitesettingloaddvcombo.AV21SearchTxtParms = aP4_SearchTxtParms;
-         objsitesettingloaddvcombo.AV22SelectedValue = "" ;
-         objsitesettingloaddvcombo.AV23SelectedText = "" ;
-         objsitesettingloaddvcombo.AV24Combo_DataJson = "" ;
-         objsitesettingloaddvcombo.context.SetSubmitInitialConfig(context);
-         objsitesettingloaddvcombo.initialize();
-         Submit( executePrivateCatch,objsitesettingloaddvcombo);
+         this.AV17ComboName = aP0_ComboName;
+         this.AV18TrnMode = aP1_TrnMode;
+         this.AV19IsDynamicCall = aP2_IsDynamicCall;
+         this.AV20SiteSettingId = aP3_SiteSettingId;
+         this.AV21SearchTxtParms = aP4_SearchTxtParms;
+         this.AV22SelectedValue = "" ;
+         this.AV23SelectedText = "" ;
+         this.AV24Combo_DataJson = "" ;
+         SubmitImpl();
          aP5_SelectedValue=this.AV22SelectedValue;
          aP6_SelectedText=this.AV23SelectedText;
          aP7_Combo_DataJson=this.AV24Combo_DataJson;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((sitesettingloaddvcombo)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -157,11 +140,11 @@ namespace GeneXus.Programs {
             S111 ();
             if ( returnInSub )
             {
-               this.cleanup();
+               cleanup();
                if (true) return;
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void S111( )
@@ -243,16 +226,12 @@ namespace GeneXus.Programs {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -262,7 +241,6 @@ namespace GeneXus.Programs {
          AV24Combo_DataJson = "";
          AV9WWPContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPContext(context);
          AV14SearchTxt = "";
-         scmdbuf = "";
          lV14SearchTxt = "";
          A101CompanyName = "";
          P00BD2_A101CompanyName = new string[] {""} ;
@@ -300,7 +278,6 @@ namespace GeneXus.Programs {
       private long A160SiteSettingId ;
       private long AV28CompanyId ;
       private string AV18TrnMode ;
-      private string scmdbuf ;
       private string A101CompanyName ;
       private bool AV19IsDynamicCall ;
       private bool returnInSub ;
@@ -313,9 +290,12 @@ namespace GeneXus.Programs {
       private string lV14SearchTxt ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV9WWPContext ;
       private IDataStoreProvider pr_default ;
       private string[] P00BD2_A101CompanyName ;
       private long[] P00BD2_A100CompanyId ;
+      private GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item AV16Combo_DataItem ;
+      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item> AV15Combo_Data ;
       private long[] P00BD3_A160SiteSettingId ;
       private long[] P00BD3_A100CompanyId ;
       private string[] P00BD3_A101CompanyName ;
@@ -324,9 +304,6 @@ namespace GeneXus.Programs {
       private string aP5_SelectedValue ;
       private string aP6_SelectedText ;
       private string aP7_Combo_DataJson ;
-      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item> AV15Combo_Data ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV9WWPContext ;
-      private GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item AV16Combo_DataItem ;
    }
 
    public class sitesettingloaddvcombo__default : DataStoreHelperBase, IDataStoreHelper

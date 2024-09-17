@@ -40,7 +40,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       {
          this.AV9DVelop_Menu = aP0_DVelop_Menu;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_DVelop_Menu=this.AV9DVelop_Menu;
       }
 
@@ -52,29 +52,12 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       public void executeSubmit( ref GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item> aP0_DVelop_Menu )
       {
-         getmenuauthorizedoptions objgetmenuauthorizedoptions;
-         objgetmenuauthorizedoptions = new getmenuauthorizedoptions();
-         objgetmenuauthorizedoptions.AV9DVelop_Menu = aP0_DVelop_Menu;
-         objgetmenuauthorizedoptions.context.SetSubmitInitialConfig(context);
-         objgetmenuauthorizedoptions.initialize();
-         Submit( executePrivateCatch,objgetmenuauthorizedoptions);
+         this.AV9DVelop_Menu = aP0_DVelop_Menu;
+         SubmitImpl();
          aP0_DVelop_Menu=this.AV9DVelop_Menu;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((getmenuauthorizedoptions)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -122,21 +105,17 @@ namespace GeneXus.Programs.wwpbaseobjects {
             }
             AV11i = (short)(AV11i+1);
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -154,11 +133,11 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private bool AV12IsAuthorized ;
       private bool GXt_boolean1 ;
       private string AV15ResultJson ;
-      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item> aP0_DVelop_Menu ;
-      private GxSimpleCollection<string> AV14RemoveIds ;
       private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item> AV9DVelop_Menu ;
+      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item> aP0_DVelop_Menu ;
       private GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item AV10DVelop_Menu_Item ;
       private GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item AV8Aux_DVelop_Menu_Item ;
+      private GxSimpleCollection<string> AV14RemoveIds ;
    }
 
 }

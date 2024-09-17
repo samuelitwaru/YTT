@@ -288,7 +288,6 @@
 }
 .oatgrid_top_div 
 {
-	display : inline-block;
 	font-family : var(--fonts_primary-bold);
 	color : var(--colors_on-background);
 	font-size : var(--fontsizes_s);

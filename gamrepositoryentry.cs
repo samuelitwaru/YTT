@@ -45,12 +45,12 @@ namespace GeneXus.Programs {
       {
          this.Gx_mode = aP0_Gx_mode;
          this.AV30Id = aP1_Id;
-         executePrivate();
+         ExecuteImpl();
          aP0_Gx_mode=this.Gx_mode;
          aP1_Id=this.AV30Id;
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -177,11 +177,8 @@ namespace GeneXus.Programs {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITWEB( ) ;
          if ( ! isAjaxCallMode( ) )
          {
@@ -212,7 +209,7 @@ namespace GeneXus.Programs {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override short ExecuteStartEvent( )
@@ -256,10 +253,10 @@ namespace GeneXus.Programs {
          CloseStyles();
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
@@ -979,7 +976,7 @@ namespace GeneXus.Programs {
          {
             if ( context.ExposeMetadata( ) )
             {
-               Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+               Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
             }
          }
          Form.Meta.addItem("description", "Repository ", 0) ;
@@ -1725,7 +1722,7 @@ namespace GeneXus.Programs {
          PA1E2( ) ;
          WS1E2( ) ;
          WE1E2( ) ;
-         this.cleanup();
+         cleanup();
          context.SetWrapped(false);
          context.GX_msglist = BackMsgLst;
          return "";
@@ -1746,7 +1743,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20248121575354", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20249161317167", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1762,7 +1759,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("gamrepositoryentry.js", "?20248121575357", false, true);
+         context.AddJavascriptSource("gamrepositoryentry.js", "?20249161317170", false, true);
          context.AddJavascriptSource("shared/HistoryManager/HistoryManager.js", "", false, true);
          context.AddJavascriptSource("shared/HistoryManager/rsh/json2005.js", "", false, true);
          context.AddJavascriptSource("shared/HistoryManager/rsh/rsh.js", "", false, true);
@@ -1775,7 +1772,7 @@ namespace GeneXus.Programs {
       {
          chkavUsecurrentrepositorasmasterauthentication.Name = "vUSECURRENTREPOSITORASMASTERAUTHENTICATION";
          chkavUsecurrentrepositorasmasterauthentication.WebTags = "";
-         chkavUsecurrentrepositorasmasterauthentication.Caption = "Use the current repository as the authentication master repository";
+         chkavUsecurrentrepositorasmasterauthentication.Caption = " ";
          AssignProp("", false, chkavUsecurrentrepositorasmasterauthentication_Internalname, "TitleCaption", chkavUsecurrentrepositorasmasterauthentication.Caption, true);
          chkavUsecurrentrepositorasmasterauthentication.CheckedValue = "false";
          AV42UseCurrentRepositorAsMasterAuthentication = StringUtil.StrToBool( StringUtil.BoolToStr( AV42UseCurrentRepositorAsMasterAuthentication));
@@ -1793,35 +1790,35 @@ namespace GeneXus.Programs {
          }
          chkavAllowoauthaccess.Name = "vALLOWOAUTHACCESS";
          chkavAllowoauthaccess.WebTags = "";
-         chkavAllowoauthaccess.Caption = "Allow oauth access?";
+         chkavAllowoauthaccess.Caption = "";
          AssignProp("", false, chkavAllowoauthaccess_Internalname, "TitleCaption", chkavAllowoauthaccess.Caption, true);
          chkavAllowoauthaccess.CheckedValue = "false";
          AV8AllowOauthAccess = StringUtil.StrToBool( StringUtil.BoolToStr( AV8AllowOauthAccess));
          AssignAttri("", false, "AV8AllowOauthAccess", AV8AllowOauthAccess);
          chkavCanregisterusers.Name = "vCANREGISTERUSERS";
          chkavCanregisterusers.WebTags = "";
-         chkavCanregisterusers.Caption = "Can register users?";
+         chkavCanregisterusers.Caption = "";
          AssignProp("", false, chkavCanregisterusers_Internalname, "TitleCaption", chkavCanregisterusers.Caption, true);
          chkavCanregisterusers.CheckedValue = "false";
          AV45CanRegisterUsers = StringUtil.StrToBool( StringUtil.BoolToStr( AV45CanRegisterUsers));
          AssignAttri("", false, "AV45CanRegisterUsers", AV45CanRegisterUsers);
          chkavGiveanonymoussession.Name = "vGIVEANONYMOUSSESSION";
          chkavGiveanonymoussession.WebTags = "";
-         chkavGiveanonymoussession.Caption = "Give anonymous session?";
+         chkavGiveanonymoussession.Caption = "";
          AssignProp("", false, chkavGiveanonymoussession_Internalname, "TitleCaption", chkavGiveanonymoussession.Caption, true);
          chkavGiveanonymoussession.CheckedValue = "false";
          AV28GiveAnonymousSession = StringUtil.StrToBool( StringUtil.BoolToStr( AV28GiveAnonymousSession));
          AssignAttri("", false, "AV28GiveAnonymousSession", AV28GiveAnonymousSession);
          chkavIsgamadminaccessrepository.Name = "vISGAMADMINACCESSREPOSITORY";
          chkavIsgamadminaccessrepository.WebTags = "";
-         chkavIsgamadminaccessrepository.Caption = "Is the current user an administrator of the new repository?";
+         chkavIsgamadminaccessrepository.Caption = " ";
          AssignProp("", false, chkavIsgamadminaccessrepository_Internalname, "TitleCaption", chkavIsgamadminaccessrepository.Caption, true);
          chkavIsgamadminaccessrepository.CheckedValue = "false";
          AV31isGAMAdminAccessRepository = StringUtil.StrToBool( StringUtil.BoolToStr( AV31isGAMAdminAccessRepository));
          AssignAttri("", false, "AV31isGAMAdminAccessRepository", AV31isGAMAdminAccessRepository);
          chkavCreategamapplication.Name = "vCREATEGAMAPPLICATION";
          chkavCreategamapplication.WebTags = "";
-         chkavCreategamapplication.Caption = "Create GAM Backend application?";
+         chkavCreategamapplication.Caption = " ";
          AssignProp("", false, chkavCreategamapplication_Internalname, "TitleCaption", chkavCreategamapplication.Caption, true);
          chkavCreategamapplication.CheckedValue = "false";
          AV20CreateGAMApplication = StringUtil.StrToBool( StringUtil.BoolToStr( AV20CreateGAMApplication));
@@ -1835,28 +1832,28 @@ namespace GeneXus.Programs {
          }
          chkavCopyroles.Name = "vCOPYROLES";
          chkavCopyroles.WebTags = "";
-         chkavCopyroles.Caption = "Copy Roles?";
+         chkavCopyroles.Caption = " ";
          AssignProp("", false, chkavCopyroles_Internalname, "TitleCaption", chkavCopyroles.Caption, true);
          chkavCopyroles.CheckedValue = "false";
          AV18CopyRoles = StringUtil.StrToBool( StringUtil.BoolToStr( AV18CopyRoles));
          AssignAttri("", false, "AV18CopyRoles", AV18CopyRoles);
          chkavCopysecuritypolicies.Name = "vCOPYSECURITYPOLICIES";
          chkavCopysecuritypolicies.WebTags = "";
-         chkavCopysecuritypolicies.Caption = "Copy Security Policies?";
+         chkavCopysecuritypolicies.Caption = " ";
          AssignProp("", false, chkavCopysecuritypolicies_Internalname, "TitleCaption", chkavCopysecuritypolicies.Caption, true);
          chkavCopysecuritypolicies.CheckedValue = "false";
          AV19CopySecurityPolicies = StringUtil.StrToBool( StringUtil.BoolToStr( AV19CopySecurityPolicies));
          AssignAttri("", false, "AV19CopySecurityPolicies", AV19CopySecurityPolicies);
          chkavCopyapplication.Name = "vCOPYAPPLICATION";
          chkavCopyapplication.WebTags = "";
-         chkavCopyapplication.Caption = "Copy Application? (Menus and Permissions)";
+         chkavCopyapplication.Caption = " ";
          AssignProp("", false, chkavCopyapplication_Internalname, "TitleCaption", chkavCopyapplication.Caption, true);
          chkavCopyapplication.CheckedValue = "false";
          AV14CopyApplication = StringUtil.StrToBool( StringUtil.BoolToStr( AV14CopyApplication));
          AssignAttri("", false, "AV14CopyApplication", AV14CopyApplication);
          chkavCopyapplicationrolepermissions.Name = "vCOPYAPPLICATIONROLEPERMISSIONS";
          chkavCopyapplicationrolepermissions.WebTags = "";
-         chkavCopyapplicationrolepermissions.Caption = "Copy Roles Permissions?";
+         chkavCopyapplicationrolepermissions.Caption = " ";
          AssignProp("", false, chkavCopyapplicationrolepermissions_Internalname, "TitleCaption", chkavCopyapplicationrolepermissions.Caption, true);
          chkavCopyapplicationrolepermissions.CheckedValue = "false";
          AV15CopyApplicationRolePermissions = StringUtil.StrToBool( StringUtil.BoolToStr( AV15CopyApplicationRolePermissions));
@@ -2017,29 +2014,22 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'AV42UseCurrentRepositorAsMasterAuthentication',fld:'vUSECURRENTREPOSITORASMASTERAUTHENTICATION',pic:''},{av:'AV8AllowOauthAccess',fld:'vALLOWOAUTHACCESS',pic:''},{av:'AV45CanRegisterUsers',fld:'vCANREGISTERUSERS',pic:''},{av:'AV28GiveAnonymousSession',fld:'vGIVEANONYMOUSSESSION',pic:''},{av:'AV31isGAMAdminAccessRepository',fld:'vISGAMADMINACCESSREPOSITORY',pic:''},{av:'AV20CreateGAMApplication',fld:'vCREATEGAMAPPLICATION',pic:''},{av:'AV18CopyRoles',fld:'vCOPYROLES',pic:''},{av:'AV19CopySecurityPolicies',fld:'vCOPYSECURITYPOLICIES',pic:''},{av:'AV14CopyApplication',fld:'vCOPYAPPLICATION',pic:''},{av:'AV15CopyApplicationRolePermissions',fld:'vCOPYAPPLICATIONROLEPERMISSIONS',pic:''},{av:'AV41UpdateConnectionFile',fld:'vUPDATECONNECTIONFILE',pic:''},{av:'AV30Id',fld:'vID',pic:'ZZZZZZZZ9',hsh:true},{av:'Gx_mode',fld:'vMODE',pic:'@!',hsh:true}]");
-         setEventMetadata("REFRESH",",oparms:[]}");
-         setEventMetadata("ENTER","{handler:'E121E2',iparms:[{av:'AV30Id',fld:'vID',pic:'ZZZZZZZZ9',hsh:true},{av:'Gx_mode',fld:'vMODE',pic:'@!',hsh:true},{av:'AV7AdministratorUserPassword',fld:'vADMINISTRATORUSERPASSWORD',pic:''},{av:'AV10ConfAdministratorUserPassword',fld:'vCONFADMINISTRATORUSERPASSWORD',pic:''},{av:'AV13ConnectionUserPassword',fld:'vCONNECTIONUSERPASSWORD',pic:''},{av:'AV11ConfConnectionUserPassword',fld:'vCONFCONNECTIONUSERPASSWORD',pic:''},{av:'AV33Name',fld:'vNAME',pic:''},{av:'AV34Namespace',fld:'vNAMESPACE',pic:''},{av:'AV21Description',fld:'vDESCRIPTION',pic:''},{av:'AV6AdministratorUserName',fld:'vADMINISTRATORUSERNAME',pic:''},{av:'AV8AllowOauthAccess',fld:'vALLOWOAUTHACCESS',pic:''},{av:'AV12ConnectionUserName',fld:'vCONNECTIONUSERNAME',pic:''},{av:'cmbavGeneratesessionstatistics'},{av:'AV27GenerateSessionStatistics',fld:'vGENERATESESSIONSTATISTICS',pic:''},{av:'AV42UseCurrentRepositorAsMasterAuthentication',fld:'vUSECURRENTREPOSITORASMASTERAUTHENTICATION',pic:''},{av:'AV9AuthenticationMasterAuthTypeName',fld:'vAUTHENTICATIONMASTERAUTHTYPENAME',pic:''},{av:'AV20CreateGAMApplication',fld:'vCREATEGAMAPPLICATION',pic:''},{av:'cmbavCopyfromrepositoryid'},{av:'AV17CopyFromRepositoryId',fld:'vCOPYFROMREPOSITORYID',pic:'ZZZZZZZZ9'},{av:'AV18CopyRoles',fld:'vCOPYROLES',pic:''},{av:'AV5AdministratorRoleId',fld:'vADMINISTRATORROLEID',pic:'ZZZZZZZZZZZ9'},{av:'AV19CopySecurityPolicies',fld:'vCOPYSECURITYPOLICIES',pic:''},{av:'AV14CopyApplication',fld:'vCOPYAPPLICATION',pic:''},{av:'AV16CopyFromApplicationId',fld:'vCOPYFROMAPPLICATIONID',pic:'ZZZZZZZZZZZ9'},{av:'AV15CopyApplicationRolePermissions',fld:'vCOPYAPPLICATIONROLEPERMISSIONS',pic:''},{av:'AV41UpdateConnectionFile',fld:'vUPDATECONNECTIONFILE',pic:''},{av:'AV31isGAMAdminAccessRepository',fld:'vISGAMADMINACCESSREPOSITORY',pic:''}]");
-         setEventMetadata("ENTER",",oparms:[{av:'AV29GUID',fld:'vGUID',pic:''}]}");
-         setEventMetadata("VUSECURRENTREPOSITORASMASTERAUTHENTICATION.CLICK","{handler:'E131E2',iparms:[{av:'AV42UseCurrentRepositorAsMasterAuthentication',fld:'vUSECURRENTREPOSITORASMASTERAUTHENTICATION',pic:''},{av:'AV15CopyApplicationRolePermissions',fld:'vCOPYAPPLICATIONROLEPERMISSIONS',pic:''},{av:'AV18CopyRoles',fld:'vCOPYROLES',pic:''},{av:'AV14CopyApplication',fld:'vCOPYAPPLICATION',pic:''},{av:'Gx_mode',fld:'vMODE',pic:'@!',hsh:true}]");
-         setEventMetadata("VUSECURRENTREPOSITORASMASTERAUTHENTICATION.CLICK",",oparms:[{av:'AV34Namespace',fld:'vNAMESPACE',pic:''},{av:'AV7AdministratorUserPassword',fld:'vADMINISTRATORUSERPASSWORD',pic:''},{av:'AV10ConfAdministratorUserPassword',fld:'vCONFADMINISTRATORUSERPASSWORD',pic:''},{av:'edtavNamespace_Visible',ctrl:'vNAMESPACE',prop:'Visible'},{av:'edtavAdministratorusername_Caption',ctrl:'vADMINISTRATORUSERNAME',prop:'Caption'},{av:'edtavAdministratoruserpassword_Visible',ctrl:'vADMINISTRATORUSERPASSWORD',prop:'Visible'},{av:'edtavConfadministratoruserpassword_Visible',ctrl:'vCONFADMINISTRATORUSERPASSWORD',prop:'Visible'},{av:'edtavAdministratorroleid_Visible',ctrl:'vADMINISTRATORROLEID',prop:'Visible'},{av:'divAdministratorroleid_cell_Class',ctrl:'ADMINISTRATORROLEID_CELL',prop:'Class'},{av:'edtavCopyfromapplicationid_Visible',ctrl:'vCOPYFROMAPPLICATIONID',prop:'Visible'},{av:'divCopyfromapplicationid_cell_Class',ctrl:'COPYFROMAPPLICATIONID_CELL',prop:'Class'},{av:'edtavGuid_Visible',ctrl:'vGUID',prop:'Visible'},{av:'divGuid_cell_Class',ctrl:'GUID_CELL',prop:'Class'},{av:'chkavUsecurrentrepositorasmasterauthentication.Visible',ctrl:'vUSECURRENTREPOSITORASMASTERAUTHENTICATION',prop:'Visible'},{av:'divUsecurrentrepositorasmasterauthentication_cell_Class',ctrl:'USECURRENTREPOSITORASMASTERAUTHENTICATION_CELL',prop:'Class'},{av:'divNamespace_cell_Class',ctrl:'NAMESPACE_CELL',prop:'Class'}]}");
-         setEventMetadata("VALIDV_GENERATESESSIONSTATISTICS","{handler:'Validv_Generatesessionstatistics',iparms:[]");
-         setEventMetadata("VALIDV_GENERATESESSIONSTATISTICS",",oparms:[]}");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"AV42UseCurrentRepositorAsMasterAuthentication","fld":"vUSECURRENTREPOSITORASMASTERAUTHENTICATION"},{"av":"AV8AllowOauthAccess","fld":"vALLOWOAUTHACCESS"},{"av":"AV45CanRegisterUsers","fld":"vCANREGISTERUSERS"},{"av":"AV28GiveAnonymousSession","fld":"vGIVEANONYMOUSSESSION"},{"av":"AV31isGAMAdminAccessRepository","fld":"vISGAMADMINACCESSREPOSITORY"},{"av":"AV20CreateGAMApplication","fld":"vCREATEGAMAPPLICATION"},{"av":"AV18CopyRoles","fld":"vCOPYROLES"},{"av":"AV19CopySecurityPolicies","fld":"vCOPYSECURITYPOLICIES"},{"av":"AV14CopyApplication","fld":"vCOPYAPPLICATION"},{"av":"AV15CopyApplicationRolePermissions","fld":"vCOPYAPPLICATIONROLEPERMISSIONS"},{"av":"AV41UpdateConnectionFile","fld":"vUPDATECONNECTIONFILE"},{"av":"AV30Id","fld":"vID","pic":"ZZZZZZZZ9","hsh":true},{"av":"Gx_mode","fld":"vMODE","pic":"@!","hsh":true}]}""");
+         setEventMetadata("ENTER","""{"handler":"E121E2","iparms":[{"av":"AV30Id","fld":"vID","pic":"ZZZZZZZZ9","hsh":true},{"av":"Gx_mode","fld":"vMODE","pic":"@!","hsh":true},{"av":"AV7AdministratorUserPassword","fld":"vADMINISTRATORUSERPASSWORD"},{"av":"AV10ConfAdministratorUserPassword","fld":"vCONFADMINISTRATORUSERPASSWORD"},{"av":"AV13ConnectionUserPassword","fld":"vCONNECTIONUSERPASSWORD"},{"av":"AV11ConfConnectionUserPassword","fld":"vCONFCONNECTIONUSERPASSWORD"},{"av":"AV33Name","fld":"vNAME"},{"av":"AV34Namespace","fld":"vNAMESPACE"},{"av":"AV21Description","fld":"vDESCRIPTION"},{"av":"AV6AdministratorUserName","fld":"vADMINISTRATORUSERNAME"},{"av":"AV8AllowOauthAccess","fld":"vALLOWOAUTHACCESS"},{"av":"AV12ConnectionUserName","fld":"vCONNECTIONUSERNAME"},{"av":"cmbavGeneratesessionstatistics"},{"av":"AV27GenerateSessionStatistics","fld":"vGENERATESESSIONSTATISTICS"},{"av":"AV42UseCurrentRepositorAsMasterAuthentication","fld":"vUSECURRENTREPOSITORASMASTERAUTHENTICATION"},{"av":"AV9AuthenticationMasterAuthTypeName","fld":"vAUTHENTICATIONMASTERAUTHTYPENAME"},{"av":"AV20CreateGAMApplication","fld":"vCREATEGAMAPPLICATION"},{"av":"cmbavCopyfromrepositoryid"},{"av":"AV17CopyFromRepositoryId","fld":"vCOPYFROMREPOSITORYID","pic":"ZZZZZZZZ9"},{"av":"AV18CopyRoles","fld":"vCOPYROLES"},{"av":"AV5AdministratorRoleId","fld":"vADMINISTRATORROLEID","pic":"ZZZZZZZZZZZ9"},{"av":"AV19CopySecurityPolicies","fld":"vCOPYSECURITYPOLICIES"},{"av":"AV14CopyApplication","fld":"vCOPYAPPLICATION"},{"av":"AV16CopyFromApplicationId","fld":"vCOPYFROMAPPLICATIONID","pic":"ZZZZZZZZZZZ9"},{"av":"AV15CopyApplicationRolePermissions","fld":"vCOPYAPPLICATIONROLEPERMISSIONS"},{"av":"AV41UpdateConnectionFile","fld":"vUPDATECONNECTIONFILE"},{"av":"AV31isGAMAdminAccessRepository","fld":"vISGAMADMINACCESSREPOSITORY"}]""");
+         setEventMetadata("ENTER",""","oparms":[{"av":"AV29GUID","fld":"vGUID"}]}""");
+         setEventMetadata("VUSECURRENTREPOSITORASMASTERAUTHENTICATION.CLICK","""{"handler":"E131E2","iparms":[{"av":"AV42UseCurrentRepositorAsMasterAuthentication","fld":"vUSECURRENTREPOSITORASMASTERAUTHENTICATION"},{"av":"AV15CopyApplicationRolePermissions","fld":"vCOPYAPPLICATIONROLEPERMISSIONS"},{"av":"AV18CopyRoles","fld":"vCOPYROLES"},{"av":"AV14CopyApplication","fld":"vCOPYAPPLICATION"},{"av":"Gx_mode","fld":"vMODE","pic":"@!","hsh":true}]""");
+         setEventMetadata("VUSECURRENTREPOSITORASMASTERAUTHENTICATION.CLICK",""","oparms":[{"av":"AV34Namespace","fld":"vNAMESPACE"},{"av":"AV7AdministratorUserPassword","fld":"vADMINISTRATORUSERPASSWORD"},{"av":"AV10ConfAdministratorUserPassword","fld":"vCONFADMINISTRATORUSERPASSWORD"},{"av":"edtavNamespace_Visible","ctrl":"vNAMESPACE","prop":"Visible"},{"av":"edtavAdministratorusername_Caption","ctrl":"vADMINISTRATORUSERNAME","prop":"Caption"},{"av":"edtavAdministratoruserpassword_Visible","ctrl":"vADMINISTRATORUSERPASSWORD","prop":"Visible"},{"av":"edtavConfadministratoruserpassword_Visible","ctrl":"vCONFADMINISTRATORUSERPASSWORD","prop":"Visible"},{"av":"edtavAdministratorroleid_Visible","ctrl":"vADMINISTRATORROLEID","prop":"Visible"},{"av":"divAdministratorroleid_cell_Class","ctrl":"ADMINISTRATORROLEID_CELL","prop":"Class"},{"av":"edtavCopyfromapplicationid_Visible","ctrl":"vCOPYFROMAPPLICATIONID","prop":"Visible"},{"av":"divCopyfromapplicationid_cell_Class","ctrl":"COPYFROMAPPLICATIONID_CELL","prop":"Class"},{"av":"edtavGuid_Visible","ctrl":"vGUID","prop":"Visible"},{"av":"divGuid_cell_Class","ctrl":"GUID_CELL","prop":"Class"},{"av":"chkavUsecurrentrepositorasmasterauthentication.Visible","ctrl":"vUSECURRENTREPOSITORASMASTERAUTHENTICATION","prop":"Visible"},{"av":"divUsecurrentrepositorasmasterauthentication_cell_Class","ctrl":"USECURRENTREPOSITORASMASTERAUTHENTICATION_CELL","prop":"Class"},{"av":"divNamespace_cell_Class","ctrl":"NAMESPACE_CELL","prop":"Class"}]}""");
+         setEventMetadata("VALIDV_GENERATESESSIONSTATISTICS","""{"handler":"Validv_Generatesessionstatistics","iparms":[]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -2103,7 +2093,6 @@ namespace GeneXus.Programs {
 
       private short nGotPars ;
       private short GxWebError ;
-      private short initialized ;
       private short gxajaxcallmode ;
       private short wbEnd ;
       private short wbStart ;
@@ -2260,6 +2249,7 @@ namespace GeneXus.Programs {
       private bool returnInSub ;
       private bool AV32isOK ;
       private GXUserControl ucGxuitabspanel_tabs ;
+      private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private string aP0_Gx_mode ;
@@ -2277,21 +2267,20 @@ namespace GeneXus.Programs {
       private GXCheckbox chkavCopyapplication ;
       private GXCheckbox chkavCopyapplicationrolepermissions ;
       private GXCheckbox chkavUpdateconnectionfile ;
+      private GeneXus.Programs.genexussecurity.SdtGAMRepository AV37Repository ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV23Errors ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMRepository> AV36Repositories ;
+      private GeneXus.Programs.genexussecurity.SdtGAMRepositoryFilter AV39RepositoryFilter ;
+      private GeneXus.Programs.genexussecurity.SdtGAMRepository AV35Repo ;
+      private GeneXus.Programs.genexussecurity.SdtGAMRepositoryCreate AV38RepositoryCreate ;
+      private GeneXus.Programs.genexussecurity.SdtGAMRepository AV25GAMRepository ;
       private IDataStoreProvider pr_default ;
+      private GeneXus.Programs.genexussecurity.SdtGAMRepository AV40RepositoryNew ;
+      private GeneXus.Programs.genexussecurity.SdtGAMUser AV26GAMUser ;
+      private GeneXus.Programs.genexussecurity.SdtGAMError AV22Error ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
       private IDataStoreProvider pr_gam ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV23Errors ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMRepository> AV36Repositories ;
-      private GXWebForm Form ;
-      private GeneXus.Programs.genexussecurity.SdtGAMError AV22Error ;
-      private GeneXus.Programs.genexussecurity.SdtGAMRepositoryCreate AV38RepositoryCreate ;
-      private GeneXus.Programs.genexussecurity.SdtGAMUser AV26GAMUser ;
-      private GeneXus.Programs.genexussecurity.SdtGAMRepository AV37Repository ;
-      private GeneXus.Programs.genexussecurity.SdtGAMRepository AV35Repo ;
-      private GeneXus.Programs.genexussecurity.SdtGAMRepository AV25GAMRepository ;
-      private GeneXus.Programs.genexussecurity.SdtGAMRepository AV40RepositoryNew ;
-      private GeneXus.Programs.genexussecurity.SdtGAMRepositoryFilter AV39RepositoryFilter ;
    }
 
    public class gamrepositoryentry__gam : DataStoreHelperBase, IDataStoreHelper

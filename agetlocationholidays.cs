@@ -40,7 +40,7 @@ namespace GeneXus.Programs {
          }
          if ( GxWebError == 0 )
          {
-            executePrivate();
+            ExecutePrivate();
          }
          cleanup();
       }
@@ -66,32 +66,15 @@ namespace GeneXus.Programs {
       public void execute( )
       {
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
       public void executeSubmit( )
       {
-         agetlocationholidays objagetlocationholidays;
-         objagetlocationholidays = new agetlocationholidays();
-         objagetlocationholidays.context.SetSubmitInitialConfig(context);
-         objagetlocationholidays.initialize();
-         Submit( executePrivateCatch,objagetlocationholidays);
+         SubmitImpl();
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((agetlocationholidays)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -179,13 +162,13 @@ namespace GeneXus.Programs {
             context.Redirect( context.wjLoc );
             context.wjLoc = "";
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
          context.CommitDataStores("getlocationholidays",pr_default);
-         CloseOpenCursors();
+         CloseCursors();
          base.cleanup();
          if ( IsMain )
          {
@@ -194,7 +177,7 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
+      protected override void CloseCursors( )
       {
          pr_default.close(1);
       }
@@ -203,7 +186,6 @@ namespace GeneXus.Programs {
       {
          GXKey = "";
          gxfirstwebparm = "";
-         scmdbuf = "";
          P005A2_A159CompanyLocationCode = new string[] {""} ;
          P005A2_A157CompanyLocationId = new long[1] ;
          A159CompanyLocationCode = "";
@@ -252,7 +234,6 @@ namespace GeneXus.Programs {
       private long A113HolidayId ;
       private string GXKey ;
       private string gxfirstwebparm ;
-      private string scmdbuf ;
       private string A159CompanyLocationCode ;
       private string AV9LocationCode ;
       private string A114HolidayName ;
@@ -269,17 +250,17 @@ namespace GeneXus.Programs {
       private string AV14concat ;
       private string AV10result ;
       private string AV13code ;
+      private GxHttpClient AV8httpClient ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private IDataStoreProvider pr_default ;
       private string[] P005A2_A159CompanyLocationCode ;
       private long[] P005A2_A157CompanyLocationId ;
+      private SdtLocationHoliDayUpdateSDT AV11holidays ;
+      private SdtLocationHoliDayUpdateSDT_itemsItem AV12holiday ;
       private long[] P005A4_A40000CompanyId ;
       private bool[] P005A4_n40000CompanyId ;
       private long[] P005A6_A113HolidayId ;
-      private GxHttpClient AV8httpClient ;
-      private SdtLocationHoliDayUpdateSDT AV11holidays ;
-      private SdtLocationHoliDayUpdateSDT_itemsItem AV12holiday ;
    }
 
    public class agetlocationholidays__default : DataStoreHelperBase, IDataStoreHelper

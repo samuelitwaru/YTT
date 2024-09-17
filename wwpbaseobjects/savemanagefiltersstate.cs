@@ -42,54 +42,33 @@ namespace GeneXus.Programs.wwpbaseobjects {
          this.AV9UserCustomKey = aP0_UserCustomKey;
          this.AV10UserCustomValue = aP1_UserCustomValue;
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
       public void executeSubmit( string aP0_UserCustomKey ,
                                  string aP1_UserCustomValue )
       {
-         savemanagefiltersstate objsavemanagefiltersstate;
-         objsavemanagefiltersstate = new savemanagefiltersstate();
-         objsavemanagefiltersstate.AV9UserCustomKey = aP0_UserCustomKey;
-         objsavemanagefiltersstate.AV10UserCustomValue = aP1_UserCustomValue;
-         objsavemanagefiltersstate.context.SetSubmitInitialConfig(context);
-         objsavemanagefiltersstate.initialize();
-         Submit( executePrivateCatch,objsavemanagefiltersstate);
+         this.AV9UserCustomKey = aP0_UserCustomKey;
+         this.AV10UserCustomValue = aP1_UserCustomValue;
+         SubmitImpl();
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((savemanagefiltersstate)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
          new GeneXus.Programs.wwpbaseobjects.saveuserkeyvalue(context ).execute(  AV9UserCustomKey,  AV10UserCustomValue) ;
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )

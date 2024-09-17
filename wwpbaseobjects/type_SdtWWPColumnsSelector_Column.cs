@@ -1,7 +1,7 @@
 /*
 				   File: type_SdtWWPColumnsSelector_Column
 			Description: Columns
-				 Author: Nemo 🐠 for C# (.NET) version 18.0.6.177934
+				 Author: Nemo 🐠 for C# (.NET) version 18.0.10.184260
 		   Program type: Callable routine
 			  Main DBMS: 
 */
@@ -199,6 +199,14 @@ namespace GeneXus.Programs.wwpbaseobjects
 
 		#endregion
 
+		#region Static Type Properties
+
+		[XmlIgnore]
+		private static GXTypeInfo _typeProps;
+		protected override GXTypeInfo TypeInfo { get { return _typeProps; } set { _typeProps = value; } }
+
+		#endregion
+
 		#region Initialization
 
 		public void initialize( )
@@ -240,6 +248,7 @@ namespace GeneXus.Programs.wwpbaseobjects
 		#endregion
 	}
 	#region Rest interface
+	[GxJsonSerialization("wrapped")]
 	[DataContract(Name=@"WWPColumnsSelector.Column", Namespace="YTT_version4")]
 	public class SdtWWPColumnsSelector_Column_RESTInterface : GxGenericCollectionItem<SdtWWPColumnsSelector_Column>, System.Web.SessionState.IRequiresSessionState
 	{

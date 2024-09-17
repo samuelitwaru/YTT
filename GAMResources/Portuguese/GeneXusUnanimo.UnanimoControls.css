@@ -93,7 +93,7 @@
 	line-height : 16px;
 	text-align : start;
 	padding-block : 6px;
-	margin-bottom : 0px !important;
+	margin-bottom : 0px;
 }
 .dd-option-container 
 {
@@ -174,12 +174,12 @@
 	width : calc(100% - 3px);
 	-webkit-appearance : none;
 	height : 4px;
-	background : var(--colors_gray02)!important;
+	background : var(--colors_gray02);
 	outline : none;
 	border-radius : 6px;
 	-webkit-transition : .2s;
 	transition : opacity .2s;
-	-webkit-writing-mode : horizontal-tb !important;
+	writing-mode : horizontal-tb;
 	text-rendering : auto;
 	display : inline-block;
 	text-align : start;
@@ -651,10 +651,6 @@ body[dir="rtl"] .ch-sidebar ch-sidebar-menu-list-item::part(collapse-item2-icon)
 	width : 12px;
 	height : 12px;
 }
-ch-grid 
-{
-	display : inline-block;
-}
 ch-grid::part(settings-mask) 
 {
 	background-color : var(--colors_mask-bg);
@@ -693,6 +689,40 @@ ch-grid::part(settings-mask)
 	align-items : center;
 	padding-inline-start : var(--spacing_inset-s);
 	padding-inline-end : var(--spacing_inset-s);
+}
+ch-grid-cell .Attribute[readonly=true] 
+{
+	height : fit-content;
+}
+ch-grid-cell gx-select[readonly="true"] .gx-select-control 
+{
+	height : fit-content;
+}
+.grid-column 
+{
+	padding : 12px;
+	padding-inline-start : var(--spacing_inset-s);
+	padding-inline-end : var(--spacing_inset-s);
+}
+.grid-settings__checkbox 
+{
+	width : 16px;
+	height : 16px;
+}
+.Grid::part(settings-columns-visible), .ww__grid::part(settings-columns-visible) 
+{
+	width : 16px;
+	height : 16px;
+}
+.Grid::part(settings-columns-visible-checked), .ww__grid::part(settings-columns-visible-checked) 
+{
+	width : 16px;
+	height : 16px;
+	accent-color : var(--colors_primary);
+}
+.grid-row-focused 
+{
+	border : solid 1px var(--colors_secondary);
 }
 .in-grid-field 
 {
@@ -755,11 +785,6 @@ ch-grid::part(settings-mask)
 .grid-row-highlight:hover 
 {
 	background-color : var(--colors_gray01);
-}
-.grid-column 
-{
-	padding-inline-start : var(--spacing_inset-s);
-	padding-inline-end : var(--spacing_inset-s);
 }
 .grid-column::part(bar) 
 {
@@ -939,10 +964,11 @@ ch-grid::part(settings-mask)
 {
 	white-space : normal;
 	height : 28px;
-	padding-left : var(--spacing_inset-m);
-	padding-right : var(--spacing_inset-m);
+	padding-inline-start : var(--spacing_inset-m);
+	padding-inline-end : var(--spacing_inset-m);
 	border-radius : var(--radius_s);
 	min-width : 80px;
+	border : none;
 	background-color : transparent;
 	font-size : var(--fontsizes_s);
 	font-family : var(--fonts_primary-semibold);
@@ -960,8 +986,8 @@ ch-grid::part(settings-mask)
 {
 	white-space : normal;
 	height : 28px;
-	padding-left : var(--spacing_inset-m);
-	padding-right : var(--spacing_inset-m);
+	padding-inline-start : var(--spacing_inset-m);
+	padding-inline-end : var(--spacing_inset-m);
 	border-radius : var(--radius_s);
 	min-width : 80px;
 	background-color : var(--colors_primary);
@@ -986,6 +1012,7 @@ ch-grid::part(settings-mask)
 {
 	display : flex;
 	align-items : center;
+	margin-block-start : var(--spacing_stack-l);
 }
 .Grid::part(settings-window), .ww__grid::part(settings-window) 
 {
@@ -1132,23 +1159,92 @@ ch-grid::part(settings-mask)
 	margin-inline-end : auto;
 	padding-inline-start : var(--spacing_inset-s);
 }
-.button-refresh 
+.button-refresh, ch-grid-action-refresh 
 {
 	content : var(--GX-Image_GeneXusUnanimo_refresh);
 }
-.button-refresh:hover 
+.button-refresh:hover, ch-grid-action-refresh:hover 
 {
 	cursor : pointer;
 	background-color : var(--colors_primary-hover-20);
 }
-.button-settings 
+.button-settings, ch-grid-action-settings 
 {
 	content : var(--GX-Image_GeneXusUnanimo_settings);
 }
-.button-settings:hover 
+.button-settings:hover, ch-grid-action-settings:hover 
 {
 	cursor : pointer;
 	background-color : var(--colors_primary-hover-20);
+}
+ch-grid-actionbar, ch-paginator, ch-paginator-pages 
+{
+	display : flex;
+}
+ch-paginator-pages::part(pages) 
+{
+	gap : var(--spacing_inline-xl);
+	padding-inline : var(--spacing_inline-l);
+	font-family : var(--fonts_primary-regular);
+}
+ch-paginator 
+{
+	margin-inline-start : auto;
+}
+ch-paginator-navigate[type="first"] 
+{
+	content : var(--GX-Image_GeneXusUnanimo_arrow_first);
+}
+ch-paginator-navigate[type="previous"] 
+{
+	content : var(--GX-Image_GeneXusUnanimo_arrow_left);
+}
+ch-paginator-navigate[type="next"] 
+{
+	content : var(--GX-Image_GeneXusUnanimo_arrow_right);
+}
+ch-paginator-navigate[type="last"] 
+{
+	content : var(--GX-Image_GeneXusUnanimo_arrow_last);
+}
+ch-paginator-navigate[type]:hover 
+{
+	cursor : pointer;
+	background-color : var(--colors_primary-hover-20);
+}
+ch-paginator-navigate[disabled] 
+{
+	filter : opacity(0.3);
+}
+ch-paginator-pages::part(page button active) 
+{
+	display : flex;
+	justify-content : center;
+	align-items : center;
+	background-color : var(--colors_secondary-enabled);
+	color : var(--colors_on-secondary);
+	width : 14px;
+	height : 22px;
+	border-radius : 100%;
+	padding : 0px;
+}
+ch-paginator-pages::part(page button active):focus 
+{
+	outline : solid 2px var(--colors_primary);
+	width : 12px;
+	height : 20px;
+}
+ch-paginator-pages::part(page button) 
+{
+	padding-inline : var(--spacing_inline-m);
+}
+ch-paginator-pages::part(page button):hover 
+{
+	cursor : pointer;
+}
+ch-paginator-pages::part(page button):focus 
+{
+	border : solid 2px var(--colors_secondary-enabled);
 }
 .button-close 
 {
@@ -1165,14 +1261,12 @@ ch-grid::part(settings-mask)
 	background-color : var(--colors_overlay-bg);
 	background-image : var(--GX-Image_GeneXusUnanimo_close_ico);
 }
-input[type="date"] 
-{
-	color-scheme : dark;
-}
 .grid-column-filter::part(button reset)[disabled] 
 {
-	color : var(--colors_on-disabled);
-	border-color : var(--colors_border-primary-disabled);
+	color : var(--colors_gray03);
+	border-color : var(--colors_border-tertiary-disabled);
+	border-style : solid;
+	border-width : var(--borders_extra-small);
 	background-color : transparent;
 	cursor : auto;
 }

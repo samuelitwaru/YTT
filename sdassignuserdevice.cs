@@ -61,32 +61,15 @@ namespace GeneXus.Programs {
       public void execute( )
       {
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
       public void executeSubmit( )
       {
-         sdassignuserdevice objsdassignuserdevice;
-         objsdassignuserdevice = new sdassignuserdevice();
-         objsdassignuserdevice.context.SetSubmitInitialConfig(context);
-         objsdassignuserdevice.initialize();
-         Submit( executePrivateCatch,objsdassignuserdevice);
+         SubmitImpl();
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((sdassignuserdevice)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -105,21 +88,17 @@ namespace GeneXus.Programs {
                GX_msglist.addItem(AV8Device.GetMessages().ToJSonString(false));
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -140,11 +119,11 @@ namespace GeneXus.Programs {
 
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GeneXus.Programs.genexussecurity.SdtGAMUser AV10GAMUser ;
+      private SdtEmployee AV9Employee ;
+      private SdtDevice AV8Device ;
       private IDataStoreProvider pr_default ;
       private IDataStoreProvider pr_gam ;
-      private SdtDevice AV8Device ;
-      private SdtEmployee AV9Employee ;
-      private GeneXus.Programs.genexussecurity.SdtGAMUser AV10GAMUser ;
    }
 
    public class sdassignuserdevice__gam : DataStoreHelperBase, IDataStoreHelper

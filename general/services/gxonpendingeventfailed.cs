@@ -74,7 +74,7 @@ namespace GeneXus.Programs.general.services {
          this.GxSyncroInfo = aP4_GxSyncroInfo;
          this.AV11Continue = false ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP5_Continue=this.AV11Continue;
       }
 
@@ -95,53 +95,32 @@ namespace GeneXus.Programs.general.services {
                                  GeneXus.Core.genexus.sd.synchronization.SdtSynchronizationInfo aP4_GxSyncroInfo ,
                                  out bool aP5_Continue )
       {
-         gxonpendingeventfailed objgxonpendingeventfailed;
-         objgxonpendingeventfailed = new gxonpendingeventfailed();
-         objgxonpendingeventfailed.AV8PendingEvent = aP0_PendingEvent;
-         objgxonpendingeventfailed.AV9BCName = aP1_BCName;
-         objgxonpendingeventfailed.AV10BCJson = aP2_BCJson;
-         objgxonpendingeventfailed.AV12EventResult = aP3_EventResult;
-         objgxonpendingeventfailed.GxSyncroInfo = aP4_GxSyncroInfo;
-         objgxonpendingeventfailed.AV11Continue = false ;
-         objgxonpendingeventfailed.context.SetSubmitInitialConfig(context);
-         objgxonpendingeventfailed.initialize();
-         Submit( executePrivateCatch,objgxonpendingeventfailed);
+         this.AV8PendingEvent = aP0_PendingEvent;
+         this.AV9BCName = aP1_BCName;
+         this.AV10BCJson = aP2_BCJson;
+         this.AV12EventResult = aP3_EventResult;
+         this.GxSyncroInfo = aP4_GxSyncroInfo;
+         this.AV11Continue = false ;
+         SubmitImpl();
          aP5_Continue=this.AV11Continue;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((gxonpendingeventfailed)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
          AV11Continue = true;
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -152,10 +131,10 @@ namespace GeneXus.Programs.general.services {
       private bool AV11Continue ;
       private string AV10BCJson ;
       private string AV9BCName ;
-      private bool aP5_Continue ;
       private GeneXus.Core.genexus.sd.synchronization.SdtSynchronizationEventList_SynchronizationEventListItem AV8PendingEvent ;
       private GeneXus.Core.genexus.sd.synchronization.SdtSynchronizationEventResultList_SynchronizationEventResultListItem AV12EventResult ;
       private GeneXus.Core.genexus.sd.synchronization.SdtSynchronizationInfo GxSyncroInfo ;
+      private bool aP5_Continue ;
    }
 
 }

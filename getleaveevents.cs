@@ -51,7 +51,7 @@ namespace GeneXus.Programs {
          this.AV9dateTo = aP1_dateTo;
          this.AV12events = new SdtSchedulerEvents(context) ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP2_events=this.AV12events;
       }
 
@@ -66,31 +66,14 @@ namespace GeneXus.Programs {
                                  DateTime aP1_dateTo ,
                                  out SdtSchedulerEvents aP2_events )
       {
-         getleaveevents objgetleaveevents;
-         objgetleaveevents = new getleaveevents();
-         objgetleaveevents.AV8dateFrom = aP0_dateFrom;
-         objgetleaveevents.AV9dateTo = aP1_dateTo;
-         objgetleaveevents.AV12events = new SdtSchedulerEvents(context) ;
-         objgetleaveevents.context.SetSubmitInitialConfig(context);
-         objgetleaveevents.initialize();
-         Submit( executePrivateCatch,objgetleaveevents);
+         this.AV8dateFrom = aP0_dateFrom;
+         this.AV9dateTo = aP1_dateTo;
+         this.AV12events = new SdtSchedulerEvents(context) ;
+         SubmitImpl();
          aP2_events=this.AV12events;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((getleaveevents)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -190,21 +173,17 @@ namespace GeneXus.Programs {
             pr_default.readNext(2);
          }
          pr_default.close(2);
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -213,7 +192,6 @@ namespace GeneXus.Programs {
          AV24Httprequest = new GxHttpRequest( context);
          AV29CompanyLocationIdValue = "";
          AV25Session = context.GetSession();
-         scmdbuf = "";
          P007K2_A157CompanyLocationId = new long[1] ;
          P007K2_A100CompanyId = new long[1] ;
          P007K3_A157CompanyLocationId = new long[1] ;
@@ -274,7 +252,6 @@ namespace GeneXus.Programs {
       private long A106EmployeeId ;
       private long A127LeaveRequestId ;
       private string AV29CompanyLocationIdValue ;
-      private string scmdbuf ;
       private string A158CompanyLocationName ;
       private string A114HolidayName ;
       private string A132LeaveRequestStatus ;
@@ -290,8 +267,10 @@ namespace GeneXus.Programs {
       private bool A139HolidayIsActive ;
       private string A133LeaveRequestDescription ;
       private IGxSession AV25Session ;
+      private GxHttpRequest AV24Httprequest ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private SdtSchedulerEvents AV12events ;
       private IDataStoreProvider pr_default ;
       private long[] P007K2_A157CompanyLocationId ;
       private long[] P007K2_A100CompanyId ;
@@ -302,6 +281,8 @@ namespace GeneXus.Programs {
       private long[] P007K3_A113HolidayId ;
       private string[] P007K3_A158CompanyLocationName ;
       private string[] P007K3_A114HolidayName ;
+      private SdtSchedulerEvents_Day AV19SpecialDay ;
+      private SdtSchedulerEvents_event AV11event ;
       private long[] P007K4_A124LeaveTypeId ;
       private long[] P007K4_A106EmployeeId ;
       private string[] P007K4_A132LeaveRequestStatus ;
@@ -314,10 +295,6 @@ namespace GeneXus.Programs {
       private DateTime[] P007K4_A129LeaveRequestStartDate ;
       private DateTime[] P007K4_A130LeaveRequestEndDate ;
       private SdtSchedulerEvents aP2_events ;
-      private GxHttpRequest AV24Httprequest ;
-      private SdtSchedulerEvents AV12events ;
-      private SdtSchedulerEvents_event AV11event ;
-      private SdtSchedulerEvents_Day AV19SpecialDay ;
    }
 
    public class getleaveevents__default : DataStoreHelperBase, IDataStoreHelper

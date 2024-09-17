@@ -38,6 +38,7 @@
 	--fontsizes_font-icon-xl : 36px;
 	--borders_xs : 1px;
 	--borders_s : 2px;
+	--borders_m : 3px;
 	--radius_s : 2px;
 	--radius_m : 4px;
 	--radius_l : 6px;
@@ -54,6 +55,8 @@
 	--colors_basecolorshadow : rgba(73, 120, 176, 0.7);
 	--colors_baseforecolor80 : rgba(255,255,255,0.8);
 	--colors_basecolor30 : rgba(73, 120, 176, 0.3);
+	--colors_basecolor20 : rgba(73, 120, 176, 0.2);
+	--colors_basecolor10 : rgba(73, 120, 176, 0.1);
 	--colors_baseforecolor : white;
 
 }

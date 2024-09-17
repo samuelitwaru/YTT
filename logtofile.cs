@@ -40,33 +40,16 @@ namespace GeneXus.Programs {
       {
          this.AV8Message = aP0_Message;
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
       public void executeSubmit( string aP0_Message )
       {
-         logtofile objlogtofile;
-         objlogtofile = new logtofile();
-         objlogtofile.AV8Message = aP0_Message;
-         objlogtofile.context.SetSubmitInitialConfig(context);
-         objlogtofile.initialize();
-         Submit( executePrivateCatch,objlogtofile);
+         this.AV8Message = aP0_Message;
+         SubmitImpl();
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((logtofile)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -74,21 +57,17 @@ namespace GeneXus.Programs {
          AV9File.Open("");
          AV9File.WriteLine(AV8Message);
          AV9File.Close();
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )

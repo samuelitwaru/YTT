@@ -64,7 +64,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          this.AV15FilterValueSel = aP11_FilterValueSel;
          this.AV16FilterValueSelDsc = aP12_FilterValueSelDsc;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_GridState=this.AV19GridState;
       }
 
@@ -82,41 +82,24 @@ namespace GeneXus.Programs.wwpbaseobjects {
                                  string aP11_FilterValueSel ,
                                  string aP12_FilterValueSelDsc )
       {
-         wwp_gridstateaddfiltervalueandsel objwwp_gridstateaddfiltervalueandsel;
-         objwwp_gridstateaddfiltervalueandsel = new wwp_gridstateaddfiltervalueandsel();
-         objwwp_gridstateaddfiltervalueandsel.AV19GridState = aP0_GridState;
-         objwwp_gridstateaddfiltervalueandsel.AV11FilterName = aP1_FilterName;
-         objwwp_gridstateaddfiltervalueandsel.AV10FilterDsc = aP2_FilterDsc;
-         objwwp_gridstateaddfiltervalueandsel.AV8AddFitler = aP3_AddFitler;
-         objwwp_gridstateaddfiltervalueandsel.AV12FilterOperator = aP4_FilterOperator;
-         objwwp_gridstateaddfiltervalueandsel.AV13FilterValue = aP5_FilterValue;
-         objwwp_gridstateaddfiltervalueandsel.AV14FilterValueDsc = aP6_FilterValueDsc;
-         objwwp_gridstateaddfiltervalueandsel.AV21IsRange = aP7_IsRange;
-         objwwp_gridstateaddfiltervalueandsel.AV17FilterValueTo = aP8_FilterValueTo;
-         objwwp_gridstateaddfiltervalueandsel.AV18FilterValueToDsc = aP9_FilterValueToDsc;
-         objwwp_gridstateaddfiltervalueandsel.AV9AddFitlerSel = aP10_AddFitlerSel;
-         objwwp_gridstateaddfiltervalueandsel.AV15FilterValueSel = aP11_FilterValueSel;
-         objwwp_gridstateaddfiltervalueandsel.AV16FilterValueSelDsc = aP12_FilterValueSelDsc;
-         objwwp_gridstateaddfiltervalueandsel.context.SetSubmitInitialConfig(context);
-         objwwp_gridstateaddfiltervalueandsel.initialize();
-         Submit( executePrivateCatch,objwwp_gridstateaddfiltervalueandsel);
+         this.AV19GridState = aP0_GridState;
+         this.AV11FilterName = aP1_FilterName;
+         this.AV10FilterDsc = aP2_FilterDsc;
+         this.AV8AddFitler = aP3_AddFitler;
+         this.AV12FilterOperator = aP4_FilterOperator;
+         this.AV13FilterValue = aP5_FilterValue;
+         this.AV14FilterValueDsc = aP6_FilterValueDsc;
+         this.AV21IsRange = aP7_IsRange;
+         this.AV17FilterValueTo = aP8_FilterValueTo;
+         this.AV18FilterValueToDsc = aP9_FilterValueToDsc;
+         this.AV9AddFitlerSel = aP10_AddFitlerSel;
+         this.AV15FilterValueSel = aP11_FilterValueSel;
+         this.AV16FilterValueSelDsc = aP12_FilterValueSelDsc;
+         SubmitImpl();
          aP0_GridState=this.AV19GridState;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwp_gridstateaddfiltervalueandsel)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -155,21 +138,17 @@ namespace GeneXus.Programs.wwpbaseobjects {
             AV20GridStateFilterValue.gxTpr_Valuedsc = AV16FilterValueSelDsc;
             AV19GridState.gxTpr_Filtervalues.Add(AV20GridStateFilterValue, 0);
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -190,8 +169,8 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private string AV18FilterValueToDsc ;
       private string AV15FilterValueSel ;
       private string AV16FilterValueSelDsc ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState aP0_GridState ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState AV19GridState ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState aP0_GridState ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue AV20GridStateFilterValue ;
    }
 

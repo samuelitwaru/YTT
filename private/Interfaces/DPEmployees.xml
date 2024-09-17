@@ -1,6 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <CallableObject guid="df6dfb96-37b0-4d27-959e-23bdc3a58ff6" name="DPEmployees" description="DPEmployees" namespace="GeneXus.Programs">
-  <Signature name="parm">
+  <Signature name="Par">
+    <Parameter name="EmployeeIds" collection="true">
+      <Field>
+        <Properties>
+          <Property>
+            <Name>Type</Name>
+            <Value>Numeric</Value>
+          </Property>
+          <Property>
+            <Name>Length</Name>
+            <Value>10</Value>
+          </Property>
+        </Properties>
+      </Field>
+    </Parameter>
     <Parameter name="ReturnValue" accessor="out" collection="true">
       <Field name="SDTEmployee" description="SDTEmployee">
         <Fields>
@@ -128,7 +142,7 @@
               </Property>
             </Properties>
           </Field>
-          <Field name="EmployeeVactionDays" description="Employee Vaction Days">
+          <Field name="EmployeeVactionDays" description="Employee Vacation Days">
             <Properties>
               <Property>
                 <Name>Type</Name>

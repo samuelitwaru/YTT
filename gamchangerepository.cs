@@ -42,10 +42,10 @@ namespace GeneXus.Programs {
 
       public void execute( )
       {
-         executePrivate();
+         ExecuteImpl();
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -149,11 +149,8 @@ namespace GeneXus.Programs {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITWEB( ) ;
          if ( ! isAjaxCallMode( ) )
          {
@@ -184,7 +181,7 @@ namespace GeneXus.Programs {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override short ExecuteStartEvent( )
@@ -228,10 +225,10 @@ namespace GeneXus.Programs {
          CloseStyles();
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
@@ -487,7 +484,7 @@ namespace GeneXus.Programs {
          {
             if ( context.ExposeMetadata( ) )
             {
-               Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+               Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
             }
          }
          Form.Meta.addItem("description", "Change Repository", 0) ;
@@ -621,6 +618,8 @@ namespace GeneXus.Programs {
             }
             if ( ! context.isAjaxRequest( ) )
             {
+               GX_FocusControl = radavSelectedconnection_Internalname;
+               AssignAttri("", false, "GX_FocusControl", GX_FocusControl);
             }
             nDonePA = 1;
          }
@@ -825,7 +824,7 @@ namespace GeneXus.Programs {
          PA192( ) ;
          WS192( ) ;
          WE192( ) ;
-         this.cleanup();
+         cleanup();
          context.SetWrapped(false);
          context.GX_msglist = BackMsgLst;
          return "";
@@ -846,7 +845,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20248121554482", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202491613163978", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -862,7 +861,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("gamchangerepository.js", "?20248121554485", false, true);
+         context.AddJavascriptSource("gamchangerepository.js", "?202491613163983", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Panel/BootstrapPanelRender.js", "", false, true);
@@ -928,25 +927,18 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'radavSelectedconnection'},{av:'AV11SelectedConnection',fld:'vSELECTEDCONNECTION',pic:''}]");
-         setEventMetadata("REFRESH",",oparms:[]}");
-         setEventMetadata("ENTER","{handler:'E12192',iparms:[{av:'radavSelectedconnection'},{av:'AV11SelectedConnection',fld:'vSELECTEDCONNECTION',pic:''}]");
-         setEventMetadata("ENTER",",oparms:[]}");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"radavSelectedconnection"},{"av":"AV11SelectedConnection","fld":"vSELECTEDCONNECTION"}]}""");
+         setEventMetadata("ENTER","""{"handler":"E12192","iparms":[{"av":"radavSelectedconnection"},{"av":"AV11SelectedConnection","fld":"vSELECTEDCONNECTION"}]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -983,7 +975,6 @@ namespace GeneXus.Programs {
 
       private short nGotPars ;
       private short GxWebError ;
-      private short initialized ;
       private short gxajaxcallmode ;
       private short wbEnd ;
       private short wbStart ;
@@ -1041,17 +1032,17 @@ namespace GeneXus.Programs {
       private bool returnInSub ;
       private bool AV12OK ;
       private GXUserControl ucDvpanel_tableattributes ;
+      private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private GXRadio radavSelectedconnection ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMConnectionInfo> AV6ConnectionInfoCollection ;
+      private GeneXus.Programs.genexussecurity.SdtGAMRepository AV10Repository ;
+      private GeneXus.Programs.genexussecurity.SdtGAMConnectionInfo AV5Connection ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV8Errors ;
+      private GeneXus.Programs.genexussecurity.SdtGAMError AV7Error ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMConnectionInfo> AV6ConnectionInfoCollection ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV8Errors ;
-      private GXWebForm Form ;
-      private GeneXus.Programs.genexussecurity.SdtGAMConnectionInfo AV5Connection ;
-      private GeneXus.Programs.genexussecurity.SdtGAMError AV7Error ;
-      private GeneXus.Programs.genexussecurity.SdtGAMRepository AV10Repository ;
    }
 
 }

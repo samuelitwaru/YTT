@@ -43,10 +43,10 @@ namespace GeneXus.Programs {
 
       public void execute( )
       {
-         executePrivate();
+         ExecuteImpl();
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -152,17 +152,20 @@ namespace GeneXus.Programs {
       protected void gxgrGrid_refresh_invoke( )
       {
          subGrid_Rows = (int)(Math.Round(NumberUtil.Val( GetPar( "subGrid_Rows"), "."), 18, MidpointRounding.ToEven));
+         AV17OrderedBy = (short)(Math.Round(NumberUtil.Val( GetPar( "OrderedBy"), "."), 18, MidpointRounding.ToEven));
+         AV18OrderedDsc = StringUtil.StrToBool( GetPar( "OrderedDsc"));
          AV20FilterFullText = GetPar( "FilterFullText");
          AV30ManageFiltersExecutionStep = (short)(Math.Round(NumberUtil.Val( GetPar( "ManageFiltersExecutionStep"), "."), 18, MidpointRounding.ToEven));
          ajax_req_read_hidden_sdt(GetNextPar( ), AV25ColumnsSelector);
-         AV74Pgmname = GetPar( "Pgmname");
+         AV75Pgmname = GetPar( "Pgmname");
          AV33TFHolidayName = GetPar( "TFHolidayName");
          AV34TFHolidayName_Sel = GetPar( "TFHolidayName_Sel");
          AV35TFHolidayStartDate = context.localUtil.ParseDateParm( GetPar( "TFHolidayStartDate"));
          AV36TFHolidayStartDate_To = context.localUtil.ParseDateParm( GetPar( "TFHolidayStartDate_To"));
          AV68TFHolidayIsActive_Sel = (short)(Math.Round(NumberUtil.Val( GetPar( "TFHolidayIsActive_Sel"), "."), 18, MidpointRounding.ToEven));
-         AV17OrderedBy = (short)(Math.Round(NumberUtil.Val( GetPar( "OrderedBy"), "."), 18, MidpointRounding.ToEven));
-         AV18OrderedDsc = StringUtil.StrToBool( GetPar( "OrderedDsc"));
+         AV8RedirectToFirstDetail = StringUtil.StrToBool( GetPar( "RedirectToFirstDetail"));
+         AV73QueryIntent = GetPar( "QueryIntent");
+         AV9GridAppliedFilters = GetPar( "GridAppliedFilters");
          AV58IsAuthorized_Update = StringUtil.StrToBool( GetPar( "IsAuthorized_Update"));
          AV60IsAuthorized_Delete = StringUtil.StrToBool( GetPar( "IsAuthorized_Delete"));
          AV64IsAuthorized_Insert = StringUtil.StrToBool( GetPar( "IsAuthorized_Insert"));
@@ -172,7 +175,7 @@ namespace GeneXus.Programs {
             GxWebError = 1;
             return  ;
          }
-         gxgrGrid_refresh( subGrid_Rows, AV20FilterFullText, AV30ManageFiltersExecutionStep, AV25ColumnsSelector, AV74Pgmname, AV33TFHolidayName, AV34TFHolidayName_Sel, AV35TFHolidayStartDate, AV36TFHolidayStartDate_To, AV68TFHolidayIsActive_Sel, AV17OrderedBy, AV18OrderedDsc, AV58IsAuthorized_Update, AV60IsAuthorized_Delete, AV64IsAuthorized_Insert) ;
+         gxgrGrid_refresh( subGrid_Rows, AV17OrderedBy, AV18OrderedDsc, AV20FilterFullText, AV30ManageFiltersExecutionStep, AV25ColumnsSelector, AV75Pgmname, AV33TFHolidayName, AV34TFHolidayName_Sel, AV35TFHolidayStartDate, AV36TFHolidayStartDate_To, AV68TFHolidayIsActive_Sel, AV8RedirectToFirstDetail, AV73QueryIntent, AV9GridAppliedFilters, AV58IsAuthorized_Update, AV60IsAuthorized_Delete, AV64IsAuthorized_Insert) ;
          AddString( context.getJSONResponse( )) ;
          /* End function gxgrGrid_refresh_invoke */
       }
@@ -203,11 +206,8 @@ namespace GeneXus.Programs {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITWEB( ) ;
          if ( ! isAjaxCallMode( ) )
          {
@@ -238,7 +238,7 @@ namespace GeneXus.Programs {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override short ExecuteStartEvent( )
@@ -282,18 +282,18 @@ namespace GeneXus.Programs {
          CloseStyles();
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
             enableOutput();
          }
-         context.AddJavascriptSource("calendar.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("calendar-setup.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("calendar-en.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("calendar.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("calendar-setup.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("calendar-en.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -356,8 +356,12 @@ namespace GeneXus.Programs {
 
       protected void send_integrity_footer_hashes( )
       {
-         GxWebStd.gx_hidden_field( context, "vPGMNAME", StringUtil.RTrim( AV74Pgmname));
-         GxWebStd.gx_hidden_field( context, "gxhash_vPGMNAME", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV74Pgmname, "")), context));
+         GxWebStd.gx_hidden_field( context, "vPGMNAME", StringUtil.RTrim( AV75Pgmname));
+         GxWebStd.gx_hidden_field( context, "gxhash_vPGMNAME", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV75Pgmname, "")), context));
+         GxWebStd.gx_boolean_hidden_field( context, "vREDIRECTTOFIRSTDETAIL", AV8RedirectToFirstDetail);
+         GxWebStd.gx_hidden_field( context, "gxhash_vREDIRECTTOFIRSTDETAIL", GetSecureSignedToken( "", AV8RedirectToFirstDetail, context));
+         GxWebStd.gx_hidden_field( context, "vQUERYINTENT", AV73QueryIntent);
+         GxWebStd.gx_hidden_field( context, "gxhash_vQUERYINTENT", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV73QueryIntent, "")), context));
          GxWebStd.gx_boolean_hidden_field( context, "vISAUTHORIZED_UPDATE", AV58IsAuthorized_Update);
          GxWebStd.gx_hidden_field( context, "gxhash_vISAUTHORIZED_UPDATE", GetSecureSignedToken( "", AV58IsAuthorized_Update, context));
          GxWebStd.gx_boolean_hidden_field( context, "vISAUTHORIZED_DELETE", AV60IsAuthorized_Delete);
@@ -370,6 +374,8 @@ namespace GeneXus.Programs {
       protected void SendCloseFormHiddens( )
       {
          /* Send hidden variables. */
+         GxWebStd.gx_hidden_field( context, "GXH_vORDEREDBY", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV17OrderedBy), 4, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, "GXH_vORDEREDDSC", StringUtil.BoolToStr( AV18OrderedDsc));
          GxWebStd.gx_hidden_field( context, "GXH_vFILTERFULLTEXT", AV20FilterFullText);
          /* Send saved values. */
          send_integrity_footer_hashes( ) ;
@@ -412,8 +418,8 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "vDDO_HOLIDAYSTARTDATEAUXDATE", context.localUtil.DToC( AV37DDO_HolidayStartDateAuxDate, 0, "/"));
          GxWebStd.gx_hidden_field( context, "vDDO_HOLIDAYSTARTDATEAUXDATETO", context.localUtil.DToC( AV38DDO_HolidayStartDateAuxDateTo, 0, "/"));
          GxWebStd.gx_hidden_field( context, "vMANAGEFILTERSEXECUTIONSTEP", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV30ManageFiltersExecutionStep), 1, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "vPGMNAME", StringUtil.RTrim( AV74Pgmname));
-         GxWebStd.gx_hidden_field( context, "gxhash_vPGMNAME", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV74Pgmname, "")), context));
+         GxWebStd.gx_hidden_field( context, "vPGMNAME", StringUtil.RTrim( AV75Pgmname));
+         GxWebStd.gx_hidden_field( context, "gxhash_vPGMNAME", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV75Pgmname, "")), context));
          GxWebStd.gx_hidden_field( context, "vTFHOLIDAYNAME", StringUtil.RTrim( AV33TFHolidayName));
          GxWebStd.gx_hidden_field( context, "vTFHOLIDAYNAME_SEL", StringUtil.RTrim( AV34TFHolidayName_Sel));
          GxWebStd.gx_hidden_field( context, "vTFHOLIDAYSTARTDATE", context.localUtil.DToC( AV35TFHolidayStartDate, 0, "/"));
@@ -421,6 +427,10 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "vTFHOLIDAYISACTIVE_SEL", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV68TFHolidayIsActive_Sel), 1, 0, ".", "")));
          GxWebStd.gx_hidden_field( context, "vORDEREDBY", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV17OrderedBy), 4, 0, ".", "")));
          GxWebStd.gx_boolean_hidden_field( context, "vORDEREDDSC", AV18OrderedDsc);
+         GxWebStd.gx_boolean_hidden_field( context, "vREDIRECTTOFIRSTDETAIL", AV8RedirectToFirstDetail);
+         GxWebStd.gx_hidden_field( context, "gxhash_vREDIRECTTOFIRSTDETAIL", GetSecureSignedToken( "", AV8RedirectToFirstDetail, context));
+         GxWebStd.gx_hidden_field( context, "vQUERYINTENT", AV73QueryIntent);
+         GxWebStd.gx_hidden_field( context, "gxhash_vQUERYINTENT", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV73QueryIntent, "")), context));
          GxWebStd.gx_boolean_hidden_field( context, "vISAUTHORIZED_UPDATE", AV58IsAuthorized_Update);
          GxWebStd.gx_hidden_field( context, "gxhash_vISAUTHORIZED_UPDATE", GetSecureSignedToken( "", AV58IsAuthorized_Update, context));
          GxWebStd.gx_boolean_hidden_field( context, "vISAUTHORIZED_DELETE", AV60IsAuthorized_Delete);
@@ -620,7 +630,7 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, divTableactions_Internalname, 1, 0, "px", 0, "px", "Flex", "start", "top", " "+"data-gx-flex"+" ", "", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "", "start", "top", "", "", "div");
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "", "start", "top", "", "align-self:center;", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-action-group ActionGroupGrouped", "start", "top", " "+"data-gx-actiongroup-type=\"toolbar\""+" ", "", "div");
             /* Div Control */
@@ -854,7 +864,7 @@ namespace GeneXus.Programs {
          {
             if ( context.ExposeMetadata( ) )
             {
-               Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+               Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
             }
          }
          Form.Meta.addItem("description", " National Holiday", 0) ;
@@ -905,36 +915,42 @@ namespace GeneXus.Programs {
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
+                              /* Execute user event: Ddo_managefilters.Onoptionclicked */
                               E112H2 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "GRIDPAGINATIONBAR.CHANGEPAGE") == 0 )
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
+                              /* Execute user event: Gridpaginationbar.Changepage */
                               E122H2 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "GRIDPAGINATIONBAR.CHANGEROWSPERPAGE") == 0 )
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
+                              /* Execute user event: Gridpaginationbar.Changerowsperpage */
                               E132H2 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "DDO_AGEXPORT.ONOPTIONCLICKED") == 0 )
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
+                              /* Execute user event: Ddo_agexport.Onoptionclicked */
                               E142H2 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "DDO_GRID.ONOPTIONCLICKED") == 0 )
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
+                              /* Execute user event: Ddo_grid.Onoptionclicked */
                               E152H2 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED") == 0 )
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
+                              /* Execute user event: Ddo_gridcolumnsselector.Oncolumnschanged */
                               E162H2 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "'DOINSERT'") == 0 )
@@ -960,6 +976,10 @@ namespace GeneXus.Programs {
                               nGXsfl_38_idx = (int)(Math.Round(NumberUtil.Val( sEvtType, "."), 18, MidpointRounding.ToEven));
                               sGXsfl_38_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_38_idx), 4, 0), 4, "0");
                               SubsflControlProps_382( ) ;
+                              AV57Update = cgiGet( edtavUpdate_Internalname);
+                              AssignAttri("", false, edtavUpdate_Internalname, AV57Update);
+                              AV59Delete = cgiGet( edtavDelete_Internalname);
+                              AssignAttri("", false, edtavDelete_Internalname, AV59Delete);
                               A113HolidayId = (long)(Math.Round(context.localUtil.CToN( cgiGet( edtHolidayId_Internalname), ".", ","), 18, MidpointRounding.ToEven));
                               A114HolidayName = cgiGet( edtHolidayName_Internalname);
                               A115HolidayStartDate = DateTimeUtil.ResetTime(context.localUtil.CToT( cgiGet( edtHolidayStartDate_Internalname), 0));
@@ -969,10 +989,6 @@ namespace GeneXus.Programs {
                               n117HolidayServiceId = false;
                               A100CompanyId = (long)(Math.Round(context.localUtil.CToN( cgiGet( edtCompanyId_Internalname), ".", ","), 18, MidpointRounding.ToEven));
                               A139HolidayIsActive = StringUtil.StrToBool( cgiGet( chkHolidayIsActive_Internalname));
-                              AV57Update = cgiGet( edtavUpdate_Internalname);
-                              AssignAttri("", false, edtavUpdate_Internalname, AV57Update);
-                              AV59Delete = cgiGet( edtavDelete_Internalname);
-                              AssignAttri("", false, edtavDelete_Internalname, AV59Delete);
                               sEvtType = StringUtil.Right( sEvt, 1);
                               if ( StringUtil.StrCmp(sEvtType, ".") == 0 )
                               {
@@ -995,6 +1011,7 @@ namespace GeneXus.Programs {
                                  {
                                     context.wbHandled = 1;
                                     dynload_actions( ) ;
+                                    /* Execute user event: Grid.Load */
                                     E202H2 ();
                                  }
                                  else if ( StringUtil.StrCmp(sEvt, "'DOUSERACTION1'") == 0 )
@@ -1010,6 +1027,16 @@ namespace GeneXus.Programs {
                                     if ( ! wbErr )
                                     {
                                        Rfr0gs = false;
+                                       /* Set Refresh If Orderedby Changed */
+                                       if ( ( context.localUtil.CToN( cgiGet( "GXH_vORDEREDBY"), ".", ",") != Convert.ToDecimal( AV17OrderedBy )) )
+                                       {
+                                          Rfr0gs = true;
+                                       }
+                                       /* Set Refresh If Ordereddsc Changed */
+                                       if ( StringUtil.StrToBool( cgiGet( "GXH_vORDEREDDSC")) != AV18OrderedDsc )
+                                       {
+                                          Rfr0gs = true;
+                                       }
                                        /* Set Refresh If Filterfulltext Changed */
                                        if ( StringUtil.StrCmp(cgiGet( "GXH_vFILTERFULLTEXT"), AV20FilterFullText) != 0 )
                                        {
@@ -1109,17 +1136,20 @@ namespace GeneXus.Programs {
       }
 
       protected void gxgrGrid_refresh( int subGrid_Rows ,
+                                       short AV17OrderedBy ,
+                                       bool AV18OrderedDsc ,
                                        string AV20FilterFullText ,
                                        short AV30ManageFiltersExecutionStep ,
                                        GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector AV25ColumnsSelector ,
-                                       string AV74Pgmname ,
+                                       string AV75Pgmname ,
                                        string AV33TFHolidayName ,
                                        string AV34TFHolidayName_Sel ,
                                        DateTime AV35TFHolidayStartDate ,
                                        DateTime AV36TFHolidayStartDate_To ,
                                        short AV68TFHolidayIsActive_Sel ,
-                                       short AV17OrderedBy ,
-                                       bool AV18OrderedDsc ,
+                                       bool AV8RedirectToFirstDetail ,
+                                       string AV73QueryIntent ,
+                                       string AV9GridAppliedFilters ,
                                        bool AV58IsAuthorized_Update ,
                                        bool AV60IsAuthorized_Delete ,
                                        bool AV64IsAuthorized_Insert )
@@ -1166,12 +1196,10 @@ namespace GeneXus.Programs {
       protected void initialize_formulas( )
       {
          /* GeneXus formulas. */
-         AV74Pgmname = "HolidayWW";
+         AV75Pgmname = "HolidayWW";
          Gx_date = DateTimeUtil.Today( context);
          edtavUpdate_Enabled = 0;
-         AssignProp("", false, edtavUpdate_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavUpdate_Enabled), 5, 0), !bGXsfl_38_Refreshing);
          edtavDelete_Enabled = 0;
-         AssignProp("", false, edtavDelete_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavDelete_Enabled), 5, 0), !bGXsfl_38_Refreshing);
       }
 
       protected void RF2H2( )
@@ -1207,28 +1235,26 @@ namespace GeneXus.Programs {
             GXPagingFrom2 = (int)(((subGrid_Rows==0) ? 0 : GRID_nFirstRecordOnPage));
             GXPagingTo2 = ((subGrid_Rows==0) ? 10000 : subGrid_fnc_Recordsperpage( )+1);
             pr_default.dynParam(0, new Object[]{ new Object[]{
-                                                 AV75Holidaywwds_1_filterfulltext ,
-                                                 AV77Holidaywwds_3_tfholidayname_sel ,
-                                                 AV76Holidaywwds_2_tfholidayname ,
-                                                 AV78Holidaywwds_4_tfholidaystartdate ,
-                                                 AV79Holidaywwds_5_tfholidaystartdate_to ,
-                                                 AV80Holidaywwds_6_tfholidayisactive_sel ,
+                                                 AV76Holidaywwds_1_filterfulltext ,
+                                                 AV78Holidaywwds_3_tfholidayname_sel ,
+                                                 AV77Holidaywwds_2_tfholidayname ,
+                                                 AV79Holidaywwds_4_tfholidaystartdate ,
+                                                 AV80Holidaywwds_5_tfholidaystartdate_to ,
+                                                 AV81Holidaywwds_6_tfholidayisactive_sel ,
                                                  A114HolidayName ,
                                                  A115HolidayStartDate ,
                                                  A139HolidayIsActive ,
                                                  AV17OrderedBy ,
                                                  AV18OrderedDsc ,
-                                                 A100CompanyId ,
-                                                 AV81Udparg7 ,
                                                  Gx_date } ,
                                                  new int[]{
-                                                 TypeConstants.DATE, TypeConstants.DATE, TypeConstants.SHORT, TypeConstants.DATE, TypeConstants.BOOLEAN, TypeConstants.SHORT, TypeConstants.BOOLEAN, TypeConstants.LONG, TypeConstants.LONG, TypeConstants.DATE
+                                                 TypeConstants.DATE, TypeConstants.DATE, TypeConstants.SHORT, TypeConstants.DATE, TypeConstants.BOOLEAN, TypeConstants.SHORT, TypeConstants.BOOLEAN, TypeConstants.DATE
                                                  }
             });
-            lV75Holidaywwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV75Holidaywwds_1_filterfulltext), "%", "");
-            lV76Holidaywwds_2_tfholidayname = StringUtil.PadR( StringUtil.RTrim( AV76Holidaywwds_2_tfholidayname), 100, "%");
+            lV76Holidaywwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV76Holidaywwds_1_filterfulltext), "%", "");
+            lV77Holidaywwds_2_tfholidayname = StringUtil.PadR( StringUtil.RTrim( AV77Holidaywwds_2_tfholidayname), 100, "%");
             /* Using cursor H002H2 */
-            pr_default.execute(0, new Object[] {AV81Udparg7, Gx_date, Gx_date, lV75Holidaywwds_1_filterfulltext, lV76Holidaywwds_2_tfholidayname, AV77Holidaywwds_3_tfholidayname_sel, AV78Holidaywwds_4_tfholidaystartdate, AV79Holidaywwds_5_tfholidaystartdate_to, GXPagingFrom2, GXPagingTo2, GXPagingTo2});
+            pr_default.execute(0, new Object[] {Gx_date, Gx_date, lV76Holidaywwds_1_filterfulltext, lV77Holidaywwds_2_tfholidayname, AV78Holidaywwds_3_tfholidayname_sel, AV79Holidaywwds_4_tfholidaystartdate, AV80Holidaywwds_5_tfholidaystartdate_to, GXPagingFrom2, GXPagingTo2, GXPagingTo2});
             nGXsfl_38_idx = 1;
             sGXsfl_38_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_38_idx), 4, 0), 4, "0");
             SubsflControlProps_382( ) ;
@@ -1243,6 +1269,7 @@ namespace GeneXus.Programs {
                A115HolidayStartDate = H002H2_A115HolidayStartDate[0];
                A114HolidayName = H002H2_A114HolidayName[0];
                A113HolidayId = H002H2_A113HolidayId[0];
+               /* Execute user event: Grid.Load */
                E202H2 ();
                pr_default.readNext(0);
             }
@@ -1257,15 +1284,19 @@ namespace GeneXus.Programs {
 
       protected void send_integrity_lvl_hashes2H2( )
       {
-         GxWebStd.gx_hidden_field( context, "vPGMNAME", StringUtil.RTrim( AV74Pgmname));
-         GxWebStd.gx_hidden_field( context, "gxhash_vPGMNAME", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV74Pgmname, "")), context));
+         GxWebStd.gx_hidden_field( context, "vPGMNAME", StringUtil.RTrim( AV75Pgmname));
+         GxWebStd.gx_hidden_field( context, "gxhash_vPGMNAME", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV75Pgmname, "")), context));
+         GxWebStd.gx_hidden_field( context, "gxhash_HOLIDAYID"+"_"+sGXsfl_38_idx, GetSecureSignedToken( sGXsfl_38_idx, context.localUtil.Format( (decimal)(A113HolidayId), "ZZZZZZZZZ9"), context));
+         GxWebStd.gx_boolean_hidden_field( context, "vREDIRECTTOFIRSTDETAIL", AV8RedirectToFirstDetail);
+         GxWebStd.gx_hidden_field( context, "gxhash_vREDIRECTTOFIRSTDETAIL", GetSecureSignedToken( "", AV8RedirectToFirstDetail, context));
+         GxWebStd.gx_hidden_field( context, "vQUERYINTENT", AV73QueryIntent);
+         GxWebStd.gx_hidden_field( context, "gxhash_vQUERYINTENT", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV73QueryIntent, "")), context));
          GxWebStd.gx_boolean_hidden_field( context, "vISAUTHORIZED_UPDATE", AV58IsAuthorized_Update);
          GxWebStd.gx_hidden_field( context, "gxhash_vISAUTHORIZED_UPDATE", GetSecureSignedToken( "", AV58IsAuthorized_Update, context));
          GxWebStd.gx_boolean_hidden_field( context, "vISAUTHORIZED_DELETE", AV60IsAuthorized_Delete);
          GxWebStd.gx_hidden_field( context, "gxhash_vISAUTHORIZED_DELETE", GetSecureSignedToken( "", AV60IsAuthorized_Delete, context));
          GxWebStd.gx_boolean_hidden_field( context, "vISAUTHORIZED_INSERT", AV64IsAuthorized_Insert);
          GxWebStd.gx_hidden_field( context, "gxhash_vISAUTHORIZED_INSERT", GetSecureSignedToken( "", AV64IsAuthorized_Insert, context));
-         GxWebStd.gx_hidden_field( context, "gxhash_HOLIDAYID"+"_"+sGXsfl_38_idx, GetSecureSignedToken( sGXsfl_38_idx, context.localUtil.Format( (decimal)(A113HolidayId), "ZZZZZZZZZ9"), context));
       }
 
       protected int subGrid_fnc_Pagecount( )
@@ -1280,43 +1311,33 @@ namespace GeneXus.Programs {
 
       protected int subGrid_fnc_Recordcount( )
       {
-         AV75Holidaywwds_1_filterfulltext = AV20FilterFullText;
-         AV76Holidaywwds_2_tfholidayname = AV33TFHolidayName;
-         AV77Holidaywwds_3_tfholidayname_sel = AV34TFHolidayName_Sel;
-         AV78Holidaywwds_4_tfholidaystartdate = AV35TFHolidayStartDate;
-         AV79Holidaywwds_5_tfholidaystartdate_to = AV36TFHolidayStartDate_To;
-         AV80Holidaywwds_6_tfholidayisactive_sel = AV68TFHolidayIsActive_Sel;
-         AV81Udparg7 = new getloggedinusercompanyid(context).executeUdp( );
-         AV81Udparg7 = new getloggedinusercompanyid(context).executeUdp( );
-         AV81Udparg7 = new getloggedinusercompanyid(context).executeUdp( );
-         AV81Udparg7 = new getloggedinusercompanyid(context).executeUdp( );
-         AV81Udparg7 = new getloggedinusercompanyid(context).executeUdp( );
-         AV81Udparg7 = new getloggedinusercompanyid(context).executeUdp( );
-         AV81Udparg7 = new getloggedinusercompanyid(context).executeUdp( );
-         AV81Udparg7 = new getloggedinusercompanyid(context).executeUdp( );
+         AV76Holidaywwds_1_filterfulltext = AV20FilterFullText;
+         AV77Holidaywwds_2_tfholidayname = AV33TFHolidayName;
+         AV78Holidaywwds_3_tfholidayname_sel = AV34TFHolidayName_Sel;
+         AV79Holidaywwds_4_tfholidaystartdate = AV35TFHolidayStartDate;
+         AV80Holidaywwds_5_tfholidaystartdate_to = AV36TFHolidayStartDate_To;
+         AV81Holidaywwds_6_tfholidayisactive_sel = AV68TFHolidayIsActive_Sel;
          pr_default.dynParam(1, new Object[]{ new Object[]{
-                                              AV75Holidaywwds_1_filterfulltext ,
-                                              AV77Holidaywwds_3_tfholidayname_sel ,
-                                              AV76Holidaywwds_2_tfholidayname ,
-                                              AV78Holidaywwds_4_tfholidaystartdate ,
-                                              AV79Holidaywwds_5_tfholidaystartdate_to ,
-                                              AV80Holidaywwds_6_tfholidayisactive_sel ,
+                                              AV76Holidaywwds_1_filterfulltext ,
+                                              AV78Holidaywwds_3_tfholidayname_sel ,
+                                              AV77Holidaywwds_2_tfholidayname ,
+                                              AV79Holidaywwds_4_tfholidaystartdate ,
+                                              AV80Holidaywwds_5_tfholidaystartdate_to ,
+                                              AV81Holidaywwds_6_tfholidayisactive_sel ,
                                               A114HolidayName ,
                                               A115HolidayStartDate ,
                                               A139HolidayIsActive ,
                                               AV17OrderedBy ,
                                               AV18OrderedDsc ,
-                                              A100CompanyId ,
-                                              AV81Udparg7 ,
                                               Gx_date } ,
                                               new int[]{
-                                              TypeConstants.DATE, TypeConstants.DATE, TypeConstants.SHORT, TypeConstants.DATE, TypeConstants.BOOLEAN, TypeConstants.SHORT, TypeConstants.BOOLEAN, TypeConstants.LONG, TypeConstants.LONG, TypeConstants.DATE
+                                              TypeConstants.DATE, TypeConstants.DATE, TypeConstants.SHORT, TypeConstants.DATE, TypeConstants.BOOLEAN, TypeConstants.SHORT, TypeConstants.BOOLEAN, TypeConstants.DATE
                                               }
          });
-         lV75Holidaywwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV75Holidaywwds_1_filterfulltext), "%", "");
-         lV76Holidaywwds_2_tfholidayname = StringUtil.PadR( StringUtil.RTrim( AV76Holidaywwds_2_tfholidayname), 100, "%");
+         lV76Holidaywwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV76Holidaywwds_1_filterfulltext), "%", "");
+         lV77Holidaywwds_2_tfholidayname = StringUtil.PadR( StringUtil.RTrim( AV77Holidaywwds_2_tfholidayname), 100, "%");
          /* Using cursor H002H3 */
-         pr_default.execute(1, new Object[] {AV81Udparg7, Gx_date, Gx_date, lV75Holidaywwds_1_filterfulltext, lV76Holidaywwds_2_tfholidayname, AV77Holidaywwds_3_tfholidayname_sel, AV78Holidaywwds_4_tfholidaystartdate, AV79Holidaywwds_5_tfholidaystartdate_to});
+         pr_default.execute(1, new Object[] {Gx_date, Gx_date, lV76Holidaywwds_1_filterfulltext, lV77Holidaywwds_2_tfholidayname, AV78Holidaywwds_3_tfholidayname_sel, AV79Holidaywwds_4_tfholidaystartdate, AV80Holidaywwds_5_tfholidaystartdate_to});
          GRID_nRecordCount = H002H3_AGRID_nRecordCount[0];
          pr_default.close(1);
          return (int)(GRID_nRecordCount) ;
@@ -1341,17 +1362,17 @@ namespace GeneXus.Programs {
 
       protected short subgrid_firstpage( )
       {
-         AV75Holidaywwds_1_filterfulltext = AV20FilterFullText;
-         AV76Holidaywwds_2_tfholidayname = AV33TFHolidayName;
-         AV77Holidaywwds_3_tfholidayname_sel = AV34TFHolidayName_Sel;
-         AV78Holidaywwds_4_tfholidaystartdate = AV35TFHolidayStartDate;
-         AV79Holidaywwds_5_tfholidaystartdate_to = AV36TFHolidayStartDate_To;
-         AV80Holidaywwds_6_tfholidayisactive_sel = AV68TFHolidayIsActive_Sel;
+         AV76Holidaywwds_1_filterfulltext = AV20FilterFullText;
+         AV77Holidaywwds_2_tfholidayname = AV33TFHolidayName;
+         AV78Holidaywwds_3_tfholidayname_sel = AV34TFHolidayName_Sel;
+         AV79Holidaywwds_4_tfholidaystartdate = AV35TFHolidayStartDate;
+         AV80Holidaywwds_5_tfholidaystartdate_to = AV36TFHolidayStartDate_To;
+         AV81Holidaywwds_6_tfholidayisactive_sel = AV68TFHolidayIsActive_Sel;
          GRID_nFirstRecordOnPage = 0;
          GxWebStd.gx_hidden_field( context, "GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV20FilterFullText, AV30ManageFiltersExecutionStep, AV25ColumnsSelector, AV74Pgmname, AV33TFHolidayName, AV34TFHolidayName_Sel, AV35TFHolidayStartDate, AV36TFHolidayStartDate_To, AV68TFHolidayIsActive_Sel, AV17OrderedBy, AV18OrderedDsc, AV58IsAuthorized_Update, AV60IsAuthorized_Delete, AV64IsAuthorized_Insert) ;
+            gxgrGrid_refresh( subGrid_Rows, AV17OrderedBy, AV18OrderedDsc, AV20FilterFullText, AV30ManageFiltersExecutionStep, AV25ColumnsSelector, AV75Pgmname, AV33TFHolidayName, AV34TFHolidayName_Sel, AV35TFHolidayStartDate, AV36TFHolidayStartDate_To, AV68TFHolidayIsActive_Sel, AV8RedirectToFirstDetail, AV73QueryIntent, AV9GridAppliedFilters, AV58IsAuthorized_Update, AV60IsAuthorized_Delete, AV64IsAuthorized_Insert) ;
          }
          send_integrity_footer_hashes( ) ;
          return 0 ;
@@ -1359,12 +1380,12 @@ namespace GeneXus.Programs {
 
       protected short subgrid_nextpage( )
       {
-         AV75Holidaywwds_1_filterfulltext = AV20FilterFullText;
-         AV76Holidaywwds_2_tfholidayname = AV33TFHolidayName;
-         AV77Holidaywwds_3_tfholidayname_sel = AV34TFHolidayName_Sel;
-         AV78Holidaywwds_4_tfholidaystartdate = AV35TFHolidayStartDate;
-         AV79Holidaywwds_5_tfholidaystartdate_to = AV36TFHolidayStartDate_To;
-         AV80Holidaywwds_6_tfholidayisactive_sel = AV68TFHolidayIsActive_Sel;
+         AV76Holidaywwds_1_filterfulltext = AV20FilterFullText;
+         AV77Holidaywwds_2_tfholidayname = AV33TFHolidayName;
+         AV78Holidaywwds_3_tfholidayname_sel = AV34TFHolidayName_Sel;
+         AV79Holidaywwds_4_tfholidaystartdate = AV35TFHolidayStartDate;
+         AV80Holidaywwds_5_tfholidaystartdate_to = AV36TFHolidayStartDate_To;
+         AV81Holidaywwds_6_tfholidayisactive_sel = AV68TFHolidayIsActive_Sel;
          GRID_nRecordCount = subGrid_fnc_Recordcount( );
          if ( ( GRID_nRecordCount >= subGrid_fnc_Recordsperpage( ) ) && ( GRID_nEOF == 0 ) )
          {
@@ -1378,7 +1399,7 @@ namespace GeneXus.Programs {
          GridContainer.AddObjectProperty("GRID_nFirstRecordOnPage", GRID_nFirstRecordOnPage);
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV20FilterFullText, AV30ManageFiltersExecutionStep, AV25ColumnsSelector, AV74Pgmname, AV33TFHolidayName, AV34TFHolidayName_Sel, AV35TFHolidayStartDate, AV36TFHolidayStartDate_To, AV68TFHolidayIsActive_Sel, AV17OrderedBy, AV18OrderedDsc, AV58IsAuthorized_Update, AV60IsAuthorized_Delete, AV64IsAuthorized_Insert) ;
+            gxgrGrid_refresh( subGrid_Rows, AV17OrderedBy, AV18OrderedDsc, AV20FilterFullText, AV30ManageFiltersExecutionStep, AV25ColumnsSelector, AV75Pgmname, AV33TFHolidayName, AV34TFHolidayName_Sel, AV35TFHolidayStartDate, AV36TFHolidayStartDate_To, AV68TFHolidayIsActive_Sel, AV8RedirectToFirstDetail, AV73QueryIntent, AV9GridAppliedFilters, AV58IsAuthorized_Update, AV60IsAuthorized_Delete, AV64IsAuthorized_Insert) ;
          }
          send_integrity_footer_hashes( ) ;
          return (short)(((GRID_nEOF==0) ? 0 : 2)) ;
@@ -1386,12 +1407,12 @@ namespace GeneXus.Programs {
 
       protected short subgrid_previouspage( )
       {
-         AV75Holidaywwds_1_filterfulltext = AV20FilterFullText;
-         AV76Holidaywwds_2_tfholidayname = AV33TFHolidayName;
-         AV77Holidaywwds_3_tfholidayname_sel = AV34TFHolidayName_Sel;
-         AV78Holidaywwds_4_tfholidaystartdate = AV35TFHolidayStartDate;
-         AV79Holidaywwds_5_tfholidaystartdate_to = AV36TFHolidayStartDate_To;
-         AV80Holidaywwds_6_tfholidayisactive_sel = AV68TFHolidayIsActive_Sel;
+         AV76Holidaywwds_1_filterfulltext = AV20FilterFullText;
+         AV77Holidaywwds_2_tfholidayname = AV33TFHolidayName;
+         AV78Holidaywwds_3_tfholidayname_sel = AV34TFHolidayName_Sel;
+         AV79Holidaywwds_4_tfholidaystartdate = AV35TFHolidayStartDate;
+         AV80Holidaywwds_5_tfholidaystartdate_to = AV36TFHolidayStartDate_To;
+         AV81Holidaywwds_6_tfholidayisactive_sel = AV68TFHolidayIsActive_Sel;
          if ( GRID_nFirstRecordOnPage >= subGrid_fnc_Recordsperpage( ) )
          {
             GRID_nFirstRecordOnPage = (long)(GRID_nFirstRecordOnPage-subGrid_fnc_Recordsperpage( ));
@@ -1403,7 +1424,7 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV20FilterFullText, AV30ManageFiltersExecutionStep, AV25ColumnsSelector, AV74Pgmname, AV33TFHolidayName, AV34TFHolidayName_Sel, AV35TFHolidayStartDate, AV36TFHolidayStartDate_To, AV68TFHolidayIsActive_Sel, AV17OrderedBy, AV18OrderedDsc, AV58IsAuthorized_Update, AV60IsAuthorized_Delete, AV64IsAuthorized_Insert) ;
+            gxgrGrid_refresh( subGrid_Rows, AV17OrderedBy, AV18OrderedDsc, AV20FilterFullText, AV30ManageFiltersExecutionStep, AV25ColumnsSelector, AV75Pgmname, AV33TFHolidayName, AV34TFHolidayName_Sel, AV35TFHolidayStartDate, AV36TFHolidayStartDate_To, AV68TFHolidayIsActive_Sel, AV8RedirectToFirstDetail, AV73QueryIntent, AV9GridAppliedFilters, AV58IsAuthorized_Update, AV60IsAuthorized_Delete, AV64IsAuthorized_Insert) ;
          }
          send_integrity_footer_hashes( ) ;
          return 0 ;
@@ -1411,12 +1432,12 @@ namespace GeneXus.Programs {
 
       protected short subgrid_lastpage( )
       {
-         AV75Holidaywwds_1_filterfulltext = AV20FilterFullText;
-         AV76Holidaywwds_2_tfholidayname = AV33TFHolidayName;
-         AV77Holidaywwds_3_tfholidayname_sel = AV34TFHolidayName_Sel;
-         AV78Holidaywwds_4_tfholidaystartdate = AV35TFHolidayStartDate;
-         AV79Holidaywwds_5_tfholidaystartdate_to = AV36TFHolidayStartDate_To;
-         AV80Holidaywwds_6_tfholidayisactive_sel = AV68TFHolidayIsActive_Sel;
+         AV76Holidaywwds_1_filterfulltext = AV20FilterFullText;
+         AV77Holidaywwds_2_tfholidayname = AV33TFHolidayName;
+         AV78Holidaywwds_3_tfholidayname_sel = AV34TFHolidayName_Sel;
+         AV79Holidaywwds_4_tfholidaystartdate = AV35TFHolidayStartDate;
+         AV80Holidaywwds_5_tfholidaystartdate_to = AV36TFHolidayStartDate_To;
+         AV81Holidaywwds_6_tfholidayisactive_sel = AV68TFHolidayIsActive_Sel;
          GRID_nRecordCount = subGrid_fnc_Recordcount( );
          if ( GRID_nRecordCount > subGrid_fnc_Recordsperpage( ) )
          {
@@ -1436,7 +1457,7 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV20FilterFullText, AV30ManageFiltersExecutionStep, AV25ColumnsSelector, AV74Pgmname, AV33TFHolidayName, AV34TFHolidayName_Sel, AV35TFHolidayStartDate, AV36TFHolidayStartDate_To, AV68TFHolidayIsActive_Sel, AV17OrderedBy, AV18OrderedDsc, AV58IsAuthorized_Update, AV60IsAuthorized_Delete, AV64IsAuthorized_Insert) ;
+            gxgrGrid_refresh( subGrid_Rows, AV17OrderedBy, AV18OrderedDsc, AV20FilterFullText, AV30ManageFiltersExecutionStep, AV25ColumnsSelector, AV75Pgmname, AV33TFHolidayName, AV34TFHolidayName_Sel, AV35TFHolidayStartDate, AV36TFHolidayStartDate_To, AV68TFHolidayIsActive_Sel, AV8RedirectToFirstDetail, AV73QueryIntent, AV9GridAppliedFilters, AV58IsAuthorized_Update, AV60IsAuthorized_Delete, AV64IsAuthorized_Insert) ;
          }
          send_integrity_footer_hashes( ) ;
          return 0 ;
@@ -1444,12 +1465,12 @@ namespace GeneXus.Programs {
 
       protected int subgrid_gotopage( int nPageNo )
       {
-         AV75Holidaywwds_1_filterfulltext = AV20FilterFullText;
-         AV76Holidaywwds_2_tfholidayname = AV33TFHolidayName;
-         AV77Holidaywwds_3_tfholidayname_sel = AV34TFHolidayName_Sel;
-         AV78Holidaywwds_4_tfholidaystartdate = AV35TFHolidayStartDate;
-         AV79Holidaywwds_5_tfholidaystartdate_to = AV36TFHolidayStartDate_To;
-         AV80Holidaywwds_6_tfholidayisactive_sel = AV68TFHolidayIsActive_Sel;
+         AV76Holidaywwds_1_filterfulltext = AV20FilterFullText;
+         AV77Holidaywwds_2_tfholidayname = AV33TFHolidayName;
+         AV78Holidaywwds_3_tfholidayname_sel = AV34TFHolidayName_Sel;
+         AV79Holidaywwds_4_tfholidaystartdate = AV35TFHolidayStartDate;
+         AV80Holidaywwds_5_tfholidaystartdate_to = AV36TFHolidayStartDate_To;
+         AV81Holidaywwds_6_tfholidayisactive_sel = AV68TFHolidayIsActive_Sel;
          if ( nPageNo > 0 )
          {
             GRID_nFirstRecordOnPage = (long)(subGrid_fnc_Recordsperpage( )*(nPageNo-1));
@@ -1461,7 +1482,7 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV20FilterFullText, AV30ManageFiltersExecutionStep, AV25ColumnsSelector, AV74Pgmname, AV33TFHolidayName, AV34TFHolidayName_Sel, AV35TFHolidayStartDate, AV36TFHolidayStartDate_To, AV68TFHolidayIsActive_Sel, AV17OrderedBy, AV18OrderedDsc, AV58IsAuthorized_Update, AV60IsAuthorized_Delete, AV64IsAuthorized_Insert) ;
+            gxgrGrid_refresh( subGrid_Rows, AV17OrderedBy, AV18OrderedDsc, AV20FilterFullText, AV30ManageFiltersExecutionStep, AV25ColumnsSelector, AV75Pgmname, AV33TFHolidayName, AV34TFHolidayName_Sel, AV35TFHolidayStartDate, AV36TFHolidayStartDate_To, AV68TFHolidayIsActive_Sel, AV8RedirectToFirstDetail, AV73QueryIntent, AV9GridAppliedFilters, AV58IsAuthorized_Update, AV60IsAuthorized_Delete, AV64IsAuthorized_Insert) ;
          }
          send_integrity_footer_hashes( ) ;
          return (int)(0) ;
@@ -1469,26 +1490,17 @@ namespace GeneXus.Programs {
 
       protected void before_start_formulas( )
       {
-         AV74Pgmname = "HolidayWW";
+         AV75Pgmname = "HolidayWW";
          Gx_date = DateTimeUtil.Today( context);
          edtavUpdate_Enabled = 0;
-         AssignProp("", false, edtavUpdate_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavUpdate_Enabled), 5, 0), !bGXsfl_38_Refreshing);
          edtavDelete_Enabled = 0;
-         AssignProp("", false, edtavDelete_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavDelete_Enabled), 5, 0), !bGXsfl_38_Refreshing);
          edtHolidayId_Enabled = 0;
-         AssignProp("", false, edtHolidayId_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtHolidayId_Enabled), 5, 0), !bGXsfl_38_Refreshing);
          edtHolidayName_Enabled = 0;
-         AssignProp("", false, edtHolidayName_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtHolidayName_Enabled), 5, 0), !bGXsfl_38_Refreshing);
          edtHolidayStartDate_Enabled = 0;
-         AssignProp("", false, edtHolidayStartDate_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtHolidayStartDate_Enabled), 5, 0), !bGXsfl_38_Refreshing);
          edtHolidayEndDate_Enabled = 0;
-         AssignProp("", false, edtHolidayEndDate_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtHolidayEndDate_Enabled), 5, 0), !bGXsfl_38_Refreshing);
          edtHolidayServiceId_Enabled = 0;
-         AssignProp("", false, edtHolidayServiceId_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtHolidayServiceId_Enabled), 5, 0), !bGXsfl_38_Refreshing);
          edtCompanyId_Enabled = 0;
-         AssignProp("", false, edtCompanyId_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtCompanyId_Enabled), 5, 0), !bGXsfl_38_Refreshing);
          chkHolidayIsActive.Enabled = 0;
-         AssignProp("", false, chkHolidayIsActive_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(chkHolidayIsActive.Enabled), 5, 0), !bGXsfl_38_Refreshing);
          fix_multi_value_controls( ) ;
       }
 
@@ -1598,6 +1610,14 @@ namespace GeneXus.Programs {
             /* Read hidden variables. */
             GXKey = Decrypt64( context.GetCookie( "GX_SESSION_ID"), Crypto.GetServerKey( ));
             /* Check if conditions changed and reset current page numbers */
+            if ( ( context.localUtil.CToN( cgiGet( "GXH_vORDEREDBY"), ".", ",") != Convert.ToDecimal( AV17OrderedBy )) )
+            {
+               GRID_nFirstRecordOnPage = 0;
+            }
+            if ( StringUtil.StrToBool( cgiGet( "GXH_vORDEREDDSC")) != AV18OrderedDsc )
+            {
+               GRID_nFirstRecordOnPage = 0;
+            }
             if ( StringUtil.StrCmp(cgiGet( "GXH_vFILTERFULLTEXT"), AV20FilterFullText) != 0 )
             {
                GRID_nFirstRecordOnPage = 0;
@@ -1625,7 +1645,7 @@ namespace GeneXus.Programs {
          /* Start Routine */
          returnInSub = false;
          this.executeUsercontrolMethod("", false, "TFHOLIDAYSTARTDATE_RANGEPICKERContainer", "Attach", "", new Object[] {(string)edtavDdo_holidaystartdateauxdatetext_Internalname});
-         subGrid_Rows = 20;
+         subGrid_Rows = 10;
          GxWebStd.gx_hidden_field( context, "GRID_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Rows), 6, 0, ".", "")));
          Grid_empowerer_Gridinternalname = subGrid_Internalname;
          ucGrid_empowerer.SendProperty(context, "", false, Grid_empowerer_Internalname, "GridInternalName", Grid_empowerer_Gridinternalname);
@@ -1761,23 +1781,36 @@ namespace GeneXus.Programs {
          AV56GridPageCount = subGrid_fnc_Pagecount( );
          AssignAttri("", false, "AV56GridPageCount", StringUtil.LTrimStr( (decimal)(AV56GridPageCount), 10, 0));
          GXt_char2 = AV9GridAppliedFilters;
-         new GeneXus.Programs.wwpbaseobjects.wwp_getappliedfiltersdescription(context ).execute(  AV74Pgmname, out  GXt_char2) ;
+         new GeneXus.Programs.wwpbaseobjects.wwp_getappliedfiltersdescription(context ).execute(  AV75Pgmname, out  GXt_char2) ;
          AV9GridAppliedFilters = GXt_char2;
          AssignAttri("", false, "AV9GridAppliedFilters", AV9GridAppliedFilters);
-         AV75Holidaywwds_1_filterfulltext = AV20FilterFullText;
-         AV76Holidaywwds_2_tfholidayname = AV33TFHolidayName;
-         AV77Holidaywwds_3_tfholidayname_sel = AV34TFHolidayName_Sel;
-         AV78Holidaywwds_4_tfholidaystartdate = AV35TFHolidayStartDate;
-         AV79Holidaywwds_5_tfholidaystartdate_to = AV36TFHolidayStartDate_To;
-         AV80Holidaywwds_6_tfholidayisactive_sel = AV68TFHolidayIsActive_Sel;
-         AV81Udparg7 = new getloggedinusercompanyid(context).executeUdp( );
-         AV81Udparg7 = new getloggedinusercompanyid(context).executeUdp( );
-         AV81Udparg7 = new getloggedinusercompanyid(context).executeUdp( );
-         AV81Udparg7 = new getloggedinusercompanyid(context).executeUdp( );
-         AV81Udparg7 = new getloggedinusercompanyid(context).executeUdp( );
-         AV81Udparg7 = new getloggedinusercompanyid(context).executeUdp( );
-         AV81Udparg7 = new getloggedinusercompanyid(context).executeUdp( );
-         AV81Udparg7 = new getloggedinusercompanyid(context).executeUdp( );
+         AV73QueryIntent = StringUtil.Trim( AV27Session.Get(AV75Pgmname+"QueryIntent"));
+         AssignAttri("", false, "AV73QueryIntent", AV73QueryIntent);
+         GxWebStd.gx_hidden_field( context, "gxhash_vQUERYINTENT", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV73QueryIntent, "")), context));
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV73QueryIntent)) )
+         {
+            AV27Session.Remove(AV75Pgmname+"QueryIntent");
+            if ( StringUtil.StrCmp(AV73QueryIntent, "5") == 0 )
+            {
+               if ( new GeneXus.Programs.wwpbaseobjects.secgamisauthbyfunctionalitykey(context).executeUdp(  "holiday_Insert") )
+               {
+                  CallWebObject(formatLink("holiday.aspx", new object[] {UrlEncode(StringUtil.RTrim("INS")),UrlEncode(StringUtil.LTrimStr(0,1,0))}, new string[] {"Mode","HolidayId"}) );
+                  context.wjLocDisableFrm = 1;
+               }
+            }
+            else
+            {
+               AV8RedirectToFirstDetail = true;
+               AssignAttri("", false, "AV8RedirectToFirstDetail", AV8RedirectToFirstDetail);
+               GxWebStd.gx_hidden_field( context, "gxhash_vREDIRECTTOFIRSTDETAIL", GetSecureSignedToken( "", AV8RedirectToFirstDetail, context));
+            }
+         }
+         AV76Holidaywwds_1_filterfulltext = AV20FilterFullText;
+         AV77Holidaywwds_2_tfholidayname = AV33TFHolidayName;
+         AV78Holidaywwds_3_tfholidayname_sel = AV34TFHolidayName_Sel;
+         AV79Holidaywwds_4_tfholidaystartdate = AV35TFHolidayStartDate;
+         AV80Holidaywwds_5_tfholidaystartdate_to = AV36TFHolidayStartDate_To;
+         AV81Holidaywwds_6_tfholidayisactive_sel = AV68TFHolidayIsActive_Sel;
          /*  Sending Event outputs  */
          context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV25ColumnsSelector", AV25ColumnsSelector);
          context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV28ManageFiltersData", AV28ManageFiltersData);
@@ -1862,6 +1895,37 @@ namespace GeneXus.Programs {
       {
          /* Grid_Load Routine */
          returnInSub = false;
+         if ( AV8RedirectToFirstDetail )
+         {
+            if ( StringUtil.StrCmp(AV73QueryIntent, "2") == 0 )
+            {
+               AV27Session.Set("HolidayViewQueryAppliedFilters", AV9GridAppliedFilters);
+               if ( new GeneXus.Programs.wwpbaseobjects.secgamisauthbyfunctionalitykey(context).executeUdp(  "holidayview_Execute") )
+               {
+                  CallWebObject(formatLink("holidayview.aspx", new object[] {UrlEncode(StringUtil.LTrimStr(A113HolidayId,10,0)),UrlEncode(StringUtil.RTrim(""))}, new string[] {"HolidayId","TabCode"}) );
+                  context.wjLocDisableFrm = 1;
+               }
+            }
+            else if ( StringUtil.StrCmp(AV73QueryIntent, "3") == 0 )
+            {
+               if ( new GeneXus.Programs.wwpbaseobjects.secgamisauthbyfunctionalitykey(context).executeUdp(  "holiday_Update") )
+               {
+                  CallWebObject(formatLink("holiday.aspx", new object[] {UrlEncode(StringUtil.RTrim("UPD")),UrlEncode(StringUtil.LTrimStr(A113HolidayId,10,0))}, new string[] {"Mode","HolidayId"}) );
+                  context.wjLocDisableFrm = 1;
+               }
+            }
+            else if ( StringUtil.StrCmp(AV73QueryIntent, "4") == 0 )
+            {
+               if ( new GeneXus.Programs.wwpbaseobjects.secgamisauthbyfunctionalitykey(context).executeUdp(  "holiday_Delete") )
+               {
+                  CallWebObject(formatLink("holiday.aspx", new object[] {UrlEncode(StringUtil.RTrim("DLT")),UrlEncode(StringUtil.LTrimStr(A113HolidayId,10,0))}, new string[] {"Mode","HolidayId"}) );
+                  context.wjLocDisableFrm = 1;
+               }
+            }
+            AV8RedirectToFirstDetail = false;
+            AssignAttri("", false, "AV8RedirectToFirstDetail", AV8RedirectToFirstDetail);
+            GxWebStd.gx_hidden_field( context, "gxhash_vREDIRECTTOFIRSTDETAIL", GetSecureSignedToken( "", AV8RedirectToFirstDetail, context));
+         }
          AV57Update = "<i class=\"fa fa-pen\"></i>";
          AssignAttri("", false, edtavUpdate_Internalname, AV57Update);
          if ( AV58IsAuthorized_Update )
@@ -1926,7 +1990,7 @@ namespace GeneXus.Programs {
                returnInSub = true;
                if (true) return;
             }
-            context.PopUp(formatLink("wwpbaseobjects.savefilteras.aspx", new object[] {UrlEncode(StringUtil.RTrim("HolidayWWFilters")),UrlEncode(StringUtil.RTrim(AV74Pgmname+"GridState"))}, new string[] {"UserKey","GridStateKey"}) , new Object[] {});
+            context.PopUp(formatLink("wwpbaseobjects.savefilteras.aspx", new object[] {UrlEncode(StringUtil.RTrim("HolidayWWFilters")),UrlEncode(StringUtil.RTrim(AV75Pgmname+"GridState"))}, new string[] {"UserKey","GridStateKey"}) , new Object[] {});
             AV30ManageFiltersExecutionStep = 2;
             AssignAttri("", false, "AV30ManageFiltersExecutionStep", StringUtil.Str( (decimal)(AV30ManageFiltersExecutionStep), 1, 0));
             context.DoAjaxRefresh();
@@ -1956,7 +2020,7 @@ namespace GeneXus.Programs {
                   returnInSub = true;
                   if (true) return;
                }
-               new GeneXus.Programs.wwpbaseobjects.savegridstate(context ).execute(  AV74Pgmname+"GridState",  AV29ManageFiltersXml) ;
+               new GeneXus.Programs.wwpbaseobjects.savegridstate(context ).execute(  AV75Pgmname+"GridState",  AV29ManageFiltersXml) ;
                AV15GridState.FromXml(AV29ManageFiltersXml, null, "", "");
                AV17OrderedBy = AV15GridState.gxTpr_Orderedby;
                AssignAttri("", false, "AV17OrderedBy", StringUtil.LTrimStr( (decimal)(AV17OrderedBy), 4, 0));
@@ -2122,13 +2186,13 @@ namespace GeneXus.Programs {
       {
          /* 'LOADGRIDSTATE' Routine */
          returnInSub = false;
-         if ( StringUtil.StrCmp(AV27Session.Get(AV74Pgmname+"GridState"), "") == 0 )
+         if ( StringUtil.StrCmp(AV27Session.Get(AV75Pgmname+"GridState"), "") == 0 )
          {
-            AV15GridState.FromXml(new GeneXus.Programs.wwpbaseobjects.loadgridstate(context).executeUdp(  AV74Pgmname+"GridState"), null, "", "");
+            AV15GridState.FromXml(new GeneXus.Programs.wwpbaseobjects.loadgridstate(context).executeUdp(  AV75Pgmname+"GridState"), null, "", "");
          }
          else
          {
-            AV15GridState.FromXml(AV27Session.Get(AV74Pgmname+"GridState"), null, "", "");
+            AV15GridState.FromXml(AV27Session.Get(AV75Pgmname+"GridState"), null, "", "");
          }
          AV17OrderedBy = AV15GridState.gxTpr_Orderedby;
          AssignAttri("", false, "AV17OrderedBy", StringUtil.LTrimStr( (decimal)(AV17OrderedBy), 4, 0));
@@ -2209,7 +2273,7 @@ namespace GeneXus.Programs {
       {
          /* 'SAVEGRIDSTATE' Routine */
          returnInSub = false;
-         AV15GridState.FromXml(AV27Session.Get(AV74Pgmname+"GridState"), null, "", "");
+         AV15GridState.FromXml(AV27Session.Get(AV75Pgmname+"GridState"), null, "", "");
          AV15GridState.gxTpr_Orderedby = AV17OrderedBy;
          AV15GridState.gxTpr_Ordereddsc = AV18OrderedDsc;
          AV15GridState.gxTpr_Filtervalues.Clear();
@@ -2219,7 +2283,7 @@ namespace GeneXus.Programs {
          new GeneXus.Programs.wwpbaseobjects.wwp_gridstateaddfiltervalue(context ).execute( ref  AV15GridState,  "TFHOLIDAYISACTIVE_SEL",  "Is Active",  !(0==AV68TFHolidayIsActive_Sel),  0,  StringUtil.Trim( StringUtil.Str( (decimal)(AV68TFHolidayIsActive_Sel), 1, 0)),  ((AV68TFHolidayIsActive_Sel==1) ? "Checked" : "Unchecked"),  false,  "",  "") ;
          AV15GridState.gxTpr_Pagesize = StringUtil.Str( (decimal)(subGrid_Rows), 10, 0);
          AV15GridState.gxTpr_Currentpage = (short)(subGrid_fnc_Currentpage( ));
-         new GeneXus.Programs.wwpbaseobjects.savegridstate(context ).execute(  AV74Pgmname+"GridState",  AV15GridState.ToXml(false, true, "", "")) ;
+         new GeneXus.Programs.wwpbaseobjects.savegridstate(context ).execute(  AV75Pgmname+"GridState",  AV15GridState.ToXml(false, true, "", "")) ;
       }
 
       protected void S122( )
@@ -2227,7 +2291,7 @@ namespace GeneXus.Programs {
          /* 'PREPARETRANSACTION' Routine */
          returnInSub = false;
          AV13TrnContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext(context);
-         AV13TrnContext.gxTpr_Callerobject = AV74Pgmname;
+         AV13TrnContext.gxTpr_Callerobject = AV75Pgmname;
          AV13TrnContext.gxTpr_Callerondelete = true;
          AV13TrnContext.gxTpr_Callerurl = AV12HTTPRequest.ScriptName+"?"+AV12HTTPRequest.QueryString;
          AV13TrnContext.gxTpr_Transactionname = "Holiday";
@@ -2328,7 +2392,7 @@ namespace GeneXus.Programs {
          PA2H2( ) ;
          WS2H2( ) ;
          WE2H2( ) ;
-         this.cleanup();
+         cleanup();
          context.SetWrapped(false);
          context.GX_msglist = BackMsgLst;
          return "";
@@ -2352,7 +2416,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024812158101", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202491716182125", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2368,7 +2432,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("holidayww.js", "?2024812158103", false, true);
+         context.AddJavascriptSource("holidayww.js", "?202491716182127", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -2397,6 +2461,8 @@ namespace GeneXus.Programs {
 
       protected void SubsflControlProps_382( )
       {
+         edtavUpdate_Internalname = "vUPDATE_"+sGXsfl_38_idx;
+         edtavDelete_Internalname = "vDELETE_"+sGXsfl_38_idx;
          edtHolidayId_Internalname = "HOLIDAYID_"+sGXsfl_38_idx;
          edtHolidayName_Internalname = "HOLIDAYNAME_"+sGXsfl_38_idx;
          edtHolidayStartDate_Internalname = "HOLIDAYSTARTDATE_"+sGXsfl_38_idx;
@@ -2404,12 +2470,12 @@ namespace GeneXus.Programs {
          edtHolidayServiceId_Internalname = "HOLIDAYSERVICEID_"+sGXsfl_38_idx;
          edtCompanyId_Internalname = "COMPANYID_"+sGXsfl_38_idx;
          chkHolidayIsActive_Internalname = "HOLIDAYISACTIVE_"+sGXsfl_38_idx;
-         edtavUpdate_Internalname = "vUPDATE_"+sGXsfl_38_idx;
-         edtavDelete_Internalname = "vDELETE_"+sGXsfl_38_idx;
       }
 
       protected void SubsflControlProps_fel_382( )
       {
+         edtavUpdate_Internalname = "vUPDATE_"+sGXsfl_38_fel_idx;
+         edtavDelete_Internalname = "vDELETE_"+sGXsfl_38_fel_idx;
          edtHolidayId_Internalname = "HOLIDAYID_"+sGXsfl_38_fel_idx;
          edtHolidayName_Internalname = "HOLIDAYNAME_"+sGXsfl_38_fel_idx;
          edtHolidayStartDate_Internalname = "HOLIDAYSTARTDATE_"+sGXsfl_38_fel_idx;
@@ -2417,12 +2483,11 @@ namespace GeneXus.Programs {
          edtHolidayServiceId_Internalname = "HOLIDAYSERVICEID_"+sGXsfl_38_fel_idx;
          edtCompanyId_Internalname = "COMPANYID_"+sGXsfl_38_fel_idx;
          chkHolidayIsActive_Internalname = "HOLIDAYISACTIVE_"+sGXsfl_38_fel_idx;
-         edtavUpdate_Internalname = "vUPDATE_"+sGXsfl_38_fel_idx;
-         edtavDelete_Internalname = "vDELETE_"+sGXsfl_38_fel_idx;
       }
 
       protected void sendrow_382( )
       {
+         sGXsfl_38_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_38_idx), 4, 0), 4, "0");
          SubsflControlProps_382( ) ;
          WB2H0( ) ;
          if ( ( subGrid_Rows * 1 == 0 ) || ( nGXsfl_38_idx <= subGrid_fnc_Recordsperpage( ) * 1 ) )
@@ -2487,6 +2552,24 @@ namespace GeneXus.Programs {
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
+               context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+((edtavUpdate_Visible==0) ? "display:none;" : "")+"\">") ;
+            }
+            /* Single line edit */
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 39,'',false,'" + sGXsfl_38_idx + "',38)\"";
+            ROClassString = "Attribute";
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavUpdate_Internalname,StringUtil.RTrim( AV57Update),(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,39);\"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)edtavUpdate_Link,(string)"",(string)"Update",(string)"",(string)edtavUpdate_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWIconActionColumn",(string)"",(int)edtavUpdate_Visible,(int)edtavUpdate_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)1,(short)38,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
+            /* Subfile cell */
+            if ( GridContainer.GetWrapped() == 1 )
+            {
+               context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+((edtavDelete_Visible==0) ? "display:none;" : "")+"\">") ;
+            }
+            /* Single line edit */
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 40,'',false,'" + sGXsfl_38_idx + "',38)\"";
+            ROClassString = "Attribute";
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavDelete_Internalname,StringUtil.RTrim( AV59Delete),(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,40);\"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)edtavDelete_Link,(string)"",(string)"Delete",(string)"",(string)edtavDelete_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWIconActionColumn",(string)"",(int)edtavDelete_Visible,(int)edtavDelete_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)1,(short)38,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
+            /* Subfile cell */
+            if ( GridContainer.GetWrapped() == 1 )
+            {
                context.WriteHtmlText( "<td valign=\"middle\" align=\""+"end"+"\""+" style=\""+"display:none;"+"\">") ;
             }
             /* Single line edit */
@@ -2548,22 +2631,6 @@ namespace GeneXus.Programs {
             chkHolidayIsActive.CheckedValue = "false";
             A139HolidayIsActive = StringUtil.StrToBool( StringUtil.BoolToStr( A139HolidayIsActive));
             GridRow.AddColumnProperties("checkbox", 1, isAjaxCallMode( ), new Object[] {(string)chkHolidayIsActive_Internalname,StringUtil.BoolToStr( A139HolidayIsActive),(string)"",(string)"",chkHolidayIsActive.Visible,(short)0,(string)"true",(string)"",(string)StyleString,(string)ClassString,(string)"WWColumn hidden-xs",(string)"",(string)""});
-            /* Subfile cell */
-            if ( GridContainer.GetWrapped() == 1 )
-            {
-               context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+((edtavUpdate_Visible==0) ? "display:none;" : "")+"\">") ;
-            }
-            /* Single line edit */
-            ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavUpdate_Internalname,StringUtil.RTrim( AV57Update),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)edtavUpdate_Link,(string)"",(string)"Update",(string)"",(string)edtavUpdate_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWIconActionColumn",(string)"",(int)edtavUpdate_Visible,(int)edtavUpdate_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)1,(short)38,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
-            /* Subfile cell */
-            if ( GridContainer.GetWrapped() == 1 )
-            {
-               context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+((edtavDelete_Visible==0) ? "display:none;" : "")+"\">") ;
-            }
-            /* Single line edit */
-            ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavDelete_Internalname,StringUtil.RTrim( AV59Delete),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)edtavDelete_Link,(string)"",(string)"Delete",(string)"",(string)edtavDelete_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWIconActionColumn",(string)"",(int)edtavDelete_Visible,(int)edtavDelete_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)1,(short)38,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
             send_integrity_lvl_hashes2H2( ) ;
             GridContainer.AddRow(GridRow);
             nGXsfl_38_idx = ((subGrid_Islastpage==1)&&(nGXsfl_38_idx+1>subGrid_fnc_Recordsperpage( )) ? 1 : nGXsfl_38_idx+1);
@@ -2622,6 +2689,12 @@ namespace GeneXus.Programs {
                   }
                }
             }
+            context.WriteHtmlText( "<th align=\""+"start"+"\" "+" nowrap=\"nowrap\" "+" class=\""+"Attribute"+"\" "+" style=\""+((edtavUpdate_Visible==0) ? "display:none;" : "")+""+"\" "+">") ;
+            context.SendWebValue( "") ;
+            context.WriteHtmlTextNl( "</th>") ;
+            context.WriteHtmlText( "<th align=\""+"start"+"\" "+" nowrap=\"nowrap\" "+" class=\""+"Attribute"+"\" "+" style=\""+((edtavDelete_Visible==0) ? "display:none;" : "")+""+"\" "+">") ;
+            context.SendWebValue( "") ;
+            context.WriteHtmlTextNl( "</th>") ;
             context.WriteHtmlText( "<th align=\""+"end"+"\" "+" nowrap=\"nowrap\" "+" class=\""+"Attribute"+"\" "+" style=\""+"display:none;"+""+"\" "+">") ;
             context.SendWebValue( "") ;
             context.WriteHtmlTextNl( "</th>") ;
@@ -2642,12 +2715,6 @@ namespace GeneXus.Programs {
             context.WriteHtmlTextNl( "</th>") ;
             context.WriteHtmlText( "<th align=\""+""+"\" "+" nowrap=\"nowrap\" "+" class=\""+"AttributeCheckBox"+"\" "+" style=\""+((chkHolidayIsActive.Visible==0) ? "display:none;" : "")+""+"\" "+">") ;
             context.SendWebValue( "Is Active") ;
-            context.WriteHtmlTextNl( "</th>") ;
-            context.WriteHtmlText( "<th align=\""+"start"+"\" "+" nowrap=\"nowrap\" "+" class=\""+"Attribute"+"\" "+" style=\""+((edtavUpdate_Visible==0) ? "display:none;" : "")+""+"\" "+">") ;
-            context.SendWebValue( "") ;
-            context.WriteHtmlTextNl( "</th>") ;
-            context.WriteHtmlText( "<th align=\""+"start"+"\" "+" nowrap=\"nowrap\" "+" class=\""+"Attribute"+"\" "+" style=\""+((edtavDelete_Visible==0) ? "display:none;" : "")+""+"\" "+">") ;
-            context.SendWebValue( "") ;
             context.WriteHtmlTextNl( "</th>") ;
             context.WriteHtmlTextNl( "</tr>") ;
             GridContainer.AddObjectProperty("GridName", "Grid");
@@ -2673,6 +2740,18 @@ namespace GeneXus.Programs {
             GridContainer.AddObjectProperty("CmpContext", "");
             GridContainer.AddObjectProperty("InMasterPage", "false");
             GridColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+            GridColumn.AddObjectProperty("Value", GXUtil.ValueEncode( StringUtil.RTrim( AV57Update)));
+            GridColumn.AddObjectProperty("Enabled", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtavUpdate_Enabled), 5, 0, ".", "")));
+            GridColumn.AddObjectProperty("Link", StringUtil.RTrim( edtavUpdate_Link));
+            GridColumn.AddObjectProperty("Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtavUpdate_Visible), 5, 0, ".", "")));
+            GridContainer.AddColumnProperties(GridColumn);
+            GridColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+            GridColumn.AddObjectProperty("Value", GXUtil.ValueEncode( StringUtil.RTrim( AV59Delete)));
+            GridColumn.AddObjectProperty("Enabled", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtavDelete_Enabled), 5, 0, ".", "")));
+            GridColumn.AddObjectProperty("Link", StringUtil.RTrim( edtavDelete_Link));
+            GridColumn.AddObjectProperty("Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtavDelete_Visible), 5, 0, ".", "")));
+            GridContainer.AddColumnProperties(GridColumn);
+            GridColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
             GridColumn.AddObjectProperty("Value", GXUtil.ValueEncode( StringUtil.LTrim( StringUtil.NToC( (decimal)(A113HolidayId), 10, 0, ".", ""))));
             GridContainer.AddColumnProperties(GridColumn);
             GridColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
@@ -2696,18 +2775,6 @@ namespace GeneXus.Programs {
             GridColumn.AddObjectProperty("Value", GXUtil.ValueEncode( StringUtil.BoolToStr( A139HolidayIsActive)));
             GridColumn.AddObjectProperty("Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(chkHolidayIsActive.Visible), 5, 0, ".", "")));
             GridContainer.AddColumnProperties(GridColumn);
-            GridColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
-            GridColumn.AddObjectProperty("Value", GXUtil.ValueEncode( StringUtil.RTrim( AV57Update)));
-            GridColumn.AddObjectProperty("Enabled", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtavUpdate_Enabled), 5, 0, ".", "")));
-            GridColumn.AddObjectProperty("Link", StringUtil.RTrim( edtavUpdate_Link));
-            GridColumn.AddObjectProperty("Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtavUpdate_Visible), 5, 0, ".", "")));
-            GridContainer.AddColumnProperties(GridColumn);
-            GridColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
-            GridColumn.AddObjectProperty("Value", GXUtil.ValueEncode( StringUtil.RTrim( AV59Delete)));
-            GridColumn.AddObjectProperty("Enabled", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtavDelete_Enabled), 5, 0, ".", "")));
-            GridColumn.AddObjectProperty("Link", StringUtil.RTrim( edtavDelete_Link));
-            GridColumn.AddObjectProperty("Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtavDelete_Visible), 5, 0, ".", "")));
-            GridContainer.AddColumnProperties(GridColumn);
             GridContainer.AddObjectProperty("Selectedindex", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Selectedindex), 4, 0, ".", "")));
             GridContainer.AddObjectProperty("Allowselection", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Allowselection), 1, 0, ".", "")));
             GridContainer.AddObjectProperty("Selectioncolor", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Selectioncolor), 9, 0, ".", "")));
@@ -2729,6 +2796,8 @@ namespace GeneXus.Programs {
          tblUnnamedtable1_Internalname = "UNNAMEDTABLE1";
          divTableheadercontent_Internalname = "TABLEHEADERCONTENT";
          divTableheader_Internalname = "TABLEHEADER";
+         edtavUpdate_Internalname = "vUPDATE";
+         edtavDelete_Internalname = "vDELETE";
          edtHolidayId_Internalname = "HOLIDAYID";
          edtHolidayName_Internalname = "HOLIDAYNAME";
          edtHolidayStartDate_Internalname = "HOLIDAYSTARTDATE";
@@ -2736,8 +2805,6 @@ namespace GeneXus.Programs {
          edtHolidayServiceId_Internalname = "HOLIDAYSERVICEID";
          edtCompanyId_Internalname = "COMPANYID";
          chkHolidayIsActive_Internalname = "HOLIDAYISACTIVE";
-         edtavUpdate_Internalname = "vUPDATE";
-         edtavDelete_Internalname = "vDELETE";
          Gridpaginationbar_Internalname = "GRIDPAGINATIONBAR";
          divGridtablewithpaginationbar_Internalname = "GRIDTABLEWITHPAGINATIONBAR";
          divTablemain_Internalname = "TABLEMAIN";
@@ -2765,12 +2832,6 @@ namespace GeneXus.Programs {
          subGrid_Allowcollapsing = 0;
          subGrid_Allowselection = 0;
          subGrid_Header = "";
-         edtavDelete_Jsonclick = "";
-         edtavDelete_Link = "";
-         edtavDelete_Enabled = 0;
-         edtavUpdate_Jsonclick = "";
-         edtavUpdate_Link = "";
-         edtavUpdate_Enabled = 0;
          chkHolidayIsActive.Caption = "";
          edtCompanyId_Jsonclick = "";
          edtHolidayServiceId_Jsonclick = "";
@@ -2778,6 +2839,12 @@ namespace GeneXus.Programs {
          edtHolidayStartDate_Jsonclick = "";
          edtHolidayName_Jsonclick = "";
          edtHolidayId_Jsonclick = "";
+         edtavDelete_Jsonclick = "";
+         edtavDelete_Link = "";
+         edtavDelete_Enabled = 0;
+         edtavUpdate_Jsonclick = "";
+         edtavUpdate_Link = "";
+         edtavUpdate_Enabled = 0;
          subGrid_Class = "GridWithPaginationBar WorkWith";
          subGrid_Backcolorstyle = 0;
          edtavFilterfulltext_Jsonclick = "";
@@ -2816,7 +2883,7 @@ namespace GeneXus.Programs {
          Ddo_grid_Fixable = "T";
          Ddo_grid_Includesortasc = "T";
          Ddo_grid_Columnssortvalues = "2|1|3";
-         Ddo_grid_Columnids = "1:HolidayName|2:HolidayStartDate|6:HolidayIsActive";
+         Ddo_grid_Columnids = "3:HolidayName|4:HolidayStartDate|8:HolidayIsActive";
          Ddo_grid_Gridinternalname = "";
          Ddo_agexport_Titlecontrolidtoreplace = "";
          Ddo_agexport_Cls = "ColumnsSelector";
@@ -2863,43 +2930,36 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV20FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV74Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV33TFHolidayName',fld:'vTFHOLIDAYNAME',pic:''},{av:'AV34TFHolidayName_Sel',fld:'vTFHOLIDAYNAME_SEL',pic:''},{av:'AV35TFHolidayStartDate',fld:'vTFHOLIDAYSTARTDATE',pic:''},{av:'AV36TFHolidayStartDate_To',fld:'vTFHOLIDAYSTARTDATE_TO',pic:''},{av:'AV68TFHolidayIsActive_Sel',fld:'vTFHOLIDAYISACTIVE_SEL',pic:'9'},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV58IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV60IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV64IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true}]");
-         setEventMetadata("REFRESH",",oparms:[{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'edtHolidayName_Visible',ctrl:'HOLIDAYNAME',prop:'Visible'},{av:'edtHolidayStartDate_Visible',ctrl:'HOLIDAYSTARTDATE',prop:'Visible'},{av:'chkHolidayIsActive.Visible',ctrl:'HOLIDAYISACTIVE',prop:'Visible'},{av:'AV55GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV56GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV9GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'AV58IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'edtavUpdate_Visible',ctrl:'vUPDATE',prop:'Visible'},{av:'AV60IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'edtavDelete_Visible',ctrl:'vDELETE',prop:'Visible'},{av:'AV64IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{ctrl:'BTNINSERT',prop:'Visible'},{av:'AV28ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''},{av:'AV15GridState',fld:'vGRIDSTATE',pic:''}]}");
-         setEventMetadata("GRIDPAGINATIONBAR.CHANGEPAGE","{handler:'E122H2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV20FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV74Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV33TFHolidayName',fld:'vTFHOLIDAYNAME',pic:''},{av:'AV34TFHolidayName_Sel',fld:'vTFHOLIDAYNAME_SEL',pic:''},{av:'AV35TFHolidayStartDate',fld:'vTFHOLIDAYSTARTDATE',pic:''},{av:'AV36TFHolidayStartDate_To',fld:'vTFHOLIDAYSTARTDATE_TO',pic:''},{av:'AV68TFHolidayIsActive_Sel',fld:'vTFHOLIDAYISACTIVE_SEL',pic:'9'},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV58IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV60IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV64IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'Gridpaginationbar_Selectedpage',ctrl:'GRIDPAGINATIONBAR',prop:'SelectedPage'}]");
-         setEventMetadata("GRIDPAGINATIONBAR.CHANGEPAGE",",oparms:[]}");
-         setEventMetadata("GRIDPAGINATIONBAR.CHANGEROWSPERPAGE","{handler:'E132H2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV20FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV74Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV33TFHolidayName',fld:'vTFHOLIDAYNAME',pic:''},{av:'AV34TFHolidayName_Sel',fld:'vTFHOLIDAYNAME_SEL',pic:''},{av:'AV35TFHolidayStartDate',fld:'vTFHOLIDAYSTARTDATE',pic:''},{av:'AV36TFHolidayStartDate_To',fld:'vTFHOLIDAYSTARTDATE_TO',pic:''},{av:'AV68TFHolidayIsActive_Sel',fld:'vTFHOLIDAYISACTIVE_SEL',pic:'9'},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV58IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV60IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV64IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'Gridpaginationbar_Rowsperpageselectedvalue',ctrl:'GRIDPAGINATIONBAR',prop:'RowsPerPageSelectedValue'}]");
-         setEventMetadata("GRIDPAGINATIONBAR.CHANGEROWSPERPAGE",",oparms:[{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'}]}");
-         setEventMetadata("DDO_GRID.ONOPTIONCLICKED","{handler:'E152H2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV20FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV74Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV33TFHolidayName',fld:'vTFHOLIDAYNAME',pic:''},{av:'AV34TFHolidayName_Sel',fld:'vTFHOLIDAYNAME_SEL',pic:''},{av:'AV35TFHolidayStartDate',fld:'vTFHOLIDAYSTARTDATE',pic:''},{av:'AV36TFHolidayStartDate_To',fld:'vTFHOLIDAYSTARTDATE_TO',pic:''},{av:'AV68TFHolidayIsActive_Sel',fld:'vTFHOLIDAYISACTIVE_SEL',pic:'9'},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV58IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV60IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV64IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'Ddo_grid_Activeeventkey',ctrl:'DDO_GRID',prop:'ActiveEventKey'},{av:'Ddo_grid_Selectedvalue_get',ctrl:'DDO_GRID',prop:'SelectedValue_get'},{av:'Ddo_grid_Selectedcolumn',ctrl:'DDO_GRID',prop:'SelectedColumn'},{av:'Ddo_grid_Filteredtext_get',ctrl:'DDO_GRID',prop:'FilteredText_get'},{av:'Ddo_grid_Filteredtextto_get',ctrl:'DDO_GRID',prop:'FilteredTextTo_get'}]");
-         setEventMetadata("DDO_GRID.ONOPTIONCLICKED",",oparms:[{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV33TFHolidayName',fld:'vTFHOLIDAYNAME',pic:''},{av:'AV34TFHolidayName_Sel',fld:'vTFHOLIDAYNAME_SEL',pic:''},{av:'AV35TFHolidayStartDate',fld:'vTFHOLIDAYSTARTDATE',pic:''},{av:'AV36TFHolidayStartDate_To',fld:'vTFHOLIDAYSTARTDATE_TO',pic:''},{av:'AV68TFHolidayIsActive_Sel',fld:'vTFHOLIDAYISACTIVE_SEL',pic:'9'},{av:'Ddo_grid_Sortedstatus',ctrl:'DDO_GRID',prop:'SortedStatus'}]}");
-         setEventMetadata("GRID.LOAD","{handler:'E202H2',iparms:[{av:'AV58IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'A113HolidayId',fld:'HOLIDAYID',pic:'ZZZZZZZZZ9',hsh:true},{av:'AV60IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true}]");
-         setEventMetadata("GRID.LOAD",",oparms:[{av:'AV57Update',fld:'vUPDATE',pic:''},{av:'edtavUpdate_Link',ctrl:'vUPDATE',prop:'Link'},{av:'AV59Delete',fld:'vDELETE',pic:''},{av:'edtavDelete_Link',ctrl:'vDELETE',prop:'Link'}]}");
-         setEventMetadata("DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED","{handler:'E162H2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV20FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV74Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV33TFHolidayName',fld:'vTFHOLIDAYNAME',pic:''},{av:'AV34TFHolidayName_Sel',fld:'vTFHOLIDAYNAME_SEL',pic:''},{av:'AV35TFHolidayStartDate',fld:'vTFHOLIDAYSTARTDATE',pic:''},{av:'AV36TFHolidayStartDate_To',fld:'vTFHOLIDAYSTARTDATE_TO',pic:''},{av:'AV68TFHolidayIsActive_Sel',fld:'vTFHOLIDAYISACTIVE_SEL',pic:'9'},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV58IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV60IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV64IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'Ddo_gridcolumnsselector_Columnsselectorvalues',ctrl:'DDO_GRIDCOLUMNSSELECTOR',prop:'ColumnsSelectorValues'}]");
-         setEventMetadata("DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED",",oparms:[{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'edtHolidayName_Visible',ctrl:'HOLIDAYNAME',prop:'Visible'},{av:'edtHolidayStartDate_Visible',ctrl:'HOLIDAYSTARTDATE',prop:'Visible'},{av:'chkHolidayIsActive.Visible',ctrl:'HOLIDAYISACTIVE',prop:'Visible'},{av:'AV55GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV56GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV9GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'AV58IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'edtavUpdate_Visible',ctrl:'vUPDATE',prop:'Visible'},{av:'AV60IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'edtavDelete_Visible',ctrl:'vDELETE',prop:'Visible'},{av:'AV64IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{ctrl:'BTNINSERT',prop:'Visible'},{av:'AV28ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''},{av:'AV15GridState',fld:'vGRIDSTATE',pic:''}]}");
-         setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED","{handler:'E112H2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV20FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV74Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV33TFHolidayName',fld:'vTFHOLIDAYNAME',pic:''},{av:'AV34TFHolidayName_Sel',fld:'vTFHOLIDAYNAME_SEL',pic:''},{av:'AV35TFHolidayStartDate',fld:'vTFHOLIDAYSTARTDATE',pic:''},{av:'AV36TFHolidayStartDate_To',fld:'vTFHOLIDAYSTARTDATE_TO',pic:''},{av:'AV68TFHolidayIsActive_Sel',fld:'vTFHOLIDAYISACTIVE_SEL',pic:'9'},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV58IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV60IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV64IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'Ddo_managefilters_Activeeventkey',ctrl:'DDO_MANAGEFILTERS',prop:'ActiveEventKey'},{av:'AV15GridState',fld:'vGRIDSTATE',pic:''}]");
-         setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED",",oparms:[{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV15GridState',fld:'vGRIDSTATE',pic:''},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV20FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV33TFHolidayName',fld:'vTFHOLIDAYNAME',pic:''},{av:'AV34TFHolidayName_Sel',fld:'vTFHOLIDAYNAME_SEL',pic:''},{av:'AV35TFHolidayStartDate',fld:'vTFHOLIDAYSTARTDATE',pic:''},{av:'AV36TFHolidayStartDate_To',fld:'vTFHOLIDAYSTARTDATE_TO',pic:''},{av:'AV68TFHolidayIsActive_Sel',fld:'vTFHOLIDAYISACTIVE_SEL',pic:'9'},{av:'Ddo_grid_Selectedvalue_set',ctrl:'DDO_GRID',prop:'SelectedValue_set'},{av:'Ddo_grid_Filteredtext_set',ctrl:'DDO_GRID',prop:'FilteredText_set'},{av:'Ddo_grid_Filteredtextto_set',ctrl:'DDO_GRID',prop:'FilteredTextTo_set'},{av:'Ddo_grid_Sortedstatus',ctrl:'DDO_GRID',prop:'SortedStatus'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'edtHolidayName_Visible',ctrl:'HOLIDAYNAME',prop:'Visible'},{av:'edtHolidayStartDate_Visible',ctrl:'HOLIDAYSTARTDATE',prop:'Visible'},{av:'chkHolidayIsActive.Visible',ctrl:'HOLIDAYISACTIVE',prop:'Visible'},{av:'AV55GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV56GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV9GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'AV58IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'edtavUpdate_Visible',ctrl:'vUPDATE',prop:'Visible'},{av:'AV60IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'edtavDelete_Visible',ctrl:'vDELETE',prop:'Visible'},{av:'AV64IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{ctrl:'BTNINSERT',prop:'Visible'},{av:'AV28ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''}]}");
-         setEventMetadata("'DOINSERT'","{handler:'E172H2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV20FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV74Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV33TFHolidayName',fld:'vTFHOLIDAYNAME',pic:''},{av:'AV34TFHolidayName_Sel',fld:'vTFHOLIDAYNAME_SEL',pic:''},{av:'AV35TFHolidayStartDate',fld:'vTFHOLIDAYSTARTDATE',pic:''},{av:'AV36TFHolidayStartDate_To',fld:'vTFHOLIDAYSTARTDATE_TO',pic:''},{av:'AV68TFHolidayIsActive_Sel',fld:'vTFHOLIDAYISACTIVE_SEL',pic:'9'},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV58IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV60IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV64IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'A113HolidayId',fld:'HOLIDAYID',pic:'ZZZZZZZZZ9',hsh:true}]");
-         setEventMetadata("'DOINSERT'",",oparms:[{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'edtHolidayName_Visible',ctrl:'HOLIDAYNAME',prop:'Visible'},{av:'edtHolidayStartDate_Visible',ctrl:'HOLIDAYSTARTDATE',prop:'Visible'},{av:'chkHolidayIsActive.Visible',ctrl:'HOLIDAYISACTIVE',prop:'Visible'},{av:'AV55GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV56GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV9GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'AV58IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'edtavUpdate_Visible',ctrl:'vUPDATE',prop:'Visible'},{av:'AV60IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'edtavDelete_Visible',ctrl:'vDELETE',prop:'Visible'},{av:'AV64IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{ctrl:'BTNINSERT',prop:'Visible'},{av:'AV28ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''},{av:'AV15GridState',fld:'vGRIDSTATE',pic:''}]}");
-         setEventMetadata("DDO_AGEXPORT.ONOPTIONCLICKED","{handler:'E142H2',iparms:[{av:'Ddo_agexport_Activeeventkey',ctrl:'DDO_AGEXPORT',prop:'ActiveEventKey'},{av:'AV74Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV15GridState',fld:'vGRIDSTATE',pic:''},{av:'AV34TFHolidayName_Sel',fld:'vTFHOLIDAYNAME_SEL',pic:''},{av:'AV68TFHolidayIsActive_Sel',fld:'vTFHOLIDAYISACTIVE_SEL',pic:'9'},{av:'AV33TFHolidayName',fld:'vTFHOLIDAYNAME',pic:''},{av:'AV35TFHolidayStartDate',fld:'vTFHOLIDAYSTARTDATE',pic:''},{av:'AV36TFHolidayStartDate_To',fld:'vTFHOLIDAYSTARTDATE_TO',pic:''}]");
-         setEventMetadata("DDO_AGEXPORT.ONOPTIONCLICKED",",oparms:[{av:'AV15GridState',fld:'vGRIDSTATE',pic:''},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'AV20FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV74Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV33TFHolidayName',fld:'vTFHOLIDAYNAME',pic:''},{av:'AV34TFHolidayName_Sel',fld:'vTFHOLIDAYNAME_SEL',pic:''},{av:'AV35TFHolidayStartDate',fld:'vTFHOLIDAYSTARTDATE',pic:''},{av:'AV36TFHolidayStartDate_To',fld:'vTFHOLIDAYSTARTDATE_TO',pic:''},{av:'AV68TFHolidayIsActive_Sel',fld:'vTFHOLIDAYISACTIVE_SEL',pic:'9'},{av:'AV58IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV60IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV64IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{av:'Ddo_grid_Sortedstatus',ctrl:'DDO_GRID',prop:'SortedStatus'},{av:'Ddo_grid_Selectedvalue_set',ctrl:'DDO_GRID',prop:'SelectedValue_set'},{av:'Ddo_grid_Filteredtext_set',ctrl:'DDO_GRID',prop:'FilteredText_set'},{av:'Ddo_grid_Filteredtextto_set',ctrl:'DDO_GRID',prop:'FilteredTextTo_set'}]}");
-         setEventMetadata("'DOUSERACTION1'","{handler:'E212H2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV20FilterFullText',fld:'vFILTERFULLTEXT',pic:''},{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV74Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV33TFHolidayName',fld:'vTFHOLIDAYNAME',pic:''},{av:'AV34TFHolidayName_Sel',fld:'vTFHOLIDAYNAME_SEL',pic:''},{av:'AV35TFHolidayStartDate',fld:'vTFHOLIDAYSTARTDATE',pic:''},{av:'AV36TFHolidayStartDate_To',fld:'vTFHOLIDAYSTARTDATE_TO',pic:''},{av:'AV68TFHolidayIsActive_Sel',fld:'vTFHOLIDAYISACTIVE_SEL',pic:'9'},{av:'AV17OrderedBy',fld:'vORDEREDBY',pic:'ZZZ9'},{av:'AV18OrderedDsc',fld:'vORDEREDDSC',pic:''},{av:'AV58IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'AV60IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'AV64IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true}]");
-         setEventMetadata("'DOUSERACTION1'",",oparms:[{av:'AV30ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV25ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'edtHolidayName_Visible',ctrl:'HOLIDAYNAME',prop:'Visible'},{av:'edtHolidayStartDate_Visible',ctrl:'HOLIDAYSTARTDATE',prop:'Visible'},{av:'chkHolidayIsActive.Visible',ctrl:'HOLIDAYISACTIVE',prop:'Visible'},{av:'AV55GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV56GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV9GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'AV58IsAuthorized_Update',fld:'vISAUTHORIZED_UPDATE',pic:'',hsh:true},{av:'edtavUpdate_Visible',ctrl:'vUPDATE',prop:'Visible'},{av:'AV60IsAuthorized_Delete',fld:'vISAUTHORIZED_DELETE',pic:'',hsh:true},{av:'edtavDelete_Visible',ctrl:'vDELETE',prop:'Visible'},{av:'AV64IsAuthorized_Insert',fld:'vISAUTHORIZED_INSERT',pic:'',hsh:true},{ctrl:'BTNINSERT',prop:'Visible'},{av:'AV28ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''},{av:'AV15GridState',fld:'vGRIDSTATE',pic:''}]}");
-         setEventMetadata("NULL","{handler:'Validv_Delete',iparms:[]");
-         setEventMetadata("NULL",",oparms:[]}");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"AV9GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV30ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV25ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV17OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV18OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV20FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV75Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV33TFHolidayName","fld":"vTFHOLIDAYNAME"},{"av":"AV34TFHolidayName_Sel","fld":"vTFHOLIDAYNAME_SEL"},{"av":"AV35TFHolidayStartDate","fld":"vTFHOLIDAYSTARTDATE"},{"av":"AV36TFHolidayStartDate_To","fld":"vTFHOLIDAYSTARTDATE_TO"},{"av":"AV68TFHolidayIsActive_Sel","fld":"vTFHOLIDAYISACTIVE_SEL","pic":"9"},{"av":"AV8RedirectToFirstDetail","fld":"vREDIRECTTOFIRSTDETAIL","hsh":true},{"av":"AV73QueryIntent","fld":"vQUERYINTENT","hsh":true},{"av":"AV58IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV60IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV64IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"av":"A113HolidayId","fld":"HOLIDAYID","pic":"ZZZZZZZZZ9","hsh":true}]""");
+         setEventMetadata("REFRESH",""","oparms":[{"av":"AV30ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV25ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"edtHolidayName_Visible","ctrl":"HOLIDAYNAME","prop":"Visible"},{"av":"edtHolidayStartDate_Visible","ctrl":"HOLIDAYSTARTDATE","prop":"Visible"},{"av":"chkHolidayIsActive.Visible","ctrl":"HOLIDAYISACTIVE","prop":"Visible"},{"av":"AV55GridCurrentPage","fld":"vGRIDCURRENTPAGE","pic":"ZZZZZZZZZ9"},{"av":"AV56GridPageCount","fld":"vGRIDPAGECOUNT","pic":"ZZZZZZZZZ9"},{"av":"AV9GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV73QueryIntent","fld":"vQUERYINTENT","hsh":true},{"av":"AV8RedirectToFirstDetail","fld":"vREDIRECTTOFIRSTDETAIL","hsh":true},{"av":"AV58IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"edtavUpdate_Visible","ctrl":"vUPDATE","prop":"Visible"},{"av":"AV60IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"edtavDelete_Visible","ctrl":"vDELETE","prop":"Visible"},{"av":"AV64IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"ctrl":"BTNINSERT","prop":"Visible"},{"av":"AV28ManageFiltersData","fld":"vMANAGEFILTERSDATA"},{"av":"AV15GridState","fld":"vGRIDSTATE"}]}""");
+         setEventMetadata("GRIDPAGINATIONBAR.CHANGEPAGE","""{"handler":"E122H2","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV17OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV18OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV20FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV30ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV25ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV75Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV33TFHolidayName","fld":"vTFHOLIDAYNAME"},{"av":"AV34TFHolidayName_Sel","fld":"vTFHOLIDAYNAME_SEL"},{"av":"AV35TFHolidayStartDate","fld":"vTFHOLIDAYSTARTDATE"},{"av":"AV36TFHolidayStartDate_To","fld":"vTFHOLIDAYSTARTDATE_TO"},{"av":"AV68TFHolidayIsActive_Sel","fld":"vTFHOLIDAYISACTIVE_SEL","pic":"9"},{"av":"AV8RedirectToFirstDetail","fld":"vREDIRECTTOFIRSTDETAIL","hsh":true},{"av":"AV73QueryIntent","fld":"vQUERYINTENT","hsh":true},{"av":"AV9GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV58IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV60IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV64IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"av":"Gridpaginationbar_Selectedpage","ctrl":"GRIDPAGINATIONBAR","prop":"SelectedPage"}]}""");
+         setEventMetadata("GRIDPAGINATIONBAR.CHANGEROWSPERPAGE","""{"handler":"E132H2","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV17OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV18OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV20FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV30ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV25ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV75Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV33TFHolidayName","fld":"vTFHOLIDAYNAME"},{"av":"AV34TFHolidayName_Sel","fld":"vTFHOLIDAYNAME_SEL"},{"av":"AV35TFHolidayStartDate","fld":"vTFHOLIDAYSTARTDATE"},{"av":"AV36TFHolidayStartDate_To","fld":"vTFHOLIDAYSTARTDATE_TO"},{"av":"AV68TFHolidayIsActive_Sel","fld":"vTFHOLIDAYISACTIVE_SEL","pic":"9"},{"av":"AV8RedirectToFirstDetail","fld":"vREDIRECTTOFIRSTDETAIL","hsh":true},{"av":"AV73QueryIntent","fld":"vQUERYINTENT","hsh":true},{"av":"AV9GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV58IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV60IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV64IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"av":"Gridpaginationbar_Rowsperpageselectedvalue","ctrl":"GRIDPAGINATIONBAR","prop":"RowsPerPageSelectedValue"}]""");
+         setEventMetadata("GRIDPAGINATIONBAR.CHANGEROWSPERPAGE",""","oparms":[{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"}]}""");
+         setEventMetadata("DDO_GRID.ONOPTIONCLICKED","""{"handler":"E152H2","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV17OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV18OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV20FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV30ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV25ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV75Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV33TFHolidayName","fld":"vTFHOLIDAYNAME"},{"av":"AV34TFHolidayName_Sel","fld":"vTFHOLIDAYNAME_SEL"},{"av":"AV35TFHolidayStartDate","fld":"vTFHOLIDAYSTARTDATE"},{"av":"AV36TFHolidayStartDate_To","fld":"vTFHOLIDAYSTARTDATE_TO"},{"av":"AV68TFHolidayIsActive_Sel","fld":"vTFHOLIDAYISACTIVE_SEL","pic":"9"},{"av":"AV8RedirectToFirstDetail","fld":"vREDIRECTTOFIRSTDETAIL","hsh":true},{"av":"AV73QueryIntent","fld":"vQUERYINTENT","hsh":true},{"av":"AV9GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV58IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV60IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV64IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"av":"Ddo_grid_Activeeventkey","ctrl":"DDO_GRID","prop":"ActiveEventKey"},{"av":"Ddo_grid_Selectedvalue_get","ctrl":"DDO_GRID","prop":"SelectedValue_get"},{"av":"Ddo_grid_Selectedcolumn","ctrl":"DDO_GRID","prop":"SelectedColumn"},{"av":"Ddo_grid_Filteredtext_get","ctrl":"DDO_GRID","prop":"FilteredText_get"},{"av":"Ddo_grid_Filteredtextto_get","ctrl":"DDO_GRID","prop":"FilteredTextTo_get"}]""");
+         setEventMetadata("DDO_GRID.ONOPTIONCLICKED",""","oparms":[{"av":"AV17OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV18OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV33TFHolidayName","fld":"vTFHOLIDAYNAME"},{"av":"AV34TFHolidayName_Sel","fld":"vTFHOLIDAYNAME_SEL"},{"av":"AV35TFHolidayStartDate","fld":"vTFHOLIDAYSTARTDATE"},{"av":"AV36TFHolidayStartDate_To","fld":"vTFHOLIDAYSTARTDATE_TO"},{"av":"AV68TFHolidayIsActive_Sel","fld":"vTFHOLIDAYISACTIVE_SEL","pic":"9"},{"av":"Ddo_grid_Sortedstatus","ctrl":"DDO_GRID","prop":"SortedStatus"}]}""");
+         setEventMetadata("GRID.LOAD","""{"handler":"E202H2","iparms":[{"av":"AV8RedirectToFirstDetail","fld":"vREDIRECTTOFIRSTDETAIL","hsh":true},{"av":"AV73QueryIntent","fld":"vQUERYINTENT","hsh":true},{"av":"AV9GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"A113HolidayId","fld":"HOLIDAYID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"AV58IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV60IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true}]""");
+         setEventMetadata("GRID.LOAD",""","oparms":[{"av":"AV8RedirectToFirstDetail","fld":"vREDIRECTTOFIRSTDETAIL","hsh":true},{"av":"AV57Update","fld":"vUPDATE"},{"av":"edtavUpdate_Link","ctrl":"vUPDATE","prop":"Link"},{"av":"AV59Delete","fld":"vDELETE"},{"av":"edtavDelete_Link","ctrl":"vDELETE","prop":"Link"}]}""");
+         setEventMetadata("DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED","""{"handler":"E162H2","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV17OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV18OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV20FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV30ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV25ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV75Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV33TFHolidayName","fld":"vTFHOLIDAYNAME"},{"av":"AV34TFHolidayName_Sel","fld":"vTFHOLIDAYNAME_SEL"},{"av":"AV35TFHolidayStartDate","fld":"vTFHOLIDAYSTARTDATE"},{"av":"AV36TFHolidayStartDate_To","fld":"vTFHOLIDAYSTARTDATE_TO"},{"av":"AV68TFHolidayIsActive_Sel","fld":"vTFHOLIDAYISACTIVE_SEL","pic":"9"},{"av":"AV8RedirectToFirstDetail","fld":"vREDIRECTTOFIRSTDETAIL","hsh":true},{"av":"AV73QueryIntent","fld":"vQUERYINTENT","hsh":true},{"av":"AV9GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV58IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV60IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV64IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"av":"Ddo_gridcolumnsselector_Columnsselectorvalues","ctrl":"DDO_GRIDCOLUMNSSELECTOR","prop":"ColumnsSelectorValues"},{"av":"A113HolidayId","fld":"HOLIDAYID","pic":"ZZZZZZZZZ9","hsh":true}]""");
+         setEventMetadata("DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED",""","oparms":[{"av":"AV25ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV30ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"edtHolidayName_Visible","ctrl":"HOLIDAYNAME","prop":"Visible"},{"av":"edtHolidayStartDate_Visible","ctrl":"HOLIDAYSTARTDATE","prop":"Visible"},{"av":"chkHolidayIsActive.Visible","ctrl":"HOLIDAYISACTIVE","prop":"Visible"},{"av":"AV55GridCurrentPage","fld":"vGRIDCURRENTPAGE","pic":"ZZZZZZZZZ9"},{"av":"AV56GridPageCount","fld":"vGRIDPAGECOUNT","pic":"ZZZZZZZZZ9"},{"av":"AV9GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV73QueryIntent","fld":"vQUERYINTENT","hsh":true},{"av":"AV8RedirectToFirstDetail","fld":"vREDIRECTTOFIRSTDETAIL","hsh":true},{"av":"AV58IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"edtavUpdate_Visible","ctrl":"vUPDATE","prop":"Visible"},{"av":"AV60IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"edtavDelete_Visible","ctrl":"vDELETE","prop":"Visible"},{"av":"AV64IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"ctrl":"BTNINSERT","prop":"Visible"},{"av":"AV28ManageFiltersData","fld":"vMANAGEFILTERSDATA"},{"av":"AV15GridState","fld":"vGRIDSTATE"}]}""");
+         setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED","""{"handler":"E112H2","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV17OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV18OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV20FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV30ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV25ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV75Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV33TFHolidayName","fld":"vTFHOLIDAYNAME"},{"av":"AV34TFHolidayName_Sel","fld":"vTFHOLIDAYNAME_SEL"},{"av":"AV35TFHolidayStartDate","fld":"vTFHOLIDAYSTARTDATE"},{"av":"AV36TFHolidayStartDate_To","fld":"vTFHOLIDAYSTARTDATE_TO"},{"av":"AV68TFHolidayIsActive_Sel","fld":"vTFHOLIDAYISACTIVE_SEL","pic":"9"},{"av":"AV8RedirectToFirstDetail","fld":"vREDIRECTTOFIRSTDETAIL","hsh":true},{"av":"AV73QueryIntent","fld":"vQUERYINTENT","hsh":true},{"av":"AV9GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV58IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV60IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV64IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"av":"Ddo_managefilters_Activeeventkey","ctrl":"DDO_MANAGEFILTERS","prop":"ActiveEventKey"},{"av":"AV15GridState","fld":"vGRIDSTATE"},{"av":"A113HolidayId","fld":"HOLIDAYID","pic":"ZZZZZZZZZ9","hsh":true}]""");
+         setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED",""","oparms":[{"av":"AV30ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV15GridState","fld":"vGRIDSTATE"},{"av":"AV17OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV18OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV20FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV33TFHolidayName","fld":"vTFHOLIDAYNAME"},{"av":"AV34TFHolidayName_Sel","fld":"vTFHOLIDAYNAME_SEL"},{"av":"AV35TFHolidayStartDate","fld":"vTFHOLIDAYSTARTDATE"},{"av":"AV36TFHolidayStartDate_To","fld":"vTFHOLIDAYSTARTDATE_TO"},{"av":"AV68TFHolidayIsActive_Sel","fld":"vTFHOLIDAYISACTIVE_SEL","pic":"9"},{"av":"Ddo_grid_Selectedvalue_set","ctrl":"DDO_GRID","prop":"SelectedValue_set"},{"av":"Ddo_grid_Filteredtext_set","ctrl":"DDO_GRID","prop":"FilteredText_set"},{"av":"Ddo_grid_Filteredtextto_set","ctrl":"DDO_GRID","prop":"FilteredTextTo_set"},{"av":"Ddo_grid_Sortedstatus","ctrl":"DDO_GRID","prop":"SortedStatus"},{"av":"AV25ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"edtHolidayName_Visible","ctrl":"HOLIDAYNAME","prop":"Visible"},{"av":"edtHolidayStartDate_Visible","ctrl":"HOLIDAYSTARTDATE","prop":"Visible"},{"av":"chkHolidayIsActive.Visible","ctrl":"HOLIDAYISACTIVE","prop":"Visible"},{"av":"AV55GridCurrentPage","fld":"vGRIDCURRENTPAGE","pic":"ZZZZZZZZZ9"},{"av":"AV56GridPageCount","fld":"vGRIDPAGECOUNT","pic":"ZZZZZZZZZ9"},{"av":"AV9GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV73QueryIntent","fld":"vQUERYINTENT","hsh":true},{"av":"AV8RedirectToFirstDetail","fld":"vREDIRECTTOFIRSTDETAIL","hsh":true},{"av":"AV58IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"edtavUpdate_Visible","ctrl":"vUPDATE","prop":"Visible"},{"av":"AV60IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"edtavDelete_Visible","ctrl":"vDELETE","prop":"Visible"},{"av":"AV64IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"ctrl":"BTNINSERT","prop":"Visible"},{"av":"AV28ManageFiltersData","fld":"vMANAGEFILTERSDATA"}]}""");
+         setEventMetadata("'DOINSERT'","""{"handler":"E172H2","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV17OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV18OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV20FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV30ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV25ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV75Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV33TFHolidayName","fld":"vTFHOLIDAYNAME"},{"av":"AV34TFHolidayName_Sel","fld":"vTFHOLIDAYNAME_SEL"},{"av":"AV35TFHolidayStartDate","fld":"vTFHOLIDAYSTARTDATE"},{"av":"AV36TFHolidayStartDate_To","fld":"vTFHOLIDAYSTARTDATE_TO"},{"av":"AV68TFHolidayIsActive_Sel","fld":"vTFHOLIDAYISACTIVE_SEL","pic":"9"},{"av":"AV8RedirectToFirstDetail","fld":"vREDIRECTTOFIRSTDETAIL","hsh":true},{"av":"AV73QueryIntent","fld":"vQUERYINTENT","hsh":true},{"av":"AV9GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV58IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV60IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV64IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"av":"A113HolidayId","fld":"HOLIDAYID","pic":"ZZZZZZZZZ9","hsh":true}]""");
+         setEventMetadata("'DOINSERT'",""","oparms":[{"av":"AV30ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV25ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"edtHolidayName_Visible","ctrl":"HOLIDAYNAME","prop":"Visible"},{"av":"edtHolidayStartDate_Visible","ctrl":"HOLIDAYSTARTDATE","prop":"Visible"},{"av":"chkHolidayIsActive.Visible","ctrl":"HOLIDAYISACTIVE","prop":"Visible"},{"av":"AV55GridCurrentPage","fld":"vGRIDCURRENTPAGE","pic":"ZZZZZZZZZ9"},{"av":"AV56GridPageCount","fld":"vGRIDPAGECOUNT","pic":"ZZZZZZZZZ9"},{"av":"AV9GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV73QueryIntent","fld":"vQUERYINTENT","hsh":true},{"av":"AV8RedirectToFirstDetail","fld":"vREDIRECTTOFIRSTDETAIL","hsh":true},{"av":"AV58IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"edtavUpdate_Visible","ctrl":"vUPDATE","prop":"Visible"},{"av":"AV60IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"edtavDelete_Visible","ctrl":"vDELETE","prop":"Visible"},{"av":"AV64IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"ctrl":"BTNINSERT","prop":"Visible"},{"av":"AV28ManageFiltersData","fld":"vMANAGEFILTERSDATA"},{"av":"AV15GridState","fld":"vGRIDSTATE"}]}""");
+         setEventMetadata("DDO_AGEXPORT.ONOPTIONCLICKED","""{"handler":"E142H2","iparms":[{"av":"Ddo_agexport_Activeeventkey","ctrl":"DDO_AGEXPORT","prop":"ActiveEventKey"},{"av":"AV75Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV17OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV18OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV15GridState","fld":"vGRIDSTATE"},{"av":"AV34TFHolidayName_Sel","fld":"vTFHOLIDAYNAME_SEL"},{"av":"AV68TFHolidayIsActive_Sel","fld":"vTFHOLIDAYISACTIVE_SEL","pic":"9"},{"av":"AV33TFHolidayName","fld":"vTFHOLIDAYNAME"},{"av":"AV35TFHolidayStartDate","fld":"vTFHOLIDAYSTARTDATE"},{"av":"AV36TFHolidayStartDate_To","fld":"vTFHOLIDAYSTARTDATE_TO"}]""");
+         setEventMetadata("DDO_AGEXPORT.ONOPTIONCLICKED",""","oparms":[{"av":"AV15GridState","fld":"vGRIDSTATE"},{"av":"AV17OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV18OrderedDsc","fld":"vORDEREDDSC"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"AV20FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV30ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV25ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV75Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV33TFHolidayName","fld":"vTFHOLIDAYNAME"},{"av":"AV34TFHolidayName_Sel","fld":"vTFHOLIDAYNAME_SEL"},{"av":"AV35TFHolidayStartDate","fld":"vTFHOLIDAYSTARTDATE"},{"av":"AV36TFHolidayStartDate_To","fld":"vTFHOLIDAYSTARTDATE_TO"},{"av":"AV68TFHolidayIsActive_Sel","fld":"vTFHOLIDAYISACTIVE_SEL","pic":"9"},{"av":"AV8RedirectToFirstDetail","fld":"vREDIRECTTOFIRSTDETAIL","hsh":true},{"av":"AV73QueryIntent","fld":"vQUERYINTENT","hsh":true},{"av":"AV9GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV58IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV60IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV64IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"av":"Ddo_grid_Sortedstatus","ctrl":"DDO_GRID","prop":"SortedStatus"},{"av":"Ddo_grid_Selectedvalue_set","ctrl":"DDO_GRID","prop":"SelectedValue_set"},{"av":"Ddo_grid_Filteredtext_set","ctrl":"DDO_GRID","prop":"FilteredText_set"},{"av":"Ddo_grid_Filteredtextto_set","ctrl":"DDO_GRID","prop":"FilteredTextTo_set"}]}""");
+         setEventMetadata("'DOUSERACTION1'","""{"handler":"E212H2","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV17OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV18OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV20FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV30ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV25ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV75Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV33TFHolidayName","fld":"vTFHOLIDAYNAME"},{"av":"AV34TFHolidayName_Sel","fld":"vTFHOLIDAYNAME_SEL"},{"av":"AV35TFHolidayStartDate","fld":"vTFHOLIDAYSTARTDATE"},{"av":"AV36TFHolidayStartDate_To","fld":"vTFHOLIDAYSTARTDATE_TO"},{"av":"AV68TFHolidayIsActive_Sel","fld":"vTFHOLIDAYISACTIVE_SEL","pic":"9"},{"av":"AV8RedirectToFirstDetail","fld":"vREDIRECTTOFIRSTDETAIL","hsh":true},{"av":"AV73QueryIntent","fld":"vQUERYINTENT","hsh":true},{"av":"AV9GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV58IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"AV60IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"AV64IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"av":"A113HolidayId","fld":"HOLIDAYID","pic":"ZZZZZZZZZ9","hsh":true}]""");
+         setEventMetadata("'DOUSERACTION1'",""","oparms":[{"av":"AV30ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV25ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"edtHolidayName_Visible","ctrl":"HOLIDAYNAME","prop":"Visible"},{"av":"edtHolidayStartDate_Visible","ctrl":"HOLIDAYSTARTDATE","prop":"Visible"},{"av":"chkHolidayIsActive.Visible","ctrl":"HOLIDAYISACTIVE","prop":"Visible"},{"av":"AV55GridCurrentPage","fld":"vGRIDCURRENTPAGE","pic":"ZZZZZZZZZ9"},{"av":"AV56GridPageCount","fld":"vGRIDPAGECOUNT","pic":"ZZZZZZZZZ9"},{"av":"AV9GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV73QueryIntent","fld":"vQUERYINTENT","hsh":true},{"av":"AV8RedirectToFirstDetail","fld":"vREDIRECTTOFIRSTDETAIL","hsh":true},{"av":"AV58IsAuthorized_Update","fld":"vISAUTHORIZED_UPDATE","hsh":true},{"av":"edtavUpdate_Visible","ctrl":"vUPDATE","prop":"Visible"},{"av":"AV60IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"edtavDelete_Visible","ctrl":"vDELETE","prop":"Visible"},{"av":"AV64IsAuthorized_Insert","fld":"vISAUTHORIZED_INSERT","hsh":true},{"ctrl":"BTNINSERT","prop":"Visible"},{"av":"AV28ManageFiltersData","fld":"vMANAGEFILTERSDATA"},{"av":"AV15GridState","fld":"vGRIDSTATE"}]}""");
+         setEventMetadata("NULL","""{"handler":"Valid_Holidayisactive","iparms":[]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -2917,17 +2977,18 @@ namespace GeneXus.Programs {
          gxfirstwebparm_bkp = "";
          AV20FilterFullText = "";
          AV25ColumnsSelector = new GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector(context);
-         AV74Pgmname = "";
+         AV75Pgmname = "";
          AV33TFHolidayName = "";
          AV34TFHolidayName_Sel = "";
          AV35TFHolidayStartDate = DateTime.MinValue;
          AV36TFHolidayStartDate_To = DateTime.MinValue;
+         AV73QueryIntent = "";
+         AV9GridAppliedFilters = "";
          sDynURL = "";
          FormProcess = "";
          bodyStyle = "";
          GXKey = "";
          AV28ManageFiltersData = new GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsData_Item>( context, "Item", "");
-         AV9GridAppliedFilters = "";
          AV62AGExportData = new GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsData_Item>( context, "Item", "");
          AV51DDO_TitleSettingsIcons = new GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsTitleSettingsIcons(context);
          AV37DDO_HolidayStartDateAuxDate = DateTime.MinValue;
@@ -2964,21 +3025,20 @@ namespace GeneXus.Programs {
          EvtGridId = "";
          EvtRowId = "";
          sEvtType = "";
+         AV57Update = "";
+         AV59Delete = "";
          A114HolidayName = "";
          A115HolidayStartDate = DateTime.MinValue;
          A116HolidayEndDate = DateTime.MinValue;
          A117HolidayServiceId = "";
-         AV57Update = "";
-         AV59Delete = "";
          Gx_date = DateTime.MinValue;
-         scmdbuf = "";
-         lV75Holidaywwds_1_filterfulltext = "";
-         lV76Holidaywwds_2_tfholidayname = "";
-         AV75Holidaywwds_1_filterfulltext = "";
-         AV77Holidaywwds_3_tfholidayname_sel = "";
-         AV76Holidaywwds_2_tfholidayname = "";
-         AV78Holidaywwds_4_tfholidaystartdate = DateTime.MinValue;
-         AV79Holidaywwds_5_tfholidaystartdate_to = DateTime.MinValue;
+         lV76Holidaywwds_1_filterfulltext = "";
+         lV77Holidaywwds_2_tfholidayname = "";
+         AV76Holidaywwds_1_filterfulltext = "";
+         AV78Holidaywwds_3_tfholidayname_sel = "";
+         AV77Holidaywwds_2_tfholidayname = "";
+         AV79Holidaywwds_4_tfholidaystartdate = DateTime.MinValue;
+         AV80Holidaywwds_5_tfholidaystartdate_to = DateTime.MinValue;
          H002H2_A139HolidayIsActive = new bool[] {false} ;
          H002H2_A100CompanyId = new long[1] ;
          H002H2_A117HolidayServiceId = new string[] {""} ;
@@ -3025,10 +3085,10 @@ namespace GeneXus.Programs {
                }
             }
          );
-         AV74Pgmname = "HolidayWW";
+         AV75Pgmname = "HolidayWW";
          Gx_date = DateTimeUtil.Today( context);
          /* GeneXus formulas. */
-         AV74Pgmname = "HolidayWW";
+         AV75Pgmname = "HolidayWW";
          Gx_date = DateTimeUtil.Today( context);
          edtavUpdate_Enabled = 0;
          edtavDelete_Enabled = 0;
@@ -3037,10 +3097,9 @@ namespace GeneXus.Programs {
       private short GRID_nEOF ;
       private short nGotPars ;
       private short GxWebError ;
+      private short AV17OrderedBy ;
       private short AV30ManageFiltersExecutionStep ;
       private short AV68TFHolidayIsActive_Sel ;
-      private short AV17OrderedBy ;
-      private short initialized ;
       private short gxajaxcallmode ;
       private short wbEnd ;
       private short wbStart ;
@@ -3048,7 +3107,7 @@ namespace GeneXus.Programs {
       private short gxcookieaux ;
       private short subGrid_Backcolorstyle ;
       private short subGrid_Sortable ;
-      private short AV80Holidaywwds_6_tfholidayisactive_sel ;
+      private short AV81Holidaywwds_6_tfholidayisactive_sel ;
       private short nGXWrapped ;
       private short subGrid_Backstyle ;
       private short subGrid_Titlebackstyle ;
@@ -3093,7 +3152,6 @@ namespace GeneXus.Programs {
       private long A113HolidayId ;
       private long A100CompanyId ;
       private long GRID_nCurrentRecord ;
-      private long AV81Udparg7 ;
       private long GRID_nRecordCount ;
       private string Gridpaginationbar_Selectedpage ;
       private string Ddo_grid_Activeeventkey ;
@@ -3107,7 +3165,7 @@ namespace GeneXus.Programs {
       private string gxfirstwebparm ;
       private string gxfirstwebparm_bkp ;
       private string sGXsfl_38_idx="0001" ;
-      private string AV74Pgmname ;
+      private string AV75Pgmname ;
       private string AV33TFHolidayName ;
       private string AV34TFHolidayName_Sel ;
       private string sDynURL ;
@@ -3193,6 +3251,10 @@ namespace GeneXus.Programs {
       private string EvtGridId ;
       private string EvtRowId ;
       private string sEvtType ;
+      private string AV57Update ;
+      private string edtavUpdate_Internalname ;
+      private string AV59Delete ;
+      private string edtavDelete_Internalname ;
       private string edtHolidayId_Internalname ;
       private string A114HolidayName ;
       private string edtHolidayName_Internalname ;
@@ -3202,15 +3264,10 @@ namespace GeneXus.Programs {
       private string edtHolidayServiceId_Internalname ;
       private string edtCompanyId_Internalname ;
       private string chkHolidayIsActive_Internalname ;
-      private string AV57Update ;
-      private string edtavUpdate_Internalname ;
-      private string AV59Delete ;
-      private string edtavDelete_Internalname ;
       private string edtavFilterfulltext_Internalname ;
-      private string scmdbuf ;
-      private string lV76Holidaywwds_2_tfholidayname ;
-      private string AV77Holidaywwds_3_tfholidayname_sel ;
-      private string AV76Holidaywwds_2_tfholidayname ;
+      private string lV77Holidaywwds_2_tfholidayname ;
+      private string AV78Holidaywwds_3_tfholidayname_sel ;
+      private string AV77Holidaywwds_2_tfholidayname ;
       private string edtavUpdate_Link ;
       private string edtavDelete_Link ;
       private string GXt_char2 ;
@@ -3222,6 +3279,8 @@ namespace GeneXus.Programs {
       private string subGrid_Class ;
       private string subGrid_Linesclass ;
       private string ROClassString ;
+      private string edtavUpdate_Jsonclick ;
+      private string edtavDelete_Jsonclick ;
       private string edtHolidayId_Jsonclick ;
       private string edtHolidayName_Jsonclick ;
       private string edtHolidayStartDate_Jsonclick ;
@@ -3229,8 +3288,6 @@ namespace GeneXus.Programs {
       private string edtHolidayServiceId_Jsonclick ;
       private string edtCompanyId_Jsonclick ;
       private string GXCCtl ;
-      private string edtavUpdate_Jsonclick ;
-      private string edtavDelete_Jsonclick ;
       private string subGrid_Header ;
       private DateTime AV35TFHolidayStartDate ;
       private DateTime AV36TFHolidayStartDate_To ;
@@ -3239,11 +3296,12 @@ namespace GeneXus.Programs {
       private DateTime A115HolidayStartDate ;
       private DateTime A116HolidayEndDate ;
       private DateTime Gx_date ;
-      private DateTime AV78Holidaywwds_4_tfholidaystartdate ;
-      private DateTime AV79Holidaywwds_5_tfholidaystartdate_to ;
+      private DateTime AV79Holidaywwds_4_tfholidaystartdate ;
+      private DateTime AV80Holidaywwds_5_tfholidaystartdate_to ;
       private bool entryPointCalled ;
       private bool toggleJsOutput ;
       private bool AV18OrderedDsc ;
+      private bool AV8RedirectToFirstDetail ;
       private bool AV58IsAuthorized_Update ;
       private bool AV60IsAuthorized_Delete ;
       private bool AV64IsAuthorized_Insert ;
@@ -3269,10 +3327,11 @@ namespace GeneXus.Programs {
       private string AV29ManageFiltersXml ;
       private string AV24UserCustomValue ;
       private string AV20FilterFullText ;
+      private string AV73QueryIntent ;
       private string AV9GridAppliedFilters ;
       private string AV39DDO_HolidayStartDateAuxDateText ;
-      private string lV75Holidaywwds_1_filterfulltext ;
-      private string AV75Holidaywwds_1_filterfulltext ;
+      private string lV76Holidaywwds_1_filterfulltext ;
+      private string AV76Holidaywwds_1_filterfulltext ;
       private string AV21ExcelFilename ;
       private string AV22ErrorMessage ;
       private IGxSession AV27Session ;
@@ -3286,9 +3345,16 @@ namespace GeneXus.Programs {
       private GXUserControl ucGrid_empowerer ;
       private GXUserControl ucTfholidaystartdate_rangepicker ;
       private GXUserControl ucDdo_managefilters ;
+      private GxHttpRequest AV12HTTPRequest ;
+      private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private GXCheckbox chkHolidayIsActive ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector AV25ColumnsSelector ;
+      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsData_Item> AV28ManageFiltersData ;
+      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsData_Item> AV62AGExportData ;
+      private GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsTitleSettingsIcons AV51DDO_TitleSettingsIcons ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState AV15GridState ;
       private IDataStoreProvider pr_default ;
       private bool[] H002H2_A139HolidayIsActive ;
       private long[] H002H2_A100CompanyId ;
@@ -3300,47 +3366,38 @@ namespace GeneXus.Programs {
       private string[] H002H2_A114HolidayName ;
       private long[] H002H2_A113HolidayId ;
       private long[] H002H3_AGRID_nRecordCount ;
+      private GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsData_Item AV63AGExportDataItem ;
+      private GeneXus.Programs.genexussecurity.SdtGAMSession AV52GAMSession ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV53GAMErrors ;
+      private GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsTitleSettingsIcons GXt_SdtDVB_SDTDropDownOptionsTitleSettingsIcons1 ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV6WWPContext ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector AV26ColumnsSelectorAux ;
+      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsData_Item> GXt_objcol_SdtDVB_SDTDropDownOptionsData_Item4 ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue AV16GridStateFilterValue ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext AV13TrnContext ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
-      private GxHttpRequest AV12HTTPRequest ;
-      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsData_Item> AV28ManageFiltersData ;
-      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsData_Item> AV62AGExportData ;
-      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsData_Item> GXt_objcol_SdtDVB_SDTDropDownOptionsData_Item4 ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV53GAMErrors ;
-      private GXWebForm Form ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV6WWPContext ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext AV13TrnContext ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState AV15GridState ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue AV16GridStateFilterValue ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector AV25ColumnsSelector ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector AV26ColumnsSelectorAux ;
-      private GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsData_Item AV63AGExportDataItem ;
-      private GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsTitleSettingsIcons AV51DDO_TitleSettingsIcons ;
-      private GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsTitleSettingsIcons GXt_SdtDVB_SDTDropDownOptionsTitleSettingsIcons1 ;
-      private GeneXus.Programs.genexussecurity.SdtGAMSession AV52GAMSession ;
    }
 
    public class holidayww__default : DataStoreHelperBase, IDataStoreHelper
    {
       protected Object[] conditional_H002H2( IGxContext context ,
-                                             string AV75Holidaywwds_1_filterfulltext ,
-                                             string AV77Holidaywwds_3_tfholidayname_sel ,
-                                             string AV76Holidaywwds_2_tfholidayname ,
-                                             DateTime AV78Holidaywwds_4_tfholidaystartdate ,
-                                             DateTime AV79Holidaywwds_5_tfholidaystartdate_to ,
-                                             short AV80Holidaywwds_6_tfholidayisactive_sel ,
+                                             string AV76Holidaywwds_1_filterfulltext ,
+                                             string AV78Holidaywwds_3_tfholidayname_sel ,
+                                             string AV77Holidaywwds_2_tfholidayname ,
+                                             DateTime AV79Holidaywwds_4_tfholidaystartdate ,
+                                             DateTime AV80Holidaywwds_5_tfholidaystartdate_to ,
+                                             short AV81Holidaywwds_6_tfholidayisactive_sel ,
                                              string A114HolidayName ,
                                              DateTime A115HolidayStartDate ,
                                              bool A139HolidayIsActive ,
                                              short AV17OrderedBy ,
                                              bool AV18OrderedDsc ,
-                                             long A100CompanyId ,
-                                             long AV81Udparg7 ,
                                              DateTime Gx_date )
       {
          System.Text.StringBuilder sWhereString = new System.Text.StringBuilder();
          string scmdbuf;
-         short[] GXv_int5 = new short[11];
+         short[] GXv_int5 = new short[10];
          Object[] GXv_Object6 = new Object[2];
          string sSelectString;
          string sFromString;
@@ -3348,57 +3405,56 @@ namespace GeneXus.Programs {
          sSelectString = " HolidayIsActive, CompanyId, HolidayServiceId, HolidayEndDate, HolidayStartDate, HolidayName, HolidayId";
          sFromString = " FROM Holiday";
          sOrderString = "";
-         AddWhere(sWhereString, "(CompanyId = :AV81Udparg7)");
          AddWhere(sWhereString, "(date_part('year', HolidayStartDate) = date_part('year', :Gx_date) or date_part('year', HolidayStartDate) = date_part('year', (CAST(:Gx_date AS date) + CAST (1 || ' YEAR' AS INTERVAL))))");
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV75Holidaywwds_1_filterfulltext)) )
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV76Holidaywwds_1_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( LOWER(HolidayName) like '%' || LOWER(:lV75Holidaywwds_1_filterfulltext)))");
+            AddWhere(sWhereString, "(( HolidayName like '%' || :lV76Holidaywwds_1_filterfulltext))");
+         }
+         else
+         {
+            GXv_int5[2] = 1;
+         }
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV78Holidaywwds_3_tfholidayname_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV77Holidaywwds_2_tfholidayname)) ) )
+         {
+            AddWhere(sWhereString, "(HolidayName like :lV77Holidaywwds_2_tfholidayname)");
          }
          else
          {
             GXv_int5[3] = 1;
          }
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV77Holidaywwds_3_tfholidayname_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV76Holidaywwds_2_tfholidayname)) ) )
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV78Holidaywwds_3_tfholidayname_sel)) && ! ( StringUtil.StrCmp(AV78Holidaywwds_3_tfholidayname_sel, "<#Empty#>") == 0 ) )
          {
-            AddWhere(sWhereString, "(LOWER(HolidayName) like LOWER(:lV76Holidaywwds_2_tfholidayname))");
+            AddWhere(sWhereString, "(HolidayName = ( :AV78Holidaywwds_3_tfholidayname_sel))");
          }
          else
          {
             GXv_int5[4] = 1;
          }
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV77Holidaywwds_3_tfholidayname_sel)) && ! ( StringUtil.StrCmp(AV77Holidaywwds_3_tfholidayname_sel, "<#Empty#>") == 0 ) )
+         if ( StringUtil.StrCmp(AV78Holidaywwds_3_tfholidayname_sel, "<#Empty#>") == 0 )
          {
-            AddWhere(sWhereString, "(HolidayName = ( :AV77Holidaywwds_3_tfholidayname_sel))");
+            AddWhere(sWhereString, "((char_length(trim(trailing ' ' from HolidayName))=0))");
+         }
+         if ( ! (DateTime.MinValue==AV79Holidaywwds_4_tfholidaystartdate) )
+         {
+            AddWhere(sWhereString, "(HolidayStartDate >= :AV79Holidaywwds_4_tfholidaystartdate)");
          }
          else
          {
             GXv_int5[5] = 1;
          }
-         if ( StringUtil.StrCmp(AV77Holidaywwds_3_tfholidayname_sel, "<#Empty#>") == 0 )
+         if ( ! (DateTime.MinValue==AV80Holidaywwds_5_tfholidaystartdate_to) )
          {
-            AddWhere(sWhereString, "((char_length(trim(trailing ' ' from HolidayName))=0))");
-         }
-         if ( ! (DateTime.MinValue==AV78Holidaywwds_4_tfholidaystartdate) )
-         {
-            AddWhere(sWhereString, "(HolidayStartDate >= :AV78Holidaywwds_4_tfholidaystartdate)");
+            AddWhere(sWhereString, "(HolidayStartDate <= :AV80Holidaywwds_5_tfholidaystartdate_to)");
          }
          else
          {
             GXv_int5[6] = 1;
          }
-         if ( ! (DateTime.MinValue==AV79Holidaywwds_5_tfholidaystartdate_to) )
-         {
-            AddWhere(sWhereString, "(HolidayStartDate <= :AV79Holidaywwds_5_tfholidaystartdate_to)");
-         }
-         else
-         {
-            GXv_int5[7] = 1;
-         }
-         if ( AV80Holidaywwds_6_tfholidayisactive_sel == 1 )
+         if ( AV81Holidaywwds_6_tfholidayisactive_sel == 1 )
          {
             AddWhere(sWhereString, "(HolidayIsActive = TRUE)");
          }
-         if ( AV80Holidaywwds_6_tfholidayisactive_sel == 2 )
+         if ( AV81Holidaywwds_6_tfholidayisactive_sel == 2 )
          {
             AddWhere(sWhereString, "(HolidayIsActive = FALSE)");
          }
@@ -3437,77 +3493,74 @@ namespace GeneXus.Programs {
       }
 
       protected Object[] conditional_H002H3( IGxContext context ,
-                                             string AV75Holidaywwds_1_filterfulltext ,
-                                             string AV77Holidaywwds_3_tfholidayname_sel ,
-                                             string AV76Holidaywwds_2_tfholidayname ,
-                                             DateTime AV78Holidaywwds_4_tfholidaystartdate ,
-                                             DateTime AV79Holidaywwds_5_tfholidaystartdate_to ,
-                                             short AV80Holidaywwds_6_tfholidayisactive_sel ,
+                                             string AV76Holidaywwds_1_filterfulltext ,
+                                             string AV78Holidaywwds_3_tfholidayname_sel ,
+                                             string AV77Holidaywwds_2_tfholidayname ,
+                                             DateTime AV79Holidaywwds_4_tfholidaystartdate ,
+                                             DateTime AV80Holidaywwds_5_tfholidaystartdate_to ,
+                                             short AV81Holidaywwds_6_tfholidayisactive_sel ,
                                              string A114HolidayName ,
                                              DateTime A115HolidayStartDate ,
                                              bool A139HolidayIsActive ,
                                              short AV17OrderedBy ,
                                              bool AV18OrderedDsc ,
-                                             long A100CompanyId ,
-                                             long AV81Udparg7 ,
                                              DateTime Gx_date )
       {
          System.Text.StringBuilder sWhereString = new System.Text.StringBuilder();
          string scmdbuf;
-         short[] GXv_int7 = new short[8];
+         short[] GXv_int7 = new short[7];
          Object[] GXv_Object8 = new Object[2];
          scmdbuf = "SELECT COUNT(*) FROM Holiday";
-         AddWhere(sWhereString, "(CompanyId = :AV81Udparg7)");
          AddWhere(sWhereString, "(date_part('year', HolidayStartDate) = date_part('year', :Gx_date) or date_part('year', HolidayStartDate) = date_part('year', (CAST(:Gx_date AS date) + CAST (1 || ' YEAR' AS INTERVAL))))");
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV75Holidaywwds_1_filterfulltext)) )
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV76Holidaywwds_1_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( LOWER(HolidayName) like '%' || LOWER(:lV75Holidaywwds_1_filterfulltext)))");
+            AddWhere(sWhereString, "(( HolidayName like '%' || :lV76Holidaywwds_1_filterfulltext))");
+         }
+         else
+         {
+            GXv_int7[2] = 1;
+         }
+         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV78Holidaywwds_3_tfholidayname_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV77Holidaywwds_2_tfholidayname)) ) )
+         {
+            AddWhere(sWhereString, "(HolidayName like :lV77Holidaywwds_2_tfholidayname)");
          }
          else
          {
             GXv_int7[3] = 1;
          }
-         if ( String.IsNullOrEmpty(StringUtil.RTrim( AV77Holidaywwds_3_tfholidayname_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV76Holidaywwds_2_tfholidayname)) ) )
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV78Holidaywwds_3_tfholidayname_sel)) && ! ( StringUtil.StrCmp(AV78Holidaywwds_3_tfholidayname_sel, "<#Empty#>") == 0 ) )
          {
-            AddWhere(sWhereString, "(LOWER(HolidayName) like LOWER(:lV76Holidaywwds_2_tfholidayname))");
+            AddWhere(sWhereString, "(HolidayName = ( :AV78Holidaywwds_3_tfholidayname_sel))");
          }
          else
          {
             GXv_int7[4] = 1;
          }
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV77Holidaywwds_3_tfholidayname_sel)) && ! ( StringUtil.StrCmp(AV77Holidaywwds_3_tfholidayname_sel, "<#Empty#>") == 0 ) )
+         if ( StringUtil.StrCmp(AV78Holidaywwds_3_tfholidayname_sel, "<#Empty#>") == 0 )
          {
-            AddWhere(sWhereString, "(HolidayName = ( :AV77Holidaywwds_3_tfholidayname_sel))");
+            AddWhere(sWhereString, "((char_length(trim(trailing ' ' from HolidayName))=0))");
+         }
+         if ( ! (DateTime.MinValue==AV79Holidaywwds_4_tfholidaystartdate) )
+         {
+            AddWhere(sWhereString, "(HolidayStartDate >= :AV79Holidaywwds_4_tfholidaystartdate)");
          }
          else
          {
             GXv_int7[5] = 1;
          }
-         if ( StringUtil.StrCmp(AV77Holidaywwds_3_tfholidayname_sel, "<#Empty#>") == 0 )
+         if ( ! (DateTime.MinValue==AV80Holidaywwds_5_tfholidaystartdate_to) )
          {
-            AddWhere(sWhereString, "((char_length(trim(trailing ' ' from HolidayName))=0))");
-         }
-         if ( ! (DateTime.MinValue==AV78Holidaywwds_4_tfholidaystartdate) )
-         {
-            AddWhere(sWhereString, "(HolidayStartDate >= :AV78Holidaywwds_4_tfholidaystartdate)");
+            AddWhere(sWhereString, "(HolidayStartDate <= :AV80Holidaywwds_5_tfholidaystartdate_to)");
          }
          else
          {
             GXv_int7[6] = 1;
          }
-         if ( ! (DateTime.MinValue==AV79Holidaywwds_5_tfholidaystartdate_to) )
-         {
-            AddWhere(sWhereString, "(HolidayStartDate <= :AV79Holidaywwds_5_tfholidaystartdate_to)");
-         }
-         else
-         {
-            GXv_int7[7] = 1;
-         }
-         if ( AV80Holidaywwds_6_tfholidayisactive_sel == 1 )
+         if ( AV81Holidaywwds_6_tfholidayisactive_sel == 1 )
          {
             AddWhere(sWhereString, "(HolidayIsActive = TRUE)");
          }
-         if ( AV80Holidaywwds_6_tfholidayisactive_sel == 2 )
+         if ( AV81Holidaywwds_6_tfholidayisactive_sel == 2 )
          {
             AddWhere(sWhereString, "(HolidayIsActive = FALSE)");
          }
@@ -3552,9 +3605,9 @@ namespace GeneXus.Programs {
          switch ( cursor )
          {
                case 0 :
-                     return conditional_H002H2(context, (string)dynConstraints[0] , (string)dynConstraints[1] , (string)dynConstraints[2] , (DateTime)dynConstraints[3] , (DateTime)dynConstraints[4] , (short)dynConstraints[5] , (string)dynConstraints[6] , (DateTime)dynConstraints[7] , (bool)dynConstraints[8] , (short)dynConstraints[9] , (bool)dynConstraints[10] , (long)dynConstraints[11] , (long)dynConstraints[12] , (DateTime)dynConstraints[13] );
+                     return conditional_H002H2(context, (string)dynConstraints[0] , (string)dynConstraints[1] , (string)dynConstraints[2] , (DateTime)dynConstraints[3] , (DateTime)dynConstraints[4] , (short)dynConstraints[5] , (string)dynConstraints[6] , (DateTime)dynConstraints[7] , (bool)dynConstraints[8] , (short)dynConstraints[9] , (bool)dynConstraints[10] , (DateTime)dynConstraints[11] );
                case 1 :
-                     return conditional_H002H3(context, (string)dynConstraints[0] , (string)dynConstraints[1] , (string)dynConstraints[2] , (DateTime)dynConstraints[3] , (DateTime)dynConstraints[4] , (short)dynConstraints[5] , (string)dynConstraints[6] , (DateTime)dynConstraints[7] , (bool)dynConstraints[8] , (short)dynConstraints[9] , (bool)dynConstraints[10] , (long)dynConstraints[11] , (long)dynConstraints[12] , (DateTime)dynConstraints[13] );
+                     return conditional_H002H3(context, (string)dynConstraints[0] , (string)dynConstraints[1] , (string)dynConstraints[2] , (DateTime)dynConstraints[3] , (DateTime)dynConstraints[4] , (short)dynConstraints[5] , (string)dynConstraints[6] , (DateTime)dynConstraints[7] , (bool)dynConstraints[8] , (short)dynConstraints[9] , (bool)dynConstraints[10] , (DateTime)dynConstraints[11] );
          }
          return base.getDynamicStatement(cursor, context, dynConstraints);
       }
@@ -3575,28 +3628,26 @@ namespace GeneXus.Programs {
        {
           Object[] prmH002H2;
           prmH002H2 = new Object[] {
-          new ParDef("AV81Udparg7",GXType.Int64,10,0) ,
           new ParDef("Gx_date",GXType.Date,8,0) ,
           new ParDef("Gx_date",GXType.Date,8,0) ,
-          new ParDef("lV75Holidaywwds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV76Holidaywwds_2_tfholidayname",GXType.Char,100,0) ,
-          new ParDef("AV77Holidaywwds_3_tfholidayname_sel",GXType.Char,100,0) ,
-          new ParDef("AV78Holidaywwds_4_tfholidaystartdate",GXType.Date,8,0) ,
-          new ParDef("AV79Holidaywwds_5_tfholidaystartdate_to",GXType.Date,8,0) ,
+          new ParDef("lV76Holidaywwds_1_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("lV77Holidaywwds_2_tfholidayname",GXType.Char,100,0) ,
+          new ParDef("AV78Holidaywwds_3_tfholidayname_sel",GXType.Char,100,0) ,
+          new ParDef("AV79Holidaywwds_4_tfholidaystartdate",GXType.Date,8,0) ,
+          new ParDef("AV80Holidaywwds_5_tfholidaystartdate_to",GXType.Date,8,0) ,
           new ParDef("GXPagingFrom2",GXType.Int32,9,0) ,
           new ParDef("GXPagingTo2",GXType.Int32,9,0) ,
           new ParDef("GXPagingTo2",GXType.Int32,9,0)
           };
           Object[] prmH002H3;
           prmH002H3 = new Object[] {
-          new ParDef("AV81Udparg7",GXType.Int64,10,0) ,
           new ParDef("Gx_date",GXType.Date,8,0) ,
           new ParDef("Gx_date",GXType.Date,8,0) ,
-          new ParDef("lV75Holidaywwds_1_filterfulltext",GXType.VarChar,100,0) ,
-          new ParDef("lV76Holidaywwds_2_tfholidayname",GXType.Char,100,0) ,
-          new ParDef("AV77Holidaywwds_3_tfholidayname_sel",GXType.Char,100,0) ,
-          new ParDef("AV78Holidaywwds_4_tfholidaystartdate",GXType.Date,8,0) ,
-          new ParDef("AV79Holidaywwds_5_tfholidaystartdate_to",GXType.Date,8,0)
+          new ParDef("lV76Holidaywwds_1_filterfulltext",GXType.VarChar,100,0) ,
+          new ParDef("lV77Holidaywwds_2_tfholidayname",GXType.Char,100,0) ,
+          new ParDef("AV78Holidaywwds_3_tfholidayname_sel",GXType.Char,100,0) ,
+          new ParDef("AV79Holidaywwds_4_tfholidaystartdate",GXType.Date,8,0) ,
+          new ParDef("AV80Holidaywwds_5_tfholidaystartdate_to",GXType.Date,8,0)
           };
           def= new CursorDef[] {
               new CursorDef("H002H2", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH002H2,11, GxCacheFrequency.OFF ,true,false )

@@ -42,7 +42,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          this.AV15OldColumnsSelector = aP0_OldColumnsSelector;
          this.AV11ColumnsSelector = aP1_ColumnsSelector;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_OldColumnsSelector=this.AV15OldColumnsSelector;
          aP1_ColumnsSelector=this.AV11ColumnsSelector;
       }
@@ -56,31 +56,14 @@ namespace GeneXus.Programs.wwpbaseobjects {
       public void executeSubmit( ref GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector aP0_OldColumnsSelector ,
                                  ref GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector aP1_ColumnsSelector )
       {
-         wwp_columnselector_updatecolumns objwwp_columnselector_updatecolumns;
-         objwwp_columnselector_updatecolumns = new wwp_columnselector_updatecolumns();
-         objwwp_columnselector_updatecolumns.AV15OldColumnsSelector = aP0_OldColumnsSelector;
-         objwwp_columnselector_updatecolumns.AV11ColumnsSelector = aP1_ColumnsSelector;
-         objwwp_columnselector_updatecolumns.context.SetSubmitInitialConfig(context);
-         objwwp_columnselector_updatecolumns.initialize();
-         Submit( executePrivateCatch,objwwp_columnselector_updatecolumns);
+         this.AV15OldColumnsSelector = aP0_OldColumnsSelector;
+         this.AV11ColumnsSelector = aP1_ColumnsSelector;
+         SubmitImpl();
          aP0_OldColumnsSelector=this.AV15OldColumnsSelector;
          aP1_ColumnsSelector=this.AV11ColumnsSelector;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwp_columnselector_updatecolumns)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -92,7 +75,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
             S111 ();
             if ( returnInSub )
             {
-               this.cleanup();
+               cleanup();
                if (true) return;
             }
             if ( AV13Found )
@@ -125,7 +108,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
             AV16ColumnOrder = (short)(AV16ColumnOrder+1);
             AV18GXV2 = (int)(AV18GXV2+1);
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void S111( )
@@ -151,16 +134,12 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -181,12 +160,12 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private bool AV13Found ;
       private bool AV14IsColumnVisible ;
       private string AV9Fixed ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector aP0_OldColumnsSelector ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector aP1_ColumnsSelector ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector AV15OldColumnsSelector ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector aP0_OldColumnsSelector ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector AV11ColumnsSelector ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector AV12ColumnsSelectorAux ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector aP1_ColumnsSelector ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector_Column AV8Column ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector AV12ColumnsSelectorAux ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector_Column AV10ColumnAux ;
    }
 

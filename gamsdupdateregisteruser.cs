@@ -50,7 +50,7 @@ namespace GeneXus.Programs {
          this.AV14LastName = aP4_LastName;
          this.AV8Messages = new GXBaseCollection<GeneXus.Utils.SdtMessages_Message>( context, "Message", "GeneXus") ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP5_Messages=this.AV8Messages;
       }
 
@@ -71,34 +71,17 @@ namespace GeneXus.Programs {
                                  string aP4_LastName ,
                                  out GXBaseCollection<GeneXus.Utils.SdtMessages_Message> aP5_Messages )
       {
-         gamsdupdateregisteruser objgamsdupdateregisteruser;
-         objgamsdupdateregisteruser = new gamsdupdateregisteruser();
-         objgamsdupdateregisteruser.AV19UserGUID = aP0_UserGUID;
-         objgamsdupdateregisteruser.AV18UserName = aP1_UserName;
-         objgamsdupdateregisteruser.AV10Email = aP2_Email;
-         objgamsdupdateregisteruser.AV12FirstName = aP3_FirstName;
-         objgamsdupdateregisteruser.AV14LastName = aP4_LastName;
-         objgamsdupdateregisteruser.AV8Messages = new GXBaseCollection<GeneXus.Utils.SdtMessages_Message>( context, "Message", "GeneXus") ;
-         objgamsdupdateregisteruser.context.SetSubmitInitialConfig(context);
-         objgamsdupdateregisteruser.initialize();
-         Submit( executePrivateCatch,objgamsdupdateregisteruser);
+         this.AV19UserGUID = aP0_UserGUID;
+         this.AV18UserName = aP1_UserName;
+         this.AV10Email = aP2_Email;
+         this.AV12FirstName = aP3_FirstName;
+         this.AV14LastName = aP4_LastName;
+         this.AV8Messages = new GXBaseCollection<GeneXus.Utils.SdtMessages_Message>( context, "Message", "GeneXus") ;
+         SubmitImpl();
          aP5_Messages=this.AV8Messages;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((gamsdupdateregisteruser)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -124,21 +107,17 @@ namespace GeneXus.Programs {
             new gam_converterrorstomessages(context ).execute(  AV11Errors, out  GXt_objcol_SdtMessages_Message1) ;
             AV8Messages = GXt_objcol_SdtMessages_Message1;
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -156,11 +135,11 @@ namespace GeneXus.Programs {
       private bool AV13isOK ;
       private string AV18UserName ;
       private string AV10Email ;
-      private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> aP5_Messages ;
       private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> AV8Messages ;
-      private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> GXt_objcol_SdtMessages_Message1 ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV11Errors ;
       private GeneXus.Programs.genexussecurity.SdtGAMUser AV17User ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV11Errors ;
+      private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> GXt_objcol_SdtMessages_Message1 ;
+      private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> aP5_Messages ;
    }
 
 }

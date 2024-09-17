@@ -50,7 +50,7 @@ namespace GeneXus.Programs {
          this.AV12CompanyId = aP1_CompanyId;
          this.AV8EmployeeIds = new GxSimpleCollection<long>() ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP2_EmployeeIds=this.AV8EmployeeIds;
       }
 
@@ -65,31 +65,14 @@ namespace GeneXus.Programs {
                                  long aP1_CompanyId ,
                                  out GxSimpleCollection<long> aP2_EmployeeIds )
       {
-         getemployeeidsbyprojectorcompany objgetemployeeidsbyprojectorcompany;
-         objgetemployeeidsbyprojectorcompany = new getemployeeidsbyprojectorcompany();
-         objgetemployeeidsbyprojectorcompany.AV9ProjectIds = aP0_ProjectIds;
-         objgetemployeeidsbyprojectorcompany.AV12CompanyId = aP1_CompanyId;
-         objgetemployeeidsbyprojectorcompany.AV8EmployeeIds = new GxSimpleCollection<long>() ;
-         objgetemployeeidsbyprojectorcompany.context.SetSubmitInitialConfig(context);
-         objgetemployeeidsbyprojectorcompany.initialize();
-         Submit( executePrivateCatch,objgetemployeeidsbyprojectorcompany);
+         this.AV9ProjectIds = aP0_ProjectIds;
+         this.AV12CompanyId = aP1_CompanyId;
+         this.AV8EmployeeIds = new GxSimpleCollection<long>() ;
+         SubmitImpl();
          aP2_EmployeeIds=this.AV8EmployeeIds;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((getemployeeidsbyprojectorcompany)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -120,12 +103,12 @@ namespace GeneXus.Programs {
             pr_default.readNext(1);
          }
          pr_default.close(1);
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -133,14 +116,9 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
          AV8EmployeeIds = new GxSimpleCollection<long>();
-         scmdbuf = "";
          P00BK2_A102ProjectId = new long[1] ;
          P00BK2_A106EmployeeId = new long[1] ;
          P00BK3_A100CompanyId = new long[1] ;
@@ -162,11 +140,10 @@ namespace GeneXus.Programs {
       private long A102ProjectId ;
       private long A106EmployeeId ;
       private long A100CompanyId ;
-      private string scmdbuf ;
-      private GxSimpleCollection<long> AV9ProjectIds ;
-      private GxSimpleCollection<long> AV8EmployeeIds ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GxSimpleCollection<long> AV9ProjectIds ;
+      private GxSimpleCollection<long> AV8EmployeeIds ;
       private IDataStoreProvider pr_default ;
       private long[] P00BK2_A102ProjectId ;
       private long[] P00BK2_A106EmployeeId ;

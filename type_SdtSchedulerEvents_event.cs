@@ -1,7 +1,7 @@
 /*
 				   File: type_SdtSchedulerEvents_event
 			Description: Items
-				 Author: Nemo 🐠 for C# (.NET) version 18.0.6.177934
+				 Author: Nemo 🐠 for C# (.NET) version 18.0.10.184260
 		   Program type: Callable routine
 			  Main DBMS: 
 */
@@ -318,7 +318,7 @@ namespace GeneXus.Programs
 		public bool ShouldSerializegxTpr_Color()
 
 		{
-				return !gxTv_SdtSchedulerEvents_event_Color_N;
+			return !gxTv_SdtSchedulerEvents_event_Color_N;
 
 		}
 
@@ -341,7 +341,7 @@ namespace GeneXus.Programs
 		public bool ShouldSerializegxTpr_Backgroundcolor()
 
 		{
-				return !gxTv_SdtSchedulerEvents_event_Backgroundcolor_N;
+			return !gxTv_SdtSchedulerEvents_event_Backgroundcolor_N;
 
 		}
 
@@ -364,7 +364,7 @@ namespace GeneXus.Programs
 		public bool ShouldSerializegxTpr_Nameweekview()
 
 		{
-				return !gxTv_SdtSchedulerEvents_event_Nameweekview_N;
+			return !gxTv_SdtSchedulerEvents_event_Nameweekview_N;
 
 		}
 
@@ -387,7 +387,7 @@ namespace GeneXus.Programs
 		public bool ShouldSerializegxTpr_Namemonthview()
 
 		{
-				return !gxTv_SdtSchedulerEvents_event_Namemonthview_N;
+			return !gxTv_SdtSchedulerEvents_event_Namemonthview_N;
 
 		}
 
@@ -410,7 +410,7 @@ namespace GeneXus.Programs
 		public bool ShouldSerializegxTpr_Namedayview()
 
 		{
-				return !gxTv_SdtSchedulerEvents_event_Namedayview_N;
+			return !gxTv_SdtSchedulerEvents_event_Namedayview_N;
 
 		}
 
@@ -433,7 +433,7 @@ namespace GeneXus.Programs
 		public bool ShouldSerializegxTpr_Tooltip()
 
 		{
-				return !gxTv_SdtSchedulerEvents_event_Tooltip_N;
+			return !gxTv_SdtSchedulerEvents_event_Tooltip_N;
 
 		}
 
@@ -444,6 +444,14 @@ namespace GeneXus.Programs
 		}
 
 
+
+		#endregion
+
+		#region Static Type Properties
+
+		[XmlIgnore]
+		private static GXTypeInfo _typeProps;
+		protected override GXTypeInfo TypeInfo { get { return _typeProps; } set { _typeProps = value; } }
 
 		#endregion
 
@@ -541,6 +549,7 @@ namespace GeneXus.Programs
 		#endregion
 	}
 	#region Rest interface
+	[GxJsonSerialization("wrapped")]
 	[DataContract(Name=@"SchedulerEvents.event", Namespace="")]
 	public class SdtSchedulerEvents_event_RESTInterface : GxGenericCollectionItem<SdtSchedulerEvents_event>, System.Web.SessionState.IRequiresSessionState
 	{
@@ -605,11 +614,11 @@ namespace GeneXus.Programs
 		public  string gxTpr_Starttime
 		{
 			get { 
-				return DateTimeUtil.TToC2( sdt.gxTpr_Starttime);
+				return DateTimeUtil.TToC2( sdt.gxTpr_Starttime,context);
 
 			}
 			set { 
-				sdt.gxTpr_Starttime = DateTimeUtil.CToT2(value);
+				sdt.gxTpr_Starttime = DateTimeUtil.CToT2(value,context);
 			}
 		}
 
@@ -617,11 +626,11 @@ namespace GeneXus.Programs
 		public  string gxTpr_Endtime
 		{
 			get { 
-				return DateTimeUtil.TToC2( sdt.gxTpr_Endtime);
+				return DateTimeUtil.TToC2( sdt.gxTpr_Endtime,context);
 
 			}
 			set { 
-				sdt.gxTpr_Endtime = DateTimeUtil.CToT2(value);
+				sdt.gxTpr_Endtime = DateTimeUtil.CToT2(value,context);
 			}
 		}
 

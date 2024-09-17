@@ -41,10 +41,10 @@ namespace GeneXus.Programs.general.ui {
 
       public void execute( )
       {
-         executePrivate();
+         ExecuteImpl();
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -61,11 +61,8 @@ namespace GeneXus.Programs.general.ui {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITWEB( ) ;
          if ( ! isAjaxCallMode( ) )
          {
@@ -80,7 +77,7 @@ namespace GeneXus.Programs.general.ui {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void RenderHtmlHeaders( )
@@ -139,7 +136,7 @@ namespace GeneXus.Programs.general.ui {
          }
          context.AddJavascriptSource("Unanimo_chameleon/chameleon.js", "", false, true);
          context.AddJavascriptSource("UserControls/GeneXusUnanimo.SidebarRender.js", "", false, true);
-         context.AddJavascriptSource("general/ui/masterunanimosidebar.js", "?202471712112533", false, true);
+         context.AddJavascriptSource("general/ui/masterunanimosidebar.js", "?202491613143371", false, true);
          context.WriteHtmlTextNl( "</body>") ;
          context.WriteHtmlTextNl( "</html>") ;
          if ( context.isSpaRequest( ) )
@@ -566,7 +563,7 @@ namespace GeneXus.Programs.general.ui {
          PA012( ) ;
          WS012( ) ;
          WE012( ) ;
-         this.cleanup();
+         cleanup();
          context.SetWrapped(false);
          context.GX_msglist = BackMsgLst;
          return "";
@@ -593,7 +590,7 @@ namespace GeneXus.Programs.general.ui {
          idxLst = 1;
          while ( idxLst <= (getDataAreaObject() == null ? Form : getDataAreaObject().GetForm()).Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)(getDataAreaObject() == null ? Form : getDataAreaObject().GetForm()).Jscriptsrc.Item(idxLst))), "?202471712112551", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)(getDataAreaObject() == null ? Form : getDataAreaObject().GetForm()).Jscriptsrc.Item(idxLst))), "?202491613143382", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -608,7 +605,7 @@ namespace GeneXus.Programs.general.ui {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("general/ui/masterunanimosidebar.js", "?202471712112551", false, true);
+         context.AddJavascriptSource("general/ui/masterunanimosidebar.js", "?202491613143382", false, true);
          context.AddJavascriptSource("Unanimo_chameleon/chameleon.js", "", false, true);
          context.AddJavascriptSource("UserControls/GeneXusUnanimo.SidebarRender.js", "", false, true);
          /* End function include_jscripts */
@@ -658,23 +655,17 @@ namespace GeneXus.Programs.general.ui {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH_MPAGE","{handler:'Refresh',iparms:[]");
-         setEventMetadata("REFRESH_MPAGE",",oparms:[]}");
+         setEventMetadata("REFRESH_MPAGE","""{"handler":"Refresh","iparms":[]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -703,7 +694,6 @@ namespace GeneXus.Programs.general.ui {
          /* GeneXus formulas. */
       }
 
-      private short initialized ;
       private short GxWebError ;
       private short wbEnd ;
       private short wbStart ;
@@ -746,14 +736,14 @@ namespace GeneXus.Programs.general.ui {
       private bool returnInSub ;
       private string AV6target ;
       private GXUserControl ucSidebarmenu ;
+      private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private GXDataAreaControl Contentholder ;
-      private msglist BackMsgLst ;
-      private msglist LclMsgLst ;
       private GXBaseCollection<GeneXus.Programs.genexusunanimo.SdtSidebarItems_SidebarItem> AV5sidebarItems ;
       private GXBaseCollection<GeneXus.Programs.genexusunanimo.SdtSidebarItems_SidebarItem> GXt_objcol_SdtSidebarItems_SidebarItem1 ;
-      private GXWebForm Form ;
+      private msglist BackMsgLst ;
+      private msglist LclMsgLst ;
    }
 
 }

@@ -70,7 +70,7 @@ namespace GeneXus.Programs {
          this.AV8EmployeeIds = aP3_EmployeeIds;
          this.Gxm2rootcol = new GXBaseCollection<SdtSDTLeaveEvent>( context, "SDTLeaveEvent", "YTT_version4") ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP4_Gxm2rootcol=this.Gxm2rootcol;
       }
 
@@ -89,33 +89,16 @@ namespace GeneXus.Programs {
                                  GxSimpleCollection<long> aP3_EmployeeIds ,
                                  out GXBaseCollection<SdtSDTLeaveEvent> aP4_Gxm2rootcol )
       {
-         dpleaveevent objdpleaveevent;
-         objdpleaveevent = new dpleaveevent();
-         objdpleaveevent.AV5FromDate = aP0_FromDate;
-         objdpleaveevent.AV6ToDate = aP1_ToDate;
-         objdpleaveevent.AV7CompanyLocationId = aP2_CompanyLocationId;
-         objdpleaveevent.AV8EmployeeIds = aP3_EmployeeIds;
-         objdpleaveevent.Gxm2rootcol = new GXBaseCollection<SdtSDTLeaveEvent>( context, "SDTLeaveEvent", "YTT_version4") ;
-         objdpleaveevent.context.SetSubmitInitialConfig(context);
-         objdpleaveevent.initialize();
-         Submit( executePrivateCatch,objdpleaveevent);
+         this.AV5FromDate = aP0_FromDate;
+         this.AV6ToDate = aP1_ToDate;
+         this.AV7CompanyLocationId = aP2_CompanyLocationId;
+         this.AV8EmployeeIds = aP3_EmployeeIds;
+         this.Gxm2rootcol = new GXBaseCollection<SdtSDTLeaveEvent>( context, "SDTLeaveEvent", "YTT_version4") ;
+         SubmitImpl();
          aP4_Gxm2rootcol=this.Gxm2rootcol;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((dpleaveevent)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -164,12 +147,12 @@ namespace GeneXus.Programs {
             pr_default.readNext(0);
          }
          pr_default.close(0);
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -177,13 +160,8 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
-         scmdbuf = "";
          A132LeaveRequestStatus = "";
          P001S2_A124LeaveTypeId = new long[1] ;
          P001S2_A100CompanyId = new long[1] ;
@@ -217,7 +195,6 @@ namespace GeneXus.Programs {
       private long A124LeaveTypeId ;
       private long A100CompanyId ;
       private long A127LeaveRequestId ;
-      private string scmdbuf ;
       private string A132LeaveRequestStatus ;
       private string A175LeaveTypeColorApproved ;
       private string GXt_char1 ;
@@ -226,9 +203,10 @@ namespace GeneXus.Programs {
       private DateTime A129LeaveRequestStartDate ;
       private DateTime A130LeaveRequestEndDate ;
       private bool n175LeaveTypeColorApproved ;
-      private GxSimpleCollection<long> AV8EmployeeIds ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GxSimpleCollection<long> AV8EmployeeIds ;
+      private GXBaseCollection<SdtSDTLeaveEvent> Gxm2rootcol ;
       private IDataStoreProvider pr_default ;
       private long[] P001S2_A124LeaveTypeId ;
       private long[] P001S2_A100CompanyId ;
@@ -240,9 +218,8 @@ namespace GeneXus.Programs {
       private DateTime[] P001S2_A130LeaveRequestEndDate ;
       private string[] P001S2_A175LeaveTypeColorApproved ;
       private bool[] P001S2_n175LeaveTypeColorApproved ;
-      private GXBaseCollection<SdtSDTLeaveEvent> aP4_Gxm2rootcol ;
-      private GXBaseCollection<SdtSDTLeaveEvent> Gxm2rootcol ;
       private SdtSDTLeaveEvent Gxm1sdtleaveevent ;
+      private GXBaseCollection<SdtSDTLeaveEvent> aP4_Gxm2rootcol ;
    }
 
    public class dpleaveevent__default : DataStoreHelperBase, IDataStoreHelper

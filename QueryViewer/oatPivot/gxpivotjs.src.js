@@ -138,11 +138,6 @@ if (!gx.util.browser.isIE() || 8 < gx.util.browser.ieVersion()) {
 
 
 	/* several helpful prototypes */
-	Array.prototype.findIndex = function (str) {
-		for (var i = 0; i < this.length; i++) if (this[i] == str) { return i; }
-		return -1;
-	}
-
 	String.prototype.trimpivot = function () {
 		var result = this.match(/^ *(.*?) *$/);
 		return (result ? result[1] : this);
@@ -10497,11 +10492,11 @@ if (!gx.util.browser.isIE() || 8 < gx.util.browser.ieVersion()) {
 			for (var iCV = 0; iCV < self.columns.length; iCV++) {
 
 				var position = 'axisRow';
-				if (self.rowConditions.findIndex(iCV) != -1) {
+				if (self.rowConditions.indexOf(iCV) != -1) {
 					position = 'axisRow';
 					rowLevel++;
 					lastRowLevel = iCV;
-				} else if (self.colConditions.findIndex(iCV) != -1) {
+				} else if (self.colConditions.indexOf(iCV) != -1) {
 					position = 'axisCol';
 					colLevel++;
 					lastColLevel = iCV;
@@ -10522,7 +10517,7 @@ if (!gx.util.browser.isIE() || 8 < gx.util.browser.ieVersion()) {
 					for (var val = 0; val < self.conditions[iCV].distinctValues.length; val++) {
 						pfvl.push(cleanDistinctValue(self.conditions[iCV].distinctValues[val], self));
 						var hiddenString = "";
-						if (self.conditions[iCV].blackList.findIndex(self.conditions[iCV].distinctValues[val]) != -1) {
+						if (self.conditions[iCV].blackList.indexOf(self.conditions[iCV].distinctValues[val]) != -1) {
 							hiddenString = " h=\"1\"";
 							pfvlExclude.push(cleanDistinctValue(self.conditions[iCV].distinctValues[val], self));
 						}
@@ -10545,7 +10540,7 @@ if (!gx.util.browser.isIE() || 8 < gx.util.browser.ieVersion()) {
 			xlpivotTable1 = xlpivotTable1 + "</pivotFields>"
 			xlpivotTable1 = xlpivotTable1 + "<rowFields>"
 			for (var iCV = 0; iCV < self.columns.length; iCV++) {
-				if ((self.rowConditions.findIndex(iCV) != -1) || (self.filterIndexes.findIndex(iCV) != -1)) {
+				if ((self.rowConditions.indexOf(iCV) != -1) || (self.filterIndexes.indexOf(iCV) != -1)) {
 					xlpivotTable1 = xlpivotTable1 + "<field x=\"" + 0 + "\"/>";
 				}
 			}
@@ -10562,7 +10557,7 @@ if (!gx.util.browser.isIE() || 8 < gx.util.browser.ieVersion()) {
 				xlpivotTable1 = xlpivotTable1 + "<colFields>"
 
 				for (var iCV = 0; iCV < self.columns.length; iCV++) {
-					if (self.colConditions.findIndex(iCV) != -1) {
+					if (self.colConditions.indexOf(iCV) != -1) {
 						var pos = pfi.indexOf(iCV);
 						xlpivotTable1 = xlpivotTable1 + "<field x=\"" + pos + "\"/>";
 					}
@@ -10860,11 +10855,11 @@ if (!gx.util.browser.isIE() || 8 < gx.util.browser.ieVersion()) {
 					
 					var pos = 0;
 					for (var val = 0; val < distValues.length; val++) {
-						if (!((distValues[val] == '') && (distValues.findIndex("#NuN#") != -1))) {//and  ( distValues.findIndex("#NuN#") != -1) )  )  {  //se omite un valor porque con el #NUN# el '' queda de mas 
+						if (!((distValues[val] == '') && (distValues.indexOf("#NuN#") != -1))) {
 
 							pfvl.push(cleanDistinctValue(distValues[val], self));
 							var hiddenString = "";
-							if (self.conditions[iCV].blackList.findIndex(distValues[val]) != -1) {
+							if (self.conditions[iCV].blackList.indexOf(distValues[val]) != -1) {
 								hiddenString = " h=\"1\"";
 								pfvlExclude.push(cleanDistinctValue(distValues[val], self));
 							}
@@ -10911,11 +10906,11 @@ if (!gx.util.browser.isIE() || 8 < gx.util.browser.ieVersion()) {
 						
 						var pos = 0;
 						for (var val = 0; val < distValues.length; val++) {
-							if (!((distValues[val] == '') && (distValues.findIndex("#NuN#") != -1))) {
+							if (!((distValues[val] == '') && (distValues.indexOf("#NuN#") != -1))) {
 								
 								pfvl.push(cleanDistinctValue(distValues[val], self));
 								var hiddenString = "";
-								if (self.conditions[iCV].blackList.findIndex(distValues[val]) != -1) {
+								if (self.conditions[iCV].blackList.indexOf(distValues[val]) != -1) {
 									hiddenString = " h=\"1\"";
 									pfvlExclude.push(cleanDistinctValue(distValues[val], self));
 								}
@@ -10968,7 +10963,7 @@ if (!gx.util.browser.isIE() || 8 < gx.util.browser.ieVersion()) {
 			if ((self.rowConditions.length + 1 != measures.length)) {
 				xlpivotTable1 = xlpivotTable1 + "<rowFields>\n"
 				for (var iCV = 0; iCV < self.columns.length; iCV++) {
-					if ((self.rowConditions.findIndex(iCV) != -1) /*|| (self.filterIndexes.find(iCV)!=-1)*/ //<-- cambio
+					if ((self.rowConditions.indexOf(iCV) != -1)
 						|| (((self.rowConditions.length + self.filterIndexes.length) == 0))
 					) {
 						var pos = pfi.indexOf(iCV);
@@ -10993,11 +10988,11 @@ if (!gx.util.browser.isIE() || 8 < gx.util.browser.ieVersion()) {
 				xlpivotTable1 = xlpivotTable1 + "<colFields>\n"
 
 				for (var iCV = 0; iCV < self.columns.length; iCV++) {
-					if ((self.colConditions.findIndex(iCV) != -1) && ((((self.rowConditions.length + self.filterIndexes.length) != 0)))) {
+					if ((self.colConditions.indexOf(iCV) != -1) && ((((self.rowConditions.length + self.filterIndexes.length) != 0)))) {
 						var pos = pfi.indexOf(iCV)
 						xlpivotTable1 = xlpivotTable1 + "<field x=\"" + pos + "\"/>\n";
 					} else {
-						if ((self.colConditions.findIndex(iCV) != -1) && ((((self.rowConditions.length + self.filterIndexes.length) == 0)))){
+						if ((self.colConditions.indexOf(iCV) != -1) && ((((self.rowConditions.length + self.filterIndexes.length) == 0)))){
 							var pos = pfi.indexOf(iCV)
 							if (self.rowConditions.length == 0)
 								pos = pfi.indexOf(iCV) - measures.length;
@@ -12630,9 +12625,9 @@ if (!gx.util.browser.isIE() || 8 < gx.util.browser.ieVersion()) {
 					}
 					for (var i = 0; i < self.rows.length; i++) {
 						var col = columnNumber;
-						if ((includeValues.findIndex(self.rows[i].cells[col].options.value) === -1)
-							&& (includeValues.findIndex(self.rows[i].cells[col].options.value.trimpivot()) === -1)
-							&& (self.conditions[col].blackList.findIndex(self.rows[i].cells[col].options.value) === -1)) {
+						if ((includeValues.indexOf(self.rows[i].cells[col].options.value) === -1)
+							&& (includeValues.indexOf(self.rows[i].cells[col].options.value.trimpivot()) === -1)
+							&& (self.conditions[col].blackList.indexOf(self.rows[i].cells[col].options.value) === -1)) {
 							self.conditions[col].blackList.push(self.rows[i].cells[col].options.value);
 							OAT.HideGridRow({ grid: self }, columnNumber, self.rows[i].cells[columnNumber].options.value);
 							OAT.actualizeBlackList("push", self, columnNumber, self.rows[i].cells[columnNumber].options.value, false);
@@ -12776,7 +12771,7 @@ if (!gx.util.browser.isIE() || 8 < gx.util.browser.ieVersion()) {
 										}
 									}
 								} else {
-									var index = self.conditions[dimPos].blackList.findIndex(hides[sofs].textContent);
+									var index = self.conditions[dimPos].blackList.indexOf(hides[sofs].textContent);
 									//if not already in the list
 									if (index === -1) {
 										for (var i = 0; i < self.rows.length; i++) { //search exact value
@@ -12957,8 +12952,8 @@ if (!gx.util.browser.isIE() || 8 < gx.util.browser.ieVersion()) {
 				var previusValue = [];
 				for (var i = 0; i < self.rows.length; i++) {
 					if (self.rows[i].cells[columnaentabla] != undefined) {
-						if (previusValue.findIndex(self.rows[i].cells[columnaentabla].options.value) === -1) {
-							if (self.conditions[iCV].blackList.findIndex(self.rows[i].cells[columnaentabla].options.value) === -1) {
+						if (previusValue.indexOf(self.rows[i].cells[columnaentabla].options.value) === -1) {
+							if (self.conditions[iCV].blackList.indexOf(self.rows[i].cells[columnaentabla].options.value) === -1) {
 								xml = xml + '<value>' + self.rows[i].cells[columnaentabla].options.value + '</value> ';
 								previusValue.push(self.rows[i].cells[columnaentabla].options.value);
 							}
@@ -13908,7 +13903,7 @@ if (!gx.util.browser.isIE() || 8 < gx.util.browser.ieVersion()) {
 								}
 							}
 
-							var index = grid.conditions[col].blackList.findIndex(colvalue);
+							var index = grid.conditions[col].blackList.indexOf(colvalue);
 							if (show === 0) { //add to black list
 								if (oper === "push") {
 									if (index === -1) {//if it not already there
@@ -14464,7 +14459,7 @@ if (!gx.util.browser.isIE() || 8 < gx.util.browser.ieVersion()) {
 				_self.grid.conditions[colNumber].blackList = [];
 				for (var i = 0; i < _self.grid.rows.length; i++) {
 					for (var col = 0; col < _self.grid.columns.length; col++) {
-						if (_self.grid.conditions[col].blackList.findIndex(_self.grid.rows[i].cells[col].options.value) === -1)
+						if (_self.grid.conditions[col].blackList.indexOf(_self.grid.rows[i].cells[col].options.value) === -1)
 							_self.grid.conditions[col].blackList.push(_self.grid.rows[i].cells[col].options.value);
 					}
 					OAT.HideGridRow(_self, colNumber, _self.grid.rows[i].cells[colNumber].options.value);
@@ -14484,7 +14479,7 @@ if (!gx.util.browser.isIE() || 8 < gx.util.browser.ieVersion()) {
 				var newBL = [];
 				for (var i = 0; i < _self.grid.rows.length; i++) {
 					var val = _self.grid.rows[i].cells[colNumber].options.value;
-					if (_self.grid.conditions[colNumber].blackList.findIndex(val) == -1) { newBL.push(val); }
+					if (_self.grid.conditions[colNumber].blackList.indexOf(val) == -1) { newBL.push(val); }
 				}
 
 				for (var col = 0; col < _self.grid.columns.length; col++) {
@@ -14556,7 +14551,7 @@ if (!gx.util.browser.isIE() || 8 < gx.util.browser.ieVersion()) {
 		if (!_self.grid.serverPaging) {
 			var previusValue = [];
 			for (var i = 0; i < _self.grid.rows.length; i++) { /*_self.grid.rows[_self.number].cells.length*/
-				if (previusValue.findIndex(_self.grid.rows[i].cells[colNumber].options.value) === -1) {
+				if (previusValue.indexOf(_self.grid.rows[i].cells[colNumber].options.value) === -1) {
 					var value = _self.grid.rows[i].cells[colNumber].options.value;
 					var pict_value = _self.grid.rows[i].cells[colNumber].value.textContent;
 					pict_value = pict_value.replace(/\&amp;/g, "&").replace(/\u00A0/g, " ")
@@ -14566,7 +14561,7 @@ if (!gx.util.browser.isIE() || 8 < gx.util.browser.ieVersion()) {
 					}
 					pict_value = pict_value.replace(/ /g, "\u00A0") + '\u00A0\u00A0\u00A0\u00A0\u00A0'
 					
-					var checked_value = (_self.grid.conditions[colNumber].blackList.findIndex(value) == -1);
+					var checked_value = (_self.grid.conditions[colNumber].blackList.indexOf(value) == -1);
 					var pair = getPairWithIcon(pict_value, "pivot_distinct_" + i, checked_value);
 					pair[0].setAttribute('value', value);
 					fixHeigthDiv.appendChild(pair[0]);
@@ -14780,8 +14775,8 @@ if (!gx.util.browser.isIE() || 8 < gx.util.browser.ieVersion()) {
 
 			var previusValue = [];
 			for (var i = 0; i < self.grid.rows.length; i++) {
-				if (previusValue.findIndex(self.grid.rows[i].cells[dimensionNumber].options.value) === -1) {
-					if (self.grid.conditions[dimensionNumber].blackList.findIndex(self.grid.rows[i].cells[dimensionNumber].options.value) === -1) {
+				if (previusValue.indexOf(self.grid.rows[i].cells[dimensionNumber].options.value) === -1) {
+					if (self.grid.conditions[dimensionNumber].blackList.indexOf(self.grid.rows[i].cells[dimensionNumber].options.value) === -1) {
 						datastr = datastr + '<VALUE>' + self.grid.rows[i].cells[dimensionNumber].options.value + '</VALUE>';
 						previusValue.push(self.grid.rows[i].cells[dimensionNumber].options.value);
 					}
@@ -15246,8 +15241,8 @@ if (!gx.util.browser.isIE() || 8 < gx.util.browser.ieVersion()) {
 				var previusValue = [];
 				for (var i = 0; i < self.grid.rows.length; i++) {
 					if (self.grid.rows[i].cells[iCV] != undefined) {
-						if (previusValue.findIndex(self.grid.rows[i].cells[iCV].options.value) === -1) {
-							if (self.grid.conditions[iCV].blackList.findIndex(self.grid.rows[i].cells[iCV].options.value) === -1) {
+						if (previusValue.indexOf(self.grid.rows[i].cells[iCV].options.value) === -1) {
+							if (self.grid.conditions[iCV].blackList.indexOf(self.grid.rows[i].cells[iCV].options.value) === -1) {
 								xml = xml + '<value>' + self.grid.rows[i].cells[iCV].options.value.toString().trimpivot() + '</value> ';
 								previusValue.push(self.grid.rows[i].cells[iCV].options.value);
 							}
@@ -15277,7 +15272,7 @@ if (!gx.util.browser.isIE() || 8 < gx.util.browser.ieVersion()) {
 						if (self.grid.rows[l].cells[iCV].options.value === self.grid.conditions[iCV].blackList[yu]) { //for rows with value "value"
 							for (var col = 0; col < iCV; col++) { //for every column previuos to colNumber
 								var colvalue = self.grid.rows[l].cells[col].options.value;
-								if (self.grid.conditions[col].blackList.findIndex(colvalue) === -1) { //if the value is not in black list
+								if (self.grid.conditions[col].blackList.indexOf(colvalue) === -1) {
 									isBlack = true;
 								}
 							}
@@ -16018,9 +16013,9 @@ if (!gx.util.browser.isIE() || 8 < gx.util.browser.ieVersion()) {
 
 				var previusValue = [];
 				for (var i = 0; i < self.grid.rows.length; i++) {
-					if (previusValue.findIndex(self.grid.rows[i].cells[iCV].options.value) === -1) {
+					if (previusValue.indexOf(self.grid.rows[i].cells[iCV].options.value) === -1) {
 						xml = xml + '<VALUE CHECKED=';
-						if (self.grid.conditions[iCV].blackList.findIndex(self.grid.rows[i].cells[iCV].options.value) === -1) {
+						if (self.grid.conditions[iCV].blackList.indexOf(self.grid.rows[i].cells[iCV].options.value) === -1) {
 							previusValue.push(self.grid.rows[i].cells[iCV].options.value);
 							xml = xml + '"true"';
 						} else {
@@ -17025,10 +17020,6 @@ if (!gx.util.browser.isIE() || 8 < gx.util.browser.ieVersion()) {
 				this.ServerPageNumber = parseToIntRegisterValue(stringRecord[0], "PageNumber")
 			}
 			//get records of the table
-			/*var filds = orderFilds;
-			if (this.TableOrderFilds != undefined) {
-				filds = this.TableOrderFilds;
-			}*/
 			filds = tableOrderField;
 			
 			for (var i = 1; i < stringRecord.length; i++) {
@@ -17039,12 +17030,10 @@ if (!gx.util.browser.isIE() || 8 < gx.util.browser.ieVersion()) {
 					var dt = stringRecord[i].split("<" + filds[j] + ">")
 					if (dt.length > 1) {
 						var at = dt[1].split("</" + filds[j] + ">")
-						/*var rp = at[0].replace(/^\s+|\s+$/g, '')
-						recordData[j] = (rp != "") ? rp : undefined*/
 						recordData[j] = at[0]
 						fullRecordData[j] = recordData[j]
 					} else {
-						if (stringRecord[i].indexOf("<" + filds[j] + "/>") >= 0) {
+						if (stringRecord[i].indexOf("<" + filds[j]) >= 0) {
 							recordData[j] = ""
 							fullRecordData[j] = ""
 						}
@@ -17053,15 +17042,7 @@ if (!gx.util.browser.isIE() || 8 < gx.util.browser.ieVersion()) {
 				}
 				this.data.push(recordData);
 
-				/*var pos_init = orderFilds.length;
-				for (var j = 0; j < orderFildsHidden.length; j++) {
-					fullRecordData[pos_init + j] = undefined
-					var dt = stringRecord[i].split("<" + orderFildsHidden[j] + ">")
-					if (dt.length > 1){
-						var at = dt[1].split("</" + orderFildsHidden[j] + ">")
-						fullRecordData[pos_init + j] = at[0]
-					}
-				}*/
+
 				var pos_init = filds.length;
 				for (var j = 0; j < this.HideDataFilds.length; j++) {
 					fullRecordData[pos_init + j] = undefined
@@ -18474,7 +18455,7 @@ if (!gx.util.browser.isIE() || 8 < gx.util.browser.ieVersion()) {
 
 				OAT_JS.grid.gridData[UcId].grid.removeAllCollapseRows()
 
-			}).closure(this), [1, 0, false, OAT_JS.grid.gridData[UcId].dataFieldOrder, OAT_JS.grid.gridData[UcId].orderType, OAT_JS.grid.gridData[UcId].filterInfo], false);
+			}).closure(this), [1, 0, false, OAT_JS.grid.gridData[UcId].dataFieldOrder, OAT_JS.grid.gridData[UcId].orderType, OAT_JS.grid.gridData[UcId].filterInfo, false]);
 
 			
 		},
@@ -18892,7 +18873,10 @@ if (!gx.util.browser.isIE() || 8 < gx.util.browser.ieVersion()) {
 						try {
 							value = headersItems[df - 1].split(datafield + ">")[1].split("<")[0]
 						} catch (ERROR) {
-							value = "#NuN#";
+							if (headersItems[df - 1].indexOf("IsNull") > -1)
+								value = "#NuN#";
+							else
+								value = ""	
 						}
 					}
 
@@ -18909,7 +18893,7 @@ if (!gx.util.browser.isIE() || 8 < gx.util.browser.ieVersion()) {
 					var sumarized = (df - totalizedItems >= 0)
 
 					if ((rows.length > 0) && (!sumarized)) { //set rowspan
-						if ((df - 1 == 0) || (row.headers[df - 2].rowSpan == 0)) { //no es la 1er columna, pero la anterior tiene span
+						if ((df - 1 == 0) || (row.headers[df - 2].rowSpan == 0)) { 
 							if (value == rows[l - 2].headers[df - 1].value) {
 								h.rowSpan = 0
 								var ant = l - 2
@@ -25885,13 +25869,33 @@ if (!gx.util.browser.isIE() || 8 < gx.util.browser.ieVersion()) {
 						} catch (ERROR) { }
 					}
 				}
-
-				self.applyFilters();
-				self.createAggStructure();
-				self.fillAggStructure();
-				self.checkAggStructure();
-				//self.count();
-
+				
+				
+				if ((self.colConditions.length > 0) || (self.GeneralDataRows.length < 500) )
+				{
+					self.applyFilters();
+					self.createAggStructure();
+					self.fillAggStructure();
+					self.checkAggStructure();
+				}
+				else
+				{
+					var rowsDataStructure = { depth: -1, items:[] };
+					var R = self.pageData.rows;
+					var CD = 0;
+					for (var rDS = 0; rDS < R.length; rDS++)
+					{
+						if (!R[rDS].subTotal) {
+							var item = { collapsed: false, conditionNumber: self.rowConditions[CD], depth: 0, value: R[rDS].headers[0].value, items:[]}
+						    rDS = self.addItemToStructure(item, 0, rDS, R)
+						} else {
+							rDS = rDS + 1
+						}
+					}
+					self.rowStructure = rowsDataStructure;
+					self.colStructure = []
+				}
+				
 				var FileName = self.query
 				if (FileName == "") {
 					FileName = "Query"
@@ -25914,7 +25918,40 @@ if (!gx.util.browser.isIE() || 8 < gx.util.browser.ieVersion()) {
 				}
 			}).closure(this))
 		}
+		
+		this.addItemToStructure = function(item, depth, line, R){
+			try {
+			var iterItem = item
+			if (R[line].headers[depth].rowSpan > 0)
+			{
+				for (var sigFila = 0; sigFila < R[line].headers[depth].rowSpan; sigFila++)
+				{
+					if (!R[line+sigFila].subTotal) {
+						
+							var subtItem = { collapsed: false, conditionNumber: self.rowConditions[depth+1], depth: depth+1, value: R[line+sigFila].headers[depth+1].value, items:[]}
+							
+							if (depth+2 < R[line].headers.length) {
+								line = self.addItemToStructure(subtItem, depth+1, line+sigFila, R)
+							}
+							item.items.push(subtItem)
+						
 
+					}
+				}
+						
+				line = line + (R[line].headers[depth].rowSpan-1)
+			}
+			} catch (error) { }
+			return line
+			
+		}
+
+
+
+
+
+
+		
 		this.appendExportToExcel2010Option = function (content, someExport) {
 			var exportXLSButton;
 			if ((self.QueryViewerCollection[IdForQueryViewerCollection].ExportToXLSX) && ((self.allData.length > 0) || (self.serverPagination))) {
@@ -27038,10 +27075,10 @@ if (!gx.util.browser.isIE() || 8 < gx.util.browser.ieVersion()) {
 			for (var i = 0; i < measures.length; i++) {
 				if (measures[i].getAttribute("displayName") === header) {
 					if ((measures[i].getAttribute("dataType") === "integer") || (measures[i].getAttribute("dataType") === "real")) {
-						div.style.textAlign = "left"
+						div.style.textAlign = "end"
 					}
 					if (measures[i].getAttribute("date") === "integer") {
-						div.style.textAlign = "right"
+						div.style.textAlign = "start"
 					}
 				}
 			}

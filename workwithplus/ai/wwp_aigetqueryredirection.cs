@@ -44,7 +44,7 @@ namespace GeneXus.Programs.workwithplus.ai {
          this.AV11Link = "" ;
          this.AV9ErrorMessage = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_Link=this.AV11Link;
          aP2_ErrorMessage=this.AV9ErrorMessage;
       }
@@ -60,32 +60,15 @@ namespace GeneXus.Programs.workwithplus.ai {
                                  out string aP1_Link ,
                                  out string aP2_ErrorMessage )
       {
-         wwp_aigetqueryredirection objwwp_aigetqueryredirection;
-         objwwp_aigetqueryredirection = new wwp_aigetqueryredirection();
-         objwwp_aigetqueryredirection.AV21UserQuery = aP0_UserQuery;
-         objwwp_aigetqueryredirection.AV11Link = "" ;
-         objwwp_aigetqueryredirection.AV9ErrorMessage = "" ;
-         objwwp_aigetqueryredirection.context.SetSubmitInitialConfig(context);
-         objwwp_aigetqueryredirection.initialize();
-         Submit( executePrivateCatch,objwwp_aigetqueryredirection);
+         this.AV21UserQuery = aP0_UserQuery;
+         this.AV11Link = "" ;
+         this.AV9ErrorMessage = "" ;
+         SubmitImpl();
          aP1_Link=this.AV11Link;
          aP2_ErrorMessage=this.AV9ErrorMessage;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwp_aigetqueryredirection)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -135,7 +118,7 @@ namespace GeneXus.Programs.workwithplus.ai {
          S111 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          if ( AV8DataAdded )
@@ -171,7 +154,7 @@ namespace GeneXus.Programs.workwithplus.ai {
                   S121 ();
                   if ( returnInSub )
                   {
-                     this.cleanup();
+                     cleanup();
                      if (true) return;
                   }
                }
@@ -219,7 +202,7 @@ namespace GeneXus.Programs.workwithplus.ai {
          {
             AV9ErrorMessage = "No page available to resolve natural language queries.";
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void S111( )
@@ -271,16 +254,12 @@ namespace GeneXus.Programs.workwithplus.ai {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -321,19 +300,19 @@ namespace GeneXus.Programs.workwithplus.ai {
       private string AV19SystemContent ;
       private string AV18ResponseText ;
       private string AV13ListName ;
-      private string aP1_Link ;
-      private string aP2_ErrorMessage ;
       private GxSimpleCollection<string> AV12LinkedPages ;
-      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item> AV16DVelop_Menu ;
-      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item> GXt_objcol_SdtDVelop_Menu_Item3 ;
-      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item> AV17MenuOptionsToAnalize ;
       private GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData> AV24WWP_AIListDatas ;
       private GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData> AV27WWP_AIUserDatas ;
       private GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData> GXt_objcol_SdtWWP_AIListData1 ;
-      private GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item AV14MenuOption ;
-      private GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item AV15MenuOptionAux ;
       private GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData AV23WWP_AIListData ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWP_SDTResult AV26SDTResult ;
+      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item> AV16DVelop_Menu ;
+      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item> GXt_objcol_SdtDVelop_Menu_Item3 ;
+      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item> AV17MenuOptionsToAnalize ;
+      private GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item AV14MenuOption ;
+      private GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item AV15MenuOptionAux ;
+      private string aP1_Link ;
+      private string aP2_ErrorMessage ;
    }
 
 }

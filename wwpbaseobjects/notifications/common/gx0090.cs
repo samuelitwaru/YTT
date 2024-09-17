@@ -43,11 +43,11 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
       public void execute( out long aP0_pWWPNotificationId )
       {
          this.AV12pWWPNotificationId = 0 ;
-         executePrivate();
+         ExecuteImpl();
          aP0_pWWPNotificationId=this.AV12pWWPNotificationId;
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -202,11 +202,8 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITWEB( ) ;
          if ( ! isAjaxCallMode( ) )
          {
@@ -237,7 +234,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override short ExecuteStartEvent( )
@@ -281,18 +278,18 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
          CloseStyles();
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
             enableOutput();
          }
-         context.AddJavascriptSource("calendar.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("calendar-setup.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("calendar-en.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("calendar.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("calendar-setup.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("calendar-en.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.WriteHtmlText( Form.Headerrawhtml) ;
          context.CloseHtmlHeader();
          if ( context.isSpaRequest( ) )
@@ -752,7 +749,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
          {
             if ( context.ExposeMetadata( ) )
             {
-               Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+               Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
             }
          }
          Form.Meta.addItem("description", "Selection List WWP_Notification", 0) ;
@@ -1268,13 +1265,9 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
       protected void before_start_formulas( )
       {
          edtWWPNotificationId_Enabled = 0;
-         AssignProp("", false, edtWWPNotificationId_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtWWPNotificationId_Enabled), 5, 0), !bGXsfl_74_Refreshing);
          edtWWPNotificationDefinitionId_Enabled = 0;
-         AssignProp("", false, edtWWPNotificationDefinitionId_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtWWPNotificationDefinitionId_Enabled), 5, 0), !bGXsfl_74_Refreshing);
          edtWWPNotificationCreated_Enabled = 0;
-         AssignProp("", false, edtWWPNotificationCreated_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtWWPNotificationCreated_Enabled), 5, 0), !bGXsfl_74_Refreshing);
          chkWWPNotificationIsRead.Enabled = 0;
-         AssignProp("", false, chkWWPNotificationIsRead_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(chkWWPNotificationIsRead.Enabled), 5, 0), !bGXsfl_74_Refreshing);
          fix_multi_value_controls( ) ;
       }
 
@@ -1406,7 +1399,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
          edtavLinkselection_gximage = "SelectRow";
          AV5LinkSelection = context.GetImagePath( "3914535b-0c03-44c5-9538-906a99cdd2bc", "", context.GetTheme( ));
          AssignAttri("", false, edtavLinkselection_Internalname, AV5LinkSelection);
-         AV14Linkselection_GXI = GXDbFile.PathToUrl( context.GetImagePath( "3914535b-0c03-44c5-9538-906a99cdd2bc", "", context.GetTheme( )));
+         AV14Linkselection_GXI = GXDbFile.PathToUrl( context.GetImagePath( "3914535b-0c03-44c5-9538-906a99cdd2bc", "", context.GetTheme( )), context);
          sendrow_742( ) ;
          GRID1_nCurrentRecord = (long)(GRID1_nCurrentRecord+1);
          if ( isFullAjaxMode( ) && ! bGXsfl_74_Refreshing )
@@ -1461,7 +1454,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
          PA5I2( ) ;
          WS5I2( ) ;
          WE5I2( ) ;
-         this.cleanup();
+         cleanup();
          context.SetWrapped(false);
          context.GX_msglist = BackMsgLst;
          return "";
@@ -1483,7 +1476,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202481416571655", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202491613202673", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1499,7 +1492,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wwpbaseobjects/notifications/common/gx0090.js", "?202481416571656", false, true);
+         context.AddJavascriptSource("wwpbaseobjects/notifications/common/gx0090.js", "?202491613202673", false, true);
          /* End function include_jscripts */
       }
 
@@ -1523,6 +1516,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
 
       protected void sendrow_742( )
       {
+         sGXsfl_74_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_74_idx), 4, 0), 4, "0");
          SubsflControlProps_742( ) ;
          WB5I0( ) ;
          if ( ( 10 * 1 == 0 ) || ( nGXsfl_74_idx <= subGrid1_fnc_Recordsperpage( ) * 1 ) )
@@ -1652,7 +1646,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
       {
          chkavCwwpnotificationisread.Name = "vCWWPNOTIFICATIONISREAD";
          chkavCwwpnotificationisread.WebTags = "";
-         chkavCwwpnotificationisread.Caption = "";
+         chkavCwwpnotificationisread.Caption = "Notification Is Read";
          AssignProp("", false, chkavCwwpnotificationisread_Internalname, "TitleCaption", chkavCwwpnotificationisread.Caption, true);
          chkavCwwpnotificationisread.CheckedValue = "false";
          AV10cWWPNotificationIsRead = StringUtil.StrToBool( StringUtil.BoolToStr( AV10cWWPNotificationIsRead));
@@ -1869,47 +1863,36 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'GRID1_nFirstRecordOnPage'},{av:'GRID1_nEOF'},{av:'subGrid1_Rows',ctrl:'GRID1',prop:'Rows'},{av:'AV6cWWPNotificationId',fld:'vCWWPNOTIFICATIONID',pic:'ZZZZZZZZZ9'},{av:'AV7cWWPNotificationDefinitionId',fld:'vCWWPNOTIFICATIONDEFINITIONID',pic:'ZZZZZZZZZ9'},{av:'AV8cWWPNotificationCreated',fld:'vCWWPNOTIFICATIONCREATED',pic:'99/99/9999 99:99:99.999'},{av:'AV9cWWPNotificationIcon',fld:'vCWWPNOTIFICATIONICON',pic:''},{av:'AV11cWWPUserExtendedId',fld:'vCWWPUSEREXTENDEDID',pic:''},{av:'AV10cWWPNotificationIsRead',fld:'vCWWPNOTIFICATIONISREAD',pic:''}]");
-         setEventMetadata("REFRESH",",oparms:[]}");
-         setEventMetadata("'TOGGLE'","{handler:'E165I1',iparms:[{av:'divAdvancedcontainer_Class',ctrl:'ADVANCEDCONTAINER',prop:'Class'},{ctrl:'BTNTOGGLE',prop:'Class'}]");
-         setEventMetadata("'TOGGLE'",",oparms:[{av:'divAdvancedcontainer_Class',ctrl:'ADVANCEDCONTAINER',prop:'Class'},{ctrl:'BTNTOGGLE',prop:'Class'}]}");
-         setEventMetadata("LBLWWPNOTIFICATIONIDFILTER.CLICK","{handler:'E115I1',iparms:[{av:'divWwpnotificationidfiltercontainer_Class',ctrl:'WWPNOTIFICATIONIDFILTERCONTAINER',prop:'Class'}]");
-         setEventMetadata("LBLWWPNOTIFICATIONIDFILTER.CLICK",",oparms:[{av:'divWwpnotificationidfiltercontainer_Class',ctrl:'WWPNOTIFICATIONIDFILTERCONTAINER',prop:'Class'},{av:'edtavCwwpnotificationid_Visible',ctrl:'vCWWPNOTIFICATIONID',prop:'Visible'}]}");
-         setEventMetadata("LBLWWPNOTIFICATIONDEFINITIONIDFILTER.CLICK","{handler:'E125I1',iparms:[{av:'divWwpnotificationdefinitionidfiltercontainer_Class',ctrl:'WWPNOTIFICATIONDEFINITIONIDFILTERCONTAINER',prop:'Class'}]");
-         setEventMetadata("LBLWWPNOTIFICATIONDEFINITIONIDFILTER.CLICK",",oparms:[{av:'divWwpnotificationdefinitionidfiltercontainer_Class',ctrl:'WWPNOTIFICATIONDEFINITIONIDFILTERCONTAINER',prop:'Class'},{av:'edtavCwwpnotificationdefinitionid_Visible',ctrl:'vCWWPNOTIFICATIONDEFINITIONID',prop:'Visible'}]}");
-         setEventMetadata("LBLWWPNOTIFICATIONICONFILTER.CLICK","{handler:'E135I1',iparms:[{av:'divWwpnotificationiconfiltercontainer_Class',ctrl:'WWPNOTIFICATIONICONFILTERCONTAINER',prop:'Class'}]");
-         setEventMetadata("LBLWWPNOTIFICATIONICONFILTER.CLICK",",oparms:[{av:'divWwpnotificationiconfiltercontainer_Class',ctrl:'WWPNOTIFICATIONICONFILTERCONTAINER',prop:'Class'},{av:'edtavCwwpnotificationicon_Visible',ctrl:'vCWWPNOTIFICATIONICON',prop:'Visible'}]}");
-         setEventMetadata("LBLWWPNOTIFICATIONISREADFILTER.CLICK","{handler:'E145I1',iparms:[{av:'divWwpnotificationisreadfiltercontainer_Class',ctrl:'WWPNOTIFICATIONISREADFILTERCONTAINER',prop:'Class'}]");
-         setEventMetadata("LBLWWPNOTIFICATIONISREADFILTER.CLICK",",oparms:[{av:'divWwpnotificationisreadfiltercontainer_Class',ctrl:'WWPNOTIFICATIONISREADFILTERCONTAINER',prop:'Class'},{av:'chkavCwwpnotificationisread.Visible',ctrl:'vCWWPNOTIFICATIONISREAD',prop:'Visible'}]}");
-         setEventMetadata("LBLWWPUSEREXTENDEDIDFILTER.CLICK","{handler:'E155I1',iparms:[{av:'divWwpuserextendedidfiltercontainer_Class',ctrl:'WWPUSEREXTENDEDIDFILTERCONTAINER',prop:'Class'}]");
-         setEventMetadata("LBLWWPUSEREXTENDEDIDFILTER.CLICK",",oparms:[{av:'divWwpuserextendedidfiltercontainer_Class',ctrl:'WWPUSEREXTENDEDIDFILTERCONTAINER',prop:'Class'},{av:'edtavCwwpuserextendedid_Visible',ctrl:'vCWWPUSEREXTENDEDID',prop:'Visible'}]}");
-         setEventMetadata("ENTER","{handler:'E195I2',iparms:[{av:'A22WWPNotificationId',fld:'WWPNOTIFICATIONID',pic:'ZZZZZZZZZ9',hsh:true}]");
-         setEventMetadata("ENTER",",oparms:[{av:'AV12pWWPNotificationId',fld:'vPWWPNOTIFICATIONID',pic:'ZZZZZZZZZ9'}]}");
-         setEventMetadata("GRID1_FIRSTPAGE","{handler:'subgrid1_firstpage',iparms:[{av:'GRID1_nFirstRecordOnPage'},{av:'GRID1_nEOF'},{av:'subGrid1_Rows',ctrl:'GRID1',prop:'Rows'},{av:'AV6cWWPNotificationId',fld:'vCWWPNOTIFICATIONID',pic:'ZZZZZZZZZ9'},{av:'AV7cWWPNotificationDefinitionId',fld:'vCWWPNOTIFICATIONDEFINITIONID',pic:'ZZZZZZZZZ9'},{av:'AV8cWWPNotificationCreated',fld:'vCWWPNOTIFICATIONCREATED',pic:'99/99/9999 99:99:99.999'},{av:'AV9cWWPNotificationIcon',fld:'vCWWPNOTIFICATIONICON',pic:''},{av:'AV11cWWPUserExtendedId',fld:'vCWWPUSEREXTENDEDID',pic:''},{av:'AV10cWWPNotificationIsRead',fld:'vCWWPNOTIFICATIONISREAD',pic:''}]");
-         setEventMetadata("GRID1_FIRSTPAGE",",oparms:[]}");
-         setEventMetadata("GRID1_PREVPAGE","{handler:'subgrid1_previouspage',iparms:[{av:'GRID1_nFirstRecordOnPage'},{av:'GRID1_nEOF'},{av:'subGrid1_Rows',ctrl:'GRID1',prop:'Rows'},{av:'AV6cWWPNotificationId',fld:'vCWWPNOTIFICATIONID',pic:'ZZZZZZZZZ9'},{av:'AV7cWWPNotificationDefinitionId',fld:'vCWWPNOTIFICATIONDEFINITIONID',pic:'ZZZZZZZZZ9'},{av:'AV8cWWPNotificationCreated',fld:'vCWWPNOTIFICATIONCREATED',pic:'99/99/9999 99:99:99.999'},{av:'AV9cWWPNotificationIcon',fld:'vCWWPNOTIFICATIONICON',pic:''},{av:'AV11cWWPUserExtendedId',fld:'vCWWPUSEREXTENDEDID',pic:''},{av:'AV10cWWPNotificationIsRead',fld:'vCWWPNOTIFICATIONISREAD',pic:''}]");
-         setEventMetadata("GRID1_PREVPAGE",",oparms:[]}");
-         setEventMetadata("GRID1_NEXTPAGE","{handler:'subgrid1_nextpage',iparms:[{av:'GRID1_nFirstRecordOnPage'},{av:'GRID1_nEOF'},{av:'subGrid1_Rows',ctrl:'GRID1',prop:'Rows'},{av:'AV6cWWPNotificationId',fld:'vCWWPNOTIFICATIONID',pic:'ZZZZZZZZZ9'},{av:'AV7cWWPNotificationDefinitionId',fld:'vCWWPNOTIFICATIONDEFINITIONID',pic:'ZZZZZZZZZ9'},{av:'AV8cWWPNotificationCreated',fld:'vCWWPNOTIFICATIONCREATED',pic:'99/99/9999 99:99:99.999'},{av:'AV9cWWPNotificationIcon',fld:'vCWWPNOTIFICATIONICON',pic:''},{av:'AV11cWWPUserExtendedId',fld:'vCWWPUSEREXTENDEDID',pic:''},{av:'AV10cWWPNotificationIsRead',fld:'vCWWPNOTIFICATIONISREAD',pic:''}]");
-         setEventMetadata("GRID1_NEXTPAGE",",oparms:[]}");
-         setEventMetadata("GRID1_LASTPAGE","{handler:'subgrid1_lastpage',iparms:[{av:'GRID1_nFirstRecordOnPage'},{av:'GRID1_nEOF'},{av:'subGrid1_Rows',ctrl:'GRID1',prop:'Rows'},{av:'AV6cWWPNotificationId',fld:'vCWWPNOTIFICATIONID',pic:'ZZZZZZZZZ9'},{av:'AV7cWWPNotificationDefinitionId',fld:'vCWWPNOTIFICATIONDEFINITIONID',pic:'ZZZZZZZZZ9'},{av:'AV8cWWPNotificationCreated',fld:'vCWWPNOTIFICATIONCREATED',pic:'99/99/9999 99:99:99.999'},{av:'AV9cWWPNotificationIcon',fld:'vCWWPNOTIFICATIONICON',pic:''},{av:'AV11cWWPUserExtendedId',fld:'vCWWPUSEREXTENDEDID',pic:''},{av:'AV10cWWPNotificationIsRead',fld:'vCWWPNOTIFICATIONISREAD',pic:''}]");
-         setEventMetadata("GRID1_LASTPAGE",",oparms:[]}");
-         setEventMetadata("NULL","{handler:'Valid_Wwpnotificationisread',iparms:[]");
-         setEventMetadata("NULL",",oparms:[]}");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"GRID1_nFirstRecordOnPage"},{"av":"GRID1_nEOF"},{"av":"subGrid1_Rows","ctrl":"GRID1","prop":"Rows"},{"av":"AV6cWWPNotificationId","fld":"vCWWPNOTIFICATIONID","pic":"ZZZZZZZZZ9"},{"av":"AV7cWWPNotificationDefinitionId","fld":"vCWWPNOTIFICATIONDEFINITIONID","pic":"ZZZZZZZZZ9"},{"av":"AV8cWWPNotificationCreated","fld":"vCWWPNOTIFICATIONCREATED","pic":"99/99/9999 99:99:99.999"},{"av":"AV9cWWPNotificationIcon","fld":"vCWWPNOTIFICATIONICON"},{"av":"AV11cWWPUserExtendedId","fld":"vCWWPUSEREXTENDEDID"},{"av":"AV10cWWPNotificationIsRead","fld":"vCWWPNOTIFICATIONISREAD"}]}""");
+         setEventMetadata("'TOGGLE'","""{"handler":"E165I1","iparms":[{"av":"divAdvancedcontainer_Class","ctrl":"ADVANCEDCONTAINER","prop":"Class"},{"ctrl":"BTNTOGGLE","prop":"Class"}]""");
+         setEventMetadata("'TOGGLE'",""","oparms":[{"av":"divAdvancedcontainer_Class","ctrl":"ADVANCEDCONTAINER","prop":"Class"},{"ctrl":"BTNTOGGLE","prop":"Class"}]}""");
+         setEventMetadata("LBLWWPNOTIFICATIONIDFILTER.CLICK","""{"handler":"E115I1","iparms":[{"av":"divWwpnotificationidfiltercontainer_Class","ctrl":"WWPNOTIFICATIONIDFILTERCONTAINER","prop":"Class"}]""");
+         setEventMetadata("LBLWWPNOTIFICATIONIDFILTER.CLICK",""","oparms":[{"av":"divWwpnotificationidfiltercontainer_Class","ctrl":"WWPNOTIFICATIONIDFILTERCONTAINER","prop":"Class"},{"av":"edtavCwwpnotificationid_Visible","ctrl":"vCWWPNOTIFICATIONID","prop":"Visible"}]}""");
+         setEventMetadata("LBLWWPNOTIFICATIONDEFINITIONIDFILTER.CLICK","""{"handler":"E125I1","iparms":[{"av":"divWwpnotificationdefinitionidfiltercontainer_Class","ctrl":"WWPNOTIFICATIONDEFINITIONIDFILTERCONTAINER","prop":"Class"}]""");
+         setEventMetadata("LBLWWPNOTIFICATIONDEFINITIONIDFILTER.CLICK",""","oparms":[{"av":"divWwpnotificationdefinitionidfiltercontainer_Class","ctrl":"WWPNOTIFICATIONDEFINITIONIDFILTERCONTAINER","prop":"Class"},{"av":"edtavCwwpnotificationdefinitionid_Visible","ctrl":"vCWWPNOTIFICATIONDEFINITIONID","prop":"Visible"}]}""");
+         setEventMetadata("LBLWWPNOTIFICATIONICONFILTER.CLICK","""{"handler":"E135I1","iparms":[{"av":"divWwpnotificationiconfiltercontainer_Class","ctrl":"WWPNOTIFICATIONICONFILTERCONTAINER","prop":"Class"}]""");
+         setEventMetadata("LBLWWPNOTIFICATIONICONFILTER.CLICK",""","oparms":[{"av":"divWwpnotificationiconfiltercontainer_Class","ctrl":"WWPNOTIFICATIONICONFILTERCONTAINER","prop":"Class"},{"av":"edtavCwwpnotificationicon_Visible","ctrl":"vCWWPNOTIFICATIONICON","prop":"Visible"}]}""");
+         setEventMetadata("LBLWWPNOTIFICATIONISREADFILTER.CLICK","""{"handler":"E145I1","iparms":[{"av":"divWwpnotificationisreadfiltercontainer_Class","ctrl":"WWPNOTIFICATIONISREADFILTERCONTAINER","prop":"Class"}]""");
+         setEventMetadata("LBLWWPNOTIFICATIONISREADFILTER.CLICK",""","oparms":[{"av":"divWwpnotificationisreadfiltercontainer_Class","ctrl":"WWPNOTIFICATIONISREADFILTERCONTAINER","prop":"Class"},{"av":"chkavCwwpnotificationisread.Visible","ctrl":"vCWWPNOTIFICATIONISREAD","prop":"Visible"}]}""");
+         setEventMetadata("LBLWWPUSEREXTENDEDIDFILTER.CLICK","""{"handler":"E155I1","iparms":[{"av":"divWwpuserextendedidfiltercontainer_Class","ctrl":"WWPUSEREXTENDEDIDFILTERCONTAINER","prop":"Class"}]""");
+         setEventMetadata("LBLWWPUSEREXTENDEDIDFILTER.CLICK",""","oparms":[{"av":"divWwpuserextendedidfiltercontainer_Class","ctrl":"WWPUSEREXTENDEDIDFILTERCONTAINER","prop":"Class"},{"av":"edtavCwwpuserextendedid_Visible","ctrl":"vCWWPUSEREXTENDEDID","prop":"Visible"}]}""");
+         setEventMetadata("ENTER","""{"handler":"E195I2","iparms":[{"av":"A22WWPNotificationId","fld":"WWPNOTIFICATIONID","pic":"ZZZZZZZZZ9","hsh":true}]""");
+         setEventMetadata("ENTER",""","oparms":[{"av":"AV12pWWPNotificationId","fld":"vPWWPNOTIFICATIONID","pic":"ZZZZZZZZZ9"}]}""");
+         setEventMetadata("GRID1_FIRSTPAGE","""{"handler":"subgrid1_firstpage","iparms":[{"av":"GRID1_nFirstRecordOnPage"},{"av":"GRID1_nEOF"},{"av":"subGrid1_Rows","ctrl":"GRID1","prop":"Rows"},{"av":"AV6cWWPNotificationId","fld":"vCWWPNOTIFICATIONID","pic":"ZZZZZZZZZ9"},{"av":"AV7cWWPNotificationDefinitionId","fld":"vCWWPNOTIFICATIONDEFINITIONID","pic":"ZZZZZZZZZ9"},{"av":"AV8cWWPNotificationCreated","fld":"vCWWPNOTIFICATIONCREATED","pic":"99/99/9999 99:99:99.999"},{"av":"AV9cWWPNotificationIcon","fld":"vCWWPNOTIFICATIONICON"},{"av":"AV11cWWPUserExtendedId","fld":"vCWWPUSEREXTENDEDID"},{"av":"AV10cWWPNotificationIsRead","fld":"vCWWPNOTIFICATIONISREAD"}]}""");
+         setEventMetadata("GRID1_PREVPAGE","""{"handler":"subgrid1_previouspage","iparms":[{"av":"GRID1_nFirstRecordOnPage"},{"av":"GRID1_nEOF"},{"av":"subGrid1_Rows","ctrl":"GRID1","prop":"Rows"},{"av":"AV6cWWPNotificationId","fld":"vCWWPNOTIFICATIONID","pic":"ZZZZZZZZZ9"},{"av":"AV7cWWPNotificationDefinitionId","fld":"vCWWPNOTIFICATIONDEFINITIONID","pic":"ZZZZZZZZZ9"},{"av":"AV8cWWPNotificationCreated","fld":"vCWWPNOTIFICATIONCREATED","pic":"99/99/9999 99:99:99.999"},{"av":"AV9cWWPNotificationIcon","fld":"vCWWPNOTIFICATIONICON"},{"av":"AV11cWWPUserExtendedId","fld":"vCWWPUSEREXTENDEDID"},{"av":"AV10cWWPNotificationIsRead","fld":"vCWWPNOTIFICATIONISREAD"}]}""");
+         setEventMetadata("GRID1_NEXTPAGE","""{"handler":"subgrid1_nextpage","iparms":[{"av":"GRID1_nFirstRecordOnPage"},{"av":"GRID1_nEOF"},{"av":"subGrid1_Rows","ctrl":"GRID1","prop":"Rows"},{"av":"AV6cWWPNotificationId","fld":"vCWWPNOTIFICATIONID","pic":"ZZZZZZZZZ9"},{"av":"AV7cWWPNotificationDefinitionId","fld":"vCWWPNOTIFICATIONDEFINITIONID","pic":"ZZZZZZZZZ9"},{"av":"AV8cWWPNotificationCreated","fld":"vCWWPNOTIFICATIONCREATED","pic":"99/99/9999 99:99:99.999"},{"av":"AV9cWWPNotificationIcon","fld":"vCWWPNOTIFICATIONICON"},{"av":"AV11cWWPUserExtendedId","fld":"vCWWPUSEREXTENDEDID"},{"av":"AV10cWWPNotificationIsRead","fld":"vCWWPNOTIFICATIONISREAD"}]}""");
+         setEventMetadata("GRID1_LASTPAGE","""{"handler":"subgrid1_lastpage","iparms":[{"av":"GRID1_nFirstRecordOnPage"},{"av":"GRID1_nEOF"},{"av":"subGrid1_Rows","ctrl":"GRID1","prop":"Rows"},{"av":"AV6cWWPNotificationId","fld":"vCWWPNOTIFICATIONID","pic":"ZZZZZZZZZ9"},{"av":"AV7cWWPNotificationDefinitionId","fld":"vCWWPNOTIFICATIONDEFINITIONID","pic":"ZZZZZZZZZ9"},{"av":"AV8cWWPNotificationCreated","fld":"vCWWPNOTIFICATIONCREATED","pic":"99/99/9999 99:99:99.999"},{"av":"AV9cWWPNotificationIcon","fld":"vCWWPNOTIFICATIONICON"},{"av":"AV11cWWPUserExtendedId","fld":"vCWWPUSEREXTENDEDID"},{"av":"AV10cWWPNotificationIsRead","fld":"vCWWPNOTIFICATIONISREAD"}]}""");
+         setEventMetadata("NULL","""{"handler":"Valid_Wwpnotificationisread","iparms":[]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -1946,7 +1929,6 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
          AV5LinkSelection = "";
          AV14Linkselection_GXI = "";
          A24WWPNotificationCreated = (DateTime)(DateTime.MinValue);
-         scmdbuf = "";
          lV9cWWPNotificationIcon = "";
          lV11cWWPUserExtendedId = "";
          A76WWPNotificationIcon = "";
@@ -1984,7 +1966,6 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
       private short GRID1_nEOF ;
       private short nGotPars ;
       private short GxWebError ;
-      private short initialized ;
       private short gxajaxcallmode ;
       private short wbEnd ;
       private short wbStart ;
@@ -2098,7 +2079,6 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
       private string edtWWPNotificationDefinitionId_Internalname ;
       private string edtWWPNotificationCreated_Internalname ;
       private string chkWWPNotificationIsRead_Internalname ;
-      private string scmdbuf ;
       private string lV11cWWPUserExtendedId ;
       private string A7WWPUserExtendedId ;
       private string AV13ADVANCED_LABEL_TEMPLATE ;
@@ -2137,6 +2117,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
       private GXWebGrid Grid1Container ;
       private GXWebRow Grid1Row ;
       private GXWebColumn Grid1Column ;
+      private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private GXCheckbox chkavCwwpnotificationisread ;
@@ -2153,7 +2134,6 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
       private long aP0_pWWPNotificationId ;
-      private GXWebForm Form ;
    }
 
    public class gx0090__default : DataStoreHelperBase, IDataStoreHelper

@@ -80,7 +80,7 @@ namespace GeneXus.Programs {
          this.AV39OptionsDescJson = "" ;
          this.AV40OptionIndexesJson = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP3_OptionsJson=this.AV38OptionsJson;
          aP4_OptionsDescJson=this.AV39OptionsDescJson;
          aP5_OptionIndexesJson=this.AV40OptionIndexesJson;
@@ -103,36 +103,19 @@ namespace GeneXus.Programs {
                                  out string aP4_OptionsDescJson ,
                                  out string aP5_OptionIndexesJson )
       {
-         companywwgetfilterdata objcompanywwgetfilterdata;
-         objcompanywwgetfilterdata = new companywwgetfilterdata();
-         objcompanywwgetfilterdata.AV35DDOName = aP0_DDOName;
-         objcompanywwgetfilterdata.AV36SearchTxtParms = aP1_SearchTxtParms;
-         objcompanywwgetfilterdata.AV37SearchTxtTo = aP2_SearchTxtTo;
-         objcompanywwgetfilterdata.AV38OptionsJson = "" ;
-         objcompanywwgetfilterdata.AV39OptionsDescJson = "" ;
-         objcompanywwgetfilterdata.AV40OptionIndexesJson = "" ;
-         objcompanywwgetfilterdata.context.SetSubmitInitialConfig(context);
-         objcompanywwgetfilterdata.initialize();
-         Submit( executePrivateCatch,objcompanywwgetfilterdata);
+         this.AV35DDOName = aP0_DDOName;
+         this.AV36SearchTxtParms = aP1_SearchTxtParms;
+         this.AV37SearchTxtTo = aP2_SearchTxtTo;
+         this.AV38OptionsJson = "" ;
+         this.AV39OptionsDescJson = "" ;
+         this.AV40OptionIndexesJson = "" ;
+         SubmitImpl();
          aP3_OptionsJson=this.AV38OptionsJson;
          aP4_OptionsDescJson=this.AV39OptionsDescJson;
          aP5_OptionIndexesJson=this.AV40OptionIndexesJson;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((companywwgetfilterdata)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -148,7 +131,7 @@ namespace GeneXus.Programs {
          S111 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          if ( StringUtil.StrCmp(StringUtil.Upper( AV35DDOName), "DDO_COMPANYNAME") == 0 )
@@ -157,7 +140,7 @@ namespace GeneXus.Programs {
             S121 ();
             if ( returnInSub )
             {
-               this.cleanup();
+               cleanup();
                if (true) return;
             }
          }
@@ -167,14 +150,14 @@ namespace GeneXus.Programs {
             S131 ();
             if ( returnInSub )
             {
-               this.cleanup();
+               cleanup();
                if (true) return;
             }
          }
          AV38OptionsJson = AV25Options.ToJSonString(false);
          AV39OptionsDescJson = AV27OptionsDesc.ToJSonString(false);
          AV40OptionIndexesJson = AV28OptionIndexes.ToJSonString(false);
-         this.cleanup();
+         cleanup();
       }
 
       protected void S111( )
@@ -361,16 +344,12 @@ namespace GeneXus.Programs {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -396,7 +375,6 @@ namespace GeneXus.Programs {
          AV48Companywwds_3_tfcompanyname_sel = "";
          AV49Companywwds_4_tfcompanylocationname = "";
          AV50Companywwds_5_tfcompanylocationname_sel = "";
-         scmdbuf = "";
          lV46Companywwds_1_filterfulltext = "";
          lV47Companywwds_2_tfcompanyname = "";
          lV49Companywwds_4_tfcompanylocationname = "";
@@ -440,7 +418,6 @@ namespace GeneXus.Programs {
       private string AV48Companywwds_3_tfcompanyname_sel ;
       private string AV49Companywwds_4_tfcompanylocationname ;
       private string AV50Companywwds_5_tfcompanylocationname_sel ;
-      private string scmdbuf ;
       private string lV47Companywwds_2_tfcompanyname ;
       private string lV49Companywwds_4_tfcompanylocationname ;
       private string A101CompanyName ;
@@ -462,6 +439,12 @@ namespace GeneXus.Programs {
       private IGxSession AV30Session ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GxSimpleCollection<string> AV25Options ;
+      private GxSimpleCollection<string> AV27OptionsDesc ;
+      private GxSimpleCollection<string> AV28OptionIndexes ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV9WWPContext ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState AV32GridState ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue AV33GridStateFilterValue ;
       private IDataStoreProvider pr_default ;
       private long[] P00692_A157CompanyLocationId ;
       private string[] P00692_A101CompanyName ;
@@ -474,12 +457,6 @@ namespace GeneXus.Programs {
       private string aP3_OptionsJson ;
       private string aP4_OptionsDescJson ;
       private string aP5_OptionIndexesJson ;
-      private GxSimpleCollection<string> AV25Options ;
-      private GxSimpleCollection<string> AV27OptionsDesc ;
-      private GxSimpleCollection<string> AV28OptionIndexes ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV9WWPContext ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState AV32GridState ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue AV33GridStateFilterValue ;
    }
 
    public class companywwgetfilterdata__default : DataStoreHelperBase, IDataStoreHelper
@@ -500,7 +477,7 @@ namespace GeneXus.Programs {
          scmdbuf = "SELECT T1.CompanyLocationId, T1.CompanyName, T2.CompanyLocationName, T1.CompanyId FROM (Company T1 INNER JOIN CompanyLocation T2 ON T2.CompanyLocationId = T1.CompanyLocationId)";
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV46Companywwds_1_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( LOWER(T1.CompanyName) like '%' || LOWER(:lV46Companywwds_1_filterfulltext)) or ( LOWER(T2.CompanyLocationName) like '%' || LOWER(:lV46Companywwds_1_filterfulltext)))");
+            AddWhere(sWhereString, "(( T1.CompanyName like '%' || :lV46Companywwds_1_filterfulltext) or ( T2.CompanyLocationName like '%' || :lV46Companywwds_1_filterfulltext))");
          }
          else
          {
@@ -509,7 +486,7 @@ namespace GeneXus.Programs {
          }
          if ( String.IsNullOrEmpty(StringUtil.RTrim( AV48Companywwds_3_tfcompanyname_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV47Companywwds_2_tfcompanyname)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(T1.CompanyName) like LOWER(:lV47Companywwds_2_tfcompanyname))");
+            AddWhere(sWhereString, "(T1.CompanyName like :lV47Companywwds_2_tfcompanyname)");
          }
          else
          {
@@ -529,7 +506,7 @@ namespace GeneXus.Programs {
          }
          if ( String.IsNullOrEmpty(StringUtil.RTrim( AV50Companywwds_5_tfcompanylocationname_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV49Companywwds_4_tfcompanylocationname)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(T2.CompanyLocationName) like LOWER(:lV49Companywwds_4_tfcompanylocationname))");
+            AddWhere(sWhereString, "(T2.CompanyLocationName like :lV49Companywwds_4_tfcompanylocationname)");
          }
          else
          {
@@ -570,7 +547,7 @@ namespace GeneXus.Programs {
          scmdbuf = "SELECT T1.CompanyLocationId, T2.CompanyLocationName, T1.CompanyName, T1.CompanyId FROM (Company T1 INNER JOIN CompanyLocation T2 ON T2.CompanyLocationId = T1.CompanyLocationId)";
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV46Companywwds_1_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( LOWER(T1.CompanyName) like '%' || LOWER(:lV46Companywwds_1_filterfulltext)) or ( LOWER(T2.CompanyLocationName) like '%' || LOWER(:lV46Companywwds_1_filterfulltext)))");
+            AddWhere(sWhereString, "(( T1.CompanyName like '%' || :lV46Companywwds_1_filterfulltext) or ( T2.CompanyLocationName like '%' || :lV46Companywwds_1_filterfulltext))");
          }
          else
          {
@@ -579,7 +556,7 @@ namespace GeneXus.Programs {
          }
          if ( String.IsNullOrEmpty(StringUtil.RTrim( AV48Companywwds_3_tfcompanyname_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV47Companywwds_2_tfcompanyname)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(T1.CompanyName) like LOWER(:lV47Companywwds_2_tfcompanyname))");
+            AddWhere(sWhereString, "(T1.CompanyName like :lV47Companywwds_2_tfcompanyname)");
          }
          else
          {
@@ -599,7 +576,7 @@ namespace GeneXus.Programs {
          }
          if ( String.IsNullOrEmpty(StringUtil.RTrim( AV50Companywwds_5_tfcompanylocationname_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV49Companywwds_4_tfcompanylocationname)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(T2.CompanyLocationName) like LOWER(:lV49Companywwds_4_tfcompanylocationname))");
+            AddWhere(sWhereString, "(T2.CompanyLocationName like :lV49Companywwds_4_tfcompanylocationname)");
          }
          else
          {

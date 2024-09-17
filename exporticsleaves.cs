@@ -55,7 +55,7 @@ namespace GeneXus.Programs {
          this.AV6Filename = "" ;
          this.AV7ErrorMessage = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP4_Filename=this.AV6Filename;
          aP5_ErrorMessage=this.AV7ErrorMessage;
       }
@@ -77,35 +77,18 @@ namespace GeneXus.Programs {
                                  out string aP4_Filename ,
                                  out string aP5_ErrorMessage )
       {
-         exporticsleaves objexporticsleaves;
-         objexporticsleaves = new exporticsleaves();
-         objexporticsleaves.AV2FromDate = aP0_FromDate;
-         objexporticsleaves.AV3ToDate = aP1_ToDate;
-         objexporticsleaves.AV4CompanyLocationId = aP2_CompanyLocationId;
-         objexporticsleaves.AV5EmployeeIds = aP3_EmployeeIds;
-         objexporticsleaves.AV6Filename = "" ;
-         objexporticsleaves.AV7ErrorMessage = "" ;
-         objexporticsleaves.context.SetSubmitInitialConfig(context);
-         objexporticsleaves.initialize();
-         Submit( executePrivateCatch,objexporticsleaves);
+         this.AV2FromDate = aP0_FromDate;
+         this.AV3ToDate = aP1_ToDate;
+         this.AV4CompanyLocationId = aP2_CompanyLocationId;
+         this.AV5EmployeeIds = aP3_EmployeeIds;
+         this.AV6Filename = "" ;
+         this.AV7ErrorMessage = "" ;
+         SubmitImpl();
          aP4_Filename=this.AV6Filename;
          aP5_ErrorMessage=this.AV7ErrorMessage;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((exporticsleaves)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -116,20 +99,16 @@ namespace GeneXus.Programs {
             AV6Filename = (string)(args[4]) ;
             AV7ErrorMessage = (string)(args[5]) ;
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -144,9 +123,9 @@ namespace GeneXus.Programs {
       private DateTime AV3ToDate ;
       private string AV6Filename ;
       private string AV7ErrorMessage ;
-      private GxSimpleCollection<long> AV5EmployeeIds ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GxSimpleCollection<long> AV5EmployeeIds ;
       private Object[] args ;
       private string aP4_Filename ;
       private string aP5_ErrorMessage ;

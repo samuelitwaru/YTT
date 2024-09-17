@@ -46,33 +46,16 @@ namespace GeneXus.Programs {
       {
          this.A109EmployeeEmail = aP0_EmployeeEmail;
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
       public void executeSubmit( string aP0_EmployeeEmail )
       {
-         deleteemployeeaccount objdeleteemployeeaccount;
-         objdeleteemployeeaccount = new deleteemployeeaccount();
-         objdeleteemployeeaccount.A109EmployeeEmail = aP0_EmployeeEmail;
-         objdeleteemployeeaccount.context.SetSubmitInitialConfig(context);
-         objdeleteemployeeaccount.initialize();
-         Submit( executePrivateCatch,objdeleteemployeeaccount);
+         this.A109EmployeeEmail = aP0_EmployeeEmail;
+         SubmitImpl();
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((deleteemployeeaccount)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -81,21 +64,17 @@ namespace GeneXus.Programs {
          {
             context.CommitDataStores("deleteemployeeaccount",pr_default);
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -116,10 +95,10 @@ namespace GeneXus.Programs {
       private string A109EmployeeEmail ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GeneXus.Programs.genexussecurity.SdtGAMUser AV10GAMUser ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV9GAMErrorCollection ;
       private IDataStoreProvider pr_default ;
       private IDataStoreProvider pr_gam ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV9GAMErrorCollection ;
-      private GeneXus.Programs.genexussecurity.SdtGAMUser AV10GAMUser ;
    }
 
    public class deleteemployeeaccount__gam : DataStoreHelperBase, IDataStoreHelper

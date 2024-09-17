@@ -40,7 +40,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       {
          this.AV8TitleSettingsIcons = new GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsTitleSettingsIcons(context) ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_TitleSettingsIcons=this.AV8TitleSettingsIcons;
       }
 
@@ -52,29 +52,12 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       public void executeSubmit( out GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsTitleSettingsIcons aP0_TitleSettingsIcons )
       {
-         getwwptitlesettingsicons objgetwwptitlesettingsicons;
-         objgetwwptitlesettingsicons = new getwwptitlesettingsicons();
-         objgetwwptitlesettingsicons.AV8TitleSettingsIcons = new GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsTitleSettingsIcons(context) ;
-         objgetwwptitlesettingsicons.context.SetSubmitInitialConfig(context);
-         objgetwwptitlesettingsicons.initialize();
-         Submit( executePrivateCatch,objgetwwptitlesettingsicons);
+         this.AV8TitleSettingsIcons = new GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsTitleSettingsIcons(context) ;
+         SubmitImpl();
          aP0_TitleSettingsIcons=this.AV8TitleSettingsIcons;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((getwwptitlesettingsicons)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -96,21 +79,17 @@ namespace GeneXus.Programs.wwpbaseobjects {
          AV8TitleSettingsIcons.gxTpr_Treeviewexpand_fi = "fas fa-angle-right";
          AV8TitleSettingsIcons.gxTpr_Fixleft_fi = "fa fa-rotate-270 fa-table CSDropDownFI";
          AV8TitleSettingsIcons.gxTpr_Fixright_fi = "fa fa-rotate-90 fa-table CSDropDownFI";
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -119,8 +98,8 @@ namespace GeneXus.Programs.wwpbaseobjects {
          /* GeneXus formulas. */
       }
 
-      private GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsTitleSettingsIcons aP0_TitleSettingsIcons ;
       private GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsTitleSettingsIcons AV8TitleSettingsIcons ;
+      private GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsTitleSettingsIcons aP0_TitleSettingsIcons ;
    }
 
 }

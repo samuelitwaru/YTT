@@ -26,20 +26,15 @@ namespace GeneXus.Programs.general.services {
    {
       public static int Main( string[] args )
       {
-         try
-         {
-            GeneXus.Configuration.Config.ParseArgs(ref args);
-            return new general.services.anotificationsregistrationhandler().executeCmdLine(args); ;
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-            return 1 ;
-         }
+         return new general.services.anotificationsregistrationhandler().MainImpl(args); ;
       }
 
       public int executeCmdLine( string[] args )
+      {
+         return ExecuteCmdLine(args); ;
+      }
+
+      protected override int ExecuteCmdLine( string[] args )
       {
           short aP0_DeviceType ;
          string aP1_DeviceId = new string(' ',0)  ;
@@ -109,7 +104,7 @@ namespace GeneXus.Programs.general.services {
          this.AV10DeviceToken = aP2_DeviceToken;
          this.AV9DeviceName = aP3_DeviceName;
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
       public void executeSubmit( short aP0_DeviceType ,
@@ -117,31 +112,14 @@ namespace GeneXus.Programs.general.services {
                                  string aP2_DeviceToken ,
                                  string aP3_DeviceName )
       {
-         anotificationsregistrationhandler objanotificationsregistrationhandler;
-         objanotificationsregistrationhandler = new anotificationsregistrationhandler();
-         objanotificationsregistrationhandler.AV11DeviceType = aP0_DeviceType;
-         objanotificationsregistrationhandler.AV8DeviceId = aP1_DeviceId;
-         objanotificationsregistrationhandler.AV10DeviceToken = aP2_DeviceToken;
-         objanotificationsregistrationhandler.AV9DeviceName = aP3_DeviceName;
-         objanotificationsregistrationhandler.context.SetSubmitInitialConfig(context);
-         objanotificationsregistrationhandler.initialize();
-         Submit( executePrivateCatch,objanotificationsregistrationhandler);
+         this.AV11DeviceType = aP0_DeviceType;
+         this.AV8DeviceId = aP1_DeviceId;
+         this.AV10DeviceToken = aP2_DeviceToken;
+         this.AV9DeviceName = aP3_DeviceName;
+         SubmitImpl();
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((anotificationsregistrationhandler)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -185,22 +163,18 @@ namespace GeneXus.Programs.general.services {
             }
             /* End Insert */
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
          context.CommitDataStores("general.services.notificationsregistrationhandler",pr_default);
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )

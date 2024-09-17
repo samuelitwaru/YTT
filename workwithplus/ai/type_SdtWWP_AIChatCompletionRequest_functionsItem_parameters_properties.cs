@@ -1,7 +1,7 @@
 /*
 				   File: type_SdtWWP_AIChatCompletionRequest_functionsItem_parameters_properties
 			Description: properties
-				 Author: Nemo 🐠 for C# (.NET) version 18.0.6.177934
+				 Author: Nemo 🐠 for C# (.NET) version 18.0.10.184260
 		   Program type: Callable routine
 			  Main DBMS: 
 */
@@ -75,6 +75,14 @@ namespace GeneXus.Programs.workwithplus.ai
 
 		#endregion
 
+		#region Static Type Properties
+
+		[XmlIgnore]
+		private static GXTypeInfo _typeProps;
+		protected override GXTypeInfo TypeInfo { get { return _typeProps; } set { _typeProps = value; } }
+
+		#endregion
+
 		#region Initialization
 
 		public void initialize( )
@@ -92,7 +100,7 @@ namespace GeneXus.Programs.workwithplus.ai
 		#endregion
 	}
 	#region Rest interface
-	[GxUnWrappedJson()]
+	[GxJsonSerialization("default")]
 	[DataContract(Name=@"WWP_AIChatCompletionRequest.functionsItem.parameters.properties", Namespace="YTT_version4")]
 	public class SdtWWP_AIChatCompletionRequest_functionsItem_parameters_properties_RESTInterface : GxGenericCollectionItem<SdtWWP_AIChatCompletionRequest_functionsItem_parameters_properties>, System.Web.SessionState.IRequiresSessionState
 	{

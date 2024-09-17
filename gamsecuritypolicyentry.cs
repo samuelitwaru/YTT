@@ -45,12 +45,12 @@ namespace GeneXus.Programs {
       {
          this.Gx_mode = aP0_Gx_mode;
          this.AV7Id = aP1_Id;
-         executePrivate();
+         ExecuteImpl();
          aP0_Gx_mode=this.Gx_mode;
          aP1_Id=this.AV7Id;
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -165,11 +165,8 @@ namespace GeneXus.Programs {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITWEB( ) ;
          if ( ! isAjaxCallMode( ) )
          {
@@ -200,7 +197,7 @@ namespace GeneXus.Programs {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override short ExecuteStartEvent( )
@@ -244,10 +241,10 @@ namespace GeneXus.Programs {
          CloseStyles();
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
@@ -851,7 +848,7 @@ namespace GeneXus.Programs {
          {
             if ( context.ExposeMetadata( ) )
             {
-               Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+               Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
             }
          }
          Form.Meta.addItem("description", "Security policy", 0) ;
@@ -1512,7 +1509,7 @@ namespace GeneXus.Programs {
          PA1J2( ) ;
          WS1J2( ) ;
          WE1J2( ) ;
-         this.cleanup();
+         cleanup();
          context.SetWrapped(false);
          context.GX_msglist = BackMsgLst;
          return "";
@@ -1533,7 +1530,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024812157321", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20249161316354", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1549,7 +1546,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("gamsecuritypolicyentry.js", "?2024812157321", false, true);
+         context.AddJavascriptSource("gamsecuritypolicyentry.js", "?20249161316354", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Panel/BootstrapPanelRender.js", "", false, true);
@@ -1714,27 +1711,20 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'AV7Id',fld:'vID',pic:'ZZZZZZZZZZZ9',hsh:true},{av:'Gx_mode',fld:'vMODE',pic:'@!',hsh:true},{av:'AV20SecurityPolicyGUID',fld:'vSECURITYPOLICYGUID',pic:'',hsh:true}]");
-         setEventMetadata("REFRESH",",oparms:[]}");
-         setEventMetadata("ENTER","{handler:'E121J2',iparms:[{av:'AV7Id',fld:'vID',pic:'ZZZZZZZZZZZ9',hsh:true},{av:'Gx_mode',fld:'vMODE',pic:'@!',hsh:true},{av:'AV20SecurityPolicyGUID',fld:'vSECURITYPOLICYGUID',pic:'',hsh:true},{av:'AV21SecurityPolicyName',fld:'vSECURITYPOLICYNAME',pic:''},{av:'AV12SecurityPolicyPeriodChangePassword',fld:'vSECURITYPOLICYPERIODCHANGEPASSWORD',pic:'ZZZ9'},{av:'AV13SecurityPolicyMinimumTimeToChangePasswords',fld:'vSECURITYPOLICYMINIMUMTIMETOCHANGEPASSWORDS',pic:'ZZZ9'},{av:'AV14SecurityPolicyMinimumLengthPassword',fld:'vSECURITYPOLICYMINIMUMLENGTHPASSWORD',pic:'Z9'},{av:'AV15SecurityPolicyMinimumNumericCharactersPassword',fld:'vSECURITYPOLICYMINIMUMNUMERICCHARACTERSPASSWORD',pic:'Z9'},{av:'AV16SecurityPolicyMinimumUpperCaseCharactersPassword',fld:'vSECURITYPOLICYMINIMUMUPPERCASECHARACTERSPASSWORD',pic:'Z9'},{av:'AV17SecurityPolicyMinimumSpecialCharactersPassword',fld:'vSECURITYPOLICYMINIMUMSPECIALCHARACTERSPASSWORD',pic:'Z9'},{av:'AV18SecurityPolicyMaximumPasswordHistoryEntries',fld:'vSECURITYPOLICYMAXIMUMPASSWORDHISTORYENTRIES',pic:'ZZZ9'},{av:'cmbavSecuritypolicyallowmultipleconcurrentwebsessions'},{av:'AV10SecurityPolicyAllowMultipleConcurrentWebSessions',fld:'vSECURITYPOLICYALLOWMULTIPLECONCURRENTWEBSESSIONS',pic:'ZZZ9'},{av:'AV11SecurityPolicyWebSessionTimeout',fld:'vSECURITYPOLICYWEBSESSIONTIMEOUT',pic:'ZZZ9'},{av:'AV9SecurityPolicyOauthTokenExpire',fld:'vSECURITYPOLICYOAUTHTOKENEXPIRE',pic:'ZZZZZ9'},{av:'AV22SecurityPolicyOauthTokenMaximumRenovations',fld:'vSECURITYPOLICYOAUTHTOKENMAXIMUMRENOVATIONS',pic:'ZZZZZ9'},{av:'AV28SecurityPolicyOauthAccessCodeExpire',fld:'vSECURITYPOLICYOAUTHACCESSCODEEXPIRE',pic:'ZZZZZ9'}]");
-         setEventMetadata("ENTER",",oparms:[{av:'AV19SecurityPolicyId',fld:'vSECURITYPOLICYID',pic:'ZZZZZZZZ9'}]}");
-         setEventMetadata("VALIDV_SECURITYPOLICYALLOWMULTIPLECONCURRENTWEBSESSIONS","{handler:'Validv_Securitypolicyallowmultipleconcurrentwebsessions',iparms:[]");
-         setEventMetadata("VALIDV_SECURITYPOLICYALLOWMULTIPLECONCURRENTWEBSESSIONS",",oparms:[]}");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"AV7Id","fld":"vID","pic":"ZZZZZZZZZZZ9","hsh":true},{"av":"Gx_mode","fld":"vMODE","pic":"@!","hsh":true},{"av":"AV20SecurityPolicyGUID","fld":"vSECURITYPOLICYGUID","hsh":true}]}""");
+         setEventMetadata("ENTER","""{"handler":"E121J2","iparms":[{"av":"AV7Id","fld":"vID","pic":"ZZZZZZZZZZZ9","hsh":true},{"av":"Gx_mode","fld":"vMODE","pic":"@!","hsh":true},{"av":"AV20SecurityPolicyGUID","fld":"vSECURITYPOLICYGUID","hsh":true},{"av":"AV21SecurityPolicyName","fld":"vSECURITYPOLICYNAME"},{"av":"AV12SecurityPolicyPeriodChangePassword","fld":"vSECURITYPOLICYPERIODCHANGEPASSWORD","pic":"ZZZ9"},{"av":"AV13SecurityPolicyMinimumTimeToChangePasswords","fld":"vSECURITYPOLICYMINIMUMTIMETOCHANGEPASSWORDS","pic":"ZZZ9"},{"av":"AV14SecurityPolicyMinimumLengthPassword","fld":"vSECURITYPOLICYMINIMUMLENGTHPASSWORD","pic":"Z9"},{"av":"AV15SecurityPolicyMinimumNumericCharactersPassword","fld":"vSECURITYPOLICYMINIMUMNUMERICCHARACTERSPASSWORD","pic":"Z9"},{"av":"AV16SecurityPolicyMinimumUpperCaseCharactersPassword","fld":"vSECURITYPOLICYMINIMUMUPPERCASECHARACTERSPASSWORD","pic":"Z9"},{"av":"AV17SecurityPolicyMinimumSpecialCharactersPassword","fld":"vSECURITYPOLICYMINIMUMSPECIALCHARACTERSPASSWORD","pic":"Z9"},{"av":"AV18SecurityPolicyMaximumPasswordHistoryEntries","fld":"vSECURITYPOLICYMAXIMUMPASSWORDHISTORYENTRIES","pic":"ZZZ9"},{"av":"cmbavSecuritypolicyallowmultipleconcurrentwebsessions"},{"av":"AV10SecurityPolicyAllowMultipleConcurrentWebSessions","fld":"vSECURITYPOLICYALLOWMULTIPLECONCURRENTWEBSESSIONS","pic":"ZZZ9"},{"av":"AV11SecurityPolicyWebSessionTimeout","fld":"vSECURITYPOLICYWEBSESSIONTIMEOUT","pic":"ZZZ9"},{"av":"AV9SecurityPolicyOauthTokenExpire","fld":"vSECURITYPOLICYOAUTHTOKENEXPIRE","pic":"ZZZZZ9"},{"av":"AV22SecurityPolicyOauthTokenMaximumRenovations","fld":"vSECURITYPOLICYOAUTHTOKENMAXIMUMRENOVATIONS","pic":"ZZZZZ9"},{"av":"AV28SecurityPolicyOauthAccessCodeExpire","fld":"vSECURITYPOLICYOAUTHACCESSCODEEXPIRE","pic":"ZZZZZ9"}]""");
+         setEventMetadata("ENTER",""","oparms":[{"av":"AV19SecurityPolicyId","fld":"vSECURITYPOLICYID","pic":"ZZZZZZZZ9"}]}""");
+         setEventMetadata("VALIDV_SECURITYPOLICYALLOWMULTIPLECONCURRENTWEBSESSIONS","""{"handler":"Validv_Securitypolicyallowmultipleconcurrentwebsessions","iparms":[]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -1786,7 +1776,6 @@ namespace GeneXus.Programs {
 
       private short nGotPars ;
       private short GxWebError ;
-      private short initialized ;
       private short gxajaxcallmode ;
       private short wbEnd ;
       private short wbStart ;
@@ -1944,19 +1933,19 @@ namespace GeneXus.Programs {
       private GXUserControl ucDvpanel_unnamedtable1 ;
       private GXUserControl ucDvpanel_onlyweb ;
       private GXUserControl ucDvpanel_onlysd ;
+      private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private string aP0_Gx_mode ;
       private long aP1_Id ;
       private GXCombobox cmbavSecuritypolicyallowmultipleconcurrentwebsessions ;
+      private GeneXus.Programs.genexussecurity.SdtGAMSecurityPolicy AV8SecurityPolicy ;
       private IDataStoreProvider pr_default ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV6Errors ;
+      private GeneXus.Programs.genexussecurity.SdtGAMError AV5Error ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
       private IDataStoreProvider pr_gam ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV6Errors ;
-      private GXWebForm Form ;
-      private GeneXus.Programs.genexussecurity.SdtGAMError AV5Error ;
-      private GeneXus.Programs.genexussecurity.SdtGAMSecurityPolicy AV8SecurityPolicy ;
    }
 
    public class gamsecuritypolicyentry__gam : DataStoreHelperBase, IDataStoreHelper

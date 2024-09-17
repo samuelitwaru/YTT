@@ -42,7 +42,7 @@ namespace GeneXus.Programs {
          this.AV12Role = aP0_Role;
          this.AV11HasRole = false ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_HasRole=this.AV11HasRole;
       }
 
@@ -55,51 +55,30 @@ namespace GeneXus.Programs {
       public void executeSubmit( string aP0_Role ,
                                  out bool aP1_HasRole )
       {
-         userhasrole objuserhasrole;
-         objuserhasrole = new userhasrole();
-         objuserhasrole.AV12Role = aP0_Role;
-         objuserhasrole.AV11HasRole = false ;
-         objuserhasrole.context.SetSubmitInitialConfig(context);
-         objuserhasrole.initialize();
-         Submit( executePrivateCatch,objuserhasrole);
+         this.AV12Role = aP0_Role;
+         this.AV11HasRole = false ;
+         SubmitImpl();
          aP1_HasRole=this.AV11HasRole;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((userhasrole)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
          AV9GAMSession = new GeneXus.Programs.genexussecurity.SdtGAMSession(context).get(out  AV8GAMErrors);
          AV10GAMUser = AV9GAMSession.gxTpr_User;
          AV11HasRole = AV10GAMUser.checkrole(AV12Role);
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -112,10 +91,10 @@ namespace GeneXus.Programs {
 
       private string AV12Role ;
       private bool AV11HasRole ;
-      private bool aP1_HasRole ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV8GAMErrors ;
       private GeneXus.Programs.genexussecurity.SdtGAMSession AV9GAMSession ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV8GAMErrors ;
       private GeneXus.Programs.genexussecurity.SdtGAMUser AV10GAMUser ;
+      private bool aP1_HasRole ;
    }
 
 }

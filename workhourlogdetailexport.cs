@@ -45,7 +45,7 @@ namespace GeneXus.Programs {
          this.AV12Filename = "" ;
          this.AV13ErrorMessage = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_Filename=this.AV12Filename;
          aP2_ErrorMessage=this.AV13ErrorMessage;
       }
@@ -61,32 +61,15 @@ namespace GeneXus.Programs {
                                  out string aP1_Filename ,
                                  out string aP2_ErrorMessage )
       {
-         workhourlogdetailexport objworkhourlogdetailexport;
-         objworkhourlogdetailexport = new workhourlogdetailexport();
-         objworkhourlogdetailexport.AV23SDTWorkHourLog = aP0_SDTWorkHourLog;
-         objworkhourlogdetailexport.AV12Filename = "" ;
-         objworkhourlogdetailexport.AV13ErrorMessage = "" ;
-         objworkhourlogdetailexport.context.SetSubmitInitialConfig(context);
-         objworkhourlogdetailexport.initialize();
-         Submit( executePrivateCatch,objworkhourlogdetailexport);
+         this.AV23SDTWorkHourLog = aP0_SDTWorkHourLog;
+         this.AV12Filename = "" ;
+         this.AV13ErrorMessage = "" ;
+         SubmitImpl();
          aP1_Filename=this.AV12Filename;
          aP2_ErrorMessage=this.AV13ErrorMessage;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((workhourlogdetailexport)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -95,7 +78,7 @@ namespace GeneXus.Programs {
          S111 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          AV14CellRow = 1;
@@ -104,38 +87,38 @@ namespace GeneXus.Programs {
          S201 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          /* Execute user subroutine: 'WRITEFILTERS' */
          S131 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          /* Execute user subroutine: 'WRITECOLUMNTITLES' */
          S141 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          /* Execute user subroutine: 'WRITEDATA' */
          S161 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          /* Execute user subroutine: 'CLOSEDOCUMENT' */
          S191 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void S111( )
@@ -347,16 +330,12 @@ namespace GeneXus.Programs {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -398,17 +377,17 @@ namespace GeneXus.Programs {
       private string AV13ErrorMessage ;
       private string AV18FilterFullText ;
       private IGxSession AV19Session ;
-      private string aP1_Filename ;
-      private string aP2_ErrorMessage ;
       private ExcelDocumentI AV11ExcelDocument ;
       private GXBaseCollection<SdtSDTWorkHourLog_SDTWorkHourLogItem> AV23SDTWorkHourLog ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV9WWPContext ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector AV24ColumnsSelector ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector_Column AV26ColumnsSelector_Column ;
       private SdtSDTWorkHourLog_SDTWorkHourLogItem AV17SDTWorkHourLogItem ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector AV25ColumnsSelectorAux ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState AV21GridState ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue AV22GridStateFilterValue ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector AV24ColumnsSelector ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector AV25ColumnsSelectorAux ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector_Column AV26ColumnsSelector_Column ;
+      private string aP1_Filename ;
+      private string aP2_ErrorMessage ;
    }
 
 }

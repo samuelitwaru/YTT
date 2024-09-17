@@ -42,7 +42,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          this.AV14ListObjectName = aP0_ListObjectName;
          this.AV8AppliedFiltersDescription = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_AppliedFiltersDescription=this.AV8AppliedFiltersDescription;
       }
 
@@ -55,30 +55,13 @@ namespace GeneXus.Programs.wwpbaseobjects {
       public void executeSubmit( string aP0_ListObjectName ,
                                  out string aP1_AppliedFiltersDescription )
       {
-         wwp_getappliedfiltersdescription objwwp_getappliedfiltersdescription;
-         objwwp_getappliedfiltersdescription = new wwp_getappliedfiltersdescription();
-         objwwp_getappliedfiltersdescription.AV14ListObjectName = aP0_ListObjectName;
-         objwwp_getappliedfiltersdescription.AV8AppliedFiltersDescription = "" ;
-         objwwp_getappliedfiltersdescription.context.SetSubmitInitialConfig(context);
-         objwwp_getappliedfiltersdescription.initialize();
-         Submit( executePrivateCatch,objwwp_getappliedfiltersdescription);
+         this.AV14ListObjectName = aP0_ListObjectName;
+         this.AV8AppliedFiltersDescription = "" ;
+         SubmitImpl();
          aP1_AppliedFiltersDescription=this.AV8AppliedFiltersDescription;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwp_getappliedfiltersdescription)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -126,7 +109,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
                S111 ();
                if ( returnInSub )
                {
-                  this.cleanup();
+                  cleanup();
                   if (true) return;
                }
                AV21GXV1 = (int)(AV21GXV1+1);
@@ -154,14 +137,14 @@ namespace GeneXus.Programs.wwpbaseobjects {
                S111 ();
                if ( returnInSub )
                {
-                  this.cleanup();
+                  cleanup();
                   if (true) return;
                }
                AV22GXV2 = (int)(AV22GXV2+1);
             }
             AV8AppliedFiltersDescription = StringUtil.Format( "Filtering by %1", AV8AppliedFiltersDescription, "", "", "", "", "", "", "", "");
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void S111( )
@@ -188,16 +171,12 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -228,10 +207,10 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private string AV19EmptyTimeStr ;
       private string AV11FilterDescription ;
       private IGxSession AV15Session ;
-      private string aP1_AppliedFiltersDescription ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState AV12GridState ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue AV13GridStateFilterValue ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_DynamicFilter AV10DynamicFiltersItem ;
+      private string aP1_AppliedFiltersDescription ;
    }
 
 }

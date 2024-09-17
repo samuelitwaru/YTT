@@ -489,6 +489,20 @@ namespace GeneXus.Programs {
          return false ;
       }
 
+      [XmlIgnore]
+      private static GXTypeInfo _typeProps;
+      protected override GXTypeInfo TypeInfo
+      {
+         get {
+            return _typeProps ;
+         }
+
+         set {
+            _typeProps = value ;
+         }
+
+      }
+
       public void initialize( )
       {
          gxTv_SdtDevice_Deviceid = "";
@@ -532,6 +546,7 @@ namespace GeneXus.Programs {
    }
 
    [DataContract(Name = @"Device", Namespace = "YTT_version4")]
+   [GxJsonSerialization("default")]
    public class SdtDevice_RESTInterface : GxGenericCollectionItem<SdtDevice>
    {
       public SdtDevice_RESTInterface( ) : base()
@@ -654,6 +669,7 @@ namespace GeneXus.Programs {
    }
 
    [DataContract(Name = @"Device", Namespace = "YTT_version4")]
+   [GxJsonSerialization("default")]
    public class SdtDevice_RESTLInterface : GxGenericCollectionItem<SdtDevice>
    {
       public SdtDevice_RESTLInterface( ) : base()

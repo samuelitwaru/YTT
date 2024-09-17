@@ -42,7 +42,7 @@ namespace GeneXus.Programs {
          this.AV9GAMErrorCollection = aP0_GAMErrorCollection;
          this.AV11Messages = new GXBaseCollection<GeneXus.Utils.SdtMessages_Message>( context, "Message", "GeneXus") ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_Messages=this.AV11Messages;
       }
 
@@ -55,30 +55,13 @@ namespace GeneXus.Programs {
       public void executeSubmit( GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> aP0_GAMErrorCollection ,
                                  out GXBaseCollection<GeneXus.Utils.SdtMessages_Message> aP1_Messages )
       {
-         gam_converterrorstomessages objgam_converterrorstomessages;
-         objgam_converterrorstomessages = new gam_converterrorstomessages();
-         objgam_converterrorstomessages.AV9GAMErrorCollection = aP0_GAMErrorCollection;
-         objgam_converterrorstomessages.AV11Messages = new GXBaseCollection<GeneXus.Utils.SdtMessages_Message>( context, "Message", "GeneXus") ;
-         objgam_converterrorstomessages.context.SetSubmitInitialConfig(context);
-         objgam_converterrorstomessages.initialize();
-         Submit( executePrivateCatch,objgam_converterrorstomessages);
+         this.AV9GAMErrorCollection = aP0_GAMErrorCollection;
+         this.AV11Messages = new GXBaseCollection<GeneXus.Utils.SdtMessages_Message>( context, "Message", "GeneXus") ;
+         SubmitImpl();
          aP1_Messages=this.AV11Messages;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((gam_converterrorstomessages)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -93,21 +76,17 @@ namespace GeneXus.Programs {
             AV11Messages.Add(AV10Message, 0);
             AV12GXV1 = (int)(AV12GXV1+1);
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -119,11 +98,11 @@ namespace GeneXus.Programs {
       }
 
       private int AV12GXV1 ;
-      private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> aP1_Messages ;
       private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV9GAMErrorCollection ;
       private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> AV11Messages ;
       private GeneXus.Programs.genexussecurity.SdtGAMError AV8GAMError ;
       private GeneXus.Utils.SdtMessages_Message AV10Message ;
+      private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> aP1_Messages ;
    }
 
 }

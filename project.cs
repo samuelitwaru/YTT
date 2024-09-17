@@ -167,7 +167,7 @@ namespace GeneXus.Programs {
          {
             if ( context.ExposeMetadata( ) )
             {
-               Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+               Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
             }
          }
          Form.Meta.addItem("description", "Project", 0) ;
@@ -213,10 +213,10 @@ namespace GeneXus.Programs {
       {
          this.Gx_mode = aP0_Gx_mode;
          this.AV7ProjectId = aP1_ProjectId;
-         executePrivate();
+         ExecuteImpl();
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -253,11 +253,8 @@ namespace GeneXus.Programs {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITENV( ) ;
          INITTRN( ) ;
          if ( ( GxWebError == 0 ) && ! isAjaxCallMode( ) )
@@ -289,7 +286,7 @@ namespace GeneXus.Programs {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void fix_multi_value_controls( )
@@ -515,10 +512,12 @@ namespace GeneXus.Programs {
          /* Div Control */
          GxWebStd.gx_div_start( context, divSectionattribute_projectmanagerid_Internalname, 1, 0, "px", 0, "px", "Section", "start", "top", "", "", "div");
          /* Single line edit */
-         GxWebStd.gx_single_line_edit( context, edtavComboprojectmanagerid_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(AV22ComboProjectManagerId), 10, 0, ".", "")), StringUtil.LTrim( ((edtavComboprojectmanagerid_Enabled!=0) ? context.localUtil.Format( (decimal)(AV22ComboProjectManagerId), "ZZZZZZZZZ9") : context.localUtil.Format( (decimal)(AV22ComboProjectManagerId), "ZZZZZZZZZ9"))), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavComboprojectmanagerid_Jsonclick, 0, "Attribute", "", "", "", "", edtavComboprojectmanagerid_Visible, edtavComboprojectmanagerid_Enabled, 0, "text", "1", 10, "chr", 1, "row", 10, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_Project.htm");
+         TempTags = "  onfocus=\"gx.evt.onfocus(this, 60,'',false,'',0)\"";
+         GxWebStd.gx_single_line_edit( context, edtavComboprojectmanagerid_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(AV22ComboProjectManagerId), 10, 0, ".", "")), StringUtil.LTrim( ((edtavComboprojectmanagerid_Enabled!=0) ? context.localUtil.Format( (decimal)(AV22ComboProjectManagerId), "ZZZZZZZZZ9") : context.localUtil.Format( (decimal)(AV22ComboProjectManagerId), "ZZZZZZZZZ9"))), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+TempTags+" onchange=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onblur(this,60);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavComboprojectmanagerid_Jsonclick, 0, "Attribute", "", "", "", "", edtavComboprojectmanagerid_Visible, edtavComboprojectmanagerid_Enabled, 0, "text", "1", 10, "chr", 1, "row", 10, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_Project.htm");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          /* Single line edit */
-         GxWebStd.gx_single_line_edit( context, edtProjectId_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(A102ProjectId), 10, 0, ".", "")), StringUtil.LTrim( ((edtProjectId_Enabled!=0) ? context.localUtil.Format( (decimal)(A102ProjectId), "ZZZZZZZZZ9") : context.localUtil.Format( (decimal)(A102ProjectId), "ZZZZZZZZZ9"))), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtProjectId_Jsonclick, 0, "Attribute", "", "", "", "", edtProjectId_Visible, edtProjectId_Enabled, 0, "text", "1", 10, "chr", 1, "row", 10, 0, 0, 0, 0, -1, 0, true, "Id", "end", false, "", "HLP_Project.htm");
+         TempTags = "  onfocus=\"gx.evt.onfocus(this, 61,'',false,'',0)\"";
+         GxWebStd.gx_single_line_edit( context, edtProjectId_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(A102ProjectId), 10, 0, ".", "")), StringUtil.LTrim( ((edtProjectId_Enabled!=0) ? context.localUtil.Format( (decimal)(A102ProjectId), "ZZZZZZZZZ9") : context.localUtil.Format( (decimal)(A102ProjectId), "ZZZZZZZZZ9"))), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+TempTags+" onchange=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onblur(this,61);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtProjectId_Jsonclick, 0, "Attribute", "", "", "", "", edtProjectId_Visible, edtProjectId_Enabled, 0, "text", "1", 10, "chr", 1, "row", 10, 0, 0, 0, 0, -1, 0, true, "Id", "end", false, "", "HLP_Project.htm");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -622,7 +621,6 @@ namespace GeneXus.Programs {
                Combo_projectmanagerid_Selectalltext = cgiGet( "COMBO_PROJECTMANAGERID_Selectalltext");
                Combo_projectmanagerid_Multiplevaluesseparator = cgiGet( "COMBO_PROJECTMANAGERID_Multiplevaluesseparator");
                Combo_projectmanagerid_Addnewoptiontext = cgiGet( "COMBO_PROJECTMANAGERID_Addnewoptiontext");
-               Combo_projectmanagerid_Gxcontroltype = (int)(Math.Round(context.localUtil.CToN( cgiGet( "COMBO_PROJECTMANAGERID_Gxcontroltype"), ".", ","), 18, MidpointRounding.ToEven));
                /* Read variables values. */
                A103ProjectName = cgiGet( edtProjectName_Internalname);
                AssignAttri("", false, "A103ProjectName", A103ProjectName);
@@ -1116,7 +1114,6 @@ namespace GeneXus.Programs {
 
       protected void CheckExtendedTable0E15( )
       {
-         nIsDirty_15 = 0;
          Gx_BScreen = 1;
          AssignAttri("", false, "Gx_BScreen", StringUtil.Str( (decimal)(Gx_BScreen), 1, 0));
          standaloneModal( ) ;
@@ -1889,10 +1886,10 @@ namespace GeneXus.Programs {
          CloseStyles();
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
@@ -2120,7 +2117,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20248121541528", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202491613133392", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2136,7 +2133,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("project.js", "?20248121541529", false, true);
+         context.AddJavascriptSource("project.js", "?202491613133392", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -2336,36 +2333,28 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("ENTER","{handler:'UserMainFullajax',iparms:[{postForm:true},{av:'Gx_mode',fld:'vMODE',pic:'@!',hsh:true},{av:'AV7ProjectId',fld:'vPROJECTID',pic:'ZZZZZZZZZ9',hsh:true}]");
-         setEventMetadata("ENTER",",oparms:[]}");
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'Gx_mode',fld:'vMODE',pic:'@!',hsh:true},{av:'AV11TrnContext',fld:'vTRNCONTEXT',pic:'',hsh:true},{av:'AV7ProjectId',fld:'vPROJECTID',pic:'ZZZZZZZZZ9',hsh:true},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'}]");
-         setEventMetadata("REFRESH",",oparms:[]}");
-         setEventMetadata("AFTER TRN","{handler:'E120E2',iparms:[{av:'AV22ComboProjectManagerId',fld:'vCOMBOPROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'Gx_mode',fld:'vMODE',pic:'@!',hsh:true},{av:'AV11TrnContext',fld:'vTRNCONTEXT',pic:'',hsh:true}]");
-         setEventMetadata("AFTER TRN",",oparms:[]}");
-         setEventMetadata("VALID_PROJECTNAME","{handler:'Valid_Projectname',iparms:[{av:'A103ProjectName',fld:'PROJECTNAME',pic:''},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'}]");
-         setEventMetadata("VALID_PROJECTNAME",",oparms:[]}");
-         setEventMetadata("VALID_PROJECTSTATUS","{handler:'Valid_Projectstatus',iparms:[]");
-         setEventMetadata("VALID_PROJECTSTATUS",",oparms:[]}");
-         setEventMetadata("VALID_PROJECTMANAGERID","{handler:'Valid_Projectmanagerid',iparms:[{av:'A166ProjectManagerId',fld:'PROJECTMANAGERID',pic:'ZZZZZZZZZ9'},{av:'A102ProjectId',fld:'PROJECTID',pic:'ZZZZZZZZZ9'},{av:'A167ProjectManagerName',fld:'PROJECTMANAGERNAME',pic:''},{av:'A176ProjectManagerEmail',fld:'PROJECTMANAGEREMAIL',pic:''},{av:'A177ProjectManagerIsActive',fld:'PROJECTMANAGERISACTIVE',pic:''}]");
-         setEventMetadata("VALID_PROJECTMANAGERID",",oparms:[{av:'A167ProjectManagerName',fld:'PROJECTMANAGERNAME',pic:''},{av:'A176ProjectManagerEmail',fld:'PROJECTMANAGEREMAIL',pic:''},{av:'A177ProjectManagerIsActive',fld:'PROJECTMANAGERISACTIVE',pic:''}]}");
-         setEventMetadata("VALIDV_COMBOPROJECTMANAGERID","{handler:'Validv_Comboprojectmanagerid',iparms:[]");
-         setEventMetadata("VALIDV_COMBOPROJECTMANAGERID",",oparms:[]}");
-         setEventMetadata("VALID_PROJECTID","{handler:'Valid_Projectid',iparms:[]");
-         setEventMetadata("VALID_PROJECTID",",oparms:[]}");
+         setEventMetadata("ENTER","""{"handler":"UserMainFullajax","iparms":[{"postForm":true},{"av":"Gx_mode","fld":"vMODE","pic":"@!","hsh":true},{"av":"AV7ProjectId","fld":"vPROJECTID","pic":"ZZZZZZZZZ9","hsh":true}]}""");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"Gx_mode","fld":"vMODE","pic":"@!","hsh":true},{"av":"AV11TrnContext","fld":"vTRNCONTEXT","hsh":true},{"av":"AV7ProjectId","fld":"vPROJECTID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"A102ProjectId","fld":"PROJECTID","pic":"ZZZZZZZZZ9"}]}""");
+         setEventMetadata("AFTER TRN","""{"handler":"E120E2","iparms":[{"av":"AV22ComboProjectManagerId","fld":"vCOMBOPROJECTMANAGERID","pic":"ZZZZZZZZZ9"},{"av":"A102ProjectId","fld":"PROJECTID","pic":"ZZZZZZZZZ9"},{"av":"Gx_mode","fld":"vMODE","pic":"@!","hsh":true},{"av":"AV11TrnContext","fld":"vTRNCONTEXT","hsh":true}]}""");
+         setEventMetadata("VALID_PROJECTNAME","""{"handler":"Valid_Projectname","iparms":[{"av":"A103ProjectName","fld":"PROJECTNAME"},{"av":"A102ProjectId","fld":"PROJECTID","pic":"ZZZZZZZZZ9"}]}""");
+         setEventMetadata("VALID_PROJECTSTATUS","""{"handler":"Valid_Projectstatus","iparms":[]}""");
+         setEventMetadata("VALID_PROJECTMANAGERID","""{"handler":"Valid_Projectmanagerid","iparms":[{"av":"A166ProjectManagerId","fld":"PROJECTMANAGERID","pic":"ZZZZZZZZZ9"},{"av":"A102ProjectId","fld":"PROJECTID","pic":"ZZZZZZZZZ9"},{"av":"A167ProjectManagerName","fld":"PROJECTMANAGERNAME"},{"av":"A176ProjectManagerEmail","fld":"PROJECTMANAGEREMAIL"},{"av":"A177ProjectManagerIsActive","fld":"PROJECTMANAGERISACTIVE"}]""");
+         setEventMetadata("VALID_PROJECTMANAGERID",""","oparms":[{"av":"A167ProjectManagerName","fld":"PROJECTMANAGERNAME"},{"av":"A176ProjectManagerEmail","fld":"PROJECTMANAGEREMAIL"},{"av":"A177ProjectManagerIsActive","fld":"PROJECTMANAGERISACTIVE"}]}""");
+         setEventMetadata("VALIDV_COMBOPROJECTMANAGERID","""{"handler":"Validv_Comboprojectmanagerid","iparms":[]}""");
+         setEventMetadata("VALID_PROJECTID","""{"handler":"Valid_Projectid","iparms":[]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
       }
 
-      protected void CloseOpenCursors( )
+      protected override void CloseCursors( )
       {
          pr_default.close(1);
          pr_default.close(19);
@@ -2380,7 +2369,6 @@ namespace GeneXus.Programs {
          Z104ProjectDescription = "";
          Z105ProjectStatus = "";
          Combo_projectmanagerid_Selectedvalue_get = "";
-         scmdbuf = "";
          gxfirstwebparm = "";
          gxfirstwebparm_bkp = "";
          GXKey = "";
@@ -2569,15 +2557,12 @@ namespace GeneXus.Programs {
 
       private short GxWebError ;
       private short gxcookieaux ;
-      private short IsConfirmed ;
-      private short IsModified ;
       private short AnyError ;
+      private short IsModified ;
+      private short IsConfirmed ;
       private short nKeyPressed ;
-      private short initialized ;
       private short Gx_BScreen ;
       private short RcdFound15 ;
-      private short GX_JID ;
-      private short nIsDirty_15 ;
       private short gxajaxcallmode ;
       private int trnEnded ;
       private int divTablecontent_Width ;
@@ -2595,7 +2580,6 @@ namespace GeneXus.Programs {
       private int edtProjectId_Enabled ;
       private int edtProjectId_Visible ;
       private int Combo_projectmanagerid_Datalistupdateminimumcharacters ;
-      private int Combo_projectmanagerid_Gxcontroltype ;
       private int AV33GXV1 ;
       private int idxLst ;
       private long wcpOAV7ProjectId ;
@@ -2613,7 +2597,6 @@ namespace GeneXus.Programs {
       private string Z103ProjectName ;
       private string Z105ProjectStatus ;
       private string Combo_projectmanagerid_Selectedvalue_get ;
-      private string scmdbuf ;
       private string gxfirstwebparm ;
       private string gxfirstwebparm_bkp ;
       private string Gx_mode ;
@@ -2726,9 +2709,17 @@ namespace GeneXus.Programs {
       private IGxSession AV12WebSession ;
       private GXProperties forbiddenHiddens ;
       private GXUserControl ucCombo_projectmanagerid ;
+      private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private GXCombobox cmbProjectStatus ;
+      private GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsTitleSettingsIcons AV26DDO_TitleSettingsIcons ;
+      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item> AV21ProjectManagerId_Data ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV8WWPContext ;
+      private GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsTitleSettingsIcons GXt_SdtDVB_SDTDropDownOptionsTitleSettingsIcons1 ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext AV11TrnContext ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext_Attribute AV14TrnContextAtt ;
+      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item> GXt_objcol_SdtDVB_SDTComboData_Item2 ;
       private IDataStoreProvider pr_default ;
       private string[] T000E4_A167ProjectManagerName ;
       private string[] T000E4_A176ProjectManagerEmail ;
@@ -2773,14 +2764,6 @@ namespace GeneXus.Programs {
       private string[] T000E20_A103ProjectName ;
       private long[] T000E21_A106EmployeeId ;
       private IDataStoreProvider pr_gam ;
-      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item> AV21ProjectManagerId_Data ;
-      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item> GXt_objcol_SdtDVB_SDTComboData_Item2 ;
-      private GXWebForm Form ;
-      private GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsTitleSettingsIcons AV26DDO_TitleSettingsIcons ;
-      private GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsTitleSettingsIcons GXt_SdtDVB_SDTDropDownOptionsTitleSettingsIcons1 ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext AV11TrnContext ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext_Attribute AV14TrnContextAtt ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV8WWPContext ;
    }
 
    public class project__gam : DataStoreHelperBase, IDataStoreHelper
@@ -2849,23 +2832,31 @@ namespace GeneXus.Programs {
   {
      if ( def == null )
      {
-        Object[] prmT000E6;
-        prmT000E6 = new Object[] {
+        Object[] prmT000E2;
+        prmT000E2 = new Object[] {
         new ParDef("ProjectId",GXType.Int64,10,0)
+        };
+        Object[] prmT000E3;
+        prmT000E3 = new Object[] {
+        new ParDef("ProjectId",GXType.Int64,10,0)
+        };
+        Object[] prmT000E4;
+        prmT000E4 = new Object[] {
+        new ParDef("ProjectManagerId",GXType.Int64,10,0){Nullable=true}
         };
         Object[] prmT000E5;
         prmT000E5 = new Object[] {
         new ParDef("ProjectManagerId",GXType.Int64,10,0){Nullable=true} ,
         new ParDef("ProjectId",GXType.Int64,10,0)
         };
+        Object[] prmT000E6;
+        prmT000E6 = new Object[] {
+        new ParDef("ProjectId",GXType.Int64,10,0)
+        };
         Object[] prmT000E7;
         prmT000E7 = new Object[] {
         new ParDef("ProjectName",GXType.Char,100,0) ,
         new ParDef("ProjectId",GXType.Int64,10,0)
-        };
-        Object[] prmT000E4;
-        prmT000E4 = new Object[] {
-        new ParDef("ProjectManagerId",GXType.Int64,10,0){Nullable=true}
         };
         Object[] prmT000E8;
         prmT000E8 = new Object[] {
@@ -2880,20 +2871,12 @@ namespace GeneXus.Programs {
         prmT000E10 = new Object[] {
         new ParDef("ProjectId",GXType.Int64,10,0)
         };
-        Object[] prmT000E3;
-        prmT000E3 = new Object[] {
-        new ParDef("ProjectId",GXType.Int64,10,0)
-        };
         Object[] prmT000E11;
         prmT000E11 = new Object[] {
         new ParDef("ProjectId",GXType.Int64,10,0)
         };
         Object[] prmT000E12;
         prmT000E12 = new Object[] {
-        new ParDef("ProjectId",GXType.Int64,10,0)
-        };
-        Object[] prmT000E2;
-        prmT000E2 = new Object[] {
         new ParDef("ProjectId",GXType.Int64,10,0)
         };
         Object[] prmT000E13;
@@ -2918,6 +2901,10 @@ namespace GeneXus.Programs {
         prmT000E16 = new Object[] {
         new ParDef("ProjectId",GXType.Int64,10,0)
         };
+        Object[] prmT000E17;
+        prmT000E17 = new Object[] {
+        new ParDef("ProjectManagerId",GXType.Int64,10,0){Nullable=true}
+        };
         Object[] prmT000E18;
         prmT000E18 = new Object[] {
         new ParDef("ProjectId",GXType.Int64,10,0)
@@ -2929,10 +2916,6 @@ namespace GeneXus.Programs {
         prmT000E20 = new Object[] {
         new ParDef("ProjectName",GXType.Char,100,0) ,
         new ParDef("ProjectId",GXType.Int64,10,0)
-        };
-        Object[] prmT000E17;
-        prmT000E17 = new Object[] {
-        new ParDef("ProjectManagerId",GXType.Int64,10,0){Nullable=true}
         };
         Object[] prmT000E21;
         prmT000E21 = new Object[] {

@@ -44,10 +44,10 @@ namespace GeneXus.Programs.wwpbaseobjects {
       public void execute( string aP0_UserKey )
       {
          this.AV14UserKey = aP0_UserKey;
-         executePrivate();
+         ExecuteImpl();
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -198,11 +198,8 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITWEB( ) ;
          if ( ! isAjaxCallMode( ) )
          {
@@ -233,7 +230,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override short ExecuteStartEvent( )
@@ -277,10 +274,10 @@ namespace GeneXus.Programs.wwpbaseobjects {
          CloseStyles();
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
@@ -624,7 +621,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          {
             if ( context.ExposeMetadata( ) )
             {
-               Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+               Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
             }
          }
          Form.Meta.addItem("description", "Filters manager", 0) ;
@@ -749,6 +746,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
                                  {
                                     context.wbHandled = 1;
                                     dynload_actions( ) ;
+                                    /* Execute user event: Gridgridstatecollections.Load */
                                     E130N2 ();
                                  }
                                  else if ( StringUtil.StrCmp(sEvt, "REFRESH") == 0 )
@@ -909,11 +907,8 @@ namespace GeneXus.Programs.wwpbaseobjects {
       {
          /* GeneXus formulas. */
          edtavMoveup_Enabled = 0;
-         AssignProp("", false, edtavMoveup_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavMoveup_Enabled), 5, 0), !bGXsfl_15_Refreshing);
          edtavMovedown_Enabled = 0;
-         AssignProp("", false, edtavMovedown_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavMovedown_Enabled), 5, 0), !bGXsfl_15_Refreshing);
          edtavUdelete_Enabled = 0;
-         AssignProp("", false, edtavUdelete_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavUdelete_Enabled), 5, 0), !bGXsfl_15_Refreshing);
       }
 
       protected void RF0N2( )
@@ -945,12 +940,14 @@ namespace GeneXus.Programs.wwpbaseobjects {
          if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
          {
             SubsflControlProps_152( ) ;
+            /* Execute user event: Gridgridstatecollections.Load */
             E130N2 ();
             if ( ( subGridgridstatecollections_Islastpage == 0 ) && ( GRIDGRIDSTATECOLLECTIONS_nCurrentRecord > 0 ) && ( GRIDGRIDSTATECOLLECTIONS_nGridOutOfScope == 0 ) && ( nGXsfl_15_idx == 1 ) )
             {
                GRIDGRIDSTATECOLLECTIONS_nCurrentRecord = 0;
                GRIDGRIDSTATECOLLECTIONS_nGridOutOfScope = 1;
                subgridgridstatecollections_firstpage( ) ;
+               /* Execute user event: Gridgridstatecollections.Load */
                E130N2 ();
             }
             wbEnd = 15;
@@ -1096,11 +1093,8 @@ namespace GeneXus.Programs.wwpbaseobjects {
       protected void before_start_formulas( )
       {
          edtavMoveup_Enabled = 0;
-         AssignProp("", false, edtavMoveup_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavMoveup_Enabled), 5, 0), !bGXsfl_15_Refreshing);
          edtavMovedown_Enabled = 0;
-         AssignProp("", false, edtavMovedown_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavMovedown_Enabled), 5, 0), !bGXsfl_15_Refreshing);
          edtavUdelete_Enabled = 0;
-         AssignProp("", false, edtavUdelete_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavUdelete_Enabled), 5, 0), !bGXsfl_15_Refreshing);
          fix_multi_value_controls( ) ;
       }
 
@@ -1435,7 +1429,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          PA0N2( ) ;
          WS0N2( ) ;
          WE0N2( ) ;
-         this.cleanup();
+         cleanup();
          context.SetWrapped(false);
          context.GX_msglist = BackMsgLst;
          return "";
@@ -1457,7 +1451,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20248121564027", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202491613145959", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1473,7 +1467,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wwpbaseobjects/managefilters.js", "?20248121564028", false, true);
+         context.AddJavascriptSource("wwpbaseobjects/managefilters.js", "?202491613145959", false, true);
          context.AddJavascriptSource("shared/jquery/jquery1.9.1.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/bootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
@@ -1504,6 +1498,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       protected void sendrow_152( )
       {
+         sGXsfl_15_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_15_idx), 4, 0), 4, "0");
          SubsflControlProps_152( ) ;
          WB0N0( ) ;
          if ( ( subGridgridstatecollections_Rows * 1 == 0 ) || ( nGXsfl_15_idx <= subGridgridstatecollections_fnc_Recordsperpage( ) * 1 ) )
@@ -1571,45 +1566,45 @@ namespace GeneXus.Programs.wwpbaseobjects {
                context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+""+"\">") ;
             }
             /* Single line edit */
-            TempTags = " " + ((edtavMoveup_Enabled!=0)&&(edtavMoveup_Visible!=0) ? " onfocus=\"gx.evt.onfocus(this, 16,'',false,'"+sGXsfl_15_idx+"',15)\"" : " ");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 16,'',false,'" + sGXsfl_15_idx + "',15)\"";
             ROClassString = "Attribute";
-            GridgridstatecollectionsRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavMoveup_Internalname,StringUtil.RTrim( AV12MoveUp),(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+((edtavMoveup_Enabled!=0)&&(edtavMoveup_Visible!=0) ? " onblur=\""+""+";gx.evt.onblur(this,16);\"" : " "),"'"+""+"'"+",false,"+"'"+"EVMOVEUP.CLICK."+sGXsfl_15_idx+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavMoveup_Jsonclick,(short)5,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWIconActionColumn",(string)"",(short)-1,(int)edtavMoveup_Enabled,(short)0,(string)"text",(string)"",(short)30,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)1,(short)15,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
+            GridgridstatecollectionsRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavMoveup_Internalname,StringUtil.RTrim( AV12MoveUp),(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,16);\"","'"+""+"'"+",false,"+"'"+"EVMOVEUP.CLICK."+sGXsfl_15_idx+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavMoveup_Jsonclick,(short)5,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWIconActionColumn",(string)"",(short)-1,(int)edtavMoveup_Enabled,(short)0,(string)"text",(string)"",(short)30,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)1,(short)15,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
             /* Subfile cell */
             if ( GridgridstatecollectionsContainer.GetWrapped() == 1 )
             {
                context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+""+"\">") ;
             }
             /* Single line edit */
-            TempTags = " " + ((edtavMovedown_Enabled!=0)&&(edtavMovedown_Visible!=0) ? " onfocus=\"gx.evt.onfocus(this, 17,'',false,'"+sGXsfl_15_idx+"',15)\"" : " ");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 17,'',false,'" + sGXsfl_15_idx + "',15)\"";
             ROClassString = "Attribute";
-            GridgridstatecollectionsRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavMovedown_Internalname,StringUtil.RTrim( AV11MoveDown),(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+((edtavMovedown_Enabled!=0)&&(edtavMovedown_Visible!=0) ? " onblur=\""+""+";gx.evt.onblur(this,17);\"" : " "),"'"+""+"'"+",false,"+"'"+"EVMOVEDOWN.CLICK."+sGXsfl_15_idx+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavMovedown_Jsonclick,(short)5,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWIconActionColumn",(string)"",(short)-1,(int)edtavMovedown_Enabled,(short)0,(string)"text",(string)"",(short)30,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)1,(short)15,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
+            GridgridstatecollectionsRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavMovedown_Internalname,StringUtil.RTrim( AV11MoveDown),(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,17);\"","'"+""+"'"+",false,"+"'"+"EVMOVEDOWN.CLICK."+sGXsfl_15_idx+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavMovedown_Jsonclick,(short)5,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWIconActionColumn",(string)"",(short)-1,(int)edtavMovedown_Enabled,(short)0,(string)"text",(string)"",(short)30,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)1,(short)15,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
             /* Subfile cell */
             if ( GridgridstatecollectionsContainer.GetWrapped() == 1 )
             {
                context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+""+"\">") ;
             }
             /* Single line edit */
-            TempTags = " " + ((edtavGridstatecollection__title_Enabled!=0)&&(edtavGridstatecollection__title_Visible!=0) ? " onfocus=\"gx.evt.onfocus(this, 18,'',false,'"+sGXsfl_15_idx+"',15)\"" : " ");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 18,'',false,'" + sGXsfl_15_idx + "',15)\"";
             ROClassString = edtavGridstatecollection__title_Class;
-            GridgridstatecollectionsRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavGridstatecollection__title_Internalname,((GeneXus.Programs.wwpbaseobjects.SdtGridStateCollection_Item)AV6GridStateCollection.Item(AV17GXV1)).gxTpr_Title,(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+((edtavGridstatecollection__title_Enabled!=0)&&(edtavGridstatecollection__title_Visible!=0) ? " onblur=\""+""+";gx.evt.onblur(this,18);\"" : " "),(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavGridstatecollection__title_Jsonclick,(short)0,(string)edtavGridstatecollection__title_Class,(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)-1,(short)1,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)100,(short)0,(short)0,(short)15,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
+            GridgridstatecollectionsRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavGridstatecollection__title_Internalname,((GeneXus.Programs.wwpbaseobjects.SdtGridStateCollection_Item)AV6GridStateCollection.Item(AV17GXV1)).gxTpr_Title,(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,18);\"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavGridstatecollection__title_Jsonclick,(short)0,(string)edtavGridstatecollection__title_Class,(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)-1,(short)1,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)100,(short)0,(short)0,(short)15,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
             /* Subfile cell */
             if ( GridgridstatecollectionsContainer.GetWrapped() == 1 )
             {
                context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+((edtavGridstatecollection__gridstatexml_Visible==0) ? "display:none;" : "")+"\">") ;
             }
             /* Single line edit */
-            TempTags = " " + ((edtavGridstatecollection__gridstatexml_Enabled!=0)&&(edtavGridstatecollection__gridstatexml_Visible!=0) ? " onfocus=\"gx.evt.onfocus(this, 19,'',false,'"+sGXsfl_15_idx+"',15)\"" : " ");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 19,'',false,'" + sGXsfl_15_idx + "',15)\"";
             ROClassString = "AttributeRealWidth";
-            GridgridstatecollectionsRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavGridstatecollection__gridstatexml_Internalname,((GeneXus.Programs.wwpbaseobjects.SdtGridStateCollection_Item)AV6GridStateCollection.Item(AV17GXV1)).gxTpr_Gridstatexml,((GeneXus.Programs.wwpbaseobjects.SdtGridStateCollection_Item)AV6GridStateCollection.Item(AV17GXV1)).gxTpr_Gridstatexml,TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+((edtavGridstatecollection__gridstatexml_Enabled!=0)&&(edtavGridstatecollection__gridstatexml_Visible!=0) ? " onblur=\""+""+";gx.evt.onblur(this,19);\"" : " "),(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavGridstatecollection__gridstatexml_Jsonclick,(short)0,(string)"AttributeRealWidth",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtavGridstatecollection__gridstatexml_Visible,(short)1,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(int)2097152,(short)0,(short)0,(short)15,(short)0,(short)0,(short)-1,(bool)true,(string)"",(string)"start",(bool)false,(string)""});
+            GridgridstatecollectionsRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavGridstatecollection__gridstatexml_Internalname,((GeneXus.Programs.wwpbaseobjects.SdtGridStateCollection_Item)AV6GridStateCollection.Item(AV17GXV1)).gxTpr_Gridstatexml,((GeneXus.Programs.wwpbaseobjects.SdtGridStateCollection_Item)AV6GridStateCollection.Item(AV17GXV1)).gxTpr_Gridstatexml,TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,19);\"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavGridstatecollection__gridstatexml_Jsonclick,(short)0,(string)"AttributeRealWidth",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtavGridstatecollection__gridstatexml_Visible,(short)1,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(int)2097152,(short)0,(short)0,(short)15,(short)0,(short)0,(short)-1,(bool)true,(string)"",(string)"start",(bool)false,(string)""});
             /* Subfile cell */
             if ( GridgridstatecollectionsContainer.GetWrapped() == 1 )
             {
                context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+""+"\">") ;
             }
             /* Single line edit */
-            TempTags = " " + ((edtavUdelete_Enabled!=0)&&(edtavUdelete_Visible!=0) ? " onfocus=\"gx.evt.onfocus(this, 20,'',false,'"+sGXsfl_15_idx+"',15)\"" : " ");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 20,'',false,'" + sGXsfl_15_idx + "',15)\"";
             ROClassString = "Attribute";
-            GridgridstatecollectionsRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavUdelete_Internalname,StringUtil.RTrim( AV13UDelete),(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+((edtavUdelete_Enabled!=0)&&(edtavUdelete_Visible!=0) ? " onblur=\""+""+";gx.evt.onblur(this,20);\"" : " "),"'"+""+"'"+",false,"+"'"+"EVUDELETE.CLICK."+sGXsfl_15_idx+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavUdelete_Jsonclick,(short)5,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWIconActionColumn",(string)"",(short)-1,(int)edtavUdelete_Enabled,(short)0,(string)"text",(string)"",(short)30,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)1,(short)15,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
+            GridgridstatecollectionsRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavUdelete_Internalname,StringUtil.RTrim( AV13UDelete),(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,20);\"","'"+""+"'"+",false,"+"'"+"EVUDELETE.CLICK."+sGXsfl_15_idx+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavUdelete_Jsonclick,(short)5,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWIconActionColumn",(string)"",(short)-1,(int)edtavUdelete_Enabled,(short)0,(string)"text",(string)"",(short)30,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)1,(short)15,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
             send_integrity_lvl_hashes0N2( ) ;
             GridgridstatecollectionsContainer.AddRow(GridgridstatecollectionsRow);
             nGXsfl_15_idx = ((subGridgridstatecollections_Islastpage==1)&&(nGXsfl_15_idx+1>subGridgridstatecollections_fnc_Recordsperpage( )) ? 1 : nGXsfl_15_idx+1);
@@ -1761,20 +1756,14 @@ namespace GeneXus.Programs.wwpbaseobjects {
          edtavGridstatecollection__title_Title = "Filters";
          chkavCollectionisempty.Caption = "";
          edtavUdelete_Jsonclick = "";
-         edtavUdelete_Visible = -1;
          edtavUdelete_Enabled = 1;
          edtavGridstatecollection__gridstatexml_Jsonclick = "";
-         edtavGridstatecollection__gridstatexml_Enabled = 1;
          edtavGridstatecollection__gridstatexml_Visible = -1;
          edtavGridstatecollection__title_Jsonclick = "";
          edtavGridstatecollection__title_Class = "Attribute";
-         edtavGridstatecollection__title_Visible = -1;
-         edtavGridstatecollection__title_Enabled = 1;
          edtavMovedown_Jsonclick = "";
-         edtavMovedown_Visible = -1;
          edtavMovedown_Enabled = 1;
          edtavMoveup_Jsonclick = "";
-         edtavMoveup_Visible = -1;
          edtavMoveup_Enabled = 1;
          subGridgridstatecollections_Class = "WorkWith";
          subGridgridstatecollections_Backcolorstyle = 0;
@@ -1804,43 +1793,37 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'GRIDGRIDSTATECOLLECTIONS_nFirstRecordOnPage'},{av:'GRIDGRIDSTATECOLLECTIONS_nEOF'},{av:'AV6GridStateCollection',fld:'vGRIDSTATECOLLECTION',grid:15,pic:''},{av:'nGXsfl_15_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:15},{av:'nRC_GXsfl_15',ctrl:'GRIDGRIDSTATECOLLECTIONS',prop:'GridRC',grid:15},{av:'subGridgridstatecollections_Rows',ctrl:'GRIDGRIDSTATECOLLECTIONS',prop:'Rows'},{av:'AV5CollectionIsEmpty',fld:'vCOLLECTIONISEMPTY',pic:''},{av:'AV14UserKey',fld:'vUSERKEY',pic:'',hsh:true}]");
-         setEventMetadata("REFRESH",",oparms:[{ctrl:'GRIDSTATECOLLECTION__TITLE',prop:'Title'},{ctrl:'FORM',prop:'Caption'},{ctrl:'GRIDSTATECOLLECTION__GRIDSTATEXML',prop:'Visible'},{ctrl:'GRIDSTATECOLLECTION__TITLE',prop:'Class'}]}");
-         setEventMetadata("GRIDGRIDSTATECOLLECTIONS.LOAD","{handler:'E130N2',iparms:[]");
-         setEventMetadata("GRIDGRIDSTATECOLLECTIONS.LOAD",",oparms:[{av:'AV12MoveUp',fld:'vMOVEUP',pic:''},{av:'AV11MoveDown',fld:'vMOVEDOWN',pic:''},{av:'AV13UDelete',fld:'vUDELETE',pic:''}]}");
-         setEventMetadata("ENTER","{handler:'E110N2',iparms:[{av:'AV6GridStateCollection',fld:'vGRIDSTATECOLLECTION',grid:15,pic:''},{av:'nGXsfl_15_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:15},{av:'GRIDGRIDSTATECOLLECTIONS_nFirstRecordOnPage'},{av:'nRC_GXsfl_15',ctrl:'GRIDGRIDSTATECOLLECTIONS',prop:'GridRC',grid:15},{av:'AV5CollectionIsEmpty',fld:'vCOLLECTIONISEMPTY',pic:''},{av:'AV14UserKey',fld:'vUSERKEY',pic:'',hsh:true},{av:'GRIDGRIDSTATECOLLECTIONS_nEOF'},{av:'subGridgridstatecollections_Rows',ctrl:'GRIDGRIDSTATECOLLECTIONS',prop:'Rows'}]");
-         setEventMetadata("ENTER",",oparms:[{av:'AV6GridStateCollection',fld:'vGRIDSTATECOLLECTION',grid:15,pic:''},{av:'nGXsfl_15_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:15},{av:'GRIDGRIDSTATECOLLECTIONS_nFirstRecordOnPage'},{av:'nRC_GXsfl_15',ctrl:'GRIDGRIDSTATECOLLECTIONS',prop:'GridRC',grid:15}]}");
-         setEventMetadata("VMOVEUP.CLICK","{handler:'E150N2',iparms:[{av:'AV6GridStateCollection',fld:'vGRIDSTATECOLLECTION',grid:15,pic:''},{av:'nGXsfl_15_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:15},{av:'GRIDGRIDSTATECOLLECTIONS_nFirstRecordOnPage'},{av:'nRC_GXsfl_15',ctrl:'GRIDGRIDSTATECOLLECTIONS',prop:'GridRC',grid:15},{av:'GRIDGRIDSTATECOLLECTIONS_nEOF'},{av:'subGridgridstatecollections_Rows',ctrl:'GRIDGRIDSTATECOLLECTIONS',prop:'Rows'},{av:'AV5CollectionIsEmpty',fld:'vCOLLECTIONISEMPTY',pic:''},{av:'AV14UserKey',fld:'vUSERKEY',pic:'',hsh:true}]");
-         setEventMetadata("VMOVEUP.CLICK",",oparms:[{av:'AV6GridStateCollection',fld:'vGRIDSTATECOLLECTION',grid:15,pic:''},{av:'nGXsfl_15_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:15},{av:'GRIDGRIDSTATECOLLECTIONS_nFirstRecordOnPage'},{av:'nRC_GXsfl_15',ctrl:'GRIDGRIDSTATECOLLECTIONS',prop:'GridRC',grid:15}]}");
-         setEventMetadata("VMOVEDOWN.CLICK","{handler:'E160N2',iparms:[{av:'AV6GridStateCollection',fld:'vGRIDSTATECOLLECTION',grid:15,pic:''},{av:'nGXsfl_15_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:15},{av:'GRIDGRIDSTATECOLLECTIONS_nFirstRecordOnPage'},{av:'nRC_GXsfl_15',ctrl:'GRIDGRIDSTATECOLLECTIONS',prop:'GridRC',grid:15},{av:'GRIDGRIDSTATECOLLECTIONS_nEOF'},{av:'subGridgridstatecollections_Rows',ctrl:'GRIDGRIDSTATECOLLECTIONS',prop:'Rows'},{av:'AV5CollectionIsEmpty',fld:'vCOLLECTIONISEMPTY',pic:''},{av:'AV14UserKey',fld:'vUSERKEY',pic:'',hsh:true}]");
-         setEventMetadata("VMOVEDOWN.CLICK",",oparms:[{av:'AV6GridStateCollection',fld:'vGRIDSTATECOLLECTION',grid:15,pic:''},{av:'nGXsfl_15_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:15},{av:'GRIDGRIDSTATECOLLECTIONS_nFirstRecordOnPage'},{av:'nRC_GXsfl_15',ctrl:'GRIDGRIDSTATECOLLECTIONS',prop:'GridRC',grid:15}]}");
-         setEventMetadata("VUDELETE.CLICK","{handler:'E170N2',iparms:[{av:'AV6GridStateCollection',fld:'vGRIDSTATECOLLECTION',grid:15,pic:''},{av:'nGXsfl_15_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:15},{av:'GRIDGRIDSTATECOLLECTIONS_nFirstRecordOnPage'},{av:'nRC_GXsfl_15',ctrl:'GRIDGRIDSTATECOLLECTIONS',prop:'GridRC',grid:15},{av:'GRIDGRIDSTATECOLLECTIONS_nEOF'},{av:'subGridgridstatecollections_Rows',ctrl:'GRIDGRIDSTATECOLLECTIONS',prop:'Rows'},{av:'AV5CollectionIsEmpty',fld:'vCOLLECTIONISEMPTY',pic:''},{av:'AV14UserKey',fld:'vUSERKEY',pic:'',hsh:true}]");
-         setEventMetadata("VUDELETE.CLICK",",oparms:[{av:'AV6GridStateCollection',fld:'vGRIDSTATECOLLECTION',grid:15,pic:''},{av:'nGXsfl_15_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:15},{av:'GRIDGRIDSTATECOLLECTIONS_nFirstRecordOnPage'},{av:'nRC_GXsfl_15',ctrl:'GRIDGRIDSTATECOLLECTIONS',prop:'GridRC',grid:15},{av:'AV5CollectionIsEmpty',fld:'vCOLLECTIONISEMPTY',pic:''}]}");
-         setEventMetadata("GRIDGRIDSTATECOLLECTIONS_FIRSTPAGE","{handler:'subgridgridstatecollections_firstpage',iparms:[{av:'GRIDGRIDSTATECOLLECTIONS_nFirstRecordOnPage'},{av:'GRIDGRIDSTATECOLLECTIONS_nEOF'},{av:'AV6GridStateCollection',fld:'vGRIDSTATECOLLECTION',grid:15,pic:''},{av:'nGXsfl_15_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:15},{av:'nRC_GXsfl_15',ctrl:'GRIDGRIDSTATECOLLECTIONS',prop:'GridRC',grid:15},{av:'subGridgridstatecollections_Rows',ctrl:'GRIDGRIDSTATECOLLECTIONS',prop:'Rows'},{av:'AV14UserKey',fld:'vUSERKEY',pic:'',hsh:true},{av:'AV5CollectionIsEmpty',fld:'vCOLLECTIONISEMPTY',pic:''}]");
-         setEventMetadata("GRIDGRIDSTATECOLLECTIONS_FIRSTPAGE",",oparms:[{ctrl:'GRIDSTATECOLLECTION__TITLE',prop:'Title'},{ctrl:'FORM',prop:'Caption'},{ctrl:'GRIDSTATECOLLECTION__GRIDSTATEXML',prop:'Visible'},{ctrl:'GRIDSTATECOLLECTION__TITLE',prop:'Class'}]}");
-         setEventMetadata("GRIDGRIDSTATECOLLECTIONS_PREVPAGE","{handler:'subgridgridstatecollections_previouspage',iparms:[{av:'GRIDGRIDSTATECOLLECTIONS_nFirstRecordOnPage'},{av:'GRIDGRIDSTATECOLLECTIONS_nEOF'},{av:'AV6GridStateCollection',fld:'vGRIDSTATECOLLECTION',grid:15,pic:''},{av:'nGXsfl_15_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:15},{av:'nRC_GXsfl_15',ctrl:'GRIDGRIDSTATECOLLECTIONS',prop:'GridRC',grid:15},{av:'subGridgridstatecollections_Rows',ctrl:'GRIDGRIDSTATECOLLECTIONS',prop:'Rows'},{av:'AV14UserKey',fld:'vUSERKEY',pic:'',hsh:true},{av:'AV5CollectionIsEmpty',fld:'vCOLLECTIONISEMPTY',pic:''}]");
-         setEventMetadata("GRIDGRIDSTATECOLLECTIONS_PREVPAGE",",oparms:[{ctrl:'GRIDSTATECOLLECTION__TITLE',prop:'Title'},{ctrl:'FORM',prop:'Caption'},{ctrl:'GRIDSTATECOLLECTION__GRIDSTATEXML',prop:'Visible'},{ctrl:'GRIDSTATECOLLECTION__TITLE',prop:'Class'}]}");
-         setEventMetadata("GRIDGRIDSTATECOLLECTIONS_NEXTPAGE","{handler:'subgridgridstatecollections_nextpage',iparms:[{av:'GRIDGRIDSTATECOLLECTIONS_nFirstRecordOnPage'},{av:'GRIDGRIDSTATECOLLECTIONS_nEOF'},{av:'AV6GridStateCollection',fld:'vGRIDSTATECOLLECTION',grid:15,pic:''},{av:'nGXsfl_15_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:15},{av:'nRC_GXsfl_15',ctrl:'GRIDGRIDSTATECOLLECTIONS',prop:'GridRC',grid:15},{av:'subGridgridstatecollections_Rows',ctrl:'GRIDGRIDSTATECOLLECTIONS',prop:'Rows'},{av:'AV14UserKey',fld:'vUSERKEY',pic:'',hsh:true},{av:'AV5CollectionIsEmpty',fld:'vCOLLECTIONISEMPTY',pic:''}]");
-         setEventMetadata("GRIDGRIDSTATECOLLECTIONS_NEXTPAGE",",oparms:[{ctrl:'GRIDSTATECOLLECTION__TITLE',prop:'Title'},{ctrl:'FORM',prop:'Caption'},{ctrl:'GRIDSTATECOLLECTION__GRIDSTATEXML',prop:'Visible'},{ctrl:'GRIDSTATECOLLECTION__TITLE',prop:'Class'}]}");
-         setEventMetadata("GRIDGRIDSTATECOLLECTIONS_LASTPAGE","{handler:'subgridgridstatecollections_lastpage',iparms:[{av:'GRIDGRIDSTATECOLLECTIONS_nFirstRecordOnPage'},{av:'GRIDGRIDSTATECOLLECTIONS_nEOF'},{av:'AV6GridStateCollection',fld:'vGRIDSTATECOLLECTION',grid:15,pic:''},{av:'nGXsfl_15_idx', ctrl: 'GRID', prop:'GridCurrRow', grid:15},{av:'nRC_GXsfl_15',ctrl:'GRIDGRIDSTATECOLLECTIONS',prop:'GridRC',grid:15},{av:'subGridgridstatecollections_Rows',ctrl:'GRIDGRIDSTATECOLLECTIONS',prop:'Rows'},{av:'AV14UserKey',fld:'vUSERKEY',pic:'',hsh:true},{av:'AV5CollectionIsEmpty',fld:'vCOLLECTIONISEMPTY',pic:''}]");
-         setEventMetadata("GRIDGRIDSTATECOLLECTIONS_LASTPAGE",",oparms:[{ctrl:'GRIDSTATECOLLECTION__TITLE',prop:'Title'},{ctrl:'FORM',prop:'Caption'},{ctrl:'GRIDSTATECOLLECTION__GRIDSTATEXML',prop:'Visible'},{ctrl:'GRIDSTATECOLLECTION__TITLE',prop:'Class'}]}");
-         setEventMetadata("NULL","{handler:'Validv_Udelete',iparms:[]");
-         setEventMetadata("NULL",",oparms:[]}");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"GRIDGRIDSTATECOLLECTIONS_nFirstRecordOnPage"},{"av":"GRIDGRIDSTATECOLLECTIONS_nEOF"},{"av":"AV6GridStateCollection","fld":"vGRIDSTATECOLLECTION","grid":15},{"av":"nGXsfl_15_idx","ctrl":"GRID","prop":"GridCurrRow","grid":15},{"av":"nRC_GXsfl_15","ctrl":"GRIDGRIDSTATECOLLECTIONS","prop":"GridRC","grid":15},{"av":"subGridgridstatecollections_Rows","ctrl":"GRIDGRIDSTATECOLLECTIONS","prop":"Rows"},{"av":"AV5CollectionIsEmpty","fld":"vCOLLECTIONISEMPTY"},{"av":"AV14UserKey","fld":"vUSERKEY","hsh":true}]""");
+         setEventMetadata("REFRESH",""","oparms":[{"ctrl":"GRIDSTATECOLLECTION__TITLE","prop":"Title"},{"ctrl":"FORM","prop":"Caption"},{"ctrl":"GRIDSTATECOLLECTION__GRIDSTATEXML","prop":"Visible"},{"ctrl":"GRIDSTATECOLLECTION__TITLE","prop":"Class"}]}""");
+         setEventMetadata("GRIDGRIDSTATECOLLECTIONS.LOAD","""{"handler":"E130N2","iparms":[]""");
+         setEventMetadata("GRIDGRIDSTATECOLLECTIONS.LOAD",""","oparms":[{"av":"AV12MoveUp","fld":"vMOVEUP"},{"av":"AV11MoveDown","fld":"vMOVEDOWN"},{"av":"AV13UDelete","fld":"vUDELETE"}]}""");
+         setEventMetadata("ENTER","""{"handler":"E110N2","iparms":[{"av":"AV6GridStateCollection","fld":"vGRIDSTATECOLLECTION","grid":15},{"av":"nGXsfl_15_idx","ctrl":"GRID","prop":"GridCurrRow","grid":15},{"av":"GRIDGRIDSTATECOLLECTIONS_nFirstRecordOnPage"},{"av":"nRC_GXsfl_15","ctrl":"GRIDGRIDSTATECOLLECTIONS","prop":"GridRC","grid":15},{"av":"AV5CollectionIsEmpty","fld":"vCOLLECTIONISEMPTY"},{"av":"AV14UserKey","fld":"vUSERKEY","hsh":true},{"av":"GRIDGRIDSTATECOLLECTIONS_nEOF"},{"av":"subGridgridstatecollections_Rows","ctrl":"GRIDGRIDSTATECOLLECTIONS","prop":"Rows"}]""");
+         setEventMetadata("ENTER",""","oparms":[{"av":"AV6GridStateCollection","fld":"vGRIDSTATECOLLECTION","grid":15},{"av":"nGXsfl_15_idx","ctrl":"GRID","prop":"GridCurrRow","grid":15},{"av":"GRIDGRIDSTATECOLLECTIONS_nFirstRecordOnPage"},{"av":"nRC_GXsfl_15","ctrl":"GRIDGRIDSTATECOLLECTIONS","prop":"GridRC","grid":15}]}""");
+         setEventMetadata("VMOVEUP.CLICK","""{"handler":"E150N2","iparms":[{"av":"AV6GridStateCollection","fld":"vGRIDSTATECOLLECTION","grid":15},{"av":"nGXsfl_15_idx","ctrl":"GRID","prop":"GridCurrRow","grid":15},{"av":"GRIDGRIDSTATECOLLECTIONS_nFirstRecordOnPage"},{"av":"nRC_GXsfl_15","ctrl":"GRIDGRIDSTATECOLLECTIONS","prop":"GridRC","grid":15},{"av":"GRIDGRIDSTATECOLLECTIONS_nEOF"},{"av":"subGridgridstatecollections_Rows","ctrl":"GRIDGRIDSTATECOLLECTIONS","prop":"Rows"},{"av":"AV5CollectionIsEmpty","fld":"vCOLLECTIONISEMPTY"},{"av":"AV14UserKey","fld":"vUSERKEY","hsh":true}]""");
+         setEventMetadata("VMOVEUP.CLICK",""","oparms":[{"av":"AV6GridStateCollection","fld":"vGRIDSTATECOLLECTION","grid":15},{"av":"nGXsfl_15_idx","ctrl":"GRID","prop":"GridCurrRow","grid":15},{"av":"GRIDGRIDSTATECOLLECTIONS_nFirstRecordOnPage"},{"av":"nRC_GXsfl_15","ctrl":"GRIDGRIDSTATECOLLECTIONS","prop":"GridRC","grid":15}]}""");
+         setEventMetadata("VMOVEDOWN.CLICK","""{"handler":"E160N2","iparms":[{"av":"AV6GridStateCollection","fld":"vGRIDSTATECOLLECTION","grid":15},{"av":"nGXsfl_15_idx","ctrl":"GRID","prop":"GridCurrRow","grid":15},{"av":"GRIDGRIDSTATECOLLECTIONS_nFirstRecordOnPage"},{"av":"nRC_GXsfl_15","ctrl":"GRIDGRIDSTATECOLLECTIONS","prop":"GridRC","grid":15},{"av":"GRIDGRIDSTATECOLLECTIONS_nEOF"},{"av":"subGridgridstatecollections_Rows","ctrl":"GRIDGRIDSTATECOLLECTIONS","prop":"Rows"},{"av":"AV5CollectionIsEmpty","fld":"vCOLLECTIONISEMPTY"},{"av":"AV14UserKey","fld":"vUSERKEY","hsh":true}]""");
+         setEventMetadata("VMOVEDOWN.CLICK",""","oparms":[{"av":"AV6GridStateCollection","fld":"vGRIDSTATECOLLECTION","grid":15},{"av":"nGXsfl_15_idx","ctrl":"GRID","prop":"GridCurrRow","grid":15},{"av":"GRIDGRIDSTATECOLLECTIONS_nFirstRecordOnPage"},{"av":"nRC_GXsfl_15","ctrl":"GRIDGRIDSTATECOLLECTIONS","prop":"GridRC","grid":15}]}""");
+         setEventMetadata("VUDELETE.CLICK","""{"handler":"E170N2","iparms":[{"av":"AV6GridStateCollection","fld":"vGRIDSTATECOLLECTION","grid":15},{"av":"nGXsfl_15_idx","ctrl":"GRID","prop":"GridCurrRow","grid":15},{"av":"GRIDGRIDSTATECOLLECTIONS_nFirstRecordOnPage"},{"av":"nRC_GXsfl_15","ctrl":"GRIDGRIDSTATECOLLECTIONS","prop":"GridRC","grid":15},{"av":"GRIDGRIDSTATECOLLECTIONS_nEOF"},{"av":"subGridgridstatecollections_Rows","ctrl":"GRIDGRIDSTATECOLLECTIONS","prop":"Rows"},{"av":"AV5CollectionIsEmpty","fld":"vCOLLECTIONISEMPTY"},{"av":"AV14UserKey","fld":"vUSERKEY","hsh":true}]""");
+         setEventMetadata("VUDELETE.CLICK",""","oparms":[{"av":"AV6GridStateCollection","fld":"vGRIDSTATECOLLECTION","grid":15},{"av":"nGXsfl_15_idx","ctrl":"GRID","prop":"GridCurrRow","grid":15},{"av":"GRIDGRIDSTATECOLLECTIONS_nFirstRecordOnPage"},{"av":"nRC_GXsfl_15","ctrl":"GRIDGRIDSTATECOLLECTIONS","prop":"GridRC","grid":15},{"av":"AV5CollectionIsEmpty","fld":"vCOLLECTIONISEMPTY"}]}""");
+         setEventMetadata("GRIDGRIDSTATECOLLECTIONS_FIRSTPAGE","""{"handler":"subgridgridstatecollections_firstpage","iparms":[{"av":"GRIDGRIDSTATECOLLECTIONS_nFirstRecordOnPage"},{"av":"GRIDGRIDSTATECOLLECTIONS_nEOF"},{"av":"AV6GridStateCollection","fld":"vGRIDSTATECOLLECTION","grid":15},{"av":"nGXsfl_15_idx","ctrl":"GRID","prop":"GridCurrRow","grid":15},{"av":"nRC_GXsfl_15","ctrl":"GRIDGRIDSTATECOLLECTIONS","prop":"GridRC","grid":15},{"av":"subGridgridstatecollections_Rows","ctrl":"GRIDGRIDSTATECOLLECTIONS","prop":"Rows"},{"av":"AV14UserKey","fld":"vUSERKEY","hsh":true},{"av":"AV5CollectionIsEmpty","fld":"vCOLLECTIONISEMPTY"}]""");
+         setEventMetadata("GRIDGRIDSTATECOLLECTIONS_FIRSTPAGE",""","oparms":[{"ctrl":"GRIDSTATECOLLECTION__TITLE","prop":"Title"},{"ctrl":"FORM","prop":"Caption"},{"ctrl":"GRIDSTATECOLLECTION__GRIDSTATEXML","prop":"Visible"},{"ctrl":"GRIDSTATECOLLECTION__TITLE","prop":"Class"}]}""");
+         setEventMetadata("GRIDGRIDSTATECOLLECTIONS_PREVPAGE","""{"handler":"subgridgridstatecollections_previouspage","iparms":[{"av":"GRIDGRIDSTATECOLLECTIONS_nFirstRecordOnPage"},{"av":"GRIDGRIDSTATECOLLECTIONS_nEOF"},{"av":"AV6GridStateCollection","fld":"vGRIDSTATECOLLECTION","grid":15},{"av":"nGXsfl_15_idx","ctrl":"GRID","prop":"GridCurrRow","grid":15},{"av":"nRC_GXsfl_15","ctrl":"GRIDGRIDSTATECOLLECTIONS","prop":"GridRC","grid":15},{"av":"subGridgridstatecollections_Rows","ctrl":"GRIDGRIDSTATECOLLECTIONS","prop":"Rows"},{"av":"AV14UserKey","fld":"vUSERKEY","hsh":true},{"av":"AV5CollectionIsEmpty","fld":"vCOLLECTIONISEMPTY"}]""");
+         setEventMetadata("GRIDGRIDSTATECOLLECTIONS_PREVPAGE",""","oparms":[{"ctrl":"GRIDSTATECOLLECTION__TITLE","prop":"Title"},{"ctrl":"FORM","prop":"Caption"},{"ctrl":"GRIDSTATECOLLECTION__GRIDSTATEXML","prop":"Visible"},{"ctrl":"GRIDSTATECOLLECTION__TITLE","prop":"Class"}]}""");
+         setEventMetadata("GRIDGRIDSTATECOLLECTIONS_NEXTPAGE","""{"handler":"subgridgridstatecollections_nextpage","iparms":[{"av":"GRIDGRIDSTATECOLLECTIONS_nFirstRecordOnPage"},{"av":"GRIDGRIDSTATECOLLECTIONS_nEOF"},{"av":"AV6GridStateCollection","fld":"vGRIDSTATECOLLECTION","grid":15},{"av":"nGXsfl_15_idx","ctrl":"GRID","prop":"GridCurrRow","grid":15},{"av":"nRC_GXsfl_15","ctrl":"GRIDGRIDSTATECOLLECTIONS","prop":"GridRC","grid":15},{"av":"subGridgridstatecollections_Rows","ctrl":"GRIDGRIDSTATECOLLECTIONS","prop":"Rows"},{"av":"AV14UserKey","fld":"vUSERKEY","hsh":true},{"av":"AV5CollectionIsEmpty","fld":"vCOLLECTIONISEMPTY"}]""");
+         setEventMetadata("GRIDGRIDSTATECOLLECTIONS_NEXTPAGE",""","oparms":[{"ctrl":"GRIDSTATECOLLECTION__TITLE","prop":"Title"},{"ctrl":"FORM","prop":"Caption"},{"ctrl":"GRIDSTATECOLLECTION__GRIDSTATEXML","prop":"Visible"},{"ctrl":"GRIDSTATECOLLECTION__TITLE","prop":"Class"}]}""");
+         setEventMetadata("GRIDGRIDSTATECOLLECTIONS_LASTPAGE","""{"handler":"subgridgridstatecollections_lastpage","iparms":[{"av":"GRIDGRIDSTATECOLLECTIONS_nFirstRecordOnPage"},{"av":"GRIDGRIDSTATECOLLECTIONS_nEOF"},{"av":"AV6GridStateCollection","fld":"vGRIDSTATECOLLECTION","grid":15},{"av":"nGXsfl_15_idx","ctrl":"GRID","prop":"GridCurrRow","grid":15},{"av":"nRC_GXsfl_15","ctrl":"GRIDGRIDSTATECOLLECTIONS","prop":"GridRC","grid":15},{"av":"subGridgridstatecollections_Rows","ctrl":"GRIDGRIDSTATECOLLECTIONS","prop":"Rows"},{"av":"AV14UserKey","fld":"vUSERKEY","hsh":true},{"av":"AV5CollectionIsEmpty","fld":"vCOLLECTIONISEMPTY"}]""");
+         setEventMetadata("GRIDGRIDSTATECOLLECTIONS_LASTPAGE",""","oparms":[{"ctrl":"GRIDSTATECOLLECTION__TITLE","prop":"Title"},{"ctrl":"FORM","prop":"Caption"},{"ctrl":"GRIDSTATECOLLECTION__GRIDSTATEXML","prop":"Visible"},{"ctrl":"GRIDSTATECOLLECTION__TITLE","prop":"Class"}]}""");
+         setEventMetadata("NULL","""{"handler":"Validv_Udelete","iparms":[]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -1890,7 +1873,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private short GRIDGRIDSTATECOLLECTIONS_nEOF ;
       private short nGotPars ;
       private short GxWebError ;
-      private short initialized ;
       private short gxajaxcallmode ;
       private short wbEnd ;
       private short wbStart ;
@@ -1921,12 +1903,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private int idxLst ;
       private int subGridgridstatecollections_Backcolor ;
       private int subGridgridstatecollections_Allbackcolor ;
-      private int edtavMoveup_Visible ;
-      private int edtavMovedown_Visible ;
-      private int edtavGridstatecollection__title_Enabled ;
-      private int edtavGridstatecollection__title_Visible ;
-      private int edtavGridstatecollection__gridstatexml_Enabled ;
-      private int edtavUdelete_Visible ;
       private int subGridgridstatecollections_Titlebackcolor ;
       private int subGridgridstatecollections_Selectedindex ;
       private int subGridgridstatecollections_Selectioncolor ;
@@ -2007,15 +1983,15 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private GXWebColumn GridgridstatecollectionsColumn ;
       private GXUserControl ucGridgridstatecollections_empowerer ;
       private GXUserControl ucDvelop_bootstrap_panel1 ;
+      private GxHttpRequest AV8HTTPRequest ;
+      private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private GXCheckbox chkavCollectionisempty ;
+      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtGridStateCollection_Item> AV6GridStateCollection ;
+      private GeneXus.Programs.wwpbaseobjects.SdtGridStateCollection_Item AV7GridStateCollectionItem ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
-      private GxHttpRequest AV8HTTPRequest ;
-      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtGridStateCollection_Item> AV6GridStateCollection ;
-      private GXWebForm Form ;
-      private GeneXus.Programs.wwpbaseobjects.SdtGridStateCollection_Item AV7GridStateCollectionItem ;
    }
 
 }

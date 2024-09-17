@@ -59,7 +59,7 @@ namespace GeneXus.Programs {
          this.AV20gxid = aP1_gxid;
          this.AV24GXM1UpdateWorkHourLog_Level_DetailSdt = new SdtUpdateWorkHourLog_Level_DetailSdt(context) ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP2_GXM1UpdateWorkHourLog_Level_DetailSdt=this.AV24GXM1UpdateWorkHourLog_Level_DetailSdt;
       }
 
@@ -74,31 +74,14 @@ namespace GeneXus.Programs {
                                  int aP1_gxid ,
                                  out SdtUpdateWorkHourLog_Level_DetailSdt aP2_GXM1UpdateWorkHourLog_Level_DetailSdt )
       {
-         updateworkhourlog_level_detail objupdateworkhourlog_level_detail;
-         objupdateworkhourlog_level_detail = new updateworkhourlog_level_detail();
-         objupdateworkhourlog_level_detail.A118WorkHourLogId = aP0_WorkHourLogId;
-         objupdateworkhourlog_level_detail.AV20gxid = aP1_gxid;
-         objupdateworkhourlog_level_detail.AV24GXM1UpdateWorkHourLog_Level_DetailSdt = new SdtUpdateWorkHourLog_Level_DetailSdt(context) ;
-         objupdateworkhourlog_level_detail.context.SetSubmitInitialConfig(context);
-         objupdateworkhourlog_level_detail.initialize();
-         Submit( executePrivateCatch,objupdateworkhourlog_level_detail);
+         this.A118WorkHourLogId = aP0_WorkHourLogId;
+         this.AV20gxid = aP1_gxid;
+         this.AV24GXM1UpdateWorkHourLog_Level_DetailSdt = new SdtUpdateWorkHourLog_Level_DetailSdt(context) ;
+         SubmitImpl();
          aP2_GXM1UpdateWorkHourLog_Level_DetailSdt=this.AV24GXM1UpdateWorkHourLog_Level_DetailSdt;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((updateworkhourlog_level_detail)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -140,21 +123,17 @@ namespace GeneXus.Programs {
          AV24GXM1UpdateWorkHourLog_Level_DetailSdt.gxTpr_Workhourlog = AV8WorkHourLog;
          AV24GXM1UpdateWorkHourLog_Level_DetailSdt.gxTpr_Today = Gx_date;
          AV24GXM1UpdateWorkHourLog_Level_DetailSdt.gxTpr_Msgvar = AV19MsgVar;
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -182,10 +161,10 @@ namespace GeneXus.Programs {
       private DateTime AV14WorkLogDate ;
       private DateTime Gx_date ;
       private string AV18WorkLogDescription ;
-      private SdtUpdateWorkHourLog_Level_DetailSdt aP2_GXM1UpdateWorkHourLog_Level_DetailSdt ;
       private IGxSession Gxwebsession ;
-      private SdtWorkHourLog AV8WorkHourLog ;
       private SdtUpdateWorkHourLog_Level_DetailSdt AV24GXM1UpdateWorkHourLog_Level_DetailSdt ;
+      private SdtWorkHourLog AV8WorkHourLog ;
+      private SdtUpdateWorkHourLog_Level_DetailSdt aP2_GXM1UpdateWorkHourLog_Level_DetailSdt ;
    }
 
 }

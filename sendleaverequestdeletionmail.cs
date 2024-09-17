@@ -62,33 +62,16 @@ namespace GeneXus.Programs {
       {
          this.AV12LeaveRequestId = aP0_LeaveRequestId;
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
       public void executeSubmit( long aP0_LeaveRequestId )
       {
-         sendleaverequestdeletionmail objsendleaverequestdeletionmail;
-         objsendleaverequestdeletionmail = new sendleaverequestdeletionmail();
-         objsendleaverequestdeletionmail.AV12LeaveRequestId = aP0_LeaveRequestId;
-         objsendleaverequestdeletionmail.context.SetSubmitInitialConfig(context);
-         objsendleaverequestdeletionmail.initialize();
-         Submit( executePrivateCatch,objsendleaverequestdeletionmail);
+         this.AV12LeaveRequestId = aP0_LeaveRequestId;
+         SubmitImpl();
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((sendleaverequestdeletionmail)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -112,12 +95,12 @@ namespace GeneXus.Programs {
          new sendemail(context ).execute(  AV13ManagerEmail, ref  AV15Subject, ref  AV11Body) ;
          AV14NotificationText = AV8Employee.gxTpr_Employeename + " has deleted a leave request.";
          new sdsendpushnotifications(context ).execute(  "Leave Request",  AV14NotificationText,  0) ;
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -125,16 +108,11 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
          AV9GAMUser = new GeneXus.Programs.genexussecurity.SdtGAMUser(context);
          AV8Employee = new SdtEmployee(context);
          AV10LeaveRequest = new SdtLeaveRequest(context);
-         scmdbuf = "";
          P008X2_A112EmployeeIsActive = new bool[] {false} ;
          P008X2_A110EmployeeIsManager = new bool[] {false} ;
          P008X2_A100CompanyId = new long[1] ;
@@ -158,7 +136,6 @@ namespace GeneXus.Programs {
       private long AV12LeaveRequestId ;
       private long A100CompanyId ;
       private long A106EmployeeId ;
-      private string scmdbuf ;
       private bool A112EmployeeIsActive ;
       private bool A110EmployeeIsManager ;
       private string AV11Body ;
@@ -168,15 +145,15 @@ namespace GeneXus.Programs {
       private string AV14NotificationText ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GeneXus.Programs.genexussecurity.SdtGAMUser AV9GAMUser ;
+      private SdtEmployee AV8Employee ;
+      private SdtLeaveRequest AV10LeaveRequest ;
       private IDataStoreProvider pr_default ;
       private bool[] P008X2_A112EmployeeIsActive ;
       private bool[] P008X2_A110EmployeeIsManager ;
       private long[] P008X2_A100CompanyId ;
       private string[] P008X2_A109EmployeeEmail ;
       private long[] P008X2_A106EmployeeId ;
-      private SdtEmployee AV8Employee ;
-      private GeneXus.Programs.genexussecurity.SdtGAMUser AV9GAMUser ;
-      private SdtLeaveRequest AV10LeaveRequest ;
    }
 
    public class sendleaverequestdeletionmail__default : DataStoreHelperBase, IDataStoreHelper

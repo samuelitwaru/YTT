@@ -58,7 +58,7 @@ namespace GeneXus.Programs {
          this.AV16PeriodicCategory = aP5_PeriodicCategory;
          this.AV19Periods = new GXBaseCollection<SdtSDTLeaveReport_PeriodCollectionItem>( context, "SDTLeaveReport.PeriodCollectionItem", "YTT_version4") ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP6_Periods=this.AV19Periods;
       }
 
@@ -81,35 +81,18 @@ namespace GeneXus.Programs {
                                  short aP5_PeriodicCategory ,
                                  out GXBaseCollection<SdtSDTLeaveReport_PeriodCollectionItem> aP6_Periods )
       {
-         procgetperiodicleavehours objprocgetperiodicleavehours;
-         objprocgetperiodicleavehours = new procgetperiodicleavehours();
-         objprocgetperiodicleavehours.AV9FromDate = aP0_FromDate;
-         objprocgetperiodicleavehours.AV12ToDate = aP1_ToDate;
-         objprocgetperiodicleavehours.AV11ProjectId = aP2_ProjectId;
-         objprocgetperiodicleavehours.AV8EmployeeId = aP3_EmployeeId;
-         objprocgetperiodicleavehours.AV17LocationId = aP4_LocationId;
-         objprocgetperiodicleavehours.AV16PeriodicCategory = aP5_PeriodicCategory;
-         objprocgetperiodicleavehours.AV19Periods = new GXBaseCollection<SdtSDTLeaveReport_PeriodCollectionItem>( context, "SDTLeaveReport.PeriodCollectionItem", "YTT_version4") ;
-         objprocgetperiodicleavehours.context.SetSubmitInitialConfig(context);
-         objprocgetperiodicleavehours.initialize();
-         Submit( executePrivateCatch,objprocgetperiodicleavehours);
+         this.AV9FromDate = aP0_FromDate;
+         this.AV12ToDate = aP1_ToDate;
+         this.AV11ProjectId = aP2_ProjectId;
+         this.AV8EmployeeId = aP3_EmployeeId;
+         this.AV17LocationId = aP4_LocationId;
+         this.AV16PeriodicCategory = aP5_PeriodicCategory;
+         this.AV19Periods = new GXBaseCollection<SdtSDTLeaveReport_PeriodCollectionItem>( context, "SDTLeaveReport.PeriodCollectionItem", "YTT_version4") ;
+         SubmitImpl();
          aP6_Periods=this.AV19Periods;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((procgetperiodicleavehours)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -117,14 +100,14 @@ namespace GeneXus.Programs {
          S111 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          /* Execute user subroutine: 'GETHOLIDAYDATES' */
          S121 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          while ( DateTimeUtil.ResetTime ( AV9FromDate ) <= DateTimeUtil.ResetTime ( AV12ToDate ) )
@@ -262,7 +245,7 @@ namespace GeneXus.Programs {
             pr_default.close(1);
             AV19Periods.Add(AV20Period, 0);
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void S111( )
@@ -311,7 +294,7 @@ namespace GeneXus.Programs {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -319,15 +302,10 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
          AV19Periods = new GXBaseCollection<SdtSDTLeaveReport_PeriodCollectionItem>( context, "SDTLeaveReport.PeriodCollectionItem", "YTT_version4");
          AV20Period = new SdtSDTLeaveReport_PeriodCollectionItem(context);
-         scmdbuf = "";
          A129LeaveRequestStartDate = DateTime.MinValue;
          A130LeaveRequestEndDate = DateTime.MinValue;
          A132LeaveRequestStatus = "";
@@ -387,7 +365,6 @@ namespace GeneXus.Programs {
       private long A102ProjectId ;
       private long A118WorkHourLogId ;
       private long A113HolidayId ;
-      private string scmdbuf ;
       private string A132LeaveRequestStatus ;
       private DateTime AV9FromDate ;
       private DateTime AV12ToDate ;
@@ -400,10 +377,11 @@ namespace GeneXus.Programs {
       private DateTime A119WorkHourLogDate ;
       private DateTime A115HolidayStartDate ;
       private bool returnInSub ;
-      private GxSimpleCollection<long> AV11ProjectId ;
-      private GxSimpleCollection<DateTime> AV23HolidayDates ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GxSimpleCollection<long> AV11ProjectId ;
+      private GXBaseCollection<SdtSDTLeaveReport_PeriodCollectionItem> AV19Periods ;
+      private SdtSDTLeaveReport_PeriodCollectionItem AV20Period ;
       private IDataStoreProvider pr_default ;
       private long[] P006R2_A124LeaveTypeId ;
       private long[] P006R2_A100CompanyId ;
@@ -413,6 +391,7 @@ namespace GeneXus.Programs {
       private DateTime[] P006R2_A129LeaveRequestStartDate ;
       private string[] P006R2_A132LeaveRequestStatus ;
       private long[] P006R2_A127LeaveRequestId ;
+      private GxSimpleCollection<DateTime> AV23HolidayDates ;
       private long[] P006R3_A100CompanyId ;
       private long[] P006R3_A157CompanyLocationId ;
       private long[] P006R3_A106EmployeeId ;
@@ -426,8 +405,6 @@ namespace GeneXus.Programs {
       private DateTime[] P006R4_A115HolidayStartDate ;
       private long[] P006R4_A113HolidayId ;
       private GXBaseCollection<SdtSDTLeaveReport_PeriodCollectionItem> aP6_Periods ;
-      private GXBaseCollection<SdtSDTLeaveReport_PeriodCollectionItem> AV19Periods ;
-      private SdtSDTLeaveReport_PeriodCollectionItem AV20Period ;
    }
 
    public class procgetperiodicleavehours__default : DataStoreHelperBase, IDataStoreHelper

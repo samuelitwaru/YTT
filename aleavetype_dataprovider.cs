@@ -24,20 +24,15 @@ namespace GeneXus.Programs {
    {
       public static int Main( string[] args )
       {
-         try
-         {
-            GeneXus.Configuration.Config.ParseArgs(ref args);
-            return new aleavetype_dataprovider().executeCmdLine(args); ;
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-            return 1 ;
-         }
+         return new aleavetype_dataprovider().MainImpl(args); ;
       }
 
       public int executeCmdLine( string[] args )
+      {
+         return ExecuteCmdLine(args); ;
+      }
+
+      protected override int ExecuteCmdLine( string[] args )
       {
          GXBCCollection<SdtLeaveType> aP0_Gxm1rootcol = new GXBCCollection<SdtLeaveType>()  ;
          execute(out aP0_Gxm1rootcol);
@@ -78,7 +73,7 @@ namespace GeneXus.Programs {
       {
          this.Gxm1rootcol = new GXBCCollection<SdtLeaveType>( context, "LeaveType", "YTT_version4") ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_Gxm1rootcol=this.Gxm1rootcol;
       }
 
@@ -90,38 +85,21 @@ namespace GeneXus.Programs {
 
       public void executeSubmit( out GXBCCollection<SdtLeaveType> aP0_Gxm1rootcol )
       {
-         aleavetype_dataprovider objaleavetype_dataprovider;
-         objaleavetype_dataprovider = new aleavetype_dataprovider();
-         objaleavetype_dataprovider.Gxm1rootcol = new GXBCCollection<SdtLeaveType>( context, "LeaveType", "YTT_version4") ;
-         objaleavetype_dataprovider.context.SetSubmitInitialConfig(context);
-         objaleavetype_dataprovider.initialize();
-         Submit( executePrivateCatch,objaleavetype_dataprovider);
+         this.Gxm1rootcol = new GXBCCollection<SdtLeaveType>( context, "LeaveType", "YTT_version4") ;
+         SubmitImpl();
          aP0_Gxm1rootcol=this.Gxm1rootcol;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((aleavetype_dataprovider)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -129,17 +107,13 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
          /* GeneXus formulas. */
       }
 
-      private GXBCCollection<SdtLeaveType> aP0_Gxm1rootcol ;
       private GXBCCollection<SdtLeaveType> Gxm1rootcol ;
+      private GXBCCollection<SdtLeaveType> aP0_Gxm1rootcol ;
    }
 
 }

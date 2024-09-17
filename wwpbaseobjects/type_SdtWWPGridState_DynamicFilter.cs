@@ -1,7 +1,7 @@
 /*
 				   File: type_SdtWWPGridState_DynamicFilter
 			Description: DynamicFilters
-				 Author: Nemo 🐠 for C# (.NET) version 18.0.6.177934
+				 Author: Nemo 🐠 for C# (.NET) version 18.0.10.184260
 		   Program type: Callable routine
 			  Main DBMS: 
 */
@@ -130,7 +130,7 @@ namespace GeneXus.Programs.wwpbaseobjects
 		public bool ShouldSerializegxTpr_Dsc()
 
 		{
-				return !gxTv_SdtWWPGridState_DynamicFilter_Dsc_N;
+			return !gxTv_SdtWWPGridState_DynamicFilter_Dsc_N;
 
 		}
 
@@ -169,7 +169,7 @@ namespace GeneXus.Programs.wwpbaseobjects
 		public bool ShouldSerializegxTpr_Valuedsc()
 
 		{
-				return !gxTv_SdtWWPGridState_DynamicFilter_Valuedsc_N;
+			return !gxTv_SdtWWPGridState_DynamicFilter_Valuedsc_N;
 
 		}
 
@@ -224,7 +224,7 @@ namespace GeneXus.Programs.wwpbaseobjects
 		public bool ShouldSerializegxTpr_Valuetodsc()
 
 		{
-				return !gxTv_SdtWWPGridState_DynamicFilter_Valuetodsc_N;
+			return !gxTv_SdtWWPGridState_DynamicFilter_Valuetodsc_N;
 
 		}
 
@@ -235,6 +235,14 @@ namespace GeneXus.Programs.wwpbaseobjects
 		}
 
 
+
+		#endregion
+
+		#region Static Type Properties
+
+		[XmlIgnore]
+		private static GXTypeInfo _typeProps;
+		protected override GXTypeInfo TypeInfo { get { return _typeProps; } set { _typeProps = value; } }
 
 		#endregion
 
@@ -292,6 +300,7 @@ namespace GeneXus.Programs.wwpbaseobjects
 		#endregion
 	}
 	#region Rest interface
+	[GxJsonSerialization("wrapped")]
 	[DataContract(Name=@"WWPGridState.DynamicFilter", Namespace="YTT_version4")]
 	public class SdtWWPGridState_DynamicFilter_RESTInterface : GxGenericCollectionItem<SdtWWPGridState_DynamicFilter>, System.Web.SessionState.IRequiresSessionState
 	{

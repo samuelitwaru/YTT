@@ -15,20 +15,18 @@
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\KBs\\YTT_version4\\NETPostgreSQL14\\NuGet.Config",
-          "C:\\Users\\samuelitwaru\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\samuelitwaru\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "net6.0"
+          "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {},
           "https://pkgs.dev.azure.com/genexuslabs/13fb82d9-57a8-49ef-95bb-0ec8324e470c/_packaging/dotnet-prereleases/nuget/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0": {
-            "targetAlias": "net6.0",
+          "net8.0": {
+            "targetAlias": "net8.0",
             "projectReferences": {}
           }
         },
@@ -39,51 +37,56 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
-        "net6.0": {
-          "targetAlias": "net6.0",
+        "net8.0": {
+          "targetAlias": "net8.0",
           "dependencies": {
             "GeneXus.Classes.Core": {
               "target": "Package",
-              "version": "[1.26.1, 1.26.1]"
+              "version": "[1.30.0, 1.30.0]"
             },
             "GeneXus.Classes.Web.Core": {
               "target": "Package",
-              "version": "[1.26.1, 1.26.1]"
+              "version": "[1.30.0, 1.30.0]"
             },
             "GeneXus.DataInitialization.Core": {
               "target": "Package",
-              "version": "[1.26.1, 1.26.1]"
+              "version": "[1.30.0, 1.30.0]"
             },
             "GeneXus.Excel.Core": {
               "target": "Package",
-              "version": "[1.26.1, 1.26.1]"
+              "version": "[1.30.0, 1.30.0]"
             },
             "GeneXus.Mail.Core": {
               "target": "Package",
-              "version": "[1.26.1, 1.26.1]"
+              "version": "[1.30.0, 1.30.0]"
             },
             "GeneXus.Maps.Core": {
               "target": "Package",
-              "version": "[1.26.1, 1.26.1]"
+              "version": "[1.30.0, 1.30.0]"
             },
             "GeneXus.NetCoreStartup": {
               "target": "Package",
-              "version": "[1.26.1, 1.26.1]"
+              "version": "[1.30.0, 1.30.0]"
             },
             "GeneXus.PdfReportsCS.Core": {
               "target": "Package",
-              "version": "[1.26.1, 1.26.1]"
+              "version": "[1.30.0, 1.30.0]"
             },
             "GeneXus.Reorganization.Core": {
               "target": "Package",
-              "version": "[1.26.1, 1.26.1]"
+              "version": "[1.30.0, 1.30.0]"
             },
             "GeneXus.Search.Core": {
               "target": "Package",
-              "version": "[1.26.1, 1.26.1]"
+              "version": "[1.30.0, 1.30.0]"
             },
             "iTextSharp-LGPL": {
               "target": "Package",
@@ -106,7 +109,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.425\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

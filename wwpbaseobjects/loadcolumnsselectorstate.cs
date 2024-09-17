@@ -42,7 +42,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          this.AV8UserCustomKey = aP0_UserCustomKey;
          this.AV9UserCustomValue = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_UserCustomValue=this.AV9UserCustomValue;
       }
 
@@ -55,49 +55,28 @@ namespace GeneXus.Programs.wwpbaseobjects {
       public void executeSubmit( string aP0_UserCustomKey ,
                                  out string aP1_UserCustomValue )
       {
-         loadcolumnsselectorstate objloadcolumnsselectorstate;
-         objloadcolumnsselectorstate = new loadcolumnsselectorstate();
-         objloadcolumnsselectorstate.AV8UserCustomKey = aP0_UserCustomKey;
-         objloadcolumnsselectorstate.AV9UserCustomValue = "" ;
-         objloadcolumnsselectorstate.context.SetSubmitInitialConfig(context);
-         objloadcolumnsselectorstate.initialize();
-         Submit( executePrivateCatch,objloadcolumnsselectorstate);
+         this.AV8UserCustomKey = aP0_UserCustomKey;
+         this.AV9UserCustomValue = "" ;
+         SubmitImpl();
          aP1_UserCustomValue=this.AV9UserCustomValue;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((loadcolumnsselectorstate)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
          new GeneXus.Programs.wwpbaseobjects.loaduserkeyvalue(context ).execute(  AV8UserCustomKey, out  AV9UserCustomValue) ;
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )

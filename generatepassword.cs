@@ -40,7 +40,7 @@ namespace GeneXus.Programs {
       {
          this.AV8Password = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_Password=this.AV8Password;
       }
 
@@ -52,29 +52,12 @@ namespace GeneXus.Programs {
 
       public void executeSubmit( out string aP0_Password )
       {
-         generatepassword objgeneratepassword;
-         objgeneratepassword = new generatepassword();
-         objgeneratepassword.AV8Password = "" ;
-         objgeneratepassword.context.SetSubmitInitialConfig(context);
-         objgeneratepassword.initialize();
-         Submit( executePrivateCatch,objgeneratepassword);
+         this.AV8Password = "" ;
+         SubmitImpl();
          aP0_Password=this.AV8Password;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((generatepassword)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -91,21 +74,17 @@ namespace GeneXus.Programs {
          {
             AV8Password = "";
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -116,8 +95,8 @@ namespace GeneXus.Programs {
       }
 
       private string AV8Password ;
-      private string aP0_Password ;
       private GxHttpClient AV9httpClient ;
+      private string aP0_Password ;
    }
 
 }

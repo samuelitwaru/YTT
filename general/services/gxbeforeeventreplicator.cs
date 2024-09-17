@@ -68,7 +68,7 @@ namespace GeneXus.Programs.general.services {
          this.GxSyncroInfo = aP1_GxSyncroInfo;
          this.AV8EventResults = aP2_EventResults;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_GxPendingEvents=this.GxPendingEvents;
          aP2_EventResults=this.AV8EventResults;
       }
@@ -84,41 +84,24 @@ namespace GeneXus.Programs.general.services {
                                  GeneXus.Core.genexus.sd.synchronization.SdtSynchronizationInfo aP1_GxSyncroInfo ,
                                  ref GXBaseCollection<GeneXus.Core.genexus.sd.synchronization.SdtSynchronizationEventResultList_SynchronizationEventResultListItem> aP2_EventResults )
       {
-         gxbeforeeventreplicator objgxbeforeeventreplicator;
-         objgxbeforeeventreplicator = new gxbeforeeventreplicator();
-         objgxbeforeeventreplicator.GxPendingEvents = aP0_GxPendingEvents;
-         objgxbeforeeventreplicator.GxSyncroInfo = aP1_GxSyncroInfo;
-         objgxbeforeeventreplicator.AV8EventResults = aP2_EventResults;
-         objgxbeforeeventreplicator.context.SetSubmitInitialConfig(context);
-         objgxbeforeeventreplicator.initialize();
-         Submit( executePrivateCatch,objgxbeforeeventreplicator);
+         this.GxPendingEvents = aP0_GxPendingEvents;
+         this.GxSyncroInfo = aP1_GxSyncroInfo;
+         this.AV8EventResults = aP2_EventResults;
+         SubmitImpl();
          aP0_GxPendingEvents=this.GxPendingEvents;
          aP2_EventResults=this.AV8EventResults;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((gxbeforeeventreplicator)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -126,20 +109,16 @@ namespace GeneXus.Programs.general.services {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
          /* GeneXus formulas. */
       }
 
-      private GXBaseCollection<GeneXus.Core.genexus.sd.synchronization.SdtSynchronizationEventList_SynchronizationEventListItem> aP0_GxPendingEvents ;
-      private GXBaseCollection<GeneXus.Core.genexus.sd.synchronization.SdtSynchronizationEventResultList_SynchronizationEventResultListItem> aP2_EventResults ;
-      private GXBaseCollection<GeneXus.Core.genexus.sd.synchronization.SdtSynchronizationEventResultList_SynchronizationEventResultListItem> AV8EventResults ;
       private GXBaseCollection<GeneXus.Core.genexus.sd.synchronization.SdtSynchronizationEventList_SynchronizationEventListItem> GxPendingEvents ;
+      private GXBaseCollection<GeneXus.Core.genexus.sd.synchronization.SdtSynchronizationEventList_SynchronizationEventListItem> aP0_GxPendingEvents ;
       private GeneXus.Core.genexus.sd.synchronization.SdtSynchronizationInfo GxSyncroInfo ;
+      private GXBaseCollection<GeneXus.Core.genexus.sd.synchronization.SdtSynchronizationEventResultList_SynchronizationEventResultListItem> AV8EventResults ;
+      private GXBaseCollection<GeneXus.Core.genexus.sd.synchronization.SdtSynchronizationEventResultList_SynchronizationEventResultListItem> aP2_EventResults ;
    }
 
 }

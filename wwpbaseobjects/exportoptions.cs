@@ -46,10 +46,10 @@ namespace GeneXus.Programs.wwpbaseobjects {
       {
          this.AV7ExcelFileName = aP0_ExcelFileName;
          this.AV6DefaultTitle = aP1_DefaultTitle;
-         executePrivate();
+         ExecuteImpl();
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -165,11 +165,8 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITWEB( ) ;
          if ( ! isAjaxCallMode( ) )
          {
@@ -200,7 +197,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override short ExecuteStartEvent( )
@@ -244,10 +241,10 @@ namespace GeneXus.Programs.wwpbaseobjects {
          CloseStyles();
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
@@ -459,7 +456,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          {
             if ( context.ExposeMetadata( ) )
             {
-               Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+               Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
             }
          }
          Form.Meta.addItem("description", "Excel Export Options", 0) ;
@@ -1149,7 +1146,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          PA0G2( ) ;
          WS0G2( ) ;
          WE0G2( ) ;
-         this.cleanup();
+         cleanup();
          context.SetWrapped(false);
          context.GX_msglist = BackMsgLst;
          return "";
@@ -1170,7 +1167,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202481416562499", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202491613145014", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1186,7 +1183,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wwpbaseobjects/exportoptions.js", "?202481416562499", false, true);
+         context.AddJavascriptSource("wwpbaseobjects/exportoptions.js", "?202491613145014", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Panel/BootstrapPanelRender.js", "", false, true);
@@ -1303,31 +1300,23 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'AV9GoogleDocResultXML',fld:'vGOOGLEDOCRESULTXML',pic:'',hsh:true},{av:'AV7ExcelFileName',fld:'vEXCELFILENAME',pic:'',hsh:true},{av:'AV6DefaultTitle',fld:'vDEFAULTTITLE',pic:'',hsh:true}]");
-         setEventMetadata("REFRESH",",oparms:[]}");
-         setEventMetadata("'DODOWNLOADTOFILE'","{handler:'E120G2',iparms:[]");
-         setEventMetadata("'DODOWNLOADTOFILE'",",oparms:[]}");
-         setEventMetadata("'DOSAVEGOOGLEDRIVE'","{handler:'E130G2',iparms:[{av:'AV9GoogleDocResultXML',fld:'vGOOGLEDOCRESULTXML',pic:'',hsh:true}]");
-         setEventMetadata("'DOSAVEGOOGLEDRIVE'",",oparms:[{av:'Innewwindow1_Target',ctrl:'INNEWWINDOW1',prop:'Target'},{av:'Innewwindow1_Height',ctrl:'INNEWWINDOW1',prop:'Height'},{av:'Innewwindow1_Width',ctrl:'INNEWWINDOW1',prop:'Width'},{ctrl:'BTNCANCEL',prop:'Caption'},{av:'tblTablecontent_Visible',ctrl:'TABLECONTENT',prop:'Visible'},{ctrl:'BTNDOWNLOADTOFILE',prop:'Visible'},{ctrl:'BTNSAVEGOOGLEDRIVE',prop:'Visible'}]}");
-         setEventMetadata("VEXPORTTYPE.CLICK","{handler:'E150G1',iparms:[{av:'cmbavExporttype'},{av:'AV8ExportType',fld:'vEXPORTTYPE',pic:'9'}]");
-         setEventMetadata("VEXPORTTYPE.CLICK",",oparms:[{av:'tblTablegoogledriveinfo_Visible',ctrl:'TABLEGOOGLEDRIVEINFO',prop:'Visible'},{ctrl:'BTNDOWNLOADTOFILE',prop:'Visible'},{ctrl:'BTNSAVEGOOGLEDRIVE',prop:'Visible'}]}");
-         setEventMetadata("VALIDV_EXPORTTYPE","{handler:'Validv_Exporttype',iparms:[]");
-         setEventMetadata("VALIDV_EXPORTTYPE",",oparms:[]}");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"AV9GoogleDocResultXML","fld":"vGOOGLEDOCRESULTXML","hsh":true},{"av":"AV7ExcelFileName","fld":"vEXCELFILENAME","hsh":true},{"av":"AV6DefaultTitle","fld":"vDEFAULTTITLE","hsh":true}]}""");
+         setEventMetadata("'DODOWNLOADTOFILE'","""{"handler":"E120G2","iparms":[]}""");
+         setEventMetadata("'DOSAVEGOOGLEDRIVE'","""{"handler":"E130G2","iparms":[{"av":"AV9GoogleDocResultXML","fld":"vGOOGLEDOCRESULTXML","hsh":true}]""");
+         setEventMetadata("'DOSAVEGOOGLEDRIVE'",""","oparms":[{"av":"Innewwindow1_Target","ctrl":"INNEWWINDOW1","prop":"Target"},{"av":"Innewwindow1_Height","ctrl":"INNEWWINDOW1","prop":"Height"},{"av":"Innewwindow1_Width","ctrl":"INNEWWINDOW1","prop":"Width"},{"ctrl":"BTNCANCEL","prop":"Caption"},{"av":"tblTablecontent_Visible","ctrl":"TABLECONTENT","prop":"Visible"},{"ctrl":"BTNDOWNLOADTOFILE","prop":"Visible"},{"ctrl":"BTNSAVEGOOGLEDRIVE","prop":"Visible"}]}""");
+         setEventMetadata("VEXPORTTYPE.CLICK","""{"handler":"E150G1","iparms":[{"av":"cmbavExporttype"},{"av":"AV8ExportType","fld":"vEXPORTTYPE","pic":"9"}]""");
+         setEventMetadata("VEXPORTTYPE.CLICK",""","oparms":[{"av":"tblTablegoogledriveinfo_Visible","ctrl":"TABLEGOOGLEDRIVEINFO","prop":"Visible"},{"ctrl":"BTNDOWNLOADTOFILE","prop":"Visible"},{"ctrl":"BTNSAVEGOOGLEDRIVE","prop":"Visible"}]}""");
+         setEventMetadata("VALIDV_EXPORTTYPE","""{"handler":"Validv_Exporttype","iparms":[]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -1372,7 +1361,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       private short nGotPars ;
       private short GxWebError ;
-      private short initialized ;
       private short gxajaxcallmode ;
       private short wbEnd ;
       private short wbStart ;
@@ -1479,14 +1467,14 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private GXUserControl ucInnewwindow1 ;
       private GXUserControl ucDvpanel_tableexport ;
       private GXUserControl ucDvpanel_tableattributes ;
+      private GxHttpRequest AV11HttpRequest ;
+      private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private GXCombobox cmbavExporttype ;
+      private GeneXus.Programs.wwpbaseobjects.SdtGoogleDocsResult AV10GoogleDocsResult ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
-      private GxHttpRequest AV11HttpRequest ;
-      private GXWebForm Form ;
-      private GeneXus.Programs.wwpbaseobjects.SdtGoogleDocsResult AV10GoogleDocsResult ;
    }
 
 }

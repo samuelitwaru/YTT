@@ -50,7 +50,7 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
          this.AV10WWPSubscriptionId = aP1_WWPSubscriptionId;
          this.AV8IncludeNotification = aP2_IncludeNotification;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_WWPSubscriptionId=this.AV10WWPSubscriptionId;
          aP2_IncludeNotification=this.AV8IncludeNotification;
       }
@@ -66,32 +66,15 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
                                  ref long aP1_WWPSubscriptionId ,
                                  ref bool aP2_IncludeNotification )
       {
-         wwp_checkuserisnotunsubscribed objwwp_checkuserisnotunsubscribed;
-         objwwp_checkuserisnotunsubscribed = new wwp_checkuserisnotunsubscribed();
-         objwwp_checkuserisnotunsubscribed.AV9WWPNotificationDefinitionId = aP0_WWPNotificationDefinitionId;
-         objwwp_checkuserisnotunsubscribed.AV10WWPSubscriptionId = aP1_WWPSubscriptionId;
-         objwwp_checkuserisnotunsubscribed.AV8IncludeNotification = aP2_IncludeNotification;
-         objwwp_checkuserisnotunsubscribed.context.SetSubmitInitialConfig(context);
-         objwwp_checkuserisnotunsubscribed.initialize();
-         Submit( executePrivateCatch,objwwp_checkuserisnotunsubscribed);
+         this.AV9WWPNotificationDefinitionId = aP0_WWPNotificationDefinitionId;
+         this.AV10WWPSubscriptionId = aP1_WWPSubscriptionId;
+         this.AV8IncludeNotification = aP2_IncludeNotification;
+         SubmitImpl();
          aP1_WWPSubscriptionId=this.AV10WWPSubscriptionId;
          aP2_IncludeNotification=this.AV8IncludeNotification;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwp_checkuserisnotunsubscribed)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -112,12 +95,12 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
             pr_default.readNext(0);
          }
          pr_default.close(0);
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -125,14 +108,9 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
          AV12Udparg1 = "";
-         scmdbuf = "";
          P002L2_A27WWPSubscriptionSubscribed = new bool[] {false} ;
          P002L2_A7WWPUserExtendedId = new string[] {""} ;
          P002L2_n7WWPUserExtendedId = new bool[] {false} ;
@@ -154,7 +132,6 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
       private long A23WWPNotificationDefinitionId ;
       private long A25WWPSubscriptionId ;
       private string AV12Udparg1 ;
-      private string scmdbuf ;
       private string A7WWPUserExtendedId ;
       private bool AV8IncludeNotification ;
       private bool A27WWPSubscriptionSubscribed ;

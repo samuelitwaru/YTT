@@ -58,7 +58,7 @@ namespace GeneXus.Programs {
          this.AV28Filename = "" ;
          this.AV27ErrorMessage = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_FromDate=this.AV10FromDate;
          aP1_ToDate=this.AV11ToDate;
          aP2_ProjectId=this.AV17ProjectId;
@@ -87,18 +87,14 @@ namespace GeneXus.Programs {
                                  out string aP5_Filename ,
                                  out string aP6_ErrorMessage )
       {
-         employeehoursreport objemployeehoursreport;
-         objemployeehoursreport = new employeehoursreport();
-         objemployeehoursreport.AV10FromDate = aP0_FromDate;
-         objemployeehoursreport.AV11ToDate = aP1_ToDate;
-         objemployeehoursreport.AV17ProjectId = aP2_ProjectId;
-         objemployeehoursreport.AV13CompanyLocationId = aP3_CompanyLocationId;
-         objemployeehoursreport.AV14EmployeeId = aP4_EmployeeId;
-         objemployeehoursreport.AV28Filename = "" ;
-         objemployeehoursreport.AV27ErrorMessage = "" ;
-         objemployeehoursreport.context.SetSubmitInitialConfig(context);
-         objemployeehoursreport.initialize();
-         Submit( executePrivateCatch,objemployeehoursreport);
+         this.AV10FromDate = aP0_FromDate;
+         this.AV11ToDate = aP1_ToDate;
+         this.AV17ProjectId = aP2_ProjectId;
+         this.AV13CompanyLocationId = aP3_CompanyLocationId;
+         this.AV14EmployeeId = aP4_EmployeeId;
+         this.AV28Filename = "" ;
+         this.AV27ErrorMessage = "" ;
+         SubmitImpl();
          aP0_FromDate=this.AV10FromDate;
          aP1_ToDate=this.AV11ToDate;
          aP2_ProjectId=this.AV17ProjectId;
@@ -108,20 +104,7 @@ namespace GeneXus.Programs {
          aP6_ErrorMessage=this.AV27ErrorMessage;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((employeehoursreport)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -129,14 +112,14 @@ namespace GeneXus.Programs {
          S161 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          /* Execute user subroutine: 'OPENDOCUMENT' */
          S111 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          AV26TotalMinutes = 0;
@@ -173,31 +156,31 @@ namespace GeneXus.Programs {
          S121 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          /* Execute user subroutine: 'WRITEDATA' */
          S131 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          /* Execute user subroutine: 'WRITEFOOT' */
          S141 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          /* Execute user subroutine: 'CLOSEDOCUMENT' */
          S151 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void S111( )
@@ -403,16 +386,12 @@ namespace GeneXus.Programs {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -422,7 +401,6 @@ namespace GeneXus.Programs {
          AV31headerCellStyle = new GeneXus.Programs.genexusoffice.office.excel.style.SdtExcelCellStyle(context);
          AV32leftAlign = new GeneXus.Programs.genexusoffice.office.excel.style.SdtExcelCellStyle(context);
          AV34footCellStyle = new GeneXus.Programs.genexusoffice.office.excel.style.SdtExcelCellStyle(context);
-         scmdbuf = "";
          P00AZ2_A102ProjectId = new long[1] ;
          P00AZ2_A103ProjectName = new string[] {""} ;
          A103ProjectName = "";
@@ -482,7 +460,6 @@ namespace GeneXus.Programs {
       private long A100CompanyId ;
       private long A118WorkHourLogId ;
       private decimal AV15TotalWorkTime ;
-      private string scmdbuf ;
       private string A103ProjectName ;
       private string GXt_char1 ;
       private string AV23Column ;
@@ -498,21 +475,29 @@ namespace GeneXus.Programs {
       private string AV28Filename ;
       private string AV27ErrorMessage ;
       private string A120WorkHourLogDuration ;
-      private GxSimpleCollection<long> AV17ProjectId ;
-      private GxSimpleCollection<long> AV13CompanyLocationId ;
-      private GxSimpleCollection<long> AV14EmployeeId ;
       private IGxSession AV16WebSession ;
-      private GeneXus.Programs.genexusoffice.office.excel.SdtExcelSpreadsheet AV12excelSpreadsheet ;
+      private IGxSession AV18Session ;
+      private GxFile AV33File ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private DateTime aP0_FromDate ;
       private DateTime aP1_ToDate ;
+      private GxSimpleCollection<long> AV17ProjectId ;
       private GxSimpleCollection<long> aP2_ProjectId ;
+      private GxSimpleCollection<long> AV13CompanyLocationId ;
       private GxSimpleCollection<long> aP3_CompanyLocationId ;
+      private GxSimpleCollection<long> AV14EmployeeId ;
       private GxSimpleCollection<long> aP4_EmployeeId ;
+      private GeneXus.Programs.genexusoffice.office.excel.style.SdtExcelCellStyle AV31headerCellStyle ;
+      private GeneXus.Programs.genexusoffice.office.excel.style.SdtExcelCellStyle AV32leftAlign ;
+      private GeneXus.Programs.genexusoffice.office.excel.style.SdtExcelCellStyle AV34footCellStyle ;
       private IDataStoreProvider pr_default ;
       private long[] P00AZ2_A102ProjectId ;
       private string[] P00AZ2_A103ProjectName ;
+      private GeneXus.Programs.genexusoffice.office.excel.cells.SdtExcelCellRange AV20excelcellrange ;
+      private GeneXus.Programs.genexusoffice.office.excel.SdtExcelSpreadsheet AV12excelSpreadsheet ;
+      private GeneXus.Programs.genexusoffice.office.excel.style.SdtExcelCellStyle AV21excelCellStyle ;
+      private GxSimpleCollection<string> AV22Columns ;
       private long[] P00AZ3_A100CompanyId ;
       private string[] P00AZ3_A148EmployeeName ;
       private string[] P00AZ3_A103ProjectName ;
@@ -527,14 +512,6 @@ namespace GeneXus.Programs {
       private long[] P00AZ3_A118WorkHourLogId ;
       private string aP5_Filename ;
       private string aP6_ErrorMessage ;
-      private IGxSession AV18Session ;
-      private GxSimpleCollection<string> AV22Columns ;
-      private GxFile AV33File ;
-      private GeneXus.Programs.genexusoffice.office.excel.cells.SdtExcelCellRange AV20excelcellrange ;
-      private GeneXus.Programs.genexusoffice.office.excel.style.SdtExcelCellStyle AV31headerCellStyle ;
-      private GeneXus.Programs.genexusoffice.office.excel.style.SdtExcelCellStyle AV32leftAlign ;
-      private GeneXus.Programs.genexusoffice.office.excel.style.SdtExcelCellStyle AV34footCellStyle ;
-      private GeneXus.Programs.genexusoffice.office.excel.style.SdtExcelCellStyle AV21excelCellStyle ;
    }
 
    public class employeehoursreport__default : DataStoreHelperBase, IDataStoreHelper

@@ -98,7 +98,7 @@ gx.OldDateTime = function (Fld, Var) {
 gx.dom_i =(function($){
 	return {
 
-	el: function (id, avoidName, avoidSpan, noCaching) {
+	el: function (id, avoidName, avoidSpan, noCaching, selectActive) {
 		//Critical function, changes here impact performance
 		if (!id) {
 			return null;
@@ -122,7 +122,8 @@ gx.dom_i =(function($){
 				if (!ctrl[0].id) {
 					ctrl[0].id = id;
 				}
-				return ctrl[0];
+				var checkedControl = Array.from(ctrl).filter(e => e.checked);
+				return checkedControl.length === 0 ? ctrl[0] : checkedControl[0];
 			}	
 			return null;
 		}
@@ -281,7 +282,7 @@ gx.dom_i =(function($){
 		var a = atts || d.attributes, i, l, n;
 		if (a) {
 			l = a.length;
-			for (i = 0; i < l; i += 1) {
+			for (let i = 0; i < l; i += 1) {
 				n = a[i].name || a[i];
 				if (typeof d[n] === 'function') {
 					d[n] = null;
@@ -394,7 +395,7 @@ gx.dom_i =(function($){
 
 	styles: function () {
 		var sheets = [...document.styleSheets].map(s=>s.href).filter(s=>!gx.lang.emptyObject(s)),
-			sheets2 = [...document.querySelectorAll('style[' + STYLE_ELEMENT_HREF + ']')].map(s=>s.getAttribute(STYLE_ELEMENT_HREF));
+			sheets2 = [...document.querySelectorAll('style[' + gx.html.STYLE_ELEMENT_HREF + ']')].map(s=>s.getAttribute(gx.html.STYLE_ELEMENT_HREF));
 		return [...sheets,...sheets2];
 	},
 
@@ -615,8 +616,8 @@ gx.dom_i =(function($){
 	},
 
 	findParentByTagName: function (el, tagName, max) {
-		var parent = el.parentNode;
-		tagName = tagName.toUpperCase();
+		var parent = el.parentNode,
+		tagName = tagName.toUpperCase(),
 		i = 0;
 		while (parent) {
 			if (max && i == max)
@@ -958,7 +959,8 @@ gx.dom_i =(function($){
 	isMaskElement: function(el) {
 		return this.hasClass(el, this.MASK_CLASS);
 	},
-	mask: function (el) {
+	mask: function (el, NotificationDelay) {
+		var NotificationDelay = NotificationDelay || 0;
 		el = this.el(el);
 
 		if (el && !this.hasClass(el, this.MASK_RELATIVE_CLASS)) {
@@ -970,12 +972,10 @@ gx.dom_i =(function($){
 				$el = $(el);
 
 			$el.css('caret-color', 'transparent');
-		/* 	$el.css('z-index', this.MASK_ZINDEX); */
+		/*$el.css('z-index', this.MASK_ZINDEX); */
 			if (!($el.is("body")) || this.getComputedStyle(el)['position'] != 'static') {
 				this.addClass(el, this.MASK_RELATIVE_CLASS);
 			}
-			
-			
 
 			maskEl = document.createElement("div");
 			maskEl.className = this.MASK_CLASS;
@@ -990,6 +990,10 @@ gx.dom_i =(function($){
 			else {
 				el.appendChild(maskEl);
 			}
+			try {
+				maskEl.style.animationDelay = `${NotificationDelay / 2}ms`;
+				maskEl.style.webkitAnimation = `${NotificationDelay / 2}ms`;
+			} catch (e) { }
 			this.addClass(el, this.MASKED_CLASS);
 			
 			if (fixHeight && setExpressionSupported) {
@@ -1531,12 +1535,7 @@ gx.dom_i =(function($){
 			getPopupMinWidth: function () {
 				var currentPopup = gx.popup.getPopup(),
 					minWidth = SMALL_MIN_SIZE;
-				if (!currentPopup) {							
-					return minWidth;
-				}
 
-				minWidth = currentPopup.width;
-				if (currentPopup.autoresize || currentPopup.autoresize === undefined) {
 					var SMALL_MIN_SIZE = 600,
 						MEDIUM_MIN_SIZE = 800,
 						LARGE_MIN_SIZE = 900,
@@ -1545,7 +1544,7 @@ gx.dom_i =(function($){
 						SMALL_BREAK_SIZE = 992,
 						MEDIUM_BREAK_SIZE = 1200;
 
-					var windowWidth = $(currentPopup.window).width();
+					var windowWidth = $(currentPopup ? currentPopup.window:window).width();
 					minWidth = MEDIUM_MIN_SIZE;
 
 					if (windowWidth >= MEDIUM_BREAK_SIZE) {
@@ -1557,7 +1556,7 @@ gx.dom_i =(function($){
 					if (windowWidth < EXTRA_SMALL_BREAK_SIZE) {
 						minWidth = windowWidth - EXTRA_SMALL_SIZE_DELTA;
 					}								
-				}
+
 				return minWidth;
 			},
 
@@ -2293,7 +2292,7 @@ gx.evt_i = (function($) {
 		var vStruct = gxO.getValidStructFld(Ctrl),
 		gxCurrentRow;
 		if (vStruct && vStruct.evt_cvc) {
-			gx.evt.startValidation(vStruct.gxgrid);
+			var context = gx.evt.startValidation(vStruct.gxgrid);
 			gx.evt.stopPropagation(evt);
 			if (vStruct.grid) {
 				gx.evt.setEventRow(gxO, Ctrl);
@@ -2301,7 +2300,7 @@ gx.evt_i = (function($) {
 			}
 			gx.fn.disableKeys();
 			return gxO[vStruct.evt_cvc].call(gxO, gxCurrentRow).always( function () {
-				gx.evt.endValidation(vStruct.gxGrid, gx.evt.types.VALUECHANGED);
+				gx.evt.endValidation(context, gx.evt.types.VALUECHANGED);
 				gx.fn.enableKeys();
 			});
 		}
@@ -2320,7 +2319,7 @@ gx.evt_i = (function($) {
 			var isFreestyleCtrl = vStruct.gxgrid && vStruct.gxgrid.isFreestyle;
 			var evt_cvcing = vStruct.evt_cvcing && !vStruct.gxsgprm;  //Not supported when Suggest is ON.
 			if (evt_cvcing) 
-				gx.evt.startValidation(vStruct.gxgrid);	
+				var context = gx.evt.startValidation(vStruct.gxgrid);	
 			if (evt_cvcing || isFreestyleCtrl) {
 				var gxOld = gx.O;
 				gx.setGxO(gxO);
@@ -2334,7 +2333,7 @@ gx.evt_i = (function($) {
 					gx.evt.setEventRow(gxO, Ctrl);
 				}
 				return gxO[vStruct.evt_cvcing].call(gxO).always(function () {
-					gx.evt.endValidation(vStruct.gxGrid, gx.evt.types.VALUECHANGING);
+					gx.evt.endValidation(context, gx.evt.types.VALUECHANGING);
 				});
 			}
 		}
@@ -2589,9 +2588,9 @@ gx.evt_i = (function($) {
 						if (/[\+\-]/.test(event.key)) {
 							return !gx.text.contains( value, event.key) || gx.text.contains(selectedText, event.key)
 						}
-						digits = value.split("").filter(function(c){ return c>='0' && c<='9'}).length;							
+						let digits = value.split("").filter(function(c){ return c>='0' && c<='9'}).length;							
 						value = gx.num.normalize_decimal_sep(pic, gx.thousandSeparator, gx.decimalPoint, value);
-						picinputs = integers + (value.indexOf(gx.decimalPoint) == -1 ? 0 : decimals);
+						let picinputs = integers + (value.indexOf(gx.decimalPoint) == -1 ? 0 : decimals);
 						return ((digits - selLen) < picinputs);
 					}	
 				}	
@@ -2792,6 +2791,8 @@ gx.evt_i = (function($) {
 
 	execUsrOnchange: function (Ctrl) {
 		var jsCode = '';
+		if (!gx.dom.hasAttribute(Ctrl, "data-gxoch0"))
+			return true;
 		try { jsCode = Ctrl.attributes["data-gxoch0"].value; }
 		catch (e) {
 			return true;
@@ -2918,14 +2919,15 @@ gx.evt_i = (function($) {
 		return changed;
 	},
 
-	setGridEvt: function (gridId, rowId) {
+	setGridEvt: function (gridId, rowId, gxO) {
+		var gxO = gxO || gx.O;
 		if (!gx.isInputEnabled())
 			return;
 		if (!gx.lang.emptyObject(gridId)) {
 			if (gx.lang.emptyObject(rowId)) {
 				var gridObj = gx.fn.getGridObj(gridId);
 				if (gridObj) {
-					rowId = gx.fn.getHidden(gx.O.CmpContext + gridObj.gridName.toUpperCase() + "_ROW");
+					rowId = gx.fn.getHidden(gxO.CmpContext + gridObj.gridName.toUpperCase() + "_ROW");
 				}
 			}
 			gx.fn.setHidden("_EventGridId", gridId);
@@ -3071,10 +3073,11 @@ gx.evt_i = (function($) {
 			gx.csv.validatingGrid = gxgrid;
 			gx.csv.validating += 1;
 		}
+		return {gxgrid,force}
 	},
 
-	endValidation: function (gxgrid, validKind) {
-		if (!gxgrid || gxgrid === gx.csv.validatingGrid){
+	endValidation: function (context, validKind) {
+		if (context.gxgrid || context.force){
 			gx.csv.validating -= 1;
 			if (gx.csv.validating === 0) {
 				gx.csv.validatingGrid = null;
@@ -3149,7 +3152,7 @@ gx.evt_i = (function($) {
 			return;
 		}
 
-		var gxObj = gx.setGxObyCtx(cmpCtx, inMaster);
+		var gxObj = gx.getObj(cmpCtx, inMaster);
 		var rowGridId = gridId;
 		var rowId_res = this.EVT_ROW_ID_REGEXP.exec(evt);
 		var rowId = (rowId_res && rowId_res.length > 1) ? rowId_res[1] : null;
@@ -3167,7 +3170,6 @@ gx.evt_i = (function($) {
 					callFailCallback();
 					return;
 				}
-				gx.setGxObyCtx(cmpCtx, inMaster);
 				if (srvCommand) {
 					gx.evt.srvCommand = true;
 					if (ctrl) {
@@ -3181,14 +3183,14 @@ gx.evt_i = (function($) {
 				}
 				if (gx.csv.lastId > 0 && !gx.csv.validatingAll) {
 					
-					var vStruct = gx.O.getValidStruct(gx.csv.lastId);
-					var CtrlId = (gx.evt.isEnterEvtCtrl(ctrl) && ctrl.id > 0) ? gx.O.getValidStructId(ctrl.id) : gx.O.focusControl;
+					var vStruct = gxObj.getValidStruct(gx.csv.lastId);
+					var CtrlId = (gx.evt.isEnterEvtCtrl(ctrl) && ctrl.id > 0) ? gxObj.getValidStructId(ctrl.id) : gxObj.focusControl;
 					var goForward = CtrlId < gx.csv.lastId; 
 					if ((goForward && (gx.evt.isEnterEvtCtrl(ctrl) || (vStruct && vStruct.isuc)))  || enterKeyPressed)
 					{
 						gx.csv.validatingAll = true;
-						gx.O.fromValid = gx.csv.lastId;
-						gx.O.toValid = gx.csv.lastId + 1;
+						gxObj.fromValid = gx.csv.lastId;
+						gxObj.toValid = gx.csv.lastId + 1;
 						gx.csv.validateAll();		
 						gx.csv.validatingAll = false;
 					}
@@ -3202,11 +3204,11 @@ gx.evt_i = (function($) {
 					gx.evt.setProcessing({status:true, ctx:"notifyValidation"});
 					var fnc_always = function() {gx.evt.setProcessing({status:false, ctx:"notifyValidation"})};
 					var oldDoPost = function() {
-							gx.ajax.doPost((gx.http.useNamedParameters(gx.ajax.selfUrl())? 'gxevent=' : '') + gx.ajax.encryptParms(gx.pO, 'gxajaxEvt'), sync, true, gridId, rowId, callback);
+							gx.ajax.doPost((gx.http.useNamedParameters(gx.ajax.selfUrl())? 'gxevent=' : '') + gx.ajax.encryptParms(gx.pO, 'gxajaxEvt'), sync, true, gridId, rowId, callback, gxObj, evt);
 						fnc_always();
 					};
 					if (gx.pO.supportAjaxEvents) {
-						gx.evt.dispatcher.dispatch(evt, gx.O, rowGridId, rowId, true, undefined, disableForm)
+						gx.evt.dispatcher.dispatch(evt, gxObj, rowGridId, rowId, true, undefined, disableForm)
 							.done(function(success) {  
 								(!success && callFailCallback());
 								(callback && callback(success)); 
@@ -3560,7 +3562,7 @@ gx.evt_i = (function($) {
 				};
 
 				// Run each block after the previous has finished
-				runCount = 0;
+				var runCount = 0;
 				var serialRunner = this.serialRunner;
 				var runner = function () {
 					if (runCount < messages.length) {
@@ -3963,7 +3965,7 @@ gx.csv_i =  (function($) {
 					var jsCode = '';
 					if (i != -1 && (bForceCheck || (Ctrl.getAttribute(gx.csv.GX_VALID_ATTRIBUTE) != "1"))) {
 						gx.csv.currentId = i;
-						gx.evt.startValidation(validStruct.gxgrid, true);
+						var context = gx.evt.startValidation(validStruct.gxgrid, true);
 						gx.csv.refreshVars(validStruct);
 						
 						var vStructValidCallback = function (validRet) {
@@ -3977,7 +3979,7 @@ gx.csv_i =  (function($) {
 							if (gx.csv.anyError)
 								validRet = !gx.csv.anyError;
 							if (!validRet) {
-								gx.evt.endValidation();
+								gx.evt.endValidation(context);
 								deferred.resolve(false);
 								return deferred.promise();
 							}
@@ -4004,7 +4006,7 @@ gx.csv_i =  (function($) {
 											gx.fn.setControlGxValid(DomCtrl, "0");
 										}
 									}
-									gx.evt.endValidation();
+									gx.evt.endValidation(context);
 								}
 								catch (e) {
 									gx.dbg.logEx(e, 'gxapi.js', 'validate');
@@ -4356,7 +4358,7 @@ gx.csv_i =  (function($) {
 				if (gx.O.fromValid > firstGridCtrl)
 					gx.O.fromValid = firstGridCtrl;
 				gx.csv.lastRow[GridId] = GXValidRow;
-				Gx_BScreen = 1;
+				gx.O.Gx_BScreen = 1;
 			},
 
 			targetRowIsMod: function (vStructId) {
@@ -4548,6 +4550,8 @@ gx.http_i = (function ($) {
 		var GX_STATE_ELEMENT_ID = "GXState";
 		var GX_AJAX_MULTIPART_ELEMENT_ID = "GXAjaxMultipart";
 		var GX_AJAX_AUTH_TOKEN = "X-GXAUTH-TOKEN";
+		var X_CSRF_TOKEN_HEADER = 'X-XSRF-TOKEN';
+		var X_CSRF_TOKEN_COOKIE = 'XSRF-TOKEN';
 		
 		return {
 			STATE_UNSENT: 0,
@@ -4824,9 +4828,6 @@ gx.http_i = (function ($) {
 				}
 				else {
 					setTimeout(function () {
-						if (gx.pO != gxO)
-							gxO.endFeedback();
-						else
 							gx.ajax.enableForm();
 					}, 200);
 				}
@@ -5080,6 +5081,10 @@ gx.http_i = (function ($) {
 					else
 						req.setRequestHeader(GX_AJAX_AUTH_TOKEN, token.value);	
 				}					
+				var csrfToken = gx.http.getCookie(X_CSRF_TOKEN_COOKIE);
+				if (csrfToken) {
+					req.setRequestHeader(X_CSRF_TOKEN_HEADER, csrfToken);
+				}
 			},
 			
 			useReadyStateEvent: function () {
@@ -6546,6 +6551,9 @@ gx.fx.obs.addObserver('gx.onload', gx, function () {
 				}
 				obj = grid2obj(obj);
 				for (; obj && pty < len - 1; pty ++) {
+					if (!obj[bcProp[pty]]) {
+						obj[bcProp[pty]] = {};
+					}
 					obj = grid2obj(obj[bcProp[pty]]);
 				}
 				if (obj) {
@@ -6943,9 +6951,14 @@ gx.fx.obs.addObserver('gx.onload', gx, function () {
 	};
 
 
+	prot.executeClientEvent = function (taskFnc, parameters) {
+		var deferred = gx.$.Deferred();
+		Promise.resolve(taskFnc.apply(this, parameters)).then ((result)=> { deferred.resolve() });
+		return deferred.promise();
+	};
+	
 	prot.executeServerEvent = function (EvtName, Synch, EvtRow, Force, GlobalContextEvent) {
 		var deferred = $.Deferred();
-		gx.O = this;
 		gx.csv.cmpCtx = this.CmpContext;
 		var synchReq = true;
 		if ((Synch != undefined) && (Synch == false))
@@ -7417,7 +7430,9 @@ gx.fx.obs.addObserver('gx.onload', gx, function () {
 						gx.evt.onchange(el);
 					}
 				}
-				cancelEvent(domEvt, true, preventDefault);
+				if (!gx.dom.isRadio(el)) {
+					cancelEvent(domEvt, true, preventDefault);
+				}
 				break;
 		}
 	};
@@ -7461,7 +7476,7 @@ gx.fx.obs.addObserver('gx.onload', gx, function () {
 					if (vStruct.fld) {
 						selectorBase = cmpContext + vStruct.fld + (vStruct.gxvar ? "" : mpSufix);
 						selectorReadOnly = "#span_" + selectorBase;
-						selector = "#" + selectorBase;
+						selector = vStruct.ctrltype === 'radio' ? `[name=${selectorBase}]` : `#${selectorBase}`;
 						try {
 							if (vStruct.gxvar && $(selectorReadOnly).length > 0) {
 								$controlElement = $(selectorReadOnly);
@@ -7837,12 +7852,8 @@ gx.fx.obs.addObserver('gx.onload', gx, function () {
 			this[uriProperty] = value;
 	};
 
-	var getNotificationDelay = function () {
-		return gx.NotificationDelay === undefined ? 1000 : gx.NotificationDelay;
-	};
-	
 	prot.getFeedbackContainer = function() {
-		return (this == gx.pO) ? document.body : this.getContainer();
+		return (this == gx.pO || (gx.pO.MasterPage && this == gx.pO.MasterPage)) ? document.body : this.getContainer();
 	};
  
 	prot.startFeedback = function(immediately, swallowKeys) {
@@ -7852,13 +7863,13 @@ gx.fx.obs.addObserver('gx.onload', gx, function () {
 			gx.fn.disableKeys();
 		}
 
-		var feedbackDelay = (immediately === true)? 0: getNotificationDelay(),
+		var feedbackDelay = (immediately === true)? 0: gx.getNotificationDelay(),
 			timeoutObj;
 
 		var fn = function() {
 			var container = this.getFeedbackContainer();
 			if (container) {
-				gx.dom.mask(container);
+				gx.dom.mask(container, feedbackDelay);
 			}
 		};
 
@@ -7992,7 +8003,7 @@ gx.fx.obs.addObserver('gx.onload', gx, function () {
 		var target;
 		this.targetComponents = this.targetComponents || {};
 		for (target in this.targetComponents) {
-			if (targetComponents.hasOwnProperty(target)) {
+			if (this.targetComponents.hasOwnProperty(target)) {
 				gx.pO.registerComponent(this.targetComponents[target]);
 			}
 		}
@@ -8113,7 +8124,7 @@ gx.printing = (function($) {
     printDirect: function(printInfo) {		
     	if (printInfo) {
 			gx.printing._deinit();		
-			$iframe = $('<iframe>');
+			let $iframe = $('<iframe>');
 			$iframe.attr('id', gx.printing.IFrameId)
 			.css({'visibility':'hidden', 'position': 'absolute', 'top': '-1000px', 'left': '-1000px'});			
 			$(document.body).append($iframe)
@@ -8155,7 +8166,7 @@ gx.thread = {
 		}
 
 		this.nextKey = function (k) {
-			for (i in this.map) {
+			for (var i in this.map) {
 				if (!k) {
 					return i;
 				}
@@ -8193,6 +8204,7 @@ gx.thread = {
 		}
 
 		this.attempt = function (start) {
+			let retVal;
 			for (var j = start; j; j = gx.thread.Mutex.Wait.next(j.c.id)) {
 				if (j.enter || (j.number && (j.number < this.number || (j.number == this.number && j.c.id < this.c.id))))
 					return setTimeout('gx.thread.Mutex.SLICE(' + this.c.id + ',' + j.c.id + ')', 10);
@@ -8526,7 +8538,8 @@ gx.base64 = {
 	bytesFromUTF8Bytes: function (Arr) {
 		var outArr = [];
 		var i = 0;
-		var c = c1 = c2 = 0;
+		var c, c1, c2;
+		c = c1 = c2 = 0;
 		var len = Arr.length;
 		while (i < len) {
 			c = Arr[i];
@@ -8541,7 +8554,7 @@ gx.base64 = {
 			}
 			else {
 				c2 = Arr[i + 1];
-				c3 = Arr[i + 2];
+				let c3 = Arr[i + 2];
 				outArr.push(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
 				i += 3;
 			}
@@ -8823,8 +8836,9 @@ gx.util.alert = (function ($) {
 })(gx.$);
 
 gx.geolocation = (function ($) {
+	var attachedCtrls;
 	return {
-		attachedCtrls: null,
+		attachedCtrls,
 
 		_init: function () {
 			attachedCtrls = [];
@@ -8836,7 +8850,7 @@ gx.geolocation = (function ($) {
 			if (navigator.geolocation)
 				navigator.geolocation.getCurrentPosition(this.positionHandler, this.handle_errors);
 			else {
-				msg = "Your browser does not support HTML5 Geolocalization";
+				let msg = "Your browser does not support HTML5 Geolocalization";
 				gx.pO.clearMessages();
 				gx.pO.addMessage(msg);
 				gx.pO.refreshOutputs([]);
@@ -9936,14 +9950,15 @@ gx.popup = (function ($) {
 
 		openPopup: function (popupData, gxO) {
 			var currentPopup = this.getPopup();
+			var gxO = gxO || gx.O;
 			var grid, i, len, vStruct;
-			if (!currentPopup || currentPopup.Opener !== gx.O || !gx.lang.isArray(popupData)) {
+			if (!currentPopup || (currentPopup.Opener !== gxO && (!currentPopup.Opener.MasterPage || currentPopup.Opener.MasterPage !== gxO )) || !gx.lang.isArray(popupData)) {
 				var popup = new this.Popup(popupData, false);
-				popup.Opener = gxO || gx.O;
+				popup.Opener = gxO;
 				for (i=0, len=popup.ReturnParms.length; i<len; i++) {
 					vStruct = gx.fn.vStructForVar(popup.ReturnParms[i]);
 					if (vStruct && vStruct.grid) {
-						grid = gx.O.getGridById(vStruct.grid);
+						grid = gxO.getGridById(vStruct.grid);
 						if (grid) {
 							break;
 						}
@@ -9973,17 +9988,24 @@ gx.popup = (function ($) {
 				if (CmpCtx) {
 					gx.setGxO(CmpCtx, InMasterPage);
 				}
-				var Ctrl = PgmParms[0].Ctrl;
+				var Ctrl = document.activeElement;
 				var isUserControl = false;
 				var rowGridId;
 				var rowId;
 				var grid;
 				if (Ctrl) {
 					rowGridId = gx.fn.rowGridId(Ctrl);
-					rowId = gx.fn.controlRowId(Ctrl);
+					rowId = gx.fn.controlRowIndex(Ctrl);
 					if (!gx.lang.emptyObject(rowGridId) && !gx.lang.emptyObject(rowId)) {
 						gx.csv.lastGrid = rowGridId;
 						gx.fn.setCurrentGridRow(rowGridId, rowId);
+						var gxO = gx.O,
+						lastId = gx.csv.lastId;
+						var vStruct = gx.fn.validStruct(lastId, gxO);
+						if (vStruct) {
+							var lastRow = gx.csv.lastRow[vStruct.grid];
+						}
+						gx.csv.checkRowChange( lastId, false, gxO, lastRow);
 					}
 				}
 				else {
@@ -11027,14 +11049,16 @@ gx.popup = (function ($) {
 
 				if (insideiFrame) {
 					var docInfo = this.getiFrameSizeInfo(pDoc);
+					var windowTopScroll = 0;
 					if (docInfo.accessParentFrame) {						
-						scrollTop = docInfo.scrollTop;
-						vMaxHeight = docInfo.maxHeight + Math.min(window.top.document.body.scrollTop - docInfo.y, 0) - 50;  //50 = Estimated PopupHeader Height
-						$cEl.css('max-height', vMaxHeight).parent().css('margin-top', '0px');
-						var minY = Math.max(window.top.document.body.scrollTop - docInfo.y, 0);
-						var realheight = Math.min(frameDoc.body.offsetHeight, vMaxHeight);						
-						this.move(id, scrollLeft, minY + scrollTop + ((vMaxHeight - realheight) / 2));						
+						windowTopScroll = window.top.document.body.scrollTop;
 					}
+					scrollTop = docInfo.scrollTop;
+					vMaxHeight = docInfo.maxHeight + Math.min(windowTopScroll - docInfo.y, 0) - 50;  //50 = Estimated PopupHeader Height
+					$cEl.css('max-height', vMaxHeight).parent().css('margin-top', '0px');
+					var minY = Math.max(windowTopScroll - docInfo.y, 0);
+					var realheight = Math.min(frameDoc.body.offsetHeight, vMaxHeight);						
+					this.move(id, scrollLeft, minY + scrollTop + ((vMaxHeight - realheight) / 2));						
 				}
 
 				var width, height;
@@ -11584,8 +11608,7 @@ gx.ajax = (function ($) {
 							inputParms.push((value !== undefined)? value: null);
 						}
 						else {
-							var vStruct_arr = this.getParmVarVStruct(parm);
-							vStruct = vStruct_arr[0];
+							var call_c2v_arr = vStruct_arr => {
 							vStruct_arr.forEach( (vStruct) => {
 							if (vStruct && typeof (vStruct.c2v) == 'function' && typeof (vStruct.val) == 'function') {
 								var vRow = (vStruct.grid === this.grid)? this.row: gx.fn.currentGridRowImpl(vStruct.grid);
@@ -11600,6 +11623,14 @@ gx.ajax = (function ($) {
 									uc.execC2VFunctions();
 								}
 							});
+							}
+							var vStruct_arr = this.getParmVarVStruct(parm);
+							vStruct = vStruct_arr[0];
+							call_c2v_arr( vStruct_arr);
+							if (!vStruct) {
+								vStruct_arr = this.getParmVarVStructGrid(parm, gx.O);
+								call_c2v_arr( vStruct_arr);
+							}
 							if (typeof (this.gxO[parm.av]) == 'function') {
 								value = this.gxO[parm.av](this.row);
 							}
@@ -11707,6 +11738,22 @@ gx.ajax = (function ($) {
 						}
 					}
 				},
+				
+				getParmVarVStructGrid:function(parm, gxO) {
+					var vStruct_arr = [],
+						grids = gxO.getAllGridsForColl(parm.av);
+					if (grids) {
+						grids.forEach(grid => {
+								var GXValidFnc = gxO.GXValidFnc,
+									gridId = grid.gridId;
+								GXValidFnc.filter(fnc => fnc.grid === gridId).forEach(field => {
+									vStruct = gxO.getValidStructFld(field.fld);
+									vStruct && vStruct.gxvar && vStruct_arr.push( vStruct);
+							});
+						});
+					}
+					return vStruct_arr;
+				},
 
 				getParmVarVStruct: function (parm) {
 					var gridObject, 
@@ -11722,7 +11769,7 @@ gx.ajax = (function ($) {
 					}
 					else {
 						if (parm.fld !== undefined) {
-							validStruct_arr.push(parm.fld ? this.gxO.getValidStructFld(parm.fld) : null);
+								validStruct_arr.push( parm.fld ? this.gxO.getValidStructFld(parm.fld) : null);
 						}
 						else {
 							if (this.grid && this.row) {
@@ -11914,28 +11961,40 @@ gx.ajax = (function ($) {
 			return (gxObj.AjaxSecurity) ? gx.sec.encrypt(parms) : parms;
 		},
 
-		doPost: function (ParmString, Synch, disableForm, gridId, rowId, callback) {
+		doPost: function (ParmString, Synch, disableForm, gridId, rowId, callback, gxO, evt) {
 			if (disableForm !== false) {
-				gx.O.startFeedback();
+				gxO.startFeedback();
 			}
 			gx.fx.obs.notify('gx.onbeforeevent', [ParmString, Synch]);
 			gx.fn.objectOnpost();
-			gx.http.saveState();
 			gx.fn.forceEnableControls(false);
-			var postInfo = this.getPostInfo(gx.O, ParmString, Synch);
+			var postInfo = this.getPostInfo(gxO, ParmString, Synch);
 			postInfo.rowId = rowId;
 			postInfo.gridId = gridId;
 			postInfo.url = gx.ajax.serviceUrl(ParmString);
-			var gxo = gx.O;
+			postInfo.evt = evt;
 			postInfo.always = function () { 
 				if (disableForm !== false) {
-					gxo.endFeedback();
+					gxO.endFeedback();
 				}
 				if (callback) {
 					callback();
 				}
 			};
+			fnc = function() {
+				if (evt) {
+					gx.fn.setHidden("_EventName", evt);
+				}
+				gx.evt.setGridEvt(gridId, rowId, gxO);
+				gx.http.saveState();
 			gx.http.doCall(postInfo);
+			};
+			if (Synch) {
+				gx.lang.doCallTimeout(fnc, this, [], gx.evt.oldDoPostDelay); 
+			}
+			else {
+				fnc.bind(this)();
+			}
 		},
 
 		getPostInfo: function (gxO, ParmString, Synch) {
@@ -13372,18 +13431,18 @@ gx.util.balloon = {
 
  Copyright (c) Jon Nylander
 */
-(function(r){var l=function(){var t={"America/Denver":["America/Mazatlan"],"Europe/London":["Africa/Casablanca"],"America/Chicago":["America/Mexico_City"],"America/Asuncion":["America/Campo_Grande","America/Santiago"],"America/Montevideo":["America/Sao_Paulo","America/Santiago"],"Asia/Beirut":"Asia/Amman Asia/Jerusalem Europe/Helsinki Asia/Damascus Africa/Cairo Asia/Gaza Europe/Minsk".split(" "),"Pacific/Auckland":["Pacific/Fiji"],"America/Los_Angeles":["America/Santa_Isabel"],"America/New_York":["America/Havana"],
+(function(n){var i=function(){var n={"America/Denver":["America/Mazatlan"],"Europe/London":["Africa/Casablanca"],"America/Chicago":["America/Mexico_City"],"America/Asuncion":["America/Campo_Grande","America/Santiago"],"America/Montevideo":["America/Sao_Paulo","America/Santiago"],"Asia/Beirut":"Asia/Amman Asia/Jerusalem Europe/Helsinki Asia/Damascus Africa/Cairo Asia/Gaza Europe/Minsk".split(" "),"Pacific/Auckland":["Pacific/Fiji"],"America/Los_Angeles":["America/Santa_Isabel"],"America/New_York":["America/Havana"],
 "America/Halifax":["America/Goose_Bay"],"America/Godthab":["America/Miquelon"],"Asia/Dubai":["Asia/Yerevan"],"Asia/Jakarta":["Asia/Krasnoyarsk"],"Asia/Shanghai":["Asia/Irkutsk","Australia/Perth"],"Australia/Sydney":["Australia/Lord_Howe"],"Asia/Tokyo":["Asia/Yakutsk"],"Asia/Dhaka":["Asia/Omsk"],"Asia/Baku":["Asia/Yerevan"],"Australia/Brisbane":["Asia/Vladivostok"],"Pacific/Noumea":["Asia/Vladivostok"],"Pacific/Majuro":["Asia/Kamchatka","Pacific/Fiji"],"Pacific/Tongatapu":["Pacific/Apia"],"Asia/Baghdad":["Europe/Minsk",
-"Europe/Moscow"],"Asia/Karachi":["Asia/Yekaterinburg"],"Africa/Johannesburg":["Asia/Gaza","Africa/Cairo"]},u=function(f){f=-f.getTimezoneOffset();return null!==f?f:0},w=function(){var f=u(new Date(2014,0,2)),a=u(new Date(2014,5,2)),b=f-a;return 0>b?f+",1":0<b?a+",1,s":f+",0"},x=function(){if("undefined"!==typeof Intl&&"undefined"!==typeof Intl.DateTimeFormat){var f=Intl.DateTimeFormat();if("undefined"!==typeof f&&"undefined"!==typeof f.resolvedOptions&&(f=f.resolvedOptions().timeZone)&&(-1<f.indexOf("/")||
-"UTC"===f))return f}},v=function c(a,b,d){"undefined"===typeof b&&(b=864E5,d=36E5);var h=(new Date(a.getTime()-b)).getTime();a=a.getTime()+b;for(var n=(new Date(h)).getTimezoneOffset(),g=null;h<a-d;){var p=new Date(h);if(p.getTimezoneOffset()!==n){g=p;break}h+=d}return 864E5===b?c(g,36E5,6E4):36E5===b?c(g,6E4,1E3):g},y=function(a,b,d,c){if("N/A"!==d)return d;if("Asia/Beirut"===b){if("Africa/Cairo"===c.name&&13983768E5===a[6].s&&14116788E5===a[6].e||"Asia/Jerusalem"===c.name&&13959648E5===a[6].s&&
-14118588E5===a[6].e)return 0}else if("America/Santiago"===b){if("America/Asuncion"===c.name&&14124816E5===a[6].s&&1397358E6===a[6].e||"America/Campo_Grande"===c.name&&14136912E5===a[6].s&&13925196E5===a[6].e)return 0}else if("America/Montevideo"===b){if("America/Sao_Paulo"===c.name&&14136876E5===a[6].s&&1392516E6===a[6].e)return 0}else if("Pacific/Auckland"===b&&"Pacific/Fiji"===c.name&&14142456E5===a[6].s&&13961016E5===a[6].e)return 0;return d},z=function(a,b){for(var d={},c=l.olson.dst_rules.zones,
-h=c.length,n=t[b],g=0;g<h;g++){var p=c[g];var k=c[g];for(var m=0,e=0;e<a.length;e++)if(k.rules[e]&&a[e]){if(a[e].s>=k.rules[e].s&&a[e].e<=k.rules[e].e)m=0,m+=Math.abs(a[e].s-k.rules[e].s),m+=Math.abs(k.rules[e].e-a[e].e);else{m="N/A";break}if(864E6<m){m="N/A";break}}k=m=y(a,b,m,k);"N/A"!==k&&(d[p.name]=k)}for(var q in d)if(d.hasOwnProperty(q))for(a=0;a<n.length;a++)if(n[a]===q)return q;return b},A=function(a){var b=function(){for(var d=[],c=0;c<l.olson.dst_rules.years.length;c++){var h=l.olson.dst_rules.years[c];
-var n=(new Date(h,0,1,0,0,1,0)).getTime();h=(new Date(h,12,31,23,59,59)).getTime();for(var g=(new Date(n)).getTimezoneOffset(),p=null,k=null;n<h-864E5;){var m=new Date(n),e=m.getTimezoneOffset();e!==g&&(e<g&&(p=m),e>g&&(k=m),g=e);n+=864E5}h=p&&k?{s:v(p).getTime(),e:v(k).getTime()}:!1;d.push(h)}return d}();return function(d){for(var c=0;c<d.length;c++)if(!1!==d[c])return!0;return!1}(b)?z(b,a):a};return{determine:function(){var a=navigator.userAgent.toLowerCase(),b=x();b||(-1!=a.indexOf("firefox")&&
-"undefined"!==typeof Intl&&"undefined"!==typeof Intl.DateTimeFormat&&(a=Intl.DateTimeFormat(void 0,{timeZoneName:"long"}).format(new Date).toLowerCase(),-1!=a.indexOf("montevideo")||-1!=a.indexOf("uruguay"))&&(b="America/Montevideo"),b||(b=l.olson.timezones[w()]),"undefined"!==typeof t[b]&&(b=A(b)));return{name:function(){return b}}}}}();l.olson=l.olson||{};l.olson.timezones={"-720,0":"Etc/GMT+12","-660,0":"Pacific/Pago_Pago","-660,1,s":"Pacific/Apia","-600,1":"America/Adak","-600,0":"Pacific/Honolulu",
+"Europe/Moscow"],"Asia/Karachi":["Asia/Yekaterinburg"],"Africa/Johannesburg":["Asia/Gaza","Africa/Cairo"]},p=function(d){d=-d.getTimezoneOffset();return null!==d?d:0},r=function(){var d=p(new Date(2014,0,2)),a=p(new Date(2014,5,2)),b=d-a;return 0>b?d+",1":0<b?a+",1,s":d+",0"},s=function(){var d;if(!("undefined"===typeof Intl||"undefined"===typeof Intl.DateTimeFormat))if(d=Intl.DateTimeFormat(),!("undefined"===typeof d||"undefined"===typeof d.resolvedOptions))if((d=d.resolvedOptions().timeZone)&&(-1<
+d.indexOf("/")||"UTC"===d))return d},q=function a(b,g,c){"undefined"===typeof g&&(g=864E5,c=36E5);for(var f=(new Date(b.getTime()-g)).getTime(),b=b.getTime()+g,i=(new Date(f)).getTimezoneOffset(),h=null;f<b-c;){var m=new Date(f);if(m.getTimezoneOffset()!==i){h=m;break}f+=c}return 864E5===g?a(h,36E5,6E4):36E5===g?a(h,6E4,1E3):h},t=function(a,b,g,c){if("N/A"!==g)return g;if("Asia/Beirut"===b){if("Africa/Cairo"===c.name&&13983768E5===a[6].s&&14116788E5===a[6].e||"Asia/Jerusalem"===c.name&&13959648E5===
+a[6].s&&14118588E5===a[6].e)return 0}else if("America/Santiago"===b){if("America/Asuncion"===c.name&&14124816E5===a[6].s&&1397358E6===a[6].e||"America/Campo_Grande"===c.name&&14136912E5===a[6].s&&13925196E5===a[6].e)return 0}else if("America/Montevideo"===b){if("America/Sao_Paulo"===c.name&&14136876E5===a[6].s&&1392516E6===a[6].e)return 0}else if("Pacific/Auckland"===b&&"Pacific/Fiji"===c.name&&14142456E5===a[6].s&&13961016E5===a[6].e)return 0;return g},u=function(a,b){for(var g={},c=i.olson.dst_rules.zones,
+f=c.length,l=n[b],h=0;h<f;h++){var m=c[h],j;j=c[h];for(var k=0,e=0;e<a.length;e++)if(j.rules[e]&&a[e]){if(a[e].s>=j.rules[e].s&&a[e].e<=j.rules[e].e)k=0,k+=Math.abs(a[e].s-j.rules[e].s),k+=Math.abs(j.rules[e].e-a[e].e);else{k="N/A";break}if(864E6<k){k="N/A";break}}j=k=t(a,b,k,j);"N/A"!==j&&(g[m.name]=j)}for(var o in g)if(g.hasOwnProperty(o))for(c=0;c<l.length;c++)if(l[c]===o)return o;return b},v=function(a){var b=function(){for(var a=[],b=0;b<i.olson.dst_rules.years.length;b++){var f;f=i.olson.dst_rules.years[b];
+var l=(new Date(f,0,1,0,0,1,0)).getTime();f=(new Date(f,12,31,23,59,59)).getTime();for(var h=(new Date(l)).getTimezoneOffset(),m=null,j=null;l<f-864E5;){var k=new Date(l),e=k.getTimezoneOffset();e!==h&&(e<h&&(m=k),e>h&&(j=k),h=e);l+=864E5}f=m&&j?{s:q(m).getTime(),e:q(j).getTime()}:!1;a.push(f)}return a}();return function(a){for(var b=0;b<a.length;b++)if(!1!==a[b])return!0;return!1}(b)?u(b,a):a};return{determine:function(){var a=navigator.userAgent.toLowerCase(),b=s();if(!b){if(-1!=a.indexOf("firefox")&&
+("undefined"!==typeof Intl&&"undefined"!==typeof Intl.DateTimeFormat)&&(a=Intl.DateTimeFormat(void 0,{timeZoneName:"long"}).format(new Date).toLowerCase(),-1!=a.indexOf("montevideo")||-1!=a.indexOf("uruguay")))b="America/Montevideo";b||(b=i.olson.timezones[r()]);"undefined"!==typeof n[b]&&(b=v(b))}return{name:function(){return b}}}}}();i.olson=i.olson||{};i.olson.timezones={"-720,0":"Etc/GMT+12","-660,0":"Pacific/Pago_Pago","-660,1,s":"Pacific/Apia","-600,1":"America/Adak","-600,0":"Pacific/Honolulu",
 "-570,0":"Pacific/Marquesas","-540,0":"Pacific/Gambier","-540,1":"America/Anchorage","-480,1":"America/Los_Angeles","-480,0":"Pacific/Pitcairn","-420,0":"America/Phoenix","-420,1":"America/Denver","-360,0":"America/Guatemala","-360,1":"America/Chicago","-360,1,s":"Pacific/Easter","-300,0":"America/Bogota","-300,1":"America/New_York","-270,0":"America/Caracas","-240,1":"America/Halifax","-240,0":"America/Santo_Domingo","-240,1,s":"America/Asuncion","-210,1":"America/St_Johns","-180,1":"America/Godthab",
 "-180,0":"America/Argentina/Buenos_Aires","-180,1,s":"America/Montevideo","-120,0":"America/Noronha","-120,1":"America/Noronha","-60,1":"Atlantic/Azores","-60,0":"Atlantic/Cape_Verde","0,0":"UTC","0,1":"Europe/London","60,1":"Europe/Berlin","60,0":"Africa/Lagos","60,1,s":"Africa/Windhoek","120,1":"Asia/Beirut","120,0":"Africa/Johannesburg","180,0":"Asia/Baghdad","180,1":"Europe/Moscow","210,1":"Asia/Tehran","240,0":"Asia/Dubai","240,1":"Asia/Baku","270,0":"Asia/Kabul","300,1":"Asia/Yekaterinburg",
 "300,0":"Asia/Karachi","330,0":"Asia/Kolkata","345,0":"Asia/Kathmandu","360,0":"Asia/Dhaka","360,1":"Asia/Omsk","390,0":"Asia/Rangoon","420,1":"Asia/Krasnoyarsk","420,0":"Asia/Jakarta","480,0":"Asia/Shanghai","480,1":"Asia/Irkutsk","525,0":"Australia/Eucla","525,1,s":"Australia/Eucla","540,1":"Asia/Yakutsk","540,0":"Asia/Tokyo","570,0":"Australia/Darwin","570,1,s":"Australia/Adelaide","600,0":"Australia/Brisbane","600,1":"Asia/Vladivostok","600,1,s":"Australia/Sydney","630,1,s":"Australia/Lord_Howe",
-"660,1":"Asia/Kamchatka","660,0":"Pacific/Noumea","690,0":"Pacific/Norfolk","720,1,s":"Pacific/Auckland","720,0":"Pacific/Majuro","765,1,s":"Pacific/Chatham","780,0":"Pacific/Tongatapu","780,1,s":"Pacific/Apia","840,0":"Pacific/Kiritimati"};l.olson.dst_rules={years:[2008,2009,2010,2011,2012,2013,2014],zones:[{name:"Africa/Cairo",rules:[{e:12199572E5,s:12090744E5},{e:1250802E6,s:1240524E6},{e:12858804E5,s:12840696E5},!1,!1,!1,{e:14116788E5,s:1406844E6}]},{name:"Africa/Casablanca",rules:[{e:12202236E5,
+"660,1":"Asia/Kamchatka","660,0":"Pacific/Noumea","690,0":"Pacific/Norfolk","720,1,s":"Pacific/Auckland","720,0":"Pacific/Majuro","765,1,s":"Pacific/Chatham","780,0":"Pacific/Tongatapu","780,1,s":"Pacific/Apia","840,0":"Pacific/Kiritimati"};i.olson.dst_rules={years:[2008,2009,2010,2011,2012,2013,2014],zones:[{name:"Africa/Cairo",rules:[{e:12199572E5,s:12090744E5},{e:1250802E6,s:1240524E6},{e:12858804E5,s:12840696E5},!1,!1,!1,{e:14116788E5,s:1406844E6}]},{name:"Africa/Casablanca",rules:[{e:12202236E5,
 s:12122784E5},{e:12508092E5,s:12438144E5},{e:1281222E6,s:12727584E5},{e:13120668E5,s:13017888E5},{e:13489704E5,s:1345428E6},{e:13828392E5,s:13761E8},{e:14142888E5,s:14069448E5}]},{name:"America/Asuncion",rules:[{e:12050316E5,s:12243888E5},{e:12364812E5,s:12558384E5},{e:12709548E5,s:12860784E5},{e:13024044E5,s:1317528E6},{e:1333854E6,s:13495824E5},{e:1364094E6,s:1381032E6},{e:13955436E5,s:14124816E5}]},{name:"America/Campo_Grande",rules:[{e:12032172E5,s:12243888E5},{e:12346668E5,s:12558384E5},{e:12667212E5,
 s:1287288E6},{e:12981708E5,s:13187376E5},{e:13302252E5,s:1350792E6},{e:136107E7,s:13822416E5},{e:13925196E5,s:14136912E5}]},{name:"America/Goose_Bay",rules:[{e:122559486E4,s:120503526E4},{e:125704446E4,s:123648486E4},{e:128909886E4,s:126853926E4},{e:13205556E5,s:129998886E4},{e:13520052E5,s:13314456E5},{e:13834548E5,s:13628952E5},{e:14149044E5,s:13943448E5}]},{name:"America/Havana",rules:[{e:12249972E5,s:12056436E5},{e:12564468E5,s:12364884E5},{e:12885012E5,s:12685428E5},{e:13211604E5,s:13005972E5},
 {e:13520052E5,s:13332564E5},{e:13834548E5,s:13628916E5},{e:14149044E5,s:13943412E5}]},{name:"America/Mazatlan",rules:[{e:1225008E6,s:12074724E5},{e:12564576E5,s:1238922E6},{e:1288512E6,s:12703716E5},{e:13199616E5,s:13018212E5},{e:13514112E5,s:13332708E5},{e:13828608E5,s:13653252E5},{e:14143104E5,s:13967748E5}]},{name:"America/Mexico_City",rules:[{e:12250044E5,s:12074688E5},{e:1256454E6,s:12389184E5},{e:12885084E5,s:1270368E6},{e:1319958E6,s:13018176E5},{e:13514076E5,s:13332672E5},{e:13828572E5,s:13653216E5},
@@ -13395,7 +13454,7 @@ s:13330584E5},{e:13802292E5,s:1364508E6},{e:1414098E6,s:13959576E5}]},{name:"Asi
 s:12697092E5},!1,!1,!1,!1]},{name:"Asia/Yekaterinburg",rules:[{e:12249684E5,s:12068244E5},{e:1256418E6,s:1238274E6},{e:12884724E5,s:12697236E5},!1,!1,!1,!1]},{name:"Asia/Yerevan",rules:[{e:1224972E6,s:1206828E6},{e:12564216E5,s:12382776E5},{e:1288476E6,s:12697272E5},{e:13199256E5,s:13011768E5},!1,!1,!1]},{name:"Australia/Lord_Howe",rules:[{e:12074076E5,s:12231342E5},{e:12388572E5,s:12545838E5},{e:12703068E5,s:12860334E5},{e:13017564E5,s:1317483E6},{e:1333206E6,s:13495374E5},{e:13652604E5,s:1380987E6},
 {e:139671E7,s:14124366E5}]},{name:"Australia/Perth",rules:[{e:12068136E5,s:12249576E5},!1,!1,!1,!1,!1,!1]},{name:"Europe/Helsinki",rules:[{e:12249828E5,s:12068388E5},{e:12564324E5,s:12382884E5},{e:12884868E5,s:1269738E6},{e:13199364E5,s:13011876E5},{e:1351386E6,s:13326372E5},{e:13828356E5,s:13646916E5},{e:14142852E5,s:13961412E5}]},{name:"Europe/Minsk",rules:[{e:12249792E5,s:12068352E5},{e:12564288E5,s:12382848E5},{e:12884832E5,s:12697344E5},!1,!1,!1,!1]},{name:"Europe/Moscow",rules:[{e:12249756E5,
 s:12068316E5},{e:12564252E5,s:12382812E5},{e:12884796E5,s:12697308E5},!1,!1,!1,!1]},{name:"Pacific/Apia",rules:[!1,!1,!1,{e:13017528E5,s:13168728E5},{e:13332024E5,s:13489272E5},{e:13652568E5,s:13803768E5},{e:13967064E5,s:14118264E5}]},{name:"Pacific/Fiji",rules:[!1,!1,{e:12696984E5,s:12878424E5},{e:13271544E5,s:1319292E6},{e:1358604E6,s:13507416E5},{e:139005E7,s:1382796E6},{e:14215032E5,s:14148504E5}]},{name:"Europe/London",rules:[{e:12249828E5,s:12068388E5},{e:12564324E5,s:12382884E5},{e:12884868E5,
-s:1269738E6},{e:13199364E5,s:13011876E5},{e:1351386E6,s:13326372E5},{e:13828356E5,s:13646916E5},{e:14142852E5,s:13961412E5}]}]};"undefined"!==typeof module&&"undefined"!==typeof module.exports?module.exports=l:"undefined"!==typeof define&&null!==define&&null!=define.amd?define([],function(){return l}):"undefined"===typeof r?window.jstz=l:r.jstz=l})();
+s:1269738E6},{e:13199364E5,s:13011876E5},{e:1351386E6,s:13326372E5},{e:13828356E5,s:13646916E5},{e:14142852E5,s:13961412E5}]}]};"undefined"!==typeof module&&"undefined"!==typeof module.exports?module.exports=i:"undefined"!==typeof define&&null!==define&&null!=define.amd?define([],function(){return i}):"undefined"===typeof n?window.jstz=i:n.jstz=i})();
 /* END OF FILE - ..\js\gxtimezone.js - */
 /* START OF FILE - ..\GenCommon\js\livepreview.js - */
 // jshint options
@@ -13403,7 +13462,7 @@ s:1269738E6},{e:13199364E5,s:13011876E5},{e:1351386E6,s:13326372E5},{e:13828356E
 gx.livePrev = (function ($) {
 	var SERVER_REQUEST_RETRY_TIMEOUT = 100,
 		GXLIVEPREVIEW_HIDESUBEL_CSSCLASS = 'gxlivepreview-hidesubelements',
-		getInfo = gx.ajax.getPostInfo("", false);
+		getInfo = gx.ajax.getPostInfo("", false),
 		postInfo = gx.ajax.getPostInfo("", false);
 	
 	var url2Base64Content= function( url) {
@@ -13754,24 +13813,33 @@ gx.nav = (function () {
 })(gx.$);
 /* END OF FILE - ..\GenCommon\js\nav.js - */
 /* START OF FILE - ..\GenCommon\js\jquery-ui.js - */
-/*! jQuery UI - v1.11.4 - 2016-07-07
+/*! jQuery UI - v1.13.2 - 2022-09-06
 * http://jqueryui.com
 * Includes: position.js
 * Copyright jQuery Foundation and other contributors; Licensed MIT */
 
-(function( factory ) {
+( function( factory ) {
+	"use strict";
+	
 	if ( typeof define === "function" && define.amd ) {
 
 		// AMD. Register as an anonymous module.
-		define([ "jquery" ], factory );
+		define( [ "jquery" ], factory );
 	} else {
 
 		// Browser globals
 		factory( jQuery );
 	}
-}(function( $ ) {
+} )( function( $ ) {
+"use strict";
+
+$.ui = $.ui || {};
+
+var version = $.ui.version = "1.13.2";
+
+
 /*!
- * jQuery UI Position 1.11.4
+ * jQuery UI Position 1.13.2
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors
@@ -13781,14 +13849,17 @@ gx.nav = (function () {
  * http://api.jqueryui.com/position/
  */
 
-(function() {
+//>>label: Position
+//>>group: Core
+//>>description: Positions elements relative to other elements.
+//>>docs: http://api.jqueryui.com/position/
+//>>demos: http://jqueryui.com/position/
 
-$.ui = $.ui || {};
 
-var cachedScrollbarWidth, supportsOffsetFractions,
+( function() {
+var cachedScrollbarWidth,
 	max = Math.max,
 	abs = Math.abs,
-	round = Math.round,
 	rhorizontal = /left|center|right/,
 	rvertical = /top|center|bottom/,
 	roffset = /[\+\-]\d+(\.[\d]+)?%?/,
@@ -13812,7 +13883,7 @@ function isWindow( obj ) {
 }
 
 function getDimensions( elem ) {
-	var raw = elem[0];
+	var raw = elem[ 0 ];
 	if ( raw.nodeType === 9 ) {
 		return {
 			width: elem.width(),
@@ -13847,8 +13918,10 @@ $.position = {
 			return cachedScrollbarWidth;
 		}
 		var w1, w2,
-			div = $( "<div style='display:block;position:absolute;width:50px;height:50px;overflow:hidden;'><div style='height:100px;width:auto;'></div></div>" ),
-			innerDiv = div.children()[0];
+			div = $( "<div style=" +
+				"'display:block;position:absolute;width:200px;height:200px;overflow:hidden;'>" +
+				"<div style='height:300px;width:auto;'></div></div>" ),
+			innerDiv = div.children()[ 0 ];
 
 		$( "body" ).append( div );
 		w1 = innerDiv.offsetWidth;
@@ -13857,12 +13930,12 @@ $.position = {
 		w2 = innerDiv.offsetWidth;
 
 		if ( w1 === w2 ) {
-			w2 = div[0].clientWidth;
+			w2 = div[ 0 ].clientWidth;
 		}
 
 		div.remove();
 
-		return (cachedScrollbarWidth = w1 - w2);
+		return ( cachedScrollbarWidth = w1 - w2 );
 	},
 	getScrollInfo: function( within ) {
 		var overflowX = within.isWindow || within.isDocument ? "" :
@@ -13870,9 +13943,9 @@ $.position = {
 			overflowY = within.isWindow || within.isDocument ? "" :
 				within.element.css( "overflow-y" ),
 			hasOverflowX = overflowX === "scroll" ||
-				( overflowX === "auto" && within.width < within.element[0].scrollWidth ),
+				( overflowX === "auto" && within.width < within.element[ 0 ].scrollWidth ),
 			hasOverflowY = overflowY === "scroll" ||
-				( overflowY === "auto" && within.height < within.element[0].scrollHeight );
+				( overflowY === "auto" && within.height < within.element[ 0 ].scrollHeight );
 		return {
 			width: hasOverflowY ? $.position.scrollbarWidth() : 0,
 			height: hasOverflowX ? $.position.scrollbarWidth() : 0
@@ -13880,7 +13953,7 @@ $.position = {
 	},
 	getWithinInfo: function( element ) {
 		var withinElement = $( element || window ),
-			isElemWindow = isWindow( withinElement[0] ),
+			isElemWindow = isWindow( withinElement[ 0 ] ),
 			isDocument = !!withinElement[ 0 ] && withinElement[ 0 ].nodeType === 9,
 			hasOffset = !isElemWindow && !isDocument;
 		return {
@@ -13890,11 +13963,8 @@ $.position = {
 			offset: hasOffset ? $( element ).offset() : { left: 0, top: 0 },
 			scrollLeft: withinElement.scrollLeft(),
 			scrollTop: withinElement.scrollTop(),
-
-			// support: jQuery 1.6.x
-			// jQuery 1.6 doesn't support .outerWidth/Height() on documents or windows
-			width: isElemWindow || isDocument ? withinElement.width() : withinElement.outerWidth(),
-			height: isElemWindow || isDocument ? withinElement.height() : withinElement.outerHeight()
+			width: withinElement.outerWidth(),
+			height: withinElement.outerHeight()
 		};
 	}
 };
@@ -13904,41 +13974,42 @@ $.fn.position = function( options ) {
 		return _position.apply( this, arguments );
 	}
 
-	// make a copy, we don't want to modify arguments
+	// Make a copy, we don't want to modify arguments
 	options = $.extend( {}, options );
 
 	var atOffset, targetWidth, targetHeight, targetOffset, basePosition, dimensions,
-		target = $( options.of ),
+
+		// Make sure string options are treated as CSS selectors
+		target = typeof options.of === "string" ?
+			$( document ).find( options.of ) :
+			$( options.of ),
+
 		within = $.position.getWithinInfo( options.within ),
 		scrollInfo = $.position.getScrollInfo( within ),
 		collision = ( options.collision || "flip" ).split( " " ),
-		offsets = {},
-		raw = target[0];
+		offsets = {};
 
 	dimensions = getDimensions( target );
-	if ( target[0].preventDefault ) {
-		// force left top to allow flipping
+	if ( target[ 0 ].preventDefault ) {
+
+		// Force left top to allow flipping
 		options.at = "left top";
 	}
 	targetWidth = dimensions.width;
 	targetHeight = dimensions.height;
 	targetOffset = dimensions.offset;
-	if (targetOffset.top + targetOffset.left === 0 && !target.is(":visible")) {
-		targetOffset = $(raw.parentElement).offset();
-		targetWidth = $(raw.parentElement).width();
-	}
 
-	// clone to reuse original targetOffset later
+	// Clone to reuse original targetOffset later
 	basePosition = $.extend( {}, targetOffset );
 
-	// force my and at to have valid horizontal and vertical positions
+	// Force my and at to have valid horizontal and vertical positions
 	// if a value is missing or invalid, it will be converted to center
 	$.each( [ "my", "at" ], function() {
 		var pos = ( options[ this ] || "" ).split( " " ),
 			horizontalOffset,
 			verticalOffset;
 
-		if ( pos.length === 1) {
+		if ( pos.length === 1 ) {
 			pos = rhorizontal.test( pos[ 0 ] ) ?
 				pos.concat( [ "center" ] ) :
 				rvertical.test( pos[ 0 ] ) ?
@@ -13948,7 +14019,7 @@ $.fn.position = function( options ) {
 		pos[ 0 ] = rhorizontal.test( pos[ 0 ] ) ? pos[ 0 ] : "center";
 		pos[ 1 ] = rvertical.test( pos[ 1 ] ) ? pos[ 1 ] : "center";
 
-		// calculate offsets
+		// Calculate offsets
 		horizontalOffset = roffset.exec( pos[ 0 ] );
 		verticalOffset = roffset.exec( pos[ 1 ] );
 		offsets[ this ] = [
@@ -13956,14 +14027,14 @@ $.fn.position = function( options ) {
 			verticalOffset ? verticalOffset[ 0 ] : 0
 		];
 
-		// reduce to just the positions without the offsets
+		// Reduce to just the positions without the offsets
 		options[ this ] = [
 			rposition.exec( pos[ 0 ] )[ 0 ],
 			rposition.exec( pos[ 1 ] )[ 0 ]
 		];
-	});
+	} );
 
-	// normalize collision option
+	// Normalize collision option
 	if ( collision.length === 1 ) {
 		collision[ 1 ] = collision[ 0 ];
 	}
@@ -13984,15 +14055,17 @@ $.fn.position = function( options ) {
 	basePosition.left += atOffset[ 0 ];
 	basePosition.top += atOffset[ 1 ];
 
-	return this.each(function() {
+	return this.each( function() {
 		var collisionPosition, using,
 			elem = $( this ),
 			elemWidth = elem.outerWidth(),
 			elemHeight = elem.outerHeight(),
 			marginLeft = parseCss( this, "marginLeft" ),
 			marginTop = parseCss( this, "marginTop" ),
-			collisionWidth = elemWidth + marginLeft + parseCss( this, "marginRight" ) + scrollInfo.width,
-			collisionHeight = elemHeight + marginTop + parseCss( this, "marginBottom" ) + scrollInfo.height,
+			collisionWidth = elemWidth + marginLeft + parseCss( this, "marginRight" ) +
+				scrollInfo.width,
+			collisionHeight = elemHeight + marginTop + parseCss( this, "marginBottom" ) +
+				scrollInfo.height,
 			position = $.extend( {}, basePosition ),
 			myOffset = getOffsets( offsets.my, elem.outerWidth(), elem.outerHeight() );
 
@@ -14010,12 +14083,6 @@ $.fn.position = function( options ) {
 
 		position.left += myOffset[ 0 ];
 		position.top += myOffset[ 1 ];
-
-		// if the browser doesn't support fractions, then round for consistent results
-		if ( !supportsOffsetFractions ) {
-			position.left = round( position.left );
-			position.top = round( position.top );
-		}
 
 		collisionPosition = {
 			marginLeft: marginLeft,
@@ -14037,12 +14104,13 @@ $.fn.position = function( options ) {
 					at: options.at,
 					within: within,
 					elem: elem
-				});
+				} );
 			}
-		});
+		} );
 
 		if ( options.using ) {
-			// adds feedback as second argument to using callback, if present
+
+			// Adds feedback as second argument to using callback, if present
 			using = function( props ) {
 				var left = targetOffset.left - position.left,
 					right = left + targetWidth - elemWidth,
@@ -14082,7 +14150,7 @@ $.fn.position = function( options ) {
 		}
 
 		elem.offset( $.extend( position, { using: using } ) );
-	});
+	} );
 };
 
 $.ui.position = {
@@ -14096,16 +14164,20 @@ $.ui.position = {
 				overRight = collisionPosLeft + data.collisionWidth - outerWidth - withinOffset,
 				newOverRight;
 
-			// element is wider than within
+			// Element is wider than within
 			if ( data.collisionWidth > outerWidth ) {
-				// element is initially over the left side of within
+
+				// Element is initially over the left side of within
 				if ( overLeft > 0 && overRight <= 0 ) {
-					newOverRight = position.left + overLeft + data.collisionWidth - outerWidth - withinOffset;
+					newOverRight = position.left + overLeft + data.collisionWidth - outerWidth -
+						withinOffset;
 					position.left += overLeft - newOverRight;
-				// element is initially over right side of within
+
+				// Element is initially over right side of within
 				} else if ( overRight > 0 && overLeft <= 0 ) {
 					position.left = withinOffset;
-				// element is initially over both left and right sides of within
+
+				// Element is initially over both left and right sides of within
 				} else {
 					if ( overLeft > overRight ) {
 						position.left = withinOffset + outerWidth - data.collisionWidth;
@@ -14113,13 +14185,16 @@ $.ui.position = {
 						position.left = withinOffset;
 					}
 				}
-			// too far left -> align with left edge
+
+			// Too far left -> align with left edge
 			} else if ( overLeft > 0 ) {
 				position.left += overLeft;
-			// too far right -> align with right edge
+
+			// Too far right -> align with right edge
 			} else if ( overRight > 0 ) {
 				position.left -= overRight;
-			// adjust based on position and margin
+
+			// Adjust based on position and margin
 			} else {
 				position.left = max( position.left - collisionPosLeft, position.left );
 			}
@@ -14133,16 +14208,20 @@ $.ui.position = {
 				overBottom = collisionPosTop + data.collisionHeight - outerHeight - withinOffset,
 				newOverBottom;
 
-			// element is taller than within
+			// Element is taller than within
 			if ( data.collisionHeight > outerHeight ) {
-				// element is initially over the top of within
+
+				// Element is initially over the top of within
 				if ( overTop > 0 && overBottom <= 0 ) {
-					newOverBottom = position.top + overTop + data.collisionHeight - outerHeight - withinOffset;
+					newOverBottom = position.top + overTop + data.collisionHeight - outerHeight -
+						withinOffset;
 					position.top += overTop - newOverBottom;
-				// element is initially over bottom of within
+
+				// Element is initially over bottom of within
 				} else if ( overBottom > 0 && overTop <= 0 ) {
 					position.top = withinOffset;
-				// element is initially over both top and bottom of within
+
+				// Element is initially over both top and bottom of within
 				} else {
 					if ( overTop > overBottom ) {
 						position.top = withinOffset + outerHeight - data.collisionHeight;
@@ -14150,13 +14229,16 @@ $.ui.position = {
 						position.top = withinOffset;
 					}
 				}
-			// too far up -> align with top
+
+			// Too far up -> align with top
 			} else if ( overTop > 0 ) {
 				position.top += overTop;
-			// too far down -> align with bottom edge
+
+			// Too far down -> align with bottom edge
 			} else if ( overBottom > 0 ) {
 				position.top -= overBottom;
-			// adjust based on position and margin
+
+			// Adjust based on position and margin
 			} else {
 				position.top = max( position.top - collisionPosTop, position.top );
 			}
@@ -14186,12 +14268,14 @@ $.ui.position = {
 				newOverLeft;
 
 			if ( overLeft < 0 ) {
-				newOverRight = position.left + myOffset + atOffset + offset + data.collisionWidth - outerWidth - withinOffset;
+				newOverRight = position.left + myOffset + atOffset + offset + data.collisionWidth -
+					outerWidth - withinOffset;
 				if ( newOverRight < 0 || newOverRight < abs( overLeft ) ) {
 					position.left += myOffset + atOffset + offset;
 				}
 			} else if ( overRight > 0 ) {
-				newOverLeft = position.left - data.collisionPosition.marginLeft + myOffset + atOffset + offset - offsetLeft;
+				newOverLeft = position.left - data.collisionPosition.marginLeft + myOffset +
+					atOffset + offset - offsetLeft;
 				if ( newOverLeft > 0 || abs( newOverLeft ) < overRight ) {
 					position.left += myOffset + atOffset + offset;
 				}
@@ -14220,12 +14304,14 @@ $.ui.position = {
 				newOverTop,
 				newOverBottom;
 			if ( overTop < 0 ) {
-				newOverBottom = position.top + myOffset + atOffset + offset + data.collisionHeight - outerHeight - withinOffset;
+				newOverBottom = position.top + myOffset + atOffset + offset + data.collisionHeight -
+					outerHeight - withinOffset;
 				if ( newOverBottom < 0 || newOverBottom < abs( overTop ) ) {
 					position.top += myOffset + atOffset + offset;
 				}
 			} else if ( overBottom > 0 ) {
-				newOverTop = position.top - data.collisionPosition.marginTop + myOffset + atOffset + offset - offsetTop;
+				newOverTop = position.top - data.collisionPosition.marginTop + myOffset + atOffset +
+					offset - offsetTop;
 				if ( newOverTop > 0 || abs( newOverTop ) < overBottom ) {
 					position.top += myOffset + atOffset + offset;
 				}
@@ -14244,50 +14330,12 @@ $.ui.position = {
 	}
 };
 
-// fraction support test
-(function() {
-	var testElement, testElementParent, testElementStyle, offsetLeft, i,
-		body = document.getElementsByTagName( "body" )[ 0 ],
-		div = document.createElement( "div" );
-
-	//Create a "fake body" for testing based on method used in jQuery.support
-	testElement = document.createElement( body ? "div" : "body" );
-	testElementStyle = {
-		visibility: "hidden",
-		width: 0,
-		height: 0,
-		border: 0,
-		margin: 0,
-		background: "none"
-	};
-	if ( body ) {
-		$.extend( testElementStyle, {
-			position: "absolute",
-			left: "-1000px",
-			top: "-1000px"
-		});
-	}
-	for ( i in testElementStyle ) {
-		testElement.style[ i ] = testElementStyle[ i ];
-	}
-	testElement.appendChild( div );
-	testElementParent = body || document.documentElement;
-	testElementParent.insertBefore( testElement, testElementParent.firstChild );
-
-	div.style.cssText = "position: absolute; left: 10.7432222px;";
-
-	offsetLeft = $( div ).offset().left;
-	supportsOffsetFractions = offsetLeft > 10 && offsetLeft < 11;
-
-	testElement.innerHTML = "";
-	testElementParent.removeChild( testElement );
-})();
-
-})();
+} )();
 
 var position = $.ui.position;
 
 
 
-}));
+
+} );
 /* END OF FILE - ..\GenCommon\js\jquery-ui.js - */

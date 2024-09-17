@@ -111,7 +111,6 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
          }
          if ( AnyError == 0 )
          {
-            IsConfirmed = 1;
          }
       }
 
@@ -180,7 +179,6 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
 
       protected void CheckExtendedTable077( )
       {
-         nIsDirty_7 = 0;
          standaloneModal( ) ;
          if ( ! ( ( A49WWPWebClientBrowserId == 0 ) || ( A49WWPWebClientBrowserId == 1 ) || ( A49WWPWebClientBrowserId == 2 ) || ( A49WWPWebClientBrowserId == 3 ) || ( A49WWPWebClientBrowserId == 5 ) || ( A49WWPWebClientBrowserId == 6 ) || ( A49WWPWebClientBrowserId == 7 ) || ( A49WWPWebClientBrowserId == 8 ) || ( A49WWPWebClientBrowserId == 9 ) ) )
          {
@@ -280,7 +278,6 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
       protected void insert_Check( )
       {
          CONFIRM_070( ) ;
-         IsConfirmed = 0;
       }
 
       protected void update_Check( )
@@ -497,7 +494,6 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
          else
          {
          }
-         IsModified = 0;
          if ( AnyError != 0 )
          {
             context.wjLoc = "";
@@ -756,7 +752,6 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
 
       protected void SaveImpl( )
       {
-         nKeyPressed = 1;
          GetKey077( ) ;
          if ( IsIns( ) )
          {
@@ -834,7 +829,6 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars7( bcwwpbaseobjects_notifications_web_WWP_WebClient, 1) ;
          SaveImpl( ) ;
          VarsToRow7( bcwwpbaseobjects_notifications_web_WWP_WebClient) ;
@@ -848,7 +842,6 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars7( bcwwpbaseobjects_notifications_web_WWP_WebClient, 1) ;
          Gx_mode = "INS";
          /* Insert record */
@@ -894,7 +887,6 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars7( bcwwpbaseobjects_notifications_web_WWP_WebClient, 1) ;
          UpdateImpl( ) ;
          context.GX_msglist = BackMsgLst;
@@ -907,7 +899,6 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars7( bcwwpbaseobjects_notifications_web_WWP_WebClient, 1) ;
          Gx_mode = "INS";
          /* Insert record */
@@ -941,8 +932,6 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
          AnyError = 0;
          context.GX_msglist.removeAllItems();
          RowToVars7( bcwwpbaseobjects_notifications_web_WWP_WebClient, 0) ;
-         nKeyPressed = 3;
-         IsConfirmed = 0;
          GetKey077( ) ;
          if ( RcdFound7 == 1 )
          {
@@ -1058,7 +1047,6 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
 
       public void ForceCommitOnExit( )
       {
-         mustCommit = true;
          return  ;
       }
 
@@ -1115,24 +1103,20 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
       }
 
-      protected void CloseOpenCursors( )
+      protected override void CloseCursors( )
       {
          pr_default.close(1);
       }
 
       public override void initialize( )
       {
-         scmdbuf = "";
-         PreviousTooltip = "";
-         PreviousCaption = "";
          Gx_mode = "";
          endTrnMsgTxt = "";
          endTrnMsgCod = "";
@@ -1225,20 +1209,12 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
          standaloneNotModal( ) ;
       }
 
-      private short IsConfirmed ;
-      private short IsModified ;
       private short AnyError ;
-      private short nKeyPressed ;
-      private short GX_JID ;
       private short Z49WWPWebClientBrowserId ;
       private short A49WWPWebClientBrowserId ;
       private short Gx_BScreen ;
       private short RcdFound7 ;
-      private short nIsDirty_7 ;
       private int trnEnded ;
-      private string scmdbuf ;
-      private string PreviousTooltip ;
-      private string PreviousCaption ;
       private string Gx_mode ;
       private string endTrnMsgTxt ;
       private string endTrnMsgCod ;
@@ -1254,10 +1230,8 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
       private DateTime i51WWPWebClientFirstRegistered ;
       private DateTime i52WWPWebClientLastRegistered ;
       private bool n7WWPUserExtendedId ;
-      private bool mustCommit ;
       private string Z50WWPWebClientBrowserVersion ;
       private string A50WWPWebClientBrowserVersion ;
-      private GeneXus.Programs.wwpbaseobjects.notifications.web.SdtWWP_WebClient bcwwpbaseobjects_notifications_web_WWP_WebClient ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private IDataStoreProvider pr_default ;
@@ -1292,6 +1266,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
       private DateTime[] BC000710_A52WWPWebClientLastRegistered ;
       private string[] BC000710_A7WWPUserExtendedId ;
       private bool[] BC000710_n7WWPUserExtendedId ;
+      private GeneXus.Programs.wwpbaseobjects.notifications.web.SdtWWP_WebClient bcwwpbaseobjects_notifications_web_WWP_WebClient ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
       private IDataStoreProvider pr_gam ;
@@ -1352,24 +1327,24 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
   {
      if ( def == null )
      {
-        Object[] prmBC00075;
-        prmBC00075 = new Object[] {
-        new ParDef("WWPWebClientId",GXType.Char,100,0)
-        };
-        Object[] prmBC00074;
-        prmBC00074 = new Object[] {
-        new ParDef("WWPUserExtendedId",GXType.Char,40,0){Nullable=true}
-        };
-        Object[] prmBC00076;
-        prmBC00076 = new Object[] {
+        Object[] prmBC00072;
+        prmBC00072 = new Object[] {
         new ParDef("WWPWebClientId",GXType.Char,100,0)
         };
         Object[] prmBC00073;
         prmBC00073 = new Object[] {
         new ParDef("WWPWebClientId",GXType.Char,100,0)
         };
-        Object[] prmBC00072;
-        prmBC00072 = new Object[] {
+        Object[] prmBC00074;
+        prmBC00074 = new Object[] {
+        new ParDef("WWPUserExtendedId",GXType.Char,40,0){Nullable=true}
+        };
+        Object[] prmBC00075;
+        prmBC00075 = new Object[] {
+        new ParDef("WWPWebClientId",GXType.Char,100,0)
+        };
+        Object[] prmBC00076;
+        prmBC00076 = new Object[] {
         new ParDef("WWPWebClientId",GXType.Char,100,0)
         };
         Object[] prmBC00077;

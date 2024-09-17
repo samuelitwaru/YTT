@@ -78,7 +78,7 @@ namespace GeneXus.Programs {
          this.AV22SelectedValue = "" ;
          this.AV15Combo_Data = new GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item>( context, "Item", "") ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP3_SelectedValue=this.AV22SelectedValue;
          aP4_Combo_Data=this.AV15Combo_Data;
       }
@@ -98,34 +98,17 @@ namespace GeneXus.Programs {
                                  out string aP3_SelectedValue ,
                                  out GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item> aP4_Combo_Data )
       {
-         employeeloaddvcombo objemployeeloaddvcombo;
-         objemployeeloaddvcombo = new employeeloaddvcombo();
-         objemployeeloaddvcombo.AV17ComboName = aP0_ComboName;
-         objemployeeloaddvcombo.AV18TrnMode = aP1_TrnMode;
-         objemployeeloaddvcombo.AV20EmployeeId = aP2_EmployeeId;
-         objemployeeloaddvcombo.AV22SelectedValue = "" ;
-         objemployeeloaddvcombo.AV15Combo_Data = new GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item>( context, "Item", "") ;
-         objemployeeloaddvcombo.context.SetSubmitInitialConfig(context);
-         objemployeeloaddvcombo.initialize();
-         Submit( executePrivateCatch,objemployeeloaddvcombo);
+         this.AV17ComboName = aP0_ComboName;
+         this.AV18TrnMode = aP1_TrnMode;
+         this.AV20EmployeeId = aP2_EmployeeId;
+         this.AV22SelectedValue = "" ;
+         this.AV15Combo_Data = new GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item>( context, "Item", "") ;
+         SubmitImpl();
          aP3_SelectedValue=this.AV22SelectedValue;
          aP4_Combo_Data=this.AV15Combo_Data;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((employeeloaddvcombo)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -136,11 +119,11 @@ namespace GeneXus.Programs {
             S111 ();
             if ( returnInSub )
             {
-               this.cleanup();
+               cleanup();
                if (true) return;
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void S111( )
@@ -164,7 +147,7 @@ namespace GeneXus.Programs {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -172,16 +155,11 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
          AV22SelectedValue = "";
          AV15Combo_Data = new GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item>( context, "Item", "");
          AV9WWPContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPContext(context);
-         scmdbuf = "";
          P006A2_A102ProjectId = new long[1] ;
          P006A2_A103ProjectName = new string[] {""} ;
          A103ProjectName = "";
@@ -199,21 +177,20 @@ namespace GeneXus.Programs {
       private long AV20EmployeeId ;
       private long A102ProjectId ;
       private string AV18TrnMode ;
-      private string scmdbuf ;
       private string A103ProjectName ;
       private bool returnInSub ;
       private string AV17ComboName ;
       private string AV22SelectedValue ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item> AV15Combo_Data ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV9WWPContext ;
       private IDataStoreProvider pr_default ;
       private long[] P006A2_A102ProjectId ;
       private string[] P006A2_A103ProjectName ;
+      private GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item AV16Combo_DataItem ;
       private string aP3_SelectedValue ;
       private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item> aP4_Combo_Data ;
-      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item> AV15Combo_Data ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV9WWPContext ;
-      private GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item AV16Combo_DataItem ;
    }
 
    public class employeeloaddvcombo__default : DataStoreHelperBase, IDataStoreHelper

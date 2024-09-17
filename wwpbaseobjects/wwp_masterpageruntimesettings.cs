@@ -45,10 +45,10 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       public void execute( )
       {
-         executePrivate();
+         ExecuteImpl();
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -207,11 +207,8 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITWEB( ) ;
          if ( ! isAjaxCallMode( ) )
          {
@@ -255,7 +252,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void RenderHtmlHeaders( )
@@ -286,10 +283,10 @@ namespace GeneXus.Programs.wwpbaseobjects {
          }
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
@@ -633,7 +630,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
             {
                if ( context.ExposeMetadata( ) )
                {
-                  Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+                  Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
                }
             }
             Form.Meta.addItem("description", "WWP_Master Page Runtime Settings", 0) ;
@@ -717,6 +714,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
                                  if ( ! wbErr )
                                  {
                                     dynload_actions( ) ;
+                                    /* Execute user event: Fontsizesmall.Click */
                                     E112G2 ();
                                  }
                               }
@@ -733,6 +731,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
                                  if ( ! wbErr )
                                  {
                                     dynload_actions( ) ;
+                                    /* Execute user event: Fontsizemedium.Click */
                                     E122G2 ();
                                  }
                               }
@@ -749,6 +748,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
                                  if ( ! wbErr )
                                  {
                                     dynload_actions( ) ;
+                                    /* Execute user event: Fontsizelarge.Click */
                                     E132G2 ();
                                  }
                               }
@@ -781,6 +781,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
                                  if ( ! wbErr )
                                  {
                                     dynload_actions( ) ;
+                                    /* Execute user event: Tablecoloritem.Click */
                                     E152G2 ();
                                  }
                               }
@@ -797,6 +798,8 @@ namespace GeneXus.Programs.wwpbaseobjects {
                                  if ( ! wbErr )
                                  {
                                     dynload_actions( ) ;
+                                    GX_FocusControl = radavBackstyle_Internalname;
+                                    AssignAttri(sPrefix, false, "GX_FocusControl", GX_FocusControl);
                                  }
                               }
                               dynload_actions( ) ;
@@ -829,6 +832,8 @@ namespace GeneXus.Programs.wwpbaseobjects {
                                        if ( ! wbErr )
                                        {
                                           dynload_actions( ) ;
+                                          GX_FocusControl = radavBackstyle_Internalname;
+                                          AssignAttri(sPrefix, false, "GX_FocusControl", GX_FocusControl);
                                           /* Execute user event: Start */
                                           E162G2 ();
                                        }
@@ -842,6 +847,9 @@ namespace GeneXus.Programs.wwpbaseobjects {
                                        if ( ! wbErr )
                                        {
                                           dynload_actions( ) ;
+                                          GX_FocusControl = radavBackstyle_Internalname;
+                                          AssignAttri(sPrefix, false, "GX_FocusControl", GX_FocusControl);
+                                          /* Execute user event: Fscolor.Load */
                                           E172G2 ();
                                        }
                                     }
@@ -854,6 +862,8 @@ namespace GeneXus.Programs.wwpbaseobjects {
                                        if ( ! wbErr )
                                        {
                                           dynload_actions( ) ;
+                                          GX_FocusControl = radavBackstyle_Internalname;
+                                          AssignAttri(sPrefix, false, "GX_FocusControl", GX_FocusControl);
                                           /* Execute user event: Refresh */
                                           E182G2 ();
                                        }
@@ -867,6 +877,9 @@ namespace GeneXus.Programs.wwpbaseobjects {
                                        if ( ! wbErr )
                                        {
                                           dynload_actions( ) ;
+                                          GX_FocusControl = radavBackstyle_Internalname;
+                                          AssignAttri(sPrefix, false, "GX_FocusControl", GX_FocusControl);
+                                          /* Execute user event: Tablecoloritem.Click */
                                           E152G2 ();
                                        }
                                     }
@@ -902,6 +915,8 @@ namespace GeneXus.Programs.wwpbaseobjects {
                                        if ( ! wbErr )
                                        {
                                           dynload_actions( ) ;
+                                          GX_FocusControl = radavBackstyle_Internalname;
+                                          AssignAttri(sPrefix, false, "GX_FocusControl", GX_FocusControl);
                                        }
                                     }
                                  }
@@ -969,6 +984,8 @@ namespace GeneXus.Programs.wwpbaseobjects {
             }
             if ( ! context.isAjaxRequest( ) )
             {
+               GX_FocusControl = radavBackstyle_Internalname;
+               AssignAttri(sPrefix, false, "GX_FocusControl", GX_FocusControl);
             }
             nDonePA = 1;
          }
@@ -1079,6 +1096,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
          {
             SubsflControlProps_122( ) ;
+            /* Execute user event: Fscolor.Load */
             E172G2 ();
             wbEnd = 12;
             WB2G0( ) ;
@@ -1665,7 +1683,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          PA2G2( ) ;
          WS2G2( ) ;
          WE2G2( ) ;
-         this.cleanup();
+         cleanup();
          context.SetWrapped(false);
          SaveComponentMsgList(sPrefix);
          context.GX_msglist = BackMsgLst;
@@ -1817,7 +1835,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202481416554546", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20249161311227", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1835,7 +1853,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       {
          if ( nGXWrapped != 1 )
          {
-            context.AddJavascriptSource("wwpbaseobjects/wwp_masterpageruntimesettings.js", "?202481416554547", false, true);
+            context.AddJavascriptSource("wwpbaseobjects/wwp_masterpageruntimesettings.js", "?20249161311227", false, true);
          }
          /* End function include_jscripts */
       }
@@ -1854,6 +1872,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       protected void sendrow_122( )
       {
+         sGXsfl_12_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_12_idx), 4, 0), 4, "0");
          SubsflControlProps_122( ) ;
          WB2G0( ) ;
          FscolorRow = GXWebRow.GetNew(context,FscolorContainer);
@@ -2041,8 +2060,18 @@ namespace GeneXus.Programs.wwpbaseobjects {
             FscolorColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
             FscolorContainer.AddColumnProperties(FscolorColumn);
             FscolorColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+            FscolorContainer.AddColumnProperties(FscolorColumn);
+            FscolorColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+            FscolorContainer.AddColumnProperties(FscolorColumn);
+            FscolorColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+            FscolorContainer.AddColumnProperties(FscolorColumn);
+            FscolorColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
+            FscolorContainer.AddColumnProperties(FscolorColumn);
+            FscolorColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
             FscolorColumn.AddObjectProperty("Value", GXUtil.ValueEncode( AV10ColorName));
             FscolorColumn.AddObjectProperty("Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtavColorname_Visible), 5, 0, ".", "")));
+            FscolorContainer.AddColumnProperties(FscolorColumn);
+            FscolorColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
             FscolorContainer.AddColumnProperties(FscolorColumn);
             FscolorContainer.AddObjectProperty("Selectedindex", StringUtil.LTrim( StringUtil.NToC( (decimal)(subFscolor_Selectedindex), 4, 0, ".", "")));
             FscolorContainer.AddObjectProperty("Allowselection", StringUtil.LTrim( StringUtil.NToC( (decimal)(subFscolor_Allowselection), 1, 0, ".", "")));
@@ -2117,37 +2146,31 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'FSCOLOR_nFirstRecordOnPage'},{av:'FSCOLOR_nEOF'},{av:'edtavColorname_Visible',ctrl:'vCOLORNAME',prop:'Visible'},{av:'AV10ColorName',fld:'vCOLORNAME',pic:''},{av:'sPrefix'},{av:'AV5WWP_DesignSystemSettings',fld:'vWWP_DESIGNSYSTEMSETTINGS',pic:''},{av:'radavBackstyle'},{av:'AV6BackStyle',fld:'vBACKSTYLE',pic:''},{av:'AV8ColorItemClass',fld:'vCOLORITEMCLASS',pic:'',hsh:true}]");
-         setEventMetadata("REFRESH",",oparms:[{av:'AV5WWP_DesignSystemSettings',fld:'vWWP_DESIGNSYSTEMSETTINGS',pic:''},{av:'radavBackstyle'},{av:'AV6BackStyle',fld:'vBACKSTYLE',pic:''},{av:'AV11FontSizeSelected',fld:'vFONTSIZESELECTED',pic:''},{av:'lblFontsizesmall_Class',ctrl:'FONTSIZESMALL',prop:'Class'},{av:'lblFontsizemedium_Class',ctrl:'FONTSIZEMEDIUM',prop:'Class'},{av:'lblFontsizelarge_Class',ctrl:'FONTSIZELARGE',prop:'Class'}]}");
-         setEventMetadata("FSCOLOR.LOAD","{handler:'E172G2',iparms:[{av:'AV8ColorItemClass',fld:'vCOLORITEMCLASS',pic:'',hsh:true},{av:'AV5WWP_DesignSystemSettings',fld:'vWWP_DESIGNSYSTEMSETTINGS',pic:''},{av:'AV10ColorName',fld:'vCOLORNAME',pic:''}]");
-         setEventMetadata("FSCOLOR.LOAD",",oparms:[{av:'AV10ColorName',fld:'vCOLORNAME',pic:''},{av:'lblColorsquare_Caption',ctrl:'COLORSQUARE',prop:'Caption'},{av:'AV8ColorItemClass',fld:'vCOLORITEMCLASS',pic:'',hsh:true}]}");
-         setEventMetadata("TABLECOLORITEM.CLICK","{handler:'E152G2',iparms:[{av:'FSCOLOR_nFirstRecordOnPage'},{av:'FSCOLOR_nEOF'},{av:'AV5WWP_DesignSystemSettings',fld:'vWWP_DESIGNSYSTEMSETTINGS',pic:''},{av:'edtavColorname_Visible',ctrl:'vCOLORNAME',prop:'Visible'},{av:'AV8ColorItemClass',fld:'vCOLORITEMCLASS',pic:'',hsh:true},{av:'AV10ColorName',fld:'vCOLORNAME',pic:''},{av:'radavBackstyle'},{av:'AV6BackStyle',fld:'vBACKSTYLE',pic:''},{av:'sPrefix'}]");
-         setEventMetadata("TABLECOLORITEM.CLICK",",oparms:[{av:'AV5WWP_DesignSystemSettings',fld:'vWWP_DESIGNSYSTEMSETTINGS',pic:''},{av:'radavBackstyle'},{av:'AV6BackStyle',fld:'vBACKSTYLE',pic:''},{av:'AV11FontSizeSelected',fld:'vFONTSIZESELECTED',pic:''},{av:'lblFontsizesmall_Class',ctrl:'FONTSIZESMALL',prop:'Class'},{av:'lblFontsizemedium_Class',ctrl:'FONTSIZEMEDIUM',prop:'Class'},{av:'lblFontsizelarge_Class',ctrl:'FONTSIZELARGE',prop:'Class'}]}");
-         setEventMetadata("FONTSIZESMALL.CLICK","{handler:'E112G2',iparms:[{av:'AV11FontSizeSelected',fld:'vFONTSIZESELECTED',pic:''},{av:'AV5WWP_DesignSystemSettings',fld:'vWWP_DESIGNSYSTEMSETTINGS',pic:''}]");
-         setEventMetadata("FONTSIZESMALL.CLICK",",oparms:[{av:'AV11FontSizeSelected',fld:'vFONTSIZESELECTED',pic:''},{av:'AV5WWP_DesignSystemSettings',fld:'vWWP_DESIGNSYSTEMSETTINGS',pic:''},{av:'lblFontsizesmall_Class',ctrl:'FONTSIZESMALL',prop:'Class'},{av:'lblFontsizemedium_Class',ctrl:'FONTSIZEMEDIUM',prop:'Class'},{av:'lblFontsizelarge_Class',ctrl:'FONTSIZELARGE',prop:'Class'}]}");
-         setEventMetadata("FONTSIZEMEDIUM.CLICK","{handler:'E122G2',iparms:[{av:'AV11FontSizeSelected',fld:'vFONTSIZESELECTED',pic:''},{av:'AV5WWP_DesignSystemSettings',fld:'vWWP_DESIGNSYSTEMSETTINGS',pic:''}]");
-         setEventMetadata("FONTSIZEMEDIUM.CLICK",",oparms:[{av:'AV11FontSizeSelected',fld:'vFONTSIZESELECTED',pic:''},{av:'AV5WWP_DesignSystemSettings',fld:'vWWP_DESIGNSYSTEMSETTINGS',pic:''},{av:'lblFontsizesmall_Class',ctrl:'FONTSIZESMALL',prop:'Class'},{av:'lblFontsizemedium_Class',ctrl:'FONTSIZEMEDIUM',prop:'Class'},{av:'lblFontsizelarge_Class',ctrl:'FONTSIZELARGE',prop:'Class'}]}");
-         setEventMetadata("FONTSIZELARGE.CLICK","{handler:'E132G2',iparms:[{av:'AV11FontSizeSelected',fld:'vFONTSIZESELECTED',pic:''},{av:'AV5WWP_DesignSystemSettings',fld:'vWWP_DESIGNSYSTEMSETTINGS',pic:''}]");
-         setEventMetadata("FONTSIZELARGE.CLICK",",oparms:[{av:'AV11FontSizeSelected',fld:'vFONTSIZESELECTED',pic:''},{av:'AV5WWP_DesignSystemSettings',fld:'vWWP_DESIGNSYSTEMSETTINGS',pic:''},{av:'lblFontsizesmall_Class',ctrl:'FONTSIZESMALL',prop:'Class'},{av:'lblFontsizemedium_Class',ctrl:'FONTSIZEMEDIUM',prop:'Class'},{av:'lblFontsizelarge_Class',ctrl:'FONTSIZELARGE',prop:'Class'}]}");
-         setEventMetadata("VBACKSTYLE.CONTROLVALUECHANGED","{handler:'E142G2',iparms:[{av:'radavBackstyle'},{av:'AV6BackStyle',fld:'vBACKSTYLE',pic:''}]");
-         setEventMetadata("VBACKSTYLE.CONTROLVALUECHANGED",",oparms:[{av:'AV5WWP_DesignSystemSettings',fld:'vWWP_DESIGNSYSTEMSETTINGS',pic:''}]}");
-         setEventMetadata("NULL","{handler:'Validv_Colorname',iparms:[]");
-         setEventMetadata("NULL",",oparms:[]}");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"FSCOLOR_nFirstRecordOnPage"},{"av":"FSCOLOR_nEOF"},{"av":"edtavColorname_Visible","ctrl":"vCOLORNAME","prop":"Visible"},{"av":"AV10ColorName","fld":"vCOLORNAME"},{"av":"sPrefix"},{"av":"AV5WWP_DesignSystemSettings","fld":"vWWP_DESIGNSYSTEMSETTINGS"},{"av":"radavBackstyle"},{"av":"AV6BackStyle","fld":"vBACKSTYLE"},{"av":"AV8ColorItemClass","fld":"vCOLORITEMCLASS","hsh":true}]""");
+         setEventMetadata("REFRESH",""","oparms":[{"av":"AV5WWP_DesignSystemSettings","fld":"vWWP_DESIGNSYSTEMSETTINGS"},{"av":"radavBackstyle"},{"av":"AV6BackStyle","fld":"vBACKSTYLE"},{"av":"AV11FontSizeSelected","fld":"vFONTSIZESELECTED"},{"av":"lblFontsizesmall_Class","ctrl":"FONTSIZESMALL","prop":"Class"},{"av":"lblFontsizemedium_Class","ctrl":"FONTSIZEMEDIUM","prop":"Class"},{"av":"lblFontsizelarge_Class","ctrl":"FONTSIZELARGE","prop":"Class"}]}""");
+         setEventMetadata("FSCOLOR.LOAD","""{"handler":"E172G2","iparms":[{"av":"AV8ColorItemClass","fld":"vCOLORITEMCLASS","hsh":true},{"av":"AV5WWP_DesignSystemSettings","fld":"vWWP_DESIGNSYSTEMSETTINGS"},{"av":"AV10ColorName","fld":"vCOLORNAME"}]""");
+         setEventMetadata("FSCOLOR.LOAD",""","oparms":[{"av":"AV10ColorName","fld":"vCOLORNAME"},{"av":"lblColorsquare_Caption","ctrl":"COLORSQUARE","prop":"Caption"},{"av":"AV8ColorItemClass","fld":"vCOLORITEMCLASS","hsh":true}]}""");
+         setEventMetadata("TABLECOLORITEM.CLICK","""{"handler":"E152G2","iparms":[{"av":"FSCOLOR_nFirstRecordOnPage"},{"av":"FSCOLOR_nEOF"},{"av":"AV5WWP_DesignSystemSettings","fld":"vWWP_DESIGNSYSTEMSETTINGS"},{"av":"edtavColorname_Visible","ctrl":"vCOLORNAME","prop":"Visible"},{"av":"AV8ColorItemClass","fld":"vCOLORITEMCLASS","hsh":true},{"av":"AV10ColorName","fld":"vCOLORNAME"},{"av":"radavBackstyle"},{"av":"AV6BackStyle","fld":"vBACKSTYLE"},{"av":"sPrefix"}]""");
+         setEventMetadata("TABLECOLORITEM.CLICK",""","oparms":[{"av":"AV5WWP_DesignSystemSettings","fld":"vWWP_DESIGNSYSTEMSETTINGS"},{"av":"radavBackstyle"},{"av":"AV6BackStyle","fld":"vBACKSTYLE"},{"av":"AV11FontSizeSelected","fld":"vFONTSIZESELECTED"},{"av":"lblFontsizesmall_Class","ctrl":"FONTSIZESMALL","prop":"Class"},{"av":"lblFontsizemedium_Class","ctrl":"FONTSIZEMEDIUM","prop":"Class"},{"av":"lblFontsizelarge_Class","ctrl":"FONTSIZELARGE","prop":"Class"}]}""");
+         setEventMetadata("FONTSIZESMALL.CLICK","""{"handler":"E112G2","iparms":[{"av":"AV11FontSizeSelected","fld":"vFONTSIZESELECTED"},{"av":"AV5WWP_DesignSystemSettings","fld":"vWWP_DESIGNSYSTEMSETTINGS"}]""");
+         setEventMetadata("FONTSIZESMALL.CLICK",""","oparms":[{"av":"AV11FontSizeSelected","fld":"vFONTSIZESELECTED"},{"av":"AV5WWP_DesignSystemSettings","fld":"vWWP_DESIGNSYSTEMSETTINGS"},{"av":"lblFontsizesmall_Class","ctrl":"FONTSIZESMALL","prop":"Class"},{"av":"lblFontsizemedium_Class","ctrl":"FONTSIZEMEDIUM","prop":"Class"},{"av":"lblFontsizelarge_Class","ctrl":"FONTSIZELARGE","prop":"Class"}]}""");
+         setEventMetadata("FONTSIZEMEDIUM.CLICK","""{"handler":"E122G2","iparms":[{"av":"AV11FontSizeSelected","fld":"vFONTSIZESELECTED"},{"av":"AV5WWP_DesignSystemSettings","fld":"vWWP_DESIGNSYSTEMSETTINGS"}]""");
+         setEventMetadata("FONTSIZEMEDIUM.CLICK",""","oparms":[{"av":"AV11FontSizeSelected","fld":"vFONTSIZESELECTED"},{"av":"AV5WWP_DesignSystemSettings","fld":"vWWP_DESIGNSYSTEMSETTINGS"},{"av":"lblFontsizesmall_Class","ctrl":"FONTSIZESMALL","prop":"Class"},{"av":"lblFontsizemedium_Class","ctrl":"FONTSIZEMEDIUM","prop":"Class"},{"av":"lblFontsizelarge_Class","ctrl":"FONTSIZELARGE","prop":"Class"}]}""");
+         setEventMetadata("FONTSIZELARGE.CLICK","""{"handler":"E132G2","iparms":[{"av":"AV11FontSizeSelected","fld":"vFONTSIZESELECTED"},{"av":"AV5WWP_DesignSystemSettings","fld":"vWWP_DESIGNSYSTEMSETTINGS"}]""");
+         setEventMetadata("FONTSIZELARGE.CLICK",""","oparms":[{"av":"AV11FontSizeSelected","fld":"vFONTSIZESELECTED"},{"av":"AV5WWP_DesignSystemSettings","fld":"vWWP_DESIGNSYSTEMSETTINGS"},{"av":"lblFontsizesmall_Class","ctrl":"FONTSIZESMALL","prop":"Class"},{"av":"lblFontsizemedium_Class","ctrl":"FONTSIZEMEDIUM","prop":"Class"},{"av":"lblFontsizelarge_Class","ctrl":"FONTSIZELARGE","prop":"Class"}]}""");
+         setEventMetadata("VBACKSTYLE.CONTROLVALUECHANGED","""{"handler":"E142G2","iparms":[{"av":"radavBackstyle"},{"av":"AV6BackStyle","fld":"vBACKSTYLE"}]""");
+         setEventMetadata("VBACKSTYLE.CONTROLVALUECHANGED",""","oparms":[{"av":"AV5WWP_DesignSystemSettings","fld":"vWWP_DESIGNSYSTEMSETTINGS"}]}""");
+         setEventMetadata("NULL","""{"handler":"Validv_Colorname","iparms":[]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -2199,7 +2222,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private short nGotPars ;
       private short GxWebError ;
       private short nDynComponent ;
-      private short initialized ;
       private short nGXWrapped ;
       private short wbEnd ;
       private short wbStart ;
@@ -2304,10 +2326,10 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private GXRadio radavBackstyle ;
-      private msglist BackMsgLst ;
-      private msglist LclMsgLst ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWP_DesignSystemSettings AV5WWP_DesignSystemSettings ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWP_DesignSystemSettings GXt_SdtWWP_DesignSystemSettings1 ;
+      private msglist BackMsgLst ;
+      private msglist LclMsgLst ;
    }
 
 }

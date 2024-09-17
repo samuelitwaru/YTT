@@ -45,7 +45,7 @@ namespace GeneXus.Programs {
       {
          this.AV2ReturnValue = new GXBCCollection<SdtWorkHourLog>( context, "WorkHourLog", "YTT_version4") ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_ReturnValue=this.AV2ReturnValue;
       }
 
@@ -57,29 +57,12 @@ namespace GeneXus.Programs {
 
       public void executeSubmit( out GXBCCollection<SdtWorkHourLog> aP0_ReturnValue )
       {
-         workhourlog_dataprovider objworkhourlog_dataprovider;
-         objworkhourlog_dataprovider = new workhourlog_dataprovider();
-         objworkhourlog_dataprovider.AV2ReturnValue = new GXBCCollection<SdtWorkHourLog>( context, "WorkHourLog", "YTT_version4") ;
-         objworkhourlog_dataprovider.context.SetSubmitInitialConfig(context);
-         objworkhourlog_dataprovider.initialize();
-         Submit( executePrivateCatch,objworkhourlog_dataprovider);
+         this.AV2ReturnValue = new GXBCCollection<SdtWorkHourLog>( context, "WorkHourLog", "YTT_version4") ;
+         SubmitImpl();
          aP0_ReturnValue=this.AV2ReturnValue;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((workhourlog_dataprovider)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -89,20 +72,16 @@ namespace GeneXus.Programs {
          {
             AV2ReturnValue = (GXBCCollection<SdtWorkHourLog>)(args[0]) ;
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -113,9 +92,9 @@ namespace GeneXus.Programs {
 
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GXBCCollection<SdtWorkHourLog> AV2ReturnValue ;
       private Object[] args ;
       private GXBCCollection<SdtWorkHourLog> aP0_ReturnValue ;
-      private GXBCCollection<SdtWorkHourLog> AV2ReturnValue ;
    }
 
 }

@@ -46,7 +46,7 @@ namespace GeneXus.Programs.workwithplus.ai {
          this.AV9Link = aP2_Link;
          this.AV8ErrorMessage = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP2_Link=this.AV9Link;
          aP3_ErrorMessage=this.AV8ErrorMessage;
       }
@@ -64,51 +64,30 @@ namespace GeneXus.Programs.workwithplus.ai {
                                  ref string aP2_Link ,
                                  out string aP3_ErrorMessage )
       {
-         wwp_aiprocessusercustomredirection objwwp_aiprocessusercustomredirection;
-         objwwp_aiprocessusercustomredirection = new wwp_aiprocessusercustomredirection();
-         objwwp_aiprocessusercustomredirection.AV10ListName = aP0_ListName;
-         objwwp_aiprocessusercustomredirection.AV11UserQuery = aP1_UserQuery;
-         objwwp_aiprocessusercustomredirection.AV9Link = aP2_Link;
-         objwwp_aiprocessusercustomredirection.AV8ErrorMessage = "" ;
-         objwwp_aiprocessusercustomredirection.context.SetSubmitInitialConfig(context);
-         objwwp_aiprocessusercustomredirection.initialize();
-         Submit( executePrivateCatch,objwwp_aiprocessusercustomredirection);
+         this.AV10ListName = aP0_ListName;
+         this.AV11UserQuery = aP1_UserQuery;
+         this.AV9Link = aP2_Link;
+         this.AV8ErrorMessage = "" ;
+         SubmitImpl();
          aP2_Link=this.AV9Link;
          aP3_ErrorMessage=this.AV8ErrorMessage;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwp_aiprocessusercustomredirection)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )

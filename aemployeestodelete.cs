@@ -26,20 +26,15 @@ namespace GeneXus.Programs {
    {
       public static int Main( string[] args )
       {
-         try
-         {
-            GeneXus.Configuration.Config.ParseArgs(ref args);
-            return new aemployeestodelete().executeCmdLine(args); ;
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-            return 1 ;
-         }
+         return new aemployeestodelete().MainImpl(args); ;
       }
 
       public int executeCmdLine( string[] args )
+      {
+         return ExecuteCmdLine(args); ;
+      }
+
+      protected override int ExecuteCmdLine( string[] args )
       {
          execute();
          return GX.GXRuntime.ExitCode ;
@@ -82,32 +77,15 @@ namespace GeneXus.Programs {
       public void execute( )
       {
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
       public void executeSubmit( )
       {
-         aemployeestodelete objaemployeestodelete;
-         objaemployeestodelete = new aemployeestodelete();
-         objaemployeestodelete.context.SetSubmitInitialConfig(context);
-         objaemployeestodelete.initialize();
-         Submit( executePrivateCatch,objaemployeestodelete);
+         SubmitImpl();
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((aemployeestodelete)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -162,7 +140,7 @@ namespace GeneXus.Programs {
             pr_default.readNext(1);
          }
          pr_default.close(1);
-         this.cleanup();
+         cleanup();
       }
 
       public override int getOutputType( )
@@ -172,7 +150,7 @@ namespace GeneXus.Programs {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -180,14 +158,9 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
          AV15StartDate = DateTime.MinValue;
-         scmdbuf = "";
          P00852_A100CompanyId = new long[1] ;
          P00852_A119WorkHourLogDate = new DateTime[] {DateTime.MinValue} ;
          P00852_A109EmployeeEmail = new string[] {""} ;
@@ -224,14 +197,11 @@ namespace GeneXus.Programs {
       private long AV14CompanyId ;
       private long A100CompanyId ;
       private long A106EmployeeId ;
-      private string scmdbuf ;
       private string A148EmployeeName ;
       private DateTime AV15StartDate ;
       private DateTime A119WorkHourLogDate ;
       private string A109EmployeeEmail ;
       private string A111GAMUserGUID ;
-      private GxSimpleCollection<long> AV17DeleteExceptions ;
-      private GxSimpleCollection<long> AV16EmployeeIdsToDelete ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private IDataStoreProvider pr_default ;
@@ -240,13 +210,15 @@ namespace GeneXus.Programs {
       private string[] P00852_A109EmployeeEmail ;
       private long[] P00852_A106EmployeeId ;
       private string[] P00852_A148EmployeeName ;
+      private GxSimpleCollection<string> AV11EmployeeEmails ;
+      private GxSimpleCollection<long> AV17DeleteExceptions ;
       private long[] P00853_A100CompanyId ;
       private long[] P00853_A106EmployeeId ;
       private string[] P00853_A109EmployeeEmail ;
       private string[] P00853_A111GAMUserGUID ;
       private string[] P00853_A148EmployeeName ;
-      private GxSimpleCollection<string> AV11EmployeeEmails ;
       private GxSimpleCollection<string> AV13EmployeeEmailsToDelete ;
+      private GxSimpleCollection<long> AV16EmployeeIdsToDelete ;
       private GxSimpleCollection<string> AV18GUIDs ;
    }
 

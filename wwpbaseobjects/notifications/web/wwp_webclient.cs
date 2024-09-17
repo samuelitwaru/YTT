@@ -124,7 +124,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
          {
             if ( context.ExposeMetadata( ) )
             {
-               Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+               Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
             }
          }
          Form.Meta.addItem("description", "WWP_Web Client", 0) ;
@@ -167,10 +167,10 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
 
       public void execute( )
       {
-         executePrivate();
+         ExecuteImpl();
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -207,11 +207,8 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITENV( ) ;
          INITTRN( ) ;
          if ( ( GxWebError == 0 ) && ! isAjaxCallMode( ) )
@@ -243,7 +240,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void fix_multi_value_controls( )
@@ -881,7 +878,6 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
 
       protected void CheckExtendedTable077( )
       {
-         nIsDirty_7 = 0;
          Gx_BScreen = 1;
          AssignAttri("", false, "Gx_BScreen", StringUtil.Str( (decimal)(Gx_BScreen), 1, 0));
          standaloneModal( ) ;
@@ -1182,7 +1178,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
          {
             getByPrimaryKey( ) ;
          }
-         CloseOpenCursors();
+         CloseCursors();
       }
 
       protected void btn_get( )
@@ -1699,18 +1695,18 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
          CloseStyles();
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
             enableOutput();
          }
-         context.AddJavascriptSource("calendar.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("calendar-setup.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("calendar-en.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("calendar.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("calendar-setup.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("calendar-en.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.WriteHtmlText( Form.Headerrawhtml) ;
          context.CloseHtmlHeader();
          if ( context.isSpaRequest( ) )
@@ -1880,7 +1876,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202481416561450", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202491613124754", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1896,7 +1892,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wwpbaseobjects/notifications/web/wwp_webclient.js", "?202481416561450", false, true);
+         context.AddJavascriptSource("wwpbaseobjects/notifications/web/wwp_webclient.js", "?202491613124754", false, true);
          /* End function include_jscripts */
       }
 
@@ -1974,15 +1970,15 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
       {
          cmbWWPWebClientBrowserId.Name = "WWPWEBCLIENTBROWSERID";
          cmbWWPWebClientBrowserId.WebTags = "";
-         cmbWWPWebClientBrowserId.addItem("0", "GAM_UnknownAgent", 0);
-         cmbWWPWebClientBrowserId.addItem("1", "GAM_InternetExplorer", 0);
-         cmbWWPWebClientBrowserId.addItem("2", "GAM_Netscape", 0);
-         cmbWWPWebClientBrowserId.addItem("3", "GAM_Opera", 0);
-         cmbWWPWebClientBrowserId.addItem("5", "GAM_PocketIE", 0);
-         cmbWWPWebClientBrowserId.addItem("6", "GAM_Firefox", 0);
-         cmbWWPWebClientBrowserId.addItem("7", "GAM_Chrome", 0);
-         cmbWWPWebClientBrowserId.addItem("8", "GAM_Safari", 0);
-         cmbWWPWebClientBrowserId.addItem("9", "GAM_Edge", 0);
+         cmbWWPWebClientBrowserId.addItem("0", "Unknown Agent", 0);
+         cmbWWPWebClientBrowserId.addItem("1", "Internet Explorer", 0);
+         cmbWWPWebClientBrowserId.addItem("2", "Netscape", 0);
+         cmbWWPWebClientBrowserId.addItem("3", "Opera", 0);
+         cmbWWPWebClientBrowserId.addItem("5", "Pocket IE", 0);
+         cmbWWPWebClientBrowserId.addItem("6", "Firefox", 0);
+         cmbWWPWebClientBrowserId.addItem("7", "Chrome", 0);
+         cmbWWPWebClientBrowserId.addItem("8", "Safari", 0);
+         cmbWWPWebClientBrowserId.addItem("9", "Edge", 0);
          if ( cmbWWPWebClientBrowserId.ItemCount > 0 )
          {
             A49WWPWebClientBrowserId = (short)(Math.Round(NumberUtil.Val( cmbWWPWebClientBrowserId.getValidValue(StringUtil.Trim( StringUtil.Str( (decimal)(A49WWPWebClientBrowserId), 4, 0))), "."), 18, MidpointRounding.ToEven));
@@ -2087,30 +2083,25 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("ENTER","{handler:'UserMainFullajax',iparms:[{postForm:true}]");
-         setEventMetadata("ENTER",",oparms:[]}");
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[]");
-         setEventMetadata("REFRESH",",oparms:[]}");
-         setEventMetadata("VALID_WWPWEBCLIENTID","{handler:'Valid_Wwpwebclientid',iparms:[{av:'cmbWWPWebClientBrowserId'},{av:'A49WWPWebClientBrowserId',fld:'WWPWEBCLIENTBROWSERID',pic:'ZZZ9'},{av:'A48WWPWebClientId',fld:'WWPWEBCLIENTID',pic:''},{av:'Gx_BScreen',fld:'vGXBSCREEN',pic:'9'},{av:'Gx_mode',fld:'vMODE',pic:'@!'},{av:'A51WWPWebClientFirstRegistered',fld:'WWPWEBCLIENTFIRSTREGISTERED',pic:'99/99/9999 99:99:99.999'},{av:'A52WWPWebClientLastRegistered',fld:'WWPWEBCLIENTLASTREGISTERED',pic:'99/99/9999 99:99:99.999'}]");
-         setEventMetadata("VALID_WWPWEBCLIENTID",",oparms:[{av:'cmbWWPWebClientBrowserId'},{av:'A49WWPWebClientBrowserId',fld:'WWPWEBCLIENTBROWSERID',pic:'ZZZ9'},{av:'A50WWPWebClientBrowserVersion',fld:'WWPWEBCLIENTBROWSERVERSION',pic:''},{av:'A51WWPWebClientFirstRegistered',fld:'WWPWEBCLIENTFIRSTREGISTERED',pic:'99/99/9999 99:99:99.999'},{av:'A52WWPWebClientLastRegistered',fld:'WWPWEBCLIENTLASTREGISTERED',pic:'99/99/9999 99:99:99.999'},{av:'A7WWPUserExtendedId',fld:'WWPUSEREXTENDEDID',pic:''},{av:'Gx_mode',fld:'vMODE',pic:'@!'},{av:'Z48WWPWebClientId'},{av:'Z49WWPWebClientBrowserId'},{av:'Z50WWPWebClientBrowserVersion'},{av:'Z51WWPWebClientFirstRegistered'},{av:'Z52WWPWebClientLastRegistered'},{av:'Z7WWPUserExtendedId'},{ctrl:'BTN_DELETE',prop:'Enabled'},{ctrl:'BTN_ENTER',prop:'Enabled'}]}");
-         setEventMetadata("VALID_WWPWEBCLIENTBROWSERID","{handler:'Valid_Wwpwebclientbrowserid',iparms:[]");
-         setEventMetadata("VALID_WWPWEBCLIENTBROWSERID",",oparms:[]}");
-         setEventMetadata("VALID_WWPUSEREXTENDEDID","{handler:'Valid_Wwpuserextendedid',iparms:[{av:'A7WWPUserExtendedId',fld:'WWPUSEREXTENDEDID',pic:''}]");
-         setEventMetadata("VALID_WWPUSEREXTENDEDID",",oparms:[]}");
+         setEventMetadata("ENTER","""{"handler":"UserMainFullajax","iparms":[{"postForm":true}]}""");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[]}""");
+         setEventMetadata("VALID_WWPWEBCLIENTID","""{"handler":"Valid_Wwpwebclientid","iparms":[{"av":"cmbWWPWebClientBrowserId"},{"av":"A49WWPWebClientBrowserId","fld":"WWPWEBCLIENTBROWSERID","pic":"ZZZ9"},{"av":"A48WWPWebClientId","fld":"WWPWEBCLIENTID"},{"av":"Gx_BScreen","fld":"vGXBSCREEN","pic":"9"},{"av":"Gx_mode","fld":"vMODE","pic":"@!"},{"av":"A51WWPWebClientFirstRegistered","fld":"WWPWEBCLIENTFIRSTREGISTERED","pic":"99/99/9999 99:99:99.999"},{"av":"A52WWPWebClientLastRegistered","fld":"WWPWEBCLIENTLASTREGISTERED","pic":"99/99/9999 99:99:99.999"}]""");
+         setEventMetadata("VALID_WWPWEBCLIENTID",""","oparms":[{"av":"cmbWWPWebClientBrowserId"},{"av":"A49WWPWebClientBrowserId","fld":"WWPWEBCLIENTBROWSERID","pic":"ZZZ9"},{"av":"A50WWPWebClientBrowserVersion","fld":"WWPWEBCLIENTBROWSERVERSION"},{"av":"A51WWPWebClientFirstRegistered","fld":"WWPWEBCLIENTFIRSTREGISTERED","pic":"99/99/9999 99:99:99.999"},{"av":"A52WWPWebClientLastRegistered","fld":"WWPWEBCLIENTLASTREGISTERED","pic":"99/99/9999 99:99:99.999"},{"av":"A7WWPUserExtendedId","fld":"WWPUSEREXTENDEDID"},{"av":"Gx_mode","fld":"vMODE","pic":"@!"},{"av":"Z48WWPWebClientId"},{"av":"Z49WWPWebClientBrowserId"},{"av":"Z50WWPWebClientBrowserVersion"},{"av":"Z51WWPWebClientFirstRegistered"},{"av":"Z52WWPWebClientLastRegistered"},{"av":"Z7WWPUserExtendedId"},{"ctrl":"BTN_DELETE","prop":"Enabled"},{"ctrl":"BTN_ENTER","prop":"Enabled"}]}""");
+         setEventMetadata("VALID_WWPWEBCLIENTBROWSERID","""{"handler":"Valid_Wwpwebclientbrowserid","iparms":[]}""");
+         setEventMetadata("VALID_WWPUSEREXTENDEDID","""{"handler":"Valid_Wwpuserextendedid","iparms":[{"av":"A7WWPUserExtendedId","fld":"WWPUSEREXTENDEDID"}]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
       }
 
-      protected void CloseOpenCursors( )
+      protected override void CloseCursors( )
       {
          pr_default.close(1);
          pr_default.close(12);
@@ -2123,7 +2114,6 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
          Z51WWPWebClientFirstRegistered = (DateTime)(DateTime.MinValue);
          Z52WWPWebClientLastRegistered = (DateTime)(DateTime.MinValue);
          Z7WWPUserExtendedId = "";
-         scmdbuf = "";
          gxfirstwebparm = "";
          gxfirstwebparm_bkp = "";
          A7WWPUserExtendedId = "";
@@ -2253,16 +2243,13 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
       private short Z49WWPWebClientBrowserId ;
       private short GxWebError ;
       private short gxcookieaux ;
-      private short IsConfirmed ;
-      private short IsModified ;
       private short AnyError ;
+      private short IsModified ;
+      private short IsConfirmed ;
       private short nKeyPressed ;
-      private short initialized ;
       private short A49WWPWebClientBrowserId ;
       private short Gx_BScreen ;
-      private short GX_JID ;
       private short RcdFound7 ;
-      private short nIsDirty_7 ;
       private short gxajaxcallmode ;
       private short ZZ49WWPWebClientBrowserId ;
       private int trnEnded ;
@@ -2285,7 +2272,6 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
       private string sPrefix ;
       private string Z48WWPWebClientId ;
       private string Z7WWPUserExtendedId ;
-      private string scmdbuf ;
       private string gxfirstwebparm ;
       private string gxfirstwebparm_bkp ;
       private string A7WWPUserExtendedId ;
@@ -2358,6 +2344,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
       private string A50WWPWebClientBrowserVersion ;
       private string Z50WWPWebClientBrowserVersion ;
       private string ZZ50WWPWebClientBrowserVersion ;
+      private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private GXCombobox cmbWWPWebClientBrowserId ;
@@ -2394,7 +2381,6 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
       private string[] T000714_A7WWPUserExtendedId ;
       private bool[] T000714_n7WWPUserExtendedId ;
       private IDataStoreProvider pr_gam ;
-      private GXWebForm Form ;
    }
 
    public class wwp_webclient__gam : DataStoreHelperBase, IDataStoreHelper
@@ -2456,13 +2442,21 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
   {
      if ( def == null )
      {
-        Object[] prmT00075;
-        prmT00075 = new Object[] {
+        Object[] prmT00072;
+        prmT00072 = new Object[] {
+        new ParDef("WWPWebClientId",GXType.Char,100,0)
+        };
+        Object[] prmT00073;
+        prmT00073 = new Object[] {
         new ParDef("WWPWebClientId",GXType.Char,100,0)
         };
         Object[] prmT00074;
         prmT00074 = new Object[] {
         new ParDef("WWPUserExtendedId",GXType.Char,40,0){Nullable=true}
+        };
+        Object[] prmT00075;
+        prmT00075 = new Object[] {
+        new ParDef("WWPWebClientId",GXType.Char,100,0)
         };
         Object[] prmT00076;
         prmT00076 = new Object[] {
@@ -2472,20 +2466,12 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
         prmT00077 = new Object[] {
         new ParDef("WWPWebClientId",GXType.Char,100,0)
         };
-        Object[] prmT00073;
-        prmT00073 = new Object[] {
-        new ParDef("WWPWebClientId",GXType.Char,100,0)
-        };
         Object[] prmT00078;
         prmT00078 = new Object[] {
         new ParDef("WWPWebClientId",GXType.Char,100,0)
         };
         Object[] prmT00079;
         prmT00079 = new Object[] {
-        new ParDef("WWPWebClientId",GXType.Char,100,0)
-        };
-        Object[] prmT00072;
-        prmT00072 = new Object[] {
         new ParDef("WWPWebClientId",GXType.Char,100,0)
         };
         Object[] prmT000710;

@@ -48,7 +48,7 @@ namespace GeneXus.Programs {
          this.AV8LeaveRequestId = aP0_LeaveRequestId;
          this.AV9LeaveRequestDuration = 0 ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_LeaveRequestDuration=this.AV9LeaveRequestDuration;
       }
 
@@ -61,30 +61,13 @@ namespace GeneXus.Programs {
       public void executeSubmit( long aP0_LeaveRequestId ,
                                  out decimal aP1_LeaveRequestDuration )
       {
-         getleaverequestduration objgetleaverequestduration;
-         objgetleaverequestduration = new getleaverequestduration();
-         objgetleaverequestduration.AV8LeaveRequestId = aP0_LeaveRequestId;
-         objgetleaverequestduration.AV9LeaveRequestDuration = 0 ;
-         objgetleaverequestduration.context.SetSubmitInitialConfig(context);
-         objgetleaverequestduration.initialize();
-         Submit( executePrivateCatch,objgetleaverequestduration);
+         this.AV8LeaveRequestId = aP0_LeaveRequestId;
+         this.AV9LeaveRequestDuration = 0 ;
+         SubmitImpl();
          aP1_LeaveRequestDuration=this.AV9LeaveRequestDuration;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((getleaverequestduration)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -99,12 +82,12 @@ namespace GeneXus.Programs {
             if (true) break;
          }
          pr_default.close(0);
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -112,13 +95,8 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
-         scmdbuf = "";
          P009N2_A127LeaveRequestId = new long[1] ;
          P009N2_A131LeaveRequestDuration = new decimal[1] ;
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.getleaverequestduration__default(),
@@ -135,7 +113,6 @@ namespace GeneXus.Programs {
       private long A127LeaveRequestId ;
       private decimal AV9LeaveRequestDuration ;
       private decimal A131LeaveRequestDuration ;
-      private string scmdbuf ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private IDataStoreProvider pr_default ;

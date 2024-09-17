@@ -54,7 +54,7 @@ namespace GeneXus.Programs {
          this.AV8EmployeeId = aP3_EmployeeId;
          this.AV17SDTEmployeeHours = new GXBaseCollection<SdtSDTEmployeeHours_SDTEmployeeHoursItem>( context, "SDTEmployeeHoursItem", "YTT_version4") ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_DateFrom=this.AV11DateFrom;
          aP1_DateTo=this.AV12DateTo;
          aP4_SDTEmployeeHours=this.AV17SDTEmployeeHours;
@@ -75,35 +75,18 @@ namespace GeneXus.Programs {
                                  long aP3_EmployeeId ,
                                  out GXBaseCollection<SdtSDTEmployeeHours_SDTEmployeeHoursItem> aP4_SDTEmployeeHours )
       {
-         procemployeeleavetotal objprocemployeeleavetotal;
-         objprocemployeeleavetotal = new procemployeeleavetotal();
-         objprocemployeeleavetotal.AV11DateFrom = aP0_DateFrom;
-         objprocemployeeleavetotal.AV12DateTo = aP1_DateTo;
-         objprocemployeeleavetotal.AV9LocationId = aP2_LocationId;
-         objprocemployeeleavetotal.AV8EmployeeId = aP3_EmployeeId;
-         objprocemployeeleavetotal.AV17SDTEmployeeHours = new GXBaseCollection<SdtSDTEmployeeHours_SDTEmployeeHoursItem>( context, "SDTEmployeeHoursItem", "YTT_version4") ;
-         objprocemployeeleavetotal.context.SetSubmitInitialConfig(context);
-         objprocemployeeleavetotal.initialize();
-         Submit( executePrivateCatch,objprocemployeeleavetotal);
+         this.AV11DateFrom = aP0_DateFrom;
+         this.AV12DateTo = aP1_DateTo;
+         this.AV9LocationId = aP2_LocationId;
+         this.AV8EmployeeId = aP3_EmployeeId;
+         this.AV17SDTEmployeeHours = new GXBaseCollection<SdtSDTEmployeeHours_SDTEmployeeHoursItem>( context, "SDTEmployeeHoursItem", "YTT_version4") ;
+         SubmitImpl();
          aP0_DateFrom=this.AV11DateFrom;
          aP1_DateTo=this.AV12DateTo;
          aP4_SDTEmployeeHours=this.AV17SDTEmployeeHours;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((procemployeeleavetotal)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -111,14 +94,14 @@ namespace GeneXus.Programs {
          S111 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          /* Execute user subroutine: 'GETHOLIDAYDATES' */
          S121 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          pr_default.dynParam(0, new Object[]{ new Object[]{
@@ -210,7 +193,7 @@ namespace GeneXus.Programs {
             pr_default.readNext(0);
          }
          pr_default.close(0);
-         this.cleanup();
+         cleanup();
       }
 
       protected void S111( )
@@ -274,7 +257,7 @@ namespace GeneXus.Programs {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -282,14 +265,9 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
          AV17SDTEmployeeHours = new GXBaseCollection<SdtSDTEmployeeHours_SDTEmployeeHoursItem>( context, "SDTEmployeeHoursItem", "YTT_version4");
-         scmdbuf = "";
          P007A2_A100CompanyId = new long[1] ;
          P007A2_A106EmployeeId = new long[1] ;
          P007A2_A157CompanyLocationId = new long[1] ;
@@ -358,7 +336,6 @@ namespace GeneXus.Programs {
       private long AV15TotalWorkMinutes ;
       private long A118WorkHourLogId ;
       private long A113HolidayId ;
-      private string scmdbuf ;
       private string A107EmployeeFirstName ;
       private string A132LeaveRequestStatus ;
       private string GXt_char1 ;
@@ -372,11 +349,11 @@ namespace GeneXus.Programs {
       private DateTime AV19FromDate ;
       private DateTime A115HolidayStartDate ;
       private bool returnInSub ;
-      private GxSimpleCollection<DateTime> AV20HolidayDates ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private DateTime aP0_DateFrom ;
       private DateTime aP1_DateTo ;
+      private GXBaseCollection<SdtSDTEmployeeHours_SDTEmployeeHoursItem> AV17SDTEmployeeHours ;
       private IDataStoreProvider pr_default ;
       private long[] P007A2_A100CompanyId ;
       private long[] P007A2_A106EmployeeId ;
@@ -387,11 +364,13 @@ namespace GeneXus.Programs {
       private DateTime[] P007A3_A129LeaveRequestStartDate ;
       private string[] P007A3_A132LeaveRequestStatus ;
       private long[] P007A3_A127LeaveRequestId ;
+      private GxSimpleCollection<DateTime> AV20HolidayDates ;
       private long[] P007A4_A106EmployeeId ;
       private DateTime[] P007A4_A119WorkHourLogDate ;
       private short[] P007A4_A122WorkHourLogMinute ;
       private short[] P007A4_A121WorkHourLogHour ;
       private long[] P007A4_A118WorkHourLogId ;
+      private SdtSDTEmployeeHours_SDTEmployeeHoursItem AV16SDTEmployeeHoursItem ;
       private long[] P007A5_A100CompanyId ;
       private long[] P007A5_A106EmployeeId ;
       private long[] P007A5_A157CompanyLocationId ;
@@ -400,8 +379,6 @@ namespace GeneXus.Programs {
       private DateTime[] P007A6_A115HolidayStartDate ;
       private long[] P007A6_A113HolidayId ;
       private GXBaseCollection<SdtSDTEmployeeHours_SDTEmployeeHoursItem> aP4_SDTEmployeeHours ;
-      private GXBaseCollection<SdtSDTEmployeeHours_SDTEmployeeHoursItem> AV17SDTEmployeeHours ;
-      private SdtSDTEmployeeHours_SDTEmployeeHoursItem AV16SDTEmployeeHoursItem ;
    }
 
    public class procemployeeleavetotal__default : DataStoreHelperBase, IDataStoreHelper

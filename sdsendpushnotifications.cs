@@ -50,37 +50,20 @@ namespace GeneXus.Programs {
          this.AV18Text = aP1_Text;
          this.AV10EmployeeId = aP2_EmployeeId;
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
       public void executeSubmit( string aP0_Title ,
                                  string aP1_Text ,
                                  long aP2_EmployeeId )
       {
-         sdsendpushnotifications objsdsendpushnotifications;
-         objsdsendpushnotifications = new sdsendpushnotifications();
-         objsdsendpushnotifications.AV22Title = aP0_Title;
-         objsdsendpushnotifications.AV18Text = aP1_Text;
-         objsdsendpushnotifications.AV10EmployeeId = aP2_EmployeeId;
-         objsdsendpushnotifications.context.SetSubmitInitialConfig(context);
-         objsdsendpushnotifications.initialize();
-         Submit( executePrivateCatch,objsdsendpushnotifications);
+         this.AV22Title = aP0_Title;
+         this.AV18Text = aP1_Text;
+         this.AV10EmployeeId = aP2_EmployeeId;
+         SubmitImpl();
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((sdsendpushnotifications)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -159,11 +142,11 @@ namespace GeneXus.Programs {
             S111 ();
             if ( returnInSub )
             {
-               this.cleanup();
+               cleanup();
                if (true) return;
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void S111( )
@@ -217,16 +200,12 @@ namespace GeneXus.Programs {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -237,7 +216,6 @@ namespace GeneXus.Programs {
          AV11GAMUser = new GeneXus.Programs.genexussecurity.SdtGAMUser(context);
          AV9Employee = new SdtEmployee(context);
          AV15NewEmployee = new SdtEmployee(context);
-         scmdbuf = "";
          P005Q2_A150DeviceUser = new string[] {""} ;
          P005Q2_n150DeviceUser = new bool[] {false} ;
          P005Q2_A149DeviceToken = new string[] {""} ;
@@ -306,7 +284,6 @@ namespace GeneXus.Programs {
       private long A102ProjectId ;
       private long A166ProjectManagerId ;
       private long A100CompanyId ;
-      private string scmdbuf ;
       private string A149DeviceToken ;
       private string A151DeviceId ;
       private string AV8DeviceToken ;
@@ -325,21 +302,29 @@ namespace GeneXus.Programs {
       private string A176ProjectManagerEmail ;
       private string A109EmployeeEmail ;
       private string A111GAMUserGUID ;
-      private GxSimpleCollection<long> AV26ProjectIds ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GeneXus.Core.genexus.common.notifications.SdtNotification AV19TheNotification ;
+      private GeneXus.Core.genexus.common.notifications.SdtDelivery AV21TheNotificationDelivery ;
+      private GeneXus.Core.genexus.common.notifications.SdtConfiguration AV20TheNotificationConfiguration ;
+      private GeneXus.Programs.genexussecurity.SdtGAMUser AV11GAMUser ;
+      private SdtEmployee AV9Employee ;
+      private SdtEmployee AV15NewEmployee ;
       private IDataStoreProvider pr_default ;
       private string[] P005Q2_A150DeviceUser ;
       private bool[] P005Q2_n150DeviceUser ;
       private string[] P005Q2_A149DeviceToken ;
       private string[] P005Q2_A151DeviceId ;
+      private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> AV17OutMessages ;
       private long[] P005Q3_A106EmployeeId ;
       private long[] P005Q3_A102ProjectId ;
+      private GxSimpleCollection<long> AV26ProjectIds ;
       private long[] P005Q4_A166ProjectManagerId ;
       private bool[] P005Q4_n166ProjectManagerId ;
       private bool[] P005Q4_A177ProjectManagerIsActive ;
       private long[] P005Q4_A102ProjectId ;
       private string[] P005Q4_A176ProjectManagerEmail ;
+      private GxSimpleCollection<string> AV23emails ;
       private bool[] P005Q5_A112EmployeeIsActive ;
       private bool[] P005Q5_A110EmployeeIsManager ;
       private long[] P005Q5_A100CompanyId ;
@@ -348,20 +333,12 @@ namespace GeneXus.Programs {
       private string[] P005Q6_A109EmployeeEmail ;
       private string[] P005Q6_A111GAMUserGUID ;
       private long[] P005Q6_A106EmployeeId ;
+      private GxSimpleCollection<string> AV25ManagerGUIDs ;
       private string[] P005Q7_A150DeviceUser ;
       private bool[] P005Q7_n150DeviceUser ;
       private string[] P005Q7_A149DeviceToken ;
       private string[] P005Q7_A151DeviceId ;
       private GxSimpleCollection<string> AV24ManagerDeviceTokens ;
-      private GxSimpleCollection<string> AV23emails ;
-      private GxSimpleCollection<string> AV25ManagerGUIDs ;
-      private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> AV17OutMessages ;
-      private SdtEmployee AV9Employee ;
-      private SdtEmployee AV15NewEmployee ;
-      private GeneXus.Programs.genexussecurity.SdtGAMUser AV11GAMUser ;
-      private GeneXus.Core.genexus.common.notifications.SdtNotification AV19TheNotification ;
-      private GeneXus.Core.genexus.common.notifications.SdtConfiguration AV20TheNotificationConfiguration ;
-      private GeneXus.Core.genexus.common.notifications.SdtDelivery AV21TheNotificationDelivery ;
    }
 
    public class sdsendpushnotifications__default : DataStoreHelperBase, IDataStoreHelper

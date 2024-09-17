@@ -42,7 +42,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          this.AV8WWPSubscriptionRoleId = aP0_WWPSubscriptionRoleId;
          this.AV9RoleName = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_RoleName=this.AV9RoleName;
       }
 
@@ -55,48 +55,27 @@ namespace GeneXus.Programs.wwpbaseobjects {
       public void executeSubmit( string aP0_WWPSubscriptionRoleId ,
                                  out string aP1_RoleName )
       {
-         wwp_getrolename objwwp_getrolename;
-         objwwp_getrolename = new wwp_getrolename();
-         objwwp_getrolename.AV8WWPSubscriptionRoleId = aP0_WWPSubscriptionRoleId;
-         objwwp_getrolename.AV9RoleName = "" ;
-         objwwp_getrolename.context.SetSubmitInitialConfig(context);
-         objwwp_getrolename.initialize();
-         Submit( executePrivateCatch,objwwp_getrolename);
+         this.AV8WWPSubscriptionRoleId = aP0_WWPSubscriptionRoleId;
+         this.AV9RoleName = "" ;
+         SubmitImpl();
          aP1_RoleName=this.AV9RoleName;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwp_getrolename)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )

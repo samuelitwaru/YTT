@@ -4,7 +4,9 @@ function GXScheduler() {
 	gxSchedulerUC = this;
 	this.SchedulerCotainerName = this.ContainerName + "_Scheduler";
 	this.DynamicCssRules = {};
-
+	var estadoCalendario;
+	var ultimaTab;
+	var ultimaFecha;
 	delete(window.scheduler._lightbox)
 	
 	// Force a reload of the Scheduler when a SPA navigation is performed.
@@ -18,6 +20,14 @@ function GXScheduler() {
 
 	this.GetCurrentEvent = function () {
 		return this.CurrentEvent;
+	}
+
+	this.SetKeepParameters = function (data) {
+		this.KeepParameters = data;
+	}
+
+	this.GetKeepParameters = function () {
+		return this.KeepParameters;
 	}
 
 	this.SetInitialDate = function (data) {
@@ -61,6 +71,14 @@ function GXScheduler() {
 		return this.SetDefaultEnd;
 	}
 
+	this.DefaultInitialDate = function (data) {
+		this.DefaultInitialDate= this.GetNormalizedDate(data, true);		
+	}
+
+	this.GetDefaultInitialDate = function () {
+		return this.DefaultInitialDate;
+	}
+
 	this.show = function () {
 		if (!this.IsPostBack) {
 			this.Initialize();
@@ -86,6 +104,18 @@ function GXScheduler() {
 		]);
 		this.TrackEvents = true;
 	}
+
+
+	scheduler.attachEvent("onViewChange", function(){
+		if(gxSchedulerUC.GetKeepParameters()){
+		 	estadoCalendario = scheduler.getState();
+			ultimaTab = estadoCalendario.mode;
+			ultimaFecha = estadoCalendario.date;
+			localStorage.setItem("ultimaTab", ultimaTab);
+			localStorage.setItem("ultimaFecha", ultimaFecha);
+		}
+			
+	});
 
 	this.SetSchedulerHtml = function () {
 
@@ -140,6 +170,9 @@ function GXScheduler() {
 		var file = "";
 		var staticDir = gx.staticDirectory.substring(1, gx.staticDirectory.length);
 		switch (language) {
+			case "Arabic":
+				file = "GXScheduler/locale/locale_ar.js";
+				break;
 			case "German":
 				file = "GXScheduler/locale/locale_de.js";
 				break;
@@ -183,8 +216,11 @@ function GXScheduler() {
 
 	this.InitScheduler = function () {
 		this.SetProperties();
-		this.SetOverrides();
-		scheduler.init(this.ContainerName, this.GetInitialDate(), this.View);
+		this.SetOverrides();	 
+		this.GetInitialDate();			
+					
+		//	scheduler.init(this.ContainerName, this.GetInitialDate(), this.View);
+		
 		scheduler.setLoadMode(this.AutoLoad);
 		if (GXScheduler.ForceRefresh) {
 			this.Refreshing = true;
@@ -209,7 +245,7 @@ function GXScheduler() {
 	this.SetProperties = function () {
 		this.setCallbackObject();
 		scheduler.config.xml_date = "%Y-%m-%d %H:%i";
-		scheduler.config.multi_day = false;
+		scheduler.config.multi_day = true;
 		scheduler.config.start_on_monday = parseInt(this.StartDay);
 		scheduler.config.first_hour = parseInt(this.FirstHour);
 		scheduler.config.last_hour = parseInt(this.LastHour);
@@ -285,7 +321,7 @@ function GXScheduler() {
 			if( this.getState().mode=="month" && typeof gxSchedulerUC.GetDefaultStart().valueOf()=="number"){
 				var evSugStart = gxSchedulerUC.GetDefaultStart();
 				var evClickStart=scheduler.getEvent(event_id).start_date;
-				if(evSugStart.getHours()!=0 && evSugStart.getUTCFullYear()!=2001){
+				if(evSugStart.getHours()!=0 && evSugStart.getUTCFullYear()!=1901){
 					scheduler.setEventStartDate(event_id,evSugStart);
 				}else{		
 					const [anio,mes,dia,hora,min] =	MergeEventSuggestedClicked(evSugStart,evClickStart);						
@@ -295,7 +331,7 @@ function GXScheduler() {
 			if(this.getState().mode=="month" && typeof gxSchedulerUC.GetDefaultEnd().valueOf()=="number"){
 				var evSugEnd = gxSchedulerUC.GetDefaultEnd();			
 				var evClickEnd=scheduler.getEvent(event_id).end_date;	
-				if(evSugEnd.getHours()!=0 && evSugEnd.getUTCFullYear()!=2001){
+				if(evSugEnd.getHours()!=0 && evSugEnd.getUTCFullYear()!=1901){
 					scheduler.setEventEndDate(event_id,evSugEnd);
 				}else{			
 					const [anio,mes,dia,hora,min] =	MergeEventSuggestedClicked(evSugEnd,evClickEnd)					
@@ -389,7 +425,7 @@ function GXScheduler() {
 			{ name: "time", height: 72, type: "time", map_to: "auto" }
 		];
 
-		scheduler.locale.labels.section_name = "Name";
+		//scheduler.locale.labels.section_name = "Name";
 	}
 
 	this.SetAppearanceProperties = function () {
@@ -484,8 +520,19 @@ function GXScheduler() {
 	/////////////////////////////////////////////////////
 
 	this.GetInitialDate = function () {
-		var initialDate = new Date(this.InitialDate.replace("-", "/").replace("-", "/"));
-		return (initialDate == "Invalid Date" || initialDate == "NaN") ? null : initialDate;
+		if(gxSchedulerUC.GetDefaultInitialDate() instanceof Date){
+			scheduler.init(this.ContainerName, gxSchedulerUC.GetDefaultInitialDate(), this.View);
+		}else{
+			tab = localStorage.getItem("ultimaTab");
+			if((gxSchedulerUC.GetKeepParameters()=="true") && tab!="undefined"){
+				fecha = new Date(localStorage.getItem("ultimaFecha"));
+				scheduler.init(this.ContainerName,fecha,tab);			
+			}else{
+				var initialDate = new Date(this.InitialDate.replace("-", "/").replace("-", "/"));
+				(initialDate == "Invalid Date" || initialDate == "NaN") ? null : initialDate;
+				scheduler.init(this.ContainerName, initialDate, this.View);
+			}			
+		}
 	}
 
 	this.GetDateMask = function (fullYear) {
@@ -567,7 +614,9 @@ function GXScheduler() {
 		var returnDate;
 		if (convertDates) {
 			if (typeof (aDate) == 'string') {
-				var convert = scheduler.date.str_to_date(this.GetDateMask(fullYear));
+				var mask =this.GetDateMask(fullYear);
+				if(mask.charAt(1)=="Y"){mask = "%m/%d/%Y %h:%i"}
+				var convert = scheduler.date.str_to_date(mask);				
 				returnDate = convert(aDateClean);
 			}
 			else {

@@ -2,7 +2,7 @@
 	"Name": "UCExample",
 	"Target": "",
 	"IsControlType": false,
-	"Template": "<div>	<button {{Click}}>Button 1</button>	<button {{Click2}}>Button 2</button></div>", 
+	"Template": "<div>	<button {{Click}}>Button 1</button>	<button {{Click2}}>Button 2</button>		<div class=\"extra content\">       <a> <i class=\"user icon\"></i> {{ExtraContent}} </a>        <slot name=\"extraContent\" />   </div> </div>", 
 	"Events": [
 		{
 			"Name": "Click",

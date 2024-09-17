@@ -110,7 +110,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
          }
          if ( AnyError == 0 )
          {
-            IsConfirmed = 1;
          }
       }
 
@@ -187,7 +186,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       protected void CheckExtendedTable011( )
       {
-         nIsDirty_1 = 0;
          standaloneModal( ) ;
          if ( ! ( GxRegex.IsMatch(A9WWPUserExtendedEmail,"^((\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*)|(\\s*))$") ) )
          {
@@ -283,7 +281,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
       protected void insert_Check( )
       {
          CONFIRM_010( ) ;
-         IsConfirmed = 0;
       }
 
       protected void update_Check( )
@@ -539,7 +536,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
          else
          {
          }
-         IsModified = 0;
          if ( AnyError != 0 )
          {
             context.wjLoc = "";
@@ -858,7 +854,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       protected void SaveImpl( )
       {
-         nKeyPressed = 1;
          GetKey011( ) ;
          if ( IsIns( ) )
          {
@@ -937,7 +932,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars1( bcwwpbaseobjects_WWP_UserExtended, 1) ;
          SaveImpl( ) ;
          VarsToRow1( bcwwpbaseobjects_WWP_UserExtended) ;
@@ -951,7 +945,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars1( bcwwpbaseobjects_WWP_UserExtended, 1) ;
          Gx_mode = "INS";
          /* Insert record */
@@ -997,7 +990,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars1( bcwwpbaseobjects_WWP_UserExtended, 1) ;
          UpdateImpl( ) ;
          context.GX_msglist = BackMsgLst;
@@ -1010,7 +1002,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars1( bcwwpbaseobjects_WWP_UserExtended, 1) ;
          Gx_mode = "INS";
          /* Insert record */
@@ -1044,8 +1035,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
          AnyError = 0;
          context.GX_msglist.removeAllItems();
          RowToVars1( bcwwpbaseobjects_WWP_UserExtended, 0) ;
-         nKeyPressed = 3;
-         IsConfirmed = 0;
          GetKey011( ) ;
          if ( RcdFound1 == 1 )
          {
@@ -1162,7 +1151,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       public void ForceCommitOnExit( )
       {
-         mustCommit = true;
          return  ;
       }
 
@@ -1219,24 +1207,20 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
       }
 
-      protected void CloseOpenCursors( )
+      protected override void CloseCursors( )
       {
          pr_default.close(1);
       }
 
       public override void initialize( )
       {
-         scmdbuf = "";
-         PreviousTooltip = "";
-         PreviousCaption = "";
          Gx_mode = "";
          endTrnMsgTxt = "";
          endTrnMsgCod = "";
@@ -1373,17 +1357,9 @@ namespace GeneXus.Programs.wwpbaseobjects {
          standaloneNotModal( ) ;
       }
 
-      private short IsConfirmed ;
-      private short IsModified ;
       private short AnyError ;
-      private short nKeyPressed ;
-      private short GX_JID ;
       private short RcdFound1 ;
-      private short nIsDirty_1 ;
       private int trnEnded ;
-      private string scmdbuf ;
-      private string PreviousTooltip ;
-      private string PreviousCaption ;
       private string Gx_mode ;
       private string endTrnMsgTxt ;
       private string endTrnMsgCod ;
@@ -1407,7 +1383,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private bool n7WWPUserExtendedId ;
       private bool n18WWPUserExtendedDeletedIn ;
       private bool Gx_longc ;
-      private bool mustCommit ;
       private string Z16WWPUserExtendedName ;
       private string A16WWPUserExtendedName ;
       private string Z8WWPUserExtendedFullName ;
@@ -1418,7 +1393,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private string A40000WWPUserExtendedPhoto_GXI ;
       private string Z10WWPUserExtendedPhoto ;
       private string A10WWPUserExtendedPhoto ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWP_UserExtended bcwwpbaseobjects_WWP_UserExtended ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private IDataStoreProvider pr_default ;
@@ -1487,6 +1461,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private DateTime[] BC000113_A18WWPUserExtendedDeletedIn ;
       private bool[] BC000113_n18WWPUserExtendedDeletedIn ;
       private string[] BC000113_A10WWPUserExtendedPhoto ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWP_UserExtended bcwwpbaseobjects_WWP_UserExtended ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
       private IDataStoreProvider pr_gam ;
@@ -1550,20 +1525,20 @@ namespace GeneXus.Programs.wwpbaseobjects {
   {
      if ( def == null )
      {
-        Object[] prmBC00014;
-        prmBC00014 = new Object[] {
-        new ParDef("WWPUserExtendedId",GXType.Char,40,0){Nullable=true}
-        };
-        Object[] prmBC00015;
-        prmBC00015 = new Object[] {
+        Object[] prmBC00012;
+        prmBC00012 = new Object[] {
         new ParDef("WWPUserExtendedId",GXType.Char,40,0){Nullable=true}
         };
         Object[] prmBC00013;
         prmBC00013 = new Object[] {
         new ParDef("WWPUserExtendedId",GXType.Char,40,0){Nullable=true}
         };
-        Object[] prmBC00012;
-        prmBC00012 = new Object[] {
+        Object[] prmBC00014;
+        prmBC00014 = new Object[] {
+        new ParDef("WWPUserExtendedId",GXType.Char,40,0){Nullable=true}
+        };
+        Object[] prmBC00015;
+        prmBC00015 = new Object[] {
         new ParDef("WWPUserExtendedId",GXType.Char,40,0){Nullable=true}
         };
         Object[] prmBC00016;

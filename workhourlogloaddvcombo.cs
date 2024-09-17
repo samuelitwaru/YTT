@@ -86,7 +86,7 @@ namespace GeneXus.Programs {
          this.AV23SelectedText = "" ;
          this.AV24Combo_DataJson = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP6_SelectedValue=this.AV22SelectedValue;
          aP7_SelectedText=this.AV23SelectedText;
          aP8_Combo_DataJson=this.AV24Combo_DataJson;
@@ -115,39 +115,22 @@ namespace GeneXus.Programs {
                                  out string aP7_SelectedText ,
                                  out string aP8_Combo_DataJson )
       {
-         workhourlogloaddvcombo objworkhourlogloaddvcombo;
-         objworkhourlogloaddvcombo = new workhourlogloaddvcombo();
-         objworkhourlogloaddvcombo.AV17ComboName = aP0_ComboName;
-         objworkhourlogloaddvcombo.AV18TrnMode = aP1_TrnMode;
-         objworkhourlogloaddvcombo.AV19IsDynamicCall = aP2_IsDynamicCall;
-         objworkhourlogloaddvcombo.AV20WorkHourLogId = aP3_WorkHourLogId;
-         objworkhourlogloaddvcombo.AV29Cond_EmployeeId = aP4_Cond_EmployeeId;
-         objworkhourlogloaddvcombo.AV21SearchTxtParms = aP5_SearchTxtParms;
-         objworkhourlogloaddvcombo.AV22SelectedValue = "" ;
-         objworkhourlogloaddvcombo.AV23SelectedText = "" ;
-         objworkhourlogloaddvcombo.AV24Combo_DataJson = "" ;
-         objworkhourlogloaddvcombo.context.SetSubmitInitialConfig(context);
-         objworkhourlogloaddvcombo.initialize();
-         Submit( executePrivateCatch,objworkhourlogloaddvcombo);
+         this.AV17ComboName = aP0_ComboName;
+         this.AV18TrnMode = aP1_TrnMode;
+         this.AV19IsDynamicCall = aP2_IsDynamicCall;
+         this.AV20WorkHourLogId = aP3_WorkHourLogId;
+         this.AV29Cond_EmployeeId = aP4_Cond_EmployeeId;
+         this.AV21SearchTxtParms = aP5_SearchTxtParms;
+         this.AV22SelectedValue = "" ;
+         this.AV23SelectedText = "" ;
+         this.AV24Combo_DataJson = "" ;
+         SubmitImpl();
          aP6_SelectedValue=this.AV22SelectedValue;
          aP7_SelectedText=this.AV23SelectedText;
          aP8_Combo_DataJson=this.AV24Combo_DataJson;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((workhourlogloaddvcombo)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -162,7 +145,7 @@ namespace GeneXus.Programs {
             S111 ();
             if ( returnInSub )
             {
-               this.cleanup();
+               cleanup();
                if (true) return;
             }
          }
@@ -172,11 +155,11 @@ namespace GeneXus.Programs {
             S121 ();
             if ( returnInSub )
             {
-               this.cleanup();
+               cleanup();
                if (true) return;
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void S111( )
@@ -316,16 +299,12 @@ namespace GeneXus.Programs {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -335,7 +314,6 @@ namespace GeneXus.Programs {
          AV24Combo_DataJson = "";
          AV9WWPContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPContext(context);
          AV14SearchTxt = "";
-         scmdbuf = "";
          lV14SearchTxt = "";
          A107EmployeeFirstName = "";
          P006C2_A107EmployeeFirstName = new string[] {""} ;
@@ -387,7 +365,6 @@ namespace GeneXus.Programs {
       private long AV28EmployeeId ;
       private long A102ProjectId ;
       private string AV18TrnMode ;
-      private string scmdbuf ;
       private string A107EmployeeFirstName ;
       private bool AV19IsDynamicCall ;
       private bool returnInSub ;
@@ -400,9 +377,12 @@ namespace GeneXus.Programs {
       private string lV14SearchTxt ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV9WWPContext ;
       private IDataStoreProvider pr_default ;
       private string[] P006C2_A107EmployeeFirstName ;
       private long[] P006C2_A106EmployeeId ;
+      private GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item AV16Combo_DataItem ;
+      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item> AV15Combo_Data ;
       private long[] P006C3_A118WorkHourLogId ;
       private long[] P006C3_A106EmployeeId ;
       private string[] P006C3_A107EmployeeFirstName ;
@@ -415,9 +395,6 @@ namespace GeneXus.Programs {
       private string aP6_SelectedValue ;
       private string aP7_SelectedText ;
       private string aP8_Combo_DataJson ;
-      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item> AV15Combo_Data ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV9WWPContext ;
-      private GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item AV16Combo_DataItem ;
    }
 
    public class workhourlogloaddvcombo__default : DataStoreHelperBase, IDataStoreHelper
@@ -438,7 +415,7 @@ namespace GeneXus.Programs {
          sOrderString = "";
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV14SearchTxt)) )
          {
-            AddWhere(sWhereString, "(LOWER(EmployeeFirstName) like '%' || LOWER(:lV14SearchTxt))");
+            AddWhere(sWhereString, "(EmployeeFirstName like '%' || :lV14SearchTxt)");
          }
          else
          {

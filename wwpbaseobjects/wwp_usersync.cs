@@ -50,7 +50,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          this.AV8GAMUser = aP1_GAMUser;
          this.AV9Messages = new GXBaseCollection<GeneXus.Utils.SdtMessages_Message>( context, "Message", "GeneXus") ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP2_Messages=this.AV9Messages;
       }
 
@@ -65,31 +65,14 @@ namespace GeneXus.Programs.wwpbaseobjects {
                                  GeneXus.Programs.genexussecurity.SdtGAMUser aP1_GAMUser ,
                                  out GXBaseCollection<GeneXus.Utils.SdtMessages_Message> aP2_Messages )
       {
-         wwp_usersync objwwp_usersync;
-         objwwp_usersync = new wwp_usersync();
-         objwwp_usersync.AV10TrnMode = aP0_TrnMode;
-         objwwp_usersync.AV8GAMUser = aP1_GAMUser;
-         objwwp_usersync.AV9Messages = new GXBaseCollection<GeneXus.Utils.SdtMessages_Message>( context, "Message", "GeneXus") ;
-         objwwp_usersync.context.SetSubmitInitialConfig(context);
-         objwwp_usersync.initialize();
-         Submit( executePrivateCatch,objwwp_usersync);
+         this.AV10TrnMode = aP0_TrnMode;
+         this.AV8GAMUser = aP1_GAMUser;
+         this.AV9Messages = new GXBaseCollection<GeneXus.Utils.SdtMessages_Message>( context, "Message", "GeneXus") ;
+         SubmitImpl();
          aP2_Messages=this.AV9Messages;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwp_usersync)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -161,21 +144,17 @@ namespace GeneXus.Programs.wwpbaseobjects {
          {
             new GeneXus.Programs.wwpbaseobjects.wwp_logger(context ).gxep_error(  StringUtil.Format( "TrnMode: %1 - %2, GAMUser: %3, Messages %4", AV10TrnMode, GeneXus.Core.genexus.gxdomaintrnmode.getDescription(context,AV10TrnMode), AV8GAMUser.tojsonstring(), AV9Messages.ToJSonString(false), "", "", "", "", ""),  AV14Pgmname) ;
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -196,11 +175,11 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private string AV14Pgmname ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GeneXus.Programs.genexussecurity.SdtGAMUser AV8GAMUser ;
+      private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> AV9Messages ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWP_UserExtended AV11WWP_UserExtended ;
       private IDataStoreProvider pr_default ;
       private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> aP2_Messages ;
-      private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> AV9Messages ;
-      private GeneXus.Programs.genexussecurity.SdtGAMUser AV8GAMUser ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWP_UserExtended AV11WWP_UserExtended ;
    }
 
    public class wwp_usersync__default : DataStoreHelperBase, IDataStoreHelper

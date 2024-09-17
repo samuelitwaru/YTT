@@ -52,7 +52,7 @@ namespace GeneXus.Programs {
          this.AV10ToDate = aP2_ToDate;
          this.AV20ExpectedWorkDays = 0 ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_EmployeeId=this.AV8EmployeeId;
          aP1_FromDate=this.AV9FromDate;
          aP2_ToDate=this.AV10ToDate;
@@ -72,35 +72,18 @@ namespace GeneXus.Programs {
                                  ref DateTime aP2_ToDate ,
                                  out long aP3_ExpectedWorkDays )
       {
-         getemployeeexpecteddays objgetemployeeexpecteddays;
-         objgetemployeeexpecteddays = new getemployeeexpecteddays();
-         objgetemployeeexpecteddays.AV8EmployeeId = aP0_EmployeeId;
-         objgetemployeeexpecteddays.AV9FromDate = aP1_FromDate;
-         objgetemployeeexpecteddays.AV10ToDate = aP2_ToDate;
-         objgetemployeeexpecteddays.AV20ExpectedWorkDays = 0 ;
-         objgetemployeeexpecteddays.context.SetSubmitInitialConfig(context);
-         objgetemployeeexpecteddays.initialize();
-         Submit( executePrivateCatch,objgetemployeeexpecteddays);
+         this.AV8EmployeeId = aP0_EmployeeId;
+         this.AV9FromDate = aP1_FromDate;
+         this.AV10ToDate = aP2_ToDate;
+         this.AV20ExpectedWorkDays = 0 ;
+         SubmitImpl();
          aP0_EmployeeId=this.AV8EmployeeId;
          aP1_FromDate=this.AV9FromDate;
          aP2_ToDate=this.AV10ToDate;
          aP3_ExpectedWorkDays=this.AV20ExpectedWorkDays;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((getemployeeexpecteddays)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -142,12 +125,12 @@ namespace GeneXus.Programs {
          {
             AV20ExpectedWorkDays = 0;
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -155,13 +138,12 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
+      protected override void CloseCursors( )
       {
       }
 
       public override void initialize( )
       {
-         scmdbuf = "";
          P00A22_A106EmployeeId = new long[1] ;
          P00A22_A100CompanyId = new long[1] ;
          P00A24_A40000GXC1 = new int[1] ;
@@ -190,7 +172,6 @@ namespace GeneXus.Programs {
       private long AV21LeaveDays ;
       private long GXt_int1 ;
       private long AV18TotalWorkDays ;
-      private string scmdbuf ;
       private DateTime AV9FromDate ;
       private DateTime AV10ToDate ;
       private bool n40000GXC1 ;

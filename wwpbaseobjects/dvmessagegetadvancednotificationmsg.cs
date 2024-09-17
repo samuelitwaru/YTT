@@ -56,7 +56,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          this.AV40ClickRedirectURL = aP7_ClickRedirectURL;
          this.AV31Parms = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP8_Parms=this.AV31Parms;
       }
 
@@ -83,37 +83,20 @@ namespace GeneXus.Programs.wwpbaseobjects {
                                  string aP7_ClickRedirectURL ,
                                  out string aP8_Parms )
       {
-         dvmessagegetadvancednotificationmsg objdvmessagegetadvancednotificationmsg;
-         objdvmessagegetadvancednotificationmsg = new dvmessagegetadvancednotificationmsg();
-         objdvmessagegetadvancednotificationmsg.AV36Title = aP0_Title;
-         objdvmessagegetadvancednotificationmsg.AV34Text = aP1_Text;
-         objdvmessagegetadvancednotificationmsg.AV38Type = aP2_Type;
-         objdvmessagegetadvancednotificationmsg.AV18ControlSelector = aP3_ControlSelector;
-         objdvmessagegetadvancednotificationmsg.AV23Hide = aP4_Hide;
-         objdvmessagegetadvancednotificationmsg.AV19IsDesktopNotification = aP5_IsDesktopNotification;
-         objdvmessagegetadvancednotificationmsg.AV21DesktopNotificationIconUrl = aP6_DesktopNotificationIconUrl;
-         objdvmessagegetadvancednotificationmsg.AV40ClickRedirectURL = aP7_ClickRedirectURL;
-         objdvmessagegetadvancednotificationmsg.AV31Parms = "" ;
-         objdvmessagegetadvancednotificationmsg.context.SetSubmitInitialConfig(context);
-         objdvmessagegetadvancednotificationmsg.initialize();
-         Submit( executePrivateCatch,objdvmessagegetadvancednotificationmsg);
+         this.AV36Title = aP0_Title;
+         this.AV34Text = aP1_Text;
+         this.AV38Type = aP2_Type;
+         this.AV18ControlSelector = aP3_ControlSelector;
+         this.AV23Hide = aP4_Hide;
+         this.AV19IsDesktopNotification = aP5_IsDesktopNotification;
+         this.AV21DesktopNotificationIconUrl = aP6_DesktopNotificationIconUrl;
+         this.AV40ClickRedirectURL = aP7_ClickRedirectURL;
+         this.AV31Parms = "" ;
+         SubmitImpl();
          aP8_Parms=this.AV31Parms;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((dvmessagegetadvancednotificationmsg)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -156,21 +139,17 @@ namespace GeneXus.Programs.wwpbaseobjects {
             AV31Parms += "}";
          }
          AV31Parms += "}";
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )

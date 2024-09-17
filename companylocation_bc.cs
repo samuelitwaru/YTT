@@ -112,7 +112,6 @@ namespace GeneXus.Programs {
          }
          if ( AnyError == 0 )
          {
-            IsConfirmed = 1;
          }
       }
 
@@ -174,7 +173,6 @@ namespace GeneXus.Programs {
 
       protected void CheckExtendedTable0M24( )
       {
-         nIsDirty_24 = 0;
          standaloneModal( ) ;
          /* Using cursor BC000M5 */
          pr_default.execute(3, new Object[] {A158CompanyLocationName, A157CompanyLocationId});
@@ -271,7 +269,6 @@ namespace GeneXus.Programs {
       protected void insert_Check( )
       {
          CONFIRM_0M0( ) ;
-         IsConfirmed = 0;
       }
 
       protected void update_Check( )
@@ -499,7 +496,6 @@ namespace GeneXus.Programs {
          else
          {
          }
-         IsModified = 0;
          if ( AnyError != 0 )
          {
             context.wjLoc = "";
@@ -733,7 +729,6 @@ namespace GeneXus.Programs {
 
       protected void SaveImpl( )
       {
-         nKeyPressed = 1;
          GetKey0M24( ) ;
          if ( IsIns( ) )
          {
@@ -811,7 +806,6 @@ namespace GeneXus.Programs {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars24( bcCompanyLocation, 1) ;
          SaveImpl( ) ;
          VarsToRow24( bcCompanyLocation) ;
@@ -825,7 +819,6 @@ namespace GeneXus.Programs {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars24( bcCompanyLocation, 1) ;
          Gx_mode = "INS";
          /* Insert record */
@@ -871,7 +864,6 @@ namespace GeneXus.Programs {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars24( bcCompanyLocation, 1) ;
          UpdateImpl( ) ;
          context.GX_msglist = BackMsgLst;
@@ -884,7 +876,6 @@ namespace GeneXus.Programs {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars24( bcCompanyLocation, 1) ;
          Gx_mode = "INS";
          /* Insert record */
@@ -918,8 +909,6 @@ namespace GeneXus.Programs {
          AnyError = 0;
          context.GX_msglist.removeAllItems();
          RowToVars24( bcCompanyLocation, 0) ;
-         nKeyPressed = 3;
-         IsConfirmed = 0;
          GetKey0M24( ) ;
          if ( RcdFound24 == 1 )
          {
@@ -1035,7 +1024,6 @@ namespace GeneXus.Programs {
 
       public void ForceCommitOnExit( )
       {
-         mustCommit = true;
          return  ;
       }
 
@@ -1092,24 +1080,20 @@ namespace GeneXus.Programs {
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
       }
 
-      protected void CloseOpenCursors( )
+      protected override void CloseCursors( )
       {
          pr_default.close(1);
       }
 
       public override void initialize( )
       {
-         scmdbuf = "";
-         PreviousTooltip = "";
-         PreviousCaption = "";
          Gx_mode = "";
          endTrnMsgTxt = "";
          endTrnMsgCod = "";
@@ -1185,19 +1169,11 @@ namespace GeneXus.Programs {
          standaloneNotModal( ) ;
       }
 
-      private short IsConfirmed ;
-      private short IsModified ;
       private short AnyError ;
-      private short nKeyPressed ;
-      private short GX_JID ;
       private short RcdFound24 ;
-      private short nIsDirty_24 ;
       private int trnEnded ;
       private long Z157CompanyLocationId ;
       private long A157CompanyLocationId ;
-      private string scmdbuf ;
-      private string PreviousTooltip ;
-      private string PreviousCaption ;
       private string Gx_mode ;
       private string endTrnMsgTxt ;
       private string endTrnMsgCod ;
@@ -1208,11 +1184,11 @@ namespace GeneXus.Programs {
       private string sMode24 ;
       private string N159CompanyLocationCode ;
       private bool returnInSub ;
-      private bool mustCommit ;
       private IGxSession AV12WebSession ;
-      private SdtCompanyLocation bcCompanyLocation ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV8WWPContext ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext AV11TrnContext ;
       private IDataStoreProvider pr_default ;
       private long[] BC000M4_A157CompanyLocationId ;
       private string[] BC000M4_A158CompanyLocationName ;
@@ -1230,11 +1206,10 @@ namespace GeneXus.Programs {
       private long[] BC000M12_A157CompanyLocationId ;
       private string[] BC000M12_A158CompanyLocationName ;
       private string[] BC000M12_A159CompanyLocationCode ;
+      private SdtCompanyLocation bcCompanyLocation ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
       private IDataStoreProvider pr_gam ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV8WWPContext ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext AV11TrnContext ;
    }
 
    public class companylocation_bc__gam : DataStoreHelperBase, IDataStoreHelper
@@ -1294,6 +1269,14 @@ namespace GeneXus.Programs {
   {
      if ( def == null )
      {
+        Object[] prmBC000M2;
+        prmBC000M2 = new Object[] {
+        new ParDef("CompanyLocationId",GXType.Int64,10,0)
+        };
+        Object[] prmBC000M3;
+        prmBC000M3 = new Object[] {
+        new ParDef("CompanyLocationId",GXType.Int64,10,0)
+        };
         Object[] prmBC000M4;
         prmBC000M4 = new Object[] {
         new ParDef("CompanyLocationId",GXType.Int64,10,0)
@@ -1305,14 +1288,6 @@ namespace GeneXus.Programs {
         };
         Object[] prmBC000M6;
         prmBC000M6 = new Object[] {
-        new ParDef("CompanyLocationId",GXType.Int64,10,0)
-        };
-        Object[] prmBC000M3;
-        prmBC000M3 = new Object[] {
-        new ParDef("CompanyLocationId",GXType.Int64,10,0)
-        };
-        Object[] prmBC000M2;
-        prmBC000M2 = new Object[] {
         new ParDef("CompanyLocationId",GXType.Int64,10,0)
         };
         Object[] prmBC000M7;

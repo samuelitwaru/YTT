@@ -50,13 +50,13 @@ namespace GeneXus.Programs.wwpbaseobjects {
          this.AV14TransactionName = aP0_TransactionName;
          this.AV9ImportType = aP1_ImportType;
          this.AV6ExtraParmsJson = aP2_ExtraParmsJson;
-         executePrivate();
+         ExecuteImpl();
          aP0_TransactionName=this.AV14TransactionName;
          aP1_ImportType=this.AV9ImportType;
          aP2_ExtraParmsJson=this.AV6ExtraParmsJson;
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -171,11 +171,8 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITWEB( ) ;
          if ( ! isAjaxCallMode( ) )
          {
@@ -219,7 +216,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void RenderHtmlHeaders( )
@@ -250,10 +247,10 @@ namespace GeneXus.Programs.wwpbaseobjects {
          }
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
@@ -546,7 +543,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
             {
                if ( context.ExposeMetadata( ) )
                {
-                  Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+                  Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
                }
             }
             Form.Meta.addItem("description", "Select file to import", 0) ;
@@ -1003,7 +1000,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          PA3C2( ) ;
          WS3C2( ) ;
          WE3C2( ) ;
-         this.cleanup();
+         cleanup();
          context.SetWrapped(false);
          SaveComponentMsgList(sPrefix);
          context.GX_msglist = BackMsgLst;
@@ -1219,7 +1216,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202481416554388", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20249161311218", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1235,7 +1232,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("wwpbaseobjects/wwp_selectimportfile.js", "?202481416554388", false, true);
+         context.AddJavascriptSource("wwpbaseobjects/wwp_selectimportfile.js", "?20249161311218", false, true);
          /* End function include_jscripts */
       }
 
@@ -1293,27 +1290,20 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'AV5ErrorMsgs',fld:'vERRORMSGS',pic:'',hsh:true}]");
-         setEventMetadata("REFRESH",",oparms:[]}");
-         setEventMetadata("'DOUCANCEL'","{handler:'E113C1',iparms:[]");
-         setEventMetadata("'DOUCANCEL'",",oparms:[]}");
-         setEventMetadata("ENTER","{handler:'E133C2',iparms:[{av:'edtavFiltertoupload_Filename',ctrl:'vFILTERTOUPLOAD',prop:'Filename'},{av:'AV7FilterToUpload',fld:'vFILTERTOUPLOAD',pic:''},{av:'AV9ImportType',fld:'vIMPORTTYPE',pic:''},{av:'AV5ErrorMsgs',fld:'vERRORMSGS',pic:'',hsh:true},{av:'AV6ExtraParmsJson',fld:'vEXTRAPARMSJSON',pic:''},{av:'AV14TransactionName',fld:'vTRANSACTIONNAME',pic:''}]");
-         setEventMetadata("ENTER",",oparms:[{av:'AV7FilterToUpload',fld:'vFILTERTOUPLOAD',pic:''}]}");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"AV5ErrorMsgs","fld":"vERRORMSGS","hsh":true}]}""");
+         setEventMetadata("'DOUCANCEL'","""{"handler":"E113C1","iparms":[]}""");
+         setEventMetadata("ENTER","""{"handler":"E133C2","iparms":[{"av":"edtavFiltertoupload_Filename","ctrl":"vFILTERTOUPLOAD","prop":"Filename"},{"av":"AV7FilterToUpload","fld":"vFILTERTOUPLOAD"},{"av":"AV9ImportType","fld":"vIMPORTTYPE"},{"av":"AV5ErrorMsgs","fld":"vERRORMSGS","hsh":true},{"av":"AV6ExtraParmsJson","fld":"vEXTRAPARMSJSON"},{"av":"AV14TransactionName","fld":"vTRANSACTIONNAME"}]""");
+         setEventMetadata("ENTER",""","oparms":[{"av":"AV7FilterToUpload","fld":"vFILTERTOUPLOAD"}]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -1363,7 +1353,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private short nGotPars ;
       private short GxWebError ;
       private short nDynComponent ;
-      private short initialized ;
       private short wbEnd ;
       private short wbStart ;
       private short nDraw ;
@@ -1433,17 +1422,17 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private string AV7FilterToUpload ;
       private GxFile gxblobfileaux ;
       private GXWebForm Form ;
+      private CacheAPI AV18Cache ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private string aP0_TransactionName ;
       private string aP1_ImportType ;
       private string aP2_ExtraParmsJson ;
+      private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> AV5ErrorMsgs ;
+      private GeneXus.Programs.wwpbaseobjects.SdtBlobData AV19BlobData ;
+      private GeneXus.Utils.SdtMessages_Message AV11Message ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
-      private CacheAPI AV18Cache ;
-      private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> AV5ErrorMsgs ;
-      private GeneXus.Utils.SdtMessages_Message AV11Message ;
-      private GeneXus.Programs.wwpbaseobjects.SdtBlobData AV19BlobData ;
    }
 
 }

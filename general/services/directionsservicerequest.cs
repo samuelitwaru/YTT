@@ -70,7 +70,7 @@ namespace GeneXus.Programs.general.services {
          this.AV12Routes = new GXBaseCollection<GeneXus.Core.genexus.common.SdtRoute>( context, "Route", "GeneXus") ;
          this.AV11errorMessages = new GXBaseCollection<GeneXus.Utils.SdtMessages_Message>( context, "Message", "GeneXus") ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP2_Routes=this.AV12Routes;
          aP3_errorMessages=this.AV11errorMessages;
       }
@@ -88,33 +88,16 @@ namespace GeneXus.Programs.general.services {
                                  out GXBaseCollection<GeneXus.Core.genexus.common.SdtRoute> aP2_Routes ,
                                  out GXBaseCollection<GeneXus.Utils.SdtMessages_Message> aP3_errorMessages )
       {
-         directionsservicerequest objdirectionsservicerequest;
-         objdirectionsservicerequest = new directionsservicerequest();
-         objdirectionsservicerequest.AV9DirectionsServiceProvider = aP0_DirectionsServiceProvider;
-         objdirectionsservicerequest.AV8DirectionsRequestParameters = aP1_DirectionsRequestParameters;
-         objdirectionsservicerequest.AV12Routes = new GXBaseCollection<GeneXus.Core.genexus.common.SdtRoute>( context, "Route", "GeneXus") ;
-         objdirectionsservicerequest.AV11errorMessages = new GXBaseCollection<GeneXus.Utils.SdtMessages_Message>( context, "Message", "GeneXus") ;
-         objdirectionsservicerequest.context.SetSubmitInitialConfig(context);
-         objdirectionsservicerequest.initialize();
-         Submit( executePrivateCatch,objdirectionsservicerequest);
+         this.AV9DirectionsServiceProvider = aP0_DirectionsServiceProvider;
+         this.AV8DirectionsRequestParameters = aP1_DirectionsRequestParameters;
+         this.AV12Routes = new GXBaseCollection<GeneXus.Core.genexus.common.SdtRoute>( context, "Route", "GeneXus") ;
+         this.AV11errorMessages = new GXBaseCollection<GeneXus.Utils.SdtMessages_Message>( context, "Message", "GeneXus") ;
+         SubmitImpl();
          aP2_Routes=this.AV12Routes;
          aP3_errorMessages=this.AV11errorMessages;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((directionsservicerequest)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -128,21 +111,17 @@ namespace GeneXus.Programs.general.services {
             AV10errorMessage.gxTpr_Type = 1;
             AV11errorMessages.Add(AV10errorMessage, 0);
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -154,12 +133,12 @@ namespace GeneXus.Programs.general.services {
       }
 
       private string AV9DirectionsServiceProvider ;
+      private GeneXus.Core.genexus.common.SdtDirectionsRequestParameters AV8DirectionsRequestParameters ;
+      private GXBaseCollection<GeneXus.Core.genexus.common.SdtRoute> AV12Routes ;
+      private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> AV11errorMessages ;
+      private GeneXus.Utils.SdtMessages_Message AV10errorMessage ;
       private GXBaseCollection<GeneXus.Core.genexus.common.SdtRoute> aP2_Routes ;
       private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> aP3_errorMessages ;
-      private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> AV11errorMessages ;
-      private GXBaseCollection<GeneXus.Core.genexus.common.SdtRoute> AV12Routes ;
-      private GeneXus.Core.genexus.common.SdtDirectionsRequestParameters AV8DirectionsRequestParameters ;
-      private GeneXus.Utils.SdtMessages_Message AV10errorMessage ;
    }
 
 }

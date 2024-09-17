@@ -70,7 +70,7 @@ namespace GeneXus.Programs {
          this.AV19EmployeeIds = aP3_EmployeeIds;
          this.Gxm2rootcol = new GXBaseCollection<SdtSDTEmployeeWeekReport>( context, "SDTEmployeeWeekReport", "YTT_version4") ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP4_Gxm2rootcol=this.Gxm2rootcol;
       }
 
@@ -89,33 +89,16 @@ namespace GeneXus.Programs {
                                  GxSimpleCollection<long> aP3_EmployeeIds ,
                                  out GXBaseCollection<SdtSDTEmployeeWeekReport> aP4_Gxm2rootcol )
       {
-         dpemployeeweekreport objdpemployeeweekreport;
-         objdpemployeeweekreport = new dpemployeeweekreport();
-         objdpemployeeweekreport.AV13FromDate = aP0_FromDate;
-         objdpemployeeweekreport.AV16ToDate = aP1_ToDate;
-         objdpemployeeweekreport.AV14CompanyLocationId = aP2_CompanyLocationId;
-         objdpemployeeweekreport.AV19EmployeeIds = aP3_EmployeeIds;
-         objdpemployeeweekreport.Gxm2rootcol = new GXBaseCollection<SdtSDTEmployeeWeekReport>( context, "SDTEmployeeWeekReport", "YTT_version4") ;
-         objdpemployeeweekreport.context.SetSubmitInitialConfig(context);
-         objdpemployeeweekreport.initialize();
-         Submit( executePrivateCatch,objdpemployeeweekreport);
+         this.AV13FromDate = aP0_FromDate;
+         this.AV16ToDate = aP1_ToDate;
+         this.AV14CompanyLocationId = aP2_CompanyLocationId;
+         this.AV19EmployeeIds = aP3_EmployeeIds;
+         this.Gxm2rootcol = new GXBaseCollection<SdtSDTEmployeeWeekReport>( context, "SDTEmployeeWeekReport", "YTT_version4") ;
+         SubmitImpl();
          aP4_Gxm2rootcol=this.Gxm2rootcol;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((dpemployeeweekreport)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -286,12 +269,12 @@ namespace GeneXus.Programs {
             pr_default.readNext(0);
          }
          pr_default.close(0);
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -299,13 +282,8 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
-         scmdbuf = "";
          P001U10_A100CompanyId = new long[1] ;
          P001U10_A112EmployeeIsActive = new bool[] {false} ;
          P001U10_A106EmployeeId = new long[1] ;
@@ -393,7 +371,6 @@ namespace GeneXus.Programs {
       private long AV15Leave ;
       private long AV12Total ;
       private long AV18Expected ;
-      private string scmdbuf ;
       private string A148EmployeeName ;
       private string GXt_char4 ;
       private DateTime AV13FromDate ;
@@ -416,10 +393,11 @@ namespace GeneXus.Programs {
       private bool n40014GXC15 ;
       private bool n40015GXC16 ;
       private bool GXt_boolean3 ;
-      private GxSimpleCollection<long> AV14CompanyLocationId ;
-      private GxSimpleCollection<long> AV19EmployeeIds ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GxSimpleCollection<long> AV14CompanyLocationId ;
+      private GxSimpleCollection<long> AV19EmployeeIds ;
+      private GXBaseCollection<SdtSDTEmployeeWeekReport> Gxm2rootcol ;
       private IDataStoreProvider pr_default ;
       private long[] P001U10_A100CompanyId ;
       private bool[] P001U10_A112EmployeeIsActive ;
@@ -458,9 +436,8 @@ namespace GeneXus.Programs {
       private bool[] P001U10_n40014GXC15 ;
       private short[] P001U10_A40015GXC16 ;
       private bool[] P001U10_n40015GXC16 ;
-      private GXBaseCollection<SdtSDTEmployeeWeekReport> aP4_Gxm2rootcol ;
-      private GXBaseCollection<SdtSDTEmployeeWeekReport> Gxm2rootcol ;
       private SdtSDTEmployeeWeekReport Gxm1sdtemployeeweekreport ;
+      private GXBaseCollection<SdtSDTEmployeeWeekReport> aP4_Gxm2rootcol ;
    }
 
    public class dpemployeeweekreport__default : DataStoreHelperBase, IDataStoreHelper

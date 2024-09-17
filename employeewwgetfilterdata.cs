@@ -80,7 +80,7 @@ namespace GeneXus.Programs {
          this.AV51OptionsDescJson = "" ;
          this.AV52OptionIndexesJson = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP3_OptionsJson=this.AV50OptionsJson;
          aP4_OptionsDescJson=this.AV51OptionsDescJson;
          aP5_OptionIndexesJson=this.AV52OptionIndexesJson;
@@ -103,36 +103,19 @@ namespace GeneXus.Programs {
                                  out string aP4_OptionsDescJson ,
                                  out string aP5_OptionIndexesJson )
       {
-         employeewwgetfilterdata objemployeewwgetfilterdata;
-         objemployeewwgetfilterdata = new employeewwgetfilterdata();
-         objemployeewwgetfilterdata.AV47DDOName = aP0_DDOName;
-         objemployeewwgetfilterdata.AV48SearchTxtParms = aP1_SearchTxtParms;
-         objemployeewwgetfilterdata.AV49SearchTxtTo = aP2_SearchTxtTo;
-         objemployeewwgetfilterdata.AV50OptionsJson = "" ;
-         objemployeewwgetfilterdata.AV51OptionsDescJson = "" ;
-         objemployeewwgetfilterdata.AV52OptionIndexesJson = "" ;
-         objemployeewwgetfilterdata.context.SetSubmitInitialConfig(context);
-         objemployeewwgetfilterdata.initialize();
-         Submit( executePrivateCatch,objemployeewwgetfilterdata);
+         this.AV47DDOName = aP0_DDOName;
+         this.AV48SearchTxtParms = aP1_SearchTxtParms;
+         this.AV49SearchTxtTo = aP2_SearchTxtTo;
+         this.AV50OptionsJson = "" ;
+         this.AV51OptionsDescJson = "" ;
+         this.AV52OptionIndexesJson = "" ;
+         SubmitImpl();
          aP3_OptionsJson=this.AV50OptionsJson;
          aP4_OptionsDescJson=this.AV51OptionsDescJson;
          aP5_OptionIndexesJson=this.AV52OptionIndexesJson;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((employeewwgetfilterdata)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -148,7 +131,7 @@ namespace GeneXus.Programs {
          S111 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          if ( StringUtil.StrCmp(StringUtil.Upper( AV47DDOName), "DDO_EMPLOYEENAME") == 0 )
@@ -157,7 +140,7 @@ namespace GeneXus.Programs {
             S121 ();
             if ( returnInSub )
             {
-               this.cleanup();
+               cleanup();
                if (true) return;
             }
          }
@@ -167,14 +150,14 @@ namespace GeneXus.Programs {
             S131 ();
             if ( returnInSub )
             {
-               this.cleanup();
+               cleanup();
                if (true) return;
             }
          }
          AV50OptionsJson = AV37Options.ToJSonString(false);
          AV51OptionsDescJson = AV39OptionsDesc.ToJSonString(false);
          AV52OptionIndexesJson = AV40OptionIndexes.ToJSonString(false);
-         this.cleanup();
+         cleanup();
       }
 
       protected void S111( )
@@ -431,16 +414,12 @@ namespace GeneXus.Programs {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -466,7 +445,6 @@ namespace GeneXus.Programs {
          AV62Employeewwds_3_tfemployeename_sel = "";
          AV63Employeewwds_4_tfemployeeemail = "";
          AV64Employeewwds_5_tfemployeeemail_sel = "";
-         scmdbuf = "";
          lV60Employeewwds_1_filterfulltext = "";
          lV61Employeewwds_2_tfemployeename = "";
          lV63Employeewwds_4_tfemployeeemail = "";
@@ -529,7 +507,6 @@ namespace GeneXus.Programs {
       private string AV55TFEmployeeName_Sel ;
       private string AV61Employeewwds_2_tfemployeename ;
       private string AV62Employeewwds_3_tfemployeename_sel ;
-      private string scmdbuf ;
       private string lV61Employeewwds_2_tfemployeename ;
       private string A148EmployeeName ;
       private bool returnInSub ;
@@ -554,10 +531,16 @@ namespace GeneXus.Programs {
       private string lV63Employeewwds_4_tfemployeeemail ;
       private string A109EmployeeEmail ;
       private string AV36Option ;
-      private GxSimpleCollection<long> AV56EmployeeIds ;
       private IGxSession AV42Session ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GxSimpleCollection<string> AV37Options ;
+      private GxSimpleCollection<string> AV39OptionsDesc ;
+      private GxSimpleCollection<string> AV40OptionIndexes ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV9WWPContext ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState AV44GridState ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue AV45GridStateFilterValue ;
+      private GxSimpleCollection<long> AV56EmployeeIds ;
       private IDataStoreProvider pr_default ;
       private string[] P006B2_A148EmployeeName ;
       private long[] P006B2_A106EmployeeId ;
@@ -578,12 +561,6 @@ namespace GeneXus.Programs {
       private string aP3_OptionsJson ;
       private string aP4_OptionsDescJson ;
       private string aP5_OptionIndexesJson ;
-      private GxSimpleCollection<string> AV37Options ;
-      private GxSimpleCollection<string> AV39OptionsDesc ;
-      private GxSimpleCollection<string> AV40OptionIndexes ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV9WWPContext ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState AV44GridState ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue AV45GridStateFilterValue ;
    }
 
    public class employeewwgetfilterdata__default : DataStoreHelperBase, IDataStoreHelper
@@ -618,7 +595,7 @@ namespace GeneXus.Programs {
          scmdbuf = "SELECT EmployeeName, EmployeeId, CompanyId, EmployeeBalance, EmployeeVactionDays, EmployeeIsActive, EmployeeIsManager, EmployeeEmail FROM Employee";
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV60Employeewwds_1_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( LOWER(EmployeeName) like '%' || LOWER(:lV60Employeewwds_1_filterfulltext)) or ( LOWER(EmployeeEmail) like '%' || LOWER(:lV60Employeewwds_1_filterfulltext)) or ( SUBSTR(TO_CHAR(EmployeeVactionDays,'90.9'), 2) like '%' || :lV60Employeewwds_1_filterfulltext) or ( SUBSTR(TO_CHAR(EmployeeBalance,'90.9'), 2) like '%' || :lV60Employeewwds_1_filterfulltext))");
+            AddWhere(sWhereString, "(( EmployeeName like '%' || :lV60Employeewwds_1_filterfulltext) or ( EmployeeEmail like '%' || :lV60Employeewwds_1_filterfulltext) or ( SUBSTR(TO_CHAR(EmployeeVactionDays,'90.9'), 2) like '%' || :lV60Employeewwds_1_filterfulltext) or ( SUBSTR(TO_CHAR(EmployeeBalance,'90.9'), 2) like '%' || :lV60Employeewwds_1_filterfulltext))");
          }
          else
          {
@@ -629,7 +606,7 @@ namespace GeneXus.Programs {
          }
          if ( String.IsNullOrEmpty(StringUtil.RTrim( AV62Employeewwds_3_tfemployeename_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV61Employeewwds_2_tfemployeename)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(EmployeeName) like LOWER(:lV61Employeewwds_2_tfemployeename))");
+            AddWhere(sWhereString, "(EmployeeName like :lV61Employeewwds_2_tfemployeename)");
          }
          else
          {
@@ -649,7 +626,7 @@ namespace GeneXus.Programs {
          }
          if ( String.IsNullOrEmpty(StringUtil.RTrim( AV64Employeewwds_5_tfemployeeemail_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV63Employeewwds_4_tfemployeeemail)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(EmployeeEmail) like LOWER(:lV63Employeewwds_4_tfemployeeemail))");
+            AddWhere(sWhereString, "(EmployeeEmail like :lV63Employeewwds_4_tfemployeeemail)");
          }
          else
          {
@@ -764,7 +741,7 @@ namespace GeneXus.Programs {
          scmdbuf = "SELECT EmployeeEmail, EmployeeId, CompanyId, EmployeeBalance, EmployeeVactionDays, EmployeeIsActive, EmployeeIsManager, EmployeeName FROM Employee";
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV60Employeewwds_1_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( LOWER(EmployeeName) like '%' || LOWER(:lV60Employeewwds_1_filterfulltext)) or ( LOWER(EmployeeEmail) like '%' || LOWER(:lV60Employeewwds_1_filterfulltext)) or ( SUBSTR(TO_CHAR(EmployeeVactionDays,'90.9'), 2) like '%' || :lV60Employeewwds_1_filterfulltext) or ( SUBSTR(TO_CHAR(EmployeeBalance,'90.9'), 2) like '%' || :lV60Employeewwds_1_filterfulltext))");
+            AddWhere(sWhereString, "(( EmployeeName like '%' || :lV60Employeewwds_1_filterfulltext) or ( EmployeeEmail like '%' || :lV60Employeewwds_1_filterfulltext) or ( SUBSTR(TO_CHAR(EmployeeVactionDays,'90.9'), 2) like '%' || :lV60Employeewwds_1_filterfulltext) or ( SUBSTR(TO_CHAR(EmployeeBalance,'90.9'), 2) like '%' || :lV60Employeewwds_1_filterfulltext))");
          }
          else
          {
@@ -775,7 +752,7 @@ namespace GeneXus.Programs {
          }
          if ( String.IsNullOrEmpty(StringUtil.RTrim( AV62Employeewwds_3_tfemployeename_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV61Employeewwds_2_tfemployeename)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(EmployeeName) like LOWER(:lV61Employeewwds_2_tfemployeename))");
+            AddWhere(sWhereString, "(EmployeeName like :lV61Employeewwds_2_tfemployeename)");
          }
          else
          {
@@ -795,7 +772,7 @@ namespace GeneXus.Programs {
          }
          if ( String.IsNullOrEmpty(StringUtil.RTrim( AV64Employeewwds_5_tfemployeeemail_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV63Employeewwds_4_tfemployeeemail)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(EmployeeEmail) like LOWER(:lV63Employeewwds_4_tfemployeeemail))");
+            AddWhere(sWhereString, "(EmployeeEmail like :lV63Employeewwds_4_tfemployeeemail)");
          }
          else
          {

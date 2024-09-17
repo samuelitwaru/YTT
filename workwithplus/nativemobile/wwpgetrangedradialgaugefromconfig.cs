@@ -241,6 +241,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
                }
                if ( StringUtil.StringSearch( GXSoapXMLReader.Name, "Body", 1) > 0 )
                {
+                  this.SetPrefixesFromReader( GXSoapXMLReader);
                   if (true) break;
                }
                GXSoapError = GXSoapXMLReader.Read();
@@ -339,7 +340,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          }
          if ( currSoapErr == 0 )
          {
-            executePrivate();
+            ExecutePrivate();
          }
          context.CloseConnections();
          sIncludeState = true;
@@ -396,7 +397,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          this.AV9GaugeConfig = aP0_GaugeConfig;
          this.AV8HTML = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_HTML=this.AV8HTML;
       }
 
@@ -409,30 +410,13 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
       public void executeSubmit( GeneXus.Programs.workwithplus.nativemobile.SdtRangedRadialGaugeConfig aP0_GaugeConfig ,
                                  out string aP1_HTML )
       {
-         wwpgetrangedradialgaugefromconfig objwwpgetrangedradialgaugefromconfig;
-         objwwpgetrangedradialgaugefromconfig = new wwpgetrangedradialgaugefromconfig();
-         objwwpgetrangedradialgaugefromconfig.AV9GaugeConfig = aP0_GaugeConfig;
-         objwwpgetrangedradialgaugefromconfig.AV8HTML = "" ;
-         objwwpgetrangedradialgaugefromconfig.context.SetSubmitInitialConfig(context);
-         objwwpgetrangedradialgaugefromconfig.initialize();
-         Submit( executePrivateCatch,objwwpgetrangedradialgaugefromconfig);
+         this.AV9GaugeConfig = aP0_GaugeConfig;
+         this.AV8HTML = "" ;
+         SubmitImpl();
          aP1_HTML=this.AV8HTML;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwpgetrangedradialgaugefromconfig)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -445,7 +429,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          S111 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          AV10propertyName = "width";
@@ -454,7 +438,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          S111 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          AV10propertyName = "degrees";
@@ -464,7 +448,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          S111 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          AV10propertyName = "valuecolor";
@@ -477,7 +461,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          S111 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          AV10propertyName = "text";
@@ -486,7 +470,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          S111 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          AV10propertyName = "firstColorStart";
@@ -495,7 +479,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          S111 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          AV10propertyName = "firstColorEnd";
@@ -504,7 +488,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          S111 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          AV10propertyName = "secondColorStart";
@@ -513,7 +497,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          S111 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          AV10propertyName = "secondColorEnd";
@@ -522,7 +506,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          S111 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          AV10propertyName = "thirdColorStart";
@@ -531,7 +515,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          S111 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          AV10propertyName = "thirdColorEnd";
@@ -540,7 +524,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          S111 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          AV10propertyName = "fourthColorStart";
@@ -549,7 +533,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          S111 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          AV10propertyName = "fourthColorEnd";
@@ -558,7 +542,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          S111 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          AV10propertyName = "fiveColorStart";
@@ -567,7 +551,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          S111 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          AV10propertyName = "fiveColorEnd";
@@ -576,7 +560,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          S111 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          if ( context.WillRedirect( ) )
@@ -584,7 +568,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
             context.Redirect( context.wjLoc );
             context.wjLoc = "";
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void S111( )
@@ -596,17 +580,13 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          base.cleanup();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -642,8 +622,8 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
       private GXXMLWriter GXSoapXMLWriter ;
       private GxSoapRequest GXSoapHTTPRequest ;
       private GxHttpResponse GXSoapHTTPResponse ;
-      private string aP1_HTML ;
       private GeneXus.Programs.workwithplus.nativemobile.SdtRangedRadialGaugeConfig AV9GaugeConfig ;
+      private string aP1_HTML ;
    }
 
 }

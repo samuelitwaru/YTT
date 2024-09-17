@@ -64,7 +64,7 @@ namespace GeneXus.Programs {
          this.AV5EmployeeIds = aP0_EmployeeIds;
          this.Gxm2rootcol = new GXBaseCollection<SdtSDTEmployee>( context, "SDTEmployee", "YTT_version4") ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_Gxm2rootcol=this.Gxm2rootcol;
       }
 
@@ -77,30 +77,13 @@ namespace GeneXus.Programs {
       public void executeSubmit( GxSimpleCollection<long> aP0_EmployeeIds ,
                                  out GXBaseCollection<SdtSDTEmployee> aP1_Gxm2rootcol )
       {
-         dpemployeesbyproject objdpemployeesbyproject;
-         objdpemployeesbyproject = new dpemployeesbyproject();
-         objdpemployeesbyproject.AV5EmployeeIds = aP0_EmployeeIds;
-         objdpemployeesbyproject.Gxm2rootcol = new GXBaseCollection<SdtSDTEmployee>( context, "SDTEmployee", "YTT_version4") ;
-         objdpemployeesbyproject.context.SetSubmitInitialConfig(context);
-         objdpemployeesbyproject.initialize();
-         Submit( executePrivateCatch,objdpemployeesbyproject);
+         this.AV5EmployeeIds = aP0_EmployeeIds;
+         this.Gxm2rootcol = new GXBaseCollection<SdtSDTEmployee>( context, "SDTEmployee", "YTT_version4") ;
+         SubmitImpl();
          aP1_Gxm2rootcol=this.Gxm2rootcol;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((dpemployeesbyproject)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -161,12 +144,12 @@ namespace GeneXus.Programs {
             pr_default.readNext(0);
          }
          pr_default.close(0);
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -174,13 +157,8 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
-         scmdbuf = "";
          P00152_A106EmployeeId = new long[1] ;
          P00152_A107EmployeeFirstName = new string[] {""} ;
          P00152_A108EmployeeLastName = new string[] {""} ;
@@ -227,7 +205,6 @@ namespace GeneXus.Programs {
       private long A102ProjectId ;
       private decimal A146EmployeeVactionDays ;
       private decimal A147EmployeeBalance ;
-      private string scmdbuf ;
       private string A107EmployeeFirstName ;
       private string A108EmployeeLastName ;
       private string A148EmployeeName ;
@@ -238,9 +215,10 @@ namespace GeneXus.Programs {
       private bool n166ProjectManagerId ;
       private string A109EmployeeEmail ;
       private string A111GAMUserGUID ;
-      private GxSimpleCollection<long> AV5EmployeeIds ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GxSimpleCollection<long> AV5EmployeeIds ;
+      private GXBaseCollection<SdtSDTEmployee> Gxm2rootcol ;
       private IDataStoreProvider pr_default ;
       private long[] P00152_A106EmployeeId ;
       private string[] P00152_A107EmployeeFirstName ;
@@ -254,14 +232,13 @@ namespace GeneXus.Programs {
       private bool[] P00152_A112EmployeeIsActive ;
       private decimal[] P00152_A146EmployeeVactionDays ;
       private decimal[] P00152_A147EmployeeBalance ;
+      private SdtSDTEmployee Gxm1sdtemployee ;
       private long[] P00153_A166ProjectManagerId ;
       private bool[] P00153_n166ProjectManagerId ;
       private long[] P00153_A102ProjectId ;
       private string[] P00153_A103ProjectName ;
-      private GXBaseCollection<SdtSDTEmployee> aP1_Gxm2rootcol ;
-      private GXBaseCollection<SdtSDTEmployee> Gxm2rootcol ;
-      private SdtSDTEmployee Gxm1sdtemployee ;
       private SdtSDTEmployee_ProjectItem Gxm3sdtemployee_project ;
+      private GXBaseCollection<SdtSDTEmployee> aP1_Gxm2rootcol ;
    }
 
    public class dpemployeesbyproject__default : DataStoreHelperBase, IDataStoreHelper

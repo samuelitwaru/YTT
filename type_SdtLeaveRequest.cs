@@ -1209,6 +1209,20 @@ namespace GeneXus.Programs {
          return false ;
       }
 
+      [XmlIgnore]
+      private static GXTypeInfo _typeProps;
+      protected override GXTypeInfo TypeInfo
+      {
+         get {
+            return _typeProps ;
+         }
+
+         set {
+            _typeProps = value ;
+         }
+
+      }
+
       public void initialize( )
       {
          sdtIsNull = 1;
@@ -1288,6 +1302,7 @@ namespace GeneXus.Programs {
    }
 
    [DataContract(Name = @"LeaveRequest", Namespace = "YTT_version4")]
+   [GxJsonSerialization("default")]
    public class SdtLeaveRequest_RESTInterface : GxGenericCollectionItem<SdtLeaveRequest>
    {
       public SdtLeaveRequest_RESTInterface( ) : base()
@@ -1550,6 +1565,7 @@ namespace GeneXus.Programs {
    }
 
    [DataContract(Name = @"LeaveRequest", Namespace = "YTT_version4")]
+   [GxJsonSerialization("default")]
    public class SdtLeaveRequest_RESTLInterface : GxGenericCollectionItem<SdtLeaveRequest>
    {
       public SdtLeaveRequest_RESTLInterface( ) : base()

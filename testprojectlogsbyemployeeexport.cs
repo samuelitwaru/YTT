@@ -49,7 +49,7 @@ namespace GeneXus.Programs {
          this.AV12Filename = "" ;
          this.AV13ErrorMessage = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_Filename=this.AV12Filename;
          aP1_ErrorMessage=this.AV13ErrorMessage;
       }
@@ -63,31 +63,14 @@ namespace GeneXus.Programs {
       public void executeSubmit( out string aP0_Filename ,
                                  out string aP1_ErrorMessage )
       {
-         testprojectlogsbyemployeeexport objtestprojectlogsbyemployeeexport;
-         objtestprojectlogsbyemployeeexport = new testprojectlogsbyemployeeexport();
-         objtestprojectlogsbyemployeeexport.AV12Filename = "" ;
-         objtestprojectlogsbyemployeeexport.AV13ErrorMessage = "" ;
-         objtestprojectlogsbyemployeeexport.context.SetSubmitInitialConfig(context);
-         objtestprojectlogsbyemployeeexport.initialize();
-         Submit( executePrivateCatch,objtestprojectlogsbyemployeeexport);
+         this.AV12Filename = "" ;
+         this.AV13ErrorMessage = "" ;
+         SubmitImpl();
          aP0_Filename=this.AV12Filename;
          aP1_ErrorMessage=this.AV13ErrorMessage;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((testprojectlogsbyemployeeexport)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -96,7 +79,7 @@ namespace GeneXus.Programs {
          S111 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          AV14CellRow = 1;
@@ -105,38 +88,38 @@ namespace GeneXus.Programs {
          S201 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          /* Execute user subroutine: 'WRITEFILTERS' */
          S131 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          /* Execute user subroutine: 'WRITECOLUMNTITLES' */
          S141 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          /* Execute user subroutine: 'WRITEDATA' */
          S161 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          /* Execute user subroutine: 'CLOSEDOCUMENT' */
          S191 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void S111( )
@@ -503,16 +486,12 @@ namespace GeneXus.Programs {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -543,7 +522,6 @@ namespace GeneXus.Programs {
          AV52Testprojectlogsbyemployeeds_7_tfworkhourlogdescription_sel = "";
          AV53Testprojectlogsbyemployeeds_8_tfprojectname = "";
          AV54Testprojectlogsbyemployeeds_9_tfprojectname_sel = "";
-         scmdbuf = "";
          lV46Testprojectlogsbyemployeeds_1_filterfulltext = "";
          lV49Testprojectlogsbyemployeeds_4_tfworkhourlogduration = "";
          lV51Testprojectlogsbyemployeeds_6_tfworkhourlogdescription = "";
@@ -589,7 +567,6 @@ namespace GeneXus.Programs {
       private string AV41TFProjectName ;
       private string AV53Testprojectlogsbyemployeeds_8_tfprojectname ;
       private string AV54Testprojectlogsbyemployeeds_9_tfprojectname_sel ;
-      private string scmdbuf ;
       private string lV53Testprojectlogsbyemployeeds_8_tfprojectname ;
       private string A103ProjectName ;
       private string GXt_char1 ;
@@ -621,8 +598,12 @@ namespace GeneXus.Programs {
       private string lV51Testprojectlogsbyemployeeds_6_tfworkhourlogdescription ;
       private string A120WorkHourLogDuration ;
       private IGxSession AV20Session ;
+      private ExcelDocumentI AV11ExcelDocument ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV9WWPContext ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector AV24ColumnsSelector ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector_Column AV26ColumnsSelector_Column ;
       private IDataStoreProvider pr_default ;
       private long[] P00BE2_A102ProjectId ;
       private string[] P00BE2_A103ProjectName ;
@@ -630,15 +611,11 @@ namespace GeneXus.Programs {
       private string[] P00BE2_A120WorkHourLogDuration ;
       private DateTime[] P00BE2_A119WorkHourLogDate ;
       private long[] P00BE2_A118WorkHourLogId ;
-      private string aP0_Filename ;
-      private string aP1_ErrorMessage ;
-      private ExcelDocumentI AV11ExcelDocument ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV9WWPContext ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector AV25ColumnsSelectorAux ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState AV22GridState ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue AV23GridStateFilterValue ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector AV24ColumnsSelector ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector AV25ColumnsSelectorAux ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector_Column AV26ColumnsSelector_Column ;
+      private string aP0_Filename ;
+      private string aP1_ErrorMessage ;
    }
 
    public class testprojectlogsbyemployeeexport__default : DataStoreHelperBase, IDataStoreHelper

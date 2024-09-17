@@ -43,10 +43,10 @@ namespace GeneXus.Programs {
       public void execute( string aP0_UserGUID )
       {
          this.AV17UserGUID = aP0_UserGUID;
-         executePrivate();
+         ExecuteImpl();
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -155,11 +155,8 @@ namespace GeneXus.Programs {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITWEB( ) ;
          if ( ! isAjaxCallMode( ) )
          {
@@ -190,7 +187,7 @@ namespace GeneXus.Programs {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override short ExecuteStartEvent( )
@@ -234,10 +231,10 @@ namespace GeneXus.Programs {
          CloseStyles();
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
@@ -472,7 +469,8 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-sm-9 gx-attribute", "start", "top", "", "", "div");
             /* Single line edit */
-            GxWebStd.gx_single_line_edit( context, edtavUserguid_Internalname, StringUtil.RTrim( AV17UserGUID), StringUtil.RTrim( context.localUtil.Format( AV17UserGUID, "")), "", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavUserguid_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavUserguid_Enabled, 0, "text", "", 40, "chr", 1, "row", 40, 0, 0, 0, 0, -1, 0, true, "GeneXusSecurityCommon\\GAMGUID", "start", true, "", "HLP_GAMUserTOTPActivation.htm");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 26,'',false,'',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtavUserguid_Internalname, StringUtil.RTrim( AV17UserGUID), StringUtil.RTrim( context.localUtil.Format( AV17UserGUID, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,26);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavUserguid_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavUserguid_Enabled, 0, "text", "", 40, "chr", 1, "row", 40, 0, 0, 0, 0, -1, 0, true, "GeneXusSecurityCommon\\GAMGUID", "start", true, "", "HLP_GAMUserTOTPActivation.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -678,7 +676,7 @@ namespace GeneXus.Programs {
          {
             if ( context.ExposeMetadata( ) )
             {
-               Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+               Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
             }
          }
          Form.Meta.addItem("description", "TOTP activation", 0) ;
@@ -1021,7 +1019,7 @@ namespace GeneXus.Programs {
             AV26Image = AV10GAMUser.gxTpr_Urlimage;
             AssignProp("", false, imgavImage_Internalname, "Bitmap", (String.IsNullOrEmpty(StringUtil.RTrim( AV26Image)) ? AV33Image_GXI : context.convertURL( context.PathToRelativeUrl( AV26Image))), true);
             AssignProp("", false, imgavImage_Internalname, "SrcSet", context.GetImageSrcSet( AV26Image), true);
-            AV33Image_GXI = GXDbFile.PathToUrl( AV10GAMUser.gxTpr_Urlimage);
+            AV33Image_GXI = GXDbFile.PathToUrl( AV10GAMUser.gxTpr_Urlimage, context);
             AssignProp("", false, imgavImage_Internalname, "Bitmap", (String.IsNullOrEmpty(StringUtil.RTrim( AV26Image)) ? AV33Image_GXI : context.convertURL( context.PathToRelativeUrl( AV26Image))), true);
             AssignProp("", false, imgavImage_Internalname, "SrcSet", context.GetImageSrcSet( AV26Image), true);
          }
@@ -1234,7 +1232,7 @@ namespace GeneXus.Programs {
          PA1V2( ) ;
          WS1V2( ) ;
          WE1V2( ) ;
-         this.cleanup();
+         cleanup();
          context.SetWrapped(false);
          context.GX_msglist = BackMsgLst;
          return "";
@@ -1255,7 +1253,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20248121572560", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20249161318433", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1271,7 +1269,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("gamusertotpactivation.js", "?20248121572563", false, true);
+         context.AddJavascriptSource("gamusertotpactivation.js", "?20249161318436", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Panel/BootstrapPanelRender.js", "", false, true);
@@ -1389,25 +1387,19 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'cmbavAuthenticationtypename'},{av:'AV5AuthenticationTypeName',fld:'vAUTHENTICATIONTYPENAME',pic:''}]");
-         setEventMetadata("REFRESH",",oparms:[]}");
-         setEventMetadata("ENTER","{handler:'E121V2',iparms:[{av:'AV17UserGUID',fld:'vUSERGUID',pic:''},{av:'AV15TOTPCode',fld:'vTOTPCODE',pic:''}]");
-         setEventMetadata("ENTER",",oparms:[{ctrl:'BTNENTER',prop:'Visible'},{av:'AV17UserGUID',fld:'vUSERGUID',pic:''}]}");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"cmbavAuthenticationtypename"},{"av":"AV5AuthenticationTypeName","fld":"vAUTHENTICATIONTYPENAME"}]}""");
+         setEventMetadata("ENTER","""{"handler":"E121V2","iparms":[{"av":"AV17UserGUID","fld":"vUSERGUID"},{"av":"AV15TOTPCode","fld":"vTOTPCODE"}]""");
+         setEventMetadata("ENTER",""","oparms":[{"ctrl":"BTNENTER","prop":"Visible"},{"av":"AV17UserGUID","fld":"vUSERGUID"}]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -1475,7 +1467,6 @@ namespace GeneXus.Programs {
 
       private short nGotPars ;
       private short GxWebError ;
-      private short initialized ;
       private short gxajaxcallmode ;
       private short wbEnd ;
       private short wbStart ;
@@ -1527,9 +1518,9 @@ namespace GeneXus.Programs {
       private string sImgUrl ;
       private string imgavImage_Internalname ;
       private string edtavUserguid_Internalname ;
+      private string TempTags ;
       private string edtavUserguid_Jsonclick ;
       private string edtavUsernamespace_Internalname ;
-      private string TempTags ;
       private string AV27UserNameSpace ;
       private string edtavUsernamespace_Jsonclick ;
       private string divAuthenticationtypename_cell_Internalname ;
@@ -1600,18 +1591,18 @@ namespace GeneXus.Programs {
       private GXProperties forbiddenHiddens ;
       private GXUserControl ucDvpanel_tableattributes ;
       private GXUserControl ucDvpanel_gam_datacard ;
+      private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private GXCombobox cmbavAuthenticationtypename ;
+      private GeneXus.Programs.genexussecurity.SdtGAMUser AV10GAMUser ;
+      private GeneXus.Programs.genexussecurity.SdtGAMApplication AV8GAMApplication ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV9GAMErrorCollection ;
+      private GeneXus.Programs.genexussecurity.SdtGAMError AV19GAMError ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMAuthenticationTypeSimple> AV6AuthenticationTypes ;
+      private GeneXus.Programs.genexussecurity.SdtGAMAuthenticationTypeSimple AV7AuthenticationTypeSimple ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMAuthenticationTypeSimple> AV6AuthenticationTypes ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV9GAMErrorCollection ;
-      private GXWebForm Form ;
-      private GeneXus.Programs.genexussecurity.SdtGAMAuthenticationTypeSimple AV7AuthenticationTypeSimple ;
-      private GeneXus.Programs.genexussecurity.SdtGAMApplication AV8GAMApplication ;
-      private GeneXus.Programs.genexussecurity.SdtGAMError AV19GAMError ;
-      private GeneXus.Programs.genexussecurity.SdtGAMUser AV10GAMUser ;
    }
 
 }

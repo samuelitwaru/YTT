@@ -110,7 +110,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
          }
          if ( AnyError == 0 )
          {
-            IsConfirmed = 1;
          }
       }
 
@@ -155,7 +154,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       protected void CheckExtendedTable033( )
       {
-         nIsDirty_3 = 0;
          standaloneModal( ) ;
       }
 
@@ -233,7 +231,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
       protected void insert_Check( )
       {
          CONFIRM_030( ) ;
-         IsConfirmed = 0;
       }
 
       protected void update_Check( )
@@ -461,7 +458,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
          else
          {
          }
-         IsModified = 0;
          if ( AnyError != 0 )
          {
             context.wjLoc = "";
@@ -683,7 +679,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       protected void SaveImpl( )
       {
-         nKeyPressed = 1;
          GetKey033( ) ;
          if ( IsIns( ) )
          {
@@ -761,7 +756,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars3( bcwwpbaseobjects_WWP_Entity, 1) ;
          SaveImpl( ) ;
          VarsToRow3( bcwwpbaseobjects_WWP_Entity) ;
@@ -775,7 +769,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars3( bcwwpbaseobjects_WWP_Entity, 1) ;
          Gx_mode = "INS";
          /* Insert record */
@@ -821,7 +814,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars3( bcwwpbaseobjects_WWP_Entity, 1) ;
          UpdateImpl( ) ;
          context.GX_msglist = BackMsgLst;
@@ -834,7 +826,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars3( bcwwpbaseobjects_WWP_Entity, 1) ;
          Gx_mode = "INS";
          /* Insert record */
@@ -868,8 +859,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
          AnyError = 0;
          context.GX_msglist.removeAllItems();
          RowToVars3( bcwwpbaseobjects_WWP_Entity, 0) ;
-         nKeyPressed = 3;
-         IsConfirmed = 0;
          GetKey033( ) ;
          if ( RcdFound3 == 1 )
          {
@@ -985,7 +974,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       public void ForceCommitOnExit( )
       {
-         mustCommit = true;
          return  ;
       }
 
@@ -1042,24 +1030,20 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
       }
 
-      protected void CloseOpenCursors( )
+      protected override void CloseCursors( )
       {
          pr_default.close(1);
       }
 
       public override void initialize( )
       {
-         scmdbuf = "";
-         PreviousTooltip = "";
-         PreviousCaption = "";
          Gx_mode = "";
          endTrnMsgTxt = "";
          endTrnMsgCod = "";
@@ -1119,27 +1103,17 @@ namespace GeneXus.Programs.wwpbaseobjects {
          standaloneNotModal( ) ;
       }
 
-      private short IsConfirmed ;
-      private short IsModified ;
       private short AnyError ;
-      private short nKeyPressed ;
-      private short GX_JID ;
       private short RcdFound3 ;
-      private short nIsDirty_3 ;
       private int trnEnded ;
       private long Z20WWPEntityId ;
       private long A20WWPEntityId ;
-      private string scmdbuf ;
-      private string PreviousTooltip ;
-      private string PreviousCaption ;
       private string Gx_mode ;
       private string endTrnMsgTxt ;
       private string endTrnMsgCod ;
       private string sMode3 ;
-      private bool mustCommit ;
       private string Z21WWPEntityName ;
       private string A21WWPEntityName ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWP_Entity bcwwpbaseobjects_WWP_Entity ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private IDataStoreProvider pr_default ;
@@ -1154,6 +1128,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private long[] BC000310_A23WWPNotificationDefinitionId ;
       private long[] BC000311_A20WWPEntityId ;
       private string[] BC000311_A21WWPEntityName ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWP_Entity bcwwpbaseobjects_WWP_Entity ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
       private IDataStoreProvider pr_gam ;
@@ -1215,20 +1190,20 @@ namespace GeneXus.Programs.wwpbaseobjects {
   {
      if ( def == null )
      {
-        Object[] prmBC00034;
-        prmBC00034 = new Object[] {
-        new ParDef("WWPEntityId",GXType.Int64,10,0)
-        };
-        Object[] prmBC00035;
-        prmBC00035 = new Object[] {
+        Object[] prmBC00032;
+        prmBC00032 = new Object[] {
         new ParDef("WWPEntityId",GXType.Int64,10,0)
         };
         Object[] prmBC00033;
         prmBC00033 = new Object[] {
         new ParDef("WWPEntityId",GXType.Int64,10,0)
         };
-        Object[] prmBC00032;
-        prmBC00032 = new Object[] {
+        Object[] prmBC00034;
+        prmBC00034 = new Object[] {
+        new ParDef("WWPEntityId",GXType.Int64,10,0)
+        };
+        Object[] prmBC00035;
+        prmBC00035 = new Object[] {
         new ParDef("WWPEntityId",GXType.Int64,10,0)
         };
         Object[] prmBC00036;

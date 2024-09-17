@@ -47,13 +47,13 @@ namespace GeneXus.Programs {
          this.Gx_mode = aP0_Gx_mode;
          this.AV5Name = aP1_Name;
          this.AV7TypeIdDsp = aP2_TypeIdDsp;
-         executePrivate();
+         ExecuteImpl();
          aP0_Gx_mode=this.Gx_mode;
          aP1_Name=this.AV5Name;
          aP2_TypeIdDsp=this.AV7TypeIdDsp;
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -170,11 +170,8 @@ namespace GeneXus.Programs {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITWEB( ) ;
          if ( ! isAjaxCallMode( ) )
          {
@@ -205,7 +202,7 @@ namespace GeneXus.Programs {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override short ExecuteStartEvent( )
@@ -249,10 +246,10 @@ namespace GeneXus.Programs {
          CloseStyles();
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
@@ -526,7 +523,7 @@ namespace GeneXus.Programs {
          {
             if ( context.ExposeMetadata( ) )
             {
-               Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+               Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
             }
          }
          Form.Meta.addItem("description", "Authentication type", 0) ;
@@ -968,7 +965,7 @@ namespace GeneXus.Programs {
          PA172( ) ;
          WS172( ) ;
          WE172( ) ;
-         this.cleanup();
+         cleanup();
          context.SetWrapped(false);
          context.GX_msglist = BackMsgLst;
          return "";
@@ -996,7 +993,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20248121564676", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202491613154399", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1012,7 +1009,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("gamauthenticationtypeentry.js", "?20248121564676", false, true);
+         context.AddJavascriptSource("gamauthenticationtypeentry.js", "?20249161315440", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Panel/BootstrapPanelRender.js", "", false, true);
@@ -1097,27 +1094,20 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'Gx_mode',fld:'vMODE',pic:'@!',hsh:true},{av:'AV5Name',fld:'vNAME',pic:'',hsh:true}]");
-         setEventMetadata("REFRESH",",oparms:[]}");
-         setEventMetadata("VTYPEID.CLICK","{handler:'E11171',iparms:[{av:'cmbavTypeid'},{av:'AV6TypeId',fld:'vTYPEID',pic:''},{av:'Gx_mode',fld:'vMODE',pic:'@!',hsh:true},{av:'AV5Name',fld:'vNAME',pic:'',hsh:true}]");
-         setEventMetadata("VTYPEID.CLICK",",oparms:[{ctrl:'WCENTRYPANEL'}]}");
-         setEventMetadata("VALIDV_TYPEID","{handler:'Validv_Typeid',iparms:[]");
-         setEventMetadata("VALIDV_TYPEID",",oparms:[]}");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"Gx_mode","fld":"vMODE","pic":"@!","hsh":true},{"av":"AV5Name","fld":"vNAME","hsh":true}]}""");
+         setEventMetadata("VTYPEID.CLICK","""{"handler":"E11171","iparms":[{"av":"cmbavTypeid"},{"av":"AV6TypeId","fld":"vTYPEID"},{"av":"Gx_mode","fld":"vMODE","pic":"@!","hsh":true},{"av":"AV5Name","fld":"vNAME","hsh":true}]""");
+         setEventMetadata("VTYPEID.CLICK",""","oparms":[{"ctrl":"WCENTRYPANEL"}]}""");
+         setEventMetadata("VALIDV_TYPEID","""{"handler":"Validv_Typeid","iparms":[]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -1153,7 +1143,6 @@ namespace GeneXus.Programs {
 
       private short nGotPars ;
       private short GxWebError ;
-      private short initialized ;
       private short gxajaxcallmode ;
       private short wbEnd ;
       private short wbStart ;
@@ -1214,6 +1203,7 @@ namespace GeneXus.Programs {
       private bool bDynCreated_Wcentrypanel ;
       private GXWebComponent WebComp_Wcentrypanel ;
       private GXUserControl ucDvpanel_tableattributes ;
+      private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private string aP0_Gx_mode ;
@@ -1222,7 +1212,6 @@ namespace GeneXus.Programs {
       private GXCombobox cmbavTypeid ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
-      private GXWebForm Form ;
    }
 
 }

@@ -677,6 +677,20 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
          return false ;
       }
 
+      [XmlIgnore]
+      private static GXTypeInfo _typeProps;
+      protected override GXTypeInfo TypeInfo
+      {
+         get {
+            return _typeProps ;
+         }
+
+         set {
+            _typeProps = value ;
+         }
+
+      }
+
       public void initialize( )
       {
          gxTv_SdtWWP_WebClient_Wwpwebclientid = "";
@@ -728,6 +742,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
    }
 
    [DataContract(Name = @"WWPBaseObjects\Notifications\Web\WWP_WebClient", Namespace = "YTT_version4")]
+   [GxJsonSerialization("default")]
    public class SdtWWP_WebClient_RESTInterface : GxGenericCollectionItem<GeneXus.Programs.wwpbaseobjects.notifications.web.SdtWWP_WebClient>
    {
       public SdtWWP_WebClient_RESTInterface( ) : base()
@@ -784,11 +799,11 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
       public string gxTpr_Wwpwebclientfirstregistered
       {
          get {
-            return DateTimeUtil.TToC3( sdt.gxTpr_Wwpwebclientfirstregistered) ;
+            return DateTimeUtil.TToC3( sdt.gxTpr_Wwpwebclientfirstregistered, (IGxContext)(context)) ;
          }
 
          set {
-            sdt.gxTpr_Wwpwebclientfirstregistered = DateTimeUtil.CToT2( value);
+            sdt.gxTpr_Wwpwebclientfirstregistered = DateTimeUtil.CToT2( value, (IGxContext)(context));
          }
 
       }
@@ -798,11 +813,11 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
       public string gxTpr_Wwpwebclientlastregistered
       {
          get {
-            return DateTimeUtil.TToC3( sdt.gxTpr_Wwpwebclientlastregistered) ;
+            return DateTimeUtil.TToC3( sdt.gxTpr_Wwpwebclientlastregistered, (IGxContext)(context)) ;
          }
 
          set {
-            sdt.gxTpr_Wwpwebclientlastregistered = DateTimeUtil.CToT2( value);
+            sdt.gxTpr_Wwpwebclientlastregistered = DateTimeUtil.CToT2( value, (IGxContext)(context));
          }
 
       }
@@ -863,6 +878,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.web {
    }
 
    [DataContract(Name = @"WWPBaseObjects\Notifications\Web\WWP_WebClient", Namespace = "YTT_version4")]
+   [GxJsonSerialization("default")]
    public class SdtWWP_WebClient_RESTLInterface : GxGenericCollectionItem<GeneXus.Programs.wwpbaseobjects.notifications.web.SdtWWP_WebClient>
    {
       public SdtWWP_WebClient_RESTLInterface( ) : base()

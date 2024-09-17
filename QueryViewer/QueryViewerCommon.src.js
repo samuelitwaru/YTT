@@ -3804,6 +3804,7 @@ qv.chart = (function () {
 
 	function SetItemClickData(eventData, qViewer, name, type, value, selected, row) {
 
+		
 		function GetContextElement(axisOrDatum, value) {
 			var contextElement = {};
 			contextElement.Name = axisOrDatum.Name;
@@ -3819,6 +3820,7 @@ qv.chart = (function () {
 		eventData.Value = value;
 		eventData.Selected = selected;
 		eventData.Context = [];
+		
 		for (var i = 0; i < qViewer.Metadata.Axes.length; i++) {
 			var axis = qViewer.Metadata.Axes[i];
 			if (!axis.IsComponent) {
@@ -3899,6 +3901,28 @@ qv.chart = (function () {
 		}
 	}
 
+	function formattedPointsTimeline(qViewer, points) {
+		var categories = qViewer.Chart.Categories.DataFields;
+		var indicators = qViewer.Chart.Series.DataFields;
+		var result = points.map(function (point) {
+			var newPoint = {};
+
+			categories.forEach(function (category) {
+				newPoint[category] = point.x;
+			});
+
+			indicators.forEach(function (indicator, index) {
+				newPoint[indicator] = point['y' + (index + 1)];
+			});
+
+			return newPoint;
+		});
+
+		return result;
+	}
+
+
+
 	function onHighchartsItemClickEventHandler(event) {
 
 		var qViewer = qv.collection[this.chart.options.qv.viewerId];
@@ -3923,7 +3947,7 @@ qv.chart = (function () {
 		if (qViewer.ItemClick && qViewer.Metadata.Data[seriesIndex].RaiseItemClick) {
 			var serie = qViewer.Chart.Series.ByIndex[seriesIndex];
 			var formattedValue = qv.util.formatNumber(event.point.y, serie.NumberFormat.DecimalPrecision, serie.Picture, false);
-			var row = qViewer.Data.Rows[event.point.index];
+			var row = IsTimelineChart(qViewer) ? qViewer.Chart.GroupByPoints[event.point.index] : qViewer.Data.Rows[event.point.index];
 			SetItemClickData(qViewer.ItemClickData, qViewer, serie.FieldName, QueryViewerElementType.Datum, formattedValue, selected, row);
 			qViewer.ItemClick();
 		}
@@ -5038,7 +5062,21 @@ qv.chart = (function () {
 			tooltip.useHTML = qv.util.isRTL(qViewer);
 			return tooltip;
 		}
-
+		
+		function initializeTimelinePoints(qViewer){
+			qViewer.Chart.GroupByPoints = [];
+			var pointsGroup = [];
+			var points;
+			var chartSerie;
+			var groupOption = "Days"; //The default initial value is "Days"
+			for (var seriesIndex = 0; seriesIndex < qViewer.Chart.Series.ByIndex.length; seriesIndex++) {
+				chartSerie = qViewer.Chart.Series.ByIndex[seriesIndex];
+				points = groupPoints(qViewer.Chart.Categories, chartSerie.Points, qv.util.XAxisDataType(qViewer), chartSerie.Aggregation, groupOption);
+				pointsGroup.push(points);
+			}
+			qViewer.Chart.GroupByPoints = formattedPointsTimeline(qViewer, getAllSeriesPointsTimeline(pointsGroup));
+		}
+		
 		function getSeriesObject(qViewer, serieIndex, groupOption) {
 
 			function getSerieObject(qViewer, chartSerie, serieIndex, series, groupOption) {
@@ -5075,6 +5113,7 @@ qv.chart = (function () {
 						if (qv.util.IsNullColor(chartSerie.Color))
 							SetHighchartsColor(qViewer, serie.data[j], chartSerie.Points[j].Color, true);
 					}
+					initializeTimelinePoints(qViewer);
 				}
 				else {
 					var widths;
@@ -5708,6 +5747,22 @@ qv.chart = (function () {
 		return qv.chart.getSparklineChartOptions(qViewer, containerId, chartType, false, step, series);
 	}
 
+	function getAllSeriesPointsTimeline(pointsGroupByIndex) {
+		var result = pointsGroupByIndex.reduce(function (accumulator, serie, index) {
+			serie.forEach(function (e) {
+				var key = 'y' + (index + 1);
+				if (!accumulator[e.x]) {
+					accumulator[e.x] = { x: e.x };
+				}
+				accumulator[e.x][key] = e.y;
+			});
+			return accumulator;
+		}, {});
+
+		return Object.values(result);
+	}
+
+
 	function GroupAndCompareFunction(charts) {
 		var firstChart = charts[0];
 		var viewerId = firstChart.options.qv.viewerId;
@@ -5767,6 +5822,7 @@ qv.chart = (function () {
 
 		// Carga las series con los datos que correspondan
 		var ns = 0
+		var pointsGroupByIndex= []
 		for (var seriesIndex = 0; seriesIndex < qViewer.Chart.Series.ByIndex.length; seriesIndex++) {
 			var chartSerie = qViewer.Chart.Series.ByIndex[seriesIndex];
 			seriesName = chartSerie.Name;
@@ -5803,7 +5859,7 @@ qv.chart = (function () {
 			var points;
 			var groupOption = document.getElementById(viewerId + "_options_group_options").value;
 			points = groupPoints(qViewer.Chart.Categories, chartSerie.Points, qv.util.XAxisDataType(qViewer), chartSerie.Aggregation, groupOption);
-
+			pointsGroupByIndex.push(points);
 			for (i = 0; i < points.length; i++) {
 				var value = points[i].y;
 				var date = new gx.date.gxdate(points[i].x, "Y4MD");
@@ -5864,9 +5920,10 @@ qv.chart = (function () {
 			}
 			ns++;
 		}
-
+		
+		qViewer.Chart.GroupByPoints = formattedPointsTimeline(qViewer, getAllSeriesPointsTimeline(pointsGroupByIndex));
 	}
-
+	
 	function getSuitableZoomFactor(points, maxPoints) {
 		if (points.length < maxPoints)
 			return 0;

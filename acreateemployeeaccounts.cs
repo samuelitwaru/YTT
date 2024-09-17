@@ -26,20 +26,15 @@ namespace GeneXus.Programs {
    {
       public static int Main( string[] args )
       {
-         try
-         {
-            GeneXus.Configuration.Config.ParseArgs(ref args);
-            return new acreateemployeeaccounts().executeCmdLine(args); ;
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-            return 1 ;
-         }
+         return new acreateemployeeaccounts().MainImpl(args); ;
       }
 
       public int executeCmdLine( string[] args )
+      {
+         return ExecuteCmdLine(args); ;
+      }
+
+      protected override int ExecuteCmdLine( string[] args )
       {
          execute();
          return GX.GXRuntime.ExitCode ;
@@ -82,32 +77,15 @@ namespace GeneXus.Programs {
       public void execute( )
       {
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
       public void executeSubmit( )
       {
-         acreateemployeeaccounts objacreateemployeeaccounts;
-         objacreateemployeeaccounts = new acreateemployeeaccounts();
-         objacreateemployeeaccounts.context.SetSubmitInitialConfig(context);
-         objacreateemployeeaccounts.initialize();
-         Submit( executePrivateCatch,objacreateemployeeaccounts);
+         SubmitImpl();
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((acreateemployeeaccounts)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -128,12 +106,12 @@ namespace GeneXus.Programs {
             pr_default.readNext(0);
          }
          pr_default.close(0);
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -141,13 +119,8 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
-         scmdbuf = "";
          P00B02_A109EmployeeEmail = new string[] {""} ;
          P00B02_A107EmployeeFirstName = new string[] {""} ;
          P00B02_A108EmployeeLastName = new string[] {""} ;
@@ -172,7 +145,6 @@ namespace GeneXus.Programs {
       }
 
       private long A106EmployeeId ;
-      private string scmdbuf ;
       private string A107EmployeeFirstName ;
       private string A108EmployeeLastName ;
       private string A109EmployeeEmail ;
@@ -184,8 +156,8 @@ namespace GeneXus.Programs {
       private string[] P00B02_A107EmployeeFirstName ;
       private string[] P00B02_A108EmployeeLastName ;
       private long[] P00B02_A106EmployeeId ;
-      private IDataStoreProvider pr_gam ;
       private SdtEmployee AV11Employee ;
+      private IDataStoreProvider pr_gam ;
    }
 
    public class acreateemployeeaccounts__gam : DataStoreHelperBase, IDataStoreHelper

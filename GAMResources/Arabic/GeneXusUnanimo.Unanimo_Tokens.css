@@ -111,6 +111,10 @@
 	--colors_border-secondary-active : var(--colors_secondary-active);
 	--colors_border-secondary-hover : var(--colors_secondary-hover);
 	--colors_border-secondary-disabled : var(--colors_gray03);
+	--colors_border-tertiary-enabled : var(--colors_tertiary);
+	--colors_border-tertiary-active : var(--colors_tertiary-active);
+	--colors_border-tertiary-hover : var(--colors_tertiary-hover);
+	--colors_border-tertiary-disabled : var(--colors_gray03);
 	--colors_border-gray-01 : var(--colors_gray01);
 	--colors_border-gray-02 : var(--colors_gray02);
 	--colors_border-gray-03 : var(--colors_gray03);

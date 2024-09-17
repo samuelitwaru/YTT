@@ -43,11 +43,11 @@ namespace GeneXus.Programs {
       public void execute( ref string aP0_ActivationKey )
       {
          this.AV5ActivationKey = aP0_ActivationKey;
-         executePrivate();
+         ExecuteImpl();
          aP0_ActivationKey=this.AV5ActivationKey;
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -131,11 +131,8 @@ namespace GeneXus.Programs {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITWEB( ) ;
          if ( ! isAjaxCallMode( ) )
          {
@@ -166,7 +163,7 @@ namespace GeneXus.Programs {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override short ExecuteStartEvent( )
@@ -210,10 +207,10 @@ namespace GeneXus.Programs {
          CloseStyles();
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
@@ -445,7 +442,7 @@ namespace GeneXus.Programs {
          {
             if ( context.ExposeMetadata( ) )
             {
-               Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+               Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
             }
          }
          Form.Meta.addItem("description", "GAM_Activate User Account", 0) ;
@@ -681,7 +678,7 @@ namespace GeneXus.Programs {
       {
          /* Start Routine */
          returnInSub = false;
-         AV8isOK = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).activateuser(AV5ActivationKey, true, out  AV12Errors);
+         AV8isOK = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).activateuser(AV5ActivationKey, true, out  AV32Errors);
          if ( AV8isOK )
          {
             lblTbmsg_Caption = "Your user account was activated successfully !!"+StringUtil.NewLine( )+"You must go to the Login page to enter the application.";
@@ -689,14 +686,14 @@ namespace GeneXus.Programs {
          }
          else
          {
-            AV25GXV1 = 1;
-            while ( AV25GXV1 <= AV12Errors.Count )
+            AV43GXV1 = 1;
+            while ( AV43GXV1 <= AV32Errors.Count )
             {
-               AV11Error = ((GeneXus.Programs.genexussecurity.SdtGAMError)AV12Errors.Item(AV25GXV1));
-               lblTbmsg_Caption = StringUtil.Trim( AV11Error.gxTpr_Message);
+               AV31Error = ((GeneXus.Programs.genexussecurity.SdtGAMError)AV32Errors.Item(AV43GXV1));
+               lblTbmsg_Caption = StringUtil.Trim( AV31Error.gxTpr_Message);
                AssignProp("", false, lblTbmsg_Internalname, "Caption", lblTbmsg_Caption, true);
                if (true) break;
-               AV25GXV1 = (int)(AV25GXV1+1);
+               AV43GXV1 = (int)(AV43GXV1+1);
             }
          }
       }
@@ -712,7 +709,7 @@ namespace GeneXus.Programs {
       {
          /* Enter Routine */
          returnInSub = false;
-         CallWebObject(formatLink("login.aspx") );
+         CallWebObject(formatLink("gamexamplelogin.aspx") );
          context.wjLocDisableFrm = 1;
       }
 
@@ -746,7 +743,7 @@ namespace GeneXus.Programs {
          PA0E2( ) ;
          WS0E2( ) ;
          WE0E2( ) ;
-         this.cleanup();
+         cleanup();
          context.SetWrapped(false);
          context.GX_msglist = BackMsgLst;
          return "";
@@ -767,7 +764,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20248121545861", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202491613144794", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -783,7 +780,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("gamactivateuseraccount.js", "?20248121545864", false, true);
+         context.AddJavascriptSource("gamactivateuseraccount.js", "?202491613144797", false, true);
          /* End function include_jscripts */
       }
 
@@ -834,25 +831,18 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[]");
-         setEventMetadata("REFRESH",",oparms:[]}");
-         setEventMetadata("ENTER","{handler:'E120E2',iparms:[]");
-         setEventMetadata("ENTER",",oparms:[]}");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[]}""");
+         setEventMetadata("ENTER","""{"handler":"E120E2","iparms":[]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -879,8 +869,8 @@ namespace GeneXus.Programs {
          EvtGridId = "";
          EvtRowId = "";
          sEvtType = "";
-         AV12Errors = new GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError>( context, "GeneXus.Programs.genexussecurity.SdtGAMError", "GeneXus.Programs");
-         AV11Error = new GeneXus.Programs.genexussecurity.SdtGAMError(context);
+         AV32Errors = new GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError>( context, "GeneXus.Programs.genexussecurity.SdtGAMError", "GeneXus.Programs");
+         AV31Error = new GeneXus.Programs.genexussecurity.SdtGAMError(context);
          BackMsgLst = new msglist();
          LclMsgLst = new msglist();
          /* GeneXus formulas. */
@@ -888,14 +878,13 @@ namespace GeneXus.Programs {
 
       private short nGotPars ;
       private short GxWebError ;
-      private short initialized ;
       private short gxajaxcallmode ;
       private short wbEnd ;
       private short wbStart ;
       private short nDonePA ;
       private short gxcookieaux ;
       private short nGXWrapped ;
-      private int AV25GXV1 ;
+      private int AV43GXV1 ;
       private int idxLst ;
       private string AV5ActivationKey ;
       private string wcpOAV5ActivationKey ;
@@ -938,14 +927,14 @@ namespace GeneXus.Programs {
       private bool gxdyncontrolsrefreshing ;
       private bool returnInSub ;
       private bool AV8isOK ;
+      private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private string aP0_ActivationKey ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV32Errors ;
+      private GeneXus.Programs.genexussecurity.SdtGAMError AV31Error ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV12Errors ;
-      private GXWebForm Form ;
-      private GeneXus.Programs.genexussecurity.SdtGAMError AV11Error ;
    }
 
 }

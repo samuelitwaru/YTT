@@ -48,35 +48,18 @@ namespace GeneXus.Programs {
          this.AV19EmployeeId = aP0_EmployeeId;
          this.AV20ProjectId = aP1_ProjectId;
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
       public void executeSubmit( long aP0_EmployeeId ,
                                  long aP1_ProjectId )
       {
-         assignprojectmanagerrole objassignprojectmanagerrole;
-         objassignprojectmanagerrole = new assignprojectmanagerrole();
-         objassignprojectmanagerrole.AV19EmployeeId = aP0_EmployeeId;
-         objassignprojectmanagerrole.AV20ProjectId = aP1_ProjectId;
-         objassignprojectmanagerrole.context.SetSubmitInitialConfig(context);
-         objassignprojectmanagerrole.initialize();
-         Submit( executePrivateCatch,objassignprojectmanagerrole);
+         this.AV19EmployeeId = aP0_EmployeeId;
+         this.AV20ProjectId = aP1_ProjectId;
+         SubmitImpl();
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((assignprojectmanagerrole)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -107,21 +90,17 @@ namespace GeneXus.Programs {
          AV9GAMUser = new GeneXus.Programs.genexussecurity.SdtGAMUser(context).getbylogin("local", AV8Employee.gxTpr_Employeeemail, out  AV10GAMErrorCollection);
          AV9GAMUser.addrolebyid( AV11GAMRole.gxTpr_Id, out  AV10GAMErrorCollection);
          context.CommitDataStores("assignprojectmanagerrole",pr_default);
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -131,7 +110,6 @@ namespace GeneXus.Programs {
          AV10GAMErrorCollection = new GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError>( context, "GeneXus.Programs.genexussecurity.SdtGAMError", "GeneXus.Programs");
          AV12GAMRepository = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context);
          AV15CurrentEmployee = new SdtEmployee(context);
-         scmdbuf = "";
          P00972_A166ProjectManagerId = new long[1] ;
          P00972_n166ProjectManagerId = new bool[] {false} ;
          P00972_A102ProjectId = new long[1] ;
@@ -156,22 +134,21 @@ namespace GeneXus.Programs {
       private long AV20ProjectId ;
       private long A166ProjectManagerId ;
       private long A102ProjectId ;
-      private string scmdbuf ;
       private bool n166ProjectManagerId ;
-      private GeneXus.Programs.genexussecurity.SdtGAMRepository AV12GAMRepository ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private SdtProject AV14Project ;
+      private GeneXus.Programs.genexussecurity.SdtGAMRole AV11GAMRole ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV10GAMErrorCollection ;
+      private GeneXus.Programs.genexussecurity.SdtGAMRepository AV12GAMRepository ;
+      private SdtEmployee AV15CurrentEmployee ;
       private IDataStoreProvider pr_default ;
       private long[] P00972_A166ProjectManagerId ;
       private bool[] P00972_n166ProjectManagerId ;
       private long[] P00972_A102ProjectId ;
-      private IDataStoreProvider pr_gam ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV10GAMErrorCollection ;
-      private SdtEmployee AV15CurrentEmployee ;
-      private SdtEmployee AV8Employee ;
       private GeneXus.Programs.genexussecurity.SdtGAMUser AV9GAMUser ;
-      private GeneXus.Programs.genexussecurity.SdtGAMRole AV11GAMRole ;
-      private SdtProject AV14Project ;
+      private SdtEmployee AV8Employee ;
+      private IDataStoreProvider pr_gam ;
    }
 
    public class assignprojectmanagerrole__gam : DataStoreHelperBase, IDataStoreHelper

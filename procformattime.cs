@@ -42,7 +42,7 @@ namespace GeneXus.Programs {
          this.AV9TimeInMins = aP0_TimeInMins;
          this.AV8FormattedTime = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_FormattedTime=this.AV8FormattedTime;
       }
 
@@ -55,30 +55,13 @@ namespace GeneXus.Programs {
       public void executeSubmit( long aP0_TimeInMins ,
                                  out string aP1_FormattedTime )
       {
-         procformattime objprocformattime;
-         objprocformattime = new procformattime();
-         objprocformattime.AV9TimeInMins = aP0_TimeInMins;
-         objprocformattime.AV8FormattedTime = "" ;
-         objprocformattime.context.SetSubmitInitialConfig(context);
-         objprocformattime.initialize();
-         Submit( executePrivateCatch,objprocformattime);
+         this.AV9TimeInMins = aP0_TimeInMins;
+         this.AV8FormattedTime = "" ;
+         SubmitImpl();
          aP1_FormattedTime=this.AV8FormattedTime;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((procformattime)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -97,21 +80,17 @@ namespace GeneXus.Programs {
             AV8FormattedTime = "";
          }
          AV8FormattedTime = StringUtil.Trim( AV8FormattedTime);
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )

@@ -42,10 +42,10 @@ namespace GeneXus.Programs {
       public void execute( )
       {
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          if ( PreviousCheck() )
          {
@@ -58,12 +58,37 @@ namespace GeneXus.Programs {
          /* Load data into tables. */
       }
 
-      public void DeleteLeaveRequestHolidays( )
+      public void CreateTrnNew( )
       {
-         string cmdBuffer;
+         string cmdBuffer = "";
+         /* Indices for table TrnNew */
          try
          {
-            cmdBuffer=" DROP TABLE LeaveRequestHolidays CASCADE "
+            cmdBuffer=" CREATE SEQUENCE TrnNewId MINVALUE 1 INCREMENT 1 "
+            ;
+            RGZ = new GxCommand(dsDefault.Db, cmdBuffer, dsDefault,0,true,false,null);
+            RGZ.ErrorMask = GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK;
+            RGZ.ExecuteStmt() ;
+            RGZ.Drop();
+         }
+         catch
+         {
+            cmdBuffer=" DROP SEQUENCE TrnNewId CASCADE "
+            ;
+            RGZ = new GxCommand(dsDefault.Db, cmdBuffer, dsDefault,0,true,false,null);
+            RGZ.ErrorMask = GxErrorMask.GX_MASKNOTFOUND | GxErrorMask.GX_MASKLOOPLOCK;
+            RGZ.ExecuteStmt() ;
+            RGZ.Drop();
+            cmdBuffer=" CREATE SEQUENCE TrnNewId MINVALUE 1 INCREMENT 1 "
+            ;
+            RGZ = new GxCommand(dsDefault.Db, cmdBuffer, dsDefault,0,true,false,null);
+            RGZ.ErrorMask = GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK;
+            RGZ.ExecuteStmt() ;
+            RGZ.Drop();
+         }
+         try
+         {
+            cmdBuffer=" CREATE TABLE TrnNew (TrnNewId bigint NOT NULL DEFAULT nextval('TrnNewId'), TrnNewName CHAR(100) NOT NULL , TrnNewDate date NOT NULL , TrnNewImage BYTEA NOT NULL , TrnNewImage_GXI VARCHAR(2048) NOT NULL , PRIMARY KEY(TrnNewId))  "
             ;
             RGZ = new GxCommand(dsDefault.Db, cmdBuffer, dsDefault,0,true,false,null);
             RGZ.ErrorMask = GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK;
@@ -74,7 +99,7 @@ namespace GeneXus.Programs {
          {
             try
             {
-               cmdBuffer=" DROP VIEW LeaveRequestHolidays CASCADE "
+               cmdBuffer=" DROP TABLE TrnNew CASCADE "
                ;
                RGZ = new GxCommand(dsDefault.Db, cmdBuffer, dsDefault,0,true,false,null);
                RGZ.ErrorMask = GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK;
@@ -85,17 +110,35 @@ namespace GeneXus.Programs {
             {
                try
                {
-                  cmdBuffer=" DROP FUNCTION LeaveRequestHolidays CASCADE "
+                  cmdBuffer=" DROP VIEW TrnNew CASCADE "
                   ;
                   RGZ = new GxCommand(dsDefault.Db, cmdBuffer, dsDefault,0,true,false,null);
-                  RGZ.ErrorMask = GxErrorMask.GX_MASKNOTFOUND | GxErrorMask.GX_MASKLOOPLOCK;
+                  RGZ.ErrorMask = GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK;
                   RGZ.ExecuteStmt() ;
                   RGZ.Drop();
                }
                catch
                {
+                  try
+                  {
+                     cmdBuffer=" DROP FUNCTION TrnNew CASCADE "
+                     ;
+                     RGZ = new GxCommand(dsDefault.Db, cmdBuffer, dsDefault,0,true,false,null);
+                     RGZ.ErrorMask = GxErrorMask.GX_MASKNOTFOUND | GxErrorMask.GX_MASKLOOPLOCK;
+                     RGZ.ExecuteStmt() ;
+                     RGZ.Drop();
+                  }
+                  catch
+                  {
+                  }
                }
             }
+            cmdBuffer=" CREATE TABLE TrnNew (TrnNewId bigint NOT NULL DEFAULT nextval('TrnNewId'), TrnNewName CHAR(100) NOT NULL , TrnNewDate date NOT NULL , TrnNewImage BYTEA NOT NULL , TrnNewImage_GXI VARCHAR(2048) NOT NULL , PRIMARY KEY(TrnNewId))  "
+            ;
+            RGZ = new GxCommand(dsDefault.Db, cmdBuffer, dsDefault,0,true,false,null);
+            RGZ.ErrorMask = GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK;
+            RGZ.ExecuteStmt() ;
+            RGZ.Drop();
          }
       }
 
@@ -110,9 +153,9 @@ namespace GeneXus.Programs {
             return true ;
          }
          sSchemaVar = GXUtil.UserId( "Server", context, pr_default);
-         if ( ! tableexist("LeaveRequestHolidays",sSchemaVar) )
+         if ( tableexist("TrnNew",sSchemaVar) )
          {
-            SetCheckError ( GXResourceManager.GetMessage("GXM_table_not_exist", new   object[]  {"LeaveRequestHolidays"}) ) ;
+            SetCheckError ( GXResourceManager.GetMessage("GXM_table_exist", new   object[]  {"TrnNew"}) ) ;
             return false ;
          }
          return true ;
@@ -152,7 +195,7 @@ namespace GeneXus.Programs {
 
       private void ExecuteOnlyTablesReorganization( )
       {
-         ReorgExecute.RegisterBlockForSubmit( 1 ,  "DeleteLeaveRequestHolidays" , new Object[]{ });
+         ReorgExecute.RegisterBlockForSubmit( 1 ,  "CreateTrnNew" , new Object[]{ });
       }
 
       private void ExecuteOnlyRisReorganization( )
@@ -174,7 +217,7 @@ namespace GeneXus.Programs {
 
       private void SetPrecedencetables( )
       {
-         GXReorganization.SetMsg( 1 ,  GXResourceManager.GetMessage("GXM_fileremove", new   object[]  {"LeaveRequestHolidays", ""}) );
+         GXReorganization.SetMsg( 1 ,  GXResourceManager.GetMessage("GXM_filecrea", new   object[]  {"TrnNew", ""}) );
       }
 
       private void SetPrecedenceris( )
@@ -197,16 +240,12 @@ namespace GeneXus.Programs {
 
       public void UtilsCleanup( )
       {
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
-      }
-
-      protected void CloseOpenCursors( )
-      {
+         CloseCursors();
       }
 
       public override void initialize( )
@@ -218,7 +257,6 @@ namespace GeneXus.Programs {
          ntablename = false;
          schemaname = "";
          nschemaname = false;
-         scmdbuf = "";
          P00012_Atablename = new string[] {""} ;
          P00012_ntablename = new bool[] {false} ;
          P00012_Aschemaname = new string[] {""} ;
@@ -244,7 +282,6 @@ namespace GeneXus.Programs {
       protected string sSchemaVar ;
       protected string sTableName ;
       protected string sMySchemaName ;
-      protected string scmdbuf ;
       protected bool ntablename ;
       protected bool nschemaname ;
       protected string tablename ;

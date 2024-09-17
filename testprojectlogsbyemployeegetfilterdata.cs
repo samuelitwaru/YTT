@@ -80,7 +80,7 @@ namespace GeneXus.Programs {
          this.AV39OptionsDescJson = "" ;
          this.AV40OptionIndexesJson = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP3_OptionsJson=this.AV38OptionsJson;
          aP4_OptionsDescJson=this.AV39OptionsDescJson;
          aP5_OptionIndexesJson=this.AV40OptionIndexesJson;
@@ -103,36 +103,19 @@ namespace GeneXus.Programs {
                                  out string aP4_OptionsDescJson ,
                                  out string aP5_OptionIndexesJson )
       {
-         testprojectlogsbyemployeegetfilterdata objtestprojectlogsbyemployeegetfilterdata;
-         objtestprojectlogsbyemployeegetfilterdata = new testprojectlogsbyemployeegetfilterdata();
-         objtestprojectlogsbyemployeegetfilterdata.AV35DDOName = aP0_DDOName;
-         objtestprojectlogsbyemployeegetfilterdata.AV36SearchTxtParms = aP1_SearchTxtParms;
-         objtestprojectlogsbyemployeegetfilterdata.AV37SearchTxtTo = aP2_SearchTxtTo;
-         objtestprojectlogsbyemployeegetfilterdata.AV38OptionsJson = "" ;
-         objtestprojectlogsbyemployeegetfilterdata.AV39OptionsDescJson = "" ;
-         objtestprojectlogsbyemployeegetfilterdata.AV40OptionIndexesJson = "" ;
-         objtestprojectlogsbyemployeegetfilterdata.context.SetSubmitInitialConfig(context);
-         objtestprojectlogsbyemployeegetfilterdata.initialize();
-         Submit( executePrivateCatch,objtestprojectlogsbyemployeegetfilterdata);
+         this.AV35DDOName = aP0_DDOName;
+         this.AV36SearchTxtParms = aP1_SearchTxtParms;
+         this.AV37SearchTxtTo = aP2_SearchTxtTo;
+         this.AV38OptionsJson = "" ;
+         this.AV39OptionsDescJson = "" ;
+         this.AV40OptionIndexesJson = "" ;
+         SubmitImpl();
          aP3_OptionsJson=this.AV38OptionsJson;
          aP4_OptionsDescJson=this.AV39OptionsDescJson;
          aP5_OptionIndexesJson=this.AV40OptionIndexesJson;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((testprojectlogsbyemployeegetfilterdata)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -148,7 +131,7 @@ namespace GeneXus.Programs {
          S111 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          if ( StringUtil.StrCmp(StringUtil.Upper( AV35DDOName), "DDO_WORKHOURLOGDURATION") == 0 )
@@ -157,7 +140,7 @@ namespace GeneXus.Programs {
             S121 ();
             if ( returnInSub )
             {
-               this.cleanup();
+               cleanup();
                if (true) return;
             }
          }
@@ -167,7 +150,7 @@ namespace GeneXus.Programs {
             S131 ();
             if ( returnInSub )
             {
-               this.cleanup();
+               cleanup();
                if (true) return;
             }
          }
@@ -177,14 +160,14 @@ namespace GeneXus.Programs {
             S141 ();
             if ( returnInSub )
             {
-               this.cleanup();
+               cleanup();
                if (true) return;
             }
          }
          AV38OptionsJson = AV25Options.ToJSonString(false);
          AV39OptionsDescJson = AV27OptionsDesc.ToJSonString(false);
          AV40OptionIndexesJson = AV28OptionIndexes.ToJSonString(false);
-         this.cleanup();
+         cleanup();
       }
 
       protected void S111( )
@@ -495,16 +478,12 @@ namespace GeneXus.Programs {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -538,7 +517,6 @@ namespace GeneXus.Programs {
          AV50Testprojectlogsbyemployeeds_7_tfworkhourlogdescription_sel = "";
          AV51Testprojectlogsbyemployeeds_8_tfprojectname = "";
          AV52Testprojectlogsbyemployeeds_9_tfprojectname_sel = "";
-         scmdbuf = "";
          lV44Testprojectlogsbyemployeeds_1_filterfulltext = "";
          lV47Testprojectlogsbyemployeeds_4_tfworkhourlogduration = "";
          lV49Testprojectlogsbyemployeeds_6_tfworkhourlogdescription = "";
@@ -593,7 +571,6 @@ namespace GeneXus.Programs {
       private string AV18TFProjectName_Sel ;
       private string AV51Testprojectlogsbyemployeeds_8_tfprojectname ;
       private string AV52Testprojectlogsbyemployeeds_9_tfprojectname_sel ;
-      private string scmdbuf ;
       private string lV51Testprojectlogsbyemployeeds_8_tfprojectname ;
       private string A103ProjectName ;
       private DateTime AV11TFWorkHourLogDate ;
@@ -631,6 +608,12 @@ namespace GeneXus.Programs {
       private IGxSession AV30Session ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GxSimpleCollection<string> AV25Options ;
+      private GxSimpleCollection<string> AV27OptionsDesc ;
+      private GxSimpleCollection<string> AV28OptionIndexes ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV9WWPContext ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState AV32GridState ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue AV33GridStateFilterValue ;
       private IDataStoreProvider pr_default ;
       private long[] P00BF2_A102ProjectId ;
       private string[] P00BF2_A120WorkHourLogDuration ;
@@ -653,12 +636,6 @@ namespace GeneXus.Programs {
       private string aP3_OptionsJson ;
       private string aP4_OptionsDescJson ;
       private string aP5_OptionIndexesJson ;
-      private GxSimpleCollection<string> AV25Options ;
-      private GxSimpleCollection<string> AV27OptionsDesc ;
-      private GxSimpleCollection<string> AV28OptionIndexes ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV9WWPContext ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState AV32GridState ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue AV33GridStateFilterValue ;
    }
 
    public class testprojectlogsbyemployeegetfilterdata__default : DataStoreHelperBase, IDataStoreHelper

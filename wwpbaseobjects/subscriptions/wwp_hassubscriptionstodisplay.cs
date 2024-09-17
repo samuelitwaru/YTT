@@ -50,7 +50,7 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
          this.AV10WWPNotificationAppliesTo = aP1_WWPNotificationAppliesTo;
          this.AV9HasSubscriptions = false ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP2_HasSubscriptions=this.AV9HasSubscriptions;
       }
 
@@ -65,31 +65,14 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
                                  short aP1_WWPNotificationAppliesTo ,
                                  out bool aP2_HasSubscriptions )
       {
-         wwp_hassubscriptionstodisplay objwwp_hassubscriptionstodisplay;
-         objwwp_hassubscriptionstodisplay = new wwp_hassubscriptionstodisplay();
-         objwwp_hassubscriptionstodisplay.AV11WWPEntityName = aP0_WWPEntityName;
-         objwwp_hassubscriptionstodisplay.AV10WWPNotificationAppliesTo = aP1_WWPNotificationAppliesTo;
-         objwwp_hassubscriptionstodisplay.AV9HasSubscriptions = false ;
-         objwwp_hassubscriptionstodisplay.context.SetSubmitInitialConfig(context);
-         objwwp_hassubscriptionstodisplay.initialize();
-         Submit( executePrivateCatch,objwwp_hassubscriptionstodisplay);
+         this.AV11WWPEntityName = aP0_WWPEntityName;
+         this.AV10WWPNotificationAppliesTo = aP1_WWPNotificationAppliesTo;
+         this.AV9HasSubscriptions = false ;
+         SubmitImpl();
          aP2_HasSubscriptions=this.AV9HasSubscriptions;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwp_hassubscriptionstodisplay)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -125,12 +108,12 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
             pr_default.readNext(0);
          }
          pr_default.close(0);
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -138,13 +121,8 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
-         scmdbuf = "";
          P003B2_A20WWPEntityId = new long[1] ;
          P003B2_A30WWPNotificationDefinitionAppli = new short[1] ;
          P003B2_A31WWPNotificationDefinitionAllow = new bool[] {false} ;
@@ -167,7 +145,6 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
       private long GXt_int1 ;
       private long A20WWPEntityId ;
       private long A23WWPNotificationDefinitionId ;
-      private string scmdbuf ;
       private bool AV9HasSubscriptions ;
       private bool A31WWPNotificationDefinitionAllow ;
       private bool A68WWPNotificationDefinitionIsAut ;

@@ -44,7 +44,7 @@ namespace GeneXus.Programs {
          this.AV12ProjectId = aP1_ProjectId;
          this.AV10HasProject = false ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP2_HasProject=this.AV10HasProject;
       }
 
@@ -59,31 +59,14 @@ namespace GeneXus.Programs {
                                  GxSimpleCollection<long> aP1_ProjectId ,
                                  out bool aP2_HasProject )
       {
-         employeehasanyproject objemployeehasanyproject;
-         objemployeehasanyproject = new employeehasanyproject();
-         objemployeehasanyproject.AV9EmployeeId = aP0_EmployeeId;
-         objemployeehasanyproject.AV12ProjectId = aP1_ProjectId;
-         objemployeehasanyproject.AV10HasProject = false ;
-         objemployeehasanyproject.context.SetSubmitInitialConfig(context);
-         objemployeehasanyproject.initialize();
-         Submit( executePrivateCatch,objemployeehasanyproject);
+         this.AV9EmployeeId = aP0_EmployeeId;
+         this.AV12ProjectId = aP1_ProjectId;
+         this.AV10HasProject = false ;
+         SubmitImpl();
          aP2_HasProject=this.AV10HasProject;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((employeehasanyproject)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -99,21 +82,17 @@ namespace GeneXus.Programs {
             }
             AV13GXV1 = (int)(AV13GXV1+1);
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -127,9 +106,9 @@ namespace GeneXus.Programs {
       private long AV9EmployeeId ;
       private bool AV10HasProject ;
       private GxSimpleCollection<long> AV12ProjectId ;
-      private bool aP2_HasProject ;
       private SdtEmployee AV8Employee ;
       private SdtEmployee_Project AV11Project ;
+      private bool aP2_HasProject ;
    }
 
 }

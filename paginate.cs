@@ -44,7 +44,7 @@ namespace GeneXus.Programs {
          this.AV10total_pages = 0 ;
          this.AV12current_page = aP2_current_page;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_pages_to_show=this.AV11pages_to_show;
          aP1_total_pages=this.AV10total_pages;
          aP2_current_page=this.AV12current_page;
@@ -61,33 +61,16 @@ namespace GeneXus.Programs {
                                  out short aP1_total_pages ,
                                  ref SdtSDTPage aP2_current_page )
       {
-         paginate objpaginate;
-         objpaginate = new paginate();
-         objpaginate.AV11pages_to_show = new GXBaseCollection<SdtSDTPage>( context, "SDTPage", "YTT_version4") ;
-         objpaginate.AV10total_pages = 0 ;
-         objpaginate.AV12current_page = aP2_current_page;
-         objpaginate.context.SetSubmitInitialConfig(context);
-         objpaginate.initialize();
-         Submit( executePrivateCatch,objpaginate);
+         this.AV11pages_to_show = new GXBaseCollection<SdtSDTPage>( context, "SDTPage", "YTT_version4") ;
+         this.AV10total_pages = 0 ;
+         this.AV12current_page = aP2_current_page;
+         SubmitImpl();
          aP0_pages_to_show=this.AV11pages_to_show;
          aP1_total_pages=this.AV10total_pages;
          aP2_current_page=this.AV12current_page;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((paginate)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -125,21 +108,17 @@ namespace GeneXus.Programs {
             AV13iteration = (short)(AV13iteration+1);
          }
          AV11pages_to_show.Sort("");
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -154,12 +133,12 @@ namespace GeneXus.Programs {
       private short AV9per_page ;
       private short AV14segments ;
       private short AV13iteration ;
-      private SdtSDTPage aP2_current_page ;
-      private GXBaseCollection<SdtSDTPage> aP0_pages_to_show ;
-      private short aP1_total_pages ;
       private GXBaseCollection<SdtSDTPage> AV11pages_to_show ;
       private SdtSDTPage AV12current_page ;
+      private SdtSDTPage aP2_current_page ;
       private SdtSDTPage AV15page1 ;
+      private GXBaseCollection<SdtSDTPage> aP0_pages_to_show ;
+      private short aP1_total_pages ;
    }
 
 }

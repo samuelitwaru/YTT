@@ -13,6 +13,12 @@
 .gx-switch-Switch .off
 {
 }
+.gx-switch-switch--disabled .on
+{
+}
+.gx-switch-switch--disabled .off
+{
+}
 
 /* [gx-css-user-controls - end] */
 .Application 
@@ -30,6 +36,10 @@
 }
 .Menu 
 {
+}
+.MenuItem 
+{
+	color : var(--colors_text-color);
 }
 .Attribute 
 {
@@ -55,6 +65,10 @@
 }
 .attribute--error 
 {
+	height : 28px;
+	max-width : 100%;
+	padding-inline-start : var(--spacing_inset-s);
+	padding-inline-end : var(--spacing_inset-s);
 	border-style : solid;
 	border-width : 1dip;
 	border-radius : 4dip;
@@ -169,7 +183,6 @@
 	font-family : var(--fonts_primary-regular);
 	color : var(--colors_gray03);
 	border-color : var(--colors_border-gray-01);
-	line-height : 1.6;
 }
 .attribute-checkbox--disabled 
 {
@@ -186,7 +199,6 @@
 	font-family : var(--fonts_primary-regular);
 	color : var(--colors_gray03);
 	border-color : var(--colors_border-gray-01);
-	line-height : 1.6;
 	border-style : none;
 	padding-left : 8dip;
 }
@@ -205,7 +217,6 @@
 	font-family : var(--fonts_primary-regular);
 	color : var(--colors_gray03);
 	border-color : var(--colors_border-gray-01);
-	line-height : 1.6;
 	border-style : none;
 	padding-left : 8dip;
 }
@@ -225,7 +236,6 @@
 	font-family : var(--fonts_primary-regular);
 	color : var(--colors_gray03);
 	border-color : var(--colors_border-gray-01);
-	line-height : 1.6;
 	margin-bottom : 7dip;
 }
 .ww__attribute--readonly 
@@ -338,22 +348,11 @@
 {
 	background-color : var(--colors_primary);
 	font-family : var(--fonts_primary-semibold);
-	color : var(--colors_on-primary);
 	text-transform : uppercase;
 	border : none;
 	border-radius : 4dip;
 	font-size : 16dip;
 	gx-elevation : 0;
-}
-.button-primary--destructive 
-{
-	font-family : var(--fonts_primary-semibold);
-	text-transform : uppercase;
-	border : none;
-	border-radius : 4dip;
-	font-size : 16dip;
-	gx-elevation : 0;
-	background-color : #f44336;
 	color : var(--colors_surface);
 }
 .button-secondary 
@@ -385,20 +384,16 @@
 	border-radius : 28dip;
 	gx-elevation : 0;
 }
-.button-rounded--disabled 
+.button-primary-destructive 
 {
-	cursor : auto;
-	font-size : 0px;
+	background-color : var(--colors_primary);
+	font-family : var(--fonts_primary-semibold);
+	text-transform : uppercase;
 	border : none;
-	height : 40px;
-	width : 40px;
-	padding-top : 2px;
-	padding-left : 8px;
-	min-width : auto;
-	border-radius : 28dip;
+	border-radius : 4dip;
+	font-size : 16dip;
+	color : var(--colors_surface);
 	gx-elevation : 0;
-	background-color : var(--colors_gray03);
-	color : var(--colors_on-disabled);
 }
 .button-primary--disabled 
 {
@@ -426,6 +421,21 @@
 	border-width : 1dip;
 	border-color : var(--colors_border-gray-03);
 	color : var(--colors_gray03);
+}
+.button-rounded--disabled 
+{
+	cursor : auto;
+	font-size : 0px;
+	border : none;
+	height : 40px;
+	width : 40px;
+	padding-block-start : 2px;
+	padding-inline-start : 8px;
+	min-width : auto;
+	border-radius : 28dip;
+	gx-elevation : 0;
+	background-color : var(--colors_gray03);
+	color : var(--colors_on-disabled);
 }
 .badge 
 {
@@ -567,17 +577,14 @@
 	background-color : var(--colors_gray01);
 	height : 1dip;
 }
-.Tab 
-{
-	font-family : var(--fonts_primary-regular);
-	text-transform : lowercase;
-}
 .TabPageUnselected 
 {
+	font-family : var(--fonts_primary-regular);
 	color : var(--colors_surface-negative);
 }
 .TabPageSelected 
 {
+	font-family : var(--fonts_primary-semibold);
 	color : var(--colors_surface-negative);
 }
 .Group 
@@ -603,8 +610,17 @@
 	padding-right : 8dip;
 	gx-switch-on-background-color : var(--colors_primary);
 	gx-switch-on-text-color : var(--colors_primary-active);
-	gx-switch-off-background-color : var(--colors_secondary-disabled);
+	gx-switch-off-background-color : var(--colors_gray02);
 	gx-switch-off-text-color : var(--colors_surface);
+}
+.switch--disabled 
+{
+	padding-left : 16dip;
+	padding-right : 8dip;
+	gx-switch-on-background-color : var(--colors_gray02);
+	gx-switch-on-text-color : var(--colors_gray01);
+	gx-switch-off-background-color : var(--colors_gray02);
+	gx-switch-off-text-color : var(--colors_gray01);
 }
 .Slider 
 {
@@ -616,6 +632,8 @@
 }
 .slider--disabled 
 {
+	padding-left : 8dip;
+	padding-right : 8dip;
 	gx-thumb-color : var(--colors_gray03);
 	gx-selected-bar-color : var(--colors_gray02);
 	gx-unselected-bar-color : var(--colors_gray01);
@@ -745,15 +763,17 @@ input.ww__attribute--readonly:focus, textarea.ww__attribute--readonly:focus, sel
 }
 .gx-label.SwitchLabel 
 {
-	font-size : 16dip;
+	font-size : 12dip;
 	font-family : var(--fonts_primary-regular);
-	color : var(--colors_text-color);
+	letter-spacing : 0.4dip;
+	color : var(--colors_surface-negative);
 }
 .gx-label.SliderLabel 
 {
-	font-size : 16dip;
+	font-size : 12dip;
 	font-family : var(--fonts_primary-regular);
-	color : var(--colors_text-color);
+	letter-spacing : 0.4dip;
+	color : var(--colors_surface-negative);
 }
 .gx-label.attribute--errorLabel 
 {
@@ -972,6 +992,25 @@ input.attribute-date--disabled:focus, textarea.attribute-date--disabled:focus, s
 	letter-spacing : 0.4dip;
 	color : var(--colors_surface-negative);
 }
+.gx-label.switch--disabledLabel 
+{
+	font-size : 12dip;
+	font-family : var(--fonts_primary-regular);
+	letter-spacing : 0.4dip;
+	color : var(--colors_surface-negative);
+}
+.gx-label.slider--disabledLabel 
+{
+	font-size : 12dip;
+	font-family : var(--fonts_primary-regular);
+	letter-spacing : 0.4dip;
+	color : var(--colors_surface-negative);
+}
+input.attribute--error:focus, textarea.attribute--error:focus, select.attribute--error:focus, .attribute--error>A:focus 
+{
+	border-color : var(--colors_secondary-enabled);
+	box-shadow : 0px 0px 0px 1px #13142c;
+}
 .button-primary[disabled] 
 {
 	cursor : auto;
@@ -1057,6 +1096,30 @@ input.attribute-date--disabled:focus, textarea.attribute-date--disabled:focus, s
 .button-tertiary:hover 
 {
 	background-color : rgba(105, 110, 242, 0.1);
+}
+.button-primary-destructive:active 
+{
+	background-color : #a02622;
+}
+.button-primary-destructive:focus 
+{
+	background-color : var(--colors_destructive);
+	outline-width : var(--borders_small);
+	outline-style : solid;
+	outline-color : var(--colors_secondary-enabled);
+	outline-offset : -2px;
+}
+.button-primary-destructive:hover 
+{
+	background-color : #d32f2b;
+}
+.button-primary-destructive[disabled] 
+{
+	cursor : auto;
+	border-radius : 4dip;
+	font-size : 16dip;
+	background-color : var(--colors_gray03);
+	color : var(--colors_on-disabled);
 }
 
 }

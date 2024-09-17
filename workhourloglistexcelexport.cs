@@ -57,7 +57,7 @@ namespace GeneXus.Programs {
          this.AV12Filename = "" ;
          this.AV17ErrorMessage = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP4_Filename=this.AV12Filename;
          aP5_ErrorMessage=this.AV17ErrorMessage;
       }
@@ -79,35 +79,18 @@ namespace GeneXus.Programs {
                                  out string aP4_Filename ,
                                  out string aP5_ErrorMessage )
       {
-         workhourloglistexcelexport objworkhourloglistexcelexport;
-         objworkhourloglistexcelexport = new workhourloglistexcelexport();
-         objworkhourloglistexcelexport.AV8EmployeeId = aP0_EmployeeId;
-         objworkhourloglistexcelexport.AV9FromDate = aP1_FromDate;
-         objworkhourloglistexcelexport.AV10ToDate = aP2_ToDate;
-         objworkhourloglistexcelexport.AV36ProjectIds = aP3_ProjectIds;
-         objworkhourloglistexcelexport.AV12Filename = "" ;
-         objworkhourloglistexcelexport.AV17ErrorMessage = "" ;
-         objworkhourloglistexcelexport.context.SetSubmitInitialConfig(context);
-         objworkhourloglistexcelexport.initialize();
-         Submit( executePrivateCatch,objworkhourloglistexcelexport);
+         this.AV8EmployeeId = aP0_EmployeeId;
+         this.AV9FromDate = aP1_FromDate;
+         this.AV10ToDate = aP2_ToDate;
+         this.AV36ProjectIds = aP3_ProjectIds;
+         this.AV12Filename = "" ;
+         this.AV17ErrorMessage = "" ;
+         SubmitImpl();
          aP4_Filename=this.AV12Filename;
          aP5_ErrorMessage=this.AV17ErrorMessage;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((workhourloglistexcelexport)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -124,14 +107,14 @@ namespace GeneXus.Programs {
          S151 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          /* Execute user subroutine: 'OPENDOCUMENT' */
          S111 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          AV21excelcellrange = AV20excelSpreadsheet.cell(1, 1);
@@ -146,14 +129,14 @@ namespace GeneXus.Programs {
          S121 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          /* Execute user subroutine: 'WRITEROWS' */
          S131 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          AV21excelcellrange = AV20excelSpreadsheet.cell(AV28CellRow+2, 1);
@@ -170,10 +153,10 @@ namespace GeneXus.Programs {
          S141 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void S111( )
@@ -349,16 +332,12 @@ namespace GeneXus.Programs {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -375,7 +354,6 @@ namespace GeneXus.Programs {
          AV19File = new GxFile(context.GetPhysicalPath());
          AV35Columns = new GxSimpleCollection<string>();
          AV30Column = "";
-         scmdbuf = "";
          AV46FilterFullText = "";
          A119WorkHourLogDate = DateTime.MinValue;
          P00BH2_A106EmployeeId = new long[1] ;
@@ -429,7 +407,6 @@ namespace GeneXus.Programs {
       private string AV12Filename ;
       private string GXt_char1 ;
       private string GXt_char2 ;
-      private string scmdbuf ;
       private string A103ProjectName ;
       private string A148EmployeeName ;
       private string AV38TFEmployeeName ;
@@ -449,10 +426,17 @@ namespace GeneXus.Programs {
       private string AV46FilterFullText ;
       private string A120WorkHourLogDuration ;
       private string AV41TFWorkHourLogDuration ;
-      private GxSimpleCollection<long> AV36ProjectIds ;
-      private GeneXus.Programs.genexusoffice.office.excel.SdtExcelSpreadsheet AV20excelSpreadsheet ;
+      private IGxSession AV18Session ;
+      private GxFile AV19File ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GxSimpleCollection<long> AV36ProjectIds ;
+      private GeneXus.Programs.genexusoffice.office.excel.style.SdtExcelCellStyle AV33headerCellStyle ;
+      private GeneXus.Programs.genexusoffice.office.excel.style.SdtExcelCellStyle AV52footCellStyle ;
+      private GeneXus.Programs.genexusoffice.office.excel.cells.SdtExcelCellRange AV21excelcellrange ;
+      private GeneXus.Programs.genexusoffice.office.excel.SdtExcelSpreadsheet AV20excelSpreadsheet ;
+      private GeneXus.Programs.genexusoffice.office.excel.style.SdtExcelCellStyle AV53excelCellStyle ;
+      private GxSimpleCollection<string> AV35Columns ;
       private IDataStoreProvider pr_default ;
       private long[] P00BH2_A106EmployeeId ;
       private string[] P00BH2_A103ProjectName ;
@@ -462,17 +446,10 @@ namespace GeneXus.Programs {
       private string[] P00BH2_A120WorkHourLogDuration ;
       private string[] P00BH2_A123WorkHourLogDescription ;
       private long[] P00BH2_A118WorkHourLogId ;
-      private string aP4_Filename ;
-      private string aP5_ErrorMessage ;
-      private IGxSession AV18Session ;
-      private GxSimpleCollection<string> AV35Columns ;
-      private GxFile AV19File ;
-      private GeneXus.Programs.genexusoffice.office.excel.cells.SdtExcelCellRange AV21excelcellrange ;
-      private GeneXus.Programs.genexusoffice.office.excel.style.SdtExcelCellStyle AV33headerCellStyle ;
-      private GeneXus.Programs.genexusoffice.office.excel.style.SdtExcelCellStyle AV52footCellStyle ;
-      private GeneXus.Programs.genexusoffice.office.excel.style.SdtExcelCellStyle AV53excelCellStyle ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState AV37GridState ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue AV44GridStateFilterValue ;
+      private string aP4_Filename ;
+      private string aP5_ErrorMessage ;
    }
 
    public class workhourloglistexcelexport__default : DataStoreHelperBase, IDataStoreHelper

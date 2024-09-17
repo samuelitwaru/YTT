@@ -1,7 +1,7 @@
 /*
 				   File: type_SdtSDTEmployeeWorkHourLogs_WorkHourLogItem
 			Description: WorkHourLog
-				 Author: Nemo 🐠 for C# (.NET) version 18.0.6.177934
+				 Author: Nemo 🐠 for C# (.NET) version 18.0.10.184260
 		   Program type: Callable routine
 			  Main DBMS: 
 */
@@ -289,6 +289,14 @@ namespace GeneXus.Programs
 
 		#endregion
 
+		#region Static Type Properties
+
+		[XmlIgnore]
+		private static GXTypeInfo _typeProps;
+		protected override GXTypeInfo TypeInfo { get { return _typeProps; } set { _typeProps = value; } }
+
+		#endregion
+
 		#region Initialization
 
 		public void initialize( )
@@ -348,6 +356,7 @@ namespace GeneXus.Programs
 		#endregion
 	}
 	#region Rest interface
+	[GxJsonSerialization("wrapped")]
 	[DataContract(Name=@"SDTEmployeeWorkHourLogs.WorkHourLogItem", Namespace="YTT_version4")]
 	public class SdtSDTEmployeeWorkHourLogs_WorkHourLogItem_RESTInterface : GxGenericCollectionItem<SdtSDTEmployeeWorkHourLogs_WorkHourLogItem>, System.Web.SessionState.IRequiresSessionState
 	{

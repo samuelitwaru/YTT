@@ -66,54 +66,33 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          this.AV8ParameterKey = aP0_ParameterKey;
          this.AV9ParameterValue = aP1_ParameterValue;
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
       public void executeSubmit( string aP0_ParameterKey ,
                                  decimal aP1_ParameterValue )
       {
-         wwpwebserversessionsetnum objwwpwebserversessionsetnum;
-         objwwpwebserversessionsetnum = new wwpwebserversessionsetnum();
-         objwwpwebserversessionsetnum.AV8ParameterKey = aP0_ParameterKey;
-         objwwpwebserversessionsetnum.AV9ParameterValue = aP1_ParameterValue;
-         objwwpwebserversessionsetnum.context.SetSubmitInitialConfig(context);
-         objwwpwebserversessionsetnum.initialize();
-         Submit( executePrivateCatch,objwwpwebserversessionsetnum);
+         this.AV8ParameterKey = aP0_ParameterKey;
+         this.AV9ParameterValue = aP1_ParameterValue;
+         SubmitImpl();
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwpwebserversessionsetnum)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
          AV10WebSession.Set(AV8ParameterKey, StringUtil.Trim( StringUtil.Str( AV9ParameterValue, 8, 2)));
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )

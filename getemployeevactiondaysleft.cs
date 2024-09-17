@@ -48,7 +48,7 @@ namespace GeneXus.Programs {
          this.AV8EmployeeId = aP0_EmployeeId;
          this.AV9EmployeeVacationDays = 0 ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_EmployeeVacationDays=this.AV9EmployeeVacationDays;
       }
 
@@ -61,30 +61,13 @@ namespace GeneXus.Programs {
       public void executeSubmit( long aP0_EmployeeId ,
                                  out short aP1_EmployeeVacationDays )
       {
-         getemployeevactiondaysleft objgetemployeevactiondaysleft;
-         objgetemployeevactiondaysleft = new getemployeevactiondaysleft();
-         objgetemployeevactiondaysleft.AV8EmployeeId = aP0_EmployeeId;
-         objgetemployeevactiondaysleft.AV9EmployeeVacationDays = 0 ;
-         objgetemployeevactiondaysleft.context.SetSubmitInitialConfig(context);
-         objgetemployeevactiondaysleft.initialize();
-         Submit( executePrivateCatch,objgetemployeevactiondaysleft);
+         this.AV8EmployeeId = aP0_EmployeeId;
+         this.AV9EmployeeVacationDays = 0 ;
+         SubmitImpl();
          aP1_EmployeeVacationDays=this.AV9EmployeeVacationDays;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((getemployeevactiondaysleft)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -99,12 +82,12 @@ namespace GeneXus.Programs {
             if (true) break;
          }
          pr_default.close(0);
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -112,13 +95,8 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
-         scmdbuf = "";
          P007I2_A106EmployeeId = new long[1] ;
          P007I2_A147EmployeeBalance = new decimal[1] ;
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.getemployeevactiondaysleft__default(),
@@ -135,7 +113,6 @@ namespace GeneXus.Programs {
       private long AV8EmployeeId ;
       private long A106EmployeeId ;
       private decimal A147EmployeeBalance ;
-      private string scmdbuf ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private IDataStoreProvider pr_default ;

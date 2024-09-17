@@ -65,7 +65,7 @@ namespace GeneXus.Programs {
          this.AV28gxid = aP1_gxid;
          this.AV35GXM1UpdateLeaveRequest_Level_DetailSdt = new SdtUpdateLeaveRequest_Level_DetailSdt(context) ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP2_GXM1UpdateLeaveRequest_Level_DetailSdt=this.AV35GXM1UpdateLeaveRequest_Level_DetailSdt;
       }
 
@@ -80,31 +80,14 @@ namespace GeneXus.Programs {
                                  int aP1_gxid ,
                                  out SdtUpdateLeaveRequest_Level_DetailSdt aP2_GXM1UpdateLeaveRequest_Level_DetailSdt )
       {
-         updateleaverequest_level_detail objupdateleaverequest_level_detail;
-         objupdateleaverequest_level_detail = new updateleaverequest_level_detail();
-         objupdateleaverequest_level_detail.A127LeaveRequestId = aP0_LeaveRequestId;
-         objupdateleaverequest_level_detail.AV28gxid = aP1_gxid;
-         objupdateleaverequest_level_detail.AV35GXM1UpdateLeaveRequest_Level_DetailSdt = new SdtUpdateLeaveRequest_Level_DetailSdt(context) ;
-         objupdateleaverequest_level_detail.context.SetSubmitInitialConfig(context);
-         objupdateleaverequest_level_detail.initialize();
-         Submit( executePrivateCatch,objupdateleaverequest_level_detail);
+         this.A127LeaveRequestId = aP0_LeaveRequestId;
+         this.AV28gxid = aP1_gxid;
+         this.AV35GXM1UpdateLeaveRequest_Level_DetailSdt = new SdtUpdateLeaveRequest_Level_DetailSdt(context) ;
+         SubmitImpl();
          aP2_GXM1UpdateLeaveRequest_Level_DetailSdt=this.AV35GXM1UpdateLeaveRequest_Level_DetailSdt;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((updateleaverequest_level_detail)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -171,11 +154,11 @@ namespace GeneXus.Programs {
          S111 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          AV35GXM1UpdateLeaveRequest_Level_DetailSdt.gxTpr_Gxdesc_leavetypeid = Gxdesc_leavetypeid;
-         this.cleanup();
+         cleanup();
       }
 
       protected void S111( )
@@ -202,16 +185,12 @@ namespace GeneXus.Programs {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -229,7 +208,6 @@ namespace GeneXus.Programs {
          Gxdynprop = "";
          AV19MsgVar = "";
          Gxdesc_leavetypeid = "";
-         scmdbuf = "";
          P00002_A100CompanyId = new long[1] ;
          P00002_A124LeaveTypeId = new long[1] ;
          P00002_A125LeaveTypeName = new string[] {""} ;
@@ -257,7 +235,6 @@ namespace GeneXus.Programs {
       private string Gxids ;
       private string AV27LeaveRequestHalfDay ;
       private string AV19MsgVar ;
-      private string scmdbuf ;
       private string A125LeaveTypeName ;
       private DateTime Gx_date ;
       private DateTime AV21LeaveRequestDate ;
@@ -267,16 +244,16 @@ namespace GeneXus.Programs {
       private string AV22LeaveRequestDescription ;
       private string Gxdynprop ;
       private string Gxdesc_leavetypeid ;
+      private IGxSession Gxwebsession ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private SdtUpdateLeaveRequest_Level_DetailSdt AV35GXM1UpdateLeaveRequest_Level_DetailSdt ;
+      private SdtLeaveRequest AV20LeaveRequest ;
       private IDataStoreProvider pr_default ;
       private long[] P00002_A100CompanyId ;
       private long[] P00002_A124LeaveTypeId ;
       private string[] P00002_A125LeaveTypeName ;
       private SdtUpdateLeaveRequest_Level_DetailSdt aP2_GXM1UpdateLeaveRequest_Level_DetailSdt ;
-      private IGxSession Gxwebsession ;
-      private SdtLeaveRequest AV20LeaveRequest ;
-      private SdtUpdateLeaveRequest_Level_DetailSdt AV35GXM1UpdateLeaveRequest_Level_DetailSdt ;
    }
 
    public class updateleaverequest_level_detail__default : DataStoreHelperBase, IDataStoreHelper

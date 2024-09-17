@@ -121,7 +121,7 @@ namespace GeneXus.Programs {
          {
             if ( context.ExposeMetadata( ) )
             {
-               Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+               Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
             }
          }
          Form.Meta.addItem("description", "Company Location", 0) ;
@@ -167,10 +167,10 @@ namespace GeneXus.Programs {
       {
          this.Gx_mode = aP0_Gx_mode;
          this.AV13CompanyLocationId = aP1_CompanyLocationId;
-         executePrivate();
+         ExecuteImpl();
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -206,11 +206,8 @@ namespace GeneXus.Programs {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITENV( ) ;
          INITTRN( ) ;
          if ( ( GxWebError == 0 ) && ! isAjaxCallMode( ) )
@@ -242,7 +239,7 @@ namespace GeneXus.Programs {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void fix_multi_value_controls( )
@@ -398,7 +395,8 @@ namespace GeneXus.Programs {
          /* Div Control */
          GxWebStd.gx_div_start( context, divHtml_bottomauxiliarcontrols_Internalname, 1, 0, "px", 0, "px", "Section", "start", "top", "", "", "div");
          /* Single line edit */
-         GxWebStd.gx_single_line_edit( context, edtCompanyLocationId_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(A157CompanyLocationId), 10, 0, ".", "")), StringUtil.LTrim( ((edtCompanyLocationId_Enabled!=0) ? context.localUtil.Format( (decimal)(A157CompanyLocationId), "ZZZZZZZZZ9") : context.localUtil.Format( (decimal)(A157CompanyLocationId), "ZZZZZZZZZ9"))), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtCompanyLocationId_Jsonclick, 0, "Attribute", "", "", "", "", edtCompanyLocationId_Visible, edtCompanyLocationId_Enabled, 0, "text", "1", 10, "chr", 1, "row", 10, 0, 0, 0, 0, -1, 0, true, "Id", "end", false, "", "HLP_CompanyLocation.htm");
+         TempTags = "  onfocus=\"gx.evt.onfocus(this, 44,'',false,'',0)\"";
+         GxWebStd.gx_single_line_edit( context, edtCompanyLocationId_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(A157CompanyLocationId), 10, 0, ".", "")), StringUtil.LTrim( ((edtCompanyLocationId_Enabled!=0) ? context.localUtil.Format( (decimal)(A157CompanyLocationId), "ZZZZZZZZZ9") : context.localUtil.Format( (decimal)(A157CompanyLocationId), "ZZZZZZZZZ9"))), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+TempTags+" onchange=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onblur(this,44);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtCompanyLocationId_Jsonclick, 0, "Attribute", "", "", "", "", edtCompanyLocationId_Visible, edtCompanyLocationId_Enabled, 0, "text", "1", 10, "chr", 1, "row", 10, 0, 0, 0, 0, -1, 0, true, "Id", "end", false, "", "HLP_CompanyLocation.htm");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -802,7 +800,6 @@ namespace GeneXus.Programs {
 
       protected void CheckExtendedTable0M24( )
       {
-         nIsDirty_24 = 0;
          Gx_BScreen = 1;
          standaloneModal( ) ;
          /* Using cursor T000M5 */
@@ -1447,10 +1444,10 @@ namespace GeneXus.Programs {
          CloseStyles();
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
@@ -1627,7 +1624,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20248121544334", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202491613143197", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1643,7 +1640,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("companylocation.js", "?20248121544335", false, true);
+         context.AddJavascriptSource("companylocation.js", "?202491613143197", false, true);
          /* End function include_jscripts */
       }
 
@@ -1758,32 +1755,25 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("ENTER","{handler:'UserMainFullajax',iparms:[{postForm:true},{av:'Gx_mode',fld:'vMODE',pic:'@!',hsh:true},{av:'AV13CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9',hsh:true}]");
-         setEventMetadata("ENTER",",oparms:[]}");
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'Gx_mode',fld:'vMODE',pic:'@!',hsh:true},{av:'AV11TrnContext',fld:'vTRNCONTEXT',pic:'',hsh:true},{av:'AV13CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9',hsh:true},{av:'A157CompanyLocationId',fld:'COMPANYLOCATIONID',pic:'ZZZZZZZZZ9'}]");
-         setEventMetadata("REFRESH",",oparms:[]}");
-         setEventMetadata("AFTER TRN","{handler:'E120M2',iparms:[{av:'Gx_mode',fld:'vMODE',pic:'@!',hsh:true},{av:'AV11TrnContext',fld:'vTRNCONTEXT',pic:'',hsh:true}]");
-         setEventMetadata("AFTER TRN",",oparms:[]}");
-         setEventMetadata("VALID_COMPANYLOCATIONNAME","{handler:'Valid_Companylocationname',iparms:[{av:'A158CompanyLocationName',fld:'COMPANYLOCATIONNAME',pic:''},{av:'A157CompanyLocationId',fld:'COMPANYLOCATIONID',pic:'ZZZZZZZZZ9'}]");
-         setEventMetadata("VALID_COMPANYLOCATIONNAME",",oparms:[]}");
-         setEventMetadata("VALID_COMPANYLOCATIONCODE","{handler:'Valid_Companylocationcode',iparms:[]");
-         setEventMetadata("VALID_COMPANYLOCATIONCODE",",oparms:[]}");
-         setEventMetadata("VALID_COMPANYLOCATIONID","{handler:'Valid_Companylocationid',iparms:[]");
-         setEventMetadata("VALID_COMPANYLOCATIONID",",oparms:[]}");
+         setEventMetadata("ENTER","""{"handler":"UserMainFullajax","iparms":[{"postForm":true},{"av":"Gx_mode","fld":"vMODE","pic":"@!","hsh":true},{"av":"AV13CompanyLocationId","fld":"vCOMPANYLOCATIONID","pic":"ZZZZZZZZZ9","hsh":true}]}""");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"Gx_mode","fld":"vMODE","pic":"@!","hsh":true},{"av":"AV11TrnContext","fld":"vTRNCONTEXT","hsh":true},{"av":"AV13CompanyLocationId","fld":"vCOMPANYLOCATIONID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"A157CompanyLocationId","fld":"COMPANYLOCATIONID","pic":"ZZZZZZZZZ9"}]}""");
+         setEventMetadata("AFTER TRN","""{"handler":"E120M2","iparms":[{"av":"Gx_mode","fld":"vMODE","pic":"@!","hsh":true},{"av":"AV11TrnContext","fld":"vTRNCONTEXT","hsh":true}]}""");
+         setEventMetadata("VALID_COMPANYLOCATIONNAME","""{"handler":"Valid_Companylocationname","iparms":[{"av":"A158CompanyLocationName","fld":"COMPANYLOCATIONNAME"},{"av":"A157CompanyLocationId","fld":"COMPANYLOCATIONID","pic":"ZZZZZZZZZ9"}]}""");
+         setEventMetadata("VALID_COMPANYLOCATIONCODE","""{"handler":"Valid_Companylocationcode","iparms":[]}""");
+         setEventMetadata("VALID_COMPANYLOCATIONID","""{"handler":"Valid_Companylocationid","iparms":[]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
       }
 
-      protected void CloseOpenCursors( )
+      protected override void CloseCursors( )
       {
          pr_default.close(1);
       }
@@ -1794,7 +1784,6 @@ namespace GeneXus.Programs {
          wcpOGx_mode = "";
          Z158CompanyLocationName = "";
          Z159CompanyLocationCode = "";
-         scmdbuf = "";
          gxfirstwebparm = "";
          gxfirstwebparm_bkp = "";
          GXKey = "";
@@ -1893,14 +1882,11 @@ namespace GeneXus.Programs {
 
       private short GxWebError ;
       private short gxcookieaux ;
-      private short IsConfirmed ;
-      private short IsModified ;
       private short AnyError ;
+      private short IsModified ;
+      private short IsConfirmed ;
       private short nKeyPressed ;
-      private short initialized ;
       private short RcdFound24 ;
-      private short GX_JID ;
-      private short nIsDirty_24 ;
       private short Gx_BScreen ;
       private short gxajaxcallmode ;
       private int trnEnded ;
@@ -1923,7 +1909,6 @@ namespace GeneXus.Programs {
       private string wcpOGx_mode ;
       private string Z158CompanyLocationName ;
       private string Z159CompanyLocationCode ;
-      private string scmdbuf ;
       private string gxfirstwebparm ;
       private string gxfirstwebparm_bkp ;
       private string Gx_mode ;
@@ -1974,8 +1959,11 @@ namespace GeneXus.Programs {
       private bool returnInSub ;
       private IGxSession AV12WebSession ;
       private GXProperties forbiddenHiddens ;
+      private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV8WWPContext ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext AV11TrnContext ;
       private IDataStoreProvider pr_default ;
       private long[] T000M4_A157CompanyLocationId ;
       private string[] T000M4_A158CompanyLocationName ;
@@ -1995,9 +1983,6 @@ namespace GeneXus.Programs {
       private long[] T000M14_A157CompanyLocationId ;
       private string[] T000M15_A158CompanyLocationName ;
       private IDataStoreProvider pr_gam ;
-      private GXWebForm Form ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV8WWPContext ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext AV11TrnContext ;
    }
 
    public class companylocation__gam : DataStoreHelperBase, IDataStoreHelper
@@ -2060,6 +2045,14 @@ namespace GeneXus.Programs {
   {
      if ( def == null )
      {
+        Object[] prmT000M2;
+        prmT000M2 = new Object[] {
+        new ParDef("CompanyLocationId",GXType.Int64,10,0)
+        };
+        Object[] prmT000M3;
+        prmT000M3 = new Object[] {
+        new ParDef("CompanyLocationId",GXType.Int64,10,0)
+        };
         Object[] prmT000M4;
         prmT000M4 = new Object[] {
         new ParDef("CompanyLocationId",GXType.Int64,10,0)
@@ -2073,20 +2066,12 @@ namespace GeneXus.Programs {
         prmT000M6 = new Object[] {
         new ParDef("CompanyLocationId",GXType.Int64,10,0)
         };
-        Object[] prmT000M3;
-        prmT000M3 = new Object[] {
-        new ParDef("CompanyLocationId",GXType.Int64,10,0)
-        };
         Object[] prmT000M7;
         prmT000M7 = new Object[] {
         new ParDef("CompanyLocationId",GXType.Int64,10,0)
         };
         Object[] prmT000M8;
         prmT000M8 = new Object[] {
-        new ParDef("CompanyLocationId",GXType.Int64,10,0)
-        };
-        Object[] prmT000M2;
-        prmT000M2 = new Object[] {
         new ParDef("CompanyLocationId",GXType.Int64,10,0)
         };
         Object[] prmT000M9;

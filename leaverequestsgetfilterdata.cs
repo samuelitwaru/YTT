@@ -80,7 +80,7 @@ namespace GeneXus.Programs {
          this.AV47OptionsDescJson = "" ;
          this.AV48OptionIndexesJson = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP3_OptionsJson=this.AV46OptionsJson;
          aP4_OptionsDescJson=this.AV47OptionsDescJson;
          aP5_OptionIndexesJson=this.AV48OptionIndexesJson;
@@ -103,36 +103,19 @@ namespace GeneXus.Programs {
                                  out string aP4_OptionsDescJson ,
                                  out string aP5_OptionIndexesJson )
       {
-         leaverequestsgetfilterdata objleaverequestsgetfilterdata;
-         objleaverequestsgetfilterdata = new leaverequestsgetfilterdata();
-         objleaverequestsgetfilterdata.AV43DDOName = aP0_DDOName;
-         objleaverequestsgetfilterdata.AV44SearchTxtParms = aP1_SearchTxtParms;
-         objleaverequestsgetfilterdata.AV45SearchTxtTo = aP2_SearchTxtTo;
-         objleaverequestsgetfilterdata.AV46OptionsJson = "" ;
-         objleaverequestsgetfilterdata.AV47OptionsDescJson = "" ;
-         objleaverequestsgetfilterdata.AV48OptionIndexesJson = "" ;
-         objleaverequestsgetfilterdata.context.SetSubmitInitialConfig(context);
-         objleaverequestsgetfilterdata.initialize();
-         Submit( executePrivateCatch,objleaverequestsgetfilterdata);
+         this.AV43DDOName = aP0_DDOName;
+         this.AV44SearchTxtParms = aP1_SearchTxtParms;
+         this.AV45SearchTxtTo = aP2_SearchTxtTo;
+         this.AV46OptionsJson = "" ;
+         this.AV47OptionsDescJson = "" ;
+         this.AV48OptionIndexesJson = "" ;
+         SubmitImpl();
          aP3_OptionsJson=this.AV46OptionsJson;
          aP4_OptionsDescJson=this.AV47OptionsDescJson;
          aP5_OptionIndexesJson=this.AV48OptionIndexesJson;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((leaverequestsgetfilterdata)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -148,7 +131,7 @@ namespace GeneXus.Programs {
          S111 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          if ( StringUtil.StrCmp(StringUtil.Upper( AV43DDOName), "DDO_LEAVETYPENAME") == 0 )
@@ -157,7 +140,7 @@ namespace GeneXus.Programs {
             S121 ();
             if ( returnInSub )
             {
-               this.cleanup();
+               cleanup();
                if (true) return;
             }
          }
@@ -167,7 +150,7 @@ namespace GeneXus.Programs {
             S131 ();
             if ( returnInSub )
             {
-               this.cleanup();
+               cleanup();
                if (true) return;
             }
          }
@@ -177,7 +160,7 @@ namespace GeneXus.Programs {
             S141 ();
             if ( returnInSub )
             {
-               this.cleanup();
+               cleanup();
                if (true) return;
             }
          }
@@ -187,14 +170,14 @@ namespace GeneXus.Programs {
             S151 ();
             if ( returnInSub )
             {
-               this.cleanup();
+               cleanup();
                if (true) return;
             }
          }
          AV46OptionsJson = AV33Options.ToJSonString(false);
          AV47OptionsDescJson = AV35OptionsDesc.ToJSonString(false);
          AV48OptionIndexesJson = AV36OptionIndexes.ToJSonString(false);
-         this.cleanup();
+         cleanup();
       }
 
       protected void S111( )
@@ -755,16 +738,12 @@ namespace GeneXus.Programs {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -809,7 +788,6 @@ namespace GeneXus.Programs {
          AV67Leaverequestsds_14_tfleaverequestdescription_sel = "";
          AV68Leaverequestsds_15_tfleaverequestrejectionreason = "";
          AV69Leaverequestsds_16_tfleaverequestrejectionreason_sel = "";
-         scmdbuf = "";
          lV54Leaverequestsds_1_filterfulltext = "";
          lV55Leaverequestsds_2_tfleavetypename = "";
          lV61Leaverequestsds_8_tfleaverequesthalfday = "";
@@ -918,7 +896,6 @@ namespace GeneXus.Programs {
       private string AV56Leaverequestsds_3_tfleavetypename_sel ;
       private string AV61Leaverequestsds_8_tfleaverequesthalfday ;
       private string AV62Leaverequestsds_9_tfleaverequesthalfday_sel ;
-      private string scmdbuf ;
       private string lV55Leaverequestsds_2_tfleavetypename ;
       private string lV61Leaverequestsds_8_tfleaverequesthalfday ;
       private string A132LeaveRequestStatus ;
@@ -967,6 +944,14 @@ namespace GeneXus.Programs {
       private IGxSession AV38Session ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GxSimpleCollection<string> AV33Options ;
+      private GxSimpleCollection<string> AV35OptionsDesc ;
+      private GxSimpleCollection<string> AV36OptionIndexes ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV9WWPContext ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState AV40GridState ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue AV41GridStateFilterValue ;
+      private GxSimpleCollection<string> AV22TFLeaveRequestStatus_Sels ;
+      private GxSimpleCollection<string> AV65Leaverequestsds_12_tfleaverequeststatus_sels ;
       private IDataStoreProvider pr_default ;
       private long[] P008D2_A124LeaveTypeId ;
       private long[] P008D2_A106EmployeeId ;
@@ -1019,14 +1004,6 @@ namespace GeneXus.Programs {
       private string aP3_OptionsJson ;
       private string aP4_OptionsDescJson ;
       private string aP5_OptionIndexesJson ;
-      private GxSimpleCollection<string> AV22TFLeaveRequestStatus_Sels ;
-      private GxSimpleCollection<string> AV65Leaverequestsds_12_tfleaverequeststatus_sels ;
-      private GxSimpleCollection<string> AV33Options ;
-      private GxSimpleCollection<string> AV35OptionsDesc ;
-      private GxSimpleCollection<string> AV36OptionIndexes ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV9WWPContext ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState AV40GridState ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue AV41GridStateFilterValue ;
    }
 
    public class leaverequestsgetfilterdata__default : DataStoreHelperBase, IDataStoreHelper

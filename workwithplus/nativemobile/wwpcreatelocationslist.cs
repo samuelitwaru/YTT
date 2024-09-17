@@ -238,6 +238,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
                }
                if ( StringUtil.StringSearch( GXSoapXMLReader.Name, "Body", 1) > 0 )
                {
+                  this.SetPrefixesFromReader( GXSoapXMLReader);
                   if (true) break;
                }
                GXSoapError = GXSoapXMLReader.Read();
@@ -341,7 +342,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          }
          if ( currSoapErr == 0 )
          {
-            executePrivate();
+            ExecutePrivate();
          }
          context.CloseConnections();
          sIncludeState = true;
@@ -402,7 +403,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          this.AV11SelectedItemText = aP1_SelectedItemText;
          this.AV9MapItems = new GXBaseCollection<GeneXus.Core.genexus.common.SdtGeolocationInfo>( context, "GeolocationInfo", "GeneXus") ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP2_MapItems=this.AV9MapItems;
       }
 
@@ -417,31 +418,14 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
                                  string aP1_SelectedItemText ,
                                  out GXBaseCollection<GeneXus.Core.genexus.common.SdtGeolocationInfo> aP2_MapItems )
       {
-         wwpcreatelocationslist objwwpcreatelocationslist;
-         objwwpcreatelocationslist = new wwpcreatelocationslist();
-         objwwpcreatelocationslist.AV10SelectedItem = aP0_SelectedItem;
-         objwwpcreatelocationslist.AV11SelectedItemText = aP1_SelectedItemText;
-         objwwpcreatelocationslist.AV9MapItems = new GXBaseCollection<GeneXus.Core.genexus.common.SdtGeolocationInfo>( context, "GeolocationInfo", "GeneXus") ;
-         objwwpcreatelocationslist.context.SetSubmitInitialConfig(context);
-         objwwpcreatelocationslist.initialize();
-         Submit( executePrivateCatch,objwwpcreatelocationslist);
+         this.AV10SelectedItem = aP0_SelectedItem;
+         this.AV11SelectedItemText = aP1_SelectedItemText;
+         this.AV9MapItems = new GXBaseCollection<GeneXus.Core.genexus.common.SdtGeolocationInfo>( context, "GeolocationInfo", "GeneXus") ;
+         SubmitImpl();
          aP2_MapItems=this.AV9MapItems;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwpcreatelocationslist)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -455,22 +439,18 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
             context.Redirect( context.wjLoc );
             context.wjLoc = "";
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          base.cleanup();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -502,9 +482,9 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
       private GXXMLWriter GXSoapXMLWriter ;
       private GxSoapRequest GXSoapHTTPRequest ;
       private GxHttpResponse GXSoapHTTPResponse ;
-      private GXBaseCollection<GeneXus.Core.genexus.common.SdtGeolocationInfo> aP2_MapItems ;
       private GXBaseCollection<GeneXus.Core.genexus.common.SdtGeolocationInfo> AV9MapItems ;
       private GeneXus.Core.genexus.common.SdtGeolocationInfo AV8MapItem ;
+      private GXBaseCollection<GeneXus.Core.genexus.common.SdtGeolocationInfo> aP2_MapItems ;
    }
 
 }

@@ -40,7 +40,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       {
          this.AV8Path = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_Path=this.AV8Path;
       }
 
@@ -52,29 +52,12 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       public void executeSubmit( out string aP0_Path )
       {
-         wwp_getdefaultexportpath objwwp_getdefaultexportpath;
-         objwwp_getdefaultexportpath = new wwp_getdefaultexportpath();
-         objwwp_getdefaultexportpath.AV8Path = "" ;
-         objwwp_getdefaultexportpath.context.SetSubmitInitialConfig(context);
-         objwwp_getdefaultexportpath.initialize();
-         Submit( executePrivateCatch,objwwp_getdefaultexportpath);
+         this.AV8Path = "" ;
+         SubmitImpl();
          aP0_Path=this.AV8Path;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwp_getdefaultexportpath)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -94,21 +77,17 @@ namespace GeneXus.Programs.wwpbaseobjects {
          {
             AV8Path = AV9File.Separator + "WEB-INF" + AV9File.Separator;
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -121,9 +100,9 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       private bool AV11IsCSharp ;
       private string AV8Path ;
-      private string aP0_Path ;
       private GxFile AV9File ;
       private GxDirectory AV10Directory ;
+      private string aP0_Path ;
    }
 
 }

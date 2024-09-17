@@ -78,7 +78,7 @@ namespace GeneXus.Programs {
          this.AV20EmployeeId = aP3_EmployeeId;
          this.AV17FinalDuration = 0 ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP4_FinalDuration=this.AV17FinalDuration;
       }
 
@@ -97,33 +97,16 @@ namespace GeneXus.Programs {
                                  long aP3_EmployeeId ,
                                  out decimal aP4_FinalDuration )
       {
-         getleaverequestdays objgetleaverequestdays;
-         objgetleaverequestdays = new getleaverequestdays();
-         objgetleaverequestdays.AV14StartDate = aP0_StartDate;
-         objgetleaverequestdays.AV10EndDate = aP1_EndDate;
-         objgetleaverequestdays.AV19LeaveRequestHalfDay = aP2_LeaveRequestHalfDay;
-         objgetleaverequestdays.AV20EmployeeId = aP3_EmployeeId;
-         objgetleaverequestdays.AV17FinalDuration = 0 ;
-         objgetleaverequestdays.context.SetSubmitInitialConfig(context);
-         objgetleaverequestdays.initialize();
-         Submit( executePrivateCatch,objgetleaverequestdays);
+         this.AV14StartDate = aP0_StartDate;
+         this.AV10EndDate = aP1_EndDate;
+         this.AV19LeaveRequestHalfDay = aP2_LeaveRequestHalfDay;
+         this.AV20EmployeeId = aP3_EmployeeId;
+         this.AV17FinalDuration = 0 ;
+         SubmitImpl();
          aP4_FinalDuration=this.AV17FinalDuration;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((getleaverequestdays)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -185,12 +168,12 @@ namespace GeneXus.Programs {
             }
             AV17FinalDuration = (decimal)(AV9Duration-AV16totalHoliday);
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -198,13 +181,8 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
-         scmdbuf = "";
          P005N2_A106EmployeeId = new long[1] ;
          P005N3_A139HolidayIsActive = new bool[] {false} ;
          P005N3_A100CompanyId = new long[1] ;
@@ -235,7 +213,6 @@ namespace GeneXus.Programs {
       private long A113HolidayId ;
       private decimal AV17FinalDuration ;
       private string AV19LeaveRequestHalfDay ;
-      private string scmdbuf ;
       private DateTime AV14StartDate ;
       private DateTime AV10EndDate ;
       private DateTime A115HolidayStartDate ;

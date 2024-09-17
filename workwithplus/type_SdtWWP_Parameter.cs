@@ -477,6 +477,20 @@ namespace GeneXus.Programs.workwithplus {
          return false ;
       }
 
+      [XmlIgnore]
+      private static GXTypeInfo _typeProps;
+      protected override GXTypeInfo TypeInfo
+      {
+         get {
+            return _typeProps ;
+         }
+
+         set {
+            _typeProps = value ;
+         }
+
+      }
+
       public void initialize( )
       {
          gxTv_SdtWWP_Parameter_Wwpparameterkey = "";
@@ -521,6 +535,7 @@ namespace GeneXus.Programs.workwithplus {
    }
 
    [DataContract(Name = @"WorkWithPlus\WWP_Parameter", Namespace = "YTT_version4")]
+   [GxJsonSerialization("default")]
    public class SdtWWP_Parameter_RESTInterface : GxGenericCollectionItem<GeneXus.Programs.workwithplus.SdtWWP_Parameter>
    {
       public SdtWWP_Parameter_RESTInterface( ) : base()
@@ -656,6 +671,7 @@ namespace GeneXus.Programs.workwithplus {
    }
 
    [DataContract(Name = @"WorkWithPlus\WWP_Parameter", Namespace = "YTT_version4")]
+   [GxJsonSerialization("default")]
    public class SdtWWP_Parameter_RESTLInterface : GxGenericCollectionItem<GeneXus.Programs.workwithplus.SdtWWP_Parameter>
    {
       public SdtWWP_Parameter_RESTLInterface( ) : base()

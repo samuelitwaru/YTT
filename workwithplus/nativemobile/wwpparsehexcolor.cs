@@ -80,7 +80,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          this.AV10HexB = "" ;
          this.AV9HexA = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_IntR=this.AV16IntR;
          aP2_IntG=this.AV15IntG;
          aP3_IntB=this.AV14IntB;
@@ -114,20 +114,16 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
                                  out string aP7_HexB ,
                                  out string aP8_HexA )
       {
-         wwpparsehexcolor objwwpparsehexcolor;
-         objwwpparsehexcolor = new wwpparsehexcolor();
-         objwwpparsehexcolor.AV17ColorStringIn = aP0_ColorStringIn;
-         objwwpparsehexcolor.AV16IntR = 0 ;
-         objwwpparsehexcolor.AV15IntG = 0 ;
-         objwwpparsehexcolor.AV14IntB = 0 ;
-         objwwpparsehexcolor.AV13IntA = 0 ;
-         objwwpparsehexcolor.AV12HexR = "" ;
-         objwwpparsehexcolor.AV11HexG = "" ;
-         objwwpparsehexcolor.AV10HexB = "" ;
-         objwwpparsehexcolor.AV9HexA = "" ;
-         objwwpparsehexcolor.context.SetSubmitInitialConfig(context);
-         objwwpparsehexcolor.initialize();
-         Submit( executePrivateCatch,objwwpparsehexcolor);
+         this.AV17ColorStringIn = aP0_ColorStringIn;
+         this.AV16IntR = 0 ;
+         this.AV15IntG = 0 ;
+         this.AV14IntB = 0 ;
+         this.AV13IntA = 0 ;
+         this.AV12HexR = "" ;
+         this.AV11HexG = "" ;
+         this.AV10HexB = "" ;
+         this.AV9HexA = "" ;
+         SubmitImpl();
          aP1_IntR=this.AV16IntR;
          aP2_IntG=this.AV15IntG;
          aP3_IntB=this.AV14IntB;
@@ -138,20 +134,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          aP8_HexA=this.AV9HexA;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwpparsehexcolor)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -203,21 +186,17 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          AV11HexG = StringUtil.PadL( AV11HexG, 2, "0");
          AV10HexB = StringUtil.PadL( AV10HexB, 2, "0");
          AV9HexA = StringUtil.PadL( AV9HexA, 2, "0");
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )

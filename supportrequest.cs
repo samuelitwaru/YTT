@@ -123,7 +123,7 @@ namespace GeneXus.Programs {
          {
             if ( context.ExposeMetadata( ) )
             {
-               Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+               Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
             }
          }
          Form.Meta.addItem("description", "Support Request", 0) ;
@@ -166,10 +166,10 @@ namespace GeneXus.Programs {
 
       public void execute( )
       {
-         executePrivate();
+         ExecuteImpl();
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -205,11 +205,8 @@ namespace GeneXus.Programs {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITENV( ) ;
          INITTRN( ) ;
          if ( ( GxWebError == 0 ) && ! isAjaxCallMode( ) )
@@ -241,7 +238,7 @@ namespace GeneXus.Programs {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void fix_multi_value_controls( )
@@ -438,7 +435,8 @@ namespace GeneXus.Programs {
          /* Div Control */
          GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-sm-9 gx-attribute", "start", "top", "", "", "div");
          /* Single line edit */
-         GxWebStd.gx_single_line_edit( context, edtEmployeeFirstName_Internalname, StringUtil.RTrim( A107EmployeeFirstName), StringUtil.RTrim( context.localUtil.Format( A107EmployeeFirstName, "")), "", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtEmployeeFirstName_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtEmployeeFirstName_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "Name", "start", true, "", "HLP_SupportRequest.htm");
+         TempTags = "  onfocus=\"gx.evt.onfocus(this, 54,'',false,'',0)\"";
+         GxWebStd.gx_single_line_edit( context, edtEmployeeFirstName_Internalname, StringUtil.RTrim( A107EmployeeFirstName), StringUtil.RTrim( context.localUtil.Format( A107EmployeeFirstName, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,54);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtEmployeeFirstName_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtEmployeeFirstName_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "Name", "start", true, "", "HLP_SupportRequest.htm");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
          GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -821,7 +819,6 @@ namespace GeneXus.Programs {
 
       protected void CheckExtendedTable0P29( )
       {
-         nIsDirty_29 = 0;
          Gx_BScreen = 1;
          standaloneModal( ) ;
          /* Using cursor T000P4 */
@@ -1108,7 +1105,7 @@ namespace GeneXus.Programs {
          {
             getByPrimaryKey( ) ;
          }
-         CloseOpenCursors();
+         CloseCursors();
       }
 
       protected void btn_get( )
@@ -1626,10 +1623,10 @@ namespace GeneXus.Programs {
          CloseStyles();
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
@@ -1792,7 +1789,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202471712112712", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202491613143328", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1808,7 +1805,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("supportrequest.js", "?202471712112713", false, true);
+         context.AddJavascriptSource("supportrequest.js", "?202491613143329", false, true);
          /* End function include_jscripts */
       }
 
@@ -1962,28 +1959,25 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("ENTER","{handler:'UserMainFullajax',iparms:[{postForm:true}]");
-         setEventMetadata("ENTER",",oparms:[]}");
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[]");
-         setEventMetadata("REFRESH",",oparms:[]}");
-         setEventMetadata("VALID_SUPPORTREQUESTID","{handler:'Valid_Supportrequestid',iparms:[{av:'A172SupportRequestId',fld:'SUPPORTREQUESTID',pic:'ZZZZZZZZZ9'},{av:'Gx_mode',fld:'vMODE',pic:'@!'}]");
-         setEventMetadata("VALID_SUPPORTREQUESTID",",oparms:[{av:'A170SupportRequestSubject',fld:'SUPPORTREQUESTSUBJECT',pic:''},{av:'A171SupportRequestDescription',fld:'SUPPORTREQUESTDESCRIPTION',pic:''},{av:'A106EmployeeId',fld:'EMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'A107EmployeeFirstName',fld:'EMPLOYEEFIRSTNAME',pic:''},{av:'Gx_mode',fld:'vMODE',pic:'@!'},{av:'Z172SupportRequestId'},{av:'Z170SupportRequestSubject'},{av:'Z171SupportRequestDescription'},{av:'Z106EmployeeId'},{av:'Z107EmployeeFirstName'},{ctrl:'BTN_DELETE',prop:'Enabled'},{ctrl:'BTN_ENTER',prop:'Enabled'}]}");
-         setEventMetadata("VALID_EMPLOYEEID","{handler:'Valid_Employeeid',iparms:[{av:'A106EmployeeId',fld:'EMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'A107EmployeeFirstName',fld:'EMPLOYEEFIRSTNAME',pic:''}]");
-         setEventMetadata("VALID_EMPLOYEEID",",oparms:[{av:'A107EmployeeFirstName',fld:'EMPLOYEEFIRSTNAME',pic:''}]}");
+         setEventMetadata("ENTER","""{"handler":"UserMainFullajax","iparms":[{"postForm":true}]}""");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[]}""");
+         setEventMetadata("VALID_SUPPORTREQUESTID","""{"handler":"Valid_Supportrequestid","iparms":[{"av":"A172SupportRequestId","fld":"SUPPORTREQUESTID","pic":"ZZZZZZZZZ9"},{"av":"Gx_mode","fld":"vMODE","pic":"@!"}]""");
+         setEventMetadata("VALID_SUPPORTREQUESTID",""","oparms":[{"av":"A170SupportRequestSubject","fld":"SUPPORTREQUESTSUBJECT"},{"av":"A171SupportRequestDescription","fld":"SUPPORTREQUESTDESCRIPTION"},{"av":"A106EmployeeId","fld":"EMPLOYEEID","pic":"ZZZZZZZZZ9"},{"av":"A107EmployeeFirstName","fld":"EMPLOYEEFIRSTNAME"},{"av":"Gx_mode","fld":"vMODE","pic":"@!"},{"av":"Z172SupportRequestId"},{"av":"Z170SupportRequestSubject"},{"av":"Z171SupportRequestDescription"},{"av":"Z106EmployeeId"},{"av":"Z107EmployeeFirstName"},{"ctrl":"BTN_DELETE","prop":"Enabled"},{"ctrl":"BTN_ENTER","prop":"Enabled"}]}""");
+         setEventMetadata("VALID_EMPLOYEEID","""{"handler":"Valid_Employeeid","iparms":[{"av":"A106EmployeeId","fld":"EMPLOYEEID","pic":"ZZZZZZZZZ9"},{"av":"A107EmployeeFirstName","fld":"EMPLOYEEFIRSTNAME"}]""");
+         setEventMetadata("VALID_EMPLOYEEID",""","oparms":[{"av":"A107EmployeeFirstName","fld":"EMPLOYEEFIRSTNAME"}]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
       }
 
-      protected void CloseOpenCursors( )
+      protected override void CloseCursors( )
       {
          pr_default.close(1);
          pr_default.close(12);
@@ -1994,7 +1988,6 @@ namespace GeneXus.Programs {
          sPrefix = "";
          Z170SupportRequestSubject = "";
          Z171SupportRequestDescription = "";
-         scmdbuf = "";
          gxfirstwebparm = "";
          gxfirstwebparm_bkp = "";
          GXKey = "";
@@ -2104,14 +2097,11 @@ namespace GeneXus.Programs {
 
       private short GxWebError ;
       private short gxcookieaux ;
-      private short IsConfirmed ;
-      private short IsModified ;
       private short AnyError ;
+      private short IsModified ;
+      private short IsConfirmed ;
       private short nKeyPressed ;
-      private short initialized ;
-      private short GX_JID ;
       private short RcdFound29 ;
-      private short nIsDirty_29 ;
       private short Gx_BScreen ;
       private short gxajaxcallmode ;
       private int trnEnded ;
@@ -2138,7 +2128,6 @@ namespace GeneXus.Programs {
       private long ZZ172SupportRequestId ;
       private long ZZ106EmployeeId ;
       private string sPrefix ;
-      private string scmdbuf ;
       private string gxfirstwebparm ;
       private string gxfirstwebparm_bkp ;
       private string GXKey ;
@@ -2201,6 +2190,7 @@ namespace GeneXus.Programs {
       private string A171SupportRequestDescription ;
       private string ZZ170SupportRequestSubject ;
       private string ZZ171SupportRequestDescription ;
+      private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private IDataStoreProvider pr_default ;
@@ -2226,7 +2216,6 @@ namespace GeneXus.Programs {
       private string[] T000P14_A107EmployeeFirstName ;
       private long[] T000P15_A172SupportRequestId ;
       private IDataStoreProvider pr_gam ;
-      private GXWebForm Form ;
    }
 
    public class supportrequest__gam : DataStoreHelperBase, IDataStoreHelper
@@ -2289,13 +2278,21 @@ namespace GeneXus.Programs {
   {
      if ( def == null )
      {
-        Object[] prmT000P5;
-        prmT000P5 = new Object[] {
+        Object[] prmT000P2;
+        prmT000P2 = new Object[] {
+        new ParDef("SupportRequestId",GXType.Int64,10,0)
+        };
+        Object[] prmT000P3;
+        prmT000P3 = new Object[] {
         new ParDef("SupportRequestId",GXType.Int64,10,0)
         };
         Object[] prmT000P4;
         prmT000P4 = new Object[] {
         new ParDef("EmployeeId",GXType.Int64,10,0)
+        };
+        Object[] prmT000P5;
+        prmT000P5 = new Object[] {
+        new ParDef("SupportRequestId",GXType.Int64,10,0)
         };
         Object[] prmT000P6;
         prmT000P6 = new Object[] {
@@ -2305,20 +2302,12 @@ namespace GeneXus.Programs {
         prmT000P7 = new Object[] {
         new ParDef("SupportRequestId",GXType.Int64,10,0)
         };
-        Object[] prmT000P3;
-        prmT000P3 = new Object[] {
-        new ParDef("SupportRequestId",GXType.Int64,10,0)
-        };
         Object[] prmT000P8;
         prmT000P8 = new Object[] {
         new ParDef("SupportRequestId",GXType.Int64,10,0)
         };
         Object[] prmT000P9;
         prmT000P9 = new Object[] {
-        new ParDef("SupportRequestId",GXType.Int64,10,0)
-        };
-        Object[] prmT000P2;
-        prmT000P2 = new Object[] {
         new ParDef("SupportRequestId",GXType.Int64,10,0)
         };
         Object[] prmT000P10;
@@ -2341,12 +2330,12 @@ namespace GeneXus.Programs {
         prmT000P13 = new Object[] {
         new ParDef("SupportRequestId",GXType.Int64,10,0)
         };
-        Object[] prmT000P15;
-        prmT000P15 = new Object[] {
-        };
         Object[] prmT000P14;
         prmT000P14 = new Object[] {
         new ParDef("EmployeeId",GXType.Int64,10,0)
+        };
+        Object[] prmT000P15;
+        prmT000P15 = new Object[] {
         };
         def= new CursorDef[] {
             new CursorDef("T000P2", "SELECT SupportRequestId, SupportRequestSubject, SupportRequestDescription, EmployeeId FROM SupportRequest WHERE SupportRequestId = :SupportRequestId  FOR UPDATE OF SupportRequest NOWAIT",true, GxErrorMask.GX_NOMASK, false, this,prmT000P2,1, GxCacheFrequency.OFF ,true,false )

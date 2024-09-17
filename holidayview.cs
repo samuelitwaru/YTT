@@ -45,10 +45,10 @@ namespace GeneXus.Programs {
       {
          this.AV12HolidayId = aP0_HolidayId;
          this.AV8TabCode = aP1_TabCode;
-         executePrivate();
+         ExecuteImpl();
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -163,11 +163,8 @@ namespace GeneXus.Programs {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITWEB( ) ;
          if ( ! isAjaxCallMode( ) )
          {
@@ -198,7 +195,7 @@ namespace GeneXus.Programs {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override short ExecuteStartEvent( )
@@ -242,10 +239,10 @@ namespace GeneXus.Programs {
          CloseStyles();
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
@@ -505,7 +502,7 @@ namespace GeneXus.Programs {
          {
             if ( context.ExposeMetadata( ) )
             {
-               Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+               Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
             }
          }
          Form.Meta.addItem("description", "Holiday View", 0) ;
@@ -812,6 +809,12 @@ namespace GeneXus.Programs {
             S112 ();
             if (returnInSub) return;
          }
+         AV11AIAppliedFilters = AV10Session.Get("HolidayViewQueryAppliedFilters");
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( StringUtil.Trim( AV11AIAppliedFilters))) )
+         {
+            GX_msglist.addItem(AV11AIAppliedFilters);
+            AV10Session.Remove("HolidayViewQueryAppliedFilters");
+         }
       }
 
       protected void nextLoad( )
@@ -881,7 +884,7 @@ namespace GeneXus.Programs {
          PA2K2( ) ;
          WS2K2( ) ;
          WE2K2( ) ;
-         this.cleanup();
+         cleanup();
          context.SetWrapped(false);
          context.GX_msglist = BackMsgLst;
          return "";
@@ -909,7 +912,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202481416562768", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20249171618964", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -925,7 +928,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("holidayview.js", "?202481416562768", false, true);
+         context.AddJavascriptSource("holidayview.js", "?20249171618964", false, true);
          context.AddJavascriptSource("shared/HistoryManager/HistoryManager.js", "", false, true);
          context.AddJavascriptSource("shared/HistoryManager/rsh/json2005.js", "", false, true);
          context.AddJavascriptSource("shared/HistoryManager/rsh/rsh.js", "", false, true);
@@ -982,23 +985,17 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'AV12HolidayId',fld:'vHOLIDAYID',pic:'ZZZZZZZZZ9',hsh:true},{av:'AV8TabCode',fld:'vTABCODE',pic:'',hsh:true}]");
-         setEventMetadata("REFRESH",",oparms:[]}");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"AV12HolidayId","fld":"vHOLIDAYID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"AV8TabCode","fld":"vTABCODE","hsh":true}]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -1025,10 +1022,11 @@ namespace GeneXus.Programs {
          EvtRowId = "";
          sEvtType = "";
          AV6WWPContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPContext(context);
-         scmdbuf = "";
          H002K2_A113HolidayId = new long[1] ;
          H002K2_A114HolidayName = new string[] {""} ;
          A114HolidayName = "";
+         AV11AIAppliedFilters = "";
+         AV10Session = context.GetSession();
          BackMsgLst = new msglist();
          LclMsgLst = new msglist();
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.holidayview__default(),
@@ -1046,7 +1044,6 @@ namespace GeneXus.Programs {
       private short nIsMod_3 ;
       private short nGotPars ;
       private short GxWebError ;
-      private short initialized ;
       private short gxajaxcallmode ;
       private short wbEnd ;
       private short wbStart ;
@@ -1090,7 +1087,6 @@ namespace GeneXus.Programs {
       private string EvtGridId ;
       private string EvtRowId ;
       private string sEvtType ;
-      private string scmdbuf ;
       private string A114HolidayName ;
       private bool entryPointCalled ;
       private bool toggleJsOutput ;
@@ -1103,17 +1099,19 @@ namespace GeneXus.Programs {
       private bool returnInSub ;
       private bool AV9Exists ;
       private bool bDynCreated_Generalwc ;
+      private string AV11AIAppliedFilters ;
+      private IGxSession AV10Session ;
       private GXWebComponent WebComp_Generalwc ;
       private GXUserControl ucTabs ;
+      private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV6WWPContext ;
       private IDataStoreProvider pr_default ;
       private long[] H002K2_A113HolidayId ;
       private string[] H002K2_A114HolidayName ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
-      private GXWebForm Form ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV6WWPContext ;
    }
 
    public class holidayview__default : DataStoreHelperBase, IDataStoreHelper

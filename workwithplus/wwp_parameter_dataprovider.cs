@@ -45,7 +45,7 @@ namespace GeneXus.Programs.workwithplus {
       {
          this.AV2ReturnValue = new GXBCCollection<GeneXus.Programs.workwithplus.SdtWWP_Parameter>( context, "WWP_Parameter", "YTT_version4") ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_ReturnValue=this.AV2ReturnValue;
       }
 
@@ -57,52 +57,31 @@ namespace GeneXus.Programs.workwithplus {
 
       public void executeSubmit( out GXBCCollection<GeneXus.Programs.workwithplus.SdtWWP_Parameter> aP0_ReturnValue )
       {
-         wwp_parameter_dataprovider objwwp_parameter_dataprovider;
-         objwwp_parameter_dataprovider = new wwp_parameter_dataprovider();
-         objwwp_parameter_dataprovider.AV2ReturnValue = new GXBCCollection<GeneXus.Programs.workwithplus.SdtWWP_Parameter>( context, "WWP_Parameter", "YTT_version4") ;
-         objwwp_parameter_dataprovider.context.SetSubmitInitialConfig(context);
-         objwwp_parameter_dataprovider.initialize();
-         Submit( executePrivateCatch,objwwp_parameter_dataprovider);
+         this.AV2ReturnValue = new GXBCCollection<GeneXus.Programs.workwithplus.SdtWWP_Parameter>( context, "WWP_Parameter", "YTT_version4") ;
+         SubmitImpl();
          aP0_ReturnValue=this.AV2ReturnValue;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwp_parameter_dataprovider)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
          args = new Object[] {(GXBCCollection<GeneXus.Programs.workwithplus.SdtWWP_Parameter>)AV2ReturnValue} ;
-         ClassLoader.Execute("workwithplus-awwp_parameter_dataprovider","GeneXus.Programs","workwithplus.awwp_parameter_dataprovider", new Object[] {context }, "execute", args);
+         ClassLoader.Execute("workwithplus.awwp_parameter_dataprovider","GeneXus.Programs","workwithplus.awwp_parameter_dataprovider", new Object[] {context }, "execute", args);
          if ( ( args != null ) && ( args.Length == 1 ) )
          {
             AV2ReturnValue = (GXBCCollection<GeneXus.Programs.workwithplus.SdtWWP_Parameter>)(args[0]) ;
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -113,9 +92,9 @@ namespace GeneXus.Programs.workwithplus {
 
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GXBCCollection<GeneXus.Programs.workwithplus.SdtWWP_Parameter> AV2ReturnValue ;
       private Object[] args ;
       private GXBCCollection<GeneXus.Programs.workwithplus.SdtWWP_Parameter> aP0_ReturnValue ;
-      private GXBCCollection<GeneXus.Programs.workwithplus.SdtWWP_Parameter> AV2ReturnValue ;
    }
 
 }

@@ -175,7 +175,6 @@ namespace GeneXus.Programs {
          }
          if ( AnyError == 0 )
          {
-            IsConfirmed = 1;
          }
       }
 
@@ -284,7 +283,6 @@ namespace GeneXus.Programs {
 
       protected void CheckExtendedTable0H19( )
       {
-         nIsDirty_19 = 0;
          standaloneModal( ) ;
          /* Using cursor BC000H4 */
          pr_default.execute(2, new Object[] {A106EmployeeId});
@@ -397,7 +395,6 @@ namespace GeneXus.Programs {
       protected void insert_Check( )
       {
          CONFIRM_0H0( ) ;
-         IsConfirmed = 0;
       }
 
       protected void update_Check( )
@@ -630,7 +627,6 @@ namespace GeneXus.Programs {
          else
          {
          }
-         IsModified = 0;
          if ( AnyError != 0 )
          {
             context.wjLoc = "";
@@ -912,7 +908,6 @@ namespace GeneXus.Programs {
 
       protected void SaveImpl( )
       {
-         nKeyPressed = 1;
          GetKey0H19( ) ;
          if ( IsIns( ) )
          {
@@ -990,7 +985,6 @@ namespace GeneXus.Programs {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars19( bcWorkHourLog, 1) ;
          SaveImpl( ) ;
          VarsToRow19( bcWorkHourLog) ;
@@ -1004,7 +998,6 @@ namespace GeneXus.Programs {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars19( bcWorkHourLog, 1) ;
          Gx_mode = "INS";
          /* Insert record */
@@ -1050,7 +1043,6 @@ namespace GeneXus.Programs {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars19( bcWorkHourLog, 1) ;
          UpdateImpl( ) ;
          context.GX_msglist = BackMsgLst;
@@ -1063,7 +1055,6 @@ namespace GeneXus.Programs {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars19( bcWorkHourLog, 1) ;
          Gx_mode = "INS";
          /* Insert record */
@@ -1097,8 +1088,6 @@ namespace GeneXus.Programs {
          AnyError = 0;
          context.GX_msglist.removeAllItems();
          RowToVars19( bcWorkHourLog, 0) ;
-         nKeyPressed = 3;
-         IsConfirmed = 0;
          GetKey0H19( ) ;
          if ( RcdFound19 == 1 )
          {
@@ -1214,7 +1203,6 @@ namespace GeneXus.Programs {
 
       public void ForceCommitOnExit( )
       {
-         mustCommit = true;
          return  ;
       }
 
@@ -1303,15 +1291,14 @@ namespace GeneXus.Programs {
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
       }
 
-      protected void CloseOpenCursors( )
+      protected override void CloseCursors( )
       {
          pr_default.close(1);
          pr_default.close(12);
@@ -1320,9 +1307,6 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
-         scmdbuf = "";
-         PreviousTooltip = "";
-         PreviousCaption = "";
          BC000H7_A118WorkHourLogId = new long[1] ;
          BC000H7_A119WorkHourLogDate = new DateTime[] {DateTime.MinValue} ;
          BC000H7_A120WorkHourLogDuration = new string[] {""} ;
@@ -1456,17 +1440,12 @@ namespace GeneXus.Programs {
          standaloneNotModal( ) ;
       }
 
-      private short IsConfirmed ;
-      private short IsModified ;
       private short AnyError ;
-      private short nKeyPressed ;
       private short RcdFound19 ;
       private short A121WorkHourLogHour ;
       private short A122WorkHourLogMinute ;
-      private short GX_JID ;
       private short Z121WorkHourLogHour ;
       private short Z122WorkHourLogMinute ;
-      private short nIsDirty_19 ;
       private int trnEnded ;
       private int Start ;
       private int Count ;
@@ -1481,9 +1460,6 @@ namespace GeneXus.Programs {
       private long AV14Insert_ProjectId ;
       private long Z106EmployeeId ;
       private long Z102ProjectId ;
-      private string scmdbuf ;
-      private string PreviousTooltip ;
-      private string PreviousCaption ;
       private string A107EmployeeFirstName ;
       private string A103ProjectName ;
       private string sMode19 ;
@@ -1497,17 +1473,14 @@ namespace GeneXus.Programs {
       private DateTime Z119WorkHourLogDate ;
       private bool returnInSub ;
       private bool Gx_longc ;
-      private bool mustCommit ;
       private string A123WorkHourLogDescription ;
       private string Z123WorkHourLogDescription ;
       private string A120WorkHourLogDuration ;
       private string Z120WorkHourLogDuration ;
       private IGxSession AV12WebSession ;
-      private GXBCCollection<SdtWorkHourLog> gx_restcollection ;
-      private SdtWorkHourLog bcWorkHourLog ;
-      private SdtWorkHourLog gx_sdt_item ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private SdtWorkHourLog bcWorkHourLog ;
       private IDataStoreProvider pr_default ;
       private long[] BC000H7_A118WorkHourLogId ;
       private DateTime[] BC000H7_A119WorkHourLogDate ;
@@ -1519,6 +1492,11 @@ namespace GeneXus.Programs {
       private string[] BC000H7_A103ProjectName ;
       private long[] BC000H7_A106EmployeeId ;
       private long[] BC000H7_A102ProjectId ;
+      private SdtWorkHourLog gx_sdt_item ;
+      private GXBCCollection<SdtWorkHourLog> gx_restcollection ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV8WWPContext ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext AV11TrnContext ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext_Attribute AV15TrnContextAtt ;
       private long[] BC000H8_A118WorkHourLogId ;
       private DateTime[] BC000H8_A119WorkHourLogDate ;
       private string[] BC000H8_A120WorkHourLogDuration ;
@@ -1565,9 +1543,6 @@ namespace GeneXus.Programs {
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
       private IDataStoreProvider pr_gam ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV8WWPContext ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext AV11TrnContext ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext_Attribute AV15TrnContextAtt ;
    }
 
    public class workhourlog_bc__gam : DataStoreHelperBase, IDataStoreHelper
@@ -1631,6 +1606,27 @@ namespace GeneXus.Programs {
   {
      if ( def == null )
      {
+        Object[] prmBC000H2;
+        prmBC000H2 = new Object[] {
+        new ParDef("WorkHourLogId",GXType.Int64,10,0)
+        };
+        Object[] prmBC000H3;
+        prmBC000H3 = new Object[] {
+        new ParDef("WorkHourLogId",GXType.Int64,10,0)
+        };
+        Object[] prmBC000H4;
+        prmBC000H4 = new Object[] {
+        new ParDef("EmployeeId",GXType.Int64,10,0)
+        };
+        Object[] prmBC000H5;
+        prmBC000H5 = new Object[] {
+        new ParDef("ProjectId",GXType.Int64,10,0)
+        };
+        Object[] prmBC000H6;
+        prmBC000H6 = new Object[] {
+        new ParDef("EmployeeId",GXType.Int64,10,0) ,
+        new ParDef("ProjectId",GXType.Int64,10,0)
+        };
         Object[] prmBC000H7;
         prmBC000H7 = new Object[] {
         new ParDef("GXPagingFrom19",GXType.Int32,9,0) ,
@@ -1640,29 +1636,8 @@ namespace GeneXus.Programs {
         prmBC000H8 = new Object[] {
         new ParDef("WorkHourLogId",GXType.Int64,10,0)
         };
-        Object[] prmBC000H4;
-        prmBC000H4 = new Object[] {
-        new ParDef("EmployeeId",GXType.Int64,10,0)
-        };
-        Object[] prmBC000H6;
-        prmBC000H6 = new Object[] {
-        new ParDef("EmployeeId",GXType.Int64,10,0) ,
-        new ParDef("ProjectId",GXType.Int64,10,0)
-        };
-        Object[] prmBC000H5;
-        prmBC000H5 = new Object[] {
-        new ParDef("ProjectId",GXType.Int64,10,0)
-        };
         Object[] prmBC000H9;
         prmBC000H9 = new Object[] {
-        new ParDef("WorkHourLogId",GXType.Int64,10,0)
-        };
-        Object[] prmBC000H3;
-        prmBC000H3 = new Object[] {
-        new ParDef("WorkHourLogId",GXType.Int64,10,0)
-        };
-        Object[] prmBC000H2;
-        prmBC000H2 = new Object[] {
         new ParDef("WorkHourLogId",GXType.Int64,10,0)
         };
         Object[] prmBC000H10;

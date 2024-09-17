@@ -42,7 +42,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          this.AV10WWPSubscriptionRoleId = aP0_WWPSubscriptionRoleId;
          this.AV9WWPUserExtendedIdCollection = new GxSimpleCollection<string>() ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_WWPUserExtendedIdCollection=this.AV9WWPUserExtendedIdCollection;
       }
 
@@ -55,30 +55,13 @@ namespace GeneXus.Programs.wwpbaseobjects {
       public void executeSubmit( string aP0_WWPSubscriptionRoleId ,
                                  out GxSimpleCollection<string> aP1_WWPUserExtendedIdCollection )
       {
-         wwp_getusersfromrole objwwp_getusersfromrole;
-         objwwp_getusersfromrole = new wwp_getusersfromrole();
-         objwwp_getusersfromrole.AV10WWPSubscriptionRoleId = aP0_WWPSubscriptionRoleId;
-         objwwp_getusersfromrole.AV9WWPUserExtendedIdCollection = new GxSimpleCollection<string>() ;
-         objwwp_getusersfromrole.context.SetSubmitInitialConfig(context);
-         objwwp_getusersfromrole.initialize();
-         Submit( executePrivateCatch,objwwp_getusersfromrole);
+         this.AV10WWPSubscriptionRoleId = aP0_WWPSubscriptionRoleId;
+         this.AV9WWPUserExtendedIdCollection = new GxSimpleCollection<string>() ;
+         SubmitImpl();
          aP1_WWPUserExtendedIdCollection=this.AV9WWPUserExtendedIdCollection;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwp_getusersfromrole)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -92,21 +75,17 @@ namespace GeneXus.Programs.wwpbaseobjects {
             AV9WWPUserExtendedIdCollection.Add(AV11GAMUser.gxTpr_Guid, 0);
             AV15GXV1 = (int)(AV15GXV1+1);
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -121,12 +100,12 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       private int AV15GXV1 ;
       private string AV10WWPSubscriptionRoleId ;
-      private GxSimpleCollection<string> aP1_WWPUserExtendedIdCollection ;
       private GxSimpleCollection<string> AV9WWPUserExtendedIdCollection ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMUser> AV14GAMUserCollection ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV13GAMErrorCollection ;
-      private GeneXus.Programs.genexussecurity.SdtGAMUser AV11GAMUser ;
       private GeneXus.Programs.genexussecurity.SdtGAMRole AV12GAMRole ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV13GAMErrorCollection ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMUser> AV14GAMUserCollection ;
+      private GeneXus.Programs.genexussecurity.SdtGAMUser AV11GAMUser ;
+      private GxSimpleCollection<string> aP1_WWPUserExtendedIdCollection ;
    }
 
 }

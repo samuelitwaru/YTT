@@ -42,7 +42,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          this.AV8Text = aP0_Text;
          this.AV9SecureText = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_SecureText=this.AV9SecureText;
       }
 
@@ -55,30 +55,13 @@ namespace GeneXus.Programs.wwpbaseobjects {
       public void executeSubmit( string aP0_Text ,
                                  out string aP1_SecureText )
       {
-         wwp_export_securetext objwwp_export_securetext;
-         objwwp_export_securetext = new wwp_export_securetext();
-         objwwp_export_securetext.AV8Text = aP0_Text;
-         objwwp_export_securetext.AV9SecureText = "" ;
-         objwwp_export_securetext.context.SetSubmitInitialConfig(context);
-         objwwp_export_securetext.initialize();
-         Submit( executePrivateCatch,objwwp_export_securetext);
+         this.AV8Text = aP0_Text;
+         this.AV9SecureText = "" ;
+         SubmitImpl();
          aP1_SecureText=this.AV9SecureText;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwp_export_securetext)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -91,21 +74,17 @@ namespace GeneXus.Programs.wwpbaseobjects {
          {
             AV9SecureText = "'" + AV9SecureText;
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )

@@ -46,33 +46,16 @@ namespace GeneXus.Programs {
       {
          this.AV8isSwtiched = aP0_isSwtiched;
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
       public void executeSubmit( bool aP0_isSwtiched )
       {
-         switchtimetracker objswitchtimetracker;
-         objswitchtimetracker = new switchtimetracker();
-         objswitchtimetracker.AV8isSwtiched = aP0_isSwtiched;
-         objswitchtimetracker.context.SetSubmitInitialConfig(context);
-         objswitchtimetracker.initialize();
-         Submit( executePrivateCatch,objswitchtimetracker);
+         this.AV8isSwtiched = aP0_isSwtiched;
+         SubmitImpl();
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((switchtimetracker)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -119,13 +102,13 @@ namespace GeneXus.Programs {
             }
             /* End Insert */
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
          context.CommitDataStores("switchtimetracker",pr_default);
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -133,13 +116,8 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
-         scmdbuf = "";
          P00934_A160SiteSettingId = new long[1] ;
          Gx_emsg = "";
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.switchtimetracker__default(),
@@ -162,7 +140,6 @@ namespace GeneXus.Programs {
       private long A100CompanyId ;
       private long GXt_int1 ;
       private long A160SiteSettingId ;
-      private string scmdbuf ;
       private string Gx_emsg ;
       private bool AV8isSwtiched ;
       private bool A161IsLogHourOpen ;

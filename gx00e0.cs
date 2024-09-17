@@ -43,11 +43,11 @@ namespace GeneXus.Programs {
       public void execute( out long aP0_pCompanyId )
       {
          this.AV9pCompanyId = 0 ;
-         executePrivate();
+         ExecuteImpl();
          aP0_pCompanyId=this.AV9pCompanyId;
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -197,11 +197,8 @@ namespace GeneXus.Programs {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITWEB( ) ;
          if ( ! isAjaxCallMode( ) )
          {
@@ -232,7 +229,7 @@ namespace GeneXus.Programs {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override short ExecuteStartEvent( )
@@ -276,10 +273,10 @@ namespace GeneXus.Programs {
          CloseStyles();
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
@@ -642,7 +639,7 @@ namespace GeneXus.Programs {
          {
             if ( context.ExposeMetadata( ) )
             {
-               Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+               Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
             }
          }
          Form.Meta.addItem("description", "Selection List ", 0) ;
@@ -1118,9 +1115,7 @@ namespace GeneXus.Programs {
       protected void before_start_formulas( )
       {
          edtCompanyId_Enabled = 0;
-         AssignProp("", false, edtCompanyId_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtCompanyId_Enabled), 5, 0), !bGXsfl_44_Refreshing);
          edtCompanyName_Enabled = 0;
-         AssignProp("", false, edtCompanyName_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtCompanyName_Enabled), 5, 0), !bGXsfl_44_Refreshing);
          fix_multi_value_controls( ) ;
       }
 
@@ -1222,7 +1217,7 @@ namespace GeneXus.Programs {
          edtavLinkselection_gximage = "SelectRow";
          AV5LinkSelection = context.GetImagePath( "3914535b-0c03-44c5-9538-906a99cdd2bc", "", context.GetTheme( ));
          AssignAttri("", false, edtavLinkselection_Internalname, AV5LinkSelection);
-         AV11Linkselection_GXI = GXDbFile.PathToUrl( context.GetImagePath( "3914535b-0c03-44c5-9538-906a99cdd2bc", "", context.GetTheme( )));
+         AV11Linkselection_GXI = GXDbFile.PathToUrl( context.GetImagePath( "3914535b-0c03-44c5-9538-906a99cdd2bc", "", context.GetTheme( )), context);
          sendrow_442( ) ;
          GRID1_nCurrentRecord = (long)(GRID1_nCurrentRecord+1);
          if ( isFullAjaxMode( ) && ! bGXsfl_44_Refreshing )
@@ -1277,7 +1272,7 @@ namespace GeneXus.Programs {
          PA5L2( ) ;
          WS5L2( ) ;
          WE5L2( ) ;
-         this.cleanup();
+         cleanup();
          context.SetWrapped(false);
          context.GX_msglist = BackMsgLst;
          return "";
@@ -1298,7 +1293,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20247171957451", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202491613202449", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1314,7 +1309,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("gx00e0.js", "?20247171957451", false, true);
+         context.AddJavascriptSource("gx00e0.js", "?202491613202449", false, true);
          /* End function include_jscripts */
       }
 
@@ -1334,6 +1329,7 @@ namespace GeneXus.Programs {
 
       protected void sendrow_442( )
       {
+         sGXsfl_44_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_44_idx), 4, 0), 4, "0");
          SubsflControlProps_442( ) ;
          WB5L0( ) ;
          if ( ( 10 * 1 == 0 ) || ( nGXsfl_44_idx <= subGrid1_fnc_Recordsperpage( ) * 1 ) )
@@ -1605,43 +1601,32 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'GRID1_nFirstRecordOnPage'},{av:'GRID1_nEOF'},{av:'subGrid1_Rows',ctrl:'GRID1',prop:'Rows'},{av:'AV6cCompanyId',fld:'vCCOMPANYID',pic:'ZZZZZZZZZ9'},{av:'AV7cCompanyName',fld:'vCCOMPANYNAME',pic:''},{av:'AV8cCompanyLocationId',fld:'vCCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'}]");
-         setEventMetadata("REFRESH",",oparms:[]}");
-         setEventMetadata("'TOGGLE'","{handler:'E145L1',iparms:[{av:'divAdvancedcontainer_Class',ctrl:'ADVANCEDCONTAINER',prop:'Class'},{ctrl:'BTNTOGGLE',prop:'Class'}]");
-         setEventMetadata("'TOGGLE'",",oparms:[{av:'divAdvancedcontainer_Class',ctrl:'ADVANCEDCONTAINER',prop:'Class'},{ctrl:'BTNTOGGLE',prop:'Class'}]}");
-         setEventMetadata("LBLCOMPANYIDFILTER.CLICK","{handler:'E115L1',iparms:[{av:'divCompanyidfiltercontainer_Class',ctrl:'COMPANYIDFILTERCONTAINER',prop:'Class'}]");
-         setEventMetadata("LBLCOMPANYIDFILTER.CLICK",",oparms:[{av:'divCompanyidfiltercontainer_Class',ctrl:'COMPANYIDFILTERCONTAINER',prop:'Class'},{av:'edtavCcompanyid_Visible',ctrl:'vCCOMPANYID',prop:'Visible'}]}");
-         setEventMetadata("LBLCOMPANYNAMEFILTER.CLICK","{handler:'E125L1',iparms:[{av:'divCompanynamefiltercontainer_Class',ctrl:'COMPANYNAMEFILTERCONTAINER',prop:'Class'}]");
-         setEventMetadata("LBLCOMPANYNAMEFILTER.CLICK",",oparms:[{av:'divCompanynamefiltercontainer_Class',ctrl:'COMPANYNAMEFILTERCONTAINER',prop:'Class'},{av:'edtavCcompanyname_Visible',ctrl:'vCCOMPANYNAME',prop:'Visible'}]}");
-         setEventMetadata("LBLCOMPANYLOCATIONIDFILTER.CLICK","{handler:'E135L1',iparms:[{av:'divCompanylocationidfiltercontainer_Class',ctrl:'COMPANYLOCATIONIDFILTERCONTAINER',prop:'Class'}]");
-         setEventMetadata("LBLCOMPANYLOCATIONIDFILTER.CLICK",",oparms:[{av:'divCompanylocationidfiltercontainer_Class',ctrl:'COMPANYLOCATIONIDFILTERCONTAINER',prop:'Class'},{av:'edtavCcompanylocationid_Visible',ctrl:'vCCOMPANYLOCATIONID',prop:'Visible'}]}");
-         setEventMetadata("ENTER","{handler:'E175L2',iparms:[{av:'A100CompanyId',fld:'COMPANYID',pic:'ZZZZZZZZZ9',hsh:true}]");
-         setEventMetadata("ENTER",",oparms:[{av:'AV9pCompanyId',fld:'vPCOMPANYID',pic:'ZZZZZZZZZ9'}]}");
-         setEventMetadata("GRID1_FIRSTPAGE","{handler:'subgrid1_firstpage',iparms:[{av:'GRID1_nFirstRecordOnPage'},{av:'GRID1_nEOF'},{av:'subGrid1_Rows',ctrl:'GRID1',prop:'Rows'},{av:'AV6cCompanyId',fld:'vCCOMPANYID',pic:'ZZZZZZZZZ9'},{av:'AV7cCompanyName',fld:'vCCOMPANYNAME',pic:''},{av:'AV8cCompanyLocationId',fld:'vCCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'}]");
-         setEventMetadata("GRID1_FIRSTPAGE",",oparms:[]}");
-         setEventMetadata("GRID1_PREVPAGE","{handler:'subgrid1_previouspage',iparms:[{av:'GRID1_nFirstRecordOnPage'},{av:'GRID1_nEOF'},{av:'subGrid1_Rows',ctrl:'GRID1',prop:'Rows'},{av:'AV6cCompanyId',fld:'vCCOMPANYID',pic:'ZZZZZZZZZ9'},{av:'AV7cCompanyName',fld:'vCCOMPANYNAME',pic:''},{av:'AV8cCompanyLocationId',fld:'vCCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'}]");
-         setEventMetadata("GRID1_PREVPAGE",",oparms:[]}");
-         setEventMetadata("GRID1_NEXTPAGE","{handler:'subgrid1_nextpage',iparms:[{av:'GRID1_nFirstRecordOnPage'},{av:'GRID1_nEOF'},{av:'subGrid1_Rows',ctrl:'GRID1',prop:'Rows'},{av:'AV6cCompanyId',fld:'vCCOMPANYID',pic:'ZZZZZZZZZ9'},{av:'AV7cCompanyName',fld:'vCCOMPANYNAME',pic:''},{av:'AV8cCompanyLocationId',fld:'vCCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'}]");
-         setEventMetadata("GRID1_NEXTPAGE",",oparms:[]}");
-         setEventMetadata("GRID1_LASTPAGE","{handler:'subgrid1_lastpage',iparms:[{av:'GRID1_nFirstRecordOnPage'},{av:'GRID1_nEOF'},{av:'subGrid1_Rows',ctrl:'GRID1',prop:'Rows'},{av:'AV6cCompanyId',fld:'vCCOMPANYID',pic:'ZZZZZZZZZ9'},{av:'AV7cCompanyName',fld:'vCCOMPANYNAME',pic:''},{av:'AV8cCompanyLocationId',fld:'vCCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'}]");
-         setEventMetadata("GRID1_LASTPAGE",",oparms:[]}");
-         setEventMetadata("NULL","{handler:'Valid_Companyname',iparms:[]");
-         setEventMetadata("NULL",",oparms:[]}");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"GRID1_nFirstRecordOnPage"},{"av":"GRID1_nEOF"},{"av":"subGrid1_Rows","ctrl":"GRID1","prop":"Rows"},{"av":"AV6cCompanyId","fld":"vCCOMPANYID","pic":"ZZZZZZZZZ9"},{"av":"AV7cCompanyName","fld":"vCCOMPANYNAME"},{"av":"AV8cCompanyLocationId","fld":"vCCOMPANYLOCATIONID","pic":"ZZZZZZZZZ9"}]}""");
+         setEventMetadata("'TOGGLE'","""{"handler":"E145L1","iparms":[{"av":"divAdvancedcontainer_Class","ctrl":"ADVANCEDCONTAINER","prop":"Class"},{"ctrl":"BTNTOGGLE","prop":"Class"}]""");
+         setEventMetadata("'TOGGLE'",""","oparms":[{"av":"divAdvancedcontainer_Class","ctrl":"ADVANCEDCONTAINER","prop":"Class"},{"ctrl":"BTNTOGGLE","prop":"Class"}]}""");
+         setEventMetadata("LBLCOMPANYIDFILTER.CLICK","""{"handler":"E115L1","iparms":[{"av":"divCompanyidfiltercontainer_Class","ctrl":"COMPANYIDFILTERCONTAINER","prop":"Class"}]""");
+         setEventMetadata("LBLCOMPANYIDFILTER.CLICK",""","oparms":[{"av":"divCompanyidfiltercontainer_Class","ctrl":"COMPANYIDFILTERCONTAINER","prop":"Class"},{"av":"edtavCcompanyid_Visible","ctrl":"vCCOMPANYID","prop":"Visible"}]}""");
+         setEventMetadata("LBLCOMPANYNAMEFILTER.CLICK","""{"handler":"E125L1","iparms":[{"av":"divCompanynamefiltercontainer_Class","ctrl":"COMPANYNAMEFILTERCONTAINER","prop":"Class"}]""");
+         setEventMetadata("LBLCOMPANYNAMEFILTER.CLICK",""","oparms":[{"av":"divCompanynamefiltercontainer_Class","ctrl":"COMPANYNAMEFILTERCONTAINER","prop":"Class"},{"av":"edtavCcompanyname_Visible","ctrl":"vCCOMPANYNAME","prop":"Visible"}]}""");
+         setEventMetadata("LBLCOMPANYLOCATIONIDFILTER.CLICK","""{"handler":"E135L1","iparms":[{"av":"divCompanylocationidfiltercontainer_Class","ctrl":"COMPANYLOCATIONIDFILTERCONTAINER","prop":"Class"}]""");
+         setEventMetadata("LBLCOMPANYLOCATIONIDFILTER.CLICK",""","oparms":[{"av":"divCompanylocationidfiltercontainer_Class","ctrl":"COMPANYLOCATIONIDFILTERCONTAINER","prop":"Class"},{"av":"edtavCcompanylocationid_Visible","ctrl":"vCCOMPANYLOCATIONID","prop":"Visible"}]}""");
+         setEventMetadata("ENTER","""{"handler":"E175L2","iparms":[{"av":"A100CompanyId","fld":"COMPANYID","pic":"ZZZZZZZZZ9","hsh":true}]""");
+         setEventMetadata("ENTER",""","oparms":[{"av":"AV9pCompanyId","fld":"vPCOMPANYID","pic":"ZZZZZZZZZ9"}]}""");
+         setEventMetadata("GRID1_FIRSTPAGE","""{"handler":"subgrid1_firstpage","iparms":[{"av":"GRID1_nFirstRecordOnPage"},{"av":"GRID1_nEOF"},{"av":"subGrid1_Rows","ctrl":"GRID1","prop":"Rows"},{"av":"AV6cCompanyId","fld":"vCCOMPANYID","pic":"ZZZZZZZZZ9"},{"av":"AV7cCompanyName","fld":"vCCOMPANYNAME"},{"av":"AV8cCompanyLocationId","fld":"vCCOMPANYLOCATIONID","pic":"ZZZZZZZZZ9"}]}""");
+         setEventMetadata("GRID1_PREVPAGE","""{"handler":"subgrid1_previouspage","iparms":[{"av":"GRID1_nFirstRecordOnPage"},{"av":"GRID1_nEOF"},{"av":"subGrid1_Rows","ctrl":"GRID1","prop":"Rows"},{"av":"AV6cCompanyId","fld":"vCCOMPANYID","pic":"ZZZZZZZZZ9"},{"av":"AV7cCompanyName","fld":"vCCOMPANYNAME"},{"av":"AV8cCompanyLocationId","fld":"vCCOMPANYLOCATIONID","pic":"ZZZZZZZZZ9"}]}""");
+         setEventMetadata("GRID1_NEXTPAGE","""{"handler":"subgrid1_nextpage","iparms":[{"av":"GRID1_nFirstRecordOnPage"},{"av":"GRID1_nEOF"},{"av":"subGrid1_Rows","ctrl":"GRID1","prop":"Rows"},{"av":"AV6cCompanyId","fld":"vCCOMPANYID","pic":"ZZZZZZZZZ9"},{"av":"AV7cCompanyName","fld":"vCCOMPANYNAME"},{"av":"AV8cCompanyLocationId","fld":"vCCOMPANYLOCATIONID","pic":"ZZZZZZZZZ9"}]}""");
+         setEventMetadata("GRID1_LASTPAGE","""{"handler":"subgrid1_lastpage","iparms":[{"av":"GRID1_nFirstRecordOnPage"},{"av":"GRID1_nEOF"},{"av":"subGrid1_Rows","ctrl":"GRID1","prop":"Rows"},{"av":"AV6cCompanyId","fld":"vCCOMPANYID","pic":"ZZZZZZZZZ9"},{"av":"AV7cCompanyName","fld":"vCCOMPANYNAME"},{"av":"AV8cCompanyLocationId","fld":"vCCOMPANYLOCATIONID","pic":"ZZZZZZZZZ9"}]}""");
+         setEventMetadata("NULL","""{"handler":"Valid_Companyname","iparms":[]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -1673,7 +1658,6 @@ namespace GeneXus.Programs {
          AV5LinkSelection = "";
          AV11Linkselection_GXI = "";
          A101CompanyName = "";
-         scmdbuf = "";
          lV7cCompanyName = "";
          H005L2_A157CompanyLocationId = new long[1] ;
          H005L2_A101CompanyName = new string[] {""} ;
@@ -1703,7 +1687,6 @@ namespace GeneXus.Programs {
       private short GRID1_nEOF ;
       private short nGotPars ;
       private short GxWebError ;
-      private short initialized ;
       private short gxajaxcallmode ;
       private short wbEnd ;
       private short wbStart ;
@@ -1796,7 +1779,6 @@ namespace GeneXus.Programs {
       private string edtCompanyId_Internalname ;
       private string A101CompanyName ;
       private string edtCompanyName_Internalname ;
-      private string scmdbuf ;
       private string lV7cCompanyName ;
       private string AV10ADVANCED_LABEL_TEMPLATE ;
       private string edtavLinkselection_gximage ;
@@ -1824,6 +1806,7 @@ namespace GeneXus.Programs {
       private GXWebGrid Grid1Container ;
       private GXWebRow Grid1Row ;
       private GXWebColumn Grid1Column ;
+      private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private IDataStoreProvider pr_default ;
@@ -1834,7 +1817,6 @@ namespace GeneXus.Programs {
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
       private long aP0_pCompanyId ;
-      private GXWebForm Form ;
    }
 
    public class gx00e0__default : DataStoreHelperBase, IDataStoreHelper

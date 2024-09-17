@@ -313,6 +313,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
                }
                if ( StringUtil.StringSearch( GXSoapXMLReader.Name, "Body", 1) > 0 )
                {
+                  this.SetPrefixesFromReader( GXSoapXMLReader);
                   if (true) break;
                }
                GXSoapError = GXSoapXMLReader.Read();
@@ -418,7 +419,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          }
          if ( currSoapErr == 0 )
          {
-            executePrivate();
+            ExecutePrivate();
          }
          context.CloseConnections();
          sIncludeState = true;
@@ -477,7 +478,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
          this.AV11SDPLaunchpadOptions = aP0_SDPLaunchpadOptions;
          this.AV8SDPDoubleMenuOptions = new GXBaseCollection<GeneXus.Programs.workwithplus.nativemobile.SdtDoubleItemListData_DoubleItemListDataItem>( context, "DoubleItemListDataItem", "YTT_version4") ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_SDPDoubleMenuOptions=this.AV8SDPDoubleMenuOptions;
       }
 
@@ -490,30 +491,13 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
       public void executeSubmit( GXBaseCollection<GeneXus.Programs.workwithplus.nativemobile.SdtLaunchpadOptions_Option> aP0_SDPLaunchpadOptions ,
                                  out GXBaseCollection<GeneXus.Programs.workwithplus.nativemobile.SdtDoubleItemListData_DoubleItemListDataItem> aP1_SDPDoubleMenuOptions )
       {
-         wwpdoublemenufromlaunchpad objwwpdoublemenufromlaunchpad;
-         objwwpdoublemenufromlaunchpad = new wwpdoublemenufromlaunchpad();
-         objwwpdoublemenufromlaunchpad.AV11SDPLaunchpadOptions = aP0_SDPLaunchpadOptions;
-         objwwpdoublemenufromlaunchpad.AV8SDPDoubleMenuOptions = new GXBaseCollection<GeneXus.Programs.workwithplus.nativemobile.SdtDoubleItemListData_DoubleItemListDataItem>( context, "DoubleItemListDataItem", "YTT_version4") ;
-         objwwpdoublemenufromlaunchpad.context.SetSubmitInitialConfig(context);
-         objwwpdoublemenufromlaunchpad.initialize();
-         Submit( executePrivateCatch,objwwpdoublemenufromlaunchpad);
+         this.AV11SDPLaunchpadOptions = aP0_SDPLaunchpadOptions;
+         this.AV8SDPDoubleMenuOptions = new GXBaseCollection<GeneXus.Programs.workwithplus.nativemobile.SdtDoubleItemListData_DoubleItemListDataItem>( context, "DoubleItemListDataItem", "YTT_version4") ;
+         SubmitImpl();
          aP1_SDPDoubleMenuOptions=this.AV8SDPDoubleMenuOptions;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwpdoublemenufromlaunchpad)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -560,22 +544,18 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
             context.Redirect( context.wjLoc );
             context.wjLoc = "";
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          base.cleanup();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override bool UploadEnabled( )
@@ -613,12 +593,12 @@ namespace GeneXus.Programs.workwithplus.nativemobile {
       private GXXMLWriter GXSoapXMLWriter ;
       private GxSoapRequest GXSoapHTTPRequest ;
       private GxHttpResponse GXSoapHTTPResponse ;
-      private GXBaseCollection<GeneXus.Programs.workwithplus.nativemobile.SdtDoubleItemListData_DoubleItemListDataItem> aP1_SDPDoubleMenuOptions ;
-      private GXBaseCollection<GeneXus.Programs.workwithplus.nativemobile.SdtDoubleItemListData_DoubleItemListDataItem> AV8SDPDoubleMenuOptions ;
       private GXBaseCollection<GeneXus.Programs.workwithplus.nativemobile.SdtLaunchpadOptions_Option> AV11SDPLaunchpadOptions ;
+      private GXBaseCollection<GeneXus.Programs.workwithplus.nativemobile.SdtDoubleItemListData_DoubleItemListDataItem> AV8SDPDoubleMenuOptions ;
       private GeneXus.Programs.workwithplus.nativemobile.SdtDoubleItemListData_DoubleItemListDataItem AV10SDPDoubleMenuOptionsLastItem ;
-      private GeneXus.Programs.workwithplus.nativemobile.SdtDoubleItemListData_DoubleItemListDataItem AV9SDPDoubleMenuOptionsItem ;
       private GeneXus.Programs.workwithplus.nativemobile.SdtLaunchpadOptions_Option AV12SDPLaunchpadOptionsItem ;
+      private GeneXus.Programs.workwithplus.nativemobile.SdtDoubleItemListData_DoubleItemListDataItem AV9SDPDoubleMenuOptionsItem ;
+      private GXBaseCollection<GeneXus.Programs.workwithplus.nativemobile.SdtDoubleItemListData_DoubleItemListDataItem> aP1_SDPDoubleMenuOptions ;
    }
 
 }

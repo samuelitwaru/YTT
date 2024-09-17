@@ -49,7 +49,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          this.AV12FirstColumn = aP3_FirstColumn;
          this.AV11FilterDsc = aP4_FilterDsc;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_ExcelDocument=this.AV10ExcelDocument;
          aP2_CellRow=this.AV9CellRow;
       }
@@ -60,34 +60,17 @@ namespace GeneXus.Programs.wwpbaseobjects {
                                  short aP3_FirstColumn ,
                                  string aP4_FilterDsc )
       {
-         wwp_exportwritefilter objwwp_exportwritefilter;
-         objwwp_exportwritefilter = new wwp_exportwritefilter();
-         objwwp_exportwritefilter.AV10ExcelDocument = aP0_ExcelDocument;
-         objwwp_exportwritefilter.AV8AddRow = aP1_AddRow;
-         objwwp_exportwritefilter.AV9CellRow = aP2_CellRow;
-         objwwp_exportwritefilter.AV12FirstColumn = aP3_FirstColumn;
-         objwwp_exportwritefilter.AV11FilterDsc = aP4_FilterDsc;
-         objwwp_exportwritefilter.context.SetSubmitInitialConfig(context);
-         objwwp_exportwritefilter.initialize();
-         Submit( executePrivateCatch,objwwp_exportwritefilter);
+         this.AV10ExcelDocument = aP0_ExcelDocument;
+         this.AV8AddRow = aP1_AddRow;
+         this.AV9CellRow = aP2_CellRow;
+         this.AV12FirstColumn = aP3_FirstColumn;
+         this.AV11FilterDsc = aP4_FilterDsc;
+         SubmitImpl();
          aP0_ExcelDocument=this.AV10ExcelDocument;
          aP2_CellRow=this.AV9CellRow;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwp_exportwritefilter)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -99,21 +82,17 @@ namespace GeneXus.Programs.wwpbaseobjects {
          AV10ExcelDocument.get_Cells(AV9CellRow, AV12FirstColumn, 1, 1).Color = 3;
          AV10ExcelDocument.get_Cells(AV9CellRow, AV12FirstColumn, 1, 1).Text = AV11FilterDsc;
          AV10ExcelDocument.get_Cells(AV9CellRow, AV12FirstColumn+1, 1, 1).Italic = 1;
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -125,9 +104,9 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private short AV12FirstColumn ;
       private bool AV8AddRow ;
       private string AV11FilterDsc ;
+      private ExcelDocumentI AV10ExcelDocument ;
       private ExcelDocumentI aP0_ExcelDocument ;
       private short aP2_CellRow ;
-      private ExcelDocumentI AV10ExcelDocument ;
    }
 
 }

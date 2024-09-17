@@ -64,7 +64,7 @@ namespace GeneXus.Programs {
          this.AV16LogDate = aP0_LogDate;
          this.AV14WorkLogCollection = new GXBaseCollection<SdtWorkLogsSDT>( context, "WorkLogsSDT", "YTT_version4") ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_WorkLogCollection=this.AV14WorkLogCollection;
       }
 
@@ -77,30 +77,13 @@ namespace GeneXus.Programs {
       public void executeSubmit( DateTime aP0_LogDate ,
                                  out GXBaseCollection<SdtWorkLogsSDT> aP1_WorkLogCollection )
       {
-         sdgetloggedworkdays objsdgetloggedworkdays;
-         objsdgetloggedworkdays = new sdgetloggedworkdays();
-         objsdgetloggedworkdays.AV16LogDate = aP0_LogDate;
-         objsdgetloggedworkdays.AV14WorkLogCollection = new GXBaseCollection<SdtWorkLogsSDT>( context, "WorkLogsSDT", "YTT_version4") ;
-         objsdgetloggedworkdays.context.SetSubmitInitialConfig(context);
-         objsdgetloggedworkdays.initialize();
-         Submit( executePrivateCatch,objsdgetloggedworkdays);
+         this.AV16LogDate = aP0_LogDate;
+         this.AV14WorkLogCollection = new GXBaseCollection<SdtWorkLogsSDT>( context, "WorkLogsSDT", "YTT_version4") ;
+         SubmitImpl();
          aP1_WorkLogCollection=this.AV14WorkLogCollection;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((sdgetloggedworkdays)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -146,12 +129,12 @@ namespace GeneXus.Programs {
             pr_default.readNext(0);
          }
          pr_default.close(0);
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -159,14 +142,9 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
          AV14WorkLogCollection = new GXBaseCollection<SdtWorkLogsSDT>( context, "WorkLogsSDT", "YTT_version4");
-         scmdbuf = "";
          P00892_A106EmployeeId = new long[1] ;
          P00892_A119WorkHourLogDate = new DateTime[] {DateTime.MinValue} ;
          P00892_A107EmployeeFirstName = new string[] {""} ;
@@ -200,7 +178,6 @@ namespace GeneXus.Programs {
       private long A106EmployeeId ;
       private long A102ProjectId ;
       private long A118WorkHourLogId ;
-      private string scmdbuf ;
       private string A107EmployeeFirstName ;
       private string A103ProjectName ;
       private string AV17MinutesVar ;
@@ -210,6 +187,7 @@ namespace GeneXus.Programs {
       private string A120WorkHourLogDuration ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GXBaseCollection<SdtWorkLogsSDT> AV14WorkLogCollection ;
       private IDataStoreProvider pr_default ;
       private long[] P00892_A106EmployeeId ;
       private DateTime[] P00892_A119WorkHourLogDate ;
@@ -221,9 +199,8 @@ namespace GeneXus.Programs {
       private short[] P00892_A121WorkHourLogHour ;
       private short[] P00892_A122WorkHourLogMinute ;
       private long[] P00892_A118WorkHourLogId ;
-      private GXBaseCollection<SdtWorkLogsSDT> aP1_WorkLogCollection ;
-      private GXBaseCollection<SdtWorkLogsSDT> AV14WorkLogCollection ;
       private SdtWorkLogsSDT AV15WorkLogItem ;
+      private GXBaseCollection<SdtWorkLogsSDT> aP1_WorkLogCollection ;
    }
 
    public class sdgetloggedworkdays__default : DataStoreHelperBase, IDataStoreHelper

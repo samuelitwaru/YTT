@@ -3697,7 +3697,7 @@ function DashboardViewer($) {
 		fakeQV.AllowElementsOrderChange = false;
 		fakeQV.UseRecordsetCache = false;
 		fakeQV.ReturnSampleData = filter.ReturnSampleData;
-		fakeQV.ParentPanel = "Default";
+		fakeQV.ParentPanel = "DashboardEditor";
 		fakeQV.ApplicationNamespace = this.ApplicationNamespace;
 		return fakeQV;
 	}

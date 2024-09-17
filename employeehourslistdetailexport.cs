@@ -45,7 +45,7 @@ namespace GeneXus.Programs {
          this.AV12Filename = "" ;
          this.AV13ErrorMessage = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_Filename=this.AV12Filename;
          aP2_ErrorMessage=this.AV13ErrorMessage;
       }
@@ -61,32 +61,15 @@ namespace GeneXus.Programs {
                                  out string aP1_Filename ,
                                  out string aP2_ErrorMessage )
       {
-         employeehourslistdetailexport objemployeehourslistdetailexport;
-         objemployeehourslistdetailexport = new employeehourslistdetailexport();
-         objemployeehourslistdetailexport.AV23SDTEmployeeHours = aP0_SDTEmployeeHours;
-         objemployeehourslistdetailexport.AV12Filename = "" ;
-         objemployeehourslistdetailexport.AV13ErrorMessage = "" ;
-         objemployeehourslistdetailexport.context.SetSubmitInitialConfig(context);
-         objemployeehourslistdetailexport.initialize();
-         Submit( executePrivateCatch,objemployeehourslistdetailexport);
+         this.AV23SDTEmployeeHours = aP0_SDTEmployeeHours;
+         this.AV12Filename = "" ;
+         this.AV13ErrorMessage = "" ;
+         SubmitImpl();
          aP1_Filename=this.AV12Filename;
          aP2_ErrorMessage=this.AV13ErrorMessage;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((employeehourslistdetailexport)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -95,7 +78,7 @@ namespace GeneXus.Programs {
          S111 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          AV14CellRow = 1;
@@ -104,38 +87,38 @@ namespace GeneXus.Programs {
          S191 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          /* Execute user subroutine: 'ATTRIBUTESSECURITYCODE' */
          S171 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          /* Execute user subroutine: 'WRITECOLUMNTITLES' */
          S131 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          /* Execute user subroutine: 'WRITEDATA' */
          S141 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
          /* Execute user subroutine: 'CLOSEDOCUMENT' */
          S181 ();
          if ( returnInSub )
          {
-            this.cleanup();
+            cleanup();
             if (true) return;
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void S111( )
@@ -278,16 +261,12 @@ namespace GeneXus.Programs {
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -315,14 +294,14 @@ namespace GeneXus.Programs {
       private bool AV36IsAuthorizedSDTEmployeeHours ;
       private string AV12Filename ;
       private string AV13ErrorMessage ;
-      private string aP1_Filename ;
-      private string aP2_ErrorMessage ;
       private IGxSession AV19Session ;
       private ExcelDocumentI AV11ExcelDocument ;
       private GXBaseCollection<SdtSDTEmployeeHours_SDTEmployeeHoursItem> AV23SDTEmployeeHours ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV9WWPContext ;
       private SdtSDTEmployeeHours_SDTEmployeeHoursItem AV17SDTEmployeeHoursItem ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState AV21GridState ;
+      private string aP1_Filename ;
+      private string aP2_ErrorMessage ;
    }
 
 }

@@ -24,20 +24,15 @@ namespace GeneXus.Programs.workwithplus {
    {
       public static int Main( string[] args )
       {
-         try
-         {
-            GeneXus.Configuration.Config.ParseArgs(ref args);
-            return new workwithplus.awwp_parameter_dataprovider().executeCmdLine(args); ;
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-            return 1 ;
-         }
+         return new workwithplus.awwp_parameter_dataprovider().MainImpl(args); ;
       }
 
       public int executeCmdLine( string[] args )
+      {
+         return ExecuteCmdLine(args); ;
+      }
+
+      protected override int ExecuteCmdLine( string[] args )
       {
          GXBCCollection<GeneXus.Programs.workwithplus.SdtWWP_Parameter> aP0_Gxm2rootcol = new GXBCCollection<GeneXus.Programs.workwithplus.SdtWWP_Parameter>()  ;
          execute(out aP0_Gxm2rootcol);
@@ -78,7 +73,7 @@ namespace GeneXus.Programs.workwithplus {
       {
          this.Gxm2rootcol = new GXBCCollection<GeneXus.Programs.workwithplus.SdtWWP_Parameter>( context, "WWP_Parameter", "YTT_version4") ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_Gxm2rootcol=this.Gxm2rootcol;
       }
 
@@ -90,29 +85,12 @@ namespace GeneXus.Programs.workwithplus {
 
       public void executeSubmit( out GXBCCollection<GeneXus.Programs.workwithplus.SdtWWP_Parameter> aP0_Gxm2rootcol )
       {
-         awwp_parameter_dataprovider objawwp_parameter_dataprovider;
-         objawwp_parameter_dataprovider = new awwp_parameter_dataprovider();
-         objawwp_parameter_dataprovider.Gxm2rootcol = new GXBCCollection<GeneXus.Programs.workwithplus.SdtWWP_Parameter>( context, "WWP_Parameter", "YTT_version4") ;
-         objawwp_parameter_dataprovider.context.SetSubmitInitialConfig(context);
-         objawwp_parameter_dataprovider.initialize();
-         Submit( executePrivateCatch,objawwp_parameter_dataprovider);
+         this.Gxm2rootcol = new GXBCCollection<GeneXus.Programs.workwithplus.SdtWWP_Parameter>( context, "WWP_Parameter", "YTT_version4") ;
+         SubmitImpl();
          aP0_Gxm2rootcol=this.Gxm2rootcol;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((awwp_parameter_dataprovider)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -165,21 +143,17 @@ namespace GeneXus.Programs.workwithplus {
          Gxm1wwp_parameter.gxTpr_Wwpparameterdescription = "Application city and country";
          Gxm1wwp_parameter.gxTpr_Wwpparametervalue = "Paris, France";
          Gxm1wwp_parameter.gxTpr_Wwpparameterdisabledelete = true;
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -188,9 +162,9 @@ namespace GeneXus.Programs.workwithplus {
          /* GeneXus formulas. */
       }
 
-      private GXBCCollection<GeneXus.Programs.workwithplus.SdtWWP_Parameter> aP0_Gxm2rootcol ;
       private GXBCCollection<GeneXus.Programs.workwithplus.SdtWWP_Parameter> Gxm2rootcol ;
       private GeneXus.Programs.workwithplus.SdtWWP_Parameter Gxm1wwp_parameter ;
+      private GXBCCollection<GeneXus.Programs.workwithplus.SdtWWP_Parameter> aP0_Gxm2rootcol ;
    }
 
 }

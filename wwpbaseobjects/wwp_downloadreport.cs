@@ -39,7 +39,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          }
          if ( GxWebError == 0 )
          {
-            executePrivate();
+            ExecutePrivate();
          }
          cleanup();
       }
@@ -61,37 +61,21 @@ namespace GeneXus.Programs.wwpbaseobjects {
       public void execute( )
       {
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
       public void executeSubmit( )
       {
-         wwp_downloadreport objwwp_downloadreport;
-         objwwp_downloadreport = new wwp_downloadreport();
-         objwwp_downloadreport.context.SetSubmitInitialConfig(context);
-         objwwp_downloadreport.initialize();
-         Submit( executePrivateCatch,objwwp_downloadreport);
+         SubmitImpl();
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwp_downloadreport)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
          AV9fileName = AV12webSession.Get("WWPExportFilePath");
          AV11name = AV12webSession.Get("WWPExportFileName");
+         new logtofile(context ).execute(  AV9fileName+" : "+AV11name) ;
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV9fileName)) && ! String.IsNullOrEmpty(StringUtil.RTrim( AV11name)) )
          {
             AV12webSession.Remove("WWPExportFilePath");
@@ -123,22 +107,18 @@ namespace GeneXus.Programs.wwpbaseobjects {
             context.Redirect( context.wjLoc );
             context.wjLoc = "";
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          base.cleanup();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )

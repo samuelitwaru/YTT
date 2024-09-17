@@ -162,6 +162,20 @@ namespace GeneXus.Programs {
 
       }
 
+      [XmlIgnore]
+      private static GXTypeInfo _typeProps;
+      protected override GXTypeInfo TypeInfo
+      {
+         get {
+            return _typeProps ;
+         }
+
+         set {
+            _typeProps = value ;
+         }
+
+      }
+
       public void initialize( )
       {
          gxTv_SdtPasswordChangePanel_Level_DetailSdt_Oldpassword = "";

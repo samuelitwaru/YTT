@@ -113,7 +113,6 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
          }
          if ( AnyError == 0 )
          {
-            IsConfirmed = 1;
          }
       }
 
@@ -196,7 +195,6 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
 
       protected void CheckExtendedTable044( )
       {
-         nIsDirty_4 = 0;
          standaloneModal( ) ;
          /* Using cursor BC00044 */
          pr_default.execute(2, new Object[] {A23WWPNotificationDefinitionId});
@@ -315,7 +313,6 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
       protected void insert_Check( )
       {
          CONFIRM_040( ) ;
-         IsConfirmed = 0;
       }
 
       protected void update_Check( )
@@ -553,7 +550,6 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
          else
          {
          }
-         IsModified = 0;
          if ( AnyError != 0 )
          {
             context.wjLoc = "";
@@ -857,7 +853,6 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
 
       protected void SaveImpl( )
       {
-         nKeyPressed = 1;
          GetKey044( ) ;
          if ( IsIns( ) )
          {
@@ -935,7 +930,6 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars4( bcwwpbaseobjects_subscriptions_WWP_Subscription, 1) ;
          SaveImpl( ) ;
          VarsToRow4( bcwwpbaseobjects_subscriptions_WWP_Subscription) ;
@@ -949,7 +943,6 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars4( bcwwpbaseobjects_subscriptions_WWP_Subscription, 1) ;
          Gx_mode = "INS";
          /* Insert record */
@@ -995,7 +988,6 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars4( bcwwpbaseobjects_subscriptions_WWP_Subscription, 1) ;
          UpdateImpl( ) ;
          context.GX_msglist = BackMsgLst;
@@ -1008,7 +1000,6 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
          context.GX_msglist = LclMsgLst;
          AnyError = 0;
          context.GX_msglist.removeAllItems();
-         IsConfirmed = 1;
          RowToVars4( bcwwpbaseobjects_subscriptions_WWP_Subscription, 1) ;
          Gx_mode = "INS";
          /* Insert record */
@@ -1042,8 +1033,6 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
          AnyError = 0;
          context.GX_msglist.removeAllItems();
          RowToVars4( bcwwpbaseobjects_subscriptions_WWP_Subscription, 0) ;
-         nKeyPressed = 3;
-         IsConfirmed = 0;
          GetKey044( ) ;
          if ( RcdFound4 == 1 )
          {
@@ -1159,7 +1148,6 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
 
       public void ForceCommitOnExit( )
       {
-         mustCommit = true;
          return  ;
       }
 
@@ -1216,15 +1204,14 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
       }
 
-      protected void CloseOpenCursors( )
+      protected override void CloseCursors( )
       {
          pr_default.close(1);
          pr_default.close(11);
@@ -1234,9 +1221,6 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
 
       public override void initialize( )
       {
-         scmdbuf = "";
-         PreviousTooltip = "";
-         PreviousCaption = "";
          Gx_mode = "";
          endTrnMsgTxt = "";
          endTrnMsgCod = "";
@@ -1368,13 +1352,8 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
          standaloneNotModal( ) ;
       }
 
-      private short IsConfirmed ;
-      private short IsModified ;
       private short AnyError ;
-      private short nKeyPressed ;
-      private short GX_JID ;
       private short RcdFound4 ;
-      private short nIsDirty_4 ;
       private int trnEnded ;
       private long Z25WWPSubscriptionId ;
       private long A25WWPSubscriptionId ;
@@ -1382,9 +1361,6 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
       private long A23WWPNotificationDefinitionId ;
       private long Z20WWPEntityId ;
       private long A20WWPEntityId ;
-      private string scmdbuf ;
-      private string PreviousTooltip ;
-      private string PreviousCaption ;
       private string Gx_mode ;
       private string endTrnMsgTxt ;
       private string endTrnMsgCod ;
@@ -1398,7 +1374,6 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
       private bool n19WWPSubscriptionRoleId ;
       private bool n7WWPUserExtendedId ;
       private bool Gx_longc ;
-      private bool mustCommit ;
       private string Z26WWPSubscriptionEntityRecordId ;
       private string A26WWPSubscriptionEntityRecordId ;
       private string Z28WWPSubscriptionEntityRecordDes ;
@@ -1409,7 +1384,6 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
       private string A8WWPUserExtendedFullName ;
       private string Z21WWPEntityName ;
       private string A21WWPEntityName ;
-      private GeneXus.Programs.wwpbaseobjects.subscriptions.SdtWWP_Subscription bcwwpbaseobjects_subscriptions_WWP_Subscription ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private IDataStoreProvider pr_default ;
@@ -1467,6 +1441,7 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
       private long[] BC000416_A23WWPNotificationDefinitionId ;
       private string[] BC000416_A7WWPUserExtendedId ;
       private bool[] BC000416_n7WWPUserExtendedId ;
+      private GeneXus.Programs.wwpbaseobjects.subscriptions.SdtWWP_Subscription bcwwpbaseobjects_subscriptions_WWP_Subscription ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
       private IDataStoreProvider pr_gam ;
@@ -1533,32 +1508,32 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
   {
      if ( def == null )
      {
-        Object[] prmBC00047;
-        prmBC00047 = new Object[] {
-        new ParDef("WWPSubscriptionId",GXType.Int64,10,0)
-        };
-        Object[] prmBC00044;
-        prmBC00044 = new Object[] {
-        new ParDef("WWPNotificationDefinitionId",GXType.Int64,10,0)
-        };
-        Object[] prmBC00046;
-        prmBC00046 = new Object[] {
-        new ParDef("WWPEntityId",GXType.Int64,10,0)
-        };
-        Object[] prmBC00045;
-        prmBC00045 = new Object[] {
-        new ParDef("WWPUserExtendedId",GXType.Char,40,0){Nullable=true}
-        };
-        Object[] prmBC00048;
-        prmBC00048 = new Object[] {
+        Object[] prmBC00042;
+        prmBC00042 = new Object[] {
         new ParDef("WWPSubscriptionId",GXType.Int64,10,0)
         };
         Object[] prmBC00043;
         prmBC00043 = new Object[] {
         new ParDef("WWPSubscriptionId",GXType.Int64,10,0)
         };
-        Object[] prmBC00042;
-        prmBC00042 = new Object[] {
+        Object[] prmBC00044;
+        prmBC00044 = new Object[] {
+        new ParDef("WWPNotificationDefinitionId",GXType.Int64,10,0)
+        };
+        Object[] prmBC00045;
+        prmBC00045 = new Object[] {
+        new ParDef("WWPUserExtendedId",GXType.Char,40,0){Nullable=true}
+        };
+        Object[] prmBC00046;
+        prmBC00046 = new Object[] {
+        new ParDef("WWPEntityId",GXType.Int64,10,0)
+        };
+        Object[] prmBC00047;
+        prmBC00047 = new Object[] {
+        new ParDef("WWPSubscriptionId",GXType.Int64,10,0)
+        };
+        Object[] prmBC00048;
+        prmBC00048 = new Object[] {
         new ParDef("WWPSubscriptionId",GXType.Int64,10,0)
         };
         Object[] prmBC00049;

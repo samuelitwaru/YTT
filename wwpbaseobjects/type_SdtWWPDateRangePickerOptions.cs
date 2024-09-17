@@ -1,7 +1,7 @@
 /*
 				   File: type_SdtWWPDateRangePickerOptions
 			Description: WWPDateRangePickerOptions
-				 Author: Nemo 🐠 for C# (.NET) version 18.0.6.177934
+				 Author: Nemo 🐠 for C# (.NET) version 18.0.10.184260
 		   Program type: Callable routine
 			  Main DBMS: 
 */
@@ -478,6 +478,14 @@ namespace GeneXus.Programs.wwpbaseobjects
 
 		#endregion
 
+		#region Static Type Properties
+
+		[XmlIgnore]
+		private static GXTypeInfo _typeProps;
+		protected override GXTypeInfo TypeInfo { get { return _typeProps; } set { _typeProps = value; } }
+
+		#endregion
+
 		#region Initialization
 
 		public void initialize( )
@@ -560,7 +568,7 @@ namespace GeneXus.Programs.wwpbaseobjects
 		#endregion
 	}
 	#region Rest interface
-	[GxUnWrappedJson()]
+	[GxJsonSerialization("default")]
 	[DataContract(Name=@"WWPDateRangePickerOptions", Namespace="YTT_version4")]
 	public class SdtWWPDateRangePickerOptions_RESTInterface : GxGenericCollectionItem<SdtWWPDateRangePickerOptions>, System.Web.SessionState.IRequiresSessionState
 	{
@@ -590,13 +598,13 @@ namespace GeneXus.Programs.wwpbaseobjects
 		{
 			get { 
 				if (sdt.ShouldSerializegxTpr_Mindate_Json())
-					return DateTimeUtil.TToC2( sdt.gxTpr_Mindate);
+					return DateTimeUtil.TToC2( sdt.gxTpr_Mindate,context);
 				else
 					return null;
 
 			}
 			set { 
-				sdt.gxTpr_Mindate = DateTimeUtil.CToT2(value);
+				sdt.gxTpr_Mindate = DateTimeUtil.CToT2(value,context);
 			}
 		}
 
@@ -605,13 +613,13 @@ namespace GeneXus.Programs.wwpbaseobjects
 		{
 			get { 
 				if (sdt.ShouldSerializegxTpr_Maxdate_Json())
-					return DateTimeUtil.TToC2( sdt.gxTpr_Maxdate);
+					return DateTimeUtil.TToC2( sdt.gxTpr_Maxdate,context);
 				else
 					return null;
 
 			}
 			set { 
-				sdt.gxTpr_Maxdate = DateTimeUtil.CToT2(value);
+				sdt.gxTpr_Maxdate = DateTimeUtil.CToT2(value,context);
 			}
 		}
 

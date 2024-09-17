@@ -40,7 +40,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       {
          this.AV8Context = new GeneXus.Programs.wwpbaseobjects.SdtWWPContext(context) ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_Context=this.AV8Context;
       }
 
@@ -52,48 +52,27 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       public void executeSubmit( out GeneXus.Programs.wwpbaseobjects.SdtWWPContext aP0_Context )
       {
-         loadwwpcontext objloadwwpcontext;
-         objloadwwpcontext = new loadwwpcontext();
-         objloadwwpcontext.AV8Context = new GeneXus.Programs.wwpbaseobjects.SdtWWPContext(context) ;
-         objloadwwpcontext.context.SetSubmitInitialConfig(context);
-         objloadwwpcontext.initialize();
-         Submit( executePrivateCatch,objloadwwpcontext);
+         this.AV8Context = new GeneXus.Programs.wwpbaseobjects.SdtWWPContext(context) ;
+         SubmitImpl();
          aP0_Context=this.AV8Context;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((loadwwpcontext)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
          AV8Context.FromXml(AV9Session.Get("wwpcontext"), null, "", "");
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -104,8 +83,8 @@ namespace GeneXus.Programs.wwpbaseobjects {
       }
 
       private IGxSession AV9Session ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext aP0_Context ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV8Context ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPContext aP0_Context ;
    }
 
 }

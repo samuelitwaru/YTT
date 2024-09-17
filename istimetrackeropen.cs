@@ -70,7 +70,7 @@ namespace GeneXus.Programs {
       {
          this.AV8isOpen = false ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP0_isOpen=this.AV8isOpen;
       }
 
@@ -82,29 +82,12 @@ namespace GeneXus.Programs {
 
       public void executeSubmit( out bool aP0_isOpen )
       {
-         istimetrackeropen objistimetrackeropen;
-         objistimetrackeropen = new istimetrackeropen();
-         objistimetrackeropen.AV8isOpen = false ;
-         objistimetrackeropen.context.SetSubmitInitialConfig(context);
-         objistimetrackeropen.initialize();
-         Submit( executePrivateCatch,objistimetrackeropen);
+         this.AV8isOpen = false ;
+         SubmitImpl();
          aP0_isOpen=this.AV8isOpen;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((istimetrackeropen)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -120,12 +103,12 @@ namespace GeneXus.Programs {
             pr_default.readNext(0);
          }
          pr_default.close(0);
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -133,13 +116,8 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
-         scmdbuf = "";
          P00942_A100CompanyId = new long[1] ;
          P00942_A161IsLogHourOpen = new bool[] {false} ;
          P00942_A160SiteSettingId = new long[1] ;
@@ -156,7 +134,6 @@ namespace GeneXus.Programs {
       private long AV10Udparg1 ;
       private long A100CompanyId ;
       private long A160SiteSettingId ;
-      private string scmdbuf ;
       private bool AV8isOpen ;
       private bool A161IsLogHourOpen ;
       private IGxDataStore dsGAM ;

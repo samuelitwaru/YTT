@@ -110,7 +110,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          {
             if ( context.ExposeMetadata( ) )
             {
-               Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+               Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
             }
          }
          Form.Meta.addItem("description", "WWP_Entity", 0) ;
@@ -153,10 +153,10 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       public void execute( )
       {
-         executePrivate();
+         ExecuteImpl();
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -192,11 +192,8 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITENV( ) ;
          INITTRN( ) ;
          if ( ( GxWebError == 0 ) && ! isAjaxCallMode( ) )
@@ -228,7 +225,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void fix_multi_value_controls( )
@@ -716,7 +713,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       protected void CheckExtendedTable033( )
       {
-         nIsDirty_3 = 0;
          Gx_BScreen = 1;
          standaloneModal( ) ;
       }
@@ -960,7 +956,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          {
             getByPrimaryKey( ) ;
          }
-         CloseOpenCursors();
+         CloseCursors();
       }
 
       protected void btn_get( )
@@ -1463,10 +1459,10 @@ namespace GeneXus.Programs.wwpbaseobjects {
          CloseStyles();
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
@@ -1619,7 +1615,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202481416561458", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202491613124230", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1635,7 +1631,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wwpbaseobjects/wwp_entity.js", "?202481416561459", false, true);
+         context.AddJavascriptSource("wwpbaseobjects/wwp_entity.js", "?202491613124230", false, true);
          /* End function include_jscripts */
       }
 
@@ -1759,26 +1755,23 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("ENTER","{handler:'UserMainFullajax',iparms:[{postForm:true}]");
-         setEventMetadata("ENTER",",oparms:[]}");
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[]");
-         setEventMetadata("REFRESH",",oparms:[]}");
-         setEventMetadata("VALID_WWPENTITYID","{handler:'Valid_Wwpentityid',iparms:[{av:'A20WWPEntityId',fld:'WWPENTITYID',pic:'ZZZZZZZZZ9'},{av:'Gx_mode',fld:'vMODE',pic:'@!'}]");
-         setEventMetadata("VALID_WWPENTITYID",",oparms:[{av:'A21WWPEntityName',fld:'WWPENTITYNAME',pic:''},{av:'Gx_mode',fld:'vMODE',pic:'@!'},{av:'Z20WWPEntityId'},{av:'Z21WWPEntityName'},{ctrl:'BTN_DELETE',prop:'Enabled'},{ctrl:'BTN_ENTER',prop:'Enabled'}]}");
+         setEventMetadata("ENTER","""{"handler":"UserMainFullajax","iparms":[{"postForm":true}]}""");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[]}""");
+         setEventMetadata("VALID_WWPENTITYID","""{"handler":"Valid_Wwpentityid","iparms":[{"av":"A20WWPEntityId","fld":"WWPENTITYID","pic":"ZZZZZZZZZ9"},{"av":"Gx_mode","fld":"vMODE","pic":"@!"}]""");
+         setEventMetadata("VALID_WWPENTITYID",""","oparms":[{"av":"A21WWPEntityName","fld":"WWPENTITYNAME"},{"av":"Gx_mode","fld":"vMODE","pic":"@!"},{"av":"Z20WWPEntityId"},{"av":"Z21WWPEntityName"},{"ctrl":"BTN_DELETE","prop":"Enabled"},{"ctrl":"BTN_ENTER","prop":"Enabled"}]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
       }
 
-      protected void CloseOpenCursors( )
+      protected override void CloseCursors( )
       {
          pr_default.close(1);
       }
@@ -1787,7 +1780,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
       {
          sPrefix = "";
          Z21WWPEntityName = "";
-         scmdbuf = "";
          gxfirstwebparm = "";
          gxfirstwebparm_bkp = "";
          GXKey = "";
@@ -1877,14 +1869,11 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       private short GxWebError ;
       private short gxcookieaux ;
-      private short IsConfirmed ;
-      private short IsModified ;
       private short AnyError ;
+      private short IsModified ;
+      private short IsConfirmed ;
       private short nKeyPressed ;
-      private short initialized ;
-      private short GX_JID ;
       private short RcdFound3 ;
-      private short nIsDirty_3 ;
       private short Gx_BScreen ;
       private short gxajaxcallmode ;
       private int trnEnded ;
@@ -1905,7 +1894,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private long A20WWPEntityId ;
       private long ZZ20WWPEntityId ;
       private string sPrefix ;
-      private string scmdbuf ;
       private string gxfirstwebparm ;
       private string gxfirstwebparm_bkp ;
       private string GXKey ;
@@ -1958,6 +1946,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private string Z21WWPEntityName ;
       private string A21WWPEntityName ;
       private string ZZ21WWPEntityName ;
+      private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private IDataStoreProvider pr_default ;
@@ -1974,7 +1963,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private long[] T000312_A23WWPNotificationDefinitionId ;
       private long[] T000313_A20WWPEntityId ;
       private IDataStoreProvider pr_gam ;
-      private GXWebForm Form ;
    }
 
    public class wwp_entity__gam : DataStoreHelperBase, IDataStoreHelper
@@ -2035,6 +2023,14 @@ namespace GeneXus.Programs.wwpbaseobjects {
   {
      if ( def == null )
      {
+        Object[] prmT00032;
+        prmT00032 = new Object[] {
+        new ParDef("WWPEntityId",GXType.Int64,10,0)
+        };
+        Object[] prmT00033;
+        prmT00033 = new Object[] {
+        new ParDef("WWPEntityId",GXType.Int64,10,0)
+        };
         Object[] prmT00034;
         prmT00034 = new Object[] {
         new ParDef("WWPEntityId",GXType.Int64,10,0)
@@ -2043,20 +2039,12 @@ namespace GeneXus.Programs.wwpbaseobjects {
         prmT00035 = new Object[] {
         new ParDef("WWPEntityId",GXType.Int64,10,0)
         };
-        Object[] prmT00033;
-        prmT00033 = new Object[] {
-        new ParDef("WWPEntityId",GXType.Int64,10,0)
-        };
         Object[] prmT00036;
         prmT00036 = new Object[] {
         new ParDef("WWPEntityId",GXType.Int64,10,0)
         };
         Object[] prmT00037;
         prmT00037 = new Object[] {
-        new ParDef("WWPEntityId",GXType.Int64,10,0)
-        };
-        Object[] prmT00032;
-        prmT00032 = new Object[] {
         new ParDef("WWPEntityId",GXType.Int64,10,0)
         };
         Object[] prmT00038;

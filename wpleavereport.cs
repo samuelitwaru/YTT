@@ -43,10 +43,10 @@ namespace GeneXus.Programs {
 
       public void execute( )
       {
-         executePrivate();
+         ExecuteImpl();
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -200,11 +200,8 @@ namespace GeneXus.Programs {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITWEB( ) ;
          if ( ! isAjaxCallMode( ) )
          {
@@ -235,7 +232,7 @@ namespace GeneXus.Programs {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override short ExecuteStartEvent( )
@@ -279,18 +276,18 @@ namespace GeneXus.Programs {
          CloseStyles();
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
             enableOutput();
          }
-         context.AddJavascriptSource("calendar.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("calendar-setup.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("calendar-en.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("calendar.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("calendar-setup.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("calendar-en.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -671,7 +668,7 @@ namespace GeneXus.Programs {
 
       public override string GetPgmdesc( )
       {
-         return "Reports" ;
+         return "" ;
       }
 
       protected void WB2Z0( )
@@ -1119,10 +1116,10 @@ namespace GeneXus.Programs {
          {
             if ( context.ExposeMetadata( ) )
             {
-               Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+               Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
             }
          }
-         Form.Meta.addItem("description", "Reports", 0) ;
+         Form.Meta.addItem("description", "", 0) ;
          context.wjLoc = "";
          context.nUserReturn = 0;
          context.wbHandled = 0;
@@ -1170,54 +1167,63 @@ namespace GeneXus.Programs {
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
+                              /* Execute user event: Ddo_managefilters.Onoptionclicked */
                               E112Z2 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "COMBO_PERIODICCATEGORY.ONOPTIONCLICKED") == 0 )
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
+                              /* Execute user event: Combo_periodiccategory.Onoptionclicked */
                               E122Z2 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "COMBO_EMPLOYEEID.ONOPTIONCLICKED") == 0 )
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
+                              /* Execute user event: Combo_employeeid.Onoptionclicked */
                               E132Z2 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "COMBO_PROJECTID.ONOPTIONCLICKED") == 0 )
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
+                              /* Execute user event: Combo_projectid.Onoptionclicked */
                               E142Z2 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "GRIDPAGINATIONBAR.CHANGEPAGE") == 0 )
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
+                              /* Execute user event: Gridpaginationbar.Changepage */
                               E152Z2 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "GRIDPAGINATIONBAR.CHANGEROWSPERPAGE") == 0 )
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
+                              /* Execute user event: Gridpaginationbar.Changerowsperpage */
                               E162Z2 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "DDO_AGEXPORT.ONOPTIONCLICKED") == 0 )
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
+                              /* Execute user event: Ddo_agexport.Onoptionclicked */
                               E172Z2 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "DATE_RANGEPICKER.DATERANGECHANGED") == 0 )
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
+                              /* Execute user event: Date_rangepicker.Daterangechanged */
                               E182Z2 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED") == 0 )
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
+                              /* Execute user event: Ddo_gridcolumnsselector.Oncolumnschanged */
                               E192Z2 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "LSCR") == 0 )
@@ -1265,6 +1271,7 @@ namespace GeneXus.Programs {
                                  {
                                     context.wbHandled = 1;
                                     dynload_actions( ) ;
+                                    /* Execute user event: Grid.Load */
                                     E222Z2 ();
                                  }
                                  else if ( StringUtil.StrCmp(sEvt, "VDETAILWEBCOMPONENT.CLICK") == 0 )
@@ -1451,23 +1458,14 @@ namespace GeneXus.Programs {
          AV72Pgmname = "WPLeaveReport";
          Gx_date = DateTimeUtil.Today( context);
          edtavSdtleavereport_periodcollection__label_Enabled = 0;
-         AssignProp("", false, edtavSdtleavereport_periodcollection__label_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavSdtleavereport_periodcollection__label_Enabled), 5, 0), !bGXsfl_77_Refreshing);
          edtavSdtleavereport_periodcollection__fromdate_Enabled = 0;
-         AssignProp("", false, edtavSdtleavereport_periodcollection__fromdate_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavSdtleavereport_periodcollection__fromdate_Enabled), 5, 0), !bGXsfl_77_Refreshing);
          edtavSdtleavereport_periodcollection__todate_Enabled = 0;
-         AssignProp("", false, edtavSdtleavereport_periodcollection__todate_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavSdtleavereport_periodcollection__todate_Enabled), 5, 0), !bGXsfl_77_Refreshing);
          edtavSdtleavereport_periodcollection__mean_Enabled = 0;
-         AssignProp("", false, edtavSdtleavereport_periodcollection__mean_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavSdtleavereport_periodcollection__mean_Enabled), 5, 0), !bGXsfl_77_Refreshing);
          edtavSdtleavereport_periodcollection__number_Enabled = 0;
-         AssignProp("", false, edtavSdtleavereport_periodcollection__number_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavSdtleavereport_periodcollection__number_Enabled), 5, 0), !bGXsfl_77_Refreshing);
          edtavSdtleavereport_periodcollection__totalleave_Enabled = 0;
-         AssignProp("", false, edtavSdtleavereport_periodcollection__totalleave_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavSdtleavereport_periodcollection__totalleave_Enabled), 5, 0), !bGXsfl_77_Refreshing);
          edtavSdtleavereport_periodcollection__formattedtotalwork_Enabled = 0;
-         AssignProp("", false, edtavSdtleavereport_periodcollection__formattedtotalwork_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavSdtleavereport_periodcollection__formattedtotalwork_Enabled), 5, 0), !bGXsfl_77_Refreshing);
          edtavSdtleavereport_periodcollection__formattedtotalleave_Enabled = 0;
-         AssignProp("", false, edtavSdtleavereport_periodcollection__formattedtotalleave_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavSdtleavereport_periodcollection__formattedtotalleave_Enabled), 5, 0), !bGXsfl_77_Refreshing);
          edtavDetailwebcomponent_Enabled = 0;
-         AssignProp("", false, edtavDetailwebcomponent_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavDetailwebcomponent_Enabled), 5, 0), !bGXsfl_77_Refreshing);
       }
 
       protected void RF2Z2( )
@@ -1510,12 +1508,14 @@ namespace GeneXus.Programs {
          if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
          {
             SubsflControlProps_772( ) ;
+            /* Execute user event: Grid.Load */
             E222Z2 ();
             if ( ( subGrid_Islastpage == 0 ) && ( GRID_nCurrentRecord > 0 ) && ( GRID_nGridOutOfScope == 0 ) && ( nGXsfl_77_idx == 1 ) )
             {
                GRID_nCurrentRecord = 0;
                GRID_nGridOutOfScope = 1;
                subgrid_firstpage( ) ;
+               /* Execute user event: Grid.Load */
                E222Z2 ();
             }
             wbEnd = 77;
@@ -1669,23 +1669,14 @@ namespace GeneXus.Programs {
          AV72Pgmname = "WPLeaveReport";
          Gx_date = DateTimeUtil.Today( context);
          edtavSdtleavereport_periodcollection__label_Enabled = 0;
-         AssignProp("", false, edtavSdtleavereport_periodcollection__label_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavSdtleavereport_periodcollection__label_Enabled), 5, 0), !bGXsfl_77_Refreshing);
          edtavSdtleavereport_periodcollection__fromdate_Enabled = 0;
-         AssignProp("", false, edtavSdtleavereport_periodcollection__fromdate_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavSdtleavereport_periodcollection__fromdate_Enabled), 5, 0), !bGXsfl_77_Refreshing);
          edtavSdtleavereport_periodcollection__todate_Enabled = 0;
-         AssignProp("", false, edtavSdtleavereport_periodcollection__todate_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavSdtleavereport_periodcollection__todate_Enabled), 5, 0), !bGXsfl_77_Refreshing);
          edtavSdtleavereport_periodcollection__mean_Enabled = 0;
-         AssignProp("", false, edtavSdtleavereport_periodcollection__mean_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavSdtleavereport_periodcollection__mean_Enabled), 5, 0), !bGXsfl_77_Refreshing);
          edtavSdtleavereport_periodcollection__number_Enabled = 0;
-         AssignProp("", false, edtavSdtleavereport_periodcollection__number_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavSdtleavereport_periodcollection__number_Enabled), 5, 0), !bGXsfl_77_Refreshing);
          edtavSdtleavereport_periodcollection__totalleave_Enabled = 0;
-         AssignProp("", false, edtavSdtleavereport_periodcollection__totalleave_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavSdtleavereport_periodcollection__totalleave_Enabled), 5, 0), !bGXsfl_77_Refreshing);
          edtavSdtleavereport_periodcollection__formattedtotalwork_Enabled = 0;
-         AssignProp("", false, edtavSdtleavereport_periodcollection__formattedtotalwork_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavSdtleavereport_periodcollection__formattedtotalwork_Enabled), 5, 0), !bGXsfl_77_Refreshing);
          edtavSdtleavereport_periodcollection__formattedtotalleave_Enabled = 0;
-         AssignProp("", false, edtavSdtleavereport_periodcollection__formattedtotalleave_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavSdtleavereport_periodcollection__formattedtotalleave_Enabled), 5, 0), !bGXsfl_77_Refreshing);
          edtavDetailwebcomponent_Enabled = 0;
-         AssignProp("", false, edtavDetailwebcomponent_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavDetailwebcomponent_Enabled), 5, 0), !bGXsfl_77_Refreshing);
          fix_multi_value_controls( ) ;
       }
 
@@ -1918,7 +1909,7 @@ namespace GeneXus.Programs {
          AV59Date_RangePickerOptions = GXt_SdtWWPDateRangePickerOptions3;
          Ddo_grid_Gridinternalname = subGrid_Internalname;
          ucDdo_grid.SendProperty(context, "", false, Ddo_grid_Internalname, "GridInternalName", Ddo_grid_Gridinternalname);
-         Form.Caption = "Reports";
+         Form.Caption = "";
          AssignProp("", false, "FORM", "Caption", Form.Caption, true);
          /* Execute user subroutine: 'LOADGRIDSTATE' */
          S122 ();
@@ -2604,7 +2595,7 @@ namespace GeneXus.Programs {
          PA2Z2( ) ;
          WS2Z2( ) ;
          WE2Z2( ) ;
-         this.cleanup();
+         cleanup();
          context.SetWrapped(false);
          context.GX_msglist = BackMsgLst;
          return "";
@@ -2635,7 +2626,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202481416571742", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202491613195169", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2651,7 +2642,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wpleavereport.js", "?202481416571745", false, true);
+         context.AddJavascriptSource("wpleavereport.js", "?202491613195172", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -2721,6 +2712,7 @@ namespace GeneXus.Programs {
 
       protected void sendrow_772( )
       {
+         sGXsfl_77_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_77_idx), 4, 0), 4, "0");
          SubsflControlProps_772( ) ;
          WB2Z0( ) ;
          if ( ( subGrid_Rows * 1 == 0 ) || ( nGXsfl_77_idx <= subGrid_fnc_Recordsperpage( ) * 1 ) )
@@ -2788,24 +2780,27 @@ namespace GeneXus.Programs {
                context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+((edtavSdtleavereport_periodcollection__label_Visible==0) ? "display:none;" : "")+"\">") ;
             }
             /* Single line edit */
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 78,'',false,'" + sGXsfl_77_idx + "',77)\"";
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtleavereport_periodcollection__label_Internalname,((SdtSDTLeaveReport_PeriodCollectionItem)AV16SDTLeaveReport.gxTpr_Periodcollection.Item(AV62GXV1)).gxTpr_Label,(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtleavereport_periodcollection__label_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtavSdtleavereport_periodcollection__label_Visible,(int)edtavSdtleavereport_periodcollection__label_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)100,(short)0,(short)0,(short)77,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtleavereport_periodcollection__label_Internalname,((SdtSDTLeaveReport_PeriodCollectionItem)AV16SDTLeaveReport.gxTpr_Periodcollection.Item(AV62GXV1)).gxTpr_Label,(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,78);\"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtleavereport_periodcollection__label_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtavSdtleavereport_periodcollection__label_Visible,(int)edtavSdtleavereport_periodcollection__label_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)100,(short)0,(short)0,(short)77,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
                context.WriteHtmlText( "<td valign=\"middle\" align=\""+"end"+"\""+" style=\""+((edtavSdtleavereport_periodcollection__fromdate_Visible==0) ? "display:none;" : "")+"\">") ;
             }
             /* Single line edit */
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 79,'',false,'" + sGXsfl_77_idx + "',77)\"";
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtleavereport_periodcollection__fromdate_Internalname,context.localUtil.Format(((SdtSDTLeaveReport_PeriodCollectionItem)AV16SDTLeaveReport.gxTpr_Periodcollection.Item(AV62GXV1)).gxTpr_Fromdate, "99/99/99"),context.localUtil.Format( ((SdtSDTLeaveReport_PeriodCollectionItem)AV16SDTLeaveReport.gxTpr_Periodcollection.Item(AV62GXV1)).gxTpr_Fromdate, "99/99/99"),(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtleavereport_periodcollection__fromdate_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtavSdtleavereport_periodcollection__fromdate_Visible,(int)edtavSdtleavereport_periodcollection__fromdate_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)8,(short)0,(short)0,(short)77,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtleavereport_periodcollection__fromdate_Internalname,context.localUtil.Format(((SdtSDTLeaveReport_PeriodCollectionItem)AV16SDTLeaveReport.gxTpr_Periodcollection.Item(AV62GXV1)).gxTpr_Fromdate, "99/99/99"),context.localUtil.Format( ((SdtSDTLeaveReport_PeriodCollectionItem)AV16SDTLeaveReport.gxTpr_Periodcollection.Item(AV62GXV1)).gxTpr_Fromdate, "99/99/99"),TempTags+" onchange=\""+"gx.date.valid_date(this, 8,'DMY',0,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 8,'DMY',0,12,'eng',false,0);"+";gx.evt.onblur(this,79);\"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtleavereport_periodcollection__fromdate_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtavSdtleavereport_periodcollection__fromdate_Visible,(int)edtavSdtleavereport_periodcollection__fromdate_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)8,(short)0,(short)0,(short)77,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
                context.WriteHtmlText( "<td valign=\"middle\" align=\""+"end"+"\""+" style=\""+((edtavSdtleavereport_periodcollection__todate_Visible==0) ? "display:none;" : "")+"\">") ;
             }
             /* Single line edit */
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 80,'',false,'" + sGXsfl_77_idx + "',77)\"";
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtleavereport_periodcollection__todate_Internalname,context.localUtil.Format(((SdtSDTLeaveReport_PeriodCollectionItem)AV16SDTLeaveReport.gxTpr_Periodcollection.Item(AV62GXV1)).gxTpr_Todate, "99/99/99"),context.localUtil.Format( ((SdtSDTLeaveReport_PeriodCollectionItem)AV16SDTLeaveReport.gxTpr_Periodcollection.Item(AV62GXV1)).gxTpr_Todate, "99/99/99"),(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtleavereport_periodcollection__todate_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtavSdtleavereport_periodcollection__todate_Visible,(int)edtavSdtleavereport_periodcollection__todate_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)8,(short)0,(short)0,(short)77,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtleavereport_periodcollection__todate_Internalname,context.localUtil.Format(((SdtSDTLeaveReport_PeriodCollectionItem)AV16SDTLeaveReport.gxTpr_Periodcollection.Item(AV62GXV1)).gxTpr_Todate, "99/99/99"),context.localUtil.Format( ((SdtSDTLeaveReport_PeriodCollectionItem)AV16SDTLeaveReport.gxTpr_Periodcollection.Item(AV62GXV1)).gxTpr_Todate, "99/99/99"),TempTags+" onchange=\""+"gx.date.valid_date(this, 8,'DMY',0,12,'eng',false,0);"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.date.valid_date(this, 8,'DMY',0,12,'eng',false,0);"+";gx.evt.onblur(this,80);\"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtleavereport_periodcollection__todate_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtavSdtleavereport_periodcollection__todate_Visible,(int)edtavSdtleavereport_periodcollection__todate_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)8,(short)0,(short)0,(short)77,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -2813,7 +2808,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtleavereport_periodcollection__mean_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(((SdtSDTLeaveReport_PeriodCollectionItem)AV16SDTLeaveReport.gxTpr_Periodcollection.Item(AV62GXV1)).gxTpr_Mean), 10, 0, ".", "")),StringUtil.LTrim( ((edtavSdtleavereport_periodcollection__mean_Enabled!=0) ? context.localUtil.Format( (decimal)(((SdtSDTLeaveReport_PeriodCollectionItem)AV16SDTLeaveReport.gxTpr_Periodcollection.Item(AV62GXV1)).gxTpr_Mean), "ZZZZZZZZZ9") : context.localUtil.Format( (decimal)(((SdtSDTLeaveReport_PeriodCollectionItem)AV16SDTLeaveReport.gxTpr_Periodcollection.Item(AV62GXV1)).gxTpr_Mean), "ZZZZZZZZZ9"))),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtleavereport_periodcollection__mean_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(int)edtavSdtleavereport_periodcollection__mean_Enabled,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)10,(short)0,(short)0,(short)77,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtleavereport_periodcollection__mean_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(((SdtSDTLeaveReport_PeriodCollectionItem)AV16SDTLeaveReport.gxTpr_Periodcollection.Item(AV62GXV1)).gxTpr_Mean), 10, 0, ".", "")),StringUtil.LTrim( ((edtavSdtleavereport_periodcollection__mean_Enabled!=0) ? context.localUtil.Format( (decimal)(((SdtSDTLeaveReport_PeriodCollectionItem)AV16SDTLeaveReport.gxTpr_Periodcollection.Item(AV62GXV1)).gxTpr_Mean), "ZZZZZZZZZ9") : context.localUtil.Format( (decimal)(((SdtSDTLeaveReport_PeriodCollectionItem)AV16SDTLeaveReport.gxTpr_Periodcollection.Item(AV62GXV1)).gxTpr_Mean), "ZZZZZZZZZ9")))," dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+""+" onchange=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onchange(this, event)\" ",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtleavereport_periodcollection__mean_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(int)edtavSdtleavereport_periodcollection__mean_Enabled,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)10,(short)0,(short)0,(short)77,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -2821,7 +2816,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtleavereport_periodcollection__number_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(((SdtSDTLeaveReport_PeriodCollectionItem)AV16SDTLeaveReport.gxTpr_Periodcollection.Item(AV62GXV1)).gxTpr_Number), 10, 0, ".", "")),StringUtil.LTrim( ((edtavSdtleavereport_periodcollection__number_Enabled!=0) ? context.localUtil.Format( (decimal)(((SdtSDTLeaveReport_PeriodCollectionItem)AV16SDTLeaveReport.gxTpr_Periodcollection.Item(AV62GXV1)).gxTpr_Number), "ZZZZZZZZZ9") : context.localUtil.Format( (decimal)(((SdtSDTLeaveReport_PeriodCollectionItem)AV16SDTLeaveReport.gxTpr_Periodcollection.Item(AV62GXV1)).gxTpr_Number), "ZZZZZZZZZ9"))),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtleavereport_periodcollection__number_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(int)edtavSdtleavereport_periodcollection__number_Enabled,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)10,(short)0,(short)0,(short)77,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtleavereport_periodcollection__number_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(((SdtSDTLeaveReport_PeriodCollectionItem)AV16SDTLeaveReport.gxTpr_Periodcollection.Item(AV62GXV1)).gxTpr_Number), 10, 0, ".", "")),StringUtil.LTrim( ((edtavSdtleavereport_periodcollection__number_Enabled!=0) ? context.localUtil.Format( (decimal)(((SdtSDTLeaveReport_PeriodCollectionItem)AV16SDTLeaveReport.gxTpr_Periodcollection.Item(AV62GXV1)).gxTpr_Number), "ZZZZZZZZZ9") : context.localUtil.Format( (decimal)(((SdtSDTLeaveReport_PeriodCollectionItem)AV16SDTLeaveReport.gxTpr_Periodcollection.Item(AV62GXV1)).gxTpr_Number), "ZZZZZZZZZ9")))," dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+""+" onchange=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onchange(this, event)\" ",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtleavereport_periodcollection__number_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(int)edtavSdtleavereport_periodcollection__number_Enabled,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)10,(short)0,(short)0,(short)77,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -2829,32 +2824,34 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtleavereport_periodcollection__totalleave_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(((SdtSDTLeaveReport_PeriodCollectionItem)AV16SDTLeaveReport.gxTpr_Periodcollection.Item(AV62GXV1)).gxTpr_Totalleave), 10, 0, ".", "")),StringUtil.LTrim( ((edtavSdtleavereport_periodcollection__totalleave_Enabled!=0) ? context.localUtil.Format( (decimal)(((SdtSDTLeaveReport_PeriodCollectionItem)AV16SDTLeaveReport.gxTpr_Periodcollection.Item(AV62GXV1)).gxTpr_Totalleave), "ZZZZZZZZZ9") : context.localUtil.Format( (decimal)(((SdtSDTLeaveReport_PeriodCollectionItem)AV16SDTLeaveReport.gxTpr_Periodcollection.Item(AV62GXV1)).gxTpr_Totalleave), "ZZZZZZZZZ9"))),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtleavereport_periodcollection__totalleave_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(int)edtavSdtleavereport_periodcollection__totalleave_Enabled,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)10,(short)0,(short)0,(short)77,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtleavereport_periodcollection__totalleave_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(((SdtSDTLeaveReport_PeriodCollectionItem)AV16SDTLeaveReport.gxTpr_Periodcollection.Item(AV62GXV1)).gxTpr_Totalleave), 10, 0, ".", "")),StringUtil.LTrim( ((edtavSdtleavereport_periodcollection__totalleave_Enabled!=0) ? context.localUtil.Format( (decimal)(((SdtSDTLeaveReport_PeriodCollectionItem)AV16SDTLeaveReport.gxTpr_Periodcollection.Item(AV62GXV1)).gxTpr_Totalleave), "ZZZZZZZZZ9") : context.localUtil.Format( (decimal)(((SdtSDTLeaveReport_PeriodCollectionItem)AV16SDTLeaveReport.gxTpr_Periodcollection.Item(AV62GXV1)).gxTpr_Totalleave), "ZZZZZZZZZ9")))," dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+""+" onchange=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onchange(this, event)\" ",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtleavereport_periodcollection__totalleave_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(int)edtavSdtleavereport_periodcollection__totalleave_Enabled,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)10,(short)0,(short)0,(short)77,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
                context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+((edtavSdtleavereport_periodcollection__formattedtotalwork_Visible==0) ? "display:none;" : "")+"\">") ;
             }
             /* Single line edit */
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 84,'',false,'" + sGXsfl_77_idx + "',77)\"";
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtleavereport_periodcollection__formattedtotalwork_Internalname,((SdtSDTLeaveReport_PeriodCollectionItem)AV16SDTLeaveReport.gxTpr_Periodcollection.Item(AV62GXV1)).gxTpr_Formattedtotalwork,(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtleavereport_periodcollection__formattedtotalwork_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtavSdtleavereport_periodcollection__formattedtotalwork_Visible,(int)edtavSdtleavereport_periodcollection__formattedtotalwork_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)40,(short)0,(short)0,(short)77,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtleavereport_periodcollection__formattedtotalwork_Internalname,((SdtSDTLeaveReport_PeriodCollectionItem)AV16SDTLeaveReport.gxTpr_Periodcollection.Item(AV62GXV1)).gxTpr_Formattedtotalwork,(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,84);\"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtleavereport_periodcollection__formattedtotalwork_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtavSdtleavereport_periodcollection__formattedtotalwork_Visible,(int)edtavSdtleavereport_periodcollection__formattedtotalwork_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)40,(short)0,(short)0,(short)77,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
                context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+((edtavSdtleavereport_periodcollection__formattedtotalleave_Visible==0) ? "display:none;" : "")+"\">") ;
             }
             /* Single line edit */
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 85,'',false,'" + sGXsfl_77_idx + "',77)\"";
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtleavereport_periodcollection__formattedtotalleave_Internalname,((SdtSDTLeaveReport_PeriodCollectionItem)AV16SDTLeaveReport.gxTpr_Periodcollection.Item(AV62GXV1)).gxTpr_Formattedtotalleave,(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtleavereport_periodcollection__formattedtotalleave_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtavSdtleavereport_periodcollection__formattedtotalleave_Visible,(int)edtavSdtleavereport_periodcollection__formattedtotalleave_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)100,(short)0,(short)0,(short)77,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavSdtleavereport_periodcollection__formattedtotalleave_Internalname,((SdtSDTLeaveReport_PeriodCollectionItem)AV16SDTLeaveReport.gxTpr_Periodcollection.Item(AV62GXV1)).gxTpr_Formattedtotalleave,(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,85);\"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavSdtleavereport_periodcollection__formattedtotalleave_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtavSdtleavereport_periodcollection__formattedtotalleave_Visible,(int)edtavSdtleavereport_periodcollection__formattedtotalleave_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)100,(short)0,(short)0,(short)77,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
                context.WriteHtmlText( "<td valign=\"middle\" align=\""+"start"+"\""+" style=\""+""+"\">") ;
             }
             /* Single line edit */
-            TempTags = " " + ((edtavDetailwebcomponent_Enabled!=0)&&(edtavDetailwebcomponent_Visible!=0) ? " onfocus=\"gx.evt.onfocus(this, 86,'',false,'"+sGXsfl_77_idx+"',77)\"" : " ");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 86,'',false,'" + sGXsfl_77_idx + "',77)\"";
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavDetailwebcomponent_Internalname,StringUtil.RTrim( AV52DetailWebComponent),(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+((edtavDetailwebcomponent_Enabled!=0)&&(edtavDetailwebcomponent_Visible!=0) ? " onblur=\""+""+";gx.evt.onblur(this,86);\"" : " "),"'"+""+"'"+",false,"+"'"+"EVDETAILWEBCOMPONENT.CLICK."+sGXsfl_77_idx+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavDetailwebcomponent_Jsonclick,(short)5,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWActionColumn WCD_ActionColumn",(string)"",(short)-1,(int)edtavDetailwebcomponent_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)1,(short)77,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtavDetailwebcomponent_Internalname,StringUtil.RTrim( AV52DetailWebComponent),(string)"",TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,86);\"","'"+""+"'"+",false,"+"'"+"EVDETAILWEBCOMPONENT.CLICK."+sGXsfl_77_idx+"'",(string)"",(string)"",(string)"",(string)"",(string)edtavDetailwebcomponent_Jsonclick,(short)5,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWActionColumn WCD_ActionColumn",(string)"",(short)-1,(int)edtavDetailwebcomponent_Enabled,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)20,(short)0,(short)1,(short)77,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
             send_integrity_lvl_hashes2Z2( ) ;
             GridContainer.AddRow(GridRow);
             nGXsfl_77_idx = ((subGrid_Islastpage==1)&&(nGXsfl_77_idx+1>subGrid_fnc_Recordsperpage( )) ? 1 : nGXsfl_77_idx+1);
@@ -3051,7 +3048,6 @@ namespace GeneXus.Programs {
          subGrid_Allowselection = 0;
          subGrid_Header = "";
          edtavDetailwebcomponent_Jsonclick = "";
-         edtavDetailwebcomponent_Visible = -1;
          edtavDetailwebcomponent_Enabled = 1;
          edtavSdtleavereport_periodcollection__formattedtotalleave_Jsonclick = "";
          edtavSdtleavereport_periodcollection__formattedtotalleave_Enabled = 0;
@@ -3167,7 +3163,7 @@ namespace GeneXus.Programs {
          Form.Background = "";
          Form.Textcolor = 0;
          Form.Backcolor = (int)(0xFFFFFF);
-         Form.Caption = "Reports";
+         Form.Caption = "";
          subGrid_Rows = 0;
          context.GX_msglist.DisplayMode = 1;
          if ( context.isSpaRequest( ) )
@@ -3183,47 +3179,40 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'AV16SDTLeaveReport',fld:'vSDTLEAVEREPORT',pic:''},{av:'nRC_GXsfl_77',ctrl:'GRID',prop:'GridRC',grid:77},{av:'AV26ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV21ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV13GridState',fld:'vGRIDSTATE',pic:''},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV72Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV48Date',fld:'vDATE',pic:''},{av:'AV49Date_To',fld:'vDATE_TO',pic:''},{av:'AV40PeriodicCategory',fld:'vPERIODICCATEGORY',pic:'ZZZ9'},{av:'AV39EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'AV38ProjectId',fld:'vPROJECTID',pic:''},{av:'AV60CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'},{av:'Gx_date',fld:'vTODAY',pic:'',hsh:true},{av:'AV41LocationId',fld:'vLOCATIONID',pic:'ZZZZZZZZZ9',hsh:true}]");
-         setEventMetadata("REFRESH",",oparms:[{av:'AV26ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV21ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{ctrl:'SDTLEAVEREPORT_PERIODCOLLECTION__LABEL',prop:'Visible'},{ctrl:'SDTLEAVEREPORT_PERIODCOLLECTION__FROMDATE',prop:'Visible'},{ctrl:'SDTLEAVEREPORT_PERIODCOLLECTION__TODATE',prop:'Visible'},{ctrl:'SDTLEAVEREPORT_PERIODCOLLECTION__FORMATTEDTOTALWORK',prop:'Visible'},{ctrl:'SDTLEAVEREPORT_PERIODCOLLECTION__FORMATTEDTOTALLEAVE',prop:'Visible'},{av:'Gridpaginationbar_Emptygridcaption',ctrl:'GRIDPAGINATIONBAR',prop:'EmptyGridCaption'},{av:'AV29GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV30GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV31GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'AV24ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''},{av:'AV13GridState',fld:'vGRIDSTATE',pic:''}]}");
-         setEventMetadata("GRIDPAGINATIONBAR.CHANGEPAGE","{handler:'E152Z2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'AV16SDTLeaveReport',fld:'vSDTLEAVEREPORT',pic:''},{av:'nRC_GXsfl_77',ctrl:'GRID',prop:'GridRC',grid:77},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV26ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV21ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV13GridState',fld:'vGRIDSTATE',pic:''},{av:'AV72Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV48Date',fld:'vDATE',pic:''},{av:'AV49Date_To',fld:'vDATE_TO',pic:''},{av:'AV40PeriodicCategory',fld:'vPERIODICCATEGORY',pic:'ZZZ9'},{av:'AV39EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'AV38ProjectId',fld:'vPROJECTID',pic:''},{av:'AV60CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'},{av:'Gx_date',fld:'vTODAY',pic:'',hsh:true},{av:'AV41LocationId',fld:'vLOCATIONID',pic:'ZZZZZZZZZ9',hsh:true},{av:'Gridpaginationbar_Selectedpage',ctrl:'GRIDPAGINATIONBAR',prop:'SelectedPage'}]");
-         setEventMetadata("GRIDPAGINATIONBAR.CHANGEPAGE",",oparms:[]}");
-         setEventMetadata("GRIDPAGINATIONBAR.CHANGEROWSPERPAGE","{handler:'E162Z2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'AV16SDTLeaveReport',fld:'vSDTLEAVEREPORT',pic:''},{av:'nRC_GXsfl_77',ctrl:'GRID',prop:'GridRC',grid:77},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV26ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV21ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV13GridState',fld:'vGRIDSTATE',pic:''},{av:'AV72Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV48Date',fld:'vDATE',pic:''},{av:'AV49Date_To',fld:'vDATE_TO',pic:''},{av:'AV40PeriodicCategory',fld:'vPERIODICCATEGORY',pic:'ZZZ9'},{av:'AV39EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'AV38ProjectId',fld:'vPROJECTID',pic:''},{av:'AV60CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'},{av:'Gx_date',fld:'vTODAY',pic:'',hsh:true},{av:'AV41LocationId',fld:'vLOCATIONID',pic:'ZZZZZZZZZ9',hsh:true},{av:'Gridpaginationbar_Rowsperpageselectedvalue',ctrl:'GRIDPAGINATIONBAR',prop:'RowsPerPageSelectedValue'}]");
-         setEventMetadata("GRIDPAGINATIONBAR.CHANGEROWSPERPAGE",",oparms:[{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'}]}");
-         setEventMetadata("GRID.LOAD","{handler:'E222Z2',iparms:[]");
-         setEventMetadata("GRID.LOAD",",oparms:[{av:'AV52DetailWebComponent',fld:'vDETAILWEBCOMPONENT',pic:''}]}");
-         setEventMetadata("DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED","{handler:'E192Z2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'AV16SDTLeaveReport',fld:'vSDTLEAVEREPORT',pic:''},{av:'nRC_GXsfl_77',ctrl:'GRID',prop:'GridRC',grid:77},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV26ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV21ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV13GridState',fld:'vGRIDSTATE',pic:''},{av:'AV72Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV48Date',fld:'vDATE',pic:''},{av:'AV49Date_To',fld:'vDATE_TO',pic:''},{av:'AV40PeriodicCategory',fld:'vPERIODICCATEGORY',pic:'ZZZ9'},{av:'AV39EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'AV38ProjectId',fld:'vPROJECTID',pic:''},{av:'AV60CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'},{av:'Gx_date',fld:'vTODAY',pic:'',hsh:true},{av:'AV41LocationId',fld:'vLOCATIONID',pic:'ZZZZZZZZZ9',hsh:true},{av:'Ddo_gridcolumnsselector_Columnsselectorvalues',ctrl:'DDO_GRIDCOLUMNSSELECTOR',prop:'ColumnsSelectorValues'}]");
-         setEventMetadata("DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED",",oparms:[{av:'AV21ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV26ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{ctrl:'SDTLEAVEREPORT_PERIODCOLLECTION__LABEL',prop:'Visible'},{ctrl:'SDTLEAVEREPORT_PERIODCOLLECTION__FROMDATE',prop:'Visible'},{ctrl:'SDTLEAVEREPORT_PERIODCOLLECTION__TODATE',prop:'Visible'},{ctrl:'SDTLEAVEREPORT_PERIODCOLLECTION__FORMATTEDTOTALWORK',prop:'Visible'},{ctrl:'SDTLEAVEREPORT_PERIODCOLLECTION__FORMATTEDTOTALLEAVE',prop:'Visible'},{av:'Gridpaginationbar_Emptygridcaption',ctrl:'GRIDPAGINATIONBAR',prop:'EmptyGridCaption'},{av:'AV29GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV30GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV31GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'AV24ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''},{av:'AV13GridState',fld:'vGRIDSTATE',pic:''}]}");
-         setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED","{handler:'E112Z2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'AV16SDTLeaveReport',fld:'vSDTLEAVEREPORT',pic:''},{av:'nRC_GXsfl_77',ctrl:'GRID',prop:'GridRC',grid:77},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV26ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV21ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV13GridState',fld:'vGRIDSTATE',pic:''},{av:'AV72Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV48Date',fld:'vDATE',pic:''},{av:'AV49Date_To',fld:'vDATE_TO',pic:''},{av:'AV40PeriodicCategory',fld:'vPERIODICCATEGORY',pic:'ZZZ9'},{av:'AV39EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'AV38ProjectId',fld:'vPROJECTID',pic:''},{av:'AV60CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'},{av:'Gx_date',fld:'vTODAY',pic:'',hsh:true},{av:'AV41LocationId',fld:'vLOCATIONID',pic:'ZZZZZZZZZ9',hsh:true},{av:'Ddo_managefilters_Activeeventkey',ctrl:'DDO_MANAGEFILTERS',prop:'ActiveEventKey'}]");
-         setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED",",oparms:[{av:'AV26ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV13GridState',fld:'vGRIDSTATE',pic:''},{av:'AV48Date',fld:'vDATE',pic:''},{av:'AV49Date_To',fld:'vDATE_TO',pic:''},{av:'AV40PeriodicCategory',fld:'vPERIODICCATEGORY',pic:'ZZZ9'},{av:'Combo_periodiccategory_Selectedvalue_set',ctrl:'COMBO_PERIODICCATEGORY',prop:'SelectedValue_set'},{av:'AV39EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'Combo_employeeid_Selectedvalue_set',ctrl:'COMBO_EMPLOYEEID',prop:'SelectedValue_set'},{av:'Combo_employeeid_Selectedtext_set',ctrl:'COMBO_EMPLOYEEID',prop:'SelectedText_set'},{av:'AV38ProjectId',fld:'vPROJECTID',pic:''},{av:'Combo_projectid_Selectedvalue_set',ctrl:'COMBO_PROJECTID',prop:'SelectedValue_set'},{av:'Combo_projectid_Selectedtext_set',ctrl:'COMBO_PROJECTID',prop:'SelectedText_set'},{av:'AV60CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'},{av:'Combo_companylocationid_Selectedvalue_set',ctrl:'COMBO_COMPANYLOCATIONID',prop:'SelectedValue_set'},{av:'Combo_companylocationid_Selectedtext_set',ctrl:'COMBO_COMPANYLOCATIONID',prop:'SelectedText_set'},{av:'AV42PeriodicCategory_Data',fld:'vPERIODICCATEGORY_DATA',pic:''},{av:'AV21ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{ctrl:'SDTLEAVEREPORT_PERIODCOLLECTION__LABEL',prop:'Visible'},{ctrl:'SDTLEAVEREPORT_PERIODCOLLECTION__FROMDATE',prop:'Visible'},{ctrl:'SDTLEAVEREPORT_PERIODCOLLECTION__TODATE',prop:'Visible'},{ctrl:'SDTLEAVEREPORT_PERIODCOLLECTION__FORMATTEDTOTALWORK',prop:'Visible'},{ctrl:'SDTLEAVEREPORT_PERIODCOLLECTION__FORMATTEDTOTALLEAVE',prop:'Visible'},{av:'Gridpaginationbar_Emptygridcaption',ctrl:'GRIDPAGINATIONBAR',prop:'EmptyGridCaption'},{av:'AV29GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV30GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV31GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'AV24ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''}]}");
-         setEventMetadata("DDO_AGEXPORT.ONOPTIONCLICKED","{handler:'E172Z2',iparms:[{av:'Ddo_agexport_Activeeventkey',ctrl:'DDO_AGEXPORT',prop:'ActiveEventKey'},{av:'AV16SDTLeaveReport',fld:'vSDTLEAVEREPORT',pic:''},{av:'GRID_nFirstRecordOnPage'},{av:'nRC_GXsfl_77',ctrl:'GRID',prop:'GridRC',grid:77},{av:'AV72Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV13GridState',fld:'vGRIDSTATE',pic:''},{av:'AV40PeriodicCategory',fld:'vPERIODICCATEGORY',pic:'ZZZ9'},{av:'AV39EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'AV38ProjectId',fld:'vPROJECTID',pic:''},{av:'AV60CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'}]");
-         setEventMetadata("DDO_AGEXPORT.ONOPTIONCLICKED",",oparms:[{av:'AV13GridState',fld:'vGRIDSTATE',pic:''},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'AV16SDTLeaveReport',fld:'vSDTLEAVEREPORT',pic:''},{av:'nRC_GXsfl_77',ctrl:'GRID',prop:'GridRC',grid:77},{av:'AV26ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV21ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV72Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV48Date',fld:'vDATE',pic:''},{av:'AV49Date_To',fld:'vDATE_TO',pic:''},{av:'AV40PeriodicCategory',fld:'vPERIODICCATEGORY',pic:'ZZZ9'},{av:'AV39EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'AV38ProjectId',fld:'vPROJECTID',pic:''},{av:'AV60CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'},{av:'Gx_date',fld:'vTODAY',pic:'',hsh:true},{av:'AV41LocationId',fld:'vLOCATIONID',pic:'ZZZZZZZZZ9',hsh:true},{av:'AV42PeriodicCategory_Data',fld:'vPERIODICCATEGORY_DATA',pic:''},{av:'Combo_periodiccategory_Selectedvalue_set',ctrl:'COMBO_PERIODICCATEGORY',prop:'SelectedValue_set'},{av:'Combo_employeeid_Selectedtext_set',ctrl:'COMBO_EMPLOYEEID',prop:'SelectedText_set'},{av:'Combo_employeeid_Selectedvalue_set',ctrl:'COMBO_EMPLOYEEID',prop:'SelectedValue_set'},{av:'Combo_projectid_Selectedtext_set',ctrl:'COMBO_PROJECTID',prop:'SelectedText_set'},{av:'Combo_projectid_Selectedvalue_set',ctrl:'COMBO_PROJECTID',prop:'SelectedValue_set'},{av:'Combo_companylocationid_Selectedtext_set',ctrl:'COMBO_COMPANYLOCATIONID',prop:'SelectedText_set'},{av:'Combo_companylocationid_Selectedvalue_set',ctrl:'COMBO_COMPANYLOCATIONID',prop:'SelectedValue_set'}]}");
-         setEventMetadata("DATE_RANGEPICKER.DATERANGECHANGED","{handler:'E182Z2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'AV16SDTLeaveReport',fld:'vSDTLEAVEREPORT',pic:''},{av:'nRC_GXsfl_77',ctrl:'GRID',prop:'GridRC',grid:77},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV26ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV21ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV13GridState',fld:'vGRIDSTATE',pic:''},{av:'AV72Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV48Date',fld:'vDATE',pic:''},{av:'AV49Date_To',fld:'vDATE_TO',pic:''},{av:'AV40PeriodicCategory',fld:'vPERIODICCATEGORY',pic:'ZZZ9'},{av:'AV39EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'AV38ProjectId',fld:'vPROJECTID',pic:''},{av:'AV60CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'},{av:'Gx_date',fld:'vTODAY',pic:'',hsh:true},{av:'AV41LocationId',fld:'vLOCATIONID',pic:'ZZZZZZZZZ9',hsh:true}]");
-         setEventMetadata("DATE_RANGEPICKER.DATERANGECHANGED",",oparms:[{av:'AV48Date',fld:'vDATE',pic:''},{av:'AV49Date_To',fld:'vDATE_TO',pic:''},{av:'AV16SDTLeaveReport',fld:'vSDTLEAVEREPORT',pic:''},{av:'GRID_nFirstRecordOnPage'},{av:'nRC_GXsfl_77',ctrl:'GRID',prop:'GridRC',grid:77},{av:'AV26ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV21ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{ctrl:'SDTLEAVEREPORT_PERIODCOLLECTION__LABEL',prop:'Visible'},{ctrl:'SDTLEAVEREPORT_PERIODCOLLECTION__FROMDATE',prop:'Visible'},{ctrl:'SDTLEAVEREPORT_PERIODCOLLECTION__TODATE',prop:'Visible'},{ctrl:'SDTLEAVEREPORT_PERIODCOLLECTION__FORMATTEDTOTALWORK',prop:'Visible'},{ctrl:'SDTLEAVEREPORT_PERIODCOLLECTION__FORMATTEDTOTALLEAVE',prop:'Visible'},{av:'Gridpaginationbar_Emptygridcaption',ctrl:'GRIDPAGINATIONBAR',prop:'EmptyGridCaption'},{av:'AV29GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV30GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV31GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'AV24ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''},{av:'AV13GridState',fld:'vGRIDSTATE',pic:''}]}");
-         setEventMetadata("VDETAILWEBCOMPONENT.CLICK","{handler:'E232Z2',iparms:[{av:'AV16SDTLeaveReport',fld:'vSDTLEAVEREPORT',pic:''},{av:'GRID_nFirstRecordOnPage'},{av:'nRC_GXsfl_77',ctrl:'GRID',prop:'GridRC',grid:77},{av:'AV39EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'AV60CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'},{av:'AV21ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''}]");
-         setEventMetadata("VDETAILWEBCOMPONENT.CLICK",",oparms:[{ctrl:'GRID_DWC'}]}");
-         setEventMetadata("COMBO_PROJECTID.ONOPTIONCLICKED","{handler:'E142Z2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'AV16SDTLeaveReport',fld:'vSDTLEAVEREPORT',pic:''},{av:'nRC_GXsfl_77',ctrl:'GRID',prop:'GridRC',grid:77},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV26ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV21ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV13GridState',fld:'vGRIDSTATE',pic:''},{av:'AV72Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV48Date',fld:'vDATE',pic:''},{av:'AV49Date_To',fld:'vDATE_TO',pic:''},{av:'AV40PeriodicCategory',fld:'vPERIODICCATEGORY',pic:'ZZZ9'},{av:'AV39EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'AV38ProjectId',fld:'vPROJECTID',pic:''},{av:'AV60CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'},{av:'Gx_date',fld:'vTODAY',pic:'',hsh:true},{av:'AV41LocationId',fld:'vLOCATIONID',pic:'ZZZZZZZZZ9',hsh:true},{av:'Combo_projectid_Selectedvalue_get',ctrl:'COMBO_PROJECTID',prop:'SelectedValue_get'}]");
-         setEventMetadata("COMBO_PROJECTID.ONOPTIONCLICKED",",oparms:[{av:'AV38ProjectId',fld:'vPROJECTID',pic:''},{av:'AV16SDTLeaveReport',fld:'vSDTLEAVEREPORT',pic:''},{av:'GRID_nFirstRecordOnPage'},{av:'nRC_GXsfl_77',ctrl:'GRID',prop:'GridRC',grid:77},{av:'AV26ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV21ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{ctrl:'SDTLEAVEREPORT_PERIODCOLLECTION__LABEL',prop:'Visible'},{ctrl:'SDTLEAVEREPORT_PERIODCOLLECTION__FROMDATE',prop:'Visible'},{ctrl:'SDTLEAVEREPORT_PERIODCOLLECTION__TODATE',prop:'Visible'},{ctrl:'SDTLEAVEREPORT_PERIODCOLLECTION__FORMATTEDTOTALWORK',prop:'Visible'},{ctrl:'SDTLEAVEREPORT_PERIODCOLLECTION__FORMATTEDTOTALLEAVE',prop:'Visible'},{av:'Gridpaginationbar_Emptygridcaption',ctrl:'GRIDPAGINATIONBAR',prop:'EmptyGridCaption'},{av:'AV29GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV30GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV31GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'AV24ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''},{av:'AV13GridState',fld:'vGRIDSTATE',pic:''}]}");
-         setEventMetadata("COMBO_EMPLOYEEID.ONOPTIONCLICKED","{handler:'E132Z2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'AV16SDTLeaveReport',fld:'vSDTLEAVEREPORT',pic:''},{av:'nRC_GXsfl_77',ctrl:'GRID',prop:'GridRC',grid:77},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV26ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV21ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV13GridState',fld:'vGRIDSTATE',pic:''},{av:'AV72Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV48Date',fld:'vDATE',pic:''},{av:'AV49Date_To',fld:'vDATE_TO',pic:''},{av:'AV40PeriodicCategory',fld:'vPERIODICCATEGORY',pic:'ZZZ9'},{av:'AV39EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'AV38ProjectId',fld:'vPROJECTID',pic:''},{av:'AV60CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'},{av:'Gx_date',fld:'vTODAY',pic:'',hsh:true},{av:'AV41LocationId',fld:'vLOCATIONID',pic:'ZZZZZZZZZ9',hsh:true},{av:'Combo_employeeid_Selectedvalue_get',ctrl:'COMBO_EMPLOYEEID',prop:'SelectedValue_get'}]");
-         setEventMetadata("COMBO_EMPLOYEEID.ONOPTIONCLICKED",",oparms:[{av:'AV39EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'AV16SDTLeaveReport',fld:'vSDTLEAVEREPORT',pic:''},{av:'GRID_nFirstRecordOnPage'},{av:'nRC_GXsfl_77',ctrl:'GRID',prop:'GridRC',grid:77},{av:'AV26ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV21ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{ctrl:'SDTLEAVEREPORT_PERIODCOLLECTION__LABEL',prop:'Visible'},{ctrl:'SDTLEAVEREPORT_PERIODCOLLECTION__FROMDATE',prop:'Visible'},{ctrl:'SDTLEAVEREPORT_PERIODCOLLECTION__TODATE',prop:'Visible'},{ctrl:'SDTLEAVEREPORT_PERIODCOLLECTION__FORMATTEDTOTALWORK',prop:'Visible'},{ctrl:'SDTLEAVEREPORT_PERIODCOLLECTION__FORMATTEDTOTALLEAVE',prop:'Visible'},{av:'Gridpaginationbar_Emptygridcaption',ctrl:'GRIDPAGINATIONBAR',prop:'EmptyGridCaption'},{av:'AV29GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV30GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV31GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'AV24ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''},{av:'AV13GridState',fld:'vGRIDSTATE',pic:''}]}");
-         setEventMetadata("COMBO_PERIODICCATEGORY.ONOPTIONCLICKED","{handler:'E122Z2',iparms:[{av:'GRID_nFirstRecordOnPage'},{av:'GRID_nEOF'},{av:'AV16SDTLeaveReport',fld:'vSDTLEAVEREPORT',pic:''},{av:'nRC_GXsfl_77',ctrl:'GRID',prop:'GridRC',grid:77},{av:'subGrid_Rows',ctrl:'GRID',prop:'Rows'},{av:'AV26ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV21ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{av:'AV13GridState',fld:'vGRIDSTATE',pic:''},{av:'AV72Pgmname',fld:'vPGMNAME',pic:'',hsh:true},{av:'AV48Date',fld:'vDATE',pic:''},{av:'AV49Date_To',fld:'vDATE_TO',pic:''},{av:'AV40PeriodicCategory',fld:'vPERIODICCATEGORY',pic:'ZZZ9'},{av:'AV39EmployeeId',fld:'vEMPLOYEEID',pic:'ZZZZZZZZZ9'},{av:'AV38ProjectId',fld:'vPROJECTID',pic:''},{av:'AV60CompanyLocationId',fld:'vCOMPANYLOCATIONID',pic:'ZZZZZZZZZ9'},{av:'Gx_date',fld:'vTODAY',pic:'',hsh:true},{av:'AV41LocationId',fld:'vLOCATIONID',pic:'ZZZZZZZZZ9',hsh:true},{av:'Combo_periodiccategory_Selectedvalue_get',ctrl:'COMBO_PERIODICCATEGORY',prop:'SelectedValue_get'}]");
-         setEventMetadata("COMBO_PERIODICCATEGORY.ONOPTIONCLICKED",",oparms:[{av:'AV40PeriodicCategory',fld:'vPERIODICCATEGORY',pic:'ZZZ9'},{av:'AV16SDTLeaveReport',fld:'vSDTLEAVEREPORT',pic:''},{av:'GRID_nFirstRecordOnPage'},{av:'nRC_GXsfl_77',ctrl:'GRID',prop:'GridRC',grid:77},{av:'AV26ManageFiltersExecutionStep',fld:'vMANAGEFILTERSEXECUTIONSTEP',pic:'9'},{av:'AV21ColumnsSelector',fld:'vCOLUMNSSELECTOR',pic:''},{ctrl:'SDTLEAVEREPORT_PERIODCOLLECTION__LABEL',prop:'Visible'},{ctrl:'SDTLEAVEREPORT_PERIODCOLLECTION__FROMDATE',prop:'Visible'},{ctrl:'SDTLEAVEREPORT_PERIODCOLLECTION__TODATE',prop:'Visible'},{ctrl:'SDTLEAVEREPORT_PERIODCOLLECTION__FORMATTEDTOTALWORK',prop:'Visible'},{ctrl:'SDTLEAVEREPORT_PERIODCOLLECTION__FORMATTEDTOTALLEAVE',prop:'Visible'},{av:'Gridpaginationbar_Emptygridcaption',ctrl:'GRIDPAGINATIONBAR',prop:'EmptyGridCaption'},{av:'AV29GridCurrentPage',fld:'vGRIDCURRENTPAGE',pic:'ZZZZZZZZZ9'},{av:'AV30GridPageCount',fld:'vGRIDPAGECOUNT',pic:'ZZZZZZZZZ9'},{av:'AV31GridAppliedFilters',fld:'vGRIDAPPLIEDFILTERS',pic:''},{av:'AV24ManageFiltersData',fld:'vMANAGEFILTERSDATA',pic:''},{av:'AV13GridState',fld:'vGRIDSTATE',pic:''}]}");
-         setEventMetadata("NULL","{handler:'Validv_Detailwebcomponent',iparms:[]");
-         setEventMetadata("NULL",",oparms:[]}");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"AV16SDTLeaveReport","fld":"vSDTLEAVEREPORT"},{"av":"nRC_GXsfl_77","ctrl":"GRID","prop":"GridRC","grid":77},{"av":"AV26ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV21ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV13GridState","fld":"vGRIDSTATE"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV72Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV48Date","fld":"vDATE"},{"av":"AV49Date_To","fld":"vDATE_TO"},{"av":"AV40PeriodicCategory","fld":"vPERIODICCATEGORY","pic":"ZZZ9"},{"av":"AV39EmployeeId","fld":"vEMPLOYEEID","pic":"ZZZZZZZZZ9"},{"av":"AV38ProjectId","fld":"vPROJECTID"},{"av":"AV60CompanyLocationId","fld":"vCOMPANYLOCATIONID","pic":"ZZZZZZZZZ9"},{"av":"Gx_date","fld":"vTODAY","hsh":true},{"av":"AV41LocationId","fld":"vLOCATIONID","pic":"ZZZZZZZZZ9","hsh":true}]""");
+         setEventMetadata("REFRESH",""","oparms":[{"av":"AV26ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV21ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"ctrl":"SDTLEAVEREPORT_PERIODCOLLECTION__LABEL","prop":"Visible"},{"ctrl":"SDTLEAVEREPORT_PERIODCOLLECTION__FROMDATE","prop":"Visible"},{"ctrl":"SDTLEAVEREPORT_PERIODCOLLECTION__TODATE","prop":"Visible"},{"ctrl":"SDTLEAVEREPORT_PERIODCOLLECTION__FORMATTEDTOTALWORK","prop":"Visible"},{"ctrl":"SDTLEAVEREPORT_PERIODCOLLECTION__FORMATTEDTOTALLEAVE","prop":"Visible"},{"av":"Gridpaginationbar_Emptygridcaption","ctrl":"GRIDPAGINATIONBAR","prop":"EmptyGridCaption"},{"av":"AV29GridCurrentPage","fld":"vGRIDCURRENTPAGE","pic":"ZZZZZZZZZ9"},{"av":"AV30GridPageCount","fld":"vGRIDPAGECOUNT","pic":"ZZZZZZZZZ9"},{"av":"AV31GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV24ManageFiltersData","fld":"vMANAGEFILTERSDATA"},{"av":"AV13GridState","fld":"vGRIDSTATE"}]}""");
+         setEventMetadata("GRIDPAGINATIONBAR.CHANGEPAGE","""{"handler":"E152Z2","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"AV16SDTLeaveReport","fld":"vSDTLEAVEREPORT"},{"av":"nRC_GXsfl_77","ctrl":"GRID","prop":"GridRC","grid":77},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV26ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV21ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV13GridState","fld":"vGRIDSTATE"},{"av":"AV72Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV48Date","fld":"vDATE"},{"av":"AV49Date_To","fld":"vDATE_TO"},{"av":"AV40PeriodicCategory","fld":"vPERIODICCATEGORY","pic":"ZZZ9"},{"av":"AV39EmployeeId","fld":"vEMPLOYEEID","pic":"ZZZZZZZZZ9"},{"av":"AV38ProjectId","fld":"vPROJECTID"},{"av":"AV60CompanyLocationId","fld":"vCOMPANYLOCATIONID","pic":"ZZZZZZZZZ9"},{"av":"Gx_date","fld":"vTODAY","hsh":true},{"av":"AV41LocationId","fld":"vLOCATIONID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"Gridpaginationbar_Selectedpage","ctrl":"GRIDPAGINATIONBAR","prop":"SelectedPage"}]}""");
+         setEventMetadata("GRIDPAGINATIONBAR.CHANGEROWSPERPAGE","""{"handler":"E162Z2","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"AV16SDTLeaveReport","fld":"vSDTLEAVEREPORT"},{"av":"nRC_GXsfl_77","ctrl":"GRID","prop":"GridRC","grid":77},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV26ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV21ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV13GridState","fld":"vGRIDSTATE"},{"av":"AV72Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV48Date","fld":"vDATE"},{"av":"AV49Date_To","fld":"vDATE_TO"},{"av":"AV40PeriodicCategory","fld":"vPERIODICCATEGORY","pic":"ZZZ9"},{"av":"AV39EmployeeId","fld":"vEMPLOYEEID","pic":"ZZZZZZZZZ9"},{"av":"AV38ProjectId","fld":"vPROJECTID"},{"av":"AV60CompanyLocationId","fld":"vCOMPANYLOCATIONID","pic":"ZZZZZZZZZ9"},{"av":"Gx_date","fld":"vTODAY","hsh":true},{"av":"AV41LocationId","fld":"vLOCATIONID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"Gridpaginationbar_Rowsperpageselectedvalue","ctrl":"GRIDPAGINATIONBAR","prop":"RowsPerPageSelectedValue"}]""");
+         setEventMetadata("GRIDPAGINATIONBAR.CHANGEROWSPERPAGE",""","oparms":[{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"}]}""");
+         setEventMetadata("GRID.LOAD","""{"handler":"E222Z2","iparms":[]""");
+         setEventMetadata("GRID.LOAD",""","oparms":[{"av":"AV52DetailWebComponent","fld":"vDETAILWEBCOMPONENT"}]}""");
+         setEventMetadata("DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED","""{"handler":"E192Z2","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"AV16SDTLeaveReport","fld":"vSDTLEAVEREPORT"},{"av":"nRC_GXsfl_77","ctrl":"GRID","prop":"GridRC","grid":77},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV26ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV21ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV13GridState","fld":"vGRIDSTATE"},{"av":"AV72Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV48Date","fld":"vDATE"},{"av":"AV49Date_To","fld":"vDATE_TO"},{"av":"AV40PeriodicCategory","fld":"vPERIODICCATEGORY","pic":"ZZZ9"},{"av":"AV39EmployeeId","fld":"vEMPLOYEEID","pic":"ZZZZZZZZZ9"},{"av":"AV38ProjectId","fld":"vPROJECTID"},{"av":"AV60CompanyLocationId","fld":"vCOMPANYLOCATIONID","pic":"ZZZZZZZZZ9"},{"av":"Gx_date","fld":"vTODAY","hsh":true},{"av":"AV41LocationId","fld":"vLOCATIONID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"Ddo_gridcolumnsselector_Columnsselectorvalues","ctrl":"DDO_GRIDCOLUMNSSELECTOR","prop":"ColumnsSelectorValues"}]""");
+         setEventMetadata("DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED",""","oparms":[{"av":"AV21ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV26ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"ctrl":"SDTLEAVEREPORT_PERIODCOLLECTION__LABEL","prop":"Visible"},{"ctrl":"SDTLEAVEREPORT_PERIODCOLLECTION__FROMDATE","prop":"Visible"},{"ctrl":"SDTLEAVEREPORT_PERIODCOLLECTION__TODATE","prop":"Visible"},{"ctrl":"SDTLEAVEREPORT_PERIODCOLLECTION__FORMATTEDTOTALWORK","prop":"Visible"},{"ctrl":"SDTLEAVEREPORT_PERIODCOLLECTION__FORMATTEDTOTALLEAVE","prop":"Visible"},{"av":"Gridpaginationbar_Emptygridcaption","ctrl":"GRIDPAGINATIONBAR","prop":"EmptyGridCaption"},{"av":"AV29GridCurrentPage","fld":"vGRIDCURRENTPAGE","pic":"ZZZZZZZZZ9"},{"av":"AV30GridPageCount","fld":"vGRIDPAGECOUNT","pic":"ZZZZZZZZZ9"},{"av":"AV31GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV24ManageFiltersData","fld":"vMANAGEFILTERSDATA"},{"av":"AV13GridState","fld":"vGRIDSTATE"}]}""");
+         setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED","""{"handler":"E112Z2","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"AV16SDTLeaveReport","fld":"vSDTLEAVEREPORT"},{"av":"nRC_GXsfl_77","ctrl":"GRID","prop":"GridRC","grid":77},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV26ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV21ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV13GridState","fld":"vGRIDSTATE"},{"av":"AV72Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV48Date","fld":"vDATE"},{"av":"AV49Date_To","fld":"vDATE_TO"},{"av":"AV40PeriodicCategory","fld":"vPERIODICCATEGORY","pic":"ZZZ9"},{"av":"AV39EmployeeId","fld":"vEMPLOYEEID","pic":"ZZZZZZZZZ9"},{"av":"AV38ProjectId","fld":"vPROJECTID"},{"av":"AV60CompanyLocationId","fld":"vCOMPANYLOCATIONID","pic":"ZZZZZZZZZ9"},{"av":"Gx_date","fld":"vTODAY","hsh":true},{"av":"AV41LocationId","fld":"vLOCATIONID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"Ddo_managefilters_Activeeventkey","ctrl":"DDO_MANAGEFILTERS","prop":"ActiveEventKey"}]""");
+         setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED",""","oparms":[{"av":"AV26ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV13GridState","fld":"vGRIDSTATE"},{"av":"AV48Date","fld":"vDATE"},{"av":"AV49Date_To","fld":"vDATE_TO"},{"av":"AV40PeriodicCategory","fld":"vPERIODICCATEGORY","pic":"ZZZ9"},{"av":"Combo_periodiccategory_Selectedvalue_set","ctrl":"COMBO_PERIODICCATEGORY","prop":"SelectedValue_set"},{"av":"AV39EmployeeId","fld":"vEMPLOYEEID","pic":"ZZZZZZZZZ9"},{"av":"Combo_employeeid_Selectedvalue_set","ctrl":"COMBO_EMPLOYEEID","prop":"SelectedValue_set"},{"av":"Combo_employeeid_Selectedtext_set","ctrl":"COMBO_EMPLOYEEID","prop":"SelectedText_set"},{"av":"AV38ProjectId","fld":"vPROJECTID"},{"av":"Combo_projectid_Selectedvalue_set","ctrl":"COMBO_PROJECTID","prop":"SelectedValue_set"},{"av":"Combo_projectid_Selectedtext_set","ctrl":"COMBO_PROJECTID","prop":"SelectedText_set"},{"av":"AV60CompanyLocationId","fld":"vCOMPANYLOCATIONID","pic":"ZZZZZZZZZ9"},{"av":"Combo_companylocationid_Selectedvalue_set","ctrl":"COMBO_COMPANYLOCATIONID","prop":"SelectedValue_set"},{"av":"Combo_companylocationid_Selectedtext_set","ctrl":"COMBO_COMPANYLOCATIONID","prop":"SelectedText_set"},{"av":"AV42PeriodicCategory_Data","fld":"vPERIODICCATEGORY_DATA"},{"av":"AV21ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"ctrl":"SDTLEAVEREPORT_PERIODCOLLECTION__LABEL","prop":"Visible"},{"ctrl":"SDTLEAVEREPORT_PERIODCOLLECTION__FROMDATE","prop":"Visible"},{"ctrl":"SDTLEAVEREPORT_PERIODCOLLECTION__TODATE","prop":"Visible"},{"ctrl":"SDTLEAVEREPORT_PERIODCOLLECTION__FORMATTEDTOTALWORK","prop":"Visible"},{"ctrl":"SDTLEAVEREPORT_PERIODCOLLECTION__FORMATTEDTOTALLEAVE","prop":"Visible"},{"av":"Gridpaginationbar_Emptygridcaption","ctrl":"GRIDPAGINATIONBAR","prop":"EmptyGridCaption"},{"av":"AV29GridCurrentPage","fld":"vGRIDCURRENTPAGE","pic":"ZZZZZZZZZ9"},{"av":"AV30GridPageCount","fld":"vGRIDPAGECOUNT","pic":"ZZZZZZZZZ9"},{"av":"AV31GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV24ManageFiltersData","fld":"vMANAGEFILTERSDATA"}]}""");
+         setEventMetadata("DDO_AGEXPORT.ONOPTIONCLICKED","""{"handler":"E172Z2","iparms":[{"av":"Ddo_agexport_Activeeventkey","ctrl":"DDO_AGEXPORT","prop":"ActiveEventKey"},{"av":"AV16SDTLeaveReport","fld":"vSDTLEAVEREPORT"},{"av":"GRID_nFirstRecordOnPage"},{"av":"nRC_GXsfl_77","ctrl":"GRID","prop":"GridRC","grid":77},{"av":"AV72Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV13GridState","fld":"vGRIDSTATE"},{"av":"AV40PeriodicCategory","fld":"vPERIODICCATEGORY","pic":"ZZZ9"},{"av":"AV39EmployeeId","fld":"vEMPLOYEEID","pic":"ZZZZZZZZZ9"},{"av":"AV38ProjectId","fld":"vPROJECTID"},{"av":"AV60CompanyLocationId","fld":"vCOMPANYLOCATIONID","pic":"ZZZZZZZZZ9"}]""");
+         setEventMetadata("DDO_AGEXPORT.ONOPTIONCLICKED",""","oparms":[{"av":"AV13GridState","fld":"vGRIDSTATE"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"AV16SDTLeaveReport","fld":"vSDTLEAVEREPORT"},{"av":"nRC_GXsfl_77","ctrl":"GRID","prop":"GridRC","grid":77},{"av":"AV26ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV21ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV72Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV48Date","fld":"vDATE"},{"av":"AV49Date_To","fld":"vDATE_TO"},{"av":"AV40PeriodicCategory","fld":"vPERIODICCATEGORY","pic":"ZZZ9"},{"av":"AV39EmployeeId","fld":"vEMPLOYEEID","pic":"ZZZZZZZZZ9"},{"av":"AV38ProjectId","fld":"vPROJECTID"},{"av":"AV60CompanyLocationId","fld":"vCOMPANYLOCATIONID","pic":"ZZZZZZZZZ9"},{"av":"Gx_date","fld":"vTODAY","hsh":true},{"av":"AV41LocationId","fld":"vLOCATIONID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"AV42PeriodicCategory_Data","fld":"vPERIODICCATEGORY_DATA"},{"av":"Combo_periodiccategory_Selectedvalue_set","ctrl":"COMBO_PERIODICCATEGORY","prop":"SelectedValue_set"},{"av":"Combo_employeeid_Selectedtext_set","ctrl":"COMBO_EMPLOYEEID","prop":"SelectedText_set"},{"av":"Combo_employeeid_Selectedvalue_set","ctrl":"COMBO_EMPLOYEEID","prop":"SelectedValue_set"},{"av":"Combo_projectid_Selectedtext_set","ctrl":"COMBO_PROJECTID","prop":"SelectedText_set"},{"av":"Combo_projectid_Selectedvalue_set","ctrl":"COMBO_PROJECTID","prop":"SelectedValue_set"},{"av":"Combo_companylocationid_Selectedtext_set","ctrl":"COMBO_COMPANYLOCATIONID","prop":"SelectedText_set"},{"av":"Combo_companylocationid_Selectedvalue_set","ctrl":"COMBO_COMPANYLOCATIONID","prop":"SelectedValue_set"}]}""");
+         setEventMetadata("DATE_RANGEPICKER.DATERANGECHANGED","""{"handler":"E182Z2","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"AV16SDTLeaveReport","fld":"vSDTLEAVEREPORT"},{"av":"nRC_GXsfl_77","ctrl":"GRID","prop":"GridRC","grid":77},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV26ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV21ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV13GridState","fld":"vGRIDSTATE"},{"av":"AV72Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV48Date","fld":"vDATE"},{"av":"AV49Date_To","fld":"vDATE_TO"},{"av":"AV40PeriodicCategory","fld":"vPERIODICCATEGORY","pic":"ZZZ9"},{"av":"AV39EmployeeId","fld":"vEMPLOYEEID","pic":"ZZZZZZZZZ9"},{"av":"AV38ProjectId","fld":"vPROJECTID"},{"av":"AV60CompanyLocationId","fld":"vCOMPANYLOCATIONID","pic":"ZZZZZZZZZ9"},{"av":"Gx_date","fld":"vTODAY","hsh":true},{"av":"AV41LocationId","fld":"vLOCATIONID","pic":"ZZZZZZZZZ9","hsh":true}]""");
+         setEventMetadata("DATE_RANGEPICKER.DATERANGECHANGED",""","oparms":[{"av":"AV48Date","fld":"vDATE"},{"av":"AV49Date_To","fld":"vDATE_TO"},{"av":"AV16SDTLeaveReport","fld":"vSDTLEAVEREPORT"},{"av":"GRID_nFirstRecordOnPage"},{"av":"nRC_GXsfl_77","ctrl":"GRID","prop":"GridRC","grid":77},{"av":"AV26ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV21ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"ctrl":"SDTLEAVEREPORT_PERIODCOLLECTION__LABEL","prop":"Visible"},{"ctrl":"SDTLEAVEREPORT_PERIODCOLLECTION__FROMDATE","prop":"Visible"},{"ctrl":"SDTLEAVEREPORT_PERIODCOLLECTION__TODATE","prop":"Visible"},{"ctrl":"SDTLEAVEREPORT_PERIODCOLLECTION__FORMATTEDTOTALWORK","prop":"Visible"},{"ctrl":"SDTLEAVEREPORT_PERIODCOLLECTION__FORMATTEDTOTALLEAVE","prop":"Visible"},{"av":"Gridpaginationbar_Emptygridcaption","ctrl":"GRIDPAGINATIONBAR","prop":"EmptyGridCaption"},{"av":"AV29GridCurrentPage","fld":"vGRIDCURRENTPAGE","pic":"ZZZZZZZZZ9"},{"av":"AV30GridPageCount","fld":"vGRIDPAGECOUNT","pic":"ZZZZZZZZZ9"},{"av":"AV31GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV24ManageFiltersData","fld":"vMANAGEFILTERSDATA"},{"av":"AV13GridState","fld":"vGRIDSTATE"}]}""");
+         setEventMetadata("VDETAILWEBCOMPONENT.CLICK","""{"handler":"E232Z2","iparms":[{"av":"AV16SDTLeaveReport","fld":"vSDTLEAVEREPORT"},{"av":"GRID_nFirstRecordOnPage"},{"av":"nRC_GXsfl_77","ctrl":"GRID","prop":"GridRC","grid":77},{"av":"AV39EmployeeId","fld":"vEMPLOYEEID","pic":"ZZZZZZZZZ9"},{"av":"AV60CompanyLocationId","fld":"vCOMPANYLOCATIONID","pic":"ZZZZZZZZZ9"},{"av":"AV21ColumnsSelector","fld":"vCOLUMNSSELECTOR"}]""");
+         setEventMetadata("VDETAILWEBCOMPONENT.CLICK",""","oparms":[{"ctrl":"GRID_DWC"}]}""");
+         setEventMetadata("COMBO_PROJECTID.ONOPTIONCLICKED","""{"handler":"E142Z2","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"AV16SDTLeaveReport","fld":"vSDTLEAVEREPORT"},{"av":"nRC_GXsfl_77","ctrl":"GRID","prop":"GridRC","grid":77},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV26ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV21ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV13GridState","fld":"vGRIDSTATE"},{"av":"AV72Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV48Date","fld":"vDATE"},{"av":"AV49Date_To","fld":"vDATE_TO"},{"av":"AV40PeriodicCategory","fld":"vPERIODICCATEGORY","pic":"ZZZ9"},{"av":"AV39EmployeeId","fld":"vEMPLOYEEID","pic":"ZZZZZZZZZ9"},{"av":"AV38ProjectId","fld":"vPROJECTID"},{"av":"AV60CompanyLocationId","fld":"vCOMPANYLOCATIONID","pic":"ZZZZZZZZZ9"},{"av":"Gx_date","fld":"vTODAY","hsh":true},{"av":"AV41LocationId","fld":"vLOCATIONID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"Combo_projectid_Selectedvalue_get","ctrl":"COMBO_PROJECTID","prop":"SelectedValue_get"}]""");
+         setEventMetadata("COMBO_PROJECTID.ONOPTIONCLICKED",""","oparms":[{"av":"AV38ProjectId","fld":"vPROJECTID"},{"av":"AV16SDTLeaveReport","fld":"vSDTLEAVEREPORT"},{"av":"GRID_nFirstRecordOnPage"},{"av":"nRC_GXsfl_77","ctrl":"GRID","prop":"GridRC","grid":77},{"av":"AV26ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV21ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"ctrl":"SDTLEAVEREPORT_PERIODCOLLECTION__LABEL","prop":"Visible"},{"ctrl":"SDTLEAVEREPORT_PERIODCOLLECTION__FROMDATE","prop":"Visible"},{"ctrl":"SDTLEAVEREPORT_PERIODCOLLECTION__TODATE","prop":"Visible"},{"ctrl":"SDTLEAVEREPORT_PERIODCOLLECTION__FORMATTEDTOTALWORK","prop":"Visible"},{"ctrl":"SDTLEAVEREPORT_PERIODCOLLECTION__FORMATTEDTOTALLEAVE","prop":"Visible"},{"av":"Gridpaginationbar_Emptygridcaption","ctrl":"GRIDPAGINATIONBAR","prop":"EmptyGridCaption"},{"av":"AV29GridCurrentPage","fld":"vGRIDCURRENTPAGE","pic":"ZZZZZZZZZ9"},{"av":"AV30GridPageCount","fld":"vGRIDPAGECOUNT","pic":"ZZZZZZZZZ9"},{"av":"AV31GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV24ManageFiltersData","fld":"vMANAGEFILTERSDATA"},{"av":"AV13GridState","fld":"vGRIDSTATE"}]}""");
+         setEventMetadata("COMBO_EMPLOYEEID.ONOPTIONCLICKED","""{"handler":"E132Z2","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"AV16SDTLeaveReport","fld":"vSDTLEAVEREPORT"},{"av":"nRC_GXsfl_77","ctrl":"GRID","prop":"GridRC","grid":77},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV26ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV21ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV13GridState","fld":"vGRIDSTATE"},{"av":"AV72Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV48Date","fld":"vDATE"},{"av":"AV49Date_To","fld":"vDATE_TO"},{"av":"AV40PeriodicCategory","fld":"vPERIODICCATEGORY","pic":"ZZZ9"},{"av":"AV39EmployeeId","fld":"vEMPLOYEEID","pic":"ZZZZZZZZZ9"},{"av":"AV38ProjectId","fld":"vPROJECTID"},{"av":"AV60CompanyLocationId","fld":"vCOMPANYLOCATIONID","pic":"ZZZZZZZZZ9"},{"av":"Gx_date","fld":"vTODAY","hsh":true},{"av":"AV41LocationId","fld":"vLOCATIONID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"Combo_employeeid_Selectedvalue_get","ctrl":"COMBO_EMPLOYEEID","prop":"SelectedValue_get"}]""");
+         setEventMetadata("COMBO_EMPLOYEEID.ONOPTIONCLICKED",""","oparms":[{"av":"AV39EmployeeId","fld":"vEMPLOYEEID","pic":"ZZZZZZZZZ9"},{"av":"AV16SDTLeaveReport","fld":"vSDTLEAVEREPORT"},{"av":"GRID_nFirstRecordOnPage"},{"av":"nRC_GXsfl_77","ctrl":"GRID","prop":"GridRC","grid":77},{"av":"AV26ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV21ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"ctrl":"SDTLEAVEREPORT_PERIODCOLLECTION__LABEL","prop":"Visible"},{"ctrl":"SDTLEAVEREPORT_PERIODCOLLECTION__FROMDATE","prop":"Visible"},{"ctrl":"SDTLEAVEREPORT_PERIODCOLLECTION__TODATE","prop":"Visible"},{"ctrl":"SDTLEAVEREPORT_PERIODCOLLECTION__FORMATTEDTOTALWORK","prop":"Visible"},{"ctrl":"SDTLEAVEREPORT_PERIODCOLLECTION__FORMATTEDTOTALLEAVE","prop":"Visible"},{"av":"Gridpaginationbar_Emptygridcaption","ctrl":"GRIDPAGINATIONBAR","prop":"EmptyGridCaption"},{"av":"AV29GridCurrentPage","fld":"vGRIDCURRENTPAGE","pic":"ZZZZZZZZZ9"},{"av":"AV30GridPageCount","fld":"vGRIDPAGECOUNT","pic":"ZZZZZZZZZ9"},{"av":"AV31GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV24ManageFiltersData","fld":"vMANAGEFILTERSDATA"},{"av":"AV13GridState","fld":"vGRIDSTATE"}]}""");
+         setEventMetadata("COMBO_PERIODICCATEGORY.ONOPTIONCLICKED","""{"handler":"E122Z2","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"AV16SDTLeaveReport","fld":"vSDTLEAVEREPORT"},{"av":"nRC_GXsfl_77","ctrl":"GRID","prop":"GridRC","grid":77},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV26ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV21ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV13GridState","fld":"vGRIDSTATE"},{"av":"AV72Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV48Date","fld":"vDATE"},{"av":"AV49Date_To","fld":"vDATE_TO"},{"av":"AV40PeriodicCategory","fld":"vPERIODICCATEGORY","pic":"ZZZ9"},{"av":"AV39EmployeeId","fld":"vEMPLOYEEID","pic":"ZZZZZZZZZ9"},{"av":"AV38ProjectId","fld":"vPROJECTID"},{"av":"AV60CompanyLocationId","fld":"vCOMPANYLOCATIONID","pic":"ZZZZZZZZZ9"},{"av":"Gx_date","fld":"vTODAY","hsh":true},{"av":"AV41LocationId","fld":"vLOCATIONID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"Combo_periodiccategory_Selectedvalue_get","ctrl":"COMBO_PERIODICCATEGORY","prop":"SelectedValue_get"}]""");
+         setEventMetadata("COMBO_PERIODICCATEGORY.ONOPTIONCLICKED",""","oparms":[{"av":"AV40PeriodicCategory","fld":"vPERIODICCATEGORY","pic":"ZZZ9"},{"av":"AV16SDTLeaveReport","fld":"vSDTLEAVEREPORT"},{"av":"GRID_nFirstRecordOnPage"},{"av":"nRC_GXsfl_77","ctrl":"GRID","prop":"GridRC","grid":77},{"av":"AV26ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV21ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"ctrl":"SDTLEAVEREPORT_PERIODCOLLECTION__LABEL","prop":"Visible"},{"ctrl":"SDTLEAVEREPORT_PERIODCOLLECTION__FROMDATE","prop":"Visible"},{"ctrl":"SDTLEAVEREPORT_PERIODCOLLECTION__TODATE","prop":"Visible"},{"ctrl":"SDTLEAVEREPORT_PERIODCOLLECTION__FORMATTEDTOTALWORK","prop":"Visible"},{"ctrl":"SDTLEAVEREPORT_PERIODCOLLECTION__FORMATTEDTOTALLEAVE","prop":"Visible"},{"av":"Gridpaginationbar_Emptygridcaption","ctrl":"GRIDPAGINATIONBAR","prop":"EmptyGridCaption"},{"av":"AV29GridCurrentPage","fld":"vGRIDCURRENTPAGE","pic":"ZZZZZZZZZ9"},{"av":"AV30GridPageCount","fld":"vGRIDPAGECOUNT","pic":"ZZZZZZZZZ9"},{"av":"AV31GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV24ManageFiltersData","fld":"vMANAGEFILTERSDATA"},{"av":"AV13GridState","fld":"vGRIDSTATE"}]}""");
+         setEventMetadata("NULL","""{"handler":"Validv_Detailwebcomponent","iparms":[]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -3355,7 +3344,6 @@ namespace GeneXus.Programs {
       private short GxWebError ;
       private short AV26ManageFiltersExecutionStep ;
       private short AV40PeriodicCategory ;
-      private short initialized ;
       private short gxajaxcallmode ;
       private short wbEnd ;
       private short wbStart ;
@@ -3402,7 +3390,6 @@ namespace GeneXus.Programs {
       private int idxLst ;
       private int subGrid_Backcolor ;
       private int subGrid_Allbackcolor ;
-      private int edtavDetailwebcomponent_Visible ;
       private int subGrid_Titlebackcolor ;
       private int subGrid_Selectedindex ;
       private int subGrid_Selectioncolor ;
@@ -3550,19 +3537,19 @@ namespace GeneXus.Programs {
       private string sEvtType ;
       private string AV52DetailWebComponent ;
       private string edtavDetailwebcomponent_Internalname ;
+      private string sGXsfl_77_fel_idx="0001" ;
       private string edtavSdtleavereport_periodcollection__label_Internalname ;
       private string edtavSdtleavereport_periodcollection__fromdate_Internalname ;
       private string edtavSdtleavereport_periodcollection__todate_Internalname ;
-      private string edtavSdtleavereport_periodcollection__mean_Internalname ;
-      private string edtavSdtleavereport_periodcollection__number_Internalname ;
-      private string edtavSdtleavereport_periodcollection__totalleave_Internalname ;
       private string edtavSdtleavereport_periodcollection__formattedtotalwork_Internalname ;
       private string edtavSdtleavereport_periodcollection__formattedtotalleave_Internalname ;
-      private string sGXsfl_77_fel_idx="0001" ;
       private string GXt_char4 ;
       private string tblTablerightheader_Internalname ;
       private string Ddo_managefilters_Caption ;
       private string Ddo_managefilters_Internalname ;
+      private string edtavSdtleavereport_periodcollection__mean_Internalname ;
+      private string edtavSdtleavereport_periodcollection__number_Internalname ;
+      private string edtavSdtleavereport_periodcollection__totalleave_Internalname ;
       private string subGrid_Class ;
       private string subGrid_Linesclass ;
       private string ROClassString ;
@@ -3617,7 +3604,6 @@ namespace GeneXus.Programs {
       private string AV47AuxText ;
       private string AV17ExcelFilename ;
       private string AV18ErrorMessage ;
-      private GxSimpleCollection<long> AV38ProjectId ;
       private IGxSession AV23Session ;
       private GXWebComponent WebComp_Grid_dwc ;
       private GXWebGrid GridContainer ;
@@ -3635,33 +3621,34 @@ namespace GeneXus.Programs {
       private GXUserControl ucDdo_gridcolumnsselector ;
       private GXUserControl ucGrid_empowerer ;
       private GXUserControl ucDdo_managefilters ;
+      private GxHttpRequest AV10HTTPRequest ;
+      private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
-      private msglist BackMsgLst ;
-      private msglist LclMsgLst ;
-      private GxHttpRequest AV10HTTPRequest ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector AV21ColumnsSelector ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState AV13GridState ;
+      private GxSimpleCollection<long> AV38ProjectId ;
+      private SdtSDTLeaveReport AV16SDTLeaveReport ;
       private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsData_Item> AV24ManageFiltersData ;
-      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsData_Item> AV34AGExportData ;
-      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsData_Item> GXt_objcol_SdtDVB_SDTDropDownOptionsData_Item5 ;
+      private GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsTitleSettingsIcons AV27DDO_TitleSettingsIcons ;
       private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item> AV42PeriodicCategory_Data ;
       private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item> AV44EmployeeId_Data ;
       private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item> AV57ProjectId_Data ;
       private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item> AV61CompanyLocationId_Data ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV46GAMErrors ;
-      private GXWebForm Form ;
-      private GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsData_Item AV35AGExportDataItem ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector AV21ColumnsSelector ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector AV22ColumnsSelectorAux ;
+      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsData_Item> AV34AGExportData ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions AV59Date_RangePickerOptions ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions GXt_SdtWWPDateRangePickerOptions3 ;
-      private GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsTitleSettingsIcons AV27DDO_TitleSettingsIcons ;
-      private GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsTitleSettingsIcons GXt_SdtDVB_SDTDropDownOptionsTitleSettingsIcons2 ;
       private GeneXus.Programs.genexussecurity.SdtGAMSession AV45GAMSession ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState AV13GridState ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue AV14GridStateFilterValue ;
-      private SdtSDTLeaveReport AV16SDTLeaveReport ;
-      private SdtSDTLeaveReport GXt_SdtSDTLeaveReport1 ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV46GAMErrors ;
+      private GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsData_Item AV35AGExportDataItem ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions GXt_SdtWWPDateRangePickerOptions3 ;
+      private GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsTitleSettingsIcons GXt_SdtDVB_SDTDropDownOptionsTitleSettingsIcons2 ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV6WWPContext ;
+      private SdtSDTLeaveReport GXt_SdtSDTLeaveReport1 ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector AV22ColumnsSelectorAux ;
+      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsData_Item> GXt_objcol_SdtDVB_SDTDropDownOptionsData_Item5 ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue AV14GridStateFilterValue ;
+      private msglist BackMsgLst ;
+      private msglist LclMsgLst ;
    }
 
 }

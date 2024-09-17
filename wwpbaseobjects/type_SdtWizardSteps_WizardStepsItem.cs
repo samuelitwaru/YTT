@@ -1,7 +1,7 @@
 /*
 				   File: type_SdtWizardSteps_WizardStepsItem
 			Description: WizardSteps
-				 Author: Nemo 🐠 for C# (.NET) version 18.0.6.177934
+				 Author: Nemo 🐠 for C# (.NET) version 18.0.10.184260
 		   Program type: Callable routine
 			  Main DBMS: 
 */
@@ -133,6 +133,14 @@ namespace GeneXus.Programs.wwpbaseobjects
 
 		#endregion
 
+		#region Static Type Properties
+
+		[XmlIgnore]
+		private static GXTypeInfo _typeProps;
+		protected override GXTypeInfo TypeInfo { get { return _typeProps; } set { _typeProps = value; } }
+
+		#endregion
+
 		#region Initialization
 
 		public void initialize( )
@@ -162,6 +170,7 @@ namespace GeneXus.Programs.wwpbaseobjects
 		#endregion
 	}
 	#region Rest interface
+	[GxJsonSerialization("wrapped")]
 	[DataContract(Name=@"WizardStepsItem", Namespace="YTT_version4")]
 	public class SdtWizardSteps_WizardStepsItem_RESTInterface : GxGenericCollectionItem<SdtWizardSteps_WizardStepsItem>, System.Web.SessionState.IRequiresSessionState
 	{

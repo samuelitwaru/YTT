@@ -47,35 +47,18 @@ namespace GeneXus.Programs {
          this.AV2supportsubject = aP0_supportsubject;
          this.AV3supportdescription = aP1_supportdescription;
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
       public void executeSubmit( string aP0_supportsubject ,
                                  string aP1_supportdescription )
       {
-         sendcontactusemail objsendcontactusemail;
-         objsendcontactusemail = new sendcontactusemail();
-         objsendcontactusemail.AV2supportsubject = aP0_supportsubject;
-         objsendcontactusemail.AV3supportdescription = aP1_supportdescription;
-         objsendcontactusemail.context.SetSubmitInitialConfig(context);
-         objsendcontactusemail.initialize();
-         Submit( executePrivateCatch,objsendcontactusemail);
+         this.AV2supportsubject = aP0_supportsubject;
+         this.AV3supportdescription = aP1_supportdescription;
+         SubmitImpl();
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((sendcontactusemail)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -84,20 +67,16 @@ namespace GeneXus.Programs {
          if ( ( args != null ) && ( args.Length == 2 ) )
          {
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )

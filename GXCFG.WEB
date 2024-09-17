@@ -49,7 +49,7 @@
       <add  key="DateFormat" value="DMY"/>
       <add  key="YearLimit" value="1940"/>
       <add  key="TimeAmPmFormat" value="12"/>
-      <add  key="VER_STAMP" value="20240812.115508"/>
+      <add  key="VER_STAMP" value="20240916.094316"/>
       <add  key="CS_BLOB_PATH" value="PublicTempStorage"/>
       <add  key="TMPMEDIA_DIR" value="PrivateTempStorage"/>
       <add  key="PRINT_LAYOUT_METADATA_DIR" value="LayoutMetadata"/>
@@ -65,11 +65,11 @@
       <add  key="Theme" value="WorkWithPlusDS"/>
       <add  key="UseNamedParameters" value="1"/>
       <add  key="EnableIntegratedSecurity" value="1"/>
-      <add  key="IntegratedSecurityLoginWeb" value="login"/>
+      <add  key="IntegratedSecurityLoginWeb" value="gamexamplelogin"/>
       <add  key="IntegratedSecurityNotAuthorizedWeb" value="gamnotauthorized"/>
       <add  key="MAX_CURSOR" value="100"/>
       <add  key="STATIC_CONTENT" value=""/>
-      <add  key="GX_BUILD_NUMBER" value="312140"/>
+      <add  key="GX_BUILD_NUMBER" value="1918140"/>
       <add  key="CACHE_CONTENT_EXPIRATION" value="36"/>
       <add  key="FTP_DEFAULT_USER" value="Zd8hx1OPJaolo5nN5s4nmc=="/>
       <add  key="FTP_DEFAULT_PASSWORD" value="kvwmxbHzjMA66dQNAHRlhn=="/>
@@ -85,8 +85,9 @@
       <add  key="wcf:serviceHostingEnvironment:useClassicReadEntityBodyMode" value="true"/>
       <add  key="HTTP_PROTOCOL" value="Unsecure"/>
       <add  key="SAMESITE_COOKIE" value="Lax"/>
-      <add  key="CACHE_INVALIDATION_TOKEN" value="20249320353514"/>
+      <add  key="CACHE_INVALIDATION_TOKEN" value="20249171626472"/>
       <add  key="CORS_ALLOW_ORIGIN" value=""/>
+      <add  key="LOG_OUTPUT" value="RollingFile"/>
       <add  key="MaxFileUploadSize" value="528000000"/>
       <add  key="SessionTimeout" value="20"/>
    </appSettings>

@@ -57,7 +57,7 @@ namespace GeneXus.Programs {
          this.AV24gxid = aP0_gxid;
          this.AV35GXM7ProfilePanel_Level_DetailSdt = new SdtProfilePanel_Level_DetailSdt(context) ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_GXM7ProfilePanel_Level_DetailSdt=this.AV35GXM7ProfilePanel_Level_DetailSdt;
       }
 
@@ -70,30 +70,13 @@ namespace GeneXus.Programs {
       public void executeSubmit( int aP0_gxid ,
                                  out SdtProfilePanel_Level_DetailSdt aP1_GXM7ProfilePanel_Level_DetailSdt )
       {
-         profilepanel_level_detail objprofilepanel_level_detail;
-         objprofilepanel_level_detail = new profilepanel_level_detail();
-         objprofilepanel_level_detail.AV24gxid = aP0_gxid;
-         objprofilepanel_level_detail.AV35GXM7ProfilePanel_Level_DetailSdt = new SdtProfilePanel_Level_DetailSdt(context) ;
-         objprofilepanel_level_detail.context.SetSubmitInitialConfig(context);
-         objprofilepanel_level_detail.initialize();
-         Submit( executePrivateCatch,objprofilepanel_level_detail);
+         this.AV24gxid = aP0_gxid;
+         this.AV35GXM7ProfilePanel_Level_DetailSdt = new SdtProfilePanel_Level_DetailSdt(context) ;
+         SubmitImpl();
          aP1_GXM7ProfilePanel_Level_DetailSdt=this.AV35GXM7ProfilePanel_Level_DetailSdt;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((profilepanel_level_detail)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -140,7 +123,7 @@ namespace GeneXus.Programs {
          AV8MenuOptions = GXt_objcol_SdtMenuOptions_MenuOptionsItem1;
          AV8MenuOptions.Sort("OrderIndex");
          AV9UserInfo_UserImage = context.GetImagePath( "9b60406f-2e43-467c-92b6-b2d04aad0f71", "", context.GetTheme( ));
-         AV36Userinfo_userimage_GXI = GXDbFile.PathToUrl( context.GetImagePath( "9b60406f-2e43-467c-92b6-b2d04aad0f71", "", context.GetTheme( )));
+         AV36Userinfo_userimage_GXI = GXDbFile.PathToUrl( context.GetImagePath( "9b60406f-2e43-467c-92b6-b2d04aad0f71", "", context.GetTheme( )), context);
          AV37GXV1 = 1;
          while ( AV37GXV1 <= AV8MenuOptions.Count )
          {
@@ -196,21 +179,17 @@ namespace GeneXus.Programs {
          AV35GXM7ProfilePanel_Level_DetailSdt.gxTpr_Usercompany = AV23UserCompany;
          AV35GXM7ProfilePanel_Level_DetailSdt.gxTpr_Role = AV20Role;
          Gxwebsession.Set(Gxids+"gxvar_Menuoptions", AV8MenuOptions.ToJSonString(false));
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
          ExitApp();
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -255,14 +234,14 @@ namespace GeneXus.Programs {
       private string Gxdynpropsdt ;
       private string Gxdynprop6 ;
       private string AV9UserInfo_UserImage ;
-      private GXBaseCollection<GeneXus.Programs.workwithplus.nativemobile.SdtMenuOptions_MenuOptionsItem> AV8MenuOptions ;
-      private SdtProfilePanel_Level_DetailSdt aP1_GXM7ProfilePanel_Level_DetailSdt ;
       private IGxSession Gxwebsession ;
-      private GxSimpleCollection<string> Gxcol_gridmenuoptions_props ;
-      private GXBaseCollection<GeneXus.Programs.workwithplus.nativemobile.SdtMenuOptions_MenuOptionsItem> GXt_objcol_SdtMenuOptions_MenuOptionsItem1 ;
+      private SdtProfilePanel_Level_DetailSdt AV35GXM7ProfilePanel_Level_DetailSdt ;
       private GeneXus.Programs.genexussecurity.SdtGAMUser AV14GamUser ;
       private SdtEmployee AV18Employee ;
-      private SdtProfilePanel_Level_DetailSdt AV35GXM7ProfilePanel_Level_DetailSdt ;
+      private GXBaseCollection<GeneXus.Programs.workwithplus.nativemobile.SdtMenuOptions_MenuOptionsItem> AV8MenuOptions ;
+      private GXBaseCollection<GeneXus.Programs.workwithplus.nativemobile.SdtMenuOptions_MenuOptionsItem> GXt_objcol_SdtMenuOptions_MenuOptionsItem1 ;
+      private GxSimpleCollection<string> Gxcol_gridmenuoptions_props ;
+      private SdtProfilePanel_Level_DetailSdt aP1_GXM7ProfilePanel_Level_DetailSdt ;
    }
 
 }

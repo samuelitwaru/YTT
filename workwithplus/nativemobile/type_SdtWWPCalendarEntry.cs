@@ -1,7 +1,7 @@
 /*
 				   File: type_SdtWWPCalendarEntry
 			Description: WWPCalendarEntry
-				 Author: Nemo 🐠 for C# (.NET) version 18.0.6.177934
+				 Author: Nemo 🐠 for C# (.NET) version 18.0.10.184260
 		   Program type: Callable routine
 			  Main DBMS: 
 */
@@ -262,6 +262,14 @@ namespace GeneXus.Programs.workwithplus.nativemobile
 
 		#endregion
 
+		#region Static Type Properties
+
+		[XmlIgnore]
+		private static GXTypeInfo _typeProps;
+		protected override GXTypeInfo TypeInfo { get { return _typeProps; } set { _typeProps = value; } }
+
+		#endregion
+
 		#region Initialization
 
 		public void initialize( )
@@ -315,7 +323,7 @@ namespace GeneXus.Programs.workwithplus.nativemobile
 		#endregion
 	}
 	#region Rest interface
-	[GxUnWrappedJson()]
+	[GxJsonSerialization("default")]
 	[DataContract(Name=@"WWPCalendarEntry", Namespace="YTT_version4")]
 	public class SdtWWPCalendarEntry_RESTInterface : GxGenericCollectionItem<SdtWWPCalendarEntry>, System.Web.SessionState.IRequiresSessionState
 	{
@@ -416,11 +424,11 @@ namespace GeneXus.Programs.workwithplus.nativemobile
 		public  string gxTpr_Time
 		{
 			get { 
-				return DateTimeUtil.TToC2( sdt.gxTpr_Time);
+				return DateTimeUtil.TToC2( sdt.gxTpr_Time,context);
 
 			}
 			set { 
-				sdt.gxTpr_Time = DateTimeUtil.CToT2(value);
+				sdt.gxTpr_Time = DateTimeUtil.CToT2(value,context);
 			}
 		}
 

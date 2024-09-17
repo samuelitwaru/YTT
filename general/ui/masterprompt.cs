@@ -41,10 +41,10 @@ namespace GeneXus.Programs.general.ui {
 
       public void execute( )
       {
-         executePrivate();
+         ExecuteImpl();
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -61,11 +61,8 @@ namespace GeneXus.Programs.general.ui {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITWEB( ) ;
          if ( ! isAjaxCallMode( ) )
          {
@@ -80,7 +77,7 @@ namespace GeneXus.Programs.general.ui {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void RenderHtmlHeaders( )
@@ -124,7 +121,7 @@ namespace GeneXus.Programs.general.ui {
          {
             disableOutput();
          }
-         context.AddJavascriptSource("general/ui/masterprompt.js", "?202471712112513", false, true);
+         context.AddJavascriptSource("general/ui/masterprompt.js", "?202491613143242", false, true);
          context.WriteHtmlTextNl( "</body>") ;
          context.WriteHtmlTextNl( "</html>") ;
          if ( context.isSpaRequest( ) )
@@ -485,7 +482,7 @@ namespace GeneXus.Programs.general.ui {
          PA022( ) ;
          WS022( ) ;
          WE022( ) ;
-         this.cleanup();
+         cleanup();
          context.SetWrapped(false);
          context.GX_msglist = BackMsgLst;
          return "";
@@ -511,7 +508,7 @@ namespace GeneXus.Programs.general.ui {
          idxLst = 1;
          while ( idxLst <= (getDataAreaObject() == null ? Form : getDataAreaObject().GetForm()).Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)(getDataAreaObject() == null ? Form : getDataAreaObject().GetForm()).Jscriptsrc.Item(idxLst))), "?202471712112518", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)(getDataAreaObject() == null ? Form : getDataAreaObject().GetForm()).Jscriptsrc.Item(idxLst))), "?202491613143245", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -528,7 +525,7 @@ namespace GeneXus.Programs.general.ui {
       {
          if ( nGXWrapped != 1 )
          {
-            context.AddJavascriptSource("general/ui/masterprompt.js", "?202471712112518", false, true);
+            context.AddJavascriptSource("general/ui/masterprompt.js", "?202491613143245", false, true);
          }
          /* End function include_jscripts */
       }
@@ -565,23 +562,17 @@ namespace GeneXus.Programs.general.ui {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH_MPAGE","{handler:'Refresh',iparms:[]");
-         setEventMetadata("REFRESH_MPAGE",",oparms:[]}");
+         setEventMetadata("REFRESH_MPAGE","""{"handler":"Refresh","iparms":[]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -600,7 +591,6 @@ namespace GeneXus.Programs.general.ui {
          /* GeneXus formulas. */
       }
 
-      private short initialized ;
       private short GxWebError ;
       private short wbEnd ;
       private short wbStart ;
@@ -623,12 +613,12 @@ namespace GeneXus.Programs.general.ui {
       private bool toggleJsOutput ;
       private bool gxdyncontrolsrefreshing ;
       private bool returnInSub ;
+      private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private GXDataAreaControl Contentholder ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
-      private GXWebForm Form ;
    }
 
 }

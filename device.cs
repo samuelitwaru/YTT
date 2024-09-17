@@ -110,7 +110,7 @@ namespace GeneXus.Programs {
          {
             if ( context.ExposeMetadata( ) )
             {
-               Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+               Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
             }
          }
          Form.Meta.addItem("description", "Device", 0) ;
@@ -153,10 +153,10 @@ namespace GeneXus.Programs {
 
       public void execute( )
       {
-         executePrivate();
+         ExecuteImpl();
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -193,11 +193,8 @@ namespace GeneXus.Programs {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITENV( ) ;
          INITTRN( ) ;
          if ( ( GxWebError == 0 ) && ! isAjaxCallMode( ) )
@@ -229,7 +226,7 @@ namespace GeneXus.Programs {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       protected void fix_multi_value_controls( )
@@ -800,7 +797,6 @@ namespace GeneXus.Programs {
 
       protected void CheckExtendedTable0L23( )
       {
-         nIsDirty_23 = 0;
          Gx_BScreen = 1;
          standaloneModal( ) ;
          if ( ! ( ( A152DeviceType == 0 ) || ( A152DeviceType == 1 ) || ( A152DeviceType == 2 ) || ( A152DeviceType == 3 ) ) )
@@ -1058,7 +1054,7 @@ namespace GeneXus.Programs {
          {
             getByPrimaryKey( ) ;
          }
-         CloseOpenCursors();
+         CloseCursors();
       }
 
       protected void btn_get( )
@@ -1573,10 +1569,10 @@ namespace GeneXus.Programs {
          CloseStyles();
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
@@ -1743,7 +1739,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202471712112090", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202491613142953", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1759,7 +1755,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("device.js", "?202471712112090", false, true);
+         context.AddJavascriptSource("device.js", "?202491613142954", false, true);
          /* End function include_jscripts */
       }
 
@@ -1921,28 +1917,24 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("ENTER","{handler:'UserMainFullajax',iparms:[{postForm:true}]");
-         setEventMetadata("ENTER",",oparms:[]}");
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[]");
-         setEventMetadata("REFRESH",",oparms:[]}");
-         setEventMetadata("VALID_DEVICEID","{handler:'Valid_Deviceid',iparms:[{av:'cmbDeviceType'},{av:'A152DeviceType',fld:'DEVICETYPE',pic:'9'},{av:'A151DeviceId',fld:'DEVICEID',pic:''},{av:'Gx_mode',fld:'vMODE',pic:'@!'}]");
-         setEventMetadata("VALID_DEVICEID",",oparms:[{av:'cmbDeviceType'},{av:'A152DeviceType',fld:'DEVICETYPE',pic:'9'},{av:'A149DeviceToken',fld:'DEVICETOKEN',pic:''},{av:'A153DeviceName',fld:'DEVICENAME',pic:''},{av:'A150DeviceUser',fld:'DEVICEUSER',pic:''},{av:'Gx_mode',fld:'vMODE',pic:'@!'},{av:'Z151DeviceId'},{av:'Z152DeviceType'},{av:'Z149DeviceToken'},{av:'Z153DeviceName'},{av:'Z150DeviceUser'},{ctrl:'BTN_DELETE',prop:'Enabled'},{ctrl:'BTN_ENTER',prop:'Enabled'}]}");
-         setEventMetadata("VALID_DEVICETYPE","{handler:'Valid_Devicetype',iparms:[]");
-         setEventMetadata("VALID_DEVICETYPE",",oparms:[]}");
+         setEventMetadata("ENTER","""{"handler":"UserMainFullajax","iparms":[{"postForm":true}]}""");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[]}""");
+         setEventMetadata("VALID_DEVICEID","""{"handler":"Valid_Deviceid","iparms":[{"av":"cmbDeviceType"},{"av":"A152DeviceType","fld":"DEVICETYPE","pic":"9"},{"av":"A151DeviceId","fld":"DEVICEID"},{"av":"Gx_mode","fld":"vMODE","pic":"@!"}]""");
+         setEventMetadata("VALID_DEVICEID",""","oparms":[{"av":"cmbDeviceType"},{"av":"A152DeviceType","fld":"DEVICETYPE","pic":"9"},{"av":"A149DeviceToken","fld":"DEVICETOKEN"},{"av":"A153DeviceName","fld":"DEVICENAME"},{"av":"A150DeviceUser","fld":"DEVICEUSER"},{"av":"Gx_mode","fld":"vMODE","pic":"@!"},{"av":"Z151DeviceId"},{"av":"Z152DeviceType"},{"av":"Z149DeviceToken"},{"av":"Z153DeviceName"},{"av":"Z150DeviceUser"},{"ctrl":"BTN_DELETE","prop":"Enabled"},{"ctrl":"BTN_ENTER","prop":"Enabled"}]}""");
+         setEventMetadata("VALID_DEVICETYPE","""{"handler":"Valid_Devicetype","iparms":[]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
       }
 
-      protected void CloseOpenCursors( )
+      protected override void CloseCursors( )
       {
          pr_default.close(1);
       }
@@ -1954,7 +1946,6 @@ namespace GeneXus.Programs {
          Z149DeviceToken = "";
          Z153DeviceName = "";
          Z150DeviceUser = "";
-         scmdbuf = "";
          gxfirstwebparm = "";
          gxfirstwebparm_bkp = "";
          GXKey = "";
@@ -2055,15 +2046,12 @@ namespace GeneXus.Programs {
       private short Z152DeviceType ;
       private short GxWebError ;
       private short gxcookieaux ;
-      private short IsConfirmed ;
-      private short IsModified ;
       private short AnyError ;
+      private short IsModified ;
+      private short IsConfirmed ;
       private short nKeyPressed ;
-      private short initialized ;
       private short A152DeviceType ;
-      private short GX_JID ;
       private short RcdFound23 ;
-      private short nIsDirty_23 ;
       private short Gx_BScreen ;
       private short gxajaxcallmode ;
       private short ZZ152DeviceType ;
@@ -2087,7 +2075,6 @@ namespace GeneXus.Programs {
       private string Z151DeviceId ;
       private string Z149DeviceToken ;
       private string Z153DeviceName ;
-      private string scmdbuf ;
       private string gxfirstwebparm ;
       private string gxfirstwebparm_bkp ;
       private string GXKey ;
@@ -2152,6 +2139,7 @@ namespace GeneXus.Programs {
       private string Z150DeviceUser ;
       private string A150DeviceUser ;
       private string ZZ150DeviceUser ;
+      private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private GXCombobox cmbDeviceType ;
@@ -2179,7 +2167,6 @@ namespace GeneXus.Programs {
       private bool[] T000L2_n150DeviceUser ;
       private string[] T000L11_A151DeviceId ;
       private IDataStoreProvider pr_gam ;
-      private GXWebForm Form ;
    }
 
    public class device__gam : DataStoreHelperBase, IDataStoreHelper
@@ -2238,6 +2225,14 @@ namespace GeneXus.Programs {
   {
      if ( def == null )
      {
+        Object[] prmT000L2;
+        prmT000L2 = new Object[] {
+        new ParDef("DeviceId",GXType.Char,128,0)
+        };
+        Object[] prmT000L3;
+        prmT000L3 = new Object[] {
+        new ParDef("DeviceId",GXType.Char,128,0)
+        };
         Object[] prmT000L4;
         prmT000L4 = new Object[] {
         new ParDef("DeviceId",GXType.Char,128,0)
@@ -2246,20 +2241,12 @@ namespace GeneXus.Programs {
         prmT000L5 = new Object[] {
         new ParDef("DeviceId",GXType.Char,128,0)
         };
-        Object[] prmT000L3;
-        prmT000L3 = new Object[] {
-        new ParDef("DeviceId",GXType.Char,128,0)
-        };
         Object[] prmT000L6;
         prmT000L6 = new Object[] {
         new ParDef("DeviceId",GXType.Char,128,0)
         };
         Object[] prmT000L7;
         prmT000L7 = new Object[] {
-        new ParDef("DeviceId",GXType.Char,128,0)
-        };
-        Object[] prmT000L2;
-        prmT000L2 = new Object[] {
         new ParDef("DeviceId",GXType.Char,128,0)
         };
         Object[] prmT000L8;

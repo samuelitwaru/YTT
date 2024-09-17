@@ -49,7 +49,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          this.AV3inJson = aP1_inJson;
          this.AV4outJson = "" ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP2_outJson=this.AV4outJson;
       }
 
@@ -64,54 +64,33 @@ namespace GeneXus.Programs.wwpbaseobjects {
                                  string aP1_inJson ,
                                  out string aP2_outJson )
       {
-         wwp_synchandler objwwp_synchandler;
-         objwwp_synchandler = new wwp_synchandler();
-         objwwp_synchandler.AV2GAMEvents = aP0_GAMEvents;
-         objwwp_synchandler.AV3inJson = aP1_inJson;
-         objwwp_synchandler.AV4outJson = "" ;
-         objwwp_synchandler.context.SetSubmitInitialConfig(context);
-         objwwp_synchandler.initialize();
-         Submit( executePrivateCatch,objwwp_synchandler);
+         this.AV2GAMEvents = aP0_GAMEvents;
+         this.AV3inJson = aP1_inJson;
+         this.AV4outJson = "" ;
+         SubmitImpl();
          aP2_outJson=this.AV4outJson;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((wwp_synchandler)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
          args = new Object[] {(string)AV2GAMEvents,(string)AV3inJson,(string)AV4outJson} ;
-         ClassLoader.Execute("wwpbaseobjects-awwp_synchandler","GeneXus.Programs","wwpbaseobjects.awwp_synchandler", new Object[] {context }, "execute", args);
+         ClassLoader.Execute("wwpbaseobjects.awwp_synchandler","GeneXus.Programs","wwpbaseobjects.awwp_synchandler", new Object[] {context }, "execute", args);
          if ( ( args != null ) && ( args.Length == 3 ) )
          {
             AV4outJson = (string)(args[2]) ;
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )

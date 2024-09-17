@@ -401,6 +401,20 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
          return false ;
       }
 
+      [XmlIgnore]
+      private static GXTypeInfo _typeProps;
+      protected override GXTypeInfo TypeInfo
+      {
+         get {
+            return _typeProps ;
+         }
+
+         set {
+            _typeProps = value ;
+         }
+
+      }
+
       public void initialize( )
       {
          gxTv_SdtWWP_MailTemplate_Wwpmailtemplatename = "";
@@ -443,6 +457,7 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
    }
 
    [DataContract(Name = @"WWPBaseObjects\Mail\WWP_MailTemplate", Namespace = "YTT_version4")]
+   [GxJsonSerialization("default")]
    public class SdtWWP_MailTemplate_RESTInterface : GxGenericCollectionItem<GeneXus.Programs.wwpbaseobjects.mail.SdtWWP_MailTemplate>
    {
       public SdtWWP_MailTemplate_RESTInterface( ) : base()
@@ -576,6 +591,7 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
    }
 
    [DataContract(Name = @"WWPBaseObjects\Mail\WWP_MailTemplate", Namespace = "YTT_version4")]
+   [GxJsonSerialization("default")]
    public class SdtWWP_MailTemplate_RESTLInterface : GxGenericCollectionItem<GeneXus.Programs.wwpbaseobjects.mail.SdtWWP_MailTemplate>
    {
       public SdtWWP_MailTemplate_RESTLInterface( ) : base()

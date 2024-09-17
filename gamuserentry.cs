@@ -45,12 +45,12 @@ namespace GeneXus.Programs {
       {
          this.Gx_mode = aP0_Gx_mode;
          this.AV55UserId = aP1_UserId;
-         executePrivate();
+         ExecuteImpl();
          aP0_Gx_mode=this.Gx_mode;
          aP1_UserId=this.AV55UserId;
       }
 
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          isStatic = false;
          webExecute();
@@ -176,11 +176,8 @@ namespace GeneXus.Programs {
 
       public override void webExecute( )
       {
-         if ( initialized == 0 )
-         {
-            createObjects();
-            initialize();
-         }
+         createObjects();
+         initialize();
          INITWEB( ) ;
          if ( ! isAjaxCallMode( ) )
          {
@@ -211,7 +208,7 @@ namespace GeneXus.Programs {
                }
             }
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override short ExecuteStartEvent( )
@@ -255,18 +252,18 @@ namespace GeneXus.Programs {
          CloseStyles();
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
-            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 312140), false, true);
+            context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
          }
-         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("gxcfg.js", "?"+GetCacheInvalidationToken( ), false, true);
          if ( context.isSpaRequest( ) )
          {
             enableOutput();
          }
-         context.AddJavascriptSource("calendar.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("calendar-setup.js", "?"+context.GetBuildNumber( 312140), false, true);
-         context.AddJavascriptSource("calendar-en.js", "?"+context.GetBuildNumber( 312140), false, true);
+         context.AddJavascriptSource("calendar.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("calendar-setup.js", "?"+context.GetBuildNumber( 1918140), false, true);
+         context.AddJavascriptSource("calendar-en.js", "?"+context.GetBuildNumber( 1918140), false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Panel/BootstrapPanelRender.js", "", false, true);
@@ -469,7 +466,8 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
             /* Single line edit */
-            GxWebStd.gx_single_line_edit( context, edtavUserid_Internalname, StringUtil.RTrim( AV55UserId), StringUtil.RTrim( context.localUtil.Format( AV55UserId, "")), "", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavUserid_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavUserid_Enabled, 0, "text", "", 40, "chr", 1, "row", 40, 0, 0, 0, 0, -1, 0, true, "GeneXusSecurityCommon\\GAMGUID", "start", true, "", "HLP_GAMUserEntry.htm");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 22,'',false,'',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtavUserid_Internalname, StringUtil.RTrim( AV55UserId), StringUtil.RTrim( context.localUtil.Format( AV55UserId, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,22);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavUserid_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavUserid_Enabled, 0, "text", "", 40, "chr", 1, "row", 40, 0, 0, 0, 0, -1, 0, true, "GeneXusSecurityCommon\\GAMGUID", "start", true, "", "HLP_GAMUserEntry.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -1075,7 +1073,7 @@ namespace GeneXus.Programs {
          {
             if ( context.ExposeMetadata( ) )
             {
-               Form.Meta.addItem("generator", "GeneXus .NET 18_0_6-177934", 0) ;
+               Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
             }
          }
          Form.Meta.addItem("description", "User ", 0) ;
@@ -1662,7 +1660,7 @@ namespace GeneXus.Programs {
                AV25Image = AV53User.gxTpr_Urlimage;
                AssignProp("", false, imgavImage_Internalname, "Bitmap", (String.IsNullOrEmpty(StringUtil.RTrim( AV25Image)) ? AV64Image_GXI : context.convertURL( context.PathToRelativeUrl( AV25Image))), true);
                AssignProp("", false, imgavImage_Internalname, "SrcSet", context.GetImageSrcSet( AV25Image), true);
-               AV64Image_GXI = GXDbFile.PathToUrl( AV53User.gxTpr_Urlimage);
+               AV64Image_GXI = GXDbFile.PathToUrl( AV53User.gxTpr_Urlimage, context);
                AssignProp("", false, imgavImage_Internalname, "Bitmap", (String.IsNullOrEmpty(StringUtil.RTrim( AV25Image)) ? AV64Image_GXI : context.convertURL( context.PathToRelativeUrl( AV25Image))), true);
                AssignProp("", false, imgavImage_Internalname, "SrcSet", context.GetImageSrcSet( AV25Image), true);
             }
@@ -2351,7 +2349,7 @@ namespace GeneXus.Programs {
          PA1M2( ) ;
          WS1M2( ) ;
          WE1M2( ) ;
-         this.cleanup();
+         cleanup();
          context.SetWrapped(false);
          context.GX_msglist = BackMsgLst;
          return "";
@@ -2373,7 +2371,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20248121575657", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202491716185231", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2389,7 +2387,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("gamuserentry.js", "?20248121575659", false, true);
+         context.AddJavascriptSource("gamuserentry.js", "?202491716185233", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Panel/BootstrapPanelRender.js", "", false, true);
@@ -2417,42 +2415,42 @@ namespace GeneXus.Programs {
          }
          chkavIsactive.Name = "vISACTIVE";
          chkavIsactive.WebTags = "";
-         chkavIsactive.Caption = "Account is active?";
+         chkavIsactive.Caption = " ";
          AssignProp("", false, chkavIsactive_Internalname, "TitleCaption", chkavIsactive.Caption, true);
          chkavIsactive.CheckedValue = "false";
          AV26IsActive = StringUtil.StrToBool( StringUtil.BoolToStr( AV26IsActive));
          AssignAttri("", false, "AV26IsActive", AV26IsActive);
          chkavDontreceiveinformation.Name = "vDONTRECEIVEINFORMATION";
          chkavDontreceiveinformation.WebTags = "";
-         chkavDontreceiveinformation.Caption = "Don't want to receive information";
+         chkavDontreceiveinformation.Caption = " ";
          AssignProp("", false, chkavDontreceiveinformation_Internalname, "TitleCaption", chkavDontreceiveinformation.Caption, true);
          chkavDontreceiveinformation.CheckedValue = "false";
          AV15DontReceiveInformation = StringUtil.StrToBool( StringUtil.BoolToStr( AV15DontReceiveInformation));
          AssignAttri("", false, "AV15DontReceiveInformation", AV15DontReceiveInformation);
          chkavCannotchangepassword.Name = "vCANNOTCHANGEPASSWORD";
          chkavCannotchangepassword.WebTags = "";
-         chkavCannotchangepassword.Caption = "Cannot change password";
+         chkavCannotchangepassword.Caption = " ";
          AssignProp("", false, chkavCannotchangepassword_Internalname, "TitleCaption", chkavCannotchangepassword.Caption, true);
          chkavCannotchangepassword.CheckedValue = "false";
          AV13CannotChangePassword = StringUtil.StrToBool( StringUtil.BoolToStr( AV13CannotChangePassword));
          AssignAttri("", false, "AV13CannotChangePassword", AV13CannotChangePassword);
          chkavMustchangepassword.Name = "vMUSTCHANGEPASSWORD";
          chkavMustchangepassword.WebTags = "";
-         chkavMustchangepassword.Caption = "Must change password";
+         chkavMustchangepassword.Caption = " ";
          AssignProp("", false, chkavMustchangepassword_Internalname, "TitleCaption", chkavMustchangepassword.Caption, true);
          chkavMustchangepassword.CheckedValue = "false";
          AV35MustChangePassword = StringUtil.StrToBool( StringUtil.BoolToStr( AV35MustChangePassword));
          AssignAttri("", false, "AV35MustChangePassword", AV35MustChangePassword);
          chkavPasswordneverexpires.Name = "vPASSWORDNEVEREXPIRES";
          chkavPasswordneverexpires.WebTags = "";
-         chkavPasswordneverexpires.Caption = "Password never expires";
+         chkavPasswordneverexpires.Caption = " ";
          AssignProp("", false, chkavPasswordneverexpires_Internalname, "TitleCaption", chkavPasswordneverexpires.Caption, true);
          chkavPasswordneverexpires.CheckedValue = "false";
          AV44PasswordNeverExpires = StringUtil.StrToBool( StringUtil.BoolToStr( AV44PasswordNeverExpires));
          AssignAttri("", false, "AV44PasswordNeverExpires", AV44PasswordNeverExpires);
          chkavIsblocked.Name = "vISBLOCKED";
          chkavIsblocked.WebTags = "";
-         chkavIsblocked.Caption = "Is blocked?";
+         chkavIsblocked.Caption = " ";
          AssignProp("", false, chkavIsblocked_Internalname, "TitleCaption", chkavIsblocked.Caption, true);
          chkavIsblocked.CheckedValue = "false";
          AV27IsBlocked = StringUtil.StrToBool( StringUtil.BoolToStr( AV27IsBlocked));
@@ -2466,14 +2464,14 @@ namespace GeneXus.Programs {
          }
          chkavIsenabledinrepository.Name = "vISENABLEDINREPOSITORY";
          chkavIsenabledinrepository.WebTags = "";
-         chkavIsenabledinrepository.Caption = "Is enabled in repository?";
+         chkavIsenabledinrepository.Caption = " ";
          AssignProp("", false, chkavIsenabledinrepository_Internalname, "TitleCaption", chkavIsenabledinrepository.Caption, true);
          chkavIsenabledinrepository.CheckedValue = "false";
          AV28IsEnabledInRepository = StringUtil.StrToBool( StringUtil.BoolToStr( AV28IsEnabledInRepository));
          AssignAttri("", false, "AV28IsEnabledInRepository", AV28IsEnabledInRepository);
          chkavEnabletwofactorauthentication.Name = "vENABLETWOFACTORAUTHENTICATION";
          chkavEnabletwofactorauthentication.WebTags = "";
-         chkavEnabletwofactorauthentication.Caption = "Enable Two Factor Authentication?";
+         chkavEnabletwofactorauthentication.Caption = " ";
          AssignProp("", false, chkavEnabletwofactorauthentication_Internalname, "TitleCaption", chkavEnabletwofactorauthentication.Caption, true);
          chkavEnabletwofactorauthentication.CheckedValue = "false";
          AV17EnableTwoFactorAuthentication = StringUtil.StrToBool( StringUtil.BoolToStr( AV17EnableTwoFactorAuthentication));
@@ -2696,33 +2694,25 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","{handler:'Refresh',iparms:[{av:'AV26IsActive',fld:'vISACTIVE',pic:''},{av:'AV15DontReceiveInformation',fld:'vDONTRECEIVEINFORMATION',pic:''},{av:'AV13CannotChangePassword',fld:'vCANNOTCHANGEPASSWORD',pic:''},{av:'AV35MustChangePassword',fld:'vMUSTCHANGEPASSWORD',pic:''},{av:'AV44PasswordNeverExpires',fld:'vPASSWORDNEVEREXPIRES',pic:''},{av:'AV27IsBlocked',fld:'vISBLOCKED',pic:''},{av:'AV28IsEnabledInRepository',fld:'vISENABLEDINREPOSITORY',pic:''},{av:'AV17EnableTwoFactorAuthentication',fld:'vENABLETWOFACTORAUTHENTICATION',pic:''},{av:'GXV1',fld:'USER_ISENABLEDINREPOSITORY',pic:''},{av:'Gx_mode',fld:'vMODE',pic:'@!',hsh:true},{av:'AV55UserId',fld:'vUSERID',pic:'',hsh:true}]");
-         setEventMetadata("REFRESH",",oparms:[{ctrl:'BTNSENDACTIVATIONEMAIL',prop:'Visible'},{ctrl:'BTNURLPROFILEGO',prop:'Visible'}]}");
-         setEventMetadata("'DOSENDACTIVATIONEMAIL'","{handler:'E141M2',iparms:[{av:'AV55UserId',fld:'vUSERID',pic:'',hsh:true}]");
-         setEventMetadata("'DOSENDACTIVATIONEMAIL'",",oparms:[]}");
-         setEventMetadata("'DOURLPROFILEGO'","{handler:'E111M1',iparms:[{av:'AV52URLProfile',fld:'vURLPROFILE',pic:''}]");
-         setEventMetadata("'DOURLPROFILEGO'",",oparms:[]}");
-         setEventMetadata("ENTER","{handler:'E151M2',iparms:[{av:'AV59CheckRequiredFieldsResult',fld:'vCHECKREQUIREDFIELDSRESULT',pic:''},{av:'Gx_mode',fld:'vMODE',pic:'@!',hsh:true},{av:'AV55UserId',fld:'vUSERID',pic:'',hsh:true},{av:'cmbavAuthenticationtypename'},{av:'AV7AuthenticationTypeName',fld:'vAUTHENTICATIONTYPENAME',pic:''},{av:'AV41Password',fld:'vPASSWORD',pic:''},{av:'AV42PasswordConf',fld:'vPASSWORDCONF',pic:''},{av:'AV36Name',fld:'vNAME',pic:''},{av:'AV16Email',fld:'vEMAIL',pic:''},{av:'AV22FirstName',fld:'vFIRSTNAME',pic:''},{av:'AV31LastName',fld:'vLASTNAME',pic:''},{av:'AV20ExternalId',fld:'vEXTERNALID',pic:''},{av:'AV11Birthday',fld:'vBIRTHDAY',pic:''},{av:'AV45Phone',fld:'vPHONE',pic:''},{av:'cmbavGender'},{av:'AV24Gender',fld:'vGENDER',pic:''},{av:'AV26IsActive',fld:'vISACTIVE',pic:''},{av:'AV46Photo',fld:'vPHOTO',pic:''},{av:'AV52URLProfile',fld:'vURLPROFILE',pic:''},{av:'AV15DontReceiveInformation',fld:'vDONTRECEIVEINFORMATION',pic:''},{av:'AV13CannotChangePassword',fld:'vCANNOTCHANGEPASSWORD',pic:''},{av:'AV35MustChangePassword',fld:'vMUSTCHANGEPASSWORD',pic:''},{av:'AV27IsBlocked',fld:'vISBLOCKED',pic:''},{av:'AV44PasswordNeverExpires',fld:'vPASSWORDNEVEREXPIRES',pic:''},{av:'cmbavSecuritypolicyid'},{av:'AV50SecurityPolicyId',fld:'vSECURITYPOLICYID',pic:'ZZZZZZZZ9'},{av:'AV17EnableTwoFactorAuthentication',fld:'vENABLETWOFACTORAUTHENTICATION',pic:''},{av:'AV28IsEnabledInRepository',fld:'vISENABLEDINREPOSITORY',pic:''},{av:'AV10AuthTypeId',fld:'vAUTHTYPEID',pic:''}]");
-         setEventMetadata("ENTER",",oparms:[{av:'AV10AuthTypeId',fld:'vAUTHTYPEID',pic:''},{av:'AV28IsEnabledInRepository',fld:'vISENABLEDINREPOSITORY',pic:''},{av:'AV41Password',fld:'vPASSWORD',pic:''},{av:'AV59CheckRequiredFieldsResult',fld:'vCHECKREQUIREDFIELDSRESULT',pic:''}]}");
-         setEventMetadata("VAUTHENTICATIONTYPENAME.ISVALID","{handler:'E161M2',iparms:[{av:'cmbavAuthenticationtypename'},{av:'AV7AuthenticationTypeName',fld:'vAUTHENTICATIONTYPENAME',pic:''},{av:'AV10AuthTypeId',fld:'vAUTHTYPEID',pic:''},{av:'Gx_mode',fld:'vMODE',pic:'@!',hsh:true}]");
-         setEventMetadata("VAUTHENTICATIONTYPENAME.ISVALID",",oparms:[{av:'AV10AuthTypeId',fld:'vAUTHTYPEID',pic:''},{av:'cmbavAuthenticationtypename'},{av:'divAuthenticationtypename_cell_Class',ctrl:'AUTHENTICATIONTYPENAME_CELL',prop:'Class'},{av:'divEmail_cell_Class',ctrl:'EMAIL_CELL',prop:'Class'},{av:'edtavPassword_Visible',ctrl:'vPASSWORD',prop:'Visible'},{av:'divPassword_cell_Class',ctrl:'PASSWORD_CELL',prop:'Class'},{av:'edtavPasswordconf_Visible',ctrl:'vPASSWORDCONF',prop:'Visible'},{av:'divPasswordconf_cell_Class',ctrl:'PASSWORDCONF_CELL',prop:'Class'},{av:'divFirstname_cell_Class',ctrl:'FIRSTNAME_CELL',prop:'Class'},{av:'divLastname_cell_Class',ctrl:'LASTNAME_CELL',prop:'Class'},{av:'divBirthday_cell_Class',ctrl:'BIRTHDAY_CELL',prop:'Class'},{av:'divGender_cell_Class',ctrl:'GENDER_CELL',prop:'Class'},{av:'divPhone_cell_Class',ctrl:'PHONE_CELL',prop:'Class'},{av:'imgavImage_Visible',ctrl:'vIMAGE',prop:'Visible'},{av:'divImage_cell_Class',ctrl:'IMAGE_CELL',prop:'Class'},{av:'chkavIsactive.Visible',ctrl:'vISACTIVE',prop:'Visible'},{av:'divIsactive_cell_Class',ctrl:'ISACTIVE_CELL',prop:'Class'},{av:'chkavIsenabledinrepository.Visible',ctrl:'vISENABLEDINREPOSITORY',prop:'Visible'},{av:'divIsenabledinrepository_cell_Class',ctrl:'ISENABLEDINREPOSITORY_CELL',prop:'Class'},{av:'edtavDatelastauthentication_Visible',ctrl:'vDATELASTAUTHENTICATION',prop:'Visible'},{av:'divDatelastauthentication_cell_Class',ctrl:'DATELASTAUTHENTICATION_CELL',prop:'Class'},{av:'chkavEnabletwofactorauthentication.Visible',ctrl:'vENABLETWOFACTORAUTHENTICATION',prop:'Visible'},{av:'divEnabletwofactorauthentication_cell_Class',ctrl:'ENABLETWOFACTORAUTHENTICATION_CELL',prop:'Class'},{av:'edtavOtpnumberlocked_Visible',ctrl:'vOTPNUMBERLOCKED',prop:'Visible'},{av:'divOtpnumberlocked_cell_Class',ctrl:'OTPNUMBERLOCKED_CELL',prop:'Class'},{av:'edtavOtplastlockeddate_Visible',ctrl:'vOTPLASTLOCKEDDATE',prop:'Visible'},{av:'divOtplastlockeddate_cell_Class',ctrl:'OTPLASTLOCKEDDATE_CELL',prop:'Class'},{av:'edtavOtpdailynumbercodes_Visible',ctrl:'vOTPDAILYNUMBERCODES',prop:'Visible'},{av:'divOtpdailynumbercodes_cell_Class',ctrl:'OTPDAILYNUMBERCODES_CELL',prop:'Class'},{av:'edtavOtplastdaterequestcode_Visible',ctrl:'vOTPLASTDATEREQUESTCODE',prop:'Visible'},{av:'divOtplastdaterequestcode_cell_Class',ctrl:'OTPLASTDATEREQUESTCODE_CELL',prop:'Class'},{av:'edtavActivationdate_Visible',ctrl:'vACTIVATIONDATE',prop:'Visible'},{av:'divActivationdate_cell_Class',ctrl:'ACTIVATIONDATE_CELL',prop:'Class'},{av:'edtavUrlprofile_Visible',ctrl:'vURLPROFILE',prop:'Visible'},{av:'divUrlprofile_cell_Class',ctrl:'URLPROFILE_CELL',prop:'Class'}]}");
-         setEventMetadata("VALIDV_GENDER","{handler:'Validv_Gender',iparms:[]");
-         setEventMetadata("VALIDV_GENDER",",oparms:[]}");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"AV26IsActive","fld":"vISACTIVE"},{"av":"AV15DontReceiveInformation","fld":"vDONTRECEIVEINFORMATION"},{"av":"AV13CannotChangePassword","fld":"vCANNOTCHANGEPASSWORD"},{"av":"AV35MustChangePassword","fld":"vMUSTCHANGEPASSWORD"},{"av":"AV44PasswordNeverExpires","fld":"vPASSWORDNEVEREXPIRES"},{"av":"AV27IsBlocked","fld":"vISBLOCKED"},{"av":"AV28IsEnabledInRepository","fld":"vISENABLEDINREPOSITORY"},{"av":"AV17EnableTwoFactorAuthentication","fld":"vENABLETWOFACTORAUTHENTICATION"},{"av":"GXV1","fld":"USER_ISENABLEDINREPOSITORY"},{"av":"Gx_mode","fld":"vMODE","pic":"@!","hsh":true},{"av":"AV55UserId","fld":"vUSERID","hsh":true}]""");
+         setEventMetadata("REFRESH",""","oparms":[{"ctrl":"BTNSENDACTIVATIONEMAIL","prop":"Visible"},{"ctrl":"BTNURLPROFILEGO","prop":"Visible"}]}""");
+         setEventMetadata("'DOSENDACTIVATIONEMAIL'","""{"handler":"E141M2","iparms":[{"av":"AV55UserId","fld":"vUSERID","hsh":true}]}""");
+         setEventMetadata("'DOURLPROFILEGO'","""{"handler":"E111M1","iparms":[{"av":"AV52URLProfile","fld":"vURLPROFILE"}]}""");
+         setEventMetadata("ENTER","""{"handler":"E151M2","iparms":[{"av":"AV59CheckRequiredFieldsResult","fld":"vCHECKREQUIREDFIELDSRESULT"},{"av":"Gx_mode","fld":"vMODE","pic":"@!","hsh":true},{"av":"AV55UserId","fld":"vUSERID","hsh":true},{"av":"cmbavAuthenticationtypename"},{"av":"AV7AuthenticationTypeName","fld":"vAUTHENTICATIONTYPENAME"},{"av":"AV41Password","fld":"vPASSWORD"},{"av":"AV42PasswordConf","fld":"vPASSWORDCONF"},{"av":"AV36Name","fld":"vNAME"},{"av":"AV16Email","fld":"vEMAIL"},{"av":"AV22FirstName","fld":"vFIRSTNAME"},{"av":"AV31LastName","fld":"vLASTNAME"},{"av":"AV20ExternalId","fld":"vEXTERNALID"},{"av":"AV11Birthday","fld":"vBIRTHDAY"},{"av":"AV45Phone","fld":"vPHONE"},{"av":"cmbavGender"},{"av":"AV24Gender","fld":"vGENDER"},{"av":"AV26IsActive","fld":"vISACTIVE"},{"av":"AV46Photo","fld":"vPHOTO"},{"av":"AV52URLProfile","fld":"vURLPROFILE"},{"av":"AV15DontReceiveInformation","fld":"vDONTRECEIVEINFORMATION"},{"av":"AV13CannotChangePassword","fld":"vCANNOTCHANGEPASSWORD"},{"av":"AV35MustChangePassword","fld":"vMUSTCHANGEPASSWORD"},{"av":"AV27IsBlocked","fld":"vISBLOCKED"},{"av":"AV44PasswordNeverExpires","fld":"vPASSWORDNEVEREXPIRES"},{"av":"cmbavSecuritypolicyid"},{"av":"AV50SecurityPolicyId","fld":"vSECURITYPOLICYID","pic":"ZZZZZZZZ9"},{"av":"AV17EnableTwoFactorAuthentication","fld":"vENABLETWOFACTORAUTHENTICATION"},{"av":"AV28IsEnabledInRepository","fld":"vISENABLEDINREPOSITORY"},{"av":"AV10AuthTypeId","fld":"vAUTHTYPEID"}]""");
+         setEventMetadata("ENTER",""","oparms":[{"av":"AV10AuthTypeId","fld":"vAUTHTYPEID"},{"av":"AV28IsEnabledInRepository","fld":"vISENABLEDINREPOSITORY"},{"av":"AV41Password","fld":"vPASSWORD"},{"av":"AV59CheckRequiredFieldsResult","fld":"vCHECKREQUIREDFIELDSRESULT"}]}""");
+         setEventMetadata("VAUTHENTICATIONTYPENAME.ISVALID","""{"handler":"E161M2","iparms":[{"av":"cmbavAuthenticationtypename"},{"av":"AV7AuthenticationTypeName","fld":"vAUTHENTICATIONTYPENAME"},{"av":"AV10AuthTypeId","fld":"vAUTHTYPEID"},{"av":"Gx_mode","fld":"vMODE","pic":"@!","hsh":true}]""");
+         setEventMetadata("VAUTHENTICATIONTYPENAME.ISVALID",""","oparms":[{"av":"AV10AuthTypeId","fld":"vAUTHTYPEID"},{"av":"cmbavAuthenticationtypename"},{"av":"divAuthenticationtypename_cell_Class","ctrl":"AUTHENTICATIONTYPENAME_CELL","prop":"Class"},{"av":"divEmail_cell_Class","ctrl":"EMAIL_CELL","prop":"Class"},{"av":"edtavPassword_Visible","ctrl":"vPASSWORD","prop":"Visible"},{"av":"divPassword_cell_Class","ctrl":"PASSWORD_CELL","prop":"Class"},{"av":"edtavPasswordconf_Visible","ctrl":"vPASSWORDCONF","prop":"Visible"},{"av":"divPasswordconf_cell_Class","ctrl":"PASSWORDCONF_CELL","prop":"Class"},{"av":"divFirstname_cell_Class","ctrl":"FIRSTNAME_CELL","prop":"Class"},{"av":"divLastname_cell_Class","ctrl":"LASTNAME_CELL","prop":"Class"},{"av":"divBirthday_cell_Class","ctrl":"BIRTHDAY_CELL","prop":"Class"},{"av":"divGender_cell_Class","ctrl":"GENDER_CELL","prop":"Class"},{"av":"divPhone_cell_Class","ctrl":"PHONE_CELL","prop":"Class"},{"av":"imgavImage_Visible","ctrl":"vIMAGE","prop":"Visible"},{"av":"divImage_cell_Class","ctrl":"IMAGE_CELL","prop":"Class"},{"av":"chkavIsactive.Visible","ctrl":"vISACTIVE","prop":"Visible"},{"av":"divIsactive_cell_Class","ctrl":"ISACTIVE_CELL","prop":"Class"},{"av":"chkavIsenabledinrepository.Visible","ctrl":"vISENABLEDINREPOSITORY","prop":"Visible"},{"av":"divIsenabledinrepository_cell_Class","ctrl":"ISENABLEDINREPOSITORY_CELL","prop":"Class"},{"av":"edtavDatelastauthentication_Visible","ctrl":"vDATELASTAUTHENTICATION","prop":"Visible"},{"av":"divDatelastauthentication_cell_Class","ctrl":"DATELASTAUTHENTICATION_CELL","prop":"Class"},{"av":"chkavEnabletwofactorauthentication.Visible","ctrl":"vENABLETWOFACTORAUTHENTICATION","prop":"Visible"},{"av":"divEnabletwofactorauthentication_cell_Class","ctrl":"ENABLETWOFACTORAUTHENTICATION_CELL","prop":"Class"},{"av":"edtavOtpnumberlocked_Visible","ctrl":"vOTPNUMBERLOCKED","prop":"Visible"},{"av":"divOtpnumberlocked_cell_Class","ctrl":"OTPNUMBERLOCKED_CELL","prop":"Class"},{"av":"edtavOtplastlockeddate_Visible","ctrl":"vOTPLASTLOCKEDDATE","prop":"Visible"},{"av":"divOtplastlockeddate_cell_Class","ctrl":"OTPLASTLOCKEDDATE_CELL","prop":"Class"},{"av":"edtavOtpdailynumbercodes_Visible","ctrl":"vOTPDAILYNUMBERCODES","prop":"Visible"},{"av":"divOtpdailynumbercodes_cell_Class","ctrl":"OTPDAILYNUMBERCODES_CELL","prop":"Class"},{"av":"edtavOtplastdaterequestcode_Visible","ctrl":"vOTPLASTDATEREQUESTCODE","prop":"Visible"},{"av":"divOtplastdaterequestcode_cell_Class","ctrl":"OTPLASTDATEREQUESTCODE_CELL","prop":"Class"},{"av":"edtavActivationdate_Visible","ctrl":"vACTIVATIONDATE","prop":"Visible"},{"av":"divActivationdate_cell_Class","ctrl":"ACTIVATIONDATE_CELL","prop":"Class"},{"av":"edtavUrlprofile_Visible","ctrl":"vURLPROFILE","prop":"Visible"},{"av":"divUrlprofile_cell_Class","ctrl":"URLPROFILE_CELL","prop":"Class"}]}""");
+         setEventMetadata("VALIDV_GENDER","""{"handler":"Validv_Gender","iparms":[]}""");
          return  ;
       }
 
       public override void cleanup( )
       {
-         flushBuffer();
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
          }
-      }
-
-      protected void CloseOpenCursors( )
-      {
       }
 
       public override void initialize( )
@@ -2814,7 +2804,6 @@ namespace GeneXus.Programs {
 
       private short nGotPars ;
       private short GxWebError ;
-      private short initialized ;
       private short gxajaxcallmode ;
       private short wbEnd ;
       private short wbStart ;
@@ -2888,9 +2877,9 @@ namespace GeneXus.Programs {
       private string Dvpanel_tableattributes_Internalname ;
       private string divTableattributes_Internalname ;
       private string edtavUserid_Internalname ;
+      private string TempTags ;
       private string edtavUserid_Jsonclick ;
       private string edtavUsernamespace_Internalname ;
-      private string TempTags ;
       private string AV56UserNameSpace ;
       private string edtavUsernamespace_Jsonclick ;
       private string divAuthenticationtypename_cell_Internalname ;
@@ -3054,7 +3043,7 @@ namespace GeneXus.Programs {
       private string AV25Image ;
       private string AV12BlobPhoto ;
       private GXUserControl ucDvpanel_tableattributes ;
-      private GeneXus.Programs.genexussecurity.SdtGAMAuthenticationType AV6AuthenticationType ;
+      private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private string aP0_Gx_mode ;
@@ -3071,23 +3060,23 @@ namespace GeneXus.Programs {
       private GXCheckbox chkavIsenabledinrepository ;
       private GXCheckbox chkavEnabletwofactorauthentication ;
       private GXCheckbox chkavUser_isenabledinrepository ;
+      private GeneXus.Programs.genexussecurity.SdtGAMUser AV53User ;
+      private GeneXus.Programs.genexussecurity.SdtGAMRepository AV23GAMRepository ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMAuthenticationTypeSimple> AV8AuthenticationTypes ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV19Errors ;
+      private GeneXus.Programs.genexussecurity.SdtGAMAuthenticationTypeSimple AV9AuthenticationTypesIns ;
+      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMSecurityPolicy> AV48SecurityPolicies ;
+      private GeneXus.Programs.genexussecurity.SdtGAMSecurityPolicyFilter AV21FilterSecPol ;
+      private GeneXus.Programs.genexussecurity.SdtGAMSecurityPolicy AV49SecurityPolicy ;
+      private GeneXus.Programs.genexussecurity.SdtGAMAuthenticationType AV6AuthenticationType ;
+      private GeneXus.Programs.genexussecurity.SdtGAMRepository AV47Repository ;
       private IDataStoreProvider pr_default ;
+      private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> AV34Messages ;
+      private GeneXus.Utils.SdtMessages_Message AV33Message ;
+      private GeneXus.Programs.genexussecurity.SdtGAMError AV18Error ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
       private IDataStoreProvider pr_gam ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV19Errors ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMAuthenticationTypeSimple> AV8AuthenticationTypes ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMSecurityPolicy> AV48SecurityPolicies ;
-      private GXBaseCollection<GeneXus.Utils.SdtMessages_Message> AV34Messages ;
-      private GXWebForm Form ;
-      private GeneXus.Programs.genexussecurity.SdtGAMError AV18Error ;
-      private GeneXus.Programs.genexussecurity.SdtGAMAuthenticationTypeSimple AV9AuthenticationTypesIns ;
-      private GeneXus.Programs.genexussecurity.SdtGAMSecurityPolicyFilter AV21FilterSecPol ;
-      private GeneXus.Programs.genexussecurity.SdtGAMRepository AV23GAMRepository ;
-      private GeneXus.Programs.genexussecurity.SdtGAMRepository AV47Repository ;
-      private GeneXus.Programs.genexussecurity.SdtGAMUser AV53User ;
-      private GeneXus.Programs.genexussecurity.SdtGAMSecurityPolicy AV49SecurityPolicy ;
-      private GeneXus.Utils.SdtMessages_Message AV33Message ;
    }
 
    public class gamuserentry__gam : DataStoreHelperBase, IDataStoreHelper

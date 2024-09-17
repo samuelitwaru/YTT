@@ -48,7 +48,7 @@ namespace GeneXus.Programs {
          this.AV9EmployeeId = aP0_EmployeeId;
          this.AV10FinalWorkHourlogDate = DateTime.MinValue ;
          initialize();
-         executePrivate();
+         ExecuteImpl();
          aP1_FinalWorkHourlogDate=this.AV10FinalWorkHourlogDate;
       }
 
@@ -61,30 +61,13 @@ namespace GeneXus.Programs {
       public void executeSubmit( long aP0_EmployeeId ,
                                  out DateTime aP1_FinalWorkHourlogDate )
       {
-         getlastworkhourlogdate objgetlastworkhourlogdate;
-         objgetlastworkhourlogdate = new getlastworkhourlogdate();
-         objgetlastworkhourlogdate.AV9EmployeeId = aP0_EmployeeId;
-         objgetlastworkhourlogdate.AV10FinalWorkHourlogDate = DateTime.MinValue ;
-         objgetlastworkhourlogdate.context.SetSubmitInitialConfig(context);
-         objgetlastworkhourlogdate.initialize();
-         Submit( executePrivateCatch,objgetlastworkhourlogdate);
+         this.AV9EmployeeId = aP0_EmployeeId;
+         this.AV10FinalWorkHourlogDate = DateTime.MinValue ;
+         SubmitImpl();
          aP1_FinalWorkHourlogDate=this.AV10FinalWorkHourlogDate;
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((getlastworkhourlogdate)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
@@ -111,12 +94,12 @@ namespace GeneXus.Programs {
          {
             AV10FinalWorkHourlogDate = Gx_date;
          }
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -124,14 +107,9 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
          AV10FinalWorkHourlogDate = DateTime.MinValue;
-         scmdbuf = "";
          P00BG2_A106EmployeeId = new long[1] ;
          P00BG2_A119WorkHourLogDate = new DateTime[] {DateTime.MinValue} ;
          P00BG2_A118WorkHourLogId = new long[1] ;
@@ -153,7 +131,6 @@ namespace GeneXus.Programs {
       private long AV9EmployeeId ;
       private long A106EmployeeId ;
       private long A118WorkHourLogId ;
-      private string scmdbuf ;
       private DateTime AV10FinalWorkHourlogDate ;
       private DateTime A119WorkHourLogDate ;
       private DateTime Gx_date ;
