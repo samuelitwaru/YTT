@@ -38,7 +38,8 @@ namespace GeneXus.Programs {
       {
          DateTime aP0_Date = new DateTime()  ;
           long aP1_EmployeeId ;
-         bool aP2_IsHoliday = new bool()  ;
+         string aP2_HolidayName = new string(' ',0)  ;
+         bool aP3_IsHoliday = new bool()  ;
          if ( 0 < args.Length )
          {
             aP0_Date=((DateTime)(context.localUtil.CToD( (string)(args[0]), 2)));
@@ -57,13 +58,21 @@ namespace GeneXus.Programs {
          }
          if ( 2 < args.Length )
          {
-            aP2_IsHoliday=((bool)(BooleanUtil.Val( (string)(args[2]))));
+            aP2_HolidayName=((string)(args[2]));
          }
          else
          {
-            aP2_IsHoliday=false;
+            aP2_HolidayName="";
          }
-         execute(aP0_Date, aP1_EmployeeId, out aP2_IsHoliday);
+         if ( 3 < args.Length )
+         {
+            aP3_IsHoliday=((bool)(BooleanUtil.Val( (string)(args[3]))));
+         }
+         else
+         {
+            aP3_IsHoliday=false;
+         }
+         execute(aP0_Date, aP1_EmployeeId, out aP2_HolidayName, out aP3_IsHoliday);
          return GX.GXRuntime.ExitCode ;
       }
 
@@ -103,32 +112,39 @@ namespace GeneXus.Programs {
 
       public void execute( DateTime aP0_Date ,
                            long aP1_EmployeeId ,
-                           out bool aP2_IsHoliday )
+                           out string aP2_HolidayName ,
+                           out bool aP3_IsHoliday )
       {
          this.AV8Date = aP0_Date;
          this.AV9EmployeeId = aP1_EmployeeId;
+         this.AV12HolidayName = "" ;
          this.AV11IsHoliday = false ;
          initialize();
          ExecuteImpl();
-         aP2_IsHoliday=this.AV11IsHoliday;
+         aP2_HolidayName=this.AV12HolidayName;
+         aP3_IsHoliday=this.AV11IsHoliday;
       }
 
       public bool executeUdp( DateTime aP0_Date ,
-                              long aP1_EmployeeId )
+                              long aP1_EmployeeId ,
+                              out string aP2_HolidayName )
       {
-         execute(aP0_Date, aP1_EmployeeId, out aP2_IsHoliday);
+         execute(aP0_Date, aP1_EmployeeId, out aP2_HolidayName, out aP3_IsHoliday);
          return AV11IsHoliday ;
       }
 
       public void executeSubmit( DateTime aP0_Date ,
                                  long aP1_EmployeeId ,
-                                 out bool aP2_IsHoliday )
+                                 out string aP2_HolidayName ,
+                                 out bool aP3_IsHoliday )
       {
          this.AV8Date = aP0_Date;
          this.AV9EmployeeId = aP1_EmployeeId;
+         this.AV12HolidayName = "" ;
          this.AV11IsHoliday = false ;
          SubmitImpl();
-         aP2_IsHoliday=this.AV11IsHoliday;
+         aP2_HolidayName=this.AV12HolidayName;
+         aP3_IsHoliday=this.AV11IsHoliday;
       }
 
       protected override void ExecutePrivate( )
@@ -158,9 +174,11 @@ namespace GeneXus.Programs {
             A100CompanyId = P00AY3_A100CompanyId[0];
             A157CompanyLocationId = P00AY3_A157CompanyLocationId[0];
             A115HolidayStartDate = P00AY3_A115HolidayStartDate[0];
+            A114HolidayName = P00AY3_A114HolidayName[0];
             A113HolidayId = P00AY3_A113HolidayId[0];
             A157CompanyLocationId = P00AY3_A157CompanyLocationId[0];
             AV11IsHoliday = true;
+            AV12HolidayName = StringUtil.Trim( A114HolidayName);
             pr_default.close(1);
             cleanup();
             if (true) return;
@@ -177,9 +195,12 @@ namespace GeneXus.Programs {
             A145LeaveTypeLoggingWorkHours = P00AY4_A145LeaveTypeLoggingWorkHours[0];
             A132LeaveRequestStatus = P00AY4_A132LeaveRequestStatus[0];
             A106EmployeeId = P00AY4_A106EmployeeId[0];
+            A125LeaveTypeName = P00AY4_A125LeaveTypeName[0];
             A127LeaveRequestId = P00AY4_A127LeaveRequestId[0];
             A145LeaveTypeLoggingWorkHours = P00AY4_A145LeaveTypeLoggingWorkHours[0];
+            A125LeaveTypeName = P00AY4_A125LeaveTypeName[0];
             AV11IsHoliday = true;
+            AV12HolidayName = StringUtil.Trim( A125LeaveTypeName);
             pr_default.close(2);
             cleanup();
             if (true) return;
@@ -201,35 +222,40 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
+         AV12HolidayName = "";
          P00AY2_A100CompanyId = new long[1] ;
          P00AY2_A106EmployeeId = new long[1] ;
          P00AY2_A157CompanyLocationId = new long[1] ;
          P00AY3_A100CompanyId = new long[1] ;
          P00AY3_A157CompanyLocationId = new long[1] ;
          P00AY3_A115HolidayStartDate = new DateTime[] {DateTime.MinValue} ;
+         P00AY3_A114HolidayName = new string[] {""} ;
          P00AY3_A113HolidayId = new long[1] ;
          A115HolidayStartDate = DateTime.MinValue;
+         A114HolidayName = "";
          P00AY4_A124LeaveTypeId = new long[1] ;
          P00AY4_A130LeaveRequestEndDate = new DateTime[] {DateTime.MinValue} ;
          P00AY4_A129LeaveRequestStartDate = new DateTime[] {DateTime.MinValue} ;
          P00AY4_A145LeaveTypeLoggingWorkHours = new string[] {""} ;
          P00AY4_A132LeaveRequestStatus = new string[] {""} ;
          P00AY4_A106EmployeeId = new long[1] ;
+         P00AY4_A125LeaveTypeName = new string[] {""} ;
          P00AY4_A127LeaveRequestId = new long[1] ;
          A130LeaveRequestEndDate = DateTime.MinValue;
          A129LeaveRequestStartDate = DateTime.MinValue;
          A145LeaveTypeLoggingWorkHours = "";
          A132LeaveRequestStatus = "";
+         A125LeaveTypeName = "";
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.aisdateholiday__default(),
             new Object[][] {
                 new Object[] {
                P00AY2_A100CompanyId, P00AY2_A106EmployeeId, P00AY2_A157CompanyLocationId
                }
                , new Object[] {
-               P00AY3_A100CompanyId, P00AY3_A157CompanyLocationId, P00AY3_A115HolidayStartDate, P00AY3_A113HolidayId
+               P00AY3_A100CompanyId, P00AY3_A157CompanyLocationId, P00AY3_A115HolidayStartDate, P00AY3_A114HolidayName, P00AY3_A113HolidayId
                }
                , new Object[] {
-               P00AY4_A124LeaveTypeId, P00AY4_A130LeaveRequestEndDate, P00AY4_A129LeaveRequestStartDate, P00AY4_A145LeaveTypeLoggingWorkHours, P00AY4_A132LeaveRequestStatus, P00AY4_A106EmployeeId, P00AY4_A127LeaveRequestId
+               P00AY4_A124LeaveTypeId, P00AY4_A130LeaveRequestEndDate, P00AY4_A129LeaveRequestStartDate, P00AY4_A145LeaveTypeLoggingWorkHours, P00AY4_A132LeaveRequestStatus, P00AY4_A106EmployeeId, P00AY4_A125LeaveTypeName, P00AY4_A127LeaveRequestId
                }
             }
          );
@@ -244,8 +270,11 @@ namespace GeneXus.Programs {
       private long A113HolidayId ;
       private long A124LeaveTypeId ;
       private long A127LeaveRequestId ;
+      private string AV12HolidayName ;
+      private string A114HolidayName ;
       private string A145LeaveTypeLoggingWorkHours ;
       private string A132LeaveRequestStatus ;
+      private string A125LeaveTypeName ;
       private DateTime AV8Date ;
       private DateTime A115HolidayStartDate ;
       private DateTime A130LeaveRequestEndDate ;
@@ -260,6 +289,7 @@ namespace GeneXus.Programs {
       private long[] P00AY3_A100CompanyId ;
       private long[] P00AY3_A157CompanyLocationId ;
       private DateTime[] P00AY3_A115HolidayStartDate ;
+      private string[] P00AY3_A114HolidayName ;
       private long[] P00AY3_A113HolidayId ;
       private long[] P00AY4_A124LeaveTypeId ;
       private DateTime[] P00AY4_A130LeaveRequestEndDate ;
@@ -267,8 +297,10 @@ namespace GeneXus.Programs {
       private string[] P00AY4_A145LeaveTypeLoggingWorkHours ;
       private string[] P00AY4_A132LeaveRequestStatus ;
       private long[] P00AY4_A106EmployeeId ;
+      private string[] P00AY4_A125LeaveTypeName ;
       private long[] P00AY4_A127LeaveRequestId ;
-      private bool aP2_IsHoliday ;
+      private string aP2_HolidayName ;
+      private bool aP3_IsHoliday ;
    }
 
    public class aisdateholiday__default : DataStoreHelperBase, IDataStoreHelper
@@ -304,8 +336,8 @@ namespace GeneXus.Programs {
           };
           def= new CursorDef[] {
               new CursorDef("P00AY2", "SELECT T1.CompanyId, T1.EmployeeId, T2.CompanyLocationId FROM (Employee T1 INNER JOIN Company T2 ON T2.CompanyId = T1.CompanyId) WHERE T1.EmployeeId = :AV9EmployeeId ORDER BY T1.EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00AY2,1, GxCacheFrequency.OFF ,false,true )
-             ,new CursorDef("P00AY3", "SELECT T1.CompanyId, T2.CompanyLocationId, T1.HolidayStartDate, T1.HolidayId FROM (Holiday T1 INNER JOIN Company T2 ON T2.CompanyId = T1.CompanyId) WHERE (T1.HolidayStartDate = :AV8Date) AND (T2.CompanyLocationId = :AV10CompanyLocationId) ORDER BY T1.HolidayId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00AY3,1, GxCacheFrequency.OFF ,false,true )
-             ,new CursorDef("P00AY4", "SELECT T1.LeaveTypeId, T1.LeaveRequestEndDate, T1.LeaveRequestStartDate, T2.LeaveTypeLoggingWorkHours, T1.LeaveRequestStatus, T1.EmployeeId, T1.LeaveRequestId FROM (LeaveRequest T1 INNER JOIN LeaveType T2 ON T2.LeaveTypeId = T1.LeaveTypeId) WHERE (T1.EmployeeId = :AV9EmployeeId) AND (T1.LeaveRequestStartDate <= :AV8Date) AND (T1.LeaveRequestEndDate >= :AV8Date) AND (T1.LeaveRequestStatus = ( 'Approved')) AND (T2.LeaveTypeLoggingWorkHours = ( 'No')) ORDER BY T1.EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00AY4,1, GxCacheFrequency.OFF ,false,true )
+             ,new CursorDef("P00AY3", "SELECT T1.CompanyId, T2.CompanyLocationId, T1.HolidayStartDate, T1.HolidayName, T1.HolidayId FROM (Holiday T1 INNER JOIN Company T2 ON T2.CompanyId = T1.CompanyId) WHERE (T1.HolidayStartDate = :AV8Date) AND (T2.CompanyLocationId = :AV10CompanyLocationId) ORDER BY T1.HolidayId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00AY3,1, GxCacheFrequency.OFF ,false,true )
+             ,new CursorDef("P00AY4", "SELECT T1.LeaveTypeId, T1.LeaveRequestEndDate, T1.LeaveRequestStartDate, T2.LeaveTypeLoggingWorkHours, T1.LeaveRequestStatus, T1.EmployeeId, T2.LeaveTypeName, T1.LeaveRequestId FROM (LeaveRequest T1 INNER JOIN LeaveType T2 ON T2.LeaveTypeId = T1.LeaveTypeId) WHERE (T1.EmployeeId = :AV9EmployeeId) AND (T1.LeaveRequestStartDate <= :AV8Date) AND (T1.LeaveRequestEndDate >= :AV8Date) AND (T1.LeaveRequestStatus = ( 'Approved')) AND (T2.LeaveTypeLoggingWorkHours = ( 'No')) ORDER BY T1.EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00AY4,1, GxCacheFrequency.OFF ,false,true )
           };
        }
     }
@@ -325,7 +357,8 @@ namespace GeneXus.Programs {
                 ((long[]) buf[0])[0] = rslt.getLong(1);
                 ((long[]) buf[1])[0] = rslt.getLong(2);
                 ((DateTime[]) buf[2])[0] = rslt.getGXDate(3);
-                ((long[]) buf[3])[0] = rslt.getLong(4);
+                ((string[]) buf[3])[0] = rslt.getString(4, 100);
+                ((long[]) buf[4])[0] = rslt.getLong(5);
                 return;
              case 2 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);
@@ -334,7 +367,8 @@ namespace GeneXus.Programs {
                 ((string[]) buf[3])[0] = rslt.getString(4, 20);
                 ((string[]) buf[4])[0] = rslt.getString(5, 20);
                 ((long[]) buf[5])[0] = rslt.getLong(6);
-                ((long[]) buf[6])[0] = rslt.getLong(7);
+                ((string[]) buf[6])[0] = rslt.getString(7, 100);
+                ((long[]) buf[7])[0] = rslt.getLong(8);
                 return;
        }
     }

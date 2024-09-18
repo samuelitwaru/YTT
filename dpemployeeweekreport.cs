@@ -216,41 +216,76 @@ namespace GeneXus.Programs {
             Gxm1sdtemployeeweekreport.gxTpr_Total = AV12Total;
             Gxm1sdtemployeeweekreport.gxTpr_Expected = AV18Expected;
             GXt_boolean3 = false;
-            new isdateholiday(context ).execute(  AV13FromDate,  A106EmployeeId, out  GXt_boolean3) ;
-            Gxm1sdtemployeeweekreport.gxTpr_Sun_isholiday = GXt_boolean3;
-            GXt_boolean3 = false;
-            new isdateholiday(context ).execute(  DateTimeUtil.DAdd( AV13FromDate, (1)),  A106EmployeeId, out  GXt_boolean3) ;
+            new isdateholiday(context ).execute(  AV13FromDate,  A106EmployeeId, out  AV22MonHolidayName, out  GXt_boolean3) ;
             Gxm1sdtemployeeweekreport.gxTpr_Mon_isholiday = GXt_boolean3;
             GXt_boolean3 = false;
-            new isdateholiday(context ).execute(  DateTimeUtil.DAdd( AV13FromDate, (2)),  A106EmployeeId, out  GXt_boolean3) ;
+            new isdateholiday(context ).execute(  DateTimeUtil.DAdd( AV13FromDate, (1)),  A106EmployeeId, out  AV23TueHolidayName, out  GXt_boolean3) ;
             Gxm1sdtemployeeweekreport.gxTpr_Tue_isholiday = GXt_boolean3;
             GXt_boolean3 = false;
-            new isdateholiday(context ).execute(  DateTimeUtil.DAdd( AV13FromDate, (3)),  A106EmployeeId, out  GXt_boolean3) ;
+            new isdateholiday(context ).execute(  DateTimeUtil.DAdd( AV13FromDate, (2)),  A106EmployeeId, out  AV24WedHolidayName, out  GXt_boolean3) ;
             Gxm1sdtemployeeweekreport.gxTpr_Wed_isholiday = GXt_boolean3;
             GXt_boolean3 = false;
-            new isdateholiday(context ).execute(  DateTimeUtil.DAdd( AV13FromDate, (4)),  A106EmployeeId, out  GXt_boolean3) ;
+            new isdateholiday(context ).execute(  DateTimeUtil.DAdd( AV13FromDate, (3)),  A106EmployeeId, out  AV25ThuHolidayName, out  GXt_boolean3) ;
             Gxm1sdtemployeeweekreport.gxTpr_Thu_isholiday = GXt_boolean3;
             GXt_boolean3 = false;
-            new isdateholiday(context ).execute(  DateTimeUtil.DAdd( AV13FromDate, (5)),  A106EmployeeId, out  GXt_boolean3) ;
+            new isdateholiday(context ).execute(  DateTimeUtil.DAdd( AV13FromDate, (4)),  A106EmployeeId, out  AV26FriHolidayName, out  GXt_boolean3) ;
             Gxm1sdtemployeeweekreport.gxTpr_Fri_isholiday = GXt_boolean3;
             GXt_boolean3 = false;
-            new isdateholiday(context ).execute(  DateTimeUtil.DAdd( AV13FromDate, (6)),  A106EmployeeId, out  GXt_boolean3) ;
+            new isdateholiday(context ).execute(  DateTimeUtil.DAdd( AV13FromDate, (5)),  A106EmployeeId, out  AV28SatHolidayName, out  GXt_boolean3) ;
             Gxm1sdtemployeeweekreport.gxTpr_Sat_isholiday = GXt_boolean3;
-            GXt_char4 = "";
-            new formattime(context ).execute(  AV5Mon, out  GXt_char4) ;
-            Gxm1sdtemployeeweekreport.gxTpr_Mon_formatted = GXt_char4;
-            GXt_char4 = "";
-            new formattime(context ).execute(  AV6Tue, out  GXt_char4) ;
-            Gxm1sdtemployeeweekreport.gxTpr_Tue_formatted = GXt_char4;
-            GXt_char4 = "";
-            new formattime(context ).execute(  AV7Wed, out  GXt_char4) ;
-            Gxm1sdtemployeeweekreport.gxTpr_Wed_formatted = GXt_char4;
-            GXt_char4 = "";
-            new formattime(context ).execute(  AV8Thu, out  GXt_char4) ;
-            Gxm1sdtemployeeweekreport.gxTpr_Thu_formatted = GXt_char4;
-            GXt_char4 = "";
-            new formattime(context ).execute(  AV9Fri, out  GXt_char4) ;
-            Gxm1sdtemployeeweekreport.gxTpr_Fri_formatted = GXt_char4;
+            GXt_boolean3 = false;
+            new isdateholiday(context ).execute(  DateTimeUtil.DAdd( AV13FromDate, (6)),  A106EmployeeId, out  AV21SunHolidayName, out  GXt_boolean3) ;
+            Gxm1sdtemployeeweekreport.gxTpr_Sun_isholiday = GXt_boolean3;
+            if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV22MonHolidayName)) )
+            {
+               Gxm1sdtemployeeweekreport.gxTpr_Mon_formatted = AV22MonHolidayName;
+            }
+            else
+            {
+               GXt_char4 = "";
+               new formattime(context ).execute(  AV5Mon, out  GXt_char4) ;
+               Gxm1sdtemployeeweekreport.gxTpr_Mon_formatted = GXt_char4;
+            }
+            if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV23TueHolidayName)) )
+            {
+               Gxm1sdtemployeeweekreport.gxTpr_Tue_formatted = AV23TueHolidayName;
+            }
+            else
+            {
+               GXt_char4 = "";
+               new formattime(context ).execute(  AV6Tue, out  GXt_char4) ;
+               Gxm1sdtemployeeweekreport.gxTpr_Tue_formatted = GXt_char4;
+            }
+            if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV24WedHolidayName)) )
+            {
+               Gxm1sdtemployeeweekreport.gxTpr_Wed_formatted = AV24WedHolidayName;
+            }
+            else
+            {
+               GXt_char4 = "";
+               new formattime(context ).execute(  AV7Wed, out  GXt_char4) ;
+               Gxm1sdtemployeeweekreport.gxTpr_Wed_formatted = GXt_char4;
+            }
+            if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV25ThuHolidayName)) )
+            {
+               Gxm1sdtemployeeweekreport.gxTpr_Thu_formatted = AV25ThuHolidayName;
+            }
+            else
+            {
+               GXt_char4 = "";
+               new formattime(context ).execute(  AV8Thu, out  GXt_char4) ;
+               Gxm1sdtemployeeweekreport.gxTpr_Thu_formatted = GXt_char4;
+            }
+            if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV26FriHolidayName)) )
+            {
+               Gxm1sdtemployeeweekreport.gxTpr_Fri_formatted = AV26FriHolidayName;
+            }
+            else
+            {
+               GXt_char4 = "";
+               new formattime(context ).execute(  AV9Fri, out  GXt_char4) ;
+               Gxm1sdtemployeeweekreport.gxTpr_Fri_formatted = GXt_char4;
+            }
             GXt_char4 = "";
             new formattime(context ).execute(  AV10Sat, out  GXt_char4) ;
             Gxm1sdtemployeeweekreport.gxTpr_Sat_formatted = GXt_char4;
@@ -323,6 +358,13 @@ namespace GeneXus.Programs {
          P001U10_n40015GXC16 = new bool[] {false} ;
          A148EmployeeName = "";
          Gxm1sdtemployeeweekreport = new SdtSDTEmployeeWeekReport(context);
+         AV22MonHolidayName = "";
+         AV23TueHolidayName = "";
+         AV24WedHolidayName = "";
+         AV25ThuHolidayName = "";
+         AV26FriHolidayName = "";
+         AV28SatHolidayName = "";
+         AV21SunHolidayName = "";
          GXt_char4 = "";
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.dpemployeeweekreport__default(),
             new Object[][] {
@@ -372,6 +414,13 @@ namespace GeneXus.Programs {
       private long AV12Total ;
       private long AV18Expected ;
       private string A148EmployeeName ;
+      private string AV22MonHolidayName ;
+      private string AV23TueHolidayName ;
+      private string AV24WedHolidayName ;
+      private string AV25ThuHolidayName ;
+      private string AV26FriHolidayName ;
+      private string AV28SatHolidayName ;
+      private string AV21SunHolidayName ;
       private string GXt_char4 ;
       private DateTime AV13FromDate ;
       private DateTime AV16ToDate ;

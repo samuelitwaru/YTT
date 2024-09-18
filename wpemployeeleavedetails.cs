@@ -17,6 +17,7 @@ using GeneXus.XML;
 using GeneXus.Search;
 using GeneXus.Encryption;
 using GeneXus.Http.Client;
+using GeneXus.Http.Server;
 using System.Xml.Serialization;
 using System.Runtime.Serialization;
 namespace GeneXus.Programs {
@@ -1151,6 +1152,8 @@ namespace GeneXus.Programs {
       {
          /* Start Routine */
          returnInSub = false;
+         new logtofile(context ).execute(  ">>>>>>>>ServerHost"+AV33HttpRequest.ServerHost) ;
+         new logtofile(context ).execute(  ">>>>>>>>BaseUrl"+AV33HttpRequest.BaseURL) ;
          AV13DateRange = context.localUtil.YMDToD( DateTimeUtil.Year( Gx_date), DateTimeUtil.Month( Gx_date), 1);
          AssignAttri("", false, "AV13DateRange", context.localUtil.Format(AV13DateRange, "99/99/99"));
          AV15DateRange_To = DateTimeUtil.DateEndOfMonth( AV13DateRange);
@@ -1409,9 +1412,9 @@ namespace GeneXus.Programs {
          returnInSub = false;
          if ( new userhasrole(context).executeUdp(  "Project Manager") )
          {
-            AV39Udparg1 = new getloggedinemployeeid(context).executeUdp( );
+            AV40Udparg1 = new getloggedinemployeeid(context).executeUdp( );
             /* Using cursor H005T10 */
-            pr_default.execute(8, new Object[] {AV39Udparg1});
+            pr_default.execute(8, new Object[] {AV40Udparg1});
             while ( (pr_default.getStatus(8) != 101) )
             {
                A106EmployeeId = H005T10_A106EmployeeId[0];
@@ -1491,7 +1494,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20249171617394", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024917179871", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1507,7 +1510,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wpemployeeleavedetails.js", "?20249171617394", false, true);
+         context.AddJavascriptSource("wpemployeeleavedetails.js", "?2024917179871", false, true);
          context.AddJavascriptSource("UserControls/UCLeavePivotTableRender.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/daterangepicker/locales.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/daterangepicker/wwp-daterangepicker.js", "", false, true);
@@ -1674,6 +1677,7 @@ namespace GeneXus.Programs {
          H005T5_A157CompanyLocationId = new long[1] ;
          H005T5_A158CompanyLocationName = new string[] {""} ;
          Gx_date = DateTime.MinValue;
+         AV33HttpRequest = new GxHttpRequest( context);
          GXt_SdtWWPDateRangePickerOptions1 = new GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions(context);
          AV25ExcelFilename = "";
          AV26ErrorMessage = "";
@@ -1779,7 +1783,7 @@ namespace GeneXus.Programs {
       private long AV10EmployeeId ;
       private long A102ProjectId ;
       private long AV32UserCompanyLocationId ;
-      private long AV39Udparg1 ;
+      private long AV40Udparg1 ;
       private long GXt_int4 ;
       private string gxfirstwebparm ;
       private string gxfirstwebparm_bkp ;
@@ -1848,6 +1852,7 @@ namespace GeneXus.Programs {
       private GeneXus.Utils.GxStringCollection gxdynajaxctrldescr ;
       private GXUserControl ucLeavepivottable ;
       private GXUserControl ucDaterange_rangepicker ;
+      private GxHttpRequest AV33HttpRequest ;
       private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
@@ -2057,7 +2062,7 @@ namespace GeneXus.Programs {
           };
           Object[] prmH005T10;
           prmH005T10 = new Object[] {
-          new ParDef("AV39Udparg1",GXType.Int64,10,0)
+          new ParDef("AV40Udparg1",GXType.Int64,10,0)
           };
           Object[] prmH005T11;
           prmH005T11 = new Object[] {
@@ -2093,7 +2098,7 @@ namespace GeneXus.Programs {
              ,new CursorDef("H005T7", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH005T7,100, GxCacheFrequency.OFF ,false,false )
              ,new CursorDef("H005T8", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH005T8,100, GxCacheFrequency.OFF ,false,false )
              ,new CursorDef("H005T9", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH005T9,100, GxCacheFrequency.OFF ,false,false )
-             ,new CursorDef("H005T10", "SELECT EmployeeId FROM Employee WHERE EmployeeId = :AV39Udparg1 ORDER BY EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH005T10,1, GxCacheFrequency.OFF ,true,true )
+             ,new CursorDef("H005T10", "SELECT EmployeeId FROM Employee WHERE EmployeeId = :AV40Udparg1 ORDER BY EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH005T10,1, GxCacheFrequency.OFF ,true,true )
              ,new CursorDef("H005T11", "SELECT EmployeeId, ProjectId FROM EmployeeProject WHERE EmployeeId = :EmployeeId ORDER BY EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH005T11,100, GxCacheFrequency.OFF ,false,false )
              ,new CursorDef("H005T12", "SELECT CompanyLocationId, CompanyLocationName FROM CompanyLocation ORDER BY CompanyLocationName ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH005T12,0, GxCacheFrequency.OFF ,true,false )
           };

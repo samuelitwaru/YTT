@@ -1651,7 +1651,7 @@ namespace GeneXus.Programs {
       {
          /* Start Routine */
          returnInSub = false;
-         subGrid_Rows = 20;
+         subGrid_Rows = 10;
          GxWebStd.gx_hidden_field( context, sPrefix+"GRID_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Rows), 6, 0, ".", "")));
          Grid_empowerer_Gridinternalname = subGrid_Internalname;
          ucGrid_empowerer.SendProperty(context, sPrefix, false, Grid_empowerer_Internalname, "GridInternalName", Grid_empowerer_Gridinternalname);
@@ -2349,7 +2349,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20249161313487", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20249184185630", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2365,7 +2365,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("projectprojectemployeewc.js", "?20249161313488", false, true);
+         context.AddJavascriptSource("projectprojectemployeewc.js", "?20249184185630", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -3289,7 +3289,7 @@ namespace GeneXus.Programs {
          AddWhere(sWhereString, "(T1.ProjectId = :AV8ProjectId)");
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV16FilterFullText)) )
          {
-            AddWhere(sWhereString, "(( LOWER(T2.EmployeeFirstName) like '%' || LOWER(:lV16FilterFullText)) or ( LOWER(T2.EmployeeLastName) like '%' || LOWER(:lV16FilterFullText)) or ( LOWER(T2.EmployeeEmail) like '%' || LOWER(:lV16FilterFullText)) or ( SUBSTR(TO_CHAR(T2.CompanyId,'9999999999'), 2) like '%' || :lV16FilterFullText) or ( LOWER(T3.CompanyName) like '%' || LOWER(:lV16FilterFullText)) or ( LOWER(T2.GAMUserGUID) like '%' || LOWER(:lV16FilterFullText)) or ( SUBSTR(TO_CHAR(T2.EmployeeVactionDays,'90.9'), 2) like '%' || :lV16FilterFullText) or ( SUBSTR(TO_CHAR(T2.EmployeeBalance,'90.9'), 2) like '%' || :lV16FilterFullText))");
+            AddWhere(sWhereString, "(( T2.EmployeeFirstName like '%' || :lV16FilterFullText) or ( T2.EmployeeLastName like '%' || :lV16FilterFullText) or ( T2.EmployeeEmail like '%' || :lV16FilterFullText) or ( SUBSTR(TO_CHAR(T2.CompanyId,'9999999999'), 2) like '%' || :lV16FilterFullText) or ( T3.CompanyName like '%' || :lV16FilterFullText) or ( T2.GAMUserGUID like '%' || :lV16FilterFullText) or ( SUBSTR(TO_CHAR(T2.EmployeeVactionDays,'90.9'), 2) like '%' || :lV16FilterFullText) or ( SUBSTR(TO_CHAR(T2.EmployeeBalance,'90.9'), 2) like '%' || :lV16FilterFullText))");
          }
          else
          {
@@ -3415,7 +3415,7 @@ namespace GeneXus.Programs {
          AddWhere(sWhereString, "(T1.ProjectId = :AV8ProjectId)");
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV16FilterFullText)) )
          {
-            AddWhere(sWhereString, "(( LOWER(T2.EmployeeFirstName) like '%' || LOWER(:lV16FilterFullText)) or ( LOWER(T2.EmployeeLastName) like '%' || LOWER(:lV16FilterFullText)) or ( LOWER(T2.EmployeeEmail) like '%' || LOWER(:lV16FilterFullText)) or ( SUBSTR(TO_CHAR(T2.CompanyId,'9999999999'), 2) like '%' || :lV16FilterFullText) or ( LOWER(T3.CompanyName) like '%' || LOWER(:lV16FilterFullText)) or ( LOWER(T2.GAMUserGUID) like '%' || LOWER(:lV16FilterFullText)) or ( SUBSTR(TO_CHAR(T2.EmployeeVactionDays,'90.9'), 2) like '%' || :lV16FilterFullText) or ( SUBSTR(TO_CHAR(T2.EmployeeBalance,'90.9'), 2) like '%' || :lV16FilterFullText))");
+            AddWhere(sWhereString, "(( T2.EmployeeFirstName like '%' || :lV16FilterFullText) or ( T2.EmployeeLastName like '%' || :lV16FilterFullText) or ( T2.EmployeeEmail like '%' || :lV16FilterFullText) or ( SUBSTR(TO_CHAR(T2.CompanyId,'9999999999'), 2) like '%' || :lV16FilterFullText) or ( T3.CompanyName like '%' || :lV16FilterFullText) or ( T2.GAMUserGUID like '%' || :lV16FilterFullText) or ( SUBSTR(TO_CHAR(T2.EmployeeVactionDays,'90.9'), 2) like '%' || :lV16FilterFullText) or ( SUBSTR(TO_CHAR(T2.EmployeeBalance,'90.9'), 2) like '%' || :lV16FilterFullText))");
          }
          else
          {

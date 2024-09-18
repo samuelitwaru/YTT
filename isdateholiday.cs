@@ -43,43 +43,51 @@ namespace GeneXus.Programs {
 
       public void execute( DateTime aP0_Date ,
                            long aP1_EmployeeId ,
-                           out bool aP2_IsHoliday )
+                           out string aP2_HolidayName ,
+                           out bool aP3_IsHoliday )
       {
          this.AV2Date = aP0_Date;
          this.AV3EmployeeId = aP1_EmployeeId;
-         this.AV4IsHoliday = false ;
+         this.AV4HolidayName = "" ;
+         this.AV5IsHoliday = false ;
          initialize();
          ExecuteImpl();
-         aP2_IsHoliday=this.AV4IsHoliday;
+         aP2_HolidayName=this.AV4HolidayName;
+         aP3_IsHoliday=this.AV5IsHoliday;
       }
 
       public bool executeUdp( DateTime aP0_Date ,
-                              long aP1_EmployeeId )
+                              long aP1_EmployeeId ,
+                              out string aP2_HolidayName )
       {
-         execute(aP0_Date, aP1_EmployeeId, out aP2_IsHoliday);
-         return AV4IsHoliday ;
+         execute(aP0_Date, aP1_EmployeeId, out aP2_HolidayName, out aP3_IsHoliday);
+         return AV5IsHoliday ;
       }
 
       public void executeSubmit( DateTime aP0_Date ,
                                  long aP1_EmployeeId ,
-                                 out bool aP2_IsHoliday )
+                                 out string aP2_HolidayName ,
+                                 out bool aP3_IsHoliday )
       {
          this.AV2Date = aP0_Date;
          this.AV3EmployeeId = aP1_EmployeeId;
-         this.AV4IsHoliday = false ;
+         this.AV4HolidayName = "" ;
+         this.AV5IsHoliday = false ;
          SubmitImpl();
-         aP2_IsHoliday=this.AV4IsHoliday;
+         aP2_HolidayName=this.AV4HolidayName;
+         aP3_IsHoliday=this.AV5IsHoliday;
       }
 
       protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
-         args = new Object[] {(DateTime)AV2Date,(long)AV3EmployeeId,(bool)AV4IsHoliday} ;
+         args = new Object[] {(DateTime)AV2Date,(long)AV3EmployeeId,(string)AV4HolidayName,(bool)AV5IsHoliday} ;
          ClassLoader.Execute("aisdateholiday","GeneXus.Programs","aisdateholiday", new Object[] {context }, "execute", args);
-         if ( ( args != null ) && ( args.Length == 3 ) )
+         if ( ( args != null ) && ( args.Length == 4 ) )
          {
-            AV4IsHoliday = (bool)(args[2]) ;
+            AV4HolidayName = (string)(args[2]) ;
+            AV5IsHoliday = (bool)(args[3]) ;
          }
          cleanup();
       }
@@ -95,16 +103,19 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
+         AV4HolidayName = "";
          /* GeneXus formulas. */
       }
 
       private long AV3EmployeeId ;
+      private string AV4HolidayName ;
       private DateTime AV2Date ;
-      private bool AV4IsHoliday ;
+      private bool AV5IsHoliday ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private Object[] args ;
-      private bool aP2_IsHoliday ;
+      private string aP2_HolidayName ;
+      private bool aP3_IsHoliday ;
    }
 
 }
