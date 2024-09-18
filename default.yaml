@@ -1,9 +1,9 @@
 openapi: 3.0.0
 info:
   title: "YTT_version4"
-  version: "20240918011948"
+  version: "20240918050455"
 servers:
-  - url: http://localhost:8083/YTT_version4NETPostgreSQL14/rest
+  - url: http://localhost:8082/YTT_version4NETPostgreSQL14/rest
 paths:
   /Device/{DeviceId}:
     get:
@@ -1179,6 +1179,29 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/LeaveRequestApprovedGetFilterDataOutput"
+        404:
+          description: "Not found"
+  /LeaveRequestListGetFilterData:
+    post:
+      tags:
+        - LeaveRequestListGetFilterData
+      operationId: "LeaveRequestListGetFilterData"
+      summary: "Leave Request List Get Filter Data"
+      security: 
+        - oAuthGXGAM: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LeaveRequestListGetFilterDataInput"
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LeaveRequestListGetFilterDataOutput"
         404:
           description: "Not found"
   /LeaveRequestPendingGetFilterData:
@@ -3086,7 +3109,7 @@ components:
       description: GAM OAuth 2
       flows:
         password:          
-          tokenUrl: http://localhost:8083/YTT_version4NETPostgreSQL14/oauth/gam/v2.0/access_token
+          tokenUrl: http://localhost:8082/YTT_version4NETPostgreSQL14/oauth/gam/v2.0/access_token
           scopes: 
             fullcontrol: Full access
   schemas:
@@ -3370,6 +3393,14 @@ components:
         isOpen:
           type: "boolean"
     LeaveRequestApprovedGetFilterDataOutput:
+      properties:
+        OptionsJson:
+          type: "string"
+        OptionsDescJson:
+          type: "string"
+        OptionIndexesJson:
+          type: "string"
+    LeaveRequestListGetFilterDataOutput:
       properties:
         OptionsJson:
           type: "string"
@@ -3812,6 +3843,14 @@ components:
         SearchTxtTo:
           type: "string"
     LeaveRequestApprovedGetFilterDataInput:  
+      properties:
+        DDOName:
+          type: "string"
+        SearchTxtParms:
+          type: "string"
+        SearchTxtTo:
+          type: "string"
+    LeaveRequestListGetFilterDataInput:  
       properties:
         DDOName:
           type: "string"

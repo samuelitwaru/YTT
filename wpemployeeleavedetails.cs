@@ -353,6 +353,8 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "EMPLOYEENAME", StringUtil.RTrim( A148EmployeeName));
          GxWebStd.gx_hidden_field( context, "COMPANYLOCATIONID", StringUtil.LTrim( StringUtil.NToC( (decimal)(A157CompanyLocationId), 10, 0, ".", "")));
          GxWebStd.gx_hidden_field( context, "EMPLOYEEID", StringUtil.LTrim( StringUtil.NToC( (decimal)(A106EmployeeId), 10, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, "LEAVEPIVOTTABLE_Leavetypeid", StringUtil.LTrim( StringUtil.NToC( (decimal)(Leavepivottable_Leavetypeid), 9, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, "LEAVEPIVOTTABLE_Employeeid", StringUtil.LTrim( StringUtil.NToC( (decimal)(Leavepivottable_Employeeid), 9, 0, ".", "")));
       }
 
       public override void RenderHtmlCloseForm( )
@@ -1152,8 +1154,6 @@ namespace GeneXus.Programs {
       {
          /* Start Routine */
          returnInSub = false;
-         new logtofile(context ).execute(  ">>>>>>>>ServerHost"+AV33HttpRequest.ServerHost) ;
-         new logtofile(context ).execute(  ">>>>>>>>BaseUrl"+AV33HttpRequest.BaseURL) ;
          AV13DateRange = context.localUtil.YMDToD( DateTimeUtil.Year( Gx_date), DateTimeUtil.Month( Gx_date), 1);
          AssignAttri("", false, "AV13DateRange", context.localUtil.Format(AV13DateRange, "99/99/99"));
          AV15DateRange_To = DateTimeUtil.DateEndOfMonth( AV13DateRange);
@@ -1494,7 +1494,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024917179871", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202491882875", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1510,7 +1510,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wpemployeeleavedetails.js", "?2024917179871", false, true);
+         context.AddJavascriptSource("wpemployeeleavedetails.js", "?202491882876", false, true);
          context.AddJavascriptSource("UserControls/UCLeavePivotTableRender.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/daterangepicker/locales.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/daterangepicker/wwp-daterangepicker.js", "", false, true);
@@ -1588,6 +1588,8 @@ namespace GeneXus.Programs {
          dynavCompanylocationid.Enabled = 1;
          edtavDaterange_rangetext_Jsonclick = "";
          edtavDaterange_rangetext_Enabled = 1;
+         Leavepivottable_Employeeid = 0;
+         Leavepivottable_Leavetypeid = 0;
          Form.Headerrawhtml = "";
          Form.Background = "";
          Form.Textcolor = 0;
@@ -1677,7 +1679,6 @@ namespace GeneXus.Programs {
          H005T5_A157CompanyLocationId = new long[1] ;
          H005T5_A158CompanyLocationName = new string[] {""} ;
          Gx_date = DateTime.MinValue;
-         AV33HttpRequest = new GxHttpRequest( context);
          GXt_SdtWWPDateRangePickerOptions1 = new GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions(context);
          AV25ExcelFilename = "";
          AV26ErrorMessage = "";
@@ -1769,6 +1770,8 @@ namespace GeneXus.Programs {
       private short nDonePA ;
       private short gxcookieaux ;
       private short nGXWrapped ;
+      private int Leavepivottable_Leavetypeid ;
+      private int Leavepivottable_Employeeid ;
       private int edtavDaterange_rangetext_Enabled ;
       private int gxdynajaxindex ;
       private int AV30UserProjectIdCollection_Count ;
@@ -1852,7 +1855,6 @@ namespace GeneXus.Programs {
       private GeneXus.Utils.GxStringCollection gxdynajaxctrldescr ;
       private GXUserControl ucLeavepivottable ;
       private GXUserControl ucDaterange_rangepicker ;
-      private GxHttpRequest AV33HttpRequest ;
       private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;

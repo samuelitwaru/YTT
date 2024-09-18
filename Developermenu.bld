@@ -26,6 +26,7 @@ wwpbaseobjects\subscriptions\wwp_subscription
 wwpbaseobjects\wwp_entity
 workwithplus\wwp_parameter
 wwpbaseobjects\wwp_userextended
+leaverequestlist
 trnnewview
 trnnewgeneral
 trnnewww
@@ -219,6 +220,7 @@ gamnotauthorized
 gamexamplelogin
 general\ui\masterprompt
 general\ui\masterunanimosidebar
+leaverequestlistgetfilterdata
 atestproc
 atestproc
 trnnewwwgetfilterdata
