@@ -1187,7 +1187,7 @@ namespace GeneXus.Programs {
       {
          /* 'DoReport' Routine */
          returnInSub = false;
-         new employeeleavereport(context ).execute(  AV12CompanyLocationId, ref  AV22EmployeeIdCollection, ref  AV13DateRange, out  AV25ExcelFilename, out  AV26ErrorMessage) ;
+         new employeeleavedetailsexport(context ).execute(  AV12CompanyLocationId, ref  AV22EmployeeIdCollection, ref  AV13DateRange, ref  AV7SDTEmployeeLeaveDetailsCollection, out  AV25ExcelFilename, out  AV26ErrorMessage) ;
          AssignAttri("", false, "AV13DateRange", context.localUtil.Format(AV13DateRange, "99/99/99"));
          if ( StringUtil.StrCmp(AV25ExcelFilename, "") != 0 )
          {
@@ -1199,6 +1199,7 @@ namespace GeneXus.Programs {
             GX_msglist.addItem(AV26ErrorMessage);
          }
          /*  Sending Event outputs  */
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV7SDTEmployeeLeaveDetailsCollection", AV7SDTEmployeeLeaveDetailsCollection);
          context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV22EmployeeIdCollection", AV22EmployeeIdCollection);
       }
 
@@ -1494,7 +1495,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202491882875", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202492016493084", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1510,7 +1511,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wpemployeeleavedetails.js", "?202491882876", false, true);
+         context.AddJavascriptSource("wpemployeeleavedetails.js", "?202492016493085", false, true);
          context.AddJavascriptSource("UserControls/UCLeavePivotTableRender.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/daterangepicker/locales.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/daterangepicker/wwp-daterangepicker.js", "", false, true);
@@ -1610,8 +1611,8 @@ namespace GeneXus.Programs {
       public override void InitializeDynEvents( )
       {
          setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"dynavProjectid"},{"av":"AV11ProjectId","fld":"vPROJECTID","pic":"ZZZZZZZZZ9"},{"av":"dynavEmployeeid"},{"av":"AV10EmployeeId","fld":"vEMPLOYEEID","pic":"ZZZZZZZZZ9"},{"av":"dynavCompanylocationid"},{"av":"AV12CompanyLocationId","fld":"vCOMPANYLOCATIONID","pic":"ZZZZZZZZZ9"}]}""");
-         setEventMetadata("'DOREPORT'","""{"handler":"E135T2","iparms":[{"av":"dynavCompanylocationid"},{"av":"AV12CompanyLocationId","fld":"vCOMPANYLOCATIONID","pic":"ZZZZZZZZZ9"},{"av":"AV22EmployeeIdCollection","fld":"vEMPLOYEEIDCOLLECTION"},{"av":"AV13DateRange","fld":"vDATERANGE"}]""");
-         setEventMetadata("'DOREPORT'",""","oparms":[{"av":"AV13DateRange","fld":"vDATERANGE"},{"av":"AV22EmployeeIdCollection","fld":"vEMPLOYEEIDCOLLECTION"}]}""");
+         setEventMetadata("'DOREPORT'","""{"handler":"E135T2","iparms":[{"av":"dynavCompanylocationid"},{"av":"AV12CompanyLocationId","fld":"vCOMPANYLOCATIONID","pic":"ZZZZZZZZZ9"},{"av":"AV22EmployeeIdCollection","fld":"vEMPLOYEEIDCOLLECTION"},{"av":"AV13DateRange","fld":"vDATERANGE"},{"av":"AV7SDTEmployeeLeaveDetailsCollection","fld":"vSDTEMPLOYEELEAVEDETAILSCOLLECTION"}]""");
+         setEventMetadata("'DOREPORT'",""","oparms":[{"av":"AV7SDTEmployeeLeaveDetailsCollection","fld":"vSDTEMPLOYEELEAVEDETAILSCOLLECTION"},{"av":"AV13DateRange","fld":"vDATERANGE"},{"av":"AV22EmployeeIdCollection","fld":"vEMPLOYEEIDCOLLECTION"}]}""");
          setEventMetadata("DATERANGE_RANGEPICKER.DATERANGECHANGED","""{"handler":"E115T2","iparms":[{"av":"dynavEmployeeid"},{"av":"AV10EmployeeId","fld":"vEMPLOYEEID","pic":"ZZZZZZZZZ9"},{"av":"AV13DateRange","fld":"vDATERANGE"},{"av":"AV15DateRange_To","fld":"vDATERANGE_TO"},{"av":"AV22EmployeeIdCollection","fld":"vEMPLOYEEIDCOLLECTION"},{"av":"dynavCompanylocationid"},{"av":"AV12CompanyLocationId","fld":"vCOMPANYLOCATIONID","pic":"ZZZZZZZZZ9"},{"av":"A125LeaveTypeName","fld":"LEAVETYPENAME"},{"av":"A100CompanyId","fld":"COMPANYID","pic":"ZZZZZZZZZ9"},{"av":"A124LeaveTypeId","fld":"LEAVETYPEID","pic":"ZZZZZZZZZ9"}]""");
          setEventMetadata("DATERANGE_RANGEPICKER.DATERANGECHANGED",""","oparms":[{"av":"AV22EmployeeIdCollection","fld":"vEMPLOYEEIDCOLLECTION"},{"av":"AV7SDTEmployeeLeaveDetailsCollection","fld":"vSDTEMPLOYEELEAVEDETAILSCOLLECTION"},{"av":"AV8LeaveTypeCollection","fld":"vLEAVETYPECOLLECTION"}]}""");
          setEventMetadata("VCOMPANYLOCATIONID.CONTROLVALUECHANGED","""{"handler":"E145T2","iparms":[{"av":"dynavProjectid"},{"av":"AV11ProjectId","fld":"vPROJECTID","pic":"ZZZZZZZZZ9"},{"av":"A148EmployeeName","fld":"EMPLOYEENAME"},{"av":"A157CompanyLocationId","fld":"COMPANYLOCATIONID","pic":"ZZZZZZZZZ9"},{"av":"dynavCompanylocationid"},{"av":"AV12CompanyLocationId","fld":"vCOMPANYLOCATIONID","pic":"ZZZZZZZZZ9"},{"av":"A106EmployeeId","fld":"EMPLOYEEID","pic":"ZZZZZZZZZ9"},{"av":"dynavEmployeeid"},{"av":"AV10EmployeeId","fld":"vEMPLOYEEID","pic":"ZZZZZZZZZ9"},{"av":"AV13DateRange","fld":"vDATERANGE"},{"av":"AV15DateRange_To","fld":"vDATERANGE_TO"},{"av":"AV22EmployeeIdCollection","fld":"vEMPLOYEEIDCOLLECTION"},{"av":"A125LeaveTypeName","fld":"LEAVETYPENAME"},{"av":"A100CompanyId","fld":"COMPANYID","pic":"ZZZZZZZZZ9"},{"av":"A124LeaveTypeId","fld":"LEAVETYPEID","pic":"ZZZZZZZZZ9"}]""");

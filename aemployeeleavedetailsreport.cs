@@ -140,7 +140,7 @@ namespace GeneXus.Programs {
             AV8EmployeeId = A106EmployeeId;
             AV18SDTEmployeeLeaveDetails = new SdtSDTEmployeeLeaveDetails(context);
             AV18SDTEmployeeLeaveDetails.gxTpr_Employeeid = A106EmployeeId;
-            AV18SDTEmployeeLeaveDetails.gxTpr_Employeename = A148EmployeeName;
+            AV18SDTEmployeeLeaveDetails.gxTpr_Employeename = StringUtil.Trim( A148EmployeeName);
             AV18SDTEmployeeLeaveDetails.gxTpr_Employeebalance = A147EmployeeBalance;
             AV22LeaveRequestCount = 0;
             AV28GXLvl11 = 0;

@@ -994,7 +994,7 @@ namespace GeneXus.Programs
 		public  string gxTpr_Mon_formatted
 		{
 			get { 
-				return StringUtil.RTrim( sdt.gxTpr_Mon_formatted);
+				return sdt.gxTpr_Mon_formatted;
 
 			}
 			set { 
@@ -1006,7 +1006,7 @@ namespace GeneXus.Programs
 		public  string gxTpr_Tue_formatted
 		{
 			get { 
-				return StringUtil.RTrim( sdt.gxTpr_Tue_formatted);
+				return sdt.gxTpr_Tue_formatted;
 
 			}
 			set { 
@@ -1018,7 +1018,7 @@ namespace GeneXus.Programs
 		public  string gxTpr_Wed_formatted
 		{
 			get { 
-				return StringUtil.RTrim( sdt.gxTpr_Wed_formatted);
+				return sdt.gxTpr_Wed_formatted;
 
 			}
 			set { 
@@ -1030,7 +1030,7 @@ namespace GeneXus.Programs
 		public  string gxTpr_Thu_formatted
 		{
 			get { 
-				return StringUtil.RTrim( sdt.gxTpr_Thu_formatted);
+				return sdt.gxTpr_Thu_formatted;
 
 			}
 			set { 
@@ -1042,7 +1042,7 @@ namespace GeneXus.Programs
 		public  string gxTpr_Fri_formatted
 		{
 			get { 
-				return StringUtil.RTrim( sdt.gxTpr_Fri_formatted);
+				return sdt.gxTpr_Fri_formatted;
 
 			}
 			set { 

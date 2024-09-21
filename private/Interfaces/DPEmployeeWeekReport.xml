@@ -292,11 +292,11 @@
             <Properties>
               <Property>
                 <Name>Type</Name>
-                <Value>Character</Value>
+                <Value>LongVarChar</Value>
               </Property>
               <Property>
                 <Name>Length</Name>
-                <Value>20</Value>
+                <Value>2097152</Value>
               </Property>
             </Properties>
           </Field>
@@ -304,11 +304,11 @@
             <Properties>
               <Property>
                 <Name>Type</Name>
-                <Value>Character</Value>
+                <Value>LongVarChar</Value>
               </Property>
               <Property>
                 <Name>Length</Name>
-                <Value>20</Value>
+                <Value>2097152</Value>
               </Property>
             </Properties>
           </Field>
@@ -316,11 +316,11 @@
             <Properties>
               <Property>
                 <Name>Type</Name>
-                <Value>Character</Value>
+                <Value>LongVarChar</Value>
               </Property>
               <Property>
                 <Name>Length</Name>
-                <Value>20</Value>
+                <Value>2097152</Value>
               </Property>
             </Properties>
           </Field>
@@ -328,11 +328,11 @@
             <Properties>
               <Property>
                 <Name>Type</Name>
-                <Value>Character</Value>
+                <Value>LongVarChar</Value>
               </Property>
               <Property>
                 <Name>Length</Name>
-                <Value>20</Value>
+                <Value>2097152</Value>
               </Property>
             </Properties>
           </Field>
@@ -340,11 +340,11 @@
             <Properties>
               <Property>
                 <Name>Type</Name>
-                <Value>Character</Value>
+                <Value>LongVarChar</Value>
               </Property>
               <Property>
                 <Name>Length</Name>
-                <Value>20</Value>
+                <Value>2097152</Value>
               </Property>
             </Properties>
           </Field>

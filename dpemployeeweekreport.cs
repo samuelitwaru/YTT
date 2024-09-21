@@ -231,14 +231,16 @@ namespace GeneXus.Programs {
             new isdateholiday(context ).execute(  DateTimeUtil.DAdd( AV13FromDate, (4)),  A106EmployeeId, out  AV26FriHolidayName, out  GXt_boolean3) ;
             Gxm1sdtemployeeweekreport.gxTpr_Fri_isholiday = GXt_boolean3;
             GXt_boolean3 = false;
-            new isdateholiday(context ).execute(  DateTimeUtil.DAdd( AV13FromDate, (5)),  A106EmployeeId, out  AV28SatHolidayName, out  GXt_boolean3) ;
+            new isdateholiday(context ).execute(  DateTimeUtil.DAdd( AV13FromDate, (5)),  A106EmployeeId, out  AV34SatHolidayName, out  GXt_boolean3) ;
             Gxm1sdtemployeeweekreport.gxTpr_Sat_isholiday = GXt_boolean3;
             GXt_boolean3 = false;
-            new isdateholiday(context ).execute(  DateTimeUtil.DAdd( AV13FromDate, (6)),  A106EmployeeId, out  AV21SunHolidayName, out  GXt_boolean3) ;
+            new isdateholiday(context ).execute(  DateTimeUtil.DAdd( AV13FromDate, (6)),  A106EmployeeId, out  AV41SunHolidayName, out  GXt_boolean3) ;
             Gxm1sdtemployeeweekreport.gxTpr_Sun_isholiday = GXt_boolean3;
             if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV22MonHolidayName)) )
             {
-               Gxm1sdtemployeeweekreport.gxTpr_Mon_formatted = AV22MonHolidayName;
+               GXt_char4 = "";
+               new formattime(context ).execute(  AV5Mon, out  GXt_char4) ;
+               Gxm1sdtemployeeweekreport.gxTpr_Mon_formatted = GXt_char4+"<br /><small>"+AV22MonHolidayName+"</small>";
             }
             else
             {
@@ -248,7 +250,9 @@ namespace GeneXus.Programs {
             }
             if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV23TueHolidayName)) )
             {
-               Gxm1sdtemployeeweekreport.gxTpr_Tue_formatted = AV23TueHolidayName;
+               GXt_char4 = "";
+               new formattime(context ).execute(  AV6Tue, out  GXt_char4) ;
+               Gxm1sdtemployeeweekreport.gxTpr_Tue_formatted = GXt_char4+"<br /><small>"+AV23TueHolidayName+"</small>";
             }
             else
             {
@@ -258,7 +262,9 @@ namespace GeneXus.Programs {
             }
             if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV24WedHolidayName)) )
             {
-               Gxm1sdtemployeeweekreport.gxTpr_Wed_formatted = AV24WedHolidayName;
+               GXt_char4 = "";
+               new formattime(context ).execute(  AV7Wed, out  GXt_char4) ;
+               Gxm1sdtemployeeweekreport.gxTpr_Wed_formatted = GXt_char4+"<br /><small>"+AV24WedHolidayName+"</small>";
             }
             else
             {
@@ -268,7 +274,9 @@ namespace GeneXus.Programs {
             }
             if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV25ThuHolidayName)) )
             {
-               Gxm1sdtemployeeweekreport.gxTpr_Thu_formatted = AV25ThuHolidayName;
+               GXt_char4 = "";
+               new formattime(context ).execute(  AV8Thu, out  GXt_char4) ;
+               Gxm1sdtemployeeweekreport.gxTpr_Thu_formatted = GXt_char4+"<br /><small>"+AV25ThuHolidayName+"</small>";
             }
             else
             {
@@ -278,7 +286,9 @@ namespace GeneXus.Programs {
             }
             if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV26FriHolidayName)) )
             {
-               Gxm1sdtemployeeweekreport.gxTpr_Fri_formatted = AV26FriHolidayName;
+               GXt_char4 = "";
+               new formattime(context ).execute(  AV9Fri, out  GXt_char4) ;
+               Gxm1sdtemployeeweekreport.gxTpr_Fri_formatted = GXt_char4+"<br /><small>"+AV26FriHolidayName+"</small>";
             }
             else
             {
@@ -363,8 +373,8 @@ namespace GeneXus.Programs {
          AV24WedHolidayName = "";
          AV25ThuHolidayName = "";
          AV26FriHolidayName = "";
-         AV28SatHolidayName = "";
-         AV21SunHolidayName = "";
+         AV34SatHolidayName = "";
+         AV41SunHolidayName = "";
          GXt_char4 = "";
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.dpemployeeweekreport__default(),
             new Object[][] {
@@ -419,8 +429,8 @@ namespace GeneXus.Programs {
       private string AV24WedHolidayName ;
       private string AV25ThuHolidayName ;
       private string AV26FriHolidayName ;
-      private string AV28SatHolidayName ;
-      private string AV21SunHolidayName ;
+      private string AV34SatHolidayName ;
+      private string AV41SunHolidayName ;
       private string GXt_char4 ;
       private DateTime AV13FromDate ;
       private DateTime AV16ToDate ;

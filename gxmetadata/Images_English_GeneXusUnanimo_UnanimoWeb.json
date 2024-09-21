@@ -1354,5 +1354,13 @@
         "Density" : 1,
         "RenderingMode" : "automatic",
         "FlipsForRTL" : false
+    }, { 
+        "Name" : "yukon_login_logo",
+        "Type" : "I",
+        "Guid" : "8043abc0-1e6e-4605-96a6-9babd495e72f",
+        "Location" : "yukon_login_logo.png",
+        "Density" : 1,
+        "RenderingMode" : "automatic",
+        "FlipsForRTL" : false
     } ]
 }
