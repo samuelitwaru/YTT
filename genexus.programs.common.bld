@@ -1,4 +1,3 @@
-GeneXusSecurity.dll
 GeneXus.dll
 type_SdtGAMSDChangePassword_Level_DetailSdt.cs
 type_SdtGAMSDNotAuthorized_Level_DetailSdt.cs
@@ -34,17 +33,17 @@ wwpbaseobjects\notifications\common\type_SdtWWP_Notification.cs
 wwpbaseobjects\mail\type_SdtWWP_Mail.cs
 wwpbaseobjects\mail\type_SdtWWP_Mail_Attachments.cs
 wwpbaseobjects\sms\type_SdtWWP_SMS.cs
+type_SdtDevice.cs
+wwpbaseobjects\type_SdtUserCustomizations.cs
 workwithplus\type_SdtWWP_Parameter.cs
-type_SdtCompany.cs
 type_SdtProject.cs
 type_SdtEmployee.cs
 type_SdtEmployee_Project.cs
+type_SdtCompany.cs
 type_SdtWorkHourLog.cs
+type_SdtLeaveType.cs
 type_SdtLeaveRequest.cs
 type_SdtCompanyLocation.cs
-type_SdtDevice.cs
-wwpbaseobjects\type_SdtUserCustomizations.cs
-type_SdtLeaveType.cs
 gxdomainwwpdomains.cs
 genexusreporting\gxdomainqueryviewervisible.cs
 gxdomainhomesampledatastatus.cs

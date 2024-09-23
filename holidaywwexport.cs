@@ -245,6 +245,7 @@ namespace GeneXus.Programs {
          AV59Holidaywwds_4_tfholidaystartdate = AV39TFHolidayStartDate;
          AV60Holidaywwds_5_tfholidaystartdate_to = AV40TFHolidayStartDate_To;
          AV61Holidaywwds_6_tfholidayisactive_sel = AV51TFHolidayIsActive_Sel;
+         AV63Udparg7 = new getloggedinusercompanyid(context).executeUdp( );
          pr_default.dynParam(0, new Object[]{ new Object[]{
                                               AV56Holidaywwds_1_filterfulltext ,
                                               AV58Holidaywwds_3_tfholidayname_sel ,
@@ -257,17 +258,20 @@ namespace GeneXus.Programs {
                                               A139HolidayIsActive ,
                                               AV17OrderedBy ,
                                               AV18OrderedDsc ,
-                                              Gx_date } ,
+                                              Gx_date ,
+                                              AV63Udparg7 ,
+                                              A100CompanyId } ,
                                               new int[]{
-                                              TypeConstants.DATE, TypeConstants.DATE, TypeConstants.SHORT, TypeConstants.DATE, TypeConstants.BOOLEAN, TypeConstants.SHORT, TypeConstants.BOOLEAN, TypeConstants.DATE
+                                              TypeConstants.DATE, TypeConstants.DATE, TypeConstants.SHORT, TypeConstants.DATE, TypeConstants.BOOLEAN, TypeConstants.SHORT, TypeConstants.BOOLEAN, TypeConstants.DATE, TypeConstants.LONG, TypeConstants.LONG
                                               }
          });
          lV56Holidaywwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV56Holidaywwds_1_filterfulltext), "%", "");
          lV57Holidaywwds_2_tfholidayname = StringUtil.PadR( StringUtil.RTrim( AV57Holidaywwds_2_tfholidayname), 100, "%");
          /* Using cursor P00582 */
-         pr_default.execute(0, new Object[] {Gx_date, Gx_date, lV56Holidaywwds_1_filterfulltext, lV57Holidaywwds_2_tfholidayname, AV58Holidaywwds_3_tfholidayname_sel, AV59Holidaywwds_4_tfholidaystartdate, AV60Holidaywwds_5_tfholidaystartdate_to});
+         pr_default.execute(0, new Object[] {AV63Udparg7, Gx_date, Gx_date, lV56Holidaywwds_1_filterfulltext, lV57Holidaywwds_2_tfholidayname, AV58Holidaywwds_3_tfholidayname_sel, AV59Holidaywwds_4_tfholidaystartdate, AV60Holidaywwds_5_tfholidaystartdate_to});
          while ( (pr_default.getStatus(0) != 101) )
          {
+            A100CompanyId = P00582_A100CompanyId[0];
             A139HolidayIsActive = P00582_A139HolidayIsActive[0];
             A115HolidayStartDate = P00582_A115HolidayStartDate[0];
             A114HolidayName = P00582_A114HolidayName[0];
@@ -282,10 +286,10 @@ namespace GeneXus.Programs {
                if (true) return;
             }
             AV32VisibleColumnCount = 0;
-            AV63GXV2 = 1;
-            while ( AV63GXV2 <= AV24ColumnsSelector.gxTpr_Columns.Count )
+            AV64GXV2 = 1;
+            while ( AV64GXV2 <= AV24ColumnsSelector.gxTpr_Columns.Count )
             {
-               AV26ColumnsSelector_Column = ((GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector_Column)AV24ColumnsSelector.gxTpr_Columns.Item(AV63GXV2));
+               AV26ColumnsSelector_Column = ((GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector_Column)AV24ColumnsSelector.gxTpr_Columns.Item(AV64GXV2));
                if ( AV26ColumnsSelector_Column.gxTpr_Isvisible )
                {
                   if ( StringUtil.StrCmp(AV26ColumnsSelector_Column.gxTpr_Columnname, "HolidayName") == 0 )
@@ -306,7 +310,7 @@ namespace GeneXus.Programs {
                   }
                   AV32VisibleColumnCount = (long)(AV32VisibleColumnCount+1);
                }
-               AV63GXV2 = (int)(AV63GXV2+1);
+               AV64GXV2 = (int)(AV64GXV2+1);
             }
             /* Execute user subroutine: 'AFTERWRITELINE' */
             S182 ();
@@ -381,10 +385,10 @@ namespace GeneXus.Programs {
          }
          AV17OrderedBy = AV22GridState.gxTpr_Orderedby;
          AV18OrderedDsc = AV22GridState.gxTpr_Ordereddsc;
-         AV64GXV3 = 1;
-         while ( AV64GXV3 <= AV22GridState.gxTpr_Filtervalues.Count )
+         AV65GXV3 = 1;
+         while ( AV65GXV3 <= AV22GridState.gxTpr_Filtervalues.Count )
          {
-            AV23GridStateFilterValue = ((GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue)AV22GridState.gxTpr_Filtervalues.Item(AV64GXV3));
+            AV23GridStateFilterValue = ((GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue)AV22GridState.gxTpr_Filtervalues.Item(AV65GXV3));
             if ( StringUtil.StrCmp(AV23GridStateFilterValue.gxTpr_Name, "FILTERFULLTEXT") == 0 )
             {
                AV19FilterFullText = AV23GridStateFilterValue.gxTpr_Value;
@@ -406,7 +410,7 @@ namespace GeneXus.Programs {
             {
                AV51TFHolidayIsActive_Sel = (short)(Math.Round(NumberUtil.Val( AV23GridStateFilterValue.gxTpr_Value, "."), 18, MidpointRounding.ToEven));
             }
-            AV64GXV3 = (int)(AV64GXV3+1);
+            AV65GXV3 = (int)(AV65GXV3+1);
          }
       }
 
@@ -457,6 +461,7 @@ namespace GeneXus.Programs {
          A114HolidayName = "";
          A115HolidayStartDate = DateTime.MinValue;
          Gx_date = DateTime.MinValue;
+         P00582_A100CompanyId = new long[1] ;
          P00582_A139HolidayIsActive = new bool[] {false} ;
          P00582_A115HolidayStartDate = new DateTime[] {DateTime.MinValue} ;
          P00582_A114HolidayName = new string[] {""} ;
@@ -470,7 +475,7 @@ namespace GeneXus.Programs {
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.holidaywwexport__default(),
             new Object[][] {
                 new Object[] {
-               P00582_A139HolidayIsActive, P00582_A115HolidayStartDate, P00582_A114HolidayName, P00582_A113HolidayId
+               P00582_A100CompanyId, P00582_A139HolidayIsActive, P00582_A115HolidayStartDate, P00582_A114HolidayName, P00582_A113HolidayId
                }
             }
          );
@@ -487,9 +492,11 @@ namespace GeneXus.Programs {
       private int AV15FirstColumn ;
       private int AV16Random ;
       private int AV54GXV1 ;
-      private int AV63GXV2 ;
-      private int AV64GXV3 ;
+      private int AV64GXV2 ;
+      private int AV65GXV3 ;
       private long AV32VisibleColumnCount ;
+      private long AV63Udparg7 ;
+      private long A100CompanyId ;
       private long A113HolidayId ;
       private string AV38TFHolidayName_Sel ;
       private string AV37TFHolidayName ;
@@ -523,6 +530,7 @@ namespace GeneXus.Programs {
       private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector AV24ColumnsSelector ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector_Column AV26ColumnsSelector_Column ;
       private IDataStoreProvider pr_default ;
+      private long[] P00582_A100CompanyId ;
       private bool[] P00582_A139HolidayIsActive ;
       private DateTime[] P00582_A115HolidayStartDate ;
       private string[] P00582_A114HolidayName ;
@@ -548,13 +556,16 @@ namespace GeneXus.Programs {
                                              bool A139HolidayIsActive ,
                                              short AV17OrderedBy ,
                                              bool AV18OrderedDsc ,
-                                             DateTime Gx_date )
+                                             DateTime Gx_date ,
+                                             long AV63Udparg7 ,
+                                             long A100CompanyId )
       {
          System.Text.StringBuilder sWhereString = new System.Text.StringBuilder();
          string scmdbuf;
-         short[] GXv_int4 = new short[7];
+         short[] GXv_int4 = new short[8];
          Object[] GXv_Object5 = new Object[2];
-         scmdbuf = "SELECT HolidayIsActive, HolidayStartDate, HolidayName, HolidayId FROM Holiday";
+         scmdbuf = "SELECT CompanyId, HolidayIsActive, HolidayStartDate, HolidayName, HolidayId FROM Holiday";
+         AddWhere(sWhereString, "(CompanyId = :AV63Udparg7)");
          AddWhere(sWhereString, "(date_part('year', HolidayStartDate) = date_part('year', :Gx_date) or date_part('year', HolidayStartDate) = date_part('year', (CAST(:Gx_date AS date) + CAST (1 || ' YEAR' AS INTERVAL))))");
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV56Holidaywwds_1_filterfulltext)) )
          {
@@ -562,7 +573,7 @@ namespace GeneXus.Programs {
          }
          else
          {
-            GXv_int4[2] = 1;
+            GXv_int4[3] = 1;
          }
          if ( String.IsNullOrEmpty(StringUtil.RTrim( AV58Holidaywwds_3_tfholidayname_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV57Holidaywwds_2_tfholidayname)) ) )
          {
@@ -570,7 +581,7 @@ namespace GeneXus.Programs {
          }
          else
          {
-            GXv_int4[3] = 1;
+            GXv_int4[4] = 1;
          }
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV58Holidaywwds_3_tfholidayname_sel)) && ! ( StringUtil.StrCmp(AV58Holidaywwds_3_tfholidayname_sel, "<#Empty#>") == 0 ) )
          {
@@ -578,7 +589,7 @@ namespace GeneXus.Programs {
          }
          else
          {
-            GXv_int4[4] = 1;
+            GXv_int4[5] = 1;
          }
          if ( StringUtil.StrCmp(AV58Holidaywwds_3_tfholidayname_sel, "<#Empty#>") == 0 )
          {
@@ -590,7 +601,7 @@ namespace GeneXus.Programs {
          }
          else
          {
-            GXv_int4[5] = 1;
+            GXv_int4[6] = 1;
          }
          if ( ! (DateTime.MinValue==AV60Holidaywwds_5_tfholidaystartdate_to) )
          {
@@ -598,7 +609,7 @@ namespace GeneXus.Programs {
          }
          else
          {
-            GXv_int4[6] = 1;
+            GXv_int4[7] = 1;
          }
          if ( AV61Holidaywwds_6_tfholidayisactive_sel == 1 )
          {
@@ -645,7 +656,7 @@ namespace GeneXus.Programs {
          switch ( cursor )
          {
                case 0 :
-                     return conditional_P00582(context, (string)dynConstraints[0] , (string)dynConstraints[1] , (string)dynConstraints[2] , (DateTime)dynConstraints[3] , (DateTime)dynConstraints[4] , (short)dynConstraints[5] , (string)dynConstraints[6] , (DateTime)dynConstraints[7] , (bool)dynConstraints[8] , (short)dynConstraints[9] , (bool)dynConstraints[10] , (DateTime)dynConstraints[11] );
+                     return conditional_P00582(context, (string)dynConstraints[0] , (string)dynConstraints[1] , (string)dynConstraints[2] , (DateTime)dynConstraints[3] , (DateTime)dynConstraints[4] , (short)dynConstraints[5] , (string)dynConstraints[6] , (DateTime)dynConstraints[7] , (bool)dynConstraints[8] , (short)dynConstraints[9] , (bool)dynConstraints[10] , (DateTime)dynConstraints[11] , (long)dynConstraints[12] , (long)dynConstraints[13] );
          }
          return base.getDynamicStatement(cursor, context, dynConstraints);
       }
@@ -665,6 +676,7 @@ namespace GeneXus.Programs {
        {
           Object[] prmP00582;
           prmP00582 = new Object[] {
+          new ParDef("AV63Udparg7",GXType.Int64,10,0) ,
           new ParDef("Gx_date",GXType.Date,8,0) ,
           new ParDef("Gx_date",GXType.Date,8,0) ,
           new ParDef("lV56Holidaywwds_1_filterfulltext",GXType.VarChar,100,0) ,
@@ -686,10 +698,11 @@ namespace GeneXus.Programs {
        switch ( cursor )
        {
              case 0 :
-                ((bool[]) buf[0])[0] = rslt.getBool(1);
-                ((DateTime[]) buf[1])[0] = rslt.getGXDate(2);
-                ((string[]) buf[2])[0] = rslt.getString(3, 100);
-                ((long[]) buf[3])[0] = rslt.getLong(4);
+                ((long[]) buf[0])[0] = rslt.getLong(1);
+                ((bool[]) buf[1])[0] = rslt.getBool(2);
+                ((DateTime[]) buf[2])[0] = rslt.getGXDate(3);
+                ((string[]) buf[3])[0] = rslt.getString(4, 100);
+                ((long[]) buf[4])[0] = rslt.getLong(5);
                 return;
        }
     }

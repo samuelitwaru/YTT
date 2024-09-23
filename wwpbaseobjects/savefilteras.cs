@@ -782,34 +782,83 @@ namespace GeneXus.Programs.wwpbaseobjects {
             GxWebStd.gx_table_start( context, tblTablemain_Internalname, tblTablemain_Internalname, "", "TableMain", 0, "", "", 1, 2, sStyleString, "", "", 0);
             context.WriteHtmlText( "<tbody>") ;
             context.WriteHtmlText( "<tr>") ;
-            context.WriteHtmlText( "<td data-align=\"center\"  style=\""+CSSHelper.Prettify( "text-align:-khtml-center;text-align:-moz-center;text-align:-webkit-center")+"\" class='PopupContentCell'>") ;
-            wb_table3_8_0P2( true) ;
-         }
-         else
-         {
-            wb_table3_8_0P2( false) ;
-         }
-         return  ;
-      }
-
-      protected void wb_table3_8_0P2e( bool wbgen )
-      {
-         if ( wbgen )
-         {
+            context.WriteHtmlText( "<td>") ;
+            /* Div Control */
+            GxWebStd.gx_div_start( context, divLayout_tableleft_Internalname, 1, 0, "px", 0, "px", "Section", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "Section", "start", "top", " "+"data-gx-base-lib=\"bootstrapv3\""+" "+"data-abstract-form"+" ", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, divTableleft_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
             context.WriteHtmlText( "</td>") ;
             context.WriteHtmlText( "</tr>") ;
             context.WriteHtmlText( "<tr>") ;
             context.WriteHtmlText( "<td>") ;
             /* Div Control */
-            GxWebStd.gx_div_start( context, divActiongroup_actions_Internalname, 1, 0, "px", 0, "px", "ActionGroupRightHTML", "start", "top", "", "", "div");
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 17,'',false,'',0)\"";
+            GxWebStd.gx_div_start( context, divLayout_tablecenter_Internalname, 1, 0, "px", 0, "px", "Section", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "Section", "start", "top", " "+"data-gx-base-lib=\"bootstrapv3\""+" "+"data-abstract-form"+" ", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, divTablecenter_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 PopupContentCell", "Center", "top", "", "", "div");
+            wb_table3_18_0P2( true) ;
+         }
+         else
+         {
+            wb_table3_18_0P2( false) ;
+         }
+         return  ;
+      }
+
+      protected void wb_table3_18_0P2e( bool wbgen )
+      {
+         if ( wbgen )
+         {
+            GxWebStd.gx_div_end( context, "Center", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-action-group ActionGroupRightHTML", "start", "top", " "+"data-gx-actiongroup-type=\"toolbar\""+" ", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-button", "start", "top", "", "", "div");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 28,'',false,'',0)\"";
             ClassString = "btn btn-default Button";
             StyleString = "";
             GxWebStd.gx_button_ctrl( context, bttBtnenter_Internalname, "", "Save", bttBtnenter_Jsonclick, 5, "Confirm", "", StyleString, ClassString, 1, 1, "standard", "'"+""+"'"+",false,"+"'"+"EENTER."+"'", TempTags, "", context.GetButtonType( ), "HLP_WWPBaseObjects/SaveFilterAs.htm");
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 18,'',false,'',0)\"";
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-button", "start", "top", "", "", "div");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 30,'',false,'',0)\"";
             ClassString = "btn btn-default BtnDefault";
             StyleString = "";
             GxWebStd.gx_button_ctrl( context, bttBtncancel_Internalname, "", "Cancel", bttBtncancel_Jsonclick, 1, "Cancel", "", StyleString, ClassString, 1, 1, "standard", "'"+""+"'"+",false,"+"'"+"ECANCEL."+"'", TempTags, "", context.GetButtonType( ), "HLP_WWPBaseObjects/SaveFilterAs.htm");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            context.WriteHtmlText( "</td>") ;
+            context.WriteHtmlText( "</tr>") ;
+            context.WriteHtmlText( "<tr>") ;
+            context.WriteHtmlText( "<td>") ;
+            /* Div Control */
+            GxWebStd.gx_div_start( context, divLayout_tableright_Internalname, 1, 0, "px", 0, "px", "Section", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "Section", "start", "top", " "+"data-gx-base-lib=\"bootstrapv3\""+" "+"data-abstract-form"+" ", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, divTableright_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             context.WriteHtmlText( "</td>") ;
             context.WriteHtmlText( "</tr>") ;
@@ -831,33 +880,35 @@ namespace GeneXus.Programs.wwpbaseobjects {
          }
       }
 
-      protected void wb_table3_8_0P2( bool wbgen )
+      protected void wb_table3_18_0P2( bool wbgen )
       {
          if ( wbgen )
          {
             /* Table start */
             sStyleString = "";
             GxWebStd.gx_table_start( context, tblTablecontent_Internalname, tblTablecontent_Internalname, "", "TableContent", 0, "", "", 1, 2, sStyleString, "", "", 0);
-            context.WriteHtmlText( "<tbody>") ;
             context.WriteHtmlText( "<tr>") ;
-            context.WriteHtmlText( "<td class='DataDescriptionCell'>") ;
-            /* Text block */
-            GxWebStd.gx_label_ctrl( context, lblTextblockfiltername_Internalname, "Name", "", "", lblTextblockfiltername_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "DataDescription", 0, "", 1, 1, 0, 0, "HLP_WWPBaseObjects/SaveFilterAs.htm");
-            context.WriteHtmlText( "</td>") ;
             context.WriteHtmlText( "<td class='RequiredDataContentCell'>") ;
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "form-group gx-form-group gx-default-form-group", "start", "top", ""+" data-gx-for=\""+edtavFiltername_Internalname+"\"", "", "div");
+            /* Attribute/Variable Label */
+            GxWebStd.gx_label_element( context, edtavFiltername_Internalname, "Name", "gx-form-item AttributeManageFiltersLabel", 1, true, "width: 25%;");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 75, "%", 0, "px", "gx-form-item gx-attribute", "start", "top", "", "", "div");
             /* Single line edit */
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 13,'',false,'',0)\"";
-            GxWebStd.gx_single_line_edit( context, edtavFiltername_Internalname, AV8FilterName, StringUtil.RTrim( context.localUtil.Format( AV8FilterName, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,13);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavFiltername_Jsonclick, 0, "AttributeManageFilters", "", "", "", "", 1, 1, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_WWPBaseObjects/SaveFilterAs.htm");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 23,'',false,'',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtavFiltername_Internalname, AV8FilterName, StringUtil.RTrim( context.localUtil.Format( AV8FilterName, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,23);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavFiltername_Jsonclick, 0, "AttributeManageFilters", "", "", "", "", 1, edtavFiltername_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_WWPBaseObjects/SaveFilterAs.htm");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
             context.WriteHtmlText( "</td>") ;
             context.WriteHtmlText( "</tr>") ;
-            context.WriteHtmlText( "</tbody>") ;
             /* End of table */
             context.WriteHtmlText( "</table>") ;
-            wb_table3_8_0P2e( true) ;
+            wb_table3_18_0P2e( true) ;
          }
          else
          {
-            wb_table3_8_0P2e( false) ;
+            wb_table3_18_0P2e( false) ;
          }
       }
 
@@ -907,7 +958,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202491982612", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20249239504688", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -923,7 +974,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wwpbaseobjects/savefilteras.js", "?202491982612", false, true);
+         context.AddJavascriptSource("wwpbaseobjects/savefilteras.js", "?20249239504688", false, true);
          context.AddJavascriptSource("DVelop/DVMessage/pnotify.custom.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/DVMessage/DVMessageRender.js", "", false, true);
@@ -937,12 +988,16 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       protected void init_default_properties( )
       {
-         lblTextblockfiltername_Internalname = "TEXTBLOCKFILTERNAME";
+         divTableleft_Internalname = "TABLELEFT";
+         divLayout_tableleft_Internalname = "LAYOUT_TABLELEFT";
          edtavFiltername_Internalname = "vFILTERNAME";
          tblTablecontent_Internalname = "TABLECONTENT";
          bttBtnenter_Internalname = "BTNENTER";
          bttBtncancel_Internalname = "BTNCANCEL";
-         divActiongroup_actions_Internalname = "ACTIONGROUP_ACTIONS";
+         divTablecenter_Internalname = "TABLECENTER";
+         divLayout_tablecenter_Internalname = "LAYOUT_TABLECENTER";
+         divTableright_Internalname = "TABLERIGHT";
+         divLayout_tableright_Internalname = "LAYOUT_TABLERIGHT";
          Ucmessage_Internalname = "UCMESSAGE";
          tblTablemain_Internalname = "TABLEMAIN";
          tblLayoutmaintable_Internalname = "LAYOUTMAINTABLE";
@@ -958,6 +1013,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          }
          init_default_properties( ) ;
          edtavFiltername_Jsonclick = "";
+         edtavFiltername_Enabled = 1;
          tblLayoutmaintable_Class = "Table TableTransactionTemplate";
          Ucmessage_Stoponerror = Convert.ToBoolean( -1);
          Form.Headerrawhtml = "";
@@ -1021,7 +1077,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
          bttBtnenter_Jsonclick = "";
          bttBtncancel_Jsonclick = "";
          ucUcmessage = new GXUserControl();
-         lblTextblockfiltername_Jsonclick = "";
          BackMsgLst = new msglist();
          LclMsgLst = new msglist();
          /* GeneXus formulas. */
@@ -1036,6 +1091,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private short gxcookieaux ;
       private short nGXWrapped ;
       private int AV21GXV1 ;
+      private int edtavFiltername_Enabled ;
       private int idxLst ;
       private string gxfirstwebparm ;
       private string gxfirstwebparm_bkp ;
@@ -1054,7 +1110,10 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private string tblLayoutmaintable_Internalname ;
       private string sStyleString ;
       private string tblTablemain_Internalname ;
-      private string divActiongroup_actions_Internalname ;
+      private string divLayout_tableleft_Internalname ;
+      private string divTableleft_Internalname ;
+      private string divLayout_tablecenter_Internalname ;
+      private string divTablecenter_Internalname ;
       private string TempTags ;
       private string ClassString ;
       private string StyleString ;
@@ -1062,10 +1121,10 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private string bttBtnenter_Jsonclick ;
       private string bttBtncancel_Internalname ;
       private string bttBtncancel_Jsonclick ;
+      private string divLayout_tableright_Internalname ;
+      private string divTableright_Internalname ;
       private string Ucmessage_Internalname ;
       private string tblTablecontent_Internalname ;
-      private string lblTextblockfiltername_Internalname ;
-      private string lblTextblockfiltername_Jsonclick ;
       private string edtavFiltername_Jsonclick ;
       private bool entryPointCalled ;
       private bool toggleJsOutput ;

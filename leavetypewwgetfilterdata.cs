@@ -203,6 +203,7 @@ namespace GeneXus.Programs {
          AV54Leavetypewwds_3_tfleavetypename_sel = AV14TFLeaveTypeName_Sel;
          AV55Leavetypewwds_4_tfleavetypevacationleave_sels = AV41TFLeaveTypeVacationLeave_Sels;
          AV56Leavetypewwds_5_tfleavetypeloggingworkhours_sels = AV43TFLeaveTypeLoggingWorkHours_Sels;
+         AV57Udparg6 = new getloggedinusercompanyid(context).executeUdp( );
          pr_default.dynParam(0, new Object[]{ new Object[]{
                                               A144LeaveTypeVacationLeave ,
                                               AV55Leavetypewwds_4_tfleavetypevacationleave_sels ,
@@ -213,9 +214,11 @@ namespace GeneXus.Programs {
                                               AV53Leavetypewwds_2_tfleavetypename ,
                                               AV55Leavetypewwds_4_tfleavetypevacationleave_sels.Count ,
                                               AV56Leavetypewwds_5_tfleavetypeloggingworkhours_sels.Count ,
-                                              A125LeaveTypeName } ,
+                                              A125LeaveTypeName ,
+                                              A100CompanyId ,
+                                              AV57Udparg6 } ,
                                               new int[]{
-                                              TypeConstants.INT, TypeConstants.INT
+                                              TypeConstants.INT, TypeConstants.INT, TypeConstants.LONG, TypeConstants.LONG
                                               }
          });
          lV52Leavetypewwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV52Leavetypewwds_1_filterfulltext), "%", "");
@@ -225,10 +228,11 @@ namespace GeneXus.Programs {
          lV52Leavetypewwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV52Leavetypewwds_1_filterfulltext), "%", "");
          lV53Leavetypewwds_2_tfleavetypename = StringUtil.PadR( StringUtil.RTrim( AV53Leavetypewwds_2_tfleavetypename), 100, "%");
          /* Using cursor P005C2 */
-         pr_default.execute(0, new Object[] {lV52Leavetypewwds_1_filterfulltext, lV52Leavetypewwds_1_filterfulltext, lV52Leavetypewwds_1_filterfulltext, lV52Leavetypewwds_1_filterfulltext, lV52Leavetypewwds_1_filterfulltext, lV53Leavetypewwds_2_tfleavetypename, AV54Leavetypewwds_3_tfleavetypename_sel});
+         pr_default.execute(0, new Object[] {AV57Udparg6, lV52Leavetypewwds_1_filterfulltext, lV52Leavetypewwds_1_filterfulltext, lV52Leavetypewwds_1_filterfulltext, lV52Leavetypewwds_1_filterfulltext, lV52Leavetypewwds_1_filterfulltext, lV53Leavetypewwds_2_tfleavetypename, AV54Leavetypewwds_3_tfleavetypename_sel});
          while ( (pr_default.getStatus(0) != 101) )
          {
             BRK5C2 = false;
+            A100CompanyId = P005C2_A100CompanyId[0];
             A125LeaveTypeName = P005C2_A125LeaveTypeName[0];
             A145LeaveTypeLoggingWorkHours = P005C2_A145LeaveTypeLoggingWorkHours[0];
             A144LeaveTypeVacationLeave = P005C2_A144LeaveTypeVacationLeave[0];
@@ -306,6 +310,7 @@ namespace GeneXus.Programs {
          A144LeaveTypeVacationLeave = "";
          A145LeaveTypeLoggingWorkHours = "";
          A125LeaveTypeName = "";
+         P005C2_A100CompanyId = new long[1] ;
          P005C2_A125LeaveTypeName = new string[] {""} ;
          P005C2_A145LeaveTypeLoggingWorkHours = new string[] {""} ;
          P005C2_A144LeaveTypeVacationLeave = new string[] {""} ;
@@ -314,7 +319,7 @@ namespace GeneXus.Programs {
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.leavetypewwgetfilterdata__default(),
             new Object[][] {
                 new Object[] {
-               P005C2_A125LeaveTypeName, P005C2_A145LeaveTypeLoggingWorkHours, P005C2_A144LeaveTypeVacationLeave, P005C2_A124LeaveTypeId
+               P005C2_A100CompanyId, P005C2_A125LeaveTypeName, P005C2_A145LeaveTypeLoggingWorkHours, P005C2_A144LeaveTypeVacationLeave, P005C2_A124LeaveTypeId
                }
             }
          );
@@ -327,6 +332,8 @@ namespace GeneXus.Programs {
       private int AV50GXV1 ;
       private int AV55Leavetypewwds_4_tfleavetypevacationleave_sels_Count ;
       private int AV56Leavetypewwds_5_tfleavetypeloggingworkhours_sels_Count ;
+      private long AV57Udparg6 ;
+      private long A100CompanyId ;
       private long A124LeaveTypeId ;
       private long AV27count ;
       private string AV13TFLeaveTypeName ;
@@ -366,6 +373,7 @@ namespace GeneXus.Programs {
       private GxSimpleCollection<string> AV55Leavetypewwds_4_tfleavetypevacationleave_sels ;
       private GxSimpleCollection<string> AV56Leavetypewwds_5_tfleavetypeloggingworkhours_sels ;
       private IDataStoreProvider pr_default ;
+      private long[] P005C2_A100CompanyId ;
       private string[] P005C2_A125LeaveTypeName ;
       private string[] P005C2_A145LeaveTypeLoggingWorkHours ;
       private string[] P005C2_A144LeaveTypeVacationLeave ;
@@ -387,24 +395,27 @@ namespace GeneXus.Programs {
                                              string AV53Leavetypewwds_2_tfleavetypename ,
                                              int AV55Leavetypewwds_4_tfleavetypevacationleave_sels_Count ,
                                              int AV56Leavetypewwds_5_tfleavetypeloggingworkhours_sels_Count ,
-                                             string A125LeaveTypeName )
+                                             string A125LeaveTypeName ,
+                                             long A100CompanyId ,
+                                             long AV57Udparg6 )
       {
          System.Text.StringBuilder sWhereString = new System.Text.StringBuilder();
          string scmdbuf;
-         short[] GXv_int1 = new short[7];
+         short[] GXv_int1 = new short[8];
          Object[] GXv_Object2 = new Object[2];
-         scmdbuf = "SELECT LeaveTypeName, LeaveTypeLoggingWorkHours, LeaveTypeVacationLeave, LeaveTypeId FROM LeaveType";
+         scmdbuf = "SELECT CompanyId, LeaveTypeName, LeaveTypeLoggingWorkHours, LeaveTypeVacationLeave, LeaveTypeId FROM LeaveType";
+         AddWhere(sWhereString, "(CompanyId = :AV57Udparg6)");
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV52Leavetypewwds_1_filterfulltext)) )
          {
             AddWhere(sWhereString, "(( LeaveTypeName like '%' || :lV52Leavetypewwds_1_filterfulltext) or ( 'no' like '%' || LOWER(:lV52Leavetypewwds_1_filterfulltext) and LeaveTypeVacationLeave = ( 'No')) or ( 'yes' like '%' || LOWER(:lV52Leavetypewwds_1_filterfulltext) and LeaveTypeVacationLeave = ( 'Yes')) or ( 'no' like '%' || LOWER(:lV52Leavetypewwds_1_filterfulltext) and LeaveTypeLoggingWorkHours = ( 'No')) or ( 'yes' like '%' || LOWER(:lV52Leavetypewwds_1_filterfulltext) and LeaveTypeLoggingWorkHours = ( 'Yes')))");
          }
          else
          {
-            GXv_int1[0] = 1;
             GXv_int1[1] = 1;
             GXv_int1[2] = 1;
             GXv_int1[3] = 1;
             GXv_int1[4] = 1;
+            GXv_int1[5] = 1;
          }
          if ( String.IsNullOrEmpty(StringUtil.RTrim( AV54Leavetypewwds_3_tfleavetypename_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV53Leavetypewwds_2_tfleavetypename)) ) )
          {
@@ -412,7 +423,7 @@ namespace GeneXus.Programs {
          }
          else
          {
-            GXv_int1[5] = 1;
+            GXv_int1[6] = 1;
          }
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV54Leavetypewwds_3_tfleavetypename_sel)) && ! ( StringUtil.StrCmp(AV54Leavetypewwds_3_tfleavetypename_sel, "<#Empty#>") == 0 ) )
          {
@@ -420,7 +431,7 @@ namespace GeneXus.Programs {
          }
          else
          {
-            GXv_int1[6] = 1;
+            GXv_int1[7] = 1;
          }
          if ( StringUtil.StrCmp(AV54Leavetypewwds_3_tfleavetypename_sel, "<#Empty#>") == 0 )
          {
@@ -448,7 +459,7 @@ namespace GeneXus.Programs {
          switch ( cursor )
          {
                case 0 :
-                     return conditional_P005C2(context, (string)dynConstraints[0] , (GxSimpleCollection<string>)dynConstraints[1] , (string)dynConstraints[2] , (GxSimpleCollection<string>)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (int)dynConstraints[7] , (int)dynConstraints[8] , (string)dynConstraints[9] );
+                     return conditional_P005C2(context, (string)dynConstraints[0] , (GxSimpleCollection<string>)dynConstraints[1] , (string)dynConstraints[2] , (GxSimpleCollection<string>)dynConstraints[3] , (string)dynConstraints[4] , (string)dynConstraints[5] , (string)dynConstraints[6] , (int)dynConstraints[7] , (int)dynConstraints[8] , (string)dynConstraints[9] , (long)dynConstraints[10] , (long)dynConstraints[11] );
          }
          return base.getDynamicStatement(cursor, context, dynConstraints);
       }
@@ -468,6 +479,7 @@ namespace GeneXus.Programs {
        {
           Object[] prmP005C2;
           prmP005C2 = new Object[] {
+          new ParDef("AV57Udparg6",GXType.Int64,10,0) ,
           new ParDef("lV52Leavetypewwds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV52Leavetypewwds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV52Leavetypewwds_1_filterfulltext",GXType.VarChar,100,0) ,
@@ -489,10 +501,11 @@ namespace GeneXus.Programs {
        switch ( cursor )
        {
              case 0 :
-                ((string[]) buf[0])[0] = rslt.getString(1, 100);
-                ((string[]) buf[1])[0] = rslt.getString(2, 20);
+                ((long[]) buf[0])[0] = rslt.getLong(1);
+                ((string[]) buf[1])[0] = rslt.getString(2, 100);
                 ((string[]) buf[2])[0] = rslt.getString(3, 20);
-                ((long[]) buf[3])[0] = rslt.getLong(4);
+                ((string[]) buf[3])[0] = rslt.getString(4, 20);
+                ((long[]) buf[4])[0] = rslt.getLong(5);
                 return;
        }
     }
