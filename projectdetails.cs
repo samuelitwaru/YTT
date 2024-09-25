@@ -417,10 +417,12 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "INNEWWINDOW1_Target", StringUtil.RTrim( Innewwindow1_Target));
          GxWebStd.gx_hidden_field( context, "FREESTYLEGRID1PAGINATIONBAR_Selectedpage", StringUtil.RTrim( Freestylegrid1paginationbar_Selectedpage));
          GxWebStd.gx_hidden_field( context, "FREESTYLEGRID1PAGINATIONBAR_Rowsperpageselectedvalue", StringUtil.LTrim( StringUtil.NToC( (decimal)(Freestylegrid1paginationbar_Rowsperpageselectedvalue), 9, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, "FREESTYLEGRID1_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subFreestylegrid1_Rows), 6, 0, ".", "")));
          GxWebStd.gx_hidden_field( context, "EMPLOYEENAME_Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtEmployeeName_Visible), 5, 0, ".", "")));
          GxWebStd.gx_hidden_field( context, "EMPLOYEEID_Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtEmployeeId_Visible), 5, 0, ".", "")));
          GxWebStd.gx_hidden_field( context, "FREESTYLEGRID1PAGINATIONBAR_Selectedpage", StringUtil.RTrim( Freestylegrid1paginationbar_Selectedpage));
          GxWebStd.gx_hidden_field( context, "FREESTYLEGRID1PAGINATIONBAR_Rowsperpageselectedvalue", StringUtil.LTrim( StringUtil.NToC( (decimal)(Freestylegrid1paginationbar_Rowsperpageselectedvalue), 9, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, "FREESTYLEGRID1_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subFreestylegrid1_Rows), 6, 0, ".", "")));
       }
 
       public override void RenderHtmlCloseForm( )
@@ -1292,6 +1294,8 @@ namespace GeneXus.Programs {
             Innewwindow1_Target = cgiGet( "INNEWWINDOW1_Target");
             Freestylegrid1paginationbar_Selectedpage = cgiGet( "FREESTYLEGRID1PAGINATIONBAR_Selectedpage");
             Freestylegrid1paginationbar_Rowsperpageselectedvalue = (int)(Math.Round(context.localUtil.CToN( cgiGet( "FREESTYLEGRID1PAGINATIONBAR_Rowsperpageselectedvalue"), ".", ","), 18, MidpointRounding.ToEven));
+            subFreestylegrid1_Rows = (int)(Math.Round(context.localUtil.CToN( cgiGet( "FREESTYLEGRID1_Rows"), ".", ","), 18, MidpointRounding.ToEven));
+            GxWebStd.gx_hidden_field( context, "FREESTYLEGRID1_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subFreestylegrid1_Rows), 6, 0, ".", "")));
             /* Read variables values. */
             if ( ( ( context.localUtil.CToN( cgiGet( edtavFreestylegrid1currentpage_Internalname), ".", ",") < Convert.ToDecimal( 0 )) ) || ( ( context.localUtil.CToN( cgiGet( edtavFreestylegrid1currentpage_Internalname), ".", ",") > Convert.ToDecimal( 9999999999L )) ) )
             {
@@ -1477,7 +1481,7 @@ namespace GeneXus.Programs {
       {
          /* Freestylegrid1_Refresh Routine */
          returnInSub = false;
-         AV10FreeStyleGrid1PageCount = 5;
+         AV10FreeStyleGrid1PageCount = subFreestylegrid1_Rows;
          AssignAttri("", false, "AV10FreeStyleGrid1PageCount", StringUtil.LTrimStr( (decimal)(AV10FreeStyleGrid1PageCount), 10, 0));
          /*  Sending Event outputs  */
       }
@@ -1499,16 +1503,6 @@ namespace GeneXus.Programs {
          }
          gxgrFreestylegrid1_refresh( subFreestylegrid1_Rows, AV22OneProjectId, AV15FromDate, AV16ToDate) ;
          /*  Sending Event outputs  */
-      }
-
-      protected void S132( )
-      {
-         /* 'EMITGLOBALEVENT' Routine */
-         returnInSub = false;
-         if ( ( AV37View == Convert.ToDecimal( 2 )) )
-         {
-            this.executeExternalObjectMethod("", false, "GlobalEvents", "ReportsFilterChanaged", new Object[] {(GxSimpleCollection<long>)AV12CompanyLocationId,(GxSimpleCollection<long>)AV13EmployeeId,(GxSimpleCollection<long>)AV14ProjectId,(DateTime)AV21DateRange,(DateTime)AV26DateRange_To}, true);
-         }
       }
 
       protected void S122( )
@@ -1584,7 +1578,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024919805688", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20249257213628", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1600,7 +1594,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("projectdetails.js", "?2024919805688", false, true);
+         context.AddJavascriptSource("projectdetails.js", "?20249257213629", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/DVPaginationBar/DVPaginationBarRender.js", "", false, true);
@@ -1963,7 +1957,7 @@ namespace GeneXus.Programs {
          setEventMetadata("FREESTYLEGRID1PAGINATIONBAR.CHANGEROWSPERPAGE",""","oparms":[{"av":"subFreestylegrid1_Rows","ctrl":"FREESTYLEGRID1","prop":"Rows"},{"av":"AV9FreeStyleGrid1CurrentPage","fld":"vFREESTYLEGRID1CURRENTPAGE","pic":"ZZZZZZZZZ9"}]}""");
          setEventMetadata("'DOEXPORTEXCEL'","""{"handler":"E134Y2","iparms":[{"av":"AV21DateRange","fld":"vDATERANGE"},{"av":"AV26DateRange_To","fld":"vDATERANGE_TO"},{"av":"AV14ProjectId","fld":"vPROJECTID"},{"av":"AV12CompanyLocationId","fld":"vCOMPANYLOCATIONID"},{"av":"AV13EmployeeId","fld":"vEMPLOYEEID"}]""");
          setEventMetadata("'DOEXPORTEXCEL'",""","oparms":[{"av":"AV13EmployeeId","fld":"vEMPLOYEEID"},{"av":"AV12CompanyLocationId","fld":"vCOMPANYLOCATIONID"},{"av":"AV14ProjectId","fld":"vPROJECTID"},{"av":"AV26DateRange_To","fld":"vDATERANGE_TO"},{"av":"AV21DateRange","fld":"vDATERANGE"},{"av":"Innewwindow1_Target","ctrl":"INNEWWINDOW1","prop":"Target"},{"av":"Innewwindow1_Name","ctrl":"INNEWWINDOW1","prop":"Name"}]}""");
-         setEventMetadata("FREESTYLEGRID1.REFRESH","""{"handler":"E184Y2","iparms":[]""");
+         setEventMetadata("FREESTYLEGRID1.REFRESH","""{"handler":"E184Y2","iparms":[{"av":"subFreestylegrid1_Rows","ctrl":"FREESTYLEGRID1","prop":"Rows"}]""");
          setEventMetadata("FREESTYLEGRID1.REFRESH",""","oparms":[{"av":"AV10FreeStyleGrid1PageCount","fld":"vFREESTYLEGRID1PAGECOUNT","pic":"ZZZZZZZZZ9"}]}""");
          setEventMetadata("GLOBALEVENTS.REPORTSFILTERCHANAGED","""{"handler":"E144Y2","iparms":[{"av":"FREESTYLEGRID1_nFirstRecordOnPage"},{"av":"FREESTYLEGRID1_nEOF"},{"av":"subFreestylegrid1_Rows","ctrl":"FREESTYLEGRID1","prop":"Rows"},{"av":"AV22OneProjectId","fld":"vONEPROJECTID","pic":"ZZZ9","hsh":true},{"av":"edtEmployeeName_Visible","ctrl":"EMPLOYEENAME","prop":"Visible"},{"av":"edtEmployeeId_Visible","ctrl":"EMPLOYEEID","prop":"Visible"},{"av":"AV15FromDate","fld":"vFROMDATE"},{"av":"AV16ToDate","fld":"vTODATE"},{"av":"AV32InProjectId","fld":"vINPROJECTID"},{"av":"AV31InEmployeeId","fld":"vINEMPLOYEEID"},{"av":"AV30InCompanyLocationId","fld":"vINCOMPANYLOCATIONID"},{"av":"AV12CompanyLocationId","fld":"vCOMPANYLOCATIONID"},{"av":"AV13EmployeeId","fld":"vEMPLOYEEID"}]""");
          setEventMetadata("GLOBALEVENTS.REPORTSFILTERCHANAGED",""","oparms":[{"av":"AV21DateRange","fld":"vDATERANGE"},{"av":"AV26DateRange_To","fld":"vDATERANGE_TO"}]}""");
@@ -2075,8 +2069,8 @@ namespace GeneXus.Programs {
       private int edtEmployeeName_Visible ;
       private int edtEmployeeId_Visible ;
       private int Freestylegrid1paginationbar_Rowsperpageselectedvalue ;
-      private int nRC_GXsfl_23 ;
       private int subFreestylegrid1_Rows ;
+      private int nRC_GXsfl_23 ;
       private int nGXsfl_23_idx=1 ;
       private int Freestylegrid1paginationbar_Pagestoshow ;
       private int edtavFreestylegrid1currentpage_Visible ;
@@ -2107,7 +2101,6 @@ namespace GeneXus.Programs {
       private long FREESTYLEGRID1_nRecordCount ;
       private long AV17LoggedInEmployeeId ;
       private long GXt_int1 ;
-      private decimal AV37View ;
       private string Freestylegrid1paginationbar_Selectedpage ;
       private string gxfirstwebparm ;
       private string gxfirstwebparm_bkp ;
