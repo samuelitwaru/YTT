@@ -1481,7 +1481,8 @@ namespace GeneXus.Programs {
       {
          /* Freestylegrid1_Refresh Routine */
          returnInSub = false;
-         AV10FreeStyleGrid1PageCount = subFreestylegrid1_Rows;
+         AV37RecordCount = (short)(subFreestylegrid1_fnc_Recordcount( ));
+         AV10FreeStyleGrid1PageCount = (long)(AV37RecordCount/ (decimal)(subFreestylegrid1_Rows)+((((int)((AV37RecordCount) % (subFreestylegrid1_Rows)))>0) ? 1 : 0));
          AssignAttri("", false, "AV10FreeStyleGrid1PageCount", StringUtil.LTrimStr( (decimal)(AV10FreeStyleGrid1PageCount), 10, 0));
          /*  Sending Event outputs  */
       }
@@ -1578,7 +1579,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20249257213628", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20249273532972", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1594,7 +1595,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("projectdetails.js", "?20249257213629", false, true);
+         context.AddJavascriptSource("projectdetails.js", "?20249273532972", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/DVPaginationBar/DVPaginationBarRender.js", "", false, true);
@@ -2060,6 +2061,7 @@ namespace GeneXus.Programs {
       private short nDonePA ;
       private short gxcookieaux ;
       private short subFreestylegrid1_Backcolorstyle ;
+      private short AV37RecordCount ;
       private short nGXWrapped ;
       private short subFreestylegrid1_Backstyle ;
       private short subFreestylegrid1_Allowselection ;
