@@ -595,7 +595,7 @@ namespace GeneXus.Programs {
          scmdbuf = "SELECT EmployeeName, EmployeeId, CompanyId, EmployeeBalance, EmployeeVactionDays, EmployeeIsActive, EmployeeIsManager, EmployeeEmail FROM Employee";
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV60Employeewwds_1_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( EmployeeName like '%' || :lV60Employeewwds_1_filterfulltext) or ( EmployeeEmail like '%' || :lV60Employeewwds_1_filterfulltext) or ( SUBSTR(TO_CHAR(EmployeeVactionDays,'90.9'), 2) like '%' || :lV60Employeewwds_1_filterfulltext) or ( SUBSTR(TO_CHAR(EmployeeBalance,'90.9'), 2) like '%' || :lV60Employeewwds_1_filterfulltext))");
+            AddWhere(sWhereString, "(( LOWER(EmployeeName) like '%' || LOWER(:lV60Employeewwds_1_filterfulltext)) or ( LOWER(EmployeeEmail) like '%' || LOWER(:lV60Employeewwds_1_filterfulltext)) or ( SUBSTR(TO_CHAR(EmployeeVactionDays,'90.9'), 2) like '%' || :lV60Employeewwds_1_filterfulltext) or ( SUBSTR(TO_CHAR(EmployeeBalance,'90.9'), 2) like '%' || :lV60Employeewwds_1_filterfulltext))");
          }
          else
          {
@@ -741,7 +741,7 @@ namespace GeneXus.Programs {
          scmdbuf = "SELECT EmployeeEmail, EmployeeId, CompanyId, EmployeeBalance, EmployeeVactionDays, EmployeeIsActive, EmployeeIsManager, EmployeeName FROM Employee";
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV60Employeewwds_1_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( EmployeeName like '%' || :lV60Employeewwds_1_filterfulltext) or ( EmployeeEmail like '%' || :lV60Employeewwds_1_filterfulltext) or ( SUBSTR(TO_CHAR(EmployeeVactionDays,'90.9'), 2) like '%' || :lV60Employeewwds_1_filterfulltext) or ( SUBSTR(TO_CHAR(EmployeeBalance,'90.9'), 2) like '%' || :lV60Employeewwds_1_filterfulltext))");
+            AddWhere(sWhereString, "(( LOWER(EmployeeName) like '%' || LOWER(:lV60Employeewwds_1_filterfulltext)) or ( LOWER(EmployeeEmail) like '%' || LOWER(:lV60Employeewwds_1_filterfulltext)) or ( SUBSTR(TO_CHAR(EmployeeVactionDays,'90.9'), 2) like '%' || :lV60Employeewwds_1_filterfulltext) or ( SUBSTR(TO_CHAR(EmployeeBalance,'90.9'), 2) like '%' || :lV60Employeewwds_1_filterfulltext))");
          }
          else
          {

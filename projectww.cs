@@ -2419,7 +2419,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20249239503590", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024102512275722", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2435,7 +2435,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("projectww.js", "?20249239503592", false, true);
+         context.AddJavascriptSource("projectww.js", "?2024102512275725", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -3369,7 +3369,7 @@ namespace GeneXus.Programs {
          sOrderString = "";
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV57Projectwwds_1_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( T1.ProjectName like '%' || :lV57Projectwwds_1_filterfulltext) or ( T1.ProjectDescription like '%' || :lV57Projectwwds_1_filterfulltext) or ( 'active' like '%' || LOWER(:lV57Projectwwds_1_filterfulltext) and T1.ProjectStatus = ( 'Active')) or ( 'inactive' like '%' || LOWER(:lV57Projectwwds_1_filterfulltext) and T1.ProjectStatus = ( 'Inactive')) or ( T2.EmployeeName like '%' || :lV57Projectwwds_1_filterfulltext))");
+            AddWhere(sWhereString, "(( LOWER(T1.ProjectName) like '%' || LOWER(:lV57Projectwwds_1_filterfulltext)) or ( LOWER(T1.ProjectDescription) like '%' || LOWER(:lV57Projectwwds_1_filterfulltext)) or ( 'active' like '%' || LOWER(:lV57Projectwwds_1_filterfulltext) and T1.ProjectStatus = ( 'Active')) or ( 'inactive' like '%' || LOWER(:lV57Projectwwds_1_filterfulltext) and T1.ProjectStatus = ( 'Inactive')) or ( LOWER(T2.EmployeeName) like '%' || LOWER(:lV57Projectwwds_1_filterfulltext)))");
          }
          else
          {
@@ -3509,7 +3509,7 @@ namespace GeneXus.Programs {
          scmdbuf = "SELECT COUNT(*) FROM (Project T1 LEFT JOIN Employee T2 ON T2.EmployeeId = T1.ProjectManagerId)";
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV57Projectwwds_1_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( T1.ProjectName like '%' || :lV57Projectwwds_1_filterfulltext) or ( T1.ProjectDescription like '%' || :lV57Projectwwds_1_filterfulltext) or ( 'active' like '%' || LOWER(:lV57Projectwwds_1_filterfulltext) and T1.ProjectStatus = ( 'Active')) or ( 'inactive' like '%' || LOWER(:lV57Projectwwds_1_filterfulltext) and T1.ProjectStatus = ( 'Inactive')) or ( T2.EmployeeName like '%' || :lV57Projectwwds_1_filterfulltext))");
+            AddWhere(sWhereString, "(( LOWER(T1.ProjectName) like '%' || LOWER(:lV57Projectwwds_1_filterfulltext)) or ( LOWER(T1.ProjectDescription) like '%' || LOWER(:lV57Projectwwds_1_filterfulltext)) or ( 'active' like '%' || LOWER(:lV57Projectwwds_1_filterfulltext) and T1.ProjectStatus = ( 'Active')) or ( 'inactive' like '%' || LOWER(:lV57Projectwwds_1_filterfulltext) and T1.ProjectStatus = ( 'Inactive')) or ( LOWER(T2.EmployeeName) like '%' || LOWER(:lV57Projectwwds_1_filterfulltext)))");
          }
          else
          {

@@ -729,7 +729,7 @@ namespace GeneXus.Programs {
          }
          if ( String.IsNullOrEmpty(StringUtil.RTrim( AV60Employeelistds_3_tfemployeename_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV59Employeelistds_2_tfemployeename)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(T1.EmployeeName) like LOWER(:lV59Employeelistds_2_tfemployeename))");
+            AddWhere(sWhereString, "(T1.EmployeeName like :lV59Employeelistds_2_tfemployeename)");
          }
          else
          {
@@ -749,7 +749,7 @@ namespace GeneXus.Programs {
          }
          if ( String.IsNullOrEmpty(StringUtil.RTrim( AV62Employeelistds_5_tfemployeeemail_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV61Employeelistds_4_tfemployeeemail)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(T1.EmployeeEmail) like LOWER(:lV61Employeelistds_4_tfemployeeemail))");
+            AddWhere(sWhereString, "(T1.EmployeeEmail like :lV61Employeelistds_4_tfemployeeemail)");
          }
          else
          {
@@ -769,7 +769,7 @@ namespace GeneXus.Programs {
          }
          if ( String.IsNullOrEmpty(StringUtil.RTrim( AV64Employeelistds_7_tfcompanyname_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV63Employeelistds_6_tfcompanyname)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(T2.CompanyName) like LOWER(:lV63Employeelistds_6_tfcompanyname))");
+            AddWhere(sWhereString, "(T2.CompanyName like :lV63Employeelistds_6_tfcompanyname)");
          }
          else
          {
@@ -863,7 +863,7 @@ namespace GeneXus.Programs {
          }
          if ( String.IsNullOrEmpty(StringUtil.RTrim( AV60Employeelistds_3_tfemployeename_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV59Employeelistds_2_tfemployeename)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(T1.EmployeeName) like LOWER(:lV59Employeelistds_2_tfemployeename))");
+            AddWhere(sWhereString, "(T1.EmployeeName like :lV59Employeelistds_2_tfemployeename)");
          }
          else
          {
@@ -883,7 +883,7 @@ namespace GeneXus.Programs {
          }
          if ( String.IsNullOrEmpty(StringUtil.RTrim( AV62Employeelistds_5_tfemployeeemail_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV61Employeelistds_4_tfemployeeemail)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(T1.EmployeeEmail) like LOWER(:lV61Employeelistds_4_tfemployeeemail))");
+            AddWhere(sWhereString, "(T1.EmployeeEmail like :lV61Employeelistds_4_tfemployeeemail)");
          }
          else
          {
@@ -903,7 +903,7 @@ namespace GeneXus.Programs {
          }
          if ( String.IsNullOrEmpty(StringUtil.RTrim( AV64Employeelistds_7_tfcompanyname_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV63Employeelistds_6_tfcompanyname)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(T2.CompanyName) like LOWER(:lV63Employeelistds_6_tfcompanyname))");
+            AddWhere(sWhereString, "(T2.CompanyName like :lV63Employeelistds_6_tfcompanyname)");
          }
          else
          {
@@ -997,7 +997,7 @@ namespace GeneXus.Programs {
          }
          if ( String.IsNullOrEmpty(StringUtil.RTrim( AV60Employeelistds_3_tfemployeename_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV59Employeelistds_2_tfemployeename)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(T1.EmployeeName) like LOWER(:lV59Employeelistds_2_tfemployeename))");
+            AddWhere(sWhereString, "(T1.EmployeeName like :lV59Employeelistds_2_tfemployeename)");
          }
          else
          {
@@ -1017,7 +1017,7 @@ namespace GeneXus.Programs {
          }
          if ( String.IsNullOrEmpty(StringUtil.RTrim( AV62Employeelistds_5_tfemployeeemail_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV61Employeelistds_4_tfemployeeemail)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(T1.EmployeeEmail) like LOWER(:lV61Employeelistds_4_tfemployeeemail))");
+            AddWhere(sWhereString, "(T1.EmployeeEmail like :lV61Employeelistds_4_tfemployeeemail)");
          }
          else
          {
@@ -1037,7 +1037,7 @@ namespace GeneXus.Programs {
          }
          if ( String.IsNullOrEmpty(StringUtil.RTrim( AV64Employeelistds_7_tfcompanyname_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV63Employeelistds_6_tfcompanyname)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(T2.CompanyName) like LOWER(:lV63Employeelistds_6_tfcompanyname))");
+            AddWhere(sWhereString, "(T2.CompanyName like :lV63Employeelistds_6_tfcompanyname)");
          }
          else
          {

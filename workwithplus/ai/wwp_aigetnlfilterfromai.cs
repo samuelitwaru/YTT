@@ -360,7 +360,8 @@ namespace GeneXus.Programs.workwithplus.ai {
          AV24SystemContent += "}" + StringUtil.NewLine( );
          AV24SystemContent += "You have the following filters available:" + StringUtil.NewLine( );
          GXt_objcol_SdtWWP_AIListData2 = AV28WWP_AIListDatas;
-         new GeneXus.Programs.workwithplus.ai.wwp_aigetlistdata(context ).execute(  "ListQuery",  AV19ListName, out  GXt_objcol_SdtWWP_AIListData2) ;
+         GXt_objcol_SdtWWP_AIListData3 = new GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData>();
+         new GeneXus.Programs.workwithplus.ai.wwp_aigetlistdata(context ).execute(  "ListQuery",  AV19ListName,  (GXProperties)(GXt_objcol_SdtWWP_AIListData2), out  GXt_objcol_SdtWWP_AIListData3) ;
          AV28WWP_AIListDatas = GXt_objcol_SdtWWP_AIListData2;
          if ( AV28WWP_AIListDatas.Count > 0 )
          {
@@ -427,6 +428,7 @@ namespace GeneXus.Programs.workwithplus.ai {
          Gx_date = DateTime.MinValue;
          AV28WWP_AIListDatas = new GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData>( context, "WWP_AIListData", "YTT_version4");
          GXt_objcol_SdtWWP_AIListData2 = new GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData>( context, "WWP_AIListData", "YTT_version4");
+         GXt_objcol_SdtWWP_AIListData3 = new GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData>( context, "WWP_AIListData", "YTT_version4");
          AV27WWP_AIListData = new GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData(context);
          Gx_date = DateTimeUtil.Today( context);
          AV36Pgmname = "WorkWithPlus.AI.WWP_AIGetNLFilterFromAI";
@@ -473,6 +475,7 @@ namespace GeneXus.Programs.workwithplus.ai {
       private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_DynamicFilter AV34DynFilter ;
       private GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData> AV28WWP_AIListDatas ;
       private GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData> GXt_objcol_SdtWWP_AIListData2 ;
+      private GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData> GXt_objcol_SdtWWP_AIListData3 ;
       private GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData AV27WWP_AIListData ;
       private string aP2_Link ;
       private string aP3_ErrorMessage ;

@@ -2649,7 +2649,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024919815779", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024102512265579", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2665,7 +2665,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("workhourlogww.js", "?2024919815781", false, true);
+         context.AddJavascriptSource("workhourlogww.js", "?2024102512265582", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/DVPaginationBar/DVPaginationBarRender.js", "", false, true);
@@ -3797,7 +3797,7 @@ namespace GeneXus.Programs {
          sOrderString = "";
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV95Workhourlogwwds_1_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( T1.WorkHourLogDuration like '%' || :lV95Workhourlogwwds_1_filterfulltext) or ( SUBSTR(TO_CHAR(T1.WorkHourLogHour,'9999'), 2) like '%' || :lV95Workhourlogwwds_1_filterfulltext) or ( SUBSTR(TO_CHAR(T1.WorkHourLogMinute,'9999'), 2) like '%' || :lV95Workhourlogwwds_1_filterfulltext) or ( T1.WorkHourLogDescription like '%' || :lV95Workhourlogwwds_1_filterfulltext) or ( T3.EmployeeFirstName like '%' || :lV95Workhourlogwwds_1_filterfulltext) or ( T2.ProjectName like '%' || :lV95Workhourlogwwds_1_filterfulltext))");
+            AddWhere(sWhereString, "(( LOWER(T1.WorkHourLogDuration) like '%' || LOWER(:lV95Workhourlogwwds_1_filterfulltext)) or ( SUBSTR(TO_CHAR(T1.WorkHourLogHour,'9999'), 2) like '%' || :lV95Workhourlogwwds_1_filterfulltext) or ( SUBSTR(TO_CHAR(T1.WorkHourLogMinute,'9999'), 2) like '%' || :lV95Workhourlogwwds_1_filterfulltext) or ( LOWER(T1.WorkHourLogDescription) like '%' || LOWER(:lV95Workhourlogwwds_1_filterfulltext)) or ( LOWER(T3.EmployeeFirstName) like '%' || LOWER(:lV95Workhourlogwwds_1_filterfulltext)) or ( LOWER(T2.ProjectName) like '%' || LOWER(:lV95Workhourlogwwds_1_filterfulltext)))");
          }
          else
          {
@@ -4078,7 +4078,7 @@ namespace GeneXus.Programs {
          scmdbuf = "SELECT COUNT(*) FROM ((WorkHourLog T1 INNER JOIN Project T3 ON T3.ProjectId = T1.ProjectId) INNER JOIN Employee T2 ON T2.EmployeeId = T1.EmployeeId)";
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV95Workhourlogwwds_1_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( T1.WorkHourLogDuration like '%' || :lV95Workhourlogwwds_1_filterfulltext) or ( SUBSTR(TO_CHAR(T1.WorkHourLogHour,'9999'), 2) like '%' || :lV95Workhourlogwwds_1_filterfulltext) or ( SUBSTR(TO_CHAR(T1.WorkHourLogMinute,'9999'), 2) like '%' || :lV95Workhourlogwwds_1_filterfulltext) or ( T1.WorkHourLogDescription like '%' || :lV95Workhourlogwwds_1_filterfulltext) or ( T2.EmployeeFirstName like '%' || :lV95Workhourlogwwds_1_filterfulltext) or ( T3.ProjectName like '%' || :lV95Workhourlogwwds_1_filterfulltext))");
+            AddWhere(sWhereString, "(( LOWER(T1.WorkHourLogDuration) like '%' || LOWER(:lV95Workhourlogwwds_1_filterfulltext)) or ( SUBSTR(TO_CHAR(T1.WorkHourLogHour,'9999'), 2) like '%' || :lV95Workhourlogwwds_1_filterfulltext) or ( SUBSTR(TO_CHAR(T1.WorkHourLogMinute,'9999'), 2) like '%' || :lV95Workhourlogwwds_1_filterfulltext) or ( LOWER(T1.WorkHourLogDescription) like '%' || LOWER(:lV95Workhourlogwwds_1_filterfulltext)) or ( LOWER(T2.EmployeeFirstName) like '%' || LOWER(:lV95Workhourlogwwds_1_filterfulltext)) or ( LOWER(T3.ProjectName) like '%' || LOWER(:lV95Workhourlogwwds_1_filterfulltext)))");
          }
          else
          {

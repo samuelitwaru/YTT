@@ -1296,7 +1296,7 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
          AssignProp(sPrefix, false, edtavWwpsubscriptionentityrecordid_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtavWwpsubscriptionentityrecordid_Visible), 5, 0), !bGXsfl_14_Refreshing);
          edtavWwpsubscriptionentityrecorddescription_Visible = 0;
          AssignProp(sPrefix, false, edtavWwpsubscriptionentityrecorddescription_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtavWwpsubscriptionentityrecorddescription_Visible), 5, 0), !bGXsfl_14_Refreshing);
-         subGrid_Rows = 20;
+         subGrid_Rows = 10;
          GxWebStd.gx_hidden_field( context, sPrefix+"GRID_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Rows), 6, 0, ".", "")));
          /* Execute user subroutine: 'LOADGRIDSTATE' */
          S112 ();
@@ -1830,7 +1830,7 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20249161311467", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024102512161347", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1848,7 +1848,7 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
       {
          if ( nGXWrapped != 1 )
          {
-            context.AddJavascriptSource("wwpbaseobjects/subscriptions/wwp_subscriptionssettingswc.js", "?20249161311467", false, true);
+            context.AddJavascriptSource("wwpbaseobjects/subscriptions/wwp_subscriptionssettingswc.js", "?2024102512161347", false, true);
             context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
             context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
             context.AddJavascriptSource("DVelop/Bootstrap/Panel/BootstrapPanelRender.js", "", false, true);

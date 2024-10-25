@@ -243,10 +243,6 @@ namespace GeneXus.Programs {
          AV48Trnnewwwds_5_tftrnnewname_sel = AV38TFTrnNewName_Sel;
          AV49Trnnewwwds_6_tftrnnewdate = AV39TFTrnNewDate;
          AV50Trnnewwwds_7_tftrnnewdate_to = AV40TFTrnNewDate_To;
-         AV51Udparg8 = new getloggedinusercompanyid(context).executeUdp( );
-         AV51Udparg8 = new getloggedinusercompanyid(context).executeUdp( );
-         AV51Udparg8 = new getloggedinusercompanyid(context).executeUdp( );
-         AV51Udparg8 = new getloggedinusercompanyid(context).executeUdp( );
          pr_default.dynParam(0, new Object[]{ new Object[]{
                                               AV44Trnnewwwds_1_filterfulltext ,
                                               AV45Trnnewwwds_2_tftrnnewid ,
@@ -259,10 +255,9 @@ namespace GeneXus.Programs {
                                               A181TrnNewName ,
                                               A182TrnNewDate ,
                                               AV17OrderedBy ,
-                                              AV18OrderedDsc ,
-                                              AV51Udparg8 } ,
+                                              AV18OrderedDsc } ,
                                               new int[]{
-                                              TypeConstants.LONG, TypeConstants.LONG, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.LONG, TypeConstants.DATE, TypeConstants.SHORT, TypeConstants.BOOLEAN, TypeConstants.LONG
+                                              TypeConstants.LONG, TypeConstants.LONG, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.LONG, TypeConstants.DATE, TypeConstants.SHORT, TypeConstants.BOOLEAN
                                               }
          });
          lV44Trnnewwwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV44Trnnewwwds_1_filterfulltext), "%", "");
@@ -285,10 +280,10 @@ namespace GeneXus.Programs {
                if (true) return;
             }
             AV32VisibleColumnCount = 0;
-            AV52GXV2 = 1;
-            while ( AV52GXV2 <= AV24ColumnsSelector.gxTpr_Columns.Count )
+            AV51GXV2 = 1;
+            while ( AV51GXV2 <= AV24ColumnsSelector.gxTpr_Columns.Count )
             {
-               AV26ColumnsSelector_Column = ((GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector_Column)AV24ColumnsSelector.gxTpr_Columns.Item(AV52GXV2));
+               AV26ColumnsSelector_Column = ((GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector_Column)AV24ColumnsSelector.gxTpr_Columns.Item(AV51GXV2));
                if ( AV26ColumnsSelector_Column.gxTpr_Isvisible )
                {
                   if ( StringUtil.StrCmp(AV26ColumnsSelector_Column.gxTpr_Columnname, "TrnNewId") == 0 )
@@ -313,7 +308,7 @@ namespace GeneXus.Programs {
                   }
                   AV32VisibleColumnCount = (long)(AV32VisibleColumnCount+1);
                }
-               AV52GXV2 = (int)(AV52GXV2+1);
+               AV51GXV2 = (int)(AV51GXV2+1);
             }
             /* Execute user subroutine: 'AFTERWRITELINE' */
             S182 ();
@@ -389,10 +384,10 @@ namespace GeneXus.Programs {
          }
          AV17OrderedBy = AV22GridState.gxTpr_Orderedby;
          AV18OrderedDsc = AV22GridState.gxTpr_Ordereddsc;
-         AV53GXV3 = 1;
-         while ( AV53GXV3 <= AV22GridState.gxTpr_Filtervalues.Count )
+         AV52GXV3 = 1;
+         while ( AV52GXV3 <= AV22GridState.gxTpr_Filtervalues.Count )
          {
-            AV23GridStateFilterValue = ((GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue)AV22GridState.gxTpr_Filtervalues.Item(AV53GXV3));
+            AV23GridStateFilterValue = ((GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue)AV22GridState.gxTpr_Filtervalues.Item(AV52GXV3));
             if ( StringUtil.StrCmp(AV23GridStateFilterValue.gxTpr_Name, "FILTERFULLTEXT") == 0 )
             {
                AV19FilterFullText = AV23GridStateFilterValue.gxTpr_Value;
@@ -415,7 +410,7 @@ namespace GeneXus.Programs {
                AV39TFTrnNewDate = context.localUtil.CToD( AV23GridStateFilterValue.gxTpr_Value, 2);
                AV40TFTrnNewDate_To = context.localUtil.CToD( AV23GridStateFilterValue.gxTpr_Valueto, 2);
             }
-            AV53GXV3 = (int)(AV53GXV3+1);
+            AV52GXV3 = (int)(AV52GXV3+1);
          }
       }
 
@@ -490,14 +485,13 @@ namespace GeneXus.Programs {
       private int AV15FirstColumn ;
       private int AV16Random ;
       private int AV42GXV1 ;
-      private int AV52GXV2 ;
-      private int AV53GXV3 ;
+      private int AV51GXV2 ;
+      private int AV52GXV3 ;
       private long AV35TFTrnNewId ;
       private long AV36TFTrnNewId_To ;
       private long AV32VisibleColumnCount ;
       private long AV45Trnnewwwds_2_tftrnnewid ;
       private long AV46Trnnewwwds_3_tftrnnewid_to ;
-      private long AV51Udparg8 ;
       private long A180TrnNewId ;
       private string AV38TFTrnNewName_Sel ;
       private string AV37TFTrnNewName ;
@@ -553,8 +547,7 @@ namespace GeneXus.Programs {
                                              string A181TrnNewName ,
                                              DateTime A182TrnNewDate ,
                                              short AV17OrderedBy ,
-                                             bool AV18OrderedDsc ,
-                                             long AV51Udparg8 )
+                                             bool AV18OrderedDsc )
       {
          System.Text.StringBuilder sWhereString = new System.Text.StringBuilder();
          string scmdbuf;
@@ -588,7 +581,7 @@ namespace GeneXus.Programs {
          }
          if ( String.IsNullOrEmpty(StringUtil.RTrim( AV48Trnnewwwds_5_tftrnnewname_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV47Trnnewwwds_4_tftrnnewname)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(TrnNewName) like LOWER(:lV47Trnnewwwds_4_tftrnnewname))");
+            AddWhere(sWhereString, "(TrnNewName like :lV47Trnnewwwds_4_tftrnnewname)");
          }
          else
          {
@@ -659,7 +652,7 @@ namespace GeneXus.Programs {
          switch ( cursor )
          {
                case 0 :
-                     return conditional_P00BS2(context, (string)dynConstraints[0] , (long)dynConstraints[1] , (long)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (DateTime)dynConstraints[5] , (DateTime)dynConstraints[6] , (long)dynConstraints[7] , (string)dynConstraints[8] , (DateTime)dynConstraints[9] , (short)dynConstraints[10] , (bool)dynConstraints[11] , (long)dynConstraints[13] );
+                     return conditional_P00BS2(context, (string)dynConstraints[0] , (long)dynConstraints[1] , (long)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (DateTime)dynConstraints[5] , (DateTime)dynConstraints[6] , (long)dynConstraints[7] , (string)dynConstraints[8] , (DateTime)dynConstraints[9] , (short)dynConstraints[10] , (bool)dynConstraints[11] );
          }
          return base.getDynamicStatement(cursor, context, dynConstraints);
       }

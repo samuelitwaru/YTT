@@ -206,16 +206,15 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
       {
          subGrid_Rows = (int)(Math.Round(NumberUtil.Val( GetPar( "subGrid_Rows"), "."), 18, MidpointRounding.ToEven));
          AV5WWPEntityId = (long)(Math.Round(NumberUtil.Val( GetPar( "WWPEntityId"), "."), 18, MidpointRounding.ToEven));
-         A100CompanyId = (long)(Math.Round(NumberUtil.Val( GetPar( "CompanyId"), "."), 18, MidpointRounding.ToEven));
          AV7WWPNotificationAppliesTo = (short)(Math.Round(NumberUtil.Val( GetPar( "WWPNotificationAppliesTo"), "."), 18, MidpointRounding.ToEven));
-         AV27Pgmname = GetPar( "Pgmname");
+         AV26Pgmname = GetPar( "Pgmname");
          edtWWPNotificationDefinitionId_Visible = (int)(Math.Round(NumberUtil.Val( GetNextPar( ), "."), 18, MidpointRounding.ToEven));
          AssignProp(sPrefix, false, edtWWPNotificationDefinitionId_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtWWPNotificationDefinitionId_Visible), 5, 0), !bGXsfl_9_Refreshing);
          edtavWwpsubscriptionid_Visible = (int)(Math.Round(NumberUtil.Val( GetNextPar( ), "."), 18, MidpointRounding.ToEven));
          AssignProp(sPrefix, false, edtavWwpsubscriptionid_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtavWwpsubscriptionid_Visible), 5, 0), !bGXsfl_9_Refreshing);
          A7WWPUserExtendedId = GetPar( "WWPUserExtendedId");
          n7WWPUserExtendedId = false;
-         AV30Udparg2 = GetPar( "Udparg2");
+         AV29Udparg1 = GetPar( "Udparg1");
          A27WWPSubscriptionSubscribed = StringUtil.StrToBool( GetPar( "WWPSubscriptionSubscribed"));
          A19WWPSubscriptionRoleId = GetPar( "WWPSubscriptionRoleId");
          n19WWPSubscriptionRoleId = false;
@@ -233,7 +232,7 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
             GxWebError = 1;
             return  ;
          }
-         gxgrGrid_refresh( subGrid_Rows, AV5WWPEntityId, A100CompanyId, AV7WWPNotificationAppliesTo, AV27Pgmname, A7WWPUserExtendedId, AV30Udparg2, A27WWPSubscriptionSubscribed, A19WWPSubscriptionRoleId, AV23WWPSubscriptionRoleIdCollection, AV8WWPNotificationId, A26WWPSubscriptionEntityRecordId, AV20WWPSubscriptionEntityRecordId, A25WWPSubscriptionId, AV24WWPNotificationDefinitionId, sPrefix) ;
+         gxgrGrid_refresh( subGrid_Rows, AV5WWPEntityId, AV7WWPNotificationAppliesTo, AV26Pgmname, A7WWPUserExtendedId, AV29Udparg1, A27WWPSubscriptionSubscribed, A19WWPSubscriptionRoleId, AV23WWPSubscriptionRoleIdCollection, AV8WWPNotificationId, A26WWPSubscriptionEntityRecordId, AV20WWPSubscriptionEntityRecordId, A25WWPSubscriptionId, AV24WWPNotificationDefinitionId, sPrefix) ;
          AddString( context.getJSONResponse( )) ;
          /* End function gxgrGrid_refresh_invoke */
       }
@@ -253,7 +252,7 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
             if ( ( GxWebError == 0 ) && ! isAjaxCallMode( ) )
             {
                /* GeneXus formulas. */
-               AV27Pgmname = "WWPBaseObjects.Subscriptions.WWP_SubscriptionsPanel";
+               AV26Pgmname = "WWPBaseObjects.Subscriptions.WWP_SubscriptionsPanel";
                WS2A2( ) ;
                if ( ! isAjaxCallMode( ) )
                {
@@ -397,10 +396,10 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
 
       protected void send_integrity_footer_hashes( )
       {
-         GxWebStd.gx_hidden_field( context, sPrefix+"vPGMNAME", StringUtil.RTrim( AV27Pgmname));
-         GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vPGMNAME", GetSecureSignedToken( sPrefix, StringUtil.RTrim( context.localUtil.Format( AV27Pgmname, "")), context));
-         GxWebStd.gx_hidden_field( context, sPrefix+"vUDPARG2", StringUtil.RTrim( AV30Udparg2));
-         GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vUDPARG2", GetSecureSignedToken( sPrefix, StringUtil.RTrim( context.localUtil.Format( AV30Udparg2, "")), context));
+         GxWebStd.gx_hidden_field( context, sPrefix+"vPGMNAME", StringUtil.RTrim( AV26Pgmname));
+         GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vPGMNAME", GetSecureSignedToken( sPrefix, StringUtil.RTrim( context.localUtil.Format( AV26Pgmname, "")), context));
+         GxWebStd.gx_hidden_field( context, sPrefix+"vUDPARG1", StringUtil.RTrim( AV29Udparg1));
+         GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vUDPARG1", GetSecureSignedToken( sPrefix, StringUtil.RTrim( context.localUtil.Format( AV29Udparg1, "")), context));
          if ( context.isAjaxRequest( ) )
          {
             context.httpAjaxContext.ajax_rsp_assign_sdt_attri(sPrefix, false, sPrefix+"vWWPSUBSCRIPTIONROLEIDCOLLECTION", AV23WWPSubscriptionRoleIdCollection);
@@ -427,11 +426,11 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
          GxWebStd.gx_hidden_field( context, sPrefix+"wcpOAV7WWPNotificationAppliesTo", StringUtil.LTrim( StringUtil.NToC( (decimal)(wcpOAV7WWPNotificationAppliesTo), 1, 0, ".", "")));
          GxWebStd.gx_hidden_field( context, sPrefix+"wcpOAV20WWPSubscriptionEntityRecordId", wcpOAV20WWPSubscriptionEntityRecordId);
          GxWebStd.gx_hidden_field( context, sPrefix+"wcpOAV14RecordAttDescription", wcpOAV14RecordAttDescription);
-         GxWebStd.gx_hidden_field( context, sPrefix+"vPGMNAME", StringUtil.RTrim( AV27Pgmname));
-         GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vPGMNAME", GetSecureSignedToken( sPrefix, StringUtil.RTrim( context.localUtil.Format( AV27Pgmname, "")), context));
+         GxWebStd.gx_hidden_field( context, sPrefix+"vPGMNAME", StringUtil.RTrim( AV26Pgmname));
+         GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vPGMNAME", GetSecureSignedToken( sPrefix, StringUtil.RTrim( context.localUtil.Format( AV26Pgmname, "")), context));
          GxWebStd.gx_hidden_field( context, sPrefix+"WWPUSEREXTENDEDID", StringUtil.RTrim( A7WWPUserExtendedId));
-         GxWebStd.gx_hidden_field( context, sPrefix+"vUDPARG2", StringUtil.RTrim( AV30Udparg2));
-         GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vUDPARG2", GetSecureSignedToken( sPrefix, StringUtil.RTrim( context.localUtil.Format( AV30Udparg2, "")), context));
+         GxWebStd.gx_hidden_field( context, sPrefix+"vUDPARG1", StringUtil.RTrim( AV29Udparg1));
+         GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vUDPARG1", GetSecureSignedToken( sPrefix, StringUtil.RTrim( context.localUtil.Format( AV29Udparg1, "")), context));
          GxWebStd.gx_boolean_hidden_field( context, sPrefix+"WWPSUBSCRIPTIONSUBSCRIBED", A27WWPSubscriptionSubscribed);
          GxWebStd.gx_hidden_field( context, sPrefix+"WWPSUBSCRIPTIONROLEID", StringUtil.RTrim( A19WWPSubscriptionRoleId));
          if ( context.isAjaxRequest( ) )
@@ -454,7 +453,6 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
          GxWebStd.gx_hidden_field( context, sPrefix+"vWWPENTITYNAME", AV6WWPEntityName);
          GxWebStd.gx_hidden_field( context, sPrefix+"vWWPNOTIFICATIONAPPLIESTO", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV7WWPNotificationAppliesTo), 1, 0, ".", "")));
          GxWebStd.gx_hidden_field( context, sPrefix+"vWWPENTITYID", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV5WWPEntityId), 10, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, sPrefix+"COMPANYID", StringUtil.LTrim( StringUtil.NToC( (decimal)(A100CompanyId), 10, 0, ".", "")));
          GxWebStd.gx_hidden_field( context, sPrefix+"GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
          GxWebStd.gx_hidden_field( context, sPrefix+"GRID_nEOF", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nEOF), 1, 0, ".", "")));
          GxWebStd.gx_hidden_field( context, sPrefix+"WWPNOTIFICATIONDEFINITIONSECFU", A67WWPNotificationDefinitionSecFu);
@@ -1001,11 +999,10 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
 
       protected void gxgrGrid_refresh( int subGrid_Rows ,
                                        long AV5WWPEntityId ,
-                                       long A100CompanyId ,
                                        short AV7WWPNotificationAppliesTo ,
-                                       string AV27Pgmname ,
+                                       string AV26Pgmname ,
                                        string A7WWPUserExtendedId ,
-                                       string AV30Udparg2 ,
+                                       string AV29Udparg1 ,
                                        bool A27WWPSubscriptionSubscribed ,
                                        string A19WWPSubscriptionRoleId ,
                                        GxSimpleCollection<string> AV23WWPSubscriptionRoleIdCollection ,
@@ -1058,14 +1055,14 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
       protected void initialize_formulas( )
       {
          /* GeneXus formulas. */
-         AV27Pgmname = "WWPBaseObjects.Subscriptions.WWP_SubscriptionsPanel";
+         AV26Pgmname = "WWPBaseObjects.Subscriptions.WWP_SubscriptionsPanel";
       }
 
       protected int subGridclient_rec_count_fnc( )
       {
          GRID_nRecordCount = 0;
          /* Using cursor H002A2 */
-         pr_default.execute(0, new Object[] {A100CompanyId, AV26Udparg1, AV7WWPNotificationAppliesTo, AV5WWPEntityId});
+         pr_default.execute(0, new Object[] {AV7WWPNotificationAppliesTo, AV5WWPEntityId});
          while ( (pr_default.getStatus(0) != 101) )
          {
             A31WWPNotificationDefinitionAllow = H002A2_A31WWPNotificationDefinitionAllow[0];
@@ -1129,7 +1126,7 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
          {
             SubsflControlProps_92( ) ;
             /* Using cursor H002A3 */
-            pr_default.execute(1, new Object[] {A100CompanyId, AV26Udparg1, AV7WWPNotificationAppliesTo, AV5WWPEntityId});
+            pr_default.execute(1, new Object[] {AV7WWPNotificationAppliesTo, AV5WWPEntityId});
             nGXsfl_9_idx = 1;
             sGXsfl_9_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_9_idx), 4, 0), 4, "0");
             SubsflControlProps_92( ) ;
@@ -1173,10 +1170,10 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
 
       protected void send_integrity_lvl_hashes2A2( )
       {
-         GxWebStd.gx_hidden_field( context, sPrefix+"vPGMNAME", StringUtil.RTrim( AV27Pgmname));
-         GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vPGMNAME", GetSecureSignedToken( sPrefix, StringUtil.RTrim( context.localUtil.Format( AV27Pgmname, "")), context));
-         GxWebStd.gx_hidden_field( context, sPrefix+"vUDPARG2", StringUtil.RTrim( AV30Udparg2));
-         GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vUDPARG2", GetSecureSignedToken( sPrefix, StringUtil.RTrim( context.localUtil.Format( AV30Udparg2, "")), context));
+         GxWebStd.gx_hidden_field( context, sPrefix+"vPGMNAME", StringUtil.RTrim( AV26Pgmname));
+         GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vPGMNAME", GetSecureSignedToken( sPrefix, StringUtil.RTrim( context.localUtil.Format( AV26Pgmname, "")), context));
+         GxWebStd.gx_hidden_field( context, sPrefix+"vUDPARG1", StringUtil.RTrim( AV29Udparg1));
+         GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vUDPARG1", GetSecureSignedToken( sPrefix, StringUtil.RTrim( context.localUtil.Format( AV29Udparg1, "")), context));
          if ( context.isAjaxRequest( ) )
          {
             context.httpAjaxContext.ajax_rsp_assign_sdt_attri(sPrefix, false, sPrefix+"vWWPSUBSCRIPTIONROLEIDCOLLECTION", AV23WWPSubscriptionRoleIdCollection);
@@ -1231,7 +1228,7 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
          GxWebStd.gx_hidden_field( context, sPrefix+"GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV5WWPEntityId, A100CompanyId, AV7WWPNotificationAppliesTo, AV27Pgmname, A7WWPUserExtendedId, AV30Udparg2, A27WWPSubscriptionSubscribed, A19WWPSubscriptionRoleId, AV23WWPSubscriptionRoleIdCollection, AV8WWPNotificationId, A26WWPSubscriptionEntityRecordId, AV20WWPSubscriptionEntityRecordId, A25WWPSubscriptionId, AV24WWPNotificationDefinitionId, sPrefix) ;
+            gxgrGrid_refresh( subGrid_Rows, AV5WWPEntityId, AV7WWPNotificationAppliesTo, AV26Pgmname, A7WWPUserExtendedId, AV29Udparg1, A27WWPSubscriptionSubscribed, A19WWPSubscriptionRoleId, AV23WWPSubscriptionRoleIdCollection, AV8WWPNotificationId, A26WWPSubscriptionEntityRecordId, AV20WWPSubscriptionEntityRecordId, A25WWPSubscriptionId, AV24WWPNotificationDefinitionId, sPrefix) ;
          }
          send_integrity_footer_hashes( ) ;
          return 0 ;
@@ -1247,7 +1244,7 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
          GridContainer.AddObjectProperty("GRID_nFirstRecordOnPage", GRID_nFirstRecordOnPage);
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV5WWPEntityId, A100CompanyId, AV7WWPNotificationAppliesTo, AV27Pgmname, A7WWPUserExtendedId, AV30Udparg2, A27WWPSubscriptionSubscribed, A19WWPSubscriptionRoleId, AV23WWPSubscriptionRoleIdCollection, AV8WWPNotificationId, A26WWPSubscriptionEntityRecordId, AV20WWPSubscriptionEntityRecordId, A25WWPSubscriptionId, AV24WWPNotificationDefinitionId, sPrefix) ;
+            gxgrGrid_refresh( subGrid_Rows, AV5WWPEntityId, AV7WWPNotificationAppliesTo, AV26Pgmname, A7WWPUserExtendedId, AV29Udparg1, A27WWPSubscriptionSubscribed, A19WWPSubscriptionRoleId, AV23WWPSubscriptionRoleIdCollection, AV8WWPNotificationId, A26WWPSubscriptionEntityRecordId, AV20WWPSubscriptionEntityRecordId, A25WWPSubscriptionId, AV24WWPNotificationDefinitionId, sPrefix) ;
          }
          send_integrity_footer_hashes( ) ;
          return (short)(((GRID_nEOF==0) ? 0 : 2)) ;
@@ -1266,7 +1263,7 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
          GxWebStd.gx_hidden_field( context, sPrefix+"GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV5WWPEntityId, A100CompanyId, AV7WWPNotificationAppliesTo, AV27Pgmname, A7WWPUserExtendedId, AV30Udparg2, A27WWPSubscriptionSubscribed, A19WWPSubscriptionRoleId, AV23WWPSubscriptionRoleIdCollection, AV8WWPNotificationId, A26WWPSubscriptionEntityRecordId, AV20WWPSubscriptionEntityRecordId, A25WWPSubscriptionId, AV24WWPNotificationDefinitionId, sPrefix) ;
+            gxgrGrid_refresh( subGrid_Rows, AV5WWPEntityId, AV7WWPNotificationAppliesTo, AV26Pgmname, A7WWPUserExtendedId, AV29Udparg1, A27WWPSubscriptionSubscribed, A19WWPSubscriptionRoleId, AV23WWPSubscriptionRoleIdCollection, AV8WWPNotificationId, A26WWPSubscriptionEntityRecordId, AV20WWPSubscriptionEntityRecordId, A25WWPSubscriptionId, AV24WWPNotificationDefinitionId, sPrefix) ;
          }
          send_integrity_footer_hashes( ) ;
          return 0 ;
@@ -1293,7 +1290,7 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
          GxWebStd.gx_hidden_field( context, sPrefix+"GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV5WWPEntityId, A100CompanyId, AV7WWPNotificationAppliesTo, AV27Pgmname, A7WWPUserExtendedId, AV30Udparg2, A27WWPSubscriptionSubscribed, A19WWPSubscriptionRoleId, AV23WWPSubscriptionRoleIdCollection, AV8WWPNotificationId, A26WWPSubscriptionEntityRecordId, AV20WWPSubscriptionEntityRecordId, A25WWPSubscriptionId, AV24WWPNotificationDefinitionId, sPrefix) ;
+            gxgrGrid_refresh( subGrid_Rows, AV5WWPEntityId, AV7WWPNotificationAppliesTo, AV26Pgmname, A7WWPUserExtendedId, AV29Udparg1, A27WWPSubscriptionSubscribed, A19WWPSubscriptionRoleId, AV23WWPSubscriptionRoleIdCollection, AV8WWPNotificationId, A26WWPSubscriptionEntityRecordId, AV20WWPSubscriptionEntityRecordId, A25WWPSubscriptionId, AV24WWPNotificationDefinitionId, sPrefix) ;
          }
          send_integrity_footer_hashes( ) ;
          return 0 ;
@@ -1312,7 +1309,7 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
          GxWebStd.gx_hidden_field( context, sPrefix+"GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV5WWPEntityId, A100CompanyId, AV7WWPNotificationAppliesTo, AV27Pgmname, A7WWPUserExtendedId, AV30Udparg2, A27WWPSubscriptionSubscribed, A19WWPSubscriptionRoleId, AV23WWPSubscriptionRoleIdCollection, AV8WWPNotificationId, A26WWPSubscriptionEntityRecordId, AV20WWPSubscriptionEntityRecordId, A25WWPSubscriptionId, AV24WWPNotificationDefinitionId, sPrefix) ;
+            gxgrGrid_refresh( subGrid_Rows, AV5WWPEntityId, AV7WWPNotificationAppliesTo, AV26Pgmname, A7WWPUserExtendedId, AV29Udparg1, A27WWPSubscriptionSubscribed, A19WWPSubscriptionRoleId, AV23WWPSubscriptionRoleIdCollection, AV8WWPNotificationId, A26WWPSubscriptionEntityRecordId, AV20WWPSubscriptionEntityRecordId, A25WWPSubscriptionId, AV24WWPNotificationDefinitionId, sPrefix) ;
          }
          send_integrity_footer_hashes( ) ;
          return (int)(0) ;
@@ -1320,7 +1317,7 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
 
       protected void before_start_formulas( )
       {
-         AV27Pgmname = "WWPBaseObjects.Subscriptions.WWP_SubscriptionsPanel";
+         AV26Pgmname = "WWPBaseObjects.Subscriptions.WWP_SubscriptionsPanel";
          edtWWPNotificationDefinitionDescr_Enabled = 0;
          edtWWPNotificationDefinitionId_Enabled = 0;
          fix_multi_value_controls( ) ;
@@ -1384,7 +1381,7 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
          AssignProp(sPrefix, false, edtWWPNotificationDefinitionId_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtWWPNotificationDefinitionId_Visible), 5, 0), !bGXsfl_9_Refreshing);
          edtavWwpsubscriptionid_Visible = 0;
          AssignProp(sPrefix, false, edtavWwpsubscriptionid_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtavWwpsubscriptionid_Visible), 5, 0), !bGXsfl_9_Refreshing);
-         subGrid_Rows = 20;
+         subGrid_Rows = 10;
          GxWebStd.gx_hidden_field( context, sPrefix+"GRID_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Rows), 6, 0, ".", "")));
          /* Execute user subroutine: 'PREPARETRANSACTION' */
          S112 ();
@@ -1435,20 +1432,6 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
             returnInSub = true;
             if (true) return;
          }
-         AV26Udparg1 = new getloggedinusercompanyid(context).executeUdp( );
-         AV26Udparg1 = new getloggedinusercompanyid(context).executeUdp( );
-         AV26Udparg1 = new getloggedinusercompanyid(context).executeUdp( );
-         AV26Udparg1 = new getloggedinusercompanyid(context).executeUdp( );
-         AV26Udparg1 = new getloggedinusercompanyid(context).executeUdp( );
-         AV26Udparg1 = new getloggedinusercompanyid(context).executeUdp( );
-         AV26Udparg1 = new getloggedinusercompanyid(context).executeUdp( );
-         AV26Udparg1 = new getloggedinusercompanyid(context).executeUdp( );
-         AV26Udparg1 = new getloggedinusercompanyid(context).executeUdp( );
-         AV26Udparg1 = new getloggedinusercompanyid(context).executeUdp( );
-         AV26Udparg1 = new getloggedinusercompanyid(context).executeUdp( );
-         AV26Udparg1 = new getloggedinusercompanyid(context).executeUdp( );
-         AV26Udparg1 = new getloggedinusercompanyid(context).executeUdp( );
-         AV26Udparg1 = new getloggedinusercompanyid(context).executeUdp( );
       }
 
       private void E142A2( )
@@ -1488,13 +1471,13 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
       {
          /* 'LOADGRIDSTATE' Routine */
          returnInSub = false;
-         if ( StringUtil.StrCmp(AV16Session.Get(AV27Pgmname+"GridState"), "") == 0 )
+         if ( StringUtil.StrCmp(AV16Session.Get(AV26Pgmname+"GridState"), "") == 0 )
          {
-            AV9GridState.FromXml(new GeneXus.Programs.wwpbaseobjects.loadgridstate(context).executeUdp(  AV27Pgmname+"GridState"), null, "", "");
+            AV9GridState.FromXml(new GeneXus.Programs.wwpbaseobjects.loadgridstate(context).executeUdp(  AV26Pgmname+"GridState"), null, "", "");
          }
          else
          {
-            AV9GridState.FromXml(AV16Session.Get(AV27Pgmname+"GridState"), null, "", "");
+            AV9GridState.FromXml(AV16Session.Get(AV26Pgmname+"GridState"), null, "", "");
          }
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( StringUtil.Trim( AV9GridState.gxTpr_Pagesize))) )
          {
@@ -1508,10 +1491,10 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
       {
          /* 'SAVEGRIDSTATE' Routine */
          returnInSub = false;
-         AV9GridState.FromXml(AV16Session.Get(AV27Pgmname+"GridState"), null, "", "");
+         AV9GridState.FromXml(AV16Session.Get(AV26Pgmname+"GridState"), null, "", "");
          AV9GridState.gxTpr_Pagesize = StringUtil.Str( (decimal)(subGrid_Rows), 10, 0);
          AV9GridState.gxTpr_Currentpage = (short)(subGrid_fnc_Currentpage( ));
-         new GeneXus.Programs.wwpbaseobjects.savegridstate(context ).execute(  AV27Pgmname+"GridState",  AV9GridState.ToXml(false, true, "", "")) ;
+         new GeneXus.Programs.wwpbaseobjects.savegridstate(context ).execute(  AV26Pgmname+"GridState",  AV9GridState.ToXml(false, true, "", "")) ;
       }
 
       protected void S112( )
@@ -1519,7 +1502,7 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
          /* 'PREPARETRANSACTION' Routine */
          returnInSub = false;
          AV17TrnContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext(context);
-         AV17TrnContext.gxTpr_Callerobject = AV27Pgmname;
+         AV17TrnContext.gxTpr_Callerobject = AV26Pgmname;
          AV17TrnContext.gxTpr_Callerondelete = true;
          AV17TrnContext.gxTpr_Callerurl = AV11HTTPRequest.ScriptName+"?"+AV11HTTPRequest.QueryString;
          AV17TrnContext.gxTpr_Transactionname = "WWPBaseObjects.Notifications.Common.WWP_NotificationDefinition";
@@ -1577,14 +1560,14 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
          returnInSub = false;
          AV12IncludeNotification = false;
          AssignAttri(sPrefix, false, chkavIncludenotification_Internalname, AV12IncludeNotification);
-         AV30Udparg2 = new GeneXus.Programs.wwpbaseobjects.wwp_getloggeduserid(context).executeUdp( );
+         AV29Udparg1 = new GeneXus.Programs.wwpbaseobjects.wwp_getloggeduserid(context).executeUdp( );
          pr_default.dynParam(3, new Object[]{ new Object[]{
                                               A19WWPSubscriptionRoleId ,
                                               AV23WWPSubscriptionRoleIdCollection ,
                                               AV20WWPSubscriptionEntityRecordId ,
                                               A26WWPSubscriptionEntityRecordId ,
                                               A7WWPUserExtendedId ,
-                                              AV30Udparg2 ,
+                                              AV29Udparg1 ,
                                               A27WWPSubscriptionSubscribed ,
                                               AV8WWPNotificationId ,
                                               A23WWPNotificationDefinitionId } ,
@@ -1593,7 +1576,7 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
                                               }
          });
          /* Using cursor H002A5 */
-         pr_default.execute(3, new Object[] {AV8WWPNotificationId, AV30Udparg2, AV20WWPSubscriptionEntityRecordId});
+         pr_default.execute(3, new Object[] {AV8WWPNotificationId, AV29Udparg1, AV20WWPSubscriptionEntityRecordId});
          while ( (pr_default.getStatus(3) != 101) )
          {
             A26WWPSubscriptionEntityRecordId = H002A5_A26WWPSubscriptionEntityRecordId[0];
@@ -1885,7 +1868,7 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202491613124835", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202410251218650", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1903,7 +1886,7 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
       {
          if ( nGXWrapped != 1 )
          {
-            context.AddJavascriptSource("wwpbaseobjects/subscriptions/wwp_subscriptionspanel.js", "?202491613124835", false, true);
+            context.AddJavascriptSource("wwpbaseobjects/subscriptions/wwp_subscriptionspanel.js", "?202410251218650", false, true);
          }
          /* End function include_jscripts */
       }
@@ -2272,15 +2255,15 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"AV5WWPEntityId","fld":"vWWPENTITYID","pic":"ZZZZZZZZZ9"},{"av":"A100CompanyId","fld":"COMPANYID","pic":"ZZZZZZZZZ9"},{"av":"AV7WWPNotificationAppliesTo","fld":"vWWPNOTIFICATIONAPPLIESTO","pic":"9"},{"av":"edtWWPNotificationDefinitionId_Visible","ctrl":"WWPNOTIFICATIONDEFINITIONID","prop":"Visible"},{"av":"edtavWwpsubscriptionid_Visible","ctrl":"vWWPSUBSCRIPTIONID","prop":"Visible"},{"av":"A7WWPUserExtendedId","fld":"WWPUSEREXTENDEDID"},{"av":"A27WWPSubscriptionSubscribed","fld":"WWPSUBSCRIPTIONSUBSCRIBED"},{"av":"A19WWPSubscriptionRoleId","fld":"WWPSUBSCRIPTIONROLEID"},{"av":"A26WWPSubscriptionEntityRecordId","fld":"WWPSUBSCRIPTIONENTITYRECORDID"},{"av":"AV20WWPSubscriptionEntityRecordId","fld":"vWWPSUBSCRIPTIONENTITYRECORDID"},{"av":"A25WWPSubscriptionId","fld":"WWPSUBSCRIPTIONID","pic":"ZZZZZZZZZ9"},{"av":"sPrefix"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV27Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV30Udparg2","fld":"vUDPARG2","hsh":true},{"av":"AV23WWPSubscriptionRoleIdCollection","fld":"vWWPSUBSCRIPTIONROLEIDCOLLECTION","hsh":true},{"av":"AV8WWPNotificationId","fld":"vWWPNOTIFICATIONID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"AV24WWPNotificationDefinitionId","fld":"vWWPNOTIFICATIONDEFINITIONID","pic":"ZZZZZZZZZ9","hsh":true}]}""");
-         setEventMetadata("GRID.LOAD","""{"handler":"E142A2","iparms":[{"av":"A23WWPNotificationDefinitionId","fld":"WWPNOTIFICATIONDEFINITIONID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"A7WWPUserExtendedId","fld":"WWPUSEREXTENDEDID"},{"av":"AV30Udparg2","fld":"vUDPARG2","hsh":true},{"av":"A27WWPSubscriptionSubscribed","fld":"WWPSUBSCRIPTIONSUBSCRIBED"},{"av":"A19WWPSubscriptionRoleId","fld":"WWPSUBSCRIPTIONROLEID"},{"av":"AV23WWPSubscriptionRoleIdCollection","fld":"vWWPSUBSCRIPTIONROLEIDCOLLECTION","hsh":true},{"av":"AV8WWPNotificationId","fld":"vWWPNOTIFICATIONID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"A26WWPSubscriptionEntityRecordId","fld":"WWPSUBSCRIPTIONENTITYRECORDID"},{"av":"AV20WWPSubscriptionEntityRecordId","fld":"vWWPSUBSCRIPTIONENTITYRECORDID"},{"av":"A25WWPSubscriptionId","fld":"WWPSUBSCRIPTIONID","pic":"ZZZZZZZZZ9"},{"av":"AV24WWPNotificationDefinitionId","fld":"vWWPNOTIFICATIONDEFINITIONID","pic":"ZZZZZZZZZ9","hsh":true}]""");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"AV5WWPEntityId","fld":"vWWPENTITYID","pic":"ZZZZZZZZZ9"},{"av":"AV7WWPNotificationAppliesTo","fld":"vWWPNOTIFICATIONAPPLIESTO","pic":"9"},{"av":"edtWWPNotificationDefinitionId_Visible","ctrl":"WWPNOTIFICATIONDEFINITIONID","prop":"Visible"},{"av":"edtavWwpsubscriptionid_Visible","ctrl":"vWWPSUBSCRIPTIONID","prop":"Visible"},{"av":"A7WWPUserExtendedId","fld":"WWPUSEREXTENDEDID"},{"av":"A27WWPSubscriptionSubscribed","fld":"WWPSUBSCRIPTIONSUBSCRIBED"},{"av":"A19WWPSubscriptionRoleId","fld":"WWPSUBSCRIPTIONROLEID"},{"av":"A26WWPSubscriptionEntityRecordId","fld":"WWPSUBSCRIPTIONENTITYRECORDID"},{"av":"AV20WWPSubscriptionEntityRecordId","fld":"vWWPSUBSCRIPTIONENTITYRECORDID"},{"av":"A25WWPSubscriptionId","fld":"WWPSUBSCRIPTIONID","pic":"ZZZZZZZZZ9"},{"av":"sPrefix"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV26Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV29Udparg1","fld":"vUDPARG1","hsh":true},{"av":"AV23WWPSubscriptionRoleIdCollection","fld":"vWWPSUBSCRIPTIONROLEIDCOLLECTION","hsh":true},{"av":"AV8WWPNotificationId","fld":"vWWPNOTIFICATIONID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"AV24WWPNotificationDefinitionId","fld":"vWWPNOTIFICATIONDEFINITIONID","pic":"ZZZZZZZZZ9","hsh":true}]}""");
+         setEventMetadata("GRID.LOAD","""{"handler":"E142A2","iparms":[{"av":"A23WWPNotificationDefinitionId","fld":"WWPNOTIFICATIONDEFINITIONID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"A7WWPUserExtendedId","fld":"WWPUSEREXTENDEDID"},{"av":"AV29Udparg1","fld":"vUDPARG1","hsh":true},{"av":"A27WWPSubscriptionSubscribed","fld":"WWPSUBSCRIPTIONSUBSCRIBED"},{"av":"A19WWPSubscriptionRoleId","fld":"WWPSUBSCRIPTIONROLEID"},{"av":"AV23WWPSubscriptionRoleIdCollection","fld":"vWWPSUBSCRIPTIONROLEIDCOLLECTION","hsh":true},{"av":"AV8WWPNotificationId","fld":"vWWPNOTIFICATIONID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"A26WWPSubscriptionEntityRecordId","fld":"WWPSUBSCRIPTIONENTITYRECORDID"},{"av":"AV20WWPSubscriptionEntityRecordId","fld":"vWWPSUBSCRIPTIONENTITYRECORDID"},{"av":"A25WWPSubscriptionId","fld":"WWPSUBSCRIPTIONID","pic":"ZZZZZZZZZ9"},{"av":"AV24WWPNotificationDefinitionId","fld":"vWWPNOTIFICATIONDEFINITIONID","pic":"ZZZZZZZZZ9","hsh":true}]""");
          setEventMetadata("GRID.LOAD",""","oparms":[{"av":"AV8WWPNotificationId","fld":"vWWPNOTIFICATIONID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"AV12IncludeNotification","fld":"vINCLUDENOTIFICATION"},{"av":"AV22WWPSubscriptionId","fld":"vWWPSUBSCRIPTIONID","pic":"ZZZZZZZZZ9"}]}""");
          setEventMetadata("TABLESUBSCRIPTIONITEM.CLICK","""{"handler":"E112A2","iparms":[{"av":"AV12IncludeNotification","fld":"vINCLUDENOTIFICATION","grid":9},{"av":"GRID_nFirstRecordOnPage"},{"av":"nRC_GXsfl_9","ctrl":"GRID","grid":9,"prop":"GridRC","grid":9},{"av":"AV22WWPSubscriptionId","fld":"vWWPSUBSCRIPTIONID","grid":9,"pic":"ZZZZZZZZZ9"},{"av":"A23WWPNotificationDefinitionId","fld":"WWPNOTIFICATIONDEFINITIONID","grid":9,"pic":"ZZZZZZZZZ9","hsh":true},{"av":"AV20WWPSubscriptionEntityRecordId","fld":"vWWPSUBSCRIPTIONENTITYRECORDID"},{"av":"AV14RecordAttDescription","fld":"vRECORDATTDESCRIPTION"}]""");
          setEventMetadata("TABLESUBSCRIPTIONITEM.CLICK",""","oparms":[{"av":"AV12IncludeNotification","fld":"vINCLUDENOTIFICATION"},{"av":"AV22WWPSubscriptionId","fld":"vWWPSUBSCRIPTIONID","pic":"ZZZZZZZZZ9"}]}""");
-         setEventMetadata("GRID_FIRSTPAGE","""{"handler":"subgrid_firstpage","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"AV5WWPEntityId","fld":"vWWPENTITYID","pic":"ZZZZZZZZZ9"},{"av":"A100CompanyId","fld":"COMPANYID","pic":"ZZZZZZZZZ9"},{"av":"AV7WWPNotificationAppliesTo","fld":"vWWPNOTIFICATIONAPPLIESTO","pic":"9"},{"av":"edtWWPNotificationDefinitionId_Visible","ctrl":"WWPNOTIFICATIONDEFINITIONID","prop":"Visible"},{"av":"edtavWwpsubscriptionid_Visible","ctrl":"vWWPSUBSCRIPTIONID","prop":"Visible"},{"av":"A7WWPUserExtendedId","fld":"WWPUSEREXTENDEDID"},{"av":"AV30Udparg2","fld":"vUDPARG2","hsh":true},{"av":"A27WWPSubscriptionSubscribed","fld":"WWPSUBSCRIPTIONSUBSCRIBED"},{"av":"A19WWPSubscriptionRoleId","fld":"WWPSUBSCRIPTIONROLEID"},{"av":"AV23WWPSubscriptionRoleIdCollection","fld":"vWWPSUBSCRIPTIONROLEIDCOLLECTION","hsh":true},{"av":"AV8WWPNotificationId","fld":"vWWPNOTIFICATIONID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"A26WWPSubscriptionEntityRecordId","fld":"WWPSUBSCRIPTIONENTITYRECORDID"},{"av":"AV20WWPSubscriptionEntityRecordId","fld":"vWWPSUBSCRIPTIONENTITYRECORDID"},{"av":"A25WWPSubscriptionId","fld":"WWPSUBSCRIPTIONID","pic":"ZZZZZZZZZ9"},{"av":"AV24WWPNotificationDefinitionId","fld":"vWWPNOTIFICATIONDEFINITIONID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"sPrefix"},{"av":"AV27Pgmname","fld":"vPGMNAME","hsh":true},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"}]}""");
-         setEventMetadata("GRID_PREVPAGE","""{"handler":"subgrid_previouspage","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"AV5WWPEntityId","fld":"vWWPENTITYID","pic":"ZZZZZZZZZ9"},{"av":"A100CompanyId","fld":"COMPANYID","pic":"ZZZZZZZZZ9"},{"av":"AV7WWPNotificationAppliesTo","fld":"vWWPNOTIFICATIONAPPLIESTO","pic":"9"},{"av":"edtWWPNotificationDefinitionId_Visible","ctrl":"WWPNOTIFICATIONDEFINITIONID","prop":"Visible"},{"av":"edtavWwpsubscriptionid_Visible","ctrl":"vWWPSUBSCRIPTIONID","prop":"Visible"},{"av":"A7WWPUserExtendedId","fld":"WWPUSEREXTENDEDID"},{"av":"AV30Udparg2","fld":"vUDPARG2","hsh":true},{"av":"A27WWPSubscriptionSubscribed","fld":"WWPSUBSCRIPTIONSUBSCRIBED"},{"av":"A19WWPSubscriptionRoleId","fld":"WWPSUBSCRIPTIONROLEID"},{"av":"AV23WWPSubscriptionRoleIdCollection","fld":"vWWPSUBSCRIPTIONROLEIDCOLLECTION","hsh":true},{"av":"AV8WWPNotificationId","fld":"vWWPNOTIFICATIONID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"A26WWPSubscriptionEntityRecordId","fld":"WWPSUBSCRIPTIONENTITYRECORDID"},{"av":"AV20WWPSubscriptionEntityRecordId","fld":"vWWPSUBSCRIPTIONENTITYRECORDID"},{"av":"A25WWPSubscriptionId","fld":"WWPSUBSCRIPTIONID","pic":"ZZZZZZZZZ9"},{"av":"AV24WWPNotificationDefinitionId","fld":"vWWPNOTIFICATIONDEFINITIONID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"sPrefix"},{"av":"AV27Pgmname","fld":"vPGMNAME","hsh":true},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"}]}""");
-         setEventMetadata("GRID_NEXTPAGE","""{"handler":"subgrid_nextpage","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"AV5WWPEntityId","fld":"vWWPENTITYID","pic":"ZZZZZZZZZ9"},{"av":"A100CompanyId","fld":"COMPANYID","pic":"ZZZZZZZZZ9"},{"av":"AV7WWPNotificationAppliesTo","fld":"vWWPNOTIFICATIONAPPLIESTO","pic":"9"},{"av":"edtWWPNotificationDefinitionId_Visible","ctrl":"WWPNOTIFICATIONDEFINITIONID","prop":"Visible"},{"av":"edtavWwpsubscriptionid_Visible","ctrl":"vWWPSUBSCRIPTIONID","prop":"Visible"},{"av":"A7WWPUserExtendedId","fld":"WWPUSEREXTENDEDID"},{"av":"AV30Udparg2","fld":"vUDPARG2","hsh":true},{"av":"A27WWPSubscriptionSubscribed","fld":"WWPSUBSCRIPTIONSUBSCRIBED"},{"av":"A19WWPSubscriptionRoleId","fld":"WWPSUBSCRIPTIONROLEID"},{"av":"AV23WWPSubscriptionRoleIdCollection","fld":"vWWPSUBSCRIPTIONROLEIDCOLLECTION","hsh":true},{"av":"AV8WWPNotificationId","fld":"vWWPNOTIFICATIONID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"A26WWPSubscriptionEntityRecordId","fld":"WWPSUBSCRIPTIONENTITYRECORDID"},{"av":"AV20WWPSubscriptionEntityRecordId","fld":"vWWPSUBSCRIPTIONENTITYRECORDID"},{"av":"A25WWPSubscriptionId","fld":"WWPSUBSCRIPTIONID","pic":"ZZZZZZZZZ9"},{"av":"AV24WWPNotificationDefinitionId","fld":"vWWPNOTIFICATIONDEFINITIONID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"sPrefix"},{"av":"AV27Pgmname","fld":"vPGMNAME","hsh":true},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"}]}""");
-         setEventMetadata("GRID_LASTPAGE","""{"handler":"subgrid_lastpage","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"AV5WWPEntityId","fld":"vWWPENTITYID","pic":"ZZZZZZZZZ9"},{"av":"A100CompanyId","fld":"COMPANYID","pic":"ZZZZZZZZZ9"},{"av":"AV7WWPNotificationAppliesTo","fld":"vWWPNOTIFICATIONAPPLIESTO","pic":"9"},{"av":"edtWWPNotificationDefinitionId_Visible","ctrl":"WWPNOTIFICATIONDEFINITIONID","prop":"Visible"},{"av":"edtavWwpsubscriptionid_Visible","ctrl":"vWWPSUBSCRIPTIONID","prop":"Visible"},{"av":"A7WWPUserExtendedId","fld":"WWPUSEREXTENDEDID"},{"av":"AV30Udparg2","fld":"vUDPARG2","hsh":true},{"av":"A27WWPSubscriptionSubscribed","fld":"WWPSUBSCRIPTIONSUBSCRIBED"},{"av":"A19WWPSubscriptionRoleId","fld":"WWPSUBSCRIPTIONROLEID"},{"av":"AV23WWPSubscriptionRoleIdCollection","fld":"vWWPSUBSCRIPTIONROLEIDCOLLECTION","hsh":true},{"av":"AV8WWPNotificationId","fld":"vWWPNOTIFICATIONID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"A26WWPSubscriptionEntityRecordId","fld":"WWPSUBSCRIPTIONENTITYRECORDID"},{"av":"AV20WWPSubscriptionEntityRecordId","fld":"vWWPSUBSCRIPTIONENTITYRECORDID"},{"av":"A25WWPSubscriptionId","fld":"WWPSUBSCRIPTIONID","pic":"ZZZZZZZZZ9"},{"av":"AV24WWPNotificationDefinitionId","fld":"vWWPNOTIFICATIONDEFINITIONID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"sPrefix"},{"av":"AV27Pgmname","fld":"vPGMNAME","hsh":true},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"}]}""");
+         setEventMetadata("GRID_FIRSTPAGE","""{"handler":"subgrid_firstpage","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"AV5WWPEntityId","fld":"vWWPENTITYID","pic":"ZZZZZZZZZ9"},{"av":"AV7WWPNotificationAppliesTo","fld":"vWWPNOTIFICATIONAPPLIESTO","pic":"9"},{"av":"edtWWPNotificationDefinitionId_Visible","ctrl":"WWPNOTIFICATIONDEFINITIONID","prop":"Visible"},{"av":"edtavWwpsubscriptionid_Visible","ctrl":"vWWPSUBSCRIPTIONID","prop":"Visible"},{"av":"A7WWPUserExtendedId","fld":"WWPUSEREXTENDEDID"},{"av":"AV29Udparg1","fld":"vUDPARG1","hsh":true},{"av":"A27WWPSubscriptionSubscribed","fld":"WWPSUBSCRIPTIONSUBSCRIBED"},{"av":"A19WWPSubscriptionRoleId","fld":"WWPSUBSCRIPTIONROLEID"},{"av":"AV23WWPSubscriptionRoleIdCollection","fld":"vWWPSUBSCRIPTIONROLEIDCOLLECTION","hsh":true},{"av":"AV8WWPNotificationId","fld":"vWWPNOTIFICATIONID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"A26WWPSubscriptionEntityRecordId","fld":"WWPSUBSCRIPTIONENTITYRECORDID"},{"av":"AV20WWPSubscriptionEntityRecordId","fld":"vWWPSUBSCRIPTIONENTITYRECORDID"},{"av":"A25WWPSubscriptionId","fld":"WWPSUBSCRIPTIONID","pic":"ZZZZZZZZZ9"},{"av":"AV24WWPNotificationDefinitionId","fld":"vWWPNOTIFICATIONDEFINITIONID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"sPrefix"},{"av":"AV26Pgmname","fld":"vPGMNAME","hsh":true},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"}]}""");
+         setEventMetadata("GRID_PREVPAGE","""{"handler":"subgrid_previouspage","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"AV5WWPEntityId","fld":"vWWPENTITYID","pic":"ZZZZZZZZZ9"},{"av":"AV7WWPNotificationAppliesTo","fld":"vWWPNOTIFICATIONAPPLIESTO","pic":"9"},{"av":"edtWWPNotificationDefinitionId_Visible","ctrl":"WWPNOTIFICATIONDEFINITIONID","prop":"Visible"},{"av":"edtavWwpsubscriptionid_Visible","ctrl":"vWWPSUBSCRIPTIONID","prop":"Visible"},{"av":"A7WWPUserExtendedId","fld":"WWPUSEREXTENDEDID"},{"av":"AV29Udparg1","fld":"vUDPARG1","hsh":true},{"av":"A27WWPSubscriptionSubscribed","fld":"WWPSUBSCRIPTIONSUBSCRIBED"},{"av":"A19WWPSubscriptionRoleId","fld":"WWPSUBSCRIPTIONROLEID"},{"av":"AV23WWPSubscriptionRoleIdCollection","fld":"vWWPSUBSCRIPTIONROLEIDCOLLECTION","hsh":true},{"av":"AV8WWPNotificationId","fld":"vWWPNOTIFICATIONID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"A26WWPSubscriptionEntityRecordId","fld":"WWPSUBSCRIPTIONENTITYRECORDID"},{"av":"AV20WWPSubscriptionEntityRecordId","fld":"vWWPSUBSCRIPTIONENTITYRECORDID"},{"av":"A25WWPSubscriptionId","fld":"WWPSUBSCRIPTIONID","pic":"ZZZZZZZZZ9"},{"av":"AV24WWPNotificationDefinitionId","fld":"vWWPNOTIFICATIONDEFINITIONID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"sPrefix"},{"av":"AV26Pgmname","fld":"vPGMNAME","hsh":true},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"}]}""");
+         setEventMetadata("GRID_NEXTPAGE","""{"handler":"subgrid_nextpage","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"AV5WWPEntityId","fld":"vWWPENTITYID","pic":"ZZZZZZZZZ9"},{"av":"AV7WWPNotificationAppliesTo","fld":"vWWPNOTIFICATIONAPPLIESTO","pic":"9"},{"av":"edtWWPNotificationDefinitionId_Visible","ctrl":"WWPNOTIFICATIONDEFINITIONID","prop":"Visible"},{"av":"edtavWwpsubscriptionid_Visible","ctrl":"vWWPSUBSCRIPTIONID","prop":"Visible"},{"av":"A7WWPUserExtendedId","fld":"WWPUSEREXTENDEDID"},{"av":"AV29Udparg1","fld":"vUDPARG1","hsh":true},{"av":"A27WWPSubscriptionSubscribed","fld":"WWPSUBSCRIPTIONSUBSCRIBED"},{"av":"A19WWPSubscriptionRoleId","fld":"WWPSUBSCRIPTIONROLEID"},{"av":"AV23WWPSubscriptionRoleIdCollection","fld":"vWWPSUBSCRIPTIONROLEIDCOLLECTION","hsh":true},{"av":"AV8WWPNotificationId","fld":"vWWPNOTIFICATIONID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"A26WWPSubscriptionEntityRecordId","fld":"WWPSUBSCRIPTIONENTITYRECORDID"},{"av":"AV20WWPSubscriptionEntityRecordId","fld":"vWWPSUBSCRIPTIONENTITYRECORDID"},{"av":"A25WWPSubscriptionId","fld":"WWPSUBSCRIPTIONID","pic":"ZZZZZZZZZ9"},{"av":"AV24WWPNotificationDefinitionId","fld":"vWWPNOTIFICATIONDEFINITIONID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"sPrefix"},{"av":"AV26Pgmname","fld":"vPGMNAME","hsh":true},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"}]}""");
+         setEventMetadata("GRID_LASTPAGE","""{"handler":"subgrid_lastpage","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"AV5WWPEntityId","fld":"vWWPENTITYID","pic":"ZZZZZZZZZ9"},{"av":"AV7WWPNotificationAppliesTo","fld":"vWWPNOTIFICATIONAPPLIESTO","pic":"9"},{"av":"edtWWPNotificationDefinitionId_Visible","ctrl":"WWPNOTIFICATIONDEFINITIONID","prop":"Visible"},{"av":"edtavWwpsubscriptionid_Visible","ctrl":"vWWPSUBSCRIPTIONID","prop":"Visible"},{"av":"A7WWPUserExtendedId","fld":"WWPUSEREXTENDEDID"},{"av":"AV29Udparg1","fld":"vUDPARG1","hsh":true},{"av":"A27WWPSubscriptionSubscribed","fld":"WWPSUBSCRIPTIONSUBSCRIBED"},{"av":"A19WWPSubscriptionRoleId","fld":"WWPSUBSCRIPTIONROLEID"},{"av":"AV23WWPSubscriptionRoleIdCollection","fld":"vWWPSUBSCRIPTIONROLEIDCOLLECTION","hsh":true},{"av":"AV8WWPNotificationId","fld":"vWWPNOTIFICATIONID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"A26WWPSubscriptionEntityRecordId","fld":"WWPSUBSCRIPTIONENTITYRECORDID"},{"av":"AV20WWPSubscriptionEntityRecordId","fld":"vWWPSUBSCRIPTIONENTITYRECORDID"},{"av":"A25WWPSubscriptionId","fld":"WWPSUBSCRIPTIONID","pic":"ZZZZZZZZZ9"},{"av":"AV24WWPNotificationDefinitionId","fld":"vWWPNOTIFICATIONDEFINITIONID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"sPrefix"},{"av":"AV26Pgmname","fld":"vPGMNAME","hsh":true},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"}]}""");
          setEventMetadata("NULL","""{"handler":"Validv_Wwpsubscriptionid","iparms":[]}""");
          return  ;
       }
@@ -2302,9 +2285,9 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
          gxfirstwebparm = "";
          gxfirstwebparm_bkp = "";
          sPrefix = "";
-         AV27Pgmname = "";
+         AV26Pgmname = "";
          A7WWPUserExtendedId = "";
-         AV30Udparg2 = "";
+         AV29Udparg1 = "";
          A19WWPSubscriptionRoleId = "";
          AV23WWPSubscriptionRoleIdCollection = new GxSimpleCollection<string>();
          A26WWPSubscriptionEntityRecordId = "";
@@ -2383,9 +2366,9 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
                }
             }
          );
-         AV27Pgmname = "WWPBaseObjects.Subscriptions.WWP_SubscriptionsPanel";
+         AV26Pgmname = "WWPBaseObjects.Subscriptions.WWP_SubscriptionsPanel";
          /* GeneXus formulas. */
-         AV27Pgmname = "WWPBaseObjects.Subscriptions.WWP_SubscriptionsPanel";
+         AV26Pgmname = "WWPBaseObjects.Subscriptions.WWP_SubscriptionsPanel";
       }
 
       private short AV7WWPNotificationAppliesTo ;
@@ -2429,7 +2412,6 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
       private int subGrid_Hoveringcolor ;
       private long GRID_nFirstRecordOnPage ;
       private long AV5WWPEntityId ;
-      private long A100CompanyId ;
       private long AV8WWPNotificationId ;
       private long A25WWPSubscriptionId ;
       private long AV24WWPNotificationDefinitionId ;
@@ -2437,7 +2419,6 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
       private long AV22WWPSubscriptionId ;
       private long GRID_nCurrentRecord ;
       private long GRID_nRecordCount ;
-      private long AV26Udparg1 ;
       private long A20WWPEntityId ;
       private string gxfirstwebparm ;
       private string gxfirstwebparm_bkp ;
@@ -2447,9 +2428,9 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
       private string sGXsfl_9_idx="0001" ;
       private string edtWWPNotificationDefinitionId_Internalname ;
       private string edtavWwpsubscriptionid_Internalname ;
-      private string AV27Pgmname ;
+      private string AV26Pgmname ;
       private string A7WWPUserExtendedId ;
-      private string AV30Udparg2 ;
+      private string AV29Udparg1 ;
       private string A19WWPSubscriptionRoleId ;
       private string sDynURL ;
       private string FormProcess ;
@@ -2560,7 +2541,7 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
                                              string AV20WWPSubscriptionEntityRecordId ,
                                              string A26WWPSubscriptionEntityRecordId ,
                                              string A7WWPUserExtendedId ,
-                                             string AV30Udparg2 ,
+                                             string AV29Udparg1 ,
                                              bool A27WWPSubscriptionSubscribed ,
                                              long AV8WWPNotificationId ,
                                              long A23WWPNotificationDefinitionId )
@@ -2571,7 +2552,7 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
          Object[] GXv_Object4 = new Object[2];
          scmdbuf = "SELECT WWPSubscriptionEntityRecordId, WWPNotificationDefinitionId, WWPSubscriptionRoleId, WWPSubscriptionSubscribed, WWPUserExtendedId, WWPSubscriptionId FROM WWP_Subscription";
          AddWhere(sWhereString, "(WWPNotificationDefinitionId = :AV8WWPNotificationId)");
-         AddWhere(sWhereString, "(( WWPUserExtendedId = ( :AV30Udparg2) and WWPSubscriptionSubscribed) or "+new GxDbmsUtils( new GxPostgreSql()).ValueList(AV23WWPSubscriptionRoleIdCollection, "WWPSubscriptionRoleId IN (", ")")+")");
+         AddWhere(sWhereString, "(( WWPUserExtendedId = ( :AV29Udparg1) and WWPSubscriptionSubscribed) or "+new GxDbmsUtils( new GxPostgreSql()).ValueList(AV23WWPSubscriptionRoleIdCollection, "WWPSubscriptionRoleId IN (", ")")+")");
          if ( StringUtil.StrCmp(AV20WWPSubscriptionEntityRecordId, "") != 0 )
          {
             AddWhere(sWhereString, "(WWPSubscriptionEntityRecordId = ( :AV20WWPSubscriptionEntityRecordId))");
@@ -2617,15 +2598,11 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
        {
           Object[] prmH002A2;
           prmH002A2 = new Object[] {
-          new ParDef("CompanyId",GXType.Int64,10,0) ,
-          new ParDef("AV26Udparg1",GXType.Int64,10,0) ,
           new ParDef("AV7WWPNotificationAppliesTo",GXType.Int16,1,0) ,
           new ParDef("AV5WWPEntityId",GXType.Int64,10,0)
           };
           Object[] prmH002A3;
           prmH002A3 = new Object[] {
-          new ParDef("CompanyId",GXType.Int64,10,0) ,
-          new ParDef("AV26Udparg1",GXType.Int64,10,0) ,
           new ParDef("AV7WWPNotificationAppliesTo",GXType.Int16,1,0) ,
           new ParDef("AV5WWPEntityId",GXType.Int64,10,0)
           };
@@ -2636,12 +2613,12 @@ namespace GeneXus.Programs.wwpbaseobjects.subscriptions {
           Object[] prmH002A5;
           prmH002A5 = new Object[] {
           new ParDef("AV8WWPNotificationId",GXType.Int64,10,0) ,
-          new ParDef("AV30Udparg2",GXType.Char,40,0) ,
+          new ParDef("AV29Udparg1",GXType.Char,40,0) ,
           new ParDef("AV20WWPSubscriptionEntityRecordId",GXType.VarChar,2000,0)
           };
           def= new CursorDef[] {
-              new CursorDef("H002A2", "SELECT WWPNotificationDefinitionAllow, WWPNotificationDefinitionAppli, WWPEntityId, WWPNotificationDefinitionId, WWPNotificationDefinitionDescr, WWPNotificationDefinitionSecFu FROM WWP_NotificationDefinition WHERE (:CompanyId = :AV26Udparg1) AND (WWPNotificationDefinitionAllow = TRUE) AND (WWPNotificationDefinitionAppli = :AV7WWPNotificationAppliesTo) AND (WWPEntityId = :AV5WWPEntityId) ORDER BY WWPNotificationDefinitionId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH002A2,100, GxCacheFrequency.OFF ,true,false )
-             ,new CursorDef("H002A3", "SELECT WWPNotificationDefinitionAllow, WWPNotificationDefinitionAppli, WWPEntityId, WWPNotificationDefinitionId, WWPNotificationDefinitionDescr, WWPNotificationDefinitionSecFu FROM WWP_NotificationDefinition WHERE (:CompanyId = :AV26Udparg1) AND (WWPNotificationDefinitionAllow = TRUE) AND (WWPNotificationDefinitionAppli = :AV7WWPNotificationAppliesTo) AND (WWPEntityId = :AV5WWPEntityId) ORDER BY WWPNotificationDefinitionId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH002A3,100, GxCacheFrequency.OFF ,true,false )
+              new CursorDef("H002A2", "SELECT WWPNotificationDefinitionAllow, WWPNotificationDefinitionAppli, WWPEntityId, WWPNotificationDefinitionId, WWPNotificationDefinitionDescr, WWPNotificationDefinitionSecFu FROM WWP_NotificationDefinition WHERE (WWPNotificationDefinitionAllow = TRUE) AND (WWPNotificationDefinitionAppli = :AV7WWPNotificationAppliesTo) AND (WWPEntityId = :AV5WWPEntityId) ORDER BY WWPNotificationDefinitionId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH002A2,100, GxCacheFrequency.OFF ,true,false )
+             ,new CursorDef("H002A3", "SELECT WWPNotificationDefinitionAllow, WWPNotificationDefinitionAppli, WWPEntityId, WWPNotificationDefinitionId, WWPNotificationDefinitionDescr, WWPNotificationDefinitionSecFu FROM WWP_NotificationDefinition WHERE (WWPNotificationDefinitionAllow = TRUE) AND (WWPNotificationDefinitionAppli = :AV7WWPNotificationAppliesTo) AND (WWPEntityId = :AV5WWPEntityId) ORDER BY WWPNotificationDefinitionId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH002A3,100, GxCacheFrequency.OFF ,true,false )
              ,new CursorDef("H002A4", "SELECT WWPEntityName, WWPEntityId FROM WWP_Entity WHERE LOWER(WWPEntityName) = ( LOWER(:AV6WWPEntityName)) ORDER BY WWPEntityId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH002A4,1, GxCacheFrequency.OFF ,false,true )
              ,new CursorDef("H002A5", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH002A5,1, GxCacheFrequency.OFF ,true,true )
           };

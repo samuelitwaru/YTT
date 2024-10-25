@@ -81,7 +81,8 @@ namespace GeneXus.Programs.workwithplus.ai {
          AV12UserQuery = "";
          AV12UserQuery += "The system contains the following queryable entities:" + StringUtil.NewLine( );
          GXt_objcol_SdtWWP_AIListData1 = AV13WWP_AIListDatas;
-         new GeneXus.Programs.workwithplus.ai.wwp_aigetlistdata(context ).execute(  "Examples",  AV10ListName, out  GXt_objcol_SdtWWP_AIListData1) ;
+         GXt_objcol_SdtWWP_AIListData2 = new GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData>();
+         new GeneXus.Programs.workwithplus.ai.wwp_aigetlistdata(context ).execute(  "Examples",  AV10ListName,  (GXProperties)(GXt_objcol_SdtWWP_AIListData1), out  GXt_objcol_SdtWWP_AIListData2) ;
          AV13WWP_AIListDatas = GXt_objcol_SdtWWP_AIListData1;
          if ( AV13WWP_AIListDatas.Count > 0 )
          {
@@ -105,9 +106,9 @@ namespace GeneXus.Programs.workwithplus.ai {
             }
             if ( AV16HasContextInfo )
             {
-               GXt_char2 = AV9Examples;
-               new GeneXus.Programs.workwithplus.ai.wwp_aigetairesponse(context ).execute(  AV11SystemContent,  AV12UserQuery, out  AV8ErrorMessage, out  GXt_char2) ;
-               AV9Examples = GXt_char2;
+               GXt_char3 = AV9Examples;
+               new GeneXus.Programs.workwithplus.ai.wwp_aigetairesponse(context ).execute(  AV11SystemContent,  AV12UserQuery, out  AV8ErrorMessage, out  GXt_char3) ;
+               AV9Examples = GXt_char3;
                if ( String.IsNullOrEmpty(StringUtil.RTrim( AV8ErrorMessage)) && ! String.IsNullOrEmpty(StringUtil.RTrim( AV9Examples)) )
                {
                   AV9Examples = "E.g.:" + StringUtil.NewLine( ) + AV9Examples;
@@ -135,15 +136,16 @@ namespace GeneXus.Programs.workwithplus.ai {
          AV12UserQuery = "";
          AV13WWP_AIListDatas = new GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData>( context, "WWP_AIListData", "YTT_version4");
          GXt_objcol_SdtWWP_AIListData1 = new GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData>( context, "WWP_AIListData", "YTT_version4");
+         GXt_objcol_SdtWWP_AIListData2 = new GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData>( context, "WWP_AIListData", "YTT_version4");
          AV14WWP_AIListData = new GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData(context);
-         GXt_char2 = "";
+         GXt_char3 = "";
          AV8ErrorMessage = "";
          /* GeneXus formulas. */
       }
 
       private short AV17MaxContextForExamples ;
       private int AV18GXV1 ;
-      private string GXt_char2 ;
+      private string GXt_char3 ;
       private bool AV16HasContextInfo ;
       private string AV10ListName ;
       private string AV9Examples ;
@@ -153,6 +155,7 @@ namespace GeneXus.Programs.workwithplus.ai {
       private string AV8ErrorMessage ;
       private GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData> AV13WWP_AIListDatas ;
       private GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData> GXt_objcol_SdtWWP_AIListData1 ;
+      private GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData> GXt_objcol_SdtWWP_AIListData2 ;
       private GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData AV14WWP_AIListData ;
       private string aP1_Examples ;
    }

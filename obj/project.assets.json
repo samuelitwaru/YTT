@@ -9010,14 +9010,14 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\KBs\\YTT_version4\\NETPostgreSQL14\\web\\GxDeps.csproj",
+      "projectUniqueName": "C:\\KBs\\YTT_version4\\NETPostgreSQL14\\Web\\GxDeps.csproj",
       "projectName": "GxDeps",
-      "projectPath": "c:\\KBs\\YTT_version4\\NETPostgreSQL14\\web\\GxDeps.csproj",
+      "projectPath": "C:\\KBs\\YTT_version4\\NETPostgreSQL14\\Web\\GxDeps.csproj",
       "packagesPath": "C:\\Users\\samuelitwaru\\.nuget\\packages\\",
-      "outputPath": "c:\\KBs\\YTT_version4\\NETPostgreSQL14\\web\\obj\\",
+      "outputPath": "C:\\KBs\\YTT_version4\\NETPostgreSQL14\\Web\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "c:\\KBs\\YTT_version4\\NETPostgreSQL14\\NuGet.Config",
+        "C:\\KBs\\YTT_version4\\NETPostgreSQL14\\NuGet.Config",
         "C:\\Users\\samuelitwaru\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
@@ -9112,7 +9112,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.401/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

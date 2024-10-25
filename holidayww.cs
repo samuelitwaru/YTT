@@ -2422,7 +2422,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202492018243446", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024102512261255", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2438,7 +2438,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("holidayww.js", "?202492018243449", false, true);
+         context.AddJavascriptSource("holidayww.js", "?2024102512261257", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -3418,7 +3418,7 @@ namespace GeneXus.Programs {
          AddWhere(sWhereString, "(CompanyId = :AV75Udparg1)");
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV77Holidaywwds_2_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( HolidayName like '%' || :lV77Holidaywwds_2_filterfulltext))");
+            AddWhere(sWhereString, "(( LOWER(HolidayName) like '%' || LOWER(:lV77Holidaywwds_2_filterfulltext)))");
          }
          else
          {
@@ -3527,7 +3527,7 @@ namespace GeneXus.Programs {
          AddWhere(sWhereString, "(CompanyId = :AV75Udparg1)");
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV77Holidaywwds_2_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( HolidayName like '%' || :lV77Holidaywwds_2_filterfulltext))");
+            AddWhere(sWhereString, "(( LOWER(HolidayName) like '%' || LOWER(:lV77Holidaywwds_2_filterfulltext)))");
          }
          else
          {

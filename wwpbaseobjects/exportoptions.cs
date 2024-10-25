@@ -253,9 +253,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Panel/BootstrapPanelRender.js", "", false, true);
-         context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
-         context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
-         context.AddJavascriptSource("DVelop/Bootstrap/Panel/BootstrapPanelRender.js", "", false, true);
          context.AddJavascriptSource("Window/InNewWindowRender.js", "", false, true);
          context.WriteHtmlText( Form.Headerrawhtml) ;
          context.CloseHtmlHeader();
@@ -326,16 +323,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
          GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEEXPORT_Showcollapseicon", StringUtil.BoolToStr( Dvpanel_tableexport_Showcollapseicon));
          GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEEXPORT_Iconposition", StringUtil.RTrim( Dvpanel_tableexport_Iconposition));
          GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEEXPORT_Autoscroll", StringUtil.BoolToStr( Dvpanel_tableexport_Autoscroll));
-         GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEATTRIBUTES_Width", StringUtil.RTrim( Dvpanel_tableattributes_Width));
-         GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEATTRIBUTES_Autowidth", StringUtil.BoolToStr( Dvpanel_tableattributes_Autowidth));
-         GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEATTRIBUTES_Autoheight", StringUtil.BoolToStr( Dvpanel_tableattributes_Autoheight));
-         GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEATTRIBUTES_Cls", StringUtil.RTrim( Dvpanel_tableattributes_Cls));
-         GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEATTRIBUTES_Title", StringUtil.RTrim( Dvpanel_tableattributes_Title));
-         GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEATTRIBUTES_Collapsible", StringUtil.BoolToStr( Dvpanel_tableattributes_Collapsible));
-         GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEATTRIBUTES_Collapsed", StringUtil.BoolToStr( Dvpanel_tableattributes_Collapsed));
-         GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEATTRIBUTES_Showcollapseicon", StringUtil.BoolToStr( Dvpanel_tableattributes_Showcollapseicon));
-         GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEATTRIBUTES_Iconposition", StringUtil.RTrim( Dvpanel_tableattributes_Iconposition));
-         GxWebStd.gx_hidden_field( context, "DVPANEL_TABLEATTRIBUTES_Autoscroll", StringUtil.BoolToStr( Dvpanel_tableattributes_Autoscroll));
          GxWebStd.gx_hidden_field( context, "INNEWWINDOW1_Width", StringUtil.RTrim( Innewwindow1_Width));
          GxWebStd.gx_hidden_field( context, "INNEWWINDOW1_Height", StringUtil.RTrim( Innewwindow1_Height));
          GxWebStd.gx_hidden_field( context, "INNEWWINDOW1_Target", StringUtil.RTrim( Innewwindow1_Target));
@@ -706,16 +693,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
             Dvpanel_tableexport_Showcollapseicon = StringUtil.StrToBool( cgiGet( "DVPANEL_TABLEEXPORT_Showcollapseicon"));
             Dvpanel_tableexport_Iconposition = cgiGet( "DVPANEL_TABLEEXPORT_Iconposition");
             Dvpanel_tableexport_Autoscroll = StringUtil.StrToBool( cgiGet( "DVPANEL_TABLEEXPORT_Autoscroll"));
-            Dvpanel_tableattributes_Width = cgiGet( "DVPANEL_TABLEATTRIBUTES_Width");
-            Dvpanel_tableattributes_Autowidth = StringUtil.StrToBool( cgiGet( "DVPANEL_TABLEATTRIBUTES_Autowidth"));
-            Dvpanel_tableattributes_Autoheight = StringUtil.StrToBool( cgiGet( "DVPANEL_TABLEATTRIBUTES_Autoheight"));
-            Dvpanel_tableattributes_Cls = cgiGet( "DVPANEL_TABLEATTRIBUTES_Cls");
-            Dvpanel_tableattributes_Title = cgiGet( "DVPANEL_TABLEATTRIBUTES_Title");
-            Dvpanel_tableattributes_Collapsible = StringUtil.StrToBool( cgiGet( "DVPANEL_TABLEATTRIBUTES_Collapsible"));
-            Dvpanel_tableattributes_Collapsed = StringUtil.StrToBool( cgiGet( "DVPANEL_TABLEATTRIBUTES_Collapsed"));
-            Dvpanel_tableattributes_Showcollapseicon = StringUtil.StrToBool( cgiGet( "DVPANEL_TABLEATTRIBUTES_Showcollapseicon"));
-            Dvpanel_tableattributes_Iconposition = cgiGet( "DVPANEL_TABLEATTRIBUTES_Iconposition");
-            Dvpanel_tableattributes_Autoscroll = StringUtil.StrToBool( cgiGet( "DVPANEL_TABLEATTRIBUTES_Autoscroll"));
             Innewwindow1_Width = cgiGet( "INNEWWINDOW1_Width");
             Innewwindow1_Height = cgiGet( "INNEWWINDOW1_Height");
             Innewwindow1_Target = cgiGet( "INNEWWINDOW1_Target");
@@ -838,79 +815,106 @@ namespace GeneXus.Programs.wwpbaseobjects {
             GxWebStd.gx_table_start( context, tblTablemain_Internalname, tblTablemain_Internalname, "", "TableMainTransaction", 0, "", "", 1, 2, sStyleString, "", "", 0);
             context.WriteHtmlText( "<tr>") ;
             context.WriteHtmlText( "<td>") ;
-            /* Text block */
-            GxWebStd.gx_label_ctrl( context, lblJs_Internalname, lblJs_Caption, "", "", lblJs_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "TextBlock", 0, "", 1, 1, 0, 2, "HLP_WWPBaseObjects/ExportOptions.htm");
-            context.WriteHtmlText( "</td>") ;
-            context.WriteHtmlText( "</tr>") ;
-            context.WriteHtmlText( "<tr>") ;
-            context.WriteHtmlText( "<td>") ;
-            ClassString = "ErrorViewer";
-            StyleString = "";
-            GxWebStd.gx_msg_list( context, "", context.GX_msglist.DisplayMode, StyleString, ClassString, "", "false");
-            context.WriteHtmlText( "</td>") ;
-            context.WriteHtmlText( "</tr>") ;
-            context.WriteHtmlText( "<tr>") ;
-            context.WriteHtmlText( "<td class='PopupContentCell'>") ;
-            wb_table2_15_0G2( true) ;
-         }
-         else
-         {
-            wb_table2_15_0G2( false) ;
-         }
-         return  ;
-      }
-
-      protected void wb_table2_15_0G2e( bool wbgen )
-      {
-         if ( wbgen )
-         {
-            context.WriteHtmlText( "</td>") ;
-            context.WriteHtmlText( "</tr>") ;
-            context.WriteHtmlText( "<tr>") ;
-            context.WriteHtmlText( "<td>") ;
             /* Div Control */
-            GxWebStd.gx_div_start( context, divHtml_usertable_ut_Internalname, 1, 0, "px", 0, "px", "Section", "start", "top", "", "", "div");
-            wb_table3_52_0G2( true) ;
-         }
-         else
-         {
-            wb_table3_52_0G2( false) ;
-         }
-         return  ;
-      }
-
-      protected void wb_table3_52_0G2e( bool wbgen )
-      {
-         if ( wbgen )
-         {
+            GxWebStd.gx_div_start( context, divTableleft_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             context.WriteHtmlText( "</td>") ;
             context.WriteHtmlText( "</tr>") ;
             context.WriteHtmlText( "<tr>") ;
             context.WriteHtmlText( "<td>") ;
             /* Div Control */
+            GxWebStd.gx_div_start( context, divTablecenter_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
+            ClassString = "ErrorViewer";
+            StyleString = "";
+            GxWebStd.gx_msg_list( context, "", context.GX_msglist.DisplayMode, StyleString, ClassString, "", "false");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 PopupContentCell", "start", "top", "", "", "div");
+            wb_table2_18_0G2( true) ;
+         }
+         else
+         {
+            wb_table2_18_0G2( false) ;
+         }
+         return  ;
+      }
+
+      protected void wb_table2_18_0G2e( bool wbgen )
+      {
+         if ( wbgen )
+         {
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
+            /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-action-group ActionGroupRight", "start", "top", " "+"data-gx-actiongroup-type=\"toolbar\""+" ", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-button", "start", "top", "", "", "div");
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 60,'',false,'',0)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 54,'',false,'',0)\"";
             ClassString = "Button";
             StyleString = "";
             GxWebStd.gx_button_ctrl( context, bttBtndownloadtofile_Internalname, "", "Save", bttBtndownloadtofile_Jsonclick, 5, "Save", "", StyleString, ClassString, bttBtndownloadtofile_Visible, 1, "standard", "'"+""+"'"+",false,"+"'"+"E\\'DODOWNLOADTOFILE\\'."+"'", TempTags, "", context.GetButtonType( ), "HLP_WWPBaseObjects/ExportOptions.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-button", "start", "top", "", "", "div");
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 62,'',false,'',0)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 56,'',false,'',0)\"";
             ClassString = "Button";
             StyleString = "";
             GxWebStd.gx_button_ctrl( context, bttBtnsavegoogledrive_Internalname, "", "Save", bttBtnsavegoogledrive_Jsonclick, 5, "Save", "", StyleString, ClassString, bttBtnsavegoogledrive_Visible, 1, "standard", "'"+""+"'"+",false,"+"'"+"E\\'DOSAVEGOOGLEDRIVE\\'."+"'", TempTags, "", context.GetButtonType( ), "HLP_WWPBaseObjects/ExportOptions.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-button", "start", "top", "", "", "div");
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 64,'',false,'',0)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 58,'',false,'',0)\"";
             ClassString = "BtnDefault";
             StyleString = "";
             GxWebStd.gx_button_ctrl( context, bttBtncancel_Internalname, "", bttBtncancel_Caption, bttBtncancel_Jsonclick, 1, "Cancel", "", StyleString, ClassString, 1, 1, "standard", "'"+""+"'"+",false,"+"'"+"ECANCEL."+"'", TempTags, "", context.GetButtonType( ), "HLP_WWPBaseObjects/ExportOptions.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            context.WriteHtmlText( "</td>") ;
+            context.WriteHtmlText( "</tr>") ;
+            context.WriteHtmlText( "<tr>") ;
+            context.WriteHtmlText( "<td>") ;
+            /* Div Control */
+            GxWebStd.gx_div_start( context, divTableright_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            context.WriteHtmlText( "</td>") ;
+            context.WriteHtmlText( "</tr>") ;
+            context.WriteHtmlText( "<tr>") ;
+            context.WriteHtmlText( "<td>") ;
+            /* Text block */
+            GxWebStd.gx_label_ctrl( context, lblJs_Internalname, lblJs_Caption, "", "", lblJs_Jsonclick, "'"+""+"'"+",false,"+"'"+""+"'", "", "TextBlock", 0, "", 1, 1, 0, 2, "HLP_WWPBaseObjects/ExportOptions.htm");
+            context.WriteHtmlText( "</td>") ;
+            context.WriteHtmlText( "</tr>") ;
+            context.WriteHtmlText( "<tr>") ;
+            context.WriteHtmlText( "<td>") ;
+            /* Div Control */
+            GxWebStd.gx_div_start( context, divHtml_usertable_ut_Internalname, 1, 0, "px", 0, "px", "Section", "start", "top", "", "", "div");
+            wb_table3_68_0G2( true) ;
+         }
+         else
+         {
+            wb_table3_68_0G2( false) ;
+         }
+         return  ;
+      }
+
+      protected void wb_table3_68_0G2e( bool wbgen )
+      {
+         if ( wbgen )
+         {
             GxWebStd.gx_div_end( context, "start", "top", "div");
             context.WriteHtmlText( "</td>") ;
             context.WriteHtmlText( "</tr>") ;
@@ -924,7 +928,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          }
       }
 
-      protected void wb_table3_52_0G2( bool wbgen )
+      protected void wb_table3_68_0G2( bool wbgen )
       {
          if ( wbgen )
          {
@@ -941,15 +945,15 @@ namespace GeneXus.Programs.wwpbaseobjects {
             context.WriteHtmlText( "</tbody>") ;
             /* End of table */
             context.WriteHtmlText( "</table>") ;
-            wb_table3_52_0G2e( true) ;
+            wb_table3_68_0G2e( true) ;
          }
          else
          {
-            wb_table3_52_0G2e( false) ;
+            wb_table3_68_0G2e( false) ;
          }
       }
 
-      protected void wb_table2_15_0G2( bool wbgen )
+      protected void wb_table2_18_0G2( bool wbgen )
       {
          if ( wbgen )
          {
@@ -989,9 +993,9 @@ namespace GeneXus.Programs.wwpbaseobjects {
             GxWebStd.gx_label_element( context, cmbavExporttype_Internalname, "Export type", "col-sm-3 AttributeLabel", 1, true, "");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-sm-9 gx-attribute", "start", "top", "", "", "div");
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 25,'',false,'',0)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 28,'',false,'',0)\"";
             /* ComboBox */
-            GxWebStd.gx_combobox_ctrl1( context, cmbavExporttype, cmbavExporttype_Internalname, StringUtil.Trim( StringUtil.Str( (decimal)(AV8ExportType), 1, 0)), 1, cmbavExporttype_Jsonclick, 7, "'"+""+"'"+",false,"+"'"+"e150g1_client"+"'", "int", "", 1, cmbavExporttype.Enabled, 0, 0, 0, "em", 0, "", "", "Attribute", "", "", TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,25);\"", "", true, 0, "HLP_WWPBaseObjects/ExportOptions.htm");
+            GxWebStd.gx_combobox_ctrl1( context, cmbavExporttype, cmbavExporttype_Internalname, StringUtil.Trim( StringUtil.Str( (decimal)(AV8ExportType), 1, 0)), 1, cmbavExporttype_Jsonclick, 7, "'"+""+"'"+",false,"+"'"+"e150g1_client"+"'", "int", "", 1, cmbavExporttype.Enabled, 0, 0, 0, "em", 0, "", "", "Attribute", "", "", TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,28);\"", "", true, 0, "HLP_WWPBaseObjects/ExportOptions.htm");
             cmbavExporttype.CurrentValue = StringUtil.Trim( StringUtil.Str( (decimal)(AV8ExportType), 1, 0));
             AssignProp("", false, cmbavExporttype_Internalname, "Values", (string)(cmbavExporttype.ToJavascriptSource()), true);
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -1004,16 +1008,16 @@ namespace GeneXus.Programs.wwpbaseobjects {
             context.WriteHtmlText( "</tr>") ;
             context.WriteHtmlText( "<tr>") ;
             context.WriteHtmlText( "<td class='CellPaddingTop10 CellMarginLeft15'>") ;
-            wb_table4_28_0G2( true) ;
+            wb_table4_31_0G2( true) ;
          }
          else
          {
-            wb_table4_28_0G2( false) ;
+            wb_table4_31_0G2( false) ;
          }
          return  ;
       }
 
-      protected void wb_table4_28_0G2e( bool wbgen )
+      protected void wb_table4_31_0G2e( bool wbgen )
       {
          if ( wbgen )
          {
@@ -1021,15 +1025,15 @@ namespace GeneXus.Programs.wwpbaseobjects {
             context.WriteHtmlText( "</tr>") ;
             /* End of table */
             context.WriteHtmlText( "</table>") ;
-            wb_table2_15_0G2e( true) ;
+            wb_table2_18_0G2e( true) ;
          }
          else
          {
-            wb_table2_15_0G2e( false) ;
+            wb_table2_18_0G2e( false) ;
          }
       }
 
-      protected void wb_table4_28_0G2( bool wbgen )
+      protected void wb_table4_31_0G2( bool wbgen )
       {
          if ( wbgen )
          {
@@ -1042,19 +1046,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
             GxWebStd.gx_table_start( context, tblTablegoogledriveinfo_Internalname, tblTablegoogledriveinfo_Internalname, "", "Table100x100", 0, "", "", 0, 0, sStyleString, "", "", 0);
             context.WriteHtmlText( "<tr>") ;
             context.WriteHtmlText( "<td>") ;
-            /* User Defined Control */
-            ucDvpanel_tableattributes.SetProperty("Width", Dvpanel_tableattributes_Width);
-            ucDvpanel_tableattributes.SetProperty("AutoWidth", Dvpanel_tableattributes_Autowidth);
-            ucDvpanel_tableattributes.SetProperty("AutoHeight", Dvpanel_tableattributes_Autoheight);
-            ucDvpanel_tableattributes.SetProperty("Cls", Dvpanel_tableattributes_Cls);
-            ucDvpanel_tableattributes.SetProperty("Title", Dvpanel_tableattributes_Title);
-            ucDvpanel_tableattributes.SetProperty("Collapsible", Dvpanel_tableattributes_Collapsible);
-            ucDvpanel_tableattributes.SetProperty("Collapsed", Dvpanel_tableattributes_Collapsed);
-            ucDvpanel_tableattributes.SetProperty("ShowCollapseIcon", Dvpanel_tableattributes_Showcollapseicon);
-            ucDvpanel_tableattributes.SetProperty("IconPosition", Dvpanel_tableattributes_Iconposition);
-            ucDvpanel_tableattributes.SetProperty("AutoScroll", Dvpanel_tableattributes_Autoscroll);
-            ucDvpanel_tableattributes.Render(context, "dvelop.gxbootstrap.panel_al", Dvpanel_tableattributes_Internalname, "DVPANEL_TABLEATTRIBUTESContainer");
-            context.WriteHtmlText( "<div class=\"gx_usercontrol_child\" id=\""+"DVPANEL_TABLEATTRIBUTESContainer"+"TableAttributes"+"\" style=\"display:none;\">") ;
             /* Div Control */
             GxWebStd.gx_div_start( context, divTableattributes_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
             /* Div Control */
@@ -1068,8 +1059,8 @@ namespace GeneXus.Programs.wwpbaseobjects {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-sm-9 gx-attribute", "start", "top", "", "", "div");
             /* Single line edit */
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 38,'',false,'',0)\"";
-            GxWebStd.gx_single_line_edit( context, edtavUser_Internalname, AV14User, StringUtil.RTrim( context.localUtil.Format( AV14User, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,38);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavUser_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavUser_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "WWPBaseObjects\\WWP_Description", "start", true, "", "HLP_WWPBaseObjects/ExportOptions.htm");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 39,'',false,'',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtavUser_Internalname, AV14User, StringUtil.RTrim( context.localUtil.Format( AV14User, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,39);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavUser_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavUser_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "WWPBaseObjects\\WWP_Description", "start", true, "", "HLP_WWPBaseObjects/ExportOptions.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -1085,8 +1076,8 @@ namespace GeneXus.Programs.wwpbaseobjects {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-sm-9 gx-attribute", "start", "top", "", "", "div");
             /* Single line edit */
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 43,'',false,'',0)\"";
-            GxWebStd.gx_single_line_edit( context, edtavDoctitle_Internalname, AV5DocTitle, StringUtil.RTrim( context.localUtil.Format( AV5DocTitle, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,43);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavDoctitle_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavDoctitle_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "WWPBaseObjects\\WWP_Description", "start", true, "", "HLP_WWPBaseObjects/ExportOptions.htm");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 44,'',false,'',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtavDoctitle_Internalname, AV5DocTitle, StringUtil.RTrim( context.localUtil.Format( AV5DocTitle, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,44);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavDoctitle_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavDoctitle_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "WWPBaseObjects\\WWP_Description", "start", true, "", "HLP_WWPBaseObjects/ExportOptions.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -1102,23 +1093,22 @@ namespace GeneXus.Programs.wwpbaseobjects {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-sm-9 gx-attribute", "start", "top", "", "", "div");
             /* Single line edit */
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 48,'',false,'',0)\"";
-            GxWebStd.gx_single_line_edit( context, edtavPassword_Internalname, AV12Password, StringUtil.RTrim( context.localUtil.Format( AV12Password, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,48);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavPassword_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavPassword_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, edtavPassword_Ispassword, 0, 0, 0, -1, -1, true, "WWPBaseObjects\\WWP_Description", "start", true, "", "HLP_WWPBaseObjects/ExportOptions.htm");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 49,'',false,'',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtavPassword_Internalname, AV12Password, StringUtil.RTrim( context.localUtil.Format( AV12Password, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,49);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavPassword_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavPassword_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, edtavPassword_Ispassword, 0, 0, 0, -1, -1, true, "WWPBaseObjects\\WWP_Description", "start", true, "", "HLP_WWPBaseObjects/ExportOptions.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
-            context.WriteHtmlText( "</div>") ;
             context.WriteHtmlText( "</td>") ;
             context.WriteHtmlText( "</tr>") ;
             /* End of table */
             context.WriteHtmlText( "</table>") ;
-            wb_table4_28_0G2e( true) ;
+            wb_table4_31_0G2e( true) ;
          }
          else
          {
-            wb_table4_28_0G2e( false) ;
+            wb_table4_31_0G2e( false) ;
          }
       }
 
@@ -1167,7 +1157,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202491613145014", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024102512204838", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1183,10 +1173,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wwpbaseobjects/exportoptions.js", "?202491613145014", false, true);
-         context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
-         context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
-         context.AddJavascriptSource("DVelop/Bootstrap/Panel/BootstrapPanelRender.js", "", false, true);
+         context.AddJavascriptSource("wwpbaseobjects/exportoptions.js", "?2024102512204839", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Panel/BootstrapPanelRender.js", "", false, true);
@@ -1210,7 +1197,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       protected void init_default_properties( )
       {
-         lblJs_Internalname = "JS";
+         divTableleft_Internalname = "TABLELEFT";
          cmbavExporttype_Internalname = "vEXPORTTYPE";
          divTableexport_Internalname = "TABLEEXPORT";
          Dvpanel_tableexport_Internalname = "DVPANEL_TABLEEXPORT";
@@ -1218,15 +1205,17 @@ namespace GeneXus.Programs.wwpbaseobjects {
          edtavDoctitle_Internalname = "vDOCTITLE";
          edtavPassword_Internalname = "vPASSWORD";
          divTableattributes_Internalname = "TABLEATTRIBUTES";
-         Dvpanel_tableattributes_Internalname = "DVPANEL_TABLEATTRIBUTES";
          tblTablegoogledriveinfo_Internalname = "TABLEGOOGLEDRIVEINFO";
          tblTablecontent_Internalname = "TABLECONTENT";
-         Innewwindow1_Internalname = "INNEWWINDOW1";
-         tblUt_Internalname = "UT";
-         divHtml_usertable_ut_Internalname = "HTML_USERTABLE_UT";
          bttBtndownloadtofile_Internalname = "BTNDOWNLOADTOFILE";
          bttBtnsavegoogledrive_Internalname = "BTNSAVEGOOGLEDRIVE";
          bttBtncancel_Internalname = "BTNCANCEL";
+         divTablecenter_Internalname = "TABLECENTER";
+         divTableright_Internalname = "TABLERIGHT";
+         lblJs_Internalname = "JS";
+         Innewwindow1_Internalname = "INNEWWINDOW1";
+         tblUt_Internalname = "UT";
+         divHtml_usertable_ut_Internalname = "HTML_USERTABLE_UT";
          tblTablemain_Internalname = "TABLEMAIN";
          divLayoutmaintable_Internalname = "LAYOUTMAINTABLE";
          Form.Internalname = "FORM";
@@ -1261,16 +1250,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
          Innewwindow1_Target = "";
          Innewwindow1_Height = "50";
          Innewwindow1_Width = "50";
-         Dvpanel_tableattributes_Autoscroll = Convert.ToBoolean( 0);
-         Dvpanel_tableattributes_Iconposition = "Right";
-         Dvpanel_tableattributes_Showcollapseicon = Convert.ToBoolean( 0);
-         Dvpanel_tableattributes_Collapsed = Convert.ToBoolean( 0);
-         Dvpanel_tableattributes_Collapsible = Convert.ToBoolean( 0);
-         Dvpanel_tableattributes_Title = "Google Drive Information";
-         Dvpanel_tableattributes_Cls = "PanelCard_GrayTitle";
-         Dvpanel_tableattributes_Autoheight = Convert.ToBoolean( -1);
-         Dvpanel_tableattributes_Autowidth = Convert.ToBoolean( 0);
-         Dvpanel_tableattributes_Width = "100%";
          Dvpanel_tableexport_Autoscroll = Convert.ToBoolean( 0);
          Dvpanel_tableexport_Iconposition = "Right";
          Dvpanel_tableexport_Showcollapseicon = Convert.ToBoolean( 0);
@@ -1346,14 +1325,13 @@ namespace GeneXus.Programs.wwpbaseobjects {
          AV10GoogleDocsResult = new GeneXus.Programs.wwpbaseobjects.SdtGoogleDocsResult(context);
          ucInnewwindow1 = new GXUserControl();
          sStyleString = "";
-         lblJs_Jsonclick = "";
          ClassString = "";
          StyleString = "";
          TempTags = "";
          bttBtnsavegoogledrive_Jsonclick = "";
          bttBtncancel_Jsonclick = "";
+         lblJs_Jsonclick = "";
          ucDvpanel_tableexport = new GXUserControl();
-         ucDvpanel_tableattributes = new GXUserControl();
          BackMsgLst = new msglist();
          LclMsgLst = new msglist();
          /* GeneXus formulas. */
@@ -1389,10 +1367,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private string Dvpanel_tableexport_Cls ;
       private string Dvpanel_tableexport_Title ;
       private string Dvpanel_tableexport_Iconposition ;
-      private string Dvpanel_tableattributes_Width ;
-      private string Dvpanel_tableattributes_Cls ;
-      private string Dvpanel_tableattributes_Title ;
-      private string Dvpanel_tableattributes_Iconposition ;
       private string Innewwindow1_Width ;
       private string Innewwindow1_Height ;
       private string Innewwindow1_Target ;
@@ -1420,18 +1394,20 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private string bttBtncancel_Internalname ;
       private string sStyleString ;
       private string tblTablemain_Internalname ;
-      private string lblJs_Jsonclick ;
+      private string divTableleft_Internalname ;
+      private string divTablecenter_Internalname ;
       private string ClassString ;
       private string StyleString ;
-      private string divHtml_usertable_ut_Internalname ;
       private string TempTags ;
       private string bttBtnsavegoogledrive_Jsonclick ;
       private string bttBtncancel_Jsonclick ;
+      private string divTableright_Internalname ;
+      private string lblJs_Jsonclick ;
+      private string divHtml_usertable_ut_Internalname ;
       private string tblUt_Internalname ;
       private string Dvpanel_tableexport_Internalname ;
       private string divTableexport_Internalname ;
       private string cmbavExporttype_Jsonclick ;
-      private string Dvpanel_tableattributes_Internalname ;
       private string divTableattributes_Internalname ;
       private string edtavUser_Jsonclick ;
       private string edtavDoctitle_Jsonclick ;
@@ -1444,12 +1420,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private bool Dvpanel_tableexport_Collapsed ;
       private bool Dvpanel_tableexport_Showcollapseicon ;
       private bool Dvpanel_tableexport_Autoscroll ;
-      private bool Dvpanel_tableattributes_Autowidth ;
-      private bool Dvpanel_tableattributes_Autoheight ;
-      private bool Dvpanel_tableattributes_Collapsible ;
-      private bool Dvpanel_tableattributes_Collapsed ;
-      private bool Dvpanel_tableattributes_Showcollapseicon ;
-      private bool Dvpanel_tableattributes_Autoscroll ;
       private bool wbLoad ;
       private bool Rfr0gs ;
       private bool wbErr ;
@@ -1466,7 +1436,6 @@ namespace GeneXus.Programs.wwpbaseobjects {
       private string AV13URL ;
       private GXUserControl ucInnewwindow1 ;
       private GXUserControl ucDvpanel_tableexport ;
-      private GXUserControl ucDvpanel_tableattributes ;
       private GxHttpRequest AV11HttpRequest ;
       private GXWebForm Form ;
       private IGxDataStore dsGAM ;

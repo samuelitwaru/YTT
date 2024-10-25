@@ -205,10 +205,6 @@ namespace GeneXus.Programs {
          AV46Trnnewwwds_5_tftrnnewname_sel = AV14TFTrnNewName_Sel;
          AV47Trnnewwwds_6_tftrnnewdate = AV15TFTrnNewDate;
          AV48Trnnewwwds_7_tftrnnewdate_to = AV16TFTrnNewDate_To;
-         AV49Udparg8 = new getloggedinusercompanyid(context).executeUdp( );
-         AV49Udparg8 = new getloggedinusercompanyid(context).executeUdp( );
-         AV49Udparg8 = new getloggedinusercompanyid(context).executeUdp( );
-         AV49Udparg8 = new getloggedinusercompanyid(context).executeUdp( );
          pr_default.dynParam(0, new Object[]{ new Object[]{
                                               AV42Trnnewwwds_1_filterfulltext ,
                                               AV43Trnnewwwds_2_tftrnnewid ,
@@ -219,10 +215,9 @@ namespace GeneXus.Programs {
                                               AV48Trnnewwwds_7_tftrnnewdate_to ,
                                               A180TrnNewId ,
                                               A181TrnNewName ,
-                                              A182TrnNewDate ,
-                                              AV49Udparg8 } ,
+                                              A182TrnNewDate } ,
                                               new int[]{
-                                              TypeConstants.LONG, TypeConstants.LONG, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.LONG, TypeConstants.DATE, TypeConstants.LONG
+                                              TypeConstants.LONG, TypeConstants.LONG, TypeConstants.DATE, TypeConstants.DATE, TypeConstants.LONG, TypeConstants.DATE
                                               }
          });
          lV42Trnnewwwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV42Trnnewwwds_1_filterfulltext), "%", "");
@@ -328,7 +323,6 @@ namespace GeneXus.Programs {
       private long AV12TFTrnNewId_To ;
       private long AV43Trnnewwwds_2_tftrnnewid ;
       private long AV44Trnnewwwds_3_tftrnnewid_to ;
-      private long AV49Udparg8 ;
       private long A180TrnNewId ;
       private long AV27count ;
       private string AV13TFTrnNewName ;
@@ -385,8 +379,7 @@ namespace GeneXus.Programs {
                                              DateTime AV48Trnnewwwds_7_tftrnnewdate_to ,
                                              long A180TrnNewId ,
                                              string A181TrnNewName ,
-                                             DateTime A182TrnNewDate ,
-                                             long AV49Udparg8 )
+                                             DateTime A182TrnNewDate )
       {
          System.Text.StringBuilder sWhereString = new System.Text.StringBuilder();
          string scmdbuf;
@@ -420,7 +413,7 @@ namespace GeneXus.Programs {
          }
          if ( String.IsNullOrEmpty(StringUtil.RTrim( AV46Trnnewwwds_5_tftrnnewname_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV45Trnnewwwds_4_tftrnnewname)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(TrnNewName) like LOWER(:lV45Trnnewwwds_4_tftrnnewname))");
+            AddWhere(sWhereString, "(TrnNewName like :lV45Trnnewwwds_4_tftrnnewname)");
          }
          else
          {
@@ -468,7 +461,7 @@ namespace GeneXus.Programs {
          switch ( cursor )
          {
                case 0 :
-                     return conditional_P00BR2(context, (string)dynConstraints[0] , (long)dynConstraints[1] , (long)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (DateTime)dynConstraints[5] , (DateTime)dynConstraints[6] , (long)dynConstraints[7] , (string)dynConstraints[8] , (DateTime)dynConstraints[9] , (long)dynConstraints[11] );
+                     return conditional_P00BR2(context, (string)dynConstraints[0] , (long)dynConstraints[1] , (long)dynConstraints[2] , (string)dynConstraints[3] , (string)dynConstraints[4] , (DateTime)dynConstraints[5] , (DateTime)dynConstraints[6] , (long)dynConstraints[7] , (string)dynConstraints[8] , (DateTime)dynConstraints[9] );
          }
          return base.getDynamicStatement(cursor, context, dynConstraints);
       }

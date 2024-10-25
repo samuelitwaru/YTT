@@ -778,14 +778,14 @@ namespace GeneXus.Programs {
          new GeneXus.Programs.wwpbaseobjects.loadwwpcontext(context ).execute( out  AV6WWPContext) ;
          lblWorkwithlink_Link = formatLink("sitesettingww.aspx") ;
          AssignProp("", false, lblWorkwithlink_Internalname, "Link", lblWorkwithlink_Link, true);
-         AV14GXLvl9 = 0;
+         AV16GXLvl9 = 0;
          /* Using cursor H005O2 */
          pr_default.execute(0, new Object[] {AV10SiteSettingId});
          while ( (pr_default.getStatus(0) != 101) )
          {
             A160SiteSettingId = H005O2_A160SiteSettingId[0];
             A161IsLogHourOpen = H005O2_A161IsLogHourOpen[0];
-            AV14GXLvl9 = 1;
+            AV16GXLvl9 = 1;
             Form.Caption = StringUtil.BoolToStr( A161IsLogHourOpen);
             AssignProp("", false, "FORM", "Caption", Form.Caption, true);
             AV9Exists = true;
@@ -793,7 +793,7 @@ namespace GeneXus.Programs {
             if (true) break;
          }
          pr_default.close(0);
-         if ( AV14GXLvl9 == 0 )
+         if ( AV16GXLvl9 == 0 )
          {
             Form.Caption = "Record not found";
             AssignProp("", false, "FORM", "Caption", Form.Caption, true);
@@ -808,6 +808,12 @@ namespace GeneXus.Programs {
             /* Execute user subroutine: 'LOADTABS' */
             S112 ();
             if (returnInSub) return;
+         }
+         AV15AIAppliedFilters = AV14Session.Get("SiteSettingViewQueryAppliedFilters");
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( StringUtil.Trim( AV15AIAppliedFilters))) )
+         {
+            GX_msglist.addItem(AV15AIAppliedFilters);
+            AV14Session.Remove("SiteSettingViewQueryAppliedFilters");
          }
       }
 
@@ -906,7 +912,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202491613201697", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024102512275949", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -922,7 +928,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("sitesettingview.js", "?202491613201698", false, true);
+         context.AddJavascriptSource("sitesettingview.js", "?2024102512275949", false, true);
          context.AddJavascriptSource("shared/HistoryManager/HistoryManager.js", "", false, true);
          context.AddJavascriptSource("shared/HistoryManager/rsh/json2005.js", "", false, true);
          context.AddJavascriptSource("shared/HistoryManager/rsh/rsh.js", "", false, true);
@@ -1018,6 +1024,8 @@ namespace GeneXus.Programs {
          AV6WWPContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPContext(context);
          H005O2_A160SiteSettingId = new long[1] ;
          H005O2_A161IsLogHourOpen = new bool[] {false} ;
+         AV15AIAppliedFilters = "";
+         AV14Session = context.GetSession();
          BackMsgLst = new msglist();
          LclMsgLst = new msglist();
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.sitesettingview__default(),
@@ -1041,7 +1049,7 @@ namespace GeneXus.Programs {
       private short nCmpId ;
       private short nDonePA ;
       private short gxcookieaux ;
-      private short AV14GXLvl9 ;
+      private short AV16GXLvl9 ;
       private short nGXWrapped ;
       private int Tabs_Pagecount ;
       private int idxLst ;
@@ -1090,6 +1098,8 @@ namespace GeneXus.Programs {
       private bool A161IsLogHourOpen ;
       private bool AV9Exists ;
       private bool bDynCreated_Generalwc ;
+      private string AV15AIAppliedFilters ;
+      private IGxSession AV14Session ;
       private GXWebComponent WebComp_Generalwc ;
       private GXUserControl ucTabs ;
       private GXWebForm Form ;

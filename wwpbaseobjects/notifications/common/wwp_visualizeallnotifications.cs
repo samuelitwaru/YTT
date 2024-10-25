@@ -1177,7 +1177,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
          AssignProp("", false, edtWWPNotificationLink_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtWWPNotificationLink_Visible), 5, 0), !bGXsfl_24_Refreshing);
          edtWWPNotificationMetadata_Visible = 0;
          AssignProp("", false, edtWWPNotificationMetadata_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtWWPNotificationMetadata_Visible), 5, 0), !bGXsfl_24_Refreshing);
-         subGrid_Rows = 20;
+         subGrid_Rows = 10;
          GxWebStd.gx_hidden_field( context, "GRID_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Rows), 6, 0, ".", "")));
          Form.Caption = "Visualize all notifications";
          AssignProp("", false, "FORM", "Caption", Form.Caption, true);
@@ -1409,7 +1409,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202491613183863", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024102512254850", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1427,7 +1427,7 @@ namespace GeneXus.Programs.wwpbaseobjects.notifications.common {
          if ( nGXWrapped != 1 )
          {
             context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-            context.AddJavascriptSource("wwpbaseobjects/notifications/common/wwp_visualizeallnotifications.js", "?202491613183863", false, true);
+            context.AddJavascriptSource("wwpbaseobjects/notifications/common/wwp_visualizeallnotifications.js", "?2024102512254850", false, true);
          }
          /* End function include_jscripts */
       }

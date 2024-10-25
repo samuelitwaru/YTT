@@ -324,7 +324,7 @@ namespace GeneXus.Programs {
          sOrderString = "";
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV14SearchTxt)) )
          {
-            AddWhere(sWhereString, "(LOWER(CompanyName) like '%' || LOWER(:lV14SearchTxt))");
+            AddWhere(sWhereString, "(CompanyName like '%' || :lV14SearchTxt)");
          }
          else
          {

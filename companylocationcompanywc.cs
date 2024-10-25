@@ -2225,7 +2225,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024923949222", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024102512181695", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2241,7 +2241,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("companylocationcompanywc.js", "?2024923949222", false, true);
+         context.AddJavascriptSource("companylocationcompanywc.js", "?2024102512181696", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -2922,7 +2922,7 @@ namespace GeneXus.Programs {
          AddWhere(sWhereString, "(CompanyLocationId = :AV8CompanyLocationId)");
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV16FilterFullText)) )
          {
-            AddWhere(sWhereString, "(( SUBSTR(TO_CHAR(CompanyId,'9999999999'), 2) like '%' || :lV16FilterFullText) or ( CompanyName like '%' || :lV16FilterFullText))");
+            AddWhere(sWhereString, "(( SUBSTR(TO_CHAR(CompanyId,'9999999999'), 2) like '%' || :lV16FilterFullText) or ( LOWER(CompanyName) like '%' || LOWER(:lV16FilterFullText)))");
          }
          else
          {
@@ -2972,7 +2972,7 @@ namespace GeneXus.Programs {
          AddWhere(sWhereString, "(CompanyLocationId = :AV8CompanyLocationId)");
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV16FilterFullText)) )
          {
-            AddWhere(sWhereString, "(( SUBSTR(TO_CHAR(CompanyId,'9999999999'), 2) like '%' || :lV16FilterFullText) or ( CompanyName like '%' || :lV16FilterFullText))");
+            AddWhere(sWhereString, "(( SUBSTR(TO_CHAR(CompanyId,'9999999999'), 2) like '%' || :lV16FilterFullText) or ( LOWER(CompanyName) like '%' || LOWER(:lV16FilterFullText)))");
          }
          else
          {

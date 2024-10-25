@@ -2364,7 +2364,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20249201821172", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024102512262838", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2380,7 +2380,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("leavetypeww.js", "?20249201821174", false, true);
+         context.AddJavascriptSource("leavetypeww.js", "?2024102512262841", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -3353,7 +3353,7 @@ namespace GeneXus.Programs {
          AddWhere(sWhereString, "(CompanyId = :AV63Udparg1)");
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV65Leavetypewwds_2_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( LeaveTypeName like '%' || :lV65Leavetypewwds_2_filterfulltext) or ( 'no' like '%' || LOWER(:lV65Leavetypewwds_2_filterfulltext) and LeaveTypeVacationLeave = ( 'No')) or ( 'yes' like '%' || LOWER(:lV65Leavetypewwds_2_filterfulltext) and LeaveTypeVacationLeave = ( 'Yes')) or ( 'no' like '%' || LOWER(:lV65Leavetypewwds_2_filterfulltext) and LeaveTypeLoggingWorkHours = ( 'No')) or ( 'yes' like '%' || LOWER(:lV65Leavetypewwds_2_filterfulltext) and LeaveTypeLoggingWorkHours = ( 'Yes')))");
+            AddWhere(sWhereString, "(( LOWER(LeaveTypeName) like '%' || LOWER(:lV65Leavetypewwds_2_filterfulltext)) or ( 'no' like '%' || LOWER(:lV65Leavetypewwds_2_filterfulltext) and LeaveTypeVacationLeave = ( 'No')) or ( 'yes' like '%' || LOWER(:lV65Leavetypewwds_2_filterfulltext) and LeaveTypeVacationLeave = ( 'Yes')) or ( 'no' like '%' || LOWER(:lV65Leavetypewwds_2_filterfulltext) and LeaveTypeLoggingWorkHours = ( 'No')) or ( 'yes' like '%' || LOWER(:lV65Leavetypewwds_2_filterfulltext) and LeaveTypeLoggingWorkHours = ( 'Yes')))");
          }
          else
          {
@@ -3449,7 +3449,7 @@ namespace GeneXus.Programs {
          AddWhere(sWhereString, "(CompanyId = :AV63Udparg1)");
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV65Leavetypewwds_2_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( LeaveTypeName like '%' || :lV65Leavetypewwds_2_filterfulltext) or ( 'no' like '%' || LOWER(:lV65Leavetypewwds_2_filterfulltext) and LeaveTypeVacationLeave = ( 'No')) or ( 'yes' like '%' || LOWER(:lV65Leavetypewwds_2_filterfulltext) and LeaveTypeVacationLeave = ( 'Yes')) or ( 'no' like '%' || LOWER(:lV65Leavetypewwds_2_filterfulltext) and LeaveTypeLoggingWorkHours = ( 'No')) or ( 'yes' like '%' || LOWER(:lV65Leavetypewwds_2_filterfulltext) and LeaveTypeLoggingWorkHours = ( 'Yes')))");
+            AddWhere(sWhereString, "(( LOWER(LeaveTypeName) like '%' || LOWER(:lV65Leavetypewwds_2_filterfulltext)) or ( 'no' like '%' || LOWER(:lV65Leavetypewwds_2_filterfulltext) and LeaveTypeVacationLeave = ( 'No')) or ( 'yes' like '%' || LOWER(:lV65Leavetypewwds_2_filterfulltext) and LeaveTypeVacationLeave = ( 'Yes')) or ( 'no' like '%' || LOWER(:lV65Leavetypewwds_2_filterfulltext) and LeaveTypeLoggingWorkHours = ( 'No')) or ( 'yes' like '%' || LOWER(:lV65Leavetypewwds_2_filterfulltext) and LeaveTypeLoggingWorkHours = ( 'Yes')))");
          }
          else
          {

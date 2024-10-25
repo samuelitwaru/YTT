@@ -81,11 +81,12 @@ namespace GeneXus.Programs.workwithplus.ai {
          AV19SystemContent += "The pages available to resolve the user's query are (page: description):" + StringUtil.NewLine( );
          AV12LinkedPages = (GxSimpleCollection<string>)(new GxSimpleCollection<string>());
          GXt_objcol_SdtWWP_AIListData1 = AV24WWP_AIListDatas;
-         new GeneXus.Programs.workwithplus.ai.wwp_aigetlistdata(context ).execute(  "RedirectToList",  "", out  GXt_objcol_SdtWWP_AIListData1) ;
+         GXt_objcol_SdtWWP_AIListData2 = new GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData>();
+         new GeneXus.Programs.workwithplus.ai.wwp_aigetlistdata(context ).execute(  "RedirectToList",  "",  (GXProperties)(GXt_objcol_SdtWWP_AIListData1), out  GXt_objcol_SdtWWP_AIListData2) ;
          AV24WWP_AIListDatas = GXt_objcol_SdtWWP_AIListData1;
-         GXt_objcol_SdtWWP_AIListData1 = AV27WWP_AIUserDatas;
-         new GeneXus.Programs.workwithplus.ai.wwp_aigetusercustomredirections(context ).execute( out  GXt_objcol_SdtWWP_AIListData1) ;
-         AV27WWP_AIUserDatas = GXt_objcol_SdtWWP_AIListData1;
+         GXt_objcol_SdtWWP_AIListData2 = AV27WWP_AIUserDatas;
+         new GeneXus.Programs.workwithplus.ai.wwp_aigetusercustomredirections(context ).execute( out  GXt_objcol_SdtWWP_AIListData2) ;
+         AV27WWP_AIUserDatas = GXt_objcol_SdtWWP_AIListData2;
          AV28GXV1 = 1;
          while ( AV28GXV1 <= AV27WWP_AIUserDatas.Count )
          {
@@ -123,9 +124,9 @@ namespace GeneXus.Programs.workwithplus.ai {
          }
          if ( AV8DataAdded )
          {
-            GXt_char2 = AV18ResponseText;
-            new GeneXus.Programs.workwithplus.ai.wwp_aigetairesponse(context ).execute(  AV19SystemContent,  AV21UserQuery, out  AV9ErrorMessage, out  GXt_char2) ;
-            AV18ResponseText = GXt_char2;
+            GXt_char3 = AV18ResponseText;
+            new GeneXus.Programs.workwithplus.ai.wwp_aigetairesponse(context ).execute(  AV19SystemContent,  AV21UserQuery, out  AV9ErrorMessage, out  GXt_char3) ;
+            AV18ResponseText = GXt_char3;
             if ( String.IsNullOrEmpty(StringUtil.RTrim( StringUtil.Trim( AV9ErrorMessage))) )
             {
                AV25i = (short)(StringUtil.StringSearch( AV18ResponseText, ":", 1));
@@ -209,9 +210,9 @@ namespace GeneXus.Programs.workwithplus.ai {
       {
          /* 'ADD MENU OPTIONS' Routine */
          returnInSub = false;
-         GXt_objcol_SdtDVelop_Menu_Item3 = AV16DVelop_Menu;
-         new GeneXus.Programs.wwpbaseobjects.menuoptionsdata(context ).execute( out  GXt_objcol_SdtDVelop_Menu_Item3) ;
-         AV16DVelop_Menu = GXt_objcol_SdtDVelop_Menu_Item3;
+         GXt_objcol_SdtDVelop_Menu_Item4 = AV16DVelop_Menu;
+         new GeneXus.Programs.wwpbaseobjects.menuoptionsdata(context ).execute( out  GXt_objcol_SdtDVelop_Menu_Item4) ;
+         AV16DVelop_Menu = GXt_objcol_SdtDVelop_Menu_Item4;
          new GeneXus.Programs.wwpbaseobjects.getmenuauthorizedoptions(context ).execute( ref  AV16DVelop_Menu) ;
          AV20SystemContentLength = (short)(StringUtil.Len( AV19SystemContent));
          new GeneXus.Programs.workwithplus.ai.wwp_aigetqueryredirectionmenuoptions(context ).execute(  AV16DVelop_Menu,  "", ref  AV12LinkedPages, ref  AV19SystemContent) ;
@@ -269,15 +270,16 @@ namespace GeneXus.Programs.workwithplus.ai {
          AV19SystemContent = "";
          AV12LinkedPages = new GxSimpleCollection<string>();
          AV24WWP_AIListDatas = new GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData>( context, "WWP_AIListData", "YTT_version4");
-         AV27WWP_AIUserDatas = new GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData>( context, "WWP_AIListData", "YTT_version4");
          GXt_objcol_SdtWWP_AIListData1 = new GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData>( context, "WWP_AIListData", "YTT_version4");
+         AV27WWP_AIUserDatas = new GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData>( context, "WWP_AIListData", "YTT_version4");
+         GXt_objcol_SdtWWP_AIListData2 = new GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData>( context, "WWP_AIListData", "YTT_version4");
          AV23WWP_AIListData = new GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData(context);
          AV18ResponseText = "";
-         GXt_char2 = "";
+         GXt_char3 = "";
          AV26SDTResult = new GeneXus.Programs.wwpbaseobjects.SdtWWP_SDTResult(context);
          AV13ListName = "";
          AV16DVelop_Menu = new GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item>( context, "Item", "YTT_version4");
-         GXt_objcol_SdtDVelop_Menu_Item3 = new GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item>( context, "Item", "YTT_version4");
+         GXt_objcol_SdtDVelop_Menu_Item4 = new GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item>( context, "Item", "YTT_version4");
          AV17MenuOptionsToAnalize = new GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item>( context, "Item", "YTT_version4");
          AV14MenuOption = new GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item(context);
          AV15MenuOptionAux = new GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item(context);
@@ -290,7 +292,7 @@ namespace GeneXus.Programs.workwithplus.ai {
       private int AV29GXV2 ;
       private int AV30GXV3 ;
       private int AV31GXV4 ;
-      private string GXt_char2 ;
+      private string GXt_char3 ;
       private bool AV8DataAdded ;
       private bool returnInSub ;
       private bool AV10IsMenuOption ;
@@ -302,12 +304,13 @@ namespace GeneXus.Programs.workwithplus.ai {
       private string AV13ListName ;
       private GxSimpleCollection<string> AV12LinkedPages ;
       private GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData> AV24WWP_AIListDatas ;
-      private GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData> AV27WWP_AIUserDatas ;
       private GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData> GXt_objcol_SdtWWP_AIListData1 ;
+      private GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData> AV27WWP_AIUserDatas ;
+      private GXBaseCollection<GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData> GXt_objcol_SdtWWP_AIListData2 ;
       private GeneXus.Programs.workwithplus.ai.SdtWWP_AIListData AV23WWP_AIListData ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWP_SDTResult AV26SDTResult ;
       private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item> AV16DVelop_Menu ;
-      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item> GXt_objcol_SdtDVelop_Menu_Item3 ;
+      private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item> GXt_objcol_SdtDVelop_Menu_Item4 ;
       private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item> AV17MenuOptionsToAnalize ;
       private GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item AV14MenuOption ;
       private GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item AV15MenuOptionAux ;

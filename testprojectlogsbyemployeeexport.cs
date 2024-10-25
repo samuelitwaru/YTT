@@ -670,7 +670,7 @@ namespace GeneXus.Programs {
          }
          if ( String.IsNullOrEmpty(StringUtil.RTrim( AV50Testprojectlogsbyemployeeds_5_tfworkhourlogduration_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV49Testprojectlogsbyemployeeds_4_tfworkhourlogduration)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(T1.WorkHourLogDuration) like LOWER(:lV49Testprojectlogsbyemployeeds_4_tfworkhourlogduration))");
+            AddWhere(sWhereString, "(T1.WorkHourLogDuration like :lV49Testprojectlogsbyemployeeds_4_tfworkhourlogduration)");
          }
          else
          {
@@ -690,7 +690,7 @@ namespace GeneXus.Programs {
          }
          if ( String.IsNullOrEmpty(StringUtil.RTrim( AV52Testprojectlogsbyemployeeds_7_tfworkhourlogdescription_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV51Testprojectlogsbyemployeeds_6_tfworkhourlogdescription)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(T1.WorkHourLogDescription) like LOWER(:lV51Testprojectlogsbyemployeeds_6_tfworkhourlogdescription))");
+            AddWhere(sWhereString, "(T1.WorkHourLogDescription like :lV51Testprojectlogsbyemployeeds_6_tfworkhourlogdescription)");
          }
          else
          {
@@ -710,7 +710,7 @@ namespace GeneXus.Programs {
          }
          if ( String.IsNullOrEmpty(StringUtil.RTrim( AV54Testprojectlogsbyemployeeds_9_tfprojectname_sel)) && ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV53Testprojectlogsbyemployeeds_8_tfprojectname)) ) )
          {
-            AddWhere(sWhereString, "(LOWER(T2.ProjectName) like LOWER(:lV53Testprojectlogsbyemployeeds_8_tfprojectname))");
+            AddWhere(sWhereString, "(T2.ProjectName like :lV53Testprojectlogsbyemployeeds_8_tfprojectname)");
          }
          else
          {

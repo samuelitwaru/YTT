@@ -695,7 +695,7 @@ namespace GeneXus.Programs {
          scmdbuf = "SELECT EmployeeId, CompanyId, EmployeeBalance, EmployeeVactionDays, EmployeeIsActive, EmployeeIsManager, EmployeeEmail, EmployeeName, EmployeeFirstName FROM Employee";
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV62Employeewwds_1_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( EmployeeName like '%' || :lV62Employeewwds_1_filterfulltext) or ( EmployeeEmail like '%' || :lV62Employeewwds_1_filterfulltext) or ( SUBSTR(TO_CHAR(EmployeeVactionDays,'90.9'), 2) like '%' || :lV62Employeewwds_1_filterfulltext) or ( SUBSTR(TO_CHAR(EmployeeBalance,'90.9'), 2) like '%' || :lV62Employeewwds_1_filterfulltext))");
+            AddWhere(sWhereString, "(( LOWER(EmployeeName) like '%' || LOWER(:lV62Employeewwds_1_filterfulltext)) or ( LOWER(EmployeeEmail) like '%' || LOWER(:lV62Employeewwds_1_filterfulltext)) or ( SUBSTR(TO_CHAR(EmployeeVactionDays,'90.9'), 2) like '%' || :lV62Employeewwds_1_filterfulltext) or ( SUBSTR(TO_CHAR(EmployeeBalance,'90.9'), 2) like '%' || :lV62Employeewwds_1_filterfulltext))");
          }
          else
          {

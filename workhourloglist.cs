@@ -2397,7 +2397,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20249239502247", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024102512272332", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2413,7 +2413,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("workhourloglist.js", "?20249239502250", false, true);
+         context.AddJavascriptSource("workhourloglist.js", "?2024102512272335", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -3429,7 +3429,7 @@ namespace GeneXus.Programs {
          sOrderString = "";
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV58Workhourloglistds_1_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( T2.ProjectName like '%' || :lV58Workhourloglistds_1_filterfulltext))");
+            AddWhere(sWhereString, "(( LOWER(T2.ProjectName) like '%' || LOWER(:lV58Workhourloglistds_1_filterfulltext)))");
          }
          else
          {
@@ -3647,7 +3647,7 @@ namespace GeneXus.Programs {
          scmdbuf = "SELECT COUNT(*) FROM ((WorkHourLog T1 INNER JOIN Project T3 ON T3.ProjectId = T1.ProjectId) INNER JOIN Employee T2 ON T2.EmployeeId = T1.EmployeeId)";
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV58Workhourloglistds_1_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( T3.ProjectName like '%' || :lV58Workhourloglistds_1_filterfulltext))");
+            AddWhere(sWhereString, "(( LOWER(T3.ProjectName) like '%' || LOWER(:lV58Workhourloglistds_1_filterfulltext)))");
          }
          else
          {

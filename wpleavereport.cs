@@ -705,7 +705,7 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, divTableactions_Internalname, 1, 0, "px", 0, "px", "Flex", "start", "top", " "+"data-gx-flex"+" ", "", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "", "start", "top", "", "", "div");
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "", "start", "top", "", "align-self:center;", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-action-group ActionGroupGrouped", "start", "top", " "+"data-gx-actiongroup-type=\"toolbar\""+" ", "", "div");
             /* Div Control */
@@ -727,20 +727,27 @@ namespace GeneXus.Programs {
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "", "start", "top", "", "", "div");
-            wb_table1_19_2Z2( true) ;
-         }
-         else
-         {
-            wb_table1_19_2Z2( false) ;
-         }
-         return  ;
-      }
-
-      protected void wb_table1_19_2Z2e( bool wbgen )
-      {
-         if ( wbgen )
-         {
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "", "start", "top", "", "align-self:center;", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, divTablerightheader_Internalname, 1, 0, "px", 0, "px", "Flex", "start", "top", " "+"data-gx-flex"+" ", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "", "start", "top", "", "flex-grow:1;", "div");
+            /* User Defined Control */
+            ucDdo_managefilters.SetProperty("IconType", Ddo_managefilters_Icontype);
+            ucDdo_managefilters.SetProperty("Icon", Ddo_managefilters_Icon);
+            ucDdo_managefilters.SetProperty("Caption", Ddo_managefilters_Caption);
+            ucDdo_managefilters.SetProperty("Tooltip", Ddo_managefilters_Tooltip);
+            ucDdo_managefilters.SetProperty("Cls", Ddo_managefilters_Cls);
+            ucDdo_managefilters.SetProperty("DropDownOptionsData", AV24ManageFiltersData);
+            ucDdo_managefilters.Render(context, "dvelop.gxbootstrap.ddoregular", Ddo_managefilters_Internalname, "DDO_MANAGEFILTERSContainer");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "", "start", "top", "", "flex-grow:1;align-self:center;", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, divTablefilters_Internalname, 1, 0, "px", 0, "px", "TableFilters", "start", "top", " "+"data-gx-flex"+" ", "", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -1882,7 +1889,7 @@ namespace GeneXus.Programs {
          ucCombo_projectid.SendProperty(context, "", false, Combo_projectid_Internalname, "GAMOAuthToken", Combo_projectid_Gamoauthtoken);
          Combo_employeeid_Gamoauthtoken = AV45GAMSession.gxTpr_Token;
          ucCombo_employeeid.SendProperty(context, "", false, Combo_employeeid_Internalname, "GAMOAuthToken", Combo_employeeid_Gamoauthtoken);
-         subGrid_Rows = 20;
+         subGrid_Rows = 10;
          GxWebStd.gx_hidden_field( context, "GRID_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Rows), 6, 0, ".", "")));
          Grid_empowerer_Gridinternalname = subGrid_Internalname;
          ucGrid_empowerer.SendProperty(context, "", false, Grid_empowerer_Internalname, "GridInternalName", Grid_empowerer_Gridinternalname);
@@ -2546,37 +2553,6 @@ namespace GeneXus.Programs {
          ucCombo_periodiccategory.SendProperty(context, "", false, Combo_periodiccategory_Internalname, "SelectedValue_set", Combo_periodiccategory_Selectedvalue_set);
       }
 
-      protected void wb_table1_19_2Z2( bool wbgen )
-      {
-         if ( wbgen )
-         {
-            /* Table start */
-            sStyleString = "";
-            GxWebStd.gx_table_start( context, tblTablerightheader_Internalname, tblTablerightheader_Internalname, "", "Table", 0, "", "", 1, 2, sStyleString, "", "", 0);
-            context.WriteHtmlText( "<tr>") ;
-            context.WriteHtmlText( "<td>") ;
-            /* User Defined Control */
-            ucDdo_managefilters.SetProperty("IconType", Ddo_managefilters_Icontype);
-            ucDdo_managefilters.SetProperty("Icon", Ddo_managefilters_Icon);
-            ucDdo_managefilters.SetProperty("Caption", Ddo_managefilters_Caption);
-            ucDdo_managefilters.SetProperty("Tooltip", Ddo_managefilters_Tooltip);
-            ucDdo_managefilters.SetProperty("Cls", Ddo_managefilters_Cls);
-            ucDdo_managefilters.SetProperty("DropDownOptionsData", AV24ManageFiltersData);
-            ucDdo_managefilters.Render(context, "dvelop.gxbootstrap.ddoregular", Ddo_managefilters_Internalname, "DDO_MANAGEFILTERSContainer");
-            context.WriteHtmlText( "</td>") ;
-            context.WriteHtmlText( "<td>") ;
-            context.WriteHtmlText( "</td>") ;
-            context.WriteHtmlText( "</tr>") ;
-            /* End of table */
-            context.WriteHtmlText( "</table>") ;
-            wb_table1_19_2Z2e( true) ;
-         }
-         else
-         {
-            wb_table1_19_2Z2e( false) ;
-         }
-      }
-
       public override void setparameters( Object[] obj )
       {
          createObjects();
@@ -2626,7 +2602,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202491613195169", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024102512271172", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2642,7 +2618,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wpleavereport.js", "?202491613195172", false, true);
+         context.AddJavascriptSource("wpleavereport.js", "?2024102512271175", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -2993,7 +2969,8 @@ namespace GeneXus.Programs {
          bttBtneditcolumns_Internalname = "BTNEDITCOLUMNS";
          divTableactions_Internalname = "TABLEACTIONS";
          Ddo_managefilters_Internalname = "DDO_MANAGEFILTERS";
-         tblTablerightheader_Internalname = "TABLERIGHTHEADER";
+         divTablefilters_Internalname = "TABLEFILTERS";
+         divTablerightheader_Internalname = "TABLERIGHTHEADER";
          divTableheadercontent_Internalname = "TABLEHEADERCONTENT";
          divFiltertable_Internalname = "FILTERTABLE";
          edtavDate_rangetext_Internalname = "vDATE_RANGETEXT";
@@ -3270,6 +3247,8 @@ namespace GeneXus.Programs {
          StyleString = "";
          bttBtnagexport_Jsonclick = "";
          bttBtneditcolumns_Jsonclick = "";
+         ucDdo_managefilters = new GXUserControl();
+         Ddo_managefilters_Caption = "";
          AV51Date_RangeText = "";
          lblFiltertextperiodiccategory_Jsonclick = "";
          ucCombo_periodiccategory = new GXUserControl();
@@ -3315,8 +3294,6 @@ namespace GeneXus.Programs {
          AV17ExcelFilename = "";
          AV18ErrorMessage = "";
          GXt_char4 = "";
-         ucDdo_managefilters = new GXUserControl();
-         Ddo_managefilters_Caption = "";
          BackMsgLst = new msglist();
          LclMsgLst = new msglist();
          subGrid_Linesclass = "";
@@ -3491,6 +3468,10 @@ namespace GeneXus.Programs {
       private string bttBtnagexport_Jsonclick ;
       private string bttBtneditcolumns_Internalname ;
       private string bttBtneditcolumns_Jsonclick ;
+      private string divTablerightheader_Internalname ;
+      private string Ddo_managefilters_Caption ;
+      private string Ddo_managefilters_Internalname ;
+      private string divTablefilters_Internalname ;
       private string divFiltertable_Internalname ;
       private string divFiltertable2_Internalname ;
       private string edtavDate_rangetext_Internalname ;
@@ -3544,9 +3525,6 @@ namespace GeneXus.Programs {
       private string edtavSdtleavereport_periodcollection__formattedtotalwork_Internalname ;
       private string edtavSdtleavereport_periodcollection__formattedtotalleave_Internalname ;
       private string GXt_char4 ;
-      private string tblTablerightheader_Internalname ;
-      private string Ddo_managefilters_Caption ;
-      private string Ddo_managefilters_Internalname ;
       private string edtavSdtleavereport_periodcollection__mean_Internalname ;
       private string edtavSdtleavereport_periodcollection__number_Internalname ;
       private string edtavSdtleavereport_periodcollection__totalleave_Internalname ;
@@ -3609,6 +3587,7 @@ namespace GeneXus.Programs {
       private GXWebGrid GridContainer ;
       private GXWebRow GridRow ;
       private GXWebColumn GridColumn ;
+      private GXUserControl ucDdo_managefilters ;
       private GXUserControl ucCombo_periodiccategory ;
       private GXUserControl ucCombo_employeeid ;
       private GXUserControl ucCombo_projectid ;
@@ -3620,7 +3599,6 @@ namespace GeneXus.Programs {
       private GXUserControl ucDdo_grid ;
       private GXUserControl ucDdo_gridcolumnsselector ;
       private GXUserControl ucGrid_empowerer ;
-      private GXUserControl ucDdo_managefilters ;
       private GxHttpRequest AV10HTTPRequest ;
       private GXWebForm Form ;
       private IGxDataStore dsGAM ;

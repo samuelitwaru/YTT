@@ -2293,7 +2293,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202491981396", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024102512262991", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2309,7 +2309,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("companyww.js", "?202491981398", false, true);
+         context.AddJavascriptSource("companyww.js", "?2024102512262993", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -3126,7 +3126,7 @@ namespace GeneXus.Programs {
          sOrderString = "";
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV60Companywwds_1_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( T1.CompanyName like '%' || :lV60Companywwds_1_filterfulltext) or ( T2.CompanyLocationName like '%' || :lV60Companywwds_1_filterfulltext))");
+            AddWhere(sWhereString, "(( LOWER(T1.CompanyName) like '%' || LOWER(:lV60Companywwds_1_filterfulltext)) or ( LOWER(T2.CompanyLocationName) like '%' || LOWER(:lV60Companywwds_1_filterfulltext)))");
          }
          else
          {
@@ -3217,7 +3217,7 @@ namespace GeneXus.Programs {
          scmdbuf = "SELECT COUNT(*) FROM (Company T1 INNER JOIN CompanyLocation T2 ON T2.CompanyLocationId = T1.CompanyLocationId)";
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV60Companywwds_1_filterfulltext)) )
          {
-            AddWhere(sWhereString, "(( T1.CompanyName like '%' || :lV60Companywwds_1_filterfulltext) or ( T2.CompanyLocationName like '%' || :lV60Companywwds_1_filterfulltext))");
+            AddWhere(sWhereString, "(( LOWER(T1.CompanyName) like '%' || LOWER(:lV60Companywwds_1_filterfulltext)) or ( LOWER(T2.CompanyLocationName) like '%' || LOWER(:lV60Companywwds_1_filterfulltext)))");
          }
          else
          {

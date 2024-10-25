@@ -231,9 +231,6 @@ namespace GeneXus.Programs {
          AV46Sitesettingwwds_4_tfcompanyid = AV37TFCompanyId;
          AV47Sitesettingwwds_5_tfcompanyid_to = AV38TFCompanyId_To;
          AV48Sitesettingwwds_6_tfisloghouropen_sel = AV39TFIsLogHourOpen_Sel;
-         AV49Udparg7 = new getloggedinusercompanyid(context).executeUdp( );
-         AV49Udparg7 = new getloggedinusercompanyid(context).executeUdp( );
-         AV49Udparg7 = new getloggedinusercompanyid(context).executeUdp( );
          pr_default.dynParam(0, new Object[]{ new Object[]{
                                               AV43Sitesettingwwds_1_filterfulltext ,
                                               AV44Sitesettingwwds_2_tfsitesettingid ,
@@ -245,17 +242,15 @@ namespace GeneXus.Programs {
                                               A100CompanyId ,
                                               A161IsLogHourOpen ,
                                               AV17OrderedBy ,
-                                              AV18OrderedDsc ,
-                                              AV49Udparg7 } ,
+                                              AV18OrderedDsc } ,
                                               new int[]{
-                                              TypeConstants.LONG, TypeConstants.LONG, TypeConstants.LONG, TypeConstants.LONG, TypeConstants.SHORT, TypeConstants.LONG, TypeConstants.LONG, TypeConstants.BOOLEAN, TypeConstants.SHORT, TypeConstants.BOOLEAN,
-                                              TypeConstants.LONG
+                                              TypeConstants.LONG, TypeConstants.LONG, TypeConstants.LONG, TypeConstants.LONG, TypeConstants.SHORT, TypeConstants.LONG, TypeConstants.LONG, TypeConstants.BOOLEAN, TypeConstants.SHORT, TypeConstants.BOOLEAN
                                               }
          });
          lV43Sitesettingwwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV43Sitesettingwwds_1_filterfulltext), "%", "");
          lV43Sitesettingwwds_1_filterfulltext = StringUtil.Concat( StringUtil.RTrim( AV43Sitesettingwwds_1_filterfulltext), "%", "");
          /* Using cursor P00BC2 */
-         pr_default.execute(0, new Object[] {AV49Udparg7, lV43Sitesettingwwds_1_filterfulltext, lV43Sitesettingwwds_1_filterfulltext, AV44Sitesettingwwds_2_tfsitesettingid, AV45Sitesettingwwds_3_tfsitesettingid_to, AV46Sitesettingwwds_4_tfcompanyid, AV47Sitesettingwwds_5_tfcompanyid_to});
+         pr_default.execute(0, new Object[] {lV43Sitesettingwwds_1_filterfulltext, lV43Sitesettingwwds_1_filterfulltext, AV44Sitesettingwwds_2_tfsitesettingid, AV45Sitesettingwwds_3_tfsitesettingid_to, AV46Sitesettingwwds_4_tfcompanyid, AV47Sitesettingwwds_5_tfcompanyid_to});
          while ( (pr_default.getStatus(0) != 101) )
          {
             A161IsLogHourOpen = P00BC2_A161IsLogHourOpen[0];
@@ -271,10 +266,10 @@ namespace GeneXus.Programs {
                if (true) return;
             }
             AV32VisibleColumnCount = 0;
-            AV50GXV2 = 1;
-            while ( AV50GXV2 <= AV24ColumnsSelector.gxTpr_Columns.Count )
+            AV49GXV2 = 1;
+            while ( AV49GXV2 <= AV24ColumnsSelector.gxTpr_Columns.Count )
             {
-               AV26ColumnsSelector_Column = ((GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector_Column)AV24ColumnsSelector.gxTpr_Columns.Item(AV50GXV2));
+               AV26ColumnsSelector_Column = ((GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector_Column)AV24ColumnsSelector.gxTpr_Columns.Item(AV49GXV2));
                if ( AV26ColumnsSelector_Column.gxTpr_Isvisible )
                {
                   if ( StringUtil.StrCmp(AV26ColumnsSelector_Column.gxTpr_Columnname, "SiteSettingId") == 0 )
@@ -291,7 +286,7 @@ namespace GeneXus.Programs {
                   }
                   AV32VisibleColumnCount = (long)(AV32VisibleColumnCount+1);
                }
-               AV50GXV2 = (int)(AV50GXV2+1);
+               AV49GXV2 = (int)(AV49GXV2+1);
             }
             /* Execute user subroutine: 'AFTERWRITELINE' */
             S182 ();
@@ -366,10 +361,10 @@ namespace GeneXus.Programs {
          }
          AV17OrderedBy = AV22GridState.gxTpr_Orderedby;
          AV18OrderedDsc = AV22GridState.gxTpr_Ordereddsc;
-         AV51GXV3 = 1;
-         while ( AV51GXV3 <= AV22GridState.gxTpr_Filtervalues.Count )
+         AV50GXV3 = 1;
+         while ( AV50GXV3 <= AV22GridState.gxTpr_Filtervalues.Count )
          {
-            AV23GridStateFilterValue = ((GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue)AV22GridState.gxTpr_Filtervalues.Item(AV51GXV3));
+            AV23GridStateFilterValue = ((GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue)AV22GridState.gxTpr_Filtervalues.Item(AV50GXV3));
             if ( StringUtil.StrCmp(AV23GridStateFilterValue.gxTpr_Name, "FILTERFULLTEXT") == 0 )
             {
                AV19FilterFullText = AV23GridStateFilterValue.gxTpr_Value;
@@ -388,7 +383,7 @@ namespace GeneXus.Programs {
             {
                AV39TFIsLogHourOpen_Sel = (short)(Math.Round(NumberUtil.Val( AV23GridStateFilterValue.gxTpr_Value, "."), 18, MidpointRounding.ToEven));
             }
-            AV51GXV3 = (int)(AV51GXV3+1);
+            AV50GXV3 = (int)(AV50GXV3+1);
          }
       }
 
@@ -453,8 +448,8 @@ namespace GeneXus.Programs {
       private int AV15FirstColumn ;
       private int AV16Random ;
       private int AV41GXV1 ;
-      private int AV50GXV2 ;
-      private int AV51GXV3 ;
+      private int AV49GXV2 ;
+      private int AV50GXV3 ;
       private long AV35TFSiteSettingId ;
       private long AV36TFSiteSettingId_To ;
       private long AV37TFCompanyId ;
@@ -464,7 +459,6 @@ namespace GeneXus.Programs {
       private long AV45Sitesettingwwds_3_tfsitesettingid_to ;
       private long AV46Sitesettingwwds_4_tfcompanyid ;
       private long AV47Sitesettingwwds_5_tfcompanyid_to ;
-      private long AV49Udparg7 ;
       private long A160SiteSettingId ;
       private long A100CompanyId ;
       private string GXt_char1 ;
@@ -509,23 +503,21 @@ namespace GeneXus.Programs {
                                              long A100CompanyId ,
                                              bool A161IsLogHourOpen ,
                                              short AV17OrderedBy ,
-                                             bool AV18OrderedDsc ,
-                                             long AV49Udparg7 )
+                                             bool AV18OrderedDsc )
       {
          System.Text.StringBuilder sWhereString = new System.Text.StringBuilder();
          string scmdbuf;
-         short[] GXv_int3 = new short[7];
+         short[] GXv_int3 = new short[6];
          Object[] GXv_Object4 = new Object[2];
          scmdbuf = "SELECT IsLogHourOpen, CompanyId, SiteSettingId FROM SiteSetting";
-         AddWhere(sWhereString, "(CompanyId = :AV49Udparg7)");
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV43Sitesettingwwds_1_filterfulltext)) )
          {
             AddWhere(sWhereString, "(( SUBSTR(TO_CHAR(SiteSettingId,'9999999999'), 2) like '%' || :lV43Sitesettingwwds_1_filterfulltext) or ( SUBSTR(TO_CHAR(CompanyId,'9999999999'), 2) like '%' || :lV43Sitesettingwwds_1_filterfulltext))");
          }
          else
          {
+            GXv_int3[0] = 1;
             GXv_int3[1] = 1;
-            GXv_int3[2] = 1;
          }
          if ( ! (0==AV44Sitesettingwwds_2_tfsitesettingid) )
          {
@@ -533,7 +525,7 @@ namespace GeneXus.Programs {
          }
          else
          {
-            GXv_int3[3] = 1;
+            GXv_int3[2] = 1;
          }
          if ( ! (0==AV45Sitesettingwwds_3_tfsitesettingid_to) )
          {
@@ -541,7 +533,7 @@ namespace GeneXus.Programs {
          }
          else
          {
-            GXv_int3[4] = 1;
+            GXv_int3[3] = 1;
          }
          if ( ! (0==AV46Sitesettingwwds_4_tfcompanyid) )
          {
@@ -549,7 +541,7 @@ namespace GeneXus.Programs {
          }
          else
          {
-            GXv_int3[5] = 1;
+            GXv_int3[4] = 1;
          }
          if ( ! (0==AV47Sitesettingwwds_5_tfcompanyid_to) )
          {
@@ -557,7 +549,7 @@ namespace GeneXus.Programs {
          }
          else
          {
-            GXv_int3[6] = 1;
+            GXv_int3[5] = 1;
          }
          if ( AV48Sitesettingwwds_6_tfisloghouropen_sel == 1 )
          {
@@ -604,7 +596,7 @@ namespace GeneXus.Programs {
          switch ( cursor )
          {
                case 0 :
-                     return conditional_P00BC2(context, (string)dynConstraints[0] , (long)dynConstraints[1] , (long)dynConstraints[2] , (long)dynConstraints[3] , (long)dynConstraints[4] , (short)dynConstraints[5] , (long)dynConstraints[6] , (long)dynConstraints[7] , (bool)dynConstraints[8] , (short)dynConstraints[9] , (bool)dynConstraints[10] , (long)dynConstraints[11] );
+                     return conditional_P00BC2(context, (string)dynConstraints[0] , (long)dynConstraints[1] , (long)dynConstraints[2] , (long)dynConstraints[3] , (long)dynConstraints[4] , (short)dynConstraints[5] , (long)dynConstraints[6] , (long)dynConstraints[7] , (bool)dynConstraints[8] , (short)dynConstraints[9] , (bool)dynConstraints[10] );
          }
          return base.getDynamicStatement(cursor, context, dynConstraints);
       }
@@ -624,7 +616,6 @@ namespace GeneXus.Programs {
        {
           Object[] prmP00BC2;
           prmP00BC2 = new Object[] {
-          new ParDef("AV49Udparg7",GXType.Int64,10,0) ,
           new ParDef("lV43Sitesettingwwds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("lV43Sitesettingwwds_1_filterfulltext",GXType.VarChar,100,0) ,
           new ParDef("AV44Sitesettingwwds_2_tfsitesettingid",GXType.Int64,10,0) ,

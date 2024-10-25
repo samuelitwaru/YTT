@@ -489,6 +489,18 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
             /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-sm-3 hidden-sm", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, divTableleft_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-md-6", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, divTablecenter_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
             ClassString = "ErrorViewer";
             StyleString = "";
@@ -500,19 +512,7 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, divMaintable_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-3 hidden-xs hidden-sm", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, divLefttable_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-md-6", "Center", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, divTablecontent_Internalname, 1, divTablecontent_Width, "px", 0, "px", "CellMarginTop10", "start", "top", "", "", "div");
+            GxWebStd.gx_div_start( context, divTablecontent_Internalname, 1, 0, "px", 0, "px", "CellMarginTop10", "start", "top", "", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
             /* Div Control */
@@ -638,10 +638,13 @@ namespace GeneXus.Programs {
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 CellMarginTop", "start", "top", "", "", "div");
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-lg-9 CellMarginTop", "start", "top", "", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, divTableleaflevel_project_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
             /* Div Control */
@@ -728,14 +731,11 @@ namespace GeneXus.Programs {
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "Center", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-3 hidden-xs hidden-sm", "start", "top", "", "", "div");
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-sm-3 hidden-sm", "start", "top", "", "", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, divRighttable_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_start( context, divTableright_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -1597,8 +1597,6 @@ namespace GeneXus.Programs {
                GX_msglist.addItem("Confirm deletion.");
             }
          }
-         divTablecontent_Width = 500;
-         AssignProp("", false, divTablecontent_Internalname, "Width", StringUtil.LTrimStr( (decimal)(divTablecontent_Width), 9, 0), true);
          edtavEmployee_employeeid_Visible = 0;
          AssignProp("", false, edtavEmployee_employeeid_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtavEmployee_employeeid_Visible), 5, 0), true);
          edtavEmployee_employeename_Visible = 0;
@@ -1950,7 +1948,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202491613193354", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024102512265317", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1966,7 +1964,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("createemployee.js", "?202491613193354", false, true);
+         context.AddJavascriptSource("createemployee.js", "?2024102512265317", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/GridEmpowerer/GridEmpowererRender.js", "", false, true);
          /* End function include_jscripts */
@@ -2212,7 +2210,7 @@ namespace GeneXus.Programs {
 
       protected void init_default_properties( )
       {
-         divLefttable_Internalname = "LEFTTABLE";
+         divTableleft_Internalname = "TABLELEFT";
          edtavEmployee_employeefirstname_Internalname = "EMPLOYEE_EMPLOYEEFIRSTNAME";
          edtavEmployee_employeelastname_Internalname = "EMPLOYEE_EMPLOYEELASTNAME";
          edtavEmployee_employeeemail_Internalname = "EMPLOYEE_EMPLOYEEEMAIL";
@@ -2221,6 +2219,7 @@ namespace GeneXus.Programs {
          chkavEmployee_employeeisactive_Internalname = "EMPLOYEE_EMPLOYEEISACTIVE";
          edtavEmployee_employeevactiondays_Internalname = "EMPLOYEE_EMPLOYEEVACTIONDAYS";
          divTableattributes_Internalname = "TABLEATTRIBUTES";
+         divTablecontent_Internalname = "TABLECONTENT";
          edtavDeletegridlinegridlevel_project_Internalname = "vDELETEGRIDLINEGRIDLEVEL_PROJECT";
          dynavEmployee_project__projectid_Internalname = "EMPLOYEE_PROJECT__PROJECTID";
          edtavEmployee_project__projectname_Internalname = "EMPLOYEE_PROJECT__PROJECTNAME";
@@ -2229,9 +2228,8 @@ namespace GeneXus.Programs {
          bttBtnenter_Internalname = "BTNENTER";
          bttBtncancel_Internalname = "BTNCANCEL";
          bttBtnuseraction1_Internalname = "BTNUSERACTION1";
-         divTablecontent_Internalname = "TABLECONTENT";
-         divRighttable_Internalname = "RIGHTTABLE";
-         divMaintable_Internalname = "MAINTABLE";
+         divTablecenter_Internalname = "TABLECENTER";
+         divTableright_Internalname = "TABLERIGHT";
          divTablemain_Internalname = "TABLEMAIN";
          edtavEmployee_employeeid_Internalname = "EMPLOYEE_EMPLOYEEID";
          edtavEmployee_employeename_Internalname = "EMPLOYEE_EMPLOYEENAME";
@@ -2305,7 +2303,6 @@ namespace GeneXus.Programs {
          edtavEmployee_employeelastname_Enabled = 1;
          edtavEmployee_employeefirstname_Jsonclick = "";
          edtavEmployee_employeefirstname_Enabled = 1;
-         divTablecontent_Width = 0;
          divLayoutmaintable_Class = "Table TableTransactionTemplate";
          Form.Headerrawhtml = "";
          Form.Background = "";
@@ -2457,7 +2454,6 @@ namespace GeneXus.Programs {
       private int nRC_GXsfl_58 ;
       private int subGridlevel_project_Rows ;
       private int nGXsfl_58_idx=1 ;
-      private int divTablecontent_Width ;
       private int edtavEmployee_employeefirstname_Enabled ;
       private int edtavEmployee_employeelastname_Enabled ;
       private int edtavEmployee_employeeemail_Enabled ;
@@ -2505,10 +2501,10 @@ namespace GeneXus.Programs {
       private string divLayoutmaintable_Internalname ;
       private string divLayoutmaintable_Class ;
       private string divTablemain_Internalname ;
+      private string divTableleft_Internalname ;
+      private string divTablecenter_Internalname ;
       private string ClassString ;
       private string StyleString ;
-      private string divMaintable_Internalname ;
-      private string divLefttable_Internalname ;
       private string divTablecontent_Internalname ;
       private string divTableattributes_Internalname ;
       private string edtavEmployee_employeefirstname_Internalname ;
@@ -2535,7 +2531,7 @@ namespace GeneXus.Programs {
       private string bttBtncancel_Jsonclick ;
       private string bttBtnuseraction1_Internalname ;
       private string bttBtnuseraction1_Jsonclick ;
-      private string divRighttable_Internalname ;
+      private string divTableright_Internalname ;
       private string divHtml_bottomauxiliarcontrols_Internalname ;
       private string edtavEmployee_employeeid_Internalname ;
       private string edtavEmployee_employeeid_Jsonclick ;

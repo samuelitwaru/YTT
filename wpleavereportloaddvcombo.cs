@@ -457,7 +457,7 @@ namespace GeneXus.Programs {
          sOrderString = "";
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV14SearchTxt)) )
          {
-            AddWhere(sWhereString, "(LOWER(EmployeeFirstName) like '%' || LOWER(:lV14SearchTxt))");
+            AddWhere(sWhereString, "(EmployeeFirstName like '%' || :lV14SearchTxt)");
          }
          else
          {
@@ -486,7 +486,7 @@ namespace GeneXus.Programs {
          sOrderString = "";
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV14SearchTxt)) )
          {
-            AddWhere(sWhereString, "(LOWER(ProjectName) like '%' || LOWER(:lV14SearchTxt))");
+            AddWhere(sWhereString, "(ProjectName like '%' || :lV14SearchTxt)");
          }
          else
          {
@@ -515,7 +515,7 @@ namespace GeneXus.Programs {
          sOrderString = "";
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV14SearchTxt)) )
          {
-            AddWhere(sWhereString, "(LOWER(CompanyLocationName) like '%' || LOWER(:lV14SearchTxt))");
+            AddWhere(sWhereString, "(CompanyLocationName like '%' || :lV14SearchTxt)");
          }
          else
          {
