@@ -69,11 +69,11 @@ namespace GeneXus.Programs {
          AV11Minutes = (short)(((int)((AV8TimeInMins) % (60))));
          if ( AV11Minutes < 10 )
          {
-            AV9FormattedTime = StringUtil.Trim( StringUtil.Str( (decimal)(AV10Hours), 5, 0)) + ":0" + StringUtil.Trim( StringUtil.Str( (decimal)(AV11Minutes), 4, 0));
+            AV9FormattedTime = StringUtil.Trim( StringUtil.Str( (decimal)(AV10Hours), 8, 0)) + ":0" + StringUtil.Trim( StringUtil.Str( (decimal)(AV11Minutes), 4, 0));
          }
          else
          {
-            AV9FormattedTime = StringUtil.Trim( StringUtil.Str( (decimal)(AV10Hours), 5, 0)) + ":" + StringUtil.Trim( StringUtil.Str( (decimal)(AV11Minutes), 4, 0));
+            AV9FormattedTime = StringUtil.Trim( StringUtil.Str( (decimal)(AV10Hours), 8, 0)) + ":" + StringUtil.Trim( StringUtil.Str( (decimal)(AV11Minutes), 4, 0));
          }
          cleanup();
       }
