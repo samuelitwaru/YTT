@@ -63,6 +63,7 @@ namespace GeneXus.Programs {
          state.Add("gxTpr_Initialized");
          state.Add("gxTpr_Projectid_Z");
          state.Add("gxTpr_Projectname_Z");
+         state.Add("gxTpr_Employeeisactiveinproject_Z");
          return state ;
       }
 
@@ -72,11 +73,13 @@ namespace GeneXus.Programs {
          sdt = (SdtEmployee_Project)(source);
          gxTv_SdtEmployee_Project_Projectid = sdt.gxTv_SdtEmployee_Project_Projectid ;
          gxTv_SdtEmployee_Project_Projectname = sdt.gxTv_SdtEmployee_Project_Projectname ;
+         gxTv_SdtEmployee_Project_Employeeisactiveinproject = sdt.gxTv_SdtEmployee_Project_Employeeisactiveinproject ;
          gxTv_SdtEmployee_Project_Mode = sdt.gxTv_SdtEmployee_Project_Mode ;
          gxTv_SdtEmployee_Project_Modified = sdt.gxTv_SdtEmployee_Project_Modified ;
          gxTv_SdtEmployee_Project_Initialized = sdt.gxTv_SdtEmployee_Project_Initialized ;
          gxTv_SdtEmployee_Project_Projectid_Z = sdt.gxTv_SdtEmployee_Project_Projectid_Z ;
          gxTv_SdtEmployee_Project_Projectname_Z = sdt.gxTv_SdtEmployee_Project_Projectname_Z ;
+         gxTv_SdtEmployee_Project_Employeeisactiveinproject_Z = sdt.gxTv_SdtEmployee_Project_Employeeisactiveinproject_Z ;
          return  ;
       }
 
@@ -97,6 +100,7 @@ namespace GeneXus.Programs {
       {
          AddObjectProperty("ProjectId", gxTv_SdtEmployee_Project_Projectid, false, includeNonInitialized);
          AddObjectProperty("ProjectName", gxTv_SdtEmployee_Project_Projectname, false, includeNonInitialized);
+         AddObjectProperty("EmployeeIsActiveInProject", gxTv_SdtEmployee_Project_Employeeisactiveinproject, false, includeNonInitialized);
          if ( includeState )
          {
             AddObjectProperty("Mode", gxTv_SdtEmployee_Project_Mode, false, includeNonInitialized);
@@ -104,6 +108,7 @@ namespace GeneXus.Programs {
             AddObjectProperty("Initialized", gxTv_SdtEmployee_Project_Initialized, false, includeNonInitialized);
             AddObjectProperty("ProjectId_Z", gxTv_SdtEmployee_Project_Projectid_Z, false, includeNonInitialized);
             AddObjectProperty("ProjectName_Z", gxTv_SdtEmployee_Project_Projectname_Z, false, includeNonInitialized);
+            AddObjectProperty("EmployeeIsActiveInProject_Z", gxTv_SdtEmployee_Project_Employeeisactiveinproject_Z, false, includeNonInitialized);
          }
          return  ;
       }
@@ -119,6 +124,11 @@ namespace GeneXus.Programs {
          {
             sdtIsNull = 0;
             gxTv_SdtEmployee_Project_Projectname = sdt.gxTv_SdtEmployee_Project_Projectname ;
+         }
+         if ( sdt.IsDirty("EmployeeIsActiveInProject") )
+         {
+            sdtIsNull = 0;
+            gxTv_SdtEmployee_Project_Employeeisactiveinproject = sdt.gxTv_SdtEmployee_Project_Employeeisactiveinproject ;
          }
          return  ;
       }
@@ -153,6 +163,23 @@ namespace GeneXus.Programs {
             gxTv_SdtEmployee_Project_Projectname = value;
             gxTv_SdtEmployee_Project_Modified = 1;
             SetDirty("Projectname");
+         }
+
+      }
+
+      [  SoapElement( ElementName = "EmployeeIsActiveInProject" )]
+      [  XmlElement( ElementName = "EmployeeIsActiveInProject"   )]
+      public bool gxTpr_Employeeisactiveinproject
+      {
+         get {
+            return gxTv_SdtEmployee_Project_Employeeisactiveinproject ;
+         }
+
+         set {
+            sdtIsNull = 0;
+            gxTv_SdtEmployee_Project_Employeeisactiveinproject = value;
+            gxTv_SdtEmployee_Project_Modified = 1;
+            SetDirty("Employeeisactiveinproject");
          }
 
       }
@@ -300,6 +327,35 @@ namespace GeneXus.Programs {
          return false ;
       }
 
+      [  SoapElement( ElementName = "EmployeeIsActiveInProject_Z" )]
+      [  XmlElement( ElementName = "EmployeeIsActiveInProject_Z"   )]
+      public bool gxTpr_Employeeisactiveinproject_Z
+      {
+         get {
+            return gxTv_SdtEmployee_Project_Employeeisactiveinproject_Z ;
+         }
+
+         set {
+            sdtIsNull = 0;
+            gxTv_SdtEmployee_Project_Employeeisactiveinproject_Z = value;
+            gxTv_SdtEmployee_Project_Modified = 1;
+            SetDirty("Employeeisactiveinproject_Z");
+         }
+
+      }
+
+      public void gxTv_SdtEmployee_Project_Employeeisactiveinproject_Z_SetNull( )
+      {
+         gxTv_SdtEmployee_Project_Employeeisactiveinproject_Z = false;
+         SetDirty("Employeeisactiveinproject_Z");
+         return  ;
+      }
+
+      public bool gxTv_SdtEmployee_Project_Employeeisactiveinproject_Z_IsNull( )
+      {
+         return false ;
+      }
+
       [XmlIgnore]
       private static GXTypeInfo _typeProps;
       protected override GXTypeInfo TypeInfo
@@ -318,6 +374,7 @@ namespace GeneXus.Programs {
       {
          sdtIsNull = 1;
          gxTv_SdtEmployee_Project_Projectname = "";
+         gxTv_SdtEmployee_Project_Employeeisactiveinproject = true;
          gxTv_SdtEmployee_Project_Mode = "";
          gxTv_SdtEmployee_Project_Projectname_Z = "";
          return  ;
@@ -336,6 +393,8 @@ namespace GeneXus.Programs {
       private string gxTv_SdtEmployee_Project_Projectname ;
       private string gxTv_SdtEmployee_Project_Mode ;
       private string gxTv_SdtEmployee_Project_Projectname_Z ;
+      private bool gxTv_SdtEmployee_Project_Employeeisactiveinproject ;
+      private bool gxTv_SdtEmployee_Project_Employeeisactiveinproject_Z ;
    }
 
    [DataContract(Name = @"Employee.Project", Namespace = "YTT_version4")]
@@ -374,6 +433,20 @@ namespace GeneXus.Programs {
 
          set {
             sdt.gxTpr_Projectname = value;
+         }
+
+      }
+
+      [DataMember( Name = "EmployeeIsActiveInProject" , Order = 2 )]
+      [GxSeudo()]
+      public bool gxTpr_Employeeisactiveinproject
+      {
+         get {
+            return sdt.gxTpr_Employeeisactiveinproject ;
+         }
+
+         set {
+            sdt.gxTpr_Employeeisactiveinproject = value;
          }
 
       }

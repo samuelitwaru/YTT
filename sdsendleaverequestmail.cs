@@ -104,6 +104,7 @@ namespace GeneXus.Programs {
          pr_default.execute(0, new Object[] {AV22EmployeeId});
          while ( (pr_default.getStatus(0) != 101) )
          {
+            A184EmployeeIsActiveInProject = P007J2_A184EmployeeIsActiveInProject[0];
             A106EmployeeId = P007J2_A106EmployeeId[0];
             A102ProjectId = P007J2_A102ProjectId[0];
             AV23ProjectIds.Add(A102ProjectId, 0);
@@ -173,6 +174,7 @@ namespace GeneXus.Programs {
       {
          AV8GAMUser = new GeneXus.Programs.genexussecurity.SdtGAMUser(context);
          AV9Employee = new SdtEmployee(context);
+         P007J2_A184EmployeeIsActiveInProject = new bool[] {false} ;
          P007J2_A106EmployeeId = new long[1] ;
          P007J2_A102ProjectId = new long[1] ;
          AV23ProjectIds = new GxSimpleCollection<long>();
@@ -196,7 +198,7 @@ namespace GeneXus.Programs {
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.sdsendleaverequestmail__default(),
             new Object[][] {
                 new Object[] {
-               P007J2_A106EmployeeId, P007J2_A102ProjectId
+               P007J2_A184EmployeeIsActiveInProject, P007J2_A106EmployeeId, P007J2_A102ProjectId
                }
                , new Object[] {
                P007J3_A166ProjectManagerId, P007J3_n166ProjectManagerId, P007J3_A177ProjectManagerIsActive, P007J3_A102ProjectId, P007J3_A176ProjectManagerEmail
@@ -219,6 +221,7 @@ namespace GeneXus.Programs {
       private string AV20EmployeeName ;
       private DateTime AV16LeaveRequestStartDate ;
       private DateTime AV17LeaveRequestEndDate ;
+      private bool A184EmployeeIsActiveInProject ;
       private bool A177ProjectManagerIsActive ;
       private bool n166ProjectManagerId ;
       private bool A112EmployeeIsActive ;
@@ -235,6 +238,7 @@ namespace GeneXus.Programs {
       private GeneXus.Programs.genexussecurity.SdtGAMUser AV8GAMUser ;
       private SdtEmployee AV9Employee ;
       private IDataStoreProvider pr_default ;
+      private bool[] P007J2_A184EmployeeIsActiveInProject ;
       private long[] P007J2_A106EmployeeId ;
       private long[] P007J2_A102ProjectId ;
       private GxSimpleCollection<long> AV23ProjectIds ;
@@ -309,7 +313,7 @@ namespace GeneXus.Programs {
           prmP007J3 = new Object[] {
           };
           def= new CursorDef[] {
-              new CursorDef("P007J2", "SELECT EmployeeId, ProjectId FROM EmployeeProject WHERE EmployeeId = :AV22EmployeeId ORDER BY EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP007J2,100, GxCacheFrequency.OFF ,false,false )
+              new CursorDef("P007J2", "SELECT EmployeeIsActiveInProject, EmployeeId, ProjectId FROM EmployeeProject WHERE (EmployeeId = :AV22EmployeeId) AND (EmployeeIsActiveInProject = TRUE) ORDER BY EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP007J2,100, GxCacheFrequency.OFF ,false,false )
              ,new CursorDef("P007J3", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP007J3,100, GxCacheFrequency.OFF ,false,false )
              ,new CursorDef("P007J4", "SELECT EmployeeIsActive, EmployeeIsManager, CompanyId, EmployeeEmail, EmployeeId FROM Employee WHERE (CompanyId = :AV9Employee__Companyid) AND (EmployeeIsManager = TRUE) AND (EmployeeIsActive = TRUE) ORDER BY CompanyId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP007J4,100, GxCacheFrequency.OFF ,false,false )
           };
@@ -323,8 +327,9 @@ namespace GeneXus.Programs {
        switch ( cursor )
        {
              case 0 :
-                ((long[]) buf[0])[0] = rslt.getLong(1);
+                ((bool[]) buf[0])[0] = rslt.getBool(1);
                 ((long[]) buf[1])[0] = rslt.getLong(2);
+                ((long[]) buf[2])[0] = rslt.getLong(3);
                 return;
              case 1 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);

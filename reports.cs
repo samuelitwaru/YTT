@@ -1152,7 +1152,6 @@ namespace GeneXus.Programs {
       {
          /* Start Routine */
          returnInSub = false;
-         AV59OneProjectId = 78;
          AV54View = 1;
          AssignAttri("", false, "AV54View", StringUtil.LTrimStr( (decimal)(AV54View), 4, 0));
          AV56ShowLeaveTotal = false;
@@ -1595,7 +1594,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202410251227954", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024103115524823", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1611,7 +1610,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("reports.js", "?202410251227956", false, true);
+         context.AddJavascriptSource("reports.js", "?2024103115524826", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -1890,7 +1889,6 @@ namespace GeneXus.Programs {
       private short AV54View ;
       private short nDonePA ;
       private short gxcookieaux ;
-      private short AV59OneProjectId ;
       private short nGXWrapped ;
       private int Pivottable1_Currentproject ;
       private int divOverviewtable_Visible ;

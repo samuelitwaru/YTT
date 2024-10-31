@@ -190,6 +190,14 @@
                   </Property>
                 </Properties>
               </Field>
+              <Field name="EmployeeIsActiveInProject" description="Employee Is Active In Project">
+                <Properties>
+                  <Property>
+                    <Name>Type</Name>
+                    <Value>Boolean</Value>
+                  </Property>
+                </Properties>
+              </Field>
             </Fields>
           </Field>
         </Fields>

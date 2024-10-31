@@ -73,15 +73,17 @@ namespace GeneXus.Programs {
          /* Output device settings */
          pr_default.dynParam(0, new Object[]{ new Object[]{
                                               A102ProjectId ,
-                                              AV11ProjectIds } ,
+                                              AV11ProjectIds ,
+                                              A184EmployeeIsActiveInProject } ,
                                               new int[]{
-                                              TypeConstants.LONG
+                                              TypeConstants.LONG, TypeConstants.BOOLEAN
                                               }
          });
          /* Using cursor P00982 */
          pr_default.execute(0);
          while ( (pr_default.getStatus(0) != 101) )
          {
+            A184EmployeeIsActiveInProject = P00982_A184EmployeeIsActiveInProject[0];
             A102ProjectId = P00982_A102ProjectId[0];
             A106EmployeeId = P00982_A106EmployeeId[0];
             AV10EmployeeIds.Add(A106EmployeeId, 0);
@@ -104,12 +106,13 @@ namespace GeneXus.Programs {
       public override void initialize( )
       {
          AV10EmployeeIds = new GxSimpleCollection<long>();
+         P00982_A184EmployeeIsActiveInProject = new bool[] {false} ;
          P00982_A102ProjectId = new long[1] ;
          P00982_A106EmployeeId = new long[1] ;
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.getemployeeidsbyproject__default(),
             new Object[][] {
                 new Object[] {
-               P00982_A102ProjectId, P00982_A106EmployeeId
+               P00982_A184EmployeeIsActiveInProject, P00982_A102ProjectId, P00982_A106EmployeeId
                }
             }
          );
@@ -118,11 +121,13 @@ namespace GeneXus.Programs {
 
       private long A102ProjectId ;
       private long A106EmployeeId ;
+      private bool A184EmployeeIsActiveInProject ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private GxSimpleCollection<long> AV11ProjectIds ;
       private GxSimpleCollection<long> AV10EmployeeIds ;
       private IDataStoreProvider pr_default ;
+      private bool[] P00982_A184EmployeeIsActiveInProject ;
       private long[] P00982_A102ProjectId ;
       private long[] P00982_A106EmployeeId ;
       private GxSimpleCollection<long> aP1_EmployeeIds ;
@@ -132,13 +137,15 @@ namespace GeneXus.Programs {
    {
       protected Object[] conditional_P00982( IGxContext context ,
                                              long A102ProjectId ,
-                                             GxSimpleCollection<long> AV11ProjectIds )
+                                             GxSimpleCollection<long> AV11ProjectIds ,
+                                             bool A184EmployeeIsActiveInProject )
       {
          System.Text.StringBuilder sWhereString = new System.Text.StringBuilder();
          string scmdbuf;
          Object[] GXv_Object1 = new Object[2];
-         scmdbuf = "SELECT ProjectId, EmployeeId FROM EmployeeProject";
+         scmdbuf = "SELECT EmployeeIsActiveInProject, ProjectId, EmployeeId FROM EmployeeProject";
          AddWhere(sWhereString, "("+new GxDbmsUtils( new GxPostgreSql()).ValueList(AV11ProjectIds, "ProjectId IN (", ")")+")");
+         AddWhere(sWhereString, "(EmployeeIsActiveInProject = TRUE)");
          scmdbuf += sWhereString;
          scmdbuf += " ORDER BY ProjectId";
          GXv_Object1[0] = scmdbuf;
@@ -152,7 +159,7 @@ namespace GeneXus.Programs {
          switch ( cursor )
          {
                case 0 :
-                     return conditional_P00982(context, (long)dynConstraints[0] , (GxSimpleCollection<long>)dynConstraints[1] );
+                     return conditional_P00982(context, (long)dynConstraints[0] , (GxSimpleCollection<long>)dynConstraints[1] , (bool)dynConstraints[2] );
          }
          return base.getDynamicStatement(cursor, context, dynConstraints);
       }
@@ -186,8 +193,9 @@ namespace GeneXus.Programs {
        switch ( cursor )
        {
              case 0 :
-                ((long[]) buf[0])[0] = rslt.getLong(1);
+                ((bool[]) buf[0])[0] = rslt.getBool(1);
                 ((long[]) buf[1])[0] = rslt.getLong(2);
+                ((long[]) buf[2])[0] = rslt.getLong(3);
                 return;
        }
     }
