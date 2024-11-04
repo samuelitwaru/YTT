@@ -26,6 +26,8 @@ wwpbaseobjects\subscriptions\wwp_subscription
 wwpbaseobjects\wwp_entity
 workwithplus\wwp_parameter
 wwpbaseobjects\wwp_userextended
+wp_leavebalancereport
+wp_leavebalancereport
 login
 leaverequestlist
 trnnewview

@@ -149,6 +149,15 @@ namespace GeneXus.Programs.wwpbaseobjects {
          Gxm3dvelop_menu_subitems.gxTpr_Linktarget = "";
          Gxm3dvelop_menu_subitems.gxTpr_Iconclass = "";
          Gxm3dvelop_menu_subitems.gxTpr_Caption = "Employee Week Hours";
+         Gxm3dvelop_menu_subitems = new GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item(context);
+         Gxm1dvelop_menu.gxTpr_Subitems.Add(Gxm3dvelop_menu_subitems, 0);
+         AV5id = (short)(AV5id+1);
+         Gxm3dvelop_menu_subitems.gxTpr_Id = StringUtil.Str( (decimal)(AV5id), 4, 0);
+         Gxm3dvelop_menu_subitems.gxTpr_Tooltip = "";
+         Gxm3dvelop_menu_subitems.gxTpr_Link = formatLink("wp_leavebalancereport.aspx") ;
+         Gxm3dvelop_menu_subitems.gxTpr_Linktarget = "";
+         Gxm3dvelop_menu_subitems.gxTpr_Iconclass = "";
+         Gxm3dvelop_menu_subitems.gxTpr_Caption = "Leave Balance Report";
          Gxm1dvelop_menu = new GeneXus.Programs.wwpbaseobjects.SdtDVelop_Menu_Item(context);
          Gxm2rootcol.Add(Gxm1dvelop_menu, 0);
          AV5id = (short)(AV5id+1);
