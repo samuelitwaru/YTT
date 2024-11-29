@@ -55,6 +55,7 @@ namespace GeneXus.Programs {
          if ( (pr_default.getStatus(5) != 101) )
          {
             RcdFound19 = 1;
+            A147EmployeeBalance = BC000H7_A147EmployeeBalance[0];
             A118WorkHourLogId = BC000H7_A118WorkHourLogId[0];
             A119WorkHourLogDate = BC000H7_A119WorkHourLogDate[0];
             A120WorkHourLogDuration = BC000H7_A120WorkHourLogDuration[0];
@@ -81,6 +82,7 @@ namespace GeneXus.Programs {
             if ( (pr_default.getStatus(5) != 101) )
             {
                RcdFound19 = 1;
+               A147EmployeeBalance = BC000H7_A147EmployeeBalance[0];
                A118WorkHourLogId = BC000H7_A118WorkHourLogId[0];
                A119WorkHourLogDate = BC000H7_A119WorkHourLogDate[0];
                A120WorkHourLogDuration = BC000H7_A120WorkHourLogDuration[0];
@@ -222,6 +224,7 @@ namespace GeneXus.Programs {
          }
          if ( ( GX_JID == 4 ) || ( GX_JID == 0 ) )
          {
+            Z147EmployeeBalance = A147EmployeeBalance;
             Z107EmployeeFirstName = A107EmployeeFirstName;
          }
          if ( ( GX_JID == 5 ) || ( GX_JID == 0 ) )
@@ -241,6 +244,7 @@ namespace GeneXus.Programs {
             Z123WorkHourLogDescription = A123WorkHourLogDescription;
             Z106EmployeeId = A106EmployeeId;
             Z102ProjectId = A102ProjectId;
+            Z147EmployeeBalance = A147EmployeeBalance;
             Z107EmployeeFirstName = A107EmployeeFirstName;
             Z103ProjectName = A103ProjectName;
          }
@@ -262,6 +266,7 @@ namespace GeneXus.Programs {
          if ( (pr_default.getStatus(6) != 101) )
          {
             RcdFound19 = 1;
+            A147EmployeeBalance = BC000H8_A147EmployeeBalance[0];
             A119WorkHourLogDate = BC000H8_A119WorkHourLogDate[0];
             A120WorkHourLogDuration = BC000H8_A120WorkHourLogDuration[0];
             A121WorkHourLogHour = BC000H8_A121WorkHourLogHour[0];
@@ -291,6 +296,7 @@ namespace GeneXus.Programs {
             GX_msglist.addItem("No matching ''.", "ForeignKeyNotFound", 1, "EMPLOYEEID");
             AnyError = 1;
          }
+         A147EmployeeBalance = BC000H4_A147EmployeeBalance[0];
          A107EmployeeFirstName = BC000H4_A107EmployeeFirstName[0];
          pr_default.close(2);
          /* Using cursor BC000H6 */
@@ -599,6 +605,7 @@ namespace GeneXus.Programs {
             /* Delete mode formulas */
             /* Using cursor BC000H14 */
             pr_default.execute(12, new Object[] {A106EmployeeId});
+            A147EmployeeBalance = BC000H14_A147EmployeeBalance[0];
             A107EmployeeFirstName = BC000H14_A107EmployeeFirstName[0];
             pr_default.close(12);
             /* Using cursor BC000H15 */
@@ -643,6 +650,7 @@ namespace GeneXus.Programs {
          if ( (pr_default.getStatus(14) != 101) )
          {
             RcdFound19 = 1;
+            A147EmployeeBalance = BC000H16_A147EmployeeBalance[0];
             A118WorkHourLogId = BC000H16_A118WorkHourLogId[0];
             A119WorkHourLogDate = BC000H16_A119WorkHourLogDate[0];
             A120WorkHourLogDuration = BC000H16_A120WorkHourLogDuration[0];
@@ -672,6 +680,7 @@ namespace GeneXus.Programs {
          if ( (pr_default.getStatus(14) != 101) )
          {
             RcdFound19 = 1;
+            A147EmployeeBalance = BC000H16_A147EmployeeBalance[0];
             A118WorkHourLogId = BC000H16_A118WorkHourLogId[0];
             A119WorkHourLogDate = BC000H16_A119WorkHourLogDate[0];
             A120WorkHourLogDuration = BC000H16_A120WorkHourLogDuration[0];
@@ -741,6 +750,7 @@ namespace GeneXus.Programs {
 
       protected void InitializeNonKey0H19( )
       {
+         A147EmployeeBalance = 0;
          A119WorkHourLogDate = DateTime.MinValue;
          A120WorkHourLogDuration = "";
          A121WorkHourLogHour = 0;
@@ -1307,6 +1317,7 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
+         BC000H7_A147EmployeeBalance = new decimal[1] ;
          BC000H7_A118WorkHourLogId = new long[1] ;
          BC000H7_A119WorkHourLogDate = new DateTime[] {DateTime.MinValue} ;
          BC000H7_A120WorkHourLogDuration = new string[] {""} ;
@@ -1337,6 +1348,7 @@ namespace GeneXus.Programs {
          Z107EmployeeFirstName = "";
          Z103ProjectName = "";
          Z123WorkHourLogDescription = "";
+         BC000H8_A147EmployeeBalance = new decimal[1] ;
          BC000H8_A118WorkHourLogId = new long[1] ;
          BC000H8_A119WorkHourLogDate = new DateTime[] {DateTime.MinValue} ;
          BC000H8_A120WorkHourLogDuration = new string[] {""} ;
@@ -1347,6 +1359,7 @@ namespace GeneXus.Programs {
          BC000H8_A103ProjectName = new string[] {""} ;
          BC000H8_A106EmployeeId = new long[1] ;
          BC000H8_A102ProjectId = new long[1] ;
+         BC000H4_A147EmployeeBalance = new decimal[1] ;
          BC000H4_A107EmployeeFirstName = new string[] {""} ;
          BC000H6_A106EmployeeId = new long[1] ;
          BC000H5_A103ProjectName = new string[] {""} ;
@@ -1368,8 +1381,10 @@ namespace GeneXus.Programs {
          BC000H2_A106EmployeeId = new long[1] ;
          BC000H2_A102ProjectId = new long[1] ;
          BC000H11_A118WorkHourLogId = new long[1] ;
+         BC000H14_A147EmployeeBalance = new decimal[1] ;
          BC000H14_A107EmployeeFirstName = new string[] {""} ;
          BC000H15_A103ProjectName = new string[] {""} ;
+         BC000H16_A147EmployeeBalance = new decimal[1] ;
          BC000H16_A118WorkHourLogId = new long[1] ;
          BC000H16_A119WorkHourLogDate = new DateTime[] {DateTime.MinValue} ;
          BC000H16_A120WorkHourLogDuration = new string[] {""} ;
@@ -1395,7 +1410,7 @@ namespace GeneXus.Programs {
                BC000H3_A118WorkHourLogId, BC000H3_A119WorkHourLogDate, BC000H3_A120WorkHourLogDuration, BC000H3_A121WorkHourLogHour, BC000H3_A122WorkHourLogMinute, BC000H3_A123WorkHourLogDescription, BC000H3_A106EmployeeId, BC000H3_A102ProjectId
                }
                , new Object[] {
-               BC000H4_A107EmployeeFirstName
+               BC000H4_A147EmployeeBalance, BC000H4_A107EmployeeFirstName
                }
                , new Object[] {
                BC000H5_A103ProjectName
@@ -1404,10 +1419,12 @@ namespace GeneXus.Programs {
                BC000H6_A106EmployeeId
                }
                , new Object[] {
-               BC000H7_A118WorkHourLogId, BC000H7_A119WorkHourLogDate, BC000H7_A120WorkHourLogDuration, BC000H7_A121WorkHourLogHour, BC000H7_A122WorkHourLogMinute, BC000H7_A123WorkHourLogDescription, BC000H7_A107EmployeeFirstName, BC000H7_A103ProjectName, BC000H7_A106EmployeeId, BC000H7_A102ProjectId
+               BC000H7_A147EmployeeBalance, BC000H7_A118WorkHourLogId, BC000H7_A119WorkHourLogDate, BC000H7_A120WorkHourLogDuration, BC000H7_A121WorkHourLogHour, BC000H7_A122WorkHourLogMinute, BC000H7_A123WorkHourLogDescription, BC000H7_A107EmployeeFirstName, BC000H7_A103ProjectName, BC000H7_A106EmployeeId,
+               BC000H7_A102ProjectId
                }
                , new Object[] {
-               BC000H8_A118WorkHourLogId, BC000H8_A119WorkHourLogDate, BC000H8_A120WorkHourLogDuration, BC000H8_A121WorkHourLogHour, BC000H8_A122WorkHourLogMinute, BC000H8_A123WorkHourLogDescription, BC000H8_A107EmployeeFirstName, BC000H8_A103ProjectName, BC000H8_A106EmployeeId, BC000H8_A102ProjectId
+               BC000H8_A147EmployeeBalance, BC000H8_A118WorkHourLogId, BC000H8_A119WorkHourLogDate, BC000H8_A120WorkHourLogDuration, BC000H8_A121WorkHourLogHour, BC000H8_A122WorkHourLogMinute, BC000H8_A123WorkHourLogDescription, BC000H8_A107EmployeeFirstName, BC000H8_A103ProjectName, BC000H8_A106EmployeeId,
+               BC000H8_A102ProjectId
                }
                , new Object[] {
                BC000H9_A118WorkHourLogId
@@ -1422,13 +1439,14 @@ namespace GeneXus.Programs {
                , new Object[] {
                }
                , new Object[] {
-               BC000H14_A107EmployeeFirstName
+               BC000H14_A147EmployeeBalance, BC000H14_A107EmployeeFirstName
                }
                , new Object[] {
                BC000H15_A103ProjectName
                }
                , new Object[] {
-               BC000H16_A118WorkHourLogId, BC000H16_A119WorkHourLogDate, BC000H16_A120WorkHourLogDuration, BC000H16_A121WorkHourLogHour, BC000H16_A122WorkHourLogMinute, BC000H16_A123WorkHourLogDescription, BC000H16_A107EmployeeFirstName, BC000H16_A103ProjectName, BC000H16_A106EmployeeId, BC000H16_A102ProjectId
+               BC000H16_A147EmployeeBalance, BC000H16_A118WorkHourLogId, BC000H16_A119WorkHourLogDate, BC000H16_A120WorkHourLogDuration, BC000H16_A121WorkHourLogHour, BC000H16_A122WorkHourLogMinute, BC000H16_A123WorkHourLogDescription, BC000H16_A107EmployeeFirstName, BC000H16_A103ProjectName, BC000H16_A106EmployeeId,
+               BC000H16_A102ProjectId
                }
             }
          );
@@ -1460,6 +1478,8 @@ namespace GeneXus.Programs {
       private long AV14Insert_ProjectId ;
       private long Z106EmployeeId ;
       private long Z102ProjectId ;
+      private decimal A147EmployeeBalance ;
+      private decimal Z147EmployeeBalance ;
       private string A107EmployeeFirstName ;
       private string A103ProjectName ;
       private string sMode19 ;
@@ -1482,6 +1502,7 @@ namespace GeneXus.Programs {
       private IGxDataStore dsDefault ;
       private SdtWorkHourLog bcWorkHourLog ;
       private IDataStoreProvider pr_default ;
+      private decimal[] BC000H7_A147EmployeeBalance ;
       private long[] BC000H7_A118WorkHourLogId ;
       private DateTime[] BC000H7_A119WorkHourLogDate ;
       private string[] BC000H7_A120WorkHourLogDuration ;
@@ -1497,6 +1518,7 @@ namespace GeneXus.Programs {
       private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV8WWPContext ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext AV11TrnContext ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext_Attribute AV15TrnContextAtt ;
+      private decimal[] BC000H8_A147EmployeeBalance ;
       private long[] BC000H8_A118WorkHourLogId ;
       private DateTime[] BC000H8_A119WorkHourLogDate ;
       private string[] BC000H8_A120WorkHourLogDuration ;
@@ -1507,6 +1529,7 @@ namespace GeneXus.Programs {
       private string[] BC000H8_A103ProjectName ;
       private long[] BC000H8_A106EmployeeId ;
       private long[] BC000H8_A102ProjectId ;
+      private decimal[] BC000H4_A147EmployeeBalance ;
       private string[] BC000H4_A107EmployeeFirstName ;
       private long[] BC000H6_A106EmployeeId ;
       private string[] BC000H5_A103ProjectName ;
@@ -1528,8 +1551,10 @@ namespace GeneXus.Programs {
       private long[] BC000H2_A106EmployeeId ;
       private long[] BC000H2_A102ProjectId ;
       private long[] BC000H11_A118WorkHourLogId ;
+      private decimal[] BC000H14_A147EmployeeBalance ;
       private string[] BC000H14_A107EmployeeFirstName ;
       private string[] BC000H15_A103ProjectName ;
+      private decimal[] BC000H16_A147EmployeeBalance ;
       private long[] BC000H16_A118WorkHourLogId ;
       private DateTime[] BC000H16_A119WorkHourLogDate ;
       private string[] BC000H16_A120WorkHourLogDuration ;
@@ -1683,19 +1708,19 @@ namespace GeneXus.Programs {
         def= new CursorDef[] {
             new CursorDef("BC000H2", "SELECT WorkHourLogId, WorkHourLogDate, WorkHourLogDuration, WorkHourLogHour, WorkHourLogMinute, WorkHourLogDescription, EmployeeId, ProjectId FROM WorkHourLog WHERE WorkHourLogId = :WorkHourLogId  FOR UPDATE OF WorkHourLog",true, GxErrorMask.GX_NOMASK, false, this,prmBC000H2,1, GxCacheFrequency.OFF ,true,false )
            ,new CursorDef("BC000H3", "SELECT WorkHourLogId, WorkHourLogDate, WorkHourLogDuration, WorkHourLogHour, WorkHourLogMinute, WorkHourLogDescription, EmployeeId, ProjectId FROM WorkHourLog WHERE WorkHourLogId = :WorkHourLogId ",true, GxErrorMask.GX_NOMASK, false, this,prmBC000H3,1, GxCacheFrequency.OFF ,true,false )
-           ,new CursorDef("BC000H4", "SELECT EmployeeFirstName FROM Employee WHERE EmployeeId = :EmployeeId ",true, GxErrorMask.GX_NOMASK, false, this,prmBC000H4,1, GxCacheFrequency.OFF ,true,false )
+           ,new CursorDef("BC000H4", "SELECT EmployeeBalance, EmployeeFirstName FROM Employee WHERE EmployeeId = :EmployeeId ",true, GxErrorMask.GX_NOMASK, false, this,prmBC000H4,1, GxCacheFrequency.OFF ,true,false )
            ,new CursorDef("BC000H5", "SELECT ProjectName FROM Project WHERE ProjectId = :ProjectId ",true, GxErrorMask.GX_NOMASK, false, this,prmBC000H5,1, GxCacheFrequency.OFF ,true,false )
            ,new CursorDef("BC000H6", "SELECT EmployeeId FROM EmployeeProject WHERE EmployeeId = :EmployeeId AND ProjectId = :ProjectId ",true, GxErrorMask.GX_NOMASK, false, this,prmBC000H6,1, GxCacheFrequency.OFF ,true,false )
-           ,new CursorDef("BC000H7", "SELECT TM1.WorkHourLogId, TM1.WorkHourLogDate, TM1.WorkHourLogDuration, TM1.WorkHourLogHour, TM1.WorkHourLogMinute, TM1.WorkHourLogDescription, T2.EmployeeFirstName, T3.ProjectName, TM1.EmployeeId, TM1.ProjectId FROM ((WorkHourLog TM1 INNER JOIN Employee T2 ON T2.EmployeeId = TM1.EmployeeId) INNER JOIN Project T3 ON T3.ProjectId = TM1.ProjectId) ORDER BY TM1.WorkHourLogId  OFFSET :GXPagingFrom19 LIMIT CASE WHEN :GXPagingTo19 > 0 THEN :GXPagingTo19 ELSE 1e9 END",true, GxErrorMask.GX_NOMASK, false, this,prmBC000H7,100, GxCacheFrequency.OFF ,true,false )
-           ,new CursorDef("BC000H8", "SELECT TM1.WorkHourLogId, TM1.WorkHourLogDate, TM1.WorkHourLogDuration, TM1.WorkHourLogHour, TM1.WorkHourLogMinute, TM1.WorkHourLogDescription, T2.EmployeeFirstName, T3.ProjectName, TM1.EmployeeId, TM1.ProjectId FROM ((WorkHourLog TM1 INNER JOIN Employee T2 ON T2.EmployeeId = TM1.EmployeeId) INNER JOIN Project T3 ON T3.ProjectId = TM1.ProjectId) WHERE TM1.WorkHourLogId = :WorkHourLogId ORDER BY TM1.WorkHourLogId ",true, GxErrorMask.GX_NOMASK, false, this,prmBC000H8,100, GxCacheFrequency.OFF ,true,false )
+           ,new CursorDef("BC000H7", "SELECT T2.EmployeeBalance, TM1.WorkHourLogId, TM1.WorkHourLogDate, TM1.WorkHourLogDuration, TM1.WorkHourLogHour, TM1.WorkHourLogMinute, TM1.WorkHourLogDescription, T2.EmployeeFirstName, T3.ProjectName, TM1.EmployeeId, TM1.ProjectId FROM ((WorkHourLog TM1 INNER JOIN Employee T2 ON T2.EmployeeId = TM1.EmployeeId) INNER JOIN Project T3 ON T3.ProjectId = TM1.ProjectId) ORDER BY TM1.WorkHourLogId  OFFSET :GXPagingFrom19 LIMIT CASE WHEN :GXPagingTo19 > 0 THEN :GXPagingTo19 ELSE 1e9 END",true, GxErrorMask.GX_NOMASK, false, this,prmBC000H7,100, GxCacheFrequency.OFF ,true,false )
+           ,new CursorDef("BC000H8", "SELECT T2.EmployeeBalance, TM1.WorkHourLogId, TM1.WorkHourLogDate, TM1.WorkHourLogDuration, TM1.WorkHourLogHour, TM1.WorkHourLogMinute, TM1.WorkHourLogDescription, T2.EmployeeFirstName, T3.ProjectName, TM1.EmployeeId, TM1.ProjectId FROM ((WorkHourLog TM1 INNER JOIN Employee T2 ON T2.EmployeeId = TM1.EmployeeId) INNER JOIN Project T3 ON T3.ProjectId = TM1.ProjectId) WHERE TM1.WorkHourLogId = :WorkHourLogId ORDER BY TM1.WorkHourLogId ",true, GxErrorMask.GX_NOMASK, false, this,prmBC000H8,100, GxCacheFrequency.OFF ,true,false )
            ,new CursorDef("BC000H9", "SELECT WorkHourLogId FROM WorkHourLog WHERE WorkHourLogId = :WorkHourLogId ",true, GxErrorMask.GX_NOMASK, false, this,prmBC000H9,1, GxCacheFrequency.OFF ,true,false )
            ,new CursorDef("BC000H10", "SAVEPOINT gxupdate;INSERT INTO WorkHourLog(WorkHourLogDate, WorkHourLogDuration, WorkHourLogHour, WorkHourLogMinute, WorkHourLogDescription, EmployeeId, ProjectId) VALUES(:WorkHourLogDate, :WorkHourLogDuration, :WorkHourLogHour, :WorkHourLogMinute, :WorkHourLogDescription, :EmployeeId, :ProjectId);RELEASE SAVEPOINT gxupdate", GxErrorMask.GX_ROLLBACKSAVEPOINT | GxErrorMask.GX_NOMASK,prmBC000H10)
            ,new CursorDef("BC000H11", "SELECT currval('WorkHourLogId') ",true, GxErrorMask.GX_NOMASK, false, this,prmBC000H11,1, GxCacheFrequency.OFF ,true,false )
            ,new CursorDef("BC000H12", "SAVEPOINT gxupdate;UPDATE WorkHourLog SET WorkHourLogDate=:WorkHourLogDate, WorkHourLogDuration=:WorkHourLogDuration, WorkHourLogHour=:WorkHourLogHour, WorkHourLogMinute=:WorkHourLogMinute, WorkHourLogDescription=:WorkHourLogDescription, EmployeeId=:EmployeeId, ProjectId=:ProjectId  WHERE WorkHourLogId = :WorkHourLogId;RELEASE SAVEPOINT gxupdate", GxErrorMask.GX_ROLLBACKSAVEPOINT | GxErrorMask.GX_NOMASK,prmBC000H12)
            ,new CursorDef("BC000H13", "SAVEPOINT gxupdate;DELETE FROM WorkHourLog  WHERE WorkHourLogId = :WorkHourLogId;RELEASE SAVEPOINT gxupdate", GxErrorMask.GX_ROLLBACKSAVEPOINT | GxErrorMask.GX_NOMASK,prmBC000H13)
-           ,new CursorDef("BC000H14", "SELECT EmployeeFirstName FROM Employee WHERE EmployeeId = :EmployeeId ",true, GxErrorMask.GX_NOMASK, false, this,prmBC000H14,1, GxCacheFrequency.OFF ,true,false )
+           ,new CursorDef("BC000H14", "SELECT EmployeeBalance, EmployeeFirstName FROM Employee WHERE EmployeeId = :EmployeeId ",true, GxErrorMask.GX_NOMASK, false, this,prmBC000H14,1, GxCacheFrequency.OFF ,true,false )
            ,new CursorDef("BC000H15", "SELECT ProjectName FROM Project WHERE ProjectId = :ProjectId ",true, GxErrorMask.GX_NOMASK, false, this,prmBC000H15,1, GxCacheFrequency.OFF ,true,false )
-           ,new CursorDef("BC000H16", "SELECT TM1.WorkHourLogId, TM1.WorkHourLogDate, TM1.WorkHourLogDuration, TM1.WorkHourLogHour, TM1.WorkHourLogMinute, TM1.WorkHourLogDescription, T2.EmployeeFirstName, T3.ProjectName, TM1.EmployeeId, TM1.ProjectId FROM ((WorkHourLog TM1 INNER JOIN Employee T2 ON T2.EmployeeId = TM1.EmployeeId) INNER JOIN Project T3 ON T3.ProjectId = TM1.ProjectId) WHERE TM1.WorkHourLogId = :WorkHourLogId ORDER BY TM1.WorkHourLogId ",true, GxErrorMask.GX_NOMASK, false, this,prmBC000H16,100, GxCacheFrequency.OFF ,true,false )
+           ,new CursorDef("BC000H16", "SELECT T2.EmployeeBalance, TM1.WorkHourLogId, TM1.WorkHourLogDate, TM1.WorkHourLogDuration, TM1.WorkHourLogHour, TM1.WorkHourLogMinute, TM1.WorkHourLogDescription, T2.EmployeeFirstName, T3.ProjectName, TM1.EmployeeId, TM1.ProjectId FROM ((WorkHourLog TM1 INNER JOIN Employee T2 ON T2.EmployeeId = TM1.EmployeeId) INNER JOIN Project T3 ON T3.ProjectId = TM1.ProjectId) WHERE TM1.WorkHourLogId = :WorkHourLogId ORDER BY TM1.WorkHourLogId ",true, GxErrorMask.GX_NOMASK, false, this,prmBC000H16,100, GxCacheFrequency.OFF ,true,false )
         };
      }
   }
@@ -1727,7 +1752,8 @@ namespace GeneXus.Programs {
               ((long[]) buf[7])[0] = rslt.getLong(8);
               return;
            case 2 :
-              ((string[]) buf[0])[0] = rslt.getString(1, 100);
+              ((decimal[]) buf[0])[0] = rslt.getDecimal(1);
+              ((string[]) buf[1])[0] = rslt.getString(2, 100);
               return;
            case 3 :
               ((string[]) buf[0])[0] = rslt.getString(1, 100);
@@ -1736,28 +1762,30 @@ namespace GeneXus.Programs {
               ((long[]) buf[0])[0] = rslt.getLong(1);
               return;
            case 5 :
-              ((long[]) buf[0])[0] = rslt.getLong(1);
-              ((DateTime[]) buf[1])[0] = rslt.getGXDate(2);
-              ((string[]) buf[2])[0] = rslt.getVarchar(3);
-              ((short[]) buf[3])[0] = rslt.getShort(4);
+              ((decimal[]) buf[0])[0] = rslt.getDecimal(1);
+              ((long[]) buf[1])[0] = rslt.getLong(2);
+              ((DateTime[]) buf[2])[0] = rslt.getGXDate(3);
+              ((string[]) buf[3])[0] = rslt.getVarchar(4);
               ((short[]) buf[4])[0] = rslt.getShort(5);
-              ((string[]) buf[5])[0] = rslt.getLongVarchar(6);
-              ((string[]) buf[6])[0] = rslt.getString(7, 100);
+              ((short[]) buf[5])[0] = rslt.getShort(6);
+              ((string[]) buf[6])[0] = rslt.getLongVarchar(7);
               ((string[]) buf[7])[0] = rslt.getString(8, 100);
-              ((long[]) buf[8])[0] = rslt.getLong(9);
+              ((string[]) buf[8])[0] = rslt.getString(9, 100);
               ((long[]) buf[9])[0] = rslt.getLong(10);
+              ((long[]) buf[10])[0] = rslt.getLong(11);
               return;
            case 6 :
-              ((long[]) buf[0])[0] = rslt.getLong(1);
-              ((DateTime[]) buf[1])[0] = rslt.getGXDate(2);
-              ((string[]) buf[2])[0] = rslt.getVarchar(3);
-              ((short[]) buf[3])[0] = rslt.getShort(4);
+              ((decimal[]) buf[0])[0] = rslt.getDecimal(1);
+              ((long[]) buf[1])[0] = rslt.getLong(2);
+              ((DateTime[]) buf[2])[0] = rslt.getGXDate(3);
+              ((string[]) buf[3])[0] = rslt.getVarchar(4);
               ((short[]) buf[4])[0] = rslt.getShort(5);
-              ((string[]) buf[5])[0] = rslt.getLongVarchar(6);
-              ((string[]) buf[6])[0] = rslt.getString(7, 100);
+              ((short[]) buf[5])[0] = rslt.getShort(6);
+              ((string[]) buf[6])[0] = rslt.getLongVarchar(7);
               ((string[]) buf[7])[0] = rslt.getString(8, 100);
-              ((long[]) buf[8])[0] = rslt.getLong(9);
+              ((string[]) buf[8])[0] = rslt.getString(9, 100);
               ((long[]) buf[9])[0] = rslt.getLong(10);
+              ((long[]) buf[10])[0] = rslt.getLong(11);
               return;
            case 7 :
               ((long[]) buf[0])[0] = rslt.getLong(1);
@@ -1766,22 +1794,24 @@ namespace GeneXus.Programs {
               ((long[]) buf[0])[0] = rslt.getLong(1);
               return;
            case 12 :
-              ((string[]) buf[0])[0] = rslt.getString(1, 100);
+              ((decimal[]) buf[0])[0] = rslt.getDecimal(1);
+              ((string[]) buf[1])[0] = rslt.getString(2, 100);
               return;
            case 13 :
               ((string[]) buf[0])[0] = rslt.getString(1, 100);
               return;
            case 14 :
-              ((long[]) buf[0])[0] = rslt.getLong(1);
-              ((DateTime[]) buf[1])[0] = rslt.getGXDate(2);
-              ((string[]) buf[2])[0] = rslt.getVarchar(3);
-              ((short[]) buf[3])[0] = rslt.getShort(4);
+              ((decimal[]) buf[0])[0] = rslt.getDecimal(1);
+              ((long[]) buf[1])[0] = rslt.getLong(2);
+              ((DateTime[]) buf[2])[0] = rslt.getGXDate(3);
+              ((string[]) buf[3])[0] = rslt.getVarchar(4);
               ((short[]) buf[4])[0] = rslt.getShort(5);
-              ((string[]) buf[5])[0] = rslt.getLongVarchar(6);
-              ((string[]) buf[6])[0] = rslt.getString(7, 100);
+              ((short[]) buf[5])[0] = rslt.getShort(6);
+              ((string[]) buf[6])[0] = rslt.getLongVarchar(7);
               ((string[]) buf[7])[0] = rslt.getString(8, 100);
-              ((long[]) buf[8])[0] = rslt.getLong(9);
+              ((string[]) buf[8])[0] = rslt.getString(9, 100);
               ((long[]) buf[9])[0] = rslt.getLong(10);
+              ((long[]) buf[10])[0] = rslt.getLong(11);
               return;
      }
   }

@@ -9,4 +9,5 @@
   <Table name="Project" />
   <Table name="EmployeeProject" />
   <Table name="SupportRequest" />
+  <Table name="EmployeeVacationSet" />
 </Dependencies>

@@ -18,11 +18,252 @@ using System.Xml.Serialization;
 namespace GeneXus.Programs {
    public class GxWebStd
    {
+      static public void gx_html_headers( IGxContext context ,
+                                          int nContentType ,
+                                          string sCacheCtrl ,
+                                          string sCacheExp ,
+                                          GXRadio radrMeta ,
+                                          GXRadio radrMetaequiv ,
+                                          bool bIsRwd )
+      {
+         short wbTemp;
+         short idxLst;
+         bool addContentType;
+         GxWebStd.set_html_headers( context, nContentType, sCacheCtrl, sCacheExp);
+         if ( nContentType == 0 )
+         {
+            context.WriteHtmlTextNl( GXUtil.HtmlDocType( )) ;
+            context.WriteHtmlTextNl( "<html lang=\"en\""+">") ;
+            context.WriteHtmlTextNl( "<head>") ;
+            if ( bIsRwd )
+            {
+               GXWebForm.AddResponsiveMetaHeaders(radrMeta);
+            }
+            idxLst = 1;
+            while ( idxLst <= radrMeta.ItemCount )
+            {
+               context.WriteHtmlText( "<meta name=\""+StringUtil.RTrim( radrMeta.getItemValue(idxLst))+"\" content=\"") ;
+               context.SendWebAttribute( StringUtil.RTrim( radrMeta.getItemText(idxLst))) ;
+               context.WriteHtmlTextNl( "\""+GXUtil.HtmlEndTag( HTMLElement.META)) ;
+               idxLst = (short)(idxLst+1);
+            }
+            context.WriteHtmlTextNl( "<!--[if IE]><meta http-equiv=\"page-enter\" content=\"blendTrans(Duration=0.1)\""+GXUtil.HtmlEndTag( HTMLElement.META)+"<![endif]-->") ;
+            context.WriteHtmlTextNl( "<meta name=\"fragment\" content=\"!\""+GXUtil.HtmlEndTag( HTMLElement.META)) ;
+            idxLst = 1;
+            addContentType = true;
+            while ( idxLst <= radrMetaequiv.ItemCount )
+            {
+               if ( StringUtil.StrCmp(StringUtil.Lower( radrMetaequiv.getItemValue(idxLst)), "content-type") == 0 )
+               {
+                  addContentType = false;
+                  wbTemp = context.ResponseContentType( radrMetaequiv.getItemText(idxLst));
+               }
+               idxLst = (short)(idxLst+1);
+            }
+            if ( addContentType )
+            {
+               context.WriteHtmlTextNl( "<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\""+GXUtil.HtmlEndTag( HTMLElement.META)) ;
+            }
+            idxLst = 1;
+            while ( idxLst <= radrMetaequiv.ItemCount )
+            {
+               context.WriteHtmlText( "<meta http-equiv=\""+StringUtil.RTrim( radrMetaequiv.getItemValue(idxLst))+"\" content=\"") ;
+               context.SendWebAttribute( StringUtil.RTrim( radrMetaequiv.getItemText(idxLst))) ;
+               context.WriteHtmlTextNl( "\""+GXUtil.HtmlEndTag( HTMLElement.META)) ;
+               idxLst = (short)(idxLst+1);
+            }
+         }
+      }
+
       static public void gx_hidden_field( IGxContext context ,
                                           string sCtrlName ,
                                           string sValue )
       {
          context.httpAjaxContext.ajax_rsp_assign_hidden(sCtrlName, sValue);
+      }
+
+      static public void ClassAttribute( IGxContext context ,
+                                         string sClass )
+      {
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( sClass)) )
+         {
+            context.WriteHtmlText( " class=\"") ;
+            context.SendWebValue( StringUtil.LTrim( sClass)) ;
+            context.WriteHtmlText( "\" ") ;
+         }
+      }
+
+      static public void gx_div_start( IGxContext context ,
+                                       string sInternalName ,
+                                       int nVisible ,
+                                       int nWidth ,
+                                       string sWidthUnit ,
+                                       int nHeight ,
+                                       string sHeightUnit ,
+                                       string sClassString ,
+                                       string sAlign ,
+                                       string sVAlign ,
+                                       string sTags ,
+                                       string sExtraStyle ,
+                                       string sHtmlTag )
+      {
+         string sOStyle;
+         bool bHAlignedVar;
+         bool bVAlignedVar;
+         sAlign = StringUtil.Lower( sAlign);
+         sVAlign = StringUtil.Lower( sVAlign);
+         bHAlignedVar = (bool)(!String.IsNullOrEmpty(StringUtil.RTrim( sAlign))&&(StringUtil.StrCmp(StringUtil.Lower( sAlign), "left")!=0)&&(StringUtil.StrCmp(StringUtil.Lower( sAlign), "start")!=0));
+         bVAlignedVar = (bool)(!String.IsNullOrEmpty(StringUtil.RTrim( sVAlign))&&(StringUtil.StrCmp(StringUtil.Lower( sVAlign), "top")!=0));
+         context.WriteHtmlText( "<"+sHtmlTag+" ") ;
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( sInternalName)) )
+         {
+            context.WriteHtmlText( "id=\""+sInternalName+"\" ") ;
+         }
+         GxWebStd.ClassAttribute( context, sClassString);
+         sOStyle = "";
+         if ( nVisible == 0 )
+         {
+            sOStyle = "display:none;";
+         }
+         if ( ! (0==nWidth) )
+         {
+            sOStyle += " width:" + StringUtil.LTrimStr( (decimal)(nWidth), 10, 0) + sWidthUnit + ";";
+         }
+         if ( ! (0==nHeight) )
+         {
+            sOStyle += " height:" + StringUtil.LTrimStr( (decimal)(nHeight), 10, 0) + sHeightUnit + ";";
+         }
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( sExtraStyle)) )
+         {
+            sOStyle += CSSHelper.Prettify( sExtraStyle+";");
+         }
+         if ( bHAlignedVar || bVAlignedVar )
+         {
+            context.WriteHtmlText( "data-align-flex ") ;
+         }
+         GxWebStd.StyleAttribute( context, sOStyle);
+         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( sTags)) )
+         {
+            context.WriteHtmlText( sTags) ;
+         }
+         if ( bHAlignedVar )
+         {
+            context.WriteHtmlText( " data-align=\"") ;
+            context.WriteHtmlText( sAlign) ;
+            context.WriteHtmlText( "\"") ;
+         }
+         if ( bVAlignedVar )
+         {
+            context.WriteHtmlText( " data-valign=\"") ;
+            context.WriteHtmlText( sVAlign) ;
+            context.WriteHtmlText( "\"") ;
+         }
+         context.WriteHtmlText( ">") ;
+      }
+
+      static public void gx_msg_list( IGxContext context ,
+                                      string sCtrlName ,
+                                      int nDisplayMode ,
+                                      string sStyleString ,
+                                      string sClassString ,
+                                      string sCmpCtx ,
+                                      string sInMaster )
+      {
+         int i;
+         context.WriteHtmlText( "<div>") ;
+         sClassString += " gx_ev";
+         if ( nDisplayMode == 1 )
+         {
+            sClassString += " ErrorViewerBullet";
+         }
+         context.WriteHtmlText( "<span") ;
+         GxWebStd.ClassAttribute( context, sClassString);
+         GxWebStd.StyleAttribute( context, sStyleString);
+         context.WriteHtmlText( " data-gx-id=\""+sCmpCtx+"gxErrorViewer\"") ;
+         context.WriteHtmlText( ">") ;
+         if ( ! context.isSpaRequest( ) )
+         {
+            i = 1;
+            while ( i <= context.GX_msglist.ItemCount )
+            {
+               context.WriteHtmlText( "<span") ;
+               GxWebStd.ClassAttribute( context, ((context.GX_msglist.getItemType((short)(i))==1) ? "gx-error-message" : "gx-warning-message"));
+               context.WriteHtmlText( ">") ;
+               context.WriteHtmlText( GXUtil.ValueEncode( context.GX_msglist.getItemText((short)(i)))) ;
+               context.WriteHtmlText( "</span>") ;
+               i = (int)(i+1);
+            }
+         }
+         context.WriteHtmlText( "</span>") ;
+         context.WriteHtmlText( "</div>") ;
+      }
+
+      static public void gx_div_end( IGxContext context ,
+                                     string sAlign ,
+                                     string sVAlign ,
+                                     string sHtmlTag )
+      {
+         context.WriteHtmlText( "</"+sHtmlTag+">") ;
+      }
+
+      static public bool gx_redirect( IGxContext context )
+      {
+         if ( context.WillRedirect( ) )
+         {
+            context.Redirect( context.wjLoc );
+            context.DispatchAjaxCommands();
+            return true ;
+         }
+         else if ( context.nUserReturn == 1 )
+         {
+            if ( context.isAjaxRequest( ) )
+            {
+               context.ajax_rsp_command_close();
+               context.DispatchAjaxCommands();
+            }
+            else
+            {
+               if ( String.IsNullOrEmpty(StringUtil.RTrim( context.GetReferer( ))) || context.IsLocalStorageSupported( ) )
+               {
+                  if ( context.isSpaRequest( true) )
+                  {
+                     context.SetHeader("X-SPA-RETURN", (string)(context.getWebReturnParmsJS( )));
+                     context.SetHeader("X-SPA-RETURN-MD", (string)(context.getWebReturnParmsMetadataJS( )));
+                  }
+                  else
+                  {
+                     context.WriteHtmlText( GXUtil.HtmlDocType( )) ;
+                     context.WriteHtmlText( "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\"><title>Close window</title>") ;
+                     context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
+                     context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
+                     context.WriteHtmlText( "</head><body><script type=\"text/javascript\">") ;
+                     context.WriteHtmlText( "gx.fn.closeWindowServerScript(") ;
+                     context.WriteHtmlText( context.getWebReturnParmsJS( )) ;
+                     context.WriteHtmlText( ", ") ;
+                     context.WriteHtmlText( context.getWebReturnParmsMetadataJS( )) ;
+                     if ( context.IsLocalStorageSupported( ) )
+                     {
+                        context.WriteHtmlText( ", true") ;
+                     }
+                     else
+                     {
+                        context.WriteHtmlText( ", false") ;
+                     }
+                     context.WriteHtmlText( ");</script></body></html>") ;
+                  }
+               }
+               else
+               {
+                  context.Redirect( context.GetReferer( ) );
+                  context.WindowClosed();
+               }
+            }
+            return true ;
+         }
+         else
+         {
+            return false ;
+         }
       }
 
       static public void gx_boolean_hidden_field( IGxContext context ,
@@ -873,43 +1114,6 @@ namespace GeneXus.Programs {
                context.WriteHtmlText( "\" ") ;
             }
          }
-      }
-
-      static public void gx_msg_list( IGxContext context ,
-                                      string sCtrlName ,
-                                      int nDisplayMode ,
-                                      string sStyleString ,
-                                      string sClassString ,
-                                      string sCmpCtx ,
-                                      string sInMaster )
-      {
-         int i;
-         context.WriteHtmlText( "<div>") ;
-         sClassString += " gx_ev";
-         if ( nDisplayMode == 1 )
-         {
-            sClassString += " ErrorViewerBullet";
-         }
-         context.WriteHtmlText( "<span") ;
-         GxWebStd.ClassAttribute( context, sClassString);
-         GxWebStd.StyleAttribute( context, sStyleString);
-         context.WriteHtmlText( " data-gx-id=\""+sCmpCtx+"gxErrorViewer\"") ;
-         context.WriteHtmlText( ">") ;
-         if ( ! context.isSpaRequest( ) )
-         {
-            i = 1;
-            while ( i <= context.GX_msglist.ItemCount )
-            {
-               context.WriteHtmlText( "<span") ;
-               GxWebStd.ClassAttribute( context, ((context.GX_msglist.getItemType((short)(i))==1) ? "gx-error-message" : "gx-warning-message"));
-               context.WriteHtmlText( ">") ;
-               context.WriteHtmlText( GXUtil.ValueEncode( context.GX_msglist.getItemText((short)(i)))) ;
-               context.WriteHtmlText( "</span>") ;
-               i = (int)(i+1);
-            }
-         }
-         context.WriteHtmlText( "</span>") ;
-         context.WriteHtmlText( "</div>") ;
       }
 
       static public void gx_combobox_ctrl( IGxContext context ,
@@ -2447,66 +2651,6 @@ namespace GeneXus.Programs {
          }
       }
 
-      static public bool gx_redirect( IGxContext context )
-      {
-         if ( context.WillRedirect( ) )
-         {
-            context.Redirect( context.wjLoc );
-            context.DispatchAjaxCommands();
-            return true ;
-         }
-         else if ( context.nUserReturn == 1 )
-         {
-            if ( context.isAjaxRequest( ) )
-            {
-               context.ajax_rsp_command_close();
-               context.DispatchAjaxCommands();
-            }
-            else
-            {
-               if ( String.IsNullOrEmpty(StringUtil.RTrim( context.GetReferer( ))) || context.IsLocalStorageSupported( ) )
-               {
-                  if ( context.isSpaRequest( true) )
-                  {
-                     context.SetHeader("X-SPA-RETURN", (string)(context.getWebReturnParmsJS( )));
-                     context.SetHeader("X-SPA-RETURN-MD", (string)(context.getWebReturnParmsMetadataJS( )));
-                  }
-                  else
-                  {
-                     context.WriteHtmlText( GXUtil.HtmlDocType( )) ;
-                     context.WriteHtmlText( "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\"><title>Close window</title>") ;
-                     context.AddJavascriptSource("jquery.js", "?"+context.GetBuildNumber( 1918140), false, true);
-                     context.AddJavascriptSource("gxgral.js", "?"+context.GetBuildNumber( 1918140), false, true);
-                     context.WriteHtmlText( "</head><body><script type=\"text/javascript\">") ;
-                     context.WriteHtmlText( "gx.fn.closeWindowServerScript(") ;
-                     context.WriteHtmlText( context.getWebReturnParmsJS( )) ;
-                     context.WriteHtmlText( ", ") ;
-                     context.WriteHtmlText( context.getWebReturnParmsMetadataJS( )) ;
-                     if ( context.IsLocalStorageSupported( ) )
-                     {
-                        context.WriteHtmlText( ", true") ;
-                     }
-                     else
-                     {
-                        context.WriteHtmlText( ", false") ;
-                     }
-                     context.WriteHtmlText( ");</script></body></html>") ;
-                  }
-               }
-               else
-               {
-                  context.Redirect( context.GetReferer( ) );
-                  context.WindowClosed();
-               }
-            }
-            return true ;
-         }
-         else
-         {
-            return false ;
-         }
-      }
-
       static public void gx_table_start( IGxContext context ,
                                          string sCtrlName ,
                                          string sHTMLid ,
@@ -2589,63 +2733,6 @@ namespace GeneXus.Programs {
          if ( StringUtil.StrCmp(sCaption, "") != 0 )
          {
             context.WriteHtmlText( "<caption>"+sCaption+"</caption>") ;
-         }
-      }
-
-      static public void gx_html_headers( IGxContext context ,
-                                          int nContentType ,
-                                          string sCacheCtrl ,
-                                          string sCacheExp ,
-                                          GXRadio radrMeta ,
-                                          GXRadio radrMetaequiv ,
-                                          bool bIsRwd )
-      {
-         short wbTemp;
-         short idxLst;
-         bool addContentType;
-         GxWebStd.set_html_headers( context, nContentType, sCacheCtrl, sCacheExp);
-         if ( nContentType == 0 )
-         {
-            context.WriteHtmlTextNl( GXUtil.HtmlDocType( )) ;
-            context.WriteHtmlTextNl( "<html lang=\"en\""+">") ;
-            context.WriteHtmlTextNl( "<head>") ;
-            if ( bIsRwd )
-            {
-               GXWebForm.AddResponsiveMetaHeaders(radrMeta);
-            }
-            idxLst = 1;
-            while ( idxLst <= radrMeta.ItemCount )
-            {
-               context.WriteHtmlText( "<meta name=\""+StringUtil.RTrim( radrMeta.getItemValue(idxLst))+"\" content=\"") ;
-               context.SendWebAttribute( StringUtil.RTrim( radrMeta.getItemText(idxLst))) ;
-               context.WriteHtmlTextNl( "\""+GXUtil.HtmlEndTag( HTMLElement.META)) ;
-               idxLst = (short)(idxLst+1);
-            }
-            context.WriteHtmlTextNl( "<!--[if IE]><meta http-equiv=\"page-enter\" content=\"blendTrans(Duration=0.1)\""+GXUtil.HtmlEndTag( HTMLElement.META)+"<![endif]-->") ;
-            context.WriteHtmlTextNl( "<meta name=\"fragment\" content=\"!\""+GXUtil.HtmlEndTag( HTMLElement.META)) ;
-            idxLst = 1;
-            addContentType = true;
-            while ( idxLst <= radrMetaequiv.ItemCount )
-            {
-               if ( StringUtil.StrCmp(StringUtil.Lower( radrMetaequiv.getItemValue(idxLst)), "content-type") == 0 )
-               {
-                  addContentType = false;
-                  wbTemp = context.ResponseContentType( radrMetaequiv.getItemText(idxLst));
-               }
-               idxLst = (short)(idxLst+1);
-            }
-            if ( addContentType )
-            {
-               context.WriteHtmlTextNl( "<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\""+GXUtil.HtmlEndTag( HTMLElement.META)) ;
-            }
-            idxLst = 1;
-            while ( idxLst <= radrMetaequiv.ItemCount )
-            {
-               context.WriteHtmlText( "<meta http-equiv=\""+StringUtil.RTrim( radrMetaequiv.getItemValue(idxLst))+"\" content=\"") ;
-               context.SendWebAttribute( StringUtil.RTrim( radrMetaequiv.getItemText(idxLst))) ;
-               context.WriteHtmlTextNl( "\""+GXUtil.HtmlEndTag( HTMLElement.META)) ;
-               idxLst = (short)(idxLst+1);
-            }
          }
       }
 
@@ -2936,82 +3023,6 @@ namespace GeneXus.Programs {
          context.WriteHtmlText( "</legend>") ;
       }
 
-      static public void gx_div_start( IGxContext context ,
-                                       string sInternalName ,
-                                       int nVisible ,
-                                       int nWidth ,
-                                       string sWidthUnit ,
-                                       int nHeight ,
-                                       string sHeightUnit ,
-                                       string sClassString ,
-                                       string sAlign ,
-                                       string sVAlign ,
-                                       string sTags ,
-                                       string sExtraStyle ,
-                                       string sHtmlTag )
-      {
-         string sOStyle;
-         bool bHAlignedVar;
-         bool bVAlignedVar;
-         sAlign = StringUtil.Lower( sAlign);
-         sVAlign = StringUtil.Lower( sVAlign);
-         bHAlignedVar = (bool)(!String.IsNullOrEmpty(StringUtil.RTrim( sAlign))&&(StringUtil.StrCmp(StringUtil.Lower( sAlign), "left")!=0)&&(StringUtil.StrCmp(StringUtil.Lower( sAlign), "start")!=0));
-         bVAlignedVar = (bool)(!String.IsNullOrEmpty(StringUtil.RTrim( sVAlign))&&(StringUtil.StrCmp(StringUtil.Lower( sVAlign), "top")!=0));
-         context.WriteHtmlText( "<"+sHtmlTag+" ") ;
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( sInternalName)) )
-         {
-            context.WriteHtmlText( "id=\""+sInternalName+"\" ") ;
-         }
-         GxWebStd.ClassAttribute( context, sClassString);
-         sOStyle = "";
-         if ( nVisible == 0 )
-         {
-            sOStyle = "display:none;";
-         }
-         if ( ! (0==nWidth) )
-         {
-            sOStyle += " width:" + StringUtil.LTrimStr( (decimal)(nWidth), 10, 0) + sWidthUnit + ";";
-         }
-         if ( ! (0==nHeight) )
-         {
-            sOStyle += " height:" + StringUtil.LTrimStr( (decimal)(nHeight), 10, 0) + sHeightUnit + ";";
-         }
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( sExtraStyle)) )
-         {
-            sOStyle += CSSHelper.Prettify( sExtraStyle+";");
-         }
-         if ( bHAlignedVar || bVAlignedVar )
-         {
-            context.WriteHtmlText( "data-align-flex ") ;
-         }
-         GxWebStd.StyleAttribute( context, sOStyle);
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( sTags)) )
-         {
-            context.WriteHtmlText( sTags) ;
-         }
-         if ( bHAlignedVar )
-         {
-            context.WriteHtmlText( " data-align=\"") ;
-            context.WriteHtmlText( sAlign) ;
-            context.WriteHtmlText( "\"") ;
-         }
-         if ( bVAlignedVar )
-         {
-            context.WriteHtmlText( " data-valign=\"") ;
-            context.WriteHtmlText( sVAlign) ;
-            context.WriteHtmlText( "\"") ;
-         }
-         context.WriteHtmlText( ">") ;
-      }
-
-      static public void gx_div_end( IGxContext context ,
-                                     string sAlign ,
-                                     string sVAlign ,
-                                     string sHtmlTag )
-      {
-         context.WriteHtmlText( "</"+sHtmlTag+">") ;
-      }
-
       static public void gx_embedded_page( IGxContext context ,
                                            string sInternalName ,
                                            string sSrc ,
@@ -3113,17 +3124,6 @@ namespace GeneXus.Programs {
          {
             context.WriteHtmlText( " style=\"") ;
             context.SendWebValue( StringUtil.LTrim( CSSHelper.Prettify( sStyle))) ;
-            context.WriteHtmlText( "\" ") ;
-         }
-      }
-
-      static public void ClassAttribute( IGxContext context ,
-                                         string sClass )
-      {
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( sClass)) )
-         {
-            context.WriteHtmlText( " class=\"") ;
-            context.SendWebValue( StringUtil.LTrim( sClass)) ;
             context.WriteHtmlText( "\" ") ;
          }
       }

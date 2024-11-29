@@ -547,14 +547,14 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-sm-6 DataContentCell DscTop", "start", "top", "", "", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+edtProjectId_Internalname+"\"", "", "div");
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+edtEmployeeIsActiveInProject_Internalname+"\"", "", "div");
             /* Attribute/Variable Label */
-            GxWebStd.gx_label_element( context, edtProjectId_Internalname, "Employees", " AttributeLabel", 1, true, "");
+            GxWebStd.gx_label_element( context, edtEmployeeIsActiveInProject_Internalname, "Employees", " AttributeLabel", 1, true, "");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
             /* Single line edit */
             TempTags = "  onfocus=\"gx.evt.onfocus(this, 45,'" + sPrefix + "',false,'',0)\"";
-            GxWebStd.gx_single_line_edit( context, edtProjectId_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(A102ProjectId), 10, 0, ".", "")), StringUtil.LTrim( ((edtProjectId_Enabled!=0) ? context.localUtil.Format( (decimal)(A102ProjectId), "ZZZZZZZZZ9") : context.localUtil.Format( (decimal)(A102ProjectId), "ZZZZZZZZZ9"))), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+TempTags+" onchange=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onblur(this,45);\"", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtProjectId_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtProjectId_Enabled, 0, "text", "1", 10, "chr", 1, "row", 10, 0, 0, 0, 0, -1, 0, true, "Id", "end", false, "", "HLP_WorkHourLogGeneral.htm");
+            GxWebStd.gx_single_line_edit( context, edtEmployeeIsActiveInProject_Internalname, StringUtil.BoolToStr( A184EmployeeIsActiveInProject), StringUtil.BoolToStr( A184EmployeeIsActiveInProject), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,45);\"", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtEmployeeIsActiveInProject_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtEmployeeIsActiveInProject_Enabled, 0, "text", "", 4, "chr", 1, "row", 4, 0, 0, 0, 0, 0, 0, true, "", "end", false, "", "HLP_WorkHourLogGeneral.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -886,10 +886,13 @@ namespace GeneXus.Programs {
             while ( (pr_default.getStatus(0) != 101) )
             {
                A106EmployeeId = H00372_A106EmployeeId[0];
+               A102ProjectId = H00372_A102ProjectId[0];
+               A166ProjectManagerId = H00372_A166ProjectManagerId[0];
+               n166ProjectManagerId = H00372_n166ProjectManagerId[0];
                A103ProjectName = H00372_A103ProjectName[0];
                AssignAttri(sPrefix, false, "A103ProjectName", A103ProjectName);
-               A102ProjectId = H00372_A102ProjectId[0];
-               AssignAttri(sPrefix, false, "A102ProjectId", StringUtil.LTrimStr( (decimal)(A102ProjectId), 10, 0));
+               A184EmployeeIsActiveInProject = H00372_A184EmployeeIsActiveInProject[0];
+               AssignAttri(sPrefix, false, "A184EmployeeIsActiveInProject", A184EmployeeIsActiveInProject);
                A107EmployeeFirstName = H00372_A107EmployeeFirstName[0];
                AssignAttri(sPrefix, false, "A107EmployeeFirstName", A107EmployeeFirstName);
                A123WorkHourLogDescription = H00372_A123WorkHourLogDescription[0];
@@ -904,8 +907,17 @@ namespace GeneXus.Programs {
                AssignAttri(sPrefix, false, "A119WorkHourLogDate", context.localUtil.Format(A119WorkHourLogDate, "99/99/99"));
                A107EmployeeFirstName = H00372_A107EmployeeFirstName[0];
                AssignAttri(sPrefix, false, "A107EmployeeFirstName", A107EmployeeFirstName);
+               A166ProjectManagerId = H00372_A166ProjectManagerId[0];
+               n166ProjectManagerId = H00372_n166ProjectManagerId[0];
                A103ProjectName = H00372_A103ProjectName[0];
                AssignAttri(sPrefix, false, "A103ProjectName", A103ProjectName);
+               A184EmployeeIsActiveInProject = H00372_A184EmployeeIsActiveInProject[0];
+               AssignAttri(sPrefix, false, "A184EmployeeIsActiveInProject", A184EmployeeIsActiveInProject);
+               /* Using cursor H00373 */
+               pr_default.execute(1, new Object[] {n166ProjectManagerId, A166ProjectManagerId, A102ProjectId});
+               A184EmployeeIsActiveInProject = H00373_A184EmployeeIsActiveInProject[0];
+               AssignAttri(sPrefix, false, "A184EmployeeIsActiveInProject", A184EmployeeIsActiveInProject);
+               pr_default.close(1);
                /* Execute user event: Load */
                E14372 ();
                /* Exiting from a For First loop. */
@@ -941,8 +953,8 @@ namespace GeneXus.Programs {
          AssignProp(sPrefix, false, edtWorkHourLogDescription_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtWorkHourLogDescription_Enabled), 5, 0), true);
          edtEmployeeFirstName_Enabled = 0;
          AssignProp(sPrefix, false, edtEmployeeFirstName_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtEmployeeFirstName_Enabled), 5, 0), true);
-         edtProjectId_Enabled = 0;
-         AssignProp(sPrefix, false, edtProjectId_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtProjectId_Enabled), 5, 0), true);
+         edtEmployeeIsActiveInProject_Enabled = 0;
+         AssignProp(sPrefix, false, edtEmployeeIsActiveInProject_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtEmployeeIsActiveInProject_Enabled), 5, 0), true);
          edtProjectName_Enabled = 0;
          AssignProp(sPrefix, false, edtProjectName_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtProjectName_Enabled), 5, 0), true);
          fix_multi_value_controls( ) ;
@@ -980,8 +992,8 @@ namespace GeneXus.Programs {
             AssignAttri(sPrefix, false, "A123WorkHourLogDescription", A123WorkHourLogDescription);
             A107EmployeeFirstName = cgiGet( edtEmployeeFirstName_Internalname);
             AssignAttri(sPrefix, false, "A107EmployeeFirstName", A107EmployeeFirstName);
-            A102ProjectId = (long)(Math.Round(context.localUtil.CToN( cgiGet( edtProjectId_Internalname), ".", ","), 18, MidpointRounding.ToEven));
-            AssignAttri(sPrefix, false, "A102ProjectId", StringUtil.LTrimStr( (decimal)(A102ProjectId), 10, 0));
+            A184EmployeeIsActiveInProject = StringUtil.StrToBool( cgiGet( edtEmployeeIsActiveInProject_Internalname));
+            AssignAttri(sPrefix, false, "A184EmployeeIsActiveInProject", A184EmployeeIsActiveInProject);
             A103ProjectName = cgiGet( edtProjectName_Internalname);
             AssignAttri(sPrefix, false, "A103ProjectName", A103ProjectName);
             /* Read subfile selected row values. */
@@ -1000,6 +1012,7 @@ namespace GeneXus.Programs {
          E13372 ();
          if ( returnInSub )
          {
+            pr_default.close(1);
             returnInSub = true;
             if (true) return;
          }
@@ -1014,6 +1027,7 @@ namespace GeneXus.Programs {
          S112 ();
          if ( returnInSub )
          {
+            pr_default.close(1);
             returnInSub = true;
             if (true) return;
          }
@@ -1258,7 +1272,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202410251219798", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024112810401273", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1274,7 +1288,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("workhourloggeneral.js", "?202410251219798", false, true);
+         context.AddJavascriptSource("workhourloggeneral.js", "?2024112810401273", false, true);
          /* End function include_jscripts */
       }
 
@@ -1292,7 +1306,7 @@ namespace GeneXus.Programs {
          edtWorkHourLogMinute_Internalname = sPrefix+"WORKHOURLOGMINUTE";
          edtWorkHourLogDescription_Internalname = sPrefix+"WORKHOURLOGDESCRIPTION";
          edtEmployeeFirstName_Internalname = sPrefix+"EMPLOYEEFIRSTNAME";
-         edtProjectId_Internalname = sPrefix+"PROJECTID";
+         edtEmployeeIsActiveInProject_Internalname = sPrefix+"EMPLOYEEISACTIVEINPROJECT";
          edtProjectName_Internalname = sPrefix+"PROJECTNAME";
          divTransactiondetail_tableattributes_Internalname = sPrefix+"TRANSACTIONDETAIL_TABLEATTRIBUTES";
          bttBtnupdate_Internalname = sPrefix+"BTNUPDATE";
@@ -1320,8 +1334,8 @@ namespace GeneXus.Programs {
          bttBtnupdate_Visible = 1;
          edtProjectName_Jsonclick = "";
          edtProjectName_Enabled = 0;
-         edtProjectId_Jsonclick = "";
-         edtProjectId_Enabled = 0;
+         edtEmployeeIsActiveInProject_Jsonclick = "";
+         edtEmployeeIsActiveInProject_Enabled = 0;
          edtEmployeeFirstName_Jsonclick = "";
          edtEmployeeFirstName_Enabled = 0;
          edtWorkHourLogDescription_Enabled = 0;
@@ -1357,7 +1371,6 @@ namespace GeneXus.Programs {
          setEventMetadata("'DODELETE'","""{"handler":"E12371","iparms":[{"av":"AV13IsAuthorized_Delete","fld":"vISAUTHORIZED_DELETE","hsh":true},{"av":"A118WorkHourLogId","fld":"WORKHOURLOGID","pic":"ZZZZZZZZZ9"}]""");
          setEventMetadata("'DODELETE'",""","oparms":[{"ctrl":"BTNDELETE","prop":"Visible"}]}""");
          setEventMetadata("VALID_WORKHOURLOGID","""{"handler":"Valid_Workhourlogid","iparms":[]}""");
-         setEventMetadata("VALID_PROJECTID","""{"handler":"Valid_Projectid","iparms":[]}""");
          return  ;
       }
 
@@ -1368,6 +1381,11 @@ namespace GeneXus.Programs {
          {
             context.CloseConnections();
          }
+      }
+
+      protected override void CloseCursors( )
+      {
+         pr_default.close(1);
       }
 
       public override void initialize( )
@@ -1398,15 +1416,19 @@ namespace GeneXus.Programs {
          EvtRowId = "";
          sEvtType = "";
          H00372_A106EmployeeId = new long[1] ;
+         H00372_A102ProjectId = new long[1] ;
+         H00372_A166ProjectManagerId = new long[1] ;
+         H00372_n166ProjectManagerId = new bool[] {false} ;
          H00372_A118WorkHourLogId = new long[1] ;
          H00372_A103ProjectName = new string[] {""} ;
-         H00372_A102ProjectId = new long[1] ;
+         H00372_A184EmployeeIsActiveInProject = new bool[] {false} ;
          H00372_A107EmployeeFirstName = new string[] {""} ;
          H00372_A123WorkHourLogDescription = new string[] {""} ;
          H00372_A122WorkHourLogMinute = new short[1] ;
          H00372_A121WorkHourLogHour = new short[1] ;
          H00372_A120WorkHourLogDuration = new string[] {""} ;
          H00372_A119WorkHourLogDate = new DateTime[] {DateTime.MinValue} ;
+         H00373_A184EmployeeIsActiveInProject = new bool[] {false} ;
          AV6WWPContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPContext(context);
          AV8TrnContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext(context);
          AV11HTTPRequest = new GxHttpRequest( context);
@@ -1417,7 +1439,11 @@ namespace GeneXus.Programs {
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.workhourloggeneral__default(),
             new Object[][] {
                 new Object[] {
-               H00372_A106EmployeeId, H00372_A118WorkHourLogId, H00372_A103ProjectName, H00372_A102ProjectId, H00372_A107EmployeeFirstName, H00372_A123WorkHourLogDescription, H00372_A122WorkHourLogMinute, H00372_A121WorkHourLogHour, H00372_A120WorkHourLogDuration, H00372_A119WorkHourLogDate
+               H00372_A106EmployeeId, H00372_A102ProjectId, H00372_A166ProjectManagerId, H00372_n166ProjectManagerId, H00372_A118WorkHourLogId, H00372_A103ProjectName, H00372_A184EmployeeIsActiveInProject, H00372_A107EmployeeFirstName, H00372_A123WorkHourLogDescription, H00372_A122WorkHourLogMinute,
+               H00372_A121WorkHourLogHour, H00372_A120WorkHourLogDuration, H00372_A119WorkHourLogDate
+               }
+               , new Object[] {
+               H00373_A184EmployeeIsActiveInProject
                }
             }
          );
@@ -1445,15 +1471,16 @@ namespace GeneXus.Programs {
       private int edtWorkHourLogMinute_Enabled ;
       private int edtWorkHourLogDescription_Enabled ;
       private int edtEmployeeFirstName_Enabled ;
-      private int edtProjectId_Enabled ;
+      private int edtEmployeeIsActiveInProject_Enabled ;
       private int edtProjectName_Enabled ;
       private int bttBtnupdate_Visible ;
       private int bttBtndelete_Visible ;
       private int idxLst ;
       private long A118WorkHourLogId ;
       private long wcpOA118WorkHourLogId ;
-      private long A102ProjectId ;
       private long A106EmployeeId ;
+      private long A102ProjectId ;
+      private long A166ProjectManagerId ;
       private string gxfirstwebparm ;
       private string gxfirstwebparm_bkp ;
       private string sPrefix ;
@@ -1485,8 +1512,8 @@ namespace GeneXus.Programs {
       private string edtEmployeeFirstName_Internalname ;
       private string A107EmployeeFirstName ;
       private string edtEmployeeFirstName_Jsonclick ;
-      private string edtProjectId_Internalname ;
-      private string edtProjectId_Jsonclick ;
+      private string edtEmployeeIsActiveInProject_Internalname ;
+      private string edtEmployeeIsActiveInProject_Jsonclick ;
       private string edtProjectName_Internalname ;
       private string A103ProjectName ;
       private string edtProjectName_Jsonclick ;
@@ -1506,9 +1533,11 @@ namespace GeneXus.Programs {
       private bool AV12IsAuthorized_Update ;
       private bool AV13IsAuthorized_Delete ;
       private bool wbLoad ;
+      private bool A184EmployeeIsActiveInProject ;
       private bool Rfr0gs ;
       private bool wbErr ;
       private bool gxdyncontrolsrefreshing ;
+      private bool n166ProjectManagerId ;
       private bool returnInSub ;
       private bool GXt_boolean1 ;
       private string A123WorkHourLogDescription ;
@@ -1520,15 +1549,19 @@ namespace GeneXus.Programs {
       private IGxDataStore dsDefault ;
       private IDataStoreProvider pr_default ;
       private long[] H00372_A106EmployeeId ;
+      private long[] H00372_A102ProjectId ;
+      private long[] H00372_A166ProjectManagerId ;
+      private bool[] H00372_n166ProjectManagerId ;
       private long[] H00372_A118WorkHourLogId ;
       private string[] H00372_A103ProjectName ;
-      private long[] H00372_A102ProjectId ;
+      private bool[] H00372_A184EmployeeIsActiveInProject ;
       private string[] H00372_A107EmployeeFirstName ;
       private string[] H00372_A123WorkHourLogDescription ;
       private short[] H00372_A122WorkHourLogMinute ;
       private short[] H00372_A121WorkHourLogHour ;
       private string[] H00372_A120WorkHourLogDuration ;
       private DateTime[] H00372_A119WorkHourLogDate ;
+      private bool[] H00373_A184EmployeeIsActiveInProject ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV6WWPContext ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext AV8TrnContext ;
       private msglist BackMsgLst ;
@@ -1542,6 +1575,7 @@ namespace GeneXus.Programs {
          cursorDefinitions();
          return new Cursor[] {
           new ForEachCursor(def[0])
+         ,new ForEachCursor(def[1])
        };
     }
 
@@ -1554,8 +1588,14 @@ namespace GeneXus.Programs {
           prmH00372 = new Object[] {
           new ParDef("WorkHourLogId",GXType.Int64,10,0)
           };
+          Object[] prmH00373;
+          prmH00373 = new Object[] {
+          new ParDef("ProjectManagerId",GXType.Int64,10,0){Nullable=true} ,
+          new ParDef("ProjectId",GXType.Int64,10,0)
+          };
           def= new CursorDef[] {
-              new CursorDef("H00372", "SELECT T1.EmployeeId, T1.WorkHourLogId, T3.ProjectName, T1.ProjectId, T2.EmployeeFirstName, T1.WorkHourLogDescription, T1.WorkHourLogMinute, T1.WorkHourLogHour, T1.WorkHourLogDuration, T1.WorkHourLogDate FROM ((WorkHourLog T1 INNER JOIN Employee T2 ON T2.EmployeeId = T1.EmployeeId) INNER JOIN Project T3 ON T3.ProjectId = T1.ProjectId) WHERE T1.WorkHourLogId = :WorkHourLogId ORDER BY T1.WorkHourLogId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00372,1, GxCacheFrequency.OFF ,true,true )
+              new CursorDef("H00372", "SELECT T1.EmployeeId, T1.ProjectId, T3.ProjectManagerId, T1.WorkHourLogId, T3.ProjectName, T4.EmployeeIsActiveInProject, T2.EmployeeFirstName, T1.WorkHourLogDescription, T1.WorkHourLogMinute, T1.WorkHourLogHour, T1.WorkHourLogDuration, T1.WorkHourLogDate FROM (((WorkHourLog T1 INNER JOIN Employee T2 ON T2.EmployeeId = T1.EmployeeId) INNER JOIN Project T3 ON T3.ProjectId = T1.ProjectId) INNER JOIN EmployeeProject T4 ON T4.EmployeeId = T1.EmployeeId AND T4.ProjectId = T1.ProjectId) WHERE T1.WorkHourLogId = :WorkHourLogId ORDER BY T1.WorkHourLogId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00372,1, GxCacheFrequency.OFF ,true,true )
+             ,new CursorDef("H00373", "SELECT EmployeeIsActiveInProject FROM EmployeeProject WHERE EmployeeId = :ProjectManagerId AND ProjectId = :ProjectId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmH00373,1, GxCacheFrequency.OFF ,true,true )
           };
        }
     }
@@ -1569,14 +1609,20 @@ namespace GeneXus.Programs {
              case 0 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);
                 ((long[]) buf[1])[0] = rslt.getLong(2);
-                ((string[]) buf[2])[0] = rslt.getString(3, 100);
-                ((long[]) buf[3])[0] = rslt.getLong(4);
-                ((string[]) buf[4])[0] = rslt.getString(5, 100);
-                ((string[]) buf[5])[0] = rslt.getLongVarchar(6);
-                ((short[]) buf[6])[0] = rslt.getShort(7);
-                ((short[]) buf[7])[0] = rslt.getShort(8);
-                ((string[]) buf[8])[0] = rslt.getVarchar(9);
-                ((DateTime[]) buf[9])[0] = rslt.getGXDate(10);
+                ((long[]) buf[2])[0] = rslt.getLong(3);
+                ((bool[]) buf[3])[0] = rslt.wasNull(3);
+                ((long[]) buf[4])[0] = rslt.getLong(4);
+                ((string[]) buf[5])[0] = rslt.getString(5, 100);
+                ((bool[]) buf[6])[0] = rslt.getBool(6);
+                ((string[]) buf[7])[0] = rslt.getString(7, 100);
+                ((string[]) buf[8])[0] = rslt.getLongVarchar(8);
+                ((short[]) buf[9])[0] = rslt.getShort(9);
+                ((short[]) buf[10])[0] = rslt.getShort(10);
+                ((string[]) buf[11])[0] = rslt.getVarchar(11);
+                ((DateTime[]) buf[12])[0] = rslt.getGXDate(12);
+                return;
+             case 1 :
+                ((bool[]) buf[0])[0] = rslt.getBool(1);
                 return;
        }
     }

@@ -3039,7 +3039,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202410251220794", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202411281041828", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -3055,7 +3055,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("leaverequestrejected.js", "?202410251220795", false, true);
+         context.AddJavascriptSource("leaverequestrejected.js", "?202411281041828", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -3669,8 +3669,8 @@ namespace GeneXus.Programs {
          Ddo_grid_Filtertype = "Character|Character|Date|Date|Character|Numeric|||Numeric";
          Ddo_grid_Includefilter = "T|T|T|T|T|T|||T";
          Ddo_grid_Fixable = "T";
-         Ddo_grid_Includesortasc = "T|T|T|T|T|T|||T";
-         Ddo_grid_Columnssortvalues = "2|3|4|5|6|7|||8";
+         Ddo_grid_Includesortasc = "T|T|T|T|T|T|||";
+         Ddo_grid_Columnssortvalues = "2|3|4|5|6|7|||";
          Ddo_grid_Columnids = "2:EmployeeName|3:LeaveTypeName|5:LeaveRequestStartDate|6:LeaveRequestEndDate|7:LeaveRequestHalfDay|8:LeaveRequestDuration|11:LeaveRequestDescriptionVariable|14:LeaveRequestRejectionReasonVariable|15:EmployeeBalance";
          Ddo_grid_Gridinternalname = "";
          Ddo_agexport_Titlecontrolidtoreplace = "";
@@ -4543,14 +4543,6 @@ namespace GeneXus.Programs {
          {
             sOrderString += " ORDER BY T1.LeaveRequestDuration DESC, T1.LeaveRequestId";
          }
-         else if ( ( AV15OrderedBy == 8 ) && ! AV16OrderedDsc )
-         {
-            sOrderString += " ORDER BY T2.EmployeeBalance, T1.LeaveRequestId";
-         }
-         else if ( ( AV15OrderedBy == 8 ) && ( AV16OrderedDsc ) )
-         {
-            sOrderString += " ORDER BY T2.EmployeeBalance DESC, T1.LeaveRequestId";
-         }
          else if ( true )
          {
             sOrderString += " ORDER BY T1.LeaveRequestId";
@@ -4800,14 +4792,6 @@ namespace GeneXus.Programs {
             scmdbuf += "";
          }
          else if ( ( AV15OrderedBy == 7 ) && ( AV16OrderedDsc ) )
-         {
-            scmdbuf += "";
-         }
-         else if ( ( AV15OrderedBy == 8 ) && ! AV16OrderedDsc )
-         {
-            scmdbuf += "";
-         }
-         else if ( ( AV15OrderedBy == 8 ) && ( AV16OrderedDsc ) )
          {
             scmdbuf += "";
          }

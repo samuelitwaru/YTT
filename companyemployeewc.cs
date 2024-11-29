@@ -2268,7 +2268,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024102512182945", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024112810394646", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2284,7 +2284,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("companyemployeewc.js", "?2024102512182946", false, true);
+         context.AddJavascriptSource("companyemployeewc.js", "?2024112810394647", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -2752,8 +2752,8 @@ namespace GeneXus.Programs {
          bttBtninsert_Visible = 1;
          Grid_empowerer_Hastitlesettings = Convert.ToBoolean( -1);
          Ddo_grid_Includesortasc = "T";
-         Ddo_grid_Columnssortvalues = "2|1|3|4|5|6|7|8|9";
-         Ddo_grid_Columnids = "2:EmployeeId|3:EmployeeFirstName|4:EmployeeLastName|5:EmployeeEmail|6:EmployeeIsManager|7:GAMUserGUID|8:EmployeeIsActive|9:EmployeeVactionDays|10:EmployeeBalance";
+         Ddo_grid_Columnssortvalues = "2|1|3|4|5|6|7|8";
+         Ddo_grid_Columnids = "2:EmployeeId|3:EmployeeFirstName|4:EmployeeLastName|5:EmployeeEmail|6:EmployeeIsManager|7:GAMUserGUID|8:EmployeeIsActive|9:EmployeeVactionDays";
          Ddo_grid_Gridinternalname = "";
          Gridpaginationbar_Rowsperpagecaption = "WWP_PagingRowsPerPage";
          Gridpaginationbar_Emptygridcaption = "WWP_PagingEmptyGridCaption";
@@ -3250,14 +3250,6 @@ namespace GeneXus.Programs {
          {
             sOrderString += " ORDER BY CompanyId DESC, EmployeeVactionDays DESC, EmployeeId";
          }
-         else if ( ( AV14OrderedBy == 9 ) && ! AV15OrderedDsc )
-         {
-            sOrderString += " ORDER BY CompanyId, EmployeeBalance, EmployeeId";
-         }
-         else if ( ( AV14OrderedBy == 9 ) && ( AV15OrderedDsc ) )
-         {
-            sOrderString += " ORDER BY CompanyId DESC, EmployeeBalance DESC, EmployeeId";
-         }
          else if ( true )
          {
             sOrderString += " ORDER BY EmployeeId";
@@ -3364,14 +3356,6 @@ namespace GeneXus.Programs {
             scmdbuf += "";
          }
          else if ( ( AV14OrderedBy == 8 ) && ( AV15OrderedDsc ) )
-         {
-            scmdbuf += "";
-         }
-         else if ( ( AV14OrderedBy == 9 ) && ! AV15OrderedDsc )
-         {
-            scmdbuf += "";
-         }
-         else if ( ( AV14OrderedBy == 9 ) && ( AV15OrderedDsc ) )
          {
             scmdbuf += "";
          }

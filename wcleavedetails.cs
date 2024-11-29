@@ -773,10 +773,6 @@ namespace GeneXus.Programs {
             this.executeExternalObjectMethod(sPrefix, false, "GlobalEvents", "ApprovedLeaveRequests", new Object[] {}, true);
             AV7Employee.Load(AV9LeaveRequest.gxTpr_Employeeid);
             AV11LeaveType.Load(AV9LeaveRequest.gxTpr_Leavetypeid);
-            if ( StringUtil.StrCmp(AV11LeaveType.gxTpr_Leavetypevacationleave, "Yes") == 0 )
-            {
-               AV7Employee.gxTpr_Employeebalance = (decimal)(AV7Employee.gxTpr_Employeebalance-AV9LeaveRequest.gxTpr_Leaverequestduration);
-            }
             if ( AV7Employee.Update() )
             {
                GXt_char1 = AV11LeaveType.gxTpr_Leavetypename + " approved";
@@ -1022,7 +1018,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024102512192255", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202411281040214", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1040,7 +1036,7 @@ namespace GeneXus.Programs {
       {
          if ( nGXWrapped != 1 )
          {
-            context.AddJavascriptSource("wcleavedetails.js", "?2024102512192255", false, true);
+            context.AddJavascriptSource("wcleavedetails.js", "?202411281040214", false, true);
          }
          /* End function include_jscripts */
       }

@@ -57,7 +57,7 @@ namespace GeneXus.Programs {
          metadata.Set("BT", "Employee");
          metadata.Set("PK", "[ \"EmployeeId\" ]");
          metadata.Set("PKAssigned", "[ \"EmployeeId\" ]");
-         metadata.Set("Levels", "[ \"Project\" ]");
+         metadata.Set("Levels", "[ \"Project\",\"VacationSet\" ]");
          metadata.Set("FKList", "[ { \"FK\":[ \"CompanyId\" ],\"FKMap\":[  ] } ]");
          metadata.Set("AllowInsert", "True");
          metadata.Set("AllowUpdate", "True");
@@ -103,6 +103,7 @@ namespace GeneXus.Programs {
          gxTv_SdtEmployee_Employeevactiondays = sdt.gxTv_SdtEmployee_Employeevactiondays ;
          gxTv_SdtEmployee_Employeevacationdayssetdate = sdt.gxTv_SdtEmployee_Employeevacationdayssetdate ;
          gxTv_SdtEmployee_Employeebalance = sdt.gxTv_SdtEmployee_Employeebalance ;
+         gxTv_SdtEmployee_Vacationset = sdt.gxTv_SdtEmployee_Vacationset ;
          gxTv_SdtEmployee_Project = sdt.gxTv_SdtEmployee_Project ;
          gxTv_SdtEmployee_Mode = sdt.gxTv_SdtEmployee_Mode ;
          gxTv_SdtEmployee_Initialized = sdt.gxTv_SdtEmployee_Initialized ;
@@ -159,6 +160,10 @@ namespace GeneXus.Programs {
          sDateCnv += StringUtil.Substring( "00", 1, 2-StringUtil.Len( sNumToPad)) + sNumToPad;
          AddObjectProperty("EmployeeVacationDaysSetDate", sDateCnv, false, includeNonInitialized);
          AddObjectProperty("EmployeeBalance", gxTv_SdtEmployee_Employeebalance, false, includeNonInitialized);
+         if ( gxTv_SdtEmployee_Vacationset != null )
+         {
+            AddObjectProperty("VacationSet", gxTv_SdtEmployee_Vacationset, includeState, includeNonInitialized);
+         }
          if ( gxTv_SdtEmployee_Project != null )
          {
             AddObjectProperty("Project", gxTv_SdtEmployee_Project, includeState, includeNonInitialized);
@@ -260,6 +265,32 @@ namespace GeneXus.Programs {
             sdtIsNull = 0;
             gxTv_SdtEmployee_Employeebalance = sdt.gxTv_SdtEmployee_Employeebalance ;
          }
+         if ( gxTv_SdtEmployee_Vacationset != null )
+         {
+            GXBCLevelCollection<SdtEmployee_VacationSet> newCollectionVacationset = sdt.gxTpr_Vacationset;
+            SdtEmployee_VacationSet currItemVacationset;
+            SdtEmployee_VacationSet newItemVacationset;
+            short idx = 1;
+            while ( idx <= newCollectionVacationset.Count )
+            {
+               newItemVacationset = ((SdtEmployee_VacationSet)newCollectionVacationset.Item(idx));
+               currItemVacationset = gxTv_SdtEmployee_Vacationset.GetByKey(newItemVacationset.gxTpr_Vacationsetdate);
+               if ( StringUtil.StrCmp(currItemVacationset.gxTpr_Mode, "UPD") == 0 )
+               {
+                  currItemVacationset.UpdateDirties(newItemVacationset);
+                  if ( StringUtil.StrCmp(newItemVacationset.gxTpr_Mode, "DLT") == 0 )
+                  {
+                     currItemVacationset.gxTpr_Mode = "DLT";
+                  }
+                  currItemVacationset.gxTpr_Modified = 1;
+               }
+               else
+               {
+                  gxTv_SdtEmployee_Vacationset.Add(newItemVacationset, 0);
+               }
+               idx = (short)(idx+1);
+            }
+         }
          if ( gxTv_SdtEmployee_Project != null )
          {
             GXBCLevelCollection<SdtEmployee_Project> newCollectionProject = sdt.gxTpr_Project;
@@ -315,6 +346,19 @@ namespace GeneXus.Programs {
                this.gxTv_SdtEmployee_Employeevactiondays_Z_SetNull( );
                this.gxTv_SdtEmployee_Employeevacationdayssetdate_Z_SetNull( );
                this.gxTv_SdtEmployee_Employeebalance_Z_SetNull( );
+               if ( gxTv_SdtEmployee_Vacationset != null )
+               {
+                  GXBCLevelCollection<SdtEmployee_VacationSet> collectionVacationset = gxTv_SdtEmployee_Vacationset;
+                  SdtEmployee_VacationSet currItemVacationset;
+                  short idx = 1;
+                  while ( idx <= collectionVacationset.Count )
+                  {
+                     currItemVacationset = ((SdtEmployee_VacationSet)collectionVacationset.Item(idx));
+                     currItemVacationset.gxTpr_Mode = "INS";
+                     currItemVacationset.gxTpr_Modified = 1;
+                     idx = (short)(idx+1);
+                  }
+               }
                if ( gxTv_SdtEmployee_Project != null )
                {
                   GXBCLevelCollection<SdtEmployee_Project> collectionProject = gxTv_SdtEmployee_Project;
@@ -544,6 +588,66 @@ namespace GeneXus.Programs {
             SetDirty("Employeebalance");
          }
 
+      }
+
+      [  SoapElement( ElementName = "VacationSet" )]
+      [  XmlArray( ElementName = "VacationSet"  )]
+      [  XmlArrayItemAttribute( ElementName= "Employee.VacationSet"  , IsNullable=false)]
+      public GXBCLevelCollection<SdtEmployee_VacationSet> gxTpr_Vacationset_GXBCLevelCollection
+      {
+         get {
+            if ( gxTv_SdtEmployee_Vacationset == null )
+            {
+               gxTv_SdtEmployee_Vacationset = new GXBCLevelCollection<SdtEmployee_VacationSet>( context, "Employee.VacationSet", "YTT_version4");
+            }
+            return gxTv_SdtEmployee_Vacationset ;
+         }
+
+         set {
+            if ( gxTv_SdtEmployee_Vacationset == null )
+            {
+               gxTv_SdtEmployee_Vacationset = new GXBCLevelCollection<SdtEmployee_VacationSet>( context, "Employee.VacationSet", "YTT_version4");
+            }
+            sdtIsNull = 0;
+            gxTv_SdtEmployee_Vacationset = value;
+         }
+
+      }
+
+      [XmlIgnore]
+      public GXBCLevelCollection<SdtEmployee_VacationSet> gxTpr_Vacationset
+      {
+         get {
+            if ( gxTv_SdtEmployee_Vacationset == null )
+            {
+               gxTv_SdtEmployee_Vacationset = new GXBCLevelCollection<SdtEmployee_VacationSet>( context, "Employee.VacationSet", "YTT_version4");
+            }
+            sdtIsNull = 0;
+            return gxTv_SdtEmployee_Vacationset ;
+         }
+
+         set {
+            sdtIsNull = 0;
+            gxTv_SdtEmployee_Vacationset = value;
+            SetDirty("Vacationset");
+         }
+
+      }
+
+      public void gxTv_SdtEmployee_Vacationset_SetNull( )
+      {
+         gxTv_SdtEmployee_Vacationset = null;
+         SetDirty("Vacationset");
+         return  ;
+      }
+
+      public bool gxTv_SdtEmployee_Vacationset_IsNull( )
+      {
+         if ( gxTv_SdtEmployee_Vacationset == null )
+         {
+            return true ;
+         }
+         return false ;
       }
 
       [  SoapElement( ElementName = "Project" )]
@@ -1124,6 +1228,7 @@ namespace GeneXus.Programs {
       private string gxTv_SdtEmployee_Gamuserguid ;
       private string gxTv_SdtEmployee_Employeeemail_Z ;
       private string gxTv_SdtEmployee_Gamuserguid_Z ;
+      private GXBCLevelCollection<SdtEmployee_VacationSet> gxTv_SdtEmployee_Vacationset=null ;
       private GXBCLevelCollection<SdtEmployee_Project> gxTv_SdtEmployee_Project=null ;
    }
 
@@ -1321,7 +1426,20 @@ namespace GeneXus.Programs {
 
       }
 
-      [DataMember( Name = "Project" , Order = 13 )]
+      [DataMember( Name = "VacationSet" , Order = 13 )]
+      public GxGenericCollection<SdtEmployee_VacationSet_RESTInterface> gxTpr_Vacationset
+      {
+         get {
+            return new GxGenericCollection<SdtEmployee_VacationSet_RESTInterface>(sdt.gxTpr_Vacationset) ;
+         }
+
+         set {
+            value.LoadCollection(sdt.gxTpr_Vacationset);
+         }
+
+      }
+
+      [DataMember( Name = "Project" , Order = 14 )]
       public GxGenericCollection<SdtEmployee_Project_RESTInterface> gxTpr_Project
       {
          get {
@@ -1355,7 +1473,7 @@ namespace GeneXus.Programs {
          }
       }
 
-      [DataMember( Name = "gx_md5_hash", Order = 14 )]
+      [DataMember( Name = "gx_md5_hash", Order = 15 )]
       public string Hash
       {
          get {

@@ -1044,14 +1044,6 @@ namespace GeneXus.Programs {
          {
             scmdbuf += " ORDER BY T1.LeaveRequestDuration DESC";
          }
-         else if ( ( AV17OrderedBy == 8 ) && ! AV18OrderedDsc )
-         {
-            scmdbuf += " ORDER BY T3.EmployeeBalance";
-         }
-         else if ( ( AV17OrderedBy == 8 ) && ( AV18OrderedDsc ) )
-         {
-            scmdbuf += " ORDER BY T3.EmployeeBalance DESC";
-         }
          GXv_Object5[0] = scmdbuf;
          GXv_Object5[1] = GXv_int4;
          return GXv_Object5 ;

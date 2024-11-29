@@ -216,12 +216,6 @@ namespace GeneXus.Programs {
                      new GeneXus.Programs.wwpbaseobjects.wwp_export_securetext(context ).execute(  AV17SDT_EmployeeBalanceActionsItem.gxTpr_Type, out  GXt_char1) ;
                      AV11ExcelDocument.get_Cells(AV14CellRow, (int)(AV15FirstColumn+AV32VisibleColumnCount), 1, 1).Text = GXt_char1;
                   }
-                  else if ( StringUtil.StrCmp(AV26ColumnsSelector_Column.gxTpr_Columnname, "SDT_EmployeeBalanceActions__Description") == 0 )
-                  {
-                     GXt_char1 = "";
-                     new GeneXus.Programs.wwpbaseobjects.wwp_export_securetext(context ).execute(  AV17SDT_EmployeeBalanceActionsItem.gxTpr_Description, out  GXt_char1) ;
-                     AV11ExcelDocument.get_Cells(AV14CellRow, (int)(AV15FirstColumn+AV32VisibleColumnCount), 1, 1).Text = GXt_char1;
-                  }
                   else if ( StringUtil.StrCmp(AV26ColumnsSelector_Column.gxTpr_Columnname, "SDT_EmployeeBalanceActions__DurationInHours") == 0 )
                   {
                      AV11ExcelDocument.get_Cells(AV14CellRow, (int)(AV15FirstColumn+AV32VisibleColumnCount), 1, 1).Number = AV17SDT_EmployeeBalanceActionsItem.gxTpr_Durationinhours;
@@ -229,6 +223,12 @@ namespace GeneXus.Programs {
                   else if ( StringUtil.StrCmp(AV26ColumnsSelector_Column.gxTpr_Columnname, "SDT_EmployeeBalanceActions__DurationInDays") == 0 )
                   {
                      AV11ExcelDocument.get_Cells(AV14CellRow, (int)(AV15FirstColumn+AV32VisibleColumnCount), 1, 1).Number = AV17SDT_EmployeeBalanceActionsItem.gxTpr_Durationindays;
+                  }
+                  else if ( StringUtil.StrCmp(AV26ColumnsSelector_Column.gxTpr_Columnname, "SDT_EmployeeBalanceActions__Description") == 0 )
+                  {
+                     GXt_char1 = "";
+                     new GeneXus.Programs.wwpbaseobjects.wwp_export_securetext(context ).execute(  AV17SDT_EmployeeBalanceActionsItem.gxTpr_Description, out  GXt_char1) ;
+                     AV11ExcelDocument.get_Cells(AV14CellRow, (int)(AV15FirstColumn+AV32VisibleColumnCount), 1, 1).Text = GXt_char1;
                   }
                   AV32VisibleColumnCount = (long)(AV32VisibleColumnCount+1);
                }
@@ -277,9 +277,9 @@ namespace GeneXus.Programs {
          new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV24ColumnsSelector,  "SDT_EmployeeBalanceActions__StartDate",  "",  "Start Date",  true,  "") ;
          new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV24ColumnsSelector,  "SDT_EmployeeBalanceActions__EndDate",  "",  "End Date",  true,  "") ;
          new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV24ColumnsSelector,  "SDT_EmployeeBalanceActions__Type",  "",  "Type",  true,  "") ;
-         new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV24ColumnsSelector,  "SDT_EmployeeBalanceActions__Description",  "",  "Description",  true,  "") ;
          new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV24ColumnsSelector,  "SDT_EmployeeBalanceActions__DurationInHours",  "",  "Duration In Hours",  true,  "") ;
          new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV24ColumnsSelector,  "SDT_EmployeeBalanceActions__DurationInDays",  "",  "Duration In Days",  true,  "") ;
+         new GeneXus.Programs.wwpbaseobjects.wwp_columnsselector_add(context ).execute( ref  AV24ColumnsSelector,  "SDT_EmployeeBalanceActions__Description",  "",  "Description",  true,  "") ;
          GXt_char1 = AV28UserCustomValue;
          new GeneXus.Programs.wwpbaseobjects.loadcolumnsselectorstate(context ).execute(  "WP_LeaveBalanceReportColumnsSelector", out  GXt_char1) ;
          AV28UserCustomValue = GXt_char1;

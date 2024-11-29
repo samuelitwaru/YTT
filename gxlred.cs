@@ -58,6 +58,8 @@ namespace GeneXus.Programs {
       {
          /* GeneXus formulas */
          /* Output device settings */
+         /* API remote call */
+         new employeeloadredundancy(context ).execute( ) ;
          cleanup();
       }
 

@@ -247,25 +247,16 @@ namespace GeneXus.Programs {
          {
             GXPagingFrom5 = AV12SkipItems;
             GXPagingTo5 = AV11MaxItems;
-            pr_default.dynParam(3, new Object[]{ new Object[]{
-                                                 AV14SearchTxt ,
-                                                 A102ProjectId ,
-                                                 AV29Cond_EmployeeId ,
-                                                 A106EmployeeId } ,
-                                                 new int[]{
-                                                 TypeConstants.LONG, TypeConstants.LONG, TypeConstants.LONG
-                                                 }
-            });
-            lV14SearchTxt = StringUtil.Concat( StringUtil.RTrim( AV14SearchTxt), "%", "");
             /* Using cursor P006C5 */
-            pr_default.execute(3, new Object[] {AV29Cond_EmployeeId, lV14SearchTxt, GXPagingFrom5, GXPagingTo5, GXPagingTo5});
+            pr_default.execute(3, new Object[] {AV29Cond_EmployeeId, GXPagingFrom5, GXPagingTo5});
             while ( (pr_default.getStatus(3) != 101) )
             {
-               A102ProjectId = P006C5_A102ProjectId[0];
                A106EmployeeId = P006C5_A106EmployeeId[0];
+               A102ProjectId = P006C5_A102ProjectId[0];
+               A184EmployeeIsActiveInProject = P006C5_A184EmployeeIsActiveInProject[0];
                AV16Combo_DataItem = new GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item(context);
                AV16Combo_DataItem.gxTpr_Id = StringUtil.Trim( StringUtil.Str( (decimal)(A102ProjectId), 10, 0));
-               AV16Combo_DataItem.gxTpr_Title = StringUtil.Trim( context.localUtil.Format( (decimal)(A102ProjectId), "ZZZZZZZZZ9"));
+               AV16Combo_DataItem.gxTpr_Title = StringUtil.Trim( StringUtil.BoolToStr( A184EmployeeIsActiveInProject));
                AV15Combo_Data.Add(AV16Combo_DataItem, 0);
                if ( AV15Combo_Data.Count > AV11MaxItems )
                {
@@ -281,18 +272,50 @@ namespace GeneXus.Programs {
          {
             if ( StringUtil.StrCmp(AV18TrnMode, "INS") != 0 )
             {
-               /* Using cursor P006C6 */
-               pr_default.execute(4, new Object[] {AV20WorkHourLogId});
-               while ( (pr_default.getStatus(4) != 101) )
+               if ( StringUtil.StrCmp(AV18TrnMode, "GET") != 0 )
                {
-                  A118WorkHourLogId = P006C6_A118WorkHourLogId[0];
-                  A102ProjectId = P006C6_A102ProjectId[0];
-                  AV22SelectedValue = ((0==A102ProjectId) ? "" : StringUtil.Trim( StringUtil.Str( (decimal)(A102ProjectId), 10, 0)));
-                  AV23SelectedText = AV22SelectedValue;
-                  /* Exiting from a For First loop. */
-                  if (true) break;
+                  /* Using cursor P006C6 */
+                  pr_default.execute(4, new Object[] {AV20WorkHourLogId});
+                  while ( (pr_default.getStatus(4) != 101) )
+                  {
+                     A106EmployeeId = P006C6_A106EmployeeId[0];
+                     A166ProjectManagerId = P006C6_A166ProjectManagerId[0];
+                     n166ProjectManagerId = P006C6_n166ProjectManagerId[0];
+                     A118WorkHourLogId = P006C6_A118WorkHourLogId[0];
+                     A102ProjectId = P006C6_A102ProjectId[0];
+                     A184EmployeeIsActiveInProject = P006C6_A184EmployeeIsActiveInProject[0];
+                     A166ProjectManagerId = P006C6_A166ProjectManagerId[0];
+                     n166ProjectManagerId = P006C6_n166ProjectManagerId[0];
+                     A184EmployeeIsActiveInProject = P006C6_A184EmployeeIsActiveInProject[0];
+                     /* Using cursor P006C7 */
+                     pr_default.execute(5, new Object[] {n166ProjectManagerId, A166ProjectManagerId, A102ProjectId});
+                     A184EmployeeIsActiveInProject = P006C7_A184EmployeeIsActiveInProject[0];
+                     pr_default.close(5);
+                     AV22SelectedValue = ((0==A102ProjectId) ? "" : StringUtil.Trim( StringUtil.Str( (decimal)(A102ProjectId), 10, 0)));
+                     AV23SelectedText = StringUtil.Trim( StringUtil.BoolToStr( A184EmployeeIsActiveInProject));
+                     /* Exiting from a For First loop. */
+                     if (true) break;
+                  }
+                  pr_default.close(4);
                }
-               pr_default.close(4);
+               else
+               {
+                  AV30ProjectId = (long)(Math.Round(NumberUtil.Val( AV14SearchTxt, "."), 18, MidpointRounding.ToEven));
+                  /* Using cursor P006C8 */
+                  pr_default.execute(6, new Object[] {AV29Cond_EmployeeId, AV30ProjectId});
+                  while ( (pr_default.getStatus(6) != 101) )
+                  {
+                     A106EmployeeId = P006C8_A106EmployeeId[0];
+                     A102ProjectId = P006C8_A102ProjectId[0];
+                     A184EmployeeIsActiveInProject = P006C8_A184EmployeeIsActiveInProject[0];
+                     AV23SelectedText = StringUtil.Trim( StringUtil.BoolToStr( A184EmployeeIsActiveInProject));
+                     /* Exit For each command. Update data (if necessary), close cursors & exit. */
+                     if (true) break;
+                     /* Exiting from a For First loop. */
+                     if (true) break;
+                  }
+                  pr_default.close(6);
+               }
             }
          }
       }
@@ -305,6 +328,11 @@ namespace GeneXus.Programs {
             context.CloseConnections();
          }
          ExitApp();
+      }
+
+      protected override void CloseCursors( )
+      {
+         pr_default.close(5);
       }
 
       public override void initialize( )
@@ -325,10 +353,19 @@ namespace GeneXus.Programs {
          P006C3_A107EmployeeFirstName = new string[] {""} ;
          P006C4_A106EmployeeId = new long[1] ;
          P006C4_A107EmployeeFirstName = new string[] {""} ;
-         P006C5_A102ProjectId = new long[1] ;
          P006C5_A106EmployeeId = new long[1] ;
+         P006C5_A102ProjectId = new long[1] ;
+         P006C5_A184EmployeeIsActiveInProject = new bool[] {false} ;
+         P006C6_A106EmployeeId = new long[1] ;
+         P006C6_A166ProjectManagerId = new long[1] ;
+         P006C6_n166ProjectManagerId = new bool[] {false} ;
          P006C6_A118WorkHourLogId = new long[1] ;
          P006C6_A102ProjectId = new long[1] ;
+         P006C6_A184EmployeeIsActiveInProject = new bool[] {false} ;
+         P006C7_A184EmployeeIsActiveInProject = new bool[] {false} ;
+         P006C8_A106EmployeeId = new long[1] ;
+         P006C8_A102ProjectId = new long[1] ;
+         P006C8_A184EmployeeIsActiveInProject = new bool[] {false} ;
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.workhourlogloaddvcombo__default(),
             new Object[][] {
                 new Object[] {
@@ -341,10 +378,16 @@ namespace GeneXus.Programs {
                P006C4_A106EmployeeId, P006C4_A107EmployeeFirstName
                }
                , new Object[] {
-               P006C5_A102ProjectId, P006C5_A106EmployeeId
+               P006C5_A106EmployeeId, P006C5_A102ProjectId, P006C5_A184EmployeeIsActiveInProject
                }
                , new Object[] {
-               P006C6_A118WorkHourLogId, P006C6_A102ProjectId
+               P006C6_A106EmployeeId, P006C6_A166ProjectManagerId, P006C6_n166ProjectManagerId, P006C6_A118WorkHourLogId, P006C6_A102ProjectId, P006C6_A184EmployeeIsActiveInProject
+               }
+               , new Object[] {
+               P006C7_A184EmployeeIsActiveInProject
+               }
+               , new Object[] {
+               P006C8_A106EmployeeId, P006C8_A102ProjectId, P006C8_A184EmployeeIsActiveInProject
                }
             }
          );
@@ -364,10 +407,14 @@ namespace GeneXus.Programs {
       private long A118WorkHourLogId ;
       private long AV28EmployeeId ;
       private long A102ProjectId ;
+      private long A166ProjectManagerId ;
+      private long AV30ProjectId ;
       private string AV18TrnMode ;
       private string A107EmployeeFirstName ;
       private bool AV19IsDynamicCall ;
       private bool returnInSub ;
+      private bool A184EmployeeIsActiveInProject ;
+      private bool n166ProjectManagerId ;
       private string AV24Combo_DataJson ;
       private string AV17ComboName ;
       private string AV21SearchTxtParms ;
@@ -388,10 +435,19 @@ namespace GeneXus.Programs {
       private string[] P006C3_A107EmployeeFirstName ;
       private long[] P006C4_A106EmployeeId ;
       private string[] P006C4_A107EmployeeFirstName ;
-      private long[] P006C5_A102ProjectId ;
       private long[] P006C5_A106EmployeeId ;
+      private long[] P006C5_A102ProjectId ;
+      private bool[] P006C5_A184EmployeeIsActiveInProject ;
+      private long[] P006C6_A106EmployeeId ;
+      private long[] P006C6_A166ProjectManagerId ;
+      private bool[] P006C6_n166ProjectManagerId ;
       private long[] P006C6_A118WorkHourLogId ;
       private long[] P006C6_A102ProjectId ;
+      private bool[] P006C6_A184EmployeeIsActiveInProject ;
+      private bool[] P006C7_A184EmployeeIsActiveInProject ;
+      private long[] P006C8_A106EmployeeId ;
+      private long[] P006C8_A102ProjectId ;
+      private bool[] P006C8_A184EmployeeIsActiveInProject ;
       private string aP6_SelectedValue ;
       private string aP7_SelectedText ;
       private string aP8_Combo_DataJson ;
@@ -428,38 +484,6 @@ namespace GeneXus.Programs {
          return GXv_Object2 ;
       }
 
-      protected Object[] conditional_P006C5( IGxContext context ,
-                                             string AV14SearchTxt ,
-                                             long A102ProjectId ,
-                                             long AV29Cond_EmployeeId ,
-                                             long A106EmployeeId )
-      {
-         System.Text.StringBuilder sWhereString = new System.Text.StringBuilder();
-         string scmdbuf;
-         short[] GXv_int3 = new short[5];
-         Object[] GXv_Object4 = new Object[2];
-         string sSelectString;
-         string sFromString;
-         string sOrderString;
-         sSelectString = " ProjectId, EmployeeId";
-         sFromString = " FROM EmployeeProject";
-         sOrderString = "";
-         AddWhere(sWhereString, "(EmployeeId = :AV29Cond_EmployeeId)");
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV14SearchTxt)) )
-         {
-            AddWhere(sWhereString, "(SUBSTR(TO_CHAR(ProjectId,'9999999999'), 2) like '%' || :lV14SearchTxt)");
-         }
-         else
-         {
-            GXv_int3[1] = 1;
-         }
-         sOrderString += " ORDER BY EmployeeId, ProjectId";
-         scmdbuf = "SELECT " + sSelectString + sFromString + sWhereString + sOrderString + "" + " OFFSET " + ":GXPagingFrom5" + " LIMIT CASE WHEN " + ":GXPagingTo5" + " > 0 THEN " + ":GXPagingTo5" + " ELSE 1e9 END";
-         GXv_Object4[0] = scmdbuf;
-         GXv_Object4[1] = GXv_int3;
-         return GXv_Object4 ;
-      }
-
       public override Object [] getDynamicStatement( int cursor ,
                                                      IGxContext context ,
                                                      Object [] dynConstraints )
@@ -468,8 +492,6 @@ namespace GeneXus.Programs {
          {
                case 0 :
                      return conditional_P006C2(context, (string)dynConstraints[0] , (string)dynConstraints[1] );
-               case 3 :
-                     return conditional_P006C5(context, (string)dynConstraints[0] , (long)dynConstraints[1] , (long)dynConstraints[2] , (long)dynConstraints[3] );
          }
          return base.getDynamicStatement(cursor, context, dynConstraints);
       }
@@ -483,6 +505,8 @@ namespace GeneXus.Programs {
          ,new ForEachCursor(def[2])
          ,new ForEachCursor(def[3])
          ,new ForEachCursor(def[4])
+         ,new ForEachCursor(def[5])
+         ,new ForEachCursor(def[6])
        };
     }
 
@@ -499,9 +523,25 @@ namespace GeneXus.Programs {
           prmP006C4 = new Object[] {
           new ParDef("AV28EmployeeId",GXType.Int64,10,0)
           };
+          Object[] prmP006C5;
+          prmP006C5 = new Object[] {
+          new ParDef("AV29Cond_EmployeeId",GXType.Int64,10,0) ,
+          new ParDef("GXPagingFrom5",GXType.Int32,9,0) ,
+          new ParDef("GXPagingTo5",GXType.Int32,9,0)
+          };
           Object[] prmP006C6;
           prmP006C6 = new Object[] {
           new ParDef("AV20WorkHourLogId",GXType.Int64,10,0)
+          };
+          Object[] prmP006C7;
+          prmP006C7 = new Object[] {
+          new ParDef("ProjectManagerId",GXType.Int64,10,0){Nullable=true} ,
+          new ParDef("ProjectId",GXType.Int64,10,0)
+          };
+          Object[] prmP006C8;
+          prmP006C8 = new Object[] {
+          new ParDef("AV29Cond_EmployeeId",GXType.Int64,10,0) ,
+          new ParDef("AV30ProjectId",GXType.Int64,10,0)
           };
           Object[] prmP006C2;
           prmP006C2 = new Object[] {
@@ -510,20 +550,14 @@ namespace GeneXus.Programs {
           new ParDef("GXPagingTo2",GXType.Int32,9,0) ,
           new ParDef("GXPagingTo2",GXType.Int32,9,0)
           };
-          Object[] prmP006C5;
-          prmP006C5 = new Object[] {
-          new ParDef("AV29Cond_EmployeeId",GXType.Int64,10,0) ,
-          new ParDef("lV14SearchTxt",GXType.VarChar,40,0) ,
-          new ParDef("GXPagingFrom5",GXType.Int32,9,0) ,
-          new ParDef("GXPagingTo5",GXType.Int32,9,0) ,
-          new ParDef("GXPagingTo5",GXType.Int32,9,0)
-          };
           def= new CursorDef[] {
               new CursorDef("P006C2", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP006C2,100, GxCacheFrequency.OFF ,false,false )
              ,new CursorDef("P006C3", "SELECT T1.WorkHourLogId, T1.EmployeeId, T2.EmployeeFirstName FROM (WorkHourLog T1 INNER JOIN Employee T2 ON T2.EmployeeId = T1.EmployeeId) WHERE T1.WorkHourLogId = :AV20WorkHourLogId ORDER BY T1.WorkHourLogId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP006C3,1, GxCacheFrequency.OFF ,false,true )
              ,new CursorDef("P006C4", "SELECT EmployeeId, EmployeeFirstName FROM Employee WHERE EmployeeId = :AV28EmployeeId ORDER BY EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP006C4,1, GxCacheFrequency.OFF ,false,true )
-             ,new CursorDef("P006C5", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP006C5,100, GxCacheFrequency.OFF ,false,false )
-             ,new CursorDef("P006C6", "SELECT WorkHourLogId, ProjectId FROM WorkHourLog WHERE WorkHourLogId = :AV20WorkHourLogId ORDER BY WorkHourLogId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP006C6,1, GxCacheFrequency.OFF ,false,true )
+             ,new CursorDef("P006C5", "SELECT EmployeeId, ProjectId, EmployeeIsActiveInProject FROM EmployeeProject WHERE EmployeeId = :AV29Cond_EmployeeId ORDER BY EmployeeIsActiveInProject, EmployeeId, ProjectId  OFFSET :GXPagingFrom5 LIMIT CASE WHEN :GXPagingTo5 > 0 THEN :GXPagingTo5 ELSE 1e9 END",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP006C5,100, GxCacheFrequency.OFF ,false,false )
+             ,new CursorDef("P006C6", "SELECT T1.EmployeeId, T2.ProjectManagerId, T1.WorkHourLogId, T1.ProjectId, T3.EmployeeIsActiveInProject FROM ((WorkHourLog T1 INNER JOIN Project T2 ON T2.ProjectId = T1.ProjectId) INNER JOIN EmployeeProject T3 ON T3.EmployeeId = T1.EmployeeId AND T3.ProjectId = T1.ProjectId) WHERE T1.WorkHourLogId = :AV20WorkHourLogId ORDER BY T1.WorkHourLogId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP006C6,1, GxCacheFrequency.OFF ,false,true )
+             ,new CursorDef("P006C7", "SELECT EmployeeIsActiveInProject FROM EmployeeProject WHERE EmployeeId = :ProjectManagerId AND ProjectId = :ProjectId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP006C7,1, GxCacheFrequency.OFF ,true,true )
+             ,new CursorDef("P006C8", "SELECT EmployeeId, ProjectId, EmployeeIsActiveInProject FROM EmployeeProject WHERE EmployeeId = :AV29Cond_EmployeeId and ProjectId = :AV30ProjectId ORDER BY EmployeeId, ProjectId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP006C8,1, GxCacheFrequency.OFF ,false,true )
           };
        }
     }
@@ -550,10 +584,23 @@ namespace GeneXus.Programs {
              case 3 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);
                 ((long[]) buf[1])[0] = rslt.getLong(2);
+                ((bool[]) buf[2])[0] = rslt.getBool(3);
                 return;
              case 4 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);
                 ((long[]) buf[1])[0] = rslt.getLong(2);
+                ((bool[]) buf[2])[0] = rslt.wasNull(2);
+                ((long[]) buf[3])[0] = rslt.getLong(3);
+                ((long[]) buf[4])[0] = rslt.getLong(4);
+                ((bool[]) buf[5])[0] = rslt.getBool(5);
+                return;
+             case 5 :
+                ((bool[]) buf[0])[0] = rslt.getBool(1);
+                return;
+             case 6 :
+                ((long[]) buf[0])[0] = rslt.getLong(1);
+                ((long[]) buf[1])[0] = rslt.getLong(2);
+                ((bool[]) buf[2])[0] = rslt.getBool(3);
                 return;
        }
     }

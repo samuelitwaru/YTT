@@ -515,6 +515,7 @@ namespace GeneXus.Programs {
             IsConfirmed = (short)(Math.Round(context.localUtil.CToN( cgiGet( "IsConfirmed"), ".", ","), 18, MidpointRounding.ToEven));
             IsModified = (short)(Math.Round(context.localUtil.CToN( cgiGet( "IsModified"), ".", ","), 18, MidpointRounding.ToEven));
             Gx_mode = cgiGet( "Mode");
+            A147EmployeeBalance = context.localUtil.CToN( cgiGet( "EMPLOYEEBALANCE"), ".", ",");
             /* Read variables values. */
             if ( ( ( context.localUtil.CToN( cgiGet( edtSupportRequestId_Internalname), ".", ",") < Convert.ToDecimal( 0 )) ) || ( ( context.localUtil.CToN( cgiGet( edtSupportRequestId_Internalname), ".", ",") > Convert.ToDecimal( 9999999999L )) ) )
             {
@@ -760,6 +761,7 @@ namespace GeneXus.Programs {
             Z170SupportRequestSubject = A170SupportRequestSubject;
             Z171SupportRequestDescription = A171SupportRequestDescription;
             Z106EmployeeId = A106EmployeeId;
+            Z147EmployeeBalance = A147EmployeeBalance;
             Z107EmployeeFirstName = A107EmployeeFirstName;
          }
       }
@@ -799,6 +801,7 @@ namespace GeneXus.Programs {
          if ( (pr_default.getStatus(3) != 101) )
          {
             RcdFound29 = 1;
+            A147EmployeeBalance = T000P5_A147EmployeeBalance[0];
             A170SupportRequestSubject = T000P5_A170SupportRequestSubject[0];
             AssignAttri("", false, "A170SupportRequestSubject", A170SupportRequestSubject);
             A171SupportRequestDescription = T000P5_A171SupportRequestDescription[0];
@@ -830,6 +833,7 @@ namespace GeneXus.Programs {
             GX_FocusControl = edtEmployeeId_Internalname;
             AssignAttri("", false, "GX_FocusControl", GX_FocusControl);
          }
+         A147EmployeeBalance = T000P4_A147EmployeeBalance[0];
          A107EmployeeFirstName = T000P4_A107EmployeeFirstName[0];
          AssignAttri("", false, "A107EmployeeFirstName", A107EmployeeFirstName);
          pr_default.close(2);
@@ -855,11 +859,12 @@ namespace GeneXus.Programs {
             GX_FocusControl = edtEmployeeId_Internalname;
             AssignAttri("", false, "GX_FocusControl", GX_FocusControl);
          }
+         A147EmployeeBalance = T000P6_A147EmployeeBalance[0];
          A107EmployeeFirstName = T000P6_A107EmployeeFirstName[0];
          AssignAttri("", false, "A107EmployeeFirstName", A107EmployeeFirstName);
          GxWebStd.set_html_headers( context, 0, "", "");
          AddString( "[[") ;
-         AddString( "\""+GXUtil.EncodeJSConstant( StringUtil.RTrim( A107EmployeeFirstName))+"\"") ;
+         AddString( "\""+GXUtil.EncodeJSConstant( StringUtil.LTrim( StringUtil.NToC( A147EmployeeBalance, 4, 1, ".", "")))+"\""+","+"\""+GXUtil.EncodeJSConstant( StringUtil.RTrim( A107EmployeeFirstName))+"\"") ;
          AddString( "]") ;
          if ( (pr_default.getStatus(4) == 101) )
          {
@@ -1469,6 +1474,7 @@ namespace GeneXus.Programs {
             /* Delete mode formulas */
             /* Using cursor T000P14 */
             pr_default.execute(12, new Object[] {A106EmployeeId});
+            A147EmployeeBalance = T000P14_A147EmployeeBalance[0];
             A107EmployeeFirstName = T000P14_A107EmployeeFirstName[0];
             AssignAttri("", false, "A107EmployeeFirstName", A107EmployeeFirstName);
             pr_default.close(12);
@@ -1683,6 +1689,7 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "IsConfirmed", StringUtil.LTrim( StringUtil.NToC( (decimal)(IsConfirmed), 4, 0, ".", "")));
          GxWebStd.gx_hidden_field( context, "IsModified", StringUtil.LTrim( StringUtil.NToC( (decimal)(IsModified), 4, 0, ".", "")));
          GxWebStd.gx_hidden_field( context, "Mode", StringUtil.RTrim( Gx_mode));
+         GxWebStd.gx_hidden_field( context, "EMPLOYEEBALANCE", StringUtil.LTrim( StringUtil.NToC( A147EmployeeBalance, 4, 1, ".", "")));
       }
 
       public override void RenderHtmlCloseForm( )
@@ -1754,6 +1761,8 @@ namespace GeneXus.Programs {
 
       protected void InitializeNonKey0P29( )
       {
+         A147EmployeeBalance = 0;
+         AssignAttri("", false, "A147EmployeeBalance", StringUtil.LTrimStr( A147EmployeeBalance, 4, 1));
          A170SupportRequestSubject = "";
          AssignAttri("", false, "A170SupportRequestSubject", A170SupportRequestSubject);
          A171SupportRequestDescription = "";
@@ -1789,7 +1798,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024102512202063", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202411281041567", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1805,7 +1814,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("supportrequest.js", "?2024102512202063", false, true);
+         context.AddJavascriptSource("supportrequest.js", "?202411281041567", false, true);
          /* End function include_jscripts */
       }
 
@@ -1923,12 +1932,14 @@ namespace GeneXus.Programs {
          AssignAttri("", false, "A170SupportRequestSubject", A170SupportRequestSubject);
          AssignAttri("", false, "A171SupportRequestDescription", A171SupportRequestDescription);
          AssignAttri("", false, "A106EmployeeId", StringUtil.LTrim( StringUtil.NToC( (decimal)(A106EmployeeId), 10, 0, ".", "")));
+         AssignAttri("", false, "A147EmployeeBalance", StringUtil.LTrim( StringUtil.NToC( A147EmployeeBalance, 4, 1, ".", "")));
          AssignAttri("", false, "A107EmployeeFirstName", StringUtil.RTrim( A107EmployeeFirstName));
          AssignAttri("", false, "Gx_mode", StringUtil.RTrim( Gx_mode));
          GxWebStd.gx_hidden_field( context, "Z172SupportRequestId", StringUtil.LTrim( StringUtil.NToC( (decimal)(Z172SupportRequestId), 10, 0, ".", "")));
          GxWebStd.gx_hidden_field( context, "Z170SupportRequestSubject", Z170SupportRequestSubject);
          GxWebStd.gx_hidden_field( context, "Z171SupportRequestDescription", Z171SupportRequestDescription);
          GxWebStd.gx_hidden_field( context, "Z106EmployeeId", StringUtil.LTrim( StringUtil.NToC( (decimal)(Z106EmployeeId), 10, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, "Z147EmployeeBalance", StringUtil.LTrim( StringUtil.NToC( Z147EmployeeBalance, 4, 1, ".", "")));
          GxWebStd.gx_hidden_field( context, "Z107EmployeeFirstName", StringUtil.RTrim( Z107EmployeeFirstName));
          AssignProp("", false, bttBtn_delete_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(bttBtn_delete_Enabled), 5, 0), true);
          AssignProp("", false, bttBtn_enter_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(bttBtn_enter_Enabled), 5, 0), true);
@@ -1945,10 +1956,12 @@ namespace GeneXus.Programs {
             AnyError = 1;
             GX_FocusControl = edtEmployeeId_Internalname;
          }
+         A147EmployeeBalance = T000P14_A147EmployeeBalance[0];
          A107EmployeeFirstName = T000P14_A107EmployeeFirstName[0];
          pr_default.close(12);
          dynload_actions( ) ;
          /*  Sending validation outputs */
+         AssignAttri("", false, "A147EmployeeBalance", StringUtil.LTrim( StringUtil.NToC( A147EmployeeBalance, 4, 1, ".", "")));
          AssignAttri("", false, "A107EmployeeFirstName", StringUtil.RTrim( A107EmployeeFirstName));
       }
 
@@ -1962,9 +1975,9 @@ namespace GeneXus.Programs {
          setEventMetadata("ENTER","""{"handler":"UserMainFullajax","iparms":[{"postForm":true}]}""");
          setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[]}""");
          setEventMetadata("VALID_SUPPORTREQUESTID","""{"handler":"Valid_Supportrequestid","iparms":[{"av":"A172SupportRequestId","fld":"SUPPORTREQUESTID","pic":"ZZZZZZZZZ9"},{"av":"Gx_mode","fld":"vMODE","pic":"@!"}]""");
-         setEventMetadata("VALID_SUPPORTREQUESTID",""","oparms":[{"av":"A170SupportRequestSubject","fld":"SUPPORTREQUESTSUBJECT"},{"av":"A171SupportRequestDescription","fld":"SUPPORTREQUESTDESCRIPTION"},{"av":"A106EmployeeId","fld":"EMPLOYEEID","pic":"ZZZZZZZZZ9"},{"av":"A107EmployeeFirstName","fld":"EMPLOYEEFIRSTNAME"},{"av":"Gx_mode","fld":"vMODE","pic":"@!"},{"av":"Z172SupportRequestId"},{"av":"Z170SupportRequestSubject"},{"av":"Z171SupportRequestDescription"},{"av":"Z106EmployeeId"},{"av":"Z107EmployeeFirstName"},{"ctrl":"BTN_DELETE","prop":"Enabled"},{"ctrl":"BTN_ENTER","prop":"Enabled"}]}""");
-         setEventMetadata("VALID_EMPLOYEEID","""{"handler":"Valid_Employeeid","iparms":[{"av":"A106EmployeeId","fld":"EMPLOYEEID","pic":"ZZZZZZZZZ9"},{"av":"A107EmployeeFirstName","fld":"EMPLOYEEFIRSTNAME"}]""");
-         setEventMetadata("VALID_EMPLOYEEID",""","oparms":[{"av":"A107EmployeeFirstName","fld":"EMPLOYEEFIRSTNAME"}]}""");
+         setEventMetadata("VALID_SUPPORTREQUESTID",""","oparms":[{"av":"A170SupportRequestSubject","fld":"SUPPORTREQUESTSUBJECT"},{"av":"A171SupportRequestDescription","fld":"SUPPORTREQUESTDESCRIPTION"},{"av":"A106EmployeeId","fld":"EMPLOYEEID","pic":"ZZZZZZZZZ9"},{"av":"A147EmployeeBalance","fld":"EMPLOYEEBALANCE","pic":"Z9.9"},{"av":"A107EmployeeFirstName","fld":"EMPLOYEEFIRSTNAME"},{"av":"Gx_mode","fld":"vMODE","pic":"@!"},{"av":"Z172SupportRequestId"},{"av":"Z170SupportRequestSubject"},{"av":"Z171SupportRequestDescription"},{"av":"Z106EmployeeId"},{"av":"Z147EmployeeBalance"},{"av":"Z107EmployeeFirstName"},{"ctrl":"BTN_DELETE","prop":"Enabled"},{"ctrl":"BTN_ENTER","prop":"Enabled"}]}""");
+         setEventMetadata("VALID_EMPLOYEEID","""{"handler":"Valid_Employeeid","iparms":[{"av":"A106EmployeeId","fld":"EMPLOYEEID","pic":"ZZZZZZZZZ9"},{"av":"A147EmployeeBalance","fld":"EMPLOYEEBALANCE","pic":"Z9.9"},{"av":"A107EmployeeFirstName","fld":"EMPLOYEEFIRSTNAME"}]""");
+         setEventMetadata("VALID_EMPLOYEEID",""","oparms":[{"av":"A147EmployeeBalance","fld":"EMPLOYEEBALANCE","pic":"Z9.9"},{"av":"A107EmployeeFirstName","fld":"EMPLOYEEFIRSTNAME"}]}""");
          return  ;
       }
 
@@ -2018,12 +2031,15 @@ namespace GeneXus.Programs {
          endTrnMsgTxt = "";
          endTrnMsgCod = "";
          Z107EmployeeFirstName = "";
+         T000P5_A147EmployeeBalance = new decimal[1] ;
          T000P5_A172SupportRequestId = new long[1] ;
          T000P5_A170SupportRequestSubject = new string[] {""} ;
          T000P5_A171SupportRequestDescription = new string[] {""} ;
          T000P5_A107EmployeeFirstName = new string[] {""} ;
          T000P5_A106EmployeeId = new long[1] ;
+         T000P4_A147EmployeeBalance = new decimal[1] ;
          T000P4_A107EmployeeFirstName = new string[] {""} ;
+         T000P6_A147EmployeeBalance = new decimal[1] ;
          T000P6_A107EmployeeFirstName = new string[] {""} ;
          T000P7_A172SupportRequestId = new long[1] ;
          T000P3_A172SupportRequestId = new long[1] ;
@@ -2038,6 +2054,7 @@ namespace GeneXus.Programs {
          T000P2_A171SupportRequestDescription = new string[] {""} ;
          T000P2_A106EmployeeId = new long[1] ;
          T000P11_A172SupportRequestId = new long[1] ;
+         T000P14_A147EmployeeBalance = new decimal[1] ;
          T000P14_A107EmployeeFirstName = new string[] {""} ;
          T000P15_A172SupportRequestId = new long[1] ;
          sDynURL = "";
@@ -2059,13 +2076,13 @@ namespace GeneXus.Programs {
                T000P3_A172SupportRequestId, T000P3_A170SupportRequestSubject, T000P3_A171SupportRequestDescription, T000P3_A106EmployeeId
                }
                , new Object[] {
-               T000P4_A107EmployeeFirstName
+               T000P4_A147EmployeeBalance, T000P4_A107EmployeeFirstName
                }
                , new Object[] {
-               T000P5_A172SupportRequestId, T000P5_A170SupportRequestSubject, T000P5_A171SupportRequestDescription, T000P5_A107EmployeeFirstName, T000P5_A106EmployeeId
+               T000P5_A147EmployeeBalance, T000P5_A172SupportRequestId, T000P5_A170SupportRequestSubject, T000P5_A171SupportRequestDescription, T000P5_A107EmployeeFirstName, T000P5_A106EmployeeId
                }
                , new Object[] {
-               T000P6_A107EmployeeFirstName
+               T000P6_A147EmployeeBalance, T000P6_A107EmployeeFirstName
                }
                , new Object[] {
                T000P7_A172SupportRequestId
@@ -2086,7 +2103,7 @@ namespace GeneXus.Programs {
                , new Object[] {
                }
                , new Object[] {
-               T000P14_A107EmployeeFirstName
+               T000P14_A147EmployeeBalance, T000P14_A107EmployeeFirstName
                }
                , new Object[] {
                T000P15_A172SupportRequestId
@@ -2127,6 +2144,9 @@ namespace GeneXus.Programs {
       private long A172SupportRequestId ;
       private long ZZ172SupportRequestId ;
       private long ZZ106EmployeeId ;
+      private decimal A147EmployeeBalance ;
+      private decimal Z147EmployeeBalance ;
+      private decimal ZZ147EmployeeBalance ;
       private string sPrefix ;
       private string gxfirstwebparm ;
       private string gxfirstwebparm_bkp ;
@@ -2194,12 +2214,15 @@ namespace GeneXus.Programs {
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private IDataStoreProvider pr_default ;
+      private decimal[] T000P5_A147EmployeeBalance ;
       private long[] T000P5_A172SupportRequestId ;
       private string[] T000P5_A170SupportRequestSubject ;
       private string[] T000P5_A171SupportRequestDescription ;
       private string[] T000P5_A107EmployeeFirstName ;
       private long[] T000P5_A106EmployeeId ;
+      private decimal[] T000P4_A147EmployeeBalance ;
       private string[] T000P4_A107EmployeeFirstName ;
+      private decimal[] T000P6_A147EmployeeBalance ;
       private string[] T000P6_A107EmployeeFirstName ;
       private long[] T000P7_A172SupportRequestId ;
       private long[] T000P3_A172SupportRequestId ;
@@ -2213,6 +2236,7 @@ namespace GeneXus.Programs {
       private string[] T000P2_A171SupportRequestDescription ;
       private long[] T000P2_A106EmployeeId ;
       private long[] T000P11_A172SupportRequestId ;
+      private decimal[] T000P14_A147EmployeeBalance ;
       private string[] T000P14_A107EmployeeFirstName ;
       private long[] T000P15_A172SupportRequestId ;
       private IDataStoreProvider pr_gam ;
@@ -2340,9 +2364,9 @@ namespace GeneXus.Programs {
         def= new CursorDef[] {
             new CursorDef("T000P2", "SELECT SupportRequestId, SupportRequestSubject, SupportRequestDescription, EmployeeId FROM SupportRequest WHERE SupportRequestId = :SupportRequestId  FOR UPDATE OF SupportRequest NOWAIT",true, GxErrorMask.GX_NOMASK, false, this,prmT000P2,1, GxCacheFrequency.OFF ,true,false )
            ,new CursorDef("T000P3", "SELECT SupportRequestId, SupportRequestSubject, SupportRequestDescription, EmployeeId FROM SupportRequest WHERE SupportRequestId = :SupportRequestId ",true, GxErrorMask.GX_NOMASK, false, this,prmT000P3,1, GxCacheFrequency.OFF ,true,false )
-           ,new CursorDef("T000P4", "SELECT EmployeeFirstName FROM Employee WHERE EmployeeId = :EmployeeId ",true, GxErrorMask.GX_NOMASK, false, this,prmT000P4,1, GxCacheFrequency.OFF ,true,false )
-           ,new CursorDef("T000P5", "SELECT TM1.SupportRequestId, TM1.SupportRequestSubject, TM1.SupportRequestDescription, T2.EmployeeFirstName, TM1.EmployeeId FROM (SupportRequest TM1 INNER JOIN Employee T2 ON T2.EmployeeId = TM1.EmployeeId) WHERE TM1.SupportRequestId = :SupportRequestId ORDER BY TM1.SupportRequestId ",true, GxErrorMask.GX_NOMASK, false, this,prmT000P5,100, GxCacheFrequency.OFF ,true,false )
-           ,new CursorDef("T000P6", "SELECT EmployeeFirstName FROM Employee WHERE EmployeeId = :EmployeeId ",true, GxErrorMask.GX_NOMASK, false, this,prmT000P6,1, GxCacheFrequency.OFF ,true,false )
+           ,new CursorDef("T000P4", "SELECT EmployeeBalance, EmployeeFirstName FROM Employee WHERE EmployeeId = :EmployeeId ",true, GxErrorMask.GX_NOMASK, false, this,prmT000P4,1, GxCacheFrequency.OFF ,true,false )
+           ,new CursorDef("T000P5", "SELECT T2.EmployeeBalance, TM1.SupportRequestId, TM1.SupportRequestSubject, TM1.SupportRequestDescription, T2.EmployeeFirstName, TM1.EmployeeId FROM (SupportRequest TM1 INNER JOIN Employee T2 ON T2.EmployeeId = TM1.EmployeeId) WHERE TM1.SupportRequestId = :SupportRequestId ORDER BY TM1.SupportRequestId ",true, GxErrorMask.GX_NOMASK, false, this,prmT000P5,100, GxCacheFrequency.OFF ,true,false )
+           ,new CursorDef("T000P6", "SELECT EmployeeBalance, EmployeeFirstName FROM Employee WHERE EmployeeId = :EmployeeId ",true, GxErrorMask.GX_NOMASK, false, this,prmT000P6,1, GxCacheFrequency.OFF ,true,false )
            ,new CursorDef("T000P7", "SELECT SupportRequestId FROM SupportRequest WHERE SupportRequestId = :SupportRequestId ",true, GxErrorMask.GX_NOMASK, false, this,prmT000P7,1, GxCacheFrequency.OFF ,true,false )
            ,new CursorDef("T000P8", "SELECT SupportRequestId FROM SupportRequest WHERE ( SupportRequestId > :SupportRequestId) ORDER BY SupportRequestId ",true, GxErrorMask.GX_NOMASK, false, this,prmT000P8,1, GxCacheFrequency.OFF ,true,true )
            ,new CursorDef("T000P9", "SELECT SupportRequestId FROM SupportRequest WHERE ( SupportRequestId < :SupportRequestId) ORDER BY SupportRequestId DESC ",true, GxErrorMask.GX_NOMASK, false, this,prmT000P9,1, GxCacheFrequency.OFF ,true,true )
@@ -2350,7 +2374,7 @@ namespace GeneXus.Programs {
            ,new CursorDef("T000P11", "SELECT currval('SupportRequestId') ",true, GxErrorMask.GX_NOMASK, false, this,prmT000P11,1, GxCacheFrequency.OFF ,true,false )
            ,new CursorDef("T000P12", "SAVEPOINT gxupdate;UPDATE SupportRequest SET SupportRequestSubject=:SupportRequestSubject, SupportRequestDescription=:SupportRequestDescription, EmployeeId=:EmployeeId  WHERE SupportRequestId = :SupportRequestId;RELEASE SAVEPOINT gxupdate", GxErrorMask.GX_ROLLBACKSAVEPOINT | GxErrorMask.GX_NOMASK,prmT000P12)
            ,new CursorDef("T000P13", "SAVEPOINT gxupdate;DELETE FROM SupportRequest  WHERE SupportRequestId = :SupportRequestId;RELEASE SAVEPOINT gxupdate", GxErrorMask.GX_ROLLBACKSAVEPOINT | GxErrorMask.GX_NOMASK,prmT000P13)
-           ,new CursorDef("T000P14", "SELECT EmployeeFirstName FROM Employee WHERE EmployeeId = :EmployeeId ",true, GxErrorMask.GX_NOMASK, false, this,prmT000P14,1, GxCacheFrequency.OFF ,true,false )
+           ,new CursorDef("T000P14", "SELECT EmployeeBalance, EmployeeFirstName FROM Employee WHERE EmployeeId = :EmployeeId ",true, GxErrorMask.GX_NOMASK, false, this,prmT000P14,1, GxCacheFrequency.OFF ,true,false )
            ,new CursorDef("T000P15", "SELECT SupportRequestId FROM SupportRequest ORDER BY SupportRequestId ",true, GxErrorMask.GX_NOMASK, false, this,prmT000P15,100, GxCacheFrequency.OFF ,true,false )
         };
      }
@@ -2375,17 +2399,20 @@ namespace GeneXus.Programs {
               ((long[]) buf[3])[0] = rslt.getLong(4);
               return;
            case 2 :
-              ((string[]) buf[0])[0] = rslt.getString(1, 100);
+              ((decimal[]) buf[0])[0] = rslt.getDecimal(1);
+              ((string[]) buf[1])[0] = rslt.getString(2, 100);
               return;
            case 3 :
-              ((long[]) buf[0])[0] = rslt.getLong(1);
-              ((string[]) buf[1])[0] = rslt.getVarchar(2);
+              ((decimal[]) buf[0])[0] = rslt.getDecimal(1);
+              ((long[]) buf[1])[0] = rslt.getLong(2);
               ((string[]) buf[2])[0] = rslt.getVarchar(3);
-              ((string[]) buf[3])[0] = rslt.getString(4, 100);
-              ((long[]) buf[4])[0] = rslt.getLong(5);
+              ((string[]) buf[3])[0] = rslt.getVarchar(4);
+              ((string[]) buf[4])[0] = rslt.getString(5, 100);
+              ((long[]) buf[5])[0] = rslt.getLong(6);
               return;
            case 4 :
-              ((string[]) buf[0])[0] = rslt.getString(1, 100);
+              ((decimal[]) buf[0])[0] = rslt.getDecimal(1);
+              ((string[]) buf[1])[0] = rslt.getString(2, 100);
               return;
            case 5 :
               ((long[]) buf[0])[0] = rslt.getLong(1);
@@ -2400,7 +2427,8 @@ namespace GeneXus.Programs {
               ((long[]) buf[0])[0] = rslt.getLong(1);
               return;
            case 12 :
-              ((string[]) buf[0])[0] = rslt.getString(1, 100);
+              ((decimal[]) buf[0])[0] = rslt.getDecimal(1);
+              ((string[]) buf[1])[0] = rslt.getString(2, 100);
               return;
            case 13 :
               ((long[]) buf[0])[0] = rslt.getLong(1);

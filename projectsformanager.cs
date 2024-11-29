@@ -71,6 +71,7 @@ namespace GeneXus.Programs {
       {
          /* GeneXus formulas */
          /* Output device settings */
+         AV10GXLvl1 = 0;
          /* Using cursor P00BJ2 */
          pr_default.execute(0, new Object[] {AV8EmployeeId});
          while ( (pr_default.getStatus(0) != 101) )
@@ -78,10 +79,15 @@ namespace GeneXus.Programs {
             A166ProjectManagerId = P00BJ2_A166ProjectManagerId[0];
             n166ProjectManagerId = P00BJ2_n166ProjectManagerId[0];
             A102ProjectId = P00BJ2_A102ProjectId[0];
+            AV10GXLvl1 = 1;
             AV9projectIds.Add(A102ProjectId, 0);
             pr_default.readNext(0);
          }
          pr_default.close(0);
+         if ( AV10GXLvl1 == 0 )
+         {
+            AV9projectIds.Clear();
+         }
          cleanup();
       }
 
@@ -111,6 +117,7 @@ namespace GeneXus.Programs {
          /* GeneXus formulas. */
       }
 
+      private short AV10GXLvl1 ;
       private long AV8EmployeeId ;
       private long A166ProjectManagerId ;
       private long A102ProjectId ;

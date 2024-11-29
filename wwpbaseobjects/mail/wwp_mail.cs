@@ -3209,7 +3209,7 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024102512183144", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024112810393391", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -3225,7 +3225,7 @@ namespace GeneXus.Programs.wwpbaseobjects.mail {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wwpbaseobjects/mail/wwp_mail.js", "?2024102512183145", false, true);
+         context.AddJavascriptSource("wwpbaseobjects/mail/wwp_mail.js", "?2024112810393391", false, true);
          /* End function include_jscripts */
       }
 

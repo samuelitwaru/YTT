@@ -46,53 +46,40 @@ namespace GeneXus.Programs {
       public void execute( )
       {
          initialize();
-         executePrivate();
+         ExecuteImpl();
       }
 
       public void executeSubmit( )
       {
-         employeeloadredundancy objemployeeloadredundancy;
-         objemployeeloadredundancy = new employeeloadredundancy();
-         objemployeeloadredundancy.context.SetSubmitInitialConfig(context);
-         objemployeeloadredundancy.initialize();
-         Submit( executePrivateCatch,objemployeeloadredundancy);
+         SubmitImpl();
       }
 
-      void executePrivateCatch( object stateInfo )
-      {
-         try
-         {
-            ((employeeloadredundancy)stateInfo).executePrivate();
-         }
-         catch ( Exception e )
-         {
-            GXUtil.SaveToEventLog( "Design", e);
-            throw;
-         }
-      }
-
-      void executePrivate( )
+      protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
-         /* Optimized UPDATE. */
-         cmdBuffer=" LOCK TABLE Employee IN EXCLUSIVE MODE "
-         ;
-         RGZ = new GxCommand(dsDefault.Db, cmdBuffer, dsDefault,0,true,false,null);
-         RGZ.ErrorMask = GxErrorMask.GX_MASKLOCKERR | GxErrorMask.GX_MASKLOOPLOCK;
-         RGZ.ExecuteStmt() ;
-         RGZ.Drop();
          /* Using cursor EMPLOYEELO2 */
          pr_default.execute(0);
+         while ( (pr_default.getStatus(0) != 101) )
+         {
+            A106EmployeeId = EMPLOYEELO2_A106EmployeeId[0];
+            A147EmployeeBalance = EMPLOYEELO2_A147EmployeeBalance[0];
+            GXt_decimal1 = A147EmployeeBalance;
+            new prc_getemployeebalance(context ).execute(  A106EmployeeId, out  GXt_decimal1) ;
+            A147EmployeeBalance = GXt_decimal1;
+            /* Using cursor EMPLOYEELO3 */
+            pr_default.execute(1, new Object[] {A147EmployeeBalance, A106EmployeeId});
+            pr_default.close(1);
+            pr_default.SmartCacheProvider.SetUpdated("Employee");
+            pr_default.readNext(0);
+         }
          pr_default.close(0);
-         pr_default.SmartCacheProvider.SetUpdated("Employee");
-         /* End optimized UPDATE. */
-         this.cleanup();
+         cleanup();
       }
 
       public override void cleanup( )
       {
-         CloseOpenCursors();
+         CloseCursors();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -100,27 +87,30 @@ namespace GeneXus.Programs {
          ExitApp();
       }
 
-      protected void CloseOpenCursors( )
-      {
-      }
-
       public override void initialize( )
       {
-         cmdBuffer = "";
+         EMPLOYEELO2_A106EmployeeId = new long[1] ;
+         EMPLOYEELO2_A147EmployeeBalance = new decimal[1] ;
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.employeeloadredundancy__default(),
             new Object[][] {
                 new Object[] {
+               EMPLOYEELO2_A106EmployeeId, EMPLOYEELO2_A147EmployeeBalance
+               }
+               , new Object[] {
                }
             }
          );
          /* GeneXus formulas. */
       }
 
-      private string cmdBuffer ;
+      private long A106EmployeeId ;
+      private decimal A147EmployeeBalance ;
+      private decimal GXt_decimal1 ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
-      private GxCommand RGZ ;
       private IDataStoreProvider pr_default ;
+      private long[] EMPLOYEELO2_A106EmployeeId ;
+      private decimal[] EMPLOYEELO2_A147EmployeeBalance ;
    }
 
    public class employeeloadredundancy__default : DataStoreHelperBase, IDataStoreHelper
@@ -129,7 +119,8 @@ namespace GeneXus.Programs {
       {
          cursorDefinitions();
          return new Cursor[] {
-          new UpdateCursor(def[0])
+          new ForEachCursor(def[0])
+         ,new UpdateCursor(def[1])
        };
     }
 
@@ -141,8 +132,14 @@ namespace GeneXus.Programs {
           Object[] prmEMPLOYEELO2;
           prmEMPLOYEELO2 = new Object[] {
           };
+          Object[] prmEMPLOYEELO3;
+          prmEMPLOYEELO3 = new Object[] {
+          new ParDef("EmployeeBalance",GXType.Number,4,1) ,
+          new ParDef("EmployeeId",GXType.Int64,10,0)
+          };
           def= new CursorDef[] {
-              new CursorDef("EMPLOYEELO2", "UPDATE Employee SET EmployeeBalance=EmployeeVactionDays - 2 ", GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK,prmEMPLOYEELO2)
+              new CursorDef("EMPLOYEELO2", "SELECT EmployeeId, EmployeeBalance FROM Employee ORDER BY EmployeeId  FOR UPDATE OF Employee",true, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmEMPLOYEELO2,1, GxCacheFrequency.OFF ,true,false )
+             ,new CursorDef("EMPLOYEELO3", "UPDATE Employee SET EmployeeBalance=:EmployeeBalance  WHERE EmployeeId = :EmployeeId", GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK,prmEMPLOYEELO3)
           };
        }
     }
@@ -151,6 +148,13 @@ namespace GeneXus.Programs {
                             IFieldGetter rslt ,
                             Object[] buf )
     {
+       switch ( cursor )
+       {
+             case 0 :
+                ((long[]) buf[0])[0] = rslt.getLong(1);
+                ((decimal[]) buf[1])[0] = rslt.getDecimal(2);
+                return;
+       }
     }
 
  }

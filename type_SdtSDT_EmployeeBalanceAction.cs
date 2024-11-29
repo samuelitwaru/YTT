@@ -174,10 +174,19 @@ namespace GeneXus.Programs
 
 
 
-
 		[SoapElement(ElementName="DurationInHours")]
 		[XmlElement(ElementName="DurationInHours")]
-		public short gxTpr_Durationinhours
+		public string gxTpr_Durationinhours_double
+		{
+			get {
+				return Convert.ToString(gxTv_SdtSDT_EmployeeBalanceAction_Durationinhours, System.Globalization.CultureInfo.InvariantCulture);
+			}
+			set {
+				gxTv_SdtSDT_EmployeeBalanceAction_Durationinhours = (decimal)(Convert.ToDecimal(value, System.Globalization.CultureInfo.InvariantCulture));
+			}
+		}
+		[XmlIgnore]
+		public decimal gxTpr_Durationinhours
 		{
 			get {
 				return gxTv_SdtSDT_EmployeeBalanceAction_Durationinhours; 
@@ -190,10 +199,19 @@ namespace GeneXus.Programs
 
 
 
-
 		[SoapElement(ElementName="DurationInDays")]
 		[XmlElement(ElementName="DurationInDays")]
-		public short gxTpr_Durationindays
+		public string gxTpr_Durationindays_double
+		{
+			get {
+				return Convert.ToString(gxTv_SdtSDT_EmployeeBalanceAction_Durationindays, System.Globalization.CultureInfo.InvariantCulture);
+			}
+			set {
+				gxTv_SdtSDT_EmployeeBalanceAction_Durationindays = (decimal)(Convert.ToDecimal(value, System.Globalization.CultureInfo.InvariantCulture));
+			}
+		}
+		[XmlIgnore]
+		public decimal gxTpr_Durationindays
 		{
 			get {
 				return gxTv_SdtSDT_EmployeeBalanceAction_Durationindays; 
@@ -269,10 +287,10 @@ namespace GeneXus.Programs
 		protected string gxTv_SdtSDT_EmployeeBalanceAction_Type;
 		 
 
-		protected short gxTv_SdtSDT_EmployeeBalanceAction_Durationinhours;
+		protected decimal gxTv_SdtSDT_EmployeeBalanceAction_Durationinhours;
 		 
 
-		protected short gxTv_SdtSDT_EmployeeBalanceAction_Durationindays;
+		protected decimal gxTv_SdtSDT_EmployeeBalanceAction_Durationindays;
 		 
 
 		protected string gxTv_SdtSDT_EmployeeBalanceAction_Description;
@@ -332,7 +350,7 @@ namespace GeneXus.Programs
 		}
 
 		[DataMember(Name="DurationInHours", Order=3)]
-		public short gxTpr_Durationinhours
+		public decimal gxTpr_Durationinhours
 		{
 			get { 
 				return sdt.gxTpr_Durationinhours;
@@ -344,7 +362,7 @@ namespace GeneXus.Programs
 		}
 
 		[DataMember(Name="DurationInDays", Order=4)]
-		public short gxTpr_Durationindays
+		public decimal gxTpr_Durationindays
 		{
 			get { 
 				return sdt.gxTpr_Durationindays;

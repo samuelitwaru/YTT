@@ -58,34 +58,37 @@ namespace GeneXus.Programs {
          dsDefault = context.GetDataStore("Default");
       }
 
-      public void execute( out GXBaseCollection<SdtSDTEmployeeProject_SDTEmployeeProjectItem> aP0_Gxm2rootcol )
+      public void execute( long aP0_EmployeeId ,
+                           out GXBaseCollection<SdtSDTEmployeeProject_SDTEmployeeProjectItem> aP1_Gxm2rootcol )
       {
+         this.AV5EmployeeId = aP0_EmployeeId;
          this.Gxm2rootcol = new GXBaseCollection<SdtSDTEmployeeProject_SDTEmployeeProjectItem>( context, "SDTEmployeeProjectItem", "YTT_version4") ;
          initialize();
          ExecuteImpl();
-         aP0_Gxm2rootcol=this.Gxm2rootcol;
+         aP1_Gxm2rootcol=this.Gxm2rootcol;
       }
 
-      public GXBaseCollection<SdtSDTEmployeeProject_SDTEmployeeProjectItem> executeUdp( )
+      public GXBaseCollection<SdtSDTEmployeeProject_SDTEmployeeProjectItem> executeUdp( long aP0_EmployeeId )
       {
-         execute(out aP0_Gxm2rootcol);
+         execute(aP0_EmployeeId, out aP1_Gxm2rootcol);
          return Gxm2rootcol ;
       }
 
-      public void executeSubmit( out GXBaseCollection<SdtSDTEmployeeProject_SDTEmployeeProjectItem> aP0_Gxm2rootcol )
+      public void executeSubmit( long aP0_EmployeeId ,
+                                 out GXBaseCollection<SdtSDTEmployeeProject_SDTEmployeeProjectItem> aP1_Gxm2rootcol )
       {
+         this.AV5EmployeeId = aP0_EmployeeId;
          this.Gxm2rootcol = new GXBaseCollection<SdtSDTEmployeeProject_SDTEmployeeProjectItem>( context, "SDTEmployeeProjectItem", "YTT_version4") ;
          SubmitImpl();
-         aP0_Gxm2rootcol=this.Gxm2rootcol;
+         aP1_Gxm2rootcol=this.Gxm2rootcol;
       }
 
       protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
-         AV9Udparg3 = new getloggedinemployeeid(context).executeUdp( );
          /* Using cursor P00132 */
-         pr_default.execute(0, new Object[] {AV9Udparg3});
+         pr_default.execute(0, new Object[] {AV5EmployeeId});
          while ( (pr_default.getStatus(0) != 101) )
          {
             A106EmployeeId = P00132_A106EmployeeId[0];
@@ -139,7 +142,7 @@ namespace GeneXus.Programs {
          /* GeneXus formulas. */
       }
 
-      private long AV9Udparg3 ;
+      private long AV5EmployeeId ;
       private long A106EmployeeId ;
       private long A102ProjectId ;
       private string A105ProjectStatus ;
@@ -155,7 +158,7 @@ namespace GeneXus.Programs {
       private string[] P00132_A103ProjectName ;
       private string[] P00132_A104ProjectDescription ;
       private SdtSDTEmployeeProject_SDTEmployeeProjectItem Gxm1sdtemployeeproject ;
-      private GXBaseCollection<SdtSDTEmployeeProject_SDTEmployeeProjectItem> aP0_Gxm2rootcol ;
+      private GXBaseCollection<SdtSDTEmployeeProject_SDTEmployeeProjectItem> aP1_Gxm2rootcol ;
    }
 
    public class dpemployeeprojects__default : DataStoreHelperBase, IDataStoreHelper
@@ -175,10 +178,10 @@ namespace GeneXus.Programs {
        {
           Object[] prmP00132;
           prmP00132 = new Object[] {
-          new ParDef("AV9Udparg3",GXType.Int64,10,0)
+          new ParDef("AV5EmployeeId",GXType.Int64,10,0)
           };
           def= new CursorDef[] {
-              new CursorDef("P00132", "SELECT T1.EmployeeId, T2.ProjectStatus, T1.ProjectId, T2.ProjectName, T2.ProjectDescription FROM (EmployeeProject T1 INNER JOIN Project T2 ON T2.ProjectId = T1.ProjectId) WHERE (T1.EmployeeId = :AV9Udparg3) AND (T2.ProjectStatus = ( 'Active')) ORDER BY T1.EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00132,100, GxCacheFrequency.OFF ,false,false )
+              new CursorDef("P00132", "SELECT T1.EmployeeId, T2.ProjectStatus, T1.ProjectId, T2.ProjectName, T2.ProjectDescription FROM (EmployeeProject T1 INNER JOIN Project T2 ON T2.ProjectId = T1.ProjectId) WHERE (T1.EmployeeId = :AV5EmployeeId) AND (T2.ProjectStatus = ( 'Active')) ORDER BY T1.EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00132,100, GxCacheFrequency.OFF ,false,false )
           };
        }
     }

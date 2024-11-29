@@ -1,6 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <CallableObject guid="1dce37b6-c1c1-4008-9d57-a6ace65d2a10" name="DPEmployeeProjects" description="DPEmployee Projects" namespace="GeneXus.Programs">
-  <Signature name="parm">
+  <Signature name="Par">
+    <Parameter name="EmployeeId">
+      <Field>
+        <Properties>
+          <Property>
+            <Name>Type</Name>
+            <Value>Numeric</Value>
+          </Property>
+          <Property>
+            <Name>Length</Name>
+            <Value>10</Value>
+          </Property>
+        </Properties>
+      </Field>
+    </Parameter>
     <Parameter name="ReturnValue" accessor="out">
       <Field name="SDTEmployeeProject" description="SDTEmployee Project" collection="true">
         <Fields>

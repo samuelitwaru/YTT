@@ -7,6 +7,7 @@
   <Table name="LeaveRequest" />
   <Table name="EmployeeProject" />
   <Table name="SupportRequest" />
+  <Table name="EmployeeVacationSet" />
   <Table name="LeaveType" />
   <Table name="Holiday" />
   <Table name="Device" />

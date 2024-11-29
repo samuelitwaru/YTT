@@ -58,37 +58,38 @@ namespace GeneXus.Programs {
          dsDefault = context.GetDataStore("Default");
       }
 
-      public void execute( out GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions aP0_Gxm2wwpdaterangepickeroptions )
+      public void execute( long aP0_EmployeeId ,
+                           out GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions aP1_Gxm2wwpdaterangepickeroptions )
       {
+         this.AV8EmployeeId = aP0_EmployeeId;
          this.Gxm2wwpdaterangepickeroptions = new GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions(context) ;
          initialize();
          ExecuteImpl();
-         aP0_Gxm2wwpdaterangepickeroptions=this.Gxm2wwpdaterangepickeroptions;
+         aP1_Gxm2wwpdaterangepickeroptions=this.Gxm2wwpdaterangepickeroptions;
       }
 
-      public GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions executeUdp( )
+      public GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions executeUdp( long aP0_EmployeeId )
       {
-         execute(out aP0_Gxm2wwpdaterangepickeroptions);
+         execute(aP0_EmployeeId, out aP1_Gxm2wwpdaterangepickeroptions);
          return Gxm2wwpdaterangepickeroptions ;
       }
 
-      public void executeSubmit( out GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions aP0_Gxm2wwpdaterangepickeroptions )
+      public void executeSubmit( long aP0_EmployeeId ,
+                                 out GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions aP1_Gxm2wwpdaterangepickeroptions )
       {
+         this.AV8EmployeeId = aP0_EmployeeId;
          this.Gxm2wwpdaterangepickeroptions = new GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions(context) ;
          SubmitImpl();
-         aP0_Gxm2wwpdaterangepickeroptions=this.Gxm2wwpdaterangepickeroptions;
+         aP1_Gxm2wwpdaterangepickeroptions=this.Gxm2wwpdaterangepickeroptions;
       }
 
       protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
-         GXt_int1 = AV8EmployeeId;
-         new getloggedinemployeeid(context ).execute( out  GXt_int1) ;
-         AV8EmployeeId = GXt_int1;
-         GXt_objcol_SdtSDTEmployeeLeaveDay2 = AV12Leavedays;
+         GXt_objcol_SdtSDTEmployeeLeaveDay1 = AV12Leavedays;
          new getleavedays(context ).execute(  AV8EmployeeId, out  AV9EmployeeLeaveDays) ;
-         AV12Leavedays = GXt_objcol_SdtSDTEmployeeLeaveDay2;
+         AV12Leavedays = GXt_objcol_SdtSDTEmployeeLeaveDay1;
          /* Using cursor P00102 */
          pr_default.execute(0, new Object[] {AV8EmployeeId});
          while ( (pr_default.getStatus(0) != 101) )
@@ -98,11 +99,11 @@ namespace GeneXus.Programs {
             A118WorkHourLogId = P00102_A118WorkHourLogId[0];
             Gxm1wwpdaterangepickeroptions_formatteddays = new GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions_FormattedDaysItem(context);
             Gxm2wwpdaterangepickeroptions.gxTpr_Formatteddays.Add(Gxm1wwpdaterangepickeroptions_formatteddays, 0);
-            GXt_char3 = AV5blank;
+            GXt_char2 = AV5blank;
             new workhourlogdateduration(context ).execute(  A119WorkHourLogDate, out  AV6ToolTip) ;
-            AV5blank = GXt_char3;
-            GXt_dtime4 = DateTimeUtil.ResetTime( A119WorkHourLogDate ) ;
-            Gxm1wwpdaterangepickeroptions_formatteddays.gxTpr_Date = GXt_dtime4;
+            AV5blank = GXt_char2;
+            GXt_dtime3 = DateTimeUtil.ResetTime( A119WorkHourLogDate ) ;
+            Gxm1wwpdaterangepickeroptions_formatteddays.gxTpr_Date = GXt_dtime3;
             Gxm1wwpdaterangepickeroptions_formatteddays.gxTpr_Class = "daterangepicker-badge daterangepicker-badge-success";
             Gxm1wwpdaterangepickeroptions_formatteddays.gxTpr_Tooltip = AV6ToolTip;
             pr_default.readNext(0);
@@ -120,8 +121,8 @@ namespace GeneXus.Programs {
             A113HolidayId = P00103_A113HolidayId[0];
             Gxm1wwpdaterangepickeroptions_formatteddays = new GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions_FormattedDaysItem(context);
             Gxm2wwpdaterangepickeroptions.gxTpr_Formatteddays.Add(Gxm1wwpdaterangepickeroptions_formatteddays, 0);
-            GXt_dtime4 = DateTimeUtil.ResetTime( A115HolidayStartDate ) ;
-            Gxm1wwpdaterangepickeroptions_formatteddays.gxTpr_Date = GXt_dtime4;
+            GXt_dtime3 = DateTimeUtil.ResetTime( A115HolidayStartDate ) ;
+            Gxm1wwpdaterangepickeroptions_formatteddays.gxTpr_Date = GXt_dtime3;
             Gxm1wwpdaterangepickeroptions_formatteddays.gxTpr_Class = "daterangepicker-badge daterangepicker-badge-warning";
             Gxm1wwpdaterangepickeroptions_formatteddays.gxTpr_Tooltip = StringUtil.Trim( A114HolidayName);
             pr_default.readNext(1);
@@ -133,8 +134,8 @@ namespace GeneXus.Programs {
             AV7day = ((SdtSDTEmployeeLeaveDay)AV9EmployeeLeaveDays.Item(AV16GXV1));
             Gxm1wwpdaterangepickeroptions_formatteddays = new GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions_FormattedDaysItem(context);
             Gxm2wwpdaterangepickeroptions.gxTpr_Formatteddays.Add(Gxm1wwpdaterangepickeroptions_formatteddays, 0);
-            GXt_dtime4 = DateTimeUtil.ResetTime( AV7day.gxTpr_Date ) ;
-            Gxm1wwpdaterangepickeroptions_formatteddays.gxTpr_Date = GXt_dtime4;
+            GXt_dtime3 = DateTimeUtil.ResetTime( AV7day.gxTpr_Date ) ;
+            Gxm1wwpdaterangepickeroptions_formatteddays.gxTpr_Date = GXt_dtime3;
             Gxm1wwpdaterangepickeroptions_formatteddays.gxTpr_Class = "daterangepicker-badge daterangepicker-badge-info";
             Gxm1wwpdaterangepickeroptions_formatteddays.gxTpr_Tooltip = AV7day.gxTpr_Leavetype;
             AV16GXV1 = (int)(AV16GXV1+1);
@@ -155,7 +156,7 @@ namespace GeneXus.Programs {
       public override void initialize( )
       {
          AV12Leavedays = new GXBaseCollection<SdtSDTEmployeeLeaveDay>( context, "SDTEmployeeLeaveDay", "YTT_version4");
-         GXt_objcol_SdtSDTEmployeeLeaveDay2 = new GXBaseCollection<SdtSDTEmployeeLeaveDay>( context, "SDTEmployeeLeaveDay", "YTT_version4");
+         GXt_objcol_SdtSDTEmployeeLeaveDay1 = new GXBaseCollection<SdtSDTEmployeeLeaveDay>( context, "SDTEmployeeLeaveDay", "YTT_version4");
          AV9EmployeeLeaveDays = new GXBaseCollection<SdtSDTEmployeeLeaveDay>( context, "SDTEmployeeLeaveDay", "YTT_version4");
          P00102_A106EmployeeId = new long[1] ;
          P00102_A119WorkHourLogDate = new DateTime[] {DateTime.MinValue} ;
@@ -163,7 +164,7 @@ namespace GeneXus.Programs {
          A119WorkHourLogDate = DateTime.MinValue;
          Gxm1wwpdaterangepickeroptions_formatteddays = new GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions_FormattedDaysItem(context);
          AV5blank = "";
-         GXt_char3 = "";
+         GXt_char2 = "";
          AV6ToolTip = "";
          P00103_A100CompanyId = new long[1] ;
          P00103_A139HolidayIsActive = new bool[] {false} ;
@@ -173,7 +174,7 @@ namespace GeneXus.Programs {
          A115HolidayStartDate = DateTime.MinValue;
          A114HolidayName = "";
          AV7day = new SdtSDTEmployeeLeaveDay(context);
-         GXt_dtime4 = (DateTime)(DateTime.MinValue);
+         GXt_dtime3 = (DateTime)(DateTime.MinValue);
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.dpdateformat__default(),
             new Object[][] {
                 new Object[] {
@@ -189,15 +190,14 @@ namespace GeneXus.Programs {
 
       private int AV16GXV1 ;
       private long AV8EmployeeId ;
-      private long GXt_int1 ;
       private long A106EmployeeId ;
       private long A118WorkHourLogId ;
       private long AV15Udparg3 ;
       private long A100CompanyId ;
       private long A113HolidayId ;
-      private string GXt_char3 ;
+      private string GXt_char2 ;
       private string A114HolidayName ;
-      private DateTime GXt_dtime4 ;
+      private DateTime GXt_dtime3 ;
       private DateTime A119WorkHourLogDate ;
       private DateTime A115HolidayStartDate ;
       private bool A139HolidayIsActive ;
@@ -207,7 +207,7 @@ namespace GeneXus.Programs {
       private IGxDataStore dsDefault ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions Gxm2wwpdaterangepickeroptions ;
       private GXBaseCollection<SdtSDTEmployeeLeaveDay> AV12Leavedays ;
-      private GXBaseCollection<SdtSDTEmployeeLeaveDay> GXt_objcol_SdtSDTEmployeeLeaveDay2 ;
+      private GXBaseCollection<SdtSDTEmployeeLeaveDay> GXt_objcol_SdtSDTEmployeeLeaveDay1 ;
       private GXBaseCollection<SdtSDTEmployeeLeaveDay> AV9EmployeeLeaveDays ;
       private IDataStoreProvider pr_default ;
       private long[] P00102_A106EmployeeId ;
@@ -220,7 +220,7 @@ namespace GeneXus.Programs {
       private string[] P00103_A114HolidayName ;
       private long[] P00103_A113HolidayId ;
       private SdtSDTEmployeeLeaveDay AV7day ;
-      private GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions aP0_Gxm2wwpdaterangepickeroptions ;
+      private GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions aP1_Gxm2wwpdaterangepickeroptions ;
    }
 
    public class dpdateformat__default : DataStoreHelperBase, IDataStoreHelper

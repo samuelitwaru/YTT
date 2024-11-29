@@ -164,6 +164,38 @@
               </Property>
             </Properties>
           </Field>
+          <Field name="VacationSet" description="Vacation Set" collection="true">
+            <Fields>
+              <Field name="VacationSetDate" description="Vacation Set Date">
+                <Properties>
+                  <Property>
+                    <Name>Type</Name>
+                    <Value>Date</Value>
+                  </Property>
+                  <Property>
+                    <Name>Length</Name>
+                    <Value>8</Value>
+                  </Property>
+                </Properties>
+              </Field>
+              <Field name="VacationSetDays" description="Vacation Set Days">
+                <Properties>
+                  <Property>
+                    <Name>Type</Name>
+                    <Value>Numeric</Value>
+                  </Property>
+                  <Property>
+                    <Name>Length</Name>
+                    <Value>4</Value>
+                  </Property>
+                  <Property>
+                    <Name>Decimals</Name>
+                    <Value>1</Value>
+                  </Property>
+                </Properties>
+              </Field>
+            </Fields>
+          </Field>
           <Field name="Project" description="Project" collection="true">
             <Fields>
               <Field name="ProjectId" description="Project Id">

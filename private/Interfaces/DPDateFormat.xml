@@ -1,6 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <CallableObject guid="e079510a-1d91-4ce0-b9f2-162e5a5bbec0" name="DPDateFormat" description="DPDate Format" namespace="GeneXus.Programs">
-  <Signature name="parm">
+  <Signature name="Par">
+    <Parameter name="EmployeeId">
+      <Field>
+        <Properties>
+          <Property>
+            <Name>Type</Name>
+            <Value>Numeric</Value>
+          </Property>
+          <Property>
+            <Name>Length</Name>
+            <Value>10</Value>
+          </Property>
+        </Properties>
+      </Field>
+    </Parameter>
     <Parameter name="ReturnValue" accessor="out">
       <Field name="WWPDateRangePickerOptions" description="WWPDate Range Picker Options">
         <Fields>
