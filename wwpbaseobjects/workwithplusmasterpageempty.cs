@@ -151,7 +151,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          context.AddJavascriptSource("DVelop/Shared/daterangepicker/daterangepicker.min.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/DatePicker/DatePickerRender.js", "", false, true);
-         context.AddJavascriptSource("wwpbaseobjects/workwithplusmasterpageempty.js", "?202411281041361", false, true);
+         context.AddJavascriptSource("wwpbaseobjects/workwithplusmasterpageempty.js", "?202412217223999", false, true);
          context.WriteHtmlTextNl( "</body>") ;
          context.WriteHtmlTextNl( "</html>") ;
          if ( context.isSpaRequest( ) )
@@ -657,7 +657,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          idxLst = 1;
          while ( idxLst <= (getDataAreaObject() == null ? Form : getDataAreaObject().GetForm()).Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)(getDataAreaObject() == null ? Form : getDataAreaObject().GetForm()).Jscriptsrc.Item(idxLst))), "?2024112810413660", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)(getDataAreaObject() == null ? Form : getDataAreaObject().GetForm()).Jscriptsrc.Item(idxLst))), "?202412217224059", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -674,7 +674,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       {
          if ( nGXWrapped != 1 )
          {
-            context.AddJavascriptSource("wwpbaseobjects/workwithplusmasterpageempty.js", "?2024112810413660", false, true);
+            context.AddJavascriptSource("wwpbaseobjects/workwithplusmasterpageempty.js", "?202412217224059", false, true);
             context.AddJavascriptSource("DVelop/DVMessage/pnotify.custom.js", "", false, true);
             context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
             context.AddJavascriptSource("DVelop/DVMessage/DVMessageRender.js", "", false, true);

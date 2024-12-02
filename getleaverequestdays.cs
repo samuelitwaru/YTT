@@ -163,6 +163,7 @@ namespace GeneXus.Programs {
                if ( ( AV8dateNumber != 1 ) && ( AV8dateNumber != 7 ) )
                {
                   AV9Duration = (short)(AV9Duration+1);
+                  new logtofile(context ).execute(  "    "+StringUtil.Str( (decimal)(AV9Duration), 4, 0)) ;
                }
                AV14StartDate = DateTimeUtil.DAdd( AV14StartDate, (1));
             }

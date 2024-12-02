@@ -1835,7 +1835,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024112810373386", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20241221719444", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1853,7 +1853,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       {
          if ( nGXWrapped != 1 )
          {
-            context.AddJavascriptSource("wwpbaseobjects/wwp_masterpageruntimesettings.js", "?2024112810373387", false, true);
+            context.AddJavascriptSource("wwpbaseobjects/wwp_masterpageruntimesettings.js", "?20241221719444", false, true);
          }
          /* End function include_jscripts */
       }

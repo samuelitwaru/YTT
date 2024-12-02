@@ -1302,7 +1302,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024112810373252", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202412217191582", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1320,7 +1320,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       {
          if ( nGXWrapped != 1 )
          {
-            context.AddJavascriptSource("wwpbaseobjects/wizardstepsprogresswc.js", "?2024112810373252", false, true);
+            context.AddJavascriptSource("wwpbaseobjects/wizardstepsprogresswc.js", "?202412217191582", false, true);
          }
          /* End function include_jscripts */
       }

@@ -182,7 +182,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          context.AddJavascriptSource("DVelop/Shared/daterangepicker/daterangepicker.min.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/DatePicker/DatePickerRender.js", "", false, true);
-         context.AddJavascriptSource("wwpbaseobjects/workwithplusmasterpage.js", "?2024112810454455", false, true);
+         context.AddJavascriptSource("wwpbaseobjects/workwithplusmasterpage.js", "?202412217265517", false, true);
          context.WriteHtmlTextNl( "</body>") ;
          context.WriteHtmlTextNl( "</html>") ;
          if ( context.isSpaRequest( ) )
@@ -888,7 +888,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          idxLst = 1;
          while ( idxLst <= (getDataAreaObject() == null ? Form : getDataAreaObject().GetForm()).Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)(getDataAreaObject() == null ? Form : getDataAreaObject().GetForm()).Jscriptsrc.Item(idxLst))), "?2024112810455089", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)(getDataAreaObject() == null ? Form : getDataAreaObject().GetForm()).Jscriptsrc.Item(idxLst))), "?20241221727057", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -903,7 +903,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("wwpbaseobjects/workwithplusmasterpage.js", "?2024112810455091", false, true);
+         context.AddJavascriptSource("wwpbaseobjects/workwithplusmasterpage.js", "?20241221727059", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/slimmenu/jquery.slimmenu.min.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
