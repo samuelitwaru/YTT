@@ -31,8 +31,8 @@ wwpbaseobjects\notifications\web\type_SdtWWP_WebNotification.cs
 wwpbaseobjects\type_SdtUserCustomizations.cs
 wwpbaseobjects\mail\type_SdtWWP_MailTemplate.cs
 wwpbaseobjects\type_SdtWWP_UserExtended.cs
-workwithplus\type_SdtWWP_Parameter.cs
 wwpbaseobjects\notifications\common\type_SdtWWP_NotificationDefinition.cs
+workwithplus\type_SdtWWP_Parameter.cs
 wwpbaseobjects\notifications\common\type_SdtWWP_Notification.cs
 wwpbaseobjects\mail\type_SdtWWP_Mail.cs
 wwpbaseobjects\mail\type_SdtWWP_Mail_Attachments.cs
@@ -41,11 +41,11 @@ type_SdtEmployee.cs
 type_SdtEmployee_Project.cs
 type_SdtEmployee_VacationSet.cs
 type_SdtProject.cs
-type_SdtWorkHourLog.cs
 type_SdtLeaveType.cs
+type_SdtWorkHourLog.cs
 type_SdtLeaveRequest.cs
-type_SdtCompanyLocation.cs
 type_SdtDevice.cs
+type_SdtCompanyLocation.cs
 gxdomainwwpdomains.cs
 genexusreporting\gxdomainqueryviewervisible.cs
 gxdomainhomesampledatastatus.cs
