@@ -132,7 +132,7 @@ namespace GeneXus.Programs {
          AV34footCellStyle = new GeneXus.Programs.genexusoffice.office.excel.style.SdtExcelCellStyle(context);
          AV34footCellStyle.gxTpr_Font.gxTpr_Bold = true;
          AV34footCellStyle.gxTpr_Font.gxTpr_Size = 13;
-         AV34footCellStyle.gxTpr_Alignment.gxTpr_Horizontal = 1;
+         AV34footCellStyle.gxTpr_Alignment.gxTpr_Horizontal = 2;
          /* Using cursor P00AZ2 */
          pr_default.execute(0, new Object[] {AV8OneProjectId});
          while ( (pr_default.getStatus(0) != 101) )
@@ -324,31 +324,21 @@ namespace GeneXus.Programs {
          returnInSub = false;
          AV24CellRow = (short)(AV24CellRow+1);
          AV20excelcellrange = AV12excelSpreadsheet.cell(AV24CellRow, 1);
-         AV20excelcellrange.gxTpr_Valuetext = "Start Date";
-         AV20excelcellrange.setcellstyle( AV34footCellStyle);
-         AV20excelcellrange = AV12excelSpreadsheet.cell(AV24CellRow, 2);
-         AV20excelcellrange.setcellstyle( AV34footCellStyle);
          GXt_char2 = "";
-         new formatdatetime(context ).execute(  AV10FromDate,  "DD/MM/YYYY", out  GXt_char2) ;
-         AV20excelcellrange.gxTpr_Valuetext = GXt_char2;
+         new formatdatetime(context ).execute(  AV10FromDate,  "DD.MM.YYYY", out  GXt_char2) ;
+         AV20excelcellrange.gxTpr_Valuetext = "Start Date "+GXt_char2;
+         AV20excelcellrange.setcellstyle( AV34footCellStyle);
          AV24CellRow = (short)(AV24CellRow+1);
          AV20excelcellrange = AV12excelSpreadsheet.cell(AV24CellRow, 1);
-         AV20excelcellrange.gxTpr_Valuetext = "End Date";
-         AV20excelcellrange.setcellstyle( AV34footCellStyle);
-         AV20excelcellrange = new GeneXus.Programs.genexusoffice.office.excel.cells.SdtExcelCellRange(context);
-         AV20excelcellrange = AV12excelSpreadsheet.cell(AV24CellRow, 2);
-         AV20excelcellrange.setcellstyle( AV34footCellStyle);
          GXt_char2 = "";
-         new formatdatetime(context ).execute(  AV11ToDate,  "DD/MM/YYYY", out  GXt_char2) ;
-         AV20excelcellrange.gxTpr_Valuetext = GXt_char2;
+         new formatdatetime(context ).execute(  AV11ToDate,  "DD.MM.YYYY", out  GXt_char2) ;
+         AV20excelcellrange.gxTpr_Valuetext = "End Date "+GXt_char2;
+         AV20excelcellrange.setcellstyle( AV34footCellStyle);
          AV24CellRow = (short)(AV24CellRow+1);
          AV20excelcellrange = AV12excelSpreadsheet.cell(AV24CellRow, 1);
-         AV20excelcellrange.gxTpr_Valuetext = "Hours Total";
-         AV20excelcellrange.setcellstyle( AV34footCellStyle);
-         AV20excelcellrange = AV12excelSpreadsheet.cell(AV24CellRow, 2);
          GXt_char2 = "";
          new procformattime(context ).execute(  AV26TotalMinutes, out  GXt_char2) ;
-         AV20excelcellrange.gxTpr_Valuetext = GXt_char2;
+         AV20excelcellrange.gxTpr_Valuetext = "Hours Total "+GXt_char2;
          AV20excelcellrange.setcellstyle( AV34footCellStyle);
       }
 

@@ -9,6 +9,10 @@
 		z-index: 2;
 		min-width:60px;
 	}
+	td:nth-last-child(1), th:nth-last-child(1) {
+		right: 0px; /* Adjust width according to column width */
+		margin-right:10px;
+	}
 	td:nth-last-child(2), th:nth-last-child(2) {
 		right: 60px; /* Adjust width according to column width */
 	}
@@ -18,16 +22,16 @@
 	}
 </style>
 
-<div id="print" style="padding-top:1px;overflow:scroll; scrollbar-width:none; border-right: 1px solid #dddddd; border-left: 1px solid #dddddd">
-	<table class="my-sticky-column-table gx-tab-spacing-fix-2 GridWithPaginationBar GridWithBorderColor WorkWith table-responsive" style='border: 1px solid #dddddd; border-collapse: collapse;'>
-		<thead  style="border-collapse: collapse; position:sticky; top:0; z-index:10">
+<div id="print" style="overflow:scroll; scrollbar-width:none; border: 0px solid #dddddd; margin-right:-5px;">
+	<table class="my-sticky-column-table">
+		<thead  style="position:sticky; top:0; z-index:10">
 			<tr>
-				<th class='text-center' style="border: 1px solid #dddddd; border-collapse: collapse; position:sticky;left:0; background:white;">Projects per employee:</th>
+				<th class='text-center' style="position:sticky;left:0; background:white;">Projects per employee:</th>
 				{{#SDTProjects}}
-				<th style="border: 1px solid #dddddd; border-collapse: collapse;padding: 5px; background:#f5f5f5;" scope="col" class="text-center"><a id='Project-{{gxTpr_Id}}{{Id}}' style='cursor:pointer' class='project' >{{gxTpr_ProjectName}}{{ProjectName}}</a></th>
+				<th style="padding: 5px; background:#f5f5f5;" scope="col" class="text-center"><a id='Project-{{gxTpr_Id}}{{Id}}' style='cursor:pointer' class='project' >{{gxTpr_ProjectName}}{{ProjectName}}</a></th>
 				{{/SDTProjects}}
-				<th style="border: 1px solid #dddddd; border-collapse: collapse; padding:5px; background:#f5f5f5;" class="work text-center">Total Work Hours</th>
-				{{#ShowLeaveTotal}}<th style="border: 1px solid #dddddd; border-collapse: collapse; padding:5px; background:#f5f5f5;" class="leave text-center">Total Leave Hours</th><th style="border: 1px solid #dddddd; border-collapse: collapse; padding:5px; background:#f5f5f5;" class="leave text-center">Total</th>{{/ShowLeaveTotal}}{{#gxTpr_ShowLeaveTotal}}<th style="border: 1px solid #dddddd; border-collapse: collapse; padding:5px; background:#f5f5f5;" class="leave text-center">Total Leave Hours</th><th style="border: 1px solid #dddddd; border-collapse: collapse; padding:5px; background:#f5f5f5;" class="leave text-center">Total</th>{{/gxTpr_ShowLeaveTotal}}
+				{{#ShowLeaveTotal}}<th style="padding:5px; background:#f5f5f5;" class="leave text-center">Total Leave Hours</th><th style="padding:5px; background:#f5f5f5;" class="leave text-center">Total</th>{{/ShowLeaveTotal}}{{#gxTpr_ShowLeaveTotal}}<th style="padding:5px; background:#f5f5f5;" class="leave text-center">Total Leave Hours</th><th style="padding:5px; background:#f5f5f5;" class="leave text-center">Total</th>{{/gxTpr_ShowLeaveTotal}}
+				<th style="background:#f5f5f5;" class="work text-center">Total Work Hours</th>
 			</tr>
 		</thead>
 		
@@ -35,31 +39,32 @@
 		<tbody style='max-height:100px'>
 			{{#SDTEmployeeProjectHoursCollection}}
 			<tr class="GridWithPaginationBar GridNoBorder WorkWithOdd text-center">	
-				<td style="border: 1px solid #dddddd; border-collapse: collapse;font-weight: bold;background:#f5f5f5; position:sticky; left:0; z-index:1" class='text-center'><a href=''  data-event="Click" >{{gxTpr_EmployeeName}}{{EmployeeName}}</a></td>
+				<td style="font-weight: bold;background:#f5f5f5; position:sticky; left:0; z-index:1" class='text-center'><a href=''  data-event="Click" >{{gxTpr_EmployeeName}}{{EmployeeName}}</a></td>
 				
 				{{#SDTProjects}}
-				<td id='{{gxTpr_EmployeeId}}{{EmployeeId}}-{{gxTpr_Id}}{{Id}}' style='border: 1px solid #dddddd; border-collapse: collapse;' class="text-center"></td>
+				<td id='{{gxTpr_EmployeeId}}{{EmployeeId}}-{{gxTpr_Id}}{{Id}}' class="text-center"></td>
 				{{/SDTProjects}}
 				
-				<td class="work text-center" style='border: 1px solid #dddddd; border-collapse: collapse;font-weight: bold;background:#f5f5f5;'>
-					<span class="tag" style='padding: 0.5rem; {{#IsWorkTimeOptimal}} background:#00a95c; color:white; border-radius:5px;{{/IsWorkTimeOptimal}}{{#gxTpr_IsWorkTimeOptimal}} background:#00a95c; color:white; border-radius:5px;{{/gxTpr_IsWorkTimeOptimal}}'>{{gxTpr_TotalFormattedTime}}{{TotalFormattedTime}}</span>
+				<td class="work text-center" style="font-weight: bold;background:#f5f5f5;'>
+					<span class="tag" style="padding: 0.5rem; {{#IsWorkTimeOptimal}} background:#00a95c; color:white; border-radius:5px;{{/IsWorkTimeOptimal}}{{#gxTpr_IsWorkTimeOptimal}} background:#00a95c; color:white; border-radius:5px;{{/gxTpr_IsWorkTimeOptimal}}">{{gxTpr_TotalFormattedTime}}{{TotalFormattedTime}}</span>
 				</td>
-				{{#ShowLeaveTotal}}<td class="leave text-center" style='border: 1px solid #dddddd;font-weight: bold; border-collapse: collapse;background:#f5f5f5;'>{{gxTpr_TotalFormattedLeave}}{{TotalFormattedLeave}}</td>{{/ShowLeaveTotal}}{{#gxTpr_ShowLeaveTotal}}<td class="leave text-center" style='border: 1px solid #dddddd;font-weight: bold; border-collapse: collapse;background:#f5f5f5;'>{{gxTpr_TotalFormattedLeave}}{{TotalFormattedLeave}}</td>{{/gxTpr_ShowLeaveTotal}}
-				{{#ShowLeaveTotal}}<td class='leave' style='border: 1px solid #dddddd;font-weight: bold; border-collapse: collapse;background:#f5f5f5;'>{{gxTpr_FormattedTotal}}{{FormattedTotal}}</td>{{/ShowLeaveTotal}}{{#gxTpr_ShowLeaveTotal}}<td class='leave' style='border: 1px solid #dddddd;font-weight: bold; border-collapse: collapse;background:#f5f5f5;'>{{gxTpr_FormattedTotal}}{{FormattedTotal}}</td>{{/gxTpr_ShowLeaveTotal}}
+				{{#ShowLeaveTotal}}<td class="leave text-center" style="font-weight: bold; background:#f5f5f5;">{{gxTpr_TotalFormattedLeave}}{{TotalFormattedLeave}}</td>{{/ShowLeaveTotal}}{{#gxTpr_ShowLeaveTotal}}<td class="leave text-center" style="font-weight: bold; background:#f5f5f5;">{{gxTpr_TotalFormattedLeave}}{{TotalFormattedLeave}}</td>{{/gxTpr_ShowLeaveTotal}}
+				{{#ShowLeaveTotal}}<td class='leave' style="font-weight: bold; background:#f5f5f5;">{{gxTpr_FormattedTotal}}{{FormattedTotal}}</td>{{/ShowLeaveTotal}}{{#gxTpr_ShowLeaveTotal}}<td class='leave' style="font-weight: bold; background:#f5f5f5;">{{gxTpr_FormattedTotal}}{{FormattedTotal}}</td>{{/gxTpr_ShowLeaveTotal}}
 				
 			</tr>
 			{{/SDTEmployeeProjectHoursCollection}}
+			
 		</tbody>
 		
 		<tfoot>
 			<tr class="GridWithPaginationBar GridNoBorder WorkWithOdd">
-				<td style="border: 1px solid #dddddd; border-collapse: collapse;font-weight: bold;background:#fff; position:sticky; left:0; z-index:1">Total</td>
+				<td style="font-weight: bold;background:#fff; position:sticky; left:0; z-index:1">Total</td>
 				{{#SDTProjects}}
-				<td class="project-total text-center" id='{{gxTpr_Id}}{{Id}}' style='border: 1px solid #dddddd; border-collapse: collapse;' scope="col">0</td>
+				<td class="project-total text-center" id='{{gxTpr_Id}}{{Id}}' scope="col">0</td>
 				{{/SDTProjects}}
-				<td id='totalWorkHours' class="work text-center" style='border: 1px solid #dddddd; border-collapse: collapse;bold;background:#f5f5f5;'>{{gxTpr_TotalFormattedWorkTime}}{{TotalFormattedWorkTime}}</td>
-				{{#ShowLeaveTotal}}<td class="leave text-center" style='border: 1px solid #dddddd; border-collapse: collapse;'></td>{{/ShowLeaveTotal}}{{#gxTpr_ShowLeaveTotal}}<td class="leave text-center" style='border: 1px solid #dddddd; border-collapse: collapse;'></td>{{/gxTpr_ShowLeaveTotal}}
-				{{#ShowLeaveTotal}}<td class="leave text-center" style='border: 1px solid #dddddd; border-collapse: collapse;'>{{gxTpr_TotalFormattedTime}}{{TotalFormattedTime}}</td>{{/ShowLeaveTotal}}{{#gxTpr_ShowLeaveTotal}}<td class="leave text-center" style='border: 1px solid #dddddd; border-collapse: collapse;'>{{gxTpr_TotalFormattedTime}}{{TotalFormattedTime}}</td>{{/gxTpr_ShowLeaveTotal}}
+				<td id='totalWorkHours' class="work text-center" style='bold;background:#f5f5f5;'>{{gxTpr_TotalFormattedWorkTime}}{{TotalFormattedWorkTime}}</td>
+				{{#ShowLeaveTotal}}<td class="leave text-center" style=''></td>{{/ShowLeaveTotal}}{{#gxTpr_ShowLeaveTotal}}<td class="leave text-center" style=''></td>{{/gxTpr_ShowLeaveTotal}}
+				{{#ShowLeaveTotal}}<td class="leave text-center" style=''>{{gxTpr_TotalFormattedTime}}{{TotalFormattedTime}}</td>{{/ShowLeaveTotal}}{{#gxTpr_ShowLeaveTotal}}<td class="leave text-center" style=''>{{gxTpr_TotalFormattedTime}}{{TotalFormattedTime}}</td>{{/gxTpr_ShowLeaveTotal}}
 				
 			</tr>
 		<tfoot>		

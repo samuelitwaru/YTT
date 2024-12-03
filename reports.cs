@@ -577,16 +577,7 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, divUnnamedtable2_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 CellPaddingLeft10", "start", "top", "", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, divOverviewtable_Internalname, divOverviewtable_Visible, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
             /* Div Control */
@@ -594,7 +585,7 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, divTable1_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
+            GxWebStd.gx_div_start( context, divTable1_Internalname, 1, 0, "px", 0, "px", "CellMarginLeftRight3", "start", "top", "", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
             /* Div Control */
@@ -606,8 +597,8 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
             /* Single line edit */
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 31,'',false,'',0)\"";
-            GxWebStd.gx_single_line_edit( context, edtavDaterange_rangetext_Internalname, AV10DateRange_RangeText, StringUtil.RTrim( context.localUtil.Format( AV10DateRange_RangeText, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,31);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavDaterange_rangetext_Jsonclick, 0, "AttributeDate", "", "", "", "", 1, edtavDaterange_rangetext_Enabled, 0, "text", "", 40, "chr", 1, "row", 40, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_Reports.htm");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 28,'',false,'',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtavDaterange_rangetext_Internalname, AV10DateRange_RangeText, StringUtil.RTrim( context.localUtil.Format( AV10DateRange_RangeText, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,28);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavDaterange_rangetext_Jsonclick, 0, "AttributeDate", "", "", "", "", 1, edtavDaterange_rangetext_Enabled, 0, "text", "", 40, "chr", 1, "row", 40, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_Reports.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -701,7 +692,7 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "end", "top", "", "", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, divUnnamedtable3_Internalname, 1, 0, "px", 0, "px", "Flex", "start", "top", " "+"data-gx-flex"+" ", "flex-direction:row-reverse;justify-content:center;align-items:center;", "div");
+            GxWebStd.gx_div_start( context, divUnnamedtable2_Internalname, 1, 0, "px", 0, "px", "Flex", "start", "top", " "+"data-gx-flex"+" ", "flex-direction:row-reverse;justify-content:center;align-items:center;", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "", "start", "top", "", "flex-grow:1;", "div");
             /* Div Control */
@@ -720,10 +711,10 @@ namespace GeneXus.Programs {
             /* Attribute/Variable Label */
             GxWebStd.gx_label_element( context, chkavShowleavetotal_Internalname, "Show Leave Total", "col-sm-3 AttributeCheckBoxLabel", 0, true, "");
             /* Check box */
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 63,'',false,'',0)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 60,'',false,'',0)\"";
             ClassString = "AttributeCheckBox";
             StyleString = "";
-            GxWebStd.gx_checkbox_ctrl( context, chkavShowleavetotal_Internalname, StringUtil.BoolToStr( AV56ShowLeaveTotal), "", "Show Leave Total", chkavShowleavetotal.Visible, chkavShowleavetotal.Enabled, "true", "", StyleString, ClassString, "", "", TempTags+" onclick="+"\"gx.fn.checkboxClick(63, this, 'true', 'false',"+"''"+");"+"gx.evt.onchange(this, event);\""+" onblur=\""+""+";gx.evt.onblur(this,63);\"");
+            GxWebStd.gx_checkbox_ctrl( context, chkavShowleavetotal_Internalname, StringUtil.BoolToStr( AV56ShowLeaveTotal), "", "Show Leave Total", chkavShowleavetotal.Visible, chkavShowleavetotal.Enabled, "true", "", StyleString, ClassString, "", "", TempTags+" onclick="+"\"gx.fn.checkboxClick(60, this, 'true', 'false',"+"''"+");"+"gx.evt.onchange(this, event);\""+" onblur=\""+""+";gx.evt.onblur(this,60);\"");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -737,7 +728,7 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, divUnnamedtable4_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
+            GxWebStd.gx_div_start( context, divUnnamedtable3_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
             /* Div Control */
@@ -780,8 +771,8 @@ namespace GeneXus.Programs {
             ucDaterange_rangepicker.SetProperty("PickerOptions", AV9DateRange_RangePickerOptions);
             ucDaterange_rangepicker.Render(context, "wwp.daterangepicker", Daterange_rangepicker_Internalname, "DATERANGE_RANGEPICKERContainer");
             /* Single line edit */
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 77,'',false,'',0)\"";
-            GxWebStd.gx_single_line_edit( context, edtavView_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(AV54View), 4, 0, ".", "")), StringUtil.LTrim( context.localUtil.Format( (decimal)(AV54View), "ZZZ9")), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+TempTags+" onchange=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onblur(this,77);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavView_Jsonclick, 0, "Attribute", "", "", "", "", edtavView_Visible, 1, 0, "text", "1", 4, "chr", 1, "row", 4, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_Reports.htm");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 74,'',false,'',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtavView_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(AV54View), 4, 0, ".", "")), StringUtil.LTrim( context.localUtil.Format( (decimal)(AV54View), "ZZZ9")), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+TempTags+" onchange=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onblur(this,74);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavView_Jsonclick, 0, "Attribute", "", "", "", "", edtavView_Visible, 1, 0, "text", "1", 4, "chr", 1, "row", 4, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_Reports.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -1594,7 +1585,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202412217282080", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20241231715181", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1610,7 +1601,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("reports.js", "?202412217282082", false, true);
+         context.AddJavascriptSource("reports.js", "?20241231715183", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -1647,7 +1638,6 @@ namespace GeneXus.Programs {
          divTablecontent_Internalname = "TABLECONTENT";
          bttBtnexportexcel_Internalname = "BTNEXPORTEXCEL";
          divUnnamedtable1_Internalname = "UNNAMEDTABLE1";
-         divUnnamedtable2_Internalname = "UNNAMEDTABLE2";
          edtavDaterange_rangetext_Internalname = "vDATERANGE_RANGETEXT";
          lblTextblockcombo_projectid_Internalname = "TEXTBLOCKCOMBO_PROJECTID";
          Combo_projectid_Internalname = "COMBO_PROJECTID";
@@ -1662,9 +1652,9 @@ namespace GeneXus.Programs {
          lblTextblockshowleavetotal_Internalname = "TEXTBLOCKSHOWLEAVETOTAL";
          chkavShowleavetotal_Internalname = "vSHOWLEAVETOTAL";
          divUnnamedtableshowleavetotal_Internalname = "UNNAMEDTABLESHOWLEAVETOTAL";
-         divUnnamedtable3_Internalname = "UNNAMEDTABLE3";
+         divUnnamedtable2_Internalname = "UNNAMEDTABLE2";
          Pivottable1_Internalname = "PIVOTTABLE1";
-         divUnnamedtable4_Internalname = "UNNAMEDTABLE4";
+         divUnnamedtable3_Internalname = "UNNAMEDTABLE3";
          divOverviewtable_Internalname = "OVERVIEWTABLE";
          divDetailtable_Internalname = "DETAILTABLE";
          divMaintable_Internalname = "MAINTABLE";
@@ -1942,7 +1932,6 @@ namespace GeneXus.Programs {
       private string TempTags ;
       private string bttBtnexportexcel_Internalname ;
       private string bttBtnexportexcel_Jsonclick ;
-      private string divUnnamedtable2_Internalname ;
       private string divOverviewtable_Internalname ;
       private string divTable1_Internalname ;
       private string edtavDaterange_rangetext_Internalname ;
@@ -1962,12 +1951,12 @@ namespace GeneXus.Programs {
       private string lblTextblockcombo_employeeid_Jsonclick ;
       private string Combo_employeeid_Caption ;
       private string Combo_employeeid_Internalname ;
-      private string divUnnamedtable3_Internalname ;
+      private string divUnnamedtable2_Internalname ;
       private string divUnnamedtableshowleavetotal_Internalname ;
       private string lblTextblockshowleavetotal_Internalname ;
       private string lblTextblockshowleavetotal_Jsonclick ;
       private string chkavShowleavetotal_Internalname ;
-      private string divUnnamedtable4_Internalname ;
+      private string divUnnamedtable3_Internalname ;
       private string Pivottable1_Internalname ;
       private string divDetailtable_Internalname ;
       private string divHtml_bottomauxiliarcontrols_Internalname ;
