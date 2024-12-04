@@ -79,7 +79,7 @@
 			// Your code here
 			var newHeight = $(window).height();
 			console.log("New height: " + newHeight);
-			$('#print').css("height", newHeight-100)
+			$('#print').css("max-height", newHeight-100)
 			// Perform actions based on the new height
 		});
   });
