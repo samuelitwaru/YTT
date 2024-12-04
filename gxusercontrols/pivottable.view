@@ -22,7 +22,7 @@
 	}
 </style>
 
-<div id="print" style="overflow:scroll; scrollbar-width:none; border: 0px solid #dddddd; margin-right:-5px;">
+<div id="print" style="overflow:scroll; scrollbar-width:none; border: 1px solid #dddddd; margin-right:-3px;">
 	<table class="my-sticky-column-table">
 		<thead  style="position:sticky; top:0; z-index:10">
 			<tr>

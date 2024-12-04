@@ -233,6 +233,7 @@ BODY.gx-masked DIV.gx-mask
 .my-sticky-column-table 
 {
 	border-collapse : separate;
+	width : 100%;
 }
 .my-sticky-column-table td, .my-sticky-column-table th 
 {

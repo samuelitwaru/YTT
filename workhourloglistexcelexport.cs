@@ -98,7 +98,7 @@ namespace GeneXus.Programs {
          AV33headerCellStyle.gxTpr_Font.gxTpr_Bold = true;
          AV33headerCellStyle.gxTpr_Font.gxTpr_Size = 13;
          AV33headerCellStyle.gxTpr_Font.gxTpr_Color.setcolorrgb(25, 25, 112) ;
-         AV33headerCellStyle.gxTpr_Alignment.gxTpr_Horizontal = 2;
+         AV33headerCellStyle.gxTpr_Alignment.gxTpr_Horizontal = 1;
          AV52footCellStyle = new GeneXus.Programs.genexusoffice.office.excel.style.SdtExcelCellStyle(context);
          AV52footCellStyle.gxTpr_Font.gxTpr_Bold = true;
          AV52footCellStyle.gxTpr_Font.gxTpr_Size = 13;
