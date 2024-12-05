@@ -150,7 +150,9 @@ namespace GeneXus.Programs {
          AV21excelcellrange.gxTpr_Valuetext = "End Date "+GXt_char1;
          AV21excelcellrange.setcellstyle( AV52footCellStyle);
          AV21excelcellrange = AV20excelSpreadsheet.cell(AV28CellRow+4, 1);
-         AV21excelcellrange.gxTpr_Valuetext = "Total "+"&TOTAL";
+         GXt_char1 = "";
+         new formattime(context ).execute(  (long)(Math.Round(AV54Total, 18, MidpointRounding.ToEven)), out  GXt_char1) ;
+         AV21excelcellrange.gxTpr_Valuetext = "Total "+GXt_char1;
          AV21excelcellrange.setcellstyle( AV52footCellStyle);
          /* Execute user subroutine: 'CLOSEDOCUMENT' */
          S141 ();
@@ -185,17 +187,18 @@ namespace GeneXus.Programs {
          AV35Columns.Add("Employee Name", 0);
          AV35Columns.Add("Project Name", 0);
          AV35Columns.Add("Log Date", 0);
+         AV35Columns.Add("Log Hours", 0);
          AV35Columns.Add("Log Description", 0);
          AV22VisibleColumnCount = 0;
-         AV54GXV1 = 1;
-         while ( AV54GXV1 <= AV35Columns.Count )
+         AV55GXV1 = 1;
+         while ( AV55GXV1 <= AV35Columns.Count )
          {
-            AV30Column = ((string)AV35Columns.Item(AV54GXV1));
+            AV30Column = ((string)AV35Columns.Item(AV55GXV1));
             AV21excelcellrange = AV20excelSpreadsheet.cell(AV28CellRow, AV29FirstColumn+AV22VisibleColumnCount);
             AV21excelcellrange.gxTpr_Valuetext = AV30Column;
             AV21excelcellrange.setcellstyle( AV33headerCellStyle);
             AV22VisibleColumnCount = (short)(AV22VisibleColumnCount+1);
-            AV54GXV1 = (int)(AV54GXV1+1);
+            AV55GXV1 = (int)(AV55GXV1+1);
          }
       }
 
@@ -204,7 +207,8 @@ namespace GeneXus.Programs {
          /* 'WRITEROWS' Routine */
          returnInSub = false;
          AV28CellRow = 4;
-         AV55Cellcol = 1;
+         AV56Cellcol = 1;
+         AV54Total = 0;
          pr_default.dynParam(0, new Object[]{ new Object[]{
                                               A102ProjectId ,
                                               AV36ProjectIds ,
@@ -230,6 +234,8 @@ namespace GeneXus.Programs {
             A148EmployeeName = P00BH2_A148EmployeeName[0];
             A120WorkHourLogDuration = P00BH2_A120WorkHourLogDuration[0];
             A123WorkHourLogDescription = P00BH2_A123WorkHourLogDescription[0];
+            A122WorkHourLogMinute = P00BH2_A122WorkHourLogMinute[0];
+            A121WorkHourLogHour = P00BH2_A121WorkHourLogHour[0];
             A118WorkHourLogId = P00BH2_A118WorkHourLogId[0];
             A148EmployeeName = P00BH2_A148EmployeeName[0];
             A103ProjectName = P00BH2_A103ProjectName[0];
@@ -245,6 +251,7 @@ namespace GeneXus.Programs {
             AV21excelcellrange = AV20excelSpreadsheet.cell(AV28CellRow, 5);
             AV21excelcellrange.gxTpr_Valuetext = StringUtil.Trim( A123WorkHourLogDescription);
             AV28CellRow = (short)(AV28CellRow+1);
+            AV54Total = (decimal)(AV54Total+(A121WorkHourLogHour*60+A122WorkHourLogMinute));
             pr_default.readNext(0);
          }
          pr_default.close(0);
@@ -284,10 +291,10 @@ namespace GeneXus.Programs {
          }
          AV43OrderedBy = AV37GridState.gxTpr_Orderedby;
          AV45OrderedDsc = AV37GridState.gxTpr_Ordereddsc;
-         AV57GXV2 = 1;
-         while ( AV57GXV2 <= AV37GridState.gxTpr_Filtervalues.Count )
+         AV58GXV2 = 1;
+         while ( AV58GXV2 <= AV37GridState.gxTpr_Filtervalues.Count )
          {
-            AV44GridStateFilterValue = ((GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue)AV37GridState.gxTpr_Filtervalues.Item(AV57GXV2));
+            AV44GridStateFilterValue = ((GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue)AV37GridState.gxTpr_Filtervalues.Item(AV58GXV2));
             if ( StringUtil.StrCmp(AV44GridStateFilterValue.gxTpr_Name, "FILTERFULLTEXT") == 0 )
             {
                AV46FilterFullText = AV44GridStateFilterValue.gxTpr_Value;
@@ -329,7 +336,7 @@ namespace GeneXus.Programs {
             {
                AV50TFWorkHourLogDescription_Sel = (short)(Math.Round(NumberUtil.Val( AV44GridStateFilterValue.gxTpr_Value, "."), 18, MidpointRounding.ToEven));
             }
-            AV57GXV2 = (int)(AV57GXV2+1);
+            AV58GXV2 = (int)(AV58GXV2+1);
          }
       }
 
@@ -366,6 +373,8 @@ namespace GeneXus.Programs {
          P00BH2_A148EmployeeName = new string[] {""} ;
          P00BH2_A120WorkHourLogDuration = new string[] {""} ;
          P00BH2_A123WorkHourLogDescription = new string[] {""} ;
+         P00BH2_A122WorkHourLogMinute = new short[1] ;
+         P00BH2_A121WorkHourLogHour = new short[1] ;
          P00BH2_A118WorkHourLogId = new long[1] ;
          A103ProjectName = "";
          A148EmployeeName = "";
@@ -383,7 +392,7 @@ namespace GeneXus.Programs {
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.workhourloglistexcelexport__default(),
             new Object[][] {
                 new Object[] {
-               P00BH2_A106EmployeeId, P00BH2_A103ProjectName, P00BH2_A102ProjectId, P00BH2_A119WorkHourLogDate, P00BH2_A148EmployeeName, P00BH2_A120WorkHourLogDuration, P00BH2_A123WorkHourLogDescription, P00BH2_A118WorkHourLogId
+               P00BH2_A106EmployeeId, P00BH2_A103ProjectName, P00BH2_A102ProjectId, P00BH2_A119WorkHourLogDate, P00BH2_A148EmployeeName, P00BH2_A120WorkHourLogDuration, P00BH2_A123WorkHourLogDescription, P00BH2_A122WorkHourLogMinute, P00BH2_A121WorkHourLogHour, P00BH2_A118WorkHourLogId
                }
             }
          );
@@ -393,20 +402,23 @@ namespace GeneXus.Programs {
       private short AV28CellRow ;
       private short AV29FirstColumn ;
       private short AV22VisibleColumnCount ;
-      private short AV55Cellcol ;
+      private short AV56Cellcol ;
+      private short A122WorkHourLogMinute ;
+      private short A121WorkHourLogHour ;
       private short AV43OrderedBy ;
       private short AV47TFEmployeeName_Sel ;
       private short AV48TFProjectName_Sel ;
       private short AV51TFWorkHourLogDate_To ;
       private short AV49TFWorkHourLogDuration_Sel ;
       private short AV50TFWorkHourLogDescription_Sel ;
-      private int AV54GXV1 ;
+      private int AV55GXV1 ;
       private int AV36ProjectIds_Count ;
-      private int AV57GXV2 ;
+      private int AV58GXV2 ;
       private long AV8EmployeeId ;
       private long A102ProjectId ;
       private long A106EmployeeId ;
       private long A118WorkHourLogId ;
+      private decimal AV54Total ;
       private string AV12Filename ;
       private string GXt_char1 ;
       private string GXt_char2 ;
@@ -448,6 +460,8 @@ namespace GeneXus.Programs {
       private string[] P00BH2_A148EmployeeName ;
       private string[] P00BH2_A120WorkHourLogDuration ;
       private string[] P00BH2_A123WorkHourLogDescription ;
+      private short[] P00BH2_A122WorkHourLogMinute ;
+      private short[] P00BH2_A121WorkHourLogHour ;
       private long[] P00BH2_A118WorkHourLogId ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState AV37GridState ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPGridState_FilterValue AV44GridStateFilterValue ;
@@ -472,7 +486,7 @@ namespace GeneXus.Programs {
          string scmdbuf;
          short[] GXv_int4 = new short[4];
          Object[] GXv_Object5 = new Object[2];
-         scmdbuf = "SELECT T1.EmployeeId, T3.ProjectName, T1.ProjectId, T1.WorkHourLogDate, T2.EmployeeName, T1.WorkHourLogDuration, T1.WorkHourLogDescription, T1.WorkHourLogId FROM ((WorkHourLog T1 INNER JOIN Employee T2 ON T2.EmployeeId = T1.EmployeeId) INNER JOIN Project T3 ON T3.ProjectId = T1.ProjectId)";
+         scmdbuf = "SELECT T1.EmployeeId, T3.ProjectName, T1.ProjectId, T1.WorkHourLogDate, T2.EmployeeName, T1.WorkHourLogDuration, T1.WorkHourLogDescription, T1.WorkHourLogMinute, T1.WorkHourLogHour, T1.WorkHourLogId FROM ((WorkHourLog T1 INNER JOIN Employee T2 ON T2.EmployeeId = T1.EmployeeId) INNER JOIN Project T3 ON T3.ProjectId = T1.ProjectId)";
          AddWhere(sWhereString, "(T1.WorkHourLogDate >= :AV9FromDate)");
          AddWhere(sWhereString, "(POSITION(RTRIM(LOWER(:AV46FilterFullText)) IN LOWER(T3.ProjectName)) >= 1)");
          AddWhere(sWhereString, "(T1.EmployeeId = :AV8EmployeeId)");
@@ -540,7 +554,9 @@ namespace GeneXus.Programs {
                 ((string[]) buf[4])[0] = rslt.getString(5, 100);
                 ((string[]) buf[5])[0] = rslt.getVarchar(6);
                 ((string[]) buf[6])[0] = rslt.getLongVarchar(7);
-                ((long[]) buf[7])[0] = rslt.getLong(8);
+                ((short[]) buf[7])[0] = rslt.getShort(8);
+                ((short[]) buf[8])[0] = rslt.getShort(9);
+                ((long[]) buf[9])[0] = rslt.getLong(10);
                 return;
        }
     }
