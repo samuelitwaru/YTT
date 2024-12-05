@@ -53,7 +53,7 @@ namespace GeneXus.Programs {
       {
          /* GeneXus formulas */
          /* Output device settings */
-         AV9File.Source = "C:\\Users\\artj9\\Desktop\\Data.txt";
+         AV9File.Source = "C:\\Users\\samuelitwaru\\Desktop\\Data.txt";
          AV9File.Open("");
          AV9File.WriteLine(AV8Message);
          AV9File.Close();

@@ -238,6 +238,7 @@ BODY.gx-masked DIV.gx-mask
 .my-sticky-column-table td, .my-sticky-column-table th 
 {
 	border : 1px solid #dddddd;
+	padding : 4px;
 }
 .StickyHeaderTableContainer .gx-grid 
 {
