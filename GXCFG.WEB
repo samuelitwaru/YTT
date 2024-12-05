@@ -85,7 +85,7 @@
       <add  key="wcf:serviceHostingEnvironment:useClassicReadEntityBodyMode" value="true"/>
       <add  key="HTTP_PROTOCOL" value="Unsecure"/>
       <add  key="SAMESITE_COOKIE" value="Lax"/>
-      <add  key="CACHE_INVALIDATION_TOKEN" value="20241259103613"/>
+      <add  key="CACHE_INVALIDATION_TOKEN" value="20241251040397"/>
       <add  key="CORS_ALLOW_ORIGIN" value=""/>
       <add  key="LOG_OUTPUT" value="RollingFile"/>
       <add  key="MaxFileUploadSize" value="528000000"/>

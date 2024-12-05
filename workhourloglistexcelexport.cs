@@ -149,6 +149,9 @@ namespace GeneXus.Programs {
          new formatdatetime(context ).execute(  AV10ToDate,  "DD.MM.YYYY", out  GXt_char1) ;
          AV21excelcellrange.gxTpr_Valuetext = "End Date "+GXt_char1;
          AV21excelcellrange.setcellstyle( AV52footCellStyle);
+         AV21excelcellrange = AV20excelSpreadsheet.cell(AV28CellRow+4, 1);
+         AV21excelcellrange.gxTpr_Valuetext = "Total "+"&TOTAL";
+         AV21excelcellrange.setcellstyle( AV52footCellStyle);
          /* Execute user subroutine: 'CLOSEDOCUMENT' */
          S141 ();
          if ( returnInSub )
