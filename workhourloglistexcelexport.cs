@@ -152,7 +152,7 @@ namespace GeneXus.Programs {
          AV21excelcellrange = AV20excelSpreadsheet.cell(AV28CellRow+4, 1);
          GXt_char1 = "";
          new formattime(context ).execute(  (long)(Math.Round(AV54Total, 18, MidpointRounding.ToEven)), out  GXt_char1) ;
-         AV21excelcellrange.gxTpr_Valuetext = "Total "+GXt_char1;
+         AV21excelcellrange.gxTpr_Valuetext = "Total "+GXt_char1+" ";
          AV21excelcellrange.setcellstyle( AV52footCellStyle);
          /* Execute user subroutine: 'CLOSEDOCUMENT' */
          S141 ();
