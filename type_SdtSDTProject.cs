@@ -32,6 +32,8 @@ namespace GeneXus.Programs
 			/* Constructor for serialization */
 			gxTv_SdtSDTProject_Projectname = "";
 
+			gxTv_SdtSDTProject_Smallcaseprojectname = "";
+
 			gxTv_SdtSDTProject_Projectdescription = "";
 
 			gxTv_SdtSDTProject_Projectstatus = "";
@@ -72,6 +74,9 @@ namespace GeneXus.Programs
 
 
 			AddObjectProperty("ProjectName", gxTpr_Projectname, false);
+
+
+			AddObjectProperty("SmallCaseProjectName", gxTpr_Smallcaseprojectname, false);
 
 
 			AddObjectProperty("ProjectDescription", gxTpr_Projectdescription, false);
@@ -133,6 +138,22 @@ namespace GeneXus.Programs
 			set {
 				gxTv_SdtSDTProject_Projectname = value;
 				SetDirty("Projectname");
+			}
+		}
+
+
+
+
+		[SoapElement(ElementName="SmallCaseProjectName")]
+		[XmlElement(ElementName="SmallCaseProjectName")]
+		public string gxTpr_Smallcaseprojectname
+		{
+			get {
+				return gxTv_SdtSDTProject_Smallcaseprojectname; 
+			}
+			set {
+				gxTv_SdtSDTProject_Smallcaseprojectname = value;
+				SetDirty("Smallcaseprojectname");
 			}
 		}
 
@@ -224,6 +245,7 @@ namespace GeneXus.Programs
 		public void initialize( )
 		{
 			gxTv_SdtSDTProject_Projectname = "";
+			gxTv_SdtSDTProject_Smallcaseprojectname = "";
 			gxTv_SdtSDTProject_Projectdescription = "";
 			gxTv_SdtSDTProject_Projectstatus = "";
 
@@ -244,6 +266,9 @@ namespace GeneXus.Programs
 		 
 
 		protected string gxTv_SdtSDTProject_Projectname;
+		 
+
+		protected string gxTv_SdtSDTProject_Smallcaseprojectname;
 		 
 
 		protected string gxTv_SdtSDTProject_Projectdescription;
@@ -311,7 +336,19 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="ProjectDescription", Order=3)]
+		[DataMember(Name="SmallCaseProjectName", Order=3)]
+		public  string gxTpr_Smallcaseprojectname
+		{
+			get { 
+				return StringUtil.RTrim( sdt.gxTpr_Smallcaseprojectname);
+
+			}
+			set { 
+				 sdt.gxTpr_Smallcaseprojectname = value;
+			}
+		}
+
+		[DataMember(Name="ProjectDescription", Order=4)]
 		public  string gxTpr_Projectdescription
 		{
 			get { 
@@ -323,7 +360,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="ProjectStatus", Order=4)]
+		[DataMember(Name="ProjectStatus", Order=5)]
 		public  string gxTpr_Projectstatus
 		{
 			get { 
@@ -335,7 +372,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="ProjectTime", Order=5)]
+		[DataMember(Name="ProjectTime", Order=6)]
 		public  string gxTpr_Projecttime
 		{
 			get { 
@@ -347,7 +384,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="ProjectFormattedTime", Order=6)]
+		[DataMember(Name="ProjectFormattedTime", Order=7)]
 		public  string gxTpr_Projectformattedtime
 		{
 			get { 

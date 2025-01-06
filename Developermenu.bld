@@ -26,6 +26,8 @@ wwpbaseobjects\subscriptions\wwp_subscription
 wwpbaseobjects\wwp_entity
 workwithplus\wwp_parameter
 wwpbaseobjects\wwp_userextended
+wp_projectoverview
+wp_projectoverview
 wp_leavebalancereport
 wp_leavebalancereport
 wc_setemployeevacationdays
@@ -227,6 +229,8 @@ gamnotauthorized
 gamexamplelogin
 general\ui\masterprompt
 general\ui\masterunanimosidebar
+aprc_employeeprojectmatrixreport
+aprc_requestaccesstoken
 aprc_getemployeebalance
 aprc_setdays
 aresetuserpasswords
@@ -403,6 +407,8 @@ sdsvc_UpdateWorkHourLog_Level_Detail
 sdsvc_LeaveRequestPanel_Level_Detail
 sdsvc_UpdateLeaveRequest_Level_Detail
 sdsvc_ViewLeaveRequest_Level_Detail
+api_timetracker
+api_timetracker
 yttv3sdnotauthorized
 yttv3sd
 gamsdnotauthorized

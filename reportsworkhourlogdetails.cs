@@ -1626,6 +1626,10 @@ namespace GeneXus.Programs {
          returnInSub = false;
          AV45Hours = 0;
          AV46Minutes = 0;
+         new logtofile(context ).execute(  StringUtil.Str( (decimal)(AV34EmployeeId), 10, 0)) ;
+         new logtofile(context ).execute(  context.localUtil.DToC( AV41FromDate, 2, "/")) ;
+         new logtofile(context ).execute(  context.localUtil.DToC( AV42ToDate, 2, "/")) ;
+         new logtofile(context ).execute(  StringUtil.Str( (decimal)(AV43OneProjectId), 10, 0)) ;
          /* Optimized group. */
          /* Using cursor H004U4 */
          pr_default.execute(2, new Object[] {AV34EmployeeId, AV43OneProjectId, AV41FromDate, AV42ToDate});
@@ -2237,7 +2241,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202412217212928", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20251310194491", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2253,7 +2257,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("reportsworkhourlogdetails.js", "?202412217212930", false, true);
+         context.AddJavascriptSource("reportsworkhourlogdetails.js", "?20251310194493", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/DVPaginationBar/DVPaginationBarRender.js", "", false, true);

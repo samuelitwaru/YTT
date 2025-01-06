@@ -64,6 +64,10 @@
  	<Compile Include="$(WebDirectory)\type_SdtSDTWorkHourLogReport.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDTWorkHourLogReport_WeekCollectionItem.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDT_EmployeeBalanceAction.cs" />
+ 	<Compile Include="$(WebDirectory)\type_SdtSDT_EmployeeProjectMatrix.cs" />
+ 	<Compile Include="$(WebDirectory)\type_SdtSDT_EmployeeProjectMatrix_ProjectsItem.cs" />
+ 	<Compile Include="$(WebDirectory)\type_SdtSDT_ErrorResponse.cs" />
+ 	<Compile Include="$(WebDirectory)\type_SdtSDT_Project.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtWorkLogsSDT.cs" />
  	<Compile Include="$(WebDirectory)\workwithplus\ai\type_SdtWWP_AIChatCompletionRequest.cs" />
  	<Compile Include="$(WebDirectory)\workwithplus\ai\type_SdtWWP_AIChatCompletionRequest_functionsItem.cs" />
