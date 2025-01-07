@@ -149,8 +149,9 @@ namespace GeneXus.Programs {
       {
          /* GeneXus formulas */
          /* Output device settings */
+         new logtofile(context ).execute(  context.localUtil.DToC( AV10DateFrom, 2, "/")+" - "+context.localUtil.DToC( AV9DateTo, 2, "/")) ;
          /* Using cursor P00BP2 */
-         pr_default.execute(0, new Object[] {AV11EmployeeId, AV10DateFrom, AV9DateTo});
+         pr_default.execute(0, new Object[] {AV11EmployeeId, AV9DateTo, AV10DateFrom});
          while ( (pr_default.getStatus(0) != 101) )
          {
             A124LeaveTypeId = P00BP2_A124LeaveTypeId[0];
@@ -164,6 +165,7 @@ namespace GeneXus.Programs {
             A131LeaveRequestDuration = P00BP2_A131LeaveRequestDuration[0];
             A127LeaveRequestId = P00BP2_A127LeaveRequestId[0];
             A144LeaveTypeVacationLeave = P00BP2_A144LeaveTypeVacationLeave[0];
+            new logtofile(context ).execute(  "Leave request: "+context.localUtil.DToC( A129LeaveRequestStartDate, 2, "/")+" - "+context.localUtil.DToC( A130LeaveRequestEndDate, 2, "/")) ;
             if ( ( DateTimeUtil.ResetTime ( A129LeaveRequestStartDate ) < DateTimeUtil.ResetTime ( AV10DateFrom ) ) && ( DateTimeUtil.ResetTime ( A130LeaveRequestEndDate ) <= DateTimeUtil.ResetTime ( AV9DateTo ) ) )
             {
                GXt_decimal1 = AV22ExceptDays;
@@ -275,11 +277,11 @@ namespace GeneXus.Programs {
           Object[] prmP00BP2;
           prmP00BP2 = new Object[] {
           new ParDef("AV11EmployeeId",GXType.Int64,10,0) ,
-          new ParDef("AV10DateFrom",GXType.Date,8,0) ,
-          new ParDef("AV9DateTo",GXType.Date,8,0)
+          new ParDef("AV9DateTo",GXType.Date,8,0) ,
+          new ParDef("AV10DateFrom",GXType.Date,8,0)
           };
           def= new CursorDef[] {
-              new CursorDef("P00BP2", "SELECT T1.LeaveTypeId, T2.LeaveTypeVacationLeave, T1.LeaveRequestStatus, T1.LeaveRequestEndDate, T1.LeaveRequestStartDate, T1.EmployeeId, T1.LeaveRequestHalfDay, T1.LeaveRequestDuration, T1.LeaveRequestId FROM (LeaveRequest T1 INNER JOIN LeaveType T2 ON T2.LeaveTypeId = T1.LeaveTypeId) WHERE (T1.EmployeeId = :AV11EmployeeId) AND (T1.LeaveRequestStartDate >= :AV10DateFrom and T1.LeaveRequestEndDate <= :AV9DateTo or T1.LeaveRequestStartDate < :AV10DateFrom and T1.LeaveRequestEndDate <= :AV9DateTo or T1.LeaveRequestStartDate >= :AV10DateFrom and T1.LeaveRequestEndDate > :AV9DateTo) AND (T1.LeaveRequestStatus = ( 'Approved')) AND (T2.LeaveTypeVacationLeave = ( 'Yes')) ORDER BY T1.EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00BP2,100, GxCacheFrequency.OFF ,true,false )
+              new CursorDef("P00BP2", "SELECT T1.LeaveTypeId, T2.LeaveTypeVacationLeave, T1.LeaveRequestStatus, T1.LeaveRequestEndDate, T1.LeaveRequestStartDate, T1.EmployeeId, T1.LeaveRequestHalfDay, T1.LeaveRequestDuration, T1.LeaveRequestId FROM (LeaveRequest T1 INNER JOIN LeaveType T2 ON T2.LeaveTypeId = T1.LeaveTypeId) WHERE (T1.EmployeeId = :AV11EmployeeId) AND (T1.LeaveRequestStartDate < :AV9DateTo and T1.LeaveRequestEndDate > :AV10DateFrom) AND (T1.LeaveRequestStatus = ( 'Approved')) AND (T2.LeaveTypeVacationLeave = ( 'Yes')) ORDER BY T1.EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00BP2,100, GxCacheFrequency.OFF ,true,false )
           };
        }
     }
