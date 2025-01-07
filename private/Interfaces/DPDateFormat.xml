@@ -15,6 +15,20 @@
         </Properties>
       </Field>
     </Parameter>
+    <Parameter name="Date">
+      <Field>
+        <Properties>
+          <Property>
+            <Name>Type</Name>
+            <Value>Date</Value>
+          </Property>
+          <Property>
+            <Name>Length</Name>
+            <Value>8</Value>
+          </Property>
+        </Properties>
+      </Field>
+    </Parameter>
     <Parameter name="ReturnValue" accessor="out">
       <Field name="WWPDateRangePickerOptions" description="WWPDate Range Picker Options">
         <Fields>

@@ -108,6 +108,10 @@ namespace GeneXus.Programs {
          /* Output device settings */
          AV21TotalHour = 0;
          AV24TotalMinute = 0;
+         AV35TotalMonthlyHour = 0;
+         AV33TotalMonthlyMinute = 0;
+         AV27TotalDailyHour = 0;
+         AV28TotalDailyMinute = 0;
          if ( DateTimeUtil.Dow( AV25WeekDate) == 2 )
          {
             AV17StartDate = AV25WeekDate;
@@ -127,63 +131,87 @@ namespace GeneXus.Programs {
                AV11EndDate = DateTimeUtil.DAdd( AV17StartDate, (6));
             }
          }
-         /* Optimized group. */
          /* Using cursor P008B2 */
-         pr_default.execute(0, new Object[] {AV17StartDate, AV36EmployeeId, AV11EndDate});
-         c121WorkHourLogHour = P008B2_A121WorkHourLogHour[0];
-         c122WorkHourLogMinute = P008B2_A122WorkHourLogMinute[0];
+         pr_default.execute(0, new Object[] {AV36EmployeeId, AV25WeekDate});
+         while ( (pr_default.getStatus(0) != 101) )
+         {
+            A119WorkHourLogDate = P008B2_A119WorkHourLogDate[0];
+            A106EmployeeId = P008B2_A106EmployeeId[0];
+            A121WorkHourLogHour = P008B2_A121WorkHourLogHour[0];
+            A122WorkHourLogMinute = P008B2_A122WorkHourLogMinute[0];
+            A118WorkHourLogId = P008B2_A118WorkHourLogId[0];
+            AV35TotalMonthlyHour = (short)(AV35TotalMonthlyHour+A121WorkHourLogHour);
+            AV33TotalMonthlyMinute = (short)(AV33TotalMonthlyMinute+A122WorkHourLogMinute);
+            if ( ( DateTimeUtil.ResetTime ( A119WorkHourLogDate ) >= DateTimeUtil.ResetTime ( AV17StartDate ) ) && ( DateTimeUtil.ResetTime ( A119WorkHourLogDate ) <= DateTimeUtil.ResetTime ( AV11EndDate ) ) )
+            {
+               AV21TotalHour = (short)(AV21TotalHour+A121WorkHourLogHour);
+               AV24TotalMinute = (short)(AV24TotalMinute+A122WorkHourLogMinute);
+            }
+            if ( DateTimeUtil.ResetTime ( A119WorkHourLogDate ) == DateTimeUtil.ResetTime ( AV25WeekDate ) )
+            {
+               AV27TotalDailyHour = (short)(AV27TotalDailyHour+A121WorkHourLogHour);
+               AV28TotalDailyMinute = (short)(AV28TotalDailyMinute+A122WorkHourLogMinute);
+            }
+            pr_default.readNext(0);
+         }
          pr_default.close(0);
-         AV21TotalHour = (short)(AV21TotalHour+c121WorkHourLogHour);
-         AV24TotalMinute = (short)(AV24TotalMinute+c122WorkHourLogMinute);
-         /* End optimized group. */
-         /* Optimized group. */
-         /* Using cursor P008B3 */
-         pr_default.execute(1, new Object[] {AV25WeekDate, AV36EmployeeId});
-         c121WorkHourLogHour = P008B3_A121WorkHourLogHour[0];
-         c122WorkHourLogMinute = P008B3_A122WorkHourLogMinute[0];
-         pr_default.close(1);
-         AV27TotalDailyHour = (short)(AV27TotalDailyHour+c121WorkHourLogHour);
-         AV28TotalDailyMinute = (short)(AV28TotalDailyMinute+c122WorkHourLogMinute);
-         /* End optimized group. */
-         /* Optimized group. */
-         /* Using cursor P008B4 */
-         pr_default.execute(2, new Object[] {AV36EmployeeId, AV25WeekDate});
-         c121WorkHourLogHour = P008B4_A121WorkHourLogHour[0];
-         c122WorkHourLogMinute = P008B4_A122WorkHourLogMinute[0];
-         pr_default.close(2);
-         AV35TotalMonthlyHour = (short)(AV35TotalMonthlyHour+c121WorkHourLogHour);
-         AV33TotalMonthlyMinute = (short)(AV33TotalMonthlyMinute+c122WorkHourLogMinute);
-         /* End optimized group. */
          AV32ModTotalMonthlyMinute = (short)(((int)((AV33TotalMonthlyMinute) % (60))));
          AV34TotalMonthlyHoursAndMinutes = (short)(NumberUtil.Trunc( AV33TotalMonthlyMinute/ (decimal)(60), 0)+AV35TotalMonthlyHour);
-         if ( AV13ModTotalMinute < 10 )
+         if ( AV34TotalMonthlyHoursAndMinutes < 10 )
          {
-            AV31MonthlyTotal = StringUtil.Str( (decimal)(AV34TotalMonthlyHoursAndMinutes), 4, 0) + ":0" + StringUtil.Trim( StringUtil.Str( (decimal)(AV13ModTotalMinute), 4, 0)) + "hrs";
+            AV37TotalMonthlyHoursAndMinutesString = "0" + StringUtil.Trim( StringUtil.Str( (decimal)(AV34TotalMonthlyHoursAndMinutes), 4, 0));
          }
          else
          {
-            AV31MonthlyTotal = StringUtil.Str( (decimal)(AV34TotalMonthlyHoursAndMinutes), 4, 0) + ":" + StringUtil.Trim( StringUtil.Str( (decimal)(AV13ModTotalMinute), 4, 0)) + "hrs";
+            AV37TotalMonthlyHoursAndMinutesString = StringUtil.Trim( StringUtil.Str( (decimal)(AV34TotalMonthlyHoursAndMinutes), 4, 0));
          }
+         if ( AV32ModTotalMonthlyMinute < 10 )
+         {
+            AV38ModTotalMonthlyMinuteString = "0" + StringUtil.Trim( StringUtil.Str( (decimal)(AV32ModTotalMonthlyMinute), 4, 0));
+         }
+         else
+         {
+            AV38ModTotalMonthlyMinuteString = StringUtil.Trim( StringUtil.Str( (decimal)(AV32ModTotalMonthlyMinute), 4, 0));
+         }
+         AV31MonthlyTotal = AV37TotalMonthlyHoursAndMinutesString + ":" + AV38ModTotalMonthlyMinuteString;
          AV13ModTotalMinute = (short)(((int)((AV24TotalMinute) % (60))));
          AV23TotalHoursAndMinutes = (short)(NumberUtil.Trunc( AV24TotalMinute/ (decimal)(60), 0)+AV21TotalHour);
-         if ( AV13ModTotalMinute < 10 )
+         if ( AV23TotalHoursAndMinutes < 10 )
          {
-            AV26WeeklyTotal = StringUtil.Str( (decimal)(AV23TotalHoursAndMinutes), 4, 0) + ":0" + StringUtil.Trim( StringUtil.Str( (decimal)(AV13ModTotalMinute), 4, 0)) + "hrs";
+            AV39TotalHoursAndMinutesString = "0" + StringUtil.Trim( StringUtil.Str( (decimal)(AV23TotalHoursAndMinutes), 4, 0));
          }
          else
          {
-            AV26WeeklyTotal = StringUtil.Str( (decimal)(AV23TotalHoursAndMinutes), 4, 0) + ":" + StringUtil.Trim( StringUtil.Str( (decimal)(AV13ModTotalMinute), 4, 0)) + "hrs";
+            AV39TotalHoursAndMinutesString = StringUtil.Trim( StringUtil.Str( (decimal)(AV23TotalHoursAndMinutes), 4, 0));
          }
+         if ( AV13ModTotalMinute < 10 )
+         {
+            AV40ModTotalMinuteString = "0" + StringUtil.Trim( StringUtil.Str( (decimal)(AV13ModTotalMinute), 4, 0));
+         }
+         else
+         {
+            AV40ModTotalMinuteString = StringUtil.Trim( StringUtil.Str( (decimal)(AV13ModTotalMinute), 4, 0));
+         }
+         AV26WeeklyTotal = AV39TotalHoursAndMinutesString + ":" + AV40ModTotalMinuteString;
          AV29ModTotalDailyMinute = (short)(((int)((AV28TotalDailyMinute) % (60))));
          AV30TotalDailyHoursAndMinutes = (short)(NumberUtil.Trunc( AV28TotalDailyMinute/ (decimal)(60), 0)+AV27TotalDailyHour);
-         if ( AV13ModTotalMinute < 10 )
+         if ( AV30TotalDailyHoursAndMinutes < 10 )
          {
-            AV8DailyTotal = StringUtil.Str( (decimal)(AV30TotalDailyHoursAndMinutes), 4, 0) + ":0" + StringUtil.Trim( StringUtil.Str( (decimal)(AV29ModTotalDailyMinute), 4, 0)) + "hrs";
+            AV41TotalDailyHoursAndMinutesString = "0" + StringUtil.Trim( StringUtil.Str( (decimal)(AV30TotalDailyHoursAndMinutes), 4, 0));
          }
          else
          {
-            AV8DailyTotal = StringUtil.Str( (decimal)(AV30TotalDailyHoursAndMinutes), 4, 0) + ":" + StringUtil.Trim( StringUtil.Str( (decimal)(AV29ModTotalDailyMinute), 4, 0)) + "hrs";
+            AV41TotalDailyHoursAndMinutesString = StringUtil.Trim( StringUtil.Str( (decimal)(AV30TotalDailyHoursAndMinutes), 4, 0));
          }
+         if ( AV29ModTotalDailyMinute < 10 )
+         {
+            AV42ModTotalDailyMinuteString = "0" + StringUtil.Trim( StringUtil.Str( (decimal)(AV29ModTotalDailyMinute), 4, 0));
+         }
+         else
+         {
+            AV42ModTotalDailyMinuteString = StringUtil.Trim( StringUtil.Str( (decimal)(AV29ModTotalDailyMinute), 4, 0));
+         }
+         AV8DailyTotal = AV41TotalDailyHoursAndMinutesString + ":" + AV42ModTotalDailyMinuteString;
          cleanup();
       }
 
@@ -204,22 +232,22 @@ namespace GeneXus.Programs {
          AV31MonthlyTotal = "";
          AV17StartDate = DateTime.MinValue;
          AV11EndDate = DateTime.MinValue;
+         P008B2_A119WorkHourLogDate = new DateTime[] {DateTime.MinValue} ;
+         P008B2_A106EmployeeId = new long[1] ;
          P008B2_A121WorkHourLogHour = new short[1] ;
          P008B2_A122WorkHourLogMinute = new short[1] ;
-         P008B3_A121WorkHourLogHour = new short[1] ;
-         P008B3_A122WorkHourLogMinute = new short[1] ;
-         P008B4_A121WorkHourLogHour = new short[1] ;
-         P008B4_A122WorkHourLogMinute = new short[1] ;
+         P008B2_A118WorkHourLogId = new long[1] ;
+         A119WorkHourLogDate = DateTime.MinValue;
+         AV37TotalMonthlyHoursAndMinutesString = "";
+         AV38ModTotalMonthlyMinuteString = "";
+         AV39TotalHoursAndMinutesString = "";
+         AV40ModTotalMinuteString = "";
+         AV41TotalDailyHoursAndMinutesString = "";
+         AV42ModTotalDailyMinuteString = "";
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.getweeklyhours__default(),
             new Object[][] {
                 new Object[] {
-               P008B2_A121WorkHourLogHour, P008B2_A122WorkHourLogMinute
-               }
-               , new Object[] {
-               P008B3_A121WorkHourLogHour, P008B3_A122WorkHourLogMinute
-               }
-               , new Object[] {
-               P008B4_A121WorkHourLogHour, P008B4_A122WorkHourLogMinute
+               P008B2_A119WorkHourLogDate, P008B2_A106EmployeeId, P008B2_A121WorkHourLogHour, P008B2_A122WorkHourLogMinute, P008B2_A118WorkHourLogId
                }
             }
          );
@@ -228,13 +256,13 @@ namespace GeneXus.Programs {
 
       private short AV21TotalHour ;
       private short AV24TotalMinute ;
-      private short AV9daysToStart ;
-      private short c121WorkHourLogHour ;
-      private short c122WorkHourLogMinute ;
-      private short AV27TotalDailyHour ;
-      private short AV28TotalDailyMinute ;
       private short AV35TotalMonthlyHour ;
       private short AV33TotalMonthlyMinute ;
+      private short AV27TotalDailyHour ;
+      private short AV28TotalDailyMinute ;
+      private short AV9daysToStart ;
+      private short A121WorkHourLogHour ;
+      private short A122WorkHourLogMinute ;
       private short AV32ModTotalMonthlyMinute ;
       private short AV34TotalMonthlyHoursAndMinutes ;
       private short AV13ModTotalMinute ;
@@ -242,21 +270,29 @@ namespace GeneXus.Programs {
       private short AV29ModTotalDailyMinute ;
       private short AV30TotalDailyHoursAndMinutes ;
       private long AV36EmployeeId ;
+      private long A106EmployeeId ;
+      private long A118WorkHourLogId ;
       private string AV26WeeklyTotal ;
       private string AV8DailyTotal ;
       private string AV31MonthlyTotal ;
       private DateTime AV25WeekDate ;
       private DateTime AV17StartDate ;
       private DateTime AV11EndDate ;
+      private DateTime A119WorkHourLogDate ;
+      private string AV37TotalMonthlyHoursAndMinutesString ;
+      private string AV38ModTotalMonthlyMinuteString ;
+      private string AV39TotalHoursAndMinutesString ;
+      private string AV40ModTotalMinuteString ;
+      private string AV41TotalDailyHoursAndMinutesString ;
+      private string AV42ModTotalDailyMinuteString ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private IDataStoreProvider pr_default ;
+      private DateTime[] P008B2_A119WorkHourLogDate ;
+      private long[] P008B2_A106EmployeeId ;
       private short[] P008B2_A121WorkHourLogHour ;
       private short[] P008B2_A122WorkHourLogMinute ;
-      private short[] P008B3_A121WorkHourLogHour ;
-      private short[] P008B3_A122WorkHourLogMinute ;
-      private short[] P008B4_A121WorkHourLogHour ;
-      private short[] P008B4_A122WorkHourLogMinute ;
+      private long[] P008B2_A118WorkHourLogId ;
       private string aP2_WeeklyTotal ;
       private string aP3_DailyTotal ;
       private string aP4_MonthlyTotal ;
@@ -269,8 +305,6 @@ namespace GeneXus.Programs {
          cursorDefinitions();
          return new Cursor[] {
           new ForEachCursor(def[0])
-         ,new ForEachCursor(def[1])
-         ,new ForEachCursor(def[2])
        };
     }
 
@@ -281,24 +315,11 @@ namespace GeneXus.Programs {
        {
           Object[] prmP008B2;
           prmP008B2 = new Object[] {
-          new ParDef("AV17StartDate",GXType.Date,8,0) ,
-          new ParDef("AV36EmployeeId",GXType.Int64,10,0) ,
-          new ParDef("AV11EndDate",GXType.Date,8,0)
-          };
-          Object[] prmP008B3;
-          prmP008B3 = new Object[] {
-          new ParDef("AV25WeekDate",GXType.Date,8,0) ,
-          new ParDef("AV36EmployeeId",GXType.Int64,10,0)
-          };
-          Object[] prmP008B4;
-          prmP008B4 = new Object[] {
           new ParDef("AV36EmployeeId",GXType.Int64,10,0) ,
           new ParDef("AV25WeekDate",GXType.Date,8,0)
           };
           def= new CursorDef[] {
-              new CursorDef("P008B2", "SELECT SUM(WorkHourLogHour), SUM(WorkHourLogMinute) FROM WorkHourLog WHERE (WorkHourLogDate >= :AV17StartDate) AND (EmployeeId = :AV36EmployeeId) AND (WorkHourLogDate <= :AV11EndDate) ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP008B2,1, GxCacheFrequency.OFF ,true,false )
-             ,new CursorDef("P008B3", "SELECT SUM(WorkHourLogHour), SUM(WorkHourLogMinute) FROM WorkHourLog WHERE (WorkHourLogDate = :AV25WeekDate) AND (EmployeeId = :AV36EmployeeId) ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP008B3,1, GxCacheFrequency.OFF ,true,false )
-             ,new CursorDef("P008B4", "SELECT SUM(WorkHourLogHour), SUM(WorkHourLogMinute) FROM WorkHourLog WHERE (EmployeeId = :AV36EmployeeId) AND (date_part('month', WorkHourLogDate) = date_part('month', :AV25WeekDate)) ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP008B4,1, GxCacheFrequency.OFF ,true,false )
+              new CursorDef("P008B2", "SELECT WorkHourLogDate, EmployeeId, WorkHourLogHour, WorkHourLogMinute, WorkHourLogId FROM WorkHourLog WHERE (EmployeeId = :AV36EmployeeId) AND (date_part('month', WorkHourLogDate) = date_part('month', :AV25WeekDate)) AND (date_part('year', WorkHourLogDate) = date_part('year', :AV25WeekDate)) ORDER BY EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP008B2,100, GxCacheFrequency.OFF ,false,false )
           };
        }
     }
@@ -310,16 +331,11 @@ namespace GeneXus.Programs {
        switch ( cursor )
        {
              case 0 :
-                ((short[]) buf[0])[0] = rslt.getShort(1);
-                ((short[]) buf[1])[0] = rslt.getShort(2);
-                return;
-             case 1 :
-                ((short[]) buf[0])[0] = rslt.getShort(1);
-                ((short[]) buf[1])[0] = rslt.getShort(2);
-                return;
-             case 2 :
-                ((short[]) buf[0])[0] = rslt.getShort(1);
-                ((short[]) buf[1])[0] = rslt.getShort(2);
+                ((DateTime[]) buf[0])[0] = rslt.getGXDate(1);
+                ((long[]) buf[1])[0] = rslt.getLong(2);
+                ((short[]) buf[2])[0] = rslt.getShort(3);
+                ((short[]) buf[3])[0] = rslt.getShort(4);
+                ((long[]) buf[4])[0] = rslt.getLong(5);
                 return;
        }
     }

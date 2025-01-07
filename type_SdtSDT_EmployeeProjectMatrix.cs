@@ -38,6 +38,8 @@ namespace GeneXus.Programs
 
 			gxTv_SdtSDT_EmployeeProjectMatrix_Formattedworkhours = "";
 
+			gxTv_SdtSDT_EmployeeProjectMatrix_Formattedexpectedworkhours = "";
+
 		}
 
 		public SdtSDT_EmployeeProjectMatrix(IGxContext context)
@@ -87,6 +89,15 @@ namespace GeneXus.Programs
 
 
 			AddObjectProperty("FormattedWorkHours", gxTpr_Formattedworkhours, false);
+
+
+			AddObjectProperty("ExpectedWorkHours", gxTpr_Expectedworkhours, false);
+
+
+			AddObjectProperty("FormattedExpectedWorkHours", gxTpr_Formattedexpectedworkhours, false);
+
+
+			AddObjectProperty("IsOptimal", gxTpr_Isoptimal, false);
 
 			if (gxTv_SdtSDT_EmployeeProjectMatrix_Projects != null)
 			{
@@ -226,6 +237,54 @@ namespace GeneXus.Programs
 
 
 
+		[SoapElement(ElementName="ExpectedWorkHours")]
+		[XmlElement(ElementName="ExpectedWorkHours")]
+		public long gxTpr_Expectedworkhours
+		{
+			get {
+				return gxTv_SdtSDT_EmployeeProjectMatrix_Expectedworkhours; 
+			}
+			set {
+				gxTv_SdtSDT_EmployeeProjectMatrix_Expectedworkhours = value;
+				SetDirty("Expectedworkhours");
+			}
+		}
+
+
+
+
+		[SoapElement(ElementName="FormattedExpectedWorkHours")]
+		[XmlElement(ElementName="FormattedExpectedWorkHours")]
+		public string gxTpr_Formattedexpectedworkhours
+		{
+			get {
+				return gxTv_SdtSDT_EmployeeProjectMatrix_Formattedexpectedworkhours; 
+			}
+			set {
+				gxTv_SdtSDT_EmployeeProjectMatrix_Formattedexpectedworkhours = value;
+				SetDirty("Formattedexpectedworkhours");
+			}
+		}
+
+
+
+
+		[SoapElement(ElementName="IsOptimal")]
+		[XmlElement(ElementName="IsOptimal")]
+		public bool gxTpr_Isoptimal
+		{
+			get {
+				return gxTv_SdtSDT_EmployeeProjectMatrix_Isoptimal; 
+			}
+			set {
+				gxTv_SdtSDT_EmployeeProjectMatrix_Isoptimal = value;
+				SetDirty("Isoptimal");
+			}
+		}
+
+
+
+
 		[SoapElement(ElementName="Projects" )]
 		[XmlArray(ElementName="Projects"  )]
 		[XmlArrayItemAttribute(ElementName="ProjectsItem" , IsNullable=false )]
@@ -291,6 +350,9 @@ namespace GeneXus.Programs
 
 			gxTv_SdtSDT_EmployeeProjectMatrix_Formattedworkhours = "";
 
+			gxTv_SdtSDT_EmployeeProjectMatrix_Formattedexpectedworkhours = "";
+
+
 			gxTv_SdtSDT_EmployeeProjectMatrix_Projects_N = true;
 
 			return  ;
@@ -324,6 +386,15 @@ namespace GeneXus.Programs
 		 
 
 		protected string gxTv_SdtSDT_EmployeeProjectMatrix_Formattedworkhours;
+		 
+
+		protected long gxTv_SdtSDT_EmployeeProjectMatrix_Expectedworkhours;
+		 
+
+		protected string gxTv_SdtSDT_EmployeeProjectMatrix_Formattedexpectedworkhours;
+		 
+
+		protected bool gxTv_SdtSDT_EmployeeProjectMatrix_Isoptimal;
 		 
 		protected bool gxTv_SdtSDT_EmployeeProjectMatrix_Projects_N;
 		protected GXBaseCollection<SdtSDT_EmployeeProjectMatrix_ProjectsItem> gxTv_SdtSDT_EmployeeProjectMatrix_Projects = null; 
@@ -442,7 +513,43 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="Projects", Order=8, EmitDefaultValue=false)]
+		[DataMember(Name="ExpectedWorkHours", Order=8)]
+		public  string gxTpr_Expectedworkhours
+		{
+			get { 
+				return StringUtil.LTrim( StringUtil.Str( (decimal) sdt.gxTpr_Expectedworkhours, 10, 0));
+
+			}
+			set { 
+				sdt.gxTpr_Expectedworkhours = (long) NumberUtil.Val( value, ".");
+			}
+		}
+
+		[DataMember(Name="FormattedExpectedWorkHours", Order=9)]
+		public  string gxTpr_Formattedexpectedworkhours
+		{
+			get { 
+				return sdt.gxTpr_Formattedexpectedworkhours;
+
+			}
+			set { 
+				 sdt.gxTpr_Formattedexpectedworkhours = value;
+			}
+		}
+
+		[DataMember(Name="IsOptimal", Order=10)]
+		public bool gxTpr_Isoptimal
+		{
+			get { 
+				return sdt.gxTpr_Isoptimal;
+
+			}
+			set { 
+				sdt.gxTpr_Isoptimal = value;
+			}
+		}
+
+		[DataMember(Name="Projects", Order=11, EmitDefaultValue=false)]
 		public GxGenericCollection<SdtSDT_EmployeeProjectMatrix_ProjectsItem_RESTInterface> gxTpr_Projects
 		{
 			get {
