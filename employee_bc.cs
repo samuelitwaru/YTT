@@ -106,7 +106,7 @@ namespace GeneXus.Programs {
                CheckExtendedTable0F16( ) ;
                if ( AnyError == 0 )
                {
-                  ZM0F16( 25) ;
+                  ZM0F16( 26) ;
                }
                CloseExtendedTableCursors0F16( ) ;
             }
@@ -161,7 +161,7 @@ namespace GeneXus.Programs {
                         CheckExtendedTable0F28( ) ;
                         if ( AnyError == 0 )
                         {
-                           ZM0F28( 28) ;
+                           ZM0F28( 29) ;
                         }
                         CloseExtendedTableCursors0F28( ) ;
                         if ( AnyError == 0 )
@@ -201,7 +201,7 @@ namespace GeneXus.Programs {
                               CheckExtendedTable0F28( ) ;
                               if ( AnyError == 0 )
                               {
-                                 ZM0F28( 28) ;
+                                 ZM0F28( 29) ;
                               }
                               CloseExtendedTableCursors0F28( ) ;
                               if ( AnyError == 0 )
@@ -326,9 +326,6 @@ namespace GeneXus.Programs {
       {
          /* Start Routine */
          returnInSub = false;
-         GXt_decimal1 = AV30EmployeeBalance;
-         new prc_getemployeebalance(context ).execute(  A106EmployeeId, out  GXt_decimal1) ;
-         AV30EmployeeBalance = GXt_decimal1;
          new GeneXus.Programs.wwpbaseobjects.loadwwpcontext(context ).execute( out  AV8WWPContext) ;
          AV11TrnContext.FromXml(AV12WebSession.Get("TrnContext"), null, "", "");
          if ( ( StringUtil.StrCmp(AV11TrnContext.gxTpr_Transactionname, AV32Pgmname) == 0 ) && ( StringUtil.StrCmp(Gx_mode, "INS") == 0 ) )
@@ -363,7 +360,7 @@ namespace GeneXus.Programs {
 
       protected void ZM0F16( short GX_JID )
       {
-         if ( ( GX_JID == 23 ) || ( GX_JID == 0 ) )
+         if ( ( GX_JID == 24 ) || ( GX_JID == 0 ) )
          {
             Z147EmployeeBalance = A147EmployeeBalance;
             Z148EmployeeName = A148EmployeeName;
@@ -377,11 +374,11 @@ namespace GeneXus.Programs {
             Z178EmployeeVacationDaysSetDate = A178EmployeeVacationDaysSetDate;
             Z100CompanyId = A100CompanyId;
          }
-         if ( ( GX_JID == 25 ) || ( GX_JID == 0 ) )
+         if ( ( GX_JID == 26 ) || ( GX_JID == 0 ) )
          {
             Z101CompanyName = A101CompanyName;
          }
-         if ( GX_JID == -23 )
+         if ( GX_JID == -24 )
          {
             Z147EmployeeBalance = A147EmployeeBalance;
             Z106EmployeeId = A106EmployeeId;
@@ -451,7 +448,7 @@ namespace GeneXus.Programs {
             A146EmployeeVactionDays = BC000F10_A146EmployeeVactionDays[0];
             A178EmployeeVacationDaysSetDate = BC000F10_A178EmployeeVacationDaysSetDate[0];
             A100CompanyId = BC000F10_A100CompanyId[0];
-            ZM0F16( -23) ;
+            ZM0F16( -24) ;
          }
          pr_default.close(8);
          OnLoadActions0F16( ) ;
@@ -465,6 +462,9 @@ namespace GeneXus.Programs {
          GXt_decimal1 = A147EmployeeBalance;
          new prc_getemployeebalance(context ).execute(  A106EmployeeId, out  GXt_decimal1) ;
          A147EmployeeBalance = GXt_decimal1;
+         GXt_decimal1 = AV30EmployeeBalance;
+         new prc_getemployeebalance(context ).execute(  A106EmployeeId, out  GXt_decimal1) ;
+         AV30EmployeeBalance = GXt_decimal1;
          A148EmployeeName = StringUtil.Trim( A107EmployeeFirstName) + " " + StringUtil.Trim( A108EmployeeLastName);
       }
 
@@ -485,6 +485,9 @@ namespace GeneXus.Programs {
          GXt_decimal1 = A147EmployeeBalance;
          new prc_getemployeebalance(context ).execute(  A106EmployeeId, out  GXt_decimal1) ;
          A147EmployeeBalance = GXt_decimal1;
+         GXt_decimal1 = AV30EmployeeBalance;
+         new prc_getemployeebalance(context ).execute(  A106EmployeeId, out  GXt_decimal1) ;
+         AV30EmployeeBalance = GXt_decimal1;
          A148EmployeeName = StringUtil.Trim( A107EmployeeFirstName) + " " + StringUtil.Trim( A108EmployeeLastName);
          if ( String.IsNullOrEmpty(StringUtil.RTrim( A107EmployeeFirstName)) )
          {
@@ -556,7 +559,7 @@ namespace GeneXus.Programs {
          pr_default.execute(6, new Object[] {A106EmployeeId});
          if ( (pr_default.getStatus(6) != 101) )
          {
-            ZM0F16( 23) ;
+            ZM0F16( 24) ;
             RcdFound16 = 1;
             A147EmployeeBalance = BC000F8_A147EmployeeBalance[0];
             A106EmployeeId = BC000F8_A106EmployeeId[0];
@@ -847,6 +850,9 @@ namespace GeneXus.Programs {
          if ( AnyError == 0 )
          {
             /* Delete mode formulas */
+            GXt_decimal1 = AV30EmployeeBalance;
+            new prc_getemployeebalance(context ).execute(  A106EmployeeId, out  GXt_decimal1) ;
+            AV30EmployeeBalance = GXt_decimal1;
             /* Using cursor BC000F17 */
             pr_default.execute(15, new Object[] {A100CompanyId});
             A101CompanyName = BC000F17_A101CompanyName[0];
@@ -1195,11 +1201,11 @@ namespace GeneXus.Programs {
 
       protected void ZM0F33( short GX_JID )
       {
-         if ( ( GX_JID == 26 ) || ( GX_JID == 0 ) )
+         if ( ( GX_JID == 27 ) || ( GX_JID == 0 ) )
          {
             Z187VacationSetDays = A187VacationSetDays;
          }
-         if ( GX_JID == -26 )
+         if ( GX_JID == -27 )
          {
             Z106EmployeeId = A106EmployeeId;
             Z186VacationSetDate = A186VacationSetDate;
@@ -1223,7 +1229,7 @@ namespace GeneXus.Programs {
          {
             RcdFound33 = 1;
             A187VacationSetDays = BC000F23_A187VacationSetDays[0];
-            ZM0F33( -26) ;
+            ZM0F33( -27) ;
          }
          pr_default.close(21);
          OnLoadActions0F33( ) ;
@@ -1269,7 +1275,7 @@ namespace GeneXus.Programs {
          pr_default.execute(4, new Object[] {A106EmployeeId, A186VacationSetDate});
          if ( (pr_default.getStatus(4) != 101) )
          {
-            ZM0F33( 26) ;
+            ZM0F33( 27) ;
             RcdFound33 = 1;
             InitializeNonKey0F33( ) ;
             A186VacationSetDate = BC000F6_A186VacationSetDate[0];
@@ -1568,15 +1574,15 @@ namespace GeneXus.Programs {
 
       protected void ZM0F28( short GX_JID )
       {
-         if ( ( GX_JID == 27 ) || ( GX_JID == 0 ) )
+         if ( ( GX_JID == 28 ) || ( GX_JID == 0 ) )
          {
             Z184EmployeeIsActiveInProject = A184EmployeeIsActiveInProject;
          }
-         if ( ( GX_JID == 28 ) || ( GX_JID == 0 ) )
+         if ( ( GX_JID == 29 ) || ( GX_JID == 0 ) )
          {
             Z103ProjectName = A103ProjectName;
          }
-         if ( GX_JID == -27 )
+         if ( GX_JID == -28 )
          {
             Z106EmployeeId = A106EmployeeId;
             Z184EmployeeIsActiveInProject = A184EmployeeIsActiveInProject;
@@ -1606,7 +1612,7 @@ namespace GeneXus.Programs {
             RcdFound28 = 1;
             A184EmployeeIsActiveInProject = BC000F29_A184EmployeeIsActiveInProject[0];
             A103ProjectName = BC000F29_A103ProjectName[0];
-            ZM0F28( -27) ;
+            ZM0F28( -28) ;
          }
          pr_default.close(27);
          OnLoadActions0F28( ) ;
@@ -1662,7 +1668,7 @@ namespace GeneXus.Programs {
          pr_default.execute(1, new Object[] {A106EmployeeId, A102ProjectId});
          if ( (pr_default.getStatus(1) != 101) )
          {
-            ZM0F28( 27) ;
+            ZM0F28( 28) ;
             RcdFound28 = 1;
             InitializeNonKey0F28( ) ;
             A184EmployeeIsActiveInProject = BC000F3_A184EmployeeIsActiveInProject[0];
@@ -2040,6 +2046,7 @@ namespace GeneXus.Programs {
          A111GAMUserGUID = "";
          AV24Password = "";
          A147EmployeeBalance = 0;
+         AV30EmployeeBalance = 0;
          A107EmployeeFirstName = "";
          A108EmployeeLastName = "";
          A109EmployeeEmail = "";
@@ -2290,7 +2297,7 @@ namespace GeneXus.Programs {
             Gx_mode = "UPD";
             Z106EmployeeId = A106EmployeeId;
          }
-         ZM0F16( -23) ;
+         ZM0F16( -24) ;
          OnLoadActions0F16( ) ;
          AddRow0F16( ) ;
          bcEmployee.gxTpr_Vacationset.ClearCollection();
@@ -2302,7 +2309,7 @@ namespace GeneXus.Programs {
             {
                Z106EmployeeId = A106EmployeeId;
                Z186VacationSetDate = A186VacationSetDate;
-               ZM0F33( -26) ;
+               ZM0F33( -27) ;
                OnLoadActions0F33( ) ;
                nRcdExists_33 = 1;
                nIsMod_33 = 0;
@@ -2321,7 +2328,7 @@ namespace GeneXus.Programs {
             {
                Z106EmployeeId = A106EmployeeId;
                Z102ProjectId = A102ProjectId;
-               ZM0F28( -27) ;
+               ZM0F28( -28) ;
                OnLoadActions0F28( ) ;
                nRcdExists_28 = 1;
                nIsMod_28 = 0;
@@ -2357,7 +2364,7 @@ namespace GeneXus.Programs {
             Gx_mode = "UPD";
             Z106EmployeeId = A106EmployeeId;
          }
-         ZM0F16( -23) ;
+         ZM0F16( -24) ;
          OnLoadActions0F16( ) ;
          AddRow0F16( ) ;
          bcEmployee.gxTpr_Vacationset.ClearCollection();
@@ -2369,7 +2376,7 @@ namespace GeneXus.Programs {
             {
                Z106EmployeeId = A106EmployeeId;
                Z186VacationSetDate = A186VacationSetDate;
-               ZM0F33( -26) ;
+               ZM0F33( -27) ;
                OnLoadActions0F33( ) ;
                nRcdExists_33 = 1;
                nIsMod_33 = 0;
@@ -2388,7 +2395,7 @@ namespace GeneXus.Programs {
             {
                Z106EmployeeId = A106EmployeeId;
                Z102ProjectId = A102ProjectId;
-               ZM0F28( -27) ;
+               ZM0F28( -28) ;
                OnLoadActions0F28( ) ;
                nRcdExists_28 = 1;
                nIsMod_28 = 0;
