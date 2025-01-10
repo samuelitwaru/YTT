@@ -962,6 +962,7 @@ namespace GeneXus.Programs {
       protected void initialize_formulas( )
       {
          /* GeneXus formulas. */
+         Gx_date = DateTimeUtil.Today( context);
       }
 
       protected void RF642( )
@@ -985,6 +986,7 @@ namespace GeneXus.Programs {
 
       protected void before_start_formulas( )
       {
+         Gx_date = DateTimeUtil.Today( context);
          fix_multi_value_controls( ) ;
       }
 
@@ -1059,9 +1061,9 @@ namespace GeneXus.Programs {
       {
          /* Start Routine */
          returnInSub = false;
-         AV11DateRange = context.localUtil.YMDToD( 2024, 1, 1);
+         AV11DateRange = context.localUtil.YMDToD( DateTimeUtil.Year( Gx_date), DateTimeUtil.Month( Gx_date), 1);
          AssignAttri("", false, "AV11DateRange", context.localUtil.Format(AV11DateRange, "99/99/99"));
-         AV21DateRange_To = context.localUtil.YMDToD( 2024, 12, 31);
+         AV21DateRange_To = DateTimeUtil.DateEndOfMonth( Gx_date);
          AssignAttri("", false, "AV21DateRange_To", context.localUtil.Format(AV21DateRange_To, "99/99/99"));
          /* Execute user subroutine: 'GETDATA' */
          S112 ();
@@ -1402,7 +1404,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20251717383168", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20251103464512", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1418,7 +1420,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wp_projectoverview.js", "?20251717383168", false, true);
+         context.AddJavascriptSource("wp_projectoverview.js", "?20251103464512", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -1607,6 +1609,7 @@ namespace GeneXus.Programs {
          EvtGridId = "";
          EvtRowId = "";
          sEvtType = "";
+         Gx_date = DateTime.MinValue;
          GXt_SdtDVB_SDTDropDownOptionsTitleSettingsIcons1 = new GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsTitleSettingsIcons(context);
          GXt_SdtWWPDateRangePickerOptions2 = new GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions(context);
          AV26Filename = "";
@@ -1652,7 +1655,9 @@ namespace GeneXus.Programs {
                }
             }
          );
+         Gx_date = DateTimeUtil.Today( context);
          /* GeneXus formulas. */
+         Gx_date = DateTimeUtil.Today( context);
       }
 
       private short nRcdExists_7 ;
@@ -1754,6 +1759,7 @@ namespace GeneXus.Programs {
       private string GXt_char4 ;
       private DateTime AV11DateRange ;
       private DateTime AV21DateRange_To ;
+      private DateTime Gx_date ;
       private bool entryPointCalled ;
       private bool toggleJsOutput ;
       private bool Combo_projectid_Allowmultipleselection ;
