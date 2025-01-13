@@ -1,1 +1,104 @@
-function UC_CalendarNavigation(n){var i="<div>hr;ll;<\/div>",f={},r,u,t;Mustache.parse(i);r=0;this.show=function(){u=n(this.getContainerControl());r=0;this.setHtml(Mustache.render(i,this,f));this.renderChildContainers();n(this.getContainerControl()).find("[data-event='NavigationClicked']").on("navigationclicked",this.onNavigationClickedHandler.closure(this)).each(function(n){this.setAttribute("data-items-index",n+1)});this.Start()};this.Scripts=[];this.Start=function(){function i(){n(document).on("click",".prev.available",function(){const i=parseInt(n(".monthselect")[0].value),r=parseInt(n(".yearselect")[0].value);t.selectedYear=r;t.selectedMonth=i;t.NavigationClicked()});n(document).on("click",".next.available",function(){const i=parseInt(n(".monthselect")[0].value),r=parseInt(n(".yearselect")[0].value);t.selectedYear=r;t.selectedMonth=i;t.NavigationClicked()})}const t=this,r=n(".monthselect"),u=n(".yearselect");n(document).ready(function(){console.log("Document is ready!");i()})};this.onNavigationClickedHandler=function(n){if(n){var t=n.currentTarget;n.preventDefault()}this.NavigationClicked&&this.NavigationClicked()};this.autoToggleVisibility=!0;t={};this.renderChildContainers=function(){u.find("[data-slot][data-parent='"+this.ContainerName+"']").each(function(i,r){var e=n(r),f=e.attr("data-slot"),u;u=t[f];u||(u=this.getChildContainer(f),t[f]=u,u.parentNode.removeChild(u));e.append(u);n(u).show()}.closure(this))}}
+function UC_CalendarNavigation($) {
+	  
+	  
+
+	var template = '<div></div>';
+	var partials = {  }; 
+	Mustache.parse(template);
+	var _iOnNavigationClicked = 0; 
+	var $container;
+	this.show = function() {
+			$container = $(this.getContainerControl());
+
+			// Raise before show scripts
+
+			_iOnNavigationClicked = 0; 
+
+			//if (this.IsPostBack)
+				this.setHtml(Mustache.render(template, this, partials));
+			this.renderChildContainers();
+
+			$(this.getContainerControl())
+				.find("[data-event='NavigationClicked']")
+				.on('navigationclicked', this.onNavigationClickedHandler.closure(this))
+				.each(function (i) {
+					this.setAttribute("data-items-index", i + 1);
+				}); 
+
+			// Raise after show scripts
+			this.Start(); 
+	}
+
+	this.Scripts = [];
+
+		this.Start = function() {
+
+					const UC = this
+					
+					const monthSelect = $('.monthselect')
+					const yearSelect = $('.yearselect')
+					
+					function addEventListeners () {
+						$(document).on('click', '.prev.available', function() {
+							const month = parseInt($('.monthselect')[0].value)
+							const year = parseInt($('.yearselect')[0].value)
+							UC.selectedYear = year
+							UC.selectedMonth = month
+							UC.NavigationClicked()
+						});
+					
+						$(document).on('click', '.next.available', function() {
+							const month = parseInt($('.monthselect')[0].value)
+							const year = parseInt($('.yearselect')[0].value)
+							UC.selectedYear = year
+							UC.selectedMonth = month
+							UC.NavigationClicked()
+						});
+						
+					}
+					
+					$(document).ready(function() {
+						console.log('Document is ready!');
+						addEventListeners()
+					});
+					
+				
+		}
+
+
+		this.onNavigationClickedHandler = function (e) {
+			if (e) {
+				var target = e.currentTarget;
+				e.preventDefault();
+				 
+				 
+			}
+
+			if (this.NavigationClicked) {
+				this.NavigationClicked();
+			}
+		} 
+
+	this.autoToggleVisibility = true;
+
+	var childContainers = {};
+	this.renderChildContainers = function () {
+		$container
+			.find("[data-slot][data-parent='" + this.ContainerName + "']")
+			.each((function (i, slot) {
+				var $slot = $(slot),
+					slotName = $slot.attr('data-slot'),
+					slotContentEl;
+
+				slotContentEl = childContainers[slotName];
+				if (!slotContentEl) {				
+					slotContentEl = this.getChildContainer(slotName)
+					childContainers[slotName] = slotContentEl;
+					slotContentEl.parentNode.removeChild(slotContentEl);
+				}
+				$slot.append(slotContentEl);
+				$(slotContentEl).show();
+			}).closure(this));
+	};
+
+}

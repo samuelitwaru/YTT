@@ -2,7 +2,7 @@
 	"Name": "UC_CalendarNavigation",
 	"Target": "",
 	"IsControlType": false,
-	"Template": "<div>hr;ll;</div>", 
+	"Template": "<div></div>", 
 	"Events": [
 		{
 			"Name": "NavigationClicked",
