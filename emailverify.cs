@@ -946,7 +946,7 @@ namespace GeneXus.Programs {
             }
             if ( AV44GAMUser.checkrole("General Manager") )
             {
-               CallWebObject(formatLink("reports.aspx") );
+               CallWebObject(formatLink("wp_projectoverview.aspx") );
                context.wjLocDisableFrm = 1;
             }
             if ( AV44GAMUser.checkrole("Manager") )
@@ -1027,7 +1027,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20251717295947", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202511318542159", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1043,7 +1043,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("emailverify.js", "?20251717295957", false, true);
+         context.AddJavascriptSource("emailverify.js", "?202511318542161", false, true);
          /* End function include_jscripts */
       }
 

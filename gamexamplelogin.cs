@@ -1283,7 +1283,7 @@ namespace GeneXus.Programs {
             }
             if ( AV76GAMUser.checkrole("General Manager") )
             {
-               CallWebObject(formatLink("reports.aspx") );
+               CallWebObject(formatLink("wp_projectoverview.aspx") );
                context.wjLocDisableFrm = 1;
             }
             if ( AV76GAMUser.checkrole("Manager") )
@@ -1431,7 +1431,7 @@ namespace GeneXus.Programs {
                      }
                      if ( AV76GAMUser.checkrole("General Manager") )
                      {
-                        CallWebObject(formatLink("reports.aspx") );
+                        CallWebObject(formatLink("wp_projectoverview.aspx") );
                         context.wjLocDisableFrm = 1;
                      }
                      if ( AV76GAMUser.checkrole("Manager") )
@@ -1460,7 +1460,7 @@ namespace GeneXus.Programs {
                   }
                   if ( AV76GAMUser.checkrole("General Manager") )
                   {
-                     CallWebObject(formatLink("reports.aspx") );
+                     CallWebObject(formatLink("wp_projectoverview.aspx") );
                      context.wjLocDisableFrm = 1;
                   }
                   if ( AV76GAMUser.checkrole("Manager") )
@@ -1764,7 +1764,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2024121216285263", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20251131854082", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1780,7 +1780,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("gamexamplelogin.js", "?2024121216285267", false, true);
+         context.AddJavascriptSource("gamexamplelogin.js", "?20251131854084", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Mask/jquery.mask.js", "", false, true);
          context.AddJavascriptSource("DVelop/WorkWithPlusUtilities/BootstrapSelect.js", "", false, true);
