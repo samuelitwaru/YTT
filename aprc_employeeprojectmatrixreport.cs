@@ -79,22 +79,24 @@ namespace GeneXus.Programs {
                            GxSimpleCollection<long> aP2_ProjectIdCollection ,
                            GxSimpleCollection<long> aP3_CompanyLocationIdCollection ,
                            GxSimpleCollection<long> aP4_EmployeeIdCollection ,
-                           bool aP5_ShowLeave ,
-                           out long aP6_OverallTotalHours ,
-                           out GXBaseCollection<SdtSDT_EmployeeProjectMatrix> aP7_SDT_EmployeeProjectMatrixCollection )
+                           GxSimpleCollection<long> aP5_UserEmployeeIdCollection ,
+                           bool aP6_ShowLeave ,
+                           out long aP7_OverallTotalHours ,
+                           out GXBaseCollection<SdtSDT_EmployeeProjectMatrix> aP8_SDT_EmployeeProjectMatrixCollection )
       {
          this.AV8FromDate = aP0_FromDate;
          this.AV9ToDate = aP1_ToDate;
          this.AV10ProjectIdCollection = aP2_ProjectIdCollection;
          this.AV12CompanyLocationIdCollection = aP3_CompanyLocationIdCollection;
          this.AV13EmployeeIdCollection = aP4_EmployeeIdCollection;
-         this.AV31ShowLeave = aP5_ShowLeave;
+         this.AV39UserEmployeeIdCollection = aP5_UserEmployeeIdCollection;
+         this.AV31ShowLeave = aP6_ShowLeave;
          this.AV34OverallTotalHours = 0 ;
          this.AV20SDT_EmployeeProjectMatrixCollection = new GXBaseCollection<SdtSDT_EmployeeProjectMatrix>( context, "SDT_EmployeeProjectMatrix", "YTT_version4") ;
          initialize();
          ExecuteImpl();
-         aP6_OverallTotalHours=this.AV34OverallTotalHours;
-         aP7_SDT_EmployeeProjectMatrixCollection=this.AV20SDT_EmployeeProjectMatrixCollection;
+         aP7_OverallTotalHours=this.AV34OverallTotalHours;
+         aP8_SDT_EmployeeProjectMatrixCollection=this.AV20SDT_EmployeeProjectMatrixCollection;
       }
 
       public GXBaseCollection<SdtSDT_EmployeeProjectMatrix> executeUdp( DateTime aP0_FromDate ,
@@ -102,10 +104,11 @@ namespace GeneXus.Programs {
                                                                         GxSimpleCollection<long> aP2_ProjectIdCollection ,
                                                                         GxSimpleCollection<long> aP3_CompanyLocationIdCollection ,
                                                                         GxSimpleCollection<long> aP4_EmployeeIdCollection ,
-                                                                        bool aP5_ShowLeave ,
-                                                                        out long aP6_OverallTotalHours )
+                                                                        GxSimpleCollection<long> aP5_UserEmployeeIdCollection ,
+                                                                        bool aP6_ShowLeave ,
+                                                                        out long aP7_OverallTotalHours )
       {
-         execute(aP0_FromDate, aP1_ToDate, aP2_ProjectIdCollection, aP3_CompanyLocationIdCollection, aP4_EmployeeIdCollection, aP5_ShowLeave, out aP6_OverallTotalHours, out aP7_SDT_EmployeeProjectMatrixCollection);
+         execute(aP0_FromDate, aP1_ToDate, aP2_ProjectIdCollection, aP3_CompanyLocationIdCollection, aP4_EmployeeIdCollection, aP5_UserEmployeeIdCollection, aP6_ShowLeave, out aP7_OverallTotalHours, out aP8_SDT_EmployeeProjectMatrixCollection);
          return AV20SDT_EmployeeProjectMatrixCollection ;
       }
 
@@ -114,21 +117,23 @@ namespace GeneXus.Programs {
                                  GxSimpleCollection<long> aP2_ProjectIdCollection ,
                                  GxSimpleCollection<long> aP3_CompanyLocationIdCollection ,
                                  GxSimpleCollection<long> aP4_EmployeeIdCollection ,
-                                 bool aP5_ShowLeave ,
-                                 out long aP6_OverallTotalHours ,
-                                 out GXBaseCollection<SdtSDT_EmployeeProjectMatrix> aP7_SDT_EmployeeProjectMatrixCollection )
+                                 GxSimpleCollection<long> aP5_UserEmployeeIdCollection ,
+                                 bool aP6_ShowLeave ,
+                                 out long aP7_OverallTotalHours ,
+                                 out GXBaseCollection<SdtSDT_EmployeeProjectMatrix> aP8_SDT_EmployeeProjectMatrixCollection )
       {
          this.AV8FromDate = aP0_FromDate;
          this.AV9ToDate = aP1_ToDate;
          this.AV10ProjectIdCollection = aP2_ProjectIdCollection;
          this.AV12CompanyLocationIdCollection = aP3_CompanyLocationIdCollection;
          this.AV13EmployeeIdCollection = aP4_EmployeeIdCollection;
-         this.AV31ShowLeave = aP5_ShowLeave;
+         this.AV39UserEmployeeIdCollection = aP5_UserEmployeeIdCollection;
+         this.AV31ShowLeave = aP6_ShowLeave;
          this.AV34OverallTotalHours = 0 ;
          this.AV20SDT_EmployeeProjectMatrixCollection = new GXBaseCollection<SdtSDT_EmployeeProjectMatrix>( context, "SDT_EmployeeProjectMatrix", "YTT_version4") ;
          SubmitImpl();
-         aP6_OverallTotalHours=this.AV34OverallTotalHours;
-         aP7_SDT_EmployeeProjectMatrixCollection=this.AV20SDT_EmployeeProjectMatrixCollection;
+         aP7_OverallTotalHours=this.AV34OverallTotalHours;
+         aP8_SDT_EmployeeProjectMatrixCollection=this.AV20SDT_EmployeeProjectMatrixCollection;
       }
 
       protected override void ExecutePrivate( )
@@ -244,13 +249,15 @@ namespace GeneXus.Programs {
                                               A106EmployeeId ,
                                               AV33ProjectEmployeeIdCollection ,
                                               AV13EmployeeIdCollection ,
+                                              AV39UserEmployeeIdCollection ,
                                               A157CompanyLocationId ,
                                               AV12CompanyLocationIdCollection ,
                                               AV33ProjectEmployeeIdCollection.Count ,
                                               AV13EmployeeIdCollection.Count ,
+                                              AV39UserEmployeeIdCollection.Count ,
                                               AV12CompanyLocationIdCollection.Count } ,
                                               new int[]{
-                                              TypeConstants.LONG, TypeConstants.LONG, TypeConstants.INT, TypeConstants.INT, TypeConstants.INT
+                                              TypeConstants.LONG, TypeConstants.LONG, TypeConstants.INT, TypeConstants.INT, TypeConstants.INT, TypeConstants.INT
                                               }
          });
          /* Using cursor P00CC5 */
@@ -440,6 +447,7 @@ namespace GeneXus.Programs {
       private int AV13EmployeeIdCollection_Count ;
       private int AV10ProjectIdCollection_Count ;
       private int AV33ProjectEmployeeIdCollection_Count ;
+      private int AV39UserEmployeeIdCollection_Count ;
       private long AV34OverallTotalHours ;
       private long A157CompanyLocationId ;
       private long A106EmployeeId ;
@@ -471,6 +479,7 @@ namespace GeneXus.Programs {
       private GxSimpleCollection<long> AV10ProjectIdCollection ;
       private GxSimpleCollection<long> AV12CompanyLocationIdCollection ;
       private GxSimpleCollection<long> AV13EmployeeIdCollection ;
+      private GxSimpleCollection<long> AV39UserEmployeeIdCollection ;
       private GXBaseCollection<SdtSDT_EmployeeProjectMatrix> AV20SDT_EmployeeProjectMatrixCollection ;
       private GxSimpleCollection<long> AV33ProjectEmployeeIdCollection ;
       private GxSimpleCollection<long> GXt_objcol_int1 ;
@@ -510,8 +519,8 @@ namespace GeneXus.Programs {
       private short[] P00CC8_A40003GXC4 ;
       private bool[] P00CC8_n40003GXC4 ;
       private SdtSDT_EmployeeProjectMatrix_ProjectsItem AV22ProjectItem ;
-      private long aP6_OverallTotalHours ;
-      private GXBaseCollection<SdtSDT_EmployeeProjectMatrix> aP7_SDT_EmployeeProjectMatrixCollection ;
+      private long aP7_OverallTotalHours ;
+      private GXBaseCollection<SdtSDT_EmployeeProjectMatrix> aP8_SDT_EmployeeProjectMatrixCollection ;
    }
 
    public class aprc_employeeprojectmatrixreport__default : DataStoreHelperBase, IDataStoreHelper
@@ -595,10 +604,12 @@ namespace GeneXus.Programs {
                                              long A106EmployeeId ,
                                              GxSimpleCollection<long> AV33ProjectEmployeeIdCollection ,
                                              GxSimpleCollection<long> AV13EmployeeIdCollection ,
+                                             GxSimpleCollection<long> AV39UserEmployeeIdCollection ,
                                              long A157CompanyLocationId ,
                                              GxSimpleCollection<long> AV12CompanyLocationIdCollection ,
                                              int AV33ProjectEmployeeIdCollection_Count ,
                                              int AV13EmployeeIdCollection_Count ,
+                                             int AV39UserEmployeeIdCollection_Count ,
                                              int AV12CompanyLocationIdCollection_Count )
       {
          System.Text.StringBuilder sWhereString = new System.Text.StringBuilder();
@@ -612,6 +623,10 @@ namespace GeneXus.Programs {
          if ( AV13EmployeeIdCollection_Count > 0 )
          {
             AddWhere(sWhereString, "("+new GxDbmsUtils( new GxPostgreSql()).ValueList(AV13EmployeeIdCollection, "T1.EmployeeId IN (", ")")+")");
+         }
+         if ( AV39UserEmployeeIdCollection_Count > 0 )
+         {
+            AddWhere(sWhereString, "("+new GxDbmsUtils( new GxPostgreSql()).ValueList(AV39UserEmployeeIdCollection, "T1.EmployeeId IN (", ")")+")");
          }
          if ( ! ( AV12CompanyLocationIdCollection_Count == 0 ) )
          {
@@ -657,7 +672,7 @@ namespace GeneXus.Programs {
                case 1 :
                      return conditional_P00CC3(context, (long)dynConstraints[0] , (GxSimpleCollection<long>)dynConstraints[1] , (int)dynConstraints[2] );
                case 3 :
-                     return conditional_P00CC5(context, (long)dynConstraints[0] , (GxSimpleCollection<long>)dynConstraints[1] , (GxSimpleCollection<long>)dynConstraints[2] , (long)dynConstraints[3] , (GxSimpleCollection<long>)dynConstraints[4] , (int)dynConstraints[5] , (int)dynConstraints[6] , (int)dynConstraints[7] );
+                     return conditional_P00CC5(context, (long)dynConstraints[0] , (GxSimpleCollection<long>)dynConstraints[1] , (GxSimpleCollection<long>)dynConstraints[2] , (GxSimpleCollection<long>)dynConstraints[3] , (long)dynConstraints[4] , (GxSimpleCollection<long>)dynConstraints[5] , (int)dynConstraints[6] , (int)dynConstraints[7] , (int)dynConstraints[8] , (int)dynConstraints[9] );
                case 4 :
                      return conditional_P00CC8(context, (long)dynConstraints[0] , (GxSimpleCollection<long>)dynConstraints[1] , (int)dynConstraints[2] , (long)dynConstraints[3] );
          }

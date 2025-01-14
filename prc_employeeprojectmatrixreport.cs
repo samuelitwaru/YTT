@@ -46,22 +46,24 @@ namespace GeneXus.Programs {
                            GxSimpleCollection<long> aP2_ProjectIdCollection ,
                            GxSimpleCollection<long> aP3_CompanyLocationIdCollection ,
                            GxSimpleCollection<long> aP4_EmployeeIdCollection ,
-                           bool aP5_ShowLeave ,
-                           out long aP6_OverallTotalHours ,
-                           out GXBaseCollection<SdtSDT_EmployeeProjectMatrix> aP7_SDT_EmployeeProjectMatrixCollection )
+                           GxSimpleCollection<long> aP5_UserEmployeeIdCollection ,
+                           bool aP6_ShowLeave ,
+                           out long aP7_OverallTotalHours ,
+                           out GXBaseCollection<SdtSDT_EmployeeProjectMatrix> aP8_SDT_EmployeeProjectMatrixCollection )
       {
          this.AV2FromDate = aP0_FromDate;
          this.AV3ToDate = aP1_ToDate;
          this.AV4ProjectIdCollection = aP2_ProjectIdCollection;
          this.AV5CompanyLocationIdCollection = aP3_CompanyLocationIdCollection;
          this.AV6EmployeeIdCollection = aP4_EmployeeIdCollection;
-         this.AV7ShowLeave = aP5_ShowLeave;
-         this.AV8OverallTotalHours = 0 ;
-         this.AV9SDT_EmployeeProjectMatrixCollection = new GXBaseCollection<SdtSDT_EmployeeProjectMatrix>( context, "SDT_EmployeeProjectMatrix", "YTT_version4") ;
+         this.AV7UserEmployeeIdCollection = aP5_UserEmployeeIdCollection;
+         this.AV8ShowLeave = aP6_ShowLeave;
+         this.AV9OverallTotalHours = 0 ;
+         this.AV10SDT_EmployeeProjectMatrixCollection = new GXBaseCollection<SdtSDT_EmployeeProjectMatrix>( context, "SDT_EmployeeProjectMatrix", "YTT_version4") ;
          initialize();
          ExecuteImpl();
-         aP6_OverallTotalHours=this.AV8OverallTotalHours;
-         aP7_SDT_EmployeeProjectMatrixCollection=this.AV9SDT_EmployeeProjectMatrixCollection;
+         aP7_OverallTotalHours=this.AV9OverallTotalHours;
+         aP8_SDT_EmployeeProjectMatrixCollection=this.AV10SDT_EmployeeProjectMatrixCollection;
       }
 
       public GXBaseCollection<SdtSDT_EmployeeProjectMatrix> executeUdp( DateTime aP0_FromDate ,
@@ -69,11 +71,12 @@ namespace GeneXus.Programs {
                                                                         GxSimpleCollection<long> aP2_ProjectIdCollection ,
                                                                         GxSimpleCollection<long> aP3_CompanyLocationIdCollection ,
                                                                         GxSimpleCollection<long> aP4_EmployeeIdCollection ,
-                                                                        bool aP5_ShowLeave ,
-                                                                        out long aP6_OverallTotalHours )
+                                                                        GxSimpleCollection<long> aP5_UserEmployeeIdCollection ,
+                                                                        bool aP6_ShowLeave ,
+                                                                        out long aP7_OverallTotalHours )
       {
-         execute(aP0_FromDate, aP1_ToDate, aP2_ProjectIdCollection, aP3_CompanyLocationIdCollection, aP4_EmployeeIdCollection, aP5_ShowLeave, out aP6_OverallTotalHours, out aP7_SDT_EmployeeProjectMatrixCollection);
-         return AV9SDT_EmployeeProjectMatrixCollection ;
+         execute(aP0_FromDate, aP1_ToDate, aP2_ProjectIdCollection, aP3_CompanyLocationIdCollection, aP4_EmployeeIdCollection, aP5_UserEmployeeIdCollection, aP6_ShowLeave, out aP7_OverallTotalHours, out aP8_SDT_EmployeeProjectMatrixCollection);
+         return AV10SDT_EmployeeProjectMatrixCollection ;
       }
 
       public void executeSubmit( DateTime aP0_FromDate ,
@@ -81,33 +84,35 @@ namespace GeneXus.Programs {
                                  GxSimpleCollection<long> aP2_ProjectIdCollection ,
                                  GxSimpleCollection<long> aP3_CompanyLocationIdCollection ,
                                  GxSimpleCollection<long> aP4_EmployeeIdCollection ,
-                                 bool aP5_ShowLeave ,
-                                 out long aP6_OverallTotalHours ,
-                                 out GXBaseCollection<SdtSDT_EmployeeProjectMatrix> aP7_SDT_EmployeeProjectMatrixCollection )
+                                 GxSimpleCollection<long> aP5_UserEmployeeIdCollection ,
+                                 bool aP6_ShowLeave ,
+                                 out long aP7_OverallTotalHours ,
+                                 out GXBaseCollection<SdtSDT_EmployeeProjectMatrix> aP8_SDT_EmployeeProjectMatrixCollection )
       {
          this.AV2FromDate = aP0_FromDate;
          this.AV3ToDate = aP1_ToDate;
          this.AV4ProjectIdCollection = aP2_ProjectIdCollection;
          this.AV5CompanyLocationIdCollection = aP3_CompanyLocationIdCollection;
          this.AV6EmployeeIdCollection = aP4_EmployeeIdCollection;
-         this.AV7ShowLeave = aP5_ShowLeave;
-         this.AV8OverallTotalHours = 0 ;
-         this.AV9SDT_EmployeeProjectMatrixCollection = new GXBaseCollection<SdtSDT_EmployeeProjectMatrix>( context, "SDT_EmployeeProjectMatrix", "YTT_version4") ;
+         this.AV7UserEmployeeIdCollection = aP5_UserEmployeeIdCollection;
+         this.AV8ShowLeave = aP6_ShowLeave;
+         this.AV9OverallTotalHours = 0 ;
+         this.AV10SDT_EmployeeProjectMatrixCollection = new GXBaseCollection<SdtSDT_EmployeeProjectMatrix>( context, "SDT_EmployeeProjectMatrix", "YTT_version4") ;
          SubmitImpl();
-         aP6_OverallTotalHours=this.AV8OverallTotalHours;
-         aP7_SDT_EmployeeProjectMatrixCollection=this.AV9SDT_EmployeeProjectMatrixCollection;
+         aP7_OverallTotalHours=this.AV9OverallTotalHours;
+         aP8_SDT_EmployeeProjectMatrixCollection=this.AV10SDT_EmployeeProjectMatrixCollection;
       }
 
       protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
-         args = new Object[] {(DateTime)AV2FromDate,(DateTime)AV3ToDate,(GxSimpleCollection<long>)AV4ProjectIdCollection,(GxSimpleCollection<long>)AV5CompanyLocationIdCollection,(GxSimpleCollection<long>)AV6EmployeeIdCollection,(bool)AV7ShowLeave,(long)AV8OverallTotalHours,(GXBaseCollection<SdtSDT_EmployeeProjectMatrix>)AV9SDT_EmployeeProjectMatrixCollection} ;
+         args = new Object[] {(DateTime)AV2FromDate,(DateTime)AV3ToDate,(GxSimpleCollection<long>)AV4ProjectIdCollection,(GxSimpleCollection<long>)AV5CompanyLocationIdCollection,(GxSimpleCollection<long>)AV6EmployeeIdCollection,(GxSimpleCollection<long>)AV7UserEmployeeIdCollection,(bool)AV8ShowLeave,(long)AV9OverallTotalHours,(GXBaseCollection<SdtSDT_EmployeeProjectMatrix>)AV10SDT_EmployeeProjectMatrixCollection} ;
          ClassLoader.Execute("aprc_employeeprojectmatrixreport","GeneXus.Programs","aprc_employeeprojectmatrixreport", new Object[] {context }, "execute", args);
-         if ( ( args != null ) && ( args.Length == 8 ) )
+         if ( ( args != null ) && ( args.Length == 9 ) )
          {
-            AV8OverallTotalHours = (long)(args[6]) ;
-            AV9SDT_EmployeeProjectMatrixCollection = (GXBaseCollection<SdtSDT_EmployeeProjectMatrix>)(args[7]) ;
+            AV9OverallTotalHours = (long)(args[7]) ;
+            AV10SDT_EmployeeProjectMatrixCollection = (GXBaseCollection<SdtSDT_EmployeeProjectMatrix>)(args[8]) ;
          }
          cleanup();
       }
@@ -123,23 +128,24 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
-         AV9SDT_EmployeeProjectMatrixCollection = new GXBaseCollection<SdtSDT_EmployeeProjectMatrix>( context, "SDT_EmployeeProjectMatrix", "YTT_version4");
+         AV10SDT_EmployeeProjectMatrixCollection = new GXBaseCollection<SdtSDT_EmployeeProjectMatrix>( context, "SDT_EmployeeProjectMatrix", "YTT_version4");
          /* GeneXus formulas. */
       }
 
-      private long AV8OverallTotalHours ;
+      private long AV9OverallTotalHours ;
       private DateTime AV2FromDate ;
       private DateTime AV3ToDate ;
-      private bool AV7ShowLeave ;
+      private bool AV8ShowLeave ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private GxSimpleCollection<long> AV4ProjectIdCollection ;
       private GxSimpleCollection<long> AV5CompanyLocationIdCollection ;
       private GxSimpleCollection<long> AV6EmployeeIdCollection ;
-      private GXBaseCollection<SdtSDT_EmployeeProjectMatrix> AV9SDT_EmployeeProjectMatrixCollection ;
+      private GxSimpleCollection<long> AV7UserEmployeeIdCollection ;
+      private GXBaseCollection<SdtSDT_EmployeeProjectMatrix> AV10SDT_EmployeeProjectMatrixCollection ;
       private Object[] args ;
-      private long aP6_OverallTotalHours ;
-      private GXBaseCollection<SdtSDT_EmployeeProjectMatrix> aP7_SDT_EmployeeProjectMatrixCollection ;
+      private long aP7_OverallTotalHours ;
+      private GXBaseCollection<SdtSDT_EmployeeProjectMatrix> aP8_SDT_EmployeeProjectMatrixCollection ;
    }
 
 }
