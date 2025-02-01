@@ -356,8 +356,6 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "vTODATE", context.localUtil.DToC( AV16ToDate, 0, "/"));
          GxWebStd.gx_hidden_field( context, "vONEPROJECTID", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV22OneProjectId), 4, 0, ".", "")));
          GxWebStd.gx_hidden_field( context, "gxhash_vONEPROJECTID", GetSecureSignedToken( "", context.localUtil.Format( (decimal)(AV22OneProjectId), "ZZZ9"), context));
-         GxWebStd.gx_hidden_field( context, "vDATERANGE", context.localUtil.DToC( AV21DateRange, 0, "/"));
-         GxWebStd.gx_hidden_field( context, "vDATERANGE_TO", context.localUtil.DToC( AV26DateRange_To, 0, "/"));
          if ( context.isAjaxRequest( ) )
          {
             context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "vPROJECTID", AV14ProjectId);
@@ -366,6 +364,8 @@ namespace GeneXus.Programs {
          {
             context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("vPROJECTID", AV14ProjectId);
          }
+         GxWebStd.gx_hidden_field( context, "vDATERANGE", context.localUtil.DToC( AV21DateRange, 0, "/"));
+         GxWebStd.gx_hidden_field( context, "vDATERANGE_TO", context.localUtil.DToC( AV26DateRange_To, 0, "/"));
          if ( context.isAjaxRequest( ) )
          {
             context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "vCOMPANYLOCATIONID", AV12CompanyLocationId);
@@ -1470,6 +1470,7 @@ namespace GeneXus.Programs {
       {
          /* 'DoExportExcel' Routine */
          returnInSub = false;
+         AV14ProjectId.Add(AV22OneProjectId, 0);
          new employeehoursreport(context ).execute( ref  AV21DateRange, ref  AV26DateRange_To, ref  AV14ProjectId, ref  AV12CompanyLocationId, ref  AV13EmployeeId, out  AV35ExcelFilename, out  AV36ErrorMessage) ;
          AssignAttri("", false, "AV21DateRange", context.localUtil.Format(AV21DateRange, "99/99/99"));
          AssignAttri("", false, "AV26DateRange_To", context.localUtil.Format(AV26DateRange_To, "99/99/99"));
@@ -1479,9 +1480,9 @@ namespace GeneXus.Programs {
          ucInnewwindow1.SendProperty(context, "", false, Innewwindow1_Internalname, "Name", Innewwindow1_Name);
          this.executeUsercontrolMethod("", false, "INNEWWINDOW1Container", "OpenWindow", "", new Object[] {});
          /*  Sending Event outputs  */
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV14ProjectId", AV14ProjectId);
          context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV13EmployeeId", AV13EmployeeId);
          context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV12CompanyLocationId", AV12CompanyLocationId);
-         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV14ProjectId", AV14ProjectId);
       }
 
       protected void E174Y2( )
@@ -1571,7 +1572,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2025211585561", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20252115511855", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1587,7 +1588,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("projectdetails.js", "?2025211585561", false, true);
+         context.AddJavascriptSource("projectdetails.js", "?20252115511855", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/DVPaginationBar/DVPaginationBarRender.js", "", false, true);
@@ -1948,8 +1949,8 @@ namespace GeneXus.Programs {
          setEventMetadata("FREESTYLEGRID1PAGINATIONBAR.CHANGEPAGE",""","oparms":[{"av":"AV9FreeStyleGrid1CurrentPage","fld":"vFREESTYLEGRID1CURRENTPAGE","pic":"ZZZZZZZZZ9"}]}""");
          setEventMetadata("FREESTYLEGRID1PAGINATIONBAR.CHANGEROWSPERPAGE","""{"handler":"E124Y2","iparms":[{"av":"FREESTYLEGRID1_nFirstRecordOnPage"},{"av":"FREESTYLEGRID1_nEOF"},{"av":"subFreestylegrid1_Rows","ctrl":"FREESTYLEGRID1","prop":"Rows"},{"av":"AV22OneProjectId","fld":"vONEPROJECTID","pic":"ZZZ9","hsh":true},{"av":"AV15FromDate","fld":"vFROMDATE"},{"av":"AV16ToDate","fld":"vTODATE"},{"av":"edtEmployeeName_Visible","ctrl":"EMPLOYEENAME","prop":"Visible"},{"av":"edtEmployeeId_Visible","ctrl":"EMPLOYEEID","prop":"Visible"},{"av":"Freestylegrid1paginationbar_Rowsperpageselectedvalue","ctrl":"FREESTYLEGRID1PAGINATIONBAR","prop":"RowsPerPageSelectedValue"}]""");
          setEventMetadata("FREESTYLEGRID1PAGINATIONBAR.CHANGEROWSPERPAGE",""","oparms":[{"av":"subFreestylegrid1_Rows","ctrl":"FREESTYLEGRID1","prop":"Rows"},{"av":"AV9FreeStyleGrid1CurrentPage","fld":"vFREESTYLEGRID1CURRENTPAGE","pic":"ZZZZZZZZZ9"}]}""");
-         setEventMetadata("'DOEXPORTEXCEL'","""{"handler":"E134Y2","iparms":[{"av":"AV21DateRange","fld":"vDATERANGE"},{"av":"AV26DateRange_To","fld":"vDATERANGE_TO"},{"av":"AV14ProjectId","fld":"vPROJECTID"},{"av":"AV12CompanyLocationId","fld":"vCOMPANYLOCATIONID"},{"av":"AV13EmployeeId","fld":"vEMPLOYEEID"}]""");
-         setEventMetadata("'DOEXPORTEXCEL'",""","oparms":[{"av":"AV13EmployeeId","fld":"vEMPLOYEEID"},{"av":"AV12CompanyLocationId","fld":"vCOMPANYLOCATIONID"},{"av":"AV14ProjectId","fld":"vPROJECTID"},{"av":"AV26DateRange_To","fld":"vDATERANGE_TO"},{"av":"AV21DateRange","fld":"vDATERANGE"},{"av":"Innewwindow1_Target","ctrl":"INNEWWINDOW1","prop":"Target"},{"av":"Innewwindow1_Name","ctrl":"INNEWWINDOW1","prop":"Name"}]}""");
+         setEventMetadata("'DOEXPORTEXCEL'","""{"handler":"E134Y2","iparms":[{"av":"AV22OneProjectId","fld":"vONEPROJECTID","pic":"ZZZ9","hsh":true},{"av":"AV14ProjectId","fld":"vPROJECTID"},{"av":"AV21DateRange","fld":"vDATERANGE"},{"av":"AV26DateRange_To","fld":"vDATERANGE_TO"},{"av":"AV12CompanyLocationId","fld":"vCOMPANYLOCATIONID"},{"av":"AV13EmployeeId","fld":"vEMPLOYEEID"}]""");
+         setEventMetadata("'DOEXPORTEXCEL'",""","oparms":[{"av":"AV14ProjectId","fld":"vPROJECTID"},{"av":"AV13EmployeeId","fld":"vEMPLOYEEID"},{"av":"AV12CompanyLocationId","fld":"vCOMPANYLOCATIONID"},{"av":"AV26DateRange_To","fld":"vDATERANGE_TO"},{"av":"AV21DateRange","fld":"vDATERANGE"},{"av":"Innewwindow1_Target","ctrl":"INNEWWINDOW1","prop":"Target"},{"av":"Innewwindow1_Name","ctrl":"INNEWWINDOW1","prop":"Name"}]}""");
          setEventMetadata("FREESTYLEGRID1.REFRESH","""{"handler":"E174Y2","iparms":[{"av":"subFreestylegrid1_Rows","ctrl":"FREESTYLEGRID1","prop":"Rows"}]""");
          setEventMetadata("FREESTYLEGRID1.REFRESH",""","oparms":[{"av":"AV10FreeStyleGrid1PageCount","fld":"vFREESTYLEGRID1PAGECOUNT","pic":"ZZZZZZZZZ9"}]}""");
          setEventMetadata("VALID_EMPLOYEEID","""{"handler":"Valid_Employeeid","iparms":[]}""");
@@ -1977,9 +1978,9 @@ namespace GeneXus.Programs {
          bodyStyle = "";
          GXKey = "";
          AV11FreeStyleGrid1AppliedFilters = "";
+         AV14ProjectId = new GxSimpleCollection<long>();
          AV21DateRange = DateTime.MinValue;
          AV26DateRange_To = DateTime.MinValue;
-         AV14ProjectId = new GxSimpleCollection<long>();
          AV12CompanyLocationId = new GxSimpleCollection<long>();
          AV13EmployeeId = new GxSimpleCollection<long>();
          AV32InProjectId = new GxSimpleCollection<long>();
