@@ -1490,7 +1490,6 @@ namespace GeneXus.Programs {
             GXt_char5 = AV6blank;
             new employeeprojectmatrixreport(context ).execute( ref  AV8DateRange, ref  AV11DateRange_To, ref  AV16ProjectId, ref  AV21CompanyLocationId, ref  AV13EmployeeId, ref  AV51EmployeeIds, ref  AV50ProjectIds, out  AV19SDTProjects, out  AV5SDTEmployeeProjectHoursCollection, out  AV41TotalFormattedWorkTime, out  AV61TotalFormattedTime) ;
             AV6blank = GXt_char5;
-            new logtofile(context ).execute(  AV5SDTEmployeeProjectHoursCollection.ToJSonString(false)) ;
             Pivottable1_Totalformattedworktime = AV41TotalFormattedWorkTime;
             ucPivottable1.SendProperty(context, "", false, Pivottable1_Internalname, "TotalFormattedWorkTime", Pivottable1_Totalformattedworktime);
             Pivottable1_Totalformattedtime = AV61TotalFormattedTime;
@@ -1586,7 +1585,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20251314101990", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20252113581777", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1602,7 +1601,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("reports.js", "?20251314101991", false, true);
+         context.AddJavascriptSource("reports.js", "?20252113581779", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);

@@ -221,7 +221,6 @@ namespace GeneXus.Programs {
             pr_default.close(2);
             while ( DateTimeUtil.ResetTime ( AV38WorkDate ) <= DateTimeUtil.ResetTime ( AV16ToDate ) )
             {
-               new logtofile(context ).execute(  "    "+context.localUtil.DToC( AV38WorkDate, 2, "/")+" = "+StringUtil.Str( (decimal)(DateTimeUtil.Dow( AV38WorkDate)), 10, 0)) ;
                if ( DateTimeUtil.Dow( AV38WorkDate) == 7 )
                {
                   AV38WorkDate = DateTimeUtil.DAdd( AV38WorkDate, (2));
@@ -284,7 +283,6 @@ namespace GeneXus.Programs {
                   new procformattime(context ).execute(  AV11SDTEmployeeProjectHours.gxTpr_Totalleave, out  GXt_char1) ;
                   AV11SDTEmployeeProjectHours.gxTpr_Totalformattedleave = GXt_char1;
                   AV11SDTEmployeeProjectHours.gxTpr_Expectedworktime = (long)(AV36CompanyWorkTimeDictionary.get(A157CompanyLocationId)-AV11SDTEmployeeProjectHours.gxTpr_Totalleave);
-                  new logtofile(context ).execute(  StringUtil.Trim( StringUtil.Str( (decimal)(A106EmployeeId), 10, 0))+":"+A148EmployeeName) ;
                   pr_default.dynParam(4, new Object[]{ new Object[]{
                                                        A102ProjectId ,
                                                        AV20ProjectIdCollection ,
@@ -333,8 +331,6 @@ namespace GeneXus.Programs {
                      }
                      AV43Total = (long)(AV42TotalMinutes+AV41TotalHours*60);
                      AV11SDTEmployeeProjectHours.gxTpr_Totaltime = (long)(AV11SDTEmployeeProjectHours.gxTpr_Totaltime+AV43Total);
-                     new logtofile(context ).execute(  "    "+StringUtil.Trim( StringUtil.Str( (decimal)(A102ProjectId), 10, 0))+":"+StringUtil.Trim( A103ProjectName)+" : "+StringUtil.Trim( StringUtil.Str( (decimal)(AV41TotalHours), 10, 0))+" : "+StringUtil.Trim( StringUtil.Str( (decimal)(AV42TotalMinutes), 10, 0))+" = "+StringUtil.Trim( StringUtil.Str( (decimal)(AV11SDTEmployeeProjectHours.gxTpr_Totaltime), 10, 0))) ;
-                     new logtofile(context ).execute(  "        "+"SELECT sum(workhourloghour), sum(workhourlogminute) FROM public.workhourlog where employeeid="+StringUtil.Trim( StringUtil.Str( (decimal)(A106EmployeeId), 10, 0))+" and projectid="+StringUtil.Trim( StringUtil.Str( (decimal)(A102ProjectId), 10, 0))+" and workhourlogdate>='"+new formatdatetime(context).executeUdp(  AV9FromDate,  "YYYY-MM-DD")+"' and workhourlogdate<='"+new formatdatetime(context).executeUdp(  AV16ToDate,  "YYYY-MM-DD")+"'") ;
                      AV14SDTProjectHoursItem.gxTpr_Projecttime = AV43Total;
                      GXt_char1 = "";
                      new formattime(context ).execute(  AV43Total, out  GXt_char1) ;
@@ -385,7 +381,6 @@ namespace GeneXus.Programs {
                         AV14SDTProjectHoursItem.gxTpr_Projectformattedtime = AV24FormattedHours;
                      }
                      AV11SDTEmployeeProjectHours.gxTpr_Projecthours.Add(AV14SDTProjectHoursItem, 0);
-                     new logtofile(context ).execute(  "  --"+StringUtil.Str( (decimal)(AV23TotalHourLogs), 10, 0)) ;
                      AV11SDTEmployeeProjectHours.gxTpr_Totaltime = (long)(AV11SDTEmployeeProjectHours.gxTpr_Totaltime+AV23TotalHourLogs);
                      pr_default.readNext(5);
                   }

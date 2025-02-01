@@ -125,10 +125,6 @@ namespace GeneXus.Programs {
             new getemployeeidsbyproject(context ).execute(  AV38ProjectIdCollection, out  GXt_objcol_int1) ;
             AV42ProjectEmployeeIdCollection = GXt_objcol_int1;
          }
-         new logtofile(context ).execute(  AV40EmployeeIdCollection.ToJSonString(false)) ;
-         new logtofile(context ).execute(  AV38ProjectIdCollection.ToJSonString(false)) ;
-         new logtofile(context ).execute(  AV42ProjectEmployeeIdCollection.ToJSonString(false)) ;
-         new logtofile(context ).execute(  AV39CompanyLocationIdCollection.ToJSonString(false)) ;
          AV52GXV1 = 1;
          while ( AV52GXV1 <= AV8SDT_EmployeeProjectMatrixCollection.Count )
          {

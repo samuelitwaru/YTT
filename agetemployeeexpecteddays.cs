@@ -164,9 +164,7 @@ namespace GeneXus.Programs {
          {
             A106EmployeeId = P00A22_A106EmployeeId[0];
             A100CompanyId = P00A22_A100CompanyId[0];
-            A148EmployeeName = P00A22_A148EmployeeName[0];
             AV14CompanyId = A100CompanyId;
-            new logtofile(context ).execute(  "Employee Name: "+StringUtil.Trim( A148EmployeeName)) ;
             /* Exit For each command. Update data (if necessary), close cursors & exit. */
             if (true) break;
             /* Exiting from a For First loop. */
@@ -186,7 +184,6 @@ namespace GeneXus.Programs {
             GXt_decimal1 = AV24LeaveDayCount;
             new getleaverequestdays(context ).execute(  AV9FromDate,  AV10ToDate,  A173LeaveRequestHalfDay,  AV8EmployeeId, out  GXt_decimal1) ;
             AV24LeaveDayCount = (decimal)(AV24LeaveDayCount+(GXt_decimal1));
-            new logtofile(context ).execute(  "    LeaveRequest: "+StringUtil.Str( (decimal)(A127LeaveRequestId), 10, 0)) ;
             pr_default.dynParam(2, new Object[]{ new Object[]{
                                                  A113HolidayId ,
                                                  AV27HolidayIdCollection ,
@@ -214,7 +211,6 @@ namespace GeneXus.Programs {
                pr_default.readNext(2);
             }
             pr_default.close(2);
-            new logtofile(context ).execute(  "     "+AV27HolidayIdCollection.ToJSonString(false)) ;
             pr_default.readNext(1);
          }
          pr_default.close(1);
@@ -235,8 +231,6 @@ namespace GeneXus.Programs {
       {
          P00A22_A106EmployeeId = new long[1] ;
          P00A22_A100CompanyId = new long[1] ;
-         P00A22_A148EmployeeName = new string[] {""} ;
-         A148EmployeeName = "";
          P00A23_A130LeaveRequestEndDate = new DateTime[] {DateTime.MinValue} ;
          P00A23_A129LeaveRequestStartDate = new DateTime[] {DateTime.MinValue} ;
          P00A23_A173LeaveRequestHalfDay = new string[] {""} ;
@@ -254,7 +248,7 @@ namespace GeneXus.Programs {
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.agetemployeeexpecteddays__default(),
             new Object[][] {
                 new Object[] {
-               P00A22_A106EmployeeId, P00A22_A100CompanyId, P00A22_A148EmployeeName
+               P00A22_A106EmployeeId, P00A22_A100CompanyId
                }
                , new Object[] {
                P00A23_A130LeaveRequestEndDate, P00A23_A129LeaveRequestStartDate, P00A23_A173LeaveRequestHalfDay, P00A23_n173LeaveRequestHalfDay, P00A23_A127LeaveRequestId
@@ -276,7 +270,6 @@ namespace GeneXus.Programs {
       private decimal AV20ExpectedWorkDays ;
       private decimal AV24LeaveDayCount ;
       private decimal GXt_decimal1 ;
-      private string A148EmployeeName ;
       private string A173LeaveRequestHalfDay ;
       private DateTime AV9FromDate ;
       private DateTime AV10ToDate ;
@@ -293,7 +286,6 @@ namespace GeneXus.Programs {
       private IDataStoreProvider pr_default ;
       private long[] P00A22_A106EmployeeId ;
       private long[] P00A22_A100CompanyId ;
-      private string[] P00A22_A148EmployeeName ;
       private DateTime[] P00A23_A130LeaveRequestEndDate ;
       private DateTime[] P00A23_A129LeaveRequestStartDate ;
       private string[] P00A23_A173LeaveRequestHalfDay ;
@@ -382,7 +374,7 @@ namespace GeneXus.Programs {
           new ParDef("LeaveRequestEndDate",GXType.Date,8,0)
           };
           def= new CursorDef[] {
-              new CursorDef("P00A22", "SELECT EmployeeId, CompanyId, EmployeeName FROM Employee WHERE EmployeeId = :AV8EmployeeId ORDER BY EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00A22,1, GxCacheFrequency.OFF ,true,true )
+              new CursorDef("P00A22", "SELECT EmployeeId, CompanyId FROM Employee WHERE EmployeeId = :AV8EmployeeId ORDER BY EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00A22,1, GxCacheFrequency.OFF ,false,true )
              ,new CursorDef("P00A23", "SELECT LeaveRequestEndDate, LeaveRequestStartDate, LeaveRequestHalfDay, LeaveRequestId FROM LeaveRequest ORDER BY LeaveRequestId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00A23,100, GxCacheFrequency.OFF ,true,false )
              ,new CursorDef("P00A24", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00A24,100, GxCacheFrequency.OFF ,false,false )
           };
@@ -398,7 +390,6 @@ namespace GeneXus.Programs {
              case 0 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);
                 ((long[]) buf[1])[0] = rslt.getLong(2);
-                ((string[]) buf[2])[0] = rslt.getString(3, 100);
                 return;
              case 1 :
                 ((DateTime[]) buf[0])[0] = rslt.getGXDate(1);

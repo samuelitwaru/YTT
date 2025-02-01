@@ -1183,7 +1183,6 @@ namespace GeneXus.Programs {
          /* 'DoExportExcel' Routine */
          returnInSub = false;
          new prc_exportprojectoverview(context ).execute(  AV11DateRange,  AV21DateRange_To,  AV14EmployeeId,  AV12ProjectId,  AV13CompanyLocationId,  AV10ShowLeaveTotal,  AV25SDT_EmployeeProjectMatrixCollection, out  AV26Filename, out  AV27ErrorMessage) ;
-         new logtofile(context ).execute(  ">>>>>>"+AV26Filename) ;
          if ( StringUtil.StrCmp(AV26Filename, "") != 0 )
          {
             CallWebObject(formatLink(AV26Filename) );
@@ -1509,7 +1508,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2025114865577", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202513120362842", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1525,7 +1524,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wp_projectoverview.js", "?2025114865577", false, true);
+         context.AddJavascriptSource("wp_projectoverview.js", "?202513120362843", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);

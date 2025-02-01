@@ -92,7 +92,6 @@ namespace GeneXus.Programs {
          AV9File.Source = AV8Filename;
          AV9File.Delete();
          AV9File.Open("");
-         new logtofile(context ).execute(  ">>>>>>"+AV8Filename) ;
          AV10Lines.Add("BEGIN:VCALENDAR", 0);
          AV10Lines.Add("PRODID:-//Yukon Software//APiCalConverter//EN", 0);
          AV10Lines.Add("VERSION:2.0", 0);

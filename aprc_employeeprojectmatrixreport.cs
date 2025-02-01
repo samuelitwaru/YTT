@@ -221,7 +221,6 @@ namespace GeneXus.Programs {
             pr_default.close(2);
             while ( DateTimeUtil.ResetTime ( AV35WorkDate ) <= DateTimeUtil.ResetTime ( AV9ToDate ) )
             {
-               new logtofile(context ).execute(  "    "+context.localUtil.DToC( AV35WorkDate, 2, "/")+" = "+StringUtil.Str( (decimal)(DateTimeUtil.Dow( AV35WorkDate)), 10, 0)) ;
                if ( DateTimeUtil.Dow( AV35WorkDate) == 7 )
                {
                   AV35WorkDate = DateTimeUtil.DAdd( AV35WorkDate, (2));
@@ -348,7 +347,6 @@ namespace GeneXus.Programs {
             if ( AV25SDT_EmployeeProjectMatrix.gxTpr_Workhours > 0 )
             {
                AV34OverallTotalHours = (long)(AV34OverallTotalHours+(AV25SDT_EmployeeProjectMatrix.gxTpr_Employeehours));
-               new logtofile(context ).execute(  StringUtil.Trim( AV25SDT_EmployeeProjectMatrix.gxTpr_Employeename)+" : "+StringUtil.Str( (decimal)(AV25SDT_EmployeeProjectMatrix.gxTpr_Employeehours), 10, 0)+">>>"+AV25SDT_EmployeeProjectMatrix.gxTpr_Formattedemployeehours) ;
                AV20SDT_EmployeeProjectMatrixCollection.Add(AV25SDT_EmployeeProjectMatrix, 0);
             }
             pr_default.readNext(3);

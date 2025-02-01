@@ -255,7 +255,6 @@ namespace GeneXus.Programs {
             GX_msglist.addItem("Error code:"+StringUtil.Str( (decimal)(AV21excelSpreadsheet.gxTpr_Errcode), 8, 0));
             GX_msglist.addItem("Error description:"+AV21excelSpreadsheet.gxTpr_Errdescription);
          }
-         new logtofile(context ).execute(  AV10Filename) ;
          AV11Session.Set("WWPExportFilePath", AV10Filename);
          AV11Session.Set("WWPExportFileName", AV10Filename);
          AV10Filename = formatLink("wwpbaseobjects.wwp_downloadreport.aspx") ;

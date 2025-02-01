@@ -376,7 +376,6 @@ namespace GeneXus.Programs {
          AV20Session.Set("WWPExportFilePath", AV12Filename);
          AV20Session.Set("WWPExportFileName", "EmployeeWWExport.xlsx");
          AV12Filename = formatLink("wwpbaseobjects.wwp_downloadreport.aspx") ;
-         new logtofile(context ).execute(  "+++"+AV12Filename) ;
       }
 
       protected void S121( )

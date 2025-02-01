@@ -132,7 +132,6 @@ namespace GeneXus.Programs {
       {
          /* GeneXus formulas */
          /* Output device settings */
-         new logtofile(context ).execute(  AV29SDTEmployeeLeaveDetailsCollection.ToJSonString(false)) ;
          /* Execute user subroutine: 'OPENDOCUMENT' */
          S111 ();
          if ( returnInSub )
@@ -245,7 +244,6 @@ namespace GeneXus.Programs {
             GX_msglist.addItem("Error code:"+StringUtil.Str( (decimal)(AV19excelSpreadsheet.gxTpr_Errcode), 8, 0));
             GX_msglist.addItem("Error description:"+AV19excelSpreadsheet.gxTpr_Errdescription);
          }
-         new logtofile(context ).execute(  AV10Filename) ;
          AV11Session.Set("WWPExportFilePath", AV10Filename);
          AV11Session.Set("WWPExportFileName", AV10Filename);
          AV10Filename = formatLink("wwpbaseobjects.wwp_downloadreport.aspx") ;

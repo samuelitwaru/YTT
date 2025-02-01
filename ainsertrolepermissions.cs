@@ -96,7 +96,6 @@ namespace GeneXus.Programs {
          AV12Perms = (GxSimpleCollection<string>)(GxRegex.Split(AV26EmployeePerms,","));
          AV8GAMRole = AV18GAMRepository.getrolebyexternalid("Is"+"Employee", out  AV10GAMErrorCollection);
          AV14GAMUser = AV18GAMRepository.getuserbylogin("local", "admin", out  AV10GAMErrorCollection);
-         new logtofile(context ).execute(  AV14GAMUser.tojsonstring()) ;
          AV15GAMPermissionFilter.gxTpr_Applicationid = 2;
          AV16GAMPermissions = AV14GAMUser.getallpermissions(AV15GAMPermissionFilter, out  AV10GAMErrorCollection);
          AV28GXV1 = 1;
@@ -109,7 +108,6 @@ namespace GeneXus.Programs {
                AV22isok = AV8GAMRole.addpermission(AV13GAMPermission, out  AV10GAMErrorCollection);
                if ( AV22isok )
                {
-                  new logtofile(context ).execute(  AV21Name) ;
                   context.CommitDataStores("insertrolepermissions",pr_default);
                }
             }

@@ -82,6 +82,7 @@ namespace GeneXus.Programs {
          state.Add("gxTpr_Employeeisactive_Z");
          state.Add("gxTpr_Employeevactiondays_Z");
          state.Add("gxTpr_Employeevacationdayssetdate_Z_Nullable");
+         state.Add("gxTpr_Employeeapipassword_Z");
          state.Add("gxTpr_Employeebalance_Z");
          return state ;
       }
@@ -102,6 +103,7 @@ namespace GeneXus.Programs {
          gxTv_SdtEmployee_Employeeisactive = sdt.gxTv_SdtEmployee_Employeeisactive ;
          gxTv_SdtEmployee_Employeevactiondays = sdt.gxTv_SdtEmployee_Employeevactiondays ;
          gxTv_SdtEmployee_Employeevacationdayssetdate = sdt.gxTv_SdtEmployee_Employeevacationdayssetdate ;
+         gxTv_SdtEmployee_Employeeapipassword = sdt.gxTv_SdtEmployee_Employeeapipassword ;
          gxTv_SdtEmployee_Employeebalance = sdt.gxTv_SdtEmployee_Employeebalance ;
          gxTv_SdtEmployee_Vacationset = sdt.gxTv_SdtEmployee_Vacationset ;
          gxTv_SdtEmployee_Project = sdt.gxTv_SdtEmployee_Project ;
@@ -119,6 +121,7 @@ namespace GeneXus.Programs {
          gxTv_SdtEmployee_Employeeisactive_Z = sdt.gxTv_SdtEmployee_Employeeisactive_Z ;
          gxTv_SdtEmployee_Employeevactiondays_Z = sdt.gxTv_SdtEmployee_Employeevactiondays_Z ;
          gxTv_SdtEmployee_Employeevacationdayssetdate_Z = sdt.gxTv_SdtEmployee_Employeevacationdayssetdate_Z ;
+         gxTv_SdtEmployee_Employeeapipassword_Z = sdt.gxTv_SdtEmployee_Employeeapipassword_Z ;
          gxTv_SdtEmployee_Employeebalance_Z = sdt.gxTv_SdtEmployee_Employeebalance_Z ;
          return  ;
       }
@@ -159,6 +162,7 @@ namespace GeneXus.Programs {
          sNumToPad = StringUtil.Trim( StringUtil.Str( (decimal)(DateTimeUtil.Day( gxTv_SdtEmployee_Employeevacationdayssetdate)), 10, 0));
          sDateCnv += StringUtil.Substring( "00", 1, 2-StringUtil.Len( sNumToPad)) + sNumToPad;
          AddObjectProperty("EmployeeVacationDaysSetDate", sDateCnv, false, includeNonInitialized);
+         AddObjectProperty("EmployeeAPIPassword", gxTv_SdtEmployee_Employeeapipassword, false, includeNonInitialized);
          AddObjectProperty("EmployeeBalance", gxTv_SdtEmployee_Employeebalance, false, includeNonInitialized);
          if ( gxTv_SdtEmployee_Vacationset != null )
          {
@@ -193,6 +197,7 @@ namespace GeneXus.Programs {
             sNumToPad = StringUtil.Trim( StringUtil.Str( (decimal)(DateTimeUtil.Day( gxTv_SdtEmployee_Employeevacationdayssetdate_Z)), 10, 0));
             sDateCnv += StringUtil.Substring( "00", 1, 2-StringUtil.Len( sNumToPad)) + sNumToPad;
             AddObjectProperty("EmployeeVacationDaysSetDate_Z", sDateCnv, false, includeNonInitialized);
+            AddObjectProperty("EmployeeAPIPassword_Z", gxTv_SdtEmployee_Employeeapipassword_Z, false, includeNonInitialized);
             AddObjectProperty("EmployeeBalance_Z", gxTv_SdtEmployee_Employeebalance_Z, false, includeNonInitialized);
          }
          return  ;
@@ -259,6 +264,11 @@ namespace GeneXus.Programs {
          {
             sdtIsNull = 0;
             gxTv_SdtEmployee_Employeevacationdayssetdate = sdt.gxTv_SdtEmployee_Employeevacationdayssetdate ;
+         }
+         if ( sdt.IsDirty("EmployeeAPIPassword") )
+         {
+            sdtIsNull = 0;
+            gxTv_SdtEmployee_Employeeapipassword = sdt.gxTv_SdtEmployee_Employeeapipassword ;
          }
          if ( sdt.IsDirty("EmployeeBalance") )
          {
@@ -345,6 +355,7 @@ namespace GeneXus.Programs {
                this.gxTv_SdtEmployee_Employeeisactive_Z_SetNull( );
                this.gxTv_SdtEmployee_Employeevactiondays_Z_SetNull( );
                this.gxTv_SdtEmployee_Employeevacationdayssetdate_Z_SetNull( );
+               this.gxTv_SdtEmployee_Employeeapipassword_Z_SetNull( );
                this.gxTv_SdtEmployee_Employeebalance_Z_SetNull( );
                if ( gxTv_SdtEmployee_Vacationset != null )
                {
@@ -570,6 +581,22 @@ namespace GeneXus.Programs {
             sdtIsNull = 0;
             gxTv_SdtEmployee_Employeevacationdayssetdate = value;
             SetDirty("Employeevacationdayssetdate");
+         }
+
+      }
+
+      [  SoapElement( ElementName = "EmployeeAPIPassword" )]
+      [  XmlElement( ElementName = "EmployeeAPIPassword"   )]
+      public string gxTpr_Employeeapipassword
+      {
+         get {
+            return gxTv_SdtEmployee_Employeeapipassword ;
+         }
+
+         set {
+            sdtIsNull = 0;
+            gxTv_SdtEmployee_Employeeapipassword = value;
+            SetDirty("Employeeapipassword");
          }
 
       }
@@ -1121,6 +1148,34 @@ namespace GeneXus.Programs {
          return false ;
       }
 
+      [  SoapElement( ElementName = "EmployeeAPIPassword_Z" )]
+      [  XmlElement( ElementName = "EmployeeAPIPassword_Z"   )]
+      public string gxTpr_Employeeapipassword_Z
+      {
+         get {
+            return gxTv_SdtEmployee_Employeeapipassword_Z ;
+         }
+
+         set {
+            sdtIsNull = 0;
+            gxTv_SdtEmployee_Employeeapipassword_Z = value;
+            SetDirty("Employeeapipassword_Z");
+         }
+
+      }
+
+      public void gxTv_SdtEmployee_Employeeapipassword_Z_SetNull( )
+      {
+         gxTv_SdtEmployee_Employeeapipassword_Z = "";
+         SetDirty("Employeeapipassword_Z");
+         return  ;
+      }
+
+      public bool gxTv_SdtEmployee_Employeeapipassword_Z_IsNull( )
+      {
+         return false ;
+      }
+
       [  SoapElement( ElementName = "EmployeeBalance_Z" )]
       [  XmlElement( ElementName = "EmployeeBalance_Z"   )]
       public decimal gxTpr_Employeebalance_Z
@@ -1173,6 +1228,7 @@ namespace GeneXus.Programs {
          gxTv_SdtEmployee_Companyname = "";
          gxTv_SdtEmployee_Gamuserguid = "";
          gxTv_SdtEmployee_Employeevacationdayssetdate = DateTime.MinValue;
+         gxTv_SdtEmployee_Employeeapipassword = "";
          gxTv_SdtEmployee_Mode = "";
          gxTv_SdtEmployee_Employeefirstname_Z = "";
          gxTv_SdtEmployee_Employeelastname_Z = "";
@@ -1181,6 +1237,7 @@ namespace GeneXus.Programs {
          gxTv_SdtEmployee_Companyname_Z = "";
          gxTv_SdtEmployee_Gamuserguid_Z = "";
          gxTv_SdtEmployee_Employeevacationdayssetdate_Z = DateTime.MinValue;
+         gxTv_SdtEmployee_Employeeapipassword_Z = "";
          sDateCnv = "";
          sNumToPad = "";
          IGxSilentTrn obj;
@@ -1226,8 +1283,10 @@ namespace GeneXus.Programs {
       private bool gxTv_SdtEmployee_Employeeisactive_Z ;
       private string gxTv_SdtEmployee_Employeeemail ;
       private string gxTv_SdtEmployee_Gamuserguid ;
+      private string gxTv_SdtEmployee_Employeeapipassword ;
       private string gxTv_SdtEmployee_Employeeemail_Z ;
       private string gxTv_SdtEmployee_Gamuserguid_Z ;
+      private string gxTv_SdtEmployee_Employeeapipassword_Z ;
       private GXBCLevelCollection<SdtEmployee_VacationSet> gxTv_SdtEmployee_Vacationset=null ;
       private GXBCLevelCollection<SdtEmployee_Project> gxTv_SdtEmployee_Project=null ;
    }
@@ -1412,7 +1471,21 @@ namespace GeneXus.Programs {
 
       }
 
-      [DataMember( Name = "EmployeeBalance" , Order = 12 )]
+      [DataMember( Name = "EmployeeAPIPassword" , Order = 12 )]
+      [GxSeudo()]
+      public string gxTpr_Employeeapipassword
+      {
+         get {
+            return sdt.gxTpr_Employeeapipassword ;
+         }
+
+         set {
+            sdt.gxTpr_Employeeapipassword = value;
+         }
+
+      }
+
+      [DataMember( Name = "EmployeeBalance" , Order = 13 )]
       [GxSeudo()]
       public Nullable<decimal> gxTpr_Employeebalance
       {
@@ -1426,7 +1499,7 @@ namespace GeneXus.Programs {
 
       }
 
-      [DataMember( Name = "VacationSet" , Order = 13 )]
+      [DataMember( Name = "VacationSet" , Order = 14 )]
       public GxGenericCollection<SdtEmployee_VacationSet_RESTInterface> gxTpr_Vacationset
       {
          get {
@@ -1439,7 +1512,7 @@ namespace GeneXus.Programs {
 
       }
 
-      [DataMember( Name = "Project" , Order = 14 )]
+      [DataMember( Name = "Project" , Order = 15 )]
       public GxGenericCollection<SdtEmployee_Project_RESTInterface> gxTpr_Project
       {
          get {
@@ -1473,7 +1546,7 @@ namespace GeneXus.Programs {
          }
       }
 
-      [DataMember( Name = "gx_md5_hash", Order = 15 )]
+      [DataMember( Name = "gx_md5_hash", Order = 16 )]
       public string Hash
       {
          get {

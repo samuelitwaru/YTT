@@ -148,6 +148,18 @@
               </Property>
             </Properties>
           </Field>
+          <Field name="EmployeeAPIPassword" description="Employee APIPassword">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>VarChar</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>40</Value>
+              </Property>
+            </Properties>
+          </Field>
           <Field name="EmployeeBalance" description="Employee Balance">
             <Properties>
               <Property>

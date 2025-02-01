@@ -149,7 +149,6 @@ namespace GeneXus.Programs {
       {
          /* GeneXus formulas */
          /* Output device settings */
-         new logtofile(context ).execute(  context.localUtil.DToC( AV10DateFrom, 2, "/")+" - "+context.localUtil.DToC( AV9DateTo, 2, "/")) ;
          /* Using cursor P00BP2 */
          pr_default.execute(0, new Object[] {AV11EmployeeId, AV9DateTo, AV10DateFrom});
          while ( (pr_default.getStatus(0) != 101) )
@@ -165,7 +164,6 @@ namespace GeneXus.Programs {
             A131LeaveRequestDuration = P00BP2_A131LeaveRequestDuration[0];
             A127LeaveRequestId = P00BP2_A127LeaveRequestId[0];
             A144LeaveTypeVacationLeave = P00BP2_A144LeaveTypeVacationLeave[0];
-            new logtofile(context ).execute(  "Leave request: "+context.localUtil.DToC( A129LeaveRequestStartDate, 2, "/")+" - "+context.localUtil.DToC( A130LeaveRequestEndDate, 2, "/")) ;
             if ( ( DateTimeUtil.ResetTime ( A129LeaveRequestStartDate ) < DateTimeUtil.ResetTime ( AV10DateFrom ) ) && ( DateTimeUtil.ResetTime ( A130LeaveRequestEndDate ) <= DateTimeUtil.ResetTime ( AV9DateTo ) ) )
             {
                GXt_decimal1 = AV22ExceptDays;
