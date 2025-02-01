@@ -1348,6 +1348,16 @@ namespace GeneXus.Programs {
       {
          /* Start Routine */
          returnInSub = false;
+         /* Execute user subroutine: 'GETSESSIONVARIABLES' */
+         S112 ();
+         if ( returnInSub )
+         {
+            returnInSub = true;
+            if (true) return;
+         }
+         new logtofile(context ).execute(  "Employeees: "+AV13EmployeeId.ToJSonString(false)) ;
+         new logtofile(context ).execute(  "Project: "+StringUtil.Str( (decimal)(AV22OneProjectId), 4, 0)) ;
+         new logtofile(context ).execute(  "Dates: "+context.localUtil.DToC( AV15FromDate, 2, "/")+" "+context.localUtil.DToC( AV16ToDate, 2, "/")) ;
          GXt_int1 = AV17LoggedInEmployeeId;
          new getloggedinemployeeid(context ).execute( out  GXt_int1) ;
          AV17LoggedInEmployeeId = GXt_int1;
@@ -1484,7 +1494,7 @@ namespace GeneXus.Programs {
          /*  Sending Event outputs  */
       }
 
-      protected void S112( )
+      protected void S122( )
       {
          /* 'UPDATESESSIONVARIABLES' Routine */
          returnInSub = false;
@@ -1495,7 +1505,7 @@ namespace GeneXus.Programs {
          AV34WebSession.Set("ToDate", context.localUtil.DToC( AV16ToDate, 2, "/"));
       }
 
-      protected void S122( )
+      protected void S112( )
       {
          /* 'GETSESSIONVARIABLES' Routine */
          returnInSub = false;
@@ -1561,7 +1571,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202513120353582", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2025211585561", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1577,7 +1587,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("projectdetails.js", "?202513120353582", false, true);
+         context.AddJavascriptSource("projectdetails.js", "?2025211585561", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/DVPaginationBar/DVPaginationBarRender.js", "", false, true);
