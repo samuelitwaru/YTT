@@ -1938,7 +1938,7 @@ namespace GeneXus.Programs {
          new userhasrole(context ).execute(  "Manager", out  GXt_boolean3) ;
          GXt_boolean4 = false;
          new userhasrole(context ).execute(  "Project Manager", out  GXt_boolean4) ;
-         if ( ( GXt_boolean3 ) || ( GXt_boolean4 ) )
+         if ( ( StringUtil.StrCmp(Gx_mode, "UPD") == 0 ) && ( ( GXt_boolean3 ) || ( GXt_boolean4 ) ) )
          {
             bttBtnsetvacationdaysbtn_Visible = 1;
             AssignProp("", false, bttBtnsetvacationdaysbtn_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(bttBtnsetvacationdaysbtn_Visible), 5, 0), true);
@@ -1949,7 +1949,7 @@ namespace GeneXus.Programs {
             new userhasrole(context ).execute(  "Manager", out  GXt_boolean4) ;
             GXt_boolean3 = false;
             new userhasrole(context ).execute(  "Project Manager", out  GXt_boolean3) ;
-            if ( ! ( ( GXt_boolean4 ) || ( GXt_boolean3 ) ) )
+            if ( ! ( ( StringUtil.StrCmp(Gx_mode, "UPD") == 0 ) && ( ( GXt_boolean4 ) || ( GXt_boolean3 ) ) ) )
             {
                bttBtnsetvacationdaysbtn_Visible = 0;
                AssignProp("", false, bttBtnsetvacationdaysbtn_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(bttBtnsetvacationdaysbtn_Visible), 5, 0), true);
@@ -4813,7 +4813,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202513120345966", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2025211651715", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -4829,7 +4829,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("employee.js", "?202513120345969", false, true);
+         context.AddJavascriptSource("employee.js", "?2025211651716", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);

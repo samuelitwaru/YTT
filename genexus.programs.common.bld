@@ -40,11 +40,11 @@ wwpbaseobjects\mail\type_SdtWWP_Mail.cs
 wwpbaseobjects\mail\type_SdtWWP_Mail_Attachments.cs
 wwpbaseobjects\notifications\common\type_SdtWWP_Notification.cs
 type_SdtProject.cs
+type_SdtCompany.cs
+type_SdtWorkHourLog.cs
 type_SdtEmployee.cs
 type_SdtEmployee_Project.cs
 type_SdtEmployee_VacationSet.cs
-type_SdtCompany.cs
-type_SdtWorkHourLog.cs
 type_SdtLeaveRequest.cs
 gxdomainwwpdomains.cs
 genexusreporting\gxdomainqueryviewervisible.cs

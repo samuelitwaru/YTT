@@ -69,13 +69,13 @@ namespace GeneXus.Programs {
          obj = new SdtProject(context);
          trn = obj.getTransaction();
          result = trn.Reindex();
-         obj = new SdtEmployee(context);
-         trn = obj.getTransaction();
-         result = trn.Reindex();
          obj = new SdtCompany(context);
          trn = obj.getTransaction();
          result = trn.Reindex();
          obj = new SdtWorkHourLog(context);
+         trn = obj.getTransaction();
+         result = trn.Reindex();
+         obj = new SdtEmployee(context);
          trn = obj.getTransaction();
          result = trn.Reindex();
          obj = new SdtLeaveRequest(context);
