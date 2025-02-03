@@ -4,7 +4,7 @@ info:
   description: "API_Time Tracker"
   version: "20250203062619"
 servers:
-  - url: http://localhost:8082/YTT_version4NETPostgreSQL14/API_TimeTracker
+  - url: https://stagingtimetracker.yukon.software/API_TimeTracker
 paths:
   /export-ics-leaves:
     post:
