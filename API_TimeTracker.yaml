@@ -4,7 +4,7 @@ info:
   description: "API_Time Tracker"
   version: "20250203062619"
 servers:
-  - url: https://stagingtimetracker.yukon.software/API_TimeTracker
+  - url: https://staging.timetracker.yukon.software/API_TimeTracker
 paths:
   /export-ics-leaves:
     post:
