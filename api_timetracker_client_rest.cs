@@ -84,38 +84,33 @@ namespace GeneXus.Programs {
          restLocation = gxobjppt.Location ;
       }
 
-      public void gxep_api_exporticsleaves( [GxJsonFormat("yyyy-MM-dd")] DateTime aP0_FromDate ,
-                                            [GxJsonFormat("yyyy-MM-dd")] DateTime aP1_ToDate ,
-                                            long aP2_EmployeeId ,
-                                            out string aP3_Filename ,
-                                            out string aP4_ErrorMessage )
+      public void gxep_api_icsleaveapi( string aP0_Username ,
+                                        string aP1_Password ,
+                                        out string aP2_ICSLeaveExport )
       {
-         restCliAPI_ExportICSLeaves = new GXRestAPIClient();
+         restCliAPI_ICSLeaveAPI = new GXRestAPIClient();
          if ( restLocation == null )
          {
             InitLocation();
          }
          restLocation.ResourceName = "/export-ics-leaves";
-         restCliAPI_ExportICSLeaves.Location = restLocation;
-         restCliAPI_ExportICSLeaves.HttpMethod = "POST";
-         restCliAPI_ExportICSLeaves.AddBodyVar("FromDate", (DateTime)(aP0_FromDate));
-         restCliAPI_ExportICSLeaves.AddBodyVar("ToDate", (DateTime)(aP1_ToDate));
-         restCliAPI_ExportICSLeaves.AddBodyVar("EmployeeId", (long)(aP2_EmployeeId));
-         restCliAPI_ExportICSLeaves.RestExecute();
-         if ( restCliAPI_ExportICSLeaves.ErrorCode != 0 )
+         restCliAPI_ICSLeaveAPI.Location = restLocation;
+         restCliAPI_ICSLeaveAPI.HttpMethod = "POST";
+         restCliAPI_ICSLeaveAPI.AddBodyVar("Username", (string)(aP0_Username));
+         restCliAPI_ICSLeaveAPI.AddBodyVar("Password", (string)(aP1_Password));
+         restCliAPI_ICSLeaveAPI.RestExecute();
+         if ( restCliAPI_ICSLeaveAPI.ErrorCode != 0 )
          {
-            gxProperties.ErrorCode = restCliAPI_ExportICSLeaves.ErrorCode;
-            gxProperties.ErrorMessage = restCliAPI_ExportICSLeaves.ErrorMessage;
-            gxProperties.StatusCode = restCliAPI_ExportICSLeaves.StatusCode;
-            aP3_Filename = "";
-            aP4_ErrorMessage = "";
+            gxProperties.ErrorCode = restCliAPI_ICSLeaveAPI.ErrorCode;
+            gxProperties.ErrorMessage = restCliAPI_ICSLeaveAPI.ErrorMessage;
+            gxProperties.StatusCode = restCliAPI_ICSLeaveAPI.StatusCode;
+            aP2_ICSLeaveExport = "";
          }
          else
          {
-            aP3_Filename = restCliAPI_ExportICSLeaves.GetBodyString("Filename");
-            aP4_ErrorMessage = restCliAPI_ExportICSLeaves.GetBodyString("ErrorMessage");
+            aP2_ICSLeaveExport = restCliAPI_ICSLeaveAPI.GetBodyString("ICSLeaveExport");
          }
-         /* API_ExportICSLeaves Constructor */
+         /* API_ICSLeaveAPI Constructor */
       }
 
       public override void cleanup( )
@@ -126,20 +121,18 @@ namespace GeneXus.Programs {
       public override void initialize( )
       {
          gxProperties = new GxObjectProperties();
-         restCliAPI_ExportICSLeaves = new GXRestAPIClient();
-         aP3_Filename = "";
-         aP4_ErrorMessage = "";
+         restCliAPI_ICSLeaveAPI = new GXRestAPIClient();
+         aP2_ICSLeaveExport = "";
          /* GeneXus formulas. */
       }
 
       protected string Gx_restmethod ;
-      protected GXRestAPIClient restCliAPI_ExportICSLeaves ;
+      protected GXRestAPIClient restCliAPI_ICSLeaveAPI ;
       protected GxLocation restLocation ;
       protected GxObjectProperties gxProperties ;
       protected IGxDataStore dsGAM ;
       protected IGxDataStore dsDefault ;
-      protected string aP3_Filename ;
-      protected string aP4_ErrorMessage ;
+      protected string aP2_ICSLeaveExport ;
    }
 
 }

@@ -31,9 +31,9 @@ namespace GeneXus.Programs {
 
       protected override GAMSecurityLevel ApiIntegratedSecurityLevel( string permissionMethod )
       {
-         if ( StringUtil.StrCmp(permissionMethod, "gxep_api_exporticsleaves") == 0 )
+         if ( StringUtil.StrCmp(permissionMethod, "gxep_api_icsleaveapi") == 0 )
          {
-            return GAMSecurityLevel.SecurityLow ;
+            return GAMSecurityLevel.SecurityNone ;
          }
          return GAMSecurityLevel.SecurityLow ;
       }
@@ -77,20 +77,16 @@ namespace GeneXus.Programs {
          cleanup();
       }
 
-      public void gxep_api_exporticsleaves( [GxJsonFormat("yyyy-MM-dd")] DateTime aP0_FromDate ,
-                                            [GxJsonFormat("yyyy-MM-dd")] DateTime aP1_ToDate ,
-                                            long aP2_EmployeeId ,
-                                            out string aP3_Filename ,
-                                            out string aP4_ErrorMessage )
+      public void gxep_api_icsleaveapi( string aP0_Username ,
+                                        string aP1_Password ,
+                                        out string aP2_ICSLeaveExport )
       {
-         this.AV6FromDate = aP0_FromDate;
-         this.AV7ToDate = aP1_ToDate;
-         this.AV9EmployeeId = aP2_EmployeeId;
+         this.AV14Username = aP0_Username;
+         this.AV13Password = aP1_Password;
          initialize();
-         /* API_ExportICSLeaves Constructor */
-         new prc_exporticsleaves(context ).execute(  AV6FromDate,  AV7ToDate,  AV9EmployeeId, out  AV10Filename, out  AV11ErrorMessage) ;
-         aP3_Filename=this.AV10Filename;
-         aP4_ErrorMessage=this.AV11ErrorMessage;
+         /* API_ICSLeaveAPI Constructor */
+         new prc_icsleaveapi(context ).execute(  AV14Username,  AV13Password, out  AV12ICSLeaveExport) ;
+         aP2_ICSLeaveExport=this.AV12ICSLeaveExport;
       }
 
       public override void cleanup( )
@@ -100,21 +96,17 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
-         AV10Filename = "";
-         AV11ErrorMessage = "";
+         AV12ICSLeaveExport = "";
          /* GeneXus formulas. */
       }
 
-      protected long AV9EmployeeId ;
       protected string Gx_restmethod ;
-      protected DateTime AV6FromDate ;
-      protected DateTime AV7ToDate ;
-      protected string AV11ErrorMessage ;
-      protected string AV10Filename ;
+      protected string AV12ICSLeaveExport ;
+      protected string AV14Username ;
+      protected string AV13Password ;
       protected IGxDataStore dsGAM ;
       protected IGxDataStore dsDefault ;
-      protected string aP3_Filename ;
-      protected string aP4_ErrorMessage ;
+      protected string aP2_ICSLeaveExport ;
    }
 
 }
