@@ -40,7 +40,7 @@ components:
       description: GAM OAuth 2
       flows:
         password:          
-          tokenUrl: http://localhost:8082/YTT_version4NETPostgreSQL14/oauth/gam/v2.0/access_token
+          tokenUrl: https://staging.timetracker.yukon.software/oauth/gam/v2.0/access_token
           scopes: 
             fullcontrol: Full access
 

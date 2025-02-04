@@ -62,7 +62,7 @@ namespace GeneXus.Programs {
          restLocation = new GxLocation();
          restLocation.Host = "localhost";
          restLocation.Port = 8082;
-         restLocation.BaseUrl = "YTT_version4NETPostgreSQL14/API_TimeTracker";
+         restLocation.BaseUrl = "YTT_version4NETPostgreSQL14/api";
          gxProperties = new GxObjectProperties();
       }
 
