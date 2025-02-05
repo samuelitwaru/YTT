@@ -60,11 +60,11 @@
 		
 		<tfoot>
 			<tr class="GridWithPaginationBar GridNoBorder WorkWithOdd">
-				<td id='project-footer' style="font-weight: bold;background:#fff; position:sticky; left:0; z-index:1">Total</td>
+				<td id='project-footer' class="text-center" style="font-weight: bold;background:#fff; position:sticky; left:0; z-index:1">Total</td>
 				<!-- Project Footer Cells Go Here -->
-				<td id='totalWorkHours' class="work text-center" style='bold;background:#f5f5f5;'></td>
-				<td class="leave text-center" style=''></td>
-				<td class="leave text-center" style=''>{{gxTpr_FormattedOverallTotalHours}}{{FormattedOverallTotalHours}}</td>
+				<td id='totalWorkHours' class="work text-center" style="bold;background:#f5f5f5;"></td>
+				<td class="leave text-center project-header" style="bold;background:#f5f5f5;"></td>
+				<td class="leave text-center project-header" style="bold;background:#f5f5f5;">{{gxTpr_FormattedOverallTotalHours}}{{FormattedOverallTotalHours}}</td>
 			</tr>
 		<tfoot>		
 	</table>
