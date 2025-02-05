@@ -21,7 +21,7 @@ using GeneXus.Http.Server;
 using System.Xml.Serialization;
 using System.Runtime.Serialization;
 namespace GeneXus.Programs {
-   public class projectdetails : GXDataArea
+   public class projectdetails : GXWebComponent
    {
       public projectdetails( )
       {
@@ -30,7 +30,10 @@ namespace GeneXus.Programs {
          dsGAM = context.GetDataStore("GAM");
          dsDefault = context.GetDataStore("Default");
          IsMain = true;
-         context.SetDefaultTheme("WorkWithPlusDS", true);
+         if ( StringUtil.Len( (string)(sPrefix)) == 0 )
+         {
+            context.SetDefaultTheme("WorkWithPlusDS", true);
+         }
       }
 
       public projectdetails( IGxContext context )
@@ -59,6 +62,11 @@ namespace GeneXus.Programs {
          webExecute();
       }
 
+      public override void SetPrefix( string sPPrefix )
+      {
+         sPrefix = sPPrefix;
+      }
+
       protected override void createObjects( )
       {
       }
@@ -66,90 +74,108 @@ namespace GeneXus.Programs {
       protected void INITWEB( )
       {
          initialize_properties( ) ;
-         if ( nGotPars == 0 )
+         if ( StringUtil.Len( (string)(sPrefix)) == 0 )
          {
-            entryPointCalled = false;
-            gxfirstwebparm = GetFirstPar( "OneProjectId");
-            gxfirstwebparm_bkp = gxfirstwebparm;
-            gxfirstwebparm = DecryptAjaxCall( gxfirstwebparm);
-            toggleJsOutput = isJsOutputEnabled( );
-            if ( context.isSpaRequest( ) )
+            if ( nGotPars == 0 )
             {
-               disableJsOutput();
-            }
-            if ( StringUtil.StrCmp(gxfirstwebparm, "dyncall") == 0 )
-            {
-               setAjaxCallMode();
-               if ( ! IsValidAjaxCall( true) )
-               {
-                  GxWebError = 1;
-                  return  ;
-               }
-               dyncall( GetNextPar( )) ;
-               return  ;
-            }
-            else if ( StringUtil.StrCmp(gxfirstwebparm, "gxajaxEvt") == 0 )
-            {
-               setAjaxEventMode();
-               if ( ! IsValidAjaxCall( true) )
-               {
-                  GxWebError = 1;
-                  return  ;
-               }
+               entryPointCalled = false;
                gxfirstwebparm = GetFirstPar( "OneProjectId");
-            }
-            else if ( StringUtil.StrCmp(gxfirstwebparm, "gxfullajaxEvt") == 0 )
-            {
-               if ( ! IsValidAjaxCall( true) )
-               {
-                  GxWebError = 1;
-                  return  ;
-               }
-               gxfirstwebparm = GetFirstPar( "OneProjectId");
-            }
-            else if ( StringUtil.StrCmp(gxfirstwebparm, "gxajaxNewRow_"+"Freestylegrid1") == 0 )
-            {
-               gxnrFreestylegrid1_newrow_invoke( ) ;
-               return  ;
-            }
-            else if ( StringUtil.StrCmp(gxfirstwebparm, "gxajaxGridRefresh_"+"Freestylegrid1") == 0 )
-            {
-               gxgrFreestylegrid1_refresh_invoke( ) ;
-               return  ;
-            }
-            else
-            {
-               if ( ! IsValidAjaxCall( false) )
-               {
-                  GxWebError = 1;
-                  return  ;
-               }
-               gxfirstwebparm = gxfirstwebparm_bkp;
-            }
-            if ( ! entryPointCalled && ! ( isAjaxCallMode( ) || isFullAjaxMode( ) ) )
-            {
-               AV22OneProjectId = (short)(Math.Round(NumberUtil.Val( gxfirstwebparm, "."), 18, MidpointRounding.ToEven));
-               AssignAttri("", false, "AV22OneProjectId", StringUtil.LTrimStr( (decimal)(AV22OneProjectId), 4, 0));
-               GxWebStd.gx_hidden_field( context, "gxhash_vONEPROJECTID", GetSecureSignedToken( "", context.localUtil.Format( (decimal)(AV22OneProjectId), "ZZZ9"), context));
-               if ( StringUtil.StrCmp(gxfirstwebparm, "viewer") != 0 )
-               {
-                  AV15FromDate = context.localUtil.ParseDateParm( GetPar( "FromDate"));
-                  AssignAttri("", false, "AV15FromDate", context.localUtil.Format(AV15FromDate, "99/99/99"));
-                  AV16ToDate = context.localUtil.ParseDateParm( GetPar( "ToDate"));
-                  AssignAttri("", false, "AV16ToDate", context.localUtil.Format(AV16ToDate, "99/99/99"));
-               }
-            }
-            if ( toggleJsOutput )
-            {
+               gxfirstwebparm_bkp = gxfirstwebparm;
+               gxfirstwebparm = DecryptAjaxCall( gxfirstwebparm);
+               toggleJsOutput = isJsOutputEnabled( );
                if ( context.isSpaRequest( ) )
                {
-                  enableJsOutput();
+                  disableJsOutput();
+               }
+               if ( StringUtil.StrCmp(gxfirstwebparm, "dyncall") == 0 )
+               {
+                  setAjaxCallMode();
+                  if ( ! IsValidAjaxCall( true) )
+                  {
+                     GxWebError = 1;
+                     return  ;
+                  }
+                  dyncall( GetNextPar( )) ;
+                  return  ;
+               }
+               else if ( StringUtil.StrCmp(gxfirstwebparm, "dyncomponent") == 0 )
+               {
+                  setAjaxEventMode();
+                  if ( ! IsValidAjaxCall( true) )
+                  {
+                     GxWebError = 1;
+                     return  ;
+                  }
+                  nDynComponent = 1;
+                  sCompPrefix = GetPar( "sCompPrefix");
+                  sSFPrefix = GetPar( "sSFPrefix");
+                  AV22OneProjectId = (short)(Math.Round(NumberUtil.Val( GetPar( "OneProjectId"), "."), 18, MidpointRounding.ToEven));
+                  AssignAttri(sPrefix, false, "AV22OneProjectId", StringUtil.LTrimStr( (decimal)(AV22OneProjectId), 4, 0));
+                  AV15FromDate = context.localUtil.ParseDateParm( GetPar( "FromDate"));
+                  AssignAttri(sPrefix, false, "AV15FromDate", context.localUtil.Format(AV15FromDate, "99/99/99"));
+                  AV16ToDate = context.localUtil.ParseDateParm( GetPar( "ToDate"));
+                  AssignAttri(sPrefix, false, "AV16ToDate", context.localUtil.Format(AV16ToDate, "99/99/99"));
+                  setjustcreated();
+                  componentprepare(new Object[] {(string)sCompPrefix,(string)sSFPrefix,(short)AV22OneProjectId,(DateTime)AV15FromDate,(DateTime)AV16ToDate});
+                  componentstart();
+                  context.httpAjaxContext.ajax_rspStartCmp(sPrefix);
+                  componentdraw();
+                  context.httpAjaxContext.ajax_rspEndCmp();
+                  return  ;
+               }
+               else if ( StringUtil.StrCmp(gxfirstwebparm, "gxajaxEvt") == 0 )
+               {
+                  setAjaxEventMode();
+                  if ( ! IsValidAjaxCall( true) )
+                  {
+                     GxWebError = 1;
+                     return  ;
+                  }
+                  gxfirstwebparm = GetFirstPar( "OneProjectId");
+               }
+               else if ( StringUtil.StrCmp(gxfirstwebparm, "gxfullajaxEvt") == 0 )
+               {
+                  if ( ! IsValidAjaxCall( true) )
+                  {
+                     GxWebError = 1;
+                     return  ;
+                  }
+                  gxfirstwebparm = GetFirstPar( "OneProjectId");
+               }
+               else if ( StringUtil.StrCmp(gxfirstwebparm, "gxajaxNewRow_"+"Freestylegrid1") == 0 )
+               {
+                  gxnrFreestylegrid1_newrow_invoke( ) ;
+                  return  ;
+               }
+               else if ( StringUtil.StrCmp(gxfirstwebparm, "gxajaxGridRefresh_"+"Freestylegrid1") == 0 )
+               {
+                  gxgrFreestylegrid1_refresh_invoke( ) ;
+                  return  ;
+               }
+               else
+               {
+                  if ( ! IsValidAjaxCall( false) )
+                  {
+                     GxWebError = 1;
+                     return  ;
+                  }
+                  gxfirstwebparm = gxfirstwebparm_bkp;
+               }
+               if ( toggleJsOutput )
+               {
+                  if ( context.isSpaRequest( ) )
+                  {
+                     enableJsOutput();
+                  }
                }
             }
          }
-         if ( ! context.IsLocalStorageSupported( ) )
+         if ( StringUtil.Len( sPrefix) == 0 )
          {
-            context.PushCurrentUrl();
+            if ( ! context.IsLocalStorageSupported( ) )
+            {
+               context.PushCurrentUrl();
+            }
          }
       }
 
@@ -158,10 +184,11 @@ namespace GeneXus.Programs {
          nRC_GXsfl_23 = (int)(Math.Round(NumberUtil.Val( GetPar( "nRC_GXsfl_23"), "."), 18, MidpointRounding.ToEven));
          nGXsfl_23_idx = (int)(Math.Round(NumberUtil.Val( GetPar( "nGXsfl_23_idx"), "."), 18, MidpointRounding.ToEven));
          sGXsfl_23_idx = GetPar( "sGXsfl_23_idx");
+         sPrefix = GetPar( "sPrefix");
          edtEmployeeName_Visible = (int)(Math.Round(NumberUtil.Val( GetNextPar( ), "."), 18, MidpointRounding.ToEven));
-         AssignProp("", false, edtEmployeeName_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtEmployeeName_Visible), 5, 0), !bGXsfl_23_Refreshing);
+         AssignProp(sPrefix, false, edtEmployeeName_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtEmployeeName_Visible), 5, 0), !bGXsfl_23_Refreshing);
          edtEmployeeId_Visible = (int)(Math.Round(NumberUtil.Val( GetNextPar( ), "."), 18, MidpointRounding.ToEven));
-         AssignProp("", false, edtEmployeeId_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtEmployeeId_Visible), 5, 0), !bGXsfl_23_Refreshing);
+         AssignProp(sPrefix, false, edtEmployeeId_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtEmployeeId_Visible), 5, 0), !bGXsfl_23_Refreshing);
          setAjaxCallMode();
          if ( ! IsValidAjaxCall( true) )
          {
@@ -179,16 +206,18 @@ namespace GeneXus.Programs {
          AV15FromDate = context.localUtil.ParseDateParm( GetPar( "FromDate"));
          AV16ToDate = context.localUtil.ParseDateParm( GetPar( "ToDate"));
          edtEmployeeName_Visible = (int)(Math.Round(NumberUtil.Val( GetNextPar( ), "."), 18, MidpointRounding.ToEven));
-         AssignProp("", false, edtEmployeeName_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtEmployeeName_Visible), 5, 0), !bGXsfl_23_Refreshing);
+         AssignProp(sPrefix, false, edtEmployeeName_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtEmployeeName_Visible), 5, 0), !bGXsfl_23_Refreshing);
          edtEmployeeId_Visible = (int)(Math.Round(NumberUtil.Val( GetNextPar( ), "."), 18, MidpointRounding.ToEven));
-         AssignProp("", false, edtEmployeeId_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtEmployeeId_Visible), 5, 0), !bGXsfl_23_Refreshing);
+         AssignProp(sPrefix, false, edtEmployeeId_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtEmployeeId_Visible), 5, 0), !bGXsfl_23_Refreshing);
+         sPrefix = GetPar( "sPrefix");
+         init_default_properties( ) ;
          setAjaxCallMode();
          if ( ! IsValidAjaxCall( true) )
          {
             GxWebError = 1;
             return  ;
          }
-         gxgrFreestylegrid1_refresh( subFreestylegrid1_Rows, AV22OneProjectId, AV15FromDate, AV16ToDate) ;
+         gxgrFreestylegrid1_refresh( subFreestylegrid1_Rows, AV22OneProjectId, AV15FromDate, AV16ToDate, sPrefix) ;
          AddString( context.getJSONResponse( )) ;
          /* End function gxgrFreestylegrid1_refresh_invoke */
       }
@@ -216,10 +245,23 @@ namespace GeneXus.Programs {
          INITWEB( ) ;
          if ( ! isAjaxCallMode( ) )
          {
-            MasterPageObj = (GXMasterPage) ClassLoader.GetInstance("wwpbaseobjects.workwithplusmasterpage", "GeneXus.Programs.wwpbaseobjects.workwithplusmasterpage", new Object[] {context});
-            MasterPageObj.setDataArea(this,false);
-            ValidateSpaRequest();
-            MasterPageObj.webExecute();
+            if ( StringUtil.Len( sPrefix) == 0 )
+            {
+               ValidateSpaRequest();
+            }
+            PA4Y2( ) ;
+            if ( ( GxWebError == 0 ) && ! isAjaxCallMode( ) )
+            {
+               /* GeneXus formulas. */
+               WS4Y2( ) ;
+               if ( ! isAjaxCallMode( ) )
+               {
+                  if ( nDynComponent == 0 )
+                  {
+                     throw new System.Net.WebException("WebComponent is not allowed to run") ;
+                  }
+               }
+            }
             if ( ( GxWebError == 0 ) && context.isAjaxRequest( ) )
             {
                enableOutput();
@@ -246,45 +288,32 @@ namespace GeneXus.Programs {
          cleanup();
       }
 
-      public override short ExecuteStartEvent( )
-      {
-         PA4Y2( ) ;
-         gxajaxcallmode = (short)((isAjaxCallMode( ) ? 1 : 0));
-         if ( ( gxajaxcallmode == 0 ) && ( GxWebError == 0 ) )
-         {
-            START4Y2( ) ;
-         }
-         return gxajaxcallmode ;
-      }
-
-      public override void RenderHtmlHeaders( )
+      protected void RenderHtmlHeaders( )
       {
          GxWebStd.gx_html_headers( context, 0, "", "", Form.Meta, Form.Metaequiv, true);
       }
 
-      public override void RenderHtmlOpenForm( )
+      protected void RenderHtmlOpenForm( )
       {
-         if ( context.isSpaRequest( ) )
+         if ( StringUtil.Len( sPrefix) == 0 )
          {
-            enableOutput();
+            if ( context.isSpaRequest( ) )
+            {
+               enableOutput();
+            }
+            context.WriteHtmlText( "<title>") ;
+            context.SendWebValue( "Project Details") ;
+            context.WriteHtmlTextNl( "</title>") ;
+            if ( context.isSpaRequest( ) )
+            {
+               disableOutput();
+            }
+            if ( StringUtil.Len( sDynURL) > 0 )
+            {
+               context.WriteHtmlText( "<BASE href=\""+sDynURL+"\" />") ;
+            }
+            define_styles( ) ;
          }
-         context.WriteHtmlText( "<title>") ;
-         context.SendWebValue( Form.Caption) ;
-         context.WriteHtmlTextNl( "</title>") ;
-         if ( context.isSpaRequest( ) )
-         {
-            disableOutput();
-         }
-         if ( StringUtil.Len( sDynURL) > 0 )
-         {
-            context.WriteHtmlText( "<BASE href=\""+sDynURL+"\" />") ;
-         }
-         define_styles( ) ;
-         if ( nGXWrapped != 1 )
-         {
-            MasterPageObj.master_styles();
-         }
-         CloseStyles();
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
             context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
@@ -300,47 +329,74 @@ namespace GeneXus.Programs {
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/DVPaginationBar/DVPaginationBarRender.js", "", false, true);
          context.AddJavascriptSource("Window/InNewWindowRender.js", "", false, true);
-         context.WriteHtmlText( Form.Headerrawhtml) ;
-         context.CloseHtmlHeader();
-         if ( context.isSpaRequest( ) )
+         if ( StringUtil.Len( sPrefix) == 0 )
          {
-            disableOutput();
+            context.CloseHtmlHeader();
+            if ( context.isSpaRequest( ) )
+            {
+               disableOutput();
+            }
+            FormProcess = " data-HasEnter=\"false\" data-Skiponenter=\"false\"";
+            context.WriteHtmlText( "<body ") ;
+            if ( StringUtil.StrCmp(context.GetLanguageProperty( "rtl"), "true") == 0 )
+            {
+               context.WriteHtmlText( " dir=\"rtl\" ") ;
+            }
+            bodyStyle = "";
+            if ( nGXWrapped == 0 )
+            {
+               bodyStyle += "-moz-opacity:0;opacity:0;";
+            }
+            context.WriteHtmlText( " "+"class=\"form-horizontal Form\""+" "+ "style='"+bodyStyle+"'") ;
+            context.WriteHtmlText( FormProcess+">") ;
+            context.skipLines(1);
+            context.WriteHtmlTextNl( "<form id=\"MAINFORM\" autocomplete=\"off\" name=\"MAINFORM\" method=\"post\" tabindex=-1  class=\"form-horizontal Form\" data-gx-class=\"form-horizontal Form\" novalidate action=\""+formatLink("projectdetails.aspx", new object[] {UrlEncode(StringUtil.LTrimStr(AV22OneProjectId,4,0)),UrlEncode(DateTimeUtil.FormatDateParm(AV15FromDate)),UrlEncode(DateTimeUtil.FormatDateParm(AV16ToDate))}, new string[] {"OneProjectId","FromDate","ToDate"}) +"\">") ;
+            GxWebStd.gx_hidden_field( context, "_EventName", "");
+            GxWebStd.gx_hidden_field( context, "_EventGridId", "");
+            GxWebStd.gx_hidden_field( context, "_EventRowId", "");
+            context.WriteHtmlText( "<div style=\"height:0;overflow:hidden\"><input type=\"submit\" title=\"submit\"  disabled></div>") ;
+            AssignProp(sPrefix, false, "FORM", "Class", "form-horizontal Form", true);
          }
-         FormProcess = " data-HasEnter=\"false\" data-Skiponenter=\"false\"";
-         context.WriteHtmlText( "<body ") ;
-         if ( StringUtil.StrCmp(context.GetLanguageProperty( "rtl"), "true") == 0 )
+         else
          {
-            context.WriteHtmlText( " dir=\"rtl\" ") ;
+            bool toggleHtmlOutput = isOutputEnabled( );
+            if ( StringUtil.StringSearch( sPrefix, "MP", 1) == 1 )
+            {
+               if ( context.isSpaRequest( ) )
+               {
+                  disableOutput();
+               }
+            }
+            context.WriteHtmlText( "<div") ;
+            GxWebStd.ClassAttribute( context, "gxwebcomponent-body"+" "+(String.IsNullOrEmpty(StringUtil.RTrim( Form.Class)) ? "form-horizontal Form" : Form.Class)+"-fx");
+            context.WriteHtmlText( ">") ;
+            if ( toggleHtmlOutput )
+            {
+               if ( StringUtil.StringSearch( sPrefix, "MP", 1) == 1 )
+               {
+                  if ( context.isSpaRequest( ) )
+                  {
+                     enableOutput();
+                  }
+               }
+            }
+            toggleJsOutput = isJsOutputEnabled( );
+            if ( context.isSpaRequest( ) )
+            {
+               disableJsOutput();
+            }
          }
-         bodyStyle = "" + "background-color:" + context.BuildHTMLColor( Form.Backcolor) + ";color:" + context.BuildHTMLColor( Form.Textcolor) + ";";
-         if ( nGXWrapped == 0 )
+         if ( StringUtil.StringSearch( sPrefix, "MP", 1) == 1 )
          {
-            bodyStyle += "-moz-opacity:0;opacity:0;";
-         }
-         if ( ! ( String.IsNullOrEmpty(StringUtil.RTrim( Form.Background)) ) )
-         {
-            bodyStyle += " background-image:url(" + context.convertURL( Form.Background) + ")";
-         }
-         context.WriteHtmlText( " "+"class=\"form-horizontal Form\""+" "+ "style='"+bodyStyle+"'") ;
-         context.WriteHtmlText( FormProcess+">") ;
-         context.skipLines(1);
-         context.WriteHtmlTextNl( "<form id=\"MAINFORM\" autocomplete=\"off\" name=\"MAINFORM\" method=\"post\" tabindex=-1  class=\"form-horizontal Form\" data-gx-class=\"form-horizontal Form\" novalidate action=\""+formatLink("projectdetails.aspx", new object[] {UrlEncode(StringUtil.LTrimStr(AV22OneProjectId,4,0)),UrlEncode(DateTimeUtil.FormatDateParm(AV15FromDate)),UrlEncode(DateTimeUtil.FormatDateParm(AV16ToDate))}, new string[] {"OneProjectId","FromDate","ToDate"}) +"\">") ;
-         GxWebStd.gx_hidden_field( context, "_EventName", "");
-         GxWebStd.gx_hidden_field( context, "_EventGridId", "");
-         GxWebStd.gx_hidden_field( context, "_EventRowId", "");
-         context.WriteHtmlText( "<div style=\"height:0;overflow:hidden\"><input type=\"submit\" title=\"submit\"  disabled></div>") ;
-         AssignProp("", false, "FORM", "Class", "form-horizontal Form", true);
-         toggleJsOutput = isJsOutputEnabled( );
-         if ( context.isSpaRequest( ) )
-         {
-            disableJsOutput();
+            if ( context.isSpaRequest( ) )
+            {
+               disableOutput();
+            }
          }
       }
 
       protected void send_integrity_footer_hashes( )
       {
-         GxWebStd.gx_hidden_field( context, "vONEPROJECTID", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV22OneProjectId), 4, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "gxhash_vONEPROJECTID", GetSecureSignedToken( "", context.localUtil.Format( (decimal)(AV22OneProjectId), "ZZZ9"), context));
          GXKey = Decrypt64( context.GetCookie( "GX_SESSION_ID"), Crypto.GetServerKey( ));
       }
 
@@ -349,151 +405,146 @@ namespace GeneXus.Programs {
          /* Send hidden variables. */
          /* Send saved values. */
          send_integrity_footer_hashes( ) ;
-         GxWebStd.gx_hidden_field( context, "nRC_GXsfl_23", StringUtil.LTrim( StringUtil.NToC( (decimal)(nRC_GXsfl_23), 8, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "vFREESTYLEGRID1PAGECOUNT", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV10FreeStyleGrid1PageCount), 10, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "vFREESTYLEGRID1APPLIEDFILTERS", AV11FreeStyleGrid1AppliedFilters);
-         GxWebStd.gx_hidden_field( context, "vFROMDATE", context.localUtil.DToC( AV15FromDate, 0, "/"));
-         GxWebStd.gx_hidden_field( context, "vTODATE", context.localUtil.DToC( AV16ToDate, 0, "/"));
-         GxWebStd.gx_hidden_field( context, "vONEPROJECTID", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV22OneProjectId), 4, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "gxhash_vONEPROJECTID", GetSecureSignedToken( "", context.localUtil.Format( (decimal)(AV22OneProjectId), "ZZZ9"), context));
+         GxWebStd.gx_hidden_field( context, sPrefix+"nRC_GXsfl_23", StringUtil.LTrim( StringUtil.NToC( (decimal)(nRC_GXsfl_23), 8, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"vFREESTYLEGRID1PAGECOUNT", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV10FreeStyleGrid1PageCount), 10, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"vFREESTYLEGRID1APPLIEDFILTERS", AV11FreeStyleGrid1AppliedFilters);
+         GxWebStd.gx_hidden_field( context, sPrefix+"wcpOAV22OneProjectId", StringUtil.LTrim( StringUtil.NToC( (decimal)(wcpOAV22OneProjectId), 4, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"wcpOAV15FromDate", context.localUtil.DToC( wcpOAV15FromDate, 0, "/"));
+         GxWebStd.gx_hidden_field( context, sPrefix+"wcpOAV16ToDate", context.localUtil.DToC( wcpOAV16ToDate, 0, "/"));
+         GxWebStd.gx_hidden_field( context, sPrefix+"vFROMDATE", context.localUtil.DToC( AV15FromDate, 0, "/"));
+         GxWebStd.gx_hidden_field( context, sPrefix+"vTODATE", context.localUtil.DToC( AV16ToDate, 0, "/"));
+         GxWebStd.gx_hidden_field( context, sPrefix+"vONEPROJECTID", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV22OneProjectId), 4, 0, ".", "")));
          if ( context.isAjaxRequest( ) )
          {
-            context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "vPROJECTID", AV14ProjectId);
+            context.httpAjaxContext.ajax_rsp_assign_sdt_attri(sPrefix, false, sPrefix+"vPROJECTID", AV14ProjectId);
          }
          else
          {
-            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("vPROJECTID", AV14ProjectId);
+            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt(sPrefix+"vPROJECTID", AV14ProjectId);
          }
          if ( context.isAjaxRequest( ) )
          {
-            context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "vEMPLOYEEID", AV13EmployeeId);
+            context.httpAjaxContext.ajax_rsp_assign_sdt_attri(sPrefix, false, sPrefix+"vEMPLOYEEID", AV13EmployeeId);
          }
          else
          {
-            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("vEMPLOYEEID", AV13EmployeeId);
+            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt(sPrefix+"vEMPLOYEEID", AV13EmployeeId);
          }
-         GxWebStd.gx_hidden_field( context, "vDATERANGE", context.localUtil.DToC( AV21DateRange, 0, "/"));
-         GxWebStd.gx_hidden_field( context, "vDATERANGE_TO", context.localUtil.DToC( AV26DateRange_To, 0, "/"));
+         GxWebStd.gx_hidden_field( context, sPrefix+"vDATERANGE", context.localUtil.DToC( AV21DateRange, 0, "/"));
+         GxWebStd.gx_hidden_field( context, sPrefix+"vDATERANGE_TO", context.localUtil.DToC( AV26DateRange_To, 0, "/"));
          if ( context.isAjaxRequest( ) )
          {
-            context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "vCOMPANYLOCATIONID", AV12CompanyLocationId);
+            context.httpAjaxContext.ajax_rsp_assign_sdt_attri(sPrefix, false, sPrefix+"vCOMPANYLOCATIONID", AV12CompanyLocationId);
          }
          else
          {
-            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("vCOMPANYLOCATIONID", AV12CompanyLocationId);
-         }
-         if ( context.isAjaxRequest( ) )
-         {
-            context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "vINPROJECTID", AV32InProjectId);
-         }
-         else
-         {
-            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("vINPROJECTID", AV32InProjectId);
+            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt(sPrefix+"vCOMPANYLOCATIONID", AV12CompanyLocationId);
          }
          if ( context.isAjaxRequest( ) )
          {
-            context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "vINEMPLOYEEID", AV31InEmployeeId);
+            context.httpAjaxContext.ajax_rsp_assign_sdt_attri(sPrefix, false, sPrefix+"vINPROJECTID", AV32InProjectId);
          }
          else
          {
-            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("vINEMPLOYEEID", AV31InEmployeeId);
+            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt(sPrefix+"vINPROJECTID", AV32InProjectId);
          }
          if ( context.isAjaxRequest( ) )
          {
-            context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "vINCOMPANYLOCATIONID", AV30InCompanyLocationId);
+            context.httpAjaxContext.ajax_rsp_assign_sdt_attri(sPrefix, false, sPrefix+"vINEMPLOYEEID", AV31InEmployeeId);
          }
          else
          {
-            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("vINCOMPANYLOCATIONID", AV30InCompanyLocationId);
+            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt(sPrefix+"vINEMPLOYEEID", AV31InEmployeeId);
          }
-         GxWebStd.gx_hidden_field( context, "FREESTYLEGRID1_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(FREESTYLEGRID1_nFirstRecordOnPage), 15, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "FREESTYLEGRID1_nEOF", StringUtil.LTrim( StringUtil.NToC( (decimal)(FREESTYLEGRID1_nEOF), 1, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "FREESTYLEGRID1_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subFreestylegrid1_Rows), 6, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "FREESTYLEGRID1PAGINATIONBAR_Class", StringUtil.RTrim( Freestylegrid1paginationbar_Class));
-         GxWebStd.gx_hidden_field( context, "FREESTYLEGRID1PAGINATIONBAR_Showfirst", StringUtil.BoolToStr( Freestylegrid1paginationbar_Showfirst));
-         GxWebStd.gx_hidden_field( context, "FREESTYLEGRID1PAGINATIONBAR_Showprevious", StringUtil.BoolToStr( Freestylegrid1paginationbar_Showprevious));
-         GxWebStd.gx_hidden_field( context, "FREESTYLEGRID1PAGINATIONBAR_Shownext", StringUtil.BoolToStr( Freestylegrid1paginationbar_Shownext));
-         GxWebStd.gx_hidden_field( context, "FREESTYLEGRID1PAGINATIONBAR_Showlast", StringUtil.BoolToStr( Freestylegrid1paginationbar_Showlast));
-         GxWebStd.gx_hidden_field( context, "FREESTYLEGRID1PAGINATIONBAR_Pagestoshow", StringUtil.LTrim( StringUtil.NToC( (decimal)(Freestylegrid1paginationbar_Pagestoshow), 9, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "FREESTYLEGRID1PAGINATIONBAR_Pagingbuttonsposition", StringUtil.RTrim( Freestylegrid1paginationbar_Pagingbuttonsposition));
-         GxWebStd.gx_hidden_field( context, "FREESTYLEGRID1PAGINATIONBAR_Pagingcaptionposition", StringUtil.RTrim( Freestylegrid1paginationbar_Pagingcaptionposition));
-         GxWebStd.gx_hidden_field( context, "FREESTYLEGRID1PAGINATIONBAR_Emptygridclass", StringUtil.RTrim( Freestylegrid1paginationbar_Emptygridclass));
-         GxWebStd.gx_hidden_field( context, "FREESTYLEGRID1PAGINATIONBAR_Rowsperpageselector", StringUtil.BoolToStr( Freestylegrid1paginationbar_Rowsperpageselector));
-         GxWebStd.gx_hidden_field( context, "FREESTYLEGRID1PAGINATIONBAR_Rowsperpageselectedvalue", StringUtil.LTrim( StringUtil.NToC( (decimal)(Freestylegrid1paginationbar_Rowsperpageselectedvalue), 9, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "FREESTYLEGRID1PAGINATIONBAR_Rowsperpageoptions", StringUtil.RTrim( Freestylegrid1paginationbar_Rowsperpageoptions));
-         GxWebStd.gx_hidden_field( context, "FREESTYLEGRID1PAGINATIONBAR_Previous", StringUtil.RTrim( Freestylegrid1paginationbar_Previous));
-         GxWebStd.gx_hidden_field( context, "FREESTYLEGRID1PAGINATIONBAR_Next", StringUtil.RTrim( Freestylegrid1paginationbar_Next));
-         GxWebStd.gx_hidden_field( context, "FREESTYLEGRID1PAGINATIONBAR_Caption", StringUtil.RTrim( Freestylegrid1paginationbar_Caption));
-         GxWebStd.gx_hidden_field( context, "FREESTYLEGRID1PAGINATIONBAR_Emptygridcaption", StringUtil.RTrim( Freestylegrid1paginationbar_Emptygridcaption));
-         GxWebStd.gx_hidden_field( context, "FREESTYLEGRID1PAGINATIONBAR_Rowsperpagecaption", StringUtil.RTrim( Freestylegrid1paginationbar_Rowsperpagecaption));
-         GxWebStd.gx_hidden_field( context, "INNEWWINDOW1_Name", StringUtil.RTrim( Innewwindow1_Name));
-         GxWebStd.gx_hidden_field( context, "INNEWWINDOW1_Target", StringUtil.RTrim( Innewwindow1_Target));
-         GxWebStd.gx_hidden_field( context, "FREESTYLEGRID1PAGINATIONBAR_Selectedpage", StringUtil.RTrim( Freestylegrid1paginationbar_Selectedpage));
-         GxWebStd.gx_hidden_field( context, "FREESTYLEGRID1PAGINATIONBAR_Rowsperpageselectedvalue", StringUtil.LTrim( StringUtil.NToC( (decimal)(Freestylegrid1paginationbar_Rowsperpageselectedvalue), 9, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "FREESTYLEGRID1_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subFreestylegrid1_Rows), 6, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "EMPLOYEENAME_Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtEmployeeName_Visible), 5, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "EMPLOYEEID_Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtEmployeeId_Visible), 5, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "FREESTYLEGRID1PAGINATIONBAR_Selectedpage", StringUtil.RTrim( Freestylegrid1paginationbar_Selectedpage));
-         GxWebStd.gx_hidden_field( context, "FREESTYLEGRID1PAGINATIONBAR_Rowsperpageselectedvalue", StringUtil.LTrim( StringUtil.NToC( (decimal)(Freestylegrid1paginationbar_Rowsperpageselectedvalue), 9, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "FREESTYLEGRID1_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subFreestylegrid1_Rows), 6, 0, ".", "")));
+         if ( context.isAjaxRequest( ) )
+         {
+            context.httpAjaxContext.ajax_rsp_assign_sdt_attri(sPrefix, false, sPrefix+"vINCOMPANYLOCATIONID", AV30InCompanyLocationId);
+         }
+         else
+         {
+            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt(sPrefix+"vINCOMPANYLOCATIONID", AV30InCompanyLocationId);
+         }
+         GxWebStd.gx_hidden_field( context, sPrefix+"FREESTYLEGRID1_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(FREESTYLEGRID1_nFirstRecordOnPage), 15, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"FREESTYLEGRID1_nEOF", StringUtil.LTrim( StringUtil.NToC( (decimal)(FREESTYLEGRID1_nEOF), 1, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"FREESTYLEGRID1_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subFreestylegrid1_Rows), 6, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"FREESTYLEGRID1PAGINATIONBAR_Class", StringUtil.RTrim( Freestylegrid1paginationbar_Class));
+         GxWebStd.gx_hidden_field( context, sPrefix+"FREESTYLEGRID1PAGINATIONBAR_Showfirst", StringUtil.BoolToStr( Freestylegrid1paginationbar_Showfirst));
+         GxWebStd.gx_hidden_field( context, sPrefix+"FREESTYLEGRID1PAGINATIONBAR_Showprevious", StringUtil.BoolToStr( Freestylegrid1paginationbar_Showprevious));
+         GxWebStd.gx_hidden_field( context, sPrefix+"FREESTYLEGRID1PAGINATIONBAR_Shownext", StringUtil.BoolToStr( Freestylegrid1paginationbar_Shownext));
+         GxWebStd.gx_hidden_field( context, sPrefix+"FREESTYLEGRID1PAGINATIONBAR_Showlast", StringUtil.BoolToStr( Freestylegrid1paginationbar_Showlast));
+         GxWebStd.gx_hidden_field( context, sPrefix+"FREESTYLEGRID1PAGINATIONBAR_Pagestoshow", StringUtil.LTrim( StringUtil.NToC( (decimal)(Freestylegrid1paginationbar_Pagestoshow), 9, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"FREESTYLEGRID1PAGINATIONBAR_Pagingbuttonsposition", StringUtil.RTrim( Freestylegrid1paginationbar_Pagingbuttonsposition));
+         GxWebStd.gx_hidden_field( context, sPrefix+"FREESTYLEGRID1PAGINATIONBAR_Pagingcaptionposition", StringUtil.RTrim( Freestylegrid1paginationbar_Pagingcaptionposition));
+         GxWebStd.gx_hidden_field( context, sPrefix+"FREESTYLEGRID1PAGINATIONBAR_Emptygridclass", StringUtil.RTrim( Freestylegrid1paginationbar_Emptygridclass));
+         GxWebStd.gx_hidden_field( context, sPrefix+"FREESTYLEGRID1PAGINATIONBAR_Rowsperpageselector", StringUtil.BoolToStr( Freestylegrid1paginationbar_Rowsperpageselector));
+         GxWebStd.gx_hidden_field( context, sPrefix+"FREESTYLEGRID1PAGINATIONBAR_Rowsperpageselectedvalue", StringUtil.LTrim( StringUtil.NToC( (decimal)(Freestylegrid1paginationbar_Rowsperpageselectedvalue), 9, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"FREESTYLEGRID1PAGINATIONBAR_Rowsperpageoptions", StringUtil.RTrim( Freestylegrid1paginationbar_Rowsperpageoptions));
+         GxWebStd.gx_hidden_field( context, sPrefix+"FREESTYLEGRID1PAGINATIONBAR_Previous", StringUtil.RTrim( Freestylegrid1paginationbar_Previous));
+         GxWebStd.gx_hidden_field( context, sPrefix+"FREESTYLEGRID1PAGINATIONBAR_Next", StringUtil.RTrim( Freestylegrid1paginationbar_Next));
+         GxWebStd.gx_hidden_field( context, sPrefix+"FREESTYLEGRID1PAGINATIONBAR_Caption", StringUtil.RTrim( Freestylegrid1paginationbar_Caption));
+         GxWebStd.gx_hidden_field( context, sPrefix+"FREESTYLEGRID1PAGINATIONBAR_Emptygridcaption", StringUtil.RTrim( Freestylegrid1paginationbar_Emptygridcaption));
+         GxWebStd.gx_hidden_field( context, sPrefix+"FREESTYLEGRID1PAGINATIONBAR_Rowsperpagecaption", StringUtil.RTrim( Freestylegrid1paginationbar_Rowsperpagecaption));
+         GxWebStd.gx_hidden_field( context, sPrefix+"INNEWWINDOW1_Name", StringUtil.RTrim( Innewwindow1_Name));
+         GxWebStd.gx_hidden_field( context, sPrefix+"INNEWWINDOW1_Target", StringUtil.RTrim( Innewwindow1_Target));
+         GxWebStd.gx_hidden_field( context, sPrefix+"FREESTYLEGRID1PAGINATIONBAR_Selectedpage", StringUtil.RTrim( Freestylegrid1paginationbar_Selectedpage));
+         GxWebStd.gx_hidden_field( context, sPrefix+"FREESTYLEGRID1PAGINATIONBAR_Rowsperpageselectedvalue", StringUtil.LTrim( StringUtil.NToC( (decimal)(Freestylegrid1paginationbar_Rowsperpageselectedvalue), 9, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"FREESTYLEGRID1_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subFreestylegrid1_Rows), 6, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"EMPLOYEENAME_Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtEmployeeName_Visible), 5, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"EMPLOYEEID_Visible", StringUtil.LTrim( StringUtil.NToC( (decimal)(edtEmployeeId_Visible), 5, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"FREESTYLEGRID1PAGINATIONBAR_Selectedpage", StringUtil.RTrim( Freestylegrid1paginationbar_Selectedpage));
+         GxWebStd.gx_hidden_field( context, sPrefix+"FREESTYLEGRID1PAGINATIONBAR_Rowsperpageselectedvalue", StringUtil.LTrim( StringUtil.NToC( (decimal)(Freestylegrid1paginationbar_Rowsperpageselectedvalue), 9, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"FREESTYLEGRID1_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subFreestylegrid1_Rows), 6, 0, ".", "")));
       }
 
-      public override void RenderHtmlCloseForm( )
+      protected void RenderHtmlCloseForm4Y2( )
       {
          SendCloseFormHiddens( ) ;
-         GxWebStd.gx_hidden_field( context, "GX_FocusControl", GX_FocusControl);
-         SendAjaxEncryptionKey();
-         SendSecurityToken((string)(sPrefix));
-         SendComponentObjects();
-         SendServerCommands();
-         SendState();
-         if ( context.isSpaRequest( ) )
+         if ( ( StringUtil.Len( sPrefix) != 0 ) && ( context.isAjaxRequest( ) || context.isSpaRequest( ) ) )
          {
-            disableOutput();
+            componentjscripts();
          }
-         context.WriteHtmlTextNl( "</form>") ;
-         if ( context.isSpaRequest( ) )
+         GxWebStd.gx_hidden_field( context, sPrefix+"GX_FocusControl", GX_FocusControl);
+         define_styles( ) ;
+         SendSecurityToken(sPrefix);
+         if ( StringUtil.Len( sPrefix) == 0 )
          {
-            enableOutput();
+            SendAjaxEncryptionKey();
+            SendComponentObjects();
+            SendServerCommands();
+            SendState();
+            if ( context.isSpaRequest( ) )
+            {
+               disableOutput();
+            }
+            context.WriteHtmlTextNl( "</form>") ;
+            if ( context.isSpaRequest( ) )
+            {
+               enableOutput();
+            }
+            include_jscripts( ) ;
+            if ( ! ( WebComp_Wcreportsworkhourlogdetails == null ) )
+            {
+               WebComp_Wcreportsworkhourlogdetails.componentjscripts();
+            }
+            context.WriteHtmlTextNl( "</body>") ;
+            context.WriteHtmlTextNl( "</html>") ;
+            if ( context.isSpaRequest( ) )
+            {
+               enableOutput();
+            }
          }
-         include_jscripts( ) ;
-         if ( ! ( WebComp_Wcreportsworkhourlogdetails == null ) )
+         else
          {
-            WebComp_Wcreportsworkhourlogdetails.componentjscripts();
-         }
-      }
-
-      public override void RenderHtmlContent( )
-      {
-         gxajaxcallmode = (short)((isAjaxCallMode( ) ? 1 : 0));
-         if ( ( gxajaxcallmode == 0 ) && ( GxWebError == 0 ) )
-         {
-            context.WriteHtmlText( "<div") ;
-            GxWebStd.ClassAttribute( context, "gx-ct-body"+" "+(String.IsNullOrEmpty(StringUtil.RTrim( Form.Class)) ? "form-horizontal Form" : Form.Class)+"-fx");
-            context.WriteHtmlText( ">") ;
-            WE4Y2( ) ;
+            SendWebComponentState();
             context.WriteHtmlText( "</div>") ;
+            if ( toggleJsOutput )
+            {
+               if ( context.isSpaRequest( ) )
+               {
+                  enableJsOutput();
+               }
+            }
          }
-      }
-
-      public override void DispatchEvents( )
-      {
-         EVT4Y2( ) ;
-      }
-
-      public override bool HasEnterEvent( )
-      {
-         return false ;
-      }
-
-      public override GXWebForm GetForm( )
-      {
-         return Form ;
-      }
-
-      public override string GetSelfLink( )
-      {
-         return formatLink("projectdetails.aspx", new object[] {UrlEncode(StringUtil.LTrimStr(AV22OneProjectId,4,0)),UrlEncode(DateTimeUtil.FormatDateParm(AV15FromDate)),UrlEncode(DateTimeUtil.FormatDateParm(AV16ToDate))}, new string[] {"OneProjectId","FromDate","ToDate"})  ;
       }
 
       public override string GetPgmname( )
@@ -514,10 +565,18 @@ namespace GeneXus.Programs {
          }
          if ( ! wbLoad )
          {
-            if ( nGXWrapped == 1 )
+            if ( StringUtil.Len( sPrefix) == 0 )
             {
                RenderHtmlHeaders( ) ;
-               RenderHtmlOpenForm( ) ;
+            }
+            RenderHtmlOpenForm( ) ;
+            if ( StringUtil.Len( sPrefix) != 0 )
+            {
+               GxWebStd.gx_hidden_field( context, sPrefix+"_CMPPGM", "projectdetails.aspx");
+               context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
+               context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
+               context.AddJavascriptSource("DVelop/DVPaginationBar/DVPaginationBarRender.js", "", false, true);
+               context.AddJavascriptSource("Window/InNewWindowRender.js", "", false, true);
             }
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "Section", "start", "top", " "+"data-gx-base-lib=\"bootstrapv3\""+" "+"data-abstract-form"+" ", "", "div");
@@ -535,7 +594,7 @@ namespace GeneXus.Programs {
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
             ClassString = "ErrorViewer";
             StyleString = "";
-            GxWebStd.gx_msg_list( context, "", context.GX_msglist.DisplayMode, StyleString, ClassString, "", "false");
+            GxWebStd.gx_msg_list( context, "", context.GX_msglist.DisplayMode, StyleString, ClassString, sPrefix, "false");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
@@ -546,10 +605,10 @@ namespace GeneXus.Programs {
             GxWebStd.gx_div_start( context, divUnnamedtable1_Internalname, 1, 0, "px", 0, "px", "Flex", "start", "top", " "+"data-gx-flex"+" ", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "", "start", "top", "", "flex-grow:1;", "div");
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 14,'',false,'',0)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 14,'" + sPrefix + "',false,'',0)\"";
             ClassString = "btn-group";
             StyleString = "";
-            GxWebStd.gx_button_ctrl( context, bttBtnexportexcel_Internalname, "gx.evt.setGridEvt("+StringUtil.Str( (decimal)(23), 2, 0)+","+"null"+");", "Export", bttBtnexportexcel_Jsonclick, 5, "Export", "", StyleString, ClassString, 1, 1, "standard", "'"+""+"'"+",false,"+"'"+"E\\'DOEXPORTEXCEL\\'."+"'", TempTags, "", context.GetButtonType( ), "HLP_ProjectDetails.htm");
+            GxWebStd.gx_button_ctrl( context, bttBtnexportexcel_Internalname, "gx.evt.setGridEvt("+StringUtil.Str( (decimal)(23), 2, 0)+","+"null"+");", "Export", bttBtnexportexcel_Jsonclick, 5, "Export", "", StyleString, ClassString, 1, 1, "standard", "'"+sPrefix+"'"+",false,"+"'"+sPrefix+"E\\'DOEXPORTEXCEL\\'."+"'", TempTags, "", context.GetButtonType( ), "HLP_ProjectDetails.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -587,19 +646,19 @@ namespace GeneXus.Programs {
             else
             {
                sStyleString = "";
-               context.WriteHtmlText( "<div id=\""+"Freestylegrid1Container"+"Div\" "+sStyleString+">"+"</div>") ;
-               context.httpAjaxContext.ajax_rsp_assign_grid("_"+"Freestylegrid1", Freestylegrid1Container, subFreestylegrid1_Internalname);
-               if ( ! context.isAjaxRequest( ) && ! context.isSpaRequest( ) )
+               context.WriteHtmlText( "<div id=\""+sPrefix+"Freestylegrid1Container"+"Div\" "+sStyleString+">"+"</div>") ;
+               context.httpAjaxContext.ajax_rsp_assign_grid(sPrefix+"_"+"Freestylegrid1", Freestylegrid1Container, subFreestylegrid1_Internalname);
+               if ( ! isAjaxCallMode( ) && ! context.isSpaRequest( ) )
                {
-                  GxWebStd.gx_hidden_field( context, "Freestylegrid1ContainerData", Freestylegrid1Container.ToJavascriptSource());
+                  GxWebStd.gx_hidden_field( context, sPrefix+"Freestylegrid1ContainerData", Freestylegrid1Container.ToJavascriptSource());
                }
                if ( context.isAjaxRequest( ) || context.isSpaRequest( ) )
                {
-                  GxWebStd.gx_hidden_field( context, "Freestylegrid1ContainerData"+"V", Freestylegrid1Container.GridValuesHidden());
+                  GxWebStd.gx_hidden_field( context, sPrefix+"Freestylegrid1ContainerData"+"V", Freestylegrid1Container.GridValuesHidden());
                }
                else
                {
-                  context.WriteHtmlText( "<input type=\"hidden\" "+"name=\""+"Freestylegrid1ContainerData"+"V"+"\" value='"+Freestylegrid1Container.GridValuesHidden()+"'/>") ;
+                  context.WriteHtmlText( "<input type=\"hidden\" "+"name=\""+sPrefix+"Freestylegrid1ContainerData"+"V"+"\" value='"+Freestylegrid1Container.GridValuesHidden()+"'/>") ;
                }
             }
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -628,7 +687,7 @@ namespace GeneXus.Programs {
             ucFreestylegrid1paginationbar.SetProperty("CurrentPage", AV9FreeStyleGrid1CurrentPage);
             ucFreestylegrid1paginationbar.SetProperty("PageCount", AV10FreeStyleGrid1PageCount);
             ucFreestylegrid1paginationbar.SetProperty("AppliedFilters", AV11FreeStyleGrid1AppliedFilters);
-            ucFreestylegrid1paginationbar.Render(context, "dvelop.dvpaginationbar", Freestylegrid1paginationbar_Internalname, "FREESTYLEGRID1PAGINATIONBARContainer");
+            ucFreestylegrid1paginationbar.Render(context, "dvelop.dvpaginationbar", Freestylegrid1paginationbar_Internalname, sPrefix+"FREESTYLEGRID1PAGINATIONBARContainer");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -642,7 +701,7 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
             /* User Defined Control */
-            ucInnewwindow1.Render(context, "innewwindow", Innewwindow1_Internalname, "INNEWWINDOW1Container");
+            ucInnewwindow1.Render(context, "innewwindow", Innewwindow1_Internalname, sPrefix+"INNEWWINDOW1Container");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -655,8 +714,8 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, divHtml_bottomauxiliarcontrols_Internalname, 1, 0, "px", 0, "px", "Section", "start", "top", "", "", "div");
             /* Single line edit */
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 47,'',false,'" + sGXsfl_23_idx + "',0)\"";
-            GxWebStd.gx_single_line_edit( context, edtavFreestylegrid1currentpage_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(AV9FreeStyleGrid1CurrentPage), 10, 0, ".", "")), StringUtil.LTrim( context.localUtil.Format( (decimal)(AV9FreeStyleGrid1CurrentPage), "ZZZZZZZZZ9")), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+TempTags+" onchange=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onblur(this,47);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavFreestylegrid1currentpage_Jsonclick, 0, "Attribute", "", "", "", "", edtavFreestylegrid1currentpage_Visible, 1, 0, "text", "1", 10, "chr", 1, "row", 10, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_ProjectDetails.htm");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 47,'" + sPrefix + "',false,'" + sGXsfl_23_idx + "',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtavFreestylegrid1currentpage_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(AV9FreeStyleGrid1CurrentPage), 10, 0, ".", "")), StringUtil.LTrim( context.localUtil.Format( (decimal)(AV9FreeStyleGrid1CurrentPage), "ZZZZZZZZZ9")), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+TempTags+" onchange=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onblur(this,47);\"", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavFreestylegrid1currentpage_Jsonclick, 0, "Attribute", "", "", "", "", edtavFreestylegrid1currentpage_Visible, 1, 0, "text", "1", 10, "chr", 1, "row", 10, 0, 0, 0, 0, -1, 0, true, "", "end", false, "", "HLP_ProjectDetails.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -676,19 +735,19 @@ namespace GeneXus.Programs {
                else
                {
                   sStyleString = "";
-                  context.WriteHtmlText( "<div id=\""+"Freestylegrid1Container"+"Div\" "+sStyleString+">"+"</div>") ;
-                  context.httpAjaxContext.ajax_rsp_assign_grid("_"+"Freestylegrid1", Freestylegrid1Container, subFreestylegrid1_Internalname);
-                  if ( ! context.isAjaxRequest( ) && ! context.isSpaRequest( ) )
+                  context.WriteHtmlText( "<div id=\""+sPrefix+"Freestylegrid1Container"+"Div\" "+sStyleString+">"+"</div>") ;
+                  context.httpAjaxContext.ajax_rsp_assign_grid(sPrefix+"_"+"Freestylegrid1", Freestylegrid1Container, subFreestylegrid1_Internalname);
+                  if ( ! isAjaxCallMode( ) && ! context.isSpaRequest( ) )
                   {
-                     GxWebStd.gx_hidden_field( context, "Freestylegrid1ContainerData", Freestylegrid1Container.ToJavascriptSource());
+                     GxWebStd.gx_hidden_field( context, sPrefix+"Freestylegrid1ContainerData", Freestylegrid1Container.ToJavascriptSource());
                   }
                   if ( context.isAjaxRequest( ) || context.isSpaRequest( ) )
                   {
-                     GxWebStd.gx_hidden_field( context, "Freestylegrid1ContainerData"+"V", Freestylegrid1Container.GridValuesHidden());
+                     GxWebStd.gx_hidden_field( context, sPrefix+"Freestylegrid1ContainerData"+"V", Freestylegrid1Container.GridValuesHidden());
                   }
                   else
                   {
-                     context.WriteHtmlText( "<input type=\"hidden\" "+"name=\""+"Freestylegrid1ContainerData"+"V"+"\" value='"+Freestylegrid1Container.GridValuesHidden()+"'/>") ;
+                     context.WriteHtmlText( "<input type=\"hidden\" "+"name=\""+sPrefix+"Freestylegrid1ContainerData"+"V"+"\" value='"+Freestylegrid1Container.GridValuesHidden()+"'/>") ;
                   }
                }
             }
@@ -701,22 +760,35 @@ namespace GeneXus.Programs {
          wbLoad = false;
          wbEnd = 0;
          wbStart = 0;
-         if ( ! context.isSpaRequest( ) )
+         if ( StringUtil.Len( sPrefix) == 0 )
          {
-            if ( context.ExposeMetadata( ) )
+            if ( ! context.isSpaRequest( ) )
             {
-               Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
+               if ( context.ExposeMetadata( ) )
+               {
+                  Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
+               }
+            }
+            Form.Meta.addItem("description", "Project Details", 0) ;
+            context.wjLoc = "";
+            context.nUserReturn = 0;
+            context.wbHandled = 0;
+            if ( StringUtil.Len( sPrefix) == 0 )
+            {
+               sXEvt = cgiGet( "_EventName");
+               if ( ! GetJustCreated( ) && ( StringUtil.StrCmp(context.GetRequestMethod( ), "POST") == 0 ) )
+               {
+               }
             }
          }
-         Form.Meta.addItem("description", "Project Details", 0) ;
-         context.wjLoc = "";
-         context.nUserReturn = 0;
-         context.wbHandled = 0;
-         if ( StringUtil.StrCmp(context.GetRequestMethod( ), "POST") == 0 )
-         {
-         }
          wbErr = false;
-         STRUP4Y0( ) ;
+         if ( ( StringUtil.Len( sPrefix) == 0 ) || ( nDraw == 1 ) )
+         {
+            if ( nDoneStart == 0 )
+            {
+               STRUP4Y0( ) ;
+            }
+         }
       }
 
       protected void WS4Y2( )
@@ -727,20 +799,24 @@ namespace GeneXus.Programs {
 
       protected void EVT4Y2( )
       {
-         if ( StringUtil.StrCmp(context.GetRequestMethod( ), "POST") == 0 )
+         sXEvt = cgiGet( "_EventName");
+         if ( ( ( ( StringUtil.Len( sPrefix) == 0 ) ) || ( StringUtil.StringSearch( sXEvt, sPrefix, 1) > 0 ) ) && ! GetJustCreated( ) && ( StringUtil.StrCmp(context.GetRequestMethod( ), "POST") == 0 ) )
          {
             if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) && ! wbErr )
             {
                /* Read Web Panel buttons. */
-               sEvt = cgiGet( "_EventName");
-               EvtGridId = cgiGet( "_EventGridId");
-               EvtRowId = cgiGet( "_EventRowId");
-               if ( StringUtil.Len( sEvt) > 0 )
+               if ( context.wbHandled == 0 )
                {
-                  sEvtType = StringUtil.Left( sEvt, 1);
-                  sEvt = StringUtil.Right( sEvt, (short)(StringUtil.Len( sEvt)-1));
-                  if ( StringUtil.StrCmp(sEvtType, "M") != 0 )
+                  if ( StringUtil.Len( sPrefix) == 0 )
                   {
+                     sEvt = cgiGet( "_EventName");
+                     EvtGridId = cgiGet( "_EventGridId");
+                     EvtRowId = cgiGet( "_EventRowId");
+                  }
+                  if ( StringUtil.Len( sEvt) > 0 )
+                  {
+                     sEvtType = StringUtil.Left( sEvt, 1);
+                     sEvt = StringUtil.Right( sEvt, (short)(StringUtil.Len( sEvt)-1));
                      if ( StringUtil.StrCmp(sEvtType, "E") == 0 )
                      {
                         sEvtType = StringUtil.Right( sEvt, 1);
@@ -749,34 +825,86 @@ namespace GeneXus.Programs {
                            sEvt = StringUtil.Left( sEvt, (short)(StringUtil.Len( sEvt)-1));
                            if ( StringUtil.StrCmp(sEvt, "RFR") == 0 )
                            {
-                              context.wbHandled = 1;
-                              dynload_actions( ) ;
+                              if ( ( StringUtil.Len( sPrefix) != 0 ) && ( nDoneStart == 0 ) )
+                              {
+                                 STRUP4Y0( ) ;
+                              }
+                              if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
+                              {
+                                 context.wbHandled = 1;
+                                 if ( ! wbErr )
+                                 {
+                                    dynload_actions( ) ;
+                                 }
+                              }
                            }
                            else if ( StringUtil.StrCmp(sEvt, "FREESTYLEGRID1PAGINATIONBAR.CHANGEPAGE") == 0 )
                            {
-                              context.wbHandled = 1;
-                              dynload_actions( ) ;
-                              /* Execute user event: Freestylegrid1paginationbar.Changepage */
-                              E114Y2 ();
+                              if ( ( StringUtil.Len( sPrefix) != 0 ) && ( nDoneStart == 0 ) )
+                              {
+                                 STRUP4Y0( ) ;
+                              }
+                              if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
+                              {
+                                 context.wbHandled = 1;
+                                 if ( ! wbErr )
+                                 {
+                                    dynload_actions( ) ;
+                                    /* Execute user event: Freestylegrid1paginationbar.Changepage */
+                                    E114Y2 ();
+                                 }
+                              }
                            }
                            else if ( StringUtil.StrCmp(sEvt, "FREESTYLEGRID1PAGINATIONBAR.CHANGEROWSPERPAGE") == 0 )
                            {
-                              context.wbHandled = 1;
-                              dynload_actions( ) ;
-                              /* Execute user event: Freestylegrid1paginationbar.Changerowsperpage */
-                              E124Y2 ();
+                              if ( ( StringUtil.Len( sPrefix) != 0 ) && ( nDoneStart == 0 ) )
+                              {
+                                 STRUP4Y0( ) ;
+                              }
+                              if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
+                              {
+                                 context.wbHandled = 1;
+                                 if ( ! wbErr )
+                                 {
+                                    dynload_actions( ) ;
+                                    /* Execute user event: Freestylegrid1paginationbar.Changerowsperpage */
+                                    E124Y2 ();
+                                 }
+                              }
                            }
                            else if ( StringUtil.StrCmp(sEvt, "'DOEXPORTEXCEL'") == 0 )
                            {
-                              context.wbHandled = 1;
-                              dynload_actions( ) ;
-                              /* Execute user event: 'DoExportExcel' */
-                              E134Y2 ();
+                              if ( ( StringUtil.Len( sPrefix) != 0 ) && ( nDoneStart == 0 ) )
+                              {
+                                 STRUP4Y0( ) ;
+                              }
+                              if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
+                              {
+                                 context.wbHandled = 1;
+                                 if ( ! wbErr )
+                                 {
+                                    dynload_actions( ) ;
+                                    /* Execute user event: 'DoExportExcel' */
+                                    E134Y2 ();
+                                 }
+                              }
                            }
                            else if ( StringUtil.StrCmp(sEvt, "LSCR") == 0 )
                            {
-                              context.wbHandled = 1;
-                              dynload_actions( ) ;
+                              if ( ( StringUtil.Len( sPrefix) != 0 ) && ( nDoneStart == 0 ) )
+                              {
+                                 STRUP4Y0( ) ;
+                              }
+                              if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
+                              {
+                                 context.wbHandled = 1;
+                                 if ( ! wbErr )
+                                 {
+                                    dynload_actions( ) ;
+                                    GX_FocusControl = edtavFreestylegrid1currentpage_Internalname;
+                                    AssignAttri(sPrefix, false, "GX_FocusControl", GX_FocusControl);
+                                 }
+                              }
                               dynload_actions( ) ;
                            }
                         }
@@ -786,6 +914,10 @@ namespace GeneXus.Programs {
                            sEvt = StringUtil.Left( sEvt, (short)(StringUtil.Len( sEvt)-4));
                            if ( ( StringUtil.StrCmp(StringUtil.Left( sEvt, 5), "START") == 0 ) || ( StringUtil.StrCmp(StringUtil.Left( sEvt, 7), "REFRESH") == 0 ) || ( StringUtil.StrCmp(StringUtil.Left( sEvt, 19), "FREESTYLEGRID1.LOAD") == 0 ) || ( StringUtil.StrCmp(StringUtil.Left( sEvt, 22), "FREESTYLEGRID1.REFRESH") == 0 ) || ( StringUtil.StrCmp(StringUtil.Left( sEvt, 5), "ENTER") == 0 ) || ( StringUtil.StrCmp(StringUtil.Left( sEvt, 6), "CANCEL") == 0 ) )
                            {
+                              if ( ( StringUtil.Len( sPrefix) != 0 ) && ( nDoneStart == 0 ) )
+                              {
+                                 STRUP4Y0( ) ;
+                              }
                               nGXsfl_23_idx = (int)(Math.Round(NumberUtil.Val( sEvtType, "."), 18, MidpointRounding.ToEven));
                               sGXsfl_23_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_23_idx), 4, 0), 4, "0");
                               SubsflControlProps_232( ) ;
@@ -797,49 +929,99 @@ namespace GeneXus.Programs {
                                  sEvt = StringUtil.Left( sEvt, (short)(StringUtil.Len( sEvt)-1));
                                  if ( StringUtil.StrCmp(sEvt, "START") == 0 )
                                  {
-                                    context.wbHandled = 1;
-                                    dynload_actions( ) ;
-                                    /* Execute user event: Start */
-                                    E144Y2 ();
+                                    if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
+                                    {
+                                       context.wbHandled = 1;
+                                       if ( ! wbErr )
+                                       {
+                                          dynload_actions( ) ;
+                                          GX_FocusControl = edtavFreestylegrid1currentpage_Internalname;
+                                          AssignAttri(sPrefix, false, "GX_FocusControl", GX_FocusControl);
+                                          /* Execute user event: Start */
+                                          E144Y2 ();
+                                       }
+                                    }
                                  }
                                  else if ( StringUtil.StrCmp(sEvt, "REFRESH") == 0 )
                                  {
-                                    context.wbHandled = 1;
-                                    dynload_actions( ) ;
-                                    /* Execute user event: Refresh */
-                                    E154Y2 ();
+                                    if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
+                                    {
+                                       context.wbHandled = 1;
+                                       if ( ! wbErr )
+                                       {
+                                          dynload_actions( ) ;
+                                          GX_FocusControl = edtavFreestylegrid1currentpage_Internalname;
+                                          AssignAttri(sPrefix, false, "GX_FocusControl", GX_FocusControl);
+                                          /* Execute user event: Refresh */
+                                          E154Y2 ();
+                                       }
+                                    }
                                  }
                                  else if ( StringUtil.StrCmp(sEvt, "FREESTYLEGRID1.LOAD") == 0 )
                                  {
-                                    context.wbHandled = 1;
-                                    dynload_actions( ) ;
-                                    /* Execute user event: Freestylegrid1.Load */
-                                    E164Y2 ();
+                                    if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
+                                    {
+                                       context.wbHandled = 1;
+                                       if ( ! wbErr )
+                                       {
+                                          dynload_actions( ) ;
+                                          GX_FocusControl = edtavFreestylegrid1currentpage_Internalname;
+                                          AssignAttri(sPrefix, false, "GX_FocusControl", GX_FocusControl);
+                                          /* Execute user event: Freestylegrid1.Load */
+                                          E164Y2 ();
+                                       }
+                                    }
                                  }
                                  else if ( StringUtil.StrCmp(sEvt, "FREESTYLEGRID1.REFRESH") == 0 )
                                  {
-                                    context.wbHandled = 1;
-                                    dynload_actions( ) ;
-                                    /* Execute user event: Freestylegrid1.Refresh */
-                                    E174Y2 ();
+                                    if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
+                                    {
+                                       context.wbHandled = 1;
+                                       if ( ! wbErr )
+                                       {
+                                          dynload_actions( ) ;
+                                          GX_FocusControl = edtavFreestylegrid1currentpage_Internalname;
+                                          AssignAttri(sPrefix, false, "GX_FocusControl", GX_FocusControl);
+                                          /* Execute user event: Freestylegrid1.Refresh */
+                                          E174Y2 ();
+                                       }
+                                    }
                                  }
                                  else if ( StringUtil.StrCmp(sEvt, "ENTER") == 0 )
                                  {
-                                    context.wbHandled = 1;
-                                    if ( ! wbErr )
+                                    if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
                                     {
-                                       Rfr0gs = false;
-                                       if ( ! Rfr0gs )
+                                       context.wbHandled = 1;
+                                       if ( ! wbErr )
                                        {
+                                          if ( ! wbErr )
+                                          {
+                                             Rfr0gs = false;
+                                             if ( ! Rfr0gs )
+                                             {
+                                             }
+                                             dynload_actions( ) ;
+                                          }
                                        }
-                                       dynload_actions( ) ;
                                     }
                                     /* No code required for Cancel button. It is implemented as the Reset button. */
                                  }
                                  else if ( StringUtil.StrCmp(sEvt, "LSCR") == 0 )
                                  {
-                                    context.wbHandled = 1;
-                                    dynload_actions( ) ;
+                                    if ( ( StringUtil.Len( sPrefix) != 0 ) && ( nDoneStart == 0 ) )
+                                    {
+                                       STRUP4Y0( ) ;
+                                    }
+                                    if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
+                                    {
+                                       context.wbHandled = 1;
+                                       if ( ! wbErr )
+                                       {
+                                          dynload_actions( ) ;
+                                          GX_FocusControl = edtavFreestylegrid1currentpage_Internalname;
+                                          AssignAttri(sPrefix, false, "GX_FocusControl", GX_FocusControl);
+                                       }
+                                    }
                                  }
                               }
                               else
@@ -858,7 +1040,7 @@ namespace GeneXus.Programs {
                            sEvtType = StringUtil.Left( sEvt, 4);
                            sEvt = StringUtil.Right( sEvt, (short)(StringUtil.Len( sEvt)-4));
                            sCmpCtrl = "W0027" + sEvtType;
-                           OldWcreportsworkhourlogdetails = cgiGet( sCmpCtrl);
+                           OldWcreportsworkhourlogdetails = cgiGet( sPrefix+sCmpCtrl);
                            if ( ( StringUtil.Len( OldWcreportsworkhourlogdetails) == 0 ) || ( StringUtil.StrCmp(OldWcreportsworkhourlogdetails, WebComp_GX_Process_Component) != 0 ) )
                            {
                               WebComp_GX_Process = getWebComponent(GetType(), "GeneXus.Programs", OldWcreportsworkhourlogdetails, new Object[] {context} );
@@ -868,7 +1050,7 @@ namespace GeneXus.Programs {
                            }
                            if ( StringUtil.Len( WebComp_GX_Process_Component) != 0 )
                            {
-                              WebComp_GX_Process.componentprocess("W0027", sEvtType, sEvt);
+                              WebComp_GX_Process.componentprocess(sPrefix+"W0027", sEvtType, sEvt);
                            }
                            nGXsfl_23_webc_idx = (int)(Math.Round(NumberUtil.Val( sEvtType, "."), 18, MidpointRounding.ToEven));
                            WebCompHandler = "Wcreportsworkhourlogdetails";
@@ -890,10 +1072,7 @@ namespace GeneXus.Programs {
             Refresh( ) ;
             if ( ! GxWebStd.gx_redirect( context) )
             {
-               if ( nGXWrapped == 1 )
-               {
-                  RenderHtmlCloseForm( ) ;
-               }
+               RenderHtmlCloseForm4Y2( ) ;
             }
          }
       }
@@ -902,28 +1081,41 @@ namespace GeneXus.Programs {
       {
          if ( nDonePA == 0 )
          {
-            if ( String.IsNullOrEmpty(StringUtil.RTrim( context.GetCookie( "GX_SESSION_ID"))) )
+            if ( StringUtil.Len( sPrefix) != 0 )
             {
-               gxcookieaux = context.SetCookie( "GX_SESSION_ID", Encrypt64( Crypto.GetEncryptionKey( ), Crypto.GetServerKey( )), "", (DateTime)(DateTime.MinValue), "", (short)(context.GetHttpSecure( )));
+               initialize_properties( ) ;
+            }
+            if ( StringUtil.Len( sPrefix) == 0 )
+            {
+               if ( String.IsNullOrEmpty(StringUtil.RTrim( context.GetCookie( "GX_SESSION_ID"))) )
+               {
+                  gxcookieaux = context.SetCookie( "GX_SESSION_ID", Encrypt64( Crypto.GetEncryptionKey( ), Crypto.GetServerKey( )), "", (DateTime)(DateTime.MinValue), "", (short)(context.GetHttpSecure( )));
+               }
             }
             GXKey = Decrypt64( context.GetCookie( "GX_SESSION_ID"), Crypto.GetServerKey( ));
             toggleJsOutput = isJsOutputEnabled( );
-            if ( context.isSpaRequest( ) )
-            {
-               disableJsOutput();
-            }
-            init_web_controls( ) ;
-            if ( toggleJsOutput )
+            if ( StringUtil.Len( sPrefix) == 0 )
             {
                if ( context.isSpaRequest( ) )
                {
-                  enableJsOutput();
+                  disableJsOutput();
+               }
+            }
+            init_web_controls( ) ;
+            if ( StringUtil.Len( sPrefix) == 0 )
+            {
+               if ( toggleJsOutput )
+               {
+                  if ( context.isSpaRequest( ) )
+                  {
+                     enableJsOutput();
+                  }
                }
             }
             if ( ! context.isAjaxRequest( ) )
             {
                GX_FocusControl = edtavFreestylegrid1currentpage_Internalname;
-               AssignAttri("", false, "GX_FocusControl", GX_FocusControl);
+               AssignAttri(sPrefix, false, "GX_FocusControl", GX_FocusControl);
             }
             nDonePA = 1;
          }
@@ -952,7 +1144,8 @@ namespace GeneXus.Programs {
       protected void gxgrFreestylegrid1_refresh( int subFreestylegrid1_Rows ,
                                                  short AV22OneProjectId ,
                                                  DateTime AV15FromDate ,
-                                                 DateTime AV16ToDate )
+                                                 DateTime AV16ToDate ,
+                                                 string sPrefix )
       {
          initialize_formulas( ) ;
          GxWebStd.set_html_headers( context, 0, "", "");
@@ -1016,7 +1209,7 @@ namespace GeneXus.Programs {
          SubsflControlProps_232( ) ;
          bGXsfl_23_Refreshing = true;
          Freestylegrid1Container.AddObjectProperty("GridName", "Freestylegrid1");
-         Freestylegrid1Container.AddObjectProperty("CmpContext", "");
+         Freestylegrid1Container.AddObjectProperty("CmpContext", sPrefix);
          Freestylegrid1Container.AddObjectProperty("InMasterPage", "false");
          Freestylegrid1Container.AddObjectProperty("Class", StringUtil.RTrim( "FreeStyleGrid"));
          Freestylegrid1Container.AddObjectProperty("Class", "FreeStyleGrid");
@@ -1090,7 +1283,7 @@ namespace GeneXus.Programs {
                pr_default.readNext(0);
             }
             FREESTYLEGRID1_nEOF = (short)(((pr_default.getStatus(0) == 101) ? 1 : 0));
-            GxWebStd.gx_hidden_field( context, "FREESTYLEGRID1_nEOF", StringUtil.LTrim( StringUtil.NToC( (decimal)(FREESTYLEGRID1_nEOF), 1, 0, ".", "")));
+            GxWebStd.gx_hidden_field( context, sPrefix+"FREESTYLEGRID1_nEOF", StringUtil.LTrim( StringUtil.NToC( (decimal)(FREESTYLEGRID1_nEOF), 1, 0, ".", "")));
             pr_default.close(0);
             wbEnd = 23;
             WB4Y0( ) ;
@@ -1157,10 +1350,10 @@ namespace GeneXus.Programs {
       protected short subfreestylegrid1_firstpage( )
       {
          FREESTYLEGRID1_nFirstRecordOnPage = 0;
-         GxWebStd.gx_hidden_field( context, "FREESTYLEGRID1_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(FREESTYLEGRID1_nFirstRecordOnPage), 15, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"FREESTYLEGRID1_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(FREESTYLEGRID1_nFirstRecordOnPage), 15, 0, ".", "")));
          if ( isFullAjaxMode( ) )
          {
-            gxgrFreestylegrid1_refresh( subFreestylegrid1_Rows, AV22OneProjectId, AV15FromDate, AV16ToDate) ;
+            gxgrFreestylegrid1_refresh( subFreestylegrid1_Rows, AV22OneProjectId, AV15FromDate, AV16ToDate, sPrefix) ;
          }
          send_integrity_footer_hashes( ) ;
          return 0 ;
@@ -1177,11 +1370,11 @@ namespace GeneXus.Programs {
          {
             return 2 ;
          }
-         GxWebStd.gx_hidden_field( context, "FREESTYLEGRID1_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(FREESTYLEGRID1_nFirstRecordOnPage), 15, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"FREESTYLEGRID1_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(FREESTYLEGRID1_nFirstRecordOnPage), 15, 0, ".", "")));
          Freestylegrid1Container.AddObjectProperty("FREESTYLEGRID1_nFirstRecordOnPage", FREESTYLEGRID1_nFirstRecordOnPage);
          if ( isFullAjaxMode( ) )
          {
-            gxgrFreestylegrid1_refresh( subFreestylegrid1_Rows, AV22OneProjectId, AV15FromDate, AV16ToDate) ;
+            gxgrFreestylegrid1_refresh( subFreestylegrid1_Rows, AV22OneProjectId, AV15FromDate, AV16ToDate, sPrefix) ;
          }
          send_integrity_footer_hashes( ) ;
          return (short)(((FREESTYLEGRID1_nEOF==0) ? 0 : 2)) ;
@@ -1197,10 +1390,10 @@ namespace GeneXus.Programs {
          {
             return 2 ;
          }
-         GxWebStd.gx_hidden_field( context, "FREESTYLEGRID1_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(FREESTYLEGRID1_nFirstRecordOnPage), 15, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"FREESTYLEGRID1_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(FREESTYLEGRID1_nFirstRecordOnPage), 15, 0, ".", "")));
          if ( isFullAjaxMode( ) )
          {
-            gxgrFreestylegrid1_refresh( subFreestylegrid1_Rows, AV22OneProjectId, AV15FromDate, AV16ToDate) ;
+            gxgrFreestylegrid1_refresh( subFreestylegrid1_Rows, AV22OneProjectId, AV15FromDate, AV16ToDate, sPrefix) ;
          }
          send_integrity_footer_hashes( ) ;
          return 0 ;
@@ -1224,10 +1417,10 @@ namespace GeneXus.Programs {
          {
             FREESTYLEGRID1_nFirstRecordOnPage = 0;
          }
-         GxWebStd.gx_hidden_field( context, "FREESTYLEGRID1_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(FREESTYLEGRID1_nFirstRecordOnPage), 15, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"FREESTYLEGRID1_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(FREESTYLEGRID1_nFirstRecordOnPage), 15, 0, ".", "")));
          if ( isFullAjaxMode( ) )
          {
-            gxgrFreestylegrid1_refresh( subFreestylegrid1_Rows, AV22OneProjectId, AV15FromDate, AV16ToDate) ;
+            gxgrFreestylegrid1_refresh( subFreestylegrid1_Rows, AV22OneProjectId, AV15FromDate, AV16ToDate, sPrefix) ;
          }
          send_integrity_footer_hashes( ) ;
          return 0 ;
@@ -1243,10 +1436,10 @@ namespace GeneXus.Programs {
          {
             FREESTYLEGRID1_nFirstRecordOnPage = 0;
          }
-         GxWebStd.gx_hidden_field( context, "FREESTYLEGRID1_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(FREESTYLEGRID1_nFirstRecordOnPage), 15, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"FREESTYLEGRID1_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(FREESTYLEGRID1_nFirstRecordOnPage), 15, 0, ".", "")));
          if ( isFullAjaxMode( ) )
          {
-            gxgrFreestylegrid1_refresh( subFreestylegrid1_Rows, AV22OneProjectId, AV15FromDate, AV16ToDate) ;
+            gxgrFreestylegrid1_refresh( subFreestylegrid1_Rows, AV22OneProjectId, AV15FromDate, AV16ToDate, sPrefix) ;
          }
          send_integrity_footer_hashes( ) ;
          return (int)(0) ;
@@ -1268,59 +1461,64 @@ namespace GeneXus.Programs {
          /* Execute user event: Start */
          E144Y2 ();
          context.wbGlbDoneStart = 1;
+         nDoneStart = 1;
          /* After Start, stand alone formulas. */
-         if ( StringUtil.StrCmp(context.GetRequestMethod( ), "POST") == 0 )
+         sXEvt = cgiGet( "_EventName");
+         if ( ! GetJustCreated( ) && ( StringUtil.StrCmp(context.GetRequestMethod( ), "POST") == 0 ) )
          {
             /* Read saved SDTs. */
             /* Read saved values. */
-            nRC_GXsfl_23 = (int)(Math.Round(context.localUtil.CToN( cgiGet( "nRC_GXsfl_23"), ".", ","), 18, MidpointRounding.ToEven));
-            AV10FreeStyleGrid1PageCount = (long)(Math.Round(context.localUtil.CToN( cgiGet( "vFREESTYLEGRID1PAGECOUNT"), ".", ","), 18, MidpointRounding.ToEven));
-            AV11FreeStyleGrid1AppliedFilters = cgiGet( "vFREESTYLEGRID1APPLIEDFILTERS");
-            AV16ToDate = context.localUtil.CToD( cgiGet( "vTODATE"), 0);
-            AV26DateRange_To = context.localUtil.CToD( cgiGet( "vDATERANGE_TO"), 0);
-            AV15FromDate = context.localUtil.CToD( cgiGet( "vFROMDATE"), 0);
-            AV21DateRange = context.localUtil.CToD( cgiGet( "vDATERANGE"), 0);
-            FREESTYLEGRID1_nFirstRecordOnPage = (long)(Math.Round(context.localUtil.CToN( cgiGet( "FREESTYLEGRID1_nFirstRecordOnPage"), ".", ","), 18, MidpointRounding.ToEven));
-            FREESTYLEGRID1_nEOF = (short)(Math.Round(context.localUtil.CToN( cgiGet( "FREESTYLEGRID1_nEOF"), ".", ","), 18, MidpointRounding.ToEven));
-            subFreestylegrid1_Rows = (int)(Math.Round(context.localUtil.CToN( cgiGet( "FREESTYLEGRID1_Rows"), ".", ","), 18, MidpointRounding.ToEven));
-            GxWebStd.gx_hidden_field( context, "FREESTYLEGRID1_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subFreestylegrid1_Rows), 6, 0, ".", "")));
-            Freestylegrid1paginationbar_Class = cgiGet( "FREESTYLEGRID1PAGINATIONBAR_Class");
-            Freestylegrid1paginationbar_Showfirst = StringUtil.StrToBool( cgiGet( "FREESTYLEGRID1PAGINATIONBAR_Showfirst"));
-            Freestylegrid1paginationbar_Showprevious = StringUtil.StrToBool( cgiGet( "FREESTYLEGRID1PAGINATIONBAR_Showprevious"));
-            Freestylegrid1paginationbar_Shownext = StringUtil.StrToBool( cgiGet( "FREESTYLEGRID1PAGINATIONBAR_Shownext"));
-            Freestylegrid1paginationbar_Showlast = StringUtil.StrToBool( cgiGet( "FREESTYLEGRID1PAGINATIONBAR_Showlast"));
-            Freestylegrid1paginationbar_Pagestoshow = (int)(Math.Round(context.localUtil.CToN( cgiGet( "FREESTYLEGRID1PAGINATIONBAR_Pagestoshow"), ".", ","), 18, MidpointRounding.ToEven));
-            Freestylegrid1paginationbar_Pagingbuttonsposition = cgiGet( "FREESTYLEGRID1PAGINATIONBAR_Pagingbuttonsposition");
-            Freestylegrid1paginationbar_Pagingcaptionposition = cgiGet( "FREESTYLEGRID1PAGINATIONBAR_Pagingcaptionposition");
-            Freestylegrid1paginationbar_Emptygridclass = cgiGet( "FREESTYLEGRID1PAGINATIONBAR_Emptygridclass");
-            Freestylegrid1paginationbar_Rowsperpageselector = StringUtil.StrToBool( cgiGet( "FREESTYLEGRID1PAGINATIONBAR_Rowsperpageselector"));
-            Freestylegrid1paginationbar_Rowsperpageselectedvalue = (int)(Math.Round(context.localUtil.CToN( cgiGet( "FREESTYLEGRID1PAGINATIONBAR_Rowsperpageselectedvalue"), ".", ","), 18, MidpointRounding.ToEven));
-            Freestylegrid1paginationbar_Rowsperpageoptions = cgiGet( "FREESTYLEGRID1PAGINATIONBAR_Rowsperpageoptions");
-            Freestylegrid1paginationbar_Previous = cgiGet( "FREESTYLEGRID1PAGINATIONBAR_Previous");
-            Freestylegrid1paginationbar_Next = cgiGet( "FREESTYLEGRID1PAGINATIONBAR_Next");
-            Freestylegrid1paginationbar_Caption = cgiGet( "FREESTYLEGRID1PAGINATIONBAR_Caption");
-            Freestylegrid1paginationbar_Emptygridcaption = cgiGet( "FREESTYLEGRID1PAGINATIONBAR_Emptygridcaption");
-            Freestylegrid1paginationbar_Rowsperpagecaption = cgiGet( "FREESTYLEGRID1PAGINATIONBAR_Rowsperpagecaption");
-            Innewwindow1_Name = cgiGet( "INNEWWINDOW1_Name");
-            Innewwindow1_Target = cgiGet( "INNEWWINDOW1_Target");
-            Freestylegrid1paginationbar_Selectedpage = cgiGet( "FREESTYLEGRID1PAGINATIONBAR_Selectedpage");
-            Freestylegrid1paginationbar_Rowsperpageselectedvalue = (int)(Math.Round(context.localUtil.CToN( cgiGet( "FREESTYLEGRID1PAGINATIONBAR_Rowsperpageselectedvalue"), ".", ","), 18, MidpointRounding.ToEven));
-            subFreestylegrid1_Rows = (int)(Math.Round(context.localUtil.CToN( cgiGet( "FREESTYLEGRID1_Rows"), ".", ","), 18, MidpointRounding.ToEven));
-            GxWebStd.gx_hidden_field( context, "FREESTYLEGRID1_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subFreestylegrid1_Rows), 6, 0, ".", "")));
+            nRC_GXsfl_23 = (int)(Math.Round(context.localUtil.CToN( cgiGet( sPrefix+"nRC_GXsfl_23"), ".", ","), 18, MidpointRounding.ToEven));
+            AV10FreeStyleGrid1PageCount = (long)(Math.Round(context.localUtil.CToN( cgiGet( sPrefix+"vFREESTYLEGRID1PAGECOUNT"), ".", ","), 18, MidpointRounding.ToEven));
+            AV11FreeStyleGrid1AppliedFilters = cgiGet( sPrefix+"vFREESTYLEGRID1APPLIEDFILTERS");
+            wcpOAV22OneProjectId = (short)(Math.Round(context.localUtil.CToN( cgiGet( sPrefix+"wcpOAV22OneProjectId"), ".", ","), 18, MidpointRounding.ToEven));
+            wcpOAV15FromDate = context.localUtil.CToD( cgiGet( sPrefix+"wcpOAV15FromDate"), 0);
+            wcpOAV16ToDate = context.localUtil.CToD( cgiGet( sPrefix+"wcpOAV16ToDate"), 0);
+            AV16ToDate = context.localUtil.CToD( cgiGet( sPrefix+"vTODATE"), 0);
+            AV26DateRange_To = context.localUtil.CToD( cgiGet( sPrefix+"vDATERANGE_TO"), 0);
+            AV15FromDate = context.localUtil.CToD( cgiGet( sPrefix+"vFROMDATE"), 0);
+            AV21DateRange = context.localUtil.CToD( cgiGet( sPrefix+"vDATERANGE"), 0);
+            FREESTYLEGRID1_nFirstRecordOnPage = (long)(Math.Round(context.localUtil.CToN( cgiGet( sPrefix+"FREESTYLEGRID1_nFirstRecordOnPage"), ".", ","), 18, MidpointRounding.ToEven));
+            FREESTYLEGRID1_nEOF = (short)(Math.Round(context.localUtil.CToN( cgiGet( sPrefix+"FREESTYLEGRID1_nEOF"), ".", ","), 18, MidpointRounding.ToEven));
+            subFreestylegrid1_Rows = (int)(Math.Round(context.localUtil.CToN( cgiGet( sPrefix+"FREESTYLEGRID1_Rows"), ".", ","), 18, MidpointRounding.ToEven));
+            GxWebStd.gx_hidden_field( context, sPrefix+"FREESTYLEGRID1_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subFreestylegrid1_Rows), 6, 0, ".", "")));
+            Freestylegrid1paginationbar_Class = cgiGet( sPrefix+"FREESTYLEGRID1PAGINATIONBAR_Class");
+            Freestylegrid1paginationbar_Showfirst = StringUtil.StrToBool( cgiGet( sPrefix+"FREESTYLEGRID1PAGINATIONBAR_Showfirst"));
+            Freestylegrid1paginationbar_Showprevious = StringUtil.StrToBool( cgiGet( sPrefix+"FREESTYLEGRID1PAGINATIONBAR_Showprevious"));
+            Freestylegrid1paginationbar_Shownext = StringUtil.StrToBool( cgiGet( sPrefix+"FREESTYLEGRID1PAGINATIONBAR_Shownext"));
+            Freestylegrid1paginationbar_Showlast = StringUtil.StrToBool( cgiGet( sPrefix+"FREESTYLEGRID1PAGINATIONBAR_Showlast"));
+            Freestylegrid1paginationbar_Pagestoshow = (int)(Math.Round(context.localUtil.CToN( cgiGet( sPrefix+"FREESTYLEGRID1PAGINATIONBAR_Pagestoshow"), ".", ","), 18, MidpointRounding.ToEven));
+            Freestylegrid1paginationbar_Pagingbuttonsposition = cgiGet( sPrefix+"FREESTYLEGRID1PAGINATIONBAR_Pagingbuttonsposition");
+            Freestylegrid1paginationbar_Pagingcaptionposition = cgiGet( sPrefix+"FREESTYLEGRID1PAGINATIONBAR_Pagingcaptionposition");
+            Freestylegrid1paginationbar_Emptygridclass = cgiGet( sPrefix+"FREESTYLEGRID1PAGINATIONBAR_Emptygridclass");
+            Freestylegrid1paginationbar_Rowsperpageselector = StringUtil.StrToBool( cgiGet( sPrefix+"FREESTYLEGRID1PAGINATIONBAR_Rowsperpageselector"));
+            Freestylegrid1paginationbar_Rowsperpageselectedvalue = (int)(Math.Round(context.localUtil.CToN( cgiGet( sPrefix+"FREESTYLEGRID1PAGINATIONBAR_Rowsperpageselectedvalue"), ".", ","), 18, MidpointRounding.ToEven));
+            Freestylegrid1paginationbar_Rowsperpageoptions = cgiGet( sPrefix+"FREESTYLEGRID1PAGINATIONBAR_Rowsperpageoptions");
+            Freestylegrid1paginationbar_Previous = cgiGet( sPrefix+"FREESTYLEGRID1PAGINATIONBAR_Previous");
+            Freestylegrid1paginationbar_Next = cgiGet( sPrefix+"FREESTYLEGRID1PAGINATIONBAR_Next");
+            Freestylegrid1paginationbar_Caption = cgiGet( sPrefix+"FREESTYLEGRID1PAGINATIONBAR_Caption");
+            Freestylegrid1paginationbar_Emptygridcaption = cgiGet( sPrefix+"FREESTYLEGRID1PAGINATIONBAR_Emptygridcaption");
+            Freestylegrid1paginationbar_Rowsperpagecaption = cgiGet( sPrefix+"FREESTYLEGRID1PAGINATIONBAR_Rowsperpagecaption");
+            Innewwindow1_Name = cgiGet( sPrefix+"INNEWWINDOW1_Name");
+            Innewwindow1_Target = cgiGet( sPrefix+"INNEWWINDOW1_Target");
+            Freestylegrid1paginationbar_Selectedpage = cgiGet( sPrefix+"FREESTYLEGRID1PAGINATIONBAR_Selectedpage");
+            Freestylegrid1paginationbar_Rowsperpageselectedvalue = (int)(Math.Round(context.localUtil.CToN( cgiGet( sPrefix+"FREESTYLEGRID1PAGINATIONBAR_Rowsperpageselectedvalue"), ".", ","), 18, MidpointRounding.ToEven));
+            subFreestylegrid1_Rows = (int)(Math.Round(context.localUtil.CToN( cgiGet( sPrefix+"FREESTYLEGRID1_Rows"), ".", ","), 18, MidpointRounding.ToEven));
+            GxWebStd.gx_hidden_field( context, sPrefix+"FREESTYLEGRID1_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subFreestylegrid1_Rows), 6, 0, ".", "")));
             /* Read variables values. */
             if ( ( ( context.localUtil.CToN( cgiGet( edtavFreestylegrid1currentpage_Internalname), ".", ",") < Convert.ToDecimal( 0 )) ) || ( ( context.localUtil.CToN( cgiGet( edtavFreestylegrid1currentpage_Internalname), ".", ",") > Convert.ToDecimal( 9999999999L )) ) )
             {
                GX_msglist.addItem(context.GetMessage( "GXM_badnum", ""), 1, "vFREESTYLEGRID1CURRENTPAGE");
                GX_FocusControl = edtavFreestylegrid1currentpage_Internalname;
-               AssignAttri("", false, "GX_FocusControl", GX_FocusControl);
+               AssignAttri(sPrefix, false, "GX_FocusControl", GX_FocusControl);
                wbErr = true;
                AV9FreeStyleGrid1CurrentPage = 0;
-               AssignAttri("", false, "AV9FreeStyleGrid1CurrentPage", StringUtil.LTrimStr( (decimal)(AV9FreeStyleGrid1CurrentPage), 10, 0));
+               AssignAttri(sPrefix, false, "AV9FreeStyleGrid1CurrentPage", StringUtil.LTrimStr( (decimal)(AV9FreeStyleGrid1CurrentPage), 10, 0));
             }
             else
             {
                AV9FreeStyleGrid1CurrentPage = (long)(Math.Round(context.localUtil.CToN( cgiGet( edtavFreestylegrid1currentpage_Internalname), ".", ","), 18, MidpointRounding.ToEven));
-               AssignAttri("", false, "AV9FreeStyleGrid1CurrentPage", StringUtil.LTrimStr( (decimal)(AV9FreeStyleGrid1CurrentPage), 10, 0));
+               AssignAttri(sPrefix, false, "AV9FreeStyleGrid1CurrentPage", StringUtil.LTrimStr( (decimal)(AV9FreeStyleGrid1CurrentPage), 10, 0));
             }
             /* Read subfile selected row values. */
             /* Read hidden variables. */
@@ -1372,19 +1570,19 @@ namespace GeneXus.Programs {
          new userhasrole(context ).execute(  "Manager", out  GXt_boolean3) ;
          AV19IsManager = GXt_boolean3;
          subFreestylegrid1_Rows = 5;
-         GxWebStd.gx_hidden_field( context, "FREESTYLEGRID1_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subFreestylegrid1_Rows), 6, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"FREESTYLEGRID1_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subFreestylegrid1_Rows), 6, 0, ".", "")));
          edtEmployeeName_Visible = 0;
-         AssignProp("", false, edtEmployeeName_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtEmployeeName_Visible), 5, 0), !bGXsfl_23_Refreshing);
+         AssignProp(sPrefix, false, edtEmployeeName_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtEmployeeName_Visible), 5, 0), !bGXsfl_23_Refreshing);
          edtEmployeeId_Visible = 0;
-         AssignProp("", false, edtEmployeeId_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtEmployeeId_Visible), 5, 0), !bGXsfl_23_Refreshing);
+         AssignProp(sPrefix, false, edtEmployeeId_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtEmployeeId_Visible), 5, 0), !bGXsfl_23_Refreshing);
          AV9FreeStyleGrid1CurrentPage = 1;
-         AssignAttri("", false, "AV9FreeStyleGrid1CurrentPage", StringUtil.LTrimStr( (decimal)(AV9FreeStyleGrid1CurrentPage), 10, 0));
+         AssignAttri(sPrefix, false, "AV9FreeStyleGrid1CurrentPage", StringUtil.LTrimStr( (decimal)(AV9FreeStyleGrid1CurrentPage), 10, 0));
          edtavFreestylegrid1currentpage_Visible = 0;
-         AssignProp("", false, edtavFreestylegrid1currentpage_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtavFreestylegrid1currentpage_Visible), 5, 0), true);
+         AssignProp(sPrefix, false, edtavFreestylegrid1currentpage_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtavFreestylegrid1currentpage_Visible), 5, 0), true);
          AV10FreeStyleGrid1PageCount = -1;
-         AssignAttri("", false, "AV10FreeStyleGrid1PageCount", StringUtil.LTrimStr( (decimal)(AV10FreeStyleGrid1PageCount), 10, 0));
+         AssignAttri(sPrefix, false, "AV10FreeStyleGrid1PageCount", StringUtil.LTrimStr( (decimal)(AV10FreeStyleGrid1PageCount), 10, 0));
          Freestylegrid1paginationbar_Rowsperpageselectedvalue = subFreestylegrid1_Rows;
-         ucFreestylegrid1paginationbar.SendProperty(context, "", false, Freestylegrid1paginationbar_Internalname, "RowsPerPageSelectedValue", StringUtil.LTrimStr( (decimal)(Freestylegrid1paginationbar_Rowsperpageselectedvalue), 9, 0));
+         ucFreestylegrid1paginationbar.SendProperty(context, sPrefix, false, Freestylegrid1paginationbar_Internalname, "RowsPerPageSelectedValue", StringUtil.LTrimStr( (decimal)(Freestylegrid1paginationbar_Rowsperpageselectedvalue), 9, 0));
          /* Execute user subroutine: 'UPDATESESSIONVARIABLES' */
          S122 ();
          if ( returnInSub )
@@ -1410,7 +1608,7 @@ namespace GeneXus.Programs {
          /* Freestylegrid1_Load Routine */
          returnInSub = false;
          /* Object Property */
-         if ( true )
+         if ( StringUtil.Len( sPrefix) == 0 )
          {
             bDynCreated_Wcreportsworkhourlogdetails = true;
          }
@@ -1424,7 +1622,7 @@ namespace GeneXus.Programs {
          if ( StringUtil.Len( WebComp_Wcreportsworkhourlogdetails_Component) != 0 )
          {
             WebComp_Wcreportsworkhourlogdetails.setjustcreated();
-            WebComp_Wcreportsworkhourlogdetails.componentprepare(new Object[] {(string)"W0027",(string)sGXsfl_23_idx,(long)A106EmployeeId,(string)A148EmployeeName,(DateTime)AV15FromDate,(DateTime)AV16ToDate,(short)AV22OneProjectId});
+            WebComp_Wcreportsworkhourlogdetails.componentprepare(new Object[] {(string)sPrefix+"W0027",(string)sGXsfl_23_idx,(long)A106EmployeeId,(string)A148EmployeeName,(DateTime)AV15FromDate,(DateTime)AV16ToDate,(short)AV22OneProjectId});
             WebComp_Wcreportsworkhourlogdetails.componentbind(new Object[] {(string)"",(string)"",(string)"",(string)"",(string)""});
          }
          /* Load Method */
@@ -1448,23 +1646,23 @@ namespace GeneXus.Programs {
          if ( StringUtil.StrCmp(Freestylegrid1paginationbar_Selectedpage, "Previous") == 0 )
          {
             AV9FreeStyleGrid1CurrentPage = (long)(AV9FreeStyleGrid1CurrentPage-1);
-            AssignAttri("", false, "AV9FreeStyleGrid1CurrentPage", StringUtil.LTrimStr( (decimal)(AV9FreeStyleGrid1CurrentPage), 10, 0));
+            AssignAttri(sPrefix, false, "AV9FreeStyleGrid1CurrentPage", StringUtil.LTrimStr( (decimal)(AV9FreeStyleGrid1CurrentPage), 10, 0));
             subfreestylegrid1_previouspage( ) ;
          }
          else if ( StringUtil.StrCmp(Freestylegrid1paginationbar_Selectedpage, "Next") == 0 )
          {
             AV9FreeStyleGrid1CurrentPage = (long)(AV9FreeStyleGrid1CurrentPage+1);
-            AssignAttri("", false, "AV9FreeStyleGrid1CurrentPage", StringUtil.LTrimStr( (decimal)(AV9FreeStyleGrid1CurrentPage), 10, 0));
+            AssignAttri(sPrefix, false, "AV9FreeStyleGrid1CurrentPage", StringUtil.LTrimStr( (decimal)(AV9FreeStyleGrid1CurrentPage), 10, 0));
             subfreestylegrid1_nextpage( ) ;
          }
          else
          {
             AV8PageToGo = (int)(Math.Round(NumberUtil.Val( Freestylegrid1paginationbar_Selectedpage, "."), 18, MidpointRounding.ToEven));
             AV9FreeStyleGrid1CurrentPage = AV8PageToGo;
-            AssignAttri("", false, "AV9FreeStyleGrid1CurrentPage", StringUtil.LTrimStr( (decimal)(AV9FreeStyleGrid1CurrentPage), 10, 0));
+            AssignAttri(sPrefix, false, "AV9FreeStyleGrid1CurrentPage", StringUtil.LTrimStr( (decimal)(AV9FreeStyleGrid1CurrentPage), 10, 0));
             subfreestylegrid1_gotopage( AV8PageToGo) ;
          }
-         context.DoAjaxRefresh();
+         context.DoAjaxRefreshCmp(sPrefix);
          /*  Sending Event outputs  */
       }
 
@@ -1473,9 +1671,9 @@ namespace GeneXus.Programs {
          /* Freestylegrid1paginationbar_Changerowsperpage Routine */
          returnInSub = false;
          subFreestylegrid1_Rows = Freestylegrid1paginationbar_Rowsperpageselectedvalue;
-         GxWebStd.gx_hidden_field( context, "FREESTYLEGRID1_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subFreestylegrid1_Rows), 6, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"FREESTYLEGRID1_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subFreestylegrid1_Rows), 6, 0, ".", "")));
          AV9FreeStyleGrid1CurrentPage = 1;
-         AssignAttri("", false, "AV9FreeStyleGrid1CurrentPage", StringUtil.LTrimStr( (decimal)(AV9FreeStyleGrid1CurrentPage), 10, 0));
+         AssignAttri(sPrefix, false, "AV9FreeStyleGrid1CurrentPage", StringUtil.LTrimStr( (decimal)(AV9FreeStyleGrid1CurrentPage), 10, 0));
          subfreestylegrid1_firstpage( ) ;
          /*  Sending Event outputs  */
       }
@@ -1487,17 +1685,17 @@ namespace GeneXus.Programs {
          new logtofile(context ).execute(  "Projects: "+AV14ProjectId.ToJSonString(false)) ;
          new logtofile(context ).execute(  "Employees: "+AV13EmployeeId.ToJSonString(false)) ;
          new employeehoursreport(context ).execute( ref  AV21DateRange, ref  AV26DateRange_To, ref  AV14ProjectId, ref  AV12CompanyLocationId, ref  AV13EmployeeId, out  AV35ExcelFilename, out  AV36ErrorMessage) ;
-         AssignAttri("", false, "AV21DateRange", context.localUtil.Format(AV21DateRange, "99/99/99"));
-         AssignAttri("", false, "AV26DateRange_To", context.localUtil.Format(AV26DateRange_To, "99/99/99"));
+         AssignAttri(sPrefix, false, "AV21DateRange", context.localUtil.Format(AV21DateRange, "99/99/99"));
+         AssignAttri(sPrefix, false, "AV26DateRange_To", context.localUtil.Format(AV26DateRange_To, "99/99/99"));
          Innewwindow1_Target = AV35ExcelFilename;
-         ucInnewwindow1.SendProperty(context, "", false, Innewwindow1_Internalname, "Target", Innewwindow1_Target);
+         ucInnewwindow1.SendProperty(context, sPrefix, false, Innewwindow1_Internalname, "Target", Innewwindow1_Target);
          Innewwindow1_Name = "_parent";
-         ucInnewwindow1.SendProperty(context, "", false, Innewwindow1_Internalname, "Name", Innewwindow1_Name);
-         this.executeUsercontrolMethod("", false, "INNEWWINDOW1Container", "OpenWindow", "", new Object[] {});
+         ucInnewwindow1.SendProperty(context, sPrefix, false, Innewwindow1_Internalname, "Name", Innewwindow1_Name);
+         this.executeUsercontrolMethod(sPrefix, false, "INNEWWINDOW1Container", "OpenWindow", "", new Object[] {});
          /*  Sending Event outputs  */
-         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV13EmployeeId", AV13EmployeeId);
-         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV12CompanyLocationId", AV12CompanyLocationId);
-         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV14ProjectId", AV14ProjectId);
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri(sPrefix, false, "AV13EmployeeId", AV13EmployeeId);
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri(sPrefix, false, "AV12CompanyLocationId", AV12CompanyLocationId);
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri(sPrefix, false, "AV14ProjectId", AV14ProjectId);
       }
 
       protected void E174Y2( )
@@ -1506,7 +1704,7 @@ namespace GeneXus.Programs {
          returnInSub = false;
          AV37RecordCount = (short)(subFreestylegrid1_fnc_Recordcount( ));
          AV10FreeStyleGrid1PageCount = (long)(AV37RecordCount/ (decimal)(subFreestylegrid1_Rows)+((((int)((AV37RecordCount) % (subFreestylegrid1_Rows)))>0) ? 1 : 0));
-         AssignAttri("", false, "AV10FreeStyleGrid1PageCount", StringUtil.LTrimStr( (decimal)(AV10FreeStyleGrid1PageCount), 10, 0));
+         AssignAttri(sPrefix, false, "AV10FreeStyleGrid1PageCount", StringUtil.LTrimStr( (decimal)(AV10FreeStyleGrid1PageCount), 10, 0));
          /*  Sending Event outputs  */
       }
 
@@ -1528,9 +1726,9 @@ namespace GeneXus.Programs {
          AV12CompanyLocationId.FromJSonString(AV34WebSession.Get("CompanyLocationId"), null);
          AV13EmployeeId.FromJSonString(AV34WebSession.Get("EmployeeId"), null);
          AV15FromDate = context.localUtil.CToD( AV34WebSession.Get("FromDate"), 2);
-         AssignAttri("", false, "AV15FromDate", context.localUtil.Format(AV15FromDate, "99/99/99"));
+         AssignAttri(sPrefix, false, "AV15FromDate", context.localUtil.Format(AV15FromDate, "99/99/99"));
          AV16ToDate = context.localUtil.CToD( AV34WebSession.Get("ToDate"), 2);
-         AssignAttri("", false, "AV16ToDate", context.localUtil.Format(AV16ToDate, "99/99/99"));
+         AssignAttri(sPrefix, false, "AV16ToDate", context.localUtil.Format(AV16ToDate, "99/99/99"));
       }
 
       public override void setparameters( Object[] obj )
@@ -1538,12 +1736,11 @@ namespace GeneXus.Programs {
          createObjects();
          initialize();
          AV22OneProjectId = Convert.ToInt16(getParm(obj,0));
-         AssignAttri("", false, "AV22OneProjectId", StringUtil.LTrimStr( (decimal)(AV22OneProjectId), 4, 0));
-         GxWebStd.gx_hidden_field( context, "gxhash_vONEPROJECTID", GetSecureSignedToken( "", context.localUtil.Format( (decimal)(AV22OneProjectId), "ZZZ9"), context));
+         AssignAttri(sPrefix, false, "AV22OneProjectId", StringUtil.LTrimStr( (decimal)(AV22OneProjectId), 4, 0));
          AV15FromDate = (DateTime)getParm(obj,1);
-         AssignAttri("", false, "AV15FromDate", context.localUtil.Format(AV15FromDate, "99/99/99"));
+         AssignAttri(sPrefix, false, "AV15FromDate", context.localUtil.Format(AV15FromDate, "99/99/99"));
          AV16ToDate = (DateTime)getParm(obj,2);
-         AssignAttri("", false, "AV16ToDate", context.localUtil.Format(AV16ToDate, "99/99/99"));
+         AssignAttri(sPrefix, false, "AV16ToDate", context.localUtil.Format(AV16ToDate, "99/99/99"));
       }
 
       public override string getresponse( string sGXDynURL )
@@ -1560,12 +1757,218 @@ namespace GeneXus.Programs {
          WE4Y2( ) ;
          cleanup();
          context.SetWrapped(false);
+         SaveComponentMsgList(sPrefix);
          context.GX_msglist = BackMsgLst;
          return "";
       }
 
       public void responsestatic( string sGXDynURL )
       {
+      }
+
+      public override void componentbind( Object[] obj )
+      {
+         if ( IsUrlCreated( ) )
+         {
+            return  ;
+         }
+         sCtrlAV22OneProjectId = (string)((string)getParm(obj,0));
+         sCtrlAV15FromDate = (string)((string)getParm(obj,1));
+         sCtrlAV16ToDate = (string)((string)getParm(obj,2));
+      }
+
+      public override void componentrestorestate( string sPPrefix ,
+                                                  string sPSFPrefix )
+      {
+         sPrefix = sPPrefix + sPSFPrefix;
+         PA4Y2( ) ;
+         WCParametersGet( ) ;
+      }
+
+      public override void componentprepare( Object[] obj )
+      {
+         wbLoad = false;
+         sCompPrefix = (string)getParm(obj,0);
+         sSFPrefix = (string)getParm(obj,1);
+         sPrefix = sCompPrefix + sSFPrefix;
+         AddComponentObject(sPrefix, "projectdetails", GetJustCreated( ));
+         if ( ( nDoneStart == 0 ) && ( nDynComponent == 0 ) )
+         {
+            INITWEB( ) ;
+         }
+         else
+         {
+            init_default_properties( ) ;
+            init_web_controls( ) ;
+         }
+         PA4Y2( ) ;
+         if ( ! GetJustCreated( ) && ( StringUtil.StrCmp(context.GetRequestMethod( ), "POST") == 0 ) && ( context.wbGlbDoneStart == 0 ) )
+         {
+            WCParametersGet( ) ;
+         }
+         else
+         {
+            AV22OneProjectId = Convert.ToInt16(getParm(obj,2));
+            AssignAttri(sPrefix, false, "AV22OneProjectId", StringUtil.LTrimStr( (decimal)(AV22OneProjectId), 4, 0));
+            AV15FromDate = (DateTime)getParm(obj,3);
+            AssignAttri(sPrefix, false, "AV15FromDate", context.localUtil.Format(AV15FromDate, "99/99/99"));
+            AV16ToDate = (DateTime)getParm(obj,4);
+            AssignAttri(sPrefix, false, "AV16ToDate", context.localUtil.Format(AV16ToDate, "99/99/99"));
+         }
+         wcpOAV22OneProjectId = (short)(Math.Round(context.localUtil.CToN( cgiGet( sPrefix+"wcpOAV22OneProjectId"), ".", ","), 18, MidpointRounding.ToEven));
+         wcpOAV15FromDate = context.localUtil.CToD( cgiGet( sPrefix+"wcpOAV15FromDate"), 0);
+         wcpOAV16ToDate = context.localUtil.CToD( cgiGet( sPrefix+"wcpOAV16ToDate"), 0);
+         if ( ! GetJustCreated( ) && ( ( AV22OneProjectId != wcpOAV22OneProjectId ) || ( DateTimeUtil.ResetTime ( AV15FromDate ) != DateTimeUtil.ResetTime ( wcpOAV15FromDate ) ) || ( DateTimeUtil.ResetTime ( AV16ToDate ) != DateTimeUtil.ResetTime ( wcpOAV16ToDate ) ) ) )
+         {
+            setjustcreated();
+         }
+         wcpOAV22OneProjectId = AV22OneProjectId;
+         wcpOAV15FromDate = AV15FromDate;
+         wcpOAV16ToDate = AV16ToDate;
+      }
+
+      protected void WCParametersGet( )
+      {
+         /* Read Component Parameters. */
+         sCtrlAV22OneProjectId = cgiGet( sPrefix+"AV22OneProjectId_CTRL");
+         if ( StringUtil.Len( sCtrlAV22OneProjectId) > 0 )
+         {
+            AV22OneProjectId = (short)(Math.Round(context.localUtil.CToN( cgiGet( sCtrlAV22OneProjectId), ".", ","), 18, MidpointRounding.ToEven));
+            AssignAttri(sPrefix, false, "AV22OneProjectId", StringUtil.LTrimStr( (decimal)(AV22OneProjectId), 4, 0));
+         }
+         else
+         {
+            AV22OneProjectId = (short)(Math.Round(context.localUtil.CToN( cgiGet( sPrefix+"AV22OneProjectId_PARM"), ".", ","), 18, MidpointRounding.ToEven));
+         }
+         sCtrlAV15FromDate = cgiGet( sPrefix+"AV15FromDate_CTRL");
+         if ( StringUtil.Len( sCtrlAV15FromDate) > 0 )
+         {
+            AV15FromDate = DateTimeUtil.ResetTime(context.localUtil.CToT( cgiGet( sCtrlAV15FromDate), 0));
+            AssignAttri(sPrefix, false, "AV15FromDate", context.localUtil.Format(AV15FromDate, "99/99/99"));
+         }
+         else
+         {
+            AV15FromDate = context.localUtil.CToD( cgiGet( sPrefix+"AV15FromDate_PARM"), 0);
+         }
+         sCtrlAV16ToDate = cgiGet( sPrefix+"AV16ToDate_CTRL");
+         if ( StringUtil.Len( sCtrlAV16ToDate) > 0 )
+         {
+            AV16ToDate = DateTimeUtil.ResetTime(context.localUtil.CToT( cgiGet( sCtrlAV16ToDate), 0));
+            AssignAttri(sPrefix, false, "AV16ToDate", context.localUtil.Format(AV16ToDate, "99/99/99"));
+         }
+         else
+         {
+            AV16ToDate = context.localUtil.CToD( cgiGet( sPrefix+"AV16ToDate_PARM"), 0);
+         }
+      }
+
+      public override void componentprocess( string sPPrefix ,
+                                             string sPSFPrefix ,
+                                             string sCompEvt )
+      {
+         sCompPrefix = sPPrefix;
+         sSFPrefix = sPSFPrefix;
+         sPrefix = sCompPrefix + sSFPrefix;
+         BackMsgLst = context.GX_msglist;
+         context.GX_msglist = LclMsgLst;
+         INITWEB( ) ;
+         nDraw = 0;
+         PA4Y2( ) ;
+         sEvt = sCompEvt;
+         WCParametersGet( ) ;
+         WS4Y2( ) ;
+         if ( isFullAjaxMode( ) )
+         {
+            componentdraw();
+         }
+         SaveComponentMsgList(sPrefix);
+         context.GX_msglist = BackMsgLst;
+      }
+
+      public override void componentstart( )
+      {
+         if ( nDoneStart == 0 )
+         {
+            WCStart( ) ;
+         }
+      }
+
+      protected void WCStart( )
+      {
+         nDraw = 1;
+         BackMsgLst = context.GX_msglist;
+         context.GX_msglist = LclMsgLst;
+         WS4Y2( ) ;
+         SaveComponentMsgList(sPrefix);
+         context.GX_msglist = BackMsgLst;
+      }
+
+      protected void WCParametersSet( )
+      {
+         GxWebStd.gx_hidden_field( context, sPrefix+"AV22OneProjectId_PARM", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV22OneProjectId), 4, 0, ".", "")));
+         if ( StringUtil.Len( StringUtil.RTrim( sCtrlAV22OneProjectId)) > 0 )
+         {
+            GxWebStd.gx_hidden_field( context, sPrefix+"AV22OneProjectId_CTRL", StringUtil.RTrim( sCtrlAV22OneProjectId));
+         }
+         GxWebStd.gx_hidden_field( context, sPrefix+"AV15FromDate_PARM", context.localUtil.DToC( AV15FromDate, 0, "/"));
+         if ( StringUtil.Len( StringUtil.RTrim( sCtrlAV15FromDate)) > 0 )
+         {
+            GxWebStd.gx_hidden_field( context, sPrefix+"AV15FromDate_CTRL", StringUtil.RTrim( sCtrlAV15FromDate));
+         }
+         GxWebStd.gx_hidden_field( context, sPrefix+"AV16ToDate_PARM", context.localUtil.DToC( AV16ToDate, 0, "/"));
+         if ( StringUtil.Len( StringUtil.RTrim( sCtrlAV16ToDate)) > 0 )
+         {
+            GxWebStd.gx_hidden_field( context, sPrefix+"AV16ToDate_CTRL", StringUtil.RTrim( sCtrlAV16ToDate));
+         }
+      }
+
+      public override void componentdraw( )
+      {
+         if ( CheckCmpSecurityAccess() )
+         {
+            if ( nDoneStart == 0 )
+            {
+               WCStart( ) ;
+            }
+            BackMsgLst = context.GX_msglist;
+            context.GX_msglist = LclMsgLst;
+            WCParametersSet( ) ;
+            WE4Y2( ) ;
+            SaveComponentMsgList(sPrefix);
+            context.GX_msglist = BackMsgLst;
+         }
+      }
+
+      public override string getstring( string sGXControl )
+      {
+         string sCtrlName;
+         if ( StringUtil.StrCmp(StringUtil.Substring( sGXControl, 1, 1), "&") == 0 )
+         {
+            sCtrlName = StringUtil.Substring( sGXControl, 2, StringUtil.Len( sGXControl)-1);
+         }
+         else
+         {
+            sCtrlName = sGXControl;
+         }
+         return cgiGet( sPrefix+"v"+StringUtil.Upper( sCtrlName)) ;
+      }
+
+      public override void componentjscripts( )
+      {
+         include_jscripts( ) ;
+         if ( ! ( WebComp_GX_Process == null ) )
+         {
+            WebComp_GX_Process.componentjscripts();
+         }
+         if ( ! ( WebComp_Wcreportsworkhourlogdetails == null ) )
+         {
+            WebComp_Wcreportsworkhourlogdetails.componentjscripts();
+         }
+      }
+
+      public override void componentthemes( )
+      {
+         define_styles( ) ;
       }
 
       protected void define_styles( )
@@ -1587,7 +1990,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20252416152512", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20252421313879", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1597,13 +2000,13 @@ namespace GeneXus.Programs {
                disableOutput();
             }
          }
+         CloseStyles();
          /* End function define_styles */
       }
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("projectdetails.js", "?20252416152513", false, true);
+         context.AddJavascriptSource("projectdetails.js", "?20252421313880", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/DVPaginationBar/DVPaginationBarRender.js", "", false, true);
@@ -1613,14 +2016,14 @@ namespace GeneXus.Programs {
 
       protected void SubsflControlProps_232( )
       {
-         edtEmployeeName_Internalname = "EMPLOYEENAME_"+sGXsfl_23_idx;
-         edtEmployeeId_Internalname = "EMPLOYEEID_"+sGXsfl_23_idx;
+         edtEmployeeName_Internalname = sPrefix+"EMPLOYEENAME_"+sGXsfl_23_idx;
+         edtEmployeeId_Internalname = sPrefix+"EMPLOYEEID_"+sGXsfl_23_idx;
       }
 
       protected void SubsflControlProps_fel_232( )
       {
-         edtEmployeeName_Internalname = "EMPLOYEENAME_"+sGXsfl_23_fel_idx;
-         edtEmployeeId_Internalname = "EMPLOYEEID_"+sGXsfl_23_fel_idx;
+         edtEmployeeName_Internalname = sPrefix+"EMPLOYEENAME_"+sGXsfl_23_fel_idx;
+         edtEmployeeId_Internalname = sPrefix+"EMPLOYEEID_"+sGXsfl_23_fel_idx;
       }
 
       protected void sendrow_232( )
@@ -1693,16 +2096,16 @@ namespace GeneXus.Programs {
             /* Div Control */
             Freestylegrid1Row.AddColumnProperties("div_start", -1, isAjaxCallMode( ), new Object[] {(string)"",(short)1,(short)0,(string)"px",(short)0,(string)"px",(string)"col-xs-12",(string)"start",(string)"top",(string)"",(string)"",(string)"div"});
             /* WebComponent */
-            GxWebStd.gx_hidden_field( context, "W0027"+sGXsfl_23_idx, StringUtil.RTrim( WebComp_Wcreportsworkhourlogdetails_Component));
+            GxWebStd.gx_hidden_field( context, sPrefix+"W0027"+sGXsfl_23_idx, StringUtil.RTrim( WebComp_Wcreportsworkhourlogdetails_Component));
             context.WriteHtmlText( "<div") ;
             GxWebStd.ClassAttribute( context, "gxwebcomponent"+" gxwebcomponent-loading");
-            context.WriteHtmlText( " id=\""+"gxHTMLWrpW0027"+sGXsfl_23_idx+"\""+"") ;
+            context.WriteHtmlText( " id=\""+sPrefix+"gxHTMLWrpW0027"+sGXsfl_23_idx+"\""+"") ;
             context.WriteHtmlText( ">") ;
             if ( bGXsfl_23_Refreshing )
             {
                if ( StringUtil.Len( WebComp_Wcreportsworkhourlogdetails_Component) != 0 )
                {
-                  if ( ! context.isAjaxRequest( ) || ( StringUtil.StringSearch( "W0027"+sGXsfl_23_idx, cgiGet( "_EventName"), 1) != 0 ) )
+                  if ( ! context.isAjaxRequest( ) || ( StringUtil.StringSearch( sPrefix+"W0027"+sGXsfl_23_idx, cgiGet( "_EventName"), 1) != 0 ) )
                   {
                      if ( 1 != 0 )
                      {
@@ -1714,7 +2117,7 @@ namespace GeneXus.Programs {
                   }
                   if ( ! context.isAjaxRequest( ) || ( StringUtil.StrCmp(StringUtil.Lower( OldWcreportsworkhourlogdetails), StringUtil.Lower( WebComp_Wcreportsworkhourlogdetails_Component)) != 0 ) )
                   {
-                     context.httpAjaxContext.ajax_rspStartCmp("gxHTMLWrpW0027"+sGXsfl_23_idx);
+                     context.httpAjaxContext.ajax_rspStartCmp(sPrefix+"gxHTMLWrpW0027"+sGXsfl_23_idx);
                   }
                   WebComp_Wcreportsworkhourlogdetails.componentdraw();
                   if ( ! context.isAjaxRequest( ) || ( StringUtil.StrCmp(StringUtil.Lower( OldWcreportsworkhourlogdetails), StringUtil.Lower( WebComp_Wcreportsworkhourlogdetails_Component)) != 0 ) )
@@ -1743,7 +2146,7 @@ namespace GeneXus.Programs {
             Freestylegrid1Row.AddColumnProperties("html_label", -1, isAjaxCallMode( ), new Object[] {(string)edtEmployeeName_Internalname,(string)"Employee Name",(string)"gx-form-item AttributeLabel",(short)0,(bool)true,(string)"width: 25%;"});
             /* Single line edit */
             ROClassString = "Attribute";
-            Freestylegrid1Row.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtEmployeeName_Internalname,StringUtil.RTrim( A148EmployeeName),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtEmployeeName_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"",(string)"",(int)edtEmployeeName_Visible,(short)0,(short)0,(string)"text",(string)"",(short)80,(string)"chr",(short)1,(string)"row",(short)100,(short)0,(short)0,(short)23,(short)0,(short)-1,(short)-1,(bool)true,(string)"Name",(string)"start",(bool)true,(string)""});
+            Freestylegrid1Row.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtEmployeeName_Internalname,StringUtil.RTrim( A148EmployeeName),(string)"",(string)"",(string)"'"+sPrefix+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtEmployeeName_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"",(string)"",(int)edtEmployeeName_Visible,(short)0,(short)0,(string)"text",(string)"",(short)80,(string)"chr",(short)1,(string)"row",(short)100,(short)0,(short)0,(short)23,(short)0,(short)-1,(short)-1,(bool)true,(string)"Name",(string)"start",(bool)true,(string)""});
             Freestylegrid1Row.AddColumnProperties("div_end", -1, isAjaxCallMode( ), new Object[] {(string)"start",(string)"top",(string)"div"});
             if ( Freestylegrid1Container.GetWrapped() == 1 )
             {
@@ -1756,7 +2159,7 @@ namespace GeneXus.Programs {
             Freestylegrid1Row.AddColumnProperties("html_label", -1, isAjaxCallMode( ), new Object[] {(string)edtEmployeeId_Internalname,(string)"Employee Id",(string)"gx-form-item AttributeLabel",(short)0,(bool)true,(string)"width: 25%;"});
             /* Single line edit */
             ROClassString = "Attribute";
-            Freestylegrid1Row.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtEmployeeId_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(A106EmployeeId), 10, 0, ".", "")),StringUtil.LTrim( context.localUtil.Format( (decimal)(A106EmployeeId), "ZZZZZZZZZ9")),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtEmployeeId_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"",(string)"",(int)edtEmployeeId_Visible,(short)0,(short)0,(string)"text",(string)"1",(short)10,(string)"chr",(short)1,(string)"row",(short)10,(short)0,(short)0,(short)23,(short)0,(short)-1,(short)0,(bool)true,(string)"Id",(string)"end",(bool)false,(string)""});
+            Freestylegrid1Row.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtEmployeeId_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(A106EmployeeId), 10, 0, ".", "")),StringUtil.LTrim( context.localUtil.Format( (decimal)(A106EmployeeId), "ZZZZZZZZZ9")),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+sPrefix+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtEmployeeId_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"",(string)"",(int)edtEmployeeId_Visible,(short)0,(short)0,(string)"text",(string)"1",(short)10,(string)"chr",(short)1,(string)"row",(short)10,(short)0,(short)0,(short)23,(short)0,(short)-1,(short)0,(bool)true,(string)"Id",(string)"end",(bool)false,(string)""});
             Freestylegrid1Row.AddColumnProperties("div_end", -1, isAjaxCallMode( ), new Object[] {(string)"start",(string)"top",(string)"div"});
             if ( Freestylegrid1Container.GetWrapped() == 1 )
             {
@@ -1793,7 +2196,7 @@ namespace GeneXus.Programs {
       {
          if ( Freestylegrid1Container.GetWrapped() == 1 )
          {
-            context.WriteHtmlText( "<div id=\""+"Freestylegrid1Container"+"DivS\" data-gxgridid=\"23\">") ;
+            context.WriteHtmlText( "<div id=\""+sPrefix+"Freestylegrid1Container"+"DivS\" data-gxgridid=\"23\">") ;
             sStyleString = "";
             GxWebStd.gx_table_start( context, subFreestylegrid1_Internalname, subFreestylegrid1_Internalname, "", "FreeStyleGrid", 0, "", "", 1, 2, sStyleString, "", "", 0);
             Freestylegrid1Container.AddObjectProperty("GridName", "Freestylegrid1");
@@ -1817,7 +2220,7 @@ namespace GeneXus.Programs {
             Freestylegrid1Container.AddObjectProperty("Cellpadding", StringUtil.LTrim( StringUtil.NToC( (decimal)(1), 4, 0, ".", "")));
             Freestylegrid1Container.AddObjectProperty("Cellspacing", StringUtil.LTrim( StringUtil.NToC( (decimal)(2), 4, 0, ".", "")));
             Freestylegrid1Container.AddObjectProperty("Backcolorstyle", StringUtil.LTrim( StringUtil.NToC( (decimal)(subFreestylegrid1_Backcolorstyle), 1, 0, ".", "")));
-            Freestylegrid1Container.AddObjectProperty("CmpContext", "");
+            Freestylegrid1Container.AddObjectProperty("CmpContext", sPrefix);
             Freestylegrid1Container.AddObjectProperty("InMasterPage", "false");
             Freestylegrid1Column = GXWebColumn.GetNew(isAjaxCallMode( ));
             Freestylegrid1Container.AddColumnProperties(Freestylegrid1Column);
@@ -1881,30 +2284,36 @@ namespace GeneXus.Programs {
 
       protected void init_default_properties( )
       {
-         bttBtnexportexcel_Internalname = "BTNEXPORTEXCEL";
-         divUnnamedtable1_Internalname = "UNNAMEDTABLE1";
-         edtEmployeeName_Internalname = "EMPLOYEENAME";
-         edtEmployeeId_Internalname = "EMPLOYEEID";
-         tblUnnamedtablecontentfsfreestylegrid1_Internalname = "UNNAMEDTABLECONTENTFSFREESTYLEGRID1";
-         divFreestylegrid1layouttable_Internalname = "FREESTYLEGRID1LAYOUTTABLE";
-         Freestylegrid1paginationbar_Internalname = "FREESTYLEGRID1PAGINATIONBAR";
-         divFreestylegrid1tablewithpaging_Internalname = "FREESTYLEGRID1TABLEWITHPAGING";
-         divTablecontent_Internalname = "TABLECONTENT";
-         Innewwindow1_Internalname = "INNEWWINDOW1";
-         divTablemain_Internalname = "TABLEMAIN";
-         edtavFreestylegrid1currentpage_Internalname = "vFREESTYLEGRID1CURRENTPAGE";
-         divHtml_bottomauxiliarcontrols_Internalname = "HTML_BOTTOMAUXILIARCONTROLS";
-         divLayoutmaintable_Internalname = "LAYOUTMAINTABLE";
-         Form.Internalname = "FORM";
-         subFreestylegrid1_Internalname = "FREESTYLEGRID1";
+         bttBtnexportexcel_Internalname = sPrefix+"BTNEXPORTEXCEL";
+         divUnnamedtable1_Internalname = sPrefix+"UNNAMEDTABLE1";
+         edtEmployeeName_Internalname = sPrefix+"EMPLOYEENAME";
+         edtEmployeeId_Internalname = sPrefix+"EMPLOYEEID";
+         tblUnnamedtablecontentfsfreestylegrid1_Internalname = sPrefix+"UNNAMEDTABLECONTENTFSFREESTYLEGRID1";
+         divFreestylegrid1layouttable_Internalname = sPrefix+"FREESTYLEGRID1LAYOUTTABLE";
+         Freestylegrid1paginationbar_Internalname = sPrefix+"FREESTYLEGRID1PAGINATIONBAR";
+         divFreestylegrid1tablewithpaging_Internalname = sPrefix+"FREESTYLEGRID1TABLEWITHPAGING";
+         divTablecontent_Internalname = sPrefix+"TABLECONTENT";
+         Innewwindow1_Internalname = sPrefix+"INNEWWINDOW1";
+         divTablemain_Internalname = sPrefix+"TABLEMAIN";
+         edtavFreestylegrid1currentpage_Internalname = sPrefix+"vFREESTYLEGRID1CURRENTPAGE";
+         divHtml_bottomauxiliarcontrols_Internalname = sPrefix+"HTML_BOTTOMAUXILIARCONTROLS";
+         divLayoutmaintable_Internalname = sPrefix+"LAYOUTMAINTABLE";
+         Form.Internalname = sPrefix+"FORM";
+         subFreestylegrid1_Internalname = sPrefix+"FREESTYLEGRID1";
       }
 
       public override void initialize_properties( )
       {
-         context.SetDefaultTheme("WorkWithPlusDS", true);
-         if ( context.isSpaRequest( ) )
+         if ( StringUtil.Len( sPrefix) == 0 )
          {
-            disableJsOutput();
+            context.SetDefaultTheme("WorkWithPlusDS", true);
+         }
+         if ( StringUtil.Len( sPrefix) == 0 )
+         {
+            if ( context.isSpaRequest( ) )
+            {
+               disableJsOutput();
+            }
          }
          init_default_properties( ) ;
          subFreestylegrid1_Allowcollapsing = 0;
@@ -1935,18 +2344,16 @@ namespace GeneXus.Programs {
          Freestylegrid1paginationbar_Showprevious = Convert.ToBoolean( -1);
          Freestylegrid1paginationbar_Showfirst = Convert.ToBoolean( 0);
          Freestylegrid1paginationbar_Class = "PaginationBar";
-         Form.Headerrawhtml = "";
-         Form.Background = "";
-         Form.Textcolor = 0;
-         Form.Backcolor = (int)(0xFFFFFF);
-         Form.Caption = "Project Details";
          edtEmployeeId_Visible = 1;
          edtEmployeeName_Visible = 1;
          subFreestylegrid1_Rows = 0;
          context.GX_msglist.DisplayMode = 1;
-         if ( context.isSpaRequest( ) )
+         if ( StringUtil.Len( sPrefix) == 0 )
          {
-            enableJsOutput();
+            if ( context.isSpaRequest( ) )
+            {
+               enableJsOutput();
+            }
          }
       }
 
@@ -1957,12 +2364,12 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"FREESTYLEGRID1_nFirstRecordOnPage"},{"av":"FREESTYLEGRID1_nEOF"},{"av":"subFreestylegrid1_Rows","ctrl":"FREESTYLEGRID1","prop":"Rows"},{"av":"AV15FromDate","fld":"vFROMDATE"},{"av":"AV16ToDate","fld":"vTODATE"},{"av":"edtEmployeeName_Visible","ctrl":"EMPLOYEENAME","prop":"Visible"},{"av":"edtEmployeeId_Visible","ctrl":"EMPLOYEEID","prop":"Visible"},{"av":"AV22OneProjectId","fld":"vONEPROJECTID","pic":"ZZZ9","hsh":true}]}""");
-         setEventMetadata("FREESTYLEGRID1.LOAD","""{"handler":"E164Y2","iparms":[{"av":"A106EmployeeId","fld":"EMPLOYEEID","pic":"ZZZZZZZZZ9"},{"av":"A148EmployeeName","fld":"EMPLOYEENAME"},{"av":"AV15FromDate","fld":"vFROMDATE"},{"av":"AV16ToDate","fld":"vTODATE"},{"av":"AV22OneProjectId","fld":"vONEPROJECTID","pic":"ZZZ9","hsh":true}]""");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"FREESTYLEGRID1_nFirstRecordOnPage"},{"av":"FREESTYLEGRID1_nEOF"},{"av":"subFreestylegrid1_Rows","ctrl":"FREESTYLEGRID1","prop":"Rows"},{"av":"AV22OneProjectId","fld":"vONEPROJECTID","pic":"ZZZ9"},{"av":"AV15FromDate","fld":"vFROMDATE"},{"av":"AV16ToDate","fld":"vTODATE"},{"av":"edtEmployeeName_Visible","ctrl":"EMPLOYEENAME","prop":"Visible"},{"av":"edtEmployeeId_Visible","ctrl":"EMPLOYEEID","prop":"Visible"},{"av":"sPrefix"}]}""");
+         setEventMetadata("FREESTYLEGRID1.LOAD","""{"handler":"E164Y2","iparms":[{"av":"A106EmployeeId","fld":"EMPLOYEEID","pic":"ZZZZZZZZZ9"},{"av":"A148EmployeeName","fld":"EMPLOYEENAME"},{"av":"AV15FromDate","fld":"vFROMDATE"},{"av":"AV16ToDate","fld":"vTODATE"},{"av":"AV22OneProjectId","fld":"vONEPROJECTID","pic":"ZZZ9"}]""");
          setEventMetadata("FREESTYLEGRID1.LOAD",""","oparms":[{"ctrl":"WCREPORTSWORKHOURLOGDETAILS"}]}""");
-         setEventMetadata("FREESTYLEGRID1PAGINATIONBAR.CHANGEPAGE","""{"handler":"E114Y2","iparms":[{"av":"FREESTYLEGRID1_nFirstRecordOnPage"},{"av":"FREESTYLEGRID1_nEOF"},{"av":"subFreestylegrid1_Rows","ctrl":"FREESTYLEGRID1","prop":"Rows"},{"av":"AV22OneProjectId","fld":"vONEPROJECTID","pic":"ZZZ9","hsh":true},{"av":"AV15FromDate","fld":"vFROMDATE"},{"av":"AV16ToDate","fld":"vTODATE"},{"av":"edtEmployeeName_Visible","ctrl":"EMPLOYEENAME","prop":"Visible"},{"av":"edtEmployeeId_Visible","ctrl":"EMPLOYEEID","prop":"Visible"},{"av":"Freestylegrid1paginationbar_Selectedpage","ctrl":"FREESTYLEGRID1PAGINATIONBAR","prop":"SelectedPage"},{"av":"AV9FreeStyleGrid1CurrentPage","fld":"vFREESTYLEGRID1CURRENTPAGE","pic":"ZZZZZZZZZ9"}]""");
+         setEventMetadata("FREESTYLEGRID1PAGINATIONBAR.CHANGEPAGE","""{"handler":"E114Y2","iparms":[{"av":"FREESTYLEGRID1_nFirstRecordOnPage"},{"av":"FREESTYLEGRID1_nEOF"},{"av":"subFreestylegrid1_Rows","ctrl":"FREESTYLEGRID1","prop":"Rows"},{"av":"AV22OneProjectId","fld":"vONEPROJECTID","pic":"ZZZ9"},{"av":"AV15FromDate","fld":"vFROMDATE"},{"av":"AV16ToDate","fld":"vTODATE"},{"av":"edtEmployeeName_Visible","ctrl":"EMPLOYEENAME","prop":"Visible"},{"av":"edtEmployeeId_Visible","ctrl":"EMPLOYEEID","prop":"Visible"},{"av":"sPrefix"},{"av":"Freestylegrid1paginationbar_Selectedpage","ctrl":"FREESTYLEGRID1PAGINATIONBAR","prop":"SelectedPage"},{"av":"AV9FreeStyleGrid1CurrentPage","fld":"vFREESTYLEGRID1CURRENTPAGE","pic":"ZZZZZZZZZ9"}]""");
          setEventMetadata("FREESTYLEGRID1PAGINATIONBAR.CHANGEPAGE",""","oparms":[{"av":"AV9FreeStyleGrid1CurrentPage","fld":"vFREESTYLEGRID1CURRENTPAGE","pic":"ZZZZZZZZZ9"}]}""");
-         setEventMetadata("FREESTYLEGRID1PAGINATIONBAR.CHANGEROWSPERPAGE","""{"handler":"E124Y2","iparms":[{"av":"FREESTYLEGRID1_nFirstRecordOnPage"},{"av":"FREESTYLEGRID1_nEOF"},{"av":"subFreestylegrid1_Rows","ctrl":"FREESTYLEGRID1","prop":"Rows"},{"av":"AV22OneProjectId","fld":"vONEPROJECTID","pic":"ZZZ9","hsh":true},{"av":"AV15FromDate","fld":"vFROMDATE"},{"av":"AV16ToDate","fld":"vTODATE"},{"av":"edtEmployeeName_Visible","ctrl":"EMPLOYEENAME","prop":"Visible"},{"av":"edtEmployeeId_Visible","ctrl":"EMPLOYEEID","prop":"Visible"},{"av":"Freestylegrid1paginationbar_Rowsperpageselectedvalue","ctrl":"FREESTYLEGRID1PAGINATIONBAR","prop":"RowsPerPageSelectedValue"}]""");
+         setEventMetadata("FREESTYLEGRID1PAGINATIONBAR.CHANGEROWSPERPAGE","""{"handler":"E124Y2","iparms":[{"av":"FREESTYLEGRID1_nFirstRecordOnPage"},{"av":"FREESTYLEGRID1_nEOF"},{"av":"subFreestylegrid1_Rows","ctrl":"FREESTYLEGRID1","prop":"Rows"},{"av":"AV22OneProjectId","fld":"vONEPROJECTID","pic":"ZZZ9"},{"av":"AV15FromDate","fld":"vFROMDATE"},{"av":"AV16ToDate","fld":"vTODATE"},{"av":"edtEmployeeName_Visible","ctrl":"EMPLOYEENAME","prop":"Visible"},{"av":"edtEmployeeId_Visible","ctrl":"EMPLOYEEID","prop":"Visible"},{"av":"sPrefix"},{"av":"Freestylegrid1paginationbar_Rowsperpageselectedvalue","ctrl":"FREESTYLEGRID1PAGINATIONBAR","prop":"RowsPerPageSelectedValue"}]""");
          setEventMetadata("FREESTYLEGRID1PAGINATIONBAR.CHANGEROWSPERPAGE",""","oparms":[{"av":"subFreestylegrid1_Rows","ctrl":"FREESTYLEGRID1","prop":"Rows"},{"av":"AV9FreeStyleGrid1CurrentPage","fld":"vFREESTYLEGRID1CURRENTPAGE","pic":"ZZZZZZZZZ9"}]}""");
          setEventMetadata("'DOEXPORTEXCEL'","""{"handler":"E134Y2","iparms":[{"av":"AV14ProjectId","fld":"vPROJECTID"},{"av":"AV13EmployeeId","fld":"vEMPLOYEEID"},{"av":"AV21DateRange","fld":"vDATERANGE"},{"av":"AV26DateRange_To","fld":"vDATERANGE_TO"},{"av":"AV12CompanyLocationId","fld":"vCOMPANYLOCATIONID"}]""");
          setEventMetadata("'DOEXPORTEXCEL'",""","oparms":[{"av":"AV13EmployeeId","fld":"vEMPLOYEEID"},{"av":"AV12CompanyLocationId","fld":"vCOMPANYLOCATIONID"},{"av":"AV14ProjectId","fld":"vPROJECTID"},{"av":"AV26DateRange_To","fld":"vDATERANGE_TO"},{"av":"AV21DateRange","fld":"vDATERANGE"},{"av":"Innewwindow1_Target","ctrl":"INNEWWINDOW1","prop":"Target"},{"av":"Innewwindow1_Name","ctrl":"INNEWWINDOW1","prop":"Name"}]}""");
@@ -1988,6 +2395,7 @@ namespace GeneXus.Programs {
          Freestylegrid1paginationbar_Selectedpage = "";
          gxfirstwebparm = "";
          gxfirstwebparm_bkp = "";
+         sPrefix = "";
          sDynURL = "";
          FormProcess = "";
          bodyStyle = "";
@@ -2002,8 +2410,6 @@ namespace GeneXus.Programs {
          AV31InEmployeeId = new GxSimpleCollection<long>();
          AV30InCompanyLocationId = new GxSimpleCollection<long>();
          GX_FocusControl = "";
-         Form = new GXWebForm();
-         sPrefix = "";
          ClassString = "";
          StyleString = "";
          TempTags = "";
@@ -2012,6 +2418,8 @@ namespace GeneXus.Programs {
          sStyleString = "";
          ucFreestylegrid1paginationbar = new GXUserControl();
          ucInnewwindow1 = new GXUserControl();
+         Form = new GXWebForm();
+         sXEvt = "";
          sEvt = "";
          EvtGridId = "";
          EvtRowId = "";
@@ -2037,6 +2445,9 @@ namespace GeneXus.Programs {
          AV34WebSession = context.GetSession();
          BackMsgLst = new msglist();
          LclMsgLst = new msglist();
+         sCtrlAV22OneProjectId = "";
+         sCtrlAV15FromDate = "";
+         sCtrlAV16ToDate = "";
          subFreestylegrid1_Linesclass = "";
          ROClassString = "";
          subFreestylegrid1_Header = "";
@@ -2061,9 +2472,11 @@ namespace GeneXus.Programs {
       private short FREESTYLEGRID1_nEOF ;
       private short nGotPars ;
       private short GxWebError ;
-      private short gxajaxcallmode ;
+      private short nDynComponent ;
       private short wbEnd ;
       private short wbStart ;
+      private short nDraw ;
+      private short nDoneStart ;
       private short nCmpId ;
       private short nDonePA ;
       private short gxcookieaux ;
@@ -2113,6 +2526,9 @@ namespace GeneXus.Programs {
       private string Freestylegrid1paginationbar_Selectedpage ;
       private string gxfirstwebparm ;
       private string gxfirstwebparm_bkp ;
+      private string sPrefix ;
+      private string sCompPrefix ;
+      private string sSFPrefix ;
       private string sGXsfl_23_idx="0001" ;
       private string edtEmployeeName_Internalname ;
       private string edtEmployeeId_Internalname ;
@@ -2133,7 +2549,6 @@ namespace GeneXus.Programs {
       private string Innewwindow1_Name ;
       private string Innewwindow1_Target ;
       private string GX_FocusControl ;
-      private string sPrefix ;
       private string divLayoutmaintable_Internalname ;
       private string divTablemain_Internalname ;
       private string ClassString ;
@@ -2151,6 +2566,7 @@ namespace GeneXus.Programs {
       private string divHtml_bottomauxiliarcontrols_Internalname ;
       private string edtavFreestylegrid1currentpage_Internalname ;
       private string edtavFreestylegrid1currentpage_Jsonclick ;
+      private string sXEvt ;
       private string sEvt ;
       private string EvtGridId ;
       private string EvtRowId ;
@@ -2161,6 +2577,9 @@ namespace GeneXus.Programs {
       private string WebComp_GX_Process_Component ;
       private string WebCompHandler="" ;
       private string WebComp_Wcreportsworkhourlogdetails_Component ;
+      private string sCtrlAV22OneProjectId ;
+      private string sCtrlAV15FromDate ;
+      private string sCtrlAV16ToDate ;
       private string sGXsfl_23_fel_idx="0001" ;
       private string subFreestylegrid1_Class ;
       private string subFreestylegrid1_Linesclass ;
@@ -2203,8 +2622,8 @@ namespace GeneXus.Programs {
       private GXWebColumn Freestylegrid1Column ;
       private GXUserControl ucFreestylegrid1paginationbar ;
       private GXUserControl ucInnewwindow1 ;
-      private IGxSession AV34WebSession ;
       private GXWebForm Form ;
+      private IGxSession AV34WebSession ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private DateTime aP1_FromDate ;

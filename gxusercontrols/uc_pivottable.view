@@ -11,18 +11,18 @@
 		right: 0;
 		background-color: white; /* Adjust as needed */
 		z-index: 2;
-		min-width:60px;
+		min-width:80px;
 	}
 	td:nth-last-child(1), th:nth-last-child(1) {
 		right: 0px; /* Adjust width according to column width */
 		margin-right:10px;
 	}
 	td:nth-last-child(2), th:nth-last-child(2) {
-		right: 60px; /* Adjust width according to column width */
+		right: 80px; /* Adjust width according to column width */
 	}
 	
 	td:nth-last-child(3), th:nth-last-child(3) {
-		right: 120px; /* Adjust width according to column width */
+		right: 160px; /* Adjust width according to column width */
 	}
 </style>
 

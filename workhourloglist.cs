@@ -21,7 +21,7 @@ using GeneXus.Http.Server;
 using System.Xml.Serialization;
 using System.Runtime.Serialization;
 namespace GeneXus.Programs {
-   public class workhourloglist : GXDataArea
+   public class workhourloglist : GXWebComponent
    {
       public workhourloglist( )
       {
@@ -30,7 +30,10 @@ namespace GeneXus.Programs {
          dsGAM = context.GetDataStore("GAM");
          dsDefault = context.GetDataStore("Default");
          IsMain = true;
-         context.SetDefaultTheme("WorkWithPlusDS", true);
+         if ( StringUtil.Len( (string)(sPrefix)) == 0 )
+         {
+            context.SetDefaultTheme("WorkWithPlusDS", true);
+         }
       }
 
       public workhourloglist( IGxContext context )
@@ -57,6 +60,11 @@ namespace GeneXus.Programs {
          webExecute();
       }
 
+      public override void SetPrefix( string sPPrefix )
+      {
+         sPrefix = sPPrefix;
+      }
+
       protected override void createObjects( )
       {
       }
@@ -64,92 +72,108 @@ namespace GeneXus.Programs {
       protected void INITWEB( )
       {
          initialize_properties( ) ;
-         if ( nGotPars == 0 )
+         if ( StringUtil.Len( (string)(sPrefix)) == 0 )
          {
-            entryPointCalled = false;
-            gxfirstwebparm = GetFirstPar( "EmployeeId");
-            gxfirstwebparm_bkp = gxfirstwebparm;
-            gxfirstwebparm = DecryptAjaxCall( gxfirstwebparm);
-            toggleJsOutput = isJsOutputEnabled( );
-            if ( context.isSpaRequest( ) )
+            if ( nGotPars == 0 )
             {
-               disableJsOutput();
-            }
-            if ( StringUtil.StrCmp(gxfirstwebparm, "dyncall") == 0 )
-            {
-               setAjaxCallMode();
-               if ( ! IsValidAjaxCall( true) )
-               {
-                  GxWebError = 1;
-                  return  ;
-               }
-               dyncall( GetNextPar( )) ;
-               return  ;
-            }
-            else if ( StringUtil.StrCmp(gxfirstwebparm, "gxajaxEvt") == 0 )
-            {
-               setAjaxEventMode();
-               if ( ! IsValidAjaxCall( true) )
-               {
-                  GxWebError = 1;
-                  return  ;
-               }
+               entryPointCalled = false;
                gxfirstwebparm = GetFirstPar( "EmployeeId");
-            }
-            else if ( StringUtil.StrCmp(gxfirstwebparm, "gxfullajaxEvt") == 0 )
-            {
-               if ( ! IsValidAjaxCall( true) )
-               {
-                  GxWebError = 1;
-                  return  ;
-               }
-               gxfirstwebparm = GetFirstPar( "EmployeeId");
-            }
-            else if ( StringUtil.StrCmp(gxfirstwebparm, "gxajaxNewRow_"+"Grid") == 0 )
-            {
-               gxnrGrid_newrow_invoke( ) ;
-               return  ;
-            }
-            else if ( StringUtil.StrCmp(gxfirstwebparm, "gxajaxGridRefresh_"+"Grid") == 0 )
-            {
-               gxgrGrid_refresh_invoke( ) ;
-               return  ;
-            }
-            else
-            {
-               if ( ! IsValidAjaxCall( false) )
-               {
-                  GxWebError = 1;
-                  return  ;
-               }
-               gxfirstwebparm = gxfirstwebparm_bkp;
-            }
-            if ( ! entryPointCalled && ! ( isAjaxCallMode( ) || isFullAjaxMode( ) ) )
-            {
-               AV52EmployeeId = (long)(Math.Round(NumberUtil.Val( gxfirstwebparm, "."), 18, MidpointRounding.ToEven));
-               AssignAttri("", false, "AV52EmployeeId", StringUtil.LTrimStr( (decimal)(AV52EmployeeId), 10, 0));
-               GxWebStd.gx_hidden_field( context, "gxhash_vEMPLOYEEID", GetSecureSignedToken( "", context.localUtil.Format( (decimal)(AV52EmployeeId), "ZZZZZZZZZ9"), context));
-               if ( StringUtil.StrCmp(gxfirstwebparm, "viewer") != 0 )
-               {
-                  AV50FromDate = context.localUtil.ParseDateParm( GetPar( "FromDate"));
-                  AssignAttri("", false, "AV50FromDate", context.localUtil.Format(AV50FromDate, "99/99/99"));
-                  GxWebStd.gx_hidden_field( context, "gxhash_vFROMDATE", GetSecureSignedToken( "", AV50FromDate, context));
-                  AV51ToDate = context.localUtil.ParseDateParm( GetPar( "ToDate"));
-                  AssignAttri("", false, "AV51ToDate", context.localUtil.Format(AV51ToDate, "99/99/99"));
-                  GxWebStd.gx_hidden_field( context, "gxhash_vTODATE", GetSecureSignedToken( "", AV51ToDate, context));
-               }
-            }
-            if ( toggleJsOutput )
-            {
+               gxfirstwebparm_bkp = gxfirstwebparm;
+               gxfirstwebparm = DecryptAjaxCall( gxfirstwebparm);
+               toggleJsOutput = isJsOutputEnabled( );
                if ( context.isSpaRequest( ) )
                {
-                  enableJsOutput();
+                  disableJsOutput();
+               }
+               if ( StringUtil.StrCmp(gxfirstwebparm, "dyncall") == 0 )
+               {
+                  setAjaxCallMode();
+                  if ( ! IsValidAjaxCall( true) )
+                  {
+                     GxWebError = 1;
+                     return  ;
+                  }
+                  dyncall( GetNextPar( )) ;
+                  return  ;
+               }
+               else if ( StringUtil.StrCmp(gxfirstwebparm, "dyncomponent") == 0 )
+               {
+                  setAjaxEventMode();
+                  if ( ! IsValidAjaxCall( true) )
+                  {
+                     GxWebError = 1;
+                     return  ;
+                  }
+                  nDynComponent = 1;
+                  sCompPrefix = GetPar( "sCompPrefix");
+                  sSFPrefix = GetPar( "sSFPrefix");
+                  AV52EmployeeId = (long)(Math.Round(NumberUtil.Val( GetPar( "EmployeeId"), "."), 18, MidpointRounding.ToEven));
+                  AssignAttri(sPrefix, false, "AV52EmployeeId", StringUtil.LTrimStr( (decimal)(AV52EmployeeId), 10, 0));
+                  AV50FromDate = context.localUtil.ParseDateParm( GetPar( "FromDate"));
+                  AssignAttri(sPrefix, false, "AV50FromDate", context.localUtil.Format(AV50FromDate, "99/99/99"));
+                  AV51ToDate = context.localUtil.ParseDateParm( GetPar( "ToDate"));
+                  AssignAttri(sPrefix, false, "AV51ToDate", context.localUtil.Format(AV51ToDate, "99/99/99"));
+                  setjustcreated();
+                  componentprepare(new Object[] {(string)sCompPrefix,(string)sSFPrefix,(long)AV52EmployeeId,(DateTime)AV50FromDate,(DateTime)AV51ToDate});
+                  componentstart();
+                  context.httpAjaxContext.ajax_rspStartCmp(sPrefix);
+                  componentdraw();
+                  context.httpAjaxContext.ajax_rspEndCmp();
+                  return  ;
+               }
+               else if ( StringUtil.StrCmp(gxfirstwebparm, "gxajaxEvt") == 0 )
+               {
+                  setAjaxEventMode();
+                  if ( ! IsValidAjaxCall( true) )
+                  {
+                     GxWebError = 1;
+                     return  ;
+                  }
+                  gxfirstwebparm = GetFirstPar( "EmployeeId");
+               }
+               else if ( StringUtil.StrCmp(gxfirstwebparm, "gxfullajaxEvt") == 0 )
+               {
+                  if ( ! IsValidAjaxCall( true) )
+                  {
+                     GxWebError = 1;
+                     return  ;
+                  }
+                  gxfirstwebparm = GetFirstPar( "EmployeeId");
+               }
+               else if ( StringUtil.StrCmp(gxfirstwebparm, "gxajaxNewRow_"+"Grid") == 0 )
+               {
+                  gxnrGrid_newrow_invoke( ) ;
+                  return  ;
+               }
+               else if ( StringUtil.StrCmp(gxfirstwebparm, "gxajaxGridRefresh_"+"Grid") == 0 )
+               {
+                  gxgrGrid_refresh_invoke( ) ;
+                  return  ;
+               }
+               else
+               {
+                  if ( ! IsValidAjaxCall( false) )
+                  {
+                     GxWebError = 1;
+                     return  ;
+                  }
+                  gxfirstwebparm = gxfirstwebparm_bkp;
+               }
+               if ( toggleJsOutput )
+               {
+                  if ( context.isSpaRequest( ) )
+                  {
+                     enableJsOutput();
+                  }
                }
             }
          }
-         if ( ! context.IsLocalStorageSupported( ) )
+         if ( StringUtil.Len( sPrefix) == 0 )
          {
-            context.PushCurrentUrl();
+            if ( ! context.IsLocalStorageSupported( ) )
+            {
+               context.PushCurrentUrl();
+            }
          }
       }
 
@@ -158,6 +182,7 @@ namespace GeneXus.Programs {
          nRC_GXsfl_37 = (int)(Math.Round(NumberUtil.Val( GetPar( "nRC_GXsfl_37"), "."), 18, MidpointRounding.ToEven));
          nGXsfl_37_idx = (int)(Math.Round(NumberUtil.Val( GetPar( "nGXsfl_37_idx"), "."), 18, MidpointRounding.ToEven));
          sGXsfl_37_idx = GetPar( "sGXsfl_37_idx");
+         sPrefix = GetPar( "sPrefix");
          setAjaxCallMode();
          if ( ! IsValidAjaxCall( true) )
          {
@@ -191,42 +216,17 @@ namespace GeneXus.Programs {
          AV37TFWorkHourLogDuration_Sel = GetPar( "TFWorkHourLogDuration_Sel");
          AV38TFWorkHourLogDescription = GetPar( "TFWorkHourLogDescription");
          AV39TFWorkHourLogDescription_Sel = GetPar( "TFWorkHourLogDescription_Sel");
-         AV55RedirectToFirstDetail = StringUtil.StrToBool( GetPar( "RedirectToFirstDetail"));
-         AV56QueryIntent = GetPar( "QueryIntent");
-         AV46GridAppliedFilters = GetPar( "GridAppliedFilters");
+         sPrefix = GetPar( "sPrefix");
+         init_default_properties( ) ;
          setAjaxCallMode();
          if ( ! IsValidAjaxCall( true) )
          {
             GxWebError = 1;
             return  ;
          }
-         gxgrGrid_refresh( subGrid_Rows, AV13OrderedBy, AV14OrderedDsc, AV16FilterFullText, AV52EmployeeId, AV50FromDate, AV51ToDate, AV53ProjectIds, AV26ManageFiltersExecutionStep, AV21ColumnsSelector, AV57Pgmname, AV27TFEmployeeName, AV28TFEmployeeName_Sel, AV29TFProjectName, AV30TFProjectName_Sel, AV31TFWorkHourLogDate, AV32TFWorkHourLogDate_To, AV36TFWorkHourLogDuration, AV37TFWorkHourLogDuration_Sel, AV38TFWorkHourLogDescription, AV39TFWorkHourLogDescription_Sel, AV55RedirectToFirstDetail, AV56QueryIntent, AV46GridAppliedFilters) ;
+         gxgrGrid_refresh( subGrid_Rows, AV13OrderedBy, AV14OrderedDsc, AV16FilterFullText, AV52EmployeeId, AV50FromDate, AV51ToDate, AV53ProjectIds, AV26ManageFiltersExecutionStep, AV21ColumnsSelector, AV57Pgmname, AV27TFEmployeeName, AV28TFEmployeeName_Sel, AV29TFProjectName, AV30TFProjectName_Sel, AV31TFWorkHourLogDate, AV32TFWorkHourLogDate_To, AV36TFWorkHourLogDuration, AV37TFWorkHourLogDuration_Sel, AV38TFWorkHourLogDescription, AV39TFWorkHourLogDescription_Sel, sPrefix) ;
          AddString( context.getJSONResponse( )) ;
          /* End function gxgrGrid_refresh_invoke */
-      }
-
-      protected override bool IntegratedSecurityEnabled
-      {
-         get {
-            return true ;
-         }
-
-      }
-
-      protected override GAMSecurityLevel IntegratedSecurityLevel
-      {
-         get {
-            return GAMSecurityLevel.SecurityHigh ;
-         }
-
-      }
-
-      protected override string ExecutePermissionPrefix
-      {
-         get {
-            return "workhourloglist_Execute" ;
-         }
-
       }
 
       public override void webExecute( )
@@ -236,10 +236,24 @@ namespace GeneXus.Programs {
          INITWEB( ) ;
          if ( ! isAjaxCallMode( ) )
          {
-            MasterPageObj = (GXMasterPage) ClassLoader.GetInstance("wwpbaseobjects.workwithplusmasterpage", "GeneXus.Programs.wwpbaseobjects.workwithplusmasterpage", new Object[] {context});
-            MasterPageObj.setDataArea(this,false);
-            ValidateSpaRequest();
-            MasterPageObj.webExecute();
+            if ( StringUtil.Len( sPrefix) == 0 )
+            {
+               ValidateSpaRequest();
+            }
+            PA492( ) ;
+            if ( ( GxWebError == 0 ) && ! isAjaxCallMode( ) )
+            {
+               /* GeneXus formulas. */
+               AV57Pgmname = "WorkHourLogList";
+               WS492( ) ;
+               if ( ! isAjaxCallMode( ) )
+               {
+                  if ( nDynComponent == 0 )
+                  {
+                     throw new System.Net.WebException("WebComponent is not allowed to run") ;
+                  }
+               }
+            }
             if ( ( GxWebError == 0 ) && context.isAjaxRequest( ) )
             {
                enableOutput();
@@ -266,45 +280,32 @@ namespace GeneXus.Programs {
          cleanup();
       }
 
-      public override short ExecuteStartEvent( )
-      {
-         PA492( ) ;
-         gxajaxcallmode = (short)((isAjaxCallMode( ) ? 1 : 0));
-         if ( ( gxajaxcallmode == 0 ) && ( GxWebError == 0 ) )
-         {
-            START492( ) ;
-         }
-         return gxajaxcallmode ;
-      }
-
-      public override void RenderHtmlHeaders( )
+      protected void RenderHtmlHeaders( )
       {
          GxWebStd.gx_html_headers( context, 0, "", "", Form.Meta, Form.Metaequiv, true);
       }
 
-      public override void RenderHtmlOpenForm( )
+      protected void RenderHtmlOpenForm( )
       {
-         if ( context.isSpaRequest( ) )
+         if ( StringUtil.Len( sPrefix) == 0 )
          {
-            enableOutput();
+            if ( context.isSpaRequest( ) )
+            {
+               enableOutput();
+            }
+            context.WriteHtmlText( "<title>") ;
+            context.SendWebValue( " Work Hour Log") ;
+            context.WriteHtmlTextNl( "</title>") ;
+            if ( context.isSpaRequest( ) )
+            {
+               disableOutput();
+            }
+            if ( StringUtil.Len( sDynURL) > 0 )
+            {
+               context.WriteHtmlText( "<BASE href=\""+sDynURL+"\" />") ;
+            }
+            define_styles( ) ;
          }
-         context.WriteHtmlText( "<title>") ;
-         context.SendWebValue( Form.Caption) ;
-         context.WriteHtmlTextNl( "</title>") ;
-         if ( context.isSpaRequest( ) )
-         {
-            disableOutput();
-         }
-         if ( StringUtil.Len( sDynURL) > 0 )
-         {
-            context.WriteHtmlText( "<BASE href=\""+sDynURL+"\" />") ;
-         }
-         define_styles( ) ;
-         if ( nGXWrapped != 1 )
-         {
-            MasterPageObj.master_styles();
-         }
-         CloseStyles();
          if ( ( ( context.GetBrowserType( ) == 1 ) || ( context.GetBrowserType( ) == 5 ) ) && ( StringUtil.StrCmp(context.GetBrowserVersion( ), "7.0") == 0 ) )
          {
             context.AddJavascriptSource("json2.js", "?"+context.GetBuildNumber( 1918140), false, true);
@@ -340,278 +341,285 @@ namespace GeneXus.Programs {
          context.AddJavascriptSource("DVelop/Shared/daterangepicker/daterangepicker.min.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/DateRangePicker/DateRangePickerRender.js", "", false, true);
-         context.WriteHtmlText( Form.Headerrawhtml) ;
-         context.CloseHtmlHeader();
-         if ( context.isSpaRequest( ) )
+         if ( StringUtil.Len( sPrefix) == 0 )
          {
-            disableOutput();
+            context.CloseHtmlHeader();
+            if ( context.isSpaRequest( ) )
+            {
+               disableOutput();
+            }
+            FormProcess = " data-HasEnter=\"false\" data-Skiponenter=\"false\"";
+            context.WriteHtmlText( "<body ") ;
+            if ( StringUtil.StrCmp(context.GetLanguageProperty( "rtl"), "true") == 0 )
+            {
+               context.WriteHtmlText( " dir=\"rtl\" ") ;
+            }
+            bodyStyle = "";
+            if ( nGXWrapped == 0 )
+            {
+               bodyStyle += "-moz-opacity:0;opacity:0;";
+            }
+            context.WriteHtmlText( " "+"class=\"form-horizontal Form\""+" "+ "style='"+bodyStyle+"'") ;
+            context.WriteHtmlText( FormProcess+">") ;
+            context.skipLines(1);
+            context.WriteHtmlTextNl( "<form id=\"MAINFORM\" autocomplete=\"off\" name=\"MAINFORM\" method=\"post\" tabindex=-1  class=\"form-horizontal Form\" data-gx-class=\"form-horizontal Form\" novalidate action=\""+formatLink("workhourloglist.aspx", new object[] {UrlEncode(StringUtil.LTrimStr(AV52EmployeeId,10,0)),UrlEncode(DateTimeUtil.FormatDateParm(AV50FromDate)),UrlEncode(DateTimeUtil.FormatDateParm(AV51ToDate))}, new string[] {"EmployeeId","FromDate","ToDate"}) +"\">") ;
+            GxWebStd.gx_hidden_field( context, "_EventName", "");
+            GxWebStd.gx_hidden_field( context, "_EventGridId", "");
+            GxWebStd.gx_hidden_field( context, "_EventRowId", "");
+            context.WriteHtmlText( "<div style=\"height:0;overflow:hidden\"><input type=\"submit\" title=\"submit\"  disabled></div>") ;
+            AssignProp(sPrefix, false, "FORM", "Class", "form-horizontal Form", true);
          }
-         FormProcess = " data-HasEnter=\"false\" data-Skiponenter=\"false\"";
-         context.WriteHtmlText( "<body ") ;
-         if ( StringUtil.StrCmp(context.GetLanguageProperty( "rtl"), "true") == 0 )
+         else
          {
-            context.WriteHtmlText( " dir=\"rtl\" ") ;
+            bool toggleHtmlOutput = isOutputEnabled( );
+            if ( StringUtil.StringSearch( sPrefix, "MP", 1) == 1 )
+            {
+               if ( context.isSpaRequest( ) )
+               {
+                  disableOutput();
+               }
+            }
+            context.WriteHtmlText( "<div") ;
+            GxWebStd.ClassAttribute( context, "gxwebcomponent-body"+" "+(String.IsNullOrEmpty(StringUtil.RTrim( Form.Class)) ? "form-horizontal Form" : Form.Class)+"-fx");
+            context.WriteHtmlText( ">") ;
+            if ( toggleHtmlOutput )
+            {
+               if ( StringUtil.StringSearch( sPrefix, "MP", 1) == 1 )
+               {
+                  if ( context.isSpaRequest( ) )
+                  {
+                     enableOutput();
+                  }
+               }
+            }
+            toggleJsOutput = isJsOutputEnabled( );
+            if ( context.isSpaRequest( ) )
+            {
+               disableJsOutput();
+            }
          }
-         bodyStyle = "" + "background-color:" + context.BuildHTMLColor( Form.Backcolor) + ";color:" + context.BuildHTMLColor( Form.Textcolor) + ";";
-         if ( nGXWrapped == 0 )
+         if ( StringUtil.StringSearch( sPrefix, "MP", 1) == 1 )
          {
-            bodyStyle += "-moz-opacity:0;opacity:0;";
-         }
-         if ( ! ( String.IsNullOrEmpty(StringUtil.RTrim( Form.Background)) ) )
-         {
-            bodyStyle += " background-image:url(" + context.convertURL( Form.Background) + ")";
-         }
-         context.WriteHtmlText( " "+"class=\"form-horizontal Form\""+" "+ "style='"+bodyStyle+"'") ;
-         context.WriteHtmlText( FormProcess+">") ;
-         context.skipLines(1);
-         context.WriteHtmlTextNl( "<form id=\"MAINFORM\" autocomplete=\"off\" name=\"MAINFORM\" method=\"post\" tabindex=-1  class=\"form-horizontal Form\" data-gx-class=\"form-horizontal Form\" novalidate action=\""+formatLink("workhourloglist.aspx", new object[] {UrlEncode(StringUtil.LTrimStr(AV52EmployeeId,10,0)),UrlEncode(DateTimeUtil.FormatDateParm(AV50FromDate)),UrlEncode(DateTimeUtil.FormatDateParm(AV51ToDate))}, new string[] {"EmployeeId","FromDate","ToDate"}) +"\">") ;
-         GxWebStd.gx_hidden_field( context, "_EventName", "");
-         GxWebStd.gx_hidden_field( context, "_EventGridId", "");
-         GxWebStd.gx_hidden_field( context, "_EventRowId", "");
-         context.WriteHtmlText( "<div style=\"height:0;overflow:hidden\"><input type=\"submit\" title=\"submit\"  disabled></div>") ;
-         AssignProp("", false, "FORM", "Class", "form-horizontal Form", true);
-         toggleJsOutput = isJsOutputEnabled( );
-         if ( context.isSpaRequest( ) )
-         {
-            disableJsOutput();
+            if ( context.isSpaRequest( ) )
+            {
+               disableOutput();
+            }
          }
       }
 
       protected void send_integrity_footer_hashes( )
       {
-         GxWebStd.gx_hidden_field( context, "vPGMNAME", StringUtil.RTrim( AV57Pgmname));
-         GxWebStd.gx_hidden_field( context, "gxhash_vPGMNAME", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV57Pgmname, "")), context));
-         GxWebStd.gx_boolean_hidden_field( context, "vREDIRECTTOFIRSTDETAIL", AV55RedirectToFirstDetail);
-         GxWebStd.gx_hidden_field( context, "gxhash_vREDIRECTTOFIRSTDETAIL", GetSecureSignedToken( "", AV55RedirectToFirstDetail, context));
-         GxWebStd.gx_hidden_field( context, "vQUERYINTENT", AV56QueryIntent);
-         GxWebStd.gx_hidden_field( context, "gxhash_vQUERYINTENT", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV56QueryIntent, "")), context));
-         GxWebStd.gx_hidden_field( context, "vEMPLOYEEID", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV52EmployeeId), 10, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "gxhash_vEMPLOYEEID", GetSecureSignedToken( "", context.localUtil.Format( (decimal)(AV52EmployeeId), "ZZZZZZZZZ9"), context));
-         GxWebStd.gx_hidden_field( context, "vFROMDATE", context.localUtil.DToC( AV50FromDate, 0, "/"));
-         GxWebStd.gx_hidden_field( context, "gxhash_vFROMDATE", GetSecureSignedToken( "", AV50FromDate, context));
-         GxWebStd.gx_hidden_field( context, "vTODATE", context.localUtil.DToC( AV51ToDate, 0, "/"));
-         GxWebStd.gx_hidden_field( context, "gxhash_vTODATE", GetSecureSignedToken( "", AV51ToDate, context));
+         GxWebStd.gx_hidden_field( context, sPrefix+"vPGMNAME", StringUtil.RTrim( AV57Pgmname));
+         GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vPGMNAME", GetSecureSignedToken( sPrefix, StringUtil.RTrim( context.localUtil.Format( AV57Pgmname, "")), context));
          if ( context.isAjaxRequest( ) )
          {
-            context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "vPROJECTIDS", AV53ProjectIds);
+            context.httpAjaxContext.ajax_rsp_assign_sdt_attri(sPrefix, false, sPrefix+"vPROJECTIDS", AV53ProjectIds);
          }
          else
          {
-            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("vPROJECTIDS", AV53ProjectIds);
+            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt(sPrefix+"vPROJECTIDS", AV53ProjectIds);
          }
-         GxWebStd.gx_hidden_field( context, "gxhash_vPROJECTIDS", GetSecureSignedToken( "", AV53ProjectIds, context));
+         GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vPROJECTIDS", GetSecureSignedToken( sPrefix, AV53ProjectIds, context));
          GXKey = Decrypt64( context.GetCookie( "GX_SESSION_ID"), Crypto.GetServerKey( ));
       }
 
       protected void SendCloseFormHiddens( )
       {
          /* Send hidden variables. */
-         GxWebStd.gx_hidden_field( context, "GXH_vORDEREDBY", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV13OrderedBy), 4, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "GXH_vORDEREDDSC", StringUtil.BoolToStr( AV14OrderedDsc));
-         GxWebStd.gx_hidden_field( context, "GXH_vFILTERFULLTEXT", AV16FilterFullText);
+         GxWebStd.gx_hidden_field( context, sPrefix+"GXH_vORDEREDBY", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV13OrderedBy), 4, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"GXH_vORDEREDDSC", StringUtil.BoolToStr( AV14OrderedDsc));
+         GxWebStd.gx_hidden_field( context, sPrefix+"GXH_vFILTERFULLTEXT", AV16FilterFullText);
          /* Send saved values. */
          send_integrity_footer_hashes( ) ;
-         GxWebStd.gx_hidden_field( context, "nRC_GXsfl_37", StringUtil.LTrim( StringUtil.NToC( (decimal)(nRC_GXsfl_37), 8, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"nRC_GXsfl_37", StringUtil.LTrim( StringUtil.NToC( (decimal)(nRC_GXsfl_37), 8, 0, ".", "")));
          if ( context.isAjaxRequest( ) )
          {
-            context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "vMANAGEFILTERSDATA", AV24ManageFiltersData);
+            context.httpAjaxContext.ajax_rsp_assign_sdt_attri(sPrefix, false, sPrefix+"vMANAGEFILTERSDATA", AV24ManageFiltersData);
          }
          else
          {
-            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("vMANAGEFILTERSDATA", AV24ManageFiltersData);
+            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt(sPrefix+"vMANAGEFILTERSDATA", AV24ManageFiltersData);
          }
-         GxWebStd.gx_hidden_field( context, "vGRIDCURRENTPAGE", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV44GridCurrentPage), 10, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "vGRIDPAGECOUNT", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV45GridPageCount), 10, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "vGRIDAPPLIEDFILTERS", AV46GridAppliedFilters);
+         GxWebStd.gx_hidden_field( context, sPrefix+"vGRIDCURRENTPAGE", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV44GridCurrentPage), 10, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"vGRIDPAGECOUNT", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV45GridPageCount), 10, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"vGRIDAPPLIEDFILTERS", AV46GridAppliedFilters);
          if ( context.isAjaxRequest( ) )
          {
-            context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "vDDO_TITLESETTINGSICONS", AV40DDO_TitleSettingsIcons);
+            context.httpAjaxContext.ajax_rsp_assign_sdt_attri(sPrefix, false, sPrefix+"vDDO_TITLESETTINGSICONS", AV40DDO_TitleSettingsIcons);
          }
          else
          {
-            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("vDDO_TITLESETTINGSICONS", AV40DDO_TitleSettingsIcons);
+            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt(sPrefix+"vDDO_TITLESETTINGSICONS", AV40DDO_TitleSettingsIcons);
          }
          if ( context.isAjaxRequest( ) )
          {
-            context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "vCOLUMNSSELECTOR", AV21ColumnsSelector);
+            context.httpAjaxContext.ajax_rsp_assign_sdt_attri(sPrefix, false, sPrefix+"vCOLUMNSSELECTOR", AV21ColumnsSelector);
          }
          else
          {
-            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("vCOLUMNSSELECTOR", AV21ColumnsSelector);
+            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt(sPrefix+"vCOLUMNSSELECTOR", AV21ColumnsSelector);
          }
-         GxWebStd.gx_hidden_field( context, "vDDO_WORKHOURLOGDATEAUXDATE", context.localUtil.DToC( AV33DDO_WorkHourLogDateAuxDate, 0, "/"));
-         GxWebStd.gx_hidden_field( context, "vDDO_WORKHOURLOGDATEAUXDATETO", context.localUtil.DToC( AV34DDO_WorkHourLogDateAuxDateTo, 0, "/"));
-         GxWebStd.gx_hidden_field( context, "vMANAGEFILTERSEXECUTIONSTEP", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV26ManageFiltersExecutionStep), 1, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "vPGMNAME", StringUtil.RTrim( AV57Pgmname));
-         GxWebStd.gx_hidden_field( context, "gxhash_vPGMNAME", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV57Pgmname, "")), context));
-         GxWebStd.gx_hidden_field( context, "vTFEMPLOYEENAME", StringUtil.RTrim( AV27TFEmployeeName));
-         GxWebStd.gx_hidden_field( context, "vTFEMPLOYEENAME_SEL", StringUtil.RTrim( AV28TFEmployeeName_Sel));
-         GxWebStd.gx_hidden_field( context, "vTFPROJECTNAME", StringUtil.RTrim( AV29TFProjectName));
-         GxWebStd.gx_hidden_field( context, "vTFPROJECTNAME_SEL", StringUtil.RTrim( AV30TFProjectName_Sel));
-         GxWebStd.gx_hidden_field( context, "vTFWORKHOURLOGDATE", context.localUtil.DToC( AV31TFWorkHourLogDate, 0, "/"));
-         GxWebStd.gx_hidden_field( context, "vTFWORKHOURLOGDATE_TO", context.localUtil.DToC( AV32TFWorkHourLogDate_To, 0, "/"));
-         GxWebStd.gx_hidden_field( context, "vTFWORKHOURLOGDURATION", AV36TFWorkHourLogDuration);
-         GxWebStd.gx_hidden_field( context, "vTFWORKHOURLOGDURATION_SEL", AV37TFWorkHourLogDuration_Sel);
-         GxWebStd.gx_hidden_field( context, "vTFWORKHOURLOGDESCRIPTION", AV38TFWorkHourLogDescription);
-         GxWebStd.gx_hidden_field( context, "vTFWORKHOURLOGDESCRIPTION_SEL", AV39TFWorkHourLogDescription_Sel);
-         GxWebStd.gx_hidden_field( context, "vORDEREDBY", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV13OrderedBy), 4, 0, ".", "")));
-         GxWebStd.gx_boolean_hidden_field( context, "vORDEREDDSC", AV14OrderedDsc);
-         GxWebStd.gx_boolean_hidden_field( context, "vREDIRECTTOFIRSTDETAIL", AV55RedirectToFirstDetail);
-         GxWebStd.gx_hidden_field( context, "gxhash_vREDIRECTTOFIRSTDETAIL", GetSecureSignedToken( "", AV55RedirectToFirstDetail, context));
-         GxWebStd.gx_hidden_field( context, "vQUERYINTENT", AV56QueryIntent);
-         GxWebStd.gx_hidden_field( context, "gxhash_vQUERYINTENT", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV56QueryIntent, "")), context));
+         GxWebStd.gx_hidden_field( context, sPrefix+"vDDO_WORKHOURLOGDATEAUXDATE", context.localUtil.DToC( AV33DDO_WorkHourLogDateAuxDate, 0, "/"));
+         GxWebStd.gx_hidden_field( context, sPrefix+"vDDO_WORKHOURLOGDATEAUXDATETO", context.localUtil.DToC( AV34DDO_WorkHourLogDateAuxDateTo, 0, "/"));
+         GxWebStd.gx_hidden_field( context, sPrefix+"wcpOAV52EmployeeId", StringUtil.LTrim( StringUtil.NToC( (decimal)(wcpOAV52EmployeeId), 10, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"wcpOAV50FromDate", context.localUtil.DToC( wcpOAV50FromDate, 0, "/"));
+         GxWebStd.gx_hidden_field( context, sPrefix+"wcpOAV51ToDate", context.localUtil.DToC( wcpOAV51ToDate, 0, "/"));
+         GxWebStd.gx_hidden_field( context, sPrefix+"vMANAGEFILTERSEXECUTIONSTEP", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV26ManageFiltersExecutionStep), 1, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"vPGMNAME", StringUtil.RTrim( AV57Pgmname));
+         GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vPGMNAME", GetSecureSignedToken( sPrefix, StringUtil.RTrim( context.localUtil.Format( AV57Pgmname, "")), context));
+         GxWebStd.gx_hidden_field( context, sPrefix+"vTFEMPLOYEENAME", StringUtil.RTrim( AV27TFEmployeeName));
+         GxWebStd.gx_hidden_field( context, sPrefix+"vTFEMPLOYEENAME_SEL", StringUtil.RTrim( AV28TFEmployeeName_Sel));
+         GxWebStd.gx_hidden_field( context, sPrefix+"vTFPROJECTNAME", StringUtil.RTrim( AV29TFProjectName));
+         GxWebStd.gx_hidden_field( context, sPrefix+"vTFPROJECTNAME_SEL", StringUtil.RTrim( AV30TFProjectName_Sel));
+         GxWebStd.gx_hidden_field( context, sPrefix+"vTFWORKHOURLOGDATE", context.localUtil.DToC( AV31TFWorkHourLogDate, 0, "/"));
+         GxWebStd.gx_hidden_field( context, sPrefix+"vTFWORKHOURLOGDATE_TO", context.localUtil.DToC( AV32TFWorkHourLogDate_To, 0, "/"));
+         GxWebStd.gx_hidden_field( context, sPrefix+"vTFWORKHOURLOGDURATION", AV36TFWorkHourLogDuration);
+         GxWebStd.gx_hidden_field( context, sPrefix+"vTFWORKHOURLOGDURATION_SEL", AV37TFWorkHourLogDuration_Sel);
+         GxWebStd.gx_hidden_field( context, sPrefix+"vTFWORKHOURLOGDESCRIPTION", AV38TFWorkHourLogDescription);
+         GxWebStd.gx_hidden_field( context, sPrefix+"vTFWORKHOURLOGDESCRIPTION_SEL", AV39TFWorkHourLogDescription_Sel);
+         GxWebStd.gx_hidden_field( context, sPrefix+"vORDEREDBY", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV13OrderedBy), 4, 0, ".", "")));
+         GxWebStd.gx_boolean_hidden_field( context, sPrefix+"vORDEREDDSC", AV14OrderedDsc);
          if ( context.isAjaxRequest( ) )
          {
-            context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "vGRIDSTATE", AV11GridState);
+            context.httpAjaxContext.ajax_rsp_assign_sdt_attri(sPrefix, false, sPrefix+"vGRIDSTATE", AV11GridState);
          }
          else
          {
-            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("vGRIDSTATE", AV11GridState);
+            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt(sPrefix+"vGRIDSTATE", AV11GridState);
          }
-         GxWebStd.gx_hidden_field( context, "vEMPLOYEEID", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV52EmployeeId), 10, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "gxhash_vEMPLOYEEID", GetSecureSignedToken( "", context.localUtil.Format( (decimal)(AV52EmployeeId), "ZZZZZZZZZ9"), context));
-         GxWebStd.gx_hidden_field( context, "vFROMDATE", context.localUtil.DToC( AV50FromDate, 0, "/"));
-         GxWebStd.gx_hidden_field( context, "gxhash_vFROMDATE", GetSecureSignedToken( "", AV50FromDate, context));
-         GxWebStd.gx_hidden_field( context, "vTODATE", context.localUtil.DToC( AV51ToDate, 0, "/"));
-         GxWebStd.gx_hidden_field( context, "gxhash_vTODATE", GetSecureSignedToken( "", AV51ToDate, context));
+         GxWebStd.gx_hidden_field( context, sPrefix+"vEMPLOYEEID", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV52EmployeeId), 10, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"vFROMDATE", context.localUtil.DToC( AV50FromDate, 0, "/"));
+         GxWebStd.gx_hidden_field( context, sPrefix+"vTODATE", context.localUtil.DToC( AV51ToDate, 0, "/"));
          if ( context.isAjaxRequest( ) )
          {
-            context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "vPROJECTIDS", AV53ProjectIds);
+            context.httpAjaxContext.ajax_rsp_assign_sdt_attri(sPrefix, false, sPrefix+"vPROJECTIDS", AV53ProjectIds);
          }
          else
          {
-            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("vPROJECTIDS", AV53ProjectIds);
+            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt(sPrefix+"vPROJECTIDS", AV53ProjectIds);
          }
-         GxWebStd.gx_hidden_field( context, "gxhash_vPROJECTIDS", GetSecureSignedToken( "", AV53ProjectIds, context));
-         GxWebStd.gx_hidden_field( context, "GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "GRID_nEOF", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nEOF), 1, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "GRID_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Rows), 6, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "DDO_MANAGEFILTERS_Icontype", StringUtil.RTrim( Ddo_managefilters_Icontype));
-         GxWebStd.gx_hidden_field( context, "DDO_MANAGEFILTERS_Icon", StringUtil.RTrim( Ddo_managefilters_Icon));
-         GxWebStd.gx_hidden_field( context, "DDO_MANAGEFILTERS_Tooltip", StringUtil.RTrim( Ddo_managefilters_Tooltip));
-         GxWebStd.gx_hidden_field( context, "DDO_MANAGEFILTERS_Cls", StringUtil.RTrim( Ddo_managefilters_Cls));
-         GxWebStd.gx_hidden_field( context, "GRIDPAGINATIONBAR_Class", StringUtil.RTrim( Gridpaginationbar_Class));
-         GxWebStd.gx_hidden_field( context, "GRIDPAGINATIONBAR_Showfirst", StringUtil.BoolToStr( Gridpaginationbar_Showfirst));
-         GxWebStd.gx_hidden_field( context, "GRIDPAGINATIONBAR_Showprevious", StringUtil.BoolToStr( Gridpaginationbar_Showprevious));
-         GxWebStd.gx_hidden_field( context, "GRIDPAGINATIONBAR_Shownext", StringUtil.BoolToStr( Gridpaginationbar_Shownext));
-         GxWebStd.gx_hidden_field( context, "GRIDPAGINATIONBAR_Showlast", StringUtil.BoolToStr( Gridpaginationbar_Showlast));
-         GxWebStd.gx_hidden_field( context, "GRIDPAGINATIONBAR_Pagestoshow", StringUtil.LTrim( StringUtil.NToC( (decimal)(Gridpaginationbar_Pagestoshow), 9, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "GRIDPAGINATIONBAR_Pagingbuttonsposition", StringUtil.RTrim( Gridpaginationbar_Pagingbuttonsposition));
-         GxWebStd.gx_hidden_field( context, "GRIDPAGINATIONBAR_Pagingcaptionposition", StringUtil.RTrim( Gridpaginationbar_Pagingcaptionposition));
-         GxWebStd.gx_hidden_field( context, "GRIDPAGINATIONBAR_Emptygridclass", StringUtil.RTrim( Gridpaginationbar_Emptygridclass));
-         GxWebStd.gx_hidden_field( context, "GRIDPAGINATIONBAR_Rowsperpageselector", StringUtil.BoolToStr( Gridpaginationbar_Rowsperpageselector));
-         GxWebStd.gx_hidden_field( context, "GRIDPAGINATIONBAR_Rowsperpageselectedvalue", StringUtil.LTrim( StringUtil.NToC( (decimal)(Gridpaginationbar_Rowsperpageselectedvalue), 9, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "GRIDPAGINATIONBAR_Rowsperpageoptions", StringUtil.RTrim( Gridpaginationbar_Rowsperpageoptions));
-         GxWebStd.gx_hidden_field( context, "GRIDPAGINATIONBAR_Previous", StringUtil.RTrim( Gridpaginationbar_Previous));
-         GxWebStd.gx_hidden_field( context, "GRIDPAGINATIONBAR_Next", StringUtil.RTrim( Gridpaginationbar_Next));
-         GxWebStd.gx_hidden_field( context, "GRIDPAGINATIONBAR_Caption", StringUtil.RTrim( Gridpaginationbar_Caption));
-         GxWebStd.gx_hidden_field( context, "GRIDPAGINATIONBAR_Emptygridcaption", StringUtil.RTrim( Gridpaginationbar_Emptygridcaption));
-         GxWebStd.gx_hidden_field( context, "GRIDPAGINATIONBAR_Rowsperpagecaption", StringUtil.RTrim( Gridpaginationbar_Rowsperpagecaption));
-         GxWebStd.gx_hidden_field( context, "INNEWWINDOW1_Name", StringUtil.RTrim( Innewwindow1_Name));
-         GxWebStd.gx_hidden_field( context, "INNEWWINDOW1_Target", StringUtil.RTrim( Innewwindow1_Target));
-         GxWebStd.gx_hidden_field( context, "DDO_GRID_Caption", StringUtil.RTrim( Ddo_grid_Caption));
-         GxWebStd.gx_hidden_field( context, "DDO_GRID_Filteredtext_set", StringUtil.RTrim( Ddo_grid_Filteredtext_set));
-         GxWebStd.gx_hidden_field( context, "DDO_GRID_Filteredtextto_set", StringUtil.RTrim( Ddo_grid_Filteredtextto_set));
-         GxWebStd.gx_hidden_field( context, "DDO_GRID_Selectedvalue_set", StringUtil.RTrim( Ddo_grid_Selectedvalue_set));
-         GxWebStd.gx_hidden_field( context, "DDO_GRID_Gamoauthtoken", StringUtil.RTrim( Ddo_grid_Gamoauthtoken));
-         GxWebStd.gx_hidden_field( context, "DDO_GRID_Gridinternalname", StringUtil.RTrim( Ddo_grid_Gridinternalname));
-         GxWebStd.gx_hidden_field( context, "DDO_GRID_Columnids", StringUtil.RTrim( Ddo_grid_Columnids));
-         GxWebStd.gx_hidden_field( context, "DDO_GRID_Columnssortvalues", StringUtil.RTrim( Ddo_grid_Columnssortvalues));
-         GxWebStd.gx_hidden_field( context, "DDO_GRID_Includesortasc", StringUtil.RTrim( Ddo_grid_Includesortasc));
-         GxWebStd.gx_hidden_field( context, "DDO_GRID_Fixable", StringUtil.RTrim( Ddo_grid_Fixable));
-         GxWebStd.gx_hidden_field( context, "DDO_GRID_Sortedstatus", StringUtil.RTrim( Ddo_grid_Sortedstatus));
-         GxWebStd.gx_hidden_field( context, "DDO_GRID_Includefilter", StringUtil.RTrim( Ddo_grid_Includefilter));
-         GxWebStd.gx_hidden_field( context, "DDO_GRID_Filtertype", StringUtil.RTrim( Ddo_grid_Filtertype));
-         GxWebStd.gx_hidden_field( context, "DDO_GRID_Filterisrange", StringUtil.RTrim( Ddo_grid_Filterisrange));
-         GxWebStd.gx_hidden_field( context, "DDO_GRID_Includedatalist", StringUtil.RTrim( Ddo_grid_Includedatalist));
-         GxWebStd.gx_hidden_field( context, "DDO_GRID_Datalisttype", StringUtil.RTrim( Ddo_grid_Datalisttype));
-         GxWebStd.gx_hidden_field( context, "DDO_GRID_Datalistproc", StringUtil.RTrim( Ddo_grid_Datalistproc));
-         GxWebStd.gx_hidden_field( context, "DDO_GRIDCOLUMNSSELECTOR_Icontype", StringUtil.RTrim( Ddo_gridcolumnsselector_Icontype));
-         GxWebStd.gx_hidden_field( context, "DDO_GRIDCOLUMNSSELECTOR_Icon", StringUtil.RTrim( Ddo_gridcolumnsselector_Icon));
-         GxWebStd.gx_hidden_field( context, "DDO_GRIDCOLUMNSSELECTOR_Caption", StringUtil.RTrim( Ddo_gridcolumnsselector_Caption));
-         GxWebStd.gx_hidden_field( context, "DDO_GRIDCOLUMNSSELECTOR_Tooltip", StringUtil.RTrim( Ddo_gridcolumnsselector_Tooltip));
-         GxWebStd.gx_hidden_field( context, "DDO_GRIDCOLUMNSSELECTOR_Cls", StringUtil.RTrim( Ddo_gridcolumnsselector_Cls));
-         GxWebStd.gx_hidden_field( context, "DDO_GRIDCOLUMNSSELECTOR_Dropdownoptionstype", StringUtil.RTrim( Ddo_gridcolumnsselector_Dropdownoptionstype));
-         GxWebStd.gx_hidden_field( context, "DDO_GRIDCOLUMNSSELECTOR_Gridinternalname", StringUtil.RTrim( Ddo_gridcolumnsselector_Gridinternalname));
-         GxWebStd.gx_hidden_field( context, "DDO_GRIDCOLUMNSSELECTOR_Titlecontrolidtoreplace", StringUtil.RTrim( Ddo_gridcolumnsselector_Titlecontrolidtoreplace));
-         GxWebStd.gx_hidden_field( context, "GRID_EMPOWERER_Gridinternalname", StringUtil.RTrim( Grid_empowerer_Gridinternalname));
-         GxWebStd.gx_hidden_field( context, "GRID_EMPOWERER_Hastitlesettings", StringUtil.BoolToStr( Grid_empowerer_Hastitlesettings));
-         GxWebStd.gx_hidden_field( context, "GRID_EMPOWERER_Hascolumnsselector", StringUtil.BoolToStr( Grid_empowerer_Hascolumnsselector));
-         GxWebStd.gx_hidden_field( context, "GRID_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Rows), 6, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "GRIDPAGINATIONBAR_Selectedpage", StringUtil.RTrim( Gridpaginationbar_Selectedpage));
-         GxWebStd.gx_hidden_field( context, "GRIDPAGINATIONBAR_Rowsperpageselectedvalue", StringUtil.LTrim( StringUtil.NToC( (decimal)(Gridpaginationbar_Rowsperpageselectedvalue), 9, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "DDO_GRID_Activeeventkey", StringUtil.RTrim( Ddo_grid_Activeeventkey));
-         GxWebStd.gx_hidden_field( context, "DDO_GRID_Selectedvalue_get", StringUtil.RTrim( Ddo_grid_Selectedvalue_get));
-         GxWebStd.gx_hidden_field( context, "DDO_GRID_Selectedcolumn", StringUtil.RTrim( Ddo_grid_Selectedcolumn));
-         GxWebStd.gx_hidden_field( context, "DDO_GRID_Filteredtext_get", StringUtil.RTrim( Ddo_grid_Filteredtext_get));
-         GxWebStd.gx_hidden_field( context, "DDO_GRID_Filteredtextto_get", StringUtil.RTrim( Ddo_grid_Filteredtextto_get));
-         GxWebStd.gx_hidden_field( context, "DDO_GRIDCOLUMNSSELECTOR_Columnsselectorvalues", StringUtil.RTrim( Ddo_gridcolumnsselector_Columnsselectorvalues));
-         GxWebStd.gx_hidden_field( context, "DDO_MANAGEFILTERS_Activeeventkey", StringUtil.RTrim( Ddo_managefilters_Activeeventkey));
-         GxWebStd.gx_hidden_field( context, "GRID_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Rows), 6, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "GRIDPAGINATIONBAR_Selectedpage", StringUtil.RTrim( Gridpaginationbar_Selectedpage));
-         GxWebStd.gx_hidden_field( context, "GRIDPAGINATIONBAR_Rowsperpageselectedvalue", StringUtil.LTrim( StringUtil.NToC( (decimal)(Gridpaginationbar_Rowsperpageselectedvalue), 9, 0, ".", "")));
-         GxWebStd.gx_hidden_field( context, "DDO_GRID_Activeeventkey", StringUtil.RTrim( Ddo_grid_Activeeventkey));
-         GxWebStd.gx_hidden_field( context, "DDO_GRID_Selectedvalue_get", StringUtil.RTrim( Ddo_grid_Selectedvalue_get));
-         GxWebStd.gx_hidden_field( context, "DDO_GRID_Selectedcolumn", StringUtil.RTrim( Ddo_grid_Selectedcolumn));
-         GxWebStd.gx_hidden_field( context, "DDO_GRID_Filteredtext_get", StringUtil.RTrim( Ddo_grid_Filteredtext_get));
-         GxWebStd.gx_hidden_field( context, "DDO_GRID_Filteredtextto_get", StringUtil.RTrim( Ddo_grid_Filteredtextto_get));
-         GxWebStd.gx_hidden_field( context, "DDO_GRIDCOLUMNSSELECTOR_Columnsselectorvalues", StringUtil.RTrim( Ddo_gridcolumnsselector_Columnsselectorvalues));
-         GxWebStd.gx_hidden_field( context, "DDO_MANAGEFILTERS_Activeeventkey", StringUtil.RTrim( Ddo_managefilters_Activeeventkey));
-         GxWebStd.gx_hidden_field( context, "GRID_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Rows), 6, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vPROJECTIDS", GetSecureSignedToken( sPrefix, AV53ProjectIds, context));
+         GxWebStd.gx_hidden_field( context, sPrefix+"GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"GRID_nEOF", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nEOF), 1, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"GRID_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Rows), 6, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"DDO_MANAGEFILTERS_Icontype", StringUtil.RTrim( Ddo_managefilters_Icontype));
+         GxWebStd.gx_hidden_field( context, sPrefix+"DDO_MANAGEFILTERS_Icon", StringUtil.RTrim( Ddo_managefilters_Icon));
+         GxWebStd.gx_hidden_field( context, sPrefix+"DDO_MANAGEFILTERS_Tooltip", StringUtil.RTrim( Ddo_managefilters_Tooltip));
+         GxWebStd.gx_hidden_field( context, sPrefix+"DDO_MANAGEFILTERS_Cls", StringUtil.RTrim( Ddo_managefilters_Cls));
+         GxWebStd.gx_hidden_field( context, sPrefix+"GRIDPAGINATIONBAR_Class", StringUtil.RTrim( Gridpaginationbar_Class));
+         GxWebStd.gx_hidden_field( context, sPrefix+"GRIDPAGINATIONBAR_Showfirst", StringUtil.BoolToStr( Gridpaginationbar_Showfirst));
+         GxWebStd.gx_hidden_field( context, sPrefix+"GRIDPAGINATIONBAR_Showprevious", StringUtil.BoolToStr( Gridpaginationbar_Showprevious));
+         GxWebStd.gx_hidden_field( context, sPrefix+"GRIDPAGINATIONBAR_Shownext", StringUtil.BoolToStr( Gridpaginationbar_Shownext));
+         GxWebStd.gx_hidden_field( context, sPrefix+"GRIDPAGINATIONBAR_Showlast", StringUtil.BoolToStr( Gridpaginationbar_Showlast));
+         GxWebStd.gx_hidden_field( context, sPrefix+"GRIDPAGINATIONBAR_Pagestoshow", StringUtil.LTrim( StringUtil.NToC( (decimal)(Gridpaginationbar_Pagestoshow), 9, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"GRIDPAGINATIONBAR_Pagingbuttonsposition", StringUtil.RTrim( Gridpaginationbar_Pagingbuttonsposition));
+         GxWebStd.gx_hidden_field( context, sPrefix+"GRIDPAGINATIONBAR_Pagingcaptionposition", StringUtil.RTrim( Gridpaginationbar_Pagingcaptionposition));
+         GxWebStd.gx_hidden_field( context, sPrefix+"GRIDPAGINATIONBAR_Emptygridclass", StringUtil.RTrim( Gridpaginationbar_Emptygridclass));
+         GxWebStd.gx_hidden_field( context, sPrefix+"GRIDPAGINATIONBAR_Rowsperpageselector", StringUtil.BoolToStr( Gridpaginationbar_Rowsperpageselector));
+         GxWebStd.gx_hidden_field( context, sPrefix+"GRIDPAGINATIONBAR_Rowsperpageselectedvalue", StringUtil.LTrim( StringUtil.NToC( (decimal)(Gridpaginationbar_Rowsperpageselectedvalue), 9, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"GRIDPAGINATIONBAR_Rowsperpageoptions", StringUtil.RTrim( Gridpaginationbar_Rowsperpageoptions));
+         GxWebStd.gx_hidden_field( context, sPrefix+"GRIDPAGINATIONBAR_Previous", StringUtil.RTrim( Gridpaginationbar_Previous));
+         GxWebStd.gx_hidden_field( context, sPrefix+"GRIDPAGINATIONBAR_Next", StringUtil.RTrim( Gridpaginationbar_Next));
+         GxWebStd.gx_hidden_field( context, sPrefix+"GRIDPAGINATIONBAR_Caption", StringUtil.RTrim( Gridpaginationbar_Caption));
+         GxWebStd.gx_hidden_field( context, sPrefix+"GRIDPAGINATIONBAR_Emptygridcaption", StringUtil.RTrim( Gridpaginationbar_Emptygridcaption));
+         GxWebStd.gx_hidden_field( context, sPrefix+"GRIDPAGINATIONBAR_Rowsperpagecaption", StringUtil.RTrim( Gridpaginationbar_Rowsperpagecaption));
+         GxWebStd.gx_hidden_field( context, sPrefix+"INNEWWINDOW1_Name", StringUtil.RTrim( Innewwindow1_Name));
+         GxWebStd.gx_hidden_field( context, sPrefix+"INNEWWINDOW1_Target", StringUtil.RTrim( Innewwindow1_Target));
+         GxWebStd.gx_hidden_field( context, sPrefix+"DDO_GRID_Caption", StringUtil.RTrim( Ddo_grid_Caption));
+         GxWebStd.gx_hidden_field( context, sPrefix+"DDO_GRID_Filteredtext_set", StringUtil.RTrim( Ddo_grid_Filteredtext_set));
+         GxWebStd.gx_hidden_field( context, sPrefix+"DDO_GRID_Filteredtextto_set", StringUtil.RTrim( Ddo_grid_Filteredtextto_set));
+         GxWebStd.gx_hidden_field( context, sPrefix+"DDO_GRID_Selectedvalue_set", StringUtil.RTrim( Ddo_grid_Selectedvalue_set));
+         GxWebStd.gx_hidden_field( context, sPrefix+"DDO_GRID_Gridinternalname", StringUtil.RTrim( Ddo_grid_Gridinternalname));
+         GxWebStd.gx_hidden_field( context, sPrefix+"DDO_GRID_Columnids", StringUtil.RTrim( Ddo_grid_Columnids));
+         GxWebStd.gx_hidden_field( context, sPrefix+"DDO_GRID_Columnssortvalues", StringUtil.RTrim( Ddo_grid_Columnssortvalues));
+         GxWebStd.gx_hidden_field( context, sPrefix+"DDO_GRID_Includesortasc", StringUtil.RTrim( Ddo_grid_Includesortasc));
+         GxWebStd.gx_hidden_field( context, sPrefix+"DDO_GRID_Fixable", StringUtil.RTrim( Ddo_grid_Fixable));
+         GxWebStd.gx_hidden_field( context, sPrefix+"DDO_GRID_Sortedstatus", StringUtil.RTrim( Ddo_grid_Sortedstatus));
+         GxWebStd.gx_hidden_field( context, sPrefix+"DDO_GRID_Includefilter", StringUtil.RTrim( Ddo_grid_Includefilter));
+         GxWebStd.gx_hidden_field( context, sPrefix+"DDO_GRID_Filtertype", StringUtil.RTrim( Ddo_grid_Filtertype));
+         GxWebStd.gx_hidden_field( context, sPrefix+"DDO_GRID_Filterisrange", StringUtil.RTrim( Ddo_grid_Filterisrange));
+         GxWebStd.gx_hidden_field( context, sPrefix+"DDO_GRID_Includedatalist", StringUtil.RTrim( Ddo_grid_Includedatalist));
+         GxWebStd.gx_hidden_field( context, sPrefix+"DDO_GRID_Datalisttype", StringUtil.RTrim( Ddo_grid_Datalisttype));
+         GxWebStd.gx_hidden_field( context, sPrefix+"DDO_GRID_Datalistproc", StringUtil.RTrim( Ddo_grid_Datalistproc));
+         GxWebStd.gx_hidden_field( context, sPrefix+"DDO_GRIDCOLUMNSSELECTOR_Icontype", StringUtil.RTrim( Ddo_gridcolumnsselector_Icontype));
+         GxWebStd.gx_hidden_field( context, sPrefix+"DDO_GRIDCOLUMNSSELECTOR_Icon", StringUtil.RTrim( Ddo_gridcolumnsselector_Icon));
+         GxWebStd.gx_hidden_field( context, sPrefix+"DDO_GRIDCOLUMNSSELECTOR_Caption", StringUtil.RTrim( Ddo_gridcolumnsselector_Caption));
+         GxWebStd.gx_hidden_field( context, sPrefix+"DDO_GRIDCOLUMNSSELECTOR_Tooltip", StringUtil.RTrim( Ddo_gridcolumnsselector_Tooltip));
+         GxWebStd.gx_hidden_field( context, sPrefix+"DDO_GRIDCOLUMNSSELECTOR_Cls", StringUtil.RTrim( Ddo_gridcolumnsselector_Cls));
+         GxWebStd.gx_hidden_field( context, sPrefix+"DDO_GRIDCOLUMNSSELECTOR_Dropdownoptionstype", StringUtil.RTrim( Ddo_gridcolumnsselector_Dropdownoptionstype));
+         GxWebStd.gx_hidden_field( context, sPrefix+"DDO_GRIDCOLUMNSSELECTOR_Gridinternalname", StringUtil.RTrim( Ddo_gridcolumnsselector_Gridinternalname));
+         GxWebStd.gx_hidden_field( context, sPrefix+"DDO_GRIDCOLUMNSSELECTOR_Titlecontrolidtoreplace", StringUtil.RTrim( Ddo_gridcolumnsselector_Titlecontrolidtoreplace));
+         GxWebStd.gx_hidden_field( context, sPrefix+"GRID_EMPOWERER_Gridinternalname", StringUtil.RTrim( Grid_empowerer_Gridinternalname));
+         GxWebStd.gx_hidden_field( context, sPrefix+"GRID_EMPOWERER_Hastitlesettings", StringUtil.BoolToStr( Grid_empowerer_Hastitlesettings));
+         GxWebStd.gx_hidden_field( context, sPrefix+"GRID_EMPOWERER_Hascolumnsselector", StringUtil.BoolToStr( Grid_empowerer_Hascolumnsselector));
+         GxWebStd.gx_hidden_field( context, sPrefix+"GRID_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Rows), 6, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"GRIDPAGINATIONBAR_Selectedpage", StringUtil.RTrim( Gridpaginationbar_Selectedpage));
+         GxWebStd.gx_hidden_field( context, sPrefix+"GRIDPAGINATIONBAR_Rowsperpageselectedvalue", StringUtil.LTrim( StringUtil.NToC( (decimal)(Gridpaginationbar_Rowsperpageselectedvalue), 9, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"DDO_GRID_Activeeventkey", StringUtil.RTrim( Ddo_grid_Activeeventkey));
+         GxWebStd.gx_hidden_field( context, sPrefix+"DDO_GRID_Selectedvalue_get", StringUtil.RTrim( Ddo_grid_Selectedvalue_get));
+         GxWebStd.gx_hidden_field( context, sPrefix+"DDO_GRID_Selectedcolumn", StringUtil.RTrim( Ddo_grid_Selectedcolumn));
+         GxWebStd.gx_hidden_field( context, sPrefix+"DDO_GRID_Filteredtext_get", StringUtil.RTrim( Ddo_grid_Filteredtext_get));
+         GxWebStd.gx_hidden_field( context, sPrefix+"DDO_GRID_Filteredtextto_get", StringUtil.RTrim( Ddo_grid_Filteredtextto_get));
+         GxWebStd.gx_hidden_field( context, sPrefix+"DDO_GRIDCOLUMNSSELECTOR_Columnsselectorvalues", StringUtil.RTrim( Ddo_gridcolumnsselector_Columnsselectorvalues));
+         GxWebStd.gx_hidden_field( context, sPrefix+"DDO_MANAGEFILTERS_Activeeventkey", StringUtil.RTrim( Ddo_managefilters_Activeeventkey));
+         GxWebStd.gx_hidden_field( context, sPrefix+"GRID_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Rows), 6, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"GRIDPAGINATIONBAR_Selectedpage", StringUtil.RTrim( Gridpaginationbar_Selectedpage));
+         GxWebStd.gx_hidden_field( context, sPrefix+"GRIDPAGINATIONBAR_Rowsperpageselectedvalue", StringUtil.LTrim( StringUtil.NToC( (decimal)(Gridpaginationbar_Rowsperpageselectedvalue), 9, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"DDO_GRID_Activeeventkey", StringUtil.RTrim( Ddo_grid_Activeeventkey));
+         GxWebStd.gx_hidden_field( context, sPrefix+"DDO_GRID_Selectedvalue_get", StringUtil.RTrim( Ddo_grid_Selectedvalue_get));
+         GxWebStd.gx_hidden_field( context, sPrefix+"DDO_GRID_Selectedcolumn", StringUtil.RTrim( Ddo_grid_Selectedcolumn));
+         GxWebStd.gx_hidden_field( context, sPrefix+"DDO_GRID_Filteredtext_get", StringUtil.RTrim( Ddo_grid_Filteredtext_get));
+         GxWebStd.gx_hidden_field( context, sPrefix+"DDO_GRID_Filteredtextto_get", StringUtil.RTrim( Ddo_grid_Filteredtextto_get));
+         GxWebStd.gx_hidden_field( context, sPrefix+"DDO_GRIDCOLUMNSSELECTOR_Columnsselectorvalues", StringUtil.RTrim( Ddo_gridcolumnsselector_Columnsselectorvalues));
+         GxWebStd.gx_hidden_field( context, sPrefix+"DDO_MANAGEFILTERS_Activeeventkey", StringUtil.RTrim( Ddo_managefilters_Activeeventkey));
+         GxWebStd.gx_hidden_field( context, sPrefix+"GRID_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Rows), 6, 0, ".", "")));
       }
 
-      public override void RenderHtmlCloseForm( )
+      protected void RenderHtmlCloseForm492( )
       {
          SendCloseFormHiddens( ) ;
-         GxWebStd.gx_hidden_field( context, "GX_FocusControl", GX_FocusControl);
-         SendAjaxEncryptionKey();
-         SendSecurityToken((string)(sPrefix));
-         SendComponentObjects();
-         SendServerCommands();
-         SendState();
-         if ( context.isSpaRequest( ) )
+         if ( ( StringUtil.Len( sPrefix) != 0 ) && ( context.isAjaxRequest( ) || context.isSpaRequest( ) ) )
          {
-            disableOutput();
+            componentjscripts();
          }
-         context.WriteHtmlTextNl( "</form>") ;
-         if ( context.isSpaRequest( ) )
+         GxWebStd.gx_hidden_field( context, sPrefix+"GX_FocusControl", GX_FocusControl);
+         define_styles( ) ;
+         SendSecurityToken(sPrefix);
+         if ( StringUtil.Len( sPrefix) == 0 )
          {
-            enableOutput();
+            SendAjaxEncryptionKey();
+            SendComponentObjects();
+            SendServerCommands();
+            SendState();
+            if ( context.isSpaRequest( ) )
+            {
+               disableOutput();
+            }
+            context.WriteHtmlTextNl( "</form>") ;
+            if ( context.isSpaRequest( ) )
+            {
+               enableOutput();
+            }
+            include_jscripts( ) ;
+            context.WriteHtmlTextNl( "</body>") ;
+            context.WriteHtmlTextNl( "</html>") ;
+            if ( context.isSpaRequest( ) )
+            {
+               enableOutput();
+            }
          }
-         include_jscripts( ) ;
-      }
-
-      public override void RenderHtmlContent( )
-      {
-         gxajaxcallmode = (short)((isAjaxCallMode( ) ? 1 : 0));
-         if ( ( gxajaxcallmode == 0 ) && ( GxWebError == 0 ) )
+         else
          {
-            context.WriteHtmlText( "<div") ;
-            GxWebStd.ClassAttribute( context, "gx-ct-body"+" "+(String.IsNullOrEmpty(StringUtil.RTrim( Form.Class)) ? "form-horizontal Form" : Form.Class)+"-fx");
-            context.WriteHtmlText( ">") ;
-            WE492( ) ;
+            SendWebComponentState();
             context.WriteHtmlText( "</div>") ;
+            if ( toggleJsOutput )
+            {
+               if ( context.isSpaRequest( ) )
+               {
+                  enableJsOutput();
+               }
+            }
          }
-      }
-
-      public override void DispatchEvents( )
-      {
-         EVT492( ) ;
-      }
-
-      public override bool HasEnterEvent( )
-      {
-         return false ;
-      }
-
-      public override GXWebForm GetForm( )
-      {
-         return Form ;
-      }
-
-      public override string GetSelfLink( )
-      {
-         return formatLink("workhourloglist.aspx", new object[] {UrlEncode(StringUtil.LTrimStr(AV52EmployeeId,10,0)),UrlEncode(DateTimeUtil.FormatDateParm(AV50FromDate)),UrlEncode(DateTimeUtil.FormatDateParm(AV51ToDate))}, new string[] {"EmployeeId","FromDate","ToDate"})  ;
       }
 
       public override string GetPgmname( )
@@ -632,10 +640,35 @@ namespace GeneXus.Programs {
          }
          if ( ! wbLoad )
          {
-            if ( nGXWrapped == 1 )
+            if ( StringUtil.Len( sPrefix) == 0 )
             {
                RenderHtmlHeaders( ) ;
-               RenderHtmlOpenForm( ) ;
+            }
+            RenderHtmlOpenForm( ) ;
+            if ( StringUtil.Len( sPrefix) != 0 )
+            {
+               GxWebStd.gx_hidden_field( context, sPrefix+"_CMPPGM", "workhourloglist.aspx");
+               context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
+               context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
+               context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
+               context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
+               context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
+               context.AddJavascriptSource("DVelop/DVPaginationBar/DVPaginationBarRender.js", "", false, true);
+               context.AddJavascriptSource("Window/InNewWindowRender.js", "", false, true);
+               context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
+               context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
+               context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
+               context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
+               context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
+               context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
+               context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
+               context.AddJavascriptSource("DVelop/GridEmpowerer/GridEmpowererRender.js", "", false, true);
+               context.AddJavascriptSource("DVelop/Shared/daterangepicker/locales.js", "", false, true);
+               context.AddJavascriptSource("DVelop/Shared/daterangepicker/wwp-daterangepicker.js", "", false, true);
+               context.AddJavascriptSource("DVelop/Shared/daterangepicker/moment.min.js", "", false, true);
+               context.AddJavascriptSource("DVelop/Shared/daterangepicker/daterangepicker.min.js", "", false, true);
+               context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
+               context.AddJavascriptSource("DVelop/DateRangePicker/DateRangePickerRender.js", "", false, true);
             }
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "Section", "start", "top", " "+"data-gx-base-lib=\"bootstrapv3\""+" "+"data-abstract-form"+" ", "", "div");
@@ -667,17 +700,17 @@ namespace GeneXus.Programs {
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-action-group ActionGroupGrouped", "start", "top", " "+"data-gx-actiongroup-type=\"toolbar\""+" ", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-button", "start", "top", "", "", "div");
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 17,'',false,'',0)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 17,'" + sPrefix + "',false,'',0)\"";
             ClassString = "Button";
             StyleString = "";
-            GxWebStd.gx_button_ctrl( context, bttBtnexport2_Internalname, "gx.evt.setGridEvt("+StringUtil.Str( (decimal)(37), 2, 0)+","+"null"+");", "Export", bttBtnexport2_Jsonclick, 5, "Export", "", StyleString, ClassString, 1, 1, "standard", "'"+""+"'"+",false,"+"'"+"E\\'DOEXPORT2\\'."+"'", TempTags, "", context.GetButtonType( ), "HLP_WorkHourLogList.htm");
+            GxWebStd.gx_button_ctrl( context, bttBtnexport2_Internalname, "gx.evt.setGridEvt("+StringUtil.Str( (decimal)(37), 2, 0)+","+"null"+");", "Export", bttBtnexport2_Jsonclick, 5, "Export", "", StyleString, ClassString, 1, 1, "standard", "'"+sPrefix+"'"+",false,"+"'"+sPrefix+"E\\'DOEXPORT2\\'."+"'", TempTags, "", context.GetButtonType( ), "HLP_WorkHourLogList.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-button", "start", "top", "", "", "div");
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 19,'',false,'',0)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 19,'" + sPrefix + "',false,'',0)\"";
             ClassString = "hidden-xs";
             StyleString = "";
-            GxWebStd.gx_button_ctrl( context, bttBtneditcolumns_Internalname, "gx.evt.setGridEvt("+StringUtil.Str( (decimal)(37), 2, 0)+","+"null"+");", "Select columns", bttBtneditcolumns_Jsonclick, 0, "Select columns", "", StyleString, ClassString, 1, 0, "standard", "'"+""+"'"+",false,"+"'"+""+"'", TempTags, "", context.GetButtonType( ), "HLP_WorkHourLogList.htm");
+            GxWebStd.gx_button_ctrl( context, bttBtneditcolumns_Internalname, "gx.evt.setGridEvt("+StringUtil.Str( (decimal)(37), 2, 0)+","+"null"+");", "Select columns", bttBtneditcolumns_Jsonclick, 0, "Select columns", "", StyleString, ClassString, 1, 0, "standard", "'"+sPrefix+"'"+",false,"+"'"+""+"'", TempTags, "", context.GetButtonType( ), "HLP_WorkHourLogList.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -696,7 +729,7 @@ namespace GeneXus.Programs {
             ucDdo_managefilters.SetProperty("Tooltip", Ddo_managefilters_Tooltip);
             ucDdo_managefilters.SetProperty("Cls", Ddo_managefilters_Cls);
             ucDdo_managefilters.SetProperty("DropDownOptionsData", AV24ManageFiltersData);
-            ucDdo_managefilters.Render(context, "dvelop.gxbootstrap.ddoregular", Ddo_managefilters_Internalname, "DDO_MANAGEFILTERSContainer");
+            ucDdo_managefilters.Render(context, "dvelop.gxbootstrap.ddoregular", Ddo_managefilters_Internalname, sPrefix+"DDO_MANAGEFILTERSContainer");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "", "start", "top", "", "flex-grow:1;align-self:center;", "div");
@@ -709,8 +742,8 @@ namespace GeneXus.Programs {
             /* Attribute/Variable Label */
             GxWebStd.gx_label_element( context, edtavFilterfulltext_Internalname, "Filter Full Text", "gx-form-item AttributeLabel", 0, true, "width: 25%;");
             /* Single line edit */
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 28,'',false,'" + sGXsfl_37_idx + "',0)\"";
-            GxWebStd.gx_single_line_edit( context, edtavFilterfulltext_Internalname, AV16FilterFullText, StringUtil.RTrim( context.localUtil.Format( AV16FilterFullText, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,28);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "Search", edtavFilterfulltext_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavFilterfulltext_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "WWPFullTextFilter", "start", true, "", "HLP_WorkHourLogList.htm");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 28,'" + sPrefix + "',false,'" + sGXsfl_37_idx + "',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtavFilterfulltext_Internalname, AV16FilterFullText, StringUtil.RTrim( context.localUtil.Format( AV16FilterFullText, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,28);\"", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "Search", edtavFilterfulltext_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavFilterfulltext_Enabled, 0, "text", "", 80, "chr", 1, "row", 100, 0, 0, 0, 0, -1, -1, true, "WWPFullTextFilter", "start", true, "", "HLP_WorkHourLogList.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -728,7 +761,7 @@ namespace GeneXus.Programs {
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
             ClassString = "ErrorViewer";
             StyleString = "";
-            GxWebStd.gx_msg_list( context, "", context.GX_msglist.DisplayMode, StyleString, ClassString, "", "false");
+            GxWebStd.gx_msg_list( context, "", context.GX_msglist.DisplayMode, StyleString, ClassString, sPrefix, "false");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
@@ -757,19 +790,19 @@ namespace GeneXus.Programs {
             else
             {
                sStyleString = "";
-               context.WriteHtmlText( "<div id=\""+"GridContainer"+"Div\" "+sStyleString+">"+"</div>") ;
-               context.httpAjaxContext.ajax_rsp_assign_grid("_"+"Grid", GridContainer, subGrid_Internalname);
-               if ( ! context.isAjaxRequest( ) && ! context.isSpaRequest( ) )
+               context.WriteHtmlText( "<div id=\""+sPrefix+"GridContainer"+"Div\" "+sStyleString+">"+"</div>") ;
+               context.httpAjaxContext.ajax_rsp_assign_grid(sPrefix+"_"+"Grid", GridContainer, subGrid_Internalname);
+               if ( ! isAjaxCallMode( ) && ! context.isSpaRequest( ) )
                {
-                  GxWebStd.gx_hidden_field( context, "GridContainerData", GridContainer.ToJavascriptSource());
+                  GxWebStd.gx_hidden_field( context, sPrefix+"GridContainerData", GridContainer.ToJavascriptSource());
                }
                if ( context.isAjaxRequest( ) || context.isSpaRequest( ) )
                {
-                  GxWebStd.gx_hidden_field( context, "GridContainerData"+"V", GridContainer.GridValuesHidden());
+                  GxWebStd.gx_hidden_field( context, sPrefix+"GridContainerData"+"V", GridContainer.GridValuesHidden());
                }
                else
                {
-                  context.WriteHtmlText( "<input type=\"hidden\" "+"name=\""+"GridContainerData"+"V"+"\" value='"+GridContainer.GridValuesHidden()+"'/>") ;
+                  context.WriteHtmlText( "<input type=\"hidden\" "+"name=\""+sPrefix+"GridContainerData"+"V"+"\" value='"+GridContainer.GridValuesHidden()+"'/>") ;
                }
             }
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -798,7 +831,7 @@ namespace GeneXus.Programs {
             ucGridpaginationbar.SetProperty("CurrentPage", AV44GridCurrentPage);
             ucGridpaginationbar.SetProperty("PageCount", AV45GridPageCount);
             ucGridpaginationbar.SetProperty("AppliedFilters", AV46GridAppliedFilters);
-            ucGridpaginationbar.Render(context, "dvelop.dvpaginationbar", Gridpaginationbar_Internalname, "GRIDPAGINATIONBARContainer");
+            ucGridpaginationbar.Render(context, "dvelop.dvpaginationbar", Gridpaginationbar_Internalname, sPrefix+"GRIDPAGINATIONBARContainer");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -809,7 +842,7 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
             /* User Defined Control */
-            ucInnewwindow1.Render(context, "innewwindow", Innewwindow1_Internalname, "INNEWWINDOW1Container");
+            ucInnewwindow1.Render(context, "innewwindow", Innewwindow1_Internalname, sPrefix+"INNEWWINDOW1Container");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -834,7 +867,7 @@ namespace GeneXus.Programs {
             ucDdo_grid.SetProperty("DataListType", Ddo_grid_Datalisttype);
             ucDdo_grid.SetProperty("DataListProc", Ddo_grid_Datalistproc);
             ucDdo_grid.SetProperty("DropDownOptionsTitleSettingsIcons", AV40DDO_TitleSettingsIcons);
-            ucDdo_grid.Render(context, "dvelop.gxbootstrap.ddogridtitlesettingsm", Ddo_grid_Internalname, "DDO_GRIDContainer");
+            ucDdo_grid.Render(context, "dvelop.gxbootstrap.ddogridtitlesettingsm", Ddo_grid_Internalname, sPrefix+"DDO_GRIDContainer");
             /* User Defined Control */
             ucDdo_gridcolumnsselector.SetProperty("IconType", Ddo_gridcolumnsselector_Icontype);
             ucDdo_gridcolumnsselector.SetProperty("Icon", Ddo_gridcolumnsselector_Icon);
@@ -844,20 +877,20 @@ namespace GeneXus.Programs {
             ucDdo_gridcolumnsselector.SetProperty("DropDownOptionsType", Ddo_gridcolumnsselector_Dropdownoptionstype);
             ucDdo_gridcolumnsselector.SetProperty("DropDownOptionsTitleSettingsIcons", AV40DDO_TitleSettingsIcons);
             ucDdo_gridcolumnsselector.SetProperty("DropDownOptionsData", AV21ColumnsSelector);
-            ucDdo_gridcolumnsselector.Render(context, "dvelop.gxbootstrap.ddogridcolumnsselector", Ddo_gridcolumnsselector_Internalname, "DDO_GRIDCOLUMNSSELECTORContainer");
+            ucDdo_gridcolumnsselector.Render(context, "dvelop.gxbootstrap.ddogridcolumnsselector", Ddo_gridcolumnsselector_Internalname, sPrefix+"DDO_GRIDCOLUMNSSELECTORContainer");
             /* User Defined Control */
             ucGrid_empowerer.SetProperty("HasTitleSettings", Grid_empowerer_Hastitlesettings);
             ucGrid_empowerer.SetProperty("HasColumnsSelector", Grid_empowerer_Hascolumnsselector);
-            ucGrid_empowerer.Render(context, "wwp.gridempowerer", Grid_empowerer_Internalname, "GRID_EMPOWERERContainer");
+            ucGrid_empowerer.Render(context, "wwp.gridempowerer", Grid_empowerer_Internalname, sPrefix+"GRID_EMPOWERERContainer");
             /* Div Control */
             GxWebStd.gx_div_start( context, divDdo_workhourlogdateauxdates_Internalname, 1, 0, "px", 0, "px", "Invisible", "start", "top", "", "", "div");
             /* Single line edit */
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 62,'',false,'" + sGXsfl_37_idx + "',0)\"";
-            GxWebStd.gx_single_line_edit( context, edtavDdo_workhourlogdateauxdatetext_Internalname, AV35DDO_WorkHourLogDateAuxDateText, StringUtil.RTrim( context.localUtil.Format( AV35DDO_WorkHourLogDateAuxDateText, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,62);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavDdo_workhourlogdateauxdatetext_Jsonclick, 0, "Attribute", "", "", "", "", 1, 1, 0, "text", "", 40, "chr", 1, "row", 40, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_WorkHourLogList.htm");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 62,'" + sPrefix + "',false,'" + sGXsfl_37_idx + "',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtavDdo_workhourlogdateauxdatetext_Internalname, AV35DDO_WorkHourLogDateAuxDateText, StringUtil.RTrim( context.localUtil.Format( AV35DDO_WorkHourLogDateAuxDateText, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,62);\"", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavDdo_workhourlogdateauxdatetext_Jsonclick, 0, "Attribute", "", "", "", "", 1, 1, 0, "text", "", 40, "chr", 1, "row", 40, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_WorkHourLogList.htm");
             /* User Defined Control */
             ucTfworkhourlogdate_rangepicker.SetProperty("Start Date", AV33DDO_WorkHourLogDateAuxDate);
             ucTfworkhourlogdate_rangepicker.SetProperty("End Date", AV34DDO_WorkHourLogDateAuxDateTo);
-            ucTfworkhourlogdate_rangepicker.Render(context, "wwp.daterangepicker", Tfworkhourlogdate_rangepicker_Internalname, "TFWORKHOURLOGDATE_RANGEPICKERContainer");
+            ucTfworkhourlogdate_rangepicker.Render(context, "wwp.daterangepicker", Tfworkhourlogdate_rangepicker_Internalname, sPrefix+"TFWORKHOURLOGDATE_RANGEPICKERContainer");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -878,19 +911,19 @@ namespace GeneXus.Programs {
                else
                {
                   sStyleString = "";
-                  context.WriteHtmlText( "<div id=\""+"GridContainer"+"Div\" "+sStyleString+">"+"</div>") ;
-                  context.httpAjaxContext.ajax_rsp_assign_grid("_"+"Grid", GridContainer, subGrid_Internalname);
-                  if ( ! context.isAjaxRequest( ) && ! context.isSpaRequest( ) )
+                  context.WriteHtmlText( "<div id=\""+sPrefix+"GridContainer"+"Div\" "+sStyleString+">"+"</div>") ;
+                  context.httpAjaxContext.ajax_rsp_assign_grid(sPrefix+"_"+"Grid", GridContainer, subGrid_Internalname);
+                  if ( ! isAjaxCallMode( ) && ! context.isSpaRequest( ) )
                   {
-                     GxWebStd.gx_hidden_field( context, "GridContainerData", GridContainer.ToJavascriptSource());
+                     GxWebStd.gx_hidden_field( context, sPrefix+"GridContainerData", GridContainer.ToJavascriptSource());
                   }
                   if ( context.isAjaxRequest( ) || context.isSpaRequest( ) )
                   {
-                     GxWebStd.gx_hidden_field( context, "GridContainerData"+"V", GridContainer.GridValuesHidden());
+                     GxWebStd.gx_hidden_field( context, sPrefix+"GridContainerData"+"V", GridContainer.GridValuesHidden());
                   }
                   else
                   {
-                     context.WriteHtmlText( "<input type=\"hidden\" "+"name=\""+"GridContainerData"+"V"+"\" value='"+GridContainer.GridValuesHidden()+"'/>") ;
+                     context.WriteHtmlText( "<input type=\"hidden\" "+"name=\""+sPrefix+"GridContainerData"+"V"+"\" value='"+GridContainer.GridValuesHidden()+"'/>") ;
                   }
                }
             }
@@ -903,22 +936,35 @@ namespace GeneXus.Programs {
          wbLoad = false;
          wbEnd = 0;
          wbStart = 0;
-         if ( ! context.isSpaRequest( ) )
+         if ( StringUtil.Len( sPrefix) == 0 )
          {
-            if ( context.ExposeMetadata( ) )
+            if ( ! context.isSpaRequest( ) )
             {
-               Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
+               if ( context.ExposeMetadata( ) )
+               {
+                  Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
+               }
+            }
+            Form.Meta.addItem("description", " Work Hour Log", 0) ;
+            context.wjLoc = "";
+            context.nUserReturn = 0;
+            context.wbHandled = 0;
+            if ( StringUtil.Len( sPrefix) == 0 )
+            {
+               sXEvt = cgiGet( "_EventName");
+               if ( ! GetJustCreated( ) && ( StringUtil.StrCmp(context.GetRequestMethod( ), "POST") == 0 ) )
+               {
+               }
             }
          }
-         Form.Meta.addItem("description", " Work Hour Log", 0) ;
-         context.wjLoc = "";
-         context.nUserReturn = 0;
-         context.wbHandled = 0;
-         if ( StringUtil.StrCmp(context.GetRequestMethod( ), "POST") == 0 )
-         {
-         }
          wbErr = false;
-         STRUP490( ) ;
+         if ( ( StringUtil.Len( sPrefix) == 0 ) || ( nDraw == 1 ) )
+         {
+            if ( nDoneStart == 0 )
+            {
+               STRUP490( ) ;
+            }
+         }
       }
 
       protected void WS492( )
@@ -929,20 +975,24 @@ namespace GeneXus.Programs {
 
       protected void EVT492( )
       {
-         if ( StringUtil.StrCmp(context.GetRequestMethod( ), "POST") == 0 )
+         sXEvt = cgiGet( "_EventName");
+         if ( ( ( ( StringUtil.Len( sPrefix) == 0 ) ) || ( StringUtil.StringSearch( sXEvt, sPrefix, 1) > 0 ) ) && ! GetJustCreated( ) && ( StringUtil.StrCmp(context.GetRequestMethod( ), "POST") == 0 ) )
          {
             if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) && ! wbErr )
             {
                /* Read Web Panel buttons. */
-               sEvt = cgiGet( "_EventName");
-               EvtGridId = cgiGet( "_EventGridId");
-               EvtRowId = cgiGet( "_EventRowId");
-               if ( StringUtil.Len( sEvt) > 0 )
+               if ( context.wbHandled == 0 )
                {
-                  sEvtType = StringUtil.Left( sEvt, 1);
-                  sEvt = StringUtil.Right( sEvt, (short)(StringUtil.Len( sEvt)-1));
-                  if ( StringUtil.StrCmp(sEvtType, "M") != 0 )
+                  if ( StringUtil.Len( sPrefix) == 0 )
                   {
+                     sEvt = cgiGet( "_EventName");
+                     EvtGridId = cgiGet( "_EventGridId");
+                     EvtRowId = cgiGet( "_EventRowId");
+                  }
+                  if ( StringUtil.Len( sEvt) > 0 )
+                  {
+                     sEvtType = StringUtil.Left( sEvt, 1);
+                     sEvt = StringUtil.Right( sEvt, (short)(StringUtil.Len( sEvt)-1));
                      if ( StringUtil.StrCmp(sEvtType, "E") == 0 )
                      {
                         sEvtType = StringUtil.Right( sEvt, 1);
@@ -951,55 +1001,137 @@ namespace GeneXus.Programs {
                            sEvt = StringUtil.Left( sEvt, (short)(StringUtil.Len( sEvt)-1));
                            if ( StringUtil.StrCmp(sEvt, "RFR") == 0 )
                            {
-                              context.wbHandled = 1;
-                              dynload_actions( ) ;
+                              if ( ( StringUtil.Len( sPrefix) != 0 ) && ( nDoneStart == 0 ) )
+                              {
+                                 STRUP490( ) ;
+                              }
+                              if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
+                              {
+                                 context.wbHandled = 1;
+                                 if ( ! wbErr )
+                                 {
+                                    dynload_actions( ) ;
+                                 }
+                              }
                            }
                            else if ( StringUtil.StrCmp(sEvt, "DDO_MANAGEFILTERS.ONOPTIONCLICKED") == 0 )
                            {
-                              context.wbHandled = 1;
-                              dynload_actions( ) ;
-                              /* Execute user event: Ddo_managefilters.Onoptionclicked */
-                              E11492 ();
+                              if ( ( StringUtil.Len( sPrefix) != 0 ) && ( nDoneStart == 0 ) )
+                              {
+                                 STRUP490( ) ;
+                              }
+                              if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
+                              {
+                                 context.wbHandled = 1;
+                                 if ( ! wbErr )
+                                 {
+                                    dynload_actions( ) ;
+                                    /* Execute user event: Ddo_managefilters.Onoptionclicked */
+                                    E11492 ();
+                                 }
+                              }
                            }
                            else if ( StringUtil.StrCmp(sEvt, "GRIDPAGINATIONBAR.CHANGEPAGE") == 0 )
                            {
-                              context.wbHandled = 1;
-                              dynload_actions( ) ;
-                              /* Execute user event: Gridpaginationbar.Changepage */
-                              E12492 ();
+                              if ( ( StringUtil.Len( sPrefix) != 0 ) && ( nDoneStart == 0 ) )
+                              {
+                                 STRUP490( ) ;
+                              }
+                              if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
+                              {
+                                 context.wbHandled = 1;
+                                 if ( ! wbErr )
+                                 {
+                                    dynload_actions( ) ;
+                                    /* Execute user event: Gridpaginationbar.Changepage */
+                                    E12492 ();
+                                 }
+                              }
                            }
                            else if ( StringUtil.StrCmp(sEvt, "GRIDPAGINATIONBAR.CHANGEROWSPERPAGE") == 0 )
                            {
-                              context.wbHandled = 1;
-                              dynload_actions( ) ;
-                              /* Execute user event: Gridpaginationbar.Changerowsperpage */
-                              E13492 ();
+                              if ( ( StringUtil.Len( sPrefix) != 0 ) && ( nDoneStart == 0 ) )
+                              {
+                                 STRUP490( ) ;
+                              }
+                              if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
+                              {
+                                 context.wbHandled = 1;
+                                 if ( ! wbErr )
+                                 {
+                                    dynload_actions( ) ;
+                                    /* Execute user event: Gridpaginationbar.Changerowsperpage */
+                                    E13492 ();
+                                 }
+                              }
                            }
                            else if ( StringUtil.StrCmp(sEvt, "DDO_GRID.ONOPTIONCLICKED") == 0 )
                            {
-                              context.wbHandled = 1;
-                              dynload_actions( ) ;
-                              /* Execute user event: Ddo_grid.Onoptionclicked */
-                              E14492 ();
+                              if ( ( StringUtil.Len( sPrefix) != 0 ) && ( nDoneStart == 0 ) )
+                              {
+                                 STRUP490( ) ;
+                              }
+                              if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
+                              {
+                                 context.wbHandled = 1;
+                                 if ( ! wbErr )
+                                 {
+                                    dynload_actions( ) ;
+                                    /* Execute user event: Ddo_grid.Onoptionclicked */
+                                    E14492 ();
+                                 }
+                              }
                            }
                            else if ( StringUtil.StrCmp(sEvt, "DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED") == 0 )
                            {
-                              context.wbHandled = 1;
-                              dynload_actions( ) ;
-                              /* Execute user event: Ddo_gridcolumnsselector.Oncolumnschanged */
-                              E15492 ();
+                              if ( ( StringUtil.Len( sPrefix) != 0 ) && ( nDoneStart == 0 ) )
+                              {
+                                 STRUP490( ) ;
+                              }
+                              if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
+                              {
+                                 context.wbHandled = 1;
+                                 if ( ! wbErr )
+                                 {
+                                    dynload_actions( ) ;
+                                    /* Execute user event: Ddo_gridcolumnsselector.Oncolumnschanged */
+                                    E15492 ();
+                                 }
+                              }
                            }
                            else if ( StringUtil.StrCmp(sEvt, "'DOEXPORT2'") == 0 )
                            {
-                              context.wbHandled = 1;
-                              dynload_actions( ) ;
-                              /* Execute user event: 'DoExport2' */
-                              E16492 ();
+                              if ( ( StringUtil.Len( sPrefix) != 0 ) && ( nDoneStart == 0 ) )
+                              {
+                                 STRUP490( ) ;
+                              }
+                              if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
+                              {
+                                 context.wbHandled = 1;
+                                 if ( ! wbErr )
+                                 {
+                                    dynload_actions( ) ;
+                                    /* Execute user event: 'DoExport2' */
+                                    E16492 ();
+                                 }
+                              }
                            }
                            else if ( StringUtil.StrCmp(sEvt, "LSCR") == 0 )
                            {
-                              context.wbHandled = 1;
-                              dynload_actions( ) ;
+                              if ( ( StringUtil.Len( sPrefix) != 0 ) && ( nDoneStart == 0 ) )
+                              {
+                                 STRUP490( ) ;
+                              }
+                              if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
+                              {
+                                 context.wbHandled = 1;
+                                 if ( ! wbErr )
+                                 {
+                                    dynload_actions( ) ;
+                                    GX_FocusControl = edtavFilterfulltext_Internalname;
+                                    AssignAttri(sPrefix, false, "GX_FocusControl", GX_FocusControl);
+                                 }
+                              }
                               dynload_actions( ) ;
                            }
                         }
@@ -1009,6 +1141,10 @@ namespace GeneXus.Programs {
                            sEvt = StringUtil.Left( sEvt, (short)(StringUtil.Len( sEvt)-4));
                            if ( ( StringUtil.StrCmp(StringUtil.Left( sEvt, 5), "START") == 0 ) || ( StringUtil.StrCmp(StringUtil.Left( sEvt, 7), "REFRESH") == 0 ) || ( StringUtil.StrCmp(StringUtil.Left( sEvt, 9), "GRID.LOAD") == 0 ) || ( StringUtil.StrCmp(StringUtil.Left( sEvt, 5), "ENTER") == 0 ) || ( StringUtil.StrCmp(StringUtil.Left( sEvt, 6), "CANCEL") == 0 ) )
                            {
+                              if ( ( StringUtil.Len( sPrefix) != 0 ) && ( nDoneStart == 0 ) )
+                              {
+                                 STRUP490( ) ;
+                              }
                               nGXsfl_37_idx = (int)(Math.Round(NumberUtil.Val( sEvtType, "."), 18, MidpointRounding.ToEven));
                               sGXsfl_37_idx = StringUtil.PadL( StringUtil.LTrimStr( (decimal)(nGXsfl_37_idx), 4, 0), 4, "0");
                               SubsflControlProps_372( ) ;
@@ -1029,57 +1165,99 @@ namespace GeneXus.Programs {
                                  sEvt = StringUtil.Left( sEvt, (short)(StringUtil.Len( sEvt)-1));
                                  if ( StringUtil.StrCmp(sEvt, "START") == 0 )
                                  {
-                                    context.wbHandled = 1;
-                                    dynload_actions( ) ;
-                                    /* Execute user event: Start */
-                                    E17492 ();
+                                    if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
+                                    {
+                                       context.wbHandled = 1;
+                                       if ( ! wbErr )
+                                       {
+                                          dynload_actions( ) ;
+                                          GX_FocusControl = edtavFilterfulltext_Internalname;
+                                          AssignAttri(sPrefix, false, "GX_FocusControl", GX_FocusControl);
+                                          /* Execute user event: Start */
+                                          E17492 ();
+                                       }
+                                    }
                                  }
                                  else if ( StringUtil.StrCmp(sEvt, "REFRESH") == 0 )
                                  {
-                                    context.wbHandled = 1;
-                                    dynload_actions( ) ;
-                                    /* Execute user event: Refresh */
-                                    E18492 ();
+                                    if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
+                                    {
+                                       context.wbHandled = 1;
+                                       if ( ! wbErr )
+                                       {
+                                          dynload_actions( ) ;
+                                          GX_FocusControl = edtavFilterfulltext_Internalname;
+                                          AssignAttri(sPrefix, false, "GX_FocusControl", GX_FocusControl);
+                                          /* Execute user event: Refresh */
+                                          E18492 ();
+                                       }
+                                    }
                                  }
                                  else if ( StringUtil.StrCmp(sEvt, "GRID.LOAD") == 0 )
                                  {
-                                    context.wbHandled = 1;
-                                    dynload_actions( ) ;
-                                    /* Execute user event: Grid.Load */
-                                    E19492 ();
+                                    if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
+                                    {
+                                       context.wbHandled = 1;
+                                       if ( ! wbErr )
+                                       {
+                                          dynload_actions( ) ;
+                                          GX_FocusControl = edtavFilterfulltext_Internalname;
+                                          AssignAttri(sPrefix, false, "GX_FocusControl", GX_FocusControl);
+                                          /* Execute user event: Grid.Load */
+                                          E19492 ();
+                                       }
+                                    }
                                  }
                                  else if ( StringUtil.StrCmp(sEvt, "ENTER") == 0 )
                                  {
-                                    context.wbHandled = 1;
-                                    if ( ! wbErr )
+                                    if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
                                     {
-                                       Rfr0gs = false;
-                                       /* Set Refresh If Orderedby Changed */
-                                       if ( ( context.localUtil.CToN( cgiGet( "GXH_vORDEREDBY"), ".", ",") != Convert.ToDecimal( AV13OrderedBy )) )
+                                       context.wbHandled = 1;
+                                       if ( ! wbErr )
                                        {
-                                          Rfr0gs = true;
+                                          if ( ! wbErr )
+                                          {
+                                             Rfr0gs = false;
+                                             /* Set Refresh If Orderedby Changed */
+                                             if ( ( context.localUtil.CToN( cgiGet( sPrefix+"GXH_vORDEREDBY"), ".", ",") != Convert.ToDecimal( AV13OrderedBy )) )
+                                             {
+                                                Rfr0gs = true;
+                                             }
+                                             /* Set Refresh If Ordereddsc Changed */
+                                             if ( StringUtil.StrToBool( cgiGet( sPrefix+"GXH_vORDEREDDSC")) != AV14OrderedDsc )
+                                             {
+                                                Rfr0gs = true;
+                                             }
+                                             /* Set Refresh If Filterfulltext Changed */
+                                             if ( StringUtil.StrCmp(cgiGet( sPrefix+"GXH_vFILTERFULLTEXT"), AV16FilterFullText) != 0 )
+                                             {
+                                                Rfr0gs = true;
+                                             }
+                                             if ( ! Rfr0gs )
+                                             {
+                                             }
+                                             dynload_actions( ) ;
+                                          }
                                        }
-                                       /* Set Refresh If Ordereddsc Changed */
-                                       if ( StringUtil.StrToBool( cgiGet( "GXH_vORDEREDDSC")) != AV14OrderedDsc )
-                                       {
-                                          Rfr0gs = true;
-                                       }
-                                       /* Set Refresh If Filterfulltext Changed */
-                                       if ( StringUtil.StrCmp(cgiGet( "GXH_vFILTERFULLTEXT"), AV16FilterFullText) != 0 )
-                                       {
-                                          Rfr0gs = true;
-                                       }
-                                       if ( ! Rfr0gs )
-                                       {
-                                       }
-                                       dynload_actions( ) ;
                                     }
                                     /* No code required for Cancel button. It is implemented as the Reset button. */
                                  }
                                  else if ( StringUtil.StrCmp(sEvt, "LSCR") == 0 )
                                  {
-                                    context.wbHandled = 1;
-                                    dynload_actions( ) ;
+                                    if ( ( StringUtil.Len( sPrefix) != 0 ) && ( nDoneStart == 0 ) )
+                                    {
+                                       STRUP490( ) ;
+                                    }
+                                    if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
+                                    {
+                                       context.wbHandled = 1;
+                                       if ( ! wbErr )
+                                       {
+                                          dynload_actions( ) ;
+                                          GX_FocusControl = edtavFilterfulltext_Internalname;
+                                          AssignAttri(sPrefix, false, "GX_FocusControl", GX_FocusControl);
+                                       }
+                                    }
                                  }
                               }
                               else
@@ -1103,10 +1281,7 @@ namespace GeneXus.Programs {
             Refresh( ) ;
             if ( ! GxWebStd.gx_redirect( context) )
             {
-               if ( nGXWrapped == 1 )
-               {
-                  RenderHtmlCloseForm( ) ;
-               }
+               RenderHtmlCloseForm492( ) ;
             }
          }
       }
@@ -1115,28 +1290,41 @@ namespace GeneXus.Programs {
       {
          if ( nDonePA == 0 )
          {
-            if ( String.IsNullOrEmpty(StringUtil.RTrim( context.GetCookie( "GX_SESSION_ID"))) )
+            if ( StringUtil.Len( sPrefix) != 0 )
             {
-               gxcookieaux = context.SetCookie( "GX_SESSION_ID", Encrypt64( Crypto.GetEncryptionKey( ), Crypto.GetServerKey( )), "", (DateTime)(DateTime.MinValue), "", (short)(context.GetHttpSecure( )));
+               initialize_properties( ) ;
+            }
+            if ( StringUtil.Len( sPrefix) == 0 )
+            {
+               if ( String.IsNullOrEmpty(StringUtil.RTrim( context.GetCookie( "GX_SESSION_ID"))) )
+               {
+                  gxcookieaux = context.SetCookie( "GX_SESSION_ID", Encrypt64( Crypto.GetEncryptionKey( ), Crypto.GetServerKey( )), "", (DateTime)(DateTime.MinValue), "", (short)(context.GetHttpSecure( )));
+               }
             }
             GXKey = Decrypt64( context.GetCookie( "GX_SESSION_ID"), Crypto.GetServerKey( ));
             toggleJsOutput = isJsOutputEnabled( );
-            if ( context.isSpaRequest( ) )
-            {
-               disableJsOutput();
-            }
-            init_web_controls( ) ;
-            if ( toggleJsOutput )
+            if ( StringUtil.Len( sPrefix) == 0 )
             {
                if ( context.isSpaRequest( ) )
                {
-                  enableJsOutput();
+                  disableJsOutput();
+               }
+            }
+            init_web_controls( ) ;
+            if ( StringUtil.Len( sPrefix) == 0 )
+            {
+               if ( toggleJsOutput )
+               {
+                  if ( context.isSpaRequest( ) )
+                  {
+                     enableJsOutput();
+                  }
                }
             }
             if ( ! context.isAjaxRequest( ) )
             {
                GX_FocusControl = edtavFilterfulltext_Internalname;
-               AssignAttri("", false, "GX_FocusControl", GX_FocusControl);
+               AssignAttri(sPrefix, false, "GX_FocusControl", GX_FocusControl);
             }
             nDonePA = 1;
          }
@@ -1183,9 +1371,7 @@ namespace GeneXus.Programs {
                                        string AV37TFWorkHourLogDuration_Sel ,
                                        string AV38TFWorkHourLogDescription ,
                                        string AV39TFWorkHourLogDescription_Sel ,
-                                       bool AV55RedirectToFirstDetail ,
-                                       string AV56QueryIntent ,
-                                       string AV46GridAppliedFilters )
+                                       string sPrefix )
       {
          initialize_formulas( ) ;
          GxWebStd.set_html_headers( context, 0, "", "");
@@ -1246,7 +1432,7 @@ namespace GeneXus.Programs {
          SubsflControlProps_372( ) ;
          bGXsfl_37_Refreshing = true;
          GridContainer.AddObjectProperty("GridName", "Grid");
-         GridContainer.AddObjectProperty("CmpContext", "");
+         GridContainer.AddObjectProperty("CmpContext", sPrefix);
          GridContainer.AddObjectProperty("InMasterPage", "false");
          GridContainer.AddObjectProperty("Class", "GridWithPaginationBar WorkWith");
          GridContainer.AddObjectProperty("Cellpadding", StringUtil.LTrim( StringUtil.NToC( (decimal)(1), 4, 0, ".", "")));
@@ -1324,7 +1510,7 @@ namespace GeneXus.Programs {
                pr_default.readNext(0);
             }
             GRID_nEOF = (short)(((pr_default.getStatus(0) == 101) ? 1 : 0));
-            GxWebStd.gx_hidden_field( context, "GRID_nEOF", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nEOF), 1, 0, ".", "")));
+            GxWebStd.gx_hidden_field( context, sPrefix+"GRID_nEOF", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nEOF), 1, 0, ".", "")));
             pr_default.close(0);
             wbEnd = 37;
             WB490( ) ;
@@ -1334,21 +1520,17 @@ namespace GeneXus.Programs {
 
       protected void send_integrity_lvl_hashes492( )
       {
-         GxWebStd.gx_hidden_field( context, "vPGMNAME", StringUtil.RTrim( AV57Pgmname));
-         GxWebStd.gx_hidden_field( context, "gxhash_vPGMNAME", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV57Pgmname, "")), context));
-         GxWebStd.gx_boolean_hidden_field( context, "vREDIRECTTOFIRSTDETAIL", AV55RedirectToFirstDetail);
-         GxWebStd.gx_hidden_field( context, "gxhash_vREDIRECTTOFIRSTDETAIL", GetSecureSignedToken( "", AV55RedirectToFirstDetail, context));
-         GxWebStd.gx_hidden_field( context, "vQUERYINTENT", AV56QueryIntent);
-         GxWebStd.gx_hidden_field( context, "gxhash_vQUERYINTENT", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV56QueryIntent, "")), context));
+         GxWebStd.gx_hidden_field( context, sPrefix+"vPGMNAME", StringUtil.RTrim( AV57Pgmname));
+         GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vPGMNAME", GetSecureSignedToken( sPrefix, StringUtil.RTrim( context.localUtil.Format( AV57Pgmname, "")), context));
          if ( context.isAjaxRequest( ) )
          {
-            context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "vPROJECTIDS", AV53ProjectIds);
+            context.httpAjaxContext.ajax_rsp_assign_sdt_attri(sPrefix, false, sPrefix+"vPROJECTIDS", AV53ProjectIds);
          }
          else
          {
-            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("vPROJECTIDS", AV53ProjectIds);
+            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt(sPrefix+"vPROJECTIDS", AV53ProjectIds);
          }
-         GxWebStd.gx_hidden_field( context, "gxhash_vPROJECTIDS", GetSecureSignedToken( "", AV53ProjectIds, context));
+         GxWebStd.gx_hidden_field( context, sPrefix+"gxhash_vPROJECTIDS", GetSecureSignedToken( sPrefix, AV53ProjectIds, context));
       }
 
       protected int subGrid_fnc_Pagecount( )
@@ -1448,10 +1630,10 @@ namespace GeneXus.Programs {
          AV67Workhourloglistds_10_tfworkhourlogdescription = AV38TFWorkHourLogDescription;
          AV68Workhourloglistds_11_tfworkhourlogdescription_sel = AV39TFWorkHourLogDescription_Sel;
          GRID_nFirstRecordOnPage = 0;
-         GxWebStd.gx_hidden_field( context, "GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV13OrderedBy, AV14OrderedDsc, AV16FilterFullText, AV52EmployeeId, AV50FromDate, AV51ToDate, AV53ProjectIds, AV26ManageFiltersExecutionStep, AV21ColumnsSelector, AV57Pgmname, AV27TFEmployeeName, AV28TFEmployeeName_Sel, AV29TFProjectName, AV30TFProjectName_Sel, AV31TFWorkHourLogDate, AV32TFWorkHourLogDate_To, AV36TFWorkHourLogDuration, AV37TFWorkHourLogDuration_Sel, AV38TFWorkHourLogDescription, AV39TFWorkHourLogDescription_Sel, AV55RedirectToFirstDetail, AV56QueryIntent, AV46GridAppliedFilters) ;
+            gxgrGrid_refresh( subGrid_Rows, AV13OrderedBy, AV14OrderedDsc, AV16FilterFullText, AV52EmployeeId, AV50FromDate, AV51ToDate, AV53ProjectIds, AV26ManageFiltersExecutionStep, AV21ColumnsSelector, AV57Pgmname, AV27TFEmployeeName, AV28TFEmployeeName_Sel, AV29TFProjectName, AV30TFProjectName_Sel, AV31TFWorkHourLogDate, AV32TFWorkHourLogDate_To, AV36TFWorkHourLogDuration, AV37TFWorkHourLogDuration_Sel, AV38TFWorkHourLogDescription, AV39TFWorkHourLogDescription_Sel, sPrefix) ;
          }
          send_integrity_footer_hashes( ) ;
          return 0 ;
@@ -1479,11 +1661,11 @@ namespace GeneXus.Programs {
          {
             return 2 ;
          }
-         GxWebStd.gx_hidden_field( context, "GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
          GridContainer.AddObjectProperty("GRID_nFirstRecordOnPage", GRID_nFirstRecordOnPage);
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV13OrderedBy, AV14OrderedDsc, AV16FilterFullText, AV52EmployeeId, AV50FromDate, AV51ToDate, AV53ProjectIds, AV26ManageFiltersExecutionStep, AV21ColumnsSelector, AV57Pgmname, AV27TFEmployeeName, AV28TFEmployeeName_Sel, AV29TFProjectName, AV30TFProjectName_Sel, AV31TFWorkHourLogDate, AV32TFWorkHourLogDate_To, AV36TFWorkHourLogDuration, AV37TFWorkHourLogDuration_Sel, AV38TFWorkHourLogDescription, AV39TFWorkHourLogDescription_Sel, AV55RedirectToFirstDetail, AV56QueryIntent, AV46GridAppliedFilters) ;
+            gxgrGrid_refresh( subGrid_Rows, AV13OrderedBy, AV14OrderedDsc, AV16FilterFullText, AV52EmployeeId, AV50FromDate, AV51ToDate, AV53ProjectIds, AV26ManageFiltersExecutionStep, AV21ColumnsSelector, AV57Pgmname, AV27TFEmployeeName, AV28TFEmployeeName_Sel, AV29TFProjectName, AV30TFProjectName_Sel, AV31TFWorkHourLogDate, AV32TFWorkHourLogDate_To, AV36TFWorkHourLogDuration, AV37TFWorkHourLogDuration_Sel, AV38TFWorkHourLogDescription, AV39TFWorkHourLogDescription_Sel, sPrefix) ;
          }
          send_integrity_footer_hashes( ) ;
          return (short)(((GRID_nEOF==0) ? 0 : 2)) ;
@@ -1510,10 +1692,10 @@ namespace GeneXus.Programs {
          {
             return 2 ;
          }
-         GxWebStd.gx_hidden_field( context, "GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV13OrderedBy, AV14OrderedDsc, AV16FilterFullText, AV52EmployeeId, AV50FromDate, AV51ToDate, AV53ProjectIds, AV26ManageFiltersExecutionStep, AV21ColumnsSelector, AV57Pgmname, AV27TFEmployeeName, AV28TFEmployeeName_Sel, AV29TFProjectName, AV30TFProjectName_Sel, AV31TFWorkHourLogDate, AV32TFWorkHourLogDate_To, AV36TFWorkHourLogDuration, AV37TFWorkHourLogDuration_Sel, AV38TFWorkHourLogDescription, AV39TFWorkHourLogDescription_Sel, AV55RedirectToFirstDetail, AV56QueryIntent, AV46GridAppliedFilters) ;
+            gxgrGrid_refresh( subGrid_Rows, AV13OrderedBy, AV14OrderedDsc, AV16FilterFullText, AV52EmployeeId, AV50FromDate, AV51ToDate, AV53ProjectIds, AV26ManageFiltersExecutionStep, AV21ColumnsSelector, AV57Pgmname, AV27TFEmployeeName, AV28TFEmployeeName_Sel, AV29TFProjectName, AV30TFProjectName_Sel, AV31TFWorkHourLogDate, AV32TFWorkHourLogDate_To, AV36TFWorkHourLogDuration, AV37TFWorkHourLogDuration_Sel, AV38TFWorkHourLogDescription, AV39TFWorkHourLogDescription_Sel, sPrefix) ;
          }
          send_integrity_footer_hashes( ) ;
          return 0 ;
@@ -1548,10 +1730,10 @@ namespace GeneXus.Programs {
          {
             GRID_nFirstRecordOnPage = 0;
          }
-         GxWebStd.gx_hidden_field( context, "GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV13OrderedBy, AV14OrderedDsc, AV16FilterFullText, AV52EmployeeId, AV50FromDate, AV51ToDate, AV53ProjectIds, AV26ManageFiltersExecutionStep, AV21ColumnsSelector, AV57Pgmname, AV27TFEmployeeName, AV28TFEmployeeName_Sel, AV29TFProjectName, AV30TFProjectName_Sel, AV31TFWorkHourLogDate, AV32TFWorkHourLogDate_To, AV36TFWorkHourLogDuration, AV37TFWorkHourLogDuration_Sel, AV38TFWorkHourLogDescription, AV39TFWorkHourLogDescription_Sel, AV55RedirectToFirstDetail, AV56QueryIntent, AV46GridAppliedFilters) ;
+            gxgrGrid_refresh( subGrid_Rows, AV13OrderedBy, AV14OrderedDsc, AV16FilterFullText, AV52EmployeeId, AV50FromDate, AV51ToDate, AV53ProjectIds, AV26ManageFiltersExecutionStep, AV21ColumnsSelector, AV57Pgmname, AV27TFEmployeeName, AV28TFEmployeeName_Sel, AV29TFProjectName, AV30TFProjectName_Sel, AV31TFWorkHourLogDate, AV32TFWorkHourLogDate_To, AV36TFWorkHourLogDuration, AV37TFWorkHourLogDuration_Sel, AV38TFWorkHourLogDescription, AV39TFWorkHourLogDescription_Sel, sPrefix) ;
          }
          send_integrity_footer_hashes( ) ;
          return 0 ;
@@ -1578,10 +1760,10 @@ namespace GeneXus.Programs {
          {
             GRID_nFirstRecordOnPage = 0;
          }
-         GxWebStd.gx_hidden_field( context, "GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"GRID_nFirstRecordOnPage", StringUtil.LTrim( StringUtil.NToC( (decimal)(GRID_nFirstRecordOnPage), 15, 0, ".", "")));
          if ( isFullAjaxMode( ) )
          {
-            gxgrGrid_refresh( subGrid_Rows, AV13OrderedBy, AV14OrderedDsc, AV16FilterFullText, AV52EmployeeId, AV50FromDate, AV51ToDate, AV53ProjectIds, AV26ManageFiltersExecutionStep, AV21ColumnsSelector, AV57Pgmname, AV27TFEmployeeName, AV28TFEmployeeName_Sel, AV29TFProjectName, AV30TFProjectName_Sel, AV31TFWorkHourLogDate, AV32TFWorkHourLogDate_To, AV36TFWorkHourLogDuration, AV37TFWorkHourLogDuration_Sel, AV38TFWorkHourLogDescription, AV39TFWorkHourLogDescription_Sel, AV55RedirectToFirstDetail, AV56QueryIntent, AV46GridAppliedFilters) ;
+            gxgrGrid_refresh( subGrid_Rows, AV13OrderedBy, AV14OrderedDsc, AV16FilterFullText, AV52EmployeeId, AV50FromDate, AV51ToDate, AV53ProjectIds, AV26ManageFiltersExecutionStep, AV21ColumnsSelector, AV57Pgmname, AV27TFEmployeeName, AV28TFEmployeeName_Sel, AV29TFProjectName, AV30TFProjectName_Sel, AV31TFWorkHourLogDate, AV32TFWorkHourLogDate_To, AV36TFWorkHourLogDuration, AV37TFWorkHourLogDuration_Sel, AV38TFWorkHourLogDescription, AV39TFWorkHourLogDescription_Sel, sPrefix) ;
          }
          send_integrity_footer_hashes( ) ;
          return (int)(0) ;
@@ -1613,106 +1795,110 @@ namespace GeneXus.Programs {
          /* Execute user event: Start */
          E17492 ();
          context.wbGlbDoneStart = 1;
+         nDoneStart = 1;
          /* After Start, stand alone formulas. */
-         if ( StringUtil.StrCmp(context.GetRequestMethod( ), "POST") == 0 )
+         sXEvt = cgiGet( "_EventName");
+         if ( ! GetJustCreated( ) && ( StringUtil.StrCmp(context.GetRequestMethod( ), "POST") == 0 ) )
          {
             /* Read saved SDTs. */
-            ajax_req_read_hidden_sdt(cgiGet( "vMANAGEFILTERSDATA"), AV24ManageFiltersData);
-            ajax_req_read_hidden_sdt(cgiGet( "vDDO_TITLESETTINGSICONS"), AV40DDO_TitleSettingsIcons);
-            ajax_req_read_hidden_sdt(cgiGet( "vCOLUMNSSELECTOR"), AV21ColumnsSelector);
+            ajax_req_read_hidden_sdt(cgiGet( sPrefix+"vMANAGEFILTERSDATA"), AV24ManageFiltersData);
+            ajax_req_read_hidden_sdt(cgiGet( sPrefix+"vDDO_TITLESETTINGSICONS"), AV40DDO_TitleSettingsIcons);
+            ajax_req_read_hidden_sdt(cgiGet( sPrefix+"vCOLUMNSSELECTOR"), AV21ColumnsSelector);
             /* Read saved values. */
-            nRC_GXsfl_37 = (int)(Math.Round(context.localUtil.CToN( cgiGet( "nRC_GXsfl_37"), ".", ","), 18, MidpointRounding.ToEven));
-            AV44GridCurrentPage = (long)(Math.Round(context.localUtil.CToN( cgiGet( "vGRIDCURRENTPAGE"), ".", ","), 18, MidpointRounding.ToEven));
-            AV45GridPageCount = (long)(Math.Round(context.localUtil.CToN( cgiGet( "vGRIDPAGECOUNT"), ".", ","), 18, MidpointRounding.ToEven));
-            AV46GridAppliedFilters = cgiGet( "vGRIDAPPLIEDFILTERS");
-            AV33DDO_WorkHourLogDateAuxDate = context.localUtil.CToD( cgiGet( "vDDO_WORKHOURLOGDATEAUXDATE"), 0);
-            AV34DDO_WorkHourLogDateAuxDateTo = context.localUtil.CToD( cgiGet( "vDDO_WORKHOURLOGDATEAUXDATETO"), 0);
-            GRID_nFirstRecordOnPage = (long)(Math.Round(context.localUtil.CToN( cgiGet( "GRID_nFirstRecordOnPage"), ".", ","), 18, MidpointRounding.ToEven));
-            GRID_nEOF = (short)(Math.Round(context.localUtil.CToN( cgiGet( "GRID_nEOF"), ".", ","), 18, MidpointRounding.ToEven));
-            subGrid_Rows = (int)(Math.Round(context.localUtil.CToN( cgiGet( "GRID_Rows"), ".", ","), 18, MidpointRounding.ToEven));
-            GxWebStd.gx_hidden_field( context, "GRID_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Rows), 6, 0, ".", "")));
-            Ddo_managefilters_Icontype = cgiGet( "DDO_MANAGEFILTERS_Icontype");
-            Ddo_managefilters_Icon = cgiGet( "DDO_MANAGEFILTERS_Icon");
-            Ddo_managefilters_Tooltip = cgiGet( "DDO_MANAGEFILTERS_Tooltip");
-            Ddo_managefilters_Cls = cgiGet( "DDO_MANAGEFILTERS_Cls");
-            Gridpaginationbar_Class = cgiGet( "GRIDPAGINATIONBAR_Class");
-            Gridpaginationbar_Showfirst = StringUtil.StrToBool( cgiGet( "GRIDPAGINATIONBAR_Showfirst"));
-            Gridpaginationbar_Showprevious = StringUtil.StrToBool( cgiGet( "GRIDPAGINATIONBAR_Showprevious"));
-            Gridpaginationbar_Shownext = StringUtil.StrToBool( cgiGet( "GRIDPAGINATIONBAR_Shownext"));
-            Gridpaginationbar_Showlast = StringUtil.StrToBool( cgiGet( "GRIDPAGINATIONBAR_Showlast"));
-            Gridpaginationbar_Pagestoshow = (int)(Math.Round(context.localUtil.CToN( cgiGet( "GRIDPAGINATIONBAR_Pagestoshow"), ".", ","), 18, MidpointRounding.ToEven));
-            Gridpaginationbar_Pagingbuttonsposition = cgiGet( "GRIDPAGINATIONBAR_Pagingbuttonsposition");
-            Gridpaginationbar_Pagingcaptionposition = cgiGet( "GRIDPAGINATIONBAR_Pagingcaptionposition");
-            Gridpaginationbar_Emptygridclass = cgiGet( "GRIDPAGINATIONBAR_Emptygridclass");
-            Gridpaginationbar_Rowsperpageselector = StringUtil.StrToBool( cgiGet( "GRIDPAGINATIONBAR_Rowsperpageselector"));
-            Gridpaginationbar_Rowsperpageselectedvalue = (int)(Math.Round(context.localUtil.CToN( cgiGet( "GRIDPAGINATIONBAR_Rowsperpageselectedvalue"), ".", ","), 18, MidpointRounding.ToEven));
-            Gridpaginationbar_Rowsperpageoptions = cgiGet( "GRIDPAGINATIONBAR_Rowsperpageoptions");
-            Gridpaginationbar_Previous = cgiGet( "GRIDPAGINATIONBAR_Previous");
-            Gridpaginationbar_Next = cgiGet( "GRIDPAGINATIONBAR_Next");
-            Gridpaginationbar_Caption = cgiGet( "GRIDPAGINATIONBAR_Caption");
-            Gridpaginationbar_Emptygridcaption = cgiGet( "GRIDPAGINATIONBAR_Emptygridcaption");
-            Gridpaginationbar_Rowsperpagecaption = cgiGet( "GRIDPAGINATIONBAR_Rowsperpagecaption");
-            Innewwindow1_Name = cgiGet( "INNEWWINDOW1_Name");
-            Innewwindow1_Target = cgiGet( "INNEWWINDOW1_Target");
-            Ddo_grid_Caption = cgiGet( "DDO_GRID_Caption");
-            Ddo_grid_Filteredtext_set = cgiGet( "DDO_GRID_Filteredtext_set");
-            Ddo_grid_Filteredtextto_set = cgiGet( "DDO_GRID_Filteredtextto_set");
-            Ddo_grid_Selectedvalue_set = cgiGet( "DDO_GRID_Selectedvalue_set");
-            Ddo_grid_Gamoauthtoken = cgiGet( "DDO_GRID_Gamoauthtoken");
-            Ddo_grid_Gridinternalname = cgiGet( "DDO_GRID_Gridinternalname");
-            Ddo_grid_Columnids = cgiGet( "DDO_GRID_Columnids");
-            Ddo_grid_Columnssortvalues = cgiGet( "DDO_GRID_Columnssortvalues");
-            Ddo_grid_Includesortasc = cgiGet( "DDO_GRID_Includesortasc");
-            Ddo_grid_Fixable = cgiGet( "DDO_GRID_Fixable");
-            Ddo_grid_Sortedstatus = cgiGet( "DDO_GRID_Sortedstatus");
-            Ddo_grid_Includefilter = cgiGet( "DDO_GRID_Includefilter");
-            Ddo_grid_Filtertype = cgiGet( "DDO_GRID_Filtertype");
-            Ddo_grid_Filterisrange = cgiGet( "DDO_GRID_Filterisrange");
-            Ddo_grid_Includedatalist = cgiGet( "DDO_GRID_Includedatalist");
-            Ddo_grid_Datalisttype = cgiGet( "DDO_GRID_Datalisttype");
-            Ddo_grid_Datalistproc = cgiGet( "DDO_GRID_Datalistproc");
-            Ddo_gridcolumnsselector_Icontype = cgiGet( "DDO_GRIDCOLUMNSSELECTOR_Icontype");
-            Ddo_gridcolumnsselector_Icon = cgiGet( "DDO_GRIDCOLUMNSSELECTOR_Icon");
-            Ddo_gridcolumnsselector_Caption = cgiGet( "DDO_GRIDCOLUMNSSELECTOR_Caption");
-            Ddo_gridcolumnsselector_Tooltip = cgiGet( "DDO_GRIDCOLUMNSSELECTOR_Tooltip");
-            Ddo_gridcolumnsselector_Cls = cgiGet( "DDO_GRIDCOLUMNSSELECTOR_Cls");
-            Ddo_gridcolumnsselector_Dropdownoptionstype = cgiGet( "DDO_GRIDCOLUMNSSELECTOR_Dropdownoptionstype");
-            Ddo_gridcolumnsselector_Gridinternalname = cgiGet( "DDO_GRIDCOLUMNSSELECTOR_Gridinternalname");
-            Ddo_gridcolumnsselector_Titlecontrolidtoreplace = cgiGet( "DDO_GRIDCOLUMNSSELECTOR_Titlecontrolidtoreplace");
-            Grid_empowerer_Gridinternalname = cgiGet( "GRID_EMPOWERER_Gridinternalname");
-            Grid_empowerer_Hastitlesettings = StringUtil.StrToBool( cgiGet( "GRID_EMPOWERER_Hastitlesettings"));
-            Grid_empowerer_Hascolumnsselector = StringUtil.StrToBool( cgiGet( "GRID_EMPOWERER_Hascolumnsselector"));
-            subGrid_Rows = (int)(Math.Round(context.localUtil.CToN( cgiGet( "GRID_Rows"), ".", ","), 18, MidpointRounding.ToEven));
-            GxWebStd.gx_hidden_field( context, "GRID_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Rows), 6, 0, ".", "")));
-            Gridpaginationbar_Selectedpage = cgiGet( "GRIDPAGINATIONBAR_Selectedpage");
-            Gridpaginationbar_Rowsperpageselectedvalue = (int)(Math.Round(context.localUtil.CToN( cgiGet( "GRIDPAGINATIONBAR_Rowsperpageselectedvalue"), ".", ","), 18, MidpointRounding.ToEven));
-            Ddo_grid_Activeeventkey = cgiGet( "DDO_GRID_Activeeventkey");
-            Ddo_grid_Selectedvalue_get = cgiGet( "DDO_GRID_Selectedvalue_get");
-            Ddo_grid_Selectedcolumn = cgiGet( "DDO_GRID_Selectedcolumn");
-            Ddo_grid_Filteredtext_get = cgiGet( "DDO_GRID_Filteredtext_get");
-            Ddo_grid_Filteredtextto_get = cgiGet( "DDO_GRID_Filteredtextto_get");
-            Ddo_gridcolumnsselector_Columnsselectorvalues = cgiGet( "DDO_GRIDCOLUMNSSELECTOR_Columnsselectorvalues");
-            Ddo_managefilters_Activeeventkey = cgiGet( "DDO_MANAGEFILTERS_Activeeventkey");
-            subGrid_Rows = (int)(Math.Round(context.localUtil.CToN( cgiGet( "GRID_Rows"), ".", ","), 18, MidpointRounding.ToEven));
-            GxWebStd.gx_hidden_field( context, "GRID_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Rows), 6, 0, ".", "")));
+            nRC_GXsfl_37 = (int)(Math.Round(context.localUtil.CToN( cgiGet( sPrefix+"nRC_GXsfl_37"), ".", ","), 18, MidpointRounding.ToEven));
+            AV44GridCurrentPage = (long)(Math.Round(context.localUtil.CToN( cgiGet( sPrefix+"vGRIDCURRENTPAGE"), ".", ","), 18, MidpointRounding.ToEven));
+            AV45GridPageCount = (long)(Math.Round(context.localUtil.CToN( cgiGet( sPrefix+"vGRIDPAGECOUNT"), ".", ","), 18, MidpointRounding.ToEven));
+            AV46GridAppliedFilters = cgiGet( sPrefix+"vGRIDAPPLIEDFILTERS");
+            AV33DDO_WorkHourLogDateAuxDate = context.localUtil.CToD( cgiGet( sPrefix+"vDDO_WORKHOURLOGDATEAUXDATE"), 0);
+            AV34DDO_WorkHourLogDateAuxDateTo = context.localUtil.CToD( cgiGet( sPrefix+"vDDO_WORKHOURLOGDATEAUXDATETO"), 0);
+            wcpOAV52EmployeeId = (long)(Math.Round(context.localUtil.CToN( cgiGet( sPrefix+"wcpOAV52EmployeeId"), ".", ","), 18, MidpointRounding.ToEven));
+            wcpOAV50FromDate = context.localUtil.CToD( cgiGet( sPrefix+"wcpOAV50FromDate"), 0);
+            wcpOAV51ToDate = context.localUtil.CToD( cgiGet( sPrefix+"wcpOAV51ToDate"), 0);
+            GRID_nFirstRecordOnPage = (long)(Math.Round(context.localUtil.CToN( cgiGet( sPrefix+"GRID_nFirstRecordOnPage"), ".", ","), 18, MidpointRounding.ToEven));
+            GRID_nEOF = (short)(Math.Round(context.localUtil.CToN( cgiGet( sPrefix+"GRID_nEOF"), ".", ","), 18, MidpointRounding.ToEven));
+            subGrid_Rows = (int)(Math.Round(context.localUtil.CToN( cgiGet( sPrefix+"GRID_Rows"), ".", ","), 18, MidpointRounding.ToEven));
+            GxWebStd.gx_hidden_field( context, sPrefix+"GRID_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Rows), 6, 0, ".", "")));
+            Ddo_managefilters_Icontype = cgiGet( sPrefix+"DDO_MANAGEFILTERS_Icontype");
+            Ddo_managefilters_Icon = cgiGet( sPrefix+"DDO_MANAGEFILTERS_Icon");
+            Ddo_managefilters_Tooltip = cgiGet( sPrefix+"DDO_MANAGEFILTERS_Tooltip");
+            Ddo_managefilters_Cls = cgiGet( sPrefix+"DDO_MANAGEFILTERS_Cls");
+            Gridpaginationbar_Class = cgiGet( sPrefix+"GRIDPAGINATIONBAR_Class");
+            Gridpaginationbar_Showfirst = StringUtil.StrToBool( cgiGet( sPrefix+"GRIDPAGINATIONBAR_Showfirst"));
+            Gridpaginationbar_Showprevious = StringUtil.StrToBool( cgiGet( sPrefix+"GRIDPAGINATIONBAR_Showprevious"));
+            Gridpaginationbar_Shownext = StringUtil.StrToBool( cgiGet( sPrefix+"GRIDPAGINATIONBAR_Shownext"));
+            Gridpaginationbar_Showlast = StringUtil.StrToBool( cgiGet( sPrefix+"GRIDPAGINATIONBAR_Showlast"));
+            Gridpaginationbar_Pagestoshow = (int)(Math.Round(context.localUtil.CToN( cgiGet( sPrefix+"GRIDPAGINATIONBAR_Pagestoshow"), ".", ","), 18, MidpointRounding.ToEven));
+            Gridpaginationbar_Pagingbuttonsposition = cgiGet( sPrefix+"GRIDPAGINATIONBAR_Pagingbuttonsposition");
+            Gridpaginationbar_Pagingcaptionposition = cgiGet( sPrefix+"GRIDPAGINATIONBAR_Pagingcaptionposition");
+            Gridpaginationbar_Emptygridclass = cgiGet( sPrefix+"GRIDPAGINATIONBAR_Emptygridclass");
+            Gridpaginationbar_Rowsperpageselector = StringUtil.StrToBool( cgiGet( sPrefix+"GRIDPAGINATIONBAR_Rowsperpageselector"));
+            Gridpaginationbar_Rowsperpageselectedvalue = (int)(Math.Round(context.localUtil.CToN( cgiGet( sPrefix+"GRIDPAGINATIONBAR_Rowsperpageselectedvalue"), ".", ","), 18, MidpointRounding.ToEven));
+            Gridpaginationbar_Rowsperpageoptions = cgiGet( sPrefix+"GRIDPAGINATIONBAR_Rowsperpageoptions");
+            Gridpaginationbar_Previous = cgiGet( sPrefix+"GRIDPAGINATIONBAR_Previous");
+            Gridpaginationbar_Next = cgiGet( sPrefix+"GRIDPAGINATIONBAR_Next");
+            Gridpaginationbar_Caption = cgiGet( sPrefix+"GRIDPAGINATIONBAR_Caption");
+            Gridpaginationbar_Emptygridcaption = cgiGet( sPrefix+"GRIDPAGINATIONBAR_Emptygridcaption");
+            Gridpaginationbar_Rowsperpagecaption = cgiGet( sPrefix+"GRIDPAGINATIONBAR_Rowsperpagecaption");
+            Innewwindow1_Name = cgiGet( sPrefix+"INNEWWINDOW1_Name");
+            Innewwindow1_Target = cgiGet( sPrefix+"INNEWWINDOW1_Target");
+            Ddo_grid_Caption = cgiGet( sPrefix+"DDO_GRID_Caption");
+            Ddo_grid_Filteredtext_set = cgiGet( sPrefix+"DDO_GRID_Filteredtext_set");
+            Ddo_grid_Filteredtextto_set = cgiGet( sPrefix+"DDO_GRID_Filteredtextto_set");
+            Ddo_grid_Selectedvalue_set = cgiGet( sPrefix+"DDO_GRID_Selectedvalue_set");
+            Ddo_grid_Gridinternalname = cgiGet( sPrefix+"DDO_GRID_Gridinternalname");
+            Ddo_grid_Columnids = cgiGet( sPrefix+"DDO_GRID_Columnids");
+            Ddo_grid_Columnssortvalues = cgiGet( sPrefix+"DDO_GRID_Columnssortvalues");
+            Ddo_grid_Includesortasc = cgiGet( sPrefix+"DDO_GRID_Includesortasc");
+            Ddo_grid_Fixable = cgiGet( sPrefix+"DDO_GRID_Fixable");
+            Ddo_grid_Sortedstatus = cgiGet( sPrefix+"DDO_GRID_Sortedstatus");
+            Ddo_grid_Includefilter = cgiGet( sPrefix+"DDO_GRID_Includefilter");
+            Ddo_grid_Filtertype = cgiGet( sPrefix+"DDO_GRID_Filtertype");
+            Ddo_grid_Filterisrange = cgiGet( sPrefix+"DDO_GRID_Filterisrange");
+            Ddo_grid_Includedatalist = cgiGet( sPrefix+"DDO_GRID_Includedatalist");
+            Ddo_grid_Datalisttype = cgiGet( sPrefix+"DDO_GRID_Datalisttype");
+            Ddo_grid_Datalistproc = cgiGet( sPrefix+"DDO_GRID_Datalistproc");
+            Ddo_gridcolumnsselector_Icontype = cgiGet( sPrefix+"DDO_GRIDCOLUMNSSELECTOR_Icontype");
+            Ddo_gridcolumnsselector_Icon = cgiGet( sPrefix+"DDO_GRIDCOLUMNSSELECTOR_Icon");
+            Ddo_gridcolumnsselector_Caption = cgiGet( sPrefix+"DDO_GRIDCOLUMNSSELECTOR_Caption");
+            Ddo_gridcolumnsselector_Tooltip = cgiGet( sPrefix+"DDO_GRIDCOLUMNSSELECTOR_Tooltip");
+            Ddo_gridcolumnsselector_Cls = cgiGet( sPrefix+"DDO_GRIDCOLUMNSSELECTOR_Cls");
+            Ddo_gridcolumnsselector_Dropdownoptionstype = cgiGet( sPrefix+"DDO_GRIDCOLUMNSSELECTOR_Dropdownoptionstype");
+            Ddo_gridcolumnsselector_Gridinternalname = cgiGet( sPrefix+"DDO_GRIDCOLUMNSSELECTOR_Gridinternalname");
+            Ddo_gridcolumnsselector_Titlecontrolidtoreplace = cgiGet( sPrefix+"DDO_GRIDCOLUMNSSELECTOR_Titlecontrolidtoreplace");
+            Grid_empowerer_Gridinternalname = cgiGet( sPrefix+"GRID_EMPOWERER_Gridinternalname");
+            Grid_empowerer_Hastitlesettings = StringUtil.StrToBool( cgiGet( sPrefix+"GRID_EMPOWERER_Hastitlesettings"));
+            Grid_empowerer_Hascolumnsselector = StringUtil.StrToBool( cgiGet( sPrefix+"GRID_EMPOWERER_Hascolumnsselector"));
+            subGrid_Rows = (int)(Math.Round(context.localUtil.CToN( cgiGet( sPrefix+"GRID_Rows"), ".", ","), 18, MidpointRounding.ToEven));
+            GxWebStd.gx_hidden_field( context, sPrefix+"GRID_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Rows), 6, 0, ".", "")));
+            Gridpaginationbar_Selectedpage = cgiGet( sPrefix+"GRIDPAGINATIONBAR_Selectedpage");
+            Gridpaginationbar_Rowsperpageselectedvalue = (int)(Math.Round(context.localUtil.CToN( cgiGet( sPrefix+"GRIDPAGINATIONBAR_Rowsperpageselectedvalue"), ".", ","), 18, MidpointRounding.ToEven));
+            Ddo_grid_Activeeventkey = cgiGet( sPrefix+"DDO_GRID_Activeeventkey");
+            Ddo_grid_Selectedvalue_get = cgiGet( sPrefix+"DDO_GRID_Selectedvalue_get");
+            Ddo_grid_Selectedcolumn = cgiGet( sPrefix+"DDO_GRID_Selectedcolumn");
+            Ddo_grid_Filteredtext_get = cgiGet( sPrefix+"DDO_GRID_Filteredtext_get");
+            Ddo_grid_Filteredtextto_get = cgiGet( sPrefix+"DDO_GRID_Filteredtextto_get");
+            Ddo_gridcolumnsselector_Columnsselectorvalues = cgiGet( sPrefix+"DDO_GRIDCOLUMNSSELECTOR_Columnsselectorvalues");
+            Ddo_managefilters_Activeeventkey = cgiGet( sPrefix+"DDO_MANAGEFILTERS_Activeeventkey");
+            subGrid_Rows = (int)(Math.Round(context.localUtil.CToN( cgiGet( sPrefix+"GRID_Rows"), ".", ","), 18, MidpointRounding.ToEven));
+            GxWebStd.gx_hidden_field( context, sPrefix+"GRID_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Rows), 6, 0, ".", "")));
             /* Read variables values. */
             AV16FilterFullText = cgiGet( edtavFilterfulltext_Internalname);
-            AssignAttri("", false, "AV16FilterFullText", AV16FilterFullText);
+            AssignAttri(sPrefix, false, "AV16FilterFullText", AV16FilterFullText);
             AV35DDO_WorkHourLogDateAuxDateText = cgiGet( edtavDdo_workhourlogdateauxdatetext_Internalname);
-            AssignAttri("", false, "AV35DDO_WorkHourLogDateAuxDateText", AV35DDO_WorkHourLogDateAuxDateText);
+            AssignAttri(sPrefix, false, "AV35DDO_WorkHourLogDateAuxDateText", AV35DDO_WorkHourLogDateAuxDateText);
             /* Read subfile selected row values. */
             /* Read hidden variables. */
             GXKey = Decrypt64( context.GetCookie( "GX_SESSION_ID"), Crypto.GetServerKey( ));
             /* Check if conditions changed and reset current page numbers */
-            if ( ( context.localUtil.CToN( cgiGet( "GXH_vORDEREDBY"), ".", ",") != Convert.ToDecimal( AV13OrderedBy )) )
+            if ( ( context.localUtil.CToN( cgiGet( sPrefix+"GXH_vORDEREDBY"), ".", ",") != Convert.ToDecimal( AV13OrderedBy )) )
             {
                GRID_nFirstRecordOnPage = 0;
             }
-            if ( StringUtil.StrToBool( cgiGet( "GXH_vORDEREDDSC")) != AV14OrderedDsc )
+            if ( StringUtil.StrToBool( cgiGet( sPrefix+"GXH_vORDEREDDSC")) != AV14OrderedDsc )
             {
                GRID_nFirstRecordOnPage = 0;
             }
-            if ( StringUtil.StrCmp(cgiGet( "GXH_vFILTERFULLTEXT"), AV16FilterFullText) != 0 )
+            if ( StringUtil.StrCmp(cgiGet( sPrefix+"GXH_vFILTERFULLTEXT"), AV16FilterFullText) != 0 )
             {
                GRID_nFirstRecordOnPage = 0;
             }
@@ -1740,31 +1926,23 @@ namespace GeneXus.Programs {
          returnInSub = false;
          AV53ProjectIds.FromJSonString(AV54WebSession.Get("ProjectId"), null);
          subGrid_Rows = 10;
-         GxWebStd.gx_hidden_field( context, "GRID_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Rows), 6, 0, ".", "")));
-         this.executeUsercontrolMethod("", false, "TFWORKHOURLOGDATE_RANGEPICKERContainer", "Attach", "", new Object[] {(string)edtavDdo_workhourlogdateauxdatetext_Internalname});
+         GxWebStd.gx_hidden_field( context, sPrefix+"GRID_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Rows), 6, 0, ".", "")));
+         this.executeUsercontrolMethod(sPrefix, false, "TFWORKHOURLOGDATE_RANGEPICKERContainer", "Attach", "", new Object[] {(string)edtavDdo_workhourlogdateauxdatetext_Internalname});
          subGrid_Rows = 10;
-         GxWebStd.gx_hidden_field( context, "GRID_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Rows), 6, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"GRID_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Rows), 6, 0, ".", "")));
          Grid_empowerer_Gridinternalname = subGrid_Internalname;
-         ucGrid_empowerer.SendProperty(context, "", false, Grid_empowerer_Internalname, "GridInternalName", Grid_empowerer_Gridinternalname);
+         ucGrid_empowerer.SendProperty(context, sPrefix, false, Grid_empowerer_Internalname, "GridInternalName", Grid_empowerer_Gridinternalname);
          Ddo_gridcolumnsselector_Gridinternalname = subGrid_Internalname;
-         ucDdo_gridcolumnsselector.SendProperty(context, "", false, Ddo_gridcolumnsselector_Internalname, "GridInternalName", Ddo_gridcolumnsselector_Gridinternalname);
-         if ( StringUtil.StrCmp(AV8HTTPRequest.Method, "GET") == 0 )
+         ucDdo_gridcolumnsselector.SendProperty(context, sPrefix, false, Ddo_gridcolumnsselector_Internalname, "GridInternalName", Ddo_gridcolumnsselector_Gridinternalname);
+         /* Execute user subroutine: 'LOADSAVEDFILTERS' */
+         S112 ();
+         if ( returnInSub )
          {
-            /* Execute user subroutine: 'LOADSAVEDFILTERS' */
-            S112 ();
-            if ( returnInSub )
-            {
-               returnInSub = true;
-               if (true) return;
-            }
+            returnInSub = true;
+            if (true) return;
          }
-         AV41GAMSession = new GeneXus.Programs.genexussecurity.SdtGAMSession(context).get(out  AV42GAMErrors);
          Ddo_grid_Gridinternalname = subGrid_Internalname;
-         ucDdo_grid.SendProperty(context, "", false, Ddo_grid_Internalname, "GridInternalName", Ddo_grid_Gridinternalname);
-         Ddo_grid_Gamoauthtoken = AV41GAMSession.gxTpr_Token;
-         ucDdo_grid.SendProperty(context, "", false, Ddo_grid_Internalname, "GAMOAuthToken", Ddo_grid_Gamoauthtoken);
-         Form.Caption = " Work Hour Log";
-         AssignProp("", false, "FORM", "Caption", Form.Caption, true);
+         ucDdo_grid.SendProperty(context, sPrefix, false, Ddo_grid_Internalname, "GridInternalName", Ddo_grid_Gridinternalname);
          /* Execute user subroutine: 'PREPARETRANSACTION' */
          S122 ();
          if ( returnInSub )
@@ -1782,7 +1960,7 @@ namespace GeneXus.Programs {
          if ( AV13OrderedBy < 1 )
          {
             AV13OrderedBy = 1;
-            AssignAttri("", false, "AV13OrderedBy", StringUtil.LTrimStr( (decimal)(AV13OrderedBy), 4, 0));
+            AssignAttri(sPrefix, false, "AV13OrderedBy", StringUtil.LTrimStr( (decimal)(AV13OrderedBy), 4, 0));
             /* Execute user subroutine: 'SETDDOSORTEDSTATUS' */
             S142 ();
             if ( returnInSub )
@@ -1795,9 +1973,9 @@ namespace GeneXus.Programs {
          new GeneXus.Programs.wwpbaseobjects.getwwptitlesettingsicons(context ).execute( out  GXt_SdtDVB_SDTDropDownOptionsTitleSettingsIcons1) ;
          AV40DDO_TitleSettingsIcons = GXt_SdtDVB_SDTDropDownOptionsTitleSettingsIcons1;
          Ddo_gridcolumnsselector_Titlecontrolidtoreplace = bttBtneditcolumns_Internalname;
-         ucDdo_gridcolumnsselector.SendProperty(context, "", false, Ddo_gridcolumnsselector_Internalname, "TitleControlIdToReplace", Ddo_gridcolumnsselector_Titlecontrolidtoreplace);
+         ucDdo_gridcolumnsselector.SendProperty(context, sPrefix, false, Ddo_gridcolumnsselector_Internalname, "TitleControlIdToReplace", Ddo_gridcolumnsselector_Titlecontrolidtoreplace);
          Gridpaginationbar_Rowsperpageselectedvalue = subGrid_Rows;
-         ucGridpaginationbar.SendProperty(context, "", false, Gridpaginationbar_Internalname, "RowsPerPageSelectedValue", StringUtil.LTrimStr( (decimal)(Gridpaginationbar_Rowsperpageselectedvalue), 9, 0));
+         ucGridpaginationbar.SendProperty(context, sPrefix, false, Gridpaginationbar_Internalname, "RowsPerPageSelectedValue", StringUtil.LTrimStr( (decimal)(Gridpaginationbar_Rowsperpageselectedvalue), 9, 0));
       }
 
       protected void E18492( )
@@ -1813,12 +1991,12 @@ namespace GeneXus.Programs {
          if ( AV26ManageFiltersExecutionStep == 1 )
          {
             AV26ManageFiltersExecutionStep = 2;
-            AssignAttri("", false, "AV26ManageFiltersExecutionStep", StringUtil.Str( (decimal)(AV26ManageFiltersExecutionStep), 1, 0));
+            AssignAttri(sPrefix, false, "AV26ManageFiltersExecutionStep", StringUtil.Str( (decimal)(AV26ManageFiltersExecutionStep), 1, 0));
          }
          else if ( AV26ManageFiltersExecutionStep == 2 )
          {
             AV26ManageFiltersExecutionStep = 0;
-            AssignAttri("", false, "AV26ManageFiltersExecutionStep", StringUtil.Str( (decimal)(AV26ManageFiltersExecutionStep), 1, 0));
+            AssignAttri(sPrefix, false, "AV26ManageFiltersExecutionStep", StringUtil.Str( (decimal)(AV26ManageFiltersExecutionStep), 1, 0));
             /* Execute user subroutine: 'LOADSAVEDFILTERS' */
             S112 ();
             if ( returnInSub )
@@ -1850,36 +2028,23 @@ namespace GeneXus.Programs {
             }
          }
          edtEmployeeName_Visible = (((GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector_Column)AV21ColumnsSelector.gxTpr_Columns.Item(1)).gxTpr_Isvisible ? 1 : 0);
-         AssignProp("", false, edtEmployeeName_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtEmployeeName_Visible), 5, 0), !bGXsfl_37_Refreshing);
+         AssignProp(sPrefix, false, edtEmployeeName_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtEmployeeName_Visible), 5, 0), !bGXsfl_37_Refreshing);
          edtProjectName_Visible = (((GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector_Column)AV21ColumnsSelector.gxTpr_Columns.Item(2)).gxTpr_Isvisible ? 1 : 0);
-         AssignProp("", false, edtProjectName_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtProjectName_Visible), 5, 0), !bGXsfl_37_Refreshing);
+         AssignProp(sPrefix, false, edtProjectName_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtProjectName_Visible), 5, 0), !bGXsfl_37_Refreshing);
          edtWorkHourLogDate_Visible = (((GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector_Column)AV21ColumnsSelector.gxTpr_Columns.Item(3)).gxTpr_Isvisible ? 1 : 0);
-         AssignProp("", false, edtWorkHourLogDate_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtWorkHourLogDate_Visible), 5, 0), !bGXsfl_37_Refreshing);
+         AssignProp(sPrefix, false, edtWorkHourLogDate_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtWorkHourLogDate_Visible), 5, 0), !bGXsfl_37_Refreshing);
          edtWorkHourLogDuration_Visible = (((GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector_Column)AV21ColumnsSelector.gxTpr_Columns.Item(4)).gxTpr_Isvisible ? 1 : 0);
-         AssignProp("", false, edtWorkHourLogDuration_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtWorkHourLogDuration_Visible), 5, 0), !bGXsfl_37_Refreshing);
+         AssignProp(sPrefix, false, edtWorkHourLogDuration_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtWorkHourLogDuration_Visible), 5, 0), !bGXsfl_37_Refreshing);
          edtWorkHourLogDescription_Visible = (((GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector_Column)AV21ColumnsSelector.gxTpr_Columns.Item(5)).gxTpr_Isvisible ? 1 : 0);
-         AssignProp("", false, edtWorkHourLogDescription_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtWorkHourLogDescription_Visible), 5, 0), !bGXsfl_37_Refreshing);
+         AssignProp(sPrefix, false, edtWorkHourLogDescription_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtWorkHourLogDescription_Visible), 5, 0), !bGXsfl_37_Refreshing);
          AV44GridCurrentPage = subGrid_fnc_Currentpage( );
-         AssignAttri("", false, "AV44GridCurrentPage", StringUtil.LTrimStr( (decimal)(AV44GridCurrentPage), 10, 0));
+         AssignAttri(sPrefix, false, "AV44GridCurrentPage", StringUtil.LTrimStr( (decimal)(AV44GridCurrentPage), 10, 0));
          AV45GridPageCount = subGrid_fnc_Pagecount( );
-         AssignAttri("", false, "AV45GridPageCount", StringUtil.LTrimStr( (decimal)(AV45GridPageCount), 10, 0));
+         AssignAttri(sPrefix, false, "AV45GridPageCount", StringUtil.LTrimStr( (decimal)(AV45GridPageCount), 10, 0));
          GXt_char2 = AV46GridAppliedFilters;
          new GeneXus.Programs.wwpbaseobjects.wwp_getappliedfiltersdescription(context ).execute(  AV57Pgmname, out  GXt_char2) ;
          AV46GridAppliedFilters = GXt_char2;
-         AssignAttri("", false, "AV46GridAppliedFilters", AV46GridAppliedFilters);
-         AV56QueryIntent = StringUtil.Trim( AV23Session.Get(AV57Pgmname+"QueryIntent"));
-         AssignAttri("", false, "AV56QueryIntent", AV56QueryIntent);
-         GxWebStd.gx_hidden_field( context, "gxhash_vQUERYINTENT", GetSecureSignedToken( "", StringUtil.RTrim( context.localUtil.Format( AV56QueryIntent, "")), context));
-         if ( ! String.IsNullOrEmpty(StringUtil.RTrim( AV56QueryIntent)) )
-         {
-            AV23Session.Remove(AV57Pgmname+"QueryIntent");
-            if ( StringUtil.StrCmp(AV56QueryIntent, "5") != 0 )
-            {
-               AV55RedirectToFirstDetail = true;
-               AssignAttri("", false, "AV55RedirectToFirstDetail", AV55RedirectToFirstDetail);
-               GxWebStd.gx_hidden_field( context, "gxhash_vREDIRECTTOFIRSTDETAIL", GetSecureSignedToken( "", AV55RedirectToFirstDetail, context));
-            }
-         }
+         AssignAttri(sPrefix, false, "AV46GridAppliedFilters", AV46GridAppliedFilters);
          AV58Workhourloglistds_1_filterfulltext = AV16FilterFullText;
          AV59Workhourloglistds_2_tfemployeename = AV27TFEmployeeName;
          AV60Workhourloglistds_3_tfemployeename_sel = AV28TFEmployeeName_Sel;
@@ -1892,9 +2057,9 @@ namespace GeneXus.Programs {
          AV67Workhourloglistds_10_tfworkhourlogdescription = AV38TFWorkHourLogDescription;
          AV68Workhourloglistds_11_tfworkhourlogdescription_sel = AV39TFWorkHourLogDescription_Sel;
          /*  Sending Event outputs  */
-         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV21ColumnsSelector", AV21ColumnsSelector);
-         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV24ManageFiltersData", AV24ManageFiltersData);
-         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV11GridState", AV11GridState);
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri(sPrefix, false, "AV21ColumnsSelector", AV21ColumnsSelector);
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri(sPrefix, false, "AV24ManageFiltersData", AV24ManageFiltersData);
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri(sPrefix, false, "AV11GridState", AV11GridState);
       }
 
       protected void E12492( )
@@ -1921,7 +2086,7 @@ namespace GeneXus.Programs {
          /* Gridpaginationbar_Changerowsperpage Routine */
          returnInSub = false;
          subGrid_Rows = Gridpaginationbar_Rowsperpageselectedvalue;
-         GxWebStd.gx_hidden_field( context, "GRID_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Rows), 6, 0, ".", "")));
+         GxWebStd.gx_hidden_field( context, sPrefix+"GRID_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Rows), 6, 0, ".", "")));
          subgrid_firstpage( ) ;
          /*  Sending Event outputs  */
       }
@@ -1933,9 +2098,9 @@ namespace GeneXus.Programs {
          if ( ( StringUtil.StrCmp(Ddo_grid_Activeeventkey, "<#OrderASC#>") == 0 ) || ( StringUtil.StrCmp(Ddo_grid_Activeeventkey, "<#OrderDSC#>") == 0 ) )
          {
             AV13OrderedBy = (short)(Math.Round(NumberUtil.Val( Ddo_grid_Selectedvalue_get, "."), 18, MidpointRounding.ToEven));
-            AssignAttri("", false, "AV13OrderedBy", StringUtil.LTrimStr( (decimal)(AV13OrderedBy), 4, 0));
+            AssignAttri(sPrefix, false, "AV13OrderedBy", StringUtil.LTrimStr( (decimal)(AV13OrderedBy), 4, 0));
             AV14OrderedDsc = ((StringUtil.StrCmp(Ddo_grid_Activeeventkey, "<#OrderDSC#>")==0) ? true : false);
-            AssignAttri("", false, "AV14OrderedDsc", AV14OrderedDsc);
+            AssignAttri(sPrefix, false, "AV14OrderedDsc", AV14OrderedDsc);
             /* Execute user subroutine: 'SETDDOSORTEDSTATUS' */
             S142 ();
             if ( returnInSub )
@@ -1950,37 +2115,37 @@ namespace GeneXus.Programs {
             if ( StringUtil.StrCmp(Ddo_grid_Selectedcolumn, "EmployeeName") == 0 )
             {
                AV27TFEmployeeName = Ddo_grid_Filteredtext_get;
-               AssignAttri("", false, "AV27TFEmployeeName", AV27TFEmployeeName);
+               AssignAttri(sPrefix, false, "AV27TFEmployeeName", AV27TFEmployeeName);
                AV28TFEmployeeName_Sel = Ddo_grid_Selectedvalue_get;
-               AssignAttri("", false, "AV28TFEmployeeName_Sel", AV28TFEmployeeName_Sel);
+               AssignAttri(sPrefix, false, "AV28TFEmployeeName_Sel", AV28TFEmployeeName_Sel);
             }
             else if ( StringUtil.StrCmp(Ddo_grid_Selectedcolumn, "ProjectName") == 0 )
             {
                AV29TFProjectName = Ddo_grid_Filteredtext_get;
-               AssignAttri("", false, "AV29TFProjectName", AV29TFProjectName);
+               AssignAttri(sPrefix, false, "AV29TFProjectName", AV29TFProjectName);
                AV30TFProjectName_Sel = Ddo_grid_Selectedvalue_get;
-               AssignAttri("", false, "AV30TFProjectName_Sel", AV30TFProjectName_Sel);
+               AssignAttri(sPrefix, false, "AV30TFProjectName_Sel", AV30TFProjectName_Sel);
             }
             else if ( StringUtil.StrCmp(Ddo_grid_Selectedcolumn, "WorkHourLogDate") == 0 )
             {
                AV31TFWorkHourLogDate = context.localUtil.CToD( Ddo_grid_Filteredtext_get, 2);
-               AssignAttri("", false, "AV31TFWorkHourLogDate", context.localUtil.Format(AV31TFWorkHourLogDate, "99/99/99"));
+               AssignAttri(sPrefix, false, "AV31TFWorkHourLogDate", context.localUtil.Format(AV31TFWorkHourLogDate, "99/99/99"));
                AV32TFWorkHourLogDate_To = context.localUtil.CToD( Ddo_grid_Filteredtextto_get, 2);
-               AssignAttri("", false, "AV32TFWorkHourLogDate_To", context.localUtil.Format(AV32TFWorkHourLogDate_To, "99/99/99"));
+               AssignAttri(sPrefix, false, "AV32TFWorkHourLogDate_To", context.localUtil.Format(AV32TFWorkHourLogDate_To, "99/99/99"));
             }
             else if ( StringUtil.StrCmp(Ddo_grid_Selectedcolumn, "WorkHourLogDuration") == 0 )
             {
                AV36TFWorkHourLogDuration = Ddo_grid_Filteredtext_get;
-               AssignAttri("", false, "AV36TFWorkHourLogDuration", AV36TFWorkHourLogDuration);
+               AssignAttri(sPrefix, false, "AV36TFWorkHourLogDuration", AV36TFWorkHourLogDuration);
                AV37TFWorkHourLogDuration_Sel = Ddo_grid_Selectedvalue_get;
-               AssignAttri("", false, "AV37TFWorkHourLogDuration_Sel", AV37TFWorkHourLogDuration_Sel);
+               AssignAttri(sPrefix, false, "AV37TFWorkHourLogDuration_Sel", AV37TFWorkHourLogDuration_Sel);
             }
             else if ( StringUtil.StrCmp(Ddo_grid_Selectedcolumn, "WorkHourLogDescription") == 0 )
             {
                AV38TFWorkHourLogDescription = Ddo_grid_Filteredtext_get;
-               AssignAttri("", false, "AV38TFWorkHourLogDescription", AV38TFWorkHourLogDescription);
+               AssignAttri(sPrefix, false, "AV38TFWorkHourLogDescription", AV38TFWorkHourLogDescription);
                AV39TFWorkHourLogDescription_Sel = Ddo_grid_Selectedvalue_get;
-               AssignAttri("", false, "AV39TFWorkHourLogDescription_Sel", AV39TFWorkHourLogDescription_Sel);
+               AssignAttri(sPrefix, false, "AV39TFWorkHourLogDescription_Sel", AV39TFWorkHourLogDescription_Sel);
             }
             subgrid_firstpage( ) ;
          }
@@ -1991,21 +2156,6 @@ namespace GeneXus.Programs {
       {
          /* Grid_Load Routine */
          returnInSub = false;
-         if ( AV55RedirectToFirstDetail )
-         {
-            if ( StringUtil.StrCmp(AV56QueryIntent, "2") == 0 )
-            {
-               AV23Session.Set("WorkHourLogViewQueryAppliedFilters", AV46GridAppliedFilters);
-               if ( new GeneXus.Programs.wwpbaseobjects.secgamisauthbyfunctionalitykey(context).executeUdp(  "workhourlogview_Execute") )
-               {
-                  CallWebObject(formatLink("workhourlogview.aspx", new object[] {UrlEncode(StringUtil.LTrimStr(A118WorkHourLogId,10,0)),UrlEncode(StringUtil.RTrim(""))}, new string[] {"WorkHourLogId","TabCode"}) );
-                  context.wjLocDisableFrm = 1;
-               }
-            }
-            AV55RedirectToFirstDetail = false;
-            AssignAttri("", false, "AV55RedirectToFirstDetail", AV55RedirectToFirstDetail);
-            GxWebStd.gx_hidden_field( context, "gxhash_vREDIRECTTOFIRSTDETAIL", GetSecureSignedToken( "", AV55RedirectToFirstDetail, context));
-         }
          /* Load Method */
          if ( wbStart != -1 )
          {
@@ -2017,7 +2167,6 @@ namespace GeneXus.Programs {
          {
             DoAjaxLoad(37, GridRow);
          }
-         /*  Sending Event outputs  */
       }
 
       protected void E15492( )
@@ -2027,11 +2176,11 @@ namespace GeneXus.Programs {
          AV19ColumnsSelectorXML = Ddo_gridcolumnsselector_Columnsselectorvalues;
          AV21ColumnsSelector.FromJSonString(AV19ColumnsSelectorXML, null);
          new GeneXus.Programs.wwpbaseobjects.savecolumnsselectorstate(context ).execute(  "WorkHourLogListColumnsSelector",  (String.IsNullOrEmpty(StringUtil.RTrim( AV19ColumnsSelectorXML)) ? "" : AV21ColumnsSelector.ToXml(false, true, "", ""))) ;
-         context.DoAjaxRefresh();
+         context.DoAjaxRefreshCmp(sPrefix);
          /*  Sending Event outputs  */
-         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV21ColumnsSelector", AV21ColumnsSelector);
-         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV24ManageFiltersData", AV24ManageFiltersData);
-         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV11GridState", AV11GridState);
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri(sPrefix, false, "AV21ColumnsSelector", AV21ColumnsSelector);
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri(sPrefix, false, "AV24ManageFiltersData", AV24ManageFiltersData);
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri(sPrefix, false, "AV11GridState", AV11GridState);
       }
 
       protected void E11492( )
@@ -2060,15 +2209,15 @@ namespace GeneXus.Programs {
             }
             context.PopUp(formatLink("wwpbaseobjects.savefilteras.aspx", new object[] {UrlEncode(StringUtil.RTrim("WorkHourLogListFilters")),UrlEncode(StringUtil.RTrim(AV57Pgmname+"GridState"))}, new string[] {"UserKey","GridStateKey"}) , new Object[] {});
             AV26ManageFiltersExecutionStep = 2;
-            AssignAttri("", false, "AV26ManageFiltersExecutionStep", StringUtil.Str( (decimal)(AV26ManageFiltersExecutionStep), 1, 0));
-            context.DoAjaxRefresh();
+            AssignAttri(sPrefix, false, "AV26ManageFiltersExecutionStep", StringUtil.Str( (decimal)(AV26ManageFiltersExecutionStep), 1, 0));
+            context.DoAjaxRefreshCmp(sPrefix);
          }
          else if ( StringUtil.StrCmp(Ddo_managefilters_Activeeventkey, "<#Manage#>") == 0 )
          {
             context.PopUp(formatLink("wwpbaseobjects.managefilters.aspx", new object[] {UrlEncode(StringUtil.RTrim("WorkHourLogListFilters"))}, new string[] {"UserKey"}) , new Object[] {});
             AV26ManageFiltersExecutionStep = 2;
-            AssignAttri("", false, "AV26ManageFiltersExecutionStep", StringUtil.Str( (decimal)(AV26ManageFiltersExecutionStep), 1, 0));
-            context.DoAjaxRefresh();
+            AssignAttri(sPrefix, false, "AV26ManageFiltersExecutionStep", StringUtil.Str( (decimal)(AV26ManageFiltersExecutionStep), 1, 0));
+            context.DoAjaxRefreshCmp(sPrefix);
          }
          else
          {
@@ -2091,9 +2240,9 @@ namespace GeneXus.Programs {
                new GeneXus.Programs.wwpbaseobjects.savegridstate(context ).execute(  AV57Pgmname+"GridState",  AV25ManageFiltersXml) ;
                AV11GridState.FromXml(AV25ManageFiltersXml, null, "", "");
                AV13OrderedBy = AV11GridState.gxTpr_Orderedby;
-               AssignAttri("", false, "AV13OrderedBy", StringUtil.LTrimStr( (decimal)(AV13OrderedBy), 4, 0));
+               AssignAttri(sPrefix, false, "AV13OrderedBy", StringUtil.LTrimStr( (decimal)(AV13OrderedBy), 4, 0));
                AV14OrderedDsc = AV11GridState.gxTpr_Ordereddsc;
-               AssignAttri("", false, "AV14OrderedDsc", AV14OrderedDsc);
+               AssignAttri(sPrefix, false, "AV14OrderedDsc", AV14OrderedDsc);
                /* Execute user subroutine: 'SETDDOSORTEDSTATUS' */
                S142 ();
                if ( returnInSub )
@@ -2112,9 +2261,9 @@ namespace GeneXus.Programs {
             }
          }
          /*  Sending Event outputs  */
-         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV11GridState", AV11GridState);
-         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV21ColumnsSelector", AV21ColumnsSelector);
-         context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV24ManageFiltersData", AV24ManageFiltersData);
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri(sPrefix, false, "AV11GridState", AV11GridState);
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri(sPrefix, false, "AV21ColumnsSelector", AV21ColumnsSelector);
+         context.httpAjaxContext.ajax_rsp_assign_sdt_attri(sPrefix, false, "AV24ManageFiltersData", AV24ManageFiltersData);
       }
 
       protected void E16492( )
@@ -2125,10 +2274,10 @@ namespace GeneXus.Programs {
          if ( StringUtil.StrCmp(AV17ExcelFilename, "") != 0 )
          {
             Innewwindow1_Target = AV17ExcelFilename;
-            ucInnewwindow1.SendProperty(context, "", false, Innewwindow1_Internalname, "Target", Innewwindow1_Target);
+            ucInnewwindow1.SendProperty(context, sPrefix, false, Innewwindow1_Internalname, "Target", Innewwindow1_Target);
             Innewwindow1_Name = "_parent";
-            ucInnewwindow1.SendProperty(context, "", false, Innewwindow1_Internalname, "Name", Innewwindow1_Name);
-            this.executeUsercontrolMethod("", false, "INNEWWINDOW1Container", "OpenWindow", "", new Object[] {});
+            ucInnewwindow1.SendProperty(context, sPrefix, false, Innewwindow1_Internalname, "Name", Innewwindow1_Name);
+            this.executeUsercontrolMethod(sPrefix, false, "INNEWWINDOW1Container", "OpenWindow", "", new Object[] {});
          }
          else
          {
@@ -2142,7 +2291,7 @@ namespace GeneXus.Programs {
          /* 'SETDDOSORTEDSTATUS' Routine */
          returnInSub = false;
          Ddo_grid_Sortedstatus = StringUtil.Trim( StringUtil.Str( (decimal)(AV13OrderedBy), 4, 0))+":"+(AV14OrderedDsc ? "DSC" : "ASC");
-         ucDdo_grid.SendProperty(context, "", false, Ddo_grid_Internalname, "SortedStatus", Ddo_grid_Sortedstatus);
+         ucDdo_grid.SendProperty(context, sPrefix, false, Ddo_grid_Internalname, "SortedStatus", Ddo_grid_Sortedstatus);
       }
 
       protected void S162( )
@@ -2179,33 +2328,33 @@ namespace GeneXus.Programs {
          /* 'CLEANFILTERS' Routine */
          returnInSub = false;
          AV16FilterFullText = "";
-         AssignAttri("", false, "AV16FilterFullText", AV16FilterFullText);
+         AssignAttri(sPrefix, false, "AV16FilterFullText", AV16FilterFullText);
          AV27TFEmployeeName = "";
-         AssignAttri("", false, "AV27TFEmployeeName", AV27TFEmployeeName);
+         AssignAttri(sPrefix, false, "AV27TFEmployeeName", AV27TFEmployeeName);
          AV28TFEmployeeName_Sel = "";
-         AssignAttri("", false, "AV28TFEmployeeName_Sel", AV28TFEmployeeName_Sel);
+         AssignAttri(sPrefix, false, "AV28TFEmployeeName_Sel", AV28TFEmployeeName_Sel);
          AV29TFProjectName = "";
-         AssignAttri("", false, "AV29TFProjectName", AV29TFProjectName);
+         AssignAttri(sPrefix, false, "AV29TFProjectName", AV29TFProjectName);
          AV30TFProjectName_Sel = "";
-         AssignAttri("", false, "AV30TFProjectName_Sel", AV30TFProjectName_Sel);
+         AssignAttri(sPrefix, false, "AV30TFProjectName_Sel", AV30TFProjectName_Sel);
          AV31TFWorkHourLogDate = DateTime.MinValue;
-         AssignAttri("", false, "AV31TFWorkHourLogDate", context.localUtil.Format(AV31TFWorkHourLogDate, "99/99/99"));
+         AssignAttri(sPrefix, false, "AV31TFWorkHourLogDate", context.localUtil.Format(AV31TFWorkHourLogDate, "99/99/99"));
          AV32TFWorkHourLogDate_To = DateTime.MinValue;
-         AssignAttri("", false, "AV32TFWorkHourLogDate_To", context.localUtil.Format(AV32TFWorkHourLogDate_To, "99/99/99"));
+         AssignAttri(sPrefix, false, "AV32TFWorkHourLogDate_To", context.localUtil.Format(AV32TFWorkHourLogDate_To, "99/99/99"));
          AV36TFWorkHourLogDuration = "";
-         AssignAttri("", false, "AV36TFWorkHourLogDuration", AV36TFWorkHourLogDuration);
+         AssignAttri(sPrefix, false, "AV36TFWorkHourLogDuration", AV36TFWorkHourLogDuration);
          AV37TFWorkHourLogDuration_Sel = "";
-         AssignAttri("", false, "AV37TFWorkHourLogDuration_Sel", AV37TFWorkHourLogDuration_Sel);
+         AssignAttri(sPrefix, false, "AV37TFWorkHourLogDuration_Sel", AV37TFWorkHourLogDuration_Sel);
          AV38TFWorkHourLogDescription = "";
-         AssignAttri("", false, "AV38TFWorkHourLogDescription", AV38TFWorkHourLogDescription);
+         AssignAttri(sPrefix, false, "AV38TFWorkHourLogDescription", AV38TFWorkHourLogDescription);
          AV39TFWorkHourLogDescription_Sel = "";
-         AssignAttri("", false, "AV39TFWorkHourLogDescription_Sel", AV39TFWorkHourLogDescription_Sel);
+         AssignAttri(sPrefix, false, "AV39TFWorkHourLogDescription_Sel", AV39TFWorkHourLogDescription_Sel);
          Ddo_grid_Selectedvalue_set = "";
-         ucDdo_grid.SendProperty(context, "", false, Ddo_grid_Internalname, "SelectedValue_set", Ddo_grid_Selectedvalue_set);
+         ucDdo_grid.SendProperty(context, sPrefix, false, Ddo_grid_Internalname, "SelectedValue_set", Ddo_grid_Selectedvalue_set);
          Ddo_grid_Filteredtext_set = "";
-         ucDdo_grid.SendProperty(context, "", false, Ddo_grid_Internalname, "FilteredText_set", Ddo_grid_Filteredtext_set);
+         ucDdo_grid.SendProperty(context, sPrefix, false, Ddo_grid_Internalname, "FilteredText_set", Ddo_grid_Filteredtext_set);
          Ddo_grid_Filteredtextto_set = "";
-         ucDdo_grid.SendProperty(context, "", false, Ddo_grid_Internalname, "FilteredTextTo_set", Ddo_grid_Filteredtextto_set);
+         ucDdo_grid.SendProperty(context, sPrefix, false, Ddo_grid_Internalname, "FilteredTextTo_set", Ddo_grid_Filteredtextto_set);
       }
 
       protected void S132( )
@@ -2221,9 +2370,9 @@ namespace GeneXus.Programs {
             AV11GridState.FromXml(AV23Session.Get(AV57Pgmname+"GridState"), null, "", "");
          }
          AV13OrderedBy = AV11GridState.gxTpr_Orderedby;
-         AssignAttri("", false, "AV13OrderedBy", StringUtil.LTrimStr( (decimal)(AV13OrderedBy), 4, 0));
+         AssignAttri(sPrefix, false, "AV13OrderedBy", StringUtil.LTrimStr( (decimal)(AV13OrderedBy), 4, 0));
          AV14OrderedDsc = AV11GridState.gxTpr_Ordereddsc;
-         AssignAttri("", false, "AV14OrderedDsc", AV14OrderedDsc);
+         AssignAttri(sPrefix, false, "AV14OrderedDsc", AV14OrderedDsc);
          /* Execute user subroutine: 'SETDDOSORTEDSTATUS' */
          S142 ();
          if ( returnInSub )
@@ -2241,7 +2390,7 @@ namespace GeneXus.Programs {
          if ( ! String.IsNullOrEmpty(StringUtil.RTrim( StringUtil.Trim( AV11GridState.gxTpr_Pagesize))) )
          {
             subGrid_Rows = (int)(Math.Round(NumberUtil.Val( AV11GridState.gxTpr_Pagesize, "."), 18, MidpointRounding.ToEven));
-            GxWebStd.gx_hidden_field( context, "GRID_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Rows), 6, 0, ".", "")));
+            GxWebStd.gx_hidden_field( context, sPrefix+"GRID_Rows", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Rows), 6, 0, ".", "")));
          }
          subgrid_gotopage( AV11GridState.gxTpr_Currentpage) ;
       }
@@ -2257,54 +2406,54 @@ namespace GeneXus.Programs {
             if ( StringUtil.StrCmp(AV12GridStateFilterValue.gxTpr_Name, "FILTERFULLTEXT") == 0 )
             {
                AV16FilterFullText = AV12GridStateFilterValue.gxTpr_Value;
-               AssignAttri("", false, "AV16FilterFullText", AV16FilterFullText);
+               AssignAttri(sPrefix, false, "AV16FilterFullText", AV16FilterFullText);
             }
             else if ( StringUtil.StrCmp(AV12GridStateFilterValue.gxTpr_Name, "TFEMPLOYEENAME") == 0 )
             {
                AV27TFEmployeeName = AV12GridStateFilterValue.gxTpr_Value;
-               AssignAttri("", false, "AV27TFEmployeeName", AV27TFEmployeeName);
+               AssignAttri(sPrefix, false, "AV27TFEmployeeName", AV27TFEmployeeName);
             }
             else if ( StringUtil.StrCmp(AV12GridStateFilterValue.gxTpr_Name, "TFEMPLOYEENAME_SEL") == 0 )
             {
                AV28TFEmployeeName_Sel = AV12GridStateFilterValue.gxTpr_Value;
-               AssignAttri("", false, "AV28TFEmployeeName_Sel", AV28TFEmployeeName_Sel);
+               AssignAttri(sPrefix, false, "AV28TFEmployeeName_Sel", AV28TFEmployeeName_Sel);
             }
             else if ( StringUtil.StrCmp(AV12GridStateFilterValue.gxTpr_Name, "TFPROJECTNAME") == 0 )
             {
                AV29TFProjectName = AV12GridStateFilterValue.gxTpr_Value;
-               AssignAttri("", false, "AV29TFProjectName", AV29TFProjectName);
+               AssignAttri(sPrefix, false, "AV29TFProjectName", AV29TFProjectName);
             }
             else if ( StringUtil.StrCmp(AV12GridStateFilterValue.gxTpr_Name, "TFPROJECTNAME_SEL") == 0 )
             {
                AV30TFProjectName_Sel = AV12GridStateFilterValue.gxTpr_Value;
-               AssignAttri("", false, "AV30TFProjectName_Sel", AV30TFProjectName_Sel);
+               AssignAttri(sPrefix, false, "AV30TFProjectName_Sel", AV30TFProjectName_Sel);
             }
             else if ( StringUtil.StrCmp(AV12GridStateFilterValue.gxTpr_Name, "TFWORKHOURLOGDATE") == 0 )
             {
                AV31TFWorkHourLogDate = context.localUtil.CToD( AV12GridStateFilterValue.gxTpr_Value, 2);
-               AssignAttri("", false, "AV31TFWorkHourLogDate", context.localUtil.Format(AV31TFWorkHourLogDate, "99/99/99"));
+               AssignAttri(sPrefix, false, "AV31TFWorkHourLogDate", context.localUtil.Format(AV31TFWorkHourLogDate, "99/99/99"));
                AV32TFWorkHourLogDate_To = context.localUtil.CToD( AV12GridStateFilterValue.gxTpr_Valueto, 2);
-               AssignAttri("", false, "AV32TFWorkHourLogDate_To", context.localUtil.Format(AV32TFWorkHourLogDate_To, "99/99/99"));
+               AssignAttri(sPrefix, false, "AV32TFWorkHourLogDate_To", context.localUtil.Format(AV32TFWorkHourLogDate_To, "99/99/99"));
             }
             else if ( StringUtil.StrCmp(AV12GridStateFilterValue.gxTpr_Name, "TFWORKHOURLOGDURATION") == 0 )
             {
                AV36TFWorkHourLogDuration = AV12GridStateFilterValue.gxTpr_Value;
-               AssignAttri("", false, "AV36TFWorkHourLogDuration", AV36TFWorkHourLogDuration);
+               AssignAttri(sPrefix, false, "AV36TFWorkHourLogDuration", AV36TFWorkHourLogDuration);
             }
             else if ( StringUtil.StrCmp(AV12GridStateFilterValue.gxTpr_Name, "TFWORKHOURLOGDURATION_SEL") == 0 )
             {
                AV37TFWorkHourLogDuration_Sel = AV12GridStateFilterValue.gxTpr_Value;
-               AssignAttri("", false, "AV37TFWorkHourLogDuration_Sel", AV37TFWorkHourLogDuration_Sel);
+               AssignAttri(sPrefix, false, "AV37TFWorkHourLogDuration_Sel", AV37TFWorkHourLogDuration_Sel);
             }
             else if ( StringUtil.StrCmp(AV12GridStateFilterValue.gxTpr_Name, "TFWORKHOURLOGDESCRIPTION") == 0 )
             {
                AV38TFWorkHourLogDescription = AV12GridStateFilterValue.gxTpr_Value;
-               AssignAttri("", false, "AV38TFWorkHourLogDescription", AV38TFWorkHourLogDescription);
+               AssignAttri(sPrefix, false, "AV38TFWorkHourLogDescription", AV38TFWorkHourLogDescription);
             }
             else if ( StringUtil.StrCmp(AV12GridStateFilterValue.gxTpr_Name, "TFWORKHOURLOGDESCRIPTION_SEL") == 0 )
             {
                AV39TFWorkHourLogDescription_Sel = AV12GridStateFilterValue.gxTpr_Value;
-               AssignAttri("", false, "AV39TFWorkHourLogDescription_Sel", AV39TFWorkHourLogDescription_Sel);
+               AssignAttri(sPrefix, false, "AV39TFWorkHourLogDescription_Sel", AV39TFWorkHourLogDescription_Sel);
             }
             AV69GXV1 = (int)(AV69GXV1+1);
          }
@@ -2317,7 +2466,7 @@ namespace GeneXus.Programs {
          GXt_char6 = "";
          new GeneXus.Programs.wwpbaseobjects.wwp_getfilterval(context ).execute(  String.IsNullOrEmpty(StringUtil.RTrim( AV39TFWorkHourLogDescription_Sel)),  AV39TFWorkHourLogDescription_Sel, out  GXt_char6) ;
          Ddo_grid_Selectedvalue_set = GXt_char2+"|"+GXt_char4+"||"+GXt_char5+"|"+GXt_char6;
-         ucDdo_grid.SendProperty(context, "", false, Ddo_grid_Internalname, "SelectedValue_set", Ddo_grid_Selectedvalue_set);
+         ucDdo_grid.SendProperty(context, sPrefix, false, Ddo_grid_Internalname, "SelectedValue_set", Ddo_grid_Selectedvalue_set);
          GXt_char6 = "";
          new GeneXus.Programs.wwpbaseobjects.wwp_getfilterval(context ).execute(  String.IsNullOrEmpty(StringUtil.RTrim( AV27TFEmployeeName)),  AV27TFEmployeeName, out  GXt_char6) ;
          GXt_char5 = "";
@@ -2327,9 +2476,9 @@ namespace GeneXus.Programs {
          GXt_char2 = "";
          new GeneXus.Programs.wwpbaseobjects.wwp_getfilterval(context ).execute(  String.IsNullOrEmpty(StringUtil.RTrim( AV38TFWorkHourLogDescription)),  AV38TFWorkHourLogDescription, out  GXt_char2) ;
          Ddo_grid_Filteredtext_set = GXt_char6+"|"+GXt_char5+"|"+((DateTime.MinValue==AV31TFWorkHourLogDate) ? "" : context.localUtil.DToC( AV31TFWorkHourLogDate, 2, "/"))+"|"+GXt_char4+"|"+GXt_char2;
-         ucDdo_grid.SendProperty(context, "", false, Ddo_grid_Internalname, "FilteredText_set", Ddo_grid_Filteredtext_set);
+         ucDdo_grid.SendProperty(context, sPrefix, false, Ddo_grid_Internalname, "FilteredText_set", Ddo_grid_Filteredtext_set);
          Ddo_grid_Filteredtextto_set = "||"+((DateTime.MinValue==AV32TFWorkHourLogDate_To) ? "" : context.localUtil.DToC( AV32TFWorkHourLogDate_To, 2, "/"))+"||";
-         ucDdo_grid.SendProperty(context, "", false, Ddo_grid_Internalname, "FilteredTextTo_set", Ddo_grid_Filteredtextto_set);
+         ucDdo_grid.SendProperty(context, sPrefix, false, Ddo_grid_Internalname, "FilteredTextTo_set", Ddo_grid_Filteredtextto_set);
       }
 
       protected void S152( )
@@ -2368,14 +2517,11 @@ namespace GeneXus.Programs {
          createObjects();
          initialize();
          AV52EmployeeId = Convert.ToInt64(getParm(obj,0));
-         AssignAttri("", false, "AV52EmployeeId", StringUtil.LTrimStr( (decimal)(AV52EmployeeId), 10, 0));
-         GxWebStd.gx_hidden_field( context, "gxhash_vEMPLOYEEID", GetSecureSignedToken( "", context.localUtil.Format( (decimal)(AV52EmployeeId), "ZZZZZZZZZ9"), context));
+         AssignAttri(sPrefix, false, "AV52EmployeeId", StringUtil.LTrimStr( (decimal)(AV52EmployeeId), 10, 0));
          AV50FromDate = (DateTime)getParm(obj,1);
-         AssignAttri("", false, "AV50FromDate", context.localUtil.Format(AV50FromDate, "99/99/99"));
-         GxWebStd.gx_hidden_field( context, "gxhash_vFROMDATE", GetSecureSignedToken( "", AV50FromDate, context));
+         AssignAttri(sPrefix, false, "AV50FromDate", context.localUtil.Format(AV50FromDate, "99/99/99"));
          AV51ToDate = (DateTime)getParm(obj,2);
-         AssignAttri("", false, "AV51ToDate", context.localUtil.Format(AV51ToDate, "99/99/99"));
-         GxWebStd.gx_hidden_field( context, "gxhash_vTODATE", GetSecureSignedToken( "", AV51ToDate, context));
+         AssignAttri(sPrefix, false, "AV51ToDate", context.localUtil.Format(AV51ToDate, "99/99/99"));
       }
 
       public override string getresponse( string sGXDynURL )
@@ -2392,12 +2538,207 @@ namespace GeneXus.Programs {
          WE492( ) ;
          cleanup();
          context.SetWrapped(false);
+         SaveComponentMsgList(sPrefix);
          context.GX_msglist = BackMsgLst;
          return "";
       }
 
       public void responsestatic( string sGXDynURL )
       {
+      }
+
+      public override void componentbind( Object[] obj )
+      {
+         if ( IsUrlCreated( ) )
+         {
+            return  ;
+         }
+         sCtrlAV52EmployeeId = (string)((string)getParm(obj,0));
+         sCtrlAV50FromDate = (string)((string)getParm(obj,1));
+         sCtrlAV51ToDate = (string)((string)getParm(obj,2));
+      }
+
+      public override void componentrestorestate( string sPPrefix ,
+                                                  string sPSFPrefix )
+      {
+         sPrefix = sPPrefix + sPSFPrefix;
+         PA492( ) ;
+         WCParametersGet( ) ;
+      }
+
+      public override void componentprepare( Object[] obj )
+      {
+         wbLoad = false;
+         sCompPrefix = (string)getParm(obj,0);
+         sSFPrefix = (string)getParm(obj,1);
+         sPrefix = sCompPrefix + sSFPrefix;
+         AddComponentObject(sPrefix, "workhourloglist", GetJustCreated( ));
+         if ( ( nDoneStart == 0 ) && ( nDynComponent == 0 ) )
+         {
+            INITWEB( ) ;
+         }
+         else
+         {
+            init_default_properties( ) ;
+            init_web_controls( ) ;
+         }
+         PA492( ) ;
+         if ( ! GetJustCreated( ) && ( StringUtil.StrCmp(context.GetRequestMethod( ), "POST") == 0 ) && ( context.wbGlbDoneStart == 0 ) )
+         {
+            WCParametersGet( ) ;
+         }
+         else
+         {
+            AV52EmployeeId = Convert.ToInt64(getParm(obj,2));
+            AssignAttri(sPrefix, false, "AV52EmployeeId", StringUtil.LTrimStr( (decimal)(AV52EmployeeId), 10, 0));
+            AV50FromDate = (DateTime)getParm(obj,3);
+            AssignAttri(sPrefix, false, "AV50FromDate", context.localUtil.Format(AV50FromDate, "99/99/99"));
+            AV51ToDate = (DateTime)getParm(obj,4);
+            AssignAttri(sPrefix, false, "AV51ToDate", context.localUtil.Format(AV51ToDate, "99/99/99"));
+         }
+         wcpOAV52EmployeeId = (long)(Math.Round(context.localUtil.CToN( cgiGet( sPrefix+"wcpOAV52EmployeeId"), ".", ","), 18, MidpointRounding.ToEven));
+         wcpOAV50FromDate = context.localUtil.CToD( cgiGet( sPrefix+"wcpOAV50FromDate"), 0);
+         wcpOAV51ToDate = context.localUtil.CToD( cgiGet( sPrefix+"wcpOAV51ToDate"), 0);
+         if ( ! GetJustCreated( ) && ( ( AV52EmployeeId != wcpOAV52EmployeeId ) || ( DateTimeUtil.ResetTime ( AV50FromDate ) != DateTimeUtil.ResetTime ( wcpOAV50FromDate ) ) || ( DateTimeUtil.ResetTime ( AV51ToDate ) != DateTimeUtil.ResetTime ( wcpOAV51ToDate ) ) ) )
+         {
+            setjustcreated();
+         }
+         wcpOAV52EmployeeId = AV52EmployeeId;
+         wcpOAV50FromDate = AV50FromDate;
+         wcpOAV51ToDate = AV51ToDate;
+      }
+
+      protected void WCParametersGet( )
+      {
+         /* Read Component Parameters. */
+         sCtrlAV52EmployeeId = cgiGet( sPrefix+"AV52EmployeeId_CTRL");
+         if ( StringUtil.Len( sCtrlAV52EmployeeId) > 0 )
+         {
+            AV52EmployeeId = (long)(Math.Round(context.localUtil.CToN( cgiGet( sCtrlAV52EmployeeId), ".", ","), 18, MidpointRounding.ToEven));
+            AssignAttri(sPrefix, false, "AV52EmployeeId", StringUtil.LTrimStr( (decimal)(AV52EmployeeId), 10, 0));
+         }
+         else
+         {
+            AV52EmployeeId = (long)(Math.Round(context.localUtil.CToN( cgiGet( sPrefix+"AV52EmployeeId_PARM"), ".", ","), 18, MidpointRounding.ToEven));
+         }
+         sCtrlAV50FromDate = cgiGet( sPrefix+"AV50FromDate_CTRL");
+         if ( StringUtil.Len( sCtrlAV50FromDate) > 0 )
+         {
+            AV50FromDate = DateTimeUtil.ResetTime(context.localUtil.CToT( cgiGet( sCtrlAV50FromDate), 0));
+            AssignAttri(sPrefix, false, "AV50FromDate", context.localUtil.Format(AV50FromDate, "99/99/99"));
+         }
+         else
+         {
+            AV50FromDate = context.localUtil.CToD( cgiGet( sPrefix+"AV50FromDate_PARM"), 0);
+         }
+         sCtrlAV51ToDate = cgiGet( sPrefix+"AV51ToDate_CTRL");
+         if ( StringUtil.Len( sCtrlAV51ToDate) > 0 )
+         {
+            AV51ToDate = DateTimeUtil.ResetTime(context.localUtil.CToT( cgiGet( sCtrlAV51ToDate), 0));
+            AssignAttri(sPrefix, false, "AV51ToDate", context.localUtil.Format(AV51ToDate, "99/99/99"));
+         }
+         else
+         {
+            AV51ToDate = context.localUtil.CToD( cgiGet( sPrefix+"AV51ToDate_PARM"), 0);
+         }
+      }
+
+      public override void componentprocess( string sPPrefix ,
+                                             string sPSFPrefix ,
+                                             string sCompEvt )
+      {
+         sCompPrefix = sPPrefix;
+         sSFPrefix = sPSFPrefix;
+         sPrefix = sCompPrefix + sSFPrefix;
+         BackMsgLst = context.GX_msglist;
+         context.GX_msglist = LclMsgLst;
+         INITWEB( ) ;
+         nDraw = 0;
+         PA492( ) ;
+         sEvt = sCompEvt;
+         WCParametersGet( ) ;
+         WS492( ) ;
+         if ( isFullAjaxMode( ) )
+         {
+            componentdraw();
+         }
+         SaveComponentMsgList(sPrefix);
+         context.GX_msglist = BackMsgLst;
+      }
+
+      public override void componentstart( )
+      {
+         if ( nDoneStart == 0 )
+         {
+            WCStart( ) ;
+         }
+      }
+
+      protected void WCStart( )
+      {
+         nDraw = 1;
+         BackMsgLst = context.GX_msglist;
+         context.GX_msglist = LclMsgLst;
+         WS492( ) ;
+         SaveComponentMsgList(sPrefix);
+         context.GX_msglist = BackMsgLst;
+      }
+
+      protected void WCParametersSet( )
+      {
+         GxWebStd.gx_hidden_field( context, sPrefix+"AV52EmployeeId_PARM", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV52EmployeeId), 10, 0, ".", "")));
+         if ( StringUtil.Len( StringUtil.RTrim( sCtrlAV52EmployeeId)) > 0 )
+         {
+            GxWebStd.gx_hidden_field( context, sPrefix+"AV52EmployeeId_CTRL", StringUtil.RTrim( sCtrlAV52EmployeeId));
+         }
+         GxWebStd.gx_hidden_field( context, sPrefix+"AV50FromDate_PARM", context.localUtil.DToC( AV50FromDate, 0, "/"));
+         if ( StringUtil.Len( StringUtil.RTrim( sCtrlAV50FromDate)) > 0 )
+         {
+            GxWebStd.gx_hidden_field( context, sPrefix+"AV50FromDate_CTRL", StringUtil.RTrim( sCtrlAV50FromDate));
+         }
+         GxWebStd.gx_hidden_field( context, sPrefix+"AV51ToDate_PARM", context.localUtil.DToC( AV51ToDate, 0, "/"));
+         if ( StringUtil.Len( StringUtil.RTrim( sCtrlAV51ToDate)) > 0 )
+         {
+            GxWebStd.gx_hidden_field( context, sPrefix+"AV51ToDate_CTRL", StringUtil.RTrim( sCtrlAV51ToDate));
+         }
+      }
+
+      public override void componentdraw( )
+      {
+         if ( nDoneStart == 0 )
+         {
+            WCStart( ) ;
+         }
+         BackMsgLst = context.GX_msglist;
+         context.GX_msglist = LclMsgLst;
+         WCParametersSet( ) ;
+         WE492( ) ;
+         SaveComponentMsgList(sPrefix);
+         context.GX_msglist = BackMsgLst;
+      }
+
+      public override string getstring( string sGXControl )
+      {
+         string sCtrlName;
+         if ( StringUtil.StrCmp(StringUtil.Substring( sGXControl, 1, 1), "&") == 0 )
+         {
+            sCtrlName = StringUtil.Substring( sGXControl, 2, StringUtil.Len( sGXControl)-1);
+         }
+         else
+         {
+            sCtrlName = sGXControl;
+         }
+         return cgiGet( sPrefix+"v"+StringUtil.Upper( sCtrlName)) ;
+      }
+
+      public override void componentjscripts( )
+      {
+         include_jscripts( ) ;
+      }
+
+      public override void componentthemes( )
+      {
+         define_styles( ) ;
       }
 
       protected void define_styles( )
@@ -2414,7 +2755,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20252416152652", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202525459512", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2424,13 +2765,13 @@ namespace GeneXus.Programs {
                disableOutput();
             }
          }
+         CloseStyles();
          /* End function define_styles */
       }
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("workhourloglist.js", "?20252416152655", false, true);
+         context.AddJavascriptSource("workhourloglist.js", "?202525459514", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -2457,32 +2798,32 @@ namespace GeneXus.Programs {
 
       protected void SubsflControlProps_372( )
       {
-         edtEmployeeName_Internalname = "EMPLOYEENAME_"+sGXsfl_37_idx;
-         edtProjectName_Internalname = "PROJECTNAME_"+sGXsfl_37_idx;
-         edtWorkHourLogId_Internalname = "WORKHOURLOGID_"+sGXsfl_37_idx;
-         edtWorkHourLogDate_Internalname = "WORKHOURLOGDATE_"+sGXsfl_37_idx;
-         edtWorkHourLogDuration_Internalname = "WORKHOURLOGDURATION_"+sGXsfl_37_idx;
-         edtWorkHourLogHour_Internalname = "WORKHOURLOGHOUR_"+sGXsfl_37_idx;
-         edtWorkHourLogMinute_Internalname = "WORKHOURLOGMINUTE_"+sGXsfl_37_idx;
-         edtWorkHourLogDescription_Internalname = "WORKHOURLOGDESCRIPTION_"+sGXsfl_37_idx;
-         edtEmployeeId_Internalname = "EMPLOYEEID_"+sGXsfl_37_idx;
-         edtEmployeeFirstName_Internalname = "EMPLOYEEFIRSTNAME_"+sGXsfl_37_idx;
-         edtProjectId_Internalname = "PROJECTID_"+sGXsfl_37_idx;
+         edtEmployeeName_Internalname = sPrefix+"EMPLOYEENAME_"+sGXsfl_37_idx;
+         edtProjectName_Internalname = sPrefix+"PROJECTNAME_"+sGXsfl_37_idx;
+         edtWorkHourLogId_Internalname = sPrefix+"WORKHOURLOGID_"+sGXsfl_37_idx;
+         edtWorkHourLogDate_Internalname = sPrefix+"WORKHOURLOGDATE_"+sGXsfl_37_idx;
+         edtWorkHourLogDuration_Internalname = sPrefix+"WORKHOURLOGDURATION_"+sGXsfl_37_idx;
+         edtWorkHourLogHour_Internalname = sPrefix+"WORKHOURLOGHOUR_"+sGXsfl_37_idx;
+         edtWorkHourLogMinute_Internalname = sPrefix+"WORKHOURLOGMINUTE_"+sGXsfl_37_idx;
+         edtWorkHourLogDescription_Internalname = sPrefix+"WORKHOURLOGDESCRIPTION_"+sGXsfl_37_idx;
+         edtEmployeeId_Internalname = sPrefix+"EMPLOYEEID_"+sGXsfl_37_idx;
+         edtEmployeeFirstName_Internalname = sPrefix+"EMPLOYEEFIRSTNAME_"+sGXsfl_37_idx;
+         edtProjectId_Internalname = sPrefix+"PROJECTID_"+sGXsfl_37_idx;
       }
 
       protected void SubsflControlProps_fel_372( )
       {
-         edtEmployeeName_Internalname = "EMPLOYEENAME_"+sGXsfl_37_fel_idx;
-         edtProjectName_Internalname = "PROJECTNAME_"+sGXsfl_37_fel_idx;
-         edtWorkHourLogId_Internalname = "WORKHOURLOGID_"+sGXsfl_37_fel_idx;
-         edtWorkHourLogDate_Internalname = "WORKHOURLOGDATE_"+sGXsfl_37_fel_idx;
-         edtWorkHourLogDuration_Internalname = "WORKHOURLOGDURATION_"+sGXsfl_37_fel_idx;
-         edtWorkHourLogHour_Internalname = "WORKHOURLOGHOUR_"+sGXsfl_37_fel_idx;
-         edtWorkHourLogMinute_Internalname = "WORKHOURLOGMINUTE_"+sGXsfl_37_fel_idx;
-         edtWorkHourLogDescription_Internalname = "WORKHOURLOGDESCRIPTION_"+sGXsfl_37_fel_idx;
-         edtEmployeeId_Internalname = "EMPLOYEEID_"+sGXsfl_37_fel_idx;
-         edtEmployeeFirstName_Internalname = "EMPLOYEEFIRSTNAME_"+sGXsfl_37_fel_idx;
-         edtProjectId_Internalname = "PROJECTID_"+sGXsfl_37_fel_idx;
+         edtEmployeeName_Internalname = sPrefix+"EMPLOYEENAME_"+sGXsfl_37_fel_idx;
+         edtProjectName_Internalname = sPrefix+"PROJECTNAME_"+sGXsfl_37_fel_idx;
+         edtWorkHourLogId_Internalname = sPrefix+"WORKHOURLOGID_"+sGXsfl_37_fel_idx;
+         edtWorkHourLogDate_Internalname = sPrefix+"WORKHOURLOGDATE_"+sGXsfl_37_fel_idx;
+         edtWorkHourLogDuration_Internalname = sPrefix+"WORKHOURLOGDURATION_"+sGXsfl_37_fel_idx;
+         edtWorkHourLogHour_Internalname = sPrefix+"WORKHOURLOGHOUR_"+sGXsfl_37_fel_idx;
+         edtWorkHourLogMinute_Internalname = sPrefix+"WORKHOURLOGMINUTE_"+sGXsfl_37_fel_idx;
+         edtWorkHourLogDescription_Internalname = sPrefix+"WORKHOURLOGDESCRIPTION_"+sGXsfl_37_fel_idx;
+         edtEmployeeId_Internalname = sPrefix+"EMPLOYEEID_"+sGXsfl_37_fel_idx;
+         edtEmployeeFirstName_Internalname = sPrefix+"EMPLOYEEFIRSTNAME_"+sGXsfl_37_fel_idx;
+         edtProjectId_Internalname = sPrefix+"PROJECTID_"+sGXsfl_37_fel_idx;
       }
 
       protected void sendrow_372( )
@@ -2556,7 +2897,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtEmployeeName_Internalname,StringUtil.RTrim( A148EmployeeName),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtEmployeeName_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtEmployeeName_Visible,(short)0,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)100,(short)0,(short)0,(short)37,(short)0,(short)-1,(short)-1,(bool)true,(string)"Name",(string)"start",(bool)true,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtEmployeeName_Internalname,StringUtil.RTrim( A148EmployeeName),(string)"",(string)"",(string)"'"+sPrefix+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtEmployeeName_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtEmployeeName_Visible,(short)0,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)100,(short)0,(short)0,(short)37,(short)0,(short)-1,(short)-1,(bool)true,(string)"Name",(string)"start",(bool)true,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -2564,7 +2905,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtProjectName_Internalname,StringUtil.RTrim( A103ProjectName),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtProjectName_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtProjectName_Visible,(short)0,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)100,(short)0,(short)0,(short)37,(short)0,(short)-1,(short)-1,(bool)true,(string)"Name",(string)"start",(bool)true,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtProjectName_Internalname,StringUtil.RTrim( A103ProjectName),(string)"",(string)"",(string)"'"+sPrefix+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtProjectName_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtProjectName_Visible,(short)0,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)100,(short)0,(short)0,(short)37,(short)0,(short)-1,(short)-1,(bool)true,(string)"Name",(string)"start",(bool)true,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -2572,7 +2913,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtWorkHourLogId_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(A118WorkHourLogId), 10, 0, ".", "")),StringUtil.LTrim( context.localUtil.Format( (decimal)(A118WorkHourLogId), "ZZZZZZZZZ9")),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtWorkHourLogId_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(short)0,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)10,(short)0,(short)0,(short)37,(short)0,(short)-1,(short)0,(bool)true,(string)"Id",(string)"end",(bool)false,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtWorkHourLogId_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(A118WorkHourLogId), 10, 0, ".", "")),StringUtil.LTrim( context.localUtil.Format( (decimal)(A118WorkHourLogId), "ZZZZZZZZZ9")),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+sPrefix+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtWorkHourLogId_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(short)0,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)10,(short)0,(short)0,(short)37,(short)0,(short)-1,(short)0,(bool)true,(string)"Id",(string)"end",(bool)false,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -2580,7 +2921,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtWorkHourLogDate_Internalname,context.localUtil.Format(A119WorkHourLogDate, "99/99/99"),context.localUtil.Format( A119WorkHourLogDate, "99/99/99"),(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtWorkHourLogDate_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtWorkHourLogDate_Visible,(short)0,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)8,(short)0,(short)0,(short)37,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtWorkHourLogDate_Internalname,context.localUtil.Format(A119WorkHourLogDate, "99/99/99"),context.localUtil.Format( A119WorkHourLogDate, "99/99/99"),(string)"",(string)"'"+sPrefix+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtWorkHourLogDate_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtWorkHourLogDate_Visible,(short)0,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)8,(short)0,(short)0,(short)37,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -2588,7 +2929,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtWorkHourLogDuration_Internalname,(string)A120WorkHourLogDuration,(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtWorkHourLogDuration_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtWorkHourLogDuration_Visible,(short)0,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)40,(short)0,(short)0,(short)37,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtWorkHourLogDuration_Internalname,(string)A120WorkHourLogDuration,(string)"",(string)"",(string)"'"+sPrefix+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtWorkHourLogDuration_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtWorkHourLogDuration_Visible,(short)0,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)40,(short)0,(short)0,(short)37,(short)0,(short)-1,(short)-1,(bool)true,(string)"",(string)"start",(bool)true,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -2596,7 +2937,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtWorkHourLogHour_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(A121WorkHourLogHour), 4, 0, ".", "")),StringUtil.LTrim( context.localUtil.Format( (decimal)(A121WorkHourLogHour), "ZZZ9")),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtWorkHourLogHour_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(short)0,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)4,(short)0,(short)0,(short)37,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtWorkHourLogHour_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(A121WorkHourLogHour), 4, 0, ".", "")),StringUtil.LTrim( context.localUtil.Format( (decimal)(A121WorkHourLogHour), "ZZZ9")),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+sPrefix+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtWorkHourLogHour_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(short)0,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)4,(short)0,(short)0,(short)37,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -2604,7 +2945,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtWorkHourLogMinute_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(A122WorkHourLogMinute), 4, 0, ".", "")),StringUtil.LTrim( context.localUtil.Format( (decimal)(A122WorkHourLogMinute), "ZZZ9")),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtWorkHourLogMinute_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(short)0,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)4,(short)0,(short)0,(short)37,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtWorkHourLogMinute_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(A122WorkHourLogMinute), 4, 0, ".", "")),StringUtil.LTrim( context.localUtil.Format( (decimal)(A122WorkHourLogMinute), "ZZZ9")),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+sPrefix+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtWorkHourLogMinute_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(short)0,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)4,(short)0,(short)0,(short)37,(short)0,(short)-1,(short)0,(bool)true,(string)"",(string)"end",(bool)false,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -2612,7 +2953,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtWorkHourLogDescription_Internalname,(string)A123WorkHourLogDescription,(string)A123WorkHourLogDescription,(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtWorkHourLogDescription_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtWorkHourLogDescription_Visible,(short)0,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(int)2097152,(short)0,(short)0,(short)37,(short)0,(short)0,(short)-1,(bool)true,(string)"",(string)"start",(bool)false,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtWorkHourLogDescription_Internalname,(string)A123WorkHourLogDescription,(string)A123WorkHourLogDescription,(string)"",(string)"'"+sPrefix+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtWorkHourLogDescription_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(int)edtWorkHourLogDescription_Visible,(short)0,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(int)2097152,(short)0,(short)0,(short)37,(short)0,(short)0,(short)-1,(bool)true,(string)"",(string)"start",(bool)false,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -2620,7 +2961,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtEmployeeId_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(A106EmployeeId), 10, 0, ".", "")),StringUtil.LTrim( context.localUtil.Format( (decimal)(A106EmployeeId), "ZZZZZZZZZ9")),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtEmployeeId_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(short)0,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)10,(short)0,(short)0,(short)37,(short)0,(short)-1,(short)0,(bool)true,(string)"Id",(string)"end",(bool)false,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtEmployeeId_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(A106EmployeeId), 10, 0, ".", "")),StringUtil.LTrim( context.localUtil.Format( (decimal)(A106EmployeeId), "ZZZZZZZZZ9")),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+sPrefix+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtEmployeeId_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(short)0,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)10,(short)0,(short)0,(short)37,(short)0,(short)-1,(short)0,(bool)true,(string)"Id",(string)"end",(bool)false,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -2628,7 +2969,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtEmployeeFirstName_Internalname,StringUtil.RTrim( A107EmployeeFirstName),(string)"",(string)"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtEmployeeFirstName_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(short)0,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)100,(short)0,(short)0,(short)37,(short)0,(short)-1,(short)-1,(bool)true,(string)"Name",(string)"start",(bool)true,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtEmployeeFirstName_Internalname,StringUtil.RTrim( A107EmployeeFirstName),(string)"",(string)"",(string)"'"+sPrefix+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtEmployeeFirstName_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(short)0,(short)0,(string)"text",(string)"",(short)0,(string)"px",(short)17,(string)"px",(short)100,(short)0,(short)0,(short)37,(short)0,(short)-1,(short)-1,(bool)true,(string)"Name",(string)"start",(bool)true,(string)""});
             /* Subfile cell */
             if ( GridContainer.GetWrapped() == 1 )
             {
@@ -2636,7 +2977,7 @@ namespace GeneXus.Programs {
             }
             /* Single line edit */
             ROClassString = "Attribute";
-            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtProjectId_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(A102ProjectId), 10, 0, ".", "")),StringUtil.LTrim( context.localUtil.Format( (decimal)(A102ProjectId), "ZZZZZZZZZ9")),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+""+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtProjectId_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(short)0,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)10,(short)0,(short)0,(short)37,(short)0,(short)-1,(short)0,(bool)true,(string)"Id",(string)"end",(bool)false,(string)""});
+            GridRow.AddColumnProperties("edit", 1, isAjaxCallMode( ), new Object[] {(string)edtProjectId_Internalname,StringUtil.LTrim( StringUtil.NToC( (decimal)(A102ProjectId), 10, 0, ".", "")),StringUtil.LTrim( context.localUtil.Format( (decimal)(A102ProjectId), "ZZZZZZZZZ9")),(string)" dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+"",(string)"'"+sPrefix+"'"+",false,"+"'"+""+"'",(string)"",(string)"",(string)"",(string)"",(string)edtProjectId_Jsonclick,(short)0,(string)"Attribute",(string)"",(string)ROClassString,(string)"WWColumn",(string)"",(short)0,(short)0,(short)0,(string)"text",(string)"1",(short)0,(string)"px",(short)17,(string)"px",(short)10,(short)0,(short)0,(short)37,(short)0,(short)-1,(short)0,(bool)true,(string)"Id",(string)"end",(bool)false,(string)""});
             send_integrity_lvl_hashes492( ) ;
             GridContainer.AddRow(GridRow);
             nGXsfl_37_idx = ((subGrid_Islastpage==1)&&(nGXsfl_37_idx+1>subGrid_fnc_Recordsperpage( )) ? 1 : nGXsfl_37_idx+1);
@@ -2655,7 +2996,7 @@ namespace GeneXus.Programs {
       {
          if ( GridContainer.GetWrapped() == 1 )
          {
-            context.WriteHtmlText( "<div id=\""+"GridContainer"+"DivS\" data-gxgridid=\"37\">") ;
+            context.WriteHtmlText( "<div id=\""+sPrefix+"GridContainer"+"DivS\" data-gxgridid=\"37\">") ;
             sStyleString = "";
             GxWebStd.gx_table_start( context, subGrid_Internalname, subGrid_Internalname, "", "GridWithPaginationBar WorkWith", 0, "", "", 1, 2, sStyleString, "", "", 0);
             /* Subfile titles */
@@ -2742,7 +3083,7 @@ namespace GeneXus.Programs {
             GridContainer.AddObjectProperty("Cellspacing", StringUtil.LTrim( StringUtil.NToC( (decimal)(2), 4, 0, ".", "")));
             GridContainer.AddObjectProperty("Backcolorstyle", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Backcolorstyle), 1, 0, ".", "")));
             GridContainer.AddObjectProperty("Sortable", StringUtil.LTrim( StringUtil.NToC( (decimal)(subGrid_Sortable), 1, 0, ".", "")));
-            GridContainer.AddObjectProperty("CmpContext", "");
+            GridContainer.AddObjectProperty("CmpContext", sPrefix);
             GridContainer.AddObjectProperty("InMasterPage", "false");
             GridColumn = GXWebColumn.GetNew(isAjaxCallMode( ));
             GridColumn.AddObjectProperty("Value", GXUtil.ValueEncode( StringUtil.RTrim( A148EmployeeName)));
@@ -2794,48 +3135,54 @@ namespace GeneXus.Programs {
 
       protected void init_default_properties( )
       {
-         bttBtnexport2_Internalname = "BTNEXPORT2";
-         bttBtneditcolumns_Internalname = "BTNEDITCOLUMNS";
-         divTableactions_Internalname = "TABLEACTIONS";
-         Ddo_managefilters_Internalname = "DDO_MANAGEFILTERS";
-         edtavFilterfulltext_Internalname = "vFILTERFULLTEXT";
-         divTablefilters_Internalname = "TABLEFILTERS";
-         divTablerightheader_Internalname = "TABLERIGHTHEADER";
-         divTableheadercontent_Internalname = "TABLEHEADERCONTENT";
-         divTableheader_Internalname = "TABLEHEADER";
-         edtEmployeeName_Internalname = "EMPLOYEENAME";
-         edtProjectName_Internalname = "PROJECTNAME";
-         edtWorkHourLogId_Internalname = "WORKHOURLOGID";
-         edtWorkHourLogDate_Internalname = "WORKHOURLOGDATE";
-         edtWorkHourLogDuration_Internalname = "WORKHOURLOGDURATION";
-         edtWorkHourLogHour_Internalname = "WORKHOURLOGHOUR";
-         edtWorkHourLogMinute_Internalname = "WORKHOURLOGMINUTE";
-         edtWorkHourLogDescription_Internalname = "WORKHOURLOGDESCRIPTION";
-         edtEmployeeId_Internalname = "EMPLOYEEID";
-         edtEmployeeFirstName_Internalname = "EMPLOYEEFIRSTNAME";
-         edtProjectId_Internalname = "PROJECTID";
-         Gridpaginationbar_Internalname = "GRIDPAGINATIONBAR";
-         divGridtablewithpaginationbar_Internalname = "GRIDTABLEWITHPAGINATIONBAR";
-         Innewwindow1_Internalname = "INNEWWINDOW1";
-         divTablemain_Internalname = "TABLEMAIN";
-         Ddo_grid_Internalname = "DDO_GRID";
-         Ddo_gridcolumnsselector_Internalname = "DDO_GRIDCOLUMNSSELECTOR";
-         Grid_empowerer_Internalname = "GRID_EMPOWERER";
-         edtavDdo_workhourlogdateauxdatetext_Internalname = "vDDO_WORKHOURLOGDATEAUXDATETEXT";
-         Tfworkhourlogdate_rangepicker_Internalname = "TFWORKHOURLOGDATE_RANGEPICKER";
-         divDdo_workhourlogdateauxdates_Internalname = "DDO_WORKHOURLOGDATEAUXDATES";
-         divHtml_bottomauxiliarcontrols_Internalname = "HTML_BOTTOMAUXILIARCONTROLS";
-         divLayoutmaintable_Internalname = "LAYOUTMAINTABLE";
-         Form.Internalname = "FORM";
-         subGrid_Internalname = "GRID";
+         bttBtnexport2_Internalname = sPrefix+"BTNEXPORT2";
+         bttBtneditcolumns_Internalname = sPrefix+"BTNEDITCOLUMNS";
+         divTableactions_Internalname = sPrefix+"TABLEACTIONS";
+         Ddo_managefilters_Internalname = sPrefix+"DDO_MANAGEFILTERS";
+         edtavFilterfulltext_Internalname = sPrefix+"vFILTERFULLTEXT";
+         divTablefilters_Internalname = sPrefix+"TABLEFILTERS";
+         divTablerightheader_Internalname = sPrefix+"TABLERIGHTHEADER";
+         divTableheadercontent_Internalname = sPrefix+"TABLEHEADERCONTENT";
+         divTableheader_Internalname = sPrefix+"TABLEHEADER";
+         edtEmployeeName_Internalname = sPrefix+"EMPLOYEENAME";
+         edtProjectName_Internalname = sPrefix+"PROJECTNAME";
+         edtWorkHourLogId_Internalname = sPrefix+"WORKHOURLOGID";
+         edtWorkHourLogDate_Internalname = sPrefix+"WORKHOURLOGDATE";
+         edtWorkHourLogDuration_Internalname = sPrefix+"WORKHOURLOGDURATION";
+         edtWorkHourLogHour_Internalname = sPrefix+"WORKHOURLOGHOUR";
+         edtWorkHourLogMinute_Internalname = sPrefix+"WORKHOURLOGMINUTE";
+         edtWorkHourLogDescription_Internalname = sPrefix+"WORKHOURLOGDESCRIPTION";
+         edtEmployeeId_Internalname = sPrefix+"EMPLOYEEID";
+         edtEmployeeFirstName_Internalname = sPrefix+"EMPLOYEEFIRSTNAME";
+         edtProjectId_Internalname = sPrefix+"PROJECTID";
+         Gridpaginationbar_Internalname = sPrefix+"GRIDPAGINATIONBAR";
+         divGridtablewithpaginationbar_Internalname = sPrefix+"GRIDTABLEWITHPAGINATIONBAR";
+         Innewwindow1_Internalname = sPrefix+"INNEWWINDOW1";
+         divTablemain_Internalname = sPrefix+"TABLEMAIN";
+         Ddo_grid_Internalname = sPrefix+"DDO_GRID";
+         Ddo_gridcolumnsselector_Internalname = sPrefix+"DDO_GRIDCOLUMNSSELECTOR";
+         Grid_empowerer_Internalname = sPrefix+"GRID_EMPOWERER";
+         edtavDdo_workhourlogdateauxdatetext_Internalname = sPrefix+"vDDO_WORKHOURLOGDATEAUXDATETEXT";
+         Tfworkhourlogdate_rangepicker_Internalname = sPrefix+"TFWORKHOURLOGDATE_RANGEPICKER";
+         divDdo_workhourlogdateauxdates_Internalname = sPrefix+"DDO_WORKHOURLOGDATEAUXDATES";
+         divHtml_bottomauxiliarcontrols_Internalname = sPrefix+"HTML_BOTTOMAUXILIARCONTROLS";
+         divLayoutmaintable_Internalname = sPrefix+"LAYOUTMAINTABLE";
+         Form.Internalname = sPrefix+"FORM";
+         subGrid_Internalname = sPrefix+"GRID";
       }
 
       public override void initialize_properties( )
       {
-         context.SetDefaultTheme("WorkWithPlusDS", true);
-         if ( context.isSpaRequest( ) )
+         if ( StringUtil.Len( sPrefix) == 0 )
          {
-            disableJsOutput();
+            context.SetDefaultTheme("WorkWithPlusDS", true);
+         }
+         if ( StringUtil.Len( sPrefix) == 0 )
+         {
+            if ( context.isSpaRequest( ) )
+            {
+               disableJsOutput();
+            }
          }
          init_default_properties( ) ;
          subGrid_Allowcollapsing = 0;
@@ -2917,16 +3264,14 @@ namespace GeneXus.Programs {
          Ddo_managefilters_Tooltip = "WWP_ManageFiltersTooltip";
          Ddo_managefilters_Icon = "fas fa-filter";
          Ddo_managefilters_Icontype = "FontIcon";
-         Form.Headerrawhtml = "";
-         Form.Background = "";
-         Form.Textcolor = 0;
-         Form.Backcolor = (int)(0xFFFFFF);
-         Form.Caption = " Work Hour Log";
          subGrid_Rows = 0;
          context.GX_msglist.DisplayMode = 1;
-         if ( context.isSpaRequest( ) )
+         if ( StringUtil.Len( sPrefix) == 0 )
          {
-            enableJsOutput();
+            if ( context.isSpaRequest( ) )
+            {
+               enableJsOutput();
+            }
          }
       }
 
@@ -2937,20 +3282,19 @@ namespace GeneXus.Programs {
 
       public override void InitializeDynEvents( )
       {
-         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"AV46GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV26ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV21ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV52EmployeeId","fld":"vEMPLOYEEID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"AV50FromDate","fld":"vFROMDATE","hsh":true},{"av":"AV51ToDate","fld":"vTODATE","hsh":true},{"av":"AV53ProjectIds","fld":"vPROJECTIDS","hsh":true},{"av":"AV57Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV27TFEmployeeName","fld":"vTFEMPLOYEENAME"},{"av":"AV28TFEmployeeName_Sel","fld":"vTFEMPLOYEENAME_SEL"},{"av":"AV29TFProjectName","fld":"vTFPROJECTNAME"},{"av":"AV30TFProjectName_Sel","fld":"vTFPROJECTNAME_SEL"},{"av":"AV31TFWorkHourLogDate","fld":"vTFWORKHOURLOGDATE"},{"av":"AV32TFWorkHourLogDate_To","fld":"vTFWORKHOURLOGDATE_TO"},{"av":"AV36TFWorkHourLogDuration","fld":"vTFWORKHOURLOGDURATION"},{"av":"AV37TFWorkHourLogDuration_Sel","fld":"vTFWORKHOURLOGDURATION_SEL"},{"av":"AV38TFWorkHourLogDescription","fld":"vTFWORKHOURLOGDESCRIPTION"},{"av":"AV39TFWorkHourLogDescription_Sel","fld":"vTFWORKHOURLOGDESCRIPTION_SEL"},{"av":"AV55RedirectToFirstDetail","fld":"vREDIRECTTOFIRSTDETAIL","hsh":true},{"av":"AV56QueryIntent","fld":"vQUERYINTENT","hsh":true}]""");
-         setEventMetadata("REFRESH",""","oparms":[{"av":"AV26ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV21ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"edtEmployeeName_Visible","ctrl":"EMPLOYEENAME","prop":"Visible"},{"av":"edtProjectName_Visible","ctrl":"PROJECTNAME","prop":"Visible"},{"av":"edtWorkHourLogDate_Visible","ctrl":"WORKHOURLOGDATE","prop":"Visible"},{"av":"edtWorkHourLogDuration_Visible","ctrl":"WORKHOURLOGDURATION","prop":"Visible"},{"av":"edtWorkHourLogDescription_Visible","ctrl":"WORKHOURLOGDESCRIPTION","prop":"Visible"},{"av":"AV44GridCurrentPage","fld":"vGRIDCURRENTPAGE","pic":"ZZZZZZZZZ9"},{"av":"AV45GridPageCount","fld":"vGRIDPAGECOUNT","pic":"ZZZZZZZZZ9"},{"av":"AV46GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV56QueryIntent","fld":"vQUERYINTENT","hsh":true},{"av":"AV55RedirectToFirstDetail","fld":"vREDIRECTTOFIRSTDETAIL","hsh":true},{"av":"AV24ManageFiltersData","fld":"vMANAGEFILTERSDATA"},{"av":"AV11GridState","fld":"vGRIDSTATE"}]}""");
-         setEventMetadata("GRIDPAGINATIONBAR.CHANGEPAGE","""{"handler":"E12492","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV52EmployeeId","fld":"vEMPLOYEEID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"AV50FromDate","fld":"vFROMDATE","hsh":true},{"av":"AV51ToDate","fld":"vTODATE","hsh":true},{"av":"AV53ProjectIds","fld":"vPROJECTIDS","hsh":true},{"av":"AV26ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV21ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV57Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV27TFEmployeeName","fld":"vTFEMPLOYEENAME"},{"av":"AV28TFEmployeeName_Sel","fld":"vTFEMPLOYEENAME_SEL"},{"av":"AV29TFProjectName","fld":"vTFPROJECTNAME"},{"av":"AV30TFProjectName_Sel","fld":"vTFPROJECTNAME_SEL"},{"av":"AV31TFWorkHourLogDate","fld":"vTFWORKHOURLOGDATE"},{"av":"AV32TFWorkHourLogDate_To","fld":"vTFWORKHOURLOGDATE_TO"},{"av":"AV36TFWorkHourLogDuration","fld":"vTFWORKHOURLOGDURATION"},{"av":"AV37TFWorkHourLogDuration_Sel","fld":"vTFWORKHOURLOGDURATION_SEL"},{"av":"AV38TFWorkHourLogDescription","fld":"vTFWORKHOURLOGDESCRIPTION"},{"av":"AV39TFWorkHourLogDescription_Sel","fld":"vTFWORKHOURLOGDESCRIPTION_SEL"},{"av":"AV55RedirectToFirstDetail","fld":"vREDIRECTTOFIRSTDETAIL","hsh":true},{"av":"AV56QueryIntent","fld":"vQUERYINTENT","hsh":true},{"av":"AV46GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"Gridpaginationbar_Selectedpage","ctrl":"GRIDPAGINATIONBAR","prop":"SelectedPage"}]}""");
-         setEventMetadata("GRIDPAGINATIONBAR.CHANGEROWSPERPAGE","""{"handler":"E13492","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV52EmployeeId","fld":"vEMPLOYEEID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"AV50FromDate","fld":"vFROMDATE","hsh":true},{"av":"AV51ToDate","fld":"vTODATE","hsh":true},{"av":"AV53ProjectIds","fld":"vPROJECTIDS","hsh":true},{"av":"AV26ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV21ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV57Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV27TFEmployeeName","fld":"vTFEMPLOYEENAME"},{"av":"AV28TFEmployeeName_Sel","fld":"vTFEMPLOYEENAME_SEL"},{"av":"AV29TFProjectName","fld":"vTFPROJECTNAME"},{"av":"AV30TFProjectName_Sel","fld":"vTFPROJECTNAME_SEL"},{"av":"AV31TFWorkHourLogDate","fld":"vTFWORKHOURLOGDATE"},{"av":"AV32TFWorkHourLogDate_To","fld":"vTFWORKHOURLOGDATE_TO"},{"av":"AV36TFWorkHourLogDuration","fld":"vTFWORKHOURLOGDURATION"},{"av":"AV37TFWorkHourLogDuration_Sel","fld":"vTFWORKHOURLOGDURATION_SEL"},{"av":"AV38TFWorkHourLogDescription","fld":"vTFWORKHOURLOGDESCRIPTION"},{"av":"AV39TFWorkHourLogDescription_Sel","fld":"vTFWORKHOURLOGDESCRIPTION_SEL"},{"av":"AV55RedirectToFirstDetail","fld":"vREDIRECTTOFIRSTDETAIL","hsh":true},{"av":"AV56QueryIntent","fld":"vQUERYINTENT","hsh":true},{"av":"AV46GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"Gridpaginationbar_Rowsperpageselectedvalue","ctrl":"GRIDPAGINATIONBAR","prop":"RowsPerPageSelectedValue"}]""");
+         setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"AV52EmployeeId","fld":"vEMPLOYEEID","pic":"ZZZZZZZZZ9"},{"av":"AV50FromDate","fld":"vFROMDATE"},{"av":"AV51ToDate","fld":"vTODATE"},{"av":"sPrefix"},{"av":"AV26ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV21ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV53ProjectIds","fld":"vPROJECTIDS","hsh":true},{"av":"AV57Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV27TFEmployeeName","fld":"vTFEMPLOYEENAME"},{"av":"AV28TFEmployeeName_Sel","fld":"vTFEMPLOYEENAME_SEL"},{"av":"AV29TFProjectName","fld":"vTFPROJECTNAME"},{"av":"AV30TFProjectName_Sel","fld":"vTFPROJECTNAME_SEL"},{"av":"AV31TFWorkHourLogDate","fld":"vTFWORKHOURLOGDATE"},{"av":"AV32TFWorkHourLogDate_To","fld":"vTFWORKHOURLOGDATE_TO"},{"av":"AV36TFWorkHourLogDuration","fld":"vTFWORKHOURLOGDURATION"},{"av":"AV37TFWorkHourLogDuration_Sel","fld":"vTFWORKHOURLOGDURATION_SEL"},{"av":"AV38TFWorkHourLogDescription","fld":"vTFWORKHOURLOGDESCRIPTION"},{"av":"AV39TFWorkHourLogDescription_Sel","fld":"vTFWORKHOURLOGDESCRIPTION_SEL"}]""");
+         setEventMetadata("REFRESH",""","oparms":[{"av":"AV26ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV21ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"edtEmployeeName_Visible","ctrl":"EMPLOYEENAME","prop":"Visible"},{"av":"edtProjectName_Visible","ctrl":"PROJECTNAME","prop":"Visible"},{"av":"edtWorkHourLogDate_Visible","ctrl":"WORKHOURLOGDATE","prop":"Visible"},{"av":"edtWorkHourLogDuration_Visible","ctrl":"WORKHOURLOGDURATION","prop":"Visible"},{"av":"edtWorkHourLogDescription_Visible","ctrl":"WORKHOURLOGDESCRIPTION","prop":"Visible"},{"av":"AV44GridCurrentPage","fld":"vGRIDCURRENTPAGE","pic":"ZZZZZZZZZ9"},{"av":"AV45GridPageCount","fld":"vGRIDPAGECOUNT","pic":"ZZZZZZZZZ9"},{"av":"AV46GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV24ManageFiltersData","fld":"vMANAGEFILTERSDATA"},{"av":"AV11GridState","fld":"vGRIDSTATE"}]}""");
+         setEventMetadata("GRIDPAGINATIONBAR.CHANGEPAGE","""{"handler":"E12492","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV52EmployeeId","fld":"vEMPLOYEEID","pic":"ZZZZZZZZZ9"},{"av":"AV50FromDate","fld":"vFROMDATE"},{"av":"AV51ToDate","fld":"vTODATE"},{"av":"AV53ProjectIds","fld":"vPROJECTIDS","hsh":true},{"av":"AV26ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV21ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV57Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV27TFEmployeeName","fld":"vTFEMPLOYEENAME"},{"av":"AV28TFEmployeeName_Sel","fld":"vTFEMPLOYEENAME_SEL"},{"av":"AV29TFProjectName","fld":"vTFPROJECTNAME"},{"av":"AV30TFProjectName_Sel","fld":"vTFPROJECTNAME_SEL"},{"av":"AV31TFWorkHourLogDate","fld":"vTFWORKHOURLOGDATE"},{"av":"AV32TFWorkHourLogDate_To","fld":"vTFWORKHOURLOGDATE_TO"},{"av":"AV36TFWorkHourLogDuration","fld":"vTFWORKHOURLOGDURATION"},{"av":"AV37TFWorkHourLogDuration_Sel","fld":"vTFWORKHOURLOGDURATION_SEL"},{"av":"AV38TFWorkHourLogDescription","fld":"vTFWORKHOURLOGDESCRIPTION"},{"av":"AV39TFWorkHourLogDescription_Sel","fld":"vTFWORKHOURLOGDESCRIPTION_SEL"},{"av":"sPrefix"},{"av":"Gridpaginationbar_Selectedpage","ctrl":"GRIDPAGINATIONBAR","prop":"SelectedPage"}]}""");
+         setEventMetadata("GRIDPAGINATIONBAR.CHANGEROWSPERPAGE","""{"handler":"E13492","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV52EmployeeId","fld":"vEMPLOYEEID","pic":"ZZZZZZZZZ9"},{"av":"AV50FromDate","fld":"vFROMDATE"},{"av":"AV51ToDate","fld":"vTODATE"},{"av":"AV53ProjectIds","fld":"vPROJECTIDS","hsh":true},{"av":"AV26ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV21ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV57Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV27TFEmployeeName","fld":"vTFEMPLOYEENAME"},{"av":"AV28TFEmployeeName_Sel","fld":"vTFEMPLOYEENAME_SEL"},{"av":"AV29TFProjectName","fld":"vTFPROJECTNAME"},{"av":"AV30TFProjectName_Sel","fld":"vTFPROJECTNAME_SEL"},{"av":"AV31TFWorkHourLogDate","fld":"vTFWORKHOURLOGDATE"},{"av":"AV32TFWorkHourLogDate_To","fld":"vTFWORKHOURLOGDATE_TO"},{"av":"AV36TFWorkHourLogDuration","fld":"vTFWORKHOURLOGDURATION"},{"av":"AV37TFWorkHourLogDuration_Sel","fld":"vTFWORKHOURLOGDURATION_SEL"},{"av":"AV38TFWorkHourLogDescription","fld":"vTFWORKHOURLOGDESCRIPTION"},{"av":"AV39TFWorkHourLogDescription_Sel","fld":"vTFWORKHOURLOGDESCRIPTION_SEL"},{"av":"sPrefix"},{"av":"Gridpaginationbar_Rowsperpageselectedvalue","ctrl":"GRIDPAGINATIONBAR","prop":"RowsPerPageSelectedValue"}]""");
          setEventMetadata("GRIDPAGINATIONBAR.CHANGEROWSPERPAGE",""","oparms":[{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"}]}""");
-         setEventMetadata("DDO_GRID.ONOPTIONCLICKED","""{"handler":"E14492","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV52EmployeeId","fld":"vEMPLOYEEID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"AV50FromDate","fld":"vFROMDATE","hsh":true},{"av":"AV51ToDate","fld":"vTODATE","hsh":true},{"av":"AV53ProjectIds","fld":"vPROJECTIDS","hsh":true},{"av":"AV26ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV21ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV57Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV27TFEmployeeName","fld":"vTFEMPLOYEENAME"},{"av":"AV28TFEmployeeName_Sel","fld":"vTFEMPLOYEENAME_SEL"},{"av":"AV29TFProjectName","fld":"vTFPROJECTNAME"},{"av":"AV30TFProjectName_Sel","fld":"vTFPROJECTNAME_SEL"},{"av":"AV31TFWorkHourLogDate","fld":"vTFWORKHOURLOGDATE"},{"av":"AV32TFWorkHourLogDate_To","fld":"vTFWORKHOURLOGDATE_TO"},{"av":"AV36TFWorkHourLogDuration","fld":"vTFWORKHOURLOGDURATION"},{"av":"AV37TFWorkHourLogDuration_Sel","fld":"vTFWORKHOURLOGDURATION_SEL"},{"av":"AV38TFWorkHourLogDescription","fld":"vTFWORKHOURLOGDESCRIPTION"},{"av":"AV39TFWorkHourLogDescription_Sel","fld":"vTFWORKHOURLOGDESCRIPTION_SEL"},{"av":"AV55RedirectToFirstDetail","fld":"vREDIRECTTOFIRSTDETAIL","hsh":true},{"av":"AV56QueryIntent","fld":"vQUERYINTENT","hsh":true},{"av":"AV46GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"Ddo_grid_Activeeventkey","ctrl":"DDO_GRID","prop":"ActiveEventKey"},{"av":"Ddo_grid_Selectedvalue_get","ctrl":"DDO_GRID","prop":"SelectedValue_get"},{"av":"Ddo_grid_Selectedcolumn","ctrl":"DDO_GRID","prop":"SelectedColumn"},{"av":"Ddo_grid_Filteredtext_get","ctrl":"DDO_GRID","prop":"FilteredText_get"},{"av":"Ddo_grid_Filteredtextto_get","ctrl":"DDO_GRID","prop":"FilteredTextTo_get"}]""");
+         setEventMetadata("DDO_GRID.ONOPTIONCLICKED","""{"handler":"E14492","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV52EmployeeId","fld":"vEMPLOYEEID","pic":"ZZZZZZZZZ9"},{"av":"AV50FromDate","fld":"vFROMDATE"},{"av":"AV51ToDate","fld":"vTODATE"},{"av":"AV53ProjectIds","fld":"vPROJECTIDS","hsh":true},{"av":"AV26ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV21ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV57Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV27TFEmployeeName","fld":"vTFEMPLOYEENAME"},{"av":"AV28TFEmployeeName_Sel","fld":"vTFEMPLOYEENAME_SEL"},{"av":"AV29TFProjectName","fld":"vTFPROJECTNAME"},{"av":"AV30TFProjectName_Sel","fld":"vTFPROJECTNAME_SEL"},{"av":"AV31TFWorkHourLogDate","fld":"vTFWORKHOURLOGDATE"},{"av":"AV32TFWorkHourLogDate_To","fld":"vTFWORKHOURLOGDATE_TO"},{"av":"AV36TFWorkHourLogDuration","fld":"vTFWORKHOURLOGDURATION"},{"av":"AV37TFWorkHourLogDuration_Sel","fld":"vTFWORKHOURLOGDURATION_SEL"},{"av":"AV38TFWorkHourLogDescription","fld":"vTFWORKHOURLOGDESCRIPTION"},{"av":"AV39TFWorkHourLogDescription_Sel","fld":"vTFWORKHOURLOGDESCRIPTION_SEL"},{"av":"sPrefix"},{"av":"Ddo_grid_Activeeventkey","ctrl":"DDO_GRID","prop":"ActiveEventKey"},{"av":"Ddo_grid_Selectedvalue_get","ctrl":"DDO_GRID","prop":"SelectedValue_get"},{"av":"Ddo_grid_Selectedcolumn","ctrl":"DDO_GRID","prop":"SelectedColumn"},{"av":"Ddo_grid_Filteredtext_get","ctrl":"DDO_GRID","prop":"FilteredText_get"},{"av":"Ddo_grid_Filteredtextto_get","ctrl":"DDO_GRID","prop":"FilteredTextTo_get"}]""");
          setEventMetadata("DDO_GRID.ONOPTIONCLICKED",""","oparms":[{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV27TFEmployeeName","fld":"vTFEMPLOYEENAME"},{"av":"AV28TFEmployeeName_Sel","fld":"vTFEMPLOYEENAME_SEL"},{"av":"AV29TFProjectName","fld":"vTFPROJECTNAME"},{"av":"AV30TFProjectName_Sel","fld":"vTFPROJECTNAME_SEL"},{"av":"AV31TFWorkHourLogDate","fld":"vTFWORKHOURLOGDATE"},{"av":"AV32TFWorkHourLogDate_To","fld":"vTFWORKHOURLOGDATE_TO"},{"av":"AV36TFWorkHourLogDuration","fld":"vTFWORKHOURLOGDURATION"},{"av":"AV37TFWorkHourLogDuration_Sel","fld":"vTFWORKHOURLOGDURATION_SEL"},{"av":"AV38TFWorkHourLogDescription","fld":"vTFWORKHOURLOGDESCRIPTION"},{"av":"AV39TFWorkHourLogDescription_Sel","fld":"vTFWORKHOURLOGDESCRIPTION_SEL"},{"av":"Ddo_grid_Sortedstatus","ctrl":"DDO_GRID","prop":"SortedStatus"}]}""");
-         setEventMetadata("GRID.LOAD","""{"handler":"E19492","iparms":[{"av":"AV55RedirectToFirstDetail","fld":"vREDIRECTTOFIRSTDETAIL","hsh":true},{"av":"AV56QueryIntent","fld":"vQUERYINTENT","hsh":true},{"av":"AV46GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"A118WorkHourLogId","fld":"WORKHOURLOGID","pic":"ZZZZZZZZZ9"}]""");
-         setEventMetadata("GRID.LOAD",""","oparms":[{"av":"AV55RedirectToFirstDetail","fld":"vREDIRECTTOFIRSTDETAIL","hsh":true}]}""");
-         setEventMetadata("DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED","""{"handler":"E15492","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV52EmployeeId","fld":"vEMPLOYEEID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"AV50FromDate","fld":"vFROMDATE","hsh":true},{"av":"AV51ToDate","fld":"vTODATE","hsh":true},{"av":"AV53ProjectIds","fld":"vPROJECTIDS","hsh":true},{"av":"AV26ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV21ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV57Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV27TFEmployeeName","fld":"vTFEMPLOYEENAME"},{"av":"AV28TFEmployeeName_Sel","fld":"vTFEMPLOYEENAME_SEL"},{"av":"AV29TFProjectName","fld":"vTFPROJECTNAME"},{"av":"AV30TFProjectName_Sel","fld":"vTFPROJECTNAME_SEL"},{"av":"AV31TFWorkHourLogDate","fld":"vTFWORKHOURLOGDATE"},{"av":"AV32TFWorkHourLogDate_To","fld":"vTFWORKHOURLOGDATE_TO"},{"av":"AV36TFWorkHourLogDuration","fld":"vTFWORKHOURLOGDURATION"},{"av":"AV37TFWorkHourLogDuration_Sel","fld":"vTFWORKHOURLOGDURATION_SEL"},{"av":"AV38TFWorkHourLogDescription","fld":"vTFWORKHOURLOGDESCRIPTION"},{"av":"AV39TFWorkHourLogDescription_Sel","fld":"vTFWORKHOURLOGDESCRIPTION_SEL"},{"av":"AV55RedirectToFirstDetail","fld":"vREDIRECTTOFIRSTDETAIL","hsh":true},{"av":"AV56QueryIntent","fld":"vQUERYINTENT","hsh":true},{"av":"AV46GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"Ddo_gridcolumnsselector_Columnsselectorvalues","ctrl":"DDO_GRIDCOLUMNSSELECTOR","prop":"ColumnsSelectorValues"}]""");
-         setEventMetadata("DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED",""","oparms":[{"av":"AV21ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV26ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"edtEmployeeName_Visible","ctrl":"EMPLOYEENAME","prop":"Visible"},{"av":"edtProjectName_Visible","ctrl":"PROJECTNAME","prop":"Visible"},{"av":"edtWorkHourLogDate_Visible","ctrl":"WORKHOURLOGDATE","prop":"Visible"},{"av":"edtWorkHourLogDuration_Visible","ctrl":"WORKHOURLOGDURATION","prop":"Visible"},{"av":"edtWorkHourLogDescription_Visible","ctrl":"WORKHOURLOGDESCRIPTION","prop":"Visible"},{"av":"AV44GridCurrentPage","fld":"vGRIDCURRENTPAGE","pic":"ZZZZZZZZZ9"},{"av":"AV45GridPageCount","fld":"vGRIDPAGECOUNT","pic":"ZZZZZZZZZ9"},{"av":"AV46GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV56QueryIntent","fld":"vQUERYINTENT","hsh":true},{"av":"AV55RedirectToFirstDetail","fld":"vREDIRECTTOFIRSTDETAIL","hsh":true},{"av":"AV24ManageFiltersData","fld":"vMANAGEFILTERSDATA"},{"av":"AV11GridState","fld":"vGRIDSTATE"}]}""");
-         setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED","""{"handler":"E11492","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV52EmployeeId","fld":"vEMPLOYEEID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"AV50FromDate","fld":"vFROMDATE","hsh":true},{"av":"AV51ToDate","fld":"vTODATE","hsh":true},{"av":"AV53ProjectIds","fld":"vPROJECTIDS","hsh":true},{"av":"AV26ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV21ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV57Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV27TFEmployeeName","fld":"vTFEMPLOYEENAME"},{"av":"AV28TFEmployeeName_Sel","fld":"vTFEMPLOYEENAME_SEL"},{"av":"AV29TFProjectName","fld":"vTFPROJECTNAME"},{"av":"AV30TFProjectName_Sel","fld":"vTFPROJECTNAME_SEL"},{"av":"AV31TFWorkHourLogDate","fld":"vTFWORKHOURLOGDATE"},{"av":"AV32TFWorkHourLogDate_To","fld":"vTFWORKHOURLOGDATE_TO"},{"av":"AV36TFWorkHourLogDuration","fld":"vTFWORKHOURLOGDURATION"},{"av":"AV37TFWorkHourLogDuration_Sel","fld":"vTFWORKHOURLOGDURATION_SEL"},{"av":"AV38TFWorkHourLogDescription","fld":"vTFWORKHOURLOGDESCRIPTION"},{"av":"AV39TFWorkHourLogDescription_Sel","fld":"vTFWORKHOURLOGDESCRIPTION_SEL"},{"av":"AV55RedirectToFirstDetail","fld":"vREDIRECTTOFIRSTDETAIL","hsh":true},{"av":"AV56QueryIntent","fld":"vQUERYINTENT","hsh":true},{"av":"AV46GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"Ddo_managefilters_Activeeventkey","ctrl":"DDO_MANAGEFILTERS","prop":"ActiveEventKey"},{"av":"AV11GridState","fld":"vGRIDSTATE"}]""");
-         setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED",""","oparms":[{"av":"AV26ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV11GridState","fld":"vGRIDSTATE"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV27TFEmployeeName","fld":"vTFEMPLOYEENAME"},{"av":"AV28TFEmployeeName_Sel","fld":"vTFEMPLOYEENAME_SEL"},{"av":"AV29TFProjectName","fld":"vTFPROJECTNAME"},{"av":"AV30TFProjectName_Sel","fld":"vTFPROJECTNAME_SEL"},{"av":"AV31TFWorkHourLogDate","fld":"vTFWORKHOURLOGDATE"},{"av":"AV32TFWorkHourLogDate_To","fld":"vTFWORKHOURLOGDATE_TO"},{"av":"AV36TFWorkHourLogDuration","fld":"vTFWORKHOURLOGDURATION"},{"av":"AV37TFWorkHourLogDuration_Sel","fld":"vTFWORKHOURLOGDURATION_SEL"},{"av":"AV38TFWorkHourLogDescription","fld":"vTFWORKHOURLOGDESCRIPTION"},{"av":"AV39TFWorkHourLogDescription_Sel","fld":"vTFWORKHOURLOGDESCRIPTION_SEL"},{"av":"Ddo_grid_Selectedvalue_set","ctrl":"DDO_GRID","prop":"SelectedValue_set"},{"av":"Ddo_grid_Filteredtext_set","ctrl":"DDO_GRID","prop":"FilteredText_set"},{"av":"Ddo_grid_Filteredtextto_set","ctrl":"DDO_GRID","prop":"FilteredTextTo_set"},{"av":"Ddo_grid_Sortedstatus","ctrl":"DDO_GRID","prop":"SortedStatus"},{"av":"AV21ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"edtEmployeeName_Visible","ctrl":"EMPLOYEENAME","prop":"Visible"},{"av":"edtProjectName_Visible","ctrl":"PROJECTNAME","prop":"Visible"},{"av":"edtWorkHourLogDate_Visible","ctrl":"WORKHOURLOGDATE","prop":"Visible"},{"av":"edtWorkHourLogDuration_Visible","ctrl":"WORKHOURLOGDURATION","prop":"Visible"},{"av":"edtWorkHourLogDescription_Visible","ctrl":"WORKHOURLOGDESCRIPTION","prop":"Visible"},{"av":"AV44GridCurrentPage","fld":"vGRIDCURRENTPAGE","pic":"ZZZZZZZZZ9"},{"av":"AV45GridPageCount","fld":"vGRIDPAGECOUNT","pic":"ZZZZZZZZZ9"},{"av":"AV46GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV56QueryIntent","fld":"vQUERYINTENT","hsh":true},{"av":"AV55RedirectToFirstDetail","fld":"vREDIRECTTOFIRSTDETAIL","hsh":true},{"av":"AV24ManageFiltersData","fld":"vMANAGEFILTERSDATA"}]}""");
-         setEventMetadata("'DOEXPORT2'","""{"handler":"E16492","iparms":[{"av":"AV52EmployeeId","fld":"vEMPLOYEEID","pic":"ZZZZZZZZZ9","hsh":true},{"av":"AV50FromDate","fld":"vFROMDATE","hsh":true},{"av":"AV51ToDate","fld":"vTODATE","hsh":true},{"av":"AV53ProjectIds","fld":"vPROJECTIDS","hsh":true}]""");
+         setEventMetadata("GRID.LOAD","""{"handler":"E19492","iparms":[]}""");
+         setEventMetadata("DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED","""{"handler":"E15492","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV52EmployeeId","fld":"vEMPLOYEEID","pic":"ZZZZZZZZZ9"},{"av":"AV50FromDate","fld":"vFROMDATE"},{"av":"AV51ToDate","fld":"vTODATE"},{"av":"AV53ProjectIds","fld":"vPROJECTIDS","hsh":true},{"av":"AV26ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV21ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV57Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV27TFEmployeeName","fld":"vTFEMPLOYEENAME"},{"av":"AV28TFEmployeeName_Sel","fld":"vTFEMPLOYEENAME_SEL"},{"av":"AV29TFProjectName","fld":"vTFPROJECTNAME"},{"av":"AV30TFProjectName_Sel","fld":"vTFPROJECTNAME_SEL"},{"av":"AV31TFWorkHourLogDate","fld":"vTFWORKHOURLOGDATE"},{"av":"AV32TFWorkHourLogDate_To","fld":"vTFWORKHOURLOGDATE_TO"},{"av":"AV36TFWorkHourLogDuration","fld":"vTFWORKHOURLOGDURATION"},{"av":"AV37TFWorkHourLogDuration_Sel","fld":"vTFWORKHOURLOGDURATION_SEL"},{"av":"AV38TFWorkHourLogDescription","fld":"vTFWORKHOURLOGDESCRIPTION"},{"av":"AV39TFWorkHourLogDescription_Sel","fld":"vTFWORKHOURLOGDESCRIPTION_SEL"},{"av":"sPrefix"},{"av":"Ddo_gridcolumnsselector_Columnsselectorvalues","ctrl":"DDO_GRIDCOLUMNSSELECTOR","prop":"ColumnsSelectorValues"}]""");
+         setEventMetadata("DDO_GRIDCOLUMNSSELECTOR.ONCOLUMNSCHANGED",""","oparms":[{"av":"AV21ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV26ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"edtEmployeeName_Visible","ctrl":"EMPLOYEENAME","prop":"Visible"},{"av":"edtProjectName_Visible","ctrl":"PROJECTNAME","prop":"Visible"},{"av":"edtWorkHourLogDate_Visible","ctrl":"WORKHOURLOGDATE","prop":"Visible"},{"av":"edtWorkHourLogDuration_Visible","ctrl":"WORKHOURLOGDURATION","prop":"Visible"},{"av":"edtWorkHourLogDescription_Visible","ctrl":"WORKHOURLOGDESCRIPTION","prop":"Visible"},{"av":"AV44GridCurrentPage","fld":"vGRIDCURRENTPAGE","pic":"ZZZZZZZZZ9"},{"av":"AV45GridPageCount","fld":"vGRIDPAGECOUNT","pic":"ZZZZZZZZZ9"},{"av":"AV46GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV24ManageFiltersData","fld":"vMANAGEFILTERSDATA"},{"av":"AV11GridState","fld":"vGRIDSTATE"}]}""");
+         setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED","""{"handler":"E11492","iparms":[{"av":"GRID_nFirstRecordOnPage"},{"av":"GRID_nEOF"},{"av":"subGrid_Rows","ctrl":"GRID","prop":"Rows"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV52EmployeeId","fld":"vEMPLOYEEID","pic":"ZZZZZZZZZ9"},{"av":"AV50FromDate","fld":"vFROMDATE"},{"av":"AV51ToDate","fld":"vTODATE"},{"av":"AV53ProjectIds","fld":"vPROJECTIDS","hsh":true},{"av":"AV26ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV21ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"AV57Pgmname","fld":"vPGMNAME","hsh":true},{"av":"AV27TFEmployeeName","fld":"vTFEMPLOYEENAME"},{"av":"AV28TFEmployeeName_Sel","fld":"vTFEMPLOYEENAME_SEL"},{"av":"AV29TFProjectName","fld":"vTFPROJECTNAME"},{"av":"AV30TFProjectName_Sel","fld":"vTFPROJECTNAME_SEL"},{"av":"AV31TFWorkHourLogDate","fld":"vTFWORKHOURLOGDATE"},{"av":"AV32TFWorkHourLogDate_To","fld":"vTFWORKHOURLOGDATE_TO"},{"av":"AV36TFWorkHourLogDuration","fld":"vTFWORKHOURLOGDURATION"},{"av":"AV37TFWorkHourLogDuration_Sel","fld":"vTFWORKHOURLOGDURATION_SEL"},{"av":"AV38TFWorkHourLogDescription","fld":"vTFWORKHOURLOGDESCRIPTION"},{"av":"AV39TFWorkHourLogDescription_Sel","fld":"vTFWORKHOURLOGDESCRIPTION_SEL"},{"av":"sPrefix"},{"av":"Ddo_managefilters_Activeeventkey","ctrl":"DDO_MANAGEFILTERS","prop":"ActiveEventKey"},{"av":"AV11GridState","fld":"vGRIDSTATE"}]""");
+         setEventMetadata("DDO_MANAGEFILTERS.ONOPTIONCLICKED",""","oparms":[{"av":"AV26ManageFiltersExecutionStep","fld":"vMANAGEFILTERSEXECUTIONSTEP","pic":"9"},{"av":"AV11GridState","fld":"vGRIDSTATE"},{"av":"AV13OrderedBy","fld":"vORDEREDBY","pic":"ZZZ9"},{"av":"AV14OrderedDsc","fld":"vORDEREDDSC"},{"av":"AV16FilterFullText","fld":"vFILTERFULLTEXT"},{"av":"AV27TFEmployeeName","fld":"vTFEMPLOYEENAME"},{"av":"AV28TFEmployeeName_Sel","fld":"vTFEMPLOYEENAME_SEL"},{"av":"AV29TFProjectName","fld":"vTFPROJECTNAME"},{"av":"AV30TFProjectName_Sel","fld":"vTFPROJECTNAME_SEL"},{"av":"AV31TFWorkHourLogDate","fld":"vTFWORKHOURLOGDATE"},{"av":"AV32TFWorkHourLogDate_To","fld":"vTFWORKHOURLOGDATE_TO"},{"av":"AV36TFWorkHourLogDuration","fld":"vTFWORKHOURLOGDURATION"},{"av":"AV37TFWorkHourLogDuration_Sel","fld":"vTFWORKHOURLOGDURATION_SEL"},{"av":"AV38TFWorkHourLogDescription","fld":"vTFWORKHOURLOGDESCRIPTION"},{"av":"AV39TFWorkHourLogDescription_Sel","fld":"vTFWORKHOURLOGDESCRIPTION_SEL"},{"av":"Ddo_grid_Selectedvalue_set","ctrl":"DDO_GRID","prop":"SelectedValue_set"},{"av":"Ddo_grid_Filteredtext_set","ctrl":"DDO_GRID","prop":"FilteredText_set"},{"av":"Ddo_grid_Filteredtextto_set","ctrl":"DDO_GRID","prop":"FilteredTextTo_set"},{"av":"Ddo_grid_Sortedstatus","ctrl":"DDO_GRID","prop":"SortedStatus"},{"av":"AV21ColumnsSelector","fld":"vCOLUMNSSELECTOR"},{"av":"edtEmployeeName_Visible","ctrl":"EMPLOYEENAME","prop":"Visible"},{"av":"edtProjectName_Visible","ctrl":"PROJECTNAME","prop":"Visible"},{"av":"edtWorkHourLogDate_Visible","ctrl":"WORKHOURLOGDATE","prop":"Visible"},{"av":"edtWorkHourLogDuration_Visible","ctrl":"WORKHOURLOGDURATION","prop":"Visible"},{"av":"edtWorkHourLogDescription_Visible","ctrl":"WORKHOURLOGDESCRIPTION","prop":"Visible"},{"av":"AV44GridCurrentPage","fld":"vGRIDCURRENTPAGE","pic":"ZZZZZZZZZ9"},{"av":"AV45GridPageCount","fld":"vGRIDPAGECOUNT","pic":"ZZZZZZZZZ9"},{"av":"AV46GridAppliedFilters","fld":"vGRIDAPPLIEDFILTERS"},{"av":"AV24ManageFiltersData","fld":"vMANAGEFILTERSDATA"}]}""");
+         setEventMetadata("'DOEXPORT2'","""{"handler":"E16492","iparms":[{"av":"AV52EmployeeId","fld":"vEMPLOYEEID","pic":"ZZZZZZZZZ9"},{"av":"AV50FromDate","fld":"vFROMDATE"},{"av":"AV51ToDate","fld":"vTODATE"},{"av":"AV53ProjectIds","fld":"vPROJECTIDS","hsh":true}]""");
          setEventMetadata("'DOEXPORT2'",""","oparms":[{"av":"Innewwindow1_Target","ctrl":"INNEWWINDOW1","prop":"Target"},{"av":"Innewwindow1_Name","ctrl":"INNEWWINDOW1","prop":"Name"}]}""");
          setEventMetadata("VALID_EMPLOYEEID","""{"handler":"Valid_Employeeid","iparms":[]}""");
          setEventMetadata("VALID_PROJECTID","""{"handler":"Valid_Projectid","iparms":[]}""");
@@ -2980,6 +3324,7 @@ namespace GeneXus.Programs {
          Ddo_managefilters_Activeeventkey = "";
          gxfirstwebparm = "";
          gxfirstwebparm_bkp = "";
+         sPrefix = "";
          AV16FilterFullText = "";
          AV53ProjectIds = new GxSimpleCollection<long>();
          AV21ColumnsSelector = new GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector(context);
@@ -2994,13 +3339,12 @@ namespace GeneXus.Programs {
          AV37TFWorkHourLogDuration_Sel = "";
          AV38TFWorkHourLogDescription = "";
          AV39TFWorkHourLogDescription_Sel = "";
-         AV56QueryIntent = "";
-         AV46GridAppliedFilters = "";
          sDynURL = "";
          FormProcess = "";
          bodyStyle = "";
          GXKey = "";
          AV24ManageFiltersData = new GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsData_Item>( context, "Item", "");
+         AV46GridAppliedFilters = "";
          AV40DDO_TitleSettingsIcons = new GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsTitleSettingsIcons(context);
          AV33DDO_WorkHourLogDateAuxDate = DateTime.MinValue;
          AV34DDO_WorkHourLogDateAuxDateTo = DateTime.MinValue;
@@ -3009,13 +3353,10 @@ namespace GeneXus.Programs {
          Ddo_grid_Filteredtext_set = "";
          Ddo_grid_Filteredtextto_set = "";
          Ddo_grid_Selectedvalue_set = "";
-         Ddo_grid_Gamoauthtoken = "";
          Ddo_grid_Sortedstatus = "";
          Ddo_gridcolumnsselector_Gridinternalname = "";
          Grid_empowerer_Gridinternalname = "";
          GX_FocusControl = "";
-         Form = new GXWebForm();
-         sPrefix = "";
          TempTags = "";
          ClassString = "";
          StyleString = "";
@@ -3032,6 +3373,8 @@ namespace GeneXus.Programs {
          ucGrid_empowerer = new GXUserControl();
          AV35DDO_WorkHourLogDateAuxDateText = "";
          ucTfworkhourlogdate_rangepicker = new GXUserControl();
+         Form = new GXWebForm();
+         sXEvt = "";
          sEvt = "";
          EvtGridId = "";
          EvtRowId = "";
@@ -3071,9 +3414,6 @@ namespace GeneXus.Programs {
          H00492_A148EmployeeName = new string[] {""} ;
          H00493_AGRID_nRecordCount = new long[1] ;
          AV54WebSession = context.GetSession();
-         AV8HTTPRequest = new GxHttpRequest( context);
-         AV41GAMSession = new GeneXus.Programs.genexussecurity.SdtGAMSession(context);
-         AV42GAMErrors = new GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError>( context, "GeneXus.Programs.genexussecurity.SdtGAMError", "GeneXus.Programs");
          GXt_SdtDVB_SDTDropDownOptionsTitleSettingsIcons1 = new GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsTitleSettingsIcons(context);
          AV6WWPContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPContext(context);
          AV23Session = context.GetSession();
@@ -3091,8 +3431,12 @@ namespace GeneXus.Programs {
          GXt_char4 = "";
          GXt_char2 = "";
          AV9TrnContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext(context);
+         AV8HTTPRequest = new GxHttpRequest( context);
          BackMsgLst = new msglist();
          LclMsgLst = new msglist();
+         sCtrlAV52EmployeeId = "";
+         sCtrlAV50FromDate = "";
+         sCtrlAV51ToDate = "";
          subGrid_Linesclass = "";
          ROClassString = "";
          GridColumn = new GXWebColumn();
@@ -3115,11 +3459,13 @@ namespace GeneXus.Programs {
       private short GRID_nEOF ;
       private short nGotPars ;
       private short GxWebError ;
+      private short nDynComponent ;
       private short AV13OrderedBy ;
       private short AV26ManageFiltersExecutionStep ;
-      private short gxajaxcallmode ;
       private short wbEnd ;
       private short wbStart ;
+      private short nDraw ;
+      private short nDoneStart ;
       private short A121WorkHourLogHour ;
       private short A122WorkHourLogMinute ;
       private short nDonePA ;
@@ -3188,6 +3534,9 @@ namespace GeneXus.Programs {
       private string Ddo_managefilters_Activeeventkey ;
       private string gxfirstwebparm ;
       private string gxfirstwebparm_bkp ;
+      private string sPrefix ;
+      private string sCompPrefix ;
+      private string sSFPrefix ;
       private string sGXsfl_37_idx="0001" ;
       private string AV57Pgmname ;
       private string AV27TFEmployeeName ;
@@ -3218,7 +3567,6 @@ namespace GeneXus.Programs {
       private string Ddo_grid_Filteredtext_set ;
       private string Ddo_grid_Filteredtextto_set ;
       private string Ddo_grid_Selectedvalue_set ;
-      private string Ddo_grid_Gamoauthtoken ;
       private string Ddo_grid_Gridinternalname ;
       private string Ddo_grid_Columnids ;
       private string Ddo_grid_Columnssortvalues ;
@@ -3241,7 +3589,6 @@ namespace GeneXus.Programs {
       private string Ddo_gridcolumnsselector_Titlecontrolidtoreplace ;
       private string Grid_empowerer_Gridinternalname ;
       private string GX_FocusControl ;
-      private string sPrefix ;
       private string divLayoutmaintable_Internalname ;
       private string divTablemain_Internalname ;
       private string divTableheader_Internalname ;
@@ -3273,6 +3620,7 @@ namespace GeneXus.Programs {
       private string edtavDdo_workhourlogdateauxdatetext_Internalname ;
       private string edtavDdo_workhourlogdateauxdatetext_Jsonclick ;
       private string Tfworkhourlogdate_rangepicker_Internalname ;
+      private string sXEvt ;
       private string sEvt ;
       private string EvtGridId ;
       private string EvtRowId ;
@@ -3301,6 +3649,9 @@ namespace GeneXus.Programs {
       private string GXt_char5 ;
       private string GXt_char4 ;
       private string GXt_char2 ;
+      private string sCtrlAV52EmployeeId ;
+      private string sCtrlAV50FromDate ;
+      private string sCtrlAV51ToDate ;
       private string sGXsfl_37_fel_idx="0001" ;
       private string subGrid_Class ;
       private string subGrid_Linesclass ;
@@ -3331,7 +3682,6 @@ namespace GeneXus.Programs {
       private bool entryPointCalled ;
       private bool toggleJsOutput ;
       private bool AV14OrderedDsc ;
-      private bool AV55RedirectToFirstDetail ;
       private bool Gridpaginationbar_Showfirst ;
       private bool Gridpaginationbar_Showprevious ;
       private bool Gridpaginationbar_Shownext ;
@@ -3355,7 +3705,6 @@ namespace GeneXus.Programs {
       private string AV37TFWorkHourLogDuration_Sel ;
       private string AV38TFWorkHourLogDescription ;
       private string AV39TFWorkHourLogDescription_Sel ;
-      private string AV56QueryIntent ;
       private string AV46GridAppliedFilters ;
       private string AV35DDO_WorkHourLogDateAuxDateText ;
       private string A120WorkHourLogDuration ;
@@ -3381,8 +3730,8 @@ namespace GeneXus.Programs {
       private GXUserControl ucDdo_gridcolumnsselector ;
       private GXUserControl ucGrid_empowerer ;
       private GXUserControl ucTfworkhourlogdate_rangepicker ;
-      private GxHttpRequest AV8HTTPRequest ;
       private GXWebForm Form ;
+      private GxHttpRequest AV8HTTPRequest ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private GxSimpleCollection<long> AV53ProjectIds ;
@@ -3403,8 +3752,6 @@ namespace GeneXus.Programs {
       private string[] H00492_A103ProjectName ;
       private string[] H00492_A148EmployeeName ;
       private long[] H00493_AGRID_nRecordCount ;
-      private GeneXus.Programs.genexussecurity.SdtGAMSession AV41GAMSession ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV42GAMErrors ;
       private GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTDropDownOptionsTitleSettingsIcons GXt_SdtDVB_SDTDropDownOptionsTitleSettingsIcons1 ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPContext AV6WWPContext ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPColumnsSelector AV22ColumnsSelectorAux ;

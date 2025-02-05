@@ -24,30 +24,6 @@ using System.Runtime.Serialization;
 namespace GeneXus.Programs {
    public class workhourloglistgetfilterdata : GXProcedure
    {
-      protected override bool IntegratedSecurityEnabled
-      {
-         get {
-            return true ;
-         }
-
-      }
-
-      protected override GAMSecurityLevel IntegratedSecurityLevel
-      {
-         get {
-            return GAMSecurityLevel.SecurityHigh ;
-         }
-
-      }
-
-      protected override string ExecutePermissionPrefix
-      {
-         get {
-            return "workhourloglist_Services_Execute" ;
-         }
-
-      }
-
       public workhourloglistgetfilterdata( )
       {
          context = new GxContext(  );
