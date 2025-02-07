@@ -84,9 +84,7 @@ namespace GeneXus.Programs {
          restLocation = gxobjppt.Location ;
       }
 
-      public void gxep_api_icsleaveapi( string aP0_Username ,
-                                        string aP1_Password ,
-                                        out string aP2_ICSLeaveExport )
+      public void gxep_api_icsleaveapi( out string aP0_ICSLeaveExport )
       {
          restCliAPI_ICSLeaveAPI = new GXRestAPIClient();
          if ( restLocation == null )
@@ -95,20 +93,18 @@ namespace GeneXus.Programs {
          }
          restLocation.ResourceName = "/export-ics-leaves";
          restCliAPI_ICSLeaveAPI.Location = restLocation;
-         restCliAPI_ICSLeaveAPI.HttpMethod = "POST";
-         restCliAPI_ICSLeaveAPI.AddBodyVar("Username", (string)(aP0_Username));
-         restCliAPI_ICSLeaveAPI.AddBodyVar("Password", (string)(aP1_Password));
+         restCliAPI_ICSLeaveAPI.HttpMethod = "GET";
          restCliAPI_ICSLeaveAPI.RestExecute();
          if ( restCliAPI_ICSLeaveAPI.ErrorCode != 0 )
          {
             gxProperties.ErrorCode = restCliAPI_ICSLeaveAPI.ErrorCode;
             gxProperties.ErrorMessage = restCliAPI_ICSLeaveAPI.ErrorMessage;
             gxProperties.StatusCode = restCliAPI_ICSLeaveAPI.StatusCode;
-            aP2_ICSLeaveExport = "";
+            aP0_ICSLeaveExport = "";
          }
          else
          {
-            aP2_ICSLeaveExport = restCliAPI_ICSLeaveAPI.GetBodyString("ICSLeaveExport");
+            aP0_ICSLeaveExport = restCliAPI_ICSLeaveAPI.GetBodyString("ICSLeaveExport");
          }
          /* API_ICSLeaveAPI Constructor */
       }
@@ -122,7 +118,7 @@ namespace GeneXus.Programs {
       {
          gxProperties = new GxObjectProperties();
          restCliAPI_ICSLeaveAPI = new GXRestAPIClient();
-         aP2_ICSLeaveExport = "";
+         aP0_ICSLeaveExport = "";
          /* GeneXus formulas. */
       }
 
@@ -132,7 +128,7 @@ namespace GeneXus.Programs {
       protected GxObjectProperties gxProperties ;
       protected IGxDataStore dsGAM ;
       protected IGxDataStore dsDefault ;
-      protected string aP2_ICSLeaveExport ;
+      protected string aP0_ICSLeaveExport ;
    }
 
 }

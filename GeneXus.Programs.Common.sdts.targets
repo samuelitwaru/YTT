@@ -104,6 +104,7 @@
  	<Compile Include="$(WebDirectory)\wwpbaseobjects\type_SdtGoogleDocsResult.cs" />
  	<Compile Include="$(WebDirectory)\wwpbaseobjects\type_SdtGoogleDocsResult_Doc.cs" />
  	<Compile Include="$(WebDirectory)\wwpbaseobjects\type_SdtGridStateCollection_Item.cs" />
+ 	<Compile Include="$(WebDirectory)\wwpbaseobjects\type_SdtHomeModulesSDT_HomeModulesSDTItem.cs" />
  	<Compile Include="$(WebDirectory)\wwpbaseobjects\type_SdtHomeSampleData_HomeSampleDataItem.cs" />
  	<Compile Include="$(WebDirectory)\wwpbaseobjects\type_SdtHomeSampleNameValueData_HomeSampleNameValueDataItem.cs" />
  	<Compile Include="$(WebDirectory)\wwpbaseobjects\notifications\common\type_SdtWWP_SDTNotificationMetadata.cs" />

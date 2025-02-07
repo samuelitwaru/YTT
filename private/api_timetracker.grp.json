@@ -5,7 +5,7 @@
 "Mappings":
 [
 {
-"Verb":"POST",
+"Verb":"GET",
 "PathRegexp":"export-ics-leaves",
 "Path":"export-ics-leaves",
 "Name":"api_icsleaveapi",

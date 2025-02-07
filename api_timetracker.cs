@@ -77,16 +77,12 @@ namespace GeneXus.Programs {
          cleanup();
       }
 
-      public void gxep_api_icsleaveapi( string aP0_Username ,
-                                        string aP1_Password ,
-                                        out string aP2_ICSLeaveExport )
+      public void gxep_api_icsleaveapi( out string aP0_ICSLeaveExport )
       {
-         this.AV14Username = aP0_Username;
-         this.AV13Password = aP1_Password;
          initialize();
          /* API_ICSLeaveAPI Constructor */
-         new prc_icsleaveapi(context ).execute(  AV14Username,  AV13Password, out  AV12ICSLeaveExport) ;
-         aP2_ICSLeaveExport=this.AV12ICSLeaveExport;
+         new prc_icsleaveapi(context ).execute( out  AV12ICSLeaveExport) ;
+         aP0_ICSLeaveExport=this.AV12ICSLeaveExport;
       }
 
       public override void cleanup( )
@@ -102,11 +98,9 @@ namespace GeneXus.Programs {
 
       protected string Gx_restmethod ;
       protected string AV12ICSLeaveExport ;
-      protected string AV14Username ;
-      protected string AV13Password ;
       protected IGxDataStore dsGAM ;
       protected IGxDataStore dsDefault ;
-      protected string aP2_ICSLeaveExport ;
+      protected string aP0_ICSLeaveExport ;
    }
 
 }

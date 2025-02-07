@@ -17,12 +17,13 @@ using GeneXus.XML;
 using GeneXus.Search;
 using GeneXus.Encryption;
 using GeneXus.Http.Client;
+using GeneXus.Http.Server;
 using System.Xml.Serialization;
 using System.Runtime.Serialization;
 namespace GeneXus.Programs {
-   public class downloadapp : GXDataArea
+   public class wp_downloadapp : GXDataArea
    {
-      public downloadapp( )
+      public wp_downloadapp( )
       {
          context = new GxContext(  );
          DataStoreUtil.LoadDataStores( context);
@@ -32,7 +33,7 @@ namespace GeneXus.Programs {
          context.SetDefaultTheme("WorkWithPlusDS", true);
       }
 
-      public downloadapp( IGxContext context )
+      public wp_downloadapp( IGxContext context )
       {
          this.context = context;
          IsMain = false;
@@ -141,7 +142,7 @@ namespace GeneXus.Programs {
       protected override string ExecutePermissionPrefix
       {
          get {
-            return "downloadapp_Execute" ;
+            return "wp_downloadapp_Execute" ;
          }
 
       }
@@ -185,11 +186,11 @@ namespace GeneXus.Programs {
 
       public override short ExecuteStartEvent( )
       {
-         PA462( ) ;
+         PA652( ) ;
          gxajaxcallmode = (short)((isAjaxCallMode( ) ? 1 : 0));
          if ( ( gxajaxcallmode == 0 ) && ( GxWebError == 0 ) )
          {
-            START462( ) ;
+            START652( ) ;
          }
          return gxajaxcallmode ;
       }
@@ -233,7 +234,6 @@ namespace GeneXus.Programs {
          {
             enableOutput();
          }
-         context.AddJavascriptSource("UserControls/DownloadAppJsRender.js", "", false, true);
          context.WriteHtmlText( Form.Headerrawhtml) ;
          context.CloseHtmlHeader();
          if ( context.isSpaRequest( ) )
@@ -260,7 +260,7 @@ namespace GeneXus.Programs {
          context.skipLines(1);
          if ( nGXWrapped != 1 )
          {
-            context.WriteHtmlTextNl( "<form id=\"MAINFORM\" autocomplete=\"off\" name=\"MAINFORM\" method=\"post\" tabindex=-1  class=\"form-horizontal Form\" data-gx-class=\"form-horizontal Form\" novalidate action=\""+formatLink("downloadapp.aspx") +"\">") ;
+            context.WriteHtmlTextNl( "<form id=\"MAINFORM\" autocomplete=\"off\" name=\"MAINFORM\" method=\"post\" tabindex=-1  class=\"form-horizontal Form\" data-gx-class=\"form-horizontal Form\" novalidate action=\""+formatLink("wp_downloadapp.aspx") +"\">") ;
             GxWebStd.gx_hidden_field( context, "_EventName", "");
             GxWebStd.gx_hidden_field( context, "_EventGridId", "");
             GxWebStd.gx_hidden_field( context, "_EventRowId", "");
@@ -284,22 +284,6 @@ namespace GeneXus.Programs {
          /* Send hidden variables. */
          /* Send saved values. */
          send_integrity_footer_hashes( ) ;
-         if ( context.isAjaxRequest( ) )
-         {
-            context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "Employee", AV10Employee);
-         }
-         else
-         {
-            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("Employee", AV10Employee);
-         }
-         if ( context.isAjaxRequest( ) )
-         {
-            context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "vEMPLOYEE", AV10Employee);
-         }
-         else
-         {
-            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("vEMPLOYEE", AV10Employee);
-         }
       }
 
       public override void RenderHtmlCloseForm( )
@@ -334,14 +318,14 @@ namespace GeneXus.Programs {
             context.WriteHtmlText( "<div") ;
             GxWebStd.ClassAttribute( context, "gx-ct-body"+" "+(String.IsNullOrEmpty(StringUtil.RTrim( Form.Class)) ? "form-horizontal Form" : Form.Class)+"-fx");
             context.WriteHtmlText( ">") ;
-            WE462( ) ;
+            WE652( ) ;
             context.WriteHtmlText( "</div>") ;
          }
       }
 
       public override void DispatchEvents( )
       {
-         EVT462( ) ;
+         EVT652( ) ;
       }
 
       public override bool HasEnterEvent( )
@@ -356,20 +340,20 @@ namespace GeneXus.Programs {
 
       public override string GetSelfLink( )
       {
-         return formatLink("downloadapp.aspx")  ;
+         return formatLink("wp_downloadapp.aspx")  ;
       }
 
       public override string GetPgmname( )
       {
-         return "DownloadApp" ;
+         return "WP_DownloadApp" ;
       }
 
       public override string GetPgmdesc( )
       {
-         return "Download App" ;
+         return " Employees" ;
       }
 
-      protected void WB460( )
+      protected void WB650( )
       {
          if ( context.isAjaxRequest( ) )
          {
@@ -382,6 +366,7 @@ namespace GeneXus.Programs {
                RenderHtmlHeaders( ) ;
                RenderHtmlOpenForm( ) ;
             }
+            GxWebStd.gx_msg_list( context, "", context.GX_msglist.DisplayMode, "", "", "", "false");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "Section", "start", "top", " "+"data-gx-base-lib=\"bootstrapv3\""+" "+"data-abstract-form"+" ", "", "div");
             /* Div Control */
@@ -396,59 +381,17 @@ namespace GeneXus.Programs {
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
-            ClassString = "ErrorViewer";
-            StyleString = "";
-            GxWebStd.gx_msg_list( context, "", context.GX_msglist.DisplayMode, StyleString, ClassString, "", "false");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+edtavField_Internalname+"\"", "", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, divTablecontent_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 CellMarginTop", "Center", "top", "", "", "div");
-            wb_table1_15_462( true) ;
-         }
-         else
-         {
-            wb_table1_15_462( false) ;
-         }
-         return  ;
-      }
-
-      protected void wb_table1_15_462e( bool wbgen )
-      {
-         if ( wbgen )
-         {
-            GxWebStd.gx_div_end( context, "Center", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 CellMarginTop", "Center", "top", "", "", "div");
-            /* User Defined Control */
-            ucDownloadapp.Render(context, "downloadappjs", Downloadapp_Internalname, "DOWNLOADAPPContainer");
-            GxWebStd.gx_div_end( context, "Center", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            GxWebStd.gx_div_end( context, "start", "top", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
-            /* Div Control */
-            GxWebStd.gx_div_start( context, divHtml_bottomauxiliarcontrols_Internalname, 1, 0, "px", 0, "px", "Section", "start", "top", "", "", "div");
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-sm-9 gx-attribute", "start", "top", "", "", "div");
             /* Single line edit */
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 25,'',false,'',0)\"";
-            GxWebStd.gx_single_line_edit( context, edtavEmployee_employeeid_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(AV10Employee.gxTpr_Employeeid), 10, 0, ".", "")), StringUtil.LTrim( context.localUtil.Format( (decimal)(AV10Employee.gxTpr_Employeeid), "ZZZZZZZZZ9")), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+TempTags+" onchange=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onblur(this,25);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavEmployee_employeeid_Jsonclick, 0, "Attribute", "", "", "", "", edtavEmployee_employeeid_Visible, 1, 0, "text", "1", 10, "chr", 1, "row", 10, 0, 0, 0, 0, -1, 0, false, "", "end", false, "", "HLP_DownloadApp.htm");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 11,'',false,'',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtavField_Internalname, StringUtil.LTrim( StringUtil.NToC( (decimal)(AV77Field), 4, 0, ".", "")), StringUtil.LTrim( ((edtavField_Enabled!=0) ? context.localUtil.Format( (decimal)(AV77Field), "ZZZ9") : context.localUtil.Format( (decimal)(AV77Field), "ZZZ9"))), " dir=\"ltr\" inputmode=\"numeric\" pattern=\"[0-9]*\""+TempTags+" onchange=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onchange(this, event)\" "+" onblur=\""+"gx.num.valid_integer( this,',');"+";gx.evt.onblur(this,11);\"", "'"+""+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavField_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavField_Enabled, 0, "text", "1", 4, "chr", 1, "row", 4, 0, 0, 0, 0, -1, 0, false, "", "end", false, "", "HLP_WP_DownloadApp.htm");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -458,7 +401,7 @@ namespace GeneXus.Programs {
          wbLoad = true;
       }
 
-      protected void START462( )
+      protected void START652( )
       {
          wbLoad = false;
          wbEnd = 0;
@@ -470,7 +413,7 @@ namespace GeneXus.Programs {
                Form.Meta.addItem("generator", "GeneXus .NET 18_0_10-184260", 0) ;
             }
          }
-         Form.Meta.addItem("description", "Download App", 0) ;
+         Form.Meta.addItem("description", " Employees", 0) ;
          context.wjLoc = "";
          context.nUserReturn = 0;
          context.wbHandled = 0;
@@ -478,16 +421,16 @@ namespace GeneXus.Programs {
          {
          }
          wbErr = false;
-         STRUP460( ) ;
+         STRUP650( ) ;
       }
 
-      protected void WS462( )
+      protected void WS652( )
       {
-         START462( ) ;
-         EVT462( ) ;
+         START652( ) ;
+         EVT652( ) ;
       }
 
-      protected void EVT462( )
+      protected void EVT652( )
       {
          if ( StringUtil.StrCmp(context.GetRequestMethod( ), "POST") == 0 )
          {
@@ -519,21 +462,14 @@ namespace GeneXus.Programs {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
                               /* Execute user event: Start */
-                              E11462 ();
-                           }
-                           else if ( StringUtil.StrCmp(sEvt, "'DOLOGOUT'") == 0 )
-                           {
-                              context.wbHandled = 1;
-                              dynload_actions( ) ;
-                              /* Execute user event: 'DoLogout' */
-                              E12462 ();
+                              E11652 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "LOAD") == 0 )
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
                               /* Execute user event: Load */
-                              E13462 ();
+                              E12652 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "ENTER") == 0 )
                            {
@@ -566,7 +502,7 @@ namespace GeneXus.Programs {
          }
       }
 
-      protected void WE462( )
+      protected void WE652( )
       {
          if ( ! GxWebStd.gx_redirect( context) )
          {
@@ -582,7 +518,7 @@ namespace GeneXus.Programs {
          }
       }
 
-      protected void PA462( )
+      protected void PA652( )
       {
          if ( nDonePA == 0 )
          {
@@ -606,7 +542,7 @@ namespace GeneXus.Programs {
             }
             if ( ! context.isAjaxRequest( ) )
             {
-               GX_FocusControl = edtavEmployee_employeeid_Internalname;
+               GX_FocusControl = edtavField_Internalname;
                AssignAttri("", false, "GX_FocusControl", GX_FocusControl);
             }
             nDonePA = 1;
@@ -638,7 +574,7 @@ namespace GeneXus.Programs {
       public void Refresh( )
       {
          send_integrity_hashes( ) ;
-         RF462( ) ;
+         RF652( ) ;
          if ( isFullAjaxMode( ) )
          {
             send_integrity_footer_hashes( ) ;
@@ -650,7 +586,7 @@ namespace GeneXus.Programs {
          /* GeneXus formulas. */
       }
 
-      protected void RF462( )
+      protected void RF652( )
       {
          initialize_formulas( ) ;
          clear_multi_value_controls( ) ;
@@ -660,12 +596,12 @@ namespace GeneXus.Programs {
          if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
          {
             /* Execute user event: Load */
-            E13462 ();
-            WB460( ) ;
+            E12652 ();
+            WB650( ) ;
          }
       }
 
-      protected void send_integrity_lvl_hashes462( )
+      protected void send_integrity_lvl_hashes652( )
       {
       }
 
@@ -674,21 +610,19 @@ namespace GeneXus.Programs {
          fix_multi_value_controls( ) ;
       }
 
-      protected void STRUP460( )
+      protected void STRUP650( )
       {
          /* Before Start, stand alone formulas. */
          before_start_formulas( ) ;
          /* Execute Start event if defined. */
          context.wbGlbDoneStart = 0;
          /* Execute user event: Start */
-         E11462 ();
+         E11652 ();
          context.wbGlbDoneStart = 1;
          /* After Start, stand alone formulas. */
          if ( StringUtil.StrCmp(context.GetRequestMethod( ), "POST") == 0 )
          {
             /* Read saved SDTs. */
-            ajax_req_read_hidden_sdt(cgiGet( "vEMPLOYEE"), AV10Employee);
-            ajax_req_read_hidden_sdt(cgiGet( "Employee"), AV10Employee);
             /* Read saved values. */
             /* Read variables values. */
             /* Read subfile selected row values. */
@@ -704,62 +638,24 @@ namespace GeneXus.Programs {
       protected void GXStart( )
       {
          /* Execute user event: Start */
-         E11462 ();
+         E11652 ();
          if (returnInSub) return;
       }
 
-      protected void E11462( )
+      protected void E11652( )
       {
          /* Start Routine */
          returnInSub = false;
-         edtavEmployee_employeeid_Visible = 0;
-         AssignProp("", false, edtavEmployee_employeeid_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(edtavEmployee_employeeid_Visible), 5, 0), true);
-      }
-
-      protected void E12462( )
-      {
-         /* 'DoLogout' Routine */
-         returnInSub = false;
-         AV7isOk = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).logout(out  AV8GAMErrorCollection);
-         AV9WebSession.Clear();
-         CallWebObject(formatLink("gamexamplelogin.aspx") );
-         context.wjLocDisableFrm = 1;
       }
 
       protected void nextLoad( )
       {
       }
 
-      protected void E13462( )
+      protected void E12652( )
       {
          /* Load Routine */
          returnInSub = false;
-      }
-
-      protected void wb_table1_15_462( bool wbgen )
-      {
-         if ( wbgen )
-         {
-            /* Table start */
-            sStyleString = "";
-            GxWebStd.gx_table_start( context, tblUnnamedtable1_Internalname, tblUnnamedtable1_Internalname, "", "Table", 0, "", "", 1, 2, sStyleString, "", "", 0);
-            context.WriteHtmlText( "<tr>") ;
-            context.WriteHtmlText( "<td>") ;
-            /* Static images/pictures */
-            ClassString = "Image" + " " + ((StringUtil.StrCmp(imgLogo_gximage, "")==0) ? "GX_Image_logo_Class" : "GX_Image_"+imgLogo_gximage+"_Class");
-            StyleString = "";
-            sImgUrl = (string)(context.GetImagePath( "4b7c8d3b-9d59-4d39-b71d-3e57f0096512", "", context.GetTheme( )));
-            GxWebStd.gx_bitmap( context, imgLogo_Internalname, sImgUrl, "", "", "", context.GetTheme( ), 1, 1, "", "", 0, 0, 0, "px", 0, "px", 0, 0, 0, "", "", StyleString, ClassString, "", "", "", "", " "+"data-gx-image"+" ", "", "", 1, false, false, context.GetImageSrcSet( sImgUrl), "HLP_DownloadApp.htm");
-            context.WriteHtmlText( "</td>") ;
-            context.WriteHtmlText( "</tr>") ;
-            /* End of table */
-            context.WriteHtmlText( "</table>") ;
-            wb_table1_15_462e( true) ;
-         }
-         else
-         {
-            wb_table1_15_462e( false) ;
-         }
       }
 
       public override void setparameters( Object[] obj )
@@ -777,9 +673,9 @@ namespace GeneXus.Programs {
          nGotPars = (short)(1);
          nGXWrapped = (short)(1);
          context.SetWrapped(true);
-         PA462( ) ;
-         WS462( ) ;
-         WE462( ) ;
+         PA652( ) ;
+         WS652( ) ;
+         WE652( ) ;
          cleanup();
          context.SetWrapped(false);
          context.GX_msglist = BackMsgLst;
@@ -801,7 +697,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20252617412170", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202526180174", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -819,8 +715,7 @@ namespace GeneXus.Programs {
          if ( nGXWrapped != 1 )
          {
             context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-            context.AddJavascriptSource("downloadapp.js", "?20252617412174", false, true);
-            context.AddJavascriptSource("UserControls/DownloadAppJsRender.js", "", false, true);
+            context.AddJavascriptSource("wp_downloadapp.js", "?202526180177", false, true);
          }
          /* End function include_jscripts */
       }
@@ -832,13 +727,8 @@ namespace GeneXus.Programs {
 
       protected void init_default_properties( )
       {
-         imgLogo_Internalname = "LOGO";
-         tblUnnamedtable1_Internalname = "UNNAMEDTABLE1";
-         Downloadapp_Internalname = "DOWNLOADAPP";
-         divTablecontent_Internalname = "TABLECONTENT";
+         edtavField_Internalname = "vFIELD";
          divTablemain_Internalname = "TABLEMAIN";
-         edtavEmployee_employeeid_Internalname = "EMPLOYEE_EMPLOYEEID";
-         divHtml_bottomauxiliarcontrols_Internalname = "HTML_BOTTOMAUXILIARCONTROLS";
          divLayoutmaintable_Internalname = "LAYOUTMAINTABLE";
          Form.Internalname = "FORM";
       }
@@ -851,14 +741,13 @@ namespace GeneXus.Programs {
             disableJsOutput();
          }
          init_default_properties( ) ;
-         edtavEmployee_employeeid_Jsonclick = "";
-         edtavEmployee_employeeid_Visible = 1;
+         edtavField_Jsonclick = "";
+         edtavField_Enabled = 1;
          Form.Headerrawhtml = "";
          Form.Background = "";
          Form.Textcolor = 0;
          Form.Backcolor = (int)(0xFFFFFF);
-         Form.Caption = "Download App";
-         context.GX_msglist.DisplayMode = 1;
+         Form.Caption = " Employees";
          if ( context.isSpaRequest( ) )
          {
             enableJsOutput();
@@ -873,7 +762,6 @@ namespace GeneXus.Programs {
       public override void InitializeDynEvents( )
       {
          setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[]}""");
-         setEventMetadata("'DOLOGOUT'","""{"handler":"E12462","iparms":[]}""");
          return  ;
       }
 
@@ -894,23 +782,14 @@ namespace GeneXus.Programs {
          FormProcess = "";
          bodyStyle = "";
          GXKey = "";
-         AV10Employee = new SdtEmployee(context);
          GX_FocusControl = "";
          Form = new GXWebForm();
          sPrefix = "";
-         ClassString = "";
-         StyleString = "";
-         ucDownloadapp = new GXUserControl();
          TempTags = "";
          sEvt = "";
          EvtGridId = "";
          EvtRowId = "";
          sEvtType = "";
-         AV8GAMErrorCollection = new GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError>( context, "GeneXus.Programs.genexussecurity.SdtGAMError", "GeneXus.Programs");
-         AV9WebSession = context.GetSession();
-         sStyleString = "";
-         imgLogo_gximage = "";
-         sImgUrl = "";
          BackMsgLst = new msglist();
          LclMsgLst = new msglist();
          /* GeneXus formulas. */
@@ -922,9 +801,10 @@ namespace GeneXus.Programs {
       private short nGXWrapped ;
       private short wbEnd ;
       private short wbStart ;
+      private short AV77Field ;
       private short nDonePA ;
       private short gxcookieaux ;
-      private int edtavEmployee_employeeid_Visible ;
+      private int edtavField_Enabled ;
       private int idxLst ;
       private string gxfirstwebparm ;
       private string gxfirstwebparm_bkp ;
@@ -936,23 +816,13 @@ namespace GeneXus.Programs {
       private string sPrefix ;
       private string divLayoutmaintable_Internalname ;
       private string divTablemain_Internalname ;
-      private string ClassString ;
-      private string StyleString ;
-      private string divTablecontent_Internalname ;
-      private string Downloadapp_Internalname ;
-      private string divHtml_bottomauxiliarcontrols_Internalname ;
+      private string edtavField_Internalname ;
       private string TempTags ;
-      private string edtavEmployee_employeeid_Internalname ;
-      private string edtavEmployee_employeeid_Jsonclick ;
+      private string edtavField_Jsonclick ;
       private string sEvt ;
       private string EvtGridId ;
       private string EvtRowId ;
       private string sEvtType ;
-      private string sStyleString ;
-      private string tblUnnamedtable1_Internalname ;
-      private string imgLogo_gximage ;
-      private string sImgUrl ;
-      private string imgLogo_Internalname ;
       private bool entryPointCalled ;
       private bool toggleJsOutput ;
       private bool wbLoad ;
@@ -960,14 +830,9 @@ namespace GeneXus.Programs {
       private bool wbErr ;
       private bool gxdyncontrolsrefreshing ;
       private bool returnInSub ;
-      private bool AV7isOk ;
-      private GXUserControl ucDownloadapp ;
-      private IGxSession AV9WebSession ;
       private GXWebForm Form ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
-      private SdtEmployee AV10Employee ;
-      private GXExternalCollection<GeneXus.Programs.genexussecurity.SdtGAMError> AV8GAMErrorCollection ;
       private msglist BackMsgLst ;
       private msglist LclMsgLst ;
    }

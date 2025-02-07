@@ -18,6 +18,7 @@ using GeneXus.XML;
 using GeneXus.Search;
 using GeneXus.Encryption;
 using GeneXus.Http.Client;
+using GeneXus.Http.Server;
 using System.Threading;
 using System.Xml.Serialization;
 using System.Runtime.Serialization;
@@ -42,40 +43,34 @@ namespace GeneXus.Programs {
          dsDefault = context.GetDataStore("Default");
       }
 
-      public void execute( string aP0_EmployeeEmail ,
-                           string aP1_EmployeeAPIPassword ,
-                           out string aP2_ICSLeaveExport )
+      public void execute( out string aP0_ICSLeaveExport )
       {
-         this.AV14EmployeeEmail = aP0_EmployeeEmail;
-         this.AV15EmployeeAPIPassword = aP1_EmployeeAPIPassword;
          this.AV8ICSLeaveExport = "" ;
          initialize();
          ExecuteImpl();
-         aP2_ICSLeaveExport=this.AV8ICSLeaveExport;
+         aP0_ICSLeaveExport=this.AV8ICSLeaveExport;
       }
 
-      public string executeUdp( string aP0_EmployeeEmail ,
-                                string aP1_EmployeeAPIPassword )
+      public string executeUdp( )
       {
-         execute(aP0_EmployeeEmail, aP1_EmployeeAPIPassword, out aP2_ICSLeaveExport);
+         execute(out aP0_ICSLeaveExport);
          return AV8ICSLeaveExport ;
       }
 
-      public void executeSubmit( string aP0_EmployeeEmail ,
-                                 string aP1_EmployeeAPIPassword ,
-                                 out string aP2_ICSLeaveExport )
+      public void executeSubmit( out string aP0_ICSLeaveExport )
       {
-         this.AV14EmployeeEmail = aP0_EmployeeEmail;
-         this.AV15EmployeeAPIPassword = aP1_EmployeeAPIPassword;
          this.AV8ICSLeaveExport = "" ;
          SubmitImpl();
-         aP2_ICSLeaveExport=this.AV8ICSLeaveExport;
+         aP0_ICSLeaveExport=this.AV8ICSLeaveExport;
       }
 
       protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
+         AV17AuthorizationValue = AV16httprequest.GetHeader("Authorization");
+         new logtofile(context ).execute(  AV17AuthorizationValue) ;
+         new logtofile(context ).execute(  StringUtil.ToBase64( "username:password")) ;
          /* Using cursor P00CH2 */
          pr_default.execute(0, new Object[] {AV14EmployeeEmail, AV15EmployeeAPIPassword});
          while ( (pr_default.getStatus(0) != 101) )
@@ -147,6 +142,10 @@ namespace GeneXus.Programs {
       public override void initialize( )
       {
          AV8ICSLeaveExport = "";
+         AV17AuthorizationValue = "";
+         AV16httprequest = new GxHttpRequest( context);
+         AV14EmployeeEmail = "";
+         AV15EmployeeAPIPassword = "";
          P00CH2_A106EmployeeId = new long[1] ;
          P00CH2_A148EmployeeName = new string[] {""} ;
          P00CH2_A188EmployeeAPIPassword = new string[] {""} ;
@@ -189,10 +188,12 @@ namespace GeneXus.Programs {
       private DateTime A129LeaveRequestStartDate ;
       private DateTime A130LeaveRequestEndDate ;
       private string AV8ICSLeaveExport ;
+      private string AV17AuthorizationValue ;
       private string AV14EmployeeEmail ;
       private string AV15EmployeeAPIPassword ;
       private string A188EmployeeAPIPassword ;
       private string A109EmployeeEmail ;
+      private GxHttpRequest AV16httprequest ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private IDataStoreProvider pr_default ;
@@ -207,7 +208,7 @@ namespace GeneXus.Programs {
       private DateTime[] P00CH3_A130LeaveRequestEndDate ;
       private string[] P00CH3_A125LeaveTypeName ;
       private long[] P00CH3_A127LeaveRequestId ;
-      private string aP2_ICSLeaveExport ;
+      private string aP0_ICSLeaveExport ;
    }
 
    public class prc_icsleaveapi__default : DataStoreHelperBase, IDataStoreHelper
