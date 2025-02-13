@@ -108,9 +108,10 @@ namespace GeneXus.Programs {
                                               AV8EmployeeIds.Count ,
                                               A132LeaveRequestStatus ,
                                               A157CompanyLocationId ,
-                                              AV7CompanyLocationId } ,
+                                              AV7CompanyLocationId ,
+                                              A112EmployeeIsActive } ,
                                               new int[]{
-                                              TypeConstants.LONG, TypeConstants.INT, TypeConstants.LONG, TypeConstants.LONG
+                                              TypeConstants.LONG, TypeConstants.INT, TypeConstants.LONG, TypeConstants.LONG, TypeConstants.BOOLEAN
                                               }
          });
          /* Using cursor P001T2 */
@@ -119,12 +120,14 @@ namespace GeneXus.Programs {
          {
             A124LeaveTypeId = P001T2_A124LeaveTypeId[0];
             A100CompanyId = P001T2_A100CompanyId[0];
+            A112EmployeeIsActive = P001T2_A112EmployeeIsActive[0];
             A106EmployeeId = P001T2_A106EmployeeId[0];
             A157CompanyLocationId = P001T2_A157CompanyLocationId[0];
             A132LeaveRequestStatus = P001T2_A132LeaveRequestStatus[0];
             A148EmployeeName = P001T2_A148EmployeeName[0];
             A100CompanyId = P001T2_A100CompanyId[0];
             A157CompanyLocationId = P001T2_A157CompanyLocationId[0];
+            A112EmployeeIsActive = P001T2_A112EmployeeIsActive[0];
             A148EmployeeName = P001T2_A148EmployeeName[0];
             Gxm1sdtleaveeventgroup = new SdtSDTLeaveEventGroup(context);
             Gxm2rootcol.Add(Gxm1sdtleaveeventgroup, 0);
@@ -151,6 +154,7 @@ namespace GeneXus.Programs {
          A132LeaveRequestStatus = "";
          P001T2_A124LeaveTypeId = new long[1] ;
          P001T2_A100CompanyId = new long[1] ;
+         P001T2_A112EmployeeIsActive = new bool[] {false} ;
          P001T2_A106EmployeeId = new long[1] ;
          P001T2_A157CompanyLocationId = new long[1] ;
          P001T2_A132LeaveRequestStatus = new string[] {""} ;
@@ -160,7 +164,7 @@ namespace GeneXus.Programs {
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.dpleaveeventgroup__default(),
             new Object[][] {
                 new Object[] {
-               P001T2_A124LeaveTypeId, P001T2_A100CompanyId, P001T2_A106EmployeeId, P001T2_A157CompanyLocationId, P001T2_A132LeaveRequestStatus, P001T2_A148EmployeeName
+               P001T2_A124LeaveTypeId, P001T2_A100CompanyId, P001T2_A112EmployeeIsActive, P001T2_A106EmployeeId, P001T2_A157CompanyLocationId, P001T2_A132LeaveRequestStatus, P001T2_A148EmployeeName
                }
             }
          );
@@ -177,6 +181,7 @@ namespace GeneXus.Programs {
       private string A148EmployeeName ;
       private DateTime AV5FromDate ;
       private DateTime AV6ToDate ;
+      private bool A112EmployeeIsActive ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private GxSimpleCollection<long> AV8EmployeeIds ;
@@ -184,6 +189,7 @@ namespace GeneXus.Programs {
       private IDataStoreProvider pr_default ;
       private long[] P001T2_A124LeaveTypeId ;
       private long[] P001T2_A100CompanyId ;
+      private bool[] P001T2_A112EmployeeIsActive ;
       private long[] P001T2_A106EmployeeId ;
       private long[] P001T2_A157CompanyLocationId ;
       private string[] P001T2_A132LeaveRequestStatus ;
@@ -200,15 +206,17 @@ namespace GeneXus.Programs {
                                              int AV8EmployeeIds_Count ,
                                              string A132LeaveRequestStatus ,
                                              long A157CompanyLocationId ,
-                                             long AV7CompanyLocationId )
+                                             long AV7CompanyLocationId ,
+                                             bool A112EmployeeIsActive )
       {
          System.Text.StringBuilder sWhereString = new System.Text.StringBuilder();
          string scmdbuf;
          short[] GXv_int1 = new short[1];
          Object[] GXv_Object2 = new Object[2];
-         scmdbuf = "SELECT DISTINCT NULL AS LeaveTypeId, NULL AS CompanyId, EmployeeId, NULL AS CompanyLocationId, NULL AS LeaveRequestStatus, EmployeeName FROM ( SELECT T1.LeaveTypeId, T2.CompanyId, T1.EmployeeId, T3.CompanyLocationId, T1.LeaveRequestStatus, T4.EmployeeName FROM (((LeaveRequest T1 INNER JOIN LeaveType T2 ON T2.LeaveTypeId = T1.LeaveTypeId) INNER JOIN Company T3 ON T3.CompanyId = T2.CompanyId) INNER JOIN Employee T4 ON T4.EmployeeId = T1.EmployeeId)";
+         scmdbuf = "SELECT DISTINCT NULL AS LeaveTypeId, NULL AS CompanyId, NULL AS EmployeeIsActive, EmployeeId, NULL AS CompanyLocationId, NULL AS LeaveRequestStatus, EmployeeName FROM ( SELECT T1.LeaveTypeId, T2.CompanyId, T4.EmployeeIsActive, T1.EmployeeId, T3.CompanyLocationId, T1.LeaveRequestStatus, T4.EmployeeName FROM (((LeaveRequest T1 INNER JOIN LeaveType T2 ON T2.LeaveTypeId = T1.LeaveTypeId) INNER JOIN Company T3 ON T3.CompanyId = T2.CompanyId) INNER JOIN Employee T4 ON T4.EmployeeId = T1.EmployeeId)";
          AddWhere(sWhereString, "(T1.LeaveRequestStatus = ( 'Approved') or T1.LeaveRequestStatus = ( 'Pending'))");
          AddWhere(sWhereString, "(T3.CompanyLocationId = :AV7CompanyLocationId)");
+         AddWhere(sWhereString, "(T4.EmployeeIsActive = TRUE)");
          if ( AV8EmployeeIds_Count > 0 )
          {
             AddWhere(sWhereString, "("+new GxDbmsUtils( new GxPostgreSql()).ValueList(AV8EmployeeIds, "T1.EmployeeId IN (", ")")+")");
@@ -229,7 +237,7 @@ namespace GeneXus.Programs {
          switch ( cursor )
          {
                case 0 :
-                     return conditional_P001T2(context, (long)dynConstraints[0] , (GxSimpleCollection<long>)dynConstraints[1] , (int)dynConstraints[2] , (string)dynConstraints[3] , (long)dynConstraints[4] , (long)dynConstraints[5] );
+                     return conditional_P001T2(context, (long)dynConstraints[0] , (GxSimpleCollection<long>)dynConstraints[1] , (int)dynConstraints[2] , (string)dynConstraints[3] , (long)dynConstraints[4] , (long)dynConstraints[5] , (bool)dynConstraints[6] );
          }
          return base.getDynamicStatement(cursor, context, dynConstraints);
       }
@@ -266,10 +274,11 @@ namespace GeneXus.Programs {
              case 0 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);
                 ((long[]) buf[1])[0] = rslt.getLong(2);
-                ((long[]) buf[2])[0] = rslt.getLong(3);
+                ((bool[]) buf[2])[0] = rslt.getBool(3);
                 ((long[]) buf[3])[0] = rslt.getLong(4);
-                ((string[]) buf[4])[0] = rslt.getString(5, 20);
-                ((string[]) buf[5])[0] = rslt.getString(6, 100);
+                ((long[]) buf[4])[0] = rslt.getLong(5);
+                ((string[]) buf[5])[0] = rslt.getString(6, 20);
+                ((string[]) buf[6])[0] = rslt.getString(7, 100);
                 return;
        }
     }

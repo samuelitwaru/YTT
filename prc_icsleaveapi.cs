@@ -68,9 +68,12 @@ namespace GeneXus.Programs {
       {
          /* GeneXus formulas */
          /* Output device settings */
-         AV17AuthorizationValue = AV16httprequest.GetHeader("Authorization");
-         new logtofile(context ).execute(  AV17AuthorizationValue) ;
-         new logtofile(context ).execute(  StringUtil.ToBase64( "username:password")) ;
+         AV17AuthorizationValue = StringUtil.FromBase64( StringUtil.StringReplace( AV16httprequest.GetHeader("Authorization"), "Basic ", ""));
+         AV21CredsCollection = (GxSimpleCollection<string>)(GxRegex.Split(AV17AuthorizationValue,":"));
+         AV14EmployeeEmail = ((string)AV21CredsCollection.Item(1));
+         AV15EmployeeAPIPassword = ((string)AV21CredsCollection.Item(2));
+         new logtofile(context ).execute(  StringUtil.FromBase64( "dXNlcm5hbWU6cGFzc3dvcmQ=")) ;
+         new logtofile(context ).execute(  AV14EmployeeEmail+":"+AV15EmployeeAPIPassword) ;
          /* Using cursor P00CH2 */
          pr_default.execute(0, new Object[] {AV14EmployeeEmail, AV15EmployeeAPIPassword});
          while ( (pr_default.getStatus(0) != 101) )
@@ -84,6 +87,48 @@ namespace GeneXus.Programs {
             AV8ICSLeaveExport += "PRODID:-//Yukon Software//APiCalConverter//EN" + StringUtil.NewLine( );
             AV8ICSLeaveExport += "VERSION:2.0" + StringUtil.NewLine( );
             AV8ICSLeaveExport += "CALSCALE:GREGORIAN" + StringUtil.NewLine( );
+            AV8ICSLeaveExport += "BEGIN:VTIMEZONE" + StringUtil.NewLine( );
+            AV8ICSLeaveExport += "TZID:EET" + StringUtil.NewLine( );
+            AV8ICSLeaveExport += "LAST-MODIFIED:20240422T053450Z" + StringUtil.NewLine( );
+            AV8ICSLeaveExport += "TZURL:https://www.tzurl.org/zoneinfo/EET" + StringUtil.NewLine( );
+            AV8ICSLeaveExport += "X-LIC-LOCATION:EET";
+            AV8ICSLeaveExport += "X-PROLEPTIC-TZNAME;X-NO-BIG-BANG=TRUE:EET" + StringUtil.NewLine( );
+            AV8ICSLeaveExport += "BEGIN:DAYLIGHT" + StringUtil.NewLine( );
+            AV8ICSLeaveExport += "TZNAME:EEST" + StringUtil.NewLine( );
+            AV8ICSLeaveExport += "TZOFFSETFROM:+0200" + StringUtil.NewLine( );
+            AV8ICSLeaveExport += "TZOFFSETTO:+0300" + StringUtil.NewLine( );
+            AV8ICSLeaveExport += "DTSTART:19770403T030000" + StringUtil.NewLine( );
+            AV8ICSLeaveExport += "RRULE:FREQ=YEARLY;UNTIL=19800406T010000Z;BYMONTH=4;BYDAY=1SU" + StringUtil.NewLine( );
+            AV8ICSLeaveExport += "END:DAYLIGHT" + StringUtil.NewLine( );
+            AV8ICSLeaveExport += "BEGIN:STANDARD" + StringUtil.NewLine( );
+            AV8ICSLeaveExport += "TZNAME:EET" + StringUtil.NewLine( );
+            AV8ICSLeaveExport += "TZOFFSETFROM:+0300" + StringUtil.NewLine( );
+            AV8ICSLeaveExport += "TZOFFSETTO:+0200" + StringUtil.NewLine( );
+            AV8ICSLeaveExport += "DTSTART:19770925T040000" + StringUtil.NewLine( );
+            AV8ICSLeaveExport += "RDATE:19781001T040000" + StringUtil.NewLine( );
+            AV8ICSLeaveExport += "END:STANDARD" + StringUtil.NewLine( );
+            AV8ICSLeaveExport += "BEGIN:STANDARD" + StringUtil.NewLine( );
+            AV8ICSLeaveExport += "TZNAME:EET" + StringUtil.NewLine( );
+            AV8ICSLeaveExport += "TZOFFSETFROM:+0300" + StringUtil.NewLine( );
+            AV8ICSLeaveExport += "TZOFFSETTO:+0200" + StringUtil.NewLine( );
+            AV8ICSLeaveExport += "DTSTART:19790930T040000" + StringUtil.NewLine( );
+            AV8ICSLeaveExport += "RRULE:FREQ=YEARLY;UNTIL=19950924T010000Z;BYMONTH=9;BYDAY=-1SU" + StringUtil.NewLine( );
+            AV8ICSLeaveExport += "END:STANDARD" + StringUtil.NewLine( );
+            AV8ICSLeaveExport += "BEGIN:DAYLIGHT" + StringUtil.NewLine( );
+            AV8ICSLeaveExport += "TZNAME:EEST" + StringUtil.NewLine( );
+            AV8ICSLeaveExport += "TZOFFSETFROM:+0200" + StringUtil.NewLine( );
+            AV8ICSLeaveExport += "TZOFFSETTO:+0300" + StringUtil.NewLine( );
+            AV8ICSLeaveExport += "DTSTART:19810329T030000" + StringUtil.NewLine( );
+            AV8ICSLeaveExport += "RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU" + StringUtil.NewLine( );
+            AV8ICSLeaveExport += "END:DAYLIGHT" + StringUtil.NewLine( );
+            AV8ICSLeaveExport += "BEGIN:STANDARD" + StringUtil.NewLine( );
+            AV8ICSLeaveExport += "TZNAME:EET" + StringUtil.NewLine( );
+            AV8ICSLeaveExport += "TZOFFSETFROM:+0300" + StringUtil.NewLine( );
+            AV8ICSLeaveExport += "TZOFFSETTO:+0200" + StringUtil.NewLine( );
+            AV8ICSLeaveExport += "DTSTART:19961027T040000" + StringUtil.NewLine( );
+            AV8ICSLeaveExport += "RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU" + StringUtil.NewLine( );
+            AV8ICSLeaveExport += "END:STANDARD" + StringUtil.NewLine( );
+            AV8ICSLeaveExport += "END:VTIMEZONE" + StringUtil.NewLine( );
             AV8ICSLeaveExport += "X-WR-TIMEZONE:Europe/Bucharest" + StringUtil.NewLine( );
             AV8ICSLeaveExport += "X-WR-CALNAME:Absence" + StringUtil.NewLine( );
             AV8ICSLeaveExport += "X-WR-CALDESC:" + StringUtil.NewLine( );
@@ -111,11 +156,6 @@ namespace GeneXus.Programs {
                AV8ICSLeaveExport += "DTEND;VALUE=DATE:" + GXt_char1 + StringUtil.NewLine( );
                AV8ICSLeaveExport += "SUMMARY:" + StringUtil.Trim( A148EmployeeName) + " | " + StringUtil.Trim( A125LeaveTypeName) + StringUtil.NewLine( );
                AV8ICSLeaveExport += "UID:" + StringUtil.Trim( StringUtil.Str( (decimal)(A127LeaveRequestId), 10, 0)) + StringUtil.Trim( A109EmployeeEmail) + StringUtil.NewLine( );
-               AV8ICSLeaveExport += "SEQUENCE:0" + StringUtil.NewLine( );
-               AV8ICSLeaveExport += "X-CONFLUENCE-SUBCALENDAR-TYPE:subscription" + StringUtil.NewLine( );
-               AV8ICSLeaveExport += "CATEGORIES:subscription" + StringUtil.NewLine( );
-               AV8ICSLeaveExport += "TRANSP:TRANSPARENT" + StringUtil.NewLine( );
-               AV8ICSLeaveExport += "STATUS:CONFIRMED" + StringUtil.NewLine( );
                AV8ICSLeaveExport += "END:VEVENT" + StringUtil.NewLine( );
                pr_default.readNext(1);
             }
@@ -144,6 +184,7 @@ namespace GeneXus.Programs {
          AV8ICSLeaveExport = "";
          AV17AuthorizationValue = "";
          AV16httprequest = new GxHttpRequest( context);
+         AV21CredsCollection = new GxSimpleCollection<string>();
          AV14EmployeeEmail = "";
          AV15EmployeeAPIPassword = "";
          P00CH2_A106EmployeeId = new long[1] ;
@@ -196,6 +237,7 @@ namespace GeneXus.Programs {
       private GxHttpRequest AV16httprequest ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
+      private GxSimpleCollection<string> AV21CredsCollection ;
       private IDataStoreProvider pr_default ;
       private long[] P00CH2_A106EmployeeId ;
       private string[] P00CH2_A148EmployeeName ;
