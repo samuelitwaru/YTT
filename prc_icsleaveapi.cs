@@ -43,25 +43,31 @@ namespace GeneXus.Programs {
          dsDefault = context.GetDataStore("Default");
       }
 
-      public void execute( out string aP0_ICSLeaveExport )
+      public void execute( out string aP0_ICSLeaveExport ,
+                           out string aP1_ErrorMessage )
       {
          this.AV8ICSLeaveExport = "" ;
+         this.AV27ErrorMessage = "" ;
          initialize();
          ExecuteImpl();
          aP0_ICSLeaveExport=this.AV8ICSLeaveExport;
+         aP1_ErrorMessage=this.AV27ErrorMessage;
       }
 
-      public string executeUdp( )
+      public string executeUdp( out string aP0_ICSLeaveExport )
       {
-         execute(out aP0_ICSLeaveExport);
-         return AV8ICSLeaveExport ;
+         execute(out aP0_ICSLeaveExport, out aP1_ErrorMessage);
+         return AV27ErrorMessage ;
       }
 
-      public void executeSubmit( out string aP0_ICSLeaveExport )
+      public void executeSubmit( out string aP0_ICSLeaveExport ,
+                                 out string aP1_ErrorMessage )
       {
          this.AV8ICSLeaveExport = "" ;
+         this.AV27ErrorMessage = "" ;
          SubmitImpl();
          aP0_ICSLeaveExport=this.AV8ICSLeaveExport;
+         aP1_ErrorMessage=this.AV27ErrorMessage;
       }
 
       protected override void ExecutePrivate( )
@@ -72,6 +78,8 @@ namespace GeneXus.Programs {
          AV21CredsCollection = (GxSimpleCollection<string>)(GxRegex.Split(AV17AuthorizationValue,":"));
          AV14EmployeeEmail = ((string)AV21CredsCollection.Item(1));
          AV15EmployeeAPIPassword = ((string)AV21CredsCollection.Item(2));
+         new logtofile(context ).execute(  AV14EmployeeEmail+" : "+AV15EmployeeAPIPassword) ;
+         AV28GXLvl10 = 0;
          /* Using cursor P00CH2 */
          pr_default.execute(0, new Object[] {AV14EmployeeEmail, AV15EmployeeAPIPassword});
          while ( (pr_default.getStatus(0) != 101) )
@@ -80,6 +88,7 @@ namespace GeneXus.Programs {
             A148EmployeeName = P00CH2_A148EmployeeName[0];
             A188EmployeeAPIPassword = P00CH2_A188EmployeeAPIPassword[0];
             A109EmployeeEmail = P00CH2_A109EmployeeEmail[0];
+            AV28GXLvl10 = 1;
             AV8ICSLeaveExport = "";
             AV8ICSLeaveExport += "BEGIN:VCALENDAR" + StringUtil.NewLine( );
             AV8ICSLeaveExport += "PRODID:-//Yukon Software//APiCalConverter//EN" + StringUtil.NewLine( );
@@ -163,6 +172,10 @@ namespace GeneXus.Programs {
             if (true) break;
          }
          pr_default.close(0);
+         if ( AV28GXLvl10 == 0 )
+         {
+            AV27ErrorMessage = "Employee not found";
+         }
          new logtofile(context ).execute(  AV8ICSLeaveExport) ;
          cleanup();
       }
@@ -180,6 +193,7 @@ namespace GeneXus.Programs {
       public override void initialize( )
       {
          AV8ICSLeaveExport = "";
+         AV27ErrorMessage = "";
          AV17AuthorizationValue = "";
          AV16httprequest = new GxHttpRequest( context);
          AV21CredsCollection = new GxSimpleCollection<string>();
@@ -217,6 +231,7 @@ namespace GeneXus.Programs {
          /* GeneXus formulas. */
       }
 
+      private short AV28GXLvl10 ;
       private long A106EmployeeId ;
       private long A124LeaveTypeId ;
       private long A127LeaveRequestId ;
@@ -227,6 +242,7 @@ namespace GeneXus.Programs {
       private DateTime A129LeaveRequestStartDate ;
       private DateTime A130LeaveRequestEndDate ;
       private string AV8ICSLeaveExport ;
+      private string AV27ErrorMessage ;
       private string AV17AuthorizationValue ;
       private string AV14EmployeeEmail ;
       private string AV15EmployeeAPIPassword ;
@@ -249,6 +265,7 @@ namespace GeneXus.Programs {
       private string[] P00CH3_A125LeaveTypeName ;
       private long[] P00CH3_A127LeaveRequestId ;
       private string aP0_ICSLeaveExport ;
+      private string aP1_ErrorMessage ;
    }
 
    public class prc_icsleaveapi__default : DataStoreHelperBase, IDataStoreHelper

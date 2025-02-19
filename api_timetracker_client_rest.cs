@@ -84,7 +84,8 @@ namespace GeneXus.Programs {
          restLocation = gxobjppt.Location ;
       }
 
-      public void gxep_api_icsleaveapi( out string aP0_ICSLeaveExport )
+      public void gxep_api_icsleaveapi( out string aP0_ICSLeaveExport ,
+                                        out string aP1_ErrorMessage )
       {
          restCliAPI_ICSLeaveAPI = new GXRestAPIClient();
          if ( restLocation == null )
@@ -101,10 +102,12 @@ namespace GeneXus.Programs {
             gxProperties.ErrorMessage = restCliAPI_ICSLeaveAPI.ErrorMessage;
             gxProperties.StatusCode = restCliAPI_ICSLeaveAPI.StatusCode;
             aP0_ICSLeaveExport = "";
+            aP1_ErrorMessage = "";
          }
          else
          {
             aP0_ICSLeaveExport = restCliAPI_ICSLeaveAPI.GetBodyString("ICSLeaveExport");
+            aP1_ErrorMessage = restCliAPI_ICSLeaveAPI.GetBodyString("ErrorMessage");
          }
          /* API_ICSLeaveAPI Constructor */
       }
@@ -119,6 +122,7 @@ namespace GeneXus.Programs {
          gxProperties = new GxObjectProperties();
          restCliAPI_ICSLeaveAPI = new GXRestAPIClient();
          aP0_ICSLeaveExport = "";
+         aP1_ErrorMessage = "";
          /* GeneXus formulas. */
       }
 
@@ -129,6 +133,7 @@ namespace GeneXus.Programs {
       protected IGxDataStore dsGAM ;
       protected IGxDataStore dsDefault ;
       protected string aP0_ICSLeaveExport ;
+      protected string aP1_ErrorMessage ;
    }
 
 }

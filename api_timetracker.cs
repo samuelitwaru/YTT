@@ -77,12 +77,14 @@ namespace GeneXus.Programs {
          cleanup();
       }
 
-      public void gxep_api_icsleaveapi( out string aP0_ICSLeaveExport )
+      public void gxep_api_icsleaveapi( out string aP0_ICSLeaveExport ,
+                                        out string aP1_ErrorMessage )
       {
          initialize();
          /* API_ICSLeaveAPI Constructor */
-         new prc_icsleaveapi(context ).execute( out  AV12ICSLeaveExport) ;
+         new prc_icsleaveapi(context ).execute( out  AV12ICSLeaveExport, out  AV11ErrorMessage) ;
          aP0_ICSLeaveExport=this.AV12ICSLeaveExport;
+         aP1_ErrorMessage=this.AV11ErrorMessage;
       }
 
       public override void cleanup( )
@@ -93,14 +95,17 @@ namespace GeneXus.Programs {
       public override void initialize( )
       {
          AV12ICSLeaveExport = "";
+         AV11ErrorMessage = "";
          /* GeneXus formulas. */
       }
 
       protected string Gx_restmethod ;
       protected string AV12ICSLeaveExport ;
+      protected string AV11ErrorMessage ;
       protected IGxDataStore dsGAM ;
       protected IGxDataStore dsDefault ;
       protected string aP0_ICSLeaveExport ;
+      protected string aP1_ErrorMessage ;
    }
 
 }
