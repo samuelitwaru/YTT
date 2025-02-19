@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: "API_TimeTracker"
   description: "API_Time Tracker"
-  version: "20250207033909"
+  version: "20250219005155"
 servers:
   - url: https://staging.timetracker.yukon.software/api
 paths:

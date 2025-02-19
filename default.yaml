@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: "YTT_version4"
-  version: "20250207033909"
+  version: "20250219005155"
 servers:
   - url: http://localhost:8082/YTT_version4NETPostgreSQL14/rest
 paths:
@@ -2283,29 +2283,6 @@ paths:
                 $ref: "#/components/schemas/WPLeaveReportLoadDVComboOutput"
         404:
           description: "Not found"
-  /WP_DownloadAppGetFilterData:
-    post:
-      tags:
-        - WP_DownloadAppGetFilterData
-      operationId: "WP_DownloadAppGetFilterData"
-      summary: "WP_Download App Get Filter Data"
-      security: 
-        - oAuthGXGAM: []
-      requestBody:
-        required: false
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/WP_DownloadAppGetFilterDataInput"
-      responses:
-        200:
-          description: "Successful operation"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/WP_DownloadAppGetFilterDataOutput"
-        404:
-          description: "Not found"
   /ComingSoonPanel_Level_Detail:
     get:
       tags:
@@ -3698,14 +3675,6 @@ components:
       properties:
         Combo_DataJson:
           type: "string"
-    WP_DownloadAppGetFilterDataOutput:
-      properties:
-        OptionsJson:
-          type: "string"
-        OptionsDescJson:
-          type: "string"
-        OptionIndexesJson:
-          type: "string"
     CompanyLocationWWGetFilterDataInput:  
       properties:
         DDOName:
@@ -4213,14 +4182,6 @@ components:
         TrnMode:
           type: "string"
         SearchTxtParms:
-          type: "string"
-    WP_DownloadAppGetFilterDataInput:  
-      properties:
-        DDOName:
-          type: "string"
-        SearchTxtParms:
-          type: "string"
-        SearchTxtTo:
           type: "string"
     GeneXus.Common.DirectionsRequestParameters:
       properties:

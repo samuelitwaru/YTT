@@ -46,8 +46,6 @@
  	<Compile Include="$(WebDirectory)\type_SdtSDTEmployeeLeaveDetails_LeaveTypeItem.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDTEmployeeLeaveDetails_LeaveTypeItem_LeaveRequestItem.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDTEmployeeProject_SDTEmployeeProjectItem.cs" />
- 	<Compile Include="$(WebDirectory)\type_SdtSDTEmployeeProjectHours.cs" />
- 	<Compile Include="$(WebDirectory)\type_SdtSDTEmployeeProjectHours_ProjectHoursItem.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDTEmployeeToLogHours_SDTEmployeeToLogHoursItem.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDTEmployeeWeekReport.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDTEmployeeWorkHourLogs.cs" />
@@ -59,7 +57,6 @@
  	<Compile Include="$(WebDirectory)\type_SdtSDTLeaveType.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDTPage.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDTProject.cs" />
- 	<Compile Include="$(WebDirectory)\type_SdtSDTRow_SDTRowItem.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDTWorkHourLog_SDTWorkHourLogItem.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDTWorkHourLogReport.cs" />
  	<Compile Include="$(WebDirectory)\type_SdtSDTWorkHourLogReport_WeekCollectionItem.cs" />

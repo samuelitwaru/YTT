@@ -72,8 +72,6 @@ namespace GeneXus.Programs {
          AV21CredsCollection = (GxSimpleCollection<string>)(GxRegex.Split(AV17AuthorizationValue,":"));
          AV14EmployeeEmail = ((string)AV21CredsCollection.Item(1));
          AV15EmployeeAPIPassword = ((string)AV21CredsCollection.Item(2));
-         new logtofile(context ).execute(  StringUtil.FromBase64( "dXNlcm5hbWU6cGFzc3dvcmQ=")) ;
-         new logtofile(context ).execute(  AV14EmployeeEmail+":"+AV15EmployeeAPIPassword) ;
          /* Using cursor P00CH2 */
          pr_default.execute(0, new Object[] {AV14EmployeeEmail, AV15EmployeeAPIPassword});
          while ( (pr_default.getStatus(0) != 101) )
@@ -91,7 +89,7 @@ namespace GeneXus.Programs {
             AV8ICSLeaveExport += "TZID:EET" + StringUtil.NewLine( );
             AV8ICSLeaveExport += "LAST-MODIFIED:20240422T053450Z" + StringUtil.NewLine( );
             AV8ICSLeaveExport += "TZURL:https://www.tzurl.org/zoneinfo/EET" + StringUtil.NewLine( );
-            AV8ICSLeaveExport += "X-LIC-LOCATION:EET";
+            AV8ICSLeaveExport += "X-LIC-LOCATION:EET" + StringUtil.NewLine( );
             AV8ICSLeaveExport += "X-PROLEPTIC-TZNAME;X-NO-BIG-BANG=TRUE:EET" + StringUtil.NewLine( );
             AV8ICSLeaveExport += "BEGIN:DAYLIGHT" + StringUtil.NewLine( );
             AV8ICSLeaveExport += "TZNAME:EEST" + StringUtil.NewLine( );
