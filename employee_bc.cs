@@ -327,13 +327,6 @@ namespace GeneXus.Programs {
          /* Start Routine */
          returnInSub = false;
          new GeneXus.Programs.wwpbaseobjects.loadwwpcontext(context ).execute( out  AV8WWPContext) ;
-         /* Execute user subroutine: 'ATTRIBUTESSECURITYCODE' */
-         S112 ();
-         if ( returnInSub )
-         {
-            returnInSub = true;
-            if (true) return;
-         }
          AV11TrnContext.FromXml(AV12WebSession.Get("TrnContext"), null, "", "");
          if ( ( StringUtil.StrCmp(AV11TrnContext.gxTpr_Transactionname, AV33Pgmname) == 0 ) && ( StringUtil.StrCmp(Gx_mode, "INS") == 0 ) )
          {
@@ -363,12 +356,6 @@ namespace GeneXus.Programs {
          GXt_char1 = AV31EmployeeAPIPassword;
          new prc_setemployeepassword(context ).execute(  A106EmployeeId, out  GXt_char1) ;
          AV31EmployeeAPIPassword = GXt_char1;
-      }
-
-      protected void S112( )
-      {
-         /* 'ATTRIBUTESSECURITYCODE' Routine */
-         returnInSub = false;
       }
 
       protected void E140F2( )
