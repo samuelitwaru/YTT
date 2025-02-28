@@ -13,4 +13,14 @@
 "VariableAlias": [],
 "ServiceMethod":"gxep_api_icsleaveapi",
 "Implementation":"Prc_ICSLeaveAPI"
+},
+{
+"Verb":"GET",
+"PathRegexp":"example",
+"Path":"example",
+"Name":"example",
+"Bodystyle":"Wrapped",
+"VariableAlias": [],
+"ServiceMethod":"gxep_example",
+"Implementation":"Prc_Example"
 }]}

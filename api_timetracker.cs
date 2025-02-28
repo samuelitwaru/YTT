@@ -35,6 +35,10 @@ namespace GeneXus.Programs {
          {
             return GAMSecurityLevel.SecurityNone ;
          }
+         else if ( StringUtil.StrCmp(permissionMethod, "gxep_example") == 0 )
+         {
+            return GAMSecurityLevel.SecurityNone ;
+         }
          return GAMSecurityLevel.SecurityLow ;
       }
 
@@ -77,14 +81,34 @@ namespace GeneXus.Programs {
          cleanup();
       }
 
-      public void gxep_api_icsleaveapi( out string aP0_ICSLeaveExport ,
-                                        out string aP1_ErrorMessage )
+      protected void E11012( )
+      {
+         /* Api_icsleaveapi_After Routine */
+         returnInSub = false;
+         new logtofile(context ).execute(  AV15result) ;
+      }
+
+      public void gxep_api_icsleaveapi( out string aP0_result )
       {
          initialize();
          /* API_ICSLeaveAPI Constructor */
-         new prc_icsleaveapi(context ).execute( out  AV12ICSLeaveExport, out  AV11ErrorMessage) ;
-         aP0_ICSLeaveExport=this.AV12ICSLeaveExport;
-         aP1_ErrorMessage=this.AV11ErrorMessage;
+         new prc_icsleaveapi(context ).execute( out  AV12ICSLeaveExport) ;
+         /* Execute user event: Api_icsleaveapi.After */
+         E11012 ();
+         if ( returnInSub )
+         {
+            aP0_result=this.AV15result;
+            return;
+         }
+         aP0_result=this.AV15result;
+      }
+
+      public void gxep_example( out SdtSDT_Example aP0_SDT_Example )
+      {
+         initialize();
+         /* Example Constructor */
+         new prc_example(context ).execute( out  AV15result) ;
+         aP0_SDT_Example=this.AV16SDT_Example;
       }
 
       public override void cleanup( )
@@ -94,18 +118,21 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
+         AV15result = "";
          AV12ICSLeaveExport = "";
-         AV11ErrorMessage = "";
+         AV16SDT_Example = new SdtSDT_Example(context);
          /* GeneXus formulas. */
       }
 
       protected string Gx_restmethod ;
+      protected bool returnInSub ;
+      protected string AV15result ;
       protected string AV12ICSLeaveExport ;
-      protected string AV11ErrorMessage ;
       protected IGxDataStore dsGAM ;
       protected IGxDataStore dsDefault ;
-      protected string aP0_ICSLeaveExport ;
-      protected string aP1_ErrorMessage ;
+      protected string aP0_result ;
+      protected SdtSDT_Example AV16SDT_Example ;
+      protected SdtSDT_Example aP0_SDT_Example ;
    }
 
 }

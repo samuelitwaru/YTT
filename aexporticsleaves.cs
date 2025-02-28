@@ -18,42 +18,359 @@ using GeneXus.XML;
 using GeneXus.Search;
 using GeneXus.Encryption;
 using GeneXus.Http.Client;
+using GeneXus.Http.Server;
 using System.Threading;
 using System.Xml.Serialization;
 using System.Runtime.Serialization;
 namespace GeneXus.Programs {
-   public class aexporticsleaves : GXProcedure
+   public class aexporticsleaves : GXWebProcedure
    {
-      public static int Main( string[] args )
+      public override void webExecute( )
       {
-         return new aexporticsleaves().MainImpl(args); ;
-      }
-
-      public int executeCmdLine( string[] args )
-      {
-         return ExecuteCmdLine(args); ;
-      }
-
-      protected override int ExecuteCmdLine( string[] args )
-      {
-         context.StatusMessage( "Command line using complex types not supported." );
-         return GX.GXRuntime.ExitCode ;
-      }
-
-      protected override bool IntegratedSecurityEnabled
-      {
-         get {
-            return true ;
+         context.SetDefaultTheme("WorkWithPlusDS", true);
+         initialize();
+         if ( ! context.isAjaxRequest( ) )
+         {
+            GXSoapHTTPResponse.AppendHeader("Content-type", "text/xml;charset=utf-8");
          }
-
-      }
-
-      protected override GAMSecurityLevel IntegratedSecurityLevel
-      {
-         get {
-            return GAMSecurityLevel.SecurityHigh ;
+         if ( StringUtil.StrCmp(StringUtil.Lower( GXSoapHTTPRequest.Method), "get") == 0 )
+         {
+            if ( StringUtil.StrCmp(StringUtil.Lower( GXSoapHTTPRequest.QueryString), "wsdl") == 0 )
+            {
+               GXSoapXMLWriter.OpenResponse(GXSoapHTTPResponse);
+               GXSoapXMLWriter.WriteStartDocument("utf-8", 0);
+               GXSoapXMLWriter.WriteStartElement("definitions");
+               GXSoapXMLWriter.WriteAttribute("name", "ExportICSLeaves");
+               GXSoapXMLWriter.WriteAttribute("targetNamespace", "YTT_version4");
+               GXSoapXMLWriter.WriteAttribute("xmlns:wsdlns", "YTT_version4");
+               GXSoapXMLWriter.WriteAttribute("xmlns:soap", "http://schemas.xmlsoap.org/wsdl/soap/");
+               GXSoapXMLWriter.WriteAttribute("xmlns:xsd", "http://www.w3.org/2001/XMLSchema");
+               GXSoapXMLWriter.WriteAttribute("xmlns", "http://schemas.xmlsoap.org/wsdl/");
+               GXSoapXMLWriter.WriteAttribute("xmlns:tns", "YTT_version4");
+               GXSoapXMLWriter.WriteStartElement("types");
+               GXSoapXMLWriter.WriteStartElement("schema");
+               GXSoapXMLWriter.WriteAttribute("targetNamespace", "YTT_version4");
+               GXSoapXMLWriter.WriteAttribute("xmlns", "http://www.w3.org/2001/XMLSchema");
+               GXSoapXMLWriter.WriteAttribute("xmlns:SOAP-ENC", "http://schemas.xmlsoap.org/soap/encoding/");
+               GXSoapXMLWriter.WriteAttribute("elementFormDefault", "qualified");
+               GXSoapXMLWriter.WriteStartElement("complexType");
+               GXSoapXMLWriter.WriteAttribute("name", "ArrayOfint");
+               GXSoapXMLWriter.WriteStartElement("sequence");
+               GXSoapXMLWriter.WriteStartElement("element");
+               GXSoapXMLWriter.WriteAttribute("minOccurs", "0");
+               GXSoapXMLWriter.WriteAttribute("maxOccurs", "unbounded");
+               GXSoapXMLWriter.WriteAttribute("name", "item");
+               GXSoapXMLWriter.WriteAttribute("type", "xsd:long");
+               GXSoapXMLWriter.WriteEndElement();
+               GXSoapXMLWriter.WriteEndElement();
+               GXSoapXMLWriter.WriteEndElement();
+               GXSoapXMLWriter.WriteStartElement("element");
+               GXSoapXMLWriter.WriteAttribute("name", "ExportICSLeaves.Execute");
+               GXSoapXMLWriter.WriteStartElement("complexType");
+               GXSoapXMLWriter.WriteStartElement("sequence");
+               GXSoapXMLWriter.WriteElement("element", "");
+               GXSoapXMLWriter.WriteAttribute("minOccurs", "1");
+               GXSoapXMLWriter.WriteAttribute("maxOccurs", "1");
+               GXSoapXMLWriter.WriteAttribute("name", "Fromdate");
+               GXSoapXMLWriter.WriteAttribute("type", "xsd:date");
+               GXSoapXMLWriter.WriteElement("element", "");
+               GXSoapXMLWriter.WriteAttribute("minOccurs", "1");
+               GXSoapXMLWriter.WriteAttribute("maxOccurs", "1");
+               GXSoapXMLWriter.WriteAttribute("name", "Todate");
+               GXSoapXMLWriter.WriteAttribute("type", "xsd:date");
+               GXSoapXMLWriter.WriteElement("element", "");
+               GXSoapXMLWriter.WriteAttribute("minOccurs", "1");
+               GXSoapXMLWriter.WriteAttribute("maxOccurs", "1");
+               GXSoapXMLWriter.WriteAttribute("name", "Companylocationid");
+               GXSoapXMLWriter.WriteAttribute("type", "xsd:long");
+               GXSoapXMLWriter.WriteElement("element", "");
+               GXSoapXMLWriter.WriteAttribute("minOccurs", "1");
+               GXSoapXMLWriter.WriteAttribute("maxOccurs", "1");
+               GXSoapXMLWriter.WriteAttribute("name", "Employeeids");
+               GXSoapXMLWriter.WriteAttribute("type", "tns:ArrayOfint");
+               GXSoapXMLWriter.WriteEndElement();
+               GXSoapXMLWriter.WriteEndElement();
+               GXSoapXMLWriter.WriteEndElement();
+               GXSoapXMLWriter.WriteStartElement("element");
+               GXSoapXMLWriter.WriteAttribute("name", "ExportICSLeaves.ExecuteResponse");
+               GXSoapXMLWriter.WriteStartElement("complexType");
+               GXSoapXMLWriter.WriteStartElement("sequence");
+               GXSoapXMLWriter.WriteElement("element", "");
+               GXSoapXMLWriter.WriteAttribute("minOccurs", "1");
+               GXSoapXMLWriter.WriteAttribute("maxOccurs", "1");
+               GXSoapXMLWriter.WriteAttribute("name", "Filename");
+               GXSoapXMLWriter.WriteAttribute("type", "xsd:string");
+               GXSoapXMLWriter.WriteElement("element", "");
+               GXSoapXMLWriter.WriteAttribute("minOccurs", "1");
+               GXSoapXMLWriter.WriteAttribute("maxOccurs", "1");
+               GXSoapXMLWriter.WriteAttribute("name", "Errormessage");
+               GXSoapXMLWriter.WriteAttribute("type", "xsd:string");
+               GXSoapXMLWriter.WriteEndElement();
+               GXSoapXMLWriter.WriteEndElement();
+               GXSoapXMLWriter.WriteEndElement();
+               GXSoapXMLWriter.WriteEndElement();
+               GXSoapXMLWriter.WriteEndElement();
+               GXSoapXMLWriter.WriteStartElement("message");
+               GXSoapXMLWriter.WriteAttribute("name", "ExportICSLeaves.ExecuteSoapIn");
+               GXSoapXMLWriter.WriteElement("part", "");
+               GXSoapXMLWriter.WriteAttribute("name", "parameters");
+               GXSoapXMLWriter.WriteAttribute("element", "tns:ExportICSLeaves.Execute");
+               GXSoapXMLWriter.WriteEndElement();
+               GXSoapXMLWriter.WriteStartElement("message");
+               GXSoapXMLWriter.WriteAttribute("name", "ExportICSLeaves.ExecuteSoapOut");
+               GXSoapXMLWriter.WriteElement("part", "");
+               GXSoapXMLWriter.WriteAttribute("name", "parameters");
+               GXSoapXMLWriter.WriteAttribute("element", "tns:ExportICSLeaves.ExecuteResponse");
+               GXSoapXMLWriter.WriteEndElement();
+               GXSoapXMLWriter.WriteStartElement("portType");
+               GXSoapXMLWriter.WriteAttribute("name", "ExportICSLeavesSoapPort");
+               GXSoapXMLWriter.WriteStartElement("operation");
+               GXSoapXMLWriter.WriteAttribute("name", "Execute");
+               GXSoapXMLWriter.WriteElement("input", "");
+               GXSoapXMLWriter.WriteAttribute("message", "wsdlns:"+"ExportICSLeaves.ExecuteSoapIn");
+               GXSoapXMLWriter.WriteElement("output", "");
+               GXSoapXMLWriter.WriteAttribute("message", "wsdlns:"+"ExportICSLeaves.ExecuteSoapOut");
+               GXSoapXMLWriter.WriteEndElement();
+               GXSoapXMLWriter.WriteEndElement();
+               GXSoapXMLWriter.WriteStartElement("binding");
+               GXSoapXMLWriter.WriteAttribute("name", "ExportICSLeavesSoapBinding");
+               GXSoapXMLWriter.WriteAttribute("type", "wsdlns:"+"ExportICSLeavesSoapPort");
+               GXSoapXMLWriter.WriteElement("soap:binding", "");
+               GXSoapXMLWriter.WriteAttribute("style", "document");
+               GXSoapXMLWriter.WriteAttribute("transport", "http://schemas.xmlsoap.org/soap/http");
+               GXSoapXMLWriter.WriteStartElement("operation");
+               GXSoapXMLWriter.WriteAttribute("name", "Execute");
+               GXSoapXMLWriter.WriteElement("soap:operation", "");
+               GXSoapXMLWriter.WriteAttribute("soapAction", "YTT_version4action/"+"AEXPORTICSLEAVES.Execute");
+               GXSoapXMLWriter.WriteStartElement("input");
+               GXSoapXMLWriter.WriteElement("soap:body", "");
+               GXSoapXMLWriter.WriteAttribute("use", "literal");
+               GXSoapXMLWriter.WriteEndElement();
+               GXSoapXMLWriter.WriteStartElement("output");
+               GXSoapXMLWriter.WriteElement("soap:body", "");
+               GXSoapXMLWriter.WriteAttribute("use", "literal");
+               GXSoapXMLWriter.WriteEndElement();
+               GXSoapXMLWriter.WriteEndElement();
+               GXSoapXMLWriter.WriteEndElement();
+               GXSoapXMLWriter.WriteStartElement("service");
+               GXSoapXMLWriter.WriteAttribute("name", "ExportICSLeaves");
+               GXSoapXMLWriter.WriteStartElement("port");
+               GXSoapXMLWriter.WriteAttribute("name", "ExportICSLeavesSoapPort");
+               GXSoapXMLWriter.WriteAttribute("binding", "wsdlns:"+"ExportICSLeavesSoapBinding");
+               GXSoapXMLWriter.WriteElement("soap:address", "");
+               GXSoapXMLWriter.WriteAttribute("location", "http://"+context.GetServerName( )+((context.GetServerPort( )>0)&&(context.GetServerPort( )!=80)&&(context.GetServerPort( )!=443) ? ":"+StringUtil.LTrim( StringUtil.Str( (decimal)(context.GetServerPort( )), 6, 0)) : "")+context.GetScriptPath( )+"aexporticsleaves.aspx");
+               GXSoapXMLWriter.WriteEndElement();
+               GXSoapXMLWriter.WriteEndElement();
+               GXSoapXMLWriter.WriteEndElement();
+               GXSoapXMLWriter.Close();
+               return  ;
+            }
+            else
+            {
+               currSoapErr = (short)(-20000);
+               currSoapErrmsg = "No SOAP request found. Call " + "http://" + context.GetServerName( ) + ((context.GetServerPort( )>0)&&(context.GetServerPort( )!=80)&&(context.GetServerPort( )!=443) ? ":"+StringUtil.LTrim( StringUtil.Str( (decimal)(context.GetServerPort( )), 6, 0)) : "") + context.GetScriptPath( ) + "aexporticsleaves.aspx" + "?wsdl to get the WSDL.";
+            }
          }
-
+         if ( currSoapErr == 0 )
+         {
+            GXSoapXMLReader.OpenRequest(GXSoapHTTPRequest);
+            GXSoapXMLReader.ReadExternalEntities = 0;
+            GXSoapXMLReader.IgnoreComments = 1;
+            GXSoapError = GXSoapXMLReader.Read();
+            while ( GXSoapError > 0 )
+            {
+               if ( StringUtil.StringSearch( GXSoapXMLReader.Name, "Envelope", 1) > 0 )
+               {
+                  this.SetPrefixesFromReader( GXSoapXMLReader);
+               }
+               if ( StringUtil.StringSearch( GXSoapXMLReader.Name, "Body", 1) > 0 )
+               {
+                  this.SetPrefixesFromReader( GXSoapXMLReader);
+                  if (true) break;
+               }
+               GXSoapError = GXSoapXMLReader.Read();
+            }
+            if ( GXSoapError > 0 )
+            {
+               GXSoapError = GXSoapXMLReader.Read();
+               if ( GXSoapError > 0 )
+               {
+                  this.SetPrefixesFromReader( GXSoapXMLReader);
+                  currMethod = GXSoapXMLReader.Name;
+                  if ( ( StringUtil.StringSearch( currMethod+"&", "Execute&", 1) > 0 ) || ( currSoapErr != 0 ) )
+                  {
+                     if ( currSoapErr == 0 )
+                     {
+                        AV11EmployeeIds = new GxSimpleCollection<long>();
+                        formatError = false;
+                        sTagName = GXSoapXMLReader.Name;
+                        if ( GXSoapXMLReader.IsSimple == 0 )
+                        {
+                           GXSoapError = GXSoapXMLReader.Read();
+                           nOutParmCount = 0;
+                           while ( ( ( StringUtil.StrCmp(GXSoapXMLReader.Name, sTagName) != 0 ) || ( GXSoapXMLReader.NodeType == 1 ) ) && ( GXSoapError > 0 ) )
+                           {
+                              readOk = 0;
+                              readElement = false;
+                              this.SetNamedPrefixesFromReader( GXSoapXMLReader);
+                              if ( StringUtil.StrCmp2( GXSoapXMLReader.LocalName, "Fromdate") && ( GXSoapXMLReader.NodeType != 2 ) && ( StringUtil.StrCmp(GXSoapXMLReader.NamespaceURI, "YTT_version4") == 0 ) )
+                              {
+                                 if ( ( StringUtil.StrCmp(GXSoapXMLReader.Value, "") == 0 ) || ( GXSoapXMLReader.ExistsAttribute("xsi:nil") == 1 ) )
+                                 {
+                                    AV16FromDate = DateTime.MinValue;
+                                 }
+                                 else
+                                 {
+                                    AV16FromDate = context.localUtil.YMDToD( (int)(Math.Round(NumberUtil.Val( StringUtil.Substring( GXSoapXMLReader.Value, 1, 4), "."), 18, MidpointRounding.ToEven)), (int)(Math.Round(NumberUtil.Val( StringUtil.Substring( GXSoapXMLReader.Value, 6, 2), "."), 18, MidpointRounding.ToEven)), (int)(Math.Round(NumberUtil.Val( StringUtil.Substring( GXSoapXMLReader.Value, 9, 2), "."), 18, MidpointRounding.ToEven)));
+                                 }
+                                 readElement = true;
+                                 if ( GXSoapError > 0 )
+                                 {
+                                    readOk = 1;
+                                 }
+                                 GXSoapError = GXSoapXMLReader.Read();
+                              }
+                              if ( StringUtil.StrCmp2( GXSoapXMLReader.LocalName, "Todate") && ( GXSoapXMLReader.NodeType != 2 ) && ( StringUtil.StrCmp(GXSoapXMLReader.NamespaceURI, "YTT_version4") == 0 ) )
+                              {
+                                 if ( ( StringUtil.StrCmp(GXSoapXMLReader.Value, "") == 0 ) || ( GXSoapXMLReader.ExistsAttribute("xsi:nil") == 1 ) )
+                                 {
+                                    AV15ToDate = DateTime.MinValue;
+                                 }
+                                 else
+                                 {
+                                    AV15ToDate = context.localUtil.YMDToD( (int)(Math.Round(NumberUtil.Val( StringUtil.Substring( GXSoapXMLReader.Value, 1, 4), "."), 18, MidpointRounding.ToEven)), (int)(Math.Round(NumberUtil.Val( StringUtil.Substring( GXSoapXMLReader.Value, 6, 2), "."), 18, MidpointRounding.ToEven)), (int)(Math.Round(NumberUtil.Val( StringUtil.Substring( GXSoapXMLReader.Value, 9, 2), "."), 18, MidpointRounding.ToEven)));
+                                 }
+                                 readElement = true;
+                                 if ( GXSoapError > 0 )
+                                 {
+                                    readOk = 1;
+                                 }
+                                 GXSoapError = GXSoapXMLReader.Read();
+                              }
+                              if ( StringUtil.StrCmp2( GXSoapXMLReader.LocalName, "Companylocationid") && ( GXSoapXMLReader.NodeType != 2 ) && ( StringUtil.StrCmp(GXSoapXMLReader.NamespaceURI, "YTT_version4") == 0 ) )
+                              {
+                                 AV17CompanyLocationId = (long)(Math.Round(NumberUtil.Val( GXSoapXMLReader.Value, "."), 18, MidpointRounding.ToEven));
+                                 readElement = true;
+                                 if ( GXSoapError > 0 )
+                                 {
+                                    readOk = 1;
+                                 }
+                                 GXSoapError = GXSoapXMLReader.Read();
+                              }
+                              if ( StringUtil.StrCmp2( GXSoapXMLReader.LocalName, "Employeeids") && ( GXSoapXMLReader.NodeType != 2 ) && ( StringUtil.StrCmp(GXSoapXMLReader.NamespaceURI, "YTT_version4") == 0 ) )
+                              {
+                                 if ( AV11EmployeeIds == null )
+                                 {
+                                    AV11EmployeeIds = new GxSimpleCollection<long>();
+                                 }
+                                 if ( GXSoapXMLReader.IsSimple == 0 )
+                                 {
+                                    AV11EmployeeIds.SetPrefixes( GetPrefixesInContext(), GXSoapXMLReader);
+                                    GXSoapError = AV11EmployeeIds.readxmlcollection(GXSoapXMLReader, "Employeeids", "item");
+                                 }
+                                 readElement = true;
+                                 if ( GXSoapError > 0 )
+                                 {
+                                    readOk = 1;
+                                 }
+                                 if ( StringUtil.StrCmp2( GXSoapXMLReader.LocalName, "Employeeids") )
+                                 {
+                                    GXSoapError = GXSoapXMLReader.Read();
+                                 }
+                              }
+                              if ( ! readElement )
+                              {
+                                 readOk = 1;
+                                 GXSoapError = GXSoapXMLReader.Read();
+                              }
+                              nOutParmCount = (short)(nOutParmCount+1);
+                              if ( ( readOk == 0 ) || formatError )
+                              {
+                                 context.sSOAPErrMsg += "Error reading " + sTagName + StringUtil.NewLine( );
+                                 context.sSOAPErrMsg += "Message: " + GXSoapXMLReader.ReadRawXML();
+                                 GXSoapError = (short)(nOutParmCount*-1);
+                              }
+                           }
+                        }
+                     }
+                  }
+                  else
+                  {
+                     currSoapErr = (short)(-20002);
+                     currSoapErrmsg = "Wrong method called. Expected method: " + "Execute";
+                  }
+               }
+            }
+            GXSoapXMLReader.Close();
+         }
+         if ( currSoapErr == 0 )
+         {
+            if ( GXSoapError < 0 )
+            {
+               currSoapErr = (short)(GXSoapError*-1);
+               currSoapErrmsg = context.sSOAPErrMsg;
+            }
+            else
+            {
+               if ( GXSoapXMLReader.ErrCode > 0 )
+               {
+                  currSoapErr = (short)(GXSoapXMLReader.ErrCode*-1);
+                  currSoapErrmsg = GXSoapXMLReader.ErrDescription;
+               }
+               else
+               {
+                  if ( GXSoapError == 0 )
+                  {
+                     currSoapErr = (short)(-20001);
+                     currSoapErrmsg = "Malformed SOAP message.";
+                  }
+                  else
+                  {
+                     currSoapErr = 0;
+                     currSoapErrmsg = "No error.";
+                  }
+               }
+            }
+         }
+         if ( currSoapErr == 0 )
+         {
+            ExecutePrivate();
+         }
+         context.CloseConnections();
+         sIncludeState = true;
+         GXSoapXMLWriter.OpenResponse(GXSoapHTTPResponse);
+         GXSoapXMLWriter.WriteStartDocument("utf-8", 0);
+         GXSoapXMLWriter.WriteStartElement("SOAP-ENV:Envelope");
+         GXSoapXMLWriter.WriteAttribute("xmlns:SOAP-ENV", "http://schemas.xmlsoap.org/soap/envelope/");
+         GXSoapXMLWriter.WriteAttribute("xmlns:xsd", "http://www.w3.org/2001/XMLSchema");
+         GXSoapXMLWriter.WriteAttribute("xmlns:SOAP-ENC", "http://schemas.xmlsoap.org/soap/encoding/");
+         GXSoapXMLWriter.WriteAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
+         if ( ( StringUtil.StringSearch( currMethod+"&", "Execute&", 1) > 0 ) || ( currSoapErr != 0 ) )
+         {
+            GXSoapXMLWriter.WriteStartElement("SOAP-ENV:Body");
+            GXSoapXMLWriter.WriteStartElement("ExportICSLeaves.ExecuteResponse");
+            GXSoapXMLWriter.WriteAttribute("xmlns", "YTT_version4");
+            if ( currSoapErr == 0 )
+            {
+               GXSoapXMLWriter.WriteElement("Filename", AV12Filename);
+               GXSoapXMLWriter.WriteAttribute("xmlns", "YTT_version4");
+               GXSoapXMLWriter.WriteElement("Errormessage", AV13ErrorMessage);
+               GXSoapXMLWriter.WriteAttribute("xmlns", "YTT_version4");
+            }
+            else
+            {
+               GXSoapXMLWriter.WriteStartElement("SOAP-ENV:Fault");
+               GXSoapXMLWriter.WriteElement("faultcode", "SOAP-ENV:Client");
+               GXSoapXMLWriter.WriteElement("faultstring", currSoapErrmsg);
+               GXSoapXMLWriter.WriteElement("detail", StringUtil.Trim( StringUtil.Str( (decimal)(currSoapErr), 10, 0)));
+               GXSoapXMLWriter.WriteEndElement();
+            }
+            GXSoapXMLWriter.WriteEndElement();
+            GXSoapXMLWriter.WriteEndElement();
+         }
+         GXSoapXMLWriter.WriteEndElement();
+         GXSoapXMLWriter.Close();
+         cleanup();
       }
 
       public aexporticsleaves( )
@@ -74,8 +391,8 @@ namespace GeneXus.Programs {
          dsDefault = context.GetDataStore("Default");
       }
 
-      public void execute( DateTime aP0_FromDate ,
-                           DateTime aP1_ToDate ,
+      public void execute( [GxJsonFormat("yyyy-MM-dd")] DateTime aP0_FromDate ,
+                           [GxJsonFormat("yyyy-MM-dd")] DateTime aP1_ToDate ,
                            long aP2_CompanyLocationId ,
                            GxSimpleCollection<long> aP3_EmployeeIds ,
                            out string aP4_Filename ,
@@ -198,12 +515,18 @@ namespace GeneXus.Programs {
          AV14Session.Set("WWPExportFilePath", AV12Filename);
          AV14Session.Set("WWPExportFileName", AV12Filename);
          AV12Filename = formatLink("wwpbaseobjects.wwp_downloadreport.aspx") ;
+         if ( context.WillRedirect( ) )
+         {
+            context.Redirect( context.wjLoc );
+            context.wjLoc = "";
+         }
          cleanup();
       }
 
       public override void cleanup( )
       {
          CloseCursors();
+         base.cleanup();
          if ( IsMain )
          {
             context.CloseConnections();
@@ -213,8 +536,13 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
-         AV12Filename = "";
-         AV13ErrorMessage = "";
+         GXSoapHTTPRequest = new GxSoapRequest(context) ;
+         GXSoapXMLReader = new GXXMLReader(context.GetPhysicalPath());
+         GXSoapHTTPResponse = new GxHttpResponse(context) ;
+         GXSoapXMLWriter = new GXXMLWriter(context.GetPhysicalPath());
+         currSoapErrmsg = "";
+         currMethod = "";
+         sTagName = "";
          AV8File = new GxFile(context.GetPhysicalPath());
          AV9Lines = new GxSimpleCollection<string>();
          A129LeaveRequestStartDate = DateTime.MinValue;
@@ -247,6 +575,10 @@ namespace GeneXus.Programs {
          /* GeneXus formulas. */
       }
 
+      private short GXSoapError ;
+      private short currSoapErr ;
+      private short readOk ;
+      private short nOutParmCount ;
       private int AV11EmployeeIds_Count ;
       private int AV19GXV1 ;
       private long AV17CompanyLocationId ;
@@ -255,6 +587,9 @@ namespace GeneXus.Programs {
       private long A124LeaveTypeId ;
       private long A100CompanyId ;
       private long A127LeaveRequestId ;
+      private string currSoapErrmsg ;
+      private string currMethod ;
+      private string sTagName ;
       private string A125LeaveTypeName ;
       private string A148EmployeeName ;
       private DateTime AV16FromDate ;
@@ -262,15 +597,22 @@ namespace GeneXus.Programs {
       private DateTime A129LeaveRequestStartDate ;
       private DateTime A130LeaveRequestEndDate ;
       private DateTime A128LeaveRequestDate ;
+      private bool readElement ;
+      private bool formatError ;
+      private bool sIncludeState ;
       private string AV12Filename ;
       private string AV13ErrorMessage ;
       private string A109EmployeeEmail ;
       private string AV10OneLine ;
+      private GXXMLReader GXSoapXMLReader ;
+      private GXXMLWriter GXSoapXMLWriter ;
+      private GxSoapRequest GXSoapHTTPRequest ;
+      private GxHttpResponse GXSoapHTTPResponse ;
       private IGxSession AV14Session ;
       private GxFile AV8File ;
+      private GxSimpleCollection<long> AV11EmployeeIds ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
-      private GxSimpleCollection<long> AV11EmployeeIds ;
       private GxSimpleCollection<string> AV9Lines ;
       private IDataStoreProvider pr_default ;
       private long[] P00BI2_A124LeaveTypeId ;

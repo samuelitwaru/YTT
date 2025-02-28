@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: "API_TimeTracker"
   description: "API_Time Tracker"
-  version: "20250219053007"
+  version: "20250227063652"
 servers:
   - url: https://staging.timetracker.yukon.software/api
 paths:
@@ -21,7 +21,29 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/API_ICSLeaveAPIOutput"
+                type: "string"
+
+
+        404:
+          description: "Not found"
+
+  /example:
+    get:
+      tags:
+        - API_TimeTracker  
+      operationId: "API_TimeTracker.Example"
+      summary: "Example"
+      security: 
+        - oAuthGXGAM: []
+      
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SDT_Example"  
+
         404:
           description: "Not found"
 
@@ -37,12 +59,17 @@ components:
             fullcontrol: Full access
 
   schemas:
-    API_ICSLeaveAPIOutput:
+  
+    SDT_Example:
       properties:
-        ICSLeaveExport:
-          type: "string"
-        ErrorMessage:
+        Id:
+          description: "Id"
+          type: "integer"
+          format: "int64"
+        Value:
+          description: "Value"
           type: "string"
 
-  
+
+
  

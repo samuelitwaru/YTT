@@ -84,8 +84,7 @@ namespace GeneXus.Programs {
          restLocation = gxobjppt.Location ;
       }
 
-      public void gxep_api_icsleaveapi( out string aP0_ICSLeaveExport ,
-                                        out string aP1_ErrorMessage )
+      public void gxep_api_icsleaveapi( out string aP0_result )
       {
          restCliAPI_ICSLeaveAPI = new GXRestAPIClient();
          if ( restLocation == null )
@@ -101,15 +100,38 @@ namespace GeneXus.Programs {
             gxProperties.ErrorCode = restCliAPI_ICSLeaveAPI.ErrorCode;
             gxProperties.ErrorMessage = restCliAPI_ICSLeaveAPI.ErrorMessage;
             gxProperties.StatusCode = restCliAPI_ICSLeaveAPI.StatusCode;
-            aP0_ICSLeaveExport = "";
-            aP1_ErrorMessage = "";
+            aP0_result = "";
          }
          else
          {
-            aP0_ICSLeaveExport = restCliAPI_ICSLeaveAPI.GetBodyString("ICSLeaveExport");
-            aP1_ErrorMessage = restCliAPI_ICSLeaveAPI.GetBodyString("ErrorMessage");
+            aP0_result = restCliAPI_ICSLeaveAPI.GetBodyString("result");
          }
          /* API_ICSLeaveAPI Constructor */
+      }
+
+      public void gxep_example( out SdtSDT_Example aP0_SDT_Example )
+      {
+         restCliExample = new GXRestAPIClient();
+         if ( restLocation == null )
+         {
+            InitLocation();
+         }
+         restLocation.ResourceName = "/example";
+         restCliExample.Location = restLocation;
+         restCliExample.HttpMethod = "GET";
+         restCliExample.RestExecute();
+         if ( restCliExample.ErrorCode != 0 )
+         {
+            gxProperties.ErrorCode = restCliExample.ErrorCode;
+            gxProperties.ErrorMessage = restCliExample.ErrorMessage;
+            gxProperties.StatusCode = restCliExample.StatusCode;
+            aP0_SDT_Example = new SdtSDT_Example();
+         }
+         else
+         {
+            aP0_SDT_Example = restCliExample.GetBodySdt<SdtSDT_Example>("SDT_Example");
+         }
+         /* Example Constructor */
       }
 
       public override void cleanup( )
@@ -121,19 +143,21 @@ namespace GeneXus.Programs {
       {
          gxProperties = new GxObjectProperties();
          restCliAPI_ICSLeaveAPI = new GXRestAPIClient();
-         aP0_ICSLeaveExport = "";
-         aP1_ErrorMessage = "";
+         aP0_result = "";
+         restCliExample = new GXRestAPIClient();
+         aP0_SDT_Example = new SdtSDT_Example();
          /* GeneXus formulas. */
       }
 
       protected string Gx_restmethod ;
       protected GXRestAPIClient restCliAPI_ICSLeaveAPI ;
+      protected GXRestAPIClient restCliExample ;
       protected GxLocation restLocation ;
       protected GxObjectProperties gxProperties ;
       protected IGxDataStore dsGAM ;
       protected IGxDataStore dsDefault ;
-      protected string aP0_ICSLeaveExport ;
-      protected string aP1_ErrorMessage ;
+      protected string aP0_result ;
+      protected SdtSDT_Example aP0_SDT_Example ;
    }
 
 }

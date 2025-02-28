@@ -5,8 +5,6 @@ using GeneXus.Resources;
 using GeneXus.Application;
 using GeneXus.Metadata;
 using GeneXus.Cryptography;
-using System.Data;
-using GeneXus.Data;
 using com.genexus;
 using GeneXus.Data.ADO;
 using GeneXus.Data.NTier;
@@ -22,56 +20,51 @@ using System.Threading;
 using System.Xml.Serialization;
 using System.Runtime.Serialization;
 namespace GeneXus.Programs {
-   public class prc_icsleaveapi : GXProcedure
+   public class prc_example : GXProcedure
    {
-      public prc_icsleaveapi( )
+      public prc_example( )
       {
          context = new GxContext(  );
          DataStoreUtil.LoadDataStores( context);
-         dsGAM = context.GetDataStore("GAM");
-         dsDefault = context.GetDataStore("Default");
          IsMain = true;
+         context.SetDefaultTheme("WorkWithPlusDS", true);
       }
 
-      public prc_icsleaveapi( IGxContext context )
+      public prc_example( IGxContext context )
       {
          this.context = context;
          IsMain = false;
-         dsGAM = context.GetDataStore("GAM");
-         dsDefault = context.GetDataStore("Default");
       }
 
-      public void execute( out string aP0_ICSLeaveExport )
+      public void execute( out string aP0_response )
       {
-         this.AV2ICSLeaveExport = "" ;
+         this.AV10response = "" ;
          initialize();
          ExecuteImpl();
-         aP0_ICSLeaveExport=this.AV2ICSLeaveExport;
+         aP0_response=this.AV10response;
       }
 
       public string executeUdp( )
       {
-         execute(out aP0_ICSLeaveExport);
-         return AV2ICSLeaveExport ;
+         execute(out aP0_response);
+         return AV10response ;
       }
 
-      public void executeSubmit( out string aP0_ICSLeaveExport )
+      public void executeSubmit( out string aP0_response )
       {
-         this.AV2ICSLeaveExport = "" ;
+         this.AV10response = "" ;
          SubmitImpl();
-         aP0_ICSLeaveExport=this.AV2ICSLeaveExport;
+         aP0_response=this.AV10response;
       }
 
       protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
-         args = new Object[] {(string)AV2ICSLeaveExport} ;
-         ClassLoader.Execute("aprc_icsleaveapi","GeneXus.Programs","aprc_icsleaveapi", new Object[] {context }, "execute", args);
-         if ( ( args != null ) && ( args.Length == 1 ) )
-         {
-            AV2ICSLeaveExport = (string)(args[0]) ;
-         }
+         AV8SDT_Example.gxTpr_Id = 1;
+         AV8SDT_Example.gxTpr_Value = "hELLO World";
+         AV10response = AV8SDT_Example.ToJSonString(false, true);
+         new logtofile(context ).execute(  ">>>>>>>"+AV10response) ;
          cleanup();
       }
 
@@ -82,19 +75,19 @@ namespace GeneXus.Programs {
          {
             context.CloseConnections();
          }
+         ExitApp();
       }
 
       public override void initialize( )
       {
-         AV2ICSLeaveExport = "";
+         AV10response = "";
+         AV8SDT_Example = new SdtSDT_Example(context);
          /* GeneXus formulas. */
       }
 
-      private string AV2ICSLeaveExport ;
-      private IGxDataStore dsGAM ;
-      private IGxDataStore dsDefault ;
-      private Object[] args ;
-      private string aP0_ICSLeaveExport ;
+      private string AV10response ;
+      private SdtSDT_Example AV8SDT_Example ;
+      private string aP0_response ;
    }
 
 }
