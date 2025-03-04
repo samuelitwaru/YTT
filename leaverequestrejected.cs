@@ -2400,24 +2400,24 @@ namespace GeneXus.Programs {
       {
          /* Grid_Load Routine */
          returnInSub = false;
-         if ( StringUtil.Len( A133LeaveRequestDescription) < 15 )
+         if ( StringUtil.Len( A133LeaveRequestDescription) < 25 )
          {
             AV68LeaveRequestDescriptionVariable = A133LeaveRequestDescription;
             AssignAttri(sPrefix, false, edtavLeaverequestdescriptionvariable_Internalname, AV68LeaveRequestDescriptionVariable);
          }
          else
          {
-            AV68LeaveRequestDescriptionVariable = StringUtil.Substring( A133LeaveRequestDescription, 1, 15) + " ...";
+            AV68LeaveRequestDescriptionVariable = StringUtil.Substring( A133LeaveRequestDescription, 1, 25) + " ...";
             AssignAttri(sPrefix, false, edtavLeaverequestdescriptionvariable_Internalname, AV68LeaveRequestDescriptionVariable);
          }
-         if ( StringUtil.Len( A134LeaveRequestRejectionReason) < 15 )
+         if ( StringUtil.Len( A134LeaveRequestRejectionReason) < 25 )
          {
             AV69LeaveRequestRejectionReasonVariable = A134LeaveRequestRejectionReason;
             AssignAttri(sPrefix, false, edtavLeaverequestrejectionreasonvariable_Internalname, AV69LeaveRequestRejectionReasonVariable);
          }
          else
          {
-            AV69LeaveRequestRejectionReasonVariable = StringUtil.Substring( A134LeaveRequestRejectionReason, 1, 15) + " ...";
+            AV69LeaveRequestRejectionReasonVariable = StringUtil.Substring( A134LeaveRequestRejectionReason, 1, 25) + " ...";
             AssignAttri(sPrefix, false, edtavLeaverequestrejectionreasonvariable_Internalname, AV69LeaveRequestRejectionReasonVariable);
          }
          if ( StringUtil.StrCmp(A173LeaveRequestHalfDay, "Morning") == 0 )
@@ -3039,7 +3039,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202521819492955", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2025341413427", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -3055,7 +3055,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("leaverequestrejected.js", "?202521819492956", false, true);
+         context.AddJavascriptSource("leaverequestrejected.js", "?2025341413427", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);

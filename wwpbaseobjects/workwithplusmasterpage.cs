@@ -182,7 +182,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          context.AddJavascriptSource("DVelop/Shared/daterangepicker/daterangepicker.min.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/DatePicker/DatePickerRender.js", "", false, true);
-         context.AddJavascriptSource("wwpbaseobjects/workwithplusmasterpage.js", "?2025218195573", false, true);
+         context.AddJavascriptSource("wwpbaseobjects/workwithplusmasterpage.js", "?20253414193513", false, true);
          context.WriteHtmlTextNl( "</body>") ;
          context.WriteHtmlTextNl( "</html>") ;
          if ( context.isSpaRequest( ) )
@@ -770,6 +770,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
       {
          /* Start Routine */
          returnInSub = false;
+         (getDataAreaObject() == null ? Form : getDataAreaObject().GetForm()).Headerrawhtml = "<script async src=\"https://www.googletagmanager.com/gtag/js?id=G-P326YV01VF\"></script>"+"<script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-P326YV01VF');</script>"+(getDataAreaObject() == null ? Form : getDataAreaObject().GetForm()).Headerrawhtml;
          (getDataAreaObject() == null ? Form : getDataAreaObject().GetForm()).Headerrawhtml = "<link rel=\"shortcut icon\" type=\"image/x-icon\" href=\""+context.convertURL( (string)(context.GetImagePath( "fac54406-4978-42bf-9e0f-abe1151bba87", "", context.GetTheme( ))))+"\">";
          (getDataAreaObject() == null ? Form : getDataAreaObject().GetForm()).Headerrawhtml = (getDataAreaObject() == null ? Form : getDataAreaObject().GetForm()).Headerrawhtml+"<style>body {margin: 0;padding: 0;font-family: Arial, Helvetica Neue, Helvetica, sans-serif;font-size: 14px;}#calendar {max-width: 1100px;margin: 50px auto;}</style>";
          (getDataAreaObject() == null ? Form : getDataAreaObject().GetForm()).Headerrawhtml = (getDataAreaObject() == null ? Form : getDataAreaObject().GetForm()).Headerrawhtml+"<script src=\"https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js\"></script>";
@@ -777,6 +778,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          (getDataAreaObject() == null ? Form : getDataAreaObject().GetForm()).Headerrawhtml = (getDataAreaObject() == null ? Form : getDataAreaObject().GetForm()).Headerrawhtml+"<script type=\"text/javascript\" src=\"https://visjs.github.io/vis-timeline/standalone/umd/vis-timeline-graph2d.min.js\"></script>";
          (getDataAreaObject() == null ? Form : getDataAreaObject().GetForm()).Headerrawhtml = (getDataAreaObject() == null ? Form : getDataAreaObject().GetForm()).Headerrawhtml+"<link href=\"https://unpkg.com/vis-timeline@latest/styles/vis-timeline-graph2d.min.css\" rel=\"stylesheet\" type=\"text/css\" />";
          (getDataAreaObject() == null ? Form : getDataAreaObject().GetForm()).Headerrawhtml = (getDataAreaObject() == null ? Form : getDataAreaObject().GetForm()).Headerrawhtml+"<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/grapesjs/0.12.17/css/grapes.min.css\"><script src=\"https://cdnjs.cloudflare.com/ajax/libs/grapesjs/0.12.17/grapes.min.js\"></script>";
+         (getDataAreaObject() == null ? Form : getDataAreaObject().GetForm()).Headerrawhtml = (getDataAreaObject() == null ? Form : getDataAreaObject().GetForm()).Headerrawhtml+"<script async src=\"https://www.googletagmanager.com/gtag/js?id=G-P326YV01VF\"></script>"+"<script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-P326YV01VF');</script>";
          divLayoutmaintable_Class = "MainContainer";
          AssignProp("", true, divLayoutmaintable_Internalname, "Class", divLayoutmaintable_Class, true);
          GXt_objcol_SdtDVelop_Menu_Item1 = AV21DVelop_Menu;
@@ -888,7 +890,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          idxLst = 1;
          while ( idxLst <= (getDataAreaObject() == null ? Form : getDataAreaObject().GetForm()).Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)(getDataAreaObject() == null ? Form : getDataAreaObject().GetForm()).Jscriptsrc.Item(idxLst))), "?202521819551396", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)(getDataAreaObject() == null ? Form : getDataAreaObject().GetForm()).Jscriptsrc.Item(idxLst))), "?20253414193934", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -903,7 +905,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("wwpbaseobjects/workwithplusmasterpage.js", "?202521819551399", false, true);
+         context.AddJavascriptSource("wwpbaseobjects/workwithplusmasterpage.js", "?20253414193935", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/slimmenu/jquery.slimmenu.min.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);

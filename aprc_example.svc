@@ -1,0 +1,1 @@
+<%@ServiceHost Service= "GeneXus.Programs.aprc_example,prc_example" %>

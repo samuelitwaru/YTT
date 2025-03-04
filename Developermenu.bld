@@ -4,7 +4,6 @@ sitesetting
 companylocation
 device_bc
 device
-leaverequest_bc
 leaverequest
 leavetype_bc
 leavetype
@@ -228,6 +227,10 @@ gamnotauthorized
 gamexamplelogin
 general\ui\masterprompt
 general\ui\masterunanimosidebar
+aprc_icsleaveexport
+aprc_icsleaveexport
+aprc_example
+aprc_example
 aprc_icsleaveapi
 aprc_icsleaveapi
 aprc_icsleaveapi

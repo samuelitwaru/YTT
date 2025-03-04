@@ -18,14 +18,13 @@ using GeneXus.XML;
 using GeneXus.Search;
 using GeneXus.Encryption;
 using GeneXus.Http.Client;
-using GeneXus.Http.Server;
 using System.Threading;
 using System.Xml.Serialization;
 using System.Runtime.Serialization;
 namespace GeneXus.Programs {
-   public class prc_example : GXProcedure
+   public class prc_icsleaveexport : GXProcedure
    {
-      public prc_example( )
+      public prc_icsleaveexport( )
       {
          context = new GxContext(  );
          DataStoreUtil.LoadDataStores( context);
@@ -34,7 +33,7 @@ namespace GeneXus.Programs {
          IsMain = true;
       }
 
-      public prc_example( IGxContext context )
+      public prc_icsleaveexport( IGxContext context )
       {
          this.context = context;
          IsMain = false;
@@ -42,36 +41,31 @@ namespace GeneXus.Programs {
          dsDefault = context.GetDataStore("Default");
       }
 
-      public void execute( out GxHttpResponse aP0_HttpResponse )
+      public void execute( long aP0_ProjectId ,
+                           long aP1_LeaveTypeId )
       {
-         this.AV2HttpResponse = new GxHttpResponse( context) ;
+         this.AV2ProjectId = aP0_ProjectId;
+         this.AV3LeaveTypeId = aP1_LeaveTypeId;
          initialize();
          ExecuteImpl();
-         aP0_HttpResponse=this.AV2HttpResponse;
       }
 
-      public GxHttpResponse executeUdp( )
+      public void executeSubmit( long aP0_ProjectId ,
+                                 long aP1_LeaveTypeId )
       {
-         execute(out aP0_HttpResponse);
-         return AV2HttpResponse ;
-      }
-
-      public void executeSubmit( out GxHttpResponse aP0_HttpResponse )
-      {
-         this.AV2HttpResponse = new GxHttpResponse( context) ;
+         this.AV2ProjectId = aP0_ProjectId;
+         this.AV3LeaveTypeId = aP1_LeaveTypeId;
          SubmitImpl();
-         aP0_HttpResponse=this.AV2HttpResponse;
       }
 
       protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
-         args = new Object[] {(GxHttpResponse)AV2HttpResponse} ;
-         ClassLoader.Execute("aprc_example","GeneXus.Programs","aprc_example", new Object[] {context }, "execute", args);
-         if ( ( args != null ) && ( args.Length == 1 ) )
+         args = new Object[] {(long)AV2ProjectId,(long)AV3LeaveTypeId} ;
+         ClassLoader.Execute("aprc_icsleaveexport","GeneXus.Programs","aprc_icsleaveexport", new Object[] {context }, "execute", args);
+         if ( ( args != null ) && ( args.Length == 2 ) )
          {
-            AV2HttpResponse = (GxHttpResponse)(args[0]) ;
          }
          cleanup();
       }
@@ -87,15 +81,14 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
-         AV2HttpResponse = new GxHttpResponse( context);
          /* GeneXus formulas. */
       }
 
-      private GxHttpResponse AV2HttpResponse ;
+      private long AV2ProjectId ;
+      private long AV3LeaveTypeId ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private Object[] args ;
-      private GxHttpResponse aP0_HttpResponse ;
    }
 
 }

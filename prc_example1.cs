@@ -18,14 +18,13 @@ using GeneXus.XML;
 using GeneXus.Search;
 using GeneXus.Encryption;
 using GeneXus.Http.Client;
-using GeneXus.Http.Server;
 using System.Threading;
 using System.Xml.Serialization;
 using System.Runtime.Serialization;
 namespace GeneXus.Programs {
-   public class prc_example : GXProcedure
+   public class prc_example1 : GXProcedure
    {
-      public prc_example( )
+      public prc_example1( )
       {
          context = new GxContext(  );
          DataStoreUtil.LoadDataStores( context);
@@ -34,7 +33,7 @@ namespace GeneXus.Programs {
          IsMain = true;
       }
 
-      public prc_example( IGxContext context )
+      public prc_example1( IGxContext context )
       {
          this.context = context;
          IsMain = false;
@@ -42,37 +41,23 @@ namespace GeneXus.Programs {
          dsDefault = context.GetDataStore("Default");
       }
 
-      public void execute( out GxHttpResponse aP0_HttpResponse )
+      public void execute( )
       {
-         this.AV2HttpResponse = new GxHttpResponse( context) ;
          initialize();
          ExecuteImpl();
-         aP0_HttpResponse=this.AV2HttpResponse;
       }
 
-      public GxHttpResponse executeUdp( )
+      public void executeSubmit( )
       {
-         execute(out aP0_HttpResponse);
-         return AV2HttpResponse ;
-      }
-
-      public void executeSubmit( out GxHttpResponse aP0_HttpResponse )
-      {
-         this.AV2HttpResponse = new GxHttpResponse( context) ;
          SubmitImpl();
-         aP0_HttpResponse=this.AV2HttpResponse;
       }
 
       protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
-         args = new Object[] {(GxHttpResponse)AV2HttpResponse} ;
-         ClassLoader.Execute("aprc_example","GeneXus.Programs","aprc_example", new Object[] {context }, "execute", args);
-         if ( ( args != null ) && ( args.Length == 1 ) )
-         {
-            AV2HttpResponse = (GxHttpResponse)(args[0]) ;
-         }
+         args = new Object[] {} ;
+         ClassLoader.Execute("aprc_example1","GeneXus.Programs","aprc_example1", new Object[] {context }, "execute", args);
          cleanup();
       }
 
@@ -87,15 +72,12 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
-         AV2HttpResponse = new GxHttpResponse( context);
          /* GeneXus formulas. */
       }
 
-      private GxHttpResponse AV2HttpResponse ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private Object[] args ;
-      private GxHttpResponse aP0_HttpResponse ;
    }
 
 }

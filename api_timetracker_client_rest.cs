@@ -16,6 +16,7 @@ using GeneXus.XML;
 using GeneXus.Search;
 using GeneXus.Encryption;
 using GeneXus.Http.Client;
+using GeneXus.Http.Server;
 using System.Xml.Serialization;
 using System.Runtime.Serialization;
 namespace GeneXus.Programs {
@@ -109,7 +110,7 @@ namespace GeneXus.Programs {
          /* API_ICSLeaveAPI Constructor */
       }
 
-      public void gxep_example( out SdtSDT_Example aP0_SDT_Example )
+      public void gxep_example( out GxHttpResponse aP0_HttpResponse )
       {
          restCliExample = new GXRestAPIClient();
          if ( restLocation == null )
@@ -125,11 +126,11 @@ namespace GeneXus.Programs {
             gxProperties.ErrorCode = restCliExample.ErrorCode;
             gxProperties.ErrorMessage = restCliExample.ErrorMessage;
             gxProperties.StatusCode = restCliExample.StatusCode;
-            aP0_SDT_Example = new SdtSDT_Example();
+            aP0_HttpResponse = new GxHttpResponse();
          }
          else
          {
-            aP0_SDT_Example = restCliExample.GetBodySdt<SdtSDT_Example>("SDT_Example");
+            aP0_HttpResponse = restCliExample.GetBodySdt<GxHttpResponse>("HttpResponse");
          }
          /* Example Constructor */
       }
@@ -145,7 +146,7 @@ namespace GeneXus.Programs {
          restCliAPI_ICSLeaveAPI = new GXRestAPIClient();
          aP0_result = "";
          restCliExample = new GXRestAPIClient();
-         aP0_SDT_Example = new SdtSDT_Example();
+         aP0_HttpResponse = new GxHttpResponse();
          /* GeneXus formulas. */
       }
 
@@ -157,7 +158,7 @@ namespace GeneXus.Programs {
       protected IGxDataStore dsGAM ;
       protected IGxDataStore dsDefault ;
       protected string aP0_result ;
-      protected SdtSDT_Example aP0_SDT_Example ;
+      protected GxHttpResponse aP0_HttpResponse ;
    }
 
 }

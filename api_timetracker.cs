@@ -16,6 +16,7 @@ using GeneXus.XML;
 using GeneXus.Search;
 using GeneXus.Encryption;
 using GeneXus.Http.Client;
+using GeneXus.Http.Server;
 using System.Xml.Serialization;
 using System.Runtime.Serialization;
 namespace GeneXus.Programs {
@@ -86,6 +87,7 @@ namespace GeneXus.Programs {
          /* Api_icsleaveapi_After Routine */
          returnInSub = false;
          new logtofile(context ).execute(  AV15result) ;
+         AV15result = AV12ICSLeaveExport;
       }
 
       public void gxep_api_icsleaveapi( out string aP0_result )
@@ -103,12 +105,12 @@ namespace GeneXus.Programs {
          aP0_result=this.AV15result;
       }
 
-      public void gxep_example( out SdtSDT_Example aP0_SDT_Example )
+      public void gxep_example( out GxHttpResponse aP0_HttpResponse )
       {
          initialize();
          /* Example Constructor */
-         new prc_example(context ).execute( out  AV15result) ;
-         aP0_SDT_Example=this.AV16SDT_Example;
+         context.wjLoc = "aprc_example.aspx";
+         aP0_HttpResponse=this.AV17HttpResponse;
       }
 
       public override void cleanup( )
@@ -120,7 +122,7 @@ namespace GeneXus.Programs {
       {
          AV15result = "";
          AV12ICSLeaveExport = "";
-         AV16SDT_Example = new SdtSDT_Example(context);
+         AV17HttpResponse = new GxHttpResponse( context);
          /* GeneXus formulas. */
       }
 
@@ -128,11 +130,11 @@ namespace GeneXus.Programs {
       protected bool returnInSub ;
       protected string AV15result ;
       protected string AV12ICSLeaveExport ;
+      protected GxHttpResponse AV17HttpResponse ;
       protected IGxDataStore dsGAM ;
       protected IGxDataStore dsDefault ;
       protected string aP0_result ;
-      protected SdtSDT_Example AV16SDT_Example ;
-      protected SdtSDT_Example aP0_SDT_Example ;
+      protected GxHttpResponse aP0_HttpResponse ;
    }
 
 }

@@ -2401,14 +2401,14 @@ namespace GeneXus.Programs {
       {
          /* Grid_Load Routine */
          returnInSub = false;
-         if ( StringUtil.Len( A133LeaveRequestDescription) < 15 )
+         if ( StringUtil.Len( A133LeaveRequestDescription) < 25 )
          {
             AV85LeaveRequestDescriptionVariable = A133LeaveRequestDescription;
             AssignAttri(sPrefix, false, edtavLeaverequestdescriptionvariable_Internalname, AV85LeaveRequestDescriptionVariable);
          }
          else
          {
-            AV85LeaveRequestDescriptionVariable = StringUtil.Substring( A133LeaveRequestDescription, 1, 15) + " ...";
+            AV85LeaveRequestDescriptionVariable = StringUtil.Substring( A133LeaveRequestDescription, 1, 25) + " ...";
             AssignAttri(sPrefix, false, edtavLeaverequestdescriptionvariable_Internalname, AV85LeaveRequestDescriptionVariable);
          }
          if ( StringUtil.StrCmp(A173LeaveRequestHalfDay, "Morning") == 0 )
@@ -3029,7 +3029,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202521819495785", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20253414135036", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -3045,7 +3045,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("leaverequestpending.js", "?202521819495786", false, true);
+         context.AddJavascriptSource("leaverequestpending.js", "?20253414135037", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
