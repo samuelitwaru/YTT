@@ -99,7 +99,7 @@ namespace GeneXus.Programs {
          AV13EmployeeEmail = ((string)AV12CredsCollection.Item(1));
          AV14EmployeeAPIPassword = ((string)AV12CredsCollection.Item(2));
          new logtofile(context ).execute(  AV13EmployeeEmail+" : "+AV14EmployeeAPIPassword) ;
-         AV22GXLvl11 = 0;
+         AV22GXLvl12 = 0;
          /* Using cursor P00CO2 */
          pr_default.execute(0, new Object[] {AV13EmployeeEmail, AV14EmployeeAPIPassword});
          while ( (pr_default.getStatus(0) != 101) )
@@ -107,12 +107,12 @@ namespace GeneXus.Programs {
             A188EmployeeAPIPassword = P00CO2_A188EmployeeAPIPassword[0];
             A109EmployeeEmail = P00CO2_A109EmployeeEmail[0];
             A106EmployeeId = P00CO2_A106EmployeeId[0];
-            AV22GXLvl11 = 1;
+            AV22GXLvl12 = 1;
             /* Exiting from a For First loop. */
             if (true) break;
          }
          pr_default.close(0);
-         if ( AV22GXLvl11 == 0 )
+         if ( AV22GXLvl12 == 0 )
          {
             AV21ErrorMessage = "Employee not found";
             AV20HttpResponse.AddString(AV21ErrorMessage);
@@ -125,10 +125,6 @@ namespace GeneXus.Programs {
             cleanup();
             if (true) return;
          }
-         AV18ProjectIdCollection.Add(AV9ProjectId, 0);
-         GXt_objcol_int1 = AV19EmployeeIdCollection;
-         new getemployeeidsbyproject(context ).execute(  AV18ProjectIdCollection, out  GXt_objcol_int1) ;
-         AV19EmployeeIdCollection = GXt_objcol_int1;
          AV15ICSLeaveExport = "";
          AV15ICSLeaveExport += "BEGIN:VCALENDAR" + StringUtil.NewLine( );
          AV15ICSLeaveExport += "PRODID:-//Yukon Software//APiCalConverter//EN" + StringUtil.NewLine( );
@@ -187,15 +183,6 @@ namespace GeneXus.Programs {
             A106EmployeeId = P00CO3_A106EmployeeId[0];
             A148EmployeeName = P00CO3_A148EmployeeName[0];
             A109EmployeeEmail = P00CO3_A109EmployeeEmail[0];
-            pr_default.dynParam(2, new Object[]{ new Object[]{
-                                                 AV9ProjectId ,
-                                                 AV8LeaveTypeId ,
-                                                 A124LeaveTypeId ,
-                                                 A106EmployeeId } ,
-                                                 new int[]{
-                                                 TypeConstants.LONG, TypeConstants.LONG, TypeConstants.LONG, TypeConstants.LONG
-                                                 }
-            });
             /* Using cursor P00CO4 */
             pr_default.execute(2, new Object[] {A106EmployeeId, AV8LeaveTypeId});
             while ( (pr_default.getStatus(2) != 101) )
@@ -208,15 +195,15 @@ namespace GeneXus.Programs {
                A127LeaveRequestId = P00CO4_A127LeaveRequestId[0];
                A125LeaveTypeName = P00CO4_A125LeaveTypeName[0];
                AV15ICSLeaveExport += "BEGIN:VEVENT" + StringUtil.NewLine( );
-               GXt_char2 = AV15ICSLeaveExport;
-               new formatdatetime(context ).execute(  A128LeaveRequestDate,  "YYYYMMDD", out  GXt_char2) ;
-               AV15ICSLeaveExport += "DTSTAMP:" + GXt_char2 + "T000000Z" + StringUtil.NewLine( );
-               GXt_char2 = AV15ICSLeaveExport;
-               new formatdatetime(context ).execute(  A129LeaveRequestStartDate,  "YYYYMMDD", out  GXt_char2) ;
-               AV15ICSLeaveExport += "DTSTART;VALUE=DATE:" + GXt_char2 + StringUtil.NewLine( );
-               GXt_char2 = AV15ICSLeaveExport;
-               new formatdatetime(context ).execute(  A130LeaveRequestEndDate,  "YYYYMMDD", out  GXt_char2) ;
-               AV15ICSLeaveExport += "DTEND;VALUE=DATE:" + GXt_char2 + StringUtil.NewLine( );
+               GXt_char1 = AV15ICSLeaveExport;
+               new formatdatetime(context ).execute(  A128LeaveRequestDate,  "YYYYMMDD", out  GXt_char1) ;
+               AV15ICSLeaveExport += "DTSTAMP:" + GXt_char1 + "T000000Z" + StringUtil.NewLine( );
+               GXt_char1 = AV15ICSLeaveExport;
+               new formatdatetime(context ).execute(  A129LeaveRequestStartDate,  "YYYYMMDD", out  GXt_char1) ;
+               AV15ICSLeaveExport += "DTSTART;VALUE=DATE:" + GXt_char1 + StringUtil.NewLine( );
+               GXt_char1 = AV15ICSLeaveExport;
+               new formatdatetime(context ).execute(  A130LeaveRequestEndDate,  "YYYYMMDD", out  GXt_char1) ;
+               AV15ICSLeaveExport += "DTEND;VALUE=DATE:" + GXt_char1 + StringUtil.NewLine( );
                AV15ICSLeaveExport += "SUMMARY:" + StringUtil.Trim( A148EmployeeName) + " | " + StringUtil.Trim( A125LeaveTypeName) + StringUtil.NewLine( );
                AV15ICSLeaveExport += "UID:" + StringUtil.Trim( StringUtil.Str( (decimal)(A127LeaveRequestId), 10, 0)) + StringUtil.Trim( A109EmployeeEmail) + StringUtil.NewLine( );
                AV15ICSLeaveExport += "END:VEVENT" + StringUtil.NewLine( );
@@ -263,9 +250,6 @@ namespace GeneXus.Programs {
          A109EmployeeEmail = "";
          AV21ErrorMessage = "";
          AV20HttpResponse = new GxHttpResponse( context);
-         AV18ProjectIdCollection = new GxSimpleCollection<long>();
-         AV19EmployeeIdCollection = new GxSimpleCollection<long>();
-         GXt_objcol_int1 = new GxSimpleCollection<long>();
          AV15ICSLeaveExport = "";
          P00CO3_A106EmployeeId = new long[1] ;
          P00CO3_A148EmployeeName = new string[] {""} ;
@@ -282,7 +266,7 @@ namespace GeneXus.Programs {
          A129LeaveRequestStartDate = DateTime.MinValue;
          A130LeaveRequestEndDate = DateTime.MinValue;
          A125LeaveTypeName = "";
-         GXt_char2 = "";
+         GXt_char1 = "";
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.aprc_icsleaveexport__default(),
             new Object[][] {
                 new Object[] {
@@ -302,7 +286,7 @@ namespace GeneXus.Programs {
       private short gxcookieaux ;
       private short nGotPars ;
       private short GxWebError ;
-      private short AV22GXLvl11 ;
+      private short AV22GXLvl12 ;
       private long AV9ProjectId ;
       private long AV8LeaveTypeId ;
       private long A106EmployeeId ;
@@ -312,7 +296,7 @@ namespace GeneXus.Programs {
       private string gxfirstwebparm ;
       private string A148EmployeeName ;
       private string A125LeaveTypeName ;
-      private string GXt_char2 ;
+      private string GXt_char1 ;
       private DateTime A128LeaveRequestDate ;
       private DateTime A129LeaveRequestStartDate ;
       private DateTime A130LeaveRequestEndDate ;
@@ -333,9 +317,6 @@ namespace GeneXus.Programs {
       private string[] P00CO2_A188EmployeeAPIPassword ;
       private string[] P00CO2_A109EmployeeEmail ;
       private long[] P00CO2_A106EmployeeId ;
-      private GxSimpleCollection<long> AV18ProjectIdCollection ;
-      private GxSimpleCollection<long> AV19EmployeeIdCollection ;
-      private GxSimpleCollection<long> GXt_objcol_int1 ;
       private long[] P00CO3_A106EmployeeId ;
       private string[] P00CO3_A148EmployeeName ;
       private string[] P00CO3_A109EmployeeEmail ;
@@ -350,45 +331,6 @@ namespace GeneXus.Programs {
 
    public class aprc_icsleaveexport__default : DataStoreHelperBase, IDataStoreHelper
    {
-      protected Object[] conditional_P00CO4( IGxContext context ,
-                                             long AV9ProjectId ,
-                                             long AV8LeaveTypeId ,
-                                             long A124LeaveTypeId ,
-                                             long A106EmployeeId )
-      {
-         System.Text.StringBuilder sWhereString = new System.Text.StringBuilder();
-         string scmdbuf;
-         short[] GXv_int3 = new short[2];
-         Object[] GXv_Object4 = new Object[2];
-         scmdbuf = "SELECT T1.EmployeeId, T1.LeaveTypeId, T1.LeaveRequestDate, T1.LeaveRequestStartDate, T1.LeaveRequestEndDate, T2.LeaveTypeName, T1.LeaveRequestId FROM (LeaveRequest T1 INNER JOIN LeaveType T2 ON T2.LeaveTypeId = T1.LeaveTypeId)";
-         AddWhere(sWhereString, "(T1.EmployeeId = :EmployeeId)");
-         if ( ! (0==AV8LeaveTypeId) )
-         {
-            AddWhere(sWhereString, "(T1.LeaveTypeId = :AV8LeaveTypeId)");
-         }
-         else
-         {
-            GXv_int3[1] = 1;
-         }
-         scmdbuf += sWhereString;
-         scmdbuf += " ORDER BY T1.EmployeeId";
-         GXv_Object4[0] = scmdbuf;
-         GXv_Object4[1] = GXv_int3;
-         return GXv_Object4 ;
-      }
-
-      public override Object [] getDynamicStatement( int cursor ,
-                                                     IGxContext context ,
-                                                     Object [] dynConstraints )
-      {
-         switch ( cursor )
-         {
-               case 2 :
-                     return conditional_P00CO4(context, (long)dynConstraints[0] , (long)dynConstraints[1] , (long)dynConstraints[3] , (long)dynConstraints[4] );
-         }
-         return base.getDynamicStatement(cursor, context, dynConstraints);
-      }
-
       public ICursor[] getCursors( )
       {
          cursorDefinitions();
@@ -420,7 +362,7 @@ namespace GeneXus.Programs {
           def= new CursorDef[] {
               new CursorDef("P00CO2", "SELECT EmployeeAPIPassword, EmployeeEmail, EmployeeId FROM Employee WHERE (EmployeeEmail = ( :AV13EmployeeEmail)) AND (EmployeeAPIPassword = ( :AV14EmployeeAPIPassword)) ORDER BY EmployeeEmail ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00CO2,1, GxCacheFrequency.OFF ,false,true )
              ,new CursorDef("P00CO3", "SELECT EmployeeId, EmployeeName, EmployeeEmail FROM Employee ORDER BY EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00CO3,100, GxCacheFrequency.OFF ,true,false )
-             ,new CursorDef("P00CO4", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00CO4,100, GxCacheFrequency.OFF ,true,false )
+             ,new CursorDef("P00CO4", "SELECT T1.EmployeeId, T1.LeaveTypeId, T1.LeaveRequestDate, T1.LeaveRequestStartDate, T1.LeaveRequestEndDate, T2.LeaveTypeName, T1.LeaveRequestId FROM (LeaveRequest T1 INNER JOIN LeaveType T2 ON T2.LeaveTypeId = T1.LeaveTypeId) WHERE (T1.EmployeeId = :EmployeeId) AND (T1.LeaveTypeId = :AV8LeaveTypeId) ORDER BY T1.EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00CO4,100, GxCacheFrequency.OFF ,true,false )
           };
        }
     }
