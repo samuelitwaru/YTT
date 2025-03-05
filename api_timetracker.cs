@@ -36,10 +36,6 @@ namespace GeneXus.Programs {
          {
             return GAMSecurityLevel.SecurityNone ;
          }
-         else if ( StringUtil.StrCmp(permissionMethod, "gxep_example") == 0 )
-         {
-            return GAMSecurityLevel.SecurityNone ;
-         }
          return GAMSecurityLevel.SecurityLow ;
       }
 
@@ -105,14 +101,6 @@ namespace GeneXus.Programs {
          aP0_result=this.AV15result;
       }
 
-      public void gxep_example( out GxHttpResponse aP0_HttpResponse )
-      {
-         initialize();
-         /* Example Constructor */
-         context.wjLoc = "aprc_example.aspx";
-         aP0_HttpResponse=this.AV17HttpResponse;
-      }
-
       public override void cleanup( )
       {
          CloseCursors();
@@ -122,7 +110,6 @@ namespace GeneXus.Programs {
       {
          AV15result = "";
          AV12ICSLeaveExport = "";
-         AV17HttpResponse = new GxHttpResponse( context);
          /* GeneXus formulas. */
       }
 
@@ -130,11 +117,9 @@ namespace GeneXus.Programs {
       protected bool returnInSub ;
       protected string AV15result ;
       protected string AV12ICSLeaveExport ;
-      protected GxHttpResponse AV17HttpResponse ;
       protected IGxDataStore dsGAM ;
       protected IGxDataStore dsDefault ;
       protected string aP0_result ;
-      protected GxHttpResponse aP0_HttpResponse ;
    }
 
 }

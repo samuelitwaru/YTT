@@ -110,31 +110,6 @@ namespace GeneXus.Programs {
          /* API_ICSLeaveAPI Constructor */
       }
 
-      public void gxep_example( out GxHttpResponse aP0_HttpResponse )
-      {
-         restCliExample = new GXRestAPIClient();
-         if ( restLocation == null )
-         {
-            InitLocation();
-         }
-         restLocation.ResourceName = "/example";
-         restCliExample.Location = restLocation;
-         restCliExample.HttpMethod = "GET";
-         restCliExample.RestExecute();
-         if ( restCliExample.ErrorCode != 0 )
-         {
-            gxProperties.ErrorCode = restCliExample.ErrorCode;
-            gxProperties.ErrorMessage = restCliExample.ErrorMessage;
-            gxProperties.StatusCode = restCliExample.StatusCode;
-            aP0_HttpResponse = new GxHttpResponse();
-         }
-         else
-         {
-            aP0_HttpResponse = restCliExample.GetBodySdt<GxHttpResponse>("HttpResponse");
-         }
-         /* Example Constructor */
-      }
-
       public override void cleanup( )
       {
          CloseCursors();
@@ -145,20 +120,16 @@ namespace GeneXus.Programs {
          gxProperties = new GxObjectProperties();
          restCliAPI_ICSLeaveAPI = new GXRestAPIClient();
          aP0_result = "";
-         restCliExample = new GXRestAPIClient();
-         aP0_HttpResponse = new GxHttpResponse();
          /* GeneXus formulas. */
       }
 
       protected string Gx_restmethod ;
       protected GXRestAPIClient restCliAPI_ICSLeaveAPI ;
-      protected GXRestAPIClient restCliExample ;
       protected GxLocation restLocation ;
       protected GxObjectProperties gxProperties ;
       protected IGxDataStore dsGAM ;
       protected IGxDataStore dsDefault ;
       protected string aP0_result ;
-      protected GxHttpResponse aP0_HttpResponse ;
    }
 
 }
