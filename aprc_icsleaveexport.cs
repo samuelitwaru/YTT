@@ -187,6 +187,15 @@ namespace GeneXus.Programs {
             A106EmployeeId = P00CO3_A106EmployeeId[0];
             A148EmployeeName = P00CO3_A148EmployeeName[0];
             A109EmployeeEmail = P00CO3_A109EmployeeEmail[0];
+            pr_default.dynParam(2, new Object[]{ new Object[]{
+                                                 AV9ProjectId ,
+                                                 AV8LeaveTypeId ,
+                                                 A124LeaveTypeId ,
+                                                 A106EmployeeId } ,
+                                                 new int[]{
+                                                 TypeConstants.LONG, TypeConstants.LONG, TypeConstants.LONG, TypeConstants.LONG
+                                                 }
+            });
             /* Using cursor P00CO4 */
             pr_default.execute(2, new Object[] {A106EmployeeId, AV8LeaveTypeId});
             while ( (pr_default.getStatus(2) != 101) )
@@ -341,6 +350,45 @@ namespace GeneXus.Programs {
 
    public class aprc_icsleaveexport__default : DataStoreHelperBase, IDataStoreHelper
    {
+      protected Object[] conditional_P00CO4( IGxContext context ,
+                                             long AV9ProjectId ,
+                                             long AV8LeaveTypeId ,
+                                             long A124LeaveTypeId ,
+                                             long A106EmployeeId )
+      {
+         System.Text.StringBuilder sWhereString = new System.Text.StringBuilder();
+         string scmdbuf;
+         short[] GXv_int3 = new short[2];
+         Object[] GXv_Object4 = new Object[2];
+         scmdbuf = "SELECT T1.EmployeeId, T1.LeaveTypeId, T1.LeaveRequestDate, T1.LeaveRequestStartDate, T1.LeaveRequestEndDate, T2.LeaveTypeName, T1.LeaveRequestId FROM (LeaveRequest T1 INNER JOIN LeaveType T2 ON T2.LeaveTypeId = T1.LeaveTypeId)";
+         AddWhere(sWhereString, "(T1.EmployeeId = :EmployeeId)");
+         if ( ! (0==AV8LeaveTypeId) )
+         {
+            AddWhere(sWhereString, "(T1.LeaveTypeId = :AV8LeaveTypeId)");
+         }
+         else
+         {
+            GXv_int3[1] = 1;
+         }
+         scmdbuf += sWhereString;
+         scmdbuf += " ORDER BY T1.EmployeeId";
+         GXv_Object4[0] = scmdbuf;
+         GXv_Object4[1] = GXv_int3;
+         return GXv_Object4 ;
+      }
+
+      public override Object [] getDynamicStatement( int cursor ,
+                                                     IGxContext context ,
+                                                     Object [] dynConstraints )
+      {
+         switch ( cursor )
+         {
+               case 2 :
+                     return conditional_P00CO4(context, (long)dynConstraints[0] , (long)dynConstraints[1] , (long)dynConstraints[3] , (long)dynConstraints[4] );
+         }
+         return base.getDynamicStatement(cursor, context, dynConstraints);
+      }
+
       public ICursor[] getCursors( )
       {
          cursorDefinitions();
@@ -372,7 +420,7 @@ namespace GeneXus.Programs {
           def= new CursorDef[] {
               new CursorDef("P00CO2", "SELECT EmployeeAPIPassword, EmployeeEmail, EmployeeId FROM Employee WHERE (EmployeeEmail = ( :AV13EmployeeEmail)) AND (EmployeeAPIPassword = ( :AV14EmployeeAPIPassword)) ORDER BY EmployeeEmail ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00CO2,1, GxCacheFrequency.OFF ,false,true )
              ,new CursorDef("P00CO3", "SELECT EmployeeId, EmployeeName, EmployeeEmail FROM Employee ORDER BY EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00CO3,100, GxCacheFrequency.OFF ,true,false )
-             ,new CursorDef("P00CO4", "SELECT T1.EmployeeId, T1.LeaveTypeId, T1.LeaveRequestDate, T1.LeaveRequestStartDate, T1.LeaveRequestEndDate, T2.LeaveTypeName, T1.LeaveRequestId FROM (LeaveRequest T1 INNER JOIN LeaveType T2 ON T2.LeaveTypeId = T1.LeaveTypeId) WHERE (T1.EmployeeId = :EmployeeId) AND (T1.LeaveTypeId = :AV8LeaveTypeId) ORDER BY T1.EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00CO4,100, GxCacheFrequency.OFF ,true,false )
+             ,new CursorDef("P00CO4", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00CO4,100, GxCacheFrequency.OFF ,true,false )
           };
        }
     }
