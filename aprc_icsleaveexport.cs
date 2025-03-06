@@ -98,8 +98,8 @@ namespace GeneXus.Programs {
          AV12CredsCollection = (GxSimpleCollection<string>)(GxRegex.Split(AV10AuthorizationValue,":"));
          AV13EmployeeEmail = ((string)AV12CredsCollection.Item(1));
          AV14EmployeeAPIPassword = ((string)AV12CredsCollection.Item(2));
-         new logtofile(context ).execute(  AV13EmployeeEmail+" : "+AV14EmployeeAPIPassword) ;
-         AV22GXLvl12 = 0;
+         new logtofile(context ).execute(  AV13EmployeeEmail+":"+AV14EmployeeAPIPassword) ;
+         AV22GXLvl13 = 0;
          /* Using cursor P00CO2 */
          pr_default.execute(0, new Object[] {AV13EmployeeEmail, AV14EmployeeAPIPassword});
          while ( (pr_default.getStatus(0) != 101) )
@@ -107,15 +107,16 @@ namespace GeneXus.Programs {
             A188EmployeeAPIPassword = P00CO2_A188EmployeeAPIPassword[0];
             A109EmployeeEmail = P00CO2_A109EmployeeEmail[0];
             A106EmployeeId = P00CO2_A106EmployeeId[0];
-            AV22GXLvl12 = 1;
+            AV22GXLvl13 = 1;
             /* Exiting from a For First loop. */
             if (true) break;
          }
          pr_default.close(0);
-         if ( AV22GXLvl12 == 0 )
+         if ( AV22GXLvl13 == 0 )
          {
-            AV21ErrorMessage = "Employee not found";
+            AV21ErrorMessage = "ERROR: AUTH FAILED";
             AV20HttpResponse.AddString(AV21ErrorMessage);
+            new logtofile(context ).execute(  AV21ErrorMessage) ;
             context.nUserReturn = 1;
             if ( context.WillRedirect( ) )
             {
@@ -176,24 +177,30 @@ namespace GeneXus.Programs {
          AV15ICSLeaveExport += "X-WR-CALNAME:Absence" + StringUtil.NewLine( );
          AV15ICSLeaveExport += "X-WR-CALDESC:" + StringUtil.NewLine( );
          AV15ICSLeaveExport += "METHOD:PUBLISH" + StringUtil.NewLine( );
+         pr_default.dynParam(1, new Object[]{ new Object[]{
+                                              AV9ProjectId } ,
+                                              new int[]{
+                                              TypeConstants.LONG
+                                              }
+         });
          /* Using cursor P00CO3 */
          pr_default.execute(1);
          while ( (pr_default.getStatus(1) != 101) )
          {
             A106EmployeeId = P00CO3_A106EmployeeId[0];
+            A124LeaveTypeId = P00CO3_A124LeaveTypeId[0];
+            A128LeaveRequestDate = P00CO3_A128LeaveRequestDate[0];
+            A129LeaveRequestStartDate = P00CO3_A129LeaveRequestStartDate[0];
+            A130LeaveRequestEndDate = P00CO3_A130LeaveRequestEndDate[0];
+            A125LeaveTypeName = P00CO3_A125LeaveTypeName[0];
             A148EmployeeName = P00CO3_A148EmployeeName[0];
             A109EmployeeEmail = P00CO3_A109EmployeeEmail[0];
-            /* Using cursor P00CO4 */
-            pr_default.execute(2, new Object[] {A106EmployeeId, AV8LeaveTypeId});
-            while ( (pr_default.getStatus(2) != 101) )
+            A127LeaveRequestId = P00CO3_A127LeaveRequestId[0];
+            A148EmployeeName = P00CO3_A148EmployeeName[0];
+            A109EmployeeEmail = P00CO3_A109EmployeeEmail[0];
+            A125LeaveTypeName = P00CO3_A125LeaveTypeName[0];
+            if ( A124LeaveTypeId == AV8LeaveTypeId )
             {
-               A124LeaveTypeId = P00CO4_A124LeaveTypeId[0];
-               A128LeaveRequestDate = P00CO4_A128LeaveRequestDate[0];
-               A129LeaveRequestStartDate = P00CO4_A129LeaveRequestStartDate[0];
-               A130LeaveRequestEndDate = P00CO4_A130LeaveRequestEndDate[0];
-               A125LeaveTypeName = P00CO4_A125LeaveTypeName[0];
-               A127LeaveRequestId = P00CO4_A127LeaveRequestId[0];
-               A125LeaveTypeName = P00CO4_A125LeaveTypeName[0];
                AV15ICSLeaveExport += "BEGIN:VEVENT" + StringUtil.NewLine( );
                GXt_char1 = AV15ICSLeaveExport;
                new formatdatetime(context ).execute(  A128LeaveRequestDate,  "YYYYMMDD", out  GXt_char1) ;
@@ -207,12 +214,12 @@ namespace GeneXus.Programs {
                AV15ICSLeaveExport += "SUMMARY:" + StringUtil.Trim( A148EmployeeName) + " | " + StringUtil.Trim( A125LeaveTypeName) + StringUtil.NewLine( );
                AV15ICSLeaveExport += "UID:" + StringUtil.Trim( StringUtil.Str( (decimal)(A127LeaveRequestId), 10, 0)) + StringUtil.Trim( A109EmployeeEmail) + StringUtil.NewLine( );
                AV15ICSLeaveExport += "END:VEVENT" + StringUtil.NewLine( );
-               pr_default.readNext(2);
             }
-            pr_default.close(2);
             pr_default.readNext(1);
          }
          pr_default.close(1);
+         new logtofile(context ).execute(  AV15ICSLeaveExport) ;
+         new logtofile(context ).execute(  "----------------------------------------------------------") ;
          AV15ICSLeaveExport += "END:VCALENDAR" + StringUtil.NewLine( );
          AV20HttpResponse.AddString(AV15ICSLeaveExport);
          if ( context.WillRedirect( ) )
@@ -252,20 +259,19 @@ namespace GeneXus.Programs {
          AV20HttpResponse = new GxHttpResponse( context);
          AV15ICSLeaveExport = "";
          P00CO3_A106EmployeeId = new long[1] ;
+         P00CO3_A124LeaveTypeId = new long[1] ;
+         P00CO3_A128LeaveRequestDate = new DateTime[] {DateTime.MinValue} ;
+         P00CO3_A129LeaveRequestStartDate = new DateTime[] {DateTime.MinValue} ;
+         P00CO3_A130LeaveRequestEndDate = new DateTime[] {DateTime.MinValue} ;
+         P00CO3_A125LeaveTypeName = new string[] {""} ;
          P00CO3_A148EmployeeName = new string[] {""} ;
          P00CO3_A109EmployeeEmail = new string[] {""} ;
-         A148EmployeeName = "";
-         P00CO4_A106EmployeeId = new long[1] ;
-         P00CO4_A124LeaveTypeId = new long[1] ;
-         P00CO4_A128LeaveRequestDate = new DateTime[] {DateTime.MinValue} ;
-         P00CO4_A129LeaveRequestStartDate = new DateTime[] {DateTime.MinValue} ;
-         P00CO4_A130LeaveRequestEndDate = new DateTime[] {DateTime.MinValue} ;
-         P00CO4_A125LeaveTypeName = new string[] {""} ;
-         P00CO4_A127LeaveRequestId = new long[1] ;
+         P00CO3_A127LeaveRequestId = new long[1] ;
          A128LeaveRequestDate = DateTime.MinValue;
          A129LeaveRequestStartDate = DateTime.MinValue;
          A130LeaveRequestEndDate = DateTime.MinValue;
          A125LeaveTypeName = "";
+         A148EmployeeName = "";
          GXt_char1 = "";
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.aprc_icsleaveexport__default(),
             new Object[][] {
@@ -273,10 +279,7 @@ namespace GeneXus.Programs {
                P00CO2_A188EmployeeAPIPassword, P00CO2_A109EmployeeEmail, P00CO2_A106EmployeeId
                }
                , new Object[] {
-               P00CO3_A106EmployeeId, P00CO3_A148EmployeeName, P00CO3_A109EmployeeEmail
-               }
-               , new Object[] {
-               P00CO4_A106EmployeeId, P00CO4_A124LeaveTypeId, P00CO4_A128LeaveRequestDate, P00CO4_A129LeaveRequestStartDate, P00CO4_A130LeaveRequestEndDate, P00CO4_A125LeaveTypeName, P00CO4_A127LeaveRequestId
+               P00CO3_A106EmployeeId, P00CO3_A124LeaveTypeId, P00CO3_A128LeaveRequestDate, P00CO3_A129LeaveRequestStartDate, P00CO3_A130LeaveRequestEndDate, P00CO3_A125LeaveTypeName, P00CO3_A148EmployeeName, P00CO3_A109EmployeeEmail, P00CO3_A127LeaveRequestId
                }
             }
          );
@@ -286,7 +289,7 @@ namespace GeneXus.Programs {
       private short gxcookieaux ;
       private short nGotPars ;
       private short GxWebError ;
-      private short AV22GXLvl12 ;
+      private short AV22GXLvl13 ;
       private long AV9ProjectId ;
       private long AV8LeaveTypeId ;
       private long A106EmployeeId ;
@@ -294,8 +297,8 @@ namespace GeneXus.Programs {
       private long A127LeaveRequestId ;
       private string GXKey ;
       private string gxfirstwebparm ;
-      private string A148EmployeeName ;
       private string A125LeaveTypeName ;
+      private string A148EmployeeName ;
       private string GXt_char1 ;
       private DateTime A128LeaveRequestDate ;
       private DateTime A129LeaveRequestStartDate ;
@@ -318,26 +321,49 @@ namespace GeneXus.Programs {
       private string[] P00CO2_A109EmployeeEmail ;
       private long[] P00CO2_A106EmployeeId ;
       private long[] P00CO3_A106EmployeeId ;
+      private long[] P00CO3_A124LeaveTypeId ;
+      private DateTime[] P00CO3_A128LeaveRequestDate ;
+      private DateTime[] P00CO3_A129LeaveRequestStartDate ;
+      private DateTime[] P00CO3_A130LeaveRequestEndDate ;
+      private string[] P00CO3_A125LeaveTypeName ;
       private string[] P00CO3_A148EmployeeName ;
       private string[] P00CO3_A109EmployeeEmail ;
-      private long[] P00CO4_A106EmployeeId ;
-      private long[] P00CO4_A124LeaveTypeId ;
-      private DateTime[] P00CO4_A128LeaveRequestDate ;
-      private DateTime[] P00CO4_A129LeaveRequestStartDate ;
-      private DateTime[] P00CO4_A130LeaveRequestEndDate ;
-      private string[] P00CO4_A125LeaveTypeName ;
-      private long[] P00CO4_A127LeaveRequestId ;
+      private long[] P00CO3_A127LeaveRequestId ;
    }
 
    public class aprc_icsleaveexport__default : DataStoreHelperBase, IDataStoreHelper
    {
+      protected Object[] conditional_P00CO3( IGxContext context ,
+                                             long AV9ProjectId )
+      {
+         System.Text.StringBuilder sWhereString = new System.Text.StringBuilder();
+         string scmdbuf;
+         Object[] GXv_Object2 = new Object[2];
+         scmdbuf = "SELECT T1.EmployeeId, T1.LeaveTypeId, T1.LeaveRequestDate, T1.LeaveRequestStartDate, T1.LeaveRequestEndDate, T3.LeaveTypeName, T2.EmployeeName, T2.EmployeeEmail, T1.LeaveRequestId FROM ((LeaveRequest T1 INNER JOIN Employee T2 ON T2.EmployeeId = T1.EmployeeId) INNER JOIN LeaveType T3 ON T3.LeaveTypeId = T1.LeaveTypeId)";
+         scmdbuf += sWhereString;
+         scmdbuf += " ORDER BY T1.LeaveRequestId";
+         GXv_Object2[0] = scmdbuf;
+         return GXv_Object2 ;
+      }
+
+      public override Object [] getDynamicStatement( int cursor ,
+                                                     IGxContext context ,
+                                                     Object [] dynConstraints )
+      {
+         switch ( cursor )
+         {
+               case 1 :
+                     return conditional_P00CO3(context, (long)dynConstraints[0] );
+         }
+         return base.getDynamicStatement(cursor, context, dynConstraints);
+      }
+
       public ICursor[] getCursors( )
       {
          cursorDefinitions();
          return new Cursor[] {
           new ForEachCursor(def[0])
          ,new ForEachCursor(def[1])
-         ,new ForEachCursor(def[2])
        };
     }
 
@@ -354,15 +380,9 @@ namespace GeneXus.Programs {
           Object[] prmP00CO3;
           prmP00CO3 = new Object[] {
           };
-          Object[] prmP00CO4;
-          prmP00CO4 = new Object[] {
-          new ParDef("EmployeeId",GXType.Int64,10,0) ,
-          new ParDef("AV8LeaveTypeId",GXType.Int64,10,0)
-          };
           def= new CursorDef[] {
               new CursorDef("P00CO2", "SELECT EmployeeAPIPassword, EmployeeEmail, EmployeeId FROM Employee WHERE (EmployeeEmail = ( :AV13EmployeeEmail)) AND (EmployeeAPIPassword = ( :AV14EmployeeAPIPassword)) ORDER BY EmployeeEmail ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00CO2,1, GxCacheFrequency.OFF ,false,true )
-             ,new CursorDef("P00CO3", "SELECT EmployeeId, EmployeeName, EmployeeEmail FROM Employee ORDER BY EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00CO3,100, GxCacheFrequency.OFF ,true,false )
-             ,new CursorDef("P00CO4", "SELECT T1.EmployeeId, T1.LeaveTypeId, T1.LeaveRequestDate, T1.LeaveRequestStartDate, T1.LeaveRequestEndDate, T2.LeaveTypeName, T1.LeaveRequestId FROM (LeaveRequest T1 INNER JOIN LeaveType T2 ON T2.LeaveTypeId = T1.LeaveTypeId) WHERE (T1.EmployeeId = :EmployeeId) AND (T1.LeaveTypeId = :AV8LeaveTypeId) ORDER BY T1.EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00CO4,100, GxCacheFrequency.OFF ,true,false )
+             ,new CursorDef("P00CO3", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00CO3,100, GxCacheFrequency.OFF ,true,false )
           };
        }
     }
@@ -380,17 +400,14 @@ namespace GeneXus.Programs {
                 return;
              case 1 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);
-                ((string[]) buf[1])[0] = rslt.getString(2, 100);
-                ((string[]) buf[2])[0] = rslt.getVarchar(3);
-                return;
-             case 2 :
-                ((long[]) buf[0])[0] = rslt.getLong(1);
                 ((long[]) buf[1])[0] = rslt.getLong(2);
                 ((DateTime[]) buf[2])[0] = rslt.getGXDate(3);
                 ((DateTime[]) buf[3])[0] = rslt.getGXDate(4);
                 ((DateTime[]) buf[4])[0] = rslt.getGXDate(5);
                 ((string[]) buf[5])[0] = rslt.getString(6, 100);
-                ((long[]) buf[6])[0] = rslt.getLong(7);
+                ((string[]) buf[6])[0] = rslt.getString(7, 100);
+                ((string[]) buf[7])[0] = rslt.getVarchar(8);
+                ((long[]) buf[8])[0] = rslt.getLong(9);
                 return;
        }
     }
