@@ -42,19 +42,23 @@ namespace GeneXus.Programs {
       }
 
       public void execute( long aP0_ProjectId ,
-                           long aP1_LeaveTypeId )
+                           long aP1_LeaveTypeId ,
+                           string aP2_Token )
       {
          this.AV2ProjectId = aP0_ProjectId;
          this.AV3LeaveTypeId = aP1_LeaveTypeId;
+         this.AV4Token = aP2_Token;
          initialize();
          ExecuteImpl();
       }
 
       public void executeSubmit( long aP0_ProjectId ,
-                                 long aP1_LeaveTypeId )
+                                 long aP1_LeaveTypeId ,
+                                 string aP2_Token )
       {
          this.AV2ProjectId = aP0_ProjectId;
          this.AV3LeaveTypeId = aP1_LeaveTypeId;
+         this.AV4Token = aP2_Token;
          SubmitImpl();
       }
 
@@ -62,9 +66,9 @@ namespace GeneXus.Programs {
       {
          /* GeneXus formulas */
          /* Output device settings */
-         args = new Object[] {(long)AV2ProjectId,(long)AV3LeaveTypeId} ;
+         args = new Object[] {(long)AV2ProjectId,(long)AV3LeaveTypeId,(string)AV4Token} ;
          ClassLoader.Execute("aprc_icsleaveexport","GeneXus.Programs","aprc_icsleaveexport", new Object[] {context }, "execute", args);
-         if ( ( args != null ) && ( args.Length == 2 ) )
+         if ( ( args != null ) && ( args.Length == 3 ) )
          {
          }
          cleanup();
@@ -86,6 +90,7 @@ namespace GeneXus.Programs {
 
       private long AV2ProjectId ;
       private long AV3LeaveTypeId ;
+      private string AV4Token ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private Object[] args ;

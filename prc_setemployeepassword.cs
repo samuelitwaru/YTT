@@ -79,8 +79,8 @@ namespace GeneXus.Programs {
             A106EmployeeId = P00CG2_A106EmployeeId[0];
             A188EmployeeAPIPassword = P00CG2_A188EmployeeAPIPassword[0];
             AV11GUIDString = StringUtil.Trim( Guid.NewGuid( ).ToString());
-            AV12StringCollection = (GxSimpleCollection<string>)(GxRegex.Split(AV11GUIDString,"-"));
-            AV9EmployeeAPIPassword = ((string)AV12StringCollection.Item(AV12StringCollection.Count));
+            AV9EmployeeAPIPassword = AV11GUIDString;
+            new logtofile(context ).execute(  AV9EmployeeAPIPassword) ;
             A188EmployeeAPIPassword = AV9EmployeeAPIPassword;
             GXTCG2 = 1;
             /* Using cursor P00CG3 */
@@ -116,7 +116,6 @@ namespace GeneXus.Programs {
          P00CG2_A188EmployeeAPIPassword = new string[] {""} ;
          A188EmployeeAPIPassword = "";
          AV11GUIDString = "";
-         AV12StringCollection = new GxSimpleCollection<string>();
          pr_gam = new DataStoreProvider(context, new GeneXus.Programs.prc_setemployeepassword__gam(),
             new Object[][] {
             }
@@ -144,7 +143,6 @@ namespace GeneXus.Programs {
       private IDataStoreProvider pr_default ;
       private long[] P00CG2_A106EmployeeId ;
       private string[] P00CG2_A188EmployeeAPIPassword ;
-      private GxSimpleCollection<string> AV12StringCollection ;
       private string aP1_EmployeeAPIPassword ;
       private IDataStoreProvider pr_gam ;
    }
