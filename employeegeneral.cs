@@ -177,7 +177,7 @@ namespace GeneXus.Programs {
             if ( ( GxWebError == 0 ) && ! isAjaxCallMode( ) )
             {
                /* GeneXus formulas. */
-               AV16Pgmname = "EmployeeGeneral";
+               AV17Pgmname = "EmployeeGeneral";
                edtavEmployeeapipassword_Enabled = 0;
                AssignProp(sPrefix, false, edtavEmployeeapipassword_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavEmployeeapipassword_Enabled), 5, 0), true);
                WS342( ) ;
@@ -535,16 +535,25 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
             /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, divUnnamedtable1_Internalname, divUnnamedtable1_Visible, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
+            /* Div Control */
+            GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
+            /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12 col-sm-6 DataContentCell DscTop", "start", "top", "", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "form-group gx-form-group", "start", "top", ""+" data-gx-for=\""+edtavEmployeeapipassword_Internalname+"\"", "", "div");
             /* Attribute/Variable Label */
-            GxWebStd.gx_label_element( context, edtavEmployeeapipassword_Internalname, "API Password", " AttributeLabel", 1, true, "");
+            GxWebStd.gx_label_element( context, edtavEmployeeapipassword_Internalname, "API Token", " AttributeLabel", 1, true, "");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", " gx-attribute", "start", "top", "", "", "div");
             /* Single line edit */
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 41,'" + sPrefix + "',false,'',0)\"";
-            GxWebStd.gx_single_line_edit( context, edtavEmployeeapipassword_Internalname, AV15EmployeeAPIPassword, StringUtil.RTrim( context.localUtil.Format( AV15EmployeeAPIPassword, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,41);\"", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavEmployeeapipassword_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavEmployeeapipassword_Enabled, 0, "text", "", 40, "chr", 1, "row", 40, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_EmployeeGeneral.htm");
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 44,'" + sPrefix + "',false,'',0)\"";
+            GxWebStd.gx_single_line_edit( context, edtavEmployeeapipassword_Internalname, AV15EmployeeAPIPassword, StringUtil.RTrim( context.localUtil.Format( AV15EmployeeAPIPassword, "")), TempTags+" onchange=\""+""+";gx.evt.onchange(this, event)\" "+" onblur=\""+""+";gx.evt.onblur(this,44);\"", "'"+sPrefix+"'"+",false,"+"'"+""+"'", "", "", "", "", edtavEmployeeapipassword_Jsonclick, 0, "Attribute", "", "", "", "", 1, edtavEmployeeapipassword_Enabled, 0, "text", "", 40, "chr", 1, "row", 40, 0, 0, 0, 0, -1, -1, true, "", "start", true, "", "HLP_EmployeeGeneral.htm");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
+            GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             GxWebStd.gx_div_end( context, "start", "top", "div");
@@ -560,14 +569,14 @@ namespace GeneXus.Programs {
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-action-group CellMarginTop10", "start", "top", " "+"data-gx-actiongroup-type=\"toolbar\""+" ", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-button", "start", "top", "", "", "div");
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 46,'" + sPrefix + "',false,'',0)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 49,'" + sPrefix + "',false,'',0)\"";
             ClassString = "Button";
             StyleString = "";
             GxWebStd.gx_button_ctrl( context, bttBtnupdate_Internalname, "", "Update", bttBtnupdate_Jsonclick, 7, "Update", "", StyleString, ClassString, bttBtnupdate_Visible, 1, "standard", "'"+sPrefix+"'"+",false,"+"'"+"e11341_client"+"'", TempTags, "", 2, "HLP_EmployeeGeneral.htm");
             GxWebStd.gx_div_end( context, "start", "top", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "gx-button", "start", "top", "", "", "div");
-            TempTags = "  onfocus=\"gx.evt.onfocus(this, 48,'" + sPrefix + "',false,'',0)\"";
+            TempTags = "  onfocus=\"gx.evt.onfocus(this, 51,'" + sPrefix + "',false,'',0)\"";
             ClassString = "BtnDefault";
             StyleString = "";
             GxWebStd.gx_button_ctrl( context, bttBtndelete_Internalname, "", "Delete", bttBtndelete_Jsonclick, 7, "Delete", "", StyleString, ClassString, bttBtndelete_Visible, 1, "standard", "'"+sPrefix+"'"+",false,"+"'"+"e12341_client"+"'", TempTags, "", 2, "HLP_EmployeeGeneral.htm");
@@ -960,7 +969,7 @@ namespace GeneXus.Programs {
       protected void initialize_formulas( )
       {
          /* GeneXus formulas. */
-         AV16Pgmname = "EmployeeGeneral";
+         AV17Pgmname = "EmployeeGeneral";
          edtavEmployeeapipassword_Enabled = 0;
          AssignProp(sPrefix, false, edtavEmployeeapipassword_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavEmployeeapipassword_Enabled), 5, 0), true);
       }
@@ -1020,7 +1029,7 @@ namespace GeneXus.Programs {
 
       protected void before_start_formulas( )
       {
-         AV16Pgmname = "EmployeeGeneral";
+         AV17Pgmname = "EmployeeGeneral";
          edtavEmployeeapipassword_Enabled = 0;
          AssignProp(sPrefix, false, edtavEmployeeapipassword_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtavEmployeeapipassword_Enabled), 5, 0), true);
          edtEmployeeFirstName_Enabled = 0;
@@ -1170,6 +1179,8 @@ namespace GeneXus.Programs {
             bttBtndelete_Visible = 0;
             AssignProp(sPrefix, false, bttBtndelete_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(bttBtndelete_Visible), 5, 0), true);
          }
+         divUnnamedtable1_Visible = (((StringUtil.StrCmp(Gx_mode, "UPD")==0)) ? 1 : 0);
+         AssignProp(sPrefix, false, divUnnamedtable1_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(divUnnamedtable1_Visible), 5, 0), true);
       }
 
       protected void S112( )
@@ -1177,7 +1188,7 @@ namespace GeneXus.Programs {
          /* 'PREPARETRANSACTION' Routine */
          returnInSub = false;
          AV8TrnContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext(context);
-         AV8TrnContext.gxTpr_Callerobject = AV16Pgmname;
+         AV8TrnContext.gxTpr_Callerobject = AV17Pgmname;
          AV8TrnContext.gxTpr_Callerondelete = false;
          AV8TrnContext.gxTpr_Callerurl = AV11HTTPRequest.ScriptName+"?"+AV11HTTPRequest.QueryString;
          AV8TrnContext.gxTpr_Transactionname = "Employee";
@@ -1381,7 +1392,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2025219830219", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202537392699", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1397,7 +1408,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("employeegeneral.js", "?2025219830219", false, true);
+         context.AddJavascriptSource("employeegeneral.js", "?202537392699", false, true);
          /* End function include_jscripts */
       }
 
@@ -1439,6 +1450,7 @@ namespace GeneXus.Programs {
          chkEmployeeIsActive_Internalname = sPrefix+"EMPLOYEEISACTIVE";
          chkEmployeeIsManager_Internalname = sPrefix+"EMPLOYEEISMANAGER";
          edtavEmployeeapipassword_Internalname = sPrefix+"vEMPLOYEEAPIPASSWORD";
+         divUnnamedtable1_Internalname = sPrefix+"UNNAMEDTABLE1";
          divTransactiondetail_tableattributes_Internalname = sPrefix+"TRANSACTIONDETAIL_TABLEATTRIBUTES";
          bttBtnupdate_Internalname = sPrefix+"BTNUPDATE";
          bttBtndelete_Internalname = sPrefix+"BTNDELETE";
@@ -1492,6 +1504,7 @@ namespace GeneXus.Programs {
          bttBtnupdate_Visible = 1;
          edtavEmployeeapipassword_Jsonclick = "";
          edtavEmployeeapipassword_Enabled = 1;
+         divUnnamedtable1_Visible = 1;
          chkEmployeeIsManager.Enabled = 0;
          chkEmployeeIsActive.Enabled = 0;
          dynCompanyId_Jsonclick = "";
@@ -1541,7 +1554,7 @@ namespace GeneXus.Programs {
          gxfirstwebparm = "";
          gxfirstwebparm_bkp = "";
          sPrefix = "";
-         AV16Pgmname = "";
+         AV17Pgmname = "";
          sDynURL = "";
          FormProcess = "";
          bodyStyle = "";
@@ -1585,6 +1598,7 @@ namespace GeneXus.Programs {
          H00344_A108EmployeeLastName = new string[] {""} ;
          H00344_A107EmployeeFirstName = new string[] {""} ;
          AV6WWPContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPContext(context);
+         Gx_mode = "";
          AV8TrnContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext(context);
          AV11HTTPRequest = new GxHttpRequest( context);
          AV10Session = context.GetSession();
@@ -1610,9 +1624,9 @@ namespace GeneXus.Programs {
                }
             }
          );
-         AV16Pgmname = "EmployeeGeneral";
+         AV17Pgmname = "EmployeeGeneral";
          /* GeneXus formulas. */
-         AV16Pgmname = "EmployeeGeneral";
+         AV17Pgmname = "EmployeeGeneral";
          edtavEmployeeapipassword_Enabled = 0;
       }
 
@@ -1630,6 +1644,7 @@ namespace GeneXus.Programs {
       private int edtEmployeeFirstName_Enabled ;
       private int edtEmployeeLastName_Enabled ;
       private int edtEmployeeEmail_Enabled ;
+      private int divUnnamedtable1_Visible ;
       private int bttBtnupdate_Visible ;
       private int bttBtndelete_Visible ;
       private int edtEmployeeId_Visible ;
@@ -1656,7 +1671,7 @@ namespace GeneXus.Programs {
       private string sPrefix ;
       private string sCompPrefix ;
       private string sSFPrefix ;
-      private string AV16Pgmname ;
+      private string AV17Pgmname ;
       private string edtavEmployeeapipassword_Internalname ;
       private string sDynURL ;
       private string FormProcess ;
@@ -1681,6 +1696,7 @@ namespace GeneXus.Programs {
       private string ClassString ;
       private string StyleString ;
       private string chkEmployeeIsManager_Internalname ;
+      private string divUnnamedtable1_Internalname ;
       private string edtavEmployeeapipassword_Jsonclick ;
       private string bttBtnupdate_Internalname ;
       private string bttBtnupdate_Jsonclick ;
@@ -1706,6 +1722,7 @@ namespace GeneXus.Programs {
       private string EvtRowId ;
       private string sEvtType ;
       private string gxwrpcisep ;
+      private string Gx_mode ;
       private string sCtrlA106EmployeeId ;
       private DateTime A178EmployeeVacationDaysSetDate ;
       private bool entryPointCalled ;

@@ -1,0 +1,4 @@
+uri http://localhost:8082/YTT_version4NETPostgreSQL14/
+API Result: {"access_token":"131450e8-6fac-42e4-85a0-40894f16ba44!iwwSoRUFNPMLJJb46JaZ5GXV8BRsZ3wnX0HIry4WtvNM1fdDtYQGeYM1iERYifLYs1GWaWYsT36Nxg","token_type":"Bearer","expires_in":0,"refresh_token":"","scope":"gam_user_data","user_guid":"d19ad431-3e05-44b3-92f0-8b49fd886392"}
+41a3e44d-e2e8-4df1-a783-75a07986ade5
+12d1833d-5744-434f-a329-c77ee9acd543
