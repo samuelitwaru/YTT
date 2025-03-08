@@ -235,7 +235,7 @@ namespace GeneXus.Programs {
                   AV15ICSLeaveExport += "DTSTART;VALUE=DATE:" + GXt_char2 + "T120000Z" + StringUtil.NewLine( );
                   GXt_char2 = AV15ICSLeaveExport;
                   new formatdatetime(context ).execute(  A130LeaveRequestEndDate,  "YYYYMMDD", out  GXt_char2) ;
-                  AV15ICSLeaveExport += "DTEND;VALUE=DATE:" + GXt_char2 + "T240000Z" + StringUtil.NewLine( );
+                  AV15ICSLeaveExport += "DTEND;VALUE=DATE:" + GXt_char2 + "T235959Z" + StringUtil.NewLine( );
                }
                else
                {
@@ -244,7 +244,7 @@ namespace GeneXus.Programs {
                   AV15ICSLeaveExport += "DTSTART;VALUE=DATE:" + GXt_char2 + "T000000Z" + StringUtil.NewLine( );
                   GXt_char2 = AV15ICSLeaveExport;
                   new formatdatetime(context ).execute(  A130LeaveRequestEndDate,  "YYYYMMDD", out  GXt_char2) ;
-                  AV15ICSLeaveExport += "DTEND;VALUE=DATE:" + GXt_char2 + "T240000Z" + StringUtil.NewLine( );
+                  AV15ICSLeaveExport += "DTEND;VALUE=DATE:" + GXt_char2 + "T235959Z" + StringUtil.NewLine( );
                }
                AV15ICSLeaveExport += "SUMMARY:" + StringUtil.Trim( A148EmployeeName) + " | " + StringUtil.Trim( A125LeaveTypeName) + StringUtil.NewLine( );
                AV15ICSLeaveExport += "UID:" + StringUtil.Trim( StringUtil.Str( (decimal)(A127LeaveRequestId), 10, 0)) + StringUtil.Trim( A109EmployeeEmail) + StringUtil.NewLine( );
