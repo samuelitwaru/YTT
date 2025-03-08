@@ -220,8 +220,8 @@ gamrecoverpasswordstep2
 gamregisteruser
 gamrecoverpasswordstep1
 gamotpauthentication
-gamupdateregisteruser
-gamchangepassword
+gamexampleupdateregisteruser
+gamexamplechangepassword
 gamhome
 gamnotauthorized
 gamexamplelogin

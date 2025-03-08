@@ -82,6 +82,7 @@ namespace GeneXus.Programs {
             pr_default.execute(0, new Object[] {AV8EmployeeId});
             while ( (pr_default.getStatus(0) != 101) )
             {
+               A184EmployeeIsActiveInProject = P00C92_A184EmployeeIsActiveInProject[0];
                A105ProjectStatus = P00C92_A105ProjectStatus[0];
                A106EmployeeId = P00C92_A106EmployeeId[0];
                A102ProjectId = P00C92_A102ProjectId[0];
@@ -120,16 +121,18 @@ namespace GeneXus.Programs {
                                                        A102ProjectId ,
                                                        AV15projectIds ,
                                                        A105ProjectStatus ,
+                                                       A184EmployeeIsActiveInProject ,
                                                        AV8EmployeeId ,
                                                        A106EmployeeId } ,
                                                        new int[]{
-                                                       TypeConstants.LONG, TypeConstants.LONG, TypeConstants.LONG
+                                                       TypeConstants.LONG, TypeConstants.BOOLEAN, TypeConstants.LONG, TypeConstants.LONG
                                                        }
                   });
                   /* Using cursor P00C93 */
                   pr_default.execute(1, new Object[] {AV8EmployeeId});
                   while ( (pr_default.getStatus(1) != 101) )
                   {
+                     A184EmployeeIsActiveInProject = P00C93_A184EmployeeIsActiveInProject[0];
                      A105ProjectStatus = P00C93_A105ProjectStatus[0];
                      A102ProjectId = P00C93_A102ProjectId[0];
                      A106EmployeeId = P00C93_A106EmployeeId[0];
@@ -171,6 +174,7 @@ namespace GeneXus.Programs {
       {
          AV14SDTEmployeeProject = new GXBaseCollection<SdtSDTEmployeeProject_SDTEmployeeProjectItem>( context, "SDTEmployeeProjectItem", "YTT_version4");
          AV13GAMUser = new GeneXus.Programs.genexussecurity.SdtGAMUser(context);
+         P00C92_A184EmployeeIsActiveInProject = new bool[] {false} ;
          P00C92_A105ProjectStatus = new string[] {""} ;
          P00C92_A106EmployeeId = new long[1] ;
          P00C92_A102ProjectId = new long[1] ;
@@ -183,6 +187,7 @@ namespace GeneXus.Programs {
          AV15projectIds = new GxSimpleCollection<long>();
          AV16Employees = new GxSimpleCollection<long>();
          GXt_objcol_int2 = new GxSimpleCollection<long>();
+         P00C93_A184EmployeeIsActiveInProject = new bool[] {false} ;
          P00C93_A105ProjectStatus = new string[] {""} ;
          P00C93_A102ProjectId = new long[1] ;
          P00C93_A106EmployeeId = new long[1] ;
@@ -191,10 +196,10 @@ namespace GeneXus.Programs {
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.getemployeetologhoursprojects__default(),
             new Object[][] {
                 new Object[] {
-               P00C92_A105ProjectStatus, P00C92_A106EmployeeId, P00C92_A102ProjectId, P00C92_A103ProjectName, P00C92_A104ProjectDescription
+               P00C92_A184EmployeeIsActiveInProject, P00C92_A105ProjectStatus, P00C92_A106EmployeeId, P00C92_A102ProjectId, P00C92_A103ProjectName, P00C92_A104ProjectDescription
                }
                , new Object[] {
-               P00C93_A105ProjectStatus, P00C93_A102ProjectId, P00C93_A106EmployeeId, P00C93_A103ProjectName, P00C93_A104ProjectDescription
+               P00C93_A184EmployeeIsActiveInProject, P00C93_A105ProjectStatus, P00C93_A102ProjectId, P00C93_A106EmployeeId, P00C93_A103ProjectName, P00C93_A104ProjectDescription
                }
             }
          );
@@ -212,12 +217,14 @@ namespace GeneXus.Programs {
       private string A103ProjectName ;
       private bool AV9IsManager ;
       private bool AV10IsProjectManager ;
+      private bool A184EmployeeIsActiveInProject ;
       private string A104ProjectDescription ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private GXBaseCollection<SdtSDTEmployeeProject_SDTEmployeeProjectItem> AV14SDTEmployeeProject ;
       private GeneXus.Programs.genexussecurity.SdtGAMUser AV13GAMUser ;
       private IDataStoreProvider pr_default ;
+      private bool[] P00C92_A184EmployeeIsActiveInProject ;
       private string[] P00C92_A105ProjectStatus ;
       private long[] P00C92_A106EmployeeId ;
       private long[] P00C92_A102ProjectId ;
@@ -227,6 +234,7 @@ namespace GeneXus.Programs {
       private GxSimpleCollection<long> AV15projectIds ;
       private GxSimpleCollection<long> AV16Employees ;
       private GxSimpleCollection<long> GXt_objcol_int2 ;
+      private bool[] P00C93_A184EmployeeIsActiveInProject ;
       private string[] P00C93_A105ProjectStatus ;
       private long[] P00C93_A102ProjectId ;
       private long[] P00C93_A106EmployeeId ;
@@ -241,6 +249,7 @@ namespace GeneXus.Programs {
                                              long A102ProjectId ,
                                              GxSimpleCollection<long> AV15projectIds ,
                                              string A105ProjectStatus ,
+                                             bool A184EmployeeIsActiveInProject ,
                                              long AV8EmployeeId ,
                                              long A106EmployeeId )
       {
@@ -248,10 +257,11 @@ namespace GeneXus.Programs {
          string scmdbuf;
          short[] GXv_int3 = new short[1];
          Object[] GXv_Object4 = new Object[2];
-         scmdbuf = "SELECT T2.ProjectStatus, T1.ProjectId, T1.EmployeeId, T2.ProjectName, T2.ProjectDescription FROM (EmployeeProject T1 INNER JOIN Project T2 ON T2.ProjectId = T1.ProjectId)";
+         scmdbuf = "SELECT T1.EmployeeIsActiveInProject, T2.ProjectStatus, T1.ProjectId, T1.EmployeeId, T2.ProjectName, T2.ProjectDescription FROM (EmployeeProject T1 INNER JOIN Project T2 ON T2.ProjectId = T1.ProjectId)";
          AddWhere(sWhereString, "(T1.EmployeeId = :AV8EmployeeId)");
          AddWhere(sWhereString, "("+new GxDbmsUtils( new GxPostgreSql()).ValueList(AV15projectIds, "T1.ProjectId IN (", ")")+")");
          AddWhere(sWhereString, "(T2.ProjectStatus = ( 'Active'))");
+         AddWhere(sWhereString, "(T1.EmployeeIsActiveInProject = TRUE)");
          scmdbuf += sWhereString;
          scmdbuf += " ORDER BY T1.EmployeeId";
          GXv_Object4[0] = scmdbuf;
@@ -266,7 +276,7 @@ namespace GeneXus.Programs {
          switch ( cursor )
          {
                case 1 :
-                     return conditional_P00C93(context, (long)dynConstraints[0] , (GxSimpleCollection<long>)dynConstraints[1] , (string)dynConstraints[2] , (long)dynConstraints[3] , (long)dynConstraints[4] );
+                     return conditional_P00C93(context, (long)dynConstraints[0] , (GxSimpleCollection<long>)dynConstraints[1] , (string)dynConstraints[2] , (bool)dynConstraints[3] , (long)dynConstraints[4] , (long)dynConstraints[5] );
          }
          return base.getDynamicStatement(cursor, context, dynConstraints);
       }
@@ -294,7 +304,7 @@ namespace GeneXus.Programs {
           new ParDef("AV8EmployeeId",GXType.Int64,10,0)
           };
           def= new CursorDef[] {
-              new CursorDef("P00C92", "SELECT T2.ProjectStatus, T1.EmployeeId, T1.ProjectId, T2.ProjectName, T2.ProjectDescription FROM (EmployeeProject T1 INNER JOIN Project T2 ON T2.ProjectId = T1.ProjectId) WHERE (T1.EmployeeId = :AV8EmployeeId) AND (T2.ProjectStatus = ( 'Active')) ORDER BY T1.EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00C92,100, GxCacheFrequency.OFF ,false,false )
+              new CursorDef("P00C92", "SELECT T1.EmployeeIsActiveInProject, T2.ProjectStatus, T1.EmployeeId, T1.ProjectId, T2.ProjectName, T2.ProjectDescription FROM (EmployeeProject T1 INNER JOIN Project T2 ON T2.ProjectId = T1.ProjectId) WHERE (T1.EmployeeId = :AV8EmployeeId) AND (T2.ProjectStatus = ( 'Active')) AND (T1.EmployeeIsActiveInProject = TRUE) ORDER BY T1.EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00C92,100, GxCacheFrequency.OFF ,false,false )
              ,new CursorDef("P00C93", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00C93,100, GxCacheFrequency.OFF ,false,false )
           };
        }
@@ -307,18 +317,20 @@ namespace GeneXus.Programs {
        switch ( cursor )
        {
              case 0 :
-                ((string[]) buf[0])[0] = rslt.getString(1, 20);
-                ((long[]) buf[1])[0] = rslt.getLong(2);
+                ((bool[]) buf[0])[0] = rslt.getBool(1);
+                ((string[]) buf[1])[0] = rslt.getString(2, 20);
                 ((long[]) buf[2])[0] = rslt.getLong(3);
-                ((string[]) buf[3])[0] = rslt.getString(4, 100);
-                ((string[]) buf[4])[0] = rslt.getVarchar(5);
+                ((long[]) buf[3])[0] = rslt.getLong(4);
+                ((string[]) buf[4])[0] = rslt.getString(5, 100);
+                ((string[]) buf[5])[0] = rslt.getVarchar(6);
                 return;
              case 1 :
-                ((string[]) buf[0])[0] = rslt.getString(1, 20);
-                ((long[]) buf[1])[0] = rslt.getLong(2);
+                ((bool[]) buf[0])[0] = rslt.getBool(1);
+                ((string[]) buf[1])[0] = rslt.getString(2, 20);
                 ((long[]) buf[2])[0] = rslt.getLong(3);
-                ((string[]) buf[3])[0] = rslt.getString(4, 100);
-                ((string[]) buf[4])[0] = rslt.getVarchar(5);
+                ((long[]) buf[3])[0] = rslt.getLong(4);
+                ((string[]) buf[4])[0] = rslt.getString(5, 100);
+                ((string[]) buf[5])[0] = rslt.getVarchar(6);
                 return;
        }
     }

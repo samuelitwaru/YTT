@@ -829,7 +829,7 @@ namespace GeneXus.Programs {
                {
                   if ( ((GeneXus.Programs.genexussecurity.SdtGAMError)AV29Errors.Item(1)).gxTpr_Code == 161 )
                   {
-                     CallWebObject(formatLink("gamupdateregisteruser.aspx", new object[] {UrlEncode(StringUtil.RTrim(AV10IDP_State))}, new string[] {"IDP_State"}) );
+                     CallWebObject(formatLink("gamexampleupdateregisteruser.aspx", new object[] {UrlEncode(StringUtil.RTrim(AV10IDP_State))}, new string[] {"IDP_State"}) );
                      context.wjLocDisableFrm = 1;
                   }
                   else
@@ -936,7 +936,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20252181950648", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20253714305275", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -952,7 +952,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("gamotpauthentication.js", "?20252181950653", false, true);
+         context.AddJavascriptSource("gamotpauthentication.js", "?20253714305277", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Mask/jquery.mask.js", "", false, true);
          context.AddJavascriptSource("DVelop/WorkWithPlusUtilities/BootstrapSelect.js", "", false, true);

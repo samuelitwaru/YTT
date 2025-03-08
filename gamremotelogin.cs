@@ -977,12 +977,12 @@ namespace GeneXus.Programs {
             {
                if ( ( ((GeneXus.Programs.genexussecurity.SdtGAMError)AV50Errors.Item(1)).gxTpr_Code == 24 ) || ( ((GeneXus.Programs.genexussecurity.SdtGAMError)AV50Errors.Item(1)).gxTpr_Code == 23 ) )
                {
-                  CallWebObject(formatLink("gamchangepassword.aspx", new object[] {UrlEncode(StringUtil.RTrim(AV13IDP_State))}, new string[] {"IDP_State"}) );
+                  CallWebObject(formatLink("gamexamplechangepassword.aspx", new object[] {UrlEncode(StringUtil.RTrim(AV13IDP_State))}, new string[] {"IDP_State"}) );
                   context.wjLocDisableFrm = 1;
                }
                else if ( ((GeneXus.Programs.genexussecurity.SdtGAMError)AV50Errors.Item(1)).gxTpr_Code == 161 )
                {
-                  CallWebObject(formatLink("gamupdateregisteruser.aspx", new object[] {UrlEncode(StringUtil.RTrim(AV13IDP_State))}, new string[] {"IDP_State"}) );
+                  CallWebObject(formatLink("gamexampleupdateregisteruser.aspx", new object[] {UrlEncode(StringUtil.RTrim(AV13IDP_State))}, new string[] {"IDP_State"}) );
                   context.wjLocDisableFrm = 1;
                }
                else if ( ( ((GeneXus.Programs.genexussecurity.SdtGAMError)AV50Errors.Item(1)).gxTpr_Code == 400 ) || ( ((GeneXus.Programs.genexussecurity.SdtGAMError)AV50Errors.Item(1)).gxTpr_Code == 410 ) )
@@ -1065,13 +1065,13 @@ namespace GeneXus.Programs {
             }
             else if ( ( ((GeneXus.Programs.genexussecurity.SdtGAMError)AV51ErrorsLogin.Item(1)).gxTpr_Code == 24 ) || ( ((GeneXus.Programs.genexussecurity.SdtGAMError)AV51ErrorsLogin.Item(1)).gxTpr_Code == 23 ) )
             {
-               CallWebObject(formatLink("gamchangepassword.aspx", new object[] {UrlEncode(StringUtil.RTrim(AV13IDP_State))}, new string[] {"IDP_State"}) );
+               CallWebObject(formatLink("gamexamplechangepassword.aspx", new object[] {UrlEncode(StringUtil.RTrim(AV13IDP_State))}, new string[] {"IDP_State"}) );
                context.wjLocDisableFrm = 1;
                AV16isRedirect = true;
             }
             else if ( ((GeneXus.Programs.genexussecurity.SdtGAMError)AV51ErrorsLogin.Item(1)).gxTpr_Code == 161 )
             {
-               CallWebObject(formatLink("gamupdateregisteruser.aspx", new object[] {UrlEncode(StringUtil.RTrim(AV13IDP_State))}, new string[] {"IDP_State"}) );
+               CallWebObject(formatLink("gamexampleupdateregisteruser.aspx", new object[] {UrlEncode(StringUtil.RTrim(AV13IDP_State))}, new string[] {"IDP_State"}) );
                context.wjLocDisableFrm = 1;
                AV16isRedirect = true;
             }
@@ -1380,7 +1380,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202521819513131", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20253714314129", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1396,7 +1396,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("gamremotelogin.js", "?202521819513136", false, true);
+         context.AddJavascriptSource("gamremotelogin.js", "?20253714314133", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Mask/jquery.mask.js", "", false, true);
          context.AddJavascriptSource("DVelop/WorkWithPlusUtilities/BootstrapSelect.js", "", false, true);

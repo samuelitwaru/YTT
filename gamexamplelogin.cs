@@ -1308,12 +1308,12 @@ namespace GeneXus.Programs {
             {
                if ( ( ((GeneXus.Programs.genexussecurity.SdtGAMError)AV66Errors.Item(1)).gxTpr_Code == 24 ) || ( ((GeneXus.Programs.genexussecurity.SdtGAMError)AV66Errors.Item(1)).gxTpr_Code == 23 ) )
                {
-                  CallWebObject(formatLink("gamchangepassword.aspx", new object[] {UrlEncode(StringUtil.RTrim(AV16IDP_State))}, new string[] {"IDP_State"}) );
+                  CallWebObject(formatLink("gamexamplechangepassword.aspx", new object[] {UrlEncode(StringUtil.RTrim(AV16IDP_State))}, new string[] {"IDP_State"}) );
                   context.wjLocDisableFrm = 1;
                }
                else if ( ((GeneXus.Programs.genexussecurity.SdtGAMError)AV66Errors.Item(1)).gxTpr_Code == 161 )
                {
-                  CallWebObject(formatLink("gamupdateregisteruser.aspx", new object[] {UrlEncode(StringUtil.RTrim(AV16IDP_State))}, new string[] {"IDP_State"}) );
+                  CallWebObject(formatLink("gamexampleupdateregisteruser.aspx", new object[] {UrlEncode(StringUtil.RTrim(AV16IDP_State))}, new string[] {"IDP_State"}) );
                   context.wjLocDisableFrm = 1;
                }
                else if ( ( ((GeneXus.Programs.genexussecurity.SdtGAMError)AV66Errors.Item(1)).gxTpr_Code == 400 ) || ( ((GeneXus.Programs.genexussecurity.SdtGAMError)AV66Errors.Item(1)).gxTpr_Code == 410 ) )
@@ -1764,7 +1764,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202521819514347", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2025371433123", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1780,7 +1780,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("gamexamplelogin.js", "?202521819514352", false, true);
+         context.AddJavascriptSource("gamexamplelogin.js", "?2025371433127", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Mask/jquery.mask.js", "", false, true);
          context.AddJavascriptSource("DVelop/WorkWithPlusUtilities/BootstrapSelect.js", "", false, true);
