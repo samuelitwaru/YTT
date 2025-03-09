@@ -108,7 +108,7 @@ namespace GeneXus.Programs {
             }
             else
             {
-               if ( AV16DayOfWeek == 1 )
+               if ( AV16DayOfWeek == 2 )
                {
                   AV15CheckDate = DateTimeUtil.DAdd( Gx_date, (-2));
                }
