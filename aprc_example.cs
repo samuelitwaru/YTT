@@ -16,7 +16,6 @@ using GeneXus.XML;
 using GeneXus.Search;
 using GeneXus.Encryption;
 using GeneXus.Http.Client;
-using GeneXus.Http.Server;
 using System.Threading;
 using System.Xml.Serialization;
 using System.Runtime.Serialization;
@@ -35,11 +34,7 @@ namespace GeneXus.Programs {
          if ( nGotPars == 0 )
          {
             entryPointCalled = false;
-            gxfirstwebparm = GetFirstPar( "HttpResponse");
-            if ( ! entryPointCalled )
-            {
-               AV12HttpResponse = gxfirstwebparm;
-            }
+            gxfirstwebparm = GetNextPar( );
          }
          if ( GxWebError == 0 )
          {
@@ -62,32 +57,24 @@ namespace GeneXus.Programs {
          IsMain = false;
       }
 
-      public void execute( out GxHttpResponse aP0_HttpResponse )
+      public void execute( )
       {
-         this.AV12HttpResponse = new GxHttpResponse( context) ;
          initialize();
          ExecuteImpl();
-         aP0_HttpResponse=this.AV12HttpResponse;
       }
 
-      public GxHttpResponse executeUdp( )
+      public void executeSubmit( )
       {
-         execute(out aP0_HttpResponse);
-         return AV12HttpResponse ;
-      }
-
-      public void executeSubmit( out GxHttpResponse aP0_HttpResponse )
-      {
-         this.AV12HttpResponse = new GxHttpResponse( context) ;
          SubmitImpl();
-         aP0_HttpResponse=this.AV12HttpResponse;
       }
 
       protected override void ExecutePrivate( )
       {
          /* GeneXus formulas */
          /* Output device settings */
-         AV12HttpResponse.AddString("Hello World");
+         CallWebObject(formatLink("adailyreminderua.aspx", new object[] {UrlEncode(DateTimeUtil.FormatDateTimeParm(context.localUtil.YMDHMSToT( 2023, 3, 3, 0, 0, 0)))}, new string[] {"SomeDate"}) );
+         context.wjLocDisableFrm = 2;
+         new logtofile(context ).execute(  formatLink("adailyreminderua.aspx", new object[] {UrlEncode(DateTimeUtil.FormatDateTimeParm(context.localUtil.YMDHMSToT( 2023, 3, 3, 0, 0, 0)))}, new string[] {"SomeDate"}) ) ;
          if ( context.WillRedirect( ) )
          {
             context.Redirect( context.wjLoc );
@@ -111,7 +98,6 @@ namespace GeneXus.Programs {
       {
          GXKey = "";
          gxfirstwebparm = "";
-         AV12HttpResponse = new GxHttpResponse( context);
          /* GeneXus formulas. */
       }
 
@@ -121,8 +107,6 @@ namespace GeneXus.Programs {
       private string GXKey ;
       private string gxfirstwebparm ;
       private bool entryPointCalled ;
-      private GxHttpResponse AV12HttpResponse ;
-      private GxHttpResponse aP0_HttpResponse ;
    }
 
 }

@@ -37,10 +37,10 @@ namespace GeneXus.Programs {
          if ( nGotPars == 0 )
          {
             entryPointCalled = false;
-            gxfirstwebparm = GetFirstPar( "Gx_date");
+            gxfirstwebparm = GetFirstPar( "SomeDate");
             if ( ! entryPointCalled )
             {
-               Gx_date = context.localUtil.ParseDateParm( gxfirstwebparm);
+               AV22SomeDate = context.localUtil.ParseDateParm( gxfirstwebparm);
             }
          }
          if ( GxWebError == 0 )
@@ -68,16 +68,16 @@ namespace GeneXus.Programs {
          dsDefault = context.GetDataStore("Default");
       }
 
-      public void execute( DateTime aP0_Gx_date )
+      public void execute( DateTime aP0_SomeDate )
       {
-         this.Gx_date = aP0_Gx_date;
+         this.AV22SomeDate = aP0_SomeDate;
          initialize();
          ExecuteImpl();
       }
 
-      public void executeSubmit( DateTime aP0_Gx_date )
+      public void executeSubmit( DateTime aP0_SomeDate )
       {
-         this.Gx_date = aP0_Gx_date;
+         this.AV22SomeDate = aP0_SomeDate;
          SubmitImpl();
       }
 
@@ -86,6 +86,8 @@ namespace GeneXus.Programs {
          /* GeneXus formulas */
          /* Output device settings */
          AV17CurrentHour = (short)(DateTimeUtil.Hour( DateTimeUtil.Now( context)));
+         Gx_date = AV22SomeDate;
+         AV20Data += "SomeDate: " + context.localUtil.DToC( AV22SomeDate, 2, "/") + "(" + DateTimeUtil.CDow( AV22SomeDate, "eng") + ")" + StringUtil.NewLine( );
          new logtofile(context ).execute(  "Today: "+context.localUtil.DToC( Gx_date, 2, "/")+"("+DateTimeUtil.CDow( Gx_date, "eng")+")") ;
          AV20Data += "Today: " + context.localUtil.DToC( Gx_date, 2, "/") + "(" + DateTimeUtil.CDow( Gx_date, "eng") + ")" + StringUtil.NewLine( );
          new logtofile(context ).execute(  "Current Hour: "+StringUtil.Str( (decimal)(AV17CurrentHour), 4, 0)) ;
@@ -100,8 +102,6 @@ namespace GeneXus.Programs {
             AV16DayOfWeek = DateTimeUtil.Dow( Gx_date);
             new logtofile(context ).execute(  "Day of Week: "+StringUtil.Str( (decimal)(AV16DayOfWeek), 4, 0)) ;
             AV20Data += "Day of Week: " + StringUtil.Str( (decimal)(AV16DayOfWeek), 4, 0) + StringUtil.NewLine( );
-            new logtofile(context ).execute(  "Today: "+context.localUtil.DToC( Gx_date, 2, "/")+"("+DateTimeUtil.CDow( Gx_date, "eng")+")") ;
-            AV20Data += "Today: " + context.localUtil.DToC( Gx_date, 2, "/") + "(" + DateTimeUtil.CDow( Gx_date, "eng") + ")" + StringUtil.NewLine( );
             if ( AV16DayOfWeek == 7 )
             {
                AV15CheckDate = DateTimeUtil.DAdd( Gx_date, (-1));
@@ -118,8 +118,6 @@ namespace GeneXus.Programs {
                }
             }
          }
-         new logtofile(context ).execute(  "Today: "+DateTimeUtil.CDow( Gx_date, "eng")) ;
-         AV20Data += "Today: " + DateTimeUtil.CDow( Gx_date, "eng") + StringUtil.NewLine( );
          new logtofile(context ).execute(  "Check Date: "+context.localUtil.DToC( AV15CheckDate, 2, "/")+" ("+DateTimeUtil.CDow( AV15CheckDate, "eng")+")") ;
          AV20Data += "Check Date: " + context.localUtil.DToC( AV15CheckDate, 2, "/") + " (" + DateTimeUtil.CDow( AV15CheckDate, "eng") + ")" + StringUtil.NewLine( );
          /* Using cursor P00AK2 */
@@ -188,6 +186,7 @@ namespace GeneXus.Programs {
       {
          GXKey = "";
          gxfirstwebparm = "";
+         Gx_date = DateTime.MinValue;
          AV20Data = "";
          AV15CheckDate = DateTime.MinValue;
          P00AK2_A100CompanyId = new long[1] ;
@@ -236,6 +235,7 @@ namespace GeneXus.Programs {
       private string A159CompanyLocationCode ;
       private string A114HolidayName ;
       private string A148EmployeeName ;
+      private DateTime AV22SomeDate ;
       private DateTime Gx_date ;
       private DateTime AV15CheckDate ;
       private DateTime A115HolidayStartDate ;
