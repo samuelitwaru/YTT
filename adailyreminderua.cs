@@ -37,7 +37,11 @@ namespace GeneXus.Programs {
          if ( nGotPars == 0 )
          {
             entryPointCalled = false;
-            gxfirstwebparm = GetNextPar( );
+            gxfirstwebparm = GetFirstPar( "Gx_date");
+            if ( ! entryPointCalled )
+            {
+               Gx_date = context.localUtil.ParseDateParm( gxfirstwebparm);
+            }
          }
          if ( GxWebError == 0 )
          {
@@ -64,14 +68,16 @@ namespace GeneXus.Programs {
          dsDefault = context.GetDataStore("Default");
       }
 
-      public void execute( )
+      public void execute( DateTime aP0_Gx_date )
       {
+         this.Gx_date = aP0_Gx_date;
          initialize();
          ExecuteImpl();
       }
 
-      public void executeSubmit( )
+      public void executeSubmit( DateTime aP0_Gx_date )
       {
+         this.Gx_date = aP0_Gx_date;
          SubmitImpl();
       }
 
@@ -182,7 +188,6 @@ namespace GeneXus.Programs {
       {
          GXKey = "";
          gxfirstwebparm = "";
-         Gx_date = DateTime.MinValue;
          AV20Data = "";
          AV15CheckDate = DateTime.MinValue;
          P00AK2_A100CompanyId = new long[1] ;

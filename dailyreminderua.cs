@@ -41,14 +41,16 @@ namespace GeneXus.Programs {
          dsDefault = context.GetDataStore("Default");
       }
 
-      public void execute( )
+      public void execute( DateTime aP0_Gx_date )
       {
+         this.Gx_date = aP0_Gx_date;
          initialize();
          ExecuteImpl();
       }
 
-      public void executeSubmit( )
+      public void executeSubmit( DateTime aP0_Gx_date )
       {
+         this.Gx_date = aP0_Gx_date;
          SubmitImpl();
       }
 
@@ -56,8 +58,11 @@ namespace GeneXus.Programs {
       {
          /* GeneXus formulas */
          /* Output device settings */
-         args = new Object[] {} ;
+         args = new Object[] {(DateTime)Gx_date} ;
          ClassLoader.Execute("adailyreminderua","GeneXus.Programs","adailyreminderua", new Object[] {context }, "execute", args);
+         if ( ( args != null ) && ( args.Length == 1 ) )
+         {
+         }
          cleanup();
       }
 
@@ -72,9 +77,12 @@ namespace GeneXus.Programs {
 
       public override void initialize( )
       {
+         Gx_date = DateTimeUtil.Today( context);
          /* GeneXus formulas. */
+         Gx_date = DateTimeUtil.Today( context);
       }
 
+      private DateTime Gx_date ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private Object[] args ;
