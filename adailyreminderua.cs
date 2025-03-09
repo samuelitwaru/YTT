@@ -81,7 +81,9 @@ namespace GeneXus.Programs {
          /* Output device settings */
          AV17CurrentHour = (short)(DateTimeUtil.Hour( DateTimeUtil.Now( context)));
          new logtofile(context ).execute(  "Today: "+context.localUtil.DToC( Gx_date, 2, "/")+"("+DateTimeUtil.CDow( Gx_date, "eng")+")") ;
+         AV20Data += "Today: " + context.localUtil.DToC( Gx_date, 2, "/") + "(" + DateTimeUtil.CDow( Gx_date, "eng") + ")";
          new logtofile(context ).execute(  "Current Hour: "+StringUtil.Str( (decimal)(AV17CurrentHour), 4, 0)) ;
+         AV20Data += "Current Hour: " + StringUtil.Str( (decimal)(AV17CurrentHour), 4, 0);
          AV18HasToLogOnLeave = false;
          if ( AV17CurrentHour >= 17 )
          {
@@ -91,7 +93,9 @@ namespace GeneXus.Programs {
          {
             AV16DayOfWeek = DateTimeUtil.Dow( Gx_date);
             new logtofile(context ).execute(  "Day of Week: "+StringUtil.Str( (decimal)(AV16DayOfWeek), 4, 0)) ;
+            AV20Data += "Day of Week: " + StringUtil.Str( (decimal)(AV16DayOfWeek), 4, 0);
             new logtofile(context ).execute(  "Today: "+context.localUtil.DToC( Gx_date, 2, "/")+"("+DateTimeUtil.CDow( Gx_date, "eng")+")") ;
+            AV20Data += "Today: " + context.localUtil.DToC( Gx_date, 2, "/") + "(" + DateTimeUtil.CDow( Gx_date, "eng") + ")";
             if ( AV16DayOfWeek == 7 )
             {
                AV15CheckDate = DateTimeUtil.DAdd( Gx_date, (-1));
@@ -109,7 +113,9 @@ namespace GeneXus.Programs {
             }
          }
          new logtofile(context ).execute(  "Today: "+DateTimeUtil.CDow( Gx_date, "eng")) ;
+         AV20Data += "Today: " + DateTimeUtil.CDow( Gx_date, "eng");
          new logtofile(context ).execute(  "Check Date: "+context.localUtil.DToC( AV15CheckDate, 2, "/")+" ("+DateTimeUtil.CDow( AV15CheckDate, "eng")+")") ;
+         AV20Data += "Check Date: " + context.localUtil.DToC( AV15CheckDate, 2, "/") + " (" + DateTimeUtil.CDow( AV15CheckDate, "eng") + ")";
          /* Using cursor P00AK2 */
          pr_default.execute(0, new Object[] {AV15CheckDate});
          while ( (pr_default.getStatus(0) != 101) )
@@ -148,9 +154,11 @@ namespace GeneXus.Programs {
             A157CompanyLocationId = P00AK3_A157CompanyLocationId[0];
             A159CompanyLocationCode = P00AK3_A159CompanyLocationCode[0];
             new logtofile(context ).execute(  "Employee Name: "+StringUtil.Trim( A148EmployeeName)) ;
+            AV20Data += "Employee Name: " + StringUtil.Trim( A148EmployeeName);
             pr_default.readNext(1);
          }
          pr_default.close(1);
+         AV21httpresponse.AddString(AV20Data);
          if ( context.WillRedirect( ) )
          {
             context.Redirect( context.wjLoc );
@@ -175,6 +183,7 @@ namespace GeneXus.Programs {
          GXKey = "";
          gxfirstwebparm = "";
          Gx_date = DateTime.MinValue;
+         AV20Data = "";
          AV15CheckDate = DateTime.MinValue;
          P00AK2_A100CompanyId = new long[1] ;
          P00AK2_A157CompanyLocationId = new long[1] ;
@@ -192,6 +201,7 @@ namespace GeneXus.Programs {
          P00AK3_A148EmployeeName = new string[] {""} ;
          P00AK3_A106EmployeeId = new long[1] ;
          A148EmployeeName = "";
+         AV21httpresponse = new GxHttpResponse( context);
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.adailyreminderua__default(),
             new Object[][] {
                 new Object[] {
@@ -227,6 +237,8 @@ namespace GeneXus.Programs {
       private bool entryPointCalled ;
       private bool AV18HasToLogOnLeave ;
       private bool A112EmployeeIsActive ;
+      private string AV20Data ;
+      private GxHttpResponse AV21httpresponse ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private IDataStoreProvider pr_default ;
