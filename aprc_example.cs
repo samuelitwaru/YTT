@@ -72,9 +72,8 @@ namespace GeneXus.Programs {
       {
          /* GeneXus formulas */
          /* Output device settings */
-         CallWebObject(formatLink("adailyreminderua.aspx", new object[] {UrlEncode(DateTimeUtil.FormatDateTimeParm(context.localUtil.YMDHMSToT( 2023, 3, 3, 0, 0, 0)))}, new string[] {"SomeDate"}) );
+         CallWebObject(formatLink("adailyreminderua.aspx", new object[] {UrlEncode(DateTimeUtil.FormatDateTimeParm(context.localUtil.YMDHMSToT( 2025, 3, 10, 0, 0, 0))),UrlEncode(StringUtil.LTrimStr(10,2,0))}, new string[] {"SomeDate","SomeHour"}) );
          context.wjLocDisableFrm = 2;
-         new logtofile(context ).execute(  formatLink("adailyreminderua.aspx", new object[] {UrlEncode(DateTimeUtil.FormatDateTimeParm(context.localUtil.YMDHMSToT( 2023, 3, 3, 0, 0, 0)))}, new string[] {"SomeDate"}) ) ;
          if ( context.WillRedirect( ) )
          {
             context.Redirect( context.wjLoc );

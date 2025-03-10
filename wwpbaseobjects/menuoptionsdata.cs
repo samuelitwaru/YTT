@@ -226,7 +226,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          AV5id = (short)(AV5id+1);
          Gxm1dvelop_menu.gxTpr_Id = StringUtil.Str( (decimal)(AV5id), 4, 0);
          Gxm1dvelop_menu.gxTpr_Tooltip = "";
-         Gxm1dvelop_menu.gxTpr_Link = formatLink("adailyreminderua.aspx", new object[] {GXUtil.UrlEncode(DateTimeUtil.FormatDateTimeParm(context.localUtil.YMDHMSToT( 2023, 3, 3, 0, 0, 0)))}, new string[] {"SomeDate"}) ;
+         Gxm1dvelop_menu.gxTpr_Link = formatLink("adailyreminderua.aspx", new object[] {GXUtil.UrlEncode(DateTimeUtil.FormatDateTimeParm(context.localUtil.YMDHMSToT( 2023, 3, 3, 0, 0, 0)))}, new string[] {"SomeDate","SomeHour"}) ;
          Gxm1dvelop_menu.gxTpr_Linktarget = "";
          Gxm1dvelop_menu.gxTpr_Iconclass = "";
          Gxm1dvelop_menu.gxTpr_Caption = "DailyReminderUA";
@@ -235,7 +235,7 @@ namespace GeneXus.Programs.wwpbaseobjects {
          AV5id = (short)(AV5id+1);
          Gxm1dvelop_menu.gxTpr_Id = StringUtil.Str( (decimal)(AV5id), 4, 0);
          Gxm1dvelop_menu.gxTpr_Tooltip = "";
-         Gxm1dvelop_menu.gxTpr_Link = formatLink("adailyreminderua.aspx", new object[] {GXUtil.UrlEncode(DateTimeUtil.FormatDateTimeParm(context.localUtil.YMDHMSToT( 2023, 3, 3, 0, 0, 0)))}, new string[] {"SomeDate"}) ;
+         Gxm1dvelop_menu.gxTpr_Link = formatLink("adailyreminderua.aspx", new object[] {GXUtil.UrlEncode(DateTimeUtil.FormatDateTimeParm(context.localUtil.YMDHMSToT( 2023, 3, 3, 0, 0, 0)))}, new string[] {"SomeDate","SomeHour"}) ;
          Gxm1dvelop_menu.gxTpr_Linktarget = "";
          Gxm1dvelop_menu.gxTpr_Iconclass = "";
          Gxm1dvelop_menu.gxTpr_Caption = "Download App";

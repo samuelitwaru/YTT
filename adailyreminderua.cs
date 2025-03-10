@@ -41,6 +41,10 @@ namespace GeneXus.Programs {
             if ( ! entryPointCalled )
             {
                AV22SomeDate = context.localUtil.ParseDateParm( gxfirstwebparm);
+               if ( StringUtil.StrCmp(gxfirstwebparm, "viewer") != 0 )
+               {
+                  AV23SomeHour = (short)(Math.Round(NumberUtil.Val( GetPar( "SomeHour"), "."), 18, MidpointRounding.ToEven));
+               }
             }
          }
          if ( GxWebError == 0 )
@@ -68,16 +72,20 @@ namespace GeneXus.Programs {
          dsDefault = context.GetDataStore("Default");
       }
 
-      public void execute( DateTime aP0_SomeDate )
+      public void execute( DateTime aP0_SomeDate ,
+                           short aP1_SomeHour )
       {
          this.AV22SomeDate = aP0_SomeDate;
+         this.AV23SomeHour = aP1_SomeHour;
          initialize();
          ExecuteImpl();
       }
 
-      public void executeSubmit( DateTime aP0_SomeDate )
+      public void executeSubmit( DateTime aP0_SomeDate ,
+                                 short aP1_SomeHour )
       {
          this.AV22SomeDate = aP0_SomeDate;
+         this.AV23SomeHour = aP1_SomeHour;
          SubmitImpl();
       }
 
@@ -87,10 +95,9 @@ namespace GeneXus.Programs {
          /* Output device settings */
          AV17CurrentHour = (short)(DateTimeUtil.Hour( DateTimeUtil.Now( context)));
          Gx_date = AV22SomeDate;
+         AV17CurrentHour = AV23SomeHour;
          AV21httpresponse.AddString("SomeDate: "+context.localUtil.DToC( AV22SomeDate, 2, "/")+"("+DateTimeUtil.CDow( AV22SomeDate, "eng")+")"+StringUtil.NewLine( ));
-         new logtofile(context ).execute(  "Today: "+context.localUtil.DToC( Gx_date, 2, "/")+"("+DateTimeUtil.CDow( Gx_date, "eng")+")") ;
          AV21httpresponse.AddString("Today: "+context.localUtil.DToC( Gx_date, 2, "/")+"("+DateTimeUtil.CDow( Gx_date, "eng")+")"+StringUtil.NewLine( ));
-         new logtofile(context ).execute(  "Current Hour: "+StringUtil.Str( (decimal)(AV17CurrentHour), 4, 0)) ;
          AV21httpresponse.AddString("Current Hour: "+StringUtil.Str( (decimal)(AV17CurrentHour), 4, 0)+StringUtil.NewLine( ));
          AV18HasToLogOnLeave = false;
          if ( AV17CurrentHour >= 17 )
@@ -100,7 +107,6 @@ namespace GeneXus.Programs {
          else
          {
             AV16DayOfWeek = DateTimeUtil.Dow( Gx_date);
-            new logtofile(context ).execute(  "Day of Week: "+StringUtil.Str( (decimal)(AV16DayOfWeek), 4, 0)) ;
             AV21httpresponse.AddString("Day of Week: "+StringUtil.Str( (decimal)(AV16DayOfWeek), 4, 0)+StringUtil.NewLine( ));
             if ( AV16DayOfWeek == 7 )
             {
@@ -118,7 +124,6 @@ namespace GeneXus.Programs {
                }
             }
          }
-         new logtofile(context ).execute(  "Check Date: "+context.localUtil.DToC( AV15CheckDate, 2, "/")+" ("+DateTimeUtil.CDow( AV15CheckDate, "eng")+")") ;
          AV21httpresponse.AddString("Check Date: "+context.localUtil.DToC( AV15CheckDate, 2, "/")+" ("+DateTimeUtil.CDow( AV15CheckDate, "eng")+")"+StringUtil.NewLine( ));
          /* Using cursor P00AK2 */
          pr_default.execute(0, new Object[] {AV15CheckDate});
@@ -132,7 +137,7 @@ namespace GeneXus.Programs {
             A113HolidayId = P00AK2_A113HolidayId[0];
             A157CompanyLocationId = P00AK2_A157CompanyLocationId[0];
             A159CompanyLocationCode = P00AK2_A159CompanyLocationCode[0];
-            new logtofile(context ).execute(  "It's a holiday: "+StringUtil.Trim( A114HolidayName)) ;
+            AV21httpresponse.AddString("It's a holiday: "+StringUtil.Trim( A114HolidayName));
             context.nUserReturn = 1;
             if ( context.WillRedirect( ) )
             {
@@ -157,7 +162,6 @@ namespace GeneXus.Programs {
             A106EmployeeId = P00AK3_A106EmployeeId[0];
             A157CompanyLocationId = P00AK3_A157CompanyLocationId[0];
             A159CompanyLocationCode = P00AK3_A159CompanyLocationCode[0];
-            new logtofile(context ).execute(  "Employee Name: "+StringUtil.Trim( A148EmployeeName)) ;
             AV20Data += "Employee Name: " + StringUtil.Trim( A148EmployeeName) + StringUtil.NewLine( );
             pr_default.readNext(1);
          }
@@ -223,6 +227,7 @@ namespace GeneXus.Programs {
 
       private short gxcookieaux ;
       private short nGotPars ;
+      private short AV23SomeHour ;
       private short GxWebError ;
       private short AV17CurrentHour ;
       private short AV16DayOfWeek ;
@@ -285,8 +290,8 @@ namespace GeneXus.Programs {
           prmP00AK3 = new Object[] {
           };
           def= new CursorDef[] {
-              new CursorDef("P00AK2", "SELECT T1.CompanyId, T2.CompanyLocationId, T3.CompanyLocationCode, T1.HolidayStartDate, T1.HolidayName, T1.HolidayId FROM ((Holiday T1 INNER JOIN Company T2 ON T2.CompanyId = T1.CompanyId) INNER JOIN CompanyLocation T3 ON T3.CompanyLocationId = T2.CompanyLocationId) WHERE (T1.HolidayStartDate = :AV15CheckDate) AND (T3.CompanyLocationCode = ( 'ukrainian')) ORDER BY T1.HolidayId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00AK2,1, GxCacheFrequency.OFF ,true,true )
-             ,new CursorDef("P00AK3", "SELECT T1.CompanyId, T2.CompanyLocationId, T3.CompanyLocationCode, T1.EmployeeIsActive, T1.EmployeeName, T1.EmployeeId FROM ((Employee T1 INNER JOIN Company T2 ON T2.CompanyId = T1.CompanyId) INNER JOIN CompanyLocation T3 ON T3.CompanyLocationId = T2.CompanyLocationId) WHERE (T1.EmployeeIsActive = TRUE) AND (T3.CompanyLocationCode = ( 'ukrainian')) ORDER BY T1.EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00AK3,100, GxCacheFrequency.OFF ,true,false )
+              new CursorDef("P00AK2", "SELECT T1.CompanyId, T2.CompanyLocationId, T3.CompanyLocationCode, T1.HolidayStartDate, T1.HolidayName, T1.HolidayId FROM ((Holiday T1 INNER JOIN Company T2 ON T2.CompanyId = T1.CompanyId) INNER JOIN CompanyLocation T3 ON T3.CompanyLocationId = T2.CompanyLocationId) WHERE (T1.HolidayStartDate = :AV15CheckDate) AND (T3.CompanyLocationCode = ( 'ukrainian')) ORDER BY T1.HolidayId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00AK2,1, GxCacheFrequency.OFF ,false,true )
+             ,new CursorDef("P00AK3", "SELECT T1.CompanyId, T2.CompanyLocationId, T3.CompanyLocationCode, T1.EmployeeIsActive, T1.EmployeeName, T1.EmployeeId FROM ((Employee T1 INNER JOIN Company T2 ON T2.CompanyId = T1.CompanyId) INNER JOIN CompanyLocation T3 ON T3.CompanyLocationId = T2.CompanyLocationId) WHERE (T1.EmployeeIsActive = TRUE) AND (T3.CompanyLocationCode = ( 'ukrainian')) ORDER BY T1.EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00AK3,100, GxCacheFrequency.OFF ,false,false )
           };
        }
     }
