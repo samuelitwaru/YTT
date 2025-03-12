@@ -240,7 +240,8 @@ namespace GeneXus.Programs {
                   AV35WorkDate = DateTimeUtil.DAdd( AV35WorkDate, (1));
                }
             }
-            AV38CompanyWorkTimeDictionary.set( A157CompanyLocationId,  (AV36DayCount-AV37CompanyHolidayDateCollection.Count)*8*60);
+            AV43CompanyWorkTimeKeyCollection.Add(A157CompanyLocationId, 0);
+            AV44CompanyWorkTimeValueCollection.Add((AV36DayCount-AV37CompanyHolidayDateCollection.Count)*8*60, 0);
             pr_default.readNext(1);
          }
          pr_default.close(1);
@@ -341,7 +342,7 @@ namespace GeneXus.Programs {
                GXt_char2 = "";
                new formattime(context ).execute(  AV25SDT_EmployeeProjectMatrix.gxTpr_Employeehours, out  GXt_char2) ;
                AV25SDT_EmployeeProjectMatrix.gxTpr_Formattedemployeehours = GXt_char2;
-               AV25SDT_EmployeeProjectMatrix.gxTpr_Expectedworkhours = (long)(AV38CompanyWorkTimeDictionary.get(A157CompanyLocationId)-AV25SDT_EmployeeProjectMatrix.gxTpr_Leavehours);
+               AV25SDT_EmployeeProjectMatrix.gxTpr_Expectedworkhours = (long)(AV44CompanyWorkTimeValueCollection.GetNumeric(AV43CompanyWorkTimeKeyCollection.IndexOf((short)(A157CompanyLocationId)))-AV25SDT_EmployeeProjectMatrix.gxTpr_Leavehours);
                AV25SDT_EmployeeProjectMatrix.gxTpr_Isoptimal = (bool)((AV25SDT_EmployeeProjectMatrix.gxTpr_Workhours>=AV25SDT_EmployeeProjectMatrix.gxTpr_Expectedworkhours));
             }
             if ( AV25SDT_EmployeeProjectMatrix.gxTpr_Workhours > 0 )
@@ -393,7 +394,8 @@ namespace GeneXus.Programs {
          P00CC4_A157CompanyLocationId = new long[1] ;
          P00CC4_A113HolidayId = new long[1] ;
          A115HolidayStartDate = DateTime.MinValue;
-         AV38CompanyWorkTimeDictionary = new GeneXus.Core.genexus.common.SdtDictionary<double, double>();
+         AV43CompanyWorkTimeKeyCollection = new GxSimpleCollection<short>();
+         AV44CompanyWorkTimeValueCollection = new GxSimpleCollection<long>();
          P00CC5_A100CompanyId = new long[1] ;
          P00CC5_A106EmployeeId = new long[1] ;
          P00CC5_A157CompanyLocationId = new long[1] ;
@@ -499,7 +501,8 @@ namespace GeneXus.Programs {
       private DateTime[] P00CC4_A115HolidayStartDate ;
       private long[] P00CC4_A157CompanyLocationId ;
       private long[] P00CC4_A113HolidayId ;
-      private GeneXus.Core.genexus.common.SdtDictionary<double, double> AV38CompanyWorkTimeDictionary ;
+      private GxSimpleCollection<short> AV43CompanyWorkTimeKeyCollection ;
+      private GxSimpleCollection<long> AV44CompanyWorkTimeValueCollection ;
       private long[] P00CC5_A100CompanyId ;
       private long[] P00CC5_A106EmployeeId ;
       private long[] P00CC5_A157CompanyLocationId ;

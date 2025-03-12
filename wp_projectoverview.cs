@@ -376,6 +376,14 @@ namespace GeneXus.Programs {
          GxWebStd.gx_boolean_hidden_field( context, "vISAUTHORIZED_OPENPROJECTDETAILS", AV47IsAuthorized_OpenProjectDetails);
          GxWebStd.gx_hidden_field( context, "gxhash_vISAUTHORIZED_OPENPROJECTDETAILS", GetSecureSignedToken( "", AV47IsAuthorized_OpenProjectDetails, context));
          GxWebStd.gx_hidden_field( context, "vCURRENTPROJECTID", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV48CurrentProjectId), 10, 0, ".", "")));
+         if ( context.isAjaxRequest( ) )
+         {
+            context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "vPROJECTID", AV12ProjectId);
+         }
+         else
+         {
+            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("vPROJECTID", AV12ProjectId);
+         }
          GxWebStd.gx_hidden_field( context, "vCURRENTEMPLOYEEID", StringUtil.LTrim( StringUtil.NToC( (decimal)(AV49CurrentEmployeeId), 10, 0, ".", "")));
          if ( context.isAjaxRequest( ) )
          {
@@ -384,14 +392,6 @@ namespace GeneXus.Programs {
          else
          {
             context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("vEMPLOYEEID", AV14EmployeeId);
-         }
-         if ( context.isAjaxRequest( ) )
-         {
-            context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "vPROJECTID", AV12ProjectId);
-         }
-         else
-         {
-            context.httpAjaxContext.ajax_rsp_assign_hidden_sdt("vPROJECTID", AV12ProjectId);
          }
          if ( context.isAjaxRequest( ) )
          {
@@ -476,6 +476,7 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "COMBO_EMPLOYEEID_Selectedvalue_get", StringUtil.RTrim( Combo_employeeid_Selectedvalue_get));
          GxWebStd.gx_hidden_field( context, "COMBO_COMPANYLOCATIONID_Selectedvalue_get", StringUtil.RTrim( Combo_companylocationid_Selectedvalue_get));
          GxWebStd.gx_hidden_field( context, "COMBO_PROJECTID_Selectedvalue_get", StringUtil.RTrim( Combo_projectid_Selectedvalue_get));
+         GxWebStd.gx_hidden_field( context, "USERCONTROL1_Currentemployeeid", StringUtil.LTrim( StringUtil.NToC( (decimal)(Usercontrol1_Currentemployeeid), 9, 0, ".", "")));
          GxWebStd.gx_hidden_field( context, "USERCONTROL1_Currentprojectid", StringUtil.LTrim( StringUtil.NToC( (decimal)(Usercontrol1_Currentprojectid), 9, 0, ".", "")));
       }
 
@@ -951,74 +952,88 @@ namespace GeneXus.Programs {
                               /* Execute user event: Combo_employeeid.Onoptionclicked */
                               E14642 ();
                            }
+                           else if ( StringUtil.StrCmp(sEvt, "USERCONTROL1.EMPLOYEECLICKED") == 0 )
+                           {
+                              context.wbHandled = 1;
+                              dynload_actions( ) ;
+                              /* Execute user event: Usercontrol1.Employeeclicked */
+                              E15642 ();
+                           }
                            else if ( StringUtil.StrCmp(sEvt, "USERCONTROL1.PROJECTCLICKED") == 0 )
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
                               /* Execute user event: Usercontrol1.Projectclicked */
-                              E15642 ();
+                              E16642 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "DATERANGE_RANGEPICKER.DATERANGECHANGED") == 0 )
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
                               /* Execute user event: Daterange_rangepicker.Daterangechanged */
-                              E16642 ();
+                              E17642 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "OPENPROJECTDETAILS_MODAL.CLOSE") == 0 )
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
                               /* Execute user event: Openprojectdetails_modal.Close */
-                              E17642 ();
+                              E18642 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "OPENEMPLOYEEDETAILS_MODAL.CLOSE") == 0 )
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
                               /* Execute user event: Openemployeedetails_modal.Close */
-                              E18642 ();
+                              E19642 ();
+                           }
+                           else if ( StringUtil.StrCmp(sEvt, "OPENEMPLOYEEDETAILS_MODAL.ONLOADCOMPONENT") == 0 )
+                           {
+                              context.wbHandled = 1;
+                              dynload_actions( ) ;
+                              /* Execute user event: Openemployeedetails_modal.Onloadcomponent */
+                              E20642 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "START") == 0 )
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
                               /* Execute user event: Start */
-                              E19642 ();
+                              E21642 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "REFRESH") == 0 )
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
                               /* Execute user event: Refresh */
-                              E20642 ();
+                              E22642 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "'DOOPENPROJECTDETAILS'") == 0 )
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
                               /* Execute user event: 'DoOpenProjectDetails' */
-                              E21642 ();
+                              E23642 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "'DOEXPORTEXCEL'") == 0 )
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
                               /* Execute user event: 'DoExportExcel' */
-                              E22642 ();
+                              E24642 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "VSHOWLEAVETOTAL.CONTROLVALUECHANGED") == 0 )
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
-                              E23642 ();
+                              E25642 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "LOAD") == 0 )
                            {
                               context.wbHandled = 1;
                               dynload_actions( ) ;
                               /* Execute user event: Load */
-                              E24642 ();
+                              E26642 ();
                            }
                            else if ( StringUtil.StrCmp(sEvt, "ENTER") == 0 )
                            {
@@ -1165,7 +1180,7 @@ namespace GeneXus.Programs {
          initialize_formulas( ) ;
          clear_multi_value_controls( ) ;
          /* Execute user event: Refresh */
-         E20642 ();
+         E22642 ();
          if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
          {
             if ( 1 != 0 )
@@ -1182,7 +1197,7 @@ namespace GeneXus.Programs {
          if ( ! context.WillRedirect( ) && ( context.nUserReturn != 1 ) )
          {
             /* Execute user event: Load */
-            E24642 ();
+            E26642 ();
             WB640( ) ;
          }
       }
@@ -1224,7 +1239,7 @@ namespace GeneXus.Programs {
          /* Execute Start event if defined. */
          context.wbGlbDoneStart = 0;
          /* Execute user event: Start */
-         E19642 ();
+         E21642 ();
          context.wbGlbDoneStart = 1;
          /* After Start, stand alone formulas. */
          if ( StringUtil.StrCmp(context.GetRequestMethod( ), "POST") == 0 )
@@ -1239,7 +1254,6 @@ namespace GeneXus.Programs {
             /* Read saved values. */
             AV11DateRange = context.localUtil.CToD( cgiGet( "vDATERANGE"), 0);
             AV21DateRange_To = context.localUtil.CToD( cgiGet( "vDATERANGE_TO"), 0);
-            AV49CurrentEmployeeId = (long)(Math.Round(context.localUtil.CToN( cgiGet( "vCURRENTEMPLOYEEID"), ".", ","), 18, MidpointRounding.ToEven));
             AV48CurrentProjectId = (long)(Math.Round(context.localUtil.CToN( cgiGet( "vCURRENTPROJECTID"), ".", ","), 18, MidpointRounding.ToEven));
             Combo_projectid_Cls = cgiGet( "COMBO_PROJECTID_Cls");
             Combo_projectid_Selectedvalue_set = cgiGet( "COMBO_PROJECTID_Selectedvalue_set");
@@ -1272,6 +1286,7 @@ namespace GeneXus.Programs {
             Combo_employeeid_Selectedvalue_get = cgiGet( "COMBO_EMPLOYEEID_Selectedvalue_get");
             Combo_companylocationid_Selectedvalue_get = cgiGet( "COMBO_COMPANYLOCATIONID_Selectedvalue_get");
             Combo_projectid_Selectedvalue_get = cgiGet( "COMBO_PROJECTID_Selectedvalue_get");
+            Usercontrol1_Currentemployeeid = (int)(Math.Round(context.localUtil.CToN( cgiGet( "USERCONTROL1_Currentemployeeid"), ".", ","), 18, MidpointRounding.ToEven));
             Usercontrol1_Currentprojectid = (int)(Math.Round(context.localUtil.CToN( cgiGet( "USERCONTROL1_Currentprojectid"), ".", ","), 18, MidpointRounding.ToEven));
             /* Read variables values. */
             AV20DateRange_RangeText = cgiGet( edtavDaterange_rangetext_Internalname);
@@ -1291,11 +1306,11 @@ namespace GeneXus.Programs {
       protected void GXStart( )
       {
          /* Execute user event: Start */
-         E19642 ();
+         E21642 ();
          if (returnInSub) return;
       }
 
-      protected void E19642( )
+      protected void E21642( )
       {
          /* Start Routine */
          returnInSub = false;
@@ -1365,7 +1380,7 @@ namespace GeneXus.Programs {
          if (returnInSub) return;
       }
 
-      protected void E20642( )
+      protected void E22642( )
       {
          /* Refresh Routine */
          returnInSub = false;
@@ -1375,7 +1390,7 @@ namespace GeneXus.Programs {
          /*  Sending Event outputs  */
       }
 
-      protected void E21642( )
+      protected void E23642( )
       {
          /* 'DoOpenProjectDetails' Routine */
          returnInSub = false;
@@ -1390,21 +1405,53 @@ namespace GeneXus.Programs {
          }
       }
 
-      protected void E17642( )
+      protected void E18642( )
       {
          /* Openprojectdetails_modal_Close Routine */
          returnInSub = false;
          context.DoAjaxRefresh();
       }
 
-      protected void E18642( )
+      protected void E20642( )
+      {
+         /* Openemployeedetails_modal_Onloadcomponent Routine */
+         returnInSub = false;
+         new logtofile(context ).execute(  ">>>>"+AV12ProjectId.ToJSonString(false)) ;
+         /* Object Property */
+         if ( true )
+         {
+            bDynCreated_Wwpaux_wc = true;
+         }
+         if ( StringUtil.StrCmp(StringUtil.Lower( WebComp_Wwpaux_wc_Component), StringUtil.Lower( "WorkHourLogList")) != 0 )
+         {
+            WebComp_Wwpaux_wc = getWebComponent(GetType(), "GeneXus.Programs", "workhourloglist", new Object[] {context} );
+            WebComp_Wwpaux_wc.ComponentInit();
+            WebComp_Wwpaux_wc.Name = "WorkHourLogList";
+            WebComp_Wwpaux_wc_Component = "WorkHourLogList";
+         }
+         if ( StringUtil.Len( WebComp_Wwpaux_wc_Component) != 0 )
+         {
+            WebComp_Wwpaux_wc.setjustcreated();
+            WebComp_Wwpaux_wc.componentprepare(new Object[] {(string)"W0090",(string)"",(long)AV49CurrentEmployeeId,(GxSimpleCollection<long>)AV12ProjectId,(DateTime)AV11DateRange,(DateTime)AV21DateRange_To});
+            WebComp_Wwpaux_wc.componentbind(new Object[] {(string)"",(string)"",(string)"",(string)""});
+         }
+         if ( isFullAjaxMode( ) || isAjaxCallMode( ) && bDynCreated_Wwpaux_wc )
+         {
+            context.httpAjaxContext.ajax_rspStartCmp("gxHTMLWrpW0090"+"");
+            WebComp_Wwpaux_wc.componentdraw();
+            context.httpAjaxContext.ajax_rspEndCmp();
+         }
+         /*  Sending Event outputs  */
+      }
+
+      protected void E19642( )
       {
          /* Openemployeedetails_modal_Close Routine */
          returnInSub = false;
          context.DoAjaxRefresh();
       }
 
-      protected void E22642( )
+      protected void E24642( )
       {
          /* 'DoExportExcel' Routine */
          returnInSub = false;
@@ -1575,7 +1622,7 @@ namespace GeneXus.Programs {
          ucCombo_projectid.SendProperty(context, "", false, Combo_projectid_Internalname, "SelectedValue_set", Combo_projectid_Selectedvalue_set);
       }
 
-      protected void E16642( )
+      protected void E17642( )
       {
          /* Daterange_rangepicker_Daterangechanged Routine */
          returnInSub = false;
@@ -1590,7 +1637,7 @@ namespace GeneXus.Programs {
          context.httpAjaxContext.ajax_rsp_assign_sdt_attri("", false, "AV15ProjectId_Data", AV15ProjectId_Data);
       }
 
-      protected void E23642( )
+      protected void E25642( )
       {
          /* Showleavetotal_Controlvaluechanged Routine */
          returnInSub = false;
@@ -1609,6 +1656,17 @@ namespace GeneXus.Programs {
       }
 
       protected void E15642( )
+      {
+         /* Usercontrol1_Employeeclicked Routine */
+         returnInSub = false;
+         AV49CurrentEmployeeId = Usercontrol1_Currentemployeeid;
+         AssignAttri("", false, "AV49CurrentEmployeeId", StringUtil.LTrimStr( (decimal)(AV49CurrentEmployeeId), 10, 0));
+         new logtofile(context ).execute(  ">>>>"+AV12ProjectId.ToJSonString(false)) ;
+         this.executeUsercontrolMethod("", false, "OPENEMPLOYEEDETAILS_MODALContainer", "Confirm", "", new Object[] {});
+         /*  Sending Event outputs  */
+      }
+
+      protected void E16642( )
       {
          /* Usercontrol1_Projectclicked Routine */
          returnInSub = false;
@@ -1737,7 +1795,7 @@ namespace GeneXus.Programs {
       {
       }
 
-      protected void E24642( )
+      protected void E26642( )
       {
          /* Load Routine */
          returnInSub = false;
@@ -1854,7 +1912,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202521819573855", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20253101943286", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1870,7 +1928,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wp_projectoverview.js", "?202521819573856", false, true);
+         context.AddJavascriptSource("wp_projectoverview.js", "?20253101943287", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -2011,22 +2069,26 @@ namespace GeneXus.Programs {
       {
          setEventMetadata("REFRESH","""{"handler":"Refresh","iparms":[{"av":"AV10ShowLeaveTotal","fld":"vSHOWLEAVETOTAL"},{"av":"AV47IsAuthorized_OpenProjectDetails","fld":"vISAUTHORIZED_OPENPROJECTDETAILS","hsh":true},{"av":"AV43UserEmployeeIdCollection","fld":"vUSEREMPLOYEEIDCOLLECTION","hsh":true},{"av":"AV44UserProjectIdCollection","fld":"vUSERPROJECTIDCOLLECTION","hsh":true}]""");
          setEventMetadata("REFRESH",""","oparms":[{"av":"AV47IsAuthorized_OpenProjectDetails","fld":"vISAUTHORIZED_OPENPROJECTDETAILS","hsh":true},{"ctrl":"BTNOPENPROJECTDETAILS","prop":"Visible"}]}""");
-         setEventMetadata("'DOOPENPROJECTDETAILS'","""{"handler":"E21642","iparms":[{"av":"AV47IsAuthorized_OpenProjectDetails","fld":"vISAUTHORIZED_OPENPROJECTDETAILS","hsh":true}]}""");
-         setEventMetadata("OPENPROJECTDETAILS_MODAL.CLOSE","""{"handler":"E17642","iparms":[]}""");
+         setEventMetadata("'DOOPENPROJECTDETAILS'","""{"handler":"E23642","iparms":[{"av":"AV47IsAuthorized_OpenProjectDetails","fld":"vISAUTHORIZED_OPENPROJECTDETAILS","hsh":true}]}""");
+         setEventMetadata("OPENPROJECTDETAILS_MODAL.CLOSE","""{"handler":"E18642","iparms":[]}""");
          setEventMetadata("'DOOPENEMPLOYEEDETAILS'","""{"handler":"E11641","iparms":[]}""");
-         setEventMetadata("OPENEMPLOYEEDETAILS_MODAL.CLOSE","""{"handler":"E18642","iparms":[]}""");
-         setEventMetadata("'DOEXPORTEXCEL'","""{"handler":"E22642","iparms":[{"av":"AV11DateRange","fld":"vDATERANGE"},{"av":"AV21DateRange_To","fld":"vDATERANGE_TO"},{"av":"AV14EmployeeId","fld":"vEMPLOYEEID"},{"av":"AV12ProjectId","fld":"vPROJECTID"},{"av":"AV13CompanyLocationId","fld":"vCOMPANYLOCATIONID"},{"av":"AV10ShowLeaveTotal","fld":"vSHOWLEAVETOTAL"},{"av":"AV25SDT_EmployeeProjectMatrixCollection","fld":"vSDT_EMPLOYEEPROJECTMATRIXCOLLECTION"}]}""");
+         setEventMetadata("OPENEMPLOYEEDETAILS_MODAL.ONLOADCOMPONENT","""{"handler":"E20642","iparms":[{"av":"AV12ProjectId","fld":"vPROJECTID"},{"av":"AV49CurrentEmployeeId","fld":"vCURRENTEMPLOYEEID","pic":"ZZZZZZZZZ9"},{"av":"AV11DateRange","fld":"vDATERANGE"},{"av":"AV21DateRange_To","fld":"vDATERANGE_TO"}]""");
+         setEventMetadata("OPENEMPLOYEEDETAILS_MODAL.ONLOADCOMPONENT",""","oparms":[{"ctrl":"WWPAUX_WC"}]}""");
+         setEventMetadata("OPENEMPLOYEEDETAILS_MODAL.CLOSE","""{"handler":"E19642","iparms":[]}""");
+         setEventMetadata("'DOEXPORTEXCEL'","""{"handler":"E24642","iparms":[{"av":"AV11DateRange","fld":"vDATERANGE"},{"av":"AV21DateRange_To","fld":"vDATERANGE_TO"},{"av":"AV14EmployeeId","fld":"vEMPLOYEEID"},{"av":"AV12ProjectId","fld":"vPROJECTID"},{"av":"AV13CompanyLocationId","fld":"vCOMPANYLOCATIONID"},{"av":"AV10ShowLeaveTotal","fld":"vSHOWLEAVETOTAL"},{"av":"AV25SDT_EmployeeProjectMatrixCollection","fld":"vSDT_EMPLOYEEPROJECTMATRIXCOLLECTION"}]}""");
          setEventMetadata("COMBO_EMPLOYEEID.ONOPTIONCLICKED","""{"handler":"E14642","iparms":[{"av":"Combo_employeeid_Selectedvalue_get","ctrl":"COMBO_EMPLOYEEID","prop":"SelectedValue_get"},{"av":"AV11DateRange","fld":"vDATERANGE"},{"av":"AV21DateRange_To","fld":"vDATERANGE_TO"},{"av":"AV12ProjectId","fld":"vPROJECTID"},{"av":"AV13CompanyLocationId","fld":"vCOMPANYLOCATIONID"},{"av":"AV14EmployeeId","fld":"vEMPLOYEEID"},{"av":"AV43UserEmployeeIdCollection","fld":"vUSEREMPLOYEEIDCOLLECTION","hsh":true},{"av":"AV10ShowLeaveTotal","fld":"vSHOWLEAVETOTAL"},{"av":"A157CompanyLocationId","fld":"COMPANYLOCATIONID","pic":"ZZZZZZZZZ9"},{"av":"A106EmployeeId","fld":"EMPLOYEEID","pic":"ZZZZZZZZZ9"},{"av":"AV44UserProjectIdCollection","fld":"vUSERPROJECTIDCOLLECTION","hsh":true},{"av":"A102ProjectId","fld":"PROJECTID","pic":"ZZZZZZZZZ9"},{"av":"A148EmployeeName","fld":"EMPLOYEENAME"},{"av":"AV37ToShowEmployeeIdCollection","fld":"vTOSHOWEMPLOYEEIDCOLLECTION"},{"av":"A103ProjectName","fld":"PROJECTNAME"},{"av":"AV38ToShowProjectIdCollection","fld":"vTOSHOWPROJECTIDCOLLECTION"}]""");
          setEventMetadata("COMBO_EMPLOYEEID.ONOPTIONCLICKED",""","oparms":[{"av":"AV14EmployeeId","fld":"vEMPLOYEEID"},{"av":"AV25SDT_EmployeeProjectMatrixCollection","fld":"vSDT_EMPLOYEEPROJECTMATRIXCOLLECTION"},{"av":"Usercontrol1_Formattedoveralltotalhours","ctrl":"USERCONTROL1","prop":"FormattedOverallTotalHours"},{"av":"AV37ToShowEmployeeIdCollection","fld":"vTOSHOWEMPLOYEEIDCOLLECTION"},{"av":"AV38ToShowProjectIdCollection","fld":"vTOSHOWPROJECTIDCOLLECTION"},{"av":"AV19EmployeeId_Data","fld":"vEMPLOYEEID_DATA"},{"av":"Combo_employeeid_Selectedvalue_set","ctrl":"COMBO_EMPLOYEEID","prop":"SelectedValue_set"},{"av":"AV15ProjectId_Data","fld":"vPROJECTID_DATA"},{"av":"Combo_projectid_Selectedvalue_set","ctrl":"COMBO_PROJECTID","prop":"SelectedValue_set"}]}""");
          setEventMetadata("COMBO_COMPANYLOCATIONID.ONOPTIONCLICKED","""{"handler":"E13642","iparms":[{"av":"Combo_companylocationid_Selectedvalue_get","ctrl":"COMBO_COMPANYLOCATIONID","prop":"SelectedValue_get"},{"av":"AV11DateRange","fld":"vDATERANGE"},{"av":"AV21DateRange_To","fld":"vDATERANGE_TO"},{"av":"AV12ProjectId","fld":"vPROJECTID"},{"av":"AV13CompanyLocationId","fld":"vCOMPANYLOCATIONID"},{"av":"AV14EmployeeId","fld":"vEMPLOYEEID"},{"av":"AV43UserEmployeeIdCollection","fld":"vUSEREMPLOYEEIDCOLLECTION","hsh":true},{"av":"AV10ShowLeaveTotal","fld":"vSHOWLEAVETOTAL"},{"av":"A157CompanyLocationId","fld":"COMPANYLOCATIONID","pic":"ZZZZZZZZZ9"},{"av":"A106EmployeeId","fld":"EMPLOYEEID","pic":"ZZZZZZZZZ9"},{"av":"AV44UserProjectIdCollection","fld":"vUSERPROJECTIDCOLLECTION","hsh":true},{"av":"A102ProjectId","fld":"PROJECTID","pic":"ZZZZZZZZZ9"},{"av":"A148EmployeeName","fld":"EMPLOYEENAME"},{"av":"AV37ToShowEmployeeIdCollection","fld":"vTOSHOWEMPLOYEEIDCOLLECTION"},{"av":"A103ProjectName","fld":"PROJECTNAME"},{"av":"AV38ToShowProjectIdCollection","fld":"vTOSHOWPROJECTIDCOLLECTION"}]""");
          setEventMetadata("COMBO_COMPANYLOCATIONID.ONOPTIONCLICKED",""","oparms":[{"av":"AV13CompanyLocationId","fld":"vCOMPANYLOCATIONID"},{"av":"AV25SDT_EmployeeProjectMatrixCollection","fld":"vSDT_EMPLOYEEPROJECTMATRIXCOLLECTION"},{"av":"Usercontrol1_Formattedoveralltotalhours","ctrl":"USERCONTROL1","prop":"FormattedOverallTotalHours"},{"av":"AV37ToShowEmployeeIdCollection","fld":"vTOSHOWEMPLOYEEIDCOLLECTION"},{"av":"AV38ToShowProjectIdCollection","fld":"vTOSHOWPROJECTIDCOLLECTION"},{"av":"AV19EmployeeId_Data","fld":"vEMPLOYEEID_DATA"},{"av":"Combo_employeeid_Selectedvalue_set","ctrl":"COMBO_EMPLOYEEID","prop":"SelectedValue_set"},{"av":"AV15ProjectId_Data","fld":"vPROJECTID_DATA"},{"av":"Combo_projectid_Selectedvalue_set","ctrl":"COMBO_PROJECTID","prop":"SelectedValue_set"}]}""");
          setEventMetadata("COMBO_PROJECTID.ONOPTIONCLICKED","""{"handler":"E12642","iparms":[{"av":"Combo_projectid_Selectedvalue_get","ctrl":"COMBO_PROJECTID","prop":"SelectedValue_get"},{"av":"AV11DateRange","fld":"vDATERANGE"},{"av":"AV21DateRange_To","fld":"vDATERANGE_TO"},{"av":"AV12ProjectId","fld":"vPROJECTID"},{"av":"AV13CompanyLocationId","fld":"vCOMPANYLOCATIONID"},{"av":"AV14EmployeeId","fld":"vEMPLOYEEID"},{"av":"AV43UserEmployeeIdCollection","fld":"vUSEREMPLOYEEIDCOLLECTION","hsh":true},{"av":"AV10ShowLeaveTotal","fld":"vSHOWLEAVETOTAL"},{"av":"A157CompanyLocationId","fld":"COMPANYLOCATIONID","pic":"ZZZZZZZZZ9"},{"av":"A106EmployeeId","fld":"EMPLOYEEID","pic":"ZZZZZZZZZ9"},{"av":"AV44UserProjectIdCollection","fld":"vUSERPROJECTIDCOLLECTION","hsh":true},{"av":"A102ProjectId","fld":"PROJECTID","pic":"ZZZZZZZZZ9"},{"av":"A148EmployeeName","fld":"EMPLOYEENAME"},{"av":"AV37ToShowEmployeeIdCollection","fld":"vTOSHOWEMPLOYEEIDCOLLECTION"},{"av":"A103ProjectName","fld":"PROJECTNAME"},{"av":"AV38ToShowProjectIdCollection","fld":"vTOSHOWPROJECTIDCOLLECTION"}]""");
          setEventMetadata("COMBO_PROJECTID.ONOPTIONCLICKED",""","oparms":[{"av":"AV12ProjectId","fld":"vPROJECTID"},{"av":"AV25SDT_EmployeeProjectMatrixCollection","fld":"vSDT_EMPLOYEEPROJECTMATRIXCOLLECTION"},{"av":"Usercontrol1_Formattedoveralltotalhours","ctrl":"USERCONTROL1","prop":"FormattedOverallTotalHours"},{"av":"AV37ToShowEmployeeIdCollection","fld":"vTOSHOWEMPLOYEEIDCOLLECTION"},{"av":"AV38ToShowProjectIdCollection","fld":"vTOSHOWPROJECTIDCOLLECTION"},{"av":"AV19EmployeeId_Data","fld":"vEMPLOYEEID_DATA"},{"av":"Combo_employeeid_Selectedvalue_set","ctrl":"COMBO_EMPLOYEEID","prop":"SelectedValue_set"},{"av":"AV15ProjectId_Data","fld":"vPROJECTID_DATA"},{"av":"Combo_projectid_Selectedvalue_set","ctrl":"COMBO_PROJECTID","prop":"SelectedValue_set"}]}""");
-         setEventMetadata("DATERANGE_RANGEPICKER.DATERANGECHANGED","""{"handler":"E16642","iparms":[{"av":"AV11DateRange","fld":"vDATERANGE"},{"av":"AV21DateRange_To","fld":"vDATERANGE_TO"},{"av":"AV12ProjectId","fld":"vPROJECTID"},{"av":"AV13CompanyLocationId","fld":"vCOMPANYLOCATIONID"},{"av":"AV14EmployeeId","fld":"vEMPLOYEEID"},{"av":"AV43UserEmployeeIdCollection","fld":"vUSEREMPLOYEEIDCOLLECTION","hsh":true},{"av":"AV10ShowLeaveTotal","fld":"vSHOWLEAVETOTAL"},{"av":"A157CompanyLocationId","fld":"COMPANYLOCATIONID","pic":"ZZZZZZZZZ9"},{"av":"A106EmployeeId","fld":"EMPLOYEEID","pic":"ZZZZZZZZZ9"},{"av":"AV44UserProjectIdCollection","fld":"vUSERPROJECTIDCOLLECTION","hsh":true},{"av":"A102ProjectId","fld":"PROJECTID","pic":"ZZZZZZZZZ9"},{"av":"A148EmployeeName","fld":"EMPLOYEENAME"},{"av":"AV37ToShowEmployeeIdCollection","fld":"vTOSHOWEMPLOYEEIDCOLLECTION"},{"av":"A103ProjectName","fld":"PROJECTNAME"},{"av":"AV38ToShowProjectIdCollection","fld":"vTOSHOWPROJECTIDCOLLECTION"}]""");
+         setEventMetadata("DATERANGE_RANGEPICKER.DATERANGECHANGED","""{"handler":"E17642","iparms":[{"av":"AV11DateRange","fld":"vDATERANGE"},{"av":"AV21DateRange_To","fld":"vDATERANGE_TO"},{"av":"AV12ProjectId","fld":"vPROJECTID"},{"av":"AV13CompanyLocationId","fld":"vCOMPANYLOCATIONID"},{"av":"AV14EmployeeId","fld":"vEMPLOYEEID"},{"av":"AV43UserEmployeeIdCollection","fld":"vUSEREMPLOYEEIDCOLLECTION","hsh":true},{"av":"AV10ShowLeaveTotal","fld":"vSHOWLEAVETOTAL"},{"av":"A157CompanyLocationId","fld":"COMPANYLOCATIONID","pic":"ZZZZZZZZZ9"},{"av":"A106EmployeeId","fld":"EMPLOYEEID","pic":"ZZZZZZZZZ9"},{"av":"AV44UserProjectIdCollection","fld":"vUSERPROJECTIDCOLLECTION","hsh":true},{"av":"A102ProjectId","fld":"PROJECTID","pic":"ZZZZZZZZZ9"},{"av":"A148EmployeeName","fld":"EMPLOYEENAME"},{"av":"AV37ToShowEmployeeIdCollection","fld":"vTOSHOWEMPLOYEEIDCOLLECTION"},{"av":"A103ProjectName","fld":"PROJECTNAME"},{"av":"AV38ToShowProjectIdCollection","fld":"vTOSHOWPROJECTIDCOLLECTION"}]""");
          setEventMetadata("DATERANGE_RANGEPICKER.DATERANGECHANGED",""","oparms":[{"av":"AV25SDT_EmployeeProjectMatrixCollection","fld":"vSDT_EMPLOYEEPROJECTMATRIXCOLLECTION"},{"av":"Usercontrol1_Formattedoveralltotalhours","ctrl":"USERCONTROL1","prop":"FormattedOverallTotalHours"},{"av":"AV37ToShowEmployeeIdCollection","fld":"vTOSHOWEMPLOYEEIDCOLLECTION"},{"av":"AV38ToShowProjectIdCollection","fld":"vTOSHOWPROJECTIDCOLLECTION"},{"av":"AV19EmployeeId_Data","fld":"vEMPLOYEEID_DATA"},{"av":"Combo_employeeid_Selectedvalue_set","ctrl":"COMBO_EMPLOYEEID","prop":"SelectedValue_set"},{"av":"AV15ProjectId_Data","fld":"vPROJECTID_DATA"},{"av":"Combo_projectid_Selectedvalue_set","ctrl":"COMBO_PROJECTID","prop":"SelectedValue_set"}]}""");
-         setEventMetadata("VSHOWLEAVETOTAL.CONTROLVALUECHANGED","""{"handler":"E23642","iparms":[{"av":"AV10ShowLeaveTotal","fld":"vSHOWLEAVETOTAL"},{"av":"AV11DateRange","fld":"vDATERANGE"},{"av":"AV21DateRange_To","fld":"vDATERANGE_TO"},{"av":"AV12ProjectId","fld":"vPROJECTID"},{"av":"AV13CompanyLocationId","fld":"vCOMPANYLOCATIONID"},{"av":"AV14EmployeeId","fld":"vEMPLOYEEID"},{"av":"AV43UserEmployeeIdCollection","fld":"vUSEREMPLOYEEIDCOLLECTION","hsh":true},{"av":"A157CompanyLocationId","fld":"COMPANYLOCATIONID","pic":"ZZZZZZZZZ9"},{"av":"A106EmployeeId","fld":"EMPLOYEEID","pic":"ZZZZZZZZZ9"},{"av":"AV44UserProjectIdCollection","fld":"vUSERPROJECTIDCOLLECTION","hsh":true},{"av":"A102ProjectId","fld":"PROJECTID","pic":"ZZZZZZZZZ9"},{"av":"A148EmployeeName","fld":"EMPLOYEENAME"},{"av":"AV37ToShowEmployeeIdCollection","fld":"vTOSHOWEMPLOYEEIDCOLLECTION"},{"av":"A103ProjectName","fld":"PROJECTNAME"},{"av":"AV38ToShowProjectIdCollection","fld":"vTOSHOWPROJECTIDCOLLECTION"}]""");
+         setEventMetadata("VSHOWLEAVETOTAL.CONTROLVALUECHANGED","""{"handler":"E25642","iparms":[{"av":"AV10ShowLeaveTotal","fld":"vSHOWLEAVETOTAL"},{"av":"AV11DateRange","fld":"vDATERANGE"},{"av":"AV21DateRange_To","fld":"vDATERANGE_TO"},{"av":"AV12ProjectId","fld":"vPROJECTID"},{"av":"AV13CompanyLocationId","fld":"vCOMPANYLOCATIONID"},{"av":"AV14EmployeeId","fld":"vEMPLOYEEID"},{"av":"AV43UserEmployeeIdCollection","fld":"vUSEREMPLOYEEIDCOLLECTION","hsh":true},{"av":"A157CompanyLocationId","fld":"COMPANYLOCATIONID","pic":"ZZZZZZZZZ9"},{"av":"A106EmployeeId","fld":"EMPLOYEEID","pic":"ZZZZZZZZZ9"},{"av":"AV44UserProjectIdCollection","fld":"vUSERPROJECTIDCOLLECTION","hsh":true},{"av":"A102ProjectId","fld":"PROJECTID","pic":"ZZZZZZZZZ9"},{"av":"A148EmployeeName","fld":"EMPLOYEENAME"},{"av":"AV37ToShowEmployeeIdCollection","fld":"vTOSHOWEMPLOYEEIDCOLLECTION"},{"av":"A103ProjectName","fld":"PROJECTNAME"},{"av":"AV38ToShowProjectIdCollection","fld":"vTOSHOWPROJECTIDCOLLECTION"}]""");
          setEventMetadata("VSHOWLEAVETOTAL.CONTROLVALUECHANGED",""","oparms":[{"av":"Usercontrol1_Showleavetotal","ctrl":"USERCONTROL1","prop":"ShowLeaveTotal"},{"av":"AV25SDT_EmployeeProjectMatrixCollection","fld":"vSDT_EMPLOYEEPROJECTMATRIXCOLLECTION"},{"av":"Usercontrol1_Formattedoveralltotalhours","ctrl":"USERCONTROL1","prop":"FormattedOverallTotalHours"},{"av":"AV37ToShowEmployeeIdCollection","fld":"vTOSHOWEMPLOYEEIDCOLLECTION"},{"av":"AV38ToShowProjectIdCollection","fld":"vTOSHOWPROJECTIDCOLLECTION"},{"av":"AV19EmployeeId_Data","fld":"vEMPLOYEEID_DATA"},{"av":"Combo_employeeid_Selectedvalue_set","ctrl":"COMBO_EMPLOYEEID","prop":"SelectedValue_set"},{"av":"AV15ProjectId_Data","fld":"vPROJECTID_DATA"},{"av":"Combo_projectid_Selectedvalue_set","ctrl":"COMBO_PROJECTID","prop":"SelectedValue_set"}]}""");
-         setEventMetadata("USERCONTROL1.PROJECTCLICKED","""{"handler":"E15642","iparms":[{"av":"Usercontrol1_Currentprojectid","ctrl":"USERCONTROL1","prop":"CurrentProjectId"},{"av":"AV13CompanyLocationId","fld":"vCOMPANYLOCATIONID"},{"av":"AV14EmployeeId","fld":"vEMPLOYEEID"},{"av":"AV12ProjectId","fld":"vPROJECTID"},{"av":"AV11DateRange","fld":"vDATERANGE"},{"av":"AV21DateRange_To","fld":"vDATERANGE_TO"},{"av":"AV10ShowLeaveTotal","fld":"vSHOWLEAVETOTAL"}]""");
+         setEventMetadata("USERCONTROL1.EMPLOYEECLICKED","""{"handler":"E15642","iparms":[{"av":"Usercontrol1_Currentemployeeid","ctrl":"USERCONTROL1","prop":"CurrentEmployeeId"},{"av":"AV12ProjectId","fld":"vPROJECTID"}]""");
+         setEventMetadata("USERCONTROL1.EMPLOYEECLICKED",""","oparms":[{"av":"AV49CurrentEmployeeId","fld":"vCURRENTEMPLOYEEID","pic":"ZZZZZZZZZ9"}]}""");
+         setEventMetadata("USERCONTROL1.PROJECTCLICKED","""{"handler":"E16642","iparms":[{"av":"Usercontrol1_Currentprojectid","ctrl":"USERCONTROL1","prop":"CurrentProjectId"},{"av":"AV13CompanyLocationId","fld":"vCOMPANYLOCATIONID"},{"av":"AV14EmployeeId","fld":"vEMPLOYEEID"},{"av":"AV12ProjectId","fld":"vPROJECTID"},{"av":"AV11DateRange","fld":"vDATERANGE"},{"av":"AV21DateRange_To","fld":"vDATERANGE_TO"},{"av":"AV10ShowLeaveTotal","fld":"vSHOWLEAVETOTAL"}]""");
          setEventMetadata("USERCONTROL1.PROJECTCLICKED",""","oparms":[{"av":"AV48CurrentProjectId","fld":"vCURRENTPROJECTID","pic":"ZZZZZZZZZ9"}]}""");
          return  ;
       }
@@ -2061,8 +2123,8 @@ namespace GeneXus.Programs {
          AV11DateRange = DateTime.MinValue;
          AV21DateRange_To = DateTime.MinValue;
          AV22DateRange_RangePickerOptions = new GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions(context);
-         AV14EmployeeId = new GxSimpleCollection<long>();
          AV12ProjectId = new GxSimpleCollection<long>();
+         AV14EmployeeId = new GxSimpleCollection<long>();
          AV13CompanyLocationId = new GxSimpleCollection<long>();
          A148EmployeeName = "";
          AV37ToShowEmployeeIdCollection = new GxSimpleCollection<long>();
@@ -2318,6 +2380,7 @@ namespace GeneXus.Programs {
       private bool AV39IsProjectManager ;
       private bool AV42IsManager ;
       private bool n166ProjectManagerId ;
+      private bool bDynCreated_Wwpaux_wc ;
       private bool GXt_boolean1 ;
       private string AV20DateRange_RangeText ;
       private string AV26Filename ;
@@ -2343,8 +2406,8 @@ namespace GeneXus.Programs {
       private GXBaseCollection<GeneXus.Programs.wwpbaseobjects.SdtDVB_SDTComboData_Item> AV19EmployeeId_Data ;
       private GXBaseCollection<SdtSDT_EmployeeProjectMatrix> AV25SDT_EmployeeProjectMatrixCollection ;
       private GeneXus.Programs.wwpbaseobjects.SdtWWPDateRangePickerOptions AV22DateRange_RangePickerOptions ;
-      private GxSimpleCollection<long> AV14EmployeeId ;
       private GxSimpleCollection<long> AV12ProjectId ;
+      private GxSimpleCollection<long> AV14EmployeeId ;
       private GxSimpleCollection<long> AV13CompanyLocationId ;
       private GxSimpleCollection<long> AV37ToShowEmployeeIdCollection ;
       private GxSimpleCollection<long> AV38ToShowProjectIdCollection ;

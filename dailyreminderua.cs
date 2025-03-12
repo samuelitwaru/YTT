@@ -41,20 +41,14 @@ namespace GeneXus.Programs {
          dsDefault = context.GetDataStore("Default");
       }
 
-      public void execute( DateTime aP0_SomeDate ,
-                           short aP1_SomeHour )
+      public void execute( )
       {
-         this.AV2SomeDate = aP0_SomeDate;
-         this.AV3SomeHour = aP1_SomeHour;
          initialize();
          ExecuteImpl();
       }
 
-      public void executeSubmit( DateTime aP0_SomeDate ,
-                                 short aP1_SomeHour )
+      public void executeSubmit( )
       {
-         this.AV2SomeDate = aP0_SomeDate;
-         this.AV3SomeHour = aP1_SomeHour;
          SubmitImpl();
       }
 
@@ -62,11 +56,8 @@ namespace GeneXus.Programs {
       {
          /* GeneXus formulas */
          /* Output device settings */
-         args = new Object[] {(DateTime)AV2SomeDate,(short)AV3SomeHour} ;
+         args = new Object[] {} ;
          ClassLoader.Execute("adailyreminderua","GeneXus.Programs","adailyreminderua", new Object[] {context }, "execute", args);
-         if ( ( args != null ) && ( args.Length == 2 ) )
-         {
-         }
          cleanup();
       }
 
@@ -84,8 +75,6 @@ namespace GeneXus.Programs {
          /* GeneXus formulas. */
       }
 
-      private short AV3SomeHour ;
-      private DateTime AV2SomeDate ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private Object[] args ;
