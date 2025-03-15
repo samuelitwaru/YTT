@@ -3354,7 +3354,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20253101923019", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20253155225252", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -3370,7 +3370,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("leaverequestpending.js", "?20253101923020", false, true);
+         context.AddJavascriptSource("leaverequestpending.js", "?20253155225253", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -4003,7 +4003,7 @@ namespace GeneXus.Programs {
          Dvelop_confirmpanel_useraction2_Cancelbuttoncaption = "WWP_ConfirmTextCancel";
          Dvelop_confirmpanel_useraction2_Nobuttoncaption = "WWP_ConfirmTextNo";
          Dvelop_confirmpanel_useraction2_Yesbuttoncaption = "WWP_ConfirmTextYes";
-         Dvelop_confirmpanel_useraction2_Confirmationtext = "Delete Leave Request?";
+         Dvelop_confirmpanel_useraction2_Confirmationtext = "Reject Leave Request?";
          Dvelop_confirmpanel_useraction2_Title = "Confirm";
          Dvelop_confirmpanel_useraction1_Confirmtype = "1";
          Dvelop_confirmpanel_useraction1_Yesbuttonposition = "left";

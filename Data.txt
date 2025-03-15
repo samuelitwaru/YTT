@@ -1,0 +1,55 @@
+uri http://localhost:8082/YTT_version4NETPostgreSQL14/
+API Result: {"access_token":"131450e8-6fac-42e4-85a0-40894f16ba44!oZ7k0TnbUtgdfD6HWtIEP9udHuaNyrKfimEhDBaYGBLzwMYogJaSjE4TUM1cc0h8pcSl3etN2UCadT","token_type":"Bearer","expires_in":0,"refresh_token":"","scope":"gam_user_data","user_guid":"d19ad431-3e05-44b3-92f0-8b49fd886392"}
+uri http://localhost:8082/YTT_version4NETPostgreSQL14/
+API Result: {"access_token":"131450e8-6fac-42e4-85a0-40894f16ba44!3ztgdNMu4YITALIqcOkxrwxPXnNox6DwMd8JOmgx7f8TCKHNPqAqolI0NQDNg4R8ciUrdG9UV3KKPB","token_type":"Bearer","expires_in":0,"refresh_token":"","scope":"gam_user_data","user_guid":"d19ad431-3e05-44b3-92f0-8b49fd886392"}
+uri http://localhost:8082/YTT_version4NETPostgreSQL14/
+API Result: {"access_token":"131450e8-6fac-42e4-85a0-40894f16ba44!oL0LfBgTi5gAUTJfZCpyfTFLfXn45owmKHaKNoI70cUQ0g9iBLPl9Nfoul0D8x77u1UC4cTgPZ83Zk","token_type":"Bearer","expires_in":0,"refresh_token":"","scope":"gam_user_data","user_guid":"d19ad431-3e05-44b3-92f0-8b49fd886392"}
+uri http://localhost:8082/YTT_version4NETPostgreSQL14/
+API Result: {"access_token":"131450e8-6fac-42e4-85a0-40894f16ba44!RAY2ao1Ryds32dcoaiHtfKJm3fBgNLXca4PbpkzSQthgaZUlJZMbzQ1FgLhaSuxvUCkguRwjJLFiGW","token_type":"Bearer","expires_in":0,"refresh_token":"","scope":"gam_user_data","user_guid":"d19ad431-3e05-44b3-92f0-8b49fd886392"}
+>>>>[]
+>>>>[]
+Employeees: [384]
+Project:  170
+Dates: 01/01/24 31/12/24
+       384
+01/01/24
+31/12/24
+       170
+>>>>[]
+>>>>[]
+Employeees: [384]
+Project:  170
+Dates: 01/01/24 31/12/24
+       384
+01/01/24
+31/12/24
+       170
+Employeees: [367,364,341,370,340,339,338,368]
+Project:  166
+Dates: 01/01/24 31/12/24
+       338
+01/01/24
+31/12/24
+       166
+       364
+01/01/24
+31/12/24
+       166
+       367
+01/01/24
+31/12/24
+       166
+       341
+01/01/24
+31/12/24
+       166
+       339
+01/01/24
+31/12/24
+       166
+>>>>[]
+>>>>[]
+>>>>[]
+>>>>[]
+>>>>[]
+>>>>[]

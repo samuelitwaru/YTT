@@ -172,7 +172,7 @@ namespace GeneXus.Programs {
          new formatdatetime(context ).execute(  AV9FromDate,  "YYYY-MM-DD", out  GXt_char1) ;
          GXt_char2 = AV12Filename;
          new formatdatetime(context ).execute(  AV10ToDate,  "YYYY-MM-DD", out  GXt_char2) ;
-         AV12Filename = "ReportExport-" + GXt_char1 + "_" + GXt_char2 + ".xlsx";
+         AV12Filename = "HoursReport-" + GXt_char1 + "_" + GXt_char2 + ".xlsx";
          AV19File.Source = AV12Filename;
          AV19File.Delete();
          AV20excelSpreadsheet.open( AV12Filename);
