@@ -149,7 +149,7 @@ namespace GeneXus.Programs {
             A157CompanyLocationId = P00AK3_A157CompanyLocationId[0];
             A159CompanyLocationCode = P00AK3_A159CompanyLocationCode[0];
             AV20Data += "Employee Name: " + StringUtil.Trim( A148EmployeeName) + StringUtil.NewLine( );
-            AV28GXLvl51 = 0;
+            AV28GXLvl48 = 0;
             /* Using cursor P00AK4 */
             pr_default.execute(2, new Object[] {A106EmployeeId, AV15CheckDate});
             while ( (pr_default.getStatus(2) != 101) )
@@ -163,7 +163,7 @@ namespace GeneXus.Programs {
                n173LeaveRequestHalfDay = P00AK4_n173LeaveRequestHalfDay[0];
                A127LeaveRequestId = P00AK4_A127LeaveRequestId[0];
                A145LeaveTypeLoggingWorkHours = P00AK4_A145LeaveTypeLoggingWorkHours[0];
-               AV28GXLvl51 = 1;
+               AV28GXLvl48 = 1;
                AV19HasNoLeave = false;
                AV18HasToLogOnLeave = false;
                if ( StringUtil.StrCmp(A145LeaveTypeLoggingWorkHours, "Yes") == 0 )
@@ -191,25 +191,25 @@ namespace GeneXus.Programs {
                pr_default.readNext(2);
             }
             pr_default.close(2);
-            if ( AV28GXLvl51 == 0 )
+            if ( AV28GXLvl48 == 0 )
             {
                AV19HasNoLeave = true;
             }
-            AV29GXLvl77 = 0;
+            AV29GXLvl74 = 0;
             /* Using cursor P00AK5 */
             pr_default.execute(3, new Object[] {AV15CheckDate, A106EmployeeId});
             while ( (pr_default.getStatus(3) != 101) )
             {
                A119WorkHourLogDate = P00AK5_A119WorkHourLogDate[0];
                A118WorkHourLogId = P00AK5_A118WorkHourLogId[0];
-               AV29GXLvl77 = 1;
+               AV29GXLvl74 = 1;
                AV14HasLoggedHours = true;
                /* Exit For each command. Update data (if necessary), close cursors & exit. */
                if (true) break;
                pr_default.readNext(3);
             }
             pr_default.close(3);
-            if ( AV29GXLvl77 == 0 )
+            if ( AV29GXLvl74 == 0 )
             {
                AV14HasLoggedHours = false;
             }
@@ -326,8 +326,8 @@ namespace GeneXus.Programs {
       private short GxWebError ;
       private short AV17CurrentHour ;
       private short AV16DayOfWeek ;
-      private short AV28GXLvl51 ;
-      private short AV29GXLvl77 ;
+      private short AV28GXLvl48 ;
+      private short AV29GXLvl74 ;
       private long A100CompanyId ;
       private long A157CompanyLocationId ;
       private long A113HolidayId ;
