@@ -32,7 +32,7 @@
  	
 	<table class="my-sticky-column-table">
 		
-		<thead  style="position:sticky; top:0;">
+		<thead  style="position:sticky; top:0; z-index:5">
 			<tr>
 				<th id='firstHeaderData' class='text-center' style="position:sticky;left:0; background:white;">Projects per employee:</th>
 				<!-- Project Header Cells Go Here -->

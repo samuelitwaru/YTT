@@ -229,3 +229,30 @@ uri http://localhost:8082/YTT_version4NETPostgreSQL14/
 API Result: {"access_token":"131450e8-6fac-42e4-85a0-40894f16ba44!8H1m6Zce0F6rZlc3IBzE7FbQbs789OII2QR2OfRp2LlMlfCN5UU8EahJ4J1kWA1YosYUp4M2nvwkhI","token_type":"Bearer","expires_in":0,"refresh_token":"","scope":"gam_user_data","user_guid":"d19ad431-3e05-44b3-92f0-8b49fd886392"}
 uri http://localhost:8082/YTT_version4NETPostgreSQL14/
 API Result: {"access_token":"131450e8-6fac-42e4-85a0-40894f16ba44!t1RJwKYEpyowmozYAg8TtORBpdBZ7wBUiRCZDWhWfQZjuyarDwsBwPqgoqAY7sy60hWeNsBOsyXnXB","token_type":"Bearer","expires_in":0,"refresh_token":"","scope":"gam_user_data","user_guid":"d19ad431-3e05-44b3-92f0-8b49fd886392"}
+>>>>[]
+>>>>[]
+>>>>[]
+>>>>[]
+>>>>[]
+>>>>[]
+>>>>[]
+>>>>[]
+>>>>[]
+>>>>[]
+>>>>[]
+>>>>[]
+Employeees: [262,628,305,631,100,205,312,334,345,381,630,632,298,135,327]
+Project:  168
+Dates: 01/01/25 31/12/25
+       327
+01/01/25
+31/12/25
+       168
+       205
+01/01/25
+31/12/25
+       168
+       312
+01/01/25
+31/12/25
+       168
