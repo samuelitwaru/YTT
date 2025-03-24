@@ -80,7 +80,6 @@ namespace GeneXus.Programs {
             A188EmployeeAPIPassword = P00CG2_A188EmployeeAPIPassword[0];
             AV11GUIDString = StringUtil.Trim( Guid.NewGuid( ).ToString());
             AV9EmployeeAPIPassword = AV11GUIDString;
-            new logtofile(context ).execute(  AV9EmployeeAPIPassword) ;
             A188EmployeeAPIPassword = AV9EmployeeAPIPassword;
             GXTCG2 = 1;
             /* Using cursor P00CG3 */

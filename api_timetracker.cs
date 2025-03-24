@@ -82,7 +82,6 @@ namespace GeneXus.Programs {
       {
          /* Api_icsleaveapi_After Routine */
          returnInSub = false;
-         new logtofile(context ).execute(  AV15result) ;
          AV15result = AV12ICSLeaveExport;
       }
 

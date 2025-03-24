@@ -291,8 +291,7 @@ namespace GeneXus.Programs {
          AV21CredsCollection = (GxSimpleCollection<string>)(GxRegex.Split(AV17AuthorizationValue,":"));
          AV14EmployeeEmail = ((string)AV21CredsCollection.Item(1));
          AV15EmployeeAPIPassword = ((string)AV21CredsCollection.Item(2));
-         new logtofile(context ).execute(  AV14EmployeeEmail+" : "+AV15EmployeeAPIPassword) ;
-         AV29GXLvl10 = 0;
+         AV29GXLvl7 = 0;
          /* Using cursor P00CH2 */
          pr_default.execute(0, new Object[] {AV14EmployeeEmail, AV15EmployeeAPIPassword});
          while ( (pr_default.getStatus(0) != 101) )
@@ -301,7 +300,7 @@ namespace GeneXus.Programs {
             A148EmployeeName = P00CH2_A148EmployeeName[0];
             A188EmployeeAPIPassword = P00CH2_A188EmployeeAPIPassword[0];
             A109EmployeeEmail = P00CH2_A109EmployeeEmail[0];
-            AV29GXLvl10 = 1;
+            AV29GXLvl7 = 1;
             AV8ICSLeaveExport = "";
             AV8ICSLeaveExport += "BEGIN:VCALENDAR" + StringUtil.NewLine( );
             AV8ICSLeaveExport += "PRODID:-//Yukon Software//APiCalConverter//EN" + StringUtil.NewLine( );
@@ -385,11 +384,10 @@ namespace GeneXus.Programs {
             if (true) break;
          }
          pr_default.close(0);
-         if ( AV29GXLvl10 == 0 )
+         if ( AV29GXLvl7 == 0 )
          {
             AV27ErrorMessage = "Employee not found";
          }
-         new logtofile(context ).execute(  ">>>"+AV8ICSLeaveExport) ;
          if ( context.WillRedirect( ) )
          {
             context.Redirect( context.wjLoc );
@@ -457,7 +455,7 @@ namespace GeneXus.Programs {
 
       private short GXSoapError ;
       private short currSoapErr ;
-      private short AV29GXLvl10 ;
+      private short AV29GXLvl7 ;
       private long A106EmployeeId ;
       private long A124LeaveTypeId ;
       private long A127LeaveRequestId ;
