@@ -432,7 +432,7 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, divTablemain_Internalname, 1, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
+            GxWebStd.gx_div_start( context, divTablemain_Internalname, divTablemain_Visible, 0, "px", 0, "px", "Table", "start", "top", "", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
             /* Div Control */
@@ -1367,6 +1367,8 @@ namespace GeneXus.Programs {
             divRememberme_cell_Class = "col-xs-12 DataContentCellLogin";
             AssignProp("", false, divRememberme_cell_Internalname, "Class", divRememberme_cell_Class, true);
          }
+         divTablemain_Visible = (((1==1)) ? 1 : 0);
+         AssignProp("", false, divTablemain_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(divTablemain_Visible), 5, 0), true);
          divTablebuttons_Visible = ((new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).canauthenticatewith("Facebook")||new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).canauthenticatewith("Twitter")||new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).canauthenticatewith("Google")||new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).canauthenticatewith("GAMRemote")) ? 1 : 0);
          AssignProp("", false, divTablebuttons_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(divTablebuttons_Visible), 5, 0), true);
       }
@@ -1764,7 +1766,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2025371433123", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20253287541391", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1780,7 +1782,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("gamexamplelogin.js", "?2025371433127", false, true);
+         context.AddJavascriptSource("gamexamplelogin.js", "?20253287541393", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Mask/jquery.mask.js", "", false, true);
          context.AddJavascriptSource("DVelop/WorkWithPlusUtilities/BootstrapSelect.js", "", false, true);
@@ -2212,6 +2214,7 @@ namespace GeneXus.Programs {
          cmbavLogonto_Jsonclick = "";
          cmbavLogonto.Visible = 1;
          cmbavLogonto.Enabled = 1;
+         divTablemain_Visible = 1;
          divLayoutmaintable_Class = "Table";
          subGridauthtypes_Class = "FreeStyleGrid";
          Wwputilities_Comboloadtype = "InfiniteScrolling";
@@ -2355,6 +2358,7 @@ namespace GeneXus.Programs {
       private int subGridauthtypes_Recordcount ;
       private int nGXsfl_60_idx=1 ;
       private int subGridauthtypes_Visible ;
+      private int divTablemain_Visible ;
       private int lblCurrentrepository_Visible ;
       private int edtavUsername_Enabled ;
       private int edtavUserpassword_Visible ;

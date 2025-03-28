@@ -570,7 +570,7 @@ namespace GeneXus.Programs {
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "col-xs-12", "start", "top", "", "", "div");
             /* Div Control */
-            GxWebStd.gx_div_start( context, divTablemain_Internalname, 1, 0, "px", 0, "px", "TableMain", "start", "top", "", "", "div");
+            GxWebStd.gx_div_start( context, divTablemain_Internalname, divTablemain_Visible, 0, "px", 0, "px", "TableMain", "start", "top", "", "", "div");
             /* Div Control */
             GxWebStd.gx_div_start( context, "", 1, 0, "px", 0, "px", "row", "start", "top", "", "", "div");
             /* Div Control */
@@ -1538,6 +1538,8 @@ namespace GeneXus.Programs {
       {
          /* 'ATTRIBUTESSECURITYCODE' Routine */
          returnInSub = false;
+         divTablemain_Visible = (((1==1)) ? 1 : 0);
+         AssignProp("", false, divTablemain_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(divTablemain_Visible), 5, 0), true);
          divUnnamedtable4_Visible = (((1==0)) ? 1 : 0);
          AssignProp("", false, divUnnamedtable4_Internalname, "Visible", StringUtil.LTrimStr( (decimal)(divUnnamedtable4_Visible), 5, 0), true);
       }
@@ -1912,7 +1914,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20253101943286", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20253287523442", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1928,7 +1930,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wp_projectoverview.js", "?20253101943287", false, true);
+         context.AddJavascriptSource("wp_projectoverview.js", "?20253287523442", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -2021,6 +2023,7 @@ namespace GeneXus.Programs {
          Combo_projectid_Caption = "";
          edtavDaterange_rangetext_Jsonclick = "";
          edtavDaterange_rangetext_Enabled = 1;
+         divTablemain_Visible = 1;
          Usercontrol1_Currentprojectid = 0;
          Usercontrol1_Currentemployeeid = 0;
          Openemployeedetails_modal_Bodytype = "WebComponent";
@@ -2252,6 +2255,7 @@ namespace GeneXus.Programs {
       private short nGXWrapped ;
       private int Usercontrol1_Currentemployeeid ;
       private int Usercontrol1_Currentprojectid ;
+      private int divTablemain_Visible ;
       private int edtavDaterange_rangetext_Enabled ;
       private int divUnnamedtable4_Visible ;
       private int bttBtnopenprojectdetails_Visible ;
