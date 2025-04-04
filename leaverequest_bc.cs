@@ -197,7 +197,7 @@ namespace GeneXus.Programs {
          /* LeaveRequestEndDate_Controlvaluechanged Routine */
          returnInSub = false;
          GXt_decimal1 = AV35LeaveRequestDuration;
-         new getleaverequestdays(context ).execute(  A129LeaveRequestStartDate,  A130LeaveRequestEndDate,  A173LeaveRequestHalfDay,  AV18EmployeeId, out  GXt_decimal1) ;
+         new prc_getleaverequestdays(context ).execute(  A129LeaveRequestStartDate,  A130LeaveRequestEndDate,  A173LeaveRequestHalfDay,  AV18EmployeeId, out  GXt_decimal1) ;
          AV35LeaveRequestDuration = GXt_decimal1;
       }
 
@@ -206,7 +206,7 @@ namespace GeneXus.Programs {
          /* LeaveRequestStartDate_Controlvaluechanged Routine */
          returnInSub = false;
          GXt_decimal1 = AV35LeaveRequestDuration;
-         new getleaverequestdays(context ).execute(  A129LeaveRequestStartDate,  A130LeaveRequestEndDate,  A173LeaveRequestHalfDay,  AV18EmployeeId, out  GXt_decimal1) ;
+         new prc_getleaverequestdays(context ).execute(  A129LeaveRequestStartDate,  A130LeaveRequestEndDate,  A173LeaveRequestHalfDay,  AV18EmployeeId, out  GXt_decimal1) ;
          AV35LeaveRequestDuration = GXt_decimal1;
       }
 
@@ -238,7 +238,7 @@ namespace GeneXus.Programs {
          /* LeaveRequestHalfDay_Click Routine */
          returnInSub = false;
          GXt_decimal1 = AV35LeaveRequestDuration;
-         new getleaverequestdays(context ).execute(  A129LeaveRequestStartDate,  A130LeaveRequestEndDate,  A173LeaveRequestHalfDay,  AV18EmployeeId, out  GXt_decimal1) ;
+         new prc_getleaverequestdays(context ).execute(  A129LeaveRequestStartDate,  A130LeaveRequestEndDate,  A173LeaveRequestHalfDay,  AV18EmployeeId, out  GXt_decimal1) ;
          AV35LeaveRequestDuration = GXt_decimal1;
       }
 
@@ -360,7 +360,7 @@ namespace GeneXus.Programs {
             A130LeaveRequestEndDate = A129LeaveRequestStartDate;
          }
          GXt_decimal1 = A131LeaveRequestDuration;
-         new getleaverequestdays(context ).execute(  A129LeaveRequestStartDate,  A130LeaveRequestEndDate,  A173LeaveRequestHalfDay,  AV18EmployeeId, out  GXt_decimal1) ;
+         new prc_getleaverequestdays(context ).execute(  A129LeaveRequestStartDate,  A130LeaveRequestEndDate,  A173LeaveRequestHalfDay,  AV18EmployeeId, out  GXt_decimal1) ;
          A131LeaveRequestDuration = GXt_decimal1;
          GXt_decimal1 = AV51EmployeeBalance;
          new prc_getemployeebalance(context ).execute(  A106EmployeeId, out  GXt_decimal1) ;
@@ -385,7 +385,7 @@ namespace GeneXus.Programs {
             A130LeaveRequestEndDate = A129LeaveRequestStartDate;
          }
          GXt_decimal1 = A131LeaveRequestDuration;
-         new getleaverequestdays(context ).execute(  A129LeaveRequestStartDate,  A130LeaveRequestEndDate,  A173LeaveRequestHalfDay,  AV18EmployeeId, out  GXt_decimal1) ;
+         new prc_getleaverequestdays(context ).execute(  A129LeaveRequestStartDate,  A130LeaveRequestEndDate,  A173LeaveRequestHalfDay,  AV18EmployeeId, out  GXt_decimal1) ;
          A131LeaveRequestDuration = GXt_decimal1;
          if ( (DateTime.MinValue==A129LeaveRequestStartDate) )
          {

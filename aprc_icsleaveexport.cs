@@ -223,19 +223,19 @@ namespace GeneXus.Programs {
                {
                   GXt_char2 = AV15ICSLeaveExport;
                   new formatdatetime(context ).execute(  A129LeaveRequestStartDate,  "YYYYMMDD", out  GXt_char2) ;
-                  AV15ICSLeaveExport += "DTSTART;TZID=Europe/Amsterdam:" + GXt_char2 + "T090000Z" + StringUtil.NewLine( );
+                  AV15ICSLeaveExport += "DTSTART;TZID=Europe/Bucharest:" + GXt_char2 + "T090000Z" + StringUtil.NewLine( );
                   GXt_char2 = AV15ICSLeaveExport;
                   new formatdatetime(context ).execute(  A130LeaveRequestEndDate,  "YYYYMMDD", out  GXt_char2) ;
-                  AV15ICSLeaveExport += "DTEND;TZID=Europe/Amsterdam:" + GXt_char2 + "T130000Z" + StringUtil.NewLine( );
+                  AV15ICSLeaveExport += "DTEND;TZID=Europe/Bucharest:" + GXt_char2 + "T130000Z" + StringUtil.NewLine( );
                }
                else if ( StringUtil.StrCmp(A173LeaveRequestHalfDay, "Afternoon") == 0 )
                {
                   GXt_char2 = AV15ICSLeaveExport;
                   new formatdatetime(context ).execute(  A129LeaveRequestStartDate,  "YYYYMMDD", out  GXt_char2) ;
-                  AV15ICSLeaveExport += "DTSTART;TZID=Europe/Amsterdam:" + GXt_char2 + "T130000Z" + StringUtil.NewLine( );
+                  AV15ICSLeaveExport += "DTSTART;TZID=Europe/Bucharest:" + GXt_char2 + "T130000Z" + StringUtil.NewLine( );
                   GXt_char2 = AV15ICSLeaveExport;
                   new formatdatetime(context ).execute(  A130LeaveRequestEndDate,  "YYYYMMDD", out  GXt_char2) ;
-                  AV15ICSLeaveExport += "DTEND;TZID=Europe/Amsterdam:" + GXt_char2 + "T170000Z" + StringUtil.NewLine( );
+                  AV15ICSLeaveExport += "DTEND;TZID=Europe/Bucharest:" + GXt_char2 + "T170000Z" + StringUtil.NewLine( );
                }
                else
                {

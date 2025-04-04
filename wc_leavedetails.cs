@@ -1658,7 +1658,7 @@ namespace GeneXus.Programs {
          /* 'LEAVEDURATIONSUB' Routine */
          returnInSub = false;
          GXt_decimal4 = 0;
-         new getleaverequestdays(context ).execute(  AV11LeaveRequest.gxTpr_Leaverequeststartdate,  AV11LeaveRequest.gxTpr_Leaverequestenddate,  AV11LeaveRequest.gxTpr_Leaverequesthalfday,  AV11LeaveRequest.gxTpr_Employeeid, out  GXt_decimal4) ;
+         new prc_getleaverequestdays(context ).execute(  AV11LeaveRequest.gxTpr_Leaverequeststartdate,  AV11LeaveRequest.gxTpr_Leaverequestenddate,  AV11LeaveRequest.gxTpr_Leaverequesthalfday,  AV11LeaveRequest.gxTpr_Employeeid, out  GXt_decimal4) ;
          AV11LeaveRequest.gxTpr_Leaverequestduration = GXt_decimal4;
       }
 
@@ -1929,7 +1929,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20253155225614", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20254217513050", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1945,7 +1945,7 @@ namespace GeneXus.Programs {
 
       protected void include_jscripts( )
       {
-         context.AddJavascriptSource("wc_leavedetails.js", "?20253155225614", false, true);
+         context.AddJavascriptSource("wc_leavedetails.js", "?20254217513051", false, true);
          /* End function include_jscripts */
       }
 

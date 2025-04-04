@@ -99,14 +99,14 @@ namespace GeneXus.Programs {
             if ( ( DateTimeUtil.ResetTime ( A129LeaveRequestStartDate ) < DateTimeUtil.ResetTime ( AV10DateFrom ) ) && ( DateTimeUtil.ResetTime ( A130LeaveRequestEndDate ) <= DateTimeUtil.ResetTime ( AV9DateTo ) ) )
             {
                GXt_decimal1 = AV22ExceptDays;
-               new getleaverequestdays(context ).execute(  AV10DateFrom,  A130LeaveRequestEndDate,  A173LeaveRequestHalfDay,  AV11EmployeeId, out  GXt_decimal1) ;
+               new prc_getleaverequestdays(context ).execute(  AV10DateFrom,  A130LeaveRequestEndDate,  A173LeaveRequestHalfDay,  AV11EmployeeId, out  GXt_decimal1) ;
                AV22ExceptDays = GXt_decimal1;
                AV17Days = (decimal)(AV17Days+AV22ExceptDays);
             }
             else if ( ( DateTimeUtil.ResetTime ( A129LeaveRequestStartDate ) >= DateTimeUtil.ResetTime ( AV10DateFrom ) ) && ( DateTimeUtil.ResetTime ( A130LeaveRequestEndDate ) > DateTimeUtil.ResetTime ( AV9DateTo ) ) )
             {
                GXt_decimal1 = AV22ExceptDays;
-               new getleaverequestdays(context ).execute(  A129LeaveRequestStartDate,  AV9DateTo,  A173LeaveRequestHalfDay,  AV11EmployeeId, out  GXt_decimal1) ;
+               new prc_getleaverequestdays(context ).execute(  A129LeaveRequestStartDate,  AV9DateTo,  A173LeaveRequestHalfDay,  AV11EmployeeId, out  GXt_decimal1) ;
                AV22ExceptDays = GXt_decimal1;
                AV17Days = (decimal)(AV17Days+AV22ExceptDays);
             }

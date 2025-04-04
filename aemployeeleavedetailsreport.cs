@@ -178,7 +178,7 @@ namespace GeneXus.Programs {
                      AV17LeaveRequestEndDate = AV11ToDate;
                   }
                   GXt_decimal2 = AV13LeaveRequestDuration;
-                  new getleaverequestdays(context ).execute(  AV14LeaveRequestStartDate,  AV17LeaveRequestEndDate,  A173LeaveRequestHalfDay,  AV8EmployeeId, out  GXt_decimal2) ;
+                  new prc_getleaverequestdays(context ).execute(  AV14LeaveRequestStartDate,  AV17LeaveRequestEndDate,  A173LeaveRequestHalfDay,  AV8EmployeeId, out  GXt_decimal2) ;
                   AV13LeaveRequestDuration = GXt_decimal2;
                   AV21LeaveRequestItem.gxTpr_Leaverequestduration = AV13LeaveRequestDuration;
                }

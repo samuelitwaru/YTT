@@ -75,21 +75,15 @@
   </Object>
   <Object>
     <ObjCls>0</ObjCls>
-    <ObjName>SiteSetting</ObjName>
-    <ObjDesc>Site Setting</ObjDesc>
-    <ObjLink>sitesetting.aspx</ObjLink>
-  </Object>
-  <Object>
-    <ObjCls>0</ObjCls>
     <ObjName>SupportRequest</ObjName>
     <ObjDesc>Support Request</ObjDesc>
     <ObjLink>supportrequest.aspx</ObjLink>
   </Object>
   <Object>
     <ObjCls>13</ObjCls>
-    <ObjName>Login</ObjName>
+    <ObjName>GAMExampleLogin</ObjName>
     <ObjDesc>Login</ObjDesc>
-    <ObjLink>login.aspx</ObjLink>
+    <ObjLink>gamexamplelogin.aspx</ObjLink>
   </Object>
   <Object>
     <ObjCls>13</ObjCls>
@@ -238,7 +232,8 @@
   <Object>
     <ObjCls>13</ObjCls>
     <ObjName>WPLeaveReport</ObjName>
-    <ObjDesc>Reports</ObjDesc>
+    <ObjDesc>
+    </ObjDesc>
     <ObjLink>wpleavereport.aspx</ObjLink>
   </Object>
   <Object>
@@ -270,12 +265,6 @@
     <ObjName>LeaveCalendarView</ObjName>
     <ObjDesc>Leave Calendar View</ObjDesc>
     <ObjLink>leavecalendarview.aspx</ObjLink>
-  </Object>
-  <Object>
-    <ObjCls>13</ObjCls>
-    <ObjName>Reports</ObjName>
-    <ObjDesc>Project Overview</ObjDesc>
-    <ObjLink>reports.aspx</ObjLink>
   </Object>
   <Object>
     <ObjCls>13</ObjCls>
@@ -328,7 +317,8 @@
   <Object>
     <ObjCls>13</ObjCls>
     <ObjName>EmployeeWeekReport</ObjName>
-    <ObjDesc>Employee Week Report</ObjDesc>
+    <ObjDesc>
+    </ObjDesc>
     <ObjLink>employeeweekreport.aspx</ObjLink>
   </Object>
   <Object>
@@ -336,6 +326,60 @@
     <ObjName>ProjectWW</ObjName>
     <ObjDesc> Project</ObjDesc>
     <ObjLink>projectww.aspx</ObjLink>
+  </Object>
+  <Object>
+    <ObjCls>13</ObjCls>
+    <ObjName>SiteSettingWW</ObjName>
+    <ObjDesc> Site Setting</ObjDesc>
+    <ObjLink>sitesettingww.aspx</ObjLink>
+  </Object>
+  <Object>
+    <ObjCls>13</ObjCls>
+    <ObjName>TestProjectLogsByEmployee</ObjName>
+    <ObjDesc> Work Hour Log</ObjDesc>
+    <ObjLink>testprojectlogsbyemployee.aspx</ObjLink>
+  </Object>
+  <Object>
+    <ObjCls>13</ObjCls>
+    <ObjName>WPEmployeeLeaveDetails</ObjName>
+    <ObjDesc>Leave Overview</ObjDesc>
+    <ObjLink>wpemployeeleavedetails.aspx</ObjLink>
+  </Object>
+  <Object>
+    <ObjCls>13</ObjCls>
+    <ObjName>TrnNewWW</ObjName>
+    <ObjDesc> Trn New</ObjDesc>
+    <ObjLink>trnnewww.aspx</ObjLink>
+  </Object>
+  <Object>
+    <ObjCls>13</ObjCls>
+    <ObjName>Login</ObjName>
+    <ObjDesc>Login</ObjDesc>
+    <ObjLink>login.aspx</ObjLink>
+  </Object>
+  <Object>
+    <ObjCls>13</ObjCls>
+    <ObjName>WP_LeaveBalanceReport1</ObjName>
+    <ObjDesc>WP_Leave Balance Report</ObjDesc>
+    <ObjLink>wp_leavebalancereport1.aspx</ObjLink>
+  </Object>
+  <Object>
+    <ObjCls>13</ObjCls>
+    <ObjName>WP_LeaveBalanceReport</ObjName>
+    <ObjDesc>Leave Balance Report</ObjDesc>
+    <ObjLink>wp_leavebalancereport.aspx</ObjLink>
+  </Object>
+  <Object>
+    <ObjCls>13</ObjCls>
+    <ObjName>WP_ProjectOverview</ObjName>
+    <ObjDesc>Project Overview</ObjDesc>
+    <ObjLink>wp_projectoverview.aspx</ObjLink>
+  </Object>
+  <Object>
+    <ObjCls>13</ObjCls>
+    <ObjName>WP_DownloadApp</ObjName>
+    <ObjDesc> Employees</ObjDesc>
+    <ObjLink>wp_downloadapp.aspx</ObjLink>
   </Object>
   <Object>
     <ObjCls>1</ObjCls>

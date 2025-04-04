@@ -182,7 +182,7 @@ namespace GeneXus.Programs {
             n173LeaveRequestHalfDay = P00A23_n173LeaveRequestHalfDay[0];
             A127LeaveRequestId = P00A23_A127LeaveRequestId[0];
             GXt_decimal1 = AV24LeaveDayCount;
-            new getleaverequestdays(context ).execute(  AV9FromDate,  AV10ToDate,  A173LeaveRequestHalfDay,  AV8EmployeeId, out  GXt_decimal1) ;
+            new prc_getleaverequestdays(context ).execute(  AV9FromDate,  AV10ToDate,  A173LeaveRequestHalfDay,  AV8EmployeeId, out  GXt_decimal1) ;
             AV24LeaveDayCount = (decimal)(AV24LeaveDayCount+(GXt_decimal1));
             pr_default.dynParam(2, new Object[]{ new Object[]{
                                                  A113HolidayId ,

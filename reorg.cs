@@ -62,13 +62,13 @@ namespace GeneXus.Programs {
       {
          string cmdBuffer = "";
          /* Indices for table Employee */
-         cmdBuffer=" ALTER TABLE Employee ADD EmployeeAPIPassword VARCHAR(40) NOT NULL DEFAULT '' "
+         cmdBuffer=" ALTER TABLE Employee ADD EmployeeFTEHours smallint NOT NULL DEFAULT 0 "
          ;
          RGZ = new GxCommand(dsDefault.Db, cmdBuffer, dsDefault,0,true,false,null);
          RGZ.ErrorMask = GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK;
          RGZ.ExecuteStmt() ;
          RGZ.Drop();
-         cmdBuffer=" ALTER TABLE Employee ALTER COLUMN EmployeeAPIPassword DROP DEFAULT "
+         cmdBuffer=" ALTER TABLE Employee ALTER COLUMN EmployeeFTEHours DROP DEFAULT "
          ;
          RGZ = new GxCommand(dsDefault.Db, cmdBuffer, dsDefault,0,true,false,null);
          RGZ.ErrorMask = GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK;
@@ -95,9 +95,9 @@ namespace GeneXus.Programs {
             return true ;
          }
          sSchemaVar = GXUtil.UserId( "Server", context, pr_default);
-         if ( ColumnExist("Employee",sSchemaVar,"EmployeeAPIPassword") )
+         if ( ColumnExist("Employee",sSchemaVar,"EmployeeFTEHours") )
          {
-            SetCheckError ( GXResourceManager.GetMessage("GXM_column_exist", new   object[]  {"EmployeeAPIPassword", "Employee"}) ) ;
+            SetCheckError ( GXResourceManager.GetMessage("GXM_column_exist", new   object[]  {"EmployeeFTEHours", "Employee"}) ) ;
             return false ;
          }
          return true ;

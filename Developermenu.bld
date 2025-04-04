@@ -332,7 +332,7 @@ adailyremindertomanagerug
 adailyremindertomanagerug
 sdgetmonthhours
 sdgetlogdaysmissed
-getleaverequestdays
+prc_getleaverequestdays
 getloggedworkdays
 sdgetweekhours
 getloggedinemployeeid
@@ -409,8 +409,8 @@ wwpbaseobjects\gethomesamplenamevaluedata
 workwithplus\awwp_parameter_dataprovider
 sdsvc_LogHoursPanel_Level_Detail
 sdsvc_UpdateWorkHourLog_Level_Detail
-sdsvc_LeaveRequestPanel_Level_Detail
 sdsvc_ViewLeaveRequest_Level_Detail
+sdsvc_LeaveRequestPanel_Level_Detail
 sdsvc_UpdateLeaveRequest_Level_Detail
 api_timetracker
 api_timetracker
@@ -422,12 +422,12 @@ yttv3sd
 gamsdnotauthorized
 loghourspanel
 updateworkhourlog
-leaverequestpanel
 viewleaverequest
-updateleaverequest
 worklogsgridcollectionpanel
 leaverequestsgridpanel
 profilepanel
 gamsdchangepassword
 gamsdupdateuser
+leaverequestpanel
+updateleaverequest
 GeneXus.Programs.Common
