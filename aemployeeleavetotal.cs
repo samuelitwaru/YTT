@@ -149,6 +149,7 @@ namespace GeneXus.Programs {
       {
          /* GeneXus formulas */
          /* Output device settings */
+         new logtofile(context ).execute(  context.localUtil.DToC( AV10FromDate, 2, "/")+" : "+context.localUtil.DToC( AV11ToDate, 2, "/")) ;
          /* Using cursor P00AU2 */
          pr_default.execute(0, new Object[] {AV8EmployeeId});
          while ( (pr_default.getStatus(0) != 101) )
@@ -182,7 +183,7 @@ namespace GeneXus.Programs {
             pr_default.readNext(1);
          }
          pr_default.close(1);
-         AV26GXLvl27 = 0;
+         AV26GXLvl29 = 0;
          /* Using cursor P00AU4 */
          pr_default.execute(2, new Object[] {AV8EmployeeId, AV11ToDate, AV10FromDate});
          while ( (pr_default.getStatus(2) != 101) )
@@ -194,7 +195,7 @@ namespace GeneXus.Programs {
             A106EmployeeId = P00AU4_A106EmployeeId[0];
             A127LeaveRequestId = P00AU4_A127LeaveRequestId[0];
             A100CompanyId = P00AU4_A100CompanyId[0];
-            AV26GXLvl27 = 1;
+            AV26GXLvl29 = 1;
             if ( DateTimeUtil.ResetTime ( A129LeaveRequestStartDate ) < DateTimeUtil.ResetTime ( AV10FromDate ) )
             {
                AV12LeaveStartDate = AV10FromDate;
@@ -221,14 +222,14 @@ namespace GeneXus.Programs {
                }
                else if ( DateTimeUtil.Dow( AV23CurrentDate) == 2 )
                {
-                  if ( ( DateTimeUtil.DDiff( AV13LeaveEndDate , AV23CurrentDate ) > 5 ) )
+                  if ( ( ( DateTimeUtil.DDiff( DateTimeUtil.DAdd( AV13LeaveEndDate, (1)) , AV23CurrentDate ) ) > 5 ) )
                   {
                      AV14Duration = (short)(AV14Duration+5);
                      AV23CurrentDate = DateTimeUtil.DAdd( AV23CurrentDate, (7));
                   }
                   else
                   {
-                     AV14Duration = (short)(AV14Duration+(DateTimeUtil.DDiff(AV13LeaveEndDate,AV23CurrentDate)));
+                     AV14Duration = (short)(AV14Duration+(DateTimeUtil.DDiff(DateTimeUtil.DAdd( AV13LeaveEndDate, (1)),AV23CurrentDate)));
                      if (true) break;
                   }
                }
@@ -262,7 +263,7 @@ namespace GeneXus.Programs {
             n40000GXC1 = false;
          }
          pr_default.close(4);
-         if ( AV26GXLvl27 == 0 )
+         if ( AV26GXLvl29 == 0 )
          {
             AV15HolidayCount = (short)(A40000GXC1);
             AV14Duration = (short)(AV14Duration+AV15HolidayCount);
@@ -337,7 +338,7 @@ namespace GeneXus.Programs {
 
       private short AV14Duration ;
       private short AV9Count ;
-      private short AV26GXLvl27 ;
+      private short AV26GXLvl29 ;
       private short cV14Duration ;
       private short AV15HolidayCount ;
       private int A40000GXC1 ;

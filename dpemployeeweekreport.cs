@@ -122,6 +122,7 @@ namespace GeneXus.Programs {
             A112EmployeeIsActive = P001U10_A112EmployeeIsActive[0];
             A106EmployeeId = P001U10_A106EmployeeId[0];
             A157CompanyLocationId = P001U10_A157CompanyLocationId[0];
+            A189EmployeeFTEHours = P001U10_A189EmployeeFTEHours[0];
             A148EmployeeName = P001U10_A148EmployeeName[0];
             A40000GXC1 = P001U10_A40000GXC1[0];
             n40000GXC1 = P001U10_n40000GXC1[0];
@@ -199,11 +200,11 @@ namespace GeneXus.Programs {
             AV11Sun = (long)(A40012GXC13*60+A40013GXC14);
             GXt_int1 = AV17Blank;
             GXt_int2 = (short)(AV15Leave);
-            new employeeleavetotal(context ).execute(  A106EmployeeId,  AV13FromDate,  DateTimeUtil.DAdd( AV13FromDate, (6)), out  GXt_int2) ;
+            new employeeleavetotal(context ).execute(  A106EmployeeId,  AV13FromDate,  DateTimeUtil.DAdd( AV13FromDate, (4)), out  GXt_int2) ;
             AV15Leave = GXt_int2;
             AV17Blank = GXt_int1;
             AV12Total = (long)(A40014GXC15*60+A40015GXC16);
-            AV18Expected = (long)((40*60)-AV15Leave);
+            AV18Expected = (long)((A189EmployeeFTEHours*60)-AV15Leave);
             Gxm1sdtemployeeweekreport.gxTpr_Employeename = StringUtil.Trim( A148EmployeeName);
             Gxm1sdtemployeeweekreport.gxTpr_Mon = AV5Mon;
             Gxm1sdtemployeeweekreport.gxTpr_Tue = AV6Tue;
@@ -333,6 +334,7 @@ namespace GeneXus.Programs {
          P001U10_A112EmployeeIsActive = new bool[] {false} ;
          P001U10_A106EmployeeId = new long[1] ;
          P001U10_A157CompanyLocationId = new long[1] ;
+         P001U10_A189EmployeeFTEHours = new short[1] ;
          P001U10_A148EmployeeName = new string[] {""} ;
          P001U10_A40000GXC1 = new short[1] ;
          P001U10_n40000GXC1 = new bool[] {false} ;
@@ -379,16 +381,17 @@ namespace GeneXus.Programs {
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.dpemployeeweekreport__default(),
             new Object[][] {
                 new Object[] {
-               P001U10_A100CompanyId, P001U10_A112EmployeeIsActive, P001U10_A106EmployeeId, P001U10_A157CompanyLocationId, P001U10_A148EmployeeName, P001U10_A40000GXC1, P001U10_n40000GXC1, P001U10_A40001GXC2, P001U10_n40001GXC2, P001U10_A40002GXC3,
-               P001U10_n40002GXC3, P001U10_A40003GXC4, P001U10_n40003GXC4, P001U10_A40004GXC5, P001U10_n40004GXC5, P001U10_A40005GXC6, P001U10_n40005GXC6, P001U10_A40006GXC7, P001U10_n40006GXC7, P001U10_A40007GXC8,
-               P001U10_n40007GXC8, P001U10_A40008GXC9, P001U10_n40008GXC9, P001U10_A40009GXC10, P001U10_n40009GXC10, P001U10_A40010GXC11, P001U10_n40010GXC11, P001U10_A40011GXC12, P001U10_n40011GXC12, P001U10_A40012GXC13,
-               P001U10_n40012GXC13, P001U10_A40013GXC14, P001U10_n40013GXC14, P001U10_A40014GXC15, P001U10_n40014GXC15, P001U10_A40015GXC16, P001U10_n40015GXC16
+               P001U10_A100CompanyId, P001U10_A112EmployeeIsActive, P001U10_A106EmployeeId, P001U10_A157CompanyLocationId, P001U10_A189EmployeeFTEHours, P001U10_A148EmployeeName, P001U10_A40000GXC1, P001U10_n40000GXC1, P001U10_A40001GXC2, P001U10_n40001GXC2,
+               P001U10_A40002GXC3, P001U10_n40002GXC3, P001U10_A40003GXC4, P001U10_n40003GXC4, P001U10_A40004GXC5, P001U10_n40004GXC5, P001U10_A40005GXC6, P001U10_n40005GXC6, P001U10_A40006GXC7, P001U10_n40006GXC7,
+               P001U10_A40007GXC8, P001U10_n40007GXC8, P001U10_A40008GXC9, P001U10_n40008GXC9, P001U10_A40009GXC10, P001U10_n40009GXC10, P001U10_A40010GXC11, P001U10_n40010GXC11, P001U10_A40011GXC12, P001U10_n40011GXC12,
+               P001U10_A40012GXC13, P001U10_n40012GXC13, P001U10_A40013GXC14, P001U10_n40013GXC14, P001U10_A40014GXC15, P001U10_n40014GXC15, P001U10_A40015GXC16, P001U10_n40015GXC16
                }
             }
          );
          /* GeneXus formulas. */
       }
 
+      private short A189EmployeeFTEHours ;
       private short A40000GXC1 ;
       private short A40001GXC2 ;
       private short A40002GXC3 ;
@@ -462,6 +465,7 @@ namespace GeneXus.Programs {
       private bool[] P001U10_A112EmployeeIsActive ;
       private long[] P001U10_A106EmployeeId ;
       private long[] P001U10_A157CompanyLocationId ;
+      private short[] P001U10_A189EmployeeFTEHours ;
       private string[] P001U10_A148EmployeeName ;
       private short[] P001U10_A40000GXC1 ;
       private bool[] P001U10_n40000GXC1 ;
@@ -514,8 +518,8 @@ namespace GeneXus.Programs {
          string scmdbuf;
          short[] GXv_int5 = new short[9];
          Object[] GXv_Object6 = new Object[2];
-         scmdbuf = "SELECT T1.CompanyId, T1.EmployeeIsActive, T1.EmployeeId, T2.CompanyLocationId, T1.EmployeeName, COALESCE( T3.GXC1, 0) AS GXC1, COALESCE( T3.GXC2, 0) AS GXC2, COALESCE( T4.GXC1, 0) AS GXC3, COALESCE( T4.GXC2, 0) AS GXC4, COALESCE( T5.GXC1, 0) AS GXC5, COALESCE( T5.GXC2, 0) AS GXC6, COALESCE( T6.GXC1, 0) AS GXC7, COALESCE( T6.GXC2, 0) AS GXC8, COALESCE( T7.GXC1, 0) AS GXC9, COALESCE( T7.GXC2, 0) AS GXC10, COALESCE( T8.GXC1, 0) AS GXC11, COALESCE( T8.GXC2, 0) AS GXC12, COALESCE( T9.GXC1, 0) AS GXC13, COALESCE( T9.GXC2, 0) AS GXC14, COALESCE( T10.GXC1, 0) AS GXC15, COALESCE( T10.GXC2, 0) AS GXC16 FROM (((((((((Employee T1 INNER JOIN Company T2 ON T2.CompanyId = T1.CompanyId) LEFT JOIN LATERAL (SELECT SUM(WorkHourLogHour) AS GXC1, EmployeeId, SUM(WorkHourLogMinute) AS GXC2 FROM WorkHourLog WHERE (T1.EmployeeId = EmployeeId) AND (WorkHourLogDate = :AV13FromDate) GROUP BY EmployeeId ) T3 ON T3.EmployeeId = T1.EmployeeId) LEFT JOIN LATERAL (SELECT SUM(WorkHourLogHour) AS GXC1, EmployeeId, SUM(WorkHourLogMinute) AS GXC2 FROM WorkHourLog WHERE (T1.EmployeeId = EmployeeId) AND (WorkHourLogDate = (CAST(:AV13FromDate AS date) + CAST (( 1) || ' DAY' AS INTERVAL))) GROUP BY EmployeeId ) T4 ON T4.EmployeeId = T1.EmployeeId) LEFT JOIN LATERAL (SELECT SUM(WorkHourLogHour) AS GXC1, EmployeeId, SUM(WorkHourLogMinute) AS GXC2 FROM WorkHourLog WHERE (T1.EmployeeId = EmployeeId) AND (WorkHourLogDate = (CAST(:AV13FromDate AS date) + CAST (( 2) || ' DAY' AS INTERVAL))) GROUP BY EmployeeId ) T5 ON T5.EmployeeId = T1.EmployeeId) LEFT JOIN LATERAL (SELECT SUM(WorkHourLogHour) AS GXC1, EmployeeId, SUM(WorkHourLogMinute) AS GXC2 FROM WorkHourLog WHERE (T1.EmployeeId = EmployeeId) AND (WorkHourLogDate = (CAST(:AV13FromDate AS date) + CAST (( 3) || ' DAY' AS INTERVAL))) GROUP BY EmployeeId ) T6 ON T6.EmployeeId";
-         scmdbuf += " = T1.EmployeeId) LEFT JOIN LATERAL (SELECT SUM(WorkHourLogHour) AS GXC1, EmployeeId, SUM(WorkHourLogMinute) AS GXC2 FROM WorkHourLog WHERE (T1.EmployeeId = EmployeeId) AND (WorkHourLogDate = (CAST(:AV13FromDate AS date) + CAST (( 4) || ' DAY' AS INTERVAL))) GROUP BY EmployeeId ) T7 ON T7.EmployeeId = T1.EmployeeId) LEFT JOIN LATERAL (SELECT SUM(WorkHourLogHour) AS GXC1, EmployeeId, SUM(WorkHourLogMinute) AS GXC2 FROM WorkHourLog WHERE (T1.EmployeeId = EmployeeId) AND (WorkHourLogDate = (CAST(:AV13FromDate AS date) + CAST (( 5) || ' DAY' AS INTERVAL))) GROUP BY EmployeeId ) T8 ON T8.EmployeeId = T1.EmployeeId) LEFT JOIN LATERAL (SELECT SUM(WorkHourLogHour) AS GXC1, EmployeeId, SUM(WorkHourLogMinute) AS GXC2 FROM WorkHourLog WHERE (T1.EmployeeId = EmployeeId) AND (WorkHourLogDate = (CAST(:AV13FromDate AS date) + CAST (( 6) || ' DAY' AS INTERVAL))) GROUP BY EmployeeId ) T9 ON T9.EmployeeId = T1.EmployeeId) LEFT JOIN LATERAL (SELECT SUM(WorkHourLogHour) AS GXC1, EmployeeId, SUM(WorkHourLogMinute) AS GXC2 FROM WorkHourLog WHERE (T1.EmployeeId = EmployeeId) AND (WorkHourLogDate >= :AV13FromDate and WorkHourLogDate <= (CAST(:AV13FromDate AS date) + CAST (( 6) || ' DAY' AS INTERVAL))) GROUP BY EmployeeId ) T10 ON T10.EmployeeId = T1.EmployeeId)";
+         scmdbuf = "SELECT T1.CompanyId, T1.EmployeeIsActive, T1.EmployeeId, T2.CompanyLocationId, T1.EmployeeFTEHours, T1.EmployeeName, COALESCE( T3.GXC1, 0) AS GXC1, COALESCE( T3.GXC2, 0) AS GXC2, COALESCE( T4.GXC1, 0) AS GXC3, COALESCE( T4.GXC2, 0) AS GXC4, COALESCE( T5.GXC1, 0) AS GXC5, COALESCE( T5.GXC2, 0) AS GXC6, COALESCE( T6.GXC1, 0) AS GXC7, COALESCE( T6.GXC2, 0) AS GXC8, COALESCE( T7.GXC1, 0) AS GXC9, COALESCE( T7.GXC2, 0) AS GXC10, COALESCE( T8.GXC1, 0) AS GXC11, COALESCE( T8.GXC2, 0) AS GXC12, COALESCE( T9.GXC1, 0) AS GXC13, COALESCE( T9.GXC2, 0) AS GXC14, COALESCE( T10.GXC1, 0) AS GXC15, COALESCE( T10.GXC2, 0) AS GXC16 FROM (((((((((Employee T1 INNER JOIN Company T2 ON T2.CompanyId = T1.CompanyId) LEFT JOIN LATERAL (SELECT SUM(WorkHourLogHour) AS GXC1, EmployeeId, SUM(WorkHourLogMinute) AS GXC2 FROM WorkHourLog WHERE (T1.EmployeeId = EmployeeId) AND (WorkHourLogDate = :AV13FromDate) GROUP BY EmployeeId ) T3 ON T3.EmployeeId = T1.EmployeeId) LEFT JOIN LATERAL (SELECT SUM(WorkHourLogHour) AS GXC1, EmployeeId, SUM(WorkHourLogMinute) AS GXC2 FROM WorkHourLog WHERE (T1.EmployeeId = EmployeeId) AND (WorkHourLogDate = (CAST(:AV13FromDate AS date) + CAST (( 1) || ' DAY' AS INTERVAL))) GROUP BY EmployeeId ) T4 ON T4.EmployeeId = T1.EmployeeId) LEFT JOIN LATERAL (SELECT SUM(WorkHourLogHour) AS GXC1, EmployeeId, SUM(WorkHourLogMinute) AS GXC2 FROM WorkHourLog WHERE (T1.EmployeeId = EmployeeId) AND (WorkHourLogDate = (CAST(:AV13FromDate AS date) + CAST (( 2) || ' DAY' AS INTERVAL))) GROUP BY EmployeeId ) T5 ON T5.EmployeeId = T1.EmployeeId) LEFT JOIN LATERAL (SELECT SUM(WorkHourLogHour) AS GXC1, EmployeeId, SUM(WorkHourLogMinute) AS GXC2 FROM WorkHourLog WHERE (T1.EmployeeId = EmployeeId) AND (WorkHourLogDate = (CAST(:AV13FromDate AS date) + CAST (( 3) || ' DAY' AS INTERVAL))) GROUP BY EmployeeId";
+         scmdbuf += " ) T6 ON T6.EmployeeId = T1.EmployeeId) LEFT JOIN LATERAL (SELECT SUM(WorkHourLogHour) AS GXC1, EmployeeId, SUM(WorkHourLogMinute) AS GXC2 FROM WorkHourLog WHERE (T1.EmployeeId = EmployeeId) AND (WorkHourLogDate = (CAST(:AV13FromDate AS date) + CAST (( 4) || ' DAY' AS INTERVAL))) GROUP BY EmployeeId ) T7 ON T7.EmployeeId = T1.EmployeeId) LEFT JOIN LATERAL (SELECT SUM(WorkHourLogHour) AS GXC1, EmployeeId, SUM(WorkHourLogMinute) AS GXC2 FROM WorkHourLog WHERE (T1.EmployeeId = EmployeeId) AND (WorkHourLogDate = (CAST(:AV13FromDate AS date) + CAST (( 5) || ' DAY' AS INTERVAL))) GROUP BY EmployeeId ) T8 ON T8.EmployeeId = T1.EmployeeId) LEFT JOIN LATERAL (SELECT SUM(WorkHourLogHour) AS GXC1, EmployeeId, SUM(WorkHourLogMinute) AS GXC2 FROM WorkHourLog WHERE (T1.EmployeeId = EmployeeId) AND (WorkHourLogDate = (CAST(:AV13FromDate AS date) + CAST (( 6) || ' DAY' AS INTERVAL))) GROUP BY EmployeeId ) T9 ON T9.EmployeeId = T1.EmployeeId) LEFT JOIN LATERAL (SELECT SUM(WorkHourLogHour) AS GXC1, EmployeeId, SUM(WorkHourLogMinute) AS GXC2 FROM WorkHourLog WHERE (T1.EmployeeId = EmployeeId) AND (WorkHourLogDate >= :AV13FromDate and WorkHourLogDate <= (CAST(:AV13FromDate AS date) + CAST (( 6) || ' DAY' AS INTERVAL))) GROUP BY EmployeeId ) T10 ON T10.EmployeeId = T1.EmployeeId)";
          AddWhere(sWhereString, "(T1.EmployeeIsActive = TRUE)");
          if ( AV14CompanyLocationId_Count > 0 )
          {
@@ -586,39 +590,40 @@ namespace GeneXus.Programs {
                 ((bool[]) buf[1])[0] = rslt.getBool(2);
                 ((long[]) buf[2])[0] = rslt.getLong(3);
                 ((long[]) buf[3])[0] = rslt.getLong(4);
-                ((string[]) buf[4])[0] = rslt.getString(5, 100);
-                ((short[]) buf[5])[0] = rslt.getShort(6);
-                ((bool[]) buf[6])[0] = rslt.wasNull(6);
-                ((short[]) buf[7])[0] = rslt.getShort(7);
-                ((bool[]) buf[8])[0] = rslt.wasNull(7);
-                ((short[]) buf[9])[0] = rslt.getShort(8);
-                ((bool[]) buf[10])[0] = rslt.wasNull(8);
-                ((short[]) buf[11])[0] = rslt.getShort(9);
-                ((bool[]) buf[12])[0] = rslt.wasNull(9);
-                ((short[]) buf[13])[0] = rslt.getShort(10);
-                ((bool[]) buf[14])[0] = rslt.wasNull(10);
-                ((short[]) buf[15])[0] = rslt.getShort(11);
-                ((bool[]) buf[16])[0] = rslt.wasNull(11);
-                ((short[]) buf[17])[0] = rslt.getShort(12);
-                ((bool[]) buf[18])[0] = rslt.wasNull(12);
-                ((short[]) buf[19])[0] = rslt.getShort(13);
-                ((bool[]) buf[20])[0] = rslt.wasNull(13);
-                ((short[]) buf[21])[0] = rslt.getShort(14);
-                ((bool[]) buf[22])[0] = rslt.wasNull(14);
-                ((short[]) buf[23])[0] = rslt.getShort(15);
-                ((bool[]) buf[24])[0] = rslt.wasNull(15);
-                ((short[]) buf[25])[0] = rslt.getShort(16);
-                ((bool[]) buf[26])[0] = rslt.wasNull(16);
-                ((short[]) buf[27])[0] = rslt.getShort(17);
-                ((bool[]) buf[28])[0] = rslt.wasNull(17);
-                ((short[]) buf[29])[0] = rslt.getShort(18);
-                ((bool[]) buf[30])[0] = rslt.wasNull(18);
-                ((short[]) buf[31])[0] = rslt.getShort(19);
-                ((bool[]) buf[32])[0] = rslt.wasNull(19);
-                ((short[]) buf[33])[0] = rslt.getShort(20);
-                ((bool[]) buf[34])[0] = rslt.wasNull(20);
-                ((short[]) buf[35])[0] = rslt.getShort(21);
-                ((bool[]) buf[36])[0] = rslt.wasNull(21);
+                ((short[]) buf[4])[0] = rslt.getShort(5);
+                ((string[]) buf[5])[0] = rslt.getString(6, 100);
+                ((short[]) buf[6])[0] = rslt.getShort(7);
+                ((bool[]) buf[7])[0] = rslt.wasNull(7);
+                ((short[]) buf[8])[0] = rslt.getShort(8);
+                ((bool[]) buf[9])[0] = rslt.wasNull(8);
+                ((short[]) buf[10])[0] = rslt.getShort(9);
+                ((bool[]) buf[11])[0] = rslt.wasNull(9);
+                ((short[]) buf[12])[0] = rslt.getShort(10);
+                ((bool[]) buf[13])[0] = rslt.wasNull(10);
+                ((short[]) buf[14])[0] = rslt.getShort(11);
+                ((bool[]) buf[15])[0] = rslt.wasNull(11);
+                ((short[]) buf[16])[0] = rslt.getShort(12);
+                ((bool[]) buf[17])[0] = rslt.wasNull(12);
+                ((short[]) buf[18])[0] = rslt.getShort(13);
+                ((bool[]) buf[19])[0] = rslt.wasNull(13);
+                ((short[]) buf[20])[0] = rslt.getShort(14);
+                ((bool[]) buf[21])[0] = rslt.wasNull(14);
+                ((short[]) buf[22])[0] = rslt.getShort(15);
+                ((bool[]) buf[23])[0] = rslt.wasNull(15);
+                ((short[]) buf[24])[0] = rslt.getShort(16);
+                ((bool[]) buf[25])[0] = rslt.wasNull(16);
+                ((short[]) buf[26])[0] = rslt.getShort(17);
+                ((bool[]) buf[27])[0] = rslt.wasNull(17);
+                ((short[]) buf[28])[0] = rslt.getShort(18);
+                ((bool[]) buf[29])[0] = rslt.wasNull(18);
+                ((short[]) buf[30])[0] = rslt.getShort(19);
+                ((bool[]) buf[31])[0] = rslt.wasNull(19);
+                ((short[]) buf[32])[0] = rslt.getShort(20);
+                ((bool[]) buf[33])[0] = rslt.wasNull(20);
+                ((short[]) buf[34])[0] = rslt.getShort(21);
+                ((bool[]) buf[35])[0] = rslt.wasNull(21);
+                ((short[]) buf[36])[0] = rslt.getShort(22);
+                ((bool[]) buf[37])[0] = rslt.wasNull(22);
                 return;
        }
     }
