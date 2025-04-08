@@ -335,17 +335,17 @@ namespace GeneXus.Programs {
             if (true) return;
          }
          AV11TrnContext.FromXml(AV12WebSession.Get("TrnContext"), null, "", "");
-         if ( ( StringUtil.StrCmp(AV11TrnContext.gxTpr_Transactionname, AV33Pgmname) == 0 ) && ( StringUtil.StrCmp(Gx_mode, "INS") == 0 ) )
+         if ( ( StringUtil.StrCmp(AV11TrnContext.gxTpr_Transactionname, AV34Pgmname) == 0 ) && ( StringUtil.StrCmp(Gx_mode, "INS") == 0 ) )
          {
-            AV34GXV1 = 1;
-            while ( AV34GXV1 <= AV11TrnContext.gxTpr_Attributes.Count )
+            AV35GXV1 = 1;
+            while ( AV35GXV1 <= AV11TrnContext.gxTpr_Attributes.Count )
             {
-               AV14TrnContextAtt = ((GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext_Attribute)AV11TrnContext.gxTpr_Attributes.Item(AV34GXV1));
+               AV14TrnContextAtt = ((GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext_Attribute)AV11TrnContext.gxTpr_Attributes.Item(AV35GXV1));
                if ( StringUtil.StrCmp(AV14TrnContextAtt.gxTpr_Attributename, "CompanyId") == 0 )
                {
                   AV13Insert_CompanyId = (long)(Math.Round(NumberUtil.Val( AV14TrnContextAtt.gxTpr_Attributevalue, "."), 18, MidpointRounding.ToEven));
                }
-               AV34GXV1 = (int)(AV34GXV1+1);
+               AV35GXV1 = (int)(AV35GXV1+1);
             }
          }
       }
@@ -424,7 +424,7 @@ namespace GeneXus.Programs {
 
       protected void standaloneNotModal( )
       {
-         AV33Pgmname = "Employee_BC";
+         AV34Pgmname = "Employee_BC";
          Gx_BScreen = 0;
       }
 
@@ -2843,7 +2843,7 @@ namespace GeneXus.Programs {
          AV8WWPContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPContext(context);
          AV11TrnContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext(context);
          AV12WebSession = context.GetSession();
-         AV33Pgmname = "";
+         AV34Pgmname = "";
          AV14TrnContextAtt = new GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext_Attribute(context);
          AV31EmployeeAPIPassword = "";
          GXt_char1 = "";
@@ -3089,7 +3089,7 @@ namespace GeneXus.Programs {
          Z184EmployeeIsActiveInProject = true;
          A184EmployeeIsActiveInProject = true;
          i184EmployeeIsActiveInProject = true;
-         AV33Pgmname = "Employee_BC";
+         AV34Pgmname = "Employee_BC";
          Z189EmployeeFTEHours = 40;
          A189EmployeeFTEHours = 40;
          i189EmployeeFTEHours = 40;
@@ -3126,7 +3126,7 @@ namespace GeneXus.Programs {
       private int trnEnded ;
       private int nGXsfl_28_idx=1 ;
       private int nGXsfl_33_idx=1 ;
-      private int AV34GXV1 ;
+      private int AV35GXV1 ;
       private long Z106EmployeeId ;
       private long A106EmployeeId ;
       private long AV13Insert_CompanyId ;
@@ -3149,7 +3149,7 @@ namespace GeneXus.Programs {
       private string endTrnMsgTxt ;
       private string endTrnMsgCod ;
       private string sMode16 ;
-      private string AV33Pgmname ;
+      private string AV34Pgmname ;
       private string GXt_char1 ;
       private string Z148EmployeeName ;
       private string A148EmployeeName ;
