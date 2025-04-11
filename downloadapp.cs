@@ -722,7 +722,7 @@ namespace GeneXus.Programs {
          returnInSub = false;
          AV7isOk = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).logout(out  AV8GAMErrorCollection);
          AV9WebSession.Clear();
-         CallWebObject(formatLink("gamexamplelogin.aspx") );
+         CallWebObject(formatLink("login.aspx") );
          context.wjLocDisableFrm = 1;
       }
 
@@ -801,7 +801,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20253101553317", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202541110592836", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -819,7 +819,7 @@ namespace GeneXus.Programs {
          if ( nGXWrapped != 1 )
          {
             context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-            context.AddJavascriptSource("downloadapp.js", "?20253101553321", false, true);
+            context.AddJavascriptSource("downloadapp.js", "?202541110592841", false, true);
             context.AddJavascriptSource("UserControls/DownloadAppJsRender.js", "", false, true);
          }
          /* End function include_jscripts */

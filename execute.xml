@@ -81,12 +81,6 @@
   </Object>
   <Object>
     <ObjCls>13</ObjCls>
-    <ObjName>GAMExampleLogin</ObjName>
-    <ObjDesc>Login</ObjDesc>
-    <ObjLink>gamexamplelogin.aspx</ObjLink>
-  </Object>
-  <Object>
-    <ObjCls>13</ObjCls>
     <ObjName>GAMNotAuthorized</ObjName>
     <ObjDesc>Not Authorized</ObjDesc>
     <ObjLink>gamnotauthorized.aspx</ObjLink>

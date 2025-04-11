@@ -83,9 +83,9 @@
    </Object>
    <Object>
       <ObjCls>13</ObjCls>
-      <ObjName>GAMExampleLogin</ObjName>
+      <ObjName>Login</ObjName>
       <ObjDesc>Login</ObjDesc>
-      <ObjLink>gamexamplelogin.aspx</ObjLink>
+      <ObjLink>login.aspx</ObjLink>
    </Object>
    <Object>
       <ObjCls>13</ObjCls>

@@ -661,7 +661,7 @@ namespace GeneXus.Programs {
          /* Loginagain_Click Routine */
          returnInSub = false;
          AV6isOK = new GeneXus.Programs.genexussecurity.SdtGAMRepository(context).logout(out  AV5Errors);
-         CallWebObject(formatLink("gamexamplelogin.aspx") );
+         CallWebObject(formatLink("login.aspx") );
          context.wjLocDisableFrm = 1;
       }
 
@@ -763,7 +763,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202521819495054", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202541110592124", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -779,7 +779,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("gamnotauthorized.js", "?202521819495059", false, true);
+         context.AddJavascriptSource("gamnotauthorized.js", "?202541110592128", false, true);
          /* End function include_jscripts */
       }
 

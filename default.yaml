@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: "YTT_version4"
-  version: "20250408115047"
+  version: "20250411064939"
 servers:
   - url: http://localhost:8082/YTT_version4NETPostgreSQL14/rest
 paths:
@@ -190,195 +190,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Device"
-  /LeaveRequest/{LeaveRequestId}:
-    get:
-      tags:
-        - LeaveRequest
-      operationId: "GetLeaveRequest"
-      summary: "Find an existing LeaveRequest"
-      security: 
-        - oAuthGXGAM: []
-      parameters:
-        - name: "LeaveRequestId"
-          in: "path"
-          description: "Leave Request Id"
-          required: true
-          schema:
-            type: "integer"
-            format: "int64"
-      responses:
-        200:
-          description: "Successful operation"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/LeaveRequest"
-        404:
-          description: "Data with the specified key could not be found"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GxJsonError"
-        400:
-          description: "Bad request"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GxJsonError"
-        500:
-          description: "Internal server error"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GxJsonError"
-    post:
-      tags:
-        - LeaveRequest
-      operationId: "InsertLeaveRequest"
-      summary: "Add a new LeaveRequest"
-      security: 
-        - oAuthGXGAM: []
-      parameters:
-        - name: "LeaveRequestId"
-          in: "path"
-          description: "Leave Request Id"
-          required: true
-          schema:
-            type: "integer"
-            format: "int64"
-      requestBody:
-        description: "LeaveRequest properties"
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/LeaveRequest"
-      responses:
-        200:
-          description: "Successful operation"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/LeaveRequest"
-        404:
-          description: "Data with the specified key could not be found"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GxJsonError"
-        400:
-          description: "Bad request"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GxJsonError"
-        500:
-          description: "Internal server error"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GxJsonError"
-        201:
-          description: "Created"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/LeaveRequest"
-    put:
-      tags:
-        - LeaveRequest
-      operationId: "UpdateLeaveRequest"
-      summary: "Update an existing LeaveRequest"
-      security: 
-        - oAuthGXGAM: []
-      parameters:
-        - name: "LeaveRequestId"
-          in: "path"
-          description: "Leave Request Id"
-          required: true
-          schema:
-            type: "integer"
-            format: "int64"
-      requestBody:
-        description: "LeaveRequest properties"
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/LeaveRequest"
-      responses:
-        200:
-          description: "Successful operation"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/LeaveRequest"
-        404:
-          description: "Data with the specified key could not be found"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GxJsonError"
-        400:
-          description: "Bad request"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GxJsonError"
-        500:
-          description: "Internal server error"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GxJsonError"
-        409:
-          description: "LeaveRequest was changed"
-    delete:
-      tags:
-        - LeaveRequest
-      operationId: "DeleteLeaveRequest"
-      summary: "Delete an existing LeaveRequest"
-      security: 
-        - oAuthGXGAM: []
-      parameters:
-        - name: "LeaveRequestId"
-          in: "path"
-          description: "Leave Request Id"
-          required: true
-          schema:
-            type: "integer"
-            format: "int64"
-      responses:
-        200:
-          description: "Successful operation"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/LeaveRequest"
-        404:
-          description: "Data with the specified key could not be found"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GxJsonError"
-        400:
-          description: "Bad request"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GxJsonError"
-        500:
-          description: "Internal server error"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GxJsonError"
-        204:
-          description: "Successful operation"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/LeaveRequest"
   /LeaveType/{LeaveTypeId}:
     get:
       tags:
@@ -1061,29 +872,6 @@ paths:
           description: "Successful operation"
         404:
           description: "Not found"
-  /GetLeaveRequestDays:
-    post:
-      tags:
-        - GetLeaveRequestDays
-      operationId: "GetLeaveRequestDays"
-      summary: "Get Leave Request Days"
-      security: 
-        - oAuthGXGAM: []
-      requestBody:
-        required: false
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GetLeaveRequestDaysInput"
-      responses:
-        200:
-          description: "Successful operation"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetLeaveRequestDaysOutput"
-        404:
-          description: "Not found"
   /GetLoggedInEmployeeId:
     post:
       tags:
@@ -1334,23 +1122,6 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/LeaveTypeWWGetFilterDataOutput"
-        404:
-          description: "Not found"
-  /Prc_Example:
-    post:
-      tags:
-        - Prc_Example
-      operationId: "Prc_Example"
-      summary: "Prc_Example"
-      security: 
-        - oAuthGXGAM: []
-      responses:
-        200:
-          description: "Successful operation"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Prc_ExampleOutput"
         404:
           description: "Not found"
   /Prc_GetLeaveRequestDays:
@@ -3210,66 +2981,6 @@ components:
           type: "string"
       required:
         - gx_md5_hash
-    LeaveRequest:
-      properties:
-        LeaveRequestId:
-          description: "Leave Request Id"
-          type: "integer"
-          format: "int64"
-        LeaveTypeId:
-          description: "Leave Type Id"
-          type: "integer"
-          format: "int64"
-        LeaveTypeName:
-          description: "Leave Type Name"
-          type: "string"
-        LeaveRequestDate:
-          description: "Leave Request Date"
-          type: "string"
-          format: "date"
-        LeaveRequestStartDate:
-          description: "Leave Request Start Date"
-          type: "string"
-          format: "date"
-        LeaveRequestEndDate:
-          description: "Leave Request End Date"
-          type: "string"
-          format: "date"
-        LeaveRequestHalfDay:
-          description: "Leave Request Half Day"
-          type: "string"
-        LeaveRequestDuration:
-          description: "Leave Request Duration"
-          type: "number"
-          format: "double"
-        LeaveRequestStatus:
-          description: "Leave Request Status"
-          type: "string"
-        LeaveRequestDescription:
-          description: "Leave Request Description"
-          type: "string"
-        LeaveRequestRejectionReason:
-          description: "Leave Request Rejection Reason"
-          type: "string"
-        EmployeeId:
-          description: "Employee Id"
-          type: "integer"
-          format: "int64"
-        EmployeeName:
-          description: "Employee Name"
-          type: "string"
-        EmployeeBalance:
-          description: "Employee Balance"
-          type: "number"
-          format: "double"
-        LeaveTypeVacationLeave:
-          description: "Leave Type Vacation Leave"
-          type: "string"
-        gx_md5_hash:
-          description: "gx_md5_hash is an identifier for a specific version of a resource, it is used for optimistic concurrency check. It is required for update and delete operations and  ignored on insert."
-          type: "string"
-      required:
-        - gx_md5_hash
     LeaveType:
       properties:
         LeaveTypeId:
@@ -3439,11 +3150,6 @@ components:
       properties:
         Continue:
           type: "boolean"
-    GetLeaveRequestDaysOutput:
-      properties:
-        FinalDuration:
-          type: "number"
-          format: "double"
     GetLoggedInEmployeeIdOutput:
       properties:
         EmployeeId:
@@ -3529,10 +3235,6 @@ components:
         OptionsDescJson:
           type: "string"
         OptionIndexesJson:
-          type: "string"
-    Prc_ExampleOutput:
-      properties:
-        HttpResponse:
           type: "string"
     Prc_GetLeaveRequestDaysOutput:
       properties:
@@ -3927,19 +3629,6 @@ components:
           type: "string"
         DeviceName:
           type: "string"
-    GetLeaveRequestDaysInput:  
-      properties:
-        StartDate:
-          type: "string"
-          format: "date"
-        EndDate:
-          type: "string"
-          format: "date"
-        LeaveRequestHalfDay:
-          type: "string"
-        EmployeeId:
-          type: "integer"
-          format: "int64"
     GetWeeklyHoursInput:  
       properties:
         WeekDate:
@@ -4473,15 +4162,6 @@ components:
           type: "string"
         Synchronizer:
           description: "Synchronizer"
-          type: "string"
-    SDT_Example:
-      properties:
-        Id:
-          description: "Id"
-          type: "integer"
-          format: "int64"
-        Value:
-          description: "Value"
           type: "string"
     WorkLogsSDT:
       properties:

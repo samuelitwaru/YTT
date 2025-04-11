@@ -806,7 +806,7 @@ namespace GeneXus.Programs {
          }
          else
          {
-            CallWebObject(formatLink("gamexamplelogin.aspx") );
+            CallWebObject(formatLink("login.aspx") );
             context.wjLocDisableFrm = 1;
          }
       }
@@ -863,7 +863,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202521819572389", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202541110593516", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -879,7 +879,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("setnewpassword.js", "?202521819572393", false, true);
+         context.AddJavascriptSource("setnewpassword.js", "?202541110593520", false, true);
          /* End function include_jscripts */
       }
 
