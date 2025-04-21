@@ -118,8 +118,8 @@ namespace GeneXus.Programs {
                      new logtofile(context ).execute(  AV16SDTEmployeeWeekReport.ToJSonString(false, true)) ;
                      AV19Body = new SdtEO_GenerateEmail(context).generate(AV16SDTEmployeeWeekReport.ToJSonString(false, true), context.localUtil.DToC( AV8FromDate, 2, "/"), context.localUtil.DToC( AV9ToDate, 2, "/"));
                      new logtofile(context ).execute(  AV19Body) ;
-                     GXt_char2 = "";
-                     new sendemail(context).executeSubmit(  "Weekly Time Tracker Reminder", ref  AV19Body, ref  GXt_char2) ;
+                     GXt_char2 = "Weekly Time Tracker Reminder";
+                     new sendemail(context).executeSubmit(  A109EmployeeEmail, ref  GXt_char2, ref  AV19Body) ;
                   }
                }
                /* Exit For each command. Update data (if necessary), close cursors & exit. */
