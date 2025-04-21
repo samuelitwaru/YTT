@@ -24,30 +24,6 @@ using System.Runtime.Serialization;
 namespace GeneXus.Programs {
    public class aprc_sendsundayreminderemails : GXWebProcedure
    {
-      protected override bool IntegratedSecurityEnabled
-      {
-         get {
-            return true ;
-         }
-
-      }
-
-      protected override GAMSecurityLevel IntegratedSecurityLevel
-      {
-         get {
-            return GAMSecurityLevel.SecurityHigh ;
-         }
-
-      }
-
-      protected override string ExecutePermissionPrefix
-      {
-         get {
-            return "prc_sendsundayreminderemails_Execute" ;
-         }
-
-      }
-
       public override void webExecute( )
       {
          context.SetDefaultTheme("WorkWithPlusDS", true);
