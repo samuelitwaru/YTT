@@ -92,7 +92,9 @@ namespace GeneXus.Programs {
             A106EmployeeId = P00CR2_A106EmployeeId[0];
             A109EmployeeEmail = P00CR2_A109EmployeeEmail[0];
             A112EmployeeIsActive = P00CR2_A112EmployeeIsActive[0];
+            A158CompanyLocationName = P00CR2_A158CompanyLocationName[0];
             A157CompanyLocationId = P00CR2_A157CompanyLocationId[0];
+            A158CompanyLocationName = P00CR2_A158CompanyLocationName[0];
             /* Using cursor P00CR3 */
             pr_default.execute(1, new Object[] {A106EmployeeId, A112EmployeeIsActive});
             while ( (pr_default.getStatus(1) != 101) )
@@ -163,8 +165,10 @@ namespace GeneXus.Programs {
          P00CR2_A106EmployeeId = new long[1] ;
          P00CR2_A109EmployeeEmail = new string[] {""} ;
          P00CR2_A112EmployeeIsActive = new bool[] {false} ;
+         P00CR2_A158CompanyLocationName = new string[] {""} ;
          A148EmployeeName = "";
          A109EmployeeEmail = "";
+         A158CompanyLocationName = "";
          P00CR3_A106EmployeeId = new long[1] ;
          P00CR3_A102ProjectId = new long[1] ;
          AV12CompanyLocationCollection = new GXBCCollection<SdtCompanyLocation>( context, "CompanyLocation", "YTT_version4");
@@ -178,7 +182,7 @@ namespace GeneXus.Programs {
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.aprc_sendsundayreminderemails__default(),
             new Object[][] {
                 new Object[] {
-               P00CR2_A100CompanyId, P00CR2_A148EmployeeName, P00CR2_A157CompanyLocationId, P00CR2_A106EmployeeId, P00CR2_A109EmployeeEmail, P00CR2_A112EmployeeIsActive
+               P00CR2_A100CompanyId, P00CR2_A148EmployeeName, P00CR2_A157CompanyLocationId, P00CR2_A106EmployeeId, P00CR2_A109EmployeeEmail, P00CR2_A112EmployeeIsActive, P00CR2_A158CompanyLocationName
                }
                , new Object[] {
                P00CR3_A106EmployeeId, P00CR3_A102ProjectId
@@ -200,6 +204,7 @@ namespace GeneXus.Programs {
       private string GXKey ;
       private string gxfirstwebparm ;
       private string A148EmployeeName ;
+      private string A158CompanyLocationName ;
       private string GXt_char2 ;
       private DateTime Gx_date ;
       private DateTime AV8FromDate ;
@@ -217,6 +222,7 @@ namespace GeneXus.Programs {
       private long[] P00CR2_A106EmployeeId ;
       private string[] P00CR2_A109EmployeeEmail ;
       private bool[] P00CR2_A112EmployeeIsActive ;
+      private string[] P00CR2_A158CompanyLocationName ;
       private long[] P00CR3_A106EmployeeId ;
       private long[] P00CR3_A102ProjectId ;
       private GXBCCollection<SdtCompanyLocation> AV12CompanyLocationCollection ;
@@ -252,7 +258,7 @@ namespace GeneXus.Programs {
           new ParDef("EmployeeIsActive",GXType.Boolean,4,0)
           };
           def= new CursorDef[] {
-              new CursorDef("P00CR2", "SELECT T1.CompanyId, T1.EmployeeName, T2.CompanyLocationId, T1.EmployeeId, T1.EmployeeEmail, T1.EmployeeIsActive FROM (Employee T1 INNER JOIN Company T2 ON T2.CompanyId = T1.CompanyId) WHERE (T1.EmployeeEmail = ( 'samuel.itwaru@yukon.ug')) AND (T1.EmployeeIsActive = TRUE) ORDER BY T1.EmployeeEmail ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00CR2,1, GxCacheFrequency.OFF ,true,true )
+              new CursorDef("P00CR2", "SELECT T1.CompanyId, T1.EmployeeName, T2.CompanyLocationId, T1.EmployeeId, T1.EmployeeEmail, T1.EmployeeIsActive, T3.CompanyLocationName FROM ((Employee T1 INNER JOIN Company T2 ON T2.CompanyId = T1.CompanyId) INNER JOIN CompanyLocation T3 ON T3.CompanyLocationId = T2.CompanyLocationId) WHERE (T1.EmployeeEmail = ( 'samuel.itwaru@yukon.ug')) AND (T3.CompanyLocationName = ( 'Uganda')) AND (T1.EmployeeIsActive = TRUE) ORDER BY T1.EmployeeEmail ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00CR2,1, GxCacheFrequency.OFF ,true,true )
              ,new CursorDef("P00CR3", "SELECT EmployeeId, ProjectId FROM EmployeeProject WHERE (EmployeeId = :EmployeeId) AND (:EmployeeIsActive = TRUE) ORDER BY EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00CR3,1, GxCacheFrequency.OFF ,true,true )
           };
        }
@@ -271,6 +277,7 @@ namespace GeneXus.Programs {
                 ((long[]) buf[3])[0] = rslt.getLong(4);
                 ((string[]) buf[4])[0] = rslt.getVarchar(5);
                 ((bool[]) buf[5])[0] = rslt.getBool(6);
+                ((string[]) buf[6])[0] = rslt.getString(7, 100);
                 return;
              case 1 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);
