@@ -184,6 +184,22 @@
               </Property>
             </Properties>
           </Field>
+          <Field name="DailyExpected" description="Daily Expected">
+            <Properties>
+              <Property>
+                <Name>Type</Name>
+                <Value>Numeric</Value>
+              </Property>
+              <Property>
+                <Name>Length</Name>
+                <Value>10</Value>
+              </Property>
+              <Property>
+                <Name>Picture</Name>
+                <Value>ZZZZZZZZZ9</Value>
+              </Property>
+            </Properties>
+          </Field>
           <Field name="Leave" description="Leave">
             <Properties>
               <Property>
@@ -211,8 +227,12 @@
                 <Value>10</Value>
               </Property>
               <Property>
+                <Name>Decimals</Name>
+                <Value>2</Value>
+              </Property>
+              <Property>
                 <Name>Picture</Name>
-                <Value>ZZZZZZZZZ9</Value>
+                <Value>ZZZZZZ9.99</Value>
               </Property>
             </Properties>
           </Field>

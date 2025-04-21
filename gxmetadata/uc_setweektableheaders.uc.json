@@ -1,0 +1,48 @@
+{
+	"Name": "UC_SetWeekTableHeaders",
+	"Target": "",
+	"IsControlType": false,
+	 "Template": "", 
+	"Events": [
+	],
+	"Properties": [
+	],
+	"Methods": {
+		"Public": [
+			{
+				"Name": "Refresh",
+				"Source": "  		//const thElements = document.querySelectorAll(\'#GridContainerTbl th\');		console.log(FromDate)		console.log(ToDate)				const fromDate = new Date(FromDate)		const toDate = new Date(ToDate)				console.log(fromDate)		console.log(toDate)				console.log(fromDate < toDate)		const spanElements = document.querySelectorAll(\'#GridContainerTbl th.WeekDay span\');		console.log(spanElements)		let index = 0		while (fromDate <= toDate) {			const formatted = this.formatDate(fromDate)			spanElements[index].innerHTML = formatted			fromDate.setDate(fromDate.getDate() + 1)			index += 1		}		  	",
+				"Return": "",
+				"Parameters": [
+					 {
+						"Name": "FromDate",
+						"Type": "FromDate"
+					} ,
+					 {
+						"Name": "ToDate",
+						"Type": "ToDate"
+					} 
+				]
+			} 
+		],
+		"Private": [
+		]
+	},
+	"Scripts": {
+		"AfterShow": [
+			{
+				"Name": "Start",
+				"Source": "			this.formatDate = (date) => {			const weekdays = [\'Sun\', \'Mon\', \'Tue\', \'Wed\', \'Thu\', \'Fri\', \'Sat\'];			const day = String(date.getDate()).padStart(2, \'0\');			const weekday = weekdays[date.getDay()];			const formatted = `${weekday} ${day}`;			return formatted;		}	  	",
+				"AngularLocation": ""
+			} 
+		],
+		"BeforeShow": [
+		]
+	},
+	"Dependencies": [
+	],
+	"Imports": [
+	],
+	"Styles": [
+	]
+}

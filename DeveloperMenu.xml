@@ -525,4 +525,10 @@
       <ObjDesc>Prc_Example</ObjDesc>
       <ObjLink>aprc_example.aspx</ObjLink>
    </Object>
+   <Object>
+      <ObjCls>1</ObjCls>
+      <ObjName>Prc_SendSundayReminderEmails</ObjName>
+      <ObjDesc>Prc_Send Sunday Reminder Emails</ObjDesc>
+      <ObjLink>aprc_sendsundayreminderemails.aspx</ObjLink>
+   </Object>
 </Objects>

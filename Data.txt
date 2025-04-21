@@ -1,0 +1,124 @@
+14/04/25 - 20/04/25
+Samuel Itwaru
+			Expected : 32:00 >>    1920.00
+			Actual   : 0:00 >>          0
+				Sending Email...
+{"EmployeeName":"Samuel Itwaru","Mon":0,"Tue":0,"Wed":0,"Thu":0,"Fri":0,"Sat":0,"Sun":0,"DailyExpected":8,"Leave":480,"Expected":1920,"Total":0,"Mon_IsHoliday":false,"Tue_IsHoliday":false,"Wed_IsHoliday":false,"Thu_IsHoliday":false,"Fri_IsHoliday":true,"Sat_IsHoliday":false,"Sun_IsHoliday":false,"Mon_Formatted":"0:00","Tue_Formatted":"0:00","Wed_Formatted":"0:00","Thu_Formatted":"0:00","Fri_Formatted":"0:00<br /><small>Good Friday</small>","Sat_Formatted":"0:00","Sun_Formatted":"0:00","Leave_Formatted":"8:00","Total_Formatted":"0:00","Expected_Formatted":"32:00"}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Tracker Reminder</title>
+    <style>
+            body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* height: 10vh; */
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 500px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .header {
+            background: #333;
+            color: white;
+            padding: 40px;
+
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .content {
+            padding: 20px;
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .button {
+            background: #ffcc00;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .button:hover {
+            background: #e6b800;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        .highlight {
+            background-color: #fff3cd; /* Light yellow */
+            border-left: 2px solid orange;
+            /* border-right: 2px solid orange; */
+            color: #fa8365
+        }
+        .empty {
+            background-color: #f8d7da; /* Light red */
+            border-left: 2px solid #dd4b39;
+
+        }
+        .full {
+            background-color: #ffffff; /* White */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">Time Tracker Reminder</div>
+        <div class="content">
+            <p>Dear Samuel Itwaru,</p>
+            <br>
+            <p>Your reported hours for the past week do not match the expected hours.</p>
+            <p>We think you forgot to fill them in.</p>
+            <p><b>Reported Hours:</b> 0:00</p>
+            <p><b>Expected Hours:</b> 32:00</p>
+
+            <table>
+                <tr>
+                    <td class=''>Mon 14</td>
+                    <td class=''>Tue 15</td>
+                    <td class=''>Wed 16</td>
+                    <td class=''>Thu 17</td>
+                    <td class=''>Fri 18</td>
+                    <td class=''>Sat 19</td>
+                    <td class=''>Sun 20</td>
+                    <td class=''>Total</td>
+                </tr>
+                <tr>
+                    <td class='empty'>0:00</td>
+                    <td class='empty'>0:00</td>
+                    <td class='empty'>0:00</td>
+                    <td class='empty'>0:00</td>
+                    <td class='highlight'>0:00<br /><small>Good Friday</small></td>
+                    <td class=''>0:00<br /><small>Good Friday</small></td>
+                    <td class=''>0:00</td>
+                    <td class=''>0:00</td>
+                </tr>
+            </table>
+
+            <div class="button-container">
+                <a href="https://timetracker.yukon.software" class="button">Fill now</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

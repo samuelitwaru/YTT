@@ -103,6 +103,9 @@ namespace GeneXus.Programs
 			AddObjectProperty("Sun", gxTpr_Sun, false);
 
 
+			AddObjectProperty("DailyExpected", gxTpr_Dailyexpected, false);
+
+
 			AddObjectProperty("Leave", gxTpr_Leave, false);
 
 
@@ -296,6 +299,22 @@ namespace GeneXus.Programs
 
 
 
+		[SoapElement(ElementName="DailyExpected")]
+		[XmlElement(ElementName="DailyExpected")]
+		public long gxTpr_Dailyexpected
+		{
+			get {
+				return gxTv_SdtSDTEmployeeWeekReport_Dailyexpected; 
+			}
+			set {
+				gxTv_SdtSDTEmployeeWeekReport_Dailyexpected = value;
+				SetDirty("Dailyexpected");
+			}
+		}
+
+
+
+
 		[SoapElement(ElementName="Leave")]
 		[XmlElement(ElementName="Leave")]
 		public long gxTpr_Leave
@@ -311,10 +330,19 @@ namespace GeneXus.Programs
 
 
 
-
 		[SoapElement(ElementName="Expected")]
 		[XmlElement(ElementName="Expected")]
-		public long gxTpr_Expected
+		public string gxTpr_Expected_double
+		{
+			get {
+				return Convert.ToString(gxTv_SdtSDTEmployeeWeekReport_Expected, System.Globalization.CultureInfo.InvariantCulture);
+			}
+			set {
+				gxTv_SdtSDTEmployeeWeekReport_Expected = (decimal)(Convert.ToDecimal(value, System.Globalization.CultureInfo.InvariantCulture));
+			}
+		}
+		[XmlIgnore]
+		public decimal gxTpr_Expected
 		{
 			get {
 				return gxTv_SdtSDTEmployeeWeekReport_Expected; 
@@ -654,6 +682,7 @@ namespace GeneXus.Programs
 
 
 
+
 			gxTv_SdtSDTEmployeeWeekReport_Mon_formatted = "";
 			gxTv_SdtSDTEmployeeWeekReport_Tue_formatted = "";
 			gxTv_SdtSDTEmployeeWeekReport_Wed_formatted = "";
@@ -697,10 +726,13 @@ namespace GeneXus.Programs
 		protected long gxTv_SdtSDTEmployeeWeekReport_Sun;
 		 
 
+		protected long gxTv_SdtSDTEmployeeWeekReport_Dailyexpected;
+		 
+
 		protected long gxTv_SdtSDTEmployeeWeekReport_Leave;
 		 
 
-		protected long gxTv_SdtSDTEmployeeWeekReport_Expected;
+		protected decimal gxTv_SdtSDTEmployeeWeekReport_Expected;
 		 
 
 		protected long gxTv_SdtSDTEmployeeWeekReport_Total;
@@ -870,7 +902,19 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="Leave", Order=8)]
+		[DataMember(Name="DailyExpected", Order=8)]
+		public  string gxTpr_Dailyexpected
+		{
+			get { 
+				return StringUtil.LTrim( StringUtil.Str( (decimal) sdt.gxTpr_Dailyexpected, 10, 0));
+
+			}
+			set { 
+				sdt.gxTpr_Dailyexpected = (long) NumberUtil.Val( value, ".");
+			}
+		}
+
+		[DataMember(Name="Leave", Order=9)]
 		public  string gxTpr_Leave
 		{
 			get { 
@@ -882,19 +926,19 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="Expected", Order=9)]
+		[DataMember(Name="Expected", Order=10)]
 		public  string gxTpr_Expected
 		{
 			get { 
-				return StringUtil.LTrim( StringUtil.Str( (decimal) sdt.gxTpr_Expected, 10, 0));
+				return StringUtil.LTrim( StringUtil.Str(  sdt.gxTpr_Expected, 10, 2));
 
 			}
 			set { 
-				sdt.gxTpr_Expected = (long) NumberUtil.Val( value, ".");
+				sdt.gxTpr_Expected =  NumberUtil.Val( value, ".");
 			}
 		}
 
-		[DataMember(Name="Total", Order=10)]
+		[DataMember(Name="Total", Order=11)]
 		public  string gxTpr_Total
 		{
 			get { 
@@ -906,7 +950,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="Mon_IsHoliday", Order=11)]
+		[DataMember(Name="Mon_IsHoliday", Order=12)]
 		public bool gxTpr_Mon_isholiday
 		{
 			get { 
@@ -918,7 +962,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="Tue_IsHoliday", Order=12)]
+		[DataMember(Name="Tue_IsHoliday", Order=13)]
 		public bool gxTpr_Tue_isholiday
 		{
 			get { 
@@ -930,7 +974,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="Wed_IsHoliday", Order=13)]
+		[DataMember(Name="Wed_IsHoliday", Order=14)]
 		public bool gxTpr_Wed_isholiday
 		{
 			get { 
@@ -942,7 +986,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="Thu_IsHoliday", Order=14)]
+		[DataMember(Name="Thu_IsHoliday", Order=15)]
 		public bool gxTpr_Thu_isholiday
 		{
 			get { 
@@ -954,7 +998,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="Fri_IsHoliday", Order=15)]
+		[DataMember(Name="Fri_IsHoliday", Order=16)]
 		public bool gxTpr_Fri_isholiday
 		{
 			get { 
@@ -966,7 +1010,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="Sat_IsHoliday", Order=16)]
+		[DataMember(Name="Sat_IsHoliday", Order=17)]
 		public bool gxTpr_Sat_isholiday
 		{
 			get { 
@@ -978,7 +1022,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="Sun_IsHoliday", Order=17)]
+		[DataMember(Name="Sun_IsHoliday", Order=18)]
 		public bool gxTpr_Sun_isholiday
 		{
 			get { 
@@ -990,7 +1034,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="Mon_Formatted", Order=18)]
+		[DataMember(Name="Mon_Formatted", Order=19)]
 		public  string gxTpr_Mon_formatted
 		{
 			get { 
@@ -1002,7 +1046,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="Tue_Formatted", Order=19)]
+		[DataMember(Name="Tue_Formatted", Order=20)]
 		public  string gxTpr_Tue_formatted
 		{
 			get { 
@@ -1014,7 +1058,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="Wed_Formatted", Order=20)]
+		[DataMember(Name="Wed_Formatted", Order=21)]
 		public  string gxTpr_Wed_formatted
 		{
 			get { 
@@ -1026,7 +1070,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="Thu_Formatted", Order=21)]
+		[DataMember(Name="Thu_Formatted", Order=22)]
 		public  string gxTpr_Thu_formatted
 		{
 			get { 
@@ -1038,7 +1082,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="Fri_Formatted", Order=22)]
+		[DataMember(Name="Fri_Formatted", Order=23)]
 		public  string gxTpr_Fri_formatted
 		{
 			get { 
@@ -1050,7 +1094,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="Sat_Formatted", Order=23)]
+		[DataMember(Name="Sat_Formatted", Order=24)]
 		public  string gxTpr_Sat_formatted
 		{
 			get { 
@@ -1062,7 +1106,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="Sun_Formatted", Order=24)]
+		[DataMember(Name="Sun_Formatted", Order=25)]
 		public  string gxTpr_Sun_formatted
 		{
 			get { 
@@ -1074,7 +1118,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="Leave_Formatted", Order=25)]
+		[DataMember(Name="Leave_Formatted", Order=26)]
 		public  string gxTpr_Leave_formatted
 		{
 			get { 
@@ -1086,7 +1130,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="Total_Formatted", Order=26)]
+		[DataMember(Name="Total_Formatted", Order=27)]
 		public  string gxTpr_Total_formatted
 		{
 			get { 
@@ -1098,7 +1142,7 @@ namespace GeneXus.Programs
 			}
 		}
 
-		[DataMember(Name="Expected_Formatted", Order=27)]
+		[DataMember(Name="Expected_Formatted", Order=28)]
 		public  string gxTpr_Expected_formatted
 		{
 			get { 

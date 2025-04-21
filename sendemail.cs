@@ -129,9 +129,11 @@ namespace GeneXus.Programs {
          {
             AV11SMTPSession.Send(AV9MailMessage);
             AV11SMTPSession.Logout();
+            new logtofile(context ).execute(  "Sent email to: "+AV13email+" Subject: "+AV12Subject) ;
          }
          else
          {
+            new logtofile(context ).execute(  "Failed email to: "+AV13email+" Subject: "+AV12Subject) ;
             GX_msglist.addItem(AV11SMTPSession.ErrDescription);
          }
          cleanup();
