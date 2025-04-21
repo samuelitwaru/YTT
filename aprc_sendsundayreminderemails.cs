@@ -114,8 +114,8 @@ namespace GeneXus.Programs {
             A148EmployeeName = P00CR2_A148EmployeeName[0];
             A157CompanyLocationId = P00CR2_A157CompanyLocationId[0];
             A106EmployeeId = P00CR2_A106EmployeeId[0];
-            A112EmployeeIsActive = P00CR2_A112EmployeeIsActive[0];
             A109EmployeeEmail = P00CR2_A109EmployeeEmail[0];
+            A112EmployeeIsActive = P00CR2_A112EmployeeIsActive[0];
             A157CompanyLocationId = P00CR2_A157CompanyLocationId[0];
             /* Using cursor P00CR3 */
             pr_default.execute(1, new Object[] {A106EmployeeId, A112EmployeeIsActive});
@@ -142,6 +142,8 @@ namespace GeneXus.Programs {
                      new logtofile(context ).execute(  AV16SDTEmployeeWeekReport.ToJSonString(false, true)) ;
                      AV19Body = new SdtEO_GenerateEmail(context).generate(AV16SDTEmployeeWeekReport.ToJSonString(false, true), context.localUtil.DToC( AV8FromDate, 2, "/"), context.localUtil.DToC( AV9ToDate, 2, "/"));
                      new logtofile(context ).execute(  AV19Body) ;
+                     GXt_char2 = "";
+                     new sendemail(context).executeSubmit(  "Weekly Time Tracker Reminder", ref  AV19Body, ref  GXt_char2) ;
                   }
                }
                /* Exit For each command. Update data (if necessary), close cursors & exit. */
@@ -183,8 +185,8 @@ namespace GeneXus.Programs {
          P00CR2_A148EmployeeName = new string[] {""} ;
          P00CR2_A157CompanyLocationId = new long[1] ;
          P00CR2_A106EmployeeId = new long[1] ;
-         P00CR2_A112EmployeeIsActive = new bool[] {false} ;
          P00CR2_A109EmployeeEmail = new string[] {""} ;
+         P00CR2_A112EmployeeIsActive = new bool[] {false} ;
          A148EmployeeName = "";
          A109EmployeeEmail = "";
          P00CR3_A106EmployeeId = new long[1] ;
@@ -196,10 +198,11 @@ namespace GeneXus.Programs {
          AV15SDTEmployeeWeekReportCollection = new GXBaseCollection<SdtSDTEmployeeWeekReport>( context, "SDTEmployeeWeekReport", "YTT_version4");
          GXt_objcol_SdtSDTEmployeeWeekReport1 = new GXBaseCollection<SdtSDTEmployeeWeekReport>( context, "SDTEmployeeWeekReport", "YTT_version4");
          AV19Body = "";
+         GXt_char2 = "";
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.aprc_sendsundayreminderemails__default(),
             new Object[][] {
                 new Object[] {
-               P00CR2_A100CompanyId, P00CR2_A148EmployeeName, P00CR2_A157CompanyLocationId, P00CR2_A106EmployeeId, P00CR2_A112EmployeeIsActive, P00CR2_A109EmployeeEmail
+               P00CR2_A100CompanyId, P00CR2_A148EmployeeName, P00CR2_A157CompanyLocationId, P00CR2_A106EmployeeId, P00CR2_A109EmployeeEmail, P00CR2_A112EmployeeIsActive
                }
                , new Object[] {
                P00CR3_A106EmployeeId, P00CR3_A102ProjectId
@@ -221,6 +224,7 @@ namespace GeneXus.Programs {
       private string GXKey ;
       private string gxfirstwebparm ;
       private string A148EmployeeName ;
+      private string GXt_char2 ;
       private DateTime Gx_date ;
       private DateTime AV8FromDate ;
       private DateTime AV9ToDate ;
@@ -235,8 +239,8 @@ namespace GeneXus.Programs {
       private string[] P00CR2_A148EmployeeName ;
       private long[] P00CR2_A157CompanyLocationId ;
       private long[] P00CR2_A106EmployeeId ;
-      private bool[] P00CR2_A112EmployeeIsActive ;
       private string[] P00CR2_A109EmployeeEmail ;
+      private bool[] P00CR2_A112EmployeeIsActive ;
       private long[] P00CR3_A106EmployeeId ;
       private long[] P00CR3_A102ProjectId ;
       private GXBCCollection<SdtCompanyLocation> AV12CompanyLocationCollection ;
@@ -272,7 +276,7 @@ namespace GeneXus.Programs {
           new ParDef("EmployeeIsActive",GXType.Boolean,4,0)
           };
           def= new CursorDef[] {
-              new CursorDef("P00CR2", "SELECT T1.CompanyId, T1.EmployeeName, T2.CompanyLocationId, T1.EmployeeId, T1.EmployeeIsActive, T1.EmployeeEmail FROM (Employee T1 INNER JOIN Company T2 ON T2.CompanyId = T1.CompanyId) WHERE (T1.EmployeeEmail = ( 'samuel.itwaru@yukon.ug')) AND (T1.EmployeeIsActive = TRUE) ORDER BY T1.EmployeeEmail ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00CR2,1, GxCacheFrequency.OFF ,true,true )
+              new CursorDef("P00CR2", "SELECT T1.CompanyId, T1.EmployeeName, T2.CompanyLocationId, T1.EmployeeId, T1.EmployeeEmail, T1.EmployeeIsActive FROM (Employee T1 INNER JOIN Company T2 ON T2.CompanyId = T1.CompanyId) WHERE (T1.EmployeeEmail = ( 'samuel.itwaru@yukon.ug')) AND (T1.EmployeeIsActive = TRUE) ORDER BY T1.EmployeeEmail ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00CR2,1, GxCacheFrequency.OFF ,true,true )
              ,new CursorDef("P00CR3", "SELECT EmployeeId, ProjectId FROM EmployeeProject WHERE (EmployeeId = :EmployeeId) AND (:EmployeeIsActive = TRUE) ORDER BY EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00CR3,1, GxCacheFrequency.OFF ,true,true )
           };
        }
@@ -289,8 +293,8 @@ namespace GeneXus.Programs {
                 ((string[]) buf[1])[0] = rslt.getString(2, 100);
                 ((long[]) buf[2])[0] = rslt.getLong(3);
                 ((long[]) buf[3])[0] = rslt.getLong(4);
-                ((bool[]) buf[4])[0] = rslt.getBool(5);
-                ((string[]) buf[5])[0] = rslt.getVarchar(6);
+                ((string[]) buf[4])[0] = rslt.getVarchar(5);
+                ((bool[]) buf[5])[0] = rslt.getBool(6);
                 return;
              case 1 :
                 ((long[]) buf[0])[0] = rslt.getLong(1);
