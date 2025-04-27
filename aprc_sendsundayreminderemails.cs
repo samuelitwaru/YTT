@@ -86,7 +86,7 @@ namespace GeneXus.Programs {
          /* Output device settings */
          AV8FromDate = DateTimeUtil.DAdd( Gx_date, (-6));
          AV9ToDate = DateTimeUtil.DAdd( AV8FromDate, (6));
-         new logtofile(context ).execute(  context.localUtil.DToC( AV8FromDate, 2, "/")+" - "+context.localUtil.DToC( AV9ToDate, 2, "/")) ;
+         new logtofile(context ).execute(  context.localUtil.DToC( AV8FromDate, 2, "/")+" - "+context.localUtil.DToC( AV9ToDate, 2, "/")+" Location: "+AV20CompanyLocationName) ;
          /* Using cursor P00CR2 */
          pr_default.execute(0, new Object[] {AV20CompanyLocationName});
          while ( (pr_default.getStatus(0) != 101) )
@@ -121,10 +121,9 @@ namespace GeneXus.Programs {
                   new logtofile(context ).execute(  "			Actual   : "+AV16SDTEmployeeWeekReport.gxTpr_Total_formatted+" >> "+StringUtil.Str( (decimal)(AV16SDTEmployeeWeekReport.gxTpr_Total), 10, 0)) ;
                   if ( (Convert.ToDecimal( AV16SDTEmployeeWeekReport.gxTpr_Total ) < AV16SDTEmployeeWeekReport.gxTpr_Expected ) )
                   {
-                     new logtofile(context ).execute(  "				Sending Email...") ;
-                     new logtofile(context ).execute(  AV16SDTEmployeeWeekReport.ToJSonString(false, true)) ;
+                     new logtofile(context ).execute(  "				"+AV16SDTEmployeeWeekReport.ToJSonString(false, true)) ;
                      AV19Body = new SdtEO_GenerateEmail(context).generate(AV16SDTEmployeeWeekReport.ToJSonString(false, true), context.localUtil.DToC( AV8FromDate, 2, "/"), context.localUtil.DToC( AV9ToDate, 2, "/"));
-                     new logtofile(context ).execute(  AV19Body) ;
+                     new logtofile(context ).execute(  "				Sending Email... "+StringUtil.Trim( A109EmployeeEmail)) ;
                      GXt_char2 = "Weekly Time Tracker Reminder";
                      new sendemail(context).executeSubmit(  A109EmployeeEmail, ref  GXt_char2, ref  AV19Body) ;
                   }
@@ -134,8 +133,7 @@ namespace GeneXus.Programs {
                pr_default.readNext(1);
             }
             pr_default.close(1);
-            /* Exiting from a For First loop. */
-            if (true) break;
+            pr_default.readNext(0);
          }
          pr_default.close(0);
          if ( context.WillRedirect( ) )
@@ -265,7 +263,7 @@ namespace GeneXus.Programs {
           new ParDef("EmployeeIsActive",GXType.Boolean,4,0)
           };
           def= new CursorDef[] {
-              new CursorDef("P00CR2", "SELECT T1.CompanyId, T1.EmployeeName, T2.CompanyLocationId, T1.EmployeeId, T1.EmployeeEmail, T1.EmployeeIsActive, T3.CompanyLocationName FROM ((Employee T1 INNER JOIN Company T2 ON T2.CompanyId = T1.CompanyId) INNER JOIN CompanyLocation T3 ON T3.CompanyLocationId = T2.CompanyLocationId) WHERE (T1.EmployeeEmail = ( 'samuel.itwaru@yukon.ug')) AND (T3.CompanyLocationName = ( :AV20CompanyLocationName)) AND (T1.EmployeeIsActive = TRUE) ORDER BY T1.EmployeeEmail ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00CR2,1, GxCacheFrequency.OFF ,true,true )
+              new CursorDef("P00CR2", "SELECT T1.CompanyId, T1.EmployeeName, T2.CompanyLocationId, T1.EmployeeId, T1.EmployeeEmail, T1.EmployeeIsActive, T3.CompanyLocationName FROM ((Employee T1 INNER JOIN Company T2 ON T2.CompanyId = T1.CompanyId) INNER JOIN CompanyLocation T3 ON T3.CompanyLocationId = T2.CompanyLocationId) WHERE (T3.CompanyLocationName = ( :AV20CompanyLocationName)) AND (T1.EmployeeIsActive = TRUE) ORDER BY T1.EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00CR2,100, GxCacheFrequency.OFF ,true,false )
              ,new CursorDef("P00CR3", "SELECT EmployeeId, ProjectId FROM EmployeeProject WHERE (EmployeeId = :EmployeeId) AND (:EmployeeIsActive = TRUE) ORDER BY EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00CR3,1, GxCacheFrequency.OFF ,true,true )
           };
        }
