@@ -36,7 +36,11 @@ namespace GeneXus.Programs {
          if ( nGotPars == 0 )
          {
             entryPointCalled = false;
-            gxfirstwebparm = GetNextPar( );
+            gxfirstwebparm = GetFirstPar( "CompanyLocationName");
+            if ( ! entryPointCalled )
+            {
+               AV20CompanyLocationName = gxfirstwebparm;
+            }
          }
          if ( GxWebError == 0 )
          {
@@ -63,14 +67,16 @@ namespace GeneXus.Programs {
          dsDefault = context.GetDataStore("Default");
       }
 
-      public void execute( )
+      public void execute( string aP0_CompanyLocationName )
       {
+         this.AV20CompanyLocationName = aP0_CompanyLocationName;
          initialize();
          ExecuteImpl();
       }
 
-      public void executeSubmit( )
+      public void executeSubmit( string aP0_CompanyLocationName )
       {
+         this.AV20CompanyLocationName = aP0_CompanyLocationName;
          SubmitImpl();
       }
 
@@ -78,12 +84,11 @@ namespace GeneXus.Programs {
       {
          /* GeneXus formulas */
          /* Output device settings */
-         Gx_date = context.localUtil.YMDToD( 2025, 4, 20);
          AV8FromDate = DateTimeUtil.DAdd( Gx_date, (-6));
          AV9ToDate = DateTimeUtil.DAdd( AV8FromDate, (6));
          new logtofile(context ).execute(  context.localUtil.DToC( AV8FromDate, 2, "/")+" - "+context.localUtil.DToC( AV9ToDate, 2, "/")) ;
          /* Using cursor P00CR2 */
-         pr_default.execute(0);
+         pr_default.execute(0, new Object[] {AV20CompanyLocationName});
          while ( (pr_default.getStatus(0) != 101) )
          {
             A100CompanyId = P00CR2_A100CompanyId[0];
@@ -156,8 +161,8 @@ namespace GeneXus.Programs {
       {
          GXKey = "";
          gxfirstwebparm = "";
-         Gx_date = DateTime.MinValue;
          AV8FromDate = DateTime.MinValue;
+         Gx_date = DateTime.MinValue;
          AV9ToDate = DateTime.MinValue;
          P00CR2_A100CompanyId = new long[1] ;
          P00CR2_A148EmployeeName = new string[] {""} ;
@@ -203,11 +208,12 @@ namespace GeneXus.Programs {
       private long A102ProjectId ;
       private string GXKey ;
       private string gxfirstwebparm ;
+      private string AV20CompanyLocationName ;
       private string A148EmployeeName ;
       private string A158CompanyLocationName ;
       private string GXt_char2 ;
-      private DateTime Gx_date ;
       private DateTime AV8FromDate ;
+      private DateTime Gx_date ;
       private DateTime AV9ToDate ;
       private bool entryPointCalled ;
       private bool A112EmployeeIsActive ;
@@ -251,6 +257,7 @@ namespace GeneXus.Programs {
        {
           Object[] prmP00CR2;
           prmP00CR2 = new Object[] {
+          new ParDef("AV20CompanyLocationName",GXType.Char,100,0)
           };
           Object[] prmP00CR3;
           prmP00CR3 = new Object[] {
@@ -258,7 +265,7 @@ namespace GeneXus.Programs {
           new ParDef("EmployeeIsActive",GXType.Boolean,4,0)
           };
           def= new CursorDef[] {
-              new CursorDef("P00CR2", "SELECT T1.CompanyId, T1.EmployeeName, T2.CompanyLocationId, T1.EmployeeId, T1.EmployeeEmail, T1.EmployeeIsActive, T3.CompanyLocationName FROM ((Employee T1 INNER JOIN Company T2 ON T2.CompanyId = T1.CompanyId) INNER JOIN CompanyLocation T3 ON T3.CompanyLocationId = T2.CompanyLocationId) WHERE (T1.EmployeeEmail = ( 'samuel.itwaru@yukon.ug')) AND (T3.CompanyLocationName = ( 'Uganda')) AND (T1.EmployeeIsActive = TRUE) ORDER BY T1.EmployeeEmail ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00CR2,1, GxCacheFrequency.OFF ,true,true )
+              new CursorDef("P00CR2", "SELECT T1.CompanyId, T1.EmployeeName, T2.CompanyLocationId, T1.EmployeeId, T1.EmployeeEmail, T1.EmployeeIsActive, T3.CompanyLocationName FROM ((Employee T1 INNER JOIN Company T2 ON T2.CompanyId = T1.CompanyId) INNER JOIN CompanyLocation T3 ON T3.CompanyLocationId = T2.CompanyLocationId) WHERE (T1.EmployeeEmail = ( 'samuel.itwaru@yukon.ug')) AND (T3.CompanyLocationName = ( :AV20CompanyLocationName)) AND (T1.EmployeeIsActive = TRUE) ORDER BY T1.EmployeeEmail ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00CR2,1, GxCacheFrequency.OFF ,true,true )
              ,new CursorDef("P00CR3", "SELECT EmployeeId, ProjectId FROM EmployeeProject WHERE (EmployeeId = :EmployeeId) AND (:EmployeeIsActive = TRUE) ORDER BY EmployeeId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00CR3,1, GxCacheFrequency.OFF ,true,true )
           };
        }

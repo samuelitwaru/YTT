@@ -212,7 +212,7 @@ namespace GeneXus.Programs {
             Gxm1sdtemployeeweekreport.gxTpr_Sat = AV10Sat;
             Gxm1sdtemployeeweekreport.gxTpr_Sun = AV11Sun;
             Gxm1sdtemployeeweekreport.gxTpr_Leave = (long)(Math.Round(AV15Leave, 18, MidpointRounding.ToEven));
-            Gxm1sdtemployeeweekreport.gxTpr_Dailyexpected = (long)(Math.Round(A189EmployeeFTEHours/ (decimal)(5), 18, MidpointRounding.ToEven));
+            Gxm1sdtemployeeweekreport.gxTpr_Dailyexpected = (long)(Math.Round((A189EmployeeFTEHours*60)/ (decimal)(5), 18, MidpointRounding.ToEven));
             Gxm1sdtemployeeweekreport.gxTpr_Total = AV12Total;
             Gxm1sdtemployeeweekreport.gxTpr_Expected = AV18Expected;
             GXt_boolean2 = false;

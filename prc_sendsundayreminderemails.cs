@@ -41,14 +41,16 @@ namespace GeneXus.Programs {
          dsDefault = context.GetDataStore("Default");
       }
 
-      public void execute( )
+      public void execute( string aP0_CompanyLocationName )
       {
+         this.AV2CompanyLocationName = aP0_CompanyLocationName;
          initialize();
          ExecuteImpl();
       }
 
-      public void executeSubmit( )
+      public void executeSubmit( string aP0_CompanyLocationName )
       {
+         this.AV2CompanyLocationName = aP0_CompanyLocationName;
          SubmitImpl();
       }
 
@@ -56,8 +58,11 @@ namespace GeneXus.Programs {
       {
          /* GeneXus formulas */
          /* Output device settings */
-         args = new Object[] {} ;
+         args = new Object[] {(string)AV2CompanyLocationName} ;
          ClassLoader.Execute("aprc_sendsundayreminderemails","GeneXus.Programs","aprc_sendsundayreminderemails", new Object[] {context }, "execute", args);
+         if ( ( args != null ) && ( args.Length == 1 ) )
+         {
+         }
          cleanup();
       }
 
@@ -75,6 +80,7 @@ namespace GeneXus.Programs {
          /* GeneXus formulas. */
       }
 
+      private string AV2CompanyLocationName ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
       private Object[] args ;

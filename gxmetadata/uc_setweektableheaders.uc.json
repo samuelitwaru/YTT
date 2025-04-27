@@ -2,7 +2,7 @@
 	"Name": "UC_SetWeekTableHeaders",
 	"Target": "",
 	"IsControlType": false,
-	 "Template": "", 
+	"Template": "<div>hhkhjk</div>", 
 	"Events": [
 	],
 	"Properties": [
@@ -11,7 +11,7 @@
 		"Public": [
 			{
 				"Name": "Refresh",
-				"Source": "  		//const thElements = document.querySelectorAll(\'#GridContainerTbl th\');		console.log(FromDate)		console.log(ToDate)				const fromDate = new Date(FromDate)		const toDate = new Date(ToDate)				console.log(fromDate)		console.log(toDate)				console.log(fromDate < toDate)		const spanElements = document.querySelectorAll(\'#GridContainerTbl th.WeekDay span\');		console.log(spanElements)		let index = 0		while (fromDate <= toDate) {			const formatted = this.formatDate(fromDate)			spanElements[index].innerHTML = formatted			fromDate.setDate(fromDate.getDate() + 1)			index += 1		}		  	",
+				"Source": "  		//const thElements = document.querySelectorAll(\'#GridContainerTbl th\');		console.log(FromDate)		console.log(ToDate)				const fromDate = new Date(FromDate)		const toDate = new Date(ToDate)				console.log(fromDate < toDate)		const spanElements = document.querySelectorAll(\'#GridContainerTbl th.WeekDay span\');		console.log(spanElements)		let index = 0		while (fromDate <= toDate) {			const formatted = this.formatDate(fromDate)			spanElements[index].innerHTML = formatted			fromDate.setDate(fromDate.getDate() + 1)			index += 1		}		  	",
 				"Return": "",
 				"Parameters": [
 					 {
