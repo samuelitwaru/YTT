@@ -1976,6 +1976,7 @@ namespace GeneXus.Programs {
          new dpemployeeweekreport(context ).execute(  AV50DateRange,  AV52DateRange_To,  AV45CompanyLocationId,  AV60EmployeeIds, out  GXt_objcol_SdtSDTEmployeeWeekReport7) ;
          AV15SDTEmployeeWeekReports = GXt_objcol_SdtSDTEmployeeWeekReport7;
          gx_BV40 = true;
+         new logtofile(context ).execute(  AV15SDTEmployeeWeekReports.ToJSonString(false)) ;
       }
 
       protected void S112( )
@@ -2028,7 +2029,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20254275201012", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2025524453040", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2046,7 +2047,7 @@ namespace GeneXus.Programs {
          if ( nGXWrapped != 1 )
          {
             context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-            context.AddJavascriptSource("employeeweekreport.js", "?20254275201012", false, true);
+            context.AddJavascriptSource("employeeweekreport.js", "?2025524453041", false, true);
             context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
             context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
             context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);

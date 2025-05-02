@@ -2,7 +2,7 @@
 	"Name": "UC_SetWeekTableHeaders",
 	"Target": "",
 	"IsControlType": false,
-	"Template": "<div>hhkhjk</div>", 
+	 "Template": "", 
 	"Events": [
 	],
 	"Properties": [
