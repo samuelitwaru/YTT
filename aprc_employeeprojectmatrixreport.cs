@@ -81,7 +81,7 @@ namespace GeneXus.Programs {
                            GxSimpleCollection<long> aP4_EmployeeIdCollection ,
                            GxSimpleCollection<long> aP5_UserEmployeeIdCollection ,
                            bool aP6_ShowLeave ,
-                           out long aP7_OverallTotalHours ,
+                           out short aP7_OverallTotalHours ,
                            out GXBaseCollection<SdtSDT_EmployeeProjectMatrix> aP8_SDT_EmployeeProjectMatrixCollection )
       {
          this.AV8FromDate = aP0_FromDate;
@@ -106,7 +106,7 @@ namespace GeneXus.Programs {
                                                                         GxSimpleCollection<long> aP4_EmployeeIdCollection ,
                                                                         GxSimpleCollection<long> aP5_UserEmployeeIdCollection ,
                                                                         bool aP6_ShowLeave ,
-                                                                        out long aP7_OverallTotalHours )
+                                                                        out short aP7_OverallTotalHours )
       {
          execute(aP0_FromDate, aP1_ToDate, aP2_ProjectIdCollection, aP3_CompanyLocationIdCollection, aP4_EmployeeIdCollection, aP5_UserEmployeeIdCollection, aP6_ShowLeave, out aP7_OverallTotalHours, out aP8_SDT_EmployeeProjectMatrixCollection);
          return AV20SDT_EmployeeProjectMatrixCollection ;
@@ -119,7 +119,7 @@ namespace GeneXus.Programs {
                                  GxSimpleCollection<long> aP4_EmployeeIdCollection ,
                                  GxSimpleCollection<long> aP5_UserEmployeeIdCollection ,
                                  bool aP6_ShowLeave ,
-                                 out long aP7_OverallTotalHours ,
+                                 out short aP7_OverallTotalHours ,
                                  out GXBaseCollection<SdtSDT_EmployeeProjectMatrix> aP8_SDT_EmployeeProjectMatrixCollection )
       {
          this.AV8FromDate = aP0_FromDate;
@@ -281,39 +281,23 @@ namespace GeneXus.Programs {
                                                  TypeConstants.LONG, TypeConstants.INT, TypeConstants.LONG
                                                  }
             });
-            /* Using cursor P00CC8 */
+            /* Using cursor P00CC7 */
             pr_default.execute(4, new Object[] {AV8FromDate, AV9ToDate, A106EmployeeId});
             while ( (pr_default.getStatus(4) != 101) )
             {
-               A102ProjectId = P00CC8_A102ProjectId[0];
-               A103ProjectName = P00CC8_A103ProjectName[0];
-               A40000GXC1 = P00CC8_A40000GXC1[0];
-               n40000GXC1 = P00CC8_n40000GXC1[0];
-               A40001GXC2 = P00CC8_A40001GXC2[0];
-               n40001GXC2 = P00CC8_n40001GXC2[0];
-               A40002GXC3 = P00CC8_A40002GXC3[0];
-               n40002GXC3 = P00CC8_n40002GXC3[0];
-               A40003GXC4 = P00CC8_A40003GXC4[0];
-               n40003GXC4 = P00CC8_n40003GXC4[0];
-               A103ProjectName = P00CC8_A103ProjectName[0];
-               A40000GXC1 = P00CC8_A40000GXC1[0];
-               n40000GXC1 = P00CC8_n40000GXC1[0];
-               A40001GXC2 = P00CC8_A40001GXC2[0];
-               n40001GXC2 = P00CC8_n40001GXC2[0];
-               A40002GXC3 = P00CC8_A40002GXC3[0];
-               n40002GXC3 = P00CC8_n40002GXC3[0];
-               A40003GXC4 = P00CC8_A40003GXC4[0];
-               n40003GXC4 = P00CC8_n40003GXC4[0];
-               if ( (DateTime.MinValue==AV8FromDate) || (DateTime.MinValue==AV9ToDate) )
-               {
-                  AV17TotalHours = A40000GXC1;
-                  AV18TotalMinutes = A40001GXC2;
-               }
-               else
-               {
-                  AV17TotalHours = A40002GXC3;
-                  AV18TotalMinutes = A40003GXC4;
-               }
+               A102ProjectId = P00CC7_A102ProjectId[0];
+               A103ProjectName = P00CC7_A103ProjectName[0];
+               A40000GXC1 = P00CC7_A40000GXC1[0];
+               n40000GXC1 = P00CC7_n40000GXC1[0];
+               A40001GXC2 = P00CC7_A40001GXC2[0];
+               n40001GXC2 = P00CC7_n40001GXC2[0];
+               A103ProjectName = P00CC7_A103ProjectName[0];
+               A40000GXC1 = P00CC7_A40000GXC1[0];
+               n40000GXC1 = P00CC7_n40000GXC1[0];
+               A40001GXC2 = P00CC7_A40001GXC2[0];
+               n40001GXC2 = P00CC7_n40001GXC2[0];
+               AV17TotalHours = A40000GXC1;
+               AV18TotalMinutes = A40001GXC2;
                AV19Total = (long)(AV18TotalMinutes+AV17TotalHours*60);
                AV22ProjectItem = new SdtSDT_EmployeeProjectMatrix_ProjectsItem(context);
                AV22ProjectItem.gxTpr_Projectid = A102ProjectId;
@@ -347,7 +331,7 @@ namespace GeneXus.Programs {
             }
             if ( AV25SDT_EmployeeProjectMatrix.gxTpr_Workhours > 0 )
             {
-               AV34OverallTotalHours = (long)(AV34OverallTotalHours+(AV25SDT_EmployeeProjectMatrix.gxTpr_Employeehours));
+               AV34OverallTotalHours = (short)(AV34OverallTotalHours+(AV25SDT_EmployeeProjectMatrix.gxTpr_Employeehours));
                AV20SDT_EmployeeProjectMatrixCollection.Add(AV25SDT_EmployeeProjectMatrix, 0);
             }
             pr_default.readNext(3);
@@ -402,17 +386,13 @@ namespace GeneXus.Programs {
          P00CC5_A148EmployeeName = new string[] {""} ;
          A148EmployeeName = "";
          AV25SDT_EmployeeProjectMatrix = new SdtSDT_EmployeeProjectMatrix(context);
-         P00CC8_A106EmployeeId = new long[1] ;
-         P00CC8_A102ProjectId = new long[1] ;
-         P00CC8_A103ProjectName = new string[] {""} ;
-         P00CC8_A40000GXC1 = new short[1] ;
-         P00CC8_n40000GXC1 = new bool[] {false} ;
-         P00CC8_A40001GXC2 = new short[1] ;
-         P00CC8_n40001GXC2 = new bool[] {false} ;
-         P00CC8_A40002GXC3 = new short[1] ;
-         P00CC8_n40002GXC3 = new bool[] {false} ;
-         P00CC8_A40003GXC4 = new short[1] ;
-         P00CC8_n40003GXC4 = new bool[] {false} ;
+         P00CC7_A106EmployeeId = new long[1] ;
+         P00CC7_A102ProjectId = new long[1] ;
+         P00CC7_A103ProjectName = new string[] {""} ;
+         P00CC7_A40000GXC1 = new short[1] ;
+         P00CC7_n40000GXC1 = new bool[] {false} ;
+         P00CC7_A40001GXC2 = new short[1] ;
+         P00CC7_n40001GXC2 = new bool[] {false} ;
          AV22ProjectItem = new SdtSDT_EmployeeProjectMatrix_ProjectsItem(context);
          GXt_char2 = "";
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.aprc_employeeprojectmatrixreport__default(),
@@ -430,25 +410,22 @@ namespace GeneXus.Programs {
                P00CC5_A100CompanyId, P00CC5_A106EmployeeId, P00CC5_A157CompanyLocationId, P00CC5_A148EmployeeName
                }
                , new Object[] {
-               P00CC8_A106EmployeeId, P00CC8_A102ProjectId, P00CC8_A103ProjectName, P00CC8_A40000GXC1, P00CC8_n40000GXC1, P00CC8_A40001GXC2, P00CC8_n40001GXC2, P00CC8_A40002GXC3, P00CC8_n40002GXC3, P00CC8_A40003GXC4,
-               P00CC8_n40003GXC4
+               P00CC7_A106EmployeeId, P00CC7_A102ProjectId, P00CC7_A103ProjectName, P00CC7_A40000GXC1, P00CC7_n40000GXC1, P00CC7_A40001GXC2, P00CC7_n40001GXC2
                }
             }
          );
          /* GeneXus formulas. */
       }
 
+      private short AV34OverallTotalHours ;
       private short AV36DayCount ;
       private short A40000GXC1 ;
       private short A40001GXC2 ;
-      private short A40002GXC3 ;
-      private short A40003GXC4 ;
       private int AV12CompanyLocationIdCollection_Count ;
       private int AV13EmployeeIdCollection_Count ;
       private int AV10ProjectIdCollection_Count ;
       private int AV33ProjectEmployeeIdCollection_Count ;
       private int AV39UserEmployeeIdCollection_Count ;
-      private long AV34OverallTotalHours ;
       private long A157CompanyLocationId ;
       private long A106EmployeeId ;
       private long A102ProjectId ;
@@ -471,8 +448,6 @@ namespace GeneXus.Programs {
       private bool A139HolidayIsActive ;
       private bool n40000GXC1 ;
       private bool n40001GXC2 ;
-      private bool n40002GXC3 ;
-      private bool n40003GXC4 ;
       private string A104ProjectDescription ;
       private IGxDataStore dsGAM ;
       private IGxDataStore dsDefault ;
@@ -508,19 +483,15 @@ namespace GeneXus.Programs {
       private long[] P00CC5_A157CompanyLocationId ;
       private string[] P00CC5_A148EmployeeName ;
       private SdtSDT_EmployeeProjectMatrix AV25SDT_EmployeeProjectMatrix ;
-      private long[] P00CC8_A106EmployeeId ;
-      private long[] P00CC8_A102ProjectId ;
-      private string[] P00CC8_A103ProjectName ;
-      private short[] P00CC8_A40000GXC1 ;
-      private bool[] P00CC8_n40000GXC1 ;
-      private short[] P00CC8_A40001GXC2 ;
-      private bool[] P00CC8_n40001GXC2 ;
-      private short[] P00CC8_A40002GXC3 ;
-      private bool[] P00CC8_n40002GXC3 ;
-      private short[] P00CC8_A40003GXC4 ;
-      private bool[] P00CC8_n40003GXC4 ;
+      private long[] P00CC7_A106EmployeeId ;
+      private long[] P00CC7_A102ProjectId ;
+      private string[] P00CC7_A103ProjectName ;
+      private short[] P00CC7_A40000GXC1 ;
+      private bool[] P00CC7_n40000GXC1 ;
+      private short[] P00CC7_A40001GXC2 ;
+      private bool[] P00CC7_n40001GXC2 ;
       private SdtSDT_EmployeeProjectMatrix_ProjectsItem AV22ProjectItem ;
-      private long aP7_OverallTotalHours ;
+      private short aP7_OverallTotalHours ;
       private GXBaseCollection<SdtSDT_EmployeeProjectMatrix> aP8_SDT_EmployeeProjectMatrixCollection ;
    }
 
@@ -639,7 +610,7 @@ namespace GeneXus.Programs {
          return GXv_Object8 ;
       }
 
-      protected Object[] conditional_P00CC8( IGxContext context ,
+      protected Object[] conditional_P00CC7( IGxContext context ,
                                              long A102ProjectId ,
                                              GxSimpleCollection<long> AV10ProjectIdCollection ,
                                              int AV10ProjectIdCollection_Count ,
@@ -649,7 +620,7 @@ namespace GeneXus.Programs {
          string scmdbuf;
          short[] GXv_int10 = new short[3];
          Object[] GXv_Object11 = new Object[2];
-         scmdbuf = "SELECT T1.EmployeeId, T1.ProjectId, T2.ProjectName, COALESCE( T3.GXC1, 0) AS GXC1, COALESCE( T3.GXC2, 0) AS GXC2, COALESCE( T4.GXC1, 0) AS GXC3, COALESCE( T4.GXC2, 0) AS GXC4 FROM (((EmployeeProject T1 INNER JOIN Project T2 ON T2.ProjectId = T1.ProjectId) LEFT JOIN LATERAL (SELECT SUM(WorkHourLogHour) AS GXC1, EmployeeId, ProjectId, SUM(WorkHourLogMinute) AS GXC2 FROM WorkHourLog WHERE T1.EmployeeId = EmployeeId and T1.ProjectId = ProjectId GROUP BY EmployeeId, ProjectId ) T3 ON T3.EmployeeId = T1.EmployeeId AND T3.ProjectId = T1.ProjectId) LEFT JOIN LATERAL (SELECT SUM(WorkHourLogHour) AS GXC1, EmployeeId, ProjectId, SUM(WorkHourLogMinute) AS GXC2 FROM WorkHourLog WHERE (T1.EmployeeId = EmployeeId and T1.ProjectId = ProjectId) AND (WorkHourLogDate >= :AV8FromDate and WorkHourLogDate <= :AV9ToDate) GROUP BY EmployeeId, ProjectId ) T4 ON T4.EmployeeId = T1.EmployeeId AND T4.ProjectId = T1.ProjectId)";
+         scmdbuf = "SELECT T1.EmployeeId, T1.ProjectId, T2.ProjectName, COALESCE( T3.GXC1, 0) AS GXC1, COALESCE( T3.GXC2, 0) AS GXC2 FROM ((EmployeeProject T1 INNER JOIN Project T2 ON T2.ProjectId = T1.ProjectId) LEFT JOIN LATERAL (SELECT SUM(WorkHourLogHour) AS GXC1, EmployeeId, ProjectId, SUM(WorkHourLogMinute) AS GXC2 FROM WorkHourLog WHERE (T1.EmployeeId = EmployeeId and T1.ProjectId = ProjectId) AND (WorkHourLogDate >= :AV8FromDate and WorkHourLogDate <= :AV9ToDate) GROUP BY EmployeeId, ProjectId ) T3 ON T3.EmployeeId = T1.EmployeeId AND T3.ProjectId = T1.ProjectId)";
          AddWhere(sWhereString, "(T1.EmployeeId = :EmployeeId)");
          if ( AV10ProjectIdCollection_Count > 0 )
          {
@@ -675,7 +646,7 @@ namespace GeneXus.Programs {
                case 3 :
                      return conditional_P00CC5(context, (long)dynConstraints[0] , (GxSimpleCollection<long>)dynConstraints[1] , (GxSimpleCollection<long>)dynConstraints[2] , (GxSimpleCollection<long>)dynConstraints[3] , (long)dynConstraints[4] , (GxSimpleCollection<long>)dynConstraints[5] , (int)dynConstraints[6] , (int)dynConstraints[7] , (int)dynConstraints[8] , (int)dynConstraints[9] );
                case 4 :
-                     return conditional_P00CC8(context, (long)dynConstraints[0] , (GxSimpleCollection<long>)dynConstraints[1] , (int)dynConstraints[2] , (long)dynConstraints[3] );
+                     return conditional_P00CC7(context, (long)dynConstraints[0] , (GxSimpleCollection<long>)dynConstraints[1] , (int)dynConstraints[2] , (long)dynConstraints[3] );
          }
          return base.getDynamicStatement(cursor, context, dynConstraints);
       }
@@ -714,8 +685,8 @@ namespace GeneXus.Programs {
           Object[] prmP00CC5;
           prmP00CC5 = new Object[] {
           };
-          Object[] prmP00CC8;
-          prmP00CC8 = new Object[] {
+          Object[] prmP00CC7;
+          prmP00CC7 = new Object[] {
           new ParDef("AV8FromDate",GXType.Date,8,0) ,
           new ParDef("AV9ToDate",GXType.Date,8,0) ,
           new ParDef("EmployeeId",GXType.Int64,10,0)
@@ -725,7 +696,7 @@ namespace GeneXus.Programs {
              ,new CursorDef("P00CC3", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00CC3,100, GxCacheFrequency.OFF ,true,false )
              ,new CursorDef("P00CC4", "SELECT T1.CompanyId, T1.HolidayIsActive, T1.HolidayStartDate, T2.CompanyLocationId, T1.HolidayId FROM (Holiday T1 INNER JOIN Company T2 ON T2.CompanyId = T1.CompanyId) WHERE (T2.CompanyLocationId = :CompanyLocationId) AND (T1.HolidayStartDate >= :AV8FromDate and T1.HolidayStartDate <= :AV9ToDate) AND ((date_part('dow', CAST(T1.HolidayStartDate AS date)) + 1) <> 7) AND ((date_part('dow', CAST(T1.HolidayStartDate AS date)) + 1) <> 1) AND (T1.HolidayIsActive = TRUE) ORDER BY T1.HolidayId ",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00CC4,100, GxCacheFrequency.OFF ,false,false )
              ,new CursorDef("P00CC5", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00CC5,100, GxCacheFrequency.OFF ,true,false )
-             ,new CursorDef("P00CC8", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00CC8,100, GxCacheFrequency.OFF ,false,false )
+             ,new CursorDef("P00CC7", "scmdbuf",false, GxErrorMask.GX_NOMASK | GxErrorMask.GX_MASKLOOPLOCK, false, this,prmP00CC7,100, GxCacheFrequency.OFF ,false,false )
           };
        }
     }
@@ -770,10 +741,6 @@ namespace GeneXus.Programs {
                 ((bool[]) buf[4])[0] = rslt.wasNull(4);
                 ((short[]) buf[5])[0] = rslt.getShort(5);
                 ((bool[]) buf[6])[0] = rslt.wasNull(5);
-                ((short[]) buf[7])[0] = rslt.getShort(6);
-                ((bool[]) buf[8])[0] = rslt.wasNull(6);
-                ((short[]) buf[9])[0] = rslt.getShort(7);
-                ((bool[]) buf[10])[0] = rslt.wasNull(7);
                 return;
        }
     }

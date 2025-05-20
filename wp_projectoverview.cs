@@ -1934,7 +1934,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20254261753387", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202552014484266", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -1950,7 +1950,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("wp_projectoverview.js", "?20254261753387", false, true);
+         context.AddJavascriptSource("wp_projectoverview.js", "?202552014484267", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -2279,6 +2279,7 @@ namespace GeneXus.Programs {
       private short nCmpId ;
       private short nDonePA ;
       private short gxcookieaux ;
+      private short AV36OverallTotalHours ;
       private short nGXWrapped ;
       private int Usercontrol1_Currentemployeeid ;
       private int Usercontrol1_Currentprojectid ;
@@ -2301,7 +2302,6 @@ namespace GeneXus.Programs {
       private long A166ProjectManagerId ;
       private long AV51LoggedInEmployeeId ;
       private long GXt_int3 ;
-      private long AV36OverallTotalHours ;
       private string Combo_employeeid_Selectedvalue_get ;
       private string Combo_companylocationid_Selectedvalue_get ;
       private string Combo_projectid_Selectedvalue_get ;
