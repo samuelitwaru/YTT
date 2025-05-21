@@ -112,7 +112,8 @@ namespace GeneXus.Programs {
                AV14EmployeeIdCollection.Add(A106EmployeeId, 0);
                AV16SDTEmployeeWeekReport = new SdtSDTEmployeeWeekReport(context);
                GXt_objcol_SdtSDTEmployeeWeekReport1 = AV15SDTEmployeeWeekReportCollection;
-               new dpemployeeweekreport(context ).execute(  AV8FromDate,  AV9ToDate,  AV17CompanyLocationIdCollection,  AV14EmployeeIdCollection, out  GXt_objcol_SdtSDTEmployeeWeekReport1) ;
+               GXt_objcol_SdtSDTEmployeeWeekReport2 = new GXBaseCollection<SdtSDTEmployeeWeekReport>();
+               new dpemployeeweekreport(context ).execute(  AV8FromDate,  AV9ToDate,  AV17CompanyLocationIdCollection,  AV14EmployeeIdCollection,  (GxSimpleCollection<long>)(GXt_objcol_SdtSDTEmployeeWeekReport1), out  GXt_objcol_SdtSDTEmployeeWeekReport2) ;
                AV15SDTEmployeeWeekReportCollection = GXt_objcol_SdtSDTEmployeeWeekReport1;
                if ( AV15SDTEmployeeWeekReportCollection.Count == 1 )
                {
@@ -124,8 +125,8 @@ namespace GeneXus.Programs {
                      new logtofile(context ).execute(  "				"+AV16SDTEmployeeWeekReport.ToJSonString(false, true)) ;
                      AV19Body = new SdtEO_GenerateEmail(context).generate(AV16SDTEmployeeWeekReport.ToJSonString(false, true), context.localUtil.DToC( AV8FromDate, 2, "/"), context.localUtil.DToC( AV9ToDate, 2, "/"));
                      new logtofile(context ).execute(  "				Sending Email... "+StringUtil.Trim( A109EmployeeEmail)) ;
-                     GXt_char2 = "Weekly Time Tracker Reminder";
-                     new sendemail(context).executeSubmit(  A109EmployeeEmail, ref  GXt_char2, ref  AV19Body) ;
+                     GXt_char3 = "Weekly Time Tracker Reminder";
+                     new sendemail(context).executeSubmit(  A109EmployeeEmail, ref  GXt_char3, ref  AV19Body) ;
                   }
                }
                /* Exit For each command. Update data (if necessary), close cursors & exit. */
@@ -180,8 +181,9 @@ namespace GeneXus.Programs {
          AV16SDTEmployeeWeekReport = new SdtSDTEmployeeWeekReport(context);
          AV15SDTEmployeeWeekReportCollection = new GXBaseCollection<SdtSDTEmployeeWeekReport>( context, "SDTEmployeeWeekReport", "YTT_version4");
          GXt_objcol_SdtSDTEmployeeWeekReport1 = new GXBaseCollection<SdtSDTEmployeeWeekReport>( context, "SDTEmployeeWeekReport", "YTT_version4");
+         GXt_objcol_SdtSDTEmployeeWeekReport2 = new GXBaseCollection<SdtSDTEmployeeWeekReport>( context, "SDTEmployeeWeekReport", "YTT_version4");
          AV19Body = "";
-         GXt_char2 = "";
+         GXt_char3 = "";
          pr_default = new DataStoreProvider(context, new GeneXus.Programs.aprc_sendsundayreminderemails__default(),
             new Object[][] {
                 new Object[] {
@@ -209,7 +211,7 @@ namespace GeneXus.Programs {
       private string AV20CompanyLocationName ;
       private string A148EmployeeName ;
       private string A158CompanyLocationName ;
-      private string GXt_char2 ;
+      private string GXt_char3 ;
       private DateTime AV8FromDate ;
       private DateTime Gx_date ;
       private DateTime AV9ToDate ;
@@ -235,6 +237,7 @@ namespace GeneXus.Programs {
       private SdtSDTEmployeeWeekReport AV16SDTEmployeeWeekReport ;
       private GXBaseCollection<SdtSDTEmployeeWeekReport> AV15SDTEmployeeWeekReportCollection ;
       private GXBaseCollection<SdtSDTEmployeeWeekReport> GXt_objcol_SdtSDTEmployeeWeekReport1 ;
+      private GXBaseCollection<SdtSDTEmployeeWeekReport> GXt_objcol_SdtSDTEmployeeWeekReport2 ;
    }
 
    public class aprc_sendsundayreminderemails__default : DataStoreHelperBase, IDataStoreHelper

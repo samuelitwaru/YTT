@@ -157,12 +157,12 @@ namespace GeneXus.Programs {
          AV20EmployyeeAvailableVacationDays = (decimal)(GXt_int4);
          new GeneXus.Programs.wwpbaseobjects.loadwwpcontext(context ).execute( out  AV32WWPContext) ;
          AV29TrnContext.FromXml(AV31WebSession.Get("TrnContext"), null, "", "");
-         if ( ( StringUtil.StrCmp(AV29TrnContext.gxTpr_Transactionname, AV54Pgmname) == 0 ) && ( StringUtil.StrCmp(Gx_mode, "INS") == 0 ) )
+         if ( ( StringUtil.StrCmp(AV29TrnContext.gxTpr_Transactionname, AV55Pgmname) == 0 ) && ( StringUtil.StrCmp(Gx_mode, "INS") == 0 ) )
          {
-            AV55GXV1 = 1;
-            while ( AV55GXV1 <= AV29TrnContext.gxTpr_Attributes.Count )
+            AV56GXV1 = 1;
+            while ( AV56GXV1 <= AV29TrnContext.gxTpr_Attributes.Count )
             {
-               AV30TrnContextAtt = ((GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext_Attribute)AV29TrnContext.gxTpr_Attributes.Item(AV55GXV1));
+               AV30TrnContextAtt = ((GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext_Attribute)AV29TrnContext.gxTpr_Attributes.Item(AV56GXV1));
                if ( StringUtil.StrCmp(AV30TrnContextAtt.gxTpr_Attributename, "LeaveTypeId") == 0 )
                {
                   AV24Insert_LeaveTypeId = (long)(Math.Round(NumberUtil.Val( AV30TrnContextAtt.gxTpr_Attributevalue, "."), 18, MidpointRounding.ToEven));
@@ -171,7 +171,7 @@ namespace GeneXus.Programs {
                {
                   AV23Insert_EmployeeId = (long)(Math.Round(NumberUtil.Val( AV30TrnContextAtt.gxTpr_Attributevalue, "."), 18, MidpointRounding.ToEven));
                }
-               AV55GXV1 = (int)(AV55GXV1+1);
+               AV56GXV1 = (int)(AV56GXV1+1);
             }
          }
       }
@@ -289,7 +289,7 @@ namespace GeneXus.Programs {
 
       protected void standaloneNotModal( )
       {
-         AV54Pgmname = "LeaveRequest_BC";
+         AV55Pgmname = "LeaveRequest_BC";
          Gx_BScreen = 0;
          Gx_date = DateTimeUtil.Today( context);
       }
@@ -1474,7 +1474,7 @@ namespace GeneXus.Programs {
          AV32WWPContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPContext(context);
          AV29TrnContext = new GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext(context);
          AV31WebSession = context.GetSession();
-         AV54Pgmname = "";
+         AV55Pgmname = "";
          AV30TrnContextAtt = new GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext_Attribute(context);
          A132LeaveRequestStatus = "";
          A129LeaveRequestStartDate = DateTime.MinValue;
@@ -1618,7 +1618,7 @@ namespace GeneXus.Programs {
                }
             }
          );
-         AV54Pgmname = "LeaveRequest_BC";
+         AV55Pgmname = "LeaveRequest_BC";
          A106EmployeeId = 0;
          Z106EmployeeId = 0;
          i106EmployeeId = 0;
@@ -1639,7 +1639,7 @@ namespace GeneXus.Programs {
       private short Gx_BScreen ;
       private short RcdFound21 ;
       private int trnEnded ;
-      private int AV55GXV1 ;
+      private int AV56GXV1 ;
       private long Z127LeaveRequestId ;
       private long A127LeaveRequestId ;
       private long AV26LeaveRequestId ;
@@ -1665,7 +1665,7 @@ namespace GeneXus.Programs {
       private string Gx_mode ;
       private string endTrnMsgTxt ;
       private string endTrnMsgCod ;
-      private string AV54Pgmname ;
+      private string AV55Pgmname ;
       private string A132LeaveRequestStatus ;
       private string A125LeaveTypeName ;
       private string A173LeaveRequestHalfDay ;

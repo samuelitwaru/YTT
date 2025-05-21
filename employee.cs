@@ -1289,6 +1289,7 @@ namespace GeneXus.Programs {
                Setvacationdaysbtn_modal_Bodycontentinternalname = cgiGet( "SETVACATIONDAYSBTN_MODAL_Bodycontentinternalname");
                Setvacationdaysbtn_modal_Result = cgiGet( "SETVACATIONDAYSBTN_MODAL_Result");
                Setvacationdaysbtn_modal_Texttype = cgiGet( "SETVACATIONDAYSBTN_MODAL_Texttype");
+               Setvacationdaysbtn_modal_Focusedbutton = cgiGet( "SETVACATIONDAYSBTN_MODAL_Focusedbutton");
                Setvacationdaysbtn_modal_Visible = StringUtil.StrToBool( cgiGet( "SETVACATIONDAYSBTN_MODAL_Visible"));
                /* Read variables values. */
                A107EmployeeFirstName = cgiGet( edtEmployeeFirstName_Internalname);
@@ -5024,7 +5025,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?202541118203035", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?2025521829564", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -5040,7 +5041,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("employee.js", "?202541118203037", false, true);
+         context.AddJavascriptSource("employee.js", "?2025521829567", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/Shared/DVelopBootstrap.js", "", false, true);
          context.AddJavascriptSource("DVelop/Shared/WorkWithPlusCommon.js", "", false, true);
          context.AddJavascriptSource("DVelop/Bootstrap/DropDownOptions/BootstrapDropDownOptionsRender.js", "", false, true);
@@ -5878,6 +5879,7 @@ namespace GeneXus.Programs {
          Setvacationdaysbtn_modal_Bodycontentinternalname = "";
          Setvacationdaysbtn_modal_Result = "";
          Setvacationdaysbtn_modal_Texttype = "";
+         Setvacationdaysbtn_modal_Focusedbutton = "";
          forbiddenHiddens = new GXProperties();
          hsh = "";
          sMode16 = "";
@@ -6416,6 +6418,7 @@ namespace GeneXus.Programs {
       private string Setvacationdaysbtn_modal_Bodycontentinternalname ;
       private string Setvacationdaysbtn_modal_Result ;
       private string Setvacationdaysbtn_modal_Texttype ;
+      private string Setvacationdaysbtn_modal_Focusedbutton ;
       private string hsh ;
       private string sMode16 ;
       private string sEvt ;

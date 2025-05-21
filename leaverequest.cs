@@ -729,7 +729,7 @@ namespace GeneXus.Programs {
                A144LeaveTypeVacationLeave = cgiGet( "LEAVETYPEVACATIONLEAVE");
                A147EmployeeBalance = context.localUtil.CToN( cgiGet( "EMPLOYEEBALANCE"), ".", ",");
                A148EmployeeName = cgiGet( "EMPLOYEENAME");
-               AV54Pgmname = cgiGet( "vPGMNAME");
+               AV55Pgmname = cgiGet( "vPGMNAME");
                /* Read variables values. */
                dynavEmployeeid.CurrentValue = cgiGet( dynavEmployeeid_Internalname);
                AV18EmployeeId = (long)(Math.Round(NumberUtil.Val( cgiGet( dynavEmployeeid_Internalname), "."), 18, MidpointRounding.ToEven));
@@ -1140,13 +1140,13 @@ namespace GeneXus.Programs {
          AssignProp("", false, divLayoutmaintable_Internalname, "Class", divLayoutmaintable_Class, true);
          new GeneXus.Programs.wwpbaseobjects.loadwwpcontext(context ).execute( out  AV32WWPContext) ;
          AV29TrnContext.FromXml(AV31WebSession.Get("TrnContext"), null, "", "");
-         if ( ( StringUtil.StrCmp(AV29TrnContext.gxTpr_Transactionname, AV54Pgmname) == 0 ) && ( StringUtil.StrCmp(Gx_mode, "INS") == 0 ) )
+         if ( ( StringUtil.StrCmp(AV29TrnContext.gxTpr_Transactionname, AV55Pgmname) == 0 ) && ( StringUtil.StrCmp(Gx_mode, "INS") == 0 ) )
          {
-            AV55GXV1 = 1;
-            AssignAttri("", false, "AV55GXV1", StringUtil.LTrimStr( (decimal)(AV55GXV1), 8, 0));
-            while ( AV55GXV1 <= AV29TrnContext.gxTpr_Attributes.Count )
+            AV56GXV1 = 1;
+            AssignAttri("", false, "AV56GXV1", StringUtil.LTrimStr( (decimal)(AV56GXV1), 8, 0));
+            while ( AV56GXV1 <= AV29TrnContext.gxTpr_Attributes.Count )
             {
-               AV30TrnContextAtt = ((GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext_Attribute)AV29TrnContext.gxTpr_Attributes.Item(AV55GXV1));
+               AV30TrnContextAtt = ((GeneXus.Programs.wwpbaseobjects.SdtWWPTransactionContext_Attribute)AV29TrnContext.gxTpr_Attributes.Item(AV56GXV1));
                if ( StringUtil.StrCmp(AV30TrnContextAtt.gxTpr_Attributename, "LeaveTypeId") == 0 )
                {
                   AV24Insert_LeaveTypeId = (long)(Math.Round(NumberUtil.Val( AV30TrnContextAtt.gxTpr_Attributevalue, "."), 18, MidpointRounding.ToEven));
@@ -1157,8 +1157,8 @@ namespace GeneXus.Programs {
                   AV23Insert_EmployeeId = (long)(Math.Round(NumberUtil.Val( AV30TrnContextAtt.gxTpr_Attributevalue, "."), 18, MidpointRounding.ToEven));
                   AssignAttri("", false, "AV23Insert_EmployeeId", StringUtil.LTrimStr( (decimal)(AV23Insert_EmployeeId), 10, 0));
                }
-               AV55GXV1 = (int)(AV55GXV1+1);
-               AssignAttri("", false, "AV55GXV1", StringUtil.LTrimStr( (decimal)(AV55GXV1), 8, 0));
+               AV56GXV1 = (int)(AV56GXV1+1);
+               AssignAttri("", false, "AV56GXV1", StringUtil.LTrimStr( (decimal)(AV56GXV1), 8, 0));
             }
          }
          edtEmployeeId_Visible = 0;
@@ -1261,12 +1261,12 @@ namespace GeneXus.Programs {
          new dpleavetype(context ).execute(  AV46LeaveTypeCompanyId,  AV50IsColored, out  GXt_objcol_SdtSDTLeaveType5) ;
          AV49LeaveTypes = GXt_objcol_SdtSDTLeaveType5;
          AV49LeaveTypes.Sort("");
-         AV56GXV2 = 1;
-         while ( AV56GXV2 <= AV49LeaveTypes.Count )
+         AV57GXV2 = 1;
+         while ( AV57GXV2 <= AV49LeaveTypes.Count )
          {
-            AV48LeaveType = ((SdtSDTLeaveType)AV49LeaveTypes.Item(AV56GXV2));
+            AV48LeaveType = ((SdtSDTLeaveType)AV49LeaveTypes.Item(AV57GXV2));
             dynavLeavetypeid.addItem(StringUtil.Trim( StringUtil.Str( (decimal)(AV48LeaveType.gxTpr_Leavetypeid), 10, 0)), AV48LeaveType.gxTpr_Leavetypename, 0);
-            AV56GXV2 = (int)(AV56GXV2+1);
+            AV57GXV2 = (int)(AV57GXV2+1);
          }
          dynload_actions( ) ;
          /*  Sending Event outputs  */
@@ -1343,8 +1343,8 @@ namespace GeneXus.Programs {
          AssignProp("", false, edtLeaveRequestDuration_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtLeaveRequestDuration_Enabled), 5, 0), true);
          edtLeaveRequestId_Enabled = 0;
          AssignProp("", false, edtLeaveRequestId_Internalname, "Enabled", StringUtil.LTrimStr( (decimal)(edtLeaveRequestId_Enabled), 5, 0), true);
-         AV54Pgmname = "LeaveRequest";
-         AssignAttri("", false, "AV54Pgmname", AV54Pgmname);
+         AV55Pgmname = "LeaveRequest";
+         AssignAttri("", false, "AV55Pgmname", AV55Pgmname);
          Gx_BScreen = 0;
          AssignAttri("", false, "Gx_BScreen", StringUtil.Str( (decimal)(Gx_BScreen), 1, 0));
          Gx_date = DateTimeUtil.Today( context);
@@ -2524,7 +2524,7 @@ namespace GeneXus.Programs {
          GxWebStd.gx_hidden_field( context, "LEAVETYPEVACATIONLEAVE", StringUtil.RTrim( A144LeaveTypeVacationLeave));
          GxWebStd.gx_hidden_field( context, "EMPLOYEEBALANCE", StringUtil.LTrim( StringUtil.NToC( A147EmployeeBalance, 4, 1, ".", "")));
          GxWebStd.gx_hidden_field( context, "EMPLOYEENAME", StringUtil.RTrim( A148EmployeeName));
-         GxWebStd.gx_hidden_field( context, "vPGMNAME", StringUtil.RTrim( AV54Pgmname));
+         GxWebStd.gx_hidden_field( context, "vPGMNAME", StringUtil.RTrim( AV55Pgmname));
       }
 
       public override void RenderHtmlCloseForm( )
@@ -2669,7 +2669,7 @@ namespace GeneXus.Programs {
          idxLst = 1;
          while ( idxLst <= Form.Jscriptsrc.Count )
          {
-            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20254119322334", true, true);
+            context.AddJavascriptSource(StringUtil.RTrim( ((string)Form.Jscriptsrc.Item(idxLst))), "?20255218311281", true, true);
             idxLst = (int)(idxLst+1);
          }
          if ( ! outputEnabled )
@@ -2685,7 +2685,7 @@ namespace GeneXus.Programs {
       protected void include_jscripts( )
       {
          context.AddJavascriptSource("messages.eng.js", "?"+GetCacheInvalidationToken( ), false, true);
-         context.AddJavascriptSource("leaverequest.js", "?20254119322341", false, true);
+         context.AddJavascriptSource("leaverequest.js", "?20255218311285", false, true);
          /* End function include_jscripts */
       }
 
@@ -3217,7 +3217,7 @@ namespace GeneXus.Programs {
          A125LeaveTypeName = "";
          A144LeaveTypeVacationLeave = "";
          A148EmployeeName = "";
-         AV54Pgmname = "";
+         AV55Pgmname = "";
          forbiddenHiddens = new GXProperties();
          hsh = "";
          sMode21 = "";
@@ -3382,7 +3382,7 @@ namespace GeneXus.Programs {
                }
             }
          );
-         AV54Pgmname = "LeaveRequest";
+         AV55Pgmname = "LeaveRequest";
          Z106EmployeeId = 0;
          N106EmployeeId = 0;
          i106EmployeeId = 0;
@@ -3427,8 +3427,8 @@ namespace GeneXus.Programs {
       private int edtLeaveRequestDuration_Visible ;
       private int edtLeaveRequestRejectionReason_Visible ;
       private int edtLeaveRequestRejectionReason_Enabled ;
-      private int AV55GXV1 ;
-      private int AV56GXV2 ;
+      private int AV56GXV1 ;
+      private int AV57GXV2 ;
       private int idxLst ;
       private int gxdynajaxindex ;
       private long wcpOAV26LeaveRequestId ;
@@ -3522,7 +3522,7 @@ namespace GeneXus.Programs {
       private string A125LeaveTypeName ;
       private string A144LeaveTypeVacationLeave ;
       private string A148EmployeeName ;
-      private string AV54Pgmname ;
+      private string AV55Pgmname ;
       private string hsh ;
       private string sMode21 ;
       private string sEvt ;

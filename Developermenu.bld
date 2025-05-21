@@ -415,14 +415,10 @@ sdsvc_UpdateLeaveRequest_Level_Detail
 sdsvc_ViewLeaveRequest_Level_Detail
 api_timetracker
 api_timetracker
-yttv3sdnotauthorized
 yttv3sd
 gamsdnotauthorized
-landingpanel
-loginpanel
 gamsdchangepassword
 gamsdupdateuser
-passwordchangepanel
 profilepanel
 updateworkhourlog
 loghourspanel
@@ -431,4 +427,8 @@ leaverequestpanel
 leaverequestsgridpanel
 updateleaverequest
 viewleaverequest
+yttv3sdnotauthorized
+loginpanel
+passwordchangepanel
+landingpanel
 GeneXus.Programs.Common
